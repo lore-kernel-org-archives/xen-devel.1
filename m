@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 964CC606A31A
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 14:25:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 592E6606A320
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 14:27:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=ObxB3zJX
-Received: from list by lists.xenproject.org with outflank-mailman.1463349.1674237 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=RiwGYkbu
+Received: from list by lists.xenproject.org with outflank-mailman.1463357.1674246 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xM4ai-0004lP-Q8; Wed, 28 Oct 2026 14:25:24 +0000
+	id 1xM4c5-0005Ff-2e; Wed, 28 Oct 2026 14:26:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1463349.1674237; Wed, 28 Oct 2026 14:25:24 +0000
+Received: by outflank-mailman (output) from mailman id 1463357.1674246; Wed, 28 Oct 2026 14:26:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xM4ai-0004lI-N1; Wed, 28 Oct 2026 14:25:24 +0000
-Received: by outflank-mailman (input) for mailman id 1463349;
- Wed, 28 Oct 2026 14:25:23 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xM4ah-0004l5-KS
- for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 14:25:23 +0000
+	id 1xM4c4-0005FW-Vv; Wed, 28 Oct 2026 14:26:48 +0000
+Received: by outflank-mailman (input) for mailman id 1463357;
+ Wed, 28 Oct 2026 14:26:47 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xM4c3-0005FN-OX
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 14:26:47 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xM4ah-007wCq-0w
- for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 15:25:23 +0100
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xM4c2-007Ion-Pz
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 15:26:46 +0100
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ae205c9-e002-0a2a0a5209dd-0a2a4508d5ba-34
- for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 15:25:22 +0100
-Received: from [209.85.221.54] (helo=mail-wr1-f54.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ae20614-2eae-0a2a0a5409dd-0a2a4506a74c-30
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 15:26:46 +0100
+Received: from [209.85.221.41] (helo=mail-wr1-f41.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ae205d2-f659-0a2a45080019-d155dd36bd02-3
- for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 15:25:22 +0100
-Received: by mail-wr1-f54.google.com with SMTP id
- ffacd0b85a97d-48e0d1c095dso566898f8f.1
- for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 07:25:22 -0700 (PDT)
+ id 6ae20626-195a-0a2a45060019-d155dd29dd6d-3
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 15:26:46 +0100
+Received: by mail-wr1-f41.google.com with SMTP id
+ ffacd0b85a97d-48e20edd106so808055f8f.1
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 07:26:46 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e3ecd35c2sm28250386f8f.39.2026.10.28.07.25.21
+ ffacd0b85a97d-48e3ebd47basm31456080f8f.32.2026.10.28.07.26.45
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 28 Oct 2026 07:25:21 -0700 (PDT)
+ Wed, 28 Oct 2026 07:26:45 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,59 +51,65 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1793197522; x=1793802322; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1793197606; x=1793802406; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Pt4R12krTVVQKTaxDhZs2VAib5e/yExqZczSnQuv+6U=;
-        b=ObxB3zJXNkiYcxtSJD756+hnGQ0ayz4M3AuTQuORdEKKNsJf7ieE8ddE37/xZbFGwT
-         cshDolkUSAM/nh/93XO40jwyzAsQeEUB2qTaCGjx65U2eFvYs85C+EzBeOtYkIHRwhoW
-         OVI+CWPDQwwqRmPhlaS6fIWJHbGHtd56CxjDP/rj1JVq2FysVElwas1ZNK44WmoRCtp8
-         y9zknbbXnNjnxSrcpKkC825fcRDFisIHjPfvPSROJ9XdRaLeaX9FwEmHJfWYwX5MsSsD
-         qSTbDJJriOvsnLHId0wmYz4SwP26b/7uc+slqiCOoz+l96jgtt4oGY0bcBG/YP8ZNxQJ
-         FMyg==
+        bh=Hs+VEOdUNLzlW8kuG1J2791RhboW1NlX6I/i0/VZM8I=;
+        b=RiwGYkbulNeSUvRbaOYpYda6KM/XhBMPZOhcnnHGuYNCtUrd5K5R86B4k/u1i3ObeQ
+         /C0Glr+xzD5sfB+iunob1RFVw2Xz9UPLDCm9gj3mSrkNH4EZxvN5ZJ842vPE6Sp2RrLI
+         ynkMlRZoQROF87kOkGttcda+chSJfRSYPIhV38wO8cd0w2hyAu0AWMSNDDf+XtO5kx/A
+         6+ollQ2cEtBY93zlx/RL+TpTQKN+/K8JcbB55tK4R705TsSNw8o+LRjlWYeC1dtH5xAR
+         QAv9G/RVLlAAe5bMrphufxR3vi9cznT/aWeAHj1q0Ryew8DfEfK+8iXSbjOG1odJ4rlb
+         XUnA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793197522; x=1793802322;
+        d=1e100.net; s=20260707; t=1793197606; x=1793802406;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Pt4R12krTVVQKTaxDhZs2VAib5e/yExqZczSnQuv+6U=;
-        b=dmb+4r29rmYldR8i5l2UY1wNQ1zx7o7iYwqldzpQ0kHVyRlRsARI3jR1Kx6r/1EO1I
-         8JTRGQ7MLo3gabiu+WvBblq66C564Fp6NpxbMcx5qHkAcKo9QKw31dd1mRrqGzZXgqtI
-         j/fx0l2C4ZkCp95Z5QvdxuEcl1jLLn1IluJp73MkHaLBS6672t+U33xyTAjqIhyAc9n/
-         2vrdPSAFdCXfwxnYIuSkmd4XbzjAj3zYBiGOyqL9du/F34VdDEH/T5nUeoGuzGmVxnLD
-         J4pAdtP1bCqJYuYJvbZFhWfXF2oWD+5atWbuTuIW5HwfiPU+sdsJWhwpZeUjAl3HViZf
-         7+qQ==
-X-Forwarded-Encrypted: i=1; AKwUvBxyzxhP6JJgpBoCmCUQZpunF9bjJO4W7unic9N5b2VK1K3ukoseeSgksanrTcUq8qtB8ki4aDiJWOI=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYIbq66rpH91pMbXk+IjKvbkWkNfNh6ZSMR1Mk+EaXxxckdJHZnm
-	dcUAhikQmPdfCOwujNv8i6WdZiCWBEbziFscZUyEkFN02gJITBiNjq07aqs8z9dn1Cw1U+ZN9Cp
-	O+GbVsA==
-X-Gm-Gg: AYBFou3TDf07gJ+Ase93YZZlNc2ZgtWdq0QBWH+ndgy7gknGPULcMlQcbAxiUa6C0y3
-	uvcD1+fekEUhghhFUz/MhRm9dV4uuCYTsTCIqxu0Gi88/mMQYT2tr16kqRsscQHeXezGPqzWvUq
-	aBNjnGXidcS69gwHMbYUvvm51YD2OPdd+7pH2Hj1AMzqG2JAK3YcNRgJZiEoTKlHdsUoag8Wf8z
-	Rjt2dZpCjyz30LqbcpjbUewQ3FHIQoOn9H7iX1p9VdmaO31kwneO1qPKZJDIbWoj42/vfByD4fW
-	7VwYPTnKudIwbVrv6NDLjZkTjjxrgkezI4KwmbQjzCNm7UZQ/o9O/AYU4NCypXbzv2PDbSaF2BI
-	1per5Raq69wA5zSU/X6hknvf+BebPUTxw56Pz3CVcPkCOvTUsLpJ8hfzudBiV+fUQOfiD5+/kvq
-	P73y+mLRMOxfw+1EwzCjmexnDYwj58ZFRgu0QCpTr0Y5EfBrql6AeWflHjteyGvT2D/EwSxqzVv
-	ktU77eE+mIFfZWxVtBS85dKDX7Kp/TaG8nSnKWzQc25fk3sLwPhDO54vqAdCFL+XCHYlPHnEWMI
-	c5X54TpantGBTVXO+dlC1jIIetf3u6F+FI9nRhOcVB+fqsRZPdJDTgzllSvD4l7j+q02ys017ok
-	eN9kW0z8eUd+JIAaq
-X-Received: by 2002:a05:6000:29cf:b0:48d:ea67:79d4 with SMTP id ffacd0b85a97d-48e5d311f62mr4360163f8f.53.1793197522096;
-        Wed, 28 Oct 2026 07:25:22 -0700 (PDT)
-Message-ID: <65d41464-6c65-40be-8279-acdececf53c5@suse.com>
-Date: Wed, 28 Oct 2026 15:25:21 +0100
+        bh=Hs+VEOdUNLzlW8kuG1J2791RhboW1NlX6I/i0/VZM8I=;
+        b=1qYSpGAJEqjUcaDtzyExqiwG1j1uM1V+Cr32LP14xRGOZ5o7dYCvCEB0fTfoQEYYeJ
+         KwhJnafjiTyrNVJpF8WxolJ6qmaCAeHlSCDbQpy2P7nxYSBaYDAtq17Kjm10Oc0q8PqA
+         4PieJ3S+Bpu5J0I7I5g/3aaZnpCGNDVstw5ode2/6rD+9eOcQ16wWDdLSD3JVmfJliEe
+         vqv+sQLM5sKY4OiXg4EmQ/KPpwwxvQH61jXpULT2Ict/l4TGoo+AFumYXNwLAyOP23jO
+         zPU9Ccb1ptv27UPUtakpJdyBbCMQkpf26nnWhkSVWmghhp5/yFAVsBTuTmNM7NVDaK5z
+         Orug==
+X-Forwarded-Encrypted: i=1; AKwUvBxtpPupAzWeaC3hb0A5NFJ/HBkR3JqN3s1558wfvFgp+dFWNJISl4ZNNk8gN3hS4IYllBgs/m+QH9M=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYIX3zdG17OP3Tebwf2LuVuOlu5oRxpd91SAbfKfDfOLj8mYD7HK
+	4DXhjC+4wrpf49hB8PI3moPkalHMUDZHPnrO0VupVI1G1vRpQUscbFQn9onXUZeiWg==
+X-Gm-Gg: AYBFou1tayY5TeZJNHFHhgO4VzdaAebML7ltmPX/WPAOINjtacUlux9/no332KZkjHo
+	OIa5o/oqeU9bjsvbV0EpydBre/VEtGvXQK8JrOl69rHCSpbU7Jub+c8rJag2Y66dfvpGohITF9g
+	fwHX5+AYwGxusMepE5/uYGHBGIB5DbwhYyzdKSSb/SYmKQfh+G9xsaD0fhoZG0gYSIMwv84HUjw
+	fzSaC8+Mumr3EnhwDXEYzSc9AoK1PjQz5b7NKDMT1rxkSpLZFQkRoIYDjSb8jv/mjbdOvid33s5
+	7G+EcCoR88PNFk382+PJCS3RJEl+oHolugtt2GSpHwx463KH3lTp5Y+v/QXdotmVuYbI4oFxWW4
+	/0qXoircf3jVlyibEf5GHxo+AmA9Avc+itRUq1QunVWihnRWNhwGgNww4U5UKUqgJ3mLP1DDPDK
+	HoMXEWHW+JEhAxWmd3CFvFEGsPVp2bllZyUh1cIJ8p0I4lPQjZI5BZAbO09Vgfoq3Dy7yVzDYK/
+	ZgwC1sQ8TmJCnLVFYhOxu1SMRyOZtP6X6Qrzv2oozat5nbGG/SyEKXREoWFEIYB3xOB2ozXNqMO
+	YW8MsbD2z6hfjvlJQA2qngIf/WxKsp4Mc37xBU3jJLYAZUGrNdnqUM2V/iPkc5Lql2Bz1SDildC
+	rWU3rZX9xLtSZ/XdO
+X-Received: by 2002:a05:6000:1449:b0:48c:67d6:a87a with SMTP id ffacd0b85a97d-48e5d5a4385mr5818050f8f.32.1793197605977;
+        Wed, 28 Oct 2026 07:26:45 -0700 (PDT)
+Message-ID: <56a5e051-b8f5-440e-bde6-604dbe575991@suse.com>
+Date: Wed, 28 Oct 2026 15:26:44 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 5/5] vpci: add SR-IOV support for DomUs
-To: Mykyta Poturai <Mykyta_Poturai@epam.com>
-Cc: Stewart Hildebrand <stewart.hildebrand@amd.com>,
+Subject: Re: [PATCH v10 1/1] xen/riscv: probe the A/D update scheme if the DT
+ advertises neither
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <cover.1792072426.git.mykyta_poturai@epam.com>
- <8823cd01334978baea19515c35068c789d4568bb.1792072426.git.mykyta_poturai@epam.com>
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>, Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ xen-devel@lists.xenproject.org, Oleksii Kurochko <oleksii.kurochko@gmail.com>
+References: <1793192679.8631fc262581453bbf619ec5b2062170.1a1829cd6d5000f79f@vates.tech>
+ <1793192757.8631fc262581453bbf619ec5b2062170.1a1829e0a63000f79f@vates.tech>
+ <19bc2130-aa66-495e-8f43-b1ce263142fe@gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -129,116 +135,65 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <8823cd01334978baea19515c35068c789d4568bb.1792072426.git.mykyta_poturai@epam.com>
+In-Reply-To: <19bc2130-aa66-495e-8f43-b1ce263142fe@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c1860d/1793197522-CCF4F87B-7BFB3BB2/10/78276251493
+X-purgate-ID: tlsNG-16d1c6/1793197606-1FACA77B-16278B3F/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 3583
+X-purgate-size: 2256
 X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 15.10.2026 16:08, Mykyta Poturai wrote:
-> --- a/xen/drivers/vpci/sriov.c
-> +++ b/xen/drivers/vpci/sriov.c
-> @@ -79,19 +79,80 @@ int vpci_vf_init_header(struct pci_dev *vf_pdev)
->      const struct pci_dev *pf_pdev;
->      int rc = 0;
->      uint16_t ctrl;
-> +    unsigned int sriov_pos;
->  
->      ASSERT(rw_is_write_locked(&vf_pdev->domain->pci_lock));
->      ASSERT(vf_pdev->info.is_virtfn);
->  
->      pf_pdev = vf_pdev->pf_pdev;
->      ASSERT(pf_pdev);
-> +    sriov_pos = pf_pdev->vpci->sriov->pos;
+On 28.10.2026 15:21, Oleksii Kurochko wrote:
+> 
+> 
+> On 10/28/26 2:05 PM, Baptiste Le Duc wrote:
+>> p2m_set_pte_flags() presets the A/D bits of G-stage PTEs only when
+>> RISCV_ISA_EXT_svade is set, which is correct only if the device tree is.
+>>
+>> The privileged spec allows exactly two schemes for updating the PTE A and D
+>> bits: hardware sets them on access and on write, or accessing a page whose
+>> A and/or D bit is clear raises a page fault so that software can set them
+>> (ratified as Svade). Every implementation uses one of them, but platforms
+>> designed before Svade and Svadu were ratified, such as the HiFive Premier
+>> P550, may advertise neither.
+>>
+>> Trust the device tree when it advertises Svade and/or Svadu, as for any
+>> other extension. When it advertises neither, probe the scheme in effect
+>> and record the matching extension in riscv_isa, so that such device trees
+>> can be used as-is, and warn naming the extension to add to "riscv,isa".
+>>
+>> Introduce probe_hw_ad_update(): alias the first page of the Xen image
+>> read-only through the FIX_MISC fixmap slot with its A and D bits clear,
+>> then load from it under an exception table fixup. Hardware updating is in
+>> effect if the load completes and the A bit is then set. The probe fails
+>> otherwise, whether the load faults or completes leaving the A bit clear.
+>> The A bit being set by a speculative access still implies Svadu, as Svade
+>> only allows A to be set by software.
+>>
+>> Add Svadu to the known ISA extensions so it can be told apart from Svade.
+>> The comment above the enum asks for new extensions to go at the bottom to
+>> avoid shuffling, a leftover from Linux where the IDs were macros with
+>> explicit values. Nothing depends on the enum values, so have the comment
+>> say that multi-letter extensions follow the order of riscv_isa_ext[].
+>>
+>> Assisted-by: Claude:claude-opus-5-5
+>> Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+>> ---
+>> Changes since v9:
+> 
+> Nit: something wrong with version numbering. (in the case of v11 would 
+> be nice to fix).
+> 
+> Changes itself LGTM:
+> 
+> Reviewed-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 
-Can't this move ...
+Acked-by: Jan Beulich <jbeulich@suse.com>
 
->      rc = vf_init_bars(vf_pdev);
->      if ( rc )
->          return rc;
-
-... here?
-
-> -    ctrl = pci_conf_read16(pf_pdev->sbdf,
-> -                           pf_pdev->vpci->sriov->pos + PCI_SRIOV_CTRL);
-> +    ctrl = pci_conf_read16(pf_pdev->sbdf, sriov_pos + PCI_SRIOV_CTRL);
-> +
-> +    if ( IS_ENABLED(CONFIG_HAS_VPCI_GUEST_SUPPORT) &&
-> +         pf_pdev->domain != vf_pdev->domain )
-> +    {
-> +        struct vpci_bar *bars = vf_pdev->vpci->header.bars;
-> +        /*
-> +         * A VF's Vendor and Device ID registers read as 0xffff. The guest has
-> +         * no PF to synthesise them from, so take the vendor from the PF and
-> +         * the device from its SR-IOV capability.
-> +         */
-> +        uint16_t vid = pci_conf_read16(pf_pdev->sbdf, PCI_VENDOR_ID);
-> +        uint16_t did = pci_conf_read16(pf_pdev->sbdf,
-> +                                       sriov_pos + PCI_SRIOV_VF_DID);
-> +
-> +        rc = vpci_add_register(vf_pdev->vpci, vpci_read_val, NULL,
-> +                               PCI_VENDOR_ID, 2, (void *)(uintptr_t)vid);
-
-This effectively open-codes _p().
-
-> +        if ( rc )
-> +            return rc;
-> +
-> +        rc = vpci_add_register(vf_pdev->vpci, vpci_read_val, NULL,
-> +                               PCI_DEVICE_ID, 2, (void *)(uintptr_t)did);
-
-Same here.
-
-> +        if ( rc )
-> +            return rc;
-> +
-> +        /* Hardcode multi-function device bit to 0 */
-> +        rc = vpci_add_register(vf_pdev->vpci, vpci_read_val, NULL,
-> +                               PCI_HEADER_TYPE, 1,
-> +                               (void *)PCI_HEADER_TYPE_NORMAL);
-
-And this works only because PCI_HEADER_TYPE_NORMAL happens to be 0. Imo
-_p() wants using here as well.
-
-> +        if ( rc )
-> +            return rc;
-> +
-> +        rc = vpci_add_register(vf_pdev->vpci, vpci_hw_read32, NULL,
-> +                               PCI_CLASS_REVISION, 4, NULL);
-> +        if ( rc )
-> +            return rc;
-
-How is this SR-IOV-related?
-
-> +        for ( unsigned int i = 0; i < PCI_SRIOV_NUM_BARS; i++ )
-> +        {
-> +            switch ( pf_pdev->vpci->sriov->vf_bars[i].type )
-> +            {
-> +            case VPCI_BAR_MEM32:
-> +            case VPCI_BAR_MEM64_LO:
-> +            case VPCI_BAR_MEM64_HI:
-> +                rc = vpci_add_register(vf_pdev->vpci, vpci_guest_mem_bar_read,
-> +                                       vpci_guest_mem_bar_write,
-> +                                       PCI_BASE_ADDRESS_0 + i * 4, 4, &bars[i]);
-> +                if ( rc )
-> +                    return rc;
-> +                break;
-> +
-> +            default:
-> +                rc = vpci_add_register(vf_pdev->vpci, vpci_read_val, NULL,
-> +                                       PCI_BASE_ADDRESS_0 + i * 4, 4,
-> +                                       (void *)0);
-
-Unlike above here I'm less certain - we deliberately use this pattern
-elsewhere already. Yet maybe those would best be switched to _p() as
-well.
-
-Jan
 
