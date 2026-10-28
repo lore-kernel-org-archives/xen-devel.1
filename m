@@ -2,56 +2,57 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 31934606A31A
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 03:37:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5BB98606A327
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 05:04:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Jve2qMQH;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=bokX1XPp
-Received: from list by lists.xenproject.org with outflank-mailman.1462820.1673806 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=uMyOT92L
+Received: from list by lists.xenproject.org with outflank-mailman.1462831.1673816 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLuSl-00016W-QH; Wed, 28 Oct 2026 03:36:31 +0000
+	id 1xLvpX-0004ur-TJ; Wed, 28 Oct 2026 05:04:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1462820.1673806; Wed, 28 Oct 2026 03:36:31 +0000
+Received: by outflank-mailman (output) from mailman id 1462831.1673816; Wed, 28 Oct 2026 05:04:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLuSl-00016P-Ni; Wed, 28 Oct 2026 03:36:31 +0000
-Received: by outflank-mailman (input) for mailman id 1462820;
- Wed, 28 Oct 2026 03:36:29 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xLvpX-0004uk-Py; Wed, 28 Oct 2026 05:04:07 +0000
+Received: by outflank-mailman (input) for mailman id 1462831;
+ Wed, 28 Oct 2026 05:04:06 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <zhongqiu.han@oss.qualcomm.com>) id 1xLuSj-00016J-LR
- for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 03:36:29 +0000
+ (envelope-from <Shuaidong.Chen@amd.com>) id 1xLvpW-0004ue-84
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 05:04:06 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xLuSi-00Ax8f-O3
- for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 04:36:28 +0100
-Received: from [10.42.69.6] (helo=localhost)
+ id 1xLvpT-006B8j-Ol
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 06:04:03 +0100
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <zhongqiu.han@oss.qualcomm.com>)
- id 6ae16db4-bab6-0a2a0a5309dd-0a2a4506a6ce-6
- for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 04:36:28 +0100
-Received: from [205.220.168.131] (helo=mx0a-0031df01.pphosted.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <zhongqiu.han@oss.qualcomm.com>)
- id 6ae16dba-195a-0a2a45060019-cddca8830cb6-3
- for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 04:36:28 +0100
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69S0j9GO2277147
- for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 03:36:25 GMT
-Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com
- [209.85.210.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hjy712a80-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 03:36:25 +0000 (GMT)
-Received: by mail-pf1-f197.google.com with SMTP id
- d2e1a72fcca58-89e6ddd4554so403616b3a.3
- for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 20:36:25 -0700 (PDT)
-Received: from [10.133.33.27] (tpe-colo-wan-fw-bordernet.qualcomm.com.
- [103.229.16.4]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3ae5a48ec90sm899533a91.6.2026.10.27.20.36.18
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 27 Oct 2026 20:36:24 -0700 (PDT)
+ (envelope-from <Shuaidong.Chen@amd.com>)
+ id 6ae18240-2eae-0a2a0a5409dd-0a2a4504c442-8
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 06:04:03 +0100
+Received: from [52.101.52.59]
+ (helo=BL2PR02CU003.outbound.protection.outlook.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Shuaidong.Chen@amd.com>)
+ id 6ae18242-b57f-0a2a45040019-3465343bae5b-3
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 06:04:02 +0100
+Received: from MN2PR20CA0055.namprd20.prod.outlook.com (2603:10b6:208:235::24)
+ by BL4PR12MB9508.namprd12.prod.outlook.com (2603:10b6:208:58e::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.19; Wed, 28 Oct
+ 2026 05:03:59 +0000
+Received: from IA0PEPF00000039.namprd03.prod.outlook.com
+ (2603:10b6:208:235:cafe::3f) by MN2PR20CA0055.outlook.office365.com
+ (2603:10b6:208:235::24) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.546.22 via Frontend Transport; Wed,
+ 28 Oct 2026 05:03:59 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ IA0PEPF00000039.mail.protection.outlook.com (10.167.249.70) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.569.4 via Frontend Transport; Wed, 28 Oct 2026 05:03:59 +0000
+Received: from jim-System-Product-Name.amd.com (10.180.168.240) by
+ satlexmb07.amd.com (10.181.42.216) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.53; Wed, 28 Oct 2026 00:03:55 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -60,248 +61,181 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=qcppdkim1 header.d=qualcomm.com header.i="@qualcomm.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=google header.d=oss.qualcomm.com header.i="@oss.qualcomm.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	/wKdshZSDdNYlVlGGww1CWjddpjIdb7CUnZ1PObkTB4=; b=Jve2qMQHUqrEssgK
-	LflW6/l7KZ234zJVmm5v4avWWbV1TcUiioz11IU7xNAS3yhP+6JpgpsoOMhZWZvJ
-	IPei/BNfJ7ExWg/tShStITm6QZsRQXDRsGswXFZFnq+o9ga6nmbSa33m3OhRLXWT
-	jNycF1Ub6eUUeiAVgYu5ZaX6svI7KSL3EU6+K53Rnc/d554YMUVQJALzktVCxxiV
-	q+Kz86xf3mp9SK5/sBZk8qiecR2lpX8aT+GhaHVmok95F2t7X+5DAAukw34dJtRr
-	PnVGLMYR/XaeQ9zEg45sqiPgK2kxAakvx9jugL9konNgiu/4GNvqT3B3MXccU96s
-	aGnIQQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793158585; x=1793763385; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=/wKdshZSDdNYlVlGGww1CWjddpjIdb7CUnZ1PObkTB4=;
-        b=bokX1XPpwcYFFqFs83TA5ZIjFB/MRB/4mw8FskWT/MAonIApI5+k8T2Etr4lGTX0Du
-         H+eK3gVuNKpuprcUqNCd/5UjUrw1IYnNkT/nMaXuKNBM3X/CtJOPIM8O4r7kD052XnSp
-         8KzWCww8tvk1Xh03EpYdfzyKYeuYsuRqI89andk3hwfz1iGqql6gzKy0mZRuuTVDAZvQ
-         xyW/7IZyac4IsNPclLx10ME4kiOocCZEz0BhLyoCzr6QXFkB8sSAjVf+XKgosKTwRGFj
-         UNj3z/GYX/puATtNqM9/QOAcQIVweOXS0baa57RkT2jZjgkDI/kFoM/bgyjNXXCRxN4X
-         FDcg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793158585; x=1793763385;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=/wKdshZSDdNYlVlGGww1CWjddpjIdb7CUnZ1PObkTB4=;
-        b=y4CnKAzotb6ah2bB4uNQph6eDSUW7zgWsSDTax0AdWrYvTQDQJWE5r2E/SJTOlvK58
-         JfKDMCjUsNXuiV3U7dfZU0m+wgvvRrB7jJmIMMLDDqxd9+kHDNk4ASLaTSGQEQZL7JPl
-         FcjuQndGw0KvUw24ymvvkIV4+UN7Gk2+3xrM2U3e0o1YMpqQ3QUGUC7PK62zvJvnfgTV
-         N86ZyuNjE1927OOa6zMiQYtltVqEklIzQDfM4gOJtrsqZTwxk3kT+rTj371haD1l1CJF
-         BVj7o3H0FN8TYVaXFnPScRedtvvxC0ki4QI2CuiKyFegdYA7F0JARiJsj6o30xgu9oHs
-         ZbCA==
-X-Forwarded-Encrypted: i=1; AKwUvBzUVk/s/fMLn5lL1why4f+UIuYIBboaqGCeK4x+dzstSJCNq7Rra3cEljc+zGNUc/vCDRbAorbZFb4=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYLBMmO9H3LfECnEBk9GdXqjdIEEERrgZacEuZalsiIV8zwfjPx/
-	tKvR2ufPhhpdbjywu4y3azjE8tzcKZl3i6ZBbbg0VhhQLBzUneF+6zvFxewOJWOjteL6VZDnxX2
-	7ZyzO3yh7kjXpFTafpEwgFqhzyuARiMoQlqvdP5pk9V34BNj84PUh+lmgIvczCO2VMpgSEw==
-X-Gm-Gg: AYBFou0l030Gcd8br4cS6xLzEOnXFhP5nfBYfvIf29uPYgMId5F5SscwOJxRNE+zonM
-	Nx9Mr73pbXygo7+w5A27/hkMFJrnsWN02/AWmaJ0IH2fHNhxPfvZgaXR/yOn4o0lixeyfFGSoOw
-	uQzatOZ2zlygpD4HIP6Vh3zs5VNDhWu545zlwdIKezl1gtn9lefOinSq5scOCmhZ3waLFhkahaN
-	DzVv9Ysr1Dg7TBNZ0ABbwmqcn+5IDKtVJYd75YUy3Ix4zQI4VTQxcGC7kk3hqO6y7HKlQ82kwQQ
-	vFuioLvrNaFQiT2JnmwnMG99udHrrFuF3Gu7JV0cc0Hsi8SkLw5rnnjZ5RWb1r3A1XfpEOCn2tj
-	nq0gMN7L3h6Xn11w+Zq6Qm3IxOsgk5S9bgiT217RibuwUy+7Otdt8OrF2DWoZ6FdRnT4m7Zp7Vg
-	toivEk8LRsBVeYuUhAL0kfEsJsgmBSHy9nqahwHORoA4s=
-X-Received: by 2002:a17:90b:5863:b0:3ac:b3ff:b476 with SMTP id 98e67ed59e1d1-3ae581836a6mr818178a91.38.1793158584995;
-        Tue, 27 Oct 2026 20:36:24 -0700 (PDT)
-X-Received: by 2002:a17:90b:5863:b0:3ac:b3ff:b476 with SMTP id 98e67ed59e1d1-3ae581836a6mr818144a91.38.1793158584441;
-        Tue, 27 Oct 2026 20:36:24 -0700 (PDT)
-Message-ID: <e5bd0521-36d1-447d-b71a-94a2e07414e2@oss.qualcomm.com>
-Date: Wed, 28 Oct 2026 11:36:16 +0800
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ouzQv6OIUWe/gp28Dt7whlqb+0QSkp8AWqJyJzKjlOFqf9VuKdfriGjl80dp04g/g4rLa0x0JF9GiYz6eTCnkLB+sHIu2qX7ZUsHlaUinGWA5LrBo8HaTDccDH2ev2H6K7w2G4GGQfAUnqG3fsse9H68tPURCGdaS8BTfaTvrsYGdZMCoEOHVCzUDBFMBxaqlyI22frw+M/wLvTYYJ9DPLfHUFYjKyJkElQlHfT7qS7972QzGY0a9ryhhJoIPYtVVE/ylhgpI6KuFgooFniIOYFCqDW6BiWyDO4O4AvQKxl78bsgAGrK7SlBzF3riiXtFHH190qcxjXr3UpXmXslfQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=kMYrGPInOhU7jXQfvL98Nfkms3z6Eq3dU6lGpKzArog=;
+ b=pWd+A53aAcQvLH6nT2TnU2EElnoKZ+yrOufzQRK3QoWom50YiOTHBVEBUhdMyE+kXHvdsGOwT9O57megvCbTzab9zDiiwVqI7JylizAv5lxpOd1CXI6GNG2ZKqXPcxheigp0KTyISQ5IZQk8VXTTkwo6j68TTjSyN2tZ+/fGL0EQpxfuuq7QJ7RlymEzD6GWIyd3Z8Dolvbu6uwZ/+8iv4BH6b+HpDYogFomLiuYhk/SxBKXhVfJIWDAIF4SuUvn9qfgYU0u5bJqYVcDOvv1qS675j2SDn5SkFIJGbiF8GWYG+y05JSkWIW5nka7ZWLK8gKMYGIySvfCFWCpIyvBIw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=kMYrGPInOhU7jXQfvL98Nfkms3z6Eq3dU6lGpKzArog=;
+ b=uMyOT92LRNk4Jzy/lJ0OraBmwhDdffXd859QimbbOXo3jGZhRI7WOBvys5mGfAejHZtodSQOg0mw2nZxaxDOGZGO3LIGfPpgrmMPzt9dlQ1+joD4kJihbxCIrkWFfZjtXsPTGnvuTr5zvKfM6T1dDWyiCnXB1uAcx6LnCvtmCYI=
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+From: Shuaidong Chen <shuaidong.chen@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Nicola Vetrini <nicola.vetrini@bugseng.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Michal Orzel <michal.orzel@amd.com>, Jan Beulich
+	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, "Anthony
+ PERARD" <anthony.perard@vates.tech>, Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Doug Goldstein
+	<cardoe@cardoe.com>, Alejandro Vallejo <alejandro.garciavallejo@amd.com>,
+	Grygorii Strashko <grygorii_strashko@epam.com>, Penny Zheng
+	<penny.zheng@amd.com>, Ray Huang <Ray.Huang@amd.com>, Shuaidong Chen
+	<shuaidong.chen@amd.com>
+Subject: [XEN PATCH] xen/typesafe: don't brace-initialize a scalar TYPE_SAFE value
+Date: Wed, 28 Oct 2026 13:03:36 +0800
+Message-ID: <20261028050336.2549325-1-shuaidong.chen@amd.com>
+X-Mailer: git-send-email 2.34.1
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/9] cpufreq: governor: Initialize kobj_type release
- callback statically
-To: Ian Rogers <irogers@google.com>, Kees Cook <kees@kernel.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Miguel Ojeda <ojeda@kernel.org>,
-        "Rafael J . Wysocki" <rafael@kernel.org>,
-        Danilo Krummrich <dakr@kernel.org>
-Cc: Nathan Chancellor <nathan@kernel.org>,
-        Nick Desaulniers <ndesaulniers@google.com>,
-        Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>,
-        =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
-        Zhihao Cheng <chengzhihao1@huawei.com>,
-        Sumanth Korikkar <sumanthk@linux.ibm.com>,
-        Bill Wendling <morbo@google.com>,
-        Justin Stitt <justinstitt@google.com>, driver-core@lists.linux.dev,
-        llvm@lists.linux.dev, linux-hardening@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-acpi@vger.kernel.org, linux-pm@vger.kernel.org,
-        linuxppc-dev@lists.ozlabs.org, linux-sh@vger.kernel.org,
-        linux-s390@vger.kernel.org, gfs2@lists.linux.dev,
-        xen-devel@lists.xenproject.org, linux-mtd@lists.infradead.org,
-        amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
-        linux-kernel@vger.kernel.org, Viresh Kumar <viresh.kumar@linaro.org>,
-        zhongqiu.han@oss.qualcomm.com
-References: <20261027223847.652884-1-irogers@google.com>
- <20261027223847.652884-5-irogers@google.com>
-Content-Language: en-US
-From: Zhongqiu Han <zhongqiu.han@oss.qualcomm.com>
-In-Reply-To: <20261027223847.652884-5-irogers@google.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI4MDAxNCBTYWx0ZWRfX1AQFRVz7DjUF
- c+eUq9EI1ygcSsMW+PGKKK1S6ssgYUIgpdjOJTkAzAlQQsor77tcnLp0k0W+rEyYj7mVIRx4geA
- LkvuAceBHalIhZlfLqgfcWRO11lT0CsHRHsf7aVc2ThX5OWmYt4IDQSzqpWr06C2Sc0pit6jUwJ
- BoDw5XNm/OorxP4MFrhx7MXsJ30sFOfuz2ipc6BhNQ5M/nSXctvjK60SLTQaMojx7ocWNeumm1z
- oWqpe9LGiSpP3BJGPw38yQj/40m6wyzjPS332jfbg002PVCIa/yV2ecHX3oWL/HN6Q+ILpzGrxi
- xikOEEyGf6RI5PAqolr59WPgaOnKTEN80p9Gk6lJCFEc4YjdDvO5eyCEYCzTIT7RL8kSBCa/WeK
- CBUN1PPGv//Cy8q6S0vX/xfM701GGxOHsmwyRbXaOhSDOSP2e9DFlGO3DqWc4P/ka16IkzN2czp
- 5frtVUv89uvfrEBpzyw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI4MDAxNCBTYWx0ZWRfXyZhWMKDAmbeY
- zMJ10E+DQGqijAtoEjpdyf2yt2ttShUbHOyW3em1FFtYM0LDwWgYJWR6CyGhpK6cA8Exw0mHHCA
- bMcZPQjnsQ7uVydy7a1tU3fomprTCXE=
-X-Authority-Analysis: v=2.4 cv=JspkP84C c=1 sm=1 tr=0 ts=6ae16db9 cx=c_pps
- a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=1XWaLZrsAAAA:8 a=MbyaxBA4Lnn_ULkWIDkA:9 a=QEXdDO2ut3YA:10
- a=2VI0MkxyNR6bbpdq8BZq:22
-X-Proofpoint-GUID: NxWYWPHZQuhhiN-mlMypILlsxQZvRQlS
-X-Proofpoint-ORIG-GUID: NxWYWPHZQuhhiN-mlMypILlsxQZvRQlS
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-10-28_01,2026-10-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 phishscore=0 adultscore=0 lowpriorityscore=0 clxscore=1015
- spamscore=0 priorityscore=1501 impostorscore=0 bulkscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610280014
-X-purgate-ID: tlsNG-16d1c6/1793158588-F5A0C77B-074958EF/0/0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
+ (10.181.42.216)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: IA0PEPF00000039:EE_|BL4PR12MB9508:EE_
+X-MS-Office365-Filtering-Correlation-Id: 81f58ef4-a4ce-4868-241d-08df34b0e074
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|82310400026|23010399003|36860700016|376014|1800799024|7416014|6133799003|18002099003|261026140227099003|10067099003|13003099007|261026121527099003|11063799006|56012099006|261021121427099003|261022105027099003|261009223027099003|261021123027099003|261022075727099003;
+X-Microsoft-Antispam-Message-Info:
+	PXwhV8H8Sh9xMbhoQbu8RI2qaURxXmA0YQaDjZGOuPEnZO7+aiKSd33wAQf+lNfSDusP4OJR6cBHO86yv8cSFquRVGtNNi1vweE1oKMmHJScZz+MSCXOQUdd5UFA4aKEY0fhAw6OX23ErVbRGR4Ycphk/IZYpkjXAfRBbMzVenGTWbBOYbSfipGkFLgsqmXL3ToOCxhHrFrMjZSKC/JPN65NgKyw5ZzAGxyyYNiFF8N6PBeSyI7vPFnU2hEaYnSx9d0dPE8ws0POjjRwIQ4gN0x8Y59YVlkQFRGGJInVOtN8dUJnvZEyzXVP+J7JB3X29Qinbdgly525VCEbCE9pf1F/doMlqdTlWvw4T6dyVvQLwEG46xaKUNOyeABygcd7CTZ4KtEqQoURR3fhX7ey5EYUdRR7Exnf5TtPFiPcG9GMRfGSPGK+nM478gw5bJE0+zDPfAqzqsKbrrNwwQhl9m13mU9qE4Rl0kJP3woaM9bK1pncU+A8EHTe1yapExLEsyje9lMxw7GwEZ3EkW4nBWD+dkuhdPeCuLeLFIfOL+YVkOmwycUnqgLF0XtvmY7EYFH2nrV8Mqp1+29Su4Uc00mR2zBEJyczcS+VUS2zaRvk0v+zoU6qcKW8jyB81yMQBLwOeefJ6BI8fBRY1B78UTFz2L0VqImCBeVEr8U/de9MMt9EcoJagXfHa+epGvMVBewW3FzUB6JO8fOBorImRA==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(23010399003)(36860700016)(376014)(1800799024)(7416014)(6133799003)(18002099003)(261026140227099003)(10067099003)(13003099007)(261026121527099003)(11063799006)(56012099006)(261021121427099003)(261022105027099003)(261009223027099003)(261021123027099003)(261022075727099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	iPo2ooDH3V3ove2IFfOpKe0rM8kD40x0qzt8WdsPARCMR8ukIE9Nw6TpbS7bk1FoLUF96QgNdot43IFtMM3M5ZVdrLY3eGD00vy6l+WochAtDKefXQ6UfYwFkhigScrNmkPZ0rne5NpFYZdSsdwMysyOYy1Feq32Vt3X50ID5OQp0qKuFO3r0Cxd6RE4rsSyLySfTl1v0X8SrXuTntU3q0nOUqsktMZBPxDNs/25JUMpWTK/+Zrl3Mwx/oIPvJLGBMF7vugtkwZWf/lhfwmQtca9C1ju3G4oC/I9mpPHH05ZVuZi2PxRJ2TpOcaqFO1VQ80OCBd3DyUUc5iDnpruiKSKWD09ErfK953GSJ1MMfWn+EsE0yi68o54Fvg8S16A0/JljMuDBMTKOMZmtpaocNyS4U+AK1tMUiZ/DI91J5+yIzvI4eg0T1bG3ZFwJ8nL
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Oct 2026 05:03:59.4059
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 81f58ef4-a4ce-4868-241d-08df34b0e074
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	IA0PEPF00000039.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL4PR12MB9508
+X-purgate-ID: tlsNG-ebf023/1793163843-50AD8B50-AC5B4214/0/0
 X-purgate-type: clean
-X-purgate-size: 4733
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+X-purgate-size: 3904
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=unavailable
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Ian,
+TYPE_SAFE() degrades to a plain typedef in non-debug builds (NDEBUG), so
+mfn_t is then `unsigned long' rather than a one-member struct.
+INVALID_MFN_INITIALIZER and INVALID_GFN_INITIALIZER, however, always
+expand to `{ ... }', which leaves
 
-Thanks for the update.
+    mfn_t first_valid_mfn = { ~0UL };
 
-On 10/28/2026 6:38 AM, Ian Rogers wrote:
-> Export cpufreq_dbs_data_release() and set .kobj_type.release statically
-> in the ondemand and conservative governors so their gov_attr_set
-> kobjects have a valid release callback statically initialized, matching
-> cpufreq_governor_dbs. Remove the redundant runtime assignment in
+initializing a scalar from a braced list.  That is valid C, but MISRA
+C:2012 Rule 9.2 (required) - "The initializer for an aggregate or union
+shall be enclosed in braces" - is reported against it, twice in the
+x86_64 build: common/page_alloc.c and arch/x86/efi/runtime.h.
 
-"matching cpufreq_governor_dbs" is a bit confusing to me
-(cpufreq_governor_dbs() was removed back in v4.8 by commit e788892ba3cc
-("cpufreq: governor: Get rid of governor events")), as it doesn't
-seem to refer to anything in the tree. Perhaps we could just drop it,
-e.g.:
+Give TYPE_SAFE() a companion TYPE_SAFE_INIT(), so that the shape of the
+initializer follows the shape of the type, and use it for both
+initializers.  The debug arm is unchanged; the non-debug one drops the
+braces.
 
-Export cpufreq_dbs_data_release() and initialize .kobj_type.release
-statically in the ondemand and conservative governors instead of
-assigning it at runtime in cpufreq_dbs_governor_init().
+No functional change: with CONFIG_DEBUG_INFO=n, common/page_alloc.o and
+arch/x86/efi/runtime.o are bit-for-bit identical, both with CONFIG_DEBUG=y
+and with it unset.  With CONFIG_DEBUG_INFO=y they differ only in
+.debug_info and .debug_line, because typesafe.h gains nine lines and the
+inline functions defined there move with it; .text and .data are
+unchanged.
 
+Signed-off-by: Shuaidong Chen <shuaidong.chen@amd.com>
+Reviewed-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+---
+ xen/include/xen/mm-frame.h |  4 ++--
+ xen/include/xen/typesafe.h | 11 ++++++++++-
+ 2 files changed, 12 insertions(+), 3 deletions(-)
 
-The code change itself looks good to me. With the changelog updated
-(in a respin if the series needs one for other reasons, or when
-applying):
-
-Reviewed-by: Zhongqiu Han <zhongqiu.han@oss.qualcomm.com>
-
-> cpufreq_dbs_governor_init().
-> 
-> This prepares for annotating struct kobj_type::release with
-> __must_init.
-> 
-> Signed-off-by: Ian Rogers <irogers@google.com>
-> ---
->   drivers/cpufreq/cpufreq_conservative.c | 5 ++++-
->   drivers/cpufreq/cpufreq_governor.c     | 4 ++--
->   drivers/cpufreq/cpufreq_governor.h     | 1 +
->   drivers/cpufreq/cpufreq_ondemand.c     | 5 ++++-
->   4 files changed, 11 insertions(+), 4 deletions(-)
-> 
-> diff --git a/drivers/cpufreq/cpufreq_conservative.c b/drivers/cpufreq/cpufreq_conservative.c
-> index 02bfd46543e9..146a2353b1a2 100644
-> --- a/drivers/cpufreq/cpufreq_conservative.c
-> +++ b/drivers/cpufreq/cpufreq_conservative.c
-> @@ -318,7 +318,10 @@ static void cs_limits(struct cpufreq_policy *policy)
->   
->   static struct dbs_governor cs_governor = {
->   	.gov = CPUFREQ_DBS_GOVERNOR_INITIALIZER("conservative"),
-> -	.kobj_type = { .default_groups = cs_groups },
-> +	.kobj_type = {
-> +		.release = cpufreq_dbs_data_release,
-> +		.default_groups = cs_groups,
-> +	},
->   	.gov_dbs_update = cs_dbs_update,
->   	.alloc = cs_alloc,
->   	.free = cs_free,
-> diff --git a/drivers/cpufreq/cpufreq_governor.c b/drivers/cpufreq/cpufreq_governor.c
-> index f3bd3dbe7c41..f8b5aca09b6b 100644
-> --- a/drivers/cpufreq/cpufreq_governor.c
-> +++ b/drivers/cpufreq/cpufreq_governor.c
-> @@ -419,7 +419,7 @@ static void free_policy_dbs_info(struct policy_dbs_info *policy_dbs,
->   	gov->free(policy_dbs);
->   }
->   
-> -static void cpufreq_dbs_data_release(struct kobject *kobj)
-> +void cpufreq_dbs_data_release(struct kobject *kobj)
->   {
->   	struct dbs_data *dbs_data = to_dbs_data(to_gov_attr_set(kobj));
->   	struct dbs_governor *gov = dbs_data->gov;
-> @@ -427,6 +427,7 @@ static void cpufreq_dbs_data_release(struct kobject *kobj)
->   	gov->exit(dbs_data);
->   	kfree(dbs_data);
->   }
-> +EXPORT_SYMBOL_GPL(cpufreq_dbs_data_release);
->   
->   int cpufreq_dbs_governor_init(struct cpufreq_policy *policy)
->   {
-> @@ -488,7 +489,6 @@ int cpufreq_dbs_governor_init(struct cpufreq_policy *policy)
->   	policy->governor_data = policy_dbs;
->   
->   	gov->kobj_type.sysfs_ops = &governor_sysfs_ops;
-> -	gov->kobj_type.release = cpufreq_dbs_data_release;
->   	ret = kobject_init_and_add(&dbs_data->attr_set.kobj, &gov->kobj_type,
->   				   get_governor_parent_kobj(policy),
->   				   "%s", gov->gov.name);
-> diff --git a/drivers/cpufreq/cpufreq_governor.h b/drivers/cpufreq/cpufreq_governor.h
-> index 806d8fb4dff1..1026712bb79b 100644
-> --- a/drivers/cpufreq/cpufreq_governor.h
-> +++ b/drivers/cpufreq/cpufreq_governor.h
-> @@ -150,6 +150,7 @@ static inline struct dbs_governor *dbs_governor_of(struct cpufreq_policy *policy
->   }
->   
->   /* Governor callback routines */
-> +void cpufreq_dbs_data_release(struct kobject *kobj);
->   int cpufreq_dbs_governor_init(struct cpufreq_policy *policy);
->   void cpufreq_dbs_governor_exit(struct cpufreq_policy *policy);
->   int cpufreq_dbs_governor_start(struct cpufreq_policy *policy);
-> diff --git a/drivers/cpufreq/cpufreq_ondemand.c b/drivers/cpufreq/cpufreq_ondemand.c
-> index 9942dbb38dae..7386d043c665 100644
-> --- a/drivers/cpufreq/cpufreq_ondemand.c
-> +++ b/drivers/cpufreq/cpufreq_ondemand.c
-> @@ -374,7 +374,10 @@ static struct od_ops od_ops = {
->   
->   static struct dbs_governor od_dbs_gov = {
->   	.gov = CPUFREQ_DBS_GOVERNOR_INITIALIZER("ondemand"),
-> -	.kobj_type = { .default_groups = od_groups },
-> +	.kobj_type = {
-> +		.release = cpufreq_dbs_data_release,
-> +		.default_groups = od_groups,
-> +	},
->   	.gov_dbs_update = od_dbs_update,
->   	.alloc = od_alloc,
->   	.free = od_free,
-
-
+diff --git a/xen/include/xen/mm-frame.h b/xen/include/xen/mm-frame.h
+index d973aec901f..e41d2680af5 100644
+--- a/xen/include/xen/mm-frame.h
++++ b/xen/include/xen/mm-frame.h
+@@ -12,7 +12,7 @@ TYPE_SAFE(unsigned long, mfn);
+  * To be used for global variable initialization. This workaround a bug
+  * in GCC < 5.0.
+  */
+-#define INVALID_MFN_INITIALIZER { INVALID_MFN_RAW }
++#define INVALID_MFN_INITIALIZER TYPE_SAFE_INIT(INVALID_MFN_RAW)
+ 
+ #if 0
+ #define mfn_t /* Grep fodder: mfn_t, _mfn() and mfn_x() are defined above */
+@@ -48,7 +48,7 @@ TYPE_SAFE(unsigned long, gfn);
+  * To be used for global variable initialization. This workaround a bug
+  * in GCC < 5.0 https://gcc.gnu.org/bugzilla/show_bug.cgi?id=64856
+  */
+-#define INVALID_GFN_INITIALIZER { INVALID_GFN_RAW }
++#define INVALID_GFN_INITIALIZER TYPE_SAFE_INIT(INVALID_GFN_RAW)
+ 
+ #if 0
+ #define gfn_t /* Grep fodder: gfn_t, _gfn() and gfn_x() are defined above */
+diff --git a/xen/include/xen/typesafe.h b/xen/include/xen/typesafe.h
+index 7ecd3b4a8d5..258404bb915 100644
+--- a/xen/include/xen/typesafe.h
++++ b/xen/include/xen/typesafe.h
+@@ -9,12 +9,17 @@
+  *  * _$FOO()  which boxes a $TYPE as a $FOO_t
+  *  * $FOO_x() which unboxes a $FOO_t to $TYPE
+  *
++ * TYPE_SAFE_INIT($VAL) spells a constant initializer for a $FOO_t, for use
++ * where _$FOO() cannot be (an object of static storage duration).
++ *
+  * This makes a $FOO_t and a $BAR_t incompatible even when the box the same
+  * $TYPE.
+  *
+  * It does have some performance cost because the types now have a different
+  * storage attribute, so type safety is only enforced in a debug build.
+- * Non-debug builds degrade to a simple typedef and noops for the functions.
++ * Non-debug builds degrade to a simple typedef and noops for the functions,
++ * and with it TYPE_SAFE_INIT() loses its braces: a scalar must not be
++ * brace-initialized.
+  */
+ 
+ #ifndef NDEBUG
+@@ -24,6 +29,8 @@
+     static inline _name##_t _##_name(_type n) { return (_name##_t) { n }; } \
+     static inline _type _name##_x(_name##_t n) { return n._name; }
+ 
++#define TYPE_SAFE_INIT(val) { val }
++
+ #else
+ 
+ #define TYPE_SAFE(_type, _name)                                         \
+@@ -31,6 +38,8 @@
+     static inline _name##_t _##_name(_type n) { return n; }             \
+     static inline _type _name##_x(_name##_t n) { return n; }
+ 
++#define TYPE_SAFE_INIT(val) (val)
++
+ #endif
+ 
+ #endif /* __XEN_TYPESAFE_H__ */
 -- 
-Thx and BRs,
-Zhongqiu Han
+2.34.1
+
 
