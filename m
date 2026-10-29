@@ -2,45 +2,49 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E733606A31A
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2026 13:56:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A3F0C606A329
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2026 13:57:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=RziWUWgV
-Received: from list by lists.xenproject.org with outflank-mailman.1464687.1675558 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=umich.edu header.i=@umich.edu header.a=rsa-sha256 header.s=relay-1 header.b=VR9MHA3v
+Received: from list by lists.xenproject.org with outflank-mailman.1464698.1675568 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMQc1-0007dz-Gr; Thu, 29 Oct 2026 13:56:13 +0000
+	id 1xMQcw-00089B-U4; Thu, 29 Oct 2026 13:57:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1464687.1675558; Thu, 29 Oct 2026 13:56:13 +0000
+Received: by outflank-mailman (output) from mailman id 1464698.1675568; Thu, 29 Oct 2026 13:57:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMQc1-0007ds-E0; Thu, 29 Oct 2026 13:56:13 +0000
-Received: by outflank-mailman (input) for mailman id 1464687;
- Thu, 29 Oct 2026 13:56:11 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xMQbz-0007dm-Tb
- for xen-devel@lists.xenproject.org; Thu, 29 Oct 2026 13:56:11 +0000
+	id 1xMQcw-000894-R5; Thu, 29 Oct 2026 13:57:10 +0000
+Received: by outflank-mailman (input) for mailman id 1464698;
+ Thu, 29 Oct 2026 13:57:09 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xMQcv-00088s-0m
+ for xen-devel@lists.xenproject.org; Thu, 29 Oct 2026 13:57:09 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xMQbz-00AYpF-6G
- for xen-devel@lists.xenproject.org; Thu, 29 Oct 2026 14:56:11 +0100
-Received: from [10.42.69.2] (helo=localhost)
+ id 1xMQct-006hLb-DP
+ for xen-devel@lists.xenproject.org; Thu, 29 Oct 2026 14:57:08 +0100
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6ae35060-2eae-0a2a0a5409dd-0a2a450296b8-48
- for <xen-devel@lists.xenproject.org>; Thu, 29 Oct 2026 14:56:10 +0100
-Received: from [209.85.221.53] (helo=mail-wr1-f53.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6ae3507a-6ca4-0a2a45020019-d155dd35b898-3
- for <xen-devel@lists.xenproject.org>; Thu, 29 Oct 2026 14:56:10 +0100
-Received: by mail-wr1-f53.google.com with SMTP id
- ffacd0b85a97d-48c4be28b82so1918424f8f.2
- for <xen-devel@lists.xenproject.org>; Thu, 29 Oct 2026 06:56:10 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e3ece14a1sm35919655f8f.57.2026.10.29.06.56.09
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 29 Oct 2026 06:56:10 -0700 (PDT)
+ (envelope-from <dunlapg@umich.edu>)
+ id 6ae350b1-2eae-0a2a0a5409dd-0a2a45059e4c-2
+ for <xen-devel@lists.xenproject.org>; Thu, 29 Oct 2026 14:57:05 +0100
+Received: from [18.219.209.13] (helo=gorgon.relay-egress.a.mail.umich.edu)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <dunlapg@umich.edu>)
+ id 6ae350af-4cb1-0a2a45050019-12dbd10dde22-3
+ for <xen-devel@lists.xenproject.org>; Thu, 29 Oct 2026 14:57:04 +0100
+Received: from truthful-redcap.authn-relay.a.mail.umich.edu
+ (ip-10-0-73-72.us-east-2.compute.internal [10.0.73.72])
+ by gorgon.relay-egress.a.mail.umich.edu with ESMTPS
+ id 6AE350AF.782D12D.52E9F640.1881737; Thu, 29 Oct 2026 09:57:03 -0400
+Received: from mail-lj1-f175.google.com (mail-lj1-f175.google.com
+ [209.85.208.175])
+ by truthful-redcap.authn-relay.a.mail.umich.edu with ESMTPSA
+ id 6AE350AE.16D3188D.71A5AF08.3104888;
+ Thu, 29 Oct 2026 09:57:02 -0400
+Received: by mail-lj1-f175.google.com with SMTP id
+ 38308e7fff4ca-3ab27e45e7cso17532241fa.3
+ for <xen-devel@lists.xenproject.org>; Thu, 29 Oct 2026 06:57:02 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,128 +53,131 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:Autocrypt:Subject:From:Cc:To:Content-Language:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1793282170; x=1793886970; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=WB3lF7EPEE1aYa6kOgODxIiQOSUkR4cyg+8/BqTd+pY=;
-        b=RziWUWgViTN+aBE0KgJCn9XnB34QXwT6NSmF/GUi4au248C88alkc8M3EYuQi3WHCn
-         /wda7Fjt3W+04TEoyl1BTdAfmmjuS76zESxgIyrhTLh8fBciVM8bM2Q+TkuKkoNNL79I
-         t2XJjnz39EZEzTRA5qyIOAoUD3VhMqxbrUFKOxcS9ugQiNjOuyq+NNmwEsFjtNHHp1i3
-         2Cwf5gTjhblPBwvtPjdAaVbP6H017lwRkk3gEVvLP/zx5zwYhuwnpTWmw7CrQItWiKmm
-         NhTwOw7FsMZ86iJSlrmyNCeSyrNzL7QuaZHtIl9xCHu+5iQnOhIey2NhiPPL7s1iqe8I
-         MzJA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793282170; x=1793886970;
-        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=WB3lF7EPEE1aYa6kOgODxIiQOSUkR4cyg+8/BqTd+pY=;
-        b=Dh7D09WT4a7lZgJigKpbj6W4NDKgX06qp9gzNaJAQaXI0/8+ppTIa4gqXNDrEzv9uq
-         fwZilYineORfOBcLIkdGYSCh4Dmv0zs3HjSUfLTgWVkGcjj6iwXoQ10TntQhntGc6dMu
-         RYVWQR2vCmt0FovojuT8w5fLJkigWuZ3um1SHquiJhufdYTnEy1nwVKtwMsgKx35k0Pf
-         4ZdfO92tYR/iY9/5FQyXb3xSF3D6wn8GfHymh+ri0OzuYnGSeVogpZXQUZiufsAmvfTZ
-         kGA7BPJ8HkPyoM6xnim0mWhdSyVHv3WurpDLEb9WrIlANNuVRZ3ejlo4YI5wzG/KD7sp
-         9SXQ==
-X-Gm-Message-State: AFq9FYIfQbmKUjN8hGXECQ+EOtSZeb4S6LXxzcQukLbUDGItSoTcuEda
-	gYghjOkoAvA20nGxpZTswuXo+IiB0cEIMNb/FAjtsrfgLvnbUAOw486iq+eIPhSLGWNKQCrcIT5
-	53R5p5w==
-X-Gm-Gg: AYBFou1hk4QUFXa6aFenct0tsuMsqblcvVP2M6FcV0OS9/f4j67i8c0/74LIoTJ3Wuj
-	xo604BtT+5AfRmpY/ErsLP9wmJLvKnD7QRVBjkhrP0B3ngJa8L25FFShJLUdqEgO/3s3aZX+Qfh
-	5Y8bLRqxjNlW6d+WQq0+h9XdVHN7QPgEwFT0DrkjYRIt6gwpli+TWOe6vjH+wYRspr358zy7hXt
-	9p//7AXcIcCch4rui5Ii6wNHuBJgUmWTYIYw5e5Lp/cqt6NNx7F9R438GSa4DTlnBKlGyXVufXH
-	Xp1rPWuw1ZcYcPoiKH1nQdbM4+4Gzfne4np1vWrJMvDbKuprPjXBILK1nwh9kObueVev98zzb5e
-	yT/fnU66CKLaA+RAZB4xsf1kGe46NxAjV4VEk/NbilLvJJtPuoXpFsW0/RZFGvrChWNV5XD2Vps
-	Jj0VrNYfZC+KoUnkHqIX3f8iRGeQ0o5YoAEzrUY/sDYY5hUJGtrmEJ6jTi2gphI9SKX3VO6Cf7t
-	GtkT3s9Wsh/yxZSF2c1RE8HA/LS8m9YFNOZi2L14zbj0OMl++oVLgt12Mr4g065t/wJd0qCe8mm
-	BjvLmTlbgobTKiwHIToDsPSqVolj18JVtgRuZxuyNkD0hV+tj2bTTcs7SllD7orKs7P9II3nH5l
-	8Ei+8vNRawh8Ri720ZQ==
-X-Received: by 2002:a05:6000:2006:b0:48d:faa4:5b66 with SMTP id ffacd0b85a97d-48e5d2f95cbmr13557122f8f.36.1793282170394;
-        Thu, 29 Oct 2026 06:56:10 -0700 (PDT)
-Message-ID: <c9bb9cf4-9171-402c-b6d7-14ba45618c6b@suse.com>
-Date: Thu, 29 Oct 2026 14:56:09 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=relay-1 header.d=umich.edu header.i="@umich.edu" header.h="References:In-Reply-To:From:Date:Subject:To:Cc"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=umich.edu;
+	s=relay-1; t=1793282222;
+	bh=t2D2sDXKQ7pTvv07EdWL5pfAbbyJ8r7Apbn+VFhH/8s=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=VR9MHA3vsSRWMzPxx2B8UTIvRCUHyqwLaTdoTlk+rDlBtV4oPpLp9wPhQd8s9jKSl
+	 1nzF0Q5pgOM3Cvf94A+HmFg4E+9B+GC5A9KE/OyNGcekIlkTbMdXRDHazsorfCHPin
+	 OL/ThspPHDgmTmK0ualzqXt9CLfO5kO8Gp8zROyFhq40TKQ879FO3g82hpEUmjhFzz
+	 ENkQe0YrKvZKQlEv9NWey1VXCX5+O+yZrby2LHZ7RkmtCJUgItMSoSQ871TWwjMXuG
+	 i5Ca5sLr1UwAnv07vjmtLxyTUnF8RASHgLl1PjquYn/rljmeZCL+bvoo+2pGe0T7Sj
+	 yoHtKEIh0BeNQ==
+Authentication-Results: truthful-redcap.authn-relay.a.mail.umich.edu; 
+	iprev=pass policy.iprev=209.85.208.175 (mail-lj1-f175.google.com);
+	auth=pass smtp.auth=dunlapg
+X-Forwarded-Encrypted: i=1; AKwUvByg+DyvYcUw+/dNxPwW38GmbQ0jvGWJTXENMZSMAvMdraPZNqPGCN+d4XocDzeMM/SQaEErZXgboW0=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYI2u/nGR9SECthm3Hkyxn1hs4lEe/GL3svFdzAHDU9VWjjFlV7k
+	GG9GL37dI+yUMboImAEsA8qCCxzvgRkOlz++gCliVytrm9mBgnIN71nl/jUIvmUu6Os0GP57Bvf
+	LGGkqdOdymDB6cIQSn+f04m9igH443Ko=
+X-Received: by 2002:a2e:9a0f:0:b0:3a9:740d:51cb with SMTP id
+ 38308e7fff4ca-3ac9cf41afamr13635901fa.14.1793282220534; Thu, 29 Oct 2026
+ 06:57:00 -0700 (PDT)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>
-From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH] x86/HVM: shrink (pack) struct periodic_time
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1793282170-30FCE2AC-9EFFA85F/10/78276251493
+References: <942facb0-c42b-4f09-9081-6cfb006c7bfc@suse.com>
+ <f404f8fd-f1ec-476e-bc7b-b6ad8909501a@suse.com> <as4Ev_8NGq-dyK-2@Mac.lan> <9e587bff-7fb9-416e-a4b6-6cb13ec39a6a@suse.com>
+In-Reply-To: <9e587bff-7fb9-416e-a4b6-6cb13ec39a6a@suse.com>
+From: George Dunlap <dunlapg@umich.edu>
+Date: Thu, 29 Oct 2026 13:56:48 +0000
+X-Gmail-Original-Message-ID: <CAFLBxZbfFp9gCp3wTPqb-WCxfhgao-Sr=WjzpcpXr=oBXp4u4A@mail.gmail.com>
+X-Gm-Features: AclHuK-x4L2Ja3WMp7g9hGbNhdv3Ydefs7MYYmMen48nofFc2DGFRV60MZ5KVPU
+Message-ID: <CAFLBxZbfFp9gCp3wTPqb-WCxfhgao-Sr=WjzpcpXr=oBXp4u4A@mail.gmail.com>
+Subject: Re: [PATCH 2/2] x86: replace this_cpu() uses in mapcache_current_vcpu()
+To: Jan Beulich <jbeulich@suse.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
+	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Andrew Cooper <andrew.cooper3@citrix.com>, 
+	Teddy Astie <teddy.astie@vates.tech>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-purgate-ID: tlsNG-c201ff/1793282225-728B62A1-55CCC43A/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 1359
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-purgate-size: 3529
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=4.0.1
+	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Except for warned_timeout_too_short, which is used with
-test_and_set_bool(), the booleans there don't need to occupy entire bytes.
-With them converted to bitfields, pending_intr_nr can move up into the
-vacated 4-byte slot.
+On Tue, Oct 13, 2026 at 12:52=E2=80=AFPM Jan Beulich <jbeulich@suse.com> wr=
+ote:
+> >> Like indicated in the earlier patch, this similarly leads to the funct=
+ion
+> >> actually being inlined (and hence generated code size actually growing=
+) in
+> >> gcc16 debug builds. In release builds (with older gcc) the function is
+> >> being inlined no matter what. Overall, having looked at generated code
+> >> differences, I'm not quite sure anymore whether the earlier observed
+> >> inefficiency with repeated this_cpu() really is much of an issue (here=
+ or
+> >> maybe even more generally).
+> >
+> > I think we sometimes focus too much on this kind of
+> > micro-optimizations when the cost of the operation itself is orders of
+> > magnitude bigger than any performance difference the optimization
+> > might cause.
+>
+> Well, any improvement we can reasonably (and safely) make counts. Even
+> if not measurable performance-wise, it may still make a difference
+> (also in power consumption) when accumulated over long enough a period.
 
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
+If we had an infinite amount of developer and reviewer attention, this
+would be true; if for instance we could have LLMs just review and
+check in patches they were confident of.  But reviewer bandwidth is in
+fact a major bottleneck; the fact that Roger and I are looking at this
+patch now means we're not looking at some other patch.
 
---- a/xen/arch/x86/include/asm/hvm/vpt.h
-+++ b/xen/arch/x86/include/asm/hvm/vpt.h
-@@ -21,19 +21,19 @@ typedef void time_cb(struct vcpu *v, voi
- 
- struct periodic_time {
-     struct list_head list;
--    bool on_list;
--    bool one_shot;
--    bool do_not_freeze;
--    bool irq_issued;
-+    bool on_list:1;
-+    bool one_shot:1;
-+    bool do_not_freeze:1;
-+    bool irq_issued:1;
-+    bool level:1;
-     bool warned_timeout_too_short;
--    bool level;
- #define PTSRC_isa    1 /* ISA time source */
- #define PTSRC_lapic  2 /* LAPIC time source */
- #define PTSRC_ioapic 3 /* IOAPIC time source */
-     u8 source;                  /* PTSRC_ */
-     u8 irq;
-+    uint32_t pending_intr_nr;   /* pending timer interrupts */
-     struct vcpu *vcpu;          /* vcpu timer interrupt delivers to */
--    u32 pending_intr_nr;        /* pending timer interrupts */
-     uint64_t generation;        /* distinguish two armings of the same timer */
-     u64 period;                 /* frequency in ns */
-     s_time_t scheduled;         /* scheduled timer interrupt */
+> > In this case I don't think the resulting code is bad or harder to
+> > read, so I don't mind adjusting the logic.  But that's a question of
+> > taste, if someone else has a preference for the original form I
+> > wouldn't change it.
+>
+> I'll give it some time for comments to that (or any other) effect.
+
+FWIW, having already looked at the patch, I don't mind either way.
+"this_cpu()" is slightly more readable; one could argue that
+per_cpu(foo, cpu) sort of implies that it could be a *different* cpu
+-- at very least someone reading the code has to go check at least
+once.  And again, human cognitive effort is the main bottleneck for a
+correct, feature-ful, and performant hypervisor.  But both the
+potential efficiency win, and the potential cognitive load, are so
+small that I don't feel like it's a clear win either way.
+
+So I would leave it off, but if you'd rather:
+
+Reviewed-by: George Dunlap <gwd@xenproject.org>
+
+> >> --- a/xen/arch/x86/domain_page.c
+> >> +++ b/xen/arch/x86/domain_page.c
+> >> @@ -20,7 +20,8 @@
+> >>
+> >>  static inline struct vcpu *mapcache_current_vcpu(void)
+> >>  {
+> >> -    const struct vcpu *v =3D this_cpu(pgtable_vcpu);
+> >> +    unsigned int cpu =3D smp_processor_id();
+> >> +    const struct vcpu *v =3D per_cpu(pgtable_vcpu, cpu);
+> >>      const struct vcpu *curr =3D current;
+> >
+> > Maybe you can reorder the variables here:
+> >
+> > const struct vcpu *curr =3D current;
+> > unsigned int cpu =3D curr->processor;
+> > const struct vcpu *v =3D per_cpu(pgtable_vcpu, cpu);
+>
+> The use of curr->processor in the remark in patch 1 was safe afaict.
+> I'm not fully sure the one here would be safe: It would require
+> thorough auditing of scheduler code to be sure, I think. (I don't
+> _think_ ->processor would be altered from a remote CPU, but I'm not
+> entirely certain.)
+
+Claude points out that curr is never dereferenced, only compared; so
+the code as it is works before `current` is set.  The first
+map_domain_page() comes long before `current` is set in
+init_idle_domain(), so Roger's version crashes during boot (Claude
+verified this).
+
+ -George
 
