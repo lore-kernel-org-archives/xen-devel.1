@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E4BF606A324
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2026 07:13:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 678C3606A31C
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2026 07:48:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=O6mau2xZ
-Received: from list by lists.xenproject.org with outflank-mailman.1464235.1674969 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=B8q6iUKC
+Received: from list by lists.xenproject.org with outflank-mailman.1464249.1674978 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMKKC-0008Ta-Gc; Thu, 29 Oct 2026 07:13:24 +0000
+	id 1xMKrL-00062l-02; Thu, 29 Oct 2026 07:47:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1464235.1674969; Thu, 29 Oct 2026 07:13:24 +0000
+Received: by outflank-mailman (output) from mailman id 1464249.1674978; Thu, 29 Oct 2026 07:47:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMKKC-0008TT-C2; Thu, 29 Oct 2026 07:13:24 +0000
-Received: by outflank-mailman (input) for mailman id 1464235;
- Thu, 29 Oct 2026 07:13:23 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xMKKB-0008TN-4i
- for xen-devel@lists.xenproject.org; Thu, 29 Oct 2026 07:13:23 +0000
+	id 1xMKrK-00062T-T1; Thu, 29 Oct 2026 07:47:38 +0000
+Received: by outflank-mailman (input) for mailman id 1464249;
+ Thu, 29 Oct 2026 07:47:37 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xMKrI-0005qd-Vz
+ for xen-devel@lists.xenproject.org; Thu, 29 Oct 2026 07:47:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xMKK9-00G5lM-NJ
- for xen-devel@lists.xenproject.org; Thu, 29 Oct 2026 08:13:21 +0100
-Received: from [10.42.69.2] (helo=localhost)
+ id 1xMKrI-004iMd-7D
+ for xen-devel@lists.xenproject.org; Thu, 29 Oct 2026 08:47:36 +0100
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ae2f201-8faa-0a2a0a5109dd-0a2a45029b40-40
- for <xen-devel@lists.xenproject.org>; Thu, 29 Oct 2026 08:13:21 +0100
-Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ae2fa07-bab6-0a2a0a5309dd-0a2a450bba56-40
+ for <xen-devel@lists.xenproject.org>; Thu, 29 Oct 2026 08:47:35 +0100
+Received: from [209.85.128.51] (helo=mail-wm1-f51.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ae2f211-6ca4-0a2a45020019-d155802ccd6c-3
- for <xen-devel@lists.xenproject.org>; Thu, 29 Oct 2026 08:13:21 +0100
-Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-4a20bdaf39cso19025145e9.1
- for <xen-devel@lists.xenproject.org>; Thu, 29 Oct 2026 00:13:21 -0700 (PDT)
+ id 6ae2fa17-b7e8-0a2a450b0019-d1558033f1ff-3
+ for <xen-devel@lists.xenproject.org>; Thu, 29 Oct 2026 08:47:35 +0100
+Received: by mail-wm1-f51.google.com with SMTP id
+ 5b1f17b1804b1-4a140e7405dso18718455e9.3
+ for <xen-devel@lists.xenproject.org>; Thu, 29 Oct 2026 00:47:35 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e3ebc3932sm33957511f8f.18.2026.10.29.00.13.20
+ 5b1f17b1804b1-4aa7f7f4cdbsm52610815e9.7.2026.10.29.00.47.34
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 29 Oct 2026 00:13:20 -0700 (PDT)
+ Thu, 29 Oct 2026 00:47:34 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,61 +51,59 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1793258001; x=1793862801; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1793260055; x=1793864855; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=kBA2wbAezOQ0h0cwG79l8WxR5+Zyx74ppDFGMr4jtsg=;
-        b=O6mau2xZqF2wJaWFQsa5jVG4M5aTZSPF4My3LR7Je/tvQBBEr1Jn52zGnlENL/QD+v
-         SHBan30HeIyj6fgFhrpkNWOVVCN1+5cLkC34Pza8szvG4VY4fnDKFxg6VJszEomQ4St0
-         +0vMPLltDnDiWV6lJc7PWcZDfQi38xUwur4MzcYiVbTdSOEYGpgJBSRW49puLhqj/h1j
-         k/moN1vLC4jBDqFTaYS33Lx41VNcbx9Rrq1y3EZ1pIfhu1zkOAdLMYApRS7FZ49m3DcM
-         visfcCwfJxUhUqqxCWqOVYtDMNEozKRcJrIarUNArDtHP7veL8n7z4wU4hE7Ti4gIv0p
-         guug==
+        bh=8TbAAvEu/zKVmCKhVcl1XqJ60T2QI4v+kGuAA3utzWw=;
+        b=B8q6iUKCcyT0HK8zMpQCkUkXEkX9MX8YxZ4hInhJ7yoeJoezBuTP7lSSZC/Oyvqnbf
+         jGTs+oq6HEjqXFpb68vPBRQFLWajwqAroK7I35/5+qY24UD3TOsZXSGeP4nqU3aC6Fq/
+         z/dYYvrmDzgUJCovSPp82QEYaEekrHA7PbCz6sfdI0YRpnMb3K2AwAAtqQj0F2Q2yXkS
+         JiVDAcPSrFy6/4LjZm69bMuFU2quOPMbJdgVWzT6ccOfKqC5hl8BST1djmcX2jHj/PQR
+         9azhmvlie04QP1Lkkjmc1qe6JQ7JozdBqUwuCUyGAOgvyCNT6+fq6v1nJbDA3hBulavj
+         llyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793258001; x=1793862801;
+        d=1e100.net; s=20260707; t=1793260055; x=1793864855;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=kBA2wbAezOQ0h0cwG79l8WxR5+Zyx74ppDFGMr4jtsg=;
-        b=FDoFTqxkc5DopkUCUbp05j9yIsKVwdkrPbnVErooHqyx+0WGCKA8IZ8IU/ADVArNYR
-         mEEMXexGdBAP+e0BvIzNchpExdS/u6BIL8yOnELjx5zZgG0yOxHWh8CxhX3lVtZWld0h
-         krTttHAd+PQ4omoyWJ50oX2ge7WKjTGmYcTx1KzNNffgMTN+uI4ROkZkRlGbrGSXKCwQ
-         dWUQb0LBZtK9hFd9rmoUcypLWOs/gHxu0n6aBQscPi7wlQzd8UElUMOVzZot1mzWCovD
-         a1vpfMBT95lJIK5+w3a2l6nxMYVU5VHKA/GRi5bmXUcnyvbfhHn2JPiXeXsTN94ze6t7
-         W8Gg==
-X-Forwarded-Encrypted: i=1; AKwUvByiOpiQiKdUa8YdEj4/dM7IQvcBY6bkGHi8JWwU3zJuiVyiilKLJxjEukoB2nh9l4mVV0a3Q/1YjQQ=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYLNUp67zJNCopav3JniSQXBix3maHlzjvC5/wywtq+lHtBwS7Cr
-	wRR2eq70fbq+IUX00nSGXDBf2Hz34lwlLVShLVxHPJ5L/U9drZu7Von9VTpDjzfj1g==
-X-Gm-Gg: AYBFou1HRqMp6VBX1XrVnFZpJ1PF77GJX0OIe1/6bO6VMizf219WC5jodtA4tIVEEAF
-	0aChQrCrDAKA3slNA3ZegQmmBo6jjOXdcfnAc1UPVrKB/5hwDoT/XDMroJKrSNgXapruzSQReEV
-	bLzAo7mxwlTcrhvEWbF/XtkWGguGDJzY2XQTRtezb3I6nY0wAoruAUI3XzOwTVOJSYdZbfIVufn
-	8B2yfdZraAif4mdc5EogNisIa38uiCTvJRpC1M7Ci+Wb+VRw7K+85nGc/uUXJECg6P2WpA/tR/i
-	NHx0otw2Xr0cHKrkLtLyRPD/f47lrL1bLhR8VQEn0eNsY7WCS3b18TrPXObXpkkHUrcY16vZamI
-	ugq6ah017zqGAHwN464nDUnwX2KWB+bnIL/t5KIQMslnf5Sqq8ie+xGyIARa8+tSpF0IRORDUfG
-	MYSfHYAzO7211wYy/SsEy4QNJlZBAH/uwevZqcjffs0yeNndxt+vzH7iJZXTT0hnrw8U0xofz6D
-	LGC73oGVeAnoppRtARSIWAkAW0wyJurK0LANLUDAZNn8QwN0fcbWUXgK/M9nku34yrXPHqovpar
-	ZpKvm7KvvoFF3xMOsA9KHX9EYAfFKcTOl8FGx5zjlL+n0DARJ57iP1k1YDM4ghITWppQaWDvJnD
-	cczpQZGY7epxUgVjIzg==
-X-Received: by 2002:a05:600c:4e01:b0:4a2:190f:cf6a with SMTP id 5b1f17b1804b1-4a967ca03demr105721145e9.35.1793258000809;
-        Thu, 29 Oct 2026 00:13:20 -0700 (PDT)
-Message-ID: <fa74b1a6-55a3-498d-ae0b-29028f879c5f@suse.com>
-Date: Thu, 29 Oct 2026 08:13:19 +0100
+        bh=8TbAAvEu/zKVmCKhVcl1XqJ60T2QI4v+kGuAA3utzWw=;
+        b=ZBo9ZpMrt/a1+ud8wqfRFp97WwmUMRrEUWs4qHemjXBIAYARhF5ZreyAx+JS5sucIN
+         oURUJqtDrmorbYNKx3T/Rr5PIEsoatQnjxpiU5POaBU1ytXiAcihTIb4VWNr9eZlaeB/
+         G3RX87RDTbqFubCSyr6X+cT+DewXXS3MqLuw+h8Uut83OuIaBg8lZxefKvXZDfNZ41ho
+         +htMXp6qx+JdVN+Sn92MG/P6Jcvm27q3Ied2+1dGk2+x56wkv0s+Tg9gJ4gABMqgokLi
+         YLE0IAlWdSBdVBQMJ3C3viNIq8pkldp1QN0P5nmJbrRxBsnhWhQz03F/oaYm/mhDIvko
+         aKbw==
+X-Forwarded-Encrypted: i=1; AKwUvBxwHMQNTUQ2iTlmOBMF9EgcW5VkceM2D0trHJXWMZ5t9iro1vsHm7wQrV5haY2aVunkPT/qVkiRw8M=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYL9pxQi93qhVObqCDt3OkDiQpX8Gnh7Et2d0oQyB4XtJKr0PI9a
+	pWLGbgwhufOLbY/1wsww1gQ3REMbSCbeiHgrljw+3BoKd8NQ7tXFA1pUF0DnhkT2Zg==
+X-Gm-Gg: AYBFou0OVBFR9CWgiUTmxhZMrar3VNmMKTy4JQQEbzGUkl++dgtZ/lW8lmYrAdMGP9S
+	AjLYORRy9SYueaVVRG1NXvir2lM49rwCHZXNNrjVAidmBND+w6S9wFt2+99YRRkeM0zSqrcv3QO
+	c8SxfIVw4Ftir2OH6I85Lpv2mLJhCW45/Mf8WiMtNkw66dPGOjuGp2WPwxhpTt+sMWpebv0EF2B
+	0FCnINRw+eccGaXr8CltrOddKK/6dc3qfzC0KIv5aJ4F4u7ZwvZBwjYk8KVRE129NSt13xDQWfP
+	OaIhLaW1WBJmx2GXjx+pYJNTGM1JEu/eagGdunwDjHl3MjW7n+lESicbUQ3rl4/yN5VfeOKTyuv
+	6JnOVLGGzlFSdLUEMEtx+SZiiOJDpgY1cLEnDhWF1OqyC5VOGc/MJY4BS7m484H7yifQubUwroB
+	0mh3eN630Ar4qOeYss5ki948dDbgQvIFIvxAglb0pRrVbsfJVQGlSzD6eBSlmmPg5WNC0BawGO0
+	FSIS8iSxCQfENIlSqTjoqskj/McQ1wd2PqcIX0rbT/vyte+h7ZwfupXaO5a5IUcVhPBUlACvcxj
+	1BLZX/LyW5ph9R/EbM9SHrk5ov0IYQuEK0dzjVj6zu1leEIaeR/m/Gq+DFYTOzAUo/K4VbYwAex
+	uNXzecbgatpHXdxLY
+X-Received: by 2002:a05:600c:4f89:b0:4a2:1612:637a with SMTP id 5b1f17b1804b1-4a966c4110fmr105857615e9.16.1793260055020;
+        Thu, 29 Oct 2026 00:47:35 -0700 (PDT)
+Message-ID: <f29b4d27-650e-4463-a0bb-785ce507c644@suse.com>
+Date: Thu, 29 Oct 2026 08:47:34 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/mm: Remove loops in get_order_from_{pages,bytes}()
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+Subject: Re: [PATCH v5 02/45] x86/mm: refuse to promote an L4 while the domain
+ has no per-domain L3
+To: George Dunlap <gwd@xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Xen-devel <xen-devel@lists.xenproject.org>
-References: <20261028124104.1564435-1-andrew.cooper3@citrix.com>
- <7128c617-9432-4571-9b7a-22d6f6e8d884@suse.com>
- <78279123-37d2-4acd-85b0-2bfe1fdf61d0@citrix.com>
+ Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
+References: <20261028-asi-hvm-v5-0-13b908e0df0b@xenproject.org>
+ <20261028-asi-hvm-v5-2-13b908e0df0b@xenproject.org>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -131,57 +129,44 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <78279123-37d2-4acd-85b0-2bfe1fdf61d0@citrix.com>
+In-Reply-To: <20261028-asi-hvm-v5-2-13b908e0df0b@xenproject.org>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1793258001-F0EA32AC-5FA78554/10/78276251493
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-42698a/1793260055-AA6DA9EA-62F91209/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 1402
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+X-purgate-size: 1469
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 28.10.2026 19:07, Andrew Cooper wrote:
-> On 28/10/2026 2:15 pm, Jan Beulich wrote:
->> On 28.10.2026 13:41, Andrew Cooper wrote:
->>> --- a/xen/include/xen/mm.h
->>> +++ b/xen/include/xen/mm.h
->>> @@ -530,26 +530,16 @@ page_list_splice(struct page_list_head *list, struct page_list_head *head)
->>>      list_for_each_entry_safe_reverse(pos, tmp, head, list)
->>>  #endif
->>>  
->>> -static inline unsigned int get_order_from_bytes(paddr_t size)
->>> +static always_inline unsigned int get_order_from_bytes(paddr_t size)
->>>  {
->>> -    unsigned int order;
->>> -
->>>      size = (size - 1) >> PAGE_SHIFT;
->>> -    for ( order = 0; size; order++ )
->>> -        size >>= 1;
->>>  
->>> -    return order;
->>> +    return fls64(size);
->>>  }
->> Along the lines of what you do below, perhaps simply
->>
->>     return fls_g(PFN_DOWN(size - 1));
->>
->> (and nothing else in the function body)? And then even
->>
->>     return flsl(PFN_DOWN(size - 1));
->>
->> (eliminating the immediate need for fls_g())?
+On 29.10.2026 00:05, George Dunlap wrote:
+> init_xen_l4_slots() puts the domain's per-domain L3 in slot 260 of the
+> L4s it fills.  Since fcf91ce9de66 ("x86/pv: don't populate the GDT/LDT
+> L3 slot at domain creation") a PV domain gets that L3 with its first
+> vCPU (pv_create_gdt_ldt_l1tab()).  Only mapcache_domain_init() makes it
+> earlier, with the domain, and release builds skip that unless memory
+> hotplug is enabled or the host's memory reaches past the part of the
+> directmap PV guests can see.  So in release builds on most hosts, an L4
+> that is promoted before XEN_DOMCTL_max_vcpus has created the domain's
+> vCPUs gets a slot 260 entry made from a NULL page (0x803e900000000063),
+> pointing far beyond the host's memory.
 > 
-> Neither of these are quite correct.  fls64() can't be downgraded to
-> flsl(), as it would truncate the input on 32bit builds of Xen.
+> Have promote_l4_table() return -EINVAL while the domain has no
+> per-domain L3, before taking any reference.  The other callers of
+> init_xen_l4_slots() all run once the L3 exists; have init_xen_l4_slots()
+> check that with a BUG_ON().  An ASSERT() would not do: the case above
+> arises only in release builds.  libxl is unaffected: it creates the
+> vCPUs before it builds or restores a domain.
 
-Only hypothetically: get_order_from_pages() taking an unsigned long is
-okay on 32-bit builds. In fact in principle get_order_from_bytes()
-could be implemented by calling get_order_from_pages() with a suitably
-adjusted argument.
+Isn't setup_compat_l4() similarly affected? XEN_DOMCTL_set_address_size
+may (in principle) be issued ahead of the domain having any vCPU-s.
+
+Independent of that, how about pulling hvm_domain_initialise()'s
+create_perdomain_mapping() up into arch_domain_create() instead of the
+code additions you do?
 
 Jan
 
