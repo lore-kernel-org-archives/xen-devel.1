@@ -2,54 +2,49 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C0951606A31A
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2026 15:22:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=Xm56vkH9
-Received: from list by lists.xenproject.org with outflank-mailman.1464821.1675669 (Exim 4.92)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 92F7E606A33C
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Oct 2026 15:47:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1464907.1675843 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMRxU-0004XP-2O; Thu, 29 Oct 2026 15:22:28 +0000
+	id 1xMSLh-0002LX-Ho; Thu, 29 Oct 2026 15:47:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1464821.1675669; Thu, 29 Oct 2026 15:22:28 +0000
+Received: by outflank-mailman (output) from mailman id 1464907.1675843; Thu, 29 Oct 2026 15:47:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMRxT-0004XH-VV; Thu, 29 Oct 2026 15:22:27 +0000
-Received: by outflank-mailman (input) for mailman id 1464821;
- Thu, 29 Oct 2026 15:12:22 +0000
+	id 1xMSLh-0002LQ-Ei; Thu, 29 Oct 2026 15:47:29 +0000
+Received: by outflank-mailman (input) for mailman id 1464907;
+ Thu, 29 Oct 2026 15:47:28 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <berrange@redhat.com>) id 1xMRni-0002F2-6c
- for xen-devel@lists.xenproject.org; Thu, 29 Oct 2026 15:12:22 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1885828c6000f79f@swg.vates.tech>)
+ id 1xMSLg-0002LI-9j
+ for xen-devel@lists.xenproject.org; Thu, 29 Oct 2026 15:47:28 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xMRnh-00An3n-Ct
- for xen-devel@lists.xenproject.org; Thu, 29 Oct 2026 16:12:21 +0100
-Received: from [10.42.69.9] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <berrange@redhat.com>)
- id 6ae36249-bab6-0a2a0a5309dd-0a2a45099a8e-8
- for <xen-devel@lists.xenproject.org>; Thu, 29 Oct 2026 16:12:21 +0100
-Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <berrange@redhat.com>)
- id 6ae36253-be1a-0a2a45090019-aa0a817c852f-3
- for <xen-devel@lists.xenproject.org>; Thu, 29 Oct 2026 16:12:21 +0100
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-647-lR4E_uxDPxGRis0Bj7u-cg-1; Thu,
- 29 Oct 2026 11:12:15 -0400
-Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 5CA951956043; Thu, 29 Oct 2026 15:12:09 +0000 (UTC)
-Received: from redhat.com (headnet04.pony-001.prod.iad2.dc.redhat.com
- [10.2.32.116])
- by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 11F131955F08; Thu, 29 Oct 2026 15:11:43 +0000 (UTC)
+ id 1xMSLe-00Asxu-5J
+ for xen-devel@lists.xenproject.org; Thu, 29 Oct 2026 16:47:26 +0100
+Received: from [10.42.69.7] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1885828c6000f79f@swg.vates.tech>)
+ id 6ae36a87-bab6-0a2a0a5309dd-0a2a4507a168-14
+ for <xen-devel@lists.xenproject.org>; Thu, 29 Oct 2026 16:47:26 +0100
+Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1885828c6000f79f@swg.vates.tech>)
+ id 6ae36a8d-b4ea-0a2a45070019-b9ff1c1292ad-3
+ for <xen-devel@lists.xenproject.org>; Thu, 29 Oct 2026 16:47:26 +0100
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a1885828c6000f79f.005 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Thu, 29 Oct 2026 15:47:21 +0000
+Received: from [192.168.1.52] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
+ [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
+ by mail2.vates.fr (Postfix) with ESMTPSA id B399F83212;
+ Thu, 29 Oct 2026 16:47:20 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -58,260 +53,90 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1793286739;
-	h=from:from:reply-to:reply-to:subject:subject:date:date:
-	 message-id:message-id:to:to:cc:cc:mime-version:mime-version:
-	 content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=sy6RcJq7kWnzNPatcCz5vMju7T26X8KtMwEXCbitl90=;
-	b=Xm56vkH9ATMJMygfPZSg+6GK3F6dQs7YPsYUO98Xep2m+NG+NICizkX3sSRQ6aFxum1tFS
-	2r5qzweZVvntR9s1vJ+llUI80AT507RpAf8Wam+f6LXJQP6VwleF7JeNpCHZ3Pdfknrstd
-	mi7fwEqZHv79SYuWjlc8dXp0RGQs8wo=
-X-MC-Unique: lR4E_uxDPxGRis0Bj7u-cg-1
-X-Mimecast-MFC-AGG-ID: lR4E_uxDPxGRis0Bj7u-cg_1793286731
-Date: Thu, 29 Oct 2026 15:11:41 +0000
-From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-To: Markus Armbruster <armbru@redhat.com>
-Cc: =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>,
-	qemu-devel@nongnu.org, Michael Roth <michael.roth@amd.com>,
-	John Snow <jsnow@redhat.com>,
-	Peter Maydell <peter.maydell@linaro.org>,
-	Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Kostiantyn Kostiuk <kkostiuk@redhat.com>,
-	Eric Blake <eblake@redhat.com>,
-	David Hildenbrand <david@kernel.org>,
-	Igor Mammedov <imammedo@redhat.com>,
-	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
-	Jason Wang <jasowangio@gmail.com>,
-	Marcelo Tosatti <mtosatti@redhat.com>, kvm@vger.kernel.org,
-	Alberto Garcia <berto@igalia.com>, Kevin Wolf <kwolf@redhat.com>,
-	Hanna Reitz <hreitz@redhat.com>,
-	Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
-	Zhao Liu <zhao1.liu@intel.com>, Jonathan Cameron <jic23@kernel.org>,
-	Junjie Cao <junjie.cao@intel.com>, Anisa Su <anisa.su@samsung.com>,
-	Elena Ufimtseva <elena.ufimtseva@oracle.com>,
-	Jagannathan Raman <jag.raman@oracle.com>,
-	John Levon <john.levon@nutanix.com>,
-	Thanos Makatos <thanos.makatos@nutanix.com>,
-	=?utf-8?Q?C=C3=A9dric?= Le Goater <clg@redhat.com>,
-	Cornelia Huck <cohuck@redhat.com>,
-	Eric Farman <farman@linux.ibm.com>,
-	Matthew Rosato <mjrosato@linux.ibm.com>,
-	Richard Henderson <richard.henderson@linaro.org>,
-	Ilya Leoshkevich <iii@linux.ibm.com>, qemu-block@nongnu.org,
-	linux-cxl@vger.kernel.org, qemu-s390x@nongnu.org,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Sergio Lopez <slp@redhat.com>, qemu-arm@nongnu.org,
-	Palmer Dabbelt <palmer@dabbelt.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Weiwei Li <liwei1518@gmail.com>,
-	Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
-	Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
-	Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org,
-	Song Gao <17746591750@163.com>, Bibo Mao <maobibo@loongson.cn>,
-	Xianglai Li <lixianglai@loongson.cn>,
-	Jiaxun Yang <jiaxun.yang@flygoat.com>,
-	Pedro Barbuda <pbarbuda@microsoft.com>,
-	Mohamed Mediouni <mohamed@unpredictable.fr>,
-	Nicholas Piggin <npiggin@gmail.com>,
-	Harsh Prateek Bora <harshpb@linux.ibm.com>,
-	Amit Machhiwal <amachhiw@linux.ibm.com>, qemu-ppc@nongnu.org,
-	Zhang Chen <zhangckid@gmail.com>,
-	Li Zhijian <lizhijian@fujitsu.com>,
-	Alistair Francis <alistair@alistair23.me>,
-	Alexander Graf <graf@amazon.com>,
-	"Gonglei (Arei)" <arei.gonglei@huawei.com>,
-	zhenwei pi <zhenwei.pi@linux.dev>, Ani Sinha <anisinha@redhat.com>,
-	Luc Michel <luc@lmichel.fr>,
-	=?utf-8?Q?C=C3=A9dric?= Le Goater <clg@kaod.org>,
-	Jamin Lin <jamin_lin@aspeedtech.com>,
-	Kane Chen <kane_chen@aspeedtech.com>,
-	Samuel Tardieu <sam@rfc1149.net>, "Denis V. Lunev" <den@openvz.org>,
-	FangSheng Huang <FangSheng.Huang@amd.com>,
-	Tyrone Ting <kfting@nuvoton.com>, Hao Wu <wuhaotsh@google.com>,
-	Keith Busch <kbusch@kernel.org>, Klaus Jensen <its@irrelevant.dk>,
-	Jesper Devantier <foss@defmacro.it>,
-	Aditya Gupta <adityag@linux.ibm.com>,
-	Glenn Miles <milesg@linux.ibm.com>, Conor Dooley <conor@kernel.org>,
-	Sebastian Huber <sebastian.huber@embedded-brains.de>,
-	Halil Pasic <pasic@linux.ibm.com>,
-	Christian Borntraeger <borntraeger@linux.ibm.com>,
-	Jason Herne <jjherne@linux.ibm.com>,
-	Titus Rwantare <titusr@google.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony PERARD <anthony@xenproject.org>,
-	Peter Xu <peterx@redhat.com>, Chinmay Rath <rathc@linux.ibm.com>,
-	Hendrik Brueckner <brueckner@linux.ibm.com>,
-	xen-devel@lists.xenproject.org,
-	Roman Bolshakov <rbolshakov@ddn.com>,
-	Phil Dennis-Jordan <phil@philjordan.eu>, Fam Zheng <fam@euphon.net>,
-	Farhan Ali <alifm@linux.ibm.com>,
-	Alex Williamson <alex@shazbot.org>,
-	Tao Tang <tangtao1634@phytium.com.cn>,
-	Stefan Berger <stefanb@linux.vnet.ibm.com>,
-	Fabiano Rosas <farosas@suse.de>,
-	Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
-	Artyom Tarasenko <atar4qemu@gmail.com>,
-	Yoshinori Sato <yoshinori.sato@nifty.com>,
-	Jiri Pirko <jiri@resnulli.us>, Eric Auger <eric.auger@redhat.com>,
-	Laurent Vivier <lvivier@redhat.com>
-Subject: Re: [PATCH v7 54/65] qdev: adjust PciDevfn declared type
-Message-ID: <auNiLX-dsm8XsFG-@redhat.com>
-Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
- <20261020-qom-qapi-v7-54-431a86b02b58@redhat.com>
- <atsxLV5YZo8dr-8G@redhat.com>
- <CAMxuvazd7G_NBOM_c6BxZn5PFSw=XQUHueHqBoQQfpzPPgi9qA@mail.gmail.com>
- <87zevz5h4k.fsf@pond.sub.org>
- <auC-ilqUJq27neSR@redhat.com>
- <87o6ce47rr.fsf@pond.sub.org>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=Es67gfhK4eAll13Wo9ntqA5rO5ZYA+VKYNSC9qFkaFk=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
+ b=lvpK13hMU3Tv77d1gNbtzuFOX2hplzsdY+a1TYp0DGuG8JuX6aqUkLWW6Lk5zBtUVHVG2lQql
+ kTU6bFFBrgHvEyRc54qeDZ2LII/lv7hzamJdm8QbzHh8k6ACIOkzKaSYlRxMYK1oJb/NQdNUQ3i
+ X1IHMy6EJunOohkMMfXqwHfr9wgts3k/j87Kbdc4RHNnb3mpMb1tJ7MMiB0yotS9uZGjxIpY9S9
+ nmAOqKslXEyUVOUt7zXa6I//xqx8JYXe2aC7DxpHOUQyxT1zJEMVAvOo9yKHZJy6nnYqKCUL0uV
+ J2dx7rsHJnTw+DPPovB7NiFn20k1LyJo3clfsTejJiTQ==
+X-Zone-Loop: b964b3962bd4c7d20c73f90cd48bbce0066c59ac40b4
+x-campaign-type: default
+x-transaction-id: 3fa1f438-650e-45fe-be6e-fba16916b2c1
+x-swg-uid: 01-21db4bc5-06ca-47d5-8b19-1b2c2c46b1fb
+X-Mailer: Sweego
+Message-ID:
+ <1793288841.8631fc262581453bbf619ec5b2062170.1a1885828c6000f79f@vates.tech>
+x-swg-bid: 1793288841.8631fc262581453bbf619ec5b2062170.1a1885828c6000f79f
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <87o6ce47rr.fsf@pond.sub.org>
-User-Agent: Mutt/2.4.2 (2026-08-30)
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
-X-Mimecast-MFC-PROC-ID: 2G7TYa8PEEO9nj3_XFOKi1YSin1WxFaXis19DMpLORk_1793286731
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1793286741-3B4D3034-C52894B3/0/0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH v2 1/6] Add a QTB container to run the Xen riscv64
+ tests
+From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Baptiste Le Duc <baptiste.le-duc@vates.tech>, 
+ xen-devel@lists.xenproject.org, Andrew Cooper <andrew.cooper3@citrix.com>, 
+ Anthony PERARD <anthony.perard@vates.tech>, 
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, 
+ Julien Grall <julien@xen.org>, 
+ =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
+ Stefano Stabellini <sstabellini@kernel.org>
+In-Reply-To: <846f2ec6-da73-4f12-b46f-5e9f841e35ad@gmail.com>
+References: <1787823334.8631fc262581453bbf619ec5b2062170.1a04293255c000c4f3@vates.tech>
+ <1787823787.8631fc262581453bbf619ec5b2062170.1a0429a0db7000c4f3@vates.tech>
+ <846f2ec6-da73-4f12-b46f-5e9f841e35ad@gmail.com>
+Date: Thu, 29 Oct 2026 16:47:14 +0100
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793288834; l=1256;
+ i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
+ bh=EAGB0uj303WpSeV8adE4Z3HR91CddmGg9iId3k6IQpo=;
+ b=R6ovMOPNjPmOLzbFvqVznLBxXpIvmwV+TgeuzZw/4PTWg19TSmGAUvwqS/Y9P2XapwZ36hZO5
+ HPzWacZOTP5BR9Smk/GUlHNrUxtvqKcssDaLwWuVsukOFEV+lcEITMA
+X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
+ pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1793288840887
+X-purgate-ID: tlsNG-ef75cf/1793288846-A58C1AE4-029B956B/0/0
 X-purgate-type: clean
-X-purgate-size: 4930
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=4.0.1
+X-purgate-size: 1256
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
+	autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Wed, Oct 28, 2026 at 08:13:44AM +0100, Markus Armbruster wrote:
-> Daniel P. Berrangé <berrange@redhat.com> writes:
+On 2026-10-22 15:28 +0200, Oleksii Kurochko wrote:
+> [ ... 120 lines skipped ... ]
+> Also, this fetches qemu.qmp, pexpect, pygdbmi and ptyprocess from PyPI
+> with only lower bounds, so the result depends on when the container is
+> built: building it now installs qemu.qmp 0.0.6, while the fork ships
+> 0.0.5. The fork already bundles wheels for all of the [qtb]
+> dependencies in python/wheels/, so they can be installed offline. I've
+> checked that the following works, with python3-setuptools added to
+> DEPS:
 > 
-> > On Tue, Oct 27, 2026 at 03:54:03PM +0100, Markus Armbruster wrote:
-> >> Marc-André Lureau <marcandre.lureau@redhat.com> writes:
-> >> 
-> >> > Hi
-> >> >
-> >> > On Fri, Oct 23, 2026 at 2:04 PM Daniel P. Berrangé <berrange@redhat.com> wrote:
-> >> >>
-> >> >> On Tue, Oct 20, 2026 at 02:46:11PM +0400, Marc-André Lureau wrote:
-> >> >> > PciDevfn is a bit special, since it accepts integer and string as
-> >> >> > setter, but only output integer as getter.
-> >
-> > snip
-> >
-> >> >                                                       But I agree we
-> >> > could do better.
-> >> >
-> >> > There are multiple options. We could keep declaring the property as
-> >> > str instead. In this case, the getter should probably return a string
-> >> > for consistency and correctness. This might surprise some existing
-> >> > users though.
-> >> 
-> >> I.e. ditch numeric suppport for numeric addresses, right?
-> >> 
-> >> Incompatible change.  Do we care?
-> >> 
-> >> If we don't, we should be honest about it and mark qom-get unstable.
-> >> 
-> >> > We could introduce new properties like `devfn-str` and `devfn-int`
-> >> > that alias the same value.
-> >> 
-> >> Compatibility break.  If breaking compatibility is okay, I'd rather use
-> >> the opportunity to get rid of cleverness, and go with your first option.
-> >> 
-> >> > We could also introduce a new structured QAPI type.
-> >> 
-> >> What kind of type do you have in mind?
-> >
-> > IMHO the root cause design flaw here was to overload 'addr' as a
-> > way to set both the slot number and function number, as using
-> > one property for two pieces of data is a well known anti-pattern
-> > we caution against.
-> >
-> > IOW, we should have had 'slot' and 'function' as separate properties
-> > from the start.
+>      pip install --break-system-packages --no-index --no-build-isolation \
+>          --find-links /tmp/qemu/python/wheels "/tmp/qemu/python[qtb]"
 > 
-> Fair.
+> Minor: python3-pytest isn't installed, so the unit tests from patch 4
+> can't be run in this container, although the README asks only for
+> "the prerequisites above plus pytest". It would be convenient to have
+> it here.
+Applied in v3, thanks!
 > 
-> Our modeling of PCI is old and weird.
+> FWIW, I've built the container and run the smoke test from this series
+> in it against a locally built riscv64 Xen (console-test run
+> dom0less-1smp-0domu-1vcpu-aplic-imsic-null): it passes.
 > 
-> What we call "pci-device" isn't a device, it's a function, where
-> function 0 sort of stands in for the device.
+Great to know, thanks! Could you please add a Tested-by next time?
 
-Mmm, yes, interesting way of looking at it.
-
-> Its "addr" isn't a PCI address, it's the address of the function on its
-> PCI bus, i.e. the tail of a PCI address.
-> 
-> > From a CLI POV, we could easily change 'addr' to mean only the slot
-> > number, since it is always parsed in string format without the
-> > magic (slot << 4) | function encoding. Then add a 'function' prop
-> 
-> In CLI, HMP and QMP string (not integer), value "5" is shorthand for
-> "5.0", and means device 5, function 0.
-> 
-> We could deprecate the .FN part in favor of a new property "function".
-> 
-> Once we drop support for .FN from "addr", its name becomes even more
-> misleading than it always was.
-
-Yes.
-
-> > The challenge is the impact on QMP with strict typing, as ideally
-> > int format would soley represent the slot number, but today the
-> > int format is encoded (slot << 4) | function.  So anyone relying
-> > on int format in QMP would silently have a semantic change if we
-> > altered what 'addr' means. 
-> 
-> That's a no-go.
-> 
-> > Deprecating 'addr' entirely and adding brand new 'slot' and
-> > 'function' properties would be a significant disruption to
-> > a syntax which has been documented for years (decades).
-> 
-> What about this:
-> 
-> * No change to PCIDevice member @devfn: encodes slot and function as an
->   integer.
-> 
-> * New "pci-device" properties "slot" and "function".  "slot" sets just
->   the slot bits of @devfn, and "function" sets just the function bits.
->   Both default to zero, so specifying just "slot" gives you
->   PCI_DEVFN(slot, 0), which makes sense.
-> 
-> * Deprecate "pci-device" property "addr" for QMP.  We can keep it around
->   for longer than the required grace period if that helps.
-> 
-> * Declare it legacy for CLI and HMP, with no intent to remove it.
-
-We can't easily keep it in CLI/HMP, while removing from QMP can we ?
-As long as the property exists on the PCIDevice object, it will be
-accessible everywhere.
-
-
-Perhaps keep it relatively simple and merely deprecate the string
-syntax of 'addr' in QMP. That's the place where it is really ugy.
-Force QMP over to only the integer syntax for 'addr', and leave
-CLI/HMP accepting the (optionally dotted) string syntax.
-
-Mgmt apps like libvirt will have to adapt. Tedious, but actually
-quite simple compared to most deprecations, as the integer syntax
-can already be used with all historical QEMU versions in QMP that
-mgmt apps ever need to deal with. They can unconditionally change
-their code to int syntax and not worry about old/new QEMUs at all.
-
-With regards,
-Daniel
 -- 
-|: https://berrange.com       ~~        https://hachyderm.io/@berrange :|
-|: https://libvirt.org          ~~          https://entangle-photo.org :|
-|: https://pixelfed.art/berrange   ~~    https://fstop138.berrange.com :|
-
+Baptiste Le Duc <baptiste.le-duc@vates.tech>
 
