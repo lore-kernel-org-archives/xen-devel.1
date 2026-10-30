@@ -2,43 +2,59 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28AC1606A323
-	for <xen-devel@archiver.kernel.org>; Fri, 30 Oct 2026 18:31:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77365606A31C
+	for <xen-devel@archiver.kernel.org>; Fri, 30 Oct 2026 19:45:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=bd5mnlMY
-Received: from list by lists.xenproject.org with outflank-mailman.1466007.1676408 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=zAkT7MCs
+Received: from list by lists.xenproject.org with outflank-mailman.1466044.1676423 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMrNN-0007OF-3K; Fri, 30 Oct 2026 18:30:53 +0000
+	id 1xMsX2-0002t2-CW; Fri, 30 Oct 2026 19:44:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1466007.1676408; Fri, 30 Oct 2026 18:30:53 +0000
+Received: by outflank-mailman (output) from mailman id 1466044.1676423; Fri, 30 Oct 2026 19:44:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMrNM-0007O6-Vj; Fri, 30 Oct 2026 18:30:52 +0000
-Received: by outflank-mailman (input) for mailman id 1466007;
- Fri, 30 Oct 2026 18:30:52 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <kees@kernel.org>) id 1xMrNL-0007Nx-J0
- for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 18:30:52 +0000
+	id 1xMsX2-0002sv-7b; Fri, 30 Oct 2026 19:44:56 +0000
+Received: by outflank-mailman (input) for mailman id 1466044;
+ Fri, 30 Oct 2026 19:44:54 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xMsX0-0002sp-LG
+ for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 19:44:54 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xMrNK-002VV8-NM
- for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 19:30:50 +0100
-Received: from [10.42.69.2] (helo=localhost)
+ id 1xMsWz-00ETqJ-Dd
+ for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 20:44:53 +0100
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <kees@kernel.org>)
- id 6ae4e246-bab6-0a2a0a5309dd-0a2a4502e812-14
- for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 19:30:50 +0100
-Received: from [172.234.252.31] (helo=sea.source.kernel.org)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <kees@kernel.org>)
- id 6ae4e259-6ca4-0a2a45020019-aceafc1fc23c-3
- for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 19:30:50 +0100
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 5A0CB43856;
- Fri, 30 Oct 2026 18:30:48 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 365561F000C1;
- Fri, 30 Oct 2026 18:30:48 +0000 (UTC)
+ (envelope-from <stefano.stabellini@amd.com>)
+ id 6ae4f352-8faa-0a2a0a5109dd-0a2a4509e102-32
+ for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 20:44:53 +0100
+Received: from [52.101.201.46]
+ (helo=PH7PR06CU001.outbound.protection.outlook.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <stefano.stabellini@amd.com>)
+ id 6ae4f3ae-be1a-0a2a45090019-3465c92e649b-3
+ for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 20:44:47 +0100
+Received: from PH8P220CA0041.NAMP220.PROD.OUTLOOK.COM (2603:10b6:510:2d9::20)
+ by BN5PR12MB9462.namprd12.prod.outlook.com (2603:10b6:408:2ac::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.569.10; Fri, 30 Oct
+ 2026 19:44:36 +0000
+Received: from PH3PEPF0005961B.namprd05.prod.outlook.com
+ (2603:10b6:510:2d9:cafe::23) by PH8P220CA0041.outlook.office365.com
+ (2603:10b6:510:2d9::20) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.546.22 via Frontend Transport; Fri,
+ 30 Oct 2026 19:44:36 +0000
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ PH3PEPF0005961B.mail.protection.outlook.com (10.167.243.25) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.569.4 via Frontend Transport; Fri, 30 Oct 2026 19:44:35 +0000
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Fri, 30 Oct
+ 2026 14:44:35 -0500
+Received: from amd.com (10.180.168.240) by satlexmb08.amd.com (10.181.42.217)
+ with Microsoft SMTP Server id 15.2.2562.53 via Frontend Transport;
+ Fri, 30 Oct 2026 14:44:34 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -47,83 +63,131 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:From:To:Cc:Subject:References:In-Reply-To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793385048;
-	bh=Ymmdwc5PEMgv61WbZEAXoHrjiG+5VIZ10E632soWGCc=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=bd5mnlMYQl798ipBazvCyuBvEJ+dWQPwsnUhVWLaW7b1vz5ZxxwwDFJAXipNxVYkZ
-	 1YMHg32fNUCuoVzm2HCBW3ov7kG+JMaBOx03FaMytt2PrrA5GHA2Tvi5hKn/EfloYP
-	 2beONBCAOHLRlOst0mi76+aNgfLm6mIii3Lr5Fvstx8lw6wGj/SrTAbdVuY0LzPwAU
-	 bCJanwYpvATD+HqFWKlmHWzxbYzpj5FiFEot/sqUcaxCu2/PrJulmkzTYLC6de+Ext
-	 aaZWpT6UFdWy/d0gaseRtXTvi4oQtl70vUfG4Wb6sIpH14qDGlI1q3EhfXbEG7UOrn
-	 +aykTDKlAEfuQ==
-Date: Fri, 30 Oct 2026 11:30:48 -0700
-From: Kees Cook <kees@kernel.org>
-To: Nathan Chancellor <nathan@kernel.org>
-Cc: Ian Rogers <irogers@google.com>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Miguel Ojeda <ojeda@kernel.org>,
-	"Rafael J . Wysocki" <rafael@kernel.org>,
-	Danilo Krummrich <dakr@kernel.org>,
-	Nick Desaulniers <ndesaulniers@google.com>,
-	Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>,
-	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
-	Zhihao Cheng <chengzhihao1@huawei.com>,
-	Zhongqiu Han <zhongqiu.han@oss.qualcomm.com>,
-	Sumanth Korikkar <sumanthk@linux.ibm.com>,
-	Bill Wendling <morbo@google.com>,
-	Justin Stitt <justinstitt@google.com>, driver-core@lists.linux.dev,
-	llvm@lists.linux.dev, linux-hardening@vger.kernel.org,
-	linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-acpi@vger.kernel.org, linux-pm@vger.kernel.org,
-	linuxppc-dev@lists.ozlabs.org, linux-sh@vger.kernel.org,
-	linux-s390@vger.kernel.org, gfs2@lists.linux.dev,
-	xen-devel@lists.xenproject.org, linux-mtd@lists.infradead.org,
-	amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
-	linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Andy Whitcroft <apw@canonical.com>, Joe Perches <joe@perches.com>
-Subject: Re: [PATCH v2 1/9] Compiler Attributes: Add __must_init macro
-Message-ID: <202610301130.FEF31E7F@keescook>
-References: <20261027223847.652884-1-irogers@google.com>
- <20261027223847.652884-2-irogers@google.com>
- <202610281155.4D2AA663@keescook>
- <20261028190233.GA669046@ax162>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ONLci2N3hUXXEfR7kS0knzuU+KSHGBrKfXjs5bCssph7we1mInj/U4pbFl0pag/EMBxYfVaicnnxfj283w9/avW4ZRzG5NoG1mJsMDYn+l4DmfzTJJEDchTURCxq+XDBbJ6ctwn/GQvxHjOr73B6h6H0ygP/pGcgSqCV6lN9+uy4efGlIg0dHEiHpMddakB1zbs6eUkSWZ/FuYREmngNPJ55ydEyiQM0WQS/rBL80y09xVU8TEXK4cOlGZ0SZl9BbD3VO0rcY2krjQyeepdxrcgZKK+GVKJ4TS2ValxwTUKPpp1/AnZQG9wGZJ23u/At2AvAsw8yLkJi0zIz4WQqrg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=T5FGtXxz13+SI2Duck3/v8izN8CZQ2+IGHg79WF2CM8=;
+ b=U7OEbVhyoVXQqv13DVqsodcz4zTt+ARhb9C6yWLVlTHpIVfx//zewCfN3BG8mrRzPF6mjR71Uo2ZjVRz/OjkiWTuTkKT649KL9a7mE0exrqkuM+Us7J63b6Y9J9Ptb86R+F5dVpFiLFk4gEevwlw0xUoSMrFKgFHdhiOJQRKOf/8t6UoNYJNP8x2h8l8SOpOlFTKsVkeZBDs/DHPnGRf06AubTSPpFcnmWcfBxUrOBCxAOJU9ZqXoS7OVTdBLQ6XzHdV2JJrDf13d0uQwCHYAvYjndeTqYOAPFsHHpTcYaceG/mVyQPIHt9JHOkxJ1J2/uUKsCZNe/dz/00NchtjRg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=T5FGtXxz13+SI2Duck3/v8izN8CZQ2+IGHg79WF2CM8=;
+ b=zAkT7MCs3PCbD9781pwzVJ+WZtm4fo+l4zwWBLkC3CEYFE7vs9B3lqasfQV/za+aGlhJhot9gFntV4TO/gxg7f5MPUnWVI8Y8YTNxR17VqkjGuHxPHIEZBylbE4gWZbxIKCEewNq+TYBmSuYdSVBEErxWLsivz6thFOz851Np4g=
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+From: Stefano Stabellini <stefano.stabellini@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Stefano Stabellini <stefano.stabellini@amd.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, "Julien
+ Grall" <julien@xen.org>, Roger Pau Monne <roger@xenproject.org>
+Subject: [PATCH] xen/gunzip: free the code-length table on an overlong length run
+Date: Fri, 30 Oct 2026 12:44:28 -0700
+Message-ID: <20261030194428.1320905-1-stefano.stabellini@amd.com>
+X-Mailer: git-send-email 2.43.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261028190233.GA669046@ax162>
-X-purgate-ID: tlsNG-720697/1793385050-F3EBB2AC-57C470AD/0/0
-X-purgate-type: clean
-X-purgate-size: 859
-X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH3PEPF0005961B:EE_|BN5PR12MB9462:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9ebf8132-2e04-42c7-3293-08df36be3a3a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|36860700016|23010399003|1800799024|82310400026|18002099003|11063799006|5023799004|56012099006|261009223027099003|261026140227099003|261022115727099003|261022105027099003|261022075727099003|261021121427099003|261028144727099003|261026121527099003|10067099003|6133799003;
+X-Microsoft-Antispam-Message-Info:
+	ylvpEaqNMTC1gTYlFUdULvMvJlbVn0tN86LSazqpSGrtbPDDYHAq0O7AW8FgybYMHIIvlu4NZ5VlunYSgMdxa2y2QqLA9g61eZ1UnGS9xk9cwQTwzTh4kER0q8yua1DYMgob/f9gI619d5akHTw33zagMyZIbBml4A0mF1tPpgkoxC6lbtf32KHYSEo4JzwnSg11/FvNAo1nxHtkN9lPVQlcvw2VyDq/uSAgc1U348rRMh0bqdEn4e/48hZBB5Xpues7Jsso1YDiFCsqLAaNd+8xmXzbHsnnT12bGHW7QsPINoF3D6L98Yiu8jrrF10hprCf9dUnglP090bQbgj7weImMcOaK3PrmCu9qF5U4b2dmDAFD56Z1SYZ3PFTov5IA/R/R/jI8mH4CraR4ltG7i7kPZKCWIGzVh1ws2sqKHqouw0ZjFlIZiGq7CH1a5SSnomLRc8Lo7bxfZwWjnnTMcXyva4eJrj3TXMpOE6lc+uViocabHr225w8ic9tAGdwbsBz/TrrPecqZrncaebYURg/lc5CM8pNVYmyXoKrcII55rXySRUCvJklp7OaTNM8xMQMv+UEacEUiAX4MyR6RwQcfYMS4M03pADqN4an1rVjJD+J7rz17BH2y0L3S635gfQKbU5LoqQrDAMu3qY4gW3OpONveLBZ1mOIilLy1Zow94rwYXd/S9uQIzlmjJ5p5sCkpQcRCp4VZZmJt3Fvmw==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(36860700016)(23010399003)(1800799024)(82310400026)(18002099003)(11063799006)(5023799004)(56012099006)(261009223027099003)(261026140227099003)(261022115727099003)(261022105027099003)(261022075727099003)(261021121427099003)(261028144727099003)(261026121527099003)(10067099003)(6133799003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	P3sIE1OhI0P8Ltt9DPrhmN9dItseZsC8XYdBWQMm5onVzg4NV6ET8GL45DM6lY0stvw8dV3sYvWwhP/3fJ1kJhm/ylobNIXQ9+xrmOHr8RXmKGIbg73yMkOLMJCAQPkdNhXT/R2GRSYZ2FiPB5KXE3tj6HMjDWM8nDU5IhaHNEJ0p4W6VPJikMsN9+CqF8GvhdczvSoKFhZXD/eq3JNx+rhsGy5n4tyhEYcvSgyH7V1QwnpFWoB4VZ/cuowaWNfpTz0zMd1U6xksaycgeeLmgpZYPZwXbmBFlFX4i4Yj7YDlhHGo0OrmRpZuT71RFTtrJ4QxqD3n2+aw3qvV6bM3X8Ccnusu/j6jnU20Lx+VVBNMSc0fLC3xVlzbT/WquE5gpSvk1yAVd+LvFIoErs06F7ZjnK1Msy8fL/UsCUCJnCwBELxuFdTGGrXeSBcwASGn
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Oct 2026 19:44:35.7353
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9ebf8132-2e04-42c7-3293-08df36be3a3a
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	PH3PEPF0005961B.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN5PR12MB9462
+X-purgate-ID: tlsNG-bad1c0/1793389493-BFED6034-B6D8F0C1/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 2157
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY autolearn=unavailable autolearn_force=no
-	version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Wed, Oct 28, 2026 at 12:02:33PM -0700, Nathan Chancellor wrote:
-> On Wed, Oct 28, 2026 at 11:56:08AM -0700, Kees Cook wrote:
-> > On Tue, Oct 27, 2026 at 03:38:36PM -0700, Ian Rogers wrote:
-> > > Note that Clang does not yet diagnose file-scope objects declared
-> > > without any initializer (initializers at file scope that omit the field
-> > > are diagnosed), see https://github.com/llvm/llvm-project/issues/232483.
-> ...
-> > As part of this, can you open a Clang bug for the lack of detecting
-> > global initializers? It'd be nice to get that fixed.
-> 
-> Is that this linked issue or a different one? Looks like you filed that
-> one and it got fixed in clang ToT about a week ago:
-> 
->   https://github.com/llvm/llvm-project/commit/58936cb3678b4b5b96177f24cac3940b9a389fe3
+inflate_dynamic() builds a decoding table from the code-length code
+lengths of a dynamic block and reads the literal/length and distance
+code lengths through it. A run of repeated or zero lengths that would
+go past the number of codes the block declares makes it refuse the
+block with 1, but that path only frees the list of code lengths: the
+table is left allocated, and nothing else frees it.
 
-Oh! Hah, it moved so fast I missed it. Great!
+Free the table before returning on each of the three kinds of run. The
+other exits of inflate_dynamic() already free what they built, or are
+taken only after error() has stopped Xen.
 
+Fixes: e2b1ebf4de50 ("x86: Support booting a bzImage format domain 0 kernel.")
+Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Anthony PERARD <anthony.perard@vates.tech>
+Cc: Michal Orzel <michal.orzel@amd.com>
+Cc: Jan Beulich <jbeulich@suse.com>
+Cc: Julien Grall <julien@xen.org>
+Cc: Roger Pau Monne <roger@xenproject.org>
+---
+ xen/common/gzip/inflate.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/xen/common/gzip/inflate.c b/xen/common/gzip/inflate.c
+index cb146555c8..69bed78a38 100644
+--- a/xen/common/gzip/inflate.c
++++ b/xen/common/gzip/inflate.c
+@@ -858,6 +858,7 @@ static int noinline __init inflate_dynamic(struct gunzip_state *s)
+             j = 3 + ((unsigned)b & 3);
+             DUMPBITS(2);
+             if ((unsigned)i + j > n) {
++                huft_free(tl);
+                 ret = 1;
+                 goto out;
+             }
+@@ -870,6 +871,7 @@ static int noinline __init inflate_dynamic(struct gunzip_state *s)
+             j = 3 + ((unsigned)b & 7);
+             DUMPBITS(3);
+             if ((unsigned)i + j > n) {
++                huft_free(tl);
+                 ret = 1;
+                 goto out;
+             }
+@@ -883,6 +885,7 @@ static int noinline __init inflate_dynamic(struct gunzip_state *s)
+             j = 11 + ((unsigned)b & 0x7f);
+             DUMPBITS(7);
+             if ((unsigned)i + j > n) {
++                huft_free(tl);
+                 ret = 1;
+                 goto out;
+             }
 -- 
-Kees Cook
+2.47.3
+
 
