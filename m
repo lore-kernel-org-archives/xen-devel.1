@@ -2,46 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1B826606A31E
-	for <xen-devel@archiver.kernel.org>; Fri, 30 Oct 2026 15:17:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 353FA606A31D
+	for <xen-devel@archiver.kernel.org>; Fri, 30 Oct 2026 15:17:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=e4zbdFTS
-Received: from list by lists.xenproject.org with outflank-mailman.1465805.1676272 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=N61yTWMB
+Received: from list by lists.xenproject.org with outflank-mailman.1465809.1676281 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMoM3-0006zf-LY; Fri, 30 Oct 2026 15:17:19 +0000
+	id 1xMoMD-0007QY-To; Fri, 30 Oct 2026 15:17:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1465805.1676272; Fri, 30 Oct 2026 15:17:19 +0000
+Received: by outflank-mailman (output) from mailman id 1465809.1676281; Fri, 30 Oct 2026 15:17:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMoM3-0006zW-Id; Fri, 30 Oct 2026 15:17:19 +0000
-Received: by outflank-mailman (input) for mailman id 1465805;
- Fri, 30 Oct 2026 15:17:17 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xMoMD-0007QR-Qp; Fri, 30 Oct 2026 15:17:29 +0000
+Received: by outflank-mailman (input) for mailman id 1465809;
+ Fri, 30 Oct 2026 15:17:28 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <luoyonggang@gmail.com>) id 1xMoM1-0006yN-JO
- for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 15:17:17 +0000
+ (envelope-from <luoyonggang@gmail.com>) id 1xMoMC-0007Ow-Fh
+ for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 15:17:28 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xMoM1-009M9t-0A
- for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 16:17:17 +0100
-Received: from [10.42.69.3] (helo=localhost)
+ id 1xMoMB-00DIJo-Sf
+ for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 16:17:27 +0100
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <luoyonggang@gmail.com>)
- id 6ae4b4e6-e002-0a2a0a5209dd-0a2a45039a82-34
- for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 16:17:16 +0100
-Received: from [74.125.82.43] (helo=mail-dl1-f43.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ae4b4e8-2eae-0a2a0a5409dd-0a2a450888e0-48
+ for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 16:17:27 +0100
+Received: from [74.125.82.41] (helo=mail-dl1-f41.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <luoyonggang@gmail.com>)
- id 6ae4b4fb-fae8-0a2a45030019-4a7d522be5d9-3
- for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 16:17:16 +0100
-Received: by mail-dl1-f43.google.com with SMTP id
- a92af1059eb24-1931ff67a29so121237c88.1
- for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 08:17:16 -0700 (PDT)
+ id 6ae4b506-f659-0a2a45080019-4a7d5229c57c-3
+ for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 16:17:27 +0100
+Received: by mail-dl1-f41.google.com with SMTP id
+ a92af1059eb24-14394530ec6so1091624c88.1
+ for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 08:17:27 -0700 (PDT)
 Received: from DESKTOP-Q716RM7 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- a92af1059eb24-1ac1854d925sm12770449c88.7.2026.10.30.08.17.05
+ a92af1059eb24-1ac1854d925sm12770449c88.7.2026.10.30.08.17.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 Oct 2026 08:17:13 -0700 (PDT)
+ Fri, 30 Oct 2026 08:17:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,43 +52,43 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793373435; x=1793978235; darn=lists.xenproject.org;
+        d=gmail.com; s=20260707; t=1793373446; x=1793978246; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=m864uzH9D1nJnXhJ32zoDB2BUw6AVK2KA1WWNZhkMsE=;
-        b=e4zbdFTS1dR9004G2INreGHxjsw47iIufXODAoPsRmCC3z+YjZgR+lt+V2prIS5XhM
-         vrUptCw27i2NFjMvRhbZxPQ4Tnxpv6Yape4raFihbK1zLIPzTSFLljtufKr8m+YY3LQR
-         L6cE9M2HUvqhA5sT5x2v/wHMJ/NMypW7XSFVDZcZ1I8jAtqJb5F7dLo4HkrRvqeDaZAb
-         C+SZd4+YNWQ8+HhIbt3GEhR4xpVB+2qAh6gK39egrIq17BGPjS6Hyvoz7BXjZ1hK5f7H
-         /49iAKPuUIN3lpNJoS1+i7pTS2ISKNTstrYm+nebYjTOHl3HNngIV14Bkqavd+v+Uh0F
-         K5Lg==
+        bh=8lrMJa0QKyERxDe5fpQfZvS/Pcg04syvA9gM/OyRcBA=;
+        b=N61yTWMB1ADWmkT9WJI+yaXXAiA77+DsmhIQTZnhHWjyUF1Cw52wpp17ZWE9ulGL2W
+         r8+rqMKZFFjMzmx8ZaQZCaCzPTH9sW7Y+1lRmOc51o32xLVZxpKPK/k3y6SZ4Mh1bajo
+         qnCMd+xIeLCe0YNtgBQTJ+HoGXrfgbbLJjqy/NO2SW447VMxWfBZe7TvTVPb+iIomFy9
+         OoPC2QQqjoskruNYxjj0g/8/vyTNTr/lM2at/Tz9wDVmxTY6Gla1qufOfZzb0+9AzcoP
+         KBiR/Xz5ttih8rwVZHUMwTPeNbAPGVGjVn885XpIyMw4m9jdX4chcHBRap1NET3hWcuS
+         SvOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793373435; x=1793978235;
+        d=1e100.net; s=20260707; t=1793373446; x=1793978246;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=m864uzH9D1nJnXhJ32zoDB2BUw6AVK2KA1WWNZhkMsE=;
-        b=sKtyckpoHw854z+01VAHShe5bMlIZ2xoAR/horxc5dw8hobLjkIZ/8Xp9wGnlPQtxl
-         ASyf9JOeh7BtlPCeBID2KWpJVT8pjs0uQHLhSa+IG3UBjZO6HrBSEEYVZvJgvZ2a42+t
-         ZARZHlMDjfDpFLIHCMCf51wYaGzzAU1PRUXcTuu6zTgp/APGT8xpU8xGPYDmed6uBB7V
-         jiJWp2IZtBeqXqu2mj1YKh5s9GRiKK+aRsEvz+IjzOyWcmRHHjkcOk4qLAyMp7GsdRLT
-         QTmOrC93UOpo49Z70O885IxRJJnOqMaM10TyMWSxNlyIFCo/NJVd0H/eQK6+2NDuY8hw
-         rL/w==
-X-Forwarded-Encrypted: i=1; AKwUvByb1owKLyQWIdiCxIjbkEVZk4fNATbGXtuEUUAI6t2skXr0bFg1xNMd//ntF3w0EfNRH4YpmDL2W10=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYIJnZw36lcVM2RZmIr7abtgPEm9BTTxnVRjloB0XE0uNXLvAswx
-	qUVMfq7c6aNmTwADQidQ/VVn+6rodfVYTJnnws6FmwE8KGZ1H7+v7ipf
-X-Gm-Gg: AYBFou3gGYyE5A4246rOzbAK0Rc16HxYN4FqaQVAYD5UajvJT66CXXyAFy2moC9vN0R
-	YkZ65UyCYLnk7ltkNI3LPUtVzcOH7mqv1SDQQThpKSZbMxAp51tKPuO49LYMRd47s0HPysVpYCU
-	SCUPEFRlPko9MofF7GNVAHC0JnBMIsTqA2N80n4wkCzq+tE4fWXxBQopP4Hs8s4WGSm4EO1c9H7
-	yFnyK82Ku3u/CAi8f+yTbZbdSPxZWaUR5qmUISSCz5T9y63xzIghL18cU10b7xe2WmQRcJBMJZh
-	yLb69r5RNc3zUn5eQB/6HUHzj6lhz91ju2tE3h3T6hmEh7uDXtkRCzuG1xQK4qTlqtdwh/aKmZr
-	Eo1rRNWmy+3zn5FlbusS4gRJ1z2zgjpas5NkM6OjZO4ZtfdVrkSn6Lv++qKNI6CmwJRirJwfPZ2
-	J6yKLo5466jAj2F7scCjUsD7mJl9Daw+7qfTwzUY2dMWmhNQ4FP4T1FI7pzHA7MJCs0RMd48ge2
-	WmvkFIXMVb1j6liOM0jDvztZaw2gng8V6+truZFEhINAWgHWU8jsVNczWlm7X/0Y+KO1EdMzXVz
-	bhJ/Kmkwn6sBz8xL3JRU8F6G+oeKBP6U1w==
-X-Received: by 2002:a05:701b:4512:10b0:181:73fc:e53 with SMTP id a92af1059eb24-1ac5b7e21fdmr3546543c88.29.1793373434663;
-        Fri, 30 Oct 2026 08:17:14 -0700 (PDT)
+        bh=8lrMJa0QKyERxDe5fpQfZvS/Pcg04syvA9gM/OyRcBA=;
+        b=oOo/l7mg+lHEE5hi07aQEMgYl1yXaSWm43Xp7lVY4LX/9wJnKFb3x+4bCJ+pZYK1tg
+         V7KIVEDddIZaPPZOYDhFsD9bODU52h3x2MpM1pi1OfZ9m5kqo77ppKmbcjxzyOb8j+1k
+         HXxylkWFqICQMW7+opRAIlupdGKgn2eWWZmgswevmLyXPoO70963ldbxlg5qszgx/I3r
+         +CUgdeYUk87AaoJqwCdjUY8zzGS/7+6KVg/kByfI7LfrcRiqNE2QHNxCdP8u28Uj/SqD
+         NxqhBjayWI638aa7kMuH2e3mWTUf8XS6Xqyzav6TUUp61wEEj+BScvbyfooqqLotzKM1
+         2T2Q==
+X-Forwarded-Encrypted: i=1; AKwUvBwUtzt2P9atdbp1zPSfDiqb+74F233wLOqxZ7b0nyd0gl+R/TQSgiONrahr/KZ7zjZ06/4G3MJRtEY=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYKXRyOgZ7knbk5ubrOfUvSCx2ESwxIUhl/zrhgCPhwheGOlmTVD
+	LxlX1j11u6naTbtAWlodO4JuAsG6hMz/EVKhyd1uKKS2Xfc72Jiuke8L
+X-Gm-Gg: AYBFou2xH1YA21s7q5bHzWKLPM6cvGl7uX+m1p1v82uCP9QIxRmpJ9ZX/4LIYoGOM7T
+	53Wii+/OOr7VJ8m+g63bSpSIqwBKEF53+sfDLCjcYbhdf7aQ8FZ1zKYBwf4PdaFiiArxoEIpNfA
+	uehv0nbIS1dXv6U3VErqzFlFeLaQs/w62k5IWwC+bpLBpuz850OJxC22SG+fa3o0Jhyc28WokRo
+	jgz7IPHyLMjHtwDrZHfZQZ6CsJY6s+563CWa7OcoIpmjejKknLlFGux58TxVTFcAY5MPVGGdhte
+	EQ6wEVEU4l70XOChgBLL+apEpcHlSgFfEJ2vl4IXMZEl6T46XvbqVv7A0JEapzREYXhYcBrBhvu
+	h4Pz/d3npcKNurE6Sa2EevmIGKbwQeth+BGpQoqPd0J5BNW8X0EahirmpM5ruN5ns3Dmvf4d9E7
+	SPfr+pH2ekXKLQNx5J/0RuN+uixpanOUrjdsZdTo1F3ew8pbbyd+YKdEucp8wyuIOxs/5EjQ61J
+	rdTBR1M3ABk54vlDNsrT3aQraFX6s9sRv5gVWx8KV2BhESFlQ0dxDSWX9ImbOBL8WUkIZLfK3kr
+	AaHA1GKidsJcYRfjULNgVA4+xbc9qJUo2+Zp46ZPzTszC1DC4meH/nyAH+ostFlfPP+/mQ==
+X-Received: by 2002:a05:7023:a5b:10b0:160:90a3:ca8c with SMTP id a92af1059eb24-1ac5cb1c615mr3223077c88.7.1793373445630;
+        Fri, 30 Oct 2026 08:17:25 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Anthony PERARD <anthony@xenproject.org>,
@@ -132,18 +132,18 @@ Cc: Anthony PERARD <anthony@xenproject.org>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Artyom Tarasenko <atar4qemu@gmail.com>,
 	qemu-arm@nongnu.org
-Subject: [PATCH 07/15] hw/core/null-machine: expand DEFINE_MACHINE
-Date: Fri, 30 Oct 2026 23:15:28 +0800
-Message-ID: <20261030151539.1872-8-luoyonggang@gmail.com>
+Subject: [PATCH 08/15] hw/mips: expand DEFINE_MACHINE for MIPS machines
+Date: Fri, 30 Oct 2026 23:15:29 +0800
+Message-ID: <20261030151539.1872-9-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.55.0.windows.3
 In-Reply-To: <20261030151539.1872-1-luoyonggang@gmail.com>
 References: <20261030151539.1872-1-luoyonggang@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-33051d/1793373436-74C884E9-92BF7DB9/0/0
+X-purgate-ID: tlsNG-c1860d/1793373447-CDF4787B-A3549E4B/0/0
 X-purgate-type: clean
-X-purgate-size: 1451
+X-purgate-size: 3959
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
@@ -152,49 +152,120 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Expand DEFINE_MACHINE() for the none machine to
-machine_none_machine_typeinfo and
-machine_none_machine_register_types() calling type_register_static().
+Expand DEFINE_MACHINE() in hw/mips/boston.c, hw/mips/fuloong2e.c, and
+hw/mips/malta.c to explicit TypeInfo and type_register_static() calls,
+reusing mips_malta_register_types() in hw/mips/malta.c.
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 ---
- hw/core/null-machine.c | 18 ++++++++++++++++--
- 1 file changed, 16 insertions(+), 2 deletions(-)
+ hw/mips/boston.c    | 18 ++++++++++++++++--
+ hw/mips/fuloong2e.c | 18 ++++++++++++++++--
+ hw/mips/malta.c     | 12 ++++++++++--
+ 3 files changed, 42 insertions(+), 6 deletions(-)
 
-diff --git a/hw/core/null-machine.c b/hw/core/null-machine.c
-index 60254913019..1f35b9169d1 100644
---- a/hw/core/null-machine.c
-+++ b/hw/core/null-machine.c
-@@ -42,8 +42,10 @@ static void machine_none_init(MachineState *mch)
+diff --git a/hw/mips/boston.c b/hw/mips/boston.c
+index 4579df23eb7..2c6edebe257 100644
+--- a/hw/mips/boston.c
++++ b/hw/mips/boston.c
+@@ -839,8 +839,10 @@ static void boston_mach_init(MachineState *machine)
      }
  }
  
--static void machine_none_machine_init(MachineClass *mc)
-+static void machine_none_machine_class_init(ObjectClass *oc, const void *data)
+-static void boston_mach_class_init(MachineClass *mc)
++static void boston_mach_class_init(ObjectClass *oc, const void *data)
  {
 +    MachineClass *mc = MACHINE_CLASS(oc);
 +
-     mc->desc = "empty machine";
-     mc->init = machine_none_init;
-     mc->max_cpus = 1;
-@@ -55,4 +57,16 @@ static void machine_none_machine_init(MachineClass *mc)
-     mc->no_cdrom = 1;
+     mc->desc = "MIPS Boston";
+     mc->init = boston_mach_init;
+     mc->block_default_type = IF_IDE;
+@@ -850,4 +852,16 @@ static void boston_mach_class_init(MachineClass *mc)
+     mc->default_cpu_type = MIPS_CPU_TYPE_NAME("I6400");
  }
  
--DEFINE_MACHINE("none", machine_none_machine_init)
-+static const TypeInfo machine_none_machine_typeinfo = {
-+    .name       = MACHINE_TYPE_NAME("none"),
+-DEFINE_MACHINE("boston", boston_mach_class_init)
++static const TypeInfo boston_mach_typeinfo = {
++    .name       = MACHINE_TYPE_NAME("boston"),
 +    .parent     = TYPE_MACHINE,
-+    .class_init = machine_none_machine_class_init,
++    .class_init = boston_mach_class_init,
 +    .instance_size = sizeof(MachineState),
 +};
 +
-+static void machine_none_machine_register_types(void)
++static void boston_mach_register_types(void)
 +{
-+    type_register_static(&machine_none_machine_typeinfo);
++    type_register_static(&boston_mach_typeinfo);
 +}
 +
-+type_init(machine_none_machine_register_types)
++type_init(boston_mach_register_types)
+diff --git a/hw/mips/fuloong2e.c b/hw/mips/fuloong2e.c
+index 9a712ee9309..96610ec1fdd 100644
+--- a/hw/mips/fuloong2e.c
++++ b/hw/mips/fuloong2e.c
+@@ -328,8 +328,10 @@ static void mips_fuloong2e_init(MachineState *machine)
+     network_init(pci_bus);
+ }
+ 
+-static void mips_fuloong2e_machine_init(MachineClass *mc)
++static void mips_fuloong2e_machine_class_init(ObjectClass *oc, const void *data)
+ {
++    MachineClass *mc = MACHINE_CLASS(oc);
++
+     mc->desc = "Fuloong 2e mini pc";
+     mc->init = mips_fuloong2e_init;
+     mc->block_default_type = IF_IDE;
+@@ -339,4 +341,16 @@ static void mips_fuloong2e_machine_init(MachineClass *mc)
+     machine_add_audiodev_property(mc);
+ }
+ 
+-DEFINE_MACHINE("fuloong2e", mips_fuloong2e_machine_init)
++static const TypeInfo mips_fuloong2e_machine_typeinfo = {
++    .name       = MACHINE_TYPE_NAME("fuloong2e"),
++    .parent     = TYPE_MACHINE,
++    .class_init = mips_fuloong2e_machine_class_init,
++    .instance_size = sizeof(MachineState),
++};
++
++static void mips_fuloong2e_machine_register_types(void)
++{
++    type_register_static(&mips_fuloong2e_machine_typeinfo);
++}
++
++type_init(mips_fuloong2e_machine_register_types)
+diff --git a/hw/mips/malta.c b/hw/mips/malta.c
+index 38c71f66f2e..0a10a2fea13 100644
+--- a/hw/mips/malta.c
++++ b/hw/mips/malta.c
+@@ -1285,8 +1285,10 @@ GlobalProperty malta_compat[] = {
+ };
+ const size_t malta_compat_len = G_N_ELEMENTS(malta_compat);
+ 
+-static void mips_malta_machine_init(MachineClass *mc)
++static void mips_malta_machine_class_init(ObjectClass *oc, const void *data)
+ {
++    MachineClass *mc = MACHINE_CLASS(oc);
++
+     mc->desc = "MIPS Malta Core LV";
+     mc->init = mips_malta_init;
+     mc->block_default_type = IF_IDE;
+@@ -1301,11 +1303,17 @@ static void mips_malta_machine_init(MachineClass *mc)
+     compat_props_add(mc->compat_props, malta_compat, malta_compat_len);
+ }
+ 
+-DEFINE_MACHINE("malta", mips_malta_machine_init)
++static const TypeInfo mips_malta_machine_typeinfo = {
++    .name       = MACHINE_TYPE_NAME("malta"),
++    .parent     = TYPE_MACHINE,
++    .class_init = mips_malta_machine_class_init,
++    .instance_size = sizeof(MachineState),
++};
+ 
+ static void mips_malta_register_types(void)
+ {
+     type_register_static(&mips_malta_device);
++    type_register_static(&mips_malta_machine_typeinfo);
+ }
+ 
+ type_init(mips_malta_register_types)
 -- 
 2.55.0.windows.3
 
