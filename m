@@ -2,59 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E1A76606A31C
-	for <xen-devel@archiver.kernel.org>; Fri, 30 Oct 2026 20:16:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 42EB1606A31A
+	for <xen-devel@archiver.kernel.org>; Fri, 30 Oct 2026 21:59:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=gvgpE06f
-Received: from list by lists.xenproject.org with outflank-mailman.1466066.1676430 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=o78V3uyd
+Received: from list by lists.xenproject.org with outflank-mailman.1466414.1676439 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMt1F-0008Ak-Gi; Fri, 30 Oct 2026 20:16:09 +0000
+	id 1xMucw-0006r9-Ew; Fri, 30 Oct 2026 21:59:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1466066.1676430; Fri, 30 Oct 2026 20:16:09 +0000
+Received: by outflank-mailman (output) from mailman id 1466414.1676439; Fri, 30 Oct 2026 21:59:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMt1F-0008Ad-E2; Fri, 30 Oct 2026 20:16:09 +0000
-Received: by outflank-mailman (input) for mailman id 1466066;
- Fri, 30 Oct 2026 20:16:09 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xMt1E-0008AX-VN
- for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 20:16:09 +0000
+	id 1xMucw-0006r2-C9; Fri, 30 Oct 2026 21:59:10 +0000
+Received: by outflank-mailman (input) for mailman id 1466414;
+ Fri, 30 Oct 2026 21:59:09 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <visitorckw@gmail.com>) id 1xMucv-0006qw-1J
+ for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 21:59:09 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xMt1E-00FMLA-CE
- for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 21:16:08 +0100
-Received: from [10.42.69.3] (helo=localhost)
+ id 1xMuct-0014bi-WD
+ for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 22:59:08 +0100
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <stefano.stabellini@amd.com>)
- id 6ae4facb-8faa-0a2a0a5109dd-0a2a4503e194-46
- for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 21:16:07 +0100
-Received: from [40.107.201.60]
- (helo=CH4PR04CU002.outbound.protection.outlook.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <stefano.stabellini@amd.com>)
- id 6ae4fb06-fae8-0a2a45030019-286bc93c7caf-3
- for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 21:16:07 +0100
-Received: from SJ0PR13CA0024.namprd13.prod.outlook.com (2603:10b6:a03:2c0::29)
- by CHXPR12MB999220.namprd12.prod.outlook.com (2603:10b6:610:2fd::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.569.10; Fri, 30 Oct
- 2026 20:16:02 +0000
-Received: from SJ1PEPF000037B5.namprd05.prod.outlook.com
- (2603:10b6:a03:2c0:cafe::56) by SJ0PR13CA0024.outlook.office365.com
- (2603:10b6:a03:2c0::29) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.592.5 via Frontend Transport; Fri, 30
- Oct 2026 20:16:00 +0000
-Received: from satlexmb08.amd.com (165.204.84.17) by
- SJ1PEPF000037B5.mail.protection.outlook.com (10.167.244.200) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.592.5 via Frontend Transport; Fri, 30 Oct 2026 20:16:00 +0000
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Fri, 30 Oct
- 2026 15:15:59 -0500
-Received: from amd.com (10.180.168.240) by satlexmb07.amd.com (10.181.42.216)
- with Microsoft SMTP Server id 15.2.2562.53 via Frontend Transport;
- Fri, 30 Oct 2026 15:15:58 -0500
+ (envelope-from <visitorckw@gmail.com>)
+ id 6ae5132a-8faa-0a2a0a5109dd-0a2a450a8ae8-2
+ for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 22:59:07 +0100
+Received: from [209.85.214.174] (helo=mail-pl1-f174.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <visitorckw@gmail.com>)
+ id 6ae5132a-f2d2-0a2a450a0019-d155d6aed900-3
+ for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 22:59:07 +0100
+Received: by mail-pl1-f174.google.com with SMTP id
+ d9443c01a7336-2e9d1114320so9701255ad.3
+ for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 14:59:07 -0700 (PDT)
+Received: from google.com ([118.150.148.19]) by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-3ae8454327esm5361880a91.4.2026.10.30.14.58.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 30 Oct 2026 14:59:04 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -63,131 +49,112 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=vdzkZq+FrAJLiQ2NM9HBADuXDnxDqQiaDawjj2J0B3f2aHQBImEqjoza8nuTsr2l2QqzRjqlZS/AbpxGOumnjyZI5ktIhWp/AtShm5u3AAaS4QvsvKDzhHZLJyL5SVksFB20I4mK2YzAynVwZy+l385rsicMz4ml0W7itLSHVUvrS1OBCqo3oZkmhO1xB/zjLvNICjl9b0neBtROSETwQYGcyuEp7+S7ZFND0I2FN+FCjh/UxnSkWwaXNmQi+8BqarzyU8m+achf1gAJ/SWqv3w3qcm4AvVksbq7Fr6PSsiye8Boy8jEUl81YnpJT+4zehe9HoPsuBPX8dZH7CeM7g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=A1Hz381z67ll8PavJLQmYEch9DB4Vv2FFyJamyBbfgI=;
- b=SyhgAn0c9K5kVc0UERzHRbLb9p/uJCPTU4yFjrL96gj8Fr0Ca8nVQ7CPYUWpLIvFwTEMNS5CZWLHDBVrYeSJehSmAyOA6UE/IJtJJdkam89hDxfXOGdHJCtn3WwGrBYSAxumcRgVJzI5L7GSET+Estg5EKe+898wfMwgFJcSr6cGiWnj42TJ7Z3kjmSmDZhDmmwUy8VVVdoGWY0+HoU+l1dwM9aSuqPIxMAx+tiFsRKBMgFvH//KdT0Fgx1SXnJ0qj1ahu6qZHIbSu9bk5qVs3Gnnr7M4pwb5sOu0GclM/ii2QZ9TYvheR5LGRjnfeVCWZEI1OmLICSLRwj481/CLQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=A1Hz381z67ll8PavJLQmYEch9DB4Vv2FFyJamyBbfgI=;
- b=gvgpE06f7Kj+v285gdg55J8c1ix0yUHnSzXiCpGzBOnzfRB+ClqZh0fsP47oqXaq6VMjPGNTCuEJ5QLz+wiqPqPYJTh1j0dDvkLhMjJQ/YIHB07PcJzXI4g++DDS8wQO2n77I4U2du62QnXRPWixbYyq7+fPyzuvGdEzhXslGuQ=
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-From: Stefano Stabellini <stefano.stabellini@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Stefano Stabellini <stefano.stabellini@amd.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, "Julien
- Grall" <julien@xen.org>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger@xenproject.org>
-Subject: [PATCH] xen/gunzip: refuse a back-reference before the start of the output
-Date: Fri, 30 Oct 2026 13:15:54 -0700
-Message-ID: <20261030201554.1363058-1-stefano.stabellini@amd.com>
-X-Mailer: git-send-email 2.43.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="In-Reply-To:Content-Disposition:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1793397546; x=1794002346; darn=lists.xenproject.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=qgi7PD6acUYIL+i15Ys7CNpZIZoU86hFOzd/i7bJ3bw=;
+        b=o78V3uydBVdEeINeaVr54vdhigm8qsTVfPUtBJ6L3/CnuKLkEhvrOEK3ru8jeZ3A01
+         Z0QP5YOXJEpsdCHgRcwHwNM8Ngfp0ieSqQq2E85YMrlI/1rc6sz1BAlHE5c78FiONpCs
+         yxdoh33oZKliXQoaeBfuXka7CNgc+WMApHFyR2A1ulFpL3zIaamIA1QD7XZyvJ/mINNl
+         3I9os607E/sy6aOLAio5DQYUvtKaRV8IAIX1X6XUvfhgBeeGHq+O8TpLxHy7tDz9O+Uq
+         Kz8DqWajehZ0f3DOejFRbHX8H6Ry+h3i2E0zS1VBDM8bvxItaVCBAlMLQfLZG6rO/H52
+         4QNg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793397546; x=1794002346;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=qgi7PD6acUYIL+i15Ys7CNpZIZoU86hFOzd/i7bJ3bw=;
+        b=L6Vmp4htMlrtg56NxlUyj2EeivbXoQKhBbfMx1LMaUOywnL8g4Fm4Ai4F0WmnMBpK4
+         6QHkqcWaxvVCtHHcGHV+O1S3DWlNB7qK/E10H5b4L/YOhtbr1WpYy8WipGVBwtgUqNUD
+         JNc/sHJ4zwjVrkINdacRa3DQZBX/F04YbK+6uX32nTEQZEYZlcxfBKEF9iJ384gkw8zG
+         L7GycLY9PCPMR0GCkBPDRRZrIlj2LMJPhFS6YwrCjFqLwGcLjGPGP6foN5eU16FkOaPw
+         +CGvNCnGzRWndtHywg0VAAM4GPjo1gQAuESag30KwhCd8r/eEqN0NnS942LitSPT+VS7
+         dZ1g==
+X-Gm-Message-State: AFq9FYJ4oDRtbEqCzgO+06rGpVrRkCU5r1gMRPsPA+csRbafnGRulKTD
+	RgmUYbtIJuqt0++mBjkUTUROOiq4dO1BxiHGb9U6zKHuhldt52AOeuy/
+X-Gm-Gg: AYBFou2S0s/wwgXE9Oe/Scs1rqOAliq+mYLBvFKDspe1Uo2aG5dLUPTTqKqd6LlMx9z
+	SQQr2t5DxVuSMAkXYfSCl0wnHHjynzCqDrxxxxu14uGFa7mWUJ90RzjmqO4jfd1Fm1JdG/H4nBW
+	a2jkRkk5rBrLZajLGl+u42tv7gTzp68+g8jXTR6wibvyGKUYm3yYOBwra5/XcdNrMpW4w7Q664g
+	pcMv/zIyNZhFnA/A+SWFO3Xr4cHdYNGtSojWJieI91p0+FgbayG1gRwQRDdrgJK2cgh5DZ3VKrD
+	E80bckW9xe212kG6D+6V+vdTqCJW9Sh+9jt2WD5ruVpSRHyIaIlmELkVvwbegpYcgbl8TvRlF1u
+	fmcumYL+Sgt+9+Nviin6334B6Gp4USwgshGppxU0dVs38do7fKxlG/rJgfNR+NGzMGTkfSgPqEG
+	QQyZfpNQhMbo0w3KTJFta88Ynf2XvMK7dVngwh0D71wLMYk9pVkHWLAYcYS4yek3pnhPOGmDzoe
+	IkTmqTTu9jw1vobRI1hlQ0box344pE0hMJL2PGopYDdwlwJGvclvO6jW/ro7AmbrvSP8TfbM4eF
+	VDyuLR3EuGvlnfLuJpC//MBGboHxWw==
+X-Received: by 2002:a17:90a:b890:b0:3ab:e588:c29b with SMTP id 98e67ed59e1d1-3ae8e5bdcc9mr1750429a91.5.1793397545841;
+        Fri, 30 Oct 2026 14:59:05 -0700 (PDT)
+Date: Sat, 31 Oct 2026 05:58:23 +0800
+From: Kuan-Wei Chiu <visitorckw@gmail.com>
+To: "Orzel, Michal" <michal.orzel@amd.com>
+Cc: xen-devel@lists.xenproject.org, sstabellini@kernel.org, julien@xen.org,
+	bertrand.marquis@arm.com, marscheng@google.com,
+	jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com
+Subject: Re: [PATCH] xen/dt: Skip non-RAM reserved-memory regions in
+ make_memory_node()
+Message-ID: <auUS_7jNO-0ONE1e@google.com>
+References: <20261028211737.17629-1-visitorckw@gmail.com>
+ <d25a667b-5126-4c57-b379-c31c4e7645c6@amd.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF000037B5:EE_|CHXPR12MB999220:EE_
-X-MS-Office365-Filtering-Correlation-Id: ccdd4697-08a3-4c2a-84b1-08df36c29d79
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700016|23010399003|82310400026|376014|1800799024|261028144727099003|261021121427099003|261021123027099003|261022115727099003|261022105027099003|261022075727099003|261009223027099003|261026121527099003|261026140227099003|10067099003|11063799006|3023799007|6133799003|18002099003|56012099006;
-X-Microsoft-Antispam-Message-Info:
-	CHwhhUCNrU9jizaDej8CGBAvhxQWGNPif0YGRgGF1/XH5v4nCxrhsgE8vGrUQR0VyzYMICASyD7ZJnGJNFDP9pH3ecHKwBgGHu6bhnikcCoz4ZAGNmYZMg9SEqk5mPTRYPtlrJnad/BiMw0eXxPrevd73J69OPdsAddazn6i1JfH+0LrsPbeL0qeSJh+bhl2wo8AI89tDgLBVJLDUxGps0Gn1br7qyPqdTP+b2YKkJP7bY+vXI1qxH8uvjVhdgesD1GtCya0RZvMKMd6IqevlwSi3t7umEPGoeJexmeXOtmjmCH5qfNUhdynLvIE+GMpS3rjTLB+D84oitC1Gx1GF1NksaRdfOd0i1YO4iTzfFrbxBtokVIMlwxwERvsFxCf4fwUZVpy+CQNJsusEhL5lndbFPXtr5nw8PXzQ57pnjh/biiI+a5IcgAw3gBEBpu2bcb4pyH9eI1V/1K4XuY4r6Ml5rE+17uALceG3Ox8xh49H32Pc0lWktQeLnRkv5naIe5Cb2IiacgTZCY7GE2PpJVdyrirl4LBccvRP2NcnlDu8sOZQEFZgvgU8WmQdVaQbKJ77PVDY1wrs7O/4FL/IjGPjUQHzQB/+j8CCG1XVRsGXkV9qm6HxAUkilDN6Mrl3NrN6YtxIAHPLNcX4pYW7iJUPoyEY19FX3k+1jl5cokJOfUVUixwDc+jJpPZTbBHsNCW5tu/Hk6C6idjN9WXOw==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(23010399003)(82310400026)(376014)(1800799024)(261028144727099003)(261021121427099003)(261021123027099003)(261022115727099003)(261022105027099003)(261022075727099003)(261009223027099003)(261026121527099003)(261026140227099003)(10067099003)(11063799006)(3023799007)(6133799003)(18002099003)(56012099006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	CvjPrJzDBnyGBgAOXASQxFPwtzZj/LiwJMtJX5v606zNp/r299IFY9ii9IGoBlptQtNZ6qyZ1/GhT3f/txxKnAD1pYmr4vej5cYpXvDrxu3zlEV1AtNY2kJIWD8rai34g29MNNvSvyzjhxNUkmWPAyHEVhR3uYrnhWvfajjaIrCYbq3zs1cRWATFofLzqUbVzSeT3DyRtoCWobJ4H8Xzohi3boY1YDbfmWWX5iWbzRZIGtXlYSAO4Wdm/PBWgotziiQzWCpscO3nB2qWv+mNmdcDWP/Jgtv+thXgCrHxtTejEhE4O7cjpfvVmbcCKEZ13EZp7aY+j1X+YnFS3JD2RhqKXNiLPh+VigmA0xnRiuhFdwq3K6X7FvBtJFJBmeQeVqmX2t/7I2iN8vg6tRM/KJA11BDenT0GEPBqirXidDVYlTpzFLwTiHs9FYwHkZ4X
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Oct 2026 20:16:00.2108
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ccdd4697-08a3-4c2a-84b1-08df36c29d79
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SJ1PEPF000037B5.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CHXPR12MB999220
-X-purgate-ID: tlsNG-33051d/1793391367-6D4D74E9-78C2B243/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 2318
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <d25a667b-5126-4c57-b379-c31c4e7645c6@amd.com>
+X-purgate-ID: tlsNG-4011c0/1793397547-4ABD8CFC-31D6C958/0/0
+X-purgate-type: clean
+X-purgate-size: 1985
+X-Spam-Status: No, score=-2.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY autolearn=no autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-inflate_codes() copies each length/distance pair from that many bytes
-behind the write position, and does not check the distance against the
-bytes written so far. RFC 1951 (section 3.2.3) forbids a distance
-reaching back before the start of the output, but a corrupt or crafted
-image can carry one. The source position is then taken modulo WSIZE,
-and because Xen's window is the output buffer itself, sized for the
-image and not 2 GiB long, the copy reads from up to 32 KiB below offset
-2 GiB of that buffer: memory the decompressor was never given, whose
-contents end up in the unpacked kernel. The CRC32 and length checks of
-the trailer only reject the image afterwards, once that memory has been
-read.
+Hi Michal,
 
-Check the distance as soon as it is decoded, against the bytes written
-so far, the current window position plus what earlier flushes of the
-window wrote out, and refuse the block as invalid, as for an undefined
-code, when it reaches back further. Xen then stops with "invalid
-compressed format (err=1)", as for any other invalid block, without
-reading memory outside the output.
+On Fri, Oct 30, 2026 at 12:04:58PM +0100, Orzel, Michal wrote:
+> 
+> 
+> On 28-Oct-26 22:17, Kuan-Wei Chiu wrote:
+> > Xen creates a second /memory node for Dom0 from
+> > bootinfo_get_reserved_mem() without checking whether those regions
+> > belong to host RAM. However, /reserved-memory can also describe
+> > on-chip SRAM or firmware regions outside system RAM. Listing them in a
+> > /memory node causes Dom0 to register non-RAM addresses as system RAM,
+> > conflicting with device MMIO mappings.
+> Hmm, I always thought that /reserved-memory is to exclude regions from memory
+> described under /memory. That's what Xen assumes too. map_range_to_domain() for
+> example does not call iomem_permit_access() for such regions because we assume
+> it's RAM. Can you provide more details of your board e.g. the device tree? Is
+> there any documentation I could use to confirm that "reserved-memory can also
+> describe on-chip SRAM or firmware regions outside system RAM"?
+> 
+Hmm, your reply initially made me wonder if this was caused by a
+non-compliant downstream device tree on our side, so I checked the
+DT spec and upstream Linux.
 
-Fixes: e2b1ebf4de50 ("x86: Support booting a bzImage format domain 0 kernel.")
-Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Anthony PERARD <anthony.perard@vates.tech>
-Cc: Michal Orzel <michal.orzel@amd.com>
-Cc: Jan Beulich <jbeulich@suse.com>
-Cc: Julien Grall <julien@xen.org>
-Cc: Roger Pau Monné <roger@xenproject.org>
----
- xen/common/gzip/inflate.c | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+The devicetree spec does not seem to explicitly mention whether
+/reserved-memory regions must fall within the range described by
+/memory. From a quick look at early_init_dt_reserve_memory() in Linux,
+the comment there also mentions not worrying if a no-map region is not
+memory as it will not be mapped.
 
-diff --git a/xen/common/gzip/inflate.c b/xen/common/gzip/inflate.c
-index cb146555c8..a40e83b250 100644
---- a/xen/common/gzip/inflate.c
-+++ b/xen/common/gzip/inflate.c
-@@ -603,8 +603,13 @@ static int __init inflate_codes(
-                 } while ((e = (t = t->v.t + ((unsigned)b & mask_bits[e]))->e) > 16);
-             DUMPBITS(t->b);
-             NEEDBITS(s, e);
--            d = w - t->v.n - ((unsigned)b & mask_bits[e]);
-+            d = t->v.n + ((unsigned)b & mask_bits[e]);
-             DUMPBITS(e);
-+
-+            if (d > w + s->bytes_out)
-+                return 1;
-+
-+            d = w - d;
-             Tracevv((stderr,"\\[%d,%d]", w-d, n));
- 
-             /* do the copy */
--- 
-2.47.3
+In upstream Linux device trees, there are cases like
+arch/mips/boot/dts/mobileye/eyeq5.dtsi and eyeq5-epm5.dts, where
+/memory starts at 0x40000000 and 0x802000000, while /reserved-memory
+defines an on-chip sram region nvram@461fe00 with "nvmem-rmem" outside
+/memory.
 
+Our board's device tree is not upstream yet, but it follows a similar
+pattern where /reserved-memory defines "nvmem-rmem" and dma pool
+sub-regions inside on-chip sram outside the dram range described by
+/memory.
+
+Regards,
+Kuan-Wei
 
