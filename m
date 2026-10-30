@@ -2,46 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 59BAE606A31C
-	for <xen-devel@archiver.kernel.org>; Fri, 30 Oct 2026 15:16:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6089A606A31A
+	for <xen-devel@archiver.kernel.org>; Fri, 30 Oct 2026 15:16:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=pFjjXG8d
-Received: from list by lists.xenproject.org with outflank-mailman.1465771.1676210 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=eFLJsk9W
+Received: from list by lists.xenproject.org with outflank-mailman.1465773.1676218 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMoKl-0004Ec-TO; Fri, 30 Oct 2026 15:15:59 +0000
+	id 1xMoKy-0004T6-2o; Fri, 30 Oct 2026 15:16:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1465771.1676210; Fri, 30 Oct 2026 15:15:59 +0000
+Received: by outflank-mailman (output) from mailman id 1465773.1676218; Fri, 30 Oct 2026 15:16:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMoKl-0004EV-PU; Fri, 30 Oct 2026 15:15:59 +0000
-Received: by outflank-mailman (input) for mailman id 1465771;
- Fri, 30 Oct 2026 15:15:58 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xMoKy-0004Sz-04; Fri, 30 Oct 2026 15:16:12 +0000
+Received: by outflank-mailman (input) for mailman id 1465773;
+ Fri, 30 Oct 2026 15:16:10 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <luoyonggang@gmail.com>) id 1xMoKk-0004EP-J1
- for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 15:15:58 +0000
+ (envelope-from <luoyonggang@gmail.com>) id 1xMoKw-0004ST-Jy
+ for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 15:16:10 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xMoKj-00272y-P2
- for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 16:15:57 +0100
-Received: from [10.42.69.10] (helo=localhost)
+ id 1xMoKw-000LGV-0l
+ for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 16:16:10 +0100
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <luoyonggang@gmail.com>)
- id 6ae4b4a5-8faa-0a2a0a5109dd-0a2a450a8476-22
- for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 16:15:57 +0100
-Received: from [74.125.82.180] (helo=mail-dy1-f180.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ae4b49b-bab6-0a2a0a5309dd-0a2a4505a864-36
+ for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 16:16:10 +0100
+Received: from [74.125.82.47] (helo=mail-dl1-f47.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <luoyonggang@gmail.com>)
- id 6ae4b4ac-f2d2-0a2a450a0019-4a7d52b4a817-3
- for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 16:15:57 +0100
-Received: by mail-dy1-f180.google.com with SMTP id
- 5a478bee46e88-35829219da8so2287187eec.0
- for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 08:15:57 -0700 (PDT)
+ id 6ae4b4b8-4cb1-0a2a45050019-4a7d522fa441-3
+ for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 16:16:09 +0100
+Received: by mail-dl1-f47.google.com with SMTP id
+ a92af1059eb24-1438d9363fbso657325c88.0
+ for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 08:16:09 -0700 (PDT)
 Received: from DESKTOP-Q716RM7 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- a92af1059eb24-1ac1854d925sm12770449c88.7.2026.10.30.08.15.45
+ a92af1059eb24-1ac1854d925sm12770449c88.7.2026.10.30.08.15.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 Oct 2026 08:15:54 -0700 (PDT)
+ Fri, 30 Oct 2026 08:16:06 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -50,45 +50,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Content-Type:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793373355; x=1793978155; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:content-type:message-id:date
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=1Rg4bi/F0EGsPeT/kaQ1mX1hyEceGiWztvW5JiOyGZA=;
-        b=pFjjXG8dATu8FpPVygTlVjIjDM464dFFElckrsSuoV51d7KShaMjOuycsvuTKkeVgw
-         EJ1lrg+VreqOaNmWeh80XaXwMaBHaXMNGfDYUu4FsMmkO/4wH55TdCZdisiLPp8wrPbM
-         zgdssfhMxHcvju30JQC9xHmBccDgX4+idZHHuvNiSyypGNa4EX2eANvT+fGLzrFrpptb
-         nOHqoys7+I0utvIofyHUhgcbEi/Dn7bqJeDdV3eA4pL6S9DAceiNbPEUBuyiolstnNce
-         8VpRRa/pHlSszeBdBcy5SZpko75Q7TMqpwRQ0EsPvRGqjPTXv/csSi+S89XAYO8Okwji
-         WCkg==
+        d=gmail.com; s=20260707; t=1793373368; x=1793978168; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=etdm1aeawsytO27AD2qjJhqW2J7wH4UjI2RO2JWtCa8=;
+        b=eFLJsk9WcHEneflZ+0FDNYor5aRmZAt13+fgbMrfmx5U7rBnHqS3C83HCduFtLSc0w
+         oqDWdHD0QnV6D+77G005TzkJ2fxFkJV0hejcX0FPFtrFkcXOYcAm10KfXRksEMAjLlu6
+         5CQu1HMZsBeR7zKMo6IErmZqOhcSk0bZyalzITYaarNkCTD5jGtF6cxSfWe/ARiIfuJs
+         7rglUhps3IFD8o2FfPu1OsX+Mn91gzbK176scd28LH7hnoF7AmLcu6N2mHZ6stDtiqqr
+         +/Wu8kzKveFb7Y6wuPqsfYD3/oRit5vtriXvxZPR2JXtS5j+Uu4FJDOhkqDgfBn+tOID
+         NtVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793373355; x=1793978155;
-        h=content-transfer-encoding:mime-version:content-type:message-id:date
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=1Rg4bi/F0EGsPeT/kaQ1mX1hyEceGiWztvW5JiOyGZA=;
-        b=jupThNIxNUTXsRJoA/1utCl4Ffe0IOJHiN0OT5rfy2/XQz8zOzdXoQ7vobpkvSaUul
-         BcHHpUNOe9bau0FyfTKOQ1MLVgoxIEdbeRJJYtnN9AMvNFGbIRBqfNoUF0P06MWFN9ab
-         J1bqRhJXXcC0B7SqsOvlCRFQh4X3vO2h9Z9pbGCJMFoBSgVqrfAZq5qJ9UfCFWl+S0On
-         DjTlNpHm+xuo95PaZc4lrbSgMsa8rCW3Q4y+luhQiBxiZY5JdgVQ6UNFZMGoeK8CSzGj
-         Sz1lHglayoTx8HJsdF4Z+Otxcypl69lvhXjH6yIHHaM4woeravBA6e2Dxioq6qOLJ9uZ
-         ybTA==
-X-Forwarded-Encrypted: i=1; AKwUvBwqHxeAhH/oxN+9rlPwc+wgsX4hQ65dgDDHyTnJhCuqVxlGefwMFJYq44rKSRMjBMhMbnhZRw4gwoM=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYLWOF4z/HRVH8b463JFcQWjfloe5NYDmaKs3qaYkxHKvrhQAKMQ
-	nCcDTvdh9vNSh0ubS9kLvZKi5R3JEEJ0hSsxdFL2E1CnnpZoJYcUsOjN
-X-Gm-Gg: AYBFou0PKO1ULZyEm06CwU7Z1qLh0I8nx225slEbpLLuwKDzQ5CL0xPuLfOXYdMp5ZF
-	D2FE+NE6A0/q/jAw9oZPnVNhzfFELQHpMg5rm+V4TaCf/NOQVOtkY7OOuC3mFkUzshVRzrgswWN
-	2MTmB3A5CLDfoLO+gfUmSeEkfWidr3VRGRhmuqYm8KiOcAV7NBC6zFiJcwIAdeZ/nLp1S6XPFI0
-	FRvRKXl+hucLgmBS82zgcMzylww570pM7voc5q4sPNHkg7aBMKTuL7K+hOYj0AKMtq3YgobVTxJ
-	2y9BXWladRlTkCfbYAKe9J9Q3qTmsFl5My0aOFC5I3RVpR1subdAx1WmZEi59CqQdWK4g91A0Bj
-	FceQbHHKEiX0ggeDHghlr3k8t1yn8wcdJNO6zYfLL1mhoEaHrEZEF+hFEG7asCAkFDPRjVbTvj6
-	eF9lqwQS91yKgUVTUl1XS0kOChGrSyrK7uk1Q/kWNE+zP2Rjg021qKBHfPCNdzZQAIh0cDsVU7I
-	EjC/NcEOFm7WQ0rtb9pBaQlcNt/ZE+mMYDoSfUnrMVyDJI6k2jRhRBDvfckQu0bQ8mh/me4DVUi
-	cSY7CKZueFwaVDqUSSmHwExfsWQPO/E8vDr0Xg5BpECD3huY
-X-Received: by 2002:a05:7022:f90d:b0:151:7831:e403 with SMTP id a92af1059eb24-1ac5b027fbfmr2873959c88.13.1793373355336;
-        Fri, 30 Oct 2026 08:15:55 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1793373368; x=1793978168;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=etdm1aeawsytO27AD2qjJhqW2J7wH4UjI2RO2JWtCa8=;
+        b=w4qdOVZx8qf2GQsVdbu0KgVRJs5pG0db62jdDVDLQtnN+sTq9er3M2A0admQKbnueb
+         9wtcVoQJW1jSgy+G1qRrP4xZfSdLJLoZF/6gK4Xjn87t+jcVnhjch7OZ3iQu7tIgAYyF
+         X5C+J0WnO3ZcmI60E7fOwgH+dpkQY+cUCKp8BqpzVfKiHt0LAD5cy6guW6oZpW/iY3bK
+         yKnXiyxYxh6k4uZe0svd6Em+YVJik9PRjHKWMYKyMIgtRXC+Z+Wd6ztNjmTlTrI7Q/i/
+         rli37ulhnHvtHgSDYRLz+oAj09ywFcXQXZk49A2MES8PTaPMfMwuGBqTdOQB1Exol2qb
+         cYdw==
+X-Forwarded-Encrypted: i=1; AKwUvBxI1kZQ+T2vxKMWRSprvAoWsMgasfkeDHONY/Chjj9DAXSzxMtP4lE6RagPqqtI8z91kOirxWEglUE=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYK3AeaVfRZb1kBcPZfn+WT3LF+qSN48tjvizB6d6qMk9JbLctGM
+	Pj2YceD0nYwbun/87NirhnjFe//XW7L20xPIo920b9v0AyCcWomAf62k
+X-Gm-Gg: AYBFou10h+TqQZ3O6mwky41QRGJ7MIHDIrjQOwykPOWo1BL2pUJlw3npyykhyUVYErY
+	FchbeTJFooSIXrccasGFd+1uVrfCkqvhg55k7wmT08DWbNcmNo55wsdqhW7G3zH60aVOp+sgxA8
+	QOfVBWFAOATZUIi4/oBPY/439NXTNzPue4kSYno2Gwap3et4B7QvdZ9BmivG0ipb6vwUrZSauBJ
+	rCmD7+MW+jC3WKHbkm2oEXxRssnwmJ8Jo9qSfUHm188CCLRj9VUXw4yVN/bPs8fZhzZ4SlHR8y3
+	mIiTDKc6Pz7U9jXGWYL1IXSYR5so3bjlMdmJAWxu/M92fjBcl010ULsTXBRTCnC69VwKy8/uFMc
+	QCDwqoPqAc36NiZXhKAeQktnDYgrjJoY6ADGXP8I0qGfQL4ZkBFBlsHK/OAbaUeU9DZY+B1x6+M
+	aHg0pF2bVtXyoU+TyxCFxW/AvNSNTg319GAjVn5owXUOyxVBe4V0/eBOVBXwBJnyqCB7evsgstZ
+	3PV51Tt2KALjKHAZLopXtrQ9nXsud4mohQz+3A6peNtHuIj4lHan40yE5ucSkLuchTSV/QH147m
+	7F9C3wibprk2bdUc4pHfyiImG6O890hwbJXSxBVs7G7lSAk20d0pDO/mgYeXKV9/7FzH0Q==
+X-Received: by 2002:a05:7022:ea57:b0:190:716:4822 with SMTP id a92af1059eb24-1ac599f506cmr3074840c88.8.1793373367717;
+        Fri, 30 Oct 2026 08:16:07 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Anthony PERARD <anthony@xenproject.org>,
@@ -132,94 +132,68 @@ Cc: Anthony PERARD <anthony@xenproject.org>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Artyom Tarasenko <atar4qemu@gmail.com>,
 	qemu-arm@nongnu.org
-Subject: [PATCH 00/15] hw: expand DEFINE_MACHINE to explicit TypeInfo registration
-Date: Fri, 30 Oct 2026 23:15:21 +0800
-Message-ID: <20261030151539.1872-1-luoyonggang@gmail.com>
+Subject: [PATCH 01/15] hw/alpha: expand DEFINE_MACHINE in dp264.c
+Date: Fri, 30 Oct 2026 23:15:22 +0800
+Message-ID: <20261030151539.1872-2-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.55.0.windows.3
-Content-Type: text/plain; charset="utf-8"
+In-Reply-To: <20261030151539.1872-1-luoyonggang@gmail.com>
+References: <20261030151539.1872-1-luoyonggang@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1793373357-5A1DDCFC-D0C1BF03/0/0
+X-purgate-ID: tlsNG-c201ff/1793373369-F64B42A1-01679BC7/0/0
 X-purgate-type: clean
-X-purgate-size: 3671
-X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-purgate-size: 1402
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-DEFINE_MACHINE and DEFINE_MACHINE_EXTENDED hide the TypeInfo and the type_init
-function that calls type_register_static(). A later change needs to pass a
-target mask into that registration, and the macros have no parameter for it.
-This series expands every caller first, with no behavior change, so the
-follow-up only replaces the type_register_static() call.
+Expand DEFINE_MACHINE() for the clipper machine to clipper_machine_typeinfo
+and clipper_machine_register_types() calling type_register_static().
 
-Each machine file gains a class_init function, a TypeInfo, and a type_init
-function that calls type_register_static(). The last patch removes
-DEFINE_MACHINE* and DEFINE_SECURE_MACHINE* from include/hw/core/boards.h.
+Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
+---
+ hw/alpha/dp264.c | 18 ++++++++++++++++--
+ 1 file changed, 16 insertions(+), 2 deletions(-)
 
-Yonggang Luo (15):
-  hw/alpha: expand DEFINE_MACHINE in dp264.c
-  hw/m68k: expand DEFINE_MACHINE for M68K machines
-  hw/microblaze: expand DEFINE_MACHINE for MicroBlaze
-  hw/tricore: expand DEFINE_MACHINE in tricore_testboard.c
-  hw/arm: expand DEFINE_MACHINE for ARM machines
-  hw/riscv: expand DEFINE_MACHINE for RISC-V machines
-  hw/core/null-machine: expand DEFINE_MACHINE
-  hw/mips: expand DEFINE_MACHINE for MIPS machines
-  hw/ppc: expand DEFINE_MACHINE for PowerPC machines
-  hw/sh4: expand DEFINE_MACHINE in r2d.c
-  hw/sparc: expand DEFINE_MACHINE in leon3.c
-  hw/xenpv: expand DEFINE_MACHINE in xen_machine_pv.c
-  hw/xtensa: expand DEFINE_MACHINE in sim.c
-  hw/xtensa: expand DEFINE_MACHINE in virt.c
-  hw/core/boards: remove unused DEFINE_MACHINE* macros
-
- hw/alpha/dp264.c                    | 18 +++++++++--
- hw/arm/bananapi_m2u.c               | 18 +++++++++--
- hw/arm/cubieboard.c                 | 19 +++++++++---
- hw/arm/digic_boards.c               | 18 +++++++++--
- hw/arm/imx25_pdk.c                  | 18 +++++++++--
- hw/arm/imx8mm-evk.c                 | 20 +++++++++---
- hw/arm/integratorcp.c               | 14 ++++++---
- hw/arm/kzm.c                        | 18 +++++++++--
- hw/arm/max78000fthr.c               | 17 ++++++++--
- hw/arm/mcimx6ul-evk.c               | 18 +++++++++--
- hw/arm/mcimx7d-sabre.c              | 20 +++++++++---
- hw/arm/msf2-som.c                   | 17 ++++++++--
- hw/arm/netduino2.c                  | 17 ++++++++--
- hw/arm/netduinoplus2.c              | 17 ++++++++--
- hw/arm/olimex-stm32-h405.c          | 18 +++++++++--
- hw/arm/orangepi.c                   | 19 +++++++++---
- hw/arm/stm32vldiscovery.c           | 18 +++++++++--
- hw/core/null-machine.c              | 18 +++++++++--
- hw/m68k/an5206.c                    | 18 +++++++++--
- hw/m68k/mcf5208.c                   | 18 +++++++++--
- hw/microblaze/petalogix_ml605_mmu.c | 19 ++++++++++--
- hw/microblaze/xlnx-zynqmp-pmu.c     | 19 ++++++++++--
- hw/mips/boston.c                    | 18 +++++++++--
- hw/mips/fuloong2e.c                 | 18 +++++++++--
- hw/mips/malta.c                     | 12 ++++++--
- hw/ppc/amigaone.c                   | 18 +++++++++--
- hw/ppc/pegasos.c                    | 21 ++++++++-----
- hw/ppc/ppc440_bamboo.c              | 18 +++++++++--
- hw/ppc/prep.c                       | 18 +++++++++--
- hw/ppc/sam460ex.c                   | 18 +++++++++--
- hw/ppc/virtex_ml507.c               | 18 +++++++++--
- hw/riscv/boston-aia.c               | 18 +++++++++--
- hw/riscv/microblaze-v-generic.c     | 18 +++++++++--
- hw/sh4/r2d.c                        | 18 +++++++++--
- hw/sparc/leon3.c                    | 18 +++++++++--
- hw/tricore/tricore_testboard.c      | 18 +++++++++--
- hw/xenpv/xen_machine_pv.c           | 18 +++++++++--
- hw/xtensa/sim.c                     | 18 +++++++++--
- hw/xtensa/virt.c                    | 18 +++++++++--
- include/hw/core/boards.h            | 48 -----------------------------
- 40 files changed, 605 insertions(+), 142 deletions(-)
-
+diff --git a/hw/alpha/dp264.c b/hw/alpha/dp264.c
+index f928e0cee82..83e9a0853c1 100644
+--- a/hw/alpha/dp264.c
++++ b/hw/alpha/dp264.c
+@@ -201,8 +201,10 @@ static void clipper_init(MachineState *machine)
+     }
+ }
+ 
+-static void clipper_machine_init(MachineClass *mc)
++static void clipper_machine_class_init(ObjectClass *oc, const void *data)
+ {
++    MachineClass *mc = MACHINE_CLASS(oc);
++
+     mc->desc = "Alpha DP264/CLIPPER";
+     mc->init = clipper_init;
+     mc->block_default_type = IF_IDE;
+@@ -213,4 +215,16 @@ static void clipper_machine_init(MachineClass *mc)
+     mc->default_nic = "e1000";
+ }
+ 
+-DEFINE_MACHINE("clipper", clipper_machine_init)
++static const TypeInfo clipper_machine_typeinfo = {
++    .name       = MACHINE_TYPE_NAME("clipper"),
++    .parent     = TYPE_MACHINE,
++    .class_init = clipper_machine_class_init,
++    .instance_size = sizeof(MachineState),
++};
++
++static void clipper_machine_register_types(void)
++{
++    type_register_static(&clipper_machine_typeinfo);
++}
++
++type_init(clipper_machine_register_types)
 -- 
 2.55.0.windows.3
 
