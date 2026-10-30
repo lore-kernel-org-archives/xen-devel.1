@@ -2,61 +2,59 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CD482606A326
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 05:50:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 32DC5606A327
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 05:50:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=i7pWjGsL
-Received: from list by lists.xenproject.org with outflank-mailman.1467445.1676790 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=ipcMkHHV
+Received: from list by lists.xenproject.org with outflank-mailman.1467433.1676749 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNkwC-0003bF-2w; Mon, 02 Nov 2026 05:50:32 +0000
+	id 1xNkw9-0002jQ-HP; Mon, 02 Nov 2026 05:50:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1467445.1676790; Mon, 02 Nov 2026 05:50:31 +0000
+Received: by outflank-mailman (output) from mailman id 1467433.1676749; Mon, 02 Nov 2026 05:50:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNkwB-0003XR-JY; Mon, 02 Nov 2026 05:50:31 +0000
-Received: by outflank-mailman (input) for mailman id 1467445;
- Sun, 01 Nov 2026 20:14:05 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xNkw9-0002gx-73; Mon, 02 Nov 2026 05:50:29 +0000
+Received: by outflank-mailman (input) for mailman id 1467433;
+ Sun, 01 Nov 2026 20:10:45 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <armbru@redhat.com>) id 1xNbwL-0001uw-BE
- for xen-devel@lists.xenproject.org; Sun, 01 Nov 2026 20:14:05 +0000
+ (envelope-from <armbru@redhat.com>) id 1xNbt7-0001on-7G
+ for xen-devel@lists.xenproject.org; Sun, 01 Nov 2026 20:10:45 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xNbwK-002OCu-OX
- for xen-devel@lists.xenproject.org; Sun, 01 Nov 2026 21:14:04 +0100
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xNbt6-007BZx-KR
+ for xen-devel@lists.xenproject.org; Sun, 01 Nov 2026 21:10:44 +0100
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <armbru@redhat.com>)
- id 6ae79d0c-8faa-0a2a0a5109dd-0a2a4509ddc0-44
- for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 21:14:04 +0100
+ id 6ae79c63-bab6-0a2a0a5309dd-0a2a4502d854-26
+ for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 21:10:44 +0100
 Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <armbru@redhat.com>)
- id 6ae79d8b-be1a-0a2a45090019-aa0a857c7775-3
- for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 21:14:04 +0100
-Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ id 6ae79cc3-6ca4-0a2a45020019-aa0a857cec65-3
+ for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 21:10:44 +0100
+Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-90-zUz3wxw2MFW_-TF18iVIrQ-1; Sun,
- 01 Nov 2026 15:13:57 -0500
-Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-400-NyKQmjqwPNCy-wEX0umkxA-1; Sun,
+ 01 Nov 2026 15:10:39 -0500
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 9C6A01800364; Sun,  1 Nov 2026 20:13:53 +0000 (UTC)
+ by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 872EA1801324; Sun,  1 Nov 2026 20:10:34 +0000 (UTC)
 Received: from blackfin.pond.sub.org (unknown [10.44.22.2])
- by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id D5BA37E0; Sun,  1 Nov 2026 20:13:52 +0000 (UTC)
+ by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 853CA30002CF; Sun,  1 Nov 2026 20:10:31 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 8867121E6A04; Sun, 01 Nov 2026 21:13:50 +0100 (CET)
-Resent-To: pasic@linux.ibm.com, 17746591750@163.com, rathc@linux.ibm.com,
- alistair@alistair23.me, stefanb@linux.vnet.ibm.com, graf@amazon.com,
- xen-devel@lists.xenproject.org, FangSheng.Huang@amd.com, luc@lmichel.fr,
- michael.roth@amd.com, jamin_lin@aspeedtech.com, kane_chen@aspeedtech.com,
- palmer@dabbelt.com, rbolshakov@ddn.com, foss@defmacro.it,
- sebastian.huber@embedded-brains.de, fam@euphon.net,
+ id 0F7E521E6A04; Sun, 01 Nov 2026 21:10:29 +0100 (CET)
+Resent-To: 17746591750@163.com, alistair@alistair23.me, graf@amazon.com,
+ FangSheng.Huang@amd.com, michael.roth@amd.com, jamin_lin@aspeedtech.com,
+ kane_chen@aspeedtech.com, palmer@dabbelt.com, rbolshakov@ddn.com,
+ foss@defmacro.it, sebastian.huber@embedded-brains.de, fam@euphon.net,
  jiaxun.yang@flygoat.com, lizhijian@fujitsu.com, atar4qemu@gmail.com,
  edgar.iglesias@gmail.com, jasowangio@gmail.com, liwei1518@gmail.com,
  npiggin@gmail.com, zhangckid@gmail.com, titusr@google.com,
@@ -65,26 +63,28 @@ Resent-To: pasic@linux.ibm.com, 17746591750@163.com, rathc@linux.ibm.com,
  its@irrelevant.dk, clg@kaod.org, conor@kernel.org, david@kernel.org,
  jic23@kernel.org, kbusch@kernel.org, mchehab+huawei@kernel.org,
  sstabellini@kernel.org, peter.maydell@linaro.org,
- richard.henderson@linaro.org, zhiwei_liu@linux.alibaba.com,
- zhenwei.pi@linux.dev, adityag@linux.ibm.com, alifm@linux.ibm.com,
- amachhiw@linux.ibm.com, borntraeger@linux.ibm.com,
- brueckner@linux.ibm.com, farman@linux.ibm.com, harshpb@linux.ibm.com,
- iii@linux.ibm.com, jjherne@linux.ibm.com, milesg@linux.ibm.com,
- mjrosato@linux.ibm.com, lixianglai@loongson.cn, maobibo@loongson.cn,
- pbarbuda@microsoft.com, yoshinori.sato@nifty.com, qemu-arm@nongnu.org,
- qemu-block@nongnu.org, qemu-devel@nongnu.org, qemu-ppc@nongnu.org,
- qemu-riscv@nongnu.org, qemu-s390x@nongnu.org, john.levon@nutanix.com,
- thanos.makatos@nutanix.com, kfting@nuvoton.com, den@openvz.org,
- elena.ufimtseva@oracle.com, jag.raman@oracle.com,
- daniel.barboza@oss.qualcomm.com, philmd@oss.qualcomm.com,
- pierrick.bouvier@oss.qualcomm.com, phil@philjordan.eu,
- tangtao1634@phytium.com.cn, chao.liu@processmission.com, jiri@resnulli.us,
- sam@rfc1149.net, anisa.su@samsung.com, alex@shazbot.org, farosas@suse.de,
+ richard.henderson@linaro.org, pasic@linux.ibm.com,
+ zhiwei_liu@linux.alibaba.com, rathc@linux.ibm.com, zhenwei.pi@linux.dev,
+ stefanb@linux.vnet.ibm.com, adityag@linux.ibm.com,
+ xen-devel@lists.xenproject.org, alifm@linux.ibm.com, luc@lmichel.fr,
+ lixianglai@loongson.cn, maobibo@loongson.cn, pbarbuda@microsoft.com,
+ yoshinori.sato@nifty.com, qemu-arm@nongnu.org, qemu-block@nongnu.org,
+ qemu-devel@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
+ qemu-s390x@nongnu.org, john.levon@nutanix.com, thanos.makatos@nutanix.com,
+ kfting@nuvoton.com, den@openvz.org, elena.ufimtseva@oracle.com,
+ jag.raman@oracle.com, daniel.barboza@oss.qualcomm.com,
+ philmd@oss.qualcomm.com, pierrick.bouvier@oss.qualcomm.com,
+ phil@philjordan.eu, tangtao1634@phytium.com.cn,
+ chao.liu@processmission.com, jiri@resnulli.us, sam@rfc1149.net,
+ anisa.su@samsung.com, alex@shazbot.org, farosas@suse.de,
  mohamed@unpredictable.fr, kvm@vger.kernel.org, linux-cxl@vger.kernel.org,
- alistair.francis@wdc.com, anthony@xenproject.org
+ alistair.francis@wdc.com, anthony@xenproject.org, amachhiw@linux.ibm.com,
+ borntraeger@linux.ibm.com, brueckner@linux.ibm.com, farman@linux.ibm.com,
+ harshpb@linux.ibm.com, iii@linux.ibm.com, jjherne@linux.ibm.com,
+ milesg@linux.ibm.com, mjrosato@linux.ibm.com
 Resent-From: Markus Armbruster <armbru@redhat.com>
-Resent-Date: Sun, 01 Nov 2026 21:13:50 +0100
-Resent-Message-ID: <87wlqwz4w1.fsf@pond.sub.org>
+Resent-Date: Sun, 01 Nov 2026 21:10:29 +0100
+Resent-Message-ID: <87mrrs1fey.fsf@pond.sub.org>
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -95,20 +95,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:Resent-To:Resent-From:Resent-Message-ID:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1793564043;
+	s=mimecast20190719; t=1793563843;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:resent-to:
 	 resent-from:resent-message-id:in-reply-to:in-reply-to:  references:references;
-	bh=dG6QdUgPpDE3LmNNjTQwdz8vTAxBziYTzulA/MP9vJ8=;
-	b=i7pWjGsL4BiGUHnTjqIz4DcWaxIo7PlE0LWJwgAdJGDun1Juzf8uYCi7M9rtXDo7A48wAi
-	jGT/H7h/TNoRzmoeK0FamZ1wItUul171G5LZGRKHlKbeAZDi3RrQqrtUqty0m4uUcPd/Wt
-	YTXT0jc7j2/JWXo2FirRg4/BN29orbc=
-X-MC-Unique: zUz3wxw2MFW_-TF18iVIrQ-1
-X-Mimecast-MFC-AGG-ID: zUz3wxw2MFW_-TF18iVIrQ_1793564033
+	bh=ky1zk6thScAqYqHATy6gr4bYU7NPm4fM3/3dmXxNTDM=;
+	b=ipcMkHHVNn4QrHMLx3E6fwiF5lHC+SP6F1aNi94Fo1duxua91vv1JmnxAFyxUdHfdJRfvE
+	NUITM9fxHGgEZvpT+V5qvSJf18aigeOCGl5ER/mCTPXMFmZ/2CpwHtuMtPgEdgRi5S+2XP
+	YeOfxj5AMWlEm+jlaqM2HjZQtONJY2o=
+X-MC-Unique: NyKQmjqwPNCy-wEX0umkxA-1
+X-Mimecast-MFC-AGG-ID: NyKQmjqwPNCy-wEX0umkxA_1793563835
 From: Markus Armbruster <armbru@redhat.com>
 To: =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>
-Cc: qemu-devel@nongnu.org,  Markus Armbruster <armbru@redhat.com>,  Michael
+Cc: Markus Armbruster <armbru@redhat.com>,  qemu-devel@nongnu.org,  Michael
  Roth <michael.roth@amd.com>,  John Snow <jsnow@redhat.com>,  Peter Maydell
  <peter.maydell@linaro.org>,  Mauro Carvalho Chehab
  <mchehab+huawei@kernel.org>,  Pierrick Bouvier
@@ -172,124 +172,65 @@ Cc: qemu-devel@nongnu.org,  Markus Armbruster <armbru@redhat.com>,  Michael
  <atar4qemu@gmail.com>,  Yoshinori Sato <yoshinori.sato@nifty.com>,  Jiri
  Pirko <jiri@resnulli.us>,  Eric Auger <eric.auger@redhat.com>,  Laurent
  Vivier <lvivier@redhat.com>
-Subject: Re: [PATCH v7 44/65] hw/nvdimm: convert UUID property to QAPI-aware
+Subject: Re: [PATCH v7 38/65] qom: convert scalar properties to QAPI-aware
  registration
-In-Reply-To: <20261020-qom-qapi-v7-44-431a86b02b58@redhat.com>
- (=?utf-8?Q?=22Marc-Andr=C3=A9?=
-	Lureau"'s message of "Tue, 20 Oct 2026 14:46:01 +0400")
+In-Reply-To: <CAMxuvaya+Tihnwjf8JNjhmhBMwE7XpTF8zPL7tbfb8DFiAV62g@mail.gmail.com>
+	(=?utf-8?Q?=22Marc-Andr=C3=A9?= Lureau"'s message of "Fri, 30 Oct 2026
+ 13:01:17 +0400")
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
-	<20261020-qom-qapi-v7-44-431a86b02b58@redhat.com>
-Date: Sun, 01 Nov 2026 18:39:55 +0100
-Message-ID: <871p9478no.fsf@pond.sub.org>
+	<20261020-qom-qapi-v7-38-431a86b02b58@redhat.com>
+	<87y0bfa81j.fsf@pond.sub.org>
+	<CAMxuvaya+Tihnwjf8JNjhmhBMwE7XpTF8zPL7tbfb8DFiAV62g@mail.gmail.com>
+Date: Fri, 30 Oct 2026 10:31:46 +0100
+Message-ID: <87bj8ba60t.fsf@pond.sub.org>
 User-Agent: Gnus/5.13 (Gnus v5.13)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
-X-Mimecast-MFC-PROC-ID: fRcQlqkfHrErry8Nnrn4-ZJxVXHk7asxQJAr1bI1FpA_1793564033
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
+X-Mimecast-MFC-PROC-ID: yuyzVa-YXpsZFrQ8NjNo5CLvsY9AR-Cw81GZN1UXIaY_1793563835
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-bad1c0/1793564044-BCAC8034-980AA31F/0/0
+X-purgate-ID: tlsNG-720697/1793563844-F04A62AC-519362EB/0/0
 X-purgate-type: clean
-X-purgate-size: 3079
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-purgate-size: 888
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=unavailable
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=unavailable
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com> writes:
 
-> Add a QemuUUID_type_info and use object_property_add_qapi() instead of
-> object_property_add() for the nvdimm UUID property.
+> Hi
 >
-> The type info is defined manually in uuid.c rather than generated,
-> since QAPI does not yet support string typedefs. An alternative would
-> be to extend the QAPI schema language with a 'typedef' construct
-> (e.g. { 'typedef': 'UUID', 'data': 'str' }), which would let the
-> generator produce the type info, C typedef, and introspection entry
-> automatically.
+> On Fri, Oct 30, 2026 at 12:48=E2=80=AFPM Markus Armbruster <armbru@redhat=
+.com> wrote:
+>>
+>> Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com> writes:
+>>
+>> > Reviewed-by: Amit Machhiwal <amachhiw@linux.ibm.com>
+>> > Signed-off-by: Markus Armbruster <armbru@redhat.com>
+>> > Signed-off-by: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
+>>
+>> How did you create this patch?  It looks almost mechanical.
 >
-> Alternatively, the exposed type being a string, we could change the
-> property to be str_type_info.
+> Repeated grep / multi-cursor in zed iirc
 >
-> Signed-off-by: Markus Armbruster <armbru@redhat.com>
-> Signed-off-by: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
-> ---
->  hw/mem/nvdimm.c     | 4 ++--
->  include/qemu/uuid.h | 4 ++++
->  util/uuid.c         | 5 +++++
->  3 files changed, 11 insertions(+), 2 deletions(-)
+>>
+>> It misses a few conversions, almost certainly in code added since you
+>> made this patch.  I can take care of them.
 >
-> diff --git a/hw/mem/nvdimm.c b/hw/mem/nvdimm.c
-> index 123ddc938546..b7ccb5c93678 100644
-> --- a/hw/mem/nvdimm.c
-> +++ b/hw/mem/nvdimm.c
-> @@ -104,8 +104,8 @@ static void nvdimm_init(Object *obj)
->                               nvdimm_get_label_size, nvdimm_set_label_siz=
-e, NULL,
->                               NULL);
-> =20
-> -    object_property_add(obj, NVDIMM_UUID_PROP, "QemuUUID", nvdimm_get_uu=
-id,
-> -                        nvdimm_set_uuid, NULL, NULL);
-> +    object_property_add_qapi(obj, NVDIMM_UUID_PROP, &QemuUUID_type_info,
-> +                             nvdimm_get_uuid, nvdimm_set_uuid, NULL, NUL=
-L);
->  }
-> =20
+> Not surprising after several months.
 
-Let's pass &str_type_info, like the next patch does, because ...
+Not at all.  Almost surprised it's so few.
 
->  static void nvdimm_finalize(Object *obj)
-> diff --git a/include/qemu/uuid.h b/include/qemu/uuid.h
-> index 869f84af09dd..ed0c62327d4d 100644
-> --- a/include/qemu/uuid.h
-> +++ b/include/qemu/uuid.h
-> @@ -16,6 +16,8 @@
->  #ifndef QEMU_UUID_H
->  #define QEMU_UUID_H
-> =20
-> +#include "qapi/qapi-type-info.h"
-> +
-> =20
->  /* Version 4 UUID (pseudo random numbers), RFC4122 4.4. */
-> =20
-> @@ -99,4 +101,6 @@ QemuUUID qemu_uuid_bswap(QemuUUID uuid);
-> =20
->  uint32_t qemu_uuid_hash(const void *uuid);
-> =20
-> +extern const QAPITypeInfo QemuUUID_type_info;
-> +
->  #endif
-> diff --git a/util/uuid.c b/util/uuid.c
-> index 234619dd5e69..363a03051aba 100644
-> --- a/util/uuid.c
-> +++ b/util/uuid.c
-> @@ -17,6 +17,11 @@
->  #include "qemu/uuid.h"
->  #include "qemu/bswap.h"
-> =20
-> +const QAPITypeInfo QemuUUID_type_info =3D {
-> +    .name =3D "QemuUUID",
-> +    .masked_name =3D "str",
-> +};
-> +
+[...]
 
-... the only difference to str_type_info is @name.
+> Are you working on v8 or should I start rebasing?
 
-In v7, @name is used as value of ObjectPropertyInfo /
-ObjectPropertyValue member @type.  Your manual QAPITypeInfo lets you
-preserve the value of @type.
-
-It isn't used that way v8 (which I'll post real soon now).  It preserves
-@type values differently.  The problem discussed in the commit message
-doesn't exist then, so I'll cut it some.
-
->  void qemu_uuid_generate(QemuUUID *uuid)
->  {
->      int i;
+I think it's overall less work if I do v8 at this point.
 
 
