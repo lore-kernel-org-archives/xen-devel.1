@@ -2,64 +2,41 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 36A27606A31C
-	for <xen-devel@archiver.kernel.org>; Fri, 30 Oct 2026 11:05:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C8EB606A31C
+	for <xen-devel@archiver.kernel.org>; Fri, 30 Oct 2026 11:13:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=dvdCG35R
-Received: from list by lists.xenproject.org with outflank-mailman.1465554.1676066 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=suBFj4It
+Received: from list by lists.xenproject.org with outflank-mailman.1465567.1676082 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMkQE-0000y8-6b; Fri, 30 Oct 2026 11:05:22 +0000
+	id 1xMkXo-0002wp-3E; Fri, 30 Oct 2026 11:13:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1465554.1676066; Fri, 30 Oct 2026 11:05:22 +0000
+Received: by outflank-mailman (output) from mailman id 1465567.1676082; Fri, 30 Oct 2026 11:13:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMkQE-0000y1-3c; Fri, 30 Oct 2026 11:05:22 +0000
-Received: by outflank-mailman (input) for mailman id 1465554;
- Fri, 30 Oct 2026 11:05:21 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xMkXo-0002wi-0R; Fri, 30 Oct 2026 11:13:12 +0000
+Received: by outflank-mailman (input) for mailman id 1465567;
+ Fri, 30 Oct 2026 11:13:11 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1xMkQD-0000xv-CI
- for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 11:05:21 +0000
+ (envelope-from <peter.maydell@linaro.org>) id 1xMkXm-0002wc-Uv
+ for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 11:13:10 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xMkQC-00GVjB-IA
- for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 12:05:20 +0100
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xMkXm-00DIwp-3C
+ for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 12:13:10 +0100
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6ae479ed-e002-0a2a0a5209dd-0a2a4509884c-22
- for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 12:05:20 +0100
-Received: from [52.101.56.13]
- (helo=BN1PR04CU002.outbound.protection.outlook.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6ae479e9-be1a-0a2a45090019-3465380d9239-3
- for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 12:05:14 +0100
-Received: from BN9P221CA0020.NAMP221.PROD.OUTLOOK.COM (2603:10b6:408:10a::32)
- by PH7PR12MB6441.namprd12.prod.outlook.com (2603:10b6:510:1fb::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.569.9; Fri, 30 Oct
- 2026 11:05:07 +0000
-Received: from BN3PEPF00022BC1.namprd04.prod.outlook.com
- (2603:10b6:408:10a:cafe::1d) by BN9P221CA0020.outlook.office365.com
- (2603:10b6:408:10a::32) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.569.7 via Frontend Transport; Fri, 30
- Oct 2026 11:05:07 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- BN3PEPF00022BC1.mail.protection.outlook.com (10.167.248.120) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.569.4 via Frontend Transport; Fri, 30 Oct 2026 11:05:07 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Fri, 30 Oct
- 2026 06:05:05 -0500
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb10.amd.com
- (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Fri, 30 Oct
- 2026 06:05:05 -0500
-Received: from [192.168.31.141] (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.53 via Frontend
- Transport; Fri, 30 Oct 2026 06:05:03 -0500
+ (envelope-from <peter.maydell@linaro.org>)
+ id 6ae47bc5-2eae-0a2a0a5409dd-0a2a4502bf80-2
+ for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 12:13:10 +0100
+Received: from [209.85.128.172] (helo=mail-yw1-f172.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <peter.maydell@linaro.org>)
+ id 6ae47bc4-6ca4-0a2a45020019-d15580acddc9-3
+ for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 12:13:09 +0100
+Received: by mail-yw1-f172.google.com with SMTP id
+ 00721157ae682-8b09e07e149so4552287b3.1
+ for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 04:13:09 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -68,183 +45,118 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=V/haRyWrQI/TsXQmqnJRydgIR+Y9UF8fLV0YWMTgMxSYs+8Zdv8qJLMG6ViG5H/ZbV0WDKjSuWsJ8jDcmm7O2e8fXwak/NZ6VN/vvoVnqoBhauVPtcN19aVJgrtWL+6elHpCeYzZbp1kU6L9eRIZM6cIK7eOAgU2GLrLgR/CtxrqqmgLRttUtVck7diTgpZuT2p+TdVA4RoRlGUPw6jGkU7gsApLqRGaRBTEg35uwlgW2V5/mxbX3jXB34S/8Bnab3jRgqoylV8QsEcBHlhIchLNo0yZw7xPa2SKrA+//g9AJYzUKJvz+qJQCI/24gofm7Ejd2OQ0qsYi7rFFjk/cw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=YgGSe5eZc8SlUXO4dgxVFymdQe2k8NNy8kYwGxCq9/I=;
- b=tIeV/2cAf1lc935jso1Tnj/ZFMfS+y7QwtiFabc5/TmZtXJ4tpMVRNuWW1HEt34stiD60fxpfVaMYDDDhANujhTYXn/7EuS4jr+KDEHnHeny/Mp5K4pYBKZc7OMZRoEB3hhDLpsabYzHiCnr6Rm5R3i4r+ZTvRF3+m7FCa79npHBVkNa7nr1Cr66MMvwdo+EXqAIgmKNcdqOJJI10znr/xHyvuFPGNFb/PcsWszuE4DDvOicNy90+2JaULrv7XtEUCSlrIsO5JNMzd1srWSj1v3UEgHU/XaUNWeQ8lYK3QfmBKynFWmpHFgBhHtXYXAZN7wUs+HUCj8N1rzzn9zy7w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=gmail.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YgGSe5eZc8SlUXO4dgxVFymdQe2k8NNy8kYwGxCq9/I=;
- b=dvdCG35Rdcf2ckSGFpxKGCBmPRaPip0ptBdJSOwByGM+278MGdMXa+0sWFnO3TB9nVin0u+6VqPZOK8hGL1+/kWumA03S7g8XGhZJb7Az72Hqd5Xr2zBaaIrscdkCNIsVAt+wHKWlMMMxQn6uYbckooPfi99XSt2kTiO5lAktIk=
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Message-ID: <d25a667b-5126-4c57-b379-c31c4e7645c6@amd.com>
-Date: Fri, 30 Oct 2026 12:04:58 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=linaro.org header.i="@linaro.org" header.h="Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
+ARC-Seal: i=1; a=rsa-sha256; t=1793358788; cv=none;
+        d=google.com; s=arc-20260327;
+        b=Na1GaoRi1eGZrn3g5vqFilW/4j874AQ3hj5iXQTk4gnLtpTroytsDyXxwvbrnpGZ4I
+         zyQ2bqt3Ppec5wyz6jfI8qT2EzH/hiIXamaxam+Z2FS7tbDy8KgO7gPVxswyQAblJycY
+         7k9DWOZt3rQlzF1LcA4uDUqNsrkQxb8wurEMhNSz1Ry+wqxjIQ4Bf+aHf5BAamlQq9DL
+         Mt+N2717Zon0w5/HIUApW28lHYkiDqpchlFkmyRNhr2qOM/mrbnpoy+oJFRvZyXeKJAE
+         5IeKL2FgCcG6BfKISx32M9lOoRzfZ2ZFIptJWZWKpqe/4evYkz6rC1m12Sammg9ayW7Q
+         z1Cw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=5LUWZT5k5KvOS94ligsCtD+U9+DDcG+IL6eyG0y0saE=;
+        fh=3EgVbjOIb5K9tD+0KroAY8Fz8mPHYGh8aQONqXayqLk=;
+        b=gQOuOxDfrcvzetgU2Q6rq4EBDYFfzGB9I0SiGm4a4GFmXQAd4IQJwpv7tTxbXCjAr5
+         W9/ANVBL0q37+bGlAFCrB7Vh04ps3jmpu+1pm6GCYL1lSBfFrfN+dscXSB30U19E8RdP
+         pzommA7XKCK4dlPQiItL3Wu0Xfen+SMOpOoI4ikRN6QfAZo5+hiYDhWjPMJdp7lAnMCD
+         4iaaF72iUtGN2Op2m+uHdQ6hZB4sOZI4GKu6W892K6nTeEsOJWg4J4ZWkDtuibLqcyd0
+         +WZvCTlWlKdsiA6y79rmVksv83LfFq3xhEbwElQH6YdERsVSGAElqWKWfdrvGWJXLnjK
+         G0wQ==;
+        darn=lists.xenproject.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1793358788; x=1793963588; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=5LUWZT5k5KvOS94ligsCtD+U9+DDcG+IL6eyG0y0saE=;
+        b=suBFj4It3KqeCQVvJrwgYiLCbBfMK+Mfi93VtvbHzRx61ZBgngxx3oXBDwG+lfiRgX
+         nfSDvwBHGHBERZ0H1V3EAdEFVLUgypWabufELVLcrHJL3guklt+R0YjW++3FN3dgHBHt
+         wq2lfRgtYHSc4I4tpqq3jIGFzGxZheHKy5CovH0d4KrBm5il2IWqrZQs6lV70aEqwJ5W
+         ce2odTMPaqhThYUYeOgaDAlOlo4HRi5pJTknb42nXNANNFCjxtYB02gPufXrxucG4v2A
+         yuC6AEIoYWXNqPIynoXme51Anl1PtqjllsV6Lr4d42cqYtaNuPnH9o0qlJSwHhSBbVul
+         yryA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793358788; x=1793963588;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=5LUWZT5k5KvOS94ligsCtD+U9+DDcG+IL6eyG0y0saE=;
+        b=eN0DYMhq7HUoJIV6JtGJY2JpO/47T7mqDV3GV1+ptlFwOtHWWAV4dIsZwfWl7T6Dpx
+         SWee/2F9ngDhHK3QLFGz2Wx4K3l8ZC/NEx3a84pSYIxJOiOYMIKgwUy6DUU8vfHOIQxr
+         be6Rz4oUWy2zpNDD/Q3DsO1XY81RYCKTbGy+OCN3gtZEAxUEdvn8FeZdGNXenYfAGmWm
+         oLknxPr68p0HxFNvYCXtway1f7AJm9S9oV+BBhVfMjRcpmJGevb4k3RHCLY9xAxtTMDb
+         rl5U5dKsZ40M2gbuR5aBQcHt6F+TCzlSIbcY7BiwvxKUQhec9yl+fA7PyoQudxR0jmri
+         YVwA==
+X-Forwarded-Encrypted: i=1; AKwUvBzAdQeGlYo3DwrXklshR5/TMx6nMDSjoMj0TNhH5GzM7eduWwOdbdVvLmMpMCSggDks/b12VwxKV4U=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYJrdFxPMKg0nRhHXmalTKnlunPt2uMMnMyoZktOQFdX9qlKoTQf
+	zOwdDm9JjK0sO5PJV9emOZi7ikcwLFC77MdtZrn3nQDcSoGPNNxSKHMF+2lzlFkcqOjJl4XSjaC
+	SJx0UYXCT0diN9ofcST387reDDK2tZ0WNzBtTAuJswg==
+X-Gm-Gg: AYBFou3A1Q+g91flhGJH2LbRlW7mcQCeIhG8KI/c+m4J3ivhfgUGjK6aSjMbizFzQxR
+	GR7n/MTFubX6idvngflBf/PaUPcWBxKc5u0fqngNAtqgYlzPCVqKnn/1LKPCwOrohWU1b3wTNqh
+	slbpGq79eEHK/0VjOjsMhVhdsZmRkOwFw/r6NA5xtFgaB6gurug9s5PWqu9XQm0u6tQlC3wPrFr
+	d1CQLgONYQeaCZlvOnVdzQI4dilZWSMw/xD4DCnBPkS2nlXTtjSG/9Sb6cMWfOjUTa0cZ8d6DB2
+	ihwa7zk7NK/xykhmOS0LSLc6FJJHZ3XVpGH52Enp+/tI2NGxqqJC+lgv3bcwSTOvK3u5H7DSK/B
+	EOcRckJUKuxo5hBQXoIIJxmh1Bq6X1MsJ7SIvnME1POb5MsEt2hHZmyhtMVzSyECTkxowi1Sbqw
+	mq4eINEMc50cSJHz1Il8mKgg==
+X-Received: by 2002:a05:690c:e1d9:10b0:8b0:f0cc:db0e with SMTP id
+ 00721157ae682-8b2b676ba6fmr7498147b3.78.1793358788267; Fri, 30 Oct 2026
+ 04:13:08 -0700 (PDT)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/dt: Skip non-RAM reserved-memory regions in
- make_memory_node()
-To: Kuan-Wei Chiu <visitorckw@gmail.com>, <xen-devel@lists.xenproject.org>
-CC: <sstabellini@kernel.org>, <julien@xen.org>, <bertrand.marquis@arm.com>,
-	<marscheng@google.com>, <jserv@ccns.ncku.edu.tw>, <eleanor15x@gmail.com>
-References: <20261028211737.17629-1-visitorckw@gmail.com>
-From: "Orzel, Michal" <michal.orzel@amd.com>
-Content-Language: en-US
-In-Reply-To: <20261028211737.17629-1-visitorckw@gmail.com>
+References: <20260911143627.2743803-1-berrange@redhat.com> <20260911143627.2743803-10-berrange@redhat.com>
+In-Reply-To: <20260911143627.2743803-10-berrange@redhat.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Fri, 30 Oct 2026 11:12:55 +0000
+X-Gm-Features: AclHuK8tWRtaAMh4OSG81o0Myk5Bd8TN4g8UgRz9NIr2z73xVEtamgvTgzkRr-c
+Message-ID: <CAFEAcA8GwF=EdaqvO7OBNZY1ku8LWNH5giveZYXSVnmk9JWfng@mail.gmail.com>
+Subject: Re: [PATCH 09/28] hw/net: mark e1000, e1000e, IGB, rtl8139 & sPAPR
+ VLAN as secure
+To: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>
+Cc: qemu-devel@nongnu.org, xen-devel@lists.xenproject.org, 
+	qemu-riscv@nongnu.org, qemu-ppc@nongnu.org, qemu-block@nongnu.org, 
+	qemu-s390x@nongnu.org, qemu-arm@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF00022BC1:EE_|PH7PR12MB6441:EE_
-X-MS-Office365-Filtering-Correlation-Id: d4db8161-aafd-4f89-1c4d-08df3675a857
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700016|82310400026|23010399003|376014|1800799024|22082099003|18002099003|56012099006|11063799006|261028144727099003|261021123027099003|261021121427099003|261026121527099003|261009223027099003|261022105027099003|261026140227099003|10067099003;
-X-Microsoft-Antispam-Message-Info:
-	yYthCAqnN2LbsIMIpo4iQ3Q+CgaloQIva15oQIiH8BFBVzEjCmIQRpnSwD4SAmCAVR+R06GPO4ur2Vd/FU5AAU5ttpN5a95EoJmNa29jMyYF64DgFPBDE6WJwMf43i4h5yuc9GA9/Ypv98NZtN2Vuv0r0Zl0/4labHQNu1DK3LFz0TTqDqETjlMrPLzSFl1YirRfTqHIslTC4Kje3ratNmzIe81fsBFyUCRT7G12MiiJKazBfxNWv5BmbtQF8d9TYqqk2liobAMP37xUns/APYF+76IQr/srvuLybAONqZA+g/GfiuG85F2af0aJPAGeoZxWcJ/lbfWYJquJ+2jEqCZr8nlbLgTcUm/Cdz/n0a+tT3Afo6x7GXrIND1/rsV5OiWTEKDDRA3T2GYFRh1wBMalp54tKOc0muOXiZLBg2iJxd4kyh0l0rQWJhGZZBm0QuVc0FhRXB1iY7lyw+rX79xDXzqeQgmINiiWSGrwVi7i1+CibbWwpZZkLWYC0sZlCxeWzJqoUdNCAtj6PtH5PYMUAGlrVrlNAnjbCQLEzvNKC7Y08gBPCY0595a3219Cg1OqqVt8y0CuujVjDqJXwznhOBdiNsU/EnIZJ10b6WssP0hJF0ZeA1fXJkMKIQ5S5etLEfOBTBXa4ky8tnpPsJaqe0F4tVxC1+knTGIaWjSHtrjp5a26VU4I9Z4COo+tOI3SbTnrgD2VkF9Yn/v8Lw==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(82310400026)(23010399003)(376014)(1800799024)(22082099003)(18002099003)(56012099006)(11063799006)(261028144727099003)(261021123027099003)(261021121427099003)(261026121527099003)(261009223027099003)(261022105027099003)(261026140227099003)(10067099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	QJA1s32+LzoGY7uQIZRhmfa5CYPwAAblWw0mS653o4d9/dPp3yonBpqjsFFAlPqeGit5AzFxS3nZophDZyaHX3OSdBqDw4+KBqAvlFpT1HE72JEaS3ogQKSY1vR9EvBm8OOSnw7jR00XnCSy+b6IVIBzlaBoWtQlBwqSM5RJtBCxQsvGDz5F4Cx6hg8tw4vJkFq4lt4c4BvqPSfKEcxsUdn6J1DhTEil4osYEAB9BSUNcBK6RGCZwFMoZi/VtAl/CbMhc5/4NXmL03wo+IS6ApypqtHszz2tua5d+n+jx7Xa2YJD5qHYXmLDkLX4hzSgW1uXm+5bgcq4C8m0J53eGyT3ghWn89EX8wn3rcPR7ShczC4RMen82W5NyFqW3PAdA4+AJ7/GXQRP4hxhTyt/4B6QgYo29TGjeJ6BtxAfwBmVtqi4rBb7B2/fhJcMDSx6
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Oct 2026 11:05:07.2836
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d4db8161-aafd-4f89-1c4d-08df3675a857
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	BN3PEPF00022BC1.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6441
-X-purgate-ID: tlsNG-bad1c0/1793358319-BC6CA034-A67FE3A5/0/0
+Content-Transfer-Encoding: quoted-printable
+X-purgate-ID: tlsNG-720697/1793358789-F04A62AC-6B977E93/0/0
 X-purgate-type: clean
-X-purgate-size: 3913
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=4.0.1
+X-purgate-size: 919
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY autolearn=unavailable autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+On Fri, 11 Sept 2026 at 15:42, Daniel P. Berrang=C3=A9 <berrange@redhat.com=
+> wrote:
+>
+> Historically most NICs are only interesting for non-virtualization
+> use cases and have not been written with malicious guests in mind.
+>
+> As a general rule either virtio-net or xen-net should be used in
+> all virtualized guests requiring a security boundary.
+>
+> There are a handful of exceptions resulting from historical usage
+> in the x86 world, to support virtualized guests lacking virtio
+> support.
+>
+> Thus the rtl8139, e1000, e1000e & IGB NICs are declared to provide
+> a security boundary.
 
+You've said in several bugs (e.g.
+https://gitlab.com/qemu-project/qemu/-/work_items/3872 )
+that igb wasn't covered by the virtualization use case.
 
-On 28-Oct-26 22:17, Kuan-Wei Chiu wrote:
-> Xen creates a second /memory node for Dom0 from
-> bootinfo_get_reserved_mem() without checking whether those regions
-> belong to host RAM. However, /reserved-memory can also describe
-> on-chip SRAM or firmware regions outside system RAM. Listing them in a
-> /memory node causes Dom0 to register non-RAM addresses as system RAM,
-> conflicting with device MMIO mappings.
-Hmm, I always thought that /reserved-memory is to exclude regions from memory
-described under /memory. That's what Xen assumes too. map_range_to_domain() for
-example does not call iomem_permit_access() for such regions because we assume
-it's RAM. Can you provide more details of your board e.g. the device tree? Is
-there any documentation I could use to confirm that "reserved-memory can also
-describe on-chip SRAM or firmware regions outside system RAM"?
+I don't care either way, but I wanted to check since I've been
+marking igb bugs as non-confidential when triaging on the
+basis of that...
 
-~Michal
-
-> 
-> Skip reserved-memory banks outside the host RAM banks reported by
-> bootinfo_get_mem() in make_memory_node().
-> 
-> Fixes: 248faa637d2f ("xen/arm: add reserved-memory regions to the dom0 memory node")
-> Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
-> ---
-> Found while trying to bring up Xen on new hardware.
-> Tested on real silicon.
-> 
->  xen/common/device-tree/domain-build.c | 42 +++++++++++++++++++++++++--
->  1 file changed, 39 insertions(+), 3 deletions(-)
-> 
-> diff --git a/xen/common/device-tree/domain-build.c b/xen/common/device-tree/domain-build.c
-> index 30a59abfa7..33baf150a6 100644
-> --- a/xen/common/device-tree/domain-build.c
-> +++ b/xen/common/device-tree/domain-build.c
-> @@ -504,6 +504,34 @@ int __init make_chosen_node(const struct kernel_info *kinfo)
->      return res;
->  }
->  
-> +static bool __init is_in_host_ram(const struct membank *bank)
-> +{
-> +    const struct membanks *ram = bootinfo_get_mem();
-> +    paddr_t start = bank->start;
-> +    paddr_t end = start + bank->size;
-> +    unsigned int i;
-> +
-> +    if ( !bank->size || end < start )
-> +        return false;
-> +
-> +    for ( i = 0; i < ram->nr_banks; i++ )
-> +    {
-> +        paddr_t ram_start = ram->bank[i].start;
-> +        paddr_t ram_end = ram_start + ram->bank[i].size;
-> +
-> +        if ( start < ram_start )
-> +            return false;
-> +
-> +        if ( end <= ram_end )
-> +            return true;
-> +
-> +        if ( start < ram_end )
-> +            start = ram_end;
-> +    }
-> +
-> +    return false;
-> +}
-> +
->  int __init make_memory_node(const struct kernel_info *kinfo, int addrcells,
->                              int sizecells, const struct membanks *mem)
->  {
-> @@ -513,14 +541,20 @@ int __init make_memory_node(const struct kernel_info *kinfo, int addrcells,
->      int nr_cells = 0;
->      __be32 reg[DT_MEM_NODE_REG_RANGE_SIZE];
->      __be32 *cells;
-> +    bool is_resv = (mem == bootinfo_get_reserved_mem());
->  
->      if ( mem->nr_banks == 0 )
->          return -ENOENT;
->  
->      /* find the first memory range that is reserved for device (or firmware) */
-> -    for ( i = 0; i < mem->nr_banks &&
-> -                 (mem->bank[i].type != MEMBANK_DEFAULT); i++ )
-> -        ;
-> +    for ( i = 0; i < mem->nr_banks; i++ )
-> +    {
-> +        if ( mem->bank[i].type != MEMBANK_DEFAULT )
-> +            continue;
-> +        if ( is_resv && !is_in_host_ram(&mem->bank[i]) )
-> +            continue;
-> +        break;
-> +    }
->  
->      if ( i == mem->nr_banks )
->          return 0;
-> @@ -544,6 +578,8 @@ int __init make_memory_node(const struct kernel_info *kinfo, int addrcells,
->          if ( (mem->bank[i].type == MEMBANK_STATIC_DOMAIN) ||
->               (mem->bank[i].type == MEMBANK_FDT_RESVMEM) )
->              continue;
-> +        if ( is_resv && !is_in_host_ram(&mem->bank[i]) )
-> +            continue;
->  
->          nr_cells += reg_size;
->          BUG_ON(nr_cells > ARRAY_SIZE(reg));
-
+thanks
+-- PMM
 
