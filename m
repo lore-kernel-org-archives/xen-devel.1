@@ -2,46 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7CA94606A31D
-	for <xen-devel@archiver.kernel.org>; Fri, 30 Oct 2026 15:17:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CB271606A31A
+	for <xen-devel@archiver.kernel.org>; Fri, 30 Oct 2026 15:18:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=xD+5p/lN
-Received: from list by lists.xenproject.org with outflank-mailman.1465819.1676290 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=XQtqfBM5
+Received: from list by lists.xenproject.org with outflank-mailman.1465825.1676299 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMoMP-0008Ur-5g; Fri, 30 Oct 2026 15:17:41 +0000
+	id 1xMoMa-0000Vp-Gx; Fri, 30 Oct 2026 15:17:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1465819.1676290; Fri, 30 Oct 2026 15:17:41 +0000
+Received: by outflank-mailman (output) from mailman id 1465825.1676299; Fri, 30 Oct 2026 15:17:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMoMP-0008Uf-1T; Fri, 30 Oct 2026 15:17:41 +0000
-Received: by outflank-mailman (input) for mailman id 1465819;
- Fri, 30 Oct 2026 15:17:40 +0000
+	id 1xMoMa-0000Vi-Dp; Fri, 30 Oct 2026 15:17:52 +0000
+Received: by outflank-mailman (input) for mailman id 1465825;
+ Fri, 30 Oct 2026 15:17:50 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <luoyonggang@gmail.com>) id 1xMoMN-0008GK-SS
- for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 15:17:39 +0000
+ (envelope-from <luoyonggang@gmail.com>) id 1xMoMY-0000TC-Sq
+ for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 15:17:50 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xMoMN-00DIKy-92
- for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 16:17:39 +0100
-Received: from [10.42.69.7] (helo=localhost)
+ id 1xMoMY-0027Pl-9a
+ for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 16:17:50 +0100
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <luoyonggang@gmail.com>)
- id 6ae4b4fc-e002-0a2a0a5209dd-0a2a450791f2-42
- for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 16:17:39 +0100
-Received: from [74.125.82.52] (helo=mail-dl1-f52.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ae4b50f-8faa-0a2a0a5109dd-0a2a45029166-22
+ for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 16:17:50 +0100
+Received: from [74.125.82.41] (helo=mail-dl1-f41.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <luoyonggang@gmail.com>)
- id 6ae4b511-b4ea-0a2a45070019-4a7d5234cc56-3
- for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 16:17:39 +0100
-Received: by mail-dl1-f52.google.com with SMTP id
- a92af1059eb24-170135e43c7so1230168c88.0
- for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 08:17:38 -0700 (PDT)
+ id 6ae4b51c-6ca4-0a2a45020019-4a7d5229adba-3
+ for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 16:17:50 +0100
+Received: by mail-dl1-f41.google.com with SMTP id
+ a92af1059eb24-15dd124bbe7so1423108c88.1
+ for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 08:17:49 -0700 (PDT)
 Received: from DESKTOP-Q716RM7 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- a92af1059eb24-1ac1854d925sm12770449c88.7.2026.10.30.08.17.27
+ a92af1059eb24-1ac1854d925sm12770449c88.7.2026.10.30.08.17.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 Oct 2026 08:17:36 -0700 (PDT)
+ Fri, 30 Oct 2026 08:17:47 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,43 +52,43 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793373457; x=1793978257; darn=lists.xenproject.org;
+        d=gmail.com; s=20260707; t=1793373468; x=1793978268; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=gGfzDRU1LJ6XJUC1FoxM7ZI/nsagUrCZ0XaVKskAYMY=;
-        b=xD+5p/lN7mV9RKKOYOMliDNj+ZHEQzKC8jUy6B0Z+oAUhBaKS8x93lyVYs2XsYBmZZ
-         tNedX+H32itdOeQseIwp9Rv46MuR5/rwBiPX3EVWQ+GIS4eJfKyAzCuWPXFG0tyMgrMG
-         5PdA3MVIf/OFtKFe8thvBFJ/M78uq+t06eiFgB9IXWJKGQUppWNMkH/E/zMQ/+g0oOFk
-         3sXobGv3J4Schr7zO4NO4aPlGRWO7sq4OmBMriPhQdNMctk+y8M9ts6UyMd081P+42Mi
-         zCHqyGdXf/chnW+82dOgbHuVwjBRb1z3pI7bXoG/9HKRbaZDPVU20UWYxVcYOp3Ewv15
-         91gw==
+        bh=BKYw1CARIGHPsFEBA2gFzPiJ4otfJ5ejgAQP620fQvg=;
+        b=XQtqfBM5JEUvB0l5QxiDdCt9ac0S8BMSiyS6OCTM5u5SNkmtbFM0UY2UDGsCPjp92U
+         ucdHYlkQNwYmNc+th0Mx/nTdMrWuq1N6tod7+6nassosMpxlXeqL26p+FLzBXev3qKLp
+         cozphZWIctrIPIZNk98w9SHMheOHFw9xYk/uonWqOgwYQzsXcIQF9IBx0KBkuQwJGEXo
+         v3GEVEn0aOqGDfjRFu72/GInUtG0A0YnWiLIKf5Uf3e1AvzgMZ25qOKGC4D38OXzaUoU
+         ADfrseVZhfWsOy0oXCS64hpIZ0vXpFsV+GypsQPsV4+xs64Z3HVsmj6f6OLHoOFbW1Z/
+         0KNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793373457; x=1793978257;
+        d=1e100.net; s=20260707; t=1793373468; x=1793978268;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=gGfzDRU1LJ6XJUC1FoxM7ZI/nsagUrCZ0XaVKskAYMY=;
-        b=UqUEvHbO72609UURgYDbQTfLrPFc674ut8zVEEseJqUP9utBJ3GtTCUtQav2pEr6y2
-         r+Na81Tl2ZA3U1UNOc+xi3ay0Cs/I08ou12fphHLRu9X7YAWMKkPqADv0lhPkiDY8Zsr
-         CxyyTYSOtztIFl97ew/4qXecjhAJDkANvLyT5A+ST6irZHzKy+rS284IweVeLT9p0iKc
-         6xpOrOyJ2fplGyOJZTG9rlIsVIBs5fK7ZntocQPQ5biRVRzIDv6c2qt8g4JNRnriqavM
-         z3weZ7lziwVfk7cwNnPh0oA29fRvGm5A+joFSDmFK58d2iMXUamjmx6CEGu9oK0PPTse
-         N+bg==
-X-Forwarded-Encrypted: i=1; AKwUvBzWKh9ZwX8mT02PTtCZJOBFd46//UT/f5rpei9XywDHtvk0+w5eVjUni1AVnO2LZJX1Yc/Gb4+7lHI=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYL2N7OpWm/j9JR1ahK4zAnhGzb4uyJoeZ5wpYdQgcQFULbIATIG
-	z6D3dbdakxN3vYTFkVuTrTjrTlmSvlMdaLw9/SYtu6tVXkoaEgNpvn5b
-X-Gm-Gg: AYBFou0a0uc9qtQulGGMBdcombMeuANZ8+H2ET4ktT7qpUMlrOcUaIM1NDGbiKpHc2O
-	oERvlEm5vpCaP9f2er6SKnBqQhXJ/BvcEE+CgmgaFyN52BWPFgdXQh8VcIFJQGrEaB7PP55lGD2
-	d7iH1O52E5rxB2F+abNUJT16vlWfmx4/xakHVsYT9/xNOSe6VGUZir4IJWQvyVg4D8McOl8n6E7
-	rAKL1BubLnz4WtDNoZ0xWM0Udiy9WIYC7FC8lgYglPe7GkwKX4Zpd78jD/XD3Il40a13ESPDAYZ
-	1ZHZGvbOyfiZfq2kRakyAH5sl/bmLf2EMKDK5+9CN4N5p6wBencuyG0v1cdcWh9EMfIfn40PDAz
-	+Wq3dtAaV3t+Li3spUft7dsOHRoh59YcQ0qe15yG8cSvuHYPkmxCXPvX/Fh0uZRAOZ9AbrTGKsr
-	O/Cr16lpX0yEpFF5BadVtwVuJXQ0nIH+ZAO5IuCvbxBelMKxj7t1+hbU/EWMb359q8FWvxDXsFy
-	r1E+GUqi5r7LigvNtwVQxq1t22VCnMxUy/DpC8vxY4jUkbPDlzHJwMT3a89m3ARNiy98ippGzYt
-	DEfvByhUE+kwFg+tOO7TIAqKpwnB1Zr042SGDHHd181nPagK
-X-Received: by 2002:a05:701b:4589:b0:19b:39f4:88c9 with SMTP id a92af1059eb24-1ac5bbb487bmr3398481c88.10.1793373456937;
-        Fri, 30 Oct 2026 08:17:36 -0700 (PDT)
+        bh=BKYw1CARIGHPsFEBA2gFzPiJ4otfJ5ejgAQP620fQvg=;
+        b=oDP+s0ATMocZCZsUWrRGlUvthF+gXwgluG04PrEmLxCPpixuWOEMpN8Yvja0M1Vmqp
+         u2FPqrPu60J2z6vYM47e8JmHN6dIL2HFMgPSZSxlkBQAuMChPaCLGmzh0Q+Js8k93oMi
+         SDJQHxpJVKHXlhlIQ0KLhgK0apB8R+I7L6Kub71oqPINavs/yz/b7QKNv2gNrIT5uSR0
+         pF+Q2YkQGc42Um71hEgGZi4osPMO0fVKqrd8qlbcjYzSOz2h3Gok+aE7nayOOPWyFPqp
+         LsKzpYDh0/xN4dP9qNfCUxip9Ubp86KfwF25NpLqKUGGwyFMWgWkYZeiO4nTaF4GzCo9
+         Wv6Q==
+X-Forwarded-Encrypted: i=1; AKwUvBzLN+VdazE/tDnm3KEW7LRVqM1HJ7psuE8VPSHs+QvtURZ4p5D5zPKrWmyVruGdaBvWNcB2RFl+iKI=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYJJYt86n+8r3FauYRXkqxRvK4ASyrZaXYfeRvyrlW0+znQifo1F
+	lxFEbNi9ETeSahOnIBsWcRNhcvz/jRpqDsrUDs9PAJSzNhKnsbX2kieP
+X-Gm-Gg: AYBFou0F5k5GdYuq92VYQY+UBTynaWDWmLtqPQAPjyaBpxqT1fUlAgbKwUY4fGGLm4x
+	gIrm4OG6L8pf8vwEX84kBHvKEiJD4gCQrIdd1w3V7Zw61cwLaTnHiT6NUMjf8tD8eVqNM8ZPpqK
+	mDqqpZCc/K3PhzXgu+dqXp56ADCuoU/ZbEE6KhaiovIh0yJhqNAV4AqXyNUPWf7SlAsGkkVZHao
+	i31+nLiWHPxTzkwsE53nCSQnUrlpGCvv5futhyppEfHmqpzCmC76UaUWaHRY55HbfbRpVI8W8qL
+	OOBjIMFPdcGbx0s0JijMm1v51nVq/Wq2UQ9H1VHcJnTako4C0Bqf/BrsomaGUyWN3KVhTbSCppZ
+	H9bUVsxzNAG7RQX3DrdaA//1eFr4nESEx7GTjQt38LMjct3MCyF4hqX730H/XaJ/LMc5CyrotCT
+	0JugsEVgJJ4AtUHQQK5F9SxmpIfgRrEnh3OgBlnyi4NudwZVRxDE+b8TNKqA+j1LQcqPrSvOgsX
+	Jl5quAHQLAmzpsrdI81uKyqKLxN71H8AG9LU6bGWQqE37Yq6hjmKgx2WIhB+ixTQX8fQfw2FUxI
+	corwngVC5HbHpQNZ8N/CTGNhIo/N3b+TJrpx8NX+xbk39+SB
+X-Received: by 2002:a05:7022:eb42:20b0:186:4a57:94e5 with SMTP id a92af1059eb24-1ac5c272744mr3802599c88.34.1793373467893;
+        Fri, 30 Oct 2026 08:17:47 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Anthony PERARD <anthony@xenproject.org>,
@@ -132,18 +132,18 @@ Cc: Anthony PERARD <anthony@xenproject.org>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Artyom Tarasenko <atar4qemu@gmail.com>,
 	qemu-arm@nongnu.org
-Subject: [PATCH 09/15] hw/ppc: expand DEFINE_MACHINE for PowerPC machines
-Date: Fri, 30 Oct 2026 23:15:30 +0800
-Message-ID: <20261030151539.1872-10-luoyonggang@gmail.com>
+Subject: [PATCH 10/15] hw/sh4: expand DEFINE_MACHINE in r2d.c
+Date: Fri, 30 Oct 2026 23:15:31 +0800
+Message-ID: <20261030151539.1872-11-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.55.0.windows.3
 In-Reply-To: <20261030151539.1872-1-luoyonggang@gmail.com>
 References: <20261030151539.1872-1-luoyonggang@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1793373459-A60C5AE4-37474557/0/0
+X-purgate-ID: tlsNG-720697/1793373470-315CD2AC-82E857BE/0/0
 X-purgate-type: clean
-X-purgate-size: 7750
+X-purgate-size: 1362
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
@@ -152,231 +152,48 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Expand DEFINE_MACHINE() and DEFINE_MACHINE_EXTENDED() in the PowerPC
-machine files to explicit TypeInfo and type_register_static() calls,
-adding the pegasos base machine to pegasos_machine_types[] in
-hw/ppc/pegasos.c.
+Expand DEFINE_MACHINE() in hw/sh4/r2d.c to r2d_machine_typeinfo and
+r2d_machine_register_types() calling type_register_static().
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 ---
- hw/ppc/amigaone.c      | 18 ++++++++++++++++--
- hw/ppc/pegasos.c       | 21 ++++++++++++++-------
- hw/ppc/ppc440_bamboo.c | 18 ++++++++++++++++--
- hw/ppc/prep.c          | 18 ++++++++++++++++--
- hw/ppc/sam460ex.c      | 18 ++++++++++++++++--
- hw/ppc/virtex_ml507.c  | 18 ++++++++++++++++--
- 6 files changed, 94 insertions(+), 17 deletions(-)
+ hw/sh4/r2d.c | 18 ++++++++++++++++--
+ 1 file changed, 16 insertions(+), 2 deletions(-)
 
-diff --git a/hw/ppc/amigaone.c b/hw/ppc/amigaone.c
-index 2e94e80b569..3cd3e92d2d8 100644
---- a/hw/ppc/amigaone.c
-+++ b/hw/ppc/amigaone.c
-@@ -416,8 +416,10 @@ static void amigaone_init(MachineState *machine)
-     }
+diff --git a/hw/sh4/r2d.c b/hw/sh4/r2d.c
+index 99afe3618e8..fb80c935ea6 100644
+--- a/hw/sh4/r2d.c
++++ b/hw/sh4/r2d.c
+@@ -378,8 +378,10 @@ static void r2d_init(MachineState *machine)
+                        SDRAM_BASE + BOOT_PARAMS_OFFSET);
  }
  
--static void amigaone_machine_init(MachineClass *mc)
-+static void amigaone_machine_class_init(ObjectClass *oc, const void *data)
+-static void r2d_machine_init(MachineClass *mc)
++static void r2d_machine_class_init(ObjectClass *oc, const void *data)
  {
 +    MachineClass *mc = MACHINE_CLASS(oc);
 +
-     mc->desc = "Eyetech AmigaOne/Mai Logic Teron";
-     mc->init = amigaone_init;
+     mc->desc = "r2d-plus board";
+     mc->init = r2d_init;
      mc->block_default_type = IF_IDE;
-@@ -427,4 +429,16 @@ static void amigaone_machine_init(MachineClass *mc)
-     mc->default_ram_size = 512 * MiB;
+@@ -387,4 +389,16 @@ static void r2d_machine_init(MachineClass *mc)
+     mc->default_nic = "rtl8139";
  }
  
--DEFINE_MACHINE("amigaone", amigaone_machine_init)
-+static const TypeInfo amigaone_machine_typeinfo = {
-+    .name       = MACHINE_TYPE_NAME("amigaone"),
+-DEFINE_MACHINE("r2d", r2d_machine_init)
++static const TypeInfo r2d_machine_typeinfo = {
++    .name       = MACHINE_TYPE_NAME("r2d"),
 +    .parent     = TYPE_MACHINE,
-+    .class_init = amigaone_machine_class_init,
++    .class_init = r2d_machine_class_init,
 +    .instance_size = sizeof(MachineState),
 +};
 +
-+static void amigaone_machine_register_types(void)
++static void r2d_machine_register_types(void)
 +{
-+    type_register_static(&amigaone_machine_typeinfo);
++    type_register_static(&r2d_machine_typeinfo);
 +}
 +
-+type_init(amigaone_machine_register_types)
-diff --git a/hw/ppc/pegasos.c b/hw/ppc/pegasos.c
-index fba2a558905..ffa63456320 100644
---- a/hw/ppc/pegasos.c
-+++ b/hw/ppc/pegasos.c
-@@ -732,8 +732,9 @@ static bool pegasos_setprop(MachineState *ms, const char *path,
-     return true;
- }
- 
--static void pegasos_machine_init(MachineClass *mc)
-+static void pegasos_machine_class_init(ObjectClass *oc, const void *data)
- {
-+    MachineClass *mc = MACHINE_CLASS(oc);
-     PPCVirtualHypervisorClass *vhc = PPC_VIRTUAL_HYPERVISOR_CLASS(mc);
-     VofMachineIfClass *vmc = VOF_MACHINE_CLASS(mc);
- 
-@@ -787,13 +788,19 @@ static void pegasos2_machine_class_init(ObjectClass *oc, const void *data)
-     mc->default_cpu_type = POWERPC_CPU_TYPE_NAME("7457_v1.2");
- }
- 
--DEFINE_MACHINE_EXTENDED("pegasos", MACHINE, PegasosMachineState,
--                        pegasos_machine_init, true, false,
--                        (const InterfaceInfo[]) {
--                        { TYPE_PPC_VIRTUAL_HYPERVISOR },
--                        { TYPE_VOF_MACHINE_IF }, { } })
--
- static const TypeInfo pegasos_machine_types[] = {
-+    {
-+        .name          = MACHINE_TYPE_NAME("pegasos"),
-+        .parent        = TYPE_MACHINE,
-+        .class_init    = pegasos_machine_class_init,
-+        .instance_size = sizeof(PegasosMachineState),
-+        .abstract      = true,
-+        .interfaces    = (const InterfaceInfo[]) {
-+            { TYPE_PPC_VIRTUAL_HYPERVISOR },
-+            { TYPE_VOF_MACHINE_IF },
-+            { }
-+        },
-+    },
-     {
-         .name          = MACHINE_TYPE_NAME("pegasos1"),
-         .parent        = TYPE_PEGASOS_MACHINE,
-diff --git a/hw/ppc/ppc440_bamboo.c b/hw/ppc/ppc440_bamboo.c
-index 2dde008b0e4..401f7bee572 100644
---- a/hw/ppc/ppc440_bamboo.c
-+++ b/hw/ppc/ppc440_bamboo.c
-@@ -256,8 +256,10 @@ static void bamboo_init(MachineState *machine)
-     }
- }
- 
--static void bamboo_machine_init(MachineClass *mc)
-+static void bamboo_machine_class_init(ObjectClass *oc, const void *data)
- {
-+    MachineClass *mc = MACHINE_CLASS(oc);
-+
-     mc->desc = "bamboo";
-     mc->init = bamboo_init;
-     mc->default_cpu_type = POWERPC_CPU_TYPE_NAME("440epb");
-@@ -265,4 +267,16 @@ static void bamboo_machine_init(MachineClass *mc)
-     mc->default_nic = "e1000";
- }
- 
--DEFINE_MACHINE("bamboo", bamboo_machine_init)
-+static const TypeInfo bamboo_machine_typeinfo = {
-+    .name       = MACHINE_TYPE_NAME("bamboo"),
-+    .parent     = TYPE_MACHINE,
-+    .class_init = bamboo_machine_class_init,
-+    .instance_size = sizeof(MachineState),
-+};
-+
-+static void bamboo_machine_register_types(void)
-+{
-+    type_register_static(&bamboo_machine_typeinfo);
-+}
-+
-+type_init(bamboo_machine_register_types)
-diff --git a/hw/ppc/prep.c b/hw/ppc/prep.c
-index 2672eb9e7a7..4afc4e20c67 100644
---- a/hw/ppc/prep.c
-+++ b/hw/ppc/prep.c
-@@ -441,8 +441,10 @@ static void ibm_40p_init(MachineState *machine)
-     }
- }
- 
--static void ibm_40p_machine_init(MachineClass *mc)
-+static void ibm_40p_machine_class_init(ObjectClass *oc, const void *data)
- {
-+    MachineClass *mc = MACHINE_CLASS(oc);
-+
-     mc->desc = "IBM RS/6000 7020 (40p)",
-     mc->init = ibm_40p_init;
-     mc->max_cpus = 1;
-@@ -456,4 +458,16 @@ static void ibm_40p_machine_init(MachineClass *mc)
-     machine_add_audiodev_property(mc);
- }
- 
--DEFINE_MACHINE("40p", ibm_40p_machine_init)
-+static const TypeInfo ibm_40p_machine_typeinfo = {
-+    .name       = MACHINE_TYPE_NAME("40p"),
-+    .parent     = TYPE_MACHINE,
-+    .class_init = ibm_40p_machine_class_init,
-+    .instance_size = sizeof(MachineState),
-+};
-+
-+static void ibm_40p_machine_register_types(void)
-+{
-+    type_register_static(&ibm_40p_machine_typeinfo);
-+}
-+
-+type_init(ibm_40p_machine_register_types)
-diff --git a/hw/ppc/sam460ex.c b/hw/ppc/sam460ex.c
-index b13dd224ba1..934ae3874c3 100644
---- a/hw/ppc/sam460ex.c
-+++ b/hw/ppc/sam460ex.c
-@@ -509,8 +509,10 @@ static void sam460ex_init(MachineState *machine)
-     boot_info->entry = entry;
- }
- 
--static void sam460ex_machine_init(MachineClass *mc)
-+static void sam460ex_machine_class_init(ObjectClass *oc, const void *data)
- {
-+    MachineClass *mc = MACHINE_CLASS(oc);
-+
-     mc->desc = "aCube Sam460ex";
-     mc->init = sam460ex_init;
-     mc->block_default_type = IF_IDE;
-@@ -519,4 +521,16 @@ static void sam460ex_machine_init(MachineClass *mc)
-     mc->default_ram_id = "ppc4xx.sdram";
- }
- 
--DEFINE_MACHINE("sam460ex", sam460ex_machine_init)
-+static const TypeInfo sam460ex_machine_typeinfo = {
-+    .name       = MACHINE_TYPE_NAME("sam460ex"),
-+    .parent     = TYPE_MACHINE,
-+    .class_init = sam460ex_machine_class_init,
-+    .instance_size = sizeof(MachineState),
-+};
-+
-+static void sam460ex_machine_register_types(void)
-+{
-+    type_register_static(&sam460ex_machine_typeinfo);
-+}
-+
-+type_init(sam460ex_machine_register_types)
-diff --git a/hw/ppc/virtex_ml507.c b/hw/ppc/virtex_ml507.c
-index 09686360e16..2a4c8c9fc93 100644
---- a/hw/ppc/virtex_ml507.c
-+++ b/hw/ppc/virtex_ml507.c
-@@ -281,12 +281,26 @@ static void virtex_init(MachineState *machine)
-     env->load_info = &boot_info;
- }
- 
--static void virtex_machine_init(MachineClass *mc)
-+static void virtex_machine_class_init(ObjectClass *oc, const void *data)
- {
-+    MachineClass *mc = MACHINE_CLASS(oc);
-+
-     mc->desc = "Xilinx Virtex ML507 reference design";
-     mc->init = virtex_init;
-     mc->default_cpu_type = POWERPC_CPU_TYPE_NAME("440-xilinx");
-     mc->default_ram_id = "ram";
- }
- 
--DEFINE_MACHINE("virtex-ml507", virtex_machine_init)
-+static const TypeInfo virtex_machine_typeinfo = {
-+    .name       = MACHINE_TYPE_NAME("virtex-ml507"),
-+    .parent     = TYPE_MACHINE,
-+    .class_init = virtex_machine_class_init,
-+    .instance_size = sizeof(MachineState),
-+};
-+
-+static void virtex_machine_register_types(void)
-+{
-+    type_register_static(&virtex_machine_typeinfo);
-+}
-+
-+type_init(virtex_machine_register_types)
++type_init(r2d_machine_register_types)
 -- 
 2.55.0.windows.3
 
