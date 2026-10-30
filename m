@@ -2,52 +2,50 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8CA6C606A334
-	for <xen-devel@archiver.kernel.org>; Fri, 30 Oct 2026 13:32:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5DDEF606A31A
+	for <xen-devel@archiver.kernel.org>; Fri, 30 Oct 2026 13:33:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=D7vbbvLy
-Received: from list by lists.xenproject.org with outflank-mailman.1465678.1676146 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=UZrFhFb3
+Received: from list by lists.xenproject.org with outflank-mailman.1465686.1676155 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMmid-0001vS-E2; Fri, 30 Oct 2026 13:32:31 +0000
+	id 1xMmjt-0002Rm-Pn; Fri, 30 Oct 2026 13:33:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1465678.1676146; Fri, 30 Oct 2026 13:32:31 +0000
+Received: by outflank-mailman (output) from mailman id 1465686.1676155; Fri, 30 Oct 2026 13:33:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMmid-0001vJ-A2; Fri, 30 Oct 2026 13:32:31 +0000
-Received: by outflank-mailman (input) for mailman id 1465678;
- Fri, 30 Oct 2026 13:32:29 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a18d02efef000cae1@swg.vates.tech>)
- id 1xMmib-0001vD-GI
- for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 13:32:29 +0000
+	id 1xMmjt-0002Rf-N2; Fri, 30 Oct 2026 13:33:49 +0000
+Received: by outflank-mailman (input) for mailman id 1465686;
+ Fri, 30 Oct 2026 13:33:48 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xMmjr-0002RN-T3
+ for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 13:33:48 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xMmia-001qg5-Pp
- for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 14:32:28 +0100
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xMmjr-0036bZ-2T
+ for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 14:33:47 +0100
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a18d02efef000cae1@swg.vates.tech>)
- id 6ae49c5b-2eae-0a2a0a5409dd-0a2a4501b6b4-24
- for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 14:32:28 +0100
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a18d043096000cae1@swg.vates.tech>)
+ id 6ae49cb0-2eae-0a2a0a5409dd-0a2a450ce5f6-42
+ for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 14:33:46 +0100
 Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a18d02efef000cae1@swg.vates.tech>)
- id 6ae49c6b-5984-0a2a45010019-b9ff1c229447-3
- for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 14:32:28 +0100
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a18d043096000cae1@swg.vates.tech>)
+ id 6ae49cba-f479-0a2a450c0019-b9ff1c2294a3-3
+ for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 14:33:46 +0100
 Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
  (Authenticated sender:
  8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
  by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a18d02efef000cae1.007 for <xen-devel@lists.xenproject.org>
+ 1a18d043096000cae1.007 for <xen-devel@lists.xenproject.org>
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Fri, 30 Oct 2026 13:32:22 +0000
+ Fri, 30 Oct 2026 13:33:44 +0000
 Received: from leducb.tail4c4a28.ts.net
  (areims-651-1-80-194.w90-18.abo.wanadoo.fr [90.18.187.194])
  (Authenticated sender: baptiste.le-duc)
- by mail2.vates.fr (Postfix) with ESMTPSA id 691F28080D;
- Fri, 30 Oct 2026 14:32:21 +0100 (CET)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 9DAC48080D;
+ Fri, 30 Oct 2026 14:33:43 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -56,23 +54,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:Feedback-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=CLWf9iffvY1JaPLYZX9LqaFI6UMZCbZf3V/Hq/+nM/c=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:feedback-id;
- b=D7vbbvLyyMi0l1iQEQ/gdw4eCg9QK2yRR+Xi01UddIYOEVwLpEXDU6uB/z+fItB15Sw174Sou
- Df8wa0ygG24/AUjdsGS7XclhKzG/cMY3hPpw2+C7EIuqknaEcQX2Pyu6DjeS0N6wTqHBUtEOjp4
- xcezdzEurMjhoCcHkORfDKideVvXOinAont8CBXURELmpbprQ7NeV4pGeEevpAXsCCYPuxtLz/Q
- mTP/YhYHTl6AZ9sGXunSTaRoqcx4i1ujxQkzDu1bGv4lZFulafA4ho/vv9pLI5qoBLugmAVFP4D
- qweRCqOZjyYzgsYJ60ZG8RMk8HjDUnrr7P2d2V2qAK2A==
-X-Zone-Loop: 7f0a09b2084fd4a13aa1e3193fde1e72c89020f59277
+ q=dns/txt; s=selector1; bh=uZekbsuzdZ47vjdPUnT6YTrIsIVlipeCtgmht957FgQ=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
+ b=UZrFhFb3TZH4ocAoT0K/buJVsYJzEps3oQcJTczBaF8pxQ0wc7Cq3fJtTdKorw0W00GYykkbJ
+ XXMRPUuCz5rgxbFjmALj4+w7KhmTWjfufxAzZXM/NeEgkJzUdfWizGrMzemiFT17Puci7KhKosZ
+ x2ZP4obeMpHHtm1egeVS5IhP05JqTg5h8w0orVs9gBbwsSX3AKg2THpVxr14g3IsGP40PRdNY/f
+ iUkEObwNa66O8f4rYV3i/CJ8WugVWW2w7L7EL7/UFW4YqXp6nwT42uJ9oVM/VNF69HsZU8E514t
+ lE893bFdhxYatRadHizJs0t9JmB0O4toBI98IXvR+zgQ==
+X-Zone-Loop: 06821ee805a64260789f1f52955a03fec0cbab4ea75c
 x-campaign-type: default
-x-transaction-id: 36d6fbf8-a271-4234-b90b-0e0f49dd8958
-x-swg-uid: 01-9f68f065-3416-4c35-874c-c9bba8ad1f18
+x-transaction-id: 9a87e8d1-122f-4313-b5cd-6c98708f3d9c
+x-swg-uid: 01-0c9e93fb-8399-451c-94ea-7f547dc3c4c3
 X-Mailer: Sweego
 Message-ID:
- <1793367142.8631fc262581453bbf619ec5b2062170.1a18d02efef000cae1@vates.tech>
-x-swg-bid: 1793367142.8631fc262581453bbf619ec5b2062170.1a18d02efef000cae1
+ <1793367224.8631fc262581453bbf619ec5b2062170.1a18d043096000cae1@vates.tech>
+x-swg-bid: 1793367224.8631fc262581453bbf619ec5b2062170.1a18d043096000cae1
 Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
 x-campaign-id: default
 x-client-id: 8631fc262581453bbf619ec5b2062170
@@ -90,173 +88,235 @@ Cc: Baptiste Le Duc <baptiste.le-duc@vates.tech>,
 	Connor Davis <connojdavis@gmail.com>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Zheng Zhang <zhangzheng@iscas.ac.cn>
-Subject: [PATCH v11 0/1] xen/riscv: fix boot on missing extensions and MMU setup bugs
-Date: Fri, 30 Oct 2026 14:32:16 +0100
+Subject: [PATCH v11 1/1] xen/riscv: probe the A/D update scheme if the DT advertises neither
+Date: Fri, 30 Oct 2026 14:33:39 +0100
+In-Reply-To: <1793367142.8631fc262581453bbf619ec5b2062170.1a18d02efef000cae1@vates.tech>
+References: <1793367142.8631fc262581453bbf619ec5b2062170.1a18d02efef000cae1@vates.tech>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-X-Change-ID: 20260902-riscv-fix-boot-missing-ext-a79c23bad694
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793367077; l=6757; i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id; bh=wPUCEZc8059rY1ai1e9M9I0u+MiDy5uAV8GQf+R8kCY=; b=2hENqEvEgahWUJc5qpP0vhj1Bd9znOS4fmAEtHTWBU+B0DYAbk0kERXEXXx+tgKwYX8Cy6p+S dg81/XXO36UDmi97c4gVLZSUt6ONFEyM/KTqCWCv6VqDVwV9eMUoo4Q
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793367077; l=8283; i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id; bh=Qo8d/oA2NwYtIy4Cpg226Vk6pvsySrr3THLteLMKNI0=; b=BrxUf9Q8yXJqlkqSk4HpsMMLISCjZFmpMasI/9Fhm9s4OxQFy+WII4by+s0DZKC5bjsskgzrD dfZbz5Ym3s1A23rj+XPJrnDUoAMpiCnvkAjm6KrD3dFWXbt6agM6LQh
 X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519; pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
 Content-Transfer-Encoding: 8bit
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1793367141637
-X-purgate-ID: tlsNG-d62444/1793367148-BCD44757-0BC6D2D2/0/0
-X-purgate-type: clean
-X-purgate-size: 6759
+X-Bm-Transport-Timestamp: 1793367223836
+X-purgate-ID: tlsNG-d25034/1793367226-50D3CA5B-5CB75267/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 8285
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY autolearn=ham autolearn_force=no version=4.0.1
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-This series introduces bug fixes that were found while bringing up CI
-support for the HiFive Premier P550 board with a basic smoke test. The
-board-support series itself will follow separately as it depends on
-PLIC/vPLIC and dom0less support that have not been upstreamed yet. This
-series carries only the independent fixes found along the way, none of them
-need the board-support series to apply.
+p2m_set_pte_flags() presets the A/D bits of G-stage PTEs only when
+RISCV_ISA_EXT_svade is set, which is correct only if the device tree is.
 
-This series:
-    1: Probe the A/D update scheme if the DT advertises neither Svade nor
-       Svadu
+The privileged spec allows exactly two schemes for updating the PTE A and D
+bits: hardware sets them on access and on write, or accessing a page whose
+A and/or D bit is clear raises a page fault so that software can set them
+(ratified as Svade). Every implementation uses one of them, but platforms
+designed before Svade and Svadu were ratified, such as the HiFive Premier
+P550, may advertise neither.
 
-Test CI pipeline:
-https://gitlab.com/xen-project/people/baptleduc/xen/-/pipelines/3008747678
+Trust the device tree when it advertises Svade and/or Svadu, as for any
+other extension. When it advertises neither, probe the scheme in effect
+and record the matching extension in riscv_isa, so that such device trees
+can be used as-is, and warn that it is missing from "riscv,isa" along with
+the probed result.
 
+Introduce probe_hw_ad_update(): alias the first page of the Xen image
+read-only through the FIX_MISC fixmap slot with its A and D bits clear,
+then load from it under an exception table fixup. Hardware updating is in
+effect if the load completes and the A bit is then set. The probe fails
+otherwise, whether the load faults or completes leaving the A bit clear.
+The A bit being set by a speculative access still implies Svadu, as Svade
+only allows A to be set by software.
+
+Add Svadu to the known ISA extensions so it can be told apart from Svade.
+The comment above the enum asks for new extensions to go at the bottom to
+avoid shuffling, a leftover from Linux where the IDs were macros with
+explicit values. Nothing depends on the enum values, so have the comment
+say that multi-letter extensions follow the order of riscv_isa_ext[].
+
+Assisted-by: Claude:claude-opus-5-5
+Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Reviewed-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes since v10:
-- Reword the comments around the probe load and the A bit check.
-- Shorten the warning printed when the extension is probed, and update the
-  commit message to match.
-- Collect trailers: R-by from Oleksii and A-by from Jan, kept as the
-  changes above only touch comments and a printk() string.
+- collect Reviewed-by and Acked-by.
+- reword the comments around the probe load and the A bit check.
+- shorten the warning printed when the extension is probed.
 ---
 Changes since v9:
-- Add a fence between the probe load and reading the PTE back, as
-  nothing else orders the A bit update before the read.
-- Explain why set_fixmap() can't be used and why any RAM page can be
+- add a fence between the load and reading the PTE back, as nothing
+  else orders the A bit update before the read.
+- explain why set_fixmap() can't be used and why any RAM page can be
   aliased.
-- Link to v9:
-  https://patch.msgid.link/1793098984.8631fc262581453bbf619ec5b2062170.1a17d072ce5000f79f@vates.tech
 ---
 Changes since v8:
-- Drop patches merged upstream:
-    999c2ca1ab ("xen/riscv: use pte_is_valid() in pte_is_mapping()")
-    8e34f567ef ("xen/riscv: fix A/D bits in Xen's page-table mappings")
-    73b802624a ("xen/riscv: look up the exception table for any trap taken
-    in Xen context")
-    8a9a4bcd7c ("xen/riscv: rework the A/D bits comment in
-    p2m_set_pte_flags()")
-- Probe through a read-only alias of the Xen image and check the A bit,
+- probe through a read-only alias of the Xen image and check the A bit,
   as A being set by a speculative access still implies Svadu.
-- Link to v8:
-  https://patch.msgid.link/1793027589.8631fc262581453bbf619ec5b2062170.1a178c5c430000f79f@vates.tech
 ---
 Changes since v7:
-- Replace the panic when the DTS advertises neither Svade nor Svadu with
-  a probe of the A/D update scheme in that case only, recording the
-  probed extension so that such device trees can be used as-is. The
-  device tree is trusted otherwise, as discussed with Jan (patch 4).
-- Add patch 3, so that the store page fault raised by the probe on Svade
-  hardware is fixed up.
-- Move the p2m_set_pte_flags() comment rework last (patch 5).
-- Collect trailers: A-by on patches 1 and 2, T-by on patch 2 and R-by on
-  patch 5.
-- Link to v7:
-  https://patch.msgid.link/1792164706.8631fc262581453bbf619ec5b2062170.1a14557373c0008425@vates.tech
+- probe the A/D update scheme when the device tree advertises neither
+  Svade nor Svadu and record the probed extension, instead of panicking.
+- drop Suggested-by.
+- update the patch's title/body accordingly.
 ---
 Changes since v6:
-- Drop the boot time probe of the A/D update scheme and trust the device
-  tree. Xen now panics when the DTS advertises neither Svade nor Svadu
-  (patch 3).
-- Patch 4 no longer changes when A/D are preset, it only reworks the
-  comment, since patch 3 guarantees the DTS advertises the scheme in
-  effect.
-- Reorder the series so the already reviewed patches come first.
-- Patch 2: add a second Fixes tag for arch_pmap_map().
-- Patch 1: rebase, as the reorder changed its context.
-- Link to v6:
-  https://patch.msgid.link/1791885904.8631fc262581453bbf619ec5b2062170.1a134b909b40008425@vates.tech
+- drop the probe and trust the device tree, only panic when it advertises
+  neither Svade nor Svadu.
+- update the patch's title/body accordingly.
+- put svadu between svade and svpbmt in riscv_isa_ext_id.
+- rewrite the enum riscv_isa_ext_id comment.
 ---
 Changes since v5:
-- Replace "xen/riscv: always preset A/D bits in G-stage PTEs" with a boot
-  time probe of the A/D update scheme (patch 1). It checks the result
-  against the Svade/Svadu DT binding and records the probed scheme when the
-  DT advertises neither, instead of trusting the DT alone.
-- Split the p2m_set_pte_flags() comment rework out into its own patch
-  (patch 2).
-- Patches 3 and 4 unchanged and are waiting to be merged.
-- Link to v5:
-  https://patch.msgid.link/1791215925.8631fc262581453bbf619ec5b2062170.1a10cc9f7c20003f66@vates.tech
+- new patch, probe the A/D bits update scheme instead of trusting the
+  device tree alone.
 ---
-Changes since v4:
-- Drop patches merged upstream:
-    ccf9d78c825b ("xen/riscv: rename PTE "permissions" to "pte_flags"")
-- Collect trailers.
-- Rebase patches on top of staging.
-- Link to v4: https://patch.msgid.link/1790845467.8631fc262581453bbf619ec5b2062170.1a0f6b5397a0003f66@vates.tech
----
-Changes since v3:
-- Drop v3 patches 1, 6 already upstreamed:
-    861e44a3ba8e ("xen/riscv: make Zihintpause no longer a required
-    extension")
-    469d83d42f5c ("docs/riscv: sync required ISA extensions with
-    required_extensions[]")
-- Add trailers (A-by and/or R-by).
-- Rename patch 3 to ("xen/riscv: always preset A/D bits in G-stage PTEs")
-  as it now always presets A/D bits instead of distinguish Svadu/Svade DT
-  bindings cases.
-- Address review comments.
-- Link to v3: https://patch.msgid.link/1790699381.8631fc262581453bbf619ec5b2062170.1a0ee00218b000b504@vates.tech
----
-Changes since v2:
-- Drop v2 patches 5 and 6, already upstreamed:
-    d8ca89f26c8a ("xen/riscv: flush speculatively cached Bare-mode TLB entries in turn_on_mmu()")
-    08a898b93d21 ("xen/riscv: fix level_map_mask truncation on load_start")
-- Drop "xen/riscv: make Svpbmt no longer a required extension".
-  It relaxed Svpbmt so boards without it, like the HiFive P550, could boot.
-  But without Svpbmt, DMA-noncoherent devices do not snoop the CPU caches
-  and can read stale data from DRAM. Mainline Linux has the same problem,
-  which is explained and reproducible in [1]. Fixing it needs a lot of
-  machinery we do not need yet, and Svpbmt is mandatory in RVA23, so
-  keeping it required is simpler and safer. An RFC will follow with a fix
-  inspired by [2].
-- Add three new patches:
-    docs/riscv: sync required ISA extensions with required_extensions[]
-    xen/riscv: rename PTE "permissions" to "pte_flags"
-    xen/riscv: use pte_is_valid() in pte_is_mapping()
-- Address review comments.
-
-[1] https://github.com/davidlohr/vanilla-kernel-sifive-p550/tree/master
-[2] https://lwn.net/Articles/996819/
----
-Changes since v1:
-- address ML comments
-- rename some patchs
-- add new patch-fix: 242dd1f890e4 ("xen/riscv: fix level_map_mask
-  truncation on load_start") discovered when working on Spacemit K3 support
-
----
-Changes in v11:
-- EDITME: describe what is new in this series revision.
-- EDITME: use bulletpoints and terse descriptions.
-- Link to v10: https://patch.msgid.link/1793192679.8631fc262581453bbf619ec5b2062170.1a1829cd6d5000f79f@vates.tech
-
----
-Baptiste Le Duc (1):
-      xen/riscv: probe the A/D update scheme if the DT advertises neither
-
  xen/arch/riscv/cpufeature.c             | 69 +++++++++++++++++++++++++++++++++
  xen/arch/riscv/include/asm/cpufeature.h | 13 ++++---
  2 files changed, 76 insertions(+), 6 deletions(-)
----
-base-commit: b07838dc463c18f9ca78806d0f05164b02d1cd14
-change-id: 20260902-riscv-fix-boot-missing-ext-a79c23bad694
 
-Best regards,
---  
-Baptiste Le Duc <baptiste.le-duc@vates.tech>
+diff --git a/xen/arch/riscv/cpufeature.c b/xen/arch/riscv/cpufeature.c
+index 3d5bbd2228..dff590f68a 100644
+--- a/xen/arch/riscv/cpufeature.c
++++ b/xen/arch/riscv/cpufeature.c
+@@ -20,6 +20,7 @@
+ 
+ #include <asm/cpufeature.h>
+ #include <asm/csr.h>
++#include <asm/fixmap.h>
+ 
+ #ifdef CONFIG_ACPI
+ # error "cpufeature.c functions should be updated to support ACPI"
+@@ -200,6 +201,7 @@ static const struct riscv_isa_ext_entry __initconstrel riscv_isa_ext[] = {
+     RISCV_ISA_EXT_ENTRY(ssaia,          ANY),
+     RISCV_ISA_EXT_ENTRY(sstc,           NONE),
+     RISCV_ISA_EXT_ENTRY(svade,          NONE),
++    RISCV_ISA_EXT_ENTRY(svadu,          NONE),
+     RISCV_ISA_EXT_ENTRY(svpbmt,         NONE),
+ };
+ 
+@@ -630,6 +632,51 @@ const char *get_guest_isa_str(void)
+     return guest_isa_str;
+ }
+ 
++/*
++ * Probe whether hardware updates the PTE A/D bits by reading through an alias
++ * mapping whose A and D bits are clear. Observing A set, even by a speculative
++ * access, implies Svadu, as Svade only allows A to be set by software.
++ */
++static bool __init probe_hw_ad_update(void)
++{
++    vaddr_t va = FIXMAP_ADDR(FIX_MISC);
++    pte_t *entry = &xen_fixmap[FIX_MISC];
++    bool a_set = false;
++
++    ASSERT(!pte_is_valid(*entry));
++
++    /*
++     * set_fixmap() can't be used, as pt_update_entry() always sets A and D.
++     *
++     * A and D belong to the PTE, not to the page, so a new PTE with A and D
++     * clear can point to any RAM page, whatever its other mappings. Use the
++     * first page of the Xen image, and map it read-only so that Xen can't be
++     * corrupted through this alias.
++     */
++    write_pte(entry, pte_from_mfn(maddr_to_mfn(virt_to_maddr(_start)),
++                                  PTE_VALID | PTE_READABLE));
++    flush_tlb_one_local(va);
++
++    /* Read from the alias, handling page fault */
++    asm_inline goto (
++        "1: lw zero, 0(%[va])\n"
++        ASM_EXTABLE(1b, %l[out])
++        :
++        : [va] "r" (va)
++        : "memory"
++        : out );
++
++    /* Check to see if hardware set A. */
++    RISCV_FENCE(r, r);
++    a_set = read_pte(entry).pte & PTE_ACCESSED;
++
++ out:
++    write_pte(entry, (pte_t){});
++    flush_tlb_one_local(va);
++
++    return a_set;
++}
++
+ void __init riscv_fill_hwcap(void)
+ {
+     unsigned int i;
+@@ -674,6 +721,28 @@ void __init riscv_fill_hwcap(void)
+                "Zihintpause unavailable: cpu_relax() gives the CPU no hint; "
+                "wire up this platform's pause equivalent in cpu_relax()\n");
+ 
++    /*
++     * The privileged spec allows exactly two schemes for updating the PTE A
++     * and D bits:
++     *  1) hardware sets them on access and on write;
++     *  2) accessing a page whose A and/or D bit is clear raises a page fault,
++     *     so that software can set them (ratified as Svade).
++     *
++     * Every implementation uses one of them, but may predate the extensions
++     * and advertise neither. In that case, trust the hardware probe.
++     */
++    if ( !riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade) &&
++         !riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svadu) )
++    {
++        bool hw_update = probe_hw_ad_update();
++
++        __set_bit(hw_update ? RISCV_ISA_EXT_svadu : RISCV_ISA_EXT_svade,
++                  riscv_isa);
++        printk(XENLOG_WARNING
++               "Svade/Svadu missing from \"riscv,isa\" - probed as %s\n",
++               hw_update ? "svadu" : "svade");
++    }
++
+     for ( i = 0; i < req_extns_amount; i++ )
+     {
+         const struct riscv_isa_ext_data ext = required_extensions[i];
+diff --git a/xen/arch/riscv/include/asm/cpufeature.h b/xen/arch/riscv/include/asm/cpufeature.h
+index 2973eb13a5..b0a23be18e 100644
+--- a/xen/arch/riscv/include/asm/cpufeature.h
++++ b/xen/arch/riscv/include/asm/cpufeature.h
+@@ -8,13 +8,13 @@
+ #include <xen/types.h>
+ 
+ /*
+- * These macros represent the logical IDs of each multi-letter RISC-V ISA
+- * extension and are used in the ISA bitmap. The logical IDs start from
+- * RISCV_ISA_EXT_BASE, which allows the 0-25 range to be reserved for single
+- * letter extensions and are used in enum riscv_isa_ext_id.
++ * Logical IDs of RISC-V ISA extensions, used as bit positions in the ISA
++ * bitmap.
+  *
+- * New extensions should just be added to the bottom, rather than added
+- * alphabetically, in order to avoid unnecessary shuffling.
++ * Single-letter extensions use IDs below RISCV_ISA_EXT_BASE and are sorted
++ * alphabetically. Multi-letter extensions start from RISCV_ISA_EXT_BASE and
++ * follow the same order as riscv_isa_ext[] (see the ordering rules described
++ * above it).
+  */
+ #define RISCV_ISA_EXT_BASE  26
+ 
+@@ -41,6 +41,7 @@ enum riscv_isa_ext_id {
+     RISCV_ISA_EXT_ssaia,
+     RISCV_ISA_EXT_sstc,
+     RISCV_ISA_EXT_svade,
++    RISCV_ISA_EXT_svadu,
+     RISCV_ISA_EXT_svpbmt,
+     RISCV_ISA_EXT_MAX
+ };
+
+-- 
+2.56.0
 
 
