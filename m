@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C812D606A31A
-	for <xen-devel@archiver.kernel.org>; Fri, 30 Oct 2026 12:29:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9866A606A31A
+	for <xen-devel@archiver.kernel.org>; Fri, 30 Oct 2026 12:29:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=DQOa9Uir
-Received: from list by lists.xenproject.org with outflank-mailman.1465600.1676097 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=gvJ7H61f
+Received: from list by lists.xenproject.org with outflank-mailman.1465478.1676091 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMlix-0005ki-Ag; Fri, 30 Oct 2026 12:28:47 +0000
+	id 1xMlix-0005iM-36; Fri, 30 Oct 2026 12:28:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1465600.1676097; Fri, 30 Oct 2026 12:28:47 +0000
+Received: by outflank-mailman (output) from mailman id 1465478.1676091; Fri, 30 Oct 2026 12:28:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMlix-0005kY-7H; Fri, 30 Oct 2026 12:28:47 +0000
-Received: by outflank-mailman (input) for mailman id 1465600;
- Fri, 30 Oct 2026 12:11:32 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xMlix-0005iF-0D; Fri, 30 Oct 2026 12:28:47 +0000
+Received: by outflank-mailman (input) for mailman id 1465478;
+ Fri, 30 Oct 2026 09:01:44 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <mlureau@redhat.com>) id 1xMlSG-00049T-86
- for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 12:11:32 +0000
+ (envelope-from <mlureau@redhat.com>) id 1xMiUa-0005hW-IH
+ for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 09:01:44 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xMlSF-00Ch0A-IJ
- for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 13:11:31 +0100
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xMiUT-002ESF-5a
+ for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 10:01:42 +0100
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <mlureau@redhat.com>)
- id 6ae4896b-bab6-0a2a0a5309dd-0a2a4509ed1e-8
- for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 13:11:31 +0100
+ id 6ae45cea-2eae-0a2a0a5409dd-0a2a4504eab6-26
+ for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 10:01:36 +0100
 Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <mlureau@redhat.com>)
- id 6ae48970-be1a-0a2a45090019-aa0a857ce175-3
- for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 13:11:29 +0100
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com
- [209.85.216.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ id 6ae45cef-b57f-0a2a45040019-aa0a857c91db-3
+ for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 10:01:36 +0100
+Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com
+ [209.85.214.199]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-608-RHM01w-8N3K6fC56XHf3BQ-1; Fri, 30 Oct 2026 08:11:26 -0400
-Received: by mail-pj1-f71.google.com with SMTP id
- 98e67ed59e1d1-3abb4c24125so631469a91.3
- for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 05:11:26 -0700 (PDT)
+ us-mta-424-mxKBEUAXNE-AgR6RvROeQQ-1; Fri, 30 Oct 2026 05:01:33 -0400
+Received: by mail-pl1-f199.google.com with SMTP id
+ d9443c01a7336-2e869e00005so9428885ad.2
+ for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 02:01:33 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,55 +51,55 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1793362288;
+	s=mimecast20190719; t=1793350895;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=huheSnuaAH41QXuP+wJKnnRPWFroH2JWTjHVE5i6hXA=;
-	b=DQOa9UirA6se8ZCtd6+NTOnhD+doNcFc0nnF7SrxG0Z5hU6s9serkhqSYEbgiXgwZw06OF
-	hZgx5XaA3oeXgcATPEpShBrCsyeOnFA/WaOQiZUlSliLje0nVI6mY7COfw+SoFzZpyXpMB
-	6EFPzdJC+ekBxnQl7+b8bjR/3OIUOMI=
-X-MC-Unique: RHM01w-8N3K6fC56XHf3BQ-1
-X-Mimecast-MFC-AGG-ID: RHM01w-8N3K6fC56XHf3BQ_1793362286
+	bh=z0kKp64FY09dUFk/LW6vDgxjLXPXjA/VzYL6OdfGV/k=;
+	b=gvJ7H61fY4RduLqJJQWL3r6RBY+/CITq+SQXuAB/M9g4boXl5cd3IJ9HaDpEHM/7bcMGDq
+	zuWw8LBVFUXwvxk4GNq1Otg+8m9WcgZN46bdZgyEkBzysX8aMIctFzOIFMOE6dTocRkhzq
+	aQ+02lPkj5HM9TJHueCVNHkE56gpr3o=
+X-MC-Unique: mxKBEUAXNE-AgR6RvROeQQ-1
+X-Mimecast-MFC-AGG-ID: mxKBEUAXNE-AgR6RvROeQQ_1793350892
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793362286; x=1793967086;
+        d=1e100.net; s=20260707; t=1793350892; x=1793955692;
         h=content-transfer-encoding:content-type:cc:to:subject:message-id
          :date:from:in-reply-to:references:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=huheSnuaAH41QXuP+wJKnnRPWFroH2JWTjHVE5i6hXA=;
-        b=HQmBTU9n7zoeH0VSi96WXPC/K5g7ar6QzNHvmUJSRKsR3hAFV5uPpWWQeTeX8IA868
-         u+SpkA4HkkUNumyrjSGAwYDGc4+WAp/ed3LPLo9CLTZLYKUnN38gYm0qKD2i820Kdg+J
-         g2y8rgWvu1GWClJgakHW6BRRu4utm2RISUrsB6XN1XzOSiG/kU6glFKOXfAePQEEVqbk
-         iKEKEgpsQPkepH/RugqJ9K1wct1YzQXixGKt+Gc1ZzwxATSlIX42AfD2029BNn239tXT
-         TdQrLnlMt1BVEvW9JFHmB1T4LMMpMlX9zHdeElNQqX+vH+BDaB2XGySjCgkGT28r3cuk
-         GtLQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzp+/Hl/FPqxyr90+O47jAyyh4RjRxcIXU1mxFpu8WyIL9ORlDrkF3hQLug+QrTrWuLkWq1gTOGRKA=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYIRs3DTsN7vElkb//OyGoEyB0Cn1CyBAdBlJr/eEznJbJZ727FY
-	WIxuBVTGdJhnHSu5JppBYs0tZMcOp9hE7p9Ef0xP52mI7nwrhp8F/QjtljnQx6RCC9jMHVQ07DU
-	ycVkgcicLiu3kcUw0SXBCvs9sMqyfHJFNUXJaNZczlrYdOPQ0jrHKTGqAwasIvzT4hM6tp1pfEE
-	TUdJUY/uTIDlWqIFkt0tm+700HQaDTik4Ip6s+SnSqOno=
-X-Gm-Gg: AYBFou1ahiWwoEw6xBlHJA/PaJYngdaLrOZaAzy8sGGbtjcelCjj8mEVwKda8Zs8bMp
-	4f+aoatLLkS7TVmJdBJJtlgz26qiaVtdJxtOrnLz+LAc2rxfZjiK3nf1byJc1aGUFY7u8D2Gx6z
-	ElWSeh1RjBGiVtxIY5Mb+0NsBNUQUaHh4EMtiGDVXv+vliJcwomPPov45vTiB5Vq2eD37hlY+xz
-	TZVgyWRlmN2BsItP0PK3r3ksCHLa3tmBf1oxiMJxmPffeqMTeHHsbwyOxtF9L/XSVPgU7wqPkJo
-	Vw==
-X-Received: by 2002:a17:90a:c2cc:b0:3a8:f70f:2437 with SMTP id 98e67ed59e1d1-3ae8980bd04mr1669658a91.50.1793362285557;
-        Fri, 30 Oct 2026 05:11:25 -0700 (PDT)
-X-Received: by 2002:a17:90a:c2cc:b0:3a8:f70f:2437 with SMTP id
- 98e67ed59e1d1-3ae8980bd04mr1669589a91.50.1793362284955; Fri, 30 Oct 2026
- 05:11:24 -0700 (PDT)
+        bh=z0kKp64FY09dUFk/LW6vDgxjLXPXjA/VzYL6OdfGV/k=;
+        b=VjoFhTXWOklVH5y5e3zbDv9pP9+7KMnR6NdDLxKIdI5urS6yvih7sXZsSD0FxyYrdZ
+         Jb/qsA3cBewq/7j/PmputUqv5x0Fgw1TkcZeizXtSZflpDij2+7kQtHWSDg3AQ2tklcW
+         voaaKBYCC9VSB9VapHDY/syH7v9BP9iGiD6Wjyk8H5K84BkP0H49hV1baiAx5h0NH89r
+         CDiyxu9MWHVXF+0RtdBEkcxY7qKZ6vuYoyhb/As5SFTd+rIIh+LjSPH683Y0RH+255rc
+         JBCsnHUbX8kMooX1PLqxBFgxzdj7KLtYRQuMufAie5TTqCxAXTOS7wCtSOV/pfdsJvyo
+         gjHQ==
+X-Forwarded-Encrypted: i=1; AKwUvBxObjyBeh+T3xY7n55rQOOxSpdoJSex71mJiEXN3MYhYfz6a1zhF1PwXDy9sUdLPwtvcjnVS3flO+U=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYLMePhHRAv+Tzag/tWueKC6dd6jhO2MazZ4H4qIGzofk1lKFyDD
+	rrWRlimMvVC6wpKs+ARhKD1BSfn9XSeb7hSw43yC8LuM6aIjP2z8YY8269ueC5TN3o9U0IytV4e
+	gHzlmsXhX1fQ9MbTmMb4mu9iiiQbkuLTev3z7VU2OW44MoYxCH3YLplo9O47qyFTCsR6y+rPqU1
+	TFGg+nQBi6fYe/di/5ICDB5Fsdr5EYZniKAEcBSfl88rQ=
+X-Gm-Gg: AYBFou2+eAL5dM76NezfaSnNfyjyfPu/wej+kpWBOeU4Z91BwXf+uSnm7uA4W0oA5p5
+	47AHuM5+aNH7iBqMS03dpFK2Rmf84jaczCeZl9gjN3aIoIXrA+UANJpnhIMlQfpH9sbGsUJ5Ldl
+	BcPGMShLOV4u88DiTtZPrkJy8FfpUJVKQ2rX993XiBFDJsDIRsJpbWmT5v4bGDKELNiCI2z47tp
+	HNAeLvXWBf2ltMOBlO6DZkXvtFTgGRhM8Q3xly4NzVsC7TRubTTtwpDJh5KqFTueGUWARr+CrTK
+	YA==
+X-Received: by 2002:a17:90b:4d05:b0:3ad:c482:ae93 with SMTP id 98e67ed59e1d1-3ae897f55f1mr1344514a91.27.1793350891493;
+        Fri, 30 Oct 2026 02:01:31 -0700 (PDT)
+X-Received: by 2002:a17:90b:4d05:b0:3ad:c482:ae93 with SMTP id
+ 98e67ed59e1d1-3ae897f55f1mr1344360a91.27.1793350890250; Fri, 30 Oct 2026
+ 02:01:30 -0700 (PDT)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
- <20261020-qom-qapi-v7-17-431a86b02b58@redhat.com> <871p97a4mf.fsf@pond.sub.org>
-In-Reply-To: <871p97a4mf.fsf@pond.sub.org>
+ <20261020-qom-qapi-v7-38-431a86b02b58@redhat.com> <87y0bfa81j.fsf@pond.sub.org>
+In-Reply-To: <87y0bfa81j.fsf@pond.sub.org>
 From: =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>
-Date: Fri, 30 Oct 2026 16:11:12 +0400
-X-Gm-Features: AclHuK9SdcKVottvuTeAWY4qSYFB8MXW7mNBnZIWRbyUXQq4NjRMq0jo7wIcSr4
-Message-ID: <CAMxuvayHXMftaQP6X_14pAf63bjX8mXxsW4TsXnLf_wbOq6eUA@mail.gmail.com>
-Subject: Re: [PATCH v7 17/65] qom: add object_{class_}property_add_qapi_enum
+Date: Fri, 30 Oct 2026 13:01:17 +0400
+X-Gm-Features: AclHuK98dJOvD1KtoAB9Z7J96maRIl_qDeI5itEWow68bU5XOo3fY2yUQSfcL4E
+Message-ID: <CAMxuvaya+Tihnwjf8JNjhmhBMwE7XpTF8zPL7tbfb8DFiAV62g@mail.gmail.com>
+Subject: Re: [PATCH v7 38/65] qom: convert scalar properties to QAPI-aware registration
 To: Markus Armbruster <armbru@redhat.com>
 Cc: qemu-devel@nongnu.org, Michael Roth <michael.roth@amd.com>, 
 	John Snow <jsnow@redhat.com>, Peter Maydell <peter.maydell@linaro.org>, 
@@ -154,13 +154,13 @@ Cc: qemu-devel@nongnu.org, Michael Roth <michael.roth@amd.com>,
 	Jiri Pirko <jiri@resnulli.us>, Eric Auger <eric.auger@redhat.com>, 
 	Laurent Vivier <lvivier@redhat.com>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: pfaJY7RSKI5fsQPaU6mr0K-Y2xwy5DfFGs9JQlDuxn8_1793362286
+X-Mimecast-MFC-PROC-ID: YoFEJZ6hSEBlqbhdFjtpyuYcbBBaUk6hg8AiUFYdvDg_1793350892
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-bad1c0/1793362289-39AC0034-86513897/0/0
+X-purgate-ID: tlsNG-ebf023/1793350896-C06DAB50-DD83248F/0/0
 X-purgate-type: clean
-X-purgate-size: 5096
+X-purgate-size: 14390
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -171,145 +171,406 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 Hi
 
-On Fri, Oct 30, 2026 at 2:02=E2=80=AFPM Markus Armbruster <armbru@redhat.co=
-m> wrote:
+On Fri, Oct 30, 2026 at 12:48=E2=80=AFPM Markus Armbruster <armbru@redhat.c=
+om> wrote:
 >
 > Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com> writes:
 >
+> > Reviewed-by: Amit Machhiwal <amachhiw@linux.ibm.com>
 > > Signed-off-by: Markus Armbruster <armbru@redhat.com>
 > > Signed-off-by: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
-> > ---
-> >  include/qom/object.h | 74 ++++++++++++++++++++++++++++++++++++++++++
-> >  qom/object.c         | 90 ++++++++++++++++++++++++++++++++++++++++++++=
-+++++---
-> >  2 files changed, 159 insertions(+), 5 deletions(-)
-> >
-> > diff --git a/include/qom/object.h b/include/qom/object.h
-> > index eb61d8842b80..e04be4caed57 100644
-> > --- a/include/qom/object.h
-> > +++ b/include/qom/object.h
-> > @@ -2027,6 +2027,80 @@ ObjectProperty *object_class_property_add_enum(O=
-bjectClass *klass,
-> >                                      int (*get)(Object *, Error **),
-> >                                      void (*set)(Object *, int, Error *=
-*));
-> >
-> > +/**
-> > + * struct QapiEnumProp: Descriptor for a property backed by a QAPI enu=
-m type
-> > + *
-> > + * Binds a QOM object property to a QAPI enum, providing automatic
-> > + * string<->int conversion through QAPI visitors and optional
-> > + * default-value initialization during object instance init.
-> > + *
-> > + * Use the QAPI_ENUM_PROP() macro to construct instances inline.
-> > + *
-> > + * @name: property name exposed on the QOM object
-> > + * @description: human-readable description (shown in ``-device help``=
-, etc.)
-> > + * @default_value: initial enum value applied via @set during instance=
- init,
-> > + *                 or -1 (the QAPI_ENUM_PROP default) to skip initiali=
-zation
-> > + * @qapi_type: pointer to the generated QAPITypeInfo for the enum
-> > + *             (provides the string<->int lookup table)
-> > + * @get: getter that returns the current enum value as int, or -1 on e=
-rror
-> > + * @set: setter that receives the enum value as int; %NULL for read-on=
-ly props
-> > + */
-> > +typedef struct QapiEnumProp {
-> > +    const char *name;
-> > +    const char *description;
-> > +    const int default_value;
-> > +    const QAPITypeInfo *qapi_type;
-> > +    int (*get)(Object *, Error **);
-> > +    void (*set)(Object *, int, Error **);
-> > +} QapiEnumProp;
-> > +
-> > +#define QAPI_ENUM_PROP(...) ({                                        =
-   \
-> > +    static const QapiEnumProp _prop =3D {                             =
-     \
-> > +        .default_value =3D -1, __VA_ARGS__                            =
-     \
-> > +    };                                                                =
-   \
-> > +    &_prop; })
 >
-> This is a cute and reasonably well-known macro trick for optional
-> keyword arguments in C.
->
-> The example [*] below specifies all arguments.  What happens when we
-> omit any?  They default to zero via default initializaion, except for
-> .default_value, which defaults to -1.
->
-> Trap for developers: some arguments aren't actually optional!  If you
-> forget to specify @name or @qapi_type, the code compiles, but crashes at
-> run time.
->
-> Not a fan.
+> How did you create this patch?  It looks almost mechanical.
 
-Agree (not a fan of C either). We could probably add more
-static/runtime checks. Or clearly state that there is room for
-improvements, or just drop it altogether - either as follow up or with
-the series. I leave that up to you since you are going to respin it.
-thanks!
-
-
+Repeated grep / multi-cursor in zed iirc
 
 >
-> > +
-> > +/**
-> > + * object_property_add_qapi_enum:
-> > + * @obj: the object to add a property to
-> > + * @prop: property descriptor
-> > + *
-> > + * Add an enum property with QAPI type association.
-> > + *
-> > + * Returns: The newly added property on success, or %NULL on failure.
-> > + */
-> > +ObjectProperty *
-> > +object_property_add_qapi_enum(Object *obj, const QapiEnumProp *prop);
-> > +
-> > +/**
-> > + * object_class_property_add_qapi_enum:
-> > + * @klass: the class object to add a property to
-> > + * @prop: property descriptor
-> > + *
-> > + * Add an enum property with QAPI type association.
-> > + *
-> > + * Use the QAPI_ENUM_PROP() macro to construct the property descriptor
-> > + * inline. If .default_value is not set, the property is not initializ=
-ed
-> > + * (default_value is -1). Otherwise, the setter is called with
-> > + * default_value during object instance init.
-> > + *
-> > + * Example::
+> It misses a few conversions, almost certainly in code added since you
+> made this patch.  I can take care of them.
+
+Not surprising after several months.
+
+> [...]
 >
-> [*]
+> > diff --git a/accel/kvm/kvm-all.c b/accel/kvm/kvm-all.c
+> > index 1d91667fb880..bc178482b309 100644
+> > --- a/accel/kvm/kvm-all.c
+> > +++ b/accel/kvm/kvm-all.c
+> > @@ -24,6 +24,7 @@
+> >  #include "qemu/config-file.h"
+> >  #include "qemu/error-report.h"
+> >  #include "qapi/error.h"
+> > +#include "qapi/qapi-builtin-type-infos.h"
+> >  #include "hw/pci/msi.h"
+> >  #include "hw/pci/msix.h"
+> >  #include "hw/s390x/adapter.h"
 >
-> > + *
-> > + *   object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
-> > + *       .name =3D "policy",
-> > + *       .description =3D "Set the NUMA policy",
-> > + *       .default_value =3D HOST_MEM_POLICY_DEFAULT,
-> > + *       .qapi_type =3D &HostMemPolicy_type_info,
-> > + *       .get =3D my_get_policy,
-> > + *       .set =3D my_set_policy,
-> > + *   ));
-> > + *
-> > + * Returns: The newly added property on success, or %NULL on failure.
-> > + */
-> > +ObjectProperty *
-> > +object_class_property_add_qapi_enum(ObjectClass *klass,
-> > +                                    const QapiEnumProp *prop);
-> > +
-> >  /**
-> >   * object_property_add_qapi:
-> >   * @obj: the object to add a property to
+> Not needed; we already include "qapi/qapi-type-infos-common.h".
 >
 > [...]
 >
+> > diff --git a/hw/acpi/ich9.c b/hw/acpi/ich9.c
+> > index 6d421b990cef..64228a620e69 100644
+> > --- a/hw/acpi/ich9.c
+> > +++ b/hw/acpi/ich9.c
+> > @@ -26,6 +26,7 @@
+> >
+> >  #include "qemu/osdep.h"
+> >  #include "qapi/error.h"
+> > +#include "qapi/qapi-builtin-type-infos.h"
+> >  #include "qapi/visitor.h"
+> >  #include "hw/pci/pci.h"
+> >  #include "migration/vmstate.h"
+>
+> Missing:
+>
+>                                        PM_REG_FIELD(acpi_pci_hotplug.root=
+),
+>                                        object_property_allow_set_link,
+>                                        OBJ_PROP_LINK_STRONG);
+>    -    object_class_property_add(oc, ACPI_PM_PROP_GPE0_BLK, "uint32",
+>    +    object_class_property_add_qapi(oc, ACPI_PM_PROP_GPE0_BLK, &uint32=
+_type_info,
+>                                   ich9_pm_get_gpe0_blk,
+>                                   NULL, NULL, NULL);
+>         object_class_property_add_uint8_ptr(oc, ACPI_PM_PROP_S3_DISABLED,
+>
+> [...]
+>
+> > diff --git a/hw/xen/xen-pvh-common.c b/hw/xen/xen-pvh-common.c
+> > index cca37202ffb2..7b4fd933a8fb 100644
+> > --- a/hw/xen/xen-pvh-common.c
+> > +++ b/hw/xen/xen-pvh-common.c
+> > @@ -9,6 +9,7 @@
+> >  #include "qemu/osdep.h"
+> >  #include "qemu/error-report.h"
+> >  #include "qemu/units.h"
+> > +#include "qapi/qapi-builtin-type-infos.h"
+> >  #include "qapi/visitor.h"
+> >  #include "hw/core/boards.h"
+> >  #include "hw/core/irq.h"
+> > @@ -413,7 +414,7 @@ void xen_pvh_class_setup_common_props(XenPVHMachine=
+Class *xpc)
+> >
+> >  #define OC_MEMMAP_PROP_BASE(c, prop_name, name)                       =
+    \
+> >  do {                                                                  =
+    \
+> > -    object_class_property_add(c, prop_name "-base", "uint64_t",       =
+    \
+> > +    object_class_property_add_qapi(c, prop_name "-base", &uint64_type_=
+info,\
+> >                                xen_pvh_get_ ## name ## _base,          =
+    \
+> >                                xen_pvh_set_ ## name ## _base, NULL, NUL=
+L); \
+> >      object_class_property_set_description(oc, prop_name "-base",      =
+    \
+> > @@ -422,7 +423,7 @@ do {                                               =
+                       \
+> >
+> >  #define OC_MEMMAP_PROP_SIZE(c, prop_name, name)                       =
+    \
+> >  do {                                                                  =
+    \
+> > -    object_class_property_add(c, prop_name "-size", "uint64_t",       =
+    \
+> > +    object_class_property_add_qapi(c, prop_name "-size", &size_type_in=
+fo, \
+> >                                xen_pvh_get_ ## name ## _size,          =
+    \
+> >                                xen_pvh_set_ ## name ## _size, NULL, NUL=
+L); \
+> >      object_class_property_set_description(oc, prop_name "-size",      =
+    \
+>
+> Use of &size_type_info is not mechanical.  Better to be as mechanical as
+> possible in such a huge patch.
+
+yes, I thought I splitted those appart - I missed some apparently
+
+>
+> [...]
+>
+> > diff --git a/qom/object.c b/qom/object.c
+> > index cc113c0810e7..9f9a2abfa08d 100644
+> > --- a/qom/object.c
+> > +++ b/qom/object.c
+> > @@ -22,10 +22,10 @@
+> >  #include "qapi/string-output-visitor.h"
+> >  #include "qapi/qobject-input-visitor.h"
+> >  #include "qapi/forward-visitor.h"
+> > +#include "qapi/qapi-builtin-type-infos.h"
+> >  #include "qapi/qapi-builtin-visit.h"
+> >  #include "qapi/compat-policy.h"
+> >  #include "qobject/qdict.h"
+> > -#include "qobject/qjson.h"
+>
+> The deletion doesn't belong.
+>
+> >  #include "qemu/id.h"
+> >  #include "qapi/qmp/qerror.h"
+> >  #include "trace.h"
+> > @@ -2449,7 +2449,7 @@ object_property_add_str(Object *obj, const char *=
+name,
+> >      prop->get =3D get;
+> >      prop->set =3D set;
+> >
+> > -    return object_property_add(obj, name, "string",
+> > +    return object_property_add_qapi(obj, name, &str_type_info,
+> >                                 get ? property_get_str : NULL,
+> >                                 set ? property_set_str : NULL,
+> >                                 property_release_data,
+> > @@ -2467,7 +2467,7 @@ object_class_property_add_str(ObjectClass *klass,=
+ const char *name,
+> >      prop->get =3D get;
+> >      prop->set =3D set;
+> >
+> > -    return object_class_property_add(klass, name, "string",
+> > +    return object_class_property_add_qapi(klass, name, &str_type_info,
+> >                                       get ? property_get_str : NULL,
+> >                                       set ? property_set_str : NULL,
+> >                                       NULL,
+> > @@ -2519,7 +2519,7 @@ object_property_add_bool(Object *obj, const char =
+*name,
+> >      prop->get =3D get;
+> >      prop->set =3D set;
+> >
+> > -    return object_property_add(obj, name, "bool",
+> > +    return object_property_add_qapi(obj, name, &bool_type_info,
+> >                                 get ? property_get_bool : NULL,
+> >                                 set ? property_set_bool : NULL,
+> >                                 property_release_data,
+> > @@ -2536,7 +2536,7 @@ object_class_property_add_bool(ObjectClass *klass=
+, const char *name,
+> >      prop->get =3D get;
+> >      prop->set =3D set;
+> >
+> > -    return object_class_property_add(klass, name, "bool",
+> > +    return object_class_property_add_qapi(klass, name, &bool_type_info=
+,
+> >                                       get ? property_get_bool : NULL,
+> >                                       set ? property_set_bool : NULL,
+> >                                       NULL,
+>
+> Missing:
+>
+>    @@ -2929,7 +2930,7 @@ object_class_property_add_bool_ptr(ObjectClass *=
+klass, const char *name,
+>             setter =3D property_class_set_bool_ptr;
+>         }
+>
+>    -    return object_class_property_add(klass, name, "bool",
+>    +    return object_class_property_add_qapi(klass, name, &bool_type_inf=
+o,
+>                                          getter, setter, NULL, (void *)of=
+fset);
+>     }
+
+Yes, new APIs I missed in updated version
+
+>
+> > @@ -2945,8 +2945,8 @@ object_property_add_uint8_ptr(Object *obj, const =
+char *name,
+> >          setter =3D property_set_uint8_ptr;
+> >      }
+> >
+> > -    return object_property_add(obj, name, "uint8",
+> > -                               getter, setter, NULL, (void *)v);
+> > +    return object_property_add_qapi(obj, name, &uint8_type_info,
+> > +                                    getter, setter, NULL, (void *)v);
+> >  }
+> >
+> >  ObjectProperty *
+>
+> Missing:
+>
+>    @@ -2969,7 +2970,7 @@ object_class_property_add_uint8_ptr(ObjectClass =
+*klass, const char *name,
+>             setter =3D property_class_set_uint8_ptr;
+>         }
+>
+>    -    return object_class_property_add(klass, name, "uint8",
+>    +    return object_class_property_add_qapi(klass, name, &uint8_type_in=
+fo,
+>                                          getter, setter, NULL, (void *)of=
+fset);
+>     }
+>
+> > @@ -2986,8 +2986,8 @@ object_class_static_property_add_uint8_ptr(Object=
+Class *klass,
+> >          setter =3D property_set_uint8_ptr;
+> >      }
+> >
+> > -    return object_class_property_add(klass, name, "uint8",
+> > -                                     getter, setter, NULL, (void *)v);
+> > +    return object_class_property_add_qapi(klass, name, &uint8_type_inf=
+o,
+> > +                                          getter, setter, NULL, (void =
+*)v);
+> >  }
+> >
+> >  ObjectProperty *
+> > @@ -3006,8 +3006,8 @@ object_property_add_uint16_ptr(Object *obj, const=
+ char *name,
+> >          setter =3D property_set_uint16_ptr;
+> >      }
+> >
+> > -    return object_property_add(obj, name, "uint16",
+> > -                               getter, setter, NULL, (void *)v);
+> > +    return object_property_add_qapi(obj, name, &uint16_type_info,
+> > +                                    getter, setter, NULL, (void *)v);
+> >  }
+> >
+> >  ObjectProperty *
+>
+> Missing:
+>
+>    @@ -3030,7 +3031,7 @@ object_class_property_add_uint16_ptr(ObjectClass=
+ *klass, const char *name,
+>             setter =3D property_class_set_uint16_ptr;
+>         }
+>
+>    -    return object_class_property_add(klass, name, "uint16",
+>    +    return object_class_property_add_qapi(klass, name, &uint16_type_i=
+nfo,
+>                                          getter, setter, NULL, (void *)of=
+fset);
+>     }
+>
+> > @@ -3047,8 +3047,8 @@ object_class_static_property_add_uint16_ptr(Objec=
+tClass *klass,
+> >          setter =3D property_set_uint16_ptr;
+> >      }
+> >
+> > -    return object_class_property_add(klass, name, "uint16",
+> > -                                     getter, setter, NULL, (void *)v);
+> > +    return object_class_property_add_qapi(klass, name, &uint16_type_in=
+fo,
+> > +                                          getter, setter, NULL, (void =
+*)v);
+> >  }
+> >
+> >  ObjectProperty *
+> > @@ -3067,8 +3067,8 @@ object_property_add_uint32_ptr(Object *obj, const=
+ char *name,
+> >          setter =3D property_set_uint32_ptr;
+> >      }
+> >
+> > -    return object_property_add(obj, name, "uint32",
+> > -                               getter, setter, NULL, (void *)v);
+> > +    return object_property_add_qapi(obj, name, &uint32_type_info,
+> > +                                    getter, setter, NULL, (void *)v);
+> >  }
+> >
+> >  ObjectProperty *
+>
+> Missing:
+>
+>    @@ -3091,7 +3092,7 @@ object_class_property_add_uint32_ptr(ObjectClass=
+ *klass, const char *name,
+>             setter =3D property_class_set_uint32_ptr;
+>         }
+>
+>    -    return object_class_property_add(klass, name, "uint32",
+>    +    return object_class_property_add_qapi(klass, name, &uint32_type_i=
+nfo,
+>                                          getter, setter, NULL, (void *)of=
+fset);
+>     }
+>
+> > @@ -3108,8 +3108,8 @@ object_class_static_property_add_uint32_ptr(Objec=
+tClass *klass,
+> >          setter =3D property_set_uint32_ptr;
+> >      }
+> >
+> > -    return object_class_property_add(klass, name, "uint32",
+> > -                                     getter, setter, NULL, (void *)v);
+> > +    return object_class_property_add_qapi(klass, name, &uint32_type_in=
+fo,
+> > +                                          getter, setter, NULL, (void =
+*)v);
+> >  }
+> >
+> >  ObjectProperty *
+> > @@ -3128,8 +3128,8 @@ object_property_add_uint64_ptr(Object *obj, const=
+ char *name,
+> >          setter =3D property_set_uint64_ptr;
+> >      }
+> >
+> > -    return object_property_add(obj, name, "uint64",
+> > -                               getter, setter, NULL, (void *)v);
+> > +    return object_property_add_qapi(obj, name, &uint64_type_info,
+> > +                                    getter, setter, NULL, (void *)v);
+> >  }
+> >
+> >  ObjectProperty *
+>
+> Missing:
+>
+>    @@ -3152,7 +3153,7 @@ object_class_property_add_uint64_ptr(ObjectClass=
+ *klass, const char *name,
+>             setter =3D property_class_set_uint64_ptr;
+>         }
+>
+>    -    return object_class_property_add(klass, name, "uint64",
+>    +    return object_class_property_add_qapi(klass, name, &uint64_type_i=
+nfo,
+>                                          getter, setter, NULL, (void *)of=
+fset);
+>     }
+>
+> > @@ -3169,8 +3169,8 @@ object_class_static_property_add_uint64_ptr(Objec=
+tClass *klass,
+> >          setter =3D property_set_uint64_ptr;
+> >      }
+> >
+> > -    return object_class_property_add(klass, name, "uint64",
+> > -                                     getter, setter, NULL, (void *)v);
+> > +    return object_class_property_add_qapi(klass, name, &uint64_type_in=
+fo,
+> > +                                          getter, setter, NULL, (void =
+*)v);
+> >  }
+> >
+> >  typedef struct {
+>
+> [...]
+>
+> > diff --git a/target/i386/sev.c b/target/i386/sev.c
+> > index b2c7260c80a4..3a36fa4d0b95 100644
+> > --- a/target/i386/sev.c
+> > +++ b/target/i386/sev.c
+> > @@ -3266,7 +3266,7 @@ sev_snp_guest_class_init(ObjectClass *oc, const v=
+oid *data)
+> >      x86_klass->adjust_cpuid_features =3D sev_snp_adjust_cpuid_features=
+;
+> >      x86_klass->kvm_type =3D sev_snp_kvm_type;
+> >
+> > -    object_class_property_add(oc, "policy", "uint64",
+> > +    object_class_property_add_qapi(oc, "policy", &uint64_type_info,
+> >                                sev_snp_guest_get_policy,
+> >                                sev_snp_guest_set_policy, NULL, NULL);
+> >      object_class_property_add_str(oc, "guest-visible-workarounds",
+>
+> Missing:
+>
+>    @@ -3290,7 +3290,7 @@ sev_snp_guest_class_init(ObjectClass *oc, const =
+void *data)
+>         object_class_property_add_bool(oc, "secure-tsc",
+>                                       sev_snp_guest_get_secure_tsc,
+>                                       sev_snp_guest_set_secure_tsc);
+>    -    object_class_property_add(oc, "tsc-frequency", "uint32",
+>    +    object_class_property_add_qapi(oc, "tsc-frequency", &uint32_type_=
+info,
+>                                   sev_snp_guest_get_tsc_frequency,
+>                                   sev_snp_guest_set_tsc_frequency, NULL, =
+NULL);
+>     }
+>
+> [...]
+>
+
+Are you working on v8 or should I start rebasing?
 
 
