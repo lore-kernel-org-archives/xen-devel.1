@@ -2,46 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A1C2F606A31A
-	for <xen-devel@archiver.kernel.org>; Fri, 30 Oct 2026 15:16:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 38326606A31D
+	for <xen-devel@archiver.kernel.org>; Fri, 30 Oct 2026 15:16:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=hoMBiosl
-Received: from list by lists.xenproject.org with outflank-mailman.1465778.1676237 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=gJMOt/xQ
+Received: from list by lists.xenproject.org with outflank-mailman.1465783.1676245 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMoLK-00058q-Kt; Fri, 30 Oct 2026 15:16:34 +0000
+	id 1xMoLU-0005Zq-Rh; Fri, 30 Oct 2026 15:16:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1465778.1676237; Fri, 30 Oct 2026 15:16:34 +0000
+Received: by outflank-mailman (output) from mailman id 1465783.1676245; Fri, 30 Oct 2026 15:16:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMoLK-00058j-HL; Fri, 30 Oct 2026 15:16:34 +0000
-Received: by outflank-mailman (input) for mailman id 1465778;
- Fri, 30 Oct 2026 15:16:33 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xMoLU-0005Yt-NR; Fri, 30 Oct 2026 15:16:44 +0000
+Received: by outflank-mailman (input) for mailman id 1465783;
+ Fri, 30 Oct 2026 15:16:44 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <luoyonggang@gmail.com>) id 1xMoLJ-00056d-36
- for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 15:16:33 +0000
+ (envelope-from <luoyonggang@gmail.com>) id 1xMoLU-0005Xr-40
+ for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 15:16:44 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xMoLI-0027EM-GM
- for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 16:16:32 +0100
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xMoLT-00A6wy-H6
+ for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 16:16:43 +0100
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <luoyonggang@gmail.com>)
- id 6ae4b4c3-8faa-0a2a0a5109dd-0a2a4509a714-20
- for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 16:16:32 +0100
-Received: from [74.125.82.54] (helo=mail-dl1-f54.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ae4b4ba-2eae-0a2a0a5409dd-0a2a4506821a-40
+ for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 16:16:43 +0100
+Received: from [74.125.82.48] (helo=mail-dl1-f48.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <luoyonggang@gmail.com>)
- id 6ae4b4ce-be1a-0a2a45090019-4a7d5236ec05-3
- for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 16:16:32 +0100
-Received: by mail-dl1-f54.google.com with SMTP id
- a92af1059eb24-15ea896ddc8so1347362c88.0
- for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 08:16:31 -0700 (PDT)
+ id 6ae4b4da-195a-0a2a45060019-4a7d5230ac9a-3
+ for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 16:16:43 +0100
+Received: by mail-dl1-f48.google.com with SMTP id
+ a92af1059eb24-1a2761c69fbso2021882c88.0
+ for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 08:16:42 -0700 (PDT)
 Received: from DESKTOP-Q716RM7 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- a92af1059eb24-1ac1854d925sm12770449c88.7.2026.10.30.08.16.20
+ a92af1059eb24-1ac1854d925sm12770449c88.7.2026.10.30.08.16.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 Oct 2026 08:16:29 -0700 (PDT)
+ Fri, 30 Oct 2026 08:16:40 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,43 +52,43 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793373390; x=1793978190; darn=lists.xenproject.org;
+        d=gmail.com; s=20260707; t=1793373401; x=1793978201; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=CnMqBd/JBHGwVaxrghEFIqcYT1aAnIXyDuq/h1Z92iw=;
-        b=hoMBioslhG2WYzQgz1XhDQBar5iuZHBzBgFBo4QD8tk9TiMCzoH4ocX7T1IENh0jpa
-         AwpagGC55yVqnb0WQAOe5ikxpCawZK43RMR3hM5j/f1R2EZERyYrBEBMLrtDMGc/FsDZ
-         ypX2SW+XRi70OYuurpSQB9Fa/lHzS3YovNYgV/rx791F8skwVXqkU6Yqg9CRDPyqdXQF
-         VUvwHDF/IVUtMQjByTAkaLzZLwAhu8K6MLyFLpyJHNXUwOqqzIpj8MK0id0uIGhhUp8P
-         PdujZL1O4YuE9WoVIPicd38E7YuN4Q9/JB+l+kzfqdo8IULG9pcvfc95hSqZf6SIoVJf
-         rUhA==
+        bh=zA4vatNcIKJhE+Eb39umMv/j/wzlc1JpQpFuLfiMq1c=;
+        b=gJMOt/xQlMHXc954IX6n9hct3SgGEcs5uFlN9Os13twS8tXfFxHD2KYETHgEXrh6F4
+         TV9uqZ5pwhyUowrRGVyOc4qkXiVcj6YXOvsEF4ytJMNTcPVWWA0+3BhjxTwO6CII2j+j
+         v6ttYjqOuMpYogXWAVRMds9cHlzSW0e5VZriXx1vI69pKTBQyT7HKHmGwndCo/tCjVeK
+         YfcUoj4m7zj/IwF2zlgRGQgayUBJJqdw4adNdLrq9L5I9NkPxHiQ0Ww0wR+xcUl/pD2m
+         7jgMCGEpIXNfC9XV43bBZlbAzWZYZTDC0fCQPZ4HX2fzmwIUDSuFNeCyZ+uI1y7nXCK+
+         GZ+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793373390; x=1793978190;
+        d=1e100.net; s=20260707; t=1793373401; x=1793978201;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=CnMqBd/JBHGwVaxrghEFIqcYT1aAnIXyDuq/h1Z92iw=;
-        b=FpN6mlJXNFug/BzbAV5wI2cXuz5CbQxEmXSjszdynwUY6Vd7T6hBSP3Dk1XDPdNoP8
-         bU84ALbolu9JMXxVAj52WgThd5zoSAw2OcDBF4KxgQnZpzUXqhNU13qHSz0CuoNPJpPE
-         fXlLfPuOVgW4zOdKZ/9yx+9k0F6QA+1nICKtRSbTsFCgVSB5NDE4ls6H8+uA4NQVI1x7
-         9mNLar+IetNVad9ILpQOs8fJ+zWEO2jj05+FY/Y/afJUQ3EwEzkgp8IefJ3But4MrzdF
-         GIESDC2IQc/xrFEJ5LkrHxqLDP2YWqhnqeN3J291AfePHZOVyfS3ZlbDD291HZou1kgk
-         oPsw==
-X-Forwarded-Encrypted: i=1; AKwUvByAr3owYrTbgZrztq1om9OzMmasunSA0OGsE97S/JpUeHa6gkwG+MK/yUC8Q/nWHTCUFEDppDSaYBE=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYKZfhzVTYh9j2eE2D3X3z4Z9odk4BFv8QQRVbJ+2mGVOKTRqCeF
-	1s7qdIk+LwFk9FVIAJ6hjg6Nh6ZHVXdjFOd3rAeAuOf6g5Cy8vWXg0iA
-X-Gm-Gg: AYBFou3pAe5Pmjcv9AwEy2syOfnnS9yvmRYUNqle/c7dtxP2D2VwKdMx2+cBgxdHvgL
-	GkNY8jMP5Fau5JtKOC6yglBz75BSy0xOSbGtJ/3ZSrI3r0rbwhmZ5MTvGfAImXBJ0yyNjQRz3Sz
-	UvvVsyUUGc3OtwQkz4iDwfOlax/xR3fE9jr0XLR6WWh1uZtmV5mN5PSdIDoyYL/wAb1mJHTxzLt
-	ZTURjvwNahJHMLUtz/OoXO/OGJC8b+0aXQGwH6OHz0JlbCrOdrHXQYPBCNCck/M4OXt7ixVVzWh
-	jRYwhHFo9hjb00wc7KdEkNBORbwsg3gxEJERQqFp+/QFbuaFkXaEVRhUH8yXNTVQJaPodRaAA3N
-	B9BgwJtSwbWKSSY7kH1kt8o+J8iRW84WnHR2hzN9VkA/AurDoz/+n3pAWUd6in75OiGvxXKV3NW
-	NPPvHoshkh5puWxfylH5Wb6cI9TEC8i66dvAfKjDv5MoAeTK3cpUoWkDKIZ92tTz+ebpDiVOWFy
-	2xcCd6r7T6RIhSaX2z0a7/fOixxAM+ixyJ5kDs37TcItEbOF1LH8cpgbVuSsGesCZoSSeeZzx6k
-	rpjvAi4SU1t3g51amRI9KozJtOmnz2dbtNlEKqFqpGj71FX2
-X-Received: by 2002:a05:701b:4502:10b0:163:fd28:5658 with SMTP id a92af1059eb24-1ac5b02289fmr3445161c88.22.1793373390156;
-        Fri, 30 Oct 2026 08:16:30 -0700 (PDT)
+        bh=zA4vatNcIKJhE+Eb39umMv/j/wzlc1JpQpFuLfiMq1c=;
+        b=ZpCPgrp7BUvJKp8h+EV/81LRnIzvhXUXAfIuTAawdxlX8a4GX33wQnl8D7PxNpqu11
+         O/7V+Yrl4WpNN6DEjJE13h8CE1T+j6p8J6XM48xt9FBOZaTNTfXAtZ+YhvxWezJRqd+V
+         1bGVzozDTxdQKDpuVhGVxLNLBVEZFMTuwors+X5trW2BkmztOteREODHFLKH2vLSmB5j
+         W9GhLi9ZFz1djsU8tgEHF8sVwjMTAPbn7B4o1Js1H33s0Wq/utUbolWi5prcAGiNFr7b
+         B87hCHxl/1/Zc/plIo0vkYj2P4dFZtgJEhAhQ60+74lcv+Ozyr+cYOZxEhj3dbWFXXQF
+         3Q0w==
+X-Forwarded-Encrypted: i=1; AKwUvBxOF5Dhju+x4qZrypiDetEGwJOYJScftnkgYFuaY57DCfZpMBoXiC6RboYqD5oVouqHb21Uyx7qcfo=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYKUwThs833Df5Zxiu0P0Exsy93N8iM3kMIyUuIcQCuGj22/twi3
+	Mp0R6Mx+3bFs1Os3ZlIsTjxv+lbwEx99SL0X7RSymdYR8Swdsc5+IBSk
+X-Gm-Gg: AYBFou1EnVgGDP/lM+FQO3nUPF3k0IDQq7hNRC1Ekh4uq8Osv1un8ETM0mwE7NS+h3U
+	sA0F2o8yISMyTizZwmlEAfurenIEa7yytyPXp4cy3ItkJYtDgI7ref5KLoD43cAGLbL4wGNhSPv
+	o7lTiK0tiknhetbYRhollV3ED+6UnZuhRwdLi2wv7zsg/9VnSU1GJKuPburBFt/i0ew5fV4Udk2
+	CmIN6XB2DOoBa8YQbj2qXafeejMg9o1DcLhNmwldzHaKGvlzYgQQG15JmzX3HUn2CzOPqQr+/tN
+	OKvjIatHVVr2HjfQF42bNV8UU2gJi3fCWYD93pPhZzzgKBb5Hd7kRAPqWQwrtIxQ/sbjU5TZvsb
+	PM+UB4jO1npuYfyMF0iPHg3Ksbl+xpjxc8CaBHJ/RjK+aIhp15+B7yjqxgmj/RyLjmulLPkkJLp
+	pjnpt1DfoOIci9NaaHGbuZZJ6gUGQUmI7n0Z9NHKncYuRlvFTpVM1xfgfwn65Qv9/RuTQ08fNGH
+	zSWW/cdvZ0CWyCbZs/wEmNBmjUpFOm0j5gBWS6togYvNLHATfDUlxS/ar7lULSKV3jpIax0RTaz
+	Id5p/XP8K529SqG0dcez/clYioFijS7tqn7nGAiS87sCDhxzSFeTCD3oe1RiOyNJsZIDGQ==
+X-Received: by 2002:a05:7022:ea46:10b0:177:9a5b:a89 with SMTP id a92af1059eb24-1ac5b5f270emr4076428c88.29.1793373401184;
+        Fri, 30 Oct 2026 08:16:41 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Anthony PERARD <anthony@xenproject.org>,
@@ -132,18 +132,18 @@ Cc: Anthony PERARD <anthony@xenproject.org>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Artyom Tarasenko <atar4qemu@gmail.com>,
 	qemu-arm@nongnu.org
-Subject: [PATCH 03/15] hw/microblaze: expand DEFINE_MACHINE for MicroBlaze
-Date: Fri, 30 Oct 2026 23:15:24 +0800
-Message-ID: <20261030151539.1872-4-luoyonggang@gmail.com>
+Subject: [PATCH 04/15] hw/tricore: expand DEFINE_MACHINE in tricore_testboard.c
+Date: Fri, 30 Oct 2026 23:15:25 +0800
+Message-ID: <20261030151539.1872-5-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.55.0.windows.3
 In-Reply-To: <20261030151539.1872-1-luoyonggang@gmail.com>
 References: <20261030151539.1872-1-luoyonggang@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1793373392-BE4DB034-EFC43F42/0/0
+X-purgate-ID: tlsNG-16d1c6/1793373403-F6A7477B-EC2C353E/0/0
 X-purgate-type: clean
-X-purgate-size: 2804
+X-purgate-size: 1433
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
@@ -152,80 +152,47 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Expand DEFINE_MACHINE() in hw/microblaze/petalogix_ml605_mmu.c and
-hw/microblaze/xlnx-zynqmp-pmu.c to explicit TypeInfo and type_init()
-functions calling type_register_static().
+Expand DEFINE_MACHINE() in hw/tricore/tricore_testboard.c to
+ttb_machine_typeinfo and ttb_machine_register_types() calling
+type_register_static().
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 ---
- hw/microblaze/petalogix_ml605_mmu.c | 19 +++++++++++++++++--
- hw/microblaze/xlnx-zynqmp-pmu.c     | 19 +++++++++++++++++--
- 2 files changed, 34 insertions(+), 4 deletions(-)
+ hw/tricore/tricore_testboard.c | 18 ++++++++++++++++--
+ 1 file changed, 16 insertions(+), 2 deletions(-)
 
-diff --git a/hw/microblaze/petalogix_ml605_mmu.c b/hw/microblaze/petalogix_ml605_mmu.c
-index 8f9f54ff1e2..393eeba76f5 100644
---- a/hw/microblaze/petalogix_ml605_mmu.c
-+++ b/hw/microblaze/petalogix_ml605_mmu.c
-@@ -214,10 +214,25 @@ petalogix_ml605_init(MachineState *machine)
- 
+diff --git a/hw/tricore/tricore_testboard.c b/hw/tricore/tricore_testboard.c
+index d5d796c8eec..2a25f090520 100644
+--- a/hw/tricore/tricore_testboard.c
++++ b/hw/tricore/tricore_testboard.c
+@@ -106,11 +106,25 @@ static void tricoreboard_init(MachineState *machine)
+     tricore_testboard_init(machine, 0x183);
  }
  
--static void petalogix_ml605_machine_init(MachineClass *mc)
-+static void petalogix_ml605_machine_class_init(ObjectClass *oc,
-+                                               const void *data)
+-static void ttb_machine_init(MachineClass *mc)
++static void ttb_machine_class_init(ObjectClass *oc, const void *data)
  {
 +    MachineClass *mc = MACHINE_CLASS(oc);
 +
-     mc->desc = "PetaLogix linux refdesign for xilinx ml605 (little endian)";
-     mc->init = petalogix_ml605_init;
+     mc->desc = "a minimal TriCore board";
+     mc->init = tricoreboard_init;
+     mc->default_cpu_type = TRICORE_CPU_TYPE_NAME("tc1796");
  }
  
--DEFINE_MACHINE("petalogix-ml605", petalogix_ml605_machine_init)
-+static const TypeInfo petalogix_ml605_machine_typeinfo = {
-+    .name       = MACHINE_TYPE_NAME("petalogix-ml605"),
+-DEFINE_MACHINE("tricore_testboard", ttb_machine_init)
++static const TypeInfo ttb_machine_typeinfo = {
++    .name       = MACHINE_TYPE_NAME("tricore_testboard"),
 +    .parent     = TYPE_MACHINE,
-+    .class_init = petalogix_ml605_machine_class_init,
++    .class_init = ttb_machine_class_init,
 +    .instance_size = sizeof(MachineState),
 +};
 +
-+static void petalogix_ml605_machine_register_types(void)
++static void ttb_machine_register_types(void)
 +{
-+    type_register_static(&petalogix_ml605_machine_typeinfo);
++    type_register_static(&ttb_machine_typeinfo);
 +}
 +
-+type_init(petalogix_ml605_machine_register_types)
-diff --git a/hw/microblaze/xlnx-zynqmp-pmu.c b/hw/microblaze/xlnx-zynqmp-pmu.c
-index 00154236bf8..d3ade9faeee 100644
---- a/hw/microblaze/xlnx-zynqmp-pmu.c
-+++ b/hw/microblaze/xlnx-zynqmp-pmu.c
-@@ -179,10 +179,25 @@ static void xlnx_zynqmp_pmu_init(MachineState *machine)
-                            NULL);
- }
- 
--static void xlnx_zynqmp_pmu_machine_init(MachineClass *mc)
-+static void xlnx_zynqmp_pmu_machine_class_init(ObjectClass *oc,
-+                                               const void *data)
- {
-+    MachineClass *mc = MACHINE_CLASS(oc);
-+
-     mc->desc = "Xilinx ZynqMP PMU machine (little endian)";
-     mc->init = xlnx_zynqmp_pmu_init;
- }
- 
--DEFINE_MACHINE("xlnx-zynqmp-pmu", xlnx_zynqmp_pmu_machine_init)
-+static const TypeInfo xlnx_zynqmp_pmu_machine_typeinfo = {
-+    .name       = MACHINE_TYPE_NAME("xlnx-zynqmp-pmu"),
-+    .parent     = TYPE_MACHINE,
-+    .class_init = xlnx_zynqmp_pmu_machine_class_init,
-+    .instance_size = sizeof(MachineState),
-+};
-+
-+static void xlnx_zynqmp_pmu_machine_register_types(void)
-+{
-+    type_register_static(&xlnx_zynqmp_pmu_machine_typeinfo);
-+}
-+
-+type_init(xlnx_zynqmp_pmu_machine_register_types)
++type_init(ttb_machine_register_types)
 -- 
 2.55.0.windows.3
 
