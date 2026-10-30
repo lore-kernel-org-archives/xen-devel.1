@@ -2,60 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E281A606A31A
-	for <xen-devel@archiver.kernel.org>; Fri, 30 Oct 2026 08:49:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0150A606A31A
+	for <xen-devel@archiver.kernel.org>; Fri, 30 Oct 2026 09:04:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=rYdG1woc
-Received: from list by lists.xenproject.org with outflank-mailman.1465469.1676001 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=valinux.co.jp header.i=@valinux.co.jp header.a=rsa-sha256 header.s=selector1 header.b=BTxUUOoJ
+Received: from list by lists.xenproject.org with outflank-mailman.1465481.1676012 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMiIj-0002fx-RW; Fri, 30 Oct 2026 08:49:29 +0000
+	id 1xMiXN-0005lA-7t; Fri, 30 Oct 2026 09:04:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1465469.1676001; Fri, 30 Oct 2026 08:49:29 +0000
+Received: by outflank-mailman (output) from mailman id 1465481.1676012; Fri, 30 Oct 2026 09:04:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMiIj-0002fq-MU; Fri, 30 Oct 2026 08:49:29 +0000
-Received: by outflank-mailman (input) for mailman id 1465469;
- Fri, 30 Oct 2026 08:49:27 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xMiXN-0005l3-4u; Fri, 30 Oct 2026 09:04:37 +0000
+Received: by outflank-mailman (input) for mailman id 1465481;
+ Fri, 30 Oct 2026 09:04:35 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1xMiIh-0002fk-8D
- for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 08:49:27 +0000
+ (envelope-from <takakura@valinux.co.jp>) id 1xMiXK-0005kx-OG
+ for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 09:04:35 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xMiIg-008yeb-6F
- for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 09:49:26 +0100
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xMiXK-002Fio-4k
+ for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 10:04:34 +0100
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6ae45a11-e002-0a2a0a5209dd-0a2a4508a1b2-4
- for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 09:49:25 +0100
-Received: from [52.101.56.41]
- (helo=BN1PR04CU002.outbound.protection.outlook.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6ae45a13-f659-0a2a45080019-34653829b11f-3
- for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 09:49:24 +0100
-Received: from SJ0P220CA0012.NAMP220.PROD.OUTLOOK.COM (2603:10b6:a03:41b::24)
- by PH6PR12MB902451.namprd12.prod.outlook.com (2603:10b6:510:3df::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.22; Fri, 30 Oct
- 2026 08:49:20 +0000
-Received: from CO1PEPF00018860.namprd02.prod.outlook.com
- (2603:10b6:a03:41b:cafe::1d) by SJ0P220CA0012.outlook.office365.com
- (2603:10b6:a03:41b::24) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.569.8 via Frontend Transport; Fri, 30
- Oct 2026 08:49:20 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- CO1PEPF00018860.mail.protection.outlook.com (10.167.249.249) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.569.4 via Frontend Transport; Fri, 30 Oct 2026 08:49:20 +0000
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Fri, 30 Oct
- 2026 03:49:19 -0500
-Received: from [192.168.31.141] (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.53 via Frontend
- Transport; Fri, 30 Oct 2026 03:49:18 -0500
+ (envelope-from <takakura@valinux.co.jp>)
+ id 6ae45d9f-bab6-0a2a0a5309dd-0a2a450ce400-12
+ for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 10:04:33 +0100
+Received: from [52.101.229.108]
+ (helo=TY3P286CU002.outbound.protection.outlook.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <takakura@valinux.co.jp>)
+ id 6ae45d9d-f479-0a2a450c0019-3465e56cc751-3
+ for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 10:04:32 +0100
+Received: from TY5P286MB319683.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:403:511::19) by TY3P286MB3793.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:400:40d::7) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.569.9; Fri, 30 Oct
+ 2026 09:04:26 +0000
+Received: from TY5P286MB319683.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::5f8d:a6bf:3b84:5a82]) by TY5P286MB319683.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::5f8d:a6bf:3b84:5a82%5]) with mapi id 15.21.0569.008; Fri, 30 Oct 2026
+ 09:04:26 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -64,108 +52,295 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-Id:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=hv4wF5aWkyvjYE6YwSZLM9vLzKPPxbR8kXL8wtQMdVwf7NJieGDzSSSJLFNaDxYvkqv70V+2towlzoDbc5C0gNnYkOFW/UzOJ+mEH4vBFshMqCGZGP0qbznkEyIQUp12qv4wFMCs++A4eMIqDBtdXajjXc7mNfiRjyR0v2b9foWbHtzfbmk/4nH4gy/Pj0fwIQ2PofXWGKctPdmu9MBL0ETXHtZIL1tFl1lDP5+6rt9ZprpI5vZtCE+C8EQP5urcCbwJSiXaEg/B/g99EqLifKcoKAsap31E/CJsVJ8IR96DvQjIz2LsYta8XdkzaYoRpLYq7hlLeYLCpFzfFy6DNw==
+ b=oIaZfOaBAsS+AqkAa5yDtMcCCUs8+OheF8qAb+mlcZng1hlFmKL9TTijLHTHKr801GkmqIa/ArkZt/NLjRVqi4yB7OMl3ofgndp0i4v3bskjk7iBoD22pD0O/Kdt5WXNCdnBxAB7Wvx+xJnMjO1m/Ijw8ltnZFSXnAZInYOCIO+e4uVxJ3Af+gYiI4IYf9Ol6wINcrbQGyEA6BOpSaBP8lX6+zOeTbRIJbUrVRC7O0G4F+NdMCPjmrQl/MsM8/kaowQWZRqKGFTkMOPJ2Dfha6YL5QYqoqYuPe4POowW9HiIXP7dtxEKeKeUHA7F0t6DKavGsEwPc0oSCen4tyU8Lw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vXGmtj+iz10g+AM3qEIZdYwY3Unl0j7ECxtlYWcVhHs=;
- b=jHWvVbrXqO46yaEsEZ1T/DQNDrQeDB8aN2xDaJEUGi3bADc5zFuREzLKCRJh4Y96HhL+0NO2m4jzbZh2kpm8H5Bu/5K+lL2zrVzJqA39P0lYMoDcATV98HInzE6u+V9aM2f2AjItnTHC+o7PXiGBMc8OYaNhd4vN/NpamyvpMjFySZ9UzD2RYnO04nBkrNgFvpFfpDc2yVqBtl2w74TnZCL9TnxBlkaw08i0Em09peVnI+lHmh7PW+3iN7OSArVZK+reupTn2aKk6KeBnL8q++sVEJXIXHSXeRHxyWpTUy9amg9W2bS1zVhgTwBS7YIgtsMpTx+3fvjDFh74VmeGgA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=gmail.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ bh=IcFToYh5/jqGF0J4/az2j2kmka+Rz9WiaE5C3TEsFVA=;
+ b=ja+Uf05K2toArHVTjREqZ3sLea9CTnTW+Z6+j2GZBmQndQHtxaLoWYTLksInpAkdSyNIfER/oNJHEuati/RJsv71tx+b9lGrxVW05UuaxI3NrCuvZi5t4GLu+Xo0a7O7IbXgcyYtnMxlSGqWagjD3gRB+dVK5ZbY+wc2B7ZVy8G8fdFFQhFyJ7HWUZdaWdXHZEfJpZWEpNYPT6n/H0SV7DIDUWQZEcRM4yw7DGQUHKF9wGHnyDg58RG0KxoYifLeheATlttmBEk2KCzMpum/ztdgXcn2GCwLCUCuSQ37cvutKIlACkoEzrt0aOVHEhpM7X7OA4aPsFij+gXdOxGv5A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
+ header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vXGmtj+iz10g+AM3qEIZdYwY3Unl0j7ECxtlYWcVhHs=;
- b=rYdG1woc2BtTUNvARk+uWU7O1wabY2AGd9N8qZw5gLmjqRrtEzSU0/Mz7jJNHuqtCIYbtDQoVrrfVLNUv5FeIdiBqXggExbgsYA9oEyKFnbGa06LwcDJuVTkSxjd/TVWya1N6kXXdPEKSYmygSWamKtP4bhSzpXg+d8MsKcOGWQ=
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Message-ID: <12b11b1a-7238-42fb-a157-a3b5afe305bd@amd.com>
-Date: Fri, 30 Oct 2026 09:49:13 +0100
+ bh=IcFToYh5/jqGF0J4/az2j2kmka+Rz9WiaE5C3TEsFVA=;
+ b=BTxUUOoJS6PHCyFRTMqBPcbVD7mbsx8jw2KU1Df9ZY2Y0dFbLxngoqB7Cs3IMFjZaix5osJeu8eNri5g5qsyZEi7tdUnUl87PNZrTt9FWS226xVXNwefCTrjhjlRcKlW8IeAy0IHKXjizOtzRrEA3KnEAKRD8R5UpGrBbq5qrz0=
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=valinux.co.jp;
+From: Ryo Takakura <takakura@valinux.co.jp>
+To: bernhard.kaindl@citrix.com
+Cc: andrew.cooper3@citrix.com,
+	anthony.perard@vates.tech,
+	jbeulich@suse.com,
+	julien@xen.org,
+	michal.orzel@amd.com,
+	roger@xenproject.org,
+	sstabellini@kernel.org,
+	takakura@valinux.co.jp,
+	xen-devel@lists.xenproject.org
+Subject: Re: [RFC 4/5] xen/tracing: Add a function tracer
+Date: Fri, 30 Oct 2026 18:02:58 +0900
+Message-Id: <20261030090258.125062-1-takakura@valinux.co.jp>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <179285185778.1706038.7602957469449476344.b4-review@b4>
+References: <179285185778.1706038.7602957469449476344.b4-review@b4>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: TY4P301CA0051.JPNP301.PROD.OUTLOOK.COM
+ (2603:1096:405:36b::12) To TY5P286MB319683.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:403:511::19)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/dt: Don't advertise Xen static-heap region to hwdom
-To: Kuan-Wei Chiu <visitorckw@gmail.com>
-CC: <xen-devel@lists.xenproject.org>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>
-References: <20261029104305.169036-1-michal.orzel@amd.com>
- <auQSEsdNOCjL53Y6@google.com>
-From: "Orzel, Michal" <michal.orzel@amd.com>
-Content-Language: en-US
-In-Reply-To: <auQSEsdNOCjL53Y6@google.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF00018860:EE_|PH6PR12MB902451:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5d9973b4-1e7c-4728-7938-08df3662b086
+X-MS-TrafficTypeDiagnostic: TY5P286MB319683:EE_|TY3P286MB3793:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5edd6344-ccae-4343-cd2c-08df3664cc82
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|23010399003|1800799024|376014|36860700016|261026140227099003|5023799004|4143699003|11063799006|261028144727099003|56012099006|261026121527099003|261021121427099003|10067099003|260925021911599003|260925022911599003|260925021311599003|261022105027099003|261022075727099003|18002099003|22082099003|6133799003;
+	BCL:0;ARA:13230040|23010399003|376014|1800799024|366016|56012099006|261009223027099003|261026121527099003|261026140227099003|261028144727099003|261021121427099003|261022075727099003|10067099003|261022105027099003|22082099003|18002099003|3023799007;
 X-Microsoft-Antispam-Message-Info:
-	ee41KT2TbT21YnYdL6vF7bZISWJC33c/7KK1wgd/Fv7vX7V/d4yWCDgc8ImDKo2RgBRvGyLbH7E/AxFm9bDgQz7usfXRongwPzlbrUJhPMsNJTYuC33BuUez5SQKWYEWeqOWvuLcRffLrP90pyGc21KIrAFvADoguO5YO7ybjro1ncJ+gPYUjHXSCvzjRNTXygSfKwQwA1UsFRt6hwEPWS3ajutz2JlY0TM3CNnAp4VGtw7kK2nVTa4fhYc+4EkrOqpBmcB6VAXeUuS5nTDk7HqFiXV2qO7vuiBaZZQWnVODLUZwukVFv3xzzfsQkbNzxcbfIGv0UCGDhQsANN/Wq9OPOpDiDJK4vWaNZIZ4ShQgb7AHfzOq2pQOl8mavtrW/jJo4qF7MUrfEkWTaBZJh1GtpfXnYvbl69uZARbhDrGaoR+TZJObkLwJsk4/RBCTCk1tYm9cuMFY3p0Svyp+aR+qGkS+7JfXKV7w8r0FXu5CF0SYd9Z9M6kLv9n+ZvUb3AmUplaE+0oqisLLWUo5dXohzw9D4Hm3frvrwssdql4IK8dB8Wx2pn8VW3cnKZGyPLYM+0AksyCJLrO0JMlZqcfoMu0jbjKNZn96BtAi/7O+zvOgzUQhqerbeiFjjuEk6a/47UmOw3DSqvoB/WA2zy/10gDTen5RqtFEjgeN0N8PU7X3THUYvEfYoETzj1etQk/onPyvx5wxrqAA2xKHHA==
+	G6vkvINLWrAi8aJSj3F6j856M9mcKNEUeWGkV1/FQb9o5ugPyNhu8NH1B4/2eOgRQlOhtpfD14C/gkWSgCHiWTtlcGVc5carkLZArjlKgNywAAFpfpL2tzNfSQ38gtLmOlft859YBHSw9Ecamz/bdWRxKoelIm8c7Z5XcRX51Vb4TXUXa99+u9Lo05RCJLsV6YFZDqWcIiNHkBJcKEL3mOY3dDx0pEwY5mgLE2jw0FkIe0PkL4j0YGqTsQHFoAbnVNROkurgZC4Ek7YH+yFSnLzwKqPFQidI+rEQjiU/WLlkRev2W7OvXzltDQ8dnW9MrnudAuX83NclIXKE+0rXU2wXPLG89C1C2fFD6xDvqNxEKFFqCntV5vSXDBox2Av/z4/8o+XrJZCJ4w+yuHl34qpwbB/wU33usb+uNJMy5MZendNT9WaLZ+8i8OYgZpdoqlxKjoiRAT9uqWTPn5jwVD+hjZDNxXgv69rYwTmDgmePMERxtBfrsQm73p5ArXiVDFIKT4xiBDBUygqny6cgl3hjBSPYnfOyqeLuP8l/aMX1LTFy4FucfC26/f+ELD6OZ6rDztzAwDG9k1nslZzjKdlpxhkFV7KEtRvoDWQzatszkCm5DDnHQ3QDlqXjAvNn0ayktkuT7h9Osn0Q9mKm1YK1gwhSt2lt9++dT6sLm1w=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(23010399003)(1800799024)(376014)(36860700016)(261026140227099003)(5023799004)(4143699003)(11063799006)(261028144727099003)(56012099006)(261026121527099003)(261021121427099003)(10067099003)(260925021911599003)(260925022911599003)(260925021311599003)(261022105027099003)(261022075727099003)(18002099003)(22082099003)(6133799003);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TY5P286MB319683.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(376014)(1800799024)(366016)(56012099006)(261009223027099003)(261026121527099003)(261026140227099003)(261028144727099003)(261021121427099003)(261022075727099003)(10067099003)(261022105027099003)(22082099003)(18002099003)(3023799007);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	xZ3wisHkZ4NSY4eYXU0pGtQ3g38BYA15l4FRRzxkR3kj9MpTVaIfsGfdz/Nbq9+rmuATNkJWJrQ3gT2GOZwad25LtnJpqMKJzuA6DCpNNwC/W8w8wXzSajIjSUUk2x4my20B0wQb1LPbqySalK18OaKQL8yqXcMxQuqRQoRU1WVgFjHApeRvq4Cpv8s3qyBQLclBYJ9JGdm18NhLJ0JZFQ1ZPTbVjlhrPAGTAThNAOyyoJI4LLtVMtniLUOC8CXDqnrqvstCercpPY2ctppx38rIdGPC5akpwlODDmWGiHNSpjUx7GieC9Kn38K2+/idRqR5WpY1MEvNZwkA8jHlyPJFvD2Bwxuik+ck/tngZWralwqvOYHQrWwv9LkwlY0yxVe42HOOALo7DdJdQ1ecxqRUfJNuSVXU0f9xOg0Kje413u1cAJjQZbO9NMsHwvof
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Oct 2026 08:49:20.4839
+	=?us-ascii?Q?W1VCO0LOVRoLP561jrDVXnaywLkVp9YJ1yMYULwuqUKgm2qEuJo+Sm6Fezn8?=
+ =?us-ascii?Q?ukACmZKgoCsnOuLVLRk+E4PdiPgv8y1lSMLBansDPLo6qT60iCXeDj6nLUn+?=
+ =?us-ascii?Q?DRM3/JCKniA8Ru40huz88PhSNXcl8sGY1nJzhvo8Lwm4HPfj5uMMkyEOpCJf?=
+ =?us-ascii?Q?auTl1XxJ4B6lnmMqYOiqqyq79z9R24p7I0vJegGeQzRq6JsyRkcflZ5ByVl+?=
+ =?us-ascii?Q?4pG4HQ9Pbw6z94/WW3Nst4fvCt7/inAEkMyNAnFLNqxf99liIqks5GQMJ6sV?=
+ =?us-ascii?Q?uqz04peuNQ7qEpgL6NRBPMZ+Yh47CYj7rRg/jthDx5ZIEGQw57owT/UxDLoW?=
+ =?us-ascii?Q?110KKGg2LDGn2SzmLRMbhnBMZUrlVZDAnephaT5CLcARAg4ramiglcb7BdCC?=
+ =?us-ascii?Q?BjFVMvxKuDp5PiXMNlHmRr0bIg6YZb1KQ0+m5V6kmljKU+H62HkULnRo1dFP?=
+ =?us-ascii?Q?vQL/h+hgkkN4h4Lr8fNEH28hybLRAYsysYSIxD26wLMCDy3nwpPRi3tK7mEA?=
+ =?us-ascii?Q?0e3JTSgHiQjwG2QWPbcm6A6CzKPoWC/8E2uk5h2Vv93it4lSim9Irp51cO6E?=
+ =?us-ascii?Q?ga7ykHQrjCYWyOOTMtZZ+lVJpl4s4I8Znq8cVIg4pSF+6+a7Z907rNzK593s?=
+ =?us-ascii?Q?z2KMtoOkzj3VQQv/1sZ7ILcqE/r9N29jDGPlcx2CXNMaVehogs+RLRsw8vpD?=
+ =?us-ascii?Q?Y4z2/SqZEF2cPyLjCCSC8j05kGN+Phu1hF3kU1A58RGv22LtY/7tpxUYErXd?=
+ =?us-ascii?Q?MmK1KX/lqYNqmiwJvQpYu2IK4Y5tGWf4BqZyh0otTHeCPYKIWjlZIRgx2pJb?=
+ =?us-ascii?Q?hUuUZtZWTveJ/rB0aDkpR+mHRzabC37IM8WFWGjmcobeeatHOg9HwLv/za+H?=
+ =?us-ascii?Q?gobkdiuSW5FnkmPVi+Ji3Z+b5ddziyI5iNhuUmbnqOLYTx70PT+RrsvEgeD8?=
+ =?us-ascii?Q?CrCMGqc3X7WuW7k02InFIUocyIs17i+EoVIalnVEhwSoWiz294T7lZkBFzMx?=
+ =?us-ascii?Q?kNFCbmfNt9Nc8G+ELK01Ji8cjPJvhabDUbO8vtkP/9IcU3sPidy1vc7UijMd?=
+ =?us-ascii?Q?Z4dlUSi7cZmH79lbAoqCxe5xVRCdbn1AlCIAqB3UQ1Q9Lo9zwVGGZw3mne4c?=
+ =?us-ascii?Q?QIAMaTwIaBinjxqgeL6toH3XbNArkZ99watIGQ4yU2B8Rhs1ZR3Ew5KVfLB5?=
+ =?us-ascii?Q?A5YO/dDL/9Nmvn2cqvKztrSzwK1kPsc2wzBS0U4surzj+Kw4kCPqUxvYAMo3?=
+ =?us-ascii?Q?ZQITC29SFUtZNDaLXa77bXCv4dc97SoDkgmREu9+jO5ZiFvOyKEpXpWApMKN?=
+ =?us-ascii?Q?gieWTL/Fv9lZEb3iJ4uWTuFDAM1C2+00WYsiN/ZRyEx2xR9mhB/nxssEwwCM?=
+ =?us-ascii?Q?b+p6C179Hgk3ooAuER9FvGccNHk4idQrdU5URLNRrtScVr7/ftpSFGqmO+Ct?=
+ =?us-ascii?Q?Cq9HATucmjVc+w4anmfzbcIY/CKdLqo2SYmQofGyAlCDZYLfrU4Fjayce38F?=
+ =?us-ascii?Q?vdp5CiU3qUfklLruYA7fOc87CMpsdtObjZFE90PCyZRhYG937k+jazisp2cD?=
+ =?us-ascii?Q?0l+NUsBwOz0rBWmwlot9QCU89W4VcenjioJJy4U9i1gvQMxYFzj2fVYWfK5B?=
+ =?us-ascii?Q?ci+g2qdBbaIVjBzWl/poLKAnlEKSqnL3Gpgq5l45B0tyHpxPE7wg2ajr6dcZ?=
+ =?us-ascii?Q?UiWD6ZnfiGMJ4YNGjVoAleIfSftCB4oyay27RL8not6rBysLZTyJmEw7efu3?=
+ =?us-ascii?Q?2f1VhId2vg=3D=3D?=
+X-OriginatorOrg: valinux.co.jp
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5edd6344-ccae-4343-cd2c-08df3664cc82
+X-MS-Exchange-CrossTenant-AuthSource: TY5P286MB319683.JPNP286.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Oct 2026 09:04:26.6686
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5d9973b4-1e7c-4728-7938-08df3662b086
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CO1PEPF00018860.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH6PR12MB902451
-X-purgate-ID: tlsNG-c1860d/1793350165-CF75B87B-C9C36AD3/0/0
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: d4rmmjIe5zngt0cczmxKM0vk1LBdVmL+xqZxOdHqYoLGBnBE66FAJWAfmTzW6wiF/aTdmaVlp06rQXK0k/nfmg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY3P286MB3793
+X-purgate-ID: tlsNG-d25034/1793351072-5093EA5B-71B642D3/0/0
 X-purgate-type: clean
-X-purgate-size: 1300
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=4.0.1
+X-purgate-size: 6678
+X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+On Sat, 24 Oct 2026 16:24:17 +0200, Bernhard Kaindl wrote:
+>> --- /dev/null
+>> +++ b/xen/common/function_trace.c
+>> @@ -0,0 +1,274 @@
+>> +    if ( this_cpu(function_trace_recursing) )
+>> +        return;
+>> +
+>> +    this_cpu(function_trace_recursing) = true;
+>> +
+>> +    buf = &this_cpu(function_trace_buffer);
+>> +    rec = &buf->records[buf->head];
+>> [...]
+>> +    buf->head = (buf->head + 1) % FUNCTION_TRACE_BUFSIZE;
+>> +    buf->written++;
+>> +
+>> +    this_cpu(function_trace_recursing) = false;
+>
+>What ensures that a callback which has already passed the dispatcher's
+>tracing_on check has finished before another CPU reads or clears its
+>buffer? The tracer registration does not appear to provide a stop hook:
 
+There is currently no such synchronization in either hypfs_trace.c
+or function_trace.c.
 
-On 30-Oct-26 04:42, Kuan-Wei Chiu wrote:
-> On Thu, Oct 29, 2026 at 11:43:05AM +0100, Michal Orzel wrote:
->> bootinfo.reserved_mem is used to store different types of memory that
->> Xen considers as reserved: domU static mem, normal /reserved-memory,
->> FDT memreserve and Xen static heap. make_memory_node(), invoked during
->> FDT generation for a hwdom for reserved memory, only skips the domU
->> static memory and FDT memreserve. This results in advertising Xen static
->> heap (if used) to a hwdom as /memory. This memory is not mapped in P2M
->> and guest attempt to access it fails. Interestingly, if the
->> /reserved-memory node is placed after /chosen, there is no problem because
->> of the check at the beginning of make_memory_node() that finds the first
->> memory range using the correct type.
+>> --- /dev/null
+>> +++ b/xen/common/function_trace.c
+>> @@ -0,0 +1,274 @@
+>> +static struct tracer function_tracer = {
+>> +    .name = "function",
+>> +    .init = function_tracer_init,
+>> +    .reset = function_tracer_reset,
+>> +    .clear_trace = function_tracer_clear,
+>> +    .get_trace_size = function_tracer_get_trace_size,
+>> +    .print_trace = function_tracer_print_trace,
+>> +};
+>
+>For reference, tracing_set_on() in xen/common/hypfs_trace.c, introduced
+>by the preceding patch, disables recording with:
+>
+>>         if ( tracer->stop )
+>>             rc = tracer->stop(&global_trace);
+>>     }
 >>
->> Fixes: 4596329291f5 ("docs, xen/arm: Introduce static heap memory")
->> Signed-off-by: Michal Orzel <michal.orzel@amd.com>
-> 
-> Reviewed-by: Kuan-Wei Chiu <visitorckw@gmail.com>
-> 
-> I guess git will treat this as conflicting with my dt patch when
-> applying. Let me know if this gets merged first and you would like me
-> to rebase and resend.
-It will likely get merged first but don't worry. I can solve the conflict when I
-start reviewing your patch.
+>>     if ( !rc )
+>>         global_trace.tracing_on = on;
+>
+>Could an already admitted callback still hold a record slot when this
+>clear resets its CPU's counters?
 
-~Michal
+I see. Yes, the callback can still be running.
 
+>> --- /dev/null
+>> +++ b/xen/common/function_trace.c
+>> @@ -0,0 +1,274 @@
+>> +static int cf_check function_tracer_clear(struct trace_context *tr)
+>> +{
+>> +    struct function_trace_cpu_buffer *buf;
+>> +    unsigned int cpu;
+>> +
+>> +    for_each_online_cpu ( cpu )
+>> +    {
+>> +        buf = &per_cpu(function_trace_buffer, cpu);
+>> +        buf->head = 0;
+>> +        buf->written = 0;
+>> +    }
+>
+>If that callback then finishes writing its old slot and updates head
+>and written, could the reset counters describe a different slot from
+>the one just filled? Could the print path likewise observe a partially
+>written record?
+
+Yes, I think both can happen.
+
+>The per-CPU recursion flag seems useful for nesting,
+>but wouldn't it leave these remote accesses unsynchronized?
+
+Yes, I added the flag only to prevent nesting.
+It does not solve the issues you raised.
+
+>Would a stop-and-drain protocol shared with callback removal let read,
+>clear, and reset operate only once the buffers are stable?
+
+Yes, I think extendeding the RCU read-side region which you
+suggested in your feedback to the patch 3/5 can be used here as well.
+I'll make sure callbacks are drained both when stopping tracing
+and when removing the callback.
+
+>There also seems to be a size-check consequence of a late writer:
+>
+>> --- /dev/null
+>> +++ b/xen/common/function_trace.c
+>> @@ -0,0 +1,274 @@
+>> +    for_each_online_cpu ( cpu )
+>> +    {
+>> +        buf = &per_cpu(function_trace_buffer, cpu);
+>> +        count = min(buf->written, (uint64_t)FUNCTION_TRACE_BUFSIZE);
+>> +        size += count * FUNCTION_TRACE_RECORD_TEXT_SIZE;
+>> +    }
+>
+>The existing hypfs_read() in xen/common/hypfs.c calculates the size and
+>checks the guest-provided length before calling the reader:
+>
+>>     unsigned int size = entry->funcs->getsize(entry);
+>> [...]
+>>     ret = -ENOBUFS;
+>>     if ( ulen < size + sizeof(e) )
+>>         goto out;
+>>
+>>     guest_handle_add_offset(uaddr, sizeof(e));
+>>
+>>     ret = entry->funcs->read(entry, uaddr);
+>
+>The trace_read() callback in xen/common/hypfs_trace.c then samples the
+>tracer size again, allocates that size, and later copies that amount:
+>
+>>     size = tracer->get_trace_size(&global_trace);
+>> [...]
+>>     buf = xzalloc_array(char, size);
+>> [...]
+>>     if ( copy_to_guest(uaddr, buf, size) )
+>>         rc = -EFAULT;
+>
+>If a final callback increases written between these two size samples,
+>while the ring is not yet full, could the second size exceed the length
+>already checked for the request? Would an owned snapshot, or a shared
+>stable-size protocol, keep the checked length and copy consistent?
+
+Thank you for detailing the issue and the possible solution.
+Yes, the second size could exceed the first size.
+And to keep the size consistent, I'll make it to keep a snapshot
+following your suggestion in the next version.
+
+>Could the snapshot also use a stable CPU set? The sizing, clearing, and
+>iterator construction each traverse for_each_online_cpu(), and the
+>iterator retains buffer pointers while producing the output:
+>
+>xen/common/function_trace.c:
+>> @@ -0,0 +1,274 @@
+>> +    for_each_online_cpu ( cpu )
+>> +    {
+>> +        const struct function_trace_cpu_buffer *cbuf = &per_cpu(function_trace_buffer, cpu);
+>> +        struct buffer_iterator *iter = &iters[nr_iters++];
+>> +
+>> +        iter->buffer = cbuf;
+>> +        iter->count = min(cbuf->written, (uint64_t)FUNCTION_TRACE_BUFSIZE);
+>> +        iter->start = cbuf->written >= FUNCTION_TRACE_BUFSIZE ? cbuf->head : 0;
+>
+>For reference, get_cpu_maps() in xen/common/cpu.c uses the CPU-hotplug
+>lock rather than the HypFS lock:
+>
+>> bool get_cpu_maps(void)
+>> {
+>>     return read_trylock(&cpu_add_remove_lock);
+>> }
+>
+>Would it make sense to pin the relevant CPU set while taking a snapshot,
+>and use that same snapshot for sizing and rendering?
+
+Yes, it makes sense.
+
+>What should happen
+>to records on a parked offline CPU? Could clearing only online buffers
+>allow its old records to reappear when that CPU comes online again?
+
+I see.
+I'll make the buffers to be clear based on cpu_present_map.
+I think this should prevent old records from reappearing
+when a CPU comes online again.
+
+>It looks like there is a design question of the stop-and-snapshot contract
+>to drain callbacks safely in their permitted contexts and preserve
+>one snapshot across HypFS's size check and copy. Locking each traversal
+>separately would still leave the gap between the two size samples.
+
+Understood. I'll make sure callbacks get drained, and keep a snapshot
+that can be used for both sizing and copying.
+
+>Thanks for checking these interactions. Is there an existing mechanism
+>that already keeps the buffers and CPU set stable across these steps?
+
+Thank you for your feedback. They are currently missing.
+I'll make sure they get fixed in the next version.
+
+Sincerely,
+Ryo Takakura
 
