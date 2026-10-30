@@ -2,80 +2,80 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C8CA606A32E
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7822D606A32F
 	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 05:50:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=aJ5Zz5Jk
-Received: from list by lists.xenproject.org with outflank-mailman.1467439.1676768 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=CX6vUGrl
+Received: from list by lists.xenproject.org with outflank-mailman.1467431.1676742 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNkwA-000384-Ge; Mon, 02 Nov 2026 05:50:30 +0000
+	id 1xNkw9-0002cP-6F; Mon, 02 Nov 2026 05:50:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1467439.1676768; Mon, 02 Nov 2026 05:50:30 +0000
+Received: by outflank-mailman (output) from mailman id 1467431.1676742; Mon, 02 Nov 2026 05:50:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNkwA-00035n-88; Mon, 02 Nov 2026 05:50:30 +0000
-Received: by outflank-mailman (input) for mailman id 1467439;
- Sun, 01 Nov 2026 20:12:31 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xNkw8-0002aO-Uq; Mon, 02 Nov 2026 05:50:28 +0000
+Received: by outflank-mailman (input) for mailman id 1467431;
+ Sun, 01 Nov 2026 20:10:07 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <armbru@redhat.com>) id 1xNbup-0001rL-3p
- for xen-devel@lists.xenproject.org; Sun, 01 Nov 2026 20:12:31 +0000
+ (envelope-from <armbru@redhat.com>) id 1xNbsV-0001hi-Il
+ for xen-devel@lists.xenproject.org; Sun, 01 Nov 2026 20:10:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xNbuo-00ETjk-H1
- for xen-devel@lists.xenproject.org; Sun, 01 Nov 2026 21:12:30 +0100
-Received: from [10.42.69.11] (helo=localhost)
+ id 1xNbsU-007BZx-Ov
+ for xen-devel@lists.xenproject.org; Sun, 01 Nov 2026 21:10:06 +0100
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <armbru@redhat.com>)
- id 6ae79ce6-e002-0a2a0a5209dd-0a2a450bd82a-28
- for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 21:12:30 +0100
+ id 6ae79c9c-bab6-0a2a0a5309dd-0a2a4505b6f4-2
+ for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 21:10:06 +0100
 Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <armbru@redhat.com>)
- id 6ae79d2d-b7e8-0a2a450b0019-aa0a857c568d-3
- for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 21:12:30 +0100
+ id 6ae79c9d-4cb1-0a2a45050019-aa0a857ca2c7-3
+ for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 21:10:06 +0100
 Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-400--bl76eGfOWKWgGNyjcKPkw-1; Sun,
- 01 Nov 2026 15:12:27 -0500
-Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-612-urAbHKg2Pm61HrOGJHCLTg-1; Sun,
+ 01 Nov 2026 15:10:00 -0500
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id CA7C11955BFE; Sun,  1 Nov 2026 20:12:21 +0000 (UTC)
+ id 5AA941954AE2; Sun,  1 Nov 2026 20:09:55 +0000 (UTC)
 Received: from blackfin.pond.sub.org (unknown [10.44.22.2])
- by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 9BF59767; Sun,  1 Nov 2026 20:12:19 +0000 (UTC)
+ by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 9BC5C30002CB; Sun,  1 Nov 2026 20:09:52 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 3331821E6A04; Sun, 01 Nov 2026 21:12:17 +0100 (CET)
-Resent-To: pasic@linux.ibm.com, 17746591750@163.com, rathc@linux.ibm.com,
- alistair@alistair23.me, stefanb@linux.vnet.ibm.com, graf@amazon.com,
- xen-devel@lists.xenproject.org, FangSheng.Huang@amd.com, luc@lmichel.fr,
- michael.roth@amd.com, lixianglai@loongson.cn, maobibo@loongson.cn,
- pbarbuda@microsoft.com, yoshinori.sato@nifty.com, qemu-arm@nongnu.org,
- qemu-block@nongnu.org, qemu-devel@nongnu.org, qemu-ppc@nongnu.org,
- qemu-riscv@nongnu.org, qemu-s390x@nongnu.org, john.levon@nutanix.com,
- thanos.makatos@nutanix.com, kfting@nuvoton.com, den@openvz.org,
- elena.ufimtseva@oracle.com, jag.raman@oracle.com,
- daniel.barboza@oss.qualcomm.com, philmd@oss.qualcomm.com,
- pierrick.bouvier@oss.qualcomm.com, phil@philjordan.eu,
- tangtao1634@phytium.com.cn, chao.liu@processmission.com, jiri@resnulli.us,
- sam@rfc1149.net, anisa.su@samsung.com, alex@shazbot.org, farosas@suse.de,
+ id 46A7D21E6A04; Sun, 01 Nov 2026 21:09:50 +0100 (CET)
+Resent-To: 17746591750@163.com, alistair@alistair23.me, graf@amazon.com,
+ FangSheng.Huang@amd.com, michael.roth@amd.com, jamin_lin@aspeedtech.com,
+ kane_chen@aspeedtech.com, palmer@dabbelt.com, rbolshakov@ddn.com,
+ foss@defmacro.it, sebastian.huber@embedded-brains.de, fam@euphon.net,
+ jiaxun.yang@flygoat.com, lizhijian@fujitsu.com, atar4qemu@gmail.com,
+ edgar.iglesias@gmail.com, jasowangio@gmail.com, liwei1518@gmail.com,
+ npiggin@gmail.com, zhangckid@gmail.com, titusr@google.com,
+ wuhaotsh@google.com, arei.gonglei@huawei.com, berto@igalia.com,
+ mark.cave-ayland@ilande.co.uk, junjie.cao@intel.com, pasic@linux.ibm.com,
+ zhao1.liu@intel.com, rathc@linux.ibm.com, its@irrelevant.dk,
+ stefanb@linux.vnet.ibm.com, clg@kaod.org, xen-devel@lists.xenproject.org,
+ conor@kernel.org, luc@lmichel.fr, david@kernel.org,
+ lixianglai@loongson.cn, maobibo@loongson.cn, pbarbuda@microsoft.com,
+ yoshinori.sato@nifty.com, qemu-arm@nongnu.org, qemu-block@nongnu.org,
+ qemu-devel@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
+ qemu-s390x@nongnu.org, john.levon@nutanix.com, thanos.makatos@nutanix.com,
+ kfting@nuvoton.com, den@openvz.org, elena.ufimtseva@oracle.com,
+ jag.raman@oracle.com, daniel.barboza@oss.qualcomm.com,
+ philmd@oss.qualcomm.com, pierrick.bouvier@oss.qualcomm.com,
+ phil@philjordan.eu, tangtao1634@phytium.com.cn,
+ chao.liu@processmission.com, jiri@resnulli.us, sam@rfc1149.net,
+ anisa.su@samsung.com, alex@shazbot.org, farosas@suse.de,
  mohamed@unpredictable.fr, kvm@vger.kernel.org, linux-cxl@vger.kernel.org,
- alistair.francis@wdc.com, anthony@xenproject.org,
- jamin_lin@aspeedtech.com, kane_chen@aspeedtech.com, palmer@dabbelt.com,
- rbolshakov@ddn.com, foss@defmacro.it, sebastian.huber@embedded-brains.de,
- fam@euphon.net, jiaxun.yang@flygoat.com, lizhijian@fujitsu.com,
- atar4qemu@gmail.com, edgar.iglesias@gmail.com, jasowangio@gmail.com,
- liwei1518@gmail.com, npiggin@gmail.com, zhangckid@gmail.com,
- titusr@google.com, wuhaotsh@google.com, arei.gonglei@huawei.com,
- berto@igalia.com, mark.cave-ayland@ilande.co.uk, junjie.cao@intel.com,
- zhao1.liu@intel.com, its@irrelevant.dk, clg@kaod.org, conor@kernel.org,
- david@kernel.org, jic23@kernel.org, kbusch@kernel.org,
- mchehab+huawei@kernel.org, sstabellini@kernel.org,
+ alistair.francis@wdc.com, anthony@xenproject.org, jic23@kernel.org,
+ kbusch@kernel.org, mchehab+huawei@kernel.org, sstabellini@kernel.org,
  peter.maydell@linaro.org, richard.henderson@linaro.org,
  zhiwei_liu@linux.alibaba.com, zhenwei.pi@linux.dev, adityag@linux.ibm.com,
  alifm@linux.ibm.com, amachhiw@linux.ibm.com, borntraeger@linux.ibm.com,
@@ -83,8 +83,8 @@ Resent-To: pasic@linux.ibm.com, 17746591750@163.com, rathc@linux.ibm.com,
  iii@linux.ibm.com, jjherne@linux.ibm.com, milesg@linux.ibm.com,
  mjrosato@linux.ibm.com
 Resent-From: Markus Armbruster <armbru@redhat.com>
-Resent-Date: Sun, 01 Nov 2026 21:12:17 +0100
-Resent-Message-ID: <87a4ns1fby.fsf@pond.sub.org>
+Resent-Date: Sun, 01 Nov 2026 21:09:50 +0100
+Resent-Message-ID: <87qzh41fg1.fsf@pond.sub.org>
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -95,30 +95,32 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:Resent-To:Resent-From:Resent-Message-ID:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1793563949;
+	s=mimecast20190719; t=1793563805;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:resent-to:
 	 resent-from:resent-message-id:in-reply-to:in-reply-to:  references:references;
-	bh=vKGPRLwe8N/A660GwOMo/LVPqg6ViXuAqs5r5nHKGQg=;
-	b=aJ5Zz5JkYru7EDBIxoXiMeoX3L+XKDkA0F1Z2nK90LKVM+M3MIFHylxt2lhyUQKXcoAzkU
-	HzZN/55ZsAmvOzSgKeej8F4Z4jwG/HUj67OFkUXSat4ooZ3c0qEloY1dQwjTyQxBZvMYt+
-	FBXjzLzKjvaC5r7iTELUvaxQIaZOVQE=
-X-MC-Unique: -bl76eGfOWKWgGNyjcKPkw-1
-X-Mimecast-MFC-AGG-ID: -bl76eGfOWKWgGNyjcKPkw_1793563943
+	bh=qHNPbSyXJvJZt0TG2P3jFllZE/LiMl2regrSv48HBo0=;
+	b=CX6vUGrlA7vcWq8HFMbWdemg6/78vfZwykoz56WcyGXXZSjq3/dDuH69O/ga44Em3BnYI4
+	ys0yKmLqZYfiDRUfAttIdQhRnFuIR1YcbQekHBqqGX6htwJzBBjn2YpjsGhjLIbaFkUNJx
+	W4kaVZKMVYVQWAKLo9ygtt3EvZwKmkY=
+X-MC-Unique: urAbHKg2Pm61HrOGJHCLTg-1
+X-Mimecast-MFC-AGG-ID: urAbHKg2Pm61HrOGJHCLTg_1793563796
 From: Markus Armbruster <armbru@redhat.com>
-To: =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>
-Cc: qemu-devel@nongnu.org,  Michael Roth <michael.roth@amd.com>,  John Snow
- <jsnow@redhat.com>,  Peter Maydell <peter.maydell@linaro.org>,  Mauro
- Carvalho Chehab <mchehab+huawei@kernel.org>,  Pierrick Bouvier
+To: Daniel P. =?utf-8?Q?Berrang=C3=A9?= <berrange@redhat.com>
+Cc: Markus Armbruster <armbru@redhat.com>,  =?utf-8?Q?Marc-Andr=C3=A9?=
+ Lureau
+ <marcandre.lureau@redhat.com>,  qemu-devel@nongnu.org,  Michael Roth
+ <michael.roth@amd.com>,  John Snow <jsnow@redhat.com>,  Peter Maydell
+ <peter.maydell@linaro.org>,  Mauro Carvalho Chehab
+ <mchehab+huawei@kernel.org>,  Pierrick Bouvier
  <pierrick.bouvier@oss.qualcomm.com>,  Paolo Bonzini <pbonzini@redhat.com>,
-  Daniel P. =?utf-8?Q?Berrang=C3=A9?= <berrange@redhat.com>,  Kostiantyn
- Kostiuk
- <kkostiuk@redhat.com>,  Eric Blake <eblake@redhat.com>,  David Hildenbrand
- <david@kernel.org>,  Igor Mammedov <imammedo@redhat.com>,  "Edgar E.
- Iglesias" <edgar.iglesias@gmail.com>,  Jason Wang <jasowangio@gmail.com>,
-  Marcelo Tosatti <mtosatti@redhat.com>,  kvm@vger.kernel.org,  Alberto
- Garcia <berto@igalia.com>,  Kevin Wolf <kwolf@redhat.com>,  Hanna Reitz
+  Kostiantyn Kostiuk <kkostiuk@redhat.com>,  Eric Blake
+ <eblake@redhat.com>,  David Hildenbrand <david@kernel.org>,  Igor Mammedov
+ <imammedo@redhat.com>,  "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+  Jason Wang <jasowangio@gmail.com>,  Marcelo Tosatti
+ <mtosatti@redhat.com>,  kvm@vger.kernel.org,  Alberto Garcia
+ <berto@igalia.com>,  Kevin Wolf <kwolf@redhat.com>,  Hanna Reitz
  <hreitz@redhat.com>,  Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?=
  <philmd@oss.qualcomm.com>,
   Zhao Liu <zhao1.liu@intel.com>,  Jonathan Cameron <jic23@kernel.org>,
@@ -171,78 +173,183 @@ Cc: qemu-devel@nongnu.org,  Michael Roth <michael.roth@amd.com>,  John Snow
  <atar4qemu@gmail.com>,  Yoshinori Sato <yoshinori.sato@nifty.com>,  Jiri
  Pirko <jiri@resnulli.us>,  Eric Auger <eric.auger@redhat.com>,  Laurent
  Vivier <lvivier@redhat.com>
-Subject: Re: [PATCH v7 64/65] qom: use QAPITypeInfo in object_property_get_enum
-In-Reply-To: <20261020-qom-qapi-v7-64-431a86b02b58@redhat.com>
- (=?utf-8?Q?=22Marc-Andr=C3=A9?=
-	Lureau"'s message of "Tue, 20 Oct 2026 14:46:21 +0400")
+Subject: Re: [PATCH v7 54/65] qdev: adjust PciDevfn declared type
+In-Reply-To: <auNiLX-dsm8XsFG-@redhat.com> ("Daniel P. =?utf-8?Q?Berrang?=
+ =?utf-8?Q?=C3=A9=22's?= message of
+	"Thu, 29 Oct 2026 15:11:41 +0000")
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
-	<20261020-qom-qapi-v7-64-431a86b02b58@redhat.com>
-Date: Sun, 01 Nov 2026 17:15:34 +0100
-Message-ID: <87mrrs7ck9.fsf@pond.sub.org>
+	<20261020-qom-qapi-v7-54-431a86b02b58@redhat.com>
+	<atsxLV5YZo8dr-8G@redhat.com>
+	<CAMxuvazd7G_NBOM_c6BxZn5PFSw=XQUHueHqBoQQfpzPPgi9qA@mail.gmail.com>
+	<87zevz5h4k.fsf@pond.sub.org> <auC-ilqUJq27neSR@redhat.com>
+	<87o6ce47rr.fsf@pond.sub.org> <auNiLX-dsm8XsFG-@redhat.com>
+Date: Fri, 30 Oct 2026 10:21:05 +0100
+Message-ID: <87o6cba6im.fsf@pond.sub.org>
 User-Agent: Gnus/5.13 (Gnus v5.13)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
-X-Mimecast-MFC-PROC-ID: MOEA4mqvZfScEFj3dWl589lfUyAOKio7UscmFtsO5Es_1793563943
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
+X-Mimecast-MFC-PROC-ID: ktf0LKJpJ6LlQEjLHCXhS63QTgC3aZ5Jj7mo8bVSFg4_1793563796
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-42698a/1793563950-AA4DB9EA-C113E0E9/0/0
+X-purgate-ID: tlsNG-c201ff/1793563806-71CA82A1-86FE6A8C/0/0
 X-purgate-type: clean
-X-purgate-size: 1493
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-purgate-size: 5941
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=unavailable
-	autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com> writes:
+Daniel P. Berrang=C3=A9 <berrange@redhat.com> writes:
 
-> The typename parameter becomes a QAPITypeInfo pointer, and the
-> validation compares prop->qapi_type against it instead of matching
-> prop->type strings.
+> On Wed, Oct 28, 2026 at 08:13:44AM +0100, Markus Armbruster wrote:
+>> Daniel P. Berrang=C3=A9 <berrange@redhat.com> writes:
+>>=20
+>> > On Tue, Oct 27, 2026 at 03:54:03PM +0100, Markus Armbruster wrote:
+>> >> Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com> writes:
+>> >>=20
+>> >> > Hi
+>> >> >
+>> >> > On Fri, Oct 23, 2026 at 2:04=E2=80=AFPM Daniel P. Berrang=C3=A9 <be=
+rrange@redhat.com> wrote:
+>> >> >>
+>> >> >> On Tue, Oct 20, 2026 at 02:46:11PM +0400, Marc-Andr=C3=A9 Lureau w=
+rote:
+>> >> >> > PciDevfn is a bit special, since it accepts integer and string a=
+s
+>> >> >> > setter, but only output integer as getter.
+>> >
+>> > snip
+>> >
+>> >> >                                                       But I agree w=
+e
+>> >> > could do better.
+>> >> >
+>> >> > There are multiple options. We could keep declaring the property as
+>> >> > str instead. In this case, the getter should probably return a stri=
+ng
+>> >> > for consistency and correctness. This might surprise some existing
+>> >> > users though.
+>> >>=20
+>> >> I.e. ditch numeric suppport for numeric addresses, right?
+>> >>=20
+>> >> Incompatible change.  Do we care?
+>> >>=20
+>> >> If we don't, we should be honest about it and mark qom-get unstable.
+>> >>=20
+>> >> > We could introduce new properties like `devfn-str` and `devfn-int`
+>> >> > that alias the same value.
+>> >>=20
+>> >> Compatibility break.  If breaking compatibility is okay, I'd rather u=
+se
+>> >> the opportunity to get rid of cleverness, and go with your first opti=
+on.
+>> >>=20
+>> >> > We could also introduce a new structured QAPI type.
+>> >>=20
+>> >> What kind of type do you have in mind?
+>> >
+>> > IMHO the root cause design flaw here was to overload 'addr' as a
+>> > way to set both the slot number and function number, as using
+>> > one property for two pieces of data is a well known anti-pattern
+>> > we caution against.
+>> >
+>> > IOW, we should have had 'slot' and 'function' as separate properties
+>> > from the start.
+>>=20
+>> Fair.
+>>=20
+>> Our modeling of PCI is old and weird.
+>>=20
+>> What we call "pci-device" isn't a device, it's a function, where
+>> function 0 sort of stands in for the device.
 >
-> Signed-off-by: Markus Armbruster <armbru@redhat.com>
-> Signed-off-by: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
+> Mmm, yes, interesting way of looking at it.
+>
+>> Its "addr" isn't a PCI address, it's the address of the function on its
+>> PCI bus, i.e. the tail of a PCI address.
+>>=20
+>> > From a CLI POV, we could easily change 'addr' to mean only the slot
+>> > number, since it is always parsed in string format without the
+>> > magic (slot << 4) | function encoding. Then add a 'function' prop
+>>=20
+>> In CLI, HMP and QMP string (not integer), value "5" is shorthand for
+>> "5.0", and means device 5, function 0.
+>>=20
+>> We could deprecate the .FN part in favor of a new property "function".
+>>=20
+>> Once we drop support for .FN from "addr", its name becomes even more
+>> misleading than it always was.
+>
+> Yes.
+>
+>> > The challenge is the impact on QMP with strict typing, as ideally
+>> > int format would soley represent the slot number, but today the
+>> > int format is encoded (slot << 4) | function.  So anyone relying
+>> > on int format in QMP would silently have a semantic change if we
+>> > altered what 'addr' means.=20
+>>=20
+>> That's a no-go.
+>>=20
+>> > Deprecating 'addr' entirely and adding brand new 'slot' and
+>> > 'function' properties would be a significant disruption to
+>> > a syntax which has been documented for years (decades).
+>>=20
+>> What about this:
+>>=20
+>> * No change to PCIDevice member @devfn: encodes slot and function as an
+>>   integer.
+>>=20
+>> * New "pci-device" properties "slot" and "function".  "slot" sets just
+>>   the slot bits of @devfn, and "function" sets just the function bits.
+>>   Both default to zero, so specifying just "slot" gives you
+>>   PCI_DEVFN(slot, 0), which makes sense.
+>>=20
+>> * Deprecate "pci-device" property "addr" for QMP.  We can keep it around
+>>   for longer than the required grace period if that helps.
+>>=20
+>> * Declare it legacy for CLI and HMP, with no intent to remove it.
+>
+> We can't easily keep it in CLI/HMP, while removing from QMP can we ?
+> As long as the property exists on the PCIDevice object, it will be
+> accessible everywhere.
 
-[...]
+You're right.  The way device_add / -device work, providing "addr" just
+for CLI and HMP would require gross hacks.
 
-> diff --git a/qom/object.c b/qom/object.c
-> index 791d981dc689..40b569d4d574 100644
-> --- a/qom/object.c
-> +++ b/qom/object.c
-> @@ -1775,7 +1775,7 @@ uint64_t object_property_get_uint(Object *obj, cons=
-t char *name,
->  }
-> =20
->  int object_property_get_enum(Object *obj, const char *name,
-> -                             const char *typename, Error **errp)
-> +                             const QAPITypeInfo *type_info, Error **errp=
-)
->  {
->      char *str;
->      int ret;
-> @@ -1785,10 +1785,10 @@ int object_property_get_enum(Object *obj, const c=
-har *name,
->          return -1;
->      }
-> =20
-> -    if (!g_str_equal(prop->type, typename)) {
-> +    if (prop->qapi_type !=3D type_info) {
->          error_setg(errp, "Property %s on %s is not '%s' enum type",
-> -                   name, object_class_get_name(
-> -                       object_get_class(obj)), typename);
-> +                   name, object_class_get_name(object_get_class(obj)),
-> +                   type_info->name);
+> Perhaps keep it relatively simple and merely deprecate the string
+> syntax of 'addr' in QMP. That's the place where it is really ugy.
+> Force QMP over to only the integer syntax for 'addr', and leave
+> CLI/HMP accepting the (optionally dotted) string syntax.
+>
+> Mgmt apps like libvirt will have to adapt. Tedious, but actually
+> quite simple compared to most deprecations, as the integer syntax
+> can already be used with all historical QEMU versions in QMP that
+> mgmt apps ever need to deal with. They can unconditionally change
+> their code to int syntax and not worry about old/new QEMUs at all.
 
-How can this happen?  Or is it a programming error?
+Yes, but if management applications have to adapt anyway, why not use
+the opportunity to adapt to the interface we actually want, i.e. "slot"
+and "function"?
 
->          return -1;
->      }
-> =20
+If we add "slot" and "function", then what to do about "addr"?  Options:
 
-[...]
+1. Do nothing.  We provide two interfaces for setting slot / function,
+and no guidance on which to use.
+
+2. We declare "addr" legacy, and recommend "slot" and "function".  This
+tells users that using it is fine, but there's a better way.
+
+3. We deprecate "addr" in favor of "slot and "function" without intent
+to remove it.  Yes, we normally deprecate with intent to remove, but we
+don't have to.
+
+4. We deprecate "addr" with intent to remove it.  Grace period
+debatable.  You argued against such a "significant disruption to a
+syntax which has been documented for years (decades)."  I'm listing it
+for completeness.
 
 
