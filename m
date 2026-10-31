@@ -2,45 +2,47 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 42EB1606A31A
-	for <xen-devel@archiver.kernel.org>; Fri, 30 Oct 2026 21:59:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=o78V3uyd
-Received: from list by lists.xenproject.org with outflank-mailman.1466414.1676439 (Exim 4.92)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AB915606A31A
+	for <xen-devel@archiver.kernel.org>; Sat, 31 Oct 2026 00:10:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1466472.1676448 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMucw-0006r9-Ew; Fri, 30 Oct 2026 21:59:10 +0000
+	id 1xMwfY-00006U-9X; Sat, 31 Oct 2026 00:10:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1466414.1676439; Fri, 30 Oct 2026 21:59:10 +0000
+Received: by outflank-mailman (output) from mailman id 1466472.1676448; Sat, 31 Oct 2026 00:10:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMucw-0006r2-C9; Fri, 30 Oct 2026 21:59:10 +0000
-Received: by outflank-mailman (input) for mailman id 1466414;
- Fri, 30 Oct 2026 21:59:09 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xMwfY-00006N-6i; Sat, 31 Oct 2026 00:10:00 +0000
+Received: by outflank-mailman (input) for mailman id 1466472;
+ Sat, 31 Oct 2026 00:09:59 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <visitorckw@gmail.com>) id 1xMucv-0006qw-1J
- for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 21:59:09 +0000
+ (envelope-from <balaton@eik.bme.hu>) id 1xMwfX-00006H-Jm
+ for xen-devel@lists.xenproject.org; Sat, 31 Oct 2026 00:09:59 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xMuct-0014bi-WD
- for xen-devel@lists.xenproject.org; Fri, 30 Oct 2026 22:59:08 +0100
-Received: from [10.42.69.10] (helo=localhost)
+ id 1xMwfX-000cCU-0t
+ for xen-devel@lists.xenproject.org; Sat, 31 Oct 2026 01:09:59 +0100
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <visitorckw@gmail.com>)
- id 6ae5132a-8faa-0a2a0a5109dd-0a2a450a8ae8-2
- for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 22:59:07 +0100
-Received: from [209.85.214.174] (helo=mail-pl1-f174.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <visitorckw@gmail.com>)
- id 6ae5132a-f2d2-0a2a450a0019-d155d6aed900-3
- for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 22:59:07 +0100
-Received: by mail-pl1-f174.google.com with SMTP id
- d9443c01a7336-2e9d1114320so9701255ad.3
- for <xen-devel@lists.xenproject.org>; Fri, 30 Oct 2026 14:59:07 -0700 (PDT)
-Received: from google.com ([118.150.148.19]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3ae8454327esm5361880a91.4.2026.10.30.14.58.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 Oct 2026 14:59:04 -0700 (PDT)
+ (envelope-from <balaton@eik.bme.hu>)
+ id 6ae531bc-2eae-0a2a0a5409dd-0a2a450bd1c2-12
+ for <xen-devel@lists.xenproject.org>; Sat, 31 Oct 2026 01:09:58 +0100
+Received: from [152.66.115.2] (helo=zero.eik.bme.hu)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <balaton@eik.bme.hu>)
+ id 6ae531d6-b7e8-0a2a450b0019-984273024bcb-3
+ for <xen-devel@lists.xenproject.org>; Sat, 31 Oct 2026 01:09:58 +0100
+Received: from localhost (localhost [127.0.0.1])
+ by zero.eik.bme.hu (Postfix) with ESMTP id EA36A60C0DB;
+ Sat, 31 Oct 2026 01:09:57 +0100 (CET)
+Received: from zero.eik.bme.hu ([127.0.0.1])
+ by localhost (zero.eik.bme.hu [127.0.0.1]) (amavis, port 10028) with ESMTP
+ id 9e_z2L1I9kjY; Sat, 31 Oct 2026 01:09:55 +0100 (CET)
+Received: by zero.eik.bme.hu (Postfix, from userid 432)
+ id D12A760C072; Sat, 31 Oct 2026 01:09:55 +0100 (CET)
+Received: from localhost (localhost [127.0.0.1])
+ by zero.eik.bme.hu (Postfix) with ESMTP id CA50A13996F;
+ Sat, 31 Oct 2026 01:09:55 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,112 +51,141 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="In-Reply-To:Content-Disposition:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793397546; x=1794002346; darn=lists.xenproject.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=qgi7PD6acUYIL+i15Ys7CNpZIZoU86hFOzd/i7bJ3bw=;
-        b=o78V3uydBVdEeINeaVr54vdhigm8qsTVfPUtBJ6L3/CnuKLkEhvrOEK3ru8jeZ3A01
-         Z0QP5YOXJEpsdCHgRcwHwNM8Ngfp0ieSqQq2E85YMrlI/1rc6sz1BAlHE5c78FiONpCs
-         yxdoh33oZKliXQoaeBfuXka7CNgc+WMApHFyR2A1ulFpL3zIaamIA1QD7XZyvJ/mINNl
-         3I9os607E/sy6aOLAio5DQYUvtKaRV8IAIX1X6XUvfhgBeeGHq+O8TpLxHy7tDz9O+Uq
-         Kz8DqWajehZ0f3DOejFRbHX8H6Ry+h3i2E0zS1VBDM8bvxItaVCBAlMLQfLZG6rO/H52
-         4QNg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793397546; x=1794002346;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=qgi7PD6acUYIL+i15Ys7CNpZIZoU86hFOzd/i7bJ3bw=;
-        b=L6Vmp4htMlrtg56NxlUyj2EeivbXoQKhBbfMx1LMaUOywnL8g4Fm4Ai4F0WmnMBpK4
-         6QHkqcWaxvVCtHHcGHV+O1S3DWlNB7qK/E10H5b4L/YOhtbr1WpYy8WipGVBwtgUqNUD
-         JNc/sHJ4zwjVrkINdacRa3DQZBX/F04YbK+6uX32nTEQZEYZlcxfBKEF9iJ384gkw8zG
-         L7GycLY9PCPMR0GCkBPDRRZrIlj2LMJPhFS6YwrCjFqLwGcLjGPGP6foN5eU16FkOaPw
-         +CGvNCnGzRWndtHywg0VAAM4GPjo1gQAuESag30KwhCd8r/eEqN0NnS942LitSPT+VS7
-         dZ1g==
-X-Gm-Message-State: AFq9FYJ4oDRtbEqCzgO+06rGpVrRkCU5r1gMRPsPA+csRbafnGRulKTD
-	RgmUYbtIJuqt0++mBjkUTUROOiq4dO1BxiHGb9U6zKHuhldt52AOeuy/
-X-Gm-Gg: AYBFou2S0s/wwgXE9Oe/Scs1rqOAliq+mYLBvFKDspe1Uo2aG5dLUPTTqKqd6LlMx9z
-	SQQr2t5DxVuSMAkXYfSCl0wnHHjynzCqDrxxxxu14uGFa7mWUJ90RzjmqO4jfd1Fm1JdG/H4nBW
-	a2jkRkk5rBrLZajLGl+u42tv7gTzp68+g8jXTR6wibvyGKUYm3yYOBwra5/XcdNrMpW4w7Q664g
-	pcMv/zIyNZhFnA/A+SWFO3Xr4cHdYNGtSojWJieI91p0+FgbayG1gRwQRDdrgJK2cgh5DZ3VKrD
-	E80bckW9xe212kG6D+6V+vdTqCJW9Sh+9jt2WD5ruVpSRHyIaIlmELkVvwbegpYcgbl8TvRlF1u
-	fmcumYL+Sgt+9+Nviin6334B6Gp4USwgshGppxU0dVs38do7fKxlG/rJgfNR+NGzMGTkfSgPqEG
-	QQyZfpNQhMbo0w3KTJFta88Ynf2XvMK7dVngwh0D71wLMYk9pVkHWLAYcYS4yek3pnhPOGmDzoe
-	IkTmqTTu9jw1vobRI1hlQ0box344pE0hMJL2PGopYDdwlwJGvclvO6jW/ro7AmbrvSP8TfbM4eF
-	VDyuLR3EuGvlnfLuJpC//MBGboHxWw==
-X-Received: by 2002:a17:90a:b890:b0:3ab:e588:c29b with SMTP id 98e67ed59e1d1-3ae8e5bdcc9mr1750429a91.5.1793397545841;
-        Fri, 30 Oct 2026 14:59:05 -0700 (PDT)
-Date: Sat, 31 Oct 2026 05:58:23 +0800
-From: Kuan-Wei Chiu <visitorckw@gmail.com>
-To: "Orzel, Michal" <michal.orzel@amd.com>
-Cc: xen-devel@lists.xenproject.org, sstabellini@kernel.org, julien@xen.org,
-	bertrand.marquis@arm.com, marscheng@google.com,
-	jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com
-Subject: Re: [PATCH] xen/dt: Skip non-RAM reserved-memory regions in
- make_memory_node()
-Message-ID: <auUS_7jNO-0ONE1e@google.com>
-References: <20261028211737.17629-1-visitorckw@gmail.com>
- <d25a667b-5126-4c57-b379-c31c4e7645c6@amd.com>
+Authentication-Results: eu.smtp.expurgate.cloud; none
+X-Virus-Scanned: amavis at eik.bme.hu
+Date: Sat, 31 Oct 2026 01:09:55 +0100 (CET)
+From: BALATON Zoltan <balaton@eik.bme.hu>
+To: Yonggang Luo <luoyonggang@gmail.com>
+cc: qemu-devel@nongnu.org, Anthony PERARD <anthony@xenproject.org>, 
+    Felipe Balbi <balbi@kernel.org>, Aleksandar Rikalo <arikalo@gmail.com>, 
+    Philippe Mathieu-Daude <philmd@mailo.com>, 
+    Antony Pavlov <antonynpavlov@gmail.com>, 
+    Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
+    Stefano Stabellini <sstabellini@kernel.org>, 
+    Subbaraya Sundeep <sundeep.lkml@gmail.com>, 
+    =?ISO-8859-15?Q?Herv=E9_Poussineau?= <hpoussin@reactos.org>, 
+    Max Filippov <jcmvbkbc@gmail.com>, 
+    Niek Linnenbank <nieklinnenbank@gmail.com>, xen-devel@lists.xenproject.org, 
+    qemu-riscv@nongnu.org, Jean-Christophe Dubois <jcd@tribudubois.net>, 
+    qemu-ppc@nongnu.org, Alexandre Iooss <erdnaxe@crans.org>, 
+    Weiwei Li <liwei1518@gmail.com>, Zhao Liu <zhao1.liu@intel.com>, 
+    Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+    Strahinja Jankovic <strahinja.p.jankovic@gmail.com>, 
+    =?ISO-8859-15?Q?Philippe_Mathieu-Daud=E9?= <philmd@oss.qualcomm.com>, 
+    Thomas Huth <th.huth+qemu@posteo.eu>, 
+    =?ISO-8859-15?Q?Cl=E9ment_Chigot?= <chigot@adacore.com>, 
+    Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
+    Yoshinori Sato <yoshinori.sato@nifty.com>, 
+    Frederic Konrad <konrad.frederic@yahoo.fr>, 
+    Palmer Dabbelt <palmer@dabbelt.com>, 
+    Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
+    Peter Maydell <peter.maydell@linaro.org>, 
+    Chao Liu <chao.liu@processmission.com>, 
+    Sai Pavan Boddu <sai.pavan.boddu@amd.com>, 
+    Alistair Francis <alistair@alistair23.me>, 
+    Huacai Chen <chenhuacai@kernel.org>, Aurelien Jarno <aurelien@aurel32.net>, 
+    Gaurav Sharma <gaurav.sharma_7@nxp.com>, 
+    "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
+    Richard Henderson <richard.henderson@linaro.org>, 
+    Alistair Francis <alistair.francis@wdc.com>, 
+    Artyom Tarasenko <atar4qemu@gmail.com>, qemu-arm@nongnu.org
+Subject: Re: [PATCH 00/15] hw: expand DEFINE_MACHINE to explicit TypeInfo
+ registration
+In-Reply-To: <20261030151539.1872-1-luoyonggang@gmail.com>
+Message-ID: <d1db54c6-b802-676a-7779-0c2c63f5f807@eik.bme.hu>
+References: <20261030151539.1872-1-luoyonggang@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <d25a667b-5126-4c57-b379-c31c4e7645c6@amd.com>
-X-purgate-ID: tlsNG-4011c0/1793397547-4ABD8CFC-31D6C958/0/0
+Content-Type: text/plain; charset=US-ASCII; format=flowed
+X-purgate-ID: tlsNG-42698a/1793405398-AACDF9EA-344DDBC4/0/0
 X-purgate-type: clean
-X-purgate-size: 1985
-X-Spam-Status: No, score=-2.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY autolearn=no autolearn_force=no
-	version=4.0.1
+X-purgate-size: 3965
+X-Spam-Status: No, score=-8.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY autolearn=unavailable
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Michal,
+On Fri, 30 Oct 2026, Yonggang Luo wrote:
+> DEFINE_MACHINE and DEFINE_MACHINE_EXTENDED hide the TypeInfo and the type_init
+> function that calls type_register_static(). A later change needs to pass a
 
-On Fri, Oct 30, 2026 at 12:04:58PM +0100, Orzel, Michal wrote:
-> 
-> 
-> On 28-Oct-26 22:17, Kuan-Wei Chiu wrote:
-> > Xen creates a second /memory node for Dom0 from
-> > bootinfo_get_reserved_mem() without checking whether those regions
-> > belong to host RAM. However, /reserved-memory can also describe
-> > on-chip SRAM or firmware regions outside system RAM. Listing them in a
-> > /memory node causes Dom0 to register non-RAM addresses as system RAM,
-> > conflicting with device MMIO mappings.
-> Hmm, I always thought that /reserved-memory is to exclude regions from memory
-> described under /memory. That's what Xen assumes too. map_range_to_domain() for
-> example does not call iomem_permit_access() for such regions because we assume
-> it's RAM. Can you provide more details of your board e.g. the device tree? Is
-> there any documentation I could use to confirm that "reserved-memory can also
-> describe on-chip SRAM or firmware regions outside system RAM"?
-> 
-Hmm, your reply initially made me wonder if this was caused by a
-non-compliant downstream device tree on our side, so I checked the
-DT spec and upstream Linux.
+That's the point of the macro to hide the boiler plate code.
 
-The devicetree spec does not seem to explicitly mention whether
-/reserved-memory regions must fall within the range described by
-/memory. From a quick look at early_init_dt_reserve_memory() in Linux,
-the comment there also mentions not worrying if a no-map region is not
-memory as it will not be mapped.
+> target mask into that registration, and the macros have no parameter for it.
 
-In upstream Linux device trees, there are cases like
-arch/mips/boot/dts/mobileye/eyeq5.dtsi and eyeq5-epm5.dts, where
-/memory starts at 0x40000000 and 0x802000000, while /reserved-memory
-defines an on-chip sram region nvram@461fe00 with "nvmem-rmem" outside
-/memory.
-
-Our board's device tree is not upstream yet, but it follows a similar
-pattern where /reserved-memory defines "nvmem-rmem" and dma pool
-sub-regions inside on-chip sram outside the dram range described by
-/memory.
+Couldn't you just change the macros to take that parameter instead of 
+expanding it everywhere?
 
 Regards,
-Kuan-Wei
+BALATON Zoltan
+
+> This series expands every caller first, with no behavior change, so the
+> follow-up only replaces the type_register_static() call.
+>
+> Each machine file gains a class_init function, a TypeInfo, and a type_init
+> function that calls type_register_static(). The last patch removes
+> DEFINE_MACHINE* and DEFINE_SECURE_MACHINE* from include/hw/core/boards.h.
+>
+> Yonggang Luo (15):
+>  hw/alpha: expand DEFINE_MACHINE in dp264.c
+>  hw/m68k: expand DEFINE_MACHINE for M68K machines
+>  hw/microblaze: expand DEFINE_MACHINE for MicroBlaze
+>  hw/tricore: expand DEFINE_MACHINE in tricore_testboard.c
+>  hw/arm: expand DEFINE_MACHINE for ARM machines
+>  hw/riscv: expand DEFINE_MACHINE for RISC-V machines
+>  hw/core/null-machine: expand DEFINE_MACHINE
+>  hw/mips: expand DEFINE_MACHINE for MIPS machines
+>  hw/ppc: expand DEFINE_MACHINE for PowerPC machines
+>  hw/sh4: expand DEFINE_MACHINE in r2d.c
+>  hw/sparc: expand DEFINE_MACHINE in leon3.c
+>  hw/xenpv: expand DEFINE_MACHINE in xen_machine_pv.c
+>  hw/xtensa: expand DEFINE_MACHINE in sim.c
+>  hw/xtensa: expand DEFINE_MACHINE in virt.c
+>  hw/core/boards: remove unused DEFINE_MACHINE* macros
+>
+> hw/alpha/dp264.c                    | 18 +++++++++--
+> hw/arm/bananapi_m2u.c               | 18 +++++++++--
+> hw/arm/cubieboard.c                 | 19 +++++++++---
+> hw/arm/digic_boards.c               | 18 +++++++++--
+> hw/arm/imx25_pdk.c                  | 18 +++++++++--
+> hw/arm/imx8mm-evk.c                 | 20 +++++++++---
+> hw/arm/integratorcp.c               | 14 ++++++---
+> hw/arm/kzm.c                        | 18 +++++++++--
+> hw/arm/max78000fthr.c               | 17 ++++++++--
+> hw/arm/mcimx6ul-evk.c               | 18 +++++++++--
+> hw/arm/mcimx7d-sabre.c              | 20 +++++++++---
+> hw/arm/msf2-som.c                   | 17 ++++++++--
+> hw/arm/netduino2.c                  | 17 ++++++++--
+> hw/arm/netduinoplus2.c              | 17 ++++++++--
+> hw/arm/olimex-stm32-h405.c          | 18 +++++++++--
+> hw/arm/orangepi.c                   | 19 +++++++++---
+> hw/arm/stm32vldiscovery.c           | 18 +++++++++--
+> hw/core/null-machine.c              | 18 +++++++++--
+> hw/m68k/an5206.c                    | 18 +++++++++--
+> hw/m68k/mcf5208.c                   | 18 +++++++++--
+> hw/microblaze/petalogix_ml605_mmu.c | 19 ++++++++++--
+> hw/microblaze/xlnx-zynqmp-pmu.c     | 19 ++++++++++--
+> hw/mips/boston.c                    | 18 +++++++++--
+> hw/mips/fuloong2e.c                 | 18 +++++++++--
+> hw/mips/malta.c                     | 12 ++++++--
+> hw/ppc/amigaone.c                   | 18 +++++++++--
+> hw/ppc/pegasos.c                    | 21 ++++++++-----
+> hw/ppc/ppc440_bamboo.c              | 18 +++++++++--
+> hw/ppc/prep.c                       | 18 +++++++++--
+> hw/ppc/sam460ex.c                   | 18 +++++++++--
+> hw/ppc/virtex_ml507.c               | 18 +++++++++--
+> hw/riscv/boston-aia.c               | 18 +++++++++--
+> hw/riscv/microblaze-v-generic.c     | 18 +++++++++--
+> hw/sh4/r2d.c                        | 18 +++++++++--
+> hw/sparc/leon3.c                    | 18 +++++++++--
+> hw/tricore/tricore_testboard.c      | 18 +++++++++--
+> hw/xenpv/xen_machine_pv.c           | 18 +++++++++--
+> hw/xtensa/sim.c                     | 18 +++++++++--
+> hw/xtensa/virt.c                    | 18 +++++++++--
+> include/hw/core/boards.h            | 48 -----------------------------
+> 40 files changed, 605 insertions(+), 142 deletions(-)
+>
+>
 
