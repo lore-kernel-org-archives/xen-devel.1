@@ -2,47 +2,60 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AB915606A31A
-	for <xen-devel@archiver.kernel.org>; Sat, 31 Oct 2026 00:10:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1466472.1676448 (Exim 4.92)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1CE5E606A31A
+	for <xen-devel@archiver.kernel.org>; Sat, 31 Oct 2026 00:33:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=Pj4NAWOf
+Received: from list by lists.xenproject.org with outflank-mailman.1466498.1676458 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMwfY-00006U-9X; Sat, 31 Oct 2026 00:10:00 +0000
+	id 1xMx2D-0004GJ-1s; Sat, 31 Oct 2026 00:33:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1466472.1676448; Sat, 31 Oct 2026 00:10:00 +0000
+Received: by outflank-mailman (output) from mailman id 1466498.1676458; Sat, 31 Oct 2026 00:33:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMwfY-00006N-6i; Sat, 31 Oct 2026 00:10:00 +0000
-Received: by outflank-mailman (input) for mailman id 1466472;
- Sat, 31 Oct 2026 00:09:59 +0000
+	id 1xMx2C-0004GC-VZ; Sat, 31 Oct 2026 00:33:24 +0000
+Received: by outflank-mailman (input) for mailman id 1466498;
+ Sat, 31 Oct 2026 00:33:24 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <balaton@eik.bme.hu>) id 1xMwfX-00006H-Jm
- for xen-devel@lists.xenproject.org; Sat, 31 Oct 2026 00:09:59 +0000
+ (envelope-from <Jason.Andryuk@amd.com>) id 1xMx2B-0004G6-Uo
+ for xen-devel@lists.xenproject.org; Sat, 31 Oct 2026 00:33:24 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xMwfX-000cCU-0t
- for xen-devel@lists.xenproject.org; Sat, 31 Oct 2026 01:09:59 +0100
-Received: from [10.42.69.11] (helo=localhost)
+ id 1xMx2B-00AKj3-4q
+ for xen-devel@lists.xenproject.org; Sat, 31 Oct 2026 01:33:23 +0100
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <balaton@eik.bme.hu>)
- id 6ae531bc-2eae-0a2a0a5409dd-0a2a450bd1c2-12
- for <xen-devel@lists.xenproject.org>; Sat, 31 Oct 2026 01:09:58 +0100
-Received: from [152.66.115.2] (helo=zero.eik.bme.hu)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <balaton@eik.bme.hu>)
- id 6ae531d6-b7e8-0a2a450b0019-984273024bcb-3
- for <xen-devel@lists.xenproject.org>; Sat, 31 Oct 2026 01:09:58 +0100
-Received: from localhost (localhost [127.0.0.1])
- by zero.eik.bme.hu (Postfix) with ESMTP id EA36A60C0DB;
- Sat, 31 Oct 2026 01:09:57 +0100 (CET)
-Received: from zero.eik.bme.hu ([127.0.0.1])
- by localhost (zero.eik.bme.hu [127.0.0.1]) (amavis, port 10028) with ESMTP
- id 9e_z2L1I9kjY; Sat, 31 Oct 2026 01:09:55 +0100 (CET)
-Received: by zero.eik.bme.hu (Postfix, from userid 432)
- id D12A760C072; Sat, 31 Oct 2026 01:09:55 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
- by zero.eik.bme.hu (Postfix) with ESMTP id CA50A13996F;
- Sat, 31 Oct 2026 01:09:55 +0100 (CET)
+ (envelope-from <Jason.Andryuk@amd.com>)
+ id 6ae536ea-e002-0a2a0a5209dd-0a2a4504a180-38
+ for <xen-devel@lists.xenproject.org>; Sat, 31 Oct 2026 01:33:22 +0100
+Received: from [52.101.56.58]
+ (helo=BN1PR04CU002.outbound.protection.outlook.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Jason.Andryuk@amd.com>)
+ id 6ae53751-b57f-0a2a45040019-3465383a2830-3
+ for <xen-devel@lists.xenproject.org>; Sat, 31 Oct 2026 01:33:22 +0100
+Received: from MW4PR03CA0120.namprd03.prod.outlook.com (2603:10b6:303:b7::35)
+ by SN7PR12MB8002.namprd12.prod.outlook.com (2603:10b6:806:34b::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.569.10; Sat, 31 Oct
+ 2026 00:33:13 +0000
+Received: from MWH0EPF000D894F.namprd05.prod.outlook.com
+ (2603:10b6:303:b7:cafe::63) by MW4PR03CA0120.outlook.office365.com
+ (2603:10b6:303:b7::35) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.569.9 via Frontend Transport; Sat, 31
+ Oct 2026 00:33:12 +0000
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ MWH0EPF000D894F.mail.protection.outlook.com (10.167.249.215) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.592.5 via Frontend Transport; Sat, 31 Oct 2026 00:33:12 +0000
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Fri, 30 Oct
+ 2026 19:33:12 -0500
+Received: from amd-BIRMANPLUS.mshome.net (10.180.168.240) by
+ satlexmb08.amd.com (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.53
+ via Frontend Transport; Fri, 30 Oct 2026 19:33:10 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,141 +64,246 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; none
-X-Virus-Scanned: amavis at eik.bme.hu
-Date: Sat, 31 Oct 2026 01:09:55 +0100 (CET)
-From: BALATON Zoltan <balaton@eik.bme.hu>
-To: Yonggang Luo <luoyonggang@gmail.com>
-cc: qemu-devel@nongnu.org, Anthony PERARD <anthony@xenproject.org>, 
-    Felipe Balbi <balbi@kernel.org>, Aleksandar Rikalo <arikalo@gmail.com>, 
-    Philippe Mathieu-Daude <philmd@mailo.com>, 
-    Antony Pavlov <antonynpavlov@gmail.com>, 
-    Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
-    Stefano Stabellini <sstabellini@kernel.org>, 
-    Subbaraya Sundeep <sundeep.lkml@gmail.com>, 
-    =?ISO-8859-15?Q?Herv=E9_Poussineau?= <hpoussin@reactos.org>, 
-    Max Filippov <jcmvbkbc@gmail.com>, 
-    Niek Linnenbank <nieklinnenbank@gmail.com>, xen-devel@lists.xenproject.org, 
-    qemu-riscv@nongnu.org, Jean-Christophe Dubois <jcd@tribudubois.net>, 
-    qemu-ppc@nongnu.org, Alexandre Iooss <erdnaxe@crans.org>, 
-    Weiwei Li <liwei1518@gmail.com>, Zhao Liu <zhao1.liu@intel.com>, 
-    Jiaxun Yang <jiaxun.yang@flygoat.com>, 
-    Strahinja Jankovic <strahinja.p.jankovic@gmail.com>, 
-    =?ISO-8859-15?Q?Philippe_Mathieu-Daud=E9?= <philmd@oss.qualcomm.com>, 
-    Thomas Huth <th.huth+qemu@posteo.eu>, 
-    =?ISO-8859-15?Q?Cl=E9ment_Chigot?= <chigot@adacore.com>, 
-    Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
-    Yoshinori Sato <yoshinori.sato@nifty.com>, 
-    Frederic Konrad <konrad.frederic@yahoo.fr>, 
-    Palmer Dabbelt <palmer@dabbelt.com>, 
-    Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
-    Peter Maydell <peter.maydell@linaro.org>, 
-    Chao Liu <chao.liu@processmission.com>, 
-    Sai Pavan Boddu <sai.pavan.boddu@amd.com>, 
-    Alistair Francis <alistair@alistair23.me>, 
-    Huacai Chen <chenhuacai@kernel.org>, Aurelien Jarno <aurelien@aurel32.net>, 
-    Gaurav Sharma <gaurav.sharma_7@nxp.com>, 
-    "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
-    Richard Henderson <richard.henderson@linaro.org>, 
-    Alistair Francis <alistair.francis@wdc.com>, 
-    Artyom Tarasenko <atar4qemu@gmail.com>, qemu-arm@nongnu.org
-Subject: Re: [PATCH 00/15] hw: expand DEFINE_MACHINE to explicit TypeInfo
- registration
-In-Reply-To: <20261030151539.1872-1-luoyonggang@gmail.com>
-Message-ID: <d1db54c6-b802-676a-7779-0c2c63f5f807@eik.bme.hu>
-References: <20261030151539.1872-1-luoyonggang@gmail.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=KhMzKwZMKQly6GmYIumdhB25xDVO/pGr8mMMMlkSforA129BbfG7MNhK7VYLsdD/KA9o0YXzMkizR+0revsXhus6vXl7LFPtFB/nqzg4cA64aByFkE1kqzOpN2f4lQNvKnVvE4NIVnyaYv4NV+PPvfN6RjgX4dYwW/bEApdKrelj1F2GnS311cQwflmTtyzc/lwxc49gK6dkq+dKQWeYnlaQtQBg5u/AOX+73m3thVmlnZVVVp7AeJGqnnylCj2gB1fWeB7wLzN1Q3HrW9KVvmhXzljeDLna3azooS8x84FPxUI37qiDJoVYYJt+Won07WiInf57arb+cEK2jvAlmg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=yih6QHYE4DaDHg0Vf0uZHGGyozrwe6Oms167g1kGBBM=;
+ b=U/nf+ZoxSo0YhkhPIuwDOD5oBqSoMluEdhI4cQy0yihGOwGCk7vQPr3Oh2NpVYPklbmAuS3yjqSfcNRQzfhFT0SoNwY9hCQCE2xyi/s7LyKehBzyzqDVAco73HTXilMhe62TMwOlpTvPETcgQ42cwdnsrrqEUWNBVuehuVj6xHIfgrIzBFjpGfSLTZrVUl18DEHUQZ9LyUpUe7QLVCTWz+l+KjGrREeS3TTeWF9Da04rvsyFV+Yy03+1c1MUKHMCcTXFAYMMeAb0Gz/cJiaqS5y9Ya1zV8EQuCPc0tiI3E75YFFS2OyXEljoFpOvrk7tRrlNit3Rtr3nXR6ZGiKcUg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=yih6QHYE4DaDHg0Vf0uZHGGyozrwe6Oms167g1kGBBM=;
+ b=Pj4NAWOfGu23NdnrtLCDLiYGgJa10xYwK8hshd3ka3eRY1H58YxmfZgXzfSGmNconrSZ4WSIhMNiDqsREQlqW1bO6cvjRH7zKXhERRowWVFcicy3efYjxdX/2KXao/AZ+W3Cb5uWR37eMSfluT38aD/A6Mvk2z/DyDDBCB3fuHQ=
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+From: Jason Andryuk <jason.andryuk@amd.com>
+To: Juergen Gross <jgross@suse.com>, Ajay Kaher <ajay.kaher@broadcom.com>,
+	Alexey Makhalov <alexey.makhalov@broadcom.com>, "Broadcom internal kernel
+ review list" <bcm-kernel-feedback-list@broadcom.com>, Thomas Gleixner
+	<tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov
+	<bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, <x86@kernel.org>,
+	"H. Peter Anvin" <hpa@zytor.com>, Andy Lutomirski <luto@kernel.org>, "Peter
+ Zijlstra" <peterz@infradead.org>, Boris Ostrovsky
+	<boris.ostrovsky@oracle.com>, Yazen Ghannam <yazen.ghannam@amd.com>, "Mario
+ Limonciello" <mario.limonciello@amd.com>
+CC: Jason Andryuk <jason.andryuk@amd.com>, Sean Christopherson
+	<seanjc@google.com>, Ingo Molnar <mingo@kernel.org>,
+	<virtualization@lists.linux.dev>, <linux-kernel@vger.kernel.org>,
+	<xen-devel@lists.xenproject.org>
+Subject: [PATCH] x86/paravirt: Add ioremap_verify_range hook and implement it for Xen PV
+Date: Fri, 30 Oct 2026 20:33:08 -0400
+Message-ID: <20261031003309.3751-1-jason.andryuk@amd.com>
+X-Mailer: git-send-email 2.34.1
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII; format=flowed
-X-purgate-ID: tlsNG-42698a/1793405398-AACDF9EA-344DDBC4/0/0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MWH0EPF000D894F:EE_|SN7PR12MB8002:EE_
+X-MS-Office365-Filtering-Correlation-Id: d7fea2ce-8a16-4fb9-77d5-08df36e68c03
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|23010399003|1800799024|376014|7416014|36860700016|82310400026|921020|260925022911599003|260925021911599003|260925021311599003|11063799006|56012099006|261009223027099003|261028144727099003|261026121527099003|261026140227099003|261021121427099003|261022075727099003|261022105027099003|10067099003|18002099003|13003099007;
+X-Microsoft-Antispam-Message-Info:
+	aWk6nQhKji0GcTEmX23tLPr4lYCz4W5jlrdrp2QAHXlkIK4KMFpVZFXdTeVQKmbeBFLCyrSmljHSR7EZmCUkF0HsOnnoUaocL0a+Pf5qPkayCbKfkNcyGB1DxTvws5K7IVX5eig6qTGRhdC5rCV7X9SbhmjSPpefOtXCvvPHRj61GbroMPq+HjMhTL++WH6VQC94VtKNUmhY4vCF06GCLv3BdIaKOLnn3IAAaimUWVDPD2oKYfQarklJVR9UTOOjXEzKflK2PXx5TQAoMoK319mZ2UDcV8xkmXj/u8tbHHSr9U1dY2rJYFesHi/g5Yci1rkjRc779gCqC2IwRgVKJQg3YuRfwfCNrXifytIW2dYsRFiVWGhwxGuw1hyI7U7tfSOdT5makn5MCHYmZY5sOksB7KvIeSUMh9K4eq2i7V0b1QBfqqZtFQ3AtyE9BenyJs8bpBHoMZVayU0f0LGuFmBU3bpXVwKX7ErK9ve7sdOizVc4bMCzRjlygLWAF19hHosXB7rbHWBoKvSfBtcN+0pDXw/tvQ6SXyEK2VFnzCzI+P88nAazNWeioMrem9S2E9DAZy5a9uWoUQjYuA3cmJ9ds51w9lhcI2eXz6ibzaA3Ye2P5KpninpAKtTgbCx7RjI0H1AioRp5WJny7lD6Oo11eAsfBQY9XFyJyxI1SFAypdzqAH0HZb64gGEGvkgXOjXwzJtp5HunXaBhjDvWeA==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(376014)(7416014)(36860700016)(82310400026)(921020)(260925022911599003)(260925021911599003)(260925021311599003)(11063799006)(56012099006)(261009223027099003)(261028144727099003)(261026121527099003)(261026140227099003)(261021121427099003)(261022075727099003)(261022105027099003)(10067099003)(18002099003)(13003099007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	NYRg0/BadDsns6DekT8ePeXb82enHV1ukRb5r52da1kdASpsWvA0mXuU15E3cFx1hHSgRYrqBbIozCDfFHTziJoruYwopYVw6igrGxSTguSTg4Qhfp++W5ZX6aGLuC0/pgqLtQ+iBtmHO5YkGhVIoBvaWaw7w6WiHvXiNrN/+EusxAjBiXA3C6/kS7w4719+P3in2EFe8BHpwuW28TAu8f+k4gXh6RyOukBly+trzlKTHOR2ngP2f8oKbLXLLahsqYlgNl5XEwtP075VkpKDdbax0Vg1ooDjbkQxlczggrJOgYBrocTr7daAbFgiQVr8/25ge/P9ko+YUJH7scHFHDj6Gc6tI+zRGXe84Bbmxq6W4db8aLcxK0XdrHeDBIAuUAUE5j526/zmVlYSPMmfbh6Hz/gqCFe5QDNVSMJIl2jAnmvcsCwd5jh47pJj89aQ
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2026 00:33:12.8540
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d7fea2ce-8a16-4fb9-77d5-08df36e68c03
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	MWH0EPF000D894F.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB8002
+X-purgate-ID: tlsNG-ebf023/1793406802-C32CCB50-F028D635/0/0
 X-purgate-type: clean
-X-purgate-size: 3965
-X-Spam-Status: No, score=-8.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY autolearn=unavailable
+X-purgate-size: 5858
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Fri, 30 Oct 2026, Yonggang Luo wrote:
-> DEFINE_MACHINE and DEFINE_MACHINE_EXTENDED hide the TypeInfo and the type_init
-> function that calls type_register_static(). A later change needs to pass a
+Xen PV guests update page tables via hypercalls, and Xen refuses to let a
+domain map machine frames it does not own, such as chipset MMIO in a domU.
+The set_pte() paths ignore the hypercall result, so ioremap() returns a
+mapping whose PTEs are not present.  Accessing the virtual address then
+faults.  This was seen in print_s5_reset_status_mmio() on Xen PV domUs
+on AMD Zen hosts.  The machine address is not accessible by the domU and
+faults on access.
 
-That's the point of the macro to hide the boiler plate code.
+Add a pv_mmu_ops hook, ioremap_verify_range, which __ioremap_caller()
+calls after ioremap_page_range().  It defaults to returning success.
+Xen PV implements it by walking the range with lookup_address() and
+failing if any entry is not present, making ioremap() return NULL.
 
-> target mask into that registration, and the macros have no parameter for it.
+This also affects a Xen PV dom0: an ioremap() of a range containing any
+page Xen refuses to map (e.g. MMIO Xen reserves for itself) now fails as
+a whole, rather than succeeding and faulting only when the refused page
+is accessed.  Pages Xen forces read-only are still mapped present and
+are unaffected.
 
-Couldn't you just change the macros to take that parameter instead of 
-expanding it everywhere?
+Fixes: ab8131028710 ("x86/CPU/AMD: Print the reason for the last reset")
+Link: https://lore.kernel.org/xen-devel/20251219010131.12659-1-ariadne@ariadne.space/
+Suggested-by: Sean Christopherson <seanjc@google.com>
+Suggested-by: Borislav Petkov <bp@alien8.de>
+Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
+---
+ arch/x86/include/asm/paravirt.h       | 10 ++++++++++
+ arch/x86/include/asm/paravirt_types.h |  6 ++++++
+ arch/x86/kernel/paravirt.c            |  7 +++++++
+ arch/x86/mm/ioremap.c                 |  3 +++
+ arch/x86/xen/mmu_pv.c                 | 24 ++++++++++++++++++++++++
+ 5 files changed, 50 insertions(+)
 
-Regards,
-BALATON Zoltan
+diff --git a/arch/x86/include/asm/paravirt.h b/arch/x86/include/asm/paravirt.h
+index 0591aa38fd85..30cb1d1636e4 100644
+--- a/arch/x86/include/asm/paravirt.h
++++ b/arch/x86/include/asm/paravirt.h
+@@ -495,6 +495,11 @@ static inline void arch_leave_lazy_mmu_mode(void)
+ 	arch_flush_lazy_mmu_mode();
+ }
+ 
++static inline int ioremap_verify_range(unsigned long addr, unsigned long size)
++{
++	return PVOP_CALL2(int, pv_ops, mmu.ioremap_verify_range, addr, size);
++}
++
+ static inline void __set_fixmap(unsigned /* enum fixed_addresses */ idx,
+ 				phys_addr_t phys, pgprot_t flags)
+ {
+@@ -557,6 +562,11 @@ static __always_inline unsigned long arch_local_irq_save(void)
+ static inline void paravirt_enter_mmap(struct mm_struct *mm)
+ {
+ }
++
++static inline int ioremap_verify_range(unsigned long addr, unsigned long size)
++{
++	return 0;
++}
+ #endif
+ 
+ #ifndef CONFIG_PARAVIRT
+diff --git a/arch/x86/include/asm/paravirt_types.h b/arch/x86/include/asm/paravirt_types.h
+index b4c4a23e77a1..674613301a83 100644
+--- a/arch/x86/include/asm/paravirt_types.h
++++ b/arch/x86/include/asm/paravirt_types.h
+@@ -164,6 +164,12 @@ struct pv_mmu_ops {
+ 
+ 	void (*lazy_mode_flush)(void);
+ 
++	/*
++	 * Verify that an ioremap()ed kernel virtual address range was
++	 * actually mapped.  Returns 0 on success.
++	 */
++	int (*ioremap_verify_range)(unsigned long addr, unsigned long size);
++
+ 	/* dom0 ops */
+ 
+ 	/* Sometimes the physical address is a pfn, and sometimes its
+diff --git a/arch/x86/kernel/paravirt.c b/arch/x86/kernel/paravirt.c
+index 00b59d774389..b1bc519c660d 100644
+--- a/arch/x86/kernel/paravirt.c
++++ b/arch/x86/kernel/paravirt.c
+@@ -88,6 +88,11 @@ static noinstr void pv_native_set_debugreg(int regno, unsigned long val)
+ {
+ 	native_set_debugreg(regno, val);
+ }
++
++static int native_ioremap_verify_range(unsigned long addr, unsigned long size)
++{
++	return 0;
++}
+ #endif
+ 
+ struct pv_info pv_info = {
+@@ -207,6 +212,8 @@ struct paravirt_patch_template pv_ops = {
+ 
+ 	.mmu.lazy_mode_flush	= paravirt_nop,
+ 
++	.mmu.ioremap_verify_range	= native_ioremap_verify_range,
++
+ 	.mmu.set_fixmap		= native_set_fixmap,
+ #endif /* CONFIG_PARAVIRT_XXL */
+ };
+diff --git a/arch/x86/mm/ioremap.c b/arch/x86/mm/ioremap.c
+index 12c8180ca1ba..6b45a7eef593 100644
+--- a/arch/x86/mm/ioremap.c
++++ b/arch/x86/mm/ioremap.c
+@@ -301,6 +301,9 @@ __ioremap_caller(resource_size_t phys_addr, unsigned long size,
+ 	if (ioremap_page_range(vaddr, vaddr + size, phys_addr, prot))
+ 		goto err_free_area;
+ 
++	if (ioremap_verify_range(vaddr, size))
++		goto err_free_area;
++
+ 	ret_addr = (void __iomem *) (vaddr + offset);
+ 	mmiotrace_ioremap(unaligned_phys_addr, unaligned_size, ret_addr);
+ 
+diff --git a/arch/x86/xen/mmu_pv.c b/arch/x86/xen/mmu_pv.c
+index 377c3c0d9f20..e524d318171f 100644
+--- a/arch/x86/xen/mmu_pv.c
++++ b/arch/x86/xen/mmu_pv.c
+@@ -359,6 +359,29 @@ static void xen_set_pte(pte_t *ptep, pte_t pteval)
+ 	__xen_set_pte(ptep, pteval);
+ }
+ 
++/*
++ * PTE updates are made via (possibly batched) hypercalls whose failures
++ * are not propagated back to the caller.  Xen refuses to let a domain map
++ * machine frames it does not own (e.g. chipset MMIO in a domU), leaving the
++ * PTE not present.  Walk the range to make sure every page got mapped.
++ */
++static int xen_ioremap_verify_range(unsigned long addr, unsigned long size)
++{
++	unsigned long end = addr + size;
++	unsigned int level;
++	pte_t *pte;
++
++	while (addr < end) {
++		pte = lookup_address(addr, &level);
++		if (!pte || !pte_present(*pte))
++			return -ENXIO;
++
++		addr = (addr & page_level_mask(level)) + page_level_size(level);
++	}
++
++	return 0;
++}
++
+ static pte_t xen_ptep_modify_prot_start(struct vm_area_struct *vma,
+ 					unsigned long addr, pte_t *ptep)
+ {
+@@ -2218,6 +2241,7 @@ void __init xen_init_mmu_ops(void)
+ 	pv_ops.mmu.enter_mmap = xen_enter_mmap;
+ 	pv_ops.mmu.exit_mmap = xen_exit_mmap;
+ 	pv_ops.mmu.lazy_mode_flush = xen_flush_lazy_mmu;
++	pv_ops.mmu.ioremap_verify_range = xen_ioremap_verify_range;
+ 	pv_ops.mmu.set_fixmap = xen_set_fixmap;
+ 
+ 	memset(dummy_mapping, 0xff, PAGE_SIZE);
+-- 
+2.34.1
 
-> This series expands every caller first, with no behavior change, so the
-> follow-up only replaces the type_register_static() call.
->
-> Each machine file gains a class_init function, a TypeInfo, and a type_init
-> function that calls type_register_static(). The last patch removes
-> DEFINE_MACHINE* and DEFINE_SECURE_MACHINE* from include/hw/core/boards.h.
->
-> Yonggang Luo (15):
->  hw/alpha: expand DEFINE_MACHINE in dp264.c
->  hw/m68k: expand DEFINE_MACHINE for M68K machines
->  hw/microblaze: expand DEFINE_MACHINE for MicroBlaze
->  hw/tricore: expand DEFINE_MACHINE in tricore_testboard.c
->  hw/arm: expand DEFINE_MACHINE for ARM machines
->  hw/riscv: expand DEFINE_MACHINE for RISC-V machines
->  hw/core/null-machine: expand DEFINE_MACHINE
->  hw/mips: expand DEFINE_MACHINE for MIPS machines
->  hw/ppc: expand DEFINE_MACHINE for PowerPC machines
->  hw/sh4: expand DEFINE_MACHINE in r2d.c
->  hw/sparc: expand DEFINE_MACHINE in leon3.c
->  hw/xenpv: expand DEFINE_MACHINE in xen_machine_pv.c
->  hw/xtensa: expand DEFINE_MACHINE in sim.c
->  hw/xtensa: expand DEFINE_MACHINE in virt.c
->  hw/core/boards: remove unused DEFINE_MACHINE* macros
->
-> hw/alpha/dp264.c                    | 18 +++++++++--
-> hw/arm/bananapi_m2u.c               | 18 +++++++++--
-> hw/arm/cubieboard.c                 | 19 +++++++++---
-> hw/arm/digic_boards.c               | 18 +++++++++--
-> hw/arm/imx25_pdk.c                  | 18 +++++++++--
-> hw/arm/imx8mm-evk.c                 | 20 +++++++++---
-> hw/arm/integratorcp.c               | 14 ++++++---
-> hw/arm/kzm.c                        | 18 +++++++++--
-> hw/arm/max78000fthr.c               | 17 ++++++++--
-> hw/arm/mcimx6ul-evk.c               | 18 +++++++++--
-> hw/arm/mcimx7d-sabre.c              | 20 +++++++++---
-> hw/arm/msf2-som.c                   | 17 ++++++++--
-> hw/arm/netduino2.c                  | 17 ++++++++--
-> hw/arm/netduinoplus2.c              | 17 ++++++++--
-> hw/arm/olimex-stm32-h405.c          | 18 +++++++++--
-> hw/arm/orangepi.c                   | 19 +++++++++---
-> hw/arm/stm32vldiscovery.c           | 18 +++++++++--
-> hw/core/null-machine.c              | 18 +++++++++--
-> hw/m68k/an5206.c                    | 18 +++++++++--
-> hw/m68k/mcf5208.c                   | 18 +++++++++--
-> hw/microblaze/petalogix_ml605_mmu.c | 19 ++++++++++--
-> hw/microblaze/xlnx-zynqmp-pmu.c     | 19 ++++++++++--
-> hw/mips/boston.c                    | 18 +++++++++--
-> hw/mips/fuloong2e.c                 | 18 +++++++++--
-> hw/mips/malta.c                     | 12 ++++++--
-> hw/ppc/amigaone.c                   | 18 +++++++++--
-> hw/ppc/pegasos.c                    | 21 ++++++++-----
-> hw/ppc/ppc440_bamboo.c              | 18 +++++++++--
-> hw/ppc/prep.c                       | 18 +++++++++--
-> hw/ppc/sam460ex.c                   | 18 +++++++++--
-> hw/ppc/virtex_ml507.c               | 18 +++++++++--
-> hw/riscv/boston-aia.c               | 18 +++++++++--
-> hw/riscv/microblaze-v-generic.c     | 18 +++++++++--
-> hw/sh4/r2d.c                        | 18 +++++++++--
-> hw/sparc/leon3.c                    | 18 +++++++++--
-> hw/tricore/tricore_testboard.c      | 18 +++++++++--
-> hw/xenpv/xen_machine_pv.c           | 18 +++++++++--
-> hw/xtensa/sim.c                     | 18 +++++++++--
-> hw/xtensa/virt.c                    | 18 +++++++++--
-> include/hw/core/boards.h            | 48 -----------------------------
-> 40 files changed, 605 insertions(+), 142 deletions(-)
->
->
 
