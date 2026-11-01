@@ -2,46 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0B394606A326
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1ABF4606A327
 	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 05:50:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=N0DudzoL
-Received: from list by lists.xenproject.org with outflank-mailman.1467337.1676729 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=t+qS3Kmr
+Received: from list by lists.xenproject.org with outflank-mailman.1467332.1676719 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNkw8-0002Ry-Kb; Mon, 02 Nov 2026 05:50:28 +0000
+	id 1xNkw8-0002LL-4D; Mon, 02 Nov 2026 05:50:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1467337.1676729; Mon, 02 Nov 2026 05:50:28 +0000
+Received: by outflank-mailman (output) from mailman id 1467332.1676719; Mon, 02 Nov 2026 05:50:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNkw8-0002QZ-FN; Mon, 02 Nov 2026 05:50:28 +0000
-Received: by outflank-mailman (input) for mailman id 1467337;
- Sun, 01 Nov 2026 16:33:15 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xNkw8-0002LE-0l; Mon, 02 Nov 2026 05:50:28 +0000
+Received: by outflank-mailman (input) for mailman id 1467332;
+ Sun, 01 Nov 2026 16:31:20 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <q.h.hack.winter@gmail.com>) id 1xNYUd-0000vU-B9
- for xen-devel@lists.xenproject.org; Sun, 01 Nov 2026 16:33:15 +0000
+ (envelope-from <q.h.hack.winter@gmail.com>) id 1xNYSl-0000tZ-Rt
+ for xen-devel@lists.xenproject.org; Sun, 01 Nov 2026 16:31:20 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xNYUc-008AOd-Kn
- for xen-devel@lists.xenproject.org; Sun, 01 Nov 2026 17:33:14 +0100
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xNYSl-006pyT-8x
+ for xen-devel@lists.xenproject.org; Sun, 01 Nov 2026 17:31:19 +0100
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <q.h.hack.winter@gmail.com>)
- id 6ae769c9-8faa-0a2a0a5109dd-0a2a4508e26e-4
- for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 17:33:14 +0100
-Received: from [209.85.216.54] (helo=mail-pj1-f54.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ae76940-2eae-0a2a0a5409dd-0a2a4503b2c2-16
+ for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 17:31:19 +0100
+Received: from [209.85.216.43] (helo=mail-pj1-f43.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <q.h.hack.winter@gmail.com>)
- id 6ae769c9-f659-0a2a45080019-d155d83694ac-3
- for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 17:33:14 +0100
-Received: by mail-pj1-f54.google.com with SMTP id
- 98e67ed59e1d1-3ac7a053626so299089a91.0
- for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 08:33:14 -0800 (PST)
+ id 6ae76955-fae8-0a2a45030019-d155d82b9ade-3
+ for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 17:31:19 +0100
+Received: by mail-pj1-f43.google.com with SMTP id
+ 98e67ed59e1d1-3ad0c2e71ebso397165a91.2
+ for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 08:31:18 -0800 (PST)
 Received: from localhost.localdomain ([113.102.236.131])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-cdb0981c5desm2063394a12.27.2026.11.01.08.33.06
+ 98e67ed59e1d1-3ae6e944ba9sm15038585a91.8.2026.11.01.08.31.12
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Sun, 01 Nov 2026 08:33:11 -0800 (PST)
+ Sun, 01 Nov 2026 08:31:16 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,43 +52,43 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793550792; x=1794155592; darn=lists.xenproject.org;
+        d=gmail.com; s=20260707; t=1793550677; x=1794155477; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
         bh=z1wgGnLaHoKZu2/+Ud078CAK3gozxrFVUFtZdHR2t7Q=;
-        b=N0DudzoLzvEvhmUa69QzvvAg+oRZAWzhCFZ0kBIOMZWPy+2XcLfxE77rPtN5xA7VIC
-         2Jd8d8rAiUCWgA3BrZ/yWfMvcccA67SoB6Y4EPg7vW2+U6JMk9wcB5lACvtqFtRdUZ9/
-         02rLUiPxdwBeajrg1gaxlq7RgFgSpMydMAXGnrXGMmxfwOTgReYzWhXh8C3tUrnONjIj
-         len+rMP/436mjiEUqwqT90eOvlkTcyK5Yk5oNbOWxZ8Ryy5vTwEqCyf025gO9ZCy6zUH
-         DeB8A1CxxfeGfR7+CuslyKrdVBJ/U82LlmJ56bGkUKiOQPuwtuHDxbhDMS7aykGwQP5w
-         FV3Q==
+        b=t+qS3KmrGZsUjv/mhney5ZVlDlj8OOOx3Auq1Pk2R3EDzUKVdVVhexbjm6WcQXSrin
+         a0qiVScCcdELyx3tXO7T1KcH/ZJg7LTjLlsf+ic+GCI67yjAKFCVmxBBVd+0ryP8DvIO
+         VGlNIEY9gTbcFYEdkrNYCg1bMMZWl57Vp/udKMycEYqbyeeLQ7Ldf/BecMdrKykiqORL
+         HHFIxFe7Wvi/iuVezM+K/yM4vlK2taBaBwkrD9Vhww/ayzCe/9FpsPXeFCrgb/OzkNax
+         1T1LqzYJdwg0Z+SMDxx75R9fnkXTj7Ce1+cuGh8Xh3ljwpHbgXpxLKi1PhCzfyZcTFeC
+         TlAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793550792; x=1794155592;
+        d=1e100.net; s=20260707; t=1793550677; x=1794155477;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
         bh=z1wgGnLaHoKZu2/+Ud078CAK3gozxrFVUFtZdHR2t7Q=;
-        b=ovaeKCFZ95DwuJTlP5mUxphnJAHJQkd6uKUDIfIU3e7f4bed4u2Rf1YnsVT60KNjc9
-         xTOGZm6/xAYxSkSj/QhmukbBqkAgJ1hBSqxZT8jT2fIGaYzKNLetKmEBsI67gIQnjcHu
-         bF/x8jSUXKYFdlEqk/ogu/mbIvRDp+qiwRGSJt2AK69ycdK+vdA/XxMSQJwf9mhUtrie
-         PwQGCXXUoH5UxW03Kb1KPBfYNwNJjvXWXLdkA7lKQxU31USsq7NEftPKBvdXqIS3v9eT
-         gPoIlv7uh88vCHw6PqNSpOIdOLQixmxrZCev24zcO/3nkUwMQbXtNEGEqM/d3u03jS9Q
-         YUuQ==
-X-Forwarded-Encrypted: i=1; AKwUvBxuoOmhKcGZeFrCwKy7v5Dj21CNiUCJQu8FW1RtXGcsdkfFyVso+zsTUuNtvWmzaxfuyKiwJXJ89Hg=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z9dYseak/X5FQIQM3BaqGUGE+OHyz7+qNHteIU+FMYbN0H/amS7
-	WfkjtLMR6BdRWfIVtbIDrjGnyHAL456Pl9rKNGU1WwOW3yxplwVfeunj
-X-Gm-Gg: AYBFou2iDDpb3J7TDrvMDh0KAq/luk1XbL6QbvcBNIJEPm/wM9GZw6yE8MAsUlR0J6S
-	hR/wNVaomRKO9yiApJbu7yOqZG/OzbIB40h+nRaZfnqJ6/tioK+N8iMzbEcqxwVmpHPDH7HDcjB
-	W+U0/padeych0R2yEV+PwguJnuHHuSv5QpfTVs1wvNE/PDAPVkXRspBxeFJKU8lauGcBZTTybWT
-	lNCZdpirLs88NFMxjxUJTwi6EGttNHWaJbnMTS1L3Xd0zUrNzttxXXdrh77p/SDPBO8httqRBjo
-	u8QI1XyDqXR1SDZZiDV12VacLpgypuOKGG+D3Bv1pvcdNtMSEj/Tcyv9Z0WMkEA2ae90LbiWpUs
-	UP8YjU14b3+07blZDBQZUsPmwQlLV3oobHrUZaXtvJl2SCIbR7VbfGf4fcEiodn+U3EivY+8V4K
-	1gjCuDE9OXpOTvFPm8LbbmEuAE/wwQSYlipyvQwgT+1NnWz/M/HVGMVv7gw9QQ7hqL2tJVto032
-	43iBFBD5PTNpekRKijlIIgP2eiQ2CgldjO7J3OCwwdJ2sJB8Rr2h5sJ9zVYbTcjAj2T+UP+T63h
-	vNMtnuRhol7urIPUF1+nrMWw1/p2zwdBeh+XzXGDrZppE91KaL31PdatLVkKNoNWpkAx7HyE6kY
-	fKIPJudAmRvS+XiLsSzKOdyw=
-X-Received: by 2002:a17:90b:1808:b0:3ab:a188:b898 with SMTP id 98e67ed59e1d1-3ae895f8623mr10840887a91.2.1793550792550;
-        Sun, 01 Nov 2026 08:33:12 -0800 (PST)
+        b=XlzAiB/pvTa3ZeLB//NOIxrPuuifDMt9w+CTOE8koDT70hqR79yZ7cq9UTe4ok7pGF
+         Bq1KcMydKOR9XOIvOypyIteKze0m57yyQWuzxPCVJRV0cvCHQtjvLwbdpbXW0HvdOEbS
+         6geM80YkzkJGtaXmfWwwinlg2RdWt3L60QMmR+aI7hyvQwjrFtb0Tv9zY7D/W8BjWHpH
+         8sh6q51PUeiR8yA2/45VGpLQlnOWJLTzuudiBv3BQzTh3Ft4Gj3iT3xvB+nektFZD5GO
+         QKf62MFebUkdiQ0lUdxmc+zehabC9G7CeqGb6VRN+1z7EUUyOxOAtQsfWzP9/QldVH0e
+         brIg==
+X-Forwarded-Encrypted: i=1; AKwUvBybdoC8CUu1DfRxOtbQDOT1nCBC41uJQFi7ybMEAAo4UXLWcfAGOTqUQtXA6fkMy8MvWKT4BrD2LAw=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z8puQY0GXWhzarzwzFTk7/vy4ekURnZ1zFkxzWY0kacupHPzhfT
+	E0yslraz6MkwVLONUoULNAc0hAcxj1w6tV07cpDddGXFUXuNk/hu1fWr
+X-Gm-Gg: AYBFou0wvSrlNo/MEWIqXEmizeMgudEA3/MUZBNTx2QbdE/IcMm0sSXZaVvrX3BYnSs
+	uqujatb0PVxEIb7CJT3lq7Jr79bwvIIEi2MViTpi1LD36NNs9sFzvmSMPZUmE1mE9l9WZJOhbdJ
+	E6OX7jjKdHSZ0OpE1HTOseOQOuHmVnsJZcZIL3d/5s4zVnwFSyIGH8bpAwIllSF6QAderQXqBpQ
+	sf41v1WioSvUsLzCgNs1F75y6hqEUqSRF9ufRmdzGjiQTctnFq2tpH0cIjJQyFUorN6kKqAsKe8
+	xZt8L0ACd7yXX2pVQuYzXHLkc3uWUuXZHSNINzz/bMivE3FMpXZc/OEGAu0/j0SpA7hP7KMBIZi
+	Muj1B1T81aGdLSFuYQsMx7MgxuwgXeY12kPMeZW1emmnx3dgGrER9+AW5ljXTQFuRdt7J0TojYB
+	MKiJSyqP0dfkUzXTEISLeeq9XGRz6iM5rbnSkZoS/mmzkxLybwJVTK2+5wbFSaFpFicsyTbdREV
+	ixJxMj2G4rx/1VJBhCHAlOOk2WzF8FBgfETUkVZpHLDVANUVniyX4Ozp/3wXHVTXFhMWNv+m8xQ
+	GzWo1Phw4VeVW6MBt7D+f9U8Z9juDNMaW1NAV5K8oRl3Hn/6OwHiFpH98BHqSN+W7NkWVcuSTNB
+	vDlK40w8EmQRWt8CK3edLdFo=
+X-Received: by 2002:a17:90b:2cc6:b0:3ac:73c7:9c07 with SMTP id 98e67ed59e1d1-3ae89292da7mr11229213a91.0.1793550676949;
+        Sun, 01 Nov 2026 08:31:16 -0800 (PST)
 From: Qihang <q.h.hack.winter@gmail.com>
 To: Juergen Gross <jgross@suse.com>,
 	xen-devel@lists.xenproject.org
@@ -99,13 +99,13 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Qihang <q.h.hack.winter@gmail.com>,
 	stable@vger.kernel.org
 Subject: [PATCH] xen/privcmd: fix double free when an irqfd is shut down twice
-Date: Mon,  2 Nov 2026 00:32:50 +0800
-Message-ID: <20261101163251.55099-1-q.h.hack.winter@gmail.com>
+Date: Mon,  2 Nov 2026 00:31:06 +0800
+Message-ID: <20261101163107.55037-1-q.h.hack.winter@gmail.com>
 X-Mailer: git-send-email 2.54.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1793550794-DFED287B-71E345AD/0/0
+X-purgate-ID: tlsNG-33051d/1793550679-6ECCB4E9-D6AF225B/0/0
 X-purgate-type: clean
 X-purgate-size: 3803
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
