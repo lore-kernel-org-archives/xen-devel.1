@@ -2,89 +2,89 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 75F27606A324
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CD482606A326
 	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 05:50:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=bcpWLqyX
-Received: from list by lists.xenproject.org with outflank-mailman.1467429.1676735 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=i7pWjGsL
+Received: from list by lists.xenproject.org with outflank-mailman.1467445.1676790 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNkw8-0002XH-SM; Mon, 02 Nov 2026 05:50:28 +0000
+	id 1xNkwC-0003bF-2w; Mon, 02 Nov 2026 05:50:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1467429.1676735; Mon, 02 Nov 2026 05:50:28 +0000
+Received: by outflank-mailman (output) from mailman id 1467445.1676790; Mon, 02 Nov 2026 05:50:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNkw8-0002Vl-N5; Mon, 02 Nov 2026 05:50:28 +0000
-Received: by outflank-mailman (input) for mailman id 1467429;
- Sun, 01 Nov 2026 20:08:51 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xNkwB-0003XR-JY; Mon, 02 Nov 2026 05:50:31 +0000
+Received: by outflank-mailman (input) for mailman id 1467445;
+ Sun, 01 Nov 2026 20:14:05 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <armbru@redhat.com>) id 1xNbrH-0000mc-8f
- for xen-devel@lists.xenproject.org; Sun, 01 Nov 2026 20:08:51 +0000
+ (envelope-from <armbru@redhat.com>) id 1xNbwL-0001uw-BE
+ for xen-devel@lists.xenproject.org; Sun, 01 Nov 2026 20:14:05 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xNbrG-005QjG-DS
- for xen-devel@lists.xenproject.org; Sun, 01 Nov 2026 21:08:50 +0100
-Received: from [10.42.69.12] (helo=localhost)
+ id 1xNbwK-002OCu-OX
+ for xen-devel@lists.xenproject.org; Sun, 01 Nov 2026 21:14:04 +0100
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <armbru@redhat.com>)
- id 6ae79be1-e002-0a2a0a5209dd-0a2a450cdd98-42
- for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 21:08:49 +0100
+ id 6ae79d0c-8faa-0a2a0a5109dd-0a2a4509ddc0-44
+ for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 21:14:04 +0100
 Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <armbru@redhat.com>)
- id 6ae79c50-f479-0a2a450c0019-aa0a857ce78f-3
- for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 21:08:49 +0100
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ id 6ae79d8b-be1a-0a2a45090019-aa0a857c7775-3
+ for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 21:14:04 +0100
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-618-2zE9XaLbMxqdAeWTtl2FYw-1; Sun,
- 01 Nov 2026 15:08:43 -0500
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-90-zUz3wxw2MFW_-TF18iVIrQ-1; Sun,
+ 01 Nov 2026 15:13:57 -0500
 Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id CE00A1955BFE; Sun,  1 Nov 2026 20:08:35 +0000 (UTC)
+ by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 9C6A01800364; Sun,  1 Nov 2026 20:13:53 +0000 (UTC)
 Received: from blackfin.pond.sub.org (unknown [10.44.22.2])
  by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 5729A7E0; Sun,  1 Nov 2026 20:08:31 +0000 (UTC)
+ id D5BA37E0; Sun,  1 Nov 2026 20:13:52 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 00A1E21E6A04; Sun, 01 Nov 2026 21:08:28 +0100 (CET)
-Resent-To: 17746591750@163.com, pasic@linux.ibm.com, alistair@alistair23.me,
- rathc@linux.ibm.com, graf@amazon.com, stefanb@linux.vnet.ibm.com,
- FangSheng.Huang@amd.com, xen-devel@lists.xenproject.org,
- michael.roth@amd.com, luc@lmichel.fr, lixianglai@loongson.cn,
- maobibo@loongson.cn, pbarbuda@microsoft.com, yoshinori.sato@nifty.com,
- qemu-arm@nongnu.org, qemu-block@nongnu.org, qemu-devel@nongnu.org,
- qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
- john.levon@nutanix.com, thanos.makatos@nutanix.com, kfting@nuvoton.com,
- den@openvz.org, elena.ufimtseva@oracle.com, jag.raman@oracle.com,
+ id 8867121E6A04; Sun, 01 Nov 2026 21:13:50 +0100 (CET)
+Resent-To: pasic@linux.ibm.com, 17746591750@163.com, rathc@linux.ibm.com,
+ alistair@alistair23.me, stefanb@linux.vnet.ibm.com, graf@amazon.com,
+ xen-devel@lists.xenproject.org, FangSheng.Huang@amd.com, luc@lmichel.fr,
+ michael.roth@amd.com, jamin_lin@aspeedtech.com, kane_chen@aspeedtech.com,
+ palmer@dabbelt.com, rbolshakov@ddn.com, foss@defmacro.it,
+ sebastian.huber@embedded-brains.de, fam@euphon.net,
+ jiaxun.yang@flygoat.com, lizhijian@fujitsu.com, atar4qemu@gmail.com,
+ edgar.iglesias@gmail.com, jasowangio@gmail.com, liwei1518@gmail.com,
+ npiggin@gmail.com, zhangckid@gmail.com, titusr@google.com,
+ wuhaotsh@google.com, arei.gonglei@huawei.com, berto@igalia.com,
+ mark.cave-ayland@ilande.co.uk, junjie.cao@intel.com, zhao1.liu@intel.com,
+ its@irrelevant.dk, clg@kaod.org, conor@kernel.org, david@kernel.org,
+ jic23@kernel.org, kbusch@kernel.org, mchehab+huawei@kernel.org,
+ sstabellini@kernel.org, peter.maydell@linaro.org,
+ richard.henderson@linaro.org, zhiwei_liu@linux.alibaba.com,
+ zhenwei.pi@linux.dev, adityag@linux.ibm.com, alifm@linux.ibm.com,
+ amachhiw@linux.ibm.com, borntraeger@linux.ibm.com,
+ brueckner@linux.ibm.com, farman@linux.ibm.com, harshpb@linux.ibm.com,
+ iii@linux.ibm.com, jjherne@linux.ibm.com, milesg@linux.ibm.com,
+ mjrosato@linux.ibm.com, lixianglai@loongson.cn, maobibo@loongson.cn,
+ pbarbuda@microsoft.com, yoshinori.sato@nifty.com, qemu-arm@nongnu.org,
+ qemu-block@nongnu.org, qemu-devel@nongnu.org, qemu-ppc@nongnu.org,
+ qemu-riscv@nongnu.org, qemu-s390x@nongnu.org, john.levon@nutanix.com,
+ thanos.makatos@nutanix.com, kfting@nuvoton.com, den@openvz.org,
+ elena.ufimtseva@oracle.com, jag.raman@oracle.com,
  daniel.barboza@oss.qualcomm.com, philmd@oss.qualcomm.com,
  pierrick.bouvier@oss.qualcomm.com, phil@philjordan.eu,
  tangtao1634@phytium.com.cn, chao.liu@processmission.com, jiri@resnulli.us,
  sam@rfc1149.net, anisa.su@samsung.com, alex@shazbot.org, farosas@suse.de,
  mohamed@unpredictable.fr, kvm@vger.kernel.org, linux-cxl@vger.kernel.org,
- alistair.francis@wdc.com, anthony@xenproject.org,
- jamin_lin@aspeedtech.com, kane_chen@aspeedtech.com, palmer@dabbelt.com,
- rbolshakov@ddn.com, foss@defmacro.it, sebastian.huber@embedded-brains.de,
- fam@euphon.net, jiaxun.yang@flygoat.com, lizhijian@fujitsu.com,
- atar4qemu@gmail.com, edgar.iglesias@gmail.com, jasowangio@gmail.com,
- liwei1518@gmail.com, npiggin@gmail.com, zhangckid@gmail.com,
- titusr@google.com, wuhaotsh@google.com, arei.gonglei@huawei.com,
- berto@igalia.com, mark.cave-ayland@ilande.co.uk, junjie.cao@intel.com,
- zhao1.liu@intel.com, its@irrelevant.dk, clg@kaod.org, conor@kernel.org,
- david@kernel.org, jic23@kernel.org, kbusch@kernel.org,
- mchehab+huawei@kernel.org, sstabellini@kernel.org,
- peter.maydell@linaro.org, richard.henderson@linaro.org,
- zhiwei_liu@linux.alibaba.com, zhenwei.pi@linux.dev, adityag@linux.ibm.com,
- alifm@linux.ibm.com, amachhiw@linux.ibm.com, borntraeger@linux.ibm.com,
- brueckner@linux.ibm.com, farman@linux.ibm.com, harshpb@linux.ibm.com,
- iii@linux.ibm.com, jjherne@linux.ibm.com, milesg@linux.ibm.com,
- mjrosato@linux.ibm.com
+ alistair.francis@wdc.com, anthony@xenproject.org
 Resent-From: Markus Armbruster <armbru@redhat.com>
-Resent-Date: Sun, 01 Nov 2026 21:08:28 +0100
-Resent-Message-ID: <87zevs1fib.fsf@pond.sub.org>
+Resent-Date: Sun, 01 Nov 2026 21:13:50 +0100
+Resent-Message-ID: <87wlqwz4w1.fsf@pond.sub.org>
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -95,22 +95,23 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:Resent-To:Resent-From:Resent-Message-ID:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1793563728;
+	s=mimecast20190719; t=1793564043;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:resent-to:
 	 resent-from:resent-message-id:in-reply-to:in-reply-to:  references:references;
-	bh=NosSc9Yc34/yxPTSQxwFm3NAockGEayknf7JSdxuCWM=;
-	b=bcpWLqyX2Hqz8v+D0PFTbgCUP++TbSzUPwjCRTBQmLZmKpYDhqJ4typmexPv89oetxRwNR
-	1h7iw49ShtRxdoHmOTTQS8oQ1Xj+FJPT1spAu2IhsUchLYHldgg7+by303P5mIh1jiqSEe
-	2OnLH+hdyF+39RGcRFBnSnxS7hVawcE=
-X-MC-Unique: 2zE9XaLbMxqdAeWTtl2FYw-1
-X-Mimecast-MFC-AGG-ID: 2zE9XaLbMxqdAeWTtl2FYw_1793563719
+	bh=dG6QdUgPpDE3LmNNjTQwdz8vTAxBziYTzulA/MP9vJ8=;
+	b=i7pWjGsL4BiGUHnTjqIz4DcWaxIo7PlE0LWJwgAdJGDun1Juzf8uYCi7M9rtXDo7A48wAi
+	jGT/H7h/TNoRzmoeK0FamZ1wItUul171G5LZGRKHlKbeAZDi3RrQqrtUqty0m4uUcPd/Wt
+	YTXT0jc7j2/JWXo2FirRg4/BN29orbc=
+X-MC-Unique: zUz3wxw2MFW_-TF18iVIrQ-1
+X-Mimecast-MFC-AGG-ID: zUz3wxw2MFW_-TF18iVIrQ_1793564033
 From: Markus Armbruster <armbru@redhat.com>
 To: =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>
-Cc: qemu-devel@nongnu.org,  Michael Roth <michael.roth@amd.com>,  John Snow
- <jsnow@redhat.com>,  Peter Maydell <peter.maydell@linaro.org>,  Mauro
- Carvalho Chehab <mchehab+huawei@kernel.org>,  Pierrick Bouvier
+Cc: qemu-devel@nongnu.org,  Markus Armbruster <armbru@redhat.com>,  Michael
+ Roth <michael.roth@amd.com>,  John Snow <jsnow@redhat.com>,  Peter Maydell
+ <peter.maydell@linaro.org>,  Mauro Carvalho Chehab
+ <mchehab+huawei@kernel.org>,  Pierrick Bouvier
  <pierrick.bouvier@oss.qualcomm.com>,  Paolo Bonzini <pbonzini@redhat.com>,
   Daniel P. =?utf-8?Q?Berrang=C3=A9?= <berrange@redhat.com>,  Kostiantyn
  Kostiuk
@@ -171,26 +172,26 @@ Cc: qemu-devel@nongnu.org,  Michael Roth <michael.roth@amd.com>,  John Snow
  <atar4qemu@gmail.com>,  Yoshinori Sato <yoshinori.sato@nifty.com>,  Jiri
  Pirko <jiri@resnulli.us>,  Eric Auger <eric.auger@redhat.com>,  Laurent
  Vivier <lvivier@redhat.com>
-Subject: Re: [PATCH v7 38/65] qom: convert scalar properties to QAPI-aware
+Subject: Re: [PATCH v7 44/65] hw/nvdimm: convert UUID property to QAPI-aware
  registration
-In-Reply-To: <20261020-qom-qapi-v7-38-431a86b02b58@redhat.com>
+In-Reply-To: <20261020-qom-qapi-v7-44-431a86b02b58@redhat.com>
  (=?utf-8?Q?=22Marc-Andr=C3=A9?=
-	Lureau"'s message of "Tue, 20 Oct 2026 14:45:55 +0400")
+	Lureau"'s message of "Tue, 20 Oct 2026 14:46:01 +0400")
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
-	<20261020-qom-qapi-v7-38-431a86b02b58@redhat.com>
-Date: Fri, 30 Oct 2026 09:48:08 +0100
-Message-ID: <87y0bfa81j.fsf@pond.sub.org>
+	<20261020-qom-qapi-v7-44-431a86b02b58@redhat.com>
+Date: Sun, 01 Nov 2026 18:39:55 +0100
+Message-ID: <871p9478no.fsf@pond.sub.org>
 User-Agent: Gnus/5.13 (Gnus v5.13)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
-X-Mimecast-MFC-PROC-ID: _gymfGmBI69LFGCwQ7dRdzjHvOVAGC1Aoxmad_ri7vk_1793563719
+X-Mimecast-MFC-PROC-ID: fRcQlqkfHrErry8Nnrn4-ZJxVXHk7asxQJAr1bI1FpA_1793564033
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-d25034/1793563729-032D8A5B-4DF152E5/0/0
+X-purgate-ID: tlsNG-bad1c0/1793564044-BCAC8034-980AA31F/0/0
 X-purgate-type: clean
-X-purgate-size: 13505
+X-purgate-size: 3079
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -201,382 +202,94 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com> writes:
 
-> Reviewed-by: Amit Machhiwal <amachhiw@linux.ibm.com>
+> Add a QemuUUID_type_info and use object_property_add_qapi() instead of
+> object_property_add() for the nvdimm UUID property.
+>
+> The type info is defined manually in uuid.c rather than generated,
+> since QAPI does not yet support string typedefs. An alternative would
+> be to extend the QAPI schema language with a 'typedef' construct
+> (e.g. { 'typedef': 'UUID', 'data': 'str' }), which would let the
+> generator produce the type info, C typedef, and introspection entry
+> automatically.
+>
+> Alternatively, the exposed type being a string, we could change the
+> property to be str_type_info.
+>
 > Signed-off-by: Markus Armbruster <armbru@redhat.com>
 > Signed-off-by: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
-
-How did you create this patch?  It looks almost mechanical.
-
-It misses a few conversions, almost certainly in code added since you
-made this patch.  I can take care of them.
-
-[...]
-
-> diff --git a/accel/kvm/kvm-all.c b/accel/kvm/kvm-all.c
-> index 1d91667fb880..bc178482b309 100644
-> --- a/accel/kvm/kvm-all.c
-> +++ b/accel/kvm/kvm-all.c
-> @@ -24,6 +24,7 @@
->  #include "qemu/config-file.h"
->  #include "qemu/error-report.h"
->  #include "qapi/error.h"
-> +#include "qapi/qapi-builtin-type-infos.h"
->  #include "hw/pci/msi.h"
->  #include "hw/pci/msix.h"
->  #include "hw/s390x/adapter.h"
-
-Not needed; we already include "qapi/qapi-type-infos-common.h".
-
-[...]
-
-> diff --git a/hw/acpi/ich9.c b/hw/acpi/ich9.c
-> index 6d421b990cef..64228a620e69 100644
-> --- a/hw/acpi/ich9.c
-> +++ b/hw/acpi/ich9.c
-> @@ -26,6 +26,7 @@
+> ---
+>  hw/mem/nvdimm.c     | 4 ++--
+>  include/qemu/uuid.h | 4 ++++
+>  util/uuid.c         | 5 +++++
+>  3 files changed, 11 insertions(+), 2 deletions(-)
+>
+> diff --git a/hw/mem/nvdimm.c b/hw/mem/nvdimm.c
+> index 123ddc938546..b7ccb5c93678 100644
+> --- a/hw/mem/nvdimm.c
+> +++ b/hw/mem/nvdimm.c
+> @@ -104,8 +104,8 @@ static void nvdimm_init(Object *obj)
+>                               nvdimm_get_label_size, nvdimm_set_label_siz=
+e, NULL,
+>                               NULL);
 > =20
->  #include "qemu/osdep.h"
->  #include "qapi/error.h"
-> +#include "qapi/qapi-builtin-type-infos.h"
->  #include "qapi/visitor.h"
->  #include "hw/pci/pci.h"
->  #include "migration/vmstate.h"
-
-Missing:
-
-                                       PM_REG_FIELD(acpi_pci_hotplug.root),
-                                       object_property_allow_set_link,
-                                       OBJ_PROP_LINK_STRONG);
-   -    object_class_property_add(oc, ACPI_PM_PROP_GPE0_BLK, "uint32",
-   +    object_class_property_add_qapi(oc, ACPI_PM_PROP_GPE0_BLK, &uint32_t=
-ype_info,
-                                  ich9_pm_get_gpe0_blk,
-                                  NULL, NULL, NULL);
-        object_class_property_add_uint8_ptr(oc, ACPI_PM_PROP_S3_DISABLED,
-
-[...]
-
-> diff --git a/hw/xen/xen-pvh-common.c b/hw/xen/xen-pvh-common.c
-> index cca37202ffb2..7b4fd933a8fb 100644
-> --- a/hw/xen/xen-pvh-common.c
-> +++ b/hw/xen/xen-pvh-common.c
-> @@ -9,6 +9,7 @@
->  #include "qemu/osdep.h"
->  #include "qemu/error-report.h"
->  #include "qemu/units.h"
-> +#include "qapi/qapi-builtin-type-infos.h"
->  #include "qapi/visitor.h"
->  #include "hw/core/boards.h"
->  #include "hw/core/irq.h"
-> @@ -413,7 +414,7 @@ void xen_pvh_class_setup_common_props(XenPVHMachineCl=
-ass *xpc)
-> =20
->  #define OC_MEMMAP_PROP_BASE(c, prop_name, name)                         =
-  \
->  do {                                                                    =
-  \
-> -    object_class_property_add(c, prop_name "-base", "uint64_t",         =
-  \
-> +    object_class_property_add_qapi(c, prop_name "-base", &uint64_type_in=
-fo,\
->                                xen_pvh_get_ ## name ## _base,            =
-  \
->                                xen_pvh_set_ ## name ## _base, NULL, NULL)=
-; \
->      object_class_property_set_description(oc, prop_name "-base",        =
-  \
-> @@ -422,7 +423,7 @@ do {                                                 =
-                     \
-> =20
->  #define OC_MEMMAP_PROP_SIZE(c, prop_name, name)                         =
-  \
->  do {                                                                    =
-  \
-> -    object_class_property_add(c, prop_name "-size", "uint64_t",         =
-  \
-> +    object_class_property_add_qapi(c, prop_name "-size", &size_type_info=
-, \
->                                xen_pvh_get_ ## name ## _size,            =
-  \
->                                xen_pvh_set_ ## name ## _size, NULL, NULL)=
-; \
->      object_class_property_set_description(oc, prop_name "-size",        =
-  \
-
-Use of &size_type_info is not mechanical.  Better to be as mechanical as
-possible in such a huge patch.
-
-[...]
-
-> diff --git a/qom/object.c b/qom/object.c
-> index cc113c0810e7..9f9a2abfa08d 100644
-> --- a/qom/object.c
-> +++ b/qom/object.c
-> @@ -22,10 +22,10 @@
->  #include "qapi/string-output-visitor.h"
->  #include "qapi/qobject-input-visitor.h"
->  #include "qapi/forward-visitor.h"
-> +#include "qapi/qapi-builtin-type-infos.h"
->  #include "qapi/qapi-builtin-visit.h"
->  #include "qapi/compat-policy.h"
->  #include "qobject/qdict.h"
-> -#include "qobject/qjson.h"
-
-The deletion doesn't belong.
-
->  #include "qemu/id.h"
->  #include "qapi/qmp/qerror.h"
->  #include "trace.h"
-> @@ -2449,7 +2449,7 @@ object_property_add_str(Object *obj, const char *na=
-me,
->      prop->get =3D get;
->      prop->set =3D set;
-> =20
-> -    return object_property_add(obj, name, "string",
-> +    return object_property_add_qapi(obj, name, &str_type_info,
->                                 get ? property_get_str : NULL,
->                                 set ? property_set_str : NULL,
->                                 property_release_data,
-> @@ -2467,7 +2467,7 @@ object_class_property_add_str(ObjectClass *klass, c=
-onst char *name,
->      prop->get =3D get;
->      prop->set =3D set;
-> =20
-> -    return object_class_property_add(klass, name, "string",
-> +    return object_class_property_add_qapi(klass, name, &str_type_info,
->                                       get ? property_get_str : NULL,
->                                       set ? property_set_str : NULL,
->                                       NULL,
-> @@ -2519,7 +2519,7 @@ object_property_add_bool(Object *obj, const char *n=
-ame,
->      prop->get =3D get;
->      prop->set =3D set;
-> =20
-> -    return object_property_add(obj, name, "bool",
-> +    return object_property_add_qapi(obj, name, &bool_type_info,
->                                 get ? property_get_bool : NULL,
->                                 set ? property_set_bool : NULL,
->                                 property_release_data,
-> @@ -2536,7 +2536,7 @@ object_class_property_add_bool(ObjectClass *klass, =
-const char *name,
->      prop->get =3D get;
->      prop->set =3D set;
-> =20
-> -    return object_class_property_add(klass, name, "bool",
-> +    return object_class_property_add_qapi(klass, name, &bool_type_info,
->                                       get ? property_get_bool : NULL,
->                                       set ? property_set_bool : NULL,
->                                       NULL,
-
-Missing:
-
-   @@ -2929,7 +2930,7 @@ object_class_property_add_bool_ptr(ObjectClass *kl=
-ass, const char *name,
-            setter =3D property_class_set_bool_ptr;
-        }
-
-   -    return object_class_property_add(klass, name, "bool",
-   +    return object_class_property_add_qapi(klass, name, &bool_type_info,
-                                         getter, setter, NULL, (void *)offs=
-et);
-    }
-
-> @@ -2945,8 +2945,8 @@ object_property_add_uint8_ptr(Object *obj, const ch=
-ar *name,
->          setter =3D property_set_uint8_ptr;
->      }
-> =20
-> -    return object_property_add(obj, name, "uint8",
-> -                               getter, setter, NULL, (void *)v);
-> +    return object_property_add_qapi(obj, name, &uint8_type_info,
-> +                                    getter, setter, NULL, (void *)v);
+> -    object_property_add(obj, NVDIMM_UUID_PROP, "QemuUUID", nvdimm_get_uu=
+id,
+> -                        nvdimm_set_uuid, NULL, NULL);
+> +    object_property_add_qapi(obj, NVDIMM_UUID_PROP, &QemuUUID_type_info,
+> +                             nvdimm_get_uuid, nvdimm_set_uuid, NULL, NUL=
+L);
 >  }
 > =20
->  ObjectProperty *
 
-Missing:
+Let's pass &str_type_info, like the next patch does, because ...
 
-   @@ -2969,7 +2970,7 @@ object_class_property_add_uint8_ptr(ObjectClass *k=
-lass, const char *name,
-            setter =3D property_class_set_uint8_ptr;
-        }
-
-   -    return object_class_property_add(klass, name, "uint8",
-   +    return object_class_property_add_qapi(klass, name, &uint8_type_info=
-,
-                                         getter, setter, NULL, (void *)offs=
-et);
-    }
-
-> @@ -2986,8 +2986,8 @@ object_class_static_property_add_uint8_ptr(ObjectCl=
-ass *klass,
->          setter =3D property_set_uint8_ptr;
->      }
+>  static void nvdimm_finalize(Object *obj)
+> diff --git a/include/qemu/uuid.h b/include/qemu/uuid.h
+> index 869f84af09dd..ed0c62327d4d 100644
+> --- a/include/qemu/uuid.h
+> +++ b/include/qemu/uuid.h
+> @@ -16,6 +16,8 @@
+>  #ifndef QEMU_UUID_H
+>  #define QEMU_UUID_H
 > =20
-> -    return object_class_property_add(klass, name, "uint8",
-> -                                     getter, setter, NULL, (void *)v);
-> +    return object_class_property_add_qapi(klass, name, &uint8_type_info,
-> +                                          getter, setter, NULL, (void *)=
-v);
->  }
+> +#include "qapi/qapi-type-info.h"
+> +
 > =20
->  ObjectProperty *
-> @@ -3006,8 +3006,8 @@ object_property_add_uint16_ptr(Object *obj, const c=
-har *name,
->          setter =3D property_set_uint16_ptr;
->      }
+>  /* Version 4 UUID (pseudo random numbers), RFC4122 4.4. */
 > =20
-> -    return object_property_add(obj, name, "uint16",
-> -                               getter, setter, NULL, (void *)v);
-> +    return object_property_add_qapi(obj, name, &uint16_type_info,
-> +                                    getter, setter, NULL, (void *)v);
->  }
+> @@ -99,4 +101,6 @@ QemuUUID qemu_uuid_bswap(QemuUUID uuid);
 > =20
->  ObjectProperty *
-
-Missing:
-
-   @@ -3030,7 +3031,7 @@ object_class_property_add_uint16_ptr(ObjectClass *=
-klass, const char *name,
-            setter =3D property_class_set_uint16_ptr;
-        }
-
-   -    return object_class_property_add(klass, name, "uint16",
-   +    return object_class_property_add_qapi(klass, name, &uint16_type_inf=
-o,
-                                         getter, setter, NULL, (void *)offs=
-et);
-    }
-
-> @@ -3047,8 +3047,8 @@ object_class_static_property_add_uint16_ptr(ObjectC=
-lass *klass,
->          setter =3D property_set_uint16_ptr;
->      }
+>  uint32_t qemu_uuid_hash(const void *uuid);
 > =20
-> -    return object_class_property_add(klass, name, "uint16",
-> -                                     getter, setter, NULL, (void *)v);
-> +    return object_class_property_add_qapi(klass, name, &uint16_type_info=
-,
-> +                                          getter, setter, NULL, (void *)=
-v);
->  }
+> +extern const QAPITypeInfo QemuUUID_type_info;
+> +
+>  #endif
+> diff --git a/util/uuid.c b/util/uuid.c
+> index 234619dd5e69..363a03051aba 100644
+> --- a/util/uuid.c
+> +++ b/util/uuid.c
+> @@ -17,6 +17,11 @@
+>  #include "qemu/uuid.h"
+>  #include "qemu/bswap.h"
 > =20
->  ObjectProperty *
-> @@ -3067,8 +3067,8 @@ object_property_add_uint32_ptr(Object *obj, const c=
-har *name,
->          setter =3D property_set_uint32_ptr;
->      }
-> =20
-> -    return object_property_add(obj, name, "uint32",
-> -                               getter, setter, NULL, (void *)v);
-> +    return object_property_add_qapi(obj, name, &uint32_type_info,
-> +                                    getter, setter, NULL, (void *)v);
->  }
-> =20
->  ObjectProperty *
+> +const QAPITypeInfo QemuUUID_type_info =3D {
+> +    .name =3D "QemuUUID",
+> +    .masked_name =3D "str",
+> +};
+> +
 
-Missing:
+... the only difference to str_type_info is @name.
 
-   @@ -3091,7 +3092,7 @@ object_class_property_add_uint32_ptr(ObjectClass *=
-klass, const char *name,
-            setter =3D property_class_set_uint32_ptr;
-        }
+In v7, @name is used as value of ObjectPropertyInfo /
+ObjectPropertyValue member @type.  Your manual QAPITypeInfo lets you
+preserve the value of @type.
 
-   -    return object_class_property_add(klass, name, "uint32",
-   +    return object_class_property_add_qapi(klass, name, &uint32_type_inf=
-o,
-                                         getter, setter, NULL, (void *)offs=
-et);
-    }
+It isn't used that way v8 (which I'll post real soon now).  It preserves
+@type values differently.  The problem discussed in the commit message
+doesn't exist then, so I'll cut it some.
 
-> @@ -3108,8 +3108,8 @@ object_class_static_property_add_uint32_ptr(ObjectC=
-lass *klass,
->          setter =3D property_set_uint32_ptr;
->      }
-> =20
-> -    return object_class_property_add(klass, name, "uint32",
-> -                                     getter, setter, NULL, (void *)v);
-> +    return object_class_property_add_qapi(klass, name, &uint32_type_info=
-,
-> +                                          getter, setter, NULL, (void *)=
-v);
->  }
-> =20
->  ObjectProperty *
-> @@ -3128,8 +3128,8 @@ object_property_add_uint64_ptr(Object *obj, const c=
-har *name,
->          setter =3D property_set_uint64_ptr;
->      }
-> =20
-> -    return object_property_add(obj, name, "uint64",
-> -                               getter, setter, NULL, (void *)v);
-> +    return object_property_add_qapi(obj, name, &uint64_type_info,
-> +                                    getter, setter, NULL, (void *)v);
->  }
-> =20
->  ObjectProperty *
-
-Missing:
-
-   @@ -3152,7 +3153,7 @@ object_class_property_add_uint64_ptr(ObjectClass *=
-klass, const char *name,
-            setter =3D property_class_set_uint64_ptr;
-        }
-
-   -    return object_class_property_add(klass, name, "uint64",
-   +    return object_class_property_add_qapi(klass, name, &uint64_type_inf=
-o,
-                                         getter, setter, NULL, (void *)offs=
-et);
-    }
-
-> @@ -3169,8 +3169,8 @@ object_class_static_property_add_uint64_ptr(ObjectC=
-lass *klass,
->          setter =3D property_set_uint64_ptr;
->      }
-> =20
-> -    return object_class_property_add(klass, name, "uint64",
-> -                                     getter, setter, NULL, (void *)v);
-> +    return object_class_property_add_qapi(klass, name, &uint64_type_info=
-,
-> +                                          getter, setter, NULL, (void *)=
-v);
->  }
-> =20
->  typedef struct {
-
-[...]
-
-> diff --git a/target/i386/sev.c b/target/i386/sev.c
-> index b2c7260c80a4..3a36fa4d0b95 100644
-> --- a/target/i386/sev.c
-> +++ b/target/i386/sev.c
-> @@ -3266,7 +3266,7 @@ sev_snp_guest_class_init(ObjectClass *oc, const voi=
-d *data)
->      x86_klass->adjust_cpuid_features =3D sev_snp_adjust_cpuid_features;
->      x86_klass->kvm_type =3D sev_snp_kvm_type;
-> =20
-> -    object_class_property_add(oc, "policy", "uint64",
-> +    object_class_property_add_qapi(oc, "policy", &uint64_type_info,
->                                sev_snp_guest_get_policy,
->                                sev_snp_guest_set_policy, NULL, NULL);
->      object_class_property_add_str(oc, "guest-visible-workarounds",
-
-Missing:
-
-   @@ -3290,7 +3290,7 @@ sev_snp_guest_class_init(ObjectClass *oc, const vo=
-id *data)
-        object_class_property_add_bool(oc, "secure-tsc",
-                                      sev_snp_guest_get_secure_tsc,
-                                      sev_snp_guest_set_secure_tsc);
-   -    object_class_property_add(oc, "tsc-frequency", "uint32",
-   +    object_class_property_add_qapi(oc, "tsc-frequency", &uint32_type_in=
-fo,
-                                  sev_snp_guest_get_tsc_frequency,
-                                  sev_snp_guest_set_tsc_frequency, NULL, NU=
-LL);
-    }
-
-[...]
+>  void qemu_uuid_generate(QemuUUID *uuid)
+>  {
+>      int i;
 
 
