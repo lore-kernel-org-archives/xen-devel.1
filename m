@@ -2,38 +2,34 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BA5C8606A324
-	for <xen-devel@archiver.kernel.org>; Sun,  1 Nov 2026 09:08:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C6029606A324
+	for <xen-devel@archiver.kernel.org>; Sun,  1 Nov 2026 15:50:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=protonmail.com header.i=@protonmail.com header.a=rsa-sha256 header.s=protonmail3 header.b=UMXRmLLA
-Received: from list by lists.xenproject.org with outflank-mailman.1466758.1676594 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=xen.org header.i=@xen.org header.a=rsa-sha256 header.s=20200302mail header.b=G9sfsBo3
+Received: from list by lists.xenproject.org with outflank-mailman.1467311.1676601 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNRXm-0007Gc-SX; Sun, 01 Nov 2026 09:08:02 +0000
+	id 1xNXp0-0003hV-Ge; Sun, 01 Nov 2026 15:50:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1466758.1676594; Sun, 01 Nov 2026 09:08:02 +0000
+Received: by outflank-mailman (output) from mailman id 1467311.1676601; Sun, 01 Nov 2026 15:50:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNRXm-0007GV-Nx; Sun, 01 Nov 2026 09:08:02 +0000
-Received: by outflank-mailman (input) for mailman id 1466758;
- Sat, 31 Oct 2026 13:22:42 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xNXp0-0003hN-Dw; Sun, 01 Nov 2026 15:50:14 +0000
+Received: by outflank-mailman (input) for mailman id 1467311;
+ Sun, 01 Nov 2026 15:50:13 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <hippalectryon@protonmail.com>) id 1xN92f-0000yh-P0
- for xen-devel@lists.xenproject.org; Sat, 31 Oct 2026 13:22:42 +0000
-Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xN92e-00CGf8-RT
- for xen-devel@lists.xenproject.org; Sat, 31 Oct 2026 14:22:40 +0100
-Received: from [10.42.69.4] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <hippalectryon@protonmail.com>)
- id 6ae5eb81-e002-0a2a0a5209dd-0a2a4504deec-24
- for <xen-devel@lists.xenproject.org>; Sat, 31 Oct 2026 14:22:40 +0100
-Received: from [109.224.244.28] (helo=mail-24428.protonmail.ch)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <hippalectryon@protonmail.com>)
- id 6ae5eba0-b57f-0a2a45040019-6de0f41c8a5f-3
- for <xen-devel@lists.xenproject.org>; Sat, 31 Oct 2026 14:22:40 +0100
+ (envelope-from <julien@xen.org>) id 1xNXoz-0003hG-69
+ for xen-devel@lists.xenproject.org; Sun, 01 Nov 2026 15:50:13 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.98.2)
+ (envelope-from <julien@xen.org>) id 1xNXoy-00000008yN3-3AQM;
+ Sun, 01 Nov 2026 15:50:12 +0000
+Received: from [2a02:8012:3a1:0:397b:b150:72c2:4d41]
+ by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.98.2)
+ (envelope-from <julien@xen.org>) id 1xNXoy-0000000GLGK-1PW4;
+ Sun, 01 Nov 2026 15:50:12 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -42,114 +38,133 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=protonmail3 header.d=protonmail.com header.i="@protonmail.com" header.h="Date:To:From:Cc:Subject:Message-ID:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
-	s=protonmail3; t=1793452959; x=1793712159;
-	bh=Pyv3gFJcRcLxJPgmWMAiEaUERPQvoCSqmhyXW8/Iubw=;
-	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
-	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=UMXRmLLAFOg60ScsSxvNjj06tAJNsC7BBhQ2DWVZFomD9a/QKNQL5pn+tDygUdhpB
-	 sPmJaMcSquyZD3ehMr/FuZcunU6EqZS2SoEuJCm/YcVswzeTP497WZGpgiOyFWVef+
-	 M4SErhiAFvD+DpnJOcIPNprGfsFjx76U+MN/Mqjza7H1ZkutET8olnOoYlGMIQ8PHD
-	 AZcTNCAN1dg5uvNKfueCPqgL6lI6pN3v9wdAGgfsxP66Ws4Uddvc7LP4irLXH0XMxM
-	 NJ+dB9648/GwL4yL3ToNUt2GzYNVAYzcV5c3zS0El6Fb25LbT0uAbxSaTh1NknXu/E
-	 yLMJujWjF96QQ==
-Date: Sat, 31 Oct 2026 13:22:34 +0000
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-From: hippalectryon@protonmail.com
-Cc: "jbeulich@suse.com" <jbeulich@suse.com>, "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>, "roger@xenproject.org" <roger@xenproject.org>
-Subject: x86/p2m: mapping a grant of a domain's own page on HVM/PVH  unmaps the original gfn
-Message-ID: <2DneAh-CXJlcHA5aISMPcKJm8Q8kOW2_02w_fam2if2BB1WKUlNRB7RLXeSEJWSUvIwhUBQwvGFytpWa-avIgPdmGb7qYPViE9jDnXyrnsM=@protonmail.com>
-Feedback-ID: 1135737:user:proton
-X-Pm-Message-ID: 9b41e0315081ef224e0554c8d1c04f9b2c1d5a81
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=Cr3FqbLYjdgT3NcfQijGukin/aH4gKsG2FWE93n9iPs=; b=G9sfsBo3IEeJjpuFPZI0+L5+jc
+	r+huzPvCKdPa1AKE3CpvcbOU5eLca6JJ+dGykoMhhRVqsTM2brl/wxDyx7Eha9cxUsVDhmpdia+jK
+	Wg5vc4Fwq0FHcyXS+HtOMQ9VI4I+lRMemHTQ0Fvs5NHj/vd2mVf6LZVYL0YSn0SxFiFA=;
+Message-ID: <ab2650fa-88e8-472c-8def-5bf794392dac@xen.org>
+Date: Sun, 1 Nov 2026 15:50:10 +0000
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-ebf023/1793452960-52ECEB50-C3C9BC48/0/0
-X-purgate-type: clean
-X-purgate-size: 3404
-X-Spam-Status: No, score=-7.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
-	SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY autolearn=no
-	autolearn_force=no version=4.0.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/1] xen/arm: populate a default P2M pool for new
+ domains
+To: Julian Vetter <julian.vetter@vates.tech>, xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>
+References: <1793353546.8631fc262581453bbf619ec5b2062170.1a18c337b6e000cae1@vates.tech>
+ <1793353749.8631fc262581453bbf619ec5b2062170.1a18c369323000cae1@vates.tech>
+Content-Language: en-GB
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <1793353749.8631fc262581453bbf619ec5b2062170.1a18c369323000cae1@vates.tech>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hello,
+Hi Julian,
 
-On x86 HVM/PVH, when a domain maps a grant that it issued to itself
-(granting domid =3D=3D own domid), the original gfn of the granted page
-loses its backing. I ran into this while looking at why Qubes OS
-blocks vchan connections from a domain to itself:
-https://github.com/QubesOS/qubes-issues/issues/951
+On 30/10/2026 09:49, Julian Vetter wrote:
+> On x86, a domain can be populated directly after the
+> XEN_DOMCTL_createdomain call. Sizing the pool is thus an optional tuning
+> step for the toolstack (libxl: "the Xen minimum is for safety, not
+> performance").
+> 
+> On ARM however, the P2M pool of a non-hardware domain starts empty. So,
+> any toolstack must size the pool before populating the domain's physmap,
+> otherwise no P2M tables can be allocated. This is an ARM specific step,
+> which every toolstack has to know about.
 
-I tested this on Xen 4.19.5 (Qubes OS R4.3 build, running nested)
-with a PVH Linux 6.18 guest, from inside the guest using libxengnttab
-(gntalloc + gntdev) and libxenevtchn with the guest's own domid as the
-peer. Here's what I see:
+Can you explain why this is a problem to modify the toolstacks? We 
+designed the domain creation specifically to avoid the pre-allocating 
+the P2M pool.
 
-- xengntshr_share_pages() to own domid, then
-  xengnttab_map_grant_ref() of that ref: both succeed.
-- The new mapping reads the page's old contents (zeros). The
-  granter's own mapping of the page then reads all 0xff, and writes
-  through it are lost. This stays the case after unmap.
-- Seconds later the guest oopses in fork (__split_huge_pmd_locked, a
-  page table entry read as all ones): Linux reused the lost frame as a
-  page table.
-- With libxenvchan the server reads the ring's cli_live byte as 0xff
-  and both sides hang.
-- Event channels bound to self work fine. Without the map step the
-  shared page behaves normally.
+Furthermore, you say you want to be consistent with x86 but...
 
-Reading the code, I believe the cause is in p2m_add_page(), which the
-grant map reaches via create_grant_p2m_mapping(). Its second loop
-looks up the M2P entry of every frame owned by d, and if the frame is
-already mapped at another gfn, it treats the new mapping as a move and
-calls p2m_remove_entry() on the old gfn. For a foreign grant owner !=3D d
-and the loop skips it, but for a grant of d's own page the original gfn
-gets removed. On unmap, replace_grant_p2m_mapping() only removes the
-grant entry, so the original gfn never comes back.
+> 
+> Instead, populate a default pool of 256 pages (1MByte) in p2m_init(),
+> matching what x86 HAP does in hap_enable(). The size is intentionally
+> fixed, because p2m_init() isn't preemptible, so the allocation must stay
+> bounded. Then dom0less and libxl set the full size, as they do today.
+> 
+> Skip the hardware domain, which has no dedicated P2M pool. Also skip LLC
+> colored setups, as the domain's colors are only configured after domain
+> creation, so the pool pages would be allocated with the default colors.
 
-The check dates from b37d30c8fc ("Mapping grant references into HVM
-guests, take 2"), whose comment said "If we get here, we know the
-local domain owns the page, so it can't have been grant mapped in".
+... on Arm we will have inconsistency between the various configuration.
 
-This change fixes it for me. I tested it on 4.19.5 with the Qubes
-patches, and it applies to current staging:
+My preference is we modify the toolstack rather adding, what seems 
+random, 256 pages at domain creation.
 
---- a/xen/arch/x86/mm/p2m.c
-+++ b/xen/arch/x86/mm/p2m.c
-@@ p2m_add_page()
--        if ( owner !=3D d )
-+        /*
-+         * A grant mapping of a domain's own page adds a second gfn for it=
-;
-+         * the page must stay mapped at its original gfn.
-+         */
-+        if ( owner !=3D d || p2m_is_grant(t) )
-             continue;
+> 
+> Signed-off-by: Julian Vetter <julian.vetter@vates.tech>
+> ---
+> Changes in v3:
+> - Use a fixed default of 256 pages, as x86 HAP does
+> - Drop the domain_p2m_default_kb() helper and the dom0less change
+> - Adapt the commit message to explain why a fixed size is used
+> 
+> Changes in v2:
+> - Size the default pool based on the exisiting formula
+> - Rewrite commit message to explain why a default pool is desirable
+> ---
+>   xen/arch/arm/mmu/p2m.c | 21 +++++++++++++++++++++
+>   1 file changed, 21 insertions(+)
+> 
+> diff --git a/xen/arch/arm/mmu/p2m.c b/xen/arch/arm/mmu/p2m.c
+> index 70d7c9fed9..9579e905d8 100644
+> --- a/xen/arch/arm/mmu/p2m.c
+> +++ b/xen/arch/arm/mmu/p2m.c
+> @@ -3,6 +3,7 @@
+>   #include <xen/domain_page.h>
+>   #include <xen/ioreq.h>
+>   #include <xen/lib.h>
+> +#include <xen/llc-coloring.h>
+>   #include <xen/sched.h>
+>   #include <xen/softirq.h>
+>   
+> @@ -1555,6 +1556,26 @@ int p2m_init(struct domain *d)
+>       if ( rc )
+>           return rc;
+>   
+> +    /*
+> +     * Populate a default of 256 pages (1MB) to the P2M pages pool here, as
+> +     * x86 HAP does. So, the domain is usable without the pool being sized
+> +     * first. The toolstack, or dom0less, still sets the full size later,
+> +     * taking the domain's RAM into account. A fixed size keeps this
+> +     * non-preemptible allocation bounded, independent of the number of vCPUs.
+> +     *
+> +     * Skip the hardware domain, which has no dedicated P2M pool, and LLC
+> +     * colored setups, as the domain's colors are only configured after domain
+> +     * creation.
+> +     */
+> +    if ( !is_hardware_domain(d) && !llc_coloring_enabled )
+> +    {
+> +        spin_lock(&d->arch.paging.lock);
+> +        rc = p2m_set_allocation(d, 256, /* can_preempt */ false);
+> +        spin_unlock(&d->arch.paging.lock);
+> +        if ( rc )
+> +            return rc;
+> +    }
 
-p2m_add_page() already leaves M2P alone for grant types, and unmap
-goes through p2m_remove_entry(), which leaves M2P alone for
-P2M_SPECIAL_TYPES, so the original gfn's M2P entry stays valid.
+Regardless what I wrote above, have you confirmed that the rest of the 
+logic will be able to cope in case of failure? At least 4dbcb0653621 
+("xen/arm: Defer GICv2 CPU interface mapping until the first access") 
+use it as an argument to not have a default pool.
 
-With this change, the self-mapped page reads and writes correctly in
-both directions, the original mapping still works after unmap, there
-is no oops, and libxenvchan loopback works. After also removing
-qrexec's loopback checks, qrexec calls and file copies from a guest to
-itself worked too, including concurrent calls and killing both ends
-in the middle of a transfer. A build of the same tree without the
-change fails the same way as stock.
+Cheers,
 
-I haven't tested PV guests (I couldn't boot one on this setup),
-migration or log-dirty mode, or Xen versions other than 4.19.5.
+-- 
+Julien Grall
 
-I can't send a signed-off patch myself. If the fix looks right, could
-someone pick it up, or suggest a better approach (for example
-rejecting such mappings instead)?
-
-Thanks,
-Hippalectryon
 
