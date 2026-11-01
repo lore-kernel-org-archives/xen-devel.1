@@ -2,89 +2,89 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 39CAB606A32F
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 05:50:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2584F606A324
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 05:50:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=CmOAScZo
-Received: from list by lists.xenproject.org with outflank-mailman.1467435.1676755 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=R+Je2Ljw
+Received: from list by lists.xenproject.org with outflank-mailman.1467441.1676780 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNkw9-0002ta-SF; Mon, 02 Nov 2026 05:50:29 +0000
+	id 1xNkwB-0003LT-AN; Mon, 02 Nov 2026 05:50:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1467435.1676755; Mon, 02 Nov 2026 05:50:29 +0000
+Received: by outflank-mailman (output) from mailman id 1467441.1676780; Mon, 02 Nov 2026 05:50:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNkw9-0002rd-IR; Mon, 02 Nov 2026 05:50:29 +0000
-Received: by outflank-mailman (input) for mailman id 1467435;
- Sun, 01 Nov 2026 20:11:19 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xNkwA-0003Jc-Qe; Mon, 02 Nov 2026 05:50:30 +0000
+Received: by outflank-mailman (input) for mailman id 1467441;
+ Sun, 01 Nov 2026 20:13:06 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <armbru@redhat.com>) id 1xNbtf-0001pY-QL
- for xen-devel@lists.xenproject.org; Sun, 01 Nov 2026 20:11:19 +0000
+ (envelope-from <armbru@redhat.com>) id 1xNbvO-0001rs-87
+ for xen-devel@lists.xenproject.org; Sun, 01 Nov 2026 20:13:06 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xNbtf-007BcK-7B
- for xen-devel@lists.xenproject.org; Sun, 01 Nov 2026 21:11:19 +0100
-Received: from [10.42.69.6] (helo=localhost)
+ id 1xNbvN-002O05-E2
+ for xen-devel@lists.xenproject.org; Sun, 01 Nov 2026 21:13:05 +0100
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <armbru@redhat.com>)
- id 6ae79cd0-8faa-0a2a0a5109dd-0a2a4506857a-10
- for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 21:11:19 +0100
+ id 6ae79d4b-2eae-0a2a0a5409dd-0a2a450bce48-18
+ for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 21:13:05 +0100
 Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <armbru@redhat.com>)
- id 6ae79ce5-195a-0a2a45060019-aa0a817c7b9b-3
- for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 21:11:18 +0100
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ id 6ae79d50-b7e8-0a2a450b0019-aa0a817c81d3-3
+ for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 21:13:05 +0100
+Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-501-dbNBgUI3NkO7qJoX7yVMQQ-1; Sun,
- 01 Nov 2026 15:11:14 -0500
-Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-447-NHSE1nS8MaKM2Lkt4h6T7g-1; Sun,
+ 01 Nov 2026 15:12:59 -0500
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 23A951800619; Sun,  1 Nov 2026 20:11:09 +0000 (UTC)
+ by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 3C6351954B0B; Sun,  1 Nov 2026 20:12:52 +0000 (UTC)
 Received: from blackfin.pond.sub.org (unknown [10.44.22.2])
- by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id D6A2730002CB; Sun,  1 Nov 2026 20:11:06 +0000 (UTC)
+ by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 369CF1800446; Sun,  1 Nov 2026 20:12:51 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 5DB5421E6A04; Sun, 01 Nov 2026 21:11:04 +0100 (CET)
-Resent-To: pasic@linux.ibm.com, 17746591750@163.com, rathc@linux.ibm.com,
- alistair@alistair23.me, stefanb@linux.vnet.ibm.com, graf@amazon.com,
- xen-devel@lists.xenproject.org, FangSheng.Huang@amd.com,
- michael.roth@amd.com, jamin_lin@aspeedtech.com, kane_chen@aspeedtech.com,
- palmer@dabbelt.com, rbolshakov@ddn.com, foss@defmacro.it,
- sebastian.huber@embedded-brains.de, fam@euphon.net,
+ id D8DE121E6A04; Sun, 01 Nov 2026 21:12:48 +0100 (CET)
+Resent-To: 17746591750@163.com, alistair@alistair23.me, graf@amazon.com,
+ FangSheng.Huang@amd.com, michael.roth@amd.com, jamin_lin@aspeedtech.com,
+ kane_chen@aspeedtech.com, palmer@dabbelt.com, rbolshakov@ddn.com,
+ foss@defmacro.it, sebastian.huber@embedded-brains.de, fam@euphon.net,
  jiaxun.yang@flygoat.com, lizhijian@fujitsu.com, atar4qemu@gmail.com,
  edgar.iglesias@gmail.com, jasowangio@gmail.com, liwei1518@gmail.com,
  npiggin@gmail.com, zhangckid@gmail.com, titusr@google.com,
  wuhaotsh@google.com, arei.gonglei@huawei.com, berto@igalia.com,
  mark.cave-ayland@ilande.co.uk, junjie.cao@intel.com, zhao1.liu@intel.com,
- its@irrelevant.dk, clg@kaod.org, conor@kernel.org, david@kernel.org,
- jic23@kernel.org, kbusch@kernel.org, mchehab+huawei@kernel.org,
- sstabellini@kernel.org, peter.maydell@linaro.org,
- richard.henderson@linaro.org, zhiwei_liu@linux.alibaba.com,
- zhenwei.pi@linux.dev, adityag@linux.ibm.com, alifm@linux.ibm.com,
- amachhiw@linux.ibm.com, borntraeger@linux.ibm.com,
- brueckner@linux.ibm.com, farman@linux.ibm.com, harshpb@linux.ibm.com,
- iii@linux.ibm.com, jjherne@linux.ibm.com, milesg@linux.ibm.com,
- mjrosato@linux.ibm.com, luc@lmichel.fr, lixianglai@loongson.cn,
- maobibo@loongson.cn, pbarbuda@microsoft.com, yoshinori.sato@nifty.com,
- qemu-arm@nongnu.org, qemu-block@nongnu.org, qemu-devel@nongnu.org,
- qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
- john.levon@nutanix.com, thanos.makatos@nutanix.com, kfting@nuvoton.com,
- den@openvz.org, elena.ufimtseva@oracle.com, jag.raman@oracle.com,
+ pasic@linux.ibm.com, its@irrelevant.dk, rathc@linux.ibm.com, clg@kaod.org,
+ stefanb@linux.vnet.ibm.com, conor@kernel.org,
+ xen-devel@lists.xenproject.org, david@kernel.org, luc@lmichel.fr,
+ jic23@kernel.org, lixianglai@loongson.cn, maobibo@loongson.cn,
+ pbarbuda@microsoft.com, yoshinori.sato@nifty.com, qemu-arm@nongnu.org,
+ qemu-block@nongnu.org, qemu-devel@nongnu.org, qemu-ppc@nongnu.org,
+ qemu-riscv@nongnu.org, qemu-s390x@nongnu.org, john.levon@nutanix.com,
+ thanos.makatos@nutanix.com, kfting@nuvoton.com, den@openvz.org,
+ elena.ufimtseva@oracle.com, jag.raman@oracle.com,
  daniel.barboza@oss.qualcomm.com, philmd@oss.qualcomm.com,
  pierrick.bouvier@oss.qualcomm.com, phil@philjordan.eu,
  tangtao1634@phytium.com.cn, chao.liu@processmission.com, jiri@resnulli.us,
  sam@rfc1149.net, anisa.su@samsung.com, alex@shazbot.org, farosas@suse.de,
  mohamed@unpredictable.fr, kvm@vger.kernel.org, linux-cxl@vger.kernel.org,
- alistair.francis@wdc.com, anthony@xenproject.org
+ alistair.francis@wdc.com, anthony@xenproject.org, kbusch@kernel.org,
+ mchehab+huawei@kernel.org, sstabellini@kernel.org,
+ peter.maydell@linaro.org, richard.henderson@linaro.org,
+ zhiwei_liu@linux.alibaba.com, zhenwei.pi@linux.dev, adityag@linux.ibm.com,
+ alifm@linux.ibm.com, amachhiw@linux.ibm.com, borntraeger@linux.ibm.com,
+ brueckner@linux.ibm.com, farman@linux.ibm.com, harshpb@linux.ibm.com,
+ iii@linux.ibm.com, jjherne@linux.ibm.com, milesg@linux.ibm.com,
+ mjrosato@linux.ibm.com
 Resent-From: Markus Armbruster <armbru@redhat.com>
-Resent-Date: Sun, 01 Nov 2026 21:11:04 +0100
-Resent-Message-ID: <87ik2g1fdz.fsf@pond.sub.org>
+Resent-Date: Sun, 01 Nov 2026 21:12:48 +0100
+Resent-Message-ID: <875wyg1fb3.fsf@pond.sub.org>
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -95,17 +95,17 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:Resent-To:Resent-From:Resent-Message-ID:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1793563877;
+	s=mimecast20190719; t=1793563984;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:resent-to:
 	 resent-from:resent-message-id:in-reply-to:in-reply-to:  references:references;
-	bh=d7M241dr+M0CEAKHzbbpskGbE8+ty5Q2vQiKfnyhvII=;
-	b=CmOAScZoFkiohsaiM3dNqKC/lS8iXnZfC8yOT+ABVq6g3lhMICiXfFRjVY3yfUT5KTCu1W
-	KJpZW2amuRHpIFuPYSsLI3ztqP0tqRkkzx5R9FntwRgBHIs5RCrkXt8SxiWBOW2Te3IPJQ
-	6d7S25MvREGHtcFi6V0veNDFc+RfsaM=
-X-MC-Unique: dbNBgUI3NkO7qJoX7yVMQQ-1
-X-Mimecast-MFC-AGG-ID: dbNBgUI3NkO7qJoX7yVMQQ_1793563870
+	bh=GTF9/Bs8O74QIWLz9nNcAwYctE+VbuxRb66ECG/NONE=;
+	b=R+Je2LjwOGdkicY3WgGYulkAMJyIllEV60lhxxLG5iBtnTuNMk7sfD3ueiHxE0U8cFgnQF
+	n4Pmc/kghBapaOZwZKt8+QAwviC7Wd5Ih77Atzff1hg+iZWgtyVw5Kcx59eW5REEGvhlB0
+	OBqyQSivPe77ijescIod8r1qwZt/yQU=
+X-MC-Unique: NHSE1nS8MaKM2Lkt4h6T7g-1
+X-Mimecast-MFC-AGG-ID: NHSE1nS8MaKM2Lkt4h6T7g_1793563975
 From: Markus Armbruster <armbru@redhat.com>
 To: =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>
 Cc: qemu-devel@nongnu.org,  Michael Roth <michael.roth@amd.com>,  John Snow
@@ -171,25 +171,25 @@ Cc: qemu-devel@nongnu.org,  Michael Roth <michael.roth@amd.com>,  John Snow
  <atar4qemu@gmail.com>,  Yoshinori Sato <yoshinori.sato@nifty.com>,  Jiri
  Pirko <jiri@resnulli.us>,  Eric Auger <eric.auger@redhat.com>,  Laurent
  Vivier <lvivier@redhat.com>
-Subject: Re: [PATCH v7 17/65] qom: add object_{class_}property_add_qapi_enum
-In-Reply-To: <20261020-qom-qapi-v7-17-431a86b02b58@redhat.com>
+Subject: Re: [PATCH v7 07/65] qapi: add QAPITypeInfo struct definition
+In-Reply-To: <20261020-qom-qapi-v7-7-431a86b02b58@redhat.com>
  (=?utf-8?Q?=22Marc-Andr=C3=A9?=
-	Lureau"'s message of "Tue, 20 Oct 2026 14:45:34 +0400")
+	Lureau"'s message of "Tue, 20 Oct 2026 14:45:24 +0400")
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
-	<20261020-qom-qapi-v7-17-431a86b02b58@redhat.com>
-Date: Fri, 30 Oct 2026 11:02:00 +0100
-Message-ID: <871p97a4mf.fsf@pond.sub.org>
+	<20261020-qom-qapi-v7-7-431a86b02b58@redhat.com>
+Date: Sun, 01 Nov 2026 17:19:49 +0100
+Message-ID: <87ik2g7cd6.fsf@pond.sub.org>
 User-Agent: Gnus/5.13 (Gnus v5.13)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: qrbBaIqulz2eq8rXwVCrDM1gcXcsL_8U4Fm_aBEFxv8_1793563870
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
+X-Mimecast-MFC-PROC-ID: KmQ7BtBBZyfMyQTyR_hELU1aXmK6Glp3MEAIHLvFI2w_1793563975
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-16d1c6/1793563879-1EAC277B-AB7FFFF6/0/0
+X-purgate-ID: tlsNG-42698a/1793563985-A8AC89EA-BE1114CB/0/0
 X-purgate-type: clean
-X-purgate-size: 4497
+X-purgate-size: 2152
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -200,129 +200,62 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com> writes:
 
+> Introduce a minimal struct that pairs a QAPI type's internal name with
+> its "masked" introspection name. Generated constants of this type will
+> let QOM property registration carry a reliable reference to the QAPI
+> schema and possibly other associated data.
+>
+> The fields are populated in following commits.
+>
 > Signed-off-by: Markus Armbruster <armbru@redhat.com>
 > Signed-off-by: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
 > ---
->  include/qom/object.h | 74 ++++++++++++++++++++++++++++++++++++++++++
->  qom/object.c         | 90 ++++++++++++++++++++++++++++++++++++++++++++++=
-+++---
->  2 files changed, 159 insertions(+), 5 deletions(-)
+>  include/qapi/qapi-type-info.h | 31 +++++++++++++++++++++++++++++++
+>  1 file changed, 31 insertions(+)
 >
-> diff --git a/include/qom/object.h b/include/qom/object.h
-> index eb61d8842b80..e04be4caed57 100644
-> --- a/include/qom/object.h
-> +++ b/include/qom/object.h
-> @@ -2027,6 +2027,80 @@ ObjectProperty *object_class_property_add_enum(Obj=
-ectClass *klass,
->                                      int (*get)(Object *, Error **),
->                                      void (*set)(Object *, int, Error **)=
-);
-> =20
-> +/**
-> + * struct QapiEnumProp: Descriptor for a property backed by a QAPI enum =
-type
-> + *
-> + * Binds a QOM object property to a QAPI enum, providing automatic
-> + * string<->int conversion through QAPI visitors and optional
-> + * default-value initialization during object instance init.
-> + *
-> + * Use the QAPI_ENUM_PROP() macro to construct instances inline.
-> + *
-> + * @name: property name exposed on the QOM object
-> + * @description: human-readable description (shown in ``-device help``, =
-etc.)
-> + * @default_value: initial enum value applied via @set during instance i=
-nit,
-> + *                 or -1 (the QAPI_ENUM_PROP default) to skip initializa=
-tion
-> + * @qapi_type: pointer to the generated QAPITypeInfo for the enum
-> + *             (provides the string<->int lookup table)
-> + * @get: getter that returns the current enum value as int, or -1 on err=
-or
-> + * @set: setter that receives the enum value as int; %NULL for read-only=
- props
+> diff --git a/include/qapi/qapi-type-info.h b/include/qapi/qapi-type-info.=
+h
+> new file mode 100644
+> index 000000000000..6a6355568325
+> --- /dev/null
+> +++ b/include/qapi/qapi-type-info.h
+> @@ -0,0 +1,31 @@
+> +/*
+> + * SPDX-License-Identifier: GPL-2.0-or-later
 > + */
-> +typedef struct QapiEnumProp {
+> +
+> +#ifndef QAPI_TYPE_INFO_H
+> +#define QAPI_TYPE_INFO_H
+> +
+> +#include "qapi/util.h"
+> +
+> +/**
+> + * QAPITypeInfo - QAPI type metadata
+> + *
+> + * @name: QAPI type name (e.g. "str", "OnOffAuto", "int32List").
+> + *        QOM uses this as the property type string.
+> + * @masked_name: Name of the type in the QAPI introspection schema, assi=
+gned by
+> + *        scripts/qapi code generator (e.g. "368").
+> + * @lookup: QEnumLookup for this type, or NULL for non-enum types.
+> + *        visit_type_enum(), qapi_enum_parse(), and qapi_enum_lookup()
+> + *        all rely on it.
+> + * @list: The list-type counterpart, or NULL if none exists.
+> + *        str_type_info.list points to strList_type_info.  qdev array
+> + *        properties follow this to find the list type for their element=
+.
+> + */
+> +typedef struct QAPITypeInfo {
 > +    const char *name;
-> +    const char *description;
-> +    const int default_value;
-> +    const QAPITypeInfo *qapi_type;
-> +    int (*get)(Object *, Error **);
-> +    void (*set)(Object *, int, Error **);
-> +} QapiEnumProp;
+> +    const char *masked_name;
+> +    const QEnumLookup *lookup;
+> +    const struct QAPITypeInfo *list;
+> +} QAPITypeInfo;
 > +
-> +#define QAPI_ENUM_PROP(...) ({                                          =
- \
-> +    static const QapiEnumProp _prop =3D {                               =
-   \
-> +        .default_value =3D -1, __VA_ARGS__                              =
-   \
-> +    };                                                                  =
- \
-> +    &_prop; })
+> +#endif /* QAPI_TYPE_INFO_H */
 
-This is a cute and reasonably well-known macro trick for optional
-keyword arguments in C.
-
-The example [*] below specifies all arguments.  What happens when we
-omit any?  They default to zero via default initializaion, except for
-.default_value, which defaults to -1.
-
-Trap for developers: some arguments aren't actually optional!  If you
-forget to specify @name or @qapi_type, the code compiles, but crashes at
-run time.
-
-Not a fan.
-
-> +
-> +/**
-> + * object_property_add_qapi_enum:
-> + * @obj: the object to add a property to
-> + * @prop: property descriptor
-> + *
-> + * Add an enum property with QAPI type association.
-> + *
-> + * Returns: The newly added property on success, or %NULL on failure.
-> + */
-> +ObjectProperty *
-> +object_property_add_qapi_enum(Object *obj, const QapiEnumProp *prop);
-> +
-> +/**
-> + * object_class_property_add_qapi_enum:
-> + * @klass: the class object to add a property to
-> + * @prop: property descriptor
-> + *
-> + * Add an enum property with QAPI type association.
-> + *
-> + * Use the QAPI_ENUM_PROP() macro to construct the property descriptor
-> + * inline. If .default_value is not set, the property is not initialized
-> + * (default_value is -1). Otherwise, the setter is called with
-> + * default_value during object instance init.
-> + *
-> + * Example::
-
-[*]
-
-> + *
-> + *   object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
-> + *       .name =3D "policy",
-> + *       .description =3D "Set the NUMA policy",
-> + *       .default_value =3D HOST_MEM_POLICY_DEFAULT,
-> + *       .qapi_type =3D &HostMemPolicy_type_info,
-> + *       .get =3D my_get_policy,
-> + *       .set =3D my_set_policy,
-> + *   ));
-> + *
-> + * Returns: The newly added property on success, or %NULL on failure.
-> + */
-> +ObjectProperty *
-> +object_class_property_add_qapi_enum(ObjectClass *klass,
-> +                                    const QapiEnumProp *prop);
-> +
->  /**
->   * object_property_add_qapi:
->   * @obj: the object to add a property to
-
-[...]
+As far as I can tell, @name is used outside tests only for an error
+message in object_property_get_enum(), and I'm not sure that error makes
+sense.  Observation, not a demand.
 
 
