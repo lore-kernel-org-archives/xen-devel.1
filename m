@@ -2,46 +2,89 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1ABF4606A327
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 05:50:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2A65A606A326
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 05:50:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=t+qS3Kmr
-Received: from list by lists.xenproject.org with outflank-mailman.1467332.1676719 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=RTEHkke3
+Received: from list by lists.xenproject.org with outflank-mailman.1467437.1676762 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNkw8-0002LL-4D; Mon, 02 Nov 2026 05:50:28 +0000
+	id 1xNkwA-0002zv-76; Mon, 02 Nov 2026 05:50:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1467332.1676719; Mon, 02 Nov 2026 05:50:28 +0000
+Received: by outflank-mailman (output) from mailman id 1467437.1676762; Mon, 02 Nov 2026 05:50:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNkw8-0002LE-0l; Mon, 02 Nov 2026 05:50:28 +0000
-Received: by outflank-mailman (input) for mailman id 1467332;
- Sun, 01 Nov 2026 16:31:20 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xNkw9-0002xc-Tb; Mon, 02 Nov 2026 05:50:29 +0000
+Received: by outflank-mailman (input) for mailman id 1467437;
+ Sun, 01 Nov 2026 20:12:01 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <q.h.hack.winter@gmail.com>) id 1xNYSl-0000tZ-Rt
- for xen-devel@lists.xenproject.org; Sun, 01 Nov 2026 16:31:20 +0000
+ (envelope-from <armbru@redhat.com>) id 1xNbuL-0001qW-PQ
+ for xen-devel@lists.xenproject.org; Sun, 01 Nov 2026 20:12:01 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xNYSl-006pyT-8x
- for xen-devel@lists.xenproject.org; Sun, 01 Nov 2026 17:31:19 +0100
-Received: from [10.42.69.3] (helo=localhost)
+ id 1xNbuL-004xKU-2y
+ for xen-devel@lists.xenproject.org; Sun, 01 Nov 2026 21:12:01 +0100
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <q.h.hack.winter@gmail.com>)
- id 6ae76940-2eae-0a2a0a5409dd-0a2a4503b2c2-16
- for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 17:31:19 +0100
-Received: from [209.85.216.43] (helo=mail-pj1-f43.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <q.h.hack.winter@gmail.com>)
- id 6ae76955-fae8-0a2a45030019-d155d82b9ade-3
- for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 17:31:19 +0100
-Received: by mail-pj1-f43.google.com with SMTP id
- 98e67ed59e1d1-3ad0c2e71ebso397165a91.2
- for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 08:31:18 -0800 (PST)
-Received: from localhost.localdomain ([113.102.236.131])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3ae6e944ba9sm15038585a91.8.2026.11.01.08.31.12
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Sun, 01 Nov 2026 08:31:16 -0800 (PST)
+ (envelope-from <armbru@redhat.com>)
+ id 6ae79cf1-8faa-0a2a0a5109dd-0a2a4508d1ba-10
+ for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 21:12:00 +0100
+Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <armbru@redhat.com>)
+ id 6ae79d0f-f659-0a2a45080019-aa0a817c961f-3
+ for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 21:12:00 +0100
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-235-4TFtM2YWOHWzydJNIPJiaQ-1; Sun,
+ 01 Nov 2026 15:11:53 -0500
+Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 9B4FC1955F45; Sun,  1 Nov 2026 20:11:48 +0000 (UTC)
+Received: from blackfin.pond.sub.org (unknown [10.44.22.2])
+ by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id C405C1956088; Sun,  1 Nov 2026 20:11:47 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id 6A55721E6A04; Sun, 01 Nov 2026 21:11:45 +0100 (CET)
+Resent-To: 17746591750@163.com, pasic@linux.ibm.com, alistair@alistair23.me,
+ rathc@linux.ibm.com, graf@amazon.com, stefanb@linux.vnet.ibm.com,
+ FangSheng.Huang@amd.com, xen-devel@lists.xenproject.org,
+ michael.roth@amd.com, jamin_lin@aspeedtech.com, kane_chen@aspeedtech.com,
+ palmer@dabbelt.com, rbolshakov@ddn.com, foss@defmacro.it,
+ sebastian.huber@embedded-brains.de, fam@euphon.net,
+ jiaxun.yang@flygoat.com, lizhijian@fujitsu.com, atar4qemu@gmail.com,
+ edgar.iglesias@gmail.com, jasowangio@gmail.com, liwei1518@gmail.com,
+ npiggin@gmail.com, zhangckid@gmail.com, titusr@google.com,
+ wuhaotsh@google.com, arei.gonglei@huawei.com, berto@igalia.com,
+ mark.cave-ayland@ilande.co.uk, junjie.cao@intel.com, zhao1.liu@intel.com,
+ its@irrelevant.dk, clg@kaod.org, conor@kernel.org, david@kernel.org,
+ jic23@kernel.org, kbusch@kernel.org, mchehab+huawei@kernel.org,
+ sstabellini@kernel.org, peter.maydell@linaro.org,
+ richard.henderson@linaro.org, zhiwei_liu@linux.alibaba.com,
+ zhenwei.pi@linux.dev, adityag@linux.ibm.com, alifm@linux.ibm.com,
+ amachhiw@linux.ibm.com, borntraeger@linux.ibm.com,
+ brueckner@linux.ibm.com, farman@linux.ibm.com, harshpb@linux.ibm.com,
+ iii@linux.ibm.com, jjherne@linux.ibm.com, milesg@linux.ibm.com,
+ mjrosato@linux.ibm.com, luc@lmichel.fr, lixianglai@loongson.cn,
+ maobibo@loongson.cn, pbarbuda@microsoft.com, yoshinori.sato@nifty.com,
+ qemu-arm@nongnu.org, qemu-block@nongnu.org, qemu-devel@nongnu.org,
+ qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
+ john.levon@nutanix.com, thanos.makatos@nutanix.com, kfting@nuvoton.com,
+ den@openvz.org, elena.ufimtseva@oracle.com, jag.raman@oracle.com,
+ daniel.barboza@oss.qualcomm.com, philmd@oss.qualcomm.com,
+ pierrick.bouvier@oss.qualcomm.com, phil@philjordan.eu,
+ tangtao1634@phytium.com.cn, chao.liu@processmission.com, jiri@resnulli.us,
+ sam@rfc1149.net, anisa.su@samsung.com, alex@shazbot.org, farosas@suse.de,
+ mohamed@unpredictable.fr, kvm@vger.kernel.org, linux-cxl@vger.kernel.org,
+ alistair.francis@wdc.com, anthony@xenproject.org
+Resent-From: Markus Armbruster <armbru@redhat.com>
+Resent-Date: Sun, 01 Nov 2026 21:11:45 +0100
+Resent-Message-ID: <87ecd41fcu.fsf@pond.sub.org>
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -50,164 +93,205 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793550677; x=1794155477; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=z1wgGnLaHoKZu2/+Ud078CAK3gozxrFVUFtZdHR2t7Q=;
-        b=t+qS3KmrGZsUjv/mhney5ZVlDlj8OOOx3Auq1Pk2R3EDzUKVdVVhexbjm6WcQXSrin
-         a0qiVScCcdELyx3tXO7T1KcH/ZJg7LTjLlsf+ic+GCI67yjAKFCVmxBBVd+0ryP8DvIO
-         VGlNIEY9gTbcFYEdkrNYCg1bMMZWl57Vp/udKMycEYqbyeeLQ7Ldf/BecMdrKykiqORL
-         HHFIxFe7Wvi/iuVezM+K/yM4vlK2taBaBwkrD9Vhww/ayzCe/9FpsPXeFCrgb/OzkNax
-         1T1LqzYJdwg0Z+SMDxx75R9fnkXTj7Ce1+cuGh8Xh3ljwpHbgXpxLKi1PhCzfyZcTFeC
-         TlAQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793550677; x=1794155477;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=z1wgGnLaHoKZu2/+Ud078CAK3gozxrFVUFtZdHR2t7Q=;
-        b=XlzAiB/pvTa3ZeLB//NOIxrPuuifDMt9w+CTOE8koDT70hqR79yZ7cq9UTe4ok7pGF
-         Bq1KcMydKOR9XOIvOypyIteKze0m57yyQWuzxPCVJRV0cvCHQtjvLwbdpbXW0HvdOEbS
-         6geM80YkzkJGtaXmfWwwinlg2RdWt3L60QMmR+aI7hyvQwjrFtb0Tv9zY7D/W8BjWHpH
-         8sh6q51PUeiR8yA2/45VGpLQlnOWJLTzuudiBv3BQzTh3Ft4Gj3iT3xvB+nektFZD5GO
-         QKf62MFebUkdiQ0lUdxmc+zehabC9G7CeqGb6VRN+1z7EUUyOxOAtQsfWzP9/QldVH0e
-         brIg==
-X-Forwarded-Encrypted: i=1; AKwUvBybdoC8CUu1DfRxOtbQDOT1nCBC41uJQFi7ybMEAAo4UXLWcfAGOTqUQtXA6fkMy8MvWKT4BrD2LAw=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z8puQY0GXWhzarzwzFTk7/vy4ekURnZ1zFkxzWY0kacupHPzhfT
-	E0yslraz6MkwVLONUoULNAc0hAcxj1w6tV07cpDddGXFUXuNk/hu1fWr
-X-Gm-Gg: AYBFou0wvSrlNo/MEWIqXEmizeMgudEA3/MUZBNTx2QbdE/IcMm0sSXZaVvrX3BYnSs
-	uqujatb0PVxEIb7CJT3lq7Jr79bwvIIEi2MViTpi1LD36NNs9sFzvmSMPZUmE1mE9l9WZJOhbdJ
-	E6OX7jjKdHSZ0OpE1HTOseOQOuHmVnsJZcZIL3d/5s4zVnwFSyIGH8bpAwIllSF6QAderQXqBpQ
-	sf41v1WioSvUsLzCgNs1F75y6hqEUqSRF9ufRmdzGjiQTctnFq2tpH0cIjJQyFUorN6kKqAsKe8
-	xZt8L0ACd7yXX2pVQuYzXHLkc3uWUuXZHSNINzz/bMivE3FMpXZc/OEGAu0/j0SpA7hP7KMBIZi
-	Muj1B1T81aGdLSFuYQsMx7MgxuwgXeY12kPMeZW1emmnx3dgGrER9+AW5ljXTQFuRdt7J0TojYB
-	MKiJSyqP0dfkUzXTEISLeeq9XGRz6iM5rbnSkZoS/mmzkxLybwJVTK2+5wbFSaFpFicsyTbdREV
-	ixJxMj2G4rx/1VJBhCHAlOOk2WzF8FBgfETUkVZpHLDVANUVniyX4Ozp/3wXHVTXFhMWNv+m8xQ
-	GzWo1Phw4VeVW6MBt7D+f9U8Z9juDNMaW1NAV5K8oRl3Hn/6OwHiFpH98BHqSN+W7NkWVcuSTNB
-	vDlK40w8EmQRWt8CK3edLdFo=
-X-Received: by 2002:a17:90b:2cc6:b0:3ac:73c7:9c07 with SMTP id 98e67ed59e1d1-3ae89292da7mr11229213a91.0.1793550676949;
-        Sun, 01 Nov 2026 08:31:16 -0800 (PST)
-From: Qihang <q.h.hack.winter@gmail.com>
-To: Juergen Gross <jgross@suse.com>,
-	xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Viresh Kumar <viresh.kumar@linaro.org>,
-	linux-kernel@vger.kernel.org,
-	Qihang <q.h.hack.winter@gmail.com>,
-	stable@vger.kernel.org
-Subject: [PATCH] xen/privcmd: fix double free when an irqfd is shut down twice
-Date: Mon,  2 Nov 2026 00:31:06 +0800
-Message-ID: <20261101163107.55037-1-q.h.hack.winter@gmail.com>
-X-Mailer: git-send-email 2.54.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:Resent-To:Resent-From:Resent-Message-ID:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1793563919;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:resent-to:
+	 resent-from:resent-message-id:in-reply-to:in-reply-to:  references:references;
+	bh=pn06HY/bU7f4uyfbIipnbJnjf3nU/iS9+J50VskAMwg=;
+	b=RTEHkke3vtp7bYWhz4pCrjjq545SbT4JaFXnbyYX77/Bnfc3tpmAWT5V4ckUsfQF/zJl7/
+	j26rMHkdqvQ421ZOT+jEYexF8OOLoyVA8ck0xkyxfDH3ZjjiBn28KBBG8TLc7apaaxt2RF
+	TH8GJ97DO0CPuqjScLVrrAnYcBbR6gA=
+X-MC-Unique: 4TFtM2YWOHWzydJNIPJiaQ-1
+X-Mimecast-MFC-AGG-ID: 4TFtM2YWOHWzydJNIPJiaQ_1793563909
+From: Markus Armbruster <armbru@redhat.com>
+To: =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>
+Cc: qemu-devel@nongnu.org,  Michael Roth <michael.roth@amd.com>,  John Snow
+ <jsnow@redhat.com>,  Peter Maydell <peter.maydell@linaro.org>,  Mauro
+ Carvalho Chehab <mchehab+huawei@kernel.org>,  Pierrick Bouvier
+ <pierrick.bouvier@oss.qualcomm.com>,  Paolo Bonzini <pbonzini@redhat.com>,
+  Daniel P. =?utf-8?Q?Berrang=C3=A9?= <berrange@redhat.com>,  Kostiantyn
+ Kostiuk
+ <kkostiuk@redhat.com>,  Eric Blake <eblake@redhat.com>,  David Hildenbrand
+ <david@kernel.org>,  Igor Mammedov <imammedo@redhat.com>,  "Edgar E.
+ Iglesias" <edgar.iglesias@gmail.com>,  Jason Wang <jasowangio@gmail.com>,
+  Marcelo Tosatti <mtosatti@redhat.com>,  kvm@vger.kernel.org,  Alberto
+ Garcia <berto@igalia.com>,  Kevin Wolf <kwolf@redhat.com>,  Hanna Reitz
+ <hreitz@redhat.com>,  Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?=
+ <philmd@oss.qualcomm.com>,
+  Zhao Liu <zhao1.liu@intel.com>,  Jonathan Cameron <jic23@kernel.org>,
+  Junjie Cao <junjie.cao@intel.com>,  Anisa Su <anisa.su@samsung.com>,
+  Elena Ufimtseva <elena.ufimtseva@oracle.com>,  Jagannathan Raman
+ <jag.raman@oracle.com>,  John Levon <john.levon@nutanix.com>,  Thanos
+ Makatos <thanos.makatos@nutanix.com>,  =?utf-8?Q?C=C3=A9dric?= Le Goater
+ <clg@redhat.com>,
+  Cornelia Huck <cohuck@redhat.com>,  Eric Farman <farman@linux.ibm.com>,
+  Matthew Rosato <mjrosato@linux.ibm.com>,  Richard Henderson
+ <richard.henderson@linaro.org>,  Ilya Leoshkevich <iii@linux.ibm.com>,
+  qemu-block@nongnu.org,  linux-cxl@vger.kernel.org,
+  qemu-s390x@nongnu.org,  "Michael S. Tsirkin" <mst@redhat.com>,  Sergio
+ Lopez <slp@redhat.com>,  qemu-arm@nongnu.org,  Palmer Dabbelt
+ <palmer@dabbelt.com>,  Alistair Francis <alistair.francis@wdc.com>,
+  Weiwei Li <liwei1518@gmail.com>,  Daniel Henrique Barboza
+ <daniel.barboza@oss.qualcomm.com>,  Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>,  Chao Liu <chao.liu@processmission.com>,
+  qemu-riscv@nongnu.org,  Song Gao <17746591750@163.com>,  Bibo Mao
+ <maobibo@loongson.cn>,  Xianglai Li <lixianglai@loongson.cn>,  Jiaxun Yang
+ <jiaxun.yang@flygoat.com>,  Pedro Barbuda <pbarbuda@microsoft.com>,
+  Mohamed Mediouni <mohamed@unpredictable.fr>,  Nicholas Piggin
+ <npiggin@gmail.com>,  Harsh Prateek Bora <harshpb@linux.ibm.com>,  Amit
+ Machhiwal <amachhiw@linux.ibm.com>,  qemu-ppc@nongnu.org,  Zhang Chen
+ <zhangckid@gmail.com>,  Li Zhijian <lizhijian@fujitsu.com>,  Alistair
+ Francis <alistair@alistair23.me>,  Alexander Graf <graf@amazon.com>,
+  "Gonglei (Arei)" <arei.gonglei@huawei.com>,  zhenwei pi
+ <zhenwei.pi@linux.dev>,  Ani Sinha <anisinha@redhat.com>,  Luc Michel
+ <luc@lmichel.fr>,  =?utf-8?Q?C=C3=A9dric?= Le Goater <clg@kaod.org>,  Jamin
+ Lin
+ <jamin_lin@aspeedtech.com>,  Kane Chen <kane_chen@aspeedtech.com>,  Samuel
+ Tardieu <sam@rfc1149.net>,  "Denis V. Lunev" <den@openvz.org>,  FangSheng
+ Huang <FangSheng.Huang@amd.com>,  Tyrone Ting <kfting@nuvoton.com>,  Hao
+ Wu <wuhaotsh@google.com>,  Keith Busch <kbusch@kernel.org>,  Klaus Jensen
+ <its@irrelevant.dk>,  Jesper Devantier <foss@defmacro.it>,  Aditya Gupta
+ <adityag@linux.ibm.com>,  Glenn Miles <milesg@linux.ibm.com>,  Conor
+ Dooley <conor@kernel.org>,  Sebastian Huber
+ <sebastian.huber@embedded-brains.de>,  Halil Pasic <pasic@linux.ibm.com>,
+  Christian Borntraeger <borntraeger@linux.ibm.com>,  Jason Herne
+ <jjherne@linux.ibm.com>,  Titus Rwantare <titusr@google.com>,  Stefano
+ Stabellini <sstabellini@kernel.org>,  Anthony PERARD
+ <anthony@xenproject.org>,  Peter Xu <peterx@redhat.com>,  Chinmay Rath
+ <rathc@linux.ibm.com>,  Hendrik Brueckner <brueckner@linux.ibm.com>,
+  xen-devel@lists.xenproject.org,  Roman Bolshakov <rbolshakov@ddn.com>,
+  Phil Dennis-Jordan <phil@philjordan.eu>,  Fam Zheng <fam@euphon.net>,
+  Farhan Ali <alifm@linux.ibm.com>,  Alex Williamson <alex@shazbot.org>,
+  Tao Tang <tangtao1634@phytium.com.cn>,  Stefan Berger
+ <stefanb@linux.vnet.ibm.com>,  Fabiano Rosas <farosas@suse.de>,  Mark
+ Cave-Ayland <mark.cave-ayland@ilande.co.uk>,  Artyom Tarasenko
+ <atar4qemu@gmail.com>,  Yoshinori Sato <yoshinori.sato@nifty.com>,  Jiri
+ Pirko <jiri@resnulli.us>,  Eric Auger <eric.auger@redhat.com>,  Laurent
+ Vivier <lvivier@redhat.com>
+Subject: Re: [PATCH v7 17/65] qom: add object_{class_}property_add_qapi_enum
+In-Reply-To: <CAMxuvayHXMftaQP6X_14pAf63bjX8mXxsW4TsXnLf_wbOq6eUA@mail.gmail.com>
+	(=?utf-8?Q?=22Marc-Andr=C3=A9?= Lureau"'s message of "Fri, 30 Oct 2026
+ 16:11:12 +0400")
+References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
+	<20261020-qom-qapi-v7-17-431a86b02b58@redhat.com>
+	<871p97a4mf.fsf@pond.sub.org>
+	<CAMxuvayHXMftaQP6X_14pAf63bjX8mXxsW4TsXnLf_wbOq6eUA@mail.gmail.com>
+Date: Sun, 01 Nov 2026 12:18:09 +0100
+Message-ID: <87se1k7qby.fsf@pond.sub.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-33051d/1793550679-6ECCB4E9-D6AF225B/0/0
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
+X-Mimecast-MFC-PROC-ID: rO-hRhugsqkehLZXvKtC4OGGcDbe4YTKkUCWx2lEB2c_1793563909
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-purgate-ID: tlsNG-c1860d/1793563920-CC77387B-3AC845B4/0/0
 X-purgate-type: clean
-X-purgate-size: 3803
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-purgate-size: 3629
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=unavailable
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-irqfd_deactivate() takes the irqfd off irqfds_list and queues
-irqfd_shutdown().  queue_work() is not a once-only gate: it refuses to
-enqueue a work item only while WORK_STRUCT_PENDING is set, and
-process_one_work() clears that bit before it calls the work function.  So
-nothing records that the shutdown work has already been queued, and
-nothing protects the window between the start of irqfd_shutdown() and the
-kfree() at its end.
+Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com> writes:
 
-Two paths call irqfd_deactivate() for the same irqfd:
+> Hi
+>
+> On Fri, Oct 30, 2026 at 2:02=E2=80=AFPM Markus Armbruster <armbru@redhat.=
+com> wrote:
+>>
+>> Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com> writes:
+>>
+>> > Signed-off-by: Markus Armbruster <armbru@redhat.com>
+>> > Signed-off-by: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
+>> > ---
+>> >  include/qom/object.h | 74 ++++++++++++++++++++++++++++++++++++++++++
+>> >  qom/object.c         | 90 +++++++++++++++++++++++++++++++++++++++++++=
+++++++---
+>> >  2 files changed, 159 insertions(+), 5 deletions(-)
+>> >
+>> > diff --git a/include/qom/object.h b/include/qom/object.h
+>> > index eb61d8842b80..e04be4caed57 100644
+>> > --- a/include/qom/object.h
+>> > +++ b/include/qom/object.h
+>> > @@ -2027,6 +2027,80 @@ ObjectProperty *object_class_property_add_enum(=
+ObjectClass *klass,
+>> >                                      int (*get)(Object *, Error **),
+>> >                                      void (*set)(Object *, int, Error =
+**));
+>> >
+>> > +/**
+>> > + * struct QapiEnumProp: Descriptor for a property backed by a QAPI en=
+um type
+>> > + *
+>> > + * Binds a QOM object property to a QAPI enum, providing automatic
+>> > + * string<->int conversion through QAPI visitors and optional
+>> > + * default-value initialization during object instance init.
+>> > + *
+>> > + * Use the QAPI_ENUM_PROP() macro to construct instances inline.
+>> > + *
+>> > + * @name: property name exposed on the QOM object
+>> > + * @description: human-readable description (shown in ``-device help`=
+`, etc.)
+>> > + * @default_value: initial enum value applied via @set during instanc=
+e init,
+>> > + *                 or -1 (the QAPI_ENUM_PROP default) to skip initial=
+ization
+>> > + * @qapi_type: pointer to the generated QAPITypeInfo for the enum
+>> > + *             (provides the string<->int lookup table)
+>> > + * @get: getter that returns the current enum value as int, or -1 on =
+error
+>> > + * @set: setter that receives the enum value as int; %NULL for read-o=
+nly props
+>> > + */
+>> > +typedef struct QapiEnumProp {
+>> > +    const char *name;
+>> > +    const char *description;
+>> > +    const int default_value;
+>> > +    const QAPITypeInfo *qapi_type;
+>> > +    int (*get)(Object *, Error **);
+>> > +    void (*set)(Object *, int, Error **);
+>> > +} QapiEnumProp;
+>> > +
+>> > +#define QAPI_ENUM_PROP(...) ({                                       =
+    \
+>> > +    static const QapiEnumProp _prop =3D {                            =
+      \
+>> > +        .default_value =3D -1, __VA_ARGS__                           =
+      \
+>> > +    };                                                               =
+    \
+>> > +    &_prop; })
+>>
+>> This is a cute and reasonably well-known macro trick for optional
+>> keyword arguments in C.
+>>
+>> The example [*] below specifies all arguments.  What happens when we
+>> omit any?  They default to zero via default initializaion, except for
+>> .default_value, which defaults to -1.
+>>
+>> Trap for developers: some arguments aren't actually optional!  If you
+>> forget to specify @name or @qapi_type, the code compiles, but crashes at
+>> run time.
+>>
+>> Not a fan.
+>
+> Agree (not a fan of C either). We could probably add more
+> static/runtime checks. Or clearly state that there is room for
+> improvements, or just drop it altogether - either as follow up or with
+> the series. I leave that up to you since you are going to respin it.
+> thanks!
 
-  - privcmd_irqfd_deassign(), from the PRIVCMD_IRQFD_FLAG_DEASSIGN ioctl;
+I dropped it for v8.  Was a bit of a pain, but the patches became
+simpler.
 
-  - irqfd_wakeup(), with EPOLLHUP set, when the last reference to the
-    eventfd file goes away, which runs wake_up_poll(&ctx->wqh, EPOLLHUP)
-    from eventfd_release().
-
-irqfds_lock serialises the two calls, but it does not make the second one
-a no-op, and eventfd_ctx_fdget() takes a reference to the eventfd_ctx,
-not to the struct file, so the last fd can still be closed while the
-ioctl is running:
-
-  CPU0                                 CPU1
-
-  eventfd_ctx_fdget()
-  spin_lock(irqfds_lock)
-  list_del_init(&kirqfd->list)
-  queue_work(&kirqfd->shutdown)        close(fd)
-                                         eventfd_release()
-                                           wake_up_poll(EPOLLHUP)
-                                         irqfd_wakeup()
-                                         spin_lock(irqfds_lock)
-                                         irqfd_deactivate() again
-
-If the work item has already started by then, its pending bit has been
-cleared and the second queue_work() succeeds.  irqfd_shutdown() then runs
-twice, so eventfd_ctx_remove_wait_queue(), eventfd_ctx_put() and kfree()
-each hit the same object a second time; and when the second queue_work()
-lands after the irqfd has been freed, the workqueue list operations write
-to freed memory.
-
-virt/kvm/eventfd.c has the same two callers and has had this guard since
-the original irqfd support (721eecbf4fe99): irqfd_wakeup() calls
-irqfd_deactivate() only if irqfd_is_active().  The comment there explains
-why that is enough: the other side deactivates the irqfd before it takes
-it off the waitqueue, and irqfd_shutdown() needs the waitqueue lock,
-which this callback holds, so the irqfd cannot be freed under it.
-
-Do the same here.  list_del_init() leaves the list head empty and the
-irqfd stays off the list until kfree(), so it serves as a one-way
-"active" flag.  The test is in irqfd_deactivate() rather than in
-irqfd_wakeup() because privcmd_irqfd_deassign() walks irqfds_list and can
-therefore never reach an inactive irqfd; only the wakeup path can, and a
-single test covers both callers.
-
-Fixes: f8941e6c4c712 ("xen: privcmd: Add support for irqfd")
-Cc: stable@vger.kernel.org
-Signed-off-by: Qihang <q.h.hack.winter@gmail.com>
----
- drivers/xen/privcmd.c | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
-
-diff --git a/drivers/xen/privcmd.c b/drivers/xen/privcmd.c
-index 5e56fbc934478..221b31611343e 100644
---- a/drivers/xen/privcmd.c
-+++ b/drivers/xen/privcmd.c
-@@ -901,10 +901,25 @@ struct privcmd_kernel_irqfd {
- 	poll_table pt;
- };
- 
-+static bool irqfd_is_active(struct privcmd_kernel_irqfd *kirqfd)
-+{
-+	lockdep_assert_held(&irqfds_lock);
-+
-+	return !list_empty(&kirqfd->list);
-+}
-+
- static void irqfd_deactivate(struct privcmd_kernel_irqfd *kirqfd)
- {
- 	lockdep_assert_held(&irqfds_lock);
- 
-+	/*
-+	 * Both the deassign ioctl and the eventfd wakeup path can reach
-+	 * this function.  list_del_init() marks the irqfd inactive, so
-+	 * only the first caller may queue the shutdown work.
-+	 */
-+	if (!irqfd_is_active(kirqfd))
-+		return;
-+
- 	list_del_init(&kirqfd->list);
- 	queue_work(irqfd_cleanup_wq, &kirqfd->shutdown);
- }
--- 
-2.54.0 (Apple Git-157)
+[...]
 
 
