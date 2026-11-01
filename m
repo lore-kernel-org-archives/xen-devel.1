@@ -2,41 +2,41 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 53CC9606A325
-	for <xen-devel@archiver.kernel.org>; Sun,  1 Nov 2026 03:12:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BEDE5606A325
+	for <xen-devel@archiver.kernel.org>; Sun,  1 Nov 2026 03:27:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=PXqFcB7x
-Received: from list by lists.xenproject.org with outflank-mailman.1467126.1676574 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=uCHhiIkM
+Received: from list by lists.xenproject.org with outflank-mailman.1467135.1676583 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNLys-0007Ap-2T; Sun, 01 Nov 2026 03:11:38 +0000
+	id 1xNMDs-0000Or-7k; Sun, 01 Nov 2026 03:27:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1467126.1676574; Sun, 01 Nov 2026 03:11:38 +0000
+Received: by outflank-mailman (output) from mailman id 1467135.1676583; Sun, 01 Nov 2026 03:27:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNLyr-0007Ai-W3; Sun, 01 Nov 2026 03:11:37 +0000
-Received: by outflank-mailman (input) for mailman id 1467126;
- Sun, 01 Nov 2026 03:11:37 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xNMDs-0000Ok-4u; Sun, 01 Nov 2026 03:27:08 +0000
+Received: by outflank-mailman (input) for mailman id 1467135;
+ Sun, 01 Nov 2026 03:27:07 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <luoyonggang@gmail.com>) id 1xNLyr-0007Ac-3q
- for xen-devel@lists.xenproject.org; Sun, 01 Nov 2026 03:11:37 +0000
+ (envelope-from <luoyonggang@gmail.com>) id 1xNMDr-0000Oe-AX
+ for xen-devel@lists.xenproject.org; Sun, 01 Nov 2026 03:27:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xNLyq-00HNKd-DI
- for xen-devel@lists.xenproject.org; Sun, 01 Nov 2026 04:11:36 +0100
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xNMDq-000hLp-GW
+ for xen-devel@lists.xenproject.org; Sun, 01 Nov 2026 04:27:06 +0100
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <luoyonggang@gmail.com>)
- id 6ae6ad62-e002-0a2a0a5209dd-0a2a45049a4e-34
- for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 04:11:36 +0100
-Received: from [209.85.208.52] (helo=mail-ed1-f52.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ae6b16c-e002-0a2a0a5209dd-0a2a45018560-4
+ for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 04:27:06 +0100
+Received: from [209.85.218.44] (helo=mail-ej1-f44.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <luoyonggang@gmail.com>)
- id 6ae6ade8-b57f-0a2a45040019-d155d034e4b0-3
- for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 04:11:36 +0100
-Received: by mail-ed1-f52.google.com with SMTP id
- 4fb4d7f45d1cf-6b2237b596cso3823931a12.0
- for <xen-devel@lists.xenproject.org>; Sat, 31 Oct 2026 20:11:36 -0700 (PDT)
+ id 6ae6b18a-5984-0a2a45010019-d155da2cd5e4-3
+ for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 04:27:06 +0100
+Received: by mail-ej1-f44.google.com with SMTP id
+ a640c23a62f3a-c49b431f022so269896466b.1
+ for <xen-devel@lists.xenproject.org>; Sat, 31 Oct 2026 20:27:06 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -46,65 +46,65 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From:Reply-To:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1793502696; cv=none;
+ARC-Seal: i=1; a=rsa-sha256; t=1793503626; cv=none;
         d=google.com; s=arc-20260327;
-        b=NaumzC6sXzakUIXBtsX7ihUoBHz3FWeDQenvdbgwWRscmWLc28FmJbShsLKDfV6Jop
-         qNI43ihfwBX+tiNr3E4JeIV7SUavij+IXW+n+lIIHg5R+iG9tTsjQ9x4Wr4JkxJaeyZp
-         114LCeldopUds3+JoLOlraevVg4xNGdNBWjENi+68oU2ka10Te1c3W3qlkA9f2x8yVyi
-         9RbHNL1CxsAMJ/+7u6HtprfwtBFpJ1ED4U0vjvc+6S+RRrt4m3ABUcZt84TcunMqAM/o
-         17zwUmHpqlyp+FW4tmj8TKkvQhg9rEgo0HbJQZGhNcTg3Ve0OHr1t/JERUWbDYw5LIdA
-         A9yw==
+        b=WQsVB7HQqZZP8VMBTrZklGZI+6mY0pUy/ibFXjTdivApw5HvZGTTWKxKpSh103Wrpj
+         nGEONRkT5+ImcYcOPvAKQ4yBUHd/kbtc69qXb2FPR9uUgRn2Hm73Cv844cq6p0VaMPPR
+         d9tMmMof+ek0CWfvo99vCJqydyv+wCpvwl4OmReJwp7+D9SbESBocO734ZcG40zpjdnp
+         mtZjBdy8JLH7svA7PUzbeFpm5hNdugEf1r1KHhk6+tuK9oCACY4lYAwT/pHmSPKDbEUU
+         LFEyFXHyRIi/la64UL7F8NW6ndBDvSCynwbcEsKIApQCYuoKXuUsL/vtw641wZAbarJm
+         ry8Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :reply-to:in-reply-to:references:mime-version:dkim-signature;
-        bh=vhYx8NCTJ3gLuFoY2YcO8xoKIGGtbLmWpknfBd4Xk+g=;
-        fh=kdsjTlqf/BJQA81FXUx/qHxqjNjs3jRj3RGoPk1XFRk=;
-        b=hmPuxWqbk/vkAVtNTKfmOgMumtdUUD3HX1WX/02wVJUB4GDqMvPJPk8ueJEVY1HkaS
-         Kh8g6C2Gvrj5T/rW0PK32/YdhNZ3Msde83fvQ3yA/6wxZD+6ukyQSUaFyckdbdPIP82p
-         /sEN1rQC8X1isNVkbsw5zU+AsgOsg04+kcwkMozuHwF/fknrFxr0stUDl6Vs0pbcDOU5
-         yLAO1MUdLMjCECZc8ZMyipVVFMxgHRqoHeRd/6WdNvt2ih6fHcJ49P+zFV7FFmMsLcsd
-         lO6Mcyr7yMASZt13bspysspmbHTy1x1AhY+VWpJpbkDIthJehWRevOKqmZw59j49cf0B
-         PlLQ==;
+        bh=DWO0Oi5z9yO5iNhbmEE3jx4kds9djaRbLYHcUT+/GCc=;
+        fh=I4lCl8Juol8+VLUalVUojFNILuLgyULvPxD0v1k0fnI=;
+        b=eYkv+DNoi/1KQU12nAUdWVqjnODsM+RCgW1esVm8CaWYnKeStquUwS8g/gmEILzrXE
+         Q7cysxWrD+V9hcKl4NkRCmm7ybp406NCRytwttXgfC6F2JFL55xeJsb2b/yqNh/xcwyZ
+         lrOPno8aZWpoIP031S4rgTdyEXgtHnjKdtzn3USAzn9Y1Shf4nY09LZ0+KyFFW42vTOE
+         IaH1Px6GDp7yt565D5j8Nx4sD9o2n0kVpFMA96Q1UamDADx8/TJal3OJUPizO8J5sj9v
+         sasb4o3o67PTN6npT87qhXr8q0RiXsSEos1nOHfRjlwrqLNt6N0ZuG7E0G7tYq8Fpwf0
+         07yA==;
         darn=lists.xenproject.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793502696; x=1794107496; darn=lists.xenproject.org;
+        d=gmail.com; s=20260707; t=1793503626; x=1794108426; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:cc:to:subject:message-id
          :date:from:reply-to:in-reply-to:references:mime-version:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=vhYx8NCTJ3gLuFoY2YcO8xoKIGGtbLmWpknfBd4Xk+g=;
-        b=PXqFcB7xO7Oc/Iom6sL7QhQXGU9TTT1vFrO6HIJ3P9XifE0jv1ty+0Y/xX0acoDwnt
-         rs9jsNFQaeGemF1Zd/nlzAxRuNkDjWukQO/jqJBbdAVIiZqlYmjzJ4sWUnLUbGqbV8+x
-         ol5Y4DXYFcTXC34hNwyKZEDwpnVObiQoj6jU/VK5u4hVmFItB/1qMo0ejOvCtFsLRW8a
-         lg/saRu9wcexF91M50FXGlk/0u5tRPpB46Jj78qyWxLr5lbJQPNIEAgJGcAnp1msAM+s
-         McyyC6YQcpGbUcm9nyDNYUwRG4sYVBqUmgOcjSC2qanwh4QEU3EUmcaf6zNbilCDR7gR
-         ZM8A==
+        bh=DWO0Oi5z9yO5iNhbmEE3jx4kds9djaRbLYHcUT+/GCc=;
+        b=uCHhiIkMOd64iboqH7OccKyvhbu6XjK0XG+DUzTrC4lMWubu4/pVibZmaLqonlyjZj
+         /fJKvuNNwGQBlr06DPmPYgd7AyslEok8/0fLqSQ+AKFLMlW/vDPcnesLUcqoTQBHiEi1
+         viXvUO1/u1yE4qz15W79XLjW0IczNrhxhK+K9aK/yW8kGSaN7bCedH23E3u9R8Afracb
+         eQsMZ0gPfsuFxGOwKH3dQx7mBKzsAU0iSAol2NiVqvc++cjofv/CShzN3Mn47Z/Ckc4I
+         ocvU8M46sOEbTqgpJPNEqken3m5b9M+FGF6c+42pjbKRygMa/fdEE5WRmsx9kF2b+kh1
+         8LXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793502696; x=1794107496;
+        d=1e100.net; s=20260707; t=1793503626; x=1794108426;
         h=content-transfer-encoding:content-type:cc:to:subject:message-id
          :date:from:reply-to:in-reply-to:references:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=vhYx8NCTJ3gLuFoY2YcO8xoKIGGtbLmWpknfBd4Xk+g=;
-        b=iVEzbgDgIISS1JUKXMJWuNB3Meuzb4DQ9m5HQAzq2mqJr2DRVu8qMlI7qTIT+1paIC
-         x6X8vfscCh/VvadjFv+j2HVi+H4u9qKGGvs+eJ4xd64eCk7pzD3hmZEzYeA5FX6Bj56l
-         HmboaNqCDm0SAkUDcqdNafI/+Rg+MitpUs4oXJCMPpIC1xaBcjKSy0jNMI6Mg2bbLVhO
-         EepBxJsE2krPId3hJ2+3dApLNyKAemDnffhCob56UF9Uj7sZ40szCynDSmqAFwaEzQqB
-         KWq+l1qbbW56yu63XQVQfAyHgZKRoXV2Uy/r2K0OUCZci4tcTKU5LxY/+CI9nM0sxMdk
-         X3Iw==
-X-Forwarded-Encrypted: i=1; AKwUvBznO4gquHrfvaHZRaNVSCQXGCWfCKqNDajSzupyPwI7TxqNHaeFW0bo1t1bBxUMUKCcZDCb8dvDd8M=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYKEPnDkcFv1FVd/VR3mQimCF1PDShAQA4RcHg/CdrFVyS7f109N
-	wkA1LNVbM51EDeNKZcFUTA2UotXUPOKXe564SAVcMqYIxCehR/JrjbawDjduXCoeyI8HGDYUz/c
-	sGx1dxNAzXmPPAxeY3uf0sgIwhwRitH4=
-X-Gm-Gg: AYBFou2x+hhRloVpkRh8yxPhIXMwBzkkTHmtLeiWPffLyuuYvUHArfy5CFXM07Wx/u8
-	6IKI3w2LxX2gXftQBW6wBUw86sic1RvLiT9hau6WJNqxr722leL2G0OqT1GvmVD9/nv7e9cPeR1
-	2ehO/ROiKS1BNhAYBVcl1GmzPXnsEGog3xWJ+cLY6q2OMJBe2FNVDkBRA3ZF4ihCE9GvBEnVa+D
-	ECjo/DpfRLv4pHseF1H20Pt/SyDfp4qmePihCgV1G63FdBaNNJuL05+9mw/Tz3rHmSSzTA4tXJn
-	e9QPHeCIjJZQWPTMKtck1YoKY5ncSoYXNNkelleT1azrNZaQrXYKh9wnHJhJ9v56GHFVMTRECYg
-	1tylov9Vqp3vWkeWVMN8Hvsn3e1eqzSOudpZD
-X-Received: by 2002:a05:6402:1f45:b0:6b4:59d0:7294 with SMTP id
- 4fb4d7f45d1cf-6b4d4c6fdd6mr4363005a12.31.1793502695567; Sat, 31 Oct 2026
- 20:11:35 -0700 (PDT)
+        bh=DWO0Oi5z9yO5iNhbmEE3jx4kds9djaRbLYHcUT+/GCc=;
+        b=08cupQ8w7WUciSxkXmk3/K86YKau7DNZBlMnNRncqjqNn7tvtfH3Cd65ph5t9X+Jtt
+         ZfXR693D6r7LKgE53IQOJvgs0Nlbk27fPd/yFAUaisdVmbWcwrCChYMYbTxPl5JzYVut
+         h/nmlu8nt5pSZNdK4hB+hDdgMqLYjIx+y+TJwRH6tMZArjm6OmW66nIarp8HmhL33DiU
+         klPoTfqWnoTgKkrlC35X+cT9e8JOPIuj0ZRkHy2oaGB53VmkaQfQH6D/4cr39jdfZco2
+         zPYKuOWp74ygd5qQOOf86zeA2SCy6/pf6pKD5zdArF2/qLYb69UckWAFRnT5buJLd8j/
+         5yEA==
+X-Forwarded-Encrypted: i=1; AKwUvBwa9I+j0zG5cZASRXejvWPkyQvGGrsVQ6INTSejxlYSqRZYqDrSnkCGkWUqGNOuG4b5K+AAYz4/OB4=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYLcgqWxNUlxzYHJ9vmDqEGRcsy2PVhinEw24thBkitWQ/Tn25MA
+	z7LCBm+CzjblISo/UIHF8olOPF9d0LKg7bLVLQDCEPu1ORYJrXTz/FXk/gUf9Swn44wDycGCG9Q
+	dqVX0xS4zMmZW2/BncR60QK7wMngHD0M=
+X-Gm-Gg: AYBFou2bSGkyop4ztg/87VhvHQYYlBNTB5E/VLiv5/2w35UzLgqiHhKhm17LRqb7jSK
+	onqqCSApbmIyuoiReRyvmJRxL2+o1mPqiD0jc/Czn/O7kyAv0gQODAFZHcHZgCmX0rtiqR5Evgh
+	PS0Mc6tvB3uM7P1Sax1nfW58Aq1iY3Rer1AbIj6iZUTsyc60Emygf+asw3LrJNUnJz48VAQiHJR
+	ocGZmIOMqI4EIvREldRNFKzCxQNXknK4yjo1pxunVEzWe7a1DlCBhtlpLTB2vgUjQM016jZ2EmX
+	vGSGURrqZb5JFwh4hOdZYQ6EEnJFFajQPqIPhbReozI5wcWGzHLOiWJXnsC0k0Mx8X01If3gZZw
+	lrlSQDWEZ9y14O9Z9fmEMYzEFKzBb1Kiya1tg9Q==
+X-Received: by 2002:a17:907:6d05:b0:c3f:c856:fb7a with SMTP id
+ a640c23a62f3a-c4ca793baa3mr525308866b.3.1793503625809; Sat, 31 Oct 2026
+ 20:27:05 -0700 (PDT)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 References: <20261030151539.1872-1-luoyonggang@gmail.com> <d1db54c6-b802-676a-7779-0c2c63f5f807@eik.bme.hu>
@@ -115,9 +115,9 @@ References: <20261030151539.1872-1-luoyonggang@gmail.com> <d1db54c6-b802-676a-77
 In-Reply-To: <a479df5b-721d-c357-5c69-c3760a73e521@eik.bme.hu>
 Reply-To: luoyonggang@gmail.com
 From: Yonggang Luo <luoyonggang@gmail.com>
-Date: Sun, 1 Nov 2026 11:11:23 +0800
-X-Gm-Features: AclHuK8ADYiZfnAadMiHgWxlPjajz8RpFN0nm2TYzD60cICsbmJtIpy63UnxYO4
-Message-ID: <CAE2XoE-2w3A4=BeskGgp7NYUtkRVNkNufu4SZjW_OQ-KAQZvhg@mail.gmail.com>
+Date: Sun, 1 Nov 2026 11:26:53 +0800
+X-Gm-Features: AclHuK9057t8H_kvHtA0m7bf23Rw45MDO_-qUsQ8r90mDc2w3RogzzSts7xwUEo
+Message-ID: <CAE2XoE-fkc-PqKsx4Lf+RdHxqctAS2TSuqueGFrnea2jaiQXnA@mail.gmail.com>
 Subject: Re: [PATCH 00/15] hw: expand DEFINE_MACHINE to explicit TypeInfo registration
 To: BALATON Zoltan <balaton@eik.bme.hu>
 Cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, qemu-devel@nongnu.org, 
@@ -145,9 +145,9 @@ Cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, qemu-devel@nongnu.org,
 	Artyom Tarasenko <atar4qemu@gmail.com>, qemu-arm@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-ebf023/1793502696-532CCB50-2D03300C/0/0
+X-purgate-ID: tlsNG-d62444/1793503626-C495A757-F67212D7/0/0
 X-purgate-type: clean
-X-purgate-size: 5856
+X-purgate-size: 4955
 X-Spam-Status: No, score=-2.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -269,49 +269,28 @@ an
 > > DEFINE_TYPES
 >
 > My point is that keeping the boiler plate as little as possible makes the
+This is also what I want, makes the code more readable and little boiler pl=
+ate.
 > code more readable. DEFINE_TYPES hides some of the boiler plate,
+
+The DEFINE_TYPES would be like this:
+
+static const TypeInfo dp264_types[] =3D {
+    {
+        .name       =3D MACHINE_TYPE_NAME("clipper"),
+        .parent     =3D TYPE_MACHINE,
+        .class_init =3D clipper_machine_class_init,
+    },
+};
+
+DEFINE_TYPES(dp264_types)
+
+
 > DEFINE_MACHINE hides even more so converting to DEFINE_TYPES would expose
 > some even if it's better than no macro at all.
 >
 > What exactly are the parameters missing from DEFINE_MACHINE_EXTENDED that
 > need to be added?
-
-Hi BALATON
-the things we faced is we first is to add TypeInfo::is_available parameter =
-to
-DEFINE_MACHINE_EXTENDED, and have more usage of it.
-Then we will add targets:uint64_t parameter to DEFINE_MACHINE_EXTENDED, thi=
-s is
-a prepare to remove TypeInfo::is_available parameter from
-DEFINE_MACHINE_EXTENDED,
-
-And finally, once all usage of TypeInfo::is_available can be replaced with
-targets:uint64_t, then we finally need to remove
-TypeInfo::is_available parameter from DEFINE_MACHINE_EXTENDED,
-
-That's what I am facing now. And the explicit
-static const TypeInfo xxx_machine_typeinfo =3D {
-    .name       =3D MACHINE_TYPE_NAME("xxx"),
-    .parent     =3D TYPE_MACHINE,
-    .class_init =3D xxx_machine_class_init,
-};
-
-Will help me avoid the issue. And I think this is a little boilerplate
-and very explicit.
-
-
-And the
-    .instance_size =3D sizeof(MachineState),
-is indeed not needed, they sharing TYPE_MACHINE's sizeof(MachineState)
-is enough.
-Even though DEFINE_MACHINE expands to .instance_size =3D
-sizeof(MachineState), and it's redundant.
-So I think convert to DEFINE_TYPES would be a good alternative to this
-issue, less boilerplate(not none)
-And dealt with the issue we faced.
-
-What do you think about this idea, BALATON
-
 >
 > Regards,
 > BALATON Zoltan
