@@ -2,45 +2,34 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DAD2E606A326
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 08:10:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 34727606A324
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 08:35:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=agjeh3/D
-Received: from list by lists.xenproject.org with outflank-mailman.1467813.1676844 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=d/5HKtJ6
+Received: from list by lists.xenproject.org with outflank-mailman.1467821.1676854 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNn6r-0000tF-Dw; Mon, 02 Nov 2026 08:09:41 +0000
+	id 1xNnVS-0004fv-7F; Mon, 02 Nov 2026 08:35:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1467813.1676844; Mon, 02 Nov 2026 08:09:41 +0000
+Received: by outflank-mailman (output) from mailman id 1467821.1676854; Mon, 02 Nov 2026 08:35:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNn6r-0000t8-BI; Mon, 02 Nov 2026 08:09:41 +0000
-Received: by outflank-mailman (input) for mailman id 1467813;
- Mon, 02 Nov 2026 08:09:40 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xNn6q-0000t2-9s
- for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 08:09:40 +0000
-Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xNn6p-006J7v-7s
- for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 09:09:39 +0100
-Received: from [10.42.69.5] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6ae8453e-e002-0a2a0a5209dd-0a2a4505e320-10
- for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 09:09:35 +0100
-Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6ae8453f-4cb1-0a2a45050019-d155802ec93d-3
- for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 09:09:35 +0100
-Received: by mail-wm1-f46.google.com with SMTP id
- 5b1f17b1804b1-4a20bde60a0so19989545e9.3
- for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 00:09:35 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4aa81a896ecsm343448895e9.9.2026.11.02.00.09.34
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 02 Nov 2026 00:09:34 -0800 (PST)
+	id 1xNnVS-0004fo-4i; Mon, 02 Nov 2026 08:35:06 +0000
+Received: by outflank-mailman (input) for mailman id 1467821;
+ Mon, 02 Nov 2026 08:35:04 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <roger@xenproject.org>) id 1xNnVQ-0004fh-No
+ for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 08:35:04 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.98.2)
+ (envelope-from <roger@xenproject.org>) id 1xNnVQ-0000000AgWs-2cMs;
+ Mon, 02 Nov 2026 08:35:04 +0000
+Received: from 224.pool85-54-217.dynamic.orange.es ([85.54.217.224]
+ helo=localhost) by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.98.2)
+ (envelope-from <roger@xenproject.org>) id 1xNnVQ-00000009iUR-0OzN;
+ Mon, 02 Nov 2026 08:35:04 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,214 +38,191 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1793606975; x=1794211775; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=WkjuEr0ZHS6yz+4IZVRbzWP0WQjy7Wkzzke+VN3k/0M=;
-        b=agjeh3/DLo6FwDcvEUj9f5052fuhIquLf5a7ZEErROeg17ZaYC8vC87ouBpaZQVsMi
-         XBhy4iN8wBgwxJqxifzXF5ULI8rL2qep/MHLa+TABPYuHTNhvBQJgY3KBsi+m+8Kq+Pn
-         EO13wnEssSMJjbgVMTr01eL+DvmjR/2A6B4fixn0bRL1VwluVBB93k01WYa1ly0E9pVL
-         UpVA58Su4bC/OQQqqRQDG9PH2/KYiwShYjK/BpsLALmNJoyOrTZkz8feBeySeEKiXS88
-         xGDDpwoaKHqTu78ZK3tk4+IcvKGB5yMrTIdVzKPhlA+DoPEQPGNdrIobk3FZnlpvcTJl
-         SuDA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793606975; x=1794211775;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=WkjuEr0ZHS6yz+4IZVRbzWP0WQjy7Wkzzke+VN3k/0M=;
-        b=xBrr0SFAesRlMuY+3P0twJGrsYN6jdP44phXDDbPRUTyR+agVnWwm7TeWBwo+v7Gdx
-         VkhQhblwQ0XPZT1mYW5L2AvhwdgUgzQWpvQgSpcKfuJwl7GhacofIonSZfZZU8k8rO5k
-         ha1I+QIWFogfMjfxN+xJXNt6WrsVgboxvIAHxUH7pb7AqIkKQctQiHBEWysgSykag8i5
-         Fu5/xg1zDRcgSz0Y+vR1v+VO+yvsMTIuKVVx9LNZUbycd5cnI8LZ/iqfTyfuP2hQ0+lv
-         ccgzNZH5MZ1VrGrFVRq2zOifrVVBme8qz/X6EbePsgb1Xsp9yU6aisq9yJ15RJ+Uqjtz
-         nuTA==
-X-Gm-Message-State: AFq9FYKGkVhawqMXLcVo+epQiGLdQUkFTNmpb39/IUNeMSOZ8maul9Gi
-	YhVFytndlfNWnBsWteEDYWVKbT29nQbUO8ctAxp6wta1T3Tc7ohS/RJ9nWy5SIZ0ZA==
-X-Gm-Gg: AYBFou0CnvRn1Dw8U6+lvIJHcOt3HOWmj5ZGtQF/XxjlNtRRRcWxuHi7xlDpaah+uuQ
-	1JuELLlMGNE0gC/SopUO1YCgxdyDg+kTHXdCUAjcDTQro5iewwWWst2ujYNKIXnB5wXegpE5xWb
-	croYVWw4JYJ9PyGKDIYJD3b2m/Gxu5FoOEDMqvigWByOZYd+wcoESmwTTi5fV5xFsX9RQbvJTFp
-	ha96GM3iZpt4xY74WwpoWbhwvJXoKbpTcGSD4RSm/L8xypnbxqUnWmZK/J49BhT9CnA+t9fB5EL
-	ihlPy+qPVQYRUKlIOmA5w2eNTF6n1FGYmXRJFLKor0kMVgE+rElBw1fjczdQQ1j12EcQaAaBOgx
-	iNR5DLsjOaq6ckowVN2k3IZHHoiOcTKdZz+Bbi98q+dpPLcNNGUX5YFyI4pUV5NkVtHGAa8278x
-	64Lx1Kkn9TIVYAI4yrR4ilM2W7OLdw3iPCtozi7/ZyqFZ7euJncVWLDIyutpA1z8Lj5/mHpaxHW
-	cCQf9RhiihabK0ouFrBDgK8d6criX4v7L8CyduszUIHG/RrE5+mX57CW/964WlqK+Iu8x5GWpF8
-	/7ok99pVaqfe23QrV3eGmgweEjOf0e4oErSNfJY1j5pDySTCMBhuCHFrZhMDXICnljtGPqFiujB
-	IxiMoResUKY9897A=
-X-Received: by 2002:a05:600c:6211:b0:4a1:80d8:aed5 with SMTP id 5b1f17b1804b1-4ac17191046mr221775665e9.6.1793606975131;
-        Mon, 02 Nov 2026 00:09:35 -0800 (PST)
-Message-ID: <a9698062-27a5-4fc7-b507-4536f3685f5d@suse.com>
-Date: Mon, 2 Nov 2026 09:09:33 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=In-Reply-To:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date;
+	bh=pxbttvmipgbs0Tapv4Nkji5GYQ56KN3Fca8IynmY2l0=; b=d/5HKtJ6sgi+Wb94sQIIcE4eg/
+	6bH7S7SAng3ZwoQQ0Wkq8E+Q5bsnoPQx2AjjiulZZIURZbK9nGJeN6o6ZTmEeV2aiLwWJCwLSqAzs
+	cixa07PdG2BrK6KvcDWLYW4tkxWfyK3C67XHWocemdZFAREoEWkK9dt10wGFr1pGbGwY=;
+Date: Mon, 2 Nov 2026 09:34:56 +0100
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>
+To: chunjie.zhu@citrix.com
+Cc: andrew.cooper3@citrix.com, jbeulich@suse.com, teddy.astie@vates.tech,
+	xen-devel@lists.xenproject.org
+Subject: Re: [PATCH 2/2] x86/hvm: sync APs TSC with the BSP at creation only
+Message-ID: <auhLMExBiCspLd49@Mac.lan>
+References: <20261030132419.84264-3-roger@xenproject.org>
+ <20261102074042.178236-1-chunjie.zhu@citrix.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/3] common: introduce "brk" allocator
-To: George Dunlap <dunlapg@umich.edu>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Teddy Astie <teddy.astie@vates.tech>
-References: <8ad3beb3-af5a-477b-af97-614edb22631a@suse.com>
- <4fc90702-fb9a-4f96-88f0-35bd3b4857f4@suse.com>
- <CAFLBxZZ5i9E6P_Gbt79coQikRG2uscxGRb+yAs2++U_Mkku9_w@mail.gmail.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <CAFLBxZZ5i9E6P_Gbt79coQikRG2uscxGRb+yAs2++U_Mkku9_w@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c201ff/1793606975-F78BE2A1-1F5ED1BF/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 4519
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+In-Reply-To: <20261102074042.178236-1-chunjie.zhu@citrix.com>
+X-Spam-Status: No, score=-16.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 29.10.2026 22:40, George Dunlap wrote:
-> On Wed, Oct 14, 2026 at 2:02 PM Jan Beulich <jbeulich@suse.com> wrote:
->> --- /dev/null
->> +++ b/xen/arch/x86/include/asm/brk.h
->> @@ -0,0 +1,23 @@
->> +/* SPDX-License-Identifier: GPL-2.0-or-later */
->> +#ifndef X86_BRK_H
->> +#define X86_BRK_H
->> +
->> +static inline unsigned long brk_adjust_start(unsigned long start)
->> +{
->> +    unsigned int subsys;
->> +
->> +    /*
->> +     * Only xen.efi will have the symbol __subsystem__ available, and it'll
->> +     * be non-zero (10) there.  In ELF the symbol will be undefined, and
->> +     * hence zero will be loaded into the register.
->> +     */
->> +    asm ( ".weak __subsystem__; mov $__subsystem__, %0" : "=r" (subsys) );
->> +
->> +    /* using_2M_mapping() isn't available here. */
->> +    if ( IS_ENABLED(CONFIG_XEN_ALIGN_2M) || subsys )
->> +        start = PAGE_ALIGN_2M(start);
+On Mon, Nov 02, 2026 at 03:40:42PM +0800, chunjie.zhu@citrix.com wrote:
+> On Fri, Oct 30, 2026 at 02:24:19 PM, Roger Pau Monne <roger@xenproject.org> wrote:
 > 
-> This seems a bit fragile: As it happens this corresponds to the clip
-> to brk_end in setup.c in patch 2, but if it didn't, then the boundary
-> in the resulting e820 reservation and what gets unmapped in
-> brk_free_unsed() wouldn't match.
+> > The current logic syncs the APs' TSC with the BSP both at reset and when
+> > setting the vCPU state.  This doesn't match hardware behavior, where APs
+> > are only in sync at platform start.
 > 
-> Claude seems to think you could make using_2M_mapping() available
-> here; and then brk_adjust_start() becomes return using_2M_mapping() ?
-> PAGE_ALIGN_2M(start) : start.  That drops the ASM, and the comment
-> about the linker producing a bogus relocation.  2/3 could then do
-> brk_end = brk_adjust_start(brk_cease()), and guaranteeing that the two
-> are the same.
-
-I don't think exposing using_2M_mapping() globally would be a good idea.
-
->> --- /dev/null
->> +++ b/xen/common/brk.c
->> @@ -0,0 +1,74 @@
->> +/* SPDX-License-Identifier: GPL-2.0-or-later */
->> +
->> +#include <xen/brk.h>
->> +#include <xen/efi.h>
->> +#include <xen/lib.h>
->> +#include <xen/mm.h>
->> +#include <xen/page-defs.h>
->> +
->> +#if __has_include(<asm/brk.h>)
->> +# include <asm/brk.h>
->> +#endif
->> +
->> +extern char __brk_start[];
->> +extern const char __bss_end[];
->> +
->> +static unsigned long __initdata allocated;
->> +static bool __initdata finished;
->> +
->> +void *__init brk_alloc(size_t size)
->> +{
->> +    void *ptr;
->> +
->> +    if ( finished )
->> +        return NULL;
->> +
->> +    /* Allocations PAGE_SIZE and up will be page-aligned. */
->> +    if ( size >= PAGE_SIZE )
->> +        allocated = ROUNDUP(allocated, PAGE_SIZE);
->> +
->> +    ptr = __brk_start + allocated;
->> +
->> +    allocated += ROUNDUP(size, sizeof(void *));
->> +
->> +    if ( allocated > __bss_end - __brk_start )
->> +    {
->> +        printk_once_init(
->> +            "%pS: over-sized BRK request: %zu bytes\n",
->> +            __builtin_extract_return_addr(__builtin_return_address(0)),
->> +            size);
->> +        return NULL;
->> +    }
+> > Move the TSC sync so it's done in hvm_vcpu_initialise(), that's called a
+> > single time at vCPU creation.  This matches the hardware behavior.
+> > INIT-SIPI and VCPUOP_initialise no longer re-sync a vCPU's TSC to vCPU 0's.
+> >
+> > On migration the TSC offset for offline vCPUs is not transferred
+> > (hvm_save_cpu_ctxt() skips offline vCPUs).  To avoid an unexpected skew
+> > synchronize offline vCPUs with the first online vCPU, taking into account
+> > the TSC_ADJUST value.
+> >
+> > The clearing of TSC_ADJUST is also made consistent with hardware behavior:
+> > clear it on S3 resume, but not across an INIT-SIPI or VCPUOP_initialise.
+> > Additionally, on S3 resume start all vCPUs from a shared TSC reading, so
+> > they are in sync.
+> >
+> > Fixes: c31f8336e64e ("[HVM] Initialise AP TSC to same as BP TSC.")
 > 
-> You bump the global `allocated` variable here before the check, and
-> don't reset it afterwards.   All future allocation attempts will
-> continue to bump this value, and
-> continue to fail.  So now allocated + brk_start is past _bbs_end,
-> brk_cease() will return something past bss_end, and (in patch 2) pass
-> that as reserve_e820_ram().  So now, so far from reducing the size
-> reserved to Xen by , we may be *increasing* the size reserved to Xen
-> with unused pages.  Worse, if it ends up overshooting the region Xen
-> is in, then reserve_e820_ram() will fail, and the host will panic.
+> This looks wrong.  c31f8336e64e only added the sync to hvm_bringup_ap(),
+> which no longer exists.  The code removed here comes from bcba667e12e3
+> (INIT-SIPI) and 192df6f9122d (VCPUOP_initialise).
+
+TBH it's a long tail of code movement.  The code in hvm_bringup_ap()
+was latter moved into hvm_vcpu_initialise(), hence why that commit is
+used as the Fixes tag.  Note that previous to c31f8336e64e the TSC
+sync was not applied, as the chunk was protected with #if 0.
+
+
+> > Fixes: 6e0336351ed9 ("x86: Implement TSC adjust feature for HVM guest")
+> > Signed-off-by: Roger Pau Monné <roger@xenproject.org>
+> > ---
+> >  xen/arch/x86/hvm/domain.c |  5 -----
+> >  xen/arch/x86/hvm/hvm.c    | 19 +++++++++++--------
+> >  xen/arch/x86/hvm/save.c   | 34 ++++++++++++++++++++++++++++++++--
+> >  xen/arch/x86/time.c       |  5 ++---
+> >  4 files changed, 45 insertions(+), 18 deletions(-)
+> >
+> > diff --git a/xen/arch/x86/hvm/domain.c b/xen/arch/x86/hvm/domain.c
+> > index 978d8b222256..71f49ec7ce9f 100644
+> > --- a/xen/arch/x86/hvm/domain.c
+> > +++ b/xen/arch/x86/hvm/domain.c
+> > @@ -312,11 +312,6 @@ int arch_set_info_hvm_guest(struct vcpu *v, const struct vcpu_hvm_context *ctx)
+> >      hvm_set_segment_register(v, x86_seg_es, &es);
+> >      hvm_set_segment_register(v, x86_seg_tss, &tr);
+> >
+> > -    /* Sync AP's TSC with BSP's. */
+> > -    v->arch.hvm.cache_tsc_offset =
+> > -        d->vcpu[0]->arch.hvm.cache_tsc_offset;
+> > -    hvm_set_tsc_offset(v, v->arch.hvm.cache_tsc_offset);
+> > -
+> >      paging_update_paging_modes(v);
+> >
+> >      hvmemul_cancel(v);
+> > diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+> > index ef9c7cd05777..81e90cc8fc8e 100644
+> > --- a/xen/arch/x86/hvm/hvm.c
+> > +++ b/xen/arch/x86/hvm/hvm.c
+> > @@ -1667,6 +1667,12 @@ int hvm_vcpu_initialise(struct vcpu *v)
+> >          /* Init guest TSC to start from zero. */
+> >          hvm_set_guest_tsc(v, 0);
+> >      }
+> > +    else
+> > +    {
+> > +        /* Start in step with vCPU 0, as all CPUs do at power-on. */
+> > +        v->arch.hvm.cache_tsc_offset = d->vcpu[0]->arch.hvm.cache_tsc_offset;
+> > +        hvm_set_tsc_offset(v, v->arch.hvm.cache_tsc_offset);
+> > +    }
+> >
+> >      return 0;
+> >
+> > @@ -4021,13 +4027,6 @@ void hvm_vcpu_reset_state(struct vcpu *v, uint16_t cs, uint16_t ip)
+> >      hvm_set_segment_register(v, x86_seg_gdt, &reg);
+> >      hvm_set_segment_register(v, x86_seg_idt, &reg);
+> >
+> > -    /* Sync AP's TSC with BSP's. */
+> > -    v->arch.hvm.cache_tsc_offset =
+> > -        v->domain->vcpu[0]->arch.hvm.cache_tsc_offset;
+> > -    hvm_set_tsc_offset(v, v->arch.hvm.cache_tsc_offset);
+> > -
+> > -    v->arch.hvm.msr_tsc_adjust = 0;
+> > -
+> >      paging_update_paging_modes(v);
+> >
+> >      v->arch.flags |= TF_kernel_mode;
+> > @@ -4079,9 +4078,13 @@ static void hvm_s3_resume(struct domain *d)
+> >      if ( test_and_clear_bool(d->arch.hvm.is_s3_suspended) )
+> >      {
+> >          struct vcpu *v;
+> > +        uint64_t at_tsc = rdtsc();
+> >
+> >          for_each_vcpu( d, v )
+> > -            hvm_set_guest_tsc(v, 0);
+> > +        {
+> > +            v->arch.hvm.msr_tsc_adjust = 0;
+> > +            hvm_set_guest_tsc_fixed(v, 0, at_tsc);
+> > +        }
+> >          domain_unpause(d);
+> >      }
+> >  }
+> > diff --git a/xen/arch/x86/hvm/save.c b/xen/arch/x86/hvm/save.c
+> > index 8ab64057064e..65ebfd384d69 100644
+> > --- a/xen/arch/x86/hvm/save.c
+> > +++ b/xen/arch/x86/hvm/save.c
+> > @@ -289,6 +289,7 @@ int hvm_load(struct domain *d, bool real, hvm_domain_context_t *h)
+> >  {
+> >      const struct hvm_save_header *hdr;
+> >      struct hvm_save_descriptor *desc;
+> > +    struct vcpu *v;
+> >      int rc;
+> >
+> >      if ( d->is_dying )
+> > @@ -302,8 +303,6 @@ int hvm_load(struct domain *d, bool real, hvm_domain_context_t *h)
+> >      rc = arch_hvm_check(d, hdr);
+> >      if ( real )
+> >      {
+> > -        struct vcpu *v;
+> > -
+> >          ASSERT(!rc);
+> >
+> >          /*
+> > @@ -341,6 +340,37 @@ int hvm_load(struct domain *d, bool real, hvm_domain_context_t *h)
+> >              /* Reset cursor for hvm_load(, true, ). */
+> >              if ( !real )
+> >                  h->cur = 0;
+> > +            else
+> > +            {
+> > +                const struct vcpu *base = NULL;
+> > +
+> > +                /*
+> > +                 * Offline vCPUs have no CPU record.  Adjust the TSC offset
+> > +                 * based on the first online vCPU, taking into account
+> > +                 * TSC_ADJUST which is saved regardless of whether the vCPU is
+> > +                 * offline.
+> > +                 */
+> > +                for_each_vcpu(d, v)
+> > +                    if ( !test_bit(_VPF_down, &v->pause_flags) )
+> > +                    {
+> > +                        base = v;
+> > +                        break;
+> > +                    }
+> > +
+> > +                if ( !base )
+> > +                    return 0;
 > 
-> This should probably use a local variable, then set the global
-> variable after we've determined that the check has succeeded.
+> This silently skips the offline vCPUs.  If that ever causes a problem it
+> will be hard to diagnose, so please add a comment or a log message.
 
-Could be done, but did Claude also realize that failure to set aside
-enough space so allocations can't fail is, effectively, a fatal bug?
-The printk_once_init() isn't a panic() here merely because panic()
-isn't going to work very well when still in EFI boot services: We
-shouldn't halt the system there, we should only yield control back to
-EFI (such that another boot attempt can be made). See patch 2.
+Is it a realistic situation to have a stream with all vCPUs offline?
+I was about to add an ASSERT_UNREACHABLE() here, but that's not a wise
+move since the restore stream is external, and could be crafted in
+such a way.  Also, if there's no online vCPUs, does it matter to sync
+the vCPUs' TSC?
 
-> The other thing Claude points out is that is_xen_fixed_mfn() isn't
-> updated, so if ever any of these pages want to be offlined for any
-> reason, it will be blocked, claiming that they're part of Xen, even if
-> they've already been assigned to a guest.  This is a pre-existing
-> situation that is extended by this patch.
-
-This indeed needs taking care of, albeit in patch 2. It's not clear
-to me though why you (they?) say this would be a pre-existing
-situation. The use of __2M_rwdata_end there looks correct to me prior
-to this series.
-
-Jan
+Thanks, Roger.
 
