@@ -2,89 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 32DC5606A327
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 05:50:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 952EA606A326
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 07:41:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=ipcMkHHV
-Received: from list by lists.xenproject.org with outflank-mailman.1467433.1676749 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=selector1 header.b=jxfg3+vL
+Received: from list by lists.xenproject.org with outflank-mailman.1467794.1676836 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNkw9-0002jQ-HP; Mon, 02 Nov 2026 05:50:29 +0000
+	id 1xNmf8-0005nv-Ue; Mon, 02 Nov 2026 07:41:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1467433.1676749; Mon, 02 Nov 2026 05:50:29 +0000
+Received: by outflank-mailman (output) from mailman id 1467794.1676836; Mon, 02 Nov 2026 07:41:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNkw9-0002gx-73; Mon, 02 Nov 2026 05:50:29 +0000
-Received: by outflank-mailman (input) for mailman id 1467433;
- Sun, 01 Nov 2026 20:10:45 +0000
+	id 1xNmf8-0005no-RL; Mon, 02 Nov 2026 07:41:02 +0000
+Received: by outflank-mailman (input) for mailman id 1467794;
+ Mon, 02 Nov 2026 07:41:01 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <armbru@redhat.com>) id 1xNbt7-0001on-7G
- for xen-devel@lists.xenproject.org; Sun, 01 Nov 2026 20:10:45 +0000
+ (envelope-from <chunjie.zhu@citrix.com>) id 1xNmf7-0005nf-Be
+ for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 07:41:01 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xNbt6-007BZx-KR
- for xen-devel@lists.xenproject.org; Sun, 01 Nov 2026 21:10:44 +0100
-Received: from [10.42.69.2] (helo=localhost)
+ id 1xNmf6-008UYS-6A
+ for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 08:41:00 +0100
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <armbru@redhat.com>)
- id 6ae79c63-bab6-0a2a0a5309dd-0a2a4502d854-26
- for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 21:10:44 +0100
-Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <armbru@redhat.com>)
- id 6ae79cc3-6ca4-0a2a45020019-aa0a857cec65-3
- for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 21:10:44 +0100
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-400-NyKQmjqwPNCy-wEX0umkxA-1; Sun,
- 01 Nov 2026 15:10:39 -0500
-Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 872EA1801324; Sun,  1 Nov 2026 20:10:34 +0000 (UTC)
-Received: from blackfin.pond.sub.org (unknown [10.44.22.2])
- by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 853CA30002CF; Sun,  1 Nov 2026 20:10:31 +0000 (UTC)
-Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 0F7E521E6A04; Sun, 01 Nov 2026 21:10:29 +0100 (CET)
-Resent-To: 17746591750@163.com, alistair@alistair23.me, graf@amazon.com,
- FangSheng.Huang@amd.com, michael.roth@amd.com, jamin_lin@aspeedtech.com,
- kane_chen@aspeedtech.com, palmer@dabbelt.com, rbolshakov@ddn.com,
- foss@defmacro.it, sebastian.huber@embedded-brains.de, fam@euphon.net,
- jiaxun.yang@flygoat.com, lizhijian@fujitsu.com, atar4qemu@gmail.com,
- edgar.iglesias@gmail.com, jasowangio@gmail.com, liwei1518@gmail.com,
- npiggin@gmail.com, zhangckid@gmail.com, titusr@google.com,
- wuhaotsh@google.com, arei.gonglei@huawei.com, berto@igalia.com,
- mark.cave-ayland@ilande.co.uk, junjie.cao@intel.com, zhao1.liu@intel.com,
- its@irrelevant.dk, clg@kaod.org, conor@kernel.org, david@kernel.org,
- jic23@kernel.org, kbusch@kernel.org, mchehab+huawei@kernel.org,
- sstabellini@kernel.org, peter.maydell@linaro.org,
- richard.henderson@linaro.org, pasic@linux.ibm.com,
- zhiwei_liu@linux.alibaba.com, rathc@linux.ibm.com, zhenwei.pi@linux.dev,
- stefanb@linux.vnet.ibm.com, adityag@linux.ibm.com,
- xen-devel@lists.xenproject.org, alifm@linux.ibm.com, luc@lmichel.fr,
- lixianglai@loongson.cn, maobibo@loongson.cn, pbarbuda@microsoft.com,
- yoshinori.sato@nifty.com, qemu-arm@nongnu.org, qemu-block@nongnu.org,
- qemu-devel@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
- qemu-s390x@nongnu.org, john.levon@nutanix.com, thanos.makatos@nutanix.com,
- kfting@nuvoton.com, den@openvz.org, elena.ufimtseva@oracle.com,
- jag.raman@oracle.com, daniel.barboza@oss.qualcomm.com,
- philmd@oss.qualcomm.com, pierrick.bouvier@oss.qualcomm.com,
- phil@philjordan.eu, tangtao1634@phytium.com.cn,
- chao.liu@processmission.com, jiri@resnulli.us, sam@rfc1149.net,
- anisa.su@samsung.com, alex@shazbot.org, farosas@suse.de,
- mohamed@unpredictable.fr, kvm@vger.kernel.org, linux-cxl@vger.kernel.org,
- alistair.francis@wdc.com, anthony@xenproject.org, amachhiw@linux.ibm.com,
- borntraeger@linux.ibm.com, brueckner@linux.ibm.com, farman@linux.ibm.com,
- harshpb@linux.ibm.com, iii@linux.ibm.com, jjherne@linux.ibm.com,
- milesg@linux.ibm.com, mjrosato@linux.ibm.com
-Resent-From: Markus Armbruster <armbru@redhat.com>
-Resent-Date: Sun, 01 Nov 2026 21:10:29 +0100
-Resent-Message-ID: <87mrrs1fey.fsf@pond.sub.org>
+ (envelope-from <chunjie.zhu@citrix.com>)
+ id 6ae83e81-bab6-0a2a0a5309dd-0a2a4506a998-30
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 08:41:00 +0100
+Received: from [52.101.52.46]
+ (helo=BL2PR02CU003.outbound.protection.outlook.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <chunjie.zhu@citrix.com>)
+ id 6ae83e8a-195a-0a2a45060019-3465342ede1e-3
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 08:40:59 +0100
+Received: from LVXPR03MB989161.namprd03.prod.outlook.com
+ (2603:10b6:408:37e::6) by DS3PR03MB873329.namprd03.prod.outlook.com
+ (2603:10b6:8:43b::18) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.569.12; Mon, 2 Nov
+ 2026 07:40:56 +0000
+Received: from LVXPR03MB989161.namprd03.prod.outlook.com
+ ([fe80::f728:f8a9:4e0c:d902]) by LVXPR03MB989161.namprd03.prod.outlook.com
+ ([fe80::f728:f8a9:4e0c:d902%5]) with mapi id 15.21.0569.011; Mon, 2 Nov 2026
+ 07:40:56 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -93,144 +52,287 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:Resent-To:Resent-From:Resent-Message-ID:In-Reply-To:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1793563843;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:resent-to:
-	 resent-from:resent-message-id:in-reply-to:in-reply-to:  references:references;
-	bh=ky1zk6thScAqYqHATy6gr4bYU7NPm4fM3/3dmXxNTDM=;
-	b=ipcMkHHVNn4QrHMLx3E6fwiF5lHC+SP6F1aNi94Fo1duxua91vv1JmnxAFyxUdHfdJRfvE
-	NUITM9fxHGgEZvpT+V5qvSJf18aigeOCGl5ER/mCTPXMFmZ/2CpwHtuMtPgEdgRi5S+2XP
-	YeOfxj5AMWlEm+jlaqM2HjZQtONJY2o=
-X-MC-Unique: NyKQmjqwPNCy-wEX0umkxA-1
-X-Mimecast-MFC-AGG-ID: NyKQmjqwPNCy-wEX0umkxA_1793563835
-From: Markus Armbruster <armbru@redhat.com>
-To: =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>
-Cc: Markus Armbruster <armbru@redhat.com>,  qemu-devel@nongnu.org,  Michael
- Roth <michael.roth@amd.com>,  John Snow <jsnow@redhat.com>,  Peter Maydell
- <peter.maydell@linaro.org>,  Mauro Carvalho Chehab
- <mchehab+huawei@kernel.org>,  Pierrick Bouvier
- <pierrick.bouvier@oss.qualcomm.com>,  Paolo Bonzini <pbonzini@redhat.com>,
-  Daniel P. =?utf-8?Q?Berrang=C3=A9?= <berrange@redhat.com>,  Kostiantyn
- Kostiuk
- <kkostiuk@redhat.com>,  Eric Blake <eblake@redhat.com>,  David Hildenbrand
- <david@kernel.org>,  Igor Mammedov <imammedo@redhat.com>,  "Edgar E.
- Iglesias" <edgar.iglesias@gmail.com>,  Jason Wang <jasowangio@gmail.com>,
-  Marcelo Tosatti <mtosatti@redhat.com>,  kvm@vger.kernel.org,  Alberto
- Garcia <berto@igalia.com>,  Kevin Wolf <kwolf@redhat.com>,  Hanna Reitz
- <hreitz@redhat.com>,  Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?=
- <philmd@oss.qualcomm.com>,
-  Zhao Liu <zhao1.liu@intel.com>,  Jonathan Cameron <jic23@kernel.org>,
-  Junjie Cao <junjie.cao@intel.com>,  Anisa Su <anisa.su@samsung.com>,
-  Elena Ufimtseva <elena.ufimtseva@oracle.com>,  Jagannathan Raman
- <jag.raman@oracle.com>,  John Levon <john.levon@nutanix.com>,  Thanos
- Makatos <thanos.makatos@nutanix.com>,  =?utf-8?Q?C=C3=A9dric?= Le Goater
- <clg@redhat.com>,
-  Cornelia Huck <cohuck@redhat.com>,  Eric Farman <farman@linux.ibm.com>,
-  Matthew Rosato <mjrosato@linux.ibm.com>,  Richard Henderson
- <richard.henderson@linaro.org>,  Ilya Leoshkevich <iii@linux.ibm.com>,
-  qemu-block@nongnu.org,  linux-cxl@vger.kernel.org,
-  qemu-s390x@nongnu.org,  "Michael S. Tsirkin" <mst@redhat.com>,  Sergio
- Lopez <slp@redhat.com>,  qemu-arm@nongnu.org,  Palmer Dabbelt
- <palmer@dabbelt.com>,  Alistair Francis <alistair.francis@wdc.com>,
-  Weiwei Li <liwei1518@gmail.com>,  Daniel Henrique Barboza
- <daniel.barboza@oss.qualcomm.com>,  Liu Zhiwei
- <zhiwei_liu@linux.alibaba.com>,  Chao Liu <chao.liu@processmission.com>,
-  qemu-riscv@nongnu.org,  Song Gao <17746591750@163.com>,  Bibo Mao
- <maobibo@loongson.cn>,  Xianglai Li <lixianglai@loongson.cn>,  Jiaxun Yang
- <jiaxun.yang@flygoat.com>,  Pedro Barbuda <pbarbuda@microsoft.com>,
-  Mohamed Mediouni <mohamed@unpredictable.fr>,  Nicholas Piggin
- <npiggin@gmail.com>,  Harsh Prateek Bora <harshpb@linux.ibm.com>,  Amit
- Machhiwal <amachhiw@linux.ibm.com>,  qemu-ppc@nongnu.org,  Zhang Chen
- <zhangckid@gmail.com>,  Li Zhijian <lizhijian@fujitsu.com>,  Alistair
- Francis <alistair@alistair23.me>,  Alexander Graf <graf@amazon.com>,
-  "Gonglei (Arei)" <arei.gonglei@huawei.com>,  zhenwei pi
- <zhenwei.pi@linux.dev>,  Ani Sinha <anisinha@redhat.com>,  Luc Michel
- <luc@lmichel.fr>,  =?utf-8?Q?C=C3=A9dric?= Le Goater <clg@kaod.org>,  Jamin
- Lin
- <jamin_lin@aspeedtech.com>,  Kane Chen <kane_chen@aspeedtech.com>,  Samuel
- Tardieu <sam@rfc1149.net>,  "Denis V. Lunev" <den@openvz.org>,  FangSheng
- Huang <FangSheng.Huang@amd.com>,  Tyrone Ting <kfting@nuvoton.com>,  Hao
- Wu <wuhaotsh@google.com>,  Keith Busch <kbusch@kernel.org>,  Klaus Jensen
- <its@irrelevant.dk>,  Jesper Devantier <foss@defmacro.it>,  Aditya Gupta
- <adityag@linux.ibm.com>,  Glenn Miles <milesg@linux.ibm.com>,  Conor
- Dooley <conor@kernel.org>,  Sebastian Huber
- <sebastian.huber@embedded-brains.de>,  Halil Pasic <pasic@linux.ibm.com>,
-  Christian Borntraeger <borntraeger@linux.ibm.com>,  Jason Herne
- <jjherne@linux.ibm.com>,  Titus Rwantare <titusr@google.com>,  Stefano
- Stabellini <sstabellini@kernel.org>,  Anthony PERARD
- <anthony@xenproject.org>,  Peter Xu <peterx@redhat.com>,  Chinmay Rath
- <rathc@linux.ibm.com>,  Hendrik Brueckner <brueckner@linux.ibm.com>,
-  xen-devel@lists.xenproject.org,  Roman Bolshakov <rbolshakov@ddn.com>,
-  Phil Dennis-Jordan <phil@philjordan.eu>,  Fam Zheng <fam@euphon.net>,
-  Farhan Ali <alifm@linux.ibm.com>,  Alex Williamson <alex@shazbot.org>,
-  Tao Tang <tangtao1634@phytium.com.cn>,  Stefan Berger
- <stefanb@linux.vnet.ibm.com>,  Fabiano Rosas <farosas@suse.de>,  Mark
- Cave-Ayland <mark.cave-ayland@ilande.co.uk>,  Artyom Tarasenko
- <atar4qemu@gmail.com>,  Yoshinori Sato <yoshinori.sato@nifty.com>,  Jiri
- Pirko <jiri@resnulli.us>,  Eric Auger <eric.auger@redhat.com>,  Laurent
- Vivier <lvivier@redhat.com>
-Subject: Re: [PATCH v7 38/65] qom: convert scalar properties to QAPI-aware
- registration
-In-Reply-To: <CAMxuvaya+Tihnwjf8JNjhmhBMwE7XpTF8zPL7tbfb8DFiAV62g@mail.gmail.com>
-	(=?utf-8?Q?=22Marc-Andr=C3=A9?= Lureau"'s message of "Fri, 30 Oct 2026
- 13:01:17 +0400")
-References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
-	<20261020-qom-qapi-v7-38-431a86b02b58@redhat.com>
-	<87y0bfa81j.fsf@pond.sub.org>
-	<CAMxuvaya+Tihnwjf8JNjhmhBMwE7XpTF8zPL7tbfb8DFiAV62g@mail.gmail.com>
-Date: Fri, 30 Oct 2026 10:31:46 +0100
-Message-ID: <87bj8ba60t.fsf@pond.sub.org>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-Id:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=EXSlcyAAMvOqUm+78u5BHC8IKK4xPg0czm0XK+Tmim4t2eNtfR6XSjVPW/3nt4haQ0OrzzWX6sK/CIGlBafr1/M5kt86hXPlEFqS2LPZ7ElWYZXvxQPa7qXTpWhlYUaJFTVNUStM2ne8t+f2URHoF0gAPX3gPprpKHkbmKKMYOSvmP2NRryLi3mBA14j8LNUVSejjNAIdzq5llzTzHYlC859RTU2F6lZTaoGOwtaCSKPLSD0seOswuSUuclYFKxNqI7lTwaeW71RH9k2fKWCJDQLhHJOymKyLXiehZOUDrpG98CT/moyDbhFoq7LfUhLsB2JYs6hZCzg0A95tgpsHw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=OR0Ckv7xEebSlla+f9OO1sjMyqjy6XAa0wMxax9/WG4=;
+ b=gFvxVyHUY65PhfkpvXmfi42SIuz3LXwMvc1nszUbfb0V7XGReahPUrl2GKqNxOWtju9fmMUc57yqNTgriEjLHFcd0iW9WDofZ8ZwlTPpogsniny5/bYXIqNREPPkLeVOapgNtdxcm+ahrcY6l7zXfc+PvFGyDrtaoaijtR+fEIF8HQQG2/Da8aDjcOreW5ojRFzVJZYpuNIP9mPztTBXkPf0+NHtXHOgs71398zV6DKzUwLFc9ArDZmRDyxLTmvtLaHh8Otl9QMfgv+zpb+dcNNQT/XYDMAnwr1lbNMKSuUICcvo9WOaUpuFyEVye30nh2S4b73kuPbrl0tNZhKTjQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=OR0Ckv7xEebSlla+f9OO1sjMyqjy6XAa0wMxax9/WG4=;
+ b=jxfg3+vLV2+1pRGf8CWPwF2PfzN/ULrN09HfcJxxynVvytelbzmvwhTw2dfTM9CS8g+Zq3FxBkGcLkXjI+LGwcBKl97wBCX3iOI6AnYpYLDiqy9Ghl3Q3gMY6W7EZpLgfI1HmOUmZ7twMDdxtjq6p14cmnUOjtj+POGOd20VCEE=
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+From: chunjie.zhu@citrix.com
+To: roger@xenproject.org
+Cc: andrew.cooper3@citrix.com,
+	jbeulich@suse.com,
+	teddy.astie@vates.tech,
+	xen-devel@lists.xenproject.org
+Subject: [PATCH 2/2] x86/hvm: sync APs TSC with the BSP at creation only
+Date: Mon,  2 Nov 2026 15:40:42 +0800
+Message-Id: <20261102074042.178236-1-chunjie.zhu@citrix.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20261030132419.84264-3-roger@xenproject.org>
+References: <20261030132419.84264-3-roger@xenproject.org>
+Content-Type: text/plain; charset=yes
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: JN3P275CA0122.ZAFP275.PROD.OUTLOOK.COM (2603:1086:0:d1::15)
+ To LVXPR03MB989161.namprd03.prod.outlook.com (2603:10b6:408:37e::6)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: yuyzVa-YXpsZFrQ8NjNo5CLvsY9AR-Cw81GZN1UXIaY_1793563835
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-720697/1793563844-F04A62AC-519362EB/0/0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: LVXPR03MB989161:EE_|DS3PR03MB873329:EE_
+X-MS-Office365-Filtering-Correlation-Id: b9e3a139-4041-4385-90e3-08df38b4a148
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|366016|1800799024|23010399003|10067099003|18002099003|22082099003|56012099006|11063799006|261021121427099003|261021123027099003|261026121527099003|261026140227099003|261022075727099003|261022105027099003|261009223027099003|261028144727099003;
+X-Microsoft-Antispam-Message-Info:
+	9AUTGU/sWTlqiVO3dXywcko0PGpwVyhskFxBsQRjMuk5yXrFNJGuBt0I+MVhCxxUR0I5UqP1vfUumUEJnuCvDVr7Ea/yODXEf0VrQIGK5NQQWYYV2Uxy24OQBq1qvVWCWt7OqMQ08+LWXmXu33cf1bCQVeR9fcpxXZcgWCOd7c5f7kUkMZs+471VF+pPivXdxLntTrrYdf/WJw2OI+h3hEDlYL+LA+DPE1DA9RcSJd0Rym0SXRKG84tEk6uLmImxndKw5YVGwNQaDWEa1KNoNNf2p83Wb0qknaUn4EvAGjwnAtScLJP1y9hcxFeTX0B3ZuQfXUrKV77SPuE4JouDKG3tHFS45lU5tauKX9Sz+OjcGDwbP8fT3hiSPttv/d5uTDpYRz3yXUcS8frLnZ/wCi20LEDp61vej1K8M0ge9BwIUalYmR4ZHqYIwJUHN0y1oByI+Es5msBj2KSz5UrIysef/R/I2teuXxbk5GOZ9mXpobWqUYNY+kYa+A3t7YBN9efY5IKqEPpJg+7qniUrHvoCs3BVzZ8MQOf15j+8kIz1bXaSuq3rpvqhyC8a5oFaqytXiUhwfSHPB+LeIs+jRSV6TX9O0dBeWnKqC0ev54GTJ3J7JHldr6ARxGsEG2d8PXq0ltTApCQH5Nt2TQXF+74Rc/kLbskIVn86MfrQzHU=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LVXPR03MB989161.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(23010399003)(10067099003)(18002099003)(22082099003)(56012099006)(11063799006)(261021121427099003)(261021123027099003)(261026121527099003)(261026140227099003)(261022075727099003)(261022105027099003)(261009223027099003)(261028144727099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?C0ZncV+UitzTs9Y3Eyy1C2s6auZiCas96b1f4QnXM+gllhSrLkf3NyIakZdA?=
+ =?us-ascii?Q?6H07zvtEkNNMOq9NCE0LpCtqVffuD7tdP1m3KGFNhKEtYAsGrQqPLjg5SUwT?=
+ =?us-ascii?Q?JGAhJwgfXizC54jWIodorSlF269xeMb4MMkLRcnsMQtm+M5KXDppSkQtpRot?=
+ =?us-ascii?Q?kttyW9AAXOqYLXG+UO99CW6a7YmKy4xkw31VkhjCjhAQkiTIZkDsSW65kLwU?=
+ =?us-ascii?Q?WKTP04apfHUBdssRDLmrQEsX8V0jEU0j0naRfGimvBXZ8yUvuP8MDfi+ssCl?=
+ =?us-ascii?Q?PqmrjpnZESFCXA2pX30RlD8u/oPFZsvK2/j/6xCMA/6VZOtMJqQtfDBOeZoN?=
+ =?us-ascii?Q?qzw+/6gtW9iQdLuCVDkjMbC/bxXNfHdVH+BHkCHizaRnXfobJFiltB9/ezI9?=
+ =?us-ascii?Q?phaNHvMrwkJFzTom+bJ4D9feEZ/0fkCwmYpxpKwJOC6WlK5HtGHp3fWm8p0+?=
+ =?us-ascii?Q?2py7o7QatxocVylABdAnNK6JBPfGYquI3KJs8MsbegoQJpu5xp029UVnVb2D?=
+ =?us-ascii?Q?ms2V0ilGkK6gfT5CgTovOqojNvTTLZAcNuXAuq+pxtYA09EU00bucKypvOFZ?=
+ =?us-ascii?Q?rs6ZTHKBgMpdKFn8s8w3QC96Wrhe24vEHEvix2xhhJv2r33KBV6mfzDvBsjt?=
+ =?us-ascii?Q?5bs7NOl+k9NUSW+RBuzWyJAP9D2OOzBH1p4u82m4X6uxBhVwrDj+KRVHeVQk?=
+ =?us-ascii?Q?T/1qG8qpBArN+h8fsaf5wokPFqQGw1Q4leuW7FbpiFxqCIn1P9WjMtDFaZVe?=
+ =?us-ascii?Q?IbLHaMF0CDAE2IS9OipiH5cgyCLM6xg4tArkiZuSNxr1SUgi0n4UhJik6xJV?=
+ =?us-ascii?Q?jUN6WDo/DuzXUT2xL4IppnHMr1v/wtU9tYDV907uOD4Fw8VLe8QbfEYPvcRy?=
+ =?us-ascii?Q?D2s+ZtOzBLmZNhIf1I4hZHGpIGpnSYaxajWGrjIvsrI8/ofpiSQguNSKNGz0?=
+ =?us-ascii?Q?Uf8mheU2FeOmLOr2UQuH28hrpLV/L3EQclHL0BnriMk1EXhRD4C8vcj12jTb?=
+ =?us-ascii?Q?l992JMfBc0PUsY4seCx4VAL9anijLJ65G5AV88Gf8MTt5zekdzErNUva/JZX?=
+ =?us-ascii?Q?aePHtUiMAyeBwHp+3GaequevbxzvfzpETasNSs+hmTTHpYy+gjGfDKRxsn8o?=
+ =?us-ascii?Q?wVSJWD8C88hb1dgy+6Nh8jKz5deDI+HrRyRGiV2zoW1cl6+Nse7GVwvPru2X?=
+ =?us-ascii?Q?UOp9ChwugNdFgl34KoRGCdluUEjRzAQnHgkcJgfLYQCOCbLwUqtVL2h9fwKO?=
+ =?us-ascii?Q?uEyOod3fL5q5fj4vkBvRk6xM69bh9twh8bN8WY8FScVkopG8fajKpthTo7aQ?=
+ =?us-ascii?Q?Z32wRbRiQly91ECgTBWweEdF9F0SirmbN5GMEsJnfEMGFy6J5qjD3G+HemZq?=
+ =?us-ascii?Q?7vmogN6j1Ngk6ddxhTg0311sx4q2C813quukVpmh9I/fOemf25Tr89XWKp1K?=
+ =?us-ascii?Q?xGdGtJU3r4OaGKWldD4ZDnXI83ZpUqvfIHYaJ7fJVdOBtxVmKc5NRAtJOqdQ?=
+ =?us-ascii?Q?fWrZsqBj6Xi/LZ2kR8Xd3kqYdukufPyAFiWS3YAG6Cg+SFX2gifSFMt8aaxh?=
+ =?us-ascii?Q?TWe1GQ8wwesjnP+DWJn9BduuRU9c+aHyvhVgCbhQOYUbQK8XvtmJJVsALGKL?=
+ =?us-ascii?Q?bj+0Y51pzqlXuzNbDBoUGajKrJ3vPhsBZqGASGLAtblUcZAjFXh6f44BQfRI?=
+ =?us-ascii?Q?j5pi+6dH/N4sPASUWvLyaoW8LWYtRTgbXRzG/83H6PQxoxNrUz7M8GU70kgA?=
+ =?us-ascii?Q?9th0vTrwJQ=3D=3D?=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b9e3a139-4041-4385-90e3-08df38b4a148
+X-MS-Exchange-CrossTenant-AuthSource: LVXPR03MB989161.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Nov 2026 07:40:56.6150
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: c2EYLRfDwCltD4JyRDDkI5B0zLLuOtGc83LtJcp9tyHjm3F1i/dm8f7dUGTQCxNo4UFVwgg6fk+H+fTrznf0HQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS3PR03MB873329
+X-purgate-ID: tlsNG-16d1c6/1793605260-1F0C777B-794809F7/0/0
 X-purgate-type: clean
-X-purgate-size: 888
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-purgate-size: 7193
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=unavailable
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com> writes:
+On Fri, Oct 30, 2026 at 02:24:19 PM, Roger Pau Monne <roger@xenproject.org> wrote:
 
-> Hi
+> The current logic syncs the APs' TSC with the BSP both at reset and when
+> setting the vCPU state.  This doesn't match hardware behavior, where APs
+> are only in sync at platform start.
+
+> Move the TSC sync so it's done in hvm_vcpu_initialise(), that's called a
+> single time at vCPU creation.  This matches the hardware behavior.
+> INIT-SIPI and VCPUOP_initialise no longer re-sync a vCPU's TSC to vCPU 0's.
 >
-> On Fri, Oct 30, 2026 at 12:48=E2=80=AFPM Markus Armbruster <armbru@redhat=
-.com> wrote:
->>
->> Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com> writes:
->>
->> > Reviewed-by: Amit Machhiwal <amachhiw@linux.ibm.com>
->> > Signed-off-by: Markus Armbruster <armbru@redhat.com>
->> > Signed-off-by: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
->>
->> How did you create this patch?  It looks almost mechanical.
+> On migration the TSC offset for offline vCPUs is not transferred
+> (hvm_save_cpu_ctxt() skips offline vCPUs).  To avoid an unexpected skew
+> synchronize offline vCPUs with the first online vCPU, taking into account
+> the TSC_ADJUST value.
 >
-> Repeated grep / multi-cursor in zed iirc
+> The clearing of TSC_ADJUST is also made consistent with hardware behavior:
+> clear it on S3 resume, but not across an INIT-SIPI or VCPUOP_initialise.
+> Additionally, on S3 resume start all vCPUs from a shared TSC reading, so
+> they are in sync.
 >
->>
->> It misses a few conversions, almost certainly in code added since you
->> made this patch.  I can take care of them.
+> Fixes: c31f8336e64e ("[HVM] Initialise AP TSC to same as BP TSC.")
+
+This looks wrong.  c31f8336e64e only added the sync to hvm_bringup_ap(),
+which no longer exists.  The code removed here comes from bcba667e12e3
+(INIT-SIPI) and 192df6f9122d (VCPUOP_initialise).
+
+> Fixes: 6e0336351ed9 ("x86: Implement TSC adjust feature for HVM guest")
+> Signed-off-by: Roger Pau Monné <roger@xenproject.org>
+> ---
+>  xen/arch/x86/hvm/domain.c |  5 -----
+>  xen/arch/x86/hvm/hvm.c    | 19 +++++++++++--------
+>  xen/arch/x86/hvm/save.c   | 34 ++++++++++++++++++++++++++++++++--
+>  xen/arch/x86/time.c       |  5 ++---
+>  4 files changed, 45 insertions(+), 18 deletions(-)
 >
-> Not surprising after several months.
+> diff --git a/xen/arch/x86/hvm/domain.c b/xen/arch/x86/hvm/domain.c
+> index 978d8b222256..71f49ec7ce9f 100644
+> --- a/xen/arch/x86/hvm/domain.c
+> +++ b/xen/arch/x86/hvm/domain.c
+> @@ -312,11 +312,6 @@ int arch_set_info_hvm_guest(struct vcpu *v, const struct vcpu_hvm_context *ctx)
+>      hvm_set_segment_register(v, x86_seg_es, &es);
+>      hvm_set_segment_register(v, x86_seg_tss, &tr);
+>
+> -    /* Sync AP's TSC with BSP's. */
+> -    v->arch.hvm.cache_tsc_offset =
+> -        d->vcpu[0]->arch.hvm.cache_tsc_offset;
+> -    hvm_set_tsc_offset(v, v->arch.hvm.cache_tsc_offset);
+> -
+>      paging_update_paging_modes(v);
+>
+>      hvmemul_cancel(v);
+> diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+> index ef9c7cd05777..81e90cc8fc8e 100644
+> --- a/xen/arch/x86/hvm/hvm.c
+> +++ b/xen/arch/x86/hvm/hvm.c
+> @@ -1667,6 +1667,12 @@ int hvm_vcpu_initialise(struct vcpu *v)
+>          /* Init guest TSC to start from zero. */
+>          hvm_set_guest_tsc(v, 0);
+>      }
+> +    else
+> +    {
+> +        /* Start in step with vCPU 0, as all CPUs do at power-on. */
+> +        v->arch.hvm.cache_tsc_offset = d->vcpu[0]->arch.hvm.cache_tsc_offset;
+> +        hvm_set_tsc_offset(v, v->arch.hvm.cache_tsc_offset);
+> +    }
+>
+>      return 0;
+>
+> @@ -4021,13 +4027,6 @@ void hvm_vcpu_reset_state(struct vcpu *v, uint16_t cs, uint16_t ip)
+>      hvm_set_segment_register(v, x86_seg_gdt, &reg);
+>      hvm_set_segment_register(v, x86_seg_idt, &reg);
+>
+> -    /* Sync AP's TSC with BSP's. */
+> -    v->arch.hvm.cache_tsc_offset =
+> -        v->domain->vcpu[0]->arch.hvm.cache_tsc_offset;
+> -    hvm_set_tsc_offset(v, v->arch.hvm.cache_tsc_offset);
+> -
+> -    v->arch.hvm.msr_tsc_adjust = 0;
+> -
+>      paging_update_paging_modes(v);
+>
+>      v->arch.flags |= TF_kernel_mode;
+> @@ -4079,9 +4078,13 @@ static void hvm_s3_resume(struct domain *d)
+>      if ( test_and_clear_bool(d->arch.hvm.is_s3_suspended) )
+>      {
+>          struct vcpu *v;
+> +        uint64_t at_tsc = rdtsc();
+>
+>          for_each_vcpu( d, v )
+> -            hvm_set_guest_tsc(v, 0);
+> +        {
+> +            v->arch.hvm.msr_tsc_adjust = 0;
+> +            hvm_set_guest_tsc_fixed(v, 0, at_tsc);
+> +        }
+>          domain_unpause(d);
+>      }
+>  }
+> diff --git a/xen/arch/x86/hvm/save.c b/xen/arch/x86/hvm/save.c
+> index 8ab64057064e..65ebfd384d69 100644
+> --- a/xen/arch/x86/hvm/save.c
+> +++ b/xen/arch/x86/hvm/save.c
+> @@ -289,6 +289,7 @@ int hvm_load(struct domain *d, bool real, hvm_domain_context_t *h)
+>  {
+>      const struct hvm_save_header *hdr;
+>      struct hvm_save_descriptor *desc;
+> +    struct vcpu *v;
+>      int rc;
+>
+>      if ( d->is_dying )
+> @@ -302,8 +303,6 @@ int hvm_load(struct domain *d, bool real, hvm_domain_context_t *h)
+>      rc = arch_hvm_check(d, hdr);
+>      if ( real )
+>      {
+> -        struct vcpu *v;
+> -
+>          ASSERT(!rc);
+>
+>          /*
+> @@ -341,6 +340,37 @@ int hvm_load(struct domain *d, bool real, hvm_domain_context_t *h)
+>              /* Reset cursor for hvm_load(, true, ). */
+>              if ( !real )
+>                  h->cur = 0;
+> +            else
+> +            {
+> +                const struct vcpu *base = NULL;
+> +
+> +                /*
+> +                 * Offline vCPUs have no CPU record.  Adjust the TSC offset
+> +                 * based on the first online vCPU, taking into account
+> +                 * TSC_ADJUST which is saved regardless of whether the vCPU is
+> +                 * offline.
+> +                 */
+> +                for_each_vcpu(d, v)
+> +                    if ( !test_bit(_VPF_down, &v->pause_flags) )
+> +                    {
+> +                        base = v;
+> +                        break;
+> +                    }
+> +
+> +                if ( !base )
+> +                    return 0;
 
-Not at all.  Almost surprised it's so few.
+This silently skips the offline vCPUs.  If that ever causes a problem it
+will be hard to diagnose, so please add a comment or a log message.
 
-[...]
-
-> Are you working on v8 or should I start rebasing?
-
-I think it's overall less work if I do v8 at this point.
+> +
+> +                for_each_vcpu(d, v)
+> +                    if ( test_bit(_VPF_down, &v->pause_flags) )
+> +                    {
+> +                        v->arch.hvm.cache_tsc_offset =
+> +                            base->arch.hvm.cache_tsc_offset -
+> +                            base->arch.hvm.msr_tsc_adjust +
+> +                            v->arch.hvm.msr_tsc_adjust;
+> +                        hvm_set_tsc_offset(v, v->arch.hvm.cache_tsc_offset);
+> +                    }
+> +            }
+> +
+>              return 0;
+>          }
+>
+> diff --git a/xen/arch/x86/time.c b/xen/arch/x86/time.c
+> index f37fddc61e47..79c7123c0a5b 100644
+> --- a/xen/arch/x86/time.c
+> +++ b/xen/arch/x86/time.c
+> @@ -3087,9 +3087,8 @@ int tsc_set_info(struct domain *d,
+>               * set_tsc_offset() is called from hvm_vcpu_initialise() before
+>               * tsc_set_info(). New vtsc mode may require recomputing TSC
+>               * offset.
+> -             * We only need to do this for BSP during initial boot. APs will
+> -             * call set_tsc_offset() later from hvm_vcpu_reset_state() and they
+> -             * will sync their TSC to BSP's sync_tsc.
+> +             * We only need to do this for BSP during initial boot.  APs copy
+> +             * vCPU 0's offset when created in hvm_vcpu_initialise().
+>               */
+>              d->arch.hvm.sync_tsc = rdtsc();
+>              hvm_set_tsc_offset(d->vcpu[0],
+> -- 
+> 2.55.0
+>
+>
+>
 
 
