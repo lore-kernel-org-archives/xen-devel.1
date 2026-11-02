@@ -2,47 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AD7CA606A324
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 20:35:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C10C4606A324
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 22:46:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=selector1 header.b=Msw0bhmc
-Received: from list by lists.xenproject.org with outflank-mailman.1468834.1677880 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=selector1 header.b=t2aN2SGB
+Received: from list by lists.xenproject.org with outflank-mailman.1468856.1677889 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNyjr-0005lt-Be; Mon, 02 Nov 2026 20:34:43 +0000
+	id 1xO0n2-0000Cm-Bv; Mon, 02 Nov 2026 22:46:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1468834.1677880; Mon, 02 Nov 2026 20:34:43 +0000
+Received: by outflank-mailman (output) from mailman id 1468856.1677889; Mon, 02 Nov 2026 22:46:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNyjr-0005lm-86; Mon, 02 Nov 2026 20:34:43 +0000
-Received: by outflank-mailman (input) for mailman id 1468834;
- Mon, 02 Nov 2026 20:34:41 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xNyjp-0005lg-6R
- for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 20:34:41 +0000
+	id 1xO0n2-0000Cf-8k; Mon, 02 Nov 2026 22:46:08 +0000
+Received: by outflank-mailman (input) for mailman id 1468856;
+ Mon, 02 Nov 2026 22:46:06 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <andrew.cooper@citrix.com>) id 1xO0n0-0000CZ-CU
+ for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 22:46:06 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xNyjo-008V3f-58
- for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 21:34:40 +0100
-Received: from [10.42.69.2] (helo=localhost)
+ id 1xO0mz-004gdX-I8
+ for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 23:46:05 +0100
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <andrew.cooper@citrix.com>)
- id 6ae8f3b7-8faa-0a2a0a5109dd-0a2a450297b4-28
- for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 21:34:40 +0100
-Received: from [52.101.61.14]
- (helo=DM1PR04CU001.outbound.protection.outlook.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ae91239-2eae-0a2a0a5409dd-0a2a4508e6be-48
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 23:46:05 +0100
+Received: from [52.101.56.43]
+ (helo=BN1PR04CU002.outbound.protection.outlook.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <andrew.cooper@citrix.com>)
- id 6ae8f3de-6ca4-0a2a45020019-34653d0ef6b1-3
- for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 21:34:39 +0100
+ id 6ae912ab-f659-0a2a45080019-3465382ba45a-4
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 23:46:05 +0100
 Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
- by CO1PR03MB7819.namprd03.prod.outlook.com (2603:10b6:303:276::13)
+ by EAYPR03MB989253.namprd03.prod.outlook.com (2603:10b6:303:2cd::8)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.569.12; Mon, 2 Nov
- 2026 20:34:11 +0000
+ 2026 22:46:02 +0000
 Received: from CH8PR03MB8275.namprd03.prod.outlook.com
  ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
  ([fe80::a70d:dc32:bba8:ce37%4]) with mapi id 15.21.0569.011; Mon, 2 Nov 2026
- 20:34:11 +0000
+ 22:46:01 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -53,36 +54,32 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ozR0zRSF2dMyTnsEii39pECfyiREhaPKOS70CO8+whGsOFwyMxCRMvWrFu0OWsRqH2zBILfgkG4/HIzQw5X/VVcvCsS54UN0o7k/MVHuaEBBMCZXpHcC/c8N9Ru6L/baNE0TywA8f6RukK41bZeIMoe2/DwZwkFqLz3A10wQkOa9FW9oe9qOVy2AQKRdZCbMDvagWAlPzIZVobQ1D8coub00AJuCeig7vdm/lGXd6BdINiJPViHkYLiU6h0ymD0/jIvhNjNId5NSCF+KLZJP9Lq9+byHc7pO0b/LdzSkGqQ5ko+B86ZdORom/vBYq7USUsDV0oBZggnJ3dsVdjuPhg==
+ b=gffg5J+HuXEXHheVEnl1xpQuj9S9ToffiaUE9t91CWNuMKNL8Fk1nkX3DYtlRAdJNsS5a2T/ShckdW67sjU0RYId9DrANbIdHoAJlYPnV3h2f0M4ELXvOJE8edP4jCAEmCmWKkJAhs2ChyQeYBbF5LnaKeb7kMyvEt9zkiyddTjxYDkEMO+lvI0Z8P5JYAGaslE6+8wtZhE7jkvywXH/EHaztbGfuw9stPDh//6o1GBjRWL8FBeUtH7Y1PUpYb6ZNeaKzVEY7/yuoGlPtx5GqB8rEF5krwmolIinB2I5+ts+39og18BHsHIV/gQZUr64nI3S6Qoc4CzO1tB5ILERUA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=AOh2F4HBlOh17uZPy/+N5rIfIqTcLvr2vaT14vKYoA8=;
- b=mXEhoAhZYII5SCeAqrqOiLteN91K76gGcVe8MxKaPTfwhtZp/zJ2r+cpM20gwpk/4sxj9WpxdKVzIqWSRRf6kEwuCZlxKUcXq4WZTVvEst4nYe+QgNOQwhI/SBnRhGYDcOuBN7m2V0RKFdf7CEWXbRf4koojH12OvDopfNj3I0KLLfGY4IhpV3LtZdEPMslmutaV9cIX0zM0fXmdp/0bQqRve1twA/ctHoQX6uUMp99TxTuRxnz/An8dDn1GIFlWat757lJLEmnLi0HiDj2iamKkUKiOThHwVWJLh9wsgqhxb9TVTZntlnXS6UUX09hCfXW/AVG1ZA4D7gQVRP+HHw==
+ bh=FN8xXwNnc3BLrFJPXHhlJ35XHTt1n0VJ678v42WMVlw=;
+ b=dr5OqJb9iXGlays3qUxteGabaQonbLErBgY+8eTsCKn5Yq5s9NeR8sn5QGvI0+Mq5VJ+RDhuHd8Mbl6ImkZW1nQ+yf40iiM36PkaxClYORGF6WcLjCGhOAX6b+z3L8Erhwx6Xp1/zSkbUvYp0PpqbmtxXg0zfeRotdwNXuVhVh7gxbggI96hOMaPJJunZb5YM4fQ3+33IBOWjZFePEkdFrJUZs+KG6GHMOjcNoRi6+NOU0UbsK9RpTd/a41oaIk5hr/Ex4McWe73mCRQhxLCx1YUAy4dvkCOBF0L7/ssDSsXh4++eeNrtFKNuqWhfAGRmwrl8f2xAe7HXSr5Kl7zRw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
  dkim=pass header.d=citrix.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AOh2F4HBlOh17uZPy/+N5rIfIqTcLvr2vaT14vKYoA8=;
- b=Msw0bhmcsF3ubYzhzchP46jbwaO5nkULkXLQv/M2qxfgSb6E93X+xOzkIlH5pgsUq148WLuFBvlLrLwWLM6wdbE67jYHgjmtJLeptS+xuo0hqyI8mEbONgPO+Zkk2MPXQSyFz4Ga4YP2UPuKG81vByCBdbK3RjE0jlboRLBHgtQ=
+ bh=FN8xXwNnc3BLrFJPXHhlJ35XHTt1n0VJ678v42WMVlw=;
+ b=t2aN2SGBfEShY/JAsZ6z1NovF2/tD2fFyKni6GDM5vR4FH5LOhOimFEEv5N3nKb0TiMTLDPd23dTDFOeHXbwx0pKc8lWBk7zYBwMti9XOcThrEhLUT5vACiq39A3abBmJGTuYBCzgXm+sqP+f2Uk6OyYBmOdDs5+60LdjpySSsE=
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <e499efd0-453c-4885-9e7a-388f21e45da1@citrix.com>
-Date: Mon, 2 Nov 2026 20:34:07 +0000
+Message-ID: <eea181ea-4310-47f0-be4a-b6d303e00c51@citrix.com>
+Date: Mon, 2 Nov 2026 22:45:58 +0000
 User-Agent: Mozilla Thunderbird
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
  <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
  <roger@xenproject.org>, Teddy Astie <teddy.astie@vates.tech>,
  Jason Andryuk <jason.andryuk@amd.com>
 Subject: Re: [PATCH] x86/svm: Adjust vNMI handling to update the cleanbit
-To: Ross Lagerwall <ross.lagerwall@citrix.com>,
- Xen-devel <xen-devel@lists.xenproject.org>
+To: Xen-devel <xen-devel@lists.xenproject.org>
 References: <20261102134621.1693316-1-andrew.cooper3@citrix.com>
- <0c81f171-7ffc-4a59-8f9e-69ad27371b96@citrix.com>
- <CH8PR03MB82743DC59D48A031251F71AAF06A2@CH8PR03MB8274.namprd03.prod.outlook.com>
- <7021681a-277a-4b40-9963-74e55dde35af@citrix.com>
 Content-Language: en-GB
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
@@ -128,171 +125,174 @@ Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
  B8WrhBLXDiYlyJT6zOV2yZFuW47VrLsjYnHwn27hmxTC/7tvG3euCklmkn9Sl9IAKFu29RSo
  d5bD8kMSCYsTqtTfT6W4A3qHGvIDta3ptLYpIAOD2sY3GYq2nf3Bbzx81wZK14JdDDHUX2Rs
  6+ahAA==
-In-Reply-To: <7021681a-277a-4b40-9963-74e55dde35af@citrix.com>
+In-Reply-To: <20261102134621.1693316-1-andrew.cooper3@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: LO4P123CA0127.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:193::6) To CH8PR03MB8275.namprd03.prod.outlook.com
+X-ClientProxiedBy: LO4P265CA0170.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:312::9) To CH8PR03MB8275.namprd03.prod.outlook.com
  (2603:10b6:610:2b9::7)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|CO1PR03MB7819:EE_
-X-MS-Office365-Filtering-Correlation-Id: 311af24d-d15a-418c-c53a-08df3920a6bc
+X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|EAYPR03MB989253:EE_
+X-MS-Office365-Filtering-Correlation-Id: 604c7a61-ddfb-452a-402c-08df393311d8
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|366016|1800799024|376014|261021121427099003|261022105027099003|261022075727099003|261009223027099003|261026140227099003|261026121527099003|261028144727099003|11063799006|5023799004|4143699003|56012099006|18002099003|22082099003|261102123227099003|10067099003;
+	BCL:0;ARA:13230040|376014|366016|1800799024|23010399003|6133799003|10067099003|261102123227099003|22082099003|18002099003|3023799007|56012099006|261021135927099003|5023799004|11063799006|261021121427099003|261026121527099003|261009223027099003;
 X-Microsoft-Antispam-Message-Info:
-	3NcdyVq7qTv+MaOt71amTYvKaOftnmKpxpnMukqOrEuRbF2PD/3AqpY2PDfmrP4P6E7/v4aJhrTApUxnQw6UJuAMR8MZENo0OZmnBP8fuBMlOb+u5xBDVaNC1KVRFD6kmelKwAFzxRvaZc2/zWy3v+SsiggROzrQrgxIrT7SJZzu6vzM7rAq5w7N9O3Tl+Fnmg3PCgunS1nBWh8s+Nj61YgiQBhRBNljyR2yyJlwx2cebzQJZb6Y6gnznuAoL80nd3mV4SYmeH2mtDfrdlP9Lmg0nLBH64AVt4JluzJD6G4cK70xHTySOGB9dY7C8Sb13x7CfQG7KgEaC0c+kWGRNyCQ5v1Y4zx4N3HaL4gWqM+OY8v90hh3zDW967ue4R66g3dZ/wLOSe2O6WeDgkZPqY2UI3+93/tMQmYrvmprQFtYRcOoyzClzz1sZ+XmorMQj8TKd0KwHrlklzpE7giasnUXEjP449/ZcUTOFb59Z28e4cAxOpgymYy3w3sdEOLaP7uMtBcWW7UqLuyCvW+3BHPwbYSVbTjQuJDNf8NQUJ2fbdGMw4J/lwDd2+UQbGzg9EJZnByIja2kZ8ztjn675t/BRMIWWSIMbxEqpEd8wNiBoqkMnQGrw2+PzHgTukoueGYHVPUAKGwMR5Ml/aw8WWYnQcgD1VVdC50dxp5QXac=
+	BnmEAlLDC6GKkXcILdzSGBYke2ss52w5iyO4zeg9ldAXJXip+ifh5TkbHNs+ko5XD7MlBcNU1nQAzad7DabIreUzAelUU9BB7r9A5uuCsAFUYNPmVnedlHaf3QsvkfXrzOpYN6515TXjJM8bCfRpFXeTL51T93vxKexaaJVOrqWbrTB+U/tTdHO2fs0QB9bGJ9hguVAL9Xx42D/Xqxw+Mwuo0MCyMCWE3LqZI57jhPPFBPxM2icCs31Kmf6U/T5rHu6kv9QgtWkog+1UKnkdmmgeJ/A8sz6v3SNDuCM0rolqrPopFCVHyefmbdlXYTGunxmEfXU3YTrdlWFiMXWF/1qJGguTltuxf0h7ovHA2DhWs5rziDEpsKD8bVSffSsfpz8046zkCQFAWf+vZfaGC386rcqpiLbicBBukWDAqstDXDGeZnfUFPJktSEunqLK6C/+dD8cwe/LECppRwgZY8vv6oNjp7Q2lkZXXYBmJ4PIa4bBExn5465NbH8dcAtGUoyUmhznJbR2gD33IYq7qFgXQu/FipvwlsensyMuY5mj3TwD6W/34JDTQAI+6ike4HlbGTjMfCpfqYWLUSv3/JIf9YP7LRrJVijUhYpaTrzxY3N+3T3I3hOGIco+9WhoIY1jeTMwgBS5gObjm0vzr1obVpRLYKksVRqGf1LE7Po=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(366016)(1800799024)(376014)(261021121427099003)(261022105027099003)(261022075727099003)(261009223027099003)(261026140227099003)(261026121527099003)(261028144727099003)(11063799006)(5023799004)(4143699003)(56012099006)(18002099003)(22082099003)(261102123227099003)(10067099003);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(23010399003)(6133799003)(10067099003)(261102123227099003)(22082099003)(18002099003)(3023799007)(56012099006)(261021135927099003)(5023799004)(11063799006)(261021121427099003)(261026121527099003)(261009223027099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?SFgvckVTckZ6cGtiWnB3TXZxazFrSmNnc2pLQ1I4K0RPaFpFcmVBdzZ6MUdx?=
- =?utf-8?B?d0tBK0lmcGJSdzZpbVV6aVkxajU0YkhmRXNiZlU4bzc1Y25ETVZhSUxaL1Qy?=
- =?utf-8?B?cFlWSTFWRUZrd2FPL3lnUHdSSjVpL1Q4Uyt1NUVaQ1FqaXVFV0E3QW1Dc2M3?=
- =?utf-8?B?ZHNCZkUrMytXWGNMWG9sUzNZdlpleVJPTTY5YUNQUVk1TG9uL0lDRzd5dzY2?=
- =?utf-8?B?QXdJRDlXRWRXL2U5NEtXSVJaSURybFBRV2hIblJwYXVjRUdSZmk1Tm83YjJq?=
- =?utf-8?B?SWxUNjhwNGs5Skp5NjhvVC9FSVp5UHd4U0RiK3ZLVjhWR294RWJYZnpuZlNs?=
- =?utf-8?B?SVNHeTczazl5SW9QVS9tdjZRWjg2OTI4TlRHekF3SmpOTWU5aEQrMC9VTVJ5?=
- =?utf-8?B?S0V2MEtLVUhSMTVPRWQrZ1ROd3pqUmRwRzE0Y253dlZ3bklZcnZESGl1MzhQ?=
- =?utf-8?B?NnYrS0k5SFhyelJWTUhDLzh4R1hXUXBrVVpQamtZOTZld3hidUw4ZXg1Tmgw?=
- =?utf-8?B?RXp1SVRJSXVSVzZXUTBtR2luTFdudEZaSmNtNW90VHpxMDFLN2lYbVZpczRF?=
- =?utf-8?B?aHVleUV4ZkQ0YkIvSFNITE1ReXhjSEpnNjdLUEl1OXJkN29kZTVaQTJOOEVu?=
- =?utf-8?B?UGRscWlGSE5VVlRhODhmTUVUS2djc3VZbVdKU0tLR1Vvd015VVBHR3k4VExz?=
- =?utf-8?B?Z210V2ZKVjhVd3pxak5TRDF2TjBDNmxoWlJhKzA2SFJjdE5ZM1B0clNKYnRv?=
- =?utf-8?B?VVl2dmJ1YVFLcTNXTFJEUFdRYVVma1dmZUY0M3lsS1ZpaVRnMUlyY3owK3kw?=
- =?utf-8?B?TFpaUGNudmhzR1FKYVVWVlI3UUZLeHFjcXNjS1kxcWxvZWcyMEpzUVBKaHE3?=
- =?utf-8?B?NnJnbDIvRmNBOVI0bHJuSVpUdnIzK3hQZEJMMFlhTlAva1JIM2g1R1NsdW5y?=
- =?utf-8?B?M085bjNONldjSVVyRHpac3NEb3hGbG8rODJITnlIVVl1WVNpUlBhc3dUQnBG?=
- =?utf-8?B?bzZoaFlncGhUN1VVblNUTlhVVjZWMDlTdVJHaDFmc2Npa2o3LzhVUGkraU5X?=
- =?utf-8?B?OG9pNDdYTHo0SWdKL0dqZnhsZ3U0OVpqUFJlVlZieFV6dTdrVmErSW5PSnVu?=
- =?utf-8?B?Y0F6aElBR01pWFVqNDliSEp1RitXYW4ycUtPOXlhUW9ZSytDbFRaYWwxeXZy?=
- =?utf-8?B?NEo2RXYzU2tVNEt1SEVGODJxbFZ3VXV5RVFWQitOSVJNLzIrVFJ2RkthRXoz?=
- =?utf-8?B?T3NyOXgyOUlTb0VZNVRBdWdUekJTMHNucHFwQ01rWVlHVW1vRzF0c2I0Nzho?=
- =?utf-8?B?bjdDS3VlNVBrVzZvWWZjVU1EV3dBYzNCV1ZZOUpHMUp6UThYNjZrNitrR0ZN?=
- =?utf-8?B?T0NNVTRJODNPNDdoV0wydm5PQVAwK0V1NVdieEtXbkdxOVpsS0RYVjRqaFRX?=
- =?utf-8?B?MTE5SVBVb08wZlpUMXZ1UHNFTnB2RTFvdkNxU3VzTktBMVdSRGlLdWhIQUpu?=
- =?utf-8?B?cXpzcXowUE5Nclo4ald4VHlrMDRBMXRzS0tvNHNpU3NlRW02K1pxeWFqUit6?=
- =?utf-8?B?QmcxS29TeVJ1bWhlWGR1K3JxZGpGTFlRb0pIaTIwaXBSTlQ0L2NhMmZBVDli?=
- =?utf-8?B?UHdaV0lKTVRzWXNRelpjZDRIam1Hb2p5WkUzLzlXbHJMd0Y5L1Q2UkQvRkw0?=
- =?utf-8?B?YnJLenMydG9Dckx0NzRrR0Nob2s0d3hnd1NGamRyNDJPL3k3blhHMjZlTDNu?=
- =?utf-8?B?WXdYemlIMk9TNmhublpQMXppdVQ0cmsvcUx2dFJYSlJIRjY3bVkzVVdiTmlZ?=
- =?utf-8?B?b1BBcG05VXV4cDNOYjhoekNtOUV3V0E3ajYvUThxeWtNdnNqbVlWZEJGRG9k?=
- =?utf-8?B?WXNkRDlvM3lEdEhsQlNGTmVaSnNiMEloeGVqb3ZtZ2RkaTlYbGRVUENpZDJ2?=
- =?utf-8?B?MnlER05TOVBqN245Wk5JVFNNa0l2VCtjVkRhOTFrT1ZVS1A3dXpHTHM0Wm9v?=
- =?utf-8?B?aFVCb1UwdENER1lrNzlWaGJXbEMvczhDYStJQlVuQzdHelVhNnQ4K2IrWDNn?=
- =?utf-8?B?dEtXR3JybEtkTzAxcllPLzZqTER0N2VQeWcwTlhTcVlSOWJWTWlVY0tFNmZS?=
- =?utf-8?B?NTYrVkRWOXV2MDJTR3BRVFgwdTg4eFNNSDJKWUdWamtLMldhZDduYUo2ZWhC?=
- =?utf-8?B?V1UzQVljS3VuWkFPcGNUTmQ1RU9XS2ZEc1NFTmlHMmpWNSszYVJGbFUzNXM4?=
- =?utf-8?B?aGRnRjN1SUFENEN3Q09vMEFvUHM1TFNubFhITzFieXIvdlVsamNOcCsrd2pZ?=
- =?utf-8?B?RC9TcEFibnVZdGwzdzV5cTJINzNxWEh0bHMzRGZPaVVQb3lnWHFMdz09?=
+	=?utf-8?B?NCtnb0FycXNScW9EZmM2Z2xXRWE5Q3RVYnV0OTcvTE84eUZKa3A5M2NVSDlW?=
+ =?utf-8?B?cCtNTm9KenM3SDhFczNDbXV1MXpxMG1nNlNpTVBYODBxYXhLSjMrekFETjk5?=
+ =?utf-8?B?RWdIbE9mcWJBTXRhTWlGb2ZyamNxQjVZYkNmTHZaamdkQzRFd2JEQmp5aElr?=
+ =?utf-8?B?Nlc3bzNiUEcxdmVKT3h2cW5tMUY2YkcrUXJjVUhRcUVBMVFLblNiWnpVT1h4?=
+ =?utf-8?B?ZHhsQVFaYlQ0ODd6blQ5bnRhclkrSlQ3Rk45cjcrUDRtYUs1amlQNG41TmVV?=
+ =?utf-8?B?K2hvZTRoVXpBUlZnMUNib1dKbzAzeW9jVlU5emw1cVBDdkZxZHFoV1NyNHFS?=
+ =?utf-8?B?TjBKSjJTelRQc1J5Y0ZIZXROMHpGeFhmbjJEYlBmNTdIQkJ5Y3I3UFdXL0Zs?=
+ =?utf-8?B?bjRHUnFIVDRJQUhtdmxxR0kyRmFYL3ZsQk9yc2w3Rk9VSTB6SkRrZjdqTUF4?=
+ =?utf-8?B?QWZtQXFaM1J1YndzL2twWDFtRUQ1Tm9wRG5CZDF4TXE1em1KUWEyTTFMOE5O?=
+ =?utf-8?B?VjZTNmxJYWtkSVlpeVV4ajNNTE9Xc3p6RHNtVWlNdTNKeG9oVWFZTDZicFAx?=
+ =?utf-8?B?TFl1Y2V4cmh6UjJLMVBaVVdhYldTMHVIcnNQQ1JpM0gxUVFaM05QU3prUGs2?=
+ =?utf-8?B?VUNmb2xCTHFZS0RVS0hoN0VZRkpFc09ZUytvY3pVV3ZJMWZrODVpbVJiSU92?=
+ =?utf-8?B?NGh0S0htU0NNc1p1eUVRc091TnAxWnBkSkpNRWdHbEJnTGo0aXhpQ3FDVXg1?=
+ =?utf-8?B?RGdIWG90TEwzR1Z2djJnSHBzRzRCTk9GZzZ2TUxFT1lqNjRGMGZDdG5LOU4z?=
+ =?utf-8?B?Nk51UDhNaGg5K29wN2U4aGJPbXJhS0xiOHVRd0hUaFVWT1V6UFlrM0tUSC9K?=
+ =?utf-8?B?K2VlU29tVDlEaVpTSFhNM1czdWhSaGxybmhxdHRsQlVDOU1TSy9OdTRBeDQw?=
+ =?utf-8?B?c205QUdJS2FMdnRFZVlEQ1ZpS1pVSjdGUE9KaXEvVXkwb2YwY0xkQUlHZ2Vz?=
+ =?utf-8?B?eCtlQ2YwRmltK3oxcWV3U0xtbEQxMTc5bVlIeTFWdjlFNVdRNGxpTzlqeUtY?=
+ =?utf-8?B?NFBLOG5PRm5mTnZZV3JVNDJuOEI0S3ZoQ2FXZ2RtdnJXdTlPNy8yUFRMTzBa?=
+ =?utf-8?B?aVl1TFRaUUFtWTM3TTlha01qWUxzUFRTamU2WFFFK041Vm0yb0hjV1A3anpZ?=
+ =?utf-8?B?b3pVM3VoNTYwR2VaWXJkZHI3dVkrYStrYXRDTFpqWVJseDNBa1RGT0kzRktX?=
+ =?utf-8?B?ZnFIbjNMUHUzM1Y2REtacEZTNmNTLzFFUnFwYUxTM2F0QWx0ejF1MkZpbjk1?=
+ =?utf-8?B?TkRCMkxJd2lSNnM5L3JYQmRKK2g3Snp1WnVmVVJIVCtybFkwMWVnbmttVHhq?=
+ =?utf-8?B?WDJVcERmYStvQVJ2N3BjZ1V4ZkF5Z2VKMjlHUlpiNUtydmNTOG8yckYzUlQr?=
+ =?utf-8?B?Rk9wNnVWTkhhVjd1K2R2cEV4bzIxQWpscHlRMFNjbkJQSFVlS2FxQ2NBNjQz?=
+ =?utf-8?B?NDBrcjZCLzBqa2JJNlljMjVYTkpLdWc0dzc1bUNUa093ZHF3RWNGamlHaEQ0?=
+ =?utf-8?B?L3hoSHl0ZFNVbXlxY1oyc0FKcmhneHRSTUIzME1wWGhaL0Z0cHZZczIyQWZv?=
+ =?utf-8?B?TThDUzNXazAvUkFKdlpiemFGM0dXMkN4NHhjZUhTa3BacTcyczcwSGJtc0Jy?=
+ =?utf-8?B?SlhJK3FmTytuSFlqYXdvdFIySnFaSFdOWFdoYm5ZZ3NueWE4VjlnQkZPaStU?=
+ =?utf-8?B?K2UwWGcyQ1RFWitYbWFRYTA1WGIwWlUxZkEvRXVFQ1V1aHFHeXNEYUxJUXVU?=
+ =?utf-8?B?QTg0K0dvZm1obGRpUjcxVWJnOHV2NUExVXBBZFhjVVdLaXowZ3lkVG9WYndX?=
+ =?utf-8?B?RFpuV2dJRmRPdUxjemFvS3dUc05vNkdYeXc1SGwrQWQ0V0tEKzNXT00yK0tn?=
+ =?utf-8?B?VFZGQ3pOVTFHRko3M0xDd1FFZGJlbWxKbE5GbHhaSWJBV0NFQnJlYy9ZVTds?=
+ =?utf-8?B?R0ZPMXhZNG5pUkFnWmpONFV3SXYxeTFteWNSd2JtVTl5WkVieXdXdTNpNTFI?=
+ =?utf-8?B?c0hZTzR6MVJNcVZBNzh6eHJpUy84YlpkVzFoSHlDSmU4bllpb05Rcko0ZENG?=
+ =?utf-8?B?UUNSZ2NXODdTNndEakZEUWJoY092M3BFOENEN3AwMkc1Qi9UdWlCQ2JBK1hD?=
+ =?utf-8?B?MUJZNHlQb0lnbXVmdUxuemwyTXdJbVBBMDZzcXJ4VldvRnpGNFdma1F3alVI?=
+ =?utf-8?B?Y3Jjb0xBYmFnb2FXdXR6UkIyQ3lDSmNiQnlLK3BHWlFmUXVzTGxjaXpkeEo0?=
+ =?utf-8?B?YmRJeVdDd3MvaTR1T0dBNUFHb01DZVZYcTJ0VXhiclVHUTR4UDJJZz09?=
 X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 311af24d-d15a-418c-c53a-08df3920a6bc
+X-MS-Exchange-CrossTenant-Network-Message-Id: 604c7a61-ddfb-452a-402c-08df393311d8
 X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Nov 2026 20:34:11.0984
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Nov 2026 22:46:01.6332
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Fhbe3Mx7YuZdHvUnq0JBZwSaEh0k7pTRhCQf+DddO7O22eHsHk1WxyLoI+5PZz98J3HZi2EnKuAJwAbZWuHpjj2Q0+XJ9XPr9nqXu0zGROA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR03MB7819
-X-purgate-ID: tlsNG-720697/1793651680-666B72AC-30CDE6AA/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 3878
+X-MS-Exchange-CrossTenant-UserPrincipalName: z2T5MT7xx4rLLHWOGiiNEB3yjvp6wembMOPLqnWjAmrDzy6Ut1JV7GsHTfjdxgLO2yWcXfGiWRAIddyEOsfB5pKj4IbvvAxdRCRMDGuLxGk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: EAYPR03MB989253
+X-purgate-ID: tlsNG-c1860d/1793659565-D5F4787B-8E976612/0/0
+X-purgate-type: clean
+X-purgate-size: 4957
 X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
 	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 02/11/2026 6:16 pm, Andrew Cooper wrote:
-> On 02/11/2026 4:12 pm, Ross Lagerwall wrote:
->>> From: Xen-devel <xen-devel-bounces@lists.xenproject.org> on behalf of Andrew Cooper <andrew.cooper3@citrix.com>
->>> Sent: Monday, November 02, 2026 13:54
->>> To: Xen-devel <xen-devel@lists.xenproject.org>
->>> Cc: Andrew Cooper <andrew.cooper3@citrix.com>; Jan Beulich <jbeulich@suse.com>; Roger Pau Monné <roger@xenproject.org>; Teddy Astie <teddy.astie@vates.tech>; Jason Andryuk <jason.andryuk@amd.com>
->>> Subject: Re: [PATCH] x86/svm: Adjust vNMI handling to update the cleanbit
->>>
->>>
->>> On 02/11/2026 1:46 pm, Andrew Cooper wrote:
->>>> Despite prior information to the contrary, APM Vol2 revision 3.46 October 2026
->>>> has been adjusted to state that the vNMI fields in vINTR are covered by the
->>>> TPR cleanbit.
->>>>
->>>> Adjust svm_inject_nmi() and svm_set_interrupt_shadow() to use vmcb_set_vintr()
->>>> rather than writing into the VMCB directly.
->>>>
->>>> In svm_inject_nmi(), fix an inefficiency from the introduction of vNMI.  Move
->>>> the reading of vmcb_get_general1_intercepts() to the point at which it is
->>>> used; tt does not need reading on the case that vNMIs are enabled.
->>>>
->>>> Fixes: 86a203ab8d38 ("x86/svm: Support vNMI on capable hardware")
->>>> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
->>>> ---
->>>> CC: Jan Beulich <jbeulich@suse.com>
->>>> CC: Roger Pau Monné <roger@xenproject.org>
->>>> CC: Teddy Astie <teddy.astie@vates.tech>
->>>> CC: Jason Andryuk <jason.andryuk@amd.com>
->>> I forgot the extra comment.  This bug is hidden by:
->>>
->>>     /* The exit may have updated the TPR: reflect this in the hardware
->>> vtpr */
->>>     intr = vmcb_get_vintr(vmcb);
->>>     intr.fields.tpr =
->>>         (vlapic_get_reg(vlapic, APIC_TASKPRI) & 0xFF) >> 4;
->>>     vmcb_set_vintr(vmcb, intr);
->>> }
->>>
->>> at the very end of the vmexit handler which unconditionally writes vINTR
->>> and hits the cleanbit.
->>>
->>> This is an absurd codepath.  SVM has virtualised CR8 since the very
->>> beginning, and put in CR8_LEGACY for Windows to use even in 32bit mode,
->>> so the only path modifying TPR is a non-accelerated write to APIC_TPR. 
->>>  That path can be updated to modify vINTR, and this logic dropped.
->>>
->>> ~Andrew
->> The APM says "(Offset 60h–67h)" for this bit in the current and previous
->> versions. Perhaps that means that more or everything in that range may be
->> covered by this bit in future? In which case more extensive changes would be
->> needed to avoid future breakage.
-> The vINTR field is complicated, because some bits are unconditional,
-> while some are covered by a cleanbit.
->
-> Byte 63h (V_INTR_MASKING, vGIF_EN, vNMI_EN, {,x2}AVIC_EN) all control
-> virtualisation behaviour.  These are unconditional, and I bet the 3
-> reserved bits in there will continue to behave in the same way when they
-> are given meaning.
->
-> All other bytes are state of the vCPU, and are (now documented to be)
-> subject to the cleanbit.
->
->> On a related note, I see the APM says this:
->>> If any VMCB fields (excluding explicitly uncached fields) have been modified,
->>> all clean bits that are undefined (within the scope of the hypervisor) must be
->>> cleared to zero.
->> AFAICT Xen doesn't do this. Might that cause breakage in future?
-> Fun...  That's incompatible with the previous sentence.
->
-> Xen follows the previous advice, and sets:
->
->     vmcb->cleanbits.raw = ~0u;
->
-> early(ish) in the VMExit handler.
+On 02/11/2026 1:46 pm, Andrew Cooper wrote:
+> diff --git a/xen/arch/x86/hvm/svm/intr.c b/xen/arch/x86/hvm/svm/intr.c
+> index 4b0debfa9a2e..2224f1834741 100644
+> --- a/xen/arch/x86/hvm/svm/intr.c
+> +++ b/xen/arch/x86/hvm/svm/intr.c
+> @@ -30,12 +30,14 @@
+>  static void svm_inject_nmi(struct vcpu *v)
+>  {
+>      struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
+> -    u32 general1_intercepts = vmcb_get_general1_intercepts(vmcb);
+> +    vintr_t vintr = vmcb_get_vintr(vmcb);
+> +    uint32_t general1_intercepts;
+>      intinfo_t event;
+>  
+> -    if ( vmcb->_vintr.fields.vnmi_enable )
+> +    if ( vintr.fields.vnmi_enable )
+>      {
+> -        vmcb->_vintr.fields.vnmi_pending = true;
+> +        vintr.fields.vnmi_pending = true;
+> +        vmcb_set_vintr(vmcb, vintr);
+>          return;
+>      }
+>  
+> @@ -51,6 +53,7 @@ static void svm_inject_nmi(struct vcpu *v)
+>       * SVM does not virtualise the NMI mask, so we emulate it by intercepting
+>       * the next IRET and blocking NMI injection until the intercept triggers.
+>       */
+> +    general1_intercepts = vmcb_get_general1_intercepts(vmcb);
+>      vmcb_set_general1_intercepts(
+>          vmcb, general1_intercepts | GENERAL1_INTERCEPT_IRET);
+>  }
 
-It would appear that AMD reserve the right to retroactively introduce
-cleanbits.
+An observation.  The code generation for this is terrible.
 
-I maintain that it's absurd to suggest both "write ~0" and "clear all
-cleanbits you don't know if you write anything".
+ffff82d0402e8640 <svm_inject_nmi>:
+ffff82d0402e8640:    48 83 ec 18              sub    $0x18,%rsp
+ffff82d0402e8644:    48 8b 87 80 05 00 00     mov    0x580(%rdi),%rax
+ffff82d0402e864b:    48 8b 50 60              mov    0x60(%rax),%rdx    // Read vmcb->_vintr
+ffff82d0402e864f:    48 89 54 24 08           mov    %rdx,0x8(%rsp)     // Spill once
+ffff82d0402e8654:    48 89 14 24              mov    %rdx,(%rsp)        // Spill twice
+ffff82d0402e8658:    81 e2 00 00 00 04        and    $0x4000000,%edx    // Test vintr.vnmi_en
+ffff82d0402e865e:    75 28                    jne    ffff82d0402e8688 <svm_inject_nmi+0x48>
+ffff82d0402e8660:    b9 02 02 00 80           mov    $0x80000202,%ecx
+ffff82d0402e8665:    81 48 0c 00 00 10 00     orl    $0x100000,0xc(%rax)
+ffff82d0402e866c:    80 a0 c0 00 00 00 fe     andb   $0xfe,0xc0(%rax)
+ffff82d0402e8673:    48 89 88 a8 00 00 00     mov    %rcx,0xa8(%rax)
+ffff82d0402e867a:    48 83 c4 18              add    $0x18,%rsp
+ffff82d0402e867e:    e9 9d a9 f1 ff           jmp    ffff82d040203020 <__x86_return_thunk>
+ffff82d0402e8683:    0f 1f 44 00 00           nopl   0x0(%rax,%rax,1)
+ffff82d0402e8688:    80 4c 24 01 08           orb    $0x8,0x1(%rsp)     // set vnmi_pending=true, on the stack
+ffff82d0402e868d:    48 8b 14 24              mov    (%rsp),%rdx        // unspill
+ffff82d0402e8691:    80 a0 c0 00 00 00 f7     andb   $0xf7,0xc0(%rax)   // Clear vmcb->_cleanbits.tpr
+ffff82d0402e8698:    48 89 54 24 10           mov    %rdx,0x10(%rsp)    // Re-spill to the other stack copy
+ffff82d0402e869d:    48 89 50 60              mov    %rdx,0x60(%rax)    // Write vmcb->_vintr
+ffff82d0402e86a1:    48 83 c4 18              add    $0x18,%rsp
+ffff82d0402e86a5:    e9 76 a9 f1 ff           jmp    ffff82d040203020 <__x86_return_thunk>
 
-The advice should be "write the cleanbits you know" in order to signify
-the VMCB as clean.
+
+That is, vintr is spilled to the stack twice, with one being a
+write-only copy.
+
+Changing the static inline accessors to macros drops two words off the
+stack, but there's still one vintr on the stack, and it's the one which
+accumulates setting vnmi_pending=true.
+
+The only way I can get the code generation to work nicely is to bypass
+the getter/setter entirely.  With only the getter, there's still a dead
+word on the stack which doesn't get accessed.  With no vintr local
+variable, we get this:
+
+ffff82d0402e8620 <svm_inject_nmi>:
+ffff82d0402e8620:    48 8b 87 80 05 00 00     mov    0x580(%rdi),%rax
+ffff82d0402e8627:    f6 40 63 04              testb  $0x4,0x63(%rax)
+ffff82d0402e862b:    75 23                    jne    ffff82d0402e8650 <svm_inject_nmi+0x30>
+ffff82d0402e862d:    ba 02 02 00 80           mov    $0x80000202,%edx
+ffff82d0402e8632:    81 48 0c 00 00 10 00     orl    $0x100000,0xc(%rax)
+ffff82d0402e8639:    80 a0 c0 00 00 00 fe     andb   $0xfe,0xc0(%rax)
+ffff82d0402e8640:    48 89 90 a8 00 00 00     mov    %rdx,0xa8(%rax)
+ffff82d0402e8647:    e9 d4 a9 f1 ff           jmp    ffff82d040203020 <__x86_return_thunk>
+ffff82d0402e864c:    0f 1f 40 00              nopl   0x0(%rax)
+ffff82d0402e8650:    80 48 61 08              orb    $0x8,0x61(%rax)
+ffff82d0402e8654:    80 a0 c0 00 00 00 f7     andb   $0xf7,0xc0(%rax)
+ffff82d0402e865b:    e9 c0 a9 f1 ff           jmp    ffff82d040203020 <__x86_return_thunk>
+
+
+which is a far more reasonable attempt by the compiler.
 
 ~Andrew
 
