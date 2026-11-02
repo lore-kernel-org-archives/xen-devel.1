@@ -2,48 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C7598606A327
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B7C31606A326
 	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 09:25:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=aspeedtech.com header.i=@aspeedtech.com header.a=rsa-sha256 header.s=selector1 header.b=iBUPBSWC
-Received: from list by lists.xenproject.org with outflank-mailman.1467843.1676887 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=aspeedtech.com header.i=@aspeedtech.com header.a=rsa-sha256 header.s=selector1 header.b=maCiI1/I
+Received: from list by lists.xenproject.org with outflank-mailman.1467864.1676957 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNoHW-0003bw-T4; Mon, 02 Nov 2026 09:24:46 +0000
+	id 1xNoHb-00052r-LZ; Mon, 02 Nov 2026 09:24:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1467843.1676887; Mon, 02 Nov 2026 09:24:46 +0000
+Received: by outflank-mailman (output) from mailman id 1467864.1676957; Mon, 02 Nov 2026 09:24:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNoHW-0003bO-Ko; Mon, 02 Nov 2026 09:24:46 +0000
-Received: by outflank-mailman (input) for mailman id 1467843;
- Mon, 02 Nov 2026 09:22:14 +0000
+	id 1xNoHb-00051V-4R; Mon, 02 Nov 2026 09:24:51 +0000
+Received: by outflank-mailman (input) for mailman id 1467864;
+ Mon, 02 Nov 2026 09:22:25 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jamin_lin@aspeedtech.com>) id 1xNoF3-0003Nw-Re
- for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 09:22:13 +0000
+ (envelope-from <jamin_lin@aspeedtech.com>) id 1xNoFE-0003Su-VG
+ for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 09:22:25 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xNoF3-0071n3-8F
- for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 10:22:13 +0100
-Received: from [10.42.69.2] (helo=localhost)
+ id 1xNoFE-0071pr-Bp
+ for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 10:22:24 +0100
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jamin_lin@aspeedtech.com>)
- id 6ae8563b-8faa-0a2a0a5109dd-0a2a45029824-34
- for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 10:22:13 +0100
-Received: from [40.107.44.94]
- (helo=SEYPR02CU001.outbound.protection.outlook.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ae85648-8faa-0a2a0a5109dd-0a2a4506a3ce-22
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 10:22:24 +0100
+Received: from [40.107.75.129]
+ (helo=OS8PR02CU002.outbound.protection.outlook.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jamin_lin@aspeedtech.com>)
- id 6ae8563f-6ca4-0a2a45020019-286b2c5e28eb-4
- for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 10:22:12 +0100
+ id 6ae8564d-195a-0a2a45060019-286b4b814aba-3
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 10:22:23 +0100
 Received: from SEZPR06MB7362.apcprd06.prod.outlook.com (2603:1096:101:253::10)
- by SI2PR06MB5265.apcprd06.prod.outlook.com (2603:1096:4:1e4::11) with
- Microsoft SMTP Server (version=TLS1_2,
+ by SEYPR06MB6824.apcprd06.prod.outlook.com (2603:1096:101:1a4::12)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.8; Mon, 2 Nov 2026
- 09:22:04 +0000
+ 09:22:18 +0000
 Received: from SEZPR06MB7362.apcprd06.prod.outlook.com
  ([fe80::cd2d:35d2:a702:1de6]) by SEZPR06MB7362.apcprd06.prod.outlook.com
  ([fe80::cd2d:35d2:a702:1de6%4]) with mapi id 15.21.0592.007; Mon, 2 Nov 2026
- 09:22:04 +0000
+ 09:22:18 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -54,20 +54,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=aspeedtech.com header.i="@aspeedtech.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Gyjn4LB6+PdZtvqQNEOUdcBHK5wTtbHvJlOdRmJVquNlseQaaQWpjwWHf78Nyk9Ot2qnU2Ncy0XDUGrASoEMNo6r/Hb1jkMHm+FVKzDbXqR51tNdrLwJpxpWkVkdhXF2hLOKY1tSIark6S5k7+nH5tZ5gjaGTsvjekh6Z820cI5mNU8a+WawXfENSOJDSnfX5VjaCIkxLPNcPDIjcdvfT/L2rwB/AqwuqFBhO5mGQN+louEAGM4hjnt68Pe5Bjje8KOyH0SfuDbl5luE/+vnK5pYaYGr691Sk9LgetEQwy4z1pfqYL1BZvUQa7Om10E+QGgUc9niIcOL5AjH2jvBgQ==
+ b=dsGPgrnBA2oravjeJk9r01LBLChIFkLu41VIsTNn2HTUOYNVb+EPoTcUivcgpgFeps1SZXHPpDzI1h2bjygp8Beh1zH++ZBl/Q7DbnvBjvP+umZrxyOtsHx4kxpzMWO80JeJ9CTPO6/TRzdf0LT322YJ2WHLg39zxTF7TjjhVHxKgMC1u4lZ24XR0qZQv3rE+RenAbaUDYLZALtGIMLJc5xSVu0uFPpJBU6dWA3RVNn5/iiFB33mr/67p3VFJAVec2HIm0BLU5kjS+HGn3LG5BzslQp0Om4yW+RSPs4WW40qqBdBkbpzl0jyCqPkSsLmEmOBMqWeDzEtnwfN7lj7/Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1J9hw3nrZMuGs8jMFjazW/vAJ+CqVwyt+EmnecSmrgw=;
- b=abLL23A+1D9u4RGAkbd73j83KraWYBURQNSsjGbAddvy6pE00kScIGFLjYIurCgVkHGBK9lCFO1C9nsJQ4I+2KASOy8NHeWx1/5U9qO6a6BMpdP/kR+lgXXETKx1wqLmnGjH+Z5nM9JSHQcVKMX5UmuTGMW3SyDYPEf5snCdKnnXHjHR0Ahz23OwWrX+59ZtOOZ1R8e+XsSCEO7o0e4MDGrxMzz59PaUO3FOH0T4nytrQ5o3OMqazlXlBDRnZMQqvDjCgZ+Dp+C5ekzyl3ekvuR48859yM6eH/yWm5+BYiiYnZGkIG8q0WspQIqAx8D0vGNOiZJz+/uU2DvRfz/S+g==
+ bh=icejiFuGpf+qVEtUBiMzeJvMEi17GcoPM9MYM4qmsik=;
+ b=NxrHBcS2jBD7JozZjseyw9aG/FCgun8YL5tyhdAoeQOdt5XOoHauWclJnWuqy7ORp4MxGuoNMhzDVQu6h87UQWWAwenIDhihfDpe+nvs8ie4+6MLJG9OMtBe4EhKXrNCq2k8TZp47STPh4Zhhbb51Yyut8HkrkeXvOM9crFw0TjMf8euVi/iv1Xgsy2bYbNDOL6C/e3SnRRQaX0chc8ii/MPm/m/3r/fl4nzqEKtdRAVbgz7AyK15qc7KTopmlwcH64DziQr7wW6nJuEXw6NAdBYVuI3O+GSnzlxX1EmEsPXKIxpLXZbCFb8TLlUL/L9Lt/GSKm//qdKeT5N9BFFig==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=aspeedtech.com; dmarc=pass action=none
  header.from=aspeedtech.com; dkim=pass header.d=aspeedtech.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aspeedtech.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1J9hw3nrZMuGs8jMFjazW/vAJ+CqVwyt+EmnecSmrgw=;
- b=iBUPBSWC18cOS+WnFIYcfhlpg1QitVXNw80T8bDrQN6pEOZYEnuAOOm2sFDDqgyRL2C/9JG4nOmGjg4T5WcBA1AaXRFvgISvSUO10Uxx/C+357U4+3neCw6p33sndZKenbNsKxTyiH5YBkCKGMdrryTN/7WOb01Efj3Lh3LHyjHJE7OxFERXS9x3CEZf7VfWw5/s11MWenREnIYqWxZ9pnzVmZuwCV5ROZ6H5u7ZaHv95Kj41KkBiofNfayjVoIDFQaqHPitJLe/G7Ie1Bc+5GksdjPflY8ZGi+gBT55mwPLXUMneupu33VD2UNJ60scnOT5ob9qD8vvVvdI5fcJGw==
+ bh=icejiFuGpf+qVEtUBiMzeJvMEi17GcoPM9MYM4qmsik=;
+ b=maCiI1/IPo6RIDiHP4bILEa1zkWNHBcf9q5FmjkMyb9cOhB/abooHHmn8eW6hbWQjvPCZnv7Ma9zjH3MMtYlZCcgib6GuYe1VsC8wdV1835W4pj+fN/ipZyyku7khDtSDwWH2YPLHl3j2gUsRTLjBHSGmDZkD+oukEPgKzfUeZg20aXB1vHn7j/GCWBO2nAY+Scu/0VJY+QiFD2YyAkYr4MN9JlTNl4EXk4U73llbP0K4cAwYmCEScngw2QInobougXWmZVVZvsTOZXyOorXyeXFQQMehgzct4/SxKP+N/UpD5NqHO253ycrVLz55YN6iH7hW28vEDcXRBgR7X10FA==
 From: Jamin Lin <jamin_lin@aspeedtech.com>
 To: "kraxel@redhat.com" <kraxel@redhat.com>, "marcandre.lureau@redhat.com"
 	<marcandre.lureau@redhat.com>, "junjie.cao@intel.com" <junjie.cao@intel.com>,
@@ -83,11 +83,12 @@ To: "kraxel@redhat.com" <kraxel@redhat.com>, "marcandre.lureau@redhat.com"
 	<qemu-devel@nongnu.org>, "open list:ASPEED BMCs" <qemu-arm@nongnu.org>, "open
  list:X86 Xen CPUs" <xen-devel@lists.xenproject.org>
 CC: Jamin Lin <jamin_lin@aspeedtech.com>, Troy Lee <troy_lee@aspeedtech.com>
-Subject: [PATCH v8 01/18] hw/usb/bus: Add an auto-hub flag to the USB bus
-Thread-Topic: [PATCH v8 01/18] hw/usb/bus: Add an auto-hub flag to the USB bus
-Thread-Index: AQHdaqufLoPY3HwMvk6g+z4FKihsFg==
-Date: Mon, 2 Nov 2026 09:22:04 +0000
-Message-ID: <20261102092201.1729245-2-jamin_lin@aspeedtech.com>
+Subject: [PATCH v8 11/18] hw/usb/redirect-server: Add a usbredir server device
+Thread-Topic: [PATCH v8 11/18] hw/usb/redirect-server: Add a usbredir server
+ device
+Thread-Index: AQHdaquo7Sqzuz2N4UaAeTmCp9IJfA==
+Date: Mon, 2 Nov 2026 09:22:18 +0000
+Message-ID: <20261102092201.1729245-12-jamin_lin@aspeedtech.com>
 References: <20261102092201.1729245-1-jamin_lin@aspeedtech.com>
 In-Reply-To: <20261102092201.1729245-1-jamin_lin@aspeedtech.com>
 Accept-Language: zh-TW, en-US
@@ -97,69 +98,69 @@ X-MS-TNEF-Correlator:
 authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=aspeedtech.com;
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SEZPR06MB7362:EE_|SI2PR06MB5265:EE_
-x-ms-office365-filtering-correlation-id: 227b7a28-a186-40a4-1695-08df38c2c24d
+x-ms-traffictypediagnostic: SEZPR06MB7362:EE_|SEYPR06MB6824:EE_
+x-ms-office365-filtering-correlation-id: 98bbcd31-43c4-43f1-a02a-08df38c2cacb
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam:
- BCL:0;ARA:13230040|376014|7416014|1800799024|23010399003|366016|10067099003|18002099003|22082099003|921020|38070700021|56012099006|261021123027099003|261021121427099003|261022105027099003|261026140227099003|261009223027099003|261028144727099003;
+ BCL:0;ARA:13230040|1800799024|366016|23010399003|376014|7416014|921020|38070700021|261021121427099003|260925022911599003|260925021311599003|260925021911599003|5023799004|56012099006|261009223027099003|261028144727099003|261021123027099003|261022075727099003|261022105027099003|261026121527099003|261026140227099003|10067099003|18002099003|22082099003|3023799007;
 x-microsoft-antispam-message-info:
- 0O/obyNDU2v73IbP/75EQlVLECLaWrJOIL6PL8uejeF4g34gkXh7y8zCcFCqH6Ds11T8oxZb8CVLTH8qcs4+ytM7NaJ0Ua6npDmbnGk7+LaK6UK7b6RCplu8BR9jRZqTYmLhsFfR/yO9ewTjbZm+q6J002RNwuqsNwfntPLlN2pWeOHlUqbEeYPD71Y9uGeOeStsXd+CZ4WbhlUG2Urmn35hFuXchDrzQlWyezTDZ7CA93gMSzZhXUdbN01l1N7N/1p7ZKPzOlIDJJRmxH1qkS2kwRRDWzePGdlW7zkmROM25Mw5rwRUNXBYaHmy8SZV7BIYUKUbXxQqsjbvZPrAxrrfuEt0VyWB8PmV9AGzqkEiTPUpY8fQGoeGa1Ay9nVRvFwbbdvwSxuZz5xdpUgyuj47wPsk64iGgkhSt69eyuYr7aNUAjX8QGSfpfmC7VAGczK0+LAMlVyE4rHJg4CRioxQYG2WVhlw6SmYgXRcMliYUO4GT0ztWRAGyDHKpyzFlxYxY57YgvnpZ6y5L+u36PXhbrz4t6HOBklMTTZ+rRfEJVpl9sITQcjhJeCnDPR8mt8KP5Ix0fl+S28dITIz3wCMVAa+B4H44WqoE4xE/Vt4afulbnu6wLupSk0qayxWEGmxgjJJ3d6GbE3SCe4/c14o2PNqDtNC1TSesEifr+uFxpVIgiGYatroSZFKh2/vZdQ/EnyBD9zGe2XZQjdvCfl3lxyLC3jg57so+f53VM0=
+ vesjlse4eLK/zV9wuxXU2dsHnuD/zYZPxbrw3pPx4S2XX2JRSIXQpsrtJz1mYjfA34lK2Ewrkg+mDMYfU3fWXmjO+kEUHAYgJlKV1QOeaUKGf7ITJkQeALqUy1r0pqq5aYnPyN6rqLlNWkn4TUfkO2+eQ+/yzzTXmfPX3LTO+CGUE9OV7y0FPd+c45pC8tbwb3IyF5JyOcNUFeOI0Gb9HIPn70n5RhDIgMtXbmo6CB4mI9aR8AoTr6/21SHSORLrfe00qKIWeWqQbUodcDmD/ZT4uFv75k1zpBjBMJ8fn+stIgP9KVfLWW+7YRZXEyazT1GcumyaXHBQskgSdS9P2i43FMVyP/k0zxkNVoEBOvVQzNJF+1KFpGHNv+458wmOfwuB+Wql8UJw+g2J4FRkyV34OwSxYr5OXc4iCHqB3cx7IduouuCctnOv8pB4camtX/fM/MwJreXuVbNkQt6+biW5asN+e5RsPNCjtNsIodwE5atEENSHPx1CuuaTUpeTYpzAEghKPIn6Ry7w38GN+uY6JwS8e8V26HK51WltshRAkGrr4BEkraV4po3pETo5GJiAappWOiBbkNbAuGlFS8t0AB8Ds1Wp3A3HRF2daDh6lohXtPr0xgbuTypZdttZuMlIR2C9ntavG11gb94cWMxUp83dV2sy9Un03s2/OYJWSazLPsc8xBAooUeOeTsFbhwbqrBLEB/UzC3lrUBjfvMNAvM5+9YNCBMxOEC0RKTX7jR4hiWXzg+lVYV68gbX
 x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SEZPR06MB7362.apcprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(1800799024)(23010399003)(366016)(10067099003)(18002099003)(22082099003)(921020)(38070700021)(56012099006)(261021123027099003)(261021121427099003)(261022105027099003)(261026140227099003)(261009223027099003)(261028144727099003);DIR:OUT;SFP:1102;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SEZPR06MB7362.apcprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(23010399003)(376014)(7416014)(921020)(38070700021)(261021121427099003)(260925022911599003)(260925021311599003)(260925021911599003)(5023799004)(56012099006)(261009223027099003)(261028144727099003)(261021123027099003)(261022075727099003)(261022105027099003)(261026121527099003)(261026140227099003)(10067099003)(18002099003)(22082099003)(3023799007);DIR:OUT;SFP:1102;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?YAw2mZiHmdeu1t2tbeIx8gh8Z1P4A27dlF66VX32Vr7xtW8b6OsHwvGjXD?=
- =?iso-8859-1?Q?zR0nmXbAshMpo5/vG8qz0L+Q5pvazTGb3e7g+Adm0EXOg13EkDGc5dGOFh?=
- =?iso-8859-1?Q?XCKkJd4ar9Y0Lp6gyBctlt3vkgvedRAldtnNb1apqMX9vOuifGu4wLQRdm?=
- =?iso-8859-1?Q?LnT7/QhRhxWsfkULSWPCJaOL4FrUaQaXv/f53eeqocFXAD9pX/psZZ1UF3?=
- =?iso-8859-1?Q?pRAUSrOewCMitbR/VEI9uR25WBhW54pJvFpVqMZqzJR+hU1+qDyJSe2E6G?=
- =?iso-8859-1?Q?kYjWZdx+ttS8b/5Gn1DxcVyR+ghj8nTb0lJgxXt19ZhtsiIybHGJAxf8bd?=
- =?iso-8859-1?Q?vUmF9Q+f70xAWFZ5N+1QvZfnrbUxPTz/C55hm68wGXsiw29Xf+Znlbvy1S?=
- =?iso-8859-1?Q?fHbo+gw3F6TWm5Ce2hO1bEKlEiLWqnEF2IQO9KLmtPxcsQqPraulwI/M3o?=
- =?iso-8859-1?Q?GYZAODKIqNSHvR9aTiNTjtgOUU48nOkvj0o070xOGI7S7TLj9SNSSM+B2/?=
- =?iso-8859-1?Q?jquZrmzsyddJ3GRNT3FcjGsTl9eJCE0Hv8ZwWVfvozQvLyKNx6Z8dybu5y?=
- =?iso-8859-1?Q?BptG/mkq5Bsa66h2WSdbsoAw4JpvM3w98ZcRhmXBxE9nTvWwMh/TdAKzaP?=
- =?iso-8859-1?Q?T+jY/VdCruviPxkaJ5uTEVIynzVvQmmFaWsgxRSXybY8u2rEVxg53gf5m6?=
- =?iso-8859-1?Q?TaMYql4E2csIV0Rj0Z1X7vAfGnTRWhhzhrU2H5YxDPr8DuZGcK4NrE7D2r?=
- =?iso-8859-1?Q?6B4gq691ydTMGRTP4wStQl5s1Lpy/4AsCWxGSsQUvbb4RXhTvWOltfv332?=
- =?iso-8859-1?Q?S5p+xLk6yg/8jPKK0dqQ8npDiKNXrX7wE/HUfwdiyVEhYfhOlkDz6LLO55?=
- =?iso-8859-1?Q?e7LlIecXLWpP3epHA15bERTriYCzbDGD0jIDs4yEU3u5cHpCMZjiGiJL8t?=
- =?iso-8859-1?Q?3wVIw1T/9mXoiJiJ3BEQDcbqP2dcNT6Hprr0CIL+e452rqiTW7cpsdlInY?=
- =?iso-8859-1?Q?eH35udjE+Z9nqi3VI2in7LIg8iLZ+emK0S5erLyL3PKvoK2JTEtHTUnK88?=
- =?iso-8859-1?Q?pbcGWx04P2pGomZoGbgHjNUfEC4a4LZnT+wduzAjgS67M+SMZLUyNKID8I?=
- =?iso-8859-1?Q?Fcpkeci/8ouRR1HdHpxDZL9CjJWNauDCNdWMnOZlOHjVhMsEIvVraFUaz0?=
- =?iso-8859-1?Q?z5Axi3XvKkGgmkHrKxbz3iQdVx2X+zeqctTwqBvRqXDdszy2uRFFFU/HD0?=
- =?iso-8859-1?Q?sIrHxNDiXTYs9TWPolM4+UHNaX9/YSC8hcfB3P1BY5HzDDhIy73FhO1gT8?=
- =?iso-8859-1?Q?BvbYkWqBBs6Qqx/Wy3suqqYML8tTpwRsKvpSjX1a3Ht8o82hlkEVhfvnPp?=
- =?iso-8859-1?Q?hUaGPNQbuE9j6SAY8PLbZu/eeSp42/3XS19QN6JQkUnkMkff8HTjlWidMO?=
- =?iso-8859-1?Q?kFUM3Yqsa5b8BIxcQyRo6DXJ/2qoLYNl4qAdGSVThu4VLSsAXm+owbt8I3?=
- =?iso-8859-1?Q?2nzCgSGW6BoJMo1wrJ3Oqs2Byw0SuR3jzN+I/2g+QqFuoZcSXVeW3HN+J5?=
- =?iso-8859-1?Q?Y4ikKudwK4XNeHKVfnpp5HymbCk/wpVq6+xcH1Bz4G7hkF0luNq5SNbyNe?=
- =?iso-8859-1?Q?z8otUJ5ktEdbnGQum/mYg9xoqJXUX5V1Zr8ddTwUUv75NYZBnyGMK4hN6f?=
- =?iso-8859-1?Q?ZiPqt1EwKgLTYU2pKGhNAxytjZct7Om4RGW8+pAdK4mpnnsHGGB38w07Rq?=
- =?iso-8859-1?Q?apjkuhMy9sVE58ejCziIO5IRBHJji50PlviXlk8ywbrTBHLlqL/TLxrhkm?=
- =?iso-8859-1?Q?ph7K//+2gQ=3D=3D?=
+ =?iso-8859-1?Q?NYairemVQg6BPPiGZQYRBhemXOuHTsHW7kYcO8NNhcKd/bIFbZiPMW6klC?=
+ =?iso-8859-1?Q?51YoT3XZFQpOYjtnGjw3KgRbq23RzFQF5wuh4najQR7dlGMWBMs+lv2uEk?=
+ =?iso-8859-1?Q?SkRUiusN+xlEUdqbyenWaaGPVPL2Ky/401UCDiIQAERRncxH4OcxcV9zVE?=
+ =?iso-8859-1?Q?es2cOj+FWekps4OvAoNsA+jQg855oS6eXES/cEjbEBffUUOoLjDv4MZYG7?=
+ =?iso-8859-1?Q?mFzZB9BEU4VbjvZFiM0CzafW976lmt9FEodt/JdelZeaBpkFaedU+etpGn?=
+ =?iso-8859-1?Q?WL4reo2+xpn3DpL7/CqcZNcIfZGOdLhj/2A6SkdvFLKZLHjNMOynDyNE/m?=
+ =?iso-8859-1?Q?AKSZuNq2xrENbk1w+KKSdbTj4Zc8GcqG6hSBYZagUDAXG07pJW7JLb9piG?=
+ =?iso-8859-1?Q?W4h3xSNGLUybgmxIhnSXWgcMnhgdSb87xk9DqB+xAd88pezLGkWIiDdajY?=
+ =?iso-8859-1?Q?+KEhKgq4hcgC0qiooAxB+X2qTPXeX1MLy334aexqL3+JdCD0w3gMt6/P+C?=
+ =?iso-8859-1?Q?j+T1mnnZfdNfkkQ/texAD3BSJK7jVTS2PTVv7FtJZXPRgbIk5tnKxzI9H7?=
+ =?iso-8859-1?Q?A9VlpFT9faaHAodvStynHbtlTyu9HB9OGjJ42sLDxVT2cHa2AfsS3ofqU/?=
+ =?iso-8859-1?Q?3z9QjaWr7kW97YT2BgplfyCz7fnoEc3jnax9HKTaKHsxJ7FfcqsaolovIg?=
+ =?iso-8859-1?Q?pYAqMD7eGm5N0r7kSVTLdKRuLwcSY7VHOYughIxaF0GlnAL1MtARrEvKht?=
+ =?iso-8859-1?Q?RAhQzpI6xx8cgbHkJgkxGnksDBdNiVEODrNWDicTX3joNCOrMTkLnGKS1P?=
+ =?iso-8859-1?Q?NZAvwdO9kH6mCeIqVBztA+msPr9VoEfDnmBhHvy/l9zIyfv3qsO/otHuJ9?=
+ =?iso-8859-1?Q?6aIhOQtuLQ7aVD1oOCzXEM26trWZHakAnXVYRYZcOqgCGPFhPnjIP73lul?=
+ =?iso-8859-1?Q?I4KtL8WBCi/sdHqgNvfM7FvYWQK96kWhR0oasnGVZlsQNcHLi3LRlnqgKR?=
+ =?iso-8859-1?Q?dcKBJEfyoBjWzcwzPd5nakymgR/TBp6o3GDlkL3FfkBJw47TeZRdtkHxDX?=
+ =?iso-8859-1?Q?kqlDs94aXJVJHIV7DJPKCw3FZFEGu1DGJKwYpkRgSMRhlAnkO8u3/5r1KW?=
+ =?iso-8859-1?Q?qqk1w+7UvgtPFUk/yY8c4PQ+5kiYA7W76aOZ6xsrsLlxYK7Aj73UfuFElQ?=
+ =?iso-8859-1?Q?O9lxItwINABcrm44UFZ/04AY/JBdKBtUXLX7filsee7OzLlvyl4rCNYeZa?=
+ =?iso-8859-1?Q?ZiB+QqeNs93OXdKKSrcDskn3YooE3zJaMgvbPx2K39tlhLS7Cxl3/mf0D5?=
+ =?iso-8859-1?Q?mzq5Vo04wI+qyGxl/1xrcNMjtNrVnQzwc+7ALgGaVCKmQzkTUwJ9GFjg9n?=
+ =?iso-8859-1?Q?WSC+4rjldDE05mjmqoY3v5NCB3SbGYZOCwlVFmLrJRmmIhtHrwVpYkxnaU?=
+ =?iso-8859-1?Q?AYdMefqFyS61T3x3HPnOElFt+akGr752bS12aHGcFLrjWJgq030OUpCeEj?=
+ =?iso-8859-1?Q?9GUlBdAiO4E9yK7FVl7uOGxTWbwAWuRYUPCsj+fvJcIqKQjqCjcCKPf//s?=
+ =?iso-8859-1?Q?0eQ9Jps4HYHPj3hbUraoA2eyBoL4t0BPGiwyF2EkqkLrxqf6Nis5DXKmv9?=
+ =?iso-8859-1?Q?L3U/35r8n/tUe5BFAHk9yfnX5M8r4M6YYll1mlyoDrd1gTvaezN9KsEEn7?=
+ =?iso-8859-1?Q?gS8ZFwHMLIQMUffM5rMpU5MDPu9MWFvgCYuuUBfrbAmbLdU81C5vrdV4Q/?=
+ =?iso-8859-1?Q?jXDh/7kuM8XA3Gi2X2+0OxmxYr4u++dxHz9/P2BgSjfL745hSvI/soIwly?=
+ =?iso-8859-1?Q?RC6uJmDf7Q=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-Exchange-RoutingPolicyChecked:
-	YbcnIxKQKycce6RbQN+4KaX5VROZdTBnF4Zvykh19cMgjoLYovwgmCBmA8DWvnZrEnL4HHlPDczhBxudEfeP/kserASOFyKjvT93TejmoLWNr98ftHuX1HJwhOsvwYib1r1YbB+gu32uPqsGwzD4aMKPWBueUwTSOfPC2Uj95dCg5zNPFSQm/jP7jBtopYXFGnka9xVfGzyOwCe1meo4+pAXAr3emB+h0wEHEmUGocCtyoEsAPVAvAfmLBuNpQ4ROLA72CaJ4h2W9m7nvD+dxyJ4WwL+bh2JNfXlsP+/pv1kCjXtXVPAISErqAYnDxJYfgXUuATF1bMXLBpIVQ8PCg==
+	Xz4+eyfZeW8S4sc9XLKUESa8fQsVDp/ZBKqAEO0XtelsBelcGiYYFSeWoo/Kj+Hh2/bn4TNyLTv6RftZ8ivl21+gczoc4FeqinstSZli8HSvdfHQ8ednuglemgiGtVGjrZvTKvTOE0wLZRqGW2F0ciKFUbyYU0FyOQXixZjilDgHP0d+kBP3VGhoWjXY3HgjvHnZ5PGoLvlRL95jJwsvrsWW7pWE0vldy62NhSjLuPEy7eWRjmgPQOgIAig8NszTmFbeQOfLn6oQq3foP7HufJA62znDMPL7YuF2vybKfMMDD4ZNfRs1CArifMkde4EfuU2eqZ9asjf8B9MeDdqbHg==
 X-OriginatorOrg: aspeedtech.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB7362.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 227b7a28-a186-40a4-1695-08df38c2c24d
-X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Nov 2026 09:22:04.3647
+X-MS-Exchange-CrossTenant-Network-Message-Id: 98bbcd31-43c4-43f1-a02a-08df38c2cacb
+X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Nov 2026 09:22:18.6471
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: 43d4aa98-e35b-4575-8939-080e90d5a249
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: E4z5nZvU28MJlOyVFWR/L7B8HUuZq1PcZximqRBzU4sIFZf/tcIso/aGcC7qY0r+15iNGbLyJEl+2oR5G/kbDlYYH+7XyN+S6OisOxJOulk=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SI2PR06MB5265
-X-purgate-ID: tlsNG-720697/1793611333-670B02AC-27513AD6/0/0
+X-MS-Exchange-CrossTenant-userprincipalname: /8dRNTocBydkQUUUZEalZdCiPQ4/CFrceI+PDWdhTDFVPrfPGtFF0NC+w/W9vYVaKgJoi1Do5ztoIubaOrr1E84an/Ja/0MFkKF0lXWUHzg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEYPR06MB6824
+X-purgate-ID: tlsNG-16d1c6/1793611344-F540B77B-45C9D0F1/0/0
 X-purgate-type: clean
-X-purgate-size: 1984
+X-purgate-size: 7843
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -168,58 +169,206 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-usb_claim_port() plugs a usb-hub into the last free port, so that more=0A=
-devices fit. Every bus gets that today, and a controller cannot turn=0A=
-it off.=0A=
+Add "x-usb-redir-server". It exports a USB device from this QEMU to a=0A=
+USB host in another QEMU, using the usbredir protocol. The other side is=0A=
+the existing "usb-redir" device.=0A=
 =0A=
-Add auto_hub and have usb_claim_port() check it. usb_bus_new() turns it=0A=
-on.=0A=
+The name has an "x-" prefix because the device is experimental. It has=0A=
+to sit on the sysbus so that qdev can find the USB bus it provides, and=0A=
+that may change later, so the name is not fixed yet.=0A=
 =0A=
-No functional change.=0A=
+The exported device is plugged in with "-device <dev>,bus=3D<id>.0". So we=
 =0A=
-Suggested-by: Gerd Hoffmann <kraxel@redhat.com>=0A=
+have to provide a USB bus. To find that bus, qdev starts at the main=0A=
+system bus and walks down the tree. A device that is not on a bus is not=0A=
+in the tree, so the bus it provides cannot be found. We have to sit on=0A=
+the main system bus. That makes this a sysbus device, even though it has=0A=
+no MMIO and no IRQ.=0A=
+=0A=
+usbredir carries one device, not a bus. A hub cannot be exported because=0A=
+the protocol has no device address field, so only the device on the=0A=
+first port is redirected. To export several devices, run one=0A=
+x-usb-redir-server per device, each with its own chardev.=0A=
+=0A=
+The link to the remote host is a chardev, so this device cannot be=0A=
+migrated. Its VMStateDescription says so with unmigratable.=0A=
+=0A=
 Signed-off-by: Jamin Lin <jamin_lin@aspeedtech.com>=0A=
+Reviewed-by: Marc-Andr=E9 Lureau <marcandre.lureau@redhat.com>=0A=
 ---=0A=
- include/hw/usb/usb.h | 1 +=0A=
- hw/usb/bus.c         | 4 +++-=0A=
- 2 files changed, 4 insertions(+), 1 deletion(-)=0A=
+ hw/usb/redirect-server.c | 143 +++++++++++++++++++++++++++++++++++++++=0A=
+ hw/usb/meson.build       |   3 +-=0A=
+ 2 files changed, 145 insertions(+), 1 deletion(-)=0A=
+ create mode 100644 hw/usb/redirect-server.c=0A=
 =0A=
-diff --git a/include/hw/usb/usb.h b/include/hw/usb/usb.h=0A=
-index cbd4711933..cc1d6d74b1 100644=0A=
---- a/include/hw/usb/usb.h=0A=
-+++ b/include/hw/usb/usb.h=0A=
-@@ -484,6 +484,7 @@ struct USBBus {=0A=
-     int busnr;=0A=
-     int nfree;=0A=
-     int nused;=0A=
-+    bool auto_hub;=0A=
-     QTAILQ_HEAD(, USBPort) free;=0A=
-     QTAILQ_HEAD(, USBPort) used;=0A=
-     QTAILQ_ENTRY(USBBus) next;=0A=
-diff --git a/hw/usb/bus.c b/hw/usb/bus.c=0A=
-index 5cc5ffec33..92f67de4fe 100644=0A=
---- a/hw/usb/bus.c=0A=
-+++ b/hw/usb/bus.c=0A=
-@@ -92,6 +92,7 @@ void usb_bus_new(USBBus *bus, size_t bus_size,=0A=
-     qbus_set_bus_hotplug_handler(BUS(bus));=0A=
-     bus->ops =3D ops;=0A=
-     bus->busnr =3D next_usb_bus++;=0A=
-+    bus->auto_hub =3D true;=0A=
-     QTAILQ_INIT(&bus->free);=0A=
-     QTAILQ_INIT(&bus->used);=0A=
-     QTAILQ_INSERT_TAIL(&busses, bus, next);=0A=
-@@ -413,7 +414,8 @@ void usb_claim_port(USBDevice *dev, Error **errp)=0A=
-             return;=0A=
-         }=0A=
-     } else {=0A=
--        if (bus->nfree =3D=3D 1 && strcmp(object_get_typename(OBJECT(dev))=
-, "usb-hub") !=3D 0) {=0A=
-+        if (bus->nfree =3D=3D 1 && bus->auto_hub &&=0A=
-+            strcmp(object_get_typename(OBJECT(dev)), "usb-hub") !=3D 0) {=
+diff --git a/hw/usb/redirect-server.c b/hw/usb/redirect-server.c=0A=
+new file mode 100644=0A=
+index 0000000000..1423564d22=0A=
+--- /dev/null=0A=
++++ b/hw/usb/redirect-server.c=0A=
+@@ -0,0 +1,143 @@=0A=
++/*=0A=
++ * USB redirector, server side=0A=
++ *=0A=
++ * Copyright (c) 2026 ASPEED Technology Inc.=0A=
++ *=0A=
++ * SPDX-License-Identifier: GPL-2.0-or-later=0A=
++ *=0A=
++ * Exports a locally emulated USB device to a remote USB host over the=0A=
++ * usbredir protocol, so a device emulated in one QEMU instance can be=0A=
++ * enumerated by a host controller emulated in another one.=0A=
++ *=0A=
++ * Architecture. The left column is a request going to the device. The=0A=
++ * right column is the answer coming back. The middle hop carries=0A=
++ * usbredir messages over a socket. The top and bottom hops carry=0A=
++ * USBPackets inside QEMU.=0A=
++ *=0A=
++ *     remote QEMU: guest driver -> EHCI/XHCI=0A=
++ *              |                     ^=0A=
++ *    USBPacket |                     | USBPacket=0A=
++ *              v                     |=0A=
++ *     "usb-redir" (the client)=0A=
++ *              |                     ^=0A=
++ *     usbredir |   chardev socket    | usbredir=0A=
++ *              v                     |=0A=
++ *     x-usb-redir-server (the server, this file)=0A=
++ *              |                     ^=0A=
++ *    USBPacket |                     | USBPacket=0A=
++ *              v                     |=0A=
++ *     any USBDevice, "-device <dev>,bus=3D<id>.0"=0A=
++ *=0A=
++ * "usb-redir" (hw/usb/redirect.c) is the client:=0A=
++ *   - it takes a USBPacket from the remote guest and writes it to the=0A=
++ *     socket as a usbredir message=0A=
++ *   - it reads the answer from the socket and completes the USBPacket=0A=
++ *=0A=
++ * This file is the server. It does the same thing, but backwards:=0A=
++ *   - it reads a usbredir message from the socket and runs it as a=0A=
++ *     USBPacket on the bus below=0A=
++ *   - it takes the result of that USBPacket and writes it back to the=0A=
++ *     same socket as a usbredir message, for the client to read=0A=
++ *=0A=
++ * A USB device has to sit on a USB bus, and in QEMU a USB bus is always=
 =0A=
-             /* Create a new hub and chain it on */=0A=
-             hub =3D USB_DEVICE(qdev_try_new("usb-hub"));=0A=
-             if (hub) {=0A=
++ * made by a host controller. So this file makes one and acts as the=0A=
++ * host controller on this side. It models no real chip: its cable is=0A=
++ * the chardev socket. The real host is in the other QEMU.=0A=
++ *=0A=
++ * usbredir carries one device, not a bus. A hub cannot be exported:=0A=
++ * the protocol has no device address field. To export several devices,=0A=
++ * run one x-usb-redir-server per device, each with its own chardev.=0A=
++ */=0A=
++=0A=
++#include "qemu/osdep.h"=0A=
++#include "qapi/error.h"=0A=
++#include "qemu/module.h"=0A=
++#include "migration/vmstate.h"=0A=
++#include "hw/core/sysbus.h"=0A=
++#include "hw/usb/usb.h"=0A=
++#include "qom/object.h"=0A=
++=0A=
++#define TYPE_USB_REDIR_SERVER "x-usb-redir-server"=0A=
++OBJECT_DECLARE_SIMPLE_TYPE(USBRedirServer, USB_REDIR_SERVER)=0A=
++=0A=
++struct USBRedirServer {=0A=
++    SysBusDevice parent_obj;=0A=
++=0A=
++    /* USB bus */=0A=
++    USBBus bus;=0A=
++    USBPort port;=0A=
++};=0A=
++=0A=
++/*=0A=
++ * USB port ops=0A=
++ */=0A=
++=0A=
++static void usbredir_server_port_child_detach(USBPort *port, USBDevice *ch=
+ild)=0A=
++{=0A=
++    /* We only export the device on our own port. Nothing to do. */=0A=
++}=0A=
++=0A=
++static void usbredir_server_port_wakeup(USBPort *port)=0A=
++{=0A=
++    /* We do not pass remote wakeup to the host. Nothing to do. */=0A=
++}=0A=
++=0A=
++static USBPortOps usbredir_server_port_ops =3D {=0A=
++    .child_detach =3D usbredir_server_port_child_detach,=0A=
++    .wakeup =3D usbredir_server_port_wakeup,=0A=
++};=0A=
++=0A=
++/*=0A=
++ * USB bus ops=0A=
++ */=0A=
++=0A=
++static USBBusOps usbredir_server_bus_ops =3D {=0A=
++};=0A=
++=0A=
++/*=0A=
++ * Device registration=0A=
++ */=0A=
++=0A=
++static void usbredir_server_realize(DeviceState *dev, Error **errp)=0A=
++{=0A=
++    USBRedirServer *s =3D USB_REDIR_SERVER(dev);=0A=
++=0A=
++    /* One port: usbredir carries a single device. */=0A=
++    usb_bus_new(&s->bus, sizeof(s->bus), &usbredir_server_bus_ops, dev);=
+=0A=
++    s->bus.auto_hub =3D false;=0A=
++    usb_register_port(&s->bus, &s->port, s, 0, &usbredir_server_port_ops,=
+=0A=
++                      USB_SPEED_MASK_LOW | USB_SPEED_MASK_FULL |=0A=
++                      USB_SPEED_MASK_HIGH);=0A=
++}=0A=
++=0A=
++/*=0A=
++ * The link to the remote host is a chardev, and we cannot migrate=0A=
++ * that. So this device cannot be migrated either.=0A=
++ */=0A=
++static const VMStateDescription vmstate_usbredir_server =3D {=0A=
++    .name =3D TYPE_USB_REDIR_SERVER,=0A=
++    .unmigratable =3D 1,=0A=
++};=0A=
++=0A=
++static void usbredir_server_class_init(ObjectClass *klass, const void *dat=
+a)=0A=
++{=0A=
++    DeviceClass *dc =3D DEVICE_CLASS(klass);=0A=
++=0A=
++    dc->desc =3D "USB Redirection Server";=0A=
++    dc->realize =3D usbredir_server_realize;=0A=
++    dc->vmsd =3D &vmstate_usbredir_server;=0A=
++    set_bit(DEVICE_CATEGORY_USB, dc->categories);=0A=
++}=0A=
++=0A=
++static const TypeInfo usbredir_server_types[] =3D {=0A=
++    {=0A=
++        .name =3D TYPE_USB_REDIR_SERVER,=0A=
++        .parent =3D TYPE_DYNAMIC_SYS_BUS_DEVICE,=0A=
++        .instance_size =3D sizeof(USBRedirServer),=0A=
++        .class_init =3D usbredir_server_class_init,=0A=
++    },=0A=
++};=0A=
++module_obj(TYPE_USB_REDIR_SERVER);=0A=
++module_kconfig(USB);=0A=
++=0A=
++DEFINE_TYPES(usbredir_server_types)=0A=
+diff --git a/hw/usb/meson.build b/hw/usb/meson.build=0A=
+index 429dcd6a24..0061b935e6 100644=0A=
+--- a/hw/usb/meson.build=0A=
++++ b/hw/usb/meson.build=0A=
+@@ -78,7 +78,8 @@ endif=0A=
+ if usbredir.found()=0A=
+   usbredir_ss =3D ss.source_set()=0A=
+   usbredir_ss.add(when: 'CONFIG_USB',=0A=
+-                  if_true: [usbredir, files('redirect.c', 'quirks.c')])=0A=
++                  if_true: [usbredir, files('redirect.c', 'quirks.c',=0A=
++                                            'redirect-server.c')])=0A=
+   hw_usb_modules +=3D {'redirect': usbredir_ss}=0A=
+ endif=0A=
+ =0A=
 -- =0A=
 2.43.0=0A=
 
