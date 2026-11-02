@@ -2,48 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 952EA606A326
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 07:41:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DAD2E606A326
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 08:10:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=selector1 header.b=jxfg3+vL
-Received: from list by lists.xenproject.org with outflank-mailman.1467794.1676836 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=agjeh3/D
+Received: from list by lists.xenproject.org with outflank-mailman.1467813.1676844 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNmf8-0005nv-Ue; Mon, 02 Nov 2026 07:41:02 +0000
+	id 1xNn6r-0000tF-Dw; Mon, 02 Nov 2026 08:09:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1467794.1676836; Mon, 02 Nov 2026 07:41:02 +0000
+Received: by outflank-mailman (output) from mailman id 1467813.1676844; Mon, 02 Nov 2026 08:09:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNmf8-0005no-RL; Mon, 02 Nov 2026 07:41:02 +0000
-Received: by outflank-mailman (input) for mailman id 1467794;
- Mon, 02 Nov 2026 07:41:01 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <chunjie.zhu@citrix.com>) id 1xNmf7-0005nf-Be
- for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 07:41:01 +0000
+	id 1xNn6r-0000t8-BI; Mon, 02 Nov 2026 08:09:41 +0000
+Received: by outflank-mailman (input) for mailman id 1467813;
+ Mon, 02 Nov 2026 08:09:40 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xNn6q-0000t2-9s
+ for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 08:09:40 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xNmf6-008UYS-6A
- for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 08:41:00 +0100
-Received: from [10.42.69.6] (helo=localhost)
+ id 1xNn6p-006J7v-7s
+ for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 09:09:39 +0100
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <chunjie.zhu@citrix.com>)
- id 6ae83e81-bab6-0a2a0a5309dd-0a2a4506a998-30
- for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 08:41:00 +0100
-Received: from [52.101.52.46]
- (helo=BL2PR02CU003.outbound.protection.outlook.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <chunjie.zhu@citrix.com>)
- id 6ae83e8a-195a-0a2a45060019-3465342ede1e-3
- for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 08:40:59 +0100
-Received: from LVXPR03MB989161.namprd03.prod.outlook.com
- (2603:10b6:408:37e::6) by DS3PR03MB873329.namprd03.prod.outlook.com
- (2603:10b6:8:43b::18) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.569.12; Mon, 2 Nov
- 2026 07:40:56 +0000
-Received: from LVXPR03MB989161.namprd03.prod.outlook.com
- ([fe80::f728:f8a9:4e0c:d902]) by LVXPR03MB989161.namprd03.prod.outlook.com
- ([fe80::f728:f8a9:4e0c:d902%5]) with mapi id 15.21.0569.011; Mon, 2 Nov 2026
- 07:40:56 +0000
+ (envelope-from <jbeulich@suse.com>)
+ id 6ae8453e-e002-0a2a0a5209dd-0a2a4505e320-10
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 09:09:35 +0100
+Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ae8453f-4cb1-0a2a45050019-d155802ec93d-3
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 09:09:35 +0100
+Received: by mail-wm1-f46.google.com with SMTP id
+ 5b1f17b1804b1-4a20bde60a0so19989545e9.3
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 00:09:35 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4aa81a896ecsm343448895e9.9.2026.11.02.00.09.34
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 02 Nov 2026 00:09:34 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,287 +49,214 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-Id:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=EXSlcyAAMvOqUm+78u5BHC8IKK4xPg0czm0XK+Tmim4t2eNtfR6XSjVPW/3nt4haQ0OrzzWX6sK/CIGlBafr1/M5kt86hXPlEFqS2LPZ7ElWYZXvxQPa7qXTpWhlYUaJFTVNUStM2ne8t+f2URHoF0gAPX3gPprpKHkbmKKMYOSvmP2NRryLi3mBA14j8LNUVSejjNAIdzq5llzTzHYlC859RTU2F6lZTaoGOwtaCSKPLSD0seOswuSUuclYFKxNqI7lTwaeW71RH9k2fKWCJDQLhHJOymKyLXiehZOUDrpG98CT/moyDbhFoq7LfUhLsB2JYs6hZCzg0A95tgpsHw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OR0Ckv7xEebSlla+f9OO1sjMyqjy6XAa0wMxax9/WG4=;
- b=gFvxVyHUY65PhfkpvXmfi42SIuz3LXwMvc1nszUbfb0V7XGReahPUrl2GKqNxOWtju9fmMUc57yqNTgriEjLHFcd0iW9WDofZ8ZwlTPpogsniny5/bYXIqNREPPkLeVOapgNtdxcm+ahrcY6l7zXfc+PvFGyDrtaoaijtR+fEIF8HQQG2/Da8aDjcOreW5ojRFzVJZYpuNIP9mPztTBXkPf0+NHtXHOgs71398zV6DKzUwLFc9ArDZmRDyxLTmvtLaHh8Otl9QMfgv+zpb+dcNNQT/XYDMAnwr1lbNMKSuUICcvo9WOaUpuFyEVye30nh2S4b73kuPbrl0tNZhKTjQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OR0Ckv7xEebSlla+f9OO1sjMyqjy6XAa0wMxax9/WG4=;
- b=jxfg3+vLV2+1pRGf8CWPwF2PfzN/ULrN09HfcJxxynVvytelbzmvwhTw2dfTM9CS8g+Zq3FxBkGcLkXjI+LGwcBKl97wBCX3iOI6AnYpYLDiqy9Ghl3Q3gMY6W7EZpLgfI1HmOUmZ7twMDdxtjq6p14cmnUOjtj+POGOd20VCEE=
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-From: chunjie.zhu@citrix.com
-To: roger@xenproject.org
-Cc: andrew.cooper3@citrix.com,
-	jbeulich@suse.com,
-	teddy.astie@vates.tech,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH 2/2] x86/hvm: sync APs TSC with the BSP at creation only
-Date: Mon,  2 Nov 2026 15:40:42 +0800
-Message-Id: <20261102074042.178236-1-chunjie.zhu@citrix.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20261030132419.84264-3-roger@xenproject.org>
-References: <20261030132419.84264-3-roger@xenproject.org>
-Content-Type: text/plain; charset=yes
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: JN3P275CA0122.ZAFP275.PROD.OUTLOOK.COM (2603:1086:0:d1::15)
- To LVXPR03MB989161.namprd03.prod.outlook.com (2603:10b6:408:37e::6)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1793606975; x=1794211775; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=WkjuEr0ZHS6yz+4IZVRbzWP0WQjy7Wkzzke+VN3k/0M=;
+        b=agjeh3/DLo6FwDcvEUj9f5052fuhIquLf5a7ZEErROeg17ZaYC8vC87ouBpaZQVsMi
+         XBhy4iN8wBgwxJqxifzXF5ULI8rL2qep/MHLa+TABPYuHTNhvBQJgY3KBsi+m+8Kq+Pn
+         EO13wnEssSMJjbgVMTr01eL+DvmjR/2A6B4fixn0bRL1VwluVBB93k01WYa1ly0E9pVL
+         UpVA58Su4bC/OQQqqRQDG9PH2/KYiwShYjK/BpsLALmNJoyOrTZkz8feBeySeEKiXS88
+         xGDDpwoaKHqTu78ZK3tk4+IcvKGB5yMrTIdVzKPhlA+DoPEQPGNdrIobk3FZnlpvcTJl
+         SuDA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793606975; x=1794211775;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=WkjuEr0ZHS6yz+4IZVRbzWP0WQjy7Wkzzke+VN3k/0M=;
+        b=xBrr0SFAesRlMuY+3P0twJGrsYN6jdP44phXDDbPRUTyR+agVnWwm7TeWBwo+v7Gdx
+         VkhQhblwQ0XPZT1mYW5L2AvhwdgUgzQWpvQgSpcKfuJwl7GhacofIonSZfZZU8k8rO5k
+         ha1I+QIWFogfMjfxN+xJXNt6WrsVgboxvIAHxUH7pb7AqIkKQctQiHBEWysgSykag8i5
+         Fu5/xg1zDRcgSz0Y+vR1v+VO+yvsMTIuKVVx9LNZUbycd5cnI8LZ/iqfTyfuP2hQ0+lv
+         ccgzNZH5MZ1VrGrFVRq2zOifrVVBme8qz/X6EbePsgb1Xsp9yU6aisq9yJ15RJ+Uqjtz
+         nuTA==
+X-Gm-Message-State: AFq9FYKGkVhawqMXLcVo+epQiGLdQUkFTNmpb39/IUNeMSOZ8maul9Gi
+	YhVFytndlfNWnBsWteEDYWVKbT29nQbUO8ctAxp6wta1T3Tc7ohS/RJ9nWy5SIZ0ZA==
+X-Gm-Gg: AYBFou0CnvRn1Dw8U6+lvIJHcOt3HOWmj5ZGtQF/XxjlNtRRRcWxuHi7xlDpaah+uuQ
+	1JuELLlMGNE0gC/SopUO1YCgxdyDg+kTHXdCUAjcDTQro5iewwWWst2ujYNKIXnB5wXegpE5xWb
+	croYVWw4JYJ9PyGKDIYJD3b2m/Gxu5FoOEDMqvigWByOZYd+wcoESmwTTi5fV5xFsX9RQbvJTFp
+	ha96GM3iZpt4xY74WwpoWbhwvJXoKbpTcGSD4RSm/L8xypnbxqUnWmZK/J49BhT9CnA+t9fB5EL
+	ihlPy+qPVQYRUKlIOmA5w2eNTF6n1FGYmXRJFLKor0kMVgE+rElBw1fjczdQQ1j12EcQaAaBOgx
+	iNR5DLsjOaq6ckowVN2k3IZHHoiOcTKdZz+Bbi98q+dpPLcNNGUX5YFyI4pUV5NkVtHGAa8278x
+	64Lx1Kkn9TIVYAI4yrR4ilM2W7OLdw3iPCtozi7/ZyqFZ7euJncVWLDIyutpA1z8Lj5/mHpaxHW
+	cCQf9RhiihabK0ouFrBDgK8d6criX4v7L8CyduszUIHG/RrE5+mX57CW/964WlqK+Iu8x5GWpF8
+	/7ok99pVaqfe23QrV3eGmgweEjOf0e4oErSNfJY1j5pDySTCMBhuCHFrZhMDXICnljtGPqFiujB
+	IxiMoResUKY9897A=
+X-Received: by 2002:a05:600c:6211:b0:4a1:80d8:aed5 with SMTP id 5b1f17b1804b1-4ac17191046mr221775665e9.6.1793606975131;
+        Mon, 02 Nov 2026 00:09:35 -0800 (PST)
+Message-ID: <a9698062-27a5-4fc7-b507-4536f3685f5d@suse.com>
+Date: Mon, 2 Nov 2026 09:09:33 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LVXPR03MB989161:EE_|DS3PR03MB873329:EE_
-X-MS-Office365-Filtering-Correlation-Id: b9e3a139-4041-4385-90e3-08df38b4a148
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|366016|1800799024|23010399003|10067099003|18002099003|22082099003|56012099006|11063799006|261021121427099003|261021123027099003|261026121527099003|261026140227099003|261022075727099003|261022105027099003|261009223027099003|261028144727099003;
-X-Microsoft-Antispam-Message-Info:
-	9AUTGU/sWTlqiVO3dXywcko0PGpwVyhskFxBsQRjMuk5yXrFNJGuBt0I+MVhCxxUR0I5UqP1vfUumUEJnuCvDVr7Ea/yODXEf0VrQIGK5NQQWYYV2Uxy24OQBq1qvVWCWt7OqMQ08+LWXmXu33cf1bCQVeR9fcpxXZcgWCOd7c5f7kUkMZs+471VF+pPivXdxLntTrrYdf/WJw2OI+h3hEDlYL+LA+DPE1DA9RcSJd0Rym0SXRKG84tEk6uLmImxndKw5YVGwNQaDWEa1KNoNNf2p83Wb0qknaUn4EvAGjwnAtScLJP1y9hcxFeTX0B3ZuQfXUrKV77SPuE4JouDKG3tHFS45lU5tauKX9Sz+OjcGDwbP8fT3hiSPttv/d5uTDpYRz3yXUcS8frLnZ/wCi20LEDp61vej1K8M0ge9BwIUalYmR4ZHqYIwJUHN0y1oByI+Es5msBj2KSz5UrIysef/R/I2teuXxbk5GOZ9mXpobWqUYNY+kYa+A3t7YBN9efY5IKqEPpJg+7qniUrHvoCs3BVzZ8MQOf15j+8kIz1bXaSuq3rpvqhyC8a5oFaqytXiUhwfSHPB+LeIs+jRSV6TX9O0dBeWnKqC0ev54GTJ3J7JHldr6ARxGsEG2d8PXq0ltTApCQH5Nt2TQXF+74Rc/kLbskIVn86MfrQzHU=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LVXPR03MB989161.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(23010399003)(10067099003)(18002099003)(22082099003)(56012099006)(11063799006)(261021121427099003)(261021123027099003)(261026121527099003)(261026140227099003)(261022075727099003)(261022105027099003)(261009223027099003)(261028144727099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?C0ZncV+UitzTs9Y3Eyy1C2s6auZiCas96b1f4QnXM+gllhSrLkf3NyIakZdA?=
- =?us-ascii?Q?6H07zvtEkNNMOq9NCE0LpCtqVffuD7tdP1m3KGFNhKEtYAsGrQqPLjg5SUwT?=
- =?us-ascii?Q?JGAhJwgfXizC54jWIodorSlF269xeMb4MMkLRcnsMQtm+M5KXDppSkQtpRot?=
- =?us-ascii?Q?kttyW9AAXOqYLXG+UO99CW6a7YmKy4xkw31VkhjCjhAQkiTIZkDsSW65kLwU?=
- =?us-ascii?Q?WKTP04apfHUBdssRDLmrQEsX8V0jEU0j0naRfGimvBXZ8yUvuP8MDfi+ssCl?=
- =?us-ascii?Q?PqmrjpnZESFCXA2pX30RlD8u/oPFZsvK2/j/6xCMA/6VZOtMJqQtfDBOeZoN?=
- =?us-ascii?Q?qzw+/6gtW9iQdLuCVDkjMbC/bxXNfHdVH+BHkCHizaRnXfobJFiltB9/ezI9?=
- =?us-ascii?Q?phaNHvMrwkJFzTom+bJ4D9feEZ/0fkCwmYpxpKwJOC6WlK5HtGHp3fWm8p0+?=
- =?us-ascii?Q?2py7o7QatxocVylABdAnNK6JBPfGYquI3KJs8MsbegoQJpu5xp029UVnVb2D?=
- =?us-ascii?Q?ms2V0ilGkK6gfT5CgTovOqojNvTTLZAcNuXAuq+pxtYA09EU00bucKypvOFZ?=
- =?us-ascii?Q?rs6ZTHKBgMpdKFn8s8w3QC96Wrhe24vEHEvix2xhhJv2r33KBV6mfzDvBsjt?=
- =?us-ascii?Q?5bs7NOl+k9NUSW+RBuzWyJAP9D2OOzBH1p4u82m4X6uxBhVwrDj+KRVHeVQk?=
- =?us-ascii?Q?T/1qG8qpBArN+h8fsaf5wokPFqQGw1Q4leuW7FbpiFxqCIn1P9WjMtDFaZVe?=
- =?us-ascii?Q?IbLHaMF0CDAE2IS9OipiH5cgyCLM6xg4tArkiZuSNxr1SUgi0n4UhJik6xJV?=
- =?us-ascii?Q?jUN6WDo/DuzXUT2xL4IppnHMr1v/wtU9tYDV907uOD4Fw8VLe8QbfEYPvcRy?=
- =?us-ascii?Q?D2s+ZtOzBLmZNhIf1I4hZHGpIGpnSYaxajWGrjIvsrI8/ofpiSQguNSKNGz0?=
- =?us-ascii?Q?Uf8mheU2FeOmLOr2UQuH28hrpLV/L3EQclHL0BnriMk1EXhRD4C8vcj12jTb?=
- =?us-ascii?Q?l992JMfBc0PUsY4seCx4VAL9anijLJ65G5AV88Gf8MTt5zekdzErNUva/JZX?=
- =?us-ascii?Q?aePHtUiMAyeBwHp+3GaequevbxzvfzpETasNSs+hmTTHpYy+gjGfDKRxsn8o?=
- =?us-ascii?Q?wVSJWD8C88hb1dgy+6Nh8jKz5deDI+HrRyRGiV2zoW1cl6+Nse7GVwvPru2X?=
- =?us-ascii?Q?UOp9ChwugNdFgl34KoRGCdluUEjRzAQnHgkcJgfLYQCOCbLwUqtVL2h9fwKO?=
- =?us-ascii?Q?uEyOod3fL5q5fj4vkBvRk6xM69bh9twh8bN8WY8FScVkopG8fajKpthTo7aQ?=
- =?us-ascii?Q?Z32wRbRiQly91ECgTBWweEdF9F0SirmbN5GMEsJnfEMGFy6J5qjD3G+HemZq?=
- =?us-ascii?Q?7vmogN6j1Ngk6ddxhTg0311sx4q2C813quukVpmh9I/fOemf25Tr89XWKp1K?=
- =?us-ascii?Q?xGdGtJU3r4OaGKWldD4ZDnXI83ZpUqvfIHYaJ7fJVdOBtxVmKc5NRAtJOqdQ?=
- =?us-ascii?Q?fWrZsqBj6Xi/LZ2kR8Xd3kqYdukufPyAFiWS3YAG6Cg+SFX2gifSFMt8aaxh?=
- =?us-ascii?Q?TWe1GQ8wwesjnP+DWJn9BduuRU9c+aHyvhVgCbhQOYUbQK8XvtmJJVsALGKL?=
- =?us-ascii?Q?bj+0Y51pzqlXuzNbDBoUGajKrJ3vPhsBZqGASGLAtblUcZAjFXh6f44BQfRI?=
- =?us-ascii?Q?j5pi+6dH/N4sPASUWvLyaoW8LWYtRTgbXRzG/83H6PQxoxNrUz7M8GU70kgA?=
- =?us-ascii?Q?9th0vTrwJQ=3D=3D?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b9e3a139-4041-4385-90e3-08df38b4a148
-X-MS-Exchange-CrossTenant-AuthSource: LVXPR03MB989161.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Nov 2026 07:40:56.6150
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: c2EYLRfDwCltD4JyRDDkI5B0zLLuOtGc83LtJcp9tyHjm3F1i/dm8f7dUGTQCxNo4UFVwgg6fk+H+fTrznf0HQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS3PR03MB873329
-X-purgate-ID: tlsNG-16d1c6/1793605260-1F0C777B-794809F7/0/0
-X-purgate-type: clean
-X-purgate-size: 7193
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/3] common: introduce "brk" allocator
+To: George Dunlap <dunlapg@umich.edu>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Teddy Astie <teddy.astie@vates.tech>
+References: <8ad3beb3-af5a-477b-af97-614edb22631a@suse.com>
+ <4fc90702-fb9a-4f96-88f0-35bd3b4857f4@suse.com>
+ <CAFLBxZZ5i9E6P_Gbt79coQikRG2uscxGRb+yAs2++U_Mkku9_w@mail.gmail.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <CAFLBxZZ5i9E6P_Gbt79coQikRG2uscxGRb+yAs2++U_Mkku9_w@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-c201ff/1793606975-F78BE2A1-1F5ED1BF/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 4519
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Fri, Oct 30, 2026 at 02:24:19 PM, Roger Pau Monne <roger@xenproject.org> wrote:
+On 29.10.2026 22:40, George Dunlap wrote:
+> On Wed, Oct 14, 2026 at 2:02 PM Jan Beulich <jbeulich@suse.com> wrote:
+>> --- /dev/null
+>> +++ b/xen/arch/x86/include/asm/brk.h
+>> @@ -0,0 +1,23 @@
+>> +/* SPDX-License-Identifier: GPL-2.0-or-later */
+>> +#ifndef X86_BRK_H
+>> +#define X86_BRK_H
+>> +
+>> +static inline unsigned long brk_adjust_start(unsigned long start)
+>> +{
+>> +    unsigned int subsys;
+>> +
+>> +    /*
+>> +     * Only xen.efi will have the symbol __subsystem__ available, and it'll
+>> +     * be non-zero (10) there.  In ELF the symbol will be undefined, and
+>> +     * hence zero will be loaded into the register.
+>> +     */
+>> +    asm ( ".weak __subsystem__; mov $__subsystem__, %0" : "=r" (subsys) );
+>> +
+>> +    /* using_2M_mapping() isn't available here. */
+>> +    if ( IS_ENABLED(CONFIG_XEN_ALIGN_2M) || subsys )
+>> +        start = PAGE_ALIGN_2M(start);
+> 
+> This seems a bit fragile: As it happens this corresponds to the clip
+> to brk_end in setup.c in patch 2, but if it didn't, then the boundary
+> in the resulting e820 reservation and what gets unmapped in
+> brk_free_unsed() wouldn't match.
+> 
+> Claude seems to think you could make using_2M_mapping() available
+> here; and then brk_adjust_start() becomes return using_2M_mapping() ?
+> PAGE_ALIGN_2M(start) : start.  That drops the ASM, and the comment
+> about the linker producing a bogus relocation.  2/3 could then do
+> brk_end = brk_adjust_start(brk_cease()), and guaranteeing that the two
+> are the same.
 
-> The current logic syncs the APs' TSC with the BSP both at reset and when
-> setting the vCPU state.  This doesn't match hardware behavior, where APs
-> are only in sync at platform start.
+I don't think exposing using_2M_mapping() globally would be a good idea.
 
-> Move the TSC sync so it's done in hvm_vcpu_initialise(), that's called a
-> single time at vCPU creation.  This matches the hardware behavior.
-> INIT-SIPI and VCPUOP_initialise no longer re-sync a vCPU's TSC to vCPU 0's.
->
-> On migration the TSC offset for offline vCPUs is not transferred
-> (hvm_save_cpu_ctxt() skips offline vCPUs).  To avoid an unexpected skew
-> synchronize offline vCPUs with the first online vCPU, taking into account
-> the TSC_ADJUST value.
->
-> The clearing of TSC_ADJUST is also made consistent with hardware behavior:
-> clear it on S3 resume, but not across an INIT-SIPI or VCPUOP_initialise.
-> Additionally, on S3 resume start all vCPUs from a shared TSC reading, so
-> they are in sync.
->
-> Fixes: c31f8336e64e ("[HVM] Initialise AP TSC to same as BP TSC.")
+>> --- /dev/null
+>> +++ b/xen/common/brk.c
+>> @@ -0,0 +1,74 @@
+>> +/* SPDX-License-Identifier: GPL-2.0-or-later */
+>> +
+>> +#include <xen/brk.h>
+>> +#include <xen/efi.h>
+>> +#include <xen/lib.h>
+>> +#include <xen/mm.h>
+>> +#include <xen/page-defs.h>
+>> +
+>> +#if __has_include(<asm/brk.h>)
+>> +# include <asm/brk.h>
+>> +#endif
+>> +
+>> +extern char __brk_start[];
+>> +extern const char __bss_end[];
+>> +
+>> +static unsigned long __initdata allocated;
+>> +static bool __initdata finished;
+>> +
+>> +void *__init brk_alloc(size_t size)
+>> +{
+>> +    void *ptr;
+>> +
+>> +    if ( finished )
+>> +        return NULL;
+>> +
+>> +    /* Allocations PAGE_SIZE and up will be page-aligned. */
+>> +    if ( size >= PAGE_SIZE )
+>> +        allocated = ROUNDUP(allocated, PAGE_SIZE);
+>> +
+>> +    ptr = __brk_start + allocated;
+>> +
+>> +    allocated += ROUNDUP(size, sizeof(void *));
+>> +
+>> +    if ( allocated > __bss_end - __brk_start )
+>> +    {
+>> +        printk_once_init(
+>> +            "%pS: over-sized BRK request: %zu bytes\n",
+>> +            __builtin_extract_return_addr(__builtin_return_address(0)),
+>> +            size);
+>> +        return NULL;
+>> +    }
+> 
+> You bump the global `allocated` variable here before the check, and
+> don't reset it afterwards.   All future allocation attempts will
+> continue to bump this value, and
+> continue to fail.  So now allocated + brk_start is past _bbs_end,
+> brk_cease() will return something past bss_end, and (in patch 2) pass
+> that as reserve_e820_ram().  So now, so far from reducing the size
+> reserved to Xen by , we may be *increasing* the size reserved to Xen
+> with unused pages.  Worse, if it ends up overshooting the region Xen
+> is in, then reserve_e820_ram() will fail, and the host will panic.
+> 
+> This should probably use a local variable, then set the global
+> variable after we've determined that the check has succeeded.
 
-This looks wrong.  c31f8336e64e only added the sync to hvm_bringup_ap(),
-which no longer exists.  The code removed here comes from bcba667e12e3
-(INIT-SIPI) and 192df6f9122d (VCPUOP_initialise).
+Could be done, but did Claude also realize that failure to set aside
+enough space so allocations can't fail is, effectively, a fatal bug?
+The printk_once_init() isn't a panic() here merely because panic()
+isn't going to work very well when still in EFI boot services: We
+shouldn't halt the system there, we should only yield control back to
+EFI (such that another boot attempt can be made). See patch 2.
 
-> Fixes: 6e0336351ed9 ("x86: Implement TSC adjust feature for HVM guest")
-> Signed-off-by: Roger Pau Monné <roger@xenproject.org>
-> ---
->  xen/arch/x86/hvm/domain.c |  5 -----
->  xen/arch/x86/hvm/hvm.c    | 19 +++++++++++--------
->  xen/arch/x86/hvm/save.c   | 34 ++++++++++++++++++++++++++++++++--
->  xen/arch/x86/time.c       |  5 ++---
->  4 files changed, 45 insertions(+), 18 deletions(-)
->
-> diff --git a/xen/arch/x86/hvm/domain.c b/xen/arch/x86/hvm/domain.c
-> index 978d8b222256..71f49ec7ce9f 100644
-> --- a/xen/arch/x86/hvm/domain.c
-> +++ b/xen/arch/x86/hvm/domain.c
-> @@ -312,11 +312,6 @@ int arch_set_info_hvm_guest(struct vcpu *v, const struct vcpu_hvm_context *ctx)
->      hvm_set_segment_register(v, x86_seg_es, &es);
->      hvm_set_segment_register(v, x86_seg_tss, &tr);
->
-> -    /* Sync AP's TSC with BSP's. */
-> -    v->arch.hvm.cache_tsc_offset =
-> -        d->vcpu[0]->arch.hvm.cache_tsc_offset;
-> -    hvm_set_tsc_offset(v, v->arch.hvm.cache_tsc_offset);
-> -
->      paging_update_paging_modes(v);
->
->      hvmemul_cancel(v);
-> diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-> index ef9c7cd05777..81e90cc8fc8e 100644
-> --- a/xen/arch/x86/hvm/hvm.c
-> +++ b/xen/arch/x86/hvm/hvm.c
-> @@ -1667,6 +1667,12 @@ int hvm_vcpu_initialise(struct vcpu *v)
->          /* Init guest TSC to start from zero. */
->          hvm_set_guest_tsc(v, 0);
->      }
-> +    else
-> +    {
-> +        /* Start in step with vCPU 0, as all CPUs do at power-on. */
-> +        v->arch.hvm.cache_tsc_offset = d->vcpu[0]->arch.hvm.cache_tsc_offset;
-> +        hvm_set_tsc_offset(v, v->arch.hvm.cache_tsc_offset);
-> +    }
->
->      return 0;
->
-> @@ -4021,13 +4027,6 @@ void hvm_vcpu_reset_state(struct vcpu *v, uint16_t cs, uint16_t ip)
->      hvm_set_segment_register(v, x86_seg_gdt, &reg);
->      hvm_set_segment_register(v, x86_seg_idt, &reg);
->
-> -    /* Sync AP's TSC with BSP's. */
-> -    v->arch.hvm.cache_tsc_offset =
-> -        v->domain->vcpu[0]->arch.hvm.cache_tsc_offset;
-> -    hvm_set_tsc_offset(v, v->arch.hvm.cache_tsc_offset);
-> -
-> -    v->arch.hvm.msr_tsc_adjust = 0;
-> -
->      paging_update_paging_modes(v);
->
->      v->arch.flags |= TF_kernel_mode;
-> @@ -4079,9 +4078,13 @@ static void hvm_s3_resume(struct domain *d)
->      if ( test_and_clear_bool(d->arch.hvm.is_s3_suspended) )
->      {
->          struct vcpu *v;
-> +        uint64_t at_tsc = rdtsc();
->
->          for_each_vcpu( d, v )
-> -            hvm_set_guest_tsc(v, 0);
-> +        {
-> +            v->arch.hvm.msr_tsc_adjust = 0;
-> +            hvm_set_guest_tsc_fixed(v, 0, at_tsc);
-> +        }
->          domain_unpause(d);
->      }
->  }
-> diff --git a/xen/arch/x86/hvm/save.c b/xen/arch/x86/hvm/save.c
-> index 8ab64057064e..65ebfd384d69 100644
-> --- a/xen/arch/x86/hvm/save.c
-> +++ b/xen/arch/x86/hvm/save.c
-> @@ -289,6 +289,7 @@ int hvm_load(struct domain *d, bool real, hvm_domain_context_t *h)
->  {
->      const struct hvm_save_header *hdr;
->      struct hvm_save_descriptor *desc;
-> +    struct vcpu *v;
->      int rc;
->
->      if ( d->is_dying )
-> @@ -302,8 +303,6 @@ int hvm_load(struct domain *d, bool real, hvm_domain_context_t *h)
->      rc = arch_hvm_check(d, hdr);
->      if ( real )
->      {
-> -        struct vcpu *v;
-> -
->          ASSERT(!rc);
->
->          /*
-> @@ -341,6 +340,37 @@ int hvm_load(struct domain *d, bool real, hvm_domain_context_t *h)
->              /* Reset cursor for hvm_load(, true, ). */
->              if ( !real )
->                  h->cur = 0;
-> +            else
-> +            {
-> +                const struct vcpu *base = NULL;
-> +
-> +                /*
-> +                 * Offline vCPUs have no CPU record.  Adjust the TSC offset
-> +                 * based on the first online vCPU, taking into account
-> +                 * TSC_ADJUST which is saved regardless of whether the vCPU is
-> +                 * offline.
-> +                 */
-> +                for_each_vcpu(d, v)
-> +                    if ( !test_bit(_VPF_down, &v->pause_flags) )
-> +                    {
-> +                        base = v;
-> +                        break;
-> +                    }
-> +
-> +                if ( !base )
-> +                    return 0;
+> The other thing Claude points out is that is_xen_fixed_mfn() isn't
+> updated, so if ever any of these pages want to be offlined for any
+> reason, it will be blocked, claiming that they're part of Xen, even if
+> they've already been assigned to a guest.  This is a pre-existing
+> situation that is extended by this patch.
 
-This silently skips the offline vCPUs.  If that ever causes a problem it
-will be hard to diagnose, so please add a comment or a log message.
+This indeed needs taking care of, albeit in patch 2. It's not clear
+to me though why you (they?) say this would be a pre-existing
+situation. The use of __2M_rwdata_end there looks correct to me prior
+to this series.
 
-> +
-> +                for_each_vcpu(d, v)
-> +                    if ( test_bit(_VPF_down, &v->pause_flags) )
-> +                    {
-> +                        v->arch.hvm.cache_tsc_offset =
-> +                            base->arch.hvm.cache_tsc_offset -
-> +                            base->arch.hvm.msr_tsc_adjust +
-> +                            v->arch.hvm.msr_tsc_adjust;
-> +                        hvm_set_tsc_offset(v, v->arch.hvm.cache_tsc_offset);
-> +                    }
-> +            }
-> +
->              return 0;
->          }
->
-> diff --git a/xen/arch/x86/time.c b/xen/arch/x86/time.c
-> index f37fddc61e47..79c7123c0a5b 100644
-> --- a/xen/arch/x86/time.c
-> +++ b/xen/arch/x86/time.c
-> @@ -3087,9 +3087,8 @@ int tsc_set_info(struct domain *d,
->               * set_tsc_offset() is called from hvm_vcpu_initialise() before
->               * tsc_set_info(). New vtsc mode may require recomputing TSC
->               * offset.
-> -             * We only need to do this for BSP during initial boot. APs will
-> -             * call set_tsc_offset() later from hvm_vcpu_reset_state() and they
-> -             * will sync their TSC to BSP's sync_tsc.
-> +             * We only need to do this for BSP during initial boot.  APs copy
-> +             * vCPU 0's offset when created in hvm_vcpu_initialise().
->               */
->              d->arch.hvm.sync_tsc = rdtsc();
->              hvm_set_tsc_offset(d->vcpu[0],
-> -- 
-> 2.55.0
->
->
->
-
+Jan
 
