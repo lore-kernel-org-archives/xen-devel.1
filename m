@@ -2,54 +2,34 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2DF5A606A324
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 14:08:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 48E64606A336
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 14:08:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=FzPDQS+j
-Received: from list by lists.xenproject.org with outflank-mailman.1468307.1677448 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=5CWE0TQN
+Received: from list by lists.xenproject.org with outflank-mailman.1468315.1677457 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNsi8-00025a-Gw; Mon, 02 Nov 2026 14:08:32 +0000
+	id 1xNsiI-0002ns-Q4; Mon, 02 Nov 2026 14:08:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1468307.1677448; Mon, 02 Nov 2026 14:08:32 +0000
+Received: by outflank-mailman (output) from mailman id 1468315.1677457; Mon, 02 Nov 2026 14:08:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNsi8-00025N-Cc; Mon, 02 Nov 2026 14:08:32 +0000
-Received: by outflank-mailman (input) for mailman id 1468307;
- Mon, 02 Nov 2026 14:08:31 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xNsiI-0002ne-MR; Mon, 02 Nov 2026 14:08:42 +0000
+Received: by outflank-mailman (input) for mailman id 1468315;
+ Mon, 02 Nov 2026 14:08:41 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1xNsi7-0001zs-As
- for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 14:08:31 +0000
-Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xNsi6-003XNo-NV
- for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 15:08:30 +0100
-Received: from [10.42.69.11] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <marcandre.lureau@redhat.com>)
- id 6ae89947-2eae-0a2a0a5409dd-0a2a450bc0f4-42
- for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 15:08:30 +0100
-Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <marcandre.lureau@redhat.com>)
- id 6ae8995d-b7e8-0a2a450b0019-aa0a817c62cb-3
- for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 15:08:30 +0100
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-591-k47H6-t-NsqFxQogk-blHQ-1; Mon,
- 02 Nov 2026 09:08:23 -0500
-Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id E1863195F176; Mon,  2 Nov 2026 14:08:18 +0000 (UTC)
-Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
- [10.2.32.116])
- by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id B10DE1803A40; Mon,  2 Nov 2026 14:08:17 +0000 (UTC)
+ (envelope-from <roger@xenproject.org>) id 1xNsiH-0002io-4p
+ for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 14:08:41 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.98.2)
+ (envelope-from <roger@xenproject.org>) id 1xNsiG-0000000AmXc-3kEG;
+ Mon, 02 Nov 2026 14:08:40 +0000
+Received: from 224.pool85-54-217.dynamic.orange.es ([85.54.217.224]
+ helo=localhost) by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.98.2)
+ (envelope-from <roger@xenproject.org>) id 1xNsiG-0000000DFT3-2I02;
+ Mon, 02 Nov 2026 14:08:40 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -58,178 +38,115 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1793628509;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=EM2iAfwAwixmnmQXqwHmtYrUyBBE03lItngzAlvkHm8=;
-	b=FzPDQS+jC3Z7CNAGh5Iquls7OKmr49ajhOObtYKd9sU1dDhol1td7pf2mN7mazbKEvAL3w
-	UxxhJXNRLpzxooipDUfKOhsPk5sk6HHWquPIbAO+4hcLibnd8IuYtwpCIBnd3I3ZTxgKHZ
-	jKhqYvqxLt1TRA1KGQRuhNuTSjIwMD0=
-X-MC-Unique: k47H6-t-NsqFxQogk-blHQ-1
-X-Mimecast-MFC-AGG-ID: k47H6-t-NsqFxQogk-blHQ_1793628500
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=In-Reply-To:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date;
+	bh=/LizmZacdPd8wNmcbjuhgUhhjLP1E+QmLgcJHLBMGb0=; b=5CWE0TQN02djtKDMnyo+SOGtTK
+	oew2v246n0V9xJME972UQbFZiZdRK0XH+HCp4jh3lGuXO2f28JEaP7An7tQoXqiyX31p+EZmxWX1W
+	1BtC0CzbNPZuZUTtjztufGWCFGdZ8tt0xclux+ajCAeze2mFktG/1PMnQeZ9foxzJEHk=;
+Date: Mon, 2 Nov 2026 15:08:38 +0100
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>,
+	Teddy Astie <teddy.astie@vates.tech>
+Subject: Re: [PATCH 2/2] x86/hvm: sync APs TSC with the BSP at creation only
+Message-ID: <auiZZly1233xKpny@Mac.lan>
+References: <20261030132419.84264-1-roger@xenproject.org>
+ <20261030132419.84264-3-roger@xenproject.org>
+ <bfa9e799-bdb3-46ec-8d2d-c085d131e6ca@citrix.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Subject: Re: [PATCH v8 13/18] hw/usb/redirect-server: Announce the exported
- device
-From: marcandre.lureau@redhat.com
-To: Jamin Lin <jamin_lin@aspeedtech.com>
-Cc: kraxel@redhat.com, marcandre.lureau@redhat.com, junjie.cao@intel.com, 
- junjie.cao@linux.dev, clg@kaod.org, 
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
- Peter Maydell <peter.maydell@linaro.org>, 
- Kane Chen <kane_chen@aspeedtech.com>, 
- =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
- Tyrone Ting <kfting@nuvoton.com>, Hao Wu <wuhaotsh@google.com>, 
- Zhao Liu <zhao1.liu@intel.com>, 
- Richard Henderson <richard.henderson@linaro.org>, 
- Helge Deller <deller@gmx.de>, Stefano Stabellini <sstabellini@kernel.org>, 
- Anthony PERARD <anthony@xenproject.org>, 
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
- "open list:All patches CC here" <qemu-devel@nongnu.org>, 
- "open list:ASPEED BMCs" <qemu-arm@nongnu.org>, 
- "open list:X86 Xen CPUs" <xen-devel@lists.xenproject.org>, 
- Troy Lee <troy_lee@aspeedtech.com>
-In-Reply-To: <20261102092201.1729245-14-jamin_lin@aspeedtech.com>
-References: <20261102092201.1729245-1-jamin_lin@aspeedtech.com>
- <20261102092201.1729245-14-jamin_lin@aspeedtech.com>
-Date: Mon, 02 Nov 2026 18:07:30 +0400
-Message-Id: <179362845017.3960472.17221122285900334594.b4-review@b4>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3466;
- i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=BJecDlFM41zBkzwfSjkq949iyOSNc820i+D+sMx1DOM=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq6JkkmGhrtimZSihYsFx6Il/MbWLCO0XS34Avz
- aNUQnOpoa6JAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCauiZJAAKCRDa6OEJdZac
- 5eDWD/sE+zg4Hx6tUTyNIzjemyF3yUjUQ5sp5gR8+pXW0Lnq/QGUoTiHqug1dKC3gKSq139L1J0
- vyAhZuY1alkBKUwcL8miqNzw/mtJkMhvfgp15wR3vGsJY5S3l1OGk4yOD7mMq+ghRRYzsfyVTN7
- neDhvN4Sth/6NjO9m5Lip0adoNb95JwIS64WkMaB6LLfpeX0mEsL7UH55XusFECkIk0c5Xegf1s
- of1PbS0qfA3kDRNE0XRgf2inJ/5OCbIvkvZpg75HC/iU0I7iEMwjWq+dvBGwSus587Mm810QQvK
- 4OFLnRMw/ogSPJj8oln16IfuFPboY0p7Q1lUnocXfF0Z6SJxgqr2NxCEsKb3nE6s5uaqbNkVyB2
- 64Tz5n5xf4wKZqDIPLyM9hf7f875aOuDELLA5LgDJP55p7VjCRPBlayGgAt2r7+9IRYU2QYSpo3
- aUfVeJSbUZ7D6f1ZqLTSHtcZ55PBbF6onWTUSM9rGvmEyNxV1P3dyTDznUIBbU1YVIrWspMyn6z
- 8N+F4cFaQUgplCQxBMB7Kr1rucF6WE9VMN3/6bG+p7taisAeOsIHCQWsEPj2e0vI765fK4T6Hms
- gf5D4uiPmWzeQN3+1pNPO0/zBoMC8pLadPEOwz1kt3baL9btGSDnytmLj0ZAqUevwaUfgO6KDkj
- lCR7wFOwqA5Kzlg==
-X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
- fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
-X-Mimecast-MFC-PROC-ID: PO22DbYMF6Pu6mK-2gbV0JmRKD5Kkv6HmwO-LS1mpnU_1793628500
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-42698a/1793628510-2C39B9EA-44CB48F4/0/0
-X-purgate-type: clean
-X-purgate-size: 3468
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
-	version=4.0.1
+In-Reply-To: <bfa9e799-bdb3-46ec-8d2d-c085d131e6ca@citrix.com>
+X-Spam-Status: No, score=-16.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-> Send device_connect when a device is attached and the host has greeted
-> us, device_disconnect when it goes away, and handle the bus reset the
-> host sends before enumerating.
+On Mon, Nov 02, 2026 at 01:44:06PM +0000, Andrew Cooper wrote:
+> On 30/10/2026 1:24 pm, Roger Pau Monne wrote:
+> > The current logic syncs the APs' TSC with the BSP both at reset and when
+> > setting the vCPU state.  This doesn't match hardware behavior, where APs
+> > are only in sync at platform start.
+> >
+> > Move the TSC sync so it's done in hvm_vcpu_initialise(), that's called a
+> > single time at vCPU creation.  This matches the hardware behavior.
+> > INIT-SIPI and VCPUOP_initialise no longer re-sync a vCPU's TSC to vCPU 0's.
 > 
-> device_connect carries no identity. The peer asks the device itself with
-> GET_DESCRIPTOR as soon as it enumerates, so anything we put there would
-> be made up. The speed is real: it comes from the device on our port.
+> Yeah, this is very buggy.   All TSC values are 0'd at #RESET and
+> unchanged for INIT.
 > 
-> Signed-off-by: Jamin Lin <jamin_lin@aspeedtech.com>
-> Message-ID: <20261102092201.1729245-14-jamin_lin@aspeedtech.com>
-> ---
->  hw/usb/redirect-server.c | 150 ++++++++++++++++++++++++++++++++++++++-
->  hw/usb/trace-events      |   7 ++
->  2 files changed, 156 insertions(+), 1 deletion(-)
->
-> diff --git a/hw/usb/redirect-server.c b/hw/usb/redirect-server.c
-> index f78351bde919..e207f5a7eb56 100644
-> --- a/hw/usb/redirect-server.c
-> +++ b/hw/usb/redirect-server.c
-> @@ -56,6 +56,7 @@
->  #include "qemu/main-loop.h"
->  #include "qemu/module.h"
->  #include "migration/vmstate.h"
-> +#include "qemu/cutils.h"
->  #include "hw/core/sysbus.h"
->  #include "hw/usb/usb.h"
->  #include "chardev/char-fe.h"
-> @@ -85,17 +86,105 @@ struct USBRedirServer {
->      /* usbredir over the chardev */
->      struct usbredirparser *parser;
->      QEMUBH *chardev_close_bh;
-> +    QEMUBH *announce_bh;
->      const uint8_t *read_buf;
->      int read_buf_size;
->      bool in_write;
->      guint watch;
->      bool host_connected;
-> +    bool device_announced;
->  };
->  
-> +/*
-> + * The device is whatever USBDevice the user plugged into our port with
-> + * "-device <device>,bus=<id>.0". NULL until then.
-> + */
-> +static USBDevice *usbredir_server_device(USBRedirServer *s)
-> +{
-> +    return s->port.dev;
-> +}
-> +
-> +/*
-> + * Device announcement
-> + */
-> +
-> +static uint8_t usbredir_server_speed(USBDevice *device)
-> +{
-> +    switch (device->speed) {
-> +    case USB_SPEED_LOW:
-> +        return usb_redir_speed_low;
-> +    case USB_SPEED_FULL:
-> +        return usb_redir_speed_full;
-> +    default:
-> +        return usb_redir_speed_high;
-> +    }
-> +}
-> +
-> +static void usbredir_server_announce_device(void *opaque)
-> +{
-> +    USBRedirServer *s = opaque;
-> +    USBDevice *device = usbredir_server_device(s);
-> +    struct usb_redir_interface_info_header iface_info = {
-> +        .interface_count = 0,
-> +    };
-> +    struct usb_redir_device_connect_header conn = {};
-> +
-> +    if (!s->host_connected || s->device_announced ||
-> +        !device || !device->attached) {
-> +        return;
-> +    }
-> +    s->device_announced = true;
-> +    conn.speed = usbredir_server_speed(device);
-> +
-> +    /*
-> +     * The device has to be in DEFAULT state before it can answer
-> +     * anything, so reset it here.
-> +     */
-> +    usb_device_reset(device);
-> +
-> +    /* Send this before device_connect. The peer needs it to accept us. */
-> +    usbredirparser_send_interface_info(s->parser, &iface_info);
+> >
+> > On migration the TSC offset for offline vCPUs is not transferred
+> > (hvm_save_cpu_ctxt() skips offline vCPUs).  To avoid an unexpected skew
+> > synchronize offline vCPUs with the first online vCPU, taking into account
+> > the TSC_ADJUST value.
+> >
+> > The clearing of TSC_ADJUST is also made consistent with hardware behavior:
+> > clear it on S3 resume, but not across an INIT-SIPI or VCPUOP_initialise.
+> > Additionally, on S3 resume start all vCPUs from a shared TSC reading, so
+> > they are in sync.
+> >
+> > Fixes: c31f8336e64e ("[HVM] Initialise AP TSC to same as BP TSC.")
+> > Fixes: 6e0336351ed9 ("x86: Implement TSC adjust feature for HVM guest")
+> > Signed-off-by: Roger Pau Monné <roger@xenproject.org>
+> > ---
+> >  xen/arch/x86/hvm/domain.c |  5 -----
+> >  xen/arch/x86/hvm/hvm.c    | 19 +++++++++++--------
+> >  xen/arch/x86/hvm/save.c   | 34 ++++++++++++++++++++++++++++++++--
+> >  xen/arch/x86/time.c       |  5 ++---
+> >  4 files changed, 45 insertions(+), 18 deletions(-)
+> >
+> > diff --git a/xen/arch/x86/hvm/domain.c b/xen/arch/x86/hvm/domain.c
+> > index 978d8b222256..71f49ec7ce9f 100644
+> > --- a/xen/arch/x86/hvm/domain.c
+> > +++ b/xen/arch/x86/hvm/domain.c
+> > @@ -312,11 +312,6 @@ int arch_set_info_hvm_guest(struct vcpu *v, const struct vcpu_hvm_context *ctx)
+> >      hvm_set_segment_register(v, x86_seg_es, &es);
+> >      hvm_set_segment_register(v, x86_seg_tss, &tr);
+> >  
+> > -    /* Sync AP's TSC with BSP's. */
+> > -    v->arch.hvm.cache_tsc_offset =
+> > -        d->vcpu[0]->arch.hvm.cache_tsc_offset;
+> > -    hvm_set_tsc_offset(v, v->arch.hvm.cache_tsc_offset);
+> > -
+> >      paging_update_paging_modes(v);
+> >  
+> >      hvmemul_cancel(v);
+> > diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+> > index ef9c7cd05777..81e90cc8fc8e 100644
+> > --- a/xen/arch/x86/hvm/hvm.c
+> > +++ b/xen/arch/x86/hvm/hvm.c
+> > @@ -1667,6 +1667,12 @@ int hvm_vcpu_initialise(struct vcpu *v)
+> >          /* Init guest TSC to start from zero. */
+> >          hvm_set_guest_tsc(v, 0);
+> >      }
+> > +    else
+> > +    {
+> > +        /* Start in step with vCPU 0, as all CPUs do at power-on. */
+> > +        v->arch.hvm.cache_tsc_offset = d->vcpu[0]->arch.hvm.cache_tsc_offset;
+> > +        hvm_set_tsc_offset(v, v->arch.hvm.cache_tsc_offset);
+> > +    }
+> 
+> I agree that the current behaviour is very broken, but this adjustment
+> isn't correct either.  For starters, it's not possible to have a
+> non-zero value here[1].
 
-The peer's usb-redir client evaluates its "filter" property against
-device_connect and this interface_info. With interface_count == 0 and
-the all-zero connect header above, any non-empty filter (vendor/product,
-class or interface rule) rejects the exported device. Fill
-interface_info from the saved configuration descriptor (interface
-number, class/subclass/ protocol) and device_connect from the local
-USBDevice?
+I'm possibly confused, but d->vcpu[0]->arch.hvm.cache_tsc_offset will
+very likely be different than 0 here (as long as vCPU are created in
+order), as it's adjusted by the hvm_set_guest_tsc() call done above
+for vCPU 0?
 
--- 
-Marc-André Lureau <marcandre.lureau@redhat.com>
+> I'm quite concerned with this patch.  You're adjusting at least 3
+> separate things.
 
+Hm, it has grown beyond the initial scope I had for it.  I could
+certainly split parts of it, I've presented it as a single change to
+avoid introducing intermediate breakage.
+
+Thanks, Roger.
 
