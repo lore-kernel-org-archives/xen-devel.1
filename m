@@ -2,48 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 27B4E606A329
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 02:01:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DA041606A327
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 02:02:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=epam.com header.i=@epam.com header.a=rsa-sha256 header.s=selector1 header.b=GsSfVc+e
-Received: from list by lists.xenproject.org with outflank-mailman.1467560.1676647 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=epam.com header.i=@epam.com header.a=rsa-sha256 header.s=selector1 header.b=dVRXO1I1
+Received: from list by lists.xenproject.org with outflank-mailman.1467567.1676657 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNhMo-00041e-Aw; Mon, 02 Nov 2026 02:01:46 +0000
+	id 1xNhN6-0004Tz-J3; Mon, 02 Nov 2026 02:02:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1467560.1676647; Mon, 02 Nov 2026 02:01:46 +0000
+Received: by outflank-mailman (output) from mailman id 1467567.1676657; Mon, 02 Nov 2026 02:02:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNhMo-00041X-7x; Mon, 02 Nov 2026 02:01:46 +0000
-Received: by outflank-mailman (input) for mailman id 1467560;
- Mon, 02 Nov 2026 02:01:44 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xNhN6-0004Ts-Ep; Mon, 02 Nov 2026 02:02:04 +0000
+Received: by outflank-mailman (input) for mailman id 1467567;
+ Mon, 02 Nov 2026 02:02:03 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <milan_djokic@epam.com>) id 1xNhMm-000411-Ks
- for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 02:01:44 +0000
+ (envelope-from <milan_djokic@epam.com>) id 1xNhN5-0004RT-7h
+ for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 02:02:03 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xNhMl-0094En-LA
- for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 03:01:43 +0100
-Received: from [10.42.69.5] (helo=localhost)
+ id 1xNhN4-00Fi8p-Km
+ for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 03:02:02 +0100
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <milan_djokic@epam.com>)
- id 6ae7eef0-bab6-0a2a0a5309dd-0a2a4505ea3e-8
- for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 03:01:43 +0100
-Received: from [52.101.70.96]
- (helo=AS8PR04CU009.outbound.protection.outlook.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ae7eef9-e002-0a2a0a5209dd-0a2a450aab00-16
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 03:02:02 +0100
+Received: from [52.101.83.110]
+ (helo=GVXPR05CU001.outbound.protection.outlook.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <milan_djokic@epam.com>)
- id 6ae7ef07-4cb1-0a2a45050019-346546603cfe-3
- for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 03:01:43 +0100
+ id 6ae7ef1a-f2d2-0a2a450a0019-3465536e321f-3
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 03:02:02 +0100
 Received: from AS2PR03MB9587.eurprd03.prod.outlook.com (2603:10a6:20b:595::7)
  by AS8PR03MB9024.eurprd03.prod.outlook.com (2603:10a6:20b:5b6::11)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.569.12; Mon, 2 Nov
- 2026 02:01:40 +0000
+ 2026 02:01:59 +0000
 Received: from AS2PR03MB9587.eurprd03.prod.outlook.com
  ([fe80::daa7:3b97:acb3:67d5]) by AS2PR03MB9587.eurprd03.prod.outlook.com
  ([fe80::daa7:3b97:acb3:67d5%5]) with mapi id 15.21.0569.011; Mon, 2 Nov 2026
- 02:01:39 +0000
+ 02:01:59 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -54,115 +54,112 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=swSSopLhIvFi5ZHiTIU7D1lVsf1r0ahD2X2oUKSJ2RJMdSaXDKzgpof80W0CCPTIFemXb2yuLC/1p8QEgE8pZOYq0MhU2MqA+Ma5DemtTLau0xe7WkKffuRWiwCQvREFMmgho79sWYB6WjPHTV/+t+T/6ptT3gqlJWcqB+WFOeNjBzMus73S2fie1ulctrEaNC2q6lARskqEgKosh2FjScFI1jTgkYQzSH30yQfkU93vfnoxM9gPBbtHUYWZP07+5Y5qXOOJiuuTIrK3YEPJpGyqUmJXuHHFFtmHwosB9VNW4XGNMG/t7mUJ2faDiWpwn0xDNTfIGOtn7IIJy1DUBA==
+ b=GDa2RI/nSJ/+0rBk1f+3cPgvOjsJ7Umms7D3xyYRWNTarw3Eqy16xxmgAtWzFgS+1Wu035HGUcg7jXW4+TXRK9Zia+Wxmbx/VXPn0af/M82wxKw8gONfCk3+IN4hUBAjBre28JSocRlH5pYaE61OrT3GtFTDDfe8+b/NRQ8RIWTcPnVuHagjpTCC9J+IS7j5HcURs6fEpijoXJ4E/X0OyQliX6DH4sAk+6/0zL3lKk0SCYkIQViDrCi3U6jhUbt/PimJzfsW0BHWm9crwb1P8leJ6daS60eaf9bKbQyitwM/uHqUB8bW1FfrZibPLdSkfZiCtWA443BfnNfSiqP2tw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=s0i2NcLQP3mIPc/1lbOppxjZLclg7dWzx00nwjlw+k0=;
- b=cUNLduGqkUddahf3afnV4KAbonc/tsbEyDF0WDdWGIQi9IDG2IsaFEBCgQOz03nu5TjzvP8zKBziO2a4WorYK9+OH1/VsmbvNIUbOkvik2rLR7MbhI8pW+GkJ1g4ZEP4JFe5qtyQCO45rhhUbKm8/xU+WpksuKO3HyqcbZ3FRqOdCj0+bXYZRhl8axSQkq+QTLl9Zd38gGAfsF1eZzEnWJoCn8fXUmIo7Lh+3gLlCFyd3/e+rEfWh4WhWQRI8Ot+ftzI/3psZCRWZEYZiXZRx3kagixacJueDZrFqvo8KA8ZBm4lh8Fw5hTkv3u2wyFi1E62sXa+ZPjz90KIFoNyUA==
+ bh=6EsK/WzkCLVQ9Z8a/nTEAKlBdSIdPGwUe8Qt4OvtfSY=;
+ b=RSsa98ji6kXbkTb0eg+azhb+yCeQuFZLudPfkvzgOBaIdvdqI2yIKSdxK3Urs25iB30O4oQh4nckejzZtyqIqOhl+6Evg4P2asqFfBEYdFipWtSUB/enEA4Xf5WtgVmK+EmDdm8PoZpvzaB5lM4es8HRRIbJVxxtE38DuJqt3mgsTPwjnllOMkbZO3uVsw2UxFmPPkba2ylAjDOitF9Raai/HRETZLftbyK7QWIyOVHZscHwx0n5QXXQuO3QhA3dasuAixbtc3Js49bndKlMHJNBUDPKAohP1A712sI4USaLsCoaLng/xQEeQblYX9ZhIfsIrJHgyZJVoX2O0uwP/g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=s0i2NcLQP3mIPc/1lbOppxjZLclg7dWzx00nwjlw+k0=;
- b=GsSfVc+eGvZh8pr39pFosNTeULrSfVErzeR2urpQv0xZHUpXoH29a7GiugzN34b7AwVF3QJDpScKDiJeZDRuI1zOpmpn7qiE2miZ7KO+3oFT6UWMvmz13L9DsZG88a+GTv+DQa3SQcy9gUbFZb9ro1jwEHQZTZFNOlVPYCyKFrJacpQzvtk/uo3W1Ykkiq+G7Ezp+FO9K8VAX5Qnpt/DpAhThtASZu5FVs8KZhAL001kiVTUCQJqoHSOVpqcZt0dZQpQ/aCYBmjzrP5v7YIIMrMkMFbJDoypC8UDmAqHfKBcfeQaCTjgDo/nh2gFBINFiUXvoPcPjW5hJL/jvyA4SQ==
+ bh=6EsK/WzkCLVQ9Z8a/nTEAKlBdSIdPGwUe8Qt4OvtfSY=;
+ b=dVRXO1I1yUTBEbQiRMRsR7gI4hBd7IUSR4wEZX0xcnCatABli7UPBSrSg+lnoafweXOHJIAVSBkird+rhMsM/boyC22FGpoRrvZmPINQb/svEnP13GXMmlziLk0Eytg+Cky/XoefjyfClhonFysFQshjHg5acnva9F1o0Xo+B+LGK3t1I1IRWdCS4Y0fOSYcP50wk37YpEKvYQArTh2TGjFx8X2DvyQPwWIDMtVAcmeIMcVzysaIiZatyDlRyQYRycgLjsW8ieG1YKKv2pgiMEPZWTDBhaPYBAdFo68FMsiRwDYFx6Aahl9IhEWpmQl1npRd5J/JLDnOtVIpgU4EsA==
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
-Message-ID: <5ebce238-8bad-4fa5-9ba2-cb23e09f8752@epam.com>
-Date: Mon, 2 Nov 2026 03:01:38 +0100
+Message-ID: <0dde4c33-cc9c-4b9a-a158-48cff857c177@epam.com>
+Date: Mon, 2 Nov 2026 03:01:58 +0100
 User-Agent: Mozilla Thunderbird
 From: Milan Djokic <milan_djokic@epam.com>
-Subject: Re: [PATCH v4 21/22] libxl/arm: Introduce domctl command for IOMMU
- vSID mapping
+Subject: Re: [PATCH v4 20/22] xen/arm: vIOMMU vSID->pSID mapping layer
 To: Oleksandr Tyshchenko <olekstysh@gmail.com>,
  "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Anthony PERARD <anthony.perard@vates.tech>,
- Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
- Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+ <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
  Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- "Daniel P. Smith" <dpsmith@apertussolutions.com>
+ Rahul Singh <rahul.singh@arm.com>, Jan Beulich <jbeulich@suse.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.com>
 References: <cover.1791328190.git.milan_djokic@epam.com>
- <66d35a04bcde0c41050e61e194de4565d6fed045.1791328190.git.milan_djokic@epam.com>
- <37275fb7-d8c3-414f-ad72-8bd399310323@gmail.com>
+ <a559fb6eca6befc043ab9a7eacf36f470ed01050.1791328190.git.milan_djokic@epam.com>
+ <d997e441-5697-4b13-8a49-e07838d83de1@gmail.com>
 Content-Language: en-US
-In-Reply-To: <37275fb7-d8c3-414f-ad72-8bd399310323@gmail.com>
+In-Reply-To: <d997e441-5697-4b13-8a49-e07838d83de1@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: AM8P190CA0030.EURP190.PROD.OUTLOOK.COM
- (2603:10a6:20b:219::35) To AS2PR03MB9587.eurprd03.prod.outlook.com
+X-ClientProxiedBy: AM8P190CA0021.EURP190.PROD.OUTLOOK.COM
+ (2603:10a6:20b:219::26) To AS2PR03MB9587.eurprd03.prod.outlook.com
  (2603:10a6:20b:595::7)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS2PR03MB9587:EE_|AS8PR03MB9024:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4503d250-5672-41ca-a7d1-08df38853bb0
+X-MS-Office365-Filtering-Correlation-Id: 912f2a21-a0de-4858-cdf9-08df388547cc
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|7416014|376014|23010399003|1800799024|366016|4143699003|11063799006|5023799004|56012099006|261009223027099003|261028144727099003|261021121427099003|261021123027099003|261026121527099003|261026140227099003|261022075727099003|261022105027099003|10067099003|22082099003|18002099003|6133799003;
+	BCL:0;ARA:13230040|376014|23010399003|1800799024|366016|4143699003|11063799006|56012099006|261009223027099003|261028144727099003|261021121427099003|261021123027099003|261026121527099003|261026140227099003|261022075727099003|261022105027099003|10067099003|22082099003|18002099003|6133799003|3023799007;
 X-Microsoft-Antispam-Message-Info:
-	VGzJMoz6RSu6gSC4/SgbKUssFOQgFB6AbPOe1Bnr95rcWJZo8S8FftXM/WVK3FCwRjYXpNcTgWVdrLAjPjZpThlYrXaaZHGjAihGMzTelajDFqH9eGQI+AUyFuyi7MEXl1J+WbVcAWNC/hr031pwOIZkkdxH5K5jvkLQNQuKU6RLm240WE1fO9cx5zc3nnrTmMgm4lCiLAE+QiQmFuRyz0Vq6Hl6zb7ApmbG4Sjo4jhShTV9Yl8FVnCjh1zNYvEppLDpGCc15Kt+QAfrxqN9yENbLHhJg8/4rCeSPtsmlOuTwX5P4wQOB1Wd3KnpSVxszvX20coxZlJ++m9mfzBQqE5gjnfX5vRP80RKhxva8zxCwEzvn0tO2mmdM9mbZWibdUEZRDu7GRl0sKX7npir9ioXnhknAJFVR2Y68Zrz0apu7rpyg1w67WA6QiwZUDOJgQJ+0iEKLMxxwof78bI2Xe6gZrYzMgDGEYXP/Q81KIUEbvxgToLd4gGbYVuIN8VfmTu26622KB2zXBDHtzA3LUNMSzQn1GfxXq+dPQN4j7Ix5p4JLT0f3oc5DvX8vV9jK0nts+cFm5kJZOARr+P3fsV/NKMSckk209Pcv0dydK7k7qfuPdD9P46SM6/rSEf1jHIormohbXWo/jI/kd9g1RIsdZ/ZlIJQh2XE+fORRsU=
+	fFCbf1UJD06644Eu1lWOBi1dliw/Qv06VjCHBM+InLOlnUXT9Loitg9bgS4/4jB/oud2AfPJyLtEedJKDhHGTHIoaNlh8PNEj+fMcE02hfiQI/OcfcdWTU0kJVAZe9NCUo40291jAJL6W+aQuhL9H9ovTGOhk+/V693mQOhplXyVrr/a2FD7CSNjAGyLwIANsVfVmVBWstiPPtx/WOor+wFJTe0iH03zMRDtOz1EkeShPY8OR9N+X8qpG7OikPav8jjURDR05voGcyqVyB50SnU8QxjwXD6kFIBGXTzbTHhijl2BEKuGS52axlEfWynekgNyVpuTp52WP5mzt7awInJ+uAfWDxyX1bpPn3rt8fqT9InpXdK5LjrVFneUEPevwyw99HgIwoxlVo7B8xgt0j2uVAc084kjGP8oTNMMjUPxozGYXYYBrrhkmWSQs8ar0FR/UzYVuCFk9qXlWgURwdkcLwO6XAeJh1lm9Y2Lgno6hhCNDbI+GmO1+ro6iORV1INEEkrIisg7yraCUi4TnbBQ7dtNymeSVgAofWbYrw46yoga63Sb5DjIjD7LCkqYLlu30YhIPSyZZAnYhPTfqLN5vKZcm93gw+I1zYLQheFWe5WIJNByi9wC4I4ZVi/FV1Dv2st9/+ASYW4S3fITkV8wuAlLbtx4b6ryjc6jBV0=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS2PR03MB9587.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(23010399003)(1800799024)(366016)(4143699003)(11063799006)(5023799004)(56012099006)(261009223027099003)(261028144727099003)(261021121427099003)(261021123027099003)(261026121527099003)(261026140227099003)(261022075727099003)(261022105027099003)(10067099003)(22082099003)(18002099003)(6133799003);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS2PR03MB9587.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(23010399003)(1800799024)(366016)(4143699003)(11063799006)(56012099006)(261009223027099003)(261028144727099003)(261021121427099003)(261021123027099003)(261026121527099003)(261026140227099003)(261022075727099003)(261022105027099003)(10067099003)(22082099003)(18002099003)(6133799003)(3023799007);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?Y2VKakRxUWxRY01odDQ2NlZTb2lGWWlSZjhiaVMybVlQM0p1b0VNOS9ZQnJM?=
- =?utf-8?B?Q0F6bnhub3kxU240TmdMSlltczhFVFhuNjNoM1lDbThvSVBOMWIyTnBYaEFO?=
- =?utf-8?B?VkF5ODJZWHdTbkpHdDlkOTVjTU02b0JIL3hOY2Z0blk0VllFKzd0TWJrTUFp?=
- =?utf-8?B?MXRIT0JhK0p6dEhpZ0ZwWlBWSGVDLzQ0WlV4dVFRTy9KaU5XclBZbUx0L3NT?=
- =?utf-8?B?K2pOZTEvVzAvendsaFlNQThUaXlpNm5xeUxJU0V1OTZnM3pFbzFBZHVubEpY?=
- =?utf-8?B?ZGg2T0FTeWR5V0l5UmlGdEo2QnZYcmEyUitFNyt2ZmZRMkErQjdDcWFJWlgy?=
- =?utf-8?B?bmdOTmZqN1B6MEU5V0Q0Z2tBSExBY3drNGJuL21LUGp5cnlOd25SZCtnd3Uy?=
- =?utf-8?B?eXdHMTdkUnQveHN3bU9KcDh3WVpvNThsZGo2d0R6dEttUldvQjdabU85cmly?=
- =?utf-8?B?UmRjaFJlYzNEdWlObHA3SFkvc0ZJc29sNU9JY29adDVUY0RTTHlIODZnS3ZO?=
- =?utf-8?B?US85a3JEZmFLc1ZLWTQya2pCNnRZRmg1YXoxZDlPaTh5VmZ2ZlNpc0o0b1Nj?=
- =?utf-8?B?T2F2QVZuUFhVYnFkb1RLQ1MrNGNpbjUzN0tkWFVLMU1xY1YvTm1rKzBvdnE5?=
- =?utf-8?B?ak5sb0VraWpKUkVTSUZpcXpkU3JnQUNxSytpaUwySldaTzYxaXd5V01UVUYx?=
- =?utf-8?B?eElXWlpNUWczUGRsTGR0UllRVWd2Z280WEdILzdOYkdLOWdUbG1maWltQ25J?=
- =?utf-8?B?Qm82UHdUR1RxZnVFOFNhN1N2Q1lyaXNiL0lLTVRNbjJmOXBoOUxjWjVZdnpu?=
- =?utf-8?B?UXJESnJNc1c4OVY3Wkl5a0p6OEc4OWNxVmdoa08yL1RvZS83QmpSYVlCWWV2?=
- =?utf-8?B?c0Q2ZVFyUFF0citLZ1haSklZVW9uckgxeGFlUXZoVmNEWEZZNEtkbGVkWEFE?=
- =?utf-8?B?SWE1VWZGdXdhNnc2MFNNM212Y3ZwdUlBaDIrVERxVndhWVp6R2ZrdHo4cElh?=
- =?utf-8?B?Ymg1V0g4TmdibGtqc0pORFVIcm9icUVNdk53ZjBLRFRvWnY3Uk1CRHVUWURq?=
- =?utf-8?B?NlRWMjlOWmZ6VmZuL2U5cFhzYlFxb1VKZHJBbk42SnBrcWsrMFgxWU1LZWUz?=
- =?utf-8?B?SEU4YVJXbzAwMFdoRitDdHliQmI5cnNKTVY3Z2Y3KzMxeUZCZXQ0ZWNzcmlB?=
- =?utf-8?B?R3pmcjV4bWh4S3ZoOVhzOHp6bXZ2K0VrdFBteHVYR0YrdjAxRWY1dGJZck1o?=
- =?utf-8?B?bU9tekhxYWVJbWFIMlJJZy9PYjMzZWtpcHhWb0JRRXpLcjVDaytJSzVMSWg5?=
- =?utf-8?B?ZkNWdDl0SVZ0Q1BtVHcrUDFYVVhmTU41RGJFbEdMamdMVWVTMWFHeXNHdkNC?=
- =?utf-8?B?bjVyQkEydzI0QmVvTTQ1TDk4UlNIY3VNaXR2aXlRMkllc2FCbDhKK3Ryd1NF?=
- =?utf-8?B?ejVGcXRNQVJlN1ErcnZSMm53TklpLzgremFpOENQVDVzVDhCM0g5TUVrZHQz?=
- =?utf-8?B?dmFqS1g0ZGVXWC8ra3pGSFpuOVdmV0lPK0d4ZnJjNXpFWFZ4OU9HeHl4RHFE?=
- =?utf-8?B?dk9MMEJJSExjd0FpcjU0SVZyUFUxVE11eWtEU0w5blJYOXd3TXlQdzcxZjJG?=
- =?utf-8?B?OXlNZHFoQTJTby85c2RWbExpbHFHY0FNTkNPOTBhaGwrWktrT0o5ZE1kWmZj?=
- =?utf-8?B?UGVOYVVrTkQrUDJRdXZxSGIveWZJUGtPUlNXSkdrcHFyRElzcDJBbCtGM1Bu?=
- =?utf-8?B?ODJrK1djeW1KZW1QdU1ObDM3N1d1dHJOQUVOOTYyemtwb0h6SHMrWUovR1R2?=
- =?utf-8?B?SmN4a1BIMmI3N3pUNGNUYlBvcDEyTHFuc3J2VXcyZkIzN1g0TmxhaGxIWlNX?=
- =?utf-8?B?M3VoVFhDTHdYUmUrTUhXekJSZmNESElueWtxMWM4MnN4S3pqOXFpYnNpSE1V?=
- =?utf-8?B?UzNMQm4xelQ0Q1pjT0Zjd2xhMEhiNHBMSXRESFFEOVE5UEtMUmt4YlBFakQ1?=
- =?utf-8?B?UkxGSjJhTlZFK3hVUTAxU2lrU1gyZVh1Ykd4WW5zNHRiSjNOTVdCZ1doM1Jh?=
- =?utf-8?B?OEtENWRzZWhheE1hbnhNNHpMYmwvUEJhYlptd2ZleDFLc3VzL05aMTZoQWth?=
- =?utf-8?B?Zm03Qy9qV1U2UVkvTDk4SXJsLzBtNnFTSUNhRlJTTkNXRDg4YjFSbmlaT0lE?=
- =?utf-8?B?VnpKbVhtOFpvOWMzcFBaVkZ6bktwakdETGtJaUcyNEF3NkY2Y3JodmZkRkc1?=
- =?utf-8?B?b00vYm92TEN3YXhOcGFoQlFjZWNhL3EvMEpXcTl3S2hJeEpJYTVwSkxvY0wx?=
- =?utf-8?B?NmIwVGVYS3RCVzM5ZmQvbEFrQVE0dUdIblc1WmtGWFRoLzNxeTIvZz09?=
+	=?utf-8?B?QkxiUkVzbklmb1FVRjhNempLM1pGWFRXZTlFcUVOMmlmOWRLRDhua3pOY3Zh?=
+ =?utf-8?B?SWNHa2hrTjBGNEJORWVGMW4rNG43RzBQK0NCMnE3emR1aVFYenJYdlVsNS9W?=
+ =?utf-8?B?dVV0NU1xM210ZGU3Ry82T3g0M3ZDTEwzL3ZSZmZTUFNHYTZlZi9xc2xkMVBh?=
+ =?utf-8?B?cFRqTzNZSXdBcHNHcUh4UUZFY3gxR1VQZm9mdU1sd0JTaHJpTW9GQ3EveGxU?=
+ =?utf-8?B?Mnc5bVdFdlNJQU8xSHVyeXVmUjVJQ3ptUS9rTGk0TEZDcDVyQzhtQTM5aGpQ?=
+ =?utf-8?B?Qk11R0Q1cUJPTkErWUZraFY1RzZpeVBmOWkrbkJsOTVZei9hcDJXcWQzUUFu?=
+ =?utf-8?B?Q1Q2eHFsN0dEOGU0cVBLZ3NPMExxVUJTUnNseUVkeCtZU0NQWE1MaWJBcXl4?=
+ =?utf-8?B?Ym5tMkw2dXVBb1RjVXZNYllBSUhQRkdIM25OQ0ovVkxOSEo1anhwRDRIN001?=
+ =?utf-8?B?VjdwUEpBM0JUT05sdlZQdU5OU1VPSG9KWThHaDhNeVJCZXExUXpoTWVVT3RE?=
+ =?utf-8?B?c1UxSWlxcGRqRUlNUC92T3llbXA5aW1xR0k2eTQzSkFSL2ZMTFV0QXZDWjFk?=
+ =?utf-8?B?aDk5WE96Mm8zSDZCY01jU3JuYlM5YkozWklDQ0YyNVN2Qm1yeEdjRTRNYWNr?=
+ =?utf-8?B?bUtEdGN1TTZWUGpkQVZpek5IUnhMdTV6TW9rTkdyYmhMcjA2MGlKdlgveXIy?=
+ =?utf-8?B?ZFIxM1MxV3pCT1NEd2VLL2dDZkxMWjAzSVQyYlM1LzlncThPWVN0WGRhR1Rl?=
+ =?utf-8?B?V3RKUEdkcjZ6NnR4bU1xUTMvM1ltQUxOMmtVK3l6SXRYWTNmNVM1ZHQ1aFZP?=
+ =?utf-8?B?UUlxMHkvUWNUQ0V1SDJMZEhXRTV3ejZHdU9rdXVTQWJRdGNHZnZhaEVzeEZU?=
+ =?utf-8?B?OWxYUHorNW5iZE0ybDNDUEhFZzN3d0FQNEZjOVFlSkRCdjI3WkRXWG45UUxv?=
+ =?utf-8?B?NCtVTTR6M2lDbm5VVXNodkJqeGRiLyt6T3JIU3UyV2JuYXV6YzJDWkI4cU4z?=
+ =?utf-8?B?U0pCaHVGN0JTN3J1dWQ3SVNHUDRPUXB5ZlBkeUNMdWtGRmNpeW1lUW1qSUhy?=
+ =?utf-8?B?RisrSDBoMVByYVJrL3paeTdhRzhSUFVEZk1nUXUwdW9YK1dzeGEwS0VYK05j?=
+ =?utf-8?B?NFBzRUttdUF4TXRwUE1SZ1ZsaWZQZzNKZDB6R2crQTRhTG9HUHphdmtrVFJk?=
+ =?utf-8?B?cVpobGRkVEdhQThkcVBySm9HMVNnbE41dmQ0bFh0RHRxSUc4R3JXV3FoSEhT?=
+ =?utf-8?B?dDlCd0x2d2R1MTF2T28vcDRCcVdnQ1JpTFdXclBUa0NkZHRiWVcyUUZlQ1pK?=
+ =?utf-8?B?VGlqRnV6V2UwTEdwZGcrU1Zld3hGOExGbDRvWkxDMUVPSnAyUnlOZ2QzRDR3?=
+ =?utf-8?B?SDJhTnBmOWdrS1Byd1IyRi9aMHVVYzBEV0c2TFB1SnIzWW5QM2NJNXVQQlhB?=
+ =?utf-8?B?cEZSWlFoZVFiWHNDdWU5TkZrbDBhaHA5Vk5tcmVYN09WaHdnUDY3S1B4MzdP?=
+ =?utf-8?B?MjM3dnVXczE3czZyVzBBV25qM2RFbFZ3RjQyMGNJMVVSeG45VVJQQ1ZlUnhS?=
+ =?utf-8?B?V0ZmWXBjcnNBb3M2ZXl3dDhYcXh0UCswZTdJVlFrdXhheFhycVdJOUlBUVRj?=
+ =?utf-8?B?b1NEYWQyeDVtYWx4NFRCRG9HNWRxQU5IcExlVDMydVhENnErVTNWQzN6MXZE?=
+ =?utf-8?B?Nm9YZ0hHeUt0ZG5zK0dFMHhxRDBBMVh3dzZyRlRxWHlYRzNRUTNtYk5WbWJC?=
+ =?utf-8?B?MTRjSjFtNU9VNGhZbEtuQjhqdmtGY3hGYm5OYXk3SDJWRXBraXJaSUNFL1Zq?=
+ =?utf-8?B?UnhHMVR2UGJnakhxK0gyOTExZEF2SzR6OTZncDVITXhXaDlyZ08xT1pBOUZM?=
+ =?utf-8?B?YkQ2MFBzVW9qSjhENTk1cEZXTXJTMklHZWtvNGNPTll0ODJ4dm5haXZuT0pM?=
+ =?utf-8?B?d2daNEcvN0NSZlR0ZFdydVk5eXpBc2F0N294eENxSzlYSndBZGNtTTJhNFVJ?=
+ =?utf-8?B?V0dkV0dLYkVwZmMxUGRkazNBMkVnd1dUenNSZkxZRWdjMU9uL3IxMUppdnND?=
+ =?utf-8?B?RDVUNnFmOUZBb2YzN2xVb1pDck4xa00wWVR3UmV6RmkxUUVLTFBxVXVPamVJ?=
+ =?utf-8?B?TWlrVlFCekJVVENWazJFTGF4cDVVaXJqRGdubEJQeGszNXVpS0N6aGc4YWxI?=
+ =?utf-8?B?VUYvQTJFMDlOUHRqamo1SE14Z2lVQ0hUaVJmTm45Q0JNTmZHVjlkMTdiYk40?=
+ =?utf-8?B?bW5QbWpyVkFWb0xLQ20wZ1Y4eGZnbE8vemd3STFlTGNiVlVaYW0xYU9qN0JV?=
+ =?utf-8?B?Tm1vU3d4YzFidW4wZVltb3czSDdVUTNaUUhPdWRqOCs1T3BuRmloUT09?=
 X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4503d250-5672-41ca-a7d1-08df38853bb0
+X-MS-Exchange-CrossTenant-Network-Message-Id: 912f2a21-a0de-4858-cdf9-08df388547cc
 X-MS-Exchange-CrossTenant-AuthSource: AS2PR03MB9587.eurprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Nov 2026 02:01:39.3846
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Nov 2026 02:01:59.7370
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 0frsHxT9euYvVJz3MGNnI04Zt+c8SQ7a7R4xbnbAACCRFfpvxuv3lwIeYEM79v6xFzcxccCknYr2ALC0rLQEWw==
+X-MS-Exchange-CrossTenant-UserPrincipalName: UpMwS2k1FOsglMcz+zltACVlftS6c0Jxggm45wuP7YumxTL3SrfOH6sVoaz7bAu27C4aJrjOqtUJfKTw2mtklw==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR03MB9024
-X-purgate-ID: tlsNG-c201ff/1793584903-F50A22A1-CC28FF2F/0/0
+X-purgate-ID: tlsNG-4011c0/1793584922-51EC2CFC-620A3937/0/0
 X-purgate-type: clean
-X-purgate-size: 15564
+X-purgate-size: 18341
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -173,403 +170,466 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 Hi Oleksandr,
 
-On 10/9/26 15:07, Oleksandr Tyshchenko wrote:
+On 10/9/26 16:15, Oleksandr Tyshchenko wrote:
 > [You don't often get email from olekstysh@gmail.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
 > 
 > On 10/7/26 03:07, Milan Djokic wrote:
 > 
 > Hello Milan
 > 
->> For guests created via the control domain (xl, Zephyr xenlib), a partial
->> device tree is parsed and loaded on the control domain side.
+>> Introduce a vIOMMU mapping layer to support passthrough of IOMMU devices
+>> attached to different physical IOMMUs, including devices with the same
+>> Stream ID.
 >>
->> SIDs in the guest device tree have to be replaced with virtual SIDs that
->> are mapped to the corresponding physical SIDs. To do this, the control
->> domain requests Xen to allocate a new vSID and map it to the original
->> pSID for each IOMMU stream ID associated with a guest device.
+>> Add a new generic vIOMMU API, viommu_allocate_vsid(), which allocates a
+>> guest vSID and maps it to the input pSID and the backing physical SMMU.
 >>
->> Introduce a new domctl command (XEN_DOMCTL_viommu_allocate_vid) that
->> allows the control domain to request a new vSID mapping and replace the
->> original pSID with the allocated vSID in the guest device tree.
+>> Once the mapping is established, the guest uses the vSID for stage-1
+>> commands, and Xen translates the vSID to the corresponding pSID before
+>> processing the command on the physical SMMU.
 >>
->> Implement vSID allocation in libxl using this interface for devices
->> configured behind an IOMMU.
+>> Implement usage of the new API for dom0less guests. Allocate vSIDs when
+>> creating the guest device tree and replace the original pSIDs with vSIDs
+>> that are subsequently used by the guest driver.
 >>
 >> Signed-off-by: Milan Djokic <milan_djokic@epam.com>
 >> ---
->>    tools/include/xenctrl.h             |  13 ++++
->>    tools/libs/ctrl/xc_domain.c         |  25 +++++++
->>    tools/libs/light/libxl_arm.c        | 107 +++++++++++++++++++++++++---
->>    xen/arch/arm/domctl.c               |  38 ++++++++++
->>    xen/include/public/domctl.h         |  22 ++++++
->>    xen/xsm/flask/hooks.c               |   4 ++
->>    xen/xsm/flask/policy/access_vectors |   2 +
->>    7 files changed, 202 insertions(+), 9 deletions(-)
+>>    xen/arch/arm/include/asm/viommu.h       |  12 +++
+>>    xen/common/device-tree/dom0less-build.c |  33 +++++--
+>>    xen/drivers/passthrough/arm/smmu-v3.c   |  10 ++-
+>>    xen/drivers/passthrough/arm/viommu.c    |   9 ++
+>>    xen/drivers/passthrough/arm/vsmmu-v3.c  | 109 +++++++++++++++++++++++-
+>>    xen/include/xen/iommu.h                 |   6 +-
+>>    6 files changed, 165 insertions(+), 14 deletions(-)
 >>
->> diff --git a/tools/include/xenctrl.h b/tools/include/xenctrl.h
->> index 9f00d4a19d..d38b365078 100644
->> --- a/tools/include/xenctrl.h
->> +++ b/tools/include/xenctrl.h
->> @@ -2664,6 +2664,19 @@ int xc_domain_set_llc_colors(xc_interface *xch, uint32_t domid,
->>                                 const uint32_t *llc_colors,
->>                                 uint32_t num_llc_colors);
->>
->> +/*
->> + * Allocate guest IOMMU vSID and establish its mapping to pSID.
->> + * It can only be used on domain DT creation.
->> + * Currently used for ARM only, possibly for RISC-V in the
->> + * future. Function has no effect for x86.
->> + */
->> +int xc_domain_viommu_allocate_vsid_range(xc_interface *xch,
->> +                                         uint32_t domid,
->> +                                         uint16_t nr_sids,
->> +                                         uint32_t first_psid,
->> +                                         uint32_t phandle,
->> +                                         uint32_t *first_vsid);
->> +
->>    #if defined(__arm__) || defined(__aarch64__)
->>    int xc_dt_overlay(xc_interface *xch, void *overlay_fdt,
->>                      uint32_t overlay_fdt_size, uint8_t overlay_op);
->> diff --git a/tools/libs/ctrl/xc_domain.c b/tools/libs/ctrl/xc_domain.c
->> index 94cfab0fa1..0bd3e45fbd 100644
->> --- a/tools/libs/ctrl/xc_domain.c
->> +++ b/tools/libs/ctrl/xc_domain.c
->> @@ -2222,6 +2222,31 @@ out:
->>
->>        return ret;
->>    }
->> +
->> +int xc_domain_viommu_allocate_vsid_range(xc_interface *xch,
->> +                                         uint32_t domid,
->> +                                         uint16_t nr_sids,
->> +                                         uint32_t first_psid,
->> +                                         uint32_t phandle,
->> +                                         uint32_t *first_vsid)
->> +{
->> +    int err;
->> +    struct xen_domctl domctl = {};
->> +
->> +    domctl.cmd = XEN_DOMCTL_viommu_alloc_vsid_range;
->> +    domctl.domain = domid;
->> +    domctl.u.viommu_alloc_vsid_range.first_psid = first_psid;
->> +    domctl.u.viommu_alloc_vsid_range.phandle = phandle;
->> +    domctl.u.viommu_alloc_vsid_range.nr_sids = nr_sids;
->> +
->> +    if ( (err = do_domctl(xch, &domctl)) != 0 )
->> +        return err;
->> +
->> +    *first_vsid = domctl.u.viommu_alloc_vsid_range.first_vsid;
->> +
->> +    return 0;
->> +}
->> +
->>    /*
->>     * Local variables:
->>     * mode: C
->> diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
->> index daaa81f2aa..75c6f8efc5 100644
->> --- a/tools/libs/light/libxl_arm.c
->> +++ b/tools/libs/light/libxl_arm.c
->> @@ -1322,11 +1322,96 @@ static int copy_partial_fdt(libxl__gc *gc, void *fdt, void *pfdt)
->>        return 0;
->>    }
->>
->> -static int modify_partial_fdt(libxl__gc *gc, void *pfdt)
->> +/*
->> + * Store virtualized 'iommus' properties for every node attached to IOMMU
->> + * and passthroughed to guest.
->> + * Used as a lookup table for mapping <phandle pSID> -> <vhandle vSID>
->> + */
->> +struct viommu_stream {
->> +    XEN_LIST_ENTRY(struct viommu_stream) entry;
->> +    char path[128];          /* DT path, stable across resizes */
->> +    fdt32_t *iommus;         /* fully virtualized iommus property */
->> +};
->> +
->> +static XEN_LIST_HEAD(, struct viommu_stream) viommu_stream_list;
-> 
-> 
-> Looks like ^^^ is keyed only by DT path ...
-> 
-> 
->> +
->> +/*
->> + * Helper function which creates mapping of dt node to
->> + * to virtualized 'iommus' property
->> + * Mappings stored in a global 'viommu_stream_list' to
->> + * make it reusable for every fdt resize
->> + */
->> +static int viommu_get_stream(libxl__gc *gc,
->> +                             uint32_t domid,
->> +                             const fdt32_t *prop,
->> +                             int proplen,
->> +                             const char* path, fdt32_t **iommus)
->>    {
->> -    int nodeoff, proplen, i, r;
->> +    int i, r;
->> +    uint32_t vsid, psid, phandle;
->> +    struct viommu_stream *viommu_stream;
->> +
->> +    /* Lookup if stream for target device is already allocated */
->> +    XEN_LIST_FOREACH(viommu_stream, &viommu_stream_list, entry)
->> +    {
->> +        if (!strcmp(viommu_stream->path, path)) {
->> +            *iommus = viommu_stream->iommus;
->> +            return 0;
->> +        }
->> +    }
-> 
->    ... a second domain with the same DT path gets the first domain’s
-> cached vSIDs without any mapping being created for it. Is it ok?
-> 
-> 
-
-You're right. The lookup should also take the domain ID into account. 
-I'll updated the lookup to use both the domain ID and DT path.
-
->> +
->> +    /* Allocate new viommu stream */
->> +    viommu_stream = malloc(sizeof(struct viommu_stream));
->> +    if (!viommu_stream)
->> +        return ERROR_NOMEM;
->> +    memset(viommu_stream, 0, sizeof(struct viommu_stream));
->> +    viommu_stream->iommus = malloc(proplen);
->> +    if (!viommu_stream->iommus) {
->> +        free(viommu_stream);
->> +        return ERROR_NOMEM;
->> +    }
->> +    memset(viommu_stream->iommus, 0, proplen);
->> +
->> +    LOG(DEBUG, "Creating vIOMMU stream for device %s",
->> +        path);
+>> diff --git a/xen/arch/arm/include/asm/viommu.h b/xen/arch/arm/include/asm/viommu.h
+>> index 5ae21042f0..3d0eb92655 100644
+>> --- a/xen/arch/arm/include/asm/viommu.h
+>> +++ b/xen/arch/arm/include/asm/viommu.h
+>> @@ -34,6 +34,16 @@ struct viommu_ops {
+>>         * Called during domain destruction to free resources used by vIOMMU.
+>>         */
+>>        int (*relinquish_resources)(struct domain *d);
 >> +
 >> +    /*
->> +     * Virtualize device "iommus" property
->> +     * (replace pIOMMU with vIOMMU phandle and pSIDs with mapped vSIDs)
+>> +     * Allocate free vSID/vRID for the guest device and establish vID->pID mapping
+>> +     * Called during domain device assignment.
+>> +     * Returns 0 on success and sets vsid argument to newly allocated vSID/vRID
+>> +     * mapped to physical ID (id argument).
+>> +     * Negative error code returned if allocation fails.
 >> +     */
->> +    for (i = 0; i < proplen / 8; ++i) {
->> +        /* Allocate new vSID mapped to pSID and physical IOMMU */
+>> +    int (*allocate_vsid)(struct domain *d, uint32_t id, uint32_t phandle,
+>> +                         uint32_t *vsid);
+>>    };
+>>
+>>    struct viommu_desc {
+>> @@ -54,6 +64,8 @@ extern struct list_head host_iommu_list;
+>>    int domain_viommu_init(struct domain *d, uint8_t viommu_type);
+>>    int viommu_relinquish_resources(struct domain *d);
+>>    uint8_t viommu_get_type(void);
+>> +int viommu_allocate_vsid(struct domain *d, uint32_t id, uint32_t phandle,
+>> +                         uint32_t *vsid);
+>>    void add_to_host_iommu_list(paddr_t addr, paddr_t size,
+>>                                const struct dt_device_node *node,
+>>                                const void *iommu);
+>> diff --git a/xen/common/device-tree/dom0less-build.c b/xen/common/device-tree/dom0less-build.c
+>> index 7280bcf72b..673bcbbd1c 100644
+>> --- a/xen/common/device-tree/dom0less-build.c
+>> +++ b/xen/common/device-tree/dom0less-build.c
+>> @@ -31,6 +31,8 @@
+>>    #include <xen/static-memory.h>
+>>    #include <xen/static-shmem.h>
+>>
+>> +#include <asm/viommu.h>
+>> +
+>>    #define XENSTORE_PFN_LATE_ALLOC UINT64_MAX
+>>
+>>    static domid_t __initdata xs_domid = DOMID_INVALID;
+>> @@ -332,11 +334,12 @@ static int __init handle_prop_pfdt(struct kernel_info *kinfo,
+>>    }
+>>
+>>    #ifdef CONFIG_ARM_VIRTUAL_IOMMU
+>> -static void __init modify_pfdt_node(void *pfdt, int nodeoff)
+>> +static void __init modify_pfdt_node(void *pfdt, int nodeoff, struct domain *d)
+>>    {
+>>        int proplen, i, rc;
+>>        const fdt32_t *prop;
+>>        fdt32_t *prop_c;
+>> +    uint32_t psid, phandle, vsid;
+>>
+>>        prop = fdt_getprop(pfdt, nodeoff, "iommus", &proplen);
+>>        if ( !prop )
+>> @@ -346,10 +349,23 @@ static void __init modify_pfdt_node(void *pfdt, int nodeoff)
+>>        if ( !prop_c )
+>>            return;
+>>
+>> +    /*
+>> +     * Assign <vIOMMU vSID> pairs to iommus property and establish
+>> +     * vSID->pSID mappings
+>> +     */
+>>        for ( i = 0; i < proplen / 8; ++i )
+>>        {
 >> +        phandle = fdt32_to_cpu(prop[i * 2]);
 >> +        psid = fdt32_to_cpu(prop[i * 2 + 1]);
->> +        r = xc_domain_viommu_allocate_vsid_range(CTX->xch, domid, 1, psid,
->> +                                                 phandle, &vsid);
->> +        if (r) {
->> +            LOG(ERROR, "Can't allocate new vSID/vRID for guest IOMMU device");
->> +            return r;
+>> +        rc = viommu_allocate_vsid(d, psid, phandle, &vsid);
+>> +        if ( rc )
+>> +        {
+>> +            dprintk(XENLOG_ERR, "(DOMID=%u) Failed to allocate vSID for "
+>> +                    "pSID: %u, pIOMMU: %u", d->domain_id, psid, phandle);
+>> +            return;
+> 
+> As I mentioned in prev commit #19/22, in that case the guest DT keeps
+> the host phandle and pSID while the domain creates normally since the
+> failure is ignored. I think, we need to propagate the error and fail
+> domain creation. What do you think?
+> 
+
+Agreed. Will be updated.
+
+> 
 >> +        }
->> +        viommu_stream->iommus[i * 2] = cpu_to_fdt32(GUEST_PHANDLE_VSMMUV3);
->> +        viommu_stream->iommus[i * 2 + 1] = cpu_to_fdt32(vsid);
->> +        LOG(DEBUG, "Mapped vSID: %u to pSID: %u", vsid, psid);
+>>            prop_c[i * 2] = cpu_to_fdt32(GUEST_PHANDLE_VSMMUV3);
+>> -        prop_c[i * 2 + 1] = prop[i * 2 + 1];
+>> +        prop_c[i * 2 + 1] = cpu_to_fdt32(vsid);
+>>        }
+>>
+>>        rc = fdt_setprop(pfdt, nodeoff, "iommus", prop_c, proplen);
+>> @@ -362,7 +378,8 @@ static void __init modify_pfdt_node(void *pfdt, int nodeoff)
+>>        return;
+>>    }
+>>    #else
+>> -    static inline void __init modify_pfdt_node(void *pfdt, int nodeoff)
+>> +    static inline void __init modify_pfdt_node(void *pfdt, int nodeoff,
+>> +                                               struct domain *d)
+>>        {
+>>            return;
+>>        }
+>> @@ -371,7 +388,7 @@ static void __init modify_pfdt_node(void *pfdt, int nodeoff)
+>>    static int __init scan_pfdt_node(struct kernel_info *kinfo, void *pfdt,
+>>                                     int nodeoff,
+>>                                     uint32_t address_cells, uint32_t size_cells,
+>> -                                 bool scan_passthrough_prop)
+>> +                                 bool scan_passthrough_prop, struct domain *d)
+>>    {
+>>        int rc = 0;
+>>        void *fdt = kinfo->fdt;
+>> @@ -394,9 +411,9 @@ static int __init scan_pfdt_node(struct kernel_info *kinfo, void *pfdt,
+>>        node_next = fdt_first_subnode(pfdt, nodeoff);
+>>        while ( node_next > 0 )
+>>        {
+>> -        modify_pfdt_node(pfdt, node_next);
+>> +        modify_pfdt_node(pfdt, node_next, d);
+>>            rc = scan_pfdt_node(kinfo, pfdt, node_next, address_cells, size_cells,
+>> -                            scan_passthrough_prop);
+>> +                            scan_passthrough_prop, d);
+>>            if ( rc )
+>>                return rc;
+>>
+>> @@ -483,7 +500,7 @@ static int __init domain_handle_dtb_boot_module(struct domain *d,
+>>                res = scan_pfdt_node(kinfo, pfdt, node_next,
+>>                                     DT_ROOT_NODE_ADDR_CELLS_DEFAULT,
+>>                                     DT_ROOT_NODE_SIZE_CELLS_DEFAULT,
+>> -                                 false);
+>> +                                 false, d);
+>>                if ( res )
+>>                    goto out;
+>>                continue;
+>> @@ -493,7 +510,7 @@ static int __init domain_handle_dtb_boot_module(struct domain *d,
+>>                res = scan_pfdt_node(kinfo, pfdt, node_next,
+>>                                     DT_ROOT_NODE_ADDR_CELLS_DEFAULT,
+>>                                     DT_ROOT_NODE_SIZE_CELLS_DEFAULT,
+>> -                                 true);
+>> +                                 true, d);
+>>                if ( res )
+>>                    goto out;
+>>                continue;
+>> diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthrough/arm/smmu-v3.c
+>> index e44f872d2d..297d2e5e7b 100644
+>> --- a/xen/drivers/passthrough/arm/smmu-v3.c
+>> +++ b/xen/drivers/passthrough/arm/smmu-v3.c
+>> @@ -3048,7 +3048,7 @@ static struct arm_smmu_device *arm_smmu_get_by_dev(const struct device *dev)
+>>    }
+>>
+>>    static struct iommu_domain *arm_smmu_get_domain_by_sid(struct domain *d,
+>> -                             u32 sid)
+>> +                             u32 sid, const struct arm_smmu_device *smmu)
+>>    {
+>>        int i;
+>>        unsigned long flags;
+>> @@ -3064,6 +3064,9 @@ static struct iommu_domain *arm_smmu_get_domain_by_sid(struct domain *d,
+>>        list_for_each_entry(io_domain, &xen_domain->contexts, list) {
+>>                smmu_domain = to_smmu_domain(io_domain);
+>>
+>> +             if (smmu_domain->smmu != smmu)
+>> +                     continue;
+>> +
+>>                spin_lock_irqsave(&smmu_domain->devices_lock, flags);
+>>                list_for_each_entry(master, &smmu_domain->devices, domain_head) {
+>>                        for (i = 0; i < master->num_streams; i++) {
+>> @@ -3292,14 +3295,15 @@ static void arm_smmu_iommu_xen_domain_teardown(struct domain *d)
+>>    }
+>>
+>>    static int arm_smmu_attach_guest_config(struct domain *d, uint32_t sid,
+>> -             const struct iommu_guest_config *cfg)
+>> +                             const struct iommu_guest_config *cfg,
+>> +                             const struct arm_smmu_device *smmu)
+>>    {
+>>        int ret = -EINVAL;
+>>        unsigned long flags;
+>>        struct arm_smmu_master *master;
+>>        struct arm_smmu_domain *smmu_domain;
+>>        struct arm_smmu_xen_domain *xen_domain = dom_iommu(d)->arch.priv;
+>> -     struct iommu_domain *io_domain = arm_smmu_get_domain_by_sid(d, sid);
+>> +     struct iommu_domain *io_domain = arm_smmu_get_domain_by_sid(d, sid, smmu);
+>>
+>>        if (!io_domain)
+>>                return -ENODEV;
+>> diff --git a/xen/drivers/passthrough/arm/viommu.c b/xen/drivers/passthrough/arm/viommu.c
+>> index 407e68e62d..6c97acb049 100644
+>> --- a/xen/drivers/passthrough/arm/viommu.c
+>> +++ b/xen/drivers/passthrough/arm/viommu.c
+>> @@ -75,6 +75,15 @@ int viommu_relinquish_resources(struct domain *d)
+>>        return cur_viommu->ops->relinquish_resources(d);
+>>    }
+>>
+>> +int viommu_allocate_vsid(struct domain *d, uint32_t id, uint32_t phandle,
+>> +                         uint32_t *vsid)
+>> +{
+>> +    if ( !cur_viommu )
+>> +        return -ENODEV;
+>> +
+>> +    return cur_viommu->ops->allocate_vsid(d, id, phandle, vsid);
+>> +}
+>> +
+>>    uint8_t viommu_get_type(void)
+>>    {
+>>        if ( !cur_viommu || host_iommu_list_incomplete ||
+>> diff --git a/xen/drivers/passthrough/arm/vsmmu-v3.c b/xen/drivers/passthrough/arm/vsmmu-v3.c
+>> index b71511c2eb..53fd7f2d63 100644
+>> --- a/xen/drivers/passthrough/arm/vsmmu-v3.c
+>> +++ b/xen/drivers/passthrough/arm/vsmmu-v3.c
+>> @@ -85,6 +85,8 @@
+>>    #define smmu_get_ste_s1ctxptr(x)    FIELD_PREP(STRTAB_STE_0_S1CTXPTR_MASK, \
+>>                                        FIELD_GET(STRTAB_STE_0_S1CTXPTR_MASK, x))
+>>
+>> +#define MAX_VSID   (1 << SMMU_IDR1_SIDSIZE)
+>> +
+>>    /* event queue entry */
+>>    struct arm_smmu_evtq_ent {
+>>        /* Common fields */
+>> @@ -132,6 +134,14 @@ struct arm_vsmmu_queue {
+>>        uint8_t     max_n_shift;
+>>    };
+>>
+>> +/* vSID->pSID mapping entry */
+>> +struct vsid_entry {
+>> +    bool        valid;
+>> +    uint32_t    vsid;
+>> +    uint32_t    psid;
+>> +    struct arm_smmu_device *smmu;
+>> +};
+>> +
+>>    struct virt_smmu {
+>>        struct      domain *d;
+>>        struct      list_head viommu_list;
+>> @@ -156,6 +166,7 @@ struct virt_smmu {
+>>        spinlock_t  cr2_lock;
+>>        spinlock_t  strtab_cfg_lock;
+>>        spinlock_t  irq_cfg_lock;
+>> +    struct vsid_entry *vsids;
+>>    };
+>>
+>>    /* Helper functions */
+>> @@ -545,6 +556,49 @@ static int arm_vsmmu_handle_cfgi_ste(struct virt_smmu *smmu, uint64_t *cmdptr)
+>>        struct arm_vsmmu_s1_trans_cfg s1_cfg = {0};
+>>        uint32_t sid = smmu_cmd_get_sid(cmdptr[0]);
+>>        struct iommu_guest_config guest_cfg = {0};
+>> +    struct arm_smmu_device *phys_smmu = NULL;
+>> +    struct host_iommu *host_iommu;
+>> +    uint32_t psid;
+>> +    struct arm_smmu_evtq_ent ent = {
+>> +        .opcode = EVT_ID_BAD_STREAMID,
+>> +        .sid = sid,
+>> +        .c_bad_ste_streamid = {
+>> +            .ssid = 0,
+>> +            .ssv = false,
+>> +        },
+>> +    };
+>> +
+>> +    /* vIOMMU->pIOMMU identity mapped for HW domain */
+>> +    if ( is_hardware_domain(d) )
+>> +    {
+>> +        psid = sid;
+>> +        list_for_each_entry(host_iommu, &host_iommu_list, entry)
+>> +        {
+>> +            if ( host_iommu->addr == smmu->addr )
+>> +            {
+>> +                phys_smmu = (struct arm_smmu_device *) host_iommu->iommu;
+>> +                break;
+>> +            }
+>> +        }
+>> +    }
+>> +    else {
+>> +        /* vSID out of range or not mapped to pSID */
+>> +        if ( sid >= MAX_VSID || !smmu->vsids[sid].valid )
+>> +        {
+>> +            arm_vsmmu_send_event(smmu, &ent);
+>> +            return -EINVAL;
+>> +        }
+>> +
+>> +        psid = smmu->vsids[sid].psid;
+>> +        phys_smmu = smmu->vsids[sid].smmu;
 >> +    }
 >> +
->> +    strcpy(viommu_stream->path, path);
->> +    *iommus = viommu_stream->iommus;
+>> +    /* vSID mapped to invalid physical SMMU */
+>> +    if (!phys_smmu)
+>> +    {
+>> +        arm_vsmmu_send_event(smmu, &ent);
+>> +        return -EINVAL;
+>> +    }
+>>
+>>        ret = arm_vsmmu_find_ste(smmu, sid, ste);
+>>        if ( ret )
+>> @@ -565,7 +619,7 @@ static int arm_vsmmu_handle_cfgi_ste(struct virt_smmu *smmu, uint64_t *cmdptr)
+>>        else
+>>            guest_cfg.config = ARM_SMMU_DOMAIN_S1;
+>>
+>> -    ret = hd->platform_ops->attach_guest_config(d, sid, &guest_cfg);
+>> +    ret = hd->platform_ops->attach_guest_config(d, psid, &guest_cfg, phys_smmu);
+>>        if ( ret )
+>>            return ret;
+>>
+>> @@ -1164,6 +1218,9 @@ static int vsmmuv3_init_single(struct domain *d, paddr_t addr,
+>>        smmu->addr = addr;
+>>        smmu->cmdq.ent_size = CMDQ_ENT_DWORDS * DWORDS_BYTES;
+>>        smmu->evtq.ent_size = EVTQ_ENT_DWORDS * DWORDS_BYTES;
+>> +    smmu->vsids = xzalloc_array(struct vsid_entry, MAX_VSID);
+> 
+> ^^^ is 65536 × 24 bytes = 1.5 MiB per vSMMU allocated contiguously even
+> if, lets say, the domain has two devices?
+> 
+> And the hwdom allocates vsids[MAX_VSID] per pSMMU even though the hwdom
+> never uses it (vIOMMU->pIOMMU identity mapped for HW domain) if I got
+> the code right.
+> 
+
+That's correct. We can avoid allocating the vSID array for direct-mapped 
+domains, since it is not used in that case.
+
+For non-direct-mapped domains, we don't know in advance how many devices 
+will be assigned to the domain. I'll replace the array with a linked 
+list to avoid allocating unnecessary memory.
+
+> 
+>> +    if ( !smmu->vsids )
+>> +        return -ENOMEM;
+> 
+> Leaks smmu when the vsids allocation fails.
+> 
+> and failure of vgic_reserve_virq() (non-visible in the context) leaks vsids.
+> 
+
+These are memory leaks. I'll update the error paths to free the 
+allocated vSID and vSMMU structures.
+
+>>
+>>        spin_lock_init(&smmu->cmd_queue_lock);
+>>        spin_lock_init(&smmu->evt_queue_lock);
+>> @@ -1254,8 +1311,9 @@ static int vsmmuv3_relinquish_resources(struct domain *d)
+>>        if ( list_head_is_null(&d->arch.viommu_list) )
+>>            return 0;
+>>
+>> -    list_for_each_entry_safe(pos, temp, &d->arch.viommu_list, viommu_list )
+>> +    list_for_each_entry_safe(pos, temp, &d->arch.viommu_list, viommu_list)
+>>        {
+>> +        xfree(pos->vsids);
+>>            list_del(&pos->viommu_list);
+>>            xfree(pos);
+>>        }
+>> @@ -1263,8 +1321,55 @@ static int vsmmuv3_relinquish_resources(struct domain *d)
+>>        return 0;
+>>    }
+>>
+>> +int vsmmuv3_allocate_vsid(struct domain *d, uint32_t id, uint32_t phandle,
+>> +                          uint32_t *vsid)
+>> +{
+>> +    uint32_t i = 0;
+>> +    struct virt_smmu *smmu;
+>> +    struct host_iommu *host_iommu;
+>> +    struct arm_smmu_device *phys_smmu = NULL;
 >> +
->> +    XEN_LIST_INSERT_HEAD(&viommu_stream_list, viommu_stream, entry);
+>> +    if ( list_head_is_null(&d->arch.viommu_list) )
+>> +        return -ENODEV;
+>> +
+>> +    smmu = list_first_entry(&d->arch.viommu_list, struct virt_smmu, viommu_list);
+>> +
+>> +    /*
+>> +     * Find the physical SMMU corresponding to the device-tree phandle.
+>> +     */
+>> +    list_for_each_entry(host_iommu, &host_iommu_list, entry)
+>> +    {
+>> +        if ( host_iommu->dt_node->phandle == phandle )
+>> +        {
+>> +            phys_smmu = (struct arm_smmu_device *) host_iommu->iommu;
+>> +            break;
+>> +        }
+>> +    }
+>> +
+>> +    if ( !phys_smmu )
+>> +        return -ENODEV;
+>> +
+>> +    /* Get first free vSID index */
+>> +    while ( i < MAX_VSID && smmu->vsids[i].valid )
+>> +        i++;
+>> +
+>> +    /* Max number of vSIDs already allocated? */
+>> +    if ( i == MAX_VSID )
+>> +        return -ENOMEM;
+>> +
+>> +    /* Establish vSID->pSID mapping */
+>> +    smmu->vsids[i].valid = true;
+>> +    smmu->vsids[i].vsid = i;
+>> +    smmu->vsids[i].psid = id;
+>> +    smmu->vsids[i].smmu = phys_smmu;
+>> +    *vsid = smmu->vsids[i].vsid;
 >> +
 >> +    return 0;
 >> +}
 >> +
->> +/*
->> + * Used to update partial fdt when vIOMMU is enabled
->> + * Maps dt properties of IOMMU devices to virtual IOMMU
->> + */
->> +static int viommu_modify_partial_fdt(libxl__gc *gc, void *pfdt, uint32_t domid)
->> +{
->> +    int nodeoff, proplen, r;
->>        const fdt32_t *prop;
->>        fdt32_t *prop_c;
->> +    char path[128];
+>>    static const struct viommu_ops vsmmuv3_ops = {
+>>        .domain_init = domain_vsmmuv3_init,
+>> +    .allocate_vsid = vsmmuv3_allocate_vsid,
+>>        .relinquish_resources = vsmmuv3_relinquish_resources,
+>>    };
 >>
->>        nodeoff = fdt_path_offset(pfdt, "/passthrough");
->>        if (nodeoff < 0)
->> @@ -1340,11 +1425,16 @@ static int modify_partial_fdt(libxl__gc *gc, void *pfdt)
->>            if (!prop)
->>                continue;
+>> diff --git a/xen/include/xen/iommu.h b/xen/include/xen/iommu.h
+>> index 253f8bb6cb..c94ee4f08e 100644
+>> --- a/xen/include/xen/iommu.h
+>> +++ b/xen/include/xen/iommu.h
+>> @@ -312,7 +312,10 @@ static inline int iommu_add_dt_pci_sideband_ids(struct pci_dev *pdev)
+>>    #endif /* HAS_DEVICE_TREE_DISCOVERY */
 >>
->> -        prop_c = libxl__zalloc(gc, proplen);
->> +        r = fdt_get_path(pfdt, nodeoff, path, sizeof(path));
->> +        if ( r < 0 ) {
->> +            LOG(ERROR, "Can't get passthrough node path");
->> +            return r;
->> +        }
->>
->> -        for (i = 0; i < proplen / 8; ++i) {
->> -            prop_c[i * 2] = cpu_to_fdt32(GUEST_PHANDLE_VSMMUV3);
->> -            prop_c[i * 2 + 1] = prop[i * 2 + 1];
->> +        r = viommu_get_stream(gc, domid, prop, proplen, path, &prop_c);
->> +        if (r) {
->> +            LOG(ERROR, "Can't get viommu stream");
->> +            return r;
->>            }
->>
->>            r = fdt_setprop(pfdt, nodeoff, "iommus", prop_c, proplen);
->> @@ -1356,7 +1446,6 @@ static int modify_partial_fdt(libxl__gc *gc, void *pfdt)
->>
->>        return 0;
->>    }
->> -
->>    #else
->>
->>    static int check_partial_fdt(libxl__gc *gc, void *fdt, size_t size)
->> @@ -1375,7 +1464,7 @@ static int copy_partial_fdt(libxl__gc *gc, void *fdt, void *pfdt)
->>        return -FDT_ERR_INTERNAL;
->>    }
->>
->> -static int modify_partial_fdt(libxl__gc *gc, void *pfdt)
->> +static int viommu_modify_partial_fdt(libxl__gc *gc, void *pfdt, uint32_t domid)
->>    {
->>        LOG(ERROR, "partial device tree not supported");
->>
->> @@ -1507,7 +1596,7 @@ next_resize:
->>            if (info->arch_arm.viommu_type == LIBXL_VIOMMU_TYPE_SMMUV3) {
->>                FDT( make_vsmmuv3_node(gc, fdt, ainfo, dom) );
->>                if (pfdt)
->> -                FDT( modify_partial_fdt(gc, pfdt) );
->> +                FDT( viommu_modify_partial_fdt(gc, pfdt, dom->guest_domid) );
->>            }
->>
->>            for (i = 0; i < d_config->num_disks; i++) {
->> diff --git a/xen/arch/arm/domctl.c b/xen/arch/arm/domctl.c
->> index b76af56fad..dc21dc9fca 100644
->> --- a/xen/arch/arm/domctl.c
->> +++ b/xen/arch/arm/domctl.c
->> @@ -16,6 +16,7 @@
->>    #include <xen/types.h>
->>    #include <xsm/xsm.h>
->>    #include <public/domctl.h>
->> +#include <asm/viommu.h>
->>
->>    void arch_get_domain_info(const struct domain *d,
->>                              struct xen_domctl_getdomaininfo *info)
->> @@ -186,6 +187,43 @@ long arch_do_domctl(struct xen_domctl *domctl, struct domain *d,
->>        }
->>        case XEN_DOMCTL_dt_overlay:
->>            return dt_overlay_domctl(d, &domctl->u.dt_overlay);
->> +
->> +#ifdef CONFIG_ARM_VIRTUAL_IOMMU
->> +    case XEN_DOMCTL_viommu_alloc_vsid_range:
->> +    {
->> +        int rc = 0;
->> +        uint16_t i;
->> +        uint32_t vsid;
->> +        struct xen_domctl_viommu_alloc_vsid_range *vsid_range =
->> +            &domctl->u.viommu_alloc_vsid_range;
->> +
->> +        if ( vsid_range->pad )
->> +            return -EINVAL;
->> +
->> +        for ( i = 0; i < vsid_range->nr_sids; i++ )
->> +        {
->> +            rc = viommu_allocate_vsid(d, vsid_range->first_psid
->> +                                          + i,
->> +                                          vsid_range->phandle,
->> +                                          &vsid);
->> +            if( rc )
->> +                return rc;
->> +        }
->> +
->> +        if ( !rc )
->> +        {
->> +            /* Calculate first vSID from allocated range */
->> +            vsid_range->first_vsid = vsid -
->> +                vsid_range->nr_sids + 1;
-> 
-> With vsid_range->nr_sids == 0, vsid stays uninitialised and garbage is
-> copied back to the caller.
-> 
-
-Good catch. I'll reject zero-sized vSID allocation requests to avoid 
-returning an uninitialized vSID.
-
-> 
->> +            rc = copy_to_guest(u_domctl, domctl, 1);
->> +            if ( rc )
->> +                rc = -EFAULT;
->> +        }
->> +
->> +        return rc;
->> +    }
+>>    struct page_info;
+>> +#ifdef CONFIG_ARM
+>>    struct iommu_guest_config;
+>> +struct arm_smmu_device;
 >> +#endif
->> +
->>        default:
->>            return subarch_do_domctl(domctl, d, u_domctl);
->>        }
->> diff --git a/xen/include/public/domctl.h b/xen/include/public/domctl.h
->> index 510300bb67..2708215d5b 100644
->> --- a/xen/include/public/domctl.h
->> +++ b/xen/include/public/domctl.h
->> @@ -1279,6 +1279,26 @@ struct xen_domctl_get_domain_state {
->>        uint64_t unique_id;      /* Unique domain identifier. */
->>    };
 >>
->> +/*
->> + * XEN_DOMCTL_viommu_alloc_vsid_range
->> + *
->> + * Allocate guest vSID range and
->> + * establish pSID->vSID mapping for target range and physical IOMMU (phandle).
->> + * Allocated range is continous
->> + */
->> +struct xen_domctl_viommu_alloc_vsid_range {
->> +    /* IN: Range first pSID  */
->> +    uint32_t first_psid;
->> +    /* IN: Physical IOMMU phandle behind which the target device streams are configured */
->> +    uint32_t phandle;
->> +    /* IN: Number of vSIDs to allocate */
->> +    uint16_t nr_sids;
->> +    /* padding, must be 0 */
->> +    uint16_t pad;
->> +    /* OUT: Mapped range first vSID */
->> +    uint32_t first_vsid;
->> +};
->> +
->>    struct xen_domctl {
->>    /* Stable domctl ops: interface_version is required to be 0.  */
->>        uint32_t cmd;
->> @@ -1371,6 +1391,7 @@ struct xen_domctl {
->>    #define XEN_DOMCTL_gsi_permission                88
->>    #define XEN_DOMCTL_set_llc_colors                89
->>    #define XEN_DOMCTL_get_domain_state              90 /* stable interface */
->> +#define XEN_DOMCTL_viommu_alloc_vsid_range       91
->>    #define XEN_DOMCTL_gdbsx_guestmemio            1000
->>    #define XEN_DOMCTL_gdbsx_pausevcpu             1001
->>    #define XEN_DOMCTL_gdbsx_unpausevcpu           1002
->> @@ -1439,6 +1460,7 @@ struct xen_domctl {
+>>    /*
+>>     * Any non-zero value returned from callbacks of this type will cause the
+>> @@ -391,7 +394,8 @@ struct iommu_ops {
+>>
+>>    #ifdef CONFIG_ARM
+>>        int (*attach_guest_config)(struct domain *d, uint32_t sid,
+>> -                               const struct iommu_guest_config *cfg);
+>> +                               const struct iommu_guest_config *cfg,
+>> +                               const struct arm_smmu_device *smmu);
 >>    #endif
->>            struct xen_domctl_set_llc_colors    set_llc_colors;
->>            struct xen_domctl_get_domain_state  get_domain_state;
->> +        struct xen_domctl_viommu_alloc_vsid_range viommu_alloc_vsid_range;
->>            uint8_t                             pad[128];
->>        } u;
 >>    };
->> diff --git a/xen/xsm/flask/hooks.c b/xen/xsm/flask/hooks.c
->> index d65ba0aeae..6321b4308b 100644
->> --- a/xen/xsm/flask/hooks.c
->> +++ b/xen/xsm/flask/hooks.c
->> @@ -881,6 +881,10 @@ static int cf_check flask_domctl(struct domain *d, struct xen_domctl *op)
->>        case XEN_DOMCTL_set_llc_colors:
->>            return current_has_perm(d, SECCLASS_DOMAIN2, DOMAIN2__SET_LLC_COLORS);
 >>
->> +    case XEN_DOMCTL_viommu_alloc_vsid_range:
->> +        return current_has_perm(d, SECCLASS_DOMAIN2,
->> +            DOMAIN2__VIOMMU_ALLOC_VSID_RANGE);
->> +
->>        default:
->>            return avc_unknown_permission("domctl", op->cmd);
->>        }
->> diff --git a/xen/xsm/flask/policy/access_vectors b/xen/xsm/flask/policy/access_vectors
->> index bbb9c117ec..35acbefab2 100644
->> --- a/xen/xsm/flask/policy/access_vectors
->> +++ b/xen/xsm/flask/policy/access_vectors
->> @@ -253,6 +253,8 @@ class domain2
->>        set_llc_colors
->>    # XEN_DOMCTL_get_domain_state
->>        get_domain_state
->> +# XEN_DOMCTL_viommu_alloc_vsid_range
->> +    viommu_alloc_vsid_range
->>    }
->>
->>    # Similar to class domain, but primarily contains domctls related to HVM domains
 > 
+
+BR,
+Milan
 
 
