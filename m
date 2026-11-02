@@ -2,45 +2,64 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3339D606A324
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 12:54:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A2CB6606A329
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 13:02:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=FS8oAb7b
-Received: from list by lists.xenproject.org with outflank-mailman.1468186.1677274 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=Bds4Tp96
+Received: from list by lists.xenproject.org with outflank-mailman.1468193.1677284 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNrYe-0007H2-3W; Mon, 02 Nov 2026 12:54:40 +0000
+	id 1xNrgF-0001Ds-Qv; Mon, 02 Nov 2026 13:02:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1468186.1677274; Mon, 02 Nov 2026 12:54:40 +0000
+Received: by outflank-mailman (output) from mailman id 1468193.1677284; Mon, 02 Nov 2026 13:02:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNrYe-0007Gv-0x; Mon, 02 Nov 2026 12:54:40 +0000
-Received: by outflank-mailman (input) for mailman id 1468186;
- Mon, 02 Nov 2026 12:54:38 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xNrYc-0007Gp-Bg
- for xen-devel@lists.xen.org; Mon, 02 Nov 2026 12:54:38 +0000
+	id 1xNrgF-0001Dl-Nf; Mon, 02 Nov 2026 13:02:31 +0000
+Received: by outflank-mailman (input) for mailman id 1468193;
+ Mon, 02 Nov 2026 13:02:30 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <Michal.Orzel@amd.com>) id 1xNrgE-0001Dd-Et
+ for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 13:02:30 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xNrYb-003IIG-8o
- for xen-devel@lists.xen.org; Mon, 02 Nov 2026 13:54:37 +0100
+ id 1xNrgD-00Aqm6-KR
+ for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 14:02:29 +0100
 Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6ae88806-e002-0a2a0a5209dd-0a2a4508db2c-28
- for <xen-devel@lists.xen.org>; Mon, 02 Nov 2026 13:54:37 +0100
-Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6ae889e1-2eae-0a2a0a5409dd-0a2a4508b208-10
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 14:02:29 +0100
+Received: from [52.101.53.13]
+ (helo=BL0PR03CU003.outbound.protection.outlook.com)
  by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6ae8880c-f659-0a2a45080019-d1558036b523-3
- for <xen-devel@lists.xen.org>; Mon, 02 Nov 2026 13:54:37 +0100
-Received: by mail-wm1-f54.google.com with SMTP id
- 5b1f17b1804b1-4a215e64962so26857415e9.1
- for <xen-devel@lists.xen.org>; Mon, 02 Nov 2026 04:54:37 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4ab69b54742sm513323355e9.15.2026.11.02.04.54.35
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 02 Nov 2026 04:54:36 -0800 (PST)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6ae889e3-f659-0a2a45080019-3465350d5578-3
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 14:02:28 +0100
+Received: from BY3PR03CA0010.namprd03.prod.outlook.com (2603:10b6:a03:39a::15)
+ by DS7PR12MB5838.namprd12.prod.outlook.com (2603:10b6:8:79::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.569.12; Mon, 2 Nov
+ 2026 13:02:23 +0000
+Received: from MW1PEPF0001888E.namprd03.prod.outlook.com
+ (2603:10b6:a03:39a:cafe::48) by BY3PR03CA0010.outlook.office365.com
+ (2603:10b6:a03:39a::15) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.569.12 via Frontend Transport; Mon, 2
+ Nov 2026 13:02:22 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ MW1PEPF0001888E.mail.protection.outlook.com (10.167.249.165) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.592.5 via Frontend Transport; Mon, 2 Nov 2026 13:02:22 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Mon, 2 Nov
+ 2026 07:02:22 -0600
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Mon, 2 Nov
+ 2026 07:02:21 -0600
+Received: from [192.168.31.141] (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.53 via Frontend
+ Transport; Mon, 2 Nov 2026 07:02:20 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,216 +68,190 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1793624076; x=1794228876; darn=lists.xen.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=SAOWEPReT0wBqLXXhw7TwFZftY7S7YztA/cQjHbR2wQ=;
-        b=FS8oAb7bgGq04Dl9K0dhtZvJl2zuEUSsv6jBcc91pQtkWIcWDJqmkcSkdo2MtfvSGA
-         sBuV3Qe6dJFJ10eFEGrc72pnY36ev5NI0NEmk+u53cPpfizlIyIx6y4PT65ygpJz9HJ5
-         ngDy9x0zHLp/4f0H4TvwyRIiYQ4lWv4tqw/agEe0ZI3n1lsAuhxkY5ZkGSU2w0geT/8+
-         MAfTFEHBaFGFro4C08WnoyR3Khkpnmc51+JR0np+qu1q+ncX5OjyaArt4wC1vnWuzwmV
-         3ZzUq9rB7OVSwhNKe+9Yc2dwRN2aX+AQjklCk3ahkMTXVWuGdORLgVSbBMmSVwEiMSv+
-         AkDQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793624076; x=1794228876;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=SAOWEPReT0wBqLXXhw7TwFZftY7S7YztA/cQjHbR2wQ=;
-        b=kCGVcnOcY4M9ehg4hS9Uiv/zTQEWtZN205erbgwHM+7Odwe5sxnw0ZvX9E5C3l0A4w
-         nuy0QO9M9sHkN2V1+WvaUtlPFlK+u7xRNC+wtiOwTuvBZoxk8LjRFHM02fIvPzpx7ArU
-         MJIl4SspXBBjK2Zh3oGbVOkPGLS0xppqORFL6XFzJAy03/Vv6jKI2hvyY/2dIfGPd6Jd
-         W9LsYgl7aFZPqHKu7i7ikwcDeSKBhkFXeDn+0zMZ5oNbTB/ith+5XYpog3ZhbfOgnVFn
-         /JV/6eaPUh2Vghf68ZZZNzlygqqXMFqHz5TOvp5NO/BGjrmf8Lu/NLrqxdTVCikDUbz/
-         66Bw==
-X-Forwarded-Encrypted: i=1; AKwUvBywWQjtR8umMAJg14mGpF2IR+Ciq6cDkn7bEhYvCzhl16F1hKmNWxFxBAi59VBZNsdT7Zli5eIFW40=@lists.xen.org
-X-Gm-Message-State: AFq9FYJbgml2nSQBFTAmI0KhoLg5ubKz8X7iVj4xWmL6pKKxMZpgoC+/
-	fgWONt3DVtO+tx7kKzCebYa5WFUHd5Imbid+OA7F8BlGR69gY+4/4zOekz+g9VR+Eg==
-X-Gm-Gg: AYBFou0JFJOz65xznYI1vGZ0LHy3PFu9LEqkwSsUesstQjd2faE82Wn/K8dViI5daAH
-	V45WHtysN4WEtPtlQy+wagStOAmuAlt4AO7QWuKk3aRzMNwdj42DM+X8RqYxKc7Pl17QpFMncLs
-	NeL4RywMmHWcsRPoWgkxKB2ATZWDWOPQISFb2HcTW+5q8/lZyaQQ357YdtQCs40m/bKpA9HWDyS
-	d/rvqbEo7cj5UMMg3doK0f5zVkqf11TFbqtVZKFS6N3HHpmwkLM42iYV2jeLW1W6JaZFvrUGVsr
-	hfLsLOnm2esHWrvK0+aMbTa3svN3qlo8KtwFpv+knpQfQJao9ezCrKhcp1FiH0mKghJ1XRY/Xgd
-	XMhfZuaGLarbkNv9qMlNspG2lkMpNagcJDIpCrNjND+EohrsOmUnit0M2xhsjXt9AMYM6VI2JoM
-	rf59apzFZPIfMlbWcUxyoY/6K0yYvTFvNUPx4D7Tve9dSIYCCVcxGDTtF4FMcGjnxXynAqgVN96
-	EXIms/JnxMsxliYfU4zNGW3DlTciqbALOsBbwQotCCKyuy5u5+oUE4+nWSbs+YrgHUKDTUzq/n9
-	SNvuLSHQrEOK6oRgIYszLScDlJqzVBv2tNAemfUWpCu921ZlGfGPYJaK3M2mLZwCI0w9icGhNe2
-	DYAmi+CMNfeJSQ6wb
-X-Received: by 2002:a05:600c:848a:b0:4a3:59c9:a756 with SMTP id 5b1f17b1804b1-4ac17b2ce84mr249413385e9.6.1793624076572;
-        Mon, 02 Nov 2026 04:54:36 -0800 (PST)
-Message-ID: <a1785adc-93e9-42dc-a3cb-9e8edf00289c@suse.com>
-Date: Mon, 2 Nov 2026 13:54:35 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=dGZMh781YpO+p+rjl0CESq5J8DRMPdfHi3ep7sAkBlzLo3aNRVZpJJ1UIwN8EH+BtknLm+LNZ25USJeX/VcFCC4IXtyOnXq4AfK68mGIH79pgTH+dQPXnhFusdntyfBvMLwtfJn6bpezinlBdGO/+V2yAmao3aFEOekJBQHnW2/fC7Db8ThpqQFxp3f35sGDpY8ZeMGm4b59PfIC6udzjdWbr3jUczGLOE4jVq4C23Qm+Kj2WdM5V10+bZkpAchdudu7fruoSOnkpoXFTe/9vVz7igW4WJe8vmRW15ClwmPJ6hpOTUuCYWofJ3Jo3C6ZJ2GWxh15CjiyW6YXiWwUVw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=32BuSs5L8vGAATNxTflFEpKUKCC8aF6a+5MfmF2suLA=;
+ b=mzlZbvOzjHoMzfi/dwEEJR9FgR7TnkwiMcgPSH7q9ReSfouCNLWeDFtx7hQEnFD9uNAGPAlfhyMqVh9aljdHCmGamxfpRan6JyPhrAdKeavPe2wXha/MZvgyjnNLgNEoe4VAw6PjAmnEXA18zdElXXBq4d0dYwy1u9R8z2fJHUaGrGv6G5Ifs491XuWplliHkKdhnQWxkLKFGHNFSLgLyw27QwGoGwBkJQNkDKgFZwvV5Vxqei8o61nSTbfr5pIehGs5OYUG/b0j0mGIdu6BO1CHDl+DO2y7KvtBo9F1DYcLjo1U3zrGRLJMPDBMU8MGSH7faJOj0Gk7x+fTF1A2CQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=gmail.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=32BuSs5L8vGAATNxTflFEpKUKCC8aF6a+5MfmF2suLA=;
+ b=Bds4Tp96fDlAyZkJuRKPWuZVREOi+gn71dKlLiciD8W5+h6ln25XiHsrXhbPuXgg5mz/xRiKUnwue1H3LG/ijQEyUovl4mQ/Es65RIuGO2Jwa2/I/myNg8Eu+iwn3HhFa89leeexsFm4iOSmByriHjX/gZ0KuBQzy/E8ThpdCNc=
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Message-ID: <10bc93f8-5ac4-4804-864e-d83a5fbf7108@amd.com>
+Date: Mon, 2 Nov 2026 14:02:20 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [BUG] Xen BUG at mce_amd.c:100 (mc_ec2type) on Zen 3; host left
- wedged, no reboot
-To: Peter Deggendorfer <pd@cortex-media.de>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>, Jason Andryuk <jason.andryuk@amd.com>,
- Soham Dandapat <soham.dandapat@amd.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xen.org
-References: <b9a98b3b-d11e-4463-ac80-4145ca991925@cortex-media.de>
- <e32a3056-c025-4d89-a494-ad7e8b6e2580@citrix.com>
- <b35c6a2f-753c-4691-aa9f-f67f2f7f37ef@cortex-media.de>
- <eff24ce3-bb48-4d2b-993c-65974d3af00e@cortex-media.de>
- <ad48ac1c-176d-407f-87e1-ae303e8eb195@suse.com>
- <8138ed44-727f-45bc-9673-9684e922595b@cortex-media.de>
- <ecfac9d0-eb72-4bb4-8aab-879cfa5dffd9@suse.com>
- <2a44faa9-9a9f-4681-84d6-8267acbec9b0@cortex-media.de>
+Subject: Re: [PATCH] xen/dt: Skip non-RAM reserved-memory regions in
+ make_memory_node()
+To: Kuan-Wei Chiu <visitorckw@gmail.com>, <xen-devel@lists.xenproject.org>
+CC: <sstabellini@kernel.org>, <julien@xen.org>, <bertrand.marquis@arm.com>,
+	<marscheng@google.com>, <jserv@ccns.ncku.edu.tw>, <eleanor15x@gmail.com>
+References: <20261028211737.17629-1-visitorckw@gmail.com>
+From: "Orzel, Michal" <michal.orzel@amd.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <2a44faa9-9a9f-4681-84d6-8267acbec9b0@cortex-media.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1793624077-D477387B-870F71BA/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 4829
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+In-Reply-To: <20261028211737.17629-1-visitorckw@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MW1PEPF0001888E:EE_|DS7PR12MB5838:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8e24c150-ea77-4a4b-03f8-08df38e188e0
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700016|82310400026|23010399003|376014|1800799024|10067099003|22082099003|18002099003|56012099006|11063799006|261021121427099003|261021123027099003|261022105027099003|261022075727099003|261026140227099003|261026121527099003|261009223027099003|261028144727099003;
+X-Microsoft-Antispam-Message-Info:
+	+sqvm85o2s5h6O61tl/42+WroESLw9neSTEaq+wxKwpC7CyARUIAAXwn8IgsACVs6bNrGCobm954mVRvbCEql0Pk6KSwid7alXQQQRaaZMltY7O4sDxTk+9NnHrOpv3Kbgyx9rGzkA5J5lj+6Q/SRMJJyGnVJTbITQA4aYr550NP0ox4brqyhnxVtH64705La8iNZRQae7VSwypvJ3nKo0zTlrYPYxemjNuCVvQZt4RJp/plSC2I2yK4GVOTMyyYiGhlB1fAEqzEJcUFGFtUTb6mkwG8jLpTSLAaxnVsr8r2H/NjdoZq1OklvWqXeKG6Nje4Z7eEEW8ZzNuYVTTYZsAWjSOPuFSGXonXFeu8E/qEhNCJ3doac8J8KNd2siu4yADG9xuXkcbDpFAkRcxN45dfC/fZXkL1S9P7QABi5w1lH8WuHIkzrYjGDXhlnXUVJq2gbiwlickrVfaLUe2XiGzli/fCIrRUxw/XO5OqAqXjtYDxtPj/s6dqDHeZaFPXC3+aGpRSjxK3FbSGRVFlZhhKf7lreTdYo33E5NivJj4VfmqNnRAqKmRoYlZAKvYZI1OBGdWF8rOPCmOQfJ6qw8vbcxroO4+Ot6CDBltXVFPD9gSjXLqywSY1rAA6115esKTXMS/ndh3+oyXnNWuuVxB73ptKHsPNnBc9h2Cc7KdDcX9ZX2G5Iim6edhmUxVLr5xCm6OAoISsz7kOGhnV8w==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(82310400026)(23010399003)(376014)(1800799024)(10067099003)(22082099003)(18002099003)(56012099006)(11063799006)(261021121427099003)(261021123027099003)(261022105027099003)(261022075727099003)(261026140227099003)(261026121527099003)(261009223027099003)(261028144727099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	/AXsZARWIdB85mjNuYyFjJqhqQLMM7dtQq4nYPBGRp6bMnxwa0u49b98tRFa+HHMII4i+g3TgNqgLTT/bO9te0/270N6QgfcisRpNVK6VqTfHpIKaefbK0lixmJsTG1+UrS1SA6j6Nnn6qFleECcrvgYNTDSSTubmot1+ESg0qAOVC248q2j7z+3xSY22/GSW3TDYydcYwOCIPYkr2AWqTdZnw64mEo1Qn36+67gZETPX24JR4NWY6ChYQAFDSyAvJoKf/UTi4YJJJwxYFUt4fylYPHpIHvl8/4G862RezH/Oqo7+bkUQM6I4kjQsjszlvTO8P8yCkfFIB4vpv4YVfjHHuwcMJJFStoBSE/mmEoJmr/LTy9c+K/5PWnVbNnriTkTxJLpzuMPw84dym6hvaMMYCRIgTeGHZuWkvgZ+fT0gbLMJEzZy3phlwFqMT2N
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Nov 2026 13:02:22.3792
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8e24c150-ea77-4a4b-03f8-08df38e188e0
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	MW1PEPF0001888E.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB5838
+X-purgate-ID: tlsNG-c1860d/1793624549-CF95A87B-8FE77F20/0/0
+X-purgate-type: clean
+X-purgate-size: 4182
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 31.10.2026 14:44, Peter Deggendorfer wrote:
-> As requested, I added a printk to mcheck_mca_logout(), and the BUG() in
-> mc_ec2type() is still replaced. These are the only changes against the
-> Debian package:
+
+
+On 28-Oct-26 22:17, Kuan-Wei Chiu wrote:
+> Xen creates a second /memory node for Dom0 from
+> bootinfo_get_reserved_mem() without checking whether those regions
+> belong to host RAM. However, /reserved-memory can also describe
+> on-chip SRAM or firmware regions outside system RAM. Listing them in a
+> /memory node causes Dom0 to register non-RAM addresses as system RAM,
+> conflicting with device MMIO mappings.
+It's worth adding a reference to Linux binding for nvmem-rmem as an example (the
+only one so far?) of /reserved-memory describing non RAM. Please also mention
+Linux comment at early_init_dt_reserve_memory().
+
 > 
-> --- a/xen/arch/x86/cpu/mcheck/mce_amd.c
-> +++ b/xen/arch/x86/cpu/mcheck/mce_amd.c
-> @@ -97,7 +97,7 @@
->       if ( errorcode & MC_EC_TLB_TYPE )
->           return MC_EC_TLB_TYPE;
->       /* Unreached */
-> -    BUG();
-> +    printk(XENLOG_WARNING "MCE: unknown AMD error code %#x\n", errorcode);
->       return 0;
->   }
+> Skip reserved-memory banks outside the host RAM banks reported by
+> bootinfo_get_mem() in make_memory_node().
+Have you considered EFI boot? There we don't use /memory and bootinfo_get_mem()
+contains usable memory. IOW I think it does not contain reserved memory. In such
+scenario, we would skip the reserved regions because they are not described in
+memory membank. So it would be a regression in behavior.
+
 > 
-> --- a/xen/arch/x86/cpu/mcheck/mce.c
-> +++ b/xen/arch/x86/cpu/mcheck/mce.c
-> @@ -304,3 +304,6 @@
->           if ( !(status & MCi_STATUS_VAL) )
->               continue; /* this bank has no valid telemetry */
+> Fixes: 248faa637d2f ("xen/arm: add reserved-memory regions to the dom0 memory node")
+> Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
+> ---
+> Found while trying to bring up Xen on new hardware.
+> Tested on real silicon.
 > 
-> +        if ( who == MCA_POLLER )
-> +            printk(XENLOG_WARNING "MCE: CPU%u bank %d status %#"PRIx64"\n",
-> +                   smp_processor_id(), i, status);
+>  xen/common/device-tree/domain-build.c | 42 +++++++++++++++++++++++++--
+>  1 file changed, 39 insertions(+), 3 deletions(-)
 > 
-> 
-> We now have some data points:
-> 
-> (XEN) [2026-10-27 13:42:10.588] MCE: CPU2 bank 23 status 0x830824448b48ffff
-> (XEN) [2026-10-27 18:19:55.593] MCE: CPU2 bank 23 status 0xffffffffffffffff
-> (XEN) [2026-10-27 22:11:10.596] MCE: CPU2 bank 17 status 0xffff832036a40048
-> (XEN) [2026-10-27 22:11:10.596] MCE: unknown AMD error code 0x48
-> (XEN) [2026-10-28 00:33:55.597] MCE: CPU2 bank 10 status 0xffff82d04022a8af
-> (XEN) [2026-10-28 05:26:40.599] MCE: CPU2 bank 17 status 0xffff82d0402408e3
-> (XEN) [2026-10-29 23:17:25.618] MCE: CPU2 bank 17 status 0xffff82d04022a8af
-> (XEN) [2026-10-30 03:25:10.622] MCE: CPU2 bank 23 status 0xffffffffffffffff
-> (XEN) [2026-10-30 10:05:55.625] MCE: CPU2 bank 10 status 0xffffffffffffffff
-> (XEN) [2026-10-31 00:58:10.625] MCE: CPU2 bank 17 status 0xffff888100b872e8
-> (XEN) [2026-10-31 00:58:10.625] MCE: unknown AMD error code 0x72e8
-> (XEN) [2026-10-31 04:17:55.632] MCE: CPU2 bank 23 status 0xffff831f00006000
-> (XEN) [2026-10-31 04:17:55.632] MCE: unknown AMD error code 0x6000
-> 
-> Only 3 of these would have hit the BUG(); the others have UC clear or
-> an error code that happens to contain a type bit.
-> 
-> The values look like pointers rather than status registers:
-> 
->    ffff82d040......  Xen text/data -- the prefix of every RIP in my
->                      earlier panic dumps
->    ffff831f........ / ffff8320........  same range as rsp in those
->                      dumps (e.g. ffff831fe6b3fc38, ffff832036a87c38)
->    ffff888100b872e8  dom0 Linux range?
+> diff --git a/xen/common/device-tree/domain-build.c b/xen/common/device-tree/domain-build.c
+> index 30a59abfa7..33baf150a6 100644
+> --- a/xen/common/device-tree/domain-build.c
+> +++ b/xen/common/device-tree/domain-build.c
+> @@ -504,6 +504,34 @@ int __init make_chosen_node(const struct kernel_info *kinfo)
+>      return res;
+>  }
+>  
+> +static bool __init is_in_host_ram(const struct membank *bank)
+> +{
+> +    const struct membanks *ram = bootinfo_get_mem();
+> +    paddr_t start = bank->start;
+> +    paddr_t end = start + bank->size;
+> +    unsigned int i;
+> +
+> +    if ( !bank->size || end < start )
+You can omit the empty check. Empty banks are not added to membanks.
 
-Plus the very first of the entries above is a pointer value rotated by 16 bits.
+> +        return false;
+> +
+> +    for ( i = 0; i < ram->nr_banks; i++ )
+> +    {
+> +        paddr_t ram_start = ram->bank[i].start;
+> +        paddr_t ram_end = ram_start + ram->bank[i].size;
+> +
+> +        if ( start < ram_start )
+> +            return false;
+> +
+> +        if ( end <= ram_end )
+> +            return true;
+> +
+> +        if ( start < ram_end )
+> +            start = ram_end;
+> +    }
+> +
+> +    return false;
+> +}
+> +
+>  int __init make_memory_node(const struct kernel_info *kinfo, int addrcells,
+>                              int sizecells, const struct membanks *mem)
+>  {
+> @@ -513,14 +541,20 @@ int __init make_memory_node(const struct kernel_info *kinfo, int addrcells,
+>      int nr_cells = 0;
+>      __be32 reg[DT_MEM_NODE_REG_RANGE_SIZE];
+>      __be32 *cells;
+> +    bool is_resv = (mem == bootinfo_get_reserved_mem());
+>  
+>      if ( mem->nr_banks == 0 )
+>          return -ENOENT;
+>  
+>      /* find the first memory range that is reserved for device (or firmware) */
+> -    for ( i = 0; i < mem->nr_banks &&
+> -                 (mem->bank[i].type != MEMBANK_DEFAULT); i++ )
+> -        ;
+> +    for ( i = 0; i < mem->nr_banks; i++ )
+> +    {
+> +        if ( mem->bank[i].type != MEMBANK_DEFAULT )
+> +            continue;
+> +        if ( is_resv && !is_in_host_ram(&mem->bank[i]) )
+> +            continue;
+This filter (MEMBANK_DEFAULT and your check) is now duplicated in two places.
+Please add a helper for it. Also adjust the now stale comment.
 
-> Two things that make me doubt these are real status values at all:
-> 0xffff82d04022a8af appears twice, 47 hours apart, for two different
-> banks (10 and 17). And all timestamps are congruent mod 15 seconds,
-> i.e. this is the poller hitting it on a small fraction of passes.
+> +        break;
+> +    }
+>  
+>      if ( i == mem->nr_banks )
+>          return 0;
+> @@ -544,6 +578,8 @@ int __init make_memory_node(const struct kernel_info *kinfo, int addrcells,
+>          if ( (mem->bank[i].type == MEMBANK_STATIC_DOMAIN) ||
+>               (mem->bank[i].type == MEMBANK_FDT_RESVMEM) )
+>              continue;
+> +        if ( is_resv && !is_in_host_ram(&mem->bank[i]) )
+> +            continue;
+>  
+>          nr_cells += reg_size;
+>          BUG_ON(nr_cells > ARRAY_SIZE(reg));
 
-There's no question that the values are garbage. We just need to find out why
-that is. As we have to explore all (remote) possibilities, first of all - you
-don't play any games involving the XEN_MC_msrinject hypercall, do you? For
-the immediate purpose here, and since ...
+~Michal
 
-> I don't know where the read goes wrong.
-
-... I can't make sense of the behavior either, I'm inclined to suggest that
-you add this hunk to your debugging patch:
-
---- a/xen/arch/x86/cpu/mcheck/mce.h
-+++ b/xen/arch/x86/cpu/mcheck/mce.h
-@@ -79,7 +79,6 @@
- static inline uint64_t mca_rdmsr(unsigned int msr)
- {
-     uint64_t val;
--    if (intpose_lookup(smp_processor_id(), msr, &val) == NULL)
-         rdmsrl(msr, val);
-     return val;
- }
-
-> /dev/mcelog records match the log lines one-to-one (same banks,
-> same order, all CPU 2), but carry status zero in every case. The record's
-> status comes from the second read in mca_init_bank(), before
-> mcabank_clear(), so that second read returned 0.
-
-Based on this observation, another thing you may want to try is extend the
-existing hunk you have to
-
---- a/xen/arch/x86/cpu/mcheck/mce.c
-+++ b/xen/arch/x86/cpu/mcheck/mce.c
-@@ -304,6 +304,17 @@
-          if ( !(status & MCi_STATUS_VAL) )
-              continue; /* this bank has no valid telemetry */
-
-+        if ( who == MCA_POLLER )
-+        {
-+            printk("MCE: CPU%u bank %d status %#"PRIx64"\n",
-+                   smp_processor_id(), i, status);
-+            status = mca_rdmsr(MSR_IA32_MCx_STATUS(i));
-+            printk("MCE: CPU%u bank %d -> %#"PRIx64"\n",
-+                   smp_processor_id(), i, status);
-+            if ( !(status & MCi_STATUS_VAL) )
-+                continue;
-+        }
-+
-         /*
-          * For Intel Latest CPU CMCI/MCE Handler caller, we need to
-          * decide whether to clear bank by MCi_STATUS bit value such as
-
-Jan
 
