@@ -2,37 +2,54 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 21DF9606A324
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 14:03:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 541FE606A324
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 14:08:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=aphyOUJD
-Received: from list by lists.xenproject.org with outflank-mailman.1468268.1677368 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=LnUKrhVK
+Received: from list by lists.xenproject.org with outflank-mailman.1468277.1677376 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNscs-0006wd-0j; Mon, 02 Nov 2026 14:03:06 +0000
+	id 1xNshR-0007Tq-G4; Mon, 02 Nov 2026 14:07:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1468268.1677368; Mon, 02 Nov 2026 14:03:05 +0000
+Received: by outflank-mailman (output) from mailman id 1468277.1677376; Mon, 02 Nov 2026 14:07:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNscr-0006wW-T6; Mon, 02 Nov 2026 14:03:05 +0000
-Received: by outflank-mailman (input) for mailman id 1468268;
- Mon, 02 Nov 2026 14:03:03 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1xNshR-0007Tj-D8; Mon, 02 Nov 2026 14:07:49 +0000
+Received: by outflank-mailman (input) for mailman id 1468277;
+ Mon, 02 Nov 2026 14:07:48 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xNscp-0006wQ-SZ
- for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 14:03:03 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xNscp-0000000AmNM-3YJj
- for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 14:03:03 +0000
-Received: from mail-lj1-f171.google.com ([209.85.208.171])
- by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xNscp-0000000DCRs-3Hwm
- for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 14:03:03 +0000
-Received: by mail-lj1-f171.google.com with SMTP id
- 38308e7fff4ca-3aca0bf7fd0so25180681fa.0
- for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 06:03:03 -0800 (PST)
+ (envelope-from <marcandre.lureau@redhat.com>) id 1xNshQ-0007Td-Fl
+ for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 14:07:48 +0000
+Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
+ id 1xNshP-00B4uG-RQ
+ for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 15:07:47 +0100
+Received: from [10.42.69.7] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <marcandre.lureau@redhat.com>)
+ id 6ae89932-bab6-0a2a0a5309dd-0a2a4507e862-2
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 15:07:47 +0100
+Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <marcandre.lureau@redhat.com>)
+ id 6ae89932-b4ea-0a2a45070019-aa0a857cb501-3
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 15:07:47 +0100
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-632-k2dcesXvMiGXIQHyQbl_aw-1; Mon,
+ 02 Nov 2026 09:07:42 -0500
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 59E231955D66; Mon,  2 Nov 2026 14:07:38 +0000 (UTC)
+Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
+ [10.2.32.116])
+ by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id B15C630000E3; Mon,  2 Nov 2026 14:07:35 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -41,97 +58,91 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:Content-Type:Cc
-	:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version;
-	bh=wCXwL03Q1KbJgBXNr6Cbs3Vs/v9x3/QUWkx8s4hLcUQ=; b=aphyOUJDuj4ZcmFyk36aStoULb
-	LDMv+/CHB6Gpf8ts9crAgZ4h0b/jirxZOkHWdbR0JOGA0JJU70xaTOY7OEuihXddMqS1pqIRX9bQo
-	rq6DnQ04/DA6SmrEMVtcq4F+0d3vkFIv9/D63XhTQ+9gkVmKom4UmqZle/+H7qAZ1lIM=;
-X-Forwarded-Encrypted: i=1; AKwUvByjVejrQ5fiIi+w5JAm934j7Q5prXuOv26K2noiVHoUi6wL8Z4XK7JEsiC/rjrQLfYsfT1aMtHFM18=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z86anCPYiREfv+TaPXQA4Ss/P/042DvcTe4SPbzA8ZJcI57NMLc
-	LHW8+PPwsLpkWbWEXIIYcJimf8Qy+WSSrjGCHPjIM5yJTL+2wKSrf362x6WjLSVec85yF5ibVXZ
-	EPB7Od56+E2soXTmpTk/BEQF5Tvi4F+g=
-X-Received: by 2002:a2e:b896:0:b0:3ab:f43:a3ca with SMTP id
- 38308e7fff4ca-3acb7a80dcbmr23174871fa.16.1793628182720; Mon, 02 Nov 2026
- 06:03:02 -0800 (PST)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1793628466;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=Z6rrMF5g7kSJjjz4JgR/DJELGyW6HUEWAKJW78oBWTs=;
+	b=LnUKrhVKdEnybn3yPCd1Yv6osOcTrP79hcqsKt1HlluBIRY9Aw/WeDADAJkLX6n/p0XrsV
+	71kd6lBdTwBGDdOCyRPMXZG9vlsDI6MqvdbNQRUTqGpNsw+35s+eujp9Z8vNAWUKweT37q
+	8R+nzWROIvkErQkjs/vrMVaN/Ae6d3c=
+X-MC-Unique: k2dcesXvMiGXIQHyQbl_aw-1
+X-Mimecast-MFC-AGG-ID: k2dcesXvMiGXIQHyQbl_aw_1793628459
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <20261028-asi-hvm-v5-0-13b908e0df0b@xenproject.org>
- <20261028-asi-hvm-v5-2-13b908e0df0b@xenproject.org> <f29b4d27-650e-4463-a0bb-785ce507c644@suse.com>
- <CAFLBxZaXHuaMuHTPKgx-vw_AH8iX+jvh2t2BGsGYFR2z5hsPiQ@mail.gmail.com> <eb3c6304-f8af-4b93-be20-3db914e1ac6a@suse.com>
-In-Reply-To: <eb3c6304-f8af-4b93-be20-3db914e1ac6a@suse.com>
-From: George Dunlap <gwd@xenproject.org>
-Date: Mon, 2 Nov 2026 14:02:48 +0000
-X-Gmail-Original-Message-ID: <CAFLBxZZ-oorO7vXHONK0b7Yq_ZwHXEpBh8jphb-GaU9C8rT11Q@mail.gmail.com>
-X-Gm-Features: AclHuK8RnItcqa2VSedy3P4ENbj78xlLTRO4MSeS5WaHp9MM8cNy3411dj9I8ek
-Message-ID: <CAFLBxZZ-oorO7vXHONK0b7Yq_ZwHXEpBh8jphb-GaU9C8rT11Q@mail.gmail.com>
-Subject: Re: [PATCH v5 02/45] x86/mm: refuse to promote an L4 while the domain
- has no per-domain L3
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
-	Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-6.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS
-	autolearn=no autolearn_force=no version=4.0.1
+Subject: Re: [PATCH v8 01/18] hw/usb/bus: Add an auto-hub flag to the USB
+ bus
+From: marcandre.lureau@redhat.com
+To: Jamin Lin <jamin_lin@aspeedtech.com>
+Cc: kraxel@redhat.com, marcandre.lureau@redhat.com, junjie.cao@intel.com, 
+ junjie.cao@linux.dev, clg@kaod.org, 
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
+ Peter Maydell <peter.maydell@linaro.org>, 
+ Kane Chen <kane_chen@aspeedtech.com>, 
+ =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
+ Tyrone Ting <kfting@nuvoton.com>, Hao Wu <wuhaotsh@google.com>, 
+ Zhao Liu <zhao1.liu@intel.com>, 
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Helge Deller <deller@gmx.de>, Stefano Stabellini <sstabellini@kernel.org>, 
+ Anthony PERARD <anthony@xenproject.org>, 
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
+ "open list:All patches CC here" <qemu-devel@nongnu.org>, 
+ "open list:ASPEED BMCs" <qemu-arm@nongnu.org>, 
+ "open list:X86 Xen CPUs" <xen-devel@lists.xenproject.org>, 
+ Troy Lee <troy_lee@aspeedtech.com>
+In-Reply-To: <20261102092201.1729245-2-jamin_lin@aspeedtech.com>
+References: <20261102092201.1729245-1-jamin_lin@aspeedtech.com>
+ <20261102092201.1729245-2-jamin_lin@aspeedtech.com>
+Date: Mon, 02 Nov 2026 18:07:30 +0400
+Message-Id: <179362845005.3960472.6869995164240582772.b4-review@b4>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=459;
+ i=marcandre.lureau@redhat.com; h=from:subject:message-id;
+ bh=pAw5eg4Arl/ByoHFAYRPJQb/M2YDquuUFg0/97XLg1g=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq6Jkj81VS6SlcWI4Rwy61JYstprlWUXrEY6lpy
+ wc1SZFRb7uJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCauiZIwAKCRDa6OEJdZac
+ 5QYyD/wPeJ8nM4weGI/sX8DMt0EeH7uYANAptfmfk41PheaO/7plM2Of4Zm2/6AppYmjB8uJw5j
+ 7aMh/2Ozw+k7hO03zeLNiS7XA1f27jXKUtARK4Bb5vRQhNtpinnBhPh/ohaLObS1QsU+58Y6Shx
+ H7ZLV27gqTf2tOrvfBF5M/F16Nx9l90XHSy+Vi5KCruu5cXiuxgg8PQN7rEq5i6JUz33hHEQg2D
+ 4xxxXvkXvea75Upv8+LaWsUJhYSUgaYEknAaXRhiBmb0sA3CbO1RHHt/cIkAjIwIgtcs//hgmEt
+ zWie0/ywlexmtlVimlLw5dVKI1E/9sQZxEEsx8oRZgdJdBdbvPcGHN8WP/WrOe26+9Fy2zA6rHs
+ 44/rYiAE+T5owtGlLkZu1KSc4cR1rAyj8R8JtBeQPU7sKSk7zV7xeya2rqQP4yqCaxmqE+Jne8A
+ h8q7quPbYLpLIKaF8uKFRM7GovMGojSVJkCtUgSwxEvYcQeaosoYJCgim6oXZuqRI91aJGS1cyM
+ RYiTTsSzCgKDD76SjGiNwpaL440PaERbSlIgN0s5j1uaYhDao2aWY6yG0HEtqGeyHKDaBUZQIpz
+ jYdjTNFp6xH2MjYulYRfmZ4n7mpT5U2hCziavVJOGXNlhJ5JSa3aHxxj3DzcKFcEqmoBnntH6mE
+ Tdj2SPUXYkm/6wg==
+X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
+ fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
+X-Mimecast-MFC-PROC-ID: S-QDwk9FnMdoTDrcHaku7hY99Mag-YqvVypDEWiNsVo_1793628459
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-ef75cf/1793628467-348C9AE4-87584817/0/0
+X-purgate-type: clean
+X-purgate-size: 461
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Mon, Nov 2, 2026 at 9:50=E2=80=AFAM Jan Beulich <jbeulich@suse.com> wrot=
-e:
->
-> On 30.10.2026 18:11, George Dunlap wrote:
-> > On Thu, Oct 29, 2026 at 7:47=E2=80=AFAM Jan Beulich <jbeulich@suse.com>=
- wrote:
-> >> Independent of that, how about pulling hvm_domain_initialise()'s
-> >> create_perdomain_mapping() up into arch_domain_create() instead of the
-> >> code additions you do?
-> >
-> > So, let's see if we can solve it "properly".  Constraints:
-> >
-> > - Eventually, not all domains will have a domain-wide L3; some will
-> > only have per-vCPU L3s.
-> >
-> > - init_xen_l4_slots needs a domain always, but only needs a vcpu to
-> > get the L3 of vcpu_pt domains.
-> >
-> > - PV vcpu_pt domains don't need an L3 installed after
-> > init_xen_l4_slots; they need to run on a clone of the L4 anyway.
-> >
-> > So by the end of the series, we could arrange it like this:
-> >
-> > non-vcpu_pt domains always allocate d->arch.l3_perdomain in
-> > arch_domain_create.  vcpu_pt domains always allocate
-> > v->arch.l3_perdomain in arch_vcpu_create.
-> >
-> > Have __init_xen_l4_slots() take a domain and an L3; if the L3 is NULL,
-> > leave the perdomain slot empty.
-> >
-> > Have init_xen_l4_slots() take a vcpu.  BUG_ON(is_hvm_vcpu(v) &&
-> > v->arch.asi.vcpu_pt && !v->arch.l3_perdomain), then pass the
-> > appropriate l3 into __init_xen_l4_slots().
-> >
-> > Have init_xen_l4_slots_pv() take a domain, and always pass the domain
-> > and d->arch.l3_perdomain to __init_xen_l4_slots.  This will be NULL
-> > for PV vcpu_pt domains, but that's fine.
-> >
-> > Then promote_l4_table() calls init_xen_l4_slots_pv() with a domain,
-> > and loses both the checks at the top.
-> >
-> > There are corner cases to sort out, like how idle domains get an L3;
-> > but overall I think this makes everything more robust.
-> >
-> > Thoughts?
->
-> Sounds plausible to me.
+On Mon, 02 Nov 2026 09:22:04 +0000, Jamin Lin <jamin_lin@aspeedtech.com> wrote:
+> usb_claim_port() plugs a usb-hub into the last free port, so that more
+> devices fit. Every bus gets that today, and a controller cannot turn
+> it off.
+> 
+> Add auto_hub and have usb_claim_port() check it. usb_bus_new() turns it
+> on.
+> 
+> [...]
 
-This has beeen done.  It required some refactoring of later patches.
-These have all been tested and skimmed, but haven't been over with a
-fine-tooth comb again, so there's a risk of LLM quirks.  Do you mind
-if I post what I have now, so people can look at it this week if the
-chance affords?  Otherwise I won't be able to post it until next week
-at the earliest.
+Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 
- -George
+-- 
+Marc-André Lureau <marcandre.lureau@redhat.com>
+
 
