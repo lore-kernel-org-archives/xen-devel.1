@@ -2,54 +2,54 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1D1C6606A326
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 72E03606A327
 	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 19:01:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=ZJOlc1mz
-Received: from list by lists.xenproject.org with outflank-mailman.1468582.1677672 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=GhAIcJxS
+Received: from list by lists.xenproject.org with outflank-mailman.1468597.1677737 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNxHe-0007c0-PU; Mon, 02 Nov 2026 19:01:30 +0000
+	id 1xNxHp-00019o-26; Mon, 02 Nov 2026 19:01:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1468582.1677672; Mon, 02 Nov 2026 19:01:30 +0000
+Received: by outflank-mailman (output) from mailman id 1468597.1677737; Mon, 02 Nov 2026 19:01:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNxHe-0007bp-MJ; Mon, 02 Nov 2026 19:01:30 +0000
-Received: by outflank-mailman (input) for mailman id 1468582;
- Mon, 02 Nov 2026 19:01:29 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xNxHo-00018y-Oj; Mon, 02 Nov 2026 19:01:40 +0000
+Received: by outflank-mailman (input) for mailman id 1468597;
+ Mon, 02 Nov 2026 19:01:39 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <stefanha@redhat.com>) id 1xNxHd-0007a1-QR
- for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 19:01:29 +0000
+ (envelope-from <stefanha@redhat.com>) id 1xNxHn-0000kT-2I
+ for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 19:01:39 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xNxHd-000KSU-7D
- for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 20:01:29 +0100
-Received: from [10.42.69.7] (helo=localhost)
+ id 1xNxHm-00AdPD-FM
+ for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 20:01:38 +0100
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <stefanha@redhat.com>)
- id 6ae8de04-bab6-0a2a0a5309dd-0a2a4507a9a8-6
- for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 20:01:28 +0100
+ id 6ae8de10-8faa-0a2a0a5109dd-0a2a4504ac8c-10
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 20:01:38 +0100
 Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <stefanha@redhat.com>)
- id 6ae8de07-b4ea-0a2a45070019-aa0a857c9391-3
- for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 20:01:28 +0100
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ id 6ae8de11-b57f-0a2a45040019-aa0a857ce263-3
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 20:01:38 +0100
+Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-408-P0nOpbXnMIuwIVoBbPrD2A-1; Mon,
- 02 Nov 2026 14:01:21 -0500
-Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-692-qHh40kBpP820t_m4fj_mMA-1; Mon,
+ 02 Nov 2026 14:01:33 -0500
+Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id BBBF41954B09; Mon,  2 Nov 2026 19:01:19 +0000 (UTC)
+ by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 7FBBE180ACFD; Mon,  2 Nov 2026 19:01:31 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 65A7730001A2; Mon,  2 Nov 2026 19:01:19 +0000 (UTC)
+ by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 8E0CD1955F43; Mon,  2 Nov 2026 19:01:30 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -60,17 +60,17 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1793646087;
+	s=mimecast20190719; t=1793646097;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=1+Fb/pNuDVJKjUmAlJEVqK84jM77qkTAumiP1SiO8JU=;
-	b=ZJOlc1mz+Vcp59a8UnpTVpecvvMVAUtDQb0QjDGpOi7xinOF9tQfPo/bUMYq8JmXtA7Yl4
-	LFkOEDBYYsvEbOWObeWXqDamdBMtJ3HfSgbmdaYrYcOYeeww+mxMdftKk0r4zNR5RKyW16
-	jWvCOF2P0w8cCTtH1S3aYeD61FNo5sk=
-X-MC-Unique: P0nOpbXnMIuwIVoBbPrD2A-1
-X-Mimecast-MFC-AGG-ID: P0nOpbXnMIuwIVoBbPrD2A_1793646080
+	bh=DlKbUaAjj04ta+A1/nUMfLg/CAVRg3igZyolJR7CeYY=;
+	b=GhAIcJxS+QusmjgjbND2DOjVnFMmKHKC6MX2IOKJ1bB/21JXFC9kbLQ8KBKTWDtvE6ozZN
+	g3bxfejIzJUhGyUw4Zn+q9xdpWQZXjh9IivPbYTbqVBtjS/W3FMRXcXTAD7usiFY8dQA1s
+	iFrdB4Dxv6p3LFEeznUgNbnX2R++SoU=
+X-MC-Unique: qHh40kBpP820t_m4fj_mMA-1
+X-Mimecast-MFC-AGG-ID: qHh40kBpP820t_m4fj_mMA_1793646091
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org,
@@ -89,21 +89,21 @@ Cc: qemu-ppc@nongnu.org,
 	Richard Henderson <richard.henderson@linaro.org>,
 	Stefan Hajnoczi <stefanha@redhat.com>,
 	=?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PULL 08/25] trace: drop 'id' from TraceEvent struct when not required
-Date: Mon,  2 Nov 2026 13:58:14 -0500
-Message-ID: <20261102185831.1880189-9-stefanha@redhat.com>
+Subject: [PULL 14/25] trace: include probe name in Rust format strings
+Date: Mon,  2 Nov 2026 13:58:20 -0500
+Message-ID: <20261102185831.1880189-15-stefanha@redhat.com>
 In-Reply-To: <20261102185831.1880189-1-stefanha@redhat.com>
 References: <20261102185831.1880189-1-stefanha@redhat.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: qdHuj8bmrHqy7ydog_5PyPqVfjWmjzRrcTIJLyMj0PA_1793646080
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
+X-Mimecast-MFC-PROC-ID: eMYoCJL4Mwe_dz_Hb6Gg522P8Aor-fdx60dnOIkh2bA_1793646091
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1793646088-A52CCAE4-FB94639D/35/111497
+X-purgate-ID: tlsNG-ebf023/1793646098-532CCB50-61CE4CF7/35/111497
 X-purgate-type: clean
-X-purgate-size: 7751
+X-purgate-size: 6988
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -114,252 +114,130 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 From: Daniel P. Berrangé <berrange@redhat.com>
 
-Only "simpletrace" uses the "id" field from the TraceEvent struct.
-Omit it when this backend is not enabled to save memory.
+The C format strings all include the probe name as a prefix,
+however, this was missed in the Rust generators for ftrace
+and syslog.
 
-Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+Reviewed-by: Eric Blake <eblake@redhat.com>
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
-Message-id: 20261102142844.3464712-9-berrange@redhat.com
+Message-id: 20261102142844.3464712-15-berrange@redhat.com
 Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
 ---
- trace/control-internal.h      | 2 ++
- trace/control.h               | 3 ++-
- trace/event-internal.h        | 2 ++
- tests/tracetool/dtrace.c      | 4 ++++
- tests/tracetool/ftrace.c      | 4 ++++
- tests/tracetool/log.c         | 4 ++++
- tests/tracetool/simple.c      | 4 ++++
- tests/tracetool/syslog.c      | 4 ++++
- tests/tracetool/ust.c         | 4 ++++
- trace/control.c               | 4 +++-
- scripts/tracetool/format/c.py | 2 ++
- 11 files changed, 35 insertions(+), 2 deletions(-)
+ scripts/tracetool/backend/ftrace.py | 2 +-
+ scripts/tracetool/backend/syslog.py | 2 +-
+ tests/tracetool/all.rs              | 8 ++++----
+ tests/tracetool/ftrace.rs           | 4 ++--
+ tests/tracetool/syslog.rs           | 4 ++--
+ 5 files changed, 10 insertions(+), 10 deletions(-)
 
-diff --git a/trace/control-internal.h b/trace/control-internal.h
-index 8d818d359be..f626b047264 100644
---- a/trace/control-internal.h
-+++ b/trace/control-internal.h
-@@ -19,11 +19,13 @@ static inline bool trace_event_is_pattern(const char *str)
-     return strchr(str, '*') != NULL;
- }
+diff --git a/scripts/tracetool/backend/ftrace.py b/scripts/tracetool/backend/ftrace.py
+index e03698a2edf..ba2a0c83770 100644
+--- a/scripts/tracetool/backend/ftrace.py
++++ b/scripts/tracetool/backend/ftrace.py
+@@ -47,5 +47,5 @@ def generate_h_backend_dstate(event, group):
+ def generate_rs(event, group):
+     out('        let format_string = c"%(fmt)s";',
+         '        unsafe {bindings::ftrace_write(format_string.as_ptr() as *const c_char, %(args)s);}',
+-        fmt=expand_format_string(event.fmt),
++        fmt=expand_format_string(event.fmt, event.name + " "),
+         args=event.args.rust_call_varargs())
+diff --git a/scripts/tracetool/backend/syslog.py b/scripts/tracetool/backend/syslog.py
+index 12b826593db..746efd35fb9 100644
+--- a/scripts/tracetool/backend/syslog.py
++++ b/scripts/tracetool/backend/syslog.py
+@@ -41,7 +41,7 @@ def generate_h(event, group):
+ def generate_rs(event, group):
+     out('        let format_string = c"%(fmt)s";',
+         '        unsafe {::trace::syslog(::trace::LOG_INFO, format_string.as_ptr() as *const c_char, %(args)s);}',
+-        fmt=expand_format_string(event.fmt),
++        fmt=expand_format_string(event.fmt, event.name + " "),
+         args=event.args.rust_call_varargs())
  
-+#ifdef CONFIG_TRACE_SIMPLE
- static inline uint32_t trace_event_get_id(TraceEvent *ev)
+ def generate_h_backend_dstate(event, group):
+diff --git a/tests/tracetool/all.rs b/tests/tracetool/all.rs
+index c8c9d288366..14afd86281e 100644
+--- a/tests/tracetool/all.rs
++++ b/tests/tracetool/all.rs
+@@ -47,7 +47,7 @@ pub fn trace_test_blah(_context: *mut (), _filename: &std::ffi::CStr)
  {
-     assert(ev != NULL);
-     return ev->id;
- }
-+#endif
- 
- static inline const char * trace_event_get_name(TraceEvent *ev)
- {
-diff --git a/trace/control.h b/trace/control.h
-index 20033fb6669..e77c07a8e68 100644
---- a/trace/control.h
-+++ b/trace/control.h
-@@ -81,13 +81,14 @@ TraceEvent *trace_event_name(const char *name);
-  */
- static bool trace_event_is_pattern(const char *str);
- 
--
-+#ifdef CONFIG_TRACE_SIMPLE
- /**
-  * trace_event_get_id:
-  *
-  * Get the identifier of an event.
-  */
- static uint32_t trace_event_get_id(TraceEvent *ev);
-+#endif
- 
- /**
-  * trace_event_get_name:
-diff --git a/trace/event-internal.h b/trace/event-internal.h
-index cc095a6ad54..ecf2caabd03 100644
---- a/trace/event-internal.h
-+++ b/trace/event-internal.h
-@@ -20,7 +20,9 @@
-  * Opaque generic description of a tracing event.
-  */
- typedef struct TraceEvent {
-+#ifdef CONFIG_TRACE_SIMPLE
-     uint32_t id;
-+#endif
-     const char * name;
-     const bool sstate;
-     uint16_t *dstate;
-diff --git a/tests/tracetool/dtrace.c b/tests/tracetool/dtrace.c
-index 9f862fa14d2..05a93918240 100644
---- a/tests/tracetool/dtrace.c
-+++ b/tests/tracetool/dtrace.c
-@@ -8,13 +8,17 @@
- uint16_t _TRACE_TEST_BLAH_DSTATE;
- uint16_t _TRACE_TEST_WIBBLE_DSTATE;
- TraceEvent _TRACE_TEST_BLAH_EVENT = {
-+#ifdef CONFIG_TRACE_SIMPLE
-     .id = 0,
-+#endif
-     .name = "test_blah",
-     .sstate = TRACE_TEST_BLAH_ENABLED,
-     .dstate = &_TRACE_TEST_BLAH_DSTATE
- };
- TraceEvent _TRACE_TEST_WIBBLE_EVENT = {
-+#ifdef CONFIG_TRACE_SIMPLE
-     .id = 0,
-+#endif
-     .name = "test_wibble",
-     .sstate = TRACE_TEST_WIBBLE_ENABLED,
-     .dstate = &_TRACE_TEST_WIBBLE_DSTATE
-diff --git a/tests/tracetool/ftrace.c b/tests/tracetool/ftrace.c
-index 9f862fa14d2..05a93918240 100644
---- a/tests/tracetool/ftrace.c
-+++ b/tests/tracetool/ftrace.c
-@@ -8,13 +8,17 @@
- uint16_t _TRACE_TEST_BLAH_DSTATE;
- uint16_t _TRACE_TEST_WIBBLE_DSTATE;
- TraceEvent _TRACE_TEST_BLAH_EVENT = {
-+#ifdef CONFIG_TRACE_SIMPLE
-     .id = 0,
-+#endif
-     .name = "test_blah",
-     .sstate = TRACE_TEST_BLAH_ENABLED,
-     .dstate = &_TRACE_TEST_BLAH_DSTATE
- };
- TraceEvent _TRACE_TEST_WIBBLE_EVENT = {
-+#ifdef CONFIG_TRACE_SIMPLE
-     .id = 0,
-+#endif
-     .name = "test_wibble",
-     .sstate = TRACE_TEST_WIBBLE_ENABLED,
-     .dstate = &_TRACE_TEST_WIBBLE_DSTATE
-diff --git a/tests/tracetool/log.c b/tests/tracetool/log.c
-index 9f862fa14d2..05a93918240 100644
---- a/tests/tracetool/log.c
-+++ b/tests/tracetool/log.c
-@@ -8,13 +8,17 @@
- uint16_t _TRACE_TEST_BLAH_DSTATE;
- uint16_t _TRACE_TEST_WIBBLE_DSTATE;
- TraceEvent _TRACE_TEST_BLAH_EVENT = {
-+#ifdef CONFIG_TRACE_SIMPLE
-     .id = 0,
-+#endif
-     .name = "test_blah",
-     .sstate = TRACE_TEST_BLAH_ENABLED,
-     .dstate = &_TRACE_TEST_BLAH_DSTATE
- };
- TraceEvent _TRACE_TEST_WIBBLE_EVENT = {
-+#ifdef CONFIG_TRACE_SIMPLE
-     .id = 0,
-+#endif
-     .name = "test_wibble",
-     .sstate = TRACE_TEST_WIBBLE_ENABLED,
-     .dstate = &_TRACE_TEST_WIBBLE_DSTATE
-diff --git a/tests/tracetool/simple.c b/tests/tracetool/simple.c
-index 0484177481c..490d6f379a5 100644
---- a/tests/tracetool/simple.c
-+++ b/tests/tracetool/simple.c
-@@ -8,13 +8,17 @@
- uint16_t _TRACE_TEST_BLAH_DSTATE;
- uint16_t _TRACE_TEST_WIBBLE_DSTATE;
- TraceEvent _TRACE_TEST_BLAH_EVENT = {
-+#ifdef CONFIG_TRACE_SIMPLE
-     .id = 0,
-+#endif
-     .name = "test_blah",
-     .sstate = TRACE_TEST_BLAH_ENABLED,
-     .dstate = &_TRACE_TEST_BLAH_DSTATE
- };
- TraceEvent _TRACE_TEST_WIBBLE_EVENT = {
-+#ifdef CONFIG_TRACE_SIMPLE
-     .id = 0,
-+#endif
-     .name = "test_wibble",
-     .sstate = TRACE_TEST_WIBBLE_ENABLED,
-     .dstate = &_TRACE_TEST_WIBBLE_DSTATE
-diff --git a/tests/tracetool/syslog.c b/tests/tracetool/syslog.c
-index 9f862fa14d2..05a93918240 100644
---- a/tests/tracetool/syslog.c
-+++ b/tests/tracetool/syslog.c
-@@ -8,13 +8,17 @@
- uint16_t _TRACE_TEST_BLAH_DSTATE;
- uint16_t _TRACE_TEST_WIBBLE_DSTATE;
- TraceEvent _TRACE_TEST_BLAH_EVENT = {
-+#ifdef CONFIG_TRACE_SIMPLE
-     .id = 0,
-+#endif
-     .name = "test_blah",
-     .sstate = TRACE_TEST_BLAH_ENABLED,
-     .dstate = &_TRACE_TEST_BLAH_DSTATE
- };
- TraceEvent _TRACE_TEST_WIBBLE_EVENT = {
-+#ifdef CONFIG_TRACE_SIMPLE
-     .id = 0,
-+#endif
-     .name = "test_wibble",
-     .sstate = TRACE_TEST_WIBBLE_ENABLED,
-     .dstate = &_TRACE_TEST_WIBBLE_DSTATE
-diff --git a/tests/tracetool/ust.c b/tests/tracetool/ust.c
-index 9f862fa14d2..05a93918240 100644
---- a/tests/tracetool/ust.c
-+++ b/tests/tracetool/ust.c
-@@ -8,13 +8,17 @@
- uint16_t _TRACE_TEST_BLAH_DSTATE;
- uint16_t _TRACE_TEST_WIBBLE_DSTATE;
- TraceEvent _TRACE_TEST_BLAH_EVENT = {
-+#ifdef CONFIG_TRACE_SIMPLE
-     .id = 0,
-+#endif
-     .name = "test_blah",
-     .sstate = TRACE_TEST_BLAH_ENABLED,
-     .dstate = &_TRACE_TEST_BLAH_DSTATE
- };
- TraceEvent _TRACE_TEST_WIBBLE_EVENT = {
-+#ifdef CONFIG_TRACE_SIMPLE
-     .id = 0,
-+#endif
-     .name = "test_wibble",
-     .sstate = TRACE_TEST_WIBBLE_ENABLED,
-     .dstate = &_TRACE_TEST_WIBBLE_DSTATE
-diff --git a/trace/control.c b/trace/control.c
-index 6971157cbe7..947b220056a 100644
---- a/trace/control.c
-+++ b/trace/control.c
-@@ -36,8 +36,8 @@ typedef struct TraceEventGroup {
- 
- static TraceEventGroup *event_groups;
- static size_t nevent_groups;
--static uint32_t next_id;
- #ifdef CONFIG_TRACE_SIMPLE
-+static uint32_t next_id;
- static bool init_trace_on_startup;
- #endif
- static char *trace_opts_file;
-@@ -65,10 +65,12 @@ QemuOptsList qemu_trace_opts = {
- 
- void trace_event_register_group(TraceEvent **events)
- {
-+#ifdef CONFIG_TRACE_SIMPLE
-     size_t i;
-     for (i = 0; events[i] != NULL; i++) {
-         events[i]->id = next_id++;
+     ::trace::probe!(qemu, test_blah, _context, _filename.as_ptr());
+     if trace_event_state_is_enabled(unsafe { _TRACE_TEST_BLAH_DSTATE}) {
+-        let format_string = c"Blah context=%p filename=%s";
++        let format_string = c"test_blah Blah context=%p filename=%s";
+         unsafe {bindings::ftrace_write(format_string.as_ptr() as *const c_char, _context /* as *mut () */, _filename.as_ptr());}
+         let format_string = c"test_blah Blah context=%p filename=%s\n";
+         if (unsafe { bindings::qemu_loglevel } & bindings::LOG_TRACE) != 0 {
+@@ -55,7 +55,7 @@ pub fn trace_test_blah(_context: *mut (), _filename: &std::ffi::CStr)
+         }
+         extern "C" { fn _simple_trace_test_blah(_context: *mut (), _filename: *const std::ffi::c_char); }
+         unsafe { _simple_trace_test_blah(_context, _filename.as_ptr()); }
+-        let format_string = c"Blah context=%p filename=%s";
++        let format_string = c"test_blah Blah context=%p filename=%s";
+         unsafe {::trace::syslog(::trace::LOG_INFO, format_string.as_ptr() as *const c_char, _context /* as *mut () */, _filename.as_ptr());}
      }
-+#endif
-     event_groups = g_renew(TraceEventGroup, event_groups, nevent_groups + 1);
-     event_groups[nevent_groups].events = events;
-     nevent_groups++;
-diff --git a/scripts/tracetool/format/c.py b/scripts/tracetool/format/c.py
-index 50e03313cbf..abe738ac423 100644
---- a/scripts/tracetool/format/c.py
-+++ b/scripts/tracetool/format/c.py
-@@ -34,7 +34,9 @@ def generate(events, backend, group):
- 
-     for e in events:
-         out('TraceEvent %(event)s = {',
-+            '#ifdef CONFIG_TRACE_SIMPLE',
-             '    .id = 0,',
-+            '#endif',
-             '    .name = \"%(name)s\",',
-             '    .sstate = %(sstate)s,',
-             '    .dstate = &%(dstate)s',
+ }
+@@ -75,7 +75,7 @@ pub fn trace_test_wibble(_context: *mut (), _value: std::ffi::c_int)
+ {
+     ::trace::probe!(qemu, test_wibble, _context, _value);
+     if trace_event_state_is_enabled(unsafe { _TRACE_TEST_WIBBLE_DSTATE}) {
+-        let format_string = c"Wibble context=%p value=%d";
++        let format_string = c"test_wibble Wibble context=%p value=%d";
+         unsafe {bindings::ftrace_write(format_string.as_ptr() as *const c_char, _context /* as *mut () */, _value /* as std::ffi::c_int */);}
+         let format_string = c"test_wibble Wibble context=%p value=%d\n";
+         if (unsafe { bindings::qemu_loglevel } & bindings::LOG_TRACE) != 0 {
+@@ -83,7 +83,7 @@ pub fn trace_test_wibble(_context: *mut (), _value: std::ffi::c_int)
+         }
+         extern "C" { fn _simple_trace_test_wibble(_context: *mut (), _value: std::ffi::c_int); }
+         unsafe { _simple_trace_test_wibble(_context, _value); }
+-        let format_string = c"Wibble context=%p value=%d";
++        let format_string = c"test_wibble Wibble context=%p value=%d";
+         unsafe {::trace::syslog(::trace::LOG_INFO, format_string.as_ptr() as *const c_char, _context /* as *mut () */, _value /* as std::ffi::c_int */);}
+     }
+ }
+diff --git a/tests/tracetool/ftrace.rs b/tests/tracetool/ftrace.rs
+index ff0bcde4b8b..39959d3fdd1 100644
+--- a/tests/tracetool/ftrace.rs
++++ b/tests/tracetool/ftrace.rs
+@@ -36,7 +36,7 @@ pub fn trace_test_blah_enabled() -> bool
+ pub fn trace_test_blah(_context: *mut (), _filename: &std::ffi::CStr)
+ {
+     if trace_event_state_is_enabled(unsafe { _TRACE_TEST_BLAH_DSTATE}) {
+-        let format_string = c"Blah context=%p filename=%s";
++        let format_string = c"test_blah Blah context=%p filename=%s";
+         unsafe {bindings::ftrace_write(format_string.as_ptr() as *const c_char, _context /* as *mut () */, _filename.as_ptr());}
+     }
+ }
+@@ -54,7 +54,7 @@ pub fn trace_test_wibble_enabled() -> bool
+ pub fn trace_test_wibble(_context: *mut (), _value: std::ffi::c_int)
+ {
+     if trace_event_state_is_enabled(unsafe { _TRACE_TEST_WIBBLE_DSTATE}) {
+-        let format_string = c"Wibble context=%p value=%d";
++        let format_string = c"test_wibble Wibble context=%p value=%d";
+         unsafe {bindings::ftrace_write(format_string.as_ptr() as *const c_char, _context /* as *mut () */, _value /* as std::ffi::c_int */);}
+     }
+ }
+diff --git a/tests/tracetool/syslog.rs b/tests/tracetool/syslog.rs
+index 9688dac84a5..b90ad4be7f4 100644
+--- a/tests/tracetool/syslog.rs
++++ b/tests/tracetool/syslog.rs
+@@ -36,7 +36,7 @@ pub fn trace_test_blah_enabled() -> bool
+ pub fn trace_test_blah(_context: *mut (), _filename: &std::ffi::CStr)
+ {
+     if trace_event_state_is_enabled(unsafe { _TRACE_TEST_BLAH_DSTATE}) {
+-        let format_string = c"Blah context=%p filename=%s";
++        let format_string = c"test_blah Blah context=%p filename=%s";
+         unsafe {::trace::syslog(::trace::LOG_INFO, format_string.as_ptr() as *const c_char, _context /* as *mut () */, _filename.as_ptr());}
+     }
+ }
+@@ -54,7 +54,7 @@ pub fn trace_test_wibble_enabled() -> bool
+ pub fn trace_test_wibble(_context: *mut (), _value: std::ffi::c_int)
+ {
+     if trace_event_state_is_enabled(unsafe { _TRACE_TEST_WIBBLE_DSTATE}) {
+-        let format_string = c"Wibble context=%p value=%d";
++        let format_string = c"test_wibble Wibble context=%p value=%d";
+         unsafe {::trace::syslog(::trace::LOG_INFO, format_string.as_ptr() as *const c_char, _context /* as *mut () */, _value /* as std::ffi::c_int */);}
+     }
+ }
 -- 
 2.56.0
 
