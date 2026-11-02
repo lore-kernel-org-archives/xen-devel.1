@@ -2,54 +2,54 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EA5D9606A32C
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 19:01:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3ADB6606A326
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 19:01:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=g32OpgCh
-Received: from list by lists.xenproject.org with outflank-mailman.1468575.1677638 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=ABXeLW/3
+Received: from list by lists.xenproject.org with outflank-mailman.1468585.1677701 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNxHR-0006YV-Qy; Mon, 02 Nov 2026 19:01:17 +0000
+	id 1xNxHi-0008J3-1P; Mon, 02 Nov 2026 19:01:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1468575.1677638; Mon, 02 Nov 2026 19:01:17 +0000
+Received: by outflank-mailman (output) from mailman id 1468585.1677701; Mon, 02 Nov 2026 19:01:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNxHR-0006YN-NT; Mon, 02 Nov 2026 19:01:17 +0000
-Received: by outflank-mailman (input) for mailman id 1468575;
- Mon, 02 Nov 2026 19:01:16 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xNxHh-0008ID-QW; Mon, 02 Nov 2026 19:01:33 +0000
+Received: by outflank-mailman (input) for mailman id 1468585;
+ Mon, 02 Nov 2026 19:01:33 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <stefanha@redhat.com>) id 1xNxHQ-0006Lr-K0
- for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 19:01:16 +0000
+ (envelope-from <stefanha@redhat.com>) id 1xNxHg-000822-Uj
+ for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 19:01:33 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xNxHP-00AdHl-Pe
- for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 20:01:15 +0100
-Received: from [10.42.69.5] (helo=localhost)
+ id 1xNxHg-00Bp7W-BL
+ for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 20:01:32 +0100
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <stefanha@redhat.com>)
- id 6ae8dde7-2eae-0a2a0a5409dd-0a2a45058876-42
- for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 20:01:15 +0100
-Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ae8ddf8-8faa-0a2a0a5109dd-0a2a4503b136-46
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 20:01:32 +0100
+Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <stefanha@redhat.com>)
- id 6ae8ddfa-4cb1-0a2a45050019-aa0a817cdd9b-3
- for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 20:01:15 +0100
-Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ id 6ae8de06-fae8-0a2a45030019-aa0a857cdde7-3
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 20:01:27 +0100
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-575-E4xqKpLVMK2dlUp-UY1vEQ-1; Mon,
- 02 Nov 2026 14:01:10 -0500
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-164-FYOnKF7dNwWxwGciaH3gdA-1; Mon,
+ 02 Nov 2026 14:01:20 -0500
 Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id B723B1800EF7; Mon,  2 Nov 2026 19:01:08 +0000 (UTC)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 70EEF19560B1; Mon,  2 Nov 2026 19:01:18 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
  by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id E2C911803A40; Mon,  2 Nov 2026 19:01:06 +0000 (UTC)
+ id 243541800765; Mon,  2 Nov 2026 19:01:18 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -58,18 +58,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1793646074;
+	s=mimecast20190719; t=1793646086;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=VyOfMou4RcojGMLaXB+CopKG9bhWtmdPnTdEbY8HCZQ=;
-	b=g32OpgChUgl7Ht0Xf/apovDr3h7H4Bf3WwQ4f9jvczQaGZjMeIaR2T9fPP4aROkoOcjdw0
-	kvC9j19L/XUgoL6tQUpIxeURAg4LrB8xE8HY9zywC8RZudrhGtHoyuIx/zZ15sZDsmha4e
-	rQLlAxUqqzDuS4NKGuAuPxFw77WTEuo=
-X-MC-Unique: E4xqKpLVMK2dlUp-UY1vEQ-1
-X-Mimecast-MFC-AGG-ID: E4xqKpLVMK2dlUp-UY1vEQ_1793646068
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=s2fQy26Nzh4pevOCqiRqluICNBTrWSgxg/L8ugtFtns=;
+	b=ABXeLW/3CNHTi9lV/IRFZVGQaYqoPnSXfdM4YTOuDXTlzdiibTz/ObE9YM1Dm4XViNTMyo
+	EEy397jRdn5d4idPyqYo7maKoBpc2R9LldXXhPXKqjdHfeNgGA3xaA6ZzzQn/9qWM1LU9t
+	5og5W7r7m+c5dB2oQFL43pUHlV+a5MY=
+X-MC-Unique: FYOnKF7dNwWxwGciaH3gdA-1
+X-Mimecast-MFC-AGG-ID: FYOnKF7dNwWxwGciaH3gdA_1793646078
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org,
@@ -86,153 +87,154 @@ Cc: qemu-ppc@nongnu.org,
 	Gerd Hoffmann <kraxel@redhat.com>,
 	Alexey Kardashevskiy <aik@ozlabs.ru>,
 	Richard Henderson <richard.henderson@linaro.org>,
-	Stefan Hajnoczi <stefanha@redhat.com>
-Subject: [PULL 00/25] Tracing patches
-Date: Mon,  2 Nov 2026 13:58:06 -0500
-Message-ID: <20261102185831.1880189-1-stefanha@redhat.com>
+	Stefan Hajnoczi <stefanha@redhat.com>,
+	=?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
+Subject: [PULL 07/25] trace: remove obsolete references to vcpu property
+Date: Mon,  2 Nov 2026 13:58:13 -0500
+Message-ID: <20261102185831.1880189-8-stefanha@redhat.com>
+In-Reply-To: <20261102185831.1880189-1-stefanha@redhat.com>
+References: <20261102185831.1880189-1-stefanha@redhat.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
-X-Mimecast-MFC-PROC-ID: m1xcjM4snOs1OYu2MhY34RGszGyR5_vkjgWeM8jNei0_1793646068
+X-Mimecast-MFC-PROC-ID: uzrzJe2fISCg8lzu_gQGZreSfhv5_yg1dOXuYUxrhWA_1793646078
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c201ff/1793646075-F44A42A1-6355E75B/35/111497
+X-purgate-ID: tlsNG-33051d/1793646087-76AF94E9-C4CBEED9/35/111497
 X-purgate-type: clean
-X-purgate-size: 6506
-X-Spam-Status: No, score=-20.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-purgate-size: 4069
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,INCLUDES_PULL_REQUEST,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
-	autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The following changes since commit 56afd82bd4db9688f1c1c9d0e2ea163b8cde3283:
+From: Daniel P. Berrangé <berrange@redhat.com>
 
-  Merge tag 'qemu-sparc-20261101' of https://github.com/mcayland/qemu into staging (2026-11-01 08:37:48 -0800)
+The 'vcpu' property for trace events was removed 2 years ago
+but some mentions of it remain in the code.
 
-are available in the Git repository at:
+Fixes: 7ffc4894a63b ("trace: Remove deprecated 'vcpu' field from QMP trace events")
+Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
+Message-id: 20261102142844.3464712-8-berrange@redhat.com
+Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
+---
+ trace/control.h        | 12 ------------
+ trace/event-internal.h | 11 -----------
+ trace/control-target.c |  6 ------
+ trace/control.c        |  6 ------
+ 4 files changed, 35 deletions(-)
 
-  https://gitlab.com/stefanha/qemu.git tags/tracing-pull-request
-
-for you to fetch changes up to 3b68720390b98f21e26ffcff8874851b7b49b7b7:
-
-  trace: remove 'trace_event_get_state' wrapper (2026-11-02 13:52:14 -0500)
-
-----------------------------------------------------------------
-Pull request
-
-Daniel Berrangé's 'disable' property removal and associated cleanups.
-
-----------------------------------------------------------------
-
-Daniel P. Berrangé (25):
-  osdep: add 'ignore_value(x)' macro
-  trace: use 'ignore_value()' instead of a dummy variable
-  trace: fix handling of char** in UST backend
-  hw/xen: replace "long unsigned int" with "unsigned long " for dtrace
-  trace: block use of "long int" for dtrace
-  trace: drop unused trace_event_set_state_dynamic_init()
-  trace: remove obsolete references to vcpu property
-  trace: drop 'id' from TraceEvent struct when not required
-  trace: change "DSTATE" variables from uint16_t to uint8_t
-  trace: add testing of 'nop' trace backend
-  trace: don't emit TraceEvent structs when 'nop' backend is used
-  trace: add test of generation with all backends enabled
-  trace: remove redundant headers from simple trace backend code
-  trace: include probe name in Rust format strings
-  trace: add missing newline in ftrace Rust format string
-  trace: eliminate dupe trace_event_get_state_dynamic_by_id() calls
-  audio: remove mistaken use of trace_event_get_state()
-  hw/ppc: remove mistaken use of trace_event_get_state()
-  monitor: remove mistaken use of trace_event_get_state()
-  trace: include qemu_loglevel_mask(LOG_TRACE) in guard
-  target/hppa: use PRIx64 in trace-events
-  trace: remove "disable" property from trace files
-  trace: stop tracking static disabled state
-  trace: remove parsing of "disable" event property
-  trace: remove 'trace_event_get_state' wrapper
-
- docs/devel/tracing.rst                       |  27 +----
- qapi/trace.json                              |   5 +-
- include/qemu/osdep.h                         |   8 ++
- tests/tracetool/all.h                        | 100 +++++++++++++++++++
- tests/tracetool/dtrace.h                     |   6 +-
- tests/tracetool/ftrace.h                     |  14 ++-
- tests/tracetool/log.h                        |  26 +++--
- tests/tracetool/nop.h                        |  25 +++++
- tests/tracetool/simple.h                     |  10 +-
- tests/tracetool/syslog.h                     |  14 ++-
- tests/tracetool/ust.h                        |   6 +-
- trace/control-internal.h                     |   8 +-
- trace/control.h                              |  49 +--------
- trace/event-internal.h                       |  19 +---
- audio/audio-mixeng-be.c                      |   2 +-
- hw/ppc/vof.c                                 |  13 +--
- monitor/qmp.c                                |   4 +-
- stubs/trace-control.c                        |   6 --
- tests/tracetool/all.c                        |  61 +++++++++++
- tests/tracetool/dtrace.c                     |  10 +-
- tests/tracetool/ftrace.c                     |  10 +-
- tests/tracetool/log.c                        |  10 +-
- tests/tracetool/nop.c                        |   7 ++
- tests/tracetool/simple.c                     |  12 +--
- tests/tracetool/syslog.c                     |  10 +-
- tests/tracetool/ust.c                        |  10 +-
- trace/control-target.c                       |  29 ------
- trace/control.c                              |  19 +---
- trace/ftrace.c                               |   3 +-
- trace/qmp.c                                  |  47 +++------
- trace/simple.c                               |   9 +-
- hw/display/trace-events                      |   2 +-
- hw/xen/trace-events                          |   4 +-
- scripts/tracetool/__init__.py                |  32 ++----
- scripts/tracetool/backend/__init__.py        |   7 +-
- scripts/tracetool/backend/dtrace.py          |   2 -
- scripts/tracetool/backend/ftrace.py          |   8 +-
- scripts/tracetool/backend/log.py             |  22 ++--
- scripts/tracetool/backend/simple.py          |   9 +-
- scripts/tracetool/backend/syslog.py          |   6 +-
- scripts/tracetool/format/c.py                |  68 ++++++-------
- scripts/tracetool/format/d.py                |   3 -
- scripts/tracetool/format/h.py                |  48 ++++-----
- scripts/tracetool/format/log_stap.py         |   3 -
- scripts/tracetool/format/rs.py               |  30 +++---
- scripts/tracetool/format/simpletrace_stap.py |   3 -
- scripts/tracetool/format/stap.py             |   3 -
- scripts/tracetool/format/ust_events_c.py     |   3 -
- scripts/tracetool/format/ust_events_h.py     |   7 +-
- target/hppa/trace-events                     |  28 +++---
- tests/tracetool/all.d                        |  10 ++
- tests/tracetool/all.log-stap                 |  15 +++
- tests/tracetool/all.rs                       |  98 ++++++++++++++++++
- tests/tracetool/all.simpletrace-stap         |  16 +++
- tests/tracetool/all.stap                     |  14 +++
- tests/tracetool/all.ust-events-c             |  14 +++
- tests/tracetool/all.ust-events-h             |  56 +++++++++++
- tests/tracetool/dtrace.rs                    |   6 +-
- tests/tracetool/ftrace.rs                    |  10 +-
- tests/tracetool/log.rs                       |  12 ++-
- tests/tracetool/meson.build                  |   4 +-
- tests/tracetool/nop.rs                       |  51 ++++++++++
- tests/tracetool/simple.rs                    |   6 +-
- tests/tracetool/syslog.rs                    |  10 +-
- tests/tracetool/tracetool-test.py            |  12 ++-
- 65 files changed, 747 insertions(+), 454 deletions(-)
- create mode 100644 tests/tracetool/all.h
- create mode 100644 tests/tracetool/nop.h
- create mode 100644 tests/tracetool/all.c
- create mode 100644 tests/tracetool/nop.c
- create mode 100644 tests/tracetool/all.d
- create mode 100644 tests/tracetool/all.log-stap
- create mode 100644 tests/tracetool/all.rs
- create mode 100644 tests/tracetool/all.simpletrace-stap
- create mode 100644 tests/tracetool/all.stap
- create mode 100644 tests/tracetool/all.ust-events-c
- create mode 100644 tests/tracetool/all.ust-events-h
- create mode 100644 tests/tracetool/nop.rs
-
+diff --git a/trace/control.h b/trace/control.h
+index 6754bfe052b..20033fb6669 100644
+--- a/trace/control.h
++++ b/trace/control.h
+@@ -139,8 +139,6 @@ static bool trace_event_get_state_static(TraceEvent *ev);
+  * trace_event_get_state_dynamic:
+  *
+  * Get the dynamic tracing state of an event.
+- *
+- * If the event has the 'vcpu' property, gets the OR'ed state of all vCPUs.
+  */
+ static bool trace_event_get_state_dynamic(TraceEvent *ev);
+ 
+@@ -149,8 +147,6 @@ static bool trace_event_get_state_dynamic(TraceEvent *ev);
+  *
+  * Set the dynamic tracing state of an event.
+  *
+- * If the event has the 'vcpu' property, sets the state on all vCPUs.
+- *
+  * Pre-condition: trace_event_get_state_static(ev) == true
+  */
+ void trace_event_set_state_dynamic(TraceEvent *ev, bool state);
+@@ -203,14 +199,6 @@ extern QemuOptsList qemu_trace_opts;
+  */
+ void trace_opt_parse(const char *optstr);
+ 
+-/**
+- * trace_get_vcpu_event_count:
+- *
+- * Return the number of known vcpu-specific events
+- */
+-uint32_t trace_get_vcpu_event_count(void);
+-
+-
+ #include "control-internal.h"
+ 
+ #endif /* TRACE__CONTROL_H */
+diff --git a/trace/event-internal.h b/trace/event-internal.h
+index 1d57b0ff1b5..cc095a6ad54 100644
+--- a/trace/event-internal.h
++++ b/trace/event-internal.h
+@@ -10,12 +10,6 @@
+ #ifndef TRACE__EVENT_INTERNAL_H
+ #define TRACE__EVENT_INTERNAL_H
+ 
+-/*
+- * Special value for TraceEvent.vcpu_id field to indicate
+- * that the event is not VCPU specific
+- */
+-#define TRACE_VCPU_EVENT_NONE ((uint32_t)-1)
+-
+ /**
+  * TraceEvent:
+  * @id: Unique event identifier.
+@@ -23,11 +17,6 @@
+  * @sstate: Static tracing state.
+  * @dstate: Dynamic tracing state
+  *
+- * Interpretation of @dstate depends on whether the event has the 'vcpu'
+- *  property:
+- * - false: Boolean value indicating whether the event is active.
+- * - true : Integral counting the number of vCPUs that have this event enabled.
+- *
+  * Opaque generic description of a tracing event.
+  */
+ typedef struct TraceEvent {
+diff --git a/trace/control-target.c b/trace/control-target.c
+index 24d9b7abbde..87b0f5037df 100644
+--- a/trace/control-target.c
++++ b/trace/control-target.c
+@@ -14,12 +14,6 @@ void trace_event_set_state_dynamic(TraceEvent *ev, bool state)
+ {
+     assert(trace_event_get_state_static(ev));
+ 
+-    /*
+-     * There is no longer a "vcpu" property, dstate can only be 1 or
+-     * 0. With it, we haven't instantiated any vCPU yet, so we will
+-     * set a global state instead, and trace_init_vcpu will reconcile
+-     * it afterwards.
+-     */
+     bool state_pre = *ev->dstate;
+     if (state_pre != state) {
+         if (state) {
+diff --git a/trace/control.c b/trace/control.c
+index 49f0a4c5cda..6971157cbe7 100644
+--- a/trace/control.c
++++ b/trace/control.c
+@@ -37,7 +37,6 @@ typedef struct TraceEventGroup {
+ static TraceEventGroup *event_groups;
+ static size_t nevent_groups;
+ static uint32_t next_id;
+-static uint32_t next_vcpu_id;
+ #ifdef CONFIG_TRACE_SIMPLE
+ static bool init_trace_on_startup;
+ #endif
+@@ -304,8 +303,3 @@ void trace_opt_parse(const char *optstr)
+     trace_opts_file = g_strdup(qemu_opt_get(opts, "file"));
+     qemu_opts_del(opts);
+ }
+-
+-uint32_t trace_get_vcpu_event_count(void)
+-{
+-    return next_vcpu_id;
+-}
 -- 
 2.56.0
 
