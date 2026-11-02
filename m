@@ -2,48 +2,47 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 94C97606C3CC
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 14:43:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=epam.com header.i=@epam.com header.a=rsa-sha256 header.s=selector1 header.b=eA7N3VLe
-Received: from list by lists.xenproject.org with outflank-mailman.1468413.1677520 (Exim 4.92)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C5DB1609621C
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 14:56:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1468425.1677529 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNtFv-0005XF-Qn; Mon, 02 Nov 2026 14:43:27 +0000
+	id 1xNtS8-0007yH-O6; Mon, 02 Nov 2026 14:56:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1468413.1677520; Mon, 02 Nov 2026 14:43:27 +0000
+Received: by outflank-mailman (output) from mailman id 1468425.1677529; Mon, 02 Nov 2026 14:56:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNtFv-0005X8-Nf; Mon, 02 Nov 2026 14:43:27 +0000
-Received: by outflank-mailman (input) for mailman id 1468413;
- Mon, 02 Nov 2026 14:43:27 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xNtS8-0007yA-Kj; Mon, 02 Nov 2026 14:56:04 +0000
+Received: by outflank-mailman (input) for mailman id 1468425;
+ Mon, 02 Nov 2026 14:56:03 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <dmytro_prokopchuk1@epam.com>) id 1xNtFu-0005Wz-Vc
- for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 14:43:27 +0000
+ (envelope-from <balaton@eik.bme.hu>) id 1xNtS7-0007y4-8u
+ for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 14:56:03 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xNtFu-00BBfd-Ag
- for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 15:43:26 +0100
-Received: from [10.42.69.11] (helo=localhost)
+ id 1xNtS6-0087Zy-Lt
+ for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 15:56:02 +0100
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <dmytro_prokopchuk1@epam.com>)
- id 6ae8a188-e002-0a2a0a5209dd-0a2a450bd6fe-24
- for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 15:43:26 +0100
-Received: from [52.101.69.127]
- (helo=AM0PR83CU005.outbound.protection.outlook.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <dmytro_prokopchuk1@epam.com>)
- id 6ae8a18e-b7e8-0a2a450b0019-3465457ff58f-3
- for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 15:43:26 +0100
-Received: from AM9PR03MB7526.eurprd03.prod.outlook.com (2603:10a6:20b:3de::17)
- by BR0PR03MB228406.eurprd03.prod.outlook.com (2603:10a6:2c8:66::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.569.12; Mon, 2 Nov
- 2026 14:43:24 +0000
-Received: from AM9PR03MB7526.eurprd03.prod.outlook.com
- ([fe80::904d:5820:80e1:41ba]) by AM9PR03MB7526.eurprd03.prod.outlook.com
- ([fe80::904d:5820:80e1:41ba%3]) with mapi id 15.21.0569.011; Mon, 2 Nov 2026
- 14:43:24 +0000
+ (envelope-from <balaton@eik.bme.hu>)
+ id 6ae8a480-2eae-0a2a0a5409dd-0a2a450a838e-12
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 15:56:02 +0100
+Received: from [152.66.115.2] (helo=zero.eik.bme.hu)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <balaton@eik.bme.hu>)
+ id 6ae8a481-f2d2-0a2a450a0019-98427302a64e-3
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 15:56:02 +0100
+Received: from localhost (localhost [127.0.0.1])
+ by zero.eik.bme.hu (Postfix) with ESMTP id 3C50A60C532;
+ Mon, 02 Nov 2026 15:56:01 +0100 (CET)
+Received: from zero.eik.bme.hu ([127.0.0.1])
+ by localhost (zero.eik.bme.hu [127.0.0.1]) (amavis, port 10028) with ESMTP
+ id VTz4k38AQKv2; Mon,  2 Nov 2026 15:55:59 +0100 (CET)
+Received: by zero.eik.bme.hu (Postfix, from userid 432)
+ id F184D60C4E7; Mon, 02 Nov 2026 15:55:58 +0100 (CET)
+Received: from localhost (localhost [127.0.0.1])
+ by zero.eik.bme.hu (Postfix) with ESMTP id ED86A13991F;
+ Mon, 02 Nov 2026 15:55:58 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,167 +51,279 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=XHwaYwy9mkB21TEeyNa7FPz9oEqbYiKpZEdF3kSG9qVeMFCF2WsK8Tk9NOIkscV1H06nQiB+m9qZrqcIjuIewpLEAUF9U64HmR/XLJyCFMighezyAEKYExuqJcEmhiClhDqQFxgGxJiSGNvknLK3+KKX+aYaKKyZdYs3k1QoDNsMKrUUMMufWGNhWjIXVfurmeQRY76f7DkVJctMl5x1KysSmd5nxOoMGMzmTdC888fK2Ip0doa20q10wSnd1qZKZvX6RiTWtqCMgqnvqPaQFRP7MS8rHIYluPU0gpyTlUjhzX+RFwF8Q3ObeEjqNbA5Z08emkxUSFVF+O69gF4F/g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9ABfFHEX/1nXmaldgHj1APyoLHqmu/HToKqwkZSYceU=;
- b=K/06ZfHkf7DXEjPpCzVVtgkWqCTjn/jXiTQY/kmku2zknezeN3qalnDwvRFXRGXv4R3+Ezi0jVas6iO1nryZwg4Ch+55wAs+pcbdpPXX9Biqq4JfkhsB+FzqgUH8SWE26Tcotxohi0wFscPaWLjyLE3VzguPrKuSQNDMSIZRR2oC5FbhZBJN3qcMsB03gxyeJmLxL6CGESe9HxeBFnHEFLYnsLlRiZ8WOAJ5TFz/zUwO5d0BsJ/cKGTeOgyyeTyCmk2TRfEd+wm3Fvt6bEXMfUagqPVtLtlnWpqdg9ENYMvUzE0/A2hxJ+hsTDvVVTwGVdjkXDknR6NrCJwgbElYRg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9ABfFHEX/1nXmaldgHj1APyoLHqmu/HToKqwkZSYceU=;
- b=eA7N3VLevsjRqRzUtkShHcdALQM0yQlfmVq9/HJLtq9aIh2SQhKJVu1G7ntewDiy+22ystIOF6YGjgU48XkKCGnbu3HZ4vvqM+DvjsMlGNIM9V5j+nNSU9y2lKLTucZ2vJDi9QDT+/P3ONfMw56NvnUvgVUGLAQyU07jdk2oxegRCKAV4Yr1L4uXa1sIcd9HQx/FbH1Btl488E+o3zsMUdsFIRiH2CIETfIkn87hss3OFcgPmK5K2eRYTNz5l8iH855hStd0kxnbws/y2FRV1dmaliceZLn1Iu5ky55CkrObFzsph+eVTUHHwJXzqTB994CoCDsl0VAIyMHiWK8B2Q==
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-Message-ID: <fddeac51-52fc-4ab9-bb24-0b3b33faf07a@epam.com>
-Date: Mon, 2 Nov 2026 16:43:23 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] misra: deviate MISRA C Rule 10.1 for boolean operands of
- arithmetic
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>,
- Doug Goldstein <cardoe@cardoe.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <a536212d9cb18b5c23d06c1c06b9a8ae03941440.1792428626.git.dmytro_prokopchuk1@epam.com>
- <83187933-b4cd-46df-b428-368d6f71cfaa@suse.com>
- <dd2f093b-4151-4c42-ba7a-c7b1ce96e02d@epam.com>
- <929b051d-2735-4d33-9240-fdf13355c11c@suse.com>
-Content-Language: en-US
-From: Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>
-In-Reply-To: <929b051d-2735-4d33-9240-fdf13355c11c@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: WA1PEPF00005B97.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d8::62c) To AM9PR03MB7526.eurprd03.prod.outlook.com
- (2603:10a6:20b:3de::17)
+Authentication-Results: eu.smtp.expurgate.cloud; none
+X-Virus-Scanned: amavis at eik.bme.hu
+Date: Mon, 2 Nov 2026 15:55:58 +0100 (CET)
+From: BALATON Zoltan <balaton@eik.bme.hu>
+To: Yonggang Luo <luoyonggang@gmail.com>
+cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
+    qemu-devel@nongnu.org, Anthony PERARD <anthony@xenproject.org>, 
+    Felipe Balbi <balbi@kernel.org>, Aleksandar Rikalo <arikalo@gmail.com>, 
+    Philippe Mathieu-Daude <philmd@mailo.com>, 
+    Antony Pavlov <antonynpavlov@gmail.com>, 
+    Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
+    Stefano Stabellini <sstabellini@kernel.org>, 
+    Subbaraya Sundeep <sundeep.lkml@gmail.com>, 
+    =?ISO-8859-15?Q?Herv=E9_Poussineau?= <hpoussin@reactos.org>, 
+    Max Filippov <jcmvbkbc@gmail.com>, 
+    Niek Linnenbank <nieklinnenbank@gmail.com>, xen-devel@lists.xenproject.org, 
+    qemu-riscv@nongnu.org, Jean-Christophe Dubois <jcd@tribudubois.net>, 
+    qemu-ppc@nongnu.org, Alexandre Iooss <erdnaxe@crans.org>, 
+    Weiwei Li <liwei1518@gmail.com>, Zhao Liu <zhao1.liu@intel.com>, 
+    Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+    Strahinja Jankovic <strahinja.p.jankovic@gmail.com>, 
+    =?ISO-8859-15?Q?Philippe_Mathieu-Daud=E9?= <philmd@oss.qualcomm.com>, 
+    Thomas Huth <th.huth+qemu@posteo.eu>, 
+    =?ISO-8859-15?Q?Cl=E9ment_Chigot?= <chigot@adacore.com>, 
+    Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
+    Yoshinori Sato <yoshinori.sato@nifty.com>, 
+    Frederic Konrad <konrad.frederic@yahoo.fr>, 
+    Palmer Dabbelt <palmer@dabbelt.com>, 
+    Peter Maydell <peter.maydell@linaro.org>, 
+    Chao Liu <chao.liu@processmission.com>, 
+    Sai Pavan Boddu <sai.pavan.boddu@amd.com>, 
+    Alistair Francis <alistair@alistair23.me>, 
+    Huacai Chen <chenhuacai@kernel.org>, Aurelien Jarno <aurelien@aurel32.net>, 
+    Gaurav Sharma <gaurav.sharma_7@nxp.com>, 
+    "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
+    Richard Henderson <richard.henderson@linaro.org>, 
+    Alistair Francis <alistair.francis@wdc.com>, 
+    Artyom Tarasenko <atar4qemu@gmail.com>, qemu-arm@nongnu.org
+Subject: Re: [PATCH 00/15] hw: expand DEFINE_MACHINE to explicit TypeInfo
+ registration
+In-Reply-To: <CAE2XoE8pNaP3rAR5Y2BpUZ2vSu-UC-wG9V9U7gPXrEGY=kx0RA@mail.gmail.com>
+Message-ID: <e5ce0ea8-7e97-aa76-6384-025fc43cb85a@eik.bme.hu>
+References: <20261030151539.1872-1-luoyonggang@gmail.com> <d1db54c6-b802-676a-7779-0c2c63f5f807@eik.bme.hu> <aa70e94c-d9a8-41c9-850f-7ded87f7f327@oss.qualcomm.com> <ba106173-fca3-6019-3028-122831887921@eik.bme.hu> <CAE2XoE9cR_X0kkDfGTU4Mt_5Hc3WZ8K5rghw2AeL4Vh=eugGag@mail.gmail.com>
+ <bf45a858-db07-de03-70ea-ca0061d7a5d1@eik.bme.hu> <CAE2XoE9_b5UiE2+BXFRqB3RPv=M+8jr1HQy7rEFVEb6w1DdoGg@mail.gmail.com> <a479df5b-721d-c357-5c69-c3760a73e521@eik.bme.hu> <CAE2XoE-2w3A4=BeskGgp7NYUtkRVNkNufu4SZjW_OQ-KAQZvhg@mail.gmail.com>
+ <6efa9f73-75dd-efd0-3fd9-6b2654b69737@eik.bme.hu> <CAE2XoE8pNaP3rAR5Y2BpUZ2vSu-UC-wG9V9U7gPXrEGY=kx0RA@mail.gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM9PR03MB7526:EE_|BR0PR03MB228406:EE_
-X-MS-Office365-Filtering-Correlation-Id: cdec245f-2b13-4961-ff8a-08df38efa632
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|7416014|376014|1800799024|366016|23010399003|10067099003|18002099003|22082099003|56012099006|4143699003|11063799006|261022105027099003|261026140227099003|261026121527099003|261009221227099003|261009223027099003|261028144727099003;
-X-Microsoft-Antispam-Message-Info:
-	xoxzqFzU5723Zcb9QLXeu5YYCQskwNuZK6rTBLbZLLiBq4llQhysCxEsHC59v2qkjxXMdVm9PtEnxRBGqn4raRf72TMjrXL0u4gib1K20BCckJ3O0k26hDQujhT/IMk1Sjtr0oQ1ctWpquDMXdMom9Ybilgwnt4ritOGtA9Fg05w9c7rvDSQn0TSV28ltu4YwdYreVPbFLRKiyb7JDZK4iDjVPZxR49AlndUzfRX+GT8tinnpl9s5YeTNsi95na+I4HVIfZCp7aPq7mZIEe2ljddAwDenUEM1n/cd53t5fwhmVcSiyoIjvRhbkJcr8LAYyHWy9zYF+yoRiMKkkjgJPeATtaZKuqFfYshL/u1kyp9PxM1sPKgDrrXPdTtHH9pTZB8c9V35EQYpmFuhw51vE0DHowdwrtUgQcYTGcWlqMsR14e0/P9r6IW9j63YIem/1IFdZq+Mc2EAHikSwwMGk6o5dqoHtmLLQQBKHXh2DVeDtOe1IdAiwn4Li+3vWdnyKU1L/Ex6APrDws5EAKPZkIR1tPuuzQQACGdP0LRA/ya0ZeJFVmBiSqlJbg8VJbOIasflhhBJF3lOtCJzJukxHmgsqutrZfnYykTB0R5ynqmfiL8ywqOoLsVVJpEO3c4fsdzO3Dx8sgjZ8h6Aby9+kRwLuoWY5fgnNb+CHzDVuk=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM9PR03MB7526.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(1800799024)(366016)(23010399003)(10067099003)(18002099003)(22082099003)(56012099006)(4143699003)(11063799006)(261022105027099003)(261026140227099003)(261026121527099003)(261009221227099003)(261009223027099003)(261028144727099003);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?dUs3Y0gveUJiTFBlVWExdzJhWXJYanNRRmFqUENHR2NISHlQYVhMUXFjcll2?=
- =?utf-8?B?RzJScjhUbWtadTFHeWdNdlNscXdXalNoK1VpUWt2OEcwWXR1WlJoRTNzOW9S?=
- =?utf-8?B?djQySWgzckhTVStIKzVWeFRRNjVTcWpGWlhYbE5LdHI2cmRpTVpEU1FHR29C?=
- =?utf-8?B?YzNxTkZkZElEdmlvZyszR0padms1elRGSnlSSlJmN3lQb3RLRitYRG9EMXJS?=
- =?utf-8?B?NjExRWMyaFZjcW9sV0plOWNYNmxaSG0xTldmdXpLazB6bDBYR29RWlhZL0hw?=
- =?utf-8?B?dEovTklNWG5BU1IvS2lxMHdQUFV5T25GQ1dLUjcvZ3RWV0ZxZnpqNStUME4z?=
- =?utf-8?B?MlFwSlNyaEFVTzhNeWlGV3FxUzhJeE5TNkFoVW15YkxUSTgxVFdtT09heklE?=
- =?utf-8?B?VnMxb0N4cjFDRG9rQVJtM3ZLL2ZLYUdtVXlUcGRmSENHenlkQ1JXakpSZnFC?=
- =?utf-8?B?aWRJTlhqZFViSUlucXFKZEpOMUx5TTI4YVRPU0paelVUSDNjU09RVHdmRG1J?=
- =?utf-8?B?bnVqWG55OExTQm5ZaGNLTUN6RU1rc2grRWc4c3IxTmFnNFhYZWN3VDNtR2Vt?=
- =?utf-8?B?bWhoc0ZzeEUwZk5VMSt5WnpOZzZsVnFXY290Y0lnRlIwUXJwNE5Xa01Tckxl?=
- =?utf-8?B?TWkyT0s2U3F1TVdSZEJ4YkhXWE1RNTl1QXZ2Vm4vV0JjdlE4RHpJT1FBQTFm?=
- =?utf-8?B?WDUxZ2J1YW9lUVRqaWh1bmRTbGlZQzl1cVJpZ3hFeUYwZEJlTFhvY3U3aTZj?=
- =?utf-8?B?NzBjYVJDWDdwcW9MN2ZuK0daRGQ5SmlmYThxTGg0eDJzQlU3VXJ4YXp5dnlt?=
- =?utf-8?B?MUJrOVhrbG5uMC9jWHJjSmJNRGd4QVFOaGVKMUxSZ3ZsOGFjM3lEVVhicXVo?=
- =?utf-8?B?Snh5cDNicG05S1pSYU11NDNsek9xbXQ3NWRiOHI1YXU5L3JHSUh2bHdHRmN5?=
- =?utf-8?B?VlVwY1NYbElxRWdJdWNxU0R1RWpHQkkxd1YySkNLNWppeGNCTWRFckJJRkxz?=
- =?utf-8?B?MmxRT0hCTFVqbTJLZDZFV2lpT3l3bElHZk9zaXpXWEIrNDNvRWxRcnJNWDhR?=
- =?utf-8?B?OVltUmdlalpyWjFvSUd4Z0R2a0hnL0VINVRLakgzbTRuNFVjNWhISmk4Rzkr?=
- =?utf-8?B?VXpOQm9LRC9iUVEwWjlFazJkTGx3ai9iTmJjU3dzeUxQTjBHWXhKVmRndVNx?=
- =?utf-8?B?WkJYVGNHOEQ5aXlrV1JOUGxkdUdtZHMzRm14cmZCMzlRVWNwZGhJbTIwUFo4?=
- =?utf-8?B?azJwd2lvSGVlQndRU1V5enZ3VGRqUmdNT3paWFgrR3lCOXlZWmY1ME1VOWkw?=
- =?utf-8?B?VjE3N3dFbTdvVzkwTFZoVDVkYk9neE45TzhYTmZPc2dHRDdBT045YW44bU9W?=
- =?utf-8?B?RlgrcU9nTG5kWGNRM3JNWktML2hSdTFQdklqWWhubjNsSnBnZExRRU5HblpG?=
- =?utf-8?B?WVpTQm9LSkNJaWhQVTdhN2txaXJGcU8rUDg1bG1pVEt0S0N0TFVuWWt4Rm1S?=
- =?utf-8?B?M1BQby9VODloOUxmRWJNNHVEUGVSMTdIZHpoeTBrUnFIalVtYnU4WXBJenhk?=
- =?utf-8?B?RnVvTTFSZGpKNEJ2bVVDV3pNV1I5ZU9JcXd2dXJRR3JRVHB5TTI2MFhZVVVI?=
- =?utf-8?B?SXZpNEZVeExpaDVTTkEvU2xYWUJDajF4MjUzS3dtN3ZtV2V4TlM4MzNRc21W?=
- =?utf-8?B?UFpaam4zeGlzQ2p5N0ttd3hrcHlVd3VRSzJ2b1ZzMEg3MVRlL2ZCblFIV3M0?=
- =?utf-8?B?TE1YVG9UdVNnMW51QUVsNGJQNmlEdnFOdnQvT2VkbnRtRkdMRUNiMUF0NitK?=
- =?utf-8?B?L1NiSUIrUWtqUWVvV0ZUZDdwT3hpck5kVFpXSFp1dnN4eVpwVmpYTHF4SGY1?=
- =?utf-8?B?aHJrdkZqdFJYMEtwTFBxR1RtY0hpREdkejBDMnZIR1U3R2hvWndKZ1FMbW9S?=
- =?utf-8?B?KzVEM0N4czhMMmdoWlJNSjdENUFnMkdCMHpZUjNLSS9ybmw4bzBMS3ZxVEtO?=
- =?utf-8?B?WTdwYUxYUWZMLy9iTFZmanpBVDBnOUNsNFA0UXVyY2M2amJxa25tcVNlQit5?=
- =?utf-8?B?Vlh0QUlMaXVuY3BYOVJrajNkWDFyZ2F3eUN3MnYzMlVwT3VobFhoWVVQTktI?=
- =?utf-8?B?MjBNa2VuMmtpS3pvVkhwZkNXS1k3MlJJbUJNQ1BpV1l4eC9FMWZDN0podngy?=
- =?utf-8?B?VkZ1Q24xNVNaMnljNXRrblRjU3lMcTgwQmVVL0ZFWHFFTXdZRmIxdHp6UGxm?=
- =?utf-8?B?a3JnTi96dHNaZW9POG1mOXRTU3YrMjByRnBtazMyNXkrSzdhL09uSGVpTWRL?=
- =?utf-8?B?ZFlFa0NWVnpBTXd4WTFTRituV08vOWV6aFlHWmZEK0dINm01MmE1SDZ2NGh0?=
- =?utf-8?Q?GClMogTAX/TIxBKw=3D?=
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: cdec245f-2b13-4961-ff8a-08df38efa632
-X-MS-Exchange-CrossTenant-AuthSource: AM9PR03MB7526.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Nov 2026 14:43:24.8290
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: OD+tzmMjSFzwI0iP4A2uBXV2MbdIqiC8eK50o2nUHb9XEim2oxGyL30gHxDfXnka2QA3Lv6grfJFLr0Y47RNmwhoqTsZdrZpCeDk+/28/7A=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BR0PR03MB228406
-X-purgate-ID: tlsNG-42698a/1793630606-AA8D99EA-92E1F6C0/0/0
+Content-Type: multipart/mixed; boundary="3866299591-608982516-1793631358=:93499"
+X-purgate-ID: tlsNG-4011c0/1793631362-520C1CFC-16F135F0/0/0
 X-purgate-type: clean
-X-purgate-size: 2145
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+X-purgate-size: 9576
+X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY autolearn=no autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
 
+--3866299591-608982516-1793631358=:93499
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8BIT
 
-On 11/2/26 12:52, Jan Beulich wrote:
-> On 02.11.2026 11:20, Dmytro Prokopchuk wrote:
->> On 10/26/26 13:13, Jan Beulich wrote:
->>> On 19.10.2026 18:54, Dmytro Prokopchuk1 wrote:
->>>> --- a/automation/eclair_analysis/ECLAIR/deviations.ecl
->>>> +++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
->>>> @@ -335,6 +335,11 @@ still non-negative."
->>>>    -config=MC3A2.R10.1,etypes+={safe, "stmt(operator(logical)||node(conditional_operator||binary_conditional_operator))", "dst_type(ebool||boolean)"}
->>>>    -doc_end
->>>>    
->>>> +-doc_begin="The result of relational, equality and logical negation operators has type int and value 0 or 1 (C99 6.5.8p6, 6.5.9p3, 6.5.3.3p5),
->>>> +so using it as an operand of an arithmetic operator is well defined and well known to all Xen developers."
->>>> +-config=MC3A2.R10.1,etypes+={safe, "stmt(operator(add||sub||mul||add_assign||sub_assign))", "src_type(ebool||boolean)"}
->>>> +-doc_end
->>>
->>> Why the restriction to add/sub/mul? The text ...
+On Mon, 2 Nov 2026, Yonggang Luo wrote:
+> On Mon, Nov 2, 2026 at 4:57 AM BALATON Zoltan <balaton@eik.bme.hu> wrote:
 >>
->> Because this is the pattern found in the Eclair's report, and it can be
->> deviated safely (as opposed to unary minus, division and remainder which
->> are not included intentionally).
-> 
-> Division and remainder aren't very useful with boolean operands, so can
-> surely be left out. However, more generally: How does "Eclair's report"
-> matter here? In deviation wording we want to go from what the Misra spec
-> says. The spec covers all operators. Hence any special casing we do
-> wants to be justified. And, right now at least, I see no justification
-> for restricting the deviation to just add/sub/mul.
+>> On Sun, 1 Nov 2026, Yonggang Luo wrote:
+>>> On Sun, Nov 1, 2026 at 7:29 AM BALATON Zoltan <balaton@eik.bme.hu> wrote:
+>>>>
+>>>> On Sun, 1 Nov 2026, Yonggang Luo wrote:
+>>>>> On Sun, Nov 1, 2026 at 1:06 AM BALATON Zoltan <balaton@eik.bme.hu> wrote:
+>>>>>>
+>>>>>> On Sat, 31 Oct 2026, Yonggang Luo wrote:
+>>>>>>> On Sat, Oct 31, 2026 at 8:42 PM BALATON Zoltan <balaton@eik.bme.hu> wrote:
+>>>>>>>>
+>>>>>>>> On Fri, 30 Oct 2026, Pierrick Bouvier wrote:
+>>>>>>>>> On 10/30/2026 4:09 PM, BALATON Zoltan wrote:
+>>>>>>>>>> On Fri, 30 Oct 2026, Yonggang Luo wrote:
+>>>>>>>>>>> DEFINE_MACHINE and DEFINE_MACHINE_EXTENDED hide the TypeInfo and the
+>>>>>>>>>>> type_init
+>>>>>>>>>>> function that calls type_register_static(). A later change needs to
+>>>>>>>>>>> pass a
+>>>>>>>>>>
+>>>>>>>>>> That's the point of the macro to hide the boiler plate code.
+>>>>>>>>>>
+>>>>>>>>>>> target mask into that registration, and the macros have no parameter
+>>>>>>>>>>> for it.
+>>>>>>>>>>
+>>>>>>>>>> Couldn't you just change the macros to take that parameter instead of
+>>>>>>>>>> expanding it everywhere?
+>>>>>>>>>>
+>>>>>>>>>
+>>>>>>>>> Problem of macros is that they don't have default parameters, so you
+>>>>>>>>> need variants for everything:
+>>>>>>>>>
+>>>>>>>>> DEFINE_MACHINE
+>>>>>>>>> DEFINE_MACHINE_EXTENDED
+>>>>>>>>> DEFINE_MACHINE_WITH_INTERFACES
+>>>>>>>>> DEFINE_MACHINE_WITH_INTERFACE_ARRAY
+>>>>>>>>> and now would need a new variant, with variant for other existing ones.
+>>>>>>>>>
+>>>>>>>>> In the end, it's just simpler to remove this and add the boilerplate.
+>>>>>>>>> It's written once and never modified, so using a macro just save typing
+>>>>>>>>> those lines once.
+>>>>>>>>>
+>>>>>>>>>> Regards,
+>>>>>>>>>> BALATON Zoltan
+>>>>>>>>>>
+>>>>>>>>>>> This series expands every caller first, with no behavior change, so the
+>>>>>>>>>>> follow-up only replaces the type_register_static() call.
+>>>>>>>>>>>
+>>>>>>>>>>> Each machine file gains a class_init function, a TypeInfo, and a
+>>>>>>>>>>> type_init
+>>>>>>>>>>> function that calls type_register_static(). The last patch removes
+>>>>>>>>>>> DEFINE_MACHINE* and DEFINE_SECURE_MACHINE* from include/hw/core/boards.h.
+>>>>>>>>
+>>>>>>>> Macros help reading the code not saving typing. If the actual
+>>>>>>>> functionality is buried in a lot of boiler plate it's harder to understand
+>>>>>>>> and spot bugs so putting the unintresting boiler plate behind a macro is
+>>>>>>>> better even if you need a separate version for different cases. Then the
+>>>>>>>> code that uses the macro will be much more obvious and not just a lot of
+>>>>>>>
+>>>>>>> I think mainly because DEFINE_MACHINE* and DEFINE_SECURE_MACHINE* are
+>>>>>>> not defined properly
+>>>>>>> that causes them to not be extended easily.
+>>>>>>>
+>>>>>>> DEFINE_TYPES is another example, use them can extend easily, how about
+>>>>>>> always use DEFINE_TYPES?
+>>>>>>> Or add a DEFINE_TYPE to replace DEFINE_MACHINE* and DEFINE_SECURE_MACHINE*?
+>>>>>>
+>>>>>> Maybe I'm missing the problem but DEFINE_MACHINE macros are just
+>>>>>> convenience wrappers around DEFINE_MACHINE_EXTENDED. So why can't you add
+>>>>>> the needed parameter to DEFINE_MACHINE_EXTENDED and use that for machines
+>>>>>> that need it, or if it's needed by all machines then make the new
+>>>>>> parameter required and add it to all convenience wrappers too so you can
+>>>>>> keep using DEFINE_MACHINE* and just need to add one parameter to it in
+>>>>>> machines?
+>>>>>
+>>>>> That's the issue, add parameter to DEFINE_MACHINE_EXTENDED means all
+>>>>> calls to it also need
+>>>>> to be changed, that means touch many $target_arch files. currently
+>>>>> it's 13. But after these
+>>>>
+>>>> That's not different from expanding the macro which would touch the same
+>>>> files.
+>>>>
+>>>>> changes, there will be much more usage on it, and if we want to add
+>>>>> more parameters or attributes
+>>>>> to it, it will be a new tree-wide change.
+>>>>
+>>>> Do you expect to need more parameters? Can't you add them at once then?
+>>>>
+>>>>> And DEFINE_TYPES do not suffer from such issues. As the TypeInfo[] is
+>>>>> explicit defined for
+>>>>> DEFINE_TYPES
+>>>>
+>>>> My point is that keeping the boiler plate as little as possible makes the
+>>>> code more readable. DEFINE_TYPES hides some of the boiler plate,
+>>>> DEFINE_MACHINE hides even more so converting to DEFINE_TYPES would expose
+>>>> some even if it's better than no macro at all.
+>>>>
+>>>> What exactly are the parameters missing from DEFINE_MACHINE_EXTENDED that
+>>>> need to be added?
+>>>
+>>> Hi BALATON
+>>> the things we faced is we first is to add TypeInfo::is_available parameter to
+>>> DEFINE_MACHINE_EXTENDED, and have more usage of it.
+>>> Then we will add targets:uint64_t parameter to DEFINE_MACHINE_EXTENDED, this is
+>>> a prepare to remove TypeInfo::is_available parameter from
+>>> DEFINE_MACHINE_EXTENDED,
+>>>
+>>> And finally, once all usage of TypeInfo::is_available can be replaced with
+>>> targets:uint64_t, then we finally need to remove
+>>> TypeInfo::is_available parameter from DEFINE_MACHINE_EXTENDED,
+>>
+>> Is there a way to avoid the temporary is_available churn and introduce the
+>> targets:uint64_t right away? (I'm not following this so I don't really
+>> know what you're talking about just looks like there's some churn here
+>> which might be good to awoid anyway independent of these macros.)
+>>
+>>> That's what I am facing now. And the explicit
+>>> static const TypeInfo xxx_machine_typeinfo = {
+>>>    .name       = MACHINE_TYPE_NAME("xxx"),
+>>>    .parent     = TYPE_MACHINE,
+>>>    .class_init = xxx_machine_class_init,
+>>> };
+>>>
+>>> Will help me avoid the issue. And I think this is a little boilerplate
+>>> and very explicit.
+>>
+>> That's not all DEFINE_MACHINE hides though. It's longer with .abstract,
+>> .secure and .iterfaces plus the machine initfn that would also need to be
+>> expanded if you used DEFINE_TYPES.
+>>
+>> Is this conversion needed for all machines using all DEFINE_MACHINE
+>
+> At the end, only "none" machine do not have targets parameter or
+> (QEMU_ARCH_ALL), as that's the sole
+> machine that supports all targets.
+>
+>> variants or only some of them? If the latter why not convert those to
+>
+>
+>
+>
+>> DEFINE_MACHINE_EXTENDED and then only that macro needs to be changed with
+>> other wrappers passing a default value without needing a new parameter.
+>> That does not work if all machines need to do this but even then, keeping
+>> the macro and adding a new required parameter is better in my opinion as
+>> it keeps boiler plate hidden.
+>
+> Another option is keep DEFINE_MACHINE and introduce DEFINE_MACHINE_TARGETS
+> and remove DEFINE_MACHINE_EXTENDED, and we only use DEFINE_MACHINE for
+> simple case,
+> that is parent is TYPE_MACHINE and have no custom type and no more
+> attributes assigned.
+> DEFINE_MACHINE_EXTENDED is too verbose, when calling it, it less clear
+> than calling to DEFINE_MACHINE.
+> And if we want to set more attributes to TypeInfo, just expand it to
+> use type_init or DEFINE_TYPES, how about this way.
+>
+> This will be something like:
+>
+> #define DEFINE_MACHINE_TARGETS(namestr, machine_initfn, targets) \
+>    static void machine_initfn##_class_init(ObjectClass *oc, const void *data) \
+>    { \
+>        MachineClass *mc = MACHINE_CLASS(oc); \
+>        machine_initfn(mc); \
+>    } \
+>    static const TypeInfo machine_initfn##_typeinfo = { \
+>        .name       = MACHINE_TYPE_NAME(namestr), \
+>        .parent     = TYPE_MACHINE, \
+>        .class_init = machine_initfn##_class_init, \
+>    }; \
+>    static void machine_initfn##_register_types(void) \
+>    { \
+>        type_register_targets(&machine_initfn##_typeinfo, targets); \
+>    } \
+>    type_init(machine_initfn##_register_types)
+>
+> /* Implicitly insecure */
+> #define DEFINE_MACHINE(namestr, machine_initfn) \
+>    DEFINE_MACHINE_TARGETS(namestr, machine_initfn, QEMU_ARCH_ALL) \
+>
+> As the many call is to DEFINE_MACHINE.
+>
+> And after all conversion, all existing usage of DEFINE_MACHINE will be
+> converted to
+> DEFINE_MACHINE_TARGETS.
+> DEFINE_MACHINE will be called for ('none') machine or future heterogeneous
+> machines
+>
+>
+> Either way, these patches will be dropped. We will introduce
+> DEFINE_MACHINE_TARGETS first.
 
-Agreed, the report shouldn't be the argument.
-The deviation should cover only the established idioms with a clear 
-meaning, and leave the rule's protection in place elsewhere. With a 
-Boolean operand these idioms are:
-- + and - (and += / -=): "count it if the condition holds",
-- * (and *=): "this value if the condition holds, else 0".
+I think I'm lost and cannot follow what you want. As far as I understood 
+you want to add a new field "target" to machine TypeInfo but instead of 
+adding that straight away you proposed to first add is_available then 
+later replace that with target. I asked why do you need is_available and 
+not add target right away?
 
-Other operators have no such idiom (at least, I'm not aware of them).
+Then if this target parameter will be needed for all machines why can't 
+you add that to all DEFINE_MACHINE macros as a required parameter and set 
+it for all machines passing it through to DEFINE_MACHINE_EXTENDED which 
+sets in the TypeInfo. That way no machines need changing other than adding 
+the target parameter to the existing DEFINE_MACHINE calls.
 
-I can put this reasoning into the deviation text in v2. Would that be
-acceptable?
-> 
-> Jan
+What am I missing?
 
+Regards,
+BALATON Zoltan
+--3866299591-608982516-1793631358=:93499--
 
