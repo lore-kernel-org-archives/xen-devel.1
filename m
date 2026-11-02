@@ -2,48 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A9A17606A324
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 02:03:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D0B22606A324
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 02:03:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=epam.com header.i=@epam.com header.a=rsa-sha256 header.s=selector1 header.b=NQLJt7ja
-Received: from list by lists.xenproject.org with outflank-mailman.1467585.1676673 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=epam.com header.i=@epam.com header.a=rsa-sha256 header.s=selector1 header.b=hLRfr3Ks
+Received: from list by lists.xenproject.org with outflank-mailman.1467590.1676683 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNhNm-0005ZX-4V; Mon, 02 Nov 2026 02:02:46 +0000
+	id 1xNhOB-00061d-HM; Mon, 02 Nov 2026 02:03:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1467585.1676673; Mon, 02 Nov 2026 02:02:46 +0000
+Received: by outflank-mailman (output) from mailman id 1467590.1676683; Mon, 02 Nov 2026 02:03:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNhNm-0005ZM-1X; Mon, 02 Nov 2026 02:02:46 +0000
-Received: by outflank-mailman (input) for mailman id 1467585;
- Mon, 02 Nov 2026 02:02:45 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xNhOB-00061T-EQ; Mon, 02 Nov 2026 02:03:11 +0000
+Received: by outflank-mailman (input) for mailman id 1467590;
+ Mon, 02 Nov 2026 02:03:10 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <milan_djokic@epam.com>) id 1xNhNk-0005Yw-Pw
- for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 02:02:45 +0000
+ (envelope-from <milan_djokic@epam.com>) id 1xNhO9-00060u-UA
+ for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 02:03:10 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xNhNk-005zkv-6g
- for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 03:02:44 +0100
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xNhO9-001ZAQ-Aw
+ for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 03:03:09 +0100
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <milan_djokic@epam.com>)
- id 6ae7ef11-8faa-0a2a0a5109dd-0a2a450488c0-40
- for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 03:02:44 +0100
-Received: from [40.107.130.102]
- (helo=MRWPR03CU001.outbound.protection.outlook.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ae7ef52-bab6-0a2a0a5309dd-0a2a450cb3ba-8
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 03:03:09 +0100
+Received: from [52.101.84.120]
+ (helo=DB3PR0202CU003.outbound.protection.outlook.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <milan_djokic@epam.com>)
- id 6ae7ef43-b57f-0a2a45040019-286b8266eb26-3
- for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 03:02:44 +0100
+ id 6ae7ef5c-f479-0a2a450c0019-34655478c6bd-3
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 03:03:09 +0100
 Received: from AS2PR03MB9587.eurprd03.prod.outlook.com (2603:10a6:20b:595::7)
  by AS8PR03MB9024.eurprd03.prod.outlook.com (2603:10a6:20b:5b6::11)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.569.12; Mon, 2 Nov
- 2026 02:02:41 +0000
+ 2026 02:03:06 +0000
 Received: from AS2PR03MB9587.eurprd03.prod.outlook.com
  ([fe80::daa7:3b97:acb3:67d5]) by AS2PR03MB9587.eurprd03.prod.outlook.com
  ([fe80::daa7:3b97:acb3:67d5%5]) with mapi id 15.21.0569.011; Mon, 2 Nov 2026
- 02:02:41 +0000
+ 02:03:06 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -54,112 +54,112 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=NjsJQP6GAQInaGyEZ6QATrWfOoWCACBSnd33XMqX0TZIo0AAqXLU38ID74MaLKM+6u8/IeN9lUAITft4Db0xaJLRTVRG5lPX5RQNplv0skWBKps9qPQ8ruL7iq4U1u7bYM+AQv3Ph87gcW0u2nmPRVXLcRU14tBO8yGK9eIh2mKOG+b/dug4Y7e6byO2dq4Fp8G6wI7a4vfw1IW27j062kpsQxLz98e6N0DU4Mq0eDIuU84IlHW/tltuX1Dd3ode2FIyFQARR4SyG6hGnWHUbemnoT6WSEjI8AiqlI9siWLnDUWMO7roScyY290fpEY3ageLQCqxmv83Q1V2ep/O0w==
+ b=fm1jjxNXUdGMafCKuqaZ+ngWj74zvfI0fozIwxpU+RRuHYoQB3nhrEj06g8DfXhYRBiGeiaDGQwipdyrLxoXkbsFKE9afcSkTl+L6gvu3hCbvyMaN2Rq92S1dyD6CD9GetwQaascx7IlnPz6Yj6fTCm1eXVurp62FM6bDPYdrIllX6Zwe8Yf2g+zpV1ZbqLv7Fv0T318+3sRIcN0ZkdN1G/MoOOSG5s1crp3y0m8umXri1m9oaPpfFJlMY/ppGJWh5bHMr9MOzWl0QueqJKnwkuO17K+BHqOwnr2mc40mMNN1TZyBBuwR+UAkewq8kI2W3xzckR6V+2G8EoNmHE6PA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vW2T2i9DI7IifQb7KRtDESGtNI+0IKDgqu0UG5a0KzU=;
- b=UnBxukIjaaRgbEMb1sMiTCeLFJcerdr/X4O0Dfprc6xA+HfqNWhLqjJkJWYO8Wp7KN6TQkeL4WtjvqXIrxpWD61BeP7bixc//5ipsztyKgLdRuWrYnOQaCZNz1tISYo8Kz2KHoAYSRQYGVhmlk1okBO6LUIpmyS6dJo9cwdTlRnISrq1Wam2Nam8L8lgFP1Qs6ZR1QzaiW7CnjLWMyap9WrvquXylg1m6E4JHK0ZrirAxu+10ZiD9M50Swks56/wTQjFUAOPJ8rIRwZhVql103li4KhREhH2spqn5Z5SbVynGx2EHJ88DNbU/K3QadkC1YxTBvA0QeVhi6A8Ne0GJA==
+ bh=c4D0qdgOmXU166wJ9d4zkpWSWIfuPJ3WK0j5lxAWrNA=;
+ b=lt3reE86zi3koJIzX8fnVzj/u3WouehNxJ5xqHsP3/8Z2EriWauZtv2knx98oI3UwIgHxuqPvuXBRCotYDQFnvvrmQQwPkrTuVMzdBHBNnnZpD6Ny4q2JSFXFwIt5nx/UpyFXdjQEH28a1NoQdwr4nQEO2x9IBf0K5UzoskgMafNippkkz+VM5ZchpiwsQ0N+6J+7ExelpbpQS6GGu5WAfgMybwqBMRoG3SfMhHM7jAo7v4AjnmRzw7ZeO3xQ8MouPrWVgdsvlEEVyX7p1AH+y7+e/ur+YC4Smw8eqmQdvCSJv9DlVBBiuGq1UFUT+3cL2pYLJJ9WjKBbzLve+mBiA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vW2T2i9DI7IifQb7KRtDESGtNI+0IKDgqu0UG5a0KzU=;
- b=NQLJt7jaVk4roytp8awsiDA6lW531Xoh/8t2PGnY2319rs+wjC9+TXCthd8ltbjkWjPDwy1YeS77lded2R5JTh0vYeORdDYjieTpECNUQd0grIXm2jjLET/Z/ZDMTBP7nfJByeztEw3ADx/A6dGCsi1OcfMt6XsThYWnjYG/1YW2hEpR28bmhy28sg40SBPqgNJqLSZxfwhb+v71veG4+5z/JzdZpK/RE2s0xfiFm6YzUaMMw+Sj1WFLzh+xXEcuwd4wr9uJSzLXIxUUBwblSICin8A83kJ/C8KbojWykWVbWtBn6PH7RMB6olMh4PwqhPB6jc8iHHrjOkIl4RiomA==
+ bh=c4D0qdgOmXU166wJ9d4zkpWSWIfuPJ3WK0j5lxAWrNA=;
+ b=hLRfr3KspZQRDPUoSCguxBOgpYGUDPeBIUulTADV+QgS6Fu2MivT9JhLHEoEG6ElruUlaR/+tbJ8OBq11shp2VqO6yeKvKCW6mL87kB557/UPBk5PKEX58AXm/iTad3kQcIkv4X+G+kVno3b5fPxv0BKfA74zECJ7X+qWNbu0RZ5lygqtLCDaz93cXpfHpOMDi7u1WwvfMu0FXRtVYBPyIv/j/sam9RC9uwKBkTAA862ebWj851BvNqGChR9YP6sQ7HA/lPcz0VbmPqeVj4uIhug/nTvTyu+jrgS/yT2jLMlW5TJ53Ne8b1SMbgyiwl2n8KXy6qh2eoI+8PWr54Z8A==
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
-Message-ID: <08c8c0ae-96e7-477b-b491-c2c138f96d7b@epam.com>
-Date: Mon, 2 Nov 2026 03:02:40 +0100
+Message-ID: <d19d743c-d85a-49cf-b8a5-1f2829d2c13c@epam.com>
+Date: Mon, 2 Nov 2026 03:03:05 +0100
 User-Agent: Mozilla Thunderbird
 From: Milan Djokic <milan_djokic@epam.com>
-Subject: Re: [PATCH v4 17/22] xen/arm: vsmmuv3: Add support to send stage-1
- event to guest
+Subject: Re: [PATCH v4 12/22] xen/arm: vsmmuv3: Add support for event queue
+ and global error
 To: Oleksandr Tyshchenko <olekstysh@gmail.com>,
  "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Rahul Singh <rahul.singh@arm.com>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
  Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
  Michal Orzel <michal.orzel@amd.com>,
  Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 References: <cover.1791328190.git.milan_djokic@epam.com>
- <94ab2741c9c61f2b66d9c5a207f913f4241c42a4.1791328190.git.milan_djokic@epam.com>
- <7b1f3938-2d07-4884-a377-ce7d9b66fdb9@gmail.com>
+ <1bf1f69e50fa7f6f90bfa6b2c7434c1ba3f65bbf.1791328190.git.milan_djokic@epam.com>
+ <ce585f3f-e2f3-46ec-ad5e-50e1f29523ba@gmail.com>
 Content-Language: en-US
-In-Reply-To: <7b1f3938-2d07-4884-a377-ce7d9b66fdb9@gmail.com>
+In-Reply-To: <ce585f3f-e2f3-46ec-ad5e-50e1f29523ba@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: AM8P190CA0009.EURP190.PROD.OUTLOOK.COM
- (2603:10a6:20b:219::14) To AS2PR03MB9587.eurprd03.prod.outlook.com
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: AM8P191CA0012.EURP191.PROD.OUTLOOK.COM
+ (2603:10a6:20b:21a::17) To AS2PR03MB9587.eurprd03.prod.outlook.com
  (2603:10a6:20b:595::7)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS2PR03MB9587:EE_|AS8PR03MB9024:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1060e135-e7e8-42f0-169d-08df388560dd
+X-MS-Office365-Filtering-Correlation-Id: 64a82144-a482-47ee-2b1a-08df38856fc1
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|23010399003|1800799024|366016|4143699003|11063799006|56012099006|261009223027099003|261028144727099003|261021121427099003|261021123027099003|261026121527099003|261026140227099003|261022075727099003|261022105027099003|10067099003|22082099003|18002099003;
+	BCL:0;ARA:13230040|376014|23010399003|1800799024|366016|4143699003|11063799006|5023799004|56012099006|261009223027099003|261028144727099003|261021121427099003|261021123027099003|261026121527099003|261026140227099003|261022075727099003|261022105027099003|10067099003|22082099003|18002099003|6133799003;
 X-Microsoft-Antispam-Message-Info:
-	8xJgo73VMgA896lpZuUyDveYgnKmnA+kpvSoHc4y2LpuG9OeNOXwnilYISxSoH5iMTB5PBGkga5cYe+g9ZoOfcEI/38OZeIsZa/WGy0zGkKJ387e4C6dPKCheYIdNNx/zFm39ISSJEv+N/vIcWPQtpSRsBoDRfMlXY7h/SzlK7Ww/odTs2MyAfq52jh0PD0rwJOBvfonlRre0UyRK7FtJcgMZhAxnbgXceXF6viEII2SnvKPo9L+F5dOCXt/vFdnwHm51hVMGe2w4QLonqVlgn/oefQMPIm1so02zX1PlPaFy+srz/Hw7v0amgA9Ec85VXiSorV9ccm46FpcF2DTcUxcSmmCsijuhlooX4RSWzy0oPiUwGmjnt9OKhGX4djx223zsi+h0wNA3kcHqAuSAXDmvCZPfErFa/MN/BjM3DGdMQ04uq9QPWRadjYs+MAQIp+neU2+92e0sS69bKd80vB9DxHaj7AzfOf+w5mBjCn8XajwUvN4y440zwuJeP2uivuV7xYSSkClu+Pg2p/j4+LFJTF/M0aqAvdpvJS/a+YYsJ4DTLcG7VQN4GPMf5b7h9GwcK+cB632aUVlxivBvGFy9EM/V2ZnI794ONVpPwFam2VsUdBxm5WDmhPGLggQXAA85R3ski+bPV8jpT4wDJTDQpTZ30lchpNTY/MlQq4=
+	bL5nUGLtA65a8h4iFT9HtcpYcs7xaP6veIwjFkQKOg2OBFpIMFyLrpSlUawDGVLqiIZuTVobap+p/9HQKOJ6p7gmII0FxxoiJ/xtLpbPUoBjRswnrtJJu13y1WKmVFv9DhaDl4Ovem6oJsDfZ3w8qMD4D71NBFKFgt5UWDcZjIKJSBqKkyRzkkRoEyljE/hATj5qmIdnVq434SGB9bFgHf+ODul/pqsH7Uugbh5hOwjUodDNhHDDa/IOyaBz/UoPOmFfSvcr9vwUOn2M4y3G6/VHmIWmcnobjjweeGEUyLh5tRAkaTNwmKWjyBlXDn0zgiF0FaIf6N7tVo2VM84MKaHQW2wbqH5r67F5mEjy/wzWOoT1qUQI9P9QUAKhqzEvn3veYfAan2z/x5DARhDXisngNrMAkDig096rnH1f4SR3We8EvXp9YxeVrloRm9xr3xLfUcHYbiTE6MskLRSH2smrqymQJA+jgZyk0eRvUu8YXyithTEIBNezZ6R4nwioRMucCd4DwZhLQgYMOJ7oQnihnOXDIphf4f1pd138QG+m/8kZbDPb6Uz0UuqeBWeJQuJ7Ve22hnzlKQp6Lv+hxmzhNY3kkS05uWY7oGMYvjmst+7Wji43ZhXOjeY6Zt7RYxeq3mXtZorJwH1N3sw6m6HpfKaN/rWU0zBFFihIc7Y=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS2PR03MB9587.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(23010399003)(1800799024)(366016)(4143699003)(11063799006)(56012099006)(261009223027099003)(261028144727099003)(261021121427099003)(261021123027099003)(261026121527099003)(261026140227099003)(261022075727099003)(261022105027099003)(10067099003)(22082099003)(18002099003);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS2PR03MB9587.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(23010399003)(1800799024)(366016)(4143699003)(11063799006)(5023799004)(56012099006)(261009223027099003)(261028144727099003)(261021121427099003)(261021123027099003)(261026121527099003)(261026140227099003)(261022075727099003)(261022105027099003)(10067099003)(22082099003)(18002099003)(6133799003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?cUhsWjRBSVlBbmRRbW5DeVR0SlVjQlQxNkhpZzlwa3Vya0hkQkZJZ2NKSytC?=
- =?utf-8?B?SVJ5MXpKRkRzOUlmaHphVU8vNkRCMkJicHNscHVkeEVReVRKcDlOSzFkRXBq?=
- =?utf-8?B?bUM4eVJ4QzdyWXlPcEhXQ2w3bm5RM2tRREJCWnNzMVpZRzVXTTdGM2sxakp3?=
- =?utf-8?B?T2lDMXpFeUFnS2YzUDBJQS9icjFZRDRsRlVjSnlDQ2QranlKeVl2a1daa1dv?=
- =?utf-8?B?blE1MVd4NDZLSzd1OFJnVGtiOGxwbmszMUUrM0ZHNXlhWmk1NnZyWWNNeCt6?=
- =?utf-8?B?SmxKRW5KdFBXdWd3WURWamc2QVJZR05qcFExdVVaS0dGK1V2V21ETVlVWmc2?=
- =?utf-8?B?ankxMFNDc0g3dklhTGhFYXRvbWUzVUZEbTlCTjh2V0JSSkxOQ2YzaHl5TDVt?=
- =?utf-8?B?REtIK2JqVjV6Q1VKb25oeWdkRStnTmNJYVVGS1g0OHNVVGJPaW03TXRqOEZV?=
- =?utf-8?B?S0JtRkpwSGFHeC91L0JkRGVCbXc4Y0w5WkJEMlZHTHljckZGT002NnQ0ZEJU?=
- =?utf-8?B?cURQS3R4VS91OUx2T21vTk1yZERBRnhTSHZnbHF5U3hmdFZEQ21BVW1tVUZj?=
- =?utf-8?B?YUpjMlp1cFJZUWpNYk1ncnZuZ2JhYkRFdVI1QzcydS9zTW1udTlQOGhUQmNt?=
- =?utf-8?B?YllOeEpQb0tNVkxPc0h4cTR1MENhT3lscXMvV2V1WXpzay9hOU43aVl1OXY2?=
- =?utf-8?B?NGZ4Qzg1V25OOFJITUgxcSthWi81RVRnVUZlclVuSlEyaEtTN3VPTmEwS2NS?=
- =?utf-8?B?RjlTUko1UG54M2RXZTJNcGhiRlJQTk9sM1EzRXo4d09jN0lrZVpJTUJKSHdk?=
- =?utf-8?B?aWpWbjI0b1Z2NXZKTFFibFJVWDdOY2hhaFBTYnZQbXNDd1I0NW5vU2xMUzRL?=
- =?utf-8?B?WGttTkZBUHREMDVVREw5N3puL0dwK2xhZytXdkNqNVRzYjlFMTMyOEtNYmlV?=
- =?utf-8?B?dFZoQWpnWXc0akxVRFEvRGI1clY3Z21RMm1yYlhTVGRqcElEOHJ3eDR5ZmZO?=
- =?utf-8?B?Y2pOWlJFQVdFczRoV3NBdnFCTkZXRXgzUXU1TjlpWUhDeDRPWE9mVDVaS1lL?=
- =?utf-8?B?N0FVNS9aU1JQSzR6dkVJTmVxY3I2cUhLLzNNUmMyR0ovRXVUYVNtNnNPa2Zm?=
- =?utf-8?B?dVNMZ0pTbjVSWE5TdlpaOG45QjJTc2RZcnNxcmxnOW91QnpDQTFRWVQvNkw2?=
- =?utf-8?B?MGtyN0s5RG1CcGJiTHYyZ3J0N2x3N1NxU1B4Ny8xMndQSGNFUnRiTVErUUll?=
- =?utf-8?B?S0FlQXNGTTJpcWxuVVUwRzJjZUNNRVZyQTFyNzh3TTIyd0VaL08xVU5SaVJ1?=
- =?utf-8?B?TjdqUDJYekxtajVhWks0ZFZ3SHQ0WFM3ZEFrUWR3WmNKbEdvczRVVm5vZkxL?=
- =?utf-8?B?ZU40N0hOb1NYd05zWkVkVFcwM0MyZDF1dW4zdkhSZGVFM0RDZHUwbUJvSjVh?=
- =?utf-8?B?b3ZkWGlwczhDM2tFcDZweG1BQTdNQVNNNkl3MU94aEk2azUyY2FXUXh2YWhH?=
- =?utf-8?B?TnpkMEZveWdiQ3N0NkFTQlQvNWUrSlYrYlZBVUY4bW9vbmZ5S2pPWWptWU9v?=
- =?utf-8?B?UlU1SElWRlFmSG14bFpzQ0VtNWNCdVFaaE5nWjlpYm1oR2NrTWJ0MFhudlND?=
- =?utf-8?B?L1FFZGorUkhiNGd2SUl0MXJFQ29XdWtyWTR3eDJYbWR5ejdGcXdoY2dsRDNr?=
- =?utf-8?B?VzZWN3lrUXlnRzhFVlBrdGFPQXNHd0QrN1JMSU4vWGdIdllXdlBBbkg4SEJw?=
- =?utf-8?B?N0s1RmZhWUxRWEJ3bHRYelNjYjBESmxZRFhUcDhBOVhPQ29waUNHSTNGNmp2?=
- =?utf-8?B?SkNBRWpkYjY4WjhZL3ZjT1NpbVU5eUR4WTdTQ0tJNzFYV0RhN3ovTUN6RHdZ?=
- =?utf-8?B?TDhzWDA0UlpxYzZjVll4OWRsVERPRkNXMkRFa1FTekVVcHBIb2tsYTU5Y3lP?=
- =?utf-8?B?eVdOZFNoNnR0R210bWFOT0xEeldDOGtoMVpFOHYvYUJQNHkzb2pBVHB4V1JX?=
- =?utf-8?B?MHVKSXRiSmREb21qR3hiTGRPNU5kamRSNWZmQUZPVmpJS08zdnBIbmtrUFVB?=
- =?utf-8?B?eHhONGxMNVV5NkRVc2poNEVDYy9RaW0yUi9NNDVUdmwxdzFsT054TXg0dkox?=
- =?utf-8?B?aXdhSmZBSlRueVViK2Z2T2UwNUFRanVvWGh1VUhqMS9EVTFZRWhMd1MvU0Ry?=
- =?utf-8?B?bHRNMEVhcDFtbHZ3dzZkc21HcWZuZzVrZExqOFVsQjAzb0Fzc29BelY0NHpX?=
- =?utf-8?B?a0xCT1JWZzhzQjhuNUl4Umh1K1V4MVc1NGVwN0ZFamtEWVlmbDJiVENpd0xj?=
- =?utf-8?B?SlE0aEgyektqalYvVllTM1pPbTdiZ2lLM3crRStsdTZQcDVYN05oQT09?=
+	=?utf-8?B?cjhkU1VUZHppeUs0c1pubklUUmoxZHZPbEZzYmltcXNFWHNvTWdqVHNrMVZD?=
+ =?utf-8?B?cForSk1sZmxUaS9TaFFUNUtheTVyRkpVcXd2MzV0d0FZbHBRMWFkSERma3NL?=
+ =?utf-8?B?TXUxUEZXbS91YWY0amxScHZNV3NvSFJ2ZHlXSmdwQjZlYWEweXJmbERzVGlx?=
+ =?utf-8?B?aDdFcE1mSHdyREFyUWM3L0kzZ1gxSWxTU01LQzByYzdlQWMyTW5wUTNJZkFM?=
+ =?utf-8?B?ZnpRMXNwMG9EZk9za0kvYU9kVnkxV1ZrODBWeGpzQXJpUndnZTJnd09CUlVi?=
+ =?utf-8?B?VDBFTUJhVDhMSDBBRDJGSzVJVGZaVUJRZkgzRCt6ZzBheHFNek5ybFg0dmpB?=
+ =?utf-8?B?cG0vNnFsQmVRQ3gyTFNEUldCbTRDRGtkTWVaTXhIYWlIWnhySk9KUFN1d2l4?=
+ =?utf-8?B?UlZRQmJSLzk2aW5XN0E0OWdVdEJyMUpUb0F4cksyS0UycnJNRWdienhHNEs5?=
+ =?utf-8?B?TTdVTXlZMU9xeGcrejZzMFIyY3B3bS83Z2lXdnQ3T1lMTVo4WklDK1luMWFx?=
+ =?utf-8?B?cFNqRnlET0Evd2hVeDc2WXFnUHFpNzZPMWpMRWR3ZzR2QnIzV0VaTzY0OVND?=
+ =?utf-8?B?WnUrRHJMNUNTUktnUUhQeTdPcWdYb1JZc2hhOEVTQVp0ajFCNnBPNE5POVhi?=
+ =?utf-8?B?Y3VtSE1oUDFkbmRlRlc2LzNpb1NkQ0lhVVpBd1I5VjZJQ2dWb01MNG9FYzVk?=
+ =?utf-8?B?SVIyQUdXOFJ2L2VHeHZVdGdCY1BCS21US3J2MjhNK0dqclNxcUovQlZHMk84?=
+ =?utf-8?B?N25YRktDREFEZ0UvcGloRTZyU2cvWjFxOVVMaWxaSXNHNjR4MUFBVTl4VmZ5?=
+ =?utf-8?B?RGtycHVLZnpOeTIwTW9YK094bjNpdG5tbW0yb2phdkQ3MGkvUi9FQVFVZTFX?=
+ =?utf-8?B?dWNvQjExdWdIdlRja1ZlNmZycXZDaDd2VzRCTU1ickxldi9yc2FKM0Vab1Vs?=
+ =?utf-8?B?d3ZnSU1TUWtWTzN5NkFxbk5wL0xsNzNDcUpNeGtYOGFFRmlEeHc1My85U29N?=
+ =?utf-8?B?UFhiQkljdDVSdnFvVFg0VEF2Z1I0YnFHZ2d5eWdhVGZ4UVBhM05KNFk4WCtx?=
+ =?utf-8?B?Nmljd2FqTHBvZ2lEb2Qxa2JVakVMaUhDSnIySVNack9SNkpZU3pFL09CcEhT?=
+ =?utf-8?B?dDFXOXZ2L1pWbVpraVk4alg1MGNOVEY5SWMyM2tQSGlrNFJ4V1F1eXc5Zlk3?=
+ =?utf-8?B?M3dzZDI4SUk0ZllNT2k5NE9yM2MzbVNIZWtSTUc2Yzl1OEwzaERQMHVReEVN?=
+ =?utf-8?B?QXFISklMMU94RFBiREFaaWNlOC9OUnp6VXVkeVZIM3c2a2laRkxwRmkwRURN?=
+ =?utf-8?B?bFAzUis0OWw5ekRhMHV5WEttVEVGQ1NxSHJSYWhEQzZNMkZ3RlhSakxtR3J1?=
+ =?utf-8?B?S09HZ1I5Z25DeGw1TUJ6a0FZT0JwZGNZVFBCbzQwYUZBTVA4eXZITFMxZmpY?=
+ =?utf-8?B?M0NON05nR0ROZUp5c2VLbFJGNDk5aGIzUWJMTW8zbys4RGF3TkR1NHpoQTQ5?=
+ =?utf-8?B?YVlmbCtKcFVXUGYzbFlia0pod3JiTkU4YUZSVHVZM241eW9oR1YzRU8zY0tO?=
+ =?utf-8?B?aTlycVJqT2VJUGN2ejRuV2twamFjRnJNRDRtQ1IwRnR4cnFqbTZza0JVc2N6?=
+ =?utf-8?B?NEJoSDltV1RKRXVWelVwUEVMbCtTWEl3NnRPeDk2ZnpYSWhnenhIMUNIdW0w?=
+ =?utf-8?B?TUhYSzY2cGIxdEFhNWM1YkNkK3JxSWIrMTk3bTk5L24vQThpNjFBOStoOTN4?=
+ =?utf-8?B?aXk3STNwaGdlOHVhVjVrNmE2OWhWMG8rYzduQVhZVVlhNHdXUXFSYkV4eFRY?=
+ =?utf-8?B?TEFBdEtsUk9WOVc5bWZzeW5HclcycW4yQlE2RW9Haml1OUFMMkpLZXhEMXcx?=
+ =?utf-8?B?OTZpMmhtQmRwb0FacmI2dENTcHZLelN0LytKWkZ5V2ZBUVRtLzRTODhHSmEr?=
+ =?utf-8?B?dHJCeWI2bWZlWEtsTFBwaTYwTExpaDllWktuOWdpQXZZeWJBT3dZbnExOEtq?=
+ =?utf-8?B?SUhRNEwzdlF5MzZDejZ1NlhTMEpJZ1RzTzF5RjJNbTJ6R3RRdWNxUUVwQUVz?=
+ =?utf-8?B?dFdFVWJ2eTZGRFhORjlJQkF4elZSR2VBWkg2cmRwcmdhNjRHb21aSG45SER5?=
+ =?utf-8?B?NExaN2tEcTd4WmszSlp0S21zRFVhVFNTTzFwWU9LdHQyZzU5c2o0S0hhR3RL?=
+ =?utf-8?B?QVlrN3dtTVhDUVhPL3ptcndrTXVQYzZYTVlEZEF2Uk05YU44eTBkYlhRWnIr?=
+ =?utf-8?B?NEVOU2l5RURhUHY2enZ6eWxWSUwzNU1yeUpkQnlqaWh0MU12NWJZOTVzTFVF?=
+ =?utf-8?B?RFp6VSs2U3BBYTYyUkgzSVYrV1dhSXo4YWlmZTR3YU96Zm9pZHovdz09?=
 X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1060e135-e7e8-42f0-169d-08df388560dd
+X-MS-Exchange-CrossTenant-Network-Message-Id: 64a82144-a482-47ee-2b1a-08df38856fc1
 X-MS-Exchange-CrossTenant-AuthSource: AS2PR03MB9587.eurprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Nov 2026 02:02:41.7698
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Nov 2026 02:03:06.7790
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: dyOXIm84fapT7tDu9gY/pztFd1fYZbDWlhbXAbAZldSU1dIbzl+YzCEOvTHhFEf6t1WSJ0VLiJt07QOGqk708Q==
+X-MS-Exchange-CrossTenant-UserPrincipalName: mfXiSham7bgBslSXYPGHIoIGRWYRUVnWYNyNIAER0cMNO7fIyiHpDmwrllAEtnFW0lUTGhaUpWitRg9OH71sVw==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR03MB9024
-X-purgate-ID: tlsNG-ebf023/1793584964-538C1B50-7264CAE1/0/0
+X-purgate-ID: tlsNG-d25034/1793584989-52132A5B-43ECDEEB/0/0
 X-purgate-type: clean
-X-purgate-size: 7231
+X-purgate-size: 18383
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -170,214 +170,508 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 Hi Oleksandr,
 
-On 10/9/26 17:12, Oleksandr Tyshchenko wrote:
-> [You don't often get email from olekstysh@gmail.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+On 10/11/26 15:27, Oleksandr Tyshchenko wrote:
+> 
 > 
 > On 10/7/26 03:07, Milan Djokic wrote:
 > 
 > Hello Milan
 > 
+> 
 >> From: Rahul Singh <rahul.singh@arm.com>
 >>
->> Stage-1 translation is handled by guest, therefore stage-1 fault has to
->> be forwarded to guest.
+>> Event queue is used to send the events to guest when there is an events/
+>> faults. Add support for event queue to send events to guest.
+>>
+>> Global error in SMMUv3 hw will be updated in smmu_gerror and
+>> smmu_gerrorn register. Add support for global error registers to send
+>> global error to guest.
+>>
+>> Add architectural error handling to the emulated command queue,
+>> updating the global error register and stopping command consumption
+>> on error.
 >>
 >> Signed-off-by: Rahul Singh <rahul.singh@arm.com>
 >> Signed-off-by: Milan Djokic <milan_djokic@epam.com>
 >> ---
->>    xen/drivers/passthrough/arm/smmu-v3.c  | 48 ++++++++++++++++++++++++--
->>    xen/drivers/passthrough/arm/vsmmu-v3.c | 44 +++++++++++++++++++++++
->>    xen/drivers/passthrough/arm/vsmmu-v3.h |  8 +++++
->>    3 files changed, 98 insertions(+), 2 deletions(-)
+>>    xen/drivers/passthrough/arm/smmu-v3.h  |  20 +++
+>>    xen/drivers/passthrough/arm/vsmmu-v3.c | 233 +++++++++++++++++++++++--
+>>    xen/include/public/arch-arm.h          |   2 +
+>>    3 files changed, 244 insertions(+), 11 deletions(-)
 >>
->> diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthrough/arm/smmu-v3.c
->> index 196ac660ef..e44f872d2d 100644
->> --- a/xen/drivers/passthrough/arm/smmu-v3.c
->> +++ b/xen/drivers/passthrough/arm/smmu-v3.c
->> @@ -871,7 +871,6 @@ static int arm_smmu_init_l2_strtab(struct arm_smmu_device *smmu, u32 sid)
->>        return 0;
->>    }
->>
->> -__maybe_unused
->>    static struct arm_smmu_master *
->>    arm_smmu_find_master(struct arm_smmu_device *smmu, u32 sid)
->>    {
->> @@ -892,10 +891,51 @@ arm_smmu_find_master(struct arm_smmu_device *smmu, u32 sid)
->>        return NULL;
->>    }
->>
->> +static int arm_smmu_handle_evt(struct arm_smmu_device *smmu, u64 *evt)
->> +{
->> +     int ret;
->> +     struct arm_smmu_master *master;
->> +     u32 sid = FIELD_GET(EVTQ_0_SID, evt[0]);
-> 
-> Maybe my comment should better be suited for commit #20/22 (where the
-> vSID->pSID mapping is introduced)...
-> 
-> Look like the event is copied to the guest unchanged (with patch 20
-> applied). It carries the pSID instead of the vSID, even though patch
-> 20’s table could translate it. So the domain might not find the device,
-> or might blame a different one whose vSID matches that number. Or I
-> missed something?
-> 
-
-You're right. The SID in the event should be translated from pSID to 
-vSID before forwarding it to the guest. I'll fix this.
-
-> 
+>> diff --git a/xen/drivers/passthrough/arm/smmu-v3.h b/xen/drivers/passthrough/arm/smmu-v3.h
+>> index 4a912be740..44ecb5d89c 100644
+>> --- a/xen/drivers/passthrough/arm/smmu-v3.h
+>> +++ b/xen/drivers/passthrough/arm/smmu-v3.h
+>> @@ -358,6 +358,26 @@
+>>    
+>>    #define EVTQ_0_ID			GENMASK_ULL(7, 0)
+>>    
+>> +#define EVT_ID_BAD_STREAMID		0x02
+>> +#define EVT_ID_BAD_STE		    	0x04
+>> +#define EVT_ID_TRANSLATION_FAULT	0x10
+>> +#define EVT_ID_ADDR_SIZE_FAULT		0x11
+>> +#define EVT_ID_ACCESS_FAULT		0x12
+>> +#define EVT_ID_PERMISSION_FAULT		0x13
 >> +
->> +     switch (FIELD_GET(EVTQ_0_ID, evt[0])) {
->> +     case EVT_ID_TRANSLATION_FAULT:
->> +             break;
->> +     case EVT_ID_ADDR_SIZE_FAULT:
->> +             break;
->> +     case EVT_ID_ACCESS_FAULT:
->> +             break;
->> +     case EVT_ID_PERMISSION_FAULT:
->> +             break;
->> +     default:
->> +             return -EOPNOTSUPP;
->> +     }
->> +
->> +     /* Stage-2 event */
->> +     if (evt[1] & EVTQ_1_S2)
->> +             return -EFAULT;
->> +
->> +     mutex_lock(&smmu->streams_mutex);
->> +     master = arm_smmu_find_master(smmu, sid);
->> +     if (!master) {
->> +             ret = -EINVAL;
->> +             goto out_unlock;
->> +     }
->> +
->> +     ret = arm_vsmmu_handle_evt(master->domain->d, smmu->dev, evt);
-> 
-> ^^^ dereferences master->domain->d with no NULL check. Would it be
-> possible that a fault event queued earlier can still arrive after the
-> device is detached (on domain destruction), so master->domain is NULL?
-> 
-
-That is possible. The domain pointer should be validated before 
-dereferencing it. I'll update this.
-
->> +     if (ret) {
->> +             ret = -EINVAL;
->> +             goto out_unlock;
->> +     }
->> +
->> +out_unlock:
->> +     mutex_unlock(&smmu->streams_mutex);
->> +     return ret;
->> +}
->> +
->>    /* IRQ and event handlers */
->>    static void arm_smmu_evtq_tasklet(void *dev)
->>    {
->> -     int i;
->> +     int i, ret;
->>        struct arm_smmu_device *smmu = dev;
->>        struct arm_smmu_queue *q = &smmu->evtq.q;
->>        struct arm_smmu_ll_queue *llq = &q->llq;
->> @@ -905,6 +945,10 @@ static void arm_smmu_evtq_tasklet(void *dev)
->>                while (!queue_remove_raw(q, evt)) {
->>                        u8 id = FIELD_GET(EVTQ_0_ID, evt[0]);
->>
->> +                     ret = arm_smmu_handle_evt(smmu, evt);
->> +                     if (!ret)
->> +                             continue;
->> +
->>                        dev_info(smmu->dev, "event 0x%02x received:\n", id);
->>                        for (i = 0; i < ARRAY_SIZE(evt); ++i)
->>                                dev_info(smmu->dev, "\t0x%016llx\n",
+>> +#define EVTQ_0_SSV			(1UL << 11)
+>> +#define EVTQ_0_SSID			GENMASK_ULL(31, 12)
+>> +#define EVTQ_0_SID			GENMASK_ULL(63, 32)
+>> +#define EVTQ_1_STAG			GENMASK_ULL(15, 0)
+>> +#define EVTQ_1_STALL			(1UL << 31)
+>> +#define EVTQ_1_PnU			(1UL << 33)
+>> +#define EVTQ_1_InD			(1UL << 34)
+>> +#define EVTQ_1_RnW			(1UL << 35)
+>> +#define EVTQ_1_S2			(1UL << 39)
+>> +#define EVTQ_1_CLASS			GENMASK_ULL(41, 40)
+>> +#define EVTQ_1_TT_READ			(1UL << 44)
+>> +#define EVTQ_2_ADDR			GENMASK_ULL(63, 0)
+>> +#define EVTQ_3_IPA			GENMASK_ULL(51, 12)
+>>    /* PRI queue */
+>>    #define PRIQ_ENT_SZ_SHIFT		4
+>>    #define PRIQ_ENT_DWORDS			((1 << PRIQ_ENT_SZ_SHIFT) >> 3)
 >> diff --git a/xen/drivers/passthrough/arm/vsmmu-v3.c b/xen/drivers/passthrough/arm/vsmmu-v3.c
->> index 87342fdf69..b71511c2eb 100644
+>> index 3f557d1c4d..87342fdf69 100644
 >> --- a/xen/drivers/passthrough/arm/vsmmu-v3.c
 >> +++ b/xen/drivers/passthrough/arm/vsmmu-v3.c
->> @@ -338,6 +338,49 @@ static void arm_vsmmu_send_event(struct virt_smmu *smmu,
->>        return;
->>    }
->>
->> +static struct virt_smmu *vsmmuv3_find_by_addr(struct domain *d, paddr_t paddr)
+>> @@ -85,6 +85,35 @@
+>>    #define smmu_get_ste_s1ctxptr(x)    FIELD_PREP(STRTAB_STE_0_S1CTXPTR_MASK, \
+>>                                        FIELD_GET(STRTAB_STE_0_S1CTXPTR_MASK, x))
+>>    
+>> +/* event queue entry */
+>> +struct arm_smmu_evtq_ent {
+>> +    /* Common fields */
+>> +    uint8_t     opcode;
+>> +    uint32_t    sid;
+>> +
+>> +    /* Event-specific fields */
+>> +    union {
+>> +        struct {
+>> +            uint32_t ssid;
+>> +            bool ssv;
+>> +        } c_bad_ste_streamid;
+>> +
+>> +        struct {
+>> +            bool stall;
+>> +            uint16_t stag;
+>> +            uint32_t ssid;
+>> +            bool ssv;
+>> +            bool s2;
+>> +            uint64_t addr;
+>> +            bool rnw;
+>> +            bool pnu;
+>> +            bool ind;
+>> +            uint8_t class;
+>> +            uint64_t addr2;
+>> +        } f_translation;
+>> +    };
+>> +};
+>> +
+>>    /* stage-1 translation configuration */
+>>    struct arm_vsmmu_s1_trans_cfg {
+>>        paddr_t s1ctxptr;
+>> @@ -115,6 +144,7 @@ struct virt_smmu {
+>>        uint32_t    strtab_base_cfg;
+>>        uint64_t    strtab_base;
+>>        uint32_t    irq_ctrl;
+>> +    uint32_t    virq;
+>>        uint64_t    gerror_irq_cfg0;
+>>        uint64_t    evtq_irq_cfg0;
+>>        struct      arm_vsmmu_queue evtq, cmdq;
+>> @@ -160,9 +190,15 @@ static inline bool smmu_get_evtq_enabled(struct virt_smmu *smmu)
+>>        spin_unlock(&smmu->cr0_lock);
+>>    
+>>        return enabled;
+>> -};
+>> +}
+>>    
+>>    /* Queue manipulation functions */
+>> +static bool queue_full(struct arm_vsmmu_queue *q)
 >> +{
->> +    struct virt_smmu *smmu;
->> +
->> +    list_for_each_entry( smmu, &d->arch.viommu_list, viommu_list )
->> +    {
->> +        if ( smmu->addr == paddr )
->> +            return smmu;
->> +    }
->> +
->> +    return NULL;
+>> +    return Q_IDX(q, q->prod) == Q_IDX(q, q->cons) &&
+>> +           Q_WRP(q, q->prod) != Q_WRP(q, q->cons);
 >> +}
 >> +
->> +int arm_vsmmu_handle_evt(struct domain *d, struct device *dev, uint64_t *evt)
+>>    static bool queue_empty(struct arm_vsmmu_queue *q)
+>>    {
+>>        return Q_IDX(q, q->prod) == Q_IDX(q, q->cons) &&
+>> @@ -175,12 +211,133 @@ static void queue_inc_cons(struct arm_vsmmu_queue *q)
+>>        q->cons = Q_OVF(q->cons) | Q_WRP(q, cons) | Q_IDX(q, cons);
+>>    }
+>>    
+>> +static void queue_inc_prod(struct arm_vsmmu_queue *q)
 >> +{
+>> +    u32 prod = (Q_WRP(q, q->prod) | Q_IDX(q, q->prod)) + 1;
+>> +    q->prod = Q_OVF(q->prod) | Q_WRP(q, prod) | Q_IDX(q, prod);
+>> +}
+>> +
+>>    static void dump_smmu_command(uint64_t *command)
+>>    {
+>>        gprintk(XENLOG_ERR, "cmd 0x%02llx: %016"PRIx64" %016"PRIx64"\n",
+>>                 smmu_cmd_get_command(command[0]), command[0], command[1]);
+>>    }
+>>    
+>> +static void arm_vsmmu_update_irq(struct virt_smmu *smmu)
+>> +{
+>> +    bool evt_pending = false;
+>> +    bool gerr_pending = false;
+>> +    uint32_t irq_ctrl;
+>> +
+>> +    spin_lock(&smmu->irq_cfg_lock);
+>> +    irq_ctrl = smmu->irq_ctrl;
+>> +    spin_unlock(&smmu->irq_cfg_lock);
+>> +
+>> +    spin_lock(&smmu->evt_queue_lock);
+>> +    evt_pending = !queue_empty(&smmu->evtq);
+>> +    spin_unlock(&smmu->evt_queue_lock);
+>> +
+>> +    spin_lock(&smmu->gerror_lock);
+>> +    gerr_pending = (smmu->gerror ^ smmu->gerrorn) != 0;
+>> +    spin_unlock(&smmu->gerror_lock);
+>> +
+>> +    vgic_inject_irq(smmu->d, NULL, smmu->virq,
+>> +                    ((irq_ctrl & IRQ_CTRL_EVTQ_IRQEN) && evt_pending) ||
+>> +                    ((irq_ctrl & IRQ_CTRL_GERROR_IRQEN) && gerr_pending));
+>> +}
+>> +
+>> +static void arm_vsmmu_set_gerror(struct virt_smmu *smmu, uint32_t gerror_err)
+>> +{
+>> +    uint32_t pending, new_gerrors;
+>> +
+>> +    spin_lock(&smmu->gerror_lock);
+>> +
+>> +    pending = smmu->gerror ^ smmu->gerrorn;
+>> +    new_gerrors = ~pending & gerror_err;
+>> +
+>> +    if ( new_gerrors )
+>> +        smmu->gerror ^= new_gerrors;
+>> +
+>> +    spin_unlock(&smmu->gerror_lock);
+>> +
+>> +    arm_vsmmu_update_irq(smmu);
+>> +}
+>> +
+>> +static int arm_vsmmu_write_evtq(struct virt_smmu *smmu, uint64_t *evt)
+>> +{
+>> +    struct arm_vsmmu_queue *q = &smmu->evtq;
+>> +    struct domain *d = smmu->d;
+>> +    paddr_t addr;
 >> +    int ret;
->> +    struct virt_smmu *smmu;
 >> +
->> +    if ( is_hardware_domain(d) )
+>> +    if ( !smmu_get_evtq_enabled(smmu) )
+>> +        return -EINVAL;
+> 
+> If the queue is disabled, the event is simply discarded and nothing is
+> wrong. Why do we then raise GERROR.EVTQ_ABT_ERR via arm_vsmmu_set_gerror()?
+> 
+> 
+>> +
+>> +    spin_lock(&smmu->evt_queue_lock);
+>> +
+>> +    if ( queue_full(q) )
 >> +    {
->> +        paddr_t paddr;
->> +        /* Base address */
->> +        ret = dt_device_get_address(dev_to_dt(dev), 0, &paddr, NULL);
->> +        if ( ret )
->> +            return -EINVAL;
->> +
->> +        smmu = vsmmuv3_find_by_addr(d, paddr);
->> +        if ( !smmu )
->> +            return -ENODEV;
+>> +        spin_unlock(&smmu->evt_queue_lock);
+>> +        return -EINVAL;
+> 
+> This does not look like a global error either. From what I got from the
+> SMMU spec (ARM IHI 0070/H.a 7.4 Event queue overflow), when the queue is
+> full the event should be discarded and the overflow flag should be set
+> in EVTQ_PROD.
+> 
+> "The Event queue overflow condition is present when:
+> SMMU_EVENTQ_PROD.OVFLG != SMMU_EVENTQ_CONS.OVACKFLG
+> When an overflow occurs, the SMMU toggles the SMMU_EVENTQ_PROD.OVFLG
+> flag if the overflow condition is not already present."
+> 
+> Otherwise the guest might show a misleading message (an event queue
+> memory-write error instead of an overflow).
+> 
+> Or I really missed something?
+> 
+
+You're correct. This is not handled according to the spec. I'll fix this 
+and also the previous case when the queue is disabled.
+
 >> +    }
->> +    else
+>> +
+>> +    addr = Q_PROD_ENT(q);
+>> +
+>> +    ret = access_guest_memory_by_gpa(d, addr, evt,
+>> +                                     sizeof(*evt) * EVTQ_ENT_DWORDS, true);
+>> +    if ( ret )
 >> +    {
->> +        smmu = list_entry(d->arch.viommu_list.next,
->> +                          struct virt_smmu, viommu_list);
+>> +        spin_unlock(&smmu->evt_queue_lock);
+>> +        return ret;
+>> +    }
+>> +
+>> +    queue_inc_prod(q);
+>> +
+>> +    spin_unlock(&smmu->evt_queue_lock);
+>> +
+>> +    arm_vsmmu_update_irq(smmu);
+>> +
+>> +    return 0;
+>> +}
+>> +
+>> +static void arm_vsmmu_send_event(struct virt_smmu *smmu,
+>> +                                 struct arm_smmu_evtq_ent *ent)
+>> +{
+>> +    uint64_t evt[EVTQ_ENT_DWORDS];
+>> +    int ret;
+>> +
+>> +    memset(evt, 0, 1 << EVTQ_ENT_SZ_SHIFT);
+>> +
+>> +    if ( !smmu_get_evtq_enabled(smmu) )
+>> +        return;
+>> +
+>> +    evt[0] |= FIELD_PREP(EVTQ_0_ID, ent->opcode);
+>> +    evt[0] |= FIELD_PREP(EVTQ_0_SID, ent->sid);
+>> +
+>> +    switch ( ent->opcode )
+>> +    {
+>> +    case EVT_ID_BAD_STREAMID:
+>> +    case EVT_ID_BAD_STE:
+>> +        evt[0] |= FIELD_PREP(EVTQ_0_SSID, ent->c_bad_ste_streamid.ssid);
+>> +        evt[0] |= FIELD_PREP(EVTQ_0_SSV, ent->c_bad_ste_streamid.ssv);
+>> +        break;
+>> +    case EVT_ID_TRANSLATION_FAULT:
+>> +    case EVT_ID_ADDR_SIZE_FAULT:
+>> +    case EVT_ID_ACCESS_FAULT:
+>> +    case EVT_ID_PERMISSION_FAULT:
+>> +        break;
+>> +    default:
+>> +        gdprintk(XENLOG_WARNING, "vSMMUv3: event opcode is bad\n");
+>> +        break;
 >> +    }
 >> +
 >> +    ret = arm_vsmmu_write_evtq(smmu, evt);
 >> +    if ( ret )
 >> +        arm_vsmmu_set_gerror(smmu, GERROR_EVTQ_ABT_ERR);
 >> +
->> +    return 0;
+>> +    return;
 >> +}
 >> +
 >>    static int arm_vsmmu_find_ste(struct virt_smmu *smmu, uint32_t sid,
 >>                                  uint64_t *ste)
 >>    {
->> @@ -1118,6 +1161,7 @@ static int vsmmuv3_init_single(struct domain *d, paddr_t addr,
+>> @@ -189,6 +346,14 @@ static int arm_vsmmu_find_ste(struct virt_smmu *smmu, uint32_t sid,
+>>        uint32_t log2size;
+>>        int strtab_size_shift;
+>>        int ret;
+>> +    struct arm_smmu_evtq_ent ent = {
+>> +        .opcode = EVT_ID_BAD_STREAMID,
+>> +        .sid = sid,
+>> +        .c_bad_ste_streamid = {
+>> +            .ssid = 0,
+>> +            .ssv = false,
+>> +        },
+>> +    };
+>>    
+>>        spin_lock(&smmu->strtab_cfg_lock);
+>>        log2size = MIN(FIELD_GET(STRTAB_BASE_CFG_LOG2SIZE, smmu->strtab_base_cfg),
+>> @@ -196,7 +361,10 @@ static int arm_vsmmu_find_ste(struct virt_smmu *smmu, uint32_t sid,
+>>        spin_unlock(&smmu->strtab_cfg_lock);
+>>    
+>>        if ( sid >= (1U << log2size) )
+>> +    {
+>> +        arm_vsmmu_send_event(smmu, &ent);
+>>            return -EINVAL;
+>> +    }
+>>    
+>>        spin_lock(&smmu->strtab_cfg_lock);
+>>        if ( FIELD_GET(STRTAB_BASE_CFG_FMT, smmu->strtab_base_cfg) ==
+>> @@ -249,6 +417,7 @@ static int arm_vsmmu_find_ste(struct virt_smmu *smmu, uint32_t sid,
+>>            {
+>>                gdprintk(XENLOG_ERR, "idx=%d > max_l2_ste=%d\n",
+>>                         idx, max_l2_ste);
+>> +            arm_vsmmu_send_event(smmu, &ent);
+>>                return -EINVAL;
+>>            }
+>>            addr = l2ptr + idx * sizeof(*ste) * STRTAB_STE_DWORDS;
+>> @@ -277,6 +446,14 @@ static int arm_vsmmu_decode_ste(struct virt_smmu *smmu, uint32_t sid,
+>>                                    uint64_t *ste)
+>>    {
+>>        uint64_t val = ste[0];
+>> +    struct arm_smmu_evtq_ent ent = {
+>> +        .opcode = EVT_ID_BAD_STE,
+>> +        .sid = sid,
+>> +        .c_bad_ste_streamid = {
+>> +            .ssid = 0,
+>> +            .ssv = false,
+>> +        },
+>> +    };
+>>    
+>>        if ( !(val & STRTAB_STE_0_V) )
+>>            return -EAGAIN;
+>> @@ -312,6 +489,7 @@ static int arm_vsmmu_decode_ste(struct virt_smmu *smmu, uint32_t sid,
+>>        return 0;
+>>    
+>>     bad_ste:
+>> +    arm_vsmmu_send_event(smmu, &ent);
+>>        return -EINVAL;
+>>    }
+>>    
+>> @@ -362,16 +540,19 @@ static int arm_vsmmu_handle_cmds(struct virt_smmu *smmu)
+>>        if ( !smmu_get_cmdq_enabled(smmu) )
+>>            return 0;
+>>    
+>> -    while ( !queue_empty(q) )
+>> +    while ( !queue_empty(q) &&
+>> +          ((smmu->gerror ^ smmu->gerrorn) & (GERROR_CMDQ_ERR)) == 0 )
+>>        {
+>> -        int ret;
+>> -
+>>            addr = Q_CONS_ENT(q);
+>>            ret = access_guest_memory_by_gpa(d, addr, command,
+>>                                             sizeof(command), false);
+>> -        if ( ret ) {
+>> -            queue_inc_cons(q);
+>> -            return ret;
+>> +        if ( ret )
+>> +        {
+>> +            smmu->cmdq.cons &= ~CMDQ_CONS_ERR;
+>> +            smmu->cmdq.cons |= FIELD_PREP(CMDQ_CONS_ERR,
+>> +                                        CMDQ_ERR_CERROR_ABT_IDX);
+>> +            arm_vsmmu_set_gerror(smmu, GERROR_CMDQ_ERR);
+>> +            break;
+>>            }
+>>    
+>>            switch ( smmu_cmd_get_command(command[0]) )
+>> @@ -395,6 +576,10 @@ static int arm_vsmmu_handle_cmds(struct virt_smmu *smmu)
+>>            default:
+>>                gdprintk(XENLOG_ERR, "vSMMUv3: unhandled command\n");
+>>                dump_smmu_command(command);
+>> +            smmu->cmdq.cons &= ~CMDQ_CONS_ERR;
+>> +            smmu->cmdq.cons |= FIELD_PREP(CMDQ_CONS_ERR,
+>> +                                          CMDQ_ERR_CERROR_ILL_IDX);
+>> +            arm_vsmmu_set_gerror(smmu, GERROR_CMDQ_ERR);
+>>                break;
+>>            }
+>>    
+>> @@ -405,6 +590,15 @@ static int arm_vsmmu_handle_cmds(struct virt_smmu *smmu)
+>>                         ret);
+>>                dump_smmu_command(command);
+>>            }
+>> +
+>> +        /*
+>> +        * Stop consuming the command queue if a command error occurred.
+>> +        * CMDQ_CONS continues to point at the offending command until the
+>> +        * error is acknowledged.
+>> +        */
+>> +        if ( (smmu->gerror ^ smmu->gerrorn) & GERROR_CMDQ_ERR )
+>> +            break;
+>> +
+>>            queue_inc_cons(q);
+>>        }
+>>    
+>> @@ -443,6 +637,7 @@ static int vsmmuv3_mmio_write(struct vcpu *v, mmio_info_t *info,
+>>                vreg_reg32_update(&reg32, r, info);
+>>                smmu->evtq.cons = reg32;
+>>                spin_unlock(&smmu->evt_queue_lock);
+>> +            arm_vsmmu_update_irq(smmu);
+>>                break;
+>>            default:
+>>                printk(XENLOG_G_ERR
+>> @@ -573,6 +768,7 @@ static int vsmmuv3_mmio_write(struct vcpu *v, mmio_info_t *info,
+>>                vreg_reg32_update(&reg32, r, info);
+>>                smmu->irq_ctrl = reg32;
+>>                spin_unlock(&smmu->irq_cfg_lock);
+>> +            arm_vsmmu_update_irq(smmu);
+>>                break;
+>>    
+>>            case VREG64(ARM_SMMU_GERROR_IRQ_CFG0):
+>> @@ -602,6 +798,10 @@ static int vsmmuv3_mmio_write(struct vcpu *v, mmio_info_t *info,
+>>                vreg_reg32_update(&reg32, r, info);
+>>                smmu->gerrorn = reg32;
+>>                spin_unlock(&smmu->gerror_lock);
+>> +            arm_vsmmu_update_irq(smmu);
+>> +            spin_lock(&smmu->cmd_queue_lock);
+>> +            arm_vsmmu_handle_cmds(smmu);
+>> +            spin_unlock(&smmu->cmd_queue_lock);
+>>                break;
+>>    
+>>            default:
+>> @@ -905,9 +1105,10 @@ static const struct mmio_handler_ops vsmmuv3_mmio_handler = {
+>>        .write = vsmmuv3_mmio_write,
+>>    };
+>>    
+>> -static int vsmmuv3_init_single(struct domain *d, paddr_t addr, paddr_t size,
+>> -                               uint32_t features)
+>> +static int vsmmuv3_init_single(struct domain *d, paddr_t addr,
+>> +                               paddr_t size, uint32_t virq, uint32_t features)
+>>    {
+>> +    int ret;
+>>        struct virt_smmu *smmu;
+>>    
+>>        smmu = xzalloc(struct virt_smmu);
+>> @@ -916,6 +1117,7 @@ static int vsmmuv3_init_single(struct domain *d, paddr_t addr, paddr_t size,
+>>    
 >>        smmu->d = d;
 >>        smmu->features = features;
->>        smmu->virq = virq;
->> +    smmu->addr = addr;
+>> +    smmu->virq = virq;
 >>        smmu->cmdq.ent_size = CMDQ_ENT_DWORDS * DWORDS_BYTES;
 >>        smmu->evtq.ent_size = EVTQ_ENT_DWORDS * DWORDS_BYTES;
->>
->> diff --git a/xen/drivers/passthrough/arm/vsmmu-v3.h b/xen/drivers/passthrough/arm/vsmmu-v3.h
->> index 9f4c86abd5..d4b7cf805f 100644
->> --- a/xen/drivers/passthrough/arm/vsmmu-v3.h
->> +++ b/xen/drivers/passthrough/arm/vsmmu-v3.h
->> @@ -8,6 +8,8 @@
->>
->>    void vsmmuv3_set_type(void);
->>
->> +int arm_vsmmu_handle_evt(struct domain *d, struct device *dev, uint64_t *evt);
+>>    
+>> @@ -928,6 +1130,15 @@ static int vsmmuv3_init_single(struct domain *d, paddr_t addr, paddr_t size,
+>>        spin_lock_init(&smmu->strtab_cfg_lock);
+>>        spin_lock_init(&smmu->irq_cfg_lock);
+>>    
+>> +    ret = vgic_reserve_virq(d, virq);
+>> +    if ( !ret )
+>> +    {
+>> +        printk(XENLOG_G_ERR
+>> +                 "vSMMUv3: Failed to reserve domain vIRQ %u\n", virq);
+>> +        xfree(smmu);
+>> +        return -EINVAL;
+>> +    }
 >> +
->>    #else
->>
->>    static inline void __init vsmmuv3_set_type(void)
->> @@ -15,6 +17,12 @@ static inline void __init vsmmuv3_set_type(void)
->>        return;
->>    }
->>
->> +static inline int arm_vsmmu_handle_evt(struct domain *d,
->> +                                       struct device *dev, uint64_t *evt)
->> +{
->> +    return -EINVAL;
->> +}
+>>        register_mmio_handler(d, &vsmmuv3_mmio_handler, addr, size, smmu);
+>>    
+>>        /* Register the vIOMMU to be able to clean it up later. */
+>> @@ -953,7 +1164,7 @@ static int domain_vsmmuv3_init(struct domain *d)
+>>            {
+>>                smmu = (const struct arm_smmu_device *) hw_iommu->iommu;
+>>                ret = vsmmuv3_init_single(d, hw_iommu->addr, hw_iommu->size,
+>> -                                      smmu->features);
+>> +                                      hw_iommu->irq, smmu->features);
+>>                if ( ret )
+>>                    return ret;
+>>            }
+>> @@ -983,7 +1194,7 @@ static int domain_vsmmuv3_init(struct domain *d)
+>>            }
+>>    
+>>            ret = vsmmuv3_init_single(d, GUEST_VSMMUV3_BASE, GUEST_VSMMUV3_SIZE,
+>> -                                  features);
+>> +                                  GUEST_VSMMU_SPI, features);
+>>            if ( ret )
+>>                return ret;
+>>        }
+>> diff --git a/xen/include/public/arch-arm.h b/xen/include/public/arch-arm.h
+>> index 8863e2e457..c43b8b7b71 100644
+>> --- a/xen/include/public/arch-arm.h
+>> +++ b/xen/include/public/arch-arm.h
+>> @@ -538,6 +538,8 @@ typedef uint64_t xen_callback_t;
+>>    #define GUEST_VIRTIO_MMIO_SPI_FIRST   33
+>>    #define GUEST_VIRTIO_MMIO_SPI_LAST    43
+>>    
+>> +#define GUEST_VSMMU_SPI         44
+> 
+> So this is the same emulated SPI as the one used for vPL011. You likely
+> need to update d_cfg->arch.nr_spis if vSMMU is enabled for the domain,
+> to ensure that we allocate enough SPIs for it (refer to
+> arch_parse_dom0less_node(), when "nr_spis" is not explicitly specified
+> we update nr_spis if vPL011 is requested). Moreover, you already do this
+> in libxl.
+> 
+
+Agreed, I missed handling the number of domain SPIs in dom0less mode. 
+I'll update this.
+
+> 
 >> +
->>    #endif /* CONFIG_VIRTUAL_ARM_SMMU_V3 */
->>
->>    #endif /* __ARCH_ARM_VSMMU_V3_H__ */
+>>    /*
+>>     * SGI is the preferred delivery mechanism of FF-A pending notifications or
+>>     * schedule recveive interrupt. SGIs 8-15 are normally not used by a guest
 > 
 
 BR,
