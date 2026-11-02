@@ -2,48 +2,41 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 15C1E606A324
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 02:03:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 13257606A324
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 03:05:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=epam.com header.i=@epam.com header.a=rsa-sha256 header.s=selector1 header.b=i2B8UNSW
-Received: from list by lists.xenproject.org with outflank-mailman.1467597.1676692 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=pAxQ713c
+Received: from list by lists.xenproject.org with outflank-mailman.1467637.1676700 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNhOZ-0006WO-Oi; Mon, 02 Nov 2026 02:03:35 +0000
+	id 1xNiM9-0006rT-3I; Mon, 02 Nov 2026 03:05:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1467597.1676692; Mon, 02 Nov 2026 02:03:35 +0000
+Received: by outflank-mailman (output) from mailman id 1467637.1676700; Mon, 02 Nov 2026 03:05:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNhOZ-0006WH-Ln; Mon, 02 Nov 2026 02:03:35 +0000
-Received: by outflank-mailman (input) for mailman id 1467597;
- Mon, 02 Nov 2026 02:03:35 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xNiM9-0006rM-0c; Mon, 02 Nov 2026 03:05:09 +0000
+Received: by outflank-mailman (input) for mailman id 1467637;
+ Mon, 02 Nov 2026 03:05:07 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <milan_djokic@epam.com>) id 1xNhOY-0006Um-OF
- for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 02:03:34 +0000
+ (envelope-from <luoyonggang@gmail.com>) id 1xNiM7-0006rE-My
+ for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 03:05:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xNhOY-005zsm-5B
- for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 03:03:34 +0100
-Received: from [10.42.69.3] (helo=localhost)
+ id 1xNiM6-00F8vF-On
+ for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 04:05:06 +0100
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <milan_djokic@epam.com>)
- id 6ae7ef58-8faa-0a2a0a5109dd-0a2a4503b9d4-22
- for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 03:03:34 +0100
-Received: from [40.107.130.108]
- (helo=MRWPR03CU001.outbound.protection.outlook.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <milan_djokic@epam.com>)
- id 6ae7ef75-fae8-0a2a45030019-286b826c1829-3
- for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 03:03:34 +0100
-Received: from AS2PR03MB9587.eurprd03.prod.outlook.com (2603:10a6:20b:595::7)
- by AS8PR03MB9024.eurprd03.prod.outlook.com (2603:10a6:20b:5b6::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.569.12; Mon, 2 Nov
- 2026 02:03:32 +0000
-Received: from AS2PR03MB9587.eurprd03.prod.outlook.com
- ([fe80::daa7:3b97:acb3:67d5]) by AS2PR03MB9587.eurprd03.prod.outlook.com
- ([fe80::daa7:3b97:acb3:67d5%5]) with mapi id 15.21.0569.011; Mon, 2 Nov 2026
- 02:03:32 +0000
+ (envelope-from <luoyonggang@gmail.com>)
+ id 6ae7fd97-bab6-0a2a0a5309dd-0a2a450ae2ce-44
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 04:05:06 +0100
+Received: from [209.85.208.50] (helo=mail-ed1-f50.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <luoyonggang@gmail.com>)
+ id 6ae7fde2-f2d2-0a2a450a0019-d155d032b84e-3
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 04:05:06 +0100
+Received: by mail-ed1-f50.google.com with SMTP id
+ 4fb4d7f45d1cf-6afa651700eso3564476a12.2
+ for <xen-devel@lists.xenproject.org>; Sun, 01 Nov 2026 19:05:06 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,316 +45,379 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=fGiCH4FYqfqzcC7v5RVYyz6UC202LVTAm5yPY+BZ16atuc9BIvlJoAv5U+Rhj0G6JOieAF/Qd1vv99wOT77x1b0IQ9JCPoF6nWhwpMVavq2a4mqDcNrYAC+Y6fPySFidt52v7PGlarg5qaZiQbkuC3QeVCc6lXNxcWnUW5ZGIOEXLzqsZiZxSdN47gLLTUxO00AeVo6dRNTbEgDY4uh2mdR9EDQtqf4pM8/Hgl0nRTG3gwG5qg1Lv2N3Z8q/+E6tfkCl/9eH4x7tkJDLrDrCBU7p5SCLDZpmy9YVtDIt1p/rGSOipgxE25clXmisY98V+jmrIZAKPWmTMHDXDGvOgg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qRRYV0eGEbi4+8XpbWOAK4nHmOJftx5mBglJzIHRjCY=;
- b=UeK+tuiXRIgC2flT0PXZ2PZUpucvVF5BrMPzuXyUECSZ5ywjv1sNHA5rZTXj5N+qntHu6cTzDMudTW4VgHYeD+pnrz/XqrrDzTR4XmgEk3Q5Q8rTaiC/c0ABJGSj3krqSqUC+9zgqqX6PpW7f/NKKkEyAYveBtqOuF4OXh35MKQivKnlPhAdNXoQFDECbqYT+9NYnaVOIZaTvedxZNx7L6x3Vn7jPI6OhNhQ0HCZ0TkghlXjkPwQx8sBtwmryBYR7NQQLKAgZCvIOIRMzGcuNGKW/PEwBVbhTH/DvdX9r1B3UkEpgOcI0wIzhCFMKxoJ0NhA69UTS01mr/U0tQJlHQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qRRYV0eGEbi4+8XpbWOAK4nHmOJftx5mBglJzIHRjCY=;
- b=i2B8UNSWJlUCCuf1jJkkmL9oO34xLhtHc5jfNTkc9Tjwm0duRb94IjM9MC1dFkq69E67nxNzpJ8U0mNEZEtH0aK20YPW5C7La9qvGR0s2Pux4/lcCPS5GuTiAq0mdtM6DSioLa+4sEo5AQz66JpYdINWTznTHRAwsZ7SwSxnDfNPSBmnWAD8wd8dHisEwb2kphExpw0HsPnpz2FdR/Y+YclGRdQxU5X8i5dPI3ia5e+3dix1OTTO7sRo7xjTlSpBhkY6CoU84mvRtUNaHU68hVYnRTg3DJGU5nMwHNpQ3Kw2133ndAe7sm+d9rf3DAO7TAiRJcHCDvzag6oV35x/yg==
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-Message-ID: <0271b2fa-02c6-45fa-9267-151ca85fa9bb@epam.com>
-Date: Mon, 2 Nov 2026 03:03:30 +0100
-User-Agent: Mozilla Thunderbird
-From: Milan Djokic <milan_djokic@epam.com>
-Subject: Re: [PATCH v4 13/22] xen/arm: vsmmuv3: IOMMU device tree node for
- dom0
-To: Oleksandr Tyshchenko <olekstysh@gmail.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Rahul Singh <rahul.singh@arm.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <cover.1791328190.git.milan_djokic@epam.com>
- <c38b1a9476f54e42050e4712a98b19bf1d97f3a0.1791328190.git.milan_djokic@epam.com>
- <b92b4b48-f4b3-452b-a973-d98744adfb2d@gmail.com>
-Content-Language: en-US
-In-Reply-To: <b92b4b48-f4b3-452b-a973-d98744adfb2d@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: AM8P191CA0029.EURP191.PROD.OUTLOOK.COM
- (2603:10a6:20b:21a::34) To AS2PR03MB9587.eurprd03.prod.outlook.com
- (2603:10a6:20b:595::7)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From:Reply-To:In-Reply-To:References:MIME-Version"
+ARC-Seal: i=1; a=rsa-sha256; t=1793588706; cv=none;
+        d=google.com; s=arc-20260327;
+        b=dJa+3l6BJVVOqflDXFHDqkvuPXiCz6ox7f/oGRPqBojuFgoYdim3TjsLvljiaSKlO6
+         E5k4RcSqcAZyW72znB7iny6Cc2cd+7IK0h7T+RHcd6yPFrqaNN5te3CTswC+yrr5HVKi
+         XjE3Vc3Zb6Aoxo+QF6QayHKim2GKtCP0+Ner8yEnYhbPmyLjonNgpeTEwg9yqY5d0TY2
+         4KcqrpLAONNg3sFsqhi6lBPizwkCWiQJbLxLu0EvEfFMxJE9ZaSDzny2qyUENLZ17+5v
+         Mxw944nNfwlMrb5p6AEnvPREjng8kzdYxErgbB5bh+cVIrpi14bs/r+9KlgHnk8u3id0
+         zbHQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :reply-to:in-reply-to:references:mime-version:dkim-signature;
+        bh=imk8Y3dp71z9rketUe9RnJkNrtaKIPDOf8w3Ba5TnQo=;
+        fh=14eKip6vGthT/lp6m1ArSiDwB7Qxtkc/On3njMQLlrg=;
+        b=WuZhOPlx3yXC7Yb6vbN0JSm/oagzFReofhR5WgaQk4rKyz3LGIs3bIr7lvWBWBqkzD
+         TfWN2mRBrg09jc2IYE8Xo0VaWTZHtodLt/dbvhfSbXOH5eEMGHOmjy04FH/1cFgL4jhh
+         uHOcwhI8CqqF2SzsbzGW8MIR8vkIQNFWDPrv4dfANSOzzzJ8jGgWP3khmCQyWTTG0B94
+         PF64hZ8v1ntp8L8ZGrUc/iVspOzAri/weFcUnwVahLxOK3B8Y7Omqd9TGFfoNVGPU0l1
+         hWQ8ciUmKEhJNK/DIHbqAQClUDgRpIk6GtSfsln/Usq+vWdPFTAWypQghIdIdFNLfvBn
+         ThoA==;
+        darn=lists.xenproject.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1793588706; x=1794193506; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:reply-to:in-reply-to:references:mime-version:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=imk8Y3dp71z9rketUe9RnJkNrtaKIPDOf8w3Ba5TnQo=;
+        b=pAxQ713cTHzQ/gKm488PmNlSQ67B+hXX7O/8XRvW7Kc898PESUliqsW+pZFxJLcz7G
+         k1fSmN3Lcem1vY+7jKMlTco2a3TopPdM4Y64oq289aUApjimzZImL0fPZ0PqHbvxdm07
+         +o/OaNwx4KfudHqm2c6Eacx4RYWiCYBzW+sVQdO8z7F5+HtMYiQLxtb/6vC0n+JdxYnH
+         wjHkPRnlIgTsTfsajXvg29UCLgd9hSXpTC1K2Qq4PMFF53cYR0JqvW0n3V0VmRfDhGld
+         hRGYGpKWokCiJO17BYtYrn++Ei6+OBZmkjiJAarJtzvSttV5neVJ7MPrbVJ5b5lhJZNv
+         +noA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793588706; x=1794193506;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:reply-to:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=imk8Y3dp71z9rketUe9RnJkNrtaKIPDOf8w3Ba5TnQo=;
+        b=R75P4rapV3Imm+UR8kAf/bB5EhARXZHtj/HUept+yM8LFP5+lZ9ELrbIaBm+4ZbP+F
+         16cucwg6q/l+nTHexzbAataJf1+CORQlGka+tGfH06yQ6rZ/HM2QC6FbihhmuiyXmWPl
+         jQM0zkG1rorZJ/WOw7mDSDgEatbnfTMyb4HXhMs8oBeOlw7cl0/h2kRxkhQiy3xzul9m
+         HRCIvE9CbnCPoYDazig0qMFgY6drmmRFzR9BX/KmM912BQLL5qM4g3gTzkjRTw15d6uZ
+         x9knMAryojA992sEwDjpeN1YXNzWanhUmoMHiH/eNKPDdvI5sP0L9rk5AWDfIdBolP6B
+         z1tg==
+X-Forwarded-Encrypted: i=1; AKwUvBx8o4UiUPO4eSmpcI7Vp+200Kk1PdQOTEYGl7Dzu/NpkqqyWem70FzmW05mM+PEOdgbzT6gaPpgHZM=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z+QrqRua+SlyP4mtfxs/TCE/riPlhCiVircVakAwWS1VtLpJFZE
+	YbnkdIHMzBbwh46KceN+Wi7l5RnoFsmdII+WbyFhCdXT3m3mrz16mNXdBqOQf6j2A925+2lyk+I
+	ws4HrIs0qeRzNOEvj/2EU5bPfltk8yY8=
+X-Gm-Gg: AYBFou3e9agaGyx2pAILzVgr/N+0Jyg124KZE9FMK5kNZxIHbjN4h6D+wzEcfJ0qMRr
+	Jld9ifEH38vHNBXURZ8gPBAIGuRG5vvm4zPqE3He0jatnSqepsrt5RWZvfALZGFwyOetbYgdMw9
+	QqeKOjo4KkXvnucxn7tDhbQg/MGxWHDwIHhHWxiwZTYxAn1UmL8E4/jIvIDU2Hz7jcmGoj4iABY
+	OE3XSM9k3Z4E6lIO0J9osBH4GFVbQzCzoYIRJsNbZDTYk6gorG9TJTQehSK/4AX0ZpkfikBdjky
+	KBOP3KNLv2Ad2W9TZWYlJJm+jAkzHWmiZfKZVSEYwm473b8hoXFKsKrsq9gXgr+UmM8FXrgVN+K
+	9Q/sYQ/F4T4u8w8Q28gfTOVMczW41qfz6h4/G
+X-Received: by 2002:a05:6402:11d3:b0:6af:dc4c:5f28 with SMTP id
+ 4fb4d7f45d1cf-6b4d4f71386mr6168227a12.37.1793588705869; Sun, 01 Nov 2026
+ 19:05:05 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS2PR03MB9587:EE_|AS8PR03MB9024:EE_
-X-MS-Office365-Filtering-Correlation-Id: d0d1e81e-7a57-44af-ff77-08df38857ec1
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|23010399003|1800799024|366016|260925022911599003|260925021311599003|260925021911599003|4143699003|11063799006|56012099006|261009223027099003|261028144727099003|261021121427099003|261021123027099003|261026121527099003|261026140227099003|261022075727099003|261022105027099003|10067099003|22082099003|18002099003|6133799003;
-X-Microsoft-Antispam-Message-Info:
-	TpFdNC0W/zlosvZAexFvfzsKT4J8ZZhoKHNdcOuiEKr+BAaaXwAwrnLWzOb9D3kiekKbWCEKlex3/iDNY7DmOvH8DVkBdQer+cOwnmhTkchq3eMKuvgWVxahrqcpjMQhp+xTdvudSEYbLHJG+3U/Og16K3RHto+LJTvi2HkcULQ8/fT2dXAAEiW0iXJ6GW9mGERNiQ1DZneMLbIv04UI9RgkbxKRSu4AUJffpE1tqvJPQ+/M99aoQ9yhi7+GE8sATczSyoWqysiHWAWuI2l16L6/laN0M8SjZGX87IbuN+iUuH+CVHZwuMTw+iTnIzXLvFgrSkX7W8tB0VjA+cMXMoLU8RSA4NLXs/WRBmuUWBrTJX9bzRtDhOqCJrZJ0FQTMAYoTuevAt7aBud1vxMPfBpWBPBp145eYbhyV+FHYlL5qe6LJQ1mME5efbEboR+zWE3uKxkwsCaErwMY0lgeRb3ltJjQDh0BBRYFhk67D6bOqbGFgxa04AM900Sj5vQ8VjGYyNtuun+KgSYRqeeeuEfp1m+WdO3Msydm3E8fVNTyjksAT3eIqBm1iYMIDRoRHYG6UL6U1twvOzJ3M7AhFqau4YARy9TENoOkvQnVZTmH0UdC9gLFVq6YFmP99oeseSOGhUM+h6647TPfnQu3J3ATlIUAm1kFb447D+AojsE=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS2PR03MB9587.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(23010399003)(1800799024)(366016)(260925022911599003)(260925021311599003)(260925021911599003)(4143699003)(11063799006)(56012099006)(261009223027099003)(261028144727099003)(261021121427099003)(261021123027099003)(261026121527099003)(261026140227099003)(261022075727099003)(261022105027099003)(10067099003)(22082099003)(18002099003)(6133799003);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?VWZ0Nm81SzM3MW9hU0RNTStVQk1FZkNvaXRjZFZSRUlXY0VsSlRpRkpDRjZR?=
- =?utf-8?B?SkRHS3p3NzhpMitNOWNlVm5lWndYK1RXMUlFSTBxaW5FM2k4alB0K3QrTFJF?=
- =?utf-8?B?Q1JsSVFzNkhvdlZDbFhrZXZjSkVac01ydjU1b09uTXJyMlhlK3cxVjJIU3ND?=
- =?utf-8?B?aytweXc0a1d6RWxFS3QwOXU3SC9zUkkvWXEwMGEybHNtRm5HbnhxdlJJRytt?=
- =?utf-8?B?QnR5S2Q4V3FQdTl5dmFMcmd1UkZZNTZSWmlCTFNrL05LRVJuOXBKdXlPWFQx?=
- =?utf-8?B?YTdYS3VlTzdrbmZTVjhBUVFNWG1yaWdTV1RjMXFhVzJiOXpqdlF6WkpFSURC?=
- =?utf-8?B?Tm5WdWZZUU9mRStCWDNSWmp0M3p6MDlmaVNNdCtwNEd0ckM0RzF1SGo2eGR4?=
- =?utf-8?B?dnBkVkJOdFRxUW5ONTNyU210NFVBL0FPOG11WmxZbTFIKzFuYXpoUXZFdGor?=
- =?utf-8?B?K0FQM1l2MGcwTzhWQ1BkQjBWaW1TbUl4Zys3Y055Wjl5YUxrTVFUbitFSUlQ?=
- =?utf-8?B?UjdWbWU3VWJGVXhNN3RtSWRWTWllT29SM0pDNUZNRWxvcFViTmppaXVNa3hY?=
- =?utf-8?B?bFQ2dFVaWlZqNmlTZ1R5T3NCdkFmVXpRTUZFVGZOSzc2cFQvSmtheGVXUzlZ?=
- =?utf-8?B?dG5ETmx6QkVuNjB0eWFBVlM5NUJnSk9NZlVVaDBUN1kzT2swSnppR1B4UFBE?=
- =?utf-8?B?QUlkNUJOSnZDZmxOREVuVm9vNlRTS25EZldPc0RLYmJjU1JZZXA1MXc1aEJN?=
- =?utf-8?B?Skd0U2NLcWJTaHRLODRIV0FNbzJxQisxUTZNNmJ2bVJOb0tqckNUS2xkczF6?=
- =?utf-8?B?aEM4eW5nb0NoZE5CaVFIUkxIbW5VSG05SUdzYlIvKzJZVUV2bHB5T25HZ0ZC?=
- =?utf-8?B?UGVkTkZXV2Ric0EybnY0d1pJT1BPNmxLcFBnbDErc0lrdEhCdkd5S0gyOElO?=
- =?utf-8?B?VlVtSFowTEdUcmZ6czNmaVBGbFB4TU1WVHlsYVp0VjB6QXpYYlZnNTZTbml0?=
- =?utf-8?B?Mi9jMjhaWkxBOW91RWpBT2xsQ01qYzJUTlpkWEdsUEFZTDYwSmlHMmR0VndJ?=
- =?utf-8?B?a3ROcWZnWFpqUHZKR1AwbmZDbjI5ZmNWblBXbjNoeHJzNHVyV3hiMG5ta2hr?=
- =?utf-8?B?VjE4VllaQlIzT0tCZkJzMzUzb1Y4M2FGczdiMmF5RWdMWTR0Qmx3bkZUWlE5?=
- =?utf-8?B?WWdsdmpBc1hlZitwdnQ0VnhkdFg5ZmJVb1RPTm9kVnd1UUlWb056clhXWkZh?=
- =?utf-8?B?ejFwYjZwMXhydnlZTUJ6OWlJS3dWcjhFYXJLaE9aeGJZN0dTZVRpbnNBUDdl?=
- =?utf-8?B?dkZZN1pnUS9NYkFnZGg4QTl3cW5tVnczV1BqNVNJMkZ0Y1BMNWtPZm84UEwv?=
- =?utf-8?B?OFNQVkdCSVAwbUZtaGlTcjlpV21VUTFxa2JUa25pdjUvejdwdC9YaWpzYjFy?=
- =?utf-8?B?bkR5TlgvT0pTa3owZGJUbXd5U3hWU2ZvMUhGbVpjOG5CdTZkWGQ4THFYS1BQ?=
- =?utf-8?B?aVU5RFBEK0pja2wzbzMyVmlLK09wU25iUVZNWm9DRkhPeVZXQWFpQXhlbXc3?=
- =?utf-8?B?QmlzM2RIWmJCcHFsV2ZlUlJKZXVKdWt3Y2NPM3VQb0IxbXA3dm4yUUtpVUgy?=
- =?utf-8?B?QTg3YXJzRE1iWVJxazV0Q3pFc2hXZFZxOVlyTUhHWmFDNzdYTGFNamNOYzdD?=
- =?utf-8?B?RzBJOXNrYTc1RzdPaE56bXJnbnJKdXowSGxMbjFyZkhsUG8vYUErRnNNamxO?=
- =?utf-8?B?T1AvZjFWM3FXN0swSUh4STNGN1pmU0NoYm9pdjZqN3lkbG0veGE1UnhRVktJ?=
- =?utf-8?B?am5Yb3VNWTl5M2tTb3AzalhDY0hKRzVHcjJMM3ZpKzY2M1ljWll6L2VPWEFu?=
- =?utf-8?B?U09RbUp4VXptSUFBSThweGU1ZHgrY3BKZ2p4OHhhN25RS28vbmswN21lTUpV?=
- =?utf-8?B?L2pkaUcvNUdjWkpZcng1Z3hIbXYxNHA5MWNUMjQxRFJ6M2JSZXR2RWJrVCt0?=
- =?utf-8?B?SUd6UnNHcDc1Mm5BcXFibjVIbk1PS05qb2d3cEg0K0NQb1RLTVA4VDdTWGcv?=
- =?utf-8?B?amhSaW5LNUJVQ1dFSHlONHNXRkI4bFNWUDZybGcvb1RCVURwZWZ5ZzlqaUxy?=
- =?utf-8?B?OFRjcEVKRGZOU3NZNzVKaXRDSXU0Q1pqWEhSeEs2N0JuSmZBNkJ2R2ZDK2xk?=
- =?utf-8?B?U0xabW1PTGxudXNiSkljZGIxaEhBWjJRWno4YStvVG9jb3VSMnRWVXo5Wjhl?=
- =?utf-8?B?Tlc5UnFPdE1qYmdHbVQ5Nm9EZnMwbk15RzBjeE03YW8zdFR0RTdRSTdLRFlF?=
- =?utf-8?B?cG5HOWZzRko0MUorU0dEUE9BWStJZGN4Lzcwc29UUHZwK2ZTZ0QzZz09?=
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d0d1e81e-7a57-44af-ff77-08df38857ec1
-X-MS-Exchange-CrossTenant-AuthSource: AS2PR03MB9587.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Nov 2026 02:03:31.9210
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 5aMqOPUOCsoCphQLfdIND6LQYgWO911/t05SdGArM61nOiJa7KIJ49W5R9whxxsWLQiWVL+lj0EtNRxsHtaG0g==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR03MB9024
-X-purgate-ID: tlsNG-33051d/1793585014-770F64E9-08C8210B/0/0
+References: <20261030151539.1872-1-luoyonggang@gmail.com> <d1db54c6-b802-676a-7779-0c2c63f5f807@eik.bme.hu>
+ <aa70e94c-d9a8-41c9-850f-7ded87f7f327@oss.qualcomm.com> <ba106173-fca3-6019-3028-122831887921@eik.bme.hu>
+ <CAE2XoE9cR_X0kkDfGTU4Mt_5Hc3WZ8K5rghw2AeL4Vh=eugGag@mail.gmail.com>
+ <bf45a858-db07-de03-70ea-ca0061d7a5d1@eik.bme.hu> <CAE2XoE9_b5UiE2+BXFRqB3RPv=M+8jr1HQy7rEFVEb6w1DdoGg@mail.gmail.com>
+ <a479df5b-721d-c357-5c69-c3760a73e521@eik.bme.hu> <CAE2XoE-2w3A4=BeskGgp7NYUtkRVNkNufu4SZjW_OQ-KAQZvhg@mail.gmail.com>
+ <6efa9f73-75dd-efd0-3fd9-6b2654b69737@eik.bme.hu>
+In-Reply-To: <6efa9f73-75dd-efd0-3fd9-6b2654b69737@eik.bme.hu>
+Reply-To: luoyonggang@gmail.com
+From: Yonggang Luo <luoyonggang@gmail.com>
+Date: Mon, 2 Nov 2026 11:04:50 +0800
+X-Gm-Features: AclHuK-B5Bt-Oq5n8C1F46Ueo6UjVwoSHbd-GyMOrqSjrQb5HmRreMzyOD5B1cQ
+Message-ID: <CAE2XoE8pNaP3rAR5Y2BpUZ2vSu-UC-wG9V9U7gPXrEGY=kx0RA@mail.gmail.com>
+Subject: Re: [PATCH 00/15] hw: expand DEFINE_MACHINE to explicit TypeInfo registration
+To: BALATON Zoltan <balaton@eik.bme.hu>
+Cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, qemu-devel@nongnu.org, 
+	Anthony PERARD <anthony@xenproject.org>, Felipe Balbi <balbi@kernel.org>, 
+	Aleksandar Rikalo <arikalo@gmail.com>, Philippe Mathieu-Daude <philmd@mailo.com>, 
+	Antony Pavlov <antonynpavlov@gmail.com>, 
+	Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
+	Stefano Stabellini <sstabellini@kernel.org>, Subbaraya Sundeep <sundeep.lkml@gmail.com>, 
+	=?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>, 
+	Max Filippov <jcmvbkbc@gmail.com>, Niek Linnenbank <nieklinnenbank@gmail.com>, 
+	xen-devel@lists.xenproject.org, qemu-riscv@nongnu.org, 
+	Jean-Christophe Dubois <jcd@tribudubois.net>, qemu-ppc@nongnu.org, 
+	Alexandre Iooss <erdnaxe@crans.org>, Weiwei Li <liwei1518@gmail.com>, Zhao Liu <zhao1.liu@intel.com>, 
+	Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+	Strahinja Jankovic <strahinja.p.jankovic@gmail.com>, 
+	=?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>, 
+	Thomas Huth <th.huth+qemu@posteo.eu>, =?UTF-8?Q?Cl=C3=A9ment_Chigot?= <chigot@adacore.com>, 
+	Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, Yoshinori Sato <yoshinori.sato@nifty.com>, 
+	Frederic Konrad <konrad.frederic@yahoo.fr>, Palmer Dabbelt <palmer@dabbelt.com>, 
+	Peter Maydell <peter.maydell@linaro.org>, Chao Liu <chao.liu@processmission.com>, 
+	Sai Pavan Boddu <sai.pavan.boddu@amd.com>, Alistair Francis <alistair@alistair23.me>, 
+	Huacai Chen <chenhuacai@kernel.org>, Aurelien Jarno <aurelien@aurel32.net>, 
+	Gaurav Sharma <gaurav.sharma_7@nxp.com>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
+	Richard Henderson <richard.henderson@linaro.org>, Alistair Francis <alistair.francis@wdc.com>, 
+	Artyom Tarasenko <atar4qemu@gmail.com>, qemu-arm@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-purgate-ID: tlsNG-4011c0/1793588706-589C9CFC-918CB747/0/0
 X-purgate-type: clean
-X-purgate-size: 6778
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=4.0.1
+X-purgate-size: 9217
+X-Spam-Status: No, score=-2.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY autolearn=no autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Oleksandr,
+On Mon, Nov 2, 2026 at 4:57=E2=80=AFAM BALATON Zoltan <balaton@eik.bme.hu> =
+wrote:
+>
+> On Sun, 1 Nov 2026, Yonggang Luo wrote:
+> > On Sun, Nov 1, 2026 at 7:29=E2=80=AFAM BALATON Zoltan <balaton@eik.bme.=
+hu> wrote:
+> >>
+> >> On Sun, 1 Nov 2026, Yonggang Luo wrote:
+> >>> On Sun, Nov 1, 2026 at 1:06=E2=80=AFAM BALATON Zoltan <balaton@eik.bm=
+e.hu> wrote:
+> >>>>
+> >>>> On Sat, 31 Oct 2026, Yonggang Luo wrote:
+> >>>>> On Sat, Oct 31, 2026 at 8:42=E2=80=AFPM BALATON Zoltan <balaton@eik=
+.bme.hu> wrote:
+> >>>>>>
+> >>>>>> On Fri, 30 Oct 2026, Pierrick Bouvier wrote:
+> >>>>>>> On 10/30/2026 4:09 PM, BALATON Zoltan wrote:
+> >>>>>>>> On Fri, 30 Oct 2026, Yonggang Luo wrote:
+> >>>>>>>>> DEFINE_MACHINE and DEFINE_MACHINE_EXTENDED hide the TypeInfo an=
+d the
+> >>>>>>>>> type_init
+> >>>>>>>>> function that calls type_register_static(). A later change need=
+s to
+> >>>>>>>>> pass a
+> >>>>>>>>
+> >>>>>>>> That's the point of the macro to hide the boiler plate code.
+> >>>>>>>>
+> >>>>>>>>> target mask into that registration, and the macros have no para=
+meter
+> >>>>>>>>> for it.
+> >>>>>>>>
+> >>>>>>>> Couldn't you just change the macros to take that parameter inste=
+ad of
+> >>>>>>>> expanding it everywhere?
+> >>>>>>>>
+> >>>>>>>
+> >>>>>>> Problem of macros is that they don't have default parameters, so =
+you
+> >>>>>>> need variants for everything:
+> >>>>>>>
+> >>>>>>> DEFINE_MACHINE
+> >>>>>>> DEFINE_MACHINE_EXTENDED
+> >>>>>>> DEFINE_MACHINE_WITH_INTERFACES
+> >>>>>>> DEFINE_MACHINE_WITH_INTERFACE_ARRAY
+> >>>>>>> and now would need a new variant, with variant for other existing=
+ ones.
+> >>>>>>>
+> >>>>>>> In the end, it's just simpler to remove this and add the boilerpl=
+ate.
+> >>>>>>> It's written once and never modified, so using a macro just save =
+typing
+> >>>>>>> those lines once.
+> >>>>>>>
+> >>>>>>>> Regards,
+> >>>>>>>> BALATON Zoltan
+> >>>>>>>>
+> >>>>>>>>> This series expands every caller first, with no behavior change=
+, so the
+> >>>>>>>>> follow-up only replaces the type_register_static() call.
+> >>>>>>>>>
+> >>>>>>>>> Each machine file gains a class_init function, a TypeInfo, and =
+a
+> >>>>>>>>> type_init
+> >>>>>>>>> function that calls type_register_static(). The last patch remo=
+ves
+> >>>>>>>>> DEFINE_MACHINE* and DEFINE_SECURE_MACHINE* from include/hw/core=
+/boards.h.
+> >>>>>>
+> >>>>>> Macros help reading the code not saving typing. If the actual
+> >>>>>> functionality is buried in a lot of boiler plate it's harder to un=
+derstand
+> >>>>>> and spot bugs so putting the unintresting boiler plate behind a ma=
+cro is
+> >>>>>> better even if you need a separate version for different cases. Th=
+en the
+> >>>>>> code that uses the macro will be much more obvious and not just a =
+lot of
+> >>>>>
+> >>>>> I think mainly because DEFINE_MACHINE* and DEFINE_SECURE_MACHINE* a=
+re
+> >>>>> not defined properly
+> >>>>> that causes them to not be extended easily.
+> >>>>>
+> >>>>> DEFINE_TYPES is another example, use them can extend easily, how ab=
+out
+> >>>>> always use DEFINE_TYPES?
+> >>>>> Or add a DEFINE_TYPE to replace DEFINE_MACHINE* and DEFINE_SECURE_M=
+ACHINE*?
+> >>>>
+> >>>> Maybe I'm missing the problem but DEFINE_MACHINE macros are just
+> >>>> convenience wrappers around DEFINE_MACHINE_EXTENDED. So why can't yo=
+u add
+> >>>> the needed parameter to DEFINE_MACHINE_EXTENDED and use that for mac=
+hines
+> >>>> that need it, or if it's needed by all machines then make the new
+> >>>> parameter required and add it to all convenience wrappers too so you=
+ can
+> >>>> keep using DEFINE_MACHINE* and just need to add one parameter to it =
+in
+> >>>> machines?
+> >>>
+> >>> That's the issue, add parameter to DEFINE_MACHINE_EXTENDED means all
+> >>> calls to it also need
+> >>> to be changed, that means touch many $target_arch files. currently
+> >>> it's 13. But after these
+> >>
+> >> That's not different from expanding the macro which would touch the sa=
+me
+> >> files.
+> >>
+> >>> changes, there will be much more usage on it, and if we want to add
+> >>> more parameters or attributes
+> >>> to it, it will be a new tree-wide change.
+> >>
+> >> Do you expect to need more parameters? Can't you add them at once then=
+?
+> >>
+> >>> And DEFINE_TYPES do not suffer from such issues. As the TypeInfo[] is
+> >>> explicit defined for
+> >>> DEFINE_TYPES
+> >>
+> >> My point is that keeping the boiler plate as little as possible makes =
+the
+> >> code more readable. DEFINE_TYPES hides some of the boiler plate,
+> >> DEFINE_MACHINE hides even more so converting to DEFINE_TYPES would exp=
+ose
+> >> some even if it's better than no macro at all.
+> >>
+> >> What exactly are the parameters missing from DEFINE_MACHINE_EXTENDED t=
+hat
+> >> need to be added?
+> >
+> > Hi BALATON
+> > the things we faced is we first is to add TypeInfo::is_available parame=
+ter to
+> > DEFINE_MACHINE_EXTENDED, and have more usage of it.
+> > Then we will add targets:uint64_t parameter to DEFINE_MACHINE_EXTENDED,=
+ this is
+> > a prepare to remove TypeInfo::is_available parameter from
+> > DEFINE_MACHINE_EXTENDED,
+> >
+> > And finally, once all usage of TypeInfo::is_available can be replaced w=
+ith
+> > targets:uint64_t, then we finally need to remove
+> > TypeInfo::is_available parameter from DEFINE_MACHINE_EXTENDED,
+>
+> Is there a way to avoid the temporary is_available churn and introduce th=
+e
+> targets:uint64_t right away? (I'm not following this so I don't really
+> know what you're talking about just looks like there's some churn here
+> which might be good to awoid anyway independent of these macros.)
+>
+> > That's what I am facing now. And the explicit
+> > static const TypeInfo xxx_machine_typeinfo =3D {
+> >    .name       =3D MACHINE_TYPE_NAME("xxx"),
+> >    .parent     =3D TYPE_MACHINE,
+> >    .class_init =3D xxx_machine_class_init,
+> > };
+> >
+> > Will help me avoid the issue. And I think this is a little boilerplate
+> > and very explicit.
+>
+> That's not all DEFINE_MACHINE hides though. It's longer with .abstract,
+> .secure and .iterfaces plus the machine initfn that would also need to be
+> expanded if you used DEFINE_TYPES.
+>
+> Is this conversion needed for all machines using all DEFINE_MACHINE
 
-On 10/10/26 17:30, Oleksandr Tyshchenko wrote:
-> 
-> 
-> On 10/7/26 03:07, Milan Djokic wrote:
-> 
-> Hello Milan
-> 
->> From: Rahul Singh <rahul.singh@arm.com>
->>
->> XEN will create an IOMMU device tree node in the device tree
->> to enable the dom0 to discover the virtual SMMUv3 during dom0 boot.
->> IOMMU device tree node will only be created when viommu is enabled
->> via Kconfig build options.
->>
->> "iommus" property will be added for dom0 devices to virtual
->> IOMMU node to enable the dom0 linux kernel to configure the IOMMU.
->>
->> Signed-off-by: Rahul Singh <rahul.singh@arm.com>
->> Signed-off-by: Milan Djokic <milan_djokic@epam.com>
->> ---
->>    xen/arch/arm/domain_build.c       | 102 +++++++++++++++++++++++++++++-
->>    xen/arch/arm/include/asm/viommu.h |   1 +
->>    2 files changed, 101 insertions(+), 2 deletions(-)
->>
->> diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
->> index cd2e09f005..6513140133 100644
->> --- a/xen/arch/arm/domain_build.c
->> +++ b/xen/arch/arm/domain_build.c
->> @@ -557,9 +557,12 @@ static int __init write_properties(struct domain *d, struct kernel_info *kinfo,
->>                continue;
->>            }
->>    
->> -        if ( iommu_node )
->> +        /*
->> +         * Expose IOMMU specific properties to hwdom when vIOMMU is
->> +         * enabled.
->> +         */
->> +        if ( iommu_node && viommu_get_type() == XEN_DOMCTL_CONFIG_VIOMMU_NONE )
->>            {
->> -            /* Don't expose IOMMU specific properties to hwdom */
->>                if ( dt_property_name_is_equal(prop, "iommus") )
->>                    continue;
->>    
->> @@ -1457,6 +1460,95 @@ int __init make_timer_node(const struct kernel_info *kinfo)
->>        return res;
->>    }
->>    
->> +#ifdef CONFIG_ARM_VIRTUAL_IOMMU
->> +static int __init make_hwdom_viommu_node(const struct kernel_info *kinfo)
->> +{
->> +    uint32_t len;
->> +    int res;
->> +    char buf[24];
->> +    void *fdt = kinfo->fdt;
->> +    const void *prop = NULL;
->> +    const struct dt_device_node *iommu = NULL;
->> +    struct host_iommu *iommu_data;
->> +    gic_interrupt_t intr;
->> +
->> +    if ( list_empty(&host_iommu_list) )
->> +        return 0;
->> +
->> +    list_for_each_entry( iommu_data, &host_iommu_list, entry )
->> +    {
->> +        if ( iommu_data->hwdom_node_created )
->> +            return 0;
->> +
->> +        iommu = iommu_data->dt_node;
->> +
->> +        snprintf(buf, sizeof(buf), "iommu@%"PRIx64, iommu_data->addr);
->> +
->> +        res = fdt_begin_node(fdt, buf);
->> +        if ( res )
->> +            return res;
->> +
->> +        prop = dt_get_property(iommu, "compatible", &len);
->> +        if ( !prop )
->> +        {
->> +            res = -FDT_ERR_XEN(ENOENT);
->> +            return res;
->> +        }
->> +
->> +        res = fdt_property(fdt, "compatible", prop, len);
->> +        if ( res )
->> +            return res;
->> +
->> +        if ( iommu->phandle )
->> +        {
->> +            res = fdt_property_cell(fdt, "phandle", iommu->phandle);
->> +            if ( res )
->> +                return res;
->> +        }
->> +
->> +        /* Use the same reg regions as the IOMMU node in host DTB. */
->> +        prop = dt_get_property(iommu, "reg", &len);
->> +        if ( !prop )
->> +        {
->> +            printk(XENLOG_ERR "vIOMMU: Can't find IOMMU reg property.\n");
->> +            res = -FDT_ERR_XEN(ENOENT);
->> +            return res;
->> +        }
->> +
->> +        res = fdt_property(fdt, "reg", prop, len);
->> +        if ( res )
->> +            return res;
->> +
->> +        prop = dt_get_property(iommu, "#iommu-cells", &len);
->> +        if ( !prop )
->> +        {
->> +            res = -FDT_ERR_XEN(ENOENT);
->> +            return res;
->> +        }
->> +
->> +        res = fdt_property(fdt, "#iommu-cells", prop, len);
->> +        if ( res )
->> +            return res;
->> +
->> +        res = fdt_property_string(fdt, "interrupt-names", "combined");
->> +        if ( res )
->> +            return res;
->> +
->> +        set_interrupt(intr, iommu_data->irq, 0xf, DT_IRQ_TYPE_LEVEL_HIGH);
->> +
->> +        res = fdt_property_interrupts(kinfo, &intr, 1);
->> +        if ( res )
->> +            return res;
->> +
->> +        iommu_data->hwdom_node_created = true;
->> +
->> +        fdt_end_node(fdt);
->> +    }
->> +
->> +    return res;
->> +}
->> +#endif
->> +
->>    static int __init handle_node(struct domain *d, struct kernel_info *kinfo,
->>                                  struct dt_device_node *node,
->>                                  p2m_type_t p2mt)
->> @@ -1525,6 +1617,12 @@ static int __init handle_node(struct domain *d, struct kernel_info *kinfo,
->>        if ( dt_match_node(timer_matches, node) )
->>            return make_timer_node(kinfo);
->>    
->> +#ifdef CONFIG_ARM_VIRTUAL_IOMMU
->> +    if ( device_get_class(node) == DEVICE_IOMMU &&
->> +         viommu_get_type() != XEN_DOMCTL_CONFIG_VIOMMU_NONE )
->> +        return make_hwdom_viommu_node(kinfo);
-> 
-> So all vIOMMU nodes are created at the position of the first pIOMMU
-> node, right? If so, could it be possible in real life for IOMMUs to sit
-> under different buses (under different parent nodes)?
-> 
+At the end, only "none" machine do not have targets parameter or
+(QEMU_ARCH_ALL), as that's the sole
+machine that supports all targets.
 
-Yes, for hardware domains, all vIOMMU nodes are inserted at the position 
-of the first pIOMMU node.
+> variants or only some of them? If the latter why not convert those to
 
-If pIOMMUs are located under different buses, the guest DT hierarchy 
-will differ from the host DT hierarchy, with all vIOMMU nodes placed 
-under the same parent. This is not necessarily a problem. However, the 
-``reg`` property is copied from the original pIOMMU node and may 
-therefore contain an address relative to its parent bus, whereas the 
-host IOMMU list and the registered MMIO regions use the translated 
-physical address obtained during the SMMUv3 driver probe. This 
-inconsistency could prevent the guest from accessing the vIOMMUs correctly.
 
-I'll change the implementation so that vIOMMU nodes are created under 
-their corresponding parent buses, preserving the original pIOMMU 
-hierarchy from the host DT.
 
-Thank you for noticing this.
 
-> 
->> +#endif
->> +
->>        /* Skip nodes used by Xen */
->>        if ( dt_device_used_by(node) == DOMID_XEN )
->>        {
->> diff --git a/xen/arch/arm/include/asm/viommu.h b/xen/arch/arm/include/asm/viommu.h
->> index 844cf34d56..5ae21042f0 100644
->> --- a/xen/arch/arm/include/asm/viommu.h
->> +++ b/xen/arch/arm/include/asm/viommu.h
->> @@ -20,6 +20,7 @@ struct host_iommu {
->>        paddr_t size;
->>        /* Used for dom0 EVTQ and GERROR interrupts (1-1 IRQ mapping) */
->>        uint32_t irq;
->> +    bool hwdom_node_created;
->>    };
->>    
->>    struct viommu_ops {
-> 
+> DEFINE_MACHINE_EXTENDED and then only that macro needs to be changed with
+> other wrappers passing a default value without needing a new parameter.
+> That does not work if all machines need to do this but even then, keeping
+> the macro and adding a new required parameter is better in my opinion as
+> it keeps boiler plate hidden.
 
-BR,
-Milan
+Another option is keep DEFINE_MACHINE and introduce DEFINE_MACHINE_TARGETS
+and remove DEFINE_MACHINE_EXTENDED, and we only use DEFINE_MACHINE for
+simple case,
+that is parent is TYPE_MACHINE and have no custom type and no more
+attributes assigned.
+DEFINE_MACHINE_EXTENDED is too verbose, when calling it, it less clear
+than calling to DEFINE_MACHINE.
+And if we want to set more attributes to TypeInfo, just expand it to
+use type_init or DEFINE_TYPES, how about this way.
 
+This will be something like:
+
+#define DEFINE_MACHINE_TARGETS(namestr, machine_initfn, targets) \
+    static void machine_initfn##_class_init(ObjectClass *oc, const void *da=
+ta) \
+    { \
+        MachineClass *mc =3D MACHINE_CLASS(oc); \
+        machine_initfn(mc); \
+    } \
+    static const TypeInfo machine_initfn##_typeinfo =3D { \
+        .name       =3D MACHINE_TYPE_NAME(namestr), \
+        .parent     =3D TYPE_MACHINE, \
+        .class_init =3D machine_initfn##_class_init, \
+    }; \
+    static void machine_initfn##_register_types(void) \
+    { \
+        type_register_targets(&machine_initfn##_typeinfo, targets); \
+    } \
+    type_init(machine_initfn##_register_types)
+
+/* Implicitly insecure */
+#define DEFINE_MACHINE(namestr, machine_initfn) \
+    DEFINE_MACHINE_TARGETS(namestr, machine_initfn, QEMU_ARCH_ALL) \
+
+As the many call is to DEFINE_MACHINE.
+
+And after all conversion, all existing usage of DEFINE_MACHINE will be
+converted to
+DEFINE_MACHINE_TARGETS.
+DEFINE_MACHINE will be called for ('none') machine or future heterogeneous
+machines
+
+
+Either way, these patches will be dropped. We will introduce
+DEFINE_MACHINE_TARGETS first.
+
+>
+> Regards,
+> BALATON Zoltan
+>
+> >
+> > And the
+> >    .instance_size =3D sizeof(MachineState),
+> > is indeed not needed, they sharing TYPE_MACHINE's sizeof(MachineState)
+> > is enough.
+> > Even though DEFINE_MACHINE expands to .instance_size =3D
+> > sizeof(MachineState), and it's redundant.
+> > So I think convert to DEFINE_TYPES would be a good alternative to this
+> > issue, less boilerplate(not none)
+> > And dealt with the issue we faced.
+> >
+> > What do you think about this idea, BALATON
+> >
+> >>
+> >> Regards,
+> >> BALATON Zoltan
+> >
+> >
+> >
+> >
+
+
+
+--=20
+         =E6=AD=A4=E8=87=B4
+=E7=A4=BC
+=E7=BD=97=E5=8B=87=E5=88=9A
+Yours
+    sincerely,
+Yonggang Luo
 
