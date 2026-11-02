@@ -2,48 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F0440606A324
-	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 09:25:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2D0CD606A326
+	for <xen-devel@archiver.kernel.org>; Mon,  2 Nov 2026 09:25:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=aspeedtech.com header.i=@aspeedtech.com header.a=rsa-sha256 header.s=selector1 header.b=rMyMiXHf
-Received: from list by lists.xenproject.org with outflank-mailman.1467869.1676984 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=aspeedtech.com header.i=@aspeedtech.com header.a=rsa-sha256 header.s=selector1 header.b=TBTO0ODk
+Received: from list by lists.xenproject.org with outflank-mailman.1467858.1676931 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNoHe-0005io-29; Mon, 02 Nov 2026 09:24:54 +0000
+	id 1xNoHZ-0004Sq-Fz; Mon, 02 Nov 2026 09:24:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1467869.1676984; Mon, 02 Nov 2026 09:24:53 +0000
+Received: by outflank-mailman (output) from mailman id 1467858.1676931; Mon, 02 Nov 2026 09:24:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xNoHd-0005ez-HS; Mon, 02 Nov 2026 09:24:53 +0000
-Received: by outflank-mailman (input) for mailman id 1467869;
- Mon, 02 Nov 2026 09:22:35 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xNoHZ-0004Pz-3Z; Mon, 02 Nov 2026 09:24:49 +0000
+Received: by outflank-mailman (input) for mailman id 1467858;
+ Mon, 02 Nov 2026 09:22:22 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jamin_lin@aspeedtech.com>) id 1xNoFP-0003UR-31
- for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 09:22:35 +0000
+ (envelope-from <jamin_lin@aspeedtech.com>) id 1xNoFB-0003Re-VT
+ for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 09:22:22 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xNoFO-0071w6-Fl
- for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 10:22:34 +0100
-Received: from [10.42.69.5] (helo=localhost)
+ id 1xNoFB-008rD4-Bd
+ for xen-devel@lists.xenproject.org; Mon, 02 Nov 2026 10:22:21 +0100
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jamin_lin@aspeedtech.com>)
- id 6ae85650-8faa-0a2a0a5109dd-0a2a4505ec98-38
- for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 10:22:34 +0100
-Received: from [52.101.127.73]
- (helo=TYDPR03CU002.outbound.protection.outlook.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ae85649-e002-0a2a0a5209dd-0a2a4504d398-10
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 10:22:21 +0100
+Received: from [40.107.75.124]
+ (helo=OS8PR02CU002.outbound.protection.outlook.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jamin_lin@aspeedtech.com>)
- id 6ae85657-4cb1-0a2a45050019-34657f49ad41-3
- for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 10:22:33 +0100
+ id 6ae8564a-b57f-0a2a45040019-286b4b7c6396-3
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 10:22:20 +0100
 Received: from SEZPR06MB7362.apcprd06.prod.outlook.com (2603:1096:101:253::10)
- by KUXPR06MB8030.apcprd06.prod.outlook.com (2603:1096:d10:4d::7) with
- Microsoft SMTP Server (version=TLS1_2,
+ by SEYPR06MB6333.apcprd06.prod.outlook.com (2603:1096:101:145::5)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.8; Mon, 2 Nov 2026
- 09:22:27 +0000
+ 09:22:16 +0000
 Received: from SEZPR06MB7362.apcprd06.prod.outlook.com
  ([fe80::cd2d:35d2:a702:1de6]) by SEZPR06MB7362.apcprd06.prod.outlook.com
  ([fe80::cd2d:35d2:a702:1de6%4]) with mapi id 15.21.0592.007; Mon, 2 Nov 2026
- 09:22:25 +0000
+ 09:22:15 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -54,20 +54,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=aspeedtech.com header.i="@aspeedtech.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=iBhgURZC4kAlutZz6m376WyDbffd1PhJAbcoWqvE1efQIKuuTeABhcCrQrhie4X75R3SokFaqrGiGpGMPPD3embmDPioIAnK21p/Y0qXLn6kty2ou6yRRahnrtPxZIaOOzJKndx6Sbg3PqgIccIhT5ATIXicwx/49n5l3zdRyry2PP9uLiGQkop8GRNgwt3QH6UHlH3zTnh+q6f0DUhZdNf2a2BSUiUqu81NFJVCNDw+XIj9mwhrKc69IEApjAaPueieyUwfyM4mi8oPkicWaD6wagTMN4zWIAhwFejvHqALgIXi2dHX+OlWB+qOL69ZUdq9Rv/EMX3qFD5kgozLmQ==
+ b=Ea40klhgdc2thbwzaGSi4pPKAIFldLRqFHhD7b3fjgjUrhf8ot7l07LQh1t1BaANxAVyLFA9tPH/E4lNQBt41Fdt35AbKWNYmgJfOj8OrogSRIhKrsz//YBjh5YNVbXchDxjDRbc8E5kHhqtMKrT7+/oigniyCrTXSP0s/7r76gJVoR8vanRTQk1d9RSnZlYg1l+1L02BtGvGJmNN3B8KlQA9RcAPsir9eYos3fTmIgb0BJYXCbjV+4Uh4dQLv75VakefC4SrhYG6Dn5wzHwl+GRaR+9MwOAtX6Fiu37YmjP8Vba0yGBY1rwXRVUFkiHJru96oZd+KCCS+Qx8WTIaA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=pfiFEH0CPSP8FOE1AeNeCKARq0aAKEWFbvucorbqrbQ=;
- b=Rp1AlIgBGwL7It4Jm2FWRupfKBPTFYXZR/B9c1k5nzs62du6vYDvvihQRZyVkbQfwkpvNEUe36ElbZQz85FoU1g91EXPPgqvPygu5xjKrJNZu+nw7tNBaWq8EgXEcw0TuFnaGTEau6u/TJgEzuSSQrY57j2UR7WQjGawhzhOkhShZpTienBGHB4xaO+bMLcgFg1wCfMNCSYhIaBPR8oiUtqr7X+XJ0I3anZn2bZkyGSd1g0cP3HokCqVvpaDHjp17S91coDWihMICabjIq85jhMWMfFU6HlUDYgTPHx4P3y/3zKSHxj9w94n8AlJRhAfuonJYka+32SevxjKaFK6Gw==
+ bh=L7ugJp5+EyBp63kk42bQjTmAv+ji8R96jAVECGk951U=;
+ b=TI/IV033LtB2ByoyIinicgx3feMchU7XZo6ZALky7FSVFCxhYPRal9cSnHS40LoYXog7txAQmsdkRteGslImzGpcqVGxgEp6bal9RwrKCMO2efBodTh2y0K5gDCwz53x1ngWyqlWbH1Az4rsrB32O79zpfflGcOby7E7EpV97A1TCUoTkgtsIEbZEG3qThEYcK/zHe0OVzRg1if5fweuqwrgclIyU0aXvaXPJvcfptyBAtQ7Ng/85ZDNin9CkwapSgBEOK8dfs7ISqb76P1UOIRmCdr6PMIcW+pH9+UislSoR97LJkmxR3HYbgTrEFf7E+gpZK4LgPNVZxq/eIsdpQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=aspeedtech.com; dmarc=pass action=none
  header.from=aspeedtech.com; dkim=pass header.d=aspeedtech.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aspeedtech.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=pfiFEH0CPSP8FOE1AeNeCKARq0aAKEWFbvucorbqrbQ=;
- b=rMyMiXHfB7MrUMak+lD8qqtmUraSv0kiYGByrQbmTsYJyL0OXX7rNh2MVHcTLONQoLCqAQ0uY3RCt3wPoao+/hv6zPVWVmrlFZDmuufWKFBoE6mTvhITlQh8vUcGD/j8TjawSy1me+2V0Cqj7ywldRwMrUJXVomcGMsY1J8h+VikdhLLVJZrMHLx6FNKZxPxhhC5cjQgWxXQygfo2QFgs5p5np6DamIhsH1ZI5xc7dQ1cBFzWLFkfh7d+zri/YEZl2s+67KAjSZednaXqfVtI0auaYJvRjHbC86AWXEjo9B8LxHsc85vh8zvIKmUY8apblmbxGxuPPJ8WjuuHIZriw==
+ bh=L7ugJp5+EyBp63kk42bQjTmAv+ji8R96jAVECGk951U=;
+ b=TBTO0ODk7THthPF6jOO+E/rNAETCq0Tsw1yfbQkcisub6P2cQs7H5lvBb7+Lsz/rz8DipKV2cRAAQjKmRvmQ0YtPfpkfO9lxBmHwMQLDDUkeofiJQB4s2spr+uDOIHYU6YobwuAd2placuVHopFzAVNtiAUG5peQFbWuKMLOJ5mFIRjkkUY4Iac2xLeR9RMaEVMXpHNsbSS2ARfz1UELtoKMkKJ6X7TYBr9PFTHRuxVtsn6NMaPSVbRNu8CjrteGGiSPm8TcuE4FCsm4kQGVZ0Z58YQm9uHlAumOE25k/7+31sZ2rVQX5+G3gpj4gks0kkRo8WMkp+uFCSh6lQxlOQ==
 From: Jamin Lin <jamin_lin@aspeedtech.com>
 To: "kraxel@redhat.com" <kraxel@redhat.com>, "marcandre.lureau@redhat.com"
 	<marcandre.lureau@redhat.com>, "junjie.cao@intel.com" <junjie.cao@intel.com>,
@@ -83,12 +83,11 @@ To: "kraxel@redhat.com" <kraxel@redhat.com>, "marcandre.lureau@redhat.com"
 	<qemu-devel@nongnu.org>, "open list:ASPEED BMCs" <qemu-arm@nongnu.org>, "open
  list:X86 Xen CPUs" <xen-devel@lists.xenproject.org>
 CC: Jamin Lin <jamin_lin@aspeedtech.com>, Troy Lee <troy_lee@aspeedtech.com>
-Subject: [PATCH v8 13/18] hw/usb/redirect-server: Announce the exported device
-Thread-Topic: [PATCH v8 13/18] hw/usb/redirect-server: Announce the exported
- device
-Thread-Index: AQHdaqupvmzo6sFN+0K1iqt887RtJA==
-Date: Mon, 2 Nov 2026 09:22:21 +0000
-Message-ID: <20261102092201.1729245-14-jamin_lin@aspeedtech.com>
+Subject: [PATCH v8 09/18] hw/arm/npcm7xx: Keep the automatic hub
+Thread-Topic: [PATCH v8 09/18] hw/arm/npcm7xx: Keep the automatic hub
+Thread-Index: AQHdaqumID06mim1t02tHdx0pgsQmw==
+Date: Mon, 2 Nov 2026 09:22:15 +0000
+Message-ID: <20261102092201.1729245-10-jamin_lin@aspeedtech.com>
 References: <20261102092201.1729245-1-jamin_lin@aspeedtech.com>
 In-Reply-To: <20261102092201.1729245-1-jamin_lin@aspeedtech.com>
 Accept-Language: zh-TW, en-US
@@ -98,69 +97,69 @@ X-MS-TNEF-Correlator:
 authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=aspeedtech.com;
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SEZPR06MB7362:EE_|KUXPR06MB8030:EE_
-x-ms-office365-filtering-correlation-id: 195a2571-f597-46b4-1310-08df38c2cea8
+x-ms-traffictypediagnostic: SEZPR06MB7362:EE_|SEYPR06MB6333:EE_
+x-ms-office365-filtering-correlation-id: 951d9524-7c82-4a90-009a-08df38c2c921
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam:
- BCL:0;ARA:13230040|366016|1800799024|23010399003|376014|7416014|921020|38070700021|261021123027099003|5023799004|56012099006|261009223027099003|261028144727099003|261021121427099003|261022075727099003|261026121527099003|261022105027099003|261026140227099003|10067099003|18002099003|22082099003|6133799003|3023799007;
+ BCL:0;ARA:13230040|366016|1800799024|23010399003|376014|7416014|921020|38070700021|56012099006|261009223027099003|261021121427099003|10067099003|18002099003|22082099003;
 x-microsoft-antispam-message-info:
- wDAyTwNva6DwCxBJQzw+YeNiKbHcjUTYttq9nb6aFUpgLhTCzOJvyeaofpHxTTSC6KkEn28ZgvNAi8DMxr3QX2PdOSFmnvdbMnJ1KAh8fL3XkHXN4Z0ZzjKbtuy/e/pHsaLEo+0kqwhLYWJbYR9k3aFKcMzWv/3vZh24x/aIv/4r09nyGgXUXExZFlpqa5dUuQKZZlvMUqUFv1AD4AVKnU7+CZOKO86EuwaZSwjP2s8fGFNzjamdBR8qfjcLzdV+bABSE2LMKfyeXrCcFyFfuNjI1Qd/FFTin3DszRvVdpnBUEA2cI1Mq4m7PTuAkEHDsDT1EwsiIx3dxXaLIlMUk6gdYppy8ppShBy9VitLm8Qqwu5aivb4BzUJQwZnUhwMzqqZTGY/k2vZqr0HaT9az/PfDwQbf6ru3EZUkdB0xmZVy86s5H4QwKlaDIpeaWGD6PBr5v/rBVICqlkYtCNdbmuWIXTSPMMmnHpKCLOnsQBTHPeTd4n8tuD1Rlhj6ed3AQoacPYP3G1L/FMp/q5hmLM7L6x51NDj5V3M4no+RiCuH23rgqm60sFdlDEzNlkwGN+0gKpC+xvAKQ9/pLNC39s1kzNyCnspOeMkOSskdCldBT1jb4OYNmpCylelztEcgYHbljTmD0ZcjPGpTqYgJqGhoB4qSm5gMd9W5P7DBFoxaNW6eR3Zfm1IiUGZBp5s2pxR34Dq3EEQr2YBovr+4Iv++BQEqqBj+V0iSKOIPM3Jh+kdvZaTJXG8NOzYsTU/
+ sDxZcu6GIqOObRAFleptD1z7eEhmHs8esImPR2o912MarTfq6ot+NXEJDAYV/aGXj4DnCqvBDCaZ7L59XdDn6Gd2khFsUv/vSLB8hXJHmDhoBKadpfBsNTcUNRBYm4efInADx6o+xSCqEL2nqKLkbvHTkJNUA6HfAtX3ardQVL1A+UnJOah2S5pItoSrGxq8XCqSs2tu+d4Ak+0cq4fV1KMPjYo7PEHu+MePM1BiltEqI3VAYVFgRNc5d/zvyYrs+5x/0+PxcfQfyucbxyqhr3nS7nEZJg/O6vhxd15u7tLQTXwWrhtHp1qWvm2Ik1o3ZmM1WQseb2JzAcj9oxMmagI+4hVfIpJb2Bw5HV8IiiUuKq7wvWOcgQTFsqx5wqq/pR2hgTqVcDadtckpDTCBANeNu7ozSdX0GDMzYYRicOgvuAIHzblnNHnY1jpN09mDTVOSiu3apaWFNTsabu1hYqIe5D62TO3ztX987Jj9V8aYGpYgi+8ebscg09kN/ptOmsf+S8nq9jbkqzr5Dx67XN2oHsK1sKYlVW/PURdrs3TpETjnFDv696gqL72JcF2NW21ljHr8qD8O9SXv+DLVABOV0SQpg2A/BnicLI4e/PZj1O/APpeoI/JI0mESiE0MOMCWCpPDKCfKIRXD9M6XVCZEnOwybCmSkOYmcsCzGtW0Mc928k8mf7aXo3BN1cyuXlKuKSfxg+n63vfngbzk9PHJyuFycghO9NmjujqZ2xl0bSD0WWXzhhVAx8Crd8Nq
 x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SEZPR06MB7362.apcprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(23010399003)(376014)(7416014)(921020)(38070700021)(261021123027099003)(5023799004)(56012099006)(261009223027099003)(261028144727099003)(261021121427099003)(261022075727099003)(261026121527099003)(261022105027099003)(261026140227099003)(10067099003)(18002099003)(22082099003)(6133799003)(3023799007);DIR:OUT;SFP:1102;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SEZPR06MB7362.apcprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(23010399003)(376014)(7416014)(921020)(38070700021)(56012099006)(261009223027099003)(261021121427099003)(10067099003)(18002099003)(22082099003);DIR:OUT;SFP:1102;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?KkIVq+EXHyJqp5857ge1GF5I3PTcyvr3CCxRM4Qn/UpTgvuzzY7TovRbNC?=
- =?iso-8859-1?Q?N/w9581x7juD6UhXlJgYVAEg+RfOthypuNg+GW5ea8WPp6KbK3xsZ5zPf1?=
- =?iso-8859-1?Q?lWUl3nCaF8j1rKqocWvFs15z8MUSc22294j35fHP/xEJxnviOUZJuO3mEy?=
- =?iso-8859-1?Q?ki058vhF4OoGuZsrVf1yiwVf6j3qVeMDLfbTg7lmho/huIJjC98FW8uXD9?=
- =?iso-8859-1?Q?WVaFRc469ucyqjJj/1k0XkB2G8e7rkHWny0qyZPRyfWYB2EWwC6muEkaNy?=
- =?iso-8859-1?Q?RJDwAsf0wSouVWeoBc5lVURp0wrOPVqdCJv9plooABu5zmFSYfvwm4ECyY?=
- =?iso-8859-1?Q?JYQrjSciXREfOuSnEKBOBpTxtDJyBzs6Vcrpo34ON+xe6gQp2hkME5alGj?=
- =?iso-8859-1?Q?q9nJmCCw3+rCHmv1C50savYlQqxKVScTFSibqKjgbw5sKGPdKOCoQIukg9?=
- =?iso-8859-1?Q?4CthbeVQ42mUBxqA7TPKGuFYXZFz1ieBTsqxLh5+2fZ5JSrI8txf+jDeyN?=
- =?iso-8859-1?Q?i8686aQEHSAK1qSwPIgmg3wGkGQuKbrO0BLBTr9/BQoG4sAcAFrL6pyynT?=
- =?iso-8859-1?Q?ufO/JgGhX7wh3lmT4y5bS/VWPYFTLrJRbT7g4jvDWDugAFd0Yuenytv5/e?=
- =?iso-8859-1?Q?sGzCr+Aw4eriGzx/IoRFkt16J9MF3GJK7yV4ITz2s39j0ZVuKlVYqAZQAB?=
- =?iso-8859-1?Q?tuPySxxL5aaO8e24bsWPKdcxSGJjOpka8sknMrf7aWByeZN4ICYZmQrZTj?=
- =?iso-8859-1?Q?LW2/LbTkj+WLBgrlJ//xS9MbV4Uqqj6YxIntA2/q/q05WLlNztalSxX8R/?=
- =?iso-8859-1?Q?85uFgRZ3GWbbPKasQR750ogSz9ND9knencmK1b8a+aVzbedTufD5u5Dbxp?=
- =?iso-8859-1?Q?YrHSfnc+CdPu8/8QkRpWAfwl9iEjExFW7vj8xMu2WhcExLNCh5O2V/vafx?=
- =?iso-8859-1?Q?Rtor4x76DuJ2I9AtQIarM84RU16Z55L2OCokJYHN1V1GqSK8TTzZtq4Jrb?=
- =?iso-8859-1?Q?i5q+8IqfDTEaedNiQd7auXVjwW/2RktmWdgGmNAPauH2HRAAapRKBIFcEW?=
- =?iso-8859-1?Q?Q/PvePO3nR0SdHYUtP7k52x71wfDp9FNjSYxOXZuI2p4ANdDXVJ1C6bblg?=
- =?iso-8859-1?Q?zBnLxK+/8wLbQzRILZoPZJbiwegviORurT1iuAFW6OIIIKrVxo0hEVhQ1Z?=
- =?iso-8859-1?Q?+HGL623CtyCZ957zbnhXmeuOEPoAhgQmU/75fq+0BErsvDrhf5L5+TMcly?=
- =?iso-8859-1?Q?op1JPvqR6gyDuyEfxHteApF3NH4xJ390uOzTCC8hKgbpb9WVT9OnFDwLgu?=
- =?iso-8859-1?Q?Eak0DRfaZZ0kvMkZrMeqGvlqfj3yUbNsYRjSLyKdhaUA5uEtjN8YsE9FH4?=
- =?iso-8859-1?Q?d8wDBfY8En6TPnzn2u1gnG6sPv/H/Fq+PAW6g2VEwFv1zFVCPngf3yFpAh?=
- =?iso-8859-1?Q?nl4yP+DjhTK9wN4tRQb9Qoy1xsbp2TsFBqenaFcuW/g5pL8yVLSZZM/Q3B?=
- =?iso-8859-1?Q?ePQJtdRnGya+5zV3P6393fa1TyG2PRwgO+u6mnrjXzxlpFzDBD1jaHGzZz?=
- =?iso-8859-1?Q?bbPKxp3JKrkh6awJuDqhVCNB9ae2f9IHDbfMuCtPxxmFVojTdBM+s3tJWZ?=
- =?iso-8859-1?Q?dBrg9n1h2SCuF9yZ8q1aGmFqmX/fIzfb49wfU/kK7o4WSI9pz4Q2rr1fIO?=
- =?iso-8859-1?Q?XbCowXtFU4Su7CLO0ztwzr5kM3Gs5exuwRjfmD1SuK93vZ/GrsTpRiSb+K?=
- =?iso-8859-1?Q?Zi9idgHJkmFCl6jfVFdX2XOZ4o4mKb2FDbQtEmJfMV+56HCBSDhzNWZvqJ?=
- =?iso-8859-1?Q?kvyIqhu/og=3D=3D?=
+ =?iso-8859-1?Q?2GYl9b+J24KAsdAfAEazcVYEgDgNn6H4q4ZDJN+wjeHvX+i86v/tIpqpyB?=
+ =?iso-8859-1?Q?8hxNTVLv5eCQlderDGG1pYh1V3DkqPKRndEYayF/6lC6/7/pKRpOSvtVsB?=
+ =?iso-8859-1?Q?n7m9NOxVMBWpCTEbLR/wszhtI6nPSekmDMN/AA0KHGwDp2y5LEeikAgmTG?=
+ =?iso-8859-1?Q?rzzZI5bb2/G/aKf9rJ1oh1akPWJb/XBoOVGTrLofhPFLIKwllqVJ4LubnG?=
+ =?iso-8859-1?Q?CuGFmEjplxOQPqTuvkxn6+cuh7Zdg2WaqfyKrVWepRToUwV5lEpRTmurSm?=
+ =?iso-8859-1?Q?njqp0MxKtFDm8oKRRmwQ5qOF3a/6LRDi6NaxpQCoIx/bF7kZjbTWBhiVem?=
+ =?iso-8859-1?Q?3Qj+uQELPFRG2o0eD7ADeoaCnn2q79hlg6F0GXC5Ah0h+9GVVnDMak9szf?=
+ =?iso-8859-1?Q?VJV7LS5+EAtKyGHAa2FvFNiHV4M6zBxM9ECczIuCNCXPSygKY4vR3DA955?=
+ =?iso-8859-1?Q?rmRRsmQGO1/ah0f2eVEm/ZBR0/TQ8K0Nfl4zEXhgGd/pkG/k6hlL642b2U?=
+ =?iso-8859-1?Q?lxIalU4xg4u64KNiBSgtbBc73QYCSf+pJmVtfTEZ4CyF0W89aj3xlCxs1r?=
+ =?iso-8859-1?Q?oRBKAKFAHW++Yr8LMg0smVq+0lB+9Mft1VSNGhtYoXhDkKlt0OJznDwldc?=
+ =?iso-8859-1?Q?lqeEybXm3RH59A3sibZlVN8f3eOXsy39d+ESEpZ9r0QerVNKmwP+W0wxju?=
+ =?iso-8859-1?Q?KcOeADUYjZhZ5Z2wH0rVShYByMWVOWydYiqNNCo+jEdaRKH32mMR1PgiKS?=
+ =?iso-8859-1?Q?ALFconlnATMsAhO9wVUglz+91XjUBJmM2GPFcCLD3JlSrqoKl/xMDzzFiv?=
+ =?iso-8859-1?Q?IHV8v4wLZ4k4K3KqD9nwkz2LF0tLjHFXb/iaD6SoeTdPcE0Jau2JvNrBE/?=
+ =?iso-8859-1?Q?+lZU5LFgj6IlyHGK7FfP8m7luGXwZ71HduF1i3p1wNhlgSNjpLcOwOsRz8?=
+ =?iso-8859-1?Q?2JXURgRjlOSnUeFbpWBF+iQ8GNDjxygUmp977sl5bB3wOpCyylvTNH7NNl?=
+ =?iso-8859-1?Q?DDYqzKzlt2I4BUUvSTrBVgIB2A+2ek0udEWqTHbQFXhT69yvKTb3Srd/gO?=
+ =?iso-8859-1?Q?hZuT8chbEqKnxI7wBAM9kA3ElPcyXIhUFiDI1AR9NmQV8VjO94X02UA81P?=
+ =?iso-8859-1?Q?bqXxUP5I3QCJY5/XuB5UciJ5b4IMr/VxrdCgRJsZREfUdNa8yRB3t9Ln74?=
+ =?iso-8859-1?Q?nmiMLpIIHrLAgsH7TOg0P/ubzcnjWRwh2PO4HhQ7C6hEEwj8Pur0TxovvH?=
+ =?iso-8859-1?Q?QzN1z0vy38E4xGiMmK7FAkOJUZbP8ccoxcHmTufAvYdvHHLxLNg0hkSEJh?=
+ =?iso-8859-1?Q?OtIk/yt5fWKcEoFlf9KNRn+tecsGkF+Q6dI3xtpCiou/PFicZENmggYQZx?=
+ =?iso-8859-1?Q?HxLE0ATJ92l2YXqEdTdyTTyu9rIny4f64CeoQyWe7R6B/wUFJMggxBtmGb?=
+ =?iso-8859-1?Q?O/n15n4BNAkjVNbx2UsK+dPafyhle4o2388VCDoh3CH0IrHMVMorUT3MOM?=
+ =?iso-8859-1?Q?exiqVv6A6GtPwvlCpp8/xnLHDEwYOeoDe37Kr90jC/4DIP/D+V9yE2Lf4o?=
+ =?iso-8859-1?Q?W5Z5Ks/eOgOepkLh1QwoCc2Q/QrutZqj0qOzknCViISXyN6id4iaXJkdnS?=
+ =?iso-8859-1?Q?iX7QW336ueCsiaPTtmYueE4xys+FHwAVDOxcZpnxF5ZHuBnfB6m33D5kKp?=
+ =?iso-8859-1?Q?2hAFr12sG5YrdMyqDYL4Vp2kDp5D2cqXvPpl4GXoRlf2W+r0Y9if6HQLda?=
+ =?iso-8859-1?Q?W8lOu2HHIgB9Y0x9XNvCXgBjGmTpzTBcxyeC2r3wxuLKJ+bJlfQV/gDktC?=
+ =?iso-8859-1?Q?kOicU2lMWw=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-Exchange-RoutingPolicyChecked:
-	qsP9p1ljG1UE1r99d0im4nKl4p/Qvy/l1ApljjSibs6KnOpODYDFZ6NOH0bt0MS+7SvGB0MwlSuXNxLmoRDPal7TbPTiHLS8kbaoU2MTl52B01ZJisLx4I3sdoI7nM9/ldYKEqSY7a3xwqKunC2A21ogb84xfuAhLDKXY46gFPxKuq2Li9xRyhDmHGCN99mxNROlelte0NpqeeNYsyTK0e/2UVN3b5k3f27gs+zbh+HzQhrPEeNFWbtO8ccChvmDu706d2iGinz0yxnIn81leGqyRTXNwNUJVddrZVW009sr7ziWmY3nGZ4Y4Ovpx9W/LHJdpYln/a5GIngg+gAKHQ==
+	4DgmIJlnu6Dni/o1FZAyOKGhJDDdjVZR3r/cw4AqPr450QuYeagb+CyNZB2qjS5C7LplOoBtH5ghX69Hz7CB5OORO1MQQVHDpRycUgBQlkQUqDWjN/zRDyTXlAJR4GKlnzfjNVbtwTwf17cx1WKgTzbdKj4tX5jGfgHBE81dUp9VHph1wxZV1kZfKpC8oqzwpK89arvSzvjGv9uDTorSwxnWbWNvGUTkvTv79wSPAyB901+TonE9cqMfconBnVMyiWWVad+6sSYclFCmf1aukgj/FFP/G5332uJt4oZFT4P6nXQvs3rFgG8I3rv0ilfl+7x0dI5dBpSRIj9p2Lv7MA==
 X-OriginatorOrg: aspeedtech.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB7362.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 195a2571-f597-46b4-1310-08df38c2cea8
-X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Nov 2026 09:22:21.4883
+X-MS-Exchange-CrossTenant-Network-Message-Id: 951d9524-7c82-4a90-009a-08df38c2c921
+X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Nov 2026 09:22:15.9018
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: 43d4aa98-e35b-4575-8939-080e90d5a249
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: b54wC7bu3cteuWn1OpHw3APZahIsl5W8trMfjcOg9p2tMyRE/jd7M+YEQmv+YfCIBteRfmPT5UPrvrx+bNBqmtItwAV02GXbgCpIFLeEqxA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: KUXPR06MB8030
-X-purgate-ID: tlsNG-c201ff/1793611354-251182A1-7ADECF6A/0/0
+X-MS-Exchange-CrossTenant-userprincipalname: 2h6LT/YnFpFfG4WpRpexhxpNezjx2GtBNzJP08g6rxEyIYUzIKlGK0J6qc0jm75Sb32FWQ5CNo3IdKdtjz1hrHuvk8mcYK/oMWl5cO8KF1A=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEYPR06MB6333
+X-purgate-ID: tlsNG-ebf023/1793611340-536C2B50-EB049B03/0/0
 X-purgate-type: clean
-X-purgate-size: 9873
+X-purgate-size: 1213
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -169,279 +168,34 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Send device_connect when a device is attached and the host has greeted=0A=
-us, device_disconnect when it goes away, and handle the bus reset the=0A=
-host sends before enumerating.=0A=
+The OHCI companion has one port, so a second device only fits behind=0A=
+the hub.=0A=
 =0A=
-device_connect carries no identity. The peer asks the device itself with=0A=
-GET_DESCRIPTOR as soon as it enumerates, so anything we put there would=0A=
-be made up. The speed is real: it comes from the device on our port.=0A=
+npcm7xx has no versioned machine type, so compat cannot reach it. Turn=0A=
+the property on here instead. The companion shares the EHCI bus, so=0A=
+the EHCI carries the property.=0A=
 =0A=
+Suggested-by: Gerd Hoffmann <kraxel@redhat.com>=0A=
 Signed-off-by: Jamin Lin <jamin_lin@aspeedtech.com>=0A=
 ---=0A=
- hw/usb/redirect-server.c | 150 ++++++++++++++++++++++++++++++++++++++-=0A=
- hw/usb/trace-events      |   7 ++=0A=
- 2 files changed, 156 insertions(+), 1 deletion(-)=0A=
+ hw/arm/npcm7xx.c | 2 ++=0A=
+ 1 file changed, 2 insertions(+)=0A=
 =0A=
-diff --git a/hw/usb/redirect-server.c b/hw/usb/redirect-server.c=0A=
-index f78351bde9..e207f5a7eb 100644=0A=
---- a/hw/usb/redirect-server.c=0A=
-+++ b/hw/usb/redirect-server.c=0A=
-@@ -56,6 +56,7 @@=0A=
- #include "qemu/main-loop.h"=0A=
- #include "qemu/module.h"=0A=
- #include "migration/vmstate.h"=0A=
-+#include "qemu/cutils.h"=0A=
- #include "hw/core/sysbus.h"=0A=
- #include "hw/usb/usb.h"=0A=
- #include "chardev/char-fe.h"=0A=
-@@ -85,17 +86,105 @@ struct USBRedirServer {=0A=
-     /* usbredir over the chardev */=0A=
-     struct usbredirparser *parser;=0A=
-     QEMUBH *chardev_close_bh;=0A=
-+    QEMUBH *announce_bh;=0A=
-     const uint8_t *read_buf;=0A=
-     int read_buf_size;=0A=
-     bool in_write;=0A=
-     guint watch;=0A=
-     bool host_connected;=0A=
-+    bool device_announced;=0A=
- };=0A=
- =0A=
-+/*=0A=
-+ * The device is whatever USBDevice the user plugged into our port with=0A=
-+ * "-device <device>,bus=3D<id>.0". NULL until then.=0A=
-+ */=0A=
-+static USBDevice *usbredir_server_device(USBRedirServer *s)=0A=
-+{=0A=
-+    return s->port.dev;=0A=
-+}=0A=
-+=0A=
-+/*=0A=
-+ * Device announcement=0A=
-+ */=0A=
-+=0A=
-+static uint8_t usbredir_server_speed(USBDevice *device)=0A=
-+{=0A=
-+    switch (device->speed) {=0A=
-+    case USB_SPEED_LOW:=0A=
-+        return usb_redir_speed_low;=0A=
-+    case USB_SPEED_FULL:=0A=
-+        return usb_redir_speed_full;=0A=
-+    default:=0A=
-+        return usb_redir_speed_high;=0A=
-+    }=0A=
-+}=0A=
-+=0A=
-+static void usbredir_server_announce_device(void *opaque)=0A=
-+{=0A=
-+    USBRedirServer *s =3D opaque;=0A=
-+    USBDevice *device =3D usbredir_server_device(s);=0A=
-+    struct usb_redir_interface_info_header iface_info =3D {=0A=
-+        .interface_count =3D 0,=0A=
-+    };=0A=
-+    struct usb_redir_device_connect_header conn =3D {};=0A=
-+=0A=
-+    if (!s->host_connected || s->device_announced ||=0A=
-+        !device || !device->attached) {=0A=
-+        return;=0A=
-+    }=0A=
-+    s->device_announced =3D true;=0A=
-+    conn.speed =3D usbredir_server_speed(device);=0A=
-+=0A=
-+    /*=0A=
-+     * The device has to be in DEFAULT state before it can answer=0A=
-+     * anything, so reset it here.=0A=
-+     */=0A=
-+    usb_device_reset(device);=0A=
-+=0A=
-+    /* Send this before device_connect. The peer needs it to accept us. */=
+diff --git a/hw/arm/npcm7xx.c b/hw/arm/npcm7xx.c=0A=
+index 695f30a0dc..3f5b33d7e3 100644=0A=
+--- a/hw/arm/npcm7xx.c=0A=
++++ b/hw/arm/npcm7xx.c=0A=
+@@ -628,6 +628,8 @@ static void npcm7xx_realize(DeviceState *dev, Error **e=
+rrp)=0A=
+     /* USB Host */=0A=
+     object_property_set_bool(OBJECT(&s->ehci), "companion-enable", true,=
 =0A=
-+    usbredirparser_send_interface_info(s->parser, &iface_info);=0A=
-+    usbredirparser_do_write(s->parser);=0A=
-+=0A=
-+    trace_usbredir_server_announce(conn.speed);=0A=
-+    usbredirparser_send_device_connect(s->parser, &conn);=0A=
-+    usbredirparser_do_write(s->parser);=0A=
-+}=0A=
-+=0A=
- /*=0A=
-  * USB port ops=0A=
-  */=0A=
- =0A=
-+static void usbredir_server_port_attach(USBPort *port)=0A=
-+{=0A=
-+    USBRedirServer *s =3D port->opaque;=0A=
-+=0A=
-+    trace_usbredir_server_attach();=0A=
-+=0A=
-+    /*=0A=
-+     * usb_attach() sets the state to ATTACHED after this returns.=0A=
-+     * A device needs DEFAULT state before it can serve a request.=0A=
-+     * The BH runs after usb_attach(), so the device stays in DEFAULT.=0A=
-+     */=0A=
-+    qemu_bh_schedule(s->announce_bh);=0A=
-+}=0A=
-+=0A=
-+static void usbredir_server_port_detach(USBPort *port)=0A=
-+{=0A=
-+    USBRedirServer *s =3D port->opaque;=0A=
-+=0A=
-+    trace_usbredir_server_detach(s->device_announced);=0A=
-+=0A=
-+    qemu_bh_cancel(s->announce_bh);=0A=
-+=0A=
-+    if (s->host_connected && s->parser && s->device_announced) {=0A=
-+        trace_usbredir_server_disconnect();=0A=
-+        usbredirparser_send_device_disconnect(s->parser);=0A=
-+        usbredirparser_do_write(s->parser);=0A=
-+    }=0A=
-+    s->device_announced =3D false;=0A=
-+}=0A=
-+=0A=
- static void usbredir_server_port_child_detach(USBPort *port, USBDevice *ch=
-ild)=0A=
- {=0A=
-     /* We only export the device on our own port. Nothing to do. */=0A=
-@@ -107,6 +196,8 @@ static void usbredir_server_port_wakeup(USBPort *port)=
-=0A=
- }=0A=
- =0A=
- static USBPortOps usbredir_server_port_ops =3D {=0A=
-+    .attach =3D usbredir_server_port_attach,=0A=
-+    .detach =3D usbredir_server_port_detach,=0A=
-     .child_detach =3D usbredir_server_port_child_detach,=0A=
-     .wakeup =3D usbredir_server_port_wakeup,=0A=
- };=0A=
-@@ -210,13 +301,53 @@ static int usbredir_server_write(void *priv, uint8_t =
-*data, int count)=0A=
-     return ret;=0A=
- }=0A=
- =0A=
--/* The remote host greets us once the socket is up. */=0A=
-+/*=0A=
-+ * usbredirparser message callbacks=0A=
-+ */=0A=
-+=0A=
- static void usbredir_server_hello(void *priv,=0A=
-                                   struct usb_redir_hello_header *hello)=0A=
- {=0A=
-     USBRedirServer *s =3D priv;=0A=
-+    char version[sizeof(hello->version) + 1];=0A=
-+=0A=
-+    pstrcpy(version, sizeof(version), hello->version);=0A=
-+    trace_usbredir_server_hello(version);=0A=
- =0A=
-     s->host_connected =3D true;=0A=
-+    qemu_bh_schedule(s->announce_bh);=0A=
-+}=0A=
-+=0A=
-+static void usbredir_server_reset(void *priv)=0A=
-+{=0A=
-+    USBRedirServer *s =3D priv;=0A=
-+    USBDevice *device =3D usbredir_server_device(s);=0A=
-+=0A=
-+    trace_usbredir_server_bus_reset(device && device->attached);=0A=
-+    usb_device_reset(device);=0A=
-+}=0A=
-+=0A=
-+static void usbredir_server_filter_reject(void *priv)=0A=
-+{=0A=
-+    trace_usbredir_server_filter_reject();=0A=
-+}=0A=
-+=0A=
-+static void usbredir_server_filter_filter(void *priv,=0A=
-+    struct usbredirfilter_rule *rules, int rules_count)=0A=
-+{=0A=
-+    /* We accept any host. The callback owns the rules, so free them. */=
-=0A=
-+    free(rules);=0A=
-+}=0A=
-+=0A=
-+static void usbredir_server_device_disconnect_ack(void *priv)=0A=
-+{=0A=
-+    /* The host saw our device_disconnect. Nothing to do. */=0A=
-+}=0A=
-+=0A=
-+static void usbredir_server_interface_info(void *priv,=0A=
-+    struct usb_redir_interface_info_header *hdr)=0A=
-+{=0A=
-+    /* The host should not send this to a device. Nothing to do. */=0A=
- }=0A=
- =0A=
- /*=0A=
-@@ -240,6 +371,14 @@ static void usbredir_server_create_parser(USBRedirServ=
-er *s)=0A=
- =0A=
-     /* Callbacks for messages the remote host sends to us */=0A=
-     s->parser->hello_func =3D usbredir_server_hello;=0A=
-+    s->parser->reset_func =3D usbredir_server_reset;=0A=
-+=0A=
-+    /* The parser calls these directly, so they must not be NULL. */=0A=
-+    s->parser->filter_reject_func =3D usbredir_server_filter_reject;=0A=
-+    s->parser->filter_filter_func =3D usbredir_server_filter_filter;=0A=
-+    s->parser->device_disconnect_ack_func =3D=0A=
-+        usbredir_server_device_disconnect_ack;=0A=
-+    s->parser->interface_info_func =3D usbredir_server_interface_info;=0A=
- =0A=
-     /* Capabilities: 64-bit IDs, connect_device_version, ep_info sizes */=
-=0A=
-     usbredirparser_caps_set_cap(caps, usb_redir_cap_connect_device_version=
-);=0A=
-@@ -267,7 +406,9 @@ static void usbredir_server_create_parser(USBRedirServe=
-r *s)=0A=
- static void usbredir_server_destroy_parser(USBRedirServer *s)=0A=
- {=0A=
-     s->host_connected =3D false;=0A=
-+    s->device_announced =3D false;=0A=
- =0A=
-+    qemu_bh_cancel(s->announce_bh);=0A=
-     g_clear_handle_id(&s->watch, g_source_remove);=0A=
- =0A=
-     if (s->parser) {=0A=
-@@ -368,6 +509,8 @@ static void usbredir_server_realize(DeviceState *dev, E=
-rror **errp)=0A=
- =0A=
-     s->chardev_close_bh =3D qemu_bh_new_guarded(usbredir_server_chardev_cl=
-ose_bh,=0A=
-                                               s, &dev->mem_reentrancy_guar=
-d);=0A=
-+    s->announce_bh =3D qemu_bh_new_guarded(usbredir_server_announce_device=
-, s,=0A=
-+                                         &dev->mem_reentrancy_guard);=0A=
- =0A=
-     qemu_chr_fe_set_handlers(&s->cs,=0A=
-                              usbredir_server_chardev_can_read,=0A=
-@@ -387,6 +530,11 @@ static void usbredir_server_unrealize(DeviceState *dev=
-)=0A=
-         qemu_bh_delete(s->chardev_close_bh);=0A=
-         s->chardev_close_bh =3D NULL;=0A=
-     }=0A=
-+=0A=
-+    if (s->announce_bh) {=0A=
-+        qemu_bh_delete(s->announce_bh);=0A=
-+        s->announce_bh =3D NULL;=0A=
-+    }=0A=
- }=0A=
- =0A=
- static const Property usbredir_server_props[] =3D {=0A=
-diff --git a/hw/usb/trace-events b/hw/usb/trace-events=0A=
-index d141661673..2cc6a244b9 100644=0A=
---- a/hw/usb/trace-events=0A=
-+++ b/hw/usb/trace-events=0A=
-@@ -399,3 +399,10 @@ usbredir_server_chardev_open(void) "chardev opened"=0A=
- usbredir_server_chardev_close(void) "chardev closed"=0A=
- usbredir_server_write_recursion(void) "recursive write, leaving it queued"=
-=0A=
- usbredir_server_log(const char *msg) "%s"=0A=
-+usbredir_server_hello(const char *version) "peer is %s"=0A=
-+usbredir_server_attach(void) "device attached"=0A=
-+usbredir_server_detach(bool announced) "device detached, was announced %d"=
-=0A=
-+usbredir_server_announce(uint8_t speed) "device_connect speed %u"=0A=
-+usbredir_server_disconnect(void) "device_disconnect sent"=0A=
-+usbredir_server_bus_reset(bool attached) "bus reset, attached %d"=0A=
-+usbredir_server_filter_reject(void) "host rejected our device"=0A=
+                              &error_abort);=0A=
++    object_property_set_bool(OBJECT(&s->ehci), "auto-hub", true,=0A=
++                             &error_abort);=0A=
+     sysbus_realize(SYS_BUS_DEVICE(&s->ehci), &error_abort);=0A=
+     sysbus_mmio_map(SYS_BUS_DEVICE(&s->ehci), 0, NPCM7XX_EHCI_BA);=0A=
+     sysbus_connect_irq(SYS_BUS_DEVICE(&s->ehci), 0,=0A=
 -- =0A=
 2.43.0=0A=
 
