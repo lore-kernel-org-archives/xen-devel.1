@@ -2,35 +2,35 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9CC05606A31B
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2026 23:30:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2829C606A324
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2026 23:30:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=umzSBLXU
-Received: from list by lists.xenproject.org with outflank-mailman.1470791.1679424 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=DCH67ffz
+Received: from list by lists.xenproject.org with outflank-mailman.1470793.1679442 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xONxe-0000pu-O1; Tue, 03 Nov 2026 23:30:38 +0000
+	id 1xONxf-0001AL-Tq; Tue, 03 Nov 2026 23:30:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1470791.1679424; Tue, 03 Nov 2026 23:30:38 +0000
+Received: by outflank-mailman (output) from mailman id 1470793.1679442; Tue, 03 Nov 2026 23:30:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xONxe-0000mt-Fj; Tue, 03 Nov 2026 23:30:38 +0000
-Received: by outflank-mailman (input) for mailman id 1470791;
- Tue, 03 Nov 2026 23:30:35 +0000
+	id 1xONxf-00019S-HT; Tue, 03 Nov 2026 23:30:39 +0000
+Received: by outflank-mailman (input) for mailman id 1470793;
+ Tue, 03 Nov 2026 23:30:36 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xONxb-0000cJ-Sv
+ (envelope-from <gwd@xenproject.org>) id 1xONxb-0000cT-VZ
  for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 23:30:35 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xONxb-0000000Cot6-2B2z;
+ (envelope-from <gwd@xenproject.org>) id 1xONxb-0000000Cot4-20Zm;
  Tue, 03 Nov 2026 23:30:35 +0000
 Received: from [2607:fb91:4c8c:bd3f:1da5:e92a:c5fb:865a]
  (helo=localhost.localdomain)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xONo7-0000000EMFa-43ya;
- Tue, 03 Nov 2026 23:20:48 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xONo0-0000000EMFa-0SDF;
+ Tue, 03 Nov 2026 23:20:40 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -42,18 +42,22 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=HhSSqAUO6JoWEvu4Yjy41Bg2ZJEqbHPy2eEHgBHq04s=; b=umzSBLXUktyoPhdhok+4W6/JTU
-	PIshuMwNJTTl8KgM7Gkcu57T32wVgNqXfsmP34T1k2ZDgjrZyMw7KwCHkmYOzjutFWNfAPzGVDBD2
-	Ye+7zBnhfuc3HmyNImgw0LAIaiYXUaTrT9/9n9kqk98wdaoekW94B0W5b+rMQlYp9pzg=;
+	bh=Wl4nV3ZTDHnsWL9MvyITa+VNEqVOjsoYMCNqs+DR/ME=; b=DCH67ffzT10GOdQvjyNrsUDtsk
+	KqP+JueGJBLXpmb3KMbMH1q3a8vxAlgitOTu9jhWg+30vnk5tp9epw1w+/6JUIvF+ARAZhMGsavgz
+	/xZl/mSzoPv3jXEyJ+s/7DCme3WxS2zyP9I+nVev9cjulsmEJwtM65fhOflBqrYDAVBs=;
 From: George Dunlap <gwd@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v6 33/44] x86/hvm: move the emulator's operand caches behind the vCPU state window
-Date: Tue,  3 Nov 2026 17:13:55 -0500
-Message-ID: <20261103-asi-hvm-v6-33-59dbc5ce9615@xenproject.org>
+Subject: [PATCH v6 21/44] x86/spec-ctrl: wire the sparse directmap view into the asi= option
+Date: Tue,  3 Nov 2026 17:13:43 -0500
+Message-ID: <20261103-asi-hvm-v6-21-59dbc5ce9615@xenproject.org>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261103-asi-hvm-v6-0-59dbc5ce9615@xenproject.org>
 References: <20261103-asi-hvm-v6-0-59dbc5ce9615@xenproject.org>
@@ -67,434 +71,372 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The HVM emulator keeps two per-vCPU caches of guest data: the read cache
-(struct hvmemul_cache), which records every guest-memory read made while
-an instruction is emulated -- guest page-table entries, instruction
-bytes and memory operands -- so that a re-execution observes the same
-values, and the three MMIO caches, which hold the operand bytes of an
-instruction's MMIO accesses.  Both are xvmalloc() allocations, from the
-xmalloc pool on the xenheap, and so mapped in every context, the sparse
-directmap view included.  Disabling the read cache when emulation
-completes leaves its entries in place.
+Let asi= choose which domains run on the sparse view of the directmap,
+when the hypervisor is built with CONFIG_SPARSE_DIRECTMAP:
 
-Put both in a domain-heap page of the vCPU's own, mapped for the life of
-the vCPU at a new slot (index 7) of its state window: the read cache,
-counts included, then the MMIO caches, 4032 bytes of the page.  As
-"x86: move the saved register frame behind the vCPU state window" does
-for the register frame, this applies to every HVM vCPU, whatever asi=
-says; for a vCPU without per-vCPU page tables the window is in the
-per-domain area that all its domain's vCPUs share, which only that
-domain's page tables map.  The pointers in struct hvm_vcpu_io hold
-window addresses.  hvmemul_cache_init() sets the page up through a
-transient mapping, as the vCPU is still being built, and
-hvmemul_cache_destroy(), now out of line, unmaps it before freeing it.
+ * `asi` and `asi=<bool>` enable or disable the sparse view, along with
+   vCPU-PT, for every domain including the hardware domain, PV or PVH.
+   HVM domains, a PVH hardware domain included, use the sparse view
+   together with vCPU-PT, which gives them the mapcache it needs; PV
+   domains all have one.  A PV domain on the sparse view keeps its
+   domain-wide mapcache and per-domain mappings: the sparse view
+   separates it from other domains, not its vCPUs from each other.
 
-The emulator only ever works on the vCPU running, on its own page
-tables, and reaches the caches through the window address;
-hvmemul_find_mmio_cache() now asserts as much.  The read cache also has
-users in other contexts: a debugger's guest page walk on a paused vCPU
-(gdbsx, and the guest stack dump of the debug keys), which reads and
-extends it if the vCPU was paused mid-emulation, and hvmemul_cancel(),
-which disables it, on toolstack, VCPUOP_initialise and INIT/SIPI paths.
-Its accessors therefore map the page transiently unless the vCPU is
-running on its own page tables, as VCPU_MAP_REGS() does: a single page,
-so no new failure paths.  They drop the mapping with
-unmap_vcpu_state_page(), which also flushes this CPU's translation.
-The read and write paths are split into an outer function, which checks
-and maps the cache once, and a recursive inner one.
+ * `asi=hvm=<bool>`, `asi=pv=<bool>` and `asi=dom0=<bool>` do the same
+   for HVM or PV domains other than the hardware domain, or for the
+   hardware domain, whatever its type: `asi=1,dom0=0` leaves the
+   hardware domain out of ASI altogether.
 
-Cost: a page per HVM vCPU, where the caches took about 4KiB of the
-xmalloc pool, and the emulator reaches them through a 4KiB mapping in
-the per-domain area instead of the directmap.
+ * A new `asi=directmap=<bool>` selects the sparse view for all domains,
+   as `asi=vcpu-pt=<bool>` selects vCPU-PT; `vcpu-pt=` alone leaves the
+   sparse view off.  On a hypervisor built without
+   CONFIG_SPARSE_DIRECTMAP the forms enabling all features leave the
+   sparse view off, and `directmap=` is rejected as invalid, as
+   compiled-out `spec-ctrl=` sub-options are.  A domain type the build
+   lacks is ignored, so that the sparse view is not built for nothing.
+
+ * For now, a PV domain uses one of XPTI and the sparse view, not both.
+   Enabled explicitly, for dom0, domUs or both, XPTI takes precedence:
+   the PV domains it covers keep the full directmap, and the boot log
+   says so.  Left to its default, XPTI yields: it is disabled for the PV
+   domains using the sparse view, with a boot-log warning where it would
+   otherwise be enabled, as the sparse view does not replace it yet (it
+   still maps the xenheap and Xen's stacks).  Each domain's case is
+   settled at its creation, and again if it becomes 32-bit, which XPTI
+   does not cover: switch_compat() then puts a domain that XPTI kept off
+   the sparse view on it, with the domain-wide mapcache, which release
+   builds may not have set up for it.
+
+The boot log gains a line with the directmap mode, "sparse" once a
+sparse view is configured and "full" otherwise, and the "ASI features
+for ..." lines, one for PV domUs now among them, say which domains use
+the sparse view.
 
 Assisted-by: Claude Code:claude-opus-5-5
 Signed-off-by: George Dunlap <gwd@xenproject.org>
 ---
 Changes in v5:
+- Follow "x86/spec-ctrl: introduce Address Space Isolation command line
+  option": opt_vcpu_pt_hwdom's name, the development warning in
+  parse_asi(), IS_ENABLED() in the boot log; pv= now replaces the line
+  saying it is ignored.
+
+Changes in v4:
+- Docs, comments and message: "domains" throughout, not "guests"
+  (Roger).
+- Follow the rename of opt_vcpu_pt_hwdom to opt_pvh_vcpu_pt_hwdom and
+  the move of the per-domain settings into d->arch.asi.
+- pv= and dom0= move to the patch introducing asi=, beside hvm=;
+  opt_sparse_dmap_hwdom and sparse_dmap_wanted()'s hardware-domain case
+  to the patches that add the other knobs and sparse_dmap_wanted()
+  (Roger).
+- directmap= on a build without CONFIG_SPARSE_DIRECTMAP is rejected as
+  invalid, as compiled-out spec-ctrl= sub-options are, rather than
+  ignored with a warning (Roger).
+- A PV domain that XPTI kept off the sparse view goes on it when it
+  becomes 32-bit, which ends XPTI; it used to end up with neither.
+
+Changes in v3:
 - New in this version.
-
-Notes for reviewers: the sizes before and after, on x86-64
-(CONFIG_PAGING_LEVELS 4, MAX_INST_LEN 15).
-
-                   before                    after
-read cache ents    16*2*(4+1) + 15*(4+1)     (16*2 + 15) * (4+1)
-                   = 235 (nents)             = 235 (HVMEMUL_CACHE_ENTS)
-read cache bytes   8 + 235*16 = 3768         the same offsetof(), at 0
-MMIO buffer bytes  64 (max_bytes)            64 (MMIO_CACHE_BYTES)
-MMIO cache bytes   24 + 64 = 88, three       88 (MMIO_CACHE_SIZE), three
-
-The page:
-
-offset  bytes  contents
-     0      8  num_ents, max_ents
-     8   3760  ents[235], 16 bytes each
-  3768     88  mmio_cache[0]: 24-byte header, buffer[64]
-  3856     88  mmio_cache[1]
-  3944     88  mmio_cache[2]
-  4032     64  unused
-
-The four old allocations together asked for 4032 bytes, the span the
-page now uses.  The limits the code checks, max_ents (235) and space
-(64), are unchanged.  The BUILD_BUG_ON() in hvmemul_cache_init() keeps
-the end within the page.
 ---
- xen/arch/x86/domain.c                  |   2 +
- xen/arch/x86/hvm/emulate.c             | 196 +++++++++++++++++++------
- xen/arch/x86/include/asm/config.h      |   1 +
- xen/arch/x86/include/asm/hvm/emulate.h |   9 +-
- xen/arch/x86/include/asm/hvm/vcpu.h    |   7 +
- 5 files changed, 165 insertions(+), 50 deletions(-)
+ docs/misc/xen-command-line.pandoc           |  30 +++++-
+ xen/arch/x86/include/asm/sparse-directmap.h |   7 ++
+ xen/arch/x86/pv/domain.c                    |  16 +++
+ xen/arch/x86/spec_ctrl.c                    | 102 +++++++++++++++++---
+ 4 files changed, 138 insertions(+), 17 deletions(-)
 
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index 03f6572086..66d71ec41b 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -595,6 +595,8 @@ int arch_vcpu_create(struct vcpu *v)
-         BUILD_BUG_ON(VCPU_STATE_IDX_N2VMCB >= VCPU_STATE_NR_PAGES);
-         BUILD_BUG_ON(VCPU_STATE_IDX_VMX_MSR >= VCPU_STATE_NR_PAGES);
-         BUILD_BUG_ON(VCPU_STATE_IDX_REGS >= VCPU_STATE_NR_PAGES);
-+        BUILD_BUG_ON(VCPU_STATE_IDX_EMUL >= VCPU_STATE_NR_PAGES);
-+        BUILD_BUG_ON(VCPU_STATE_IDX_EMUL == VCPU_STATE_IDX_REGS);
-         /* Page tables only; torn down with the rest of the per-domain area. */
-         rc = create_perdomain_mapping(v, VCPU_STATE_START(v),
-                                       VCPU_STATE_NR_PAGES,
-diff --git a/xen/arch/x86/hvm/emulate.c b/xen/arch/x86/hvm/emulate.c
-index cd2831d34b..e2cf982c25 100644
---- a/xen/arch/x86/hvm/emulate.c
-+++ b/xen/arch/x86/hvm/emulate.c
-@@ -9,6 +9,7 @@
-  *    Keir Fraser <keir@xen.org>
-  */
+diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
+index 839d06da26..092c858f34 100644
+--- a/docs/misc/xen-command-line.pandoc
++++ b/docs/misc/xen-command-line.pandoc
+@@ -203,7 +203,7 @@ to appropriate auditing by Xen.  Argo is disabled by default.
+     buggy or malicious other domain spamming the ring.
  
-+#include <xen/domain_page.h>
- #include <xen/init.h>
- #include <xen/iocap.h>
- #include <xen/ioreq.h>
-@@ -56,6 +57,26 @@ struct hvmemul_cache
-     } ents[];
- };
+ ### asi (x86)
+-> `= List of [ <bool>, {pv,hvm,dom0}=<bool>,
++> `= List of [ <bool>, {pv,hvm,dom0}=<bool>, directmap=<bool>,
+ >              vcpu-pt=<bool> | vcpu-pt=hvm=<bool> ]`
  
-+/*
-+ * AVX512F scatter/gather insns can access up to 16 independent linear
-+ * addresses, up to 8 bytes size. Each such linear range can span a page
-+ * boundary, i.e. may require two page walks.  Account for each insn byte
-+ * individually, both for simplicity and to leave some slack space.
-+ */
-+#define HVMEMUL_CACHE_ENTS \
-+    ((16 * 2 + MAX_INST_LEN) * (CONFIG_PAGING_LEVELS + 1))
+ > Default: `false`
+@@ -215,14 +215,16 @@ mitigations for certain speculative related attacks, at the cost of mapping
+ sensitive information on-demand.  It might also offer some protection against
+ unmitigated speculation-related attacks.
+ 
+-The mechanisms currently implemented apply to HVM domains, including a PVH
+-hardware domain.  PV domains, including a PV hardware domain, are unaffected.
++The mechanisms currently implemented are `vcpu-pt`, for HVM domains including
++a PVH hardware domain, and `directmap`, for all domains including the hardware
++domain, PV or PVH.  The plain boolean enables or disables both, wherever they
++apply.
+ 
+ * `pv=`, `hvm=` and `dom0=` enable the features for PV domains or HVM domains
+   other than the hardware domain, or for the hardware domain, PV or PVH.  The
+   plain boolean does all three: `asi=1,dom0=0` leaves the hardware domain
+-  out.  The forms naming no domain type (an un-suffixed `vcpu-pt=<bool>`)
+-  cover the hardware domain too.
++  out.  The forms naming no domain type (an un-suffixed `vcpu-pt=<bool>`, and
++  `directmap=<bool>`) cover the hardware domain too.
+ 
+ **WARNING: manual de-selection of enabled options will invalidate any
+ protection offered by the feature.  The fine grained options provided below
+@@ -231,6 +233,18 @@ are meant to be used for debugging purposes only.**
+ * `vcpu-pt` gives each vCPU its own per-domain area: the per-domain slot of
+   each vCPU's monitor table maps a region private to that vCPU.
+ 
++* `directmap` (only available when Xen is built with
++  `CONFIG_SPARSE_DIRECTMAP`) runs guest contexts on a sparse view of the
++  directmap, which maps the memory Xen needs to reach at all times (the Xen
++  heap, Xen's own image, firmware tables), while guest memory is mapped
++  transiently.  This selection is system-wide; `pv=`, `hvm=` and `dom0=`
++  make it for one domain type, along with the other features.  HVM domains use
++  the sparse view only together with `vcpu-pt`, and PV domains only without
++  XPTI, which yields to the sparse view unless enabled explicitly (see
++  `xpti`).  The whole-feature forms (`asi`, `asi=<bool>`, and `pv=`, `hvm=`
++  and `dom0=`) set this too, on builds that support it; on other builds they
++  leave it off.
 +
-+/* Operand bytes per MMIO cache: up to m512 or a tile row. */
-+#define MMIO_CACHE_BYTES 64
-+
-+/* Layout of the caches' page: the read cache, then the MMIO caches. */
-+#define MMIO_CACHE_SIZE                                                   \
-+    ROUNDUP(offsetof(struct hvm_mmio_cache, buffer[MMIO_CACHE_BYTES]),    \
-+            __alignof__(struct hvm_mmio_cache))
-+#define EMUL_PAGE_MMIO_CACHE(i)                                           \
-+    (ROUNDUP(offsetof(struct hvmemul_cache, ents[HVMEMUL_CACHE_ENTS]),    \
-+             __alignof__(struct hvm_mmio_cache)) + (i) * MMIO_CACHE_SIZE)
-+
- static void hvmtrace_io_assist(const ioreq_t *p)
- {
-     unsigned int size, event;
-@@ -1130,6 +1151,9 @@ static struct hvm_mmio_cache *hvmemul_find_mmio_cache(
-     unsigned int i;
-     struct hvm_mmio_cache *cache;
+ ### asid (x86)
+ > `= <boolean>`
  
-+    ASSERT(hvio == &current->arch.hvm.hvm_io);
-+    ASSERT(this_cpu(pgtable_vcpu) == current);
+@@ -3132,6 +3146,12 @@ Meltdown for all domains.
+ With `dom0` and `domu` it is possible to control page table isolation
+ for dom0 or guest domains only.
+ 
++With `asi`, XPTI and the sparse directmap view (`asi=directmap`) exclude each
++other for a PV domain.  Enabled explicitly, as a whole or with `dom0` or
++`domu`, XPTI keeps the PV domains it covers off the sparse view, and the boot
++log says so.  Left to its default, XPTI is disabled for the PV domains using
++the sparse view, with a boot-log warning where it would otherwise be enabled.
 +
-     for ( i = 0; i < hvio->mmio_cache_count; i ++ )
-     {
-         cache = hvio->mmio_cache[i];
-@@ -3057,77 +3081,133 @@ void hvm_dump_emulation_state(const char *loglvl, const char *prefix,
+ ### xsave (x86)
+ > `= <boolean>`
  
- int hvmemul_cache_init(struct vcpu *v)
- {
--    /*
--     * AVX512F scatter/gather insns can access up to 16 independent linear
--     * addresses, up to 8 bytes size. Each such linear range can span a page
--     * boundary, i.e. may require two page walks.
--     */
--    unsigned int nents = 16 * 2 * (CONFIG_PAGING_LEVELS + 1);
--    unsigned int i, max_bytes = 64;
-+    struct hvm_vcpu_io *hvio = &v->arch.hvm.hvm_io;
-+    struct page_info *pg = alloc_domheap_page(v->domain, MEMF_no_owner);
-+    void *va = (void *)VCPU_STATE_ADDR(v, VCPU_STATE_IDX_EMUL), *p;
-     struct hvmemul_cache *cache;
-+    unsigned int i;
-+    mfn_t mfn;
- 
--    /*
--     * Account for each insn byte individually, both for simplicity and to
--     * leave some slack space.
--     */
--    nents += MAX_INST_LEN * (CONFIG_PAGING_LEVELS + 1);
-+    BUILD_BUG_ON(EMUL_PAGE_MMIO_CACHE(ARRAY_SIZE(hvio->mmio_cache)) >
-+                 PAGE_SIZE);
- 
--    cache = xvmalloc_flex_struct(struct hvmemul_cache, ents, nents);
--    if ( !cache )
-+    if ( !pg )
-         return -ENOMEM;
- 
--    /* Cache is disabled initially. */
--    cache->num_ents = nents + 1;
--    cache->max_ents = nents;
-+    mfn = page_to_mfn(pg);
-+    clear_domain_page(mfn);
- 
--    v->arch.hvm.hvm_io.cache = cache;
-+    /* v != current, so we can't use the vCPU state window. */
-+    p = map_domain_page(mfn);
- 
--    for ( i = 0; i < ARRAY_SIZE(v->arch.hvm.hvm_io.mmio_cache); ++i )
-+    /* Cache is disabled initially. */
-+    cache = p;
-+    cache->num_ents = HVMEMUL_CACHE_ENTS + 1;
-+    cache->max_ents = HVMEMUL_CACHE_ENTS;
-+
-+    for ( i = 0; i < ARRAY_SIZE(hvio->mmio_cache); ++i )
-     {
--        v->arch.hvm.hvm_io.mmio_cache[i] =
--            xvmalloc_flex_struct(struct hvm_mmio_cache, buffer, max_bytes);
--        if ( !v->arch.hvm.hvm_io.mmio_cache[i] )
--            return -ENOMEM;
--        v->arch.hvm.hvm_io.mmio_cache[i]->space = max_bytes;
-+        struct hvm_mmio_cache *mmio = p + EMUL_PAGE_MMIO_CACHE(i);
-+
-+        mmio->space = MMIO_CACHE_BYTES;
-     }
- 
-+    unmap_domain_page(p);
-+
-+    populate_perdomain_mapping(v, (unsigned long)va, &mfn, 1,
-+                               __PAGE_HYPERVISOR_RW);
-+
-+    hvio->emul_pg = pg;
-+    hvio->cache = va;
-+    for ( i = 0; i < ARRAY_SIZE(hvio->mmio_cache); ++i )
-+        hvio->mmio_cache[i] = va + EMUL_PAGE_MMIO_CACHE(i);
-+
-     return 0;
+diff --git a/xen/arch/x86/include/asm/sparse-directmap.h b/xen/arch/x86/include/asm/sparse-directmap.h
+index 2f8b94f4c1..db4df82215 100644
+--- a/xen/arch/x86/include/asm/sparse-directmap.h
++++ b/xen/arch/x86/include/asm/sparse-directmap.h
+@@ -31,6 +31,10 @@ static inline bool sparse_dmap_configured(void)
+     return opt_sparse_dmap_pv || opt_sparse_dmap_hvm || opt_sparse_dmap_hwdom;
  }
  
-+void hvmemul_cache_destroy(struct vcpu *v)
-+{
-+    struct hvm_vcpu_io *hvio = &v->arch.hvm.hvm_io;
-+    unsigned int i;
++static inline bool sparse_dmap_pv(void)    { return opt_sparse_dmap_pv; }
++static inline bool sparse_dmap_hvm(void)   { return opt_sparse_dmap_hvm; }
++static inline bool sparse_dmap_hwdom(void) { return opt_sparse_dmap_hwdom; }
 +
-+    if ( !hvio->emul_pg )
-+        return;
-+
-+    unmap_vcpu_state(v, VCPU_STATE_IDX_EMUL, 1);
-+    free_domheap_page(hvio->emul_pg);
-+    hvio->emul_pg = NULL;
-+    hvio->cache = NULL;
-+    for ( i = 0; i < ARRAY_SIZE(hvio->mmio_cache); ++i )
-+        hvio->mmio_cache[i] = NULL;
-+}
-+
-+/*
-+ * The read cache of @v, for access from any context: the window address in
-+ * struct hvm_vcpu_io where v runs here on its own page tables, a transient
-+ * mapping of the page otherwise, and the NULL left there once the cache is
-+ * destroyed.  v's page tables being loaded is not enough: while this CPU
-+ * holds v's state lazily, an IPI syncing that state for another CPU can
-+ * switch them away at any time.
-+ */
-+static struct hvmemul_cache *map_cache(const struct vcpu *v)
-+{
-+    const struct hvm_vcpu_io *hvio = &v->arch.hvm.hvm_io;
-+
-+    if ( !hvio->emul_pg || (v == current && this_cpu(pgtable_vcpu) == v) )
-+        return hvio->cache;
-+
-+    /* The read cache is at the start of the page. */
-+    return __map_domain_page(hvio->emul_pg);
-+}
-+
-+static void unmap_cache(const struct vcpu *v,
-+                        const struct hvmemul_cache *cache)
-+{
-+    if ( cache != v->arch.hvm.hvm_io.cache )
-+        unmap_vcpu_state_page(cache);
-+}
-+
-+#define HVMEMUL_MAP_CACHE(v) map_cache(v)
-+
-+/* Drops the mapping of a vCPU's read cache and nullifies its pointer. */
-+#define HVMEMUL_UNMAP_CACHE(v, cache) do {  \
-+    unmap_cache(v, cache);                  \
-+    (cache) = NULL;                         \
-+} while ( false )
-+
- unsigned int hvmemul_cache_disable(struct vcpu *v)
+ /* Whether a new domain of the given type is to use the sparse view. */
+ static inline bool sparse_dmap_wanted(bool pv, bool hwdom)
  {
--    struct hvmemul_cache *cache = v->arch.hvm.hvm_io.cache;
-+    struct hvmemul_cache *cache = HVMEMUL_MAP_CACHE(v);
-     unsigned int token = cache->num_ents;
+@@ -51,6 +55,9 @@ int sparse_dmap_drop_pagetable(mfn_t mfn);
  
-     cache->num_ents = cache->max_ents + 1;
- 
-+    HVMEMUL_UNMAP_CACHE(v, cache);
-+
-     return token;
- }
- 
- void hvmemul_cache_restore(struct vcpu *v, unsigned int token)
- {
--    struct hvmemul_cache *cache = v->arch.hvm.hvm_io.cache;
-+    struct hvmemul_cache *cache = HVMEMUL_MAP_CACHE(v);
- 
-     ASSERT(cache->num_ents > cache->max_ents);
-     cache->num_ents = token;
-+
-+    HVMEMUL_UNMAP_CACHE(v, cache);
- }
- 
--bool hvmemul_read_cache(const struct vcpu *v, paddr_t gpa,
--                        void *buffer, unsigned int size)
-+static bool read_cache(const struct hvmemul_cache *cache, paddr_t gpa,
-+                       void *buffer, unsigned int size)
- {
--    const struct hvmemul_cache *cache = v->arch.hvm.hvm_io.cache;
-     unsigned int i;
- 
--    /* Cache unavailable? */
--    if ( !is_hvm_vcpu(v) || cache->num_ents > cache->max_ents )
--        return false;
--
-     while ( size > sizeof(cache->ents->data) )
-     {
-         i = gpa & (sizeof(cache->ents->data) - 1)
-             ? -gpa & (sizeof(cache->ents->data) - 1)
-             : sizeof(cache->ents->data);
--        if ( !hvmemul_read_cache(v, gpa, buffer, i) )
-+        if ( !read_cache(cache, gpa, buffer, i) )
-             return false;
-         gpa += i;
-         buffer += i;
-@@ -3144,22 +3224,37 @@ bool hvmemul_read_cache(const struct vcpu *v, paddr_t gpa,
-     return false;
- }
- 
--void hvmemul_write_cache(const struct vcpu *v, paddr_t gpa,
--                         const void *buffer, unsigned int size)
-+bool hvmemul_read_cache(const struct vcpu *v, paddr_t gpa,
-+                        void *buffer, unsigned int size)
- {
--    struct hvmemul_cache *cache = v->arch.hvm.hvm_io.cache;
--    unsigned int i;
-+    const struct hvmemul_cache *cache;
-+    bool hit = false;
- 
--    /* Cache unavailable? */
--    if ( !is_hvm_vcpu(v) || cache->num_ents > cache->max_ents )
--        return;
-+    if ( !is_hvm_vcpu(v) )
-+        return false;
-+
-+    cache = HVMEMUL_MAP_CACHE(v);
-+
-+    /* Cache available? */
-+    if ( cache->num_ents <= cache->max_ents )
-+        hit = read_cache(cache, gpa, buffer, size);
-+
-+    HVMEMUL_UNMAP_CACHE(v, cache);
-+
-+    return hit;
-+}
-+
-+static void write_cache(const struct vcpu *v, struct hvmemul_cache *cache,
-+                        paddr_t gpa, const void *buffer, unsigned int size)
-+{
-+    unsigned int i;
- 
-     while ( size > sizeof(cache->ents->data) )
-     {
-         i = gpa & (sizeof(cache->ents->data) - 1)
-             ? -gpa & (sizeof(cache->ents->data) - 1)
-             : sizeof(cache->ents->data);
--        hvmemul_write_cache(v, gpa, buffer, i);
-+        write_cache(v, cache, gpa, buffer, i);
-         gpa += i;
-         buffer += i;
-         size -= i;
-@@ -3186,6 +3281,23 @@ void hvmemul_write_cache(const struct vcpu *v, paddr_t gpa,
-     cache->num_ents = i + 1;
- }
- 
-+void hvmemul_write_cache(const struct vcpu *v, paddr_t gpa,
-+                         const void *buffer, unsigned int size)
-+{
-+    struct hvmemul_cache *cache;
-+
-+    if ( !is_hvm_vcpu(v) )
-+        return;
-+
-+    cache = HVMEMUL_MAP_CACHE(v);
-+
-+    /* Cache available? */
-+    if ( cache->num_ents <= cache->max_ents )
-+        write_cache(v, cache, gpa, buffer, size);
-+
-+    HVMEMUL_UNMAP_CACHE(v, cache);
-+}
-+
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/arch/x86/include/asm/config.h b/xen/arch/x86/include/asm/config.h
-index c8d4a8ddc7..5bd9970fce 100644
---- a/xen/arch/x86/include/asm/config.h
-+++ b/xen/arch/x86/include/asm/config.h
-@@ -312,6 +312,7 @@ extern unsigned long xen_phys_start;
- #define VCPU_STATE_IDX_N2VMCB    1
- #define VCPU_STATE_IDX_VMX_MSR   2
- #define VCPU_STATE_IDX_REGS      6
-+#define VCPU_STATE_IDX_EMUL      7
- 
- #define ELFSIZE 64
- 
-diff --git a/xen/arch/x86/include/asm/hvm/emulate.h b/xen/arch/x86/include/asm/hvm/emulate.h
-index 178ac32e15..16491a92b1 100644
---- a/xen/arch/x86/include/asm/hvm/emulate.h
-+++ b/xen/arch/x86/include/asm/hvm/emulate.h
-@@ -117,14 +117,7 @@ int hvmemul_do_pio_buffer(uint16_t port,
-  *   further re-execution.
-  */
- int __must_check hvmemul_cache_init(struct vcpu *v);
--static inline void hvmemul_cache_destroy(struct vcpu *v)
--{
--    unsigned int i;
--
--    for ( i = 0; i < ARRAY_SIZE(v->arch.hvm.hvm_io.mmio_cache); ++i )
--        XVFREE(v->arch.hvm.hvm_io.mmio_cache[i]);
--    XVFREE(v->arch.hvm.hvm_io.cache);
--}
-+void hvmemul_cache_destroy(struct vcpu *v);
- bool hvmemul_read_cache(const struct vcpu *v, paddr_t gpa,
-                         void *buffer, unsigned int size);
- void hvmemul_write_cache(const struct vcpu *v, paddr_t gpa,
-diff --git a/xen/arch/x86/include/asm/hvm/vcpu.h b/xen/arch/x86/include/asm/hvm/vcpu.h
-index 876c230784..ee7bc8be00 100644
---- a/xen/arch/x86/include/asm/hvm/vcpu.h
-+++ b/xen/arch/x86/include/asm/hvm/vcpu.h
-@@ -46,6 +46,13 @@ struct hvm_vcpu_io {
-     unsigned char mmio_insn[16];
-     struct hvmemul_cache *cache;
+ static inline bool sparse_dmap_configured(void) { return false; }
+ static inline bool sparse_dmap_wanted(bool pv, bool hwdom) { return false; }
++static inline bool sparse_dmap_pv(void)    { return false; }
++static inline bool sparse_dmap_hvm(void)   { return false; }
++static inline bool sparse_dmap_hwdom(void) { return false; }
+ static inline void sparse_dmap_init(void) {}
+ static inline int sparse_dmap_mirror_map(unsigned long virt, mfn_t mfn,
+                                          unsigned long nr, pte_attr_t flags)
+diff --git a/xen/arch/x86/pv/domain.c b/xen/arch/x86/pv/domain.c
+index f139d8f83c..579d6133f5 100644
+--- a/xen/arch/x86/pv/domain.c
++++ b/xen/arch/x86/pv/domain.c
+@@ -248,6 +248,20 @@ int switch_compat(struct domain *d)
+     d->arch.has_32bit_shinfo = 1;
+     d->arch.pv.is_32bit = true;
  
 +    /*
-+     * The page holding the caches above, mapped in the vCPU's state window:
-+     * mmio_cache[] and cache hold addresses in the window, for use while the
-+     * vCPU's own page tables are loaded.
++     * XPTI, cleared below, is for 64-bit domains.  A domain it kept off the
++     * sparse directmap view goes on it now if wanted, and the domain-wide
++     * mapcache the view needs is set up for the domain and its vCPUs.
 +     */
-+    struct page_info *emul_pg;
++    if ( d->arch.pv.xpti && sparse_dmap_wanted(true, is_hardware_domain(d)) )
++    {
++        d->arch.asi.sparse_dmap = true;
++        mapcache_domain_init(d);
++        for_each_vcpu ( d, v )
++            if ( (rc = mapcache_vcpu_init(v)) )
++                goto undo_and_fail;
++    }
 +
      /*
-      * For string instruction emulation we need to be able to signal a
-      * necessary retry through other than function return codes.
+      * For 32bit PV guests the shared_info machine address must fit in a 32-bit
+      * field within the guest's start_info structure.  We might need to free
+@@ -301,6 +315,8 @@ int switch_compat(struct domain *d)
+ 
+  undo_and_fail:
+     d->arch.pv.is_32bit = d->arch.has_32bit_shinfo = false;
++    if ( d->arch.pv.xpti )
++        d->arch.asi.sparse_dmap = false;
+     for_each_vcpu( d, v )
+     {
+         free_compat_arg_xlat(v);
+diff --git a/xen/arch/x86/spec_ctrl.c b/xen/arch/x86/spec_ctrl.c
+index bcdcdf0476..c86f5ff886 100644
+--- a/xen/arch/x86/spec_ctrl.c
++++ b/xen/arch/x86/spec_ctrl.c
+@@ -387,6 +387,19 @@ int8_t __ro_after_init opt_xpti_domu = -1;
+ 
+ static __init void xpti_init_default(void)
+ {
++    /*
++     * XPTI and the sparse directmap view exclude each other for a PV domain
++     * (see spec_ctrl_init_domain()).  Enabled explicitly, XPTI takes
++     * precedence: the PV domains it covers stay off the sparse view.  Left to
++     * its default, it yields: it is off where the sparse view is asked for.
++     */
++    if ( !opt_dom0_pvh && opt_xpti_hwdom == 1 && sparse_dmap_hwdom() )
++        printk(XENLOG_ERR
++               "XPTI enabled, disabling Dom0 sparse-directmap\n");
++    if ( opt_xpti_domu == 1 && sparse_dmap_pv() )
++        printk(XENLOG_ERR
++               "XPTI enabled, disabling PV DomU sparse-directmap\n");
++
+     if ( (boot_cpu_data.vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) ||
+          cpu_has_rdcl_no )
+     {
+@@ -397,10 +410,21 @@ static __init void xpti_init_default(void)
+     }
+     else
+     {
++        bool yield_hwdom = opt_xpti_hwdom < 0 && !opt_dom0_pvh &&
++                           sparse_dmap_hwdom();
++        bool yield_domu = opt_xpti_domu < 0 && sparse_dmap_pv();
++
++        /* The default would be on here: say where it yields. */
++        if ( yield_hwdom || yield_domu )
++            printk(XENLOG_WARNING
++                   "XPTI defaults off for PV %s on the sparse directmap\n",
++                   yield_hwdom ? (yield_domu ? "Dom0 and DomU" : "Dom0")
++                               : "DomU");
++
+         if ( opt_xpti_hwdom < 0 )
+-            opt_xpti_hwdom = 1;
++            opt_xpti_hwdom = !sparse_dmap_hwdom();
+         if ( opt_xpti_domu < 0 )
+-            opt_xpti_domu = 1;
++            opt_xpti_domu = !sparse_dmap_pv();
+     }
+ }
+ 
+@@ -491,6 +515,23 @@ static int __init cf_check parse_pv_l1tf(const char *s)
+ }
+ custom_param("pv-l1tf", parse_pv_l1tf);
+ 
++/*
++ * Set the sparse directmap view's knob for each domain type given.  A type
++ * the build lacks stays off, so that no view is built for it, and without
++ * CONFIG_SPARSE_DIRECTMAP all stay off.
++ */
++static void __init set_sparse_dmap(bool pv, bool hvm, bool hwdom, bool val)
++{
++#ifdef CONFIG_SPARSE_DIRECTMAP
++    if ( pv && IS_ENABLED(CONFIG_PV) )
++        opt_sparse_dmap_pv = val;
++    if ( hvm && IS_ENABLED(CONFIG_HVM) )
++        opt_sparse_dmap_hvm = val;
++    if ( hwdom )
++        opt_sparse_dmap_hwdom = val;
++#endif
++}
++
+ static int __init cf_check parse_asi(const char *s)
+ {
+     static bool __initdata warned;
+@@ -507,7 +548,10 @@ static int __init cf_check parse_asi(const char *s)
+ 
+     /* Interpret 'asi' alone in its positive boolean form. */
+     if ( *s == '\0' )
++    {
+         opt_vcpu_pt_hwdom = opt_vcpu_pt_hvm = true;
++        set_sparse_dmap(true, true, true, true);
++    }
+ 
+     do {
+         ss = strchr(s, ',');
+@@ -520,17 +564,33 @@ static int __init cf_check parse_asi(const char *s)
+         case 0:
+         case 1:
+             opt_vcpu_pt_hwdom = opt_vcpu_pt_hvm = val;
++            set_sparse_dmap(true, true, true, val);
+             break;
+ 
+         default:
+             if ( (val = parse_boolean("pv", s, ss)) >= 0 )
+-                printk(XENLOG_WARNING
+-                       "No ASI feature applies to PV domains - ignoring 'asi=%.*s' setting\n",
+-                       (int)(ss - s), s);
++                set_sparse_dmap(true, false, false, val);
+             else if ( (val = parse_boolean("hvm", s, ss)) >= 0 )
++            {
+                 opt_vcpu_pt_hvm = val;
++                set_sparse_dmap(false, true, false, val);
++            }
+             else if ( (val = parse_boolean("dom0", s, ss)) >= 0 )
++            {
+                 opt_vcpu_pt_hwdom = val;
++                set_sparse_dmap(false, false, true, val);
++            }
++            else if ( (val = parse_boolean("directmap", s, ss)) >= 0 )
++            {
++                /* System-wide: every domain type, the hardware domain too. */
++                if ( IS_ENABLED(CONFIG_SPARSE_DIRECTMAP) )
++                    set_sparse_dmap(true, true, true, val);
++                else
++                {
++                    no_config_param("SPARSE_DIRECTMAP", "asi", s, ss);
++                    rc = -EINVAL;
++                }
++            }
+             else if ( (val = parse_boolean("vcpu-pt", s, ss)) != -1 )
+             {
+                 switch ( val )
+@@ -759,11 +819,28 @@ static void __init print_details(enum ind_thunk thunk)
+            opt_pv_l1tf_domu  ? "enabled"  : "disabled");
+ #endif
+ 
+-    printk("  ASI features for Dom0:%s\n",
+-           opt_dom0_pvh && opt_vcpu_pt_hwdom ? " vCPU-PT" : " None");
+-    if ( IS_ENABLED(CONFIG_HVM) )
+-        printk("  ASI features for HVM VMs:%s\n",
+-               opt_vcpu_pt_hvm               ? " vCPU-PT" : " None");
++    {
++        bool hwdom_pt = opt_dom0_pvh && opt_vcpu_pt_hwdom;
++        bool hwdom_sd = sparse_dmap_hwdom() &&
++                        (opt_dom0_pvh ? hwdom_pt : !opt_xpti_hwdom);
++
++        printk("  ASI directmap mode: %s\n",
++               sparse_dmap_configured()   ? "sparse"            : "full");
++        printk("  ASI features for Dom0:%s%s%s\n",
++               hwdom_pt || hwdom_sd       ? ""                  : " None",
++               hwdom_pt                   ? " vCPU-PT"          : "",
++               hwdom_sd                   ? " sparse-directmap" : "");
++        if ( IS_ENABLED(CONFIG_HVM) )
++            printk("  ASI features for HVM VMs:%s%s%s\n",
++                   opt_vcpu_pt_hvm        ? ""                  : " None",
++                   opt_vcpu_pt_hvm        ? " vCPU-PT"          : "",
++                   opt_vcpu_pt_hvm && sparse_dmap_hvm()
++                                          ? " sparse-directmap" : "");
++        if ( IS_ENABLED(CONFIG_PV) )
++            printk("  ASI features for PV VMs:%s\n",
++                   sparse_dmap_pv() && !opt_xpti_domu
++                                          ? " sparse-directmap" : " None");
++    }
+ }
+ 
+ static bool __init check_smt_enabled(void)
+@@ -1956,9 +2033,10 @@ void spec_ctrl_init_domain(struct domain *d)
+ 
+     /*
+      * The sparse directmap view needs a mapcache: PV domains all have one,
+-     * HVM domains through per-vCPU page-tables.
++     * HVM domains through per-vCPU page-tables.  A PV domain using XPTI
++     * stays on the full directmap.
+      */
+-    d->arch.asi.sparse_dmap = (pv || d->arch.asi.vcpu_pt) &&
++    d->arch.asi.sparse_dmap = (pv ? !d->arch.pv.xpti : d->arch.asi.vcpu_pt) &&
+                               sparse_dmap_wanted(pv, is_hardware_domain(d));
+ }
+ 
 -- 
 2.56.0
 
