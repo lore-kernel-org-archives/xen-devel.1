@@ -2,47 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B969A606D836
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2026 13:26:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1469791.1678548 (Exim 4.92)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 66F1B606A33A
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2026 13:28:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=gacjujDk
+Received: from list by lists.xenproject.org with outflank-mailman.1469800.1678557 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOEWz-0006vb-Fn; Tue, 03 Nov 2026 13:26:29 +0000
+	id 1xOEZ9-0007ld-QW; Tue, 03 Nov 2026 13:28:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1469791.1678548; Tue, 03 Nov 2026 13:26:29 +0000
+Received: by outflank-mailman (output) from mailman id 1469800.1678557; Tue, 03 Nov 2026 13:28:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOEWz-0006vU-D4; Tue, 03 Nov 2026 13:26:29 +0000
-Received: by outflank-mailman (input) for mailman id 1469791;
- Tue, 03 Nov 2026 13:26:28 +0000
+	id 1xOEZ9-0007lW-Nw; Tue, 03 Nov 2026 13:28:43 +0000
+Received: by outflank-mailman (input) for mailman id 1469800;
+ Tue, 03 Nov 2026 13:28:42 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <balaton@eik.bme.hu>) id 1xOEWy-0006uH-CC
- for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 13:26:28 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xOEZ8-0007lN-Fn
+ for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 13:28:42 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xOEWx-008cuu-AT
- for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 14:26:27 +0100
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xOEZ7-008dgC-Sw
+ for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 14:28:41 +0100
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <balaton@eik.bme.hu>)
- id 6ae9e0fb-e002-0a2a0a5209dd-0a2a4504810e-16
- for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 14:26:27 +0100
-Received: from [152.66.115.2] (helo=zero.eik.bme.hu)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <balaton@eik.bme.hu>)
- id 6ae9e102-b57f-0a2a45040019-98427302db9f-3
- for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 14:26:27 +0100
-Received: from localhost (localhost [127.0.0.1])
- by zero.eik.bme.hu (Postfix) with ESMTP id 7F89B60C38A;
- Tue, 03 Nov 2026 14:26:26 +0100 (CET)
-Received: from zero.eik.bme.hu ([127.0.0.1])
- by localhost (zero.eik.bme.hu [127.0.0.1]) (amavis, port 10028) with ESMTP
- id HGLqhQTijtbz; Tue,  3 Nov 2026 14:26:24 +0100 (CET)
-Received: by zero.eik.bme.hu (Postfix, from userid 432)
- id 0C62960C38B; Tue, 03 Nov 2026 14:26:24 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
- by zero.eik.bme.hu (Postfix) with ESMTP id 08A16139920;
- Tue, 03 Nov 2026 14:26:24 +0100 (CET)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ae9e183-8faa-0a2a0a5109dd-0a2a4506aa22-24
+ for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 14:28:41 +0100
+Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ae9e189-195a-0a2a45060019-d1558036b024-3
+ for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 14:28:41 +0100
+Received: by mail-wm1-f54.google.com with SMTP id
+ 5b1f17b1804b1-4a35ac4475dso29895035e9.2
+ for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 05:28:41 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4ac0a66caefsm274639575e9.5.2026.11.03.05.28.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 03 Nov 2026 05:28:40 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,343 +49,135 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; none
-X-Virus-Scanned: amavis at eik.bme.hu
-Date: Tue, 3 Nov 2026 14:26:23 +0100 (CET)
-From: BALATON Zoltan <balaton@eik.bme.hu>
-To: Yonggang Luo <luoyonggang@gmail.com>
-cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
-    qemu-devel@nongnu.org, Anthony PERARD <anthony@xenproject.org>, 
-    Felipe Balbi <balbi@kernel.org>, Aleksandar Rikalo <arikalo@gmail.com>, 
-    Philippe Mathieu-Daude <philmd@mailo.com>, 
-    Antony Pavlov <antonynpavlov@gmail.com>, 
-    Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
-    Stefano Stabellini <sstabellini@kernel.org>, 
-    Subbaraya Sundeep <sundeep.lkml@gmail.com>, 
-    =?ISO-8859-15?Q?Herv=E9_Poussineau?= <hpoussin@reactos.org>, 
-    Max Filippov <jcmvbkbc@gmail.com>, 
-    Niek Linnenbank <nieklinnenbank@gmail.com>, xen-devel@lists.xenproject.org, 
-    qemu-riscv@nongnu.org, Jean-Christophe Dubois <jcd@tribudubois.net>, 
-    qemu-ppc@nongnu.org, Alexandre Iooss <erdnaxe@crans.org>, 
-    Weiwei Li <liwei1518@gmail.com>, Zhao Liu <zhao1.liu@intel.com>, 
-    Jiaxun Yang <jiaxun.yang@flygoat.com>, 
-    Strahinja Jankovic <strahinja.p.jankovic@gmail.com>, 
-    =?ISO-8859-15?Q?Philippe_Mathieu-Daud=E9?= <philmd@oss.qualcomm.com>, 
-    Thomas Huth <th.huth+qemu@posteo.eu>, 
-    =?ISO-8859-15?Q?Cl=E9ment_Chigot?= <chigot@adacore.com>, 
-    Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
-    Yoshinori Sato <yoshinori.sato@nifty.com>, 
-    Frederic Konrad <konrad.frederic@yahoo.fr>, 
-    Palmer Dabbelt <palmer@dabbelt.com>, 
-    Peter Maydell <peter.maydell@linaro.org>, 
-    Chao Liu <chao.liu@processmission.com>, 
-    Sai Pavan Boddu <sai.pavan.boddu@amd.com>, 
-    Alistair Francis <alistair@alistair23.me>, 
-    Huacai Chen <chenhuacai@kernel.org>, Aurelien Jarno <aurelien@aurel32.net>, 
-    Gaurav Sharma <gaurav.sharma_7@nxp.com>, 
-    "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
-    Richard Henderson <richard.henderson@linaro.org>, 
-    Alistair Francis <alistair.francis@wdc.com>, 
-    Artyom Tarasenko <atar4qemu@gmail.com>, qemu-arm@nongnu.org
-Subject: Re: [PATCH 00/15] hw: expand DEFINE_MACHINE to explicit TypeInfo
- registration
-In-Reply-To: <b5987922-1ba0-c284-668f-10d2b114044f@eik.bme.hu>
-Message-ID: <63da8d3e-38a8-7de5-f73b-7f3dfd6e09d3@eik.bme.hu>
-References: <20261030151539.1872-1-luoyonggang@gmail.com> <d1db54c6-b802-676a-7779-0c2c63f5f807@eik.bme.hu> <aa70e94c-d9a8-41c9-850f-7ded87f7f327@oss.qualcomm.com> <ba106173-fca3-6019-3028-122831887921@eik.bme.hu> <CAE2XoE9cR_X0kkDfGTU4Mt_5Hc3WZ8K5rghw2AeL4Vh=eugGag@mail.gmail.com>
- <bf45a858-db07-de03-70ea-ca0061d7a5d1@eik.bme.hu> <CAE2XoE9_b5UiE2+BXFRqB3RPv=M+8jr1HQy7rEFVEb6w1DdoGg@mail.gmail.com> <a479df5b-721d-c357-5c69-c3760a73e521@eik.bme.hu> <CAE2XoE-2w3A4=BeskGgp7NYUtkRVNkNufu4SZjW_OQ-KAQZvhg@mail.gmail.com>
- <6efa9f73-75dd-efd0-3fd9-6b2654b69737@eik.bme.hu> <CAE2XoE8pNaP3rAR5Y2BpUZ2vSu-UC-wG9V9U7gPXrEGY=kx0RA@mail.gmail.com> <e5ce0ea8-7e97-aa76-6384-025fc43cb85a@eik.bme.hu> <CAE2XoE-459vCeK1O__iCs_hgMfMEQHWf_f_=hXG4ZhMJ1Z4aBw@mail.gmail.com>
- <b5987922-1ba0-c284-668f-10d2b114044f@eik.bme.hu>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1793712521; x=1794317321; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=cxcSiNayj7KvRCwrpKS7MARJcUKjMzXqCYh9tZM9V4s=;
+        b=gacjujDkwH7N5yzn5zMOvsHzg+r92P8w1WTh2OaDJWe4w3Fd5yw+IkqZzdDPf7WbBd
+         mQvtRFGjNu9xeBNAxBFksBo4lemvPmYqNl81GBygzSsB4pCDkFZmFsv6V6M5mSr3IVDG
+         rTBcqncqDQns7CjrRGCaVTnAi54gHAbJm0oDTTznYMbuPAg6YUBurH5gWtqD/QqAAzoO
+         EN7Y7WAjKeBdX3/TU4zNG0XS+brBL5t8+6WIG5AMxKP87rGWvkdUGjIBFMtp/zL1/GzR
+         Vf6nU+z3wBQpH46jU1gSnAT9dQ4t8ztBVPSY/uV6s6C9hkQDfGYPmRlR9uHuMImGutYu
+         T3kw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793712521; x=1794317321;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=cxcSiNayj7KvRCwrpKS7MARJcUKjMzXqCYh9tZM9V4s=;
+        b=Qi6/yPzU4yhvSHMtqIkYjHONVhw/zyWCLd1clwBMQQ316Zka7kPRw0WKtYtTXW+PJD
+         YhX0NGu2hJBPv/Se2Fo5qEcUyJqflY0elbAGlDG0EILM5lvs+4d5M1HSwO6RIJSojqiT
+         dAM5goE0QN4HzFIfycgOm3nBl+aiTG9rQdKfkzdAElb7Ul2Mwv9A65tGjV7U2UG6u7yq
+         ctfLPRGgWn9+uyXQIJe/K14mIfPqWiZzs/V9CVDwjaGYoPgrXKgX4jxzPxkxOyJ6axPY
+         +JNcc8wLvEDYBfZ1MZiwvO3NcPVnhGspIz16U04NwlFAcIh7fKE4CK0qWWjB81NO5vnT
+         cHfg==
+X-Forwarded-Encrypted: i=1; AKwUvBxt7GyRMDyGLI81e2DAYoh5iNxDJ48YxHitsFna3jdJO6/nbXvpOTeRWSfZhSAPa8vMqa8NPpXFLAY=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z87befqNQLAYIATNxHpNH6pCNLdVw72a2Gq20s38T9Joj1xWkBs
+	MgqQURxah3xj7UQ5MU+2m/touVSsB8t/V/zJ22zKS8WpqjK9p5K/kgqhvnlDMNEej6E5b4cMGI2
+	zInxraA==
+X-Gm-Gg: AYBFou3uYd8jqNOhOr0vB4JkAlgf9DCryIATbkZknreBTP+NF0zLp4E0X3SjG1VPALS
+	ZWEFqvOaTENL37+AOBgZQfVx5GQCgQuLOrktqVLd4Krw6dG3TSg3kJlj0LhNQFUagtqpN1j4xF1
+	6fBTV0Qr1FqDKpib8b8zS1K0LLnA9WoE+llU6o4dnF8bTXekjXCo5dTihWSxwOOmG5Ctw5U0pJI
+	V71mTcDMZPV21CZIzYSxcxn8wnmd5uhB27Wqtfs6otnbWh8qfxAzrn+431JlXobvrmAOTFm4D2e
+	Ek63lziO/qLqejiGRqIyA4F+1YOd/rn5oVUAuuroNodyZkmGpkOAYvwOQQ6Mkolz1xDZcEAMuh1
+	YVJ+RGEKLVDGN6hglTAUPxldOREiUT8ZsduYqK7tMprAAKYJ9l0esz9JontRqsp3NVpRROdbrBl
+	HGbhh9YxHna+C3unJaPl5gzRS5073U21YqxOXUEhSkzNC3GJ5CRVWOotZrU5EzPyybZPoaA0G8c
+	0dgemKT59ZNvwHtSbHpOXHH7o7xOnYZ613wjktXor0VdEgjaWXR/n+RrZ0/g8MQ4xk4mP5rgwhL
+	WFyKHgZYqx/0fpwF/3F8f1hwX5DFiasiTeNgNp8ZdIxyEV5vCawhMA0p/UyUcyG0srGIfgB9uDq
+	oMmul9jt2dcerNcv6
+X-Received: by 2002:a05:600c:800c:b0:4a2:d99:3171 with SMTP id 5b1f17b1804b1-4ac17753c13mr313485575e9.23.1793712521162;
+        Tue, 03 Nov 2026 05:28:41 -0800 (PST)
+Message-ID: <e640647e-522d-48dd-a8d3-619c5705d7b1@suse.com>
+Date: Tue, 3 Nov 2026 14:28:40 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="3866299591-867130576-1793712384=:91419"
-X-purgate-ID: tlsNG-ebf023/1793712387-C22D4B50-64A55595/0/0
-X-purgate-type: clean
-X-purgate-size: 11780
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY autolearn=no autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] xen/gnttab: Shrink struct gnttab_copy_buf
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+References: <20261103130120.2020581-1-andrew.cooper3@citrix.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20261103130120.2020581-1-andrew.cooper3@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-16d1c6/1793712521-FDC0F77B-DCAD8912/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 1875
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
+On 03.11.2026 14:01, Andrew Cooper wrote:
+> Move the booleans into earlier padding.  No functional change.
+> 
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
---3866299591-867130576-1793712384=:91419
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8BIT
+Acked-by: Jan Beulich <jbeulich@suse.com>
 
-On Tue, 3 Nov 2026, BALATON Zoltan wrote:
-> On Tue, 3 Nov 2026, Yonggang Luo wrote:
->> On Mon, Nov 2, 2026 at 10:56 PM BALATON Zoltan <balaton@eik.bme.hu> wrote:
->>> 
->>> On Mon, 2 Nov 2026, Yonggang Luo wrote:
->>>> On Mon, Nov 2, 2026 at 4:57 AM BALATON Zoltan <balaton@eik.bme.hu> wrote:
->>>>> 
->>>>> On Sun, 1 Nov 2026, Yonggang Luo wrote:
->>>>>> On Sun, Nov 1, 2026 at 7:29 AM BALATON Zoltan <balaton@eik.bme.hu> 
->>>>>> wrote:
->>>>>>> 
->>>>>>> On Sun, 1 Nov 2026, Yonggang Luo wrote:
->>>>>>>> On Sun, Nov 1, 2026 at 1:06 AM BALATON Zoltan <balaton@eik.bme.hu> 
->>>>>>>> wrote:
->>>>>>>>> 
->>>>>>>>> On Sat, 31 Oct 2026, Yonggang Luo wrote:
->>>>>>>>>> On Sat, Oct 31, 2026 at 8:42 PM BALATON Zoltan <balaton@eik.bme.hu> 
->>>>>>>>>> wrote:
->>>>>>>>>>> 
->>>>>>>>>>> On Fri, 30 Oct 2026, Pierrick Bouvier wrote:
->>>>>>>>>>>> On 10/30/2026 4:09 PM, BALATON Zoltan wrote:
->>>>>>>>>>>>> On Fri, 30 Oct 2026, Yonggang Luo wrote:
->>>>>>>>>>>>>> DEFINE_MACHINE and DEFINE_MACHINE_EXTENDED hide the TypeInfo 
->>>>>>>>>>>>>> and the
->>>>>>>>>>>>>> type_init
->>>>>>>>>>>>>> function that calls type_register_static(). A later change 
->>>>>>>>>>>>>> needs to
->>>>>>>>>>>>>> pass a
->>>>>>>>>>>>> 
->>>>>>>>>>>>> That's the point of the macro to hide the boiler plate code.
->>>>>>>>>>>>> 
->>>>>>>>>>>>>> target mask into that registration, and the macros have no 
->>>>>>>>>>>>>> parameter
->>>>>>>>>>>>>> for it.
->>>>>>>>>>>>> 
->>>>>>>>>>>>> Couldn't you just change the macros to take that parameter 
->>>>>>>>>>>>> instead of
->>>>>>>>>>>>> expanding it everywhere?
->>>>>>>>>>>>> 
->>>>>>>>>>>> 
->>>>>>>>>>>> Problem of macros is that they don't have default parameters, so 
->>>>>>>>>>>> you
->>>>>>>>>>>> need variants for everything:
->>>>>>>>>>>> 
->>>>>>>>>>>> DEFINE_MACHINE
->>>>>>>>>>>> DEFINE_MACHINE_EXTENDED
->>>>>>>>>>>> DEFINE_MACHINE_WITH_INTERFACES
->>>>>>>>>>>> DEFINE_MACHINE_WITH_INTERFACE_ARRAY
->>>>>>>>>>>> and now would need a new variant, with variant for other existing 
->>>>>>>>>>>> ones.
->>>>>>>>>>>> 
->>>>>>>>>>>> In the end, it's just simpler to remove this and add the 
->>>>>>>>>>>> boilerplate.
->>>>>>>>>>>> It's written once and never modified, so using a macro just save 
->>>>>>>>>>>> typing
->>>>>>>>>>>> those lines once.
->>>>>>>>>>>> 
->>>>>>>>>>>>> Regards,
->>>>>>>>>>>>> BALATON Zoltan
->>>>>>>>>>>>> 
->>>>>>>>>>>>>> This series expands every caller first, with no behavior 
->>>>>>>>>>>>>> change, so the
->>>>>>>>>>>>>> follow-up only replaces the type_register_static() call.
->>>>>>>>>>>>>> 
->>>>>>>>>>>>>> Each machine file gains a class_init function, a TypeInfo, and 
->>>>>>>>>>>>>> a
->>>>>>>>>>>>>> type_init
->>>>>>>>>>>>>> function that calls type_register_static(). The last patch 
->>>>>>>>>>>>>> removes
->>>>>>>>>>>>>> DEFINE_MACHINE* and DEFINE_SECURE_MACHINE* from 
->>>>>>>>>>>>>> include/hw/core/boards.h.
->>>>>>>>>>> 
->>>>>>>>>>> Macros help reading the code not saving typing. If the actual
->>>>>>>>>>> functionality is buried in a lot of boiler plate it's harder to 
->>>>>>>>>>> understand
->>>>>>>>>>> and spot bugs so putting the unintresting boiler plate behind a 
->>>>>>>>>>> macro is
->>>>>>>>>>> better even if you need a separate version for different cases. 
->>>>>>>>>>> Then the
->>>>>>>>>>> code that uses the macro will be much more obvious and not just a 
->>>>>>>>>>> lot of
->>>>>>>>>> 
->>>>>>>>>> I think mainly because DEFINE_MACHINE* and DEFINE_SECURE_MACHINE* 
->>>>>>>>>> are
->>>>>>>>>> not defined properly
->>>>>>>>>> that causes them to not be extended easily.
->>>>>>>>>> 
->>>>>>>>>> DEFINE_TYPES is another example, use them can extend easily, how 
->>>>>>>>>> about
->>>>>>>>>> always use DEFINE_TYPES?
->>>>>>>>>> Or add a DEFINE_TYPE to replace DEFINE_MACHINE* and 
->>>>>>>>>> DEFINE_SECURE_MACHINE*?
->>>>>>>>> 
->>>>>>>>> Maybe I'm missing the problem but DEFINE_MACHINE macros are just
->>>>>>>>> convenience wrappers around DEFINE_MACHINE_EXTENDED. So why can't 
->>>>>>>>> you add
->>>>>>>>> the needed parameter to DEFINE_MACHINE_EXTENDED and use that for 
->>>>>>>>> machines
->>>>>>>>> that need it, or if it's needed by all machines then make the new
->>>>>>>>> parameter required and add it to all convenience wrappers too so you 
->>>>>>>>> can
->>>>>>>>> keep using DEFINE_MACHINE* and just need to add one parameter to it 
->>>>>>>>> in
->>>>>>>>> machines?
->>>>>>>> 
->>>>>>>> That's the issue, add parameter to DEFINE_MACHINE_EXTENDED means all
->>>>>>>> calls to it also need
->>>>>>>> to be changed, that means touch many $target_arch files. currently
->>>>>>>> it's 13. But after these
->>>>>>> 
->>>>>>> That's not different from expanding the macro which would touch the 
->>>>>>> same
->>>>>>> files.
->>>>>>> 
->>>>>>>> changes, there will be much more usage on it, and if we want to add
->>>>>>>> more parameters or attributes
->>>>>>>> to it, it will be a new tree-wide change.
->>>>>>> 
->>>>>>> Do you expect to need more parameters? Can't you add them at once 
->>>>>>> then?
->>>>>>> 
->>>>>>>> And DEFINE_TYPES do not suffer from such issues. As the TypeInfo[] is
->>>>>>>> explicit defined for
->>>>>>>> DEFINE_TYPES
->>>>>>> 
->>>>>>> My point is that keeping the boiler plate as little as possible makes 
->>>>>>> the
->>>>>>> code more readable. DEFINE_TYPES hides some of the boiler plate,
->>>>>>> DEFINE_MACHINE hides even more so converting to DEFINE_TYPES would 
->>>>>>> expose
->>>>>>> some even if it's better than no macro at all.
->>>>>>> 
->>>>>>> What exactly are the parameters missing from DEFINE_MACHINE_EXTENDED 
->>>>>>> that
->>>>>>> need to be added?
->>>>>> 
->>>>>> Hi BALATON
->>>>>> the things we faced is we first is to add TypeInfo::is_available 
->>>>>> parameter to
->>>>>> DEFINE_MACHINE_EXTENDED, and have more usage of it.
->>>>>> Then we will add targets:uint64_t parameter to DEFINE_MACHINE_EXTENDED, 
->>>>>> this is
->>>>>> a prepare to remove TypeInfo::is_available parameter from
->>>>>> DEFINE_MACHINE_EXTENDED,
->>>>>> 
->>>>>> And finally, once all usage of TypeInfo::is_available can be replaced 
->>>>>> with
->>>>>> targets:uint64_t, then we finally need to remove
->>>>>> TypeInfo::is_available parameter from DEFINE_MACHINE_EXTENDED,
->>>>> 
->>>>> Is there a way to avoid the temporary is_available churn and introduce 
->>>>> the
->>>>> targets:uint64_t right away? (I'm not following this so I don't really
->>>>> know what you're talking about just looks like there's some churn here
->>>>> which might be good to awoid anyway independent of these macros.)
->>>>> 
->>>>>> That's what I am facing now. And the explicit
->>>>>> static const TypeInfo xxx_machine_typeinfo = {
->>>>>>    .name       = MACHINE_TYPE_NAME("xxx"),
->>>>>>    .parent     = TYPE_MACHINE,
->>>>>>    .class_init = xxx_machine_class_init,
->>>>>> };
->>>>>> 
->>>>>> Will help me avoid the issue. And I think this is a little boilerplate
->>>>>> and very explicit.
->>>>> 
->>>>> That's not all DEFINE_MACHINE hides though. It's longer with .abstract,
->>>>> .secure and .iterfaces plus the machine initfn that would also need to 
->>>>> be
->>>>> expanded if you used DEFINE_TYPES.
->>>>> 
->>>>> Is this conversion needed for all machines using all DEFINE_MACHINE
->>>> 
->>>> At the end, only "none" machine do not have targets parameter or
->>>> (QEMU_ARCH_ALL), as that's the sole
->>>> machine that supports all targets.
->>>> 
->>>>> variants or only some of them? If the latter why not convert those to
->>>> 
->>>> 
->>>> 
->>>> 
->>>>> DEFINE_MACHINE_EXTENDED and then only that macro needs to be changed 
->>>>> with
->>>>> other wrappers passing a default value without needing a new parameter.
->>>>> That does not work if all machines need to do this but even then, 
->>>>> keeping
->>>>> the macro and adding a new required parameter is better in my opinion as
->>>>> it keeps boiler plate hidden.
->>>> 
->>>> Another option is keep DEFINE_MACHINE and introduce 
->>>> DEFINE_MACHINE_TARGETS
->>>> and remove DEFINE_MACHINE_EXTENDED, and we only use DEFINE_MACHINE for
->>>> simple case,
->>>> that is parent is TYPE_MACHINE and have no custom type and no more
->>>> attributes assigned.
->>>> DEFINE_MACHINE_EXTENDED is too verbose, when calling it, it less clear
->>>> than calling to DEFINE_MACHINE.
->>>> And if we want to set more attributes to TypeInfo, just expand it to
->>>> use type_init or DEFINE_TYPES, how about this way.
->>>> 
->>>> This will be something like:
->>>> 
->>>> #define DEFINE_MACHINE_TARGETS(namestr, machine_initfn, targets) \
->>>>    static void machine_initfn##_class_init(ObjectClass *oc, const void 
->>>> *data) \
->>>>    { \
->>>>        MachineClass *mc = MACHINE_CLASS(oc); \
->>>>        machine_initfn(mc); \
->>>>    } \
->>>>    static const TypeInfo machine_initfn##_typeinfo = { \
->>>>        .name       = MACHINE_TYPE_NAME(namestr), \
->>>>        .parent     = TYPE_MACHINE, \
->>>>        .class_init = machine_initfn##_class_init, \
->>>>    }; \
->>>>    static void machine_initfn##_register_types(void) \
->>>>    { \
->>>>        type_register_targets(&machine_initfn##_typeinfo, targets); \
->>>>    } \
->>>>    type_init(machine_initfn##_register_types)
->>>> 
->>>> /* Implicitly insecure */
->>>> #define DEFINE_MACHINE(namestr, machine_initfn) \
->>>>    DEFINE_MACHINE_TARGETS(namestr, machine_initfn, QEMU_ARCH_ALL) \
->>>> 
->>>> As the many call is to DEFINE_MACHINE.
->>>> 
->>>> And after all conversion, all existing usage of DEFINE_MACHINE will be
->>>> converted to
->>>> DEFINE_MACHINE_TARGETS.
->>>> DEFINE_MACHINE will be called for ('none') machine or future 
->>>> heterogeneous
->>>> machines
->>>> 
->>>> 
->>>> Either way, these patches will be dropped. We will introduce
->>>> DEFINE_MACHINE_TARGETS first.
->>> 
->>> I think I'm lost and cannot follow what you want. As far as I understood
->>> you want to add a new field "target" to machine TypeInfo but instead of
->>> adding that straight away you proposed to first add is_available then
->>> later replace that with target. I asked why do you need is_available and
->>> not add target right away?
->>> 
->>> Then if this target parameter will be needed for all machines why can't
->>> you add that to all DEFINE_MACHINE macros as a required parameter and set
->>> it for all machines passing it through to DEFINE_MACHINE_EXTENDED which
->>> sets in the TypeInfo. That way no machines need changing other than adding
->>> the target parameter to the existing DEFINE_MACHINE calls.
->>> 
->>> What am I missing?
->> Or sorry, I did not explain well.
->> 
->> I means reshape DEFINE_MACHINE like
->> 
->> https://lore.kernel.org/qemu-devel/20261102194826.1298-1-luoyonggang@gmail.com/T/#u
->> 
->> basically every call to DEFINE_MACHINE needs the targets parameter.
->> So we can always passing targets parameter for DEFINE_MACHINE.
->
-> That's OK and is what I suggested, the part I did not get is why do you need 
-> an intermediate is_available step instead of just adding the target parameter 
-> to all DEFINE_MACHINE* macros.
+> On arm32, it's 40 bytes before and after.  Given that we can't reuse the
+> tail-padding from struct gnttab_copy_ptr, I'm not sure there's an obvious
+> improvement to be had:
+> 
+>   xen.git/xen$ pahole xen-syms-arm32-after -E -C gnttab_copy_buf
+>   struct gnttab_copy_buf {
+>         struct gnttab_copy_ptr {
+>                 union {
+>                         /* typedef grant_ref_t -> uint32_t */ unsigned int ref;          /*     0     4 */
+>                         /* typedef xen_pfn_t -> uint64_t */ long long unsigned int gmfn; /*     0     8 */
+>                 } u;                                                                     /*     0     8 */
+>                 /* typedef domid_t -> uint16_t */ short unsigned int domid;              /*     8     2 */
+>                 /* typedef uint16_t */ short unsigned int offset;                        /*    10     2 */
+>         }ptr; /*     0    16 */
+> 
+>         /* XXX last struct has 4 bytes of padding */
+> 
+>         /* typedef uint16_t */ short unsigned int         len;                           /*    16     2 */
+>         _Bool                      read_only;                                            /*    18     1 */
+>         _Bool                      have_grant;                                           /*    19     1 */
+>         _Bool                      have_type;                                            /*    20     1 */
 
-I noticed there's some redundancy between the arch and the name prefix 
-with this change. Basically you're trying to split namestr into name and 
-arch where the final machine name will be arch-name. Is there a way to do 
-this from the macro somehow so you don't have to specify the arch twice 
-once in the name and once as an enum?
+Making these bitfields would help Arm32.
 
-Regards,
-BALATON Zoltan
---3866299591-867130576-1793712384=:91419--
+Jan
+
+PS: Can we also get the other pending gnttab change sorted? As said,
+feel free to post your patch, and I'll ack it. Alternatively an ack
+on my variant would be nice.
 
