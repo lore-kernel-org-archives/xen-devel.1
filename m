@@ -2,43 +2,35 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 00676606A31B
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2026 22:01:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C19FC606A324
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2026 23:20:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=AuKAd+2p
-Received: from list by lists.xenproject.org with outflank-mailman.1470675.1679308 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=m5v61Kqk
+Received: from list by lists.xenproject.org with outflank-mailman.1470713.1679336 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOMZK-0004sk-4N; Tue, 03 Nov 2026 22:01:26 +0000
+	id 1xONnk-0002yh-2a; Tue, 03 Nov 2026 23:20:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1470675.1679308; Tue, 03 Nov 2026 22:01:26 +0000
+Received: by outflank-mailman (output) from mailman id 1470713.1679336; Tue, 03 Nov 2026 23:20:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOMZK-0004sd-1B; Tue, 03 Nov 2026 22:01:26 +0000
-Received: by outflank-mailman (input) for mailman id 1470675;
- Tue, 03 Nov 2026 22:01:24 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xONnj-0002ya-Vz; Tue, 03 Nov 2026 23:20:23 +0000
+Received: by outflank-mailman (input) for mailman id 1470713;
+ Tue, 03 Nov 2026 23:20:22 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <dakr@kernel.org>) id 1xOMZI-0004sP-Ke
- for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 22:01:24 +0000
-Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xOMZH-00FeOK-PJ
- for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 23:01:23 +0100
-Received: from [10.42.69.5] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <dakr@kernel.org>)
- id 6aea59b0-2eae-0a2a0a5409dd-0a2a4505d9f0-4
- for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 23:01:23 +0100
-Received: from [172.234.252.31] (helo=sea.source.kernel.org)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <dakr@kernel.org>)
- id 6aea59b2-4cb1-0a2a45050019-aceafc1fb816-3
- for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 23:01:23 +0100
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id B58204026B;
- Tue,  3 Nov 2026 22:01:21 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 73E5C1F000C1;
- Tue,  3 Nov 2026 22:01:16 +0000 (UTC)
+ (envelope-from <gwd@xenproject.org>) id 1xONni-0002wo-Qw
+ for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 23:20:22 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.98.2)
+ (envelope-from <gwd@xenproject.org>) id 1xONni-0000000CofN-1h5Q;
+ Tue, 03 Nov 2026 23:20:22 +0000
+Received: from [2607:fb91:4c8c:bd3f:1da5:e92a:c5fb:865a]
+ (helo=localhost.localdomain)
+ by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.98.2)
+ (envelope-from <gwd@xenproject.org>) id 1xONnh-0000000EMFa-2DVQ;
+ Tue, 03 Nov 2026 23:20:22 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -47,82 +39,122 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:Subject:Cc:To:From:References:In-Reply-To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793743281;
-	bh=R6uA9hX7fD85rhN6sNXcNNPGP4g4K/KhTQ6rqqOfAX0=;
-	h=Date:Subject:Cc:To:From:References:In-Reply-To;
-	b=AuKAd+2pAiWxmodz6a5kLrzOGag2dQXGCvIWfiU2SqiHPwjnt+DZeZOIZzwDoeFgW
-	 f5tvI82TTyJbTTJBeMupREcEqkEJOTnvm2tcg6rR6KzI977TOiUnB4XfJblBR0m8Ko
-	 3on7l/RW87okd18TkMziqprxQ9KNwBaxunuTpwN+wdELBok8svqqglFYItI7OaAie9
-	 SaIAxAjUUZc0FGMB/GEzff7Fem5FCCZW2y7K8Ha9aPGJ34HwNpxMac8F2DMTukXzX4
-	 NMMYmaBoHXuYiAJmGYwn0YL5KCqaN+IzO8Fe7/dimMO7SXev4BOPXOSMGcMZiQPmb5
-	 yEemvUz0AwJZg==
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:Content-Type:
+	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
+	bh=3VJN5UNE9/z4qrpuleJ1/OW1QHRZAWYrv6m65EedvqM=; b=m5v61KqkHzWattc6yApMmTdIUu
+	6NeSqowudPi3AnVvZ/xY6Cq+vSWsWY3OVoHpwiDFPoCAz3uYlaIhjFAI/Sx70UK4rnowrxH+0GIRm
+	Zg3t6wdFp7T8ZmxHat404orQL+sxFkYrULxgRBRRXPzBz+pN7DmgU2d7tK3FzglXW6hA=;
+From: George Dunlap <gwd@xenproject.org>
+To: xen-devel@lists.xenproject.org
+Cc: =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Teddy Astie <teddy.astie@vates.tech>
+Subject: [PATCH v6 03/44] x86/mm: prepare destroy_perdomain_mapping() for per-vCPU perdomain areas
+Date: Tue,  3 Nov 2026 17:13:25 -0500
+Message-ID: <20261103-asi-hvm-v6-3-59dbc5ce9615@xenproject.org>
+X-Mailer: git-send-email 2.56.0
+In-Reply-To: <20261103-asi-hvm-v6-0-59dbc5ce9615@xenproject.org>
+References: <20261103-asi-hvm-v6-0-59dbc5ce9615@xenproject.org>
 X-Archived-By: <archiver.kernel.org>
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Tue, 03 Nov 2026 23:01:15 +0100
-Message-Id: <DMLWX8NY1N1N.2OMQMQCIVRR18@kernel.org>
-Subject: Re: [PATCH v2 0/9] Add __must_init and require explicit
- kobj_type::release
-Cc: "Kees Cook" <kees@kernel.org>, "Greg Kroah-Hartman"
- <gregkh@linuxfoundation.org>, "Miguel Ojeda" <ojeda@kernel.org>, "Rafael J
- . Wysocki" <rafael@kernel.org>, "Nathan Chancellor" <nathan@kernel.org>,
- "Nick Desaulniers" <ndesaulniers@google.com>, "Miguel Ojeda"
- <miguel.ojeda.sandonis@gmail.com>, =?utf-8?q?Christian_K=C3=B6nig?=
- <christian.koenig@amd.com>, "Zhihao Cheng" <chengzhihao1@huawei.com>,
- "Zhongqiu Han" <zhongqiu.han@oss.qualcomm.com>, "Sumanth Korikkar"
- <sumanthk@linux.ibm.com>, "Bill Wendling" <morbo@google.com>, "Justin
- Stitt" <justinstitt@google.com>, <driver-core@lists.linux.dev>,
- <llvm@lists.linux.dev>, <linux-hardening@vger.kernel.org>,
- <linux-fsdevel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
- <linux-acpi@vger.kernel.org>, <linux-pm@vger.kernel.org>,
- <linuxppc-dev@lists.ozlabs.org>, <linux-sh@vger.kernel.org>,
- <linux-s390@vger.kernel.org>, <gfs2@lists.linux.dev>,
- <xen-devel@lists.xenproject.org>, <linux-mtd@lists.infradead.org>,
- <amd-gfx@lists.freedesktop.org>, <dri-devel@lists.freedesktop.org>,
- <linux-kernel@vger.kernel.org>
-To: "Ian Rogers" <irogers@google.com>
-From: "Danilo Krummrich" <dakr@kernel.org>
-References: <20261027223847.652884-1-irogers@google.com>
-In-Reply-To: <20261027223847.652884-1-irogers@google.com>
-X-purgate-ID: tlsNG-c201ff/1793743283-738BE2A1-A7A6175B/0/0
-X-purgate-type: clean
-X-purgate-size: 1324
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
-	autolearn=no autolearn_force=no version=4.0.1
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Tue Oct 27, 2026 at 11:38 PM CET, Ian Rogers wrote:
-> Clang supports the 'require_explicit_initialization' attribute on struct
-> fields to enforce that the field is explicitly initialized when an
-> aggregate object is constructed, emitting -Wuninitialized-explicit-init
-> (enabled by default) if the field is omitted.
->
-> Following discussion at the Linux Plumbers Conference [1], patch 1 adds
-> the attribute to include/linux/compiler_attributes.h as __must_init. In
-> v1 it was called __require_explicit_initialization. Kees picked up that
-> patch with a first seq_file user [2], and in that thread Greg suggested
-> the shorter __must_init spelling, which Kees and Miguel agreed to. As
-> the attribute did not land in the v7.4 merge window, Kees asked that
-> this series carry the renamed attribute. The Acked-by/Reviewed-by tags
-> on patch 1 were given for the original spelling; the rename is
-> mechanical.
+From: Roger Pau Monné <roger.pau@citrix.com>
 
-This looks ready, and I plan to pick it up through the driver-core tree wit=
-h the
-minor commit message correction.
+We want to change per-domain mappings to be per-vCPU mappings.  In
+preparation for that, we want to arrange that
+destroy_perdomain_mapping() work either with a single perdomain area,
+or with a per-vCPU perdomain area.
 
->   powerpc/secvar: Add missing kobject release callback to secvar_ktype
->   sh: sq: Add missing kobject release callback to ktype_percpu_entry
->   xen/sys-hypervisor: Add release callback to hyp_sysfs_kobj_type
+The one remaining caller, free_compat_arg_xlat(), is already in a vCPU
+context, so we just need to change the parameter from a domain pointer
+to a vCPU pointer.
 
-Some ACKs would be appreciated. :)
+No functional change.
 
-Thanks,
-Danilo
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-4-8, Claude Code:claude-opus-5-5
+Signed-off-by: George Dunlap <gwd@xenproject.org>
+Reviewed-by: Roger Pau Monné <roger@xenproject.org>
+---
+Changes in v4:
+- Say "No functional change." (Roger).
+
+Changes in v3:
+- Rebased onto staging without the GDT/LDT conversions (for the
+  HVM-only series): free_compat_arg_xlat() is the only caller left.
+- Drop the linear-page-table fast path altogether (Jan): its only user
+  would have been guest-driven LDT teardown, and without it the
+  function does not depend on the linear mapping being available.
+
+Changes in v2:
+- Added to the series
+
+Changes since the previously posted version:
+- The fast path is gone (v3), and with it the previously posted
+  version's sync_local_execstate() call.
+- Reword and retitle for clarity (was: "x86/mm: switch
+  destroy_perdomain_mapping() parameter from domain to vCPU").
+---
+ xen/arch/x86/include/asm/mm.h | 2 +-
+ xen/arch/x86/mm.c             | 3 ++-
+ xen/arch/x86/x86_64/mm.c      | 2 +-
+ 3 files changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/xen/arch/x86/include/asm/mm.h b/xen/arch/x86/include/asm/mm.h
+index e77ac5ccdf..1cdd30f7e2 100644
+--- a/xen/arch/x86/include/asm/mm.h
++++ b/xen/arch/x86/include/asm/mm.h
+@@ -610,7 +610,7 @@ struct page_info *allocate_perdomain_l3(struct domain *d);
+ int create_perdomain_mapping(struct domain *d, unsigned long va,
+                              unsigned int nr, l1_pgentry_t **pl1tab,
+                              struct page_info **ppg);
+-void destroy_perdomain_mapping(struct domain *d, unsigned long va,
++void destroy_perdomain_mapping(const struct vcpu *v, unsigned long va,
+                                unsigned int nr);
+ void free_perdomain_mappings(struct domain *d);
+ 
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index 63e6aadcda..c784c4f726 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -6356,10 +6356,11 @@ int create_perdomain_mapping(struct domain *d, unsigned long va,
+     return rc;
+ }
+ 
+-void destroy_perdomain_mapping(struct domain *d, unsigned long va,
++void destroy_perdomain_mapping(const struct vcpu *v, unsigned long va,
+                                unsigned int nr)
+ {
+     const l3_pgentry_t *l3tab, *pl3e;
++    const struct domain *d = v->domain;
+ 
+     ASSERT(va >= PERDOMAIN_VIRT_START &&
+            va < PERDOMAIN_VIRT_SLOT(PERDOMAIN_SLOTS));
+diff --git a/xen/arch/x86/x86_64/mm.c b/xen/arch/x86/x86_64/mm.c
+index 8eadab7933..f467ed426b 100644
+--- a/xen/arch/x86/x86_64/mm.c
++++ b/xen/arch/x86/x86_64/mm.c
+@@ -739,7 +739,7 @@ int setup_compat_arg_xlat(struct vcpu *v)
+ 
+ void free_compat_arg_xlat(struct vcpu *v)
+ {
+-    destroy_perdomain_mapping(v->domain, ARG_XLAT_START(v),
++    destroy_perdomain_mapping(v, ARG_XLAT_START(v),
+                               PFN_UP(COMPAT_ARG_XLAT_SIZE));
+ }
+ 
+-- 
+2.56.0
+
 
