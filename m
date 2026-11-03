@@ -2,35 +2,35 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B862606A334
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A0015606A334
 	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2026 23:31:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=d9FXRJIU
-Received: from list by lists.xenproject.org with outflank-mailman.1470810.1679593 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=vblZ+qDc
+Received: from list by lists.xenproject.org with outflank-mailman.1470814.1679610 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xONy5-0006Cy-Be; Tue, 03 Nov 2026 23:31:05 +0000
+	id 1xONyA-0007Jy-3a; Tue, 03 Nov 2026 23:31:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1470810.1679593; Tue, 03 Nov 2026 23:31:04 +0000
+Received: by outflank-mailman (output) from mailman id 1470814.1679610; Tue, 03 Nov 2026 23:31:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xONy3-00062i-DD; Tue, 03 Nov 2026 23:31:03 +0000
-Received: by outflank-mailman (input) for mailman id 1470810;
+	id 1xONy8-0007BW-BR; Tue, 03 Nov 2026 23:31:08 +0000
+Received: by outflank-mailman (input) for mailman id 1470814;
  Tue, 03 Nov 2026 23:30:36 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xONxc-0000dv-Gq
+ (envelope-from <gwd@xenproject.org>) id 1xONxc-0000eU-N8
  for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 23:30:36 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xONxc-0000000Covq-1ubp;
+ (envelope-from <gwd@xenproject.org>) id 1xONxc-0000000CouI-06Vu;
  Tue, 03 Nov 2026 23:30:36 +0000
 Received: from [2607:fb91:4c8c:bd3f:1da5:e92a:c5fb:865a]
  (helo=localhost.localdomain)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xONny-0000000EMFa-2t77;
- Tue, 03 Nov 2026 23:20:38 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xONoD-0000000EMFa-0N4L;
+ Tue, 03 Nov 2026 23:20:53 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -42,18 +42,19 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=r1VmGidvH1AZLdhk+0ig3hYGT6yhxdDnEfjoDf/SEiU=; b=d9FXRJIUIaGrZetJr5AfUpk4yz
-	Zmu4v3VghhJWbE2i/nNLQayqltm599DBQ5PA5cnze4SlLx/8/YeSDY/uKnCfZqKy2T0ueQDCI6ApC
-	aCBRP6UXgplQQHzZBwG1akKDVWZ4yeNx8RkWeBwV+oNkGAVX+053X8w1zCf2sjwmigCA=;
+	bh=+ze/mUts7B6alTNouyX2ejvqaet9bE/wAgVhHkz5gYM=; b=vblZ+qDcgbyK7289GtynIGBy6w
+	Y4rD6msZISrkm+/4Gwolo9g7c1S4FaucHuqrKd9mUkx9W+5HXmD0QN+GtM/0YguYxR+/hVQ2FvH0/
+	FVMmzdRR+3ePCDdRJs+AB+x6LWBCmlcFokQZIuiawZ5OQW49XWWW1hvHyY9KLjCKPJow=;
 From: George Dunlap <gwd@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>,
+Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
+	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
 	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v6 19/44] x86/domain_page: clear a mapcache slot at its last unmap
-Date: Tue,  3 Nov 2026 17:13:41 -0500
-Message-ID: <20261103-asi-hvm-v6-19-59dbc5ce9615@xenproject.org>
+Subject: [PATCH v6 40/44] x86/fpu: Pass explicit xsave areas to fpu_(f)xsave()
+Date: Tue,  3 Nov 2026 17:14:02 -0500
+Message-ID: <20261103-asi-hvm-v6-40-59dbc5ce9615@xenproject.org>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261103-asi-hvm-v6-0-59dbc5ce9615@xenproject.org>
 References: <20261103-asi-hvm-v6-0-59dbc5ce9615@xenproject.org>
@@ -67,205 +68,125 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-unmap_domain_page() keeps a recently unmapped slot in the vCPU's
-maphash (MAPHASH_ENTRIES, 8 per vCPU) for a quick remap of the same
-MFN, and leaves its PTE in place until the entry is displaced by a later
-unmap or reclaimed by a full cache.  Until then the page stays mapped,
-although nothing refers to the mapping and the mapcache holds no
-reference to the page.  Where the mapcache clears a slot's PTE, it
-defers the flush: the slot's translation can stay in the TLB of the CPU
-which used it until that CPU next flushes.
+From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 
-While the full directmap is loaded, that reaches nothing it does not
-map anyway.  On the sparse view of the directmap, Xen reaches
-domain-heap memory only through mappings made for the purpose.  A
-mapping or a translation left behind keeps the page reachable after its
-last unmap: while Xen serves another of the guest's contexts on the
-same vCPU, and, once the page is freed and handed to another domain,
-from a context which has nothing to do with it.
+Have the save entry point fetch the vCPU's XSAVE area once, through
+the VCPU_MAP_XSAVE_AREA() seam, and pass the resulting pointer down
+explicitly: xsave() gains an area parameter in place of its internal
+dereference, and fpu_fxsave() takes the legacy region directly.  The
+lower-level helpers no longer know where a vCPU's save area lives,
+which is the property the coming relocation of guest save areas
+relies on; the vcpu pointers become const on the way.
 
-So clear a slot's PTE when its last reference goes, maphash slots
-included: the hash entry keeps the slot, not the mapping, and a later
-hit maps the page again in the same slot.  The slot has mapped nothing
-else in between, so that needs no flush.  Reusing the slot for another
-page still goes through the garbage map, or through the replacement of
-a hash entry when the cache is full, both of which flush first.
+No functional change.
 
-In a per-vCPU mapcache, as vCPU-PT domains have, also invalidate the
-slot's translation on the local CPU, right after clearing the PTE.  The
-slot has a second address, in the mirror of the per-domain area that
-every domain but a 64-bit PV one gets for the compat argument
-translation area, and its translation is invalidated too: two INVLPGs.
-That leaves no translation on any CPU, as the vCPU's page-tables are
-loaded on one CPU at a time, and a CPU loading other page-tables
-(switch_cr3_cr4()) flushes non-global translations, the mapcache's
-included.
-
-A PV domain's domain-wide mapcache has its PTEs cleared but no
-INVLPG, as CPUs running the domain's other vCPUs may hold the slot's
-translation too, which a local INVLPG would not reach.  For it, as
-before, builds with PV support flush a page freed by its owner from
-TLBs before the page is handed out again.
-
-The cost is one PTE write per unmap into the maphash and per remap from
-it, and in a per-vCPU mapcache two INVLPGs per slot's last unmap.  A
-second unmap of an entry in the maphash now finds its PTE not present
-and is caught by the check unmap_domain_page() has for entries the
-first unmap zapped, rather than by the reference count's ASSERT() in
-debug builds only.
-
-The change does not depend on asi= or on a sparse view of the directmap
-being configured: PV vCPUs use the domain-wide mapcache on the default
-command line too.  For them it adds the PTE writes above, and leaves up
-to MAPHASH_ENTRIES fewer pages per vCPU mapped in the
-domain-wide mapcache.
-
-Assisted-by: Claude Code:claude-opus-5-5
+Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+Assisted-by: Claude Code:claude-fable-5
 Signed-off-by: George Dunlap <gwd@xenproject.org>
----
-Changes in v4:
-- Merge v3's 15/18 ("x86/mm: flush owned pages before reuse with the
-  sparse directmap view") and 16/18 ("x86/domain_page: keep the
-  maphash's slots, not their mappings").  Rather than flush pages freed
-  by their owner before reuse wherever a sparse view is configured,
-  invalidate a per-vCPU mapcache slot's translations on the local CPU
-  right after its PTE is cleared (Roger).
-- Message: don't restate when PV vCPUs use the mapcache (Roger).
 
-Changes in v3:
+---
+Revived from "x86: Address Space Isolation FPU preparations" v3 patch
+10/12 (<20250110132823.24348-11-alejandro.vallejo@cloud.com>, Acked-by
+Jan Beulich; no v4 was ever posted).
+
+Changes in v5:
 - New in this version.
 
-For reviewers: with a slot cleared and invalidated at its last unmap,
-a per-vCPU mapcache's maphash saves only the search for a free slot,
-and a second slot for a page mapped twice at once.  One page in two
-slots is fine, and already happens when it is not in the maphash.  So
-per-vCPU mapcaches could drop the maphash, and with it their garbage
-map and wrap-time flush; that is left for a follow-up.
+Changes since the previously posted version:
+ - Regenerated against the eager-FPU-only tree: the entry point is now
+   vcpu_save_fpu() (vcpu_xsave_mask()/_vcpu_save_fpu() no longer
+   exist), and the mask is always XSTATE_ALL.
+ - Expanded the commit message.
 ---
- xen/arch/x86/domain_page.c        | 53 +++++++++++++++++++++++++------
- xen/arch/x86/include/asm/domain.h |  5 ++-
- 2 files changed, 48 insertions(+), 10 deletions(-)
+ xen/arch/x86/i387.c               | 18 ++++++++++++------
+ xen/arch/x86/include/asm/xstate.h |  2 +-
+ xen/arch/x86/xstate.c             |  3 +--
+ 3 files changed, 14 insertions(+), 9 deletions(-)
 
-diff --git a/xen/arch/x86/domain_page.c b/xen/arch/x86/domain_page.c
-index 6b662706fb..4198ee7c18 100644
---- a/xen/arch/x86/domain_page.c
-+++ b/xen/arch/x86/domain_page.c
-@@ -130,6 +130,26 @@ static void mapcache_exit(struct mapcache_domain *dcache)
- #define MAPCACHE_L1ENT(idx) \
-     __linear_l1_table[l1_linear_offset(MAPCACHE_VIRT_START + pfn_to_paddr(idx))]
+diff --git a/xen/arch/x86/i387.c b/xen/arch/x86/i387.c
+index c6796bc97b..65491b5697 100644
+--- a/xen/arch/x86/i387.c
++++ b/xen/arch/x86/i387.c
+@@ -109,7 +109,8 @@ static inline void fpu_fxrstor(struct vcpu *v)
+ /*******************************/
  
-+/*
-+ * Clear a slot's PTE.  For a per-vCPU mapcache (HVM domains only), then also
-+ * drop the slot's translations from this CPU's TLB, at its address and at its
-+ * alias in the per-domain mirror, which every HVM domain has.  No other CPU
-+ * can hold them: the vCPU's page-tables are loaded on one CPU at a time, and
-+ * loading other page-tables flushes non-global translations.
-+ */
-+static void mapcache_zap(const struct mapcache_domain *dcache,
-+                         unsigned int idx)
-+{
-+    unsigned long va = MAPCACHE_VIRT_START + pfn_to_paddr(idx);
-+
-+    l1e_write(&MAPCACHE_L1ENT(idx), l1e_empty());
-+    if ( dcache )
-+        return;
-+
-+    flush_tlb_one_local(va);
-+    flush_tlb_one_local(va - PERDOMAIN_VIRT_START + PERDOMAIN_ALT_VIRT_START);
-+}
-+
- void *map_domain_page(mfn_t mfn)
+ /* Save x87 extended state */
+-static inline void fpu_xsave(struct vcpu *v)
++static inline void fpu_xsave(const struct vcpu *v,
++                             struct xsave_struct *xsave_area)
  {
-     unsigned long flags;
-@@ -176,6 +196,14 @@ void *map_domain_page(mfn_t mfn)
-     {
-         idx = hashent->idx;
-         ASSERT(idx < cache->entries);
-+        /*
-+         * An entry the maphash kept holds on to its slot, not to its mapping
-+         * (see unmap_domain_page()): map the page again.  No flush is needed,
-+         * as the slot has mapped nothing else since.
-+         */
-+        if ( !hashent->refcnt )
-+            l1e_write(&MAPCACHE_L1ENT(idx),
-+                      l1e_from_mfn(mfn, __PAGE_HYPERVISOR_RW));
-         hashent->refcnt++;
-         ASSERT(hashent->refcnt);
-         ASSERT(mfn_eq(l1e_get_mfn(MAPCACHE_L1ENT(idx)), mfn));
-@@ -208,8 +236,8 @@ void *map_domain_page(mfn_t mfn)
-                 if ( hashent->idx != MAPHASHENT_NOTINUSE && !hashent->refcnt )
-                 {
-                     idx = hashent->idx;
--                    ASSERT(l1e_get_pfn(MAPCACHE_L1ENT(idx)) == hashent->mfn);
--                    l1e_write(&MAPCACHE_L1ENT(idx), l1e_empty());
-+                    ASSERT(!(l1e_get_flags(MAPCACHE_L1ENT(idx)) &
-+                             _PAGE_PRESENT));
-                     hashent->idx = MAPHASHENT_NOTINUSE;
-                     hashent->mfn = ~0UL;
-                     break;
-@@ -273,32 +301,39 @@ void unmap_domain_page(const void *ptr)
+     bool ok;
  
-     local_irq_save(flags);
+@@ -119,15 +120,14 @@ static inline void fpu_xsave(struct vcpu *v)
+      */
+     ok = set_xcr0(v->arch.xcr0_accum | XSTATE_FP_SSE);
+     ASSERT(ok);
+-    xsave(v, XSTATE_ALL);
++    xsave(v, xsave_area, XSTATE_ALL);
+     ok = set_xcr0(v->arch.xcr0 ?: XSTATE_FP_SSE);
+     ASSERT(ok);
+ }
  
-+    /*
-+     * The maphash keeps a freed slot, not its mapping: the page may change
-+     * hands meanwhile.  A domain-wide mapcache's translation left in a TLB
-+     * is covered by the flush the allocator makes before reusing an owned
-+     * page.
-+     */
-     if ( hashent->idx == idx )
-     {
-         ASSERT(hashent->mfn == mfn);
-         ASSERT(hashent->refcnt);
-         hashent->refcnt--;
-+        if ( !hashent->refcnt )
-+            mapcache_zap(dcache, idx);
-     }
-     else if ( !hashent->refcnt )
-     {
-+        /* The entry replaced has no mapping left: mark its slot as garbage. */
-         if ( hashent->idx != MAPHASHENT_NOTINUSE )
-         {
--            /* /First/, zap the PTE. */
--            ASSERT(l1e_get_pfn(MAPCACHE_L1ENT(hashent->idx)) ==
--                   hashent->mfn);
--            l1e_write(&MAPCACHE_L1ENT(hashent->idx), l1e_empty());
--            /* /Second/, mark as garbage. */
-+            ASSERT(!(l1e_get_flags(MAPCACHE_L1ENT(hashent->idx)) &
-+                     _PAGE_PRESENT));
-             set_bit(hashent->idx, cache->garbage);
-         }
+ /* Save x87 FPU, MMX, SSE and SSE2 state */
+-static inline void fpu_fxsave(struct vcpu *v)
++static inline void fpu_fxsave(const struct vcpu *v, fpusse_t *fpu_ctxt)
+ {
+-    fpusse_t *fpu_ctxt = &v->arch.xsave_area->fpu_sse;
+     unsigned int fip_width = v->domain->arch.x87_fip_width;
  
--        /* Add newly-freed mapping to the maphash. */
-+        /* Add the newly-freed slot to the maphash, without its mapping. */
-+        mapcache_zap(dcache, idx);
-         hashent->mfn = mfn;
-         hashent->idx = idx;
-     }
+     if ( fip_width != 4 )
+@@ -192,15 +192,21 @@ void vcpu_restore_fpu(struct vcpu *v)
+  */
+ void vcpu_save_fpu(struct vcpu *v)
+ {
++    struct xsave_struct *xsave_area;
++
+     ASSERT(!is_idle_vcpu(v));
+ 
+     /* This can happen, if a paravirtualised guest OS has set its CR0.TS. */
+     clts();
+ 
++    xsave_area = VCPU_MAP_XSAVE_AREA(v);
++
+     if ( cpu_has_xsave )
+-        fpu_xsave(v);
++        fpu_xsave(v, xsave_area);
      else
-     {
-         /* /First/, zap the PTE. */
--        l1e_write(&MAPCACHE_L1ENT(idx), l1e_empty());
-+        mapcache_zap(dcache, idx);
-         /* /Second/, mark as garbage. */
-         set_bit(idx, cache->garbage);
-     }
-diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
-index f84ac15759..0e405157b4 100644
---- a/xen/arch/x86/include/asm/domain.h
-+++ b/xen/arch/x86/include/asm/domain.h
-@@ -74,7 +74,10 @@ struct mapcache_vcpu {
-     /* Shadow of mapcache_domain.epoch. */
-     unsigned int shadow_epoch;
+-        fpu_fxsave(v);
++        fpu_fxsave(v, &xsave_area->fpu_sse);
++
++    VCPU_UNMAP_XSAVE_AREA(v, xsave_area);
+ }
  
--    /* Lock-free per-VCPU hash of recently-used mappings. */
-+    /*
-+     * Lock-free per-VCPU hash of recently-used mappings.  An entry without
-+     * references keeps its slot but not its mapping (see unmap_domain_page()).
-+     */
-     struct vcpu_maphash_entry {
-         unsigned long mfn;
-         uint32_t      idx;
+ /* Initialize FPU's context save area */
+diff --git a/xen/arch/x86/include/asm/xstate.h b/xen/arch/x86/include/asm/xstate.h
+index 0519379edb..40bb6f152e 100644
+--- a/xen/arch/x86/include/asm/xstate.h
++++ b/xen/arch/x86/include/asm/xstate.h
+@@ -95,7 +95,7 @@ uint64_t get_xcr0(void);
+ void set_msr_xss(u64 xss);
+ uint64_t get_msr_xss(void);
+ uint64_t read_bndcfgu(void);
+-void xsave(struct vcpu *v, uint64_t mask);
++void xsave(const struct vcpu *v, struct xsave_struct *ptr, uint64_t mask);
+ void xrstor(struct vcpu *v, uint64_t mask);
+ void xstate_set_init(uint64_t mask);
+ bool xsave_enabled(const struct vcpu *v);
+diff --git a/xen/arch/x86/xstate.c b/xen/arch/x86/xstate.c
+index 2eae3f098d..058bc4c0bc 100644
+--- a/xen/arch/x86/xstate.c
++++ b/xen/arch/x86/xstate.c
+@@ -304,9 +304,8 @@ void compress_xsave_states(struct vcpu *v, const void *src, unsigned int size)
+     VCPU_UNMAP_XSAVE_AREA(v, xstate);
+ }
+ 
+-void xsave(struct vcpu *v, uint64_t mask)
++void xsave(const struct vcpu *v, struct xsave_struct *ptr, uint64_t mask)
+ {
+-    struct xsave_struct *ptr = v->arch.xsave_area;
+     uint32_t hmask = mask >> 32;
+     uint32_t lmask = mask;
+     unsigned int fip_width = v->domain->arch.x87_fip_width;
 -- 
 2.56.0
 
