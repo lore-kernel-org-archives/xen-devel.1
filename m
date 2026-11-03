@@ -2,48 +2,54 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E9872606A329
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2026 07:14:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC299606A324
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2026 08:16:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=aspeedtech.com header.i=@aspeedtech.com header.a=rsa-sha256 header.s=selector1 header.b=kXLwPQg9
-Received: from list by lists.xenproject.org with outflank-mailman.1469267.1678141 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=YDbGpCwU
+Received: from list by lists.xenproject.org with outflank-mailman.1469304.1678150 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xO8iw-0000VU-IM; Tue, 03 Nov 2026 07:14:26 +0000
+	id 1xO9gs-0003Ra-Ib; Tue, 03 Nov 2026 08:16:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1469267.1678141; Tue, 03 Nov 2026 07:14:26 +0000
+Received: by outflank-mailman (output) from mailman id 1469304.1678150; Tue, 03 Nov 2026 08:16:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xO8iw-0000VN-ER; Tue, 03 Nov 2026 07:14:26 +0000
-Received: by outflank-mailman (input) for mailman id 1469267;
- Tue, 03 Nov 2026 07:14:24 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xO9gs-0003RS-EG; Tue, 03 Nov 2026 08:16:22 +0000
+Received: by outflank-mailman (input) for mailman id 1469304;
+ Tue, 03 Nov 2026 08:16:21 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jamin_lin@aspeedtech.com>) id 1xO8iu-0000VH-HB
- for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 07:14:24 +0000
+ (envelope-from <berrange@redhat.com>) id 1xO9gr-0003RK-Bo
+ for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 08:16:21 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xO8it-002EIL-QY
- for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 08:14:23 +0100
-Received: from [10.42.69.12] (helo=localhost)
+ id 1xO9gp-00DHvI-Mc
+ for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 09:16:19 +0100
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jamin_lin@aspeedtech.com>)
- id 6ae989c9-2eae-0a2a0a5409dd-0a2a450c89be-22
- for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 08:14:23 +0100
-Received: from [40.107.44.132]
- (helo=SEYPR02CU001.outbound.protection.outlook.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jamin_lin@aspeedtech.com>)
- id 6ae989cb-f479-0a2a450c0019-286b2c8491fa-3
- for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 08:14:21 +0100
-Received: from SEZPR06MB7362.apcprd06.prod.outlook.com (2603:1096:101:253::10)
- by TYZPR06MB6618.apcprd06.prod.outlook.com (2603:1096:400:462::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.8; Tue, 3 Nov 2026
- 07:14:15 +0000
-Received: from SEZPR06MB7362.apcprd06.prod.outlook.com
- ([fe80::cd2d:35d2:a702:1de6]) by SEZPR06MB7362.apcprd06.prod.outlook.com
- ([fe80::cd2d:35d2:a702:1de6%4]) with mapi id 15.21.0592.007; Tue, 3 Nov 2026
- 07:14:13 +0000
+ (envelope-from <berrange@redhat.com>)
+ id 6ae99844-8faa-0a2a0a5109dd-0a2a450b8c3a-40
+ for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 09:16:19 +0100
+Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <berrange@redhat.com>)
+ id 6ae99852-b7e8-0a2a450b0019-aa0a857c53ed-3
+ for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 09:16:19 +0100
+Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-202-kBU0XR3aMbS8L4OQaIH33A-1; Tue,
+ 03 Nov 2026 03:16:13 -0500
+Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 8DF86180067A; Tue,  3 Nov 2026 08:16:06 +0000 (UTC)
+Received: from redhat.com (headnet04.pony-001.prod.iad2.dc.redhat.com
+ [10.2.32.116])
+ by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id D11201955F43; Tue,  3 Nov 2026 08:15:55 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,208 +58,125 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=aspeedtech.com header.i="@aspeedtech.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xtALvLMYw8/9yvbzCPp6jgyGFvvDfma2govi/kc8Tcpp7+hTxWXZHZR7NqwAWnNZKAHzrr72e/WEJ2oKr2DGXk31x707tGL6s+z9X4uCYlAY7Sw9XFs+pHXHJTN3V+u/vozsU8mLCm7BX0LMp3bcCgcBO2g++IkIbp2e5MSQBsxlJ/DGAlCTB+lj8jaCLsS6wL7vxFb4LRVPXTw6rBYoKkYO1zMPNHZ6BapTEsCILSxkHCESOJGMsP7AaWTVT3f4t6GkCdu+E73hG1AZJKsUGdp23bRl3srQzstcb6UG+hTYdmD/qNrE9yKtJNnqYo0TXpRTvZDHI630QWfzyXaWew==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ITg0zpWtqw67dO/HL30blrN/GXLvdv9ic/n/2a8we2M=;
- b=ewHObis4WlPNhOPRxHG0bWwwHW9lyDWtgrQcBnRWI04h6jOMQAAhA7nNRudoyscjBnw7+Bzv/2N+cpZJ5nmrGJNAWhRU9UnSj7TBwzUV991waDBcEsiEeT4a4d90dCNMIRctWSYKHmpbCNHGO5t7A4k8U6hwA/ecqVeJhD6cEIRgdT0QAsoFXav2RcXPHp90YUlse10nroTi3YEYDIrCqe5WEgwck02D7HILKF2gJML9dExt5m9ZMig5hpXNWOlHVkBBdpd3az3jcYFXtnQh2uf9IOydZOU4gFrGU1jLrKpwSO+mPT0ki+zUQAIZ+HvulHPb4yorgTvs8S1O12xRpQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=aspeedtech.com; dmarc=pass action=none
- header.from=aspeedtech.com; dkim=pass header.d=aspeedtech.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aspeedtech.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ITg0zpWtqw67dO/HL30blrN/GXLvdv9ic/n/2a8we2M=;
- b=kXLwPQg9z0SqER0IV1Ll+jpXe/fmL+txJ3FVuodpKLOaXlaZZLBdQ/F35q7mTXLp3gVWLlz7QQDgM+ZUCe0fVql22GCm4Go2/7pDGAmG1gzsjhFeBwFnl0PE9pInycoZiwu9gI5xVi8/SK9/fQU7kbSCuGAVOpWoyc+QszVTGMN44czKwDsIHQNx1EAeXQodL4/mPG7mU+zLMH7bvb91CWVvCff4n3jDPPL449nNKd3JU+BikfCndANIZi8hVkaxy6Tsl2BLVXCVnOB6XanFhNFZav/ILh5A/Tg2z8LaFNju6bLzYfYK+2cZXJPsZH/bpz74fImZoB0LPl8VBpK3Mw==
-From: Jamin Lin <jamin_lin@aspeedtech.com>
-To: "marcandre.lureau@redhat.com" <marcandre.lureau@redhat.com>
-CC: "kraxel@redhat.com" <kraxel@redhat.com>, "junjie.cao@intel.com"
-	<junjie.cao@intel.com>, "junjie.cao@linux.dev" <junjie.cao@linux.dev>,
-	"clg@kaod.org" <clg@kaod.org>, Pierrick Bouvier
-	<pierrick.bouvier@oss.qualcomm.com>, Peter Maydell
-	<peter.maydell@linaro.org>, Kane Chen <kane_chen@aspeedtech.com>,
-	=?utf-8?B?UGhpbGlwcGUgTWF0aGlldS1EYXVkw6k=?= <philmd@oss.qualcomm.com>,
-	Tyrone Ting <kfting@nuvoton.com>, Hao Wu <wuhaotsh@google.com>, Zhao Liu
-	<zhao1.liu@intel.com>, Richard Henderson <richard.henderson@linaro.org>,
-	Helge Deller <deller@gmx.de>, Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony PERARD <anthony@xenproject.org>, "Edgar E. Iglesias"
-	<edgar.iglesias@gmail.com>, "open list:All patches CC here"
-	<qemu-devel@nongnu.org>, "open list:ASPEED BMCs" <qemu-arm@nongnu.org>, "open
- list:X86 Xen CPUs" <xen-devel@lists.xenproject.org>, Troy Lee
-	<troy_lee@aspeedtech.com>
-Subject: RE: [PATCH v8 13/18] hw/usb/redirect-server: Announce the exported
- device
-Thread-Topic: [PATCH v8 13/18] hw/usb/redirect-server: Announce the exported
- device
-Thread-Index: AQHdaqupvmzo6sFN+0K1iqt887RtJLca0acAgAEdGdA=
-Date: Tue, 3 Nov 2026 07:14:13 +0000
-Message-ID:
- <SEZPR06MB7362D2A0D7F08E9D1575CA80FC692@SEZPR06MB7362.apcprd06.prod.outlook.com>
-References: <20261102092201.1729245-1-jamin_lin@aspeedtech.com>
- <20261102092201.1729245-14-jamin_lin@aspeedtech.com>
- <179362845017.3960472.17221122285900334594.b4-review@b4>
-In-Reply-To: <179362845017.3960472.17221122285900334594.b4-review@b4>
-Accept-Language: zh-TW, en-US
-Content-Language: zh-TW
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=aspeedtech.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SEZPR06MB7362:EE_|TYZPR06MB6618:EE_
-x-ms-office365-filtering-correlation-id: a67f4baf-fac6-4cb4-acaa-08df397a107d
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam:
- BCL:0;ARA:13230040|366016|1800799024|23010399003|376014|7416014|38070700021|261021123027099003|4143699003|56012099006|261009223027099003|261028144727099003|261022075727099003|261026121527099003|261021121427099003|261026140227099003|261022105027099003|10067099003|18002099003|22082099003|261102123227099003|6133799003|3023799007|261102130727099003;
-x-microsoft-antispam-message-info:
- F+xXHUn7bcwQgnOK3WnWsB7nZsSwIg7LWv698cU+uD+qTBmm08Df3Sv+Z49pALP5689QRSG0iQHHICha5ltP3/YqfpH5xEBEhy/ZjH/6CEqLWRAQiGQv2HOaCJNqpPrU7yDRiOrohvzNRMjUwDwq5TZfn1qeURCU0Nt/tKsJ2Fp+wXWp+xqqHWgfsGrEh0f09AA4lm23073Ze41YanxKhGxbRiQaO2nQw1TAQfmfn18rpAV178zBea33xBVJoZ2a+nXUvLVgQTDMrAqvbQeNOIPnDOOmKgralssAmyZm4Elbl6mh9t8ayddt5ob5yTFPg4kttozEsI2tEaZsrLlcZ+ebKmqHXgM1yBHAcTtc1vYZWqUDQZ2IB9ieirKTl8Nz6E1I2Y4p90oDViRNZJCdOlDiqsizx17bVLCchna1svEK4adg/XJ7kMO4WFG53CaGArq4U4w3MKcnnI9FgHjzLqexF93WhkLnJ35lvmOxV01tchZKw8k+NrysXVQmPaPG8Nt0/K1slZO/octJRHCHD32/4VRaKuvA6NGAot0JZcBi72/qbZtiB2l9TAnX5uEQztws1iaVifsvHisvZ9u4G82FjI2/1fkTJ2SVzHWNp2muKXOikYjHq03JWwFdp8ppvWS0aCjyAJLSuENxOW+b3Vv+E2l8xUnoNsiDW9HUmoqlCeZc+T+NDBhwIOoMd4QQX5hZZH8VYnidUtNRaF78EamtNGd0SgfEe1+sx7GqN4A=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:zh-tw;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SEZPR06MB7362.apcprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(23010399003)(376014)(7416014)(38070700021)(261021123027099003)(4143699003)(56012099006)(261009223027099003)(261028144727099003)(261022075727099003)(261026121527099003)(261021121427099003)(261026140227099003)(261022105027099003)(10067099003)(18002099003)(22082099003)(261102123227099003)(6133799003)(3023799007)(261102130727099003);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?utf-8?B?TW0yczhpRUpNMjdEdFRxc3A5RGQ5VkhVMHJSZXJ0RHgycHdKSm53dG9QWUVT?=
- =?utf-8?B?Z1hWZDZCdE5GZlBFZzQ2ZVlLUFRZdkFwUUZrekNBajhvcmNtNDE2TkFrS0M4?=
- =?utf-8?B?aGVlbDZGWS9WMEdoaDBXMUhzNjE4b25Pd29EQ1NNWXJGZlhac1Noc3o5YWtS?=
- =?utf-8?B?WVNOWWNzdzZqNWFEMnduckVleHRKVDlnL291Y1FqUEtnMW95WmdLVE0yNk1T?=
- =?utf-8?B?VDN4WUVqakZFbHBRT2dQaElacVBsRnlRRzVSUnVPN1B6SnRxQXA0eThvbHVj?=
- =?utf-8?B?d2VuTVNic01zZ2xUaWUzbFFnV3pSMkxzYW5RV1Zpa215WXAvTEdnVU15OGp6?=
- =?utf-8?B?U0VwdUMrcjJKT1pKOGdtQ2Rla3NUQXUzYUx2djd6MmxFdEUxWEUvSGFvK0pV?=
- =?utf-8?B?VlpwSUxocDE4K094UWZsVUdmV0t3NGZoM2xMYzI4N3NTQ09HYUIxNFRaOEJL?=
- =?utf-8?B?SVVRbWNzT1hFUnFDRi9pVDdCWjU4RitBZXdwYnpmMVlzTU5tYUdsZXV3T0Fz?=
- =?utf-8?B?RXNMS0pNQnpvV09vVmljZHllZUZjQ05oRUpNMlhXa05WUkpZTHJhTU92clpr?=
- =?utf-8?B?MkZSeDhTcDNjYjNxNGNtb0Y5bFR3TDNqa0tYSUQxZG9MSDZwdVF3UjZjSHIx?=
- =?utf-8?B?NDkxUGVZR1ZITHVvMjh1SXBKcEJpWGd6RktlT0dPQllIT3N6ZC8xeE5EVnN0?=
- =?utf-8?B?NjVCUHdjd1FVMm1jVlZ5MzMxOEswTWw1b1hmMkFISjBjYmJYL2h1VnVvZEJt?=
- =?utf-8?B?Yi9PdWRXRzI4RzRXOVNsR2JYRERXV2UrUDByZlhMNlhmZi8rU0U3K2YrRW4y?=
- =?utf-8?B?azlOQUR4YkJjU2t0TVZCV0E5RG1haDlDbkRvNlc1ckhsY1d4YWZOWFIrSkd6?=
- =?utf-8?B?WU1oNWhTOUpTL0doUitkL0hGUUcvN0NtdmlMbjVqbmxORlVBblBrd2p6UWRx?=
- =?utf-8?B?UUV0Y05ObndhY3lmL3hHZkgwa2dXck02NHdqRGlENFU2SEFYVHFDSjFmQzVS?=
- =?utf-8?B?bmQ5VGtZcGhZM1JNaWtkSkZ4MDhELzQ2YWNhbmZXeWo4eGIyZTZYTWpJMGJS?=
- =?utf-8?B?OWtyTkZHQjhOS05aOGYvbTA1Q0s1cDlETVR0THg0dG5IVmdSMmdiQUllb3pw?=
- =?utf-8?B?U2pmNjFqVnN3NjN3RHdidXZvYm9nSDB2Rkltdzdna1lNd0pCR2YzWXhJVmZv?=
- =?utf-8?B?WGRjdU1vbU13cXBHOHpsZGZpYUpLT3g2RG5aSHNhaERFZVcrTGNIc3FnanQv?=
- =?utf-8?B?ZFZKbC94SlBQMktQWTZCYWdYWU9MQTMzMmYzUEdtZHA2Rm8wZmlnMC9SNVI3?=
- =?utf-8?B?VUNqcGdwZHhKdFd4cVhjNHo0M2Z1YjFSWUxKaU5lUFZub09PT2FJNXlXL2ZC?=
- =?utf-8?B?dS9rOCt5U0gyclczMVhzZU1PMmNCZUF5UytzUGJMZmFkV3EwNmRSVWQvRmUr?=
- =?utf-8?B?OS9MYlJ2UVdwWVdPdFRkSFBqNGpWa2NTVTR3Y3ZLWkNqSmtwY3lMcjJiZS9v?=
- =?utf-8?B?NjhMSlY0aTYybVQxMlBTTlh3ckk2dGlSQ2hPVC9HTTNZWVFERGVXOC9IMS9o?=
- =?utf-8?B?WjJGMlV1MVlyVmRYTGdmeGdzTzBoU1FmQ25uM2F5STQ4VlB3OFZxTWRXQUxl?=
- =?utf-8?B?SjZaMGtrampZYUhHZi9GaHpIWUx1VHJUS3J1RHdsMVJyNk1FWTVkRTdnYWtR?=
- =?utf-8?B?VkxCTUt5YWRyQ2pvQWtyRWRkdTg0SjRWcVpyb3VJeVI1WVdXZE53cmpMOG5I?=
- =?utf-8?B?ZW1CT09SajhNbVc2QmpjSUg2MjVpYS9RMmZSUk1IckZMRHBqbThXNEN1UzJD?=
- =?utf-8?B?bDJWaXVKSXducDRKK3hFaE04Y25Wci9OMUdEb0lHanZHTjNreEt5VjZwckNO?=
- =?utf-8?B?cUNGcnJ4RWMyY3lVQ00yd09Xc3ZuNW1mMHZnNU12YmxLc3d3S2ZqZUFBOVcv?=
- =?utf-8?B?MkgreFFaNjMyYXgvY2J5bTUwVzhrdWhjcWhFQ08vM3FkZmRuT1RxR3RGbmQ0?=
- =?utf-8?B?VmQvUnhrYkJOWkI0R1BESmVJc0tBV0FrUy9nck1WSzQ0NTFTMUg3dWFtY3RK?=
- =?utf-8?B?S2I5Rm51NFZEbkQ5cStkWHB2THhPRnN0aVpIR3hpSFZXL3VhNmwveXY0WDhN?=
- =?utf-8?B?bVViVnREZjR5Rm9PSEVzREpwV1lYenhHbVMwMUxVRGVxL1pHY3YxdFlIL1lD?=
- =?utf-8?B?OHhWaER3WDIrTEdhSHFiZDNOTXcvMzdXR2tFNk5GNWVqMGlSYmFKSDJvdWNK?=
- =?utf-8?B?NS9SN2VQdDNwaEpKZWZISmlWWE1YaUVxRUh0OHVzcjNEQXZhMzZpeTdENTRw?=
- =?utf-8?B?eUpaQTZUejdyZlY5RWVnRlp0MllDSWFwT29xN0xyM0NpMzdTWmRKQT09?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1793693778;
+	h=from:from:reply-to:reply-to:subject:subject:date:date:
+	 message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+	 content-type:content-type:in-reply-to:in-reply-to:  references:references;
+	bh=BVLfCVXQHgSH4f3V9ZECiy4kJVTCfquG8wFB49Y2ssc=;
+	b=YDbGpCwUb632jLugNdFxN3tMz8jug8A1DXvHhZdcfi35PbJqCM/t/h03Ez2i5KgDTAfttr
+	c2T/hp8Ar1jEEYMwN21ZTu8YiU5PPpCNXwNymxCztV+TD19FvepUE3KUpB7fc8FF7WsvYg
+	g1zIwvLLDxfBcY5IKzH7lGD6YzUye0Y=
+X-MC-Unique: kBU0XR3aMbS8L4OQaIH33A-1
+X-Mimecast-MFC-AGG-ID: kBU0XR3aMbS8L4OQaIH33A_1793693768
+Date: Tue, 3 Nov 2026 08:15:52 +0000
+From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+To: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
+Cc: BALATON Zoltan <balaton@eik.bme.hu>,
+	Yonggang Luo <luoyonggang@gmail.com>, qemu-devel@nongnu.org,
+	Anthony PERARD <anthony@xenproject.org>,
+	Felipe Balbi <balbi@kernel.org>,
+	Aleksandar Rikalo <arikalo@gmail.com>,
+	Philippe Mathieu-Daude <philmd@mailo.com>,
+	Antony Pavlov <antonynpavlov@gmail.com>,
+	Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Subbaraya Sundeep <sundeep.lkml@gmail.com>,
+	=?utf-8?B?SGVydsOp?= Poussineau <hpoussin@reactos.org>,
+	Max Filippov <jcmvbkbc@gmail.com>,
+	Niek Linnenbank <nieklinnenbank@gmail.com>,
+	xen-devel@lists.xenproject.org, qemu-riscv@nongnu.org,
+	Jean-Christophe Dubois <jcd@tribudubois.net>, qemu-ppc@nongnu.org,
+	Alexandre Iooss <erdnaxe@crans.org>,
+	Weiwei Li <liwei1518@gmail.com>, Zhao Liu <zhao1.liu@intel.com>,
+	Jiaxun Yang <jiaxun.yang@flygoat.com>,
+	Strahinja Jankovic <strahinja.p.jankovic@gmail.com>,
+	Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+	Thomas Huth <th.huth+qemu@posteo.eu>,
+	=?utf-8?Q?Cl=C3=A9ment?= Chigot <chigot@adacore.com>,
+	Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+	Yoshinori Sato <yoshinori.sato@nifty.com>,
+	Frederic Konrad <konrad.frederic@yahoo.fr>,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Peter Maydell <peter.maydell@linaro.org>,
+	Chao Liu <chao.liu@processmission.com>,
+	Sai Pavan Boddu <sai.pavan.boddu@amd.com>,
+	Alistair Francis <alistair@alistair23.me>,
+	Huacai Chen <chenhuacai@kernel.org>,
+	Aurelien Jarno <aurelien@aurel32.net>,
+	Gaurav Sharma <gaurav.sharma_7@nxp.com>,
+	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+	Richard Henderson <richard.henderson@linaro.org>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Artyom Tarasenko <atar4qemu@gmail.com>, qemu-arm@nongnu.org
+Subject: Re: [PATCH 00/15] hw: expand DEFINE_MACHINE to explicit TypeInfo
+ registration
+Message-ID: <aumYOBw-nKQAWdYK@redhat.com>
+Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+References: <20261030151539.1872-1-luoyonggang@gmail.com>
+ <d1db54c6-b802-676a-7779-0c2c63f5f807@eik.bme.hu>
+ <aa70e94c-d9a8-41c9-850f-7ded87f7f327@oss.qualcomm.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked:
-	ZHdyqFa3ZSsweMYnzqY5roqJSiO+XN3CDuW0UoO+ulquZrO0Yi6bCkv2SSVJGIHJ9LvlpSS2c3T8umdM20pvYai8M5xGtQAWAftb36akFxPo6W5oOzDYZ1Bix5ivh+DUwBAYI10pz7In5N3WWQSKVKSFqOik/+app4KskNUFmWFlqTtGjmdKJTjCQ8pYvbWOcJBRM5bx7My5lxcxABbiOgEMqDnmPJ7msNXF96TIzK0yK82lfGvVYdQ4AyjrKKZx63W/ITOYMqpf4kjjFH6+bQDJuOSwHDJIOYf7qg57IUFqw2bR92AtloYVeC1IoBa1947Osf37j7ght047kUhsnQ==
-X-OriginatorOrg: aspeedtech.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB7362.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a67f4baf-fac6-4cb4-acaa-08df397a107d
-X-MS-Exchange-CrossTenant-originalarrivaltime: 03 Nov 2026 07:14:13.4918
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 43d4aa98-e35b-4575-8939-080e90d5a249
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: DT3aSa73cGEwJxYBRarMzuDe+XkOdPZ4IihNWjZWd4bL4usmUVm3ZkYvWlOb/Y9QyUgs4359fm3BhFhEeRKib26OuRjomFYrAzUnI3bZRac=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYZPR06MB6618
-X-purgate-ID: tlsNG-d25034/1793690062-03AD4A5B-BDBEE599/0/0
+In-Reply-To: <aa70e94c-d9a8-41c9-850f-7ded87f7f327@oss.qualcomm.com>
+User-Agent: Mutt/2.4.2 (2026-08-30)
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
+X-Mimecast-MFC-PROC-ID: n8BBvt5bPXo12HEVunNy6UK_LlelX1H0EW_FC3TSn-A_1793693768
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+X-purgate-ID: tlsNG-42698a/1793693779-A94C39EA-DEBBB6DB/35/111497
 X-purgate-type: clean
-X-purgate-size: 5704
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY autolearn=unavailable autolearn_force=no
-	version=4.0.1
+X-purgate-size: 1645
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-SGkgTWFyYy1BbmRyw6kgTHVyZWF1DQoNCj4gU3ViamVjdDogUmU6IFtQQVRDSCB2OCAxMy8xOF0g
-aHcvdXNiL3JlZGlyZWN0LXNlcnZlcjogQW5ub3VuY2UgdGhlIGV4cG9ydGVkDQo+IGRldmljZQ0K
-PiANCj4gPiBTZW5kIGRldmljZV9jb25uZWN0IHdoZW4gYSBkZXZpY2UgaXMgYXR0YWNoZWQgYW5k
-IHRoZSBob3N0IGhhcyBncmVldGVkDQo+ID4gdXMsIGRldmljZV9kaXNjb25uZWN0IHdoZW4gaXQg
-Z29lcyBhd2F5LCBhbmQgaGFuZGxlIHRoZSBidXMgcmVzZXQgdGhlDQo+ID4gaG9zdCBzZW5kcyBi
-ZWZvcmUgZW51bWVyYXRpbmcuDQo+ID4NCj4gPiBkZXZpY2VfY29ubmVjdCBjYXJyaWVzIG5vIGlk
-ZW50aXR5LiBUaGUgcGVlciBhc2tzIHRoZSBkZXZpY2UgaXRzZWxmDQo+ID4gd2l0aCBHRVRfREVT
-Q1JJUFRPUiBhcyBzb29uIGFzIGl0IGVudW1lcmF0ZXMsIHNvIGFueXRoaW5nIHdlIHB1dCB0aGVy
-ZQ0KPiA+IHdvdWxkIGJlIG1hZGUgdXAuIFRoZSBzcGVlZCBpcyByZWFsOiBpdCBjb21lcyBmcm9t
-IHRoZSBkZXZpY2Ugb24gb3VyIHBvcnQuDQo+ID4NCj4gPiBTaWduZWQtb2ZmLWJ5OiBKYW1pbiBM
-aW4gPGphbWluX2xpbkBhc3BlZWR0ZWNoLmNvbT4NCj4gPiBNZXNzYWdlLUlEOiA8MjAyNjExMDIw
-OTIyMDEuMTcyOTI0NS0xNC1qYW1pbl9saW5AYXNwZWVkdGVjaC5jb20+DQo+ID4gLS0tDQo+ID4g
-IGh3L3VzYi9yZWRpcmVjdC1zZXJ2ZXIuYyB8IDE1MA0KPiArKysrKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKysrKy0NCj4gPiAgaHcvdXNiL3RyYWNlLWV2ZW50cyAgICAgIHwgICA3ICsr
-DQo+ID4gIDIgZmlsZXMgY2hhbmdlZCwgMTU2IGluc2VydGlvbnMoKyksIDEgZGVsZXRpb24oLSkN
-Cj4gPg0KPiA+IGRpZmYgLS1naXQgYS9ody91c2IvcmVkaXJlY3Qtc2VydmVyLmMgYi9ody91c2Iv
-cmVkaXJlY3Qtc2VydmVyLmMgaW5kZXgNCj4gPiBmNzgzNTFiZGU5MTkuLmUyMDdmNWE3ZWI1NiAx
-MDA2NDQNCj4gPiAtLS0gYS9ody91c2IvcmVkaXJlY3Qtc2VydmVyLmMNCj4gPiArKysgYi9ody91
-c2IvcmVkaXJlY3Qtc2VydmVyLmMNCj4gPiBAQCAtNTYsNiArNTYsNyBAQA0KPiA+ICAjaW5jbHVk
-ZSAicWVtdS9tYWluLWxvb3AuaCINCj4gPiAgI2luY2x1ZGUgInFlbXUvbW9kdWxlLmgiDQo+ID4g
-ICNpbmNsdWRlICJtaWdyYXRpb24vdm1zdGF0ZS5oIg0KPiA+ICsjaW5jbHVkZSAicWVtdS9jdXRp
-bHMuaCINCj4gPiAgI2luY2x1ZGUgImh3L2NvcmUvc3lzYnVzLmgiDQo+ID4gICNpbmNsdWRlICJo
-dy91c2IvdXNiLmgiDQo+ID4gICNpbmNsdWRlICJjaGFyZGV2L2NoYXItZmUuaCINCj4gPiBAQCAt
-ODUsMTcgKzg2LDEwNSBAQCBzdHJ1Y3QgVVNCUmVkaXJTZXJ2ZXIgew0KPiA+ICAgICAgLyogdXNi
-cmVkaXIgb3ZlciB0aGUgY2hhcmRldiAqLw0KPiA+ICAgICAgc3RydWN0IHVzYnJlZGlycGFyc2Vy
-ICpwYXJzZXI7DQo+ID4gICAgICBRRU1VQkggKmNoYXJkZXZfY2xvc2VfYmg7DQo+ID4gKyAgICBR
-RU1VQkggKmFubm91bmNlX2JoOw0KPiA+ICAgICAgY29uc3QgdWludDhfdCAqcmVhZF9idWY7DQo+
-ID4gICAgICBpbnQgcmVhZF9idWZfc2l6ZTsNCj4gPiAgICAgIGJvb2wgaW5fd3JpdGU7DQo+ID4g
-ICAgICBndWludCB3YXRjaDsNCj4gPiAgICAgIGJvb2wgaG9zdF9jb25uZWN0ZWQ7DQo+ID4gKyAg
-ICBib29sIGRldmljZV9hbm5vdW5jZWQ7DQo+ID4gIH07DQo+ID4NCj4gPiArLyoNCj4gPiArICog
-VGhlIGRldmljZSBpcyB3aGF0ZXZlciBVU0JEZXZpY2UgdGhlIHVzZXIgcGx1Z2dlZCBpbnRvIG91
-ciBwb3J0DQo+ID4gK3dpdGgNCj4gPiArICogIi1kZXZpY2UgPGRldmljZT4sYnVzPTxpZD4uMCIu
-IE5VTEwgdW50aWwgdGhlbi4NCj4gPiArICovDQo+ID4gK3N0YXRpYyBVU0JEZXZpY2UgKnVzYnJl
-ZGlyX3NlcnZlcl9kZXZpY2UoVVNCUmVkaXJTZXJ2ZXIgKnMpIHsNCj4gPiArICAgIHJldHVybiBz
-LT5wb3J0LmRldjsNCj4gPiArfQ0KPiA+ICsNCj4gPiArLyoNCj4gPiArICogRGV2aWNlIGFubm91
-bmNlbWVudA0KPiA+ICsgKi8NCj4gPiArDQo+ID4gK3N0YXRpYyB1aW50OF90IHVzYnJlZGlyX3Nl
-cnZlcl9zcGVlZChVU0JEZXZpY2UgKmRldmljZSkgew0KPiA+ICsgICAgc3dpdGNoIChkZXZpY2Ut
-PnNwZWVkKSB7DQo+ID4gKyAgICBjYXNlIFVTQl9TUEVFRF9MT1c6DQo+ID4gKyAgICAgICAgcmV0
-dXJuIHVzYl9yZWRpcl9zcGVlZF9sb3c7DQo+ID4gKyAgICBjYXNlIFVTQl9TUEVFRF9GVUxMOg0K
-PiA+ICsgICAgICAgIHJldHVybiB1c2JfcmVkaXJfc3BlZWRfZnVsbDsNCj4gPiArICAgIGRlZmF1
-bHQ6DQo+ID4gKyAgICAgICAgcmV0dXJuIHVzYl9yZWRpcl9zcGVlZF9oaWdoOw0KPiA+ICsgICAg
-fQ0KPiA+ICt9DQo+ID4gKw0KPiA+ICtzdGF0aWMgdm9pZCB1c2JyZWRpcl9zZXJ2ZXJfYW5ub3Vu
-Y2VfZGV2aWNlKHZvaWQgKm9wYXF1ZSkgew0KPiA+ICsgICAgVVNCUmVkaXJTZXJ2ZXIgKnMgPSBv
-cGFxdWU7DQo+ID4gKyAgICBVU0JEZXZpY2UgKmRldmljZSA9IHVzYnJlZGlyX3NlcnZlcl9kZXZp
-Y2Uocyk7DQo+ID4gKyAgICBzdHJ1Y3QgdXNiX3JlZGlyX2ludGVyZmFjZV9pbmZvX2hlYWRlciBp
-ZmFjZV9pbmZvID0gew0KPiA+ICsgICAgICAgIC5pbnRlcmZhY2VfY291bnQgPSAwLA0KPiA+ICsg
-ICAgfTsNCj4gPiArICAgIHN0cnVjdCB1c2JfcmVkaXJfZGV2aWNlX2Nvbm5lY3RfaGVhZGVyIGNv
-bm4gPSB7fTsNCj4gPiArDQo+ID4gKyAgICBpZiAoIXMtPmhvc3RfY29ubmVjdGVkIHx8IHMtPmRl
-dmljZV9hbm5vdW5jZWQgfHwNCj4gPiArICAgICAgICAhZGV2aWNlIHx8ICFkZXZpY2UtPmF0dGFj
-aGVkKSB7DQo+ID4gKyAgICAgICAgcmV0dXJuOw0KPiA+ICsgICAgfQ0KPiA+ICsgICAgcy0+ZGV2
-aWNlX2Fubm91bmNlZCA9IHRydWU7DQo+ID4gKyAgICBjb25uLnNwZWVkID0gdXNicmVkaXJfc2Vy
-dmVyX3NwZWVkKGRldmljZSk7DQo+ID4gKw0KPiA+ICsgICAgLyoNCj4gPiArICAgICAqIFRoZSBk
-ZXZpY2UgaGFzIHRvIGJlIGluIERFRkFVTFQgc3RhdGUgYmVmb3JlIGl0IGNhbiBhbnN3ZXINCj4g
-PiArICAgICAqIGFueXRoaW5nLCBzbyByZXNldCBpdCBoZXJlLg0KPiA+ICsgICAgICovDQo+ID4g
-KyAgICB1c2JfZGV2aWNlX3Jlc2V0KGRldmljZSk7DQo+ID4gKw0KPiA+ICsgICAgLyogU2VuZCB0
-aGlzIGJlZm9yZSBkZXZpY2VfY29ubmVjdC4gVGhlIHBlZXIgbmVlZHMgaXQgdG8gYWNjZXB0IHVz
-LiAqLw0KPiA+ICsgICAgdXNicmVkaXJwYXJzZXJfc2VuZF9pbnRlcmZhY2VfaW5mbyhzLT5wYXJz
-ZXIsICZpZmFjZV9pbmZvKTsNCj4gDQo+IFRoZSBwZWVyJ3MgdXNiLXJlZGlyIGNsaWVudCBldmFs
-dWF0ZXMgaXRzICJmaWx0ZXIiIHByb3BlcnR5IGFnYWluc3QNCj4gZGV2aWNlX2Nvbm5lY3QgYW5k
-IHRoaXMgaW50ZXJmYWNlX2luZm8uIFdpdGggaW50ZXJmYWNlX2NvdW50ID09IDAgYW5kIHRoZQ0K
-PiBhbGwtemVybyBjb25uZWN0IGhlYWRlciBhYm92ZSwgYW55IG5vbi1lbXB0eSBmaWx0ZXIgKHZl
-bmRvci9wcm9kdWN0LCBjbGFzcyBvcg0KPiBpbnRlcmZhY2UgcnVsZSkgcmVqZWN0cyB0aGUgZXhw
-b3J0ZWQgZGV2aWNlLiBGaWxsIGludGVyZmFjZV9pbmZvIGZyb20gdGhlIHNhdmVkDQo+IGNvbmZp
-Z3VyYXRpb24gZGVzY3JpcHRvciAoaW50ZXJmYWNlIG51bWJlciwgY2xhc3Mvc3ViY2xhc3MvIHBy
-b3RvY29sKSBhbmQNCj4gZGV2aWNlX2Nvbm5lY3QgZnJvbSB0aGUgbG9jYWwgVVNCRGV2aWNlPw0K
-PiANCg0KVGhhbmtzIGZvciB0aGUgcmV2aWV3IGFuZCBzdWdnZXN0aW9uLg0KDQpJIHdpbGwgcmV3
-b3JrIHRoZSBzZXJpZXMgdG8gcmVhZCB0aGUgZGVzY3JpcHRvcnMgZnJvbSB0aGUgZGV2aWNlIGlu
-c3RlYWQgb2YgaGFyZCBjb2RlIDAuIFRoZSBob3N0IGhhcyBubyBkZXZpY2UNCnVudGlsIGRldmlj
-ZV9jb25uZWN0IGFycml2ZXMsIHNvIGl0IGNhbm5vdCBhc2sgZm9yIGFueXRoaW5nIGl0c2VsZi4g
-VGhlIHNlcnZlciByZWFkIHRoZSBkZXNjcmlwdG9ycyBpbiB0aGUgDQphbm5vdW5jZSBwYXRoIGJl
-Zm9yZSBpdCBzZW5kcyBkZXZpY2VfY29ubmVjdC4NCg0KSSB3aWxsIGFkZCBhIHBhdGNoIGZvciB0
-aGlzIGFuZCB0aGUgcGF0Y2ggb3JkZXIgd2lsbCBiZSBjaGFuZ2VkLg0KDQpUaGFua3MsDQpKYW1p
-bg0KPiAtLQ0KPiBNYXJjLUFuZHLDqSBMdXJlYXUgPG1hcmNhbmRyZS5sdXJlYXVAcmVkaGF0LmNv
-bT4NCg0K
+On Fri, Oct 30, 2026 at 05:51:44PM -0800, Pierrick Bouvier wrote:
+> On 10/30/2026 4:09 PM, BALATON Zoltan wrote:
+> > On Fri, 30 Oct 2026, Yonggang Luo wrote:
+> >> DEFINE_MACHINE and DEFINE_MACHINE_EXTENDED hide the TypeInfo and the
+> >> type_init
+> >> function that calls type_register_static(). A later change needs to
+> >> pass a
+> > 
+> > That's the point of the macro to hide the boiler plate code.
+> > 
+> >> target mask into that registration, and the macros have no parameter
+> >> for it.
+> > 
+> > Couldn't you just change the macros to take that parameter instead of
+> > expanding it everywhere?
+> >
+> 
+> Problem of macros is that they don't have default parameters, so you
+> need variants for everything:
+> 
+> DEFINE_MACHINE
+> DEFINE_MACHINE_EXTENDED
+> DEFINE_MACHINE_WITH_INTERFACES
+> DEFINE_MACHINE_WITH_INTERFACE_ARRAY
+> and now would need a new variant, with variant for other existing ones.
+> 
+> In the end, it's just simpler to remove this and add the boilerplate.
+> It's written once and never modified, so using a macro just save typing
+> those lines once.
+
+For each machine, it is only written once, but we add machines
+over time, and every time a new machine is added the code style
+is slightly different. We introduced all the variuos DEFINE_*
+macros for QOM to better ensure consistent style and usage as
+new code is added over time.
+
+With regards,
+Daniel
+-- 
+|: https://berrange.com       ~~        https://hachyderm.io/@berrange :|
+|: https://libvirt.org          ~~          https://entangle-photo.org :|
+|: https://pixelfed.art/berrange   ~~    https://fstop138.berrange.com :|
+
 
