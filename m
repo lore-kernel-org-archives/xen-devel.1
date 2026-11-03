@@ -2,46 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A9D5606A32E
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9A354606A326
 	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2026 02:29:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=toxicpanda.com header.i=@toxicpanda.com header.a=rsa-sha256 header.s=google header.b=UDvQf9nq
-Received: from list by lists.xenproject.org with outflank-mailman.1468949.1678023 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=toxicpanda.com header.i=@toxicpanda.com header.a=rsa-sha256 header.s=google header.b=MIVy3/0s
+Received: from list by lists.xenproject.org with outflank-mailman.1468947.1678014 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xO4Gu-0001N9-3j; Tue, 03 Nov 2026 02:29:12 +0000
+	id 1xO4Gs-00016b-KH; Tue, 03 Nov 2026 02:29:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1468949.1678023; Tue, 03 Nov 2026 02:29:12 +0000
+Received: by outflank-mailman (output) from mailman id 1468947.1678014; Tue, 03 Nov 2026 02:29:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xO4Gt-0001MZ-Sv; Tue, 03 Nov 2026 02:29:11 +0000
-Received: by outflank-mailman (input) for mailman id 1468949;
- Tue, 03 Nov 2026 02:29:10 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xO4Gs-00015y-Ee; Tue, 03 Nov 2026 02:29:10 +0000
+Received: by outflank-mailman (input) for mailman id 1468947;
+ Tue, 03 Nov 2026 02:29:08 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <josef@toxicpanda.com>) id 1xO4Gs-000142-Da
- for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 02:29:10 +0000
+ (envelope-from <josef@toxicpanda.com>) id 1xO4Gq-0000os-P6
+ for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 02:29:08 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xO4Gr-00CYCC-Qg
- for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 03:29:09 +0100
-Received: from [10.42.69.12] (helo=localhost)
+ id 1xO4Gq-00BP11-5y
+ for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 03:29:08 +0100
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <josef@toxicpanda.com>)
- id 6ae94690-e002-0a2a0a5209dd-0a2a450cec40-26
- for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 03:29:09 +0100
-Received: from [209.85.160.175] (helo=mail-qt1-f175.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ae946df-bab6-0a2a0a5309dd-0a2a4502d736-24
+ for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 03:29:08 +0100
+Received: from [209.85.222.173] (helo=mail-qk1-f173.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <josef@toxicpanda.com>)
- id 6ae946f4-f479-0a2a450c0019-d155a0afe483-3
- for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 03:29:09 +0100
-Received: by mail-qt1-f175.google.com with SMTP id
- d75a77b69052e-53cd0c8614eso28050841cf.0
- for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 18:29:09 -0800 (PST)
-Received: from toxicpanda.com ([153.61.196.253])
+ id 6ae946f3-6ca4-0a2a45020019-d155deadc0b4-3
+ for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 03:29:08 +0100
+Received: by mail-qk1-f173.google.com with SMTP id
+ af79cd13be357-93f22a8515eso350685085a.2
+ for <xen-devel@lists.xenproject.org>; Mon, 02 Nov 2026 18:29:07 -0800 (PST)
+Received: from toxicpanda.com ([153.61.196.254])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-5498b49ce1dsm13814311cf.5.2026.11.02.18.29.07
+ af79cd13be357-94425ac5322sm974378785a.39.2026.11.02.18.29.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Nov 2026 18:29:07 -0800 (PST)
+ Mon, 02 Nov 2026 18:29:05 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,53 +52,53 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=toxicpanda.com header.i="@toxicpanda.com" header.h="Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=toxicpanda.com; s=google; t=1793672948; x=1794277748; darn=lists.xenproject.org;
+        d=toxicpanda.com; s=google; t=1793672947; x=1794277747; darn=lists.xenproject.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=MseyG3+pKKIruXhcv710BgM8fgKq/guu+mQy13emKdo=;
-        b=UDvQf9nq8EcsxThyEuq1CbS0swoqeQQgHLSzrZpNj8wjU4/l1mMSRNrgaxMQSpNasu
-         oKsmMY67U8okM/ibsygnwzUUFqozXMQST9pHIvsbOnNzrPxHw9iLkw1bPOGi5Du9Lp2f
-         XFjyJitMuNM3zIRLDKRk08kzBSY8IhT2f8WFTNcUwU89SX8Iw/3/CfQLYlWTVA2ZdsTh
-         +UHuZE4UEJTK4UOdibkZic7r6VTCDGm86vH74p9X+UeF1ilk7zBo6N0mdihpBl12SK/n
-         mHdd54s1dQoqW+QxFOllSc6sj8LTTuRt189dJS+HdzWLAbc+2dX/o6DY/xK9IPab8YIm
-         e9fw==
+        bh=beA32Wl5uGeVdDRquUg9onzNEjLmSlivsd983Tz/Vmc=;
+        b=MIVy3/0sBd1CCo+yd20XI3EDIHDtOeHsAt9I3WRZjR6qRIKFoVQbVHc4uQUmse5rU6
+         vpT09fpdavPkLlzyFTY/b0FqA1DhV0HfW/uIldt+0/azSKTddXZBYiLqYY9O/gBlYhe/
+         ewFkizTnzGK6GMOMQXOarmQfa1IjLJL5sahxyy94MBdy5WMhACHxYBf4/7DkrO+SmRtj
+         M2ghZeM9rLnLmC3LIizqm4g6D9dQ6/aERPd+jtIA6dwkpIFmzlpeQ7YYGeCrHz0aV/KF
+         XAgosV3F1kWG467TbHmGr6tSyd+cP51mQ/ynjaA8naVqi+F4YnOUWqfUIZS/mqUoRCXK
+         ekUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793672948; x=1794277748;
+        d=1e100.net; s=20260707; t=1793672947; x=1794277747;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=MseyG3+pKKIruXhcv710BgM8fgKq/guu+mQy13emKdo=;
-        b=yQ+QFe1lya6II1UqlC7Txeseg+VBXYKXHON1swEW/FU2SBxmTJM3Rcm3Xbmgf3qNeL
-         QDomOoKpbd2X2Y9/mYVPU2m5Kj3cNA2HrTlMVYpQnc6zx6AzFB4LEk/+o8gd00wxDIC5
-         tvBvxc6wOeFkW4gtZYyRtsNZ/8Q/rBbV3sl1s0RX47eNl8CMzlCFOm9NeDGOnD/1q6Y0
-         9Ut4Tr8BvM5fKW0I3r8Z/nMY6exrMIEFVrB1FWHd1iV3Wggni+tcPFatU6hbbHEU3g7u
-         3mEwbCrq9eUdwqWNWkjf+eTyZbsDUJBE7mW6a7brohcJW4SwbF6lFQittZ5CAkCA/TGJ
-         qulg==
-X-Forwarded-Encrypted: i=1; AKwUvBypcZ3D5GbBNR8ONNtzzGQ4MFjqNnCD5JtX9LaLM8HAGhVbQen/LIn3yD+n0W4hfoErP5mX737q2l8=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z+uZsukGHq0THSwKzbR8cFDLwmGZtfwRj8X9UDvfAHNl06XVJgm
-	qinsH8PB82KfatnkZ59FL47qDneSLOukJes6ffblFRAhfkIu3OZFkZLMtR0JkQxTDdI=
-X-Gm-Gg: AYBFou1C1TrieimN2J0MowNdjx9Zj/dpGbH6TYpMTqUoII15HkqM8F+sMj2dK6bd5sQ
-	eib3c5gntpsFQOnoI06vMXBKpko2FSnC/CUToRgIy/xlrVtvNv2hJahmfJVW6TReNPlL3Nw6ZMZ
-	4kA82On0Jxgb6rsIToXS0/tokz2qhaYWNl9lF1Bs31N2nn1s9v0IT/KArCGgPWL8ND5i22Ou6D9
-	JlFwi2MBbvuYpTrutAQgCsbTfTVXgCpt+fMQQnTadyp3VwV8Ajo50Rk6OF8tTc50YHry6yYPGVA
-	YnDz0a9aUrj0X3/LA65wTdG+naB6ScGx/nXG38cDcRkcHG8Tj44iwGTJqwdokeT9O6hbAdGQY/k
-	nojNJ8SeXqFWygt56191DP25crH5sWQRYlrJRocMZY3k2T0i7ikqr+6rK9yAB7osApc8TJCqA+1
-	RxU1MGlJEgMe2sXyR8p/DApOTpbvWk0scmQd4t6pYdDISw1DCAYuitlpSS44xz1qOF1K1zw3C+C
-	bHkHXg+SuHdRcyLeYcWo2scapJ+v0N3MEtNfAyGWbyADJ/9Gn7hWGKPMtxC13i6kf3Z39pq9mKG
-	4u1R3FdbI3fbTWOA8oEHevGKxbkllMFI8xThqmV6tHt0AA==
-X-Received: by 2002:a05:622a:250e:b0:535:a5fa:ee05 with SMTP id d75a77b69052e-542b7ff0369mr187387061cf.69.1793672948244;
-        Mon, 02 Nov 2026 18:29:08 -0800 (PST)
+        bh=beA32Wl5uGeVdDRquUg9onzNEjLmSlivsd983Tz/Vmc=;
+        b=lBvoRlpIsX96pfnJP2QI55hojGMrhd9+Os7xJhe1q8OcaIQ81QtZeSUMm26SRZlgNg
+         axQohsPn+5CqyC190cghh//7Tjrg/wlOjB5YmeN+tEVhxKDcY+5jXsYXtXSFf3+T2rFN
+         VKBPTEOP6SmfnDsD/uLmhZgDv5T4RvjNDxZqqzzCb5hGkQ4qEvoZJFDgh9+ViGIeefQb
+         SE6pxMiqHdybTjYiU5zMEHv8qiJA1xN+Yj/3EPXypDTJWLcp1sMO8+iQXZF5G15+mTLc
+         M166AFU48LDY3Uopw246ScrdxfH0BjpWqLWjnaP5Y1VhXGXKiusABJsAv0isd40kKNf8
+         BVLA==
+X-Forwarded-Encrypted: i=1; AKwUvBy+9F/W8+zlyBRu20ABmYruvES1SQwhcBMm5UT5GDkOLurON20XSFArz4LTf/EPu1hF6lhd4i4bsfQ=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYImJsSLEIOXASdemLk0XFXUzkbCuRyu1fYDkmVW9XbwyafbZVca
+	bTFUnZqqlxm9Qkp6DYELtEN7C72bM0+LBW8uwkk1IJOt7SzsC2qNaC851Alce9BXBwg=
+X-Gm-Gg: AYBFou09tXr85cOsgdoARSwfvbLxWItThftVKzpF6AAMw4bvPLFpY2cZT37gSciKpEq
+	KabFMeYEPHUPRgtNgzitZZegebk4CD1y2l4eiCsY+uptrkFRPxKrN2Nna7PbWDSENTsAK6zHts2
+	+dfU0TxHKqW33+BxPWOOQBJyRK+T66SXiFZ2H/tOi43seeOcvioB++FC/eny8RyBfLolz4bkcR3
+	7loAnhncJFvaNmXuAdFtyZzUi0x6HYMSaYiHg2uRXGEanKbNyQ3+3J1Kj+qAsEDMWagjRt4Tb/1
+	lE7ugdwtHJhKX9IeGepVoV3cg/il01P+V+7L+M7bfUj4VOpZTKoIbhc3U+kP2ZliV+9HGdXtQ5+
+	04rf9i4QqNW/CDL9aD8hW9A7ZkWmI6o2GjBArFxaqfmbxQ8T4fgX4LPbo9iMoM9iJ0oMhO3QXQg
+	BaHkJyqMKO+BkoUpSBx7SZqsLY61gv2xV1sME7/GiGKYDP3+cmsEa9KAITKN6lkesxb/9jNa5yw
+	B0YvWRT//xHk2yaU81jrYQbpqkQYNDdPP5SGicU1Lv/sjJGUtrOb8gVHuXFsUM8tIXCe/cBq9TY
+	Qe/9zAaayfgZL2IAck5HQ624s8Dm/JrfZJ2xRUWl8Z+fKw==
+X-Received: by 2002:a05:620a:2b43:b0:93d:92a9:1a5e with SMTP id af79cd13be357-94421799683mr2059957985a.37.1793672946476;
+        Mon, 02 Nov 2026 18:29:06 -0800 (PST)
 From: Josef Bacik <josef@toxicpanda.com>
-Date: Tue, 03 Nov 2026 02:28:38 +0000
-Subject: [PATCH net-next v3 12/15] net: test the skb layouts skb_segment()
- refuses
+Date: Tue, 03 Nov 2026 02:28:37 +0000
+Subject: [PATCH net-next v3 11/15] net: skbuff: don't run off frag_list in
+ skb_segment()
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261103-b4-skbuff-bug-on-followups-v3-12-54ad0ab57614@toxicpanda.com>
+Message-Id: <20261103-b4-skbuff-bug-on-followups-v3-11-54ad0ab57614@toxicpanda.com>
 References: <20261103-b4-skbuff-bug-on-followups-v3-0-54ad0ab57614@toxicpanda.com>
 In-Reply-To: <20261103-b4-skbuff-bug-on-followups-v3-0-54ad0ab57614@toxicpanda.com>
 To: "David S. Miller" <davem@davemloft.net>, 
@@ -113,18 +113,18 @@ Cc: Juergen Gross <jgross@suse.com>,
  David Laight <david.laight.linux@gmail.com>, netdev@vger.kernel.org, 
  xen-devel@lists.xenproject.org, Josef Bacik <josef@toxicpanda.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openssh-sha256; t=1793672923; l=5235;
+X-Developer-Signature: v=1; a=openssh-sha256; t=1793672923; l=3043;
  i=josef@toxicpanda.com; h=from:subject:message-id;
- bh=/VgW0oW9T+Tzy+i1BGO6eU3AucNR1Ntg0slpO9Mj98E=;
+ bh=ZFtZ+wZ1/BRwvrFDewd6GJQ8sWu7jAVgTMehQH1Him4=;
  b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgUBr36M/n0nWN0DNbnxwzIiCZez6MG
  JiruuNaSCI/zXsAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
- QKMmn6TBuIrBkysKogxABEz6HQG1Via38Q+vUl7yCgJi2hIoaEjJWJRzWZW20ii4tSe3afYAeZ4
- ExrUaw3kh8Ao=
+ QF1JASk2FaQ2hzp9j2Mg5ifJ5XQ/M7YFkqH/XBR1KN5aCYeKq0yVaHYAgZGVZBKc6lSw+ESgzWk
+ 7uQyVrofUxQU=
 X-Developer-Key: i=josef@toxicpanda.com; a=openssh;
  fpr=SHA256:C8kOX2QUJCMqnCX+KEeoqRAjLo9L+ELOSH2NSAJHqGA
-X-purgate-ID: tlsNG-d25034/1793672949-020C1A5B-F8DA71D8/0/0
+X-purgate-ID: tlsNG-720697/1793672948-31BC82AC-DCA57C44/0/0
 X-purgate-type: clean
-X-purgate-size: 5237
+X-purgate-size: 3045
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -133,172 +133,82 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The GSO KUnit test only checks layouts skb_segment() can segment.  Add
-the ones it has to refuse with -EINVAL:
+skb_segment() keeps going until it has segmented head_skb->len bytes.
+It takes the data from head_skb and then from each member of the
+frag_list.  If head_skb->len counts data that this walk can't find, the
+walk runs out of members while it still owes data and dereferences a
+NULL list_skb.  There are two ways to get there:
 
- - The non-uniform frag_list with SG on, which used to hit the
-   BUG_ON(i >= nfrags) the existing test steps around.
- - A frag_list member that has its own frag_list.
- - An skb whose len counts bytes it doesn't hold.  The data runs out on
-   a segment boundary, in the middle of a segment, after the last
-   frag_list member, and with GSO_BY_FRAGS.
+ - head_skb->len is bigger than what head_skb and its frag_list hold.
+ - A member has a frag_list of its own.  head_skb->len counts those
+   bytes, but for each member the walk only looks at the linear part and
+   frags[].
 
-They warn on CONFIG_DEBUG_NET kernels, so run them with the warning
-backtrace suppressed.  Also update the comment on the non-uniform case,
-which still says SG would hit that BUG_ON().
+No path in the tree is known to build a GSO skb like either.  GRO
+flushes instead of chaining an skb that already has a frag_list.  IP
+reassembly does nest frag_lists, but a reassembled skb isn't GSO.
 
+Check list_skb in the three places where the walk moves on to it, and
+fail the segmentation with -EINVAL.  The KUnit cases in the next patch
+hit the NULL pointer dereference without this patch, and at least one of
+them hits it again with any one of the three checks taken out.
+
+Without SG the payload is copied by helpers that check the length
+themselves and recurse into a nested frag_list.  That path still fails
+for a len that is too big, and still segments a nested frag_list.
+
+Found by the Sashiko AI review of the BUG_ON() series.
+
+Link: https://lore.kernel.org/all/20261007-b4-skbuff-bug-on-v2-0-b9a5f732895b@toxicpanda.com/
 Signed-off-by: Josef Bacik <josef@toxicpanda.com>
 ---
- net/core/net_test.c | 98 +++++++++++++++++++++++++++++++++++++++++++++++++++--
- 1 file changed, 95 insertions(+), 3 deletions(-)
+ net/core/skbuff.c | 18 +++++++++++++++++-
+ 1 file changed, 17 insertions(+), 1 deletion(-)
 
-diff --git a/net/core/net_test.c b/net/core/net_test.c
-index 2b5080c22663..298ca240104c 100644
---- a/net/core/net_test.c
-+++ b/net/core/net_test.c
-@@ -41,6 +41,12 @@ enum gso_test_nr {
- 	GSO_TEST_RESEGMENT_MULTI,
- 	GSO_TEST_RESEGMENT_TAIL,
- 	GSO_TEST_RESEGMENT_ONE_MSS,
-+	GSO_TEST_FRAG_LIST_NON_UNIFORM_SG,
-+	GSO_TEST_FRAG_LIST_NESTED,
-+	GSO_TEST_SHORT_LINEAR,
-+	GSO_TEST_SHORT_LINEAR_STRADDLE,
-+	GSO_TEST_SHORT_FRAG_LIST,
-+	GSO_TEST_SHORT_GSO_BY_FRAGS,
- };
+diff --git a/net/core/skbuff.c b/net/core/skbuff.c
+index e3fc6291d223..b2c44a58db23 100644
+--- a/net/core/skbuff.c
++++ b/net/core/skbuff.c
+@@ -5164,7 +5164,16 @@ struct sk_buff *skb_segment(struct sk_buff *head_skb,
+ 		int hsize;
+ 		int size;
  
- struct gso_test_case {
-@@ -58,11 +64,16 @@ struct gso_test_case {
- 	unsigned int gso_type;
- 	/* skbs from alloc_skb() instead of build_skb(), head_frag clear */
- 	bool no_head_frag;
-+	/* bytes that skb->len counts but the skb doesn't hold */
-+	unsigned int missing_len;
- 
- 	/* output as expected */
- 	unsigned int nr_segs;
- 	const unsigned int *segs;
- 	const unsigned int *gso_segs;
-+
-+	/* skb_segment() is expected to fail with this error */
-+	int err;
- };
- 
- static struct gso_test_case cases[] = {
-@@ -241,6 +252,61 @@ static struct gso_test_case cases[] = {
- 		},
- 		.gso_segs = (const unsigned int[]) { 0, 0, 0, 0 },
- 	},
-+	{
-+		/* frag_list members that don't end on gso_size boundaries
-+		 * can't be segmented with SG
++		/* list_skb runs out early if head_skb->len counts data that
++		 * this walk can't find: bytes that aren't there, or a member's
++		 * own frag_list, which the walk never looks inside.
 +		 */
-+		.id = GSO_TEST_FRAG_LIST_NON_UNIFORM_SG,
-+		.name = "frag_list_non_uniform_sg",
-+		.linear_len = GSO_TEST_SIZE,
-+		.nr_frag_skbs = 4,
-+		.frag_skbs = (const unsigned int[]) { GSO_TEST_SIZE, 1, GSO_TEST_SIZE, 2 },
-+		.err = -EINVAL,
-+	},
-+	{
-+		/* the second frag_list member hangs off the first one's
-+		 * frag_list instead of off the head's
-+		 */
-+		.id = GSO_TEST_FRAG_LIST_NESTED,
-+		.name = "frag_list_nested",
-+		.linear_len = GSO_TEST_SIZE,
-+		.nr_frag_skbs = 2,
-+		.frag_skbs = (const unsigned int[]) { GSO_TEST_SIZE, GSO_TEST_SIZE },
-+		.err = -EINVAL,
-+	},
-+	{
-+		/* the data runs out on a segment boundary */
-+		.id = GSO_TEST_SHORT_LINEAR,
-+		.name = "short_linear",
-+		.linear_len = GSO_TEST_SIZE,
-+		.missing_len = 50,
-+		.err = -EINVAL,
-+	},
-+	{
-+		/* the data runs out in the middle of a segment */
-+		.id = GSO_TEST_SHORT_LINEAR_STRADDLE,
-+		.name = "short_linear_straddle",
-+		.linear_len = GSO_TEST_SIZE + 500,
-+		.missing_len = 700,
-+		.err = -EINVAL,
-+	},
-+	{
-+		.id = GSO_TEST_SHORT_FRAG_LIST,
-+		.name = "short_frag_list",
-+		.linear_len = GSO_TEST_SIZE,
-+		.nr_frag_skbs = 1,
-+		.frag_skbs = (const unsigned int[]) { GSO_TEST_SIZE },
-+		.missing_len = 50,
-+		.err = -EINVAL,
-+	},
-+	{
-+		.id = GSO_TEST_SHORT_GSO_BY_FRAGS,
-+		.name = "short_gso_by_frags",
-+		.nr_frag_skbs = 2,
-+		.frag_skbs = (const unsigned int[]) { 100, 200 },
-+		.missing_len = 50,
-+		.err = -EINVAL,
-+	},
- };
+ 		if (unlikely(gso_by_frags)) {
++			if (unlikely(!list_skb)) {
++				DEBUG_NET_WARN_ON_ONCE(1);
++				err = -EINVAL;
++				goto err;
++			}
+ 			len = list_skb->len;
+ 		} else {
+ 			len = head_skb->len - offset;
+@@ -5174,7 +5183,8 @@ struct sk_buff *skb_segment(struct sk_buff *head_skb,
  
- static void gso_test_case_to_desc(struct gso_test_case *t, char *desc)
-@@ -337,21 +403,47 @@ static void gso_test_func(struct kunit *test)
- 		skb->data_len += total_size;
- 		skb->truesize += total_true_size;
+ 		hsize = skb_headlen(head_skb) - offset;
  
--		if (tcase->id == GSO_TEST_GSO_BY_FRAGS)
-+		if (tcase->id == GSO_TEST_GSO_BY_FRAGS ||
-+		    tcase->id == GSO_TEST_SHORT_GSO_BY_FRAGS)
- 			skb_shinfo(skb)->gso_size = GSO_BY_FRAGS;
-+
-+		if (tcase->id == GSO_TEST_FRAG_LIST_NESTED) {
-+			struct sk_buff *first = skb_shinfo(skb)->frag_list;
-+
-+			skb_shinfo(first)->frag_list = first->next;
-+			first->next = NULL;
-+			first->len += tcase->frag_skbs[1];
-+			first->data_len += tcase->frag_skbs[1];
-+		}
- 	}
+-		if (hsize <= 0 && i >= nfrags && skb_headlen(list_skb) &&
++		if (hsize <= 0 && i >= nfrags && list_skb &&
++		    skb_headlen(list_skb) &&
+ 		    (skb_headlen(list_skb) == len || sg)) {
+ 			if (unlikely(skb_headlen(list_skb) > len)) {
+ 				DEBUG_NET_WARN_ON_ONCE(1);
+@@ -5294,6 +5304,12 @@ struct sk_buff *skb_segment(struct sk_buff *head_skb,
  
-+	skb->len += tcase->missing_len;
-+	skb->data_len += tcase->missing_len;
+ 		while (pos < offset + len) {
+ 			if (i >= nfrags) {
++				if (unlikely(!list_skb)) {
++					DEBUG_NET_WARN_ON_ONCE(1);
++					err = -EINVAL;
++					goto err;
++				}
 +
- 	features = NETIF_F_SG | NETIF_F_HW_CSUM;
- 	if (tcase->id == GSO_TEST_GSO_PARTIAL)
- 		features |= NETIF_F_GSO_PARTIAL;
- 
--	/* TODO: this should also work with SG,
--	 * rather than hit BUG_ON(i >= nfrags)
-+	/* TODO: this should also work with SG, rather than fail the
-+	 * i >= nfrags check in skb_segment()
- 	 */
- 	if (tcase->id == GSO_TEST_FRAG_LIST_NON_UNIFORM)
- 		features &= ~NETIF_F_SG;
- 
- 	SKB_GSO_CB(skb)->max_segs = tcase->max_segs;
-+
-+	if (tcase->err) {
-+		/* the suppression block doesn't run if it can't be set up */
-+		segs = NULL;
-+		kunit_warning_suppress(test) {
-+			segs = skb_segment(skb, features);
-+		}
-+		KUNIT_EXPECT_EQ(test, PTR_ERR_OR_ZERO(segs), tcase->err);
-+		if (!IS_ERR_OR_NULL(segs))
-+			kfree_skb_list(segs);
-+		goto free_gso_skb;
-+	}
-+
- 	segs = skb_segment(skb, features);
- 	if (IS_ERR(segs)) {
- 		KUNIT_FAIL(test, "segs error %pe", segs);
+ 				if (skb_shinfo(nskb)->nr_frags &&
+ 				    nskb->pp_recycle != list_skb->pp_recycle) {
+ 					nskb->data_len = pos - offset - hsize;
 
 -- 
 2.55.0
