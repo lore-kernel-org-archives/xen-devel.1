@@ -2,48 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B37C4606A329
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2026 17:31:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D0BA7606A32D
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2026 17:31:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=epam.com header.i=@epam.com header.a=rsa-sha256 header.s=selector1 header.b=r6Htc9az
-Received: from list by lists.xenproject.org with outflank-mailman.1470393.1679207 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=epam.com header.i=@epam.com header.a=rsa-sha256 header.s=selector1 header.b=CLU4CGiz
+Received: from list by lists.xenproject.org with outflank-mailman.1470401.1679223 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOILV-0004SU-Rz; Tue, 03 Nov 2026 17:30:53 +0000
+	id 1xOILZ-0005JF-KY; Tue, 03 Nov 2026 17:30:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1470393.1679207; Tue, 03 Nov 2026 17:30:53 +0000
+Received: by outflank-mailman (output) from mailman id 1470401.1679223; Tue, 03 Nov 2026 17:30:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOILV-0004R0-Ep; Tue, 03 Nov 2026 17:30:53 +0000
-Received: by outflank-mailman (input) for mailman id 1470393;
- Tue, 03 Nov 2026 17:30:52 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xOILZ-0005H8-5M; Tue, 03 Nov 2026 17:30:57 +0000
+Received: by outflank-mailman (input) for mailman id 1470401;
+ Tue, 03 Nov 2026 17:30:55 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <milan_djokic@epam.com>) id 1xOILU-0004Kk-Lb
- for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 17:30:52 +0000
+ (envelope-from <milan_djokic@epam.com>) id 1xOILX-0004tz-Ct
+ for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 17:30:55 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xOILU-0082xo-1w
- for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 18:30:52 +0100
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xOILW-003aA2-Ol
+ for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 18:30:54 +0100
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <milan_djokic@epam.com>)
- id 6aea1a28-e002-0a2a0a5209dd-0a2a4501986e-42
- for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 18:30:52 +0100
-Received: from [40.107.159.108]
- (helo=OSPPR02CU001.outbound.protection.outlook.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aea1a4a-bab6-0a2a0a5309dd-0a2a4509cda8-10
+ for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 18:30:54 +0100
+Received: from [52.101.83.81]
+ (helo=GVXPR05CU001.outbound.protection.outlook.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <milan_djokic@epam.com>)
- id 6aea1a4b-5984-0a2a45010019-286b9f6ca2a9-3
- for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 18:30:51 +0100
+ id 6aea1a4e-be1a-0a2a45090019-34655351c1db-4
+ for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 18:30:54 +0100
 Received: from AS2PR03MB9587.eurprd03.prod.outlook.com (2603:10a6:20b:595::7)
  by DBBPR03MB10511.eurprd03.prod.outlook.com (2603:10a6:10:53d::13)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.8; Tue, 3 Nov 2026
- 17:30:50 +0000
+ 17:30:52 +0000
 Received: from AS2PR03MB9587.eurprd03.prod.outlook.com
  ([fe80::daa7:3b97:acb3:67d5]) by AS2PR03MB9587.eurprd03.prod.outlook.com
  ([fe80::daa7:3b97:acb3:67d5%5]) with mapi id 15.21.0592.007; Tue, 3 Nov 2026
- 17:30:50 +0000
+ 17:30:52 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -54,33 +54,33 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=SXJe94yEhT+FQ7Mx/GEmy5YfQsRvWCAOc6KmTX/qXtoNHDv7jr2NCJehiQJr051lSqqEHG95K+iX7YXwPRaUVK9ounbY9wU1kRe2e2eNR8XqgTgXrAXECXUJixaodi52ttbcjqr49bCNdvyMTpfBjj/O6FS+iEtsyCBm1yzTx/ghNmBv0uY4HJGwe+mmgEAHVVOgIjhnC99JEpiOMFkTBLZTWWTOeG2FdZt5gvXUmSc3GYxpMORQ/waDNp65SXd3YhWMWGjNXWmRNViGycK+57L4CCU2ssSOeE1YFXPW464nv1mNWZYau6u7BeRjIverYJ8hALTTaFf45eFbHrjFag==
+ b=ii7VguH65cJ0VecA8UQfz/JmhLY7wKXEAERREYgzxHbK4/J1L7E4HDK+3wdZYIjZNNZ6fh+UmmpKnLCV8Fa+9i+TEhqRgw7g83tZQb1UZNlXmZcJkysyW97HKGzGqy/45f03+X8Cm81hmKpusP+ThMdvVNK8EqroKA7Dc4R0AQO48nCWsye4DQubo2WAIwfzosyslhlzgL1fC+uAGiItUazIiCEpNlgDQ4lE/m/YcnCbB2qlHGLygj/NVvBSqk4JyRe97/rtosILcOAYTS4Qqv4j5bDypabHThEn4cgm96QwVPq49G+UHxHm2o0UaIqoIfTmfqtk9g20pwXVfxBxhw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1KCpdXRKAXdQEdm2NQv0CErWiAD2OMKxubJ598FQNOM=;
- b=DJWjaCD8reyct6VsBzzihmqxYJ4hDeu5ME3ho2505WdJcNedt1yOi89HKZUdU9n6UKg6TYL6b6oOcaiN5GVi+z9mvvUhxN/wjlMfaRmc9Twv+yKgF1ADKjdEPsPMU7FPovEha0u7mN7dWNVhoXOh5vuRGTcPdiGYyZv098021afFKHdiUD/MwqKcbW/nF3a+rBaiI41AneemVpNQxw8OvKOI0KNypB+Vc64ex0RTS/VWYFYhh89+BDO8xJf01vhfvEO3J4Gnpo9IM54RnDS387UlQPy/tMZM8HurL2YvloY2eDaahOmWNUTpDU6qJsgcP6dEJK3pA7LpNRq6YcMSVA==
+ bh=04wlLDrCXxRbN44m6Xv1zNQ5EXjCUtM6cx5nIO/iEp8=;
+ b=M3qahzUvwAd/7t/mhmQjfzW3WeCtH2wZZP1NtBR8pYzC68z8ivZhsU0gmPR0TCZcCn06QXi5KzilabyEpge/tj0QnJz7r/59O9fHVzPGgJRg5Ku0x05Zn1HDChCJcYmC63Dq7GgbOaNBE5nTeEVFBEbXkY9s9+frLCvHAEQm+R2wPWcnAV9ps9uzUQwSMkX2V6dUgI4DW5Hmqoc+0UFWTvUcJPoSUwT/0MyW57odHr3Gv01Ubgd4/4keMFrPrc3QKUrM+B066oSZQ42o/2IRZ+4pw1O+2+gZD8JEX0zFPp//tU/+WdiljpEK2TVRar8J67d0rOIOog/qLjaoF9KFwg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1KCpdXRKAXdQEdm2NQv0CErWiAD2OMKxubJ598FQNOM=;
- b=r6Htc9azGMoLF5ZcARS958YkzZt+XUV6WeD+vZRe+g4bpkGE7HNIJ71584dxLaXU6pGOqwfrA6YcTNLcJWDbErqH10lszWHUt4Oxti4rbjNY9tn8chRHsxfneZ6ZFFDS2HuhnXzQraQZH+f9dz+rRr+X+O+Atj0G0jDwSFe+o82E9wmB6GW4eIGKk59mfH+VWWhMtq0X3xWzfSx9hjsMLQ5GN8Sa01BSf2sQVcx2Rmb2J6Rau67g8RXMh1Vsx2EARglyjvi0udQr3y9rlq7mKke9BEl6/ZwUZNhoDyb5eAu5QS7xS7kj9d6s1IjC7hhQsjywg3iSRkdDAgaFWO3qNw==
+ bh=04wlLDrCXxRbN44m6Xv1zNQ5EXjCUtM6cx5nIO/iEp8=;
+ b=CLU4CGizHPRz/RFg92AVej+gLZUtATFeZJBRwEjlwcOE90mWPH5IxzZ7Ih5jSN+3BebtDI0uRVr7ANCfV/yyRLMJtDVQR8hvhg7K+RHLnGuu+4uhi9bickM+v9n/yfOIa/8j4f6cj+NLt86d63FHq1hEqzbJMy34i0cODgrdrVD+4q3mpaudPlMvQAfDl6ffgji0VpXnyWoALMtl04uco3q2hyGxsSqvT4waLM3DIvHePgKh0xuBq5O1ovSBfO4XRGsSF1cerUu7mbaQA64FuONsCrgBIhb/t+B6dxBQucMB/SqFMFbLyu+SGwWUwuCanFjWxY9xEKUk5PSWf6sCWA==
 From: Milan Djokic <milan_djokic@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Rahul Singh <rahul.singh@arm.com>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>, Michal Orzel <michal.orzel@amd.com>, Volodymyr
- Babchuk <Volodymyr_Babchuk@epam.com>, Milan Djokic <milan_djokic@epam.com>
-Subject: [PATCH v5 17/22] xen/arm: vsmmuv3: Add support to send stage-1 event
- to guest
-Thread-Topic: [PATCH v5 17/22] xen/arm: vsmmuv3: Add support to send stage-1
- event to guest
-Thread-Index: AQHda7kRgq+8QDTpUk6bKfQWFvQtuw==
-Date: Tue, 3 Nov 2026 17:30:50 +0000
+CC: Rahul Singh <rahul.singh@arm.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, Milan Djokic
+	<milan_djokic@epam.com>
+Subject: [PATCH v5 19/22] xen/arm: vIOMMU: Modify the partial device tree for
+ dom0less
+Thread-Topic: [PATCH v5 19/22] xen/arm: vIOMMU: Modify the partial device tree
+ for dom0less
+Thread-Index: AQHda7kT4VFqDkiD1UGmccSWBKKiSg==
+Date: Tue, 3 Nov 2026 17:30:52 +0000
 Message-ID:
- <d2bef93f0883984523de1d7811b764e65a78c7de.1793726692.git.milan_djokic@epam.com>
+ <eda58449cb79816d97f32f79323e98d1f07f923f.1793726692.git.milan_djokic@epam.com>
 References: <cover.1793726692.git.milan_djokic@epam.com>
 In-Reply-To: <cover.1793726692.git.milan_djokic@epam.com>
 Accept-Language: en-US
@@ -91,48 +91,48 @@ authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: AS2PR03MB9587:EE_|DBBPR03MB10511:EE_
-x-ms-office365-filtering-correlation-id: 23e946be-d757-47d7-b54b-08df39d0343b
+x-ms-office365-filtering-correlation-id: 93818c35-541a-4006-56e3-08df39d035b4
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam:
- BCL:0;ARA:13230040|23010399003|1800799024|376014|366016|38070700021|11063799006|56012099006|261009223027099003|261022105027099003|261021121427099003|261021123027099003|261102123227099003|261028144727099003|261026140227099003|261026121527099003|10067099003|18002099003|22082099003;
+ BCL:0;ARA:13230040|23010399003|1800799024|376014|366016|38070700021|11063799006|56012099006|261009223027099003|261021121427099003|261021123027099003|261102123227099003|261026121527099003|10067099003|18002099003|22082099003;
 x-microsoft-antispam-message-info:
- W1rjYJSw6dDAE7JozkK6h3v0jhcoPIs51EtIXOCQRRBWs51IvsAt18NZ3uXiAQf7mbXgfubnOtp0/L/Lm9wYyMjmvOXP5NAcqWwOd0cjqmQHYddNBvPdrvJtZnqAuG1nEc3q7bvEf2NZgFqHHwvW6mpDVqZI9cz+tRZl8/Ki4iOegRoOc8uQA0LwgqzGiiSgPUrIN2azNiP6IvLvQcpp+q9RA29kpu3Rw8FPUFdQAAPbhz71NrXr03poZNYd8TnoFDqJ2Vi0112ER2E/OgHqN1xYH7FLlctx92x49XChf1Qa2EtAnKgKYH00nwJ/km36NgirOSswcloOqS2d73klVQZRVjzWxRXMcYPFKOfWKcOtvwZ79NYa8bPLkxOdFxZqcsz11Wf0NUIXQIHJBVXpHLM5sRd2isx5b5MJpeCbR128IvbIicyTTPdBIm374A0nw9mQ4KMsEeQ7HFReQBelwjLsyjkcGU15aCOEcENzfLZbnaDXWzVKRqIUUdBeJnnZ/wkSwNHVNRMOqTgeHG6YgT+hljc+Sp37vOqXgm7m0qcyFbSPHptYa0V/66jt79qCLn54b4DK15jg7DO2qNNUTIilITo+0/nMCiFt1hQcJNS5FoLgEQI+rnNH+fyvBZwetm/rUg+lN9VjJv4sXHueeP0By5B0EKRPt+SmN63MpFL4jtsBh2WU3i4OKifHNu8ffhAMtFdCMTx7bhSg8VHtnmZN+dmc953zTCRQJa+Ie1w=
+ ZvbDM+5wapsZoTaW1Rdtp/RMv090ipdRTKmuiwkBaRdHaFQEifzbXOJ6o5g/PMtGGDZevmHff8EcWYBuSKRMjZGw8Mykl8qu9UiEJMLX/BjgkeD3Ls7rEUcCRqgxXBcZWnn3zJAh8QSeEMSGlCJbGf99GouH+c9yxip6d+aAFPjFnjKJkEb5nzdkWKIFxvrmcmWZ+FLFRpVEeboMLlwkHb86+DBEGlfwGqbumfNZOdetBpcYzXGFJwLszrYK4WwQmwkiIZBar5zwXF+9Ublhuz37o+xmXX4D0z5zhIYpTchevC9XFLRe0oJ0oQiNelTIkIEj+GFyCO1u4smgPNcMolw5enFmBVF7RbaWfBDqOQC9vqnQky3QxBOXB7T2pzj3F8WHgO5OQ8tFxkal66304FTILdXiwzCXB5KubN3TR9I6qQmH4IWwNPDXSbrUHWZtCzpH5nIXJa+xHYKDDNVJ+Y3zVJNhQ8DdPvOFhdj9sRRVdDypdZ3A43oF3qXx9YznF0hd34+XIxWFvd7PAuqD77rTU+y+BQ57IoMO7rzOoAbu7o6g6OMq4SoHsRfqzTBVJSengCvTz3WputEoGuOcUONWyboTjdw7+ffAO0uobQ9Gloeq0i5w4xkkqkbGyH5G61GGWuOoxejkXGYVP32mRPsJQ5sWD2f4GtizUh0SiBCNkIRLipbhfOv13yoHh3oISnaLmjAE+LgbR+tDksK4xMxxKHJDFL+CJ/1U/b4/NL0=
 x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS2PR03MB9587.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(376014)(366016)(38070700021)(11063799006)(56012099006)(261009223027099003)(261022105027099003)(261021121427099003)(261021123027099003)(261102123227099003)(261028144727099003)(261026140227099003)(261026121527099003)(10067099003)(18002099003)(22082099003);DIR:OUT;SFP:1102;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS2PR03MB9587.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(376014)(366016)(38070700021)(11063799006)(56012099006)(261009223027099003)(261021121427099003)(261021123027099003)(261102123227099003)(261026121527099003)(10067099003)(18002099003)(22082099003);DIR:OUT;SFP:1102;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?96DBro5Xf4Jo0qyOQDN7/U9Bj1UanOp27iCgV2A2eXo0rXifMghF5/rEW3?=
- =?iso-8859-1?Q?vU928IFiQfcq2RRt9Aa10kOA3aZgZL/RwFMn2GQtLehZqdLMeZCUM3IEC4?=
- =?iso-8859-1?Q?1olredj/Fpvo1fuVeif7CtOSDiE93zB78N4CE16cHJosSL2dWUt3iiSk/q?=
- =?iso-8859-1?Q?vz3Mvj253OaUw6ZMGcSU75Ak9wGEAP9dKoGwJCPZgfWBdziTvaO4ZtjDzO?=
- =?iso-8859-1?Q?rJCKspd6ydUjsWi+77A6GcfH/x8sxF6Fo5+M4ivphfKzcLYjsjYR9ltZ0B?=
- =?iso-8859-1?Q?rozdP+ybPBRjC55/Aqsb+3y1Osj/Lv/XCV7lfHvpXEcN/GGXKAkKMT8Xwh?=
- =?iso-8859-1?Q?grAIhhzJbBPUHSHw3SHCMza+sxR42OfvqxKBcSO6M+VprvO1fITd9hBZ2b?=
- =?iso-8859-1?Q?MTcY2tCyJzFjcsXxfQfL3R6KNITfyIY2KrBaI5kOzddcg9wNkYsoNs5VVc?=
- =?iso-8859-1?Q?JNfI774ZPg+PogddaJLFywSax0WH5yg6PPquomprPxu/6XJouUijYK1Tb8?=
- =?iso-8859-1?Q?+JA+dRC8vWtv96wswnL03k1JhISlqpkgxQ8xiADzl4lxl0g8JEB7p/jlkO?=
- =?iso-8859-1?Q?Fv4qW3fu7rfJHum57gr1Ib0Wli7s4ZgL+nv6PTZYt3PfK0p7TvMces6hFE?=
- =?iso-8859-1?Q?g4ghIkfU7zLmn3tWqBvYnI1KZsMNrLunqDCZkzNDJiIp+li9Vv3PeMaKOC?=
- =?iso-8859-1?Q?Jgp3ghd+bEwrVKi/tMx0Si3svP07X9uPKQNt3E33B/Qw3R6OFtwBqr6s6E?=
- =?iso-8859-1?Q?7eq0jqxG5zzVFSOs5g5qvzogCivDzxPsH3TxsHDvQjFa/pHieC6Rmt0u82?=
- =?iso-8859-1?Q?OOxnp/bOhmGTxTVsxQcILyTt8efctoMSxfbdPViNlmc1nFeI0ibpqKIoIM?=
- =?iso-8859-1?Q?nlzygoEHSpdvH4sd0KmgJqfPCv/xAmtiKaJpmAel2PDHcgsnLlw4NqKM0t?=
- =?iso-8859-1?Q?e1cep2/YcUqC3Fu96simT7OchAw6gBGJRSoqGJ2aptfAZbdgmtfJYf8AVr?=
- =?iso-8859-1?Q?C5Jtan5Sr5/YnpP+3k9Nl6krxa26Rhxr7FFuUpipKSoLF4NdW4JlgKnhvR?=
- =?iso-8859-1?Q?DWaeE6+Fc/Kz3yBEcaMjAXhQav+RYJtyZoXAcqvpT9mMvEtp7PBow5dk8v?=
- =?iso-8859-1?Q?IL5YcLG32mj6PDM4pufnGyPJF2fg4k+zyb22x6NYA/1F/QpcFETd/err0F?=
- =?iso-8859-1?Q?kBgbJfE3tKbwn/raOXafiW2qsLP61xYVA3+f9cOELwy/Z29f2tOWviIurV?=
- =?iso-8859-1?Q?l9TAyia+6YthI5JqeEc/uOM/e3D1BEhnhZn4p4AcU0E8RxPO8S16D7MTz+?=
- =?iso-8859-1?Q?w5KdMtzNX3aUqAxveCqazW7GvCKdJORVn4kyxbmfxr8qhv4GoruifXBb0p?=
- =?iso-8859-1?Q?JESJO9ZREnVzKVeUvts4PPF3hD8dDm3N4gGDKALXRkXskI160flK0Kwtpv?=
- =?iso-8859-1?Q?6qrHn8uPUZAn8Khe47D0ela5Q5Bi36wEePPvyaW+DndwxWEmnfDTSe3xWt?=
- =?iso-8859-1?Q?OWkmQVGLOGFZkTZPKprd4qU8+EkvKkG+rUiNIwqrI6baANS7u/6QnuWOJ5?=
- =?iso-8859-1?Q?o2V6LVeWkx6h/lER0duVoAOs9bikLiP5cNfC8+KoHMCu6E73Y8c5MnSCmY?=
- =?iso-8859-1?Q?tTqGrVlURsH7M3sVEU/0QprJ9WPdM/gyQm6bJHU6ZTuKq/Ty2gQvXE/Gkc?=
- =?iso-8859-1?Q?VDPE841vyJ+UKTzztyUk6qToYdz6Q/YqjS5gqq2SBIuEjreGJb885uM+Bx?=
- =?iso-8859-1?Q?LxYfkGwJ20OSaYgRif0i2tp1H7nOdfT5djZcfmVSVTzGZ9UySMWfDBVhVO?=
- =?iso-8859-1?Q?xL65xbSX1A=3D=3D?=
+ =?iso-8859-1?Q?ufz0SxnTUwrDtKGOt4MnsKmyBQqL+X7qgkbiKyC74UkO87AeBG5z5FWBfW?=
+ =?iso-8859-1?Q?qNlct6ozoZMeoqK0dt0cXbBo8W2b3CPs0nnJyPTjNbefPw3zGoJ1m5/uEy?=
+ =?iso-8859-1?Q?N1dgwMa5RM4qxfVEg6jY9jpzwlpp/xF8tMNsTZxAw66D1oqkvNiXTAvkTV?=
+ =?iso-8859-1?Q?bFjIgo6uAyjG2ykJA+vKbKYl7fzA5hApTEoOz1cnKmc8yD0okKZlF3DqaJ?=
+ =?iso-8859-1?Q?YYKThFFaZ1h325vHtmeJscDJaD2gj+rEORhZh7zrEcUGIMPqnvBC+dm1pw?=
+ =?iso-8859-1?Q?hl/FWZwfSGUOM0+IVg16nhN82011ocBgSTLWUHrbN6Jsw+iUVoXkXJzNoq?=
+ =?iso-8859-1?Q?TGb/LB6BTzXPaDy6eMdy1vZIg+uHUgcm3DLBbwUPgTrIlahmPmd/1yyX88?=
+ =?iso-8859-1?Q?o8/qZb92aYVD2FLjyXLGaQuYypBicanL69eZVmJd+f6JQQ4V4SP7i8qnND?=
+ =?iso-8859-1?Q?H4enkv8E4UmLlC7qaELd4c1nfQebEfhKhhocLNSNLEPP11a5GGSfmVnld1?=
+ =?iso-8859-1?Q?ZciJPdHjcvA3hSrmbWXoWsHeKA9iDzMgK7M047Zi7Ld6NbRrkibC826joK?=
+ =?iso-8859-1?Q?Vya5D9n7ySL6HDoUm26HPemfa+SxJ9/csFgnEV9Y7DfF0OpohB/BrWcrqi?=
+ =?iso-8859-1?Q?TwLN7128GwbrHIN7JdvGJHtDrb4cZaomIbSuvQui2TpDVUe0oAAMXveTKt?=
+ =?iso-8859-1?Q?5WhE3otTSevcnMtUhR29mCehpI6ETeAjj7Pz5JfLkVqr3SOy8pIvnxlM7N?=
+ =?iso-8859-1?Q?0JWe+bUFuzzUbcAwMXffcwojO1RbMC4c9Q0EQ/8wI1NpUQxdwc3RQ6snb6?=
+ =?iso-8859-1?Q?HZCmi5w2mqCyVv14+6Ly+Yz9iFrlpiaTzuFpNQpE2eJTHTSvFm3fVcSsUV?=
+ =?iso-8859-1?Q?YfAmEqgh/JDhq4UjGJTuJny4+gF/3YMOvS4mkDjR/QUs6+AoV8eoqZSt9d?=
+ =?iso-8859-1?Q?i9yx0RAnv/pAt/eDbXBnBWd9Nu3rzMOvBgLA61zreTyyVhI54Whq6dV8Sg?=
+ =?iso-8859-1?Q?Bj8lUzQXQhBblFO0w1vcuFkem9BN8ZeAfYy3qGZXLdQi9MCUpj8w49rlGn?=
+ =?iso-8859-1?Q?Qal8ElZa3F9ZTbbPlAvoIJo5T133xwDOXJtoNNz6A/uIjEeNhCLMjAwfTL?=
+ =?iso-8859-1?Q?7Ct3/GZVMc8FP17an52rBo5AIQIZZmlv7QxlWv0sfWeBnEtm0/fBcJlNb5?=
+ =?iso-8859-1?Q?CMRahdrxSMu0nhSguegl2VinTxLsFz3DBIlZUQOj5aik+AgWRe/SvpIn8f?=
+ =?iso-8859-1?Q?Xu4R5FZ/IxVReqsODR4fTFkc70Ffc56kS49u2GtavF6krv3yS+Ms+1owBZ?=
+ =?iso-8859-1?Q?w8h0JyiZklgJGBVm9eJp3EuEgbXhJS/+67AeTNusUHgtg4pLpaK/MnbIZI?=
+ =?iso-8859-1?Q?AzNwwGAhnpS8if7+LVldYoNCg5DGdr1rMlU04f38EKX5/yoZ+JCzPAT9K/?=
+ =?iso-8859-1?Q?ZchbLS7CykkEdxNAwW2HfZNrGj/Ypp+hhFekJXxIiobDC8eDZRpdO1EO7j?=
+ =?iso-8859-1?Q?Y1nFQW4aLyY9antf5e/xydyomlT0WFudV/39t33iCm7d0V6MxhCDTQybyp?=
+ =?iso-8859-1?Q?1PfGhzO7VoEPvP9s24ht6Y3hmgvFfWqrjwMncYVyJBXd9u96xUTSkL+0Iq?=
+ =?iso-8859-1?Q?xD5EjcjjewjSdEteLg16HIKtMNrI2Cp9T94FEflwYyBzd5TDzUZOxkzOpp?=
+ =?iso-8859-1?Q?mtQekgb2jqCEqJAbOC7s+msyyQ3a0FgkswwXCdS06vMp4qwUzyLvKkofTz?=
+ =?iso-8859-1?Q?SFP+LshRi/ZL1nFK7TLl7MdBmD7fkrrcilNgiV9gf3mofD2/w0tl0Y4QAR?=
+ =?iso-8859-1?Q?Dl1KqxCyFA=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 X-Archived-By: <archiver.kernel.org>
@@ -140,17 +140,17 @@ MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: AS2PR03MB9587.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 23e946be-d757-47d7-b54b-08df39d0343b
-X-MS-Exchange-CrossTenant-originalarrivaltime: 03 Nov 2026 17:30:50.1661
+X-MS-Exchange-CrossTenant-Network-Message-Id: 93818c35-541a-4006-56e3-08df39d035b4
+X-MS-Exchange-CrossTenant-originalarrivaltime: 03 Nov 2026 17:30:52.6622
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 4Giti2ZelYXpdjvig2V5CfF87/k3phDvmcsz9BthPSXGB3CCeNRquadJAlNXgzVPYy+ayTtEa+6KbV9Ba59Z3Q==
+X-MS-Exchange-CrossTenant-userprincipalname: qC5kj2QtJoifbhGi9pfbaj11sZGBwANOcjYv8xn6RUsy+7rw+vjm9jEbZSCsTL6Pq0K4AIzQqRdP3mKDJD02eQ==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR03MB10511
-X-purgate-ID: tlsNG-d62444/1793727052-BDE78757-4A09FECA/0/0
+X-purgate-ID: tlsNG-bad1c0/1793727054-39CC7034-5DDA5E89/0/0
 X-purgate-type: clean
-X-purgate-size: 5177
+X-purgate-size: 2750
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -161,188 +161,88 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 From: Rahul Singh <rahul.singh@arm.com>
 
-Stage-1 translation is handled by guest, therefore stage-1 fault has to
-be forwarded to guest.
+To configure IOMMU in guest for passthrough devices, user will need to
+copy the unmodified "iommus" property from host device tree to partial
+device tree. To enable the dom0 linux kernel to configure the IOMMU
+correctly replace the phandle in partial device tree with virtual
+IOMMU phandle when "iommus" property is set.
 
 Signed-off-by: Rahul Singh <rahul.singh@arm.com>
 Signed-off-by: Milan Djokic <milan_djokic@epam.com>
 ---
- xen/drivers/passthrough/arm/smmu-v3.c  | 45 ++++++++++++++++++++++++--
- xen/drivers/passthrough/arm/vsmmu-v3.c | 44 +++++++++++++++++++++++++
- xen/drivers/passthrough/arm/vsmmu-v3.h |  8 +++++
- 3 files changed, 95 insertions(+), 2 deletions(-)
+ xen/common/device-tree/dom0less-build.c | 45 ++++++++++++++++++++++++-
+ 1 file changed, 44 insertions(+), 1 deletion(-)
 
-diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthroug=
-h/arm/smmu-v3.c
-index 4f95b5206e..f213b3de12 100644
---- a/xen/drivers/passthrough/arm/smmu-v3.c
-+++ b/xen/drivers/passthrough/arm/smmu-v3.c
-@@ -871,7 +871,6 @@ static int arm_smmu_init_l2_strtab(struct arm_smmu_devi=
-ce *smmu, u32 sid)
- 	return 0;
+diff --git a/xen/common/device-tree/dom0less-build.c b/xen/common/device-tr=
+ee/dom0less-build.c
+index a877e695ad..970f89ef68 100644
+--- a/xen/common/device-tree/dom0less-build.c
++++ b/xen/common/device-tree/dom0less-build.c
+@@ -332,7 +332,46 @@ static int __init handle_prop_pfdt(struct kernel_info =
+*kinfo,
+     return ( propoff !=3D -FDT_ERR_NOTFOUND ) ? propoff : 0;
  }
 =20
--__maybe_unused
- static struct arm_smmu_master *
- arm_smmu_find_master(struct arm_smmu_device *smmu, u32 sid)
- {
-@@ -892,10 +891,48 @@ arm_smmu_find_master(struct arm_smmu_device *smmu, u3=
-2 sid)
- 	return NULL;
- }
-=20
-+static int arm_smmu_handle_evt(struct arm_smmu_device *smmu, u64 *evt)
+-static int __init scan_pfdt_node(struct kernel_info *kinfo, const void *pf=
+dt,
++#ifdef CONFIG_ARM_VIRTUAL_IOMMU
++static int __init modify_pfdt_node(void *pfdt, int nodeoff)
 +{
-+	int ret =3D 0;
-+	struct arm_smmu_master *master;
-+	u32 sid =3D FIELD_GET(EVTQ_0_SID, evt[0]);
++    int proplen, i, rc;
++    const fdt32_t *prop;
++    fdt32_t *prop_c;
 +
-+	switch (FIELD_GET(EVTQ_0_ID, evt[0])) {
-+	case EVT_ID_TRANSLATION_FAULT:
-+		break;
-+	case EVT_ID_ADDR_SIZE_FAULT:
-+		break;
-+	case EVT_ID_ACCESS_FAULT:
-+		break;
-+	case EVT_ID_PERMISSION_FAULT:
-+		break;
-+	default:
-+		return -EOPNOTSUPP;
-+	}
++    prop =3D fdt_getprop(pfdt, nodeoff, "iommus", &proplen);
++    if ( !prop )
++        return -EINVAL;
 +
-+	/* Stage-2 event */
-+	if (evt[1] & EVTQ_1_S2)
-+		return -EFAULT;
++    prop_c =3D xzalloc_bytes(proplen);
++    if ( !prop_c )
++        return -ENOMEM;
 +
-+	mutex_lock(&smmu->streams_mutex);
-+	master =3D arm_smmu_find_master(smmu, sid);
-+	if (!master) {
-+		ret =3D -EINVAL;
-+		goto out_unlock;
-+	}
-+
-+	if (master->domain)
-+		ret =3D arm_vsmmu_handle_evt(master->domain->d, smmu->dev, evt);
-+
-+out_unlock:
-+	mutex_unlock(&smmu->streams_mutex);
-+	return ret;
-+}
-+
- /* IRQ and event handlers */
- static void arm_smmu_evtq_tasklet(void *dev)
- {
--	int i;
-+	int i, ret;
- 	struct arm_smmu_device *smmu =3D dev;
- 	struct arm_smmu_queue *q =3D &smmu->evtq.q;
- 	struct arm_smmu_ll_queue *llq =3D &q->llq;
-@@ -905,6 +942,10 @@ static void arm_smmu_evtq_tasklet(void *dev)
- 		while (!queue_remove_raw(q, evt)) {
- 			u8 id =3D FIELD_GET(EVTQ_0_ID, evt[0]);
-=20
-+			ret =3D arm_smmu_handle_evt(smmu, evt);
-+			if (!ret)
-+				continue;
-+
- 			dev_info(smmu->dev, "event 0x%02x received:\n", id);
- 			for (i =3D 0; i < ARRAY_SIZE(evt); ++i)
- 				dev_info(smmu->dev, "\t0x%016llx\n",
-diff --git a/xen/drivers/passthrough/arm/vsmmu-v3.c b/xen/drivers/passthrou=
-gh/arm/vsmmu-v3.c
-index 17e83dcb1a..24588affe9 100644
---- a/xen/drivers/passthrough/arm/vsmmu-v3.c
-+++ b/xen/drivers/passthrough/arm/vsmmu-v3.c
-@@ -347,6 +347,49 @@ static void arm_vsmmu_send_event(struct virt_smmu *smm=
-u,
-     return;
- }
-=20
-+static struct virt_smmu *vsmmuv3_find_by_addr(struct domain *d, paddr_t pa=
-ddr)
-+{
-+    struct virt_smmu *smmu;
-+
-+    list_for_each_entry( smmu, &d->arch.viommu_list, viommu_list )
++    for ( i =3D 0; i < proplen / 8; ++i )
 +    {
-+        if ( smmu->addr =3D=3D paddr )
-+            return smmu;
++        prop_c[i * 2] =3D cpu_to_fdt32(GUEST_PHANDLE_VSMMUV3);
++        prop_c[i * 2 + 1] =3D prop[i * 2 + 1];
 +    }
 +
-+    return NULL;
-+}
-+
-+int arm_vsmmu_handle_evt(struct domain *d, struct device *dev, uint64_t *e=
-vt)
-+{
-+    int ret;
-+    struct virt_smmu *smmu;
-+
-+    if ( domain_use_host_layout(d) )
++    rc =3D fdt_setprop(pfdt, nodeoff, "iommus", prop_c, proplen);
++    if ( rc )
 +    {
-+        paddr_t paddr;
-+        /* Base address */
-+        ret =3D dt_device_get_address(dev_to_dt(dev), 0, &paddr, NULL);
-+        if ( ret )
-+            return -EINVAL;
-+
-+        smmu =3D vsmmuv3_find_by_addr(d, paddr);
-+        if ( !smmu )
-+            return -ENODEV;
-+    }
-+    else
-+    {
-+        smmu =3D list_entry(d->arch.viommu_list.next,
-+                          struct virt_smmu, viommu_list);
++        dprintk(XENLOG_ERR, "Can't set the iommus property in partial FDT"=
+);
++        goto out;
 +    }
 +
-+    ret =3D arm_vsmmu_write_evtq(smmu, evt);
-+    if ( ret )
-+        arm_vsmmu_set_gerror(smmu, GERROR_EVTQ_ABT_ERR);
-+
-+    return 0;
++ out:
++    xfree(prop_c);
++    return rc;
 +}
-+
- static int arm_vsmmu_find_ste(struct virt_smmu *smmu, uint32_t sid,
-                               uint64_t *ste)
- {
-@@ -1142,6 +1185,7 @@ static int vsmmuv3_init_single(struct domain *d, padd=
-r_t addr,
-     smmu->d =3D d;
-     smmu->features =3D features;
-     smmu->virq =3D virq;
-+    smmu->addr =3D addr;
-     smmu->cmdq.ent_size =3D CMDQ_ENT_DWORDS * DWORDS_BYTES;
-     smmu->evtq.ent_size =3D EVTQ_ENT_DWORDS * DWORDS_BYTES;
-=20
-diff --git a/xen/drivers/passthrough/arm/vsmmu-v3.h b/xen/drivers/passthrou=
-gh/arm/vsmmu-v3.h
-index 9f4c86abd5..d4b7cf805f 100644
---- a/xen/drivers/passthrough/arm/vsmmu-v3.h
-+++ b/xen/drivers/passthrough/arm/vsmmu-v3.h
-@@ -8,6 +8,8 @@
-=20
- void vsmmuv3_set_type(void);
-=20
-+int arm_vsmmu_handle_evt(struct domain *d, struct device *dev, uint64_t *e=
-vt);
-+
- #else
-=20
- static inline void __init vsmmuv3_set_type(void)
-@@ -15,6 +17,12 @@ static inline void __init vsmmuv3_set_type(void)
-     return;
- }
-=20
-+static inline int arm_vsmmu_handle_evt(struct domain *d,
-+                                       struct device *dev, uint64_t *evt)
++#else
++static inline int __init modify_pfdt_node(void *pfdt, int nodeoff)
 +{
-+    return -EINVAL;
++    return -EOPNOTSUPP;
 +}
++#endif
 +
- #endif /* CONFIG_VIRTUAL_ARM_SMMU_V3 */
-=20
- #endif /* __ARCH_ARM_VSMMU_V3_H__ */
++static int __init scan_pfdt_node(struct kernel_info *kinfo, void *pfdt,
+                                  int nodeoff,
+                                  uint32_t address_cells, uint32_t size_cel=
+ls,
+                                  bool scan_passthrough_prop)
+@@ -358,6 +397,10 @@ static int __init scan_pfdt_node(struct kernel_info *k=
+info, const void *pfdt,
+     node_next =3D fdt_first_subnode(pfdt, nodeoff);
+     while ( node_next > 0 )
+     {
++        rc =3D modify_pfdt_node(pfdt, node_next);
++        if ( rc )
++            return rc;
++
+         rc =3D scan_pfdt_node(kinfo, pfdt, node_next, address_cells, size_=
+cells,
+                             scan_passthrough_prop);
+         if ( rc )
 --=20
 2.43.0
 
