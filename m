@@ -2,46 +2,41 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 217FD606A324
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2026 17:31:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5B731606A326
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2026 18:09:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=toxicpanda.com header.i=@toxicpanda.com header.a=rsa-sha256 header.s=google header.b=CJBPWsAw
-Received: from list by lists.xenproject.org with outflank-mailman.1470506.1679264 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ntxIbNAj
+Received: from list by lists.xenproject.org with outflank-mailman.1470527.1679273 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOIMM-0001U1-Bi; Tue, 03 Nov 2026 17:31:46 +0000
+	id 1xOIwN-0002TB-V3; Tue, 03 Nov 2026 18:08:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1470506.1679264; Tue, 03 Nov 2026 17:31:46 +0000
+Received: by outflank-mailman (output) from mailman id 1470527.1679273; Tue, 03 Nov 2026 18:08:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOIMM-0001Tu-8W; Tue, 03 Nov 2026 17:31:46 +0000
-Received: by outflank-mailman (input) for mailman id 1470506;
- Tue, 03 Nov 2026 17:31:45 +0000
+	id 1xOIwN-0002T4-SN; Tue, 03 Nov 2026 18:08:59 +0000
+Received: by outflank-mailman (input) for mailman id 1470527;
+ Tue, 03 Nov 2026 18:08:58 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <josef@toxicpanda.com>) id 1xOIMK-0001SV-QR
- for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 17:31:45 +0000
+ (envelope-from <luoyonggang@gmail.com>) id 1xOIwM-0002SR-4X
+ for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 18:08:58 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xOIMK-003aOy-1X
- for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 18:31:44 +0100
-Received: from [10.42.69.12] (helo=localhost)
+ id 1xOIwK-00BgSl-35
+ for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 19:08:56 +0100
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <josef@toxicpanda.com>)
- id 6aea1a7e-bab6-0a2a0a5309dd-0a2a450ca908-6
- for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 18:31:44 +0100
-Received: from [209.85.219.53] (helo=mail-qv1-f53.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <josef@toxicpanda.com>)
- id 6aea1a7e-f479-0a2a450c0019-d155db35d4bf-3
- for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 18:31:43 +0100
-Received: by mail-qv1-f53.google.com with SMTP id
- 6a1803df08f44-91c7a0c1617so71371146d6.0
- for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 09:31:43 -0800 (PST)
-Received: from toxicpanda.com ([153.61.196.246])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-91ca7f254a1sm120862756d6.7.2026.11.03.09.31.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Nov 2026 09:31:41 -0800 (PST)
+ (envelope-from <luoyonggang@gmail.com>)
+ id 6aea2329-e002-0a2a0a5209dd-0a2a4507e2a2-48
+ for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 19:08:56 +0100
+Received: from [209.85.208.43] (helo=mail-ed1-f43.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <luoyonggang@gmail.com>)
+ id 6aea2337-b4ea-0a2a45070019-d155d02bb526-3
+ for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 19:08:56 +0100
+Received: by mail-ed1-f43.google.com with SMTP id
+ 4fb4d7f45d1cf-6b1afcd2d23so6537362a12.1
+ for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 10:08:56 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -50,116 +45,268 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=toxicpanda.com header.i="@toxicpanda.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From:Reply-To:In-Reply-To:References:MIME-Version"
+ARC-Seal: i=1; a=rsa-sha256; t=1793729335; cv=none;
+        d=google.com; s=arc-20260327;
+        b=NMrhnoUSZXtN+sYyzxLhDNfxIbSuA2i4W4OR2GqBtHZ6o9zexgE6QUy1hzpqDat3E6
+         pTGwXT6n51ZP6T16m5UZWciyYqm4Vs0v6bgue2LwPh6nrZdeu7l2wZPnGYt1Xh9G90WF
+         q8pJQIZmh1S3yUHuUPKTaZSQ7WPuFS0EdB/iHOJAfqx90i0pBEmO11NGXV12Z316w2iX
+         WW5ia5nUrKI0PfcuDLpK+/WhmiSYDX3WGFOqDY1ov2qGRsSnplLcnvQYNkETelheb8v0
+         OKzc7FwVP3WaKnGnZCKDE8IFMvoBD/+3dkPvJN39DlhGEHkj+NeW2K8M6iu7RBiMVCes
+         1FxQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :reply-to:in-reply-to:references:mime-version:dkim-signature;
+        bh=BJey1qLpGncca5aTW0VYBYvYOxSWgotKBUYp0cXl14Y=;
+        fh=/Bi8Cb5pjqlldEGH2AgGDw3cdpg6TEBLwzPwqKWehvA=;
+        b=eLtBML1ADHHsUC5ZRBgfvo7XL4y0TlH6n8aO+JCbIHCI6yqNYg7Xm90vPB0NAk9mBm
+         9KLOwQQyNWxmEvK3yLYJAoQhQ2xKofIEqBv/emULshV8y98lFCFPJ3LM3hWGRMAqTXmG
+         u3ryBHpGOxWs9qHruvJ9WDsf9TcPpKa5b8mdDHSd1Ntub5u5QQ4e0uPx3XdeU7Mnwspd
+         BBtiAxA0lK4Rmhr/q1j+I5cA/5Q13MZFnbvXvOsUPK1QKTgX8IZAV4lNvUnSq64DH2MQ
+         d5+Z6iAvmSHFoxZT+BcYSyVHT4YAto3cAjTfFT9A1kiafN9M5cZz7k3ueMQCnoSsR+ag
+         FcfQ==;
+        darn=lists.xenproject.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=toxicpanda.com; s=google; t=1793727102; x=1794331902; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=eegksxV28ioEtuerGVBp7CC0Yc83uWN1TXj01mx1N9o=;
-        b=CJBPWsAwTaAQs0Faam86OpRMGlXwbd1K1jAahg4JwfN35BOHcLNb9QCHcgwDahubp4
-         coYB3npzDAz9eKUqnjiTVfNyagCbd6JI8DvaxrOONFb83MlJY1bk44rt4bppKsJ41Cc6
-         n11+Mh1oRv97/7ZDmrBLVtm5MpMUWj7kWrAOXsqxUnFLuMOZh0lqkShh7KQYlQuDEP/Z
-         nCI97o8VU6qsXUrkuRlTd0gaUG+FbfKKjdA47quKamIBIk0d9ESSoMU1iD2v9vfc4uEI
-         +eaAnU2qAdBUNf10VIeuXi8of3l0TV9wVrkKMnVsoGlMX4ZC5Xe880bJJ+3/SIFgUG37
-         i5aQ==
+        d=gmail.com; s=20260707; t=1793729335; x=1794334135; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:reply-to:in-reply-to:references:mime-version:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=BJey1qLpGncca5aTW0VYBYvYOxSWgotKBUYp0cXl14Y=;
+        b=ntxIbNAjBOL2Io6sc0yjvqZ9rnx+uVUvi/VkKRPQXw+kiO/Jx1lw3Hbh+nrih+IGlW
+         Gd84RZb53y9CIm6TEUHcwGpcpCUGf25HvZVWW8GrZQJWRMdPHBG/wzqeHAde4iz5BSXR
+         qMY9SIqUkZpY/AI/Ur3ppSLQgxGIJE87/nVqV/KzM1vnhleQsGGA2NwUmFDl6aezjvr7
+         2Ddi7EKjN/K3ZeafAmEclobkJtulNVhIRVW0T1KgGRN1VahHa87lQcpih52sKYphEk18
+         ULxY/8HoBfXMM6eU93Q0G7yBOFt/j64jl10w2cI7pbVnElxr8ZzcfruGlW1n+xnhbW4N
+         trdg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793727102; x=1794331902;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+        d=1e100.net; s=20260707; t=1793729335; x=1794334135;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:reply-to:in-reply-to:references:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=eegksxV28ioEtuerGVBp7CC0Yc83uWN1TXj01mx1N9o=;
-        b=re9fY5oCTzmikBk8Vu2h+eekLRGUV8So59qmBmRTYcORQrCQ/KueRnDfzbvrYvhryJ
-         WZkcASZdvPCi9x1UJcKs87JVOW0RWo9f34bImkMuZF6BEsqK4kTvV6DKI/UkWddaEXBf
-         SpuvhVVtmWxJpUdCWbX/xOD/ua9gDgewGz/RzvRYlwf7UZInc7KJiJb73e7jSlxP/tf/
-         Ka9SAC0aZa3eXVU1xMeJAOUZ+LJJLCYb/QoXI42uijDaAPGX0hgVFfnRAiUsBwxA/J2u
-         TvjysSPet/ME2lKOY8SaPJiLQR/91HxeRWcN0q0uUbhnNjk1of/FzgkkxA6GwAT9tawe
-         OYpA==
-X-Forwarded-Encrypted: i=1; AKwUvBxOohV/uC+HVJ5+pu09BzFQn+LbBjRjVll+enccRAIyXFCe6gy/wfFzIenadMWdQeQyTJPBDfO9YSs=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z9Sg+QDQzhseKTK1gIEMjITs9Z7+z2ahTLzh4/AV6kMxNonPVrM
-	5aWcMOpefLjkp0MwGcdv/ZhbmcGgeA7oye31JA12O2NxRbveJCQGSUJUc6qxj7K4vF0=
-X-Gm-Gg: AYBFou24vEfxcSpctQcjMRcEs14ucxzmmCcO2Gm4OnwMRZPyTpm3F1wVRSirPTUirIj
-	f1zdFjcRLV+jl8ACwaMq/Z9WU1PU2tXlyjWapZWLQNznmwqSLA+2NpxUFCWv/qeJzTN5z+VPiKp
-	+zYLL26eZpqDzPpDDMM1U55fpJMPfEB3kTsZdnNi5RlNA31bpUCZfsnVrwKcwLvpGksAziDyrRc
-	++6WKTs7YjaAGJQluLbq9TIjBPToDKPPEfPyuhcj3Odx4/tim0SELX62+dv4MHYfcHhy4vF4YVP
-	1EJAQS2Wq1yDK7R7c7VUTGOnRD2wX2zvKPuaPs9BKoKVa9EcrRXhaeYD27YoBmvU7dDy63spvGU
-	i3GgUsqy5jdpjYFShsTsmeqYxPm1eU7HPxHzRJZbYsCMtZYIiCNJFljPUZnFJBp1t7P30MOgHIL
-	x6ewFhCMacXYGMMaiX2eNvxQ9ok9yDnrb4/QB03pEL/+I0ekyBSQ0sGNnl2bQ44FYYTjRyQBRJ7
-	lQ2bDbUvYUz7LRR7wZ3fzgJyLy3OQDFI3JV9ApeLRhNFY8Egh7lYNOAuCnZmkbO3x7vX8/VWdLC
-	DPQO58STXJdRVpvikSUhCOz+W9w1aPHV/zp7mSTYE4ilpsSyvz8HJWUqxeT3N+6dlGs=
-X-Received: by 2002:a05:6214:f09:b0:912:517b:40f6 with SMTP id 6a1803df08f44-91ca4b4d439mr219929456d6.40.1793727102334;
-        Tue, 03 Nov 2026 09:31:42 -0800 (PST)
-From: Josef Bacik <josef@toxicpanda.com>
-To: Mina Almasry <almasrymina@google.com>
-Cc: "David S. Miller" <davem@davemloft.net>,
- Eric Dumazet <edumazet@kernel.org>, Jakub Kicinski <kuba@kernel.org>,
- Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>,
- Andrew Lunn <andrew+netdev@lunn.ch>, Juergen Gross <jgross@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
- Fernando Fernandez Mancera <fmancera@suse.de>,
- David Laight <david.laight.linux@gmail.com>, netdev@vger.kernel.org,
- xen-devel@lists.xenproject.org
-Subject: Re: [PATCH net-next v3 02/15] net: skbuff: add skb_checksum_full() that reports failure
-Date: Tue, 03 Nov 2026 17:28:00 -0000
-Message-ID: <179372688053858.2.9209483466693222021@toxicpanda.com>
-In-Reply-To: <CAHS8izMK8nrYny_jc-aTbjwP8tsDkY0a1ed7F=GfwzfXWm8o=A@mail.gmail.com>
-References: <20261103-b4-skbuff-bug-on-followups-v3-0-54ad0ab57614@toxicpanda.com>
- <20261103-b4-skbuff-bug-on-followups-v3-2-54ad0ab57614@toxicpanda.com>
- <CAHS8izMK8nrYny_jc-aTbjwP8tsDkY0a1ed7F=GfwzfXWm8o=A@mail.gmail.com>
+        bh=BJey1qLpGncca5aTW0VYBYvYOxSWgotKBUYp0cXl14Y=;
+        b=vtpBBB5US0rdG5y1EJPsXFyF9uWmTZxKo0P+meZ9z7y0qnFvnXIryr5MhdWfovzv/Z
+         lVymliCBNOa+M/Kz2rKEm9GBQm3uivm5OWKmp2Z8Bk+h+1HA/DwfMGqOJ7EA3BMcTAJA
+         P/TyF59iqvK41o4/X0MRrXzpt3JYW4lpickRhsVyLee+a5pOt7XOOuQ99K2NY3yeVYTa
+         aHArULZELB0OpO9UQaEpwv93wYveAz9iFet3PPLqNzl70PKYBrS+OGDWP1HUKvNZjiS7
+         ymPJtCjXl/YMbqMVvoI0eCMnIiu/3qWcds4STl31JLND5g6dpJpv4yLOn1isEQZ07ZQW
+         2Q1Q==
+X-Forwarded-Encrypted: i=1; AKwUvByeTk5vCn3wT6LLsoVSTv89XKPyMMgpg5uKsA8DCP16VVIUvYVKvdFR+ZvXzSgusGUs2WC67sbYs+Q=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z+XoSAkU9CuLn1mDD4i4lEQlxbL4SCaQnmyWD9AIHgC30A2o/5L
+	XNX/CoaHEQw1pjVpZ6KmHqm5UUYXpZE7vHUU1Jko2vkgHk+uuESCxQCSLO22w3ZuRcWcSH2nkZN
+	uO7ax/B1kR7MH0jmok1h1X8eokhyqLuw=
+X-Gm-Gg: AYBFou37JQKcyDro/M3Y8cHn34KtAiZf+xmKPwUzEqsu1mql4od7l9QrfGH/M/uNjAl
+	JrQgP3pQC0akbVz11JVhb+ET3446rBYq3kbIamK6EjNMF+NqhLDVpZzej0l1ylR6Bf3/sbsY/N6
+	HW1kH+2+2s3qxi4Td0TWPFgB3LtXuJIFqD6A7xndNIKvR8JbVTYlxwUsMUzrQHz8INMpUWrsL6Y
+	+XzoNRqAXzwvid25i6bSx1MzRgP+tTKkMhpE2jBC3Q1jlFdKm38/0FCGQYW8lGkT40FevSi3HUL
+	jYrht0QWMXnuu+X7Ms07JqUO+pDUgHuyhi5jAWLbNXfpJ2VeLRx4pOO0Pl9txUAeCEScGJHHvMm
+	Eotk6cxSsvLDUeF3uE+yFV3WkET9nw0XSEgC7PQ==
+X-Received: by 2002:a05:6402:5009:b0:6b4:d731:4bf3 with SMTP id
+ 4fb4d7f45d1cf-6b4d7315217mr10362792a12.41.1793729335335; Tue, 03 Nov 2026
+ 10:08:55 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d25034/1793727103-50B3DA5B-D3E3B7D5/0/0
+References: <20261030151539.1872-1-luoyonggang@gmail.com> <d1db54c6-b802-676a-7779-0c2c63f5f807@eik.bme.hu>
+ <aa70e94c-d9a8-41c9-850f-7ded87f7f327@oss.qualcomm.com> <aumYOBw-nKQAWdYK@redhat.com>
+ <CAE2XoE8Xwevk523OfB+GgwbRu0iVnyD4VNOx81rj7J7F5aq=OA@mail.gmail.com>
+ <54851326-3627-2b86-57d6-c338ed4e4b50@eik.bme.hu> <CAE2XoE_P2mZAT8wZwzFsTqJTK8nxNSSqJRrOM2T-AJkQjwJHBw@mail.gmail.com>
+ <aunnuwhsx9ZOOXBX@redhat.com>
+In-Reply-To: <aunnuwhsx9ZOOXBX@redhat.com>
+Reply-To: luoyonggang@gmail.com
+From: Yonggang Luo <luoyonggang@gmail.com>
+Date: Wed, 4 Nov 2026 02:08:41 +0800
+X-Gm-Features: AclHuK8P6bHHgBWP0bpAQALyo5aHjtSP7ofvKj-lRIfhjZfCfQMKs0HHJgLdFgo
+Message-ID: <CAE2XoE9Kj+C3JLvWMzuGLbBsaFY4KQMhxnwLNwAAhzRmZAFj9w@mail.gmail.com>
+Subject: Re: [PATCH 00/15] hw: expand DEFINE_MACHINE to explicit TypeInfo registration
+To: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>
+Cc: BALATON Zoltan <balaton@eik.bme.hu>, 
+	Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, qemu-devel@nongnu.org, 
+	Anthony PERARD <anthony@xenproject.org>, Felipe Balbi <balbi@kernel.org>, 
+	Aleksandar Rikalo <arikalo@gmail.com>, Philippe Mathieu-Daude <philmd@mailo.com>, 
+	Antony Pavlov <antonynpavlov@gmail.com>, 
+	Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
+	Stefano Stabellini <sstabellini@kernel.org>, Subbaraya Sundeep <sundeep.lkml@gmail.com>, 
+	=?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>, 
+	Max Filippov <jcmvbkbc@gmail.com>, Niek Linnenbank <nieklinnenbank@gmail.com>, 
+	xen-devel@lists.xenproject.org, qemu-riscv@nongnu.org, 
+	Jean-Christophe Dubois <jcd@tribudubois.net>, qemu-ppc@nongnu.org, 
+	Alexandre Iooss <erdnaxe@crans.org>, Weiwei Li <liwei1518@gmail.com>, Zhao Liu <zhao1.liu@intel.com>, 
+	Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+	Strahinja Jankovic <strahinja.p.jankovic@gmail.com>, 
+	=?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>, 
+	Thomas Huth <th.huth+qemu@posteo.eu>, =?UTF-8?Q?Cl=C3=A9ment_Chigot?= <chigot@adacore.com>, 
+	Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, Yoshinori Sato <yoshinori.sato@nifty.com>, 
+	Frederic Konrad <konrad.frederic@yahoo.fr>, Palmer Dabbelt <palmer@dabbelt.com>, 
+	Peter Maydell <peter.maydell@linaro.org>, Chao Liu <chao.liu@processmission.com>, 
+	Sai Pavan Boddu <sai.pavan.boddu@amd.com>, Alistair Francis <alistair@alistair23.me>, 
+	Huacai Chen <chenhuacai@kernel.org>, Aurelien Jarno <aurelien@aurel32.net>, 
+	Gaurav Sharma <gaurav.sharma_7@nxp.com>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
+	Richard Henderson <richard.henderson@linaro.org>, Alistair Francis <alistair.francis@wdc.com>, 
+	Artyom Tarasenko <atar4qemu@gmail.com>, qemu-arm@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-purgate-ID: tlsNG-ef75cf/1793729336-37CD7AE4-4ABA6D12/0/0
 X-purgate-type: clean
-X-purgate-size: 1958
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
-	autolearn=no autolearn_force=no version=4.0.1
+X-purgate-size: 5759
+X-Spam-Status: No, score=-2.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY autolearn=no autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Mon, Nov 02, 2026 at 06:44:46PM -0800, Mina Almasry wrote:
-> Hmm, but do we really want this intermediate state where skb_checksum
-> and skb_checksum_full exist? Why not fix it in one go rather than
-> little by little?
+On Tue, Nov 3, 2026 at 9:55=E2=80=AFPM Daniel P. Berrang=C3=A9 <berrange@re=
+dhat.com> wrote:
+>
+> On Tue, Nov 03, 2026 at 09:48:44PM +0800, Yonggang Luo wrote:
+> > On Tue, Nov 3, 2026 at 9:23=E2=80=AFPM BALATON Zoltan <balaton@eik.bme.=
+hu> wrote:
+> > >
+> > > On Tue, 3 Nov 2026, Yonggang Luo wrote:
+> > > > On Tue, Nov 3, 2026 at 4:16=E2=80=AFPM Daniel P. Berrang=C3=A9 <ber=
+range@redhat.com> wrote:
+> > > >>
+> > > >> On Fri, Oct 30, 2026 at 05:51:44PM -0800, Pierrick Bouvier wrote:
+> > > >>> On 10/30/2026 4:09 PM, BALATON Zoltan wrote:
+> > > >>>> On Fri, 30 Oct 2026, Yonggang Luo wrote:
+> > > >>>>> DEFINE_MACHINE and DEFINE_MACHINE_EXTENDED hide the TypeInfo an=
+d the
+> > > >>>>> type_init
+> > > >>>>> function that calls type_register_static(). A later change need=
+s to
+> > > >>>>> pass a
+> > > >>>>
+> > > >>>> That's the point of the macro to hide the boiler plate code.
+> > > >>>>
+> > > >>>>> target mask into that registration, and the macros have no para=
+meter
+> > > >>>>> for it.
+> > > >>>>
+> > > >>>> Couldn't you just change the macros to take that parameter inste=
+ad of
+> > > >>>> expanding it everywhere?
+> > > >>>>
+> > > >>>
+> > > >>> Problem of macros is that they don't have default parameters, so =
+you
+> > > >>> need variants for everything:
+> > > >>>
+> > > >>> DEFINE_MACHINE
+> > > >>> DEFINE_MACHINE_EXTENDED
+> > > >>> DEFINE_MACHINE_WITH_INTERFACES
+> > > >>> DEFINE_MACHINE_WITH_INTERFACE_ARRAY
+> > > >>> and now would need a new variant, with variant for other existing=
+ ones.
+> > > >>>
+> > > >>> In the end, it's just simpler to remove this and add the boilerpl=
+ate.
+> > > >>> It's written once and never modified, so using a macro just save =
+typing
+> > > >>> those lines once.
+> > > >>
+> > > >> For each machine, it is only written once, but we add machines
+> > > >> over time, and every time a new machine is added the code style
+> > > >> is slightly different. We introduced all the variuos DEFINE_*
+> > > >> macros for QOM to better ensure consistent style and usage as
+> > > >> new code is added over time.
+> > > >
+> > > > I understand that the DEFINE_* macros are bloating because of this.
+> > > > Indeed currently the only two macros used are "DEFINE_MACHINE" and
+> > > > "DEFINE_MACHINE_EXTENDED"
+> > >
+> > > There are a few machines using some others but these are the most use=
+d.
+> > > That suggests maybe we should change the convenience wrappers to matc=
+h
+> > > what machines need but DEFINE_MACHINE_EXTENDED is meant to be the one=
+ that
+> > > allows all parameters which should be rarely needed.
+> > >
+> > > > ; each time people want to add a new attribute, the macros is twice=
+d.
+> > >
+> > > Not necessarily. The SECURE parameter did that to preserve previous
+> > > behaviour but if you add new parameter changing all callers (which is=
+ the
+> > > same as expanding the macro that would also change all callers) then =
+it's
+> > > just a new parameter added not changing the number of DEFINE_MACHINE*
+> > > wrappers. Rearranging the wrappers to make DEFINE_MACHINE_EXTENDED us=
+ed
+> > > less is an independent change.
+> > >
+> > > > And the usage of DEFINE_MACHINE_EXTENDED is rare and can be replace=
+d
+> > > > with DEFINE_TYPES or TypeInfo
+> > > > and be more explicit. When we used as macro parameter, we need thin=
+k
+> > >
+> > > But that defies the purpose of hiding the QOM boiler plate as much as
+> > > possible. New people are confused by QOM and it's easier for them to =
+look
+> > > up documentation on the DEFINE_MACHINE* macros to see what parameter =
+is
+> > > what and not care about how it's stored in QOM TypeInfo or what is th=
+at
+> > > at all.
+> > >
+> > > > what's that parameter means, and for
+> > > > TypeInfo, we can directly know what that member is about(because we
+> > > > are assigned with the member name).
+> > >
+> > > The parameter also has a name and documentation so it's not simpler t=
+o
+> > > look up TypeInfo than look at the macro definition or docs. In fact i=
+t's
+> > > harder to guess from TypeInfo as then you also need to get into QOM.
+> > >
+> > > > That's why I suggest keeping a single DEFINE_MACHINE, just like
+> > > > DEFINE_TYPES; as they are the most
+> > > > used macros(and simple enough), and won't suffer from changes much.
+> > >
+> > > That means exposing all the boiler plate for all machines other than =
+the
+> > > simplest case. I think it would be better to keep DEFINE_MACHINE_EXTE=
+NDED
+> > > but maybe rethink the existing wrappers and drop unused ones and mayb=
+e add
+> > > new ones that reduce the usage of DEFINE_MACHINE_EXTENDED but still k=
+eep
+> > > the boiler plate hidden.
+> >
+> > Thanks, I'll go this way, remove unused macros, and keep DEFINE_MACHINE=
+_EXTENDED
+> > and extend both DEFINE_MACHINE_EXTENDED DEFINE_MACHINE supports
+> > "targets" or "arch_mask" parameter.
+>
+> Given that we don't need to do general per-arch type filtering in
+> QOM, we could just move 'is_available' out of TypeInfo, and into the
 
-I don't want to keep it, the wrappers go away once the last caller is
-converted.  I just can't get there in one go.
+Hi Daniel,
+The "is_available" is used for dealing with the QOM name conflict,
+that is before the calling
+to MachineClass call or any other class_init.
 
-After this series skb_checksum() still has 44 call sites in 28 files:
-11 in netfilter and ipvs, 13 in ipv4 and ipv6, 13 in six drivers, 2 each
-in mptcp, bpf and pktgen, and 1 in xfrm.  Changing the prototype means
-converting all of them in the same patch, and that one patch would go
-through netfilter, ipsec, mptcp, bpf and the drivers at once.
+> MachineClass, so it is a regular class level property, which can be
+> set in the class_init methods, and thus avoid any changes to the
+> DEFINE_MACHINE macros.
+>
+> With regards,
+> Daniel
+> --
+> |: https://berrange.com       ~~        https://hachyderm.io/@berrange :|
+> |: https://libvirt.org          ~~          https://entangle-photo.org :|
+> |: https://pixelfed.art/berrange   ~~    https://fstop138.berrange.com :|
+>
 
-It isn't a mechanical change either.  Each caller has to do something
-with the error, and 17 of the 44 are in functions that return void, for
-example udp4_hwcsum(), ip_cmsg_recv_checksum(),
-mptcp_update_data_checksum() and nft_payload_set_eval().  Those need
-their own callers looked at first.
 
-skb_crc32c() looks smaller with three callers left, but one of them is
-sctp_compute_cksum(), which has 11 callers of its own in sctp,
-netfilter, openvswitch and act_csum.  The other two are siw and
-batman-adv.
-
-So this series converts the core users, because patch 3 closes a hole
-where a packet that couldn't be checksummed passes validation and I
-didn't want that to wait for the rest.  After that it's one small series
-per subsystem, and the last one removes the wrapper.
-
-This is my plan for everything, in response to your cover letter. I've
-got a 15 patch limit and a one series per net/net-next. I'm trying to
-make this as easy as possible so that they can be spot checked and
-merged quickly. I started with core and I'm slowly working my way out.
-I'm purposely avoiding "change all the callers" style patches because
-that's harder to review. This is slower but easier for everybody, at
-least I think it's easier.
-
-Thanks,
-Josef
+--=20
+         =E6=AD=A4=E8=87=B4
+=E7=A4=BC
+=E7=BD=97=E5=8B=87=E5=88=9A
+Yours
+    sincerely,
+Yonggang Luo
 
