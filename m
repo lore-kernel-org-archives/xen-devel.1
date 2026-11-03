@@ -2,48 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 91CEA606A32D
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2026 06:03:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1078E606A324
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2026 06:05:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=valinux.co.jp header.i=@valinux.co.jp header.a=rsa-sha256 header.s=selector1 header.b=RufqMuw4
-Received: from list by lists.xenproject.org with outflank-mailman.1469200.1678096 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=valinux.co.jp header.i=@valinux.co.jp header.a=rsa-sha256 header.s=selector1 header.b=P4XQ15sc
+Received: from list by lists.xenproject.org with outflank-mailman.1469210.1678104 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xO7bV-0002kS-Id; Tue, 03 Nov 2026 06:02:41 +0000
+	id 1xO7dg-0003LZ-0W; Tue, 03 Nov 2026 06:04:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1469200.1678096; Tue, 03 Nov 2026 06:02:41 +0000
+Received: by outflank-mailman (output) from mailman id 1469210.1678104; Tue, 03 Nov 2026 06:04:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xO7bV-0002kL-FY; Tue, 03 Nov 2026 06:02:41 +0000
-Received: by outflank-mailman (input) for mailman id 1469200;
- Tue, 03 Nov 2026 06:02:40 +0000
+	id 1xO7df-0003LS-UA; Tue, 03 Nov 2026 06:04:55 +0000
+Received: by outflank-mailman (input) for mailman id 1469210;
+ Tue, 03 Nov 2026 06:04:54 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <takakura@valinux.co.jp>) id 1xO7bT-0002kF-3S
- for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 06:02:40 +0000
+ (envelope-from <takakura@valinux.co.jp>) id 1xO7de-0003LM-9l
+ for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 06:04:54 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xO7bS-001Pv3-GQ
- for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 07:02:38 +0100
+ id 1xO7dd-001QM5-Mw
+ for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 07:04:53 +0100
 Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <takakura@valinux.co.jp>)
- id 6ae978f6-8faa-0a2a0a5109dd-0a2a450be98c-18
- for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 07:02:38 +0100
-Received: from [52.101.228.119]
- (helo=OS0P286CU011.outbound.protection.outlook.com)
+ id 6ae97974-8faa-0a2a0a5109dd-0a2a450b84c0-20
+ for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 07:04:53 +0100
+Received: from [40.107.74.119]
+ (helo=OS0P286CU010.outbound.protection.outlook.com)
  by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <takakura@valinux.co.jp>)
- id 6ae978fa-b7e8-0a2a450b0019-3465e477d854-3
- for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 07:02:37 +0100
+ id 6ae97983-b7e8-0a2a450b0019-286b4a77ba77-3
+ for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 07:04:53 +0100
 Received: from TY5P286MB319683.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:403:511::19) by TYYP286MB6030.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:405:27b::10) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.569.12; Tue, 3 Nov
- 2026 06:02:31 +0000
+ (2603:1096:403:511::19) by OS9P286MB7838.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:604:474::19) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.8; Tue, 3 Nov 2026
+ 06:04:49 +0000
 Received: from TY5P286MB319683.JPNP286.PROD.OUTLOOK.COM
  ([fe80::5f8d:a6bf:3b84:5a82]) by TY5P286MB319683.JPNP286.PROD.OUTLOOK.COM
  ([fe80::5f8d:a6bf:3b84:5a82%5]) with mapi id 15.21.0569.011; Tue, 3 Nov 2026
- 06:02:31 +0000
+ 06:04:49 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -54,26 +54,25 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-Id:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=eFj/BGgNB8l+GoIW/CZAV5rAdU8THbMgovllSGZyDWKWSTXxg5m8LzINf9w0zbJRyHcKiCm4e3Q0UXI/k64H2BgGK+/RvZgRQzrqddlLfQwXNA1ApPGG7Y7ky44FwPuKrCb9HVkWybSoXtcV5RjdqMkydkANmJjtKeqsRRR1r8qiqEvhkYnXImQ3hzKSVWdeEAtDuK0IhL60hNTBCwVf4OxdjoK2kqdMkU/K0WodTTuFVnfcIPaHYBChGhY54fnnHmE2KZ/da5uIXgDzG5OSqOm7H/D+Al81tiR6R4Y7UDxIqYLI3Vjdm6DFylJVbnCU0US4xGRU1l3kAo1uWd6Qvg==
+ b=L0cQ1v0OIYtS/6bYaruPagq4EOAFVz+GonF8UMrM9ISus+3ePJY+Gp7hW5KnFwcFVoic8Z1nkBXUCuhJN1UdV0lmg7w2yBybutJa25+MTpoQVxZwfLcNv4i/7z0Uz5Ck5eb+EEHeQk2qADxsKNH5igUGUPm8tJj0Tl5EYneNNkofdMz6TJYLpRwox5OK+L97RqAfRE0jt433WIA4O7LiTeILOrQXG27TfDTwQcUZUC5mRq1QJX0sv97y5Dh2M0rZpdIg7ruIYmAYaKxyyjBdg7hfrl9z+8ckb3gl3l9FFvjxQUQnb3Ti9hmQoAfCLmSh7tW2zKsiEiN6IqoIiRYE/Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=lNbOfU7NzuNKzvHBmh/+QSyLAHBq+dv9rlvp07UgFXU=;
- b=k9Bnl5CvUpJCbEQEeMjnQDJYoJSmLmVz884fIrtN1xmNO6x1/KIYrji9DZiKAQLNIzZ7EPkOoOqclVGwT5ILQvYUyugIRAw90ckzSXuEfnlTf4OO2VmTmgIJYOAtN/DYXeUk0EmZc8YwNBZAz+vppRpdHeZI6OmXZwqjeeDJMUAXk5/PaAXPl+8wPFg1SK9jqhfWINWd6fmwkHSiqWUGsXPSHApomdmUXkN6L7pNj7rSyCg7YzY0RQrUTQN3u5VLAAd1/3uI5ErqvGBhOKqDPVUgsY3YwWmGqUFhSQopnNroY+jaxx/gSg0Lyzqy1zNzxzdsa0ooejg0TJlo3wciyw==
+ bh=kUkl3RtsSxBVJ/HZu/hZ9Lm1nvwsMgutWtd4I+5L8b4=;
+ b=YVpiDndgVDFfIYtbJp14skOQ2a3f+RaCOYl6lE4Ui3rfelgn7yzEeMIylBdugedlaqHtodgnT4VABAFsP3GZQgr+PK2WKXdxpKcaqNZnMh3OXQmH12Yg/d/N8RsZM1kQeqzEqml20W4N5UUxJ9PW6T6cqXSSUVwWt0N2+Yl922i7AtNlIYtjcmFhr0YQGTpqxjiu2JAj6alCYBu/j3dixUL1ZiRRasrZP+P/ww/bL+swv/LCSu9ocvEdGvkY7ud6JFrft2zULvY/KYplFFm8DnqTFxLgahML4WieF2UzuzfzZtTTNBM+xD7RXBKaTkunJJzNsrYf6XnSVcWvC+AriQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
  header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=lNbOfU7NzuNKzvHBmh/+QSyLAHBq+dv9rlvp07UgFXU=;
- b=RufqMuw4LqeiKKWncEGIyaCBVCMrytLzgkvQ0naql9xoM3/nvl0Szl9bDiKLu7t5GTuaLdqxST+7PtB5qCy1pB0HI2RollLpD2/9l+P1YuTH6h/eLv+rup8hqRJs0OAuUE+p09Z9z2os+4QQUlP3tD3Rou50MmtMHkl5zh5LmI8=
+ bh=kUkl3RtsSxBVJ/HZu/hZ9Lm1nvwsMgutWtd4I+5L8b4=;
+ b=P4XQ15scv9ziuQb67RAg4oWnxUl/hqV2EvJhK69+QIwiuxLhoKFyuUycufixp8UQNdEPQQAb0C3cJ/iSMGfb2BkEkKJaeVX9+tJtIP6tz1C9LH4chGneEEwWNC6WG9d7B4e0NMjYmsDzeNk1ORVOJO4BQT4Uk7iVgUHlDPCAzIg=
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=valinux.co.jp;
 From: Ryo Takakura <takakura@valinux.co.jp>
-To: bernhard.kaindl@citrix.com
+To: andrew.cooper3@citrix.com
 Cc: Volodymyr_Babchuk@epam.com,
-	andrew.cooper3@citrix.com,
 	anthony.perard@vates.tech,
 	bertrand.marquis@arm.com,
 	jbeulich@suse.com,
@@ -86,75 +85,75 @@ Cc: Volodymyr_Babchuk@epam.com,
 	teddy.astie@vates.tech,
 	xen-devel@lists.xenproject.org
 Subject: Re: [RFC 5/5] xen/x86: livepatch: enable attaching callbacks
-Date: Tue,  3 Nov 2026 15:02:07 +0900
-Message-Id: <20261103060207.104162-1-takakura@valinux.co.jp>
+Date: Tue,  3 Nov 2026 15:04:42 +0900
+Message-Id: <20261103060442.104814-1-takakura@valinux.co.jp>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <179285259082.1706038.15527286146285697701.b4-review@b4>
-References: <179285259082.1706038.15527286146285697701.b4-review@b4>
+In-Reply-To: <97d772f1-322f-43f6-a793-fdbba16c7f04@citrix.com>
+References: <97d772f1-322f-43f6-a793-fdbba16c7f04@citrix.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: OS7PR01CA0169.jpnprd01.prod.outlook.com
- (2603:1096:604:24c::14) To TY5P286MB319683.JPNP286.PROD.OUTLOOK.COM
+X-ClientProxiedBy: OS7PR01CA0305.jpnprd01.prod.outlook.com
+ (2603:1096:604:26f::14) To TY5P286MB319683.JPNP286.PROD.OUTLOOK.COM
  (2603:1096:403:511::19)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: TY5P286MB319683:EE_|TYYP286MB6030:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9c9f0a5c-7bdf-4edc-f32c-08df39700c36
+X-MS-TrafficTypeDiagnostic: TY5P286MB319683:EE_|OS9P286MB7838:EE_
+X-MS-Office365-Filtering-Correlation-Id: d3a0408c-e3c6-421a-4b27-08df39705e42
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|7416014|376014|366016|1800799024|23010399003|6133799003|10067099003|261102123227099003|22082099003|18002099003|3023799007|13003099007|261021135927099003|56012099006|261026130827099003|261021133027099003|261021130227099003|261026135527099003|261022075727099003|261026121527099003|261021121427099003|261026140227099003|261022115727099003|261022105027099003|261022113327099003|261028144727099003|261009223027099003|261021123027099003;
+	BCL:0;ARA:13230040|7416014|376014|23010399003|1800799024|366016|260925022911599003|260925021311599003|260925021911599003|56012099006|261009223027099003|261028144727099003|261021121427099003|261102123227099003|261022105027099003|261022113327099003|261022075727099003|261022115727099003|261021130227099003|261021123027099003|261021133027099003|261021135927099003|261026135527099003|261026140227099003|261026130827099003|261026121527099003|10067099003|22082099003|18002099003|6133799003|3023799007;
 X-Microsoft-Antispam-Message-Info:
-	QOL8ycIu+oI4XDzYOiEPurU4qBPE17y8xlwQMXIxAz1fIDsbKoXBP5QAwllxMVKP6usa6gyeJ2opi1N+gk/LHKn49jvnCcOw0nTwTYnjjZq/IvobIe7z8V3f/8BVn0r0ohFR723fRZWn8xRS5LoejZeG1YabPM8gSyJ/gykeKZ2jtKbErtczm7PjSIAuLqv5dBI2HwJOAyHr+AswHUUwDb30iOEO02Ggi0Ux79Dr1Q3E0cPxMHeyRjUUlosBUx4Yd8RIa7ur+qMjthOwMsVJ3UzExoATI1TZ4Xy9RH56IjIJGcQwR+Xcw7dujItqyrDsIiy0GUgrrSE6R200z6IK9NLE6UDCqZ0pN95G15INdT99uCEifYHwd3cNYX1AdW40tg9gIhsPMWfgf37BEBivMuRxBsvft/WE1IKoG4AzlRInQSlhlxUKsc1qoAYnExi3ZD+q4SEPt/72vCig3zlU1hP10gPHR12kp0NtQDVvY4qn94jOutR4T6/bIFXL99nRg1ULKYukUMOXjLRBR3n0oFkL9r/46JxL4WcA9NSe1ykrHqvP239+0EBAZpEbbXk5xnMj22FNsv5rRO97qmzqxf6xsKPV+52LOe1+N2A777DtU9mmFSazGlZLC4IJsoMJ
+	D3Qp5NEPLWmvFF2Gf2rUXsYvp6L+1CQno+L7Dyh9j2FdP4/+UbEjApOLQeczpjlVW/F0DGM0UE0n36//kx3NgsDXJb471tLuSH2cbb4Zl/YxwEVo0k8FcfabT3tZb1wCyPh6YRQaC5pS1XJxXNFCaW1drMGOsvbN2W6njhT8A+rFLTs1jrF4AwOq59+n4KbgP3eDDv/HnWXrQIL/7HqoKty4X+EWpgQjJqFmpxEKi1ISbwPaHddNRcYK0ukvxzYY/QOZUWQ0CK90fkvch+xGQKMbDvCYUYRfwfLJoT+Z2hh/7Bsx8y+VHRNk9pLqqx+rnnebzQWgibINvwr+1lxGUpxorPVejWGXuuLElP0Wjir6gY95puQHa0fWxl6EuU8m+XfY8ahHMi85/LtKuupDgNwxnvJgg+/oNt8FhA3dGkx/1ylMkT9/D/sSYOlwu/r5BCYquH6O2BUrssvurv8B4uFRpI7qYUwMei0m0CHkB+JW9OIVOrCWLNxViD9Zem0HW+NIo4XfWuRmhvwbcXHwHmYWkXgXCYkHHdQjpgsk2o18ME0bXUHZknA/tLu8zRBSj2suy28TRlOerqIA0RxkJzq5F6GCuH9hmHCgrD1fEzeF2b3tuv80KKG/iC6rcK/v
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TY5P286MB319683.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(366016)(1800799024)(23010399003)(6133799003)(10067099003)(261102123227099003)(22082099003)(18002099003)(3023799007)(13003099007)(261021135927099003)(56012099006)(261026130827099003)(261021133027099003)(261021130227099003)(261026135527099003)(261022075727099003)(261026121527099003)(261021121427099003)(261026140227099003)(261022115727099003)(261022105027099003)(261022113327099003)(261028144727099003)(261009223027099003)(261021123027099003);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TY5P286MB319683.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(23010399003)(1800799024)(366016)(260925022911599003)(260925021311599003)(260925021911599003)(56012099006)(261009223027099003)(261028144727099003)(261021121427099003)(261102123227099003)(261022105027099003)(261022113327099003)(261022075727099003)(261022115727099003)(261021130227099003)(261021123027099003)(261021133027099003)(261021135927099003)(261026135527099003)(261026140227099003)(261026130827099003)(261026121527099003)(10067099003)(22082099003)(18002099003)(6133799003)(3023799007);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?IwA9tqzPZnx5DuKwqNTPO1WvyQTjNURMS6Vwg4p0AwLsdlNVa425xSmqleZb?=
- =?us-ascii?Q?hDPogbUJm98D7xazoOH95H9m6OTajaZD2UrraOIxrZC6zxlw6PaSFqvUE0a/?=
- =?us-ascii?Q?bNgooZdWeo7EuRkdvIC3BumU//JprYs2E8lTgKtnv+DeiyLOS6+revBqJxaE?=
- =?us-ascii?Q?WhM/KshQxAA0o523Lx4EMjda4oy+6Ahc+/l87FXw+WXH/aHGxAHwvBo3s6gN?=
- =?us-ascii?Q?QJVVWtMw7maetJH2b0oEYevjnb2jqKWg+cMw3nBRvkQBavYtgxJE/JJYiGDE?=
- =?us-ascii?Q?023Mm8/rYHqIrHozWem8nu7fQvnynPFJ9EBcN/jex6JrR3+aGWS2iU4t1KFR?=
- =?us-ascii?Q?1Bk5rnVRR12wmDV9hQ4UxQl0B2Km66eOIZu/hXr30uLWY946EiSdkK1sVLP9?=
- =?us-ascii?Q?AZshSUAvJprlH2sTHTGk7sg5RvJMLMw8aMKDNwjt0amKMJ082XK0yoHUNQT7?=
- =?us-ascii?Q?U55Phjg/QfCH4qBLdl7OjNB69eojWoAROXE833F1I13yacemFqFvE9VLEuDu?=
- =?us-ascii?Q?CTk8IjYnai8Pc0fZBmJU1UguUBaEdxv9NyVi3qMEfzZxjpc6Rk6Go+TfzFRp?=
- =?us-ascii?Q?JK2hIGZ0JOIIekXMKDFGizcJRCeppduu5viSa6Bd7D50UBs8lib+vslnoYtE?=
- =?us-ascii?Q?mi0T0UdRZ9VLailO9OE+rDk3wUKo9iZhSOKjPrP+PktxqJ264tNeqwaVj6Fy?=
- =?us-ascii?Q?40NgylwXVIYaf1058/3Aq3nA45G8/isMxxrvqAu6Qf2zJWnX8UXMSBjtpDap?=
- =?us-ascii?Q?nFCsLMNJLQEJPcVi9BNq93mXpuI9Xh2sH3YzVrpn7GMB1MUJmj4FyOM/HBkW?=
- =?us-ascii?Q?R16dzP2bVIsaWHkNW0UGWOUETXmJq3GtPANI/hWFpwCmUSWkkShoZ+CE8n5e?=
- =?us-ascii?Q?7ypNUFuCd/3RbP59SH/EYVprIVIrp6BA+BzGOoMy0l7ZsC1LMPS6ApeWnFm3?=
- =?us-ascii?Q?NYwdo7e2rfhJLt5V4TKkZ0x18kL4WBXY9YVTJUSP8Z8gv3Xmn2xODz4FfmFt?=
- =?us-ascii?Q?jn8cCp/p2NliQJ1RGP72Nat/E1SOM0QQGz1V9aO07TlBVbGcTCB1EluqzyLd?=
- =?us-ascii?Q?dFAw8144N0uYRaL0axZxlAUUQ8GNYf/jjbkICFzQNZUpokCgCuAFBMxyLH0x?=
- =?us-ascii?Q?w4LpRfezGCwCFGOf5ymPEhnKo25cy0eC9V+3vCTQKGZy/jhl9UV0C0AnkAb+?=
- =?us-ascii?Q?xj4AVYZmu4WyuIf7v8vJNYFmWElt3s8IOJLh7y797eB8YS59p0bySRO7KTEA?=
- =?us-ascii?Q?FyB7P2tpPeCzx+GhrATQ6eDWw+bChQIqGjG1I8Ip7wguuycQJ9xIOK9wE5M8?=
- =?us-ascii?Q?eg/SRebQPhHPgFqoX2L3EBuHgX3uN0Oet226zG7uTgHn5M3m5ylYa9vu4ULK?=
- =?us-ascii?Q?5wV5wWrmYZLlH/zCwUZGPv0V4M4H4db8hEQxRQxYHAVKojg2zbYwHsziBa+R?=
- =?us-ascii?Q?wpswpuXkAw84NZbkNK2hPAzp5OGTLaURsqxnAQ35xJjWzDrLk3eAa9xgN74R?=
- =?us-ascii?Q?kqHo5R5gMIJ+PTmspONdSJjpuwLVf7htDCbJuyOBT0YzM2KlZ6S8YiBU9+pp?=
- =?us-ascii?Q?kR9fedWPTEX3+A4XvMW+Nvl1FuEBS5ZTN4vSZ+Wha6wvjJ4uJ2rRsDUZNIjz?=
- =?us-ascii?Q?y6Fgy/NwTfDo4nD9vSyWuu2Sni8yAmTyegiPUKGn+xe/4KX5CmbZT/li/IeY?=
- =?us-ascii?Q?8fhOekNE35WnIVDdQ7gUovwVPp45wLb76i63rrVUbiXSCc1NHcIQFZQwX3mn?=
- =?us-ascii?Q?o7iBb0Qybw=3D=3D?=
+	=?us-ascii?Q?dzH8K0c0DCBldGrBgWPPBw5pyi2AqpH6qLBZ4K3dzuJ4RrE5yyqY6VJzD8c0?=
+ =?us-ascii?Q?uNn3WcaoGQJXEdi8Idih7utT6Zn0gSn7LX1kwF3Rhi7l5Pb/s5A0lI3J5ei0?=
+ =?us-ascii?Q?LFkmljvIKjZ79JiezNg9HHIJIYJsCTJ0uHXwsazDVZKZI1LzSb8EJV5KKRae?=
+ =?us-ascii?Q?rf7PJIgXtQyYpIc20TOhmb/uV4L6TGMPicm/kcH2o70X6dxLVBTGi5RvKIxZ?=
+ =?us-ascii?Q?mbC7YWEfrhoegqWIYIwVReZwXmxbrEFWHkKMcy4ZoOHxhDzPErVsSPUnL+fe?=
+ =?us-ascii?Q?QvlMZeojQrilGOidIoipJYhwkQMieCmwVI4C7g93HLEZtrZrew4zS6Le2GKA?=
+ =?us-ascii?Q?B+59OcuD6lkvhN9FUVg6Sa6nk++VjyIpWmA6LP4D0DOdUkf/i+RFmoQcdQYm?=
+ =?us-ascii?Q?urAEsesIvYrGJraClLCOxwGR1ULhV0hGaZqye4WQjyDaMsuaRVNYW3vTr5UA?=
+ =?us-ascii?Q?tldynoI/egQAtM/n48/6zwxXNWCVxr7HELVg7Y/CsG49IbCeXXpF81X79My0?=
+ =?us-ascii?Q?aDHItFQ1FbFjafC7KArKuZY3ntM7cNwdmO7dgzWZTXlUOgMbr6aGYD9t0Cdj?=
+ =?us-ascii?Q?BteBkvrMSYKMc8NaBdRDs6d6m8GtDJc08uLkEsJKhXeDY/VaRLCrJlBAqM2b?=
+ =?us-ascii?Q?oF0ZbzTqeReURlp1aVTWiU5Up6JcBLl/d2jX0yutD/Lo35cVHWg/Xqz7Sje8?=
+ =?us-ascii?Q?5WqBiZVohjay3rebxWniwCn4jfnOMcciDklqHfF3YhiPZnx6lqmZcLV7QEvq?=
+ =?us-ascii?Q?Ku1n46ooOsRne7LIn/+2Rhx9AbzEeqiyFnhaiw8WxUg+ClqoPCeZYnQ9oEbF?=
+ =?us-ascii?Q?jh5vca3quIj/3lM/HO9pBJfFYICAEUtTY4t5/CGp5toECikUTZBeViUKaaFE?=
+ =?us-ascii?Q?9EA4vYdqACRZLQOAsb523D2CG9OEyMwO3iwY4Co/ZUoJAgWV86FWZHyzUOyK?=
+ =?us-ascii?Q?1RQjpHEmsiYVHW3W9azJ3E6PLkBIosd1KlBe/C5s8o1bhWmcRAUHdzQXRLiu?=
+ =?us-ascii?Q?71ELuE3pdeVVik6Wc1VleYEP6N5KDg6p3soMs/pnpH78mNmg4dcVtVSNXbtV?=
+ =?us-ascii?Q?065858c7DECrvy/MWuhV2HCngo/bYRl7wTjIc3VIhUFhI+YE1HYJMBpi/iYC?=
+ =?us-ascii?Q?utXkCo16xrMnKdAwu4kqDBSmhfN11tX2AnyYqyPFmDO93tYfGXOrRxi7PlIu?=
+ =?us-ascii?Q?E9gUIZ8Gt7lo3AQav/K4B1t5RSNJMTg/mtCjaeMWhu68IFwUM3Cdc8npzveQ?=
+ =?us-ascii?Q?SjnmtozvvLhnzyO3fctAFGc3/uJHnFY48huXiEJSFQesl3gRQB50fzDhWseX?=
+ =?us-ascii?Q?A5v7hEJYUZHRJeknNCMvZKrB5zKJJU0GhoqCup0dQIie57Gsi5eEkRnB4B+T?=
+ =?us-ascii?Q?+C/Ex4dnZwo4uNuz/7eM+7DuIZrK+53i/lzko40C9Tw80P3imtcNKiu5bd8O?=
+ =?us-ascii?Q?VtztsegylQ2bHz6pu3psmhWz/Wmqxhjlgc1dB9JEBOGD5KhE2TZbFsgxoLk+?=
+ =?us-ascii?Q?ufXCoCLlW0/B67X8yH7aloN01kXxwZCStC2W94M68oL/buDK4tCT/96Pde9Z?=
+ =?us-ascii?Q?SR9kduTfTpNbj6Z/yY1CXrA1Urh0iQPIOYztWkrymhft92f7r11gX9Zvq10h?=
+ =?us-ascii?Q?VjkelNhHTVmVXQLuTmUIk4Ri1rNZR6CPXHN/xwl3mcfKvxqq6N585od3LReh?=
+ =?us-ascii?Q?6y+W2xYAa/+9nDkc+bLqUr7THY8VnzIh7RZz/1a3J23IgjwEmP+COAwQY1Lu?=
+ =?us-ascii?Q?Q+zp4gqgDw=3D=3D?=
 X-OriginatorOrg: valinux.co.jp
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9c9f0a5c-7bdf-4edc-f32c-08df39700c36
+X-MS-Exchange-CrossTenant-Network-Message-Id: d3a0408c-e3c6-421a-4b27-08df39705e42
 X-MS-Exchange-CrossTenant-AuthSource: TY5P286MB319683.JPNP286.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Nov 2026 06:02:31.5475
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Nov 2026 06:04:49.1124
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 20q7nujg6kvYv7Cv8Y2HUkwN2Hd8yG2Lvah8Jt2Xlrx28QU0LlaNmCjb0qtfawRlw1cryn5W+ZTRinQEyX6xUA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYYP286MB6030
-X-purgate-ID: tlsNG-42698a/1793685757-ABED69EA-3E9D5B25/0/0
+X-MS-Exchange-CrossTenant-UserPrincipalName: njHN11BnDfcWpcI0PEWMZ+GgUNFNjyyHwJKslKw4UDqRQ8Xjp0bmXsimDyTufhBWcpHOXgUm+k49ab+OyF7PLg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: OS9P286MB7838
+X-purgate-ID: tlsNG-42698a/1793685893-A82F49EA-DC87AAA0/0/0
 X-purgate-type: clean
-X-purgate-size: 10104
+X-purgate-size: 6304
 X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
 	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
@@ -162,154 +161,72 @@ X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Sat, 24 Oct 2026 16:36:30, Bernhard Kaindl wrote:
->> --- a/xen/arch/x86/livepatch.c
->> +++ b/xen/arch/x86/livepatch.c
->> @@ -365,6 +369,35 @@ int arch_livepatch_secure(const void *va, unsigned int pages, enum va_type type)
->> +#ifdef CONFIG_X86_PATCHABLE_FUNCTION_ENTRY
->> +unsigned long arch_livepatch_trace_entry(unsigned long addr)
->> +{
->> +    if ( (is_endbr64((const void *)addr) || is_endbr64_poison((const void *)addr)) )
->> +        addr += ENDBR64_LEN;
+On Mon, 26 Oct 2026 11:42:37 +0000, Andrew Cooper wrote:
+>On 23/10/2026 5:58 am, Ryo Takakura wrote:
+>> diff --git a/xen/arch/x86/livepatch-asm.S b/xen/arch/x86/livepatch-asm.S
+>> new file mode 100644
+>> index 0000000000..005765b476
+>> --- /dev/null
+>> +++ b/xen/arch/x86/livepatch-asm.S
+>> @@ -0,0 +1,60 @@
+>> +/* SPDX-License-Identifier: GPL-2.0-only */
+>> +#include <asm/asm_defns.h>
 >> +
->> +    return addr;
->> +}
+>> +        .text
+>> +
 >
->Could this helper itself be selected as a tracing target? It appears
->to be an ordinary function in an object compiled with patchable
->entries, and dispatch now calls it before reaching the callback:
+>You need ".file __FILE__" too.  IIRC this is a workaround for a binutils
+>bug.
 
-Yes, it could.
-I missed the function to mark uninstrumentable.
+Understood. I'll add ".file __FILE__".
 
->> --- a/xen/common/hypfs_trace.c
->> +++ b/xen/common/hypfs_trace.c
->> @@ -141,7 +141,7 @@ void trace_dispatch_callbacks(unsigned long ip, unsigned long parent_ip)
->> -    if ( (unsigned long)global_trace_func.old_addr != ip )
->> +    if ( arch_livepatch_trace_entry((unsigned long)global_trace_func.old_addr) != ip )
->>          return;
->>
->>      callback = global_trace_func.new_addr;
+>> +/*
+>> + * xen/arch/x86/livepatch-asm.S
+>> + *
+>> + * Trampoline for livepatch tracer.
+>> + *
+>> + * If livepatch tracer is enabled, function entries are placed
+>> + * with five NOPs. arch_livepatch_apply_trace() will be livepatching
+>> + * those NOPs to:
+>> + *
+>> + *     CALL      xen_livepatch_trace_caller
+>> + *
+>> + * 0(%rsp): traced function + 5
+>> + * 8(%rsp): return address to the traced function's caller
 >
->If the helper is the selected target and recording is enabled, could
->this call enter the trampoline and dispatcher again, which then calls
->the helper again before the recorder's recursion guard is reached?
->What would contain that recursion before Xen runs out of stack?
+>Somewhere in this comment needs to say that all GPRs need preserving.
 
-Yes, it could enter recursion.
+Ok. I'll add a comment.
 
->Would excluding the helper from instrumentation on both architectures
->help, together with checking the rest of the pre-callback dispatch
->path? The Arm64 helper introduced here looks relevant too:
->
->> --- a/xen/arch/arm/arm64/livepatch.c
->> +++ b/xen/arch/arm/arm64/livepatch.c
->> @@ -497,6 +497,11 @@ int arch_livepatch_perform_rela(struct livepatch_elf *elf,
->>  #ifdef CONFIG_ARM64_PATCHABLE_FUNCTION_ENTRY
->> +unsigned long arch_livepatch_trace_entry(unsigned long addr)
->> +{
->> +    return addr;
->> +}
->
->To illustrate, I think the helper's compiler-generated tracing entry
->could be excluded with a small change like:
->
->--- a/xen/arch/arm/arm64/livepatch.c
->+++ b/xen/arch/arm/arm64/livepatch.c
->@@ -497,7 +497,8 @@ int arch_livepatch_perform_rela(struct livepatch_elf *elf,
-> }
-> 
-> #ifdef CONFIG_ARM64_PATCHABLE_FUNCTION_ENTRY
->-unsigned long arch_livepatch_trace_entry(unsigned long addr)
->+unsigned long __attribute__((patchable_function_entry(0, 0)))
->+arch_livepatch_trace_entry(unsigned long addr)
-> {
->     return addr;
-> }
->--- a/xen/arch/x86/livepatch.c
->+++ b/xen/arch/x86/livepatch.c
->@@ -370,7 +370,8 @@ int arch_livepatch_secure(const void *va, unsigned int pages, enum va_type type)
-> }
-> 
-> #ifdef CONFIG_X86_PATCHABLE_FUNCTION_ENTRY
->-unsigned long arch_livepatch_trace_entry(unsigned long addr)
->+unsigned long __attribute__((patchable_function_entry(0, 0)))
->+arch_livepatch_trace_entry(unsigned long addr)
-> {
->     if ( (is_endbr64((const void *)addr) || is_endbr64_poison((const void *)addr)) )
->         addr += ENDBR64_LEN;
->
->Would this remove these helpers from the compiler-generated entry
->table, using the same attribute as the dispatcher?
-
-Thank you. Yes, I think this should work.
-I'll make sure to mark both functions uninstrumentable.
-
->It only excludes
->these two functions from compiler instrumentation; it does not provide
->a general recursion guard or audit their callees. Uploaded trace
->payloads would still need trace-site validation to enforce the same
->exclusions, rather than relying only on HypFS's entry-table check.
-
-Understood.
-
-For the former concern on recursion, I'll put a guard covering the dispatcher
-following your suggestion:
-https://lore.kernel.org/xen-devel/179284608595.1706038.12585790247811677658.b4-review@b4/
-
-For the latter trace-site validation, please see arch_livepatch_verify_entry()
-which I propose in the reply to your 1/5 patch feedback:
-https://lore.kernel.org/xen-devel/20261026073022.110170-1-takakura@valinux.co.jp/
-I'll add the corresponding x86 validation.
-
->Separately, does the new trampoline need the mitigation-aware RET
->abstraction used elsewhere in Xen?
+>Except...  Looking at arch_generic_hweightl(), my notes about
+>__attribute__((no_caller_saved_registers)) say GCC >= 7 and 8 is already
+>a minimum for the (broken) patchable function entry, let alone the fixed
+>one.
 
 I see.
-Yes, I think it needs to be RET.
 
->> --- /dev/null
->> +++ b/xen/arch/x86/livepatch-asm.S
->> @@ -0,0 +1,60 @@
->> +        popq    %rax
->> +        popfq
->> +        popq    %rbp
->> +        ret
->> +END(xen_livepatch_trace_caller)
->
->For reference, the existing asm/asm-defns.h, included through
->asm/asm_defns.h, contains:
->
->> #ifdef CONFIG_RETURN_THUNK
->> # define RET jmp __x86_return_thunk
->> #else
->> # define RET ret
->> #endif
->
->With CONFIG_RETURN_THUNK enabled, wouldn't a literal ret here bypass
->the configured return thunk? To illustrate, I think this could be
->addressed with a small change like:
->
->--- a/xen/arch/x86/livepatch-asm.S
->+++ b/xen/arch/x86/livepatch-asm.S
->@@ -56,5 +56,5 @@ FUNC(xen_livepatch_trace_caller)
->         popq    %rax
->         popfq
->         popq    %rbp
->-        ret
->+        RET
-> END(xen_livepatch_trace_caller)
->
->Would this preserve the configured return convention with the existing
->include chain?
+>So I think you don't need an ASM trampoline at all.  I think you can
+>merge xen_livepatch_trace_caller() and xen_livepatch_trace_dispatcher()
+>and just tell the compiler to spill all ABI registers.
 
-Yes, I'll fix this in the new version.
+Yes, it would be nice to merge the two...
+But xen_livepatch_trace_dispatcher() is also shared with arm64,
+and GCC does not appear to support no_caller_saved_registers on arm64.
+That makes arm64 still need its ASM trampoline to preserve
+the registers and common C dispatcher.
+Do you think rewriting livepatch_trace_caller() in C while keeping
+livepatch_trace_dispatcher() as common dispatcher would be reasonable?
 
->I also wondered about the C stack alignment at the dispatcher call:
->
->> --- /dev/null
->> +++ b/xen/arch/x86/livepatch-asm.S
->> @@ -0,0 +1,60 @@
+I'm also thinking of adding the attribute force_align_arg_pointer
+to address the Bernhard's feedback on stack alignment:
+https://lore.kernel.org/xen-devel/179285259082.1706038.15527286146285697701.b4-review@b4/
+
+>Also, the xen_ prefixes are redundant.  Just name the function
+>livepatch_trace_caller().
+
+Ok. I'll remove them.
+
+>> + */
 >> +FUNC(xen_livepatch_trace_caller)
 >> +        pushq   %rbp
 >> +        movq    %rsp, %rbp
@@ -325,49 +242,79 @@ Yes, I'll fix this in the new version.
 >> +        pushq   %r9
 >> +        pushq   %r10
 >> +        pushq   %r11
->> [...]
+>> +
+>> +        /*
+>> +         * xen_livepatch_trace_dispatcher(ip, parent_ip)
+>> +         *
+>> +         * ip: Address of the traced function.
+>> +         * parent_ip: Address where the traced function was called.
+>> +         */
 >> +        movq    8(%rbp), %rdi
 >> +        subq    $5, %rdi
 >> +        movq    16(%rbp), %rsi
 >> +        call    xen_livepatch_trace_dispatcher
+>> +
+>> +        /* Restore the saved state. */
+>> +        popq    %r11
+>> +        popq    %r10
+>> +        popq    %r9
+>> +        popq    %r8
+>> +        popq    %rdi
+>> +        popq    %rsi
+>> +        popq    %rdx
+>> +        popq    %rcx
+>> +        popq    %rax
+>> +        popfq
+>> +        popq    %rbp
+>> +        ret
+>> +END(xen_livepatch_trace_caller)
 >
->For a build using the normal 16-byte C stack boundary, wouldn't the
->traced function enter with RSP eight modulo sixteen? The injected call
->then makes it zero, and these eleven pushes leave it eight immediately
->before calling C, rather than zero. Would that give the dispatcher the
->wrong incoming alignment in such a build?
-
-I see.
-I checked it and was working on 8 bytes aligned stack.
-
->The existing xen/arch/x86/arch.mk makes the reduced boundary conditional:
+>Just in case there's a problem doing this all in C...
 >
->> # If supported by the compiler, reduce stack alignment to 8 bytes. But allow
->> # this to be overridden elsewhere.
->> $(call cc-option-add,CFLAGS_stack_boundary,CC,-mpreferred-stack-boundary=3)
+>No need for pushf or popf at all.  Flags are undefined at function
+>boundaries.
 >
->Could the trampoline establish the dispatcher's required alignment
->without assuming this reduction is active, and restore the exact
->original stack afterwards? Is there another build constraint which
->rules out the 16-byte case for this feature?
+>Please drop the q suffixes; they're all unnecessary here.
+>
+>The ret needs to be RET for speculative mitigations.  (It's emitted as
+>JMP which will be turned back into a RET on safe system.)
 
-There is no such constraint ruling out the 16-byte case right now.
-And I'm thinking of making the trampoline into C function with
-the attribute force_align_arg_pointer to make sure the stack is aligned.
-Do you think this would work?
+Understood.
+I'll get them fixed in case if we need a trampoline.
 
-About the discussion on making the trampoline into C function,
-please see the Andrew's feedback:
-https://lore.kernel.org/xen-devel/97d772f1-322f-43f6-a793-fdbba16c7f04@citrix.com/
-
->Finally, could the x86 entry checks address the same restoration issue
->as the Arm64 path discussed on patch 1?
-
-I see. Yes, I think there is the same issue.
-
+>> diff --git a/xen/arch/x86/livepatch.c b/xen/arch/x86/livepatch.c
+>> index 5158e91f7e..1dfcc3e750 100644
 >> --- a/xen/arch/x86/livepatch.c
 >> +++ b/xen/arch/x86/livepatch.c
+>> @@ -19,6 +19,10 @@
+>>  #include <asm/nmi.h>
+>>  #include <asm/setup.h>
+>>  
+>> +#ifdef CONFIG_X86_PATCHABLE_FUNCTION_ENTRY
+>> +extern void xen_livepatch_trace_caller(void);
+>> +#endif
+>
+>You don't need ifdefary around declarations.
+
+Ok. I'll remove them.
+
+>> +
+>>  static bool has_active_waitqueue(const struct vm_event_domain *ved)
+>>  {
+>>      /* ved may be xzalloc()'d without INIT_LIST_HEAD() yet. */
 >> @@ -365,6 +369,35 @@ int arch_livepatch_secure(const void *va, unsigned int pages, enum va_type type)
+>>      return modify_xen_mappings(start, start + pages * PAGE_SIZE, flag);
+>>  }
+>>  
+>> +#ifdef CONFIG_X86_PATCHABLE_FUNCTION_ENTRY
+>> +unsigned long arch_livepatch_trace_entry(unsigned long addr)
+>> +{
+>> +    if ( (is_endbr64((const void *)addr) || is_endbr64_poison((const void *)addr)) )
+>> +        addr += ENDBR64_LEN;
+>> +
+>> +    return addr;
+>> +}
+>> +
 >> +void noinline arch_livepatch_apply_trace(const struct livepatch_func *trace)
 >> +{
 >> +    void *site = (void *)arch_livepatch_trace_entry((unsigned long)trace->old_addr);
@@ -379,6 +326,15 @@ I see. Yes, I think there is the same issue.
 >> +    memcpy(&insn[1], &val, sizeof(val));
 >> +    memcpy(site, insn, sizeof(insn));
 >> +}
+>
+>Why noinline?  These are out-of-line anyway by being cross-TU, but in a
+>theoretical world where we had working LTO, I don't see any problem with
+>them being inlined.
+
+I see. Thanks for explaining.
+Here I added noinline following arch_livepatch_apply().
+I'll remove them.
+
 >> +
 >> +void noinline arch_livepatch_revert_trace(const struct livepatch_func *trace)
 >> +{
@@ -386,45 +342,16 @@ I see. Yes, I think there is the same issue.
 >> +
 >> +    memset(site, 0x90, ARCH_PATCH_INSN_SIZE);
 >> +}
+>> +#endif
 >
->The existing arch_livepatch_verify_func() in this file checks the
->replacement space like this; these lines are not added by this patch:
+>This wants to be a 5 byte NOP, not 5x 1-byte NOPs.
 >
->>         uint8_t needed = ARCH_PATCH_INSN_SIZE;
->>
->>         if ( is_endbr64(func->old_addr) || is_endbr64_poison(func->old_addr) )
->>             needed += ENDBR64_LEN;
->>
->>         if ( func->old_size < needed )
->>             return -EINVAL;
+>I see that GCC is still doing the slow thing.  Clang is doing it's code
+>generation more sensibly.
 >
->ARCH_PATCH_INSN_SIZE is five in asm/livepatch.h. Am I right that this
->checks space but not whether the original bytes are reserved tracing
->NOPs? Could an uploaded .livepatch.traces payload name a sufficiently
->large uninstrumented entry, have real instructions overwritten, and
->then lose them when revert substitutes five NOPs?
+>Use the add_nops() function.
 
-Yes, that could happen.
-
->Would shared trace-site validation for uploaded payloads and HypFS
->requests help establish the original bytes and reject overlapping
->ordinary livepatches? Could the applied offset and restoration state
->also be retained rather than inferred again from a potentially changed
->entry when reverting?
-
-I see, I agree with both.
-
-For the former, I believe it's addressed by my reply to your
-patch 1/5 feedback. Please take a look at arch_livepatch_verify_entry().
-https://lore.kernel.org/xen-devel/20261026073022.110170-1-takakura@valinux.co.jp/
-
-For the latter, I'll follow the existing arch_livepatch_apply()/revert()'s
-save/restore routine in the next version.
-
->Thanks for taking a look. I may have missed a guard or architecture
->constraint elsewhere, so I'd appreciate your view on these cases.
-
-No, you didn't miss anything. Thank you for pointing them out.
+Understood. I'll use add_nops() in the next version.
 
 Sincerely,
 Ryo Takakura
