@@ -2,35 +2,35 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 79E65606A332
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2026 23:30:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 288C9606A324
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2026 23:30:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=18K9dXGF
-Received: from list by lists.xenproject.org with outflank-mailman.1470790.1679419 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=L3hfN98v
+Received: from list by lists.xenproject.org with outflank-mailman.1470792.1679433 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xONxe-0000k2-EK; Tue, 03 Nov 2026 23:30:38 +0000
+	id 1xONxf-00015b-FC; Tue, 03 Nov 2026 23:30:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1470790.1679419; Tue, 03 Nov 2026 23:30:38 +0000
+Received: by outflank-mailman (output) from mailman id 1470792.1679433; Tue, 03 Nov 2026 23:30:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xONxe-0000iG-79; Tue, 03 Nov 2026 23:30:38 +0000
-Received: by outflank-mailman (input) for mailman id 1470790;
- Tue, 03 Nov 2026 23:30:35 +0000
+	id 1xONxf-00013D-5m; Tue, 03 Nov 2026 23:30:39 +0000
+Received: by outflank-mailman (input) for mailman id 1470792;
+ Tue, 03 Nov 2026 23:30:36 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xONxb-0000cB-Sa
+ (envelope-from <gwd@xenproject.org>) id 1xONxb-0000cR-Ue
  for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 23:30:35 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xONxb-0000000Cot8-2LqQ;
+ (envelope-from <gwd@xenproject.org>) id 1xONxb-0000000CotE-2nd9;
  Tue, 03 Nov 2026 23:30:35 +0000
 Received: from [2607:fb91:4c8c:bd3f:1da5:e92a:c5fb:865a]
  (helo=localhost.localdomain)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xONnv-0000000EMFa-1eLx;
- Tue, 03 Nov 2026 23:20:35 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xONo6-0000000EMFa-2CES;
+ Tue, 03 Nov 2026 23:20:47 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -42,22 +42,18 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=XSMwTIeZ5h90J4h/y2ZToyj+1NftG+yZwUVpCV46iA0=; b=18K9dXGFatSNazLPoV4skeQSFT
-	9m9zBHvy/T7zHnZlWGYHWrkTe0ijP/75HmQF7E8VJPDCVhRoE51XkXQMha6iBx0ziBX//YzDTUZoO
-	hTBTN45UpuF5b872RHoYxA9J8NAfVKxdqZRIG1bo2WPGaG7m9IibQF7TFAcAjCp8Hdsc=;
+	bh=ZOf/B1UVKOtb3aCxqsyxbTnFEMbHfy0ZTl7SCHGJvtY=; b=L3hfN98vo62L+nSTqXOD4KSUXO
+	qNpyPmmtZkQ7eHEjXpQt8TtC5bDbE9Ml6sV8aT41QrolraK8mJk/tPAnnKPfbZrmlhKjLpsxi9s64
+	uo7x6fk/IbLTo6Ta9yl/7tJ6G0o7QhH6KIcQsssGHP15BuWn6nnCfQjjkkjRWGFOs2V4=;
 From: George Dunlap <gwd@xenproject.org>
 To: xen-devel@lists.xenproject.org
 Cc: Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Teddy Astie <teddy.astie@vates.tech>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v6 16/44] x86/mm: add hooks for a sparse view of the directmap
-Date: Tue,  3 Nov 2026 17:13:38 -0500
-Message-ID: <20261103-asi-hvm-v6-16-59dbc5ce9615@xenproject.org>
+	Teddy Astie <teddy.astie@vates.tech>
+Subject: [PATCH v6 32/44] x86: move the saved register frame behind the vCPU state window
+Date: Tue,  3 Nov 2026 17:13:54 -0500
+Message-ID: <20261103-asi-hvm-v6-32-59dbc5ce9615@xenproject.org>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261103-asi-hvm-v6-0-59dbc5ce9615@xenproject.org>
 References: <20261103-asi-hvm-v6-0-59dbc5ce9615@xenproject.org>
@@ -71,406 +67,324 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The directmap maps all of RAM, and every root page-table carries it,
-so while any guest context runs, all guest memory is reachable from
-Xen's address space.  For ASI, guest contexts are to run on a sparse
-view of the directmap which maps only what Xen must reach through it
-at all times, leaving guest memory to transient mappings
-(map_domain_page()).
+While a vCPU is not running, its register frame is saved in struct
+vcpu: a xenheap page, mapped in every context, the sparse directmap view
+included.  Under Address Space Isolation that leaves the general-purpose
+registers of every descheduled vCPU reachable from other domains'
+contexts, whether or not the vCPU's own domain is on the sparse view.
 
-A later patch builds such a sparse view alongside the full directmap,
-once the boot allocator has handed its memory to the heap.  It is then
-kept in step:
+Keep the frame instead in a domain-heap page of the vCPU's own, mapped
+for the life of the vCPU at a new slot (index 6) of its state window,
+like the SVM VMCB and the VMX MSR list; indexes 3-5 are left for the
+guest XSAVE area, which takes up to three pages.  Like the VMCB and MSR
+list moves, this does not depend on asi=, and it applies to every guest
+vCPU, PV and HVM: struct vcpu no longer holds a copy.  The page is
+allocated in arch_vcpu_create() ahead of arch_vcpu_regs_init(), which
+initialises the frame, and unmapped before it is freed, on the failure
+path as at teardown.
 
- - xenheap allocations are added, and taken out again before the pages
-   are freed.  If that fails the pages stay mapped, and are leaked with
-   a warning rather than reused;
- - memory handed to the heap later (boot modules, .init) is taken out,
-   and is not handed over if that fails;
- - a PV dom0's initrd, assigned to dom0 in place, is taken out;
- - page-tables from the boot allocator, which the sparse view maps with
-   every other boot-time allocation, are taken out when idle_pg_table's
-   hierarchy frees them, and are not freed if that fails, so that the
-   sparse view never keeps a page the heap may hand out;
- - changes to the full directmap through map_pages_to_xen() and
-   modify_xen_mappings() are mirrored.  After boot, map_pages_to_xen()
-   maps into the directmap only memory Xen keeps (stack guard and shadow
-   stack pages, firmware tables); memory hot-add maps the new range into
-   the full directmap only, so that the sparse view never needs
-   page-table pages for it.
+An HVM vCPU using per-vCPU page tables has its window in its own page
+tables.  For any other vCPU, PV ones included, the window is in the
+per-domain area that all its domain's vCPUs share, which only that
+domain's page tables map: a context on the sparse view reaches no other
+domain's frames.  That includes a domain left off the sparse view, such
+as dom0 under asi=1,dom0=0, whose vCPUs' frames are no longer mapped in
+the contexts of the domUs on the sparse view.
 
-Add a hook at each of these points, and one where the view is to be
-built; x86's are stubs in a new asm/sparse-directmap.h.  map_pages_in()
-and modify_mappings_in() are no longer static: memory hot-add calls
-map_pages_in() on idle_pg_table, and the sparse view will use both.
+__context_switch() saves the outgoing vCPU's frame while its page tables
+are still loaded, and now restores the incoming vCPU's only after
+write_ptbase(), once its window is mapped.  Nothing in between reads the
+frame: set_xcr0(), the FPU restore, the ctxt_switch->to() hooks, and the
+PSR and GDT updates.  Both copies go through the window address, with
+interrupts off; a transient mapping would complete the lazy context
+switch and re-enter __context_switch().
 
-Common code gains four hooks for this, arch_heap_pages_init(),
-arch_xenheap_needs_scrub() and arch_xenheap_pages_{alloc,free}(), no-ops
-until an architecture implements them.  A failed
-arch_xenheap_pages_alloc() may have mapped part of the pages:
-alloc_xenheap_pages() then takes them out through
-arch_xenheap_pages_free(), as a free would, before freeing them, and
-leaks them if that fails too.
+The save is skipped if the outgoing vCPU's page tables are no longer
+loaded.  Only the shadow-mode paths which abandon a PV vCPU's page
+tables early (update_cr3() failure in new_guest_cr3() and
+_toggle_guest_pt()) leave them so, loading the idle page tables once
+they have crashed the domain; anything else reaching that point is a
+page-table tracking bug, fatal in every build.  After such a crash the
+vCPU's saved frame is the one it was last switched in with, not its
+registers at the crash, and that is what XEN_DOMCTL_getvcpucontext and
+the debug keys report for it.
 
-alloc_xenheap_pages() accepts pages still awaiting scrubbing
-(MEMF_no_scrub).  That is harmless while the directmap maps all memory
-anyway, but the sparse view would make such a page's contents, a dying
-domain's data for instance, reachable from every context on it until
-overwritten.  With a sparse view configured, arch_xenheap_needs_scrub()
-makes xenheap allocations scrub those pages first, as domain heap
-allocations do; clean pages need nothing extra.
+VCPU_MAP_REGS() returns the window address when the vCPU is running
+here on its own page tables (v == current and this_cpu(pgtable_vcpu) ==
+v), and otherwise a transient mapping of the page, which, for a single
+page, cannot fail.  Its users all work on a vCPU other than the one
+running here, normally paused or not yet run: vCPU creation, the
+toolstack's vCPU context, the HVM CPU record, VCPUOP_initialise,
+INIT/SIPI and S3 resets, a hypercall continued on another CPU, PV dom0
+construction, and the debug-key dumps.  The vCPU's own page tables
+being loaded is not enough: while a CPU holds a vCPU's state lazily
+they are loaded there, but an IPI syncing that state for another CPU
+can switch them away at any time.  VCPU_UNMAP_REGS() drops a transient
+mapping with unmap_vcpu_state_page(), which also flushes this CPU's
+translation.
 
-arch_mfns_in_directmap() says whether an MFN range is reachable through
-the directmap; it now answers for every context, so false once a sparse
-view is configured.  Its one caller, init_node_heap(), then keeps a NUMA
-node's heap metadata in the xenheap instead of carving it out of the
-node's memory through the directmap: carved out of a range handed to the
-heap, it would be left out of the sparse view, which every heap
-allocation needs it in.
+The live frame on the pCPU's stack, which holds a running vCPU's
+registers, is not affected.
 
-The hooks for now are just stubs.  No functional change.
+Cost: a page per guest vCPU, and a transient mapping on each of the
+cold paths above.  On every switch into a guest vCPU, the restore
+reaches the frame through a 4KiB, non-global PTE in the per-domain
+area, just after switch_cr3_cr4() has flushed the TLB, so it takes a
+page walk, where struct vcpu was reached through a superpage of the
+full directmap.  struct vcpu shrinks from 3072 to 2880 bytes (x86_64
+defconfig).
 
 Assisted-by: Claude Code:claude-opus-5-5
 Signed-off-by: George Dunlap <gwd@xenproject.org>
 ---
 Changes in v5:
-- New in this version, split out of "x86/mm: build and maintain a sparse
-  view of the directmap".
+- New in this version.
 ---
- xen/arch/x86/include/asm/mm.h               | 12 +++++-
- xen/arch/x86/include/asm/sparse-directmap.h | 30 +++++++++++++++
- xen/arch/x86/mm.c                           | 30 ++++++++++++---
- xen/arch/x86/pv/dom0_build.c                |  4 ++
- xen/arch/x86/setup.c                        |  4 ++
- xen/arch/x86/x86_64/mm.c                    | 10 ++++-
- xen/common/page_alloc.c                     | 41 ++++++++++++++++++++-
- xen/include/xen/mm.h                        | 21 +++++++++++
- 8 files changed, 142 insertions(+), 10 deletions(-)
- create mode 100644 xen/arch/x86/include/asm/sparse-directmap.h
+ xen/arch/x86/domain.c             | 98 ++++++++++++++++++++++++++++++-
+ xen/arch/x86/include/asm/config.h |  1 +
+ xen/arch/x86/include/asm/domain.h | 26 +++++---
+ 3 files changed, 116 insertions(+), 9 deletions(-)
 
-diff --git a/xen/arch/x86/include/asm/mm.h b/xen/arch/x86/include/asm/mm.h
-index 7b9a0f561d..61dc317dd4 100644
---- a/xen/arch/x86/include/asm/mm.h
-+++ b/xen/arch/x86/include/asm/mm.h
-@@ -7,6 +7,7 @@
- #include <xen/rwlock.h>
- #include <asm/io.h>
- #include <asm/page.h>
-+#include <asm/sparse-directmap.h>
- #include <asm/uaccess.h>
- 
- /*
-@@ -599,6 +600,11 @@ mfn_t alloc_xen_pagetable(void);
- void free_xen_pagetable(mfn_t mfn);
- void *alloc_mapped_pagetable(mfn_t *pmfn);
- 
-+int map_pages_in(l4_pgentry_t *root, unsigned long virt, mfn_t mfn,
-+                 unsigned long nr_mfns, pte_attr_t flags);
-+int modify_mappings_in(l4_pgentry_t *root, unsigned long s, unsigned long e,
-+                       pte_attr_t nf);
-+
- int __sync_local_execstate(void);
- 
- /* Arch-specific portion of memory_op hypercall. */
-@@ -660,12 +666,16 @@ void write_32bit_pse_identmap(uint32_t *l2);
- 
- /*
-  * x86 maps part of physical memory via the directmap region.
-- * Return whether the range of MFN falls in the directmap region.
-+ * Return whether the range of MFN falls in the directmap region in every
-+ * context: never, with a sparse directmap view configured.
-  */
- static inline bool arch_mfns_in_directmap(unsigned long mfn, unsigned long nr)
- {
-     unsigned long eva = min(DIRECTMAP_VIRT_END, HYPERVISOR_VIRT_END);
- 
-+    if ( sparse_dmap_configured() )
-+        return false;
-+
-     return (mfn + nr) <= (virt_to_mfn(eva - 1) + 1);
+diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+index 143f76babf..03f6572086 100644
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -17,6 +17,7 @@
+ #include <xen/cpu.h>
+ #include <xen/delay.h>
+ #include <xen/domain.h>
++#include <xen/domain_page.h>
+ #include <xen/errno.h>
+ #include <xen/event.h>
+ #include <xen/grant_table.h>
+@@ -493,6 +494,66 @@ unsigned int arch_domain_struct_memflags(void)
+     return MEMF_bits(bits);
  }
- 
-diff --git a/xen/arch/x86/include/asm/sparse-directmap.h b/xen/arch/x86/include/asm/sparse-directmap.h
-new file mode 100644
-index 0000000000..53747a98ad
---- /dev/null
-+++ b/xen/arch/x86/include/asm/sparse-directmap.h
-@@ -0,0 +1,30 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+#ifndef X86_SPARSE_DIRECTMAP_H
-+#define X86_SPARSE_DIRECTMAP_H
-+
-+#include <xen/mm-frame.h>
-+#include <xen/mm-types.h>
-+#include <asm/page.h>
-+
-+static inline bool sparse_dmap_configured(void) { return false; }
-+static inline void sparse_dmap_init(void) {}
-+static inline int sparse_dmap_mirror_map(unsigned long virt, mfn_t mfn,
-+                                         unsigned long nr, pte_attr_t flags)
-+{
-+    return 0;
-+}
-+static inline int sparse_dmap_mirror_modify(unsigned long s, unsigned long e,
-+                                            pte_attr_t nf)
-+{
-+    return 0;
-+}
-+static inline int sparse_dmap_remove(mfn_t mfn, unsigned long nr)
-+{
-+    return 0;
-+}
-+static inline int sparse_dmap_drop_pagetable(mfn_t mfn)
-+{
-+    return 0;
-+}
-+
-+#endif /* X86_SPARSE_DIRECTMAP_H */
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index 39c6fa3d56..904ed7a258 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -127,6 +127,7 @@
- #include <asm/setup.h>
- #include <asm/shadow.h>
- #include <asm/shared.h>
-+#include <asm/sparse-directmap.h>
- #include <asm/trampoline.h>
- #include <asm/traps.h>
- #include <asm/x86_emulate.h>
-@@ -5442,10 +5443,17 @@ mfn_t xen_map_to_mfn(unsigned long va)
- 
- /*
-  * Free a page-table page that the hierarchy rooted at @root has stopped
-- * using.
-+ * using.  One of idle_pg_table's may be in the sparse directmap view: it is
-+ * taken out first, under the sparse view's L3 lock inside an L3 lock of
-+ * idle_pg_table's hierarchy (the only order in which the two nest), and
-+ * kept if that fails.  The sparse view's own page-tables are not in it, and
-+ * are freed directly: the caller may hold the sparse view's L3 lock.
-  */
- static void free_pagetable_in(const l4_pgentry_t *root, mfn_t mfn)
- {
-+    if ( root == idle_pg_table && sparse_dmap_drop_pagetable(mfn) )
-+        return;
-+
-     free_xen_pagetable(mfn);
- }
- 
-@@ -5453,7 +5461,7 @@ static void free_pagetable_in(const l4_pgentry_t *root, mfn_t mfn)
-  * map_pages_to_xen() in the hierarchy rooted at @root: idle_pg_table's, or
-  * another hierarchy sharing its virtual addresses.
-  */
--static int map_pages_in(
-+int map_pages_in(
-     l4_pgentry_t *root,
-     unsigned long virt,
-     mfn_t mfn,
-@@ -5865,7 +5873,12 @@ int map_pages_to_xen(
-     unsigned long nr_mfns,
-     pte_attr_t flags)
- {
--    return map_pages_in(idle_pg_table, virt, mfn, nr_mfns, flags);
-+    int rc = map_pages_in(idle_pg_table, virt, mfn, nr_mfns, flags);
-+
-+    if ( !rc )
-+        rc = sparse_dmap_mirror_map(virt, mfn, nr_mfns, flags);
-+
-+    return rc;
- }
- 
- int __init populate_pt_range(unsigned long virt, unsigned long nr_mfns)
-@@ -5888,8 +5901,8 @@ int __init populate_pt_range(unsigned long virt, unsigned long nr_mfns)
-  * modify_mappings_in() does so in the hierarchy rooted at @root, as
-  * map_pages_in() does.
-  */
--static int modify_mappings_in(l4_pgentry_t *root, unsigned long s,
--                              unsigned long e, pte_attr_t nf)
-+int modify_mappings_in(l4_pgentry_t *root, unsigned long s,
-+                       unsigned long e, pte_attr_t nf)
- {
-     bool locking = system_state > SYS_STATE_boot;
-     l3_pgentry_t *pl3e = NULL;
-@@ -6169,7 +6182,12 @@ static int modify_mappings_in(l4_pgentry_t *root, unsigned long s,
- 
- int modify_xen_mappings(unsigned long s, unsigned long e, pte_attr_t nf)
- {
--    return modify_mappings_in(idle_pg_table, s, e, nf);
-+    int rc = modify_mappings_in(idle_pg_table, s, e, nf);
-+
-+    if ( !rc )
-+        rc = sparse_dmap_mirror_modify(s, e, nf);
-+
-+    return rc;
- }
- 
- int destroy_xen_mappings(unsigned long s, unsigned long e)
-diff --git a/xen/arch/x86/pv/dom0_build.c b/xen/arch/x86/pv/dom0_build.c
-index dd64af5616..829eafd67d 100644
---- a/xen/arch/x86/pv/dom0_build.c
-+++ b/xen/arch/x86/pv/dom0_build.c
-@@ -22,6 +22,7 @@
- #include <asm/pv/mm.h>
- #include <asm/setup.h>
- #include <asm/shadow.h>
-+#include <asm/sparse-directmap.h>
- 
- /* Allow ring-3 access in long mode as guest cannot use ring 1 ... */
- #define BASE_PROT (_PAGE_PRESENT|_PAGE_RW|_PAGE_ACCESSED|_PAGE_USER)
-@@ -650,6 +651,9 @@ static int __init dom0_construct(const struct boot_domain *bd)
-         {
-             if ( assign_pages(mfn_to_page(_mfn(initrd_mfn)), count, d, 0) )
-                 BUG();
-+            /* The initrd is dom0's now: out of the sparse directmap. */
-+            if ( sparse_dmap_remove(_mfn(initrd_mfn), PFN_UP(initrd_len)) )
-+                panic("Cannot unmap dom0's initrd\n");
-             /*
-              * We have mapped the initrd directly into dom0, and assigned the
-              * pages. Tell the boot_module handling that we've freed it, so the
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index df7cfcc563..e23ded0c86 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -54,6 +54,7 @@
- #include <asm/spec_ctrl.h>
- #include <asm/stubs.h>
- #include <asm/tboot.h>
-+#include <asm/sparse-directmap.h>
- #include <asm/trampoline.h>
- #include <asm/traps.h>
- 
-@@ -1946,6 +1947,9 @@ void asmlinkage __init noreturn __start_xen(void)
-         }
-     }
- 
-+    /* The heap now has all memory, and page-tables come from it. */
-+    sparse_dmap_init();
-+
-     bsp_stack = cpu_alloc_stack(0); /* Needs to know IDT vs FRED */
-     if ( !bsp_stack )
-         panic("No memory for BSP stack\n");
-diff --git a/xen/arch/x86/x86_64/mm.c b/xen/arch/x86/x86_64/mm.c
-index 7b04537066..c5d9dd64a3 100644
---- a/xen/arch/x86/x86_64/mm.c
-+++ b/xen/arch/x86/x86_64/mm.c
-@@ -1231,8 +1231,14 @@ int memory_add(unsigned long spfn, unsigned long epfn, unsigned int pxm)
-     i = virt_to_mfn(HYPERVISOR_VIRT_END - 1) + 1;
-     if ( spfn < i )
-     {
--        ret = map_pages_to_xen((unsigned long)mfn_to_virt(spfn), _mfn(spfn),
--                               min(epfn, i) - spfn, PAGE_HYPERVISOR);
-+        /*
-+         * Into the full directmap only, not a sparse directmap view: the
-+         * frame table and M2P carved from the start of the range are
-+         * reached through their own mappings, and the rest goes to the
-+         * heap, which the sparse view leaves out.
-+         */
-+        ret = map_pages_in(idle_pg_table, (unsigned long)mfn_to_virt(spfn),
-+                           _mfn(spfn), min(epfn, i) - spfn, PAGE_HYPERVISOR);
-         if ( ret )
-             goto destroy_directmap;
-     }
-diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
-index 5243dba29f..2150dcbd5e 100644
---- a/xen/common/page_alloc.c
-+++ b/xen/common/page_alloc.c
-@@ -1971,6 +1971,9 @@ static void init_heap_pages(
-     unsigned long i;
-     bool need_scrub = scrub_debug;
- 
-+    if ( !arch_heap_pages_init(page_to_mfn(pg), nr_pages) )
-+        return;
-+
-     /*
-      * Keep MFN 0 away from the buddy allocator to avoid crossing zone
-      * boundary when merging two buddies.
-@@ -2540,10 +2543,33 @@ void *alloc_xenheap_pages(unsigned int order, unsigned int memflags)
-     if ( !(memflags >> _MEMF_bits) )
-         memflags |= MEMF_bits(xenheap_bits);
- 
--    pg = alloc_domheap_pages(NULL, order, memflags | MEMF_no_scrub);
-+    /*
-+     * Pages still awaiting scrubbing may do as xenheap pages: the directmap
-+     * maps them anyway.  Not so if an arch's sparse directmap view makes them
-+     * reachable where the rest of the heap's memory is not.
-+     */
-+    if ( !arch_xenheap_needs_scrub() )
-+        memflags |= MEMF_no_scrub;
-+
-+    pg = alloc_domheap_pages(NULL, order, memflags);
-     if ( unlikely(pg == NULL) )
-         return NULL;
- 
-+    if ( arch_xenheap_pages_alloc(page_to_mfn(pg), order) )
-+    {
-+        /*
-+         * The hook may have mapped part of the pages before failing: take
-+         * them out again as a free would, and leak them if that fails too.
-+         */
-+        if ( arch_xenheap_pages_free(page_to_mfn(pg), order) )
-+            printk(XENLOG_WARNING
-+                   "Leaking xenheap pages %"PRI_mfn"+%u: still mapped\n",
-+                   mfn_x(page_to_mfn(pg)), 1U << order);
-+        else
-+            free_domheap_pages(pg, order);
-+        return NULL;
-+    }
-+
-     for ( i = 0; i < (1u << order); i++ )
-         pg[i].count_info |= PGC_xen_heap;
- 
-@@ -2562,6 +2588,19 @@ void free_xenheap_pages(void *v, unsigned int order)
- 
-     pg = virt_to_page(v);
- 
-+    /*
-+     * If the pages cannot be taken out of an arch's sparse directmap view,
-+     * they may remain reachable through it: leak them rather than hand them
-+     * out.
-+     */
-+    if ( arch_xenheap_pages_free(page_to_mfn(pg), order) )
-+    {
-+        printk(XENLOG_WARNING
-+               "Leaking xenheap pages %"PRI_mfn"+%u: still mapped\n",
-+               mfn_x(page_to_mfn(pg)), 1U << order);
-+        return;
-+    }
-+
-     for ( i = 0; i < (1u << order); i++ )
-         pg[i].count_info &= ~PGC_xen_heap;
- 
-diff --git a/xen/include/xen/mm.h b/xen/include/xen/mm.h
-index 153c57f5dd..e8f9993286 100644
---- a/xen/include/xen/mm.h
-+++ b/xen/include/xen/mm.h
-@@ -94,6 +94,27 @@ bool scrub_free_pages(void);
- #define alloc_xenheap_page() (alloc_xenheap_pages(0,0))
- #define free_xenheap_page(v) (free_xenheap_pages(v,0))
  
 +/*
-+ * Hooks for an architecture keeping a second, sparse view of its directmap,
-+ * which maps the xenheap but not the rest of the heap's memory.
++ * A vCPU keeps its register frame, while it is not running, in a domain-heap
++ * page of its own, mapped for the life of the vCPU at a fixed slot of its
++ * state window.
 + */
-+static inline bool arch_heap_pages_init(mfn_t mfn, unsigned long nr)
++static struct cpu_user_regs *regs_window(const struct vcpu *v)
 +{
-+    return true;
++    return (void *)VCPU_STATE_ADDR(v, VCPU_STATE_IDX_REGS);
 +}
-+static inline bool arch_xenheap_needs_scrub(void)
++
++static int vcpu_regs_alloc(struct vcpu *v)
 +{
-+    return false;
-+}
-+static inline int arch_xenheap_pages_alloc(mfn_t mfn, unsigned int order)
-+{
-+    return 0;
-+}
-+static inline int arch_xenheap_pages_free(mfn_t mfn, unsigned int order)
-+{
++    struct page_info *pg = alloc_domheap_page(v->domain, MEMF_no_owner);
++    mfn_t mfn;
++
++    if ( !pg )
++        return -ENOMEM;
++
++    mfn = page_to_mfn(pg);
++    clear_domain_page(mfn);
++    populate_perdomain_mapping(v, VCPU_STATE_ADDR(v, VCPU_STATE_IDX_REGS),
++                               &mfn, 1, __PAGE_HYPERVISOR_RW);
++    v->arch.regs_pg = pg;
++
 +    return 0;
 +}
 +
- /* Free an allocation, and zero the pointer to it. */
- #define FREE_XENHEAP_PAGES(p, o) do { \
-     void *_ptr_ = (p);                \
++static void vcpu_regs_free(struct vcpu *v)
++{
++    struct page_info *pg = v->arch.regs_pg;
++
++    if ( !pg )
++        return;
++
++    unmap_vcpu_state(v, VCPU_STATE_IDX_REGS, 1);
++    v->arch.regs_pg = NULL;
++    free_domheap_page(pg);
++}
++
++struct cpu_user_regs *vcpu_map_regs(const struct vcpu *v)
++{
++    /*
++     * v's page tables being loaded is not enough: while this CPU holds v's
++     * state lazily, an IPI syncing that state for another CPU can switch
++     * them away at any time.
++     */
++    if ( v == current && this_cpu(pgtable_vcpu) == v )
++        return regs_window(v);
++
++    return __map_domain_page(v->arch.regs_pg);
++}
++
++void vcpu_unmap_regs(const struct vcpu *v, const struct cpu_user_regs *regs)
++{
++    if ( !regs || regs == regs_window(v) )
++        return;
++
++    unmap_vcpu_state_page(regs);
++}
++
+ /* Initialise various registers to their architectural INIT/RESET state. */
+ void arch_vcpu_regs_init(struct vcpu *v)
+ {
+@@ -533,6 +594,7 @@ int arch_vcpu_create(struct vcpu *v)
+         BUILD_BUG_ON(VCPU_STATE_IDX_VMCB >= VCPU_STATE_NR_PAGES);
+         BUILD_BUG_ON(VCPU_STATE_IDX_N2VMCB >= VCPU_STATE_NR_PAGES);
+         BUILD_BUG_ON(VCPU_STATE_IDX_VMX_MSR >= VCPU_STATE_NR_PAGES);
++        BUILD_BUG_ON(VCPU_STATE_IDX_REGS >= VCPU_STATE_NR_PAGES);
+         /* Page tables only; torn down with the rest of the per-domain area. */
+         rc = create_perdomain_mapping(v, VCPU_STATE_START(v),
+                                       VCPU_STATE_NR_PAGES,
+@@ -547,6 +609,10 @@ int arch_vcpu_create(struct vcpu *v)
+ 
+         vmce_init_vcpu(v);
+ 
++        /* The frame's storage, ahead of its initialisation. */
++        if ( (rc = vcpu_regs_alloc(v)) != 0 )
++            goto fail;
++
+         arch_vcpu_regs_init(v);
+ 
+         if ( (rc = init_vcpu_msr_policy(v)) )
+@@ -589,6 +655,7 @@ int arch_vcpu_create(struct vcpu *v)
+  fail:
+     paging_vcpu_teardown(v);
+     vcpu_destroy_fpu(v);
++    vcpu_regs_free(v);
+     xfree(v->arch.msrs);
+     v->arch.msrs = NULL;
+     free_pervcpu_mappings(v);
+@@ -613,6 +680,8 @@ void arch_vcpu_destroy(struct vcpu *v)
+     else
+         ASSERT_UNREACHABLE();
+ 
++    vcpu_regs_free(v);
++
+     free_pervcpu_mappings(v);
+ }
+ 
+@@ -2135,6 +2204,19 @@ static void load_default_gdt(unsigned int cpu)
+     per_cpu(full_gdt_loaded, cpu) = false;
+ }
+ 
++/*
++ * The register frame of p or n, for __context_switch(), which runs with
++ * interrupts off and with the vCPU's own page tables loaded: the window
++ * address serves.  A transient mapping is not an option from here: it would
++ * complete the lazy context switch and re-enter __context_switch().
++ */
++static struct cpu_user_regs *vcpu_user_regs(const struct vcpu *v)
++{
++    BUG_ON(this_cpu(pgtable_vcpu) != v);
++
++    return regs_window(v);
++}
++
+ static void __context_switch(void)
+ {
+     struct cpu_user_regs *stack_regs = guest_cpu_user_regs();
+@@ -2149,7 +2231,17 @@ static void __context_switch(void)
+     if ( !is_idle_domain(pd) )
+     {
+         ASSERT(read_atomic(&p->dirty_cpu) == cpu);
+-        memcpy(&p->arch._user_regs, stack_regs, CTXT_SWITCH_STACK_BYTES);
++        /*
++         * p's frame is reached through its state window, mapped while p's
++         * own page tables are loaded, as they normally still are here.  Not
++         * so after the shadow-mode paths which abandon a vCPU's tables early
++         * (update_cr3() failure), which have crashed the domain: the frame
++         * is left unsaved.  A transient mapping would re-enter this function.
++         */
++        if ( likely(this_cpu(pgtable_vcpu) == p) )
++            memcpy(vcpu_user_regs(p), stack_regs, CTXT_SWITCH_STACK_BYTES);
++        else
++            BUG_ON(!domain_shutting_down(pd));
+         vcpu_save_fpu(p);
+         pd->arch.ctxt_switch->from(p);
+     }
+@@ -2165,7 +2257,6 @@ static void __context_switch(void)
+ 
+     if ( !is_idle_domain(nd) )
+     {
+-        memcpy(stack_regs, &n->arch._user_regs, CTXT_SWITCH_STACK_BYTES);
+         if ( cpu_has_xsave )
+         {
+             if ( !set_xcr0(n->arch.xcr0 ?: XSTATE_FP_SSE) )
+@@ -2189,6 +2280,9 @@ static void __context_switch(void)
+ 
+     write_ptbase(n);
+ 
++    if ( !is_idle_domain(nd) )
++        memcpy(stack_regs, vcpu_user_regs(n), CTXT_SWITCH_STACK_BYTES);
++
+ #ifdef CONFIG_PV
+     /* Prefetch the VMCB if we expect to use it later in the context switch */
+     if ( using_svm() && is_pv_64bit_domain(nd) && !is_idle_domain(nd) )
+diff --git a/xen/arch/x86/include/asm/config.h b/xen/arch/x86/include/asm/config.h
+index 8a265e25c8..c8d4a8ddc7 100644
+--- a/xen/arch/x86/include/asm/config.h
++++ b/xen/arch/x86/include/asm/config.h
+@@ -311,6 +311,7 @@ extern unsigned long xen_phys_start;
+ #define VCPU_STATE_IDX_VMCB      0
+ #define VCPU_STATE_IDX_N2VMCB    1
+ #define VCPU_STATE_IDX_VMX_MSR   2
++#define VCPU_STATE_IDX_REGS      6
+ 
+ #define ELFSIZE 64
+ 
+diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
+index 457eb69ace..6b27af9eb5 100644
+--- a/xen/arch/x86/include/asm/domain.h
++++ b/xen/arch/x86/include/asm/domain.h
+@@ -633,11 +633,12 @@ struct pv_vcpu
+ struct arch_vcpu
+ {
+     /*
+-     * The vCPU's register frame while it is not running: __context_switch()
+-     * copies it here from the stack when the vCPU is switched out, and back
+-     * when it is switched in.  Everything else goes through VCPU_MAP_REGS().
++     * The page holding the vCPU's register frame while it is not running,
++     * mapped in its state window: __context_switch() copies the frame there
++     * from the stack when the vCPU is switched out, and back when it is
++     * switched in.  Everything else goes through VCPU_MAP_REGS().
+      */
+-    struct cpu_user_regs _user_regs;
++    struct page_info *regs_pg;
+ 
+     /* Debug registers. */
+     unsigned long dr[4];
+@@ -752,12 +753,20 @@ static inline void free_vcpu_guest_context(struct vcpu_guest_context *vgc)
+  * registers for code working on a vCPU other than the one running (whose
+  * registers are on the stack, see guest_cpu_user_regs()).
+  *
++ * The frame is in the vCPU's state window: the window address serves while
++ * the vCPU runs here on its own page tables, and the page is mapped
++ * transiently otherwise, which cannot fail.
++ *
+  * The pointer is valid until VCPU_UNMAP_REGS(), which clears it.  A mapping
+- * must not be held across a scheduling point.
++ * must not be held across a scheduling point: a transient one is only valid
++ * on the pCPU which made it.
+  *
+  * @param v Owner of the register frame
+  */
+-#define VCPU_MAP_REGS(v) (&(v)->arch._user_regs)
++struct cpu_user_regs *vcpu_map_regs(const struct vcpu *v);
++void vcpu_unmap_regs(const struct vcpu *v, const struct cpu_user_regs *regs);
++
++#define VCPU_MAP_REGS(v) vcpu_map_regs(v)
+ 
+ /*
+  * Drops the mapping of a vCPU's register frame and nullifies its pointer.
+@@ -765,7 +774,10 @@ static inline void free_vcpu_guest_context(struct vcpu_guest_context *vgc)
+  * @param v Owner of the register frame
+  * @param r Register frame of v, from VCPU_MAP_REGS()
+  */
+-#define VCPU_UNMAP_REGS(v, r) do { (void)(v); (r) = NULL; } while ( false )
++#define VCPU_UNMAP_REGS(v, r) do {  \
++    vcpu_unmap_regs(v, r);          \
++    (r) = NULL;                     \
++} while ( false )
+ 
+ void arch_vcpu_regs_init(struct vcpu *v);
+ 
 -- 
 2.56.0
 
