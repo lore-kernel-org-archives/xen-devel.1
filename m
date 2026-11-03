@@ -2,35 +2,35 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1917F606A32F
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 47103606A330
 	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2026 23:31:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=PFdYYBSl
-Received: from list by lists.xenproject.org with outflank-mailman.1470813.1679600 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=htbWlk3K
+Received: from list by lists.xenproject.org with outflank-mailman.1470816.1679629 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xONy7-0006iZ-K5; Tue, 03 Nov 2026 23:31:07 +0000
+	id 1xONyF-0008VS-Fs; Tue, 03 Nov 2026 23:31:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1470813.1679600; Tue, 03 Nov 2026 23:31:07 +0000
+Received: by outflank-mailman (output) from mailman id 1470816.1679629; Tue, 03 Nov 2026 23:31:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xONy5-0006ZJ-Ls; Tue, 03 Nov 2026 23:31:05 +0000
-Received: by outflank-mailman (input) for mailman id 1470813;
- Tue, 03 Nov 2026 23:30:36 +0000
+	id 1xONyD-0008OB-RC; Tue, 03 Nov 2026 23:31:13 +0000
+Received: by outflank-mailman (input) for mailman id 1470816;
+ Tue, 03 Nov 2026 23:30:41 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xONxc-0000e7-Iz
- for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 23:30:36 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xONxg-0001WI-Tw
+ for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 23:30:40 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xONxc-0000000CowF-2ALZ;
- Tue, 03 Nov 2026 23:30:36 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xONxb-0000000CotS-3RdR;
+ Tue, 03 Nov 2026 23:30:35 +0000
 Received: from [2607:fb91:4c8c:bd3f:1da5:e92a:c5fb:865a]
  (helo=localhost.localdomain)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xONoB-0000000EMFa-2YLH;
- Tue, 03 Nov 2026 23:20:51 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xONoC-0000000EMFa-0N4x;
+ Tue, 03 Nov 2026 23:20:52 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -42,18 +42,19 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=tI8rWUCKpztUW6i1B6fFTfydag4KVKVQaRj7AWM+f08=; b=PFdYYBSlPazogd+zDW6QBUkiY7
-	krXZyDtMh2h+WOSWP1a1EFPa1w38RNzW0hp5gW/O75U0cR9bV8/udKImyscxFr7oztXsToMuO2UoV
-	ew3BI2Iu2sVSETl1QmuahdOYfFPWIyUpRz8gvT72MKaMsaUUy1KdmPD73w8akAQp/gCs=;
+	bh=FlX8i68BurZZbddP5JFg/suxuQm3LKHJ87QfUKq0fho=; b=htbWlk3KJqG5vECGkaAg8TQ5wn
+	7uXoaZRD1izMpagwbi1PMdwVCkrkUJhA57EeehYboSwoZRIgbCCdD8UU5x6Nhv2vmIM3MuoeLq1+h
+	9z6DjsG9kaBLG0RdTM0mqMQQ+zAXmfUxe9D5WL5KE6V1TTT9KA6HI49qTdC2vrQ84PoM=;
 From: George Dunlap <gwd@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>,
+Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
+	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
 	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v6 37/44] x86/hvm: use map_domain_pages() for multi-frame emulated accesses
-Date: Tue,  3 Nov 2026 17:13:59 -0500
-Message-ID: <20261103-asi-hvm-v6-37-59dbc5ce9615@xenproject.org>
+Subject: [PATCH v6 38/44] x86/emulator: Refactor FXSAVE_AREA to use wrappers
+Date: Tue,  3 Nov 2026 17:14:00 -0500
+Message-ID: <20261103-asi-hvm-v6-38-59dbc5ce9615@xenproject.org>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261103-asi-hvm-v6-0-59dbc5ce9615@xenproject.org>
 References: <20261103-asi-hvm-v6-0-59dbc5ce9615@xenproject.org>
@@ -67,66 +68,140 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-hvmemul_map_linear_addr() picks its mapping method purely on the frame
-count: one frame goes through map_domain_page(), more through vmap() --
-mapping the guest data in every context for the duration, those of
-domains on the sparse directmap view included, whatever the guest's own
-configuration.  map_domain_pages() maps them only in the page tables of
-the guest's own domain; use it for the multi-frame case.
+From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 
-The NULL return handling is unchanged: the primitive can fail only for
-want of a free slot, and the access then bails out as unhandleable
-exactly as before.
+The FXSAVE/FXRSTOR emulation scratch buffer is the calling vCPU's own
+XSAVE area, reached today through a raw pointer dereference.  Route it
+through the VCPU_MAP_XSAVE_AREA()/VCPU_UNMAP_XSAVE_AREA() seam
+instead, so the buffer keeps working when guest XSAVE areas move
+behind per-vCPU mappings.  This path always operates on `current`, for
+which the map has a fastpath; the unmap is a no-op outside Xen builds.
 
-This is one of the two in-tree consumers of the primitive.  Other
-long-lived global mappings of guest pages (the ioreq server pages among
-them) remain in the vmap area.
+The macro pair is named MAP_FXSAVE_AREA()/UNMAP_FXSAVE_AREA() rather
+than keeping the bare FXSAVE_AREA name, so that the mapping operation
+is visible at the use sites.
 
+blk_fxsave() saves directly into the caller's buffer when it is large
+enough, so it needs a second variable: the save destination and the
+mapped area are not the same pointer, and only the latter may be
+handed to the unmap.
+
+Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-5-5
 Signed-off-by: George Dunlap <gwd@xenproject.org>
+
 ---
+Revived from "x86: Address Space Isolation FPU preparations" v3 patch
+08/12 (<20250110132823.24348-9-alejandro.vallejo@cloud.com>, Acked-by
+Jan Beulich modulo the rename below; no v4 was ever posted).
+
 Changes in v5:
 - New in this version.
----
- xen/arch/x86/hvm/emulate.c | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/emulate.c b/xen/arch/x86/hvm/emulate.c
-index da7c08b5d9..7e7beccb93 100644
---- a/xen/arch/x86/hvm/emulate.c
-+++ b/xen/arch/x86/hvm/emulate.c
-@@ -735,7 +735,8 @@ static void *hvmemul_map_linear_addr(
+Changes since the previously posted version:
+ - Renamed FXSAVE_AREA to MAP_FXSAVE_AREA(), as requested by Jan
+   Beulich on the original thread ("the existing macro better would be
+   adjusted to become MAP_FXSAVE_AREA()"), making the map operation
+   visible at the use sites.
+ - Introduced the separate save-destination variable in blk_fxsave().
+   The original unmapped `fxsr` after that variable had been
+   repointed at the caller's buffer, so the unmap received a pointer
+   that was never mapped.  Harmless while the unmap was a stub, but a
+   latent bug, and exactly the class of mistake Jan predicted in the
+   message quoted above when he objected to the mapping being
+   invisible at the use sites.
+ - Reworded the commit message.
+ - Unmap before raising #GP for a reserved MXCSR bit in blk_fxrstor:
+   generate_exception_if() leaves through the done: label, past the
+   unmap.
+---
+ xen/arch/x86/x86_emulate/blk.c | 36 +++++++++++++++++++++++-----------
+ 1 file changed, 25 insertions(+), 11 deletions(-)
+
+diff --git a/xen/arch/x86/x86_emulate/blk.c b/xen/arch/x86/x86_emulate/blk.c
+index 9fddf649ee..b3055c8084 100644
+--- a/xen/arch/x86/x86_emulate/blk.c
++++ b/xen/arch/x86/x86_emulate/blk.c
+@@ -11,9 +11,12 @@
+     !defined(X86EMUL_NO_SIMD)
+ # ifdef __XEN__
+ #  include <asm/xstate.h>
+-#  define FXSAVE_AREA ((void *)&current->arch.xsave_area->fpu_sse)
++/* Has a fastpath for `current`, so there's no actual map */
++#  define MAP_FXSAVE_AREA() ((void *)VCPU_MAP_XSAVE_AREA(current))
++#  define UNMAP_FXSAVE_AREA(x) VCPU_UNMAP_XSAVE_AREA(current, x)
+ # else
+-#  define FXSAVE_AREA get_fpu_save_area()
++#  define MAP_FXSAVE_AREA() get_fpu_save_area()
++#  define UNMAP_FXSAVE_AREA(x) ((void)(x))
+ # endif
+ #endif
  
-     /*
-      * The maximum access size depends on the number of adjacent mfns[] which
--     * can be vmap()'d, accouting for possible misalignment within the region.
-+     * can be mapped together, accounting for possible misalignment within
-+     * the region.
-      * The higher level emulation callers are responsible for ensuring that
-      * mfns[] is large enough for the requested access size.
-      */
-@@ -824,9 +825,9 @@ static void *hvmemul_map_linear_addr(
-     /* Entire access within a single frame? */
-     if ( nr_frames == 1 )
-         mapping = map_domain_page(hvmemul_ctxt->mfn[0]);
--    /* Multiple frames? Need to vmap(). */
--    else if ( (mapping = vmap(hvmemul_ctxt->mfn,
--                              nr_frames)) == NULL )
-+    /* Multiple frames? Need a multi-page mapping. */
-+    else if ( (mapping = map_domain_pages(hvmemul_ctxt->mfn,
-+                                          nr_frames)) == NULL )
-         goto unhandleable;
+@@ -254,7 +257,7 @@ int x86_emul_blk(
  
- #ifndef NDEBUG /* Poision unused mfn[]s with INVALID_MFN. */
-@@ -867,7 +868,7 @@ static void hvmemul_unmap_linear_addr(
-     if ( nr_frames == 1 )
-         unmap_domain_page(mapping);
-     else
--        vunmap(mapping);
-+        unmap_domain_pages(mapping, nr_frames);
- 
-     for ( i = 0; i < nr_frames; i++ )
+     case blk_fxrstor:
      {
+-        struct x86_fxsr *fxsr = FXSAVE_AREA;
++        struct x86_fxsr *fxsr = MAP_FXSAVE_AREA();
+ 
+         ASSERT(!data);
+         ASSERT(bytes == sizeof(*fxsr));
+@@ -277,18 +280,26 @@ int x86_emul_blk(
+                               (unsigned int)offsetof(struct x86_fxsr, rsvd)));
+         memset(fxsr->rsvd, 0, sizeof(*fxsr) - offsetof(struct x86_fxsr, rsvd));
+ 
+-        generate_exception_if(fxsr->mxcsr & ~mxcsr_mask, X86_EXC_GP, 0);
++        if ( fxsr->mxcsr & ~mxcsr_mask )
++        {
++            UNMAP_FXSAVE_AREA(fxsr);
++            generate_exception(X86_EXC_GP, 0);
++        }
+ 
+         if ( s->rex_prefix & REX_W )
+             asm volatile ( "fxrstorq %0" :: "m" (*fxsr) );
+         else
+             asm volatile ( "fxrstor %0" :: "m" (*fxsr) );
++
++        UNMAP_FXSAVE_AREA(fxsr);
++
+         break;
+     }
+ 
+     case blk_fxsave:
+     {
+-        struct x86_fxsr *fxsr = FXSAVE_AREA;
++        struct x86_fxsr *fxsr = MAP_FXSAVE_AREA();
++        struct x86_fxsr *dst = fxsr;
+ 
+         ASSERT(!data);
+         ASSERT(bytes == sizeof(*fxsr));
+@@ -296,17 +307,20 @@ int x86_emul_blk(
+ 
+         if ( s->op_bytes < sizeof(*fxsr) )
+             /* Don't chance consuming uninitialized data. */
+-            memset(fxsr, 0, s->op_bytes);
++            memset(dst, 0, s->op_bytes);
+         else
+-            fxsr = ptr;
++            dst = ptr;
+ 
+         if ( s->rex_prefix & REX_W )
+-            asm volatile ( "fxsaveq %0" : "=m" (*fxsr) );
++            asm volatile ( "fxsaveq %0" : "=m" (*dst) );
+         else
+-            asm volatile ( "fxsave %0" : "=m" (*fxsr) );
++            asm volatile ( "fxsave %0" : "=m" (*dst) );
++
++        if ( dst != ptr ) /* i.e. s->op_bytes < sizeof(*fxsr) */
++            memcpy(ptr, dst, s->op_bytes);
++
++        UNMAP_FXSAVE_AREA(fxsr);
+ 
+-        if ( fxsr != ptr ) /* i.e. s->op_bytes < sizeof(*fxsr) */
+-            memcpy(ptr, fxsr, s->op_bytes);
+         break;
+     }
+ 
 -- 
 2.56.0
 
