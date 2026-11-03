@@ -2,45 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 74588606A32C
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2026 15:29:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77A55606A32D
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2026 15:30:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=google header.b=Z4jsgKUC
-Received: from list by lists.xenproject.org with outflank-mailman.1470119.1678898 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=google header.b=pAvu/Y8R
+Received: from list by lists.xenproject.org with outflank-mailman.1470114.1678854 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOGSE-0006zq-Qi; Tue, 03 Nov 2026 15:29:42 +0000
+	id 1xOGS9-0005wM-Hr; Tue, 03 Nov 2026 15:29:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1470119.1678898; Tue, 03 Nov 2026 15:29:42 +0000
+Received: by outflank-mailman (output) from mailman id 1470114.1678854; Tue, 03 Nov 2026 15:29:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOGSE-0006zb-Mm; Tue, 03 Nov 2026 15:29:42 +0000
-Received: by outflank-mailman (input) for mailman id 1470119;
- Tue, 03 Nov 2026 15:29:41 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xOGSD-0006jS-EP
- for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 15:29:41 +0000
+	id 1xOGS9-0005wF-EX; Tue, 03 Nov 2026 15:29:37 +0000
+Received: by outflank-mailman (input) for mailman id 1470114;
+ Tue, 03 Nov 2026 15:29:36 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <andrew.cooper3@citrix.com>) id 1xOGS8-0005ut-0R
+ for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 15:29:36 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xOGSC-0040rM-KI
- for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 16:29:40 +0100
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xOGS7-007Ik4-4s
+ for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 16:29:35 +0100
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <andrew.cooper3@citrix.com>)
- id 6ae9fdcd-bab6-0a2a0a5309dd-0a2a4509d89c-48
- for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 16:29:40 +0100
-Received: from [209.85.218.44] (helo=mail-ej1-f44.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ae9fdd8-e002-0a2a0a5209dd-0a2a45069112-16
+ for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 16:29:34 +0100
+Received: from [209.85.221.48] (helo=mail-wr1-f48.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <andrew.cooper3@citrix.com>)
- id 6ae9fde4-be1a-0a2a45090019-d155da2cb5f2-3
- for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 16:29:40 +0100
-Received: by mail-ej1-f44.google.com with SMTP id
- a640c23a62f3a-c414e5d282eso516700766b.1
- for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 07:29:40 -0800 (PST)
+ id 6ae9fdde-195a-0a2a45060019-d155dd30d5aa-3
+ for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 16:29:34 +0100
+Received: by mail-wr1-f48.google.com with SMTP id
+ ffacd0b85a97d-48e47347279so2718731f8f.1
+ for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 07:29:34 -0800 (PST)
 Received: from localhost.localdomain (host-78-146-248-75.as13285.net.
  [78.146.248.75]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e71b959c1sm25430467f8f.45.2026.11.03.07.29.38
+ ffacd0b85a97d-48e71b959c1sm25430467f8f.45.2026.11.03.07.29.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Nov 2026 07:29:38 -0800 (PST)
+ Tue, 03 Nov 2026 07:29:33 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,44 +50,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1793719780; x=1794324580; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=YXonRJiUpIIQUGfPHULNa0+riN0YTsjAc2+s6FHrnD0=;
-        b=Z4jsgKUCt1nv4RpXDOqlxCB6LJCLwIfUv7rZF95n7suf2jP85wjXv2679FoYhszdYg
-         T8/RYMiR0TEpDdIQAPQBTWk/ONdhCZaS7nXKnNHwEDEAUU9XGbxd3phu3TG4K3fRElG2
-         i0h9eePot8KFdlni9E6l5UOFBW2+98b/94ZlU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793719780; x=1794324580;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=citrix.com; s=google; t=1793719774; x=1794324574; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=YXonRJiUpIIQUGfPHULNa0+riN0YTsjAc2+s6FHrnD0=;
-        b=CeLRrQJ1NN7WIX+qYVSWJmuseua4LikYkNssPrmtN51i+VaTzs01RT3T3uZt9mKves
-         bIdKnu6uEeFTJyQRKs0pLMDlwBCkqjQN1ZtTWtjzpjgpAd/8hYRQiyd6HaZKs+XpBeUO
-         K8cFOOAT6etfzPCpydqlrwR1FkNzKEv+u+VpJR3RPKBNhM3s2q0a6/HXirs3xoBY6U6V
-         eEmnoXTf9d6PXh8XHD3EiI1ILzqFUKk5dQ17oShUftr0xlrJ1ZQobRCnB8aGAkd1CfcG
-         ++D0iXgE5Xke1aCsvwbCqeAJ6Nr+5VhVEddEcroGXVKKHXFE/mPFpCnT3tiG08odmJSb
-         fewg==
-X-Gm-Message-State: APuU4Z9BIsfHTEUKyDgmBNnddeOef6jOrc/Cg9AtqtoUMD0CitB+4Asn
-	8ZkhVMnb5A0IwO17OfpuNjCa+w4ub6TKjgu9lwWsiGaZ3mF7SCfYFrKTABoNAhgItORq1nAIrAq
-	QQBD9M9U=
-X-Gm-Gg: AYBFou0UkbOtNAWMQ9CcUzAmJl+MscDXIqaIWvSr07VV9ocv+nqT+4NxiR8Rq74L1lo
-	dxrEPCSmWoyEx4V7ElIfQGw/IWwwimxeqVXKhsD3GPw9mSPneqGboR9OBsggPLSGz0nY9PRoUHK
-	6p9rNsEAdiOhnaEZ0DY69ICkJDxhj+A1kdn6w6bJEIlBAMNXtjb5zp6PBfu+14EAOwd/goHbd+x
-	HO7GzeCMPAxkvVNw1bjwKQ+Es/J3zdb6WQjZI2DovMzigrlfTvf66QBF7cTvbQmEi/m7Rk1HNfr
-	UqZTxq8az1QVy79TtdtY4lxgpXjSyQRsMIaEz3IfJScGlnT4VzPZskg1WDp9HU8JXGdou9YJwAH
-	Hxy5exOPt02oip4MtoMOzRdV8pkXDHhjrQbATsLrAaI5P9U8uFn6Ip8jnD4ZUqIvB2cNcyPKCw0
-	EwiXJOePxv7rGluiyqNSjJVi+gdKV1rd2uYJscLc7eILyTGul2hCn4cD0qNP/K7G1BCsueprsn6
-	T4g1Z84VAlpRLVDH5bHmz/sDCKJdzO9ewGpFfBDz/VBLgHMEvzlgoF5YoW5Ils6njzrbRJIbK5p
-	Be1+qj7hddXqU3LtekLZoqNn6RQj479Nvgiq9kWJZ2oHGG1vgXwLk9t6z/4keybYIkFF5r5CVKH
-	4X0e7Tv1z3mE5eRk1/YV4Sh4U
-X-Received: by 2002:a17:906:99c9:b0:c2d:c247:5400 with SMTP id a640c23a62f3a-c4ca7b405c5mr1089032866b.27.1793719779322;
-        Tue, 03 Nov 2026 07:29:39 -0800 (PST)
+        bh=JLUNCn2/D5g5yvkcTLpH7WqPGLr39WKTjFC7rSB4uPo=;
+        b=pAvu/Y8RLp+QF+xI3cpcMf8ZIKcntYK5ckqNk/bWKtgd+UPDu9XktqpmcuhZ6iufz5
+         nZUi3cwXHK6j3xSStDK8yKJzVN/Ptx70Exz1xuhivhZiVIgW2Way6qG4iMI/DMvDC5Bg
+         NlsNbYc3b1nZkTVJjR9T+OJu/OJnJSlbQarlQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793719774; x=1794324574;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=JLUNCn2/D5g5yvkcTLpH7WqPGLr39WKTjFC7rSB4uPo=;
+        b=t+w47tUXwHMdBYHKYci3DgZ1SZY9wBaCoGkv7rHVyhi/XVGRWrWkal/f8Wlq2ErlJ7
+         CYjXjobDsnZdf6x1JTl//cxgXWSp71b0aClWRyWqJN7TZjhuyq56VavJpk6sZNtgJfiL
+         1SJwdUs+H9fy/LOZDlfaG/RHRcDLLNa5F9zpqVZupz7VjnEyLlmj6BbU1rsr2bQHlgMT
+         vN+r3rUr+/Y0q+wNJa5AhwIxncwvFzy0PJvLPB48qWKXv4SOXAurTFQNzTHZtT6J0FfT
+         Wx8UEL+v8afk7pTmJlYn3y9iK7gTYYTBYvf+GO+5EBzXXlHgoS6s58bFOc1x57VRYYxx
+         kkDQ==
+X-Gm-Message-State: APuU4Z+cBqCgXv3YFhd+NPlcFYZIJ6sSimnrYAHNTewPBDubvyKj/BVZ
+	gNYVjnzC+mQk8jDujAbrF+Yp1WLthvK7rnvn+/niB0QqkbapU8U2s0533zU7g0X+qgTfAgQFFO3
+	BT96fiT0=
+X-Gm-Gg: AYBFou0qCMpV3ek7iIMPFsmxypNCrOejSHsUPPm5pCESK4hgF+KDkWJA6G44Qr33lQu
+	X/kzbwvu5fa9yIpCafMr3bYJiwFC/nqpeTQjphAhE2pr6WnmWYvuwAVyKGRrh79/r9oEqbDPE6B
+	mnnXjBlk6O5NRx90nR8J+MVr89zO0XQIkwxK0tk6yNdMn7kT3Jrmohkc9m++HdFSYBB3pzCXgph
+	4PgbKSOxELQeGJHC7+kQvfUPTHwpmmtfOZgCQZK57Iloa3+f94uM5a5SwYhh9jC+BlKmWgI7Uam
+	VxZwqxzDa9aREnPKvmd4QFcEOpf/CWe3hPjwDTZ5r+ZQXrVHrwwqzWy9jLm60nXytPEbzO25IOY
+	oRM1KW1J4Qo+vmneD/YvY/e/a7XVCvOV4pPFaRJ5fSthlWOcv/ld64w4+GFP2y3yDL10GAlUrIz
+	nz0V2rS/bZU/fKMSGHeIchoRnt7iXesv3jiTfVkT6SrAK767O4n4p93ae5k43Y5vhWeLr8v/Lxw
+	uJchIVEwY0lejyFuJiv5uZS50B/EF3U9MGr+50BUAgNLjkUASCXwj7+aftculk7YRy2tAwTzbKW
+	10V3M4EO/nHJVdpOJJznar1KqgeaNVQ8nvjWjHkz9SJjSYu/y7LaoZTLoFg7DMCkn1oWvi/1R76
+	d+UjPS8O0ZzJdsZa4up03O6sV
+X-Received: by 2002:a05:6000:4810:b0:487:106f:ee31 with SMTP id ffacd0b85a97d-48e6e304036mr32900523f8f.27.1793719774017;
+        Tue, 03 Nov 2026 07:29:34 -0800 (PST)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -100,78 +100,40 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 	Teddy Astie <teddy.astie@vates.tech>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
 	Baptiste Le Duc <baptiste.le-duc@vates.tech>
-Subject: [PATCH 5/6] xen/gnttab: Fold error handling in _cache_flush()
-Date: Tue,  3 Nov 2026 15:29:27 +0000
-Message-Id: <20261103152928.2142176-6-andrew.cooper3@citrix.com>
+Subject: [PATCH 0/6] xen/gnttab: XSA-519/520 followup
+Date: Tue,  3 Nov 2026 15:29:22 +0000
+Message-Id: <20261103152928.2142176-1-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20261103152928.2142176-1-andrew.cooper3@citrix.com>
-References: <20261103152928.2142176-1-andrew.cooper3@citrix.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1793719780-FC610034-42FF5581/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 1656
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-purgate-ID: tlsNG-16d1c6/1793719774-F460277B-7281E0F5/0/0
+X-purgate-type: clean
+X-purgate-size: 677
+X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-No functional change.
+Andrew Cooper (6):
+  xen/gnttab: Drop owner->grant_table check in _cache_flush()
+  xen/gnttab: Disallow GNTTABOP_cache_flush from non-direct-mapped
+    domains
+  xen/gnttab: Remove explicit rcu_lock_current_domain()
+  xen/gnttab: Document how _cache_flush() works
+  xen/gnttab: Fold error handling in _cache_flush()
+  treewide: Make {invalidate/clean}_dcahce_va_range() void
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Julien Grall <julien@xen.org>
-CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-CC: Bertrand Marquis <bertrand.marquis@arm.com>
-CC: Michal Orzel <michal.orzel@amd.com>
-CC: Jan Beulich <jbeulich@suse.com>
-CC: Roger Pau Monné <roger@xenproject.org>
-CC: Teddy Astie <teddy.astie@vates.tech>
-CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-CC: Baptiste Le Duc <baptiste.le-duc@vates.tech>
----
- xen/common/grant_table.c | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
+ xen/arch/arm/include/asm/page.h   | 20 +++++--------
+ xen/arch/riscv/include/asm/page.h | 10 ++-----
+ xen/arch/riscv/mm.c               |  4 +--
+ xen/common/grant_table.c          | 48 ++++++++++++++++---------------
+ 4 files changed, 36 insertions(+), 46 deletions(-)
 
-diff --git a/xen/common/grant_table.c b/xen/common/grant_table.c
-index 4cc23f9231e6..d453c38556fc 100644
---- a/xen/common/grant_table.c
-+++ b/xen/common/grant_table.c
-@@ -3647,9 +3647,8 @@ static int _cache_flush(gnttab_cache_flush_t *cflush, grant_ref_t *cur_ref)
-         act = grant_map_exists(d, owner->grant_table, mfn, cur_ref);
-         if ( IS_ERR_OR_NULL(act) )
-         {
--            grant_read_unlock(owner->grant_table);
--            put_page(page);
--            return act ? PTR_ERR(act) : 1;
-+            ret = act ? PTR_ERR(act) : 1;
-+            goto gnt_unlock;
-         }
- 
-         /*
-@@ -3683,13 +3682,15 @@ static int _cache_flush(gnttab_cache_flush_t *cflush, grant_ref_t *cur_ref)
-     else
-         ret = 0;
- 
-+    unmap_domain_page(v);
-+
-     if ( d != owner )
-     {
-         active_entry_release(act);
-+    gnt_unlock:
-         grant_read_unlock(owner->grant_table);
-     }
- 
--    unmap_domain_page(v);
-     put_page(page);
- 
-     return ret;
 -- 
 2.39.5
 
