@@ -2,54 +2,49 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 12C3D606A326
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2026 13:55:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 18C45606A33F
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2026 14:05:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=h4fLuo8G
-Received: from list by lists.xenproject.org with outflank-mailman.1469847.1678611 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=cXEWXShv
+Received: from list by lists.xenproject.org with outflank-mailman.1469861.1678620 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOEzD-0006vy-SV; Tue, 03 Nov 2026 13:55:39 +0000
+	id 1xOF7y-0000vR-Pj; Tue, 03 Nov 2026 14:04:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1469847.1678611; Tue, 03 Nov 2026 13:55:39 +0000
+Received: by outflank-mailman (output) from mailman id 1469861.1678620; Tue, 03 Nov 2026 14:04:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOEzD-0006vr-PH; Tue, 03 Nov 2026 13:55:39 +0000
-Received: by outflank-mailman (input) for mailman id 1469847;
- Tue, 03 Nov 2026 13:55:38 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <berrange@redhat.com>) id 1xOEzC-0006vf-41
- for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 13:55:38 +0000
+	id 1xOF7y-0000vK-Me; Tue, 03 Nov 2026 14:04:42 +0000
+Received: by outflank-mailman (input) for mailman id 1469861;
+ Tue, 03 Nov 2026 14:04:40 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xOF7w-0000vE-AM
+ for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 14:04:40 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xOEzB-006zxr-Go
- for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 14:55:37 +0100
-Received: from [10.42.69.11] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <berrange@redhat.com>)
- id 6ae9e7d0-8faa-0a2a0a5109dd-0a2a450bc31c-34
- for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 14:55:34 +0100
-Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <berrange@redhat.com>)
- id 6ae9e7d5-b7e8-0a2a450b0019-aa0a857c9fbf-3
- for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 14:55:34 +0100
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-60-FkhH78s2NBeluyaD0FvwgA-1; Tue,
- 03 Nov 2026 08:55:29 -0500
-Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id DC4591955BC4; Tue,  3 Nov 2026 13:55:21 +0000 (UTC)
-Received: from redhat.com (headnet04.pony-001.prod.iad2.dc.redhat.com
- [10.2.32.116])
- by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 82727195608C; Tue,  3 Nov 2026 13:55:10 +0000 (UTC)
+ id 1xOF7v-007SJY-BW
+ for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 15:04:39 +0100
+Received: from [10.42.69.2] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1a1b9ce9c000403d@swg.vates.tech>)
+ id 6ae9e9f6-bab6-0a2a0a5309dd-0a2a4502abb8-4
+ for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 15:04:39 +0100
+Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1a1b9ce9c000403d@swg.vates.tech>)
+ id 6ae9e9f6-6ca4-0a2a45020019-b9ff1c129a53-3
+ for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 15:04:38 +0100
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a1a1b9ce9c000403d.008 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Tue, 03 Nov 2026 14:04:31 +0000
+Received: from leducb.home (areims-651-1-80-194.w90-18.abo.wanadoo.fr
+ [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 299B980CEA;
+ Tue,  3 Nov 2026 15:04:30 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -58,194 +53,176 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1793714132;
-	h=from:from:reply-to:reply-to:subject:subject:date:date:
-	 message-id:message-id:to:to:cc:cc:mime-version:mime-version:
-	 content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=HkLAd4qQaoBYZVRD0j1kGkVYOIEsMDHpcx8amGDTFMA=;
-	b=h4fLuo8GqIm7LMlrEK4WhlkOzhOVNtG6hKH6YcCxJioF5znXlnxIziMIko246klldJ8TKN
-	Kc5eGyqObbXXdZHGCtmzX5Rm6RZ5YDzztoOzF9pfcbJZUv2SpD0Pu2BeadS7k4l6qpctRf
-	P+nVd/oKBCkjpDmpxQ4o8wbtSq6KLAs=
-X-MC-Unique: FkhH78s2NBeluyaD0FvwgA-1
-X-Mimecast-MFC-AGG-ID: FkhH78s2NBeluyaD0FvwgA_1793714124
-Date: Tue, 3 Nov 2026 13:55:07 +0000
-From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-To: Yonggang Luo <luoyonggang@gmail.com>
-Cc: BALATON Zoltan <balaton@eik.bme.hu>,
-	Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
-	qemu-devel@nongnu.org, Anthony PERARD <anthony@xenproject.org>,
-	Felipe Balbi <balbi@kernel.org>,
-	Aleksandar Rikalo <arikalo@gmail.com>,
-	Philippe Mathieu-Daude <philmd@mailo.com>,
-	Antony Pavlov <antonynpavlov@gmail.com>,
-	Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=xR3LshpJf4aU8udUWzTEmL0l5bpW90W538KPPuHClJU=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:feedback-id;
+ b=cXEWXShvBM0KSeva+tvUeLNA1COf899JBgsM/5/JEhANTNIfquv7aG/SDJ+M9SMlBuk+ddO7O
+ +6LmqYYjPFLoy1Y4AtDRfl7KVDXjvoLGYJ6D02VAQSQcTVp2wT9AfkViqSnKd6qP85Y7FIrnAwF
+ R85Kz0zLBn5T+ZScrYLwOPVuNqRC+nOPQiB3/SanLQVaKpjg1umFUnZbAY2kqCReYCr3Exlm477
+ q34ilEHfLj89Dwp65iiQOOvYtCb5oIlJOViD4PxO9OcEOXcQN9jqftxOWmgjJbk9mNfCEiBB/i0
+ vXww63koGgJel0Ly+KrOBEpQ0QlzRxKe/ZzAEctMK2OA==
+X-Zone-Loop: 04442828bf1c3092a27254946025411a94df66c4648e
+x-campaign-type: default
+x-transaction-id: b93ca29c-3ced-4058-ae8d-abe08ef3ffee
+x-swg-uid: 01-c96d6d35-4e7f-4c8e-9947-06953e23a605
+X-Mailer: Sweego
+Message-ID:
+ <1793714671.8631fc262581453bbf619ec5b2062170.1a1a1b9ce9c000403d@vates.tech>
+x-swg-bid: 1793714671.8631fc262581453bbf619ec5b2062170.1a1a1b9ce9c000403d
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+To: xen-devel@lists.xenproject.org
+Cc: Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+	Doug Goldstein <cardoe@cardoe.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Subbaraya Sundeep <sundeep.lkml@gmail.com>,
-	=?utf-8?B?SGVydsOp?= Poussineau <hpoussin@reactos.org>,
-	Max Filippov <jcmvbkbc@gmail.com>,
-	Niek Linnenbank <nieklinnenbank@gmail.com>,
-	xen-devel@lists.xenproject.org, qemu-riscv@nongnu.org,
-	Jean-Christophe Dubois <jcd@tribudubois.net>, qemu-ppc@nongnu.org,
-	Alexandre Iooss <erdnaxe@crans.org>,
-	Weiwei Li <liwei1518@gmail.com>, Zhao Liu <zhao1.liu@intel.com>,
-	Jiaxun Yang <jiaxun.yang@flygoat.com>,
-	Strahinja Jankovic <strahinja.p.jankovic@gmail.com>,
-	Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
-	Thomas Huth <th.huth+qemu@posteo.eu>,
-	=?utf-8?Q?Cl=C3=A9ment?= Chigot <chigot@adacore.com>,
-	Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
-	Yoshinori Sato <yoshinori.sato@nifty.com>,
-	Frederic Konrad <konrad.frederic@yahoo.fr>,
-	Palmer Dabbelt <palmer@dabbelt.com>,
-	Peter Maydell <peter.maydell@linaro.org>,
-	Chao Liu <chao.liu@processmission.com>,
-	Sai Pavan Boddu <sai.pavan.boddu@amd.com>,
-	Alistair Francis <alistair@alistair23.me>,
-	Huacai Chen <chenhuacai@kernel.org>,
-	Aurelien Jarno <aurelien@aurel32.net>,
-	Gaurav Sharma <gaurav.sharma_7@nxp.com>,
-	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
-	Richard Henderson <richard.henderson@linaro.org>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Alistair Francis <alistair.francis@wdc.com>,
-	Artyom Tarasenko <atar4qemu@gmail.com>, qemu-arm@nongnu.org
-Subject: Re: [PATCH 00/15] hw: expand DEFINE_MACHINE to explicit TypeInfo
- registration
-Message-ID: <aunnuwhsx9ZOOXBX@redhat.com>
-Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-References: <20261030151539.1872-1-luoyonggang@gmail.com>
- <d1db54c6-b802-676a-7779-0c2c63f5f807@eik.bme.hu>
- <aa70e94c-d9a8-41c9-850f-7ded87f7f327@oss.qualcomm.com>
- <aumYOBw-nKQAWdYK@redhat.com>
- <CAE2XoE8Xwevk523OfB+GgwbRu0iVnyD4VNOx81rj7J7F5aq=OA@mail.gmail.com>
- <54851326-3627-2b86-57d6-c338ed4e4b50@eik.bme.hu>
- <CAE2XoE_P2mZAT8wZwzFsTqJTK8nxNSSqJRrOM2T-AJkQjwJHBw@mail.gmail.com>
+	Connor Davis <connojdavis@gmail.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Alejandro Vallejo <alejandro.garciavallejo@amd.com>,
+	Zhang Zheng <zhangzheng@iscas.ac.cn>
+Subject: [PATCH v3 0/6] CI: run the riscv64 smoke test with the QTB framework
+Date: Tue,  3 Nov 2026 15:04:13 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <CAE2XoE_P2mZAT8wZwzFsTqJTK8nxNSSqJRrOM2T-AJkQjwJHBw@mail.gmail.com>
-User-Agent: Mutt/2.4.3 (2026-10-09)
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
-X-Mimecast-MFC-PROC-ID: nx6NLDKONS1Upu0bA268i6IzawI6178LAYrl9LYrB3A_1793714124
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain; charset="utf-8"
+X-Change-ID: 20261103-qtb-framework-pytest-f3ed28e4bd78
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793714580; l=5996; i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id; bh=/ItNJDnAZ8idEcB3e4PBLEVjvavObGnb/Xj0R/bL8Vs=; b=K2FZLfcokUN5ijqWddOyY/dD5MwhOry/whF2t3AmLWq9SbjDDkXhwbqDZQj63Xql5xH0fLDxm wR3cO2MTyCPA2RxRC8cO+0ZKl9eZscc6g0CJIztOzFF9yLTbe/sXXtT
+X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519; pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-42698a/1793714134-194C39EA-896082AF/35/111497
-X-purgate-type: clean
-X-purgate-size: 5076
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=4.0.1
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1793714670358
+X-purgate-ID: tlsNG-720697/1793714678-F38BC2AC-9951DD7E/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 5998
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Tue, Nov 03, 2026 at 09:48:44PM +0800, Yonggang Luo wrote:
-> On Tue, Nov 3, 2026 at 9:23 PM BALATON Zoltan <balaton@eik.bme.hu> wrote:
-> >
-> > On Tue, 3 Nov 2026, Yonggang Luo wrote:
-> > > On Tue, Nov 3, 2026 at 4:16 PM Daniel P. Berrangé <berrange@redhat.com> wrote:
-> > >>
-> > >> On Fri, Oct 30, 2026 at 05:51:44PM -0800, Pierrick Bouvier wrote:
-> > >>> On 10/30/2026 4:09 PM, BALATON Zoltan wrote:
-> > >>>> On Fri, 30 Oct 2026, Yonggang Luo wrote:
-> > >>>>> DEFINE_MACHINE and DEFINE_MACHINE_EXTENDED hide the TypeInfo and the
-> > >>>>> type_init
-> > >>>>> function that calls type_register_static(). A later change needs to
-> > >>>>> pass a
-> > >>>>
-> > >>>> That's the point of the macro to hide the boiler plate code.
-> > >>>>
-> > >>>>> target mask into that registration, and the macros have no parameter
-> > >>>>> for it.
-> > >>>>
-> > >>>> Couldn't you just change the macros to take that parameter instead of
-> > >>>> expanding it everywhere?
-> > >>>>
-> > >>>
-> > >>> Problem of macros is that they don't have default parameters, so you
-> > >>> need variants for everything:
-> > >>>
-> > >>> DEFINE_MACHINE
-> > >>> DEFINE_MACHINE_EXTENDED
-> > >>> DEFINE_MACHINE_WITH_INTERFACES
-> > >>> DEFINE_MACHINE_WITH_INTERFACE_ARRAY
-> > >>> and now would need a new variant, with variant for other existing ones.
-> > >>>
-> > >>> In the end, it's just simpler to remove this and add the boilerplate.
-> > >>> It's written once and never modified, so using a macro just save typing
-> > >>> those lines once.
-> > >>
-> > >> For each machine, it is only written once, but we add machines
-> > >> over time, and every time a new machine is added the code style
-> > >> is slightly different. We introduced all the variuos DEFINE_*
-> > >> macros for QOM to better ensure consistent style and usage as
-> > >> new code is added over time.
-> > >
-> > > I understand that the DEFINE_* macros are bloating because of this.
-> > > Indeed currently the only two macros used are "DEFINE_MACHINE" and
-> > > "DEFINE_MACHINE_EXTENDED"
-> >
-> > There are a few machines using some others but these are the most used.
-> > That suggests maybe we should change the convenience wrappers to match
-> > what machines need but DEFINE_MACHINE_EXTENDED is meant to be the one that
-> > allows all parameters which should be rarely needed.
-> >
-> > > ; each time people want to add a new attribute, the macros is twiced.
-> >
-> > Not necessarily. The SECURE parameter did that to preserve previous
-> > behaviour but if you add new parameter changing all callers (which is the
-> > same as expanding the macro that would also change all callers) then it's
-> > just a new parameter added not changing the number of DEFINE_MACHINE*
-> > wrappers. Rearranging the wrappers to make DEFINE_MACHINE_EXTENDED used
-> > less is an independent change.
-> >
-> > > And the usage of DEFINE_MACHINE_EXTENDED is rare and can be replaced
-> > > with DEFINE_TYPES or TypeInfo
-> > > and be more explicit. When we used as macro parameter, we need think
-> >
-> > But that defies the purpose of hiding the QOM boiler plate as much as
-> > possible. New people are confused by QOM and it's easier for them to look
-> > up documentation on the DEFINE_MACHINE* macros to see what parameter is
-> > what and not care about how it's stored in QOM TypeInfo or what is that
-> > at all.
-> >
-> > > what's that parameter means, and for
-> > > TypeInfo, we can directly know what that member is about(because we
-> > > are assigned with the member name).
-> >
-> > The parameter also has a name and documentation so it's not simpler to
-> > look up TypeInfo than look at the macro definition or docs. In fact it's
-> > harder to guess from TypeInfo as then you also need to get into QOM.
-> >
-> > > That's why I suggest keeping a single DEFINE_MACHINE, just like
-> > > DEFINE_TYPES; as they are the most
-> > > used macros(and simple enough), and won't suffer from changes much.
-> >
-> > That means exposing all the boiler plate for all machines other than the
-> > simplest case. I think it would be better to keep DEFINE_MACHINE_EXTENDED
-> > but maybe rethink the existing wrappers and drop unused ones and maybe add
-> > new ones that reduce the usage of DEFINE_MACHINE_EXTENDED but still keep
-> > the boiler plate hidden.
-> 
-> Thanks, I'll go this way, remove unused macros, and keep DEFINE_MACHINE_EXTENDED
-> and extend both DEFINE_MACHINE_EXTENDED DEFINE_MACHINE supports
-> "targets" or "arch_mask" parameter.
+The current riscv64 smoke test (qemu-smoke-riscv64.sh) boots Xen under QEMU
+and waits for "All set up" with expect. That is enough for one string on
+one console, but RISC-V dom0less, in flight on xen-devel, would appreciate
+having more: a matrix of pCPU counts, schedulers and domU layouts, and
+checks on several consoles (Xen's and each domU's).
 
-Given that we don't need to do general per-arch type filtering in
-QOM, we could just move 'is_available' out of TypeInfo, and into the
-MachineClass, so it is a regular class level property, which can be
-set in the class_init methods, and thus avoid any changes to the
-DEFINE_MACHINE macros.
+This series adds a small pytest framework built on AMD's QTB (QEMU Test
+Bench) Python package [1]. It was written as part of the Xen safety
+initiative and drives a QEMU instance over qtest, QMP and GDB, so a test
+has full access to the machine while the emulation runs: read and write the
+consoles, inspect registers and memory, inject interrupts and faults. QTB
+is not upstream in QEMU yet, but is planned to be. Using QTB for the
+riscv64 tests was suggested by Stefano Stabellini.
 
-With regards,
-Daniel
--- 
-|: https://berrange.com       ~~        https://hachyderm.io/@berrange :|
-|: https://libvirt.org          ~~          https://entangle-photo.org :|
-|: https://pixelfed.art/berrange   ~~    https://fstop138.berrange.com :|
+The pytest framework the series adds is a small wrapper on top of the QTB
+framework that allows us to test the output of many different Xen
+configurations with a simple pytest function. The aim is first to add more
+coverage, and also to have a modular and easy way to add test logic. For
+example, we plan to use it to add IRQ tests, checking that an interrupt
+reaches the expected guest based on its SMP affinity.
+
+Tests are plain pytest functions and the machine they boot is a
+fixture. The per-test console logs and a JUnit report are kept as CI
+artifacts, so GitLab shows per-test results. The README added in patch 4
+is the best place to start reading.
+
+Coverage is unchanged: the only test boots Xen alone on one pCPU and
+waits for "All set up". The new job runs next to the expect-based one,
+which patch 6 drops separately, so that patch can wait until the QTB job
+has proven itself. The domU console tests are ready and will follow as
+a separate series once RISC-V dom0less is merged, as they cannot pass
+on staging before that.
+
+This series:
+    1: CI: add a Debian 13 riscv64 QTB container
+    2-3: automation/qtb: add the QTB machine for riscv64, and the
+         console-test type with a Xen boot test
+    4: automation/qtb: add QTB framework README
+    5: CI: add a riscv64 smoke test job using the QTB console-test
+    6: CI: drop the riscv64 expect-based smoke test
+
+Tested in GitLab CI, with the container's Debian qemu-system-riscv64 and
+the OpenSBI it bundles.
+
+Test CI pipeline:
+https://gitlab.com/xen-project/people/baptleduc/xen/-/pipelines/TODO
+
+[1] https://gitlab.com/xen-project/people/amd/qemu/-/tree/24cd7e5c0d7e4db8e651f091d0b9da2e7c58dbab/python
+
+---
+Changes in v3:
+- Rework the framework by using pytest: tests are pytest functions
+  parametrizing a `machine` fixture, run all at once with a JUnit
+  report. The CLI, config.yaml, the per-type YAML files, the test class
+  hierarchy and the attempts/retry logic are gone, so the v2 remarks on
+  them no longer apply.
+- Split into patches under 200 lines each.
+- Move the container to xen.git (automation/build/), named
+  debian:13-riscv64-qtb, with offline wheels from the fork, pytest, and
+  a comment that the pinned commit is from the safety branch.
+- Binaries and logs directories are given with --binaries-dir and
+  --log-dir, no environment variable.
+- Mirror Xen's console to stdout, so pytest shows it in the report of a
+  failing test.
+- Take the per-string timeout from TEST_TIMEOUT_OVERRIDE/TEST_TIMEOUT,
+  like console.exp.
+- Map pexpect timeouts and EOF to AssertionError (a pytest failure)
+  instead of a dedicated TestFailure exception.
+- Keep the host at 2GB: the follow-up domU tests boot two 512MB domUs.
+- Drop the unit tests patch: nothing in CI runs them.
+- Drop the Jinja2 host device tree. The follow-up domU series generates
+  it from QEMU's own (-machine dumpdtb=) with fdtput, as the Arm tests
+  do, and the Xen-only test here needs none.
+- Keep the expect-based test, drop it in its own patch.
+- Rename the CI template and job with "qtb".
+- Link to v2: https://patch.msgid.link/1787823334.8631fc262581453bbf619ec5b2062170.1a04293255c000c4f3@vates.tech
+
+To: xen-devel@lists.xenproject.org
+Cc: Doug Goldstein <cardoe@cardoe.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Anthony PERARD <anthony.perard@vates.tech>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>
+Cc: Connor Davis <connojdavis@gmail.com>
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+Cc: Zhang Zheng <zhangzheng@iscas.ac.cn>
+
+---
+Baptiste Le Duc (6):
+      CI: add a Debian 13 riscv64 QTB container
+      automation/qtb: add the QTB machine for riscv64
+      automation/qtb: add the console-test type with a Xen boot test
+      automation/qtb: add QTB framework README
+      CI: add a riscv64 smoke test job using the QTB console-test
+      CI: drop the riscv64 expect-based smoke test
+
+ automation/build/debian/13-riscv64-qtb.dockerfile  |  47 ++++++++
+ automation/gitlab-ci/test.yaml                     |  25 ++--
+ automation/scripts/containerize                    |   1 +
+ automation/scripts/qemu-smoke-riscv64.sh           |  19 ---
+ automation/scripts/qtb/__init__.py                 |   2 +
+ automation/scripts/qtb/env.py                      |  15 +++
+ automation/scripts/qtb/riscv/README.md             | 127 +++++++++++++++++++++
+ automation/scripts/qtb/riscv/__init__.py           |   2 +
+ automation/scripts/qtb/riscv/machine.py            |  92 +++++++++++++++
+ automation/scripts/qtb/riscv/tests/__init__.py     |   2 +
+ automation/scripts/qtb/riscv/tests/conftest.py     |  65 +++++++++++
+ automation/scripts/qtb/riscv/tests/test_console.py |  35 ++++++
+ automation/scripts/qtb/utils.py                    |  15 +++
+ 13 files changed, 419 insertions(+), 28 deletions(-)
+---
+base-commit: d8e0282815561ff67ebe6b5dfd582a586dafff48
+change-id: 20261103-qtb-framework-pytest-f3ed28e4bd78
+
+Best regards,
+--  
+Baptiste Le Duc <baptiste.le-duc@vates.tech>
 
 
