@@ -2,35 +2,35 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6747B606A331
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 79E65606A332
 	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2026 23:30:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=yWLy8e/I
-Received: from list by lists.xenproject.org with outflank-mailman.1470796.1679461 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=18K9dXGF
+Received: from list by lists.xenproject.org with outflank-mailman.1470790.1679419 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xONxh-0001Yn-EP; Tue, 03 Nov 2026 23:30:41 +0000
+	id 1xONxe-0000k2-EK; Tue, 03 Nov 2026 23:30:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1470796.1679461; Tue, 03 Nov 2026 23:30:41 +0000
+Received: by outflank-mailman (output) from mailman id 1470790.1679419; Tue, 03 Nov 2026 23:30:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xONxg-0001VV-VS; Tue, 03 Nov 2026 23:30:40 +0000
-Received: by outflank-mailman (input) for mailman id 1470796;
- Tue, 03 Nov 2026 23:30:36 +0000
+	id 1xONxe-0000iG-79; Tue, 03 Nov 2026 23:30:38 +0000
+Received: by outflank-mailman (input) for mailman id 1470790;
+ Tue, 03 Nov 2026 23:30:35 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xONxc-0000cf-1O
- for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 23:30:36 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xONxb-0000cB-Sa
+ for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 23:30:35 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xONxb-0000000CotM-3JWU;
+ (envelope-from <gwd@xenproject.org>) id 1xONxb-0000000Cot8-2LqQ;
  Tue, 03 Nov 2026 23:30:35 +0000
 Received: from [2607:fb91:4c8c:bd3f:1da5:e92a:c5fb:865a]
  (helo=localhost.localdomain)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xONo8-0000000EMFa-2DhE;
- Tue, 03 Nov 2026 23:20:48 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xONnv-0000000EMFa-1eLx;
+ Tue, 03 Nov 2026 23:20:35 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -42,18 +42,22 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=xMTLrvxxwpwmKfoWs2RiIcYg6g+Liai9ytC5nmpdgLQ=; b=yWLy8e/IpNDGhWHzoGLtuB2yL2
-	PWMLKC5wPoo+Ore5hFSM61WQpSUGH3hxeVFrPlXaOTYA8V47i3AFStTeL+FFob2B7+zAS5MkpPKcb
-	JYrftt4kUH1/XCzAx94Sl+P5NF98llk8XuBMToqDdU+uRy2D8HnYplUopop/4zicq7QY=;
+	bh=XSMwTIeZ5h90J4h/y2ZToyj+1NftG+yZwUVpCV46iA0=; b=18K9dXGFatSNazLPoV4skeQSFT
+	9m9zBHvy/T7zHnZlWGYHWrkTe0ijP/75HmQF7E8VJPDCVhRoE51XkXQMha6iBx0ziBX//YzDTUZoO
+	hTBTN45UpuF5b872RHoYxA9J8NAfVKxdqZRIG1bo2WPGaG7m9IibQF7TFAcAjCp8Hdsc=;
 From: George Dunlap <gwd@xenproject.org>
 To: xen-devel@lists.xenproject.org
 Cc: Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v6 34/44] x86/hvm: clear the vCPU's copy of an emulated I/O request once consumed
-Date: Tue,  3 Nov 2026 17:13:56 -0500
-Message-ID: <20261103-asi-hvm-v6-34-59dbc5ce9615@xenproject.org>
+	Teddy Astie <teddy.astie@vates.tech>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v6 16/44] x86/mm: add hooks for a sparse view of the directmap
+Date: Tue,  3 Nov 2026 17:13:38 -0500
+Message-ID: <20261103-asi-hvm-v6-16-59dbc5ce9615@xenproject.org>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261103-asi-hvm-v6-0-59dbc5ce9615@xenproject.org>
 References: <20261103-asi-hvm-v6-0-59dbc5ce9615@xenproject.org>
@@ -67,143 +71,406 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-hvmemul_do_io() keeps the request it is emulating in the vCPU's struct
-vcpu_io: the data written, or the response once a device model has
-supplied it, with the address and repeat count.  Once the access is done
-only the state is set back to STATE_IOREQ_NONE, so the operand stays in
-struct vcpu, a xenheap page mapped in every context, until the next
-emulated I/O overwrites it.
+The directmap maps all of RAM, and every root page-table carries it,
+so while any guest context runs, all guest memory is reachable from
+Xen's address space.  For ASI, guest contexts are to run on a sparse
+view of the directmap which maps only what Xen must reach through it
+at all times, leaving guest memory to transient mappings
+(map_domain_page()).
 
-Drop the copy wherever it is done with: when the response has been taken
-into hvmemul_do_io()'s local copy on the instruction's re-execution,
-when Xen's own handlers have completed the access, when the request is
-retried, suspended or not sent, and in hvmemul_cancel().  A request sent
-to a device model stays while it is in flight: the re-execution checks
-it, and the port-I/O completion reads its address and size before
-re-issuing it.  One which needs no completion -- a port write, or a
-request whose data is a guest buffer's address -- loses its address,
-data and count as soon as it is sent: the device model has its own copy,
-and the completion path reads only the state, type, direction and
-data_is_ptr.  Nothing reads the copy after STATE_IOREQ_NONE.
+A later patch builds such a sparse view alongside the full directmap,
+once the boot allocator has handed its memory to the heap.  It is then
+kept in step:
 
-Only the x86 emulator changes.  struct vcpu_io is common code, and Arm's
-MMIO completion reads the response from it.  Moving the in-flight copy
-out of struct vcpu belongs with narrowing the ioreq server pages, which
-carry the same operand while a device model handles it.
+ - xenheap allocations are added, and taken out again before the pages
+   are freed.  If that fails the pages stay mapped, and are leaked with
+   a warning rather than reused;
+ - memory handed to the heap later (boot modules, .init) is taken out,
+   and is not handed over if that fails;
+ - a PV dom0's initrd, assigned to dom0 in place, is taken out;
+ - page-tables from the boot allocator, which the sparse view maps with
+   every other boot-time allocation, are taken out when idle_pg_table's
+   hierarchy frees them, and are not freed if that fails, so that the
+   sparse view never keeps a page the heap may hand out;
+ - changes to the full directmap through map_pages_to_xen() and
+   modify_xen_mappings() are mirrored.  After boot, map_pages_to_xen()
+   maps into the directmap only memory Xen keeps (stack guard and shadow
+   stack pages, firmware tables); memory hot-add maps the new range into
+   the full directmap only, so that the sparse view never needs
+   page-table pages for it.
+
+Add a hook at each of these points, and one where the view is to be
+built; x86's are stubs in a new asm/sparse-directmap.h.  map_pages_in()
+and modify_mappings_in() are no longer static: memory hot-add calls
+map_pages_in() on idle_pg_table, and the sparse view will use both.
+
+Common code gains four hooks for this, arch_heap_pages_init(),
+arch_xenheap_needs_scrub() and arch_xenheap_pages_{alloc,free}(), no-ops
+until an architecture implements them.  A failed
+arch_xenheap_pages_alloc() may have mapped part of the pages:
+alloc_xenheap_pages() then takes them out through
+arch_xenheap_pages_free(), as a free would, before freeing them, and
+leaks them if that fails too.
+
+alloc_xenheap_pages() accepts pages still awaiting scrubbing
+(MEMF_no_scrub).  That is harmless while the directmap maps all memory
+anyway, but the sparse view would make such a page's contents, a dying
+domain's data for instance, reachable from every context on it until
+overwritten.  With a sparse view configured, arch_xenheap_needs_scrub()
+makes xenheap allocations scrub those pages first, as domain heap
+allocations do; clean pages need nothing extra.
+
+arch_mfns_in_directmap() says whether an MFN range is reachable through
+the directmap; it now answers for every context, so false once a sparse
+view is configured.  Its one caller, init_node_heap(), then keeps a NUMA
+node's heap metadata in the xenheap instead of carving it out of the
+node's memory through the directmap: carved out of a range handed to the
+heap, it would be left out of the sparse view, which every heap
+allocation needs it in.
+
+The hooks for now are just stubs.  No functional change.
 
 Assisted-by: Claude Code:claude-opus-5-5
 Signed-off-by: George Dunlap <gwd@xenproject.org>
 ---
 Changes in v5:
-- New in this version.
+- New in this version, split out of "x86/mm: build and maintain a sparse
+  view of the directmap".
 ---
- xen/arch/x86/hvm/emulate.c | 36 ++++++++++++++++++++++++++++--------
- 1 file changed, 28 insertions(+), 8 deletions(-)
+ xen/arch/x86/include/asm/mm.h               | 12 +++++-
+ xen/arch/x86/include/asm/sparse-directmap.h | 30 +++++++++++++++
+ xen/arch/x86/mm.c                           | 30 ++++++++++++---
+ xen/arch/x86/pv/dom0_build.c                |  4 ++
+ xen/arch/x86/setup.c                        |  4 ++
+ xen/arch/x86/x86_64/mm.c                    | 10 ++++-
+ xen/common/page_alloc.c                     | 41 ++++++++++++++++++++-
+ xen/include/xen/mm.h                        | 21 +++++++++++
+ 8 files changed, 142 insertions(+), 10 deletions(-)
+ create mode 100644 xen/arch/x86/include/asm/sparse-directmap.h
 
-diff --git a/xen/arch/x86/hvm/emulate.c b/xen/arch/x86/hvm/emulate.c
-index e2cf982c25..da7c08b5d9 100644
---- a/xen/arch/x86/hvm/emulate.c
-+++ b/xen/arch/x86/hvm/emulate.c
-@@ -167,6 +167,16 @@ static const struct hvm_io_handler ioreq_server_handler = {
-     .ops = &ioreq_server_ops
- };
+diff --git a/xen/arch/x86/include/asm/mm.h b/xen/arch/x86/include/asm/mm.h
+index 7b9a0f561d..61dc317dd4 100644
+--- a/xen/arch/x86/include/asm/mm.h
++++ b/xen/arch/x86/include/asm/mm.h
+@@ -7,6 +7,7 @@
+ #include <xen/rwlock.h>
+ #include <asm/io.h>
+ #include <asm/page.h>
++#include <asm/sparse-directmap.h>
+ #include <asm/uaccess.h>
  
-+/*
-+ * The vCPU's copy of an emulated I/O request is done with: nothing reads it
-+ * before the next request overwrites it.  Clear it all, so that the operand
-+ * and the address do not stay in struct vcpu.
-+ */
-+static void ioreq_done(struct vcpu_io *vio)
+ /*
+@@ -599,6 +600,11 @@ mfn_t alloc_xen_pagetable(void);
+ void free_xen_pagetable(mfn_t mfn);
+ void *alloc_mapped_pagetable(mfn_t *pmfn);
+ 
++int map_pages_in(l4_pgentry_t *root, unsigned long virt, mfn_t mfn,
++                 unsigned long nr_mfns, pte_attr_t flags);
++int modify_mappings_in(l4_pgentry_t *root, unsigned long s, unsigned long e,
++                       pte_attr_t nf);
++
+ int __sync_local_execstate(void);
+ 
+ /* Arch-specific portion of memory_op hypercall. */
+@@ -660,12 +666,16 @@ void write_32bit_pse_identmap(uint32_t *l2);
+ 
+ /*
+  * x86 maps part of physical memory via the directmap region.
+- * Return whether the range of MFN falls in the directmap region.
++ * Return whether the range of MFN falls in the directmap region in every
++ * context: never, with a sparse directmap view configured.
+  */
+ static inline bool arch_mfns_in_directmap(unsigned long mfn, unsigned long nr)
+ {
+     unsigned long eva = min(DIRECTMAP_VIRT_END, HYPERVISOR_VIRT_END);
+ 
++    if ( sparse_dmap_configured() )
++        return false;
++
+     return (mfn + nr) <= (virt_to_mfn(eva - 1) + 1);
+ }
+ 
+diff --git a/xen/arch/x86/include/asm/sparse-directmap.h b/xen/arch/x86/include/asm/sparse-directmap.h
+new file mode 100644
+index 0000000000..53747a98ad
+--- /dev/null
++++ b/xen/arch/x86/include/asm/sparse-directmap.h
+@@ -0,0 +1,30 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++#ifndef X86_SPARSE_DIRECTMAP_H
++#define X86_SPARSE_DIRECTMAP_H
++
++#include <xen/mm-frame.h>
++#include <xen/mm-types.h>
++#include <asm/page.h>
++
++static inline bool sparse_dmap_configured(void) { return false; }
++static inline void sparse_dmap_init(void) {}
++static inline int sparse_dmap_mirror_map(unsigned long virt, mfn_t mfn,
++                                         unsigned long nr, pte_attr_t flags)
 +{
-+    vio->req = (ioreq_t){ .state = STATE_IOREQ_NONE };
++    return 0;
++}
++static inline int sparse_dmap_mirror_modify(unsigned long s, unsigned long e,
++                                            pte_attr_t nf)
++{
++    return 0;
++}
++static inline int sparse_dmap_remove(mfn_t mfn, unsigned long nr)
++{
++    return 0;
++}
++static inline int sparse_dmap_drop_pagetable(mfn_t mfn)
++{
++    return 0;
 +}
 +
++#endif /* X86_SPARSE_DIRECTMAP_H */
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index 39c6fa3d56..904ed7a258 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -127,6 +127,7 @@
+ #include <asm/setup.h>
+ #include <asm/shadow.h>
+ #include <asm/shared.h>
++#include <asm/sparse-directmap.h>
+ #include <asm/trampoline.h>
+ #include <asm/traps.h>
+ #include <asm/x86_emulate.h>
+@@ -5442,10 +5443,17 @@ mfn_t xen_map_to_mfn(unsigned long va)
+ 
  /*
-  * Drop all records of in-flight emulation. This is needed whenever a vCPU's
-  * register state may have changed behind the emulator's back.
-@@ -175,7 +185,7 @@ void hvmemul_cancel(struct vcpu *v)
+  * Free a page-table page that the hierarchy rooted at @root has stopped
+- * using.
++ * using.  One of idle_pg_table's may be in the sparse directmap view: it is
++ * taken out first, under the sparse view's L3 lock inside an L3 lock of
++ * idle_pg_table's hierarchy (the only order in which the two nest), and
++ * kept if that fails.  The sparse view's own page-tables are not in it, and
++ * are freed directly: the caller may hold the sparse view's L3 lock.
+  */
+ static void free_pagetable_in(const l4_pgentry_t *root, mfn_t mfn)
  {
-     struct hvm_vcpu_io *hvio = &v->arch.hvm.hvm_io;
++    if ( root == idle_pg_table && sparse_dmap_drop_pagetable(mfn) )
++        return;
++
+     free_xen_pagetable(mfn);
+ }
  
--    v->io.req.state = STATE_IOREQ_NONE;
-+    ioreq_done(&v->io);
-     v->io.completion = VIO_no_completion;
-     hvio->mmio_cache_count = 0;
-     hvio->mmio_insn_bytes = 0;
-@@ -265,8 +275,9 @@ static int hvmemul_do_io(
-     case STATE_IOREQ_NONE:
-         break;
-     case STATE_IORESP_READY:
--        vio->req.state = STATE_IOREQ_NONE;
-+        /* The local copy carries the response from here. */
-         p = vio->req;
-+        ioreq_done(vio);
+@@ -5453,7 +5461,7 @@ static void free_pagetable_in(const l4_pgentry_t *root, mfn_t mfn)
+  * map_pages_to_xen() in the hierarchy rooted at @root: idle_pg_table's, or
+  * another hierarchy sharing its virtual addresses.
+  */
+-static int map_pages_in(
++int map_pages_in(
+     l4_pgentry_t *root,
+     unsigned long virt,
+     mfn_t mfn,
+@@ -5865,7 +5873,12 @@ int map_pages_to_xen(
+     unsigned long nr_mfns,
+     pte_attr_t flags)
+ {
+-    return map_pages_in(idle_pg_table, virt, mfn, nr_mfns, flags);
++    int rc = map_pages_in(idle_pg_table, virt, mfn, nr_mfns, flags);
++
++    if ( !rc )
++        rc = sparse_dmap_mirror_map(virt, mfn, nr_mfns, flags);
++
++    return rc;
+ }
  
-         /* Verify the emulation request has been correctly re-issued */
-         if ( (p.type != (is_mmio ? IOREQ_TYPE_COPY : IOREQ_TYPE_PIO)) ||
-@@ -330,7 +341,7 @@ static int hvmemul_do_io(
-     {
-     case X86EMUL_OKAY:
-     case X86EMUL_RETRY:
--        vio->req.state = STATE_IOREQ_NONE;
-+        ioreq_done(vio);
-         break;
-     case X86EMUL_UNHANDLEABLE:
-     {
-@@ -383,7 +394,7 @@ static int hvmemul_do_io(
-                 if ( s == NULL )
-                 {
-                     rc = X86EMUL_RETRY;
--                    vio->req.state = STATE_IOREQ_NONE;
-+                    ioreq_done(vio);
-                     break;
-                 }
+ int __init populate_pt_range(unsigned long virt, unsigned long nr_mfns)
+@@ -5888,8 +5901,8 @@ int __init populate_pt_range(unsigned long virt, unsigned long nr_mfns)
+  * modify_mappings_in() does so in the hierarchy rooted at @root, as
+  * map_pages_in() does.
+  */
+-static int modify_mappings_in(l4_pgentry_t *root, unsigned long s,
+-                              unsigned long e, pte_attr_t nf)
++int modify_mappings_in(l4_pgentry_t *root, unsigned long s,
++                       unsigned long e, pte_attr_t nf)
+ {
+     bool locking = system_state > SYS_STATE_boot;
+     l3_pgentry_t *pl3e = NULL;
+@@ -6169,7 +6182,12 @@ static int modify_mappings_in(l4_pgentry_t *root, unsigned long s,
  
-@@ -394,7 +405,7 @@ static int hvmemul_do_io(
-                 if ( dir == IOREQ_READ )
-                 {
-                     rc = hvm_process_io_intercept(&ioreq_server_handler, &p);
--                    vio->req.state = STATE_IOREQ_NONE;
-+                    ioreq_done(vio);
-                     break;
-                 }
-             }
-@@ -440,7 +451,7 @@ static int hvmemul_do_io(
-                                     paddr_to_pfn(addr));
+ int modify_xen_mappings(unsigned long s, unsigned long e, pte_attr_t nf)
+ {
+-    return modify_mappings_in(idle_pg_table, s, e, nf);
++    int rc = modify_mappings_in(idle_pg_table, s, e, nf);
++
++    if ( !rc )
++        rc = sparse_dmap_mirror_modify(s, e, nf);
++
++    return rc;
+ }
  
-                         rc = X86EMUL_RETRY;
--                        vio->req.state = STATE_IOREQ_NONE;
-+                        ioreq_done(vio);
-                         break;
-                     }
+ int destroy_xen_mappings(unsigned long s, unsigned long e)
+diff --git a/xen/arch/x86/pv/dom0_build.c b/xen/arch/x86/pv/dom0_build.c
+index dd64af5616..829eafd67d 100644
+--- a/xen/arch/x86/pv/dom0_build.c
++++ b/xen/arch/x86/pv/dom0_build.c
+@@ -22,6 +22,7 @@
+ #include <asm/pv/mm.h>
+ #include <asm/setup.h>
+ #include <asm/shadow.h>
++#include <asm/sparse-directmap.h>
  
-@@ -455,15 +466,24 @@ static int hvmemul_do_io(
-                              dir ? "read from" : "write to", addr, size);
-             }
-             rc = hvm_process_io_intercept(&null_handler, &p);
--            vio->req.state = STATE_IOREQ_NONE;
-+            ioreq_done(vio);
-         }
-         else
+ /* Allow ring-3 access in long mode as guest cannot use ring 1 ... */
+ #define BASE_PROT (_PAGE_PRESENT|_PAGE_RW|_PAGE_ACCESSED|_PAGE_USER)
+@@ -650,6 +651,9 @@ static int __init dom0_construct(const struct boot_domain *bd)
          {
-             rc = ioreq_send(s, &p, 0);
-             if ( rc != X86EMUL_RETRY || vio->suspended )
--                vio->req.state = STATE_IOREQ_NONE;
-+                ioreq_done(vio);
-             else if ( !ioreq_needs_completion(&vio->req) )
-+            {
-+                /*
-+                 * Nothing comes back, and the device model has its own copy
-+                 * of the request: keep only what completion checks.
-+                 */
-+                vio->req.addr = 0;
-+                vio->req.data = 0;
-+                vio->req.count = 0;
-                 rc = X86EMUL_OKAY;
-+            }
+             if ( assign_pages(mfn_to_page(_mfn(initrd_mfn)), count, d, 0) )
+                 BUG();
++            /* The initrd is dom0's now: out of the sparse directmap. */
++            if ( sparse_dmap_remove(_mfn(initrd_mfn), PFN_UP(initrd_len)) )
++                panic("Cannot unmap dom0's initrd\n");
+             /*
+              * We have mapped the initrd directly into dom0, and assigned the
+              * pages. Tell the boot_module handling that we've freed it, so the
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index df7cfcc563..e23ded0c86 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -54,6 +54,7 @@
+ #include <asm/spec_ctrl.h>
+ #include <asm/stubs.h>
+ #include <asm/tboot.h>
++#include <asm/sparse-directmap.h>
+ #include <asm/trampoline.h>
+ #include <asm/traps.h>
+ 
+@@ -1946,6 +1947,9 @@ void asmlinkage __init noreturn __start_xen(void)
          }
-         break;
      }
+ 
++    /* The heap now has all memory, and page-tables come from it. */
++    sparse_dmap_init();
++
+     bsp_stack = cpu_alloc_stack(0); /* Needs to know IDT vs FRED */
+     if ( !bsp_stack )
+         panic("No memory for BSP stack\n");
+diff --git a/xen/arch/x86/x86_64/mm.c b/xen/arch/x86/x86_64/mm.c
+index 7b04537066..c5d9dd64a3 100644
+--- a/xen/arch/x86/x86_64/mm.c
++++ b/xen/arch/x86/x86_64/mm.c
+@@ -1231,8 +1231,14 @@ int memory_add(unsigned long spfn, unsigned long epfn, unsigned int pxm)
+     i = virt_to_mfn(HYPERVISOR_VIRT_END - 1) + 1;
+     if ( spfn < i )
+     {
+-        ret = map_pages_to_xen((unsigned long)mfn_to_virt(spfn), _mfn(spfn),
+-                               min(epfn, i) - spfn, PAGE_HYPERVISOR);
++        /*
++         * Into the full directmap only, not a sparse directmap view: the
++         * frame table and M2P carved from the start of the range are
++         * reached through their own mappings, and the rest goes to the
++         * heap, which the sparse view leaves out.
++         */
++        ret = map_pages_in(idle_pg_table, (unsigned long)mfn_to_virt(spfn),
++                           _mfn(spfn), min(epfn, i) - spfn, PAGE_HYPERVISOR);
+         if ( ret )
+             goto destroy_directmap;
+     }
+diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
+index 5243dba29f..2150dcbd5e 100644
+--- a/xen/common/page_alloc.c
++++ b/xen/common/page_alloc.c
+@@ -1971,6 +1971,9 @@ static void init_heap_pages(
+     unsigned long i;
+     bool need_scrub = scrub_debug;
+ 
++    if ( !arch_heap_pages_init(page_to_mfn(pg), nr_pages) )
++        return;
++
+     /*
+      * Keep MFN 0 away from the buddy allocator to avoid crossing zone
+      * boundary when merging two buddies.
+@@ -2540,10 +2543,33 @@ void *alloc_xenheap_pages(unsigned int order, unsigned int memflags)
+     if ( !(memflags >> _MEMF_bits) )
+         memflags |= MEMF_bits(xenheap_bits);
+ 
+-    pg = alloc_domheap_pages(NULL, order, memflags | MEMF_no_scrub);
++    /*
++     * Pages still awaiting scrubbing may do as xenheap pages: the directmap
++     * maps them anyway.  Not so if an arch's sparse directmap view makes them
++     * reachable where the rest of the heap's memory is not.
++     */
++    if ( !arch_xenheap_needs_scrub() )
++        memflags |= MEMF_no_scrub;
++
++    pg = alloc_domheap_pages(NULL, order, memflags);
+     if ( unlikely(pg == NULL) )
+         return NULL;
+ 
++    if ( arch_xenheap_pages_alloc(page_to_mfn(pg), order) )
++    {
++        /*
++         * The hook may have mapped part of the pages before failing: take
++         * them out again as a free would, and leak them if that fails too.
++         */
++        if ( arch_xenheap_pages_free(page_to_mfn(pg), order) )
++            printk(XENLOG_WARNING
++                   "Leaking xenheap pages %"PRI_mfn"+%u: still mapped\n",
++                   mfn_x(page_to_mfn(pg)), 1U << order);
++        else
++            free_domheap_pages(pg, order);
++        return NULL;
++    }
++
+     for ( i = 0; i < (1u << order); i++ )
+         pg[i].count_info |= PGC_xen_heap;
+ 
+@@ -2562,6 +2588,19 @@ void free_xenheap_pages(void *v, unsigned int order)
+ 
+     pg = virt_to_page(v);
+ 
++    /*
++     * If the pages cannot be taken out of an arch's sparse directmap view,
++     * they may remain reachable through it: leak them rather than hand them
++     * out.
++     */
++    if ( arch_xenheap_pages_free(page_to_mfn(pg), order) )
++    {
++        printk(XENLOG_WARNING
++               "Leaking xenheap pages %"PRI_mfn"+%u: still mapped\n",
++               mfn_x(page_to_mfn(pg)), 1U << order);
++        return;
++    }
++
+     for ( i = 0; i < (1u << order); i++ )
+         pg[i].count_info &= ~PGC_xen_heap;
+ 
+diff --git a/xen/include/xen/mm.h b/xen/include/xen/mm.h
+index 153c57f5dd..e8f9993286 100644
+--- a/xen/include/xen/mm.h
++++ b/xen/include/xen/mm.h
+@@ -94,6 +94,27 @@ bool scrub_free_pages(void);
+ #define alloc_xenheap_page() (alloc_xenheap_pages(0,0))
+ #define free_xenheap_page(v) (free_xenheap_pages(v,0))
+ 
++/*
++ * Hooks for an architecture keeping a second, sparse view of its directmap,
++ * which maps the xenheap but not the rest of the heap's memory.
++ */
++static inline bool arch_heap_pages_init(mfn_t mfn, unsigned long nr)
++{
++    return true;
++}
++static inline bool arch_xenheap_needs_scrub(void)
++{
++    return false;
++}
++static inline int arch_xenheap_pages_alloc(mfn_t mfn, unsigned int order)
++{
++    return 0;
++}
++static inline int arch_xenheap_pages_free(mfn_t mfn, unsigned int order)
++{
++    return 0;
++}
++
+ /* Free an allocation, and zero the pointer to it. */
+ #define FREE_XENHEAP_PAGES(p, o) do { \
+     void *_ptr_ = (p);                \
 -- 
 2.56.0
 
