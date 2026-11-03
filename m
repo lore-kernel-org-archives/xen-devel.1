@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1EBFE606A32D
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2026 12:53:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3BAE3606A327
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2026 12:54:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=eqjsBA9+
-Received: from list by lists.xenproject.org with outflank-mailman.1469732.1678488 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=ZE90cJ9t
+Received: from list by lists.xenproject.org with outflank-mailman.1469741.1678497 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOE0b-0007rz-Rf; Tue, 03 Nov 2026 12:53:01 +0000
+	id 1xOE1X-0008Os-5g; Tue, 03 Nov 2026 12:53:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1469732.1678488; Tue, 03 Nov 2026 12:53:01 +0000
+Received: by outflank-mailman (output) from mailman id 1469741.1678497; Tue, 03 Nov 2026 12:53:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOE0b-0007ro-OH; Tue, 03 Nov 2026 12:53:01 +0000
-Received: by outflank-mailman (input) for mailman id 1469732;
- Tue, 03 Nov 2026 12:53:00 +0000
+	id 1xOE1X-0008Ok-3A; Tue, 03 Nov 2026 12:53:59 +0000
+Received: by outflank-mailman (input) for mailman id 1469741;
+ Tue, 03 Nov 2026 12:53:58 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xOE0Z-0007r1-Ua
- for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 12:53:00 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xOE1V-0008OT-VC
+ for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 12:53:58 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xOE0Z-007Ext-BD
- for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 13:52:59 +0100
+ id 1xOE1V-007FLq-BO
+ for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 13:53:57 +0100
 Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ae9d921-e002-0a2a0a5209dd-0a2a45089714-26
- for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 13:52:59 +0100
-Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
+ id 6ae9d953-2eae-0a2a0a5409dd-0a2a4508d06c-46
+ for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 13:53:57 +0100
+Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
  by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ae9d92a-f659-0a2a45080019-d155802bac23-3
- for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 13:52:59 +0100
-Received: by mail-wm1-f43.google.com with SMTP id
- 5b1f17b1804b1-4a59100fa83so37194215e9.0
- for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 04:52:59 -0800 (PST)
+ id 6ae9d965-f659-0a2a45080019-d155802ed47d-3
+ for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 13:53:57 +0100
+Received: by mail-wm1-f46.google.com with SMTP id
+ 5b1f17b1804b1-4a218c463d1so27924455e9.0
+ for <xen-devel@lists.xenproject.org>; Tue, 03 Nov 2026 04:53:57 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4b2a9faff90sm63361015e9.5.2026.11.03.04.52.57
+ 5b1f17b1804b1-4b2aa481a45sm51437475e9.7.2026.11.03.04.53.55
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 03 Nov 2026 04:52:58 -0800 (PST)
+ Tue, 03 Nov 2026 04:53:56 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,57 +51,59 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:Autocrypt:Subject:From:Cc:To:Content-Language:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1793710378; x=1794315178; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1793710437; x=1794315237; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
          :content-language:user-agent:mime-version:date:message-id:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=8VuaqkQPqBjqBACTzffN206lpD6yNEaHP3dOmoVJUos=;
-        b=eqjsBA9+ZGoniSw0Y+GYl1UdyRpxwaRkM8LXXPSHIxCLaItg0WBywVJgZXeiluWkCc
-         wn6nfQVtnMuTpQC1Td1GuEPIeEmFez4FtHbfJUcH2aEU7kga9yDkISSCK0iqDOVdnpDW
-         1nrOIUjd70oZAgJwt3WCxNGXg2XinBeBuonHu67YrnUpOU/FOcKY1bZAhI1pGlwe6yx8
-         uAnSNQop/38vqBze+x7VR4mnRgimN3a1fWCEquh4Sin8qnvdDqEf8Xa0YLqfvvSoYSk+
-         svq7xSEEa4VMeVmRd3rt2bYrkuU0jNWx0qfdBBpZDjVsGnF3bmArqAbZCSB83JaqgB0e
-         RPrQ==
+        bh=rFrjfLJvymmO7wm+shvpLfY3kMeh2pY6kKTI+A0f32s=;
+        b=ZE90cJ9tivhpn8kGvzWYAYuZBat9z5bZMLhYzHTBMFVChZ3ayUErjgHfEgn9PU2tgU
+         RHiwkNv2J8PYtEHBiu8fPWb694crg63f8aCm+i8o0Raz5kLT4njg4XCP5Z3pk3vTdzsC
+         mjiY2LT7UTxemBosjVBybG9H+5If8bugSdfxbryU7iVDEzXwmM8SZ5wJss3Wn272LWYb
+         Uom1Tk489kPrqfVlyKIdHr3769PlX6k73MNbDMYoG9rdsXHRqC0uE9SM+IWKOAclpqGw
+         E2t8J1zJSh05KHYdAAoAqFsc2ki02s59/QWDJzyoNivE7b2tyVQaJnj/W4hZMWGm5q+J
+         fX6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793710378; x=1794315178;
+        d=1e100.net; s=20260707; t=1793710437; x=1794315237;
         h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
          :content-language:user-agent:mime-version:date:message-id:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=8VuaqkQPqBjqBACTzffN206lpD6yNEaHP3dOmoVJUos=;
-        b=d3Y1+ZC7F3qbFzD0N0JXPSKwUPQvzOiQlWIx32MeUYwGq2H5y1eWd7IgVnJiwvo+DG
-         /AtVlrxxm6Fjdv6bo5/T79TAW6yeGrkYuh2gxqC2HYjcJQOea5uKr5RmZcq4vpCkv+8r
-         apNEegEgCbhNgzeQilzyyk+Pfgay3HviT65xlrJ+Qmh5PPx+8tR4y2eCW1En8g9q+ehc
-         eqCHy6/8QXMYcCYEfNRUYhRM7HNPNj3H+em+gSTll8VrQUoTbRL6PN6WCHZMtEaEqSck
-         6O6I3LidC2hD0UPdxu3bTGKoNwfpPXhBYEKKK7LdlMXhVKD8IVycSJXpOhrRzQOqPEQa
-         BwIQ==
-X-Gm-Message-State: APuU4Z8b4Nnt1hKunctu7QuBNj47eBWmU+tiaKD119jmy4zkE1nJe0aT
-	iopprefSeKFQB+Rhv3EdlIWrgZb/0nkgnaLf/kHGsZyyHsCo6KTih7brbwSWEcMEwZm8yVpzhMK
-	x9OJxMQ==
-X-Gm-Gg: AYBFou0RhcDQPAqW7MM+BKTO7TxBhQHiZQEJY/bVtQqCKKlrDyyBX5bzDEzHcrZzhUq
-	Hr79KHj7zx2Y63WaLC3gzexhveke+yG4ECJIugln7PLWTD4E6nVKs+Fk1E057TK58rOw8C/iFP7
-	3UZU+m3UMO5+thK1s3YaqZ7wWUF1a1hEIVojFPtzAW32baHKMvJ/zl3Da9g4UvsT9wX+KLstIsC
-	0ipCG2d3mw1024upKAAVh3Ycpj3DfHxlmwmc0mvZvoDSGVnNsdV9eiAIamXNVtwLGRnyv0AvETp
-	ffCsX8xogWcsa2OORZWATR9KkfKephtvfdOgY4Vt2YqOkByLfqgZPXdiCCoPvwVsZYyrDvWAZYF
-	aGLobzXnhBh9HpkZCm6Af+Z/VETvGxPxcZubIAdg7KTOmph/wWBxElygQaSoUyFEVbQpbWsoFb/
-	M94xXepw0maA74wueV1t43xhLcUu6lNl5WlK7V7oAeIP+C8UJMrFeNDXYOTcIsOeQ+kNlq9ghC+
-	/dus4yf7/rOiXC1mpoHAnB4wdSpp0xAkX5fvLxbYrpG+XGyl+XcRzMVC/XmQqAYo7rX/O0q7o8R
-	nf3N/hJZ0BqzDwF4PFNEQiE7URZK/MgERRPill/vaRcvIRW/7An+Rbgc6LoZVVf3STzqW2fFwit
-	tNeeV7Mj3c2bEp8aQ
-X-Received: by 2002:a05:600c:4ece:b0:4a2:40:8d2c with SMTP id 5b1f17b1804b1-4ac17b2c396mr285826445e9.26.1793710378476;
-        Tue, 03 Nov 2026 04:52:58 -0800 (PST)
-Message-ID: <4da146da-26ee-4ecd-a747-130ed0783324@suse.com>
-Date: Tue, 3 Nov 2026 13:52:57 +0100
+        bh=rFrjfLJvymmO7wm+shvpLfY3kMeh2pY6kKTI+A0f32s=;
+        b=ChHUKPd10UlQC25qtUyaQQBRIFFFs889lpLnuloZ+qFTdSmp8joREoIFF4+EWE5cAD
+         VfH//oxKk0+eDpKEsAJ6ejmDzaM1jARG4yeUye5BclW/LlSCzK3TNN+rg5S5CZsj3+Ya
+         oLZsJsO32gbe2kVlH0Dl6ig4F7o1tsmJfDsGiTvGsQMRMMm97WJ8+kXya7E6iC5n8XxC
+         GxQsvpJRkzuevc7m1AzcP+fy3qyImrE5DD9t/PBTmCaja9vsjRPddzTJX1khJMz50Zkv
+         2WSixz2l2d0X0mz+STxR3OxEh7Zn1n2sNmvWJzjjNvQRHa2cefDfI1lm5GWAYiJs6opi
+         kiEA==
+X-Gm-Message-State: APuU4Z9fDM42QguBHcEFioBJTwMHryI56mVRShl4QJw442V9wwARqRLx
+	6YyCxt2icD9c9djo46+ai2BUdRQhJUqFaEMdf683EDKvcIjX/+NGuVB9GxUre0H9m3gVqdk9pB7
+	SrniFmg==
+X-Gm-Gg: AYBFou3IsZ6QUvwF0JOenItiNTdDvOiAB3NB5zjEluO2V64YrnnNrdzIRDV2+Pnh/rF
+	D7ffQZ1I2Di27HkQyZK6vGDw6YBigzvcw2FduPiQI4xBGKD4q92qYbT7bKJJyq59vlvTBk45GHj
+	ceiEd+RNnlKYotkbOtCpbeyxktOWtGG4zn2Y24sB4hBUZWBHtx4f1endlUtxDE+/+UWEQKC3Jku
+	MuAVCPy55Bess16olL8tpO85zbbinmHfi3LcVlu7FQW3vdv8kJvIT/9Zfshvq1WXUyTIaOhdcNM
+	NQD1mnk2RPrhR/wqI709vZIS5s2nCD9POkjR0pDwuj/jmDWwSzXddXCr5spOjMmme4TvH1oWzLt
+	6KUui9cAcAHPRx+GHFeGvbGXk/kZ5RnrVyQG9GK9WAr1npn2/69kZRSiqXUbJIdUpSZOvZEzTPi
+	ICdrXhrxEkjjCaxbdhZ7tXY0TjgfSiOC/3gDZKt9Id95nM8/vqWHDsA/UwAKel9+dfMmVQVdzVf
+	YWWBWz8xLLbZ/ws/L3ndrWxHNYlLVQNJhh8MaPuDhZNSGAEpwI5Juk8oMmFyzD0rxjo6kQYFxoq
+	T40NunAmRfpwuQs6lw4AVGVz/T2z0zkiful3Rck6WEWqqO2AH3/xE25G6YfEXW8b/1nMds0Ly+i
+	TfpdhanL8jtkevFG8/5l8FsUNAyWJQpCW0K7jLg==
+X-Received: by 2002:a05:600c:4e43:b0:4ab:e27d:e241 with SMTP id 5b1f17b1804b1-4ac180f28f7mr283466735e9.15.1793710436812;
+        Tue, 03 Nov 2026 04:53:56 -0800 (PST)
+Message-ID: <9cd6da48-7a5e-4971-93e1-7d7262ddf7fc@suse.com>
+Date: Tue, 3 Nov 2026 13:53:55 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Content-Language: en-US
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Teddy Astie <teddy.astie@vates.tech>
 From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH] x86/cpuidle: allocate processor_powers[] dynamically
+Subject: [PATCH] x86/cpufreq: allocate processor_pminfo[] dynamically
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -127,9 +129,9 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c1860d/1793710379-D477387B-A1513A6A/10/78276251493
+X-purgate-ID: tlsNG-c1860d/1793710437-DFAD487B-DE4682C9/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 3185
+X-purgate-size: 5035
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -140,94 +142,139 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 There's no need to have a NR_CPUS-dimensioned static array there.
 
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-Some of the new conditionals checking processor_powers may arguably want
-to check (really: might better have been put there long ago) xen_cpuidle
-instead. Thoughts?
+As ordering of pre-SMP initcalls isn't well-defined, allocate the array
+from both cpufreq_presmp_init() and cpufreq_register_driver().
 
---- a/xen/arch/x86/acpi/cpu_idle.c
-+++ b/xen/arch/x86/acpi/cpu_idle.c
-@@ -44,6 +44,7 @@
- #include <xen/smp.h>
- #include <xen/softirq.h>
- #include <xen/trace.h>
-+#include <xen/xvmalloc.h>
+Alongside adding a few NULL checks, drop a redundant one from
+get_cpufreq_para().
+
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
+
+--- a/xen/drivers/acpi/pm-op.c
++++ b/xen/drivers/acpi/pm-op.c
+@@ -104,8 +104,7 @@ static int get_cpufreq_para(struct xen_s
+     pmpt = processor_pminfo[op->cpuid];
+     policy = per_cpu(cpufreq_cpu_policy, op->cpuid);
  
- #include <asm/apic.h>
- #include <asm/cpuidle.h>
-@@ -149,7 +150,7 @@ custom_param("max_cstate", parse_cstate)
- static bool __read_mostly local_apic_timer_c2_ok;
- boolean_param("lapic_timer_c2_ok", local_apic_timer_c2_ok);
+-    if ( !pmpt ||
+-         ((pmpt->init & XEN_PX_INIT) && !pmpt->perf.states) ||
++    if ( ((pmpt->init & XEN_PX_INIT) && !pmpt->perf.states) ||
+          /* Avoid NULL deref of pmpt->perf.states[] */
+          ((pmpt->init & XEN_CPPC_INIT) && pmpt->perf.state_count) ||
+          !policy || !policy->governor )
+@@ -369,7 +368,7 @@ int do_pm_op(struct xen_sysctl_pm_op *op
  
--struct acpi_processor_power *__read_mostly processor_powers[NR_CPUS];
-+struct acpi_processor_power **__read_mostly processor_powers;
+     if ( op->cpuid >= nr_cpu_ids || !cpu_online(op->cpuid) )
+         return -EINVAL;
+-    pmpt = processor_pminfo[op->cpuid];
++    pmpt = processor_pminfo ? processor_pminfo[op->cpuid] : NULL;
  
- /*
-  * This field starts out as zero, and can be set to -1 just to signal it has
-@@ -447,7 +448,9 @@ static void cf_check dump_cx(unsigned ch
+     switch ( op->cmd & PM_PARA_CATEGORY_MASK )
+     {
+--- a/xen/drivers/acpi/pmstat.c
++++ b/xen/drivers/acpi/pmstat.c
+@@ -227,7 +227,7 @@ int do_get_pm_info(struct xen_sysctl_get
  
- static int __init cf_check cpu_idle_key_init(void)
- {
--    register_keyhandler('c', dump_cx, "dump ACPI Cx structures", 1);
-+    if ( processor_powers )
-+        register_keyhandler('c', dump_cx, "dump ACPI Cx structures", 1);
+     if ( !op || (op->cpuid >= nr_cpu_ids) || !cpu_online(op->cpuid) )
+         return -EINVAL;
+-    pmpt = processor_pminfo[op->cpuid];
++    pmpt = processor_pminfo ? processor_pminfo[op->cpuid] : NULL;
+ 
+     switch ( op->type & PMSTAT_CATEGORY_MASK )
+     {
+--- a/xen/drivers/cpufreq/cpufreq.c
++++ b/xen/drivers/cpufreq/cpufreq.c
+@@ -218,7 +218,7 @@ int cpufreq_limit_change(unsigned int cp
+     struct cpufreq_policy policy;
+ 
+     if (!cpu_online(cpu) || !(data = per_cpu(cpufreq_cpu_policy, cpu)) ||
+-        !processor_pminfo[cpu])
++        !processor_pminfo || !processor_pminfo[cpu])
+         return -ENODEV;
+ 
+     perf = &processor_pminfo[cpu]->perf;
+@@ -273,7 +273,7 @@ int cpufreq_add_cpu(unsigned int cpu)
+     unsigned int shared_type;
+ 
+     /* to protect the case when Px was not controlled by xen */
+-    if ( !processor_pminfo[cpu] || !cpu_online(cpu) )
++    if ( !processor_pminfo || !processor_pminfo[cpu] || !cpu_online(cpu) )
+         return -EINVAL;
+ 
+     if ( !(processor_pminfo[cpu]->init & (XEN_PX_INIT | XEN_CPPC_INIT)) )
+@@ -448,7 +448,7 @@ int cpufreq_del_cpu(unsigned int cpu)
+     const struct xen_psd_package *domain_info;
+ 
+     /* to protect the case when Px was not controlled by xen */
+-    if ( !processor_pminfo[cpu] || !cpu_online(cpu) )
++    if ( !processor_pminfo || !processor_pminfo[cpu] || !cpu_online(cpu) )
+         return -EINVAL;
+ 
+     if ( !(processor_pminfo[cpu]->init & (XEN_PX_INIT | XEN_CPPC_INIT)) )
+@@ -563,6 +563,9 @@ int set_px_pminfo(uint32_t acpi_id, stru
+     struct processor_pminfo *pmpt;
+     struct processor_performance *pxpt;
+ 
++    if ( !processor_pminfo )
++        return -ENOMEM;
 +
+     cpu = get_cpu_id(acpi_id);
+     if ( cpu < 0 || !perf )
+     {
+@@ -726,6 +729,9 @@ int set_cppc_pminfo(unsigned int acpi_id
+     int ret = 0, cpu_id;
+     struct processor_pminfo *pm_info;
+ 
++    if ( !processor_pminfo )
++        return -ENOMEM;
++
+     cpu_id = get_cpu_id(acpi_id);
+     if ( cpu_id < 0 )
+     {
+@@ -947,6 +953,11 @@ static struct notifier_block cpu_nfb = {
+ 
+ static int __init cf_check cpufreq_presmp_init(void)
+ {
++    if ( !processor_pminfo )
++        processor_pminfo = xvzalloc_array(struct processor_pminfo *, nr_cpu_ids);
++    if ( !processor_pminfo )
++        return -ENOMEM;
++
+     register_cpu_notifier(&cpu_nfb);
      return 0;
  }
- __initcall(cpu_idle_key_init);
-@@ -1339,6 +1342,9 @@ long set_cx_pminfo(uint32_t acpi_id, str
-     if ( vendor_override > 0 )
-         return 0;
+@@ -954,6 +965,11 @@ presmp_initcall(cpufreq_presmp_init);
  
-+    if ( !processor_powers )
+ int __init cpufreq_register_driver(const struct cpufreq_driver *driver_data)
+ {
++    if ( !processor_pminfo )
++        processor_pminfo = xvzalloc_array(struct processor_pminfo *, nr_cpu_ids);
++    if ( !processor_pminfo )
 +        return -ENOMEM;
 +
-     print_cx_pminfo(acpi_id, power);
+    if ( !driver_data || !driver_data->init ||
+         !driver_data->verify || !driver_data->exit ||
+         (!driver_data->target == !driver_data->setpolicy) )
+--- a/xen/drivers/cpufreq/utility.c
++++ b/xen/drivers/cpufreq/utility.c
+@@ -32,7 +32,7 @@
+ #include <public/sysctl.h>
  
-     cpu_id = get_cpu_id(acpi_id);
-@@ -1512,12 +1518,14 @@ static void amd_cpuidle_init(struct acpi
- #ifdef CONFIG_PM_STATS
- uint32_t pmstat_get_cx_nr(unsigned int cpu)
- {
--    return processor_powers[cpu] ? processor_powers[cpu]->count : 0;
-+    return processor_powers && processor_powers[cpu]
-+           ? processor_powers[cpu]->count : 0;
- }
+ struct cpufreq_driver __read_mostly cpufreq_driver;
+-struct processor_pminfo *__read_mostly processor_pminfo[NR_CPUS];
++struct processor_pminfo **__read_mostly processor_pminfo;
+ DEFINE_PER_CPU_READ_MOSTLY(struct cpufreq_policy *, cpufreq_cpu_policy);
  
- int pmstat_get_cx_stat(unsigned int cpu, struct pm_cx_stat *stat)
- {
--    struct acpi_processor_power *power = processor_powers[cpu];
-+    struct acpi_processor_power *power = processor_powers
-+                                         ? processor_powers[cpu] : NULL;
-     uint64_t idle_usage = 0, idle_res = 0;
-     uint64_t last_state_update_tick, current_stime, current_tick;
-     uint64_t usage[ACPI_PROCESSOR_MAX_POWER] = { 0 };
-@@ -1694,6 +1702,15 @@ static int __init cf_check cpuidle_presm
-     if ( !xen_cpuidle )
-         return 0;
+ /*********************************************************************
+--- a/xen/include/acpi/cpufreq/processor_perf.h
++++ b/xen/include/acpi/cpufreq/processor_perf.h
+@@ -59,7 +59,7 @@ struct processor_pminfo {
+     uint32_t init;
+ };
  
-+    processor_powers = xvzalloc_array(struct acpi_processor_power *,
-+                                      nr_cpu_ids);
-+    if ( !processor_powers )
-+    {
-+        printk("CPUIDLE: disabled - not enough memory\n");
-+        xen_cpuidle = 0;
-+        return -ENOMEM;
-+    }
-+
-     mwait_idle_init(&cpu_nfb);
-     cpu_nfb.notifier_call(&cpu_nfb, CPU_UP_PREPARE, cpu);
-     cpu_nfb.notifier_call(&cpu_nfb, CPU_ONLINE, cpu);
---- a/xen/arch/x86/include/asm/cpuidle.h
-+++ b/xen/arch/x86/include/asm/cpuidle.h
-@@ -5,7 +5,7 @@
- #include <xen/notifier.h>
- #include <xen/sched.h>
+-extern struct processor_pminfo *processor_pminfo[NR_CPUS];
++extern struct processor_pminfo **processor_pminfo;
  
--extern struct acpi_processor_power *processor_powers[];
-+extern struct acpi_processor_power **processor_powers;
- 
- extern void (*pm_idle_save)(void);
- 
+ struct px_stat {
+     uint8_t total;        /* total Px states */
 
