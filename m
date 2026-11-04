@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 03FC0606A33A
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2026 14:50:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9DB89606A31B
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2026 14:51:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=g24MCQv3
-Received: from list by lists.xenproject.org with outflank-mailman.1472040.1680101 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=Lpm2X4yS
+Received: from list by lists.xenproject.org with outflank-mailman.1472048.1680110 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOcJF-00059v-SI; Wed, 04 Nov 2026 14:49:53 +0000
+	id 1xOcL1-0006c6-5d; Wed, 04 Nov 2026 14:51:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1472040.1680101; Wed, 04 Nov 2026 14:49:53 +0000
+Received: by outflank-mailman (output) from mailman id 1472048.1680110; Wed, 04 Nov 2026 14:51:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOcJF-00059n-Os; Wed, 04 Nov 2026 14:49:53 +0000
-Received: by outflank-mailman (input) for mailman id 1472040;
- Wed, 04 Nov 2026 14:49:52 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xOcJE-00059h-Ba
- for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 14:49:52 +0000
+	id 1xOcL1-0006bz-2r; Wed, 04 Nov 2026 14:51:43 +0000
+Received: by outflank-mailman (input) for mailman id 1472048;
+ Wed, 04 Nov 2026 14:51:42 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xOcL0-0006bt-CE
+ for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 14:51:42 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xOcJD-00B7bQ-OH
- for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 15:49:51 +0100
-Received: from [10.42.69.7] (helo=localhost)
+ id 1xOcKz-00Ak3d-PA
+ for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 15:51:41 +0100
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aeb460f-2eae-0a2a0a5409dd-0a2a4507c5de-2
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 15:49:51 +0100
-Received: from [209.85.221.49] (helo=mail-wr1-f49.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aeb4674-e002-0a2a0a5209dd-0a2a450b943e-22
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 15:51:41 +0100
+Received: from [209.85.221.41] (helo=mail-wr1-f41.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aeb460f-b4ea-0a2a45070019-d155dd31d4cf-3
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 15:49:51 +0100
-Received: by mail-wr1-f49.google.com with SMTP id
- ffacd0b85a97d-48e00eee27dso453556f8f.0
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 06:49:51 -0800 (PST)
+ id 6aeb467d-b7e8-0a2a450b0019-d155dd29ac2d-3
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 15:51:41 +0100
+Received: by mail-wr1-f41.google.com with SMTP id
+ ffacd0b85a97d-48e3b22e971so425524f8f.0
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 06:51:41 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4b43cff3b14sm57617735e9.10.2026.11.04.06.49.49
+ ffacd0b85a97d-48fec8d8e29sm4510590f8f.19.2026.11.04.06.51.38
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 04 Nov 2026 06:49:50 -0800 (PST)
+ Wed, 04 Nov 2026 06:51:39 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,52 +51,53 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1793803791; x=1794408591; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1793803901; x=1794408701; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=4YSul6A+Yvf0xViQCRiwP4iZhdP7bYxM5Sccp0+2ABg=;
-        b=g24MCQv3fxFvnPgdXKobFVadQXkPJ2cvt2atnx8uyYDnOoqaSeJcbH9GWqDWb9s1Uo
-         lRw0KESw+4VOQomufLaBdpl05uS9Yli99xXa/yCUzkdd6oMjzaXqayRtmCRGqTxmvsdM
-         vOfdsj+mkdgap7S1vdslwMgfkdcfrGtgex2qNJv8PNLUAeW0KBtCvvlZ1FoRnw1rTZBw
-         V3ZxsUlwM6Z27y4i+ImFBmaI2iMQ/6MrAwD8/Kr/LiQxF7iEn9pfWdamG8W9JB0aYLF5
-         MieKmfQrkyCKZbp1p1ozWbn0TOUtlS17JOpU7J/6vtY+gDsmudxbdvaGpa1fMHPXbt1w
-         E5HQ==
+        bh=Uc8W2UpuSTrMsgDJbRnprQBO1BgyU+dWXGRRmxPKO2Y=;
+        b=Lpm2X4ySRCfNpbBAPqreGCn6le4xVypK567jhdezzNyxJl27efwNfnIVl5uN9hCajn
+         QgLz1okvFfG0YbjipHgUSHjtpIvhduSWJskWSJMRXBgrK/UfSfpHpOIEk9kAhf3rvt4B
+         VbMKklQ4PyzJzPGsYWbNlYndEkQ25EqDtn8Z06MBO9ItcrR68b9gMOOB5MgROiaSbIWt
+         xO90mENRV9iRbsQEzenA0Ckm6bgf8vWDuKt/EP6uaBpGhJUQm9N5lvh+ETV9hv585tBl
+         6oFEKhLMtqfUUAJvMXK02xZVdiyRSf4haI31Nn/qQHsCKzVIcT8jmgRjUq9R3UF8TqsD
+         sSwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793803791; x=1794408591;
+        d=1e100.net; s=20260707; t=1793803901; x=1794408701;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=4YSul6A+Yvf0xViQCRiwP4iZhdP7bYxM5Sccp0+2ABg=;
-        b=x5B5SD1zcJiblroPKrJhZPt823bVHLm+l3es4UmOJPR8RMJhPfvul+qxGDFUQOL+mR
-         LeytlC3lVTzfbbM7BEbWv4g7cmhg/4P2u0VvZVWVtBK3PRmT1fXISq2hiWqitIjPB0+N
-         /io+aGxNUC6JIwmyUo4u6V4EREBikoZaMy/0q6Bdx6KBrAOcPiXE5SMBEu3qgUQxTXyO
-         ZPvh0uzfmTfrDMvmgbFKo0QFlvuON5oQG3ukKAFxy/m3TOhTWS4qZrwCAWoBxGoiO1nt
-         xPFjgg34tP0Yuz6YxBQKaV4iFxKgy5M8f4HwprsqfSFAyljIPK8C579ElkPUo3CSPCw8
-         Nwnw==
-X-Forwarded-Encrypted: i=1; AKwUvBwV6CzUEne5kdDqA9O0KBhWPFD5QT3okfLhudZJT2etscM2vMkEIaRR/xnK2jJ9t0eyraJA+pbI33g=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z9Ayiti43KXcpNmEv/cqUeQZCO5DrALRZung9CfIGktOi9CNtmJ
-	QhjcK6DOj+AOrWZVd/6JMTOiVSVdTkmFYbHClvB6DEP5CZJBiFfTmfds5OF6UvS3WQ==
-X-Gm-Gg: AYBFou2c3B4qjPRMnb0RMZvNunsUGn2mPJzCn6aCG1Tb04w6jHvIbNB2MVRyTujGJT5
-	TacoEZBvpw3Kwc/v+hh1kUg2qhZHM5hy6SBA+jas9VMN4C8d8EwMZL9RWnCL5zCCPAU/EhgQsx8
-	/MpiW46mRkro7o3fflp4HjWWx2QUUaFtIP8PJMWS8hwP24NhfIoVxmdwWKBmLWT4JzgyENfE8B+
-	0YlI8qJNg2LrrifxxZ4meK/6YdV6m8FnNIZ9LbJGficC3r0OdLYpI/ww8aVLfhmO5w4dshNXPJ+
-	WAaphsKuxq3rOmLvH5j1g9A37iskxvWtcBQnHo3kT4o7L02hI/DXkcJRw/KyZP8uo/CC4TOi6sF
-	rsgNj/2P+A/DSmoWTL2psk/UdMsRqkWmf4dfeDmvZufKJcv84r1BMhtGXbM34mbLL9+iR127UIF
-	ZsOE8Vjd2NJqvlD+C5lbQkykhm6NwWhH7nNftaqbCTq5cRlC6fZJ3Ob5/FQMMkZOL95HaxCAtLS
-	ZrRB82Dwel0Vzg4BXFC93YTc56jSvEyt+T0OWdJQFwMtNHYdRe9BuWerS1EzHjJCBv/tQh7y7w4
-	f/FtcaTF3mSpyUQ5CpSJ+ojYc8y0LbOR4WRhyHKdvWBMe8/A4NLYSzea1IohnWwip52ltCv6yw2
-	7nx7eW6rNN2Rti/I=
-X-Received: by 2002:a05:600c:4714:b0:4a6:30c3:1114 with SMTP id 5b1f17b1804b1-4ac180f1c7amr369418085e9.12.1793803790980;
-        Wed, 04 Nov 2026 06:49:50 -0800 (PST)
-Message-ID: <9f55c251-af36-41e0-8afe-cb218d41f6cc@suse.com>
-Date: Wed, 4 Nov 2026 15:49:49 +0100
+        bh=Uc8W2UpuSTrMsgDJbRnprQBO1BgyU+dWXGRRmxPKO2Y=;
+        b=sgNgXpJZt91SXleowTVlk1TrZt9gqtR9X7HkpePLIpz66fbiSkCrmKixZe+IAVwheI
+         IR/cbatxgkbr+04nLeV/TteD/yCOk4AKBueVno698QoFtiofrKKFxEELzEHZl4fJusGy
+         OZNlyIeLRCKwL/ENzKxwsqM0q3hA0VHTp3xOc7azcStp0K4O9p7ec6eIl/my2z46OXxI
+         eTutXqvuyOWo+a9931SIETfTZ998DlcfQ9VIYZNbOib+gZylwgy/8I3bA22Q2+xwbm5+
+         uSGggRN3TWjPUb/+3VrKTtfGp3PrTfHhLG6iMrI0EZF0dRWJO4acQgKmVxq74YYSS13Z
+         2v9w==
+X-Forwarded-Encrypted: i=1; AKwUvBwtpGV5KMIssXHMcS/1ZbH71Ksc0PzLPuBY/2/3FAFM5b9TTeL0+HbPVzSOjZ5Z2rBeffZM+b+/UjY=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z+kVSLuIPEFzc1jbGHrz4fdnMsfzOSz1/jv7PkqYXdA8Tmy7QHY
+	ysfIkLnu1NjNXU0976n3uUil48MW6x2um+M5V0BiRTKELWP8vEXdpXJNPiL+pgeJt//yNEW4JUf
+	fUzyafA==
+X-Gm-Gg: AYBFou26q9um/8Fv5BzS/MFY9+/Svp3O2lhlr+454MnJeNTt2BlJe1voTdZZe3litFj
+	jjxQX0eTakXoq3tEkkwldsvBZoneKuPnYC14MoYTuoxn0sl9tgJSVKnmdMpfobosrciclalfTWI
+	PC/iykOtpuRjpPwJY+kjsrWp0W9JUrEUYwFQgvG6dYlO1d7tJUTv/0OldrHUjiUHYm16kT+tsMJ
+	HC2xDyM1hYAcb3H42bV3Fb0vAlQQrlb4I3PKYz2G62xN2amaQUVF5X3OCEvGefcAbPW5QgIDrlg
+	DkbTbRvwyMbQbMKKb3bZ+majHDcXKxOMf7iH5rYuCpXncfIjS0TpD9qPSyvZZbbKuNo+RZKNsXY
+	tsnkhoMkheIuJM276VEURDTDRFcZ8V5BEoxUojwMeqVt4CXWHAQ/Od2PGXfsGZbCrjBgDQV5Gpm
+	JsTVQTYVl1zvQ8jUR2HDLOV7EeezhPJYn+4uTp0vpG8ZDZUJSGVWQd6c5ethTwkJMJq2+9hyhJs
+	kRlzq40RBPLFz666GasenJbqOrs4mLYBsoljeqBC84Hz/CsXbMKR4qu6+HiVUVq81qB0LM+u7/Z
+	WfEo61Iz9kUIghgNs+fEgsfhx5Iy7iIV7JoI0zffFFGOkV/HHRlMpPzfSQa7KoA6VwXWHOsTDTi
+	PyC3wPUdnVbV0yAjb
+X-Received: by 2002:a5d:4ec6:0:b0:48e:bf0:30f with SMTP id ffacd0b85a97d-48e6e308ed9mr28652479f8f.34.1793803901049;
+        Wed, 04 Nov 2026 06:51:41 -0800 (PST)
+Message-ID: <28839e8c-bcde-463e-8617-92576ca8e8e6@suse.com>
+Date: Wed, 4 Nov 2026 15:51:38 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] xen/build-id: Introduce is_gnu_build_id()
+Subject: Re: [PATCH 2/2] xen/build-id: Drop xen_build_id_check()
 To: Andrew Cooper <andrew.cooper3@citrix.com>
 Cc: Ross Lagerwall <ross.lagerwall@citrix.com>,
  Anthony PERARD <anthony.perard@vates.tech>,
@@ -105,7 +106,7 @@ Cc: Ross Lagerwall <ross.lagerwall@citrix.com>,
  Stefano Stabellini <sstabellini@kernel.org>,
  Xen-devel <xen-devel@lists.xenproject.org>
 References: <20261104135133.2209628-1-andrew.cooper3@citrix.com>
- <20261104135133.2209628-2-andrew.cooper3@citrix.com>
+ <20261104135133.2209628-3-andrew.cooper3@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -131,79 +132,44 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20261104135133.2209628-2-andrew.cooper3@citrix.com>
+In-Reply-To: <20261104135133.2209628-3-andrew.cooper3@citrix.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1793803791-35CC7AE4-89336EF3/10/78276251493
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-42698a/1793803901-1B6D29EA-6E48B235/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 2138
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-purgate-size: 946
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 On 04.11.2026 14:51, Andrew Cooper wrote:
-> Broken out of the subsequent change for legibility reasons.  It will be used
-> to replace xen_build_id_check().
+> The function is misnamed; it really is looking for a GNU Build ID note, not a
+> Xen note as the name suggests.
+> 
+> It also has an awkward API to use.  For a GNU Build ID, the content is always
+> at +16 from the start, so really doesn't need to be returned by pointer, nor
+> is it necessary be doing additional checks on the returned pointers being
+> valid.
+> 
+> Switching to is_gnu_build_id() allows xen_build_init() to be simplified,
+> returning after the first successful find rather than passing an rc down the
+> function to skip later checks.
+> 
+> No functional change.
 > 
 > Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> ---
-> CC: Ross Lagerwall <ross.lagerwall@citrix.com>
-> CC: Anthony PERARD <anthony.perard@vates.tech>
-> CC: Michal Orzel <michal.orzel@amd.com>
-> CC: Jan Beulich <jbeulich@suse.com>
-> CC: Julien Grall <julien@xen.org>
-> CC: Roger Pau Monné <roger@xenproject.org>
-> CC: Stefano Stabellini <sstabellini@kernel.org>
-> ---
->  xen/common/version.c         | 33 +++++++++++++++++++++++++++++++++
->  xen/include/xen/elfstructs.h |  2 ++
->  xen/include/xen/version.h    |  2 ++
->  3 files changed, 37 insertions(+)
-> 
-> diff --git a/xen/common/version.c b/xen/common/version.c
-> index 80e7a9b981cf..7eb8a0221d82 100644
-> --- a/xen/common/version.c
-> +++ b/xen/common/version.c
-> @@ -114,6 +114,37 @@ void print_version(void)
->  /* Defined in linker script. */
->  extern const Elf_Note __note_gnu_build_id_start[], __note_gnu_build_id_end[];
->  
-> +/*
-> + * Check whether @n is a GNU Build ID note.
-> + *
-> + * We check that:
-> + *  - type is NT_GNU_BUILD_ID
-> + *  - name is GNU\0
-> + *  - desc is non-empty and exactly covering the rest of the buffer
-> + *
-> + * If this returns true, the contents starts at n + NT_GNU_HDR_SIZE.
-> + */
-> +bool is_gnu_build_id(const Elf_Note *n, unsigned int len)
-> +{
-> +    const char *name;
-> +
-> +    if ( len <= NT_GNU_HDR_SIZE )
-> +        return false;
-> +
-> +    if ( n->type != NT_GNU_BUILD_ID ||
-> +         n->namesz != 4 )
-> +        return false;
-> +
-> +    name = ELFNOTE_NAME(n);
-> +    if ( strncmp(name, "GNU", 4) != 0 )
-> +        return false;
-> +
-> +    if ( len != n->descsz + NT_GNU_HDR_SIZE )
-> +        return false;
 
-Isn't this too strict a check? Build-IDs can, iirc, take different formats
-(yes, this is under our control, but still), and I don't think there's a
-guarantee that all current and future ones are coming without any padding.
-IOW I think len wants comparing against the rounded up sum.
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+> The 16 probably ought to be a define somewhere, but I see no obvious
+> candidates in the ELF spec.
+
+That's for NT_GNU_HDR_SIZE in patch 1? Why should the ELF spec care about
+GNU notes?
 
 Jan
 
