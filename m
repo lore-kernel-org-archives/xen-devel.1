@@ -2,46 +2,51 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7CF1B606A331
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2026 13:52:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5F3C9606A31B
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2026 14:01:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=google header.b=Iv2q0cOU
-Received: from list by lists.xenproject.org with outflank-mailman.1471922.1680055 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=CHtWPm5q
+Received: from list by lists.xenproject.org with outflank-mailman.1471950.1680064 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xObOy-0003iq-TP; Wed, 04 Nov 2026 13:51:44 +0000
+	id 1xObY2-0006A6-Ri; Wed, 04 Nov 2026 14:01:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1471922.1680055; Wed, 04 Nov 2026 13:51:44 +0000
+Received: by outflank-mailman (output) from mailman id 1471950.1680064; Wed, 04 Nov 2026 14:01:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xObOy-0003ij-Py; Wed, 04 Nov 2026 13:51:44 +0000
-Received: by outflank-mailman (input) for mailman id 1471922;
- Wed, 04 Nov 2026 13:51:43 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper3@citrix.com>) id 1xObOx-0003eU-Fi
- for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 13:51:43 +0000
+	id 1xObY2-00069z-Or; Wed, 04 Nov 2026 14:01:06 +0000
+Received: by outflank-mailman (input) for mailman id 1471950;
+ Wed, 04 Nov 2026 14:01:05 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1a6dcf00e000403d@swg.vates.tech>)
+ id 1xObY1-00069r-Co
+ for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 14:01:05 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xObOw-00EfZF-Sd
- for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 14:51:42 +0100
-Received: from [10.42.69.2] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6aeb3869-bab6-0a2a0a5309dd-0a2a4502df3e-20
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 14:51:42 +0100
-Received: from [209.85.221.41] (helo=mail-wr1-f41.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6aeb3869-6ca4-0a2a45020019-d155dd29e98f-3
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 14:51:37 +0100
-Received: by mail-wr1-f41.google.com with SMTP id
- ffacd0b85a97d-48bbb06e746so470445f8f.3
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 05:51:37 -0800 (PST)
-Received: from localhost.localdomain (host-78-146-248-75.as13285.net.
- [78.146.248.75]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4b4107b7198sm27919235e9.0.2026.11.04.05.51.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Nov 2026 05:51:36 -0800 (PST)
+ id 1xObY0-00EYjg-JT
+ for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 15:01:04 +0100
+Received: from [10.42.69.6] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1a6dcf00e000403d@swg.vates.tech>)
+ id 6aeb3a98-e002-0a2a0a5209dd-0a2a4506bdee-18
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 15:01:04 +0100
+Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1a6dcf00e000403d@swg.vates.tech>)
+ id 6aeb3a9f-195a-0a2a45060019-b9ff1c23840b-3
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 15:01:03 +0100
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a1a6dcf00e000403d.007 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Wed, 04 Nov 2026 14:00:59 +0000
+Received: from [192.168.1.52] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
+ [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
+ by mail2.vates.fr (Postfix) with ESMTPSA id C61CC821D0;
+ Wed,  4 Nov 2026 15:00:58 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -50,87 +55,113 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1793800297; x=1794405097; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=zyhWJc0WzTY4V2MRzOh2aP3P8zgX4P7gXVVJwlwaSC4=;
-        b=Iv2q0cOUu91VEqaqpn4+JLlDUg/wuwNHSYQaWbRERkjUjAnb0ouQ4z0rOB1/kP9FCQ
-         BBc9oez0mRvNARDNHjN9FLWyGRaJyDjNQYHJNBgvrBfBczNm++BurfXRVuw/UMoponxO
-         MBVMy8gcIAiTB3Sjy/2nKDXwXvuoImX/r8Kbo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793800297; x=1794405097;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=zyhWJc0WzTY4V2MRzOh2aP3P8zgX4P7gXVVJwlwaSC4=;
-        b=yd9Z+vY8SUwhyBBDWo11Z1dnzIiSWwfB4b7Vgnd290mneK3leDV/bMZiWAO9GE3u+j
-         Q+b5j9NUtk1ZIits9JzbCUyQIV6RdorzCKnjO0w8aBGNckA+R4lhVDggp0Q33p35D9Ff
-         yqv68P0KQphZoPUpf8kIXfzvL4fBXM4diKgyl53BGeoTmfQNXKrVB9NarSJpmI+h8qAc
-         06gp5/3DTSoNG9uugeYNLAVDOlPsHyPb58QmDHkXavtEBTVpWjNnJ36KCJiw4L28aGhi
-         /kdpA/vyJcJ74QAey3s5pd8nFnoIBjdZ5IhuCxOBqSzye9D1t7iR05Bg0nn5cS9jjM+v
-         wr9Q==
-X-Gm-Message-State: APuU4Z8/q3vLtGK5h05j7qsv6ZRTsw+J3QQFPbXLqN7M9yubyI8ihsTl
-	qolsGAxKGjgc9YbpHlN7xn35pY4Hddbam7udmlOBC9GnD2SeeUgpdX49fcxQolC4VTtB9Oc3pWH
-	prtStTck=
-X-Gm-Gg: AYBFou2f23YlzYuxl7DArUZwCcYqe6v4QV/PMUObfIozLJYj9zyj3y63leKv1P7tsaT
-	xuKEwJVvA/gDFizTkNBpUD6mILgJs+aq1dutu2/8Lh+YAxzAB/KqgMSIpXil4kbvy0b3TzWcyBW
-	uua0pA2O2TMOo8wzs0ZgIZDVyNCOgCzIe3hwHz03o3+sfsrlr8sEdoVuRafogTU7P6NGBJbmKlk
-	iK+PgVOI7hv4Rp0QcpPJ5JklHfZQi/xZpXn+p1zUb0SxI8IE1NzPQxzFzYoHM4Acs5GZZk42Omz
-	3bvx85Qn7Br+t7Dey7beCPMHSjw991MRA5/RJH+7RG4jeJbL2N0Pbdr4yMLH8dKHIC+bR9SoIeR
-	uVAtgujxTtYaX2OvexjP6x980ajBrYpX6kpHhXdvqvrph9y07K3+bljSwBCPm7QkcX0cXUwI9Ii
-	m6EL+DTfED8Ve3e2I+ARF5NR/Ty1/kV/8DJE2VJVWMcN/pfun/8dlsZMHlPNZZ24Fblw7NMlRIi
-	xA10dprcXed5s3IhMtMo+NxsxQf3r7VlChjHExAyVU7mOTQCM/1WrwdpLO/SCd4ud2AeW7ERqvH
-	2VHWJkBcDTTTlMgvqixgMxF7QEnE9yAdoPNjZFyjYftzRsLqXoGE3a/QMHR4xIyNSlPFqYkxGv0
-	Oot4KSOYqslckij4Tlsb6vxFn
-X-Received: by 2002:a05:600c:6212:b0:4a4:de70:2ad4 with SMTP id 5b1f17b1804b1-4ac17ffa395mr352272655e9.22.1793800296536;
-        Wed, 04 Nov 2026 05:51:36 -0800 (PST)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Ross Lagerwall <ross.lagerwall@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH 0/2] xen/build-id: Further cleanup
-Date: Wed,  4 Nov 2026 13:51:31 +0000
-Message-Id: <20261104135133.2209628-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=hSvh9tIJZudOU7akmVf6d7si3GhoDN2Ygh0sY5giZ0s=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
+ b=CHtWPm5qQ7qhbWqO/x5FSIqFZam6X3+SZJJKKYO3iY+jlsU0c7kV4ak2vospG82P9+SQBmW8e
+ 1llibiF8PUNQJqUfUyWtsCE/2sXQL1Dunx/Ugr+9Ah2qwosPJ1ZCfbo23rzZHykb4+1PgOB3iGv
+ kroYQmLovRYrlqg7zfm6XmTyA/o0hVwon3W5NS0hIUeTM/8uI2tPj/FeibKVCx2eOTT9ojcQ8w8
+ ixL7OJwNIrX46PCJAahw5oMNuiD1w9jFX7mhbwuSFQZiXAQhBj396e1MwpdwI+RUwDTH2kT6WfO
+ 7H+x+1hqjfHHE41rzxe8r/z0/tULqJc2rrukhtNxEQnQ==
+X-Zone-Loop: 844fcfab838b5d821057add834ab5cc9ade412b5e98f
+x-campaign-type: default
+x-transaction-id: 635ced06-c1d8-4989-9473-279cf7bc1871
+x-swg-uid: 01-8c46f024-b652-42d7-9b7f-50ee49b5929e
+X-Mailer: Sweego
+Message-ID:
+ <1793800859.8631fc262581453bbf619ec5b2062170.1a1a6dcf00e000403d@vates.tech>
+x-swg-bid: 1793800859.8631fc262581453bbf619ec5b2062170.1a1a6dcf00e000403d
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1793800302-31DC92AC-58C54EAB/0/0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH v3 37/39] xen/riscv: implement continue_new_vcpu()
+From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: xen-devel@lists.xenproject.org, 
+ Romain Caritey <Romain.Caritey@microchip.com>, 
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>, 
+ Zheng Zhang <zhangzheng@iscas.ac.cn>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Connor Davis <connojdavis@gmail.com>, 
+ Andrew Cooper <andrew.cooper3@citrix.com>, 
+ Anthony PERARD <anthony.perard@vates.tech>, 
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, 
+ Julien Grall <julien@xen.org>, 
+ =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
+ Stefano Stabellini <sstabellini@kernel.org>
+In-Reply-To: <0d254188c7f21c88ef1982dc9c5810f7b503e38e.1790779209.git.oleksii.kurochko@gmail.com>
+References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
+ <0d254188c7f21c88ef1982dc9c5810f7b503e38e.1790779209.git.oleksii.kurochko@gmail.com>
+Date: Wed, 04 Nov 2026 15:00:50 +0100
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793800853; l=2013;
+ i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
+ bh=/knFn1VKfhNtR1yW6m3cyPzh9rzT7yTH+1/ivqer6G8=;
+ b=BU3lTBHrU/K3BRx24WT1O1ig+mwJuF03kON/DZ4yoO6EyLet15ESYlaRNpsuj5OFRHJrKkPnK
+ JxyjZvx6/cOCCL00QQSAlTJgn4Mz7rX0QnUtSpyw2c5l7M7NfRQfZEz
+X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
+ pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1793800859044
+X-purgate-ID: tlsNG-16d1c6/1793800863-FE67277B-C1A9AE69/0/0
 X-purgate-type: clean
-X-purgate-size: 515
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham autolearn_force=no
+X-purgate-size: 2013
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-This is the final piece of work 32b63424e4e4 "x86/EFI: Fix detection of
-buildid" which is rather overdue a first posting.
+> continue_new_vcpu() is the arch hook invoked the first time a freshly
+> created vCPU is scheduled. Implement both cases it has to cover:
+>  - for the idle vCPU, switch to its own stack and jump to idle_loop();
+>  - for a guest vCPU, enter the guest through the new
+>    return_to_new_vcpu() path in entry.S, which restores hstatus and
+>    sepc, passes the hart id in a0 and, in a1, either the DTB address
+>    (boot vCPU, as expected by the RISC-V boot protocol) or the opaque
+>    value passed to SBI HSM hart_start() (secondary vCPUs), clears the
+>    remaining GPRs, sets sstatus.SPP and sstatus.SPIE and executes sret.
+> 
+Nit: the guest vCPU sentence is hard to follow in one go. Maybe split it:
 
-Andrew Cooper (2):
-  xen/build-id: Introduce is_gnu_build_id()
-  xen/build-id: Drop xen_build_id_check()
+  - for a guest vCPU, enter the guest through the new
+    return_to_new_vcpu() path in entry.S. It restores hstatus and
+    sepc and passes the hart id in a0. a1 holds the DTB address for
+    the boot vCPU (as expected by the RISC-V boot protocol), or the
+    opaque value passed to SBI HSM hart_start() for secondary vCPUs.
+    It then clears the remaining GPRs, sets sstatus.SPP and
+    sstatus.SPIE, and executes sret.
 
- xen/common/livepatch.c    | 11 +++-----
- xen/common/version.c      | 56 +++++++++++++++++++++------------------
- xen/include/xen/version.h |  4 +--
- 3 files changed, 35 insertions(+), 36 deletions(-)
+> [ ... 94 lines skipped ... ]
+> --- a/xen/arch/riscv/entry.S
+> +++ b/xen/arch/riscv/entry.S
+> @@ -147,3 +147,42 @@ FUNC(__context_switch)
+>  
+>          ret
+>  END(__context_switch)
+> +
+> +/*
+> + * Enter a vCPU for the first time. Must be called with interrupts disabled,
+> + * see continue_new_vcpu().
+> + */
+> +FUNC(return_to_new_vcpu)
+> +        REG_L   t0, CPU_USER_REGS_HSTATUS(sp)
+> +        csrw    CSR_HSTATUS, t0
+> +
+At this point regs->hstatus only has SPV | SPVP (arch_vcpu_create()), so
+VSXL is written as 0, which is a reserved encoding. That only gets fixed
+by "xen/riscv: set the guest's XLEN explicitly in hstatus.VSXL", which
+comes later in the series. Wouldn't it be better to move that one ahead
+of this patch?
 
+Reviewed-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
 
-base-commit: 2043d22b7e926f508cc23391b4c75325fa7211e9
 -- 
-2.39.5
-
+Baptiste Le Duc <baptiste.le-duc@vates.tech>
 
