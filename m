@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DCD38606A31B
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2026 10:47:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9A563606A32C
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2026 10:59:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=d9knW2Lp
-Received: from list by lists.xenproject.org with outflank-mailman.1471651.1679902 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=BTEHmzMT
+Received: from list by lists.xenproject.org with outflank-mailman.1471665.1679912 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOYWE-0005AE-A1; Wed, 04 Nov 2026 10:47:02 +0000
+	id 1xOYhf-000703-Ad; Wed, 04 Nov 2026 10:58:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1471651.1679902; Wed, 04 Nov 2026 10:47:02 +0000
+Received: by outflank-mailman (output) from mailman id 1471665.1679912; Wed, 04 Nov 2026 10:58:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOYWE-0005A7-7F; Wed, 04 Nov 2026 10:47:02 +0000
-Received: by outflank-mailman (input) for mailman id 1471651;
- Wed, 04 Nov 2026 10:47:00 +0000
+	id 1xOYhf-0006zw-78; Wed, 04 Nov 2026 10:58:51 +0000
+Received: by outflank-mailman (input) for mailman id 1471665;
+ Wed, 04 Nov 2026 10:58:49 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xOYWC-0005A0-Ao
- for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 10:47:00 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xOYhd-0006zq-Pz
+ for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 10:58:49 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xOYWB-00AI82-Nt
- for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 11:46:59 +0100
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xOYhc-00AKwa-Vx
+ for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 11:58:49 +0100
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aeb0d22-8faa-0a2a0a5109dd-0a2a45049130-12
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 11:46:59 +0100
-Received: from [209.85.221.46] (helo=mail-wr1-f46.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aeb0fe8-8faa-0a2a0a5109dd-0a2a4508a7fc-2
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 11:58:48 +0100
+Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aeb0d1e-b57f-0a2a45040019-d155dd2ef0c9-3
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 11:46:54 +0100
-Received: by mail-wr1-f46.google.com with SMTP id
- ffacd0b85a97d-48e04773687so201815f8f.2
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 02:46:54 -0800 (PST)
+ id 6aeb0fe8-f659-0a2a45080019-d1558030a45f-3
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 11:58:48 +0100
+Received: by mail-wm1-f48.google.com with SMTP id
+ 5b1f17b1804b1-4a549cd7fd2so4745875e9.0
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 02:58:48 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48fecac1a1csm3153700f8f.12.2026.11.04.02.46.53
+ 5b1f17b1804b1-4b4134ff2a3sm42205495e9.2.2026.11.04.02.58.47
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 04 Nov 2026 02:46:53 -0800 (PST)
+ Wed, 04 Nov 2026 02:58:48 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,59 +51,64 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1793789214; x=1794394014; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1793789928; x=1794394728; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=30A1bfQ7LdKKRF9Zidp9+TUWRKwU2+ZacTc/RxfXgCQ=;
-        b=d9knW2LpeyAgdo/pCTbzz/g402AgYHE4nAiyZr4qp5PYYgwc9eW5OoDFHPHA3xvc3h
-         2wxI4ObO5Co5+1Ct5fwhiuNKyczB7Wn3n9zhZ7Kh/lCDVSgotY+LXYDGZWVBL0HMaKLl
-         CULYQ3do7JMWm5ucO0nNdo2r6Cvk4vKZqrrzqUQeEyy1Jh1YVm9d+4OxdkYtGpXD0Ibl
-         16DRnFBSuYk2A2FvzK9Bw1QHpYksawr3abjvMP2QxrFvAnaR4VSWpKTBE9XqTa0gaosF
-         jRp1c2jCx6TgsBdYsubH7klfA6Fvl+Ex+8zyZAyQwmTyVkAdsgFm5nfjGQvUu5uDBmyi
-         cd0A==
+        bh=G/74xMzCy1qrkh5nS4TT5y5CUMY7oP3+jZg9UUxgPNQ=;
+        b=BTEHmzMTLeXeLrn4ITnyGXwyxxmo0n17nkUpO/2VAqZpT0DYqcol3tYYgEPh8YGQmp
+         1lfiAAELk+PBb0DEdd+erYEmnIeqv+naju+i69W/d4NnQ0y6qEM5zjqz7QKhUEuJeoyt
+         WpU3aOJtEOZicnf7vO0cNjOUWGCpZMKk7YMGFMCwH5fJGGIzFfO69efsuIMy8PO2V/I8
+         cqkrvrSY8vuEqqSpF+R/2UEQsM5hNDYYbpWt1gTuB+v7upC5bPE8rIi+BK/AzyBqQiNM
+         QR2gVVCZYNrsZHgNgnaESH4DtU9EbXrzabXT1DHxAUL0yjWF/6P2r25i2oZwi3dmtA6w
+         1DXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793789214; x=1794394014;
+        d=1e100.net; s=20260707; t=1793789928; x=1794394728;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=30A1bfQ7LdKKRF9Zidp9+TUWRKwU2+ZacTc/RxfXgCQ=;
-        b=sTEQwOFPfi3oMSX4awuQPPHKLi0waW17NkLeNCh0BFhYgnks59RU2zBFAFC8e/2sau
-         apgtJc0wMwSqAe9lN+1RcKCvDfvX2h9KgHHO/+J9LAM1BUhsHEbgHaUveTVzVxZac3hL
-         HP/U0Rc6BoSwdBBEiyCixQjegxDadJl9vfPctG3HZzynkCbT13x5GFBhoebN7jfm5oXD
-         wU659dCiPlxU1GTr2vZKfwxQ9g7ZkMiaxTRbt66mJbnjoCCf1vTS9wgj5PQVUKHobHka
-         C5pWH7na/Qxr0/emWP/hChuDoJ6dy3HSQHoHW/wLLfryENtTDEf0vpb5u7HG23iIfQ2R
-         RYFQ==
-X-Forwarded-Encrypted: i=1; AKwUvBxufTPsaojKUHi+b2mnTxvAgknqylvfxPg/TYJBM3E8MYCCaHekDfz5DJstr5JboLLZxK2r/Ps1gYU=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z+OJgOrDNPM/VaSGBGPBy/WSDPInQ3hBkkZ6xpnpXAZlcFS4S15
-	oO3eh21PQSgePQtKm0Al7Ehdzal/gLMmOV1UEp9A5xiXeLdD2hzdP48pS5yEetozjQ==
-X-Gm-Gg: AYBFou1Fclm82t9+6+1sfsBZg9coEBBQ8qcnsqYspWagJj88wt2G095Pb3jw1R0MgRv
-	gvMeMYyBkvDzfwUG/oOcjmV1PzEURMwe62RaJ7PWSpFBwVnI4W0qEvD2bsOf/V6gdvS9bdrC/FT
-	BB0MdLMbWIL2TlaoSuYFJF6xsvzDCo8FzJ0lMir2g2P7zm2WUlGruBx61wnZeK2pmBambneBuqK
-	rZpd+I3sP/c+vu2U4t74tCoq1fkDwh4BTviOgtBjJcV5qY/h/HiYGCZz8dJgNoMaSYxNh3h1knF
-	eINlkuVt6RsJgQ37XbsLjS2c2OqcvhjmIiOLTlP+M3/Sci2XEWN/UPiByHc8fu1qZG6Dq9R9sZz
-	kDJSQYiyRDEYMb7eTXRLiiXZdS/YB6mweEAMVIXjtbE+IcG7gx/stNCVZOW920dPdvMHxINUIXX
-	EjcQkqCDRSMWigm1QJLakBGcD4IuFYMN35XUGuFledMz1xn7OndcO5Wlpv4zzmuDDODYoHaG/GT
-	SgiV1H5t04S3W13R1ygFrW5aG5wTcHGTH7afDwXsURhXU56BrLfzyW5YNc4C2fnEedTVMDk6k16
-	OBsHb/ItsyiJvtSqPDPbm+52jPQ+8SGGpTuODMCBRoHObzz6Udh5U8lhLJur1cIMoadK72yKVy/
-	XgjynVXzxOkvY9VI=
-X-Received: by 2002:a05:6000:26cd:b0:48e:8882:6d91 with SMTP id ffacd0b85a97d-48e88826d9dmr15712896f8f.1.1793789213916;
-        Wed, 04 Nov 2026 02:46:53 -0800 (PST)
-Message-ID: <63d71f41-6d5d-4b53-9af4-9d0938a2ef7a@suse.com>
-Date: Wed, 4 Nov 2026 11:46:52 +0100
+        bh=G/74xMzCy1qrkh5nS4TT5y5CUMY7oP3+jZg9UUxgPNQ=;
+        b=YwFbxwiAlKqyj9Al6N1oMxaMjPQrK898vH/0tvkLFRDjVhxo4SQpniLS5ymjgDPFgi
+         CZ+d06X6/npUMkW9lgaZfgiQb4dkeRXxvE1cYe4kd6r1YeRIHxAeYGukXJ3uiVap2dWs
+         36KO5xzRukGyK7qirGn5uCiRoB864gG37FUs+ielXOMgyRSzGzzMPWpBujJX01VSC4ZH
+         VH9uW0MoaMBvb6k/BlBUDe9tu0uJa50hF3GojvZ2xM47uVuJ5Q3OR/Q3dV4c6rnOSGPy
+         domSw0LFyhUzpiiWqKQHPmkR2VR8Lhsp5vDslxt0XpZJyFLQUuabbGrDiVoyoA4M5uV8
+         y7vQ==
+X-Forwarded-Encrypted: i=1; AKwUvBxDbaQfj+DF3FE0qZhq5XUAb9ML8MUBQfJWxyBWNC1pS/84re1sFjDXso1xUM2blhbXgisuCmUlrjw=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z9oEIr+xs9vH9w7VkVhBLn/tmuGZYHftsvDiOvz0blWu86IqFAP
+	TsCDLhOJEJmBZvOXJwN3DBMtII1fYRIGaPaRTQMj99oIB8LJFy8p87odkczRU5kQ8w==
+X-Gm-Gg: AYBFou1QRrG46+Tsgb1XHlxkOKAFRiO4BFEbm6Kikdj+a1xsiUbF3gw9dT92T2L6TEi
+	KhgvZyXeFdgwqjnjC27eRrOtHP/EylrOZ1Viczz/crzjyn/ISUZYUEf0PFNqayLBdEkQJlDYKD3
+	j5gD7kpLqEa/N/B+N5c/yeACa8MmKsdF8HJKvkSsrUDdoimGPbaeF4EwvAYSP6kI59SN0s9c0ok
+	/QTd0gCeY/I34bZRj/2hFhDj47m4jCpNkn+xuXE68vOrJwgWGyyjImbGoTPzCAya4DhR/JSyQDY
+	4RqZ1aT46drE24FiIkcBMjI+rC2kYHV89j/KbJEOncAa4KY3b6eIIYeiqVOwdahV1wO/7hNNcHK
+	ARRXpBdXvXNYVT0LxSm32NjZbPLDr8PbeMxZbUJ3ZFKXxVjatGdvUrBPKscpSqwG/1GlT09yUHe
+	pEdfVAj1chsNCaqpFdgp6zw00ZU47dH0WKkdbdLXeBoe5XYjb1eOx6XaYF6GBaQ5zpUuXtxd7hs
+	A9W8ubnie2SJd4v0bIrNsnnJz29ljgOD45ypJaliznKFZHgf5YpeqFlR5YkvLofligyedBi+cJY
+	pwOkPa8Wj5vAyJYDe0JeL+Xn7n3YUCNmLaZOF0hmDf5TQlAFxZ3J6jAVgNdjcxJMGcZCINiYBAP
+	59TJyddzBKKr3PJySE4UkxuayhK8Y0Z8HvkKK
+X-Received: by 2002:a05:600c:848c:b0:4a3:5da2:38ae with SMTP id 5b1f17b1804b1-4ac17a3628emr357729515e9.14.1793789928294;
+        Wed, 04 Nov 2026 02:58:48 -0800 (PST)
+Message-ID: <4c03ba94-6635-4f86-bd05-944fc396f3ec@suse.com>
+Date: Wed, 4 Nov 2026 11:58:47 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 01/44] x86/mm: allocate the per-domain L3 in
- arch_domain_create()
-To: George Dunlap <gwd@xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+Subject: Re: [PATCH 4/4] automation/eclair: deviate MISRA C Rule 11.8 for
+ xfree() and vfree()
+To: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>
+Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>,
+ Doug Goldstein <cardoe@cardoe.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
-References: <20261103-asi-hvm-v6-0-59dbc5ce9615@xenproject.org>
- <20261103-asi-hvm-v6-1-59dbc5ce9615@xenproject.org>
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <cover.1793699713.git.dmytro_prokopchuk1@epam.com>
+ <4accfe649e163bb4d0372c432256ed394b4ee50d.1793699713.git.dmytro_prokopchuk1@epam.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -129,56 +134,32 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20261103-asi-hvm-v6-1-59dbc5ce9615@xenproject.org>
+In-Reply-To: <4accfe649e163bb4d0372c432256ed394b4ee50d.1793699713.git.dmytro_prokopchuk1@epam.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ebf023/1793789214-583C0B50-399E3915/10/78276251493
+X-purgate-ID: tlsNG-c1860d/1793789928-DFCD387B-8AF0C178/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 2023
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-purgate-size: 760
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 03.11.2026 23:13, George Dunlap wrote:
-> init_xen_l4_slots() relies on d->arch.perdomain_l3_pg being non-NULL,
-> or it will fill in a garbage value for slot 260.  Currently, this
-> is allocated only implicitly, as a side effect of calling
-> create_perdomain_mapping().  But depending on the specific
-> circumstances, this may not happen until several hypercalls after the
-> domain is created.  This is not robust: callers need to keep track of
-> when exactly certain structures happen to be created to ensure that
-> init_xen_l4_slots() operates properly.
-> 
-> Since fcf91ce9de66 ("x86/pv: don't populate the GDT/LDT L3 slot at
-> domain creation"), a PV domain gets its L3 with its first vCPU
-> (pv_create_gdt_ldt_l1tab()).  Only mapcache_domain_init() makes it
-> earlier, and release builds skip that unless memory hotplug is enabled
-> or the host's memory reaches past the part of the directmap PV guests
-> can see.  So in release builds on most hosts, an L4 that is promoted
-> before XEN_DOMCTL_max_vcpus has created the domain's vCPUs gets a
-> slot 260 entry made from a NULL page (0x803e900000000063).  libxl is
-> unaffected: it creates the vCPUs before it builds or restores a domain.
-> 
-> Allocate it explicitly in arch_domain_create() instead.  Introduce
-> allocate_perdomain_l3(), which will allocate a page with the
-> appropriate parameters and zero it.  create_perdomain_mapping() now
-> requires the L3 to exist, and BUG()s if it does not.
-> 
-> We return a pg rather than setting d->arch.perdomain_l3_pg directly,
-> because later we'll use the same function to initialize the per-vCPU
-> perdomain L3.
-> 
-> This removes the need to allocate it semi-implicitly (calling
-> create_perdomain_mapping() with nr == 0) in hvm_domain_initialise().
-> 
-> Fixes: fcf91ce9de66 ("x86/pv: don't populate the GDT/LDT L3 slot at domain creation")
-> Assisted-by: Claude Code:claude-opus-5-5
-> Signed-off-by: George Dunlap <gwd@xenproject.org>
+On 03.11.2026 11:29, Dmytro Prokopchuk1 wrote:
+> Livepatch passes const-qualified pointers from struct payload to xfree()
+> and vfree(), which take a 'void *' argument. The cast that removes the
+> const qualifier is a violation of MISRA C Rule 11.8.
 
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+I can only repeat my prior suggestion here: xfree(), vfree(), and other
+similar freeing / unmapping functions should take pointer-to-const. Andrew
+has been of the opposite opinion, thus being unhappy about e.g. vunmap()
+or unmap_domain_page() taking pointer-to-const. I think we need to come to
+a project-wide position towards this, and only then can we decide whether
+(and if so how) to deviate any of those functions.
 
+Further, if you deviate xfree() and vfree(), why not also xvfree()?
+
+Jan
 
