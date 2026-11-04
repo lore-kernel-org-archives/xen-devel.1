@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 99EA0606A31B
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2026 13:29:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0BDDF606A31B
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2026 13:31:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=GYJxnKty
-Received: from list by lists.xenproject.org with outflank-mailman.1471890.1680019 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=hHFCYSvs
+Received: from list by lists.xenproject.org with outflank-mailman.1471903.1680028 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOb31-0007ET-FC; Wed, 04 Nov 2026 13:29:03 +0000
+	id 1xOb52-0000Ob-Tb; Wed, 04 Nov 2026 13:31:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1471890.1680019; Wed, 04 Nov 2026 13:29:03 +0000
+Received: by outflank-mailman (output) from mailman id 1471903.1680028; Wed, 04 Nov 2026 13:31:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOb31-0007EM-Bp; Wed, 04 Nov 2026 13:29:03 +0000
-Received: by outflank-mailman (input) for mailman id 1471890;
- Wed, 04 Nov 2026 13:29:02 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xOb30-0007D1-47
- for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 13:29:02 +0000
+	id 1xOb52-0000OU-Qw; Wed, 04 Nov 2026 13:31:08 +0000
+Received: by outflank-mailman (input) for mailman id 1471903;
+ Wed, 04 Nov 2026 13:31:07 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xOb51-0000O0-Hq
+ for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 13:31:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xOb2z-00CKAa-GX
- for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 14:29:01 +0100
+ id 1xOb50-00EaCs-UY
+ for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 14:31:06 +0100
 Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aeb3316-2eae-0a2a0a5409dd-0a2a4503d710-14
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 14:29:01 +0100
-Received: from [209.85.221.51] (helo=mail-wr1-f51.google.com)
+ id 6aeb339a-bab6-0a2a0a5309dd-0a2a4503b9c6-8
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 14:31:06 +0100
+Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
  by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aeb331c-fae8-0a2a45030019-d155dd33c0ba-3
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 14:29:00 +0100
-Received: by mail-wr1-f51.google.com with SMTP id
- ffacd0b85a97d-48b042c0759so410166f8f.2
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 05:29:00 -0800 (PST)
+ id 6aeb339a-fae8-0a2a45030019-d1558030c83c-3
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 14:31:06 +0100
+Received: by mail-wm1-f48.google.com with SMTP id
+ 5b1f17b1804b1-4ac95761c85so5065215e9.2
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 05:31:06 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48fed08536dsm3543031f8f.32.2026.11.04.05.28.59
+ 5b1f17b1804b1-4b43d4c9d4csm73165215e9.12.2026.11.04.05.31.04
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 04 Nov 2026 05:28:59 -0800 (PST)
+ Wed, 04 Nov 2026 05:31:05 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,62 +49,72 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Cc:Content-Language:References:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1793798940; x=1794403740; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1793799066; x=1794403866; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :cc:content-language:references:to:subject:user-agent:mime-version
+         :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=vNm8RDO0dXMvB7146YlHAPn4FQqDBobCaiCX5pUPnDo=;
-        b=GYJxnKtyF+pboFQsbAkGHM6W+CsPQRJjVM0doIp5XyNdVjeVwQqB7X12J8xmYQGBId
-         36IMC1Ar+lFXo/n3t4DED9TMwxCupqQvUbb0Fuw33aTlTtYmjYp7prjShMUEx/TvBieq
-         czqH7Nhc8AgicWDuAHaoKVi7AjBiNTZnldzO+G1hPXiCbY02UvaLF+fd6pp8WrF9krlb
-         WsvBvskrLiEEL85aP4xZgNfabVsEgZrBZ3KIr2OEPvI9NCi9VckbeEy4mwl2zeF2KlvC
-         WQANbBdUm3wpIilMW8ucMxyxXd1leqQ6bIMMB6SXwDYTm6cz68hXH8/q+0FYHbxmzzGM
-         gG5g==
+        bh=kEKyi63FwfdhLQCi+rq0mDadwoOTO7xrjoRDGEKx9yQ=;
+        b=hHFCYSvsAeOgjPPHFVuVKep0OtZGGHuBVSzFk6s0Do4P0wWQV9Q5Y7OJNegrmhMQVi
+         tJBg55YWmO+vpJDIf9ZGLgP4xSwxjr+jQPlnr85cAaHzuEerQNE5kmW94FHyjO36TLJi
+         Kw1/RSUiRbk3It4tr+tx4zUdBjAFeM4Rf4sK0QO2CQYRxcGkGzETdwlXy2AGg9dcEZfd
+         6ErpBEJQ2nBxI89fcjUk5+qVfWBm2VoySajpBzms/0JmZjdjiy7abMh8G+C6TI0lD/G2
+         5+vF/MbOKFT230tUlQoJmSYlL/zlbUpzYjPnrbj8T3UWdsI25Iwi+FHpamThQdceBHHo
+         MC0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793798940; x=1794403740;
+        d=1e100.net; s=20260707; t=1793799066; x=1794403866;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :cc:content-language:references:to:subject:user-agent:mime-version
+         :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=vNm8RDO0dXMvB7146YlHAPn4FQqDBobCaiCX5pUPnDo=;
-        b=DO/hkHBGsYBdv9HU3sqkK88jrIT4PDqM1KzqHOfsd/aH4ngqfQlodJkW+b7nkREybu
-         aXrkR49EcnnXatv+wAfDk2J4PoQhY4V4nzcgu428IsF0Us0C5m56sfvcVrKfSVOUCN73
-         aL5iTb6T1Env6kox9hEyDeujig1JGpzRtfh6BCLyIMerT7AARnnUawvdmmAE1E0rxIK4
-         SKawPx+ebN5iw4hxNZSkfa6UPOrDOe3nBojzkRXeWhUDxXr3SaDYX/cbLyK6n66yyCWh
-         1HByenWXQsSa8QPnl+686gw7DzVUaDHQdNhSQPvatanCvSws+X2NCKGk1fsCB858ljog
-         pvYw==
-X-Forwarded-Encrypted: i=1; AKwUvByk0gcU8r9pKJzNIIgUQ6roP7+pz9o90ys1y2ZKpdEANAIc5ZarVRugDtJkLOIEsBGHdzOtGG2I+OY=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z9mOT1OT8dzfkGlxJwcqcPMuZBQDPsQ2jLZvf05ywK3+jJ62Xdj
-	yLuBH+TJacKxR4pzuNLMJuQtzy+ZD/oUNhKZoS6A88rZmdnK5eS1KiGtA5E/cqsDGg==
-X-Gm-Gg: AYBFou0M+89Tj9l85V1fRsEnBpQeTmu377SpKLOxBhItgBlXKCm3nOad7PmCzq02NWr
-	KPFIrCpKB23ie4bNeUEN3Y8+HNw15OrGYM4Z0xTyT8I8crI6wXOumshfg7hFhBI9anz06TC5kRk
-	9wjLmhVAlArBWuLP7J50k+KA7UfD3tpd2vCJu/FxQAu9Z7TaFJj4IkTWUuXHEKfLSohC/E6yH4I
-	YKQbn4+JlO6nRG632P1GWDSjvBazACReoA/KDLi39iCZba9muGROuBu6tmrp8DiCocmeTLx8Hew
-	RwdQYN61ZnJCHPjVl/BJIWwDZeeUJXT2R9DGNS9tukO9vXMs9HxmH5OygSAsGV02EQ0qy3jZcha
-	fAKp9Jhwlzc8Xqd1FavFooEQO9BTfZ+m7W+1Oi7LK9gpEACDrG5E0kFStZQy+1gOKUMYzRiffar
-	haE44KWDWwMeRXAIsZwtXTBO39+kMkDdfjip8BM4s28wzs9k1wKlfaHPzfBKS5A3CAsfgJOKMIT
-	6MoRG6Jcv09y0XuZm9xWAoX1IwIvASsyP+yKAkNtxb5LXdklDAh+Gxjetw6cAzvpnoVSS9MvrQr
-	Pmb+dALrMtfhCBRDThnd0FiLGdDDNhomEhAkNlSrckl0CcKaX8EXs3Fkct1DEdqaK2kvsnuNu/y
-	UTSffsayaNugEx0CP
-X-Received: by 2002:a05:6000:24c5:b0:48e:d7c:4bc8 with SMTP id ffacd0b85a97d-48e6e2bdddbmr38793365f8f.7.1793798939930;
-        Wed, 04 Nov 2026 05:28:59 -0800 (PST)
-Message-ID: <a7217959-5019-40fa-ab49-b6270727b4be@suse.com>
-Date: Wed, 4 Nov 2026 14:28:59 +0100
+        bh=kEKyi63FwfdhLQCi+rq0mDadwoOTO7xrjoRDGEKx9yQ=;
+        b=l/YhDRsBKPjHSCHln7Dndf7nDbAHRnYYm8VrdZlkq/M30Q63r1Qudzyj0fmBeJeg0M
+         ybohbpimkf78qrrV9EGfAV4X8zVYqrMTCEjPmPtEdBwdyUChvLgkOK0vgFIIh9wmLye0
+         YAbd/+TcH5I+MwXg6kdLRWO4+A6UKDXT9fboem9bo1t0i5FCex+LE9eBZBwJYxtN4kD+
+         l5QzKVTHUZ5DXatByKcZuL9r+cXwf8Q593E5PSLvEEAhK/SK5UF05o+pXiZ0IvthLtd3
+         /+DkF7FNhORtlMpkKkU+axOovKf936c/f7pCcH1OHY48i6Gn6XXCaZPFZxA//LKv3HcJ
+         skmw==
+X-Forwarded-Encrypted: i=1; AKwUvBxEWKvd2ysYouAA0cuaM63fiaNJghpyNtPJXy+hq86DYZwiirO+rv0w8tKff6zUZeI5MQ4ibKJuIQo=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z8jXLH89jkLEkdRSTVMFRR19850gjei0vlz8lTmu1ki6Y1QyVVx
+	iPDpOkeOBB60FVmxPg7TcYQw/+DGT0OqAvdvfLDcpgvj1zpDixx9mwqqX+L4z6lixg==
+X-Gm-Gg: AYBFou2Np5m3tn5AHSG4PR/klrnmrveEQ28HAyK9/mVeWxCvpBX5mBCPUrwxKKJOi1E
+	LjBlZsrNenkW/97T7dR/M+H2PPw9AyFsxKUYqtbqUSSLvKokVcchnbRXpnHLdbIYLYus65LZCWe
+	WFI34WB5a3oMSqXPNZATnqMl/A6H2iKW5BVa/USPdmN5haxzKvak9V+42Py7iFHPMINUNV7fJ2K
+	CYMV8d76F2SSPNdHgu0SFSfwG0HwRGrTqARkdeM1HR0HYuKGgq2W1Rqmnf2rPrDrHHNre2XM6YT
+	anLb2KnEMIv596W6vCz8PkYtOeqRyvgw8ZLLoMW3X4VBh5PMuSTU4KtyXDSwgLJEzkloU+Lcjrw
+	3DTFd+1R3nX4cmgfSYifgKu7gBsJDKXk8UnHB7fnMCkxvFzTS7kyxKuagbZhK7gIAHYHX56Ms4d
+	cEbq9CWkSNH9gIF6u7Zca7VS0ffCV/EXnsZqJXESou7LJImUlcYb52Y2LWoyv0asddIstSXrfiA
+	xE0hWey5vM/6SWCRH8FkQ35WVNNzY7GoQsP0+W/qybMj8LxUi5dCjm0gIXJG3x7hBKi7vFaESwQ
+	znLrwxiRGVVY/EENB2RrkfPROE/TJzELWZrodS41eisi2+TSUtSa1lBC4bRmFDKCXn7T7xd9ZpG
+	dqkvaz5kIyjxL49bm
+X-Received: by 2002:a05:600c:8b0a:b0:4a2:191f:7cbd with SMTP id 5b1f17b1804b1-4ac17191009mr366200125e9.11.1793799065766;
+        Wed, 04 Nov 2026 05:31:05 -0800 (PST)
+Message-ID: <3293924d-2333-4edd-97c1-91baa5ba00d4@suse.com>
+Date: Wed, 4 Nov 2026 14:31:04 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 21/39] xen/riscv: add guest memory read helper
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
- <c77408157f7674ad2ffc775d1267470b724fdecf.1790779209.git.oleksii.kurochko@gmail.com>
- <1792595464.8631fc262581453bbf619ec5b2062170.1a15f041119000f79f@vates.tech>
- <9c74569c-82a9-46b0-a013-c502c36c8d38@gmail.com>
+Subject: Re: [PATCH] misra: deviate MISRA C Rule 10.1 for boolean operands of
+ arithmetic
+To: Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>
+Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>,
+ Doug Goldstein <cardoe@cardoe.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <a536212d9cb18b5c23d06c1c06b9a8ae03941440.1792428626.git.dmytro_prokopchuk1@epam.com>
+ <83187933-b4cd-46df-b428-368d6f71cfaa@suse.com>
+ <dd2f093b-4151-4c42-ba7a-c7b1ce96e02d@epam.com>
+ <929b051d-2735-4d33-9240-fdf13355c11c@suse.com>
+ <fddeac51-52fc-4ab9-bb24-0b3b33faf07a@epam.com>
+ <6cde35ac-186f-4a9e-bd66-71b752582a21@suse.com>
+ <7ce2c3c6-f73c-405e-adb5-e8a2b68427f9@epam.com>
 Content-Language: en-US
-Cc: Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- xen-devel@lists.xenproject.org
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
@@ -129,87 +139,85 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <9c74569c-82a9-46b0-a013-c502c36c8d38@gmail.com>
+In-Reply-To: <7ce2c3c6-f73c-405e-adb5-e8a2b68427f9@epam.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-33051d/1793798940-758824E9-BB507B43/10/78276251493
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-33051d/1793799066-77AC44E9-028094A7/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 2950
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+X-purgate-size: 3275
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
 	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=4.0.1
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 04.11.2026 13:39, Oleksii Kurochko wrote:
+On 04.11.2026 14:28, Dmytro Prokopchuk wrote:
 > 
 > 
-> On 10/21/26 5:11 PM, Baptiste Le Duc wrote:
->> Sorry I forgot one thing.> +unsigned long read_guest(unsigned long 
->> guest_addr, bool read_insn,
->>> +                         struct trap_info *trap)
->>> +{
->>> +    /*
->>> +     * Poison the result: if the very first access faults, the fixup 
->>> skips
->>> +     * over the loads without writing it. Callers must check trap- 
->>>> scause.
->>> +     */
->>> +    unsigned long val = ~0UL, tmp;
->>> +
->>> +    /*
->>> +     * hlv/hlvx use hstatus.SPVP for the privilege of the access, and 
->>> the
->>> +     * live vsatp/hgatp for the translation. Xen never installs a 
->>> value of
->>> +     * its own in hstatus (it is only saved on trap entry and restored
->>> +     * before sret) and it doesn't reschedule before returning to the
->>> +     * guest, so all three still belong to the vCPU which trapped.
->>> +     */
->>> +    if ( read_insn )
->>> +    {
->>> +        asm volatile ( "\n"
->> I think this would need asm_inline instead...> +            "1: hlvx.hu 
->> %[val], (%[addr])\n"
->>> +            ASM_EXTABLE_TRAP_INFO(1b, 3f, %[ti])
->>> +            "   andi %[tmp], %[val], 3\n"
->>> +            "   addi %[tmp], %[tmp], -3\n"
->>> +            "   bnez %[tmp], 3f\n"
->>> +            "   addi %[addr], %[addr], 2\n"
->>> +            "\n"
->>> +            "2: hlvx.hu %[tmp], (%[addr])\n"
->>> +            ASM_EXTABLE_TRAP_INFO(2b, 3f, %[ti])
->>> +            "   slli %[tmp], %[tmp], 16\n"
->>> +            "   or %[val], %[val], %[tmp]\n"
->>> +            "3:\n"
->>> +        : [val] "+&r" (val), [tmp] "=&r" (tmp), [addr] "+&r" 
->>> (guest_addr),
->>> +          "+m" (*trap)
->>> +        : [ti] "r" (trap) );
->>> +
->>> +        /*
->>> +         * Although HLVX instructions' explicit memory accesses 
->>> require execute
->>> +         * permissions, they still raise the same exceptions as other 
->>> load
->>> +         * instructions, rather than raising fetch exceptions instead.
->>> +         */
->>> +        if ( trap->scause == CAUSE_LOAD_PAGE_FAULT )
->>> +            trap->scause = CAUSE_FETCH_PAGE_FAULT;
->>> +    }
->>> +    else
->>> +    {
->>> +        asm volatile ( "\n"
->> ... same for here.
+> On 11/2/26 17:45, Jan Beulich wrote:
+>> On 02.11.2026 15:43, Dmytro Prokopchuk wrote:
+>>>
+>>>
+>>> On 11/2/26 12:52, Jan Beulich wrote:
+>>>> On 02.11.2026 11:20, Dmytro Prokopchuk wrote:
+>>>>> On 10/26/26 13:13, Jan Beulich wrote:
+>>>>>> On 19.10.2026 18:54, Dmytro Prokopchuk1 wrote:
+>>>>>>> --- a/automation/eclair_analysis/ECLAIR/deviations.ecl
+>>>>>>> +++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
+>>>>>>> @@ -335,6 +335,11 @@ still non-negative."
+>>>>>>>     -config=MC3A2.R10.1,etypes+={safe, "stmt(operator(logical)||node(conditional_operator||binary_conditional_operator))", "dst_type(ebool||boolean)"}
+>>>>>>>     -doc_end
+>>>>>>>     
+>>>>>>> +-doc_begin="The result of relational, equality and logical negation operators has type int and value 0 or 1 (C99 6.5.8p6, 6.5.9p3, 6.5.3.3p5),
+>>>>>>> +so using it as an operand of an arithmetic operator is well defined and well known to all Xen developers."
+>>>>>>> +-config=MC3A2.R10.1,etypes+={safe, "stmt(operator(add||sub||mul||add_assign||sub_assign))", "src_type(ebool||boolean)"}
+>>>>>>> +-doc_end
+>>>>>>
+>>>>>> Why the restriction to add/sub/mul? The text ...
+>>>>>
+>>>>> Because this is the pattern found in the Eclair's report, and it can be
+>>>>> deviated safely (as opposed to unary minus, division and remainder which
+>>>>> are not included intentionally).
+>>>>
+>>>> Division and remainder aren't very useful with boolean operands, so can
+>>>> surely be left out. However, more generally: How does "Eclair's report"
+>>>> matter here? In deviation wording we want to go from what the Misra spec
+>>>> says. The spec covers all operators. Hence any special casing we do
+>>>> wants to be justified. And, right now at least, I see no justification
+>>>> for restricting the deviation to just add/sub/mul.
+>>>
+>>> Agreed, the report shouldn't be the argument.
+>>> The deviation should cover only the established idioms with a clear
+>>> meaning, and leave the rule's protection in place elsewhere. With a
+>>> Boolean operand these idioms are:
+>>> - + and - (and += / -=): "count it if the condition holds",
+>>> - * (and *=): "this value if the condition holds, else 0".
+>>>
+>>> Other operators have no such idiom (at least, I'm not aware of them).
+>>
+>> The use with * easily extends to <<. With that it's only logical to also
+>> include >>.
+>>
+>> With + and - covered, it feels pretty much natural that relational
+>> operators also want covering.
+>>
+>> Once there, and with division and modulo agreed upon to leave out, there
+>> isn't that much else left, I think.
 > 
-> read_guest() is an out-of-line function with its only caller in another 
-> translation unit, so asm_inline wouldn't change any inlining decision here.
+> I agree these uses would be equally well defined.
 > 
-> volatile is still needed, as the asm may trap and reads memory which can 
-> change behind the compiler's back.
+> My thought is about deviating them without a need. For these operators 
+> there is currently nothing in Xen. Without the deviation the rule keeps 
+> protecting new code: e.g. Boolean operand of << would be reported and 
+> looked at, rather than silently accepted.
+> 
+> So I'd prefer to keep deviation limited to +, - and * (and assignment 
+> forms). If you still think the wider scope is preferable, I'll of course 
+> go with that in v3.
 
-Yet that's not expressed by volatile, but by a memory clobber.
+I do think the wider form is what we want to go with, yet at the same time
+it's not just me to take that decision.
 
 Jan
 
