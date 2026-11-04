@@ -2,54 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A6EA1606A328
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2026 08:20:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F2958606A31B
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2026 09:44:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=susede1 header.b=eXIA9Z1v;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=susede1 header.b=eXIA9Z1v
-Received: from list by lists.xenproject.org with outflank-mailman.1471541.1679858 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=Ob4Sp7Hn
+Received: from list by lists.xenproject.org with outflank-mailman.1471584.1679868 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOWEF-0001k8-9b; Wed, 04 Nov 2026 08:20:19 +0000
+	id 1xOXXJ-0003pS-AZ; Wed, 04 Nov 2026 09:44:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1471541.1679858; Wed, 04 Nov 2026 08:20:19 +0000
+Received: by outflank-mailman (output) from mailman id 1471584.1679868; Wed, 04 Nov 2026 09:44:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOWEF-0001k1-6g; Wed, 04 Nov 2026 08:20:19 +0000
-Received: by outflank-mailman (input) for mailman id 1471541;
- Wed, 04 Nov 2026 08:20:17 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jgross@suse.com>) id 1xOWED-0001jv-Ev
- for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 08:20:17 +0000
+	id 1xOXXJ-0003pL-66; Wed, 04 Nov 2026 09:44:05 +0000
+Received: by outflank-mailman (input) for mailman id 1471584;
+ Wed, 04 Nov 2026 09:44:03 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xOXXH-0003pF-9t
+ for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 09:44:03 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xOWEC-00DWny-Lz
- for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 09:20:16 +0100
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xOXXG-00HBik-DI
+ for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 10:44:02 +0100
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jgross@suse.com>)
- id 6aeaeabc-2eae-0a2a0a5409dd-0a2a4509c37a-20
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 09:20:16 +0100
-Received: from [195.135.223.130] (helo=smtp-out1.suse.de)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jgross@suse.com>)
- id 6aeaeac0-be1a-0a2a45090019-c387df82e68e-3
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 09:20:16 +0100
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id BD87321F36;
- Wed,  4 Nov 2026 08:20:15 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 3D980134F0;
- Wed,  4 Nov 2026 08:20:15 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id 8rhoBb/q6mp9bgAAD6G6ig
- (envelope-from <jgross@suse.com>); Wed, 04 Nov 2026 08:20:15 +0000
+ (envelope-from <jbeulich@suse.com>)
+ id 6aeafe5b-bab6-0a2a0a5309dd-0a2a4505a3c8-42
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 10:44:02 +0100
+Received: from [209.85.221.53] (helo=mail-wr1-f53.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6aeafe61-4cb1-0a2a45050019-d155dd35e825-3
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 10:44:01 +0100
+Received: by mail-wr1-f53.google.com with SMTP id
+ ffacd0b85a97d-48e09aa5264so214913f8f.2
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 01:44:01 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48feda207d8sm2713188f8f.52.2026.11.04.01.44.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 04 Nov 2026 01:44:00 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -58,198 +49,136 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Autocrypt"; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Autocrypt"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1793780415; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=SBs5ngltfceoGz65CnfqU4ni/SkBXbisTdH2AJEoDqw=;
-	b=eXIA9Z1vNflgGIOD5PkcOdSYo7dHNT3ZabQ8geK1s2F/ydy0f/2FauA1E/q6xI/G4tZyCD
-	hawq/AZcyJTCwHO50k9qt0L16WZYMLIFXjQjBvzvVyyI73gPknSCO1+pjFnwMyy3uAnB33
-	nDaHGRkE17aD+t1GHtIKDO3ztODie7c=
-Authentication-Results: smtp-out1.suse.de;
-	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1793780415; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=SBs5ngltfceoGz65CnfqU4ni/SkBXbisTdH2AJEoDqw=;
-	b=eXIA9Z1vNflgGIOD5PkcOdSYo7dHNT3ZabQ8geK1s2F/ydy0f/2FauA1E/q6xI/G4tZyCD
-	hawq/AZcyJTCwHO50k9qt0L16WZYMLIFXjQjBvzvVyyI73gPknSCO1+pjFnwMyy3uAnB33
-	nDaHGRkE17aD+t1GHtIKDO3ztODie7c=
-Message-ID: <d6d14b59-66a2-4a1d-ba57-15b86412ed1b@suse.com>
-Date: Wed, 4 Nov 2026 09:20:14 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1793785441; x=1794390241; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=NamH/73RfpPGvbow4bV2m5TQ4lDJv8cYz4Xojo26n/8=;
+        b=Ob4Sp7Hn/n+G5bMEN3YWk8JQyV5bX2THnjMP/HCsOz26w+AGJsiz7lPicdiPnoL19T
+         sNwrB9/MHn89Tfbc88iu7b/nJo/TBHxiuMzQStQ+/0gsrq9fV07leq4Wo6GGmbG8n61+
+         F1vlWJEqH4Ay7miWZ6uj7xXyggFsVmwrrhSfAUasWLFjNBbghq0FPAyFlqV5FMKULi5B
+         4jpDeHM8Inh1gxFGt0UwYMx4lxR5f5mGZOF0RK0KTQrxuhEdL3Xmwk0DtdeNCSzKW9+I
+         VLMAfvol9Y47a1rST+Zrr0Y//bdzaJSElNkkSpTuGnDTdLzDd39E+ayX8Z17suZzbJ4h
+         zhcg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793785441; x=1794390241;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=NamH/73RfpPGvbow4bV2m5TQ4lDJv8cYz4Xojo26n/8=;
+        b=KcfI5IC7KeJ4DCcu1CfOg5JbIu9myjsaaWgxLqx2IdWi5B0VWk5LaiP9XSpCeuHFHo
+         IcMOyCZ1GnECfOt6CKwPXkl4QVM2M++k2K8sC8aWd7OzhLqgL5C5zbDF1QJrNGrr7DH+
+         +2dnhl1aKTITzolbW/pKcleh+XIOYCN5Ci50zzCw4qTjUfiBprXdMAs3vz+POOmbJPXH
+         4efDx0WNXXS+Rj3BcbnG2lwlVA5Qg43GJW7lTpiGwFEMzUJQhM7W1QsJj5ToOf7lTVhv
+         0mZsq5ImpDHpZOJ/YqK7spOjuFo8hQgB5FwEhozxz7g/0XmvFimlpIKfjY32KdfTIW2v
+         w3Yg==
+X-Forwarded-Encrypted: i=1; AKwUvBzrA6CXdfeEcFGwH6f779CxIVdW9q/EyMR2tk831ep2k65qcN03sSDeVkvVNofWc1JGebae4qsbN5c=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z/dfz8+Mz3eH4G0HWT1hqeCPiqUevuOyOihmgXrh9Dqq+qMn6BO
+	BQhoTRi4cQuwCousrHYfr59LMtalfPmL72P6OFfJbMAy+1F60NyNhbXoPVWzijQp6A==
+X-Gm-Gg: AYBFou2owCjnGxMiH0jBwQ2vGN1NmxIH6kOegECj/8oppVNAm2TokMR96jwGC4TEN7W
+	G4+D7tcu02fB5uJ1Kq5rU+L9WJYOHM8MXbWkKUerEEIM/b1AjEnM2vm4If9c441OR/yNWCPpxYA
+	JYxkgXEn1n23a75FXw70gIB9m2Zy+2hE5qSeRWNJktTXON7MiEEf/srd1N5IcY3CIc8oK7gFZEo
+	K02l11DiGpnwEBpIHq0wB6TJhnoXKj1aOBPtyBDsyzrQwUhOtdnKzf+0mtOYOlfNS96V96ALZNX
+	CHwoI4Z/G57x7QZ4hIe7gSVGawy3KhfpOI7UillOfxL+E0vvnyaDokwuSA0wKzEslmkOSdSPiIq
+	tDFBzc8yq6pN6UmPSMMzFF6BLvnba+pwSVCAdDJL2SJYt9nNozSh/Cw20T4MujXOc5u774HWdKl
+	U7qk4HBCi0HmIzMva6ehTMEAbzyfmcEoGsPlRNo8essXLMmTk7ooGsymFwJvFS05Q9QCzvVwDdk
+	9paKxoEt3vvFY9FT+TrmLsNC5MEiAiNFnwBAWXo2Ae9bN2vwJNOyzhmwGG4zxBgIc+GwXuifPW6
+	KfLM+cUGEjtdesRbwxG7qIlGbSjS02OxZwnQ2PcgSsfYgX+9mlFWtMNQXzLS/m1Ibmf3lbPEV4F
+	G1VB02XazZLb0vzU=
+X-Received: by 2002:a05:6000:2288:b0:488:8ab9:f74c with SMTP id ffacd0b85a97d-48e6e2bbf04mr35372076f8f.3.1793785441345;
+        Wed, 04 Nov 2026 01:44:01 -0800 (PST)
+Message-ID: <5b36fc16-51f2-4cef-ab26-3945267b8fc3@suse.com>
+Date: Wed, 4 Nov 2026 10:44:00 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86/CPU/AMD: Don't print reset reason in VMs
-To: Jason Andryuk <jason.andryuk@amd.com>, Thomas Gleixner <tglx@kernel.org>,
- Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
- Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
- "H. Peter Anvin" <hpa@zytor.com>,
- Mario Limonciello <mario.limonciello@amd.com>,
- Yazen Ghannam <yazen.ghannam@amd.com>
-Cc: xen-devel@lists.xenproject.org, Ariadne Conill <ariadne@ariadne.space>,
- Sean Christopherson <seanjc@google.com>, stable@vger.kernel.org,
- Ingo Molnar <mingo@kernel.org>, linux-kernel@vger.kernel.org
-References: <20261104013026.185392-1-jason.andryuk@amd.com>
+Subject: Re: [PATCH 6/7] gnttab: rename a parameter of
+ gnttab_populate_status_frames()
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Julien Grall <julien@xen.org>, Stefano Stabellini
+ <sstabellini@kernel.org>, Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <38850629-8bfa-4737-99ff-0fd3f489e56e@suse.com>
+ <06d74bd4-86f1-4c25-a6f7-f4e1c9de199f@suse.com>
+ <b8a4b183-34c9-4fba-a3b8-d86c4ee7b531@citrix.com>
 Content-Language: en-US
-From: Juergen Gross <jgross@suse.com>
-Autocrypt: addr=jgross@suse.com; keydata=
- xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
- ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
- dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
- NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
- XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
- AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
- CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
- mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
- G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
- kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
- Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
- RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
- vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
- sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
- aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
- w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
- auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
- 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
- fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
- HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
- QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
- ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
-In-Reply-To: <20261104013026.185392-1-jason.andryuk@amd.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------LKuNJD8fzNHF2QkAVsWACpJT"
-X-Spam-Level: 
-X-Spamd-Result: default: False [-9.80 / 50.00];
-	SUSE_INTERNAL_BYPASS(-9.00)[];
-	NEURAL_SPAM_LONG(3.49)[0.998];
-	BAYES_HAM(-3.00)[100.00%];
-	SIGNED_PGP(-2.00)[];
-	MIME_BASE64_TEXT_BOGUS(1.00)[];
-	MIME_GOOD(-0.20)[multipart/signed,multipart/mixed,text/plain];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_BASE64_TEXT(0.10)[];
-	XM_UA_NO_VERSION(0.01)[];
-	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	MIME_TRACE(0.00)[0:+,1:+,2:+,3:~];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RCVD_TLS_ALL(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_EQ_ENVFROM(0.00)[];
-	TO_DN_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	HAS_ATTACHMENT(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email,imap1.dmz-prg2.suse.org:helo]
-X-Spam-Score: -9.80
-X-purgate-ID: tlsNG-bad1c0/1793780416-BFAD0034-F4E5E011/35/110847
-X-purgate-type: clean
-X-purgate-size: 5442
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <b8a4b183-34c9-4fba-a3b8-d86c4ee7b531@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-c201ff/1793785441-F64B42A1-A6FD504A/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 1450
 X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=4.0.1
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------LKuNJD8fzNHF2QkAVsWACpJT
-Content-Type: multipart/mixed; boundary="------------aF0OXbWKlvGAtnWy4QKg8fQK";
- protected-headers="v1"; hp="clear"
-Message-ID: <d6d14b59-66a2-4a1d-ba57-15b86412ed1b@suse.com>
-Date: Wed, 4 Nov 2026 09:20:14 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86/CPU/AMD: Don't print reset reason in VMs
-To: Jason Andryuk <jason.andryuk@amd.com>, Thomas Gleixner <tglx@kernel.org>,
- Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
- Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
- "H. Peter Anvin" <hpa@zytor.com>,
- Mario Limonciello <mario.limonciello@amd.com>,
- Yazen Ghannam <yazen.ghannam@amd.com>
-Cc: xen-devel@lists.xenproject.org, Ariadne Conill <ariadne@ariadne.space>,
- Sean Christopherson <seanjc@google.com>, stable@vger.kernel.org,
- Ingo Molnar <mingo@kernel.org>, linux-kernel@vger.kernel.org
-References: <20261104013026.185392-1-jason.andryuk@amd.com>
-Content-Language: en-US
-From: Juergen Gross <jgross@suse.com>
-Autocrypt: addr=jgross@suse.com; keydata=
- xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
- ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
- dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
- NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
- XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
- AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
- CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
- mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
- G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
- kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
- Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
- RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
- vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
- sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
- aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
- w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
- auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
- 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
- fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
- HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
- QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
- ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
-In-Reply-To: <20261104013026.185392-1-jason.andryuk@amd.com>
+On 03.11.2026 17:59, Andrew Cooper wrote:
+> On 28/07/2026 2:52 pm, Jan Beulich wrote:
+>> --- a/xen/common/grant_table.c
+>> +++ b/xen/common/grant_table.c
+>> @@ -1807,12 +1807,9 @@ fault:
+>>  
+>>  static int
+>>  gnttab_populate_status_frames(struct domain *d, struct grant_table *gt,
+>> -                              unsigned int req_nr_frames)
+>> +                              unsigned int grant_frames)
+>>  {
+>> -    unsigned int i;
+>> -    unsigned int req_status_frames;
+>> -
+>> -    req_status_frames = grant_to_status_frames(req_nr_frames);
+>> +    unsigned int i, req_status_frames = grant_to_status_frames(grant_frames);
+>>  
+>>      /* Make sure, prior version checks are architectural visible */
+>>      block_speculation();
+>>
+> 
+> I fully agree that it's misnamed.
+> 
+> However, I'd suggest req_grant_frames to match the req_status_frames,
+> and also to hint at why it's not just gt->nr_grant_frames.
 
---------------aF0OXbWKlvGAtnWy4QKg8fQK
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+When we discussed this earlier on, I think we had settled on deliberately
+omitting the req_ prefix here: It's correct only for the use of the function
+from gnttab_grow_table(), but not quite for that from gnttab_set_version().
 
-T24gMDQuMTEuMjYgMDI6MzAsIEphc29uIEFuZHJ5dWsgd3JvdGU6DQo+IHByaW50X3M1X3Jl
-c2V0X3N0YXR1c19tbWlvKCkgZXhwZWN0cyB0byByZWFkIEZDSCBNTUlPIG9uIGJhcmVtZXRh
-bC4gIFZNcw0KPiBkb24ndCBoYXZlIGVtdWxhdGVkIEZDSCByZWdpc3RlcnMsIHNvIHRoZXJl
-IGlzIG5vdGhpbmcgdG8gY2hlY2suICBBZGQgYW4NCj4gZWFybHkgZXhpdCB3aGVuIHJ1bm5p
-bmcgb24gYSBoeXBlcnZpc29yLg0KPiANCj4gVGhlIHJlYWwgbW90aXZhdGlvbiBpcyBYZW4g
-UFYgZG9tVXMgY2FuJ3QgYm9vdCBvbiBaZW4gQ1BVcy4gIFBWIGRvbVVzDQo+IFBURSBjb250
-YWluIHN5c3RlbSBwaHlzaWNhbCBhZGRyZXNzZXMgLSB0aGV5IGRvbid0IGhhdmUgY29uY2Vw
-dCBvZiBndWVzdA0KPiBwaHlzaWNhbCBhZGRyZXNzZXMuICBkb21VcyBjYW4gb25seSBtYXAg
-cGh5c2ljYWwgYWRkcmVzc2VzIHRoZXkgYXJlDQo+IGFzc2lnbmVkLCBzbyBhIGRvbVUgZmFp
-bHMgdG8gbWFwIHRoZSBGQ0ggTU1JTyBhZGRyZXNzZXMuICBIb3dldmVyDQo+IHNldF9wdGUo
-KSBkb2VzIG5vdCByZXR1cm4gZmFpbHVyZSwgc28gaW9yZW1hcCgpIHJldHVybnMgYSBwb2lu
-dGVyIHdoaWxlDQo+IHRoZSBQVEVzIGFyZSB1bnBvcHVsYXRlZC4gIHByaW50X3M1X3Jlc2V0
-X3N0YXR1c19tbWlvKCkgZmF1bHRzIHdoZW4NCj4gcmVhZGluZyB0aHJvdWdoIHRoZSBwb2lu
-dGVyLCBicmVha2luZyB0aGUgYm9vdC4gIFRoaXMgY2hhbmdlIGZpeGVzIFhlbg0KPiBQViBk
-b21VcyBib290aW5nIG9uIFplbiBDUFVzLg0KPiANCj4gZG9tMCBjYW4gbWFwIHRoZSBGQ0gg
-TU1JTywgYnV0IGl0IGhhcyBYODZfRkVBVFVSRV9IWVBFUlZJU09SIHNldC4gIFdpdGgNCj4g
-dGhpcyBjaGFuZ2UsIGl0IG5vIGxvbmdlciBwcmludHMgdGhlIHJlc2V0IHJlYXNvbi4NCj4g
-DQo+IEZpeGVzOiBhYjgxMzEwMjg3MTAgKCJ4ODYvQ1BVL0FNRDogUHJpbnQgdGhlIHJlYXNv
-biBmb3IgdGhlIGxhc3QgcmVzZXQiKQ0KPiBDYzogc3RhYmxlQHZnZXIua2VybmVsLm9yZw0K
-PiBTdWdnZXN0ZWQtYnk6IEJvcmlzbGF2IFBldGtvdiA8YnBAYWxpZW44LmRlPg0KPiBTaWdu
-ZWQtb2ZmLWJ5OiBKYXNvbiBBbmRyeXVrIDxqYXNvbi5hbmRyeXVrQGFtZC5jb20+DQpSZXZp
-ZXdlZC1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPg0KDQoNCkp1ZXJnZW4N
-Cg==
+> It might also be worth a comment saying /* The number of status frames
+> is always derived from the number of grant frames */ or something similar?
 
---------------aF0OXbWKlvGAtnWy4QKg8fQK--
+That's a comment we may want to have in or ahead of grant_to_status_frames(),
+but not at every of its call sites.
 
---------------LKuNJD8fzNHF2QkAVsWACpJT
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmrq6r4FAwAAAAAACgkQsN6d1ii/Ey+X
-Ngf+NSERpLNaHp3iNP/+G4bYmYAUbmiwYtU4yyLTSMiNx1rDMcPEAKSlzfKJxhvL400QiamrqdMU
-eQQgp+A1yz3WYp+7q5AIf7XFq9uNjXAxknysZorXcaTYdi0X3OgAmyGClfHbBQ/d9FMqh1WYoFFE
-cv3Nd25TdM5PXq5WVLrK565FnrgBHJB/b6AgX+kQGHQpy5qFvEEC1eOP+mGim9KZrMIibKgLoztb
-tJaE0SFruiJehG/ueh6qSaEIKYl3KUSzNq7k2Czn/o5H83dE6eQ79k+YszaQkRDJXepCumXqmYD9
-E3DBL8fcA5OvWQVs6B6+AWbWMqkfE9MWSB0a8W88Zw==
-=Os7j
------END PGP SIGNATURE-----
-
---------------LKuNJD8fzNHF2QkAVsWACpJT--
+Jan
 
