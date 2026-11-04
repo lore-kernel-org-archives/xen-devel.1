@@ -2,46 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1939D606C5A6
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 85521609733B
 	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2026 20:48:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=toxicpanda.com header.i=@toxicpanda.com header.a=rsa-sha256 header.s=google header.b=fj+3rV7D
-Received: from list by lists.xenproject.org with outflank-mailman.1472776.1680695 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=toxicpanda.com header.i=@toxicpanda.com header.a=rsa-sha256 header.s=google header.b=YIqhOJN7
+Received: from list by lists.xenproject.org with outflank-mailman.1472780.1680707 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOhtz-0005u1-7x; Wed, 04 Nov 2026 20:48:11 +0000
+	id 1xOhu1-0006Tj-SR; Wed, 04 Nov 2026 20:48:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1472776.1680695; Wed, 04 Nov 2026 20:48:11 +0000
+Received: by outflank-mailman (output) from mailman id 1472780.1680707; Wed, 04 Nov 2026 20:48:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOhty-0005rS-Fm; Wed, 04 Nov 2026 20:48:10 +0000
-Received: by outflank-mailman (input) for mailman id 1472776;
- Wed, 04 Nov 2026 20:48:09 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xOhu1-0006QU-AN; Wed, 04 Nov 2026 20:48:13 +0000
+Received: by outflank-mailman (input) for mailman id 1472780;
+ Wed, 04 Nov 2026 20:48:11 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <josef@toxicpanda.com>) id 1xOhtw-0005WC-R8
- for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 20:48:08 +0000
+ (envelope-from <josef@toxicpanda.com>) id 1xOhtz-0005xS-2x
+ for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 20:48:11 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xOhtw-000QZ3-6r
- for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 21:48:08 +0100
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xOhty-00DUt0-FD
+ for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 21:48:10 +0100
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <josef@toxicpanda.com>)
- id 6aeb9a01-8faa-0a2a0a5109dd-0a2a4501da4a-10
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 21:48:08 +0100
-Received: from [209.85.222.174] (helo=mail-qk1-f174.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aeb9a03-2eae-0a2a0a5409dd-0a2a45069bb8-14
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 21:48:10 +0100
+Received: from [209.85.222.177] (helo=mail-qk1-f177.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <josef@toxicpanda.com>)
- id 6aeb9a07-5984-0a2a45010019-d155deaed51d-3
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 21:48:08 +0100
-Received: by mail-qk1-f174.google.com with SMTP id
- af79cd13be357-93e635220b4so106364985a.1
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 12:48:07 -0800 (PST)
-Received: from toxicpanda.com ([153.61.196.245])
+ id 6aeb9a09-195a-0a2a45060019-d155deb1f143-3
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 21:48:10 +0100
+Received: by mail-qk1-f177.google.com with SMTP id
+ af79cd13be357-93f079a63b8so112332785a.3
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 12:48:10 -0800 (PST)
+Received: from toxicpanda.com ([153.61.196.253])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-945d4899dc6sm292004485a.43.2026.11.04.12.48.05
+ af79cd13be357-945d483d762sm294338885a.27.2026.11.04.12.48.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Nov 2026 12:48:06 -0800 (PST)
+ Wed, 04 Nov 2026 12:48:07 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,53 +52,53 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=toxicpanda.com header.i="@toxicpanda.com" header.h="Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=toxicpanda.com; s=google; t=1793825287; x=1794430087; darn=lists.xenproject.org;
+        d=toxicpanda.com; s=google; t=1793825288; x=1794430088; darn=lists.xenproject.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=vm4X83cKQV2cViXLrBy8CdaLxj8kNgfl4SZFvLru4UA=;
-        b=fj+3rV7D0DZObpoMlJckGVvFKWfGqQ2jCB/kCt8UdEYuqPeQm2pjfioUBQwavCqysO
-         4gjdVkHwcqiv/SgLCR7IBY5BHjdiLu4ei32bxle5N/bMBwbmNKwpoZKTxC8mr+x+nCRB
-         PYTDVcuXFa3MCRXYveVMZEl+hzRRw1nY0zI/b5f9Azuz/5lpzFoVpXwam2fo5ZgwClNZ
-         cG6CkKrx3k/64ezKXtm3ePmoWhwLi16aG9+XsfCeLHrLve8yxhJlt4WeYNh4UQqFyRq1
-         Szrcs2SPid1UAY+NjcyNcJExL8AVuiTdTxIY/r4PKtoSPzZgwmyB1+KkECDW1cwv4eVp
-         TOdg==
+        bh=UbSwO3gZAlShSf8y/3JGnXMddTOZvjpIdY8ib59dlm8=;
+        b=YIqhOJN7ZCzDLcp9eweAn2J7TdnGMx4sCzPFuN9HZ5SZUxk50OYO6UE7CNfjcqROIS
+         1hzB9bS6SdTQ8KuFb/wRVcJgUVXE5L87ktEucpDLcOAxRgKmmGIgguLyrXm3EXZWZysj
+         dSnAnsuoB9bwQnUEmzQcrCHbtVdanV4mDOUo2Is+kxsfih0oHEsU1N2Euw8fwAKGZIrM
+         Kqb5b9iqQJWSuvP8gd2R05GZduYtPkoiKzisHta4RK3mrHnWfBztFJzJ5MCa380zx6xi
+         2g9vyEyaB93JkLzcFdHnNogWQ7hC3+B+BZYg3uCgbpspHRbweV1KBmt3FRXaa0Lgola0
+         Sfaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793825287; x=1794430087;
+        d=1e100.net; s=20260707; t=1793825288; x=1794430088;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=vm4X83cKQV2cViXLrBy8CdaLxj8kNgfl4SZFvLru4UA=;
-        b=b++Wj5QkA3uaVtIK9cEYoAGsDc8gPBi6ytEtNAUPJEz5H89P9UelF5OgbQNlVk8qLx
-         dif1QWrJONccpY9Tjrfya16BONlciISYQl7LT4AsNAnvawSSS4+fWR/7D2r1bNz1IuAm
-         asXk5fakn4s48nua83/SwmrPQmTMLNqxaHQyg8koALm4onj6KTIkF5O66vBg5hYNqkot
-         9Pp/j/5L+SvetmMrhRcryBGT6U/T6gmYKYY/HTizIODXCdZYAXKVMyrkUMsr8spohNWU
-         zUcyqNNrXw5QBO+FzyT4h2cL4ur4P5zxWvgbCI8qmqnH3Z7I5/46mJThEfUETXiYDtXQ
-         giBA==
-X-Forwarded-Encrypted: i=1; AKwUvBymSLjRPMvFaRip90XmDJxM8NGrlXZdhfbxO4cQd15Gv317svlBxqBgvd0xtThbTGfbYiBi+4+jAOY=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z9u1ENBFh/oTwdwxdbxegInrq0a3AcHOVXM4hez0Xj3L6QgrGS2
-	5Rs7T/X1wHnuYvFSxZ5Kr7f5JSSeYzkaqA/FnSl9nleNHku+AAOTRZ9dKYjSrtszq9M=
-X-Gm-Gg: AYBFou3o0/uJ7PZqOuy5DubSrOPqNNh2NyRwQ17zXb23y0W8bzcin48wUi/FJ0jbP08
-	sZ21F5TEa8sW5RJTk1AhpfRTKMZBjI2+FHDr99LyQ4KhgikOekTldUa9idbVXIWJUaM836Bi1Iy
-	AMm/sjSSW54rNcrP+K6cE62pCT2mqCfmNR/g88mIVoVnrTSElEpbu9pqDdlCSXjAfQIfbwpSxA9
-	PD7Va59LzuC6CUApX8okG6X6EBodTUrTPdDWQuAKQm6DOsXBL7DDF4dOEHl8x9tWqARDgaGX1Ij
-	MLq2OR7ZZe/4ZcinQcoLpVjFHBr59U0z6/a1k+Sp+jNTYHyGgFKeunJxdlO8z5hVuh8MK57pe/U
-	PIz3yPKRBeMWSkft0VhboCAUiTcZs7yYIGzKwolQFskfv47EPZrQFSYYZxETMFS70q/ZK2aXTp8
-	U2iwaxKgDp53uAsHAjPIVsFD4fsE6wQtyEy/Jr4zUA2VENE2f6oDi/+HUeVgvjwzVs2aynPEOXS
-	EyMBohcHq7TP9ZpZHdwdNvilg4inL9gZ5qDrRlW2mc3sxUxXvyPNBNGs1NUIKduml8U/QcF6qoc
-	6V2JUixkYKPrtTQcmkMDuxLMg2MfseU7KB2rwYPRN4NBsqYh1JBr8yDEnfVo8FeY2yY=
-X-Received: by 2002:a05:620a:4043:b0:93f:31f0:6a7f with SMTP id af79cd13be357-9442172a5c1mr3191494585a.69.1793825286622;
-        Wed, 04 Nov 2026 12:48:06 -0800 (PST)
+        bh=UbSwO3gZAlShSf8y/3JGnXMddTOZvjpIdY8ib59dlm8=;
+        b=uW0TDYwG9/b29OSSV9cECXuCF9LdWCKQFJfbfCKYXLIev/v3OwE+RBvXrRVVlL+HiI
+         opnqoEz143kBuuzU+Nx6sw/xtirKGWvcXi/wewnkXVNRm2Fg1xHtZMyZQ/ezg/wsrYth
+         MN7NBxTCQgJVFTjHxC74WTRO1Cc3qebFDKeeWJ/qTB9IM4histfBJUdbFBxBfoIYo2KE
+         ddE6a5UgVSPXqtSjAr+8mNFNcS2QSlsWIywqizyAHgwMLGy/b1It/DR5kjn+E9CL4WYP
+         sDpfETfs1jf2/uYXVLLA4HEL/40sfbzASE2IdOmrTa0AUJssyz1PzqtWwOM2ZuX9oYAs
+         qHMA==
+X-Forwarded-Encrypted: i=1; AKwUvBxc6KJtExaxmMNkAyKbYY5tVbRPXyrEeH+alqRxRXDxC77sq71si8kziKUnlfN7E/R5dTT5wt+3oVA=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z9xDhj7H7FoBkkGevxSE7SzjLp8INq+GZI/ilfsqsGCw/W2tOC2
+	PU5WDh7ZuamnP9ifTRyKG5qzbmv4tRtlgMLj8q0Bys230aa87udbu3QP0GuQe1zAKZA=
+X-Gm-Gg: AYBFou2+agZqlT+5vKCHQAgQd7rqJlSMLMHgLU0+uNZ6fvt6Y1qOcWw4Z/IckUlievX
+	wqp06zSarzX+zA3cbHQHG95rzC9RNy4RznBjJOu/QpI9DBs+GTSQkiC1EbCzhd+kwcbF3Hhbu2E
+	y8Y1W7q9IWKphrd0+mKN/vikEgpLqMqQBNP3wxT8I2fHMncDq45Wl5xsp2JrNjvNt0oVRKcp2Jn
+	g0t4mPSeG3mtvx5L/RPX5KJT6MrM/lMMrjQq8/L4SQYqbvt/OjnVSom5f/IeSuNUj/puopQG+Lk
+	es2SG7SEQuCjmkJTZoZNgLnzuT2Lh851DsvL1p8xuzqgTlv1eU48kw1AufU7yGMo7CUwxffTr90
+	Obbrc7NNpRsyL4ZIr1WiIQQQR9L1uiNQyn2QBR5evWKxZ002BHCyQ2nkgsXBBrcqecyW9JvzUuU
+	eVrBA/e+x3W6338xoYJR1e+7qIzGlRHFiMLAvymiFApkyXl4s/dW/krzlECdu/q8424OEmjZUn1
+	LVoGtGZOk4/uooMnQncKpSokyCKKLa7EV6ZtZO5aIrU/OvXSVpLwMLdF9Qze+HKAoJUiFRz4bsE
+	l9VQluTaVGV6nTZgXHTtbPuD17YIMa9XfvKVb1C/+xCnlA==
+X-Received: by 2002:a05:620a:a905:b0:945:b9c8:de5a with SMTP id af79cd13be357-945b9c8dedbmr1356158885a.20.1793825287918;
+        Wed, 04 Nov 2026 12:48:07 -0800 (PST)
 From: Josef Bacik <josef@toxicpanda.com>
-Date: Wed, 04 Nov 2026 20:47:26 +0000
-Subject: [PATCH net-next v4 14/15] net/tls: don't BUG() on leftover length
- in __skb_nsg()
+Date: Wed, 04 Nov 2026 20:47:27 +0000
+Subject: [PATCH net-next v4 15/15] net: update comments that still describe
+ the skb BUG_ON()s
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261104-b4-skbuff-bug-on-followups-v4-14-b7ffeb364f5d@toxicpanda.com>
+Message-Id: <20261104-b4-skbuff-bug-on-followups-v4-15-b7ffeb364f5d@toxicpanda.com>
 References: <20261104-b4-skbuff-bug-on-followups-v4-0-b7ffeb364f5d@toxicpanda.com>
 In-Reply-To: <20261104-b4-skbuff-bug-on-followups-v4-0-b7ffeb364f5d@toxicpanda.com>
 To: "David S. Miller" <davem@davemloft.net>, 
@@ -113,18 +113,18 @@ Cc: Juergen Gross <jgross@suse.com>,
  David Laight <david.laight.linux@gmail.com>, netdev@vger.kernel.org, 
  xen-devel@lists.xenproject.org, Josef Bacik <josef@toxicpanda.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openssh-sha256; t=1793825269; l=1573;
+X-Developer-Signature: v=1; a=openssh-sha256; t=1793825269; l=2967;
  i=josef@toxicpanda.com; h=from:subject:message-id;
- bh=jtewRftckK13p/nQalxWcrhfGpFqhqstsSARsz5AoHI=;
+ bh=EAJ0bQj/Oj/in9lIWu/G1LG29YPEIg8lFuBrNd3Sw5Q=;
  b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgUBr36M/n0nWN0DNbnxwzIiCZez6MG
  JiruuNaSCI/zXsAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
- QDKngciEsEX8JG2Ad0fN9Mloe1uVw1/l2WZ7sISbd/Ng5VMersZpizDOJC2J3tEMBwMooCA/YD/
- B+ZXmrDCaGAc=
+ QHf4WC7tdHNHClwRAYr93iv9/GKE9HPJjZnVhEDjCwlX4VLZbqFYVp2C6I1QijW+aNqGzDet3wR
+ d30tDtFHCMgo=
 X-Developer-Key: i=josef@toxicpanda.com; a=openssh;
  fpr=SHA256:C8kOX2QUJCMqnCX+KEeoqRAjLo9L+ELOSH2NSAJHqGA
-X-purgate-ID: tlsNG-d62444/1793825288-1EE60757-E8A99555/0/0
+X-purgate-ID: tlsNG-16d1c6/1793825290-F6A7477B-32DDD58F/0/0
 X-purgate-type: clean
-X-purgate-size: 1575
+X-purgate-size: 2969
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -133,45 +133,72 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-__skb_nsg() counts the scatterlist entries for a range of an skb with a
-copy of the __skb_to_sgvec() walk, including its BUG_ON(len) when the
-skb runs out before the range does.  tls_decrypt_sg() calls it on the
-same range it then passes to skb_to_sgvec(), so a bad range would BUG()
-here before it got to skb_to_sgvec()'s error return.
+The skbuff BUG_ON() conversions left a few comments behind:
 
-__skb_nsg() already returns -EMSGSIZE for a frag_list nested too deep,
-and tls_decrypt_sg() fails the record on any return below 1.  Return
--EINVAL for the leftover length too, with a DEBUG_NET_WARN_ON_ONCE() for
-debug kernels, and say so in the comment above skb_nsg().
+ - bpf_skb_net_grow() says skb_segment() BUG()s on a frag_list with
+   head_frag set at the downgraded MSS.  It fails the segmentation and
+   the packet is dropped, which is still why the skb gets linearized.
+ - The skb_to_sgvec() kernel-doc doesn't list the -EINVAL that
+   __skb_to_sgvec() returns when @offset and @len run past the end of
+   the skb.
+ - A comment in the netmem KUnit test names BUG_ON(i >= nfrags) in
+   skb_segment(), which is a check that fails the segmentation now.
+
+No functional change.
 
 Acked-by: Mina Almasry <almasrymina@google.com>
 Signed-off-by: Josef Bacik <josef@toxicpanda.com>
 ---
- net/tls/tls_sw.c | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+ net/core/filter.c   | 6 +++---
+ net/core/net_test.c | 2 +-
+ net/core/skbuff.c   | 5 +++--
+ 3 files changed, 7 insertions(+), 6 deletions(-)
 
-diff --git a/net/tls/tls_sw.c b/net/tls/tls_sw.c
-index 771e02bff519..748ae27f2b88 100644
---- a/net/tls/tls_sw.c
-+++ b/net/tls/tls_sw.c
-@@ -142,12 +142,16 @@ static int __skb_nsg(struct sk_buff *skb, int offset, int len,
-                         start = end;
-                 }
-         }
--        BUG_ON(len);
-+	if (unlikely(len)) {
-+		DEBUG_NET_WARN_ON_ONCE(1);
-+		return -EINVAL;
-+	}
-         return elt;
- }
+diff --git a/net/core/filter.c b/net/core/filter.c
+index 09c60a58c82a..9881ac89e94c 100644
+--- a/net/core/filter.c
++++ b/net/core/filter.c
+@@ -3723,9 +3723,9 @@ static int bpf_skb_net_grow(struct sk_buff *skb, u32 off, u32 len_diff,
+ 		shinfo->gso_segs = 0;
  
- /* Return the number of scatterlist elements required to completely map the
-- * skb, or -EMSGSIZE if the recursion depth is exceeded.
-+ * skb, -EMSGSIZE if the recursion depth is exceeded, or -EINVAL if the skb
-+ * runs out before @len does.
+ 		/* Due to header growth, MSS needs to be downgraded.
+-		 * There is a BUG_ON() when segmenting the frag_list with
+-		 * head_frag true, so linearize the skb after downgrading
+-		 * the MSS.
++		 * Segmenting a frag_list with head_frag true at the new MSS
++		 * fails and the packet gets dropped, so linearize the skb
++		 * after downgrading the MSS.
+ 		 */
+ 		if (!(flags & BPF_F_ADJ_ROOM_FIXED_GSO)) {
+ 			skb_decrease_gso_size(shinfo, len_diff);
+diff --git a/net/core/net_test.c b/net/core/net_test.c
+index 03203454cd19..976d14896251 100644
+--- a/net/core/net_test.c
++++ b/net/core/net_test.c
+@@ -1524,7 +1524,7 @@ static void netmem_ref_test_skb_segment(struct kunit *test)
+ 	/* 5. Linear head_skb (nr_frags=0) + mixed pp_recycle frag_list where
+ 	 * member A has linear + frag (pp_recycle=1) and tail member B has
+ 	 * linear len == skb_headlen(A) (pp_recycle=0): keeps SG clone path
+-	 * synchronized without hitting BUG_ON(i >= nfrags).
++	 * synchronized without failing the i >= nfrags check.
+ 	 */
+ 	head = alloc_skb(64, GFP_KERNEL);
+ 	list = alloc_skb(64, GFP_KERNEL);
+diff --git a/net/core/skbuff.c b/net/core/skbuff.c
+index 45cd77e153f1..29951ce11850 100644
+--- a/net/core/skbuff.c
++++ b/net/core/skbuff.c
+@@ -5641,8 +5641,9 @@ __skb_to_sgvec(struct sk_buff *skb, struct scatterlist *sg, int offset, int len,
+  *
+  *	Fill the specified scatter-gather list with mappings/pointers into a
+  *	region of the buffer space attached to a socket buffer. Returns either
+- *	the number of scatterlist items used, or -EMSGSIZE if the contents
+- *	could not fit.
++ *	the number of scatterlist items used, -EMSGSIZE if the contents
++ *	could not fit, or -EINVAL if @offset and @len run past the end of
++ *	the skb.
   */
- static int skb_nsg(struct sk_buff *skb, int offset, int len)
+ int skb_to_sgvec(struct sk_buff *skb, struct scatterlist *sg, int offset, int len)
  {
 
 -- 
