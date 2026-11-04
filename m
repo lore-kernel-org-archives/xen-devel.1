@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F2958606A31B
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2026 09:44:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8ED6D606A328
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2026 10:11:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=Ob4Sp7Hn
-Received: from list by lists.xenproject.org with outflank-mailman.1471584.1679868 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=H/EBd0bo
+Received: from list by lists.xenproject.org with outflank-mailman.1471617.1679876 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOXXJ-0003pS-AZ; Wed, 04 Nov 2026 09:44:05 +0000
+	id 1xOXxr-0007tG-B2; Wed, 04 Nov 2026 10:11:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1471584.1679868; Wed, 04 Nov 2026 09:44:05 +0000
+Received: by outflank-mailman (output) from mailman id 1471617.1679876; Wed, 04 Nov 2026 10:11:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOXXJ-0003pL-66; Wed, 04 Nov 2026 09:44:05 +0000
-Received: by outflank-mailman (input) for mailman id 1471584;
- Wed, 04 Nov 2026 09:44:03 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xOXXH-0003pF-9t
- for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 09:44:03 +0000
+	id 1xOXxr-0007t9-80; Wed, 04 Nov 2026 10:11:31 +0000
+Received: by outflank-mailman (input) for mailman id 1471617;
+ Wed, 04 Nov 2026 10:11:30 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xOXxq-0007t3-P8
+ for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 10:11:30 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xOXXG-00HBik-DI
- for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 10:44:02 +0100
-Received: from [10.42.69.5] (helo=localhost)
+ id 1xOXxp-00GBhM-Te
+ for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 11:11:29 +0100
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aeafe5b-bab6-0a2a0a5309dd-0a2a4505a3c8-42
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 10:44:02 +0100
-Received: from [209.85.221.53] (helo=mail-wr1-f53.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aeb04ce-8faa-0a2a0a5109dd-0a2a4508e7de-16
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 11:11:29 +0100
+Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aeafe61-4cb1-0a2a45050019-d155dd35e825-3
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 10:44:01 +0100
-Received: by mail-wr1-f53.google.com with SMTP id
- ffacd0b85a97d-48e09aa5264so214913f8f.2
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 01:44:01 -0800 (PST)
+ id 6aeb04d1-f659-0a2a45080019-d1558036c4ce-3
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 11:11:29 +0100
+Received: by mail-wm1-f54.google.com with SMTP id
+ 5b1f17b1804b1-4a214af2076so3179055e9.0
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 02:11:29 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48feda207d8sm2713188f8f.52.2026.11.04.01.44.00
+ 5b1f17b1804b1-4b43c17ecdasm66418615e9.5.2026.11.04.02.11.28
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 04 Nov 2026 01:44:00 -0800 (PST)
+ Wed, 04 Nov 2026 02:11:28 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,61 +51,57 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1793785441; x=1794390241; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1793787089; x=1794391889; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=NamH/73RfpPGvbow4bV2m5TQ4lDJv8cYz4Xojo26n/8=;
-        b=Ob4Sp7Hn/n+G5bMEN3YWk8JQyV5bX2THnjMP/HCsOz26w+AGJsiz7lPicdiPnoL19T
-         sNwrB9/MHn89Tfbc88iu7b/nJo/TBHxiuMzQStQ+/0gsrq9fV07leq4Wo6GGmbG8n61+
-         F1vlWJEqH4Ay7miWZ6uj7xXyggFsVmwrrhSfAUasWLFjNBbghq0FPAyFlqV5FMKULi5B
-         4jpDeHM8Inh1gxFGt0UwYMx4lxR5f5mGZOF0RK0KTQrxuhEdL3Xmwk0DtdeNCSzKW9+I
-         VLMAfvol9Y47a1rST+Zrr0Y//bdzaJSElNkkSpTuGnDTdLzDd39E+ayX8Z17suZzbJ4h
-         zhcg==
+        bh=XlNv9wby1nKD2zqGSHjj/t/EeDOe5xMy1sw4OFFn9q8=;
+        b=H/EBd0bo0iXiCskIStlC68Z+H9FND1ujaWxxiXb17PYbeVS9LSoWBqb8RTez6sjj11
+         89/vp40GethDxMyT6hH+0KkxsaHaTycDfSEd9pnReUQ5hKWp91NxG+SQ3/dTkZgOUS/y
+         qZYMhA+ZeDim6H60yc20QQcutrL3pI5iSga/mo81WL2dELjc1CV7M5qzVKE1qtfaVe0L
+         uPhvEa4SsBaEsN4nA3S1qBkNxeRA3lCmEptDU1i/iGzbY8HHQgfI4srRKqQ9aJ1emi5E
+         dpbA4cdST4YqHru77094AW3BMNJ/A+K0JqOGcxt8RaiO903hs/050fwxzVnVDeMX0m2U
+         3EVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793785441; x=1794390241;
+        d=1e100.net; s=20260707; t=1793787089; x=1794391889;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=NamH/73RfpPGvbow4bV2m5TQ4lDJv8cYz4Xojo26n/8=;
-        b=KcfI5IC7KeJ4DCcu1CfOg5JbIu9myjsaaWgxLqx2IdWi5B0VWk5LaiP9XSpCeuHFHo
-         IcMOyCZ1GnECfOt6CKwPXkl4QVM2M++k2K8sC8aWd7OzhLqgL5C5zbDF1QJrNGrr7DH+
-         +2dnhl1aKTITzolbW/pKcleh+XIOYCN5Ci50zzCw4qTjUfiBprXdMAs3vz+POOmbJPXH
-         4efDx0WNXXS+Rj3BcbnG2lwlVA5Qg43GJW7lTpiGwFEMzUJQhM7W1QsJj5ToOf7lTVhv
-         0mZsq5ImpDHpZOJ/YqK7spOjuFo8hQgB5FwEhozxz7g/0XmvFimlpIKfjY32KdfTIW2v
-         w3Yg==
-X-Forwarded-Encrypted: i=1; AKwUvBzrA6CXdfeEcFGwH6f779CxIVdW9q/EyMR2tk831ep2k65qcN03sSDeVkvVNofWc1JGebae4qsbN5c=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z/dfz8+Mz3eH4G0HWT1hqeCPiqUevuOyOihmgXrh9Dqq+qMn6BO
-	BQhoTRi4cQuwCousrHYfr59LMtalfPmL72P6OFfJbMAy+1F60NyNhbXoPVWzijQp6A==
-X-Gm-Gg: AYBFou2owCjnGxMiH0jBwQ2vGN1NmxIH6kOegECj/8oppVNAm2TokMR96jwGC4TEN7W
-	G4+D7tcu02fB5uJ1Kq5rU+L9WJYOHM8MXbWkKUerEEIM/b1AjEnM2vm4If9c441OR/yNWCPpxYA
-	JYxkgXEn1n23a75FXw70gIB9m2Zy+2hE5qSeRWNJktTXON7MiEEf/srd1N5IcY3CIc8oK7gFZEo
-	K02l11DiGpnwEBpIHq0wB6TJhnoXKj1aOBPtyBDsyzrQwUhOtdnKzf+0mtOYOlfNS96V96ALZNX
-	CHwoI4Z/G57x7QZ4hIe7gSVGawy3KhfpOI7UillOfxL+E0vvnyaDokwuSA0wKzEslmkOSdSPiIq
-	tDFBzc8yq6pN6UmPSMMzFF6BLvnba+pwSVCAdDJL2SJYt9nNozSh/Cw20T4MujXOc5u774HWdKl
-	U7qk4HBCi0HmIzMva6ehTMEAbzyfmcEoGsPlRNo8essXLMmTk7ooGsymFwJvFS05Q9QCzvVwDdk
-	9paKxoEt3vvFY9FT+TrmLsNC5MEiAiNFnwBAWXo2Ae9bN2vwJNOyzhmwGG4zxBgIc+GwXuifPW6
-	KfLM+cUGEjtdesRbwxG7qIlGbSjS02OxZwnQ2PcgSsfYgX+9mlFWtMNQXzLS/m1Ibmf3lbPEV4F
-	G1VB02XazZLb0vzU=
-X-Received: by 2002:a05:6000:2288:b0:488:8ab9:f74c with SMTP id ffacd0b85a97d-48e6e2bbf04mr35372076f8f.3.1793785441345;
-        Wed, 04 Nov 2026 01:44:01 -0800 (PST)
-Message-ID: <5b36fc16-51f2-4cef-ab26-3945267b8fc3@suse.com>
-Date: Wed, 4 Nov 2026 10:44:00 +0100
+        bh=XlNv9wby1nKD2zqGSHjj/t/EeDOe5xMy1sw4OFFn9q8=;
+        b=njSGikUc94rD39l8LicXy3VUne5oiH2gxUndUk6++sgk3NIb5rODURg55ILU1TglEY
+         HRYJMOU7d3x6pxm8+sUAzAi4eTzgmssLf8Rad7tDx4zqh9nIENCq9bXl90t4ddET6/Xb
+         cbMBzQlEXgXEGkqd3S8LYNFUR5fRozaNdn/S71IYsLA3+9sVCv2JM8uJ0rJMzVDV9aDs
+         xVQrJ40Q30hGhDAfd3sFQPN4yJUaA4+nmcVr6aVvevLC/zKPZziHpEBTJxAlxlK2KIIQ
+         Vv/EmfVlRalgUA9rS6uw+wpfqEJvDTp1qLTTa+PRcg9zGNwcyF2YvwW80q4fldpiKdaw
+         JCBg==
+X-Gm-Message-State: APuU4Z8yGlCMSi7YgXHu2y5Kh/3tGtpMQuZCZVvAp4FyOCLdjUFM3QP0
+	a6Z3MLKAfN1lgabZ2GoZpoN1Y/r2LfC5Xx/TZRHNDv3rvRL9vg7uwgv+5VCKuFUyKw==
+X-Gm-Gg: AYBFou3XbTOi1Wdp52iEtMgVCnk9BJ4oCUSPMSlGyFg7pZxu6iwE8wmEUYkzekdq77G
+	0X15DY/zkYxPt5HqQ8si218ClUveyeAJWYWPNNhunTUjGve1s6BjP1MEZZECGXslgAWzidL1DHc
+	gb2lZU4DQeuPYURhU1sbuuLbBNheGgq3DH2MCZBlywe6JxlSOYj89Zoip5Sq9BxK0rHkULxHdYW
+	CUdOX+h33a1k+ANv9yOuoA1mADZG0rZwPqDIe236F8d1TSGZmwuVuEtcnKSffT4nklA5HvFkjEU
+	PMswmbSWW66rc9A3hrvFKtzlrE3PjpIwrAeZP1pMuqhHHGBJYoKPooGt+Ht04EKrQdMnrERtk9X
+	M3gRnG4s9Xm6bo+B0EIOFivBc1tMJtmsrqKz1SgePLNc3+1v7khMF48N2cqXkAlOnj6wj8soT51
+	wxK4oQutQiWa71yp/NDLvsIoXQauUChgJyHbWq1qPHwM+iSecK7y0S/iih9SdlKML5jlyISde2V
+	oKPlN7k7Ex9b1Txx20O94SNRFjc3sST0ncUELei8ouwlx16LmfwikVGRTWZ4PdedsXAYCCEEfnJ
+	xrlYXZmzpJKiFxw0lCiO3Y36sEr2cIc61m0KC8GCVP4xDRX+8cYikOwb5GVjsgNjqWx11cn9BqE
+	s5xNwjffyQ33eGJIRmA==
+X-Received: by 2002:a05:600c:e552:b0:4b1:4da2:ca99 with SMTP id 5b1f17b1804b1-4b14da2cb6fmr139256985e9.10.1793787089308;
+        Wed, 04 Nov 2026 02:11:29 -0800 (PST)
+Message-ID: <721b7eab-3893-4a0a-81b7-e6bde01118e0@suse.com>
+Date: Wed, 4 Nov 2026 11:11:28 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 6/7] gnttab: rename a parameter of
- gnttab_populate_status_frames()
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Julien Grall <julien@xen.org>, Stefano Stabellini
- <sstabellini@kernel.org>, Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <38850629-8bfa-4737-99ff-0fd3f489e56e@suse.com>
- <06d74bd4-86f1-4c25-a6f7-f4e1c9de199f@suse.com>
- <b8a4b183-34c9-4fba-a3b8-d86c4ee7b531@citrix.com>
+Subject: Re: [PATCH 12/15] x86/PVH: heed the kernel in pvh_steal_ram()
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Teddy Astie <teddy.astie@vates.tech>
+References: <1b4c2bb4-118d-497c-8d7d-f3824fd61a73@suse.com>
+ <032c1cb0-55b8-489d-bcf4-4d4c14a590ae@suse.com> <atHPRLewczIY8Qm1@Mac.lan>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -131,54 +127,67 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <b8a4b183-34c9-4fba-a3b8-d86c4ee7b531@citrix.com>
+In-Reply-To: <atHPRLewczIY8Qm1@Mac.lan>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c201ff/1793785441-F64B42A1-A6FD504A/10/78276251493
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-c1860d/1793787089-CED4087B-56515CC2/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 1450
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+X-purgate-size: 2253
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 03.11.2026 17:59, Andrew Cooper wrote:
-> On 28/07/2026 2:52 pm, Jan Beulich wrote:
->> --- a/xen/common/grant_table.c
->> +++ b/xen/common/grant_table.c
->> @@ -1807,12 +1807,9 @@ fault:
->>  
->>  static int
->>  gnttab_populate_status_frames(struct domain *d, struct grant_table *gt,
->> -                              unsigned int req_nr_frames)
->> +                              unsigned int grant_frames)
->>  {
->> -    unsigned int i;
->> -    unsigned int req_status_frames;
->> -
->> -    req_status_frames = grant_to_status_frames(req_nr_frames);
->> +    unsigned int i, req_status_frames = grant_to_status_frames(grant_frames);
->>  
->>      /* Make sure, prior version checks are architectural visible */
->>      block_speculation();
+On 16.10.2026 09:16, Roger Pau Monné wrote:
+> On Mon, Oct 12, 2026 at 10:25:40AM +0200, Jan Beulich wrote:
+>> While the function working downwards will typically result in no conflict
+>> with the kernel range, there's no guarantee of that.
 >>
+>> Fixes: 1d74282c455f ("x86: setup PVHv2 Dom0 ACPI tables")
+>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+>>
+>> --- a/xen/arch/x86/hvm/dom0_build.c
+>> +++ b/xen/arch/x86/hvm/dom0_build.c
+>> @@ -186,8 +186,12 @@ static int __init pvh_populate_memory_ra
+>>  /* Steal RAM from the end of a memory region. */
+>>  static int __init pvh_steal_ram(struct domain *d, unsigned long size,
+>>                                  unsigned long align, paddr_t limit,
+>> +                                const struct elf_binary *elf,
+>>                                  paddr_t *addr)
+>>  {
+>> +    paddr_t kernel_start = (paddr_t)elf->dest_base & PAGE_MASK;
+>> +    paddr_t kernel_end = ROUNDUP((paddr_t)elf->dest_base + elf->dest_size,
+>> +                                 PAGE_SIZE);
+>>      unsigned int i = d->arch.nr_e820;
+>>  
+>>      /*
+>> @@ -203,6 +207,11 @@ static int __init pvh_steal_ram(struct d
+>>              continue;
+>>  
+>>          *addr = (entry->addr + entry->size - size) & ~(align - 1);
+>> +
+>> +        /* Avoid kernel range, if this is the region it lives in. */
+>> +        if ( *addr < kernel_end && *addr + size > kernel_start )
+>> +            *addr = (kernel_start - size) & ~(align - 1);
+>> +
+>>          if ( *addr < entry->addr ||
+>>               /* Don't steal from the low 1MB due to the copying done there. */
+>>               *addr < MB(1) )
 > 
-> I fully agree that it's misnamed.
+> If you clip addr to remove the kernel range for allocation purposes
+> you need to restore it before the `entry->size = *addr - entry->addr`
+> adjustment.
 > 
-> However, I'd suggest req_grant_frames to match the req_status_frames,
-> and also to hint at why it's not just gt->nr_grant_frames.
+> Overall I continue to think this will be much simpler if we passed
+> around a rangeset.  This series is adding a fair amount of extra code
+> to deal with overlaps between kernel/initrd allocations vs everything
+> else, which could be solved more easily by using a rangeset.
 
-When we discussed this earlier on, I think we had settled on deliberately
-omitting the req_ prefix here: It's correct only for the use of the function
-from gnttab_grow_table(), but not quite for that from gnttab_set_version().
-
-> It might also be worth a comment saying /* The number of status frames
-> is always derived from the number of grant frames */ or something similar?
-
-That's a comment we may want to have in or ahead of grant_to_status_frames(),
-but not at every of its call sites.
+I've started moving to that approach. With the kernel range removed from
+the rangeset early on, the need for this separate patch then disappears.
 
 Jan
 
