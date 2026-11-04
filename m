@@ -2,54 +2,54 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DC3D86071A0E
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2026 20:18:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F4096071ADB
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2026 20:18:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=THAaKW7y
-Received: from list by lists.xenproject.org with outflank-mailman.1472525.1680433 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=VMqSnzMn
+Received: from list by lists.xenproject.org with outflank-mailman.1472546.1680485 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOhRK-00014I-JH; Wed, 04 Nov 2026 20:18:34 +0000
+	id 1xOhRW-00034D-LB; Wed, 04 Nov 2026 20:18:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1472525.1680433; Wed, 04 Nov 2026 20:18:34 +0000
+Received: by outflank-mailman (output) from mailman id 1472546.1680485; Wed, 04 Nov 2026 20:18:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOhRK-00013s-Dn; Wed, 04 Nov 2026 20:18:34 +0000
-Received: by outflank-mailman (input) for mailman id 1472525;
- Wed, 04 Nov 2026 20:18:32 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xOhRV-0002zP-7u; Wed, 04 Nov 2026 20:18:45 +0000
+Received: by outflank-mailman (input) for mailman id 1472546;
+ Wed, 04 Nov 2026 20:18:42 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <stefanha@redhat.com>) id 1xOhRH-0000SB-Se
- for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 20:18:31 +0000
+ (envelope-from <stefanha@redhat.com>) id 1xOhRS-0002My-Fa
+ for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 20:18:42 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xOhRH-007PCO-95
- for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 21:18:31 +0100
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xOhRR-00BuII-Qn
+ for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 21:18:41 +0100
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <stefanha@redhat.com>)
- id 6aeb9312-e002-0a2a0a5209dd-0a2a450997ac-14
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 21:18:31 +0100
+ id 6aeb9305-2eae-0a2a0a5409dd-0a2a450acd02-30
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 21:18:41 +0100
 Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <stefanha@redhat.com>)
- id 6aeb9315-be1a-0a2a45090019-aa0a817c8afb-3
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 21:18:30 +0100
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ id 6aeb9320-f2d2-0a2a450a0019-aa0a817ce11b-3
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 21:18:41 +0100
+Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-221-0n45YEU1NAq4Orr0v3_tpA-1; Wed,
- 04 Nov 2026 15:18:24 -0500
-Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-695-8gi46V3fPbuorzIqtOGZcA-1; Wed,
+ 04 Nov 2026 15:18:37 -0500
+Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 8F11E1955EA0; Wed,  4 Nov 2026 20:18:21 +0000 (UTC)
+ by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id C696A1956055; Wed,  4 Nov 2026 20:18:35 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 4544626C; Wed,  4 Nov 2026 20:18:21 +0000 (UTC)
+ by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 7AEE11848D40; Wed,  4 Nov 2026 20:18:35 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -60,17 +60,17 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1793823509;
+	s=mimecast20190719; t=1793823520;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=HVLiXlgRnVDt9HN6YEs055+fC583nu5lD1opbfo202g=;
-	b=THAaKW7ywNyT8MDum3hE+yqnkD+wI/oebrZafWLtcSz3d4vTXDf4e7RKnu6MuAGw+eD60D
-	3APzsX5n5wPeigPTwX0OQ7cTgMaUgGCzNOWKIJ8xUTwCbOs5lQmOCa0yDhznHYyh1HdDPt
-	A/WB5Fm/smC5tpBQpp3rnFJL8EgUcx4=
-X-MC-Unique: 0n45YEU1NAq4Orr0v3_tpA-1
-X-Mimecast-MFC-AGG-ID: 0n45YEU1NAq4Orr0v3_tpA_1793823501
+	bh=Uufc4nv38yI9zDdiGbNpg4ZIN69J3LElu5ZGq15CX2Y=;
+	b=VMqSnzMnsrLR2mlc3qXu7nTmeB5FT1/gkfv/ZXAP32oN55sgZg82BQzvzrlsiBRyupuvzn
+	76P7pkkPLzzNvnLvNkcRA8LDvxGPWljwMKHlDJaNpswu0JJ5EfS5Z32BDYtsr1JrOo6khT
+	rPugs2b9JT07YuCDZA474a0fWKj18dA=
+X-MC-Unique: 8gi46V3fPbuorzIqtOGZcA-1
+X-Mimecast-MFC-AGG-ID: 8gi46V3fPbuorzIqtOGZcA_1793823515
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
@@ -89,21 +89,21 @@ Cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
 	Stefan Hajnoczi <stefanha@redhat.com>,
 	Helge Deller <deller@gmx.de>,
 	=?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PULL v2 10/25] trace: add testing of 'nop' trace backend
-Date: Wed,  4 Nov 2026 15:17:46 -0500
-Message-ID: <20261104201802.11556-11-stefanha@redhat.com>
+Subject: [PULL v2 19/25] monitor: remove mistaken use of trace_event_get_state()
+Date: Wed,  4 Nov 2026 15:17:55 -0500
+Message-ID: <20261104201802.11556-20-stefanha@redhat.com>
 In-Reply-To: <20261104201802.11556-1-stefanha@redhat.com>
 References: <20261104201802.11556-1-stefanha@redhat.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
-X-Mimecast-MFC-PROC-ID: GL6LRPdCjsa2JGG19WnSwosxo20GsK7EaHA_uZqYKUM_1793823501
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
+X-Mimecast-MFC-PROC-ID: wkH5n77aLcWUjxyz2LEavSJ-y432_Tdz8KhxVaR7gj0_1793823515
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1793823511-3B0DD034-93B4A404/35/111497
+X-purgate-ID: tlsNG-4011c0/1793823521-5A3DCCFC-589374A5/35/111497
 X-purgate-type: clean
-X-purgate-size: 5329
+X-purgate-size: 1697
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -114,184 +114,42 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 From: Daniel P. Berrangé <berrange@redhat.com>
 
-This will be used to demonstrate that tracetool outputs the bare
-minimum of code when tracing is disabled. Currently, as of this
-initial commit of reference output, too much code is generated.
+Conditional checks must call trace_event_get_state_backends()
+which checks the state of all backends (dtrace, ftrace, log,
+syslog, simple & ust), while trace_event_get_state() only
+validates state for backends using QEMU's internal state
+tracking (ftrace, log, syslog, simple).
 
 Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
-Message-id: 20261102142844.3464712-11-berrange@redhat.com
+Message-id: 20261102142844.3464712-20-berrange@redhat.com
 Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
 ---
- tests/tracetool/nop.h             | 29 ++++++++++++++++++
- tests/tracetool/nop.c             | 36 ++++++++++++++++++++++
- tests/tracetool/meson.build       |  1 +
- tests/tracetool/nop.rs            | 51 +++++++++++++++++++++++++++++++
- tests/tracetool/tracetool-test.py |  2 +-
- 5 files changed, 118 insertions(+), 1 deletion(-)
- create mode 100644 tests/tracetool/nop.h
- create mode 100644 tests/tracetool/nop.c
- create mode 100644 tests/tracetool/nop.rs
+ monitor/qmp.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/tests/tracetool/nop.h b/tests/tracetool/nop.h
-new file mode 100644
-index 00000000000..443f5e0cf6e
---- /dev/null
-+++ b/tests/tracetool/nop.h
-@@ -0,0 +1,29 @@
-+/* This file is autogenerated by tracetool, do not edit. */
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+
-+#ifndef TRACE_TESTSUITE_GENERATED_TRACERS_H
-+#define TRACE_TESTSUITE_GENERATED_TRACERS_H
-+
-+#include "trace/control.h"
-+
-+extern TraceEvent _TRACE_TEST_BLAH_EVENT;
-+extern TraceEvent _TRACE_TEST_WIBBLE_EVENT;
-+extern uint8_t _TRACE_TEST_BLAH_DSTATE;
-+extern uint8_t _TRACE_TEST_WIBBLE_DSTATE;
-+#define TRACE_TEST_BLAH_ENABLED 1
-+#define TRACE_TEST_WIBBLE_ENABLED 1
-+
-+#define TRACE_TEST_BLAH_BACKEND_DSTATE() ( \
-+    false)
-+
-+static inline void trace_test_blah(void *context, const char *filename)
-+{
-+}
-+
-+#define TRACE_TEST_WIBBLE_BACKEND_DSTATE() ( \
-+    false)
-+
-+static inline void trace_test_wibble(void *context, int value)
-+{
-+}
-+#endif /* TRACE_TESTSUITE_GENERATED_TRACERS_H */
-diff --git a/tests/tracetool/nop.c b/tests/tracetool/nop.c
-new file mode 100644
-index 00000000000..f83d06252ea
---- /dev/null
-+++ b/tests/tracetool/nop.c
-@@ -0,0 +1,36 @@
-+/* This file is autogenerated by tracetool, do not edit. */
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+
-+#include "qemu/osdep.h"
-+#include "qemu/module.h"
-+#include "trace-testsuite.h"
-+
-+uint8_t _TRACE_TEST_BLAH_DSTATE;
-+uint8_t _TRACE_TEST_WIBBLE_DSTATE;
-+TraceEvent _TRACE_TEST_BLAH_EVENT = {
-+#ifdef CONFIG_TRACE_SIMPLE
-+    .id = 0,
-+#endif
-+    .name = "test_blah",
-+    .sstate = TRACE_TEST_BLAH_ENABLED,
-+    .dstate = &_TRACE_TEST_BLAH_DSTATE
-+};
-+TraceEvent _TRACE_TEST_WIBBLE_EVENT = {
-+#ifdef CONFIG_TRACE_SIMPLE
-+    .id = 0,
-+#endif
-+    .name = "test_wibble",
-+    .sstate = TRACE_TEST_WIBBLE_ENABLED,
-+    .dstate = &_TRACE_TEST_WIBBLE_DSTATE
-+};
-+TraceEvent *testsuite_trace_events[] = {
-+    &_TRACE_TEST_BLAH_EVENT,
-+    &_TRACE_TEST_WIBBLE_EVENT,
-+  NULL,
-+};
-+
-+static void trace_testsuite_register_events(void)
-+{
-+    trace_event_register_group(testsuite_trace_events);
-+}
-+trace_init(trace_testsuite_register_events)
-diff --git a/tests/tracetool/meson.build b/tests/tracetool/meson.build
-index 09bbaaa86bf..f4f583e6224 100644
---- a/tests/tracetool/meson.build
-+++ b/tests/tracetool/meson.build
-@@ -5,6 +5,7 @@ test_env.set('PYTHONPATH', meson.project_source_root() / 'scripts')
- test_env.set('PYTHONIOENCODING', 'utf-8')
+diff --git a/monitor/qmp.c b/monitor/qmp.c
+index d2e45d3993b..2f66257e4ad 100644
+--- a/monitor/qmp.c
++++ b/monitor/qmp.c
+@@ -440,7 +440,7 @@ void coroutine_fn monitor_qmp_dispatcher_co(void *data)
  
- backends = [
-+    'nop',
-     'dtrace',
-     'ftrace',
-     'log',
-diff --git a/tests/tracetool/nop.rs b/tests/tracetool/nop.rs
-new file mode 100644
-index 00000000000..5f007cecd04
---- /dev/null
-+++ b/tests/tracetool/nop.rs
-@@ -0,0 +1,51 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+// This file is @generated by tracetool, do not edit.
-+
-+#[allow(unused_imports)]
-+use std::ffi::c_char;
-+#[allow(unused_imports)]
-+use util::bindings;
-+
-+#[allow(dead_code)]
-+#[inline(always)]
-+fn trace_event_state_is_enabled(dstate: u8) -> bool {
-+    (unsafe { trace_events_enabled_count }) != 0 && dstate != 0
-+}
-+
-+extern "C" {
-+    #[allow(dead_code)]
-+    static mut trace_events_enabled_count: u32;
-+}
-+extern "C" {
-+    #[allow(dead_code)]
-+    static mut _TRACE_TEST_BLAH_DSTATE: u8;
-+    #[allow(dead_code)]
-+    static mut _TRACE_TEST_WIBBLE_DSTATE: u8;
-+}
-+
-+#[inline(always)]
-+#[allow(dead_code)]
-+pub fn trace_test_blah_enabled() -> bool
-+{
-+    false
-+}
-+
-+#[inline(always)]
-+#[allow(dead_code)]
-+pub fn trace_test_blah(_context: *mut (), _filename: &std::ffi::CStr)
-+{
-+}
-+
-+#[inline(always)]
-+#[allow(dead_code)]
-+pub fn trace_test_wibble_enabled() -> bool
-+{
-+    false
-+}
-+
-+#[inline(always)]
-+#[allow(dead_code)]
-+pub fn trace_test_wibble(_context: *mut (), _value: std::ffi::c_int)
-+{
-+}
-+
-diff --git a/tests/tracetool/tracetool-test.py b/tests/tracetool/tracetool-test.py
-index 59e9ab3d6ef..74f315a4629 100755
---- a/tests/tracetool/tracetool-test.py
-+++ b/tests/tracetool/tracetool-test.py
-@@ -14,7 +14,7 @@ def get_formats(backend):
-         "c",
-         "h",
-     ]
--    if backend in {"dtrace", "ftrace", "log", "simple", "syslog"}:
-+    if backend in {"nop", "dtrace", "ftrace", "log", "simple", "syslog"}:
-         formats += ["rs"]
-     if backend == "dtrace":
-         formats += [
+         /* Process request */
+         if (req_obj->req) {
+-            if (trace_event_get_state(TRACE_MONITOR_QMP_CMD_IN_BAND)) {
++            if (trace_event_get_state_backends(TRACE_MONITOR_QMP_CMD_IN_BAND)) {
+                 QDict *qdict = qobject_to(QDict, req_obj->req);
+                 QObject *id = qdict ? qdict_get(qdict, "id") : NULL;
+                 GString *id_json;
+@@ -496,7 +496,7 @@ static void handle_qmp_command(void *opaque, QObject *req, Error *err)
+ 
+     if (qdict && qmp_is_oob(qdict)) {
+         /* OOB commands are executed immediately */
+-        if (trace_event_get_state(TRACE_MONITOR_QMP_CMD_OUT_OF_BAND)) {
++        if (trace_event_get_state_backends(TRACE_MONITOR_QMP_CMD_OUT_OF_BAND)) {
+             QObject *id = qdict_get(qdict, "id");
+             GString *id_json;
+ 
 -- 
 2.56.0
 
