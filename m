@@ -2,48 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10BCC606A31B
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2026 11:25:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 12CD7606A32C
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2026 11:34:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=selector1 header.b=j/7gxdvB
-Received: from list by lists.xenproject.org with outflank-mailman.1471708.1679940 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=EImNaH9G
+Received: from list by lists.xenproject.org with outflank-mailman.1471719.1679948 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOZ6i-0003wo-Pj; Wed, 04 Nov 2026 11:24:44 +0000
+	id 1xOZFc-0005fJ-Io; Wed, 04 Nov 2026 11:33:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1471708.1679940; Wed, 04 Nov 2026 11:24:44 +0000
+Received: by outflank-mailman (output) from mailman id 1471719.1679948; Wed, 04 Nov 2026 11:33:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOZ6i-0003wh-M6; Wed, 04 Nov 2026 11:24:44 +0000
-Received: by outflank-mailman (input) for mailman id 1471708;
- Wed, 04 Nov 2026 11:24:43 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper@citrix.com>) id 1xOZ6h-0003wb-6k
- for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 11:24:43 +0000
+	id 1xOZFc-0005fC-Fj; Wed, 04 Nov 2026 11:33:56 +0000
+Received: by outflank-mailman (input) for mailman id 1471719;
+ Wed, 04 Nov 2026 11:33:55 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xOZFb-0005f6-42
+ for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 11:33:55 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xOZ6g-00BvRR-Je
- for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 12:24:42 +0100
-Received: from [10.42.69.12] (helo=localhost)
+ id 1xOZFa-00A62d-Gm
+ for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 12:33:54 +0100
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6aeb15f4-8faa-0a2a0a5109dd-0a2a450ccec4-26
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 12:24:42 +0100
-Received: from [52.101.57.29]
- (helo=BN8PR05CU002.outbound.protection.outlook.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6aeb15f9-f479-0a2a450c0019-3465391d90cc-3
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 12:24:41 +0100
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
- by BLAPR03MB5556.namprd03.prod.outlook.com (2603:10b6:208:297::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.569.12; Wed, 4 Nov
- 2026 11:24:40 +0000
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::a70d:dc32:bba8:ce37%4]) with mapi id 15.21.0592.009; Wed, 4 Nov 2026
- 11:24:39 +0000
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6aeb1816-2eae-0a2a0a5409dd-0a2a4503d82e-20
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 12:33:54 +0100
+Received: from [209.85.221.45] (helo=mail-wr1-f45.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6aeb1822-fae8-0a2a45030019-d155dd2dd878-3
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 12:33:54 +0100
+Received: by mail-wr1-f45.google.com with SMTP id
+ ffacd0b85a97d-490c1d337d8so23835f8f.2
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 03:33:54 -0800 (PST)
+Received: from [192.168.1.6] (user-109-243-146-71.play-internet.pl.
+ [109.243.146.71]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48feda2007esm3354133f8f.47.2026.11.04.03.33.52
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 04 Nov 2026 03:33:53 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,192 +49,299 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ogfFkj9ieF8gl5RsBsKXLpae4Kvj4cM37rjgNSJbTOfCIhClLbQKxsBpDOGS+KdTKqaErHYeStxLLo8vm/NRiX4inbjGV4icOXqGfV3yfgtc4cEaRFwwYZbXi6faa3D4R75G1d2pzexhOTJscRzFbFAlR12ir4UgvNUi8ucA+tChmXdYg/tmYceJLHWm0TCOcr4UaoTbAVHPMNeinQRQAzz8SOYzP0RMaYlubrYggUQyJ0YdctoUv/oXgAkG8A+Gt1dJlfUTEDQOaECVGz17iJXL6YAYTQY7IFTFsFehjm2ZLE+6S0ef77v+tk+OuQyKZgNgfbcIj5itbBd/vICXFg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=iBPMcX8RjO2+i82SwiSUdTPfy6bL9PXZsbff7x7UdjY=;
- b=lyo0bo7pFjpeUgSTziW++snzuAJx7QZgYWOecxqHem0Q0GqB3sH6sALJp71n2X5HR75o5PUsGevNB/fAWD7kGV2X+Ni0qWR6R5h8jlQsRx0KQsWkZJtlA9aXqk5jV6A7c6+KzESdHmpBfuXuyurcm1RMed+Za9HbkuVAoeX3wESKfxqukC4mKbflVf0/hb+6xEV65CAclYSmp99nzoOFpCsuG6aU6K60ByhAha5HSiBid37mG6hxsc5jiM26l06Zbemd5zusRdorTVIdtlTnZcDmaZnzdo+epkkTs/PCsjsbSJN05hoYFVZTaAJhQMaOX14A3aUkp6BVelxPcSS5bQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=iBPMcX8RjO2+i82SwiSUdTPfy6bL9PXZsbff7x7UdjY=;
- b=j/7gxdvBwchMEolkg1Jb29F1ZLcGPl/ggFQwTESUFVF21Qm/gGKJ/jpQu5TF1qKVtLklmUCI9aP9EtqoBuTD+ZfZqacLYhfw8ywytKZmuGPvLxaRJqWgEHRvWUcn2MduHfM6A6Qw6InwBYZzIJC7yl46IuqpndRZXDiJlkjlwY0=
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <de39dd8c-1db0-45a9-a9c9-ad2f2e0a90cb@citrix.com>
-Date: Wed, 4 Nov 2026 11:24:36 +0000
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1793792034; x=1794396834; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=3zDMyA4rVT7YPhbltgk8jepE5SDB7NJpRffzDpRyBOE=;
+        b=EImNaH9GjBY2udj+CD0Q/3KK/TqS2LVSGWlYpuz5TY0wIgj3+4leorkAWa6oocKghW
+         Xpxf9+ZpCxDW5vT/OYnl5G5GQB2Lbz5yHKNZCX8v6cc/j4IparmQmSCz5ETEyJiusdkp
+         +MGTzSfTNO389dvK7OFz+pxUesEsWIMqUcYuEg8Ct1j2QxTx4YfWN/vXiFi/523midxw
+         ZrgFYxKg8VqNXBwoF3QtKEc+thhMUn5oM2rsKi9wZ7qT8dQtpJb66Cwz3aIFJIwPIABE
+         k2aKO+GiWzjDvuwRxjmUxeG9tOaJLbBy/J/2DtHGhQkKLQvvIT2fEZUfEdkVIY7hpU5Y
+         1vbw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793792034; x=1794396834;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=3zDMyA4rVT7YPhbltgk8jepE5SDB7NJpRffzDpRyBOE=;
+        b=pPLkNMJeC0rvVjgVkWUmlN/PtWPL59N8vV/3SWrZZ/69UgdpnRNCyD0olHpMP5HnzF
+         9FP4dEJyqg3Qk/7aGKr5Abc68y90TC16H+7FokhQw5KFQBSnPUDPpPhJDCWz/vRhVNJz
+         M0OqgA/U3FV6VoCRCds/aQZlgSo+i2Tknu4LATPPYTzjIjvox7soMdsVc8dbCMGMexbQ
+         6R400NYZ2ikVuiARLTOEKbBscI03un583l1fAZdV+apgJRfUkux/waxIYra/IdQCzPRX
+         6FYbhklfOoyVrK9C7i2a8EGTFzzsnyH0zHiJHTxaeYMCpeZGFqqn8X/aQgjhEgsU/xln
+         /TsA==
+X-Gm-Message-State: APuU4Z/5bTsknG4AerXfpITWGyjtdRsc5FWe89S5i7cEdO4kfCLEgtEj
+	3xeoBO35nohniC96HmGANX0fDylvvrchOHph1b/NgsffPrK80bb1R0VA
+X-Gm-Gg: AYBFou1xqVzhf2aqfA3p9nJClZt97d4rLSIe/5QmETAuVKOgBGXcc4ryk86cLfNyF9D
+	bTildGyiAhL6hv8mIywJE1sonSgu0+3/bnmx+u5EZHabNuv/YDRRv7iF5rGx1WIU+XqlwpC9iwj
+	MHX0RiJflaSSbzCU7bUudGzlog/m3NAfdoTD3xyaF/YoGiSXfhBYNZioOIZlOqoBUc5/gL4m6lw
+	OvjAT+qWJZh4HarqDjYI7mf+9vua3Oz+rX0XG3TFRcH4H0kfoxUCXjuqarDiY8TsU5cq0qirr8k
+	5LM1RVO1m3FGPWvkAeM5etPSbZlDUSkNfjnwNE4wdLp8tlAt6U86IGmtzLhnJsijK3uDbyHbsK/
+	o4v3zqQoVhrMx2yd5ZBV4K4UXp2cEdlof5o1uZho599tnyosvv/o8RzZjK4BqoFhqZCM0X0c+7a
+	VFopWwTDOsar2v9KebNGGMGTQJnDXhLHBBQfa74chr2bhr35dqINpZB0OQ5owaDu53g7s6j7QgY
+	nVyugfRcZyOnDaf8zPeD33MLdfhWxvXR6X5yCyD3TyKdgKqXY8/0j8WncEAQodGjvaPQcwuqZ97
+	kDgKjVJMwAyHkuX2WShVHYD/+xWka1nGt/hkmJy45TtONLs5vDP7wxlA1LL0Fi4M0KdvYZfeTr6
+	kYuc=
+X-Received: by 2002:a5d:64e7:0:b0:48e:17d1:16c9 with SMTP id ffacd0b85a97d-48e6e4f5652mr33870451f8f.40.1793792033715;
+        Wed, 04 Nov 2026 03:33:53 -0800 (PST)
+Message-ID: <0c5c754a-e072-4c95-9adb-85ad4ce5fddf@gmail.com>
+Date: Wed, 4 Nov 2026 12:33:51 +0100
+X-Archived-By: <archiver.kernel.org>
+MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Nicola Vetrini <nicola.vetrini@bugseng.com>,
- Doug Goldstein <cardoe@cardoe.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
+Subject: Re: [PATCH v3 17/39] xen/riscv: add guest page fault handling stub
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Cc: xen-devel@lists.xenproject.org,
+ Romain Caritey <Romain.Caritey@microchip.com>,
+ Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
  Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
  Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>
-Subject: Re: [PATCH 4/4] automation/eclair: deviate MISRA C Rule 11.8 for
- xfree() and vfree()
-To: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <cover.1793699713.git.dmytro_prokopchuk1@epam.com>
- <4accfe649e163bb4d0372c432256ed394b4ee50d.1793699713.git.dmytro_prokopchuk1@epam.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <4accfe649e163bb4d0372c432256ed394b4ee50d.1793699713.git.dmytro_prokopchuk1@epam.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: LO6P123CA0007.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:338::9) To CH8PR03MB8275.namprd03.prod.outlook.com
- (2603:10b6:610:2b9::7)
-X-Archived-By: <archiver.kernel.org>
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|BLAPR03MB5556:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2ccf0975-f901-47c6-3275-08df3a663732
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|7416014|376014|366016|1800799024|261021121427099003|261026121527099003|4143699003|11063799006|10067099003|56012099006|22082099003|18002099003|261102123227099003|6133799003;
-X-Microsoft-Antispam-Message-Info:
-	yavHZFC2tSvFoNJiG64OfoTAc+rXeW9Xtjmai9Z4A1NTdOBo/ixl/a5KpUiWwwwNxjGueosvuMxJEmnCMeTs01BqYBJdNWOBCH8iLfS+7jwahiPgYIYloLlFkfFyXthlNEpIyAB9nktASb1Hu916sssK98eC9JZPKZeTumFVtJ0+ErNcnNUMMiK++0/2jpkc1mpr+dfnAt0eqv4m4/cWXy6KzCm123jwr8ZdreRfi7vUeMdLKoZ1mX1OcmI37QqYteEp73Ch1B9JuMgTZ2ir2KsJacoEb4kxdHvgaXSDOqZMCpF3sUnn5gYpZ9i8rCayxOMttl68FLIEl3fMI0ExrsUkoyjG28pWY55C/pOmeLbnfX8FG6y80vG5L2kGb5J54Ah3WFr59dlTtZ8qYLjqEr2KkKOk372NPNCCehsFrsFnVKQ9xYWjUNvc6QntbuO8ScgBdK+evvBkaQ+28rwqFniPx6Mmu2W5vx9kZ1MhPBMIQxiXYX/1KSLhkMVY3M+c/39KZUX0QlSYttuiO9kMy05slmZqu96dqZZbJ7f+CLv3c8zOJu/FneTaNRaN+gz+iczC8dHxMFJGFYf6A1qhhqvi1wqTfzAezN4L9lnDlF1oSMaLBhJNwjKMFFIFlDooBKJiwxvHSPI2fWqghF4ywmEpSja6rwd7jbiPXbfP1Gs=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(7416014)(376014)(366016)(1800799024)(261021121427099003)(261026121527099003)(4143699003)(11063799006)(10067099003)(56012099006)(22082099003)(18002099003)(261102123227099003)(6133799003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?cW5XampQZkdsdHRmTXNhSmxlQzNKakwrYUs4UUxUV2VvUHR5NTFZeVNiSWpq?=
- =?utf-8?B?L3c4TGV2TEhSTTNFYy9Kbm8zWGNBL1NwZGF2NkE3UXNQOVppaC9hUUw5bWxx?=
- =?utf-8?B?T0dPUWI1aXdqLzdUZ2FzeDVESzhhZys4UGxRSVMrK2RHM0dtSlE1eEE1dmo3?=
- =?utf-8?B?c3pVczBOL1RaZ0ttcmdRQWJOdVdGQWUxTG4vYjBZVnJxSWJHaHk0eENnSExW?=
- =?utf-8?B?NExIU1VISUI0TTRmcEVQVitRS2dCMTh5bWVDdlZQZ1VDaENQMStYM0RqbnFy?=
- =?utf-8?B?UjFjZjNGWlRSaE5vNXRleDFZS1U0N1hyZGwxay93WndHTURnME1kdGRnUFI2?=
- =?utf-8?B?RTY0eE0zd2o2bFp3RWFRYklNUFlwTU8xb3JVR1ZzTGN4M0wrS1ZtU0lUbFJS?=
- =?utf-8?B?SjdlbWtCSVFFSHRIVXB5dDMxNzNyWUdqV3NBM2NkdHZQcm9FYzFCTitBbS9Q?=
- =?utf-8?B?UVVzZUpySkluWW5kV0h4NlhQekRTdENIaW0wYUNrQW1BU25mQW1nOU10Wklp?=
- =?utf-8?B?cHZoQzlBbG1GelJrN0hHR3ZtQ25ISXYrWlhXQ2Z2Ym5uMnpsYWtLTW0xRHFw?=
- =?utf-8?B?RlVnWGprWkFFV2tPREtMS05DOE4rOWpVMS9ORFBIeXBvclQ1RVRRbVV2NkVk?=
- =?utf-8?B?SEJka093eG4zRkxSUGhUSXA5WWZCSlI5eU9zcXNZWU8wMUhMVnRXWk1weHpQ?=
- =?utf-8?B?QkJMTEp1RDcxVVN5aGxQdjJYUW9zd1l2NG40TkUyeHFUMEt2SW5vellNejVT?=
- =?utf-8?B?eDU5NXh4cHFNL3J4UHBZejVTRXVzeDlUazZPZytXNGtKdjFGUlpMVHJ1MEpH?=
- =?utf-8?B?cjU5L2ovVllvRSt5eGlDUnRiT01VYjhrZWFEWC9kSmhHQlREelpTWkxYZkFR?=
- =?utf-8?B?Qzh5N04rZUthNjFIZU9PaS8yNjZBVWVSZzR6Y0h5Q2xvMTAvSGFCVENEVTJM?=
- =?utf-8?B?Qm9XNmNUUjk0cDEydHhiL2NzMkwvTzRVREFBT29hMlRacTNFcENYNUZPYWtY?=
- =?utf-8?B?aHl0RTJJa0lUdHlkd2crNlBTN3ZCS3Nqb205cXdtdU5sNVNKcGI2Z3dCSkQr?=
- =?utf-8?B?ZWRFdW5URmFFTS9MV2VQNDRybnAycnl4aEpUaHorcmF5anFFUk53ZEhGSE51?=
- =?utf-8?B?TUJDK1d0WlhRM0tYQWFFaTlYNE0rN2x3OFBqdU16cHVhc1FHcTM5alIweEJR?=
- =?utf-8?B?R1RqODhMYklPU3RQR2RuMFRkcGwyb1l1SUxRWHQ1UmJuUXU0NUE2eFFIUUth?=
- =?utf-8?B?N1VzVytFS3pGSUpHTi9zMzNxT3EzNDAwN1FtVHY1eGgzQ2RFczV1TjViUXhS?=
- =?utf-8?B?b1AycHArSUJiUE1sZHkybzlYSy9NTi9YaGtvWTV3Z3JwR1ZRK1VIcTBpQUVZ?=
- =?utf-8?B?eDFsTXlNQ0VjTzRJT3E2QitUQktEUlQ3ZjZiVWNCYTJEa3BsMktNNTJyRlpC?=
- =?utf-8?B?ZUdqRjRyYzk2VEplRFY1Yjk3T1ZwaDVWeWNHSFRiNnl0RVVpT25VYndDWHdI?=
- =?utf-8?B?MVZzbnJINVNCTFFXNE9IUkhNUVhZS00vN1hZa05LRnV5S29ndVpCbU5nKzd1?=
- =?utf-8?B?dFlwaTFxYnhlNWJXbmdLQThvS05qcEdzQkpleVI4K3ViT05qbzhHTjgxRFdz?=
- =?utf-8?B?WXF6SE5URjBFTEJkWjNuR3ZSdVhWdkxoWUZGdldpeWtscEhGOS9kYURSbVdl?=
- =?utf-8?B?cVQ0UXFXMnczTUJRMEJTSkFXTjNFWlJBOXBjT2lCRDZXSEphbW9LRTI4aVBM?=
- =?utf-8?B?Zzk0VXY2ZzBndDRlVDB6Wk0zQWRNNVhOdE0rbkpDY2dLY0RhTC9QUW9lZVVz?=
- =?utf-8?B?K2JiMFppaWMwTk9OYXJrdW1VL3F6QjU1SzZDb25xallnT2FXU3VJcVR0SDJp?=
- =?utf-8?B?Zjd0Y01qb3dUMjhGRElLMm9HcTZibENTalh5RTB1Z2M5T3VxTXFtb0E4Vkd5?=
- =?utf-8?B?VG9pd09qZkM1MFpicy9MdkpzaDB4c2xsWlRTZmRmSFVSRi9JL2p3NHFaZGN2?=
- =?utf-8?B?REdmOExaSU94Z1g4bjJkWm5sTWxHNjc0cURINnF6M1QrY3hkQVZlN3NXTzkw?=
- =?utf-8?B?Q1VTOFFLaldRYXpoRkxBQ3Q2QXV3NC9DeExPd3ZPWkR1OWU4ODRPL05PMDMy?=
- =?utf-8?B?MXNWVENtUWhqc0pManh5Mjl4M2tCL3Fnbzh4eUVOZzMzUnBzU3RBblkwQ29o?=
- =?utf-8?B?UlYwQXNIcUJlRHdWKzd5QVRIT0FzTGkxd1U1WXdrWVd3aDI3VXcwZEx1RUMw?=
- =?utf-8?B?WmVsNFI3RGZqcDhjek9vdUxEV2Y1cks2NlMwWTRtTjZRVGJyNCtEa1NFOS93?=
- =?utf-8?B?TzlhYzJIVFdpMksyMlplVFBEemhFSFdYVk5Kam4wUlZyTi85d0tTdz09?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2ccf0975-f901-47c6-3275-08df3a663732
-X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Nov 2026 11:24:39.8703
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: J6p/JlRXcK3VIumCj7ppP/pAzcTTGBafvLz66MJzHHW2QonfRkqBtcrf1uRpBXP5IX/g1jSIT6NlmwyQDfyR1ICdESa5lBhCGM0MCjnEp6E=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BLAPR03MB5556
-X-purgate-ID: tlsNG-d25034/1793791482-5290EA5B-FD4386CD/0/0
-X-purgate-type: clean
-X-purgate-size: 1153
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=4.0.1
+ <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
+References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
+ <42d1a37341eadd764022a1658bebcffcee15238a.1790779209.git.oleksii.kurochko@gmail.com>
+ <1792508386.8631fc262581453bbf619ec5b2062170.1a159d35ad4000f79f@vates.tech>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <1792508386.8631fc262581453bbf619ec5b2062170.1a159d35ad4000f79f@vates.tech>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-33051d/1793792034-6C8DD4E9-57397E9B/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 8542
+X-Spam-Status: No, score=-13.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FORGED_GMAIL_RCVD,FREEMAIL_FORGED_FROMDOMAIN,
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 03/11/2026 10:29 am, Dmytro Prokopchuk1 wrote:
-> Livepatch passes const-qualified pointers from struct payload to xfree()
-> and vfree(), which take a 'void *' argument. The cast that removes the
-> const qualifier is a violation of MISRA C Rule 11.8.
->
-> Such casts are safe.  The deallocation functions neither read nor write
-> the content of the object being freed, and the object is not accessed
-> after it has been freed.
-
-I have a very firm objection to this.
-
-It is impossible for any allocation from malloc()/calloc()/etc to point
-to read-only memory, which is why free() takes a mutable pointer, not a
-const pointer.  The same is true of any other heap implementation.
-
-It is impossible to make an object in read-only memory undefined. 
-Objects in read-only memory by definition have a global lifetime, and it
-is absurd to argue that a specific heap implementation ought to permit
-making such objects undefined.
 
 
-The bug here is livepatch storing a heap allocation in a const pointer.
+On 10/20/26 4:59 PM, Baptiste Le Duc wrote:
+>> Add a handler for guest page faults and hook it into the trap path,
+>> providing the trap-side entry point which will later feed the MMIO
+>> dispatch.
 
-This comes from deeper problem where some contributors/reviewers want
-the const keyword to mean something it doesn't.
+Based on your comments below I will update here to:
 
-~Andrew
+  Add a handler for guest page faults and hook it into the trap path,
+-providing the trap-side entry point which will later feed the MMIO
+-dispatch.
++providing the trap-side entry point for the MMIO dispatch.
+
+>>
+>> This will be used, for example, to trap accesses to APLIC registers so
+>> that a guest can initialize and drive an emulated interrupt controller.
+>>
+>> A G-stage (stage-2) fault has one of three causes, reported via scause:
+>> - Fetch fault: guest tried to execute from a guest-physical address
+>>    that is unmapped or that G-stage marks non-executable. Never
+>>    emulatable (nothing to emulate a fetch into). On real hardware
+>>    this raises an instruction access fault, so Xen reflects the same
+>>    fault back to the guest. Decided here.
+>>
+>> - Load fault / Store fault: left undecided by this patch, this is
+>>    where MMIO emulation will hook in later.
+> Nit: should drop "in later" as it would be stale in the future. I'd
+> suggest:
+>    - Load fault / Store fault: this is where MMIO emulation will hook.
+>      Not in scope of this patch.
+
+I will re-use your option with small remark:
+
+"this is where MMIO emulation *hooks in*. Not in scope of this patch."
+
+'hooks in' instead of 'will hook'.
+
+> 
+>>
+>> Any of these three faults can instead be reported via a pseudoinstruction
+>> in htinst, when both:
+>>
+>> (a) the fault occurred on an implicit access Xen made to walk a
+>>      VS-stage page table, and
+> Xen doesn't access the VS-stage page tables here: the implicit access is
+> done by the hardware page-table walker, while translating a guest access
+> through the guest's VS-stage page tables. I'd suggest to use spec's
+> wording. Moreover, "and" is not needed between both conditions as you said
+> above "when both" which already indicates that both should be true.
+> 
+> Here is a proposition:
+> ```
+>      Any of these three faults can instead be reported via a
+>      pseudoinstruction in htinst, when both:
+>          (a) the fault is caused by an implicit memory access for VS-stage
+>              address translation.
+>          (b) htval holds a nonzero value: the guest-physical address of that
+>              VS-stage PTE, not of the guest's original access.
+> ```
+This option better. I will use it.
+
+>>
+>> However, none of these paths consult the p2m first, and the future MMIO path
+>> won't either: RISC-V has no populate-on-demand, no paging, and no
+>> mem_access, so every guest mapping is established eagerly. A G-stage
+>> fault therefore never indicates a mapping Xen could lazily resolve to
+>> let the access complete.
+>>
+>> resolve_faulting_gpa() is a stub which always fails for now, so any guest
+>> page fault other than one taken on an implicit access for VS-stage
+>> translation currently crashes the domain. That one is reflected to the
+>> guest through trap_redirect(), which is still a BUG_ON() placeholder
+>> though, and so takes the host down. This is no worse than before this
+>> patch, where these traps fell through to do_unexpected_trap() and die().
+>>
+>> Cache the "trap came from the guest" test in a local, as the guest page
+>> fault case needs it too.
+>>
+>> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+>> +    default:
+>> +        domain_crash(current->domain, "Impossible cause (%#lx) in %s?\n",
+>> +                     gf->cause, __func__);
+> Nit: please drop __func__, the message is unique enough to find where it
+> comes from.
+
+Agree, not to much sense. It will be dropped.
+
+> 
+>> +        return;
+>> +    }
+>> +
+>> +    trap_redirect(&utrap);
+>> +}
+>> +
+>> +void handle_guest_page_fault(struct cpu_user_regs *regs, unsigned long cause)
+>> +{
+>> +    struct guest_fault gf = {
+>> +        .regs = regs,
+>> +        .cause = cause,
+>> +        .gpa = INVALID_PADDR,
+>> +    };
+>> +    int rc;
+>> +
+>> +    gf.htinst = csr_read(CSR_HTINST);
+>> +    gf.htval = csr_read(CSR_HTVAL);
+>> +    gf.stval = csr_read(CSR_STVAL);
+>> +
+>> +    /*
+>> +     * A guest-page fault may arise due to an implicit memory access during
+>> +     * first-stage (VS-stage) address translation, in which case a guest
+>> +     * physical address written to htval is that of the implicit memory
+>> +     * access that faulted - for example, the address of a VS-level page
+>> +     * table entry that could not be read. (The guest physical address
+>> +     * corresponding to the original virtual address is unknown when
+>> +     * VS-stage translation fails to complete)
+> Nit: I think this paragraph could be re-written by using what you said
+> in the commit message.
+> ```
+>      htinst reports one of the special pseudoinstruction values when both:
+>        (a) the fault is caused by an implicit memory access for VS-stage
+>            address translation
+>        (b) htval holds a nonzero value: the guest physical address of that
+>            VS-stage PTE, not of the guest's original access, which is
+>            unknown as VS-stage translation didn't complete.
+> 
+>      No access to emulate then: to match bare hardware behavior, inject an
+>      access fault of the ORIGINAL access type (Instruction, Load, or
+>      Store/AMO) that initiated the address translation.
+> ```
+
+I will use then your option.
+
+> 
+>> +     *
+>> +     * In such cases htinst reports one of the pseudoinstructions recognized
+>> +     * by htinst_is_pseudo(), and the fault requires separate handling (since
+>> +     * G-stage translation failed on an unpopulated/unmapped guest physical
+>> +     * address during a hardware page-table walk). To match bare hardware
+>> +     * behavior, we must inject an access fault of the ORIGINAL access type
+>> +     * (Instruction, Load, or Store/AMO) that initiated the address
+>> +     * translation.
+>> +     *
+>> +     * FIXME: This assumes that guest page tables never reside in an emulated
+>> +     * MMIO region, i.e. that an implicit access faulting at G-stage always
+>> +     * targets an unpopulated GPA. Guests may (even transiently) place page
+>> +     * tables in MMIO-backed memory, e.g. a video frame buffer. Supporting
+>> +     * that would require walking the VS-stage page tables in software,
+>> +     * accessing the PTEs (including A/D updates) through the MMIO handlers,
+>> +     * and then emulating the original access, instead of injecting a fault.
+>> +     */
+>> +    if ( htinst_is_pseudo(gf.htinst) )
+>> +    {
+>> +        inject_access_fault(&gf);
+>> +
+>> +        return;
+>> +    }
+>> +
+>> +    rc = resolve_faulting_gpa(&gf);
+>> +    if ( rc )
+>> +        goto out;
+>> +
+>> +    switch ( cause )
+>> +    {
+>> +    case CAUSE_LOAD_GUEST_PAGE_FAULT:
+>> +        rc = emulate_load(&gf);
+>> +        break;
+>> +
+>> +    case CAUSE_STORE_GUEST_PAGE_FAULT:
+>> +        rc = emulate_store(&gf);
+>> +        break;
+>> +
+>> +    case CAUSE_FETCH_GUEST_PAGE_FAULT:
+>> +        /*
+>> +         * Guest is trying to reach unmapped/unpopulated, or G-stage PTE doesn't
+>> +         * allow execution (X=0). Generate fetch fault in this case.
+>> +         */
+>> +        inject_access_fault(&gf);
+>> +        return;
+>> +
+>> +    default:
+>> +        ASSERT_UNREACHABLE();
+>> +        rc = -EOPNOTSUPP;
+>> +
+>> +        break;
+>> +    }
+>> +
+>> + out:
+>> +    if ( rc )
+>> +        domain_crash(current->domain,
+>> +                     "%s: unable to handle guest page fault (cause=%#lx) at gpa %#"PRIpaddr"\n",
+>> +                     __func__, cause, gf.gpa);
+> Probably __func__ can be dropped as the message is unique enough.
+
+Agree with dropping of __func__.
+
+> 
+>> +}
+>> diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
+>> @@ -193,6 +194,7 @@ void do_trap(struct cpu_user_regs *cpu_regs)
+>>   {
+>>       register_t pc = cpu_regs->sepc;
+>>       unsigned long cause = csr_read(CSR_SCAUSE);
+>> +    bool from_guest = cpu_regs->hstatus & HSTATUS_SPV;
+>> @@ -275,3 +289,9 @@ enum mc_disposition arch_do_multicall_call(struct mc_state *state)
+>> +
+>> +/* Redirect trap to Guest. */
+> This duplicates the comment on the prototype in traps.h, so I'd drop it
+> here.
+> 
+
+Agree, it is enough to have the comment only in prototype.
+
+Thanks!
+
+~ Oleksii
+
 
