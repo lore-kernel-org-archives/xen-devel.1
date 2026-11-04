@@ -2,47 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 61841606A326
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2026 16:31:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E6723606D808
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2026 16:38:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=selector1 header.b=mI14yNMD
-Received: from list by lists.xenproject.org with outflank-mailman.1472211.1680173 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=tav7Op5a
+Received: from list by lists.xenproject.org with outflank-mailman.1472227.1680187 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOdtW-0006gw-AK; Wed, 04 Nov 2026 16:31:26 +0000
+	id 1xOe0S-0007bt-1O; Wed, 04 Nov 2026 16:38:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1472211.1680173; Wed, 04 Nov 2026 16:31:26 +0000
+Received: by outflank-mailman (output) from mailman id 1472227.1680187; Wed, 04 Nov 2026 16:38:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOdtW-0006gp-7b; Wed, 04 Nov 2026 16:31:26 +0000
-Received: by outflank-mailman (input) for mailman id 1472211;
- Wed, 04 Nov 2026 16:31:24 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xOdtU-0006gj-Ir
- for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 16:31:24 +0000
+	id 1xOe0R-0007bm-U5; Wed, 04 Nov 2026 16:38:35 +0000
+Received: by outflank-mailman (input) for mailman id 1472227;
+ Wed, 04 Nov 2026 16:38:35 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xOe0Q-0007bc-N6
+ for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 16:38:34 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xOdtT-00F0EG-Vm
- for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 17:31:24 +0100
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xOe0P-000x1H-VJ
+ for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 17:38:33 +0100
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6aeb5dd3-2eae-0a2a0a5409dd-0a2a4501c530-34
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 17:31:23 +0100
-Received: from [40.93.194.7]
- (helo=SN4PR0501CU005.outbound.protection.outlook.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6aeb5dda-5984-0a2a45010019-285dc20747ce-3
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 17:31:23 +0100
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
- by DM6PR03MB4940.namprd03.prod.outlook.com (2603:10b6:5:1e3::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.10; Wed, 4 Nov
- 2026 16:31:19 +0000
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::a70d:dc32:bba8:ce37%4]) with mapi id 15.21.0592.009; Wed, 4 Nov 2026
- 16:31:19 +0000
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6aeb5f81-bab6-0a2a0a5309dd-0a2a450c951c-22
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 17:38:33 +0100
+Received: from [209.85.221.52] (helo=mail-wr1-f52.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6aeb5f89-f479-0a2a450c0019-d155dd34d917-3
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 17:38:33 +0100
+Received: by mail-wr1-f52.google.com with SMTP id
+ ffacd0b85a97d-490a0e72588so333723f8f.3
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 08:38:33 -0800 (PST)
+Received: from [192.168.1.6] (user-109-243-146-71.play-internet.pl.
+ [109.243.146.71]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48fed0844e2sm3739894f8f.28.2026.11.04.08.38.32
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 04 Nov 2026 08:38:32 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,189 +49,424 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Od/wcol4xdMNlGGqc/Zl3IFUYKv9tZYNY0QFCc5vi1gxn+9uI+3Qp3z1ufot3hHki2ToDUH57h+qStgWfX2Bvfxah+0b14uxgLqTOSBR52UspLFkFLMK1Rzs3EC8/ufR2LTJP8hTAopKUrdSt8oxScDvJKQEXHF+kzETTsmWKiLJ6T4BAvTsORxlN54Rlg08ra8QMnXmky18MfkX364cOmBcxvE6Xl3CJNeklbvwn6JzHtWhjt7njtcNeT/2R+AwJjVHSbmgNMFmPsJ8oID5tppQMxA+Wi4k+RleX/xjhDO8qPLogRwomK+wvfFXMY1WSChEBgw08YXjI2QWt9HxUg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=zH0AnDnT78PdGq6FySrWUDxu0XRcC48TxmYqlUNdiQA=;
- b=wYTqx/6SIJdGJYCN4wcMyBfxtLSfQooLbibNe4E8QZKCJ7BsI3zFVef4RoqGkG/ccw4MY9hhEW9nnnxy5vK1M+2NENXBWbp79o5ZvCMkyrNlxx6accwviHELImQwTetk5KtyxdIQBLk3WV7gJGiVLobk3r1mOJqwvz0ACntxyA/9uFj1drUqfKSrPg2NIouneye5hHNns/AZTb5k7pAIUpoUpCvnN8tcmejLbPLXwFYNqxL1/SIDoFfKBKZXUCa4enf1ArOVjp+Jh0DZuWtnt76dPyixtgY87hd/JpVNvXjmz6NH2DBobQgVR0BYDnxYX111/CXlcCF74FR3v0OUqQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zH0AnDnT78PdGq6FySrWUDxu0XRcC48TxmYqlUNdiQA=;
- b=mI14yNMDvPPuktzpv2G1jR5SF00R1QyWycLR9nkF7/bqaTqubP0WT+F/U/GSgvkPahHtshmmulk3f/rNDj1rfCr9UJJ90EHcfy9+BB2IUW5RmSiBpkIVTgN1BX/MBETWR0wttFxII7iV1komT2kufvMT+/V3xZv0/ovtr5dFyz0=
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <67b28949-be62-416e-be27-5f1b81bea8c0@citrix.com>
-Date: Wed, 4 Nov 2026 16:31:16 +0000
-User-Agent: Mozilla Thunderbird
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>, Jason Andryuk <jason.andryuk@amd.com>,
- Xen-devel <xen-devel@lists.xenproject.org>
-Subject: Re: [PATCH] x86/svm: Adjust vNMI handling to update the cleanbit
-To: Jan Beulich <jbeulich@suse.com>
-References: <20261102134621.1693316-1-andrew.cooper3@citrix.com>
- <6648b7f8-bbb5-4231-9c30-ed7843a5d59a@suse.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <6648b7f8-bbb5-4231-9c30-ed7843a5d59a@suse.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: LO4P265CA0055.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:2af::11) To CH8PR03MB8275.namprd03.prod.outlook.com
- (2603:10b6:610:2b9::7)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1793810313; x=1794415113; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=7oPzuPFyKO/r7exvkxR3tK22R6tRkddL2ZLbRLJk17g=;
+        b=tav7Op5a2+BlpMmOzyRXblOVwi6/m5dZnj5Wb+yK7a7SCOO7BFLBWdoobZ8l6SrLFK
+         dZskwvApAH5wImF6+GAvjes2AhgBDdAg/i5WC8tH2HK7mKDdkMAakSe2Tef/JUAUkOmQ
+         xx1l5NeOCtNClroqsW5+ICqbikljA89h425KnG2s7zuZLB2xv4ZGQyr/rFaGNAN74sMN
+         8Rr7YWekVmBNnvqO1KajC1QeeuLyqcIUVeB80YYrYUBoHN9Eml3CuxBayCJyzw584uMu
+         u4il6sue+fhF//FKemuZK0vY8QqbMHPnez15ES4o5JFCxzKRsJTTGTXotISKWeubwwCd
+         NT7A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793810313; x=1794415113;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=7oPzuPFyKO/r7exvkxR3tK22R6tRkddL2ZLbRLJk17g=;
+        b=v3A6++Q61+DDgq4TtxsvnbOaLUNE8KvQIWpUoDmXXnVNhMyC8aRybY+Yq44r6kqydy
+         /yGSVlZbdQ0ngPSI57SvdmHW55U7vDHO5DwG44Qqolg3EtZ17rrJFeBCUGECX5As20wH
+         HjOIED1ZC530LbAk1B0VfaV0ZfoCHmynAaNpGAjelx4II67JH2pdR1HEh8BEZcCXavxi
+         lTvM1WQCVqZH3RDQwlZXY9yg1/e3arHY4kNUu4TY+lzG0chwtR8NBDETOOZFG68fqdjq
+         lfq40CXDu4RjVDaQxzEYJ+5aUVW9z+LX1Gk/AIXaX0Kb0h2BFyR/QCFCX9NBrK7nyu/U
+         hgLg==
+X-Gm-Message-State: APuU4Z+UswB6dyc+KboKlffZNfGwvyR0CnWp1C5hVqXkPUCvoXUuh7FO
+	+cyaCxruZutpubiaUdNamQjFx8FvrQ1Z3QPi83+iytj9fLOse9c03ZeG
+X-Gm-Gg: AYBFou0JBN3WX6lvOvLdCq6xW1JqmRODf4W6tSNt8DsfkqXkxHhSRq01KslGL4pNoQD
+	b5bGH7JibGfyZjIADEtlu29zUh3ptzQ4qlp9s9HgE1HcB1WShkTivKfDZ59B/DVga6N36RKaBgC
+	/A4oa4cQcPWhO3UAXD+jhTP2tV1wiZUX1C10A+ZyU9DNkJfhtr8LNtxVhTBEkQi5P5SpLAf9j63
+	O5rWIoqHWd+2tVGd4OlMIhcFNpU3w1WDJRzi8wjpYVGNgqaolsjBW4pwXXbbhNIlEEPGq+nK0XF
+	sFV4xN7UJZukyPXiPkmti+4s6Fjsr50LQTCrQkzCuDpBqOIHmNwoK/euDsN56+osaaGXCLORJDL
+	PTZTxOTXmdsYK6YpS2eY79k0d84yBoezImbDKPHZ2zxbegxKVSvQf+WtW388k4uRJ9ZaivHzZ+U
+	YraCax1tmR8uO8a5TwGHkHP8GX8ysVI3kKsieGxcaAYCne8wD8PzF8GMmFIGK5aAlqGX8vW+d4V
+	HG+uo5W3VUkskdFtmi5TTW+b+fhGA6KAFE1Fs5TUT0fyXn3ZpnH69sD9qtBSwcl59RXxc0n8Z6Y
+	JIWaBMzG5UsBKzzJz7FB89VHZXfZEj7ZeT1RVVSmX88OZ3kEc1A9SLwLwFw0QkKKvCvsRwZYail
+	tVDU=
+X-Received: by 2002:a05:6000:2a03:b0:48a:fba3:d5b1 with SMTP id ffacd0b85a97d-48e6e50b502mr25808328f8f.55.1793810312999;
+        Wed, 04 Nov 2026 08:38:32 -0800 (PST)
+Message-ID: <8f6c0cd1-f5fc-4a1d-8752-3da42a52a710@gmail.com>
+Date: Wed, 4 Nov 2026 17:38:31 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|DM6PR03MB4940:EE_
-X-MS-Office365-Filtering-Correlation-Id: 15c1a8c1-73fa-4533-ed6d-08df3a910e3f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|23010399003|366016|1800799024|10067099003|18002099003|22082099003|4143699003|56012099006|11063799006|5023799004|261022075727099003|261102123227099003|261026121527099003|261021121427099003|261009223027099003;
-X-Microsoft-Antispam-Message-Info:
-	5gzXlrsi11scQHgma/h7UrwGmoioAuNpGTJTL412zi4IIbxhxJsb31RFczxIjbC8Ne2dd459mI7b6VqLYUoBVE1e47SUBHg+5BReqFC9EO8hyZaSNbHy87qcH79eljkLoMxrXXxJiR8/ykFcXMylndAEJ8N+e7YCbEZ4quCKNJyiRxEWeU4vxKWnEdzDDyPkWooEKJ1wsfkL5N9DwKJEybFJwW7oOrfaQCOLf8dYHOf7JZ9SYltcllMAzF5SRlSSVkbzd003IQP2QchhkL1OL5/a1p2qecAhjrVLO6IstTujm6cdG3mCZzZ1XGYu6e8B/QCW0WSDZz5ClFGPZL7qJP+kSZNC7G/QCG5CxoSgBwWneVncM/pAx5BJERNj41VLkLTjSI6DZbXqKEBx/anLbl024UsuDP39KHCxrpGYIOdX0mrF4uxe5ltpNk3TQJR9cIoTyt1SsgOEPFfcOSljbOzBvjEaRJBO7OzuQRrGxm8y/PNO98wIMuePVBIIN21/q69BK7LV02QowbrPRUPAckCj8Q/cko7PbRXJKoGrMEZRmSfEfo2lyABbB3yC/C+rj9Sjy1z2V2EtMfRvFvmM8wYbnk14DDgZNkThWtmYsPF8Of9GSbcl06BB+8t0K56i4Hqk57BoFkJRt3gYvv8GAewuirPKGZtmjWTjcuZa0AM=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(23010399003)(366016)(1800799024)(10067099003)(18002099003)(22082099003)(4143699003)(56012099006)(11063799006)(5023799004)(261022075727099003)(261102123227099003)(261026121527099003)(261021121427099003)(261009223027099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?VnJDa0VsNUo2ZWVhK0xSekRsODlkNDhDV1VJaTlvb0Z1bEpibHZ6TGo2a0h3?=
- =?utf-8?B?TkM4TWVuTjFzNElIM3pPOU80QVBoOSt5cWlsaHh0eCt0SjJzUERzczF1UXBZ?=
- =?utf-8?B?MVJIN1kxUVFoWExRODVRVGlDRkpFMkV1VGNsdkg0aTZaWGN2STZ5eXdnU0pa?=
- =?utf-8?B?eFNrVENzcmdMai96eERGdVMzQ1lIc0xIZzlKTVhadGcxN3N5T05RLzhBNjRP?=
- =?utf-8?B?TmpMKzk3Q0RweTB1QjJGUXAxeG85MFc4eGRXWURHeVRBR2l2M0JidXV3UURX?=
- =?utf-8?B?OXMrVVY4d2Y4aTg5TklsU1NRbzM3SFBjUmNwaGxwcWt0TlhDUG5sRWNUanc5?=
- =?utf-8?B?RU5vaHNyVlNkZUVYT2xaYmNGTXI4dVNWY0pDYnJnRThaU3lKRW5uZitjQTVK?=
- =?utf-8?B?ZVR1SkdmRm85aGk0bHA0cHJYem5yVVdaZkgyU2sxSDNtTVA1R3VjaWx6Z0Fx?=
- =?utf-8?B?OC9CcUlteS9mQ0N4TTVKNkhBSlFJK1piUFo4dE9iS28rdXY3SUYzRzZZRWdl?=
- =?utf-8?B?K2ZRNXZsVldtblRHZlNwNWRlY0s3eDdvZzQyRzAwM1k2VVdxUTkyZ3pLazU4?=
- =?utf-8?B?Q0V6RDYxSkEwN2FrT01jWFN3QUxqcy9DNEpkalZUS2FWdDVKcktuSCtvb0t5?=
- =?utf-8?B?K2pBenFxZndsMDVSaDJEVWhUWnBjTWRpbXdPUWpwSmxBQmFJd2xieXFlZnQ3?=
- =?utf-8?B?RnU3bk9kOU5oczNMRmxHOXFoZG5ObWc3aDV1V1BGSDdwemNGTUx5VERPejVa?=
- =?utf-8?B?V2VZcnpyWUx3K0JnKytYMCtRcGVJNTBVQzF1ZExZMUY1Qk9sQytTRGwvWWVE?=
- =?utf-8?B?Vy9mbHdjSE5PVTRkbkx4R09qaDJlaWdqQUc0SkwzKzRJNzFmekc4dEtNZ2Nx?=
- =?utf-8?B?QkI4SW8yU2Q5a2xiVm1hbmIyUlQ0WVVrU3oxUkpJZXlDMGNyZHB5MFFpRXBk?=
- =?utf-8?B?Z292Vmx0TGM2N2lOUmpEc2ord01UR0pKREdiaFRvWlVnQTIwY3hrRTcxVWZn?=
- =?utf-8?B?WmxVVC9TWmRGcTF0d044dCtPT2tlblhRL3UyUjNnNHRHdkNZNzFKN01pTFdE?=
- =?utf-8?B?RWxnd2Z6NU5KR3FhV0Q3bFg2T0ZzV1ExcmxveThEeVFoVVVIZ3dzUGhUT1Zy?=
- =?utf-8?B?a0tETkk5QjFPak8xQXVjM25DdFh1ZXh3TGZPbmxXRjg0UFpVSEZ0b3d4dkI4?=
- =?utf-8?B?bm5aVkpzK1V0L0hxbkN0UFdEamxtYVllNktNcXJmUGxKenp0d0F3R0IvNDM5?=
- =?utf-8?B?dllFN3drMk5uaGYxNWVsRGYzRkFyM2ZNSDJjZDMxM0ltWmFkTk56QlNQdE1M?=
- =?utf-8?B?UVduaXFmR29tdExybFdKVjhnV2t1cVQrSGYwQU11N0JFdFY1eGNDS0Rma0dX?=
- =?utf-8?B?SmJqbllycHNjQjJQZ29vdHBCS2dzeW4zV1VHMGtBWDRsQ1BJNlNoSmZHdGRw?=
- =?utf-8?B?L01pU0hJZml2L2hUd1JlUnF6Nmhqb1QwbTNXaWxOaFpmVmFlTkc4WENwSHlR?=
- =?utf-8?B?eFlRVXdrRVVPT1Aybnc1bXJxRHYraVU2TGNyczZwZm4zMWYxTlBvMnVYTVpB?=
- =?utf-8?B?ejlyUFF3b09SOXhLZ2E4VE0wSHVJaU9rNlJDVXNWMHRvV3hiZzI3dDRjSFpT?=
- =?utf-8?B?UlJ3ZW1rc1pldUVQamw1VDdocjhKdWwxY3gxT1VhVk4zeXBjazFucFQxRFB3?=
- =?utf-8?B?RWF6d3pmMkY3NVp5UVdJcWlGbUhHQlBiUXlNNnQyc0VZWlhQTENGNUtJbEZm?=
- =?utf-8?B?Y05yU1BuRDZXVTJVNHVpR0lIbFl6bHgwR28yNTVvNlpRaHhJNFhMZGxVUG1R?=
- =?utf-8?B?MW11RU4rY2pRTlZTMHFUbERPL3BHZGM3MnkzOXZjT0pnWk85N2pBdDJHQkdw?=
- =?utf-8?B?UDZReU54cS9EZHk5czNVMUcrRTFjbm1ySiswRWM2Y3pkOVh0Qm00ejBlZ2VT?=
- =?utf-8?B?aVNHTWR2ZkVPRUdDK1pPSUx3K2U3M1kzenFVRlJ1bzVMblc4TElSczNsZ2Rs?=
- =?utf-8?B?OXFvc2ZYVDk4dmpyQUZvUnNzYmxMWDllVUZTVjg0MzRtQnZVV2traFk0aXh0?=
- =?utf-8?B?Z3Jtdk42VE5UVFFhMStCZXNCVVk2SDRFOFllTGRjOFNXTTc3M1I0Mmk2K1Fx?=
- =?utf-8?B?d2ZaeTFkNWhObFFtZWd6VlQ5Rkp6QVpXTDlsSUZoMXczMXk0RHpZSGJaSkNK?=
- =?utf-8?B?aDR5azNjVTVuQTlKaVpoTGRRZHNHSHVXeFZaSjB3ZUg2TExKRzdZdDU5UWk0?=
- =?utf-8?B?TkZCSERjK0ZFQWVrOG1SeG1BcTI1eCt6YS9aNFpQQnpFayt2em5jaG56Y2Js?=
- =?utf-8?B?T1IvdllPOFVCOWo5dXpjdnpyQ0tKZVVtUmhuN2xPeTU1QUloUitxZz09?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 15c1a8c1-73fa-4533-ed6d-08df3a910e3f
-X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Nov 2026 16:31:19.5236
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: TrXGozmsMut1dkr0MNGeBBPtHQONQHEazWnyabSS30QGwMdEg6Q16n35+uV13Z7sLJ5q6MSHQtHvKXNiUW8cMhbCcvPbj0IfjD+bHgkCWvg=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR03MB4940
-X-purgate-ID: tlsNG-d62444/1793809883-C495A757-4EF2FE9C/10/78276251493
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 23/39] xen/riscv: add helpers for decoding a trapped
+ load or store
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Cc: xen-devel@lists.xenproject.org,
+ Romain Caritey <Romain.Caritey@microchip.com>,
+ Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
+References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
+ <bac190288e65f82ef51d85e32c939558c21776d0.1790779209.git.oleksii.kurochko@gmail.com>
+ <1792663384.8631fc262581453bbf619ec5b2062170.1a1631070d2000f79f@vates.tech>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <1792663384.8631fc262581453bbf619ec5b2062170.1a1631070d2000f79f@vates.tech>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-d25034/1793810313-002F0A5B-C0CE863C/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 1079
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=4.0.1
+X-purgate-size: 14273
+X-Spam-Status: No, score=-14.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 02/11/2026 1:51 pm, Jan Beulich wrote:
-> On 02.11.2026 14:46, Andrew Cooper wrote:
->> Despite prior information to the contrary, APM Vol2 revision 3.46 October 2026
->> has been adjusted to state that the vNMI fields in vINTR are covered by the
->> TPR cleanbit.
+
+
+On 10/22/26 12:02 PM, Baptiste Le Duc wrote:
+>> emulate_load() and emulate_store() will both need to obtain the
+>> instruction which caused a guest MMIO trap, decode it, and locate the
+>> register operand it names. Add what the two share, ahead of either of
+>> them being implemented: struct decoded_insn, insn_fetch_faulted(),
+>> decode_ldst_insn(), guest_xlen(), guest_gpr() and advance_pc(), together
+>> with the XLEN_FIELD_*, INSN_OPCODE_* and RV_RD()/RV_RS2() definitions
+>> they need.
 >>
->> Adjust svm_inject_nmi() and svm_set_interrupt_shadow() to use vmcb_set_vintr()
->> rather than writing into the VMCB directly.
+>> Nothing calls any of this yet, so reference the functions from the
+>> emulate_load() stub to keep the build going; the references go away once
+>> emulate_load() gains its body later.
 >>
->> In svm_inject_nmi(), fix an inefficiency from the introduction of vNMI.  Move
->> the reading of vmcb_get_general1_intercepts() to the point at which it is
->> used; tt does not need reading on the case that vNMIs are enabled.
-> Nit: s/tt/it/ ?
+>> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+>> ---
+>> How these helpers are used can be seen in the patches adding emulate_load()
+>> and emulate_store().
+> Appreciate this precision, thanks!
 
-Fixed.
+Welcome!
 
->> Fixes: 86a203ab8d38 ("x86/svm: Support vNMI on capable hardware")
->> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> Assuming the first sentence of the description kind of implies trust into this
-> being the final word on the matter:
+>> [ ... 116 lines skipped ... ]
+>> +/*
+>> + * The effective XLEN of the guest at the point of the trap: hstatus.VSXL for a
+>> + * trap taken from VS-mode, vsstatus.UXL for one taken from VU-mode.
+>> + *
+>> + * VSXL is consulted whichever mode the trap came from, as it also gives the
+>> + * width of vsstatus itself: where VSXL says 32, that register has no UXL field
+>> + * to consult and VU-mode is 32-bit as well, there being nothing to configure.
+> Reading "it also gives the width of vsstatus itself", one might
+> understand that VSXL equals UXL in all cases, while, as you mentioned,
+> this only holds when VSXL says 32. I would slightly reword it, e.g.:
+> ```
+>      VSXL is consulted whichever mode the trap came from: if VSXL says
+>      32, vsstatus has no UXL field, so VU-mode is 32-bit as well and
+>      there is nothing to configure.
+> ```
 
-It is formally written statement on the matter, where previously there
-was none.
+Agreed. I'll use your suggested wording.
 
-> Reviewed-by: Jan Beulich <jbeulich@suse.com>
+>>
+>> + *
+>> + * It is needed to decode a trapped instruction: the encodings which exist only
+>> + * for XLEN=64 must not be recognized for a 32-bit guest. Besides those simply
+>> + * being reserved there, the compressed ones are ambiguous: C.LD and C.FLW
+>> + * share the encoding 0x6000 (mask 0xe003), and likewise C.SD/C.FSW,
+>> + * C.LDSP/C.FLWSP and C.SDSP/C.FSWSP.
+>> + *
+>> + * IS_ENABLED() can't be used here as HSTATUS_VSXL is defined for
+>> + * __riscv_xlen == 64 only, the field not existing on RV32 in the first place.
+>> + */
+>> +static unsigned int guest_xlen(const struct cpu_user_regs *regs)
+>> +{
+>> +#ifdef CONFIG_RISCV_32
+>> +    return 32;
+>> +#else
+>> +    unsigned long xl = MASK_EXTR(regs->hstatus, HSTATUS_VSXL);
+> xl only ever holds a 2-bit field, so unsigned int would be better here.
 
-Thanks.
+MASK_EXTR() yields the type of its operands, unsigned long here (and 
+unsigned long long for the UXL extraction), as do the XLEN_FIELD_* 
+constants xl is compared against. Making xl unsigned int would add an 
+implicit narrowing conversion: harmless value-wise but I think it will 
+violate one of MISRA rules at least if build everything with 
+-Wconversion then it will tell: conversion from 'long unsigned int' to 
+'unsigned int' may change value.
 
-~Andrew
+>> [ ... 49 lines skipped ... ]
+>> +static unsigned long *guest_gpr(struct cpu_user_regs *regs,
+>> +                                const struct decoded_insn *di)
+>> +{
+>> +    /*
+>> +     * decode_ldst_insn() is what fills @di in, and it rejects an access
+>> +     * wider than a guest register.
+>> +     */
+>> +    ASSERT(di->len <= (guest_xlen(regs) / BITS_PER_BYTE));
+> Nit: the parentheses around the division aren't needed.
+
+I can drop them but I think it improves readability here a little bit.
+
+>> [ ... 14 lines skipped ... ]
+>> +static bool insn_fetch_faulted(const struct guest_fault *gf,
+>> +                               struct decoded_insn *di)
+>> +{
+>> +    unsigned long htinst = gf->htinst;
+>> +
+>> +    /*
+>> +     * A pseudoinstruction says nothing about the instruction the guest was
+>> +     * executing, and comes with a guest physical address which isn't the one
+>> +     * that instruction accessed. handle_guest_page_fault() deals with such a
+>> +     * fault on its own, so no emulation can ever start for one.
+>> +     */
+>> +    ASSERT(!htinst_is_pseudo(htinst));
+>> +
+>> +    /*
+>> +     * Bit[0] == 1 implies trapped instruction value is transformed instruction
+>> +     * or custom value. A transformed instruction is a 32-bit encoding, so a
+>> +     * value with any bit above bit[31] set is a custom one, which is of no use
+>> +     * for decoding: fetch the instruction from guest memory then, as for zero.
+>> +     */
+>> +    if ( (htinst & BIT(0, UL)) && (htinst == (uint32_t)htinst) )
+>> +    {
+>> +        /*
+>> +         * The transformation always yields the 32-bit format, with bits[1:0]
+>> +         * holding a marker instead of the original opcode bits: bit[0] set to
+>> +         * flag the transformation, bit[1] clear if the trapped instruction
+>> +         * was a compressed one. Restoring the opcode bits makes the value the
+>> +         * valid 32-bit encoding decode_ldst_insn() decodes. Its handling of
+>> +         * compressed encodings exists for the branch below, where a
+>> +         * compressed instruction is read from guest memory as is: a trapped
+>> +         * one arrives here already expanded to its 32-bit equivalent, and the
+>> +         * opcode bits just restored have it decoded as such.
+> Reading this, I first understood that something had to be done to recover
+> the original compressed opcode. "Restoring the opcode bits" suggests going
+> back to the trapped encoding, while it is only setting bits[1:0] to 0b11 of
+> an already expanded instruction. Maybe say that first, e.g.:
+> 
+> ```
+>      /*
+>       * A compressed instruction is reported already expanded to its
+>       * 32-bit equivalent by the hardware, so htinst always holds a
+>       * 32-bit encoding, apart from bits[1:0] which is holding a marker:
+>       * bit[0] is set to flag the transformation and bit[1] is clear if
+>       * the trapped instruction was compressed. Setting both bits gives
+>       * the original 32-bit encoding for decode_ldst_insn().
+>       */
+> ```
+
+Agree, it will be better.
+
+>> +         *
+>> +         * The length then cannot come from the value anymore, only from
+>> +         * bit[1]. And only a 16- or a 32-bit instruction is ever reported
+>> +         * this way: the standard load and store instructions the hardware
+>> +         * transforms are all of one of these two lengths, anything else comes
+>> +         * as the zero special value handled below.
+>> +         */
+>> +        di->insn = htinst | 3;
+>> +        di->insn_len = (htinst & BIT(1, UL)) ? 4 : 2;
+>> +    }
+>> +    else
+>> +    {
+>> +        const struct cpu_user_regs *regs = gf->regs;
+>> +        struct trap_info utrap = {};
+>> +
+>> +        /*
+>> +         * Bit[0] == 0 implies trapped instruction value is zero or special
+>> +         * value. With the pseudoinstructions ruled out above, only zero (or a
+>> +         * custom value, see above) is left: the instruction has to be read from
+>> +         * guest memory.
+> Nit: as the assert would disappears in release build, this comment is
+> partially true. I would suggest something like:
+> ```
+>           * Bit[0] == 0 implies trapped instruction value is zero or
+>           * special value. With the pseudoinstructions ruled out (see
+>           * comment above) only zero (or a custom value, see above) is
+>           * left: the instruction has to be read from guest memory.
+> ```
+> 
+
+Agree "ruled out" could be read incorrectly. I think it will be better then:
+
+          /*
+           * Bit[0] == 0 implies trapped instruction value is zero or 
+special
+-         * value. With the pseudoinstructions ruled out above, only 
+zero (or a
+-         * custom value, see above) is left: the instruction has to be 
+read from
+-         * guest memory.
++         * value. Pseudoinstructions never get here (see the comment 
+ahead of
++         * the ASSERT() above), so only zero (or a custom value, see 
+above) is
++         * left: the instruction has to be read from guest memory.
+           */
+
+>> +         */
+>> +
+>> +        di->insn = read_guest(regs->sepc, true, &utrap);
+>> +        if ( utrap.scause )
+>> +        {
+>> +            /*
+>> +             * If during getting of trapped instruction a fault happen in
+>> +             * G-stage translation then CAUSE_LOAD_GUEST_PAGE_FAULT is
+>> +             * generated. Such faults during this operation is considered as
+>> +             * bus error.
+> Typo: "Such faults ... are considered" (plural subject). Also "a fault
+> happen" above should be "a fault happens", and "as bus error" -> "a
+> bus error". Maybe:
+> 
+>      /*
+>      * If a G-stage translation fault happens while fetching the
+>      * trapped instruction, CAUSE_LOAD_GUEST_PAGE_FAULT is generated.
+>      * Such faults are treated as an access fault.
+>      */
+> I used access fault instead of bus error because the code below sets
+> CAUSE_FETCH_ACCESS which is more like an access fault.
+> 
+
+Suggestion LGTM with one nit that "... instruction acccess fault" + 
+mentioned of that it is because of hlvx instruction so:
+
+              /*
+-             * If during getting of trapped instruction a fault happen in
+-             * G-stage translation then CAUSE_LOAD_GUEST_PAGE_FAULT is
+-             * generated. Such faults during this operation is 
+considered as
+-             * bus error.
++             * If a G-stage translation fault happens while fetching the
++             * trapped instruction, CAUSE_LOAD_GUEST_PAGE_FAULT is 
+generated,
++             * hlvx being a load. Such a fault is reported to the guest 
+as an
++             * instruction access fault.
+               */
+              if ( utrap.scause == CAUSE_LOAD_GUEST_PAGE_FAULT )
+                  utrap.scause = CAUSE_FETCH_ACCESS;
+
+
+
+>> [ ... 54 lines skipped ... ]
+>> +/*
+>> + * Decode the load or store instruction fetched into @di, filling in the
+>> + * remaining fields of it (@di->insn and @di->insn_len are filled by
+>> + * insn_fetch_faulted()). Fields which don't apply to the instruction are left
+>> + * alone, so @di is expected to start out zeroed.
+>> + *
+>> + * @xlen is the effective XLEN of the guest, needed as
+>> + * the encodings which exist for XLEN=64 only must not be recognized for a
+>> + * 32-bit guest.
+> Nit: odd wrapping, "the encodings" fits on the line above.
+> 
+
+Missed that, it could be really on the prev line.
+
+>> + *
+>> + * Returns false if the instruction is not a load or store which can be
+>> + * emulated here.
+>>
+> Nit: maybe reword for clarity:
+> 
+>   * Returns false if the instruction is not a load or store, or cannot be
+>   * emulated here.
+> 
+
+Agree, your option is better
+
+>> + */
+>> +static bool decode_ldst_insn(struct decoded_insn *di, unsigned int xlen)
+>> +{
+>> +    uint32_t insn = di->insn;
+>> +    unsigned int funct3, width_log2;
+>> +
+>> +    if ( INSN_IS_16BIT(insn) )
+>> +    {
+>> +        /*
+>> +         * C.LW, C.LD, C.SW and C.SD (bits[1:0] == 00), and their sp-relative
+>> +         * C.*SP forms (bits[1:0] == 10), have bits[15:13] of the form x1y:
+>> +         * x is set for a store, and y selects a width of 4 or 8 bytes.
+>> +         */
+>> +        funct3 = RV_X(insn, 13, 3);
+>> +
+>> +        if ( (insn & 1) || !(funct3 & 2) )
+>> +            return false;
+>> +
+>> +        di->is_write = funct3 & 4;
+>> +        width_log2 = 2 + (funct3 & 1);
+>> +
+>> +        if ( !(insn & 2) )
+>> +            /* Quadrant 0: bits[4:2] encode rd' (load) or rs2' (store) */
+>> +            di->reg = RVC_RS2S(insn);
+>> +        else if ( di->is_write )
+>> +            /* Quadrant 2 (CSS): bits[6:2] encode rs2 for C.SWSP / C.SDSP */
+>> +            di->reg = RVC_RS2(insn);
+>> +        else
+>> +        {
+>> +            /* Quadrant 2 (CI): bits[11:7] encode rd for C.LWSP / C.LDSP */
+>> +            di->reg = RV_RD(insn);
+>> +
+>> +            /* C.LWSP and C.LDSP are reserved with rd being x0. */
+>> +            if ( !di->reg )
+>> +                return false;
+>> +        }
+>> +    }
+>> +    else
+>> +    {
+>> +        /*
+>> +         * funct3[1:0] is log2 of the width in bytes, and funct3[2] selects
+>> +         * zero-extension for a load, while being reserved for a store.
+>> +         */
+>> +        funct3 = RV_X(insn, 12, 3);
+> 
+> Nit: the RVC branch above says where funct3 lives (bits[15:13]), this one
+> doesn't. Maybe mention bits[14:12] as well, so the reader doesn't wonder why
+> 12 here vs 13 above:
+> 
+> ```
+>          /*
+>           * LOAD and STORE (I/S-type) have funct3 in bits[14:12]: funct3[1:0]
+>           * is log2 of the width in bytes, and funct3[2] selects zero-extension
+>           * for a load, while being reserved for a store.
+>           */
+> ```
+
+Agreed. Will apply your comment.
+
+> 
+>> [ ... 51 lines skipped ... ]
+>> diff --git a/xen/arch/riscv/include/asm/riscv_encoding.h b/xen/arch/riscv/include/asm/riscv_encoding.h
+>> index b01da95f7e..1af309aa4a 100644
+>> --- a/xen/arch/riscv/include/asm/riscv_encoding.h
+>> +++ b/xen/arch/riscv/include/asm/riscv_encoding.h
+>> @@ -65,6 +65,14 @@
+>>   #define SSTATUS64_UXL			MSTATUS_UXL
+>>   #define SSTATUS64_SD			MSTATUS64_SD
+>>   
+>> +/*
+>> + * Width encoded by the MXL, SXL, UXL and VSXL fields, all of which share one
+>> + * encoding. 0 is reserved.
+>> + */
+>> +#define XLEN_FIELD_32			_UL(1)
+>> +#define XLEN_FIELD_64			_UL(2)
+>> +#define XLEN_FIELD_128			_UL(3)
+> Do we really need long here? int wouldn't be enough?
+> 
+
+Good question.
+
+These are values of fields living at bits 33:32 (VSXL, UXL, SXL), so a 
+plain int would overflow if one were ever shifted into place. That isn't 
+the case at the moment, but I think it's worth looking beyond the 
+current uses: this header is included all over arch/riscv, and we can't 
+know how these definitions will be used in the future. Using UL also 
+keeps them in line with the other field values in this header, e.g. 
+SATP_MODE_* and STVEC_MODE_*.
+
+Thanks for review!
+
+~ Oleksii
 
