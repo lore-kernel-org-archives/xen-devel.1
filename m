@@ -2,35 +2,64 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C0144606A324
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Nov 2026 23:31:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A7D6D606A31B
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Nov 2026 01:31:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=u7pXdlPi
-Received: from list by lists.xenproject.org with outflank-mailman.1470819.1679655 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=L6hvkqOu
+Received: from list by lists.xenproject.org with outflank-mailman.1471091.1679723 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xONyL-0001Pi-Ie; Tue, 03 Nov 2026 23:31:21 +0000
+	id 1xOPpu-00070P-Uz; Wed, 04 Nov 2026 01:30:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1470819.1679655; Tue, 03 Nov 2026 23:31:20 +0000
+Received: by outflank-mailman (output) from mailman id 1471091.1679723; Wed, 04 Nov 2026 01:30:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xONyK-0001JP-3b; Tue, 03 Nov 2026 23:31:20 +0000
-Received: by outflank-mailman (input) for mailman id 1470819;
- Tue, 03 Nov 2026 23:30:41 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1xOPpu-00070H-RV; Wed, 04 Nov 2026 01:30:46 +0000
+Received: by outflank-mailman (input) for mailman id 1471091;
+ Wed, 04 Nov 2026 01:30:45 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xONxh-0001fH-DV
- for xen-devel@lists.xenproject.org; Tue, 03 Nov 2026 23:30:41 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xONxc-0000000Couq-0h34;
- Tue, 03 Nov 2026 23:30:36 +0000
-Received: from [2607:fb91:4c8c:bd3f:1da5:e92a:c5fb:865a]
- (helo=localhost.localdomain)
- by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xONo6-0000000EMFa-0a2k;
- Tue, 03 Nov 2026 23:20:46 +0000
+ (envelope-from <Jason.Andryuk@amd.com>) id 1xOPpt-0006zx-AZ
+ for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 01:30:45 +0000
+Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
+ id 1xOPpr-00Chf0-Ko
+ for xen-devel@lists.xenproject.org; Wed, 04 Nov 2026 02:30:43 +0100
+Received: from [10.42.69.12] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <Jason.Andryuk@amd.com>)
+ id 6aea8a75-e002-0a2a0a5209dd-0a2a450ce0c6-34
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 02:30:42 +0100
+Received: from [52.101.53.15]
+ (helo=BL0PR03CU003.outbound.protection.outlook.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Jason.Andryuk@amd.com>)
+ id 6aea8ac1-f479-0a2a450c0019-3465350fd93f-4
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 02:30:42 +0100
+Received: from CH5PR05CA0016.namprd05.prod.outlook.com (2603:10b6:610:1f0::21)
+ by CH1PR12MB9600.namprd12.prod.outlook.com (2603:10b6:610:2ae::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.569.12; Wed, 4 Nov
+ 2026 01:30:35 +0000
+Received: from CH3PEPF00000010.namprd04.prod.outlook.com
+ (2603:10b6:610:1f0:cafe::a2) by CH5PR05CA0016.outlook.office365.com
+ (2603:10b6:610:1f0::21) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.592.8 via Frontend Transport; Wed, 4
+ Nov 2026 01:30:35 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ CH3PEPF00000010.mail.protection.outlook.com (10.167.244.41) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.592.5 via Frontend Transport; Wed, 4 Nov 2026 01:30:34 +0000
+Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Tue, 3 Nov
+ 2026 19:30:34 -0600
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb09.amd.com
+ (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Tue, 3 Nov
+ 2026 19:30:34 -0600
+Received: from amd-BIRMANPLUS.mshome.net (10.180.168.240) by
+ satlexmb08.amd.com (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.53
+ via Frontend Transport; Tue, 3 Nov 2026 19:30:33 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -39,743 +68,129 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
-	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=NVGIgw99IFj4HEOzfc5+DvnxduyyMypiBLFSXW+Jamo=; b=u7pXdlPiOO2YZCVs5TKZwm+E7s
-	PXwX5lElsgWzVSkR2TpMNP+x8aoyWlT5eppF2xihBKGFSaeigqO+dVS08ZKfLYyXHRSS2SAVJd2vT
-	3c0f1S4K6LDYUo6Uwkn/yvuTgUSTvBfgCu7V/4KWr/TADnIgDRSJuBKYv/7If6ZOvaO0=;
-From: George Dunlap <gwd@xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v6 31/44] x86: access a vCPU's saved register frame through map/unmap helpers
-Date: Tue,  3 Nov 2026 17:13:53 -0500
-Message-ID: <20261103-asi-hvm-v6-31-59dbc5ce9615@xenproject.org>
-X-Mailer: git-send-email 2.56.0
-In-Reply-To: <20261103-asi-hvm-v6-0-59dbc5ce9615@xenproject.org>
-References: <20261103-asi-hvm-v6-0-59dbc5ce9615@xenproject.org>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=WgJJvbUANbTAy4+TSZzaKbVBdTGvE/9DLfak1GD6iKQ6vx1tJwx3/NnYUT4tlHO8bgtu4lSBlRa/R97+HQ+/0b5fU1IzJ163g2bO8+/le+F7Alz6gCMVVWYKi7Ie0Go4PxYsmfupsO3y8cmjguwPpD/CbLkjEURas1C5DpgKUMqrQUVIpQPEmtoe6drV0B1O0Zk9vC2CmJPAycc3ZNUNj6/shxCSQnX5dXrS0AGpKDUgxSplDMz22qEop9yEvBS7bdQ6epao1PLVSLyc1PYf0x1cBmICzBuQ+S64uzXUUSx5c9VteyQHthjigpHHTWpFk+uAjClaUN+QKMX+TsdOIw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=/4KkTE7RABblzwjhCGZMtm25YJM2v5qVGKmwGQAa0Hk=;
+ b=uvdp2/sXe7D4iirwyUcbNVuBam0bz+m9e1nfIBp4PePCTlhnIinMvQhnF+be+CywYaN2wtr3V/cdO9i/yWeflyPUtahABpFjilsCm8gtPSldC06l6YXaGkDNh6PufTVxYJ0W8KXzhexGNeiMl4D7a9VRQseo1cCV0vW4yY0iUbUzCzvXaIfZ2it6YUfElLQuSaVosNLeZfS/z5ywjYQn55QgoKKRQ+c1P2vz9JA7etNdWVGOblxZJ2CgFU8MX/Or/bK7CMq0Z4JrY5YsSFEnMefVOGuCgINpYCw3TJMMWB3LJqaH28n47Sorw2MychJoR+M0yZI+sJYn7krRmvU2Wg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=kernel.org smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=/4KkTE7RABblzwjhCGZMtm25YJM2v5qVGKmwGQAa0Hk=;
+ b=L6hvkqOujIbeHLqnz5TrQTkpnW23XDvGS3MmCgON+ckYs1LYVqB9MiXqZI6sI3pxwstXqp4B51Ac2h0J2B6CbKkQWHy2XpJhAUJeusCPqKOFhjCzxx226Hz3YfmFbFs3fXSLFLWdw5kq/4Exy7xkbw6QEWVXFB4qmQPNDIUm1ss=
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+From: Jason Andryuk <jason.andryuk@amd.com>
+To: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
+	<x86@kernel.org>, "H. Peter Anvin" <hpa@zytor.com>, Mario Limonciello
+	<mario.limonciello@amd.com>, Yazen Ghannam <yazen.ghannam@amd.com>
+CC: <xen-devel@lists.xenproject.org>, Ariadne Conill <ariadne@ariadne.space>,
+	Sean Christopherson <seanjc@google.com>, Juergen Gross <jgross@suse.com>,
+	Jason Andryuk <jason.andryuk@amd.com>, <stable@vger.kernel.org>, Ingo Molnar
+	<mingo@kernel.org>, <linux-kernel@vger.kernel.org>
+Subject: [PATCH] x86/CPU/AMD: Don't print reset reason in VMs
+Date: Tue, 3 Nov 2026 20:30:25 -0500
+Message-ID: <20261104013026.185392-1-jason.andryuk@amd.com>
+X-Mailer: git-send-email 2.34.1
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH3PEPF00000010:EE_|CH1PR12MB9600:EE_
+X-MS-Office365-Filtering-Correlation-Id: b4ef121e-7884-49d3-90fd-08df3a13394f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|82310400026|7416014|376014|1800799024|36860700016|23010399003|260925022911599003|18002099003|260925021311599003|260925021911599003|261102123227099003|56012099006|10067099003|261009223027099003|261022105027099003|261021121427099003|261021123027099003|5023799004|11063799006|261028144727099003|261026121527099003|261026140227099003;
+X-Microsoft-Antispam-Message-Info:
+	jswD/zhYDvaAX6T7oc88dlTbW69uUHve8rVrdA/duX9Rk8HzotcVPQ/2mztIehNEJykfecovpzNMNm66evQX2RqYDz5v70ekyhu0tvs7n77rhaK5b+uK+PSJci5PFL7x6K+5tD+abqAk+SVnP6FqKOCbkD1LsnQxO09R3/5nCnkb3gzISrJdhsMxNDFU71XalucSirXoYdVBcGWrIun4/PyUKbXhQRjtQ3PfJeGQ8pw5sAUIRpVY7hBh0q67WTCiyEPNQUf7ektlhIjrusKytZ0DvqbyiVJEYDszQ+A/0zK/Can112A8+vK/gFoiMt3+8gUwIJH6omYsRd1gIO+mhMFEkkef+BTZKseQAR8mJcqn6x42atOK5B4W6z4zIe31LY7s4JtMK6XlnvAQEpdpX6ducO7f+g9g/jrxfNY/ctuwgKO32NZNAfdfWxDaIaJllkOBjS+054yBauFRQ3cWQGuRDKuvVkqxVm5lAwXYblBFhbvW/NVfp3r4QbT1vfIC8pC4Hcgg8lIXQMq1ySQKmXwVhWsQXsFAcnXQBSUvq2/r68qH3kWOj/oOsUUob1wdaUBxaN3XDhmBov9Lce6q/M4NSqFyNVIBvGHiT5ybFyMLUmbJkTN1V3XsIMuASIcNMGFRxgr8zc9Cy0FEETAJiIO9ggH4jMMYgZ9Aui1IWRe1U06mfe1WtAqJWBO/xvYt3q56rsoklb2+w1GPig7K1w==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(7416014)(376014)(1800799024)(36860700016)(23010399003)(260925022911599003)(18002099003)(260925021311599003)(260925021911599003)(261102123227099003)(56012099006)(10067099003)(261009223027099003)(261022105027099003)(261021121427099003)(261021123027099003)(5023799004)(11063799006)(261028144727099003)(261026121527099003)(261026140227099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	OjS/bccuQx9CI8q/cnb9g62Faud4TSmnaxBwSmUzvSC1q/TMf1wZ4OkFAnyn72KPYCJHVArTRUm+RMzjqvgjkvyIpnuYMggmWPOhHB0JhVk6NwzpB/3zNGu2A9Ev/x6DF6JGUQRJ/VAiFrmXFu7UquRlE//OMbPGBlnP3Xox25x7rl6jLowngiIIyZnXq53zWUIZwOsKyTCuxHWz8JXzEsBfL63gGCNX6MYHvDcQO45MR31O0ppGlIhi+RDfLer6n3sZsfJ8vX9czrQXOoRd7lbJcbUMEoRVtBjkjrsMsqjkng77m5OKocDUzhqjQxkEVv9qck0XKJGcIgvMMnb4AO+1e9hwu977rk7jJwud3rlZAbM8XZvShvJHZgwkv2r2kU/tWYIE0lVP6SeemlVwVTJU5XvlZScZg+ea9VR/PoYpVDbL5pNhfHsL7PCMxWZ5
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Nov 2026 01:30:34.9625
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b4ef121e-7884-49d3-90fd-08df3a13394f
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CH3PEPF00000010.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH1PR12MB9600
+X-purgate-ID: tlsNG-d25034/1793755842-018C5A5B-A1A8B7B3/0/0
+X-purgate-type: clean
+X-purgate-size: 2066
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-When a vCPU is switched out, __context_switch() copies its register
-frame from the stack into struct vcpu, and back when the vCPU is
-switched in.  Code working on a vCPU other than the one running uses
-that copy: vCPU creation, XEN_DOMCTL_{get,set}vcpucontext, saving and
-loading the HVM CPU record, VCPUOP_initialise, INIT/SIPI and S3 resets,
-the result of a hypercall continued on another CPU, PV dom0
-construction, and the debug-key dumps.
+print_s5_reset_status_mmio() expects to read FCH MMIO on baremetal.  VMs
+don't have emulated FCH registers, so there is nothing to check.  Add an
+early exit when running on a hypervisor.
 
-Under Address Space Isolation the frame is to move out of struct vcpu,
-which is mapped in every context, into memory which other domains'
-contexts do not map.  Its users then need a transient mapping whenever
-they run in another context.  Prepare for that:
-introduce VCPU_MAP_REGS() and VCPU_UNMAP_REGS(), after
-VCPU_MAP_XSAVE_AREA(), and convert every user but the context switch,
-which moves the frame between the stack and its storage.  The field
-becomes _user_regs, so that an access bypassing the helpers fails to
-build: once the frame can live elsewhere, such an access would silently
-use a stale copy.
+The real motivation is Xen PV domUs can't boot on Zen CPUs.  PV domUs
+PTE contain system physical addresses - they don't have concept of guest
+physical addresses.  domUs can only map physical addresses they are
+assigned, so a domU fails to map the FCH MMIO addresses.  However
+set_pte() does not return failure, so ioremap() returns a pointer while
+the PTEs are unpopulated.  print_s5_reset_status_mmio() faults when
+reading through the pointer, breaking the boot.  This change fixes Xen
+PV domUs booting on Zen CPUs.
 
-vcpu_show_registers() now prints from a copy of the frame for PV vCPUs
-as well as HVM ones, so that it holds no mapping while printing, and
-vmx_set_info_guest() reads EFLAGS.TF before engaging the VMCS.
+dom0 can map the FCH MMIO, but it has X86_FEATURE_HYPERVISOR set.  With
+this change, it no longer prints the reset reason.
 
-No functional change.
-
-Assisted-by: Claude Code:claude-opus-5-5
-Signed-off-by: George Dunlap <gwd@xenproject.org>
+Fixes: ab8131028710 ("x86/CPU/AMD: Print the reason for the last reset")
+Cc: stable@vger.kernel.org
+Suggested-by: Borislav Petkov <bp@alien8.de>
+Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
 ---
-Changes in v5:
-- New in this version.
----
- xen/arch/x86/domain.c             | 94 ++++++++++++++++++-------------
- xen/arch/x86/domctl.c             | 72 ++++++++++++-----------
- xen/arch/x86/hvm/domain.c         |  6 +-
- xen/arch/x86/hvm/hvm.c            | 89 ++++++++++++++++-------------
- xen/arch/x86/hvm/vmx/vmcs.c       |  9 +--
- xen/arch/x86/hvm/vmx/vmx.c        |  7 ++-
- xen/arch/x86/hypercall.c          |  4 +-
- xen/arch/x86/include/asm/domain.h | 28 ++++++++-
- xen/arch/x86/pv/dom0_build.c      |  3 +-
- xen/arch/x86/traps.c              | 20 ++++---
- 10 files changed, 204 insertions(+), 128 deletions(-)
+dom0 could work, but that would require a xen_initial_domain() check.
 
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index 633619b400..143f76babf 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -496,8 +496,12 @@ unsigned int arch_domain_struct_memflags(void)
- /* Initialise various registers to their architectural INIT/RESET state. */
- void arch_vcpu_regs_init(struct vcpu *v)
- {
--    memset(&v->arch.user_regs, 0, sizeof(v->arch.user_regs));
--    v->arch.user_regs.eflags = X86_EFLAGS_MBS;
-+    struct cpu_user_regs *regs = VCPU_MAP_REGS(v);
-+
-+    memset(regs, 0, sizeof(*regs));
-+    regs->eflags = X86_EFLAGS_MBS;
-+
-+    VCPU_UNMAP_REGS(v, regs);
+I've wondered about a different approach:  We can't directly check for a
+device for the FCH_PM_BASE memory, but maybe we could check for a PCI
+ISA Bridge with PCI_VENDOR_ID_AMD.  That might be close enough to
+indicate real hardware?  But it would still be a heuristic, so I'm not
+sure how much better that would be.
+---
+ arch/x86/kernel/cpu/amd.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/arch/x86/kernel/cpu/amd.c b/arch/x86/kernel/cpu/amd.c
+index 40463bad1078..580ccc2ce5fc 100644
+--- a/arch/x86/kernel/cpu/amd.c
++++ b/arch/x86/kernel/cpu/amd.c
+@@ -1357,7 +1357,8 @@ static __init int print_s5_reset_status_mmio(void)
+ 	u32 value;
+ 	int i;
  
-     memset(v->arch.dr, 0, sizeof(v->arch.dr));
-     v->arch.dr6 = X86_DR6_DEFAULT;
-@@ -1152,6 +1156,7 @@ int arch_set_info_guest(
- {
-     struct domain *d = v->domain;
-     const struct cpu_policy *p = d->arch.cpu_policy;
-+    struct cpu_user_regs *regs;
-     unsigned int i;
-     unsigned long flags;
-     bool compat;
-@@ -1279,30 +1284,32 @@ int arch_set_info_guest(
-     else
-         vcpu_reset_fpu(v);
+-	if (!cpu_feature_enabled(X86_FEATURE_ZEN))
++	if (!cpu_feature_enabled(X86_FEATURE_ZEN) ||
++	    cpu_feature_enabled(X86_FEATURE_HYPERVISOR))
+ 		return 0;
  
--    memset(&v->arch.user_regs, 0, sizeof(v->arch.user_regs));
-+    regs = VCPU_MAP_REGS(v);
-+    memset(regs, 0, sizeof(*regs));
- 
-     if ( !compat )
-     {
--        v->arch.user_regs.r15               = c.nat->user_regs.r15;
--        v->arch.user_regs.r14               = c.nat->user_regs.r14;
--        v->arch.user_regs.r13               = c.nat->user_regs.r13;
--        v->arch.user_regs.r12               = c.nat->user_regs.r12;
--        v->arch.user_regs.rbp               = c.nat->user_regs.rbp;
--        v->arch.user_regs.rbx               = c.nat->user_regs.rbx;
--        v->arch.user_regs.r11               = c.nat->user_regs.r11;
--        v->arch.user_regs.r10               = c.nat->user_regs.r10;
--        v->arch.user_regs.r9                = c.nat->user_regs.r9;
--        v->arch.user_regs.r8                = c.nat->user_regs.r8;
--        v->arch.user_regs.rax               = c.nat->user_regs.rax;
--        v->arch.user_regs.rcx               = c.nat->user_regs.rcx;
--        v->arch.user_regs.rdx               = c.nat->user_regs.rdx;
--        v->arch.user_regs.rsi               = c.nat->user_regs.rsi;
--        v->arch.user_regs.rdi               = c.nat->user_regs.rdi;
--        v->arch.user_regs.rip               = c.nat->user_regs.rip;
--        v->arch.user_regs.cs                = c.nat->user_regs.cs;
--        v->arch.user_regs.rflags            = (c.nat->user_regs.rflags & X86_EFLAGS_ALL) | X86_EFLAGS_MBS;
--        v->arch.user_regs.rsp               = c.nat->user_regs.rsp;
--        v->arch.user_regs.ss                = c.nat->user_regs.ss;
-+        regs->r15                           = c.nat->user_regs.r15;
-+        regs->r14                           = c.nat->user_regs.r14;
-+        regs->r13                           = c.nat->user_regs.r13;
-+        regs->r12                           = c.nat->user_regs.r12;
-+        regs->rbp                           = c.nat->user_regs.rbp;
-+        regs->rbx                           = c.nat->user_regs.rbx;
-+        regs->r11                           = c.nat->user_regs.r11;
-+        regs->r10                           = c.nat->user_regs.r10;
-+        regs->r9                            = c.nat->user_regs.r9;
-+        regs->r8                            = c.nat->user_regs.r8;
-+        regs->rax                           = c.nat->user_regs.rax;
-+        regs->rcx                           = c.nat->user_regs.rcx;
-+        regs->rdx                           = c.nat->user_regs.rdx;
-+        regs->rsi                           = c.nat->user_regs.rsi;
-+        regs->rdi                           = c.nat->user_regs.rdi;
-+        regs->rip                           = c.nat->user_regs.rip;
-+        regs->cs                            = c.nat->user_regs.cs;
-+        regs->rflags                        =
-+            (c.nat->user_regs.rflags & X86_EFLAGS_ALL) | X86_EFLAGS_MBS;
-+        regs->rsp                           = c.nat->user_regs.rsp;
-+        regs->ss                            = c.nat->user_regs.ss;
-         v->arch.pv.es                       = c.nat->user_regs.es;
-         v->arch.pv.ds                       = c.nat->user_regs.ds;
-         v->arch.pv.fs                       = c.nat->user_regs.fs;
-@@ -1315,18 +1322,19 @@ int arch_set_info_guest(
- #ifdef CONFIG_COMPAT
-     else
-     {
--        v->arch.user_regs.ebx               = c.cmp->user_regs.ebx;
--        v->arch.user_regs.ecx               = c.cmp->user_regs.ecx;
--        v->arch.user_regs.edx               = c.cmp->user_regs.edx;
--        v->arch.user_regs.esi               = c.cmp->user_regs.esi;
--        v->arch.user_regs.edi               = c.cmp->user_regs.edi;
--        v->arch.user_regs.ebp               = c.cmp->user_regs.ebp;
--        v->arch.user_regs.eax               = c.cmp->user_regs.eax;
--        v->arch.user_regs.eip               = c.cmp->user_regs.eip;
--        v->arch.user_regs.cs                = c.cmp->user_regs.cs;
--        v->arch.user_regs.eflags            = (c.cmp->user_regs.eflags & X86_EFLAGS_ALL) | X86_EFLAGS_MBS;
--        v->arch.user_regs.esp               = c.cmp->user_regs.esp;
--        v->arch.user_regs.ss                = c.cmp->user_regs.ss;
-+        regs->ebx                           = c.cmp->user_regs.ebx;
-+        regs->ecx                           = c.cmp->user_regs.ecx;
-+        regs->edx                           = c.cmp->user_regs.edx;
-+        regs->esi                           = c.cmp->user_regs.esi;
-+        regs->edi                           = c.cmp->user_regs.edi;
-+        regs->ebp                           = c.cmp->user_regs.ebp;
-+        regs->eax                           = c.cmp->user_regs.eax;
-+        regs->eip                           = c.cmp->user_regs.eip;
-+        regs->cs                            = c.cmp->user_regs.cs;
-+        regs->eflags                        =
-+            (c.cmp->user_regs.eflags & X86_EFLAGS_ALL) | X86_EFLAGS_MBS;
-+        regs->esp                           = c.cmp->user_regs.esp;
-+        regs->ss                            = c.cmp->user_regs.ss;
-         v->arch.pv.es                       = c.cmp->user_regs.es;
-         v->arch.pv.ds                       = c.cmp->user_regs.ds;
-         v->arch.pv.fs                       = c.cmp->user_regs.fs;
-@@ -1341,6 +1349,8 @@ int arch_set_info_guest(
-     }
- #endif
- 
-+    VCPU_UNMAP_REGS(v, regs);
-+
-     if ( v->vcpu_id == 0 && (c(vm_assist) & ~arch_vm_assist_valid_mask(d)) )
-         return -EINVAL;
- 
-@@ -1359,12 +1369,16 @@ int arch_set_info_guest(
-     }
- 
- #ifdef CONFIG_PV
-+    regs = VCPU_MAP_REGS(v);
-+
-     /* IOPL privileges are virtualised. */
--    v->arch.pv.iopl = v->arch.user_regs.eflags & X86_EFLAGS_IOPL;
--    v->arch.user_regs.eflags &= ~X86_EFLAGS_IOPL;
-+    v->arch.pv.iopl = regs->eflags & X86_EFLAGS_IOPL;
-+    regs->eflags &= ~X86_EFLAGS_IOPL;
- 
-     /* Ensure real hardware interrupts are enabled. */
--    v->arch.user_regs.eflags |= X86_EFLAGS_IF;
-+    regs->eflags |= X86_EFLAGS_IF;
-+
-+    VCPU_UNMAP_REGS(v, regs);
- 
-     nr_gdt_frames = DIV_ROUND_UP(c(gdt_ents), 512);
-     if ( nr_gdt_frames > ARRAY_SIZE(v->arch.pv.gdt_frames) )
-@@ -2135,7 +2149,7 @@ static void __context_switch(void)
-     if ( !is_idle_domain(pd) )
-     {
-         ASSERT(read_atomic(&p->dirty_cpu) == cpu);
--        memcpy(&p->arch.user_regs, stack_regs, CTXT_SWITCH_STACK_BYTES);
-+        memcpy(&p->arch._user_regs, stack_regs, CTXT_SWITCH_STACK_BYTES);
-         vcpu_save_fpu(p);
-         pd->arch.ctxt_switch->from(p);
-     }
-@@ -2151,7 +2165,7 @@ static void __context_switch(void)
- 
-     if ( !is_idle_domain(nd) )
-     {
--        memcpy(stack_regs, &n->arch.user_regs, CTXT_SWITCH_STACK_BYTES);
-+        memcpy(stack_regs, &n->arch._user_regs, CTXT_SWITCH_STACK_BYTES);
-         if ( cpu_has_xsave )
-         {
-             if ( !set_xcr0(n->arch.xcr0 ?: XSTATE_FP_SSE) )
-diff --git a/xen/arch/x86/domctl.c b/xen/arch/x86/domctl.c
-index 1e00510702..04bcde5580 100644
---- a/xen/arch/x86/domctl.c
-+++ b/xen/arch/x86/domctl.c
-@@ -1461,6 +1461,7 @@ void arch_get_info_guest(struct vcpu *v, vcpu_guest_context_u c)
-     const struct domain *d = v->domain;
-     bool compat = is_pv_32bit_domain(d);
-     const struct xsave_struct *xsave_area;
-+    const struct cpu_user_regs *regs;
- #ifdef CONFIG_COMPAT
- #define c(fld) (!compat ? (c.nat->fld) : (c.cmp->fld))
- #else
-@@ -1479,29 +1480,32 @@ void arch_get_info_guest(struct vcpu *v, vcpu_guest_context_u c)
-     c(flags |= VGCF_i387_valid);
-     if ( !(v->pause_flags & VPF_down) )
-         c(flags |= VGCF_online);
-+
-+    regs = VCPU_MAP_REGS(v);
-+
-     if ( !compat )
-     {
-         /* Backing memory is pre-zeroed. */
--        c.nat->user_regs.r15               = v->arch.user_regs.r15;
--        c.nat->user_regs.r14               = v->arch.user_regs.r14;
--        c.nat->user_regs.r13               = v->arch.user_regs.r13;
--        c.nat->user_regs.r12               = v->arch.user_regs.r12;
--        c.nat->user_regs.rbp               = v->arch.user_regs.rbp;
--        c.nat->user_regs.rbx               = v->arch.user_regs.rbx;
--        c.nat->user_regs.r11               = v->arch.user_regs.r11;
--        c.nat->user_regs.r10               = v->arch.user_regs.r10;
--        c.nat->user_regs.r9                = v->arch.user_regs.r9;
--        c.nat->user_regs.r8                = v->arch.user_regs.r8;
--        c.nat->user_regs.rax               = v->arch.user_regs.rax;
--        c.nat->user_regs.rcx               = v->arch.user_regs.rcx;
--        c.nat->user_regs.rdx               = v->arch.user_regs.rdx;
--        c.nat->user_regs.rsi               = v->arch.user_regs.rsi;
--        c.nat->user_regs.rdi               = v->arch.user_regs.rdi;
--        c.nat->user_regs.rip               = v->arch.user_regs.rip;
--        c.nat->user_regs.cs                = v->arch.user_regs.cs;
--        c.nat->user_regs.rflags            = v->arch.user_regs.rflags;
--        c.nat->user_regs.rsp               = v->arch.user_regs.rsp;
--        c.nat->user_regs.ss                = v->arch.user_regs.ss;
-+        c.nat->user_regs.r15               = regs->r15;
-+        c.nat->user_regs.r14               = regs->r14;
-+        c.nat->user_regs.r13               = regs->r13;
-+        c.nat->user_regs.r12               = regs->r12;
-+        c.nat->user_regs.rbp               = regs->rbp;
-+        c.nat->user_regs.rbx               = regs->rbx;
-+        c.nat->user_regs.r11               = regs->r11;
-+        c.nat->user_regs.r10               = regs->r10;
-+        c.nat->user_regs.r9                = regs->r9;
-+        c.nat->user_regs.r8                = regs->r8;
-+        c.nat->user_regs.rax               = regs->rax;
-+        c.nat->user_regs.rcx               = regs->rcx;
-+        c.nat->user_regs.rdx               = regs->rdx;
-+        c.nat->user_regs.rsi               = regs->rsi;
-+        c.nat->user_regs.rdi               = regs->rdi;
-+        c.nat->user_regs.rip               = regs->rip;
-+        c.nat->user_regs.cs                = regs->cs;
-+        c.nat->user_regs.rflags            = regs->rflags;
-+        c.nat->user_regs.rsp               = regs->rsp;
-+        c.nat->user_regs.ss                = regs->ss;
-         c.nat->user_regs.es                = v->arch.pv.es;
-         c.nat->user_regs.ds                = v->arch.pv.ds;
-         c.nat->user_regs.fs                = v->arch.pv.fs;
-@@ -1515,18 +1519,18 @@ void arch_get_info_guest(struct vcpu *v, vcpu_guest_context_u c)
-     else
-     {
-         /* Backing memory is pre-zeroed. */
--        c.cmp->user_regs.ebp               = v->arch.user_regs.ebp;
--        c.cmp->user_regs.ebx               = v->arch.user_regs.ebx;
--        c.cmp->user_regs.eax               = v->arch.user_regs.eax;
--        c.cmp->user_regs.ecx               = v->arch.user_regs.ecx;
--        c.cmp->user_regs.edx               = v->arch.user_regs.edx;
--        c.cmp->user_regs.esi               = v->arch.user_regs.esi;
--        c.cmp->user_regs.edi               = v->arch.user_regs.edi;
--        c.cmp->user_regs.eip               = v->arch.user_regs.eip;
--        c.cmp->user_regs.cs                = v->arch.user_regs.cs;
--        c.cmp->user_regs.eflags            = v->arch.user_regs.eflags;
--        c.cmp->user_regs.esp               = v->arch.user_regs.esp;
--        c.cmp->user_regs.ss                = v->arch.user_regs.ss;
-+        c.cmp->user_regs.ebp               = regs->ebp;
-+        c.cmp->user_regs.ebx               = regs->ebx;
-+        c.cmp->user_regs.eax               = regs->eax;
-+        c.cmp->user_regs.ecx               = regs->ecx;
-+        c.cmp->user_regs.edx               = regs->edx;
-+        c.cmp->user_regs.esi               = regs->esi;
-+        c.cmp->user_regs.edi               = regs->edi;
-+        c.cmp->user_regs.eip               = regs->eip;
-+        c.cmp->user_regs.cs                = regs->cs;
-+        c.cmp->user_regs.eflags            = regs->eflags;
-+        c.cmp->user_regs.esp               = regs->esp;
-+        c.cmp->user_regs.ss                = regs->ss;
-         c.cmp->user_regs.es                = v->arch.pv.es;
-         c.cmp->user_regs.ds                = v->arch.pv.ds;
-         c.cmp->user_regs.fs                = v->arch.pv.fs;
-@@ -1638,10 +1642,12 @@ void arch_get_info_guest(struct vcpu *v, vcpu_guest_context_u c)
-         }
- #endif
- 
--        if ( guest_kernel_mode(v, &v->arch.user_regs) )
-+        if ( guest_kernel_mode(v, regs) )
-             c(flags |= VGCF_in_kernel);
-     }
- 
-+    VCPU_UNMAP_REGS(v, regs);
-+
-     c(vm_assist = d->vm_assist);
- #undef c
- }
-diff --git a/xen/arch/x86/hvm/domain.c b/xen/arch/x86/hvm/domain.c
-index 978d8b2222..71e16e25ba 100644
---- a/xen/arch/x86/hvm/domain.c
-+++ b/xen/arch/x86/hvm/domain.c
-@@ -103,7 +103,7 @@ static int check_segment(struct segment_register *reg, enum x86_segment seg)
- int arch_set_info_hvm_guest(struct vcpu *v, const struct vcpu_hvm_context *ctx)
- {
-     const struct domain *d = v->domain;
--    struct cpu_user_regs *uregs = &v->arch.user_regs;
-+    struct cpu_user_regs *uregs;
-     struct segment_register cs, ds, ss, es, tr;
-     const char *errstr;
-     int rc;
-@@ -188,6 +188,7 @@ int arch_set_info_hvm_guest(struct vcpu *v, const struct vcpu_hvm_context *ctx)
-             return -EINVAL;
-         }
- 
-+        uregs = VCPU_MAP_REGS(v);
-         uregs->rax    = regs->eax;
-         uregs->rcx    = regs->ecx;
-         uregs->rdx    = regs->edx;
-@@ -198,6 +199,7 @@ int arch_set_info_hvm_guest(struct vcpu *v, const struct vcpu_hvm_context *ctx)
-         uregs->rdi    = regs->edi;
-         uregs->rip    = regs->eip;
-         uregs->rflags = (regs->eflags & X86_EFLAGS_ALL) | X86_EFLAGS_MBS;
-+        VCPU_UNMAP_REGS(v, uregs);
- 
-         v->arch.hvm.guest_cr[0] = regs->cr0;
-         v->arch.hvm.guest_cr[3] = regs->cr3;
-@@ -239,6 +241,7 @@ int arch_set_info_hvm_guest(struct vcpu *v, const struct vcpu_hvm_context *ctx)
-             return -EINVAL;
-         }
- 
-+        uregs = VCPU_MAP_REGS(v);
-         uregs->rax    = regs->rax;
-         uregs->rcx    = regs->rcx;
-         uregs->rdx    = regs->rdx;
-@@ -249,6 +252,7 @@ int arch_set_info_hvm_guest(struct vcpu *v, const struct vcpu_hvm_context *ctx)
-         uregs->rdi    = regs->rdi;
-         uregs->rip    = regs->rip;
-         uregs->rflags = (regs->rflags & X86_EFLAGS_ALL) | X86_EFLAGS_MBS;
-+        VCPU_UNMAP_REGS(v, uregs);
- 
-         v->arch.hvm.guest_cr[0] = regs->cr0;
-         v->arch.hvm.guest_cr[3] = regs->cr3;
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 71da15c0a4..eadccf3d79 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -827,28 +827,29 @@ HVM_REGISTER_SAVE_RESTORE(TSC_ADJUST, hvm_save_tsc_adjust, NULL,
- 
- static int cf_check hvm_save_cpu_ctxt(struct vcpu *v, hvm_domain_context_t *h)
- {
-+    const struct cpu_user_regs *regs = VCPU_MAP_REGS(v);
-     struct segment_register seg;
-     struct hvm_hw_cpu ctxt = {
-         .tsc = hvm_get_guest_tsc_fixed(v, v->domain->arch.hvm.sync_tsc),
-         .msr_tsc_aux = v->arch.msrs->tsc_aux,
--        .rax = v->arch.user_regs.rax,
--        .rbx = v->arch.user_regs.rbx,
--        .rcx = v->arch.user_regs.rcx,
--        .rdx = v->arch.user_regs.rdx,
--        .rbp = v->arch.user_regs.rbp,
--        .rsi = v->arch.user_regs.rsi,
--        .rdi = v->arch.user_regs.rdi,
--        .rsp = v->arch.user_regs.rsp,
--        .rip = v->arch.user_regs.rip,
--        .rflags = v->arch.user_regs.rflags,
--        .r8  = v->arch.user_regs.r8,
--        .r9  = v->arch.user_regs.r9,
--        .r10 = v->arch.user_regs.r10,
--        .r11 = v->arch.user_regs.r11,
--        .r12 = v->arch.user_regs.r12,
--        .r13 = v->arch.user_regs.r13,
--        .r14 = v->arch.user_regs.r14,
--        .r15 = v->arch.user_regs.r15,
-+        .rax = regs->rax,
-+        .rbx = regs->rbx,
-+        .rcx = regs->rcx,
-+        .rdx = regs->rdx,
-+        .rbp = regs->rbp,
-+        .rsi = regs->rsi,
-+        .rdi = regs->rdi,
-+        .rsp = regs->rsp,
-+        .rip = regs->rip,
-+        .rflags = regs->rflags,
-+        .r8  = regs->r8,
-+        .r9  = regs->r9,
-+        .r10 = regs->r10,
-+        .r11 = regs->r11,
-+        .r12 = regs->r12,
-+        .r13 = regs->r13,
-+        .r14 = regs->r14,
-+        .r15 = regs->r15,
-         .cr0 = v->arch.hvm.guest_cr[0],
-         .cr2 = v->arch.hvm.guest_cr[2],
-         .cr3 = v->arch.hvm.guest_cr[3],
-@@ -863,6 +864,8 @@ static int cf_check hvm_save_cpu_ctxt(struct vcpu *v, hvm_domain_context_t *h)
-     };
-     const struct xsave_struct *xsave_area;
- 
-+    VCPU_UNMAP_REGS(v, regs);
-+
-     /*
-      * We don't need to save state for a vcpu that is down; the restore
-      * code will leave it down if there is nothing saved.
-@@ -1020,6 +1023,7 @@ static int cf_check hvm_load_cpu_ctxt(struct domain *d, hvm_domain_context_t *h)
-     const struct cpu_policy *p = d->arch.cpu_policy;
-     unsigned int vcpuid = hvm_load_instance(h);
-     struct vcpu *v;
-+    struct cpu_user_regs *regs;
-     struct hvm_hw_cpu ctxt;
-     struct segment_register seg;
-     const char *errstr;
-@@ -1182,24 +1186,26 @@ static int cf_check hvm_load_cpu_ctxt(struct domain *d, hvm_domain_context_t *h)
-     else
-         vcpu_reset_fpu(v);
- 
--    v->arch.user_regs.rax = ctxt.rax;
--    v->arch.user_regs.rbx = ctxt.rbx;
--    v->arch.user_regs.rcx = ctxt.rcx;
--    v->arch.user_regs.rdx = ctxt.rdx;
--    v->arch.user_regs.rbp = ctxt.rbp;
--    v->arch.user_regs.rsi = ctxt.rsi;
--    v->arch.user_regs.rdi = ctxt.rdi;
--    v->arch.user_regs.rsp = ctxt.rsp;
--    v->arch.user_regs.rip = ctxt.rip;
--    v->arch.user_regs.rflags = ctxt.rflags | X86_EFLAGS_MBS;
--    v->arch.user_regs.r8  = ctxt.r8;
--    v->arch.user_regs.r9  = ctxt.r9;
--    v->arch.user_regs.r10 = ctxt.r10;
--    v->arch.user_regs.r11 = ctxt.r11;
--    v->arch.user_regs.r12 = ctxt.r12;
--    v->arch.user_regs.r13 = ctxt.r13;
--    v->arch.user_regs.r14 = ctxt.r14;
--    v->arch.user_regs.r15 = ctxt.r15;
-+    regs = VCPU_MAP_REGS(v);
-+    regs->rax = ctxt.rax;
-+    regs->rbx = ctxt.rbx;
-+    regs->rcx = ctxt.rcx;
-+    regs->rdx = ctxt.rdx;
-+    regs->rbp = ctxt.rbp;
-+    regs->rsi = ctxt.rsi;
-+    regs->rdi = ctxt.rdi;
-+    regs->rsp = ctxt.rsp;
-+    regs->rip = ctxt.rip;
-+    regs->rflags = ctxt.rflags | X86_EFLAGS_MBS;
-+    regs->r8  = ctxt.r8;
-+    regs->r9  = ctxt.r9;
-+    regs->r10 = ctxt.r10;
-+    regs->r11 = ctxt.r11;
-+    regs->r12 = ctxt.r12;
-+    regs->r13 = ctxt.r13;
-+    regs->r14 = ctxt.r14;
-+    regs->r15 = ctxt.r15;
-+    VCPU_UNMAP_REGS(v, regs);
-     v->arch.dr[0] = ctxt.dr0;
-     v->arch.dr[1] = ctxt.dr1;
-     v->arch.dr[2] = ctxt.dr2;
-@@ -2563,7 +2569,7 @@ bool hvm_vcpu_virtual_to_linear(
- {
-     unsigned long addr = offset, last_byte;
-     const struct cpu_user_regs *regs = v == current ? guest_cpu_user_regs()
--                                                    : &v->arch.user_regs;
-+                                                    : VCPU_MAP_REGS(v);
-     bool okay = false;
- 
-     ASSERT(v == current || !vcpu_runnable(v));
-@@ -2688,6 +2694,10 @@ bool hvm_vcpu_virtual_to_linear(
-      * failed.  The permissions failure is not relevant to some callers.
-      */
-     *linear_addr = addr;
-+
-+    if ( v != current )
-+        VCPU_UNMAP_REGS(v, regs);
-+
-     return okay;
- }
- 
-@@ -3956,6 +3966,7 @@ void hvm_init_hypercall_page(struct domain *d, void *ptr)
- void hvm_vcpu_reset_state(struct vcpu *v, uint16_t cs, uint16_t ip)
- {
-     struct domain *d = v->domain;
-+    struct cpu_user_regs *regs;
-     struct segment_register reg;
- 
-     domain_lock(d);
-@@ -3973,7 +3984,9 @@ void hvm_vcpu_reset_state(struct vcpu *v, uint16_t cs, uint16_t ip)
-     vcpu_reset_fpu(v);
- 
-     arch_vcpu_regs_init(v);
--    v->arch.user_regs.rip = ip;
-+    regs = VCPU_MAP_REGS(v);
-+    regs->rip = ip;
-+    VCPU_UNMAP_REGS(v, regs);
- 
-     v->arch.hvm.guest_cr[0] = X86_CR0_ET;
-     hvm_update_guest_cr(v, 0);
-diff --git a/xen/arch/x86/hvm/vmx/vmcs.c b/xen/arch/x86/hvm/vmx/vmcs.c
-index 592722f1ca..78b0af29f2 100644
---- a/xen/arch/x86/hvm/vmx/vmcs.c
-+++ b/xen/arch/x86/hvm/vmx/vmcs.c
-@@ -2083,15 +2083,13 @@ static void vmx_dump_sel2(const char *name, uint32_t lim)
- 
- void vmcs_dump_vcpu(struct vcpu *v)
- {
--    struct cpu_user_regs *regs = &v->arch.user_regs;
-+    const struct cpu_user_regs *regs = v == current ? guest_cpu_user_regs()
-+                                                    : VCPU_MAP_REGS(v);
-     uint32_t vmentry_ctl, vmexit_ctl;
-     unsigned long cr4;
-     uint64_t efer;
-     unsigned int i, n;
- 
--    if ( v == current )
--        regs = guest_cpu_user_regs();
--
-     vmx_vmcs_enter(v);
- 
-     vmentry_ctl = vmr32(VM_ENTRY_CONTROLS),
-@@ -2236,6 +2234,9 @@ void vmcs_dump_vcpu(struct vcpu *v)
-                vmr16(VIRTUAL_PROCESSOR_ID), vmr(VM_FUNCTION_CONTROL));
- 
-     vmx_vmcs_exit(v);
-+
-+    if ( v != current )
-+        VCPU_UNMAP_REGS(v, regs);
- }
- 
- static void cf_check vmcs_dump(unsigned char ch)
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index 3c7374a9ff..bdbcd0ad4d 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -2159,8 +2159,12 @@ static bool cf_check vmx_event_pending(const struct vcpu *v)
- 
- static void cf_check vmx_set_info_guest(struct vcpu *v)
- {
-+    const struct cpu_user_regs *regs = VCPU_MAP_REGS(v);
-+    bool single_step = regs->eflags & X86_EFLAGS_TF;
-     unsigned long intr_shadow;
- 
-+    VCPU_UNMAP_REGS(v, regs);
-+
-     vmx_vmcs_enter(v);
- 
-     __vmwrite(GUEST_DR7, v->arch.dr7);
-@@ -2174,8 +2178,7 @@ static void cf_check vmx_set_info_guest(struct vcpu *v)
-      * immediately vmexit and hence make no progress.
-      */
-     __vmread(GUEST_INTERRUPTIBILITY_INFO, &intr_shadow);
--    if ( v->domain->debugger_attached &&
--         (v->arch.user_regs.eflags & X86_EFLAGS_TF) &&
-+    if ( v->domain->debugger_attached && single_step &&
-          (intr_shadow & VMX_INTR_SHADOW_STI) )
-     {
-         intr_shadow &= ~VMX_INTR_SHADOW_STI;
-diff --git a/xen/arch/x86/hypercall.c b/xen/arch/x86/hypercall.c
-index dc0a90ca09..bfdc462874 100644
---- a/xen/arch/x86/hypercall.c
-+++ b/xen/arch/x86/hypercall.c
-@@ -107,9 +107,11 @@ unsigned long hypercall_create_continuation(
- 
- void arch_hypercall_tasklet_result(struct vcpu *v, long res)
- {
--    struct cpu_user_regs *regs = &v->arch.user_regs;
-+    struct cpu_user_regs *regs = VCPU_MAP_REGS(v);
- 
-     regs->rax = res;
-+
-+    VCPU_UNMAP_REGS(v, regs);
- }
- 
- int hypercall_xlat_continuation(unsigned int *id, unsigned int nr,
-diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
-index 0e405157b4..457eb69ace 100644
---- a/xen/arch/x86/include/asm/domain.h
-+++ b/xen/arch/x86/include/asm/domain.h
-@@ -632,7 +632,12 @@ struct pv_vcpu
- 
- struct arch_vcpu
- {
--    struct cpu_user_regs user_regs;
-+    /*
-+     * The vCPU's register frame while it is not running: __context_switch()
-+     * copies it here from the stack when the vCPU is switched out, and back
-+     * when it is switched in.  Everything else goes through VCPU_MAP_REGS().
-+     */
-+    struct cpu_user_regs _user_regs;
- 
-     /* Debug registers. */
-     unsigned long dr[4];
-@@ -741,6 +746,27 @@ static inline void free_vcpu_guest_context(struct vcpu_guest_context *vgc)
-     vfree(vgc);
- }
- 
-+/*
-+ * Fetch a pointer to the register frame a vCPU was last switched out with,
-+ * or which a toolstack, debugger or reset has put there since: the vCPU's
-+ * registers for code working on a vCPU other than the one running (whose
-+ * registers are on the stack, see guest_cpu_user_regs()).
-+ *
-+ * The pointer is valid until VCPU_UNMAP_REGS(), which clears it.  A mapping
-+ * must not be held across a scheduling point.
-+ *
-+ * @param v Owner of the register frame
-+ */
-+#define VCPU_MAP_REGS(v) (&(v)->arch._user_regs)
-+
-+/*
-+ * Drops the mapping of a vCPU's register frame and nullifies its pointer.
-+ *
-+ * @param v Owner of the register frame
-+ * @param r Register frame of v, from VCPU_MAP_REGS()
-+ */
-+#define VCPU_UNMAP_REGS(v, r) do { (void)(v); (r) = NULL; } while ( false )
-+
- void arch_vcpu_regs_init(struct vcpu *v);
- 
- struct vcpu_hvm_context;
-diff --git a/xen/arch/x86/pv/dom0_build.c b/xen/arch/x86/pv/dom0_build.c
-index 829eafd67d..a08362df16 100644
---- a/xen/arch/x86/pv/dom0_build.c
-+++ b/xen/arch/x86/pv/dom0_build.c
-@@ -1007,7 +1007,7 @@ static int __init dom0_construct(const struct boot_domain *bd)
-      *          rSI = start_info
-      *  [rAX,rBX,rCX,rDX,rDI,rBP,R8-R15 are zero]
-      */
--    regs = &v->arch.user_regs;
-+    regs = VCPU_MAP_REGS(v);
-     v->arch.pv.ds = (compat ? FLAT_COMPAT_KERNEL_DS : FLAT_KERNEL_DS);
-     v->arch.pv.es = (compat ? FLAT_COMPAT_KERNEL_DS : FLAT_KERNEL_DS);
-     v->arch.pv.fs = (compat ? FLAT_COMPAT_KERNEL_DS : FLAT_KERNEL_DS);
-@@ -1018,6 +1018,7 @@ static int __init dom0_construct(const struct boot_domain *bd)
-     regs->rsp = vstack_end;
-     regs->rsi = vstartinfo_start;
-     regs->eflags = X86_EFLAGS_IF | X86_EFLAGS_MBS;
-+    VCPU_UNMAP_REGS(v, regs);
- 
-     /*
-      * We don't call arch_set_info_guest(), so some initialisation needs doing
-diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
-index ac01ba0872..3b4a01ba52 100644
---- a/xen/arch/x86/traps.c
-+++ b/xen/arch/x86/traps.c
-@@ -273,16 +273,17 @@ void show_registers(const struct cpu_user_regs *regs)
- 
- void vcpu_show_registers(struct vcpu *v)
- {
--    const struct cpu_user_regs *regs = &v->arch.user_regs;
--    struct cpu_user_regs aux_regs;
-+    const struct cpu_user_regs *regs = VCPU_MAP_REGS(v);
-+    struct cpu_user_regs aux_regs = *regs;
-     struct extra_state state;
-     enum context context;
- 
-+    VCPU_UNMAP_REGS(v, regs);
-+    regs = &aux_regs;
-+
-     if ( is_hvm_vcpu(v) )
-     {
--        aux_regs = *regs;
-         get_hvm_registers(v, &aux_regs, &state);
--        regs = &aux_regs;
-         context = CTXT_hvm_guest;
-     }
-     else
-@@ -916,6 +917,7 @@ void cf_check show_execution_state(const struct cpu_user_regs *regs)
- 
- void vcpu_show_execution_state(struct vcpu *v)
- {
-+    const struct cpu_user_regs *regs;
-     unsigned long flags = 0;
- 
-     if ( test_bit(_VPF_down, &v->pause_flags) )
-@@ -961,12 +963,16 @@ void vcpu_show_execution_state(struct vcpu *v)
-          */
-         console_unlock_recursive_irqrestore(flags);
- 
--        show_hvm_stack(v, &v->arch.user_regs);
-+        regs = VCPU_MAP_REGS(v);
-+        show_hvm_stack(v, regs);
-+        VCPU_UNMAP_REGS(v, regs);
-     }
-     else
-     {
--        if ( guest_kernel_mode(v, &v->arch.user_regs) )
--            show_guest_stack(v, &v->arch.user_regs);
-+        regs = VCPU_MAP_REGS(v);
-+        if ( guest_kernel_mode(v, regs) )
-+            show_guest_stack(v, regs);
-+        VCPU_UNMAP_REGS(v, regs);
- 
-         console_unlock_recursive_irqrestore(flags);
-     }
+ 	addr = ioremap(FCH_PM_BASE + FCH_PM_S5_RESET_STATUS, sizeof(value));
 -- 
-2.56.0
+2.34.1
 
 
