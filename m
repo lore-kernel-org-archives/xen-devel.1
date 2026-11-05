@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D9E4606A326
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 13:32:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 02702606D831
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 13:33:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=RzQZZPQG
-Received: from list by lists.xenproject.org with outflank-mailman.1474623.1681633 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=gSywKm74
+Received: from list by lists.xenproject.org with outflank-mailman.1474634.1681641 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOxZs-0004Cw-Th; Thu, 05 Nov 2026 13:32:28 +0000
+	id 1xOxaS-0004iP-4M; Thu, 05 Nov 2026 13:33:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1474623.1681633; Thu, 05 Nov 2026 13:32:28 +0000
+Received: by outflank-mailman (output) from mailman id 1474634.1681641; Thu, 05 Nov 2026 13:33:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOxZs-0004Cp-Q0; Thu, 05 Nov 2026 13:32:28 +0000
-Received: by outflank-mailman (input) for mailman id 1474623;
- Thu, 05 Nov 2026 13:32:27 +0000
+	id 1xOxaS-0004iI-0v; Thu, 05 Nov 2026 13:33:04 +0000
+Received: by outflank-mailman (input) for mailman id 1474634;
+ Thu, 05 Nov 2026 13:33:03 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xOxZr-0004Cj-SZ
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 13:32:27 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xOxaQ-0004ht-VR
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 13:33:02 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xOxZq-000NaQ-FI
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 14:32:26 +0100
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xOxaQ-00Aj8S-BO
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 14:33:02 +0100
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aec8559-2eae-0a2a0a5409dd-0a2a4501e258-46
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 14:32:26 +0100
-Received: from [209.85.218.49] (helo=mail-ej1-f49.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aec8580-8faa-0a2a0a5109dd-0a2a4506831e-44
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 14:33:02 +0100
+Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aec8569-5984-0a2a45010019-d155da31b1c8-3
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 14:32:26 +0100
-Received: by mail-ej1-f49.google.com with SMTP id
- a640c23a62f3a-c450ab1483cso311782466b.3
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 05:32:26 -0800 (PST)
+ id 6aec858d-195a-0a2a45060019-d155802bd4ff-3
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 14:33:01 +0100
+Received: by mail-wm1-f43.google.com with SMTP id
+ 5b1f17b1804b1-4b467581b98so13351095e9.0
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 05:33:01 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c4d0e48d0dcsm171112266b.70.2026.11.05.05.32.24
+ 5b1f17b1804b1-4b57317cae5sm103423815e9.12.2026.11.05.05.32.59
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 05 Nov 2026 05:32:24 -0800 (PST)
+ Thu, 05 Nov 2026 05:33:00 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,59 +51,58 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1793885545; x=1794490345; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1793885581; x=1794490381; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=pu1UgUgWUzi4OHOR1sIfgHhhY81bof5NV4x1QUXUyUA=;
-        b=RzQZZPQGxT0HYPgcSgrpqCnsHfWtH9+v9YhgBV1gzNf3BmOKt9sqFqMXRMAe49FDMx
-         Ruk+meQo3reTz5EE4QnL9d9HpBJpZpLyq/mWFr78kO3HENyWm5r7iahBJT31XLfDtmBT
-         5jsurJ53Vjo1FDpaxKiJXLJ/2p3twK4+CNr2z6O75aJH96DWT8yB4yaw4t622vGK8GF8
-         GqA1Fu+w+wkXDnuIS9ZV7SyMvY/vrqQ8dnDCaSOdzShygvBtn0TJUitW526qcllUwxpI
-         zTTVVzxExrRB5LsFNc9XEuq6c9bcKmogaKgTiqkYNjzYp3E5e3e9kCBcoNsu4r5hw5VF
-         SgEQ==
+        bh=YuPU3a8IBBvMhUzOW5Q9jnXRThErt0mAuRAL2YchLs4=;
+        b=gSywKm74J5m1Cs5SvUIN3mDAJ5WVZRGGBA7Z0aAWtEEDF34MZRWDlFlSLIklSXFbxz
+         k99iw4y8SV1U6UEBVcO8SKM2UJ7Q3dkYyKXAoTcYUVLtV0naaqRonbA1Mm9k6YbI7hBz
+         DcjtLmGSCgj+ORKoEuC1jfTWjxmdscT9KshOjnesyk8Wdj1yfVgeLXfRulxuI3Ibx890
+         joBhI5gUGkSqqY7GM8hpSNb/JCLgPBIhPjYUa/3xay2qQ7t8z+aCCx5GpdOSL13wazZ0
+         zAir1IjhMQCjISbGEriwOsrFUC3wGE61j5Fgj/cag8NOCYHbRWHthf7xcDA/QHQmTFs4
+         PlNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793885545; x=1794490345;
+        d=1e100.net; s=20260707; t=1793885581; x=1794490381;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=pu1UgUgWUzi4OHOR1sIfgHhhY81bof5NV4x1QUXUyUA=;
-        b=wykG6C4XnavwYl11Is3cZlIuu9KNnC2QhjwgnJ3DD5bsVRtoztGHnuOo5JqJjhrbI+
-         M46oEnPjONZ//47KkzFpE7WXUUIv19pSAu7n7Y7MeZpX8IwxBxZjT1BBwWdaxoEXBTZ/
-         SYliTs0MWc1wETyZ1+x05iBVoPL99HyWsoMzHYiEUapVx7INmXuu/kmY/HYtF4BXomoG
-         lKZTYu+OCLTX0dUGVF6FCgVvsOgL08xR6HnsJtCp61Fye3IBTcdrtcLWoZi4FKtLtzDg
-         dWByrsU0+Dg6qnMvqCDg3rTl4KuODGwotJHySUpjz9H3SbKd4jxT/Y1i1zRPB0NAvPWk
-         6cnw==
-X-Gm-Message-State: APuU4Z/u8CXT2WlXAaQY9ABLqN3HOFWhg8oB1a12mhXy8seQQEQ4U+Wi
-	NOuoHKMIcMpBABNHl2P+1cUDbKANf1SFiKzsW5DFPmEnDProGwmUhNh6tcBeplYqUCUtsL/HedB
-	8b/v8Cw==
-X-Gm-Gg: AYBFou12Dt894bFHNtgsCx8ed3ytTda9mOlPaRp3mN7kL7LbWzpgFosgCS748xsfgGd
-	5yakJzLXCKVqfxXhHYTxren/p5HJxG9ONZlZl2aQVP+MNq3CfZSRjG7BDXFWj5s5fcTd/VcRJBz
-	BzOLEMquGKCq+NdQRlxylDgrvmZP9rlf2yJUXgODyLELg8Q4iKBn0t1UwwIwmxxc+MbpbnM1SO2
-	DAFPuPCPFHfzYSmJr1Dp8PW28dtqzWzhsQ0AosxAsc98m39vrhPbzscWTLuG6IBbx1qPQXhTokB
-	8/JKbGGXn27Mfhns3O0PwqSdl3S0Pv0AGvmtrCY5EYpN90+iTGPlE7oTsaal5AbUfaR11XloHX4
-	afJIuPTFl9AmcA6uVvcB0h8yBO2w27PGEGVP6OHESwWxZ4fzV5/YZ5gIrPLgFBfjxUoSEzLZ5mp
-	Y+g5Bq7lhvSTgxLHkiFvbuEg7lp6HH1JCQj+2DkduP7KbGovk2ZOD070qlQhLwrCzi0FIbTBeF1
-	aC8Cv/BpgkHhndi4rAIwPwTDUMOadhzvYcza87hSh6fuf/MSk2XZILpX1s6Jcd91gLgqcS7Jbwv
-	J4juGJhKyFSc9M9tGfpZmnTudY+rR6RN+vBooFd86tz7Boc/s7gGQiuHo67Oxs7fbkcjBCEqkZm
-	Jn5hAE3jheBYH7eY=
-X-Received: by 2002:a17:907:868a:b0:c40:231:6eab with SMTP id a640c23a62f3a-c4ca7a4e651mr1693952066b.16.1793885545530;
-        Thu, 05 Nov 2026 05:32:25 -0800 (PST)
-Message-ID: <64ac61c0-f265-4860-bdb0-f142ea9e4a04@suse.com>
-Date: Thu, 5 Nov 2026 14:32:24 +0100
+        bh=YuPU3a8IBBvMhUzOW5Q9jnXRThErt0mAuRAL2YchLs4=;
+        b=euXUYxoeZwzC24nX64f6XTeQoTtWI7fFwM3TG9fPMiSR3yDOt70YgWZ+t3TU7Xp0NB
+         3AtxtGmbSIMIy8a0p1Vy8Ly0nlshrNeCWlA9/eOncdLALdg8GEyJYsRgMtnLsbIaOzYX
+         N0KXR9FKMA2F04iMxkpLJD66OP+lSfyWSm+HFKDEwNKohzhLbGOYCuhYKzk652o/ccNJ
+         TIBwTkvQvFkq69vnOVYW3SS+B77KT4hdS714xZG2X78VmDcJqy74tavwjzfM57xX1XTY
+         h1qD/laO36vEr99vT5C8OoOj/jxM4YodT3FQeTOismfj5uBJ5Si/f4q73pPCdIUVZOaX
+         W7Ag==
+X-Gm-Message-State: APuU4Z/rY+x09UdqzzSFYWlvB0bgpBK5c/5oyNf1FL06MMp9NIMqDipA
+	ZmZOXTb32heUvJYWTbiEZNN9fpF7aM/03q98ily1xhLUrTrt/kD+mdV3lDQYuHcgFiZofm7H45e
+	NQuMM3Q==
+X-Gm-Gg: AYBFou28EwZ16ao4AM7KEmwqh5IUWRwi5PjnZAA3fc68Hf7JEju4TwjUCj1FyMzF8D3
+	FrfluecKdV2KcPERUqj5pnnEgcez8YgbUs6HSgS6NqUkaI5xshHNkIYETK/GWtCQgYBwSQ6f/vb
+	c2LhdMtZKA6lAZIQWVtxodlDCdrW5TrkSpqJ1/vzdSDScv+skQkGvX0CLS/VDcu/Nn9ZyAntcQJ
+	VOyz6+KuSIUQq0zglh77Fjbh8zjpZi5SG8QJFPMBBqtTsdqTFbuSklb1i744e8GFeUhbFe2Rlxm
+	2SKFCNIQp1fjKCUZ8/uCkndDR/u2Flq388IUeKxc/C1wYK6BYqOrD9OX+PW02IYtG8uI9wiksnO
+	RP0c5cKTkYMeTbSLJrnIRaXPhmbMhZS4e/CpRag0GKmDi9CyF3QpKYljD5ydk+qS/DxgwA1Zdnd
+	yecdWBLxl96LOwWZyc6YtdM1HXzxmtmGSbfYfboWT1KCUG60JXWXgaMKp6dVdTJALCDRQzAGi7W
+	eZqCUiGyGeNlqGaHJdlD+SnI2sWfloi/Ygz/l22NSqBTFcais6p96qZr3FIWfJ3FFJqN4hXqhsb
+	v3fCMlaOBxOJzWRFuYnoAn3UxKFkM5BDG1/K5iax+h5cIJK2tpG+l0nozUBrp4ddrhceTfP1iJJ
+	5YIK0413ppEcYbPM=
+X-Received: by 2002:a05:600c:8b06:b0:4a2:d:5ccc with SMTP id 5b1f17b1804b1-4ac17b2bc63mr431783145e9.10.1793885581330;
+        Thu, 05 Nov 2026 05:33:01 -0800 (PST)
+Message-ID: <ca7b7cc5-fecb-4215-aec3-8c70b0c51e3f@suse.com>
+Date: Thu, 5 Nov 2026 14:32:58 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v2 01/14] x86/EFI: guard against oversized modules
+Subject: [PATCH v2 02/14] x86/setup: widen consider_modules()'es size
+ parameter
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Marek Marczykowski
- <marmarek@invisiblethingslab.com>,
- Daniel Smith <dpsmith@apertussolutions.com>
+ <roger@xenproject.org>
 References: <a1f88104-14ae-400c-b950-163d5a7e552b@suse.com>
 Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -131,10 +130,10 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
 In-Reply-To: <a1f88104-14ae-400c-b950-163d5a7e552b@suse.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d62444/1793885546-BC359757-EF92E473/10/78276251493
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-16d1c6/1793885581-FD40B77B-5516A196/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 1040
+X-purgate-size: 712
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -143,32 +142,25 @@ X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-module_t's mod_end field (which we repurpose to hold a module's size)
-cannot hold values 4Gb and up. Don't let truncation go silently.
+Eventually we will want to lift the restriction on module size anyway.
+Right now what we (subsequently) need is a way to express at least
+"exactly 4G", when rounding up valid sizes below 4G to the next 1G
+boundary.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
-Reviewed-by: George Dunlap <gwd@xenproject.org>
-Acked-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 ---
-MB and MB2 also constrain module to below 4Gb. The constraint here may be
-possible to drop once hyperlaunch work has progressed enough to no longer
-require the intermediate mb_modules[].
+v2: New.
 
---- a/xen/arch/x86/efi/efi-boot.h
-+++ b/xen/arch/x86/efi/efi-boot.h
-@@ -736,6 +736,13 @@ static void __init efi_arch_handle_modul
-     place_string(&mb_modules[mbi.mods_count].string, local_name.s);
-     mb_modules[mbi.mods_count].mod_start = file->addr >> PAGE_SHIFT;
-     mb_modules[mbi.mods_count].mod_end = file->size;
-+
-+    if ( mb_modules[mbi.mods_count].mod_end != file->size )
-+    {
-+        PrintStr(name);
-+        blexit(L" is too large");
-+    }
-+
-     ++mbi.mods_count;
-     efi_bs->FreePool(ptr);
- }
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -690,7 +690,7 @@ static void __init noinline move_xen(voi
+ #undef BOOTSTRAP_MAP_LIMIT
+ 
+ static uint64_t __init consider_modules(
+-    uint64_t s, uint64_t e, uint32_t size, const struct boot_module *mods,
++    uint64_t s, uint64_t e, uint64_t size, const struct boot_module *mods,
+     unsigned int nr_mods, unsigned int this_mod)
+ {
+     unsigned int i;
 
 
