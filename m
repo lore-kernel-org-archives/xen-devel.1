@@ -2,43 +2,43 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4E3A1606D808
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 21:06:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 73698606D801
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 21:07:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=F+NMyrHF
-Received: from list by lists.xenproject.org with outflank-mailman.1475569.1682190 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hyoADFGo
+Received: from list by lists.xenproject.org with outflank-mailman.1475579.1682199 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xP4fS-0003Nq-6p; Thu, 05 Nov 2026 21:06:42 +0000
+	id 1xP4fe-0003uV-EF; Thu, 05 Nov 2026 21:06:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1475569.1682190; Thu, 05 Nov 2026 21:06:42 +0000
+Received: by outflank-mailman (output) from mailman id 1475579.1682199; Thu, 05 Nov 2026 21:06:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xP4fS-0003Nh-43; Thu, 05 Nov 2026 21:06:42 +0000
-Received: by outflank-mailman (input) for mailman id 1475569;
- Thu, 05 Nov 2026 21:06:40 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xP4fe-0003uE-AH; Thu, 05 Nov 2026 21:06:54 +0000
+Received: by outflank-mailman (input) for mailman id 1475579;
+ Thu, 05 Nov 2026 21:06:52 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ljs@kernel.org>) id 1xP4fQ-0003Mh-Pg
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 21:06:40 +0000
+ (envelope-from <ljs@kernel.org>) id 1xP4fc-0003s7-Pv
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 21:06:52 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xP4fQ-00525r-6h
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 22:06:40 +0100
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xP4fc-00FGJ8-6v
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 22:06:52 +0100
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <ljs@kernel.org>)
- id 6aecefc2-e002-0a2a0a5209dd-0a2a4504dcfa-36
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 22:06:40 +0100
+ id 6aecefea-e002-0a2a0a5209dd-0a2a4503bb02-2
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 22:06:52 +0100
 Received: from [172.105.4.254] (helo=tor.source.kernel.org)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <ljs@kernel.org>)
- id 6aecefde-b57f-0a2a45040019-ac6904fee86c-3
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 22:06:39 +0100
+ id 6aecefea-fae8-0a2a45030019-ac6904fe9d94-3
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 22:06:51 +0100
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 9B68560232;
+ by tor.source.kernel.org (Postfix) with ESMTP id B47AC605F7;
+ Thu,  5 Nov 2026 21:06:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C70931F008A2;
  Thu,  5 Nov 2026 21:06:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 891FF1F0089F;
- Thu,  5 Nov 2026 21:06:26 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,23 +49,23 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="From:Date:Subject:References:In-Reply-To:To:Cc"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793912798;
-	bh=wDJov6C3ftgFR9HVA3C77e8dvsBn9mUiFAP4oxc5gso=;
+	s=k20260515; t=1793912810;
+	bh=lMfCHuJWDITAzVX5MILlRUAfVtlxLQX6U8OJOyztS0Q=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=F+NMyrHFBUcpcvdLlYfefS9fChSe5iibGSD2sqAN7qVA/rV6ebmZ5qCXW5xusd1tJ
-	 Jq/lz3cUiwOdjnCDcRSzFRFu7nCMmpfyDOOFdQuAyOEPJCLx3Nvs2COSwLWAY5luYJ
-	 c2PcdAwxTx9dk3y4715xe2jzU34js3UES+LJWtjJFLPrBAOPwyLzTVL9W0nM8OWnIz
-	 JfGm0qQ4ai24kUi0kYZbeEvGkjT0pdY6txBuK83Ejj0f6en7vHE+xr28CVUhMWP+QX
-	 Wkx0vicLtz6iHdxQrV8XIL/A4dr/uVz0V7DkZU92pqsOFZbwWhAB53aV0yjoilJZF9
-	 E0g82mI+iLpOQ==
+	b=hyoADFGoZhaTWJkzXcW3KcbEavv04p8OShbOv92vBdUSDNLHC33p5UKp1V2NVcrld
+	 kDlm4+Dh0N0ewg6c+CsYgrDJ3ZyQfeLnEMeGuWWhUOa1JWAqXOF3EIa9dU7hEYQurC
+	 UD8uUTqIpkS8973AB0tlJQaOj0TVHyTL25qiKUL5PD3kHvTGhvyIEbBHKWXDn6uHka
+	 RoxnfP2r7Ju1UsLJ3jtzSicq0aWOqHOlTJAt5o8ROmzR1tSO11ZVBsg+5OZeT4rkNp
+	 9MHuwVurtm4FxobT/XptLLk7AHWfQIwdo04JpdFyuH/BI40j4CP1PTKjHXSsUS4XXm
+	 oJDzW5rZ2ElnQ==
 From: "Lorenzo Stoakes (ARM)" <ljs@kernel.org>
-Date: Thu, 05 Nov 2026 21:05:34 +0000
-Subject: [PATCH 03/14] mshv_vtl: convert mmap hooks to mmap_prepare
+Date: Thu, 05 Nov 2026 21:05:35 +0000
+Subject: [PATCH 04/14] vduse: convert IOVA domain mmap hook to mmap_prepare
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261105-late-2026-mmap_prepare-v1-3-c56aadfbab8a@kernel.org>
+Message-Id: <20261105-late-2026-mmap_prepare-v1-4-c56aadfbab8a@kernel.org>
 References: <20261105-late-2026-mmap_prepare-v1-0-c56aadfbab8a@kernel.org>
 In-Reply-To: <20261105-late-2026-mmap_prepare-v1-0-c56aadfbab8a@kernel.org>
 To: Juergen Gross <jgross@suse.com>, 
@@ -110,17 +110,17 @@ Cc: ljs@kernel.org, xen-devel@lists.xenproject.org,
  linux-aspeed@lists.ozlabs.org, linux-arm-msm@vger.kernel.org, 
  op-tee@lists.trustedfirmware.org, netdev@vger.kernel.org
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2014; i=ljs@kernel.org;
- h=from:subject:message-id; bh=JxN0KjNUmrQ4SKv8FW2PS979jApnXc/RSZcYUQZ0Su8=;
- b=owGbwMvMwCV2fu7ZrsZH9SKMp9WSGLLevF8tcZL1VfXfq85qV/gLon/N4+6fdOGa+o2dyru2B
- X1qn+Fu3VHKwiDGxSArpsjy/Iv4/iCRsHmdF/zdYOawMoEMYeDiFICJ9C5nZPjw5P6i+ClZTf6V
- xw7ZXvyxmPe92OKKh6GXFoi2ysxea3eA4RfzDdW0Q1MsE8q3KzNPSkh3W7fOaWFC8sa6wI0Ncf0
- 57/kB
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1527; i=ljs@kernel.org;
+ h=from:subject:message-id; bh=f+7KpJr4q75MSHX3Bd7fDuPR7a/rNIIIf/bMN+NEgYc=;
+ b=owGbwMvMwCV2fu7ZrsZH9SKMp9WSGLLevF8du8y356wo75UohnvW1WmG2azZxoEG9l+mvHw8c
+ ZHxmh0fOkpZGMS4GGTFFFmefxHfHyQSNq/zgr8bzBxWJpAhDFycAjCRiBOMDB0R1y2sCsxZCz9d
+ WmjgP+cKZ4HBz+NXpWMcv1wV1woTUGNk+FWtznBzgiPz5WrBrQefRpSzaacb3N2dE78n6eYhful
+ ubgA=
 X-Developer-Key: i=ljs@kernel.org; a=openpgp;
  fpr=E7F417BF5214569E89D04F46CF9DCD8A81E27F14
-X-purgate-ID: tlsNG-ebf023/1793912800-528C9B50-7E5F2752/0/0
+X-purgate-ID: tlsNG-33051d/1793912812-756834E9-5C12C4EC/0/0
 X-purgate-type: clean
-X-purgate-size: 2016
+X-purgate-size: 1529
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -129,63 +129,46 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Move from the deprecated mmap hook to the new mmap_prepare hook for both
-the mshv_vtl and mshv_vtl_low devices. These only set VMA operations and
-flags.
+Move from the deprecated mmap hook to the new mmap_prepare hook. The hook
+only sets VMA flags, operations and private data.
 
 Signed-off-by: Lorenzo Stoakes (ARM) <ljs@kernel.org>
 ---
- drivers/hv/mshv_vtl_main.c | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
+ drivers/vdpa/vdpa_user/iova_domain.c | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/hv/mshv_vtl_main.c b/drivers/hv/mshv_vtl_main.c
-index d8225242c73f..e372d4c0188d 100644
---- a/drivers/hv/mshv_vtl_main.c
-+++ b/drivers/hv/mshv_vtl_main.c
-@@ -832,9 +832,9 @@ static const struct vm_operations_struct mshv_vtl_vm_ops = {
- 	.fault = mshv_vtl_fault,
+diff --git a/drivers/vdpa/vdpa_user/iova_domain.c b/drivers/vdpa/vdpa_user/iova_domain.c
+index b6c958224b7c..64465f690a4d 100644
+--- a/drivers/vdpa/vdpa_user/iova_domain.c
++++ b/drivers/vdpa/vdpa_user/iova_domain.c
+@@ -575,13 +575,13 @@ static const struct vm_operations_struct vduse_domain_mmap_ops = {
+ 	.fault = vduse_domain_mmap_fault,
  };
  
--static int mshv_vtl_mmap(struct file *filp, struct vm_area_struct *vma)
-+static int mshv_vtl_mmap_prepare(struct vm_area_desc *desc)
+-static int vduse_domain_mmap(struct file *file, struct vm_area_struct *vma)
++static int vduse_domain_mmap_prepare(struct vm_area_desc *desc)
  {
--	vma->vm_ops = &mshv_vtl_vm_ops;
-+	desc->vm_ops = &mshv_vtl_vm_ops;
+-	struct vduse_iova_domain *domain = file->private_data;
++	struct vduse_iova_domain *domain = desc->file->private_data;
+ 
+-	vm_flags_set(vma, VM_DONTDUMP | VM_DONTEXPAND);
+-	vma->vm_private_data = domain;
+-	vma->vm_ops = &vduse_domain_mmap_ops;
++	vma_desc_set_flags(desc, VMA_DONTDUMP_BIT, VMA_DONTEXPAND_BIT);
++	desc->private_data = domain;
++	desc->vm_ops = &vduse_domain_mmap_ops;
  
  	return 0;
  }
-@@ -852,7 +852,7 @@ static const struct file_operations mshv_vtl_fops = {
+@@ -606,7 +606,7 @@ static int vduse_domain_release(struct inode *inode, struct file *file)
+ 
+ static const struct file_operations vduse_domain_fops = {
  	.owner = THIS_MODULE,
- 	.unlocked_ioctl = mshv_vtl_ioctl,
- 	.release = mshv_vtl_release,
--	.mmap = mshv_vtl_mmap,
-+	.mmap_prepare = mshv_vtl_mmap_prepare,
+-	.mmap = vduse_domain_mmap,
++	.mmap_prepare = vduse_domain_mmap_prepare,
+ 	.release = vduse_domain_release,
  };
  
- static void mshv_vtl_synic_mask_vmbus_sint(void *info)
-@@ -1283,10 +1283,10 @@ static const struct vm_operations_struct mshv_vtl_low_vm_ops = {
- 	.huge_fault = mshv_vtl_low_huge_fault,
- };
- 
--static int mshv_vtl_low_mmap(struct file *filp, struct vm_area_struct *vma)
-+static int mshv_vtl_low_mmap_prepare(struct vm_area_desc *desc)
- {
--	vma->vm_ops = &mshv_vtl_low_vm_ops;
--	vm_flags_set(vma, VM_HUGEPAGE | VM_MIXEDMAP);
-+	desc->vm_ops = &mshv_vtl_low_vm_ops;
-+	vma_desc_set_flags(desc, VMA_HUGEPAGE_BIT, VMA_MIXEDMAP_BIT);
- 
- 	return 0;
- }
-@@ -1294,7 +1294,7 @@ static int mshv_vtl_low_mmap(struct file *filp, struct vm_area_struct *vma)
- static const struct file_operations mshv_vtl_low_file_ops = {
- 	.owner		= THIS_MODULE,
- 	.open		= mshv_vtl_low_open,
--	.mmap		= mshv_vtl_low_mmap,
-+	.mmap_prepare	= mshv_vtl_low_mmap_prepare,
- };
- 
- static struct miscdevice mshv_vtl_low = {
 
 -- 
 2.56.0
