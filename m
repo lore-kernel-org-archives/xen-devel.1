@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 93FDF606A31B
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 08:06:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C1F5606A326
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 08:13:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=BIxI8D6s
-Received: from list by lists.xenproject.org with outflank-mailman.1474137.1681321 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=Y0khizxp
+Received: from list by lists.xenproject.org with outflank-mailman.1474146.1681330 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOsUT-0006eP-IO; Thu, 05 Nov 2026 08:06:33 +0000
+	id 1xOsb9-00022w-Ai; Thu, 05 Nov 2026 08:13:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1474137.1681321; Thu, 05 Nov 2026 08:06:33 +0000
+Received: by outflank-mailman (output) from mailman id 1474146.1681330; Thu, 05 Nov 2026 08:13:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOsUT-0006eI-FR; Thu, 05 Nov 2026 08:06:33 +0000
-Received: by outflank-mailman (input) for mailman id 1474137;
- Thu, 05 Nov 2026 08:06:31 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xOsUR-0006eC-Hi
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 08:06:31 +0000
+	id 1xOsb9-00022p-80; Thu, 05 Nov 2026 08:13:27 +0000
+Received: by outflank-mailman (input) for mailman id 1474146;
+ Thu, 05 Nov 2026 08:13:26 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xOsb8-00022R-9g
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 08:13:26 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xOsUQ-002pCL-Up
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 09:06:30 +0100
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xOsb6-00GuWb-Dz
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 09:13:24 +0100
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aec3905-e002-0a2a0a5209dd-0a2a45049556-6
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 09:06:30 +0100
-Received: from [209.85.221.49] (helo=mail-wr1-f49.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aec3a9e-bab6-0a2a0a5309dd-0a2a4506e57e-26
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 09:13:24 +0100
+Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aec38f8-b57f-0a2a45040019-d155dd31d554-3
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 09:06:16 +0100
-Received: by mail-wr1-f49.google.com with SMTP id
- ffacd0b85a97d-48e47347279so897768f8f.1
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 00:06:16 -0800 (PST)
+ id 6aec3aa4-195a-0a2a45060019-d1558036cd7e-3
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 09:13:24 +0100
+Received: by mail-wm1-f54.google.com with SMTP id
+ 5b1f17b1804b1-4a20bdaf39cso16081885e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 00:13:24 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48fecac1a1csm8357312f8f.12.2026.11.05.00.06.15
+ ffacd0b85a97d-48fea181085sm8549278f8f.1.2026.11.05.00.13.22
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 05 Nov 2026 00:06:16 -0800 (PST)
+ Thu, 05 Nov 2026 00:13:23 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,58 +51,59 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1793865976; x=1794470776; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1793866404; x=1794471204; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=L6+Zl7fwUtq3UYi9FIJP2j29UMwyKYMiUj5q0PWhwR0=;
-        b=BIxI8D6sqh8rg4yWLcIf0aPYZbek57ABhr7t+2ErUoRamnrTpnE6TcGM4ERu/lwmOR
-         zfKA5Ikay4oett8YZwoAdIPmo6/a5Zo4tPE8CFyI71+Rs8wR0AKyuoo6HtFTQRqTblIH
-         M7YzPoKseVuZCNlaJjFpmnBFlqdVLNYUeikVpyHKNSaNx4HeslCOnnuOuN4AWdnK9m/H
-         jTYf59nmfeLi9CyPeeC41/mZaFAwXiKpwmDXe18ndWV1q5ikNWoJo83LBZqZWVOzlK3G
-         eqTakz6pIvyCaszt/lJuhFDIvfxnd8WZScEVOtvXOaU1XptOaEfQ0P9xH/RTeUWXOFF7
-         gkEg==
+        bh=ilp1ZFuaFXFjQmjuHd3VoFXvmRpQam+c/MOy2R58vKk=;
+        b=Y0khizxp8ZDcsNL/96SvX/L8QvowmknzF9DalJgWwXw+UEQgvlp6WoYJF+/Qq0D1b5
+         TRGKKIvAKMz/Q2dCNmyQPC0aYk85Dnzq4ncbHcJTk9i+1AeaAi0p5OK+Wq6bGaCSMwHv
+         cyrS8Rx0zxE1d8bTqf8RTOszYhaTS0EWwByrPdu8ygv51++uMUN2vBladIxZ/IX9HTtR
+         9weoKNp/ZTYV8KcsQM4n67MIcKXsHJLQMmAKH4GL7PYYSKrWkBwrum4TfaMcdoFxyS/g
+         J2J/cbO5UhfHWWHlmmsBzIp2+ftTBYaK+k+w4noB54E2P+0xEU0Bqgv8dPmHan03OHc0
+         7t9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793865976; x=1794470776;
+        d=1e100.net; s=20260707; t=1793866404; x=1794471204;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=L6+Zl7fwUtq3UYi9FIJP2j29UMwyKYMiUj5q0PWhwR0=;
-        b=rjHUT3KZ407sFXUMst2VcRJihl1+HKVeopcWUce1vwwRX6+tVn4ZlOxUDAnb/Vl7l9
-         +sp+GYZ9vyb/BQ2cEel8tg1kO0QyiKNm8lStRnNhLY96MuIB2ueUKG8qB3ncGQrDkKxr
-         IPZdZY6w1vFy4dkSS7CkbXQHZDy8T1Vf+ZCrH8BMefqLfcvlyACYmP4srMzW9XZKAbcw
-         HdnNawnzvidRKYL9VPEFk8WVPUc0QRZZ4NLDxH2KJGsB2aEGdppC/uY0mqrNk3hKeH4c
-         yqdSoN8rtszrTPOqedxb5aNbTXm6tGljgG5HgWcn6lEJ+BVUpf3gkyJcZ1+cJQhFMzBl
-         3biw==
-X-Gm-Message-State: APuU4Z/yHLUurQ4ucDuLYIu6c1M5iqlBuye8W8Q3NN4CTWozkYF48yiv
-	D54xkkxFvXYk+DUl7m8TqMk2Kg+JKnQgGoQg7fCfacdRd29ZNGo7GFmEKUj+31RFyQ==
-X-Gm-Gg: AYBFou0mKo1g26aOtorljpUUv1xBQqnb1wi/2ooa+DgNVb2nyKnLiVCQOKCMTdOMtYz
-	cBG6nCoKYTMmn1zVlr1cPAjNhjJPuv5GmN2j3wcXS+nsExgKTOvkcFwHPgbdAlkPB3RXxOMgqVP
-	YSScNlxsdjMJ5SEPNBs72iCvre0dInAmLogYxykwbFfHYJoZligwqBVA62axm0w13rq0qMdJc2B
-	v3xDlreMd6ak+G7dPkYTBx0hqg7/Zpnn1uYrApvqlz0BaPdDME3wMtcm15SZizdPsKk55u7jx4s
-	ecwlxbgA35vkXnYXnY8tqog54a1ALrueX0+0Uu/nPcknfVyQACLYj2sOV8/Xwr3KlMYOcj3Nr6q
-	WEQIcEHnFac4majEdcW9C8MpjkkZk6rFWA7M2oweYKM63mIxi+aJVEN0X70rF8G9Ijh0yXUSj3V
-	9/ovo91vC1oJbEq22zL/QYmjdOdPBEdcU7k3b4YETB1BwV4wO14DCsT5uJRChQHfBVHzVeyMvOb
-	GHez6DPkH6GoqkCZxTLkHNK2M5LqLkXhKFakvLyRi0v2Ay1rCsb4sqNccdrK/LWq/PjEBsWdsaY
-	DN1R2VaELyS8lToExohBOttKO6/UpJAqXoFV5yu41PYiYkvzp17SxcTsbFV3Uy50KcjH2LfVMXE
-	e7VAxYczUdheGmcw=
-X-Received: by 2002:a05:6000:40dc:b0:48d:e61d:68da with SMTP id ffacd0b85a97d-48e6e2fa50dmr40296781f8f.20.1793865976428;
-        Thu, 05 Nov 2026 00:06:16 -0800 (PST)
-Message-ID: <ac9eb028-6585-4318-b0ee-e6c86624722f@suse.com>
-Date: Thu, 5 Nov 2026 09:06:15 +0100
+        bh=ilp1ZFuaFXFjQmjuHd3VoFXvmRpQam+c/MOy2R58vKk=;
+        b=YuGRRctbIk5nLYoLXCzxKZVn1Il0ujmIug05jMNZ/okcwJiiVzubVgk0JdAuUsSvi7
+         qhmjdWTMi5Ji1K6ItOWpDUhldH86pZPTDCYA1WSDqEhcWM6slw0y+9rKzgQ6hKyl4cIY
+         2wGtHjQ4JLJwUW/WNlDZa9De9se0DiLYhOwhgPU+j5PHUJGa7uZSP8HEf42Xtqf+OLCJ
+         FNsOVRCSgmVxAx5J+NBVeQKyc0LgmYh0G5DueS0SnOfgwOWV7/IOkdnR2yTk/j/RZPPC
+         IQvSCLFrHXTWKCCcMyGYaHwcsUbuy54o6nRuhf1aLEOkJniZL7zKlipy2L7nRpc3Flyg
+         tUUw==
+X-Forwarded-Encrypted: i=1; AKwUvByV2NDHxGxwF5j7WKxmSMaWjGq3T2O9nkzL33wI9bcqw4OUBqJzSfjYOe/EJsM96oeEziJqhWZRijQ=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z/4OyxpdzhW0nQjJHaBgUJyD9CsHDJ0vdUxF7vD1QSon72TsfPa
+	/fsUysph4LlmzoGAAs9gZE2ZHsz37TewFTSOd3iwJut0iRZYDhZcU7NWPSVoPwiL/Q==
+X-Gm-Gg: AYBFou0+TkHIfrWeBqEZshusVM2Ene9XK11Ue+CvVroZqN8qD64ggMbBDTeK9jueiJn
+	FEgqo+2b5WqhsvfwaE7LYcIRjLcOlOHzNaHTg52+RKs3nqoESDfNt//+MCj8jXFssMttzgrEzTD
+	XgxYDptyB1AXH1/hv1YlNfMp9YOE06qmnVlM6j26IoFnHsliVVk/B1OGRbIog1F8gKwTQ+Ivx4W
+	K0I7w4C4XwS4/TWT+F68YqK46XdfJOCShauYPnl4YeOeNlpbbXSRxxSNghlEbz6i41llj2Q+AIG
+	LLfwsPICh05cDlkB+JdJAg9EXp/l1BFuoBUpsA3pI/ZmRuMq5NmfKW4Q27igmLxeXf22VYjrajE
+	GNge6Px1Hzvo4zN7NUvm/ixDY/uU8QpHzZR71UqEB+Y2/rGmtgpsaZmHsVd/IrTrKqJaVEI3d1H
+	sKrv96uLh+24AdmZRqUInS3HUPJuNrxyLp/p8zaS7LpmlW1z3JnT3TTnJ/f6wu2MSohru/+6eRm
+	gfHWrhigY6sTRV4RgVeDrvp8KpVKmj/TFG0sbWFpJJQda9YFTmEoAwce89F3SXQnqNrzUCEb3fr
+	kO7ZnHxvLEYwh8UGMlfo5IcxbIxvp7P3haGMiXOOoHFcVyX4t57ivGY7p2LPsQG3yLO4D6o5jjZ
+	ekSCAF2Txf3cgRxCI
+X-Received: by 2002:a05:600c:5295:b0:4a1:e92b:ae4a with SMTP id 5b1f17b1804b1-4b3c3545146mr103805865e9.21.1793866403823;
+        Thu, 05 Nov 2026 00:13:23 -0800 (PST)
+Message-ID: <fdd91377-bcc1-4695-8cb7-b5db1f0f71ab@suse.com>
+Date: Thu, 5 Nov 2026 09:13:22 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 11/15] x86/PVH: try to map initrd directly into Dom0
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>,
- Marek Marczykowski <marmarek@invisiblethingslab.com>
-References: <1b4c2bb4-118d-497c-8d7d-f3824fd61a73@suse.com>
- <78cd46cc-84ed-46df-96c9-26ce97ed0da0@suse.com> <atEADbxD4mL_bXy6@Mac.lan>
+Subject: Re: [PATCH] libxl: wait for QEMU exit before restarting a domain
+To: Jason Andryuk <jason.andryuk@amd.com>, Jiaqing Zhao <Zhao.Jiaqing@amd.com>
+Cc: Anthony PERARD <anthony.perard@vates.tech>,
+ Juergen Gross <jgross@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Penny Zheng <penny.zheng@amd.com>, xen-devel@lists.xenproject.org
+References: <20261104064645.1171477-1-Zhao.Jiaqing@amd.com>
+ <0762b21d-3173-4014-bd43-fa2a9cef9c85@amd.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -128,12 +129,12 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <atEADbxD4mL_bXy6@Mac.lan>
+In-Reply-To: <0762b21d-3173-4014-bd43-fa2a9cef9c85@amd.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1793865976-52AC8B50-8C08F2F0/10/78276251493
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-16d1c6/1793866404-F6C7777B-042F08E0/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 1071
+X-purgate-size: 891
 X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
@@ -141,24 +142,25 @@ X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 15.10.2026 18:32, Roger Pau Monné wrote:
-> On Mon, Oct 12, 2026 at 10:25:11AM +0200, Jan Beulich wrote:
->> Why does find_memory() go upwards, while find_kernel_memory() goes
->> downwards? And why do we use the lowest part of the region found by
->> find_memory() rather than the highest part?
+On 04.11.2026 18:33, Jason Andryuk wrote:
+> On 2026-11-04 01:46, Jiaqing Zhao wrote:
+>> The PID-based device model destruction path returns immediately after
+>> sending SIGHUP, before QEMU has necessarily exited. When an HVM guest
+>> reboots with VNC enabled, the new QEMU process may fail to bind the VNC
+>> port because the old process still holds it.
+>>
+>> Wait for QEMU to exit in a child process after singaling it for at most
 > 
-> find_memory() should probably start downwards from 4G.
+> "signaling"
+> 
+>> 60 seconds. If waiting fails or times out, log the error and retain the
+>> existing domain destruction behaviour.
+> 
+> 60 seconds seems like a lot.  Did you measure the time to see how long 
+> it takes?  It's an upper bound, but maybe 10 seconds would be better?
 
-In the course of replacing that find_memory() by pvh_steal_ram() (while
-converting to rangeset-based tracking) I learned the hard way that this
-isn't possible, even if it ought to be. Linux won't cope with parts of
-start-info (at least the module array) living outside of the first Gb
-(in 32-bit Linux it may go farther, depending on CONFIG_PAGE_OFFSET).
-See pvh_level3_ident_pgt[] having only its first direct-map entry
-populated, and pvh_start_xen() also only updating that one entry. Which
-causes xen_prepare_pvh() -> init_pvh_bootparams() to fall over anything
-living beyond the 1Gb boundary. (.memmap_paddr would apparently have
-the same issue, just that for Dom0 we don't set that.)
+Is 10s enough for it to time out upon disconnecting pass-through devices?
+I'm seeing this happen routinely, albeit with an older version of qemu.
 
 Jan
 
