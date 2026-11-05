@@ -2,41 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B784F606A31B
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 11:29:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3D40C606A337
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 11:32:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=j3DnjTl2
-Received: from list by lists.xenproject.org with outflank-mailman.1474473.1681588 (Exim 4.92)
+	dkim=temperror header.d=invisiblethingslab.com header.i=@invisiblethingslab.com header.a=rsa-sha256 header.s=fm2 header.b=A6AIn4nS;
+	dkim=pass (2048-bit key, unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.a=rsa-sha256 header.s=fm3 header.b=DO2cQbgQ
+Received: from list by lists.xenproject.org with outflank-mailman.1474486.1681597 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOven-0006IV-BC; Thu, 05 Nov 2026 11:29:25 +0000
+	id 1xOvhf-00083u-RY; Thu, 05 Nov 2026 11:32:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1474473.1681588; Thu, 05 Nov 2026 11:29:25 +0000
+Received: by outflank-mailman (output) from mailman id 1474486.1681597; Thu, 05 Nov 2026 11:32:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOven-0006IO-7o; Thu, 05 Nov 2026 11:29:25 +0000
-Received: by outflank-mailman (input) for mailman id 1474473;
- Thu, 05 Nov 2026 11:29:24 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <luoyonggang@gmail.com>) id 1xOvel-0006Gv-Tu
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 11:29:24 +0000
+	id 1xOvhf-00083n-O0; Thu, 05 Nov 2026 11:32:23 +0000
+Received: by outflank-mailman (input) for mailman id 1474486;
+ Thu, 05 Nov 2026 11:32:22 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xOvhe-00083h-6b
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 11:32:22 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xOvek-00Dgfk-JI
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 12:29:22 +0100
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xOvhd-003ZAB-CF
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 12:32:21 +0100
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <luoyonggang@gmail.com>)
- id 6aec6887-bab6-0a2a0a5309dd-0a2a4508a8a6-24
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 12:29:22 +0100
-Received: from [209.85.208.41] (helo=mail-ed1-f41.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <luoyonggang@gmail.com>)
- id 6aec6892-f659-0a2a45080019-d155d029d004-3
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 12:29:22 +0100
-Received: by mail-ed1-f41.google.com with SMTP id
- 4fb4d7f45d1cf-6b56c428212so1412122a12.2
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 03:29:22 -0800 (PST)
+ (envelope-from <marmarek@invisiblethingslab.com>)
+ id 6aec6936-2eae-0a2a0a5409dd-0a2a450a8ba8-46
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 12:32:21 +0100
+Received: from [202.12.124.148] (helo=fout-b5-smtp.messagingengine.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <marmarek@invisiblethingslab.com>)
+ id 6aec693f-f2d2-0a2a450a0019-ca0c7c9498cf-3
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 12:32:16 +0100
+Received: from phl-compute-07.internal (phl-compute-07.internal [10.202.2.47])
+ by mailfout.stl.internal (Postfix) with ESMTP id 0BDD71D000C9
+ for <xen-devel@lists.xenproject.org>; Thu,  5 Nov 2026 06:32:15 -0500 (EST)
+Received: from phl-frontend-03 ([10.202.2.162])
+ by phl-compute-07.internal (MEProxy); Thu, 05 Nov 2026 06:32:15 -0500
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
+ 5 Nov 2026 06:32:13 -0500 (EST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -45,197 +49,155 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From:Reply-To:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1793878162; cv=none;
-        d=google.com; s=arc-20260327;
-        b=aVjy1k97os2aY/yIcJuafNPb+8r11ZSs5/qVTl2P2NSOZDAS6N+srF99ZqDM0sMhpj
-         lm1PGjCiD0MS44N8RvSVBA7SVvZ8r2K+jHymwlihv0hA54H89Msv7HCGiAoiiEVkwQcg
-         BBocrS9A9e7NDrwR8FlDqHeaEykgnuWzC/IyhS8Y93W8gOlKXY3ZfRAjum1bM9fgBVSZ
-         nojFSpyyvOaVNjp/NK/NZSi6n6MVhVrVTV9J2Jfnft8ZEZGF03L+mpP84cQNST0Wpbqy
-         X4uTqB/nOPbhwRnYg8J/ZN5VcWlDaRdwC+mwqWzwBHdPq46QYAWITVz5UDLSGlH0GYZc
-         h8Pw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :reply-to:in-reply-to:references:mime-version:dkim-signature;
-        bh=N6YNeSVq516in4se9KIqzFq1rO/6YIHrrr7AeykheZo=;
-        fh=WO+2NvSEfXFY/eK2blaRfchrtrM7RA095bDLGwZkWeI=;
-        b=hqsa/zoaVEgf46aCLsSe9akzYmgbK4uGy0rg3riDQyXwlNRQwtvyvH2EgLHHmiKxMz
-         dvjphsu6kbb4SYdpHwIzcmwgpkzNz53LOQ84kp47fjkOQdzp868HFFK7wv9xyQOW99CJ
-         LJ/EiS74KY72o/JhgNFqeaoM4msx62Ygq+tSGlXI72rkVMJ06YuuN8G46OR/OHng2i3/
-         u+B34FBp+vgRaizk/mrlIqAcGXRjhsToJnlsY+lINXRYVSYvKh99xeys8RbsWj1u5Y5+
-         P6XIU+6EAuc0bk37VzAdo15KoF9gFNOtEaVWj597qWXLvYrE70MbnWbVJnxr0y1u1xAM
-         Iq2w==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793878162; x=1794482962; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:reply-to:in-reply-to:references:mime-version:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=N6YNeSVq516in4se9KIqzFq1rO/6YIHrrr7AeykheZo=;
-        b=j3DnjTl2DHzszfqaCRuRGVlUsJKKRy5fXhw5L9z/BFtixgvvU9uBEmFXtUPvLpRkUU
-         CTBFXGqPvXVQAN9Rx1+sFcb4T8DrY5MZ8ejeSvNyxlvnt9PrtWuMcEtQgK63rqqYbvXv
-         40kvQcEY+sv5Y0e6TFEvosRHDMhgJIlH7Y4Ank/g/Ds6HNDEHU6zkWHAUGhVe0hUoVfA
-         2CRfKpPTmaBrGoUG0q92WmMJrY+P3WltYZ9sBiUTjtDEL0w9L1w6O9qgWv5Nk6VBHJB7
-         DWLH4sHUKavSyxdo5CBxEy0vIvV3nnQp5uV/GG77vw9Isx0JBAylivx9pmgfEsnr01DU
-         dSaQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793878162; x=1794482962;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:reply-to:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=N6YNeSVq516in4se9KIqzFq1rO/6YIHrrr7AeykheZo=;
-        b=jD9yYJmRTExuWKOsR5PRBiDz4jETl2G1c9K5jCZZZFWSAsteM4Sf2lyUXg7bHg3w1N
-         b6j74AxijLTEg55vgMVLabasqNd7F9mIWYUOL5//YkD71iB4M58RTXfDUevpdzppzYpy
-         DFKOfTBo0QaNH7sQr4ArD9YuC5yIuChEK4GOoN+o7gjgjhnChxRQ8R7DjnpH0saxY6EH
-         wi1w/pB9EX5k7yYR0XsdEb1VY8lDrFb2m5nGu9FstOooiWxsKaK8DwSX0eUBLwT7tYdn
-         dCd2YqaOc2Rcp7DVSQsBIt40xXbFrqWNSMk19CE01FK4bpeViSDnijTg+Y5j0X2cJdsJ
-         2g2g==
-X-Forwarded-Encrypted: i=1; AKwUvBxfu/VG1db+jWROAhL2eWikUwCzypmBSeS//AAkxTsEzZo+7qXtb91ebTkzj/JXWyUoxsLWYQdrrGc=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z9e8+WPurWuJKUrbdM2wF9TGteHS7a3FmTE1lG84B5HjPbePhzR
-	B3uADiRCKEL5s/MhqOkB0xc2Gcz8D8X1vD9u7DDIZQwGsf1tLADLQ9ycyftxRa18k1qJEC6iwdp
-	Mar08MoaJ4BYXmu4sxtqU2lQpTGqt6ug=
-X-Gm-Gg: AYBFou36I60feLTxNSjakacKguHYzEuIMAhp1IPIezFgpldweefmPBfeRsT94OIt5rD
-	3twtb5XEjmOOQ7pvzQ6FNb6nRA/s5NcBzuLspVWJE5jq5N+bxPTMY3qF2EgLr0E+ywFo42nr06A
-	92HgzzlK4aPfQnRHaWHPkKAoT8TF9fQ0G/nl6+tphMRd+Ab0dyH4q1UxH/+8SOwpUPCc15ZxdC3
-	MdnCDhDiKzUvmbdWYQ08y7+h3pwxrXwCMAMMuJ0TtKuz1BndTI03/dxSgKhRIHI1mZPZSc+4po9
-	Ru/XrLyU799K8mdje4nF9nBJnfCCaTT55rRZmVxpFCQnS3tWxGl/BQyVcCOtXciMB8jVG4/v2gS
-	YB2jC10wOhFuY1maS0yTzZFiK9/KQnE0KVEbb
-X-Received: by 2002:a05:6402:1a23:b0:6ac:9a44:d404 with SMTP id
- 4fb4d7f45d1cf-6b4d32890a2mr9686232a12.0.1793878161823; Thu, 05 Nov 2026
- 03:29:21 -0800 (PST)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=fm2 header.d=invisiblethingslab.com header.i="@invisiblethingslab.com" header.h="Cc:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=fm3 header.d=messagingengine.com header.i="@messagingengine.com" header.h="Cc:Content-Type:Date:Feedback-ID:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To:X-ME-Proxy:X-ME-Sender"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm2; t=1793878334;
+	 x=1793964734; bh=a1JRX2cbKbfVTWq2yjK/5KKyBmq9J7XoKfZMuwx0m0I=; b=
+	A6AIn4nSZVovPDbMY0bW3flqtSmZiX584wVkSp4HBaCgntIvFu1ddLJJ8VviXlt4
+	HGFshRDNT19Pdm6ata0TUGnGJYuRGESHSMhuiWMm6K4iFWUMNrUZtGcFL+zkqfSl
+	RmuIjIfwDxXVLP6OuI9Tkw6EA7l8GYOHtZWIdCAEdu+CrjnNWB2DM9Xa6tlDKVng
+	eI8T9SDTxok0kv/N0HwuWM0Cw0aJqSNrpuDb/sJx2UcgPCHAGpOYzGuTo2Mz7j4n
+	Mrhuc+XWG+1doq/n4QB2KEJ6zUAwU/5s1Za692E5KyR0QtAnKMUw8xIMgd2ecjUw
+	WQbFZUhU+715nATr22kifA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-type:content-type:date:date
+	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:subject:subject:to
+	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
+	1793878334; x=1793964734; bh=a1JRX2cbKbfVTWq2yjK/5KKyBmq9J7XoKfZ
+	Muwx0m0I=; b=DO2cQbgQtCnIoeP2KaJBlCj6ejbQ5B+F5unMRLjDVNzIHbmRsRx
+	l85xdFIELX2FAVSC33FTRxZrn57hlCicoy8kl9F7AWTSxviQWUsHrxNkwPHZcHx7
+	LsHDQdW40HhSSPVu1gfDrTFkAtNwlNYb4sTiwbq8dEqsiqL3e8DUsEU8bQ+/Ebwl
+	XoPWO2c2w+QYCCy9CZEEewfR6vZYKPE5H0umQBE63RMXtz2a2KRd788guiNwSZ+0
+	oMYZ2849mg6TlusimkPyB5vIdxYAH6w0+QDBBTlUiT0wCfIC0gxzZpU6AuiToRuR
+	g9oeaI0V+csbE3AyNCVdK3ub3EEqBUgzGQg==
+X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-09;
+	repo=github.com/dkim2wg/interop; date=2026-11-03; sw=lmtpprox;
+	action=sign d=invisiblethingslab.com a=rsa-sha256;
+DKIM2-Signature: i=1; m=1; t=1793878334; d=invisiblethingslab.com;
+	mf=PG1hcm1hcmVrQGludmlzaWJsZXRoaW5nc2xhYi5jb20+;
+	rt=PHhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZz4=;
+	s=fm2:rsa-sha256:mw3oQwluO7QsJpMm59FJDYWB+mOEfkNrfB2m5h9vUsyLW15
+	PslJI2sjCIfF6cXvGg8rj4IEFPlpIT6z9/3WW1V56+A3yI6qcLrcl1DXeaQoHv3p
+	Sc+2tZpp+Tio9hM/H7V1g0FTSG90ot9bdeht+Fge9qIn9F3UOPLM3sheif4e8/wJ
+	Z59OvXkBxgdGxYYNWPLL6T3EY2rqlS8ZOiIlSiHtWq/FYq1ct2MrqCFEA0kB786L
+	jUiuW4eJ+Dn2bV1/m6VkppHtT3tGH52/6SkMBsWKei9MBDa7nTuuqY4zGsTXFd3z
+	OsfYA7U+3LdHEWpVwM7XY9KfBZmgW6S35/PgavQ==;
+X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-09;
+	repo=github.com/dkim2wg/interop; date=2026-11-03; sw=lmtpprox;
+	action=mi-m=1; hc=12;
+	hn=cc,content-disposition,content-type,date,feedback-id,from,
+	in-reply-to,message-id,mime-version,references,subject,to;
+Message-Instance: m=1; h=sha256:UT8tmUnCCBPVRQ9fzzCQr7dVIIWmjg3FP9Vive8QbHw=:uNueO9dY+F6vF5MRz5lv03CYPr0zlaCrPkPBi3Ed49E=;
+X-ME-Sender: <xms:Pmnsat5IjkW1dVShlKhqCLpKCQvCsU7PFBskDpVtQ-PvfuC5u0EOzg>
+    <xme:PmnsatJ-giKlyO8PpeVkt_z9wPsMhl5Pom8I2xsw8R1Vck6cvxhMSt2iGavYpaOSo
+    iLME8fpwxgoQklLc8DXgeieshgcl6MKgnIoFn1AGRTV4U3IMg>
+X-ME-Received: <xmr:PmnsamuHXOACVVAv7VcrAopvnJyN0YGS0Dql2szqlBE1OK2iOTtDeSn-f6NbFN-V8PVfRDJ_QUr6AsHCjUUIcNUYy7m-n7t845LJt8oGGcE>
+X-ME-Proxy-Cause: dmFkZTFCu93y14GmrmgAZ0vJGPo4iklgQsRmaz3FnJ0EzxxDDS07rYte67xnn/PPzTzpiD
+    +JBxCj+npRTTWUnEflBJ4iYtVkE1wvV43M/4/zW/eSbMiMchv1QECnwWGYELqwwy/6v8z+
+    YTqlXBL5W9QcyUQ6uzfKZhDAKQNScSdXS8KMGUpmQY7XCA8OI3aD2QQtA6qWDNcXuDQ0d+
+    z/vwsWOKlkg9ZQDNEimtUuu270H09tMhXBOu3aBu1zlAnUoCHeckQzZkwvE4PhXi2/gBrA
+    +cZkVn+e9mYAm5+abNdlptorXRoyj18cBThNex0QQMLYsh80/8WjnJyL+Z2lN3kxMnEDKP
+    +IAWqO/EOKqHGVNPq9N1PNCQ7w3dcgW7tDvmuC1pOK4ja+F5uKkh5f3wib0nwTUtoTs4X/
+    HgzEyOTYUmdS0uWu1RaBv61ylIGjINsZQF7YKr27g4LIXDTuiXQ8gjV4AvSKFwJOipjR8Z
+    YBdyPxja3XY9LYGzPSPzdfQu8eaEge8Cik4K2B37kBFy3gCrLtNCbwep7pprBgTyaa9xLM
+    nFnisbvQNR0xzLSyVuAf1vZSUMIwHQ4UXTCF7tfssNFEJo0u0Pl65TfASWbi6L7bKku1Yr
+    MnotRLW7RqpmRu3uHhbhjPtZFLsgsaQaw71P5h76SdQelqLZCZrYxLSQ0TLA
+X-ME-Proxy: <xmx:PmnsasI4Y9i86MKDdzeGUnYfJT-faAifWsgpBCHIlBDlZikfUcZhQg>
+    <xmx:Pmnsav9Kyh3sHV_eacSIPd25iBc120r3JgxvmMi6gko_g4QFNGKgFw>
+    <xmx:Pmnsalxo5AUnKOnm19uOSVb3mR2-sRoAhkPLdohCojCocDABmbcCJA>
+    <xmx:Pmnsas5yrSjYq5W7VWGCrAst1HZNL9VoOcOa5csBNyk9mDJfIcCdGQ>
+    <xmx:PmnsaswB0LtLEfNaRiplNeHqt--X7rJW9i2RK5Fm-Z-XGThJ43GlFSHZ>
+Feedback-ID: i1568416f:Fastmail
+Date: Thu, 5 Nov 2026 12:32:11 +0100
+From: Marek Marczykowski <marmarek@invisiblethingslab.com>
+To: George Dunlap <gwd@xenproject.org>
+Cc: Jan Beulich <jbeulich@suse.com>,
+	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Teddy Astie <teddy.astie@vates.tech>,
+	Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>,
+	Daniel Smith <dpsmith@apertussolutions.com>
+Subject: Re: [PATCH 01/15] x86/EFI: guard against oversized modules
+Message-ID: <auxpO1GTRFnei45o@mail-itl>
+References: <1b4c2bb4-118d-497c-8d7d-f3824fd61a73@suse.com>
+ <bc140f68-a6a8-48be-950d-813ea33de071@suse.com>
+ <CAFLBxZaruHp0XzV-8iJvfTwgLNaiALjFHNxL7jJMjtnWivf0KA@mail.gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <20261030151539.1872-1-luoyonggang@gmail.com> <d1db54c6-b802-676a-7779-0c2c63f5f807@eik.bme.hu>
- <aa70e94c-d9a8-41c9-850f-7ded87f7f327@oss.qualcomm.com> <aumYOBw-nKQAWdYK@redhat.com>
- <CAE2XoE8Xwevk523OfB+GgwbRu0iVnyD4VNOx81rj7J7F5aq=OA@mail.gmail.com>
- <54851326-3627-2b86-57d6-c338ed4e4b50@eik.bme.hu> <CAE2XoE_P2mZAT8wZwzFsTqJTK8nxNSSqJRrOM2T-AJkQjwJHBw@mail.gmail.com>
- <aunnuwhsx9ZOOXBX@redhat.com> <45433754-3cea-41fc-9f45-65a328d0efca@oss.qualcomm.com>
- <auxaPyRRm3MTBz1f@redhat.com>
-In-Reply-To: <auxaPyRRm3MTBz1f@redhat.com>
-Reply-To: luoyonggang@gmail.com
-From: Yonggang Luo <luoyonggang@gmail.com>
-Date: Thu, 5 Nov 2026 19:29:08 +0800
-X-Gm-Features: AclHuK-4rXijL_AUOdDONNduLekRdI_s2YHPupRTfowSD0vm5SlSlXiC8G5KfNY
-Message-ID: <CAE2XoE_=rb9rKyjVZXmBcAHU11554WTt0BkFoP6EAsDFQPEhiw@mail.gmail.com>
-Subject: [PATCH 00/15] hw: expand DEFINE_MACHINE to explicit TypeInfo registration
-To: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>
-Cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, BALATON Zoltan <balaton@eik.bme.hu>, 
-	"qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, Anthony PERARD <anthony@xenproject.org>, 
-	Felipe Balbi <balbi@kernel.org>, Aleksandar Rikalo <arikalo@gmail.com>, 
-	Philippe Mathieu-Daude <philmd@mailo.com>, Antony Pavlov <antonynpavlov@gmail.com>, 
-	Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
-	Stefano Stabellini <sstabellini@kernel.org>, Subbaraya Sundeep <sundeep.lkml@gmail.com>, 
-	=?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>, 
-	Max Filippov <jcmvbkbc@gmail.com>, Niek Linnenbank <nieklinnenbank@gmail.com>, 
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
-	"qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, Jean-Christophe Dubois <jcd@tribudubois.net>, 
-	"qemu-ppc@nongnu.org" <qemu-ppc@nongnu.org>, Alexandre Iooss <erdnaxe@crans.org>, Weiwei Li <liwei1518@gmail.com>, 
-	Zhao Liu <zhao1.liu@intel.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
-	Strahinja Jankovic <strahinja.p.jankovic@gmail.com>, 
-	=?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>, 
-	Thomas Huth <th.huth+qemu@posteo.eu>, =?UTF-8?Q?Cl=C3=A9ment_Chigot?= <chigot@adacore.com>, 
-	Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, Yoshinori Sato <yoshinori.sato@nifty.com>, 
-	Frederic Konrad <konrad.frederic@yahoo.fr>, Palmer Dabbelt <palmer@dabbelt.com>, 
-	Peter Maydell <peter.maydell@linaro.org>, Chao Liu <chao.liu@processmission.com>, 
-	Sai Pavan Boddu <sai.pavan.boddu@amd.com>, Alistair Francis <alistair@alistair23.me>, 
-	Huacai Chen <chenhuacai@kernel.org>, Aurelien Jarno <aurelien@aurel32.net>, 
-	Gaurav Sharma <gaurav.sharma_7@nxp.com>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
-	Richard Henderson <richard.henderson@linaro.org>, Alistair Francis <alistair.francis@wdc.com>, 
-	Artyom Tarasenko <atar4qemu@gmail.com>, "qemu-arm@nongnu.org" <qemu-arm@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-c1860d/1793878162-CF75B87B-8A61B36D/0/0
-X-purgate-type: clean
-X-purgate-size: 2786
-X-Spam-Status: No, score=-2.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY autolearn=no autolearn_force=no
-	version=4.0.1
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="aO8RRs/B/E5vsFXN"
+Content-Disposition: inline
+In-Reply-To: <CAFLBxZaruHp0XzV-8iJvfTwgLNaiALjFHNxL7jJMjtnWivf0KA@mail.gmail.com>
+X-purgate-ID: tlsNG-4011c0/1793878341-512C8CFC-3F0EEDC4/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 2125
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Thursday, November 5, 2026, Daniel P. Berrang=C3=A9 <berrange@redhat.com=
-> wrote:
->
-> On Thu, Nov 05, 2026 at 12:27:18AM -0800, Pierrick Bouvier wrote:
-> > On 11/3/2026 5:55 AM, Daniel P. Berrang=C3=A9 wrote:
-> > > On Tue, Nov 03, 2026 at 09:48:44PM +0800, Yonggang Luo wrote:
-> > >> On Tue, Nov 3, 2026 at 9:23=E2=80=AFPM BALATON Zoltan <balaton@eik.b=
-me.hu> wrote:
-> > >>>
-> > >>> On Tue, 3 Nov 2026, Yonggang Luo wrote:
-> > >>> That means exposing all the boiler plate for all machines other tha=
-n the
-> > >>> simplest case. I think it would be better to keep DEFINE_MACHINE_EX=
-TENDED
-> > >>> but maybe rethink the existing wrappers and drop unused ones and ma=
-ybe add
-> > >>> new ones that reduce the usage of DEFINE_MACHINE_EXTENDED but still=
- keep
-> > >>> the boiler plate hidden.
-> > >>
-> > >> Thanks, I'll go this way, remove unused macros, and keep DEFINE_MACH=
-INE_EXTENDED
-> > >> and extend both DEFINE_MACHINE_EXTENDED DEFINE_MACHINE supports
-> > >> "targets" or "arch_mask" parameter.
-> > >
-> > > Given that we don't need to do general per-arch type filtering in
-> > > QOM, we could just move 'is_available' out of TypeInfo, and into the
-> > > MachineClass, so it is a regular class level property, which can be
-> > > set in the class_init methods, and thus avoid any changes to the
-> > > DEFINE_MACHINE macros.
-> > >
+--aO8RRs/B/E5vsFXN
+Content-Type: text/plain; protected-headers=v1; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Date: Thu, 5 Nov 2026 12:32:11 +0100
+From: Marek Marczykowski <marmarek@invisiblethingslab.com>
+To: George Dunlap <gwd@xenproject.org>
+Cc: Jan Beulich <jbeulich@suse.com>,
+	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Teddy Astie <teddy.astie@vates.tech>,
+	Roger Pau =?utf-8?B?PT91dGYtOD9CP1RXOXVic09wPz0=?= <roger@xenproject.org>,
+	Daniel Smith <dpsmith@apertussolutions.com>
+Subject: Re: [PATCH 01/15] x86/EFI: guard against oversized modules
+
+On Mon, Oct 12, 2026 at 11:12:44AM +0100, George Dunlap wrote:
+> [Re-sending from @xenproject.org, since my other email bounced]
+>=20
+> On Mon, Oct 12, 2026 at 9:19=E2=80=AFAM Jan Beulich <jbeulich@suse.com> w=
+rote:
 > >
-> > Some cpus need it also, and it's used for filtering purpose at this tim=
-e
-> > (to avoid duplication at registration). We already depend on this behav=
-ior.
->
-> Can you give me more info on the problem with the CPUs ? What cases
-> have duplicate class names with CPUs ?
+> > x86/EFI: guard against oversized modules
+>=20
+> Nit: This repeats the subject line.  `git am` of this has two identical l=
+ines.
+>=20
+> > module_t's mod_end field (which we repurpose to hold a module's size)
+> > cannot hold values 4Gb and up. Don't let truncation go silently.
+> >
+> > Signed-off-by: Jan Beulich <jbeulich@suse.com>
+>=20
+> With the repeated subject line fixed:
+>=20
+> Reviewed-by: George Dunlap <gwd@xenproject.org>
+
+Acked-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblethingslab.com>
 
 
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
 
-Hi, please take a look at this
+--aO8RRs/B/E5vsFXN
+Content-Type: application/pgp-signature; name=signature.asc
 
-https://lore.kernel.org/qemu-devel/20261031164009.2048-1-luoyonggang@gmail.=
-com/
+-----BEGIN PGP SIGNATURE-----
 
-Also the single-binary RISC-V patches also faced the same issues,
-trying to access
-the target_info() in class_init that can be also avoided by this idea,
-the bucket TypeImpl .
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmrsaTsACgkQ24/THMrX
+1yyOXgf+OqB5fjGY/hqFc5mZnv+qtAtmYEc4k14K8OIT0jJHnU0TNaKo6xYdmXyg
+JcyD6DU62OsW3SFzeN8/paS86/8OhbzybRgb6Sh5p1wVAnvZBjvN7rMfayQJzf4z
+v+lBhmVwFKAvHRcPWuARa42ZZcbcbxjxeD+qgGO061T/yec6H/F36eAAlpdJBC19
+007zNc1zicH2dKBiAdYqkPhHCGrsuTJy/1J1jWHvDd5Cyz1NHjSTvZpvou23hAUE
+cLzdWGHs4KF2MkXsEk0R4dffVAvv2DAye+jdhi/Ob/1DFFIIzbI5i8CQCjXlQRY8
+NEcu/UZ7WY7QJ8Th0N1Pr27czDzjjA==
+=1E4D
+-----END PGP SIGNATURE-----
 
-The patches is at:
-
-https://lore.kernel.org/qemu-riscv/20260916-hw-riscv-cpu-int-v4-0-babc367b6=
-0f5@rev.ng/
-
-The riscv machine  need choose different cpu machine according to the
-target in class_init =EF=BC=8C
-
-specifically
-https://lore.kernel.org/qemu-riscv/20260916-hw-riscv-cpu-int-v4-1-babc367b6=
-0f5@rev.ng/
-
-https://lore.kernel.org/qemu-riscv/20260916-hw-riscv-cpu-int-v4-7-babc367b6=
-0f5@rev.ng/
-
-By the introduction of TypeBucket idea, these all can be resolved. and
-we have no need to rename
-The QOM typename at all.
-
-
-
->
-> With regards,
-> Daniel
-> --
-> |: https://berrange.com       ~~        https://hachyderm.io/@berrange :|
-> |: https://libvirt.org          ~~          https://entangle-photo.org :|
-> |: https://pixelfed.art/berrange   ~~    https://fstop138.berrange.com :|
->
+--aO8RRs/B/E5vsFXN--
 
