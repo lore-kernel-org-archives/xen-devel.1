@@ -2,75 +2,75 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7597E606A338
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 01:35:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 48F86606A32C
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 01:35:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=ford.com header.i=@ford.com header.a=rsa-sha256 header.s=ppford header.b=nTjDpRcs;
-	dkim=pass (1024-bit key, unprotected) header.d=azureford.onmicrosoft.com header.i=@azureford.onmicrosoft.com header.a=rsa-sha256 header.s=selector2-azureford-onmicrosoft-com header.b=lq4Xed6L;
-	dkim=pass (2048-bit key, unprotected) header.d=saarlouis.ford.com header.i=@saarlouis.ford.com header.a=rsa-sha256 header.s=ppserprodsaar header.b=glYqaB/k;
-	dkim=neutral header.d=ford.com header.i=@ford.com header.a=rsa-sha256 header.s=ppfserpocford header.b=RINZk+Xq
-Received: from list by lists.xenproject.org with outflank-mailman.1473267.1680972 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=ford.com header.i=@ford.com header.a=rsa-sha256 header.s=ppford header.b=iB1XS8v+;
+	dkim=pass (1024-bit key, unprotected) header.d=azureford.onmicrosoft.com header.i=@azureford.onmicrosoft.com header.a=rsa-sha256 header.s=selector2-azureford-onmicrosoft-com header.b=AbpBsRMV;
+	dkim=pass (2048-bit key, unprotected) header.d=saarlouis.ford.com header.i=@saarlouis.ford.com header.a=rsa-sha256 header.s=ppserprodsaar header.b=BOq1Yb6p;
+	dkim=neutral header.d=ford.com header.i=@ford.com header.a=rsa-sha256 header.s=ppfserpocford header.b=CYWSoEaX
+Received: from list by lists.xenproject.org with outflank-mailman.1473321.1680982 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOmNw-0003XN-9v; Thu, 05 Nov 2026 01:35:24 +0000
+	id 1xOmOG-0005kX-Tr; Thu, 05 Nov 2026 01:35:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1473267.1680972; Thu, 05 Nov 2026 01:35:24 +0000
+Received: by outflank-mailman (output) from mailman id 1473321.1680982; Thu, 05 Nov 2026 01:35:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOmNv-0003W5-Vk; Thu, 05 Nov 2026 01:35:23 +0000
-Received: by outflank-mailman (input) for mailman id 1473267;
- Thu, 05 Nov 2026 01:35:21 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xOmOG-0005kF-Pc; Thu, 05 Nov 2026 01:35:44 +0000
+Received: by outflank-mailman (input) for mailman id 1473321;
+ Thu, 05 Nov 2026 01:35:43 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <dmukhin@ford.com>) id 1xOmNt-0002r1-Cy
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 01:35:21 +0000
+ (envelope-from <dmukhin@ford.com>) id 1xOmOF-0005gD-HU
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 01:35:43 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xOmNs-00G6d6-Ox
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 02:35:20 +0100
-Received: from [10.42.69.11] (helo=localhost)
+ id 1xOmOE-001x5b-UL
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 02:35:42 +0100
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <dmukhin@ford.com>)
- id 6aebdd50-8faa-0a2a0a5109dd-0a2a450ba0fe-6
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 02:35:20 +0100
-Received: from [148.163.143.241] (helo=mx0b-00498f03.pphosted.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aebdd3a-2eae-0a2a0a5409dd-0a2a4509db66-22
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 02:35:42 +0100
+Received: from [148.163.146.23] (helo=mx0a-00498f03.pphosted.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <dmukhin@ford.com>)
- id 6aebdd57-b7e8-0a2a450b0019-94a38ff18596-3
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 02:35:20 +0100
-Received: from pps.filterd (m0367129.ppops.net [127.0.0.1])
- by mx0b-00498f03.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6A50n3kW891327
- for <xen-devel@lists.xenproject.org>; Thu, 5 Nov 2026 01:35:19 GMT
+ id 6aebdd6d-be1a-0a2a45090019-94a39217d2ea-3
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 02:35:42 +0100
+Received: from pps.filterd (m0367123.ppops.net [127.0.0.1])
+ by mx0a-00498f03.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6A50mfSb2568379
+ for <xen-devel@lists.xenproject.org>; Thu, 5 Nov 2026 01:35:40 GMT
 Received: from dm1pr04cu001.outbound.protection.outlook.com
- (mail-centralusazon11010003.outbound.protection.outlook.com [52.101.61.3])
- by mx0b-00498f03.pphosted.com (PPS) with ESMTPS id 4hr99fkx66-1
+ (mail-centralusazon11010040.outbound.protection.outlook.com [52.101.61.40])
+ by mx0a-00498f03.pphosted.com (PPS) with ESMTPS id 4hr8vmvb53-1
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 01:35:18 +0000 (GMT)
-Received: from MW4PR03CA0349.namprd03.prod.outlook.com (2603:10b6:303:dc::24)
- by IA2PR16MB6450.namprd16.prod.outlook.com (2603:10b6:208:4b5::9)
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 01:35:40 +0000 (GMT)
+Received: from PH5P222CA0008.NAMP222.PROD.OUTLOOK.COM (2603:10b6:510:34b::10)
+ by MW4PR16MB5087.namprd16.prod.outlook.com (2603:10b6:303:1be::18)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.10; Thu, 5 Nov
- 2026 01:35:16 +0000
-Received: from MWH0EPF000D8952.namprd05.prod.outlook.com
- (2603:10b6:303:dc:cafe::95) by MW4PR03CA0349.outlook.office365.com
- (2603:10b6:303:dc::24) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.8; Thu, 5 Nov 2026
+ 01:34:29 +0000
+Received: from PH3PEPF0005961D.namprd05.prod.outlook.com
+ (2603:10b6:510:34b:cafe::a4) by PH5P222CA0008.outlook.office365.com
+ (2603:10b6:510:34b::10) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.592.10 via Frontend Transport; Thu, 5
- Nov 2026 01:35:15 +0000
-Received: from mx0b-00498f04.pphosted.com (148.163.138.245) by
- MWH0EPF000D8952.mail.protection.outlook.com (10.167.249.218) with Microsoft
+ Nov 2026 01:34:28 +0000
+Received: from mx0a-00498f04.pphosted.com (205.220.161.53) by
+ PH3PEPF0005961D.mail.protection.outlook.com (10.167.243.27) with Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.592.5
- via Frontend Transport; Thu, 5 Nov 2026 01:35:15 +0000
-Received: from pps.filterd (m0426315.ppops.net [127.0.0.1])
- by mx0b-00498f04.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6A50mM3K3108343
- for <xen-devel@lists.xenproject.org>; Wed, 4 Nov 2026 20:35:14 -0500
+ via Frontend Transport; Thu, 5 Nov 2026 01:34:27 +0000
+Received: from pps.filterd (m0426318.ppops.net [127.0.0.1])
+ by mx0a-00498f04.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6A50nw2C2971351
+ for <xen-devel@lists.xenproject.org>; Wed, 4 Nov 2026 20:34:27 -0500
 Received: from smtp-us.ser.proofpoint.com (pmta-usw.ser.proofpoint.com
  [50.112.124.217])
- by mx0b-00498f04.pphosted.com (PPS) with ESMTPS id 4hp33swb03-4
+ by mx0a-00498f04.pphosted.com (PPS) with ESMTPS id 4hnxs4nrk8-2
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 20:35:14 -0500 (EST)
-Received: from localhost ([19.12.92.222]) by cmsmtp with ESMTPSA
- id OmNjxjTfWf5COOmNkxlP9d; Thu, 05 Nov 2026 01:35:13 +0000
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 20:34:26 -0500 (EST)
+Received: from localhost ([19.12.76.222]) by cmsmtp with ESMTPSA
+ id OmMyxjRSdf5COOmMzxlLKX; Thu, 05 Nov 2026 01:34:26 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -82,23 +82,23 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=ppford header.d=ford.com header.i="@ford.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=selector2-azureford-onmicrosoft-com header.d=azureford.onmicrosoft.com header.i="@azureford.onmicrosoft.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"; dkim=pass header.s=ppserprodsaar header.d=saarlouis.ford.com header.i="@saarlouis.ford.com" header.h="Cc:Content-Transfer-Encoding:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=ppfserpocford header.d=ford.com header.i="@ford.com" header.h="Cc:Content-Transfer-Encoding:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ford.com; h=cc
 	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=ppford; bh=qOs
-	JRjyoDQvTbvcH6l7zxEClwnEuff0f3kYC5ZzqB5o=; b=nTjDpRcsvmErmw/Fkky
-	peUsxVgO8YUJBflteWCSL+R9kQArZdMcqgPnNve1qHSz7rehxY23oKiKRUqHiXX1
-	0q2jp9ugJYfHuLSU7IJAaWhHpTf+bWgHgweRULdVdN/m1/vv+75QjQvriBBJg6dP
-	o8J9xunZ+VbBvWP/MqHOyOobSW4cGp8qzUjzaN6tGCLw3dPiMVRbc0dlepcwCSZu
-	kx1yHQmoKfDnX8ZDy/kenryRCGv1J9vKvAPcsRjZQV3+1dtuchzhRD0jTjMdrrpX
-	5mF1OqZ4B9/uZn3ewJdQ9C4zMh7SFKsApEM83kBZEXLx3oBMaR9sT0wHsiqqtYVx
-	CoA==
+	:message-id:mime-version:references:subject:to; s=ppford; bh=UnF
+	VM1D32Q8PVzU9oZlOxLlg1sYnLTK8jp9jrh0Jn4Y=; b=iB1XS8v+q4RL1hCmtMR
+	4YaHgthfisWlBlaL5J2YLkStDJNWyjjciwgvuXRgr/gqNLsh9HicyXp0+SVVuN5M
+	haSlYcwS0ev0efdJA6pSJg0gq4vLMiLlrnu1G1CH6aq6u3qu2HUvFKlEWBSzd6en
+	QBTMY6W/PZMGkL8ocvoXEDdDWPyWlGaMff7ZG8F3eADLbeX3lY0gKtH4YLxeC/PR
+	YUXATv/e+S22chZ0hTo4DfohtCfOTbhj4ZWI8FP7QQ8Iwoooeqi7WT/h4+e8XjWG
+	3uKhmquZcGZSYaYensGfw9rXJl717qeZKgRrVyfCXwwrBMSZ3r7moPLFRaY/UEVG
+	zyA==
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=BLk86YELZ8917nLMLUuG3LbDdyoB8iXkimCYHPqkVQ+R6aI0kGMpxWhiJSi8/STbWyog6wpLEvpo9P4pBBnru8Gc+2CAg+nvZJe0NXN7cpyunyJQv/yaazmjgHfojAqSlBxh621X4DKkD5pu2+uDQa1xD5czQ4pR2tVhFgDbZepI7C5HJnSdBUklBWyWsSmVe1Xxg5+2/1ZMDNgoq4O9ysjtkHqAV8yfLBrDc8JXOi8isPV9SZAcFsdlOC635y7p8cqmZxg4wPbXCXihxKM21aG0Es8Dm9NwFwir8D4SmLVkMccERMlB7TKvlHTW1bMlbTgx1YJxc451FbZzesHkPQ==
+ b=Qk+IM3DLHYGiA00opPW3/OfLKt5XNOS0voGkrnZnDePm1mFUOxtpFZ9utrjp+71YEe1RfPSk6Wyb7jQSDc9Cm9iRfWivCxF2xUhNY53mkp6pmGJN2JjwpGRqWRcqXfR6bZjH7Vg2L7PdTiiWtuHzdXGDI60Ng12ZsTDVnjWuYYqfZf8TS7a4sTFWIW55RJjeyAmTI0y6+HCj7MGbFefVPaJIViu2XKFFVnWW8YEFtpwTTQBq3U3+SkYCXJm3f6zXBigiQ/SpJGrT7gHge+PKJ6U/b6XcT6+HxKfUP6JGKJc8Og0LOaWOPsYcHOCYpu0AdZERi9lJ0GVvlXe+GCKgpQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qOsJRjyoDQvTbvcH6l7zxEClwnEuff0f3kYC5ZzqB5o=;
- b=inahtb92IkcpRKSzGkgy80djss6vPAyuIZ6B11StVcXVyYwBkElyy8mI97EuTsxCfdHo5NNlxRR/8IDDdBaGe+ZWXmkPjDFFoTauEE9knyGwMEpRqJ4sR48/Sa8Ky6/UgJgVO59tDKwjs6xxZg0NtvcpfZZdf/65+FssSNXYEDxlBL69DtI6hevOti+DJaT+P48nK3VGO4Oxsr/WOxGkAhc643wutgE+gN058BMDXSxu2l34cfSPO/mwc5RECMF4O22QafX7rdksaafdxneVxul54C64t1bOtMfIfPUl/dsuOqP7gtnSX3Ph+aYXZwe0OSsPx/yGEZDdSFJufWNRSQ==
+ bh=UnFVM1D32Q8PVzU9oZlOxLlg1sYnLTK8jp9jrh0Jn4Y=;
+ b=WT9gSu6eRmP5lypwNONvIoGevIyWoab+h24iU72lA3lA8b/lwQTaWkflWouqTFY/XosVSJeMJGheiVPPpp8UdjsbNONX8j/kIpWBhev3KEEIIP5Zw1BiFdozvQ6a3R28wsASswXMaUJZ78N6ZkoSRaDVT7d/iEjELRlWwJn69qFNnrnhhSLpMvdwj2mzunBaexLNLEFQy8IfsgXiYogyASJgXPLs9IhegmFPOg66l8liRkw9DeomgvO0b0kIEhuh5mhmAGK6zWuydFKbqhVLjsKGZlREJbOLqf8VRx8GPnDKJ24qbuwttvhkF7l12FRRMwALAdM4p27jdNag3H+xvA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 148.163.138.245) smtp.rcpttodomain=lists.xenproject.org
+ 205.220.161.53) smtp.rcpttodomain=lists.xenproject.org
  smtp.mailfrom=ford.com; dmarc=pass (p=reject sp=reject pct=100) action=none
  header.from=ford.com; dkim=pass (signature was verified)
  header.d=saarlouis.ford.com; dkim=pass (signature was verified)
@@ -106,46 +106,46 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=azureford.onmicrosoft.com; s=selector2-azureford-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qOsJRjyoDQvTbvcH6l7zxEClwnEuff0f3kYC5ZzqB5o=;
- b=lq4Xed6LegmkAeEemHuc6B+FS0hYiOSlm8SSYpG7dBsxubwdqdJ3WhrxkN2cgf0bUwaw5vsx6YguZ1wAdofPAG4kkXFQFvlSytQ51QNPXI5vsSnrIedt0JGzeoMqrtuwXOh7gsHn8tmSgTulUiDmTOucdZsJyfwTZWuxGNYbifc=
+ bh=UnFVM1D32Q8PVzU9oZlOxLlg1sYnLTK8jp9jrh0Jn4Y=;
+ b=AbpBsRMV0hYrfS8NqJyesf48bbQfTCmoSVYuUqP7/j+15UC/OCCIJJPwUhz/C2MPsXIKpy+p3iVpauwW87d2awwdJGED1bH8yoe5C45E85BA57mP9QWrxwmioPwEyWi9ROTPR1BfxhKIMzm33lRS70tkk3qjAcRRgMXL6gCgbh8=
 X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 148.163.138.245) smtp.mailfrom=ford.com; dkim=pass (signature was
- verified) header.d=saarlouis.ford.com;dkim=pass (signature was verified)
+ is 205.220.161.53) smtp.mailfrom=ford.com; dkim=pass (signature was verified)
+ header.d=saarlouis.ford.com;dkim=pass (signature was verified)
  header.d=ford.com;dmarc=pass action=none header.from=ford.com;
 Received-SPF: Pass (protection.outlook.com: domain of ford.com designates
- 148.163.138.245 as permitted sender) receiver=protection.outlook.com;
- client-ip=148.163.138.245; helo=mx0b-00498f04.pphosted.com; pr=C
+ 205.220.161.53 as permitted sender) receiver=protection.outlook.com;
+ client-ip=205.220.161.53; helo=mx0a-00498f04.pphosted.com; pr=C
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	saarlouis.ford.com; h=cc:content-transfer-encoding:date:from
 	:in-reply-to:message-id:mime-version:references:subject:to; s=
-	ppserprodsaar; bh=qOsJRjyoDQvTbvcH6l7zxEClwnEuff0f3kYC5ZzqB5o=; b=
-	glYqaB/k02mM8btyH77b8quWiXXSX9bSyGy9U/v8NumopMGOn37wSE0EboWJixpU
-	VcLGlJycaRbTdGCU6AWaQnqwNEQI/srJ4kmqDh+apMsEF2x/soJgw/uYstz1HERM
-	aVPZjojgsPmUK9HHUgKOG48bt3nJBlw3f9du9qSVD3mP2iZ6u1U3Xow2Y93Maiid
-	VdS30+UU9vNP3DH+YoA053+9qo1qvTNtwspbCRbcC7j/Wc8O16NFmpkSexDY6oTf
-	rCQPL5Mzakommu9ntcpjdv9xw7DOdk4do+10Daawoyv2MIDL7lGvXc5FhcTyxp20
-	wpEuV6YUQ2ecaF9ONAZk7w==
+	ppserprodsaar; bh=UnFVM1D32Q8PVzU9oZlOxLlg1sYnLTK8jp9jrh0Jn4Y=; b=
+	BOq1Yb6ptAIG+gnm6XL1IMtAYZC4u3Bim2AExV9G3vXDColQaTGs441u56riVzBg
+	f3NcUHxVilNxPSWIXHG6RWAarZ9xaE86LtRye3N5z4Ub30by0/Migi0/r8Mo8zh2
+	ajh7HVHxaiWdIw9dF93cDbVGE4ZaCPxZqG0nrvsgkJtvz5UWYXQOaV0BwmL8h/Yy
+	ybR+Oqr7AYDUZTOtc+N7d0Uy6lmiohPLiZ/CsmVRCpLsJ9AkBTrxL7hAQKSYqLaX
+	BYlUkoZxmPTFZQG8MpzfPSWYFyy7Qb8WYHGnZ/YwqJINWUgVTTq5Nj2b/OiNUqMS
+	HwM5xiEa/iG44ZNKt+AnTg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ford.com; h=cc
 	:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=ppfserpocford; bh=qOsJRjy
-	oDQvTbvcH6l7zxEClwnEuff0f3kYC5ZzqB5o=; b=RINZk+XqgyF0kROSQskOj6I
-	LLRo8pmro7z9aJ71UKiw6SSyzM/llY2P7xgktGa2nFcbf6n5hyQRJNHQVIF3y4i9
-	AyVIXPrzv/VlwS86zVQLwZ68y2Xa/x2FaE2ogDBwGtZx3mSu7ad5Jlz+b9eiOfVs
-	szGrCU31z7v18VRVKiW91jhEWt/yH8TkVplzsanGwQkxnUvHxJqS5F97V1Y1KY5E
-	K71dlcSmh9lRcSy90xn57yIl7UaqoTU2b8OqahETA93qyKXLxa2pL9QQ8CuuvpOi
-	ZH0wMbqFHZpusZ5EcVIzjqUJlQrV/xb0n1SZxBqb4XIw0eetSM7rJyvLNsthNEQ=
+	:mime-version:references:subject:to; s=ppfserpocford; bh=UnFVM1D
+	32Q8PVzU9oZlOxLlg1sYnLTK8jp9jrh0Jn4Y=; b=CYWSoEaXv6AkQV8ZqfQBNCZ
+	k7WErDch4E+okcrFFuXC8OGVBxIYgczOx6aREEaQ+YS5ku23xWOstPhezXcwCiaj
+	882mhRi0gCWl3HZMdzLjjJeEZLgn8AZaI3yWg0iXgNF2llshxGeg4Le0Ice1PM0C
+	iilFJFG36S+nGt11mS7PJ2aN0YGuRrGkJbwAiG4LJsI7PhrsRTxqzAtzODVvpc13
+	G8Qc+0teKAIBupqp80NneXuPK4b6/dmj00QPBTW4tQC1NXgonGfAKtr9y5QYxDY2
+	JzmxNhu4mD5eLvaLYPsuDujHaI+Y/mEuT4mw/iGggjg90sUMC7tal+Y43+dH7AA=
 	=
 X-Mailer: SER-76bead168636dc6ed1c9e51ce4dea80dbdd4163750742b614a4d871e565792b7
-X-Cloudmark-MID: OmNjxjTfWf5COOmNkxlP9d
+X-Cloudmark-MID: OmMyxjRSdf5COOmMzxlLKX
 X-Proofpoint-CID: eb09f7eb-2dc2-34ab-a188-7b293c1db1fe
 From: dmukhin@ford.com
 To: xen-devel@lists.xenproject.org
 Cc: andrew.cooper3@citrix.com, jason.andryuk@amd.com, jbeulich@suse.com,
         roger@xenproject.org, teddy.astie@vates.tech, dmukhin@xen.org,
         Denis Mukhin <dmukhin@ford.com>
-Subject: [PATCH v1 27/28] CHANGELOG.md: add note on initial SVM AVIC support
-Date: Wed,  4 Nov 2026 17:33:44 -0800
-Message-ID: <20261105013347.719392-28-dmukhin@ford.com>
+Subject: [PATCH v1 07/28] x86/hvm: avic: add VMCB state initialization
+Date: Wed,  4 Nov 2026 17:33:24 -0800
+Message-ID: <20261105013347.719392-8-dmukhin@ford.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261105013347.719392-1-dmukhin@ford.com>
 References: <20261105013347.719392-1-dmukhin@ford.com>
@@ -156,74 +156,73 @@ PSER-M365-App: SER-APP
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-05_01,2026-11-04_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
- lowpriorityscore=0 phishscore=0 adultscore=0 spamscore=0 malwarescore=0
- suspectscore=0 bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+ malwarescore=0 bulkscore=0 phishscore=0 adultscore=0 suspectscore=0
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
  route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610300000
  definitions=main-2611050005
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MWH0EPF000D8952:EE_|IA2PR16MB6450:EE_
+X-MS-TrafficTypeDiagnostic: PH3PEPF0005961D:EE_|MW4PR16MB5087:EE_
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: a13d5a9b-10cc-4791-769a-08df3add0ae4
+X-MS-Office365-Filtering-Correlation-Id: 1df2eed9-27af-495a-854e-08df3adcee59
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|23010399003|1800799024|36860700016|82310400026|11063799006|56012099006|261021121427099003|261022105027099003|261009223027099003|261102123227099003|261026121527099003|261026140227099003|261028144727099003|10067099003|18002099003|22082099003|13003099007;
+	BCL:0;ARA:13230040|1800799024|23010399003|376014|36860700016|82310400026|261009223027099003|261021121427099003|261021123027099003|11063799006|56012099006|261102123227099003|261022075727099003|261026140227099003|261022105027099003|261026121527099003|261028144727099003|10067099003|18002099003|22082099003|6133799003;
 X-Microsoft-Antispam-Message-Info:
-	gbDXFJL6Q0SKSXpQdEnWwrg/HufYP0SHYvfugKZWgBRCp4BtpfpGtwZG/X0oTla1FQnwhJ8Fqa0pJxdqxqraWa8NbVBj+le2CK+cs49ZxjN2VkX3zTPSu/AlLjtyXLf+vz8Wzgi/HIMwQotlRSmnQv8LdPSEGg938fn9WGJnyOEJULQ3gpw4W9J7vmLSmliIB2VEnAGe2LUbazL/cw1xLBUnL1JnEWcGthdgvm5DkLgsVEyu+tkeCfR/Y+uAczIGXLbOn0Ht8bWkg/lTonFJoOpCjG8xY0bvKt1iMvPv8oMulNYII7GRY5A51lU/nUQJCLSr9AENlqjInfZ9K23EIT9N6p8vhMvYzg6Ft45ebWdVY9jABA5fkTgbvsQQ+D/4qlRMi9rRYCHlLNSehyLx72mISk9pfcgTch8KkkjdaO0QCjS1ZEcSWZZMlPCSJTwMU5asZFepJG7rxly87gjFew4qxklZPT8QDYDjRGX+Ow3qW5/HC8uC+OsNu6ETSiRGEv6yYEBQecxoEfXv7I1Iu6ERKoZg9u3bzFkii8JVsh1Duwmkywm4PzRKmv91u2fobqPyga04nfoXqMXvkH1VCxGqpLjELf2mPoHCRf2k+fmAFpzQN+hch2KfmqLOe1wcQdswZzQqXx1mhlXL1T3ouQWc07Btb4UChqOhmv3k6N4=
+	url9H1lcwI83DpUkLbesMo6R/4ZsxSSmBpzDEQhT72M3GddXUA75ov3IiEx/SHP/JNuY3yfJULV032Hnvk0KXg+pEFcSHDCcABuSd4TXXFSm0agfGXXP9Dkzjkviqo9xleDkzqZTgxcPVlJc8KBH4wYpf7A8Qt3To8JM4f33pQ7P+hiw4GfVMBFk5o8gRrvlMeaqcEWu5DbmfO7Z36ZYNzBiADVO7BakGoQ1DLV60GcKVQLUWGIgdxSboWxvJo+0ZkMIb2w64eVtVnRQO5IMotOhYF1k1DuKOV6KUrrpaL3nLJ2pzjWYJGDiUjEnO5iZsYh2DbcRVVkKBrtUpQ10Rl5Q/OqoIWOHYXxRGUWVfps2sfBk2hp0K4ZAVfgUoBnRJ19ZqGbrj+HjrTZYr2lOKBsSdGE0LytJGXPVgg49hVpB/Z7GTktKZu+Sp2uAukgMkz8BMzdCjgzJBg2vkQOjjeQqidJnnNe5GwVgKReELEZp2k6MAMyjjl0ZIsqzkkeg/CIrd7+tGkJVHcocEgFwTteRSflO0sJ0MHh+Fe31+7Wn9u2koUr/8oNoiCFLrzQt1KIjFLGbwM36/m17tZNSwV+XlNLoariDUQORTza3e4OVtJnXZTvv6VM62++QVnn4rzV6kez1er292+2lkTe1dJt+Lc8fXNsj84aVz0HEGquviqyxl3iuxNXt7Zn1tG/7TDNqOGVEG9jgnJhDEKZYyg==
 X-Forefront-Antispam-Report:
-	CIP:148.163.138.245;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mx0b-00498f04.pphosted.com;PTR:mx0b-00498f04.pphosted.com;CAT:NONE;SFS:(13230040)(376014)(23010399003)(1800799024)(36860700016)(82310400026)(11063799006)(56012099006)(261021121427099003)(261022105027099003)(261009223027099003)(261102123227099003)(261026121527099003)(261026140227099003)(261028144727099003)(10067099003)(18002099003)(22082099003)(13003099007);DIR:OUT;SFP:1101;
+	CIP:205.220.161.53;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mx0a-00498f04.pphosted.com;PTR:mx0a-00498f04.pphosted.com;CAT:NONE;SFS:(13230040)(1800799024)(23010399003)(376014)(36860700016)(82310400026)(261009223027099003)(261021121427099003)(261021123027099003)(11063799006)(56012099006)(261102123227099003)(261022075727099003)(261026140227099003)(261022105027099003)(261026121527099003)(261028144727099003)(10067099003)(18002099003)(22082099003)(6133799003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	VfKBbbVrlWkMs+t+WSlYvdYk1JZt98T8bKBBw3X+1ul3suPOEXyM4R+d7LXeUGCYXBJPwJTdzHX0WC1n6oAn8RZoMD6OkcVezjA4907JXAPhBeiEdg+7syobE0e7ICrhVvbTqKuMn79xBmJp9mxbfnnjA4zrvKEYR+s23M2MVDyYAPgwTILNImddxe4UptNb5sciUC91Hl6MBigd993dFZk8i33oQpthpueqGCzJpgq4AKx/nFizsOtVyBOwVjBLL7hX68rlRHoyfLwhhenDtISkr2oRSNZkdYq/Z4aH7KUTVui0HHbyZ341xCRvBMsiisyx3qNgexAoEOvUMVnwHa5jQOkfx3CNVSViSXtah7Be+t/5d7pe+8NZlxMmqbNZa2LaTBVkb7C2BXLS9Nf3S6yBkCq+upzeMGHanZS0JiYn35Bp48IOy1ftHyYyTuB0
+	zNqdHCnoWprRZ99eOK2AISB6i8gx/q/piUykbQNBTW7PTX9352NBcBQlRni3qBKbV/WxAgsC6URsxh9c+jsCDKQC8TZ2glcCbtRmDVOGlv+b0j8xvEXEF3wLi032zcFXtWljkEveC7/Gogy83wfeVkk8YQhS3KgPFOnEqmkqjS6XX85wW+v5rvNOqRMZm3Ka5Tyxc+pvu/36u963ctz3nlsXluX9gnwj6Ux5o+wbvJYuZ5694joCRu9l2P2eWiyk0tRWlMm6rR95wP05IwGuOdN7deolY1Mz8aElESHyv5izqQXogoKgmyASkALXhVCt6qqqFLtmroj71wh95FZ5D42mtz0wzyaKvC4tUKqK8kXcTqq31JMPgK+mk6JihEPfbU3V5n9nMxIDdGywpmahBD1SV7T0svbPi+d8khaAKYYilK6fTte95NSxXhwzXcMP
 X-Exchange-RoutingPolicyChecked:
-	FHZcIaJWG66pKtNSxLjT+YVIGXurYhX3nuDVyZ9D3ewrBwkJeMJ7v4ENXjkH4zv0DA5OVGTDqtlldoYmLRiVLKVh9SqiTqTXMqK/3u0W6KsFO7SmlmNIPpHFlK4dZmdDlnN9ngdq6/2z6BPz/Xn5HV86x8cKrToDlsQ/jZlpIB+hhH6RL2uZUEa7zXz6xe3EBPxivW8Xzf1cCl0kl4qTTDSxGDYseR47QWDzIh1TTXT/Rq9BGfW9VsMkCOA+RPK7b+esxdqwY47dQkrzUKCTSS3L41EXZcNI9oGgGp9ALuhXx/xFIsoDcJkAuQ+nF0rjXnbYurOcmOfhRTsWFNL8Lg==
+	CQIvjwWCwe3UTu3zkEO9lMnk4BQb2oh9rx9Khu9Eq7BISlTenlzplfCvqvBBj7efMjkB2KDB9S11SLjcxWfJ8Ugu/og/8QZAopJxsHy7pA32xBCJTAPae9ETDqCasJh9DNPGnijkXMJQ7Fpvwxcf8ThQXa49xiwc6bBOcU8EMC25TucaIS+9wkxwA2rjCHEWEhqPffvD1w6gg4JJ3oCqCYi5crHfrJLK0aS4JzPBErcRHQ5oo3N7RgkRcnUITkwvA3o7lWJdg54UHN7q6DlzCWvcG/cOebST6WhECiO6LoPE5IANYbS9cuseeSUoTk8pm1V21ZoTs0TzTc7r/qZSpw==
 X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
-	wYRJoBs01WEaea/qjTtoklUAyexLqpdnx/tpJhAoRqSptZ1NuVJ/Z/85uSl6O47xPfka8NkqZKEoaE5lqp+G3C+2/mRmHQXB3SVHqPC+XgJ8wDGYrvwKD/jRJJxDBCzVmMOC9WJ2hcUUbkplOkYmm6VTKTENU4dX3gO/NdNRaVu+B3NBf8UOfWhwjxqkk28ZqWTv+2gRG9qqSQU6aA0umBG3DaavWEXx8Q4SwrXCVa2XYrHUJeU/v++z9QMGxzxd4Qy92HPac81HSxRVzlVBGGnnHPWwSYFjqECDqG7ZM9TvMrSugzYoApvU/6jy3ucUaBPUM2j4aYzVdH9wFFz1rpkgDrDBLvzBI/pZ390Yrwl14SpGB8bGHuMHUClyNHXOSCkbCSo/fW5gt8yyZAz81tozrYofaDvPjZXW6DtemAiALyuYsoIGAyoTuM6iD5CaQS3aDdh06IE2VtBMWtt+t8qro4PZRxgNxVyIPEkzRachoR0ycK0+QpnLxZBJ0mYHVEAvRlHR1nrQl83yFEzUyJO+1LgSmx8yllkDeFrHak7jTDDc8r0kVRlll3+hal7myQ7q1DNgmEX20t8pk/3IDPvbrU1tPP8vgGHcxoxyk1kUJmsOPqDytbKcOvF5CUVYcsZPhXIWVDXitqZS0dDuEg==
+	/6F/wv8B4AnKh3+cTcWqODzwHgycO/RuJXVzp2SkwXeYDEPl3mNtl6YYpBNoV3bk1MRmv+hnfcOmCTJXNXlEbD4OnwM7jcrsU3EHIb2bnqgcmx0cXWilgNFAwXwy2GAQuev3fejF9V6IQkLYYH4JsQI6DnOox04zYYelk67Lk5/ec/rT++Tr8+Z+zvcNwFVURkiTnTVzpoDODLJOoPtMyxDUTUSkPNvSKpQIRC3PL4r55U5g7BTSIE75ajWzefOFhjCXg1+qwSisVvL56AmgMiLBwxGVn7UY9t/dgYn4gDevd+mHa2BxIXGLcnQWt3zH6X3Qt9RZTp2qH6WPKZ5Jp39QB5MIo7wU6kN9a08+I9ECLUAzlCJ4mI43mLylaZIYzGk+Y1GgwJC1gai24YmEEy+2eQpc3pdmFwsz6agmJdMiU9bhlFmCWzydnSDQmsO+HybBXyGJbbnDxKmauJQYhfrwrfMaJJElFGQMSwydZzAlIW7rsl4JYtGE1LkeYpf9NQaylNksnKALkpBaN6bzJYiL4qXEnp8/YnUOp0lIf9F8eck6x/c9l+3Uk3oBNFZpK3YjbGvV7wFGfFYQSLDfMAzZSJdj8v/5gpxPVfq8aunqVb+FvQMmdM6mHsyracWGVy9t+5rjf2eCzqQPtCZXMQ==
 X-OriginatorOrg: ford.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Nov 2026 01:35:15.1974
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Nov 2026 01:34:27.5000
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a13d5a9b-10cc-4791-769a-08df3add0ae4
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1df2eed9-27af-495a-854e-08df3adcee59
 X-MS-Exchange-CrossTenant-Id: c990bb7a-51f4-439b-bd36-9c07fb1041c0
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=c990bb7a-51f4-439b-bd36-9c07fb1041c0;Ip=[148.163.138.245];Helo=[mx0b-00498f04.pphosted.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=c990bb7a-51f4-439b-bd36-9c07fb1041c0;Ip=[205.220.161.53];Helo=[mx0a-00498f04.pphosted.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	MWH0EPF000D8952.namprd05.prod.outlook.com
+	PH3PEPF0005961D.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA2PR16MB6450
-X-Proofpoint-GUID: rAWjpCUdPTUsD9DfHqSEKpXrJD-mxYZV
-X-Proofpoint-ORIG-GUID: rAWjpCUdPTUsD9DfHqSEKpXrJD-mxYZV
-X-Authority-Analysis: v=2.4 cv=LcKpeTfi c=1 sm=1 tr=0 ts=6aebdd56 cx=c_pps
- a=z4Cvy7J80qD6KqIazgzwmw==:117 a=b7IhknPlfT0FN1EembXvig==:17
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR16MB5087
+X-Proofpoint-GUID: g2kYAiWPnxTJAPWSgBuC-gghkGGePTZK
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA1MDAwNSBTYWx0ZWRfXzQ+/cGirvAxX
+ jJonAOG2I6ILL3m4MiK8l1/UAHzyae2BDo8WJpAz7lOBIZ+Et+g8m7iKkwkzOcV8V+f4q96FVFA
+ EtQ0BnwBKoVhi8JQUxdDaTJ9egs+T9BWe96vYRBcV1dgdm3M0GmsDL0eIvZVeFN/6yuiwktXQDZ
+ MaQ5jtIDCrS2UaaRPgr2GsWECNNUS6ts7bMux8Nh2GuTSAcEPpoYerOtlWCis1vfu203tOBFv+/
+ ph8+S8aQyksdAKa9Qb+UZZfFu1UfkkWK24L0uCeX45W47SKWpp3tWHXHlYsOdMi5wjnFDCf39qK
+ wcSyv+MmMK2yyT+izvigWk93rPl0t+jv6VMNAzZpD3xg8HeYKdQ2y3bKfK14p7IndjoXoWwU1gj
+ M3NYNQBBcp+T3IUMoQ3SLEyYiqmu1std7e8rsdw9/jr0CYt0uKD24VdmNAuozEPS2R08C4wvTdH
+ vjFuzetwAGBMvtlBa6w==
+X-Authority-Analysis: v=2.4 cv=T7AZ3PKQ c=1 sm=1 tr=0 ts=6aebdd6c cx=c_pps
+ a=v5NpUkBk8u87wj8Ets5Xkg==:117 a=lOEMawUel/sSvQipkIvNbg==:17
  a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=zJRp6_cAMcgA:10 a=3PXLN80vpJUA:10
  a=6NUGLSImWEsA:10 a=w9pew1qAHqMA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=P_n1zlmtWsCQbjROFjcg:22 a=X3KReqg2EL6A36SYCKpz:22 a=IUhvlq-UAAAA:8
- a=cbNQJ9GKAAAA:8 a=Mp1fN1wBtM18aOJufkkA:9 a=DqJYxgmhk6moR-_7_KoZ:22
- a=WmVTiCyuxqgg3mnwYu6p:22 a=HAt3PS7web1Nm6r8Pb4Y:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA1MDAwNSBTYWx0ZWRfX2jKxd7r9M0Ho
- XuDPB4fIT3LVdf2LM2HraM8Qx6NUfBI+r171U2uijiUrfKv6o5sZchleske3ubicpUmnxDZ6lAe
- vUfXAIHFRNte6oa2YUMDjMywWdjM7i9364JFvdeq2J4/BZ5FUkfaPTkUSXNm+/crRsJlfpGMOec
- XcvXn0euDZf1o7niiicagO+pGNM3940ZTLS5JFOHapbV28CBt/uxlUFp+/XNz6AUDMV77Q8fLvC
- wN/Hhvcv0TaWfznrY0cHYM5lxxgjmN9b6T2YGDMHyWmetfKMDKtfV4QA6cW6mmNIaretM/A20Qr
- fYG4N29uzc10R2ZCxNggJBVSw4Pfutbsuz8SrIxJAKWvILvXE1EF6dlAzluF6jN7OLkWzGDaoLc
- 3dbN/inuI2R0WzxLIoml7PrqQIZlAAC1xRxGkvnJI/vrlS4t/ZVWI7f0pGjApDtMqqv5pBpa0sd
- GRL0hABOOhc/0KTfuqA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA1MDAwNSBTYWx0ZWRfX59k8+1zhyvt0
- 3jpfIGh2aP5SVAF+Det+mALli37Kh+PXm5w1D19krs6OhMYCulIAIfIv2tEr/qTGf7kw5FK898i
- JvkVNdvmhHcVkVOWn1Y9/WAb4jv+VvAuaAOF5/Wu6925xM4b1zCg
+ a=P_n1zlmtWsCQbjROFjcg:22 a=N9_n2FxmZfwfyRXvS9-E:22 a=cbNQJ9GKAAAA:8
+ a=uumIENlhXCaLf2fO76MA:9 a=DqJYxgmhk6moR-_7_KoZ:22 a=WmVTiCyuxqgg3mnwYu6p:22
+X-Proofpoint-ORIG-GUID: g2kYAiWPnxTJAPWSgBuC-gghkGGePTZK
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA1MDAwNSBTYWx0ZWRfXyda6KKswhthO
+ 1jxJwJ48jXdvTIaK9zscI+nTCNjBCrjVgwQWgMfcF29QyFdLxJ4T5Eh0cNYgdUnPQF26xgJv9s4
+ bqR9NmSTSQ4LDgE+fBzYFK4JfnfWNf+L2WfbHV+r8rDluh8DObqK
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-05_01,2026-11-04_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
- spamscore=0 lowpriorityscore=0 priorityscore=1501 impostorscore=0
- adultscore=0 malwarescore=0 clxscore=1015 phishscore=0 bulkscore=0
+ phishscore=0 lowpriorityscore=0 clxscore=1015 malwarescore=0 spamscore=0
+ priorityscore=1501 bulkscore=0 adultscore=0 impostorscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611050005
-X-purgate-ID: tlsNG-42698a/1793842520-AA2C49EA-9287A31D/0/0
+X-purgate-ID: tlsNG-bad1c0/1793842542-FCC15034-A7E6F79C/0/0
 X-purgate-type: clean
-X-purgate-size: 721
+X-purgate-size: 8087
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -234,25 +233,252 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 From: Denis Mukhin <dmukhin@ford.com>
 
+Update SVM VMCB with AVIC-related data types as per [1].
+
+Install AVIC backing page and logical/physical APIC ID tables mappings
+into VMCB.
+
+Set VMCB 'avic_enable' bit to 1 in case of successful initialization.
+
+[1] AMD APM Volumes 1-5 "15.29 Advanced Virtual Interrupt Controller".
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
- CHANGELOG.md | 3 +++
- 1 file changed, 3 insertions(+)
+ xen/arch/x86/hvm/svm/avic.c | 110 ++++++++++++++++++++++++++++++++++++
+ xen/arch/x86/hvm/svm/avic.h |   3 +
+ xen/arch/x86/hvm/svm/vmcb.c |   7 +++
+ xen/arch/x86/hvm/svm/vmcb.h |  19 +++++--
+ 4 files changed, 135 insertions(+), 4 deletions(-)
 
-diff --git a/CHANGELOG.md b/CHANGELOG.md
-index 225397f12876..f657efba6389 100644
---- a/CHANGELOG.md
-+++ b/CHANGELOG.md
-@@ -14,6 +14,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
-      permissions for the port range in question.
-      XEN_DOMCTL_ioport_permission now needs invoking up front /
-      afterwards.
-+   - Initial SVM AVIC support to accelerate IPIs and posted interrupts on AMD
-+     systems. AVIC with vLAPIC in x2APIC mode is not supported, GALog is not
-+     supported.
+diff --git a/xen/arch/x86/hvm/svm/avic.c b/xen/arch/x86/hvm/svm/avic.c
+index 2c0e113ae34e..bc98661a7057 100644
+--- a/xen/arch/x86/hvm/svm/avic.c
++++ b/xen/arch/x86/hvm/svm/avic.c
+@@ -9,6 +9,16 @@
+ #include <xen/param.h>
  
- ### Added
+ #include "avic.h"
++#include "vmcb.h"
++
++#define AVIC_PHYSICAL_ID_ENTRY_BACKING_PAGE_MASK        GENMASK_ULL(51, 12U)
++#define AVIC_PHYSICAL_ID_TABLE_SIZE_MASK                (0xFFULL)
++
++/*
++ * For AVIC, the max index allowed for physical APIC ID table is 0xfe (254), as
++ * 0xff is a broadcast to all CPUs, i.e. can't be targeted individually.
++ */
++#define AVIC_MAX_PHYSICAL_ID                            (0xFEU)
  
+ bool __read_mostly svm_avic_enable;
+ 
+@@ -125,6 +135,106 @@ void svm_avic_domain_relinquish_resources(struct domain *d)
+     }
+ }
+ 
++static bool avic_vcpu_supported(struct vcpu *v)
++{
++    struct domain *d = v->domain;
++    unsigned int id;
++
++    if ( !svm_avic_enable || !has_vlapic(d) )
++        return false;
++
++    if ( d->max_vcpus * 2 >= AVIC_PHYSICAL_ID_TABLE_SIZE_MASK )
++    {
++        gprintk(XENLOG_WARNING,
++                "%pv: AVIC: unsupported domain max_vcpus %u\n",
++                v, d->max_vcpus);
++        return false;
++    }
++
++    id = GET_xAPIC_ID(vlapic_reg_read(v, APIC_ID));
++    if ( id > AVIC_MAX_PHYSICAL_ID )
++    {
++        gprintk(XENLOG_WARNING,
++                "%pv: AVIC: unsupported APIC ID %u\n",
++                v, id);
++        return false;
++    }
++
++    return true;
++}
++
++static void avic_vcpu_enable(const struct vcpu *v, bool enable)
++{
++    const struct svm_vcpu *sv = &v->arch.hvm.svm;
++    struct vmcb_struct *vmcb = sv->vmcb;
++
++    vmcb->_vintr.fields.x2avic_enable = 0;
++    vmcb->_vintr.fields.avic_enable = enable;
++    vmcb->cleanbits.avic = 0;
++
++    printk(XENLOG_INFO
++           "%pv: AVIC: %s: apic_id=%#x avic_physical_id=%#"PRIx64" max_vcpus=%u\n",
++           v,
++           enable ? "enable" : "disable",
++           GET_xAPIC_ID(vlapic_reg_read(v, APIC_ID)),
++           sv->avic_physical_id ? ACCESS_ONCE(*sv->avic_physical_id) :
++                                  0xDEADDEADUL,
++           v->domain->max_vcpus);
++}
++
++int svm_avic_vmcb_create(struct vcpu *v)
++{
++    struct domain *d = v->domain;
++    struct svm_domain *sd = &d->arch.hvm.svm;
++    struct svm_vcpu *sv = &v->arch.hvm.svm;
++    struct vmcb_struct *vmcb = sv->vmcb;
++    const struct vlapic *vlapic = vcpu_vlapic(v);
++    mfn_t mfn;
++    uint64_t entry;
++    unsigned int id;
++
++    if ( !avic_vcpu_supported(v) )
++        return 0;
++
++    vmcb->avic_vapic_bar = APIC_DEFAULT_PHYS_BASE;
++    vmcb->avic_backing_page = page_to_maddr(vlapic->regs_page);
++
++    mfn = domain_page_map_to_mfn(sd->avic_logical_id_table);
++    vmcb->avic_logical_id_table = mfn_to_maddr(mfn);
++
++    mfn = domain_page_map_to_mfn(sd->avic_physical_id_table);
++    vmcb->avic_physical_id_table = mfn_to_maddr(mfn);
++    vmcb->avic_physical_id_table |= (d->max_vcpus * 2) &
++                                    AVIC_PHYSICAL_ID_TABLE_SIZE_MASK;
++
++    id = GET_xAPIC_ID(vlapic_reg_read(v, APIC_ID));
++
++    sv->avic_physical_id = &sd->avic_physical_id_table[id];
++
++    entry = vmcb->avic_backing_page & AVIC_PHYSICAL_ID_ENTRY_BACKING_PAGE_MASK;
++    entry |= AVIC_PHYSICAL_ID_ENTRY_VALID_MASK;
++
++    ACCESS_ONCE(*sv->avic_physical_id) = entry;
++
++    avic_vcpu_enable(v, true);
++
++    return 0;
++}
++
++void svm_avic_vmcb_destroy(struct vcpu *v)
++{
++    struct svm_vcpu *sv = &v->arch.hvm.svm;
++    struct vmcb_struct *vmcb = sv->vmcb;
++
++    if ( svm_avic_vcpu_enabled(v) )
++        avic_vcpu_enable(v, false);
++
++    vmcb->avic_physical_id_table = 0;
++    vmcb->avic_logical_id_table = 0;
++    vmcb->avic_backing_page = 0;
++    vmcb->avic_vapic_bar = 0;
++}
++
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/x86/hvm/svm/avic.h b/xen/arch/x86/hvm/svm/avic.h
+index 3da62f59b0cf..1084ae683944 100644
+--- a/xen/arch/x86/hvm/svm/avic.h
++++ b/xen/arch/x86/hvm/svm/avic.h
+@@ -11,4 +11,7 @@ extern bool svm_avic_enable;
+ int svm_avic_domain_initialise(struct domain *d);
+ void svm_avic_domain_relinquish_resources(struct domain *d);
+ 
++int svm_avic_vmcb_create(struct vcpu *v);
++void svm_avic_vmcb_destroy(struct vcpu *v);
++
+ #endif /* __SVM_AVIC_H__ */
+diff --git a/xen/arch/x86/hvm/svm/vmcb.c b/xen/arch/x86/hvm/svm/vmcb.c
+index 3ec5bdddf588..c4282bfd6c6e 100644
+--- a/xen/arch/x86/hvm/svm/vmcb.c
++++ b/xen/arch/x86/hvm/svm/vmcb.c
+@@ -20,6 +20,7 @@
+ #include <asm/p2m.h>
+ #include <asm/spec_ctrl.h>
+ 
++#include "avic.h"
+ #include "svm.h"
+ #include "vmcb.h"
+ 
+@@ -215,6 +216,10 @@ int svm_create_vmcb(struct vcpu *v)
+     if ( rc )
+         return rc;
+ 
++    rc = svm_avic_vmcb_create(v);
++    if ( rc )
++        return rc;
++
+     paddr = virt_to_maddr(nv->nv_n1vmcx);
+     nv->nv_n1vmcx_pa = paddr;
+     svm->vmcb_pa = paddr;
+@@ -227,6 +232,8 @@ void svm_destroy_vmcb(struct vcpu *v)
+     struct nestedvcpu *nv = &vcpu_nestedhvm(v);
+     struct svm_vcpu *svm = &v->arch.hvm.svm;
+ 
++    svm_avic_vmcb_destroy(v);
++
+     if ( nv->nv_n1vmcx != NULL )
+         free_vmcb(nv->nv_n1vmcx);
+ 
+diff --git a/xen/arch/x86/hvm/svm/vmcb.h b/xen/arch/x86/hvm/svm/vmcb.h
+index 8b351679fac5..1ee5da053a9a 100644
+--- a/xen/arch/x86/hvm/svm/vmcb.h
++++ b/xen/arch/x86/hvm/svm/vmcb.h
+@@ -346,7 +346,9 @@ typedef union
+         u64 intr_masking: 1;
+         u64 vgif_enable:  1;
+         u64 vnmi_enable:  1;
+-        u64 :             5;
++        u64 rsvd2:        3;
++        u64 x2avic_enable:1;
++        u64 avic_enable:  1;  /* bit 31 */
+         u64 vector:       8;
+         u64 rsvd3:       24;
+     } fields;
+@@ -362,6 +364,10 @@ typedef union
+     uint64_t raw;
+ } virt_ext_t;
+ 
++/*
++ * AMD64 Achitecture's Programmer's Manual, Volume 2
++ * 15.15.3 VMCB Clean Field
++ */
+ typedef union
+ {
+     struct {
+@@ -377,7 +383,7 @@ typedef union
+         bool seg:1;        /* 8:  cs, ds, es, ss, cpl */
+         bool cr2:1;        /* 9:  cr2 */
+         bool lbr:1;        /* 10: debugctlmsr, last{branch,int}{to,from}ip */
+-        bool :1;
++        bool avic:1;       /* 11: AVIC */
+         bool cet:1;        /* 12: msr_s_set, ssp, msr_isst */
+     };
+     uint32_t raw;
+@@ -469,7 +475,8 @@ struct vmcb_struct {
+         };
+         uint64_t _np_ctrl;
+     };
+-    uint64_t res08[2];
++    uint64_t avic_vapic_bar;    /* offset 0x98 */
++    uint64_t res08;             /* offset 0xA0 */
+     intinfo_t event_inj;        /* offset 0xA8 */
+     uint64_t _h_cr3;            /* offset 0xB0 - cleanbit 4 */
+     virt_ext_t virt_ext;        /* offset 0xB8 */
+@@ -478,7 +485,11 @@ struct vmcb_struct {
+     uint64_t nextrip;           /* offset 0xC8 */
+     uint8_t  guest_ins_len;     /* offset 0xD0 */
+     uint8_t  guest_ins[15];     /* offset 0xD1 */
+-    uint64_t res10a[8];         /* offset 0xE0 */
++    uint64_t avic_backing_page;      /* offset 0xE0 */
++    uint64_t res09a;                 /* offset 0xE8 */
++    uint64_t avic_logical_id_table;  /* offset 0xF0 */
++    uint64_t avic_physical_id_table; /* offset 0xF8 */
++    uint64_t res10a[4];         /* offset 0x100 pad to save area */
+     uint16_t bus_lock_count;    /* offset 0x120 */
+     uint16_t res10b[3];         /* offset 0x122 */
+     uint64_t res10c[91];        /* offset 0x128 pad to save area */
 -- 
 2.55.0
 
