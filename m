@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3EE25606A326
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 14:22:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2F843606A31B
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 15:04:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=mG+TDBzo
-Received: from list by lists.xenproject.org with outflank-mailman.1474836.1681766 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=FV/I76O9
+Received: from list by lists.xenproject.org with outflank-mailman.1474908.1681775 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOyLh-0003Ad-ME; Thu, 05 Nov 2026 14:21:53 +0000
+	id 1xOz0B-0001D7-Mn; Thu, 05 Nov 2026 15:03:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1474836.1681766; Thu, 05 Nov 2026 14:21:53 +0000
+Received: by outflank-mailman (output) from mailman id 1474908.1681775; Thu, 05 Nov 2026 15:03:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOyLh-0003AW-JO; Thu, 05 Nov 2026 14:21:53 +0000
-Received: by outflank-mailman (input) for mailman id 1474836;
- Thu, 05 Nov 2026 14:21:52 +0000
+	id 1xOz0B-0001D0-Jz; Thu, 05 Nov 2026 15:03:43 +0000
+Received: by outflank-mailman (input) for mailman id 1474908;
+ Thu, 05 Nov 2026 15:03:42 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xOyLg-00039L-1D
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 14:21:52 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xOz09-0001Cu-Pz
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 15:03:42 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xOyLf-00A0lk-DV
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 15:21:51 +0100
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xOz09-00AzKr-2r
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 16:03:41 +0100
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6aec90fe-2eae-0a2a0a5409dd-0a2a4504ea6a-2
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 15:21:51 +0100
-Received: from [209.85.221.46] (helo=mail-wr1-f46.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aec9abe-2eae-0a2a0a5409dd-0a2a4506e05a-38
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 16:03:41 +0100
+Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6aec90ff-b57f-0a2a45040019-d155dd2ec052-3
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 15:21:51 +0100
-Received: by mail-wr1-f46.google.com with SMTP id
- ffacd0b85a97d-491aaed7565so389521f8f.2
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 06:21:51 -0800 (PST)
-Received: from [192.168.1.6] (user-109-243-65-71.play-internet.pl.
- [109.243.65.71]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48fec8d8748sm10375982f8f.16.2026.11.05.06.21.49
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 05 Nov 2026 06:21:49 -0800 (PST)
+ id 6aec9acc-195a-0a2a45060019-d1558030adcb-3
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 16:03:40 +0100
+Received: by mail-wm1-f48.google.com with SMTP id
+ 5b1f17b1804b1-4a2d6cf958bso9787635e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 07:03:40 -0800 (PST)
+Received: from fedora (user-109-243-65-71.play-internet.pl. [109.243.65.71])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4b57317cb8esm74121585e9.13.2026.11.05.07.03.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 05 Nov 2026 07:03:39 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,440 +49,1220 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793888511; x=1794493311; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=RSejp9A0sjLzLSVB368wdKm/cwyGhDQchQcPYouvIxc=;
-        b=mG+TDBzoqzNtdGONYFxDTCRHIKjf1l3jhMpwZbk/AngGyhThcwdqjW3fOZdJlKiMx5
-         XzAtKHG1qvki+iMQr/+zVBSa8qmKsUPGcl7JqsL8NSkJVg0rf4Dn5F7JCTbyq0+Ryt2/
-         kZLUrrAp/4hQxWxthxKEO9UvxQ1e+hV9hsL+YxT/vuiuL1pZ/Ur30HydqQjXODnlX9x5
-         L7forUG6Q+HhIf9TTN37bkGzYmXxHMm4/aK6BgLUasf3sGlNPu7fTYs7VoDSSJWilKi+
-         y1K6eKqDy4bOlF1BX+VUfWvy7GTLSCldvSjz+/2k+KC/fYzfaSm621ypODE5WgXD3JzX
-         xZsg==
+        d=gmail.com; s=20260707; t=1793891020; x=1794495820; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=nvr6HpEMBVSx7QqUJgJUbyrp9h4N4e79BJPbeAyxw1s=;
+        b=FV/I76O9z0APFCb/cAFYOOfjMiEgVjInJP1L6am0JCNQRE4HL6/AbLh+q5l4/kN0S+
+         a1dLiCbd2+jfDqu1LHAYET82GQIOG52O3adBhnLSEBgLLFuUdRcBnWH8YS694fpoxGUT
+         PNk75glt8IqFNOqa1loy/9NkFCB7v6YArnwHbkP7e2hQnAyIjLs2/r/OZYeOArR48EuO
+         npgtKazN9IVee1kFhd2OFMj7fU1UPk27HxQhgRXn6IakxVBLar1b1Ef3x+RDevRv/YnM
+         Ztk61r1XruNmZSby0hv+zEGh/HNEZhiIuug/SHh9YX6p5NbdroRlkMlGW8EYqQMNa1Ak
+         nTyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793888511; x=1794493311;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20260707; t=1793891020; x=1794495820;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=RSejp9A0sjLzLSVB368wdKm/cwyGhDQchQcPYouvIxc=;
-        b=l6dNWN1Ax/3O70VKnukP3K0/OOPmO9dsaUzsZsLzN1aCJXTpZ25es7t7D6SSKkQ2sy
-         c8TUzEW6oTaLBBP6f+JsVuKY7N83uGTdbSFT9ALD7P6mlUbR8l7breymr82PF//uBB6s
-         k03Rnnjs6m2g0WbCOmNhm/XmfJaNhqcLyuUqYxXrQ47VWdKYfvAygipEn6qg86qH/LsX
-         TEiAnmmHJPA6jdQeXCz/7qux7xGshh5kCQdVbrFYlrgZIcjvMvZ7qc46HzCwRR+H7CHI
-         1rSAWleNSCzEt2UnfcPpvN0lsSg7esC44THGZrVUOUKqh0W/3azfBf4c9p0WOCrTNejU
-         Icrw==
-X-Gm-Message-State: APuU4Z9pjQwPXwJKtnduHqtYVXBDEdnU+zlMW2q69W+sMOYrjq9pwPuq
-	HqLuCJ9JCl/K94YYKljUPt80TUbzkdEqjgIMU/KyP6J4OgYPSB6LO6XV
-X-Gm-Gg: AYBFou3K22F1WkiLMWyUOn4g0oQ8SIW9SizBsb0Jv49Y3+IYBxdcWAOgO2vTsbrQ50G
-	nvaT84Sk3LCiZCadjo5XySpxnhooJ/zJNE6eZcBT/RqdSHZo/idIsojMqkvaZPGXRN99aB+T6k8
-	5hNpgQoqSD0eSAmlcJNkE7gDGnt3r1C7rpMZUrx7OV+qbo35EEWRoXZKHklBk0jBSlt4qVc3g5Q
-	bTj0zGkVIX1kO34wKzPcJEKPDLnSNSkqvB6U4URP+wNb+tzQS62IVYjvmvQIspeH9Ga+OYdin+Q
-	+cTUnXYldqN3hJ7Wzk7+6nZjNL3oxgU6sMRA40eXhnfjfRBv8Hi32yNmFyxHrizQklOlaO0Di2u
-	j9vCYunJr8wEfZwV35RdBw2OK2WdwSObS/NOB2QX8VP9ixH3yv90To/1YmiE9Yzsoohu3DXoP6X
-	qpO7ck9BDFmzDDr/Fs+UBoL00pO9XV0zwv8HdmRLdKD4F1N6b19PqTw3LZyBzyKa6qSihQaJ99M
-	U0SyfotmfJhlT3pUSa9HaAOPK1qUDgEPaIoT5wsXWH0xRw+oBNo6zlDdPxqUPUfq3kMrJc0T3cH
-	m2e3evWz05slEl1kEnNq0CT0EkzOprZNCWKpPwvncKNN1HLgV67ikMa/7fyRkrSFK1WzugGBbEZ
-	22mfQs8btEIKuqoIgTR2q1g==
-X-Received: by 2002:a05:6000:46c5:b0:48e:5db7:fd6c with SMTP id ffacd0b85a97d-48e6e2bde59mr25041368f8f.4.1793888510394;
-        Thu, 05 Nov 2026 06:21:50 -0800 (PST)
-Message-ID: <cf206b92-88df-4f51-b10b-960e0c141d9e@gmail.com>
-Date: Thu, 5 Nov 2026 15:21:48 +0100
+        bh=nvr6HpEMBVSx7QqUJgJUbyrp9h4N4e79BJPbeAyxw1s=;
+        b=lPURRxDP5hqhPqDwkWcg5/nsjpcALDKgMpdrabv23BvqbfKkh5odotYjRDfoKVQQT1
+         +WofKwaopKT2Ve78lKqD47CRUhGRWbEgcMUJpR0zQM2YrCXMHpTK5moliVekpxs/t+u5
+         b1+jaNV6CESmQCovwA7++mVPgsHHohKuC3hEYuSYfmqSwqL/K4NauyfkecnmmKvD31ct
+         TB2Ly9H34gajhTGBJ6HFMFVkK6nCgz+p2nD0nfW+28FZ6oeARBwMAgfvNZSzoK5cjTKC
+         KW0OIn23euCNw9OsOQCZBIgcZXyzg+fAHxDSeqami3gUNlO7XPU2U2z6zHk/lyoem9ZI
+         E58Q==
+X-Gm-Message-State: APuU4Z+oviT4ENUJI2U45zFjsQ6yQ9caYFv6ssxhHIX+OXjk4J9YhXzL
+	8S85GNxU2x/KxTwJ9nu8Q5u8EYKlbcbTex6sVe8sdD2+OuXy4rQYxK6aJYnZog==
+X-Gm-Gg: AYBFou2mVFbwdRqyIqtO1qf2Q+0YumzNZLJcU0Fb6hiaS9qU7RPlk2KBkl9rFc2W0b3
+	8v1YVXuO2/oX5VlkG2Ti40jLnvFx0pNY4aFH88FZ64/9IFUgj6ZQ34gALokknDIVr6TgAxWcx0/
+	tqaixdSzL9pF0kMe2hCCAiMXvgkUwBVAAFeRGNxgYQZVEr21FoOwX08Oq7zpNMCzKPcKc3yCqMg
+	XoZBI/5Ko8nb7woZMP/4JwTDefrEgAkmVmdKmaBzx4oEPGZJWwL7+XThZ5uWbYwddn4Iwd+bIys
+	X67LmUcy2BaskggETCcN4rjiZCOlIuosJse5JZOKtQV/dDqJeYoJ2NySuepYao690TEOKiJRVKl
+	LWS9b0+HuVkWwMh6K5/oQSbdyQzwb/FUv0+koD/US8BydO28yj7CEp6O23azsiZce+rRu98LdC2
+	+iYUKNB5eQIDcNNDD2AOfLY28FuPrahSKOrj7ItLbkQCWgBEVzAzipgyjtJc8BsnBT9TQZBt+0s
+	W+2a41VUIIRQWFO84M8A7Izcvzxn7Agztc4PbrjzsMnjH0gTGRek8tEHhzrn4ixXm8wyAzQBAth
+	nveqA0EK/liSrQ2DNNRNxXFiOZHKttnVYttmwkoJcHgz2rVPuft+cw+zPyafhStFV1cj
+X-Received: by 2002:a05:600c:4ece:b0:4a2:40:8d2c with SMTP id 5b1f17b1804b1-4ac17b2c396mr411580545e9.26.1793891019977;
+        Thu, 05 Nov 2026 07:03:39 -0800 (PST)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+	Connor Davis <connojdavis@gmail.com>,
+	Tamas K Lengyel <tamas@tklengyel.com>,
+	Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH v1] xen/riscv: align header inclusion guards with CODING_STYLE
+Date: Thu,  5 Nov 2026 16:03:36 +0100
+Message-ID: <20261105150336.25751-1-oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.56.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 30/39] xen/riscv: implement APLIC-IMSIC-hart sync
- barrier for vCPU migration
-To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-Cc: xen-devel@lists.xenproject.org,
- Romain Caritey <Romain.Caritey@microchip.com>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
- Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
-References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
- <2075cb10e5f6df787b29f2f087632c82b787a007.1790779209.git.oleksii.kurochko@gmail.com>
- <c77101fe-2505-4cdb-8520-52f92a1c668d@gmail.com>
- <1792763490.8631fc262581453bbf619ec5b2062170.1a16907f005000f79f@vates.tech>
-Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <1792763490.8631fc262581453bbf619ec5b2062170.1a16907f005000f79f@vates.tech>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ebf023/1793888511-C10DDB50-1603620A/10/73395122804
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-16d1c6/1793891020-F4A0477B-AEF422B6/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 14781
-X-Spam-Status: No, score=-14.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-purgate-size: 36386
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
 	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+Commit 7abea85c9f12 ("CODING_STYLE: Updated header guard
+recommendations") changed the recommended naming of inclusion guards
+for arch-specific headers to <arch>_<something>_H. Most RISC-V headers
+still use the ASM__RISCV__<FILENAME>_H form required by the previous
+rules, and a few use ASM_RISCV_<FILENAME>_H, which follows neither.
 
+Rename the guards to RISCV_<SOMETHING>_H. While doing so, also fix two
+guards which don't match their file names: extable.h used
+ASM__RISCV__ASM_EXTABLE_H and intc.h used the misspelt
+ASM__RISCV__INTERRUPT_CONTOLLER_H. For riscv_encoding.h, don't repeat
+the architecture name and use RISCV_ENCODING_H.
 
-On 10/23/26 3:51 PM, Baptiste Le Duc wrote:
-> On 2026-10-06 16:25:55+02:00, Oleksii Kurochko wrote:
->> On 9/30/26 6:23 PM, Oleksii Kurochko wrote:
->>> When a vCPU is moved to a different guest interrupt file, MSIs that the
->>> APLIC has already sent towards the old file may still be in flight. They
->>> must land before the old file's state is saved and the switch is done,
->>> otherwise they would be lost.
->>>
->>> To wait for them, use the APLIC's genmsi register. Writing it makes the
->>> APLIC itself send an MSI (an "extempore" MSI) with a given interrupt
->>> identity to a given hart. genmsi can only target the hart's hypervisor-
->>> level interrupt file, not a guest one, but the AIA spec guarantees that
->>> all MSIs previously sent by the same APLIC to the same hart become
->>> visible at the hart's IMSIC before the extempore MSI does. So once the
->>> extempore MSI has been delivered, no older MSI from this APLIC to the
->>> hart can still be in flight, whichever interrupt file it targets.
->>>
->>> genmsi's Busy bit clearing only tells that the APLIC has sent the
->>> extempore MSI, not that it has arrived, so the sequence described in the
->>> AIA spec under "Synchronizing interactions between a hart and the APLIC"
->>> is split in two. aplic_genmsi_barrier() does the APLIC side, while
->>> imsic_aplic_sync() does the hart side: it clears the pending bit of the
->>> reserved identity before the genmsi write and spins on it afterwards,
->>> which is what tells that the extempore MSI, and hence every older MSI
->>> from this APLIC to this hart, has really arrived. Keeping the hart side
->>> in imsic.c leaves the APLIC code free of the IMSIC local CSR accessors.
->>>
->>> The last interrupt identity (nr_ids) is reserved for this purpose.
->>>
->>> Migration doesn't use the barrier at this stage, so imsic_migrate_vcpu()
->>> only references imsic_aplic_sync() to keep the compiler from complaining
->>> about it being unused.
->>>
->>> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
->>> ---
->>> Changes in v3:
->>>    - Rename from "xen/riscv: implement APLIC-hart sync barrier for vCPU
->>>      migration", as the barrier waits for the MSIs to reach the hart's IMSIC.
->>>    - Re-word the commit message, describing in it how the sequence is split
->>>      between aplic_genmsi_barrier() and imsic_aplic_sync().
->>>    - Move imsic_aplic_sync(), imsic_local_is_pending() and imsic_csr_read()
->>>      here from "xen/riscv: remap interrupts to new IMSIC VS-file", so that
->>>      both halves of the synchronization sequence are introduced together.
->>>    - s/aplic_hart_field/aplic_hart_index/ following the rename of the helper
->>>      in "xen/riscv: implement virtual APLIC MMIO emulation".
->>>    - Drop masking of sync_id with APLIC_TARGET_EIID, which could silently
->>>      chop off bits; instead add BUILD_BUG_ON() and ASSERT() to make it
->>>      explicit that sync_id always fits into the EIID field.
->>>    - Drop the redundant parentheses around the macro argument in
->>>      imsic_csr_read().
->>>    - Use unsigned int for isel in imsic_local_is_pending() and drop the
->>>      redundant !! as the function returns bool.
->>>    - Rename the unused argument of imsic_aplic_sync() to unused.
->>> ---
->>> Changes in v2:
->>>    - New patch.
->>> ---
->>> ---
->>>    xen/arch/riscv/aplic.c             | 33 +++++++++++++++++++
->>>    xen/arch/riscv/imsic.c             | 52 ++++++++++++++++++++++++++++++
->>>    xen/arch/riscv/include/asm/aplic.h |  3 ++
->>>    xen/arch/riscv/include/asm/imsic.h |  8 +++++
->>>    4 files changed, 96 insertions(+)
->>>
->>> diff --git a/xen/arch/riscv/aplic.c b/xen/arch/riscv/aplic.c
->>> index 283e5d6046a6..5f9a894b5a76 100644
->>> --- a/xen/arch/riscv/aplic.c
->>> +++ b/xen/arch/riscv/aplic.c
->>> @@ -27,7 +27,9 @@
->>>    #include <asm/imsic.h>
->>>    #include <asm/intc.h>
->>>    #include <asm/io.h>
->>> +#include <asm/processor.h>
->>>    #include <asm/riscv_encoding.h>
->>> +#include <asm/smp.h>
->>>    
->>>    static struct aplic_priv aplic = {
->>>        .lock = SPIN_LOCK_UNLOCKED,
->>> @@ -183,6 +185,37 @@ void aplic_hw_write_reg(unsigned int offset, uint32_t value)
->>>        spin_unlock_irqrestore(&aplic.lock, flags);
->>>    }
->>>    
->>> +/*
->>> + * As needed, synchronize with all IOMMUs and APLICs to ensure that no
->>> + * straggler MSIs will arrive at the old interrupt file after this step.
->>> + */
->>> +void aplic_genmsi_barrier(void)
->>> +{
->>> +    const struct imsic_config *imsic = imsic_get_config();
->>> +    unsigned int cpu = smp_processor_id();
->>> +    unsigned long flags;
->>> +    uint32_t val;
->>> +
->>> +    /*
->>> +     * sync_id is nr_ids, which imsic_parse_node() limits to IMSIC_MAX_ID,
->>> +     * so it always fits into the EIID field.
->>> +     */
->>> +    BUILD_BUG_ON(IMSIC_MAX_ID > MASK_EXTR(~0U, APLIC_TARGET_EIID));
->>> +    ASSERT(imsic->sync_id <= IMSIC_MAX_ID);
->>> +
->>> +    val = MASK_INSR(aplic_hart_index(cpu), APLIC_TARGET_HART_IDX) |
->>> +          imsic->sync_id;
->>> +
->>> +    spin_lock_irqsave(&aplic.lock, flags);
->>> +
->>> +    writel(val, &aplic.regs->genmsi);
->>> +
->>> +    while ( readl(&aplic.regs->genmsi) & APLIC_GENMSI_BUSY )
->>> +        cpu_relax();
->>> +
->>> +    spin_unlock_irqrestore(&aplic.lock, flags);
->>> +}
->>> +
->>>    static void __init aplic_init_hw_interrupts(void)
->>>    {
->>>        unsigned int i;
->>> diff --git a/xen/arch/riscv/imsic.c b/xen/arch/riscv/imsic.c
->>> index f1e44dc56bb8..8e0273eab902 100644
->>> --- a/xen/arch/riscv/imsic.c
->>> +++ b/xen/arch/riscv/imsic.c
->>> @@ -27,6 +27,7 @@
->>>    #include <xen/xvmalloc.h>
->>>    
->>>    #include <asm/aia.h>
->>> +#include <asm/aplic.h>
->>>    #include <asm/imsic.h>
->>>    
->>>    #define IMSIC_HART_SIZE(guest_bits) (BIT(guest_bits, U) * IMSIC_MMIO_PAGE_SZ)
->>> @@ -60,6 +61,12 @@ static unsigned int __ro_after_init guest_num_msis;
->>>    #define IMSIC_DISABLE_EITHRESHOLD   1
->>>    #define IMSIC_ENABLE_EITHRESHOLD    0
->>>    
->>> +#define imsic_csr_read(c)       \
->>> +({                              \
->>> +    csr_write(CSR_SISELECT, c); \
->>> +    csr_read(CSR_SIREG);        \
->>> +})
->>> +
->>>    #define imsic_csr_write(c, v)   \
->>>    do {                            \
->>>        csr_write(CSR_SISELECT, c); \
->>> @@ -203,6 +210,15 @@ void imsic_irq_enable(unsigned int irq)
->>>         */
->>>        ASSERT(!local_irq_is_enabled());
->>>    
->>> +    if ( irq == imsic_cfg.sync_id )
->>> +    {
->>> +        printk(XENLOG_WARNING
->>> +               "irq%u is reserved for APLIC sync so shouldn't be set by %s\n",
->>> +               irq, __func__);
->>> +
->>> +        return;
->>> +    }
->>> +
->>>        spin_lock(&imsic_cfg.lock);
->>>        /*
->>>         * There is no irq - 1 here (look at aplic_set_irq_type()) because:
->>> @@ -241,6 +257,15 @@ void imsic_irq_disable(unsigned int irq)
->>>        spin_unlock(&imsic_cfg.lock);
->>>    }
->>>    
->>> +static bool imsic_local_is_pending(unsigned int id)
->>> +{
->>> +    unsigned int isel =
->>> +        (id / BITS_PER_LONG) * (BITS_PER_LONG / IMSIC_EIPx_BITS) + IMSIC_EIP0;
->>> +    unsigned long bit = BIT(id % BITS_PER_LONG, UL);
->>> +
->>> +    return imsic_csr_read(isel) & bit;
->>> +}
->>> +
->>>    /* Callers aren't intended to changed imsic_cfg so return const. */
->>>    const struct imsic_config *imsic_get_config(void)
->>>    {
->>> @@ -387,6 +412,9 @@ static int __init imsic_parse_node(const struct dt_device_node *node,
->>>    
->>>        imsic_cfg.nr_eix = DIV_ROUND_UP(imsic_cfg.nr_ids + 1, 64);
->>>    
->>> +    /* Reserve last identity for APLIC-to-hart synchronization */
->>> +    imsic_cfg.sync_id = imsic_cfg.nr_ids;
->>> +
->>>        /* Compute base address */
->>>        *nr_mmios = 0;
->>>        rc = dt_device_get_address(node, *nr_mmios, &base_addr, NULL);
->>> @@ -497,6 +525,27 @@ static void imsic_call_on_cpu(unsigned int cpu, void (*func)(void *),
->>>            on_selected_cpus(cpumask_of(cpu), func, data, 1);
->>>    }
->>>    
->>> +/*
->>> + * Ensure that all the MSIs the APLIC has already generated for the hart this
->>> + * runs on have really reached the hart's IMSIC.
->>> + *
->>> + * The barrier is the one described by the AIA specification in
->>> + * "Synchronizing interactions between a hart and the APLIC": ask the APLIC to
->>> + * send an MSI to the hart itself and wait until it shows up as pending in the
->>> + * hart's own interrupt file. As it says nothing about MSIs on their way to
->>> + * any other hart, it has to be executed by the pCPU owning the interrupt file
->>> + * the MSIs were being sent to.
->>> + */
->>> +static void cf_check imsic_aplic_sync(void *unused)
->>> +{
->>> +    imsic_local_eix_update(imsic_cfg.sync_id, 1, true, false);
->>> +
->>> +    aplic_genmsi_barrier();
->>> +
->>> +    while ( !imsic_local_is_pending(imsic_cfg.sync_id) )
->>> +        cpu_relax();
->>> +}
->>> +
->>>    static void cf_check imsic_vsfile_local_clear(void *data)
->>>    {
->>>        unsigned int i;
->>> @@ -862,5 +911,8 @@ void imsic_migrate_vcpu(struct vcpu *v)
->>>        /* Zero-out new IMSIC VS-file */
->>>        imsic_call_on_cpu(v->processor, imsic_vsfile_local_clear, &vsfile_data);
->>>    
->>> +    /* Avoid an unused-function error until the barrier has a user. */
->>> +    (void)imsic_aplic_sync;
->>> +
->>>        BUG_ON("unimplemented");
->>>    }
->>> diff --git a/xen/arch/riscv/include/asm/aplic.h b/xen/arch/riscv/include/asm/aplic.h
->>> index 9018936ca95a..bfb510b2ae5e 100644
->>> --- a/xen/arch/riscv/include/asm/aplic.h
->>> +++ b/xen/arch/riscv/include/asm/aplic.h
->>> @@ -94,6 +94,7 @@
->>>    #define APLIC_SETIPNUM_LE               0x2000
->>>    
->>>    #define APLIC_GENMSI                    0x3000
->>> +#define APLIC_GENMSI_BUSY               BIT(12, U)
->>>    
->>>    #define APLIC_TARGET_BASE               0x3004
->>>    #define APLIC_TARGET_LAST               0x3ffc
->>> @@ -177,4 +178,6 @@ struct aplic_regs {
->>>    uint32_t aplic_hw_read_reg(unsigned int offset);
->>>    void aplic_hw_write_reg(unsigned int offset, uint32_t value);
->>>    
->>> +void aplic_genmsi_barrier(void);
->>> +
->>>    #endif /* ASM_RISCV_APLIC_H */
->>> diff --git a/xen/arch/riscv/include/asm/imsic.h b/xen/arch/riscv/include/asm/imsic.h
->>> index 8130d125f5c3..f86407e21765 100644
->>> --- a/xen/arch/riscv/include/asm/imsic.h
->>> +++ b/xen/arch/riscv/include/asm/imsic.h
->>> @@ -62,6 +62,14 @@ struct imsic_config {
->>>         */
->>>        unsigned int nr_eix;
->>>    
->>> +    /*
->>> +     * Interrupt identity reserved exclusively for APLIC-to-hart
->>> +     * synchronization.
->>> +     *
->>> +     * Must not be allocated to any interrupt source.
->>> +     */
->>> +    unsigned int sync_id;
->>> +
->>>        /* MSI */
->>>        const struct imsic_msi *msi;
->>>    
->>
->>
->> I think it also makes sense here to apply the following fixup patch:
->>
->> commit db57e94ed8405c98d7a21f4f88764fa5e0ea2d04
->> (riscv-next-upstreaming-fixups)
->> Author: Oleksii Kurochko <oleksii.kurochko@gmail.com>
->> Date:   Tue Oct 6 15:59:52 2026 +0200
->>
->>       fixup! xen/riscv: implement APLIC-IMSIC-hart sync barrier for vCPU
->> migration
->>
->>       In MSI delivery mode the MSI of APLIC source N carries identity N, by
->>       which Xen recognises it in its own IMSIC interrupt file. A source
->>       numbered sync_id or higher can't be told apart: its identity either
->>       isn't implemented, so its MSIs are dropped, or is the one reserved for
->>       the sync barrier, which it would satisfy early and whose pending bit
->>       would swallow its interrupt. Limit the usable sources to those below
->>       sync_id, and document how the identities of Xen's interrupt file are
->>       allocated.
->>
->> diff --git a/xen/arch/riscv/aplic.c b/xen/arch/riscv/aplic.c
->> index 96aa4edb3958..86ff3cae984d 100644
->> --- a/xen/arch/riscv/aplic.c
->> +++ b/xen/arch/riscv/aplic.c
->> @@ -246,6 +246,7 @@ static int __init cf_check aplic_init(void)
->>        uint64_t size, paddr;
->>        const struct dt_device_node *imsic_node;
->>        const struct dt_device_node *node = aplic_info.node;
->> +    const struct imsic_config *imsic;
->>        int rc;
->>
->>        /* Check for associated imsic node */
->> @@ -270,6 +271,22 @@ static int __init cf_check aplic_init(void)
->>            panic("%s: failed to get number of interrupt sources\n",
->>                  node->full_name);
->>
->> +    /*
->> +     * In MSI delivery mode the MSI of source N carries identity N, by
->> which
->> +     * Xen recognises it in its own IMSIC interrupt file. Hence the sources
->> +     * numbered from sync_id on can't be used: their identities either
->> aren't
->> +     * implemented or are the one reserved for the APLIC-IMSIC sync
->> barrier.
->> +     */
->> +    imsic = imsic_get_config();
->> +    if ( aplic_info.num_irqs >= imsic->sync_id )
->> +    {
->> +        printk(XENLOG_WARNING
->> +               "%s: only %u of %u interrupt sources usable with %u
->> IMSIC identities\n",
->> +               node->full_name, imsic->sync_id - 1, aplic_info.num_irqs,
->> +               imsic->nr_ids);
->> +        aplic_info.num_irqs = imsic->sync_id - 1;
->> +    }
->> +
->>        guest_aplic_num_sources = min(GUEST_APLIC_MAX_SOURCES,
->> aplic_info.num_irqs);
->>
->>        if ( aplic_info.num_irqs > ARRAY_SIZE(aplic.regs->sourcecfg) )
->> diff --git a/xen/arch/riscv/imsic.c b/xen/arch/riscv/imsic.c
->> index ca5243826726..408b94b22ee9 100644
->> --- a/xen/arch/riscv/imsic.c
->> +++ b/xen/arch/riscv/imsic.c
->> @@ -533,7 +533,15 @@ static int __init imsic_parse_node(const struct
->> dt_device_node *node,
->>
->>        imsic_cfg.nr_eix = DIV_ROUND_UP(imsic_cfg.nr_ids + 1, 64);
->>
->> -    /* Reserve last identity for APLIC-to-hart synchronization */
->> +    /*
->> +     * The identities of Xen's own interrupt file are allocated statically:
->> +     *  - the APLIC sources take 1 .. riscv,num-sources, as the MSI of
->> source
->> +     *    N carries identity N (aplic_init() drops the sources which
->> don't fit
->> +     *    below sync_id);
->> +     *  - the last one, nr_ids, is reserved for APLIC-to-hart
->> synchronization.
->> +     * Anything else taking identities from this file has to stay clear of
->> +     * both.
->> +     */
->>        imsic_cfg.sync_id = imsic_cfg.nr_ids;
->>
->>        /* Compute base address */
->>
->> Any thoughts about it?
-> LGTM, but I wonder why, as I said in the original patch, sync_id is
-> really needed.
-> 
+No functional change.
 
-I think that I am not understand your response. Could you please 
-re-phrase it?
+Assisted-by: Claude-Code:claude-opus-5-5
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+ xen/arch/riscv/aplic-priv.h                 | 6 +++---
+ xen/arch/riscv/include/asm/acpi.h           | 6 +++---
+ xen/arch/riscv/include/asm/aplic.h          | 6 +++---
+ xen/arch/riscv/include/asm/asm.h            | 6 +++---
+ xen/arch/riscv/include/asm/atomic.h         | 6 +++---
+ xen/arch/riscv/include/asm/bitops.h         | 6 +++---
+ xen/arch/riscv/include/asm/bug.h            | 6 +++---
+ xen/arch/riscv/include/asm/cache.h          | 6 +++---
+ xen/arch/riscv/include/asm/cmpxchg.h        | 6 +++---
+ xen/arch/riscv/include/asm/config.h         | 6 +++---
+ xen/arch/riscv/include/asm/cpufeature.h     | 6 +++---
+ xen/arch/riscv/include/asm/csr.h            | 6 +++---
+ xen/arch/riscv/include/asm/current.h        | 6 +++---
+ xen/arch/riscv/include/asm/domain.h         | 6 +++---
+ xen/arch/riscv/include/asm/early_printk.h   | 6 +++---
+ xen/arch/riscv/include/asm/event.h          | 6 +++---
+ xen/arch/riscv/include/asm/extable.h        | 6 +++---
+ xen/arch/riscv/include/asm/fence.h          | 6 +++---
+ xen/arch/riscv/include/asm/fixmap.h         | 6 +++---
+ xen/arch/riscv/include/asm/flushtlb.h       | 6 +++---
+ xen/arch/riscv/include/asm/guest-layout.h   | 6 +++---
+ xen/arch/riscv/include/asm/guest_access.h   | 6 +++---
+ xen/arch/riscv/include/asm/guest_atomics.h  | 6 +++---
+ xen/arch/riscv/include/asm/imsic.h          | 6 +++---
+ xen/arch/riscv/include/asm/insn-defs.h      | 6 +++---
+ xen/arch/riscv/include/asm/intc.h           | 6 +++---
+ xen/arch/riscv/include/asm/io.h             | 6 +++---
+ xen/arch/riscv/include/asm/irq.h            | 6 +++---
+ xen/arch/riscv/include/asm/mm-types.h       | 6 +++---
+ xen/arch/riscv/include/asm/mm.h             | 6 +++---
+ xen/arch/riscv/include/asm/monitor.h        | 6 +++---
+ xen/arch/riscv/include/asm/nospec.h         | 6 +++---
+ xen/arch/riscv/include/asm/p2m.h            | 6 +++---
+ xen/arch/riscv/include/asm/page-bits.h      | 6 +++---
+ xen/arch/riscv/include/asm/page.h           | 6 +++---
+ xen/arch/riscv/include/asm/paging.h         | 6 +++---
+ xen/arch/riscv/include/asm/pmap.h           | 6 +++---
+ xen/arch/riscv/include/asm/processor.h      | 6 +++---
+ xen/arch/riscv/include/asm/regs.h           | 6 +++---
+ xen/arch/riscv/include/asm/riscv_encoding.h | 4 ++--
+ xen/arch/riscv/include/asm/sbi.h            | 6 +++---
+ xen/arch/riscv/include/asm/setup.h          | 6 +++---
+ xen/arch/riscv/include/asm/smp.h            | 4 ++--
+ xen/arch/riscv/include/asm/spinlock.h       | 6 +++---
+ xen/arch/riscv/include/asm/string.h         | 6 +++---
+ xen/arch/riscv/include/asm/system.h         | 6 +++---
+ xen/arch/riscv/include/asm/time.h           | 6 +++---
+ xen/arch/riscv/include/asm/traps.h          | 6 +++---
+ xen/arch/riscv/include/asm/types.h          | 6 +++---
+ xen/arch/riscv/include/asm/vaplic.h         | 6 +++---
+ xen/arch/riscv/include/asm/vmid.h           | 6 +++---
+ xen/arch/riscv/include/asm/vsbi.h           | 4 ++--
+ xen/arch/riscv/include/asm/vtimer.h         | 6 +++---
+ 53 files changed, 156 insertions(+), 156 deletions(-)
 
-~ Oleksii
+diff --git a/xen/arch/riscv/aplic-priv.h b/xen/arch/riscv/aplic-priv.h
+index 35100d3a64fe..009020c83fb9 100644
+--- a/xen/arch/riscv/aplic-priv.h
++++ b/xen/arch/riscv/aplic-priv.h
+@@ -11,8 +11,8 @@
+  * Copyright (c) Vates.
+  */
+ 
+-#ifndef ASM_RISCV_APLIC_PRIV_H
+-#define ASM_RISCV_APLIC_PRIV_H
++#ifndef RISCV_APLIC_PRIV_H
++#define RISCV_APLIC_PRIV_H
+ 
+ #include <xen/spinlock.h>
+ #include <xen/types.h>
+@@ -47,4 +47,4 @@ struct aplic_priv {
+  */
+ extern unsigned int guest_aplic_num_sources;
+ 
+-#endif /* ASM_RISCV_APLIC_PRIV_H */
++#endif /* RISCV_APLIC_PRIV_H */
+diff --git a/xen/arch/riscv/include/asm/acpi.h b/xen/arch/riscv/include/asm/acpi.h
+index 0c553bd6b8fa..8c769b2c0bd9 100644
+--- a/xen/arch/riscv/include/asm/acpi.h
++++ b/xen/arch/riscv/include/asm/acpi.h
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
+-#ifndef ASM__RISCV__ACPI_H
+-#define ASM__RISCV__ACPI_H
++#ifndef RISCV_ACPI_H
++#define RISCV_ACPI_H
+ 
+-#endif /* ASM__RISCV__ACPI_H */
++#endif /* RISCV_ACPI_H */
+diff --git a/xen/arch/riscv/include/asm/aplic.h b/xen/arch/riscv/include/asm/aplic.h
+index a2af55d54fc0..51be469b69e5 100644
+--- a/xen/arch/riscv/include/asm/aplic.h
++++ b/xen/arch/riscv/include/asm/aplic.h
+@@ -8,8 +8,8 @@
+  * Copyright (c) Microchip.
+  */
+ 
+-#ifndef ASM_RISCV_APLIC_H
+-#define ASM_RISCV_APLIC_H
++#ifndef RISCV_APLIC_H
++#define RISCV_APLIC_H
+ 
+ #include <xen/types.h>
+ 
+@@ -141,4 +141,4 @@ struct aplic_regs {
+     uint32_t target[1023];      /* 0x3004 */
+ };
+ 
+-#endif /* ASM_RISCV_APLIC_H */
++#endif /* RISCV_APLIC_H */
+diff --git a/xen/arch/riscv/include/asm/asm.h b/xen/arch/riscv/include/asm/asm.h
+index e147b6f05388..a663db4c23e4 100644
+--- a/xen/arch/riscv/include/asm/asm.h
++++ b/xen/arch/riscv/include/asm/asm.h
+@@ -3,8 +3,8 @@
+  * Copyright (C) 2015 Regents of the University of California
+  */
+ 
+-#ifndef ASM__RISCV__ASM_H
+-#define ASM__RISCV__ASM_H
++#ifndef RISCV_ASM_H
++#define RISCV_ASM_H
+ 
+ #ifdef __ASSEMBLER__
+ #include <xen/linkage.h>
+@@ -52,4 +52,4 @@
+ #error "Unexpected __SIZEOF_SHORT__"
+ #endif
+ 
+-#endif /* ASM__RISCV__ASM_H */
++#endif /* RISCV_ASM_H */
+diff --git a/xen/arch/riscv/include/asm/atomic.h b/xen/arch/riscv/include/asm/atomic.h
+index 8e0425cea0b9..3a0184d35dcd 100644
+--- a/xen/arch/riscv/include/asm/atomic.h
++++ b/xen/arch/riscv/include/asm/atomic.h
+@@ -19,8 +19,8 @@
+  * Copyright (C) 2024 Vates SAS
+  */
+ 
+-#ifndef ASM__RISCV__ATOMIC_H
+-#define ASM__RISCV__ATOMIC_H
++#ifndef RISCV_ATOMIC_H
++#define RISCV_ATOMIC_H
+ 
+ #include <xen/atomic.h>
+ 
+@@ -266,7 +266,7 @@ ATOMIC_OPS()
+ #undef ATOMIC_OPS
+ #undef ATOMIC_OP
+ 
+-#endif /* ASM__RISCV__ATOMIC_H */
++#endif /* RISCV_ATOMIC_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/riscv/include/asm/bitops.h b/xen/arch/riscv/include/asm/bitops.h
+index 72a4a8c155d6..471eb07bd287 100644
+--- a/xen/arch/riscv/include/asm/bitops.h
++++ b/xen/arch/riscv/include/asm/bitops.h
+@@ -1,8 +1,8 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ /* Copyright (C) 2012 Regents of the University of California */
+ 
+-#ifndef ASM__RISCV__BITOPS_H
+-#define ASM__RISCV__BITOPS_H
++#ifndef RISCV_BITOPS_H
++#define RISCV_BITOPS_H
+ 
+ #include <asm/system.h>
+ 
+@@ -132,7 +132,7 @@ static inline void clear_bit(int nr, volatile void *p)
+ 
+ #define arch_hweightl(x) __builtin_popcountl(x)
+ 
+-#endif /* ASM__RISCV__BITOPS_H */
++#endif /* RISCV_BITOPS_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/riscv/include/asm/bug.h b/xen/arch/riscv/include/asm/bug.h
+index c2cdc2dc2a46..8834dcea8197 100644
+--- a/xen/arch/riscv/include/asm/bug.h
++++ b/xen/arch/riscv/include/asm/bug.h
+@@ -4,8 +4,8 @@
+  * Copyright (C) 2021-2023 Vates
+  *
+  */
+-#ifndef ASM__RISCV__BUG_H
+-#define ASM__RISCV__BUG_H
++#ifndef RISCV_BUG_H
++#define RISCV_BUG_H
+ 
+ #ifndef __ASSEMBLER__
+ 
+@@ -15,4 +15,4 @@
+ 
+ #endif /* !__ASSEMBLER__ */
+ 
+-#endif /* ASM__RISCV__BUG_H */
++#endif /* RISCV_BUG_H */
+diff --git a/xen/arch/riscv/include/asm/cache.h b/xen/arch/riscv/include/asm/cache.h
+index d4cf1ac8e2cd..6b8dff48b76f 100644
+--- a/xen/arch/riscv/include/asm/cache.h
++++ b/xen/arch/riscv/include/asm/cache.h
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
+-#ifndef ASM__RISCV__CACHE_H
+-#define ASM__RISCV__CACHE_H
++#ifndef RISCV_CACHE_H
++#define RISCV_CACHE_H
+ 
+-#endif /* ASM__RISCV__CACHE_H */
++#endif /* RISCV_CACHE_H */
+diff --git a/xen/arch/riscv/include/asm/cmpxchg.h b/xen/arch/riscv/include/asm/cmpxchg.h
+index d47ebaffcef0..12268d0babd9 100644
+--- a/xen/arch/riscv/include/asm/cmpxchg.h
++++ b/xen/arch/riscv/include/asm/cmpxchg.h
+@@ -1,8 +1,8 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ /* Copyright (C) 2014 Regents of the University of California */
+ 
+-#ifndef ASM__RISCV__CMPXCHG_H
+-#define ASM__RISCV__CMPXCHG_H
++#ifndef RISCV_CMPXCHG_H
++#define RISCV_CMPXCHG_H
+ 
+ #include <xen/bitops.h>
+ #include <xen/compiler.h>
+@@ -230,7 +230,7 @@ static always_inline unsigned long __cmpxchg(volatile void *ptr,
+               sizeof(*(ptr))); \
+ })
+ 
+-#endif /* ASM__RISCV__CMPXCHG_H */
++#endif /* RISCV_CMPXCHG_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/riscv/include/asm/config.h b/xen/arch/riscv/include/asm/config.h
+index fd69057826e1..8d43ee76da5f 100644
+--- a/xen/arch/riscv/include/asm/config.h
++++ b/xen/arch/riscv/include/asm/config.h
+@@ -1,7 +1,7 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
+-#ifndef ASM__RISCV__CONFIG_H
+-#define ASM__RISCV__CONFIG_H
++#ifndef RISCV_CONFIG_H
++#define RISCV_CONFIG_H
+ 
+ #include <xen/const.h>
+ #include <xen/page-size.h>
+@@ -164,7 +164,7 @@ extern unsigned long phys_offset; /* = load_start - XEN_VIRT_START */
+ #error "Define KERNEL_LOAD_ADDR_ALIGNMENT"
+ #endif
+ 
+-#endif /* ASM__RISCV__CONFIG_H */
++#endif /* RISCV_CONFIG_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/riscv/include/asm/cpufeature.h b/xen/arch/riscv/include/asm/cpufeature.h
+index b0a23be18e6f..d42189e8ebe7 100644
+--- a/xen/arch/riscv/include/asm/cpufeature.h
++++ b/xen/arch/riscv/include/asm/cpufeature.h
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+-#ifndef ASM__RISCV__CPUFEATURE_H
+-#define ASM__RISCV__CPUFEATURE_H
++#ifndef RISCV_CPUFEATURE_H
++#define RISCV_CPUFEATURE_H
+ 
+ #ifndef __ASSEMBLER__
+ 
+@@ -57,7 +57,7 @@ bool riscv_isa_extension_available(const unsigned long *isa_bitmap,
+ 
+ #endif /* __ASSEMBLER__ */
+ 
+-#endif /* ASM__RISCV__CPUFEATURE_H */
++#endif /* RISCV_CPUFEATURE_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/riscv/include/asm/csr.h b/xen/arch/riscv/include/asm/csr.h
+index 888d6a2a86d6..a805f7ed0ba1 100644
+--- a/xen/arch/riscv/include/asm/csr.h
++++ b/xen/arch/riscv/include/asm/csr.h
+@@ -3,8 +3,8 @@
+  * Copyright (C) 2015 Regents of the University of California
+  */
+ 
+-#ifndef ASM__RISCV__CSR_H
+-#define ASM__RISCV__CSR_H
++#ifndef RISCV_CSR_H
++#define RISCV_CSR_H
+ 
+ #include <xen/const.h>
+ 
+@@ -128,4 +128,4 @@ static always_inline bool csr_read_safe(unsigned long csr,
+ 
+ #endif /* __ASSEMBLER__ */
+ 
+-#endif /* ASM__RISCV__CSR_H */
++#endif /* RISCV_CSR_H */
+diff --git a/xen/arch/riscv/include/asm/current.h b/xen/arch/riscv/include/asm/current.h
+index 78ec52fd8a35..06683d7ae060 100644
+--- a/xen/arch/riscv/include/asm/current.h
++++ b/xen/arch/riscv/include/asm/current.h
+@@ -1,7 +1,7 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
+-#ifndef ASM__RISCV__CURRENT_H
+-#define ASM__RISCV__CURRENT_H
++#ifndef RISCV_CURRENT_H
++#define RISCV_CURRENT_H
+ 
+ #include <xen/bug.h>
+ #include <xen/cache.h>
+@@ -62,4 +62,4 @@ DECLARE_PER_CPU(struct vcpu *, curr_vcpu);
+ 
+ #endif /* __ASSEMBLER__ */
+ 
+-#endif /* ASM__RISCV__CURRENT_H */
++#endif /* RISCV_CURRENT_H */
+diff --git a/xen/arch/riscv/include/asm/domain.h b/xen/arch/riscv/include/asm/domain.h
+index e035b33ddfdc..98e5e72e58ba 100644
+--- a/xen/arch/riscv/include/asm/domain.h
++++ b/xen/arch/riscv/include/asm/domain.h
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+-#ifndef ASM__RISCV__DOMAIN_H
+-#define ASM__RISCV__DOMAIN_H
++#ifndef RISCV_DOMAIN_H
++#define RISCV_DOMAIN_H
+ 
+ #include <xen/mm.h>
+ #include <xen/spinlock.h>
+@@ -128,7 +128,7 @@ int vcpu_unset_interrupt(struct vcpu *v, unsigned int irq);
+ void vcpu_sync_interrupts(struct vcpu *curr);
+ void vcpu_flush_interrupts(struct vcpu *curr);
+ 
+-#endif /* ASM__RISCV__DOMAIN_H */
++#endif /* RISCV_DOMAIN_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/riscv/include/asm/early_printk.h b/xen/arch/riscv/include/asm/early_printk.h
+index 2750045bdd80..240b7f539a04 100644
+--- a/xen/arch/riscv/include/asm/early_printk.h
++++ b/xen/arch/riscv/include/asm/early_printk.h
+@@ -1,7 +1,7 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
+-#ifndef ASM__RISCV__EARLY_PRINTK_H
+-#define ASM__RISCV__EARLY_PRINTK_H
++#ifndef RISCV_EARLY_PRINTK_H
++#define RISCV_EARLY_PRINTK_H
+ 
+ #include <xen/early_printk.h>
+ 
+@@ -11,4 +11,4 @@ void early_printk(const char *str);
+ static inline void early_printk(const char *s) {};
+ #endif
+ 
+-#endif /* ASM__RISCV__EARLY_PRINTK_H */
++#endif /* RISCV_EARLY_PRINTK_H */
+diff --git a/xen/arch/riscv/include/asm/event.h b/xen/arch/riscv/include/asm/event.h
+index 116434c665c0..a1fc0bc6fd7a 100644
+--- a/xen/arch/riscv/include/asm/event.h
++++ b/xen/arch/riscv/include/asm/event.h
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+-#ifndef ASM__RISCV__EVENT_H
+-#define ASM__RISCV__EVENT_H
++#ifndef RISCV_EVENT_H
++#define RISCV_EVENT_H
+ 
+ #include <xen/lib.h>
+ 
+@@ -29,7 +29,7 @@ static inline enum virq_type arch_get_virq_type(unsigned int virq)
+     return VIRQ_GLOBAL;
+ }
+ 
+-#endif /* ASM__RISCV__EVENT_H */
++#endif /* RISCV_EVENT_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/riscv/include/asm/extable.h b/xen/arch/riscv/include/asm/extable.h
+index c0128a91818f..0209b2f3bfa5 100644
+--- a/xen/arch/riscv/include/asm/extable.h
++++ b/xen/arch/riscv/include/asm/extable.h
+@@ -1,7 +1,7 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
+-#ifndef ASM__RISCV__ASM_EXTABLE_H
+-#define ASM__RISCV__ASM_EXTABLE_H
++#ifndef RISCV_EXTABLE_H
++#define RISCV_EXTABLE_H
+ 
+ #ifdef __ASSEMBLER__
+ 
+@@ -55,4 +55,4 @@ bool fixup_exception(struct cpu_user_regs *regs);
+ 
+ #endif /* __ASSEMBLY__ */
+ 
+-#endif /* ASM__RISCV__ASM_EXTABLE_H */
++#endif /* RISCV_EXTABLE_H */
+diff --git a/xen/arch/riscv/include/asm/fence.h b/xen/arch/riscv/include/asm/fence.h
+index edfaac49cd9c..f5dd3096e5f0 100644
+--- a/xen/arch/riscv/include/asm/fence.h
++++ b/xen/arch/riscv/include/asm/fence.h
+@@ -1,9 +1,9 @@
+ /* SPDX-License-Identifier: GPL-2.0-or-later */
+-#ifndef ASM__RISCV__FENCE_H
+-#define ASM__RISCV__FENCE_H
++#ifndef RISCV_FENCE_H
++#define RISCV_FENCE_H
+ 
+ #define RISCV_ACQUIRE_BARRIER   "\tfence r , rw\n"
+ #define RISCV_RELEASE_BARRIER   "\tfence rw, w\n"
+ #define RISCV_FULL_BARRIER      "\tfence rw, rw\n"
+ 
+-#endif	/* ASM__RISCV__FENCE_H */
++#endif	/* RISCV_FENCE_H */
+diff --git a/xen/arch/riscv/include/asm/fixmap.h b/xen/arch/riscv/include/asm/fixmap.h
+index 085d135c15d4..7e907c3d1c03 100644
+--- a/xen/arch/riscv/include/asm/fixmap.h
++++ b/xen/arch/riscv/include/asm/fixmap.h
+@@ -2,8 +2,8 @@
+ /*
+  * fixmap.h: compile-time virtual memory allocation
+  */
+-#ifndef ASM__RISCV__FIXMAP_H
+-#define ASM__RISCV__FIXMAP_H
++#ifndef RISCV_FIXMAP_H
++#define RISCV_FIXMAP_H
+ 
+ #include <xen/bug.h>
+ #include <xen/page-size.h>
+@@ -48,4 +48,4 @@ static inline unsigned int virt_to_fix(vaddr_t vaddr)
+ 
+ #endif /* __ASSEMBLER__ */
+ 
+-#endif /* ASM__RISCV__FIXMAP_H */
++#endif /* RISCV_FIXMAP_H */
+diff --git a/xen/arch/riscv/include/asm/flushtlb.h b/xen/arch/riscv/include/asm/flushtlb.h
+index b0112d416dbe..e1d17430da5f 100644
+--- a/xen/arch/riscv/include/asm/flushtlb.h
++++ b/xen/arch/riscv/include/asm/flushtlb.h
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+-#ifndef ASM__RISCV__FLUSHTLB_H
+-#define ASM__RISCV__FLUSHTLB_H
++#ifndef RISCV_FLUSHTLB_H
++#define RISCV_FLUSHTLB_H
+ 
+ #include <xen/bug.h>
+ #include <xen/cpumask.h>
+@@ -53,7 +53,7 @@ static inline void arch_flush_tlb_mask(const cpumask_t *mask)
+     sbi_remote_hfence_gvma(mask, 0, 0);
+ }
+ 
+-#endif /* ASM__RISCV__FLUSHTLB_H */
++#endif /* RISCV_FLUSHTLB_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/riscv/include/asm/guest-layout.h b/xen/arch/riscv/include/asm/guest-layout.h
+index ceed9125e7e2..52d1f2e108ea 100644
+--- a/xen/arch/riscv/include/asm/guest-layout.h
++++ b/xen/arch/riscv/include/asm/guest-layout.h
+@@ -1,5 +1,5 @@
+-#ifndef ASM_RISCV_GUEST_LAYOUT_H
+-#define ASM_RISCV_GUEST_LAYOUT_H
++#ifndef RISCV_GUEST_LAYOUT_H
++#define RISCV_GUEST_LAYOUT_H
+ 
+ #include <public/xen.h>
+ 
+@@ -44,4 +44,4 @@
+ #define GUEST_MAGIC_BASE  _UL(0x79000000)
+ #define GUEST_MAGIC_SIZE  _UL(0x00200000)
+ 
+-#endif /* ASM_RISCV_GUEST_LAYOUT_H */
++#endif /* RISCV_GUEST_LAYOUT_H */
+diff --git a/xen/arch/riscv/include/asm/guest_access.h b/xen/arch/riscv/include/asm/guest_access.h
+index 8d679319ded0..e94aa838a3e7 100644
+--- a/xen/arch/riscv/include/asm/guest_access.h
++++ b/xen/arch/riscv/include/asm/guest_access.h
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+-#ifndef ASM__RISCV__GUEST_ACCESS_H
+-#define ASM__RISCV__GUEST_ACCESS_H
++#ifndef RISCV_GUEST_ACCESS_H
++#define RISCV_GUEST_ACCESS_H
+ 
+ #include <xen/types.h>
+ 
+@@ -25,7 +25,7 @@ unsigned long raw_clear_guest(void *to, unsigned int len);
+ unsigned long copy_to_guest_phys(struct domain *d, paddr_t gpa, void *buf,
+                                  unsigned long len);
+ 
+-#endif /* ASM__RISCV__GUEST_ACCESS_H */
++#endif /* RISCV_GUEST_ACCESS_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/riscv/include/asm/guest_atomics.h b/xen/arch/riscv/include/asm/guest_atomics.h
+index 22a7551804f9..1909e667214b 100644
+--- a/xen/arch/riscv/include/asm/guest_atomics.h
++++ b/xen/arch/riscv/include/asm/guest_atomics.h
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+-#ifndef ASM__RISCV__GUEST_ATOMICS_H
+-#define ASM__RISCV__GUEST_ATOMICS_H
++#ifndef RISCV_GUEST_ATOMICS_H
++#define RISCV_GUEST_ATOMICS_H
+ 
+ #include <xen/bug.h>
+ 
+@@ -32,7 +32,7 @@ guest_testop(test_and_change_bit)
+ 
+ #define guest_test_bit(d, nr, p) ((void)(d), test_bit(nr, p))
+ 
+-#endif /* ASM__RISCV__GUEST_ATOMICS_H */
++#endif /* RISCV_GUEST_ATOMICS_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/riscv/include/asm/imsic.h b/xen/arch/riscv/include/asm/imsic.h
+index 2425430ed116..639ee327dc67 100644
+--- a/xen/arch/riscv/include/asm/imsic.h
++++ b/xen/arch/riscv/include/asm/imsic.h
+@@ -8,8 +8,8 @@
+  * (c) Microchip Technology Inc.
+  */
+ 
+-#ifndef ASM_RISCV_IMSIC_H
+-#define ASM_RISCV_IMSIC_H
++#ifndef RISCV_IMSIC_H
++#define RISCV_IMSIC_H
+ 
+ #include <xen/rwlock.h>
+ #include <xen/spinlock.h>
+@@ -96,4 +96,4 @@ unsigned int vcpu_guest_file_id(const struct vcpu *v);
+ 
+ int vimsic_make_domu_dt_node(struct kernel_info *kinfo, unsigned int *phandle);
+ 
+-#endif /* ASM_RISCV_IMSIC_H */
++#endif /* RISCV_IMSIC_H */
+diff --git a/xen/arch/riscv/include/asm/insn-defs.h b/xen/arch/riscv/include/asm/insn-defs.h
+index 61aaa202fd13..1bcdbfde3fc7 100644
+--- a/xen/arch/riscv/include/asm/insn-defs.h
++++ b/xen/arch/riscv/include/asm/insn-defs.h
+@@ -1,10 +1,10 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
+-#ifndef ASM_RISCV_INSN_DEFS_H
+-#define ASM_RISCV_INSN_DEFS_H
++#ifndef RISCV_INSN_DEFS_H
++#define RISCV_INSN_DEFS_H
+ 
+ #define HFENCE_VVMA(vaddr, asid) \
+     asm volatile ( "hfence.vvma %z0, %z1" \
+                   :: "rJ" (vaddr), "rJ" (asid) : "memory" )
+ 
+-#endif /* ASM_RISCV_INSN_DEFS_H */
++#endif /* RISCV_INSN_DEFS_H */
+diff --git a/xen/arch/riscv/include/asm/intc.h b/xen/arch/riscv/include/asm/intc.h
+index 1bfba7c6155b..909317335769 100644
+--- a/xen/arch/riscv/include/asm/intc.h
++++ b/xen/arch/riscv/include/asm/intc.h
+@@ -5,8 +5,8 @@
+  * (c) 2024 Vates
+  */
+ 
+-#ifndef ASM__RISCV__INTERRUPT_CONTOLLER_H
+-#define ASM__RISCV__INTERRUPT_CONTOLLER_H
++#ifndef RISCV_INTC_H
++#define RISCV_INTC_H
+ 
+ struct dt_device_node;
+ 
+@@ -91,4 +91,4 @@ void domain_vintc_deinit(struct domain *d);
+ 
+ int vintc_reserve_virq(const struct domain *d, unsigned int virq);
+ 
+-#endif /* ASM__RISCV__INTERRUPT_CONTOLLER_H */
++#endif /* RISCV_INTC_H */
+diff --git a/xen/arch/riscv/include/asm/io.h b/xen/arch/riscv/include/asm/io.h
+index 9aeafd6b3b1f..547c144b983a 100644
+--- a/xen/arch/riscv/include/asm/io.h
++++ b/xen/arch/riscv/include/asm/io.h
+@@ -35,8 +35,8 @@
+  * Copyright (C) 2024 Vates
+  */
+ 
+-#ifndef ASM__RISCV__IO_H
+-#define ASM__RISCV__IO_H
++#ifndef RISCV_IO_H
++#define RISCV_IO_H
+ 
+ #include <xen/macros.h>
+ #include <xen/types.h>
+@@ -151,7 +151,7 @@ static inline uint64_t __raw_readq(const volatile void __iomem *addr)
+ #define writel(v, c)    ({ __io_bw(); writel_cpu(v, c); __io_aw(); })
+ #define writeq(v, c)    ({ __io_bw(); writeq_cpu(v, c); __io_aw(); })
+ 
+-#endif /* ASM__RISCV__IO_H */
++#endif /* RISCV_IO_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/riscv/include/asm/irq.h b/xen/arch/riscv/include/asm/irq.h
+index 57e814d90cf4..2eb68a5baf04 100644
+--- a/xen/arch/riscv/include/asm/irq.h
++++ b/xen/arch/riscv/include/asm/irq.h
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+-#ifndef ASM__RISCV__IRQ_H
+-#define ASM__RISCV__IRQ_H
++#ifndef RISCV_IRQ_H
++#define RISCV_IRQ_H
+ 
+ #include <xen/bug.h>
+ #include <xen/device_tree.h>
+@@ -57,7 +57,7 @@ int route_irq_to_guest(struct domain *d, unsigned int virq,
+ 
+ int release_guest_irq(const struct domain *d, unsigned int virq);
+ 
+-#endif /* ASM__RISCV__IRQ_H */
++#endif /* RISCV_IRQ_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/riscv/include/asm/mm-types.h b/xen/arch/riscv/include/asm/mm-types.h
+index fa512064b808..a04e8f8b179d 100644
+--- a/xen/arch/riscv/include/asm/mm-types.h
++++ b/xen/arch/riscv/include/asm/mm-types.h
+@@ -1,8 +1,8 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
+-#ifndef ASM_RISCV_MM_TYPES_H
+-#define ASM_RISCV_MM_TYPES_H
++#ifndef RISCV_MM_TYPES_H
++#define RISCV_MM_TYPES_H
+ 
+ typedef unsigned long pte_attr_t;
+ 
+-#endif /* ASM_RISCV_MM_TYPES_H */
++#endif /* RISCV_MM_TYPES_H */
+diff --git a/xen/arch/riscv/include/asm/mm.h b/xen/arch/riscv/include/asm/mm.h
+index 1ac66283ec9b..bb7c96e7d2a1 100644
+--- a/xen/arch/riscv/include/asm/mm.h
++++ b/xen/arch/riscv/include/asm/mm.h
+@@ -1,7 +1,7 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
+-#ifndef ASM__RISCV__MM_H
+-#define ASM__RISCV__MM_H
++#ifndef RISCV_MM_H
++#define RISCV_MM_H
+ 
+ #include <public/xen.h>
+ #include <xen/bug.h>
+@@ -349,4 +349,4 @@ void setup_fixmap_mappings(void);
+ 
+ void *early_fdt_map(paddr_t fdt_paddr);
+ 
+-#endif /* ASM__RISCV__MM_H */
++#endif /* RISCV_MM_H */
+diff --git a/xen/arch/riscv/include/asm/monitor.h b/xen/arch/riscv/include/asm/monitor.h
+index fb3d3e8e3ac6..54e08cab8b8f 100644
+--- a/xen/arch/riscv/include/asm/monitor.h
++++ b/xen/arch/riscv/include/asm/monitor.h
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+-#ifndef ASM__RISCV__MONITOR_H
+-#define ASM__RISCV__MONITOR_H
++#ifndef RISCV_MONITOR_H
++#define RISCV_MONITOR_H
+ 
+ #include <xen/bug.h>
+ 
+@@ -14,7 +14,7 @@ static inline uint32_t arch_monitor_get_capabilities(struct domain *d)
+     return 0;
+ }
+ 
+-#endif /* ASM__RISCV__MONITOR_H */
++#endif /* RISCV_MONITOR_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/riscv/include/asm/nospec.h b/xen/arch/riscv/include/asm/nospec.h
+index f9b0241c98f3..c969a9898ffd 100644
+--- a/xen/arch/riscv/include/asm/nospec.h
++++ b/xen/arch/riscv/include/asm/nospec.h
+@@ -1,8 +1,8 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ /* Copyright (C) 2024 Vates */
+ 
+-#ifndef ASM__RISCV__NOSPEC_H
+-#define ASM__RISCV__NOSPEC_H
++#ifndef RISCV_NOSPEC_H
++#define RISCV_NOSPEC_H
+ 
+ static inline bool evaluate_nospec(bool condition)
+ {
+@@ -13,7 +13,7 @@ static inline void block_speculation(void)
+ {
+ }
+ 
+-#endif /* ASM__RISCV__NOSPEC_H */
++#endif /* RISCV_NOSPEC_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/riscv/include/asm/p2m.h b/xen/arch/riscv/include/asm/p2m.h
+index 0d1dace1a0d8..c0538281517f 100644
+--- a/xen/arch/riscv/include/asm/p2m.h
++++ b/xen/arch/riscv/include/asm/p2m.h
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+-#ifndef ASM__RISCV__P2M_H
+-#define ASM__RISCV__P2M_H
++#ifndef RISCV_P2M_H
++#define RISCV_P2M_H
+ 
+ #include <xen/bitops.h>
+ #include <xen/errno.h>
+@@ -264,7 +264,7 @@ void p2m_ctxt_switch_from(struct vcpu *p);
+ void p2m_ctxt_switch_to(struct vcpu *n);
+ void p2m_handle_vmenter(void);
+ 
+-#endif /* ASM__RISCV__P2M_H */
++#endif /* RISCV_P2M_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/riscv/include/asm/page-bits.h b/xen/arch/riscv/include/asm/page-bits.h
+index 788c7d951811..73b9f6378c2c 100644
+--- a/xen/arch/riscv/include/asm/page-bits.h
++++ b/xen/arch/riscv/include/asm/page-bits.h
+@@ -1,7 +1,7 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
+-#ifndef ASM__RISCV__PAGE_BITS_H
+-#define ASM__RISCV__PAGE_BITS_H
++#ifndef RISCV_PAGE_BITS_H
++#define RISCV_PAGE_BITS_H
+ 
+ #define PAGE_SHIFT              12 /* 4 KiB Pages */
+ #define PADDR_BITS              56 /* 44-bit PPN */
+@@ -16,4 +16,4 @@
+ 
+ #define PTE_PPN_SHIFT           10
+ 
+-#endif /* ASM__RISCV__PAGE_BITS_H */
++#endif /* RISCV_PAGE_BITS_H */
+diff --git a/xen/arch/riscv/include/asm/page.h b/xen/arch/riscv/include/asm/page.h
+index f9e59e61de30..7a2ac2be4df1 100644
+--- a/xen/arch/riscv/include/asm/page.h
++++ b/xen/arch/riscv/include/asm/page.h
+@@ -1,7 +1,7 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
+-#ifndef ASM__RISCV__PAGE_H
+-#define ASM__RISCV__PAGE_H
++#ifndef RISCV_PAGE_H
++#define RISCV_PAGE_H
+ 
+ #ifndef __ASSEMBLER__
+ 
+@@ -253,4 +253,4 @@ pte_t pt_walk(vaddr_t va, unsigned int *pte_level);
+ 
+ #endif /* __ASSEMBLER__ */
+ 
+-#endif /* ASM__RISCV__PAGE_H */
++#endif /* RISCV_PAGE_H */
+diff --git a/xen/arch/riscv/include/asm/paging.h b/xen/arch/riscv/include/asm/paging.h
+index 103384723dc5..4f667aa0e749 100644
+--- a/xen/arch/riscv/include/asm/paging.h
++++ b/xen/arch/riscv/include/asm/paging.h
+@@ -1,5 +1,5 @@
+-#ifndef ASM_RISCV_PAGING_H
+-#define ASM_RISCV_PAGING_H
++#ifndef RISCV_PAGING_H
++#define RISCV_PAGING_H
+ 
+ #include <asm-generic/paging.h>
+ 
+@@ -18,4 +18,4 @@ void paging_free_page(struct domain *d, struct page_info *pg);
+ 
+ struct page_info *paging_alloc_page(struct domain *d);
+ 
+-#endif /* ASM_RISCV_PAGING_H */
++#endif /* RISCV_PAGING_H */
+diff --git a/xen/arch/riscv/include/asm/pmap.h b/xen/arch/riscv/include/asm/pmap.h
+index 146dd29f958a..842c40ab6a94 100644
+--- a/xen/arch/riscv/include/asm/pmap.h
++++ b/xen/arch/riscv/include/asm/pmap.h
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0 */
+-#ifndef ASM__RISCV__PMAP_H
+-#define ASM__RISCV__PMAP_H
++#ifndef RISCV_PMAP_H
++#define RISCV_PMAP_H
+ 
+ #include <xen/bug.h>
+ #include <xen/init.h>
+@@ -33,4 +33,4 @@ static inline void __init arch_pmap_unmap(unsigned int slot)
+     flush_tlb_one_local(FIXMAP_ADDR(slot));
+ }
+ 
+-#endif /* ASM__RISCV__PMAP_H */
++#endif /* RISCV_PMAP_H */
+diff --git a/xen/arch/riscv/include/asm/processor.h b/xen/arch/riscv/include/asm/processor.h
+index b1745c107100..007c22d2e611 100644
+--- a/xen/arch/riscv/include/asm/processor.h
++++ b/xen/arch/riscv/include/asm/processor.h
+@@ -7,8 +7,8 @@
+  *
+  */
+ 
+-#ifndef ASM__RISCV__PROCESSOR_H
+-#define ASM__RISCV__PROCESSOR_H
++#ifndef RISCV_PROCESSOR_H
++#define RISCV_PROCESSOR_H
+ 
+ #ifndef __ASSEMBLER__
+ 
+@@ -94,7 +94,7 @@ static inline void sfence_vma(void)
+ 
+ #endif /* __ASSEMBLER__ */
+ 
+-#endif /* ASM__RISCV__PROCESSOR_H */
++#endif /* RISCV_PROCESSOR_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/riscv/include/asm/regs.h b/xen/arch/riscv/include/asm/regs.h
+index 531958f3d748..24674d37cfe4 100644
+--- a/xen/arch/riscv/include/asm/regs.h
++++ b/xen/arch/riscv/include/asm/regs.h
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+-#ifndef ASM__RISCV__REGS_H
+-#define ASM__RISCV__REGS_H
++#ifndef RISCV_REGS_H
++#define RISCV_REGS_H
+ 
+ #ifndef __ASSEMBLER__
+ 
+@@ -17,7 +17,7 @@ static inline bool guest_mode(const struct cpu_user_regs *r)
+ 
+ #endif /* __ASSEMBLER__ */
+ 
+-#endif /* ASM__RISCV__REGS_H */
++#endif /* RISCV_REGS_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/riscv/include/asm/riscv_encoding.h b/xen/arch/riscv/include/asm/riscv_encoding.h
+index 647268e6d0d4..e55be8c1757a 100644
+--- a/xen/arch/riscv/include/asm/riscv_encoding.h
++++ b/xen/arch/riscv/include/asm/riscv_encoding.h
+@@ -6,8 +6,8 @@
+  *   Anup Patel <anup.patel@wdc.com>
+  */
+ 
+-#ifndef ASM__RISCV__RISCV_ENCODING_H
+-#define ASM__RISCV__RISCV_ENCODING_H
++#ifndef RISCV_ENCODING_H
++#define RISCV_ENCODING_H
+ 
+ #define _UL(X) _AC(X, UL)
+ #define _ULL(X) _AC(X, ULL)
+diff --git a/xen/arch/riscv/include/asm/sbi.h b/xen/arch/riscv/include/asm/sbi.h
+index 1952868e963c..2a245d0b4206 100644
+--- a/xen/arch/riscv/include/asm/sbi.h
++++ b/xen/arch/riscv/include/asm/sbi.h
+@@ -9,8 +9,8 @@
+  * Copyright (c) 2019 Western Digital Corporation or its affiliates.
+  */
+ 
+-#ifndef ASM__RISCV__SBI_H
+-#define ASM__RISCV__SBI_H
++#ifndef RISCV_SBI_H
++#define RISCV_SBI_H
+ 
+ #include <xen/cpumask.h>
+ 
+@@ -145,4 +145,4 @@ int sbi_remote_hfence_gvma_vmid(const cpumask_t *cpu_mask, vaddr_t start,
+  */
+ int sbi_init(void);
+ 
+-#endif /* ASM__RISCV__SBI_H */
++#endif /* RISCV_SBI_H */
+diff --git a/xen/arch/riscv/include/asm/setup.h b/xen/arch/riscv/include/asm/setup.h
+index 73ce2f293348..8eee8a746335 100644
+--- a/xen/arch/riscv/include/asm/setup.h
++++ b/xen/arch/riscv/include/asm/setup.h
+@@ -1,7 +1,7 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
+-#ifndef ASM__RISCV__SETUP_H
+-#define ASM__RISCV__SETUP_H
++#ifndef RISCV_SETUP_H
++#define RISCV_SETUP_H
+ 
+ #include <xen/types.h>
+ 
+@@ -11,7 +11,7 @@ void copy_from_paddr(void *dst, paddr_t paddr, unsigned long len);
+ 
+ void init_csr_masks(void);
+ 
+-#endif /* ASM__RISCV__SETUP_H */
++#endif /* RISCV_SETUP_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/riscv/include/asm/smp.h b/xen/arch/riscv/include/asm/smp.h
+index 5dbacf1f9d2d..78f67b917195 100644
+--- a/xen/arch/riscv/include/asm/smp.h
++++ b/xen/arch/riscv/include/asm/smp.h
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+-#ifndef ASM__RISCV__SMP_H
+-#define ASM__RISCV__SMP_H
++#ifndef RISCV_SMP_H
++#define RISCV_SMP_H
+ 
+ #include <xen/cpumask.h>
+ #include <xen/macros.h>
+diff --git a/xen/arch/riscv/include/asm/spinlock.h b/xen/arch/riscv/include/asm/spinlock.h
+index 4a607eba520d..1b43ed06365e 100644
+--- a/xen/arch/riscv/include/asm/spinlock.h
++++ b/xen/arch/riscv/include/asm/spinlock.h
+@@ -1,5 +1,5 @@
+-#ifndef ASM__RISCV__SPINLOCK_H
+-#define ASM__RISCV__SPINLOCK_H
++#ifndef RISCV_SPINLOCK_H
++#define RISCV_SPINLOCK_H
+ 
+ #define arch_lock_acquire_barrier() smp_mb()
+ #define arch_lock_release_barrier() smp_mb()
+@@ -12,4 +12,4 @@
+     arch_lock_signal();             \
+ })
+ 
+-#endif /* ASM__RISCV__SPINLOCK_H */
++#endif /* RISCV_SPINLOCK_H */
+diff --git a/xen/arch/riscv/include/asm/string.h b/xen/arch/riscv/include/asm/string.h
+index a20af81f677d..8dde5c48807b 100644
+--- a/xen/arch/riscv/include/asm/string.h
++++ b/xen/arch/riscv/include/asm/string.h
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
+-#ifndef ASM__RISCV__STRING_H
+-#define ASM__RISCV__STRING_H
++#ifndef RISCV_STRING_H
++#define RISCV_STRING_H
+ 
+-#endif /* ASM__RISCV__STRING_H */
++#endif /* RISCV_STRING_H */
+diff --git a/xen/arch/riscv/include/asm/system.h b/xen/arch/riscv/include/asm/system.h
+index f33af64fd2ec..cb382487751c 100644
+--- a/xen/arch/riscv/include/asm/system.h
++++ b/xen/arch/riscv/include/asm/system.h
+@@ -1,7 +1,7 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
+-#ifndef ASM__RISCV__SYSTEM_H
+-#define ASM__RISCV__SYSTEM_H
++#ifndef RISCV_SYSTEM_H
++#define RISCV_SYSTEM_H
+ 
+ #include <xen/stdbool.h>
+ 
+@@ -78,7 +78,7 @@ static inline bool local_irq_is_enabled(void)
+ 
+ #endif /* __ASSEMBLER__ */
+ 
+-#endif /* ASM__RISCV__SYSTEM_H */
++#endif /* RISCV_SYSTEM_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/riscv/include/asm/time.h b/xen/arch/riscv/include/asm/time.h
+index 4d68900151a7..0e5b96a8631c 100644
+--- a/xen/arch/riscv/include/asm/time.h
++++ b/xen/arch/riscv/include/asm/time.h
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+-#ifndef ASM__RISCV__TIME_H
+-#define ASM__RISCV__TIME_H
++#ifndef RISCV_TIME_H
++#define RISCV_TIME_H
+ 
+ #include <xen/bug.h>
+ #include <xen/muldiv64.h>
+@@ -29,7 +29,7 @@ void preinit_xen_time(void);
+ 
+ extern int (* __ro_after_init set_xen_timer)(uint64_t deadline);
+ 
+-#endif /* ASM__RISCV__TIME_H */
++#endif /* RISCV_TIME_H */
+ 
+ /*
+  * Local variables:
+diff --git a/xen/arch/riscv/include/asm/traps.h b/xen/arch/riscv/include/asm/traps.h
+index 21fa3c3259b3..08c6215e931a 100644
+--- a/xen/arch/riscv/include/asm/traps.h
++++ b/xen/arch/riscv/include/asm/traps.h
+@@ -1,7 +1,7 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
+-#ifndef ASM__RISCV__TRAPS_H
+-#define ASM__RISCV__TRAPS_H
++#ifndef RISCV_TRAPS_H
++#define RISCV_TRAPS_H
+ 
+ #include <asm/processor.h>
+ 
+@@ -13,4 +13,4 @@ void trap_init(void);
+ 
+ #endif /* __ASSEMBLER__ */
+ 
+-#endif /* ASM__RISCV__TRAPS_H */
++#endif /* RISCV_TRAPS_H */
+diff --git a/xen/arch/riscv/include/asm/types.h b/xen/arch/riscv/include/asm/types.h
+index d801596a2013..b0d4c62aef36 100644
+--- a/xen/arch/riscv/include/asm/types.h
++++ b/xen/arch/riscv/include/asm/types.h
+@@ -1,7 +1,7 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
+-#ifndef ASM__RISCV__TYPES_H
+-#define ASM__RISCV__TYPES_H
++#ifndef RISCV_TYPES_H
++#define RISCV_TYPES_H
+ 
+ #if defined(CONFIG_RISCV_32)
+ 
+@@ -25,7 +25,7 @@ typedef u64 register_t;
+ 
+ #endif
+ 
+-#endif /* ASM__RISCV__TYPES_H */
++#endif /* RISCV_TYPES_H */
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/riscv/include/asm/vaplic.h b/xen/arch/riscv/include/asm/vaplic.h
+index 96080bfbc23b..dcbe0d59a886 100644
+--- a/xen/arch/riscv/include/asm/vaplic.h
++++ b/xen/arch/riscv/include/asm/vaplic.h
+@@ -7,8 +7,8 @@
+  * Copyright (c) Microchip.
+  */
+ 
+-#ifndef ASM__RISCV__VAPLIC_H
+-#define ASM__RISCV__VAPLIC_H
++#ifndef RISCV_VAPLIC_H
++#define RISCV_VAPLIC_H
+ 
+ #include <xen/kernel.h>
+ #include <xen/types.h>
+@@ -31,4 +31,4 @@ struct vaplic {
+ int domain_vaplic_init(struct domain *d);
+ void domain_vaplic_deinit(struct domain *d);
+ 
+-#endif /* ASM__RISCV__VAPLIC_H */
++#endif /* RISCV_VAPLIC_H */
+diff --git a/xen/arch/riscv/include/asm/vmid.h b/xen/arch/riscv/include/asm/vmid.h
+index 1c500c4aff70..2b4fc0df8e63 100644
+--- a/xen/arch/riscv/include/asm/vmid.h
++++ b/xen/arch/riscv/include/asm/vmid.h
+@@ -1,7 +1,7 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
+-#ifndef ASM_RISCV_VMID_H
+-#define ASM_RISCV_VMID_H
++#ifndef RISCV_VMID_H
++#define RISCV_VMID_H
+ 
+ struct vcpu;
+ struct vcpu_vmid;
+@@ -11,4 +11,4 @@ bool vmid_handle_vmenter(struct vcpu_vmid *vmid);
+ void vmid_flush_vcpu(struct vcpu *v);
+ void vmid_flush_hart(void);
+ 
+-#endif /* ASM_RISCV_VMID_H */
++#endif /* RISCV_VMID_H */
+diff --git a/xen/arch/riscv/include/asm/vsbi.h b/xen/arch/riscv/include/asm/vsbi.h
+index fa0cad604e8b..c5902fa0728d 100644
+--- a/xen/arch/riscv/include/asm/vsbi.h
++++ b/xen/arch/riscv/include/asm/vsbi.h
+@@ -1,7 +1,7 @@
+ /* SPDX-License-Identifier:  GPL-2.0-only */
+ 
+-#ifndef ASM_RISCV_VSBI_H
+-#define ASM_RISCV_VSBI_H
++#ifndef RISCV_VSBI_H
++#define RISCV_VSBI_H
+ 
+ struct cpu_user_regs;
+ 
+diff --git a/xen/arch/riscv/include/asm/vtimer.h b/xen/arch/riscv/include/asm/vtimer.h
+index b4d48d1a1732..950795be12f3 100644
+--- a/xen/arch/riscv/include/asm/vtimer.h
++++ b/xen/arch/riscv/include/asm/vtimer.h
+@@ -1,7 +1,7 @@
+ /* SPDX-License-Identifier: GPL-2.0-only */
+ 
+-#ifndef ASM__RISCV__VTIMER_H
+-#define ASM__RISCV__VTIMER_H
++#ifndef RISCV_VTIMER_H
++#define RISCV_VTIMER_H
+ 
+ #include <xen/timer.h>
+ 
+@@ -17,4 +17,4 @@ void vtimer_set_timer(struct vtimer *t, uint64_t ticks);
+ void vtimer_ctxt_switch_from(struct vcpu *p);
+ void vtimer_ctxt_switch_to(struct vcpu *n);
+ 
+-#endif /* ASM__RISCV__VTIMER_H */
++#endif /* RISCV_VTIMER_H */
+
+base-commit: 2043d22b7e926f508cc23391b4c75325fa7211e9
+-- 
+2.56.0
 
 
