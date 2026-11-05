@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 70D78606D81A
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 13:34:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C09F2606A330
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 13:34:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=KjopbVO2
-Received: from list by lists.xenproject.org with outflank-mailman.1474667.1681658 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=XLHxxp6l
+Received: from list by lists.xenproject.org with outflank-mailman.1474673.1681668 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOxbG-0005mc-MY; Thu, 05 Nov 2026 13:33:54 +0000
+	id 1xOxbY-0006Cj-U8; Thu, 05 Nov 2026 13:34:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1474667.1681658; Thu, 05 Nov 2026 13:33:54 +0000
+Received: by outflank-mailman (output) from mailman id 1474673.1681668; Thu, 05 Nov 2026 13:34:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOxbG-0005mR-Jc; Thu, 05 Nov 2026 13:33:54 +0000
-Received: by outflank-mailman (input) for mailman id 1474667;
- Thu, 05 Nov 2026 13:33:54 +0000
+	id 1xOxbY-0006Cc-Qg; Thu, 05 Nov 2026 13:34:12 +0000
+Received: by outflank-mailman (input) for mailman id 1474673;
+ Thu, 05 Nov 2026 13:34:12 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xOxbG-0005l0-6q
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 13:33:54 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xOxbY-0006B7-4x
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 13:34:12 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xOxbF-00E4OU-Ji
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 14:33:53 +0100
-Received: from [10.42.69.6] (helo=localhost)
+ id 1xOxbX-00E4XL-He
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 14:34:11 +0100
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aec85ba-e002-0a2a0a5209dd-0a2a4506c6a8-14
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 14:33:53 +0100
-Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aec85c8-e002-0a2a0a5209dd-0a2a450ac31c-28
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 14:34:11 +0100
+Received: from [209.85.218.50] (helo=mail-ej1-f50.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aec85c1-195a-0a2a45060019-d1558032cd70-3
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 14:33:53 +0100
-Received: by mail-wm1-f50.google.com with SMTP id
- 5b1f17b1804b1-4a20bdaf39cso19875185e9.1
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 05:33:53 -0800 (PST)
+ id 6aec85d3-f2d2-0a2a450a0019-d155da32d411-3
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 14:34:11 +0100
+Received: by mail-ej1-f50.google.com with SMTP id
+ a640c23a62f3a-c4322d310e7so31676366b.0
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 05:34:11 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4b41297c0d3sm111256165e9.1.2026.11.05.05.33.50
+ a640c23a62f3a-c4d0e444950sm179757666b.40.2026.11.05.05.34.09
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 05 Nov 2026 05:33:50 -0800 (PST)
+ Thu, 05 Nov 2026 05:34:10 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,52 +51,52 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1793885633; x=1794490433; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1793885651; x=1794490451; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=T7Nq9uZ3jEvxZNv9g78qXVfRY8rIVXwVbnY0N5ssSvg=;
-        b=KjopbVO2dmmgoq+rMUUiLOS3+WYm/BeHzNZw2fzNNbI7W/eIWi0lPJtC2Cwt/Xi+NH
-         A6lGtqXUPYIdDGSF3Wm0xeYxp/V5Dme91dFmHeB/J05MfFf5T5/U5X5DeKesvPIg0N4S
-         hRIZPLN8cAh5OfxV+CwNZhnO6nXowjHtFrPLBamIHbcXLLjpHpXtVNxK6t6yyfboc5Iq
-         cdrthcBLy9R0Ya2ZYbhn0dJoIOEVCk7FqjZ0khX6CovNV6ixT7cQJMGdYblPoqpsN7xg
-         aE2sfLCsxbSvGJAfgTY2WYKK71T1gkSg21udMQMPOOyPkbFGfXHMECrx7uuJGz7Cjryo
-         NhNg==
+        bh=XhVMm7OWGM53YPwY0RwS/WYkkxI/DMxC9jQTrfPSs7E=;
+        b=XLHxxp6lGywZ/iIxyVAZz1qpI7EGK4unqTcEWb2c0ROFupX5o45ZcMqKQrqAvYSP6r
+         ANuwqJT9h3wL/9S/94qKJrRW4t9opXkOExujmiljMWyscjvJnWwwNLot2P8PJse0iloR
+         XMGjYeoTlPq7bMxVNAWiCVoFJt3hQqsFQL0av/ENcFZAeE0dtulKHyrSGm28EocxZvW6
+         zsbsJT5yEQVDMwyEtZq9Q/eYt/0muLgUmFlsotmbEjRtg7MI3RKS7TpNPTJTioiyHTsI
+         OrB/3vxMLoknpl2rmEIs9/SbaTBJ2n5pUFsRQZ0k+Gq5MVTZdyA86VmAHK/nTiHUvw8R
+         rxtA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793885633; x=1794490433;
+        d=1e100.net; s=20260707; t=1793885651; x=1794490451;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=T7Nq9uZ3jEvxZNv9g78qXVfRY8rIVXwVbnY0N5ssSvg=;
-        b=VuAIs+tUDFwgy54YJpC6+9ZQJjSqHvi4m+61acNCRkjtqPNNznoMKR+RCmZdxT/Zls
-         EKLEezEsNtNkbQObGeIC52YEQahrniDTXWoaEZ/H7QXk5eqTpkWd4Y85wRHLW/4/zDSy
-         qkH2RzsY4NKIhhEuooWmWunVbbrWS2IEJlfq2zbPV5XVbxf8FK3x6ht2FpvvyYNeuP5p
-         p8LL2qnG/UPFe3Oj8q8IlbacaPwBK1pcUgoUWb5hBEyC9i74jZQSxmIMVwkDfGhLA9aZ
-         4wAOwvcQ6WpZ2Jli1V7ynwZdJ7BAiDunRxI/HtXNwOWCreitEH8xu3JQEvJeYPOS0GtD
-         agqg==
-X-Gm-Message-State: APuU4Z+ifjTNyw0OOJWnc0s572nljVGSfQAlt2pG1ftSRJnniBhJXJ8l
-	y+bOMZJ2DEJX0qog57HV/Iu/txM2q7l6tVtNK2oi4jj+3shBY8QIUbyqptfne7l61q7t4GgO1yK
-	obRzZ5g==
-X-Gm-Gg: AYBFou3Io5Q4XSo3lkqLVo+61HeHrk2+5CWYvzmEfbpnBUe7ongh4CMz/DP43CWVNfZ
-	+I+Zi2jpuuIQQiNLb7JjIy446vUEetz/TADlK0vJr6PB6m0l1e62Ob/5nk/329GmC46HLVf7OKN
-	PgWzDo7WneRrmFF39YxXmbKuLo0bhcMplsK4a788v5504OdfAGT6sjaffPN1ETzHSPA2N0nLkzH
-	45rE1ky0jPB1ewDRWbUvulyhijVohMs25SM4XCNmNCVky/rdFmZe9/vpSDf/csGATR6A3/oanKr
-	Db3QkdOswFL97UJcR/hlzBhDrwnewyyDR5NX+uZdMoD/LAAp93E5SNxXayW6GxV6A6KUZzCb9YH
-	AkqaKdD6kc/kD2vIJIoJyiEP8rGV/Ik1As8v2qJRbkDChPuMpA5iX7lD3/+Jpo2sw7fgEU8B1fG
-	sjsnWYme1IGSwiQvVxjaJBNw3AjR3DDMD+e7AV30EpIiVBdutLXPf2yx7ZgqWIxnC91KiqqSBrx
-	RpDkkDVzfmHt2u1nZ7Rs0jhJUbjDoOs7BCCQZmbgogG9dvXfEHW2uT59gdOGg4WLsZXOPcnD23y
-	EVZpGOi4xkmxG3vnIwSK8zBvKv/rhdv/Eaci+MaSCKhhCxIFqvyqrOIrDLtGN1JeX0ME6e1bYL+
-	qDkd9iEZQYV4lNM/u
-X-Received: by 2002:a05:600c:a00a:b0:4a2:190f:cf6a with SMTP id 5b1f17b1804b1-4ac19802310mr424240255e9.35.1793885632776;
-        Thu, 05 Nov 2026 05:33:52 -0800 (PST)
-Message-ID: <839f9e5b-43ba-4cf2-9176-ce5ea51f9149@suse.com>
-Date: Thu, 5 Nov 2026 14:33:50 +0100
+        bh=XhVMm7OWGM53YPwY0RwS/WYkkxI/DMxC9jQTrfPSs7E=;
+        b=DBzyWtkaauCGefvMVyl+tUYs9namnkKSWOknSdHSiFjpnI1Rh4kGslP81EDHEQ+J5s
+         zSmYGRx+NSBf2VX75jjb/u5Bm06jeLiQePAqqIGXW2D0MBoT8Kt34sWSNYFSH7S4FnDt
+         3YanjVT9HyQgDhxhpmr0R0PFidlxq5EmaiHg7VbmVZwoiWeOXCehFaOvklorNZ/t6z7s
+         sX6dE7ZEsDBQrj6tPzYWnBtBwnkadR6XuQA2e9rjC+HftQJ0Xv2dFBk65Sy/uybIgGep
+         SGf+EsBCGY+RyhzicO6vkqififvNDnA+zMV61lA9x3C9aetw4nG+UF97VZDhCzXLtXFd
+         IenA==
+X-Gm-Message-State: APuU4Z+fFKkcqYNekiXxK2l57RLzNQY/256JXJr0iRHYJvEzY6dzepS2
+	Lmox0i2xrxLgQqZKO6po+18RFaFY8Qk+V6mCg1n5PTBTp7uKeHDIOtsmclV7CczPSf1P75bNkv3
+	+hFAK6A==
+X-Gm-Gg: AYBFou0cAB+QIURXtT8aAh9nSr6O/vUjP6EXZ6sTyvZ56kX1RwxVWhg08WOd+dEkXWr
+	Yu0sObMA7qJdMg0+q4owyDHm6FfhrhSAmY0+z5wjqA1rEhRT37F9cUCKyrItrRCX4ItqGHg7pzP
+	jNtYbMEcF93EqQ9vC1i088YBMGveNMxQOIMi3YlCsdfbeqkgxS8Mx42xSwgStmqCuAGcGGC74WS
+	kLWYedwYx/OiJrTTIKUVgHmxa/+vaoxazCPY584lQOBfg5oWSnfPqD/C4uOyTGTQA/GuYUOKmrG
+	bDumNwLJwo9vPMYhsLcYL520RuLjdfOcUgOgNGbFxi3Upv/MsNnKWnBuoMESUutWHZuougpGBW6
+	eQfXNZoPmXJWeVX9i7epQ8rzKRt0ZIQWESRmgWaTCDjeN4AFDK5Qiqu/GKZIxplgxlfl/1iGTvQ
+	9l2z7nY6XKqgjsB65MGPZTxa83alFB4YLKsFjRRDDYbs4ZNcQkfqqHbiG7Kkhb42mjhVwjC5/dM
+	khKO8slEn3aMWxw6zKXoiv0Ht7SRSMhJkQFZq9PI0ynSrxARTxuQgApZDoGHXVF3+KgqUC9Zt4r
+	Ftln0ONVLNfniYazaPlDNNks2QGoGtS6ELjuVeMJam4k910yl2Ilq6c4DQGZAxjVF2QY5XnsVBU
+	V05UIXWp5DIMSWgQz
+X-Received: by 2002:a17:907:9612:b0:c3f:8c92:3b51 with SMTP id a640c23a62f3a-c4ca793c5f9mr1753027866b.4.1793885650906;
+        Thu, 05 Nov 2026 05:34:10 -0800 (PST)
+Message-ID: <15a24084-6fd8-4e87-96da-d7059fe43946@suse.com>
+Date: Thu, 5 Nov 2026 14:34:09 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v2 04/14] x86/PVH: split pvh_load_kernel()
+Subject: [PATCH v2 05/14] x86/PVH: keep a copy of Dom0's initial E820 map
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -130,9 +130,9 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <a1f88104-14ae-400c-b950-163d5a7e552b@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-16d1c6/1793885633-F74C977B-2C878843/10/78276251493
+X-purgate-ID: tlsNG-4011c0/1793885651-52CDBCFC-88047AFE/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 6931
+X-purgate-size: 3767
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -141,208 +141,118 @@ X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-All E820 manipulations want to happen before the initrd is placed. As a
-first step, split placing the kernel from actually loading it. Then
-placement of other data (ACPI, VMX) can be inserted between kernel
-placement and P2M population (followed by the loading of the kernel).
+pvh_populate_p2m() needs to populate RAM according to the initial map
+established, prior to any stealing by pvh_steal_ram(). Subsequently the
+invocations of those functions will (need to) move ahead of
+pvh_populate_p2m() (while accessing those regions needs to stay after
+that), so what to act on is no longer Dom0's memory map at the time of
+invocation.
+
+Don't bother freeing the allocation on intermediate error paths: We're
+going to panic() anyway.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
-Reviewed-by: Teddy Astie <teddy.astie@vates.tech>
 ---
-If need be, moving the "elf" local variable to dom0_construct_pvh() could
-of course further be split off. Just that this by itself doesn't make much
-sense.
----
-v2: Also log domain in new printk().
+v2: Clarify plans in description. Also log domain in new printk().
 
 --- a/xen/arch/x86/hvm/dom0_build.c
 +++ b/xen/arch/x86/hvm/dom0_build.c
-@@ -644,26 +644,17 @@ static bool __init check_and_adjust_load
-     return true;
+@@ -13,6 +13,7 @@
+ #include <xen/multiboot.h>
+ #include <xen/pci.h>
+ #include <xen/softirq.h>
++#include <xen/xvmalloc.h>
+ 
+ #include <acpi/actables.h>
+ 
+@@ -413,7 +414,10 @@ static void __init pvh_init_p2m(struct d
+     } while ( preempted );
  }
  
--static int __init pvh_load_kernel(
--    const struct boot_domain *bd, paddr_t *entry, paddr_t *start_info_addr)
-+static int __init pvh_place_kernel(
-+    const struct boot_domain *bd,
-+    struct elf_binary *elf,
-+    paddr_t *entry)
+-static int __init pvh_populate_p2m(struct domain *d)
++static int __init pvh_populate_p2m(
++    struct domain *d,
++    const struct e820entry *e820,
++    unsigned int nr_e820)
  {
-     struct domain *d = bd->d;
-     struct boot_module *image = bd->kernel;
--    struct boot_module *initrd = bd->initrd;
-     void *image_base = bootstrap_map_bm(image);
-     void *image_start = image_base + image->arch.headroom;
-     unsigned long image_len = image->size;
--    unsigned long initrd_len =
--        initrd ? initrd->size - initrd->arch.headroom : 0;
--    size_t cmdline_len = bd->cmdline ? strlen(bd->cmdline) + 1 : 0;
--    const char *initrd_cmdline = NULL;
--    struct elf_binary elf;
-     struct elf_dom_parms parms;
--    size_t extra_space;
--    paddr_t last_addr;
--    struct hvm_start_info start_info = { 0 };
--    struct hvm_modlist_entry mod = { 0 };
--    struct vcpu *v = d->vcpu[0];
-     int rc;
+     struct vcpu *v = d->vcpu[0];
+     unsigned int i;
+@@ -421,15 +425,15 @@ static int __init pvh_populate_p2m(struc
+ #define MB1_PAGES PFN_DOWN(MB(1))
  
-     if ( (rc = bzimage_parse(image_base, &image_start, &image_len)) != 0 )
-@@ -672,19 +663,19 @@ static int __init pvh_load_kernel(
-         return rc;
-     }
- 
--    if ( (rc = elf_init(&elf, image_start, image_len)) != 0 )
-+    if ( (rc = elf_init(elf, image_start, image_len)) != 0 )
+     /* Populate memory map. */
+-    for ( i = 0; i < d->arch.nr_e820; i++ )
++    for ( i = 0; i < nr_e820; i++ )
      {
-         printk("Unable to init ELF\n");
-         return rc;
-     }
-     if ( opt_dom0_verbose )
--        elf_set_verbose(&elf);
--    elf_parse_binary(&elf);
--    if ( (rc = elf_xen_parse(&elf, &parms, true)) != 0 )
-+        elf_set_verbose(elf);
-+    elf_parse_binary(elf);
-+    if ( (rc = elf_xen_parse(elf, &parms, true)) != 0 )
-     {
-         printk("Unable to parse kernel for ELFNOTES\n");
--        if ( elf_check_broken(&elf) )
--            printk("%pd kernel: broken ELF: %s\n", d, elf_check_broken(&elf));
-+        if ( elf_check_broken(elf) )
-+            printk("%pd kernel: broken ELF: %s\n", d, elf_check_broken(elf));
-         return rc;
-     }
+         unsigned long addr, size;
  
-@@ -697,20 +688,43 @@ static int __init pvh_load_kernel(
-     if ( (rc = initdom_check_parms(d, &parms)) != 0 )
-         return rc;
+-        if ( d->arch.e820[i].type != E820_RAM )
++        if ( e820[i].type != E820_RAM )
+             continue;
  
--    /* Copy the OS image and free temporary buffer. */
--    elf.dest_base = (void *)(parms.virt_kstart - parms.virt_base);
--    elf.dest_size = parms.virt_kend - parms.virt_kstart;
-+    elf->dest_base = (void *)(parms.virt_kstart - parms.virt_base);
-+    elf->dest_size = parms.virt_kend - parms.virt_kstart;
+-        addr = PFN_DOWN(d->arch.e820[i].addr);
+-        size = PFN_DOWN(d->arch.e820[i].size);
++        addr = PFN_DOWN(e820[i].addr);
++        size = PFN_DOWN(e820[i].size);
  
--    if ( !check_and_adjust_load_address(d, &elf, &parms) )
-+    if ( !check_and_adjust_load_address(d, elf, &parms) )
-         return -ENOSPC;
- 
--    elf_set_vcpu(&elf, v);
--    rc = elf_load_binary(&elf);
-+    *entry = parms.phys_entry;
-+
-+    return 0;
-+}
-+
-+static int __init pvh_load_kernel(
-+    const struct boot_domain *bd,
-+    struct elf_binary *elf,
-+    paddr_t *start_info_addr)
-+{
-+    struct domain *d = bd->d;
-+    struct boot_module *initrd = bd->initrd;
-+    unsigned long initrd_len =
-+        initrd ? initrd->size - initrd->arch.headroom : 0;
-+    size_t cmdline_len = bd->cmdline ? strlen(bd->cmdline) + 1 : 0;
-+    const char *initrd_cmdline = NULL;
-+    size_t extra_space;
-+    paddr_t last_addr;
-+    struct hvm_start_info start_info = { 0 };
-+    struct hvm_modlist_entry mod = { 0 };
-+    struct vcpu *v = d->vcpu[0];
-+    int rc;
-+
-+    /* Copy the OS image and free temporary buffer. */
-+    elf_set_vcpu(elf, v);
-+    rc = elf_load_binary(elf);
-     if ( rc < 0 )
-     {
-         printk("Failed to load kernel: %d\n", rc);
--        if ( elf_check_broken(&elf) )
--            printk("%pd kernel: broken ELF: %s\n", d, elf_check_broken(&elf));
-+        if ( elf_check_broken(elf) )
-+            printk("%pd kernel: broken ELF: %s\n", d, elf_check_broken(elf));
-         return rc;
-     }
- 
-@@ -724,7 +738,7 @@ static int __init pvh_load_kernel(
- 
-     if ( initrd )
-     {
--        size_t initrd_space = elf_round_up(&elf, initrd_len);
-+        size_t initrd_space = elf_round_up(elf, initrd_len);
- 
-         if ( initrd->arch.cmdline_pa )
+         rc = pvh_populate_memory_range(d, addr, size);
+         if ( rc )
+@@ -438,11 +442,11 @@ static int __init pvh_populate_p2m(struc
+         if ( addr < MB1_PAGES )
          {
-@@ -741,9 +755,9 @@ static int __init pvh_load_kernel(
-             initrd = NULL;
-     }
+             uint64_t end = min_t(uint64_t, MB(1),
+-                                 d->arch.e820[i].addr + d->arch.e820[i].size);
++                                 e820[i].addr + e820[i].size);
+             enum hvm_translation_result res =
+                  hvm_copy_to_guest_phys(mfn_to_maddr(_mfn(addr)),
+                                         mfn_to_virt(addr),
+-                                        end - d->arch.e820[i].addr,
++                                        end - e820[i].addr,
+                                         v);
  
--    extra_space += elf_round_up(&elf, cmdline_len);
-+    extra_space += elf_round_up(elf, cmdline_len);
- 
--    last_addr = find_memory(d, &elf, extra_space);
-+    last_addr = find_memory(d, elf, extra_space);
-     if ( last_addr == INVALID_PADDR )
-     {
-         printk("Unable to find a memory region to load initrd and metadata\n");
-@@ -763,7 +777,7 @@ static int __init pvh_load_kernel(
- 
-         mod.paddr = last_addr;
-         mod.size = initrd_len;
--        last_addr += elf_round_up(&elf, initrd_len);
-+        last_addr += elf_round_up(elf, initrd_len);
-         if ( initrd_cmdline )
-         {
-             size_t len = strlen(initrd_cmdline) + 1;
-@@ -796,7 +810,7 @@ static int __init pvh_load_kernel(
-      * Round up to 32/64 bits (depending on the guest kernel bitness) so
-      * the modlist/start_info is aligned.
-      */
--    last_addr += elf_round_up(&elf, cmdline_len);
-+    last_addr += elf_round_up(elf, cmdline_len);
- 
-     if ( initrd != NULL )
-     {
-@@ -820,7 +834,6 @@ static int __init pvh_load_kernel(
-         return rc;
-     }
- 
--    *entry = parms.phys_entry;
-     *start_info_addr = last_addr;
- 
-     return 0;
-@@ -1338,6 +1351,7 @@ int __init dom0_construct_pvh(const stru
- {
+             if ( res != HVMTRANS_okay )
+@@ -1352,6 +1356,8 @@ int __init dom0_construct_pvh(const stru
      paddr_t entry, start_info;
      struct domain *d = bd->d;
-+    struct elf_binary elf;
+     struct elf_binary elf;
++    struct e820entry *orig_e820;
++    unsigned int nr_orig_e820;
      int rc;
  
      printk(XENLOG_INFO "*** Building a PVH Dom%d ***\n", d->domain_id);
-@@ -1375,6 +1389,13 @@ int __init dom0_construct_pvh(const stru
+@@ -1389,6 +1395,16 @@ int __init dom0_construct_pvh(const stru
  
      iommu_hwdom_init(d);
  
-+    rc = pvh_place_kernel(bd, &elf, &entry);
-+    if ( rc )
++    nr_orig_e820 = d->arch.nr_e820;
++    orig_e820 = xvmalloc_array(struct e820entry, nr_orig_e820);
++    if ( !orig_e820 )
 +    {
-+        printk("%pd: failed to place kernel\n", d);
-+        return rc;
++        printk("%pd: no memory for copy of E820 map (%u entries)\n",
++               d, nr_orig_e820);
++        return -ENOMEM;
 +    }
++    memcpy(orig_e820, d->arch.e820, nr_orig_e820 * sizeof(*orig_e820));
 +
-     rc = pvh_populate_p2m(d);
+     rc = pvh_place_kernel(bd, &elf, &entry);
      if ( rc )
      {
-@@ -1382,7 +1403,7 @@ int __init dom0_construct_pvh(const stru
+@@ -1396,13 +1412,15 @@ int __init dom0_construct_pvh(const stru
          return rc;
      }
  
--    rc = pvh_load_kernel(bd, &entry, &start_info);
-+    rc = pvh_load_kernel(bd, &elf, &start_info);
+-    rc = pvh_populate_p2m(d);
++    rc = pvh_populate_p2m(d, orig_e820, nr_orig_e820);
      if ( rc )
      {
-         printk("Failed to load Dom0 kernel\n");
+         printk("Failed to setup Dom0 physical memory map\n");
+         return rc;
+     }
+ 
++    xvfree(orig_e820);
++
+     rc = pvh_load_kernel(bd, &elf, &start_info);
+     if ( rc )
+     {
 
 
