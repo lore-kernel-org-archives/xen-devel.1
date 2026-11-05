@@ -2,43 +2,43 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 57733606A31B
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 21:07:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 981CA606D81B
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 21:07:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=RnuBqofl
-Received: from list by lists.xenproject.org with outflank-mailman.1475595.1682218 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=EoGQCLGY
+Received: from list by lists.xenproject.org with outflank-mailman.1475601.1682226 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xP4g2-0004mD-TP; Thu, 05 Nov 2026 21:07:18 +0000
+	id 1xP4gF-0005FP-7z; Thu, 05 Nov 2026 21:07:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1475595.1682218; Thu, 05 Nov 2026 21:07:18 +0000
+Received: by outflank-mailman (output) from mailman id 1475601.1682226; Thu, 05 Nov 2026 21:07:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xP4g2-0004m6-Ow; Thu, 05 Nov 2026 21:07:18 +0000
-Received: by outflank-mailman (input) for mailman id 1475595;
- Thu, 05 Nov 2026 21:07:17 +0000
+	id 1xP4gF-0005FI-3e; Thu, 05 Nov 2026 21:07:31 +0000
+Received: by outflank-mailman (input) for mailman id 1475601;
+ Thu, 05 Nov 2026 21:07:29 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ljs@kernel.org>) id 1xP4g1-0004l3-MS
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 21:07:17 +0000
+ (envelope-from <ljs@kernel.org>) id 1xP4gD-0005Cu-SI
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 21:07:29 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xP4g1-00BmBL-3L
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 22:07:17 +0100
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xP4gD-001V0L-9K
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 22:07:29 +0100
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <ljs@kernel.org>)
- id 6aecf004-8faa-0a2a0a5109dd-0a2a4509ec62-4
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 22:07:17 +0100
+ id 6aecf003-bab6-0a2a0a5309dd-0a2a4502e648-38
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 22:07:29 +0100
 Received: from [172.234.252.31] (helo=sea.source.kernel.org)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <ljs@kernel.org>)
- id 6aecf003-be1a-0a2a45090019-aceafc1f8042-3
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 22:07:16 +0100
+ id 6aecf00f-6ca4-0a2a45020019-aceafc1f99ca-3
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 22:07:28 +0100
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 3053B434E5;
+ by sea.source.kernel.org (Postfix) with ESMTP id 698154379E;
+ Thu,  5 Nov 2026 21:07:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8983A1F0089F;
  Thu,  5 Nov 2026 21:07:15 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4C0881F008BE;
- Thu,  5 Nov 2026 21:07:03 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,23 +49,23 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="From:Date:Subject:References:In-Reply-To:To:Cc"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793912835;
-	bh=QKT0z8QtIRwzKrfDYLgpmoyX9J+/idevkgO1HnXZit4=;
+	s=k20260515; t=1793912847;
+	bh=K0Qe+brxG+0dZUrKAAGrAFU8X9IZH0VVnpzTIvw3ERA=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=RnuBqoflWBl9+my+oc0dxGf7vwqGAIPn/FsGegfNU3dHcec/WKV86s6Ur1Z7CgphR
-	 XKnhR+RNjTNO8xHOfu/7SF8YH25vN+805KwkJu0FanhjtyA5pyhvbbpwpubqNIFDqI
-	 0TVcpTKSq0Hbsoi1IvuBwqBkbcg2LUnI8ztcdNM7aUjh5w7hvqpQ6VfM7GqHQzO7sB
-	 P65idNuN5d5q0GV/XG9x/f4N6e/Z8fjyllKisCJ9sQgGmYELUKRoe5PiuZNsJh9pU5
-	 chtN+L8dJARPPHvocVhTuHejP5A11y7PUl2FEC/P7We+rpc+2vc3NxNzEGRFg75tiJ
-	 ON7wUjneXfb7Q==
+	b=EoGQCLGYUECuMK3Ryy2JPZD867vm1Nft2NyWWjYZH04COu4EW/n19poNq9sBYoVuM
+	 /9L6U4I6ZY4vXlCPISOuIqoBB5h83vy6AzZrs2irL36W/r0sB/qf1ZvlmEqaeHCR98
+	 Yd2HoEORahKhAsOB/TOKoJBhF5tSUb+5it9H8lS7Qhw6Evt7ES6t9E6Hi7+ZQqGPV/
+	 km0fScYDuEqdFgtcf7u8IrOQsq2bqZdZcBr9xB/YyRxrFVrgKBphzww0dpecuBV/gD
+	 cN1u7CBvszdIwDETsVYy/2zHoypyOCESC6YkymFo3ap/d8M1X84ZFUtyFwrTw/eilV
+	 jjk9dx2yFMCwQ==
 From: "Lorenzo Stoakes (ARM)" <ljs@kernel.org>
-Date: Thu, 05 Nov 2026 21:05:37 +0000
-Subject: [PATCH 06/14] udf: convert mmap hook to mmap_prepare
+Date: Thu, 05 Nov 2026 21:05:38 +0000
+Subject: [PATCH 07/14] selinuxfs: convert mmap hooks to mmap_prepare
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261105-late-2026-mmap_prepare-v1-6-c56aadfbab8a@kernel.org>
+Message-Id: <20261105-late-2026-mmap_prepare-v1-7-c56aadfbab8a@kernel.org>
 References: <20261105-late-2026-mmap_prepare-v1-0-c56aadfbab8a@kernel.org>
 In-Reply-To: <20261105-late-2026-mmap_prepare-v1-0-c56aadfbab8a@kernel.org>
 To: Juergen Gross <jgross@suse.com>, 
@@ -110,17 +110,17 @@ Cc: ljs@kernel.org, xen-devel@lists.xenproject.org,
  linux-aspeed@lists.ozlabs.org, linux-arm-msm@vger.kernel.org, 
  op-tee@lists.trustedfirmware.org, netdev@vger.kernel.org
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1166; i=ljs@kernel.org;
- h=from:subject:message-id; bh=DLdQ29COL0zGmxo/RqnqfZh7M8nmGGQT+1l47aYTRPY=;
- b=owGbwMvMwCV2fu7ZrsZH9SKMp9WSGLLevF+TVmThWvlNcPmraFeJkEjHwxYvPkgIt/wtrxeoz
- +A9ez2ho5SFQYyLQVZMkeX5F/H9QSJh8zov+LvBzGFlAhnCwMUpABO5fZvhn+2396kibN6ZSya4
- 8c9Md3ietX1BVNqe62l2F/Zvfvurg4nhf5JVc2LZzaRWi98fwrc7JT79lmb6P+mw/7Z3Hc9+hFT
- 68QIA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2606; i=ljs@kernel.org;
+ h=from:subject:message-id; bh=7PdtcPjX+tywnOn8AbMVtXCWtyiPBNa3B2xUfxFmHH4=;
+ b=owGbwMvMwCV2fu7ZrsZH9SKMp9WSGLLevF/TIhScFGkt26v86da3Ox+Yv91Wnrv55exlR5/1b
+ 3xS+CHGoqOUhUGMi0FWTJHl+Rfx/UEiYfM6L/i7wcxhZQIZwsDFKQATWbaV4Z/R5fMFHr++HXFy
+ /Ffm97i/eD5f7pGnC1lXqB4L2nOKY1YTw/9ss1+Cbkvu1sn7vT0cwLOC8VqV2dR7TXeLg2ew97/
+ Z5cYPAA==
 X-Developer-Key: i=ljs@kernel.org; a=openpgp;
  fpr=E7F417BF5214569E89D04F46CF9DCD8A81E27F14
-X-purgate-ID: tlsNG-bad1c0/1793912837-BCECE034-89FEE038/0/0
+X-purgate-ID: tlsNG-720697/1793912849-660A82AC-A4B6C1B1/0/0
 X-purgate-type: clean
-X-purgate-size: 1168
+X-purgate-size: 2608
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -129,41 +129,79 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Move from the deprecated mmap hook to the new mmap_prepare hook. The hook
-only updates the access time and sets the VMA operations.
+Move from the deprecated mmap hook to the new mmap_prepare hook for the
+policy and status files.
+
+The policy file only sets VMA flags and operations. The status file remaps
+a single page, so use the PFN remap mmap action to do so.
 
 Signed-off-by: Lorenzo Stoakes (ARM) <ljs@kernel.org>
 ---
- fs/udf/file.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ security/selinux/selinuxfs.c | 24 +++++++++++-------------
+ 1 file changed, 11 insertions(+), 13 deletions(-)
 
-diff --git a/fs/udf/file.c b/fs/udf/file.c
-index 02e9314818dc..d5e80c6cae96 100644
---- a/fs/udf/file.c
-+++ b/fs/udf/file.c
-@@ -190,10 +190,10 @@ static int udf_release_file(struct inode *inode, struct file *filp)
- 	return 0;
+diff --git a/security/selinux/selinuxfs.c b/security/selinux/selinuxfs.c
+index 310e19efff1d..e78c65685020 100644
+--- a/security/selinux/selinuxfs.c
++++ b/security/selinux/selinuxfs.c
+@@ -236,27 +236,25 @@ static ssize_t sel_read_handle_status(struct file *filp, char __user *buf,
+ 				       sizeof(struct selinux_kernel_status));
  }
  
--static int udf_file_mmap(struct file *file, struct vm_area_struct *vma)
-+static int udf_file_mmap_prepare(struct vm_area_desc *desc)
+-static int sel_mmap_handle_status(struct file *filp,
+-				  struct vm_area_struct *vma)
++static int sel_mmap_prepare_handle_status(struct vm_area_desc *desc)
  {
--	file_accessed(file);
--	vma->vm_ops = &udf_file_vm_ops;
-+	file_accessed(desc->file);
-+	desc->vm_ops = &udf_file_vm_ops;
+-	struct page    *status = filp->private_data;
+-	unsigned long	size = vma->vm_end - vma->vm_start;
++	struct page    *status = desc->file->private_data;
+ 
+ 	BUG_ON(!status);
+ 
+ 	/* only allows one page from the head */
+-	if (vma->vm_pgoff > 0 || size != PAGE_SIZE)
++	if (desc->pgoff > 0 || vma_desc_size(desc) != PAGE_SIZE)
+ 		return -EIO;
+ 
+-	return remap_pfn_range(vma, vma->vm_start,
+-			       page_to_pfn(status),
+-			       size, vma->vm_page_prot);
++	mmap_action_remap_full(desc, page_to_pfn(status));
++
++	return 0;
+ }
+ 
+ static const struct file_operations sel_handle_status_ops = {
+ 	.open		= sel_open_handle_status,
+ 	.read		= sel_read_handle_status,
+-	.mmap		= sel_mmap_handle_status,
++	.mmap_prepare	= sel_mmap_prepare_handle_status,
+ 	.llseek		= generic_file_llseek,
+ };
+ 
+@@ -419,10 +417,10 @@ static const struct vm_operations_struct sel_mmap_policy_ops = {
+ 	.page_mkwrite = sel_mmap_policy_fault,
+ };
+ 
+-static int sel_mmap_policy(struct file *filp, struct vm_area_struct *vma)
++static int sel_mmap_prepare_policy(struct vm_area_desc *desc)
+ {
+-	vm_flags_set(vma, VM_DONTEXPAND | VM_DONTDUMP);
+-	vma->vm_ops = &sel_mmap_policy_ops;
++	vma_desc_set_flags(desc, VMA_DONTEXPAND_BIT, VMA_DONTDUMP_BIT);
++	desc->vm_ops = &sel_mmap_policy_ops;
  
  	return 0;
  }
-@@ -202,7 +202,7 @@ const struct file_operations udf_file_operations = {
- 	.read_iter		= generic_file_read_iter,
- 	.unlocked_ioctl		= udf_ioctl,
- 	.open			= generic_file_open,
--	.mmap			= udf_file_mmap,
-+	.mmap_prepare		= udf_file_mmap_prepare,
- 	.write_iter		= udf_file_write_iter,
- 	.release		= udf_release_file,
- 	.fsync			= simple_fsync,
+@@ -430,7 +428,7 @@ static int sel_mmap_policy(struct file *filp, struct vm_area_struct *vma)
+ static const struct file_operations sel_policy_ops = {
+ 	.open		= sel_open_policy,
+ 	.read		= sel_read_policy,
+-	.mmap		= sel_mmap_policy,
++	.mmap_prepare	= sel_mmap_prepare_policy,
+ 	.release	= sel_release_policy,
+ 	.llseek		= generic_file_llseek,
+ };
 
 -- 
 2.56.0
