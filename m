@@ -2,47 +2,39 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 48478606A31B
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 00:09:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=edera.dev header.i=@edera.dev header.a=rsa-sha256 header.s=google header.b=H89zCo+P
-Received: from list by lists.xenproject.org with outflank-mailman.1473030.1680739 (Exim 4.92)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88393606A336
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 00:09:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1473016.1680748 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOl2A-0008NO-RB; Thu, 05 Nov 2026 00:08:50 +0000
+	id 1xOl2U-0000DT-1m; Thu, 05 Nov 2026 00:09:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1473030.1680739; Thu, 05 Nov 2026 00:08:50 +0000
+Received: by outflank-mailman (output) from mailman id 1473016.1680748; Thu, 05 Nov 2026 00:09:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOl2A-0008NH-Nl; Thu, 05 Nov 2026 00:08:50 +0000
-Received: by outflank-mailman (input) for mailman id 1473030;
- Thu, 05 Nov 2026 00:07:27 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xOl2T-0000DM-VF; Thu, 05 Nov 2026 00:09:09 +0000
+Received: by outflank-mailman (input) for mailman id 1473016;
+ Thu, 05 Nov 2026 00:01:56 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <kavi@edera.dev>) id 1xOl0p-0008Gs-8X
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 00:07:27 +0000
+ (envelope-from <kavithadaula@kavithas-macbook-pro.local>)
+ id 1xOkvU-0008B1-Gd
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 00:01:56 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xOl0o-00DrPP-Ll
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 01:07:26 +0100
-Received: from [10.42.69.2] (helo=localhost)
+ id 1xOkvT-00FtPN-F6
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 01:01:55 +0100
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <kavi@edera.dev>)
- id 6aebc852-bab6-0a2a0a5309dd-0a2a4502ce68-44
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 01:07:26 +0100
-Received: from [209.85.160.177] (helo=mail-qt1-f177.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <kavi@edera.dev>)
- id 6aebc8bd-6ca4-0a2a45020019-d155a0b1b575-3
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 01:07:26 +0100
-Received: by mail-qt1-f177.google.com with SMTP id
- d75a77b69052e-5495d549924so12467761cf.1
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 16:07:26 -0800 (PST)
-Received: from localhost.localdomain
- ([2600:4040:2e7a:3100:d9e8:a7bf:8c30:7336])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-91e7dfdfb5fsm32786346d6.16.2026.11.04.16.07.24
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 04 Nov 2026 16:07:24 -0800 (PST)
+ (envelope-from <kavithadaula@kavithas-macbook-pro.local>)
+ id 6aebc762-2eae-0a2a0a5409dd-0a2a450c9428-10
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 01:01:55 +0100
+Received: from [72.66.120.178] (helo=Kavithas-MacBook-Pro.local)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
+ (envelope-from <kavithadaula@kavithas-macbook-pro.local>)
+ id 6aebc772-f479-0a2a450c0019-484278b2cd41-1
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 01:01:55 +0100
+Received: by Kavithas-MacBook-Pro.local (Postfix, from userid 501)
+ id 4A07A1A585A2; Wed,  4 Nov 2026 19:01:54 -0500 (EST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,46 +43,8 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=edera.dev header.i="@edera.dev" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=edera.dev; s=google; t=1793837245; x=1794442045; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=XCpW/b5tui0bRd/i8QmB/FeEdN2UMNiMD2TH2Q2ymh4=;
-        b=H89zCo+PfIWoSpchAgRgJFHbP/kNUIT9wTFwmS9sIrP3+T7OVJ4DnYkMDPQskkzzFW
-         yUIcgtQatpKmrYAtqfTZJJrf/JLmzY6uwnxD6Il+kfnoZzELmH5u/2n4t/jYfqbGgqnT
-         g6W3e1Hl/GZhgFMOrcQLFOArF0qN9xWv+8lTriH6to3hCOoZ8ES1eMgp7W6mQTCRmJaV
-         ocnc6HJCi1Pqxro+7lv11TXDVaduu88sfaa6mTPSy8lgUbdipLZBpX9fBEcyHfFuXQiC
-         pClcdUtRUApvYLTmJfc0eNYNjSWX6uVjK6ZtBqCaA7MH+0G242a8Qb+l834ExrH2xLDk
-         WZVw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793837245; x=1794442045;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=XCpW/b5tui0bRd/i8QmB/FeEdN2UMNiMD2TH2Q2ymh4=;
-        b=ygl14wSrPN4MjPButU0AtYlgi+0ZxIf4oBn8i/yMDYjidt2Ne2t+Anmk4xP7F4/eII
-         ROVpUQZGLVfH/BUXNJqh4tD+wefpQNAZFqv+c2U8xMiY6Bf4eKIknVw95wm5hW5Hyl0w
-         Ue1/2Z11XGBs51u5rALnNUR0jCnbAoC/FGNydDW7fRQk85m4Ei5NqWZNj5YkYjoHZejx
-         TedbFda5G0XBmp2tsvdihK9iC7SdaVipeqkyvMl1T/ku+gNZLx1hsZ7unUWMUp6VXpAb
-         iKjxjYbQIhagfI5h2FApAAOpfk6SFfBalKqSbvnarVvlNn0+dnsnGGQrgmBepcxm+2Cd
-         Rsfg==
-X-Forwarded-Encrypted: i=1; AKwUvBxOfhDzEIZvd6llTLAqWq8fZYHlFcuoo99s0xlGyAOxVpvN9gG2IcB4fc5/WspU+vgrJxB2zMX96mI=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z+qC2sR7pPqdDiI+tebJIX4PCeMBRlEjG3cAUT8nHKnkMf859XT
-	oENYRHWOEvVDEObcmq7qv5C99i/YOa4k0LHhTnJ8mLJZNsyJIIl95RoaISyRMtNIhi8=
-X-Gm-Gg: AYBFou0tFtk+HEnRULX47T9jO7DImF63ozhu8Sh655dKFqddAlRSROoj83yMlWtD/6X
-	U8x9PdYqG2eOID4CAitatN/dB1+g4h5uho+qhmJpK6cntEQb9yleWq2RDimHu45Ld+yI1fiORyO
-	vtCJq5dKA2L9o8ZYdBPjMEx+T7ajFCZ9XHfX9hwXN14akdCFaMA/EIlKdlE910O8ofMfMalCW1O
-	oTyZz782tNiMCtFUL01hd16SbZLwrUI7tOFt719hpuTsNXcFIvnwH54DZVJxuXROEcWzTv8BxcX
-	pAYHHyEy7vcFj32/TLmS0b4is/Tqzqz5+Lm8Q/IUoRfBj5FpzresoWxz/JVCx6yM7AlhO/xSwTg
-	rDwIG7L5wgBNsjMp+GXWTLevSwqEjeKN7pPB40KLb7VZlUrXRWhNaKFinygcCAlwnjkFfm/TNaj
-	mwXDnYz6oEbrZeJcaoh0oYION5A3W0D9Y/8/s+ApLvMgwcKT4/vgrMJ1BN03EmE1rv7adXhq7Yz
-	EYXiJ4ZkA+n+HBz2hvikMUYdzJzeulpQ+alIe+tvfVhDhq9MGiNPBJyviNh5CvpATQaWrgmaPWa
-	yzU0tUeq9Jac4GVKevDM56+KfWpUORwAXHIKJt3451BbjD/hCCCjMsgmbpqUJIIjKufzMxA5gnf
-	26upmy2YM
-X-Received: by 2002:a05:622a:1f90:b0:535:80b:9911 with SMTP id d75a77b69052e-542b658d18amr268931571cf.24.1793837244780;
-        Wed, 04 Nov 2026 16:07:24 -0800 (PST)
-From: Kavitha Daula <kavi@edera.dev>
+Authentication-Results: eu.smtp.expurgate.cloud; none
+From: Kavitha Daula <kavithadaula@Kavithas-MacBook-Pro.local>
 To: jgross@suse.com,
 	sstabellini@kernel.org
 Cc: oleksandr_tyshchenko@epam.com,
@@ -98,22 +52,23 @@ Cc: oleksandr_tyshchenko@epam.com,
 	linux-kernel@vger.kernel.org,
 	Kavitha Daula <kavi@edera.dev>
 Subject: [PATCH] xen/grant-table: annotate on-stack work in gnttab_unmap_refs_sync()
-Date: Wed,  4 Nov 2026 19:07:16 -0500
-Message-ID: <20261105000716.83314-1-kavi@edera.dev>
+Date: Wed,  4 Nov 2026 19:01:37 -0500
+Message-ID: <20261105000137.82224-1-kavithadaula@Kavithas-MacBook-Pro.local>
 X-Mailer: git-send-email 2.50.1
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1793837246-311CF2AC-4E303F2C/0/0
+X-purgate-ID: tlsNG-d25034/1793836915-51737A5B-C19AC4A2/0/0
 X-purgate-type: clean
-X-purgate-size: 2911
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+X-purgate-size: 2951
+X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_ADSP_NXDOMAIN,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
+
+From: Kavitha Daula <kavi@edera.dev>
 
 Both callers of gnttab_unmap_refs_sync(), free_persistent_gnts() and
 xen_blkbk_unmap_purged_grants() in blkback, keep their struct
