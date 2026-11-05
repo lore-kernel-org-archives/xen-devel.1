@@ -2,75 +2,76 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7EC19606A32F
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 01:35:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B07D6606A326
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 01:35:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=ford.com header.i=@ford.com header.a=rsa-sha256 header.s=ppford header.b=HUt/0LgL;
-	dkim=pass (1024-bit key, unprotected) header.d=azureford.onmicrosoft.com header.i=@azureford.onmicrosoft.com header.a=rsa-sha256 header.s=selector2-azureford-onmicrosoft-com header.b=TM3GWSaX;
-	dkim=pass (2048-bit key, unprotected) header.d=saarlouis.ford.com header.i=@saarlouis.ford.com header.a=rsa-sha256 header.s=ppserprodsaar header.b=DyVSxIpl;
-	dkim=neutral header.d=ford.com header.i=@ford.com header.a=rsa-sha256 header.s=ppfserpocford header.b=snsb/7Fr
-Received: from list by lists.xenproject.org with outflank-mailman.1473218.1680883 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=ford.com header.i=@ford.com header.a=rsa-sha256 header.s=ppford header.b=d+/DuG+7;
+	dkim=pass (1024-bit key, unprotected) header.d=azureford.onmicrosoft.com header.i=@azureford.onmicrosoft.com header.a=rsa-sha256 header.s=selector2-azureford-onmicrosoft-com header.b=BSFP8y1D;
+	dkim=pass (2048-bit key, unprotected) header.d=saarlouis.ford.com header.i=@saarlouis.ford.com header.a=rsa-sha256 header.s=ppserprodsaar header.b=aZbJvFw0;
+	dkim=neutral header.d=ford.com header.i=@ford.com header.a=rsa-sha256 header.s=ppfserpocford header.b=eEZ3+eze
+Received: from list by lists.xenproject.org with outflank-mailman.1473232.1680910 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOmNa-0007yG-Ln; Thu, 05 Nov 2026 01:35:02 +0000
+	id 1xOmNh-0000kb-BR; Thu, 05 Nov 2026 01:35:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1473218.1680883; Thu, 05 Nov 2026 01:35:02 +0000
+Received: by outflank-mailman (output) from mailman id 1473232.1680910; Thu, 05 Nov 2026 01:35:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOmNa-0007xx-El; Thu, 05 Nov 2026 01:35:02 +0000
-Received: by outflank-mailman (input) for mailman id 1473218;
- Thu, 05 Nov 2026 01:35:01 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xOmNh-0000jc-5r; Thu, 05 Nov 2026 01:35:09 +0000
+Received: by outflank-mailman (input) for mailman id 1473232;
+ Thu, 05 Nov 2026 01:35:08 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <dmukhin@ford.com>) id 1xOmNY-0007hY-N9
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 01:35:00 +0000
+ (envelope-from <dmukhin@ford.com>) id 1xOmNf-0000Tg-M7
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 01:35:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xOmNY-00G6d6-48
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 02:35:00 +0100
-Received: from [10.42.69.3] (helo=localhost)
+ id 1xOmNf-000xGY-2C
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 02:35:07 +0100
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <dmukhin@ford.com>)
- id 6aebdd1f-8faa-0a2a0a5109dd-0a2a4503bb5c-12
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 02:35:00 +0100
-Received: from [148.163.146.23] (helo=mx0a-00498f03.pphosted.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aebdd28-bab6-0a2a0a5309dd-0a2a450c8a0c-26
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 02:35:02 +0100
+Received: from [148.163.143.241] (helo=mx0b-00498f03.pphosted.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <dmukhin@ford.com>)
- id 6aebdd42-fae8-0a2a45030019-94a392173f32-3
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 02:34:59 +0100
-Received: from pps.filterd (m0482516.ppops.net [127.0.0.1])
- by m0482516.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 6A50mlYw1531545
- for <xen-devel@lists.xenproject.org>; Wed, 4 Nov 2026 17:34:58 -0800
-Received: from sn4pr2101cu001.outbound.protection.outlook.com
- (mail-southcentralusazon11012002.outbound.protection.outlook.com
- [40.93.195.2])
- by m0482516.ppops.net (PPS) with ESMTPS id 4hr9tfbhbv-1
+ id 6aebdd45-f479-0a2a450c0019-94a38ff1cdc2-3
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 02:35:02 +0100
+Received: from pps.filterd (m0367128.ppops.net [127.0.0.1])
+ by mx0b-00498f03.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6A50meLi2611674
+ for <xen-devel@lists.xenproject.org>; Thu, 5 Nov 2026 01:35:00 GMT
+Received: from cy7pr03cu001.outbound.protection.outlook.com
+ (mail-westcentralusazon11010058.outbound.protection.outlook.com
+ [40.93.198.58])
+ by mx0b-00498f03.pphosted.com (PPS) with ESMTPS id 4hrdw8rvdt-1
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 17:34:57 -0800 (PST)
-Received: from SJ0PR03CA0288.namprd03.prod.outlook.com (2603:10b6:a03:39e::23)
- by SAAPR16MB330156.namprd16.prod.outlook.com (2603:10b6:802:302::23)
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 01:35:00 +0000 (GMT)
+Received: from BLAPR03CA0056.namprd03.prod.outlook.com (2603:10b6:208:32d::31)
+ by CH0PR16MB5337.namprd16.prod.outlook.com (2603:10b6:610:18b::12)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.10; Thu, 5 Nov
- 2026 01:34:52 +0000
-Received: from BY1PEPF0001AE19.namprd04.prod.outlook.com
- (2603:10b6:a03:39e:cafe::89) by SJ0PR03CA0288.outlook.office365.com
- (2603:10b6:a03:39e::23) with Microsoft SMTP Server (version=TLS1_3,
+ 2026 01:34:54 +0000
+Received: from MN7PEPF0000014B.namprd04.prod.outlook.com
+ (2603:10b6:208:32d:cafe::3) by BLAPR03CA0056.outlook.office365.com
+ (2603:10b6:208:32d::31) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.592.10 via Frontend Transport; Thu, 5
- Nov 2026 01:34:52 +0000
+ Nov 2026 01:34:54 +0000
 Received: from mx0a-00498f04.pphosted.com (205.220.161.53) by
- BY1PEPF0001AE19.mail.protection.outlook.com (10.167.242.101) with Microsoft
+ MN7PEPF0000014B.mail.protection.outlook.com (10.167.254.37) with Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.592.5
- via Frontend Transport; Thu, 5 Nov 2026 01:34:51 +0000
-Received: from pps.filterd (m0426318.ppops.net [127.0.0.1])
+ via Frontend Transport; Thu, 5 Nov 2026 01:34:54 +0000
+Received: from pps.filterd (m0373460.ppops.net [127.0.0.1])
  by mx0a-00498f04.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6A50nD1o2970229
- for <xen-devel@lists.xenproject.org>; Wed, 4 Nov 2026 20:34:51 -0500
-Received: from smtp-us.ser.proofpoint.com (pmta-usw.ser.proofpoint.com
- [50.112.124.217])
- by mx0a-00498f04.pphosted.com (PPS) with ESMTPS id 4hnxs4nrkf-5
+ 6A50o3Jj1488836
+ for <xen-devel@lists.xenproject.org>; Wed, 4 Nov 2026 20:34:53 -0500
+Received: from smtp-us.ser.proofpoint.com (pmta-use.ser.proofpoint.com
+ [3.215.31.156])
+ by mx0a-00498f04.pphosted.com (PPS) with ESMTPS id 4hp232whx5-2
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 20:34:51 -0500 (EST)
+ for <xen-devel@lists.xenproject.org>; Wed, 04 Nov 2026 20:34:53 -0500 (EST)
 Received: from localhost ([19.12.92.222]) by cmsmtp with ESMTPSA
- id OmNMxrjPFCiSDOmNNxv4Er; Thu, 05 Nov 2026 01:34:50 +0000
+ id OmNPxwimvDnFpOmNQx5heC; Thu, 05 Nov 2026 01:34:52 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -82,21 +83,21 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=ppford header.d=ford.com header.i="@ford.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=selector2-azureford-onmicrosoft-com header.d=azureford.onmicrosoft.com header.i="@azureford.onmicrosoft.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"; dkim=pass header.s=ppserprodsaar header.d=saarlouis.ford.com header.i="@saarlouis.ford.com" header.h="Cc:Content-Transfer-Encoding:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=ppfserpocford header.d=ford.com header.i="@ford.com" header.h="Cc:Content-Transfer-Encoding:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ford.com; h=cc
 	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=ppford; bh=e3L
-	Z4m0W4czz8dEMCWl5vmq0g3rWTQs9k90QwOMyDoo=; b=HUt/0LgLoZCPJ4Y6ovm
-	lE4PESarrismXD6xvOUTqiSORJ2RGIbgcyN951iOZ0PDOSR1R7csBcK9aEvCGyGg
-	wV5ZCez3kmrwADxdckHlHkLqVp5lJtyYv20oBOSEqcMOF9mvpXJrPY48aQfL1A0V
-	jAauIQ+jv3gl1uQ15KeotcvuW+tC8sTjcDOPxQhoP9V4728MYTgPpoVdIHCGbV5D
-	mmp7xjLGlRbzZK3xSmKErreUlzAaFH/Cy7tyJmtxY+JM48TmYRl3Cfw27PELQH5s
-	nNO0LcTuU9uNZFX9My8SLmFzcUQjFUVZHJdyFXq+hp+e3CKTZ1a6oD7MGoZOHpL5
-	5nw==
+	:message-id:mime-version:references:subject:to; s=ppford; bh=7Of
+	eq2WpHsK3IHZPkWuWlAntiWL+LEDmFt6Pi7PGeq0=; b=d+/DuG+7B9A1G8z3ssq
+	/4xoA+AF5UIaSKd2mrtTHrSj1jO7wCJ3/Hco4/R6KPW8qX19WVlQ5BBxxPbuSUG9
+	M+QmDcN/XhGoh9sUNLs/vwI6Ao/UmWwGNaGL8edLomeL3KPmGBe3sI10hejdH4bx
+	CQOpCFkCVIkowVbOcCv2gArPD1VROhZ+3XYHYqykfF1HRzlHGSkjHSHOtwXUxT5W
+	VPYSio9HLTbi+B3LWm8AM6GZFdpfUFyHEJ7RZx+Jc3rZ1yv6P6VeiTBo/YupPIz2
+	joysY/G9JKt45/1zt9pU3fPE+IGNReXeEdO+rlgxZ6II2HFWWpNCifnc1umNs6OD
+	KIw==
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=bKJJLsfeA2tAcuHdCugD1ynmAIaptLMWUYuVJnms6iimDsdFAafJ/Pf0t+88UhN0oIAufJCk/O7tV5F2JQgqPcuJfPTBkBDT5LSJra07BG61ZskludaF99fZP5E8pLAQpkyJ0Ya6s/2I5f3uMRRhyp6xiJs9Va7YaryXKW8GVyb4/Kjp6XJmiw7+VpPkZPE2BM/AJeFgAIoXfQj2K7J0dm5QxOP7izdYIk3BcbA2c/9TeoHDZvN0yuf18xBMKLvIf9o8DjWWSdUtsfdSlxy5iS2A36aWYgfQ+4oDoZpx4SR4BglN3hDtehQEoD8TUWbLxtmsp79jLh0xPFtWGuPsWQ==
+ b=uraGYyNY/CYa11E3KRHm4r1ZjdmQxK8xgG0mwAnO2O2cbugLozabF4YM1Z4EVyeV3QNbGJ0KsSUpJ8eGlKMFQq7BbgNaY5xtt2LEF/zKOI2AluOhu4H3D51P2czXi4VfoUIhDYZuV7/0HZhtv8DCM8SW2oUvHQ7r51R5JFPQK+ciEmknaXafOTGX1txYOKNbqu6k98uotEVWv0ed6rpIbHEgxog1whaj1lKsWTiTjgBpJBci8I6Zl0bllnv84xULfKryGxcYfm0WrgSAEjmVizOtYOhnDPr5vaLA19ENeMoNCb13O4JhMA1yCpOokSybqeFVgYou6TfEN+/USoor0g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=e3LZ4m0W4czz8dEMCWl5vmq0g3rWTQs9k90QwOMyDoo=;
- b=tVj100aER/FKLCC+m96z0poDcjM0JgGNOMORJupg5bhLjUdr/PEFC2f5coB8bH7Stjty3JPJ0BQqWy9j0D1wzphcdiz1bBJFCjxoy3snVrRTkWWWrnjiJVcHYX+x6p4TquJxjfqRX/3oMqx5+wiSPGTpD//eMV/2zeFNWcrpvkGdWgSrqZMMzJUfqCn0QcSDfpiOLYKPJwGq4HkFbGzqYChRMsm82RQk5vf7FuxNjmB/rV5rOvgkjCAYWpBcfYuby2kri4s4O+FE8aC+OeEgL6ZxrLM+FsWh4uljZr3W065Sa/m8m4blSA7eZMeoZN3FaNifYkjKxpZEp8Nup+EXbw==
+ bh=7Ofeq2WpHsK3IHZPkWuWlAntiWL+LEDmFt6Pi7PGeq0=;
+ b=RnXuFwjODABjiiC8QuDgrGvaFg/v1y1Y+KwDgGU6Kx6WNCO/qtOPjyf2Pt/Hbg495MK7kgh5v5NQxvGpsZKdlV+FhnUzfeEiSc/xSQR+xv4zowrhZItTBvwT7AXTG+ZmOLpHQ6ETIj6sMubsTNZDjz8/crj8JFlDma+7Df+mcoOL0yt8N85ChKFzil/12Y+135XlW+GvG3FAHiWN5q1p0b3NgtVXxR0CCoGEK1QOkobIx2AxYtrYpn/9rHYe53vUCrPJgViloQaV4SaZslFKJBYKDcFKMGLsjwfHpjCkyNJLm50Gq3SZ5ATTJMHItHwHnc+gC/7IxyTOL3w2huX9zQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  205.220.161.53) smtp.rcpttodomain=lists.xenproject.org
  smtp.mailfrom=ford.com; dmarc=pass (p=reject sp=reject pct=100) action=none
@@ -106,8 +107,8 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=azureford.onmicrosoft.com; s=selector2-azureford-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=e3LZ4m0W4czz8dEMCWl5vmq0g3rWTQs9k90QwOMyDoo=;
- b=TM3GWSaXlVUDHPHvnGVuq6jLZSCLuwZSauAOkhGrwObfmZBKXSgq7kHBkRllMrSEQ8WacmzPXOGLb1NDez65Ud3n/0SxeDcKlMbpQTlxYC1fevoNPATSbCOO9M4Li8Cr62r3jQLuO6obi+qhzRaComSedXE0FjKxJEsUdC6UDZQ=
+ bh=7Ofeq2WpHsK3IHZPkWuWlAntiWL+LEDmFt6Pi7PGeq0=;
+ b=BSFP8y1D+SPNYJd9tfyL89/mCLxOzBQIDaVdJnr0zSj0OpuS3cXUNU1meOvEdcPYrcZOM3tmv4Y4m5LgNzwEecTKVe1cW3SoyBhFdFvhxHkIXX0ed2hrj4ez+awmTw+bxhrQ8wUxs+RfrFs8jcSNy3X2h336hGZJHrbqUNNnqNc=
 X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
  is 205.220.161.53) smtp.mailfrom=ford.com; dkim=pass (signature was verified)
  header.d=saarlouis.ford.com;dkim=pass (signature was verified)
@@ -118,34 +119,34 @@ Received-SPF: Pass (protection.outlook.com: domain of ford.com designates
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	saarlouis.ford.com; h=cc:content-transfer-encoding:date:from
 	:in-reply-to:message-id:mime-version:references:subject:to; s=
-	ppserprodsaar; bh=e3LZ4m0W4czz8dEMCWl5vmq0g3rWTQs9k90QwOMyDoo=; b=
-	DyVSxIpl/xVWpG5l/uycLvVGCKBXAMvGjQIgE1VlOnm6CoFV3rCdbrXxtX73TUvV
-	1eHVRlpqwF6vxJQ7Mfp0FPlnrT53lI+C5GofbBHPGTTcPii9gx3wASNqOSE7gZ1Z
-	5vhYYTuw0D1GIztNy8mC5xrQx0wipcY2Oux3h9sPxxjstg5LT7hjEyvBwO1sKTjS
-	CHDtk5U/XrEZyTrpKGfYC/af4IsSz2oH+V1HNG8omU8YrRSqLBGF2zpZ+nABma/e
-	P5km8AwsiVB9eBPB4G3fIkHQ0p2rYVFKO5yTeK09r83vLkhaOECIWOuR9UxmGFLI
-	h4i2U7uVJluu1Qs7j5XM7w==
+	ppserprodsaar; bh=7Ofeq2WpHsK3IHZPkWuWlAntiWL+LEDmFt6Pi7PGeq0=; b=
+	aZbJvFw0QF/EWTY0hwHJ3cxYyZtOhYyu+xQ+rF7zDM9mZsrrDYHgw18/f8XsvuZU
+	CkdGVe4mv+nzrQUFGfQEPELzKd2TdgkIKqL/QInPqDXrP5Fv1PECtS/Bawdam3MY
+	9zRBeNqhV6eIETCL3ZwfwqlvdJn1RH+hTN7hqohtalqDBDmoWCbothHX1EiB4j3+
+	dVgvnLOuFcCsmb82oHOgEiCUiCO4P5hQhYWBa7k88VBKKO7LO786L9Yk0xgfnSKB
+	huTrOXbP+GtAtJ7D+D4YwTAEQyzatCE5nGHXNaFacEaWhavhD0u0NRo2wZyIOxYh
+	cvcO4lXGwFIfVt4TfETKKg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ford.com; h=cc
 	:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=ppfserpocford; bh=e3LZ4m0
-	W4czz8dEMCWl5vmq0g3rWTQs9k90QwOMyDoo=; b=snsb/7FrxhKzg4TbT5ZyY2l
-	wGDZV72Os6LRcwDipIGIj12QVQI64yyei2CcHb+L8bY/gSbCvtYjKRObBVGp9XOg
-	4Rgg55F++D1NdlsjnNEVDR3nvqsxIAybtkAuOqiSDGwS7sC3jCDAi7kZMYnxEU4L
-	HPkZPN4dDU/qpBXa4J+9Vc/60QVj6AMEHAeEp/n4a5msMbSj+Gf1cKcTKZTEu3Cu
-	u6BPzWgskgtARig7H4JBEevgXDrUwOCl4N5R/0+2Sl91uaAMIMB2L89o3FTz1+aj
-	gNsPHw6bQpmEMg3SS6WK4+a5h2rtnRHBh1jy85pajfE+r6KjkjrwJtFZF0AmsJA=
+	:mime-version:references:subject:to; s=ppfserpocford; bh=7Ofeq2W
+	pHsK3IHZPkWuWlAntiWL+LEDmFt6Pi7PGeq0=; b=eEZ3+eze65ogdEmzpnXmEJu
+	ArYl7539rhof2RZRikxlorpTTn8BWTYSPQEqj3olsFxV2l4WfW+SN05IZYM53nRk
+	FjDImGumJwhJS3h0nK9BAgFrWK30xCq+WGjTA1PSm1hNC8JtUZo3CKLIT31h5SJt
+	2UjmSyZM0Ik3W31fC2dHAotcmbMq8XaEX+XAMjPkaPRxRIUINozISFdioN1SItcO
+	PW7DSxnDVm2snj5jR4I05mQq58gAxLxshSNJHT09qxz2nrPqQ0H1NJk2RVnapYqu
+	3nTzx09suwHXoivAnr7V+X2lFUfcRaAIRzW4nE07t64+jNHX74c8D86fmR+hq3w=
 	=
 X-Mailer: SER-76bead168636dc6ed1c9e51ce4dea80dbdd4163750742b614a4d871e565792b7
-X-Cloudmark-MID: OmNMxrjPFCiSDOmNNxv4Er
+X-Cloudmark-MID: OmNPxwimvDnFpOmNQx5heC
 X-Proofpoint-CID: eb09f7eb-2dc2-34ab-a188-7b293c1db1fe
 From: dmukhin@ford.com
 To: xen-devel@lists.xenproject.org
 Cc: andrew.cooper3@citrix.com, jason.andryuk@amd.com, jbeulich@suse.com,
         roger@xenproject.org, teddy.astie@vates.tech, dmukhin@xen.org,
         Denis Mukhin <dmukhin@ford.com>
-Subject: [PATCH v1 17/28] x86/hvm: avic: route interrupt delivery to vCPU
-Date: Wed,  4 Nov 2026 17:33:34 -0800
-Message-ID: <20261105013347.719392-18-dmukhin@ford.com>
+Subject: [PATCH v1 18/28] x86/hvm: add facility to print hardware-assisted vLAPIC info
+Date: Wed,  4 Nov 2026 17:33:35 -0800
+Message-ID: <20261105013347.719392-19-dmukhin@ford.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261105013347.719392-1-dmukhin@ford.com>
 References: <20261105013347.719392-1-dmukhin@ford.com>
@@ -156,73 +157,73 @@ PSER-M365-App: SER-APP
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-05_01,2026-11-04_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
- malwarescore=0 bulkscore=0 phishscore=0 adultscore=0 suspectscore=0
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0
+ spamscore=0 malwarescore=0 bulkscore=0 lowpriorityscore=0 suspectscore=0
+ phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
  route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610300000
  definitions=main-2611050005
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BY1PEPF0001AE19:EE_|SAAPR16MB330156:EE_
+X-MS-TrafficTypeDiagnostic: MN7PEPF0000014B:EE_|CH0PR16MB5337:EE_
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 339fb0cd-6ad1-4cda-b71c-08df3adcfcd1
+X-MS-Office365-Filtering-Correlation-Id: 70ab23dc-44d6-401e-9375-08df3adcfe6a
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|23010399003|1800799024|82310400026|36860700016|11063799006|56012099006|261021123027099003|261021121427099003|261022105027099003|261022075727099003|261009223027099003|261102123227099003|261026140227099003|261026121527099003|261028144727099003|10067099003|18002099003|22082099003;
+	BCL:0;ARA:13230040|23010399003|376014|1800799024|36860700016|82310400026|56012099006|11063799006|261009223027099003|261026140227099003|261022105027099003|261021123027099003|261102123227099003|261022075727099003|261026121527099003|261021121427099003|261028144727099003|10067099003|18002099003|22082099003|6133799003;
 X-Microsoft-Antispam-Message-Info:
-	YW11dLMlk7Z4mR3ha76jy/6I0Fpfc1wv4kaBTxTowXlXs9eazVtStkUE1ZLWPNeNH7EvyhRRCFBCQt0jEix730RZc7JgCsGxIqZ3XUzfTbRj6lBns24cQcijWe6+wZCfkYykFQDuPCPi9wEJfa5Ad0Qwv7yEmricIxDu8UZplfKWjg4sxO3m1AYFeE+buoepfRAxM8Dl6c7POhgZEweCSLGHLSHUnssBHH0Bf5SBOSyW96UtmLWaiP8/jDByvS9t501SC9unDYqsbNE/7Wfp+liVE0Y5auFT8JJuN/Ah5uPyZHuNMxFZ4D26yEbW8l5zi0UAt1hyDZI6ewsLmbQSq8npdEm4wRY9df6LURw2OlrcHsMNlBhzR5ccDC6xq1wsCPPXw28j0DFKtfXjghTmfabM6yJ1HgCvqMo5fQyIA1u8wRX+JvDrjIVdpHMHWyDSRUePYsC4Fz/R1w6GDddGT8yNj5D3Vd3WRFJpLDwCC7qGI9saLQs2pb5nFVa5MNs8nse5KZyjuNMpeM3cGANAU77KYz+Nutkt5atUUSQamh5qjFgEYp50eLH6ZsGFM8MQEwDnrA39OWb4Ht+w+yum4K786Q2uAzy84fRvDzAi1TcFFYK0prT1dQ0UTR56ctomO9pVWyzJvSIxcTM2Ja4VoZDTszpNYb8OJ6Pqs8+a/kCK/4Ufm/m0ql9VbsWqk5WnQMwjWlWrJ5tjrHCm0bB23Q==
+	TcVtbFUrasnOY+skDs+q8k7xFlmY9d3oZRpHJOlXO6Z87w4Y1rluEaDUqfqUfQB36Zi1uT8+U5Wj93V5rmBU5AQBhCGvyZ8ZOrAUlMRfEoQtBNqhetpLS0O4HYByA8rUwjPRe1Zj6hFiSSXKqhwNj4Tu8kqVwm+jvaLQBDrqKWOfTIRN5Oq+44XaPqb2AKLW1WC70A9KkodEfPIX/tdg0lVKwcXNxoVvk+agMlsCqRlakqLZuTWC3dddnTvxv1+lE0IVASTwhCgAIyl9QoBcMT3PQoru9a8BC4fAA0mj9Z0uzdY77P3P7ryAlIQXQqC9gUBQulOpnEuhHjw7FsrzrPAMeXlfQ1/wzR06Owm0Brqsov3n+DWdOnwI1DWOhQ5HIBxm4+xjlmlLPYa1Zj40ej6AH7JsXJbFfLPiedtnioXAfkJoL4XWPRqVUZ7hxOWp50DhKbwtGuRkAneNx24Vtg11juopNEbsV6KKwYDYUDhKFmxRlXXH2lNphY4TRBgxtUbdiNsAL/Hr7tc6Uox46bKgKs8P3QROGWjFC2sPap+gwdbu0rBUT4EvJLldCBd/yp3zOD9SZEqkozfHr96LBScoXxnGlX7f+zD9dzciXQvQA+zXWf71v2iyKdGCUXOm7fvfq45qB11bD4JJ3FSkpy078baQQ+vXTQuUptihBcE+hoYUjYCbXG52ciMgnutK3UjZyeCpfR8Sq3UfGb2Q7Q==
 X-Forefront-Antispam-Report:
-	CIP:205.220.161.53;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mx0a-00498f04.pphosted.com;PTR:mx0a-00498f04.pphosted.com;CAT:NONE;SFS:(13230040)(376014)(23010399003)(1800799024)(82310400026)(36860700016)(11063799006)(56012099006)(261021123027099003)(261021121427099003)(261022105027099003)(261022075727099003)(261009223027099003)(261102123227099003)(261026140227099003)(261026121527099003)(261028144727099003)(10067099003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
+	CIP:205.220.161.53;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mx0a-00498f04.pphosted.com;PTR:mx0a-00498f04.pphosted.com;CAT:NONE;SFS:(13230040)(23010399003)(376014)(1800799024)(36860700016)(82310400026)(56012099006)(11063799006)(261009223027099003)(261026140227099003)(261022105027099003)(261021123027099003)(261102123227099003)(261022075727099003)(261026121527099003)(261021121427099003)(261028144727099003)(10067099003)(18002099003)(22082099003)(6133799003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	W243dfjhwVLviO6df3uexQMD/sJXsY+DwEl6AANLEnVjK9VNEA7ngOOvcZ3JdvtrEes/LuaHfI03mfC3woPWko2uNNEV392xs/0jp2eyAOQTmEe5amxK5IHlKubMFKdXbxf8Na7ij0lFLcTmif6K86UZRjQ1v74obu5OC2ORHOcuNfCQNz/9EUIMLwF2Ic7tqxFClsB4w2L61c/cYm+yn00lwvgRfPWBHwhoXaN3uexMVp/rlTqCGuTYyliuvrI2du+WGQy6c7Rk0i4gR5QzwChlijVHHA2fXD9kgzrbYdjVC/DuU9RiXxRnax0b+DEoAjdFOSC0wYCsk6O6HUr+t0+mx7QCyZ/JS6bQ5qwyWev9B9FPiGGBi7migd0kS87yW7aQfJSQ3OT7FuRkZVd1xdc0P0fJfDOVy6II2zTN2fAMJ1aVhCd+gNkO6nwII8bE
+	G9HBY90xgv/GeUtpWbXxo0Vqvxb03tnGywN02ut6PM9eA5qF0bU3fAchIW1mujuTxJuDPD1l7rNHt4zmc5yYjLLsdLKYhc1k+oGuJPZFq8Zpxe8428899xIbfDH13dEdsPAqskSNpnRvTFdgUHJjnfZaj57l5RPxY+mNvsR5yX0FQRHS2AtnzBfqKCqXsp0tRt8t2eHALuhYbNZYCTB6UQB2j+CxzZqeAM/WD2ixhcygMsEgThc8EdiRp6rqaDT9ibJi6DNvu0UJ+P7W7NQIM3wGItJk8riaUWTY8n2FwCZmvbR4Vw+Ua2+LpEVY6WeW8+V74HAuLnbccRjl+2xS3+8tYOsspKxjG1QiBwgL7xj3JWvEMZBAIAJqZADMu4CxDbAQtxjFrOnWZo41wkZq6G2U0fMkH97ApEaGUJM+mzhFtuAmDdy4BQKrx9IC2gz1
 X-Exchange-RoutingPolicyChecked:
-	xZyDK3v0BywQGes90kWFZdEM7XcU4A1GO92C683255Cwp1ICNT+OPpmpqJ0rejDptfCINkgFcOTH5KbD0XXzh2ZoTSleY55/7syJ9YHkrVB7xLRM/s5Q4RfXJ++FwKHXbucq1T8BeAGZj7WbMOxXsnvEqQE2tmsYjRAFecseD6o6pYAMUcWVu4wOOiBezYtsLboEgesbzG1VRuCwa+RIbwvJpoygMyULwgVG+FxqJapKB08FfHkDgwVSYTvP+AwgXuGp7gusw9DvkRnrtGp3pnRbTF8DA32AEnWpfiFC6sENCz44oOjR5PI1RBZlg2COKkE/jUlbQ8TPuOxpsEcftA==
+	kpr9i6F4UTWbAuRqTN4r+QHoFsPQ4MDotGozADxoj7YBKkCx5DdNch5A46Q4HETW3As8PMccHJNwVL4l7iFj5cWKwYZKpEop2SHyFHgSK0qBIh/3CYyJHSAqxU2KTtebwBhOYTvPw+/KmukuMJkXxAEa63ajBlZwOqQYZLIaNpdS046LySVD/ngBDno9/WaBPFjfzA1gdkAo5H6LtHW7PoZYFe9i15lDttw1N23xTr8NnbSCAw/Trwzbx2AVfBd6/WpXeTa9HxiQaHV6FbEIuzhqFpKsi5Q5yueMxGjRSgDcJ+bLfqclxtVoQpYq8yEqsXLvbnh2F/TiiSJ0aLVahw==
 X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
-	SrwAnGskudoWjByS2RRliAZFeDSmjLSSqaq3oXuHFnTelAYOza48nybuEDwBLxVHLJRIWjmKUHTnB5SB8hgg+fF6Ay5SevBzPmoYnQUfUAqOe0zn0LcTNEICF/WfvkjilBngBVwOQ5dpzX99+PK0FPQAezqj/nciRhUcZ/yoPfVn9QP2ua/6366XHzfppo9dAQwSzC7SvIhswLDko7HyQ0ioHlsQ0kp/tUAc3gFi3K7WE4GESGYO6gbCEPbmTpJJHgTH1yvLGeN11IZyJCN+p2SdvQEvUoT6zfjsntoOYzmOC9KJNzZxlCP2rtco18OFgvZ1A8ZtylPDDKEiods69ju1Ga5eGnVrl2m4HQzpV5m1/JuRgyLjU2N+IuvP16YzMEbIf+zkYydxLNcwn+L2w1vnvVPXMo3xfmGrhnE1ftr/YEagJ52isK3C26TwUJwT6fg2WouYz1lDns8X9B9qrDh3qdyhOFvdR9n5FZsQZ0e+yGWTnXECEeqpMYpf8yh0n1Bls21NtNif/l2Gxrh9B/sywpIVdI8Ut9EICcdadNDoIDnlAFsFCSB7iM90VHCHaFYQmz5riENDCawQK90lTmqXa2XzkqQ+YzspUK5vdJWXgOuSC5pvK5nPXtzd2k+t8CwypacK0sA57KiB7GplOw==
+	EttMKd5KHKz+3oLsOXfPbHdqU03x6Oo3ecyLCZ2OB+c2PwsH2lYfTPgBlFiRotWv/JDTJ70plBQWle8Kyon2aJ63onpeSw9GvfjY32KSuidV8jfXYqq6EyAKuP1KqELhHkSeBsqYRh4GomIqYEw+JBx4TWxtKss9PUOLCE2Km9jhmyC9u4n2NlbBkr0MBK1MX+RbS66sb344FfBZIl/G14YJ9unc6g4WpbCNQIMZMwDMhuNsbFFq/59HG6Saxm++YwufMGHmE/7R/PlJ/V96Sy9TrcAk8SEmlRXgeIBUO95cTfVKxPMIFDnGRnWQvalBqUMySFtGQ3yLn3r8eZY4rGl8yRo3p6w8sftUZoZzw2RASsXel9wbNGhVxcpPppj3QkqzYjbFB/vJurzfa7A4YckNjmNOMpqPLyH5sOLfBs10qNPCj4IDA0V06CoJxbUbLoXDSoYfRxoL/VvsAvUoGKffKgOjj9lq3L4ts8J0r3F+1ck2oBG5uFGh9zvta1dYGTOZx6EqHqtK76vTt9CNdjgpZEjknXayQMQY7AtchRFWUBfsCZv7G4c6DNFeKcWadDi7Qv80oanZo7DBgL1p6zf11/2N4W5yWJmXtTG5o5RHwdsDRdSTOlsT0KfoYoM1xmdSbTSjLmSBsOrB3rHoKw==
 X-OriginatorOrg: ford.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Nov 2026 01:34:51.8196
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Nov 2026 01:34:54.2609
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 339fb0cd-6ad1-4cda-b71c-08df3adcfcd1
+X-MS-Exchange-CrossTenant-Network-Message-Id: 70ab23dc-44d6-401e-9375-08df3adcfe6a
 X-MS-Exchange-CrossTenant-Id: c990bb7a-51f4-439b-bd36-9c07fb1041c0
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=c990bb7a-51f4-439b-bd36-9c07fb1041c0;Ip=[205.220.161.53];Helo=[mx0a-00498f04.pphosted.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BY1PEPF0001AE19.namprd04.prod.outlook.com
+	MN7PEPF0000014B.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SAAPR16MB330156
-X-Authority-Analysis: v=2.4 cv=XfAcX455 c=1 sm=1 tr=0 ts=6aebdd41 cx=c_pps
- a=LBR8CsJoUNkXwF8+XrmcNA==:117 a=lOEMawUel/sSvQipkIvNbg==:17
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR16MB5337
+X-Authority-Analysis: v=2.4 cv=JPiuIMKb c=1 sm=1 tr=0 ts=6aebdd44 cx=c_pps
+ a=lG9UAvPfEC4VfFSIqus9xw==:117 a=lOEMawUel/sSvQipkIvNbg==:17
  a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=zJRp6_cAMcgA:10 a=3PXLN80vpJUA:10
  a=6NUGLSImWEsA:10 a=w9pew1qAHqMA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=P_n1zlmtWsCQbjROFjcg:22 a=NvsXeTrgx-CJMFV-xl94:22 a=cbNQJ9GKAAAA:8
- a=eYvIa5XWC3BHbn6lEHkA:9 a=DqJYxgmhk6moR-_7_KoZ:22 a=WmVTiCyuxqgg3mnwYu6p:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA1MDAwNSBTYWx0ZWRfXzDRqV38T1sCN
- Uo0JeeFUe+GMb1ZKZBk57zV1z3U1maqlUZWkgLLsVdxIUiDXMIei6TVw4oYezoTBL/7Ni5/EEcE
- oyVXoNzbcJcRkPAsqTMOHa0M/oWPpei5MApv4xg+Y/4fkglHBj2f
-X-Proofpoint-GUID: FneIbTRcH1kCe1BdGrISqCo6TgLT1rIm
-X-Proofpoint-ORIG-GUID: FneIbTRcH1kCe1BdGrISqCo6TgLT1rIm
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA1MDAwNSBTYWx0ZWRfX/Kqob5IwLuCB
- bWEt8Q4x9gxwsvmvvB0bKqfOmN/5LW3BsC+pFw/emV6g05GWv+QeaZpYn40gxJZJp8hT6ZW2Gdt
- IklY2bOOjpevPb5ARO6BrDvNBxP9+qJCaAV/GYQAeu2xYZw2LYJaSf3f9qEARLvCxW6w72auB1P
- sjcUUzPv0ot1Oknl4S9Tp85JTVxNWCIPDYkQW1/4MALODPgXCJf5YR7ANj04t+PR177uP7w0AZL
- U+cu1lRRs0feFQRB3s8tEAWELnUErjq1VeN7ivH48ozqG1qcrM1Te7+oOsLE6Fq/uQqlFxlNevQ
- jCXCRXg0o7gn2uV8Wol+urbAPsdYqqq3RuIcjHBv/G6koOnTlXwu6y76Ywio5IxjKm/5x+AJpjc
- tFYp29Td9iX/iyWh3hjeKwBwWYbzE41zqKZu36SF+NlpsPm1lLLc1WEeOmUqbR/JCwKjHGO1PrF
- X7l/my1KawuVZ0Yfp3g==
+ a=P_n1zlmtWsCQbjROFjcg:22 a=WER9OelvoqQQjwJToBYG:22 a=cbNQJ9GKAAAA:8
+ a=cHMDla566H0nh-0__SgA:9 a=G69WFyCBNqGPyalROSdv:22 a=WmVTiCyuxqgg3mnwYu6p:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA1MDAwNSBTYWx0ZWRfX8Kktu+OhnsX4
+ ds4PTiKH684uUHRpdXlpHyE6wqneo1GhW7hVk9epdIZ1X2UaU2scIg/VV5qoQwoTPmJNDfycQ7c
+ IZBPGq9qw6dVBtobsNramSHmUDulNxmLQDWVnwElKEOdQVPPBS4G
+X-Proofpoint-ORIG-GUID: iUINUCIM8Obz9kqXn3q49AOXpBsnc1RF
+X-Proofpoint-GUID: iUINUCIM8Obz9kqXn3q49AOXpBsnc1RF
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA1MDAwNSBTYWx0ZWRfX2M/xW0adbW5E
+ IDNHUARIwAVBRJNwtANqkhRVu2A6ualRQw05Et84T2ZXol9Q7VDsI14r5/mSyMteZjx4yDSDS5U
+ m9CFrhhps430quE6vq58GumLv5ziMYLk9rHq7yBoFT5o5B6XdUyCqzaoTEEF9jPQ0kndFPQtwxe
+ nSxb4aY5olrJicHiJsEr1EvzAJiYWCE9Suw2taxgTOyboxhz84B4UpBGOIg6h8VJbjonxFfIbkX
+ aXcI+JSYmQfAZGDIBk0UlzcXvVDW0P9kCJqblJ3zvhdBZJNZUcczrTRW6rOA0FCOtyOoY8rYKky
+ MRLhxgG3BH1c/ZtDb9Kzq9Jt2kYFd1zTmoshBIvCBZlyFackfxpiBmJ0XaJRDCOqa57M50pCJe/
+ uuQfo5kaWxpCxobB9MqDN/qSLeC3j96PuCdZmwT+xKjHpvY4/0SSOQasLr2V3dNrvR2ks1ecKtr
+ Du9OjwefonSiSzcy2ZQ==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-05_01,2026-11-04_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
- priorityscore=1501 bulkscore=0 clxscore=1015 malwarescore=0 impostorscore=0
- suspectscore=0 spamscore=0 adultscore=0 phishscore=0 lowpriorityscore=0
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 clxscore=1015
+ malwarescore=0 bulkscore=0 adultscore=0 priorityscore=1501 phishscore=0
+ suspectscore=0 impostorscore=0 spamscore=0 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611050005
-X-purgate-ID: tlsNG-33051d/1793842500-6DCD34E9-1B88FE81/0/0
+X-purgate-ID: tlsNG-d25034/1793842502-00CCBA5B-F27C115B/0/0
 X-purgate-type: clean
-X-purgate-size: 12429
+X-purgate-size: 3046
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -233,408 +234,97 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 From: Denis Mukhin <dmukhin@ford.com>
 
-Enabling AVIC implicitly disables the V_IRQ, V_INTR_PRIO, V_IGN_TPR,
-and V_INTR_VECTOR fields in the VMCB Control Word.
+Introduce new method 'dump_posted_intr' in 'hvm_function_table' to enable
+hardware-assisted vLAPIC printouts (e.g. performance counters).
 
-Introduce new interrupt injection code via AVIC backing page.
-
-Essentially, that is handling of 'IsRunning' bit in physical APIC ID
-table entry: it needs to be in sync with the scheduled vCPU. Shadow
-the state to work around hardware not perceiving 'IsRunning' bit.
-
-Add new doorbell MSR to accelerate IPI emulation. The MSR can be used
-for posting interrupts from hypervisor to the guest (e.g. event
-channels).
+Update 'interrupt bindings' keyhandler with a call to the newly introduced
+hvm_dump_posted_intr().
 
 Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
- xen/arch/x86/hvm/svm/avic.c              | 156 +++++++++++++++++++++++
- xen/arch/x86/hvm/svm/avic.h              |  17 +++
- xen/arch/x86/hvm/svm/intr.c              |   9 ++
- xen/arch/x86/hvm/svm/svm.c               |  32 +++++
- xen/arch/x86/include/asm/hvm/svm-types.h |   2 +
- xen/arch/x86/include/asm/msr-index.h     |   1 +
- 6 files changed, 217 insertions(+)
+ xen/arch/x86/include/asm/hvm/hvm.h | 12 ++++++++++++
+ xen/arch/x86/irq.c                 | 24 ++++++++++++++++++++++++
+ 2 files changed, 36 insertions(+)
 
-diff --git a/xen/arch/x86/hvm/svm/avic.c b/xen/arch/x86/hvm/svm/avic.c
-index 18a814871133..0bcab0465227 100644
---- a/xen/arch/x86/hvm/svm/avic.c
-+++ b/xen/arch/x86/hvm/svm/avic.c
-@@ -33,6 +33,8 @@
- #define AVIC_MAX_PHYSICAL_ID                            (0xFEU)
- 
- bool __read_mostly svm_avic_enable;
-+unsigned int __read_mostly svm_avic_features = AVIC_HW_ISRUNNING |
-+                                               AVIC_DOORBELL_MSR;
- 
- static const char __section(".bss.page_aligned.const") __aligned(PAGE_SIZE)
-     avic_apic_access_page[PAGE_SIZE];
-@@ -50,6 +52,11 @@ static int cf_check avic_parse_cmdline(const char *s)
-     {
-         svm_avic_enable = true;
-     }
-+    else if ( !strcmp(s, "nodoorbell") )
-+    {
-+        svm_avic_enable = true;
-+        svm_avic_features &= ~AVIC_DOORBELL_MSR;
-+    }
-     else
-     {
-         return -EINVAL;
-@@ -228,6 +235,7 @@ int svm_avic_vmcb_create(struct vcpu *v)
-     entry |= AVIC_PHYSICAL_ID_ENTRY_VALID_MASK;
- 
-     ACCESS_ONCE(*sv->avic_physical_id) = entry;
-+    ACCESS_ONCE(sv->avic_shadow_id) = entry;
- 
-     avic_vcpu_enable(v, true);
- 
-@@ -248,6 +256,102 @@ void svm_avic_vmcb_destroy(struct vcpu *v)
-     vmcb->avic_vapic_bar = 0;
+diff --git a/xen/arch/x86/include/asm/hvm/hvm.h b/xen/arch/x86/include/asm/hvm/hvm.h
+index 9bf2064925fa..1f0f7749b579 100644
+--- a/xen/arch/x86/include/asm/hvm/hvm.h
++++ b/xen/arch/x86/include/asm/hvm/hvm.h
+@@ -217,6 +217,7 @@ struct hvm_function_table {
+     void (*update_eoi_exit_bitmap)(struct vcpu *v, uint8_t vector, bool set);
+     void (*process_isr)(int isr, struct vcpu *v);
+     void (*deliver_posted_intr)(struct vcpu *v, u8 vector);
++    void (*dump_posted_intr)(const struct vcpu *v);
+     void (*sync_pir_to_irr)(struct vcpu *v);
+     bool (*test_pir)(const struct vcpu *v, uint8_t vector);
+     void (*handle_eoi)(uint8_t vector, int isr);
+@@ -851,6 +852,12 @@ static inline void hvm_sync_pir_to_irr(struct vcpu *v)
+         alternative_vcall(hvm_funcs.sync_pir_to_irr, v);
  }
  
-+static void avic_vcpu_set_cpu(struct vcpu *v)
++static inline void hvm_dump_posted_intr(const struct vcpu *v)
 +{
-+    struct svm_vcpu *sv = &v->arch.hvm.svm;
-+    unsigned apic_id = cpu_data[v->processor].apicid;
-+    uint64_t entry;
-+
-+    BUG_ON(sv->avic_physical_id == NULL);
-+    ASSERT(!(apic_id & ~AVIC_PHYSICAL_ID_ENTRY_HOST_PHYSICAL_ID_MASK));
-+
-+    entry = ACCESS_ONCE(sv->avic_shadow_id);
-+    entry &= ~AVIC_PHYSICAL_ID_ENTRY_HOST_PHYSICAL_ID_MASK;
-+    entry |= apic_id;
-+
-+    ACCESS_ONCE(*sv->avic_physical_id) = entry;
-+
-+    ACCESS_ONCE(sv->avic_shadow_id) = entry;
++    if ( hvm_funcs.dump_posted_intr )
++        alternative_vcall(hvm_funcs.dump_posted_intr, v);
 +}
 +
-+static void avic_vcpu_set_running(struct vcpu *v)
-+{
-+    struct svm_vcpu *sv = &v->arch.hvm.svm;
-+    uint64_t entry;
-+
-+    BUG_ON(sv->avic_physical_id == NULL);
-+
-+    entry = ACCESS_ONCE(sv->avic_shadow_id);
-+    entry |= AVIC_PHYSICAL_ID_ENTRY_IS_RUNNING_MASK;
-+
-+    /* Shadow IsRunning state update. */
-+    ACCESS_ONCE(sv->avic_shadow_id) = entry;
-+
-+    /*
-+     * If hardware has problems detecting IsRunning (erratum 1235)
-+     * keep IsRunning in the shadow entry only.
-+     */
-+    if ( svm_avic_features & AVIC_HW_ISRUNNING )
-+        ACCESS_ONCE(*sv->avic_physical_id) = entry;
-+}
-+
-+static void avic_vcpu_clear_running(struct vcpu *v)
-+{
-+    struct svm_vcpu *sv = &v->arch.hvm.svm;
-+    unsigned apic_id = cpu_data[v->processor].apicid;
-+    uint64_t entry;
-+
-+    BUG_ON(sv->avic_physical_id == NULL);
-+    ASSERT(!(apic_id & ~AVIC_PHYSICAL_ID_ENTRY_HOST_PHYSICAL_ID_MASK));
-+
-+    entry = ACCESS_ONCE(sv->avic_shadow_id);
-+    entry &= ~AVIC_PHYSICAL_ID_ENTRY_IS_RUNNING_MASK;
-+
-+    /*
-+     * If hardware has problems detecting IsRunning (erratum 1235)
-+     * keep IsRunning in the shadow entry only.
-+     */
-+    if ( svm_avic_features & AVIC_HW_ISRUNNING )
-+        ACCESS_ONCE(*sv->avic_physical_id) = entry;
-+
-+    /* Shadow IsRunning state update. */
-+    ACCESS_ONCE(sv->avic_shadow_id) = entry;
-+}
-+
-+/* vCPU enters blocking state. */
-+void svm_avic_vcpu_block(struct vcpu *v)
-+{
-+    avic_vcpu_clear_running(v);
-+}
-+
-+/* vCPU is preparing to resume guest execution. */
-+void svm_avic_vcpu_resume(struct vcpu *v)
-+{
-+    avic_vcpu_set_running(v);
-+}
-+
-+/* vCPU is being assigned a new pCPU. */
-+void svm_avic_vcpu_switch_to(struct vcpu *v)
-+{
-+    avic_vcpu_set_cpu(v);
-+}
-+
-+/* vCPU is being removed from a pCPU. */
-+void svm_avic_vcpu_switch_from(struct vcpu *v)
-+{
-+    avic_vcpu_clear_running(v);
-+}
-+
-+bool svm_avic_vcpu_enabled(const struct vcpu *v)
-+{
-+    const struct svm_vcpu *sv = &v->arch.hvm.svm;
-+    const struct vmcb_struct *vmcb = sv->vmcb;
-+
-+    ASSERT(!(vmcb->_vintr.fields.x2avic_enable));
-+
-+    return vmcb->_vintr.fields.avic_enable;
-+}
-+
- /*
-  * Handle the AVIC_INCOMP_IPI #VMEXIT when AVIC is enabled.
-  *
-@@ -546,6 +650,58 @@ void svm_avic_vmexit_noaccel(struct cpu_user_regs *regs)
-         hvm_emulate_one_vm_event(EMUL_KIND_NORMAL, X86_EXC_UD, X86_EVENT_NO_EC);
+ #else  /* CONFIG_HVM */
+ 
+ #define hvm_enabled false
+@@ -958,6 +965,11 @@ static inline void hvm_set_reg(struct vcpu *v, unsigned int reg, uint64_t val)
+     ASSERT_UNREACHABLE();
  }
  
-+static void avic_deliver_posted_intr(struct vcpu *v)
++static inline void hvm_dump_posted_intr(const struct vcpu *v)
 +{
-+    struct svm_vcpu *sv = &v->arch.hvm.svm;
-+    uint64_t entry;
-+    unsigned int apicid;
-+
-+    smp_mb();
-+
-+    entry = ACCESS_ONCE(sv->avic_shadow_id);
-+
-+    if ( !(entry & AVIC_PHYSICAL_ID_ENTRY_IS_RUNNING_MASK) )
-+        return;
-+
-+    /*
-+     * Some AMD systems (e.g. Zen5 Family 26 (0x1a), Model 36 (0x24)) have
-+     * broken remote notification via doorbell MSR.
-+     * Fallback to brute force, if requested.
-+     */
-+    if ( svm_avic_features & AVIC_DOORBELL_MSR )
-+    {
-+        apicid = entry & AVIC_PHYSICAL_ID_ENTRY_HOST_PHYSICAL_ID_MASK;
-+
-+        /* Ensure the pending interrupt wakes vCPU. */
-+        vcpu_unblock(v);
-+
-+        /*
-+         * AMD APM, 5.29.8.2 Doorbell Mechanism
-+         * The serializing semantics of WRMSR are relaxed when writing to
-+         * the Doorbell Register.
-+         */
-+        wrmsrl(MSR_AMD_AVIC_DOORBELL, apicid);
-+    }
-+    else
-+    {
-+        vcpu_kick(v);
-+    }
++    ASSERT_UNREACHABLE();
 +}
 +
-+void cf_check svm_avic_hvm_deliver_posted_intr(struct vcpu *v, uint8_t vector)
-+{
-+    ASSERT(v != current);
-+
-+    if ( svm_avic_vcpu_enabled(v) )
-+    {
-+        avic_deliver_posted_intr(v);
-+    }
-+    else
-+    {
-+        vcpu_kick(v);
-+    }
-+}
-+
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/arch/x86/hvm/svm/avic.h b/xen/arch/x86/hvm/svm/avic.h
-index f9ff3ffc9346..098924925e89 100644
---- a/xen/arch/x86/hvm/svm/avic.h
-+++ b/xen/arch/x86/hvm/svm/avic.h
-@@ -6,6 +6,15 @@
- #ifndef __SVM_AVIC_H__
- #define __SVM_AVIC_H__
- 
-+#include <xen/const.h>
-+
-+/* Known AVIC hardware quirks. */
-+enum {
-+    AVIC_HW_ISRUNNING       = BIT(0, U),    /* See erratum 1235 */
-+    AVIC_DOORBELL_MSR       = BIT(1, U),    /* Remote vCPU notification OK */
-+};
-+
-+extern unsigned int svm_avic_features;
- extern bool svm_avic_enable;
- 
- int svm_avic_domain_initialise(struct domain *d);
-@@ -17,4 +26,12 @@ void svm_avic_vmcb_destroy(struct vcpu *v);
- void svm_avic_vmexit_incomp_ipi(struct cpu_user_regs *regs);
- void svm_avic_vmexit_noaccel(struct cpu_user_regs *regs);
- 
-+bool svm_avic_vcpu_enabled(const struct vcpu *v);
-+void svm_avic_vcpu_block(struct vcpu *v);
-+void svm_avic_vcpu_resume(struct vcpu *v);
-+void svm_avic_vcpu_switch_to(struct vcpu *v);
-+void svm_avic_vcpu_switch_from(struct vcpu *v);
-+
-+void cf_check svm_avic_hvm_deliver_posted_intr(struct vcpu *v, uint8_t vector);
-+
- #endif /* __SVM_AVIC_H__ */
-diff --git a/xen/arch/x86/hvm/svm/intr.c b/xen/arch/x86/hvm/svm/intr.c
-index 1d39f25e5209..9cceca704a91 100644
---- a/xen/arch/x86/hvm/svm/intr.c
-+++ b/xen/arch/x86/hvm/svm/intr.c
-@@ -24,6 +24,7 @@
- #include <public/hvm/ioreq.h>
- #include <xen/domain_page.h>
- 
-+#include "avic.h"
- #include "nestedhvm.h"
- #include "vmcb.h"
- 
-@@ -80,6 +81,14 @@ static void svm_enable_intr_window(struct vcpu *v, struct hvm_intack intack)
- 
-     ASSERT(intack.source != hvm_intsrc_none);
- 
-+    if ( svm_avic_vcpu_enabled(v) )
-+        /*
-+         * AVIC delivers pending LAPIC interrupts from the backing page
-+         * when the guest becomes interruptible, no need to arm the legacy
-+         * V_IRQ/VINTR interrupt-window mechanism.
-+         */
-+        return;
-+
-     if ( nestedhvm_enabled(v->domain) )
-     {
-         struct nestedvcpu *nv = &vcpu_nestedhvm(v);
-diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
-index d1a95e441f03..2fac76725c4f 100644
---- a/xen/arch/x86/hvm/svm/svm.c
-+++ b/xen/arch/x86/hvm/svm/svm.c
-@@ -35,6 +35,7 @@
- #include <asm/p2m.h>
- #include <asm/paging.h>
- #include <asm/processor.h>
-+#include <asm/pv/shim.h>
- #include <asm/vm_event.h>
- #include <asm/x86_emulate.h>
- 
-@@ -877,6 +878,10 @@ static void cf_check svm_ctxt_switch_from(struct vcpu *v)
-     svm_tsc_ratio_save(v);
- 
-     svm_sync_vmcb(v, vmcb_needs_vmload);
-+
-+    if ( svm_avic_vcpu_enabled(v) )
-+        svm_avic_vcpu_switch_from(v);
-+
-     svm_vmload_pa(per_cpu(host_vmcb, cpu));
- 
-     /* Resume use of ISTs now that the host TR is reinstated. */
-@@ -914,6 +919,9 @@ static void cf_check svm_ctxt_switch_to(struct vcpu *v)
- 
-     svm_tsc_ratio_load(v);
- 
-+    if ( svm_avic_vcpu_enabled(v) )
-+        svm_avic_vcpu_switch_to(v);
-+
-     if ( cpu_has_msr_tsc_aux )
-         wrmsr_tsc_aux(v->arch.msrs->tsc_aux);
- 
-@@ -935,6 +943,9 @@ static bool vcpu_is_vlapic_tpr_emulated(const struct vcpu *v, bool force_noaccel
-     if ( vlapic_hw_disabled(vlapic) )
-         return false;
- 
-+    if ( svm_avic_vcpu_enabled(v) )
-+        return false;
-+
-     return true;
+ #define is_viridian_domain(d) ((void)(d), false)
+ #define is_viridian_vcpu(v) ((void)(v), false)
+ #define has_viridian_time_ref_count(d) ((void)(d), false)
+diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
+index 32a75f77a46d..de79e36fdfe7 100644
+--- a/xen/arch/x86/irq.c
++++ b/xen/arch/x86/irq.c
+@@ -2527,6 +2527,28 @@ void free_domain_pirqs(struct domain *d)
+     pcidevs_unlock();
  }
  
-@@ -982,6 +993,9 @@ static void noreturn cf_check svm_do_resume(void)
-             (vlapic_get_reg(vlapic, APIC_TASKPRI) & 0xFF) >> 4;
-         vmcb_set_vintr(vmcb, intr);
-     }
-+    else if ( svm_avic_vcpu_enabled(v) )
-+        /* AVIC accelerates TPR accesses. */
-+        svm_avic_vcpu_resume(v);
- 
-     hvm_do_resume(v);
- 
-@@ -1091,6 +1105,12 @@ static int cf_check acpi_c1e_quirk(
-     return X86EMUL_OKAY;
- }
- 
-+static void cf_check svm_vcpu_block(struct vcpu *v)
++static void dump_posted_intr_info(void)
 +{
-+    if ( svm_avic_vcpu_enabled(v) )
-+        svm_avic_vcpu_block(v);
++    struct domain *d;
++    struct vcpu *v;
++
++    rcu_read_lock(&domlist_read_lock);
++
++    printk("****** Posted Interrupts Statistics ******\n");
++
++    for_each_domain ( d )
++    {
++        printk("\n>>> Domain %d <<<\n", d->domain_id);
++
++        for_each_vcpu ( d, v )
++            hvm_dump_posted_intr(v);
++    }
++
++    printk("******************************************\n");
++
++    rcu_read_unlock(&domlist_read_lock);
 +}
 +
- static int cf_check svm_domain_initialise(struct domain *d)
+ static void cf_check dump_irqs(unsigned char key)
  {
-     static const struct arch_csw csw = {
-@@ -1104,6 +1124,7 @@ static int cf_check svm_domain_initialise(struct domain *d)
-     if ( rc )
-         return rc;
+     int i, irq, pirq;
+@@ -2605,6 +2627,8 @@ static void cf_check dump_irqs(unsigned char key)
+             printk("   %#02x -> %ps()\n", i, direct_apic_vector[i]);
  
-+    d->arch.hvm.pi_ops.vcpu_block = svm_vcpu_block;
-     d->arch.ctxt_switch = &csw;
- 
-     svm_guest_osvw_init(d);
-@@ -2493,6 +2514,13 @@ static void __init svm_avic_start(void)
- {
-     if ( !cpu_has_svm_avic || pv_shim )
-         svm_avic_enable = false;
+     dump_ioapic_irq_info();
 +
-+    if ( !svm_avic_enable )
-+        return;
-+
-+    svm_function_table.deliver_posted_intr = svm_avic_hvm_deliver_posted_intr;
-+
-+    svm_function_table.caps.virtual_intr_delivery = true;
++    dump_posted_intr_info();
  }
  
- const struct hvm_function_table * __init start_svm(void)
-@@ -2814,6 +2842,10 @@ void asmlinkage svm_vmexit_handler(void)
- 
-     case VMEXIT_VINTR:
-         svm_clear_intr_window(v);
-+
-+        if ( svm_avic_vcpu_enabled(v) )
-+            domain_crash(v->domain, "%pv: VMEXIT_VINTR=%#"PRIx64"\n", v, intr.bytes);
-+
-         break;
- 
-     case VMEXIT_INVD:
-diff --git a/xen/arch/x86/include/asm/hvm/svm-types.h b/xen/arch/x86/include/asm/hvm/svm-types.h
-index 377ad2494e7c..cc40b1b02095 100644
---- a/xen/arch/x86/include/asm/hvm/svm-types.h
-+++ b/xen/arch/x86/include/asm/hvm/svm-types.h
-@@ -51,6 +51,8 @@ struct svm_vcpu {
-      */
-     uint32_t avic_ldr;
-     uint32_t avic_dfr;
-+    uint64_t *avic_physical_id;
-+    uint64_t avic_shadow_id;
- };
- 
- struct nestedsvm {
-diff --git a/xen/arch/x86/include/asm/msr-index.h b/xen/arch/x86/include/asm/msr-index.h
-index ad1c6c97f8f7..84fd9b6581b6 100644
---- a/xen/arch/x86/include/asm/msr-index.h
-+++ b/xen/arch/x86/include/asm/msr-index.h
-@@ -406,6 +406,7 @@
- #define MSR_K8_PSTATE7			0xc001006BU
- #define MSR_K8_ENABLE_C1E		0xc0010055U
- #define MSR_K8_VM_HSAVE_PA		0xc0010117U
-+#define MSR_AMD_AVIC_DOORBELL		0xc001011bU
- 
- #define MSR_AMD_FAM15H_EVNTSEL0		0xc0010200U
- #define MSR_AMD_FAM15H_PERFCTR0		0xc0010201U
+ static int __init cf_check setup_dump_irqs(void)
 -- 
 2.55.0
 
