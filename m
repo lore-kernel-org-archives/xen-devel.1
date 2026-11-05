@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A512606A329
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 16:41:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2DC83606A326
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 16:49:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=vcvclZ7K
-Received: from list by lists.xenproject.org with outflank-mailman.1475246.1682092 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=naZPLT5D
+Received: from list by lists.xenproject.org with outflank-mailman.1475259.1682100 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xP0WV-0001jL-QF; Thu, 05 Nov 2026 16:41:11 +0000
+	id 1xP0dx-0005JX-Fk; Thu, 05 Nov 2026 16:48:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1475246.1682092; Thu, 05 Nov 2026 16:41:11 +0000
+Received: by outflank-mailman (output) from mailman id 1475259.1682100; Thu, 05 Nov 2026 16:48:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xP0WV-0001jE-MM; Thu, 05 Nov 2026 16:41:11 +0000
-Received: by outflank-mailman (input) for mailman id 1475246;
- Thu, 05 Nov 2026 16:41:10 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xP0WU-0001hw-FM
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 16:41:10 +0000
+	id 1xP0dx-0005JQ-Cr; Thu, 05 Nov 2026 16:48:53 +0000
+Received: by outflank-mailman (input) for mailman id 1475259;
+ Thu, 05 Nov 2026 16:48:51 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <visitorckw@gmail.com>) id 1xP0dv-0005I9-Dp
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 16:48:51 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xP0WT-00Efq7-SS
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 17:41:09 +0100
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xP0du-004WML-Qk
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 17:48:50 +0100
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6aecb176-e002-0a2a0a5209dd-0a2a4504b4f8-40
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 17:41:09 +0100
-Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6aecb1a5-b57f-0a2a45040019-d1558035c536-3
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 17:41:09 +0100
-Received: by mail-wm1-f53.google.com with SMTP id
- 5b1f17b1804b1-4a20a37703bso16188575e9.1
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 08:41:09 -0800 (PST)
-Received: from [192.168.1.6] (user-109-243-65-71.play-internet.pl.
- [109.243.65.71]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4b56e58fcc6sm140773205e9.2.2026.11.05.08.41.07
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 05 Nov 2026 08:41:08 -0800 (PST)
+ (envelope-from <visitorckw@gmail.com>)
+ id 6aecb360-bab6-0a2a0a5309dd-0a2a450b8752-28
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 17:48:50 +0100
+Received: from [209.85.210.173] (helo=mail-pf1-f173.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <visitorckw@gmail.com>)
+ id 6aecb371-b7e8-0a2a450b0019-d155d2ade041-3
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 17:48:50 +0100
+Received: by mail-pf1-f173.google.com with SMTP id
+ d2e1a72fcca58-8b32bc605d9so79265b3a.2
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 08:48:50 -0800 (PST)
+Received: from google.com ([118.150.148.19]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-8b09af918f2sm2233005b3a.23.2026.11.05.08.48.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 05 Nov 2026 08:48:48 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,143 +49,201 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="In-Reply-To:Content-Disposition:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793896869; x=1794501669; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=My9+F1xNt+fGV/uocE/2p6QDB4njnXMZQHAomdCWdiM=;
-        b=vcvclZ7Kbzg6hYWtVklAdQ60VoJr+v1Cp6NFGn2rHUsYgH12qALX6Y5d7zfPCQ/7Hr
-         naj01G2Eu1+xPtlGPg9xqV1lJExf6PUQue5BUv0pnT08HsDQUG4hVj+fp1w051upcbQY
-         YGU+4xi1GlvBp+pfdW7uid8HNFKQsPBmBfmVdU+zhBdw2CiAqNnaQYQ2WqnOKZoIEc78
-         +JSCaSoMVM1EzhX3Q93hrotZrqlruDzIWqal2dMaZGvo8+jZpy0EEElbVeBeqDovEeMZ
-         wxpuLCJtc4u33ebd+0S92msCwGiT4nmeIrSr7dSj0teYAf9LU+uU+uOwmqAFiE+EnxKx
-         l2DA==
+        d=gmail.com; s=20260707; t=1793897329; x=1794502129; darn=lists.xenproject.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=nGgbr1sgl5oeyIRIzBGv/BG59BAeAsA8nAEB42w9jp8=;
+        b=naZPLT5DDFyrVVTb2gj2+92Bnr3x0c0Aj6FyjazS2MUz9XfLMVu0EKqH3kNKsV76cc
+         aQegxYjtKItB8+++zTV4mV2i7AkSpk4AR5DU1YCdZBd5Whg9X6sY9bs2GjJGnWvJtBiX
+         lLYChdhowuUXyZFAKnHIyoYcYLRrl8VMbm0Y21NmZ7cqrybvXe4nCNFCT28sivcAOOXZ
+         VGeV+yp0jQ6MpE8J+GPU9+p4tzWoj8a+5sagi43PdMEW2NQNGGCXvPa2EnjjsOVXJjhz
+         55DSUCW657aDONoixA0yON269WictujR4za445nTtFWuDnP980UBc+wE/U49PY3RNxLP
+         CCxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793896869; x=1794501669;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=My9+F1xNt+fGV/uocE/2p6QDB4njnXMZQHAomdCWdiM=;
-        b=LfafE6qFZ7tOr92U5c04IIUp76DlzOCl2srOY9m35BLSDvT6Y8jJ3kfw4nRpNyYFIS
-         L7zNkJBUUT7yhqutkxYkH9TcMfvKTlJuM3Ba1Z8lBERM5y+FeYqIko5eAwIDxzaiNDst
-         BQTnjaK+0+Jxa+ZJDMgBdmePjpRHNVq+wl9PUeOU56aMcdpjj30UMHBFLKDXEOE+CjM8
-         OMLF24ePEf786qr1JyHwJ5fKFDnDCnDr4gE3x7kcNpNeJcl6WfbbEcOCJjMySAESFoiu
-         20Ho+1Y7OJhxz1vD/8SNkx55IATDKCxpKtd03SaDLEn64uGkIagIc/Z0wIz30qIH1pdX
-         nJ7g==
-X-Gm-Message-State: APuU4Z/Wn0YD0MPIV9MEaxsMk6+BUKD7hagrDJyOM9vr4lK2NOkfhj5D
-	vbNa9u+E8Lt91gXANNj20MHyHOBaSvb9IjvnLz6i5vXmEcRABFBsclYH
-X-Gm-Gg: AYBFou3rxx17vpOxW03bnU3FzX1DZ8yURiWTsc9PKQ6uJqoM1Tw6VagOS6anIvkDLUr
-	7c53vK5WlT+MC7ZhkE8Cu3JMooXagpXdTfmaL8HioXnsv4zyv97G5/9i6vClVB6NJPD0d7BEt9u
-	XkjbLZF9euYEKRRXxkvHIAHmvQnbrkdkkvtG39XpRWwdPAOM9QPCA/B1ZvyRweDtR8MYmlWe8mh
-	lS/h41Vd6bw2R9uQYr2c2xQfXNl0+YpAwONAtszkhf4WYDlVlxbp532jav0d1q4b6H/xwodb0+X
-	5dNE/xphBU7WWC+qb200kYEAjcPvWhp7ln7Yj6bkEyYizTxdTMnWuGkAikLhaYtGYYHRa0NT3C1
-	r76JPo0fVUA83v1bcERZzQ/VhFhulI1MMdqTKGxSe2reZzF8ABX8jESWgCy5DwsBT/IrixB8U+a
-	jwfZu789ca3lmNzi1VooLtvioRwW5ZmgGY407ZVZmieiZE//cdpz2zqvs7dNpStUDL+gdCRTK3B
-	ea/Cbzok4QLP0yzPKumVTliGhwU0OJFAFY2hCUHX/S5M2zzxiJPftAk/i48xQgygxkjE0TLQWq2
-	JxAzLlgTSZ/nI3xAr6Bjc5DpKB1njPa+sGEK/+/iYjgbmC4Cd/uUt/jtDw9Se4FRp9hmBXobMgk
-	5
-X-Received: by 2002:a05:600c:190f:b0:4a2:1a:a11d with SMTP id 5b1f17b1804b1-4ac1275c26emr417049585e9.0.1793896869269;
-        Thu, 05 Nov 2026 08:41:09 -0800 (PST)
-Message-ID: <d6f1f2a9-a6be-46c1-9777-e7e710b809ad@gmail.com>
-Date: Thu, 5 Nov 2026 17:41:07 +0100
+        d=1e100.net; s=20260707; t=1793897329; x=1794502129;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=nGgbr1sgl5oeyIRIzBGv/BG59BAeAsA8nAEB42w9jp8=;
+        b=T37nQVHicqKZRaN8unNJDjsHAE1IermffVtwqXomr8e4xNQcsHoXS4Oj1l0+PDQP1S
+         0D3bYIL2QJyKWy0Tnj2r3ok3Z6eP9laxNCbV13Q+AI5D4ISR8MxLSEzT6o8SunkG2SR7
+         IlgdiJMXG3QttHCaUohsorkpUxHz9LLIHLUmUduZToHCnAzpf/djbeFlaux+HcTv0LS+
+         E7AKRmvRxlOGRaBqsQkvC9l0uT5pDBnlnKOuB76/AOhUxSrVD4gFBsBS3WMYtpW++x1b
+         if8gwXymLWjLl+pUPPSkDPY9qORCzxA4tpt9QCE7fzmNPUpDNz4H9ZDP+00mti4FkOXk
+         SISA==
+X-Gm-Message-State: APuU4Z/xw05TOWJvZemmWz/TARjTC6IXsyoIjyMAzXDnlKAcUOglb8Q6
+	DiHLpY+7egLqA0X69urB5M4CwjtEXOcvjoocrYEAcEcUdagjA24Kx9Cm
+X-Gm-Gg: AYBFou3H5SxZylusqCoxuPhLHjw32SyMbdE6DOhyK2l6e/MkysblbL1zFDJnj6L7VaS
+	rEt8uUmf4AKIuWwjql+pazIfgjgtprsiwCbJIJpAXc48kZU/KhuBvfBt832wVvo14DvccIEAUbj
+	M34ShfjrkBkloHzHVUeFm8FU+usm2EoWNneGlGcMl7sMCCKmToQtqPBPlb88pHzyiN3z1rxrlg7
+	in0NtX87OkPEJNLmnGwldyOGtxowpBfonUAe6XwtR3uJgCNTebCQOsa2Op6AZ61ZRhRLG3HmhRf
+	lLpzXoWgvKiS2CEjQMoZhDm8my5YaZBaivyzHrBZQrweV9onvEm3nZSME+im4ueAlAph/FNiybm
+	vO0WJVDopG+sJ28VwJUrWCp4ECF5J2oPxVA3pH1juSNRGjfMtQrI/k36KtIap3oUCWcjLCf5/8H
+	zsOC/Ov6IEc/bP0/a0NbtucWYP+dKpg3yzQ8ePtj2KBUJtA7LbNNxYvRompxztBq16Vt/oLJfhl
+	NZ2ZFyakHnGgK1yJAq4DrhVzJspmNUOKfMxJJw4g/6QbRN9ccXe3jhWizQVkJtN5DcJIzW/80FN
+	swQCDcT8xVfC2FbeFrZGq65fmDOd
+X-Received: by 2002:a05:6a00:4148:b0:881:e266:c3c5 with SMTP id d2e1a72fcca58-8a9ba7039admr17093163b3a.2.1793897328565;
+        Thu, 05 Nov 2026 08:48:48 -0800 (PST)
+Date: Fri, 6 Nov 2026 00:48:44 +0800
+From: Kuan-Wei Chiu <visitorckw@gmail.com>
+To: "Orzel, Michal" <michal.orzel@amd.com>
+Cc: xen-devel@lists.xenproject.org, sstabellini@kernel.org, julien@xen.org,
+	bertrand.marquis@arm.com, marscheng@google.com,
+	jserv@ccns.ncku.edu.tw, eleanor15x@gmail.com
+Subject: Re: [PATCH] xen/dt: Skip non-RAM reserved-memory regions in
+ make_memory_node()
+Message-ID: <auyzbMaKb2_Oul4V@google.com>
+References: <20261028211737.17629-1-visitorckw@gmail.com>
+ <10bc93f8-5ac4-4804-864e-d83a5fbf7108@amd.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 29/39] xen/riscv: prepare new IMSIC VS-file
-To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-Cc: xen-devel@lists.xenproject.org,
- Romain Caritey <Romain.Caritey@microchip.com>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
- Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
-References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
- <7f00946a6b1b67e79f94e3c665f8f0ce9d5d0e5a.1790779209.git.oleksii.kurochko@gmail.com>
- <1792760165.8631fc262581453bbf619ec5b2062170.1a168d535ab000f79f@vates.tech>
- <81b0b1fa-1aa4-4646-bdfa-5e773cb876f4@gmail.com>
- <1793892454.8631fc262581453bbf619ec5b2062170.1a1ac529128000403d@vates.tech>
-Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <1793892454.8631fc262581453bbf619ec5b2062170.1a1ac529128000403d@vates.tech>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ebf023/1793896869-C0AD8B50-FF22F614/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 2314
-X-Spam-Status: No, score=-4.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <10bc93f8-5ac4-4804-864e-d83a5fbf7108@amd.com>
+X-purgate-ID: tlsNG-42698a/1793897330-188C99EA-C66FF9E6/0/0
+X-purgate-type: clean
+X-purgate-size: 4721
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=4.0.1
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+Hi Michal,
 
+On Mon, Nov 02, 2026 at 02:02:20PM +0100, Orzel, Michal wrote:
+> 
+> 
+> On 28-Oct-26 22:17, Kuan-Wei Chiu wrote:
+> > Xen creates a second /memory node for Dom0 from
+> > bootinfo_get_reserved_mem() without checking whether those regions
+> > belong to host RAM. However, /reserved-memory can also describe
+> > on-chip SRAM or firmware regions outside system RAM. Listing them in a
+> > /memory node causes Dom0 to register non-RAM addresses as system RAM,
+> > conflicting with device MMIO mappings.
+> It's worth adding a reference to Linux binding for nvmem-rmem as an example (the
+> only one so far?) of /reserved-memory describing non RAM. Please also mention
+> Linux comment at early_init_dt_reserve_memory().
 
-On 11/5/26 4:27 PM, Baptiste Le Duc wrote:
-> On 2026-11-05 13:49 +0100, Oleksii Kurochko wrote:
->> [ ... 79 lines skipped ... ]
->>>> +
->>> What does the switch buy? ireg only ends up as the value written to
->>> vsiselect, not as a CSR number, so it doesn't need to be a compile-time
->>> constant. imsic_vs_csr_write(ireg, val) does the same, without the 128 case
->>> labels and the macro pyramid. If there's a reason, it wants stating in a
->>> comment; otherwise please drop the pyramid (an ASSERT() on the range can
->>> stay if you want one).
->>
->> Good point.
->>
->> I will drop it and use the following instead:
->>
->> /*
->>    * On RV64 a 64-bit EIx group is the even-numbered register alone,
->> whereas on
->>    * RV32 it is split into the even-numbered (low half) and the following
->>    * odd-numbered (high half) register. ireg names the first, even-numbered
->>    * register of such a group, among eip0..eip63 or eie0..eie63.
->>    */
->> static void imsic_eix_check(unsigned int ireg)
->> {
->>       ASSERT(!(ireg & 1));
->>       ASSERT((ireg >= IMSIC_EIP0 && ireg < IMSIC_EIP0 + 64) ||
->>              (ireg >= IMSIC_EIE0 && ireg < IMSIC_EIE0 + 64));
->> }
->>
->> /* Write a whole 64-bit EIx group, laid out as described above. */
-> Nit: "above" may go stale if the code moves. Better to name the function
-> you are referring to.
+Ack.
+
+> 
+> > 
+> > Skip reserved-memory banks outside the host RAM banks reported by
+> > bootinfo_get_mem() in make_memory_node().
+> Have you considered EFI boot? There we don't use /memory and bootinfo_get_mem()
+> contains usable memory. IOW I think it does not contain reserved memory. In such
+> scenario, we would skip the reserved regions because they are not described in
+> memory membank. So it would be a regression in behavior.
 > 
 
-Agree with that.
+I'm not quite familiar with EFI, so I indeed didn't consider the EFI
+boot scenario in the first place. I think I should skip the
+is_in_host_ram() check when efi_enabled(EFI_BOOT)?
 
-> Also, the parameter isn't an *ireg value. It is the register number
-> written to *iselect; *ireg is only the data window. Per AIA (IMSIC
-> chapter, "Interrupt files"), values 0x80-0xFF of *iselect select
-> eip0-63/eie0-63, and imsic_csr_write() uses its first argument that way:
+> > 
+> > Fixes: 248faa637d2f ("xen/arm: add reserved-memory regions to the dom0 memory node")
+> > Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
+> > ---
+> > Found while trying to bring up Xen on new hardware.
+> > Tested on real silicon.
+> > 
+> >  xen/common/device-tree/domain-build.c | 42 +++++++++++++++++++++++++--
+> >  1 file changed, 39 insertions(+), 3 deletions(-)
+> > 
+> > diff --git a/xen/common/device-tree/domain-build.c b/xen/common/device-tree/domain-build.c
+> > index 30a59abfa7..33baf150a6 100644
+> > --- a/xen/common/device-tree/domain-build.c
+> > +++ b/xen/common/device-tree/domain-build.c
+> > @@ -504,6 +504,34 @@ int __init make_chosen_node(const struct kernel_info *kinfo)
+> >      return res;
+> >  }
+> >  
+> > +static bool __init is_in_host_ram(const struct membank *bank)
+> > +{
+> > +    const struct membanks *ram = bootinfo_get_mem();
+> > +    paddr_t start = bank->start;
+> > +    paddr_t end = start + bank->size;
+> > +    unsigned int i;
+> > +
+> > +    if ( !bank->size || end < start )
+> You can omit the empty check. Empty banks are not added to membanks.
+
+Ack.
+
 > 
-> #define imsic_csr_write(c, v)   \
-> do {                            \
->      csr_write(CSR_SISELECT, c); \
->      csr_write(CSR_SIREG, v);    \
-> } while (0)
-> 
-> So I'd rename it to "iselect" (here and in the other helpers taking
-> the same argument).
+> > +        return false;
+> > +
+> > +    for ( i = 0; i < ram->nr_banks; i++ )
+> > +    {
+> > +        paddr_t ram_start = ram->bank[i].start;
+> > +        paddr_t ram_end = ram_start + ram->bank[i].size;
+> > +
+> > +        if ( start < ram_start )
+> > +            return false;
+> > +
+> > +        if ( end <= ram_end )
+> > +            return true;
+> > +
+> > +        if ( start < ram_end )
+> > +            start = ram_end;
+> > +    }
+> > +
+> > +    return false;
+> > +}
+> > +
+> >  int __init make_memory_node(const struct kernel_info *kinfo, int addrcells,
+> >                              int sizecells, const struct membanks *mem)
+> >  {
+> > @@ -513,14 +541,20 @@ int __init make_memory_node(const struct kernel_info *kinfo, int addrcells,
+> >      int nr_cells = 0;
+> >      __be32 reg[DT_MEM_NODE_REG_RANGE_SIZE];
+> >      __be32 *cells;
+> > +    bool is_resv = (mem == bootinfo_get_reserved_mem());
+> >  
+> >      if ( mem->nr_banks == 0 )
+> >          return -ENOENT;
+> >  
+> >      /* find the first memory range that is reserved for device (or firmware) */
+> > -    for ( i = 0; i < mem->nr_banks &&
+> > -                 (mem->bank[i].type != MEMBANK_DEFAULT); i++ )
+> > -        ;
+> > +    for ( i = 0; i < mem->nr_banks; i++ )
+> > +    {
+> > +        if ( mem->bank[i].type != MEMBANK_DEFAULT )
+> > +            continue;
+> > +        if ( is_resv && !is_in_host_ram(&mem->bank[i]) )
+> > +            continue;
+> This filter (MEMBANK_DEFAULT and your check) is now duplicated in two places.
+> Please add a helper for it. Also adjust the now stale comment.
 > 
 
-As to the name: I'd rather keep ireg. The value does go into *iselect,
-but what it denotes is a register of the interrupt file: per the AIA
-spec, values of *iselect in the range 0x70-0xFF select the registers
-of the interrupt file (eidelivery, eithreshold, eip0-63, eie0-63), and
-ireg is the number of such a register, eip0-63/eie0-63 here.
+Ack.
 
-~ Oleksii
+Regards,
+Kuan-Wei
+
+> > +        break;
+> > +    }
+> >  
+> >      if ( i == mem->nr_banks )
+> >          return 0;
+> > @@ -544,6 +578,8 @@ int __init make_memory_node(const struct kernel_info *kinfo, int addrcells,
+> >          if ( (mem->bank[i].type == MEMBANK_STATIC_DOMAIN) ||
+> >               (mem->bank[i].type == MEMBANK_FDT_RESVMEM) )
+> >              continue;
+> > +        if ( is_resv && !is_in_host_ram(&mem->bank[i]) )
+> > +            continue;
+> >  
+> >          nr_cells += reg_size;
+> >          BUG_ON(nr_cells > ARRAY_SIZE(reg));
+> 
+> ~Michal
+> 
 
