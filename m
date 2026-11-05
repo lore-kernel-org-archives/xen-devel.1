@@ -2,44 +2,44 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6CE5F6070783
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 15:50:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3165060707BF
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 15:50:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=casper.20170209 header.b=wJOQVik5
-Received: from list by lists.xenproject.org with outflank-mailman.1475006.1681911 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=casper.20170209 header.b=FbXOOX8v
+Received: from list by lists.xenproject.org with outflank-mailman.1475008.1681924 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOzj8-00051K-0f; Thu, 05 Nov 2026 15:50:10 +0000
+	id 1xOzj9-0005Qk-Op; Thu, 05 Nov 2026 15:50:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1475006.1681911; Thu, 05 Nov 2026 15:50:09 +0000
+Received: by outflank-mailman (output) from mailman id 1475008.1681924; Thu, 05 Nov 2026 15:50:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOzj7-0004zW-ET; Thu, 05 Nov 2026 15:50:09 +0000
-Received: by outflank-mailman (input) for mailman id 1475006;
- Thu, 05 Nov 2026 15:50:05 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xOzj9-0005PC-7H; Thu, 05 Nov 2026 15:50:11 +0000
+Received: by outflank-mailman (input) for mailman id 1475008;
+ Thu, 05 Nov 2026 15:50:06 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <BATV+a10630623031064a0c86+8474+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1xOzj3-0003vk-6B
+ id 1xOzj3-0004BT-Ts
  for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 15:50:05 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xOzj2-00B7sn-In; Thu, 05 Nov 2026 16:50:04 +0100
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xOzj3-000oQ8-9a; Thu, 05 Nov 2026 16:50:05 +0100
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
  <BATV+a10630623031064a0c86+8474+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6aeca5ab-2eae-0a2a0a5409dd-0a2a4504ba48-6
- for <multiple-recipients>; Thu, 05 Nov 2026 16:50:04 +0100
+ id 6aeca5ad-bab6-0a2a0a5309dd-0a2a4505be14-4
+ for <multiple-recipients>; Thu, 05 Nov 2026 16:50:05 +0100
 Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
  <BATV+a10630623031064a0c86+8474+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6aeca5a6-b57f-0a2a45040019-5a9b3222de26-3
+ id 6aeca5a6-4cb1-0a2a45050019-5a9b3222813e-3
  for <multiple-recipients>; Thu, 05 Nov 2026 16:49:58 +0100
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.100.1 #2 (Red Hat Linux))
- id 1xOzit-00000009aog-3EQm; Thu, 05 Nov 2026 15:49:55 +0000
+ id 1xOzit-00000009aof-2vx4; Thu, 05 Nov 2026 15:49:55 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.5 #2 (Red
- Hat Linux)) id 1xOzit-0000000Aays-2HEO;
+ Hat Linux)) id 1xOzit-0000000Aaym-20JR;
  Thu, 05 Nov 2026 15:49:55 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -48,17 +48,17 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
-	Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:
-	To:From:Reply-To:Content-ID:Content-Description;
-	bh=h7IHIRRM4XFq6GwXgluit19dquWavUx85ZLuD079Loc=; b=wJOQVik5uP7OzAC5hZCitvfvF0
-	4Thd8CLgIpOlwvCfnb6BOX4rc0TukNFuOPsOx3/UrpS3NUXN7vhvsItwvt0Xb4rXkNUC2TNWc043u
-	T3eK2BL1xtTetnGeKdhOWYxTPWpTwt5iXQxe278C36OP6PNO88vmYSoUJUPdrTc6/DXtYrkXNBsnV
-	RR3YzmQg+ZLuJpAXGELumrxRv3mTGdnI0JTdKCRxVgOKpeVEckfVd52Hy/PV0awnb2xCWs0pRd+bP
-	OkmqqbnTzNpxquMdiwgJ5cVsywOvGE9TeLptWJMVexyFIU0ltrJdza9vVbytkS9z0OjrVR+iZV1b9
-	PJDxaiVw==;
+	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
+	Reply-To:Content-Type:Content-ID:Content-Description;
+	bh=owfwD0c0iFVkQvxXvAVHEdrEkPi8aTG2v+Yo8RsVjLo=; b=FbXOOX8vbDQkaNDkiTyDoCi0GI
+	JbPxVa0uJaJ0nH2KdWLZQ1b41mAhpvDhmrHl4VimexZABaM1zNkCJ7p5BGD6CW3sgbLWBcq6nybSv
+	RtmK55YPnkziyKx5y4tyxXs3uy2ZzfZlt1c2IR1o4nQglyenBHZgDkcNijt5WtbXHR8RBY2czDCv4
+	5Kbgdj/SnX5OYqhgX7s/6eqJR/T6d9rv0FKgADxwMTQI8XC6GqIhukF5KJjp02re2d5nV5lk/c/wo
+	jo2a4jOzuH1Pb0+Qm+ijRn5cnhlAvql5bALrkR8hZyK/ou+5tdd3Tz28N4nZkd4q+WY2D84acs/K/
+	IMMMbylQ==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: kvm@vger.kernel.org
 Cc: linux-kernel@vger.kernel.org,
@@ -87,21 +87,20 @@ Cc: linux-kernel@vger.kernel.org,
 	Dongli Zhang <dongli.zhang@oracle.com>,
 	joe.jin@oracle.com,
 	David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v11 03/23] KVM: x86: Replace nr_vcpus_matched_tsc count with all_vcpus_matched_tsc bool
-Date: Thu,  5 Nov 2026 07:49:34 -0800
-Message-ID: <20261105154955.2525419-4-dwmw2@infradead.org>
+Subject: [PATCH v11 01/23] KVM: x86: Improve synchronization in kvm_synchronize_tsc()
+Date: Thu,  5 Nov 2026 07:49:32 -0800
+Message-ID: <20261105154955.2525419-2-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261105154955.2525419-1-dwmw2@infradead.org>
 References: <20261105154955.2525419-1-dwmw2@infradead.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-ebf023/1793893803-585C7B50-3F2BE8AD/0/0
+X-purgate-ID: tlsNG-c201ff/1793893803-F62AB2A1-4F7BB7F3/0/0
 X-purgate-type: clean
-X-purgate-size: 4215
+X-purgate-size: 3850
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -112,98 +111,104 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Using a count and comparing with kvm->online_vcpus was always racy
-because a new vCPU could be created while kvm_track_tsc_matching() was
-running and comparing with kvm->online_vcpus. That variable is only
-atomic with respect to itself; kvm_arch_vcpu_create() runs before
-kvm->online_vcpus is incremented for the new vCPU.
+When synchronizing to an existing TSC (either by explicitly writing
+zero, or the legacy hack where the TSC is written within one second's
+worth of the previously written TSC), the last_tsc_write and
+last_tsc_nsec values were being misrecorded by __kvm_synchronize_tsc().
+The *unsynchronized* value of the TSC (perhaps even zero) was being
+recorded, along with the current time at which kvm_synchronize_tsc()
+was called. This could cause *subsequent* writes to fail to synchronize
+correctly.
 
-Replace the count with a boolean that is set in kvm_track_tsc_matching()
-after comparing the count, and cleared when a new TSC generation starts.
-The boolean is consumed by pvclock_update_vm_gtod_copy() under the
-tsc_write_lock, which serializes against __kvm_synchronize_tsc().
+Fix that by extrapolating the generation's TSC value to the current
+time (data = cur_tsc_write + elapsed cycles) before passing it to
+__kvm_synchronize_tsc(), so the recorded {data, ns} pair always lies
+on the generation's line and the one-second matching window slides
+forward with each synchronized write. When the TSC is stable, reuse
+the generation's offset exactly; when it is unstable, compute a new
+offset for the extrapolated value.
 
-Keep the count for now as it's still used in the trace event.
-
-Note that the explicit clear of the flag when a new generation starts
-is currently overwritten by the unconditional recompute in
-kvm_track_tsc_matching() under the same lock; it is preparation for
-subsequent patches which consume the previous value of the flag.
-
-Initialize the flag to true at VM creation: a VM whose vCPUs never
-reach kvm_track_tsc_matching() — notably with a protected guest TSC
-(TDX, SNP Secure TSC), where __kvm_synchronize_tsc() returns early —
-would otherwise never be eligible for PVCLOCK_TSC_STABLE_BIT, where
-the old read-time computation gave 0 + 1 == 1 for a single-vCPU VM.
+Furthermore, there were *three* different TSC reads used for calculating
+the "current" time, all slightly different from each other. Fix that by
+using kvm_get_time_and_clockread() where possible and using the same
+host_tsc value in all cases.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+Reviewed-by: Paul Durrant <paul@xen.org>
 ---
- arch/x86/include/asm/kvm_host.h |  1 +
- arch/x86/kvm/x86.c              | 18 ++++++++++++++----
- 2 files changed, 15 insertions(+), 4 deletions(-)
+ arch/x86/kvm/x86.c | 39 ++++++++++++++++++++++++++++++---------
+ 1 file changed, 30 insertions(+), 9 deletions(-)
 
-diff --git a/arch/x86/include/asm/kvm_host.h b/arch/x86/include/asm/kvm_host.h
-index ea48b1949316..1efca01647d2 100644
---- a/arch/x86/include/asm/kvm_host.h
-+++ b/arch/x86/include/asm/kvm_host.h
-@@ -1242,6 +1242,7 @@ struct kvm_arch {
- 	u64 cur_tsc_write;
- 	u64 cur_tsc_offset;
- 	u64 cur_tsc_generation;
-+	bool all_vcpus_matched_tsc;
- 	int nr_vcpus_matched_tsc;
- 
- 	u32 default_tsc_khz;
 diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-index 90f9b07ef749..ec8693f4827f 100644
+index 32563a91fba9..7a2b0b99373f 100644
 --- a/arch/x86/kvm/x86.c
 +++ b/arch/x86/kvm/x86.c
-@@ -1125,8 +1125,10 @@ static void kvm_track_tsc_matching(struct kvm_vcpu *vcpu, bool new_generation)
- 	 * and all vCPUs must have matching TSCs.  Note, the count for matching
- 	 * vCPUs doesn't include the reference vCPU, hence "+1".
- 	 */
--	bool use_master_clock = (ka->nr_vcpus_matched_tsc + 1 ==
--				 atomic_read(&vcpu->kvm->online_vcpus)) &&
-+	ka->all_vcpus_matched_tsc = (ka->nr_vcpus_matched_tsc + 1 ==
-+				     atomic_read(&vcpu->kvm->online_vcpus));
+@@ -210,6 +210,10 @@ module_param(pi_inject_timer, bint, 0644);
+ static bool __read_mostly mitigate_smt_rsb;
+ module_param(mitigate_smt_rsb, bool, 0444);
+ 
++#ifdef CONFIG_X86_64
++static bool kvm_get_time_and_clockread(s64 *kernel_ns, u64 *tsc_timestamp);
++#endif
 +
-+	bool use_master_clock = ka->all_vcpus_matched_tsc &&
- 				gtod_is_based_on_tsc(gtod->clock.vclock_mode);
+ #define KVM_SUPPORTED_XCR0     (XFEATURE_MASK_FP | XFEATURE_MASK_SSE \
+ 				| XFEATURE_MASK_YMM | XFEATURE_MASK_BNDREGS \
+ 				| XFEATURE_MASK_BNDCSR | XFEATURE_MASK_AVX512 \
+@@ -1374,14 +1378,23 @@ void kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 *user_value)
+ {
+ 	u64 data = user_value ? *user_value : 0;
+ 	struct kvm *kvm = vcpu->kvm;
+-	u64 offset, ns, elapsed;
++	u64 offset, host_tsc, elapsed;
++	s64 ns;
+ 	unsigned long flags;
+ 	bool matched = false;
+ 	bool synchronizing = false;
  
- 	/*
-@@ -1367,6 +1369,7 @@ static void __kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 offset, u64 tsc,
- 		kvm->arch.cur_tsc_write = tsc;
- 		kvm->arch.cur_tsc_offset = offset;
- 		kvm->arch.nr_vcpus_matched_tsc = 0;
-+		kvm->arch.all_vcpus_matched_tsc = false;
- 	} else if (vcpu->arch.this_tsc_generation != kvm->arch.cur_tsc_generation) {
- 		kvm->arch.nr_vcpus_matched_tsc++;
- 	}
-@@ -1591,8 +1594,7 @@ static void pvclock_update_vm_gtod_copy(struct kvm *kvm)
- 	bool host_tsc_clocksource, vcpus_matched;
- 
- 	lockdep_assert_held(&kvm->arch.tsc_write_lock);
--	vcpus_matched = (ka->nr_vcpus_matched_tsc + 1 ==
--			atomic_read(&kvm->online_vcpus));
-+	vcpus_matched = ka->all_vcpus_matched_tsc;
- 
- 	/*
- 	 * If the host uses TSC clock, then passthrough TSC as stable
-@@ -10007,6 +10009,14 @@ int kvm_arch_init_vm(struct kvm *kvm, unsigned long type)
- 	ratelimit_set_flags(&kvm->arch.kvmclock_update_rs, RATELIMIT_MSG_ON_RELEASE);
- 	kvm->arch.kvmclock_offset = -get_kvmclock_base_ns();
- 
-+	/*
-+	 * Start with all (zero) vCPUs considered matched, so that a VM whose
-+	 * vCPUs never reach kvm_track_tsc_matching() — notably when the guest
-+	 * TSC is protected (TDX, SNP Secure TSC) and __kvm_synchronize_tsc()
-+	 * returns early — is still eligible for PVCLOCK_TSC_STABLE_BIT.
-+	 */
-+	kvm->arch.all_vcpus_matched_tsc = true;
-+
  	raw_spin_lock_irqsave(&kvm->arch.tsc_write_lock, flags);
- 	pvclock_update_vm_gtod_copy(kvm);
- 	raw_spin_unlock_irqrestore(&kvm->arch.tsc_write_lock, flags);
+-	offset = kvm_compute_l1_tsc_offset(vcpu, rdtsc(), data);
+-	ns = get_kvmclock_base_ns();
++
++#ifdef CONFIG_X86_64
++	if (!kvm_get_time_and_clockread(&ns, &host_tsc))
++#endif
++	{
++		host_tsc = rdtsc();
++		ns = get_kvmclock_base_ns();
++	}
++
++	offset = kvm_compute_l1_tsc_offset(vcpu, host_tsc, data);
+ 	elapsed = ns - kvm->arch.last_tsc_nsec;
+ 
+ 	if (vcpu->arch.virtual_tsc_khz) {
+@@ -1424,13 +1437,21 @@ void kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 *user_value)
+          */
+ 	if (synchronizing &&
+ 	    vcpu->arch.virtual_tsc_khz == kvm->arch.last_tsc_khz) {
+-		if (!kvm_check_tsc_unstable()) {
++		/*
++		 * If synchronizing, advance the reference point to "now"
++		 * so the matching window slides forward with each vCPU.
++		 * Extrapolate from the generation's own origin: 'elapsed'
++		 * is measured from the most recent write, which lies on
++		 * the generation's line only for the first matched write.
++		 */
++		u64 delta = nsec_to_cycles(vcpu, ns - kvm->arch.cur_tsc_nsec);
++
++		data = kvm->arch.cur_tsc_write + delta;
++
++		if (!kvm_check_tsc_unstable())
+ 			offset = kvm->arch.cur_tsc_offset;
+-		} else {
+-			u64 delta = nsec_to_cycles(vcpu, elapsed);
+-			data += delta;
+-			offset = kvm_compute_l1_tsc_offset(vcpu, rdtsc(), data);
+-		}
++		else
++			offset = kvm_compute_l1_tsc_offset(vcpu, host_tsc, data);
+ 		matched = true;
+ 	}
+ 
 -- 
 2.43.0
 
