@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 64D94606D805
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 11:44:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9FB78606A328
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 12:50:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=eV6Gvx37
-Received: from list by lists.xenproject.org with outflank-mailman.1474496.1681605 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=VnGaeeJ7
+Received: from list by lists.xenproject.org with outflank-mailman.1474581.1681614 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOvsu-0002kx-QF; Thu, 05 Nov 2026 11:44:00 +0000
+	id 1xOwuT-0000mV-MB; Thu, 05 Nov 2026 12:49:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1474496.1681605; Thu, 05 Nov 2026 11:44:00 +0000
+Received: by outflank-mailman (output) from mailman id 1474581.1681614; Thu, 05 Nov 2026 12:49:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOvsu-0002kq-NG; Thu, 05 Nov 2026 11:44:00 +0000
-Received: by outflank-mailman (input) for mailman id 1474496;
- Thu, 05 Nov 2026 11:43:59 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xOvst-0002kk-Fu
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 11:43:59 +0000
+	id 1xOwuT-0000mO-JA; Thu, 05 Nov 2026 12:49:41 +0000
+Received: by outflank-mailman (input) for mailman id 1474581;
+ Thu, 05 Nov 2026 12:49:40 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xOwuS-0000mI-LY
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 12:49:40 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xOvss-002gbd-Gm
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 12:43:58 +0100
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xOwuS-009gv4-2O
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 13:49:40 +0100
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6aec6be7-e002-0a2a0a5209dd-0a2a4501c33a-38
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 12:43:58 +0100
-Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aec7b4f-8faa-0a2a0a5109dd-0a2a4505a2d8-46
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 13:49:40 +0100
+Received: from [209.85.128.51] (helo=mail-wm1-f51.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6aec6bfe-5984-0a2a45010019-d1558031c07c-3
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 12:43:58 +0100
-Received: by mail-wm1-f49.google.com with SMTP id
- 5b1f17b1804b1-4a5b2be99a8so13720625e9.2
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 03:43:58 -0800 (PST)
+ id 6aec7b63-4cb1-0a2a45050019-d1558033c1c3-3
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 13:49:39 +0100
+Received: by mail-wm1-f51.google.com with SMTP id
+ 5b1f17b1804b1-4a5036bbac7so11188195e9.3
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 04:49:39 -0800 (PST)
 Received: from [192.168.1.6] (user-109-243-65-71.play-internet.pl.
  [109.243.65.71]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48feda1f100sm9735976f8f.46.2026.11.05.03.43.56
+ 5b1f17b1804b1-4b4533873f0sm136652705e9.4.2026.11.05.04.49.37
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 05 Nov 2026 03:43:57 -0800 (PST)
+ Thu, 05 Nov 2026 04:49:38 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,51 +51,51 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793879038; x=1794483838; darn=lists.xenproject.org;
+        d=gmail.com; s=20260707; t=1793882979; x=1794487779; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=fC3nIsihUEw5p4mwDyf18YPtfyEs4Yx7c0Yt/0Br/ts=;
-        b=eV6Gvx371EHhWUeeSHK6m4r42ZQASr0z/EjzzQf7/xEY7FjOoyBpVJHGK3s9b4pFQj
-         rAIUgJKyt/AU9cjU//dbA2oRdjpUHIF3KIR3x1CcfPukgjrYCFCCdn+rchKNyJv4ZBxR
-         IKzsgqbGGQvmsHvnA6FapN1Pa2KNGdqo6ITWE4d5wBQbgEI8Md2pOhS0lOAT+CFRbdlK
-         p1TUyElvcG1btQZ57/lQoZQMmVNanam9LoQe1yqWywseYTmNeDtvcxLPg7nix08Cjo+J
-         FSJQFkkvnlFwdeJBmgrnTeKjrA/Yows9zxVmEruZEXBINNig9nnQtwNj7P/YAF269U9S
-         QwDw==
+        bh=RbU+esne70TuXyLcr1aSiliGdvPWNYuuqC4KPBugy1g=;
+        b=VnGaeeJ73P8aFTis+tQz51UKsKT3n2J0oZAAauy8pkubVa1rH0L53QCDyemPlN4jXu
+         yiTi3sF3Z/H8Bwp3eNwmZcFlKXhzZExjQBRzF5pRFO7tlaskn4RaETOD+dlotZ4YRTAq
+         wEwqosYiEOs7GoYLfScuZp+ECQF8rMXrGTg0sOL0yhXjQSpSbFNhq7Alw78VbK09M2MV
+         rihiwOusbr3uJOScWWvAKTpCzS4j9+KGEmDdBnfeaQMRmMg5CzIqXROVyB91nooO9O8T
+         GMxoH+9WNHufAxkE9jFXAt9e+24njLuGNwREKqVgl2U6Z+LbHqjwT3tfWG2gHf9B/O9j
+         O9ag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793879038; x=1794483838;
+        d=1e100.net; s=20260707; t=1793882979; x=1794487779;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=fC3nIsihUEw5p4mwDyf18YPtfyEs4Yx7c0Yt/0Br/ts=;
-        b=2Mb8n73h/OA5/oiZ7oaM7yjlElWEv16q3sbCldT8Y+VarVThHGpzOTCiUnpnkBUpbC
-         lfGVFxmijOfFvyfJV4WOHPiSOVZVPRmDA9xXlj1cRB26S0iVkrKBozk2W5ykaCWp/7Xa
-         A6myN24h6Pinfxn3eBBLe1z7a3PdFY4COJk9pkHsfFpmvH1GS+2eddiJUxFt/kB08MA7
-         r6ZeY7bDV8qcIH8ncwpZNwsJPhrF31/sEyWUzhEZAoB07Ileu4hpb/V1TWvDvgaeVvMj
-         w6fcK1qyLVXKK6AC8Ot68n8gwfqRMf+YRUtqSBoUZbyriBKsqoGjUhF5mlTkQJxWmXgR
-         yp1A==
-X-Gm-Message-State: APuU4Z9CWREcm90+eXjP/sYQXdjfEdBYpEubZ/p9qXTlkahtaN6IaboQ
-	QsYzDTMKvfYA5BDxfNGTelvuVQZvWDjRkzSLFIpN7nkB1UBNuLLPLKrV
-X-Gm-Gg: AYBFou1RobJ/sAPRyV03779PKwdD1yj7YZ0fgdbmIu3bMXMjFb07n9RuZZZ+Zje48CR
-	wcgSRwAIUSYaLNNe0w4xFpa6J9h4aSFSk84dbd2ezm9eSN+e3nMuotgj6xfiU2i/PCw2vRzeHVZ
-	TILHuCEy733ssFxxnc/mj1mTZ+jTm319mh0CEw9F2kFSRbZots/Kt7IkaYWMSi54zP2Q28pu5hO
-	VvMr8nJT5wGxqdKU5k3vV4I0ums/lKaS6K6hvWugIk7j3dUAPVD+uNAMXSg6MaQaoBPWP8KNB8C
-	BU9PzqZLvKL+CRVOplFj9hE9ms1TU1kfa61v/bEN8FfMcY9YjQjYTUPHZ+xO2RQ2XfFLaJDvpyJ
-	DbvXWzZ1XA+BE5SRebgViHAZb5nSnu1hgV9VR0uqJR0IrFAQNG7VUedTrQN6tuMT5+hbiYJXyc3
-	AeC7zNDaYMIVc4sT+4oauCrEPp7lkAuumIsbHBpjjWXrkYV+sWz+Ktn0Grgv6mI0QtsXY19S7hC
-	C/kY6OL+kC7+ECZwLM3yP0NKF/Wy3xQOhf9g9t9zZjO93CGJWg1uV852qg/9zA6XMeEOromfbuQ
-	1qcWQWoYJgFVPh4GmcnzR7IyMcRIslzqGg4AtSCcJOVV7lHQ4pleHlFFTp15KAVCMG52CGJ7oRY
-	2jecb1rusXjzGrlxcfoqXdA==
-X-Received: by 2002:a05:600c:4f8b:b0:4a3:5a98:c279 with SMTP id 5b1f17b1804b1-4ac17ffb07cmr406193075e9.8.1793879037743;
-        Thu, 05 Nov 2026 03:43:57 -0800 (PST)
-Message-ID: <d8839a78-4af7-46cd-b9ca-8913f98f84f8@gmail.com>
-Date: Thu, 5 Nov 2026 12:43:56 +0100
+        bh=RbU+esne70TuXyLcr1aSiliGdvPWNYuuqC4KPBugy1g=;
+        b=VyHnxx13GiZxEMCVnmak0IE1LOeTwMBw3psK+zwlLASTF8W9qi4pr4rcINUrJ8jmVs
+         YU9t1WJ1a8+aQsgLpblBHM4WEeNK2Wa2s5s/+IivYfOHAZr2SlpcQn1j+5whWzfFrEFG
+         Cmhm+XbOinIK6ABMItNyZxyei+Mmm7aD1aJaPZs3TtyLHczUgZ6m0K3PWNQm7lUOwnoe
+         TAjIRelMR3nyNnvNFwuB87fXOdPLDb8es7xSrHdKJAkilRQp7EhK6PFiwmVh3jQsZSrp
+         XEexKjYirWSD3/y/fZHTopXRa8i2iRmhevlF8X8izTroOf3AxJnWAI4dp/LjPU0l4YY+
+         oIBQ==
+X-Gm-Message-State: APuU4Z99uy00DUMbPbpPK9hT1Ck6HRr9hSccT6ga0XVgxskCERZ/UUGh
+	7xlc1T8uqavbOjynSN3h5FDW9ZDGAwYAp7y7wWrBMRfAB00W84zL5K1a
+X-Gm-Gg: AYBFou2S02bWCBpeA5VZRsi0Adbx9p83eTHG1vhrK0ElH6gIh300LRl+KabS8zxcTOU
+	UHIAkgfC8f0AV5LxFhEpZWwYaJO40L3CkHsV9lHYrGiDRDqjL4LjreWeiRf7642RSfNPo8fk9F4
+	676fnbI5yAZdOo3k3X1/XraUIpC71+2qGdgYsgbhRdEYTM2bjPe+3Saiix3wz1eJeZkUeRmbIsd
+	v+ifyi4AZnZWS30j27jxjEzIca/0eCnzJrvVdNqholOgzej8LO39lCV5ZWWB6Er3AwyhJyvPjNO
+	YmJyLx/viwii2/L8TnbgNC4r/2MG/2KxrktoR1dTNETIutXs5OuOmJdWQjndQGSV8t2pmrA1ifs
+	YBlmpoqyYjeFWjCNIutZjk3y4S7LA8N91C6dok42ge4W+c/jcELmUYH2URzbUIG95YDWiY0vEzq
+	BN2w76l4vH+JAKcbYQQx5gSfEcs72EG26IFme4P7dctDrOoAb6H4PYRMFT/kX9avLS4PiN+q09s
+	IsruvYfMTthR7JiqeN9DhtFkiFjnUvHZxnNNfBmWAuGsEmMvw74azYuYaU5mXgj5Qs75Se5OrlC
+	1fCEX6Cadafbgd/97KMDz93JnIgTjU7tk2uIcIyAZIJuSzbzqUbQ/NwrraQlaTL+cHkTbDUIWSl
+	EVg==
+X-Received: by 2002:a05:600c:470d:b0:4a2:191f:7cb8 with SMTP id 5b1f17b1804b1-4ac1899378bmr398106795e9.17.1793882978577;
+        Thu, 05 Nov 2026 04:49:38 -0800 (PST)
+Message-ID: <81b0b1fa-1aa4-4646-bdfa-5e773cb876f4@gmail.com>
+Date: Thu, 5 Nov 2026 13:49:37 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 28/39] xen/riscv: introduce vaplic_reconfigure_target()
+Subject: Re: [PATCH v3 29/39] xen/riscv: prepare new IMSIC VS-file
 To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
 Cc: xen-devel@lists.xenproject.org,
  Romain Caritey <Romain.Caritey@microchip.com>,
@@ -108,16 +108,16 @@ Cc: xen-devel@lists.xenproject.org,
  Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
  <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
 References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
- <ccbe8db271e53f13bfc4bd223d546e8531108310.1790779209.git.oleksii.kurochko@gmail.com>
- <1792676312.8631fc262581453bbf619ec5b2062170.1a163d5b71c000f79f@vates.tech>
+ <7f00946a6b1b67e79f94e3c665f8f0ce9d5d0e5a.1790779209.git.oleksii.kurochko@gmail.com>
+ <1792760165.8631fc262581453bbf619ec5b2062170.1a168d535ab000f79f@vates.tech>
 Content-Language: en-US
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <1792676312.8631fc262581453bbf619ec5b2062170.1a163d5b71c000f79f@vates.tech>
+In-Reply-To: <1792760165.8631fc262581453bbf619ec5b2062170.1a168d535ab000f79f@vates.tech>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1793879038-1E07B757-30D04DCD/10/73395122804
+X-purgate-ID: tlsNG-c201ff/1793882979-F60AA2A1-2898F6FF/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 8356
+X-purgate-size: 6406
 X-Spam-Status: No, score=-9.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
@@ -128,181 +128,172 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 
 
-On 10/22/26 3:38 PM, Baptiste Le Duc wrote:
->> When a vCPU is migrated to a different pCPU, its IMSIC guest interrupt
->> file changes. Any APLIC interrupt previously configured to deliver an
->> MSI to the old interrupt file must be retargeted to the new one.
->>
-> Jan's first question on v2 was how this avoids losing interrupts that
-> are raised mid-retarget. You answered it on the list (step 3 of the AIA
-> VS-level migration sequence; in-flight MSIs still land in the old file's
-> eip and get merged into the new file later), but neither the description
-> nor a comment says so. Please put it in the description, since this
-> function is only correct as one step of that sequence.
-> 
+On 10/23/26 2:55 PM, Baptiste Le Duc wrote:
+>> [ ... 64 lines skipped ... ]
+>> diff --git a/xen/arch/riscv/aia.c b/xen/arch/riscv/aia.c
+>> index e31c9c2d24..229ab4b867 100644
+>> --- a/xen/arch/riscv/aia.c
+>> +++ b/xen/arch/riscv/aia.c
+>> @@ -1,8 +1,10 @@
+>>   /* SPDX-License-Identifier: GPL-2.0-only */
+>>   
+>> +#include <xen/bug.h>
+>>   #include <xen/errno.h>
+>>   #include <xen/init.h>
+>>   #include <xen/sections.h>
+>> +#include <xen/sched.h>
+> Nit: Why xen/sched.h? The stub doesn't dereference v, and asm/aia.h already
+> forward-declares struct vcpu. If it stays: sched < sections, so it goes one
+> line up.
 
-I will add the following:
+Indeed, nothing needs it here. I'll include <asm/aia.h> instead, which
+aia.c doesn't include yet: without that the stub's struct vcpu would 
+only be declared inside the parameter list. <xen/sched.h> then moves to 
+the patch where v gets dereferenced first.
 
-This is correct only as part of step 3 of the sequence in the AIA spec's
-"Migrating a virtual hart to a different guest interrupt file". Before
-it is called, the new file must be cleared, with eidelivery set to 0,
-and recorded in the vCPU's IMSIC state, which aplic_msi_target_gen()
-takes the new target from. Once it returns, Xen must synchronize with
-the APLIC.
-
-That is also why an interrupt raised mid-retarget isn't lost. An MSI
-sent before its source's TARGET register is rewritten is latched in the
-old file's eip, the synchronization ensures it has arrived there, and
-steps 4 and 5 merge that eip into the new file. One sent after the
-rewrite lands in the new file and stays pending there until eidelivery
-is restored (step 6).
-
-
->> [ ... 43 lines skipped ... ]
->> --- a/xen/arch/riscv/aplic.c
->> +++ b/xen/arch/riscv/aplic.c
->> @@ -128,7 +128,10 @@ static unsigned long aplic_hart_index(unsigned int cpu)
->>   /*
->>    * v->processor can't be used here: during a migration it names the new pCPU
->>    * before the interrupt file is moved there. The caller has to hold
->> - * vsfile_lock until the result is written to the h/w.
->> + * vsfile_lock, so that the guest file id and the pCPU owning it are read as
->> + * a consistent pair. A value built from the old file just before a migration
->> + * publishes the new one isn't lost: vaplic_reconfigure_target() runs after
->> + * the publication and rewrites every source targeting the vCPU.
-> At this point in the series nothing calls vaplic_reconfigure_target(),
-> so "runs after the publication" describes a caller that doesn't exist
-> yet. Either move this sentence to the patch that adds the call, or word
-> it as a requirement on that caller.
-> 
-
-Agreed, I'll word it as a requirement on that caller:
-
-   A value may still be built from the old file just before a migration
-   publishes the new one, so whoever publishes a new file has to call
-   vaplic_reconfigure_target() afterwards, to rewrite every source
-   targeting the vCPU.
-
-
-
->> [ ... 43 lines skipped ... ]
->>
->> +/* Decode the target vCPU from a TARGET snapshot (NULL if none). */
->> +static struct vcpu *vaplic_target_decode_vcpu(const struct domain *d,
->> +                                              uint32_t target)
->> +{
->> +    unsigned int hart_idx = MASK_EXTR(target, APLIC_TARGET_HART_IDX);
+>> [ ... 30 lines skipped ... ]
+>> +#define imsic_vs_csr_write(c, v)    \
+>> +do {                                \
+>> +    csr_write(CSR_VSISELECT, c);    \
+>> +    csr_write(CSR_VSIREG, v);       \
+>> +} while (0)
 >> +
->> +    /*
->> +     * Skip a source whose EIID is 0, e.g. one still holding its reset
->> +     * value: interrupt identity 0 isn't valid at any IMSIC interrupt file,
->> +     * so such a source delivers nothing and needs no retargeting.
->> +     * The hart index range check is only a guard: the write path refuses to
->> +     * record values with an out-of-range hart index.
->> +     */
-> "Reset value" reads as if the AIA spec defined one, but it doesn't: APLIC
-> state other than domaincfg, the MSI address config registers and the
-> genmsi Busy bit is UNSPECIFIED after reset. The 0 here only comes from
-> xvzalloc_array() in domain_vaplic_init(). Could this be made explicit?
-> It may also be worth saying that this check keeps unprogrammed sources
-> from decoding as targeting vCPU0 (hart index 0), which would otherwise
-> cause pointless physical TARGET rewrites on every vCPU0 migration.
-> 
-> Something like:
-> 
->        /*
->         * Skip a source whose EIID is 0 (not yet programmed, vAPLIC state
->         * is zero-initialised): identity 0 is reserved at every IMSIC, so
->         * it can't fire. Otherwise it would also decode as targeting
->         * vCPU0 and get rewritten on every vCPU0 migration.
->         * The hart index range check is only a guard: the write path
->         * refuses to record values with an out-of-range hart index.
->         */
-> 
-
-Agreed on both points. I'd word it slightly differently though: the
-write path doesn't reject EIID 0, so a guest can program it itself and
-"not yet programmed" is only one of the cases; the spec calls identity 0
-never valid rather than reserved; and such a source can still become
-pending and have its MSI sent, it's the IMSIC that ignores it. So:
-
-     Skip a source whose EIID is 0: interrupt identity 0 is never valid
-     at an IMSIC, so such a source delivers nothing and needs no
-     retargeting. The AIA spec leaves target[] UNSPECIFIED after reset,
-     but the vAPLIC state is zero-initialized, so this also covers every
-     source the guest hasn't programmed yet, which would otherwise decode
-     as targeting vCPU0 (hart index 0) and have its h/w TARGET register
-     needlessly rewritten on every vCPU0 migration.
-
-
->> [ ... 6 lines skipped ... ]
->> +void vaplic_reconfigure_target(const struct vcpu *v)
->> +{
->> +    struct domain *d = v->domain;
->> +    struct vaplic *vaplic = to_vaplic(d);
->> +    struct vimsic_state *vimsic_state = v->arch.vimsic_state;
->> +    unsigned int irqn;
+>> +/*
+>> + * Leaf macros for the switchcase expansion pyramid below:
+>> + * imsic_switchcase_break(ireg, op, v) - emit "case ireg: op(ireg, v); break"
+>> + */
+>> +#define imsic_switchcase_break(ireg, op, v) \
+>> +    case ireg:                              \
+>> +        op(ireg, v);                        \
+>> +        break
 >> +
->> +    bitmap_for_each ( irqn, d->arch.vintc->used_irqs, d->arch.vintc->nr_virqs )
+>> +/*
+>> + * Generic switchcase expansion pyramid.
+>> + * F is the per-operation leaf macro, ireg is the base register index.
+>> + * Extra args (e.g. an operation and/or a value) are forwarded to F via
+>> + * __VA_ARGS__.
+>> + */
+>> +#define imsic_switchcase_2(F, ireg, ...)             \
+>> +    F((ireg) + 0, __VA_ARGS__);                      \
+>> +    F((ireg) + 1, __VA_ARGS__)
+>> +#define imsic_switchcase_4(F, ireg, ...)             \
+>> +    imsic_switchcase_2(F, (ireg) + 0, __VA_ARGS__);  \
+>> +    imsic_switchcase_2(F, (ireg) + 2, __VA_ARGS__)
+>> +#define imsic_switchcase_8(F, ireg, ...)             \
+>> +    imsic_switchcase_4(F, (ireg) + 0, __VA_ARGS__);  \
+>> +    imsic_switchcase_4(F, (ireg) + 4, __VA_ARGS__)
+>> +#define imsic_switchcase_16(F, ireg, ...)            \
+>> +    imsic_switchcase_8(F, (ireg) + 0, __VA_ARGS__);  \
+>> +    imsic_switchcase_8(F, (ireg) + 8, __VA_ARGS__)
+>> +#define imsic_switchcase_32(F, ireg, ...)            \
+>> +    imsic_switchcase_16(F, (ireg) + 0, __VA_ARGS__); \
+>> +    imsic_switchcase_16(F, (ireg) + 16, __VA_ARGS__)
+>> +#define imsic_switchcase_64(F, ireg, ...)            \
+>> +    imsic_switchcase_32(F, (ireg) + 0, __VA_ARGS__); \
+>> +    imsic_switchcase_32(F, (ireg) + 32, __VA_ARGS__)
+>> +
+>> +static void imsic_eix_write(unsigned int ireg, unsigned long val)
+>> +{
+>> +    switch ( ireg )
 >> +    {
->> +        struct vaplic_source *src = &vaplic->regs.sources[irqn];
->> +        unsigned long flags;
->> +        uint32_t target;
+>> +    imsic_switchcase_64(imsic_switchcase_break, IMSIC_EIP0,
+>> +                        imsic_vs_csr_write, val);
+>> +    imsic_switchcase_64(imsic_switchcase_break, IMSIC_EIE0,
+>> +                        imsic_vs_csr_write, val);
+>> +    default:
+>> +        ASSERT_UNREACHABLE();
+>> +        break;
+>> +    }
+>> +}
 >> +
->> +        /* APLIC interrupt sources start from 1, there is no source 0. */
->> +        if ( !irqn )
->> +            continue;
+> What does the switch buy? ireg only ends up as the value written to
+> vsiselect, not as a CSR number, so it doesn't need to be a compile-time
+> constant. imsic_vs_csr_write(ireg, val) does the same, without the 128 case
+> labels and the macro pyramid. If there's a reason, it wants stating in a
+> comment; otherwise please drop the pyramid (an ASSERT() on the range can
+> stay if you want one).
+
+Good point.
+
+I will drop it and use the following instead:
+
+/*
+  * On RV64 a 64-bit EIx group is the even-numbered register alone, 
+whereas on
+  * RV32 it is split into the even-numbered (low half) and the following
+  * odd-numbered (high half) register. ireg names the first, even-numbered
+  * register of such a group, among eip0..eip63 or eie0..eie63.
+  */
+static void imsic_eix_check(unsigned int ireg)
+{
+     ASSERT(!(ireg & 1));
+     ASSERT((ireg >= IMSIC_EIP0 && ireg < IMSIC_EIP0 + 64) ||
+            (ireg >= IMSIC_EIE0 && ireg < IMSIC_EIE0 + 64));
+}
+
+/* Write a whole 64-bit EIx group, laid out as described above. */
+static void imsic_eix_write64(unsigned int ireg, uint64_t val)
+{
+     imsic_eix_check(ireg);
+     imsic_vs_csr_write(ireg, val);
+     if ( IS_ENABLED(CONFIG_RISCV_32) )
+         imsic_vs_csr_write(ireg + 1, val >> 32);
+}
+
+I will applt the similar patter to other patches where the pyramid was used.
+
+
+> 
+> Typo (only if the macros stay): "Leaf macros" - there's only one here. And
+> `case ireg:` / `op(ireg, v)` as well as c and v in imsic_vs_csr_write()
+> want parenthesizing (MISRA 20.7).
+
+As to c and v in imsic_vs_csr_write(): they're passed as whole arguments
+to csr_write() and the other csr_*() macros, which is covered by the
+R20.7 deviation for macro parameters used as macro arguments. That's 
+also why the parentheses were dropped in v3.
+
+>> [ ... 67 lines skipped ... ]
+>> +static void cf_check imsic_vsfile_local_clear(void *data)
+>> +{
+>> +    unsigned int i;
+>> +    const struct imsic_vsfile_data *idata = data;
+>> +    unsigned long new_hstatus, old_hstatus, old_vsiselect;
 >> +
->> +        spin_lock_irqsave(&src->lock, flags);
+>> +    /* We can only zero-out if we have a IMSIC VS-file */
+> Typo: s/a IMSIC/an IMSIC/
+>> [ ... 31 lines skipped ... ]
+>>   void imsic_migrate_vcpu(struct vcpu *v)
+>>   {
+>> +    struct imsic_vsfile_data vsfile_data = {
+>> +        .nr_eix = imsic_cfg.nr_eix,
+>> +    };
 >> +
->> +        target = read_atomic(&src->target);
+>>       /*
+>>        * The scheduler can mark a freshly created vCPU's unit as migrated and
+>>        * invoke this before the vCPU has ever run (see the migrated branch in
+>> @@ -703,5 +849,18 @@ void imsic_migrate_vcpu(struct vcpu *v)
+>>       if ( v->arch.last_cpu == CPU_NONE )
+>>           return;
+>>   
+>> +    /*
+>> +     * At this point, all interrupt producers are still using the old IMSIC
+>> +     * VS-file.
+>> +     */
 >> +
->> +        if ( vaplic_target_decode_vcpu(d, target) == v )
->> +        {
->> +            /*
->> +             * IRQs are already off under src->lock so no need for *_irqsave
->> +             * here.
->> +             */
->> +            read_lock(&vimsic_state->vsfile_lock);
->> +            aplic_hw_write_reg(offsetof(struct aplic_regs, target[irqn - 1]),
->> +                               aplic_msi_target_gen(v, target));
->>
-> Doesn't this need the same vsfile_cpu != CPU_NONE check as
-> vaplic_emulate_store()? 
-
-The case with the similar place in vaplic_emulate_store() is slightly 
-different, as a guest could write to the target register using a vCPU 
-for which the h/w interrupt file hasn't been assigned yet. Since we 
-support only h/w interrupt files, we should simply ignore such writes, 
-as the vCPU isn't ready for some reason.
-
-> Because it seems that, for a vCPU on a s/w
-> VS-file, aplic_msi_target_gen() calls aplic_hart_index(CPU_NONE) and
-> indexes imsic->msi[] out of bounds; the ASSERT() in
-> aplic_msi_target_gen() doesn't help in release builds.
-
-I think ASSERT() should be sufficient to catch this situation. Since 
-software interrupt file support is not included in this patch series, 
-vaplic_reconfigure_target() cannot be called for a vCPU with a software 
-interrupt file. The ASSERT() in aplic_hw_write_reg() will catch such 
-cases. Therefore, even in a release build, we will never encounter a 
-vCPU with a software interrupt file so we shouldn't care that ASSERT() 
-is do nothing in release built.
-
-When it comes to adding software interrupt file support, debug builds 
-will be used during development, so the need to update 
-aplic_msi_target_gen() to handle this case properly won't be overlooked.
-
-> Since both
-> callers now do the same lock/check/generate/write sequence, a helper for
-> it would make sense.
+>> +    vsfile_data.hgei = vgein_assign(v);
+>> +
+>> +    /* We don't support SW interrupt files at the moment. */
+>> +    BUG_ON(!vsfile_data.hgei);
+>> +
+>> +    /* Zero-out new IMSIC VS-file */
+>> +    imsic_call_on_cpu(v->processor, imsic_vsfile_local_clear, &vsfile_data);
+> Nit: The comment restates the call; drop it.
 > 
 
-Looking at my current implementation of the software interrupt file 
-support, aplic_msi_target_gen() has been updated so that there is no 
-longer a need to check vsfile_cpu != CPU_NONE before calling it. 
-Therefore, this check will be removed from vaplic_emulate_store() and 
-both the places will look the same.
+Agreed, I will drop.
+
+Thanks!
 
 ~ Oleksii
 
