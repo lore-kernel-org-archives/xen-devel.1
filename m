@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5E21F6070780
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6CE5F6070783
 	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 15:50:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=desiato.20200630 header.b=PS8heR5U
-Received: from list by lists.xenproject.org with outflank-mailman.1474997.1681856 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=casper.20170209 header.b=wJOQVik5
+Received: from list by lists.xenproject.org with outflank-mailman.1475006.1681911 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOzj2-0003hE-4V; Thu, 05 Nov 2026 15:50:04 +0000
+	id 1xOzj8-00051K-0f; Thu, 05 Nov 2026 15:50:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1474997.1681856; Thu, 05 Nov 2026 15:50:04 +0000
+Received: by outflank-mailman (output) from mailman id 1475006.1681911; Thu, 05 Nov 2026 15:50:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOzj2-0003fn-0w; Thu, 05 Nov 2026 15:50:04 +0000
-Received: by outflank-mailman (input) for mailman id 1474997;
- Thu, 05 Nov 2026 15:50:02 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xOzj7-0004zW-ET; Thu, 05 Nov 2026 15:50:09 +0000
+Received: by outflank-mailman (input) for mailman id 1475006;
+ Thu, 05 Nov 2026 15:50:05 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <BATV+4c1d8b341febb4002902+8474+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1xOzj0-00031P-AM
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 15:50:02 +0000
+ <BATV+a10630623031064a0c86+8474+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1xOzj3-0003vk-6B
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 15:50:05 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xOziz-00GUtv-Mt; Thu, 05 Nov 2026 16:50:01 +0100
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xOzj2-00B7sn-In; Thu, 05 Nov 2026 16:50:04 +0100
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <BATV+4c1d8b341febb4002902+8474+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 6aeca5a0-8faa-0a2a0a5109dd-0a2a4508cd68-8
- for <multiple-recipients>; Thu, 05 Nov 2026 16:50:01 +0100
-Received: from [90.155.92.199] (helo=desiato.infradead.org)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ <BATV+a10630623031064a0c86+8474+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 6aeca5ab-2eae-0a2a0a5409dd-0a2a4504ba48-6
+ for <multiple-recipients>; Thu, 05 Nov 2026 16:50:04 +0100
+Received: from [90.155.50.34] (helo=casper.infradead.org)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <BATV+4c1d8b341febb4002902+8474+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 6aeca5a8-f659-0a2a45080019-5a9b5cc7adf2-3
- for <multiple-recipients>; Thu, 05 Nov 2026 16:50:00 +0100
+ <BATV+a10630623031064a0c86+8474+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 6aeca5a6-b57f-0a2a45040019-5a9b3222de26-3
+ for <multiple-recipients>; Thu, 05 Nov 2026 16:49:58 +0100
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
- by desiato.infradead.org with esmtpsa (Exim 4.100.1 #2 (Red Hat Linux))
- id 1xOziw-00000003Bo1-28cY; Thu, 05 Nov 2026 15:49:58 +0000
+ by casper.infradead.org with esmtpsa (Exim 4.100.1 #2 (Red Hat Linux))
+ id 1xOzit-00000009aog-3EQm; Thu, 05 Nov 2026 15:49:55 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.5 #2 (Red
- Hat Linux)) id 1xOziu-0000000AazW-0O4I;
- Thu, 05 Nov 2026 15:49:56 +0000
+ Hat Linux)) id 1xOzit-0000000Aays-2HEO;
+ Thu, 05 Nov 2026 15:49:55 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -48,17 +48,17 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=desiato.20200630 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
-	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=mKH9BxiVhD1hkWOxu0QRNvIl232YhI8uqiNY5R0UwSo=; b=PS8heR5UfpzNGppFEyFnViA2DL
-	FRWZk3qRLQOMGVQFWIw5D/XcdpEnJVkMbTkQfVXe4hAXq0CqByd46FPAhCF/k4oM5IGvQPzLmQe0k
-	ajTJabtgEAwXls17arD8PDPJxchbIETuZhSsekBzV0Ps6XZc0/Qx3Obg7iISMggAf2QoIZWilTLzi
-	uYxiWORF261bI3SEiPfDd1loNVLFSa7d3eRwGRbfKgHQRbNNOVEomunG2rLQt8RGvscUb1SCb21mb
-	h42wQ9/0PEFxFJKniq3Xy+Unj6QBuN+m9Meb3YOhW5jbXXWURJp1UoA6k8aImvZ7GX6oP8q3A8aRT
-	xHYCUTxw==;
+	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:
+	To:From:Reply-To:Content-ID:Content-Description;
+	bh=h7IHIRRM4XFq6GwXgluit19dquWavUx85ZLuD079Loc=; b=wJOQVik5uP7OzAC5hZCitvfvF0
+	4Thd8CLgIpOlwvCfnb6BOX4rc0TukNFuOPsOx3/UrpS3NUXN7vhvsItwvt0Xb4rXkNUC2TNWc043u
+	T3eK2BL1xtTetnGeKdhOWYxTPWpTwt5iXQxe278C36OP6PNO88vmYSoUJUPdrTc6/DXtYrkXNBsnV
+	RR3YzmQg+ZLuJpAXGELumrxRv3mTGdnI0JTdKCRxVgOKpeVEckfVd52Hy/PV0awnb2xCWs0pRd+bP
+	OkmqqbnTzNpxquMdiwgJ5cVsywOvGE9TeLptWJMVexyFIU0ltrJdza9vVbytkS9z0OjrVR+iZV1b9
+	PJDxaiVw==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: kvm@vger.kernel.org
 Cc: linux-kernel@vger.kernel.org,
@@ -87,144 +87,123 @@ Cc: linux-kernel@vger.kernel.org,
 	Dongli Zhang <dongli.zhang@oracle.com>,
 	joe.jin@oracle.com,
 	David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v11 12/23] UAPI: x86: Move pvclock-abi to UAPI for x86 platforms
-Date: Thu,  5 Nov 2026 07:49:43 -0800
-Message-ID: <20261105154955.2525419-13-dwmw2@infradead.org>
+Subject: [PATCH v11 03/23] KVM: x86: Replace nr_vcpus_matched_tsc count with all_vcpus_matched_tsc bool
+Date: Thu,  5 Nov 2026 07:49:34 -0800
+Message-ID: <20261105154955.2525419-4-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261105154955.2525419-1-dwmw2@infradead.org>
 References: <20261105154955.2525419-1-dwmw2@infradead.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-c1860d/1793893801-D457487B-B88B81AE/0/0
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-purgate-ID: tlsNG-ebf023/1793893803-585C7B50-3F2BE8AD/0/0
 X-purgate-type: clean
-X-purgate-size: 3998
-X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-purgate-size: 4215
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Jack Allister <jalliste@amazon.com>
+From: David Woodhouse <dwmw@amazon.co.uk>
 
-A subsequent commit will provide a new KVM interface for performing a
-fixup/correction of the KVM clock against the reference TSC. The
-KVM_[GS]ET_CLOCK_GUEST API requires a pvclock_vcpu_time_info, as such
-the caller must know about this definition.
+Using a count and comparing with kvm->online_vcpus was always racy
+because a new vCPU could be created while kvm_track_tsc_matching() was
+running and comparing with kvm->online_vcpus. That variable is only
+atomic with respect to itself; kvm_arch_vcpu_create() runs before
+kvm->online_vcpus is incremented for the new vCPU.
 
-Move the definition to the UAPI folder so that it is exported to
-usermode, change the type definitions to use the standard for UAPI
-exports, and add the Linux-syscall-note exception to the SPDX licence
-identifier as is conventional for exported headers.
+Replace the count with a boolean that is set in kvm_track_tsc_matching()
+after comparing the count, and cleared when a new TSC generation starts.
+The boolean is consumed by pvclock_update_vm_gtod_copy() under the
+tsc_write_lock, which serializes against __kvm_synchronize_tsc().
 
-Define __KERNEL__ in scripts/xen-hypercalls.sh: the UAPI header now
-pulls in linux/types.h, and the script's raw $CPP invocation with
-$LINUXINCLUDE does not define it, which would trigger the "attempt to
-use kernel headers from user space" warning from the UAPI type
-headers.
+Keep the count for now as it's still used in the trace event.
 
-Signed-off-by: Jack Allister <jalliste@amazon.com>
+Note that the explicit clear of the flag when a new generation starts
+is currently overwritten by the unconditional recompute in
+kvm_track_tsc_matching() under the same lock; it is preparation for
+subsequent patches which consume the previous value of the flag.
+
+Initialize the flag to true at VM creation: a VM whose vCPUs never
+reach kvm_track_tsc_matching() — notably with a protected guest TSC
+(TDX, SNP Secure TSC), where __kvm_synchronize_tsc() returns early —
+would otherwise never be eligible for PVCLOCK_TSC_STABLE_BIT, where
+the old read-time computation gave 0 + 1 == 1 for a single-vCPU VM.
+
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Reviewed-by: Paul Durrant <paul@xen.org>
-Tested-by: Dongli Zhang <dongli.zhang@oracle.com>
 ---
- MAINTAINERS                                   |  4 +--
- arch/x86/include/{ => uapi}/asm/pvclock-abi.h | 27 ++++++++++---------
- scripts/xen-hypercalls.sh                     |  2 +-
- 3 files changed, 18 insertions(+), 15 deletions(-)
- rename arch/x86/include/{ => uapi}/asm/pvclock-abi.h (82%)
+ arch/x86/include/asm/kvm_host.h |  1 +
+ arch/x86/kvm/x86.c              | 18 ++++++++++++++----
+ 2 files changed, 15 insertions(+), 4 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 9fadc98d3c49..773f7c800f6a 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -14663,8 +14663,8 @@ S:	Supported
- T:	git git://git.kernel.org/pub/scm/virt/kvm/kvm.git
- F:	arch/um/include/asm/kvm_para.h
- F:	arch/x86/include/asm/kvm_para.h
--F:	arch/x86/include/asm/pvclock-abi.h
- F:	arch/x86/include/uapi/asm/kvm_para.h
-+F:	arch/x86/include/uapi/asm/pvclock-abi.h
- F:	arch/x86/kernel/kvm.c
- F:	arch/x86/kernel/kvmclock.c
- F:	include/asm-generic/kvm_para.h
-@@ -29780,8 +29780,8 @@ R:	Boris Ostrovsky <boris.ostrovsky@oracle.com>
- L:	xen-devel@lists.xenproject.org (moderated for non-subscribers)
- S:	Supported
- F:	arch/x86/configs/xen.config
--F:	arch/x86/include/asm/pvclock-abi.h
- F:	arch/x86/include/asm/xen/
-+F:	arch/x86/include/uapi/asm/pvclock-abi.h
- F:	arch/x86/platform/pvh/
- F:	arch/x86/xen/
+diff --git a/arch/x86/include/asm/kvm_host.h b/arch/x86/include/asm/kvm_host.h
+index ea48b1949316..1efca01647d2 100644
+--- a/arch/x86/include/asm/kvm_host.h
++++ b/arch/x86/include/asm/kvm_host.h
+@@ -1242,6 +1242,7 @@ struct kvm_arch {
+ 	u64 cur_tsc_write;
+ 	u64 cur_tsc_offset;
+ 	u64 cur_tsc_generation;
++	bool all_vcpus_matched_tsc;
+ 	int nr_vcpus_matched_tsc;
  
-diff --git a/arch/x86/include/asm/pvclock-abi.h b/arch/x86/include/uapi/asm/pvclock-abi.h
-similarity index 82%
-rename from arch/x86/include/asm/pvclock-abi.h
-rename to arch/x86/include/uapi/asm/pvclock-abi.h
-index b9fece5fc96d..6d70cf640362 100644
---- a/arch/x86/include/asm/pvclock-abi.h
-+++ b/arch/x86/include/uapi/asm/pvclock-abi.h
-@@ -1,6 +1,9 @@
--/* SPDX-License-Identifier: GPL-2.0 */
-+/* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
- #ifndef _ASM_X86_PVCLOCK_ABI_H
- #define _ASM_X86_PVCLOCK_ABI_H
+ 	u32 default_tsc_khz;
+diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
+index 90f9b07ef749..ec8693f4827f 100644
+--- a/arch/x86/kvm/x86.c
++++ b/arch/x86/kvm/x86.c
+@@ -1125,8 +1125,10 @@ static void kvm_track_tsc_matching(struct kvm_vcpu *vcpu, bool new_generation)
+ 	 * and all vCPUs must have matching TSCs.  Note, the count for matching
+ 	 * vCPUs doesn't include the reference vCPU, hence "+1".
+ 	 */
+-	bool use_master_clock = (ka->nr_vcpus_matched_tsc + 1 ==
+-				 atomic_read(&vcpu->kvm->online_vcpus)) &&
++	ka->all_vcpus_matched_tsc = (ka->nr_vcpus_matched_tsc + 1 ==
++				     atomic_read(&vcpu->kvm->online_vcpus));
 +
-+#include <linux/types.h>
++	bool use_master_clock = ka->all_vcpus_matched_tsc &&
+ 				gtod_is_based_on_tsc(gtod->clock.vclock_mode);
+ 
+ 	/*
+@@ -1367,6 +1369,7 @@ static void __kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 offset, u64 tsc,
+ 		kvm->arch.cur_tsc_write = tsc;
+ 		kvm->arch.cur_tsc_offset = offset;
+ 		kvm->arch.nr_vcpus_matched_tsc = 0;
++		kvm->arch.all_vcpus_matched_tsc = false;
+ 	} else if (vcpu->arch.this_tsc_generation != kvm->arch.cur_tsc_generation) {
+ 		kvm->arch.nr_vcpus_matched_tsc++;
+ 	}
+@@ -1591,8 +1594,7 @@ static void pvclock_update_vm_gtod_copy(struct kvm *kvm)
+ 	bool host_tsc_clocksource, vcpus_matched;
+ 
+ 	lockdep_assert_held(&kvm->arch.tsc_write_lock);
+-	vcpus_matched = (ka->nr_vcpus_matched_tsc + 1 ==
+-			atomic_read(&kvm->online_vcpus));
++	vcpus_matched = ka->all_vcpus_matched_tsc;
+ 
+ 	/*
+ 	 * If the host uses TSC clock, then passthrough TSC as stable
+@@ -10007,6 +10009,14 @@ int kvm_arch_init_vm(struct kvm *kvm, unsigned long type)
+ 	ratelimit_set_flags(&kvm->arch.kvmclock_update_rs, RATELIMIT_MSG_ON_RELEASE);
+ 	kvm->arch.kvmclock_offset = -get_kvmclock_base_ns();
+ 
++	/*
++	 * Start with all (zero) vCPUs considered matched, so that a VM whose
++	 * vCPUs never reach kvm_track_tsc_matching() — notably when the guest
++	 * TSC is protected (TDX, SNP Secure TSC) and __kvm_synchronize_tsc()
++	 * returns early — is still eligible for PVCLOCK_TSC_STABLE_BIT.
++	 */
++	kvm->arch.all_vcpus_matched_tsc = true;
 +
- #ifndef __ASSEMBLER__
- 
- /*
-@@ -24,20 +27,20 @@
-  */
- 
- struct pvclock_vcpu_time_info {
--	u32   version;
--	u32   pad0;
--	u64   tsc_timestamp;
--	u64   system_time;
--	u32   tsc_to_system_mul;
--	s8    tsc_shift;
--	u8    flags;
--	u8    pad[2];
-+	__u32   version;
-+	__u32   pad0;
-+	__u64   tsc_timestamp;
-+	__u64   system_time;
-+	__u32   tsc_to_system_mul;
-+	__s8    tsc_shift;
-+	__u8    flags;
-+	__u8    pad[2];
- } __attribute__((__packed__)); /* 32 bytes */
- 
- struct pvclock_wall_clock {
--	u32   version;
--	u32   sec;
--	u32   nsec;
-+	__u32   version;
-+	__u32   sec;
-+	__u32   nsec;
- } __attribute__((__packed__));
- 
- #define PVCLOCK_TSC_STABLE_BIT	(1 << 0)
-diff --git a/scripts/xen-hypercalls.sh b/scripts/xen-hypercalls.sh
-index f18b00843df3..51a722198997 100755
---- a/scripts/xen-hypercalls.sh
-+++ b/scripts/xen-hypercalls.sh
-@@ -5,7 +5,7 @@ shift
- in="$@"
- 
- for i in $in; do
--	eval $CPP $LINUXINCLUDE -dD -imacros "$i" -x c /dev/null
-+	eval $CPP -D__KERNEL__ $LINUXINCLUDE -dD -imacros "$i" -x c /dev/null
- done | \
- awk '$1 == "#define" && $2 ~ /__HYPERVISOR_[a-z][a-z_0-9]*/ { v[$3] = $2 }
- 	END {   print "/* auto-generated by scripts/xen-hypercall.sh */"
+ 	raw_spin_lock_irqsave(&kvm->arch.tsc_write_lock, flags);
+ 	pvclock_update_vm_gtod_copy(kvm);
+ 	raw_spin_unlock_irqrestore(&kvm->arch.tsc_write_lock, flags);
 -- 
 2.43.0
 
