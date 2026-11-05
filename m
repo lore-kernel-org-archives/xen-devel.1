@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 02E55606EE8F
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 15:50:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 12320606D805
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 15:50:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=casper.20170209 header.b=ZcdGpA6p
-Received: from list by lists.xenproject.org with outflank-mailman.1475017.1682000 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=desiato.20200630 header.b=IPxuipau
+Received: from list by lists.xenproject.org with outflank-mailman.1475020.1682015 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOzjO-00089F-55; Thu, 05 Nov 2026 15:50:26 +0000
+	id 1xOzjR-0000HN-F1; Thu, 05 Nov 2026 15:50:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1475017.1682000; Thu, 05 Nov 2026 15:50:25 +0000
+Received: by outflank-mailman (output) from mailman id 1475020.1682015; Thu, 05 Nov 2026 15:50:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOzjM-00087F-UF; Thu, 05 Nov 2026 15:50:24 +0000
-Received: by outflank-mailman (input) for mailman id 1475017;
- Thu, 05 Nov 2026 15:50:10 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xOzjQ-0000Bf-2R; Thu, 05 Nov 2026 15:50:28 +0000
+Received: by outflank-mailman (input) for mailman id 1475020;
+ Thu, 05 Nov 2026 15:50:12 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <BATV+a10630623031064a0c86+8474+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1xOzj8-0005Cp-HL
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 15:50:10 +0000
+ <BATV+4c1d8b341febb4002902+8474+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 1xOzj9-0005UO-Sz
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 15:50:12 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xOzj7-00GUz4-TW; Thu, 05 Nov 2026 16:50:09 +0100
+ id 1xOzj9-00ErBr-8C; Thu, 05 Nov 2026 16:50:11 +0100
 Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <BATV+a10630623031064a0c86+8474+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6aeca5b1-8faa-0a2a0a5109dd-0a2a450cbe30-12
- for <multiple-recipients>; Thu, 05 Nov 2026 16:50:09 +0100
-Received: from [90.155.50.34] (helo=casper.infradead.org)
+ <BATV+4c1d8b341febb4002902+8474+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 6aeca5a5-e002-0a2a0a5209dd-0a2a450ce7f6-4
+ for <multiple-recipients>; Thu, 05 Nov 2026 16:50:01 +0100
+Received: from [90.155.92.199] (helo=desiato.infradead.org)
  by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <BATV+a10630623031064a0c86+8474+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6aeca5a6-f479-0a2a450c0019-5a9b3222e880-3
- for <multiple-recipients>; Thu, 05 Nov 2026 16:49:58 +0100
+ <BATV+4c1d8b341febb4002902+8474+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 6aeca5a8-f479-0a2a450c0019-5a9b5cc79a62-3
+ for <multiple-recipients>; Thu, 05 Nov 2026 16:50:00 +0100
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.100.1 #2 (Red Hat Linux))
- id 1xOziu-00000009aoq-0dWx; Thu, 05 Nov 2026 15:49:56 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.100.1 #2 (Red Hat Linux))
+ id 1xOziw-00000003Bny-29bb; Thu, 05 Nov 2026 15:49:58 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.5 #2 (Red
- Hat Linux)) id 1xOzit-0000000AazM-3xHY;
- Thu, 05 Nov 2026 15:49:55 +0000
+ Hat Linux)) id 1xOziu-0000000AazR-01Rb;
+ Thu, 05 Nov 2026 15:49:56 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -48,17 +48,17 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=desiato.20200630 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
-	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=+Bp/FraEPNEKgnVnaEnw6iNuhtXFkslibvECwlTvHqE=; b=ZcdGpA6p4Jpvl/hnSOPP0PjHv/
-	eeUSBwF7bh55qJGD+CCING13IN7mFqESX25yk51b9VeLvgG4rbjs5xe8s0UTFKm4LqdldDD/tIZtF
-	dG9+rgKGgqNn+BAiv5ZHViWGFDcT4mJofE0dNYAWQLik25Qdtkp0ppZIWLyPpyr0zLWPB/Po5fjUm
-	SfkH/qeYivekcHSnsWOKZmJWKHBT/J3eS7feqBmxhrn5A22MEYZ0n23XYt2SfhqEMiY4bFLQpkXHS
-	8/H/c+LfweYD+K4wNyQjIGJEe5BI/YFpAfzjG68e/WD1+lP4eOLg2hXQCYo9jfVgcSPILWa33Nuy1
-	yRkQlxag==;
+	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:
+	To:From:Reply-To:Content-ID:Content-Description;
+	bh=WVtfluigLHm+qCIoMwJls4zd6p70KJsFBBAO4EnPbSY=; b=IPxuipauPh1uxvLe8CbOPYLS4J
+	vfXdV83+56i8IGOPlQ1wOVhKkuA4BlHApMOlXaBrgLCP4Ls5amnO9shAQCuonKgetQda59SU4s4Fc
+	Upx0kZ2G5CVCxQd6ZlV+KzNcIozzfXizorRjZP18jrkGACtgQmR9tV99a1Z/fNVf0NHzj/rKsEIU2
+	/uobNRbQcM/wIpdn2fIYxt8k1cJcBy+J96/UH6V7Dx9LdQhJfXzuUsJ8ALytrIMiB80EpKGBnJrOu
+	BYX8Qfgw5WkCxv30CoQjKQ6BRoirOcT6Ihrx4OLh3ZZEhNA6vShpKTD9afezLI5K2d2ks4ozk/AbJ
+	3zdwgRMA==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: kvm@vger.kernel.org
 Cc: linux-kernel@vger.kernel.org,
@@ -87,20 +87,21 @@ Cc: linux-kernel@vger.kernel.org,
 	Dongli Zhang <dongli.zhang@oracle.com>,
 	joe.jin@oracle.com,
 	David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v11 10/23] KVM: x86: Remove pvclock_gtod_data and private timekeeping code
-Date: Thu,  5 Nov 2026 07:49:41 -0800
-Message-ID: <20261105154955.2525419-11-dwmw2@infradead.org>
+Subject: [PATCH v11 11/23] KVM: x86: Activate master clock from kvm_arch_init_vm()
+Date: Thu,  5 Nov 2026 07:49:42 -0800
+Message-ID: <20261105154955.2525419-12-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261105154955.2525419-1-dwmw2@infradead.org>
 References: <20261105154955.2525419-1-dwmw2@infradead.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-d25034/1793893803-03AD4A5B-DBF46BDD/0/0
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
+X-purgate-ID: tlsNG-d25034/1793893801-01EC2A5B-8BB243DE/0/0
 X-purgate-type: clean
-X-purgate-size: 2800
+X-purgate-size: 6887
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -111,92 +112,168 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-Remove the now-unused KVM-private timekeeping infrastructure:
+Initialize the TSC generation and master clock state at VM creation
+time, rather than relying on kvm_update_masterclock() from
+kvm_arch_vcpu_postcreate().
 
- - struct pvclock_clock and struct pvclock_gtod_data
- - update_pvclock_gtod() and its seqcount-protected state copy
-   (the private readers were already removed when their last callers
-   went away)
+Set cur_tsc_generation=1, cur_tsc_khz, cur_tsc_scaling_ratio,
+cur_tsc_offset, cur_tsc_nsec and kvmclock_offset from an atomic
+ktime/TSC snapshot. This establishes a coherent epoch so that:
+
+ - The first vCPU synchronizes to the existing generation (getting
+   the pre-computed TSC offset) rather than computing its own.
+ - pvclock_update_vm_gtod_copy() succeeds immediately (no zero
+   tsc_hz from uninitialized cur_tsc_scaling_ratio).
+ - KVM_GET_CLOCK returns valid {host_tsc, realtime} fields as soon
+   as any vCPU exists.
+ - KVM_[GS]ET_CLOCK_GUEST works without a prior KVM_RUN.
+ - No O(N) iteration of all vCPUs on each vCPU creation.
+
+This replaces the KVM_REQ_MASTERCLOCK_UPDATE check and
+kvm_update_masterclock() call in kvm_arch_vcpu_postcreate(), which
+worked around the missing initialization. A masterclock refresh is
+still performed (synchronously, so that it is valid even for userspace
+which queries the clock before ever running a vCPU) when the first
+vCPU is created, since the VM-creation snapshot can go stale while the
+VM has no vCPUs: a clocksource change notifies only VMs with vCPUs,
+and a change back to TSC leaves nothing to disagree with the stale
+snapshot.
+
+The generation's recorded offset in kvm_synchronize_tsc() can now only
+be joined by a vCPU with the same scaling ratio it was recorded with:
+the initial generation's offset is recorded with the default ratio
+before any vCPU exists, and a vCPU with a different ratio opens a new
+generation with its own offset, keeping the generation's ratio and
+offset describing the same scaling domain.
 
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- arch/x86/kvm/x86.c | 56 ----------------------------------------------
- 1 file changed, 56 deletions(-)
+ arch/x86/kvm/x86.c | 76 ++++++++++++++++++++++++++++++++++++++--------
+ 1 file changed, 64 insertions(+), 12 deletions(-)
 
 diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-index e81e527e7b99..940168528721 100644
+index 940168528721..6dbdb60962fe 100644
 --- a/arch/x86/kvm/x86.c
 +++ b/arch/x86/kvm/x86.c
-@@ -889,60 +889,6 @@ static inline bool kvm_vcpu_exit_request(struct kvm_vcpu *vcpu)
- 	       kvm_request_pending(vcpu) || xfer_to_guest_mode_work_pending();
- }
+@@ -1500,11 +1500,25 @@ void kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 *value, bool user_initiated)
  
--#ifdef CONFIG_X86_64
--struct pvclock_clock {
--	int vclock_mode;
--	u64 cycle_last;
--	u64 mask;
--	u32 mult;
--	u32 shift;
--	u64 base_cycles;
--	u64 offset;
--};
--
--struct pvclock_gtod_data {
--	seqcount_t	seq;
--
--	struct pvclock_clock clock; /* extract of a clocksource struct */
--	struct pvclock_clock raw_clock; /* extract of a clocksource struct */
--
--	ktime_t		offs_boot;
--	u64		wall_time_sec;
--};
--
--static struct pvclock_gtod_data pvclock_gtod_data;
--
--static void update_pvclock_gtod(struct timekeeper *tk)
--{
--	struct pvclock_gtod_data *vdata = &pvclock_gtod_data;
--
--	write_seqcount_begin(&vdata->seq);
--
--	/* copy pvclock gtod data */
--	vdata->clock.vclock_mode	= tk->tkr_mono.clock->vdso_clock_mode;
--	vdata->clock.cycle_last		= tk->tkr_mono.cycle_last;
--	vdata->clock.mask		= tk->tkr_mono.mask;
--	vdata->clock.mult		= tk->tkr_mono.mult;
--	vdata->clock.shift		= tk->tkr_mono.shift;
--	vdata->clock.base_cycles	= tk->tkr_mono.xtime_nsec;
--	vdata->clock.offset		= tk->tkr_mono.base;
--
--	vdata->raw_clock.vclock_mode	= tk->tkr_raw.clock->vdso_clock_mode;
--	vdata->raw_clock.cycle_last	= tk->tkr_raw.cycle_last;
--	vdata->raw_clock.mask		= tk->tkr_raw.mask;
--	vdata->raw_clock.mult		= tk->tkr_raw.mult;
--	vdata->raw_clock.shift		= tk->tkr_raw.shift;
--	vdata->raw_clock.base_cycles	= tk->tkr_raw.xtime_nsec;
--	vdata->raw_clock.offset		= tk->tkr_raw.base;
--
--	vdata->wall_time_sec            = tk->xtime_sec;
--
--	vdata->offs_boot		= tk->offs_boot;
--
--	write_seqcount_end(&vdata->seq);
--}
--#endif
--
- static s64 get_kvmclock_base_ns(void)
- {
- 	/* Count up from boot time, but with the frequency of the raw clock.  */
-@@ -7092,8 +7038,6 @@ static int pvclock_gtod_notify(struct notifier_block *nb, unsigned long unused,
- {
- 	struct timekeeper *tk = priv;
+ 		data = kvm->arch.cur_tsc_write + delta;
  
--	update_pvclock_gtod(tk);
--
+-		if (!kvm_check_tsc_unstable())
+-			offset = kvm->arch.cur_tsc_offset;
+-		else
++		/*
++		 * The generation's offset can only be joined by a vCPU which
++		 * scales the TSC by the same ratio it was recorded with; the
++		 * initial generation's offset is recorded at VM creation
++		 * with the default ratio, before any vCPU exists. With a
++		 * different ratio, open a new generation (recording this
++		 * vCPU's own offset) rather than leave the generation's
++		 * ratio and offset describing different scaling domains.
++		 */
++		if (vcpu->arch.l1_tsc_scaling_ratio !=
++		    kvm->arch.cur_tsc_scaling_ratio) {
+ 			offset = kvm_compute_l1_tsc_offset(vcpu, host_tsc, data);
+-		matched = true;
++		} else {
++			if (!kvm_check_tsc_unstable())
++				offset = kvm->arch.cur_tsc_offset;
++			else
++				offset = kvm_compute_l1_tsc_offset(vcpu, host_tsc, data);
++			matched = true;
++		}
+ 	}
+ 
+ 	__kvm_synchronize_tsc(vcpu, offset, data, ns, matched, user_initiated);
+@@ -9645,8 +9659,15 @@ void kvm_arch_vcpu_postcreate(struct kvm_vcpu *vcpu)
+ 		return;
+ 	vcpu_load(vcpu);
+ 	kvm_synchronize_tsc(vcpu, NULL, false);
+-	if (kvm_check_request(KVM_REQ_MASTERCLOCK_UPDATE, vcpu))
++
++	/*
++	 * Refresh the VM-creation masterclock snapshot (see
++	 * kvm_arch_init_vm), synchronously so that it is valid even for
++	 * userspace which queries the clock before ever running a vCPU.
++	 */
++	if (vcpu->vcpu_idx == 0)
+ 		kvm_update_masterclock(vcpu->kvm, NULL);
++
+ 	vcpu_put(vcpu);
+ 
+ 	/* poll control enabled by default */
+@@ -10065,6 +10086,8 @@ int kvm_arch_init_vm(struct kvm *kvm, unsigned long type)
+ {
+ 	int ret;
+ 	unsigned long flags;
++	u64 kvmclock_host_tsc;
++	s64 kvmclock_ns;
+ 
+ 	if (!kvm_is_vm_type_supported(type))
+ 		return -EINVAL;
+@@ -10096,9 +10119,13 @@ int kvm_arch_init_vm(struct kvm *kvm, unsigned long type)
+ 	seqcount_raw_spinlock_init(&kvm->arch.pvclock_sc, &kvm->arch.tsc_write_lock);
+ 	ratelimit_state_init(&kvm->arch.kvmclock_update_rs, HZ, 10);
+ 	ratelimit_set_flags(&kvm->arch.kvmclock_update_rs, RATELIMIT_MSG_ON_RELEASE);
+-	kvm->arch.kvmclock_offset = -get_kvmclock_base_ns();
+-	kvm->arch.all_vcpus_matched_freq = true;
+ 
++	kvm->arch.default_tsc_khz = max_tsc_khz ? : tsc_khz;
++	kvm->arch.apic_bus_cycle_ns = APIC_BUS_CYCLE_NS_DEFAULT;
++	kvm->arch.guest_can_read_msr_platform_info = true;
++	kvm->arch.enable_pmu = enable_pmu && !kvm->arch.has_protected_pmu;
++
++	kvm->arch.all_vcpus_matched_freq = true;
  	/*
- 	 * Pairs with the READ_ONCE() in the lockless readers; the race is
- 	 * benign by design, relying on eventual consistency (the notifier
+ 	 * Start with all (zero) vCPUs considered matched, so that a VM whose
+ 	 * vCPUs never reach kvm_track_tsc_matching() — notably when the guest
+@@ -10106,16 +10133,41 @@ int kvm_arch_init_vm(struct kvm *kvm, unsigned long type)
+ 	 * returns early — is still eligible for PVCLOCK_TSC_STABLE_BIT.
+ 	 */
+ 	kvm->arch.all_vcpus_matched_tsc = true;
++	kvm->arch.cur_tsc_scaling_ratio = kvm_caps.default_tsc_scaling_ratio;
++	kvm->arch.cur_tsc_khz = kvm->arch.default_tsc_khz;
+ 
+ 	raw_spin_lock_irqsave(&kvm->arch.tsc_write_lock, flags);
++
++	/*
++	 * Establish the initial TSC generation for synchronization logic.
++	 * The first vCPU will sync to this, starting its guest TSC at the
++	 * number of cycles elapsed since VM creation rather than at zero.
++	 * This ensures coherence with the kvmclock epoch (also set here),
++	 * and the master clock snapshot taken below is immediately valid.
++	 * It is refreshed again when the first vCPU is created, in case
++	 * the host clocksource changed (and changed back) in between:
++	 * pvclock_gtod_update_fn() does not notify a VM with no vCPUs.
++	 */
++#ifdef CONFIG_X86_64
++	if (!kvm_get_time_and_clockread(&kvmclock_ns, &kvmclock_host_tsc))
++#endif
++	{
++		/*
++		 * If not simultaneous, we want the TSC to be zero slightly
++		 * *after* the kvmclock is zero.
++		 */
++		kvmclock_ns = get_kvmclock_base_ns();
++		kvmclock_host_tsc = rdtsc();
++	}
++	kvm->arch.cur_tsc_write = 0;
++	kvm->arch.cur_tsc_offset = -(s64)kvmclock_host_tsc;
++	kvm->arch.cur_tsc_nsec = kvmclock_ns;
++	kvm->arch.cur_tsc_generation = 1;
++	kvm->arch.kvmclock_offset = -kvmclock_ns;
++
+ 	pvclock_update_vm_gtod_copy(kvm);
+ 	raw_spin_unlock_irqrestore(&kvm->arch.tsc_write_lock, flags);
+ 
+-	kvm->arch.default_tsc_khz = max_tsc_khz ? : tsc_khz;
+-	kvm->arch.apic_bus_cycle_ns = APIC_BUS_CYCLE_NS_DEFAULT;
+-	kvm->arch.guest_can_read_msr_platform_info = true;
+-	kvm->arch.enable_pmu = enable_pmu && !kvm->arch.has_protected_pmu;
+-
+ #if IS_ENABLED(CONFIG_HYPERV)
+ 	spin_lock_init(&kvm->arch.hv_root_tdp_lock);
+ 	kvm->arch.hv_root_tdp = INVALID_PAGE;
 -- 
 2.43.0
 
