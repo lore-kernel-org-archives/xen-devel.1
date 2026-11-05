@@ -2,64 +2,76 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9A06D60741C4
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 19:49:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 63191606D81B
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 20:10:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=T/D0C78f
-Received: from list by lists.xenproject.org with outflank-mailman.1475452.1682127 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=ford.com header.i=@ford.com header.a=rsa-sha256 header.s=ppford header.b=n0RhYhlZ;
+	dkim=pass (1024-bit key, unprotected) header.d=azureford.onmicrosoft.com header.i=@azureford.onmicrosoft.com header.a=rsa-sha256 header.s=selector2-azureford-onmicrosoft-com header.b=HxI4S8IR;
+	dkim=pass (2048-bit key, unprotected) header.d=saarlouis.ford.com header.i=@saarlouis.ford.com header.a=rsa-sha256 header.s=ppserprodsaar header.b=V2PdolL6;
+	dkim=neutral header.d=ford.com header.i=@ford.com header.a=rsa-sha256 header.s=ppfserpocford header.b=WJsT7/2h
+Received: from list by lists.xenproject.org with outflank-mailman.1475477.1682136 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xP3Sk-00011t-AJ; Thu, 05 Nov 2026 19:49:30 +0000
+	id 1xP3n0-0001w2-15; Thu, 05 Nov 2026 20:10:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1475452.1682127; Thu, 05 Nov 2026 19:49:30 +0000
+Received: by outflank-mailman (output) from mailman id 1475477.1682136; Thu, 05 Nov 2026 20:10:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xP3Sk-00011i-6M; Thu, 05 Nov 2026 19:49:30 +0000
-Received: by outflank-mailman (input) for mailman id 1475452;
- Thu, 05 Nov 2026 19:49:28 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xP3mz-0001vv-UE; Thu, 05 Nov 2026 20:10:25 +0000
+Received: by outflank-mailman (input) for mailman id 1475477;
+ Thu, 05 Nov 2026 20:10:24 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ayan.kumar.halder@amd.com>) id 1xP3Si-0000yF-4s
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 19:49:28 +0000
+ (envelope-from <dmukhin@ford.com>) id 1xP3mx-0001sS-FA
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 20:10:24 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xP3Sh-00H238-DM
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 20:49:27 +0100
-Received: from [10.42.69.6] (helo=localhost)
+ id 1xP3mw-00FPFb-OJ
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 21:10:22 +0100
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ayan.kumar.halder@amd.com>)
- id 6aecddad-2eae-0a2a0a5409dd-0a2a4506953e-44
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 20:49:26 +0100
-Received: from [40.107.201.42]
- (helo=CH4PR04CU002.outbound.protection.outlook.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <ayan.kumar.halder@amd.com>)
- id 6aecddc4-195a-0a2a45060019-286bc92a646b-3
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 20:49:26 +0100
-Received: from CH2PR02CA0011.namprd02.prod.outlook.com (2603:10b6:610:4e::21)
- by IA1PR12MB6068.namprd12.prod.outlook.com (2603:10b6:208:3ec::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.569.12; Thu, 5 Nov
- 2026 19:49:18 +0000
-Received: from BN7PEPF00000096.namprd03.prod.outlook.com
- (2603:10b6:610:4e:cafe::3b) by CH2PR02CA0011.outlook.office365.com
- (2603:10b6:610:4e::21) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.592.10 via Frontend Transport; Thu, 5
- Nov 2026 19:49:17 +0000
-Received: from satlexmb08.amd.com (165.204.84.17) by
- BN7PEPF00000096.mail.protection.outlook.com (10.167.245.74) with Microsoft
+ (envelope-from <dmukhin@ford.com>)
+ id 6aece285-e002-0a2a0a5209dd-0a2a4501c1ea-32
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 21:10:22 +0100
+Received: from [148.163.143.241] (helo=mx0b-00498f03.pphosted.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <dmukhin@ford.com>)
+ id 6aece2ac-5984-0a2a45010019-94a38ff14fea-3
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 21:10:21 +0100
+Received: from pps.filterd (m0367130.ppops.net [127.0.0.1])
+ by mx0b-00498f03.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6A5HgAQ8339101
+ for <xen-devel@lists.xenproject.org>; Thu, 5 Nov 2026 20:10:20 GMT
+Received: from cy3pr05cu001.outbound.protection.outlook.com
+ (mail-westcentralusazon11013010.outbound.protection.outlook.com
+ [40.93.201.10])
+ by mx0b-00498f03.pphosted.com (PPS) with ESMTPS id 4hrvnm3fyw-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 20:10:20 +0000 (GMT)
+Received: from DS1P221CA0001.NAMP221.PROD.OUTLOOK.COM (2603:10b6:8:451::6) by
+ PH0PR16MB4710.namprd16.prod.outlook.com (2603:10b6:510:14c::6) with
+ Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.615.4 via Frontend Transport; Thu, 5 Nov 2026 19:49:17 +0000
-Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Thu, 5 Nov
- 2026 13:49:16 -0600
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb09.amd.com
- (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Thu, 5 Nov
- 2026 13:49:15 -0600
-Received: from xcbayankuma40.xilinx.com (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.53 via
- Frontend Transport; Thu, 5 Nov 2026 13:49:15 -0600
+ 15.21.592.10; Thu, 5 Nov 2026 20:10:15 +0000
+Received: from DM3PEPF000265B0.namprd02.prod.outlook.com
+ (2603:10b6:8:451:cafe::31) by DS1P221CA0001.outlook.office365.com
+ (2603:10b6:8:451::6) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.522.4 via Frontend Transport; Thu, 5
+ Nov 2026 20:10:15 +0000
+Received: from mx0a-00498f04.pphosted.com (205.220.161.53) by
+ DM3PEPF000265B0.mail.protection.outlook.com (10.167.23.39) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.615.4
+ via Frontend Transport; Thu, 5 Nov 2026 20:10:15 +0000
+Received: from pps.filterd (m0426317.ppops.net [127.0.0.1])
+ by mx0a-00498f04.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6A5HiN1U977248
+ for <xen-devel@lists.xenproject.org>; Thu, 5 Nov 2026 15:10:14 -0500
+Received: from smtp-us.ser.proofpoint.com (pmta-usw.ser.proofpoint.com
+ [50.112.124.217])
+ by mx0a-00498f04.pphosted.com (PPS) with ESMTPS id 4hnydrpwad-7
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 15:10:14 -0500 (EST)
+Received: from localhost ([19.12.76.221]) by cmsmtp with ESMTPSA
+ id P3mmxKzet7GL1P3mnxc72w; Thu, 05 Nov 2026 20:10:14 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -68,415 +80,170 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=ppford header.d=ford.com header.i="@ford.com" header.h="Cc:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=selector2-azureford-onmicrosoft-com header.d=azureford.onmicrosoft.com header.i="@azureford.onmicrosoft.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"; dkim=pass header.s=ppserprodsaar header.d=saarlouis.ford.com header.i="@saarlouis.ford.com" header.h="Cc:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=ppfserpocford header.d=ford.com header.i="@ford.com" header.h="Cc:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ford.com; h=cc
+	:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=ppford; bh=ersnkD1Gkm4Hfqlsy+y7Y7pOziu
+	4aoNXDL+Od2HaFtg=; b=n0RhYhlZHpDirnlIZwDIfttjA1zhgojABxW1ewgY0bP
+	76rYOu9E8Dn6xEGuBX2hUaSBjELa+RVq2g/YSlfTBCVJrW0IoD9M6/XM49KSj1pv
+	nwhO/ynDlDXrq16XOJpyZLgVa2kT2/Sq12GiAR40YqYDzVqrM6mcTBf/JUHw54mZ
+	ySB5oF0iQuogJFbt7CUkKrue+eW/3DQYc2YU6gOfPAic2dBQRDbwOVUslPkWOjsT
+	nuUeyK0bmbELjP3LHErJieesN4xHbbo4kMpTr16/nLmSwVIVYj9gTl3tbt4mtI//
+	bChImPW6pmUQF1TF5vBR1jjrl6T97ptTZa1dWnMM97w==
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=vqFZppIq67L8E8uzZ4tjSGjR7/aDRNd5t3AqgPHDOBcPBnu6t+1BS0nohQbbIb5/9ikMdwrxb1a9DHEvd4tRsbDsqwIzkBNP5gDdRMMBJzfdzS6dWJ4vvQemkAXEZEKhNWChdAWGx1rxJqNzFqJCSNn9nZaJnflzsl21kgb+DHWnHlqP+FUFHfnuqkyxUC91Li33jKbZdRlOG2LAhjYijN6QxLzRgm7/Lub6U5JQhZClmodfTe6m/YWmvc/EYHZxXjV3audLZ2W3N5ejsvyo/L3rVI2c3THyJ9+RLlsExOKNFiEm6Cy/J2kJ/f0ehLO/QYx37u9ySkRKPiCceqwP6A==
+ b=i4TNRh++eEIVQufUcC1crCvjmJ791OtIwiEdtweTvXAz60+gJTz154CXLO/3bbeYcOaZ49eVUdq+VqckxyHtpiv7Ds8oa3UClYMKAUxmdOXeWPYflV4M4relhtUMn3duktUiF1ujxX+Eq+G3cDjwmIb/aZQSiE9SZveESZkM3VP1BY8Yy3wWGgqZ0wBmomtiC4lTGYsp9P4M1MTS6BBDitimqVlmHKuLRv18TX6SEzaZCWB7ACxoHLKu+NIFqI5jdwrHUAZJvsHyQIW8SCv2pqK5HPx2kxP/NGnTITT0a3lomTevEnnSUmmiDbnc3COg9+KvbH34zjNuHZSFsc8fJg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vxijgqwtMMbeEP8fdxjHUyKp3RSGALhMiKwSj2SW5fw=;
- b=LTZ3+0pDn1xgnwwLmg+OFxHwUtsJm/hQNqWWwSaxUESo6U73oNaBY7xwMrPkLQBxPLNRQf9T6u+s1qkkHoDEUiIQkUj6SuXZJ3CVXaf2nKXl7WTbGrdOG7MWgNa94GaSxEig3gX2LRR4Axqekl9+CLijRq2ddq4jO8fdrFStTcWRit7yMSCAkQkGmUXoyI6UIiiadiNB7G0X+RnK9mUg6YIhJGGiyiNMbFXJXj2spl5fywErCJO5xdb42Qe2cks0FiniDv54rORxGzDC232x4OXPo5+5kg/eHs/PNNj5GfKGm3QVxx7MeUMOAokszQkWomytyUgcFHAP5O6kZSxSXg==
+ bh=ersnkD1Gkm4Hfqlsy+y7Y7pOziu4aoNXDL+Od2HaFtg=;
+ b=m7j2TFsCHmmvY+zIqYaNGhFTov6y0W3XRT7FNyD7z6qH8KbTJxklVZe/0FhwVDmKAJ5PCOPgD8kLQZ/13QRgCRYW7Wp/FYRmSU8CzHyagNJlBPS75WlOM0C7O5bOKz+EYUG8h4lf/Ikb5w1b8nFKATX9xP9YN9+A7aurXUEoe2o/GaHQPYjQI4kim8HVFqdBSbE3zWywy5xRQHExtR4y9gUUAJjGoVDHQvql3+XYRY3eAnqw63nSidnnpg6PbjtNTtPvARr/lYS5rqpGa2OWhWGnyxNoNLc2rTbQEqv/RPKvkXr0oAaFHWZPh3rz+WsiJie62KwoWxFu7CjvsiGJBw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ 205.220.161.53) smtp.rcpttodomain=lists.xenproject.org
+ smtp.mailfrom=ford.com; dmarc=pass (p=reject sp=reject pct=100) action=none
+ header.from=ford.com; dkim=pass (signature was verified)
+ header.d=saarlouis.ford.com; dkim=pass (signature was verified)
+ header.d=ford.com; arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=azureford.onmicrosoft.com; s=selector2-azureford-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vxijgqwtMMbeEP8fdxjHUyKp3RSGALhMiKwSj2SW5fw=;
- b=T/D0C78f4slXvfuZ4sxAwA9arnmoLtR+JryWQX50CGXcnYopQT5ac20yJ4fTtHFIMwZsvMikCOl6nlIPx9PvX6pDBCJS5l5bny3gRJixcEqiSEE57qwNytWZVzf/W+azcyNJPIWZtDVvOIArOJZ0QQ8ltAfTNXk+XEMvjMGfHOA=
+ bh=ersnkD1Gkm4Hfqlsy+y7Y7pOziu4aoNXDL+Od2HaFtg=;
+ b=HxI4S8IRHFt11lgHW3ck9Pll+TaAxkDgpNv6jEjOlSqaw5vAIBPDB79Iy+nbq1KNgFzChjRSXpHzZfmg/1RNW5z7v+yyVrvqEAaHURVWJ6IYf42dNP9yRJXmsDNvEKgma1RM8PPACuB0u1/+Dn4NwdJR7XFAgvEXfwBNnaVPSbI=
 X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-From: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, "Artem
- Mygaiev" <artem_mygaiev@epam.com>, Matthew L Weber
-	<matthew.l.weber3@boeing.com>, Ayan Kumar Halder <ayan.kumar.halder@amd.com>
-Subject: [XEN PATCH v2] docs/fusa: add the Arm Generic Timer architecture specification
-Date: Thu, 5 Nov 2026 19:49:10 +0000
-Message-ID: <20261105194910.1186029-1-ayan.kumar.halder@amd.com>
-X-Mailer: git-send-email 2.25.1
+ is 205.220.161.53) smtp.mailfrom=ford.com; dkim=pass (signature was verified)
+ header.d=saarlouis.ford.com;dkim=pass (signature was verified)
+ header.d=ford.com;dmarc=pass action=none header.from=ford.com;
+Received-SPF: Pass (protection.outlook.com: domain of ford.com designates
+ 205.220.161.53 as permitted sender) receiver=protection.outlook.com;
+ client-ip=205.220.161.53; helo=mx0a-00498f04.pphosted.com; pr=C
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	saarlouis.ford.com; h=cc:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=ppserprodsaar;
+	 bh=ersnkD1Gkm4Hfqlsy+y7Y7pOziu4aoNXDL+Od2HaFtg=; b=V2PdolL6CBs7
+	cBwN53HXI+7OWO2BfDclzy8QFPv3BQbVaNXT0ItlNunCDOKbDmXEP7jAuXp+Fdep
+	Yo52/nJAtyZ1AoITDpgJ0cKr2LH4AaPoTzl7WFFaq0AHidPA8l5ZXYa916VhZ2s8
+	dAoydPUzrNFDxLRrKQJnMgjDaHq5EFWmY6fwAJsyXXrfhb+LRcShB32TKgLvoNjF
+	Q0L5p8lM1NEfHProKpY0LVb3peS/a38vETp68A8LfbESJor388XQKGtHl4YzhLON
+	UmAofvoyFlpp87kpRGJgFoLImCh+vWw8AnN9llv3Q/mzC39gw5V3slpqrB/VLw+l
+	gBzQ+lTAag==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ford.com; h=cc
+	:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=ppfserpocford; bh=ersnkD1Gkm4Hfqlsy+y7
+	Y7pOziu4aoNXDL+Od2HaFtg=; b=WJsT7/2hEQXOUIjDXT5euJc5BGWSDbVRl0cb
+	0HGSLiiCj4k4zrMDnIaqQ+bMX2BFzFgK+K4GCS+BUtp5AVByUxKqAg4VPY3Tmgum
+	SaX+padXqtuDZJPLvqT+BP6TvYr/vhtCZ4Vf+uHhta1Ami8xUakyXKq/IHFvYIr+
+	TBVgh+xcRU9z8HiL6XkeSNgKghe8ztK07/lQIBvavoQmqLjvLuj5pUVd409+pLVl
+	2qmI7A8Xa4cSLkoMuY65kU8M4kN8eWSPQ1lesHYsx2sMWox00wM++yldhrLVkMcp
+	LLvg+0bJgkMNsnc2HSIPcI9sd5+hJTnzfn4J0DB34MDMNghGqw==
+X-Mailer: SER-76bead168636dc6ed1c9e51ce4dea80dbdd4163750742b614a4d871e565792b7
+X-Cloudmark-MID: P3mmxKzet7GL1P3mnxc72w
+X-Proofpoint-CID: eb09f7eb-2dc2-34ab-a188-7b293c1db1fe
+From: dmukhin@ford.com
+Date: Thu, 5 Nov 2026 12:10:11 -0800
+To: Jan Beulich <jbeulich@suse.com>
+Cc: dmukhin@ford.com, andrew.cooper3@citrix.com, jason.andryuk@amd.com,
+        roger@xenproject.org, teddy.astie@vates.tech,
+        xen-devel@lists.xenproject.org
+Subject: Re: [PATCH v1 09/28] x86/hvm: fix hvm_emulate_one_vm_event()
+ definition
+Message-ID: <auzioxAtHJ1/3MZA@kraken>
+References: <20261105013347.719392-1-dmukhin@ford.com>
+ <20261105013347.719392-10-dmukhin@ford.com>
+ <421bbdc7-400d-4ed8-b000-2d845ab88e9c@suse.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <421bbdc7-400d-4ed8-b000-2d845ab88e9c@suse.com>
+PSER-M365-App: SER-APP
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-05_05,2026-11-04_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0
+ spamscore=0 suspectscore=0 lowpriorityscore=0 malwarescore=0 bulkscore=0
+ adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610300000
+ definitions=main-2611050080
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN7PEPF00000096:EE_|IA1PR12MB6068:EE_
-X-MS-Office365-Filtering-Correlation-Id: 420525e2-2974-45e2-adb6-08df3b75e07b
-X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
+X-MS-TrafficTypeDiagnostic: DM3PEPF000265B0:EE_|PH0PR16MB4710:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4a09a419-c7e6-4aac-3fd3-08df3b78ce72
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
- BCL:0;ARA:13230040|23010399003|1800799024|376014|36860700016|82310400026|260925021311599003|261009223027099003|261021135927099003|260925022911599003|260925021911599003|261022113327099003|11063799006|261021121427099003|261026121527099003|261026140227099003|261028144727099003|56012099006|261022075727099003|261022105027099003|20046099003|261102123227099003|18002099003|6133799003|10067099003|13003099007|3023799007;
+	BCL:0;ARA:13230040|376014|1800799024|23010399003|36860700016|82310400026|11063799006|56012099006|4143699003|261009223027099003|10067099003|22082099003|18002099003;
 X-Microsoft-Antispam-Message-Info:
- gR1tRiBIH6KmQOnJwugsEniooPa3EXRfAoEttABCHypZNiIFqkXycRzOM4p/rT0ABNhBWq05k7KELJQlBF5hUFJxkRJDby5q7We7q7g2lGUacNYLzxtHA65VjYTuxCuEIpxsLLTKoQLBr5+gQWHW1tKzrnZ2WpOg8hUZYkx5JaUbNgsnT9Vk5HMPGgubbjTmr19nrTPCQvWDfSHBQDTk2oofN0eQ8iWhwv+VKeMUqblu2GY3fPhdGImMMms48mno4VSUl8SVngM+Q/pA4EaDiSSNKO/z/3IyNYb183MKSs7RcLI9GuFeUVZJjAvDwTzQ3zV1UYqZmf7x+8eNOovaCDohVL8odJc5GlTpFJ9r7SaxpIEdO3xcXLjgJblw2IhGOJ1BX1fPgMN9EA5xKU/+z0oFhoiD/HMIMDjQPtSsKqPrBMqHhDHDj2giXHhfvAW+YBlc7W+51TlLE/mUlC4j+t+64qWDEWtcLHhDamGyBOZaMAUOuav6V31suQIH/xhXwjY1DaACImHG+ati8YZna3hq12Cy0kbePa+TJw5dFlyxAdVeovUptE8E7zat5xEmy8RZ6tsPwjJ2fz1LlVtZZbuLB+e9KNudjWHAT5VdMYY3iVuuN7nJ17xfB1TK9NLXdyg4Gb5f//G+fSpJxrCm59WnJFrt08ozFoQj2E7sFWo=
+	F4vj0AnG6jeC3+hurJ836Esj3TD/7uucgEC5vpmqyPfZx1byCxrTvTenelNs/wH9e6DN5TrK+wek3x/jA7sFp8E7Eqf0dwMzo50TE1VKF+v+hkLj26iyj/BT99J/jweadM1xHu0VLzh/ep5DGI9OUZ2/Mds0KvPETBAUOXbqUx5ILXAGZIRpOjRMyLETiNptLGBtqcVnQr7FPPl36Ymrv/wWe+0asx5dnW2XV3t+ReBi68QYbR1p9tQBpaVvFZnWzt/c4WbHSAXAao9E6zxHjvonHt0VD5AJkZJ8XDvg7wGdkuTJhk5jBrEAfgpNAhRyLLWcr9T73292LcJ/tmtiq+g6K5VI+ofkwOPWcsN3zWHGBe4DRXcIHmJSEg+KgCogPrDmnYVX5G4TlqtA8N9yWONvlXpobdJ/XkaSrnYPZQ4GQ4oyWinvzbuucO4ZKQIIu8hdzCRQpa42pm7u1wHSDf9rIa251cWBN+pz5wFabEZytkF3E1vBgHA7RfyytgVBtQG5ugZ+tNmEz41viKDyqhhxaWkJ4f68KHfHuh8HjUouPP1RHmLwuf1b8tfdbweoVTHLKxAu7QL3ACKeNholv0YWkkZWQai4L0GkURw3xRuSMtsrQU/3+lHTk3yhvoqXiKsM6meujQd8N6zRaonjCZdd5yFm6Hi+mwFqzgQYRpAqsphAwBMMQJx8mCEKiIdqAB/q+Z1EXRx3VtA//9EHDQ==
 X-Forefront-Antispam-Report:
- CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(376014)(36860700016)(82310400026)(260925021311599003)(261009223027099003)(261021135927099003)(260925022911599003)(260925021911599003)(261022113327099003)(11063799006)(261021121427099003)(261026121527099003)(261026140227099003)(261028144727099003)(56012099006)(261022075727099003)(261022105027099003)(20046099003)(261102123227099003)(18002099003)(6133799003)(10067099003)(13003099007)(3023799007);DIR:OUT;SFP:1101;
+	CIP:205.220.161.53;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mx0a-00498f04.pphosted.com;PTR:mx0a-00498f04.pphosted.com;CAT:NONE;SFS:(13230040)(376014)(1800799024)(23010399003)(36860700016)(82310400026)(11063799006)(56012099006)(4143699003)(261009223027099003)(10067099003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
- 6oHd4Z2aMlwQlb3e+bdKY8JPIcaLER+3XC7Fxb9LBxGdlTfoHmlLdKBG04HNIPu+b5JgoXlcfxcsmCfDEa5STX3qqRiZ8pnLKHYvMrniS3RWAHbZ9fVQVqnPey1LQqBTT7g/O0Aozk6i4yoOovAojPuaQzEzMkXaIwg/92Zdxfjy+B8V5TO5pOWAwzUpZSpwFF5VyRB/UcqdgEYN93PSIBkTwGNxFtuT0zG9HCBvkwUhhnLcK6MtEQFrdgCmXeh5e0SMn5ejtsgm+vCNlUVwtKPYx2+ATtGOqzDJdyvvuSKFU9quNyOKQlLbYVfJZV21L8lrHKNHOeLQerlKiMAbayYO5lbw8eTN/XMbkO+/Kjnb1mFdWZap78iR0aM9dJgbI+gT0SRZbxlWg/R/vBsf67EiFT08vsPO8G2DOAk8B4mwAxwZVbrYkXMH2WY5lqMp
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Nov 2026 19:49:17.2879
+	3r9a1SG8P6FxqxJOgTg8egrQAGdcPQk6k4Ut+UBX7Ufyw4U3HPRb/yJ6MHZ7qD7t6NOmPYpxDceuPK2A+A3rM6rsAsjiF4HRXQE9XXxUPNVgD94DU+7OHhlc/TNaFJ7oyiVeb2pL4nPMgt0yv63UUd+EhhNESg1n5arAZpRqNMyvM2bLCwt5TYem0AygruhO/3wXy+rVFUuPuZgXmIi6v28CzR6bNKleYX8XiLS4UiGNSWP32pYMbM+u/Yul0y8WZ5O1qQoNziOjbSTFKhu8WRgH7tgIudLNCflLlSKC/m7QBhuBsGe2KhiJA1hzT1VQ2ZIsXA0cerVuaHZqpgyDc/zAayxNmDvSCmdroRSTMwzMYgfF+FuhFYU+koDWuns0kck1CekbF1UCv+l3sqJuiY5nUxPQBacix8qrgaE8wuX46/AZt1for8gz9fabUbcy
+X-Exchange-RoutingPolicyChecked:
+	FpSJxukWGcghAVRz7PH+oaHoXsahXm1wKlFfpTF4XTap5Pc35EGFu0nbWLbjiJwYbnYayEYGwxrIRrkbGxnR5Rm6UFnZ3Lj4Tl1fB6aKGrkwCsVtnU00u/rn5d5m69oKgOEQGmk8KpK1lKEdarDYpXu6uoFZXraNR5QJeffOMngtjKb81J4BKLRXB6xE4ucDEyRf14ScLJQjfftHr2Bzyv6e2bELIgdB7OruPfGQjr5J9ijJmniinII7T1+WHRt0HtI/HGNWEeqfvodOeBumptFVXKGrd6ROqOgtEGvn+qZrPk07iVDIg2HcZ8X4xJpKwS3AK8AAEiNKhI1oP2rKbg==
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
+	AKpmlg8g2CvqBoDrLFxRGqOL5HfQWAnUNWQIzFnq4zaw9Lp+fsYnJ7fNRhF0fDIxSMykaoXRxlwWwMX4eL6LZhuiEI2EAwb8JELv0LC1xeloWrwm2TpnrsKKzV2SDKZr58Dl0py7e5f3/hZ5PmxHnMi5XP3/ESf26IhG7POAFctknLBG44kPuIZACNrfHdzYim8NU7WCWGn3NT0oRWi76pspxJm+H99owEXHje0tQtOCrShSYWXnDZlcV2u62GgftwD94d4PRskGFBtw8C5oVfVvfNY/CE7nlMVibXTZI8GftqKGqTBd5OtFbQqCbgpUD4m07ezwuy85ZsO02jDN8ppuGtXhVmq4kOc9bTmAunQslIHkGuwGmvsB5/cahtCA52pqFc+iykQh5zy+Y0NyyGEPSbgVicFBsa9aNTe0/1a52VLkSDF4uJtEoHEtyld9DADP0NOC5Z1Ps466ecgFBt0da9FHgFb5jAEq3DdkY7yft+u1DCokt9GNIrSXMbowe4iCJ7P2CILVA/LzSlyXJd1Hw2A6xAuiFoMYaH+L/+qSmz4K9AFaTI8IQL63KzDCb9foKSOBYAk+gCdJ7YZPRrDlo8OA4YGvJRpsFt5YPZqC+iXHV+k+3aTpp5GK+Ll+b/p6cjiP0UoO05+xRUNKqQ==
+X-OriginatorOrg: ford.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Nov 2026 20:10:15.3004
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 420525e2-2974-45e2-adb6-08df3b75e07b
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN7PEPF00000096.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4a09a419-c7e6-4aac-3fd3-08df3b78ce72
+X-MS-Exchange-CrossTenant-Id: c990bb7a-51f4-439b-bd36-9c07fb1041c0
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=c990bb7a-51f4-439b-bd36-9c07fb1041c0;Ip=[205.220.161.53];Helo=[mx0a-00498f04.pphosted.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	DM3PEPF000265B0.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6068
-X-purgate-ID: tlsNG-16d1c6/1793908166-F4C0777B-41ED7EA4/0/0
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR16MB4710
+X-Proofpoint-ORIG-GUID: UOOKT-mkVT6JynH2rayiDWX_9H_Q_65u
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA1MDA4MCBTYWx0ZWRfX6FD3jhN2d1gg
+ eJrcuogu39ExzqHmWCQdRdIMreJV1q04gs3+7NDVa4RGOZCGURbKDNHZg6E5SB+2iTGvQowQVw2
+ bJ0/gnbPomerOwuXDFRJHsPGu6uKup+YTUq39eHspNuDWm+FHlj6
+X-Authority-Analysis: v=2.4 cv=QfjzLcbv c=1 sm=1 tr=0 ts=6aece2ac cx=c_pps
+ a=dDG42FMqTjgm/c7QxIpGBg==:117 a=lOEMawUel/sSvQipkIvNbg==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=kj9zAlcOel0A:10 a=zJRp6_cAMcgA:10
+ a=3PXLN80vpJUA:10 a=6NUGLSImWEsA:10 a=w9pew1qAHqMA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=P_n1zlmtWsCQbjROFjcg:22 a=vnUQfov-gS4s1L7hHvr-:22
+ a=cbNQJ9GKAAAA:8 a=ADSr9sXkiUwMa2rtvkAA:9 a=CjuIK1q_8ugA:10
+ a=DqJYxgmhk6moR-_7_KoZ:22 a=WmVTiCyuxqgg3mnwYu6p:22
+X-Proofpoint-GUID: UOOKT-mkVT6JynH2rayiDWX_9H_Q_65u
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA1MDA4MCBTYWx0ZWRfX6LngpkItUk92
+ ZyhPhjmaPKCxKiHt2HtA9H+KqxUyJrWuGk3Dc9OHmM+LUa2lhAuJ4gwDqT1xKq1Og843dJsKUkW
+ M4cpQ0rlsApcj4GhFqUNSGA9u2s8dysGy5F+gY/uuKCTm8KJZu6VIiy1eZEcHD6207e1bZbmfOn
+ 2igB69SxqkXo4qn8zAEbf0Ocw5imTu8kWuHU08/B4d6HedPFfx0OG36QBgWKqFDwp+9hIyTrGds
+ CiITYsz0gZ6AG3ZjnSQWyWwVjShNfSCTyfDIPvKSqPrlUFmM1JUzxqghJirEKoZyG7+N1rucAYJ
+ mciI02hRhJHD1ONSz2qE0xraXvwpDMvzYctEK/Itrl76jRBRjGMh+p6MGXhkfBtegkS/yRYnSbZ
+ PXlDWHyAtiKTbFlDYIwfATWF5NweC6xBhzWetdqhuo28C8PvvyBqUZn5vYf5b0f3voV2PYEtZ0b
+ tBCiLKy/8P3jNn2XJRw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-05_05,2026-11-04_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+ lowpriorityscore=0 adultscore=0 impostorscore=0 priorityscore=1501
+ malwarescore=0 clxscore=1015 suspectscore=0 bulkscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611050080
+X-purgate-ID: tlsNG-d62444/1793909422-1DC79757-1BF72C8C/0/0
 X-purgate-type: clean
-X-purgate-size: 14630
-X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-purgate-size: 388
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
+	autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Describe how Xen uses the Arm Generic Timer over the lifetime of a VM:
-the two timers it exposes, how each relates to the system counter, what
-it sets up while creating a VM, and how it emulates the physical timer
-and handles the virtual one.
+On Thu, Nov 05, 2026 at 09:30:02AM +0100, Jan Beulich wrote:
+> On 05.11.2026 02:33, dmukhin@ford.com wrote:
+> > From: Denis Mukhin <dmukhin@ford.com>
+> > 
+> > Add empty definition for !CONFIG_VM_EVENT case.
+> 
+> Which is needed because of?
 
-Also describe freedom from interference between VMs. The timers are
-emulated per vCPU, so timer programming in one VM does not alter
-another's. The virtual timer is isolated by the per VM offset in
-CNTVOFF_EL2 and the per vCPU context saved and restored across context
-switches; the physical timer by the per vCPU state Xen keeps for the
-trapped accesses. A VM that reprograms its own physical timer clears its
-own pending condition, which the architecture requires of a timer given
-a new deadline and which affects no other VM.
+That is a fix for *-randconfig runs with AVIC series:
+VMEXIT_AVIC_NOACCEL handlers can call hvm_emulate_one_vm_event() 
 
-Add an architecture_specs index and reference it from the functional
-safety documentation index.
-
-Signed-off-by: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
----
-Changes in v2:
-- Dropped Matt's Reviewed-by: the patch changed materially after his review
-  (timer-name capitalisation and the footnote conversion below were not in the
-  reviewed version), so the tag is not carried forward.
-- Fixed typo "creeation" -> "creation" in the VM-creation section heading.
-  (Matt)
-- Corrected the CNTV_TVAL_EL0 description from "compare value register" to
-  "timer value register" (TVAL is the timer-value alias, CVAL is the
-  comparator). (Matt)
-- Grammar: "The interrupt behave" -> "The interrupt behaves". (Matt)
-- Capitalised and hyphenated the timer names in the interrupt-id table:
-  "Secure" / "Non-secure", matching Arm terminology. (Matt)
-- Converted the [1]/[2] references from a manual line block to proper RST
-  footnotes (.. [1] / [2]_), so Sphinx renders numbered citations and
-  cross-references. (Matt)
-- Added the arm64_generic_timer_plat_program_cntfrq_el0 design requirement to
-  the Covers: list, so the architecture specification covers all of the
-  generic-timer design requirements in
-  docs/fusa/reqs/design-reqs/arm64/generic-timer.rst.
-- Added a blank line between the interrupt-id list-table and the following
-  paragraph to silence a Sphinx "explicit markup ends without a blank line"
-  warning.
-- Rebased onto current staging; split out from the v1 2/2 series as a
-  standalone patch (arch spec only), adding the architecture_specs index and
-  wiring it into docs/fusa/index.rst.
-
- .../fusa/architecture_specs/generic_timer.rst | 251 ++++++++++++++++++
- docs/fusa/architecture_specs/index.rst        |   9 +
- docs/fusa/index.rst                           |   1 +
- 3 files changed, 261 insertions(+)
- create mode 100644 docs/fusa/architecture_specs/generic_timer.rst
- create mode 100644 docs/fusa/architecture_specs/index.rst
-
-diff --git a/docs/fusa/architecture_specs/generic_timer.rst b/docs/fusa/architecture_specs/generic_timer.rst
-new file mode 100644
-index 0000000000..bb2d066f8d
---- /dev/null
-+++ b/docs/fusa/architecture_specs/generic_timer.rst
-@@ -0,0 +1,251 @@
-+.. SPDX-License-Identifier: CC-BY-4.0
-+
-+Generic Timer
-+=============
-+
-+`XenArch~arm64_generic_timer~1`
-+
-+Covers:
-+ - `XenSwdgn~arm64_generic_timer_probe_dt~1`
-+ - `XenSwdgn~arm64_generic_timer_read_freq~1`
-+ - `XenSwdgn~arm64_generic_timer_access_cntkctlel1~1`
-+ - `XenSwdgn~arm64_generic_timer_access_virtual_timer~1`
-+ - `XenSwdgn~arm64_generic_timer_access_physical_timer~1`
-+ - `XenSwdgn~arm64_generic_timer_trigger_virtual_interrupt~1`
-+ - `XenSwdgn~arm64_generic_timer_trigger_physical_interrupt~1`
-+ - `XenSwdgn~arm64_generic_timer_plat_program_cntfrq_el0~1`
-+
-+Needs:
-+ - XenTestCase
-+
-+This document describes Xen's usage of the Arm Generic Timer during the
-+lifetime of a VM.
-+
-+Introduction
-+------------
-+
-+The Generic Timer:
-+
-+- provides a system counter that measures the passing of time in real-time,
-+- supports virtual counters that measure the passing of virtual-time. That is,
-+  a virtual counter can measure the passing of time on a particular
-+  virtual machine,
-+- can trigger events after a period of time has passed.
-+
-+Types of timers
-+---------------
-+
-+Xen exposes two types of timer over the lifetime of a VM:
-+
-+- physical timer
-+- virtual timer
-+
-+::
-+
-+    +------------------+
-+    |  System Counter  |
-+    +--------+---------+
-+             | System Time Bus
-+             +----------------------------+
-+             |                            |
-+             |                            v
-+             |                        +-------+       +----------+
-+             |                        |   -   |<------|  CNTVOFF |
-+             |                        +---+---+       +----------+
-+             |                            |
-+             v                            v
-+        +---------+                  +---------+
-+        |  CNTPCT |                  |  CNTVCT |
-+        +---------+                  +---------+
-+        +---------+                  +---------+
-+        | Physical|                  | Virtual |
-+        |  Timer  |                  |  Timer  |
-+        +---------+                  +---------+
-+    ( PE )
-+
-+The physical timer measures the passage of time in relation to the physical
-+counter, CNTPCT_EL0. The physical counter starts from zero when the system
-+counter starts, that is, at power-on or reset, so its value is not related to
-+when Xen booted. Xen derives its own system time (``NOW()`` / ``get_s_time()``)
-+from it by subtracting a snapshot of CNTPCT taken at boot, so that system time
-+is measured from Xen boot. The physical timer is accessed by the following
-+registers:
-+
-+- CNTPCT_EL0 - physical count value
-+- CNTP_CTL_EL0 - control register
-+- CNTP_CVAL_EL0 - compare value register
-+- CNTP_TVAL_EL0 - timer value register
-+
-+The virtual timer measures the passage of time in relation to the virtual
-+counter. It is used to broadcast the virtual time (physical - offset). Offset is
-+set by Xen (CNTVOFF_EL2 register) during VM creation. As a result, the virtual
-+time will report time from the creation of the VM. It is accessed by the
-+following registers:
-+
-+- CNTVCT_EL0 - virtual count value
-+- CNTV_CTL_EL0 - control register
-+- CNTV_CVAL_EL0 - compare value register
-+- CNTV_TVAL_EL0 - timer value register
-+
-+CNTFRQ_EL0 reports the frequency of the system counter. However, this register
-+is not populated by hardware. The register is writable at the highest
-+implemented Exception level and readable at all Exception levels. Firmware,
-+typically running at EL3, populates this register as part of early system
-+initialization. Higher-level software, like an operating system, can then use
-+the register to get the frequency.
-+
-+Xen reads the counter frequency from the device tree (the timer node's
-+``clock-frequency`` property, or the firmware-populated CNTFRQ_EL0) and relies
-+on that value being correct; it is a configuration input to Xen's system time,
-+not something Xen can independently cross-check against hardware.
-+
-+Generic timer usage during VM creation
-+--------------------------------------
-+
-+While preparing the device tree for a VM, Xen creates a timer node (based on the
-+device tree bindings [2]_ and architecture specification [1]_) for the VM. For
-+this, the host device tree is expected to have a node for the generic timer.
-+
-+During the VM creation, Xen sets the offset (CNTVOFF_EL2) used to broadcast the
-+virtual time for a VM and assigns the following per processor interrupts for
-+timers.
-+
-+.. list-table::
-+   :header-rows: 1
-+
-+   * - Name
-+     - Interrupt id
-+
-+   * - Virtual timer
-+     - 27
-+
-+   * - Physical Secure timer
-+     - 29
-+
-+   * - Physical Non-secure timer
-+     - 30
-+
-+Xen reserves the 27, 29 and 30 interrupt ids in the virtual GIC. The exception
-+to this is for hardware VM, where the VM will be assigned interrupt numbers the
-+same as in the host device tree.
-+
-+The parent interrupt is linked to the Generic interrupt controller node.
-+
-+If the host device tree node for the generic timer contains the property
-+"clock-frequency", the same is passed on to the guest device tree.
-+
-+During the VM vCPU creation, Xen initializes the internal/background timers (one
-+for physical timer and one for virtual timer).
-+
-+Generic timer interface between Xen and VM
-+------------------------------------------
-+
-+VM can make use of both the physical and virtual timer.
-+
-+Physical timer
-+^^^^^^^^^^^^^^
-+
-+Xen traps VM's accesses to system registers related to physical timer (except
-+CNTPCT_EL0). This is done to allow Xen to emulate the physical timer for a VM,
-+that is, to check that the access is permitted and to translate the compare
-+value the VM programs, which is an absolute physical counter value, into Xen's
-+system time. Xen does not route the physical timer interrupt to guest or itself.
-+Instead, it makes use of the internal timer used for the physical timer
-+emulation to schedule the interrupt injection into the VM.
-+
-+The flow can be depicted as follows:
-+
-+::
-+
-+    +---------------------------------------------------+
-+    | VMs read or write                                 |
-+    | any of CNTP_CTL, CNTP_CVAL, CNTP_TVAL             |
-+    +-------------------------+-------------------------+
-+                              |
-+                              v
-+    +---------------------------------------------------+
-+    | MSR/MRS instruction is trapped by Xen             |
-+    +-------------------------+-------------------------+
-+                              |
-+                              v
-+    +---------------------------------------------------+
-+    | Xen reads or writes to the register               |
-+    | on behalf of VM                                   |
-+    |                                                   |
-+    |  1. For read access : Xen returns the value from  |
-+    |     the VM's vcpu physical timer context.         |
-+    |  2. For write access : Xen saves the value in the |
-+    |     VM's vcpu physical timer context. Depending   |
-+    |     on the value, it schedules the internal timer |
-+    |     for interrupt injection.                      |
-+    |                                                   |
-+    |  Increments the VM program counter                |
-+    |  and returns control to VM.                       |
-+    +---------------------------------------------------+
-+
-+Virtual timer
-+^^^^^^^^^^^^^
-+
-+Xen does not trap accesses to system registers related to virtual timer.
-+The timer context (i.e. content of timer registers) is saved/restored during the
-+vCPU context switch. At save time, Xen initializes an internal timer to make
-+sure the VM's vCPU is scheduled at the time of the next virtual timer interrupt.
-+The virtual timer interrupt is first routed to Xen, masked and injected into the
-+VM. The interrupt behaves in a level-sensitive manner, meaning the timer will
-+continue to signal the interrupt until one of the following situations occurs:
-+
-+- interrupt is masked
-+- timer is disabled
-+- firing condition is no longer met
-+
-+Xen masks the interrupt (using the CNTV_CTL_EL0 register) before injecting it
-+into the VM to avoid an interrupt storm that could otherwise occur if the VM
-+did not handle the interrupt properly. This masking is specific to the virtual
-+timer: Xen does not mask the physical timer when injecting its interrupt (see
-+the physical timer section above), and that difference is what the virtual and
-+physical deschedule test cases verify.
-+
-+Freedom from interference
-+-------------------------
-+
-+The Generic Timer is emulated per vCPU, so timer programming in one VM cannot
-+alter another VM's timer state. The mechanism differs between the two timers.
-+
-+Virtual timer isolation
-+^^^^^^^^^^^^^^^^^^^^^^^
-+
-+Each VM has its own virtual time base, which Xen sets in CNTVOFF_EL2 during VM
-+creation, so the virtual count a VM reads is its own. The virtual timer
-+context, that is the compare and control registers, is saved and restored per
-+vCPU across context switches, and the internal timer Xen uses to schedule
-+interrupt injection is per vCPU as well. Every emulation path acts on the vCPU
-+that trapped, so one VM enabling, disabling or rearming its virtual timer does
-+not change what another VM's virtual timer is waiting for, nor when it fires.
-+This isolation assumes the per-vCPU virtual timer context is saved and restored
-+on every vCPU context switch; that save/restore is the premise the freedom-from-
-+interference claim depends on.
-+
-+Physical timer isolation
-+^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+The physical timer is fully emulated, and the compare value, control value and
-+pending condition Xen keeps on a VM's behalf are per vCPU. One VM's accesses
-+to CNTP_CTL_EL0, CNTP_CVAL_EL0 or CNTP_TVAL_EL0 are trapped and applied to its
-+own context only.
-+
-+A VM that writes CNTP_TVAL_EL0 or CNTP_CVAL_EL0 while its physical timer has a
-+pending condition clears that condition and re-arms the timer. This is the
-+behaviour the architecture requires of a timer that is given a new deadline,
-+and it affects only the VM that performs the write. It is not a loss of an
-+interrupt belonging to another VM.
-+
-+System counter isolation
-+^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+The system counter itself is read-only to a VM and monotonic, so concurrent
-+reads from several VMs cannot interfere with one another. Both timers derive
-+from it, the physical one directly and the virtual one through the per VM
-+offset described above.
-+
-+.. [1] Arm Architecture Reference Manual for A-profile architecture, Chapter 11
-+.. [2] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/devicetree/bindings/timer/arm,arch_timer.yaml
-diff --git a/docs/fusa/architecture_specs/index.rst b/docs/fusa/architecture_specs/index.rst
-new file mode 100644
-index 0000000000..395e3c1225
---- /dev/null
-+++ b/docs/fusa/architecture_specs/index.rst
-@@ -0,0 +1,9 @@
-+.. SPDX-License-Identifier: CC-BY-4.0
-+
-+Architecture specifications
-+===========================
-+
-+.. toctree::
-+   :maxdepth: 2
-+
-+   generic_timer
-diff --git a/docs/fusa/index.rst b/docs/fusa/index.rst
-index 5f1e8acfc4..b3c72ec7d4 100644
---- a/docs/fusa/index.rst
-+++ b/docs/fusa/index.rst
-@@ -7,3 +7,4 @@ Functional Safety documentation
-    :maxdepth: 2
- 
-    reqs/index
-+   architecture_specs/index
-
-base-commit: c4a09c112c391ffc1aea33afff49ffb28156fbdb
--- 
-2.25.1
-
+> 
+> Jan
+> 
 
