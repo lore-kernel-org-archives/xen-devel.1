@@ -2,51 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10087606A60C
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 15:59:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 94179606A31B
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 16:26:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=HuKUy/EO
-Received: from list by lists.xenproject.org with outflank-mailman.1475193.1682064 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=G7/oC7Ew
+Received: from list by lists.xenproject.org with outflank-mailman.1475212.1682074 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOzsA-0008J3-9H; Thu, 05 Nov 2026 15:59:30 +0000
+	id 1xP0II-0002Fq-Co; Thu, 05 Nov 2026 16:26:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1475193.1682064; Thu, 05 Nov 2026 15:59:30 +0000
+Received: by outflank-mailman (output) from mailman id 1475212.1682074; Thu, 05 Nov 2026 16:26:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOzsA-0008Iw-6T; Thu, 05 Nov 2026 15:59:30 +0000
-Received: by outflank-mailman (input) for mailman id 1475193;
- Thu, 05 Nov 2026 15:59:28 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1ac6fbbf5000403d@swg.vates.tech>)
- id 1xOzs8-0008Iq-3u
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 15:59:28 +0000
+	id 1xP0II-0002Fj-9G; Thu, 05 Nov 2026 16:26:30 +0000
+Received: by outflank-mailman (input) for mailman id 1475212;
+ Thu, 05 Nov 2026 16:26:29 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xP0IH-0002Fd-1V
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 16:26:29 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xOzs7-004Oeo-Gm
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 16:59:27 +0100
-Received: from [10.42.69.11] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1ac6fbbf5000403d@swg.vates.tech>)
- id 6aeca7bd-bab6-0a2a0a5309dd-0a2a450be546-34
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 16:59:27 +0100
-Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1ac6fbbf5000403d@swg.vates.tech>)
- id 6aeca7df-b7e8-0a2a450b0019-b9ff1c129aa3-3
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 16:59:27 +0100
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a1ac6fbbf5000403d.001 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Thu, 05 Nov 2026 15:59:26 +0000
-Received: from [192.168.1.52] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
- [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
- by mail2.vates.fr (Postfix) with ESMTPSA id 7D06B823F4
- for <xen-devel@lists.xenproject.org>; Thu,  5 Nov 2026 16:59:25 +0100 (CET)
+ id 1xP0IF-00Eddz-O7
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 17:26:27 +0100
+Received: from [10.42.69.12] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6aecae24-e002-0a2a0a5209dd-0a2a450c9796-16
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 17:26:27 +0100
+Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6aecae33-f479-0a2a450c0019-d155802dacef-3
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 17:26:27 +0100
+Received: by mail-wm1-f45.google.com with SMTP id
+ 5b1f17b1804b1-4a59100fa83so20681135e9.0
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 08:26:27 -0800 (PST)
+Received: from [192.168.1.6] (user-109-243-65-71.play-internet.pl.
+ [109.243.65.71]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4b56f0237aesm78573505e9.9.2026.11.05.08.26.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 05 Nov 2026 08:26:24 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -55,33 +49,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=v3pNtB1EAJfftu/oN6OZwk6BrgOe3HU1/3qAGLaEzxE=;
- h=from:subject:date:message-id:to:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
- b=HuKUy/EO0q7/4Fo5maXmUtKOK6F4QdRpUrHoSHk93wzRc3g5+1Ivc2ojuyQhulSByJa2WeOK/
- 7rl01yOvWk6mAD9Uh0F6/76RezJUQTrlrQP9o8apMgOAqaBY2zbB6wj/U+m86k45fwuJIm6yh7N
- wsrM29sdmzTdrE9Tq0L0rTUzPE1OAY57KPkXkhcj3NnIlTGGDteLz+1fFyiJ8qY2KRpE/0rbL3w
- I7siTsLtcSuYZHytdOUaqHgPgEj9CdS6VYQdRgLqmRDsqYrN9yuauO0M/3IsZuUCb30bxSmhHCM
- KgQR0yBsV5uf7YTYDzrNUO9ovWGw4WG4mMAhxN3uzhGA==
-X-Zone-Loop: acf0734f203e638d955b6a48e111b941ee50e486ffe9
-x-campaign-type: default
-x-transaction-id: 4676f543-2aa1-4a67-a186-ef04117629bf
-x-swg-uid: 01-e5aa996b-b282-4646-8008-36a7e8831cde
-X-Mailer: Sweego
-Message-ID:
- <1793894366.8631fc262581453bbf619ec5b2062170.1a1ac6fbbf5000403d@vates.tech>
-x-swg-bid: 1793894366.8631fc262581453bbf619ec5b2062170.1a1ac6fbbf5000403d
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-Date: Thu, 5 Nov 2026 16:59:25 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1793895987; x=1794500787; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=BYSvNpGyoJGh7bHU68a8hS3u7Syc2l+JA2nju4G4sYY=;
+        b=G7/oC7EwSAc6YMzz0H8lxl8XNA+i8bO0cwVQBVx48FznN+aJO22ZHUEcGvpW1k7biZ
+         BVprIlittG1BeEZ6pYRahQcRKwqG7JKakIaRTr4YKKNWyq/NoVLHmazxV66xE0NxJYEA
+         beNgxgczRUFzmvlteoX/lcPckZEYUQAgavWtaGhRDEg+XsYYsjGqsvDdQ4kq/f7JE4i0
+         8/8KTVl0zQ9JF3a7atyL19wKKPn+vn6swV0/u5g94uT11NJH9+IQsBt8XK4W9ZjxAGPt
+         Kcft9qkxj+V44klSBz/QEpYxpn5ojyMwf+FnyP/5ANl/BijFrHq2cUfJ24ubolQSUho6
+         MBKA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793895987; x=1794500787;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=BYSvNpGyoJGh7bHU68a8hS3u7Syc2l+JA2nju4G4sYY=;
+        b=o4a9kA+GNfBQw5GGY0c/9/aDPRaIk71ugvuPudwQLeNFjL1n2KBQKg9SIJUNGAhgGS
+         Ps+9aDWa9FlBSBIQcpnEzcetGG44Ac246S52mU2cLgvqD9YZV/c/fMJsIH53iOpIkaAG
+         5f9fPTLaUxgB1nckg96yj5bW1365OKxUVm7CNWbvvat6aDzzqVSd4CbM4doTAzsyvXgp
+         sorBDNl4eS8zWFaNqbQLJQ8oiMRBg0MlIs/y53G3N/BfIUSBjm98qR2ZYRyIXophHfd3
+         dk2X1pHhwLClAjimm8gfnmw63AJSO513Pk8hCAMIIs0h0FemgMlk0+dNjAw6QE6Rp1rb
+         tPaQ==
+X-Forwarded-Encrypted: i=1; AKwUvBzJ/sF1xw8BOT+ZUXCkCrUpfkm1GvZxjkWUZv5/j+Q3wFKVri5Coaq40tb4Ep8L6Z5pTI1ILFzO13I=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z+LTCEvEfRz4wEd2lT49GmCyXy8YNVBErqDElqbziJ2leAv0JMB
+	AtsMQRnIRB01bSu3FgttIaKs+nF8d6nGOK8egNJVhpBEt7qkhk5Shwby
+X-Gm-Gg: AYBFou1vgiy/HZIW/xgazSuBiPgsOJIOG4tu3S8GMAV3eYYvmQlMx+kyOEGeFwpvi1Q
+	IQCLK8RRNTHTZrJ4/Sw2OSv6g9pRFCoExYWJwdyE5RWuFgZZ65GrqiNs4PtDoT+tdr8NqYJc8X+
+	EU3fDYmPT9rkEv1p011LmDbRX5W+6rCyhZn+kDVmTwwe3HYOOUm09LWZvp3jUCWrF47Sjv2r4ps
+	7vgV6HI4mjhW12/JrupRYzbPLnnTv7L/sSW3BFrmoDpb4dbHub9EkhlD2B9EoYri3yAZPSXuIJb
+	4Geo8T7PNZkXOTIdB9YQJo9y2dPS2mFYPMXr3Jc4kpHdBiVWe3gtI3HV64K5JvqV85SwHBV2dHb
+	ErACMj7HrDAk5m5G+MTtPi8JFr6HcFbmUcrOgwAfjQvsJvvmyPx88ncMpc03XxibarWYlp2vI5m
+	/qmjKfbQhhLEHFIGBoaAxNvf+oo+iKHUPIKVvhDktUEm2cuQ0OYYLV9rxRYykKHPFxbO9pTgbT6
+	6G3gB1/ywnpfasreVl/9YE+KneOMyfslUPrp1x/bV4CwrXQx0qv2JGMUMTofzGnYdhK76TNszMm
+	bPc38DZMw63m6+wSKlnez0heVAr1vwDDoLQJUdNcyL11r2h18Gm3hYasBIZAOhj7EPyxnkdIzXe
+	gHNf7bpm2qAF8DGKTYbogpw==
+X-Received: by 2002:a05:600c:138c:b0:49f:ce78:3562 with SMTP id 5b1f17b1804b1-4ac1765d3e8mr425684435e9.19.1793895986859;
+        Thu, 05 Nov 2026 08:26:26 -0800 (PST)
+Message-ID: <3d2b61ed-790a-4c11-8607-8c5fe6b34b61@gmail.com>
+Date: Thu, 5 Nov 2026 17:26:23 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v3 30/39] xen/riscv: implement APLIC-IMSIC-hart sync
  barrier for vCPU migration
-To: xen-devel@lists.xenproject.org
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ xen-devel@lists.xenproject.org
 References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
  <2075cb10e5f6df787b29f2f087632c82b787a007.1790779209.git.oleksii.kurochko@gmail.com>
  <c77101fe-2505-4cdb-8520-52f92a1c668d@gmail.com>
@@ -89,43 +106,17 @@ References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
  <cf206b92-88df-4f51-b10b-960e0c141d9e@gmail.com>
  <1793892730.8631fc262581453bbf619ec5b2062170.1a1ac56c714000403d@vates.tech>
  <1ff766a5-3d49-45fb-9c46-d781cfaf4b6d@gmail.com>
-From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+ <1793894366.8631fc262581453bbf619ec5b2062170.1a1ac6fbbf5000403d@vates.tech>
 Content-Language: en-US
-Autocrypt: addr=baptiste.le-duc@vates.tech; keydata=
- xsBNBGoPSX8BCADSuTikqW3FD4mscQugY1thRaKlIhcJ2G9YCWYXAlp+xosvTlzfIftOZZim
- 750MLvyKtLPkQzB6TZtFZBiexSraaF/MdDKRTT5DcVa3r7ZnHgqMclWlPa4ioysS4yFcJanL
- cyNOT7HUFvIdirMMqiViedfYtS0GORPBBPVISD6ClMz3ecHIxqllfq9CHYQn4amKEfHmh6tm
- Rufo4Gjl6x8cUFZZlRQf+aCmUzdSPA0P5u3sueYH1uEz4w/jbD53MlKqzCvxUeOsfS2swTQA
- 6mS9jIgOjNadpUTOzKfDHMgFirtG+HFpm45Nwp6KQizxgDVOfTnOfVHm5Gwqm3ETl9y5ABEB
- AAHNPEJhcHRpc3RlIExlIER1YyAoVmF0ZXMgWXViaWtleSkgPGJhcHRpc3RlLmxlLWR1Y0B2
- YXRlcy50ZWNoPsLAjgQTAQoAOBYhBGiSJ6HgW88MgT/gfu2Cu2XL9M6QBQJqD0l/AhsDBQsJ
- CAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEO2Cu2XL9M6QuMcH/ihiy/Nrxp919AmY0ENnc0NK
- r/2LDvW/hrX4FfbpxAmrGmQ7MU1aQTk0JDbfcsG8OYH6wO5sqnXb1gz50YrEdpfVSbHz5YTZ
- EhDIxE4g7NrvJZh3Qc0m0CAyjYTNHen7J6olVaCMjrOH7uRHUYZ7Pl3am9mZosfLmez/aWJO
- a6ihQxBXHI75brlk1teIURkep2kP7P0Flmfl4cA//saREoTF7GXCtjOSQk/xg8PP0Sswqp5G
- TdJptn3FQn6lAzfz0eFSYqkaoX2c2k1MDa7o+UX9cfGPL8ybMKnYkasLxck6eOWGJWf+YTrm
- ga/r0kBaftmqNDgt5nI2jNTDwZcT9g3OwE0Eag9JfwEIAM6IWbuBSvz+erv27oGDDpo8M6Fp
- dGUvft7v+WceHUfxiXpYFx9qgIU6XGy6y+3lJMAvNcltS8DuhioqMlfKRSYGKZlpliY65dNP
- 557IuM4ctVJ+I9CVclvv9eahARQKgF5auLJAAlvGSmU+ufNvlwTUmLIRcrPviTmB6X5jJYc+
- fiNeyI0HcsgcN21C0r62tUCypuZ+vgEJXw2bx1V8mVGZKxdGJPh58QF6kRK+xmd4kEComLGV
- BeM6BcVOtEjDcGNC0tLhXb0p9g1Ys55iA8sd6s4WacyolW2J6rwmcOkjiWexWw1caYgIWAV1
- 004M3gwUaOz0dGq2i7HQ0AiVfVkAEQEAAcLAdgQYAQoAIBYhBGiSJ6HgW88MgT/gfu2Cu2XL
- 9M6QBQJqD0l/AhsMAAoJEO2Cu2XL9M6QovYH/RjstyL5o/V5K74ylBtz0j5t3pLX5JKbwApi
- 656rGgDdqElImyvvZppNMl/mgHNzvxmfFAhJXnSX9f1fqVEQKOGEhLUastnl/ssBiE5x7btM
- V0GAffxXbXJZbVv4b/DI+gVrOPc2YXlVwruapvTZNtD3hqPrkjrmq5WTtGR2loIVSe62hmh0
- BGD2Fy79b/hYWyBqhayPBEjwGW75u4/yn+Yqy1PgG3hIcvg7GSuT3akhHZSB2Mbguzcoyf9Q
- DJl6t33JxPRkkNrEdkPPmRlQCTSiUkVjKqMDF3jlINWsJ5t4jKFsNF91ksdw7aQgiX+tQIpE
- ugMC1NuNi5dDGip66bw=
-In-Reply-To: <1ff766a5-3d49-45fb-9c46-d781cfaf4b6d@gmail.com>
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <1793894366.8631fc262581453bbf619ec5b2062170.1a1ac6fbbf5000403d@vates.tech>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1793894365557
-X-purgate-ID: tlsNG-42698a/1793894367-AAEDE9EA-8C363F8C/0/0
-X-purgate-type: clean
-X-purgate-size: 1402
-X-Spam-Status: No, score=-4.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FORGED_MUA_MOZILLA,
+X-purgate-ID: tlsNG-d25034/1793895987-026DEA5B-002BAAB4/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 1556
+X-Spam-Status: No, score=-4.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_PASS,
 	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=no
 	autolearn_force=no version=4.0.1
@@ -134,42 +125,48 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 
 
-On 11/5/26 4:51 PM, Oleksii Kurochko wrote:
+On 11/5/26 4:59 PM, Baptiste Le Duc wrote:
 > 
 > 
-> On 11/5/26 4:32 PM, Baptiste Le Duc wrote:
->> On 2026-11-05 15:21 +0100, Oleksii Kurochko wrote:
->>> [ ... 348 lines skipped ... ]
->>>> LGTM, but I wonder why, as I said in the original patch, sync_id is
->>>> really needed.
->>>>
->>>
->>> I think that I am not understand your response. Could you please
->>> re-phrase it?
->> I'm questionning the need of the sync_id field as it will always be
->> equal to imsic_cfg.nr_ids, couldn't we drop it?
+> On 11/5/26 4:51 PM, Oleksii Kurochko wrote:
 >>
+>>
+>> On 11/5/26 4:32 PM, Baptiste Le Duc wrote:
+>>> On 2026-11-05 15:21 +0100, Oleksii Kurochko wrote:
+>>>> [ ... 348 lines skipped ... ]
+>>>>> LGTM, but I wonder why, as I said in the original patch, sync_id is
+>>>>> really needed.
+>>>>>
+>>>>
+>>>> I think that I am not understand your response. Could you please
+>>>> re-phrase it?
+>>> I'm questionning the need of the sync_id field as it will always be
+>>> equal to imsic_cfg.nr_ids, couldn't we drop it?
+>>>
+>>
+>> It's equal to nr_ids by choice rather than by necessity: which identity
+>> gets reserved is decided in a single place, imsic_parse_node(), and all
+>> the users (the genmsi write, the pending bit the barrier spins on, the
+>> limit on the APLIC sources and the ASSERT() in imsic_irq_enable()) refer
+>> to it by its role rather than as "the last identity".
+>>
+>> Basically if one day someone will decide to come up with EIID 
+>> allocator instead of using static allocation then it will be harder to 
+>> find a places where to change.
+>>
+>> So yes, it could be drooped but at the moment I think it is useful to 
+>> have separate field or ,at least, as an option in asm/imsic.h:
+>>
+>> static inline unsigned int imsic_sync_id(const struct imsic_config *cfg)
+>> {
+>>      return cfg->nr_ids;
+>> }
 > 
-> It's equal to nr_ids by choice rather than by necessity: which identity
-> gets reserved is decided in a single place, imsic_parse_node(), and all
-> the users (the genmsi write, the pending bit the barrier spins on, the
-> limit on the APLIC sources and the ASSERT() in imsic_irq_enable()) refer
-> to it by its role rather than as "the last identity".
+> I prefer this as it would save space in imsic_config struct.
 > 
-> Basically if one day someone will decide to come up with EIID allocator 
-> instead of using static allocation then it will be harder to find a 
-> places where to change.
-> 
-> So yes, it could be drooped but at the moment I think it is useful to 
-> have separate field or ,at least, as an option in asm/imsic.h:
-> 
-> static inline unsigned int imsic_sync_id(const struct imsic_config *cfg)
-> {
->      return cfg->nr_ids;
-> }
 
-I prefer this as it would save space in imsic_config struct.
+Thanks for the clarification. I'll go with that approach, then.
 
-> ~ Oleksii
+~ Oleksii
 
 
