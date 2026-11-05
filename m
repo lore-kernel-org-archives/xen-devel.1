@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6E384606A31B
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 13:36:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D452606A326
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 13:36:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=OM4t+89R
-Received: from list by lists.xenproject.org with outflank-mailman.1474707.1681704 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=PZehcl6L
+Received: from list by lists.xenproject.org with outflank-mailman.1474713.1681713 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOxdA-0008O8-3o; Thu, 05 Nov 2026 13:35:52 +0000
+	id 1xOxdO-0000Ph-AQ; Thu, 05 Nov 2026 13:36:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1474707.1681704; Thu, 05 Nov 2026 13:35:52 +0000
+Received: by outflank-mailman (output) from mailman id 1474713.1681713; Thu, 05 Nov 2026 13:36:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOxdA-0008O1-0q; Thu, 05 Nov 2026 13:35:52 +0000
-Received: by outflank-mailman (input) for mailman id 1474707;
- Thu, 05 Nov 2026 13:35:51 +0000
+	id 1xOxdO-0000Pa-7R; Thu, 05 Nov 2026 13:36:06 +0000
+Received: by outflank-mailman (input) for mailman id 1474713;
+ Thu, 05 Nov 2026 13:36:05 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xOxd9-0008Np-DH
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 13:35:51 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xOxdN-0000Ou-8x
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 13:36:05 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xOxd3-00Ak0m-Ph
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 14:35:45 +0100
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xOxdM-00Ak7z-Le
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 14:36:04 +0100
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aec8627-2eae-0a2a0a5409dd-0a2a4509c210-22
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 14:35:45 +0100
-Received: from [209.85.208.41] (helo=mail-ed1-f41.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aec8630-2eae-0a2a0a5409dd-0a2a45088e0a-42
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 14:36:04 +0100
+Received: from [209.85.218.45] (helo=mail-ej1-f45.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aec8631-be1a-0a2a45090019-d155d029f134-3
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 14:35:45 +0100
-Received: by mail-ed1-f41.google.com with SMTP id
- 4fb4d7f45d1cf-6b570ff3dfdso1362468a12.3
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 05:35:45 -0800 (PST)
+ id 6aec8644-f659-0a2a45080019-d155da2dd4bc-3
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 14:36:04 +0100
+Received: by mail-ej1-f45.google.com with SMTP id
+ a640c23a62f3a-c4322d310e7so32200166b.0
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 05:36:04 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6b55ac5aec7sm1818296a12.20.2026.11.05.05.35.43
+ a640c23a62f3a-c4d0e4668afsm172795166b.51.2026.11.05.05.36.03
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 05 Nov 2026 05:35:44 -0800 (PST)
+ Thu, 05 Nov 2026 05:36:03 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,52 +51,52 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1793885745; x=1794490545; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1793885764; x=1794490564; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=Les9WkE9lOfW3mflu8VwX8atN7kQJgnKhFYC3t+evzA=;
-        b=OM4t+89RFlU9gUCGDuVXykKkTknSM8lB2hAnI5RS+Hn+BF9OtVHAvooaS2c6CxeA0u
-         mgwJP51EhCzXBLjgGCa8CQmejZJ2/q7boyL0LgNnCbJUWoQq869f8dd2sdwyADVkprEx
-         PaqpSSKFiq/B+xB4jXGV7waJzM99TK57Z4ILU/enKVbO+rrJI6nA9SziKfaQSKGSNn3b
-         1UpLBzBAcRR7Gn6tnYGy9PDqmFTNS+WNzqiaj+7VYCBi8WJJFS9PW8ouoYNOKWTC7eGH
-         djo3AmmL8ZKUS9FfI4XjXDpw3VAEyJaHPOLVtP+AmSYAXiaaSTNpkLRHJluJOwBLO/WQ
-         w09Q==
+        bh=Xqd7lQJf6HxSa5w7PCo/dVug3ab9DqyZkj44HJO+byE=;
+        b=PZehcl6LqNrWcNaAcUWURluYaEBu/6sv3BEFWpjoedJzij+eH+9A73nJqGRu2KwJgi
+         jW9wo7O3ZkB2X1OvTGLyTZUqd71HgRySzWOkDhkPrJCIFixHyThKcJpw9HcNDCVBeBQa
+         M5B5iTiP+n+9TtwDTukBVbAxVQNbGAJEuQRXPDpe/+CoxtihOxm0SL+PLs9+g7hTY8cb
+         wBTNDGOXnmEzm30E+b7BDtn9AKI96ZnOVwgcIJvEAxKrQXFDdmolYWaO/IExiiK5bQiq
+         lhYykBuFBP/FfjHsWURglLk/ugCbtghiywgfN/lLWF0Nk8aIJ+5z51UH/x6WHbwhW5pE
+         P7yw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793885745; x=1794490545;
+        d=1e100.net; s=20260707; t=1793885764; x=1794490564;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=Les9WkE9lOfW3mflu8VwX8atN7kQJgnKhFYC3t+evzA=;
-        b=Pk1pC0WuAdfoT0h+nhCqL7dzmbCS5jqbzgDCUP4XMjfEEHrGCa3RTnr3wVqcT+XIzn
-         SKd05OIjQ5Es6sLPgBHWbXZWnIWOVoFO25k7D+KXZz8z7UMdz2ta2MXb0LaCysbsw4PM
-         uVXD68El24z4nLXQOgyVBeLJoSZxcDLFZVSYMr85fRpnTQJmi3nmtbd55v0d6eEk93gE
-         xof/PoQczLEEAl99MpmeAU34bpXmnKRzRguwOtV3gHiazOnHjJWt4dyD6fzTXi2Oz8jU
-         y1Y5GUUlIJZnrSMditoDnHdskKeV17jrDXiaOc3TfUqwDLeg8vks3gP7b2/ilp+4eoMI
-         GI5g==
-X-Gm-Message-State: APuU4Z/upeZ4R4F69nRsekIMIJKeWdvNjhABvQVx2XLFX5cm6x2gPcsl
-	V51FKEvHdCrcvrca3CL6wh5WM9jPFIvPDNw0Eu5n8/OrJB765r0EgFCKy7+IpvI49zEI9DTfSSc
-	Ahhn+2A==
-X-Gm-Gg: AYBFou2/85QMToh4V6kbTDzlYHSILmBNrm+c1muqpsVzNu4k97qWPaHfAOSUOIUG5qN
-	IKRlRou96bAKZGmpHm6DRbRLG7PbXWjGGTPWddlbpBlxaBz46hWGpRWLaZ4nXNybxvWe64hLMv+
-	wQpZelPQufEOW9CtErjJL1Ypl5PKzRRDhvD4C+LjRsavUp60pFsPhdH4U1T39PaleCqpUZ/jaNC
-	PIyCrFh6iruw0+5ORYz8+momjcegOnL21iE1rK1ePh8nTwCi67UO3jQvRTpfFrPHcvQpzekJZPh
-	EzYGETApURBmGhJzMx1uRehnsXtmZL+Vjy1tRT4kbX/QTlkxXSt7QQkjPEfBBozxpI0EHrrO9bi
-	nHwgDKThtchMnQx8EB35kK6lU4nt+ERqUtM1CPmH/L5R7lLJyZejSiu0Y85SH1G7kgSDC5+UjgI
-	43qnEcApCtYsdk5w1VlsRjG2xoWARa934MQEyyBIhaZkKComNvh0b/nYBNSO+rm+5A6igjBi/px
-	AUNoM8iuxHMp8vcGXJ93y0IiDk2OGajfXqLNMc0kcY8ShWVptWSVpTXDUl41WQqvqsnbjegzlqO
-	JmL5Pj6FfX1CViCdENTpF9tPHzyKSA8j3CYU3QM/EfPagq4tuCwooahjadwj8PorKcEaIC3/1bh
-	3WHBq9b1+yJRK4vo=
-X-Received: by 2002:a17:907:84b:b0:c49:8f1e:af0a with SMTP id a640c23a62f3a-c4ca795e453mr1630598666b.7.1793885744727;
-        Thu, 05 Nov 2026 05:35:44 -0800 (PST)
-Message-ID: <4a678bd3-e70b-4194-b4ce-645328d61bd3@suse.com>
-Date: Thu, 5 Nov 2026 14:35:43 +0100
+        bh=Xqd7lQJf6HxSa5w7PCo/dVug3ab9DqyZkj44HJO+byE=;
+        b=Umiutjnf5TWpu2iv80TFBHUuxOPXQGNK6CojWfKqkaz1mjUrYawyrKyCtCXS84A4ib
+         ANZhpiqOhB3Wtittb/w9TWIsGPSCSfty2dYCD67FUVe9G81mrNhf7iHjFfa+iP7i4TTz
+         QXCkDdFq7+CA7Xu4CKxCIo2TSyV+BV4eX+4fVwaEEo7dNYM+kgCVJEY8LYhSReuHzpt9
+         1r0kMCwklGQ5jXu57LfhcG3xSf3r0+lsjTa+Rx9XD5pAQgN6ycEnkBwIJqUdBgOcoQbX
+         8jUxiJ5rTv2o469ACsP4PJJ/jZkJ/fyD9qdGCfKa9I8HY7YFtJn+4djkZxfQ/E92prjG
+         0V5g==
+X-Gm-Message-State: APuU4Z/Obu6iVzFNeoTGA9Gp2ftFoK0AFXBBcxUqR+LrMdzL19Zp7B06
+	a+LUuZK7gJL6wstzodXyrGSMmnhMmbSjLpDYAFlISK3CV8FD48WNll44bFPV56V9A++mIavZEai
+	6FtvthQ==
+X-Gm-Gg: AYBFou0cnUkP22Axt1AXsh7U0o3biR/2kTWfCZVNQdOetZg8NMLEIwDX9kGiYJjaUdo
+	F0aUWPer6mhjpyxVYEPiNkOJXQ9K8Yhi2d7lOt1D6HZBlOMUEN9VQW1O8ILJmCZOm4NM5RdLZzv
+	+pCOV9tnSqHPZLiYDy5hGt9JkwYTH/jGYXdY47HneZsgoojOrOcv7TYYezHLelWxbi7z/wDCaGy
+	udm1cMoitGeWnnxzwDbOMDzvGkUOaoENtet5O5zEYVnouSEg9tzCZHp3P55GhU3sWicxsz5d/7c
+	pHjRP3cocSV4DfNWn6FySfG3/+tb22OutMvdq0zWBITS+BiIevj0R5ApAmse1N8TwdY9njs1iLI
+	t7TXBahd9U4TrCQCQyoNuWaI9YQkmdTyl0lGcklUiduwPkmd0+UJsqNQIT/lqim5yLunhZzZ4Ns
+	t8Ot7Vt4rCnhwvqvdnPaQYLyLfejMLm1iLcDs3SBcwwira1lx55z77G4iYjvnkaNdTOjDd6YaIa
+	vVlQ4L6tlHw+udGc0ZyuCaFgVzEYQRiN1Eypkpef2g0sxihf6nOZNpXuhgaQz2VCCGw00zL7jW8
+	Lng0H5gEke8dwnTxX7M+wUf9m2LL4FcG0KukFvBMlIoe+zMsdlr2zSrjptewjSy1JXI1Gh7G9rg
+	8QHOdh+WHzWI49uUp
+X-Received: by 2002:a17:907:84b:b0:c46:6a50:40c2 with SMTP id a640c23a62f3a-c4ca7acc58fmr1606505166b.39.1793885764041;
+        Thu, 05 Nov 2026 05:36:04 -0800 (PST)
+Message-ID: <fb392a52-3c9e-4fab-ab05-4c57a62f39c9@suse.com>
+Date: Thu, 5 Nov 2026 14:36:03 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v2 09/14] x86/PVH: track Dom0 available RAM in a rangeset
+Subject: [PATCH v2 10/14] x86/PVH: try to map initrd directly into Dom0
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -129,10 +129,10 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
 In-Reply-To: <a1f88104-14ae-400c-b950-163d5a7e552b@suse.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-bad1c0/1793885745-BCECE034-2AEE01BF/10/78276251493
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-c1860d/1793885764-D554C87B-F29BFDCD/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 17504
+X-purgate-size: 12187
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -141,511 +141,361 @@ X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Convert pvh_steal_ram() to work from a rangeset, and replace find_memory()
-entirely. By tracking the kernel range right from the creation of that
-rangeset we also avoid inadvertently stealing from the kernel range.
+Our present handling of initrd is problematic in particular when the
+initrd is huge, and when at the same time "dom0_mem=" isn't in use to
+significantly shrink Dom0's memory (from the default). In that case,
+insufficient memory may exist for pvh_populate_p2m() to succeed (because
+initrd memory can be freed only after copying).
 
-Shrinking the E820 region stolen from moves into pvh_add_mem_range(). To
-retain coverage of tail padding, the real end address now needs
-communicating from pvh_steal_ram() to pvh_add_mem_range().
+Make an attempt to map the blob (including headroom) into Dom0's P2M
+instead, thus also saving the copying operation. With __start_xen() having
+arranged for a larger than necessary blob, that mapping can typically be
+done with superpage mappings.
 
-Sadly the find_memory() replacement cannot use an upper limit of 4Gb, as
-that would break current Linux: It accesses module table (and memory map,
-which for Dom0 we don't set) via a very early direct-map, which has only
-the first L3 entry populated.
-
-Fixes: 1d74282c455f ("x86: setup PVHv2 Dom0 ACPI tables")
-Suggested-by: Xenia Ragiadakou <xenia.ragiadakou@amd.com>
+Reported-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
-The Suggested-by: is based on the respective commit's S-o-b. I didn't go
-hunt for whether this may have been suggested in review of that patch.
-
-Clearly find_kernel_memory() could also be converted, but is unrelated
-here and hence left for a separate change.
+pvh_steal_ram() can (theoretically) fail just because of
+rangeset_remove_range() there failing, in which case we may be in limbo
+state. That's hopefully an acceptable risk.
 ---
-v2: New.
+v2: Re-base over changes earlier in the series, in particular to use
+    pvh_steal_ram() here. Avoid NULL deref when there's no initrd. Also
+    log domain in new/moved printk().
 
 --- a/xen/arch/x86/hvm/dom0_build.c
 +++ b/xen/arch/x86/hvm/dom0_build.c
-@@ -183,41 +183,62 @@ static int __init pvh_populate_memory_ra
-     return 0;
+@@ -528,7 +528,9 @@ static void __init pvh_init_p2m(struct d
+ static int __init pvh_populate_p2m(
+     struct domain *d,
+     const struct e820entry *e820,
+-    unsigned int nr_e820)
++    unsigned int nr_e820,
++    unsigned long initrd_start,
++    unsigned long initrd_end)
+ {
+     struct vcpu *v = d->vcpu[0];
+     unsigned int i;
+@@ -546,7 +548,12 @@ static int __init pvh_populate_p2m(
+         addr = PFN_DOWN(e820[i].addr);
+         size = PFN_DOWN(e820[i].size);
+ 
+-        rc = pvh_populate_memory_range(d, addr, size);
++        if ( addr + size <= initrd_start || addr >= initrd_end )
++            rc = pvh_populate_memory_range(d, addr, size);
++        else
++            rc = pvh_populate_memory_range(d, addr, initrd_start - addr)
++                 ?: pvh_populate_memory_range(d, initrd_end,
++                                              addr + size - initrd_end);
+         if ( rc )
+             return rc;
+ 
+@@ -636,6 +643,43 @@ static struct rangeset *__init make_ram_
+     return ram;
  }
  
-+struct steal_info {
-+    unsigned long size, align;
-+    paddr_t addr, end;
-+};
-+
-+static int cf_check __init find_ram(
-+    unsigned long s, unsigned long e, void *data)
++static int __init pvh_map_initrd(
++    struct domain *d, const struct boot_module *initrd,
++    paddr_t initrd_start, unsigned int order)
 +{
-+    struct steal_info *info = data;
-+
-+    if ( e + 1 - s >= info->size )
++    for ( paddr_t ga = initrd_start, ma = initrd->start;
++          ga < initrd_start + initrd->size;
++          ga += PAGE_SIZE << order, ma += PAGE_SIZE << order )
 +    {
-+        paddr_t addr = (e + 1 - info->size) & ~(info->align - 1);
++        int rc = p2m_add_page(d, gaddr_to_gfn(ga), maddr_to_mfn(ma),
++                              order, p2m_ram_rw);
 +
-+        if ( addr >= s )
++        if ( rc )
 +        {
-+            info->addr = addr;
-+            info->end = e;
++            printk("%pd: failed to map initrd: [%#lx,%#lx): %d\n",
++                   d, PFN_DOWN(ga), PFN_DOWN(ga) + (1UL << order), rc);
++
++            /*
++             * Best effort rollback: The range will be replaced anyway by the
++             * subsequent pvh_populate_p2m().
++             */
++            while ( ga > initrd_start )
++            {
++                ga -= PAGE_SIZE << order;
++                ma -= PAGE_SIZE << order;
++                p2m_remove_page(d, gaddr_to_gfn(ga), maddr_to_mfn(ma), order);
++                order_stats[order]--;
++            }
++
++            return rc;
 +        }
++
++        order_stats[order]++;
 +    }
 +
 +    return 0;
 +}
 +
- /* Steal RAM from the end of a memory region. */
--static int __init pvh_steal_ram(struct domain *d, unsigned long size,
-+static int __init pvh_steal_ram(struct rangeset *ram, unsigned long size,
-                                 unsigned long align, paddr_t limit,
--                                paddr_t *addr)
-+                                paddr_t *addr, paddr_t *end)
- {
--    unsigned int i = d->arch.nr_e820;
--
-     /*
-      * Alignment 0 should be set to 1, so it doesn't wrap around in the
--     * calculations below.
-+     * calculations in find_ram().
-      */
--    align = align ? : 1;
--    while ( i-- )
--    {
--        struct e820entry *entry = &d->arch.e820[i];
-+    struct steal_info info = {
-+        .size = size,
-+        .align = align ?: 1,
-+        .addr = INVALID_PADDR,
-+    };
- 
--        if ( entry->type != E820_RAM || entry->addr + entry->size > limit )
--            continue;
-+    rangeset_report_ranges(ram, MB(1), limit - 1, find_ram, &info);
- 
--        *addr = (entry->addr + entry->size - size) & ~(align - 1);
--        if ( *addr < entry->addr ||
--             /* Don't steal from the low 1MB due to the copying done there. */
--             *addr < MB(1) )
--            continue;
-+    if ( info.addr == INVALID_PADDR )
-+        return -ENOMEM;
- 
--        entry->size = *addr - entry->addr;
--        return 0;
--    }
-+    *addr = info.addr;
- 
--    return -ENOMEM;
-+    if ( end )
-+        /* Suitable for passing to pvh_add_mem_range(). */
-+        *end = info.end + 1;
-+
-+    return rangeset_remove_range(ram, info.addr, info.end);
- }
- 
- /* NB: memory map must be sorted at all times for this to work correctly. */
- static int __init pvh_add_mem_range(struct domain *d, uint64_t s, uint64_t e,
--                                    unsigned int type)
-+                                    unsigned int type, bool replace)
- {
-     struct e820entry *map;
-     unsigned int i;
-@@ -245,12 +266,66 @@ static int __init pvh_add_mem_range(stru
-             break;
- 
-         if ( re > s )
--            return -EEXIST;
-+        {
-+            if ( !replace || d->arch.e820[i].type != E820_RAM )
-+                return -EEXIST;
-+
-+            /* In the common case we get away without memory allocation. */
-+            if ( re == e && rs <= s )
-+            {
-+                d->arch.e820[i].size -= e - s;
-+
-+                if ( !d->arch.e820[i].size )
-+                {
-+                    memmove(d->arch.e820 + i, d->arch.e820 + i + 1,
-+                            (d->arch.nr_e820 - i - 1) * sizeof(*d->arch.e820));
-+
-+                    d->arch.nr_e820--;
-+                    i--;
-+                }
-+            }
-+            else
-+            {
-+                /*
-+                 * While pvh_steal_ram() steals from the end of regions, this
-+                 * case can still occur because of RAM ranges in use which
-+                 * aren't reflected in E820 (first and foremost the kernel).
-+                 */
-+                map = xzalloc_array(struct e820entry, d->arch.nr_e820 + 1);
-+                if ( !map )
-+                    goto nomem;
-+
-+                memcpy(map, d->arch.e820, (i + 1) * sizeof(*map));
-+                memcpy(map + i + 1, d->arch.e820 + i,
-+                       (d->arch.nr_e820 - i) * sizeof(*map));
-+
-+                map[i].size = max(rs, s) - rs;
-+
-+                map[i + 1].addr = min(re, e);
-+                map[i + 1].size = re - map[i + 1].addr;
-+
-+                if ( !map[i].size )
-+                    goto insert;
-+
-+                if ( !map[i + 1].size )
-+                {
-+                    d->arch.e820[i] = map[i];
-+                    xfree(map);
-+                }
-+                else
-+                {
-+                    xfree(d->arch.e820);
-+                    d->arch.e820 = map;
-+                    d->arch.nr_e820++;
-+                }
-+            }
-+        }
-     }
- 
-     map = xzalloc_array(struct e820entry, d->arch.nr_e820 + 1);
-     if ( !map )
-     {
-+    nomem:
-         printk(XENLOG_WARNING "E820: out of memory to add region\n");
-         return -ENOMEM;
-     }
-@@ -258,6 +333,8 @@ static int __init pvh_add_mem_range(stru
-     memcpy(map, d->arch.e820, i * sizeof(*d->arch.e820));
-     memcpy(map + i + 1, d->arch.e820 + i,
-            (d->arch.nr_e820 - i) * sizeof(*d->arch.e820));
-+
-+ insert:
-     map[i].addr = s;
-     map[i].size = e - s;
-     map[i].type = type;
-@@ -275,9 +352,10 @@ struct vmx_info {
- 
- static int __init pvh_place_vmx_realmode_helpers(
-     struct domain *d,
-+    struct rangeset *ram,
-     struct vmx_info *info)
- {
--    paddr_t gaddr;
-+    paddr_t gaddr, gend;
- 
-     /*
-      * Steal some space from the last RAM region below 4GB to store the
-@@ -285,28 +363,27 @@ static int __init pvh_place_vmx_realmode
-      * structure (which accounts for the first 104b) doesn't cross a page
-      * boundary.
-      */
--    if ( !pvh_steal_ram(d, HVM_VM86_TSS_SIZE, 128, GB(4), &gaddr) )
-+    if ( !pvh_steal_ram(ram, HVM_VM86_TSS_SIZE, 128, GB(4), &gaddr, &gend) )
-     {
-         d->arch.hvm.params[HVM_PARAM_VM86_TSS_SIZED] =
-             VM86_TSS_UPDATED | ((uint64_t)HVM_VM86_TSS_SIZE << 32) | gaddr;
- 
-         info->tss = gaddr;
- 
--        if ( pvh_add_mem_range(d, gaddr, gaddr + HVM_VM86_TSS_SIZE,
--                               E820_RESERVED) )
-+        if ( pvh_add_mem_range(d, gaddr, gend, E820_RESERVED, true) )
-             printk("Unable to set VM86 TSS as reserved in the memory map\n");
-     }
-     else
-         printk("Unable to allocate VM86 TSS area\n");
- 
-     /* Steal some more RAM for the identity page tables. */
--    if ( pvh_steal_ram(d, PAGE_SIZE, PAGE_SIZE, GB(4), &gaddr) )
-+    if ( pvh_steal_ram(ram, PAGE_SIZE, PAGE_SIZE, GB(4), &gaddr, &gend) )
-     {
-         printk("Unable to find memory to stash the identity page tables\n");
-         return -ENOMEM;
-     }
- 
--    if ( pvh_add_mem_range(d, gaddr, gaddr + PAGE_SIZE, E820_RESERVED) )
-+    if ( pvh_add_mem_range(d, gaddr, gend, E820_RESERVED, true) )
-         printk("%pd: Unable to set identity page tables as reserved in the memory map\n",
-                d);
- 
-@@ -519,14 +596,15 @@ static int __init pvh_populate_p2m(
- #undef MB1_PAGES
- }
- 
--static paddr_t __init find_memory(
--    const struct domain *d, const struct elf_binary *elf, size_t size)
-+static struct rangeset *__init make_ram_rangeset(
-+    const struct domain *d, const struct elf_binary *elf)
- {
--    paddr_t kernel_start = (paddr_t)elf->dest_base & PAGE_MASK;
--    paddr_t kernel_end = ROUNDUP((paddr_t)elf->dest_base + elf->dest_size,
--                                 PAGE_SIZE);
-+    struct rangeset *ram = rangeset_new(NULL, NULL, 0);
-     unsigned int i;
- 
-+    if ( !ram )
-+        return NULL;
-+
-     /* The memory map is sorted. */
-     for ( i = 0; i < d->arch.nr_e820; i++ )
-     {
-@@ -538,26 +616,24 @@ static paddr_t __init find_memory(
- 
-         start = MAX(ROUNDUP(d->arch.e820[i].addr, PAGE_SIZE), MB(1));
- 
--        /*
--         * NB: Even better would be to use rangesets to determine a suitable
--         * range, in particular in case a kernel requests multiple heavily
--         * discontiguous regions (which right now we fold all into one big
--         * region).
--         */
--        if ( end <= kernel_start || start >= kernel_end )
--        {
--            /* No overlap, just check whether the region is large enough. */
--            if ( end - start >= size )
--                return start;
--        }
--        /* Deal with the kernel already being loaded in the region. */
--        else if ( kernel_start > start && kernel_start - start >= size )
--            return start;
--        else if ( kernel_end < end && end - kernel_end >= size )
--            return kernel_end;
-+        if ( start < end &&
-+             rangeset_add_range(ram, start, end - 1) != 0 )
-+            return NULL;
-     }
- 
--    return INVALID_PADDR;
-+    /*
-+     * Remove the kernel range, rounded to page boundaries.
-+     *
-+     * NB: Even better would be to record space needed by the kernel at its
-+     * allocation, in particular in case a kernel requests multiple heavily
-+     * discontiguous regions (which right now we fold all into one big one).
-+     */
-+    if ( rangeset_remove_range(ram, (paddr_t)elf->dest_base & PAGE_MASK,
-+                               ROUNDUP((paddr_t)elf->dest_base + elf->dest_size,
-+                                       PAGE_SIZE) - 1) != 0 )
-+        return NULL;
-+
-+    return ram;
- }
- 
  static bool __init check_load_address(
-@@ -723,7 +799,8 @@ static int __init pvh_place_kernel(
+     const struct domain *d, const struct elf_binary *elf)
+ {
+@@ -796,9 +840,98 @@ static int __init pvh_place_kernel(
+     return 0;
+ }
+ 
++static void __init pvh_place_initrd(
++    const struct boot_domain *bd,
++    const struct elf_binary *elf,
++    struct rangeset *ram,
++    struct hvm_modlist_entry *mod,
++    paddr_t *blob_start,
++    paddr_t *blob_end)
++{
++    struct domain *d = bd->d;
++    struct boot_module *initrd = bd->initrd;
++    struct boot_module try;
++    unsigned long initrd_len =
++        initrd ? initrd->size - initrd->arch.headroom : 0;
++    size_t align = 1UL << L3_PAGETABLE_SHIFT;
++    int rc;
++
++    *blob_start = INVALID_PADDR;
++    *blob_end   = 0;
++
++    if ( !initrd_len )
++        return;
++
++    try = *initrd;
++
++    mod->size = initrd_len;
++
++    /*
++     * As we promise to place below 4G whatever fits there, make a first pass
++     * limiting permitted addresses.  If we can't fit it there, fall back to
++     * placing above 4G.
++     */
++    for ( paddr_t limit = GB(4); ; )
++    {
++        unsigned long size = ROUNDUP(try.size, PAGE_SIZE);
++        paddr_t start;
++
++        if ( IS_ALIGNED(try.start | size, align) &&
++             !pvh_steal_ram(ram, size - try.arch.headroom, align, limit,
++                            blob_start, NULL) )
++            break;
++
++        if ( align == PAGE_SIZE )
++        {
++            if ( !(limit + 1) )
++                return;
++
++            limit = -1;
++            align = 1UL << L3_PAGETABLE_SHIFT;
++            try = *initrd;
++            continue;
++        }
++
++        align >>= PAGETABLE_ORDER;
++
++        start = ROUNDDOWN(try.start + try.arch.headroom, align);
++        if ( start > try.start )
++        {
++            /* Free (part of) and reduce headroom. */
++            try.arch.headroom -= start - try.start;
++            try.size          -= start - try.start;
++            try.start          = start;
++        }
++    }
++
++    /* Free unused headroom, if any. */
++    if ( try.start > initrd->start )
++    {
++        init_domheap_pages(initrd->start, try.start);
++        *initrd = try;
++    }
++
++    rc = pvh_map_initrd(d, initrd, *blob_start, get_order_from_bytes(align));
++    if ( rc )
++    {
++        printk("%pd: failed to map initrd @ %#lx: %d\n", d, *blob_start, rc);
++        return;
++    }
++
++    rc = assign_pages(maddr_to_page(initrd->start),
++                      PFN_UP(initrd->size), d, dom0_memflags);
++    if ( rc )
++        panic("%pd: cannot assign initrd RAM: %d\n", d, rc);
++
++    mod->paddr = *blob_start + initrd->arch.headroom;
++    *blob_end  = *blob_start + initrd->size;
++    initrd->arch.released = true;
++}
++
  static int __init pvh_load_kernel(
      const struct boot_domain *bd,
      struct elf_binary *elf,
--    paddr_t *start_info_addr)
-+    paddr_t *start_info_addr,
-+    struct rangeset *ram)
++    struct hvm_modlist_entry *mod,
+     paddr_t *start_info_addr,
+     struct rangeset *ram)
  {
-     struct domain *d = bd->d;
-     struct boot_module *initrd = bd->initrd;
-@@ -778,8 +855,13 @@ static int __init pvh_load_kernel(
- 
-     extra_space += elf_round_up(elf, cmdline_len);
- 
--    last_addr = find_memory(d, elf, extra_space);
--    if ( last_addr == INVALID_PADDR )
-+    /*
-+     * While not written down anywhere, 64-bit Linux requires at least mod to
-+     * live below 1Gb (mapped by the first L3 entry of the direct map).  32-bit
-+     * Linux may map more, but defaults to mapping only 1Gb.
-+     */
-+    if ( pvh_steal_ram(ram, PAGE_ALIGN(extra_space), PAGE_SIZE, GB(1),
-+                       &last_addr, NULL) )
-     {
-         printk("Unable to find a memory region to load initrd and metadata\n");
-         return -ENOMEM;
-@@ -922,7 +1004,10 @@ static int __init cf_check acpi_set_intr
-     return 0;
- }
- 
--static int __init pvh_setup_acpi_madt(struct domain *d, paddr_t *addr)
-+static int __init pvh_setup_acpi_madt(
-+    struct domain *d,
-+    struct rangeset *ram,
-+    paddr_t *addr)
- {
-     struct acpi_table_madt *madt;
-     struct acpi_table_header *table;
-@@ -946,15 +1031,17 @@ static int __init pvh_setup_acpi_madt(st
- 
-     if ( !*addr )
-     {
-+        paddr_t end;
-+
-         /* Reserve space to place the new MADT in guest memory space. */
--        if ( pvh_steal_ram(d, size, 0, GB(4), addr) )
-+        if ( pvh_steal_ram(ram, size, 0, GB(4), addr, &end) )
-         {
-             printk("%pd: unable to steal guest RAM for MADT\n", d);
-             return -ENOMEM;
-         }
- 
-         /* Mark this region as E820_ACPI. */
--        if ( pvh_add_mem_range(d, *addr, *addr + size, E820_ACPI) )
-+        if ( pvh_add_mem_range(d, *addr, end, E820_ACPI, true) )
-             printk("%pd: unable to add MADT region to memory map\n", d);
- 
-         return 0;
-@@ -1102,8 +1189,11 @@ static bool __init pvh_acpi_xsdt_table_a
-             strncmp(sig, ACPI_SIG_FACS, ACPI_NAME_SIZE));
- }
- 
--static int __init pvh_setup_acpi_xsdt(struct domain *d, paddr_t madt_addr,
--                                      paddr_t *addr)
-+static int __init pvh_setup_acpi_xsdt(
-+    struct domain *d,
-+    struct rangeset *ram,
-+    paddr_t madt_addr,
-+    paddr_t *addr)
- {
-     struct acpi_table_xsdt *xsdt;
-     struct acpi_table_header *table;
-@@ -1138,15 +1228,17 @@ static int __init pvh_setup_acpi_xsdt(st
- 
-     if ( !*addr )
-     {
-+        paddr_t end;
-+
-         /* Reserve space to place the new XSDT in guest memory space. */
--        if ( pvh_steal_ram(d, size, 0, GB(4), addr) )
-+        if ( pvh_steal_ram(ram, size, 0, GB(4), addr, &end) )
-         {
-             printk("%pd: unable to find guest RAM for XSDT\n", d);
-             return -ENOMEM;
-         }
- 
-         /* Mark this region as E820_ACPI. */
--        if ( pvh_add_mem_range(d, *addr, *addr + size, E820_ACPI) )
-+        if ( pvh_add_mem_range(d, *addr, end, E820_ACPI, true) )
-             printk("%pd: unable to add XSDT region to memory map\n", d);
- 
-         return 0;
-@@ -1238,9 +1330,11 @@ struct acpi_info {
- 
- static int __init pvh_place_acpi(
-     struct domain *d,
--    struct acpi_info *info)
-+    struct acpi_info *info,
-+    struct rangeset *ram)
- {
-     unsigned int i;
-+    paddr_t end;
+@@ -809,9 +942,8 @@ static int __init pvh_load_kernel(
+     size_t cmdline_len = bd->cmdline ? strlen(bd->cmdline) + 1 : 0;
+     const char *initrd_cmdline = NULL;
+     size_t extra_space;
+-    paddr_t last_addr;
++    paddr_t last_addr, initrd_start = 0;
+     struct hvm_start_info start_info = { 0 };
+-    struct hvm_modlist_entry mod = { 0 };
+     struct vcpu *v = d->vcpu[0];
      int rc;
  
-     /* Scan top-level tables and add their regions to the guest memory map. */
-@@ -1258,7 +1352,7 @@ static int __init pvh_place_acpi(
-         if ( strncmp(sig, ACPI_SIG_MADT, ACPI_NAME_SIZE)
-              ? pvh_acpi_table_allowed(sig, addr, size)
-              : !acpi_memory_banned(addr, size) )
--             pvh_add_mem_range(d, addr, addr + size, E820_ACPI);
-+             pvh_add_mem_range(d, addr, addr + size, E820_ACPI, false);
-     }
+@@ -828,15 +960,18 @@ static int __init pvh_load_kernel(
  
-     /* Identity map ACPI e820 regions. */
-@@ -1294,25 +1388,23 @@ static int __init pvh_place_acpi(
-         }
-     }
+     /*
+      * Find a RAM region big enough (and that doesn't overlap with the loaded
+-     * kernel) in order to load the initrd and the metadata. Note it could be
+-     * split into smaller allocations, done as a single region in order to
+-     * simplify it.
++     * kernel) in order to load the initrd (if it wasn't mapped directly above)
++     * and the metadata.  Note it could be split into smaller allocations, done
++     * as a single region in order to simplify it.
+      */
+     extra_space = sizeof(start_info);
  
--    rc = pvh_setup_acpi_madt(d, &info->madt);
-+    rc = pvh_setup_acpi_madt(d, ram, &info->madt);
-     if ( rc )
-         return rc;
- 
--    rc = pvh_setup_acpi_xsdt(d, info->madt, &info->xsdt);
-+    rc = pvh_setup_acpi_xsdt(d, ram, info->madt, &info->xsdt);
-     if ( rc )
-         return rc;
- 
--    if ( pvh_steal_ram(d, sizeof(struct acpi_table_rsdp), 0, GB(4),
--                       &info->rsdp) )
-+    if ( pvh_steal_ram(ram, sizeof(struct acpi_table_rsdp), 0, GB(4),
-+                       &info->rsdp, &end) )
+     if ( initrd )
      {
-         printk("%pd: unable to allocate guest RAM for RSDP\n", d);
-         return -ENOMEM;
+-        size_t initrd_space = elf_round_up(elf, initrd_len);
++        size_t initrd_space = 0;
++
++        if ( !mod->paddr )
++            initrd_space = elf_round_up(elf, initrd_len);
+ 
+         if ( initrd->arch.cmdline_pa )
+         {
+@@ -848,7 +983,9 @@ static int __init pvh_load_kernel(
+             initrd_space += strlen(initrd_cmdline) + 1;
+ 
+         if ( initrd_space )
+-            extra_space += ROUNDUP(initrd_space, PAGE_SIZE) + sizeof(mod);
++            extra_space += ROUNDUP(initrd_space, PAGE_SIZE) + sizeof(*mod);
++        else if ( mod->paddr )
++            extra_space += sizeof(*mod);
+         else
+             initrd = NULL;
+     }
+@@ -860,14 +997,16 @@ static int __init pvh_load_kernel(
+      * live below 1Gb (mapped by the first L3 entry of the direct map).  32-bit
+      * Linux may map more, but defaults to mapping only 1Gb.
+      */
+-    if ( pvh_steal_ram(ram, PAGE_ALIGN(extra_space), PAGE_SIZE, GB(1),
+-                       &last_addr, NULL) )
++    rc = pvh_steal_ram(ram, PAGE_ALIGN(extra_space), PAGE_SIZE, GB(1),
++                       &last_addr, NULL);
++    if ( rc )
+     {
+-        printk("Unable to find a memory region to load initrd and metadata\n");
+-        return -ENOMEM;
++        printk("%pd: unable to find a memory region to %s metadata: %d\n",
++               d, mod->paddr ? "put" : "load initrd and", rc);
++        return rc;
      }
  
-     /* Mark this region as E820_ACPI. */
--    if ( pvh_add_mem_range(d, info->rsdp,
--                           info->rsdp + sizeof(struct acpi_table_rsdp),
--                           E820_ACPI) )
-+    if ( pvh_add_mem_range(d, info->rsdp, end, E820_ACPI, true) )
-         printk("%pd: unable to add RSDP region to memory map\n", d);
+-    if ( initrd != NULL )
++    if ( initrd && !mod->paddr )
+     {
+         rc = hvm_copy_to_guest_phys(last_addr,
+                                     __va(initrd->start + initrd->arch.headroom),
+@@ -878,28 +1017,29 @@ static int __init pvh_load_kernel(
+             return rc;
+         }
  
-     return 0;
-@@ -1330,11 +1422,11 @@ static int __init pvh_setup_acpi(
-         .length = sizeof(rsdp),
-     };
+-        mod.paddr = last_addr;
+-        mod.size = initrd_len;
++        initrd_start = last_addr;
+         last_addr += elf_round_up(elf, initrd_len);
+-        if ( initrd_cmdline )
+-        {
+-            size_t len = strlen(initrd_cmdline) + 1;
+-
+-            rc = hvm_copy_to_guest_phys(last_addr, initrd_cmdline, len, v);
+-            if ( rc )
+-            {
+-                printk("Unable to copy module command line\n");
+-                return rc;
+-            }
+-            mod.cmdline_paddr = last_addr;
+-            last_addr += len;
+-        }
+-        last_addr = ROUNDUP(last_addr, PAGE_SIZE);
+     }
  
--    rc = pvh_setup_acpi_madt(d, &info->madt);
-+    rc = pvh_setup_acpi_madt(d, NULL, &info->madt);
+     /* Free temporary buffers. */
+     free_boot_modules();
+ 
++    if ( initrd_cmdline )
++    {
++        size_t len = strlen(initrd_cmdline) + 1;
++
++        rc = hvm_copy_to_guest_phys(last_addr, initrd_cmdline, len, v);
++        if ( rc )
++        {
++            printk("%pd: unable to copy module command line\n", d);
++            return rc;
++        }
++        mod->cmdline_paddr = last_addr;
++        last_addr = ROUNDUP(last_addr + len, PAGE_SIZE);
++    }
++    else if ( initrd && !mod->paddr )
++        last_addr = ROUNDUP(last_addr, PAGE_SIZE);
++
+     rc = hvm_copy_to_guest_phys(last_addr, bd->cmdline, cmdline_len, v);
      if ( rc )
-         return rc;
+     {
+@@ -917,7 +1057,10 @@ static int __init pvh_load_kernel(
  
--    rc = pvh_setup_acpi_xsdt(d, info->madt, &info->xsdt);
-+    rc = pvh_setup_acpi_xsdt(d, NULL, info->madt, &info->xsdt);
-     if ( rc )
-         return rc;
+     if ( initrd != NULL )
+     {
+-        rc = hvm_copy_to_guest_phys(last_addr, &mod, sizeof(mod), v);
++        if ( !mod->paddr )
++            mod->paddr = initrd_start;
++
++        rc = hvm_copy_to_guest_phys(last_addr, mod, sizeof(*mod), v);
+         if ( rc )
+         {
+             printk("Unable to copy guest modules\n");
+@@ -925,7 +1068,7 @@ static int __init pvh_load_kernel(
+         }
+         start_info.modlist_paddr = last_addr;
+         start_info.nr_modules = 1;
+-        last_addr += sizeof(mod);
++        last_addr += sizeof(*mod);
+     }
  
-@@ -1413,6 +1505,7 @@ int __init dom0_construct_pvh(const stru
-     struct elf_binary elf;
-     struct e820entry *orig_e820;
-     unsigned int nr_orig_e820;
-+    struct rangeset *ram;
+     start_info.magic = XEN_HVM_START_MAGIC_VALUE;
+@@ -1508,6 +1651,8 @@ int __init dom0_construct_pvh(const stru
+     struct rangeset *ram;
      struct acpi_info acpi = {};
      struct vmx_info vmx = {};
++    struct hvm_modlist_entry initrd = {};
++    paddr_t blob_start, blob_end;
      int rc;
-@@ -1469,7 +1562,14 @@ int __init dom0_construct_pvh(const stru
-         return rc;
-     }
  
--    rc = pvh_place_acpi(d, &acpi);
-+    ram = make_ram_rangeset(d, &elf);
-+    if ( !ram )
-+    {
-+        printk("%pd: not enough memory to track RAM\n", d);
-+        return -ENOMEM;
-+    }
-+
-+    rc = pvh_place_acpi(d, &acpi, ram);
-     if ( rc )
-     {
-         printk("%pd: failed to place ACPI tables: %d\n", d, rc);
-@@ -1487,7 +1587,7 @@ int __init dom0_construct_pvh(const stru
-           */
-          !vmx_unrestricted_guest(d->vcpu[0]) )
-     {
--        rc = pvh_place_vmx_realmode_helpers(d, &vmx);
-+        rc = pvh_place_vmx_realmode_helpers(d, ram, &vmx);
-         if ( rc )
+     printk(XENLOG_INFO "*** Building a PVH Dom%d ***\n", d->domain_id);
+@@ -1592,7 +1737,10 @@ int __init dom0_construct_pvh(const stru
              return rc;
      }
-@@ -1501,13 +1601,15 @@ int __init dom0_construct_pvh(const stru
+ 
+-    rc = pvh_populate_p2m(d, orig_e820, nr_orig_e820);
++    pvh_place_initrd(bd, &elf, ram, &initrd, &blob_start, &blob_end);
++
++    rc = pvh_populate_p2m(d, orig_e820, nr_orig_e820,
++                          PFN_DOWN(blob_start), PFN_UP(blob_end));
+     if ( rc )
+     {
+         printk("Failed to setup Dom0 physical memory map\n");
+@@ -1601,7 +1749,7 @@ int __init dom0_construct_pvh(const stru
  
      xvfree(orig_e820);
  
--    rc = pvh_load_kernel(bd, &elf, &start_info);
-+    rc = pvh_load_kernel(bd, &elf, &start_info, ram);
+-    rc = pvh_load_kernel(bd, &elf, &start_info, ram);
++    rc = pvh_load_kernel(bd, &elf, &initrd, &start_info, ram);
      if ( rc )
      {
          printk("Failed to load Dom0 kernel\n");
-         return rc;
-     }
- 
-+    rangeset_destroy(ram);
-+
-     rc = pvh_setup_cpus(d, entry, start_info);
-     if ( rc )
-     {
 
 
