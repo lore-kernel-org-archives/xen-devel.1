@@ -2,45 +2,51 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5EC4F606E560
-	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 15:56:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10087606A60C
+	for <xen-devel@archiver.kernel.org>; Thu,  5 Nov 2026 15:59:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Q7qtQ5+X
-Received: from list by lists.xenproject.org with outflank-mailman.1475183.1682054 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=HuKUy/EO
+Received: from list by lists.xenproject.org with outflank-mailman.1475193.1682064 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOzpQ-0007JO-TP; Thu, 05 Nov 2026 15:56:40 +0000
+	id 1xOzsA-0008J3-9H; Thu, 05 Nov 2026 15:59:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1475183.1682054; Thu, 05 Nov 2026 15:56:40 +0000
+Received: by outflank-mailman (output) from mailman id 1475193.1682064; Thu, 05 Nov 2026 15:59:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xOzpQ-0007JH-Qh; Thu, 05 Nov 2026 15:56:40 +0000
-Received: by outflank-mailman (input) for mailman id 1475183;
- Thu, 05 Nov 2026 15:56:38 +0000
+	id 1xOzsA-0008Iw-6T; Thu, 05 Nov 2026 15:59:30 +0000
+Received: by outflank-mailman (input) for mailman id 1475193;
+ Thu, 05 Nov 2026 15:59:28 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xOzpO-0007JB-Ub
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 15:56:38 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1ac6fbbf5000403d@swg.vates.tech>)
+ id 1xOzs8-0008Iq-3u
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 15:59:28 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xOzpN-004OBc-Vn
- for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 16:56:37 +0100
-Received: from [10.42.69.5] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6aeca717-e002-0a2a0a5209dd-0a2a4505b582-46
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 16:56:37 +0100
-Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6aeca735-4cb1-0a2a45050019-d1558032e046-3
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 16:56:37 +0100
-Received: by mail-wm1-f50.google.com with SMTP id
- 5b1f17b1804b1-4a3517554f7so17515135e9.2
- for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 07:56:37 -0800 (PST)
-Received: from [192.168.1.6] (user-109-243-65-71.play-internet.pl.
- [109.243.65.71]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4b57373f7f1sm85043575e9.15.2026.11.05.07.56.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 05 Nov 2026 07:56:36 -0800 (PST)
+ id 1xOzs7-004Oeo-Gm
+ for xen-devel@lists.xenproject.org; Thu, 05 Nov 2026 16:59:27 +0100
+Received: from [10.42.69.11] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1ac6fbbf5000403d@swg.vates.tech>)
+ id 6aeca7bd-bab6-0a2a0a5309dd-0a2a450be546-34
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 16:59:27 +0100
+Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1ac6fbbf5000403d@swg.vates.tech>)
+ id 6aeca7df-b7e8-0a2a450b0019-b9ff1c129aa3-3
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 16:59:27 +0100
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a1ac6fbbf5000403d.001 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Thu, 05 Nov 2026 15:59:26 +0000
+Received: from [192.168.1.52] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
+ [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 7D06B823F4
+ for <xen-devel@lists.xenproject.org>; Thu,  5 Nov 2026 16:59:25 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,132 +55,121 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793894197; x=1794498997; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=KKA1X1TpOQEUg5qbNgjqdXJevgFe79vEWtHeQL6Wkrc=;
-        b=Q7qtQ5+XQNUU4uho2hohKN6K0WT1DPU3yHVQZ88YK0IX/+iwu+dsYiVGX6N9yTngJK
-         KmxNMRwTRG/G15YdLfxf3ETIJS2vlgz8lMrLKbAan9/8EM245mH4lX97wePtejI0dEcC
-         bXvVmQqgd2LVDV7VkgEll+6BE1zEzkIqhDi8/j2hJDifNpryUBXEkyGr8DjtKgLXA9B6
-         kk5dlOyTXvbQ3ioznn4RR/TA77sso3vCvaFu1ShO8MxOpEaq01xMMiKajx7/rJU3CIH1
-         4WdoUX2nJ9VsaJkBkJw/vm0RKdy5IWXo9VF5gB4CJ2ERFAXc5+imyGKer1i0F42akYaL
-         ByqA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793894197; x=1794498997;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=KKA1X1TpOQEUg5qbNgjqdXJevgFe79vEWtHeQL6Wkrc=;
-        b=a7dX0y8evVBUyCOlPJW8YEzZVzO/XkEgKKqIMfjqnk4dkLN7PQphxkycn69XB7bBQZ
-         O1dxajOk49zBEUWspje5Cd3mew0PDePwkhvaC/S4JJIct/p2do6efGFgiazBwQURGa1v
-         L2KbZ16oAe6y+F2tkuLDbZWFprkb89l9y9uFgKqBR8eXOfzmo1mzA7IEts2xso0isikG
-         jQa07INgyoFKFlOZ+F6jjZc2GffkxZptMZLBj2t3BxiEHL5fk6s5ixniXz7mqnyAgdsI
-         x6GOHpF0HLVGudANm59bTDYhPKZhsU+H4N3/WvC+WftFMaBxBJY/2M/OjIJnTvgFuyBP
-         5m+Q==
-X-Forwarded-Encrypted: i=1; AKwUvBza9c+zFOs8ShRCZBpyuXqHNOiMdMIgNAiEqQBT/D6RJFI9U51hyEivwo2wOSTwMdyRav8SY4DT+SY=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z+kNwPTJEbAArfDFEZ7r6ZXULiNZ1uL5BQ+AGj15c2j9MbliCwM
-	kzt++qYzXiIBPOffsQnV7yx/UdIG1JMgvv2axvb6+4cB6fOKtlW0ckS1
-X-Gm-Gg: AYBFou1KLHGumqebMX2Hp0rKpBQrUzaEDXuDn89wfrhWg+QNmhvpDjkoq+xaZ0P4V8y
-	6l+YePMboTOQinZZRsJNsWUEG5sND2cG9jTzJ3q+7F4VSC+CghPRCTcl3/NRKhn+LyEYmDa+i9F
-	0BcP9AHunDajm5W69/pf1nQ7/DEs26kahfPx7haFiieTIYtAMOdiZS3yVQj0CUilpahE/dd/D8K
-	CW8l/eWuVUZ5436UytR1n+y1xWkIomfG8Z9dGx4GdKAqnpqwH5XeMyQI8ce60NQhfkmLrw+OX43
-	dIOoZpI6dE47W9OTiT6HeVYM2iqmt5c0Ln5AJn1hmnRNVFaUDUgcmPOFn3sMKmEdZJsb04tJPdz
-	FdUlS4upNxaDafwPY8/UdWggloato8eUw65RIyiDSusBW4ptXOdd4t0HhvHPFGqwBLwYGdX5eDF
-	/1dYexxhS6z+VNPQ4sA++wOjKVW6Ux/LjF79l0x3F3BEi+MnAhCz2wE1a5ZC6m69YSuFXl6Hmi8
-	uG9z+ycUh2QrdIgwFprGJmxU7Exbcer/IANNrtvLts5o9Gh20sfMzbf/NJ7zNaPnThJ7bIhG8rX
-	CYBSJDr/VzUq5vytWbscgk3CCxGO3bJ4m7c85CB3s63cZRkb6Euh045mcGBZ374PBTedndpsJ9A
-	U
-X-Received: by 2002:a05:600c:8b2c:b0:4a2:5267:3cd4 with SMTP id 5b1f17b1804b1-4ac151a8c26mr459694345e9.3.1793894197241;
-        Thu, 05 Nov 2026 07:56:37 -0800 (PST)
-Message-ID: <8c2b7338-e65b-4d14-af62-9f300e2becb5@gmail.com>
-Date: Thu, 5 Nov 2026 16:56:36 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=v3pNtB1EAJfftu/oN6OZwk6BrgOe3HU1/3qAGLaEzxE=;
+ h=from:subject:date:message-id:to:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
+ b=HuKUy/EO0q7/4Fo5maXmUtKOK6F4QdRpUrHoSHk93wzRc3g5+1Ivc2ojuyQhulSByJa2WeOK/
+ 7rl01yOvWk6mAD9Uh0F6/76RezJUQTrlrQP9o8apMgOAqaBY2zbB6wj/U+m86k45fwuJIm6yh7N
+ wsrM29sdmzTdrE9Tq0L0rTUzPE1OAY57KPkXkhcj3NnIlTGGDteLz+1fFyiJ8qY2KRpE/0rbL3w
+ I7siTsLtcSuYZHytdOUaqHgPgEj9CdS6VYQdRgLqmRDsqYrN9yuauO0M/3IsZuUCb30bxSmhHCM
+ KgQR0yBsV5uf7YTYDzrNUO9ovWGw4WG4mMAhxN3uzhGA==
+X-Zone-Loop: acf0734f203e638d955b6a48e111b941ee50e486ffe9
+x-campaign-type: default
+x-transaction-id: 4676f543-2aa1-4a67-a186-ef04117629bf
+x-swg-uid: 01-e5aa996b-b282-4646-8008-36a7e8831cde
+X-Mailer: Sweego
+Message-ID:
+ <1793894366.8631fc262581453bbf619ec5b2062170.1a1ac6fbbf5000403d@vates.tech>
+x-swg-bid: 1793894366.8631fc262581453bbf619ec5b2062170.1a1ac6fbbf5000403d
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+Date: Thu, 5 Nov 2026 16:59:25 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] xen/riscv: align header inclusion guards with
- CODING_STYLE
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Connor Davis <connojdavis@gmail.com>, Tamas K Lengyel <tamas@tklengyel.com>,
- xen-devel@lists.xenproject.org
-References: <20261105150336.25751-1-oleksii.kurochko@gmail.com>
- <573590f0-1a94-4113-a76c-3ae644bebdff@suse.com>
+Subject: Re: [PATCH v3 30/39] xen/riscv: implement APLIC-IMSIC-hart sync
+ barrier for vCPU migration
+To: xen-devel@lists.xenproject.org
+References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
+ <2075cb10e5f6df787b29f2f087632c82b787a007.1790779209.git.oleksii.kurochko@gmail.com>
+ <c77101fe-2505-4cdb-8520-52f92a1c668d@gmail.com>
+ <1792763490.8631fc262581453bbf619ec5b2062170.1a16907f005000f79f@vates.tech>
+ <cf206b92-88df-4f51-b10b-960e0c141d9e@gmail.com>
+ <1793892730.8631fc262581453bbf619ec5b2062170.1a1ac56c714000403d@vates.tech>
+ <1ff766a5-3d49-45fb-9c46-d781cfaf4b6d@gmail.com>
+From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
 Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <573590f0-1a94-4113-a76c-3ae644bebdff@suse.com>
+Autocrypt: addr=baptiste.le-duc@vates.tech; keydata=
+ xsBNBGoPSX8BCADSuTikqW3FD4mscQugY1thRaKlIhcJ2G9YCWYXAlp+xosvTlzfIftOZZim
+ 750MLvyKtLPkQzB6TZtFZBiexSraaF/MdDKRTT5DcVa3r7ZnHgqMclWlPa4ioysS4yFcJanL
+ cyNOT7HUFvIdirMMqiViedfYtS0GORPBBPVISD6ClMz3ecHIxqllfq9CHYQn4amKEfHmh6tm
+ Rufo4Gjl6x8cUFZZlRQf+aCmUzdSPA0P5u3sueYH1uEz4w/jbD53MlKqzCvxUeOsfS2swTQA
+ 6mS9jIgOjNadpUTOzKfDHMgFirtG+HFpm45Nwp6KQizxgDVOfTnOfVHm5Gwqm3ETl9y5ABEB
+ AAHNPEJhcHRpc3RlIExlIER1YyAoVmF0ZXMgWXViaWtleSkgPGJhcHRpc3RlLmxlLWR1Y0B2
+ YXRlcy50ZWNoPsLAjgQTAQoAOBYhBGiSJ6HgW88MgT/gfu2Cu2XL9M6QBQJqD0l/AhsDBQsJ
+ CAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEO2Cu2XL9M6QuMcH/ihiy/Nrxp919AmY0ENnc0NK
+ r/2LDvW/hrX4FfbpxAmrGmQ7MU1aQTk0JDbfcsG8OYH6wO5sqnXb1gz50YrEdpfVSbHz5YTZ
+ EhDIxE4g7NrvJZh3Qc0m0CAyjYTNHen7J6olVaCMjrOH7uRHUYZ7Pl3am9mZosfLmez/aWJO
+ a6ihQxBXHI75brlk1teIURkep2kP7P0Flmfl4cA//saREoTF7GXCtjOSQk/xg8PP0Sswqp5G
+ TdJptn3FQn6lAzfz0eFSYqkaoX2c2k1MDa7o+UX9cfGPL8ybMKnYkasLxck6eOWGJWf+YTrm
+ ga/r0kBaftmqNDgt5nI2jNTDwZcT9g3OwE0Eag9JfwEIAM6IWbuBSvz+erv27oGDDpo8M6Fp
+ dGUvft7v+WceHUfxiXpYFx9qgIU6XGy6y+3lJMAvNcltS8DuhioqMlfKRSYGKZlpliY65dNP
+ 557IuM4ctVJ+I9CVclvv9eahARQKgF5auLJAAlvGSmU+ufNvlwTUmLIRcrPviTmB6X5jJYc+
+ fiNeyI0HcsgcN21C0r62tUCypuZ+vgEJXw2bx1V8mVGZKxdGJPh58QF6kRK+xmd4kEComLGV
+ BeM6BcVOtEjDcGNC0tLhXb0p9g1Ys55iA8sd6s4WacyolW2J6rwmcOkjiWexWw1caYgIWAV1
+ 004M3gwUaOz0dGq2i7HQ0AiVfVkAEQEAAcLAdgQYAQoAIBYhBGiSJ6HgW88MgT/gfu2Cu2XL
+ 9M6QBQJqD0l/AhsMAAoJEO2Cu2XL9M6QovYH/RjstyL5o/V5K74ylBtz0j5t3pLX5JKbwApi
+ 656rGgDdqElImyvvZppNMl/mgHNzvxmfFAhJXnSX9f1fqVEQKOGEhLUastnl/ssBiE5x7btM
+ V0GAffxXbXJZbVv4b/DI+gVrOPc2YXlVwruapvTZNtD3hqPrkjrmq5WTtGR2loIVSe62hmh0
+ BGD2Fy79b/hYWyBqhayPBEjwGW75u4/yn+Yqy1PgG3hIcvg7GSuT3akhHZSB2Mbguzcoyf9Q
+ DJl6t33JxPRkkNrEdkPPmRlQCTSiUkVjKqMDF3jlINWsJ5t4jKFsNF91ksdw7aQgiX+tQIpE
+ ugMC1NuNi5dDGip66bw=
+In-Reply-To: <1ff766a5-3d49-45fb-9c46-d781cfaf4b6d@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c201ff/1793894197-726B52A1-DEF470ED/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 2015
-X-Spam-Status: No, score=-14.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+Content-Transfer-Encoding: 8bit
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1793894365557
+X-purgate-ID: tlsNG-42698a/1793894367-AAEDE9EA-8C363F8C/0/0
+X-purgate-type: clean
+X-purgate-size: 1402
+X-Spam-Status: No, score=-4.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FORGED_MUA_MOZILLA,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 
 
-On 11/5/26 4:44 PM, Jan Beulich wrote:
-> On 05.11.2026 16:03, Oleksii Kurochko wrote:
->> Commit 7abea85c9f12 ("CODING_STYLE: Updated header guard
->> recommendations") changed the recommended naming of inclusion guards
->> for arch-specific headers to <arch>_<something>_H. Most RISC-V headers
->> still use the ASM__RISCV__<FILENAME>_H form required by the previous
->> rules, and a few use ASM_RISCV_<FILENAME>_H, which follows neither.
+On 11/5/26 4:51 PM, Oleksii Kurochko wrote:
+> 
+> 
+> On 11/5/26 4:32 PM, Baptiste Le Duc wrote:
+>> On 2026-11-05 15:21 +0100, Oleksii Kurochko wrote:
+>>> [ ... 348 lines skipped ... ]
+>>>> LGTM, but I wonder why, as I said in the original patch, sync_id is
+>>>> really needed.
+>>>>
+>>>
+>>> I think that I am not understand your response. Could you please
+>>> re-phrase it?
+>> I'm questionning the need of the sync_id field as it will always be
+>> equal to imsic_cfg.nr_ids, couldn't we drop it?
 >>
->> Rename the guards to RISCV_<SOMETHING>_H. While doing so, also fix two
->> guards which don't match their file names: extable.h used
->> ASM__RISCV__ASM_EXTABLE_H and intc.h used the misspelt
->> ASM__RISCV__INTERRUPT_CONTOLLER_H. For riscv_encoding.h, don't repeat
->> the architecture name and use RISCV_ENCODING_H.
 > 
-> I'd recommend against that. If you want this tag, renamed the file as
-> well. Otherwise stick to the naming rules.
+> It's equal to nr_ids by choice rather than by necessity: which identity
+> gets reserved is decided in a single place, imsic_parse_node(), and all
+> the users (the genmsi write, the pending bit the barrier spins on, the
+> limit on the APLIC sources and the ASSERT() in imsic_irq_enable()) refer
+> to it by its role rather than as "the last identity".
 > 
->> No functional change.
->>
->> Assisted-by: Claude-Code:claude-opus-5-5
->> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+> Basically if one day someone will decide to come up with EIID allocator 
+> instead of using static allocation then it will be harder to find a 
+> places where to change.
 > 
-> With the above (and possibly also the below) adjustment(s)
-> Acked-by: Jan Beulich <jbeulich@suse.com>
-> Which way to make the adjustment you will need to indicate. Changing the
-> tag identifier can be done while committing. If you want to rename the
-> file, I could drop that one hunk from here while committing. Please
-> indicate intentions.
-
-I think I prefer then to follow the naming rules and name tag identifier 
-as RISCV_RISCV_ENCODING_H.
+> So yes, it could be drooped but at the moment I think it is useful to 
+> have separate field or ,at least, as an option in asm/imsic.h:
 > 
->> --- a/xen/arch/riscv/include/asm/vsbi.h
->> +++ b/xen/arch/riscv/include/asm/vsbi.h
->> @@ -1,7 +1,7 @@
->>   /* SPDX-License-Identifier:  GPL-2.0-only */
->>   
->> -#ifndef ASM_RISCV_VSBI_H
->> -#define ASM_RISCV_VSBI_H
->> +#ifndef RISCV_VSBI_H
->> +#define RISCV_VSBI_H
->>   
->>   struct cpu_user_regs;
->>   
-> 
-> I think at this occasion the #endif also wants to gain the usual comment.
+> static inline unsigned int imsic_sync_id(const struct imsic_config *cfg)
+> {
+>      return cfg->nr_ids;
+> }
 
-Oh, missed that.
+I prefer this as it would save space in imsic_config struct.
 
-I will appreciate if it could be done during committing.
+> ~ Oleksii
 
-Thanks a lot!
-
-~ Oleksii
 
