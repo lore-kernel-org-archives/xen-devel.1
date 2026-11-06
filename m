@@ -2,46 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4F284606A326
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A3671606A328
 	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2026 08:09:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=edera.dev header.i=@edera.dev header.a=rsa-sha256 header.s=google header.b=k/JwLrTU
-Received: from list by lists.xenproject.org with outflank-mailman.1476312.1682452 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=edera.dev header.i=@edera.dev header.a=rsa-sha256 header.s=google header.b=De2RiAai
+Received: from list by lists.xenproject.org with outflank-mailman.1476314.1682469 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xPF0d-0007AN-Du; Fri, 06 Nov 2026 08:09:15 +0000
+	id 1xPF0i-0007bd-PW; Fri, 06 Nov 2026 08:09:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1476312.1682452; Fri, 06 Nov 2026 08:09:15 +0000
+Received: by outflank-mailman (output) from mailman id 1476314.1682469; Fri, 06 Nov 2026 08:09:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xPF0d-0007AG-9L; Fri, 06 Nov 2026 08:09:15 +0000
-Received: by outflank-mailman (input) for mailman id 1476312;
- Fri, 06 Nov 2026 08:09:13 +0000
+	id 1xPF0i-0007bT-MM; Fri, 06 Nov 2026 08:09:20 +0000
+Received: by outflank-mailman (input) for mailman id 1476314;
+ Fri, 06 Nov 2026 08:09:19 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <luca@edera.dev>) id 1xPF0b-00078z-HS
- for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 08:09:13 +0000
+ (envelope-from <luca@edera.dev>) id 1xPF0h-0007Zw-5k
+ for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 08:09:19 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xPF0a-000tIA-H5
- for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 09:09:12 +0100
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xPF0g-000tMz-J0
+ for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 09:09:18 +0100
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <luca@edera.dev>)
- id 6aed8b21-e002-0a2a0a5209dd-0a2a4508817c-38
- for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 09:09:12 +0100
-Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aed8b2a-8faa-0a2a0a5109dd-0a2a4509b500-10
+ for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 09:09:18 +0100
+Received: from [209.85.221.48] (helo=mail-wr1-f48.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <luca@edera.dev>)
- id 6aed8b28-f659-0a2a45080019-d1558034d881-3
- for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 09:09:12 +0100
-Received: by mail-wm1-f52.google.com with SMTP id
- 5b1f17b1804b1-4a210470b49so1991825e9.2
- for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 00:09:12 -0800 (PST)
+ id 6aed8b2e-be1a-0a2a45090019-d155dd30cd6a-3
+ for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 09:09:18 +0100
+Received: by mail-wr1-f48.google.com with SMTP id
+ ffacd0b85a97d-48dfc0421d9so338353f8f.1
+ for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 00:09:18 -0800 (PST)
 Received: from framework13.home ([2a01:e11:3:1ff0:831:b00b:e409:f875])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-492ff85585esm1534507f8f.5.2026.11.06.00.09.10
+ ffacd0b85a97d-492ff85585esm1534507f8f.5.2026.11.06.00.09.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Nov 2026 00:09:11 -0800 (PST)
+ Fri, 06 Nov 2026 00:09:17 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -50,44 +50,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=edera.dev header.i="@edera.dev" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=edera.dev header.i="@edera.dev" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=edera.dev; s=google; t=1793952552; x=1794557352; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=nYgjSx6ztXwWw8pUeZQnPzDV6xkhD2nykKrf2tut3DI=;
-        b=k/JwLrTUO2kSwTZeOhJQX4JQhL5K4PJDeKbQKWiIgbytE1NaTcmTYAvW1f9WpDBhgq
-         CNAoF2aXDBQ0TFGfW88LBXDlB14dopaGM3WinIdCZG/0zF7Ju+S/ZD948BH0oy0Is6zo
-         ZENQq7+i8ncFjoiJVrJzQx+rxBx9/rB7uYoSWSbQvHNKzCHcdmh3YKa2dTK8pLpEYxYt
-         fV/rZo1q6gGOdHK9gGaZ4kmprvM0tnbHrTknSkVUmhv86CjyIgxNbgnVV+Dlj3t7gE4d
-         vl+KbfhqHcuKuFXPY4pZUDvzKYxLGuxJi4q6E43M9u+8zr6u9LGcV3G8xW9zPcyNpnfv
-         Km3g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793952552; x=1794557352;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=edera.dev; s=google; t=1793952558; x=1794557358; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=nYgjSx6ztXwWw8pUeZQnPzDV6xkhD2nykKrf2tut3DI=;
-        b=aDe9wgyc5wtX2s/4tPQ8qZ0hrdl99cxMxe9XtT0xZVM2D9f4FRexXEB7D0UGddqFzS
-         L66VwD6e12QdcO1R0YSxZ4MxIRkOT+sVq5flfsgiueuPhU5+RrlRJxj/cmTsmbVw09eH
-         9EBlOVUitxKRrreVtnGK0JM9Y40Qc2n+NzcEghauSKlxoes3GXHy/E8fQdIG7UZpnrQY
-         m2n6YJqopbUZ/frQc4/YYbQIk+D3cDBRDnm0NfS5do+CA8EKG0HR5AICMjZZmYL1slkP
-         lMIqhTBvilhH2oIwtUiLjUK0QyYhOYasRDoGWWaYvj0t5ldO/KtPL3QVYQTqfo1/Fbxi
-         LFAg==
-X-Gm-Message-State: APuU4Z/QNEPqieOs2Sst92bDQOfiEkaErBPqGQfNpqcs08MQ+Kn7PDj/
-	9eQJRpFvZmDbfVOZY3fBNxkO84Ofn5AUWiEkV/tt/NqRYtSFftYpxn6Gd81YAHDvRbWFWlQPp3h
-	EvfrbNsI=
-X-Gm-Gg: AYBFou2UTT+0gYsEliDcWhdRX2JIys1nGtHbDUXU0HT0fSx9UB/LRcl4Vu3OyBL7lM/
-	yH95hV6mUj6QwH7ICULSycuLoN8JVBe/Z01hUxRF6X6NBc6eQTGfHK90Py1MHl/J7TaQbMeQB93
-	gWFIWpQFALpjLnwu3/A+haj1dmIhkee6LF3uFiW4I/ikvv7pHMB8kOAohWDJ1Ryj+l2sQRoKnvh
-	CJqk7KfUQXc+fEvus4WCnVcCThu3mqRZOZSW6a7knhjTl+VsuVJG5VMlgd2ayWBX4VWm2rG5JiM
-	ik4/ihwwN2530NCQ8IRByZ3FLCrREa7yvIDxntTIJzFKHfqjpltteShn5oaJSUoKDKObaujc+Pc
-	jt8QHYrRy6AsYDV0/dafP/f+EL0++cRf96TPAiVVK80eTfqeHU9VtMbG98fdvNjREQQ7jw0mh2C
-	DvmwzmPg80iqVU9m9818EIUPIf285kkJkwwoPo6cbkyKUf1hl2BARy6ppgjoMxShNqBe7AJ8Bx7
-	HIxeEUctpy9Qi9o3HGN9uP/Y7rad188uxoN00c4rjlUcPpdWxEN344mESZBIcqQ4EjCWT10Giwa
-	WPOGqXh922uCTvwIfj1yuzH2EA==
-X-Received: by 2002:a05:600c:3ba5:b0:4b2:406b:f3bd with SMTP id 5b1f17b1804b1-4b6f74694a1mr23590085e9.23.1793952551715;
-        Fri, 06 Nov 2026 00:09:11 -0800 (PST)
+        bh=IEKAEyHBNOdxjTO8grr2RcMiadnMYmahTPI5OWv+TvE=;
+        b=De2RiAaiB2O14DOFE0sO/fUsQzGpTH+zjsT2Y811te+E9w6w141GKwDfPh2QWIHBdw
+         X0k/tDzWDwWzAcAR2eZ8LOR5TkTlfNgiDyvP9rzA/PWUKzpnliSyRq6Y/iRa5N76kajP
+         bDoWbs6nhsaCLd8ZBacVUxBnDOIOxZp+qOb+mWyGhaMadHtxb+mtXk0UbDtaXw4Z+zsA
+         7PZthVM0HAmn5Dz68Evv80PBMsHzT0MkHgWwWFSWVMwEFA6siEzjlgto0YA3asqqmldm
+         oVCGvLoat0O6NnmlsiRqnVC3K+Lipskr4wW9qHDUn0zk7dg4Lq814wAOigCvn+T+e1w/
+         IZVQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793952558; x=1794557358;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=IEKAEyHBNOdxjTO8grr2RcMiadnMYmahTPI5OWv+TvE=;
+        b=0Y00uN/LgLcjbo6TAsHLKEL37HqEEZy+iFDa8y5iKOHBt79apdOqTgfrEQNYeBQCYs
+         lwhSp26W4l7PATIpkpB2vsZFDJdafEgeCNA+0vDVHM/xme0fK8pQZj8A3RDkZdKKuiCE
+         6sRz/dO1S+V8lZttxsDrEWBpmGtarnU6gKm0Ra0WXWdRF97mO3XLuyPnXxscWIZ9+Yt9
+         zsJAjnYtuuPBMPiEevlMrwWKCcM2fX9qza8Rd2jWGeOwfoWGdbj6orW2W4siFKg977G6
+         boFGwityzmGD5MbgsHzYUM1AyzT2Am+KIesxXFMshqdexsd2gBPMGgtVReddJooIlHvN
+         wIpg==
+X-Gm-Message-State: APuU4Z+Tc1kBOwhKcbCUYf2jWxqSgh/S4fSg/zfH1QgAqZb52eM5HXPw
+	ZYv3MsHxVrs59YFIDvSWipCieF/AgQX1FtlPSnOa52hwhcdz9jwDd0MqsdZYQRjAgBUL8fJ/RWV
+	/J57pksc=
+X-Gm-Gg: AYBFou3iW5T4FxUs4eBfbu4lukaeGPE+rVRIDe6AGdAvGR3J7/KaXVXJYReR/fn5SBa
+	RDa9CgT+UDcCvabHen8bK46aLpi7Xl7Z5kNF7waCdEbaI2pKtgZ2jEITeuSGlJONCtHuFVz/y8L
+	s9FJ391Z7zXBLjp/b7lseaOaYm3kRMFkzdQr9MdmYYsxI8X8aY2WxmxjhpJV4NDGkKFlp/W8OLb
+	W81q2afTmnXaGvcDlVFlAyVYyX0lUwlAQozJM9NoYvE5Os8rnDoBKTg+mmCJbVGrQ1WqAO9T0Uc
+	rst/XyLctqn44uYysNKDDPWB+foLc/79anBkyr5FnfnLob8U6TNtx8xIhCV85g2nYU2r4CF+Aud
+	BmXGCIZB6zJKa5T639GIimmQMKbelw9G584gPULuZ+LJVE6APMz0ONE9dQA0Nzw/+oISpDXyGLs
+	EWo6/jfADb45tr0QNxTjqzzBvtmusj0JC4VFDrUDL5R4T8uWwAyzmJIyHAr+CHiD2H7ajxjFjQY
+	48JvxmVULmgw1ibLooV6gEsTyijLCpWPKd6Z5UUG3LfyLV6DuMqaW5zWhCMClWy1683Rdqtivdf
+	+VzPsxVwykJWNQLJNgB+UpIkgA==
+X-Received: by 2002:a05:6000:2dc2:b0:48d:db77:d124 with SMTP id ffacd0b85a97d-49273e5bcb5mr3324321f8f.6.1793952557946;
+        Fri, 06 Nov 2026 00:09:17 -0800 (PST)
 From: Luca Di Maio <luca@edera.dev>
 To: xen-devel@lists.xenproject.org
 Cc: Luca Di Maio <luca@edera.dev>,
@@ -100,121 +101,135 @@ Cc: Luca Di Maio <luca@edera.dev>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Alex Zenla <alex@edera.dev>,
-	Andres Rodriguez <andres@edera.dev>
-Subject: [PATCH v2 0/4] x86/HVM: batch the flushes of grant unmaps
-Date: Fri,  6 Nov 2026 09:08:50 +0100
-Message-ID: <20261106080859.2285309-1-luca@edera.dev>
+	Anthony PERARD <anthony.perard@vates.tech>
+Subject: [PATCH v2 2/4] IOMMU: record the flushes skipped under iommu_dont_flush_iotlb
+Date: Fri,  6 Nov 2026 09:08:52 +0100
+Message-ID: <20261106080859.2285309-3-luca@edera.dev>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20261106080859.2285309-1-luca@edera.dev>
+References: <20261106080859.2285309-1-luca@edera.dev>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1793952552-D574B87B-B54463BD/0/0
+X-purgate-ID: tlsNG-bad1c0/1793952558-BFAD0034-3315047D/0/0
 X-purgate-type: clean
-X-purgate-size: 4388
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-purgate-size: 4385
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi all,
+While iommu_dont_flush_iotlb is set, iommu_legacy_map(),
+iommu_legacy_unmap() and the shared-EPT path of ept_set_entry() skip
+their IOTLB flush and drop its range and flags, so a caller deferring
+the flush has to work out what to flush on its own.
 
-GNTTABOP_unmap_grant_ref already batches the TLB flushes of a PV
-caller: gnttab_unmap_grant_ref() unmaps up to 32 grants, flushes the
-TLBs once with gnttab_flush_tlb(), and only then releases the pages.
-gnttab_flush_tlb() does nothing for a translated caller, whose unmaps
-go through the p2m, and the p2m code flushes the guest TLBs and the
-IOTLB for every page instead. A PVH dom0 running netback pays both
-flushes for every page a domU transmits.
+Check the flag in iommu_iotlb_flush() instead, which all three call,
+and record what it skips in the per-CPU iommu_skipped_flush: the
+smallest range covering the skipped flushes, and their flags. No other
+caller of iommu_iotlb_flush() runs while the flag is set, and the code
+setting it clears it before its own flush. The next patch uses the
+record for grant unmaps.
 
-This series gives translated callers the same batching, for both
-flushes, before the pages are released. The IOTLB half has no PV
-counterpart: a PV dom0's IOMMU maps all of RAM by default, so its
-grant unmaps don't touch it. Patches 1 and 2 are preparatory, and
-patches 3 and 4 have the details.
+Assisted-by: Claude Code:claude-opus-5-5
+Signed-off-by: Luca Di Maio <luca@edera.dev>
 
-iperf3 between a PVH dom0 running netback and two PVH domUs:
-
-  machine:  c7i.metal-24xl, Xeon Platinum 8488C, 96 threads,
-            VT-d with shared EPT tables
-  dom0:     96 pinned vCPUs, 4 GiB, Debian 13, Linux 6.12
-  domUs:    8 vCPUs, 1 GiB, Linux 6.18, on a bridge
-  Xen:      staging at 9a6cc49b44, built with GCC 14.2
-  runs:     10 s, Gbit/s received, higher is better, 60 per row
-            from 4 boots of each build, interleaved
-  shown:    mean of the runs +/- their relative standard deviation
-
-                   base          patched       %change
-  domU to dom0
-    1 stream       0.64 +/-1%    3.11 +/-2%      +386%
-    2 streams      0.81 +/-6%    3.16 +/-2%      +291%
-    4 streams      0.84 +/-4%    2.69 +/-7%      +221%
-    8 streams      0.83 +/-2%    2.40 +/-5%      +190%
-    16 streams     0.81 +/-2%    2.23 +/-2%      +175%
-  domU to domU
-    1 stream       0.62 +/-6%    2.29 +/-5%      +267%
-    2 streams      0.73 +/-7%    2.26 +/-10%     +211%
-    4 streams      0.75 +/-4%    1.86 +/-16%     +150%
-    8 streams      0.73 +/-4%    1.73 +/-9%      +136%
-    16 streams     0.71 +/-3%    1.62 +/-6%      +128%
-  dom0 to domU
-    1 stream       4.19 +/-6%    3.93 +/-8%      -6.2%
-    2 streams      4.87 +/-9%    4.68 +/-11%     -4.0%
-    4 streams      8.73 +/-21%   8.34 +/-19%     -4.5%
-    8 streams     12.53 +/-17%  13.05 +/-17%     +4.1%
-    16 streams    16.85 +/-12%  16.40 +/-16%     -2.7%
-
-The table comes from one of 13 sessions on this instance type, which
-ran 7,779 runs over 57 boots in total.
-
-A domU transmits 2.2 to 4.8 times as much, and 2.2 to 4.0 times as
-much per busy dom0 vCPU, where base never exceeds 0.84 Gbit/s whatever
-the number of streams.
-
-From dom0 to a domU, netback fills the domU's buffers with grant
-copies and maps few of its packets, so the series barely runs there
-and the differences stay within the margin of error.
-
-Between boots of the same build, the single-stream mean varied no
-more than the run-to-run spread predicts. A debug build ran the same
-benchmark without assertion failures or IOMMU faults.
-
+---
 Changes in v2:
-- Patch 1 is new: VT-d rounds flush ranges to an aligned power of two
-  itself, instead of the grant unmap batch doing it (Teddy).
-- iommu_iotlb_flush() checks iommu_dont_flush_iotlb and records the
-  range as well as the flags of the flushes it skips, instead of its
-  callers recording the flags in a uint8_t (Teddy, Jan).
-- The grant unmap batch flushes the recorded range, instead of the span
-  of the unmapped gfns (Teddy).
-- The table's patched column is now re-run against v2
+- Check the flag in iommu_iotlb_flush() rather than in its callers,
+  which also drops the duplicated flags in ept_set_entry() (Teddy).
+- Record the range of the skipped flushes as well as their flags
+  (Teddy).
+- Store the flags as unsigned int in struct iommu_skipped_flush, instead
+  of a uint8_t checked by a BUILD_BUG_ON() (Teddy, Jan).
+---
+ xen/arch/x86/mm/p2m-ept.c       |  2 +-
+ xen/drivers/passthrough/iommu.c | 17 +++++++++++++++--
+ xen/include/xen/iommu.h         |  6 ++++++
+ 3 files changed, 22 insertions(+), 3 deletions(-)
 
-Thanks,
-L
-
-Luca Di Maio (4):
-  VT-d: round IOTLB flush ranges up to an aligned power of two
-  IOMMU: record the flushes skipped under iommu_dont_flush_iotlb
-  x86/HVM: defer IOTLB flushes across a grant unmap batch
-  x86/HVM: defer p2m TLB flushes across a grant unmap batch
-
- xen/arch/arm/include/asm/grant_table.h     |  3 ++
- xen/arch/x86/hvm/grant_table.c             | 55 +++++++++++++++++++++-
- xen/arch/x86/include/asm/grant_table.h     | 13 +++++
- xen/arch/x86/include/asm/hvm/grant_table.h |  5 ++
- xen/arch/x86/include/asm/hvm/vcpu.h        | 10 ++++
- xen/arch/x86/mm/p2m-ept.c                  |  2 +-
- xen/common/grant_table.c                   |  6 +++
- xen/drivers/passthrough/iommu.c            | 17 ++++++-
- xen/drivers/passthrough/vtd/iommu.c        |  4 ++
- xen/include/xen/iommu.h                    |  6 +++
- 10 files changed, 117 insertions(+), 4 deletions(-)
-
-
-base-commit: 41ddcfe808ec1228289ae60c30768d50a58c98fe
+diff --git a/xen/arch/x86/mm/p2m-ept.c b/xen/arch/x86/mm/p2m-ept.c
+index 204bdb054a..33c3d8fc58 100644
+--- a/xen/arch/x86/mm/p2m-ept.c
++++ b/xen/arch/x86/mm/p2m-ept.c
+@@ -976,7 +976,7 @@ out:
+     if ( rc == 0 && p2m_is_hostp2m(p2m) &&
+          need_modify_vtd_table )
+     {
+-        if ( iommu_use_hap_pt(d) && !this_cpu(iommu_dont_flush_iotlb) )
++        if ( iommu_use_hap_pt(d) )
+             rc = iommu_iotlb_flush(d, _dfn(gfn), 1ul << order,
+                                    (iommu_flags ? IOMMU_FLUSHF_added : 0) |
+                                    (vtd_pte_present ? IOMMU_FLUSHF_modified
+diff --git a/xen/drivers/passthrough/iommu.c b/xen/drivers/passthrough/iommu.c
+index 4b22ecfe65..8e97086601 100644
+--- a/xen/drivers/passthrough/iommu.c
++++ b/xen/drivers/passthrough/iommu.c
+@@ -64,6 +64,7 @@ bool __read_mostly iommu_hap_pt_share = true;
+ bool __read_mostly iommu_debug;
+ 
+ DEFINE_PER_CPU(bool, iommu_dont_flush_iotlb);
++DEFINE_PER_CPU(struct iommu_skipped_flush, iommu_skipped_flush);
+ 
+ static int __init cf_check parse_iommu_param(const char *s)
+ {
+@@ -390,7 +391,7 @@ int iommu_legacy_map(struct domain *d, dfn_t dfn, mfn_t mfn,
+     ASSERT(!(flags & IOMMUF_preempt));
+     rc = iommu_map(d, dfn, mfn, page_count, flags, &flush_flags);
+ 
+-    if ( !this_cpu(iommu_dont_flush_iotlb) && !rc )
++    if ( !rc )
+         rc = iommu_iotlb_flush(d, dfn, page_count, flush_flags);
+ 
+     return rc;
+@@ -458,7 +459,7 @@ int iommu_legacy_unmap(struct domain *d, dfn_t dfn, unsigned long page_count)
+     unsigned int flush_flags = 0;
+     int rc = iommu_unmap(d, dfn, page_count, 0, &flush_flags);
+ 
+-    if ( !this_cpu(iommu_dont_flush_iotlb) && !rc )
++    if ( !rc )
+         rc = iommu_iotlb_flush(d, dfn, page_count, flush_flags);
+ 
+     return rc;
+@@ -488,6 +489,18 @@ int iommu_iotlb_flush(struct domain *d, dfn_t dfn, unsigned long page_count,
+     if ( dfn_eq(dfn, INVALID_DFN) )
+         return -EINVAL;
+ 
++    if ( this_cpu(iommu_dont_flush_iotlb) )
++    {
++        struct iommu_skipped_flush *skipped = &this_cpu(iommu_skipped_flush);
++
++        skipped->first = _dfn(min(dfn_x(skipped->first), dfn_x(dfn)));
++        skipped->last = _dfn(max(dfn_x(skipped->last),
++                                 dfn_x(dfn) + page_count - 1));
++        skipped->flags |= flush_flags;
++
++        return 0;
++    }
++
+     rc = iommu_call(hd->platform_ops, iotlb_flush, d, dfn, page_count,
+                     flush_flags);
+     if ( unlikely(rc) )
+diff --git a/xen/include/xen/iommu.h b/xen/include/xen/iommu.h
+index 37c4a1dc82..a2aeaf8d41 100644
+--- a/xen/include/xen/iommu.h
++++ b/xen/include/xen/iommu.h
+@@ -502,6 +502,12 @@ void iommu_dev_iotlb_flush_timeout(struct domain *d, struct pci_dev *pdev);
+  */
+ DECLARE_PER_CPU(bool, iommu_dont_flush_iotlb);
+ 
++struct iommu_skipped_flush {
++    dfn_t first, last;
++    unsigned int flags;
++};
++DECLARE_PER_CPU(struct iommu_skipped_flush, iommu_skipped_flush);
++
+ bool arch_iommu_use_permitted(const struct domain *d);
+ 
+ #ifdef CONFIG_X86
 -- 
 2.47.3
 
