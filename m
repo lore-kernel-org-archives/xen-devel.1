@@ -2,64 +2,59 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 155A3606A330
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2026 23:22:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F01B1606A326
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2026 23:37:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=n6nb9yD3
-Received: from list by lists.xenproject.org with outflank-mailman.1477537.1682967 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=vswN9LCd
+Received: from list by lists.xenproject.org with outflank-mailman.1477554.1682977 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xPTGc-0000fk-3H; Fri, 06 Nov 2026 23:22:42 +0000
+	id 1xPTUQ-00038y-A6; Fri, 06 Nov 2026 23:36:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1477537.1682967; Fri, 06 Nov 2026 23:22:42 +0000
+Received: by outflank-mailman (output) from mailman id 1477554.1682977; Fri, 06 Nov 2026 23:36:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xPTGb-0000fd-W1; Fri, 06 Nov 2026 23:22:41 +0000
-Received: by outflank-mailman (input) for mailman id 1477537;
- Fri, 06 Nov 2026 23:22:40 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Jason.Andryuk@amd.com>) id 1xPTGa-0000fX-Cm
- for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 23:22:40 +0000
+	id 1xPTUQ-00038r-5V; Fri, 06 Nov 2026 23:36:58 +0000
+Received: by outflank-mailman (input) for mailman id 1477554;
+ Fri, 06 Nov 2026 23:36:57 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xPTUO-00038l-VD
+ for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 23:36:57 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xPTGZ-001J6e-Q3
- for xen-devel@lists.xenproject.org; Sat, 07 Nov 2026 00:22:39 +0100
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xPTUO-007fiz-5T
+ for xen-devel@lists.xenproject.org; Sat, 07 Nov 2026 00:36:56 +0100
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Jason.Andryuk@amd.com>)
- id 6aee610a-bab6-0a2a0a5309dd-0a2a4501c53c-38
- for <xen-devel@lists.xenproject.org>; Sat, 07 Nov 2026 00:22:39 +0100
-Received: from [52.101.62.44]
- (helo=DM5PR21CU001.outbound.protection.outlook.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aee6449-e002-0a2a0a5209dd-0a2a450594f0-40
+ for <xen-devel@lists.xenproject.org>; Sat, 07 Nov 2026 00:36:55 +0100
+Received: from [52.101.52.46]
+ (helo=BL2PR02CU003.outbound.protection.outlook.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <Jason.Andryuk@amd.com>)
- id 6aee613d-5984-0a2a45010019-34653e2c72d5-4
- for <xen-devel@lists.xenproject.org>; Sat, 07 Nov 2026 00:22:39 +0100
-Received: from CH0PR04CA0097.namprd04.prod.outlook.com (2603:10b6:610:75::12)
- by PH0PR12MB8151.namprd12.prod.outlook.com (2603:10b6:510:299::17)
+ id 6aee6496-4cb1-0a2a45050019-3465342eda11-3
+ for <xen-devel@lists.xenproject.org>; Sat, 07 Nov 2026 00:36:55 +0100
+Received: from MW4PR04CA0382.namprd04.prod.outlook.com (2603:10b6:303:81::27)
+ by IA0PR12MB8208.namprd12.prod.outlook.com (2603:10b6:208:409::17)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.11; Fri, 6 Nov
- 2026 23:18:23 +0000
-Received: from BN1PEPF00006003.namprd05.prod.outlook.com
- (2603:10b6:610:75:cafe::ae) by CH0PR04CA0097.outlook.office365.com
- (2603:10b6:610:75::12) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.10; Fri, 6 Nov
+ 2026 23:36:50 +0000
+Received: from SJ1PEPF0000231F.namprd03.prod.outlook.com
+ (2603:10b6:303:81:cafe::57) by MW4PR04CA0382.outlook.office365.com
+ (2603:10b6:303:81::27) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.592.11 via Frontend Transport; Fri, 6
- Nov 2026 23:18:22 +0000
+ Nov 2026 23:36:50 +0000
 Received: from satlexmb08.amd.com (165.204.84.17) by
- BN1PEPF00006003.mail.protection.outlook.com (10.167.243.235) with Microsoft
+ SJ1PEPF0000231F.mail.protection.outlook.com (10.167.242.235) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.615.4 via Frontend Transport; Fri, 6 Nov 2026 23:18:22 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
+ 15.21.615.4 via Frontend Transport; Fri, 6 Nov 2026 23:36:49 +0000
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb08.amd.com
  (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Fri, 6 Nov
- 2026 17:18:21 -0600
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
- (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Fri, 6 Nov
- 2026 17:18:21 -0600
-Received: from amd-BIRMANPLUS.mshome.net (10.180.168.240) by
- satlexmb08.amd.com (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.53
- via Frontend Transport; Fri, 6 Nov 2026 17:18:20 -0600
+ 2026 17:36:49 -0600
+Received: from [192.168.19.2] (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.53 via Frontend
+ Transport; Fri, 6 Nov 2026 17:36:48 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -70,170 +65,111 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Fu9sqzvi1I+cc6k8rcXv/c2Isb65aNZBMoyGZJXyeOxP+nxOn1h7XM3BU1xcGfgwk+Kp2AL0zYhxaWK3jD1Ho0q65Ny34/IVMKfS+iDGS07WatdszYxtKWE/t0LlUwgXrLp/uURkZ0j7yRf8X+gX+EbmmzEOTKdTVu6RHvbmVyUR7CyncLgX9Jc9eeoEw5GfqOZp1AN3I4lPuXae/Kt9jEMfgTDD+4djJpYoIzYOpZWDH+nRwva5I4/B11Nux6WeryBNj3m6ZTmTLNF5QHfNIolBXMgId7nTBCOnKOyw2k2+mZ/PPCvr6cbi68JhOCjrRJnbbf0b4NVPhq8j0+jhDg==
+ b=KuEISEOXIL9FtfsppweZP7ZfJDJCc8NfktLIXUSzVw8KI2vYkoxplXBUxRj0CWGeJqsWCFDiFF3t6HhH4a/7817p5aG6P39nwOUSZfxRcMfeW0Wystl4CsMTRo9IoxDva8KrqXpnrd+X8c0c9i2gHiHMl8wQ/BVV8dt6l3JaWp7c+tQkYw9UlvgO/vvOPf1UJXmvP0oOLRUR94fApW0H6uul+CpeWERKfHaPkmvHrZTvE9rJFzUKBpcuAoTMy3dlTt4QLLMj/9z3L6QBxhe57L6OGo91oDeMTHhhIXP1lINM8qXno6e8Ai3ldGfwxD4AKoBQH6D/Berj4YJ8Xyn0yw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5E8tva5VeiWDebMRKelLIwpUYYUIu8xtyTWuQvy6+EI=;
- b=FKputN6N0eLW5kVVJdp9CwxSQIIhDsMz/8POio0jCoQjmwByxk6CHybiQBGYP3Vhslte2xUL0bXey6lJJtZBQlsh4JQWaTTyB2QsQbXvFLLyAHwep+1nicz/uqaksRbnpQ5dh1VX0rowT/KBsUnCcEuOCWuavLyiEA6i4ZN1O2PoMRrPG4QpzRcYT9wrUeXWfQi3uAU91I3VaGjDDHN5Lar9qJryvCIN53INe9dcj/CjKwESvFZXLqvPqWdnNy1A/TmHbBWW0kIFI/VkGioUZMB2IB+Bl12Ypc1y8XxwADg3kGMtz0nB2kX6XUCI/kjMgX3mx/NsxkBtc8h1kxjD8A==
+ bh=9UbMA8KwT+v/jWXBocaOx/JAX3SoO+6nvQu8Yzh23aM=;
+ b=emP2tHuYiXKKytn+ytJexbUvRDpwXkKNYvI8YY/LoCh3ofTemb5XNxhiyTXd/m0I4uGFhdhXtMPgk7H3UmhdMMy5KOdUEnnQqw44iz4xrziq2ox+jWYf+ZaJcNBwx7pYECsn7unEcKWJYHo2+919Zp1L/Y6IzOm8xBNcnOiwUmVe1JE53qEXu6TxkjwqWHiD0kQC1TaPOI9nYk1yzSAg65Ybot4lFx++Tr4G7ln2/Ca/KNmzBOv7R2fowXMYtUB62X7Yd/mE2oNxHBYMvpwfPxzVnmbYauElAq79H7+vLpHsjCTA6Zwxof10a/10kypDbqPnHyFsW5uUvu3R6F5OMw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
+ 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5E8tva5VeiWDebMRKelLIwpUYYUIu8xtyTWuQvy6+EI=;
- b=n6nb9yD30F3GVdCJnIumDtqFvpgMPXkKd2UKaafSTiFrMw+BWEBf0lU3++o0EGF2PcnF6sxbAXbvPS0M0kgOfrnIw3aXuatnXUxXBSQ2J8mZta+CJxD22uRNnU1dcfbxRAgl8Vqg2wEUkK9xB0BzXC2b/7YzTIJvO5vYi/wmxt4=
+ bh=9UbMA8KwT+v/jWXBocaOx/JAX3SoO+6nvQu8Yzh23aM=;
+ b=vswN9LCd6kVMCKt0co+zCGfJSa8hEGXJ9iRSWE0oZOsOWBlQi9ocvyL3cuK8Ynu5MKCeYsRqMnTSY+tgt0ZrHfvyosdh9dxphdnZZOPDgtdRy+iVQCOvQmXyVUrLL3PJJc5nCSB1A/WfyssearZPElHcB9Dwcr4tJPfHE0/VYDQ=
 X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
  is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-From: Jason Andryuk <jason.andryuk@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Jason Andryuk <jason.andryuk@amd.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, "Volodymyr
- Babchuk" <Volodymyr_Babchuk@epam.com>, "Daniel P. Smith"
-	<dpsmith@apertussolutions.com>, =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?=
-	<marmarek@invisiblethingslab.com>, Jan Beulich <jbeulich@suse.com>, "Andrew
- Cooper" <andrew.cooper3@citrix.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger@xenproject.org>, Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH] xen/efi: Handle efi_memmap with Xen relocating itself
-Date: Fri, 6 Nov 2026 18:18:18 -0500
-Message-ID: <20261106231818.482564-1-jason.andryuk@amd.com>
-X-Mailer: git-send-email 2.34.1
+Message-ID: <729bd90c-af1d-45b6-a466-f18845a10daf@amd.com>
+Date: Fri, 6 Nov 2026 18:36:48 -0500
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] x86/cpuidle: allocate processor_powers[] dynamically
+To: Jan Beulich <jbeulich@suse.com>, "xen-devel@lists.xenproject.org"
+	<xen-devel@lists.xenproject.org>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Teddy Astie
+	<teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+	<roger@xenproject.org>
+References: <4da146da-26ee-4ecd-a747-130ed0783324@suse.com>
+Content-Language: en-US
+From: Jason Andryuk <jason.andryuk@amd.com>
+In-Reply-To: <4da146da-26ee-4ecd-a747-130ed0783324@suse.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN1PEPF00006003:EE_|PH0PR12MB8151:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8b3dd3c2-9d56-45ef-525d-08df3c5c403d
+X-MS-TrafficTypeDiagnostic: SJ1PEPF0000231F:EE_|IA0PR12MB8208:EE_
+X-MS-Office365-Filtering-Correlation-Id: 591382d3-29c5-4989-c21b-08df3c5ed484
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|7416014|23010399003|1800799024|82310400026|36860700016|11063799006|56012099006|261022115727099003|261022075727099003|261021121427099003|261022105027099003|261021123027099003|261009223027099003|261102123227099003|261028144727099003|261026121527099003|261026140227099003|10067099003|6133799003|18002099003;
+	BCL:0;ARA:13230040|82310400026|36860700016|23010399003|1800799024|376014|22082099003|18002099003|10067099003|261102123227099003|11063799006|261028144727099003|261022105027099003|261021121427099003|261026140227099003|261026121527099003|56012099006;
 X-Microsoft-Antispam-Message-Info:
-	6Vq74p7dGr0zn3qCVAzQT7TvnZgmn2lfv3XRNT4f2XSpodCOf63QW0dbjZSQzg0OXDtQN5hl47dIy9z0Xvl+TEo9Ke+lYxD/HXA5uBK7V75wAtEO/ds9YlC3oiqMve/I1VAT0zplHepZ7O1pOEytxurgLAx3K3sOqCIoSTy/9oT2S/gVSP+trdnFqj6529SkfbBCOnc6uIrRWdJ/ka0RMlVwNbNl5n/S+dQ3DEn47t5tixcpxdnnpK7qqozi5CKzxoITxVpcOEeIaffQdI7bOirjh01/mrm9SdBQRMk91IvEIjwcOyP21XcRdojbOR5OeNXGohLawTElPI1MXJaYQhYOakXYRUK3XZ7qkPsL8UrX1zqNKBVKyW9LPfW9saDz5pHCsGrp3GMwQO1EyC2QPKYeVbiSOJE0WUN5dQ6FG9pcodMOIRIt+6kWMUOyTfI55njUzHIR7w4+82hd0SRndzyws699A76IpT/8+KJ3UJyo+r8lKBI8CYY3aPEaWk6yzaxTetS7ias2JDVpIjhh+GWx85B+0nWT3+Br56DfyYwROkGVPIMeifGKE4LOZYbRlKMjPr0IE9kSU3BC0zvMCemXHcnJTSvsIyOpitRjOUdjJQVswQNMtdsy4bCQ5dxhXHwmu4ZokT7h+taS4oV8dTHo4B1Ra5YcZSPBvZGy0sSCffjHeq2aooJ6+s5QmYAdp2zSUI427srktynKMgFh7Q==
+	QJkPbjSjwFT4fRtO5jaeh7zf0MVpRssaZfVuNiXApJYizKNpSsVj25pv/C7Lv4LyX+gOGgxu+hHgUe8EIlnToqlTjM8ZPN9BHRqipN6F+q0ZrAHaqXtFIVneZ/qxCTG2Cmp6TwbYF3IOwMNCQG6zfIRBiBBmz2FJEXn4s7ykwOxorQ+GylLxpqZ2NhGDhte8HKjfgWSw0pY8HRa73CuUrDQKJG9PUOvLhwXxn0/3QniU+lbAxVmf0YV3DWkuoWLIQ1Vb2tQV4z8C+ER0yqM0pWV7mvfEKSFzI1pQjt8VvKP3oZHDyIofU3PExsPgznpX4RgnmWH7KJjii84Q4KhWiHbii71mrJHSeg2NUu+QoWGS77dXh5PKIgkzVl4SQK2AOEqUHMcN/AQ1s6OwpzvvdLUSxS47TkLxoOVyDZqVeReb5XnKVLgk38/ITJ89tdtrHYT/TfdLO+bWwHpf2X4H+0KV6lk5gjQN2V2Pxb6/oMqO4qYjOpDnx4MuifvgD2iE4J20Duq0S8lXNJCsG5yZjPITZhgDRV7nYOEddk0yfFDYY9YmYMGSdL8x6T7GAi/RwvPQ40ChfKo/r8TuhjssDMJ47wJ9TFNPju2h8G1RZGYxbKJEzKhfSVyWGabTTsAfIKdI8xpBJdWe6jho41NFanax9QlfH/epk9kGzkT4c89TyJdOShbXSM018H6WWo9u05CW079jAQmpZkTEwZt42w==
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(7416014)(23010399003)(1800799024)(82310400026)(36860700016)(11063799006)(56012099006)(261022115727099003)(261022075727099003)(261021121427099003)(261022105027099003)(261021123027099003)(261009223027099003)(261102123227099003)(261028144727099003)(261026121527099003)(261026140227099003)(10067099003)(6133799003)(18002099003);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700016)(23010399003)(1800799024)(376014)(22082099003)(18002099003)(10067099003)(261102123227099003)(11063799006)(261028144727099003)(261022105027099003)(261021121427099003)(261026140227099003)(261026121527099003)(56012099006);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	GvdYk2iL8tlc9Q/GF6ZBoE5pyjELFC259LzVK47+FAAY5dWLqmc6/0hoJ8Y7JMl2z6zO2EFIG6veLAzL2c9lp7m+RNzwWhOHPVjv1t4xIk5ovbTk1J87P5w+xZFV62H5e58uBm7Zmn+tCEVI0D0+/V0rvfxtqssv9X6zqk4UA4iDoJWQItbKcHIdNCR/cFzqi+uKvGCYeFahEJTCnF0GHzdySamMvYK06AI5ac4UgK3FzHwH6VqX+fa9sh9w2ijcH5y0kCs4xThF+TWf3+Ujm5GnxwpnhxmoUgYCW8DsAXzAUGbL2ZtlurHqPcy78M84mZlxhqRe0o8IJZxkfWA7ynARgD31QREtyLd2HqkLSwh+XO6Zfzk/g1H3ouF6WNQimWCdAq/+VI0IIX9QC8T6t89BEXEziyaWSJDkngtJXvuZYu1rZApM+xyRgpuVmtB8
+	SSUsfnOb2BYajTpH3Cph9Oyya4hE2XsHlV4cxflgIB+wb0+ZSklwlV0g5c/dwQk5EcaBt9FupbOZaYebPM9EqBvytnDwt6Q1vOCXwOX8Mkbwk4aatJ0v6RCaT/eQ38XIGtB//UPoNZFjk1NhJ96NP5hHw71q+X4ieKGffUO94mZlaXeyK2Y4l2JNT+31OZQNCVOXkpYO5Q3nlQeJCD06vGaoXvhlcwp+ngvw0zdGaYT1MJ7GiZmD9kyNpsbm1SioLWnCm5zM/GHIV3NoWdkpAb6k8NhlbpTQb228l0DV21+Cir7xyOohVXYyWOZeaSdzp/OklbTIPLsXPFdwvu7gktFKF5wbZ0u1mEYuDyJlMZ0NWRue9D69L8PCOAk9zIfhw5iSWsRbKxdvFKJiIeC79HDAPJpkCUyRhLUttRVrrTcMBsci8yxUvbv3WnE+w2VE
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Nov 2026 23:18:22.1889
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Nov 2026 23:36:49.8920
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8b3dd3c2-9d56-45ef-525d-08df3c5c403d
+X-MS-Exchange-CrossTenant-Network-Message-Id: 591382d3-29c5-4989-c21b-08df3c5ed484
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BN1PEPF00006003.namprd05.prod.outlook.com
+	SJ1PEPF0000231F.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB8151
-X-purgate-ID: tlsNG-d62444/1794007359-1DA7E757-D7B2E92C/0/0
-X-purgate-type: clean
-X-purgate-size: 3405
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB8208
+X-purgate-ID: tlsNG-c201ff/1794008215-728B62A1-AA0C7862/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 1029
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-With Xen booting via Multiboot2/GRUB on an EFI platform, and modified to
-use MULTIBOOT2_LOAD_PREFERENCE_LOW, Xen relocates itself with
-move_xen().
+On 2026-11-03 07:52, Jan Beulich wrote:
+> There's no need to have a NR_CPUS-dimensioned static array there.
+> 
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> ---
+> Some of the new conditionals checking processor_powers may arguably want
+> to check (really: might better have been put there long ago) xen_cpuidle
+> instead. Thoughts?
 
-However a PVH dom0 shows:
-kernel: Failed to lookup header 0x77ffd000 in Xen memory map: error -3
-kernel: ACPI=0x77ffd000
 
-... for all the Xen efi memory map lookups.  Dumping the memory map at
-runtime showed it was scrubbed.  Because Xen relocated itself, the
-original physical address referenced through a directmap address goes
-stale.
 
-Add efi_arch_mmap_buffer_virt() to convert from the initial value to an
-appropriate runtime value.  ARM uses Boot Services AllocatePool(), so it
-must continue to use DIRECTMAP_VIRT_START.
+> @@ -1694,6 +1702,15 @@ static int __init cf_check cpuidle_presm
+>       if ( !xen_cpuidle )
+>           return 0;
+>   
+> +    processor_powers = xvzalloc_array(struct acpi_processor_power *,
+> +                                      nr_cpu_ids);
+> +    if ( !processor_powers )
+> +    {
+> +        printk("CPUIDLE: disabled - not enough memory\n");
+> +        xen_cpuidle = 0;
+> +        return -ENOMEM;
+> +    }
+> +
+>       mwait_idle_init(&cpu_nfb);
+mwait-idle.c accesses processor_powers[], too, but that should not be 
+accessible since we don't make it into mwait_idle_init()?
 
-For x86, we use an offset into the loaded Xen binary at the time of the
-call and add the to XEN_VIRT_START.  ebmalloc() allocates from the Xen
-image memory, so it moves during relocation.  xen_phys_start is set for
-xen.efi in efi_exit_boot(), but not for xen.gz, so it cannot be used
-Use `lea __image_base__(%rip)` to get the current load address, and use
-that to calculate the offset into the Xen image.  That offset is also
-valid from XEN_VIRT_START.
+If so:
+Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
 
-Fixes: c5b9805bc1f7 ("efi: create new early memory allocator")
-Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
----
-I think it could be seen without MULTIBOOT2_LOAD_PREFERENCE_LOW if xen
-chose to relocate itself.  But since grub usually loads xen high, it
-doesn't relocate itself.
----
- xen/arch/arm/efi/efi-boot.h |  5 +++++
- xen/arch/x86/efi/efi-boot.h | 10 ++++++++++
- xen/common/efi/boot.c       |  2 +-
- 3 files changed, 16 insertions(+), 1 deletion(-)
-
-diff --git a/xen/arch/arm/efi/efi-boot.h b/xen/arch/arm/efi/efi-boot.h
-index 069cc68b0a..717bd8d607 100644
---- a/xen/arch/arm/efi/efi-boot.h
-+++ b/xen/arch/arm/efi/efi-boot.h
-@@ -449,6 +449,11 @@ static void *__init efi_arch_allocate_mmap_buffer(UINTN map_size)
-     return ptr;
- }
- 
-+static void *__init efi_arch_mmap_buffer_virt(void *ptr)
-+{
-+    return ptr + DIRECTMAP_VIRT_START;
-+}
-+
- static void __init efi_arch_edd(void)
- {
- }
-diff --git a/xen/arch/x86/efi/efi-boot.h b/xen/arch/x86/efi/efi-boot.h
-index d738b839ee..ffc277ccfd 100644
---- a/xen/arch/x86/efi/efi-boot.h
-+++ b/xen/arch/x86/efi/efi-boot.h
-@@ -224,6 +224,16 @@ static void *__init efi_arch_allocate_mmap_buffer(UINTN map_size)
-     return ebmalloc(map_size);
- }
- 
-+static void *__init efi_arch_mmap_buffer_virt(void *ptr)
-+{
-+    unsigned long load_base;
-+
-+    /* RIP-relative address is the current Xen load address. */
-+    asm("lea __image_base__(%%rip), %0" : "=r" (load_base));
-+
-+    return ptr - load_base + XEN_VIRT_START;
-+}
-+
- static void __init efi_arch_pre_exit_boot(void)
- {
-     if ( !trampoline_phys )
-diff --git a/xen/common/efi/boot.c b/xen/common/efi/boot.c
-index 89b5831691..5396bad7a5 100644
---- a/xen/common/efi/boot.c
-+++ b/xen/common/efi/boot.c
-@@ -1425,8 +1425,8 @@ static void __init efi_exit_boot(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *Syste
-     /* Adjust pointers into EFI. */
-     efi_ct = (const void *)efi_ct + DIRECTMAP_VIRT_START;
-     efi_rs = (const void *)efi_rs + DIRECTMAP_VIRT_START;
--    efi_memmap = (void *)efi_memmap + DIRECTMAP_VIRT_START;
-     efi_fw_vendor = (const void *)efi_fw_vendor + DIRECTMAP_VIRT_START;
-+    efi_memmap = efi_arch_mmap_buffer_virt(efi_memmap);
- }
- 
- /* SAF-1-safe */
--- 
-2.34.1
-
+Thanks,
+Jason
 
