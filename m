@@ -2,42 +2,42 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 40ECB606A326
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 186CE606A329
 	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2026 15:16:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1476740.1682737 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1476744.1682776 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xPLfh-0003y9-TD; Fri, 06 Nov 2026 15:16:05 +0000
+	id 1xPLfk-0004qp-TL; Fri, 06 Nov 2026 15:16:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1476740.1682737; Fri, 06 Nov 2026 15:16:05 +0000
+Received: by outflank-mailman (output) from mailman id 1476744.1682776; Fri, 06 Nov 2026 15:16:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xPLfh-0003y2-PY; Fri, 06 Nov 2026 15:16:05 +0000
-Received: by outflank-mailman (input) for mailman id 1476740;
- Fri, 06 Nov 2026 15:16:04 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xPLfk-0004qg-P5; Fri, 06 Nov 2026 15:16:08 +0000
+Received: by outflank-mailman (input) for mailman id 1476744;
+ Fri, 06 Nov 2026 15:16:07 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <andrewcoop@xenbits.xen.org>)
- id 1xPLff-0003fk-S0; Fri, 06 Nov 2026 15:16:03 +0000
+ id 1xPLfi-0004Gd-Sh; Fri, 06 Nov 2026 15:16:06 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xPLff-007Zic-1B; Fri, 06 Nov 2026 16:16:03 +0100
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xPLfi-00447Q-9G; Fri, 06 Nov 2026 16:16:06 +0100
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <andrewcoop@xenbits.xen.org>)
- id 6aedef1d-8faa-0a2a0a5109dd-0a2a4508a628-44
- for <multiple-recipients>; Fri, 06 Nov 2026 16:16:02 +0100
+ id 6aedef2d-2eae-0a2a0a5409dd-0a2a450c88d0-20
+ for <multiple-recipients>; Fri, 06 Nov 2026 16:16:06 +0100
 Received: from [104.130.215.37] (helo=mail.xenproject.org)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <andrewcoop@xenbits.xen.org>)
- id 6aedef31-f659-0a2a45080019-6882d725d98c-3
- for <multiple-recipients>; Fri, 06 Nov 2026 16:16:02 +0100
+ id 6aedef34-f479-0a2a450c0019-6882d725be5a-3
+ for <multiple-recipients>; Fri, 06 Nov 2026 16:16:05 +0100
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.98.2)
  (envelope-from <andrewcoop@xenbits.xen.org>)
- id 1xPLfb-00000001GcE-1tmf; Fri, 06 Nov 2026 15:15:59 +0000
+ id 1xPLfe-00000001Gd5-1DVm; Fri, 06 Nov 2026 15:16:02 +0000
 Received: from andrewcoop by xenbits.xenproject.org with local (Exim 4.98.2)
  (envelope-from <andrewcoop@xenbits.xen.org>)
- id 1xPLfb-0000000A5rj-1W0D; Fri, 06 Nov 2026 15:15:59 +0000
+ id 1xPLfe-0000000A5tc-0wMP; Fri, 06 Nov 2026 15:16:02 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -56,13 +56,13 @@ To: xen-announce@lists.xen.org, xen-devel@lists.xen.org,
  xen-users@lists.xen.org, oss-security@lists.openwall.com
 From: Xen.org security team <security@xen.org>
 CC: Xen.org security team <security-team-members@xen.org>
-Subject: Xen Security Advisory 526 v1 (CVE-2026-100080) - Linux
- xen-netback: guest can trigger use-after-free for
-Message-Id: <E1xPLfb-0000000A5rj-1W0D@xenbits.xenproject.org>
-Date: Fri, 06 Nov 2026 15:15:59 +0000
-X-purgate-ID: tlsNG-c1860d/1793978162-D437587B-E71D9501/0/0
+Subject: Xen Security Advisory 527 v1 (CVE-2026-100081) - Linux
+ xen-netback: guest can trigger use-after-free for reading multicast data
+Message-Id: <E1xPLfe-0000000A5tc-0wMP@xenbits.xenproject.org>
+Date: Fri, 06 Nov 2026 15:16:02 +0000
+X-purgate-ID: tlsNG-d25034/1793978166-770D9A5B-658D72A8/0/0
 X-purgate-type: clean
-X-purgate-size: 4476
+X-purgate-size: 4580
 X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_PASS,
 	SPF_PASS,UNPARSEABLE_RELAY autolearn=no autolearn_force=no
@@ -78,34 +78,31 @@ Content-Transfer-Encoding: 7bit
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA256
 
-           Xen Security Advisory CVE-2026-100080 / XSA-526
+           Xen Security Advisory CVE-2026-100081 / XSA-527
 
-          Linux xen-netback: guest can trigger use-after-free for
-                        network statistics reads
+ Linux xen-netback: guest can trigger use-after-free for reading multicast data
 
 ISSUE DESCRIPTION
 =================
 
-The network statistic data in the driver is protected by RCU.
-Unfortunately when tearing down the queues after an error during
-connecting to the frontend (e.g. due to illegal Xenstore data filled
-in by the guest), the statistic data is being freed without
-synchronizing the RCU state.  In case the data is being read via sysfs
-in this phase, access to already freed memory or memory being in new
-use is possible.
+Multicast handling in the driver is implemented as a lookup early on the
+transmit (guest receive) path.  The respective function can be invoked in
+parallel with teardown of a device.  Thus the lookup may access data which
+was already freed, with that memory perhaps already being in new use
+elsewhere.
 
 IMPACT
 ======
 
 The most likely outcome is a driver crash, possibly escalated to a host
 crash.  This then is a Denial of Service (DoS) affecting the entire host.
-
-Information leaks cannot be ruled out.
+Information leaks and, with very low likelihood, privilege escalation
+cannot be ruled out.
 
 VULNERABLE SYSTEMS
 ==================
 
-Linux versions 4.11 and newer are vulnerable.
+Linux versions 4.3 and newer are vulnerable.
 
 MITIGATION
 ==========
@@ -119,66 +116,70 @@ problem.
 CREDITS
 =======
 
-This issue was discovered by Yehyeong Lee of Hyundai Mobis.
+This issue was discovered by kerhunt.
 
 RESOLUTION
 ==========
 
 Applying the attached patch resolves this issue.
 
-xsa526-linux.patch           Linux
+Note that patches for released versions are generally prepared to
+apply to the stable branches, and may not apply cleanly to the most
+recent release tarball.  Downstreams are encouraged to update to the
+tip of the stable branch before applying these patches.
 
-$ sha256sum xsa526*
-88dd41b89b43fa1b14e68c1a40aa69a22309e0c57a1b5543168949a273627ca8  xsa526-linux.patch
+xsa527-linux.patch           Linux 7.4-rc - 5.5
+
+$ sha256sum xsa527*
+f68ebd9c262ac005043c9832bc8f73d70f5e083d1c9435b55d4dccadbb3e40df  xsa527-linux.patch
 $
 
 NOTE REGARDING LACK OF EMBARGO
 ==============================
 
-This issue was disclosed in public.
+A closely related issue was disclosed in public.
 -----BEGIN PGP SIGNATURE-----
 
-iQFABAEBCAAqFiEEI+MiLBRfRHX6gGCng/4UyVfoK9kFAmrt7ssMHHBncEB4ZW4u
-b3JnAAoJEIP+FMlX6CvZq84H/02MP77ou0FS+9nAF8CWbGl79KfiUWO2xjXPEdKB
-Mgyzk0Gtq+Q0/oTaxPC59f9Pxc4yiCnGuIjpVM2qPOfaHZD0uEnzzGEROxVNCABq
-7wCxZ/9Uu3MXO+1rcMgVqUNoHEqYLxgSp3OZ7O48DFQtkulP6fp4EgR0xTUIgPwn
-oKlWoSKORAXOkULt5Qn5xI0+YN0OgDMdHKj/BPkRIGeeqOHPRcUmeZU9VRnOiATh
-v1lR6erAWEx/dwr5Yq6ZReA6GFgDNRRk7ersnc5mwxxUyDtJtNXPHUCmE8AZ/q4C
-H2I/1SLzm6oa+v+0fngSasn9+lMZC6fzy0SxRJF3clRui+A=
-=uEqL
+iQFABAEBCAAqFiEEI+MiLBRfRHX6gGCng/4UyVfoK9kFAmrt7s4MHHBncEB4ZW4u
+b3JnAAoJEIP+FMlX6CvZeNAH/j1BrfAQ6QeYh/fzh1ql5EG2e2hE3m3cP6k84uBh
+ZIVNAcqat+6UsxF/jaHRyTV49cts4HVHDBu9mpoi1vWkLhoSK7kkLl37oh0ar71P
+XpCtLfgqzCPd/0F19at2l5sigXwZA/GvRbn4aEVp4s+dC5U/a67IZJtj/xMvTGVB
+oOeIEenbIQHrWMCQmXaLHa2Ht2qCgJyyt0LzAFZf2pTbcl6tnCt8yQFVHh2ABa7e
+5rXgH3bJRp6AOod3nsAkL+al2l8ShAx/TTIvDUxZw+qD6bELMDBwGYWSTMCRogAH
+JcqEMRgZWL87gx2ubKJkG57pGuoXv8ydhD2o0/9WrBPRbzs=
+=dUnZ
 -----END PGP SIGNATURE-----
 
 --=separator
-Content-Type: application/octet-stream; name="xsa526-linux.patch"
-Content-Disposition: attachment; filename="xsa526-linux.patch"
+Content-Type: application/octet-stream; name="xsa527-linux.patch"
+Content-Disposition: attachment; filename="xsa527-linux.patch"
 Content-Transfer-Encoding: base64
 
-RnJvbTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgpEYXRlOiBGcmksIDYgTm92IDIw
-MjYgMTM6MDc6NTIgKzAxMDAKU3ViamVjdDogW1BBVENIXSB4ZW4tbmV0YmFjazogRml4IFVBRiB3
-aGVuIHJlYWRpbmcgc3RhdGlzdGljcyBkYXRhCgpUaGUgbmV0d29yayBzdGF0aXN0aWMgZGF0YSBp
-biB0aGUgZHJpdmVyIGlzIHByb3RlY3RlZCBieSBSQ1UuClVuZm9ydHVuYXRlbHkgd2hlbiB0ZWFy
-aW5nIGRvd24gdGhlIHF1ZXVlcyBhZnRlciBhbiBlcnJvciBkdXJpbmcKY29ubmVjdGluZyB0byB0
-aGUgZnJvbnRlbmQgKGUuZy4gZHVlIHRvIGlsbGVnYWwgWGVuc3RvcmUgZGF0YSBmaWxsZWQKaW4g
-YnkgdGhlIGd1ZXN0KSwgdGhlIHN0YXRpc3RpYyBkYXRhIGlzIGJlaW5nIGZyZWVkIHdpdGhvdXQK
-c3luY2hyb25pemluZyB0aGUgUkNVIHN0YXRlLiAgSW4gY2FzZSB0aGUgZGF0YSBpcyBiZWluZyBy
-ZWFkIHZpYSBzeXNmcwppbiB0aGlzIHBoYXNlLCBhY2Nlc3MgdG8gYWxyZWFkeSBmcmVlZCBtZW1v
-cnkgb3IgbWVtb3J5IGJlaW5nIGluIG5ldwp1c2UgaXMgcG9zc2libGUuCgpGaXggdGhhdCBieSBj
-YWxsaW5nIHN5bmNocm9uaXplX25ldCgpIGJlZm9yZSBmcmVlaW5nIHRoZSBxdWV1ZSBkYXRhLgoK
-VGhpcyBpcyBYU0EtNTI2IC8gQ1ZFLTIwMjYtMTAwMDgwCgpGaXhlczogYjE3MDc1ZDVjMTk4ICgi
-eGVuLW5ldGJhY2s6IGZpeCByYWNlIGNvbmRpdGlvbiBvbiBYZW5CdXMgZGlzY29ubmVjdCIpClJl
-cG9ydGVkLWJ5OiBZZWh5ZW9uZyBMZWUgPHlobGVlQGlzc2xhYi5rb3JlYS5hYy5rcj4KU2lnbmVk
-LW9mZi1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgotLS0KIGRyaXZlcnMvbmV0
-L3hlbi1uZXRiYWNrL3hlbmJ1cy5jIHwgMSArCiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24o
-KykKCmRpZmYgLS1naXQgYS9kcml2ZXJzL25ldC94ZW4tbmV0YmFjay94ZW5idXMuYyBiL2RyaXZl
-cnMvbmV0L3hlbi1uZXRiYWNrL3hlbmJ1cy5jCmluZGV4IGUwMjBmNDRhYzJjNy4uYzEwMzRkOGY2
-YmYwIDEwMDY0NAotLS0gYS9kcml2ZXJzL25ldC94ZW4tbmV0YmFjay94ZW5idXMuYworKysgYi9k
-cml2ZXJzL25ldC94ZW4tbmV0YmFjay94ZW5idXMuYwpAQCAtODM3LDYgKzgzNyw3IEBAIHN0YXRp
-YyB2b2lkIGNvbm5lY3Qoc3RydWN0IGJhY2tlbmRfaW5mbyAqYmUpCiBlcnI6CiAJaWYgKGJlLT52
-aWYtPm51bV9xdWV1ZXMgPiAwKQogCQl4ZW52aWZfZGlzY29ubmVjdF9kYXRhKGJlLT52aWYpOyAv
-KiBDbGVhbiB1cCBleGlzdGluZyBxdWV1ZXMgKi8KKwlzeW5jaHJvbml6ZV9uZXQoKTsKIAlmb3Ig
-KHF1ZXVlX2luZGV4ID0gMDsgcXVldWVfaW5kZXggPCBiZS0+dmlmLT5udW1fcXVldWVzOyArK3F1
-ZXVlX2luZGV4KQogCQl4ZW52aWZfZGVpbml0X3F1ZXVlKCZiZS0+dmlmLT5xdWV1ZXNbcXVldWVf
-aW5kZXhdKTsKIAl2ZnJlZShiZS0+dmlmLT5xdWV1ZXMpOwotLSAKMi41Ni4wCgo=
+RnJvbTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgpTdWJqZWN0OiB4ZW4tbmV0YmFj
+azogZGVmZXIgeGVudmlmX21jYXN0X2FkZHJfbGlzdF9mcmVlKCkKCkluIG9yZGVyIGZvciB0aGUg
+ZnVuY3Rpb24gdG8gbGVnaXRpbWF0ZWx5IGF2b2lkIGxvY2tpbmcvUkNVLCBpdCBuZWVkcyB0bwpy
+dW4gYWZ0ZXIgYWxsIFRYL1JYIHByb2Nlc3NpbmcgaGFzIGZpbmlzaGVkL3N0b3BwZWQ6IExvb2t1
+cHMgaGFwcGVuIGZyb20KeGVudmlmX3N0YXJ0X3htaXQoKSwgd2hpbGUgYWRkcy9yZW1vdmVzIGhh
+cHBlbiBmcm9tIHhlbnZpZl90eF9hY3Rpb24oKQooY2FsbGVkIG91dCBvZiB4ZW52aWZfcG9sbCgp
+KS4KCk1vdmUgdGhlIGNhbGwgb3V0IG9mIHhlbnZpZl9kaXNjb25uZWN0X2RhdGEoKSAodGhlIGNh
+bGwgdG8gdGhlIGZ1bmN0aW9uCmZyb20gY29ubmVjdCgpJ3MgZXJyb3IgcGF0aCBkb2Vzbid0IHJl
+cXVpcmUgYW55IGNsZWFuaW5nIHVwIHRoZXJlKSwgYW5kCnB1dCBpdCBwYXN0IHRoZSBzeW5jaHJv
+bml6YXRpb24gcG9pbnQgaW4gYmFja2VuZF9kaXNjb25uZWN0KCkuCgpUaGlzIGlzIFhTQS01Mjcg
+LyBDVkUtMjAyNi0xMDAwODEuCgpGaXhlczogYjE3MDc1ZDVjMTk4ICgieGVuLW5ldGJhY2s6IGZp
+eCByYWNlIGNvbmRpdGlvbiBvbiBYZW5CdXMgZGlzY29ubmVjdCIpClJlcG9ydGVkLWJ5OiBrZXJo
+dW50IDxrZXJodW50QHByb3Rvbi5tZT4KU2lnbmVkLW9mZi1ieTogSmFuIEJldWxpY2ggPGpiZXVs
+aWNoQHN1c2UuY29tPgpSZXZpZXdlZC1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29t
+PgoKLS0tIGEvZHJpdmVycy9uZXQveGVuLW5ldGJhY2svaW50ZXJmYWNlLmMKKysrIGIvZHJpdmVy
+cy9uZXQveGVuLW5ldGJhY2svaW50ZXJmYWNlLmMKQEAgLTgxMiw4ICs4MTIsNiBAQCB2b2lkIHhl
+bnZpZl9kaXNjb25uZWN0X2RhdGEoc3RydWN0IHhlbnZpCiAKIAkJeGVudmlmX2Rpc2Nvbm5lY3Rf
+cXVldWUocXVldWUpOwogCX0KLQotCXhlbnZpZl9tY2FzdF9hZGRyX2xpc3RfZnJlZSh2aWYpOwog
+fQogCiB2b2lkIHhlbnZpZl9kaXNjb25uZWN0X2N0cmwoc3RydWN0IHhlbnZpZiAqdmlmKQotLS0g
+YS9kcml2ZXJzL25ldC94ZW4tbmV0YmFjay94ZW5idXMuYworKysgYi9kcml2ZXJzL25ldC94ZW4t
+bmV0YmFjay94ZW5idXMuYwpAQCAtMjY3LDYgKzI2Nyw4IEBAIHN0YXRpYyB2b2lkIGJhY2tlbmRf
+ZGlzY29ubmVjdChzdHJ1Y3QgYmEKIAkJdmlmLT5udW1fcXVldWVzID0gMDsKIAkJc3luY2hyb25p
+emVfbmV0KCk7CiAKKwkJeGVudmlmX21jYXN0X2FkZHJfbGlzdF9mcmVlKHZpZik7CisKIAkJZm9y
+IChxdWV1ZV9pbmRleCA9IDA7IHF1ZXVlX2luZGV4IDwgbnVtX3F1ZXVlczsgKytxdWV1ZV9pbmRl
+eCkKIAkJCXhlbnZpZl9kZWluaXRfcXVldWUoJnZpZi0+cXVldWVzW3F1ZXVlX2luZGV4XSk7CiAK
 
 --=separator--
 
