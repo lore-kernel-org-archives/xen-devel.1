@@ -2,51 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 05A27606A326
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2026 12:25:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 47EF9606A32D
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2026 12:32:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=ndpqkN/M
-Received: from list by lists.xenproject.org with outflank-mailman.1476547.1682596 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=0Si9arya
+Received: from list by lists.xenproject.org with outflank-mailman.1476560.1682603 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xPJ0W-0001PT-0z; Fri, 06 Nov 2026 12:25:24 +0000
+	id 1xPJ6d-0003KJ-Kq; Fri, 06 Nov 2026 12:31:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1476547.1682596; Fri, 06 Nov 2026 12:25:23 +0000
+Received: by outflank-mailman (output) from mailman id 1476560.1682603; Fri, 06 Nov 2026 12:31:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xPJ0V-0001PM-TX; Fri, 06 Nov 2026 12:25:23 +0000
-Received: by outflank-mailman (input) for mailman id 1476547;
- Fri, 06 Nov 2026 12:25:22 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1b0d20fa3000403d@swg.vates.tech>)
- id 1xPJ0T-0001PF-Bm
- for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 12:25:22 +0000
+	id 1xPJ6d-0003KC-HX; Fri, 06 Nov 2026 12:31:43 +0000
+Received: by outflank-mailman (input) for mailman id 1476560;
+ Fri, 06 Nov 2026 12:31:42 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xPJ6c-0003K6-2U
+ for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 12:31:42 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xPJ0S-001k1A-OU
- for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 13:25:20 +0100
-Received: from [10.42.69.3] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1b0d20fa3000403d@swg.vates.tech>)
- id 6aedc72c-2eae-0a2a0a5409dd-0a2a45039bb0-24
- for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 13:25:20 +0100
-Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1b0d20fa3000403d@swg.vates.tech>)
- id 6aedc730-fae8-0a2a45030019-b9ff1c238dd7-3
- for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 13:25:20 +0100
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a1b0d20fa3000403d.004 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Fri, 06 Nov 2026 12:25:19 +0000
-Received: from [192.168.1.18] (88-188-240-210.subs.proxad.net [88.188.240.210])
- (Authenticated sender: teddy.astie)
- by mail2.vates.fr (Postfix) with ESMTPSA id 0831D815D3;
- Fri,  6 Nov 2026 13:25:18 +0100 (CET)
+ id 1xPJ6b-00CtaJ-FJ
+ for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 13:31:41 +0100
+Received: from [10.42.69.8] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6aedc8aa-bab6-0a2a0a5309dd-0a2a45088d9c-10
+ for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 13:31:41 +0100
+Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6aedc8ad-f659-0a2a45080019-d1558030e104-3
+ for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 13:31:41 +0100
+Received: by mail-wm1-f48.google.com with SMTP id
+ 5b1f17b1804b1-4afe2d546f9so7274255e9.3
+ for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 04:31:41 -0800 (PST)
+Received: from [192.168.1.6] (user-109-243-65-71.play-internet.pl.
+ [109.243.65.71]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4b6e1b5d745sm51679815e9.6.2026.11.06.04.31.39
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 06 Nov 2026 04:31:40 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -55,213 +49,142 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=I7fboQ6hhB1brI/ZQ/qVJ3o+uat7fM4QGfOPqSPZYbU=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=ndpqkN/MSnMC4/Fz7EELhLuvUWVn0AY9rWgKN46itFDGNbH6oLF8SqnkJcZsTZx0yAwd607cm
- OnFk8A3QfZdcU+HSmw3v8C7/BAWmU0UbeTDRMKLu2GfoY+yHprZk+6KWCLJ1V1Nm/43s2gQ9CiE
- WzJP1WTTObk5tMEaTLjo4SGBHJZjQPcMBG3foDiY0ExwVlvNGQIELUTqMCSROkQ2S4w+KeitIJP
- FEEkvJbrMex7H31vazH2j7hz37BQEG5bOch30sIdUGQCJe6ioHizjtI3KxJ71LlmzRjzliVbkAl
- aNhRDdFwRhQmAwOrvBPqcdIjwmViZsG6u4QQc3lZNXSw==
-X-Zone-Loop: 07bca7c211d699a0d85b4c640b81fbd851a7d4230c2c
-x-campaign-type: default
-x-transaction-id: d540402b-3f1f-4afe-afba-d0872de50ce3
-x-swg-uid: 01-659de91f-66ba-462c-bcd4-34986226e910
-X-Mailer: Sweego
-Message-ID:
- <1793967919.8631fc262581453bbf619ec5b2062170.1a1b0d20fa3000403d@vates.tech>
-x-swg-bid: 1793967919.8631fc262581453bbf619ec5b2062170.1a1b0d20fa3000403d
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-Date: Fri, 6 Nov 2026 13:25:17 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1793968301; x=1794573101; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=VekLoelMDz98u4a3t38Xf/FqPMtqclmZQXjTRdGMY/4=;
+        b=0Si9aryadhTqGU9jI2dIlcOYwjfUk4NMNkYMV+A0+K2xZ6HtLYTJ7OToPuQ9C0ixQH
+         JV1LNNOpek9ruW171N34TX6jyw5AAh97PlP7mW+AeGtd3u1ZHTG7I1XRJMnswO5QFXl6
+         XC5pKzvwuaSKCeg4Kfkf8+ErDk1e4+JrgM/5Y8DkhRcN+GUasjO5qQguw7SjI9GJEWyM
+         /YzGdtXwbmob+SBfOlJWpqd/Ywmc2jkZ+3nGSvVPt0Mqhgr/H6lUhIf4s2wWFooR4znS
+         efmPW4MDubww0BMee8gKWZuQQQgvjVPVjY0LbX/ioAGXBU4O1EFJxVQjdlxo5DbI4hN8
+         Wkgg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793968301; x=1794573101;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=VekLoelMDz98u4a3t38Xf/FqPMtqclmZQXjTRdGMY/4=;
+        b=Dbx4u/GCo8LC+0K2GZuJyHjSDA4lU0RiLnLS2rfvR1z0cPRWvkB2IouFxGVqfr+7/h
+         RMzZiNz7FRx/kczy8BEBLcL/hgEkUvUu8C4SB9OK76CQGoAy9aKoKoD+v4zyn9BMAJWN
+         gI/gK3rnqQrJ7HnCjpKh3prX39lrx/r0LDQo86I4Kag8ceqoWpMDkRaM1wjPZcf2jkeb
+         TeRrecn+YpVMzhcKvZHoRuM9xhbWBvwT6384NVrO2yd5tRpGpytQKk824RRqwsHtGIgx
+         xJVzB/rxnriYhGCt+yUzKLs+OZXy14cOFs9SJKlQh837MDH6DN/FyPDZfbWdWuP7TVOy
+         aH/w==
+X-Gm-Message-State: APuU4Z9wHSenNzfOLBWoCZMDyQ9JS125H3XvZ+j1VsRnWBS1nY7pJKZc
+	mFC2gAXyREVC/lnF00RrCA+zsveX3zq+6Elxef0lBm0TnICHcqbCSWbf
+X-Gm-Gg: AYBFou12Nf1TkbhmYtjQGn232EWIVHD6diFV3ocDtSJ8LiPCOr9qQeqZq95jbkCNiZz
+	GXhLZPSjfL8snskPoxcDoEnNyHw9fSZjVdG35+TjNQptZht6+6EcPxLtzzxxAFhdeIugvIVsOos
+	XU1r6xYFOxZJt+d0pI0Qmyo6Ywlf0M/ay4l+t4y4gjOCtX6JCuzIjSoKQda+pgBwIsNRIXwZkHe
+	oSzMSSglwJNvdWPRRE+6nQ2cvd3FT8EQ4zKrrj/zD5OFc+MuoD5z1FU7S8/ORB1kHdmvB+HYo5f
+	Gg064/mTAi3Xl8tfIrT194xENbRUDAOLaxxGw8JQRSWRRG1sTlG+S15z26d2X03qBQfsHG8Tbh4
+	wgfa4Spj92kqXfkv4ntuJV62NRaqUfZAYRQUTxzBRlepWYlhKWWbQPvhZSvI8MVDli7GN4Wr1MX
+	9pNx2Pwy7wpeNHAcSqfcieI1R8G0yvmYmfpNKzx/8qvKg3NA4hCDrOKF+c5aOv10ZVa+HWGvonN
+	EitgCtmml1wZwgmPfclqGvqp+SxwMGtSeDeZIqq81frglm3I9IuKkzrcn9ULpcKPiQFSvvmVq+n
+	ZjIb/sasDgZyvgKL+Vi0O3NLIGoCvSlBIiFbjrYg2bSxbx0YiDRHT9tN6f6I4vRH8scPjWImKhW
+	8
+X-Received: by 2002:a05:600c:8b01:b0:4a3:5a7b:6002 with SMTP id 5b1f17b1804b1-4b6dff841afmr40066665e9.28.1793968300840;
+        Fri, 06 Nov 2026 04:31:40 -0800 (PST)
+Message-ID: <9611989e-a1ef-4bf7-af80-b96d6c3a68ca@gmail.com>
+Date: Fri, 6 Nov 2026 13:31:39 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 03/28] x86/hvm: report SVM x2AVIC support
-To: dmukhin@ford.com, xen-devel@lists.xenproject.org
-Cc: andrew.cooper3@citrix.com, jason.andryuk@amd.com, jbeulich@suse.com,
- roger@xenproject.org, dmukhin@xen.org
-References: <20261105013347.719392-1-dmukhin@ford.com>
- <20261105013347.719392-4-dmukhin@ford.com>
+Subject: Re: [PATCH v3 39/39] xen/riscv: introduce IMSIC h/w interrupt file
+ attaching to vcpu
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Cc: xen-devel@lists.xenproject.org,
+ Romain Caritey <Romain.Caritey@microchip.com>,
+ Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
+References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
+ <fa5788d0133c98ae3feac474da325239d27ed153.1790779209.git.oleksii.kurochko@gmail.com>
+ <1793804802.8631fc262581453bbf619ec5b2062170.1a1a71918bf000403d@vates.tech>
 Content-Language: en-US
-From: Teddy Astie <teddy.astie@vates.tech>
-Autocrypt: addr=teddy.astie@vates.tech; keydata=
- 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
- x9fhaZEsniw8/bYgC3igkk5YJiOa
-In-Reply-To: <20261105013347.719392-4-dmukhin@ford.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------vMQ8KXmX8yrprnEKqyr6r249"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1793967918188
-X-purgate-ID: tlsNG-33051d/1793967920-76CF84E9-F96BD973/0/0
-X-purgate-type: clean
-X-purgate-size: 7939
-X-Spam-Status: No, score=-14.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FORGED_MUA_MOZILLA,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <1793804802.8631fc262581453bbf619ec5b2062170.1a1a71918bf000403d@vates.tech>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-c1860d/1793968301-D654487B-EE2C8A66/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 2725
+X-Spam-Status: No, score=-9.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,
+	SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------vMQ8KXmX8yrprnEKqyr6r249
-Content-Type: multipart/mixed; boundary="------------wNns3wKY6lNt6B8E7MgV0IjT";
- protected-headers="v1"; hp="clear"
-Message-ID: <3c763222-85e6-40e7-988e-19470407bbe1@vates.tech>
-Date: Fri, 6 Nov 2026 13:25:17 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 03/28] x86/hvm: report SVM x2AVIC support
-To: dmukhin@ford.com, xen-devel@lists.xenproject.org
-Cc: andrew.cooper3@citrix.com, jason.andryuk@amd.com, jbeulich@suse.com,
- roger@xenproject.org, dmukhin@xen.org
-References: <20261105013347.719392-1-dmukhin@ford.com>
- <20261105013347.719392-4-dmukhin@ford.com>
-Content-Language: en-US
-From: Teddy Astie <teddy.astie@vates.tech>
-Autocrypt: addr=teddy.astie@vates.tech; keydata=
- xsDNBGn5sK8BDACuzSrrTjpVf4ay06OYB6yY0J1PqKffihoNMtrQRZjAHxoAPC7LTBVHV/XO
- Zw5HJc+9R71z1JV+iYg6z3jPziGKzX8Fj3ZXlzJPmpf1PuETH3KdbvtJT4ny+OGntnJntUoR
- KRPhTirr6yNeBk/637O3CQXjtqFUPZnko8OI/o1yawIBhJJAWicutjkkUgd28Bh6HV9EIumH
- tCBgn5/1A/fpm9624MMgYLsA8qjC4XsoovQvFCaO8HEhvfzrrTZHjn/nPeB9SigxIxXW8YaT
- VqMdqul07o72m3eA2mf+LMu9a04FX/d4wbxBLtELm+1jIrbtyaFZEMOLv/haSiS/Lj3btJH/
- EoucejoZ5SH49ksmVAmKOLktOaTQ8b2gEvP7iaKiIiszCCtOSRohr+2GvDsDeLvVZnlR3I+S
- PhHar7TPKjFz0G3DPNolyjXywNqOAMpomSPi8lSwjAFsxOtQbcck/qRGRSNk4DAmH70pA+89
- MXfQXZ3qt1Q01B1+sU0I8xsAEQEAAc0kVGVkZHkgQXN0aWUgPHRlZGR5LmFzdGllQHZhdGVz
- LnRlY2g+wsENBBMBCAA3FiEEGAIew9LzHY3pdrqtZg+p0QLLz9AFAmn5sK8FCQWjmoACGwME
- CwkIBwUVCAkKCwUWAgMBAAAKCRBmD6nRAsvP0ID6DACGOktArFbLKHNzuyOVCskwfUZPla6Z
- pd3GZ8r61SrAKePIr2BnpgPkd0hV3bSRkRLIrgjzR2NRCzfp0x0HfuhcYfAYPR46XHTvjaJE
- v99sT/vGUG1BZguYDOScSEpgSNaNlYum3RKZbMuROxdK8G+YHccJY8PvWSq2K2yiae2KGiAv
- 1yjnZxug9/PtDfX8vQFUSg2w1ukRDf50wvDohN1zUQfFtofOP2xCRsDZiHAlQ0pF+aUjXQhP
- eP3IdpfWc8cyRLXF06Rk46YMYCytweGtGdHcqAfrVthl84129ZPN422k/voW0sm14gjYlGcT
- UwgnYlFRk2FLq0QeKEDcS0aj3o3EVAQCrayoGzi1pnlIKE3PRGUcUzjGVvzQ/po24gOjwba9
- Egr/Wmu3MQlx/7A8zT5QBzF/n+RYdLNQ0Eu6YnUwf0Z1uieqNaon+olyIRFiLb/hCZHO6ekN
- f5vrm2clHUbQAYaPQebknujoKBo6ZLHg0WM1gZS01Gz+aUpKsUfOwM0EafmwsAEMAKiQiZa3
- yQMmc/h3sDbfVHPSiBA4IMI/NAB7IotzPHq1GzCpsoVILAhF/INbWjxJ3DbVf+en3/FvdVZg
- 2S38xtnth0njNdlVKpyxm054phKjbdoFDwaknWolS4hrddTmetSG5/52AjtmPFtlXAk0NmLv
- fJnW3seXVQbgM7sW/MNXPP5UKDpkGnLhnvej+GU0s3109sJeXT5ImVdphFs9cvyZyBT9t1Pb
- Rowv58EgV0zE4hbAeVkULAbxFV5b/ExTjjGVHoX7CVhWxvCiTqCUoXZRkUE9C3FnkzEFRkKb
- Yu6NCfiHfEyB3Xyg9hfdrRgjMRq907zCof+nDtWxGz1MSEuvTj1g9GZ049Bennqzjc/Q+0ov
- XoK4jm+Py0FiUGUaA6yhexficjH+kCR/xDbVnWrMhSLB4AuTBT9HjfZI6gk3uYLhoT8Pig4/
- eVtR2Q1wZIJsFToR6ofGuyECwFcs+PUXN7fmGRSiPXgjAr/zIUBdW0VWCE3OGPNqtRk2E5s6
- IQARAQABwsD8BBgBCAAmFiEEGAIew9LzHY3pdrqtZg+p0QLLz9AFAmn5sLAFCQWjmoACGwwA
- CgkQZg+p0QLLz9DncQwAg76IehTemLIfrB8T9WIBZrI4kUV7G7a4rjiVoUiHYN5QwhnbZnsa
- JDlt+Ezoqy/510eo2bCSzvW5xXYPgyjcuOPwgQo1Qp764QxyX6rld2f2RcWkDuBHun55ZWXj
- by8o21ginPRwruBVYY5rVf3DV1iBu4NurUeHtyFk/dS0XTOQi2wVUb17sW/+ybCEokdVacZG
- zOqP/OmwHrF8ylXlXnhQq6e3r+J+T8fuoGJelm/CJiMwyP6cEWE8sxVqX/iqwjwUYkuOCpE+
- lOWSvdNHgoEkWR0RXBPQjnGmLKbfTl/QDXLk6NP2/r9uxm2HL6Ei3QJKSEdrp+XZaVnk/Off
- O485NOTKwGOxyWb006cTMh53xPkAJFQu4Tvdj+odsHz88jqw5wfPG0BYWx0I/FspYj7N9kZR
- 8ULR9nX0LvpzJ/kB4NgHIUt8YtIL6ZSfM2dbF7fKzvx1UqFfvozJZwFzfEieJLXa4nlGgR6D
- x9fhaZEsniw8/bYgC3igkk5YJiOa
-In-Reply-To: <20261105013347.719392-4-dmukhin@ford.com>
 
---------------wNns3wKY6lNt6B8E7MgV0IjT
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
 
-TGUgMDUvMTEvMjAyNiDDoCAwMjozNywgZG11a2hpbkBmb3JkLmNvbSBhIMOpY3JpdMKgOg0K
-PiBGcm9tOiBEZW5pcyBNdWtoaW4gPGRtdWtoaW5AZm9yZC5jb20+DQo+IA0KPiBSZXBvcnQg
-U1ZNIEFWSUMgc3VwcG9ydCBmcm9tIENQVUlEIEZuODAwMDAwMEFfRURYW1gyQVZJQ10oYml0
-IDE4KS4NCj4gDQo+IFNpZ25lZC1vZmYtYnk6IERlbmlzIE11a2hpbiA8ZG11a2hpbkBmb3Jk
-LmNvbT4NCj4gLS0tDQo+ICAgeGVuL2FyY2gveDg2L2h2bS9zdm0vc3ZtLmMgICAgICAgICB8
-IDEgKw0KPiAgIHhlbi9hcmNoL3g4Ni9pbmNsdWRlL2FzbS9odm0vc3ZtLmggfCAyICsrDQo+
-ICAgMiBmaWxlcyBjaGFuZ2VkLCAzIGluc2VydGlvbnMoKykNCj4gDQo+IGRpZmYgLS1naXQg
-YS94ZW4vYXJjaC94ODYvaHZtL3N2bS9zdm0uYyBiL3hlbi9hcmNoL3g4Ni9odm0vc3ZtL3N2
-bS5jDQo+IGluZGV4IGNmMDA4YThhY2RmMi4uZGI4MWRhZDRiNjgxIDEwMDY0NA0KPiAtLS0g
-YS94ZW4vYXJjaC94ODYvaHZtL3N2bS9zdm0uYw0KPiArKysgYi94ZW4vYXJjaC94ODYvaHZt
-L3N2bS9zdm0uYw0KPiBAQCAtMjQ1Nyw2ICsyNDU3LDcgQEAgc3RhdGljIHZvaWQgX19pbml0
-IHByaW50X3N2bV9mZWF0dXJlcyh2b2lkKQ0KPiAgICAgICBQKGNwdV9oYXNfc3ZtX3ZubWks
-ICJWaXJ0dWFsIE5NSSIpOw0KPiAgICAgICBQKGNwdV9oYXNfc3ZtX2J1c19sb2NrLCAiQnVz
-IExvY2sgRmlsdGVyIik7DQo+ICAgICAgIFAoY3B1X2hhc19zdm1fYXZpYywgIkFkdmFuY2Vk
-IFZpcnR1YWwgSW50ZXJydXB0IENvbnRyb2xsZXIiKTsNCj4gKyAgICBQKGNwdV9oYXNfc3Zt
-X3gyYXZpYywgIngyIEFkdmFuY2VkIFZpcnR1YWwgSW50ZXJydXB0IENvbnRyb2xsZXIiKTsN
-Cj4gICAjdW5kZWYgUA0KPiAgIA0KDQoieDIgQWR2YW5jZWQgVmlydHVhbCBJbnRlcnJ1cHQg
-Q29udHJvbGxlciIgbG9va3MgYSBiaXQgd2VpcmQgdG8gbWUuDQoNCldoYXQgYWJvdXQgIngy
-QVBJQyBBVklDIiA/DQooYW5kIGF0IHRoZSBzYW1lIHRpbWUsIGFkZGluZyAiKEFWSUMpIiB0
-byB0aGUgZ2VuZXJhbCBBVklDIG9uZSwgbGlrZSANCndoYXQgaXMgZG9uZSBmb3IgTlBUIGJl
-aW5nIG5hbWVkICJOZXN0ZWQgUGFnZSBUYWJsZXMgKE5QVCkiKQ0KDQo+ICAgICAgIGlmICgg
-IXByaW50ZWQgKQ0KPiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L2luY2x1ZGUvYXNtL2h2
-bS9zdm0uaCBiL3hlbi9hcmNoL3g4Ni9pbmNsdWRlL2FzbS9odm0vc3ZtLmgNCj4gaW5kZXgg
-MGZjMzNmNDFiMDlkLi4yOTJhOWVlMTliMTEgMTAwNjQ0DQo+IC0tLSBhL3hlbi9hcmNoL3g4
-Ni9pbmNsdWRlL2FzbS9odm0vc3ZtLmgNCj4gKysrIGIveGVuL2FyY2gveDg2L2luY2x1ZGUv
-YXNtL2h2bS9zdm0uaA0KPiBAQCAtMzYsNiArMzYsNyBAQCBleHRlcm4gdTMyIHN2bV9mZWF0
-dXJlX2ZsYWdzOw0KPiAgICNkZWZpbmUgU1ZNX0ZFQVRVUkVfQVZJQyAgICAgICAgICAxMyAv
-KiBBZHZhbmNlZCBWaXJ0dWFsIEludGVycnVwdCBDb250cm9sbGVyICovDQo+ICAgI2RlZmlu
-ZSBTVk1fRkVBVFVSRV9WTE9BRFNBVkUgICAgIDE1IC8qIHZpcnR1YWwgdm1sb2FkL3Ztc2F2
-ZSAqLw0KPiAgICNkZWZpbmUgU1ZNX0ZFQVRVUkVfVkdJRiAgICAgICAgICAxNiAvKiBWaXJ0
-dWFsIEdJRiAqLw0KPiArI2RlZmluZSBTVk1fRkVBVFVSRV9YMkFWSUMgICAgICAgIDE4IC8q
-IHgyIEFkdmFuY2VkIFZpcnR1YWwgSW50ZXJydXB0IENvbnRyb2xsZXIgKi8NCj4gICAjZGVm
-aW5lIFNWTV9GRUFUVVJFX1NTUyAgICAgICAgICAgMTkgLyogTlBUIFN1cGVydmlzb3IgU2hh
-ZG93IFN0YWNrcyAqLw0KPiAgICNkZWZpbmUgU1ZNX0ZFQVRVUkVfU1BFQ19DVFJMICAgICAy
-MCAvKiBNU1JfU1BFQ19DVFJMIHZpcnR1YWxpc2F0aW9uICovDQo+ICAgI2RlZmluZSBTVk1f
-RkVBVFVSRV9WTk1JICAgICAgICAgIDI1IC8qIFZpcnR1YWwgTk1JICovDQo+IEBAIC01Nyw2
-ICs1OCw3IEBAIHN0YXRpYyBpbmxpbmUgYm9vbCBjcHVfaGFzX3N2bV9mZWF0dXJlKHVuc2ln
-bmVkIGludCBmZWF0KQ0KPiAgICNkZWZpbmUgY3B1X2hhc19wYXVzZV90aHJlc2ggIGNwdV9o
-YXNfc3ZtX2ZlYXR1cmUoU1ZNX0ZFQVRVUkVfUEFVU0VUSFJFU0gpDQo+ICAgI2RlZmluZSBj
-cHVfaGFzX3RzY19yYXRpbyAgICAgY3B1X2hhc19zdm1fZmVhdHVyZShTVk1fRkVBVFVSRV9U
-U0NSQVRFTVNSKQ0KPiAgICNkZWZpbmUgY3B1X2hhc19zdm1fYXZpYyAgICAgIGNwdV9oYXNf
-c3ZtX2ZlYXR1cmUoU1ZNX0ZFQVRVUkVfQVZJQykNCj4gKyNkZWZpbmUgY3B1X2hhc19zdm1f
-eDJhdmljICAgIGNwdV9oYXNfc3ZtX2ZlYXR1cmUoU1ZNX0ZFQVRVUkVfWDJBVklDKQ0KPiAg
-ICNkZWZpbmUgY3B1X2hhc19zdm1fdmxvYWRzYXZlIGNwdV9oYXNfc3ZtX2ZlYXR1cmUoU1ZN
-X0ZFQVRVUkVfVkxPQURTQVZFKQ0KPiAgICNkZWZpbmUgY3B1X2hhc19zdm1fc3NzICAgICAg
-IGNwdV9oYXNfc3ZtX2ZlYXR1cmUoU1ZNX0ZFQVRVUkVfU1NTKQ0KPiAgICNkZWZpbmUgY3B1
-X2hhc19zdm1fc3BlY19jdHJsIGNwdV9oYXNfc3ZtX2ZlYXR1cmUoU1ZNX0ZFQVRVUkVfU1BF
-Q19DVFJMKQ0KDQo=
+On 11/4/26 4:06 PM, Baptiste Le Duc wrote:
+>> Introduce imsic_vsfile_attach() to give a vCPU a working guest
+>> interrupt file.
+>>
+>> A guest (VS) interrupt file has to be backed by one of the hardware
+>> guest interrupt files of the pCPU the vCPU runs on, so that pCPU has to
+>> be known first. arch_vcpu_create() is therefore not a suitable place:
+>> the pCPU assigned to a vCPU can still change before the vCPU is first
+>> scheduled, which would mean taking another file and remapping the
+>> guest's IMSIC page to it. Call imsic_vsfile_attach() from
+>> continue_new_vcpu() instead, i.e. when the vCPU is scheduled for the
+>> first time; as that isn't an __init context, neither is
+>> imsic_vsfile_attach().
+>>
+>> Giving a vCPU its first file shares most of the steps with moving it to
+>> a new one on migration, so move the body of imsic_migrate_vcpu() to
+>> imsic_vsfile_move() and use it for both. Its first_attach argument skips
+>> the part which moves the interrupt state out of the old file: the vCPU
+>> has never run at that point, so the freshly acquired and zeroed file is
+>> all the interrupt state it has, and hstatus.VGEIN can be pointed at it
+>> right away.
+>>
+>> vAPLIC target registers are reconfigured on the first attach as well: a
+>> target the guest writes for a vCPU which has no h/w guest interrupt file
+>> yet only updates the stored copy, which reaches the h/w at this point.
+>>
+> Nit: I didn't quite understand this paragraph, "only updates"
+> leaves out that the h/w APLIC write is skipped, because there is no file
+> to point the target at yet. Maybe something like:
+> 
+>      The guest may program a vAPLIC TARGET register for a vCPU which has
+>      not run yet. That vCPU has no h/w guest interrupt file yet, so
+>      vaplic_mmio_write() only stores the value. imsic_vsfile_move() then
+>      writes it to the h/w APLIC on the first attach, pointing to the newly
+>      acquired file.
+> 
 
---------------wNns3wKY6lNt6B8E7MgV0IjT--
+Agreed, I'll reword it along those lines, naming vaplic_target_write(),
+which is where the value gets stored, and vaplic_reconfigure_target(),
+which is what writes it to the h/w APLIC on the first attach:
 
---------------vMQ8KXmX8yrprnEKqyr6r249
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+```
+The guest may program the vAPLIC target register of a h/w source for a
+vCPU which hasn't run yet. That vCPU has no h/w guest interrupt file
+yet, so there is nothing to point the h/w target register at, and
+vaplic_target_write() only stores the value. Hence imsic_vsfile_move()
+calls vaplic_reconfigure_target() on the first attach as well, which
+writes the stored value to the h/w APLIC, pointing it at the newly
+acquired file.
+```
 
------BEGIN PGP SIGNATURE-----
+> Reviewed-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+> 
 
-wsD5BAABCAAjFiEEGAIew9LzHY3pdrqtZg+p0QLLz9AFAmrtxy0FAwAAAAAACgkQZg+p0QLLz9Cs
-fgv6A+w7xICeIgBL1n/baKbou+ObVhjCJTr6oLoUExKGL0lUgPvNw4pNYIXHCJnX6LWo6CAUuHWV
-pYSP9PWzTCBGhXRFy1wPsJtFfmglyVlCVuJ7h9w/ac7mYqtuKgSE37rqwFdr0DLwJZG2XXqyz2Uc
-BU9R3j4KzF4SL2UKiVdQ+ZAsgbkfEeutZMf7YMesRYk/+KPrvUCCuAJkQJK5CAvIc+ChWLIg80sM
-UqAGXVtUwjod4JenB7BiJKPPy63V/4/NsEF7pEIRCDye95YduCaFQF9wuEmfToIYA5PCJOqggZGv
-93aT6PMBA0GHeWCGkTja9GtdGnxiKJ2UZhfW99JAh9yjReabZR8HapEU9kM7XDVLP3I9EROyiUwh
-zis4J8XZoX+dhcIrf9RC10CtIqo+lAHW5y7dVmTdIFf23PzQBVCEyqrdaUS03ZuKnL/YAxyxum64
-cwaDdBpj47yFs3MaGnrE2YHBTpKk+5QQ1xEbkWT53qL+vBLbXwkldYePBTew
-=68P2
------END PGP SIGNATURE-----
+Thanks for the review!
 
---------------vMQ8KXmX8yrprnEKqyr6r249--
+~ Oleksii
+
 
