@@ -2,48 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3E6B3606A31B
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2026 03:46:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DEB87606A326
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2026 07:03:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=aspeedtech.com header.i=@aspeedtech.com header.a=rsa-sha256 header.s=selector1 header.b=lDgdC1bD
-Received: from list by lists.xenproject.org with outflank-mailman.1476164.1682415 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=NOg8Eg3t
+Received: from list by lists.xenproject.org with outflank-mailman.1476268.1682425 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xPAu1-00051Q-UG; Fri, 06 Nov 2026 03:46:09 +0000
+	id 1xPDyc-0002Mc-VH; Fri, 06 Nov 2026 07:03:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1476164.1682415; Fri, 06 Nov 2026 03:46:09 +0000
+Received: by outflank-mailman (output) from mailman id 1476268.1682425; Fri, 06 Nov 2026 07:03:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xPAu1-00051J-RW; Fri, 06 Nov 2026 03:46:09 +0000
-Received: by outflank-mailman (input) for mailman id 1476164;
- Fri, 06 Nov 2026 03:46:08 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jamin_lin@aspeedtech.com>) id 1xPAu0-00051D-J2
- for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 03:46:08 +0000
+	id 1xPDyc-0002MV-RO; Fri, 06 Nov 2026 07:03:06 +0000
+Received: by outflank-mailman (input) for mailman id 1476268;
+ Fri, 06 Nov 2026 07:03:06 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xPDyb-0002MP-W7
+ for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 07:03:06 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xPAtz-0027ke-W2
- for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 04:46:08 +0100
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xPDya-00GKEv-DV
+ for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 08:03:04 +0100
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jamin_lin@aspeedtech.com>)
- id 6aed4d26-e002-0a2a0a5209dd-0a2a45088530-34
- for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 04:46:07 +0100
-Received: from [52.101.127.81]
- (helo=TYDPR03CU002.outbound.protection.outlook.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jamin_lin@aspeedtech.com>)
- id 6aed4d7d-f659-0a2a45080019-34657f517f09-3
- for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 04:46:07 +0100
-Received: from SEZPR06MB7362.apcprd06.prod.outlook.com (2603:1096:101:253::10)
- by TY0PR06MB5079.apcprd06.prod.outlook.com (2603:1096:400:1b9::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.8; Fri, 6 Nov 2026
- 03:45:58 +0000
-Received: from SEZPR06MB7362.apcprd06.prod.outlook.com
- ([fe80::cd2d:35d2:a702:1de6]) by SEZPR06MB7362.apcprd06.prod.outlook.com
- ([fe80::cd2d:35d2:a702:1de6%4]) with mapi id 15.21.0592.009; Fri, 6 Nov 2026
- 03:45:58 +0000
+ (envelope-from <jbeulich@suse.com>)
+ id 6aed7b99-8faa-0a2a0a5109dd-0a2a4503b4ec-46
+ for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 08:03:04 +0100
+Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6aed7ba7-fae8-0a2a45030019-d1558031cd69-3
+ for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 08:03:04 +0100
+Received: by mail-wm1-f49.google.com with SMTP id
+ 5b1f17b1804b1-4a20bdaf39cso3058185e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 05 Nov 2026 23:03:04 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4b6e28cce1fsm41203345e9.15.2026.11.05.23.03.01
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 05 Nov 2026 23:03:02 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,202 +49,138 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=aspeedtech.com header.i="@aspeedtech.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=elJObx+rzD690J0hmbgt1yIVYORwesXe/y6vVVERUdJbzi01hn67iR5KCLfQ91KwIaUk2D3mG/V1yYOuBxXhC7lBuUk3HI4YvAqJ1Y+Mu4fKKjL4gQqRmK5Fwj8uEP009rpMUCistuaesY4Nmcqp5XFHUjQZJsp96qLuWQZ1jngvOPmLWsaRe4+PHa3kPTQLZlUOY3xAFmD4M4IYSquyFHfcOvmxIK/Oy014GN6mVkVx8CX+Oy0wPthQ9wR7AYdlK7vCVwM6yy8OFomwL0qP7GklKJ8/wXsSlwUoI0sx7eHj2Xn1qfztfATimLRUrRqehcPPhOKqFxWYwhL6MXRE2g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=SQ3ESIv8pnvoGT3giU0WmiQtXz1sadcN+wcIvZYxuTc=;
- b=cRhWJdLjpJZYgmhzwMvP5v/jKu7t/J3mvLI9lEM1Oz+lMbUNsAzVEboOjs9ji3EeC/KU8mw1aIUD3g4A9eD47Ph1dMZB5f1OUgNWku3GJXy8esoHzde1s+ldBCE3tUqI5cSdghpddOuv4bTMHVaMWnRNk4D2A/T1oMuVzG4Cxi+gl49EXbAE5r7HC3yLu4awHTNa6dGhKLZmnigAQP35C9Tmk9b8wRExjNvOBLqqR/MPq6fFdKXURB7SiSkFasQA1dvOInvcWghsNCrEqCfLoaycO+VaLaWOAfoBoiorTrY22XFwmkg417lT+3dvG1DW2+w2YTtC6ErjQqA2b5vptg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=aspeedtech.com; dmarc=pass action=none
- header.from=aspeedtech.com; dkim=pass header.d=aspeedtech.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aspeedtech.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SQ3ESIv8pnvoGT3giU0WmiQtXz1sadcN+wcIvZYxuTc=;
- b=lDgdC1bDuev4sEER/Fal+TdQ588lipoghfSL6FIFatgq4Cs0Hi5Y4xGG5lNet3NIdjzH2vmVm3fFy8iC3RTrJQNxU5cwdE+VY6qTk92rNr0vd4bEBUO4ol1ojThns7AmHmmQJMYsXFWh6uiZMvJ8Rw5FXozfZa6L3mdzpweNjZqD24sFy4vXR3iCDdgqnjGz0Il2eRnvuRlxu3t9sd5LFrKYsWv/oWYMTeY7sveVzh5Ai0iMhtXRuBNVEvkBI2mBA/SzUmkqZAhp2aGiadatTDodnzUA0cMQDdGnrzkca89d1soeQwQrEKlnjrexxM/A9b1sLK+rtHWGFnR3ZlpM9g==
-From: Jamin Lin <jamin_lin@aspeedtech.com>
-To: Junjie Cao <junjie.cao@linux.dev>
-CC: "kraxel@redhat.com" <kraxel@redhat.com>, "marcandre.lureau@redhat.com"
-	<marcandre.lureau@redhat.com>, "clg@kaod.org" <clg@kaod.org>,
-	"pierrick.bouvier@oss.qualcomm.com" <pierrick.bouvier@oss.qualcomm.com>,
-	"peter.maydell@linaro.org" <peter.maydell@linaro.org>, Kane Chen
-	<kane_chen@aspeedtech.com>, "philmd@oss.qualcomm.com"
-	<philmd@oss.qualcomm.com>, "kfting@nuvoton.com" <kfting@nuvoton.com>,
-	"wuhaotsh@google.com" <wuhaotsh@google.com>, "zhao1.liu@intel.com"
-	<zhao1.liu@intel.com>, "richard.henderson@linaro.org"
-	<richard.henderson@linaro.org>, "deller@gmx.de" <deller@gmx.de>,
-	"sstabellini@kernel.org" <sstabellini@kernel.org>, "anthony@xenproject.org"
-	<anthony@xenproject.org>, "edgar.iglesias@gmail.com"
-	<edgar.iglesias@gmail.com>, Troy Lee <troy_lee@aspeedtech.com>,
-	"qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-arm@nongnu.org"
-	<qemu-arm@nongnu.org>, "xen-devel@lists.xenproject.org"
-	<xen-devel@lists.xenproject.org>
-Subject: RE: [PATCH v8 02/18] hw/usb/hcd-xhci: Add an auto-hub property and
- leave it off
-Thread-Topic: [PATCH v8 02/18] hw/usb/hcd-xhci: Add an auto-hub property and
- leave it off
-Thread-Index: AQHdaqugzonZbCOsyEq5GblPuZWDarccaGeAgAP/C2CAAAURcA==
-Date: Fri, 6 Nov 2026 03:45:58 +0000
-Message-ID:
- <SEZPR06MB7362D089282550D7585C16DEFC762@SEZPR06MB7362.apcprd06.prod.outlook.com>
-References: <20261102092201.1729245-1-jamin_lin@aspeedtech.com>
- <20261102092201.1729245-3-jamin_lin@aspeedtech.com>
- <20261103142327.1348025-1-junjie.cao@linux.dev>
- <SEZPR06MB73626D50E685F83DFB006D8DFC762@SEZPR06MB7362.apcprd06.prod.outlook.com>
-In-Reply-To:
- <SEZPR06MB73626D50E685F83DFB006D8DFC762@SEZPR06MB7362.apcprd06.prod.outlook.com>
-Accept-Language: zh-TW, en-US
-Content-Language: zh-TW
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=aspeedtech.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SEZPR06MB7362:EE_|TY0PR06MB5079:EE_
-x-ms-office365-filtering-correlation-id: d7343fc9-47d1-48e3-2620-08df3bb8782b
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam:
- BCL:0;ARA:13230040|23010399003|366016|1800799024|7416014|376014|261022105027099003|261022075727099003|261026140227099003|38070700021|261026121527099003|261028144727099003|4143699003|10067099003|56012099006|22082099003|3023799007|18002099003;
-x-microsoft-antispam-message-info:
- afMlWjAL6ctTeo1e5LXKH9nGmJCowkgopypaEy6bHCxARi/U1LeAacxyScfF+I5U5nMXaHqEGc2KWZuApNJYNDw4ghHdiEgIUVHFXzmSENXvzTKQe8UTLsaunAvDsOZbgaoPU/0w6RwAJHkaDKYee+oSX2/QRuDfECTdNCUkNipsSkYg5P4YTp7Kh2wTZCUI3pDzkofYgogRq45SC8hvXuA40XCsKBRIVEEuDvM35xjw65jyDdsd/Z8kiBTXOWYkHK/+99G1pzZS3LAWGiDdL6Op945b1qXZKfmIgYxvUSJpcpG30G1kKUHXPsozdUlTwfhnlyKvDOSt1FN7bpWuKuvWBhRqipEVHPlHknm5PRuq/sBAJ4klR83FoSj/eNnFdwG3UNR14P/kYQNLuarNBKOT643GjfJvRqsYvrMZQeC78n+g//oKS9pgFQT8BZKay+xF0WFGz+VZKR3mVlkwJos0iakmHefnNEtvqlQvOkf70jnG3OJZUved+xHtcwwKWatOezlebxzJmr1W8bmjSchSjonM4cfx9Uo8NV+Kp61DneLVX1mjVAif4IEqBqO/VmCIsyFLSBeeartX2cnWeNjIDIs7USs8PiX66IoS/Ewjqct9A3bTH0VXTizuA+zESCZJvjh8F0rYr5op2KOl7RQ7V6VgEVWtlYo8KIA/DKyjNJlxSWO+DWpsSMozfDAeXPiEIO9cjLaoZV4AeKttmTvhkvmioXhPw+E6B73a9mg=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:zh-tw;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SEZPR06MB7362.apcprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(366016)(1800799024)(7416014)(376014)(261022105027099003)(261022075727099003)(261026140227099003)(38070700021)(261026121527099003)(261028144727099003)(4143699003)(10067099003)(56012099006)(22082099003)(3023799007)(18002099003);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?6RkHOcsxhg32gsF2RjjkIfucsglZHJHcjLcBpWguUxjohDVW/aScTTyHB4?=
- =?iso-8859-1?Q?80JYhJKmf3frc4at1VTHZpM1O8/BHUZYfx0wxHEzOJJETAZX8LH0uPP8Rm?=
- =?iso-8859-1?Q?extBZCmcntrQ5pJOoYhVNB9/s29HfD31hhXxDWy/eVU15cIEfYysraSrt7?=
- =?iso-8859-1?Q?yeEufE1PnZgG77PyxNLBtGqOwZ/s7exSpo2NZUYIUHZRF5Ml0Vf5H5tggr?=
- =?iso-8859-1?Q?QsMKl62rKOi+Z6DHPdu7IvW0FZUlHdc3PCCp5Jg/8b2b2HYImWUSgB8B25?=
- =?iso-8859-1?Q?BI1n9YT8h0Ugfau6U6cufoFZWDzuORqj5KVFiajG1U4n8a3jcDWBbiTkBn?=
- =?iso-8859-1?Q?UHooZTl44BAtZhD4yd7qaHGC/zSV+iZlwsNeFE41InlqV+VhnFZjZFvzgD?=
- =?iso-8859-1?Q?+VXtnl7u7DV2dz6rSiXXhOjZapIIQoQrRBEReGbPZdzEZQF03lwGzONW5v?=
- =?iso-8859-1?Q?zh13MOPgmxp5CeCpHl217RpN1aDx4YwuGU/mdIPXmS1L9oVoZiDc3c7Ylw?=
- =?iso-8859-1?Q?59sJiD0nriU9sX4etpkxfdIMg1K19StHE3VRrwy4MDyKxIyYWclwIaOe1I?=
- =?iso-8859-1?Q?qgBWCtD4ONV4Pcj/vjjwMdHjqsvJC0WqvX27Lfp0cz3kniaQltNNGusis5?=
- =?iso-8859-1?Q?3Sq1Y4HveSOTS4EfOVF/zR5xsVB+H/CP/xCgp8JqTjxGeA1kl8a2eKKBGo?=
- =?iso-8859-1?Q?5ZVpL/8I/BaxT/d9ogmdPgP/0W3bT0jwcluJPhCtp/HzOtFcFpkfnw93ha?=
- =?iso-8859-1?Q?bHnqXozredxaC1TY6zrflBsfPDlVGRBM6Ti21B5kFehlRVqphk3PFGmPrR?=
- =?iso-8859-1?Q?HAk0s7ZSYzx2kjfW0yI6CYRtIa/yOqGIFJ9JteAzEsC9+la0FKKFx9qc09?=
- =?iso-8859-1?Q?q0bWlWMaO6DUe4Rdmc4mCpV7C7xu2Dpp+rsMjrcH4aM9wZxoYOuoH+PiO7?=
- =?iso-8859-1?Q?YM0oiqDDlpju3kstD6dYKBc5FM/doUCPuo0X547OXygbDPT7DlE9/FQ4Mf?=
- =?iso-8859-1?Q?v1jNy+QPIIKdbyqLjG0jdJxiAfU4wpbTdXLp1pJWR+r9EuOp58x/gMFrne?=
- =?iso-8859-1?Q?SbcAGOeieNKGLC1mrFnrcbUG3+144aAqR+LFbhUJzm9e6GTo6kbWIM2w30?=
- =?iso-8859-1?Q?3WXh0sArxUtqT16uDlTnhxe4drQBRtVlIwzJ2RVjcpLbvU9CKyD4ZXNDJV?=
- =?iso-8859-1?Q?h4kgkeZxmqJRNQfHxPudrSDdvTamyKr+0KSfXmaXx7sxHtTrIWwdBaC/IQ?=
- =?iso-8859-1?Q?cYDJRL5HzmlEEN1ZPI8kqApQe49ePtzBlEs7Ex32B/8DhqF8ICUUJmqnRZ?=
- =?iso-8859-1?Q?XLcqlqwV98jR80ofT7EY6Pr9XDQc/IN2wk41RY5zlMwudtfWkTz/CeaKSE?=
- =?iso-8859-1?Q?YCmC6s/Nk/7p8iLSDfVHzcApt9npIPYCzxjUqXAHPXPS3eElcgSgU/Ki08?=
- =?iso-8859-1?Q?jgRG6A5fjvEojG9UXgSsRmGBx0YuiYLj064WgI/Ssl8B5v9EGpMTwxNJSu?=
- =?iso-8859-1?Q?muGOzvUMAoyXCeCI7u5xDQr1BcxwL2DFDf8gNIVS7dtHWhNRpRLEao0/2b?=
- =?iso-8859-1?Q?ZTb8WzqzUOdIDTcaXebBUAFSRajLcYXzRs3HwyD6G34JhNN7rGA+3aCLKx?=
- =?iso-8859-1?Q?D4/dqO/KNznnaJevL0Mc3zPSBafXq51UoYyU/1FSXzVlwGV3SiA7z1J3IG?=
- =?iso-8859-1?Q?A/NdcsKAncAJ32F169NLuGSQQg73q23FAyE/E0eP+SHZdiOO+Sssk68VN0?=
- =?iso-8859-1?Q?7Q/QLLnMKx1MnROnQMKxGSteZWtcEmjysZ2wg7g4c1M7DGjTCqVBz461OU?=
- =?iso-8859-1?Q?JuBFrCePXQ=3D=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1793948583; x=1794553383; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=kQ2ROWRTdO/pxyulQSAwumhYJ9F4gvlCfIGw8Dy5YSU=;
+        b=NOg8Eg3t9n7oKn6yymbtNOrgU6cjDobpFOmZuMkabIceIPlAK1WrZDUFikvAXUHY4T
+         owcCyyCCOHGQyLpqanEX379U2VwYlWudP3ve4TGKSsWCT+Vc19cePB6kZ8lhj8upq/DD
+         Z9xidIt7JRn1dBT52lzy9QkeeKthefx3q6W9110ozGdNs+X94/0rr+sib5TTAZYGsKkO
+         6eM/F+hOqp3vEeTgEJexIooryr1jTFM5GHWQGvPsn/XrHIg0+sWXvvHoFvlCTGloPR1T
+         i+WHESMS+CEaiOgYFl6DcvYsVuA9EkHL+xBp24W5Qj8N30U7h2HT6wQWf8uyuQJvUigA
+         JLzw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793948583; x=1794553383;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=kQ2ROWRTdO/pxyulQSAwumhYJ9F4gvlCfIGw8Dy5YSU=;
+        b=flRx+X2NHZ1Ge31icJnzKYnI1TU2D6BmAn6c2+TRUoX8GKV7AN4yJS5DOJ2wEUG176
+         mSvGhZVa95rM4NgA9t0ryTt0ekK+e/ekkh2mYVG08IyNdgS9mF9PJXgRF98OufRjNJ38
+         Ouyj/CqxAXtOU7HH3E2pCqf4/XEHqVMFPxJTZEl+kFnd55ov+bt0FI98Jk6j61q42nQo
+         pxKcVXs8OlzyLwCev4sDYWSE029rOzG9f9UZNSKI802rhtMomwc6D16xU0Sxby4Kq5O2
+         EsV47HB0BUDO+Y+gGjXVu/j6/Df89D+ZEPWtydnMHJ918qmG/3dOS4x3gXaducISnba3
+         6XWA==
+X-Forwarded-Encrypted: i=1; AKwUvBzXBsvFPvfS++0m1bnS0w5MgFTBZDQZbE7tCdPB1+n8A0z6xji2MUhKTcErwLcoditQf3H3UrdyhJE=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z92AlMVw1MA2W9RQiiV/po2VrzzswgSGw2ZZ1UJCAjCEuBzuleT
+	/xxambl/6ujfpVgQBTiZSOrpKR0yU6F0tAbGx7iGIkjr/FTCKGVMFifuHl0kYBXTpA==
+X-Gm-Gg: AYBFou2uSUF8vNmLpwKrg93B7A6I0sYdHXkpfXPov5n2LO9935dYDgqYv+fKa0s154r
+	K+RUVdZeJ4x47cnLxM3MhoWmegCieCUptd7a6J8fyYduyi7KtHQfpjywf5GpP3vUaf5Mi3sL+2I
+	Se9f3703pxw1xL6kSSnWJnxkl5W6bvP4cjxYIkWAo0SS9rczhYimeRz/yvVP8PzZn6DYjQ/Lfce
+	cR45pkMkvhn8aWZtyTLuxHJD2DFObgKivlhE6IqEycl+aPxiqHPsyqQ+VktdBfil05ijrQQMdER
+	y6RMmyWyP6RC4cFz5r2W7ZGuf4MGprtwcHYaJqaugVOtl00mRIxJg/wNJihEPADisI1dvTYn8cz
+	l/kaOrmwSIeMzACYRCItZq09WDJo45HgusyBLJH+ucNWg1AjZ5u4IcSPVab0uHB08Ve+whXiI/4
+	MaFG/ucWcxTMlFsgRqDHlaH370FTO4O6Cj5Wkzo6ipMr7qLZ8OsUOukVdUrSJr93/ey3vgDVax3
+	jO5Fe1UMPEOfjX1QDKkf6G0MJ8+mFPlRFUoaG6ghZemu7qXEthJ5MS5kPGINoWK7zFDrDr9tWV1
+	n8qrW09/8ilP0xpa+XH+gPQFzIkIJDt9bAyASPj23/eI/wTwew0o4Bhlxkh8XVBE7Ua0sliejN+
+	x0hyCEFv9QqB1H1E=
+X-Received: by 2002:a05:600c:3b29:b0:4a1:fae5:f2e2 with SMTP id 5b1f17b1804b1-4b6db4a5d89mr23798075e9.4.1793948583441;
+        Thu, 05 Nov 2026 23:03:03 -0800 (PST)
+Message-ID: <da90f205-a2ac-4e39-a359-79a3408c0d12@suse.com>
+Date: Fri, 6 Nov 2026 08:03:00 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked:
-	Z0A0jXgX0qaJ+3QfsLF2YgQBWjf02TeobscQadSV0TtW7Fthn1PO1IOpmbti8GZ3BgrZ/eMQF7BaUr17zgaCm+jQSj52VwD4RZewjp9Dck99K2N+BgOYiXjKav1hTe/o9LN8V2+OM1EegyBro8cLv9ZGCot1rYoOIxUkqrIPD+l+FpUkXEac++ygqSW4wtA/ul7r0tpRCXh0IQ4EHRPzHooGXGRq8b/maPB+00tS7sv5lRjkI+g8EbwCJpdVJPeZFVARnjSH+/OmvpnDVNJiT749WM+Pt3msfYqQhuEKNVQ7Rt5Owu6R2T09PAOr7a1lSkf/xmc6WMjTITQgthxl1w==
-X-OriginatorOrg: aspeedtech.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB7362.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d7343fc9-47d1-48e3-2620-08df3bb8782b
-X-MS-Exchange-CrossTenant-originalarrivaltime: 06 Nov 2026 03:45:58.5520
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 43d4aa98-e35b-4575-8939-080e90d5a249
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Xk8v7cb7mPyTTaobLKYemHvgksA5FIXWspzbAlZK+PlcQvS5VFuTvgomU6Y+4Xsfg4VVyxouark5CkS2fOoWdE6KRyT3gRpb3PTdBQeG56Y=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY0PR06MB5079
-X-purgate-ID: tlsNG-c1860d/1793936767-CDF4787B-11D78D04/0/0
-X-purgate-type: clean
-X-purgate-size: 2529
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
-	autolearn=no autolearn_force=no version=4.0.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 26/28] docs: add coverage for svm_avic=
+To: dmukhin@ford.com
+Cc: andrew.cooper3@citrix.com, jason.andryuk@amd.com, roger@xenproject.org,
+ teddy.astie@vates.tech, xen-devel@lists.xenproject.org
+References: <20261105013347.719392-1-dmukhin@ford.com>
+ <20261105013347.719392-27-dmukhin@ford.com>
+ <70db6d7a-5e48-4a39-8553-4718f7ccdf73@suse.com> <auzlbS6B2k0yJJOF@kraken>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <auzlbS6B2k0yJJOF@kraken>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-33051d/1793948584-6C8DD4E9-C6041596/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 1627
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-> Subject: RE: [PATCH v8 02/18] hw/usb/hcd-xhci: Add an auto-hub property a=
-nd
-> leave it off
->=20
-> > Subject: Re: [PATCH v8 02/18] hw/usb/hcd-xhci: Add an auto-hub
-> > property and leave it off
-> >
-> > Hi Jamin,
-> >
-> > On Mon, Nov 02, 2026 at 09:22:05AM +0000, Jamin Lin wrote:
-> > > Add auto-hub and leave it off. hw_compat_11_1 turns it on, so an
-> > > older machine type keeps the hub it has today and a guest saved by
-> > > an older QEMU still loads.
-> >
-> > Reran the migration check from v7: with pc-q35-11.1, a guest saved
-> > without the series loads on v8 with the hub in place, for qemu-xhci
-> > with four HID devices and for q35 -usb with six.
-> >
-> > But this missed the 11.2 soft freeze, so in 12.0 pc-q35-11.2 is an old
-> > machine type too, and hw_compat_11_1 (my suggestion on v7) doesn't
-> > cover it. Saved with pc-q35-11.2 on master, both cases fail on v8:
-> >
-> >   Unknown section or instance '0000:00:01.0/4/usb-hub' 0
-> >   Unknown section or instance '0000:00:1d.7/6/usb-hub' 0
-> >
-> > The entries from 02-05 want hw_compat_11_2 once the 12.0 machine types
-> > are in.
-> >
-> > Junjie
->=20
-> Hi Junjie, Marc-Andr=E9, and Gerd,
->=20
-> Due to the QEMU code freeze and the planned 11.2 release in December,
+On 05.11.2026 21:22, dmukhin@ford.com wrote:
+> On Thu, Nov 05, 2026 at 09:24:09AM +0100, Jan Beulich wrote:
+>> On 05.11.2026 02:33, dmukhin@ford.com wrote:
+>>> @@ -2673,6 +2673,27 @@ On Sappire and Emerald Rapids CPUs with May 2025 microcode or later, the
+>>>  `ibpb-alt=` option can be used to switch to the alternative mitigation for
+>>>  Intel SA-00982.  Intel suggest that some workloads will benefit from this.
+>>>  
+>>> +### svm_avic (x86)
+>>> +> `= true | false | nodoorbell`
+>>> +
+>>> +This option configures Advanced Virtual Interrupt Controller (AVIC), which
+>>> +is an extension of AMD Secure Virtual Machine (SVM) to virtualize local APIC
+>>> +for guest VM.
+>>> +
+>>> +This parameter is experimental and for expert configuration only.
+>>> +
+>>> +Xen has mitigatations for the following AVIC hardware flaws:
+>>
+>> Nit: mitigations
+>>
+>>> + * AMD Erratum 1235. A hardware flaw affecting certain AMD Family 17h and
+>>> +   Hygon Family 18h processors where the CPU hardware reads a stale
+>>> +   `IsRunning=1` bit during Interrupt Control Register (ICR) write emulation.
+>>> +
+>>> +Limitations:
+>>> +
+>>> + * AVIC in x2APIC mode is not supported.
+>>> +
+>>> + * AVIC in nested virtualization setup is not supported.
+>>> +
+>>>  ### sync_console
+>>>  > `= <boolean>`
+>>
+>> This wants to be part of the patch where the option is introduced. New options
+> 
+> I introduced 'svm_avic=nodoorbell' later in the series, after 
+> svm_avic= appears for the first time. So my thinking was to document
+> all new options in one patch...
 
+Please do this as (sub)options are being added.
 
-I am not sure about the correct release version. I expect it to be v11.2.
-If the version is wrong, please correct me.
-
-Thanks,
-Jamin
-
-
-> disabling automatic hub creation while keeping migration compatibility wi=
-th
-> older QEMU versions requires adding the property to hw_compat_11_2.
-> We need to wait until after the QEMU 11.2 release for the maintainers to =
-add
-> hw_compat_11_2 to each machine type.
->=20
-> The USB redirection server is my original upstream goal, and I think this=
- task is
-> independent of the automatic hub task.
-> So, I want to split the auto-hub changes into a separate prerequisite pat=
-ch
-> series and send v9 after the QEMU 11.2 release.
->=20
-> The USB redirection server common protocol series still needs rework on t=
-he
-> device announcement and control transfer patches.
-> I will send v9 next week and mention that it requires the patch series th=
-at
-> disables automatic hub creation.
->=20
-> This way, we can continue testing and reviewing the USB redirection serve=
-r
-> common protocol this month.(November)
->=20
-> "If you agree, I will send v9 next week. Otherwise, I will wait until aft=
-er the
-> QEMU 11.2 release and then resend the full patch series as v9."
->=20
-> Thanks,
-> Jamin
-
+Jan
 
