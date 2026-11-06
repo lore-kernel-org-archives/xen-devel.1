@@ -2,48 +2,40 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28DC1606A32D
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2026 16:04:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 95B96606A326
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2026 16:20:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=selector1 header.b=Jcc6XCce
-Received: from list by lists.xenproject.org with outflank-mailman.1477077.1682850 (Exim 4.92)
+	dkim=fail reason="signature verification failed" (1024-bit key, unprotected) header.d=apertussolutions.com header.i=@apertussolutions.com header.a=rsa-sha256 header.s=zoho header.b=eZ13jAgq
+Received: from list by lists.xenproject.org with outflank-mailman.1477102.1682859 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xPMQM-0002hx-Q3; Fri, 06 Nov 2026 16:04:18 +0000
+	id 1xPMfK-0005LO-0U; Fri, 06 Nov 2026 16:19:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1477077.1682850; Fri, 06 Nov 2026 16:04:18 +0000
+Received: by outflank-mailman (output) from mailman id 1477102.1682859; Fri, 06 Nov 2026 16:19:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xPMQM-0002ho-LK; Fri, 06 Nov 2026 16:04:18 +0000
-Received: by outflank-mailman (input) for mailman id 1477077;
- Fri, 06 Nov 2026 16:04:17 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xPMfJ-0005LH-Sr; Fri, 06 Nov 2026 16:19:45 +0000
+Received: by outflank-mailman (input) for mailman id 1477102;
+ Fri, 06 Nov 2026 16:19:45 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper@citrix.com>) id 1xPMQK-0002hi-U7
- for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 16:04:17 +0000
+ (envelope-from <dpsmith@apertussolutions.com>) id 1xPMfI-0005LA-Qy
+ for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 16:19:44 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xPMQK-000X39-An
- for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 17:04:16 +0100
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xPMfG-002OFU-Jg
+ for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 17:19:42 +0100
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6aedfa62-e002-0a2a0a5209dd-0a2a4501aeb0-48
- for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 17:04:16 +0100
-Received: from [52.101.61.18]
- (helo=DM1PR04CU001.outbound.protection.outlook.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6aedfa7e-5984-0a2a45010019-34653d12c3fd-3
- for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 17:04:15 +0100
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
- by SJ0PR03MB6648.namprd03.prod.outlook.com (2603:10b6:a03:391::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.11; Fri, 6 Nov
- 2026 16:03:34 +0000
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::a70d:dc32:bba8:ce37%4]) with mapi id 15.21.0592.010; Fri, 6 Nov 2026
- 16:03:34 +0000
+ (envelope-from <dpsmith@apertussolutions.com>)
+ id 6aedfe18-2eae-0a2a0a5409dd-0a2a45079626-16
+ for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 17:19:41 +0100
+Received: from [165.173.180.50] (helo=sender6-of-o50.zoho.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <dpsmith@apertussolutions.com>)
+ id 6aedfe1b-b4ea-0a2a45070019-a5adb432bfef-3
+ for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 17:19:41 +0100
+Received: by smtp.zohomail.com with SMTPS id 1793981971052886.4401578272528;
+ Fri, 6 Nov 2026 08:19:31 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,171 +44,181 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=GkiMkdQgq6NvYytSjwoMWKrdzxT/7OMyoXUwIjVKvOuK5ERTy9aStSfrnNCj7z1BaXmqK+/Ry45PXeHsmSHrDrCzXgUDRjKuUj8X3QTFTT0gq3qVbWEU80vid4fMMaNWn/fRlMYgFZzv6ZlzOn33XWQ03kJkD7wKrM/V74BEMEKBE8bBnOpSk6WzOeVX1wcpRoPCwEo5lxO3Rl7Mg2MLA12EV5udT/IMP9+ADWsuJ0T/dDJedibd/sH3IVUgdiAIJTHWuMoEnxzuK//X04DFBsn3b8Ce/ATUoF9+E0CNPB7lk24cK/8vzTpa5csePfrs3bfjyhmLBgB07cgjWZmtUg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yomdQ7QwXopVssE+DCCfhkqY7S3zAHHZkc7NleIfsho=;
- b=L1LRVI6CBaCqBRJsIN/2Hp5ax+qx9JY1cCTIo5Hse860VmXp18Eny5/ERq5brYckTja8Jg/ufak4BPs45zR5vjiP+9rKVluYy9IZj+qu79uaucHdyYYfwGXo3sAcHTBC9LPrZ8/7+tmDKQznJ67c/hh7XiPQYsmV1dish9KGQtqVY1WlAEngi4rD4inEa7w59WN2tsXMEhwW5+MuldFEXa4Hy2mF3ZCdZ3G7kdA+THRM8luw880wRjxubq2FYGVQXcoz0RmZHD/ulfNrHXNSDACw2C5JAME1JyU9zFvK3sI6Bf1OjFW5BLjPH3OlAl2FpW4U3pbjqWNhHlFC9RamLQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yomdQ7QwXopVssE+DCCfhkqY7S3zAHHZkc7NleIfsho=;
- b=Jcc6XCceQZX861sPqEHVdNrTzniZWo534wNh9KH5+qMry1zq3ANGN0KNuhRAW1iRTrxwjWDucQDwh8xbkXbk+6vhUy3UT+pEZOiEGKWS3vNGWhuPFdA3dBBu9ZvzyecMS6G8ptUpwjo1+66qgLjKwAfhmd1n6AhJ4JXl5fEydtM=
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <b8d76591-5862-493c-8e54-00663f0f4366@citrix.com>
-Date: Fri, 6 Nov 2026 16:03:30 +0000
-User-Agent: Mozilla Thunderbird
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, jason.andryuk@amd.com,
- jbeulich@suse.com, roger@xenproject.org, teddy.astie@vates.tech,
- dmukhin@xen.org
-Subject: Re: [PATCH v1 01/28] x86/hvm: move SVM feature printout to a separate
- function
-To: dmukhin@ford.com, xen-devel@lists.xenproject.org
-References: <20261105013347.719392-1-dmukhin@ford.com>
- <20261105013347.719392-2-dmukhin@ford.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <20261105013347.719392-2-dmukhin@ford.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: LO4P123CA0665.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:316::16) To CH8PR03MB8275.namprd03.prod.outlook.com
- (2603:10b6:610:2b9::7)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=zoho header.d=apertussolutions.com header.i="@apertussolutions.com" header.h="Content-Type:Content-Transfer-Encoding:Cc:Date:From:MIME-Version:Message-ID:Subject:To"
+ARC-Seal: i=1; a=rsa-sha256; t=1793981974; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=Mzl7/jp7e9l5MMDmf9jz162/uh8Dthdzg9wZJZKD9VD58ACWZnsfEDBQ6SwuODjonCy5zoUAGy4YJRfwvh764GgqaeLa12JWnHQYjhcVfFKiIZocqMRD37AGtAJ+yM2GO1JPjcYNXa69IMXle8H7eO8Tq7jUd5bqf943h30ZhNE=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1793981974; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=Tz+dumTzOkyurKIDuKTXH7Bh5vpMqUu73eS3Xj+UXPk=; 
+	b=Z5D3mJk/V36Vzf8oHFZI5Z88X2Ud1pHZfTL2VGUwGSWqYZqgVdDpJyaAfvDvqZxDs0FBpg2jhOrhXulyvPY3duB5QX15nJ+ABgjZBPbSxco/TG3XTdgibecDQKwq7OMhxUJAXbTBZ8uw1yA14CSr//7xbkajS/dngxUhd+KZ/iY=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=apertussolutions.com;
+	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
+	dmarc=pass header.from=<dpsmith@apertussolutions.com>
+DKIM-Signature: a=rsa-sha256; b=eZ13jAgqJVf0taaP6LbKoK8AC41rt66n/2wb3/NTRn1FQxVC17p35KW1CyEzOi8t+L6ngEmqSWxJ1RFHo/6T8DE/TjAYI9diXAGHncJ2LKmbvzpCzV/GKwr4q0oTnWKvwihcMSI+nWWD3kRYCdfcOph7e7U9bfbhzhF9BLqCIRk=; c=relaxed/relaxed; s=zoho; d=apertussolutions.com; v=1; bh=Tz+dumTzOkyurKIDuKTXH7Bh5vpMqUu73eS3Xj+UXPk=; h=Content-Description:Content-ID:Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:List-Subscribe:List-Post:List-Owner:List-Id:List-Archive:List-Help:List-Unsubscribe:MIME-Version:Message-ID:Resent-Sender:Resent-Cc:Resent-Date:Resent-To:Reply-To:Resent-Message-ID:Resent-From:Sender:Subject:To:Date:From:Message-Id:Reply-To:Subject:To:Cc;
+Message-ID: <51ed28b0-1c41-4e6b-95a9-786e59d4cd9f@apertussolutions.com>
+Date: Fri, 6 Nov 2026 11:19:29 -0500
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|SJ0PR03MB6648:EE_
-X-MS-Office365-Filtering-Correlation-Id: c6c581c5-0744-412e-0816-08df3c1f82a3
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|366016|376014|23010399003|18002099003|22082099003|10067099003|4143699003|11063799006|56012099006;
-X-Microsoft-Antispam-Message-Info:
-	/AFOcEQLlvTawi3A1EV/qzLXCAXjFlCj6Ez0Oj0e3cnjLXedMxod/866xyXtfJJ/+z6aheCq9GG6QWnpDvGFwd+hvN46MVv+YQCP2+M5uy68vqpRC3z3QDy9xA5r6TmZUaAhCmPVCxLDpdcDnRNDK4Zdhm6ctPCIUGUFDPoXrgRFgIcIY8rblkfemcJ4vq3Wvey/ySE0681UO/bgFOgMRFir0qBDN8dzMAavG+j/EGOTJRmydhRFHfyCJazDCQ/wBJYQ3F3ovRFEVTffYjQ2eyyn6YXgEr/MMevH9xdAUhFGxZ39TAD2Ym5cyJ+/PTkg8ibbfcOrWO0U6l8/cOt+JDWk1EGTYf146qoaDPQ+gwK3/pE4bjYKC7bm+tpCSWTJrR+VQAdNxI0Ui3eI5KU1GAAmfOMggpiS8+/RGG9Ulv6BPa6KgXtoiZHjijgEa0Co/E+cuDWBCQmEHAdeQw/T8eiM2yjvOIJ2Bv28MHllZCWm/z9mfHEK/0XDME8wwvMlbGiP+d8dUHsDGHOqWQXiB+MYQclfz5UAikplLn5PtYVvcwWZo73CiMPDvAryst2vKlAvTxffmJOFRkV5PicJ1HxXjpwyImx/Gfyi9FlnT5IMN0bpRD+YwC4xOdK9dmTp6xZJ4orzShU7I0KfQvIH+ff6GjS3g2ncYuWvaK2vLIc=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(23010399003)(18002099003)(22082099003)(10067099003)(4143699003)(11063799006)(56012099006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?WEZidWxqRkQvTE4ydzNuRExzWnBOVjFlNFBGYWtnZnpMTWhsTEZwRDYwenNS?=
- =?utf-8?B?cEFpVnlxRTRvUURvMWtIblhZN2hjOHRCQS9TWWRaK1VhNTNaUGZ3OG5CVjRR?=
- =?utf-8?B?clJxdnBqWk1NQklHSWo5dlFJaHdxSUZhSWgwOExQMmZWb3JJREZFRW5ha1VC?=
- =?utf-8?B?dUhROWVCUjRYT2I4ejJyQlZMSkJCMld5dUtxR0R3aWNsbXB1S0QvblVnbVVF?=
- =?utf-8?B?S3IxMUxBbTF2TUlzK2lsbXptdmNzMVdqQTBXam1hcmlGOXFWQmJlM2VqM29V?=
- =?utf-8?B?bzM4VUtkaHQ0aVpnUDBTL0hRd2cvbDdOQllwY1VCN1hIUmoxTTRZVnFTclhG?=
- =?utf-8?B?ZTVMSy93aytCcnRtYWtaZFVySVVWM0ltV1dabjNkcFdVZDdtQ1hPeGVSSDlO?=
- =?utf-8?B?dzFVYzY1bDZ0MnUxTVBZTW5kS3pYZ2JHbHVrcm0raVhwK25sWFVMbTVoY2lL?=
- =?utf-8?B?VEVxYXVqd1V6ME9DVFFQbmJvRW8rWFlpRUZieExETFZ0THlQZkpxVnZqL2Qw?=
- =?utf-8?B?NnA2aDRQdHdybG1QWXBwVGtIUXdld3pwU2l5SHIwcWx4VXhLWTlmWkM0WVVO?=
- =?utf-8?B?aXNJSlNuMmdScWg2UnpvbjZTTU8yTWRzMkViY0FnV0FmVi9qQ2hwUXlSNmdo?=
- =?utf-8?B?NEdmUXVtZjNkZS9yaXZ3NmNxSElodDhkazFqUXNEdk54VGlaN0lkSFJ3WDlK?=
- =?utf-8?B?bXpzSUJubG45QnJKcnJnUWZlR2dGOTBrM0lUZ0Z4Q0hEK09uYnBPTk5yN0w0?=
- =?utf-8?B?YmgzWHN5a1BBY0F0d1dkQTlFYlc2eStXR25Da0ZDa2VEdWlkNDlFd1dVL2w2?=
- =?utf-8?B?VWdvQXFBY1VTazNYZXlKd1d0bStjbDgrOVk2eEwxYlBJMVVSUXNUSkROV0dP?=
- =?utf-8?B?WkVHVUE4c2Z0bnFHRXUzTlBqSTUwUUROMnNoU2F1Z0VWeWowRTVjQ1VXVFBa?=
- =?utf-8?B?b0xMOGR4U3ZnZkZIMW9iQVB4VnhOZittSVFDaytHaDlmZEYzWHdwQmhIY3Vh?=
- =?utf-8?B?ZUc0YWNyQkUzclBIYkp5VUhCWCs0dTQ1bmp6U1p3Mkk2eGM1M2VwZmRhdXoz?=
- =?utf-8?B?N2xlYzdlcmFpZFM0TDVQUnVjME0rVEUxZmRGd095TCtVQWU1cXIwRi85UGxj?=
- =?utf-8?B?MisxTXVLWnB5anM2WC9mWTZSRUdpY1Vlam5GTGQ5OVBlMWZwT2RITFRGYW85?=
- =?utf-8?B?RndKRUhaaVFaRGxYdFFUOWhwaXRzRXlBd2lCOUUwb1k2eTEvRXY2aklIejda?=
- =?utf-8?B?R1ZrS0k5ZkxiQnY2Z1NVQWxJUmlJa1VCVnNhSGtadU9tL0t4WVVySkdyRmNH?=
- =?utf-8?B?K0lSWWdTcDJkK0cvZkd1YWNHdFZWbjUwWGQrSkhkSHprR3hRY1dKNlNScEQr?=
- =?utf-8?B?dGVuV01YZWtFQU5rdzVueVRoWHk1bWNydWI1alNnbDlEZEZPSk9zcFN0d2dW?=
- =?utf-8?B?bHRQWmJUQS9vWmhyeXJ6TTZWWUZlREh3ZmMyOUtrRUVDU3JhcVRNTys0clpM?=
- =?utf-8?B?Q0VQdUl5bUJHdTFlUHdtS1NZM0ZITVRKY0E3Vm1GbEx4c0RZZUtzVitVbVFK?=
- =?utf-8?B?YkxuWk5IMWQ4TTVYM1pTWWJjd1ptN3VVbWo4a2Y3QmZWd3V0MmUvMVB5UjdM?=
- =?utf-8?B?eDdJT2paZnFmU2NGd1p5UHB5YUhqMS9WZWlJaDhXSDJpU0JvanBTcjZ1MVBW?=
- =?utf-8?B?ckFkVnB1SHNrYytZSExRSlRvTUZQVGZFM0Z3aUVwUlNNZkFDTDVMbFgwcEcx?=
- =?utf-8?B?aVZBK2FSWUFjNU1KVjNnY0E2QWVYc1kwYXV1TmFuNmJla1c3b0ZtbG1ub2hW?=
- =?utf-8?B?WFJwWXJneDViN08wN3lSSHJudnh3V1h3RWRDZ1JYSm9tUjdjZUV0TmhrcDJS?=
- =?utf-8?B?eXV5ZFhpblVqS05aWC9YclVFcUcySjlkalNneXBmT2NCSHBDcjg0azFYdlJz?=
- =?utf-8?B?TFlpSWRiT0lkSGVuME5zelRqZlNUc2N6WmsxREhqaVZvRGNaRDZJTUdQSy8x?=
- =?utf-8?B?Sy9FVUJmb1dSY051ZlY1enQ0V3VQZEFZMzBpNzFQR1hVTWVJclFhSHRZdU51?=
- =?utf-8?B?dmJWc3dPWVFhaHZuMnR2SjFWTU95SEdGdjZ2TUtmVzljVVIrUlI5YVNUeDVz?=
- =?utf-8?B?K0I2KzA5dms4Ynp1QlJPdWExNEZUMjJ1WG1YUEV3YmJ5eXBsTzVDSThoVlBm?=
- =?utf-8?B?eXZSb0M0YnJUZHBCem03RUpUYjBNWmw5WnhFRndwb0VVRC9XZHJBWTFRcUtV?=
- =?utf-8?B?ZFBQSGRMQ21Rc1A2b2VYRHZGYndrQVR1TnRWOGpmTkEvQys1MnZneStPQWZK?=
- =?utf-8?B?Qmp5Lzl3K2dQSDl6QUM0UFMyQUxhOUpGeWlDRGFhMUNwcFBkek90Zz09?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c6c581c5-0744-412e-0816-08df3c1f82a3
-X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Nov 2026 16:03:34.4133
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 5bYPEj4rm79oCs6tYQxSpNKVcPcdMHiRQ9Kx+SmgB+hDlonlwMpVR3ITW5AzOKM7O8wqxeh+Ikma566aUkoYTepudBY9ru6QaSRkns7WQQA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR03MB6648
-X-purgate-ID: tlsNG-d62444/1793981056-BE664757-E22310D9/0/0
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Teddy Astie <teddy.astie@vates.tech>,
+ Andrew Cooper <Andrew.Cooper3@citrix.com>
+Subject: RFC: Promote FLASK XSM Module to Supported in SUPPORT.md
+Autocrypt: addr=dpsmith@apertussolutions.com; keydata=
+ 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
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ZohoMailClient: External
+X-purgate-ID: tlsNG-ef75cf/1793981981-A7CD7AE4-C9DB8ECB/0/0
 X-purgate-type: clean
-X-purgate-size: 323
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=4.0.1
+X-purgate-size: 4761
+X-Spam-Status: No, score=-5.1 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1
+	autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 05/11/2026 1:33 am, dmukhin@ford.com wrote:
-> From: Denis Mukhin <dmukhin@ford.com>
->
-> Isolate long SVM feature list printout in a separate function to
-> improve readability.
->
-> Not a functional change.
->
-> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+Greetings,
 
-Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+This RFC is intended to start a dialogue following the discussion on the 
+November Xen Community Call. It proposes changing the status of the 
+FLASK XSM Module (the implementation in `xen/xsm/flask`) from 
+Experimental to Supported in SUPPORT.md, while leaving the FLASK default 
+policy Experimental.
+
+### Background: XSA-77 and disaggregation guidance
+
+XSA-77 ("Disaggregated domain management security status") documented 
+that the majority of management hypercalls (most `XEN_DOMCTL_*` subops, 
+all of `__HYPERVISOR_sysctl`, certain memory operations, etc.) were 
+originally written only for fully-privileged dom0 and had not been 
+reviewed for exposure to semi-privileged, potentially hostile callers.
+
+When XSM/FLASK is used to delegate those interfaces, a compromised 
+management domain may be able to cause host-wide denial of service or 
+privilege escalation. The security team’s policy (codified in “Security 
+Status of dom0 disaggregation” section of `docs/misc/xsm-flask.txt`) is 
+that, until the interfaces are reviewed, bugs that merely reduce the 
+security of a radically disaggregated system to that of a 
+non-disaggregated one will be handled as ordinary public bugs rather 
+than under the normal security embargo process. Only a small set of 
+subops are treated as safe for disaggregation; the remainder listed in 
+that section remain covered by the XSA-77 stance.
+
+SUPPORT.md currently reflects this distinction and the XSA-77 caveat for 
+FLASK.
+
+### Current status and the case for change
+
+Today, SUPPORT.md divides XSM support between "XSM Framework", "FLASK 
+XSM Module", "FLASK default policy", and "SILO XSM Module", where "XSM 
+Framework" and "SILO XSM Module" are marked as Supported, and "FLASK XSM 
+Module" and "FLASK default policy" are marked Experimental.
+
+The core concern behind XSA-77 is that it has not been demonstrated 
+which fine-grained operation delegations can be done safely. The 
+documentation provides guidance on “safe”/covered interfaces precisely 
+because of that gap. At its heart, this concern is a policy- and 
+configuration-level issue.
+
+Marking the code, "FLASK XSM Module", Experimental primarily because a 
+user could write an insecure custom policy feels inconsistent. Many 
+other knobs in Xen (and in the Linux kernel) allow an administrator to 
+weaken isolation or security guarantees; we do not mark the underlying 
+code Experimental solely for that reason. An objection to promoting the 
+FLASK module should be rooted in concrete problems with the 
+implementation in xen/xsm/flask (in the form of patches or defect 
+reports), not in the possibility of misconfiguration or vague aspersions 
+about code quality.
+
+Real-world use supports treating the module as mature. OpenXT 
+derivatives have deployed FLASK-based configurations on the order of 
+multiple hundreds of devices for more than 15 years and have undergone 
+multiple private security evaluations. In full disclosure, those 
+deployments use variations of the OpenXT FLASK policy, not the upstream 
+default.
+
+### Proposed SUPPORT.md text
+
+I would like to propose moving "FLASK XSM Module" to Supported status 
+with a clear statement of what is supported, while leaving "FLASK 
+default policy" as Experimental with a minor clarification.
+
+```
+### FLASK XSM Module
+
+     Status: Supported
+
+Compile time disabled by default.
+
+Using FLASK to delegate various domain control hypercalls
+to particular other domains, rather than only permitting use by dom0,
+remains specifically excluded from security support for many hypercalls.
+Please see XSA-77 and the guidance in docs/misc/xsm-flask.txt
+for more details. The Supported status of this module reflects the
+maturity of the implementation in xen/xsm/flask; any security guarantees
+for a particular policy configuration are the responsibility of the
+policy author.
+
+### FLASK default policy
+
+     Status: Experimental
+
+The default policy includes FLASK labels and roles for a "typical" 
+Xen-based system
+with dom0, driver domains, stub domains, domUs, and so on.
+No specific validation claims are made for this policy.
+```
+
+### Summary
+
+- Promote the FLASK XSM Module (`xen/xsm/flask`) to Supported.
+- Leave the FLASK default policy Experimental, with a minor 
+clarification on default policy validation claims.
+- Retain the existing note that delegating the XSA-77-covered interfaces 
+remains outside security support, consistent with the guidance already 
+in `xsm-flask.txt`.
+
+I would value feedback, especially from anyone who has concrete concerns 
+about the quality or correctness of the FLASK implementation itself.
+
+-- 
+V/r,
+Daniel P. Smith
+Apertus Solutions, LLC
+
 
