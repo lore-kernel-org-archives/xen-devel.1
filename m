@@ -2,54 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3BDA5606A336
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2026 09:09:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 40D99606A326
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2026 09:18:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=N0af8Qdt
-Received: from list by lists.xenproject.org with outflank-mailman.1476378.1682506 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=GkcgkT+g
+Received: from list by lists.xenproject.org with outflank-mailman.1476388.1682514 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xPFwK-0002sk-St; Fri, 06 Nov 2026 09:08:52 +0000
+	id 1xPG51-0004f0-JY; Fri, 06 Nov 2026 09:17:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1476378.1682506; Fri, 06 Nov 2026 09:08:52 +0000
+Received: by outflank-mailman (output) from mailman id 1476388.1682514; Fri, 06 Nov 2026 09:17:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xPFwK-0002sd-PR; Fri, 06 Nov 2026 09:08:52 +0000
-Received: by outflank-mailman (input) for mailman id 1476378;
- Fri, 06 Nov 2026 09:08:51 +0000
+	id 1xPG51-0004et-Gn; Fri, 06 Nov 2026 09:17:51 +0000
+Received: by outflank-mailman (input) for mailman id 1476388;
+ Fri, 06 Nov 2026 09:17:49 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <berrange@redhat.com>) id 1xPFwJ-0002sX-JZ
- for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 09:08:51 +0000
+ (envelope-from <Roger.Pau@amd.com>) id 1xPG4z-0004en-FZ
+ for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 09:17:49 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xPFwI-002xOj-PJ
- for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 10:08:50 +0100
-Received: from [10.42.69.11] (helo=localhost)
+ id 1xPG4y-00DFr6-IL
+ for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 10:17:48 +0100
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <berrange@redhat.com>)
- id 6aed9922-8faa-0a2a0a5109dd-0a2a450be75c-0
- for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 10:08:50 +0100
-Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <berrange@redhat.com>)
- id 6aed991e-b7e8-0a2a450b0019-aa0a817cb6ef-3
- for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 10:08:47 +0100
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-651-yzAb6lIKNqGlxw4drA2uog-1; Fri,
- 06 Nov 2026 04:08:42 -0500
-Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id B55551956057; Fri,  6 Nov 2026 09:08:38 +0000 (UTC)
-Received: from redhat.com (headnet04.pony-001.prod.iad2.dc.redhat.com
- [10.2.32.116])
- by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 42E1B1956047; Fri,  6 Nov 2026 09:08:31 +0000 (UTC)
+ (envelope-from <Roger.Pau@amd.com>)
+ id 6aed9b38-e002-0a2a0a5209dd-0a2a4506dcaa-18
+ for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 10:17:47 +0100
+Received: from [40.107.208.8]
+ (helo=PH0PR06CU001.outbound.protection.outlook.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Roger.Pau@amd.com>)
+ id 6aed9b39-195a-0a2a45060019-286bd00848d4-4
+ for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 10:17:47 +0100
+Received: from SAWPR12MB999315.namprd12.prod.outlook.com
+ (2603:10b6:806:560::13) by FT1PR12MB183566.namprd12.prod.outlook.com
+ (2603:10b6:170:2b::5) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.11; Fri, 6 Nov
+ 2026 09:17:44 +0000
+Received: from SAWPR12MB999315.namprd12.prod.outlook.com
+ ([fe80::5382:815f:5b37:73b9]) by SAWPR12MB999315.namprd12.prod.outlook.com
+ ([fe80::5382:815f:5b37:73b9%6]) with mapi id 15.21.0592.009; Fri, 6 Nov 2026
+ 09:17:44 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -58,146 +52,226 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1793956126;
-	h=from:from:reply-to:reply-to:subject:subject:date:date:
-	 message-id:message-id:to:to:cc:cc:mime-version:mime-version:
-	 content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=BrRMLM1AFmYi/bs5etB4HJkcjnYDxynCvbguHNw2R60=;
-	b=N0af8QdtjFsR0m10wmIj7KILbvw+VsMQn/lBsGsRYqPeHN4/pXuLi9wIhMITqO8wMkhTBw
-	F/UrroSqV9rFy9JmZ2GdTe7Apnedvg+DYHgwnlHiXDlmYk+02pAc8owc4uC0SM5WbYclve
-	3GEo2b5iYxyFTmBL7K9iMMax8yazTms=
-X-MC-Unique: yzAb6lIKNqGlxw4drA2uog-1
-X-Mimecast-MFC-AGG-ID: yzAb6lIKNqGlxw4drA2uog_1793956120
-Date: Fri, 6 Nov 2026 09:08:28 +0000
-From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-To: Jamin Lin <jamin_lin@aspeedtech.com>
-Cc: Junjie Cao <junjie.cao@linux.dev>,
-	"kraxel@redhat.com" <kraxel@redhat.com>,
-	"marcandre.lureau@redhat.com" <marcandre.lureau@redhat.com>,
-	"clg@kaod.org" <clg@kaod.org>,
-	"pierrick.bouvier@oss.qualcomm.com" <pierrick.bouvier@oss.qualcomm.com>,
-	"peter.maydell@linaro.org" <peter.maydell@linaro.org>,
-	Kane Chen <kane_chen@aspeedtech.com>,
-	"philmd@oss.qualcomm.com" <philmd@oss.qualcomm.com>,
-	"kfting@nuvoton.com" <kfting@nuvoton.com>,
-	"wuhaotsh@google.com" <wuhaotsh@google.com>,
-	"zhao1.liu@intel.com" <zhao1.liu@intel.com>,
-	"richard.henderson@linaro.org" <richard.henderson@linaro.org>,
-	"deller@gmx.de" <deller@gmx.de>,
-	"sstabellini@kernel.org" <sstabellini@kernel.org>,
-	"anthony@xenproject.org" <anthony@xenproject.org>,
-	"edgar.iglesias@gmail.com" <edgar.iglesias@gmail.com>,
-	Troy Lee <troy_lee@aspeedtech.com>,
-	"qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
-	"qemu-arm@nongnu.org" <qemu-arm@nongnu.org>,
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Subject: Re: [PATCH v8 02/18] hw/usb/hcd-xhci: Add an auto-hub property and
- leave it off
-Message-ID: <au2ZDOY7MGdY74L9@redhat.com>
-Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-References: <20261102092201.1729245-1-jamin_lin@aspeedtech.com>
- <20261102092201.1729245-3-jamin_lin@aspeedtech.com>
- <20261103142327.1348025-1-junjie.cao@linux.dev>
- <SEZPR06MB73626D50E685F83DFB006D8DFC762@SEZPR06MB7362.apcprd06.prod.outlook.com>
- <SEZPR06MB7362D089282550D7585C16DEFC762@SEZPR06MB7362.apcprd06.prod.outlook.com>
-X-Archived-By: <archiver.kernel.org>
-MIME-Version: 1.0
-In-Reply-To: <SEZPR06MB7362D089282550D7585C16DEFC762@SEZPR06MB7362.apcprd06.prod.outlook.com>
-User-Agent: Mutt/2.4.3 (2026-10-09)
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
-X-Mimecast-MFC-PROC-ID: MM6er1YQ7_R-qwjwK9SVIqWDbZ-kCIg7VI2xsgBx9zM_1793956120
-X-Mimecast-Originator: redhat.com
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=NN8z/RXW6wPsu+otmAWxVjlC/ft+kuG8RBq3GDxeaw9Vhg1i3C8ikMLhVSoh1BAiq5NMB6HLNqLiX/EO7nEpE8NhCpIpcpLGnEqhCvw6v9xc3kuPtiLI//US67T4jJCP9/GqBbuUmQwf77WGvR+TKJjA3Uu1I8mLIO2DvswguGyLIPbWP+EMF8EMXO+BoD9BtYU2CwOItz5cGgKuJTUT0V9xkmr4XoPXrCGiaIJAXzkGN82puso7H2oVp8pSuPO+3C+QNBzfSctMznflpu8rkoNySsrAuKELvFytLneKDtzsvASdIFndWV/Pp4w/bR/CPc/JMfxrrCUMG2XL7TWKaw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=w7vr8U9XAP4KsuO2PvdfHTPTfVxbMCpKtocrR+VP+Hk=;
+ b=vygOBN1ixwzPQLSYvRJEjp4zuR6Kgq0OQvgZFjzrqZiLWnw5t/u1Hl974hkTVH0gfG74k8eBN7B2rY+vQkLghHO40FYARAKa6koqHZ1UYbhVsSADR6ovaTarPAOsxt4ORPShc+CkO8E7iGzWCD35oyiGRvPTFJ7FwCKrAdZm9jry01SSLHyxVhYbm2Wr9LpSWMl9637Kk+IM8LA4ZO46hUsKWpEEzfy+Khlx16muDpFuk2zbC7vNc5pbowPg3A925YKVmP/NOgISj8vb1z43t0AMqD4Dc5VSWPJRSkGXM1Jya6XJSM8kTq2uTlCjCDUVnIzHvUSm+th7WAI6ST/DHg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=w7vr8U9XAP4KsuO2PvdfHTPTfVxbMCpKtocrR+VP+Hk=;
+ b=GkcgkT+gEo1s2wY85FKZ7HVcDG8G+3J4D3M2DDcTWB4anW2g4S9BaOo2KEFCafZOwML217jZmEJuRr8FHnxxW+QsP7RwrV9Za4h48VxvEiRDizxteMYTFvadB63tfKezqNwCCgmDTzy7CZ1tTFxaFaBvOzV1fEbmMpW6NcvxBz0=
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Date: Fri, 6 Nov 2026 10:17:41 +0100
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@amd.com>
+To: Jiaqing Zhao <Zhao.Jiaqing@amd.com>
+Cc: xen-devel@lists.xenproject.org,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Juergen Gross <jgross@suse.com>,
+	Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Penny Zheng <penny.zheng@amd.com>
+Subject: Re: [PATCH] libxl: wait for QEMU exit before restarting a domain
+Message-ID: <au2bNZiQmElHeEhu@Mac.lan>
+References: <20261104064645.1171477-1-Zhao.Jiaqing@amd.com>
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-42698a/1793956127-A92CC9EA-093DEFF1/35/111497
+In-Reply-To: <20261104064645.1171477-1-Zhao.Jiaqing@amd.com>
+X-ClientProxiedBy: ZR0P278CA0118.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:20::15) To SAWPR12MB999315.namprd12.prod.outlook.com
+ (2603:10b6:806:560::13)
+X-Archived-By: <archiver.kernel.org>
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SAWPR12MB999315:EE_|FT1PR12MB183566:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1e08828d-d132-4bd6-14dc-08df3be6d0a8
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|366016|376014|23010399003|1800799024|18002099003|22082099003|6133799003|10067099003|11063799006|261102124527099003|261102123227099003|261026140227099003|261026121527099003|261028144727099003|261021123027099003|261021121427099003|261022105027099003|261022075727099003|56012099006|261009223027099003;
+X-Microsoft-Antispam-Message-Info:
+	ULf+Pxo6pWGCiyWM3lyQJKXFFJMjbajzrVOT4wEyuRKSrgfNjcmgjbHCsRXucDk8ci6ULmhrd9T01irdUvYkLp32pLuwWsZMv0C8k+LRhZZX5ERs+mD6QinN9qTVVHmJuelcKpxnaXd8Dwy5w8oHvgnUcE9r051pxBQ+l9zCuqhzHqPNyw9WesQeNh9ySljBQDn/tvoT1+J9LjTh8aqMezqRbil9KMbmE2eLkWodksfyWhwDgLmszvhcES4nTh0aYUYzFJbGIwY5qbrapvIcD1kQTzy6kGcnMHiVmEygz2rUl66SvmndzwnsKUonkL6d1WCUhJPa4z6vTQ6019E9eBXDu9pkVfW34NzgBChEO3S8qOPEfW3HPAv56U5OdY2p6wkK15ZYs09UEnC9q5dDPxN2JaDo3TGW7thrTmiKNjnwG93vjxszL2dFORwMF42TdhW4Uh/kapWPqOPIdhmcU1tP/fA6nUU8awSKUmt3+UYjqBdviDv6BwCDBbLY6PPNgTcspcR4zgL0Y2r7c4oM8mWNlugrc9FQVfD2638DBQzhuueyKAdmYuosP0sZYO2kAdFeCgFsSM62ztVb2DPCUyuMJUNauKJF48kKpy48W2p5UkcbOIT3zbWRAAngK+Vnanmz2Zc4trc7aGn79GudQRCmYAJgYNR4Wc6mKd8QGrU=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SAWPR12MB999315.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(23010399003)(1800799024)(18002099003)(22082099003)(6133799003)(10067099003)(11063799006)(261102124527099003)(261102123227099003)(261026140227099003)(261026121527099003)(261028144727099003)(261021123027099003)(261021121427099003)(261022105027099003)(261022075727099003)(56012099006)(261009223027099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?Q29WMW5MeXl4YzFwYnk5VzNxYWFjTU5nSnF2am1XRm9YbkhUWlF3Rkh3T2dX?=
+ =?utf-8?B?YlJQbGpNVG5qN2hhUitKM1ZBNGs0aEhkalpOQVVWVGZRdDNtcEdQRGJSNkND?=
+ =?utf-8?B?OFk1Umt2WXVrU2YydSt3VzJERUIzK0JBcWs3WTcvTitLRURyc3h1WkpCTjhw?=
+ =?utf-8?B?MUdRd1hONWxHZHB4Y2F3WWRLSitrV3dTMVlEVXkrVWR0ZlIydXFkNG5LZW16?=
+ =?utf-8?B?aXM2eDZQR1ZUcGJQczJEdk5jU25aakV1RXlIMmNXNmYzUjhsWGp5K2dERzBr?=
+ =?utf-8?B?aUVxaW92d1dJRkdQd05tWm1iVkpoZ2czME1NR1FWdGJJL29FNU9Bc1YrcWp2?=
+ =?utf-8?B?NHpqelhUejl1VTJxbDZTUFdma0xtUDhDOFJLMlJCQ2FycVozN21PY25xQllY?=
+ =?utf-8?B?UUJVUGswWFFxQnlmRFJjbjRhZ3hhNm1vWG05bC81ZmVSNlFvSERlZ2tIczVE?=
+ =?utf-8?B?K09GVm02ZHdydXVsdXNjUHNscUpmcEdZRnZIVGgwaGNZclFIUVAyNWhuZFlQ?=
+ =?utf-8?B?Qm1hc2FBTS9CRG9JS0Q1bFV3S09HOWpNbGpZa3EwcC9KUDdvUG5nVnQxUVpF?=
+ =?utf-8?B?aHZlWFZDTXpocjFNcmVXWmZBeUdhOFdCMWd1N2xub2tpVGYwTmVvMWFZUVNu?=
+ =?utf-8?B?bldGZlUxR0xieUF5Ym9OSXZwNkxMNWZpTjltQ2JEQmxmQnI2UjliZzI1cS9z?=
+ =?utf-8?B?S3FXNFFhUHY0RTgvWXcyY0hhTGdia0RxVWY4Q2N0cVNvRmJOSDJSSnNLTEdu?=
+ =?utf-8?B?RWFnTHVnMm5JeUhhUlVDR1Y5dDUrNjBCTTJWSVpraEZCVVdCL1pLMDNqdHZO?=
+ =?utf-8?B?L1VrK2toTFY1Z29Ob25jZFJhcEkzcVgrenZxMWp3a0ZoZWdieDI0TTNtRTlR?=
+ =?utf-8?B?QThnMVFLUXo5cFNJdWRjeFRHbWJpbWh6b3VZS2FVeU1QK1NVRmN0cU8ra3Nw?=
+ =?utf-8?B?a1hzRDNEQ0RvTEpLcDNKNFB6amZUbjliYXpONVNyd0RIYVI5ODN3aS9mY1Nr?=
+ =?utf-8?B?ekw4MDcxK0pPT0FwcjQwT09ldGxwbnNVdlRtb0F3aVd3Y3ZqMk1HajNzVlVh?=
+ =?utf-8?B?QkhJd1dscUxyU0RVUUg2M0ZLRExlc2RHelQ3WC9wUHJtOGV3ZFZ5eHAzWkRZ?=
+ =?utf-8?B?NjZlVnJReWEyTTVBOFVIK0NaS3l3MnhYWDhZeEZsOWg2RGlnZ0tqZGlFSk9v?=
+ =?utf-8?B?TUFiZlR5RG43aU1HelBDMFJVQTdHZU8vSUdrdUxQNVk1bXpiWXlrMENwNXRq?=
+ =?utf-8?B?eCtKODY2TGZqQ3l5bWU5d0RVT2tOVjZhbnZHREUwNmp6aU9jL0I1WC9OaC9z?=
+ =?utf-8?B?WnE2NktidDB1c1Q4d1FYS0Y4elBsOGpmaGxsZXRDMDk0TGM4cUtIWnNFS1hk?=
+ =?utf-8?B?MXE5N3d5UW4vRXhmSjlsTzlYSUp5dUhuV1pGQlFHK3B2eHJBR2JjcThPZkto?=
+ =?utf-8?B?aWxKU1NqU2JRWUpNRG1aTXg0WHNIYWZIKzE1cE5MLzlSZGt2N2RUV1o2RHFS?=
+ =?utf-8?B?SkZaUy9lL3JYcWFaR0tVckE5RUVQTTBCZk5RRytNVU9Pa2NacHdxano4a1Av?=
+ =?utf-8?B?N0xnSitEem5GTDA0YkQwQ2QwWFIzekFnbWtUR0lWdWFWU0pjMnhZbVpnNVZG?=
+ =?utf-8?B?SDh1NmtyUXpxTDdMYUN5UEsrUXA2L29vT2xnRDBPOUlWM0MvWlp5VGM5cmNO?=
+ =?utf-8?B?VTlkaFdheEVYVmtmb0o0WVU2Q2ZvQzBpODdxeUZxU05GcnNLazJVTjd3Ni9m?=
+ =?utf-8?B?aGhxQU53djNDV01QVnlJTjEralUreEorVGJ3WmNlcHJJNWNhaUxpa2U3bzI1?=
+ =?utf-8?B?WU1vMU5IalM0NTYvUExFQmxEbEZlb3JhbFViU010c2t1Y1dhUEoxSlZQV1Z6?=
+ =?utf-8?B?L2lpYU1ncTZZckdrU0dBMjAyL09ySjdNKzhFMEdBeE81RWZaVjhMaTBlQ1Nk?=
+ =?utf-8?B?M3lhSUI0bWFPQmsvM2dmMkpZRHBSbEU0NmN0U3lvSC91NE0zbHJFU0trSGN3?=
+ =?utf-8?B?NEJYblFQQ2MrM0RhS0ZaQ21sV0pkTVdSeFJIQnNFZlhka0lybkVHaHBXZFRp?=
+ =?utf-8?B?VStveWozNzZtNkt5YlIvN3Rqbm1MTkMrNlpObTk1TGw3VHNEQzhnSDJrUkd5?=
+ =?utf-8?B?c3VobSt0a3FUdWNlR0s2aVBtS3NvZTlKWkZKMG1vYWordkZJMEVRM2JLMGI1?=
+ =?utf-8?B?Y1hXeHJJRzJLRjlhc0RUVVR6QWxCdURIQUFzbjJGSWZIVDZWc1hkSVhaZmNp?=
+ =?utf-8?B?d2JGOHA2eTljMHNZVjhaeTlrUnE3WVhBZ2xqKzhkUkh3ajFXazl1cDJVd1hj?=
+ =?utf-8?B?TTY5ak5oY0tXVHptQ0JzQXoyWDNqbWVDZHEzUTRWQy82ZDNkSFl0Zz09?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1e08828d-d132-4bd6-14dc-08df3be6d0a8
+X-MS-Exchange-CrossTenant-AuthSource: SAWPR12MB999315.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Nov 2026 09:17:44.0334
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: rGBRRpq0CDhCXYOqW5Gq/tOfVuc8MWqtC+F9wcYEBrRFRZ9YcvhF/AP3g8abudk+AWymLQBQIx5H163no9WbrA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: FT1PR12MB183566
+X-purgate-ID: tlsNG-16d1c6/1793956667-F627077B-5AACCF9F/0/0
 X-purgate-type: clean
-X-purgate-size: 3236
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-purgate-size: 4632
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Fri, Nov 06, 2026 at 03:45:58AM +0000, Jamin Lin wrote:
-> > Subject: RE: [PATCH v8 02/18] hw/usb/hcd-xhci: Add an auto-hub property and
-> > leave it off
-> > 
-> > > Subject: Re: [PATCH v8 02/18] hw/usb/hcd-xhci: Add an auto-hub
-> > > property and leave it off
-> > >
-> > > Hi Jamin,
-> > >
-> > > On Mon, Nov 02, 2026 at 09:22:05AM +0000, Jamin Lin wrote:
-> > > > Add auto-hub and leave it off. hw_compat_11_1 turns it on, so an
-> > > > older machine type keeps the hub it has today and a guest saved by
-> > > > an older QEMU still loads.
-> > >
-> > > Reran the migration check from v7: with pc-q35-11.1, a guest saved
-> > > without the series loads on v8 with the hub in place, for qemu-xhci
-> > > with four HID devices and for q35 -usb with six.
-> > >
-> > > But this missed the 11.2 soft freeze, so in 12.0 pc-q35-11.2 is an old
-> > > machine type too, and hw_compat_11_1 (my suggestion on v7) doesn't
-> > > cover it. Saved with pc-q35-11.2 on master, both cases fail on v8:
-> > >
-> > >   Unknown section or instance '0000:00:01.0/4/usb-hub' 0
-> > >   Unknown section or instance '0000:00:1d.7/6/usb-hub' 0
-> > >
-> > > The entries from 02-05 want hw_compat_11_2 once the 12.0 machine types
-> > > are in.
-> > >
-> > > Junjie
-> > 
-> > Hi Junjie, Marc-André, and Gerd,
-> > 
-> > Due to the QEMU code freeze and the planned 11.2 release in December,
+On Wed, Nov 04, 2026 at 02:46:28PM +0800, Jiaqing Zhao wrote:
+> The PID-based device model destruction path returns immediately after
+> sending SIGHUP, before QEMU has necessarily exited. When an HVM guest
+> reboots with VNC enabled, the new QEMU process may fail to bind the VNC
+> port because the old process still holds it.
 > 
+> Wait for QEMU to exit in a child process after singaling it for at most
+> 60 seconds. If waiting fails or times out, log the error and retain the
+> existing domain destruction behaviour.
 > 
-> I am not sure about the correct release version. I expect it to be v11.2.
-> If the version is wrong, please correct me.
+> Signed-off-by: Jiaqing Zhao <Zhao.Jiaqing@amd.com>
+> ---
+> Cc: Anthony PERARD <anthony.perard@vates.tech>
+> Cc: Juergen Gross <jgross@suse.com>
+> Cc: Roger Pau Monné <roger@xenproject.com>
+> Cc: Stefano Stabellini <sstabellini@kernel.org>
+> Cc: Penny Zheng <penny.zheng@amd.com>
+> ---
+>  tools/libs/light/libxl_aoutils.c  |  8 ++++--
+>  tools/libs/light/libxl_dm.c       | 45 ++++++++++++++++++++++++++-----
+>  tools/libs/light/libxl_domain.c   |  2 +-
+>  tools/libs/light/libxl_internal.h |  3 ++-
+>  4 files changed, 48 insertions(+), 10 deletions(-)
+> 
+> diff --git a/tools/libs/light/libxl_aoutils.c b/tools/libs/light/libxl_aoutils.c
+> index c2d42e7cac..977a2705a8 100644
+> --- a/tools/libs/light/libxl_aoutils.c
+> +++ b/tools/libs/light/libxl_aoutils.c
+> @@ -628,10 +628,11 @@ void libxl__kill(libxl__gc *gc, pid_t pid, int sig, const char *what)
+>  
+>  /* Generic function to signal (HUP) a pid stored in xenstore */
+>  int libxl__kill_xs_path(libxl__gc *gc, const char *xs_path_pid,
+> -                        const char *what)
+> +                        const char *what, pid_t *pid_r)
+>  {
+>      const char *xs_pid;
+> -    int ret, pid;
+> +    int ret;
+> +    pid_t pid;
+>  
+>      ret = libxl__xs_read_checked(gc, XBT_NULL, xs_path_pid, &xs_pid);
+>      if (ret || !xs_pid) {
+> @@ -640,6 +641,9 @@ int libxl__kill_xs_path(libxl__gc *gc, const char *xs_path_pid,
+>          goto out;
+>      }
+>      pid = atoi(xs_pid);
+> +    if (pid_r) {
+> +        *pid_r = pid;
+> +    }
+>  
+>      ret = kill(pid, SIGHUP);
+>      if (ret < 0 && errno == ESRCH) {
+> diff --git a/tools/libs/light/libxl_dm.c b/tools/libs/light/libxl_dm.c
+> index 511ec76a65..ac1db9fe6a 100644
+> --- a/tools/libs/light/libxl_dm.c
+> +++ b/tools/libs/light/libxl_dm.c
+> @@ -2859,7 +2859,7 @@ static void device_model_probe_spawn_outcome(libxl__egc *egc,
+>  
+>      /* Ensure our QEMU command line probe is killed. */
+>      rc = libxl__kill_xs_path(gc, dmss->spawn.pidpath,
+> -                             "qemu command-line probe");
+> +                             "qemu command-line probe", NULL);
+>      if (rc) {
+>          LOGD(WARN, dmss->guest_domid,
+>               "Killing qemu command-line probe pid from path %s",
+> @@ -3420,9 +3420,10 @@ out:
+>  }
+>  
+>  /* Generic function to signal a Qemu instance to exit */
+> -static int kill_device_model(libxl__gc *gc, const char *xs_path_pid)
+> +static int kill_device_model(libxl__gc *gc, const char *xs_path_pid,
+> +                             pid_t *pid_r)
+>  {
+> -    return libxl__kill_xs_path(gc, xs_path_pid, "Device Model");
+> +    return libxl__kill_xs_path(gc, xs_path_pid, "Device Model", pid_r);
+>  }
+>  
+>  /* Helper to destroy a Qdisk backend */
+> @@ -3433,7 +3434,7 @@ int libxl__destroy_qemu_xenpv_backend(libxl__gc *gc, uint32_t domid)
+>  
+>      pid_path = GCSPRINTF("libxl/%u/qdisk-backend-pid", domid);
+>  
+> -    rc = kill_device_model(gc, pid_path);
+> +    rc = kill_device_model(gc, pid_path, NULL);
+>      if (rc)
+>          goto out;
+>  
+> @@ -3454,6 +3455,21 @@ static void kill_device_model_uid_cb(libxl__egc *egc,
+>                                       libxl__ev_child *destroyer,
+>                                       pid_t pid, int status);
+>  
+> +/* Run in a child so waiting for QEMU does not block the libxl event loop. */
+> +static int wait_device_model_pid_child(libxl__gc *gc, uint32_t domid, pid_t pid)
+> +{
+> +    unsigned int i;
+> +
+> +    for (i = 0; i < LIBXL_DEVICE_MODEL_STOP_TIMEOUT * 10; i++) {
+> +        if (kill(pid, 0) && errno == ESRCH)
 
-Yes, the forthcoming release is 11.2, the version then ticks over to 12.0
-for the first release of 2027.
+Isn't this theoretically racy?  How can you guarantee the PID hasn't
+been reused, and thus you end up killing an unexpected process on
+further loops?
 
-> > disabling automatic hub creation while keeping migration compatibility with
-> > older QEMU versions requires adding the property to hw_compat_11_2.
-> > We need to wait until after the QEMU 11.2 release for the maintainers to add
-> > hw_compat_11_2 to each machine type.
-> > 
-> > The USB redirection server is my original upstream goal, and I think this task is
-> > independent of the automatic hub task.
-> > So, I want to split the auto-hub changes into a separate prerequisite patch
-> > series and send v9 after the QEMU 11.2 release.
-> > 
-> > The USB redirection server common protocol series still needs rework on the
-> > device announcement and control transfer patches.
-> > I will send v9 next week and mention that it requires the patch series that
-> > disables automatic hub creation.
-> > 
-> > This way, we can continue testing and reviewing the USB redirection server
-> > common protocol this month.(November)
-> > 
-> > "If you agree, I will send v9 next week. Otherwise, I will wait until after the
-> > QEMU 11.2 release and then resend the full patch series as v9."
+I see you hook this up into the events interface by spawning a process
+that does the spinning, have you looked whether it's possible to get
+PID state changes as notification on a file descriptor?  That would be
+more natural to hook into the events interface, and would avoid the
+race mentioned above AFAICT.
 
-Don't delay sending new versions of your series because of the release
-freeze.
-
-Just put a "TODO: change to hw_compat_11_2 before merge" in the commit
-message to call out the bit that you know needs changing before this
-can be finally ready to merge.
-
-With regards,
-Daniel
--- 
-|: https://berrange.com       ~~        https://hachyderm.io/@berrange :|
-|: https://libvirt.org          ~~          https://entangle-photo.org :|
-|: https://pixelfed.art/berrange   ~~    https://fstop138.berrange.com :|
-
+Thanks, Roger.
 
