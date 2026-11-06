@@ -2,58 +2,51 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC247606D83E
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2026 13:59:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ECE3E606A326
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2026 14:58:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=suse.cz header.i=@suse.cz header.a=rsa-sha256 header.s=susede2_rsa header.b=uiFsa2Bw;
-	dkim=pass header.d=suse.cz header.i=@suse.cz header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=6UCJswdK;
-	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.a=rsa-sha256 header.s=susede2_rsa header.b=LgjfvuMA;
-	dkim=neutral header.d=suse.cz header.i=@suse.cz header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=X0ai5JyZ
-Received: from list by lists.xenproject.org with outflank-mailman.1476661.1682675 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=NZQoQYB9
+Received: from list by lists.xenproject.org with outflank-mailman.1476700.1682685 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xPKSt-0004q6-AY; Fri, 06 Nov 2026 13:58:47 +0000
+	id 1xPLOH-0006qe-GN; Fri, 06 Nov 2026 14:58:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1476661.1682675; Fri, 06 Nov 2026 13:58:47 +0000
+Received: by outflank-mailman (output) from mailman id 1476700.1682685; Fri, 06 Nov 2026 14:58:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xPKSt-0004pz-7x; Fri, 06 Nov 2026 13:58:47 +0000
-Received: by outflank-mailman (input) for mailman id 1476661;
- Fri, 06 Nov 2026 13:58:46 +0000
+	id 1xPLOH-0006qT-Cc; Fri, 06 Nov 2026 14:58:05 +0000
+Received: by outflank-mailman (input) for mailman id 1476700;
+ Fri, 06 Nov 2026 14:58:03 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jack@suse.cz>) id 1xPKSr-0004oV-K9
- for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 13:58:46 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1b15dc430000403d@swg.vates.tech>)
+ id 1xPLOF-0006qN-Tc
+ for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 14:58:03 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xPKSr-00E4tL-0J
- for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 14:58:45 +0100
-Received: from [10.42.69.3] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jack@suse.cz>)
- id 6aeddd0e-bab6-0a2a0a5309dd-0a2a45038474-12
- for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 14:58:44 +0100
-Received: from [195.135.223.130] (helo=smtp-out1.suse.de)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jack@suse.cz>)
- id 6aeddd14-fae8-0a2a45030019-c387df82d1c6-3
- for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 14:58:44 +0100
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id F315122154;
- Fri,  6 Nov 2026 13:58:42 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id C0677134E9;
- Fri,  6 Nov 2026 13:58:42 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id 67kcJxLd7WqbVAAAD6G6ig
- (envelope-from <jack@suse.cz>); Fri, 06 Nov 2026 13:58:42 +0000
-Received: by quack.suse.cz (Postfix, from userid 1000)
- id 4E5B121B72; Fri, 06 Nov 2026 14:58:27 +0100 (CET)
+ id 1xPLOF-0041XK-5o
+ for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 15:58:03 +0100
+Received: from [10.42.69.7] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1b15dc430000403d@swg.vates.tech>)
+ id 6aedeaf7-8faa-0a2a0a5109dd-0a2a4507c9f4-12
+ for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 15:58:03 +0100
+Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1b15dc430000403d@swg.vates.tech>)
+ id 6aedeafa-b4ea-0a2a45070019-b9ff1c129299-3
+ for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 15:58:02 +0100
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a1b15dc430000403d.00a for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Fri, 06 Nov 2026 14:57:54 +0000
+Received: from julian.home (82-67-211-29.subs.proxad.net [82.67.211.29])
+ (Authenticated sender: julian.vetter@vates.tech)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 74C7C81B6C;
+ Fri,  6 Nov 2026 15:57:53 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -62,169 +55,103 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede2_rsa header.d=suse.cz header.i="@suse.cz" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References"; dkim=permerror header.s=susede2_ed25519 header.d=suse.cz header.i="@suse.cz"; dkim=pass header.s=susede2_rsa header.d=suse.cz header.i="@suse.cz" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References"; dkim=permerror header.s=susede2_ed25519 header.d=suse.cz header.i="@suse.cz"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-	t=1793973524; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=ItHvNO33pb8zb9UZ+LEb6x6bQbeF4DIAGvYYNsI45U8=;
-	b=uiFsa2BwcYOxq2gi53CMvsQcPLhPjX3qEOfmyRG+MMW+i9UaggY9jJaa5wavXNFuLDRya0
-	b9bIk7d+ZGVpmXDC5GD2K4lSWXyUMEx1Xgkq2ZbP1QBkGfhdEqjgXpD2RQsoW8lER5KjM6
-	2nPPQOWWqm1KOh+/u7G+gDW1pky2kPE=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-	s=susede2_ed25519; t=1793973524;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=ItHvNO33pb8zb9UZ+LEb6x6bQbeF4DIAGvYYNsI45U8=;
-	b=6UCJswdK0Z/DiwhrcdamgOXwZj9ItIC+/2kw90iroytJRvaOKpNnwu36Zgri1J7K0hnpW1
-	lNS/qFpJKVe0WBAA==
-Authentication-Results: smtp-out1.suse.de;
-	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-	t=1793973523; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=ItHvNO33pb8zb9UZ+LEb6x6bQbeF4DIAGvYYNsI45U8=;
-	b=LgjfvuMAU87vP+sPHVFl3AgPTWwGTRrRaQzjksp+GUoFchaJHCJWRi3C7JriPqlaDS1xv0
-	xf0+UF6xyLfW5w2peCcDGzuPDj/KNox0QLmUkIz4npAwhjxdTcSyJLMVg3YL5GoQgLdgFJ
-	1Wd203yEyPmbh14aWkzxWl+puCMK0x8=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-	s=susede2_ed25519; t=1793973523;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=ItHvNO33pb8zb9UZ+LEb6x6bQbeF4DIAGvYYNsI45U8=;
-	b=X0ai5JyZByGuYCrevlOApXcGyusGRiOAMLTwFWFDZ7nil+IaqW8n/M/kqrLHGa75L9F+9G
-	ed8IDOXKbujoFXBQ==
-Date: Fri, 6 Nov 2026 14:58:27 +0100
-From: Jan Kara <jack@suse.cz>
-To: "Lorenzo Stoakes (ARM)" <ljs@kernel.org>
-Cc: Juergen Gross <jgross@suse.com>, 
-	Stefano Stabellini <sstabellini@kernel.org>, Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, 
-	Madhavan Srinivasan <maddy@linux.ibm.com>, Nicholas Piggin <npiggin@gmail.com>, 
-	Michael Ellerman <mpe@ellerman.id.au>, "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>, 
-	"Ritesh Harjani (IBM)" <ritesh.list@gmail.com>, Shrikanth Hegde <sshegde@linux.ibm.com>, 
-	Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>, Dexuan Cui <decui@microsoft.com>, 
-	"Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowangio@gmail.com>, 
-	Eugenio =?utf-8?B?UMOpcmV6?= <eperezma@redhat.com>, Xuan Zhuo <xuanzhuo@linux.alibaba.com>, 
-	Jarkko Sakkinen <jarkko@kernel.org>, Dave Hansen <dave.hansen@linux.intel.com>, 
-	Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
-	x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, Jan Kara <jack@suse.com>, 
-	Paul Moore <paul@paul-moore.com>, Stephen Smalley <stephen.smalley.work@gmail.com>, 
-	Ondrej =?utf-8?B?TW9zbsOhxI1law==?= <omosnacek@gmail.com>, Joel Stanley <joel@jms.id.au>, 
-	Andrew Jeffery <andrew@codeconstruct.com.au>, Ryan Chen <ryan_chen@aspeedtech.com>, 
-	Billy Tsai <billy_tsai@aspeedtech.com>, Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
-	Jens Wiklander <jenswi@kernel.org>, Sumit Garg <sumit.garg@kernel.org>, 
-	Scott Branden <scott.branden@broadcom.com>, 
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Arnd Bergmann <arnd@arndb.de>, 
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Richard Cochran <richardcochran@gmail.com>, 
-	David Woodhouse <dwmw2@infradead.org>, Andrew Lunn <andrew+netdev@lunn.ch>, 
-	"David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@kernel.org>, 
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, xen-devel@lists.xenproject.org, 
-	linux-kernel@vger.kernel.org, linuxppc-dev@lists.ozlabs.org, kvm@vger.kernel.org, 
-	linux-hyperv@vger.kernel.org, virtualization@lists.linux.dev, linux-sgx@vger.kernel.org, 
-	selinux@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
-	linux-aspeed@lists.ozlabs.org, linux-arm-msm@vger.kernel.org, op-tee@lists.trustedfirmware.org, 
-	netdev@vger.kernel.org
-Subject: Re: [PATCH 06/14] udf: convert mmap hook to mmap_prepare
-Message-ID: <6ve6dvcmmozqiv5zkkq57thm62rtsc43jlbsfoxm24qrm5bhkg@ygji3l2k2qxq>
-References: <20261105-late-2026-mmap_prepare-v1-0-c56aadfbab8a@kernel.org>
- <20261105-late-2026-mmap_prepare-v1-6-c56aadfbab8a@kernel.org>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=XdcJ4jFaa68uoYdaUyfdYZAzejo+UGLqoHgHy20wKy0=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:feedback-id;
+ b=NZQoQYB9tywpzxtacITkvDt6+ZhuR1/N9apraARH//lWtLWDwoarSlBVEiupZ6W5D+N4UgPUm
+ wKgv3YRrNdYSpi9rLDdDU7HV4894WVceIc8GdHL7+fO1oBXYC+4zxWSiuiqnZuiH5yzfWk29QHP
+ Y9XUvL7yHdDpZqzQWDUqVHMKgLv4PnkIkRzJZy9F9YghexQHconWcBal4uTVYrr5GaKv+4+p+Dx
+ 4Vj2wKOMGj4kahcctjtK3E43tZdb9HaF4mi+x4YJW2FEO4B45kLke1SsFOyLBzCznSDt7kG4h7L
+ n8JVetX23Bmk1zOT/Olu8M5kS3roVx11Zpb8XG42qsQA==
+X-Zone-Loop: be56381978996ca0f8f21b569ff49b840090bf24287e
+x-campaign-type: default
+x-transaction-id: 48a466be-985d-41ce-9fe5-2a3a3d98eb45
+x-swg-uid: 01-27bb5538-8e92-4745-82dc-6ca83774d8bf
+X-Mailer: Sweego
+Message-ID:
+ <1793977074.8631fc262581453bbf619ec5b2062170.1a1b15dc430000403d@vates.tech>
+x-swg-bid: 1793977074.8631fc262581453bbf619ec5b2062170.1a1b15dc430000403d
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+From: Julian Vetter <julian.vetter@vates.tech>
+To: xen-devel@lists.xenproject.org,
+	linux-kernel@vger.kernel.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Thomas Gleixner <tglx@kernel.org>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+	Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+	Jiayuan Chen <jiayuan.chen@linux.dev>,
+	"Masami Hiramatsu (Google)" <mhiramat@kernel.org>,
+	"Vineeth Pillai (Google)" <vineeth@bitbyteword.org>,
+	Julian Vetter <julian.vetter@vates.tech>
+Subject: [PATCH 0/2] Re-raise irq_work lost during Xen suspend
+Date: Fri,  6 Nov 2026 15:57:40 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261105-late-2026-mmap_prepare-v1-6-c56aadfbab8a@kernel.org>
-X-Spam-Level: 
-X-Spamd-Result: default: False [-15.30 / 50.00];
-	SUSE_INTERNAL_BYPASS(-9.00)[];
-	REPLY(-4.00)[];
-	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	MID_RHS_NOT_FQDN(0.50)[];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FREEMAIL_ENVRCPT(0.00)[gmail.com];
-	MISSING_XM_UA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	TAGGED_RCPT(0.00)[netdev];
-	RCVD_COUNT_THREE(0.00)[3];
-	DKIM_SIGNED(0.00)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[suse.com,kernel.org,epam.com,linux.ibm.com,gmail.com,ellerman.id.au,microsoft.com,redhat.com,linux.alibaba.com,linux.intel.com,alien8.de,zytor.com,paul-moore.com,jms.id.au,codeconstruct.com.au,aspeedtech.com,broadcom.com,arndb.de,linuxfoundation.org,infradead.org,lunn.ch,davemloft.net,lists.xenproject.org,vger.kernel.org,lists.ozlabs.org,lists.linux.dev,lists.infradead.org,lists.trustedfirmware.org];
-	R_RATELIMIT(0.00)[to_ip_from(RLyerg7kx5bdf6cnfzf33td54o)];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[61];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email,suse.cz:email,imap1.dmz-prg2.suse.org:helo]
-X-Spam-Score: -15.30
-X-purgate-ID: tlsNG-33051d/1793973524-770F64E9-6D96FC6B/0/0
+X-BM-Disclaimer: Yes
+Content-Type: multipart/alternative; boundary="-=Part.3b.3163fd9a7fa2d20e.1a1b15dc1a5.3017bf55e344f14b=-"
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1793977074093
+X-purgate-ID: tlsNG-ef75cf/1793977083-A52CCAE4-88E8566E/0/0
 X-purgate-type: clean
-X-purgate-size: 1482
+X-purgate-size: 1675
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY autolearn=unavailable autolearn_force=no
+	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Thu 05-11-26 21:05:37, Lorenzo Stoakes (ARM) wrote:
-> Move from the deprecated mmap hook to the new mmap_prepare hook. The hook
-> only updates the access time and sets the VMA operations.
-> 
-> Signed-off-by: Lorenzo Stoakes (ARM) <ljs@kernel.org>
+---=Part.3b.3163fd9a7fa2d20e.1a1b15dc1a5.3017bf55e344f14b=-
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Looks good. Feel free to add:
+We hit this issue with an Ubuntu 26=2E04 cloudimage guests (7=2E0 based
+kernel with the 8250 as an nbcon console) on XCP-ng 8=2E3 / Xen 4=2E17=2E =
+With
+a kernel commandline adding two consoles, i=2Ee=2E, 'console=3DttyS1
+console=3DttyS0'=2E During a live migration on that setup the printk()s fr=
+om
+gnttab_resume() and xen_irq_resume() queue nbcon_irq_work while the APIC
+is disabled=2E Thus the list transitions from empty to non-empty, but
+doesn't receive the IPI to empty the list again=2E Afterwards the list
+stays non-empty, so the IPI never fires and all irq_work piles up=2E
 
-Reviewed-by: Jan Kara <jack@suse.cz>
+The Commit 560f4deda327 ("printk/nbcon: Change nbcon_irq_work to
+IRQ_WORK_LAZY") removed this particular issue because declaring the IRQ
+work to be lazy, causes the timer interrupt to trigger the irq work
+instead=2E But any other non-lazy irq_work queued in that window is still
+lost the same way and will cause the list to fill up without being
+handled=2E
 
-I'll leave it for MM guys to merge this.
-								Honza
+Signed-off-by: Julian Vetter <julian=2Evetter@vates=2Etech>
+---
+Julian Vetter (2):
+  irq_work: Add irq_work_raise_pending()
+  xen/manage: Re-raise pending irq_work after suspend
 
-> ---
->  fs/udf/file.c | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
-> 
-> diff --git a/fs/udf/file.c b/fs/udf/file.c
-> index 02e9314818dc..d5e80c6cae96 100644
-> --- a/fs/udf/file.c
-> +++ b/fs/udf/file.c
-> @@ -190,10 +190,10 @@ static int udf_release_file(struct inode *inode, struct file *filp)
->  	return 0;
->  }
->  
-> -static int udf_file_mmap(struct file *file, struct vm_area_struct *vma)
-> +static int udf_file_mmap_prepare(struct vm_area_desc *desc)
->  {
-> -	file_accessed(file);
-> -	vma->vm_ops = &udf_file_vm_ops;
-> +	file_accessed(desc->file);
-> +	desc->vm_ops = &udf_file_vm_ops;
->  
->  	return 0;
->  }
-> @@ -202,7 +202,7 @@ const struct file_operations udf_file_operations = {
->  	.read_iter		= generic_file_read_iter,
->  	.unlocked_ioctl		= udf_ioctl,
->  	.open			= generic_file_open,
-> -	.mmap			= udf_file_mmap,
-> +	.mmap_prepare		= udf_file_mmap_prepare,
->  	.write_iter		= udf_file_write_iter,
->  	.release		= udf_release_file,
->  	.fsync			= simple_fsync,
-> 
-> -- 
-> 2.56.0
-> 
+ drivers/xen/manage=2Ec     |  3 +++
+ include/linux/irq_work=2Eh |  2 ++
+ kernel/irq_work=2Ec        | 10 ++++++++++
+ 3 files changed, 15 insertions(+)
+
+--=20
+2=2E53=2E0
+
+
+
 -- 
-Jan Kara <jack@suse.com>
-SUSE Labs, CR
+Julian Vetter | Vates Hypervisor & Kernel Developer
+
+XCP-ng & Xen Orch=
+estra - Vates solutions
+
+web: https://vates=2Etech
+---=Part.3b.3163fd9a7fa2d20e.1a1b15dc1a5.3017bf55e344f14b=---
 
