@@ -2,51 +2,42 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 92794606D83B
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2026 15:02:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=j1qYmRoV
-Received: from list by lists.xenproject.org with outflank-mailman.1476720.1682712 (Exim 4.92)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 40ECB606A326
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2026 15:16:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1476740.1682737 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xPLSF-0000th-Fb; Fri, 06 Nov 2026 15:02:11 +0000
+	id 1xPLfh-0003y9-TD; Fri, 06 Nov 2026 15:16:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1476720.1682712; Fri, 06 Nov 2026 15:02:11 +0000
+Received: by outflank-mailman (output) from mailman id 1476740.1682737; Fri, 06 Nov 2026 15:16:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xPLSF-0000ta-Ce; Fri, 06 Nov 2026 15:02:11 +0000
-Received: by outflank-mailman (input) for mailman id 1476720;
- Fri, 06 Nov 2026 15:02:10 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1b161726c000403d@swg.vates.tech>)
- id 1xPLSE-0000tC-1F
- for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 15:02:10 +0000
+	id 1xPLfh-0003y2-PY; Fri, 06 Nov 2026 15:16:05 +0000
+Received: by outflank-mailman (input) for mailman id 1476740;
+ Fri, 06 Nov 2026 15:16:04 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <andrewcoop@xenbits.xen.org>)
+ id 1xPLff-0003fk-S0; Fri, 06 Nov 2026 15:16:03 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xPLSD-000Nho-CP
- for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 16:02:09 +0100
-Received: from [10.42.69.1] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1b161726c000403d@swg.vates.tech>)
- id 6aedebf1-e002-0a2a0a5209dd-0a2a4501d8f0-0
- for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 16:02:09 +0100
-Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1b161726c000403d@swg.vates.tech>)
- id 6aedebf0-5984-0a2a45010019-b9ff1c23b6af-3
- for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 16:02:09 +0100
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a1b161726c000403d.00a for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Fri, 06 Nov 2026 15:01:55 +0000
-Received: from julian.home (82-67-211-29.subs.proxad.net [82.67.211.29])
- (Authenticated sender: julian.vetter@vates.tech)
- by mail2.vates.fr (Postfix) with ESMTPSA id E6ED081A63;
- Fri,  6 Nov 2026 16:01:54 +0100 (CET)
+ id 1xPLff-007Zic-1B; Fri, 06 Nov 2026 16:16:03 +0100
+Received: from [10.42.69.8] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <andrewcoop@xenbits.xen.org>)
+ id 6aedef1d-8faa-0a2a0a5109dd-0a2a4508a628-44
+ for <multiple-recipients>; Fri, 06 Nov 2026 16:16:02 +0100
+Received: from [104.130.215.37] (helo=mail.xenproject.org)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <andrewcoop@xenbits.xen.org>)
+ id 6aedef31-f659-0a2a45080019-6882d725d98c-3
+ for <multiple-recipients>; Fri, 06 Nov 2026 16:16:02 +0100
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.98.2)
+ (envelope-from <andrewcoop@xenbits.xen.org>)
+ id 1xPLfb-00000001GcE-1tmf; Fri, 06 Nov 2026 15:15:59 +0000
+Received: from andrewcoop by xenbits.xenproject.org with local (Exim 4.98.2)
+ (envelope-from <andrewcoop@xenbits.xen.org>)
+ id 1xPLfb-0000000A5rj-1W0D; Fri, 06 Nov 2026 15:15:59 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -55,120 +46,139 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=wHHvi3hBR4r+9APsqtUvDD87Ym1BNhY3X703ylm8Qyw=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=j1qYmRoV8gTjKVD2zGfnYtkSPKWdpHSSVTrMSLKoukGnuOWYqJR+wAopGSmVRths4Y46SvTwx
- eMZ8OqNUvQFNbvGyU3NET0jM9A/1AAWuQ3LaRa8efWJAnISqz6whRjqzZ6R3UlgHJ9Jk4wHm2eO
- qGmvSqPGpnQTJkCAsS+Mi840Mq8oHSEvPVEdpcETJ+gSZuDQ+FHaQaxcfBJtkcPUnrGRI+Qb2Gc
- M/urp2+jgxc2P0LXZR/T6viI+G8b+2SH8CnAsQenWtVGwWOORkDMHeJvZGjhmP580fwQo/xzUu7
- bfsb6IUbNqYGW29PnVQzwG4YlEpJdTKy+USUGKuOT0Yw==
-X-Zone-Loop: 421a4d0a402fe47186c6b38243650f29e1e461c3535f
-x-campaign-type: default
-x-transaction-id: 32875009-4875-4d3c-9d00-34efde578f7a
-x-swg-uid: 01-2b6e033f-775e-4059-9040-9249c2aed5a3
-X-Mailer: Sweego
-Message-ID:
- <1793977316.8631fc262581453bbf619ec5b2062170.1a1b161726c000403d@vates.tech>
-x-swg-bid: 1793977316.8631fc262581453bbf619ec5b2062170.1a1b161726c000403d
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-From: Julian Vetter <julian.vetter@vates.tech>
-To: xen-devel@lists.xenproject.org,
-	linux-kernel@vger.kernel.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Thomas Gleixner <tglx@kernel.org>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
-	Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
-	Jiayuan Chen <jiayuan.chen@linux.dev>,
-	"Masami Hiramatsu (Google)" <mhiramat@kernel.org>,
-	"Vineeth Pillai (Google)" <vineeth@bitbyteword.org>,
-	Julian Vetter <julian.vetter@vates.tech>
-Subject: [PATCH 2/2] xen/manage: Re-raise pending irq_work after suspend
-Date: Fri,  6 Nov 2026 16:01:38 +0100
-In-Reply-To: <1793977074.8631fc262581453bbf619ec5b2062170.1a1b15dc430000403d@vates.tech>
-References: <1793977074.8631fc262581453bbf619ec5b2062170.1a1b15dc430000403d@vates.tech>
+Authentication-Results: eu.smtp.expurgate.cloud; none
+Content-Type: multipart/mixed; boundary="=separator"; charset="utf-8"
+Content-Transfer-Encoding: binary
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.3e.4ed4c3bce91e9c03.1a1b16170c2.c742e2ef938736bc=-"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1793977315523
-X-purgate-ID: tlsNG-d62444/1793977329-BE664757-78A7B694/0/0
+X-Mailer: MIME-tools 5.515 (Entity 5.515)
+To: xen-announce@lists.xen.org, xen-devel@lists.xen.org,
+ xen-users@lists.xen.org, oss-security@lists.openwall.com
+From: Xen.org security team <security@xen.org>
+CC: Xen.org security team <security-team-members@xen.org>
+Subject: Xen Security Advisory 526 v1 (CVE-2026-100080) - Linux
+ xen-netback: guest can trigger use-after-free for
+Message-Id: <E1xPLfb-0000000A5rj-1W0D@xenbits.xenproject.org>
+Date: Fri, 06 Nov 2026 15:15:59 +0000
+X-purgate-ID: tlsNG-c1860d/1793978162-D437587B-E71D9501/0/0
 X-purgate-type: clean
-X-purgate-size: 1846
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
+X-purgate-size: 4476
+X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY autolearn=no autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
----=Part.3e.4ed4c3bce91e9c03.1a1b16170c2.c742e2ef938736bc=-
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+--=separator
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
 
-xen_suspend() calls syscore_suspend(), which on x86 disables the APIC,
-and only re-enables it in syscore_resume()=2E But, in between,
-gnttab_resume() and xen_irq_resume() call printk()=2E
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
 
-With an nbcon console, e=2Eg=2E the 8250, printk() queues irq_work, which
-sends a self-IPI=2E As the APIC is disabled, the IPI is dropped=2E The
-irq_work stays on the raised list, and no later irq_work_queue() on that
-CPU raises the IPI again=2E All irq_work on that CPU is dead after resume=
-=2E
+           Xen Security Advisory CVE-2026-100080 / XSA-526
 
-Commit 560f4deda327 ("printk/nbcon: Change nbcon_irq_work to
-IRQ_WORK_LAZY") removed this particular issue, but any other non-lazy
-irq_work queued in this window would cause the irq_work to stall in the
-same way=2E
+          Linux xen-netback: guest can trigger use-after-free for
+                        network statistics reads
 
-To fix the issue, re-raise pending irq_work once syscore_resume() has
-re-enabled the APIC=2E
+ISSUE DESCRIPTION
+=================
 
-Signed-off-by: Julian Vetter <julian=2Evetter@vates=2Etech>
----
- drivers/xen/manage=2Ec | 3 +++
- 1 file changed, 3 insertions(+)
+The network statistic data in the driver is protected by RCU.
+Unfortunately when tearing down the queues after an error during
+connecting to the frontend (e.g. due to illegal Xenstore data filled
+in by the guest), the statistic data is being freed without
+synchronizing the RCU state.  In case the data is being read via sysfs
+in this phase, access to already freed memory or memory being in new
+use is possible.
 
-diff --git a/drivers/xen/manage=2Ec b/drivers/xen/manage=2Ec
-index 05d7de128e71=2E=2E5054fcb25337 100644
---- a/drivers/xen/manage=2Ec
-+++ b/drivers/xen/manage=2Ec
-@@ -13,6 +13,7 @@
- #include <linux/stop_machine=2Eh>
- #include <linux/suspend=2Eh>
- #include <linux/freezer=2Eh>
-+#include <linux/irq_work=2Eh>
- #include <linux/syscore_ops=2Eh>
- #include <linux/export=2Eh>
-=20
-@@ -86,6 +87,8 @@ static int xen_suspend(void *data)
-=20
- 	syscore_resume();
-=20
-+	irq_work_raise_pending();
-+
- 	return 0;
- }
-=20
---=20
-2=2E53=2E0
+IMPACT
+======
 
+The most likely outcome is a driver crash, possibly escalated to a host
+crash.  This then is a Denial of Service (DoS) affecting the entire host.
 
+Information leaks cannot be ruled out.
 
--- 
-Julian Vetter | Vates Hypervisor & Kernel Developer
+VULNERABLE SYSTEMS
+==================
 
-XCP-ng & Xen Orch=
-estra - Vates solutions
+Linux versions 4.11 and newer are vulnerable.
 
-web: https://vates=2Etech
----=Part.3e.4ed4c3bce91e9c03.1a1b16170c2.c742e2ef938736bc=---
+MITIGATION
+==========
+
+Using a userspace PV network backend (e.g. the qemu based "qnic" backend)
+will mitigate the problem.
+
+Using a dedicated network driver domain per guest will mitigate the
+problem.
+
+CREDITS
+=======
+
+This issue was discovered by Yehyeong Lee of Hyundai Mobis.
+
+RESOLUTION
+==========
+
+Applying the attached patch resolves this issue.
+
+xsa526-linux.patch           Linux
+
+$ sha256sum xsa526*
+88dd41b89b43fa1b14e68c1a40aa69a22309e0c57a1b5543168949a273627ca8  xsa526-linux.patch
+$
+
+NOTE REGARDING LACK OF EMBARGO
+==============================
+
+This issue was disclosed in public.
+-----BEGIN PGP SIGNATURE-----
+
+iQFABAEBCAAqFiEEI+MiLBRfRHX6gGCng/4UyVfoK9kFAmrt7ssMHHBncEB4ZW4u
+b3JnAAoJEIP+FMlX6CvZq84H/02MP77ou0FS+9nAF8CWbGl79KfiUWO2xjXPEdKB
+Mgyzk0Gtq+Q0/oTaxPC59f9Pxc4yiCnGuIjpVM2qPOfaHZD0uEnzzGEROxVNCABq
+7wCxZ/9Uu3MXO+1rcMgVqUNoHEqYLxgSp3OZ7O48DFQtkulP6fp4EgR0xTUIgPwn
+oKlWoSKORAXOkULt5Qn5xI0+YN0OgDMdHKj/BPkRIGeeqOHPRcUmeZU9VRnOiATh
+v1lR6erAWEx/dwr5Yq6ZReA6GFgDNRRk7ersnc5mwxxUyDtJtNXPHUCmE8AZ/q4C
+H2I/1SLzm6oa+v+0fngSasn9+lMZC6fzy0SxRJF3clRui+A=
+=uEqL
+-----END PGP SIGNATURE-----
+
+--=separator
+Content-Type: application/octet-stream; name="xsa526-linux.patch"
+Content-Disposition: attachment; filename="xsa526-linux.patch"
+Content-Transfer-Encoding: base64
+
+RnJvbTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgpEYXRlOiBGcmksIDYgTm92IDIw
+MjYgMTM6MDc6NTIgKzAxMDAKU3ViamVjdDogW1BBVENIXSB4ZW4tbmV0YmFjazogRml4IFVBRiB3
+aGVuIHJlYWRpbmcgc3RhdGlzdGljcyBkYXRhCgpUaGUgbmV0d29yayBzdGF0aXN0aWMgZGF0YSBp
+biB0aGUgZHJpdmVyIGlzIHByb3RlY3RlZCBieSBSQ1UuClVuZm9ydHVuYXRlbHkgd2hlbiB0ZWFy
+aW5nIGRvd24gdGhlIHF1ZXVlcyBhZnRlciBhbiBlcnJvciBkdXJpbmcKY29ubmVjdGluZyB0byB0
+aGUgZnJvbnRlbmQgKGUuZy4gZHVlIHRvIGlsbGVnYWwgWGVuc3RvcmUgZGF0YSBmaWxsZWQKaW4g
+YnkgdGhlIGd1ZXN0KSwgdGhlIHN0YXRpc3RpYyBkYXRhIGlzIGJlaW5nIGZyZWVkIHdpdGhvdXQK
+c3luY2hyb25pemluZyB0aGUgUkNVIHN0YXRlLiAgSW4gY2FzZSB0aGUgZGF0YSBpcyBiZWluZyBy
+ZWFkIHZpYSBzeXNmcwppbiB0aGlzIHBoYXNlLCBhY2Nlc3MgdG8gYWxyZWFkeSBmcmVlZCBtZW1v
+cnkgb3IgbWVtb3J5IGJlaW5nIGluIG5ldwp1c2UgaXMgcG9zc2libGUuCgpGaXggdGhhdCBieSBj
+YWxsaW5nIHN5bmNocm9uaXplX25ldCgpIGJlZm9yZSBmcmVlaW5nIHRoZSBxdWV1ZSBkYXRhLgoK
+VGhpcyBpcyBYU0EtNTI2IC8gQ1ZFLTIwMjYtMTAwMDgwCgpGaXhlczogYjE3MDc1ZDVjMTk4ICgi
+eGVuLW5ldGJhY2s6IGZpeCByYWNlIGNvbmRpdGlvbiBvbiBYZW5CdXMgZGlzY29ubmVjdCIpClJl
+cG9ydGVkLWJ5OiBZZWh5ZW9uZyBMZWUgPHlobGVlQGlzc2xhYi5rb3JlYS5hYy5rcj4KU2lnbmVk
+LW9mZi1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgotLS0KIGRyaXZlcnMvbmV0
+L3hlbi1uZXRiYWNrL3hlbmJ1cy5jIHwgMSArCiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24o
+KykKCmRpZmYgLS1naXQgYS9kcml2ZXJzL25ldC94ZW4tbmV0YmFjay94ZW5idXMuYyBiL2RyaXZl
+cnMvbmV0L3hlbi1uZXRiYWNrL3hlbmJ1cy5jCmluZGV4IGUwMjBmNDRhYzJjNy4uYzEwMzRkOGY2
+YmYwIDEwMDY0NAotLS0gYS9kcml2ZXJzL25ldC94ZW4tbmV0YmFjay94ZW5idXMuYworKysgYi9k
+cml2ZXJzL25ldC94ZW4tbmV0YmFjay94ZW5idXMuYwpAQCAtODM3LDYgKzgzNyw3IEBAIHN0YXRp
+YyB2b2lkIGNvbm5lY3Qoc3RydWN0IGJhY2tlbmRfaW5mbyAqYmUpCiBlcnI6CiAJaWYgKGJlLT52
+aWYtPm51bV9xdWV1ZXMgPiAwKQogCQl4ZW52aWZfZGlzY29ubmVjdF9kYXRhKGJlLT52aWYpOyAv
+KiBDbGVhbiB1cCBleGlzdGluZyBxdWV1ZXMgKi8KKwlzeW5jaHJvbml6ZV9uZXQoKTsKIAlmb3Ig
+KHF1ZXVlX2luZGV4ID0gMDsgcXVldWVfaW5kZXggPCBiZS0+dmlmLT5udW1fcXVldWVzOyArK3F1
+ZXVlX2luZGV4KQogCQl4ZW52aWZfZGVpbml0X3F1ZXVlKCZiZS0+dmlmLT5xdWV1ZXNbcXVldWVf
+aW5kZXhdKTsKIAl2ZnJlZShiZS0+dmlmLT5xdWV1ZXMpOwotLSAKMi41Ni4wCgo=
+
+--=separator--
 
