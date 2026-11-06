@@ -2,55 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DA2E0606A332
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2026 11:54:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EA716606A336
+	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2026 12:00:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=jJgKXX+D
-Received: from list by lists.xenproject.org with outflank-mailman.1476510.1682577 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=hvMkR+LW
+Received: from list by lists.xenproject.org with outflank-mailman.1476521.1682586 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xPIWJ-0003fH-D2; Fri, 06 Nov 2026 11:54:11 +0000
+	id 1xPIc0-0005C5-48; Fri, 06 Nov 2026 12:00:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1476510.1682577; Fri, 06 Nov 2026 11:54:11 +0000
+Received: by outflank-mailman (output) from mailman id 1476521.1682586; Fri, 06 Nov 2026 12:00:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xPIWJ-0003fA-AH; Fri, 06 Nov 2026 11:54:11 +0000
-Received: by outflank-mailman (input) for mailman id 1476510;
- Fri, 06 Nov 2026 11:54:11 +0000
+	id 1xPIc0-0005Bo-1M; Fri, 06 Nov 2026 12:00:04 +0000
+Received: by outflank-mailman (input) for mailman id 1476521;
+ Fri, 06 Nov 2026 12:00:02 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <armbru@redhat.com>) id 1xPIWI-0003dz-Td
- for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 11:54:10 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xPIby-0004nv-FM
+ for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 12:00:02 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xPIWI-00HQcN-6l
- for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 12:54:10 +0100
-Received: from [10.42.69.6] (helo=localhost)
+ id 1xPIbx-003RMU-SJ
+ for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 13:00:01 +0100
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <armbru@redhat.com>)
- id 6aedbfde-bab6-0a2a0a5309dd-0a2a4506ae8c-20
- for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 12:54:10 +0100
-Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <armbru@redhat.com>)
- id 6aedbfdb-195a-0a2a45060019-aa0a817c784d-3
- for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 12:54:04 +0100
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-461-YFptxQWZPqOcoLwxFxBMyQ-1; Fri,
- 06 Nov 2026 06:54:00 -0500
-Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id E3D66180057A; Fri,  6 Nov 2026 11:53:57 +0000 (UTC)
-Received: from blackfin.pond.sub.org (unknown [10.44.22.2])
- by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id EEEF139200; Fri,  6 Nov 2026 11:53:56 +0000 (UTC)
-Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 9841921E6A04; Fri, 06 Nov 2026 12:53:54 +0100 (CET)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6aedc12b-e002-0a2a0a5209dd-0a2a4501cc80-24
+ for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 13:00:01 +0100
+Received: from [209.85.221.50] (helo=mail-wr1-f50.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6aedc141-5984-0a2a45010019-d155dd32d803-3
+ for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 13:00:01 +0100
+Received: by mail-wr1-f50.google.com with SMTP id
+ ffacd0b85a97d-490c1d337d8so353396f8f.2
+ for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 04:00:01 -0800 (PST)
+Received: from [192.168.1.6] (user-109-243-65-71.play-internet.pl.
+ [109.243.65.71]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-492d6d63b6esm3509053f8f.10.2026.11.06.03.59.58
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 06 Nov 2026 03:59:59 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -59,162 +49,184 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1793966043;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=9ddJIImjGsmsUfpk27UWUOb09SPlNh75NQ7+6roRcnk=;
-	b=jJgKXX+DEqVokIPy6LwAozAySFZBp+ANhZOcXoN/YyCPQbPwEczTm1GqRKctf7mRXMMkOy
-	W81zC0PZID86AahwyX+pjBJ/8T7G86hkrw4bA3s5BnxqPUWBUrymGqkepoT6I3uEA3MtWy
-	fmr6VKurGFWXM1yb+S+U1JU7ow/hPDs=
-X-MC-Unique: YFptxQWZPqOcoLwxFxBMyQ-1
-X-Mimecast-MFC-AGG-ID: YFptxQWZPqOcoLwxFxBMyQ_1793966038
-From: Markus Armbruster <armbru@redhat.com>
-To: Daniel P. =?utf-8?Q?Berrang=C3=A9?= <berrange@redhat.com>
-Cc: qemu-devel@nongnu.org,  Pierrick Bouvier
- <pierrick.bouvier@oss.qualcomm.com>,  Gerd Hoffmann <kraxel@redhat.com>,
-  xen-devel@lists.xenproject.org,  qemu-ppc@nongnu.org,  "Edgar E.
- Iglesias" <edgar.iglesias@gmail.com>,  Eric Blake <eblake@redhat.com>,
-  Markus Armbruster <armbru@redhat.com>,  =?utf-8?Q?Marc-Andr=C3=A9?= Lureau
- <marcandre.lureau@redhat.com>,  Anthony PERARD <anthony@xenproject.org>,
-  Paolo Bonzini <pbonzini@redhat.com>,  Stefano Stabellini
- <sstabellini@kernel.org>,  Alexey Kardashevskiy <aik@ozlabs.ru>,  Richard
- Henderson <richard.henderson@linaro.org>,  Helge Deller <deller@gmx.de>,
-  Stefan Hajnoczi <stefanha@redhat.com>
-Subject: Re: [PULL v2 23/25] trace: stop tracking static disabled state
-In-Reply-To: <20261104201802.11556-24-stefanha@redhat.com> (Stefan Hajnoczi's
-	message of "Wed, 4 Nov 2026 15:17:59 -0500")
-References: <20261104201802.11556-1-stefanha@redhat.com>
-	<20261104201802.11556-24-stefanha@redhat.com>
-Date: Fri, 06 Nov 2026 12:53:54 +0100
-Message-ID: <87se1efa5p.fsf@pond.sub.org>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1793966401; x=1794571201; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=R9LY+qJIkHH2BovcZe+33BJedNk0QdNyXv21VapNinw=;
+        b=hvMkR+LW9Q5EH8J1UaXVZHz3OjxkC8ihv21QTURpsqBOpInM2UW29yT0SIa/08GMKA
+         ljToK731W2xEByQmCeTDh3FbWYZGHj/C+Hf+GHfXtcNmAQE4O6kGXrgYp5EaFQbGiWF0
+         +DBJRVSBG4SI+GVbegHifw9ocR4tPxXiSmiXilPoJ1LdmOuxkUdKreuRyQ3RtOLQTCh7
+         Bl5rimbv5G2Nb+2PNrLWCIpyZqP33EdvNzYVkwmDaLgJzLHofC9id+vs2ncLA51Y8xnI
+         ykeyMJhhD6E7bydJftV4wU7W2Unt2KLjE3I9TwfRvFKeRCd2BmapVz8CijH42rStvGfF
+         9wGw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793966401; x=1794571201;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=R9LY+qJIkHH2BovcZe+33BJedNk0QdNyXv21VapNinw=;
+        b=EIia+TlOev3OaF2Gmn60Dm4EgvfFNn3rFUZBQMA2qmusRZqt3sTpHspzqP2bwpnfNY
+         B6I+83FQaXSgIVPOw/QTRegVMEZEAeavo+PzYBPundYFo6DZvB3E/kj8+fS7Bnxu8WWq
+         GwBenFvR3sJ9SEJQIn6T2I2NyUqXBgocN69jWb0xewWPhZjozxheCmzNcvz2zMlrmoy0
+         JC4REu0fERu9jp3UAoQM5R7qNjxc0+1j+7Z3/IILkEhuJiE33KJxaL23tE30okY3XHh2
+         QEUfqusgKVRsJFvHbk84Zkl482Do3fKf1c8A8DgYyDkXFnnm2KKsDTAelpZogT+i1MYP
+         QwjQ==
+X-Gm-Message-State: APuU4Z/XaccvjBYZtXJJOhYdvsDz67h0kNgq739K66EIanVwpC6MeKcV
+	vORY+UMCK1sBmG5KUL7moR3NiCRLqagKaJa569uctHMQAVGOaZZXYQZB
+X-Gm-Gg: AYBFou2mwbrV8pqAFVNaebrspz9rR89n4e5v15y7K4ROT/+HHH/vPWZAoTj1VrWjhmp
+	LsZlzy3N2Ox3jYnRBLyd7b1PaCpW1+BDh07bj0IgK4Nie5NwD3LBPV7Wd5xN5KGX3YpZsaKdAGm
+	cYYELJnHu65Ne9+TyN7nkr7YrS0TkshBiGWbPhUtTbRTYvnzUCGroZOkwpxqZS+pr9yfdFvM9vL
+	LEIa2K8XdaJwqn3dLxwcLu5Rq2plQvItCp7rMnQZJqFUtqd5zXyaT/rQ6mqkVWUj6RXUyf2vABT
+	kf+5xK3jQy4neoQXbImkx/ejTjPA26KK3+NVP3paudI0N/OYxO92CFBdT5OshBwVeYu25k61lHy
+	7fTCHel3qm0mcxnerGWIfeqSmIVGGbiXIURU7KFBIskqogImLis4lM4wDP9Yx59xpQrHF4lnQS3
+	1L6nAERl7xTkzVRuaByP4ifXQDaE5St+zhPa/xtT6OnqNZHzCLnCMA+X/bou96LSgyONAv3odFv
+	TDsg4aUV0vRr5m6xrZ5jgnd0fcXSdxvoHYRRxxIjlrzDR2PsdnXn8MDFuYoGV5/K9xK3hDjcbE0
+	DPJgj0SzMnYZWk6BGroEf5rrX0KcLcosNqpBKhzSpvwz+Fog5vzpL6ZPFuYzsc4HileBT4Kl5Fc
+	u
+X-Received: by 2002:adf:e009:0:20b0:493:2eb8:e7fb with SMTP id ffacd0b85a97d-4932eb8f10dmr1575912f8f.41.1793966401215;
+        Fri, 06 Nov 2026 04:00:01 -0800 (PST)
+Message-ID: <ac014a57-5a77-41aa-a3e3-39e5764acf2f@gmail.com>
+Date: Fri, 6 Nov 2026 12:59:57 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
-X-Mimecast-MFC-PROC-ID: IJdNcwzWJ_wz1RqDANEeaOvq2OQDRh1YEbJrmGfvW9o_1793966038
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-16d1c6/1793966050-FE87577B-12A0F5A3/35/111497
-X-purgate-type: clean
-X-purgate-size: 3232
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=4.0.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 38/39] xen/riscv: set the guest's XLEN explicitly in
+ hstatus.VSXL
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Cc: xen-devel@lists.xenproject.org,
+ Romain Caritey <Romain.Caritey@microchip.com>,
+ Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
+References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
+ <0c65801cec7cdac1556abc610e076f33c1500d1f.1790779209.git.oleksii.kurochko@gmail.com>
+ <1793803069.8631fc262581453bbf619ec5b2062170.1a1a6fea90d000403d@vates.tech>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <1793803069.8631fc262581453bbf619ec5b2062170.1a1a6fea90d000403d@vates.tech>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-d62444/1793966401-C4558757-6765C164/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 3506
+X-Spam-Status: No, score=-8.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FORGED_GMAIL_RCVD,FREEMAIL_FORGED_FROMDOMAIN,
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-I missed this, because I wasn't cc'ed.
 
-Stefan Hajnoczi <stefanha@redhat.com> writes:
 
-> From: Daniel P. Berrang=C3=A9 <berrange@redhat.com>
->
-> The TraceEvent struct contains a "bool sstate" field which track whether
-> a trace event was disabled statically. i.e. at build time via the
-> "disable" property annotation in trace-events.
->
-> The only runtime use of this field is to let "trace-event-get-state"
-> report that an event is "unavailable" instead of reporting an error for
-> an unknown trace event.
->
-> Trace events are not ABI so their names can change and the event can
-> come and go at any time. Thus there is little utility in reporting the
-> existence of a disabled event that cannot ever be used at runtime.
->
-> Removing the "bool sstate" field from TraceEvent saves 8 bytes of
-> space in the struct, adding up to approx 64 KB across all current
-> events.
->
-> Reviewed-by: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
-> Signed-off-by: Daniel P. Berrang=C3=A9 <berrange@redhat.com>
-> Message-id: 20261102142844.3464712-24-berrange@redhat.com
-> Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
+On 11/4/26 3:37 PM, Baptiste Le Duc wrote:
+>> [ ... 97 lines skipped ... ]
+>> --- a/xen/arch/riscv/domain.c
+>> +++ b/xen/arch/riscv/domain.c
+>> @@ -51,6 +51,119 @@ static struct csr_masks __ro_after_init csr_masks;
+>>   #define HENVCFG_VALID_MASK 0xe0000003000000ffUL
+>>   #define HSTATEEN0_VALID_MASK 0xde00000000000007UL
+>>   
+>> +/*
+>> + * Return the hstatus.VSXL value encoding the guest's XLEN. Whether the
+>> + * hardware can actually provide that width is a separate question, answered
+>> + * by hstatus_vsxl_settable().
+>> + *
+>> + * The switch() deliberately has no default case, so that adding a new
+>> + * domain_type (a 128-bit one, in particular) fails to build until this
+>> + * mapping is updated.
+>> + */
+>> +unsigned int domain_vsxl(const struct domain *d)
+>> +{
+>> +    switch ( d->type )
+>> +    {
+>> +    case DOMAIN_32BIT:
+>> +        return XLEN_FIELD_32;
+>> +
+>> +    case DOMAIN_64BIT:
+>> +        return XLEN_FIELD_64;
+> Couldn't we add to avoid having to explain why there is no default in
+> the comment above, and to respect MISRA rules?
+> default:
+>      break
 
-[...]
+I'd rather not: d->type is an enum, and for those Xen deliberately omits
+the default label, as -Wall enables -Wswitch, which breaks the build
+(-Werror) if one of the enum's values isn't handled. A default label
+would silence exactly that check. MISRA-wise this is covered by the
+R16.4 deviation for switches on enums.
 
-> diff --git a/qapi/trace.json b/qapi/trace.json
-> index 29c76256055..8533e378977 100644
-> --- a/qapi/trace.json
-> +++ b/qapi/trace.json
-> @@ -16,8 +16,6 @@
->  # @TraceEventState:
->  #     State of a tracing event.
->  #
-> -# @unavailable: The event is statically disabled.
-> -#
->  # @disabled: The event is dynamically disabled.
->  #
->  # @enabled: The event is dynamically enabled.
-> @@ -25,7 +23,7 @@
->  # Since: 2.2
->  ##
->  { 'enum': 'TraceEventState',
-> -  'data': ['unavailable', 'disabled', 'enabled'] }
-> +  'data': ['disabled', 'enabled'] }
+I'll move the explanation into the switch() itself, though, and mention 
+-Wswitch there, which should make the intent clearer:
 
-No note in docs/about/removed-features.rst needed?
+...
+     case DOMAIN_64BIT:
+         return XLEN_FIELD_64;
 
-> =20
->  ##
->  # @TraceEventInfo:
-> @@ -69,6 +67,7 @@
-   ##
-   # @trace-event-set-state:
-   #     Set the dynamic tracing state of events.
-   #
-   # @name: Event name pattern (case-sensitive glob).
-   #
->  # @enable: Whether to enable tracing.
->  #
->  # @ignore-unavailable: Do not match unavailable events with @name.
-> +#      Deprecated: since 11.2
->  #
->  # Since: 2.2
->  #
+     /*
+      * No default case: -Wswitch then fails the build should a new
+      * domain_type (a 128-bit one, in particular) be added without
+      * updating this mapping.
+      */
+     }
+...
 
-Are you trying to deprecate use of argument @ignore-unavailable?
+>> +    }
+>> +
+>> +    ASSERT_UNREACHABLE();
+>> +
+>> +    /* A reserved encoding, which hstatus_vsxl_settable() never accepts. */
+>> +    return 0;
+> Could this get a name next to XLEN_FIELD_{32,64,128} in riscv_encoding.h,
+> e.g.:
+> 
+> #define XLEN_FIELD_RESERVED     _UL(0)
+> so the comment isn't the only thing explaining the 0?
 
-If no, what are you trying to do?
+Sure, I'll add XLEN_FIELD_RESERVED and return it there.
 
-If yes, this isn't how we do that.  Instead:
+>> [ ... 88 lines skipped ... ]
+>> +
+>>   void __init init_csr_masks(void)
+>>   {
+>>       /*
+>> @@ -91,6 +204,10 @@ static void vcpu_csr_init(struct vcpu *v)
+>>   {
+>>       v->arch.hedeleg = HEDELEG_DEFAULT & csr_masks.hedeleg;
+>>   
+>> +    /*
+>> +     * hstatus.VSXL is left zero here: the domain's type, and hence the
+>> +     * guest's XLEN, is only known once its kernel image has been probed.
+>> +     */
+> 
+> "Probe" refers to two different things in this series: the hardware
+> probe of the settable hstatus.VSXL values (init_hstatus_vsxl_settable_mask())
+> and the guest kernel header parsing (kernel_probe()). This comment is
+> about the latter, but it is easy to read it as the former, which already
+> ran at boot. Could you name it explicitly and state the ordering that
+> actually matters? I'd suggest:
+> 
+>      /*
+>       * hstatus.VSXL is left zero here: vCPU0 is created before
+>       * kernel_probe() reads the guest kernel header, so the domain's type,
+>       * and hence the guest's XLEN, is not known yet.
+>       */
+> 
+Your suggested rewording looks good to me. I'll take your wording, and 
+name kernel_probe() in the commit message as well, which has the same 
+ambiguity.
 
-   ##
-   # @trace-event-set-state:
-   #     Set the dynamic tracing state of events.
-   #
-   # @name: Event name pattern (case-sensitive glob).
-   #
-   # @enable: Whether to enable tracing.
-   #
-   # @ignore-unavailable: Do not match unavailable events with @name.
-   #
-   # Features:
-   #
-   # @deprecated: Argument @ignore-unavailable is deperecated and does
-   #     nothing.
-   #
-   # Since: 2.2
-   #
-   # .. qmp-example::
-   #
-   #     -> { "execute": "trace-event-set-state",
-   #          "arguments": { "name": "qemu_memalign", "enable": true } }
-   #     <- { "return": {} }
-   ##
-   { 'command': 'trace-event-set-state',
-     'data': {'name': 'str', 'enable': 'bool',
-              '*ignore-unavailable': { 'type': 'bool',
-                                       'features': [ 'deprecated' ] } } }
+Thanks.
 
-with a matching update to docs/about/deprecated.rst.
-
-[...]
-
+~ Oleksii
 
