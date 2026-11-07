@@ -2,45 +2,64 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CF952606A326
-	for <xen-devel@archiver.kernel.org>; Fri,  6 Nov 2026 23:56:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98E3A606A326
+	for <xen-devel@archiver.kernel.org>; Sat,  7 Nov 2026 00:11:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=google header.b=Frtb/vbV
-Received: from list by lists.xenproject.org with outflank-mailman.1477593.1682994 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=x9OQtvzj
+Received: from list by lists.xenproject.org with outflank-mailman.1477614.1683002 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xPTnO-0007Ny-3O; Fri, 06 Nov 2026 23:56:34 +0000
+	id 1xPU1c-000327-BB; Sat, 07 Nov 2026 00:11:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1477593.1682994; Fri, 06 Nov 2026 23:56:34 +0000
+Received: by outflank-mailman (output) from mailman id 1477614.1683002; Sat, 07 Nov 2026 00:11:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xPTnO-0007Nr-0G; Fri, 06 Nov 2026 23:56:34 +0000
-Received: by outflank-mailman (input) for mailman id 1477593;
- Fri, 06 Nov 2026 23:56:33 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xPTnM-0007Nk-SX
- for xen-devel@lists.xenproject.org; Fri, 06 Nov 2026 23:56:33 +0000
+	id 1xPU1c-000320-7o; Sat, 07 Nov 2026 00:11:16 +0000
+Received: by outflank-mailman (input) for mailman id 1477614;
+ Sat, 07 Nov 2026 00:11:15 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <Jason.Andryuk@amd.com>) id 1xPU1a-00031u-T7
+ for xen-devel@lists.xenproject.org; Sat, 07 Nov 2026 00:11:15 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xPTnM-001LoL-6D
- for xen-devel@lists.xenproject.org; Sat, 07 Nov 2026 00:56:32 +0100
-Received: from [10.42.69.2] (helo=localhost)
+ id 1xPU1a-008Vlw-A0
+ for xen-devel@lists.xenproject.org; Sat, 07 Nov 2026 01:11:14 +0100
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6aee6923-8faa-0a2a0a5109dd-0a2a4502b0c2-2
- for <xen-devel@lists.xenproject.org>; Sat, 07 Nov 2026 00:56:32 +0100
-Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6aee692f-6ca4-0a2a45020019-d155802ea9e8-3
- for <xen-devel@lists.xenproject.org>; Sat, 07 Nov 2026 00:56:32 +0100
-Received: by mail-wm1-f46.google.com with SMTP id
- 5b1f17b1804b1-4a2072b9832so607135e9.1
- for <xen-devel@lists.xenproject.org>; Fri, 06 Nov 2026 15:56:32 -0800 (PST)
-Received: from localhost.localdomain (host-78-146-248-75.as13285.net.
- [78.146.248.75]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4b7e32b46a3sm19200735e9.6.2026.11.06.15.56.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Nov 2026 15:56:31 -0800 (PST)
+ (envelope-from <Jason.Andryuk@amd.com>)
+ id 6aee6c62-2eae-0a2a0a5409dd-0a2a4505e1c4-32
+ for <xen-devel@lists.xenproject.org>; Sat, 07 Nov 2026 01:11:13 +0100
+Received: from [52.101.56.7]
+ (helo=BN1PR04CU002.outbound.protection.outlook.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Jason.Andryuk@amd.com>)
+ id 6aee6ca0-4cb1-0a2a45050019-346538072f5a-4
+ for <xen-devel@lists.xenproject.org>; Sat, 07 Nov 2026 01:11:13 +0100
+Received: from CH0PR03CA0416.namprd03.prod.outlook.com (2603:10b6:610:11b::7)
+ by DS3PR12MB637004.namprd12.prod.outlook.com (2603:10b6:8:43f::24)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.11; Sat, 7 Nov
+ 2026 00:11:10 +0000
+Received: from DM3PEPF000265C2.namprd03.prod.outlook.com
+ (2603:10b6:610:11b:cafe::79) by CH0PR03CA0416.outlook.office365.com
+ (2603:10b6:610:11b::7) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.592.11 via Frontend Transport; Sat, 7
+ Nov 2026 00:11:10 +0000
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ DM3PEPF000265C2.mail.protection.outlook.com (10.167.23.183) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.615.4 via Frontend Transport; Sat, 7 Nov 2026 00:11:10 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Fri, 6 Nov
+ 2026 18:11:08 -0600
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Fri, 6 Nov
+ 2026 18:11:08 -0600
+Received: from [192.168.19.2] (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.53 via Frontend
+ Transport; Fri, 6 Nov 2026 18:11:07 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,411 +68,106 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1794009391; x=1794614191; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=u/++iBq87OEZlSRysDMyKl+pJtbf6Rmz2e5RRpkSpU4=;
-        b=Frtb/vbV03xeCsWQg1Qx4T50CsPOMeV5fzk3bZk8YPqw8KbNDsHkzmm/tH8N0dzinv
-         5LNmvXRWR5u0HKV1oEylVsxtYIhZX88Gsb8olkePn4XeP0ejqNZkmxsYwDNHDWbmPtCZ
-         yqcbLafyWNJHJJ6ZRAqOI0kjCTuwKRQa+i17s=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794009391; x=1794614191;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=u/++iBq87OEZlSRysDMyKl+pJtbf6Rmz2e5RRpkSpU4=;
-        b=v9WuDSdldINKCZIicjUAEc2lKfPWHiYmEIYuCLAIf5RwWjssDuRoiXe3j7U+G7ON/L
-         Wd0PNti6wk9baIexr0s2a5f6B9OphD42HoGVhgWTUkTJHoH2Cr/uQZsp/BUqIncspUkA
-         zwp5j4RcQ8kJzCToJfds/my+O9w5MLKqQQfG8UwCBREgQFIV9qn18EGZKN6VuPHTdSPl
-         ArGdvO75z40r8wi1hVElnSWLUBwBL9nTK8ywRtBGtF8hti/ssfJtzq+6BlRGgNNrWHuN
-         jK7JbBn4ZqYaCnR6oHyqAQwvy4im0rUMl1N1NAWWCNjF3EwCkJwmTVXZxgke19ceUn6R
-         O2Mg==
-X-Gm-Message-State: APuU4Z99YTFDridSDD2H6DYgkEPE6eAOuWFJicQY8EjQlqiDiqj3BJXy
-	rby77ue4XvE+bDYg+q9mWHdUe17ROT9wM6d2KUsRqd/RVgYXMNOnnvPOk7EOMYXCPRCYTg6wAaT
-	ZR67xyMg=
-X-Gm-Gg: AYBFou2pvTJUL6+OY61c+EhR0hF0Iyw5p08PlUaXnp6ReNZWsRq4RYpMLm2EartNDQb
-	IWgvbjLOzQSyzAlfTsiD/G9X1Os+6sX19h69O3eOOhxWJ0BbNJjodVq6CO6NlZH/yn07ez5PPrG
-	TK0MItmomCh6iR/yGgrsZ6KAu1gTjJKEXVw3VuOzCSlKHsQS6ojJjbxFxLzaw7DH9VyExXGqyLW
-	5gXzs5fk71uD4+4zyzVoVAYfMYcc+MMTioO1wWZuEGwK8O6kdcEGSYhFqFP+hlss6KbqDUfO6rE
-	AV25upougPjNeXF8cvh7r2Jk9ExVgKLk3O555agajZ37a856GMrJVv7J2Ln6gp3HNQOsP9OhUlQ
-	cOaRTwLALfDbfBXugL2Dwk3ZoDjJd6dz8Vh53es30il+xJEbhAImgSSkBhwswxxBE4YQW9VetKm
-	Y9Me6sPJ+Q8/y1Do9hPkquKRuc79I7tPfR6IepkVsHnrHJKTFrRPG3XHV1YpRaW8XCkCUj1Rp84
-	eYVpRDdV1W8V89ab+f0IJ1ZQ1Pap8ljfOJ9bvH+yIenp6jdNbeLiiNaQhPg1pOVEM3Dnf6ATNPE
-	hm5c4bBwQjm+o0GwMXUmPbMXBwIV1WGsa9H4CEfK9iQOINqRF/SE5FH1z/m9fH9BIybLyMf4oB3
-	X5wEY9byd+yIScrTR6ES+KEMH
-X-Received: by 2002:a05:600c:8115:b0:4a2:10f9:37db with SMTP id 5b1f17b1804b1-4b8190f468amr8518525e9.7.1794009391423;
-        Fri, 06 Nov 2026 15:56:31 -0800 (PST)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Ross Lagerwall <ross.lagerwall@citrix.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jason Andryuk <jason.andryuk@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Teddy Astie <teddy.astie@vates.tech>,
-	Denis Mukhin <dmukhin@ford.com>
-Subject: [PATCH v2] x86/svm: Cleanup vintr_t type
-Date: Fri,  6 Nov 2026 23:56:29 +0000
-Message-Id: <20261106235629.2799832-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=FqEoyVql5/58l0CPzLzrUsAxwSElaU/GyWgZcn3CVU92HXvhgKnHE4LFvgWXOZMdAbHAtqvsklsfaDNCSQQLnZlYySBLSPJxaol8IjrITf2lVzbWEmJT2K/tos2Pa1kuV+deJXO/u7ekNPXtx342AI6VtmPF4SjBaI/1+tbfSGkHknpnEZZrtwxGMAGzfn0Rj+IPlmIwVCliowGWthsv/FiftCEJUBtLXdKAnJmAicBdXTnoWS+HWPJQSlJskB3msFcEPSNhZvwY2dIpvhxg81gqLjSQWB3io0jveCNtCJTwI3Kp4x8OJOP2rV7P72fhDAFBygCI52qACjvxJ0EXWA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=HgVRn+JthJCU/a3f/yAhpe/2QUL+mvwRtOMP6JzrdyQ=;
+ b=HsKRrDVtYJ9Xcaiu93oS++/isWCDbw7OsaBdUP2mSg5smrl5RnKvk9c5FgRm8hUC6+zN1q720qg042/qLMf8NeFrl/COPD8b0g8WhteGNNv7kUddoLbOdNPPue8eG4YezV6tcGcLoXUxUCkUROWWAdwKicVqDl5sFRnJ3YwQIiJzyAw4cvsOkGyKlqJGBKUCoRf0d56rF5qMONsaHx5KWmTC5wNXlurUp53uZM9ITPn2jZQRbWo2ghSLaITvzXooRTXaFHe4PdhfWCR7sDtI208MImSuf+35dE/l/5H124/Dkpc65onseofdDpbBOC5d/xFblSXIloFlOOsXuWwglw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=citrix.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=HgVRn+JthJCU/a3f/yAhpe/2QUL+mvwRtOMP6JzrdyQ=;
+ b=x9OQtvzjS5MBlsaZvgNZhhlzumeiaOsZDrVFJxIBIMBPVirQ2L7fn/kxlMW8C/cGUhx1N0HdG3wWe5xtIFtoxS6f0hXrKswAJtCd/2g6ong2dF+1gm5TJDvQ+jWxkJW8Xrg9mHaIrjxtZ2j8Le7VuBynbClIvbHv3ed5d3inh98=
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Message-ID: <936b4d91-cb3c-4be5-9945-4c150afbec3a@amd.com>
+Date: Fri, 6 Nov 2026 19:11:01 -0500
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] tools/ocaml: Fix cleaning bindings test
+To: Andrew Cooper <andrew.cooper3@citrix.com>,
+	<xen-devel@lists.xenproject.org>
+CC: Andrii Sultanov <andriy.sultanov@vates.tech>, Guillaume Thouvenin
+	<guillaume.thouvenin@vates.tech>, Anthony PERARD <anthony.perard@vates.tech>
+References: <20261106231732.482518-1-jason.andryuk@amd.com>
+ <0037995b-dea1-42d6-85ac-cfa7719762a3@citrix.com>
+Content-Language: en-US
+From: Jason Andryuk <jason.andryuk@amd.com>
+In-Reply-To: <0037995b-dea1-42d6-85ac-cfa7719762a3@citrix.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1794009392-67ABD2AC-4DD0BECD/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 13355
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM3PEPF000265C2:EE_|DS3PR12MB637004:EE_
+X-MS-Office365-Filtering-Correlation-Id: dde06e32-9b5a-4e61-dad7-08df3c63a096
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|23010399003|1800799024|82310400026|36860700016|261026140227099003|11063799006|4143699003|56012099006|261022075727099003|261021123027099003|261021121427099003|261022105027099003|261009223027099003|261102123227099003|261026121527099003|261028144727099003|10067099003|18002099003|22082099003|6133799003;
+X-Microsoft-Antispam-Message-Info:
+	GRYSYNoE/OUusWuiNy5Fyxlpl2mCiugWKK074w/rITuCnuVmxYFXtEiEUw5rua0gRUv9x+P+xO+5lHjtb052fQZZ+x+JEBz85vsavr3QXeUzguHmf9M282n0Z+huoXJXCbOnh0diNI8vMPQjAwfCMvJr9MiHPqywAk5HxPsL8HKHSrc//I5iX6KqVALZJOW4G7Id1f4xFgiHB6JKK+dQi8Oz+xlhQSBOebsmls0Bfd986lycqJU/RulLUDneTafo5TvMBNNgq7ZgS3GVR1J3y8TB2s5ZhHBz3KmrBw1+hlx7FOzMT+Oz2zhdbiUPwNDGMAe+ak++sLwzJeOhgSjHRj4Hlj9+NSLmZzOF1SJmK2cKlTySa+K1MwF8tVFooq4KTJvnn54nUjAqNd3fgscc3pnnn8cwcJCfHDP7mP5giEcN2boNv6BS7I2FTngMon7Fx0BkFm/UdJDNknoO+A96Q8/5g9AWnQYt0X25jBDn3MkEw6sGseoqlqvzAc+Lb6v2cfQQcjEH/bv6mKsXcPaTc8vrX4v0OCeQqT9tQDoE0dbmrZqhIKHQ2adE9N6uMyezAJDiiYsSqJCKJ7a2BNV1HeyYPUtcfCBb6FviYqQ+ESUMzwvVZHmUv/7UJavBX0lr1P5IR7mXJ52DBRdGnKfjUPDCVCN5T20CuuUwXIH0nV8QC7waO1haxnLpgmtORD9WgCy5NnTtffguzzZimaLmXQ==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(23010399003)(1800799024)(82310400026)(36860700016)(261026140227099003)(11063799006)(4143699003)(56012099006)(261022075727099003)(261021123027099003)(261021121427099003)(261022105027099003)(261009223027099003)(261102123227099003)(261026121527099003)(261028144727099003)(10067099003)(18002099003)(22082099003)(6133799003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	9QQOkut3++OFuTiKh1Ge4ozq6oAD/JD1Xs/5mntEg7nKFcEbwLn+5+WovrdXkk/TKe2kN8RwagRNu0W3NfJ602IM6dVc6HjbVLlZK8eLekfKrc2frxMjWMz018QsHLMq37SyHmvGur2JuHK+5YrcMQUzPoIBBM+FJbMDtKrEF46EYNkJwbIsnU18RQO933bNVnNRglu33v0qT9F9Yxso6MDWriQEsSyn+JXH9U+P9Y463JEe4gnL5IVye2tGl0OM6smqbidqFBO4G0YV5baV3ECb4B0k3Cd/jxJgnosCe0OJcMC/Qc3sL02WBjiupBBDt358fh6iGhYZjlXJcjWlVUUT+PanYNsdhww9O9h6nhW44JBRLE95yIDaimYo3ocYQogUvhHqf2WrPsBOEhIVVePNNnkh9Ez7VA0xcpDqXqrSD2M4IPJSwhONzU1OvzHA
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Nov 2026 00:11:10.2825
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: dde06e32-9b5a-4e61-dad7-08df3c63a096
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	DM3PEPF000265C2.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS3PR12MB637004
+X-purgate-ID: tlsNG-c201ff/1794010273-72EB12A1-A89EDB8A/0/0
+X-purgate-type: clean
+X-purgate-size: 992
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Ross Lagerwall <ross.lagerwall@citrix.com>
+On 2026-11-06 18:19, Andrew Cooper wrote:
+> On 06/11/2026 11:17 pm, Jason Andryuk wrote:
+>> make clean fails in the bindings tests:
+>>
+>> make[7]: Entering directory '/home/amd/xen/tools/ocaml/tests/bindings'
+>> rm -f .*.d *.o *.so *.a *.cmo *.cmi *.cma *.cmx *.cmxa *.cmxs *.annot *.spot *.spit unix.cmxa -ccopt -L -ccopt ....
+>> rm: invalid option -- 'c'
+>> Try 'rm --help' for more information.
+>>
+>> Split the compiler flags out of the LIBS variable, since LIBS is passed
+>> to rm.  The individual *.cxma files are deleted in their respective
+>> directories.
+>>
+>> Fixes: d97847e858f1 ("tools/ocaml: Gitlab CI test for bindings")
+>> Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
+> 
+> Lovely...  Sorry for breaking this.
+> 
+> Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
-Rearrange the union to drop the .fields infix, rename bytes to the more
-common raw, adjust types where appropriate, and simplify some names.
-Adjust the users accordingly.
+Thanks.  I just double checked and unix.cmxa isn't in the directory on a 
+successful build.  So the whole thing could be moved to LIBFLAGS or a 
+suitable name.
 
-No functional change intended.
-
-Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
-Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
----
-CC: Jan Beulich <jbeulich@suse.com>
-CC: Roger Pau Monné <roger@xenproject.org>
-CC: Teddy Astie <teddy.astie@vates.tech>
-CC: Jason Andryuk <jason.andryuk@amd.com>
-CC: Ross Lagerwall <ross.lagerwall@citrix.com>
-CC: Denis Mukhin <dmukhin@ford.com>
-
-v2:
- * Further adjustments to names, swap to true/false for bools.
----
- xen/arch/x86/hvm/svm/intr.c      | 19 +++++++--------
- xen/arch/x86/hvm/svm/nestedsvm.c | 33 +++++++++++++------------
- xen/arch/x86/hvm/svm/svm.c       | 18 +++++++-------
- xen/arch/x86/hvm/svm/vmcb.c      |  6 ++---
- xen/arch/x86/hvm/svm/vmcb.h      | 41 +++++++++++++++-----------------
- 5 files changed, 55 insertions(+), 62 deletions(-)
-
-diff --git a/xen/arch/x86/hvm/svm/intr.c b/xen/arch/x86/hvm/svm/intr.c
-index 2224f1834741..dfe6d8347605 100644
---- a/xen/arch/x86/hvm/svm/intr.c
-+++ b/xen/arch/x86/hvm/svm/intr.c
-@@ -34,9 +34,9 @@ static void svm_inject_nmi(struct vcpu *v)
-     uint32_t general1_intercepts;
-     intinfo_t event;
- 
--    if ( vintr.fields.vnmi_enable )
-+    if ( vintr.vnmi_en )
-     {
--        vintr.fields.vnmi_pending = true;
-+        vintr.nmi_pending = true;
-         vmcb_set_vintr(vmcb, vintr);
-         return;
-     }
-@@ -93,7 +93,7 @@ static void svm_enable_intr_window(struct vcpu *v, struct hvm_intack intack)
-              */
-             ASSERT(gvmcb != NULL);
-             intr = vmcb_get_vintr(gvmcb);
--            if ( intr.fields.irq )
-+            if ( intr.intr_pending )
-                 return;
-         }
-     }
-@@ -122,10 +122,10 @@ static void svm_enable_intr_window(struct vcpu *v, struct hvm_intack intack)
-         return;
- 
-     intr = vmcb_get_vintr(vmcb);
--    intr.fields.irq     = 1;
--    intr.fields.vector  = 0;
--    intr.fields.prio    = intack.vector >> 4;
--    intr.fields.ign_tpr = (intack.source != hvm_intsrc_lapic);
-+    intr.intr_pending = true;
-+    intr.intr_prio    = intack.vector >> 4;
-+    intr.ign_tpr      = (intack.source != hvm_intsrc_lapic);
-+    intr.vector       = 0;
-     vmcb_set_vintr(vmcb, intr);
-     vmcb_set_general1_intercepts(
-         vmcb, general1_intercepts | GENERAL1_INTERCEPT_VINTR);
-@@ -153,15 +153,14 @@ void asmlinkage svm_intr_assist(void)
-         intblk = hvm_interrupt_blocked(v, intack);
- 
-         /*
--         * When vNMI is active, NMIs can be injected by setting vnmi_pending
-+         * When vNMI is active, NMIs can be injected by setting nmi_pending
-          * and hardware will deliver them at the next appropriate opportunity.
-          * Consider them not blocked, to avoid trying to open an NMI Window.
-          *
-          * Correctness here relies on the fact that all vNMI capable hardware
-          * has vGIF, and vGIF is always activated when appropriate.
-          */
--        if ( intblk == hvm_intblk_nmi_iret &&
--             vmcb->_vintr.fields.vnmi_enable )
-+        if ( intblk == hvm_intblk_nmi_iret && vmcb->_vintr.vnmi_en )
-             intblk = hvm_intblk_none;
- 
-         if ( intblk == hvm_intblk_svm_gif )
-diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
-index d970869cfd96..610c8c213cf2 100644
---- a/xen/arch/x86/hvm/svm/nestedsvm.c
-+++ b/xen/arch/x86/hvm/svm/nestedsvm.c
-@@ -427,7 +427,7 @@ static int nsvm_vmcb_prepare4vmrun(struct vcpu *v, struct cpu_user_regs *regs)
-     if ( !clean.tpr )
-     {
-         n2vmcb->_vintr = ns_vmcb->_vintr;
--        n2vmcb->_vintr.fields.intr_masking = 1;
-+        n2vmcb->_vintr.vintr_masking = true;
-     }
- 
-     /* Interrupt state */
-@@ -637,7 +637,7 @@ nsvm_vcpu_vmentry(struct vcpu *v, struct cpu_user_regs *regs,
-     svm->ns_hap_enabled = vmcb_get_np(ns_vmcb);
- 
-     /* Remember the V_INTR_MASK in hostflags */
--    svm->ns_hostflags.vintrmask = ns_vmcb->_vintr.fields.intr_masking;
-+    svm->ns_hostflags.vintrmask = ns_vmcb->_vintr.vintr_masking;
- 
-     /* Save l1 guest state (= host state) */
-     ret = nsvm_vcpu_hostsave(v, inst_len);
-@@ -723,8 +723,8 @@ nsvm_vcpu_vmexit_inject(struct vcpu *v, struct cpu_user_regs *regs,
-     struct vmcb_struct *ns_vmcb;
-     struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
- 
--    if ( vmcb->_vintr.fields.vgif_enable )
--        vmcb->_vintr.fields.vgif = 0;
-+    if ( vmcb->_vintr.vgif_en )
-+        vmcb->_vintr.gif = false;
-     else
-         svm->ns_gif = 0;
- 
-@@ -979,7 +979,7 @@ nsvm_vmcb_prepare4vmexit(struct vcpu *v, struct cpu_user_regs *regs)
-     /* Virtual Interrupts */
-     ns_vmcb->_vintr = n2vmcb->_vintr;
-     if ( !svm->ns_hostflags.vintrmask )
--        ns_vmcb->_vintr.fields.intr_masking = 0;
-+        ns_vmcb->_vintr.vintr_masking = false;
- 
-     /* Interrupt state */
-     ns_vmcb->int_stat = n2vmcb->int_stat;
-@@ -1198,8 +1198,8 @@ nestedsvm_vmexit_defer(struct vcpu *v,
-     struct nestedsvm *svm = &vcpu_nestedsvm(v);
-     struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
- 
--    if ( vmcb->_vintr.fields.vgif_enable )
--        vmcb->_vintr.fields.vgif = 0;
-+    if ( vmcb->_vintr.vgif_en )
-+        vmcb->_vintr.gif = false;
-     else
-         svm->ns_gif = 0;
- 
-@@ -1461,8 +1461,8 @@ nestedsvm_gif_isset(struct vcpu *v)
-     struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
- 
-     /* get the vmcb gif value if using vgif */
--    if ( vmcb->_vintr.fields.vgif_enable )
--        return vmcb->_vintr.fields.vgif;
-+    if ( vmcb->_vintr.vgif_en )
-+        return vmcb->_vintr.gif;
-     else
-         return svm->ns_gif;
- }
-@@ -1509,7 +1509,7 @@ void svm_vmexit_do_clgi(struct cpu_user_regs *regs, struct vcpu *v)
- 
-     /* After a CLGI no interrupts should come */
-     intr = vmcb_get_vintr(vmcb);
--    intr.fields.irq = 0;
-+    intr.intr_pending = false;
-     general1_intercepts &= ~GENERAL1_INTERCEPT_VINTR;
-     vmcb_set_vintr(vmcb, intr);
-     vmcb_set_general1_intercepts(vmcb, general1_intercepts);
-@@ -1543,12 +1543,11 @@ void svm_nested_features_on_efer_update(struct vcpu *v)
-             vmcb_set_general2_intercepts(vmcb, general2_intercepts);
-         }
- 
--        if ( !vmcb->_vintr.fields.vgif_enable &&
--             cpu_has_svm_vgif )
-+        if ( !vmcb->_vintr.vgif_en && cpu_has_svm_vgif )
-         {
-             vintr = vmcb_get_vintr(vmcb);
--            vintr.fields.vgif = svm->ns_gif;
--            vintr.fields.vgif_enable = 1;
-+            vintr.gif = svm->ns_gif;
-+            vintr.vgif_en = true;
-             vmcb_set_vintr(vmcb, vintr);
-             general2_intercepts  = vmcb_get_general2_intercepts(vmcb);
-             general2_intercepts &= ~(GENERAL2_INTERCEPT_STGI |
-@@ -1567,11 +1566,11 @@ void svm_nested_features_on_efer_update(struct vcpu *v)
-             vmcb_set_general2_intercepts(vmcb, general2_intercepts);
-         }
- 
--        if ( vmcb->_vintr.fields.vgif_enable )
-+        if ( vmcb->_vintr.vgif_en )
-         {
-             vintr = vmcb_get_vintr(vmcb);
--            svm->ns_gif = vintr.fields.vgif;
--            vintr.fields.vgif_enable = 0;
-+            svm->ns_gif = vintr.gif;
-+            vintr.vgif_en = false;
-             vmcb_set_vintr(vmcb, vintr);
-             general2_intercepts  = vmcb_get_general2_intercepts(vmcb);
-             general2_intercepts |= (GENERAL2_INTERCEPT_STGI |
-diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
-index 666bcd3eb483..3e08610d151f 100644
---- a/xen/arch/x86/hvm/svm/svm.c
-+++ b/xen/arch/x86/hvm/svm/svm.c
-@@ -498,8 +498,8 @@ static unsigned cf_check int svm_get_interrupt_shadow(struct vcpu *v)
-     if ( vmcb->int_stat.intr_shadow )
-         intr_shadow |= HVM_INTR_SHADOW_MOV_SS | HVM_INTR_SHADOW_STI;
- 
--    if ( vmcb->_vintr.fields.vnmi_enable
--         ? vmcb->_vintr.fields.vnmi_blocking
-+    if ( vmcb->_vintr.vnmi_en
-+         ? vmcb->_vintr.nmi_blocked
-          : (vmcb_get_general1_intercepts(vmcb) & GENERAL1_INTERCEPT_IRET) )
-         intr_shadow |= HVM_INTR_SHADOW_NMI;
- 
-@@ -516,9 +516,9 @@ static void cf_check svm_set_interrupt_shadow(
-     vmcb->int_stat.intr_shadow =
-         !!(intr_shadow & (HVM_INTR_SHADOW_MOV_SS|HVM_INTR_SHADOW_STI));
- 
--    if ( vintr.fields.vnmi_enable )
-+    if ( vintr.vnmi_en )
-     {
--        vintr.fields.vnmi_blocking = block_nmi;
-+        vintr.nmi_blocked = block_nmi;
-         vmcb_set_vintr(vmcb, vintr);
-     }
-     else
-@@ -964,8 +964,7 @@ static void noreturn cf_check svm_do_resume(void)
- 
-         /* Reflect the vlapic's TPR in the hardware vtpr */
-         intr = vmcb_get_vintr(vmcb);
--        intr.fields.tpr =
--            (vlapic_get_reg(vlapic, APIC_TASKPRI) & 0xFF) >> 4;
-+        intr.tpr = (vlapic_get_reg(vlapic, APIC_TASKPRI) & 0xFF) >> 4;
-         vmcb_set_vintr(vmcb, intr);
-     }
- 
-@@ -2542,7 +2541,7 @@ void asmlinkage svm_vmexit_handler(void)
-     {
-         intr = vmcb_get_vintr(vmcb);
-         vlapic_set_reg(vlapic, APIC_TASKPRI,
--                   ((intr.fields.tpr & 0x0F) << 4) |
-+                   ((intr.tpr & 0x0F) << 4) |
-                    (vlapic_get_reg(vlapic, APIC_TASKPRI) & 0x0F));
-     }
- 
-@@ -2776,7 +2775,7 @@ void asmlinkage svm_vmexit_handler(void)
-         u32 general1_intercepts = vmcb_get_general1_intercepts(vmcb);
-         intr = vmcb_get_vintr(vmcb);
- 
--        intr.fields.irq = 0;
-+        intr.intr_pending = false;
-         general1_intercepts &= ~GENERAL1_INTERCEPT_VINTR;
- 
-         vmcb_set_vintr(vmcb, intr);
-@@ -3067,8 +3066,7 @@ void asmlinkage svm_vmexit_handler(void)
- 
-     /* The exit may have updated the TPR: reflect this in the hardware vtpr */
-     intr = vmcb_get_vintr(vmcb);
--    intr.fields.tpr =
--        (vlapic_get_reg(vlapic, APIC_TASKPRI) & 0xFF) >> 4;
-+    intr.tpr = (vlapic_get_reg(vlapic, APIC_TASKPRI) & 0xFF) >> 4;
-     vmcb_set_vintr(vmcb, intr);
- }
- 
-diff --git a/xen/arch/x86/hvm/svm/vmcb.c b/xen/arch/x86/hvm/svm/vmcb.c
-index 33c85ea3bfc5..91b9581a2e34 100644
---- a/xen/arch/x86/hvm/svm/vmcb.c
-+++ b/xen/arch/x86/hvm/svm/vmcb.c
-@@ -105,7 +105,7 @@ static int construct_vmcb(struct vcpu *v)
-     vmcb->_iopm_base_pa = __pa(v->domain->arch.hvm.io_bitmap);
- 
-     /* Virtualise EFLAGS.IF and LAPIC TPR (CR8). */
--    vmcb->_vintr.fields.intr_masking = 1;
-+    vmcb->_vintr.vintr_masking = true;
- 
-     /* Don't need to intercept RDTSC if CPU supports TSC rate scaling */
-     if ( v->domain->arch.vtsc && !cpu_has_tsc_ratio )
-@@ -192,7 +192,7 @@ static int construct_vmcb(struct vcpu *v)
-     if ( default_xen_spec_ctrl == SPEC_CTRL_STIBP )
-         v->arch.msrs->spec_ctrl.raw = SPEC_CTRL_STIBP;
- 
--    vmcb->_vintr.fields.vnmi_enable = cpu_has_svm_vnmi;
-+    vmcb->_vintr.vnmi_en = cpu_has_svm_vnmi;
- 
-     return 0;
- }
-@@ -275,7 +275,7 @@ void svm_vmcb_dump(const char *from, const struct vmcb_struct *vmcb)
-            vmcb_get_iopm_base_pa(vmcb), vmcb_get_msrpm_base_pa(vmcb),
-            vmcb_get_tsc_offset(vmcb));
-     printk("tlb_control = %#x vintr = %#"PRIx64" int_stat = %#"PRIx64"\n",
--           vmcb->tlb_control, vmcb_get_vintr(vmcb).bytes,
-+           vmcb->tlb_control, vmcb_get_vintr(vmcb).raw,
-            vmcb->int_stat.raw);
-     printk("event_inj %016"PRIx64", valid? %d, ec? %d, type %u, vector %#x\n",
-            vmcb->event_inj.raw, vmcb->event_inj.v,
-diff --git a/xen/arch/x86/hvm/svm/vmcb.h b/xen/arch/x86/hvm/svm/vmcb.h
-index 8b351679fac5..bfe4a4521dcb 100644
---- a/xen/arch/x86/hvm/svm/vmcb.h
-+++ b/xen/arch/x86/hvm/svm/vmcb.h
-@@ -328,28 +328,25 @@ typedef union {
-     uint64_t raw;
- } intstat_t;
- 
--typedef union
--{
--    u64 bytes;
--    struct
--    {
--        u64 tpr:          8;
--        u64 irq:          1;
--        u64 vgif:         1;
--        u64 :             1;
--        u64 vnmi_pending: 1;
--        u64 vnmi_blocking:1;
--        u64 :             3;
--        u64 prio:         4;
--        u64 ign_tpr:      1;
--        u64 rsvd1:        3;
--        u64 intr_masking: 1;
--        u64 vgif_enable:  1;
--        u64 vnmi_enable:  1;
--        u64 :             5;
--        u64 vector:       8;
--        u64 rsvd3:       24;
--    } fields;
-+typedef union {
-+    struct {         /* Cleanbit 3 (TPR),  APM Name */
-+        uint8_t tpr;                /* c   V_TPR */
-+        bool    intr_pending:1;     /* c   V_IRQ */
-+        bool    gif:1;              /*     VGIF */
-+        bool    :1;
-+        bool    nmi_pending:1;      /* c   V_NMI */
-+        bool    nmi_blocked:1;      /* c   V_NMI_MASK */
-+        uint8_t :3;
-+        uint8_t intr_prio:4;        /* c   V_INTR_PRIO */
-+        bool    ign_tpr:1;          /* c   V_IGN_TPR */
-+        uint8_t :3;
-+        bool    vintr_masking:1;    /* c   V_INTR_MASKING */
-+        bool    vgif_en:1;          /*     VGIF_EN */
-+        bool    vnmi_en:1;          /*     V_NMI_ENABLE */
-+        uint8_t :5;
-+        uint8_t vector;             /* c   V_INTR_VECTOR */
-+    };
-+    uint64_t raw;
- } vintr_t;
- 
- typedef union
--- 
-2.39.5
-
+Regards,
+Jason
 
