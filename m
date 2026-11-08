@@ -2,43 +2,43 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DC54D606A330
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F2C1B606A331
 	for <xen-devel@archiver.kernel.org>; Sun,  8 Nov 2026 22:40:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20260707 header.b=nJOx9GII
-Received: from list by lists.xenproject.org with outflank-mailman.1479085.1683137 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20260707 header.b=SYfAcFOA
+Received: from list by lists.xenproject.org with outflank-mailman.1479090.1683175 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQBYD-0004LS-8V; Sun, 08 Nov 2026 22:39:49 +0000
+	id 1xQBYL-0005Ia-D8; Sun, 08 Nov 2026 22:39:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1479085.1683137; Sun, 08 Nov 2026 22:39:49 +0000
+Received: by outflank-mailman (output) from mailman id 1479090.1683175; Sun, 08 Nov 2026 22:39:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQBYD-0004LI-58; Sun, 08 Nov 2026 22:39:49 +0000
-Received: by outflank-mailman (input) for mailman id 1479085;
- Sun, 08 Nov 2026 22:39:47 +0000
+	id 1xQBYL-0005IP-8F; Sun, 08 Nov 2026 22:39:57 +0000
+Received: by outflank-mailman (input) for mailman id 1479090;
+ Sun, 08 Nov 2026 22:39:55 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <3L_rwagcKCUYqzwomz0owwotm.kwu5mv-lm3mttq010.5mvxzwrmk1.wzo@flex--irogers.bounces.google.com>)
- id 1xQBYB-00049z-9W
- for xen-devel@lists.xenproject.org; Sun, 08 Nov 2026 22:39:47 +0000
+ <3OPrwagcKCU8z85xv89x55x2v.t53Ev4-uvCv22z9A9.Ev46850vtA.58x@flex--irogers.bounces.google.com>)
+ id 1xQBYJ-00058y-Le
+ for xen-devel@lists.xenproject.org; Sun, 08 Nov 2026 22:39:55 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xQBYA-001uiE-ML
- for xen-devel@lists.xenproject.org; Sun, 08 Nov 2026 23:39:46 +0100
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xQBYJ-001umh-2e
+ for xen-devel@lists.xenproject.org; Sun, 08 Nov 2026 23:39:55 +0100
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <3L_rwagcKCUYqzwomz0owwotm.kwu5mv-lm3mttq010.5mvxzwrmk1.wzo@flex--irogers.bounces.google.com>)
- id 6af0f998-e002-0a2a0a5209dd-0a2a4501b036-12
- for <xen-devel@lists.xenproject.org>; Sun, 08 Nov 2026 23:39:46 +0100
-Received: from [74.125.82.69] (helo=mail-dl1-f69.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ <3OPrwagcKCU8z85xv89x55x2v.t53Ev4-uvCv22z9A9.Ev46850vtA.58x@flex--irogers.bounces.google.com>)
+ id 6af0fa07-8faa-0a2a0a5109dd-0a2a450c92d6-18
+ for <xen-devel@lists.xenproject.org>; Sun, 08 Nov 2026 23:39:55 +0100
+Received: from [74.125.82.200] (helo=mail-dy1-f200.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <3L_rwagcKCUYqzwomz0owwotm.kwu5mv-lm3mttq010.5mvxzwrmk1.wzo@flex--irogers.bounces.google.com>)
- id 6af0fa31-5984-0a2a45010019-4a7d5245e55e-3
- for <xen-devel@lists.xenproject.org>; Sun, 08 Nov 2026 23:39:46 +0100
-Received: by mail-dl1-f69.google.com with SMTP id
- a92af1059eb24-1b0d864826cso1320315c88.1
- for <xen-devel@lists.xenproject.org>; Sun, 08 Nov 2026 14:39:46 -0800 (PST)
+ <3OPrwagcKCU8z85xv89x55x2v.t53Ev4-uvCv22z9A9.Ev46850vtA.58x@flex--irogers.bounces.google.com>)
+ id 6af0fa39-f479-0a2a450c0019-4a7d52c8bd04-3
+ for <xen-devel@lists.xenproject.org>; Sun, 08 Nov 2026 23:39:54 +0100
+Received: by mail-dy1-f200.google.com with SMTP id
+ 5a478bee46e88-33c35f5ca6cso849399eec.1
+ for <xen-devel@lists.xenproject.org>; Sun, 08 Nov 2026 14:39:54 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,46 +49,45 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=google.com header.i="@google.com" header.h="Content-Type:Cc:To:From:Subject:Message-ID:References:Mime-Version:In-Reply-To:Date"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20260707; t=1794177584; x=1794782384; darn=lists.xenproject.org;
+        d=google.com; s=20260707; t=1794177593; x=1794782393; darn=lists.xenproject.org;
         h=content-type:cc:to:from:subject:message-id:references:mime-version
          :in-reply-to:date:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=4kX4Ed3A+P912IudIYmkHnIS6SHmJhWXUKLWP4ZNJ5k=;
-        b=nJOx9GIIt5rhsfzfKka6ooWclB4ShMBLHUBLN1Vxnyy+F6WiHrpSzmbj4BeE1HWDdZ
-         1x6tzycFEljlRFSUrW0v4GhxDIOo5RfZ6OxYTECG0B99rDE2UzqjMRJMnsZPaFRTcK4j
-         yp+aH0udoTaMpDMpUyh58Vt7+LKK7J7UXLrgPcl0g6GKId3ovO5CBS5uCHUAhAKqvaLm
-         AS/muVTK4lOcwl2o8eHpvaLkzOkNlIFlmHxK3m7ZBCS1EtLkHasnu3d/X8dacRnl0mwn
-         TdJTaR1R0SWHVfqOqT4z4eNi5J+faKTgHwP0ruwwWl++M/Po86u648Y1AU/VRSHmciBP
-         r5xg==
+        bh=noN8ey05POi7MkRY5IldCk9pju5ZMENfN/kneqqJ3/c=;
+        b=SYfAcFOAT8tuyHEpMOqB/g00hFhJdr/UPz+6Gpj0y09p815eGDPgjqLTCt+oMZUcMw
+         ZBZ3IUTB2vofdG3xgVR3V279q6herGR6ddrHCc1xJEAd+6b12blE2Oe9F0H9NAFG9S4+
+         YwyCzlA9AkDv2FxOKDdxyOWmSnVJhKq4rFZnFFw+s+5xTqEpjSy7uway2J8bUYcSo3A7
+         QjVQ2czR1w1l1+fp7bewaPsARYT5eiu0Tzre0/AjONbXtDvhPR0Wn2MVGxJ50ga89wnN
+         pC7spdJQRtvD22pkrop0zBaU194HpOdKUp5hRLV0BCACFIHf4vR2Tgav9ZDROIvI94i1
+         SACw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794177584; x=1794782384;
+        d=1e100.net; s=20260707; t=1794177593; x=1794782393;
         h=content-type:cc:to:from:subject:message-id:references:mime-version
          :in-reply-to:date:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=4kX4Ed3A+P912IudIYmkHnIS6SHmJhWXUKLWP4ZNJ5k=;
-        b=l2fZyCVs6531srhTehvACDxdJDWzkOWAIxA3p4Nn8wzSisndw1ZOx83MTUIWvdOIDU
-         L2tHQfqpicqjEv438x0Gi0UYPrenphp7IiOVUzN8FJTXQWfq+0qIJj+Qtr9WcHKRLQly
-         FOfCrDqoTWILh4cZ/d6xhZLPM3eCfJcO1ZLcA0TkDZIInYVYwFsD7ezt80nebw7D2ljg
-         4TN1yqP61ZNMnbYAYZTsqrDQG/5FEXBJWIMzkoWQCkDzHXKsnIwMhV95mDM4zknZToA3
-         y3ksHAzeJ7vFPjG1og8BK3GyIW/UMZB3qsuspHYI/sG6agU36cAzbX6+8xvUWAB6WvZO
-         Qwfw==
-X-Forwarded-Encrypted: i=1; AL+hErHvTDpyOPGOOFj6CasHd8lPAAI//LS1ztpmGTg81lEq3S7jYcHeE7vUIgTL86kmd5rGt+H/xznXsKI=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z8K4QFkJD53u63tB5YJWwbe6GHc67PFU6kPZRIqgI2CcOoON1Bk
-	CuWlgEU75Ea5/y2H1cqY3dppdPA6j6sWc39DBQ1GyBMgbKkLJ19RfOYYcG6Cg9tpQNd5+210uaP
-	jihAhqJh1yQ==
-X-Received: from dlad1.prod.google.com ([2002:a05:701b:2201:b0:1b2:6421:f4fb])
- (user=irogers job=prod-delivery.src-stubby-dispatcher) by 2002:a05:7022:ea8a:b0:163:bee9:b250
- with SMTP id a92af1059eb24-1b39fedbec2mr3348910c88.22.1794177583902; Sun, 08
- Nov 2026 14:39:43 -0800 (PST)
-Date: Sun,  8 Nov 2026 14:39:06 -0800
+        bh=noN8ey05POi7MkRY5IldCk9pju5ZMENfN/kneqqJ3/c=;
+        b=h9z3pp5tNWY/ozVrOq07av/o01XEHLs7RQIdhpBR/Pvs/deLKtS9Cyzkd5NiDWqyrh
+         gjNLaVse7txMJC3wyrsDJXQKvMUwACRvjU807618BBjvW5rTRVG9fE8Bg3nz5lsAB15I
+         XJ58R368bt4zk8Wu36Ytu6KkdMgEAOpJ0YuAkzjJWs1P+HYiCcfIspkktKrr7ik6bb3j
+         wBq0FD69XOqCiWsfUJdRFB/TfxyEGJxOPfV9Nq98DeZM8bRDQtflKHbrUdNL9R6fiQfd
+         Y7dXV5SO8vMMfD8VgXo1tllJAppBlfNEgDubOF3t76DKX394sGI9dbaGeJ3apwlFFVkB
+         Ho8A==
+X-Forwarded-Encrypted: i=1; AL+hErEk9RZarmOzi0a2XHHB6gunvaG4oQZdimdirn+pj3A2VCYc8F5HqjuExHRmaDOQk3KiHoIr0np5z6k=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z+QsUk7m+HsJfWQ7rZjsAJ7W8amuQpXKbnZk2ZCLef+V2Z566qU
+	2YwNMbsZyOQtJE4wJeBGzzo1neoLwmgkTURZAzHP0lsSjq6k5KUKhcX3AcUYDOx/eYjG6XFQAuu
+	PrkqwPBDAjg==
+X-Received: from dlam9-n1.prod.google.com ([2002:a05:701b:2089:10b0:195:beb6:14cc])
+ (user=irogers job=prod-delivery.src-stubby-dispatcher) by 2002:a05:7022:28b:10b0:1b0:430d:d81c
+ with SMTP id a92af1059eb24-1b39feab6a4mr3897188c88.25.1794177592505; Sun, 08
+ Nov 2026 14:39:52 -0800 (PST)
+Date: Sun,  8 Nov 2026 14:39:10 -0800
 In-Reply-To: <20261108223913.3624571-1-irogers@google.com>
 X-Archived-By: <archiver.kernel.org>
 Mime-Version: 1.0
 References: <20261108223913.3624571-1-irogers@google.com>
 X-Mailer: git-send-email 2.56.0.455.g6c5a503b38-goog
-Message-ID: <20261108223913.3624571-3-irogers@google.com>
-Subject: [PATCH v3 2/9] powerpc/secvar: Add missing kobject release callback
- to secvar_ktype
+Message-ID: <20261108223913.3624571-7-irogers@google.com>
+Subject: [PATCH v3 6/9] xen/sys-hypervisor: Add release callback to hyp_sysfs_kobj_type
 From: Ian Rogers <irogers@google.com>
 To: Danilo Krummrich <dakr@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
 	Kees Cook <kees@kernel.org>, Miguel Ojeda <ojeda@kernel.org>, 
@@ -114,50 +113,50 @@ Cc: Madhavan Srinivasan <maddy@linux.ibm.com>, Michael Ellerman <mpe@ellerman.id
 	amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, 
 	linux-kernel@vger.kernel.org, Ian Rogers <irogers@google.com>
 Content-Type: text/plain; charset="UTF-8"
-X-purgate-ID: tlsNG-d62444/1794177586-1F66C757-69BF243C/0/0
+X-purgate-ID: tlsNG-d25034/1794177595-50520A5B-F1872E5C/0/0
 X-purgate-type: clean
-X-purgate-size: 1283
+X-purgate-size: 1156
 X-Spam-Status: No, score=-26.3 required=3.0 tests=BAYES_00,DKIMWL_WL_MED,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
 	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT,USER_IN_DEF_DKIM_WL
-	autolearn=unavailable autolearn_force=no version=4.0.1
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-In add_var(), a struct kobject is dynamically allocated with
-kzalloc_obj() and initialized with secvar_ktype. If kobject_add() or
-sysfs_create_file() fails, kobject_put(kobj) is called to clean up.
-However, secvar_ktype does not define a .release callback, which results
-in a memory leak of kobj (and a pr_debug warning in kobject_cleanup()
-when CONFIG_DEBUG_KOBJECT_RELEASE is enabled).
+hypervisor_init() in drivers/base/hypervisor.c creates hypervisor_kobj
+with kobject_create_and_add() (which allocates a dynamic kobject using
+dynamic_kobj_ktype), and hypervisor_subsys_init() in
+drivers/xen/sys-hypervisor.c then overwrites hypervisor_kobj->ktype with
+&hyp_sysfs_kobj_type, which had no .release callback.
 
-Provide a secvar_release() callback that calls kfree(kobj).
+Add hyp_sysfs_release() calling kfree(kobj) to preserve the dynamic
+kobject release behavior.
 
-Fixes: bd5d9c743d38 ("powerpc: expose secure variables to userspace via sysfs")
+Fixes: cff7e81b3dd7 ("xen: add /sys/hypervisor support")
 Signed-off-by: Ian Rogers <irogers@google.com>
 ---
- arch/powerpc/kernel/secvar-sysfs.c | 6 ++++++
+ drivers/xen/sys-hypervisor.c | 6 ++++++
  1 file changed, 6 insertions(+)
 
-diff --git a/arch/powerpc/kernel/secvar-sysfs.c b/arch/powerpc/kernel/secvar-sysfs.c
-index 395399bbab2c..f3f6ac25ea78 100644
---- a/arch/powerpc/kernel/secvar-sysfs.c
-+++ b/arch/powerpc/kernel/secvar-sysfs.c
-@@ -126,7 +126,13 @@ static const struct attribute_group secvar_attr_group = {
+diff --git a/drivers/xen/sys-hypervisor.c b/drivers/xen/sys-hypervisor.c
+index 91923242a5ae..0e8a2cd69fd6 100644
+--- a/drivers/xen/sys-hypervisor.c
++++ b/drivers/xen/sys-hypervisor.c
+@@ -659,7 +659,13 @@ static const struct sysfs_ops hyp_sysfs_ops = {
+ 	.store = hyp_sysfs_store,
  };
- __ATTRIBUTE_GROUPS(secvar_attr);
  
-+static void secvar_release(struct kobject *kobj)
++static void hyp_sysfs_release(struct kobject *kobj)
 +{
 +	kfree(kobj);
 +}
 +
- static const struct kobj_type secvar_ktype = {
-+	.release	= secvar_release,
- 	.sysfs_ops	= &kobj_sysfs_ops,
- 	.default_groups = secvar_attr_groups,
+ static const struct kobj_type hyp_sysfs_kobj_type = {
++	.release = hyp_sysfs_release,
+ 	.sysfs_ops = &hyp_sysfs_ops,
  };
+ 
 -- 
 2.56.0.455.g6c5a503b38-goog
 
