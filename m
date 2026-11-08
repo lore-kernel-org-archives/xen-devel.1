@@ -2,43 +2,43 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2262A606A31A
-	for <xen-devel@archiver.kernel.org>; Sun,  8 Nov 2026 03:01:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1478609.1683103 (Exim 4.92)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E10DF606A31C
+	for <xen-devel@archiver.kernel.org>; Sun,  8 Nov 2026 08:43:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=R+SlQOYJ
+Received: from list by lists.xenproject.org with outflank-mailman.1478800.1683112 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xPt9S-0006dv-Pz; Sun, 08 Nov 2026 03:01:02 +0000
+	id 1xPyUF-0006FC-Gx; Sun, 08 Nov 2026 08:42:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1478609.1683103; Sun, 08 Nov 2026 03:01:02 +0000
+Received: by outflank-mailman (output) from mailman id 1478800.1683112; Sun, 08 Nov 2026 08:42:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xPt9S-0006dk-Kd; Sun, 08 Nov 2026 03:01:02 +0000
-Received: by outflank-mailman (input) for mailman id 1478609;
- Sun, 08 Nov 2026 03:01:01 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xPyUF-0006F4-CS; Sun, 08 Nov 2026 08:42:51 +0000
+Received: by outflank-mailman (input) for mailman id 1478800;
+ Sun, 08 Nov 2026 08:42:50 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ehem@m5p.com>) id 1xPt9R-0006de-ME
- for xen-devel@lists.xenproject.org; Sun, 08 Nov 2026 03:01:01 +0000
+ (envelope-from <rppt@kernel.org>) id 1xPyUE-0006Ey-8l
+ for xen-devel@lists.xenproject.org; Sun, 08 Nov 2026 08:42:50 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xPt9R-003iU5-1b
- for xen-devel@lists.xenproject.org; Sun, 08 Nov 2026 04:01:01 +0100
-Received: from [10.42.69.11] (helo=localhost)
+ id 1xPyUC-000bDa-2U
+ for xen-devel@lists.xenproject.org; Sun, 08 Nov 2026 09:42:48 +0100
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ehem@m5p.com>)
- id 6aefe5b2-bab6-0a2a0a5309dd-0a2a450b814a-22
- for <xen-devel@lists.xenproject.org>; Sun, 08 Nov 2026 04:01:01 +0100
-Received: from [74.104.188.4] (helo=mailhost.m5p.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <ehem@m5p.com>)
- id 6aefe5e7-b7e8-0a2a450b0019-4a68bc043901-5
- for <xen-devel@lists.xenproject.org>; Sun, 08 Nov 2026 04:01:00 +0100
-Received: from m5p.com (mailhost.m5p.com [IPv6:fdc4:6ee8:648f:6bf6:0:0:0:f7])
- by mailhost.m5p.com (8.18.1/8.17.1) with ESMTPS id 6A830R0k095764
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
- Sat, 7 Nov 2026 22:00:53 -0500 (EST) (envelope-from ehem@m5p.com)
-Received: (from ehem@localhost)
- by m5p.com (8.18.1/8.15.2/Submit) id 6A830QxV095763;
- Sat, 7 Nov 2026 19:00:26 -0800 (PST) (envelope-from ehem)
+ (envelope-from <rppt@kernel.org>)
+ id 6af035ad-bab6-0a2a0a5309dd-0a2a450ad8ac-22
+ for <xen-devel@lists.xenproject.org>; Sun, 08 Nov 2026 09:42:48 +0100
+Received: from [172.234.252.31] (helo=sea.source.kernel.org)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <rppt@kernel.org>)
+ id 6af03606-f2d2-0a2a450a0019-aceafc1fbeb2-3
+ for <xen-devel@lists.xenproject.org>; Sun, 08 Nov 2026 09:42:47 +0100
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id 62AF1448C4;
+ Sun,  8 Nov 2026 08:42:45 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3E7861F0089F;
+ Sun,  8 Nov 2026 08:42:43 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -47,93 +47,110 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; none
-Date: Sat, 7 Nov 2026 19:00:26 -0800
-From: Elliott Mitchell <ehem+xen@m5p.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-        Anthony PERARD <anthony.perard@vates.tech>,
-        Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
-        Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger@xenproject.org>,
-        Stefano Stabellini <sstabellini@kernel.org>,
-        xen-devel@lists.xenproject.org
-Subject: Re: [PATCH 2/5] Config.mk: record hash of SeaBIOS tag
-Message-ID: <au_lyioQRMuKkoqJ@mattapan.m5p.com.>
-References: <cover.1792436534.git.ehem+xen@m5p.com>
- <9771fce7e080b2d64fd9535b6e38d70781eb2de3.1792436534.git.ehem+xen@m5p.com>
- <0fc3eb31-1aac-4b0e-8f9a-ae947dabe81d@suse.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="From:Date:Subject:To:Cc"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794127365;
+	bh=OvMwR2q246pcD5TId5yUQvPErCrIqP4Yqwl75kEJdv4=;
+	h=From:Date:Subject:To:Cc;
+	b=R+SlQOYJPlqMQtkVfLLLVQdln/NbRUqFxW6q8kybGmJI1Ss8JrmkDqLK/CPMlI6as
+	 bIXH2ERjSanKhItHNzpQp2YWjyNIbJLQKMRBKCdsaiTxa+iQRwJ0iv2IK5Lmeqt4hM
+	 ln8SZIfloQ24RJTpkL7MMm8AkApe/fkzdJGLQ7fuN1nzuSK9MMQHP/XQObI2TnFjkz
+	 CHMCXy2uwEqTAXbWzPX0orhE1GqNVNEsTOapZD60AsVPV0SLpQvHGH7aILXYgo9SVh
+	 jJhXEO65lpzewbkcFZBljrIEo2uiIRgtJO+HutILFfIQJnCcX5OWF8pnNCN8C/3Blo
+	 9TazDZceW7c6A==
+From: "Mike Rapoport (Microsoft)" <rppt@kernel.org>
+Date: Sun, 08 Nov 2026 10:42:40 +0200
+Subject: [PATCH] xen/events: replace __get_free_pages() with kmalloc()
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <0fc3eb31-1aac-4b0e-8f9a-ae947dabe81d@suse.com>
-X-Spam-Status: No, score=-8.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY autolearn=ham
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261108-b4-xen-v1-1-76095f25cbf4@kernel.org>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yWM0QqDMAxFf0XyvDItpeB+ZewhrVEzWByJDkH89
+ 7Xb47mccw8wUiaDW3OA0oeNFynQXRrIM8pEjofC4Fsf2+iDS8HtJA67PETfZ+rHAEV+K428/47
+ ujz/blp6U11pXI6GRS4qS5zotyhPL9YW2ksJ5fgHuiZ8TigAAAA==
+X-Change-ID: 20260624-b4-xen-a1cd629ce9f4
+To: Juergen Gross <jgross@suse.com>, 
+ Stefano Stabellini <sstabellini@kernel.org>, 
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Cc: David Hildenbrand <david@kernel.org>, 
+ "Mike Rapoport (Microsoft)" <rppt@kernel.org>, 
+ Vlastimil Babka <vbabka@kernel.org>, linux-mm@kvack.org, 
+ xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org
+X-Mailer: b4 0.16.1-dev
+X-purgate-ID: tlsNG-4011c0/1794127367-51CC3CFC-282494F1/0/0
+X-purgate-type: clean
+X-purgate-size: 2320
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=unavailable
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
-X-purgate-ID: tlsNG-42698a/1794106861-A90CD9EA-AAE50CB3/0/0
-X-purgate-type: clean
-X-purgate-size: 2666
 
-On Mon, Oct 26, 2026 at 10:05:45AM +0100, Jan Beulich wrote:
-> On 19.10.2026 21:02, Elliott Mitchell wrote:
-> > Date: Sun, 18 Oct 2026 14:12:43 -0700
-> > 
-> > Recording the tag as a comment, but directing git at the hash allows
-> > bypassing downloading tags (git does not selectively download tags).
-> > While remote branches get prefixed with the remote name.  The result is
-> > identical, the tag is simply a reference to the hash.
-> 
-> I don't quite get what the win is. The middle sentence also feels, to
-> me, unrelated to anything else here. The fact that ...
-> 
-> > --- a/Config.mk
-> > +++ b/Config.mk
-> > @@ -220,7 +220,8 @@ MINIOS_UPSTREAM_URL ?= https://xenbits.xen.org/git-http/mini-os.git
-> >  MINIOS_UPSTREAM_REVISION ?= 26ceb2daf95dd9e7fed9c83d36be3aaf1a0fa8a1
-> 
-> ... we use a hash here, for example, doesn't warrant ...
-> 
-> >  SEABIOS_UPSTREAM_URL ?= https://xenbits.xen.org/git-http/seabios.git
-> > -SEABIOS_UPSTREAM_REVISION ?= rel-1.17.0
-> > +# rel-1.17.0
-> > +SEABIOS_UPSTREAM_REVISION ?= b52ca86e094d19b58e2304417787e96b940e39c6
-> 
-> ... the use here. IOW if this is to be pursued, more explanation is
-> going to be necessary.
+set_evtchn_to_irq() allocates a page for the event channel to IRQ
+number software lookup table.
 
-Issue is git's handling of tags isn't very good.  In particular it really
-wants to either get all tags or no tags.  I've found it quite difficult
-(read: I've yet to suceed) trying to get it retrieve a single tag.
-Instead what it does is resolve the tag to the commit hash (by asking the
-server) and then only saving the commit to persistent storage.
+This buffer can be allocated with kmalloc() as there's nothing special
+about it to go directly to the page allocator.
 
-If you have git save all tags, it will download nearly everything.  Not
-just the branch/tag you need, but any branch which has a tag.  This means
-somewhere 2-10x the storage, 2-10x the download bandwidth, 2-10x the time
-spent waiting for the download.
+kmalloc() provides a better API that does not require ugly casts and
+kfree() does not need to know the size of the freed object.
 
+Performance difference between kmalloc() and __get_free_pages() is not
+measurable as both allocators take an object/page from a per-CPU list for
+fast path allocations.
 
+For the slow path the performance is anyway determined by the amount of
+reclaim involved rather than by what allocator is used.
 
-The situation with Qemu is far more concerning.  Since
-$(QEMU_UPSTREAM_REVISION) points at a branch on Xen's git server, every
-time that branch moves you get a different build.  Since different
-versions will have different bugs/features unless there is a public
-record of where the branch was over time, older builds become impossible
-to reproduce.  
+Replace use of __get_free_pages() with kmalloc() and free_pages() with
+kfree().
 
-The favored solution to these problems would be to switch to using
-`git subtree`.  This though would be a pretty major move.  I was hoping
-this series would get a discussion started about option.
+Link: https://lore.kernel.org/all/635405e4-9423-4a25-a6e7-e03c8ea0bcbe@redhat.com
+Signed-off-by: Mike Rapoport (Microsoft) <rppt@kernel.org>
+---
+This is a (small) part of larger work of replacing page allocator calls
+with kmalloc.
 
+Largely, anything that doesn't need struct page (or a memdesc in the
+future) should just use kmalloc() or kvmalloc() to allocate memory.
+Removing needless calls to page allocator helps with memdesc (aka project
+folio) conversion and gives a nicer API without casts.
+---
+ drivers/xen/events/events_base.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
--- 
-(\___(\___(\______          --=> 8-) EHM <=--          ______/)___/)___/)
- \BS (    |         ehem+sigmsg@m5p.com  PGP 87145445         |    )   /
-  \_CS\   |  _____  -O #include <stddisclaimer.h> O-   _____  |   /  _/
-8A19\___\_|_/58D2 7E3D DDF4 7BA6 <-PGP-> 41D1 B375 37D0 8714\_|_/___/5445
+diff --git a/drivers/xen/events/events_base.c b/drivers/xen/events/events_base.c
+index fd16d652c81f2..8c377493429b7 100644
+--- a/drivers/xen/events/events_base.c
++++ b/drivers/xen/events/events_base.c
+@@ -230,7 +230,7 @@ static int set_evtchn_to_irq(evtchn_port_t evtchn, unsigned int irq)
+ 		if (irq == -1)
+ 			return 0;
+ 
+-		evtchn_row = (int *) __get_free_pages(GFP_KERNEL, 0);
++		evtchn_row = kmalloc(PAGE_SIZE, GFP_KERNEL);
+ 		if (evtchn_row == NULL)
+ 			return -ENOMEM;
+ 
+@@ -241,7 +241,7 @@ static int set_evtchn_to_irq(evtchn_port_t evtchn, unsigned int irq)
+ 		 * thread was faster inserting it, we can drop ours.
+ 		 */
+ 		if (cmpxchg(&evtchn_to_irq[row], NULL, evtchn_row) != NULL)
+-			free_page((unsigned long) evtchn_row);
++			kfree(evtchn_row);
+ 	}
+ 
+ 	WRITE_ONCE(evtchn_to_irq[row][col], irq);
 
+---
+base-commit: 6628e7d4c6b25c8d18f1345e3a20d21829aae7e4
+change-id: 20260624-b4-xen-a1cd629ce9f4
+
+--
+Sincerely yours,
+Mike.
 
 
