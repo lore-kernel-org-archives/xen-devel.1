@@ -2,46 +2,51 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 03BD3606A31C
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2026 15:11:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 60D89606A33E
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2026 15:22:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=invisiblethingslab.com header.i=@invisiblethingslab.com header.a=rsa-sha256 header.s=fm2 header.b=K896862v;
-	dkim=pass (2048-bit key, unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.a=rsa-sha256 header.s=fm3 header.b=qhrqgFD4
-Received: from list by lists.xenproject.org with outflank-mailman.1480246.1684214 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=ZRuJUOh/
+Received: from list by lists.xenproject.org with outflank-mailman.1480261.1684223 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQR1m-000289-6e; Mon, 09 Nov 2026 15:11:22 +0000
+	id 1xQRCb-0004VU-4B; Mon, 09 Nov 2026 15:22:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1480246.1684214; Mon, 09 Nov 2026 15:11:22 +0000
+Received: by outflank-mailman (output) from mailman id 1480261.1684223; Mon, 09 Nov 2026 15:22:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQR1m-00027x-3y; Mon, 09 Nov 2026 15:11:22 +0000
-Received: by outflank-mailman (input) for mailman id 1480246;
- Mon, 09 Nov 2026 15:11:21 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marmarek@invisiblethingslab.com>) id 1xQR1k-00027l-Rp
- for xen-devel@lists.xenproject.org; Mon, 09 Nov 2026 15:11:20 +0000
+	id 1xQRCb-0004VN-1J; Mon, 09 Nov 2026 15:22:33 +0000
+Received: by outflank-mailman (input) for mailman id 1480261;
+ Mon, 09 Nov 2026 15:22:32 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1c0e75539000403d@swg.vates.tech>)
+ id 1xQRCa-0004VH-7i
+ for xen-devel@lists.xenproject.org; Mon, 09 Nov 2026 15:22:32 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xQR1j-00BBVa-Tr
- for xen-devel@lists.xenproject.org; Mon, 09 Nov 2026 16:11:20 +0100
-Received: from [10.42.69.4] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <marmarek@invisiblethingslab.com>)
- id 6af1e296-e002-0a2a0a5209dd-0a2a45049474-2
- for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2026 16:11:19 +0100
-Received: from [202.12.124.146] (helo=fout-b3-smtp.messagingengine.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <marmarek@invisiblethingslab.com>)
- id 6af1e296-b57f-0a2a45040019-ca0c7c92eac3-3
- for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2026 16:11:19 +0100
-Received: from phl-compute-02.internal (phl-compute-02.internal [10.202.2.42])
- by mailfout.stl.internal (Postfix) with ESMTP id 275B51D0019B
- for <xen-devel@lists.xenproject.org>; Mon,  9 Nov 2026 10:11:18 -0500 (EST)
-Received: from phl-frontend-03 ([10.202.2.162])
- by phl-compute-02.internal (MEProxy); Mon, 09 Nov 2026 10:11:18 -0500
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 9 Nov 2026 10:11:15 -0500 (EST)
+ id 1xQRCZ-009yBA-39
+ for xen-devel@lists.xenproject.org; Mon, 09 Nov 2026 16:22:31 +0100
+Received: from [10.42.69.6] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1c0e75539000403d@swg.vates.tech>)
+ id 6af1e537-bab6-0a2a0a5309dd-0a2a4506ca42-0
+ for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2026 16:22:31 +0100
+Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1c0e75539000403d@swg.vates.tech>)
+ id 6af1e536-195a-0a2a45060019-b9ff1c23911b-3
+ for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2026 16:22:30 +0100
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a1c0e75539000403d.001 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Mon, 09 Nov 2026 15:22:28 +0000
+Received: from [192.168.1.52] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
+ [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 00F0581CDC
+ for <xen-devel@lists.xenproject.org>; Mon,  9 Nov 2026 16:22:27 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -50,242 +55,97 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=fm2 header.d=invisiblethingslab.com header.i="@invisiblethingslab.com" header.h="Cc:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=fm3 header.d=messagingengine.com header.i="@messagingengine.com" header.h="Cc:Content-Type:Date:Feedback-ID:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To:X-ME-Proxy:X-ME-Sender"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to; s=fm2; t=1794237077;
-	 x=1794323477; bh=Nd+fRP9whILnYPUlZQfICgG7JtYs+TR4N7HOnq8DRdk=; b=
-	K896862vXnSdEyyhzPQ/AEzrw7RgATIS3U5GFkAN5Fzp+ktHcVfjDPuvFlu/VVtD
-	JNIYPMVETUBCDd/4fN8jXZjcI7PLl1eFkWv+9xy2TtFZOkepP1T3FNQRw7mHDzsr
-	+PM08vyuMrDRRRoS1cqTP3ho2Z+sgl02VlyWmlboUxGe5cDd2sN5aNblOd799BJx
-	DsfYERXJ4MiO1Mh9X/CS/oVLyJ3uBcdz0bqOgRAZxcb+SsHAmCUtqeOuaNiLGVGH
-	0PDceztthj1+kzhDoM1xPxxRhobfBAlIWzPy7EdAYTVXOWPYAr29hp8nCKxR31fS
-	khUedMALcUqIl2Dk1z7lDA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:content-type:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:subject:subject:to
-	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
-	1794237077; x=1794323477; bh=Nd+fRP9whILnYPUlZQfICgG7JtYs+TR4N7H
-	Onq8DRdk=; b=qhrqgFD4Ngl2H3RV8t9HxFVQvqfNlKa9ltlfSMGA6NjKpTuqipV
-	PL0XgHVWRp/0nH7h1U9GQK3VAYZRIfQl5AxL3h2EW4nPJfAbLnu/NyNrJMTdaQzP
-	UVe1hn1PK68AI8g682aIJZ6Ip1MTC6we5GID55wt5qdXbjGCfSn5N6ykJ08iayks
-	oit23SSdMOoXelbBXFHnH7q8q8qz1o7amfNRH9f4jObby5mnVI2dot+6ke2ZFVmb
-	OUnGi3iHeb0oS70jGpHex9bbQ9lhOSF6Q/1WGzSPscwRPlRuGt8A49RYtRR5hunp
-	VUuoMyFU8Ufpr9rLFjtOttKxP4feRhYGx4A==
-X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-09;
-	repo=github.com/dkim2wg/interop; date=2026-11-03; sw=lmtpprox;
-	action=sign d=invisiblethingslab.com a=rsa-sha256;
-DKIM2-Signature: i=1; m=1; t=1794237077; d=invisiblethingslab.com;
-	mf=PG1hcm1hcmVrQGludmlzaWJsZXRoaW5nc2xhYi5jb20+;
-	rt=PHhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZz4=;
-	s=fm2:rsa-sha256:GuP8rh4mMZmR/nt95Lfs7OLP4OPF5aGUvQDW6kLFOPqCuFk
-	Zzm/ThOKpf5JyuCIpVBdLCCZMi+dRv1o5yKGaVIL86WCfJTnZlH6u5A1tWrW5DQu
-	ZfhQg5RVucJKEKVYbTGqt1+qmRjKdARyeQO+tkVHLqD2RSm/n5aJaQI+CoGEUSPA
-	MWwTGmzin8mgzeUkc9IHfRZWPwuGGEH2wjkonIX8KB8QhpwJlb2p0L5jZCf5u+MC
-	7/sqJ9XpW137lLpVvqY588ztarBVN8j+GE5IInTzwCmnpWYSzyJU4WSaYkMz2jTH
-	/cyEu6OixdP1swne/RvNxoBVj0hTNHTgnOJIIHw==;
-X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-09;
-	repo=github.com/dkim2wg/interop; date=2026-11-03; sw=lmtpprox;
-	action=mi-m=1; hc=12;
-	hn=cc,content-disposition,content-type,date,feedback-id,from,
-	in-reply-to,message-id,mime-version,references,subject,to;
-Message-Instance: m=1; h=sha256:chz5SuMpke/YNteJKMrKgB6bCTJeu0LsX+TW1VdQJRA=:8sieIUTzEqsQ8Abwz2sXKuTlSp7usZPsv38mrNtd9/0=;
-X-ME-Sender: <xms:leLxaiCCHsS-gCA_GqgshqFhc-yOtvMCE0OWeYefgUuyNlzRiyqn5Q>
-    <xme:leLxaoWSl1zzyb4_v-mXCdR1V6ESbAnsTodzAUQ21RAw_O--9DVfIiu2he7c3WQMO
-    ijVc6aAePodrfAJBSFl4m8meRg7O2g8Efbf0cagexSWlhnLVQ0>
-X-ME-Received: <xmr:leLxag8aGstRB662mRVHohDmIb3Ay5ev2Pcrk4jkmsWbp8Tak9CPus4pK2jgq3APpFmN7PgbUxjNppAsG3eW5CGBAWTSFnX1iIEUN74w6q8>
-X-ME-Proxy-Cause: dmFkZTFE392SYlY+fcZkcyT3ehmOEPFko1/oPZynWn6jTMhHDUIpM/XbUStHJRV+IJBPth
-    WUcC8YBKhNjbLouCsOS/cAxsJAMOmIBx4x93kiC+ylv+PvlBN6Lwvx4ejTlrKT7LAEwYP4
-    qOJLIU8GOZJO+whtXWWKxZKvHOUyuKlgrM2o+Co/o04uVGT6YQIEW4DrpxVFcsd86TbiDK
-    yVxt8Box3rThkMfCU7IDzP4iLMR6lG6BeMIIkQLJePxbjTl9B6i8yy1VGSwIvALsYVuesO
-    pqQeKtWCZnBEp4iAN33QIRo/cjrTnCC7AbGa9+s13DFTK1vUtC7JQxazrx0+G4ghJVMaR1
-    3Tvzx6XNZSqDhocXjpvNyTXpN09hI0IpZA6WYaRa43Z8U7rxlf48q6Qr7gIeO3Ml3RJbbA
-    0LRpGTwWS3K3tlxm663vkYzVuQsIL55d2PlBEXuoKvkYDTcAni+YeXC5fMvTWZuSLC8Jpx
-    U+xg1BKSL2SMhbF3SndlzkC/uDxgLRUrNEa7hu9KiJlccF2+TgKRlJ2olXmihDWE7n3NFN
-    Z01+cltl1C9vwq0OCFsUVrmbe7EbIkaUoxhFqtnOcZHyVvmzBxA+HIOBoeqnoJM9KHCjhG
-    DjSi5AzIFRreYfPVMtwFx5p13mncu00wCazKYR+tyA+eqI9oAzrDQyKFcePQ
-X-ME-Proxy: <xmx:leLxaqTPCCgRe0fQE3OyId1oAfmRJTYsQWziPb7eKTUtVI2-H8_Hew>
-    <xmx:leLxalRXCODIca8-S2g-Pho1t6kQ_F9B1rprJ7IhKVINcQpxJ6DTBg>
-    <xmx:leLxam54cWZKrS7RogPljkzN9JrUlW68kzRS6pg9X47ZD6aBTXotig>
-    <xmx:leLxaqUohMMCKguuRtJ-mGd5WHdwBOSATEqtcThV68eUSrIWU4fXoA>
-    <xmx:leLxakFwE8UUg2ON7KUAz0MpgrAkxela-6OjuiBiSa7C-SGu_5HvmqgY>
-Feedback-ID: i1568416f:Fastmail
-Date: Mon, 9 Nov 2026 16:11:13 +0100
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Jason Andryuk <jason.andryuk@amd.com>
-Cc: xen-devel@lists.xenproject.org,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: Re: [PATCH] xen/efi: Handle efi_memmap with Xen relocating itself
-Message-ID: <avHikdwM2wR-GpON@mail-itl>
-References: <20261106231818.482564-1-jason.andryuk@amd.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=uSMBe9Lg5LmrTKUirt02A7ljUKbmyPQudO3IPhv1/so=;
+ h=from:subject:date:message-id:to:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
+ b=ZRuJUOh/Tgje65dbUxGxJOIZwo77JtBzCA6kHhQXjbm/zlqcL92LAkp/FfCoi36HWQqN8WH2I
+ ozC81/SYkFcK254jCxJcIdORoNM1aLzFEaD0okdX+oVH1a3RX+XefyBIDrY0q6P1MMYDDGiBrVF
+ Tx6a5baQloyLx+MH41yZM7uswVd06jFajjIN89XeCGoYqIGm62Ui+eeo7dttzlkONnBgigi+6eD
+ QrRtcNzQercp88aUVHPJFmHM/pAu2v0Hokf2axIVHM1cDu3mahHynGfbT8i4W5ogvl4acltUdOV
+ m4wpKBljza31DqUNn0N2h8PfwaCPhIOF0dqCg6KNd2uA==
+X-Zone-Loop: 601e8cda1237830f3f1ba8a86f5e38b9a4eb334eb061
+x-campaign-type: default
+x-transaction-id: 863fa99b-d75d-4945-a06f-2ba01fb28e77
+x-swg-uid: 01-7e290151-fc1a-4c92-b9c2-758640ad2f0a
+X-Mailer: Sweego
+Message-ID:
+ <1794237748.8631fc262581453bbf619ec5b2062170.1a1c0e75539000403d@vates.tech>
+x-swg-bid: 1794237748.8631fc262581453bbf619ec5b2062170.1a1c0e75539000403d
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+Date: Mon, 9 Nov 2026 16:22:27 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="NjfjfO8wFjKcFDro"
-Content-Disposition: inline
-In-Reply-To: <20261106231818.482564-1-jason.andryuk@amd.com>
-X-purgate-ID: tlsNG-ebf023/1794237079-51ED6B50-FD825C25/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 31/39] xen/riscv: remap interrupts to new IMSIC VS-file
+To: xen-devel@lists.xenproject.org
+References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
+ <45011daea86267b8f4b707bc7de6357b0712fb08.1790779209.git.oleksii.kurochko@gmail.com>
+ <1793023599.8631fc262581453bbf619ec5b2062170.1a17888e252000f79f@vates.tech>
+ <d272b357-b5cc-42e6-9a84-753f361ad278@gmail.com>
+ <1793971568.8631fc262581453bbf619ec5b2062170.1a1b109bd79000403d@vates.tech>
+ <294b2a3f-ba42-4e04-afa1-ee56ffe7133b@gmail.com>
+ <17fe3d2b-8d48-4926-ae4c-14fedf74ea8a@gmail.com>
+From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Content-Language: en-US
+Autocrypt: addr=baptiste.le-duc@vates.tech; keydata=
+ xsBNBGoPSX8BCADSuTikqW3FD4mscQugY1thRaKlIhcJ2G9YCWYXAlp+xosvTlzfIftOZZim
+ 750MLvyKtLPkQzB6TZtFZBiexSraaF/MdDKRTT5DcVa3r7ZnHgqMclWlPa4ioysS4yFcJanL
+ cyNOT7HUFvIdirMMqiViedfYtS0GORPBBPVISD6ClMz3ecHIxqllfq9CHYQn4amKEfHmh6tm
+ Rufo4Gjl6x8cUFZZlRQf+aCmUzdSPA0P5u3sueYH1uEz4w/jbD53MlKqzCvxUeOsfS2swTQA
+ 6mS9jIgOjNadpUTOzKfDHMgFirtG+HFpm45Nwp6KQizxgDVOfTnOfVHm5Gwqm3ETl9y5ABEB
+ AAHNPEJhcHRpc3RlIExlIER1YyAoVmF0ZXMgWXViaWtleSkgPGJhcHRpc3RlLmxlLWR1Y0B2
+ YXRlcy50ZWNoPsLAjgQTAQoAOBYhBGiSJ6HgW88MgT/gfu2Cu2XL9M6QBQJqD0l/AhsDBQsJ
+ CAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEO2Cu2XL9M6QuMcH/ihiy/Nrxp919AmY0ENnc0NK
+ r/2LDvW/hrX4FfbpxAmrGmQ7MU1aQTk0JDbfcsG8OYH6wO5sqnXb1gz50YrEdpfVSbHz5YTZ
+ EhDIxE4g7NrvJZh3Qc0m0CAyjYTNHen7J6olVaCMjrOH7uRHUYZ7Pl3am9mZosfLmez/aWJO
+ a6ihQxBXHI75brlk1teIURkep2kP7P0Flmfl4cA//saREoTF7GXCtjOSQk/xg8PP0Sswqp5G
+ TdJptn3FQn6lAzfz0eFSYqkaoX2c2k1MDa7o+UX9cfGPL8ybMKnYkasLxck6eOWGJWf+YTrm
+ ga/r0kBaftmqNDgt5nI2jNTDwZcT9g3OwE0Eag9JfwEIAM6IWbuBSvz+erv27oGDDpo8M6Fp
+ dGUvft7v+WceHUfxiXpYFx9qgIU6XGy6y+3lJMAvNcltS8DuhioqMlfKRSYGKZlpliY65dNP
+ 557IuM4ctVJ+I9CVclvv9eahARQKgF5auLJAAlvGSmU+ufNvlwTUmLIRcrPviTmB6X5jJYc+
+ fiNeyI0HcsgcN21C0r62tUCypuZ+vgEJXw2bx1V8mVGZKxdGJPh58QF6kRK+xmd4kEComLGV
+ BeM6BcVOtEjDcGNC0tLhXb0p9g1Ys55iA8sd6s4WacyolW2J6rwmcOkjiWexWw1caYgIWAV1
+ 004M3gwUaOz0dGq2i7HQ0AiVfVkAEQEAAcLAdgQYAQoAIBYhBGiSJ6HgW88MgT/gfu2Cu2XL
+ 9M6QBQJqD0l/AhsMAAoJEO2Cu2XL9M6QovYH/RjstyL5o/V5K74ylBtz0j5t3pLX5JKbwApi
+ 656rGgDdqElImyvvZppNMl/mgHNzvxmfFAhJXnSX9f1fqVEQKOGEhLUastnl/ssBiE5x7btM
+ V0GAffxXbXJZbVv4b/DI+gVrOPc2YXlVwruapvTZNtD3hqPrkjrmq5WTtGR2loIVSe62hmh0
+ BGD2Fy79b/hYWyBqhayPBEjwGW75u4/yn+Yqy1PgG3hIcvg7GSuT3akhHZSB2Mbguzcoyf9Q
+ DJl6t33JxPRkkNrEdkPPmRlQCTSiUkVjKqMDF3jlINWsJ5t4jKFsNF91ksdw7aQgiX+tQIpE
+ ugMC1NuNi5dDGip66bw=
+In-Reply-To: <17fe3d2b-8d48-4926-ae4c-14fedf74ea8a@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1794237748043
+X-purgate-ID: tlsNG-16d1c6/1794237751-F687577B-C300925B/0/0
 X-purgate-type: clean
-X-purgate-size: 5442
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
-	version=4.0.1
+X-purgate-size: 639
+X-Spam-Status: No, score=-4.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FORGED_MUA_MOZILLA,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
---NjfjfO8wFjKcFDro
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Date: Mon, 9 Nov 2026 16:11:13 +0100
-From: Marek =?utf-8?B?PT91dGYtOD9RP01hcmN6eWtvd3NraS1HPUMzPUIzcmVja2k/PQ==?= <marmarek@invisiblethingslab.com>
-To: Jason Andryuk <jason.andryuk@amd.com>
-Cc: xen-devel@lists.xenproject.org,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Roger Pau =?utf-8?B?PT91dGYtOD9CP1RXOXVic09wPz0=?= <roger@xenproject.org>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: Re: [PATCH] xen/efi: Handle efi_memmap with Xen relocating itself
 
-On Fri, Nov 06, 2026 at 06:18:18PM -0500, Jason Andryuk wrote:
-> With Xen booting via Multiboot2/GRUB on an EFI platform, and modified to
-> use MULTIBOOT2_LOAD_PREFERENCE_LOW, Xen relocates itself with
-> move_xen().
->=20
-> However a PVH dom0 shows:
-> kernel: Failed to lookup header 0x77ffd000 in Xen memory map: error -3
-> kernel: ACPI=3D0x77ffd000
->=20
-> ... for all the Xen efi memory map lookups.  Dumping the memory map at
-> runtime showed it was scrubbed.  Because Xen relocated itself, the
-> original physical address referenced through a directmap address goes
-> stale.
->=20
-> Add efi_arch_mmap_buffer_virt() to convert from the initial value to an
-> appropriate runtime value.  ARM uses Boot Services AllocatePool(), so it
-> must continue to use DIRECTMAP_VIRT_START.
->=20
-> For x86, we use an offset into the loaded Xen binary at the time of the
-> call and add the to XEN_VIRT_START.  ebmalloc() allocates from the Xen
-> image memory, so it moves during relocation.  xen_phys_start is set for
-> xen.efi in efi_exit_boot(), but not for xen.gz, so it cannot be used
-> Use `lea __image_base__(%rip)` to get the current load address, and use
-> that to calculate the offset into the Xen image.  That offset is also
-> valid from XEN_VIRT_START.
->=20
-> Fixes: c5b9805bc1f7 ("efi: create new early memory allocator")
-> Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
 
-I did not tested this, but looks correct:
-Reviewed-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblethingslab.c=
-om>
+On 11/9/26 4:02 PM, Oleksii Kurochko wrote:
+> Would you be okay with such explanation:
+> 
+> vgein_release() takes the pCPU the VGEIN belongs to explicitly rather
+> than relying on v->processor, as the two may differ: a vCPU moved to
+> another pCPU has to release the VGEIN of the pCPU it leaves, while
+> v->processor already names the new one. As the bitmap of a pCPU may thus
+> be changed from another pCPU, it is protected by a lock.
+> 
+> I tried to write in the way as it is requirement to API rather than a 
+> description of the code which will be introduced later somewhere in "=== 
+> migration"
+LGTM!
+> ~ Oleksii
 
-> ---
-> I think it could be seen without MULTIBOOT2_LOAD_PREFERENCE_LOW if xen
-> chose to relocate itself.  But since grub usually loads xen high, it
-> doesn't relocate itself.
-> ---
->  xen/arch/arm/efi/efi-boot.h |  5 +++++
->  xen/arch/x86/efi/efi-boot.h | 10 ++++++++++
->  xen/common/efi/boot.c       |  2 +-
->  3 files changed, 16 insertions(+), 1 deletion(-)
->=20
-> diff --git a/xen/arch/arm/efi/efi-boot.h b/xen/arch/arm/efi/efi-boot.h
-> index 069cc68b0a..717bd8d607 100644
-> --- a/xen/arch/arm/efi/efi-boot.h
-> +++ b/xen/arch/arm/efi/efi-boot.h
-> @@ -449,6 +449,11 @@ static void *__init efi_arch_allocate_mmap_buffer(UI=
-NTN map_size)
->      return ptr;
->  }
-> =20
-> +static void *__init efi_arch_mmap_buffer_virt(void *ptr)
-> +{
-> +    return ptr + DIRECTMAP_VIRT_START;
-> +}
-> +
->  static void __init efi_arch_edd(void)
->  {
->  }
-> diff --git a/xen/arch/x86/efi/efi-boot.h b/xen/arch/x86/efi/efi-boot.h
-> index d738b839ee..ffc277ccfd 100644
-> --- a/xen/arch/x86/efi/efi-boot.h
-> +++ b/xen/arch/x86/efi/efi-boot.h
-> @@ -224,6 +224,16 @@ static void *__init efi_arch_allocate_mmap_buffer(UI=
-NTN map_size)
->      return ebmalloc(map_size);
->  }
-> =20
-> +static void *__init efi_arch_mmap_buffer_virt(void *ptr)
-> +{
-> +    unsigned long load_base;
-> +
-> +    /* RIP-relative address is the current Xen load address. */
-> +    asm("lea __image_base__(%%rip), %0" : "=3Dr" (load_base));
-> +
-> +    return ptr - load_base + XEN_VIRT_START;
-> +}
-> +
->  static void __init efi_arch_pre_exit_boot(void)
->  {
->      if ( !trampoline_phys )
-> diff --git a/xen/common/efi/boot.c b/xen/common/efi/boot.c
-> index 89b5831691..5396bad7a5 100644
-> --- a/xen/common/efi/boot.c
-> +++ b/xen/common/efi/boot.c
-> @@ -1425,8 +1425,8 @@ static void __init efi_exit_boot(EFI_HANDLE ImageHa=
-ndle, EFI_SYSTEM_TABLE *Syste
->      /* Adjust pointers into EFI. */
->      efi_ct =3D (const void *)efi_ct + DIRECTMAP_VIRT_START;
->      efi_rs =3D (const void *)efi_rs + DIRECTMAP_VIRT_START;
-> -    efi_memmap =3D (void *)efi_memmap + DIRECTMAP_VIRT_START;
->      efi_fw_vendor =3D (const void *)efi_fw_vendor + DIRECTMAP_VIRT_START;
-> +    efi_memmap =3D efi_arch_mmap_buffer_virt(efi_memmap);
->  }
-> =20
->  /* SAF-1-safe */
-> --=20
-> 2.34.1
->=20
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-
---NjfjfO8wFjKcFDro
-Content-Type: application/pgp-signature; name=signature.asc
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmrx4pEACgkQ24/THMrX
-1yxMRwf+MeRnbd48+hnxrSMOuEF/P3YQjU9JQ0YCcSnBj+cl8y0HU18V09wlLcmr
-GCT7mVpC4IbeuKWpJ82YJj/sKUSFE0ULQTGkK5nYEsK2oxy42eoHhD1qTrrMFZgW
-aFpC2oLwDAHQxLX2c0kT+Ei/LYba+VohUZY3Rivinm8lJRWR9yph9mrRj4tenVLy
-t+uDEHlgFI5lnMtNkdUeJEPhOJGBSVQThuUMJ8TAytu/IWatmqJQlasLu4QBUS0W
-1el0q6Vt6tN/7f9znI2upDnRCJOiRCb6t+qlYv2Fh3zn0qwsWHDuvbMqrStIHlkf
-B2zAV+B5eaW2qgsPtFLWvY7gPNeSkw==
-=HgJX
------END PGP SIGNATURE-----
-
---NjfjfO8wFjKcFDro--
 
