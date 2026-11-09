@@ -2,41 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 36206606A31C
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2026 05:55:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 76E68606A31C
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2026 06:25:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=codeconstruct.com.au header.i=@codeconstruct.com.au header.a=rsa-sha256 header.s=2022a header.b=egf84Gcq
-Received: from list by lists.xenproject.org with outflank-mailman.1479514.1683463 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=XxD4lowi
+Received: from list by lists.xenproject.org with outflank-mailman.1479549.1683470 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQILf-0000Ay-NF; Mon, 09 Nov 2026 05:55:19 +0000
+	id 1xQIoE-00083b-Qx; Mon, 09 Nov 2026 06:24:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1479514.1683463; Mon, 09 Nov 2026 05:55:19 +0000
+Received: by outflank-mailman (output) from mailman id 1479549.1683470; Mon, 09 Nov 2026 06:24:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQILf-0000Ar-JQ; Mon, 09 Nov 2026 05:55:19 +0000
-Received: by outflank-mailman (input) for mailman id 1479514;
- Mon, 09 Nov 2026 05:18:47 +0000
+	id 1xQIoE-00083U-OB; Mon, 09 Nov 2026 06:24:50 +0000
+Received: by outflank-mailman (input) for mailman id 1479549;
+ Mon, 09 Nov 2026 06:24:49 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew@codeconstruct.com.au>) id 1xQHmI-0006uK-Fa
- for xen-devel@lists.xenproject.org; Mon, 09 Nov 2026 05:18:47 +0000
+ (envelope-from <lkp@intel.com>) id 1xQIoC-00083O-PA
+ for xen-devel@lists.xenproject.org; Mon, 09 Nov 2026 06:24:49 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xQHmG-009rKu-Ib
- for xen-devel@lists.xenproject.org; Mon, 09 Nov 2026 06:18:44 +0100
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xQIoB-001Z7k-V0
+ for xen-devel@lists.xenproject.org; Mon, 09 Nov 2026 07:24:47 +0100
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew@codeconstruct.com.au>)
- id 6af157ae-e002-0a2a0a5209dd-0a2a4504e7ca-4
- for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2026 06:18:43 +0100
-Received: from [203.29.241.158] (helo=codeconstruct.com.au)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew@codeconstruct.com.au>)
- id 6af157b0-b57f-0a2a45040019-cb1df19e8140-3
- for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2026 06:18:43 +0100
-Received: from [192.168.68.117] (unknown [180.150.112.139])
- by mail.codeconstruct.com.au (Postfix) with ESMTPSA id 083566E9E9;
- Mon,  9 Nov 2026 13:18:31 +0800 (AWST)
+ (envelope-from <lkp@intel.com>)
+ id 6af16705-e002-0a2a0a5209dd-0a2a4503c11e-44
+ for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2026 07:24:47 +0100
+Received: from [192.198.163.13] (helo=mgamail.intel.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <lkp@intel.com>)
+ id 6af1672c-fae8-0a2a45030019-c0c6a30dfe0a-3
+ for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2026 07:24:46 +0100
+Received: from orviesa006.jf.intel.com ([10.64.159.146])
+ by fmvoesa107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 08 Nov 2026 22:24:43 -0800
+Received: from lkp-server01.sh.intel.com (HELO 0caa9d2d175c) ([10.239.97.150])
+ by orviesa006.jf.intel.com with ESMTP; 08 Nov 2026 22:24:38 -0800
+Received: from kbuild by 0caa9d2d175c with local (Exim 4.98.2)
+ (envelope-from <lkp@intel.com>) id 1xQIny-00000000u1P-2AzQ;
+ Mon, 09 Nov 2026 06:24:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -45,86 +50,96 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=2022a header.d=codeconstruct.com.au header.i="@codeconstruct.com.au" header.h="Subject:From:To:Cc:Date:In-Reply-To:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=codeconstruct.com.au; s=2022a; t=1794201519;
-	bh=inbRv9rqETpvmrvWY+hsNFNboYN1tmYS0qnuK2Kr/gs=;
-	h=Subject:From:To:Cc:Date:In-Reply-To:References;
-	b=egf84Gcqai+t2RbzRcp/hsSqUjhQHhjh3vyzhBpm8hV2KWxqDFJxnPUahIU113EcT
-	 BgLm6wqU/Euo4rhk1oHtIX3Z9zvOL05mtWbK6K/L7+70zAOa6b9LxPeqiMFkTfAyXR
-	 sJ6r+I/RKBuOwB8hQ4kh0KzVB0J735kCbnMQRQlA7QvM+MYWUHFrMnQcdvVsUlq4qL
-	 OrhgI7yGlCRf9GdwPQCvkWPbpW6LqMolW9oQ7mrzBne/qL9+nOjj/aqp3F164dsqk2
-	 7rLero/HB4L0DSs1r+ug01+7VgG2RcG87tSeq7M4AqhpAUCMcl+W2qQMRVuMpXb4J2
-	 kfa7LW520ih5Q==
-Message-ID: <4848c58f3152233477c4fa4786de2a49c9261c9c.camel@codeconstruct.com.au>
-Subject: Re: [PATCH 09/14] soc: aspeed: convert LPC and P2A control mmap
- hooks to mmap_prepare
-From: Andrew Jeffery <andrew@codeconstruct.com.au>
-To: "Lorenzo Stoakes (ARM)" <ljs@kernel.org>, Juergen Gross
- <jgross@suse.com>,  Stefano Stabellini <sstabellini@kernel.org>, Oleksandr
- Tyshchenko <oleksandr_tyshchenko@epam.com>, Madhavan Srinivasan	
- <maddy@linux.ibm.com>, Nicholas Piggin <npiggin@gmail.com>, Michael
- Ellerman	 <mpe@ellerman.id.au>, "Christophe Leroy (CS GROUP)"
- <chleroy@kernel.org>,  "Ritesh Harjani (IBM)"	 <ritesh.list@gmail.com>,
- Shrikanth Hegde <sshegde@linux.ibm.com>, Haiyang Zhang	
- <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>, Dexuan Cui	
- <decui@microsoft.com>, "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang	
- <jasowangio@gmail.com>, Eugenio =?ISO-8859-1?Q?P=E9rez?=
- <eperezma@redhat.com>,  Xuan Zhuo <xuanzhuo@linux.alibaba.com>, Jarkko
- Sakkinen <jarkko@kernel.org>, Dave Hansen	 <dave.hansen@linux.intel.com>,
- Thomas Gleixner <tglx@kernel.org>, Ingo Molnar	 <mingo@redhat.com>,
- Borislav Petkov <bp@alien8.de>, x86@kernel.org, "H. Peter Anvin"
- <hpa@zytor.com>, Jan Kara <jack@suse.com>, Paul Moore
- <paul@paul-moore.com>, Stephen Smalley <stephen.smalley.work@gmail.com>,
- Ondrej =?UTF-8?Q?Mosn=C3=A1=C4=8Dek?=	 <omosnacek@gmail.com>, Joel Stanley
- <joel@jms.id.au>, Ryan Chen	 <ryan_chen@aspeedtech.com>, Billy Tsai
- <billy_tsai@aspeedtech.com>, Bjorn Andersson <andersson@kernel.org>, Konrad
- Dybcio <konradybcio@kernel.org>, Abel Vesa	 <abelvesa@kernel.org>, Jens
- Wiklander <jenswi@kernel.org>, Sumit Garg	 <sumit.garg@kernel.org>, Scott
- Branden <scott.branden@broadcom.com>,  Broadcom internal kernel review list
-	 <bcm-kernel-feedback-list@broadcom.com>, Arnd Bergmann <arnd@arndb.de>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Richard Cochran
- <richardcochran@gmail.com>, David Woodhouse	 <dwmw2@infradead.org>, Andrew
- Lunn <andrew+netdev@lunn.ch>, "David S. Miller"	 <davem@davemloft.net>,
- Eric Dumazet <edumazet@kernel.org>, Jakub Kicinski	 <kuba@kernel.org>,
- Paolo Abeni <pabeni@redhat.com>
-Cc: xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org, 
-	linuxppc-dev@lists.ozlabs.org, kvm@vger.kernel.org,
- linux-hyperv@vger.kernel.org, 	virtualization@lists.linux.dev,
- linux-sgx@vger.kernel.org, 	selinux@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, 	linux-aspeed@lists.ozlabs.org,
- linux-arm-msm@vger.kernel.org, 	op-tee@lists.trustedfirmware.org,
- netdev@vger.kernel.org
-Date: Mon, 09 Nov 2026 15:48:30 +1030
-In-Reply-To: <20261105-late-2026-mmap_prepare-v1-9-c56aadfbab8a@kernel.org>
-References: <20261105-late-2026-mmap_prepare-v1-0-c56aadfbab8a@kernel.org>
-	 <20261105-late-2026-mmap_prepare-v1-9-c56aadfbab8a@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.56.2-0+deb13u1 
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=Intel header.d=intel.com header.i="@intel.com" header.h="Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:In-Reply-To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1794205486; x=1825741486;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=YSso0Po3Ac6MsrirK9TwldtrkZcqVN03F1SxefX9FxQ=;
+  b=XxD4lowi4DyZwwvYPFhrYpqkSWB74nH5+e8X6KouOKCu4XYzwSxdmcpp
+   KLyCGN0Z2aU1UvDCIhL5khlrZV+4mG8OjnaGJZvh5Eosx30WB1YE67fbD
+   hA5Lv2bjAfaMhq0XsJTYdRYpS/m0U79DIwc/fygSirU5+L6pcNvjPtz36
+   sj6PT4FqxFL7OcKHwLphjc9vsG7ooQVd7IWu7aaQ4MVx1LQw4BPX0AYsG
+   uQE3CP1dOsJtIhmBeUL7STwhxxKA5HC3QsJVYiUYjO9SGFF9FhAcTSRAk
+   +N9hzziCSMXv0sI7ifpJbsz/SkH7/UDpqRi+qhohsyi3/3h7imEve9VDO
+   Q==;
+X-CSE-ConnectionGUID: IiGCwNNgQjeDbJC5EmaOGA==
+X-CSE-MsgGUID: uuZ7M4kXTjSiEbmjOrK7sA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11960"; a="2913758"
+X-IronPort-AV: E=Sophos;i="6.27,203,1787036400"; 
+   d="scan'208";a="2913758"
+X-CSE-ConnectionGUID: GzK1GYJdQue5f+Pi2BBMaQ==
+X-CSE-MsgGUID: iW7KKfENRneZYXWo/Xw9aw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,203,1787036400"; 
+   d="scan'208";a="7824695"
+Date: Mon, 9 Nov 2026 14:24:09 +0800
+From: kernel test robot <lkp@intel.com>
+To: David Woodhouse <dwmw2@infradead.org>, kvm@vger.kernel.org
+Cc: oe-kbuild-all@lists.linux.dev, linux-kernel@vger.kernel.org,
+	linux-kselftest@vger.kernel.org, linux-doc@vger.kernel.org,
+	xen-devel@lists.xenproject.org, x86@kernel.org,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Sean Christopherson <seanjc@google.com>,
+	Paul Durrant <paul@xen.org>, Vitaly Kuznetsov <vkuznets@redhat.com>,
+	Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	"H . Peter Anvin" <hpa@zytor.com>, Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Juergen Gross <jgross@suse.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Jonathan Cameron <jic23@kernel.org>,
+	Sascha Bischoff <Sascha.Bischoff@arm.com>,
+	Marc Zyngier <maz@kernel.org>, Joey Gouly <joey.gouly@arm.com>,
+	Jack Allister <jalliste@amazon.com>,
+	Dongli Zhang <dongli.zhang@oracle.com>, joe.jin@oracle.com,
+	David Woodhouse <dwmw@amazon.co.uk>
+Subject: Re: [PATCH v12 08/24] KVM: x86: Re-synchronize TSC after
+ KVM_SET_TSC_KHZ
+Message-ID: <202611091411.tSxUx2Bj-lkp@intel.com>
+References: <20261109012112.3415328-9-dwmw2@infradead.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-purgate-ID: tlsNG-ebf023/1794201523-520D5B50-494F5A72/0/0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261109012112.3415328-9-dwmw2@infradead.org>
+X-purgate-ID: tlsNG-33051d/1794205487-6D8D54E9-0F72CE6F/0/0
 X-purgate-type: clean
-X-purgate-size: 489
-X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY autolearn=unavailable autolearn_force=no
-	version=4.0.1
+X-purgate-size: 1343
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Thu, 2026-11-05 at 21:05 +0000, Lorenzo Stoakes (ARM) wrote:
-> Move from the deprecated mmap hook to the new mmap_prepare hook for both
-> the LPC control and P2A control drivers.
->=20
-> Both remap a range of their reserved memory region, so use the PFN remap
-> mmap action to do so, retaining the -EAGAIN error on failure via the acti=
-on
-> error override.
->=20
-> Signed-off-by: Lorenzo Stoakes (ARM) <ljs@kernel.org>
+Hi David,
 
-Acked-by: Andrew Jeffery <andrew@codeconstruct.com.au>
+kernel test robot noticed the following build errors:
+
+[auto build test ERROR on dea4f6380f4ec96e8f3b0aaf2343764bd0d25ef4]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/David-Woodhouse/KVM-x86-Improve-synchronization-in-kvm_synchronize_tsc/20261108-172047
+base:   dea4f6380f4ec96e8f3b0aaf2343764bd0d25ef4
+patch link:    https://lore.kernel.org/r/20261109012112.3415328-9-dwmw2%40infradead.org
+patch subject: [PATCH v12 08/24] KVM: x86: Re-synchronize TSC after KVM_SET_TSC_KHZ
+config: i386-buildonly-randconfig-1005-20261109 (https://download.01.org/0day-ci/archive/20261109/202611091411.tSxUx2Bj-lkp@intel.com/config)
+compiler: gcc-14 (Debian 14.2.0-19) 14.2.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20261109/202611091411.tSxUx2Bj-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202611091411.tSxUx2Bj-lkp@intel.com/
+
+All errors (new ones prefixed by >>):
+
+   ld: arch/x86/kvm/x86.o: in function `kvm_synchronize_tsc_at':
+>> x86.c:(.text+0xfaca): undefined reference to `__udivdi3'
+
+--
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
