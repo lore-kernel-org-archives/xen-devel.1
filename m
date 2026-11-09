@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 80E12606B647
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2026 01:21:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 42048606B66D
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2026 01:21:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=casper.20170209 header.b=Q0PHCfEl
-Received: from list by lists.xenproject.org with outflank-mailman.1479225.1683272 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=desiato.20200630 header.b=bS27lcWH
+Received: from list by lists.xenproject.org with outflank-mailman.1479239.1683371 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQE4a-000891-Lk; Mon, 09 Nov 2026 01:21:24 +0000
+	id 1xQE4m-0002Lr-TM; Mon, 09 Nov 2026 01:21:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1479225.1683272; Mon, 09 Nov 2026 01:21:24 +0000
+Received: by outflank-mailman (output) from mailman id 1479239.1683371; Mon, 09 Nov 2026 01:21:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQE4Z-00087i-UW; Mon, 09 Nov 2026 01:21:23 +0000
-Received: by outflank-mailman (input) for mailman id 1479225;
- Mon, 09 Nov 2026 01:21:21 +0000
+	id 1xQE4l-0002F5-Lb; Mon, 09 Nov 2026 01:21:35 +0000
+Received: by outflank-mailman (input) for mailman id 1479239;
+ Mon, 09 Nov 2026 01:21:24 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <BATV+a92e0821319b6b3898f8+8478+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1xQE4X-0007DM-Bd
- for xen-devel@lists.xenproject.org; Mon, 09 Nov 2026 01:21:21 +0000
+ <BATV+eaa65bbd42d4fabe269c+8478+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 1xQE4a-00087C-2V
+ for xen-devel@lists.xenproject.org; Mon, 09 Nov 2026 01:21:24 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xQE4W-009V22-OS; Mon, 09 Nov 2026 02:21:20 +0100
-Received: from [10.42.69.11] (helo=localhost)
+ id 1xQE4Z-0014kv-Dr; Mon, 09 Nov 2026 02:21:23 +0100
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <BATV+a92e0821319b6b3898f8+8478+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6af12009-2eae-0a2a0a5409dd-0a2a450bb5dc-2
- for <multiple-recipients>; Mon, 09 Nov 2026 02:21:16 +0100
-Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ <BATV+eaa65bbd42d4fabe269c+8478+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 6af11f9a-8faa-0a2a0a5109dd-0a2a450aa0d8-38
+ for <multiple-recipients>; Mon, 09 Nov 2026 02:21:23 +0100
+Received: from [90.155.92.199] (helo=desiato.infradead.org)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <BATV+a92e0821319b6b3898f8+8478+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6af1200b-b7e8-0a2a450b0019-5a9b3222dea8-3
- for <multiple-recipients>; Mon, 09 Nov 2026 02:21:15 +0100
+ <BATV+eaa65bbd42d4fabe269c+8478+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 6af1200d-f2d2-0a2a450a0019-5a9b5cc79ae4-3
+ for <multiple-recipients>; Mon, 09 Nov 2026 02:21:17 +0100
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.100.1 #2 (Red Hat Linux))
- id 1xQE4O-00000007Pvo-3MrP; Mon, 09 Nov 2026 01:21:12 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.100.1 #2 (Red Hat Linux))
+ id 1xQE4S-00000006AYK-02Bj; Mon, 09 Nov 2026 01:21:16 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.5 #2 (Red
- Hat Linux)) id 1xQE4O-0000000EKU4-1ax4;
- Mon, 09 Nov 2026 01:21:12 +0000
+ Hat Linux)) id 1xQE4P-0000000EKVW-1fdS;
+ Mon, 09 Nov 2026 01:21:13 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -48,17 +48,17 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=desiato.20200630 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
-	Content-Type:MIME-Version:Message-ID:Date:Subject:Cc:To:From:Reply-To:
-	Content-ID:Content-Description:In-Reply-To:References;
-	bh=2JUWpAXehAdk2sueW9eETpGmCfDkYuUrUfomdwHxtKQ=; b=Q0PHCfElb3strszBz45LigVCIT
-	3UJqLf36BDZ68nh49TcsICeTQWHXRUMLyJAUrFvBdyGpLMmye0vYT5823ikHuDd4C8a+0UUWULOeK
-	wfS2yCD0A3dR9CSH7HNnTvR5mRA5HunaAJJfn/mF9MVloFyXqre1okr4OEYf0gO/5jycFCr9FIqK3
-	VBvl72tQrOIHy/wpiDw24NQrNn6NvMusETpowpWC17V0n0uWw5/blJQa1B3ecQGVcYQPJ41WFh9d9
-	b8EKm3gCZ4VjHF6EUMJgfAofZvoldwMH3n1UxFNIaGVYn+gh63I/aiWVamR0naPTLZahCVYIqr16q
-	VLNhrigQ==;
+	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:
+	To:From:Reply-To:Content-ID:Content-Description;
+	bh=Ab0Mw4iSTNA2k5eZaP75VVaX8Iz1KNLj1JlNYy/km+U=; b=bS27lcWHZuP1+9EjRMhxO9quQF
+	UK2/7axrd3yAA+3DgK3Sl98QEgWuDVQT4UUtLo6XJNtbmsBI1eS9RqodBSLBRXq+dU2bAXF1ObSAS
+	iv58LgoHw6D+nhYss932nAeAMr4MATlz6T2uEYvlIUrHtR8yWl0e4UWuuHFldHn2yJLdKnlDxhjgC
+	muOwvWZ1+L+oHb1hxSia9EkthCmqEO34GimkJh+RJDnXM/VuOaWhkuj9cjiIIE1mN6x/HFY+0DuiB
+	EyN81hq4I2I6mnq+6JSxG031oQtRNmBZpwHEGMrxYIjJTbjiuiPsh8VXaGoh/5p/NOurPtl5Td0WM
+	8MupR2SQ==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: kvm@vger.kernel.org
 Cc: linux-kernel@vger.kernel.org,
@@ -87,169 +87,147 @@ Cc: linux-kernel@vger.kernel.org,
 	Dongli Zhang <dongli.zhang@oracle.com>,
 	joe.jin@oracle.com,
 	David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v12 00/24] KVM: x86: Cleaning up the KVM clock mess, part 2
-Date: Sun,  8 Nov 2026 17:20:46 -0800
-Message-ID: <20261109012112.3415328-1-dwmw2@infradead.org>
+Subject: [PATCH v12 22/24] KVM: x86/xen: Drop open-coded fallback clock read in kvm_xen_start_timer()
+Date: Sun,  8 Nov 2026 17:21:08 -0800
+Message-ID: <20261109012112.3415328-23-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20261109012112.3415328-1-dwmw2@infradead.org>
+References: <20261109012112.3415328-1-dwmw2@infradead.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-42698a/1794187276-A90CD9EA-B1BCCA81/0/0
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
+X-purgate-ID: tlsNG-4011c0/1794187282-4ABD8CFC-1BD4FBFE/0/0
 X-purgate-type: clean
-X-purgate-size: 7749
+X-purgate-size: 5179
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=4.0.1
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-I love it when sashiko-bot finds things that my own local sashiko run didn't.
+When no coherent (CLOCK_MONOTONIC, TSC) pair was available,
+kvm_xen_start_timer() computed one from separate ktime_get() and
+rdtsc() calls rather than using get_kvmclock_ns(), with a comment
+explaining that the latter had a systemic error from scaling host TSC
+directly to nanoseconds instead of scaling to the guest TSC first.
 
-This is the second half of the KVM clock series which has been churning
-since about 2024. The first half¹ is upstream as of 7.4-rc1 (yay!).  This is
-the remainder — the masterclock overhaul, and new API for fixing migration.
+Commit abdef42276d8 ("KVM: x86: Fix KVM clock precision in
+get_kvmclock() with TSC scaling") removed that systemic error: in
+master clock mode, get_kvmclock_ns() now scales the host TSC delta to
+the guest TSC and converts it with the guest's own mul/shift,
+computing precisely what the guest would.
 
-In v12 I've finally removed the last reason why a *guest* can force the KVM
-clock out of masterclock mode (by using the old SYSTEM_TIME MSR). Even if we
-do still care about that SUSE kernel from 2015, we can satisfy it just by
-updating the master clock when it rewrites the MSR.
+The fallback is also nearly unreachable. It sits behind the
+use_master_clock check, so on 32-bit (where the master clock is never
+active) it is dead code, and on 64-bit kvm_get_monotonic_and_clockread()
+can only fail there if the host clocksource changed after the last
+master clock update, in the window before the resulting masterclock
+update is processed. In exactly that window get_kvmclock_ns() takes
+its raw-clock fallback path rather than the guest TSC computation,
+which is continuous with the last valid snapshot and tolerable for
+the one timer that can be started before the pending masterclock
+update lands.
 
-Tree: https://git.infradead.org/?p=users/dwmw2/linux.git;a=shortlog;h=refs/heads/kvmclock12
+Drop it and fall back to the existing get_kvmclock_ns() path.
 
-Since v11², fixing what the on-list review found, and more that arose out of
-that:
+Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+---
+ arch/x86/kvm/xen.c | 48 ++++++++++++++++++++++------------------------
+ 1 file changed, 23 insertions(+), 25 deletions(-)
 
-KVM_SET_TSC_KHZ:
- • Synchronizing during vCPU creation, before the vCPU is counted in
-   online_vcpus, corrupted the VM-wide matching state.
- • Because the user_set_tsc flag was VM-wide, restoring one vCPU's TSC made
-   a sibling's *unrestored* value be preserved across a frequency change.
- • Time spent in the ioctl between sampling the guest TSC and reinstalling
-   it was silently subtracted from the vCPU's clock.
- • Setting the unchanged frequency perturbed the generation tracking, and a
-   failed call committed the rejected frequency anyway.
- • An above-host-rate frequency on scaling-less hardware left the vCPU in
-   catchup mode forever.
-
-The master clock:
- • Making the first vCPU match the TSC generation established at VM
-   creation was a silent guest-visible change (its TSC became the cycles
-   elapsed since KVM_CREATE_VM), and handed it a stale offset if the host
-   suspended while the VM had no vCPUs.
- • KVM_GET_CLOCK trusted a master snapshot which nothing refreshes for a
-   VM with no vCPUs across a host suspend, returning a discontinuity
-   flagged KVM_CLOCK_TSC_STABLE.
- • A TSC synchronization which changed the vCPU's offset left the guest's
-   pvclock unrefreshed, now that offset changes no longer turn the master
-   clock off.
- • When the last vCPU reached a new common frequency, nothing refreshed
-   the masterclock scaling factors.
- • A pending masterclock update on a newly created vCPU wasn't serviced
-   until it first ran, and a vCPU whose creation was aborted part-way
-   stayed counted as matched forever.
- • Guests using the legacy MSR_KVM_SYSTEM_TIME lost the master clock
-   entirely — the 2015 workaround for SUSE's 2.6.16 freshness heuristic,
-   which is better satisfied by sliding the reference point forward when
-   the legacy MSR is rewritten (new patch 24).
-
-KVM_[GS]ET_CLOCK_GUEST:
- • The guest TSC comparison mishandled wraparound.
- • The frequency sanity check could underflow, rejected two hosts
-   calibrated exactly 1kHz apart, and hvclock_to_hz() could wrap on
-   absurd user-supplied mul/shift.
- • The -EBUSY case was unreachable, and GET returned from inside the
-   seqcount read section.
-
-Elsewhere:
- • kvm_vm_ioctl_set_clock() wrapped if the host clock had legally been
-   set to within moments of the 1970 epoch.
- • clang couldn't see that guest_now was always initialized in
-   kvm_xen_start_timer() on 32-bit builds (kernel test robot³).
- • Comments and commit messages overclaimed in places, the
-   kvm_update_master_clock tracepoint still said "offsetmatched", the
-   tools/ uapi header mirror had drifted, and api.rst didn't document the
-   new KVM_SET_TSC_KHZ behaviour.
- • Selftests skipped on any errno rather than just -ENODATA, could pass
-   on a buggy kernel under adverse scheduling, lost a whole frequency's
-   coverage when hardware scaling wasn't engaged, and carried a third
-   private copy of the pvclock arithmetic.
-
-¹ https://lore.kernel.org/all/20260826213303.914988-1-seanjc@google.com
-² https://lore.kernel.org/all/20261105154955.2525419-1-dwmw2@infradead.org
-³ https://lore.kernel.org/all/202611072152.FL5QBzjH-lkp@intel.com
-
-
-David Woodhouse (21):
-  KVM: x86: Improve synchronization in kvm_synchronize_tsc()
-  KVM: x86: Kill last_tsc_{nsec,write,offset} fields
-  KVM: x86: Replace nr_vcpus_matched_tsc count with all_vcpus_matched_tsc bool
-  KVM: x86: Allow KVM master clock mode when TSCs are offset from each other
-  KVM: x86: Factor out kvm_use_master_clock()
-  KVM: x86: Avoid gratuitous global clock updates
-  KVM: x86: Avoid redundant masterclock updates from multiple vCPUs
-  KVM: x86: Re-synchronize TSC after KVM_SET_TSC_KHZ
-  KVM: x86: Cache host vclock_mode for masterclock eligibility checks
-  KVM: x86: Remove pvclock_gtod_data and private timekeeping code
-  KVM: x86: Activate master clock from kvm_arch_init_vm()
-  KVM: selftests: Use UAPI pvclock-abi.h in xen_shinfo_test
-  KVM: selftests: Add library helpers for clock and TSC-offset ioctls
-  KVM: x86: Add KVM_VCPU_TSC_SCALE and fix the documentation on TSC migration
-  KVM: selftests: Add master clock offset test
-  KVM: selftests: Add Xen/generic CPUID timing leaf test
-  KVM: selftests: Add Xen runstate migration test
-  KVM: selftests: Test that the first user TSC write is honoured exactly
-  KVM: x86/xen: Drop open-coded fallback clock read in kvm_xen_start_timer()
-  KVM: x86: Use a single time snapshot in kvm_vm_ioctl_set_clock()
-  KVM: x86: Keep master clock for guests using legacy MSR_KVM_SYSTEM_TIME
-
-Jack Allister (3):
-  UAPI: x86: Move pvclock-abi to UAPI for x86 platforms
-  KVM: x86: Add KVM_[GS]ET_CLOCK_GUEST for accurate KVM clock migration
-  KVM: selftests: Add KVM/PV clock selftest to prove timer correction
-
- Documentation/virt/kvm/api.rst                |  61 ++
- Documentation/virt/kvm/devices/vcpu.rst       | 137 ++-
- Documentation/virt/kvm/locking.rst            |   2 +-
- MAINTAINERS                                   |   4 +-
- arch/x86/include/asm/kvm_host.h               |  14 +-
- arch/x86/include/uapi/asm/kvm.h               |   7 +
- arch/x86/include/{ => uapi}/asm/pvclock-abi.h |  27 +-
- arch/x86/kvm/msrs.c                           |  28 +-
- arch/x86/kvm/trace.h                          |  12 +-
- arch/x86/kvm/x86.c                            | 957 ++++++++++++++----
- arch/x86/kvm/x86.h                            |   2 +-
- arch/x86/kvm/xen.c                            |  48 +-
- include/uapi/linux/kvm.h                      |   4 +
- scripts/xen-hypercalls.sh                     |   2 +-
- tools/arch/x86/include/asm/pvclock-abi.h      |  27 +-
- tools/arch/x86/include/uapi/asm/kvm.h         |   6 +
- tools/testing/selftests/kvm/Makefile.kvm      |   6 +
- .../selftests/kvm/include/x86/processor.h     |  50 +
- .../kvm/x86/masterclock_offset_test.c         | 203 ++++
- .../kvm/x86/pvclock_migration_test.c          | 521 ++++++++++
- .../testing/selftests/kvm/x86/pvclock_test.c  | 518 ++++++++++
- .../selftests/kvm/x86/tsc_user_set_test.c     | 153 +++
- .../selftests/kvm/x86/xen_cpuid_timing_test.c | 271 +++++
- .../selftests/kvm/x86/xen_migration_test.c    | 222 ++++
- .../selftests/kvm/x86/xen_shinfo_test.c       |  31 +-
- 25 files changed, 3010 insertions(+), 303 deletions(-)
- rename arch/x86/include/{ => uapi}/asm/pvclock-abi.h (82%)
- create mode 100644 tools/testing/selftests/kvm/x86/masterclock_offset_test.c
- create mode 100644 tools/testing/selftests/kvm/x86/pvclock_migration_test.c
- create mode 100644 tools/testing/selftests/kvm/x86/pvclock_test.c
- create mode 100644 tools/testing/selftests/kvm/x86/tsc_user_set_test.c
- create mode 100644 tools/testing/selftests/kvm/x86/xen_cpuid_timing_test.c
- create mode 100644 tools/testing/selftests/kvm/x86/xen_migration_test.c
-
-
-base-commit: dea4f6380f4ec96e8f3b0aaf2343764bd0d25ef4
+diff --git a/arch/x86/kvm/xen.c b/arch/x86/kvm/xen.c
+index 6aa00f746cba..dae43acb3cc3 100644
+--- a/arch/x86/kvm/xen.c
++++ b/arch/x86/kvm/xen.c
+@@ -188,7 +188,7 @@ static void kvm_xen_start_timer(struct kvm_vcpu *vcpu, u64 guest_abs,
+ 	struct kvm_vcpu_xen *xen = &vcpu->arch.xen;
+ 	int64_t kernel_now, delta;
+ 	uint64_t guest_now;
+-	int r = -EOPNOTSUPP;
++	bool fallback = true;
+ 
+ 	/*
+ 	 * The guest provides the requested timeout in absolute nanoseconds
+@@ -210,6 +210,7 @@ static void kvm_xen_start_timer(struct kvm_vcpu *vcpu, u64 guest_abs,
+ 	do {
+ 		struct pvclock_vcpu_time_info hv_clock;
+ 		uint64_t host_tsc, guest_tsc;
++		int r = -EOPNOTSUPP;
+ 
+ 		if (!cpu_feature_enabled(X86_FEATURE_CONSTANT_TSC) ||
+ 		    !vcpu->kvm->arch.use_master_clock)
+@@ -230,43 +231,40 @@ static void kvm_xen_start_timer(struct kvm_vcpu *vcpu, u64 guest_abs,
+ 		if (r)
+ 			break;
+ 
++		/*
++		 * With use_master_clock set, the clocksource was TSC-based
++		 * when the master clock was last updated. The clockread can
++		 * only fail here if the clocksource has changed since, in
++		 * which case a masterclock update is already pending and
++		 * get_kvmclock_ns() returns the raw-clock fallback value —
++		 * continuous with the last valid snapshot, which is as good
++		 * as it gets in that transient window.
++		 */
+ 		if (!IS_ENABLED(CONFIG_64BIT) ||
+-		    !kvm_get_monotonic_and_clockread(&kernel_now, &host_tsc)) {
+-			/*
+-			 * Don't fall back to get_kvmclock_ns() because it's
+-			 * broken; it has a systemic error in its results
+-			 * because it scales directly from host TSC to
+-			 * nanoseconds, and doesn't scale first to guest TSC
+-			 * and *then* to nanoseconds as the guest does.
+-			 *
+-			 * There is a small error introduced here because time
+-			 * continues to elapse between the ktime_get() and the
+-			 * subsequent rdtsc(). But not the systemic drift due
+-			 * to get_kvmclock_ns().
+-			 */
+-			kernel_now = ktime_get(); /* This is CLOCK_MONOTONIC */
+-			host_tsc = rdtsc();
+-		}
++		    !kvm_get_monotonic_and_clockread(&kernel_now, &host_tsc))
++			break;
+ 
+ 		/* Calculate the guest kvmclock as the guest would do it. */
+ 		guest_tsc = kvm_read_l1_tsc(vcpu, host_tsc);
+ 		guest_now = __pvclock_read_cycles(&hv_clock, guest_tsc);
++		fallback = false;
+ 	} while (0);
+ 
+-	if (r) {
++	if (fallback) {
+ 		/*
+-		 * Without CONSTANT_TSC, get_kvmclock_ns() is the only option.
++		 * Without CONSTANT_TSC and the master clock,
++		 * get_kvmclock_ns() is the only option.
+ 		 *
+ 		 * Also if the guest PV clock hasn't been set up yet, as is
+ 		 * likely to be the case during migration when the vCPU has
+ 		 * not been run yet. It would be possible to calculate the
+ 		 * scaling factors properly in that case but there's not much
+-		 * point in doing so. The get_kvmclock_ns() drift accumulates
+-		 * over time, so it's OK to use it at startup. Besides, on
+-		 * migration there's going to be a little bit of skew in the
+-		 * precise moment at which timers fire anyway. Often they'll
+-		 * be in the "past" by the time the VM is running again after
+-		 * migration.
++		 * point in doing so. Without the master clock, the
++		 * get_kvmclock_ns() drift accumulates over time, so it's OK
++		 * to use it at startup. Besides, on migration there's going
++		 * to be a little bit of skew in the precise moment at which
++		 * timers fire anyway. Often they'll be in the "past" by the
++		 * time the VM is running again after migration.
+ 		 */
+ 		guest_now = get_kvmclock_ns(vcpu->kvm);
+ 		kernel_now = ktime_get();
 -- 
 2.43.0
 
