@@ -2,64 +2,54 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 54E43607357C
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2026 07:35:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 04FE2606A322
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2026 07:53:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=oK7Lu21Q
-Received: from list by lists.xenproject.org with outflank-mailman.1479620.1683544 (Exim 4.92)
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=susede1 header.b=g6DzDdfc;
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=susede1 header.b=g6DzDdfc
+Received: from list by lists.xenproject.org with outflank-mailman.1479631.1683552 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQJuI-0000jD-3O; Mon, 09 Nov 2026 07:35:10 +0000
+	id 1xQKBv-0004s2-Gp; Mon, 09 Nov 2026 07:53:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1479620.1683544; Mon, 09 Nov 2026 07:35:10 +0000
+Received: by outflank-mailman (output) from mailman id 1479631.1683552; Mon, 09 Nov 2026 07:53:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQJuH-0000j5-V6; Mon, 09 Nov 2026 07:35:09 +0000
-Received: by outflank-mailman (input) for mailman id 1479620;
- Mon, 09 Nov 2026 07:35:08 +0000
+	id 1xQKBv-0004rv-Cb; Mon, 09 Nov 2026 07:53:23 +0000
+Received: by outflank-mailman (input) for mailman id 1479631;
+ Mon, 09 Nov 2026 07:53:21 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1xQJuG-0000iy-4s
- for xen-devel@lists.xenproject.org; Mon, 09 Nov 2026 07:35:08 +0000
+ (envelope-from <jgross@suse.com>) id 1xQKBt-0004rp-Ja
+ for xen-devel@lists.xenproject.org; Mon, 09 Nov 2026 07:53:21 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xQJuE-002rQj-JK
- for xen-devel@lists.xenproject.org; Mon, 09 Nov 2026 08:35:06 +0100
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xQKBs-00AFfc-Hb
+ for xen-devel@lists.xenproject.org; Mon, 09 Nov 2026 08:53:20 +0100
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6af177a6-e002-0a2a0a5209dd-0a2a4508c002-22
- for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2026 08:35:06 +0100
-Received: from [52.101.48.5]
- (helo=MW6PR02CU001.outbound.protection.outlook.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6af177a8-f659-0a2a45080019-346530058338-3
- for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2026 08:35:06 +0100
-Received: from BN9PR03CA0559.namprd03.prod.outlook.com (2603:10b6:408:138::24)
- by PH0PR12MB7012.namprd12.prod.outlook.com (2603:10b6:510:21c::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.13; Mon, 9 Nov
- 2026 07:34:57 +0000
-Received: from BL2PEPF000352D9.namprd02.prod.outlook.com
- (2603:10b6:408:138:cafe::42) by BN9PR03CA0559.outlook.office365.com
- (2603:10b6:408:138::24) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.496.5 via Frontend Transport; Mon, 9
- Nov 2026 07:34:57 +0000
-Received: from satlexmb08.amd.com (165.204.84.17) by
- BL2PEPF000352D9.mail.protection.outlook.com (10.167.254.10) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.615.4 via Frontend Transport; Mon, 9 Nov 2026 07:34:57 +0000
-Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Mon, 9 Nov
- 2026 01:34:56 -0600
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb09.amd.com
- (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Mon, 9 Nov
- 2026 01:34:56 -0600
-Received: from [192.168.31.141] (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.53 via Frontend
- Transport; Mon, 9 Nov 2026 01:34:55 -0600
+ (envelope-from <jgross@suse.com>)
+ id 6af17bed-2eae-0a2a0a5409dd-0a2a4506b306-12
+ for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2026 08:53:20 +0100
+Received: from [195.135.223.130] (helo=smtp-out1.suse.de)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jgross@suse.com>)
+ id 6af17bef-195a-0a2a45060019-c387df82df76-3
+ for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2026 08:53:20 +0100
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id C2F3F21F83;
+ Mon,  9 Nov 2026 07:53:19 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 6749A13319;
+ Mon,  9 Nov 2026 07:53:19 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id ZaOBD+978WrJRwAAD6G6ig
+ (envelope-from <jgross@suse.com>); Mon, 09 Nov 2026 07:53:19 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -68,118 +58,218 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=GcaSfFmVu69dmr1r1OQBVEY7ebjl/atZqQ4F7hG7ZzlC2iSTstLDGqoSGjbwNeHav448UwVk0EMEbUWHVNDSM6hJtRacW4KULHzD1MG4yuAIY14UAIjEz48+Bqqt06ZDnrfbNYKJ1x4K37iaOXtQLTtjqCXMrz/MNQw18CC2pIItmrjZYowcuEGx+IoLdRZ4pVzsRPGk7OnhlyzXkxTS1Yx6DA9t9hBVkAftzOmFR8gbA1uhS/hYL93Ztood/SWHj4BAh5rf90njPL7R2a4JYFKFSdctoJXaPUGIDP62kV7nxn5eCovhWIyN8elGHPLxvW5DWnSMvesiaMHphNC2zQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=PsfowvyyPcPPxczp+yUm3mw/LEg9/zzxe532S6UERoM=;
- b=MtPDY2LwIZTpImjmBmnhvX+b5lK7GBxvmAbx1L+svfbBQxJiNMhlEHUACX8Xsrt5X6//fjbYocd+FBEssgO3F/S+tKYSgTOeHW+cdm1adlVCacs6+QVKix7iEHlxILKnbr7fRbWI8i39Hn7tD+9vYGrRrXRskgUZ6YFerG8P62bqg56PwtnGEyFuLYUejpANNE9eCqOdwMgijsJmD0AnBPOS/wkqluDvG3/ScKjUMF+NdJO0J7f2jWnKtFkBzZ8yCt6VqcgiSlK55DB8nlZnJs7txH99boZMB5Qs1p5ylWSLpm7YAeWnolEXk9ivsbPqgKmFmBx4V4nNHCUUYEnDRw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=gmail.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PsfowvyyPcPPxczp+yUm3mw/LEg9/zzxe532S6UERoM=;
- b=oK7Lu21QzySsntAOXJxQE+5O4cCejXCU/uO9VVmva6VzmXIOcCkMGOhFb+lq+XTx4NHOfWMVCxfyBSCxSoD1gWoqyGRwEF6lklYXSj4n/k4M3+5o5o96jCr9byJXTOylEG3+33zynK0ou72ttuisKdc+2d15hL2zBsYX8fJp/CM=
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Message-ID: <0f39082f-2433-4a2c-89c5-fec0828e3eed@amd.com>
-Date: Mon, 9 Nov 2026 08:34:49 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Autocrypt"; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Autocrypt"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1794210799; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=mtwimrsAGfjjluaZ29H+iIKzD9a3mq5Gyxp1CKu0/S4=;
+	b=g6DzDdfcnRcM33YreK2ahQsBHkXEbLPIgPFv9GPVarTdwsPQr2CTIsF55ENSLzdf38DC5s
+	npi7JRAh/4EppTiPS1/9LSZ7QXBfih7Cv5u+iLWv04iPb2n9fQTbmef45IfBmsI1M9Pxsm
+	mGFFaqOrG219P4NlTHxK3DLrTjyISYE=
+Authentication-Results: smtp-out1.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1794210799; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=mtwimrsAGfjjluaZ29H+iIKzD9a3mq5Gyxp1CKu0/S4=;
+	b=g6DzDdfcnRcM33YreK2ahQsBHkXEbLPIgPFv9GPVarTdwsPQr2CTIsF55ENSLzdf38DC5s
+	npi7JRAh/4EppTiPS1/9LSZ7QXBfih7Cv5u+iLWv04iPb2n9fQTbmef45IfBmsI1M9Pxsm
+	mGFFaqOrG219P4NlTHxK3DLrTjyISYE=
+Message-ID: <7af392b9-0cf9-46fe-a820-c994942893fe@suse.com>
+Date: Mon, 9 Nov 2026 08:53:18 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/dt: Skip non-RAM reserved-memory regions in
- make_memory_node()
-To: Kuan-Wei Chiu <visitorckw@gmail.com>
-CC: <xen-devel@lists.xenproject.org>, <sstabellini@kernel.org>,
-	<julien@xen.org>, <bertrand.marquis@arm.com>, <marscheng@google.com>,
-	<jserv@ccns.ncku.edu.tw>, <eleanor15x@gmail.com>
-References: <20261028211737.17629-1-visitorckw@gmail.com>
- <10bc93f8-5ac4-4804-864e-d83a5fbf7108@amd.com> <auyzbMaKb2_Oul4V@google.com>
-From: "Orzel, Michal" <michal.orzel@amd.com>
+Subject: Re: [PATCH] xen/events: replace __get_free_pages() with kmalloc()
+To: "Mike Rapoport (Microsoft)" <rppt@kernel.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Cc: David Hildenbrand <david@kernel.org>, Vlastimil Babka
+ <vbabka@kernel.org>, linux-mm@kvack.org, xen-devel@lists.xenproject.org,
+ linux-kernel@vger.kernel.org
+References: <20261108-b4-xen-v1-1-76095f25cbf4@kernel.org>
 Content-Language: en-US
-In-Reply-To: <auyzbMaKb2_Oul4V@google.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL2PEPF000352D9:EE_|PH0PR12MB7012:EE_
-X-MS-Office365-Filtering-Correlation-Id: d3374274-066f-4550-b58c-08df3e33f42f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|376014|23010399003|82310400026|36860700016|11063799006|4143699003|56012099006|261021121427099003|261022105027099003|261009223027099003|261026140227099003|261026121527099003|261028144727099003|261102123227099003|10067099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info:
-	PFvL1fooKQBk5SYH8cMuJNXoKS+GfT4/lGH+WUjtHqk8OtFzWi6n6IhwDWEsIs7DG3iECRe5c+EhuSZrx5xqG87BqGumst3fGdYXTnQ4CfNyGTO+mnMay0/67W/IE4t7oltXBQZfX7lqOBzJRz0s8r6BKRAoIUm29T1Yz7sF4AgOCI/S5a69Gi+Z2wQQS4unKUV30CMQMdiXr6A41hwyNhqNemmneCy72R7ibx3fFCOjMY+I9ezMuGwG8rZZ0L+9T+vSjnfNZDB3JYpOWL+FvIl5uc1aeaNpmcKmlBWJ5rP1Y1wJoJF7uEVuM1rp6Soe5RtOXU3cAh413cbCFOgoZEUScOuHlercJ3hYdwdQZRzO+rrSggHib8HwbsGIhNAZ6AjATuvOQ5wUSNPPoKblnHpk3VvCNLHhBIbDIC0sBYDlHOU8GU/yvx3ovgSErefNQCak53HKV0htU8RNFNwV5Dn0JyurlaOVfqi0IHsbqIqBDyD8kZVTdVH/cyJMCkaZeSbmiIvKEHKk5HXOwHOmaVfuyupjXi4gvTLevt7Fh93d7D7fpSCBHFft/goe+/P6uDwtfeTzqfIxyShmqTBH+urhdu4QrYzRbE3DrZFHXo5pYHdoePaODJF6HEkP/fVk5RNE1WR2s8qJuJMeRMZZOLjSdRJ0mOKhmHQUDsWTFbXxROzim9hoqS/YMNxr23o8t6pJTxVO/oBbGiAlsbdD+w==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(376014)(23010399003)(82310400026)(36860700016)(11063799006)(4143699003)(56012099006)(261021121427099003)(261022105027099003)(261009223027099003)(261026140227099003)(261026121527099003)(261028144727099003)(261102123227099003)(10067099003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	DJQSQjx6DEEtdEk8pNdJ9ZXMk7m8ss1hOq99hP3TMSX8WlxJYT2pdQxQwkk93HyxfnNvxenR7bXhvLOhVd7JZ9jDpbfdgfc01tMOKF2dHWDQ/7TH9sUICtpHTR4NQGC9NZiDOCSchfr+h19+em0zBnNPLSYIgayRtMahtDahMGBg4gs4RktUx1pe1moMwIle58e1olBcfvI9TAibAG43qh85pnCZLEZVz0dOuWd/uHz1uRhOrpQ8K0ni6dieO0ZMP/uNjpTRgb08Q28LyoPYnYg0xz9j0BkKEyGTggMJwOqnjRbCKWznqtRqjS+USOMPUWOKDAyIbuW6ZWNI393HQty8apJcrq8tPcO38Up7C/+IDo/Wmks/bdqUyz69GnGkUty8JXkr+HTXuNdJv6lPf0jvydh71S4oDQpiyklenAIsZF07uzj/SiL+8NRYuO3F
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Nov 2026 07:34:57.0490
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d3374274-066f-4550-b58c-08df3e33f42f
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	BL2PEPF000352D9.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB7012
-X-purgate-ID: tlsNG-c1860d/1794209706-CEB4187B-F6E888C3/0/0
+From: Juergen Gross <jgross@suse.com>
+Autocrypt: addr=jgross@suse.com; keydata=
+ xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
+ ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
+ dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
+ NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
+ XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
+ AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
+ CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
+ mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
+ G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
+ kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
+ Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
+ RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
+ vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
+ sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
+ aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
+ w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
+ auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
+ 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
+ fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
+ HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
+ QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
+ ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
+In-Reply-To: <20261108-b4-xen-v1-1-76095f25cbf4@kernel.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------wXW5pNoOVuHMY5I23DbFQuaD"
+X-Spam-Level: 
+X-Spamd-Result: default: False [-9.80 / 50.00];
+	SUSE_INTERNAL_BYPASS(-9.00)[];
+	NEURAL_SPAM_LONG(3.49)[0.998];
+	BAYES_HAM(-3.00)[100.00%];
+	SIGNED_PGP(-2.00)[];
+	MIME_BASE64_TEXT_BOGUS(1.00)[];
+	MIME_GOOD(-0.20)[multipart/signed,multipart/mixed,text/plain];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	MIME_BASE64_TEXT(0.10)[];
+	XM_UA_NO_VERSION(0.01)[];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	MIME_TRACE(0.00)[0:+,1:+,2:+,3:~];
+	ARC_NA(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCVD_TLS_ALL(0.00)[];
+	HAS_ATTACHMENT(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_EQ_ENVFROM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[8];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo]
+X-Spam-Score: -9.80
+X-purgate-ID: tlsNG-16d1c6/1794210800-FDC0F77B-83906BE9/35/110847
 X-purgate-type: clean
-X-purgate-size: 1479
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=4.0.1
+X-purgate-size: 7210
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=unavailable
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------wXW5pNoOVuHMY5I23DbFQuaD
+Content-Type: multipart/mixed; boundary="------------9CjsJxfyxMmK8BT64s75qaM0";
+ protected-headers="v1"; hp="clear"
+Message-ID: <7af392b9-0cf9-46fe-a820-c994942893fe@suse.com>
+Date: Mon, 9 Nov 2026 08:53:18 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] xen/events: replace __get_free_pages() with kmalloc()
+To: "Mike Rapoport (Microsoft)" <rppt@kernel.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Cc: David Hildenbrand <david@kernel.org>, Vlastimil Babka
+ <vbabka@kernel.org>, linux-mm@kvack.org, xen-devel@lists.xenproject.org,
+ linux-kernel@vger.kernel.org
+References: <20261108-b4-xen-v1-1-76095f25cbf4@kernel.org>
+Content-Language: en-US
+From: Juergen Gross <jgross@suse.com>
+Autocrypt: addr=jgross@suse.com; keydata=
+ xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
+ ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
+ dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
+ NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
+ XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
+ AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
+ CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
+ mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
+ G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
+ kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
+ Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
+ RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
+ vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
+ sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
+ aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
+ w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
+ auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
+ 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
+ fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
+ HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
+ QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
+ ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
+In-Reply-To: <20261108-b4-xen-v1-1-76095f25cbf4@kernel.org>
 
+--------------9CjsJxfyxMmK8BT64s75qaM0
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-On 05-Nov-26 17:48, Kuan-Wei Chiu wrote:
-> Hi Michal,
-> 
-> On Mon, Nov 02, 2026 at 02:02:20PM +0100, Orzel, Michal wrote:
->>
->>
->> On 28-Oct-26 22:17, Kuan-Wei Chiu wrote:
->>> Xen creates a second /memory node for Dom0 from
->>> bootinfo_get_reserved_mem() without checking whether those regions
->>> belong to host RAM. However, /reserved-memory can also describe
->>> on-chip SRAM or firmware regions outside system RAM. Listing them in a
->>> /memory node causes Dom0 to register non-RAM addresses as system RAM,
->>> conflicting with device MMIO mappings.
->> It's worth adding a reference to Linux binding for nvmem-rmem as an example (the
->> only one so far?) of /reserved-memory describing non RAM. Please also mention
->> Linux comment at early_init_dt_reserve_memory().
-> 
-> Ack.
-> 
->>
->>>
->>> Skip reserved-memory banks outside the host RAM banks reported by
->>> bootinfo_get_mem() in make_memory_node().
->> Have you considered EFI boot? There we don't use /memory and bootinfo_get_mem()
->> contains usable memory. IOW I think it does not contain reserved memory. In such
->> scenario, we would skip the reserved regions because they are not described in
->> memory membank. So it would be a regression in behavior.
->>
-> 
-> I'm not quite familiar with EFI, so I indeed didn't consider the EFI
-> boot scenario in the first place. I think I should skip the
-> is_in_host_ram() check when efi_enabled(EFI_BOOT)?'
-Yes, please do so.
+T24gMDguMTEuMjYgMDk6NDIsIE1pa2UgUmFwb3BvcnQgKE1pY3Jvc29mdCkgd3JvdGU6DQo+
+IHNldF9ldnRjaG5fdG9faXJxKCkgYWxsb2NhdGVzIGEgcGFnZSBmb3IgdGhlIGV2ZW50IGNo
+YW5uZWwgdG8gSVJRDQo+IG51bWJlciBzb2Z0d2FyZSBsb29rdXAgdGFibGUuDQo+IA0KPiBU
+aGlzIGJ1ZmZlciBjYW4gYmUgYWxsb2NhdGVkIHdpdGgga21hbGxvYygpIGFzIHRoZXJlJ3Mg
+bm90aGluZyBzcGVjaWFsDQo+IGFib3V0IGl0IHRvIGdvIGRpcmVjdGx5IHRvIHRoZSBwYWdl
+IGFsbG9jYXRvci4NCj4gDQo+IGttYWxsb2MoKSBwcm92aWRlcyBhIGJldHRlciBBUEkgdGhh
+dCBkb2VzIG5vdCByZXF1aXJlIHVnbHkgY2FzdHMgYW5kDQo+IGtmcmVlKCkgZG9lcyBub3Qg
+bmVlZCB0byBrbm93IHRoZSBzaXplIG9mIHRoZSBmcmVlZCBvYmplY3QuDQo+IA0KPiBQZXJm
+b3JtYW5jZSBkaWZmZXJlbmNlIGJldHdlZW4ga21hbGxvYygpIGFuZCBfX2dldF9mcmVlX3Bh
+Z2VzKCkgaXMgbm90DQo+IG1lYXN1cmFibGUgYXMgYm90aCBhbGxvY2F0b3JzIHRha2UgYW4g
+b2JqZWN0L3BhZ2UgZnJvbSBhIHBlci1DUFUgbGlzdCBmb3INCj4gZmFzdCBwYXRoIGFsbG9j
+YXRpb25zLg0KPiANCj4gRm9yIHRoZSBzbG93IHBhdGggdGhlIHBlcmZvcm1hbmNlIGlzIGFu
+eXdheSBkZXRlcm1pbmVkIGJ5IHRoZSBhbW91bnQgb2YNCj4gcmVjbGFpbSBpbnZvbHZlZCBy
+YXRoZXIgdGhhbiBieSB3aGF0IGFsbG9jYXRvciBpcyB1c2VkLg0KPiANCj4gUmVwbGFjZSB1
+c2Ugb2YgX19nZXRfZnJlZV9wYWdlcygpIHdpdGgga21hbGxvYygpIGFuZCBmcmVlX3BhZ2Vz
+KCkgd2l0aA0KPiBrZnJlZSgpLg0KPiANCj4gTGluazogaHR0cHM6Ly9sb3JlLmtlcm5lbC5v
+cmcvYWxsLzYzNTQwNWU0LTk0MjMtNGEyNS1hNmU3LWUwM2M4ZWEwYmNiZUByZWRoYXQuY29t
+DQo+IFNpZ25lZC1vZmYtYnk6IE1pa2UgUmFwb3BvcnQgKE1pY3Jvc29mdCkgPHJwcHRAa2Vy
+bmVsLm9yZz4NCg0KU2hvdWxkbid0IHlvdSBhbHNvIHJlcGxhY2UgX19nZXRfZnJlZV9wYWdl
+KCkgaW4geGVuX2luaXRfSVJRKCk/IEkgZG9uJ3Qgc2VlDQp3aHkgdGhpcyBpcyBiZWluZyBv
+bWl0dGVkLg0KDQoNCkp1ZXJnZW4NCg0KPiAtLS0NCj4gVGhpcyBpcyBhIChzbWFsbCkgcGFy
+dCBvZiBsYXJnZXIgd29yayBvZiByZXBsYWNpbmcgcGFnZSBhbGxvY2F0b3IgY2FsbHMNCj4g
+d2l0aCBrbWFsbG9jLg0KPiANCj4gTGFyZ2VseSwgYW55dGhpbmcgdGhhdCBkb2Vzbid0IG5l
+ZWQgc3RydWN0IHBhZ2UgKG9yIGEgbWVtZGVzYyBpbiB0aGUNCj4gZnV0dXJlKSBzaG91bGQg
+anVzdCB1c2Uga21hbGxvYygpIG9yIGt2bWFsbG9jKCkgdG8gYWxsb2NhdGUgbWVtb3J5Lg0K
+PiBSZW1vdmluZyBuZWVkbGVzcyBjYWxscyB0byBwYWdlIGFsbG9jYXRvciBoZWxwcyB3aXRo
+IG1lbWRlc2MgKGFrYSBwcm9qZWN0DQo+IGZvbGlvKSBjb252ZXJzaW9uIGFuZCBnaXZlcyBh
+IG5pY2VyIEFQSSB3aXRob3V0IGNhc3RzLg0KPiAtLS0NCj4gICBkcml2ZXJzL3hlbi9ldmVu
+dHMvZXZlbnRzX2Jhc2UuYyB8IDQgKystLQ0KPiAgIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2Vy
+dGlvbnMoKyksIDIgZGVsZXRpb25zKC0pDQo+IA0KPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy94
+ZW4vZXZlbnRzL2V2ZW50c19iYXNlLmMgYi9kcml2ZXJzL3hlbi9ldmVudHMvZXZlbnRzX2Jh
+c2UuYw0KPiBpbmRleCBmZDE2ZDY1MmM4MWYyLi44YzM3NzQ5MzQyOWI3IDEwMDY0NA0KPiAt
+LS0gYS9kcml2ZXJzL3hlbi9ldmVudHMvZXZlbnRzX2Jhc2UuYw0KPiArKysgYi9kcml2ZXJz
+L3hlbi9ldmVudHMvZXZlbnRzX2Jhc2UuYw0KPiBAQCAtMjMwLDcgKzIzMCw3IEBAIHN0YXRp
+YyBpbnQgc2V0X2V2dGNobl90b19pcnEoZXZ0Y2huX3BvcnRfdCBldnRjaG4sIHVuc2lnbmVk
+IGludCBpcnEpDQo+ICAgCQlpZiAoaXJxID09IC0xKQ0KPiAgIAkJCXJldHVybiAwOw0KPiAg
+IA0KPiAtCQlldnRjaG5fcm93ID0gKGludCAqKSBfX2dldF9mcmVlX3BhZ2VzKEdGUF9LRVJO
+RUwsIDApOw0KPiArCQlldnRjaG5fcm93ID0ga21hbGxvYyhQQUdFX1NJWkUsIEdGUF9LRVJO
+RUwpOw0KPiAgIAkJaWYgKGV2dGNobl9yb3cgPT0gTlVMTCkNCj4gICAJCQlyZXR1cm4gLUVO
+T01FTTsNCj4gICANCj4gQEAgLTI0MSw3ICsyNDEsNyBAQCBzdGF0aWMgaW50IHNldF9ldnRj
+aG5fdG9faXJxKGV2dGNobl9wb3J0X3QgZXZ0Y2huLCB1bnNpZ25lZCBpbnQgaXJxKQ0KPiAg
+IAkJICogdGhyZWFkIHdhcyBmYXN0ZXIgaW5zZXJ0aW5nIGl0LCB3ZSBjYW4gZHJvcCBvdXJz
+Lg0KPiAgIAkJICovDQo+ICAgCQlpZiAoY21weGNoZygmZXZ0Y2huX3RvX2lycVtyb3ddLCBO
+VUxMLCBldnRjaG5fcm93KSAhPSBOVUxMKQ0KPiAtCQkJZnJlZV9wYWdlKCh1bnNpZ25lZCBs
+b25nKSBldnRjaG5fcm93KTsNCj4gKwkJCWtmcmVlKGV2dGNobl9yb3cpOw0KPiAgIAl9DQo+
+ICAgDQo+ICAgCVdSSVRFX09OQ0UoZXZ0Y2huX3RvX2lycVtyb3ddW2NvbF0sIGlycSk7DQo+
+IA0KPiAtLS0NCj4gYmFzZS1jb21taXQ6IDY2MjhlN2Q0YzZiMjVjOGQxOGYxMzQ1ZTNhMjBk
+MjE4MjlhYWU3ZTQNCj4gY2hhbmdlLWlkOiAyMDI2MDYyNC1iNC14ZW4tYTFjZDYyOWNlOWY0
+DQo+IA0KPiAtLQ0KPiBTaW5jZXJlbHkgeW91cnMsDQo+IE1pa2UuDQoNCg==
 
-~Michal
+--------------9CjsJxfyxMmK8BT64s75qaM0--
 
+--------------wXW5pNoOVuHMY5I23DbFQuaD
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmrxe+4FAwAAAAAACgkQsN6d1ii/Ey9J
+cwf+L3XaMzorCG1a1NqCToQpyu0zZH4Y8kmNNW0/rOxHQHH3N6z1NjBS/4OA3dFxz/HgVZJG9fjN
+VpLu3NGawgxhx0kswckZeP0mL1qsTAJNqCJt2iR9xPBSQIhvWz2dTObySLv7i2AzzK+7Ker8V/A3
+l9M7wG9YjYC9c0fsPRcqtYFECiH8KZL47sOCGX+2mS5bn1lJG7U9/C1ODW3hmiTns3rdiYFg8TxX
+NFVkoo/VFf1nIjJtr4IVJsVNhyOsfTRRbbiy4eyb8RpYC5mCNK2t9k1m5Q/EN8ZvRlsG+EcptY/7
+VqBH+RbDz8HR65Q9mlfkxWSs8/m1rpk6XBRjjX7n+A==
+=sx3s
+-----END PGP SIGNATURE-----
+
+--------------wXW5pNoOVuHMY5I23DbFQuaD--
 
