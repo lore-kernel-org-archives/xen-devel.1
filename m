@@ -2,45 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CFD08606EE9A
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2026 01:22:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F6D4606A322
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2026 02:57:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=desiato.20200630 header.b=BlcG+kUi
-Received: from list by lists.xenproject.org with outflank-mailman.1479238.1683387 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=aspeedtech.com header.i=@aspeedtech.com header.a=rsa-sha256 header.s=selector1 header.b=Or25hesv
+Received: from list by lists.xenproject.org with outflank-mailman.1479456.1683435 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQE4q-0002yN-8k; Mon, 09 Nov 2026 01:21:40 +0000
+	id 1xQFZS-00072O-0L; Mon, 09 Nov 2026 02:57:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1479238.1683387; Mon, 09 Nov 2026 01:21:39 +0000
+Received: by outflank-mailman (output) from mailman id 1479456.1683435; Mon, 09 Nov 2026 02:57:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQE4o-0002p9-S7; Mon, 09 Nov 2026 01:21:38 +0000
-Received: by outflank-mailman (input) for mailman id 1479238;
- Mon, 09 Nov 2026 01:21:24 +0000
+	id 1xQFZR-00072G-TT; Mon, 09 Nov 2026 02:57:21 +0000
+Received: by outflank-mailman (input) for mailman id 1479456;
+ Mon, 09 Nov 2026 02:57:20 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <BATV+eaa65bbd42d4fabe269c+8478+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1xQE4Z-0007zb-KY
- for xen-devel@lists.xenproject.org; Mon, 09 Nov 2026 01:21:23 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <jamin_lin@aspeedtech.com>) id 1xQFZP-0006yY-7P
+ for xen-devel@lists.xenproject.org; Mon, 09 Nov 2026 02:57:20 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xQE4Z-002A54-1V; Mon, 09 Nov 2026 02:21:23 +0100
+ id 1xQFZO-009duL-KV
+ for xen-devel@lists.xenproject.org; Mon, 09 Nov 2026 03:57:18 +0100
 Received: from [10.42.69.9] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <BATV+eaa65bbd42d4fabe269c+8478+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 6af11fc9-e002-0a2a0a5209dd-0a2a4509b036-44
- for <multiple-recipients>; Mon, 09 Nov 2026 02:21:23 +0100
-Received: from [90.155.92.199] (helo=desiato.infradead.org)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <jamin_lin@aspeedtech.com>)
+ id 6af13651-e002-0a2a0a5209dd-0a2a45099f2a-34
+ for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2026 03:57:18 +0100
+Received: from [52.101.126.85]
+ (helo=TYPPR03CU001.outbound.protection.outlook.com)
  by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <BATV+eaa65bbd42d4fabe269c+8478+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 6af1200d-be1a-0a2a45090019-5a9b5cc7c5a8-3
- for <multiple-recipients>; Mon, 09 Nov 2026 02:21:17 +0100
-Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
- by desiato.infradead.org with esmtpsa (Exim 4.100.1 #2 (Red Hat Linux))
- id 1xQE4Q-00000006AYB-28ju; Mon, 09 Nov 2026 01:21:15 +0000
-Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.5 #2 (Red
- Hat Linux)) id 1xQE4O-0000000EKUZ-3FJ2;
- Mon, 09 Nov 2026 01:21:12 +0000
+ (envelope-from <jamin_lin@aspeedtech.com>)
+ id 6af1368a-be1a-0a2a45090019-34657e554e5a-3
+ for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2026 03:57:17 +0100
+Received: from SEZPR06MB7362.apcprd06.prod.outlook.com (2603:1096:101:253::10)
+ by TYPPR06MB8051.apcprd06.prod.outlook.com (2603:1096:405:318::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.7; Mon, 9 Nov 2026
+ 02:57:11 +0000
+Received: from SEZPR06MB7362.apcprd06.prod.outlook.com
+ ([fe80::cd2d:35d2:a702:1de6]) by SEZPR06MB7362.apcprd06.prod.outlook.com
+ ([fe80::cd2d:35d2:a702:1de6%4]) with mapi id 15.21.0615.005; Mon, 9 Nov 2026
+ 02:57:11 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -48,465 +51,156 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=desiato.20200630 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
-	Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:
-	To:From:Reply-To:Content-ID:Content-Description;
-	bh=OGXN0D0AnakZQfmHEkKPNkYcySUtuJFGfGpWognUlZg=; b=BlcG+kUioyjKmZnJeACk4Nuqun
-	q24fNixOf2dqW9pl1WEw1JY68gEQQ/RBx7tVu/0I018bYMAnj4z/BFGq8pu2mUnxm0WTfOgx6emzR
-	nRW9w5s3x5RIlF3wBkTcrY3CRt0ttltQndI1zOPXBTNbEo0P2/937BSkICkMTSfbZPXgi/yEgYrbH
-	v0Q8IN8jaRODckRLBi3YUZJX2NOWGPSS23kS7RsV5FxmF612mIGHEryZ76J9sXvxGogub/cb3KU3O
-	d5eMAwxPNA3ocAFJZ5shoXU28kNY+QoU/YqqanGJ56R5QCj76bHwqAfkiuaBfeWJFoDu6JjfLU/oq
-	3aKvFsXw==;
-From: David Woodhouse <dwmw2@infradead.org>
-To: kvm@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org,
-	linux-kselftest@vger.kernel.org,
-	linux-doc@vger.kernel.org,
-	xen-devel@lists.xenproject.org,
-	x86@kernel.org,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Sean Christopherson <seanjc@google.com>,
-	Paul Durrant <paul@xen.org>,
-	Vitaly Kuznetsov <vkuznets@redhat.com>,
-	Thomas Gleixner <tglx@kernel.org>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	"H . Peter Anvin" <hpa@zytor.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Juergen Gross <jgross@suse.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Jonathan Cameron <jic23@kernel.org>,
-	Sascha Bischoff <Sascha.Bischoff@arm.com>,
-	Marc Zyngier <maz@kernel.org>,
-	Joey Gouly <joey.gouly@arm.com>,
-	Jack Allister <jalliste@amazon.com>,
-	Dongli Zhang <dongli.zhang@oracle.com>,
-	joe.jin@oracle.com,
-	David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v12 08/24] KVM: x86: Re-synchronize TSC after KVM_SET_TSC_KHZ
-Date: Sun,  8 Nov 2026 17:20:54 -0800
-Message-ID: <20261109012112.3415328-9-dwmw2@infradead.org>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261109012112.3415328-1-dwmw2@infradead.org>
-References: <20261109012112.3415328-1-dwmw2@infradead.org>
+Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=aspeedtech.com header.i="@aspeedtech.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=VPuX7SRLOJ3uZhKRtcG7xvY9UdqigmXCcqj/AE7HJ3KFWhWU20QpMmNvgY3hRv5PvixCVx7AWaXfXSFliFahM5hA+frofbVj1P0oObxsQAvb5bEa28pQS9JXVUtKRk8eGjpv7y3sJQlAcWC8wxuGn6yH1p1hu8R1vd+++BFzWy1/7pqFLcb/sgxpMF2dfMn8oroExGL7gflCJhONGPWzisBrfgLNdeUvNvtO6BuQPgOICTCO5wOqvQRy9hCQA57dxb+tkelN6irQK+RI1Mx1exGfxe6lUFvyrzgJn8lVLMmxtDvVxLYNi140Q37OMaaeqtSJ9zRbT3/yOWXOWKL8MA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=F9nXBS8S94qf4A24kGLZUf4xuXXgQzpnvIVcGjGPAhI=;
+ b=mfgfBWJhaWcyuE5o+dVQ7McHxzvCK8IH156v8Ul97AajqmvWxlperMRp4Jk8s6gC7IfCXH8YiXGSaFnybxo8jnq8sOL7gi8icDxdJ+sMgK6NujmKcBltz/QyDK/2kmhYfw/TP974c5cxBMUqf9NDZnegMx2gqeDI02ZpdSMbP8X3aan6SiTaFyFnI/teP9/0ffnqS28H0koYHVI23zToL2OLOAuSHl57jktn51qcp31z3OHQKH/fkcQsfGXGRwg0T5FrF33mDy2gUfy4Nl0iTKX6pE0+fAwa7ikgr4fdbJAV73Qx2VnXrz87WXJqsVARXl55+JHLyHIDp9yWy22qbA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=aspeedtech.com; dmarc=pass action=none
+ header.from=aspeedtech.com; dkim=pass header.d=aspeedtech.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aspeedtech.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=F9nXBS8S94qf4A24kGLZUf4xuXXgQzpnvIVcGjGPAhI=;
+ b=Or25hesvZJqLuEijD9sUb6pN7LusBq9L6jCV6988kYdD9Kk36Rmkk8agRBXBxWt4xftxSGExpGa74ja25lV9b0v6+ybvE/HiF6+rZL3e6ZjwE9zEA4tzn4dp9QuBGUbgO6WumwKYxt1biQY8sCW42OMdebtvn01XMNG1ZaoxP7mEU/FonWuN7uo5Tm0yzpVK1VA1r13lz/6TPcBqgKvsmf6wQwR98v9F5Lj7PRmQG0aZbryC8UxOB8CyApKgoEmHHU32Tp4Q1JcCfXM1wctcOdbsELeFKmiG9wg9aBulEDIc2Ut4MCkIX26OfgEyrlRJyfv/gpzJp6A2cfCPaXaQSA==
+From: Jamin Lin <jamin_lin@aspeedtech.com>
+To: Junjie Cao <junjie.cao@linux.dev>
+CC: "kraxel@redhat.com" <kraxel@redhat.com>, "marcandre.lureau@redhat.com"
+	<marcandre.lureau@redhat.com>, "clg@kaod.org" <clg@kaod.org>,
+	"pierrick.bouvier@oss.qualcomm.com" <pierrick.bouvier@oss.qualcomm.com>,
+	"peter.maydell@linaro.org" <peter.maydell@linaro.org>, Kane Chen
+	<kane_chen@aspeedtech.com>, "philmd@oss.qualcomm.com"
+	<philmd@oss.qualcomm.com>, "kfting@nuvoton.com" <kfting@nuvoton.com>,
+	"wuhaotsh@google.com" <wuhaotsh@google.com>, "zhao1.liu@intel.com"
+	<zhao1.liu@intel.com>, "richard.henderson@linaro.org"
+	<richard.henderson@linaro.org>, "deller@gmx.de" <deller@gmx.de>,
+	"sstabellini@kernel.org" <sstabellini@kernel.org>, "anthony@xenproject.org"
+	<anthony@xenproject.org>, "edgar.iglesias@gmail.com"
+	<edgar.iglesias@gmail.com>, Troy Lee <troy_lee@aspeedtech.com>,
+	"qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-arm@nongnu.org"
+	<qemu-arm@nongnu.org>, "xen-devel@lists.xenproject.org"
+	<xen-devel@lists.xenproject.org>
+Subject: RE: [PATCH v8 14/18] hw/usb/redirect-server: Implement control
+ transfers
+Thread-Topic: [PATCH v8 14/18] hw/usb/redirect-server: Implement control
+ transfers
+Thread-Index: AQHdaquqR4kcpf7BW0WY0PXfmYQ09LccaG6AgAiuDZA=
+Date: Mon, 9 Nov 2026 02:57:11 +0000
+Message-ID:
+ <SEZPR06MB73628601F248BA1E414079EEFC732@SEZPR06MB7362.apcprd06.prod.outlook.com>
+References: <20261102092201.1729245-1-jamin_lin@aspeedtech.com>
+ <20261102092201.1729245-15-jamin_lin@aspeedtech.com>
+ <20261103142327.1348025-7-junjie.cao@linux.dev>
+In-Reply-To: <20261103142327.1348025-7-junjie.cao@linux.dev>
+Accept-Language: zh-TW, en-US
+Content-Language: zh-TW
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=aspeedtech.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: SEZPR06MB7362:EE_|TYPPR06MB8051:EE_
+x-ms-office365-filtering-correlation-id: 9475d214-bcd6-4a39-4986-08df3e0d268e
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|23010399003|376014|1800799024|7416014|366016|261102130727099003|261026121527099003|4143699003|56012099006|3023799007|10067099003|18002099003|22082099003|38070700021;
+x-microsoft-antispam-message-info:
+ KODUbTQen8mEqyxszSkxr2VWaQn9yStfemy7hA4b5pMAYglf4wR+SBuRvkO/GQsOEHwlmN+uRY7daJX3Tza9zeyYKnLMS8aTSGtrQ0TwHFtgLc6zHAiV08R6DLSaje5FpbqqCKXJmPZX8lCln7Ur2dd+qtDbVn5PG5/zU1R90Wdnb45eicUbCc1foIssQZHer2XkhP8yfHHWEta7COfQWZwKPSL+GzoM9VuckUyrAuE3j2bGcpwfZPO85rvNdDg3bbZEs29ppp3JlCatpSwWWNaL3o490t21pbwHhitYQB1h+D37DyTHRNoIoNPiVGYb4YT+dMxBiO3z6HeAfPjVkL3KggdrKxr4gCetlRtBi1ww7VP7HsKEsjf5aUqaec9DrT0XLy0XDAMSzrr9kKvEWuAvB7ICcvg4+e9Wg4pxGfMKoy5IBjZcPYf3XqiIz/9EfvK+wDeNxkJzgJcOaHlDxGsKdIwAR2Fn/BMQ5Ca6sVI3B9DpmxOW+IeOtR2eh6LW0WROO4lPxWNDY6mpBBack06MOVB9tR9e5j2zvTrU3spo85sgOj6cb8Cd0eJDWczw535i2W7MtGPMjGsfeat9zg6lPjECMKRdUZGLY9/HvXY0MClf2N0kXkj/IiClg6jLZ/FZWp7mFQyYjBlWeQaY/5v7Wi/RmrCj7gpmFoMTRiPMpjJIzMHRJ3vpZDohQ7TfZwR0HuOqsdqY4K48eCpwBJ8MJTV5iGGndJ3itvEa7UY=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SEZPR06MB7362.apcprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(376014)(1800799024)(7416014)(366016)(261102130727099003)(261026121527099003)(4143699003)(56012099006)(3023799007)(10067099003)(18002099003)(22082099003)(38070700021);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?us-ascii?Q?9nhRUj0480/JLvPdj0sBme0iRfoW+eTOc0Z3hfaiVtK5A6LbrjkD8cY+tabg?=
+ =?us-ascii?Q?U9NvZ+7e6VzQZgAKoFNKU5Uch+09GRgT5vry0kdBXgTjzNUpx7OQxBcbg5//?=
+ =?us-ascii?Q?HLfNphAOogpym+23B61pV10vcw+vDiKjQyWXcO7cibHQTl0SlUGtDdkEo2Hs?=
+ =?us-ascii?Q?oMcAEYe7DRBMqNc3L3fnPHeIZ7HzHTCDksptZjUdxb9bAeX/X5f7U6Uj9N+I?=
+ =?us-ascii?Q?OviNk5Pm1cF1gUh9AOaGakN+jCTukhOIHUY/+sEHDaDL93W9Otor/rVeE4O9?=
+ =?us-ascii?Q?0Rfzo1FKVb/sT8IRxwgLxWmmvDYYIT1YB++p2GUvzZW4x0rXl+WbCAfNhTdn?=
+ =?us-ascii?Q?IxG6oxI/X5DvDDqMv4V+rlpPb2sXg3Nw6TQWgcucrBGbvM/wuKi7enAtgCAn?=
+ =?us-ascii?Q?sYQsf+C1Lb2w2Lb61WAQdO29zyR7IWN5+ytU8rnlicK7WpxqzT13HzDpfgbI?=
+ =?us-ascii?Q?D1QohAzZ6plHF21FwIMWj3n+03mmwnKOw6ltfa0tSt6/UFaGNSCBW0+oZEB7?=
+ =?us-ascii?Q?f2UoZYpRR+DgzkvQe2LExOCdvUwxUbdO46B+KlH6cADzC2sJ+rLK8QHvSlKj?=
+ =?us-ascii?Q?6CANUIjQfgVENAEuA/54qscZdA9QBQEFJo+26pfTliFWVwo5PEt6tg9zyAG/?=
+ =?us-ascii?Q?gxBzw7ZnTzHw3x5S60vGZuUNdDTxsRf4yjRIkfLI/H/8BoOu/gBPkC6lj7Pe?=
+ =?us-ascii?Q?ym2wvpG7L3kJ1p95Zcr0VmZOJ3lxI8FPm7HhbZFtVq/nHA60QWIdZoxnPRab?=
+ =?us-ascii?Q?5xSKM19bAfJxQ/Nr8m6Li89QeHLf8rIfjewqQop4Reg9B9nopI29hQ3KF7Hm?=
+ =?us-ascii?Q?kuZnoKcX/4os2vRnadP5DR+60qvAiZXBvP6RE2rUDjdJ8cukctas1d/BwiNN?=
+ =?us-ascii?Q?CrMKWrAZP1jK+M/Xd81Ba6GHy0TcwEvevF/PMZ9CzGrgA9X0e3zzch+2wKzh?=
+ =?us-ascii?Q?v905hJNH584x1cz7wlbhjHc4XOOmftekXLI5Xec4rVocMVJCJBT12rhNjqz3?=
+ =?us-ascii?Q?KTufcQtcKC01dRi7BA+r4JgO/Gb/H9dMBa1LTyio8Xh3ULef7oNWLGuvWARr?=
+ =?us-ascii?Q?gS34QBtOm7UvCEnqB9i5yr24QtvDabLiO3SsDlfDnsQfpWftmLHBkqvl6x9K?=
+ =?us-ascii?Q?QweVErU60NQTz5gPrZbGAXfW9Ds1kC68WanK69W6bkrM2xCmDV2gbL/xwZPm?=
+ =?us-ascii?Q?poENCBkX5gBQe3QWe1jdv1ruvNCgfWTMWTZ2kuSJvj7ROpq1FXYqdcvt31yA?=
+ =?us-ascii?Q?SDNKo2VOXajwt8wD1D4bkGH+ICdQ9WG2Kl3OQH5QD805+orQPc8/6+fRXbhX?=
+ =?us-ascii?Q?slQZrdT+f/9assZGUI4mJSr1vTJkjHc6xmybvEfFIbxypZM7fpM85BHKsM+x?=
+ =?us-ascii?Q?mRL6uoeMZL91p8jhLLosku89sG20q3nPWOcLZKMUHedd4M0Cc7AEyTY3kYrv?=
+ =?us-ascii?Q?5qE8nAgGgBh1jlC+ZGozRZyDVW+VrytnECHMJG2Pft8eUdw/5C7xoLqLxna3?=
+ =?us-ascii?Q?d9I6cDe73AMZ2TZc/ckstY6HVCjQsc1LgQxJDuXcEDTDUiCc4CGtsNzXxtu9?=
+ =?us-ascii?Q?MVGLcKgdAdWi0Cy6gjMP4V4A2oc4gAXyvXZMoCoUJowhxWgQIGRDVy4Kq9S+?=
+ =?us-ascii?Q?QUmjjszxJih6aCfQUuC7hXDkn69oS6pWK+opX5aPRapPILMFJtC7DdmFESSB?=
+ =?us-ascii?Q?/OEEUwNAGLBZ7eAg3sZzJLwQylq6qU6Xy2HRdCBpOf976evAHJ14SZT3fzw5?=
+ =?us-ascii?Q?qPiijp6zeA=3D=3D?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-bad1c0/1794187283-BD4C3034-897928B9/0/0
+X-Exchange-RoutingPolicyChecked:
+	AmkKvx8IlTXFLRQ+OS78a/vnP/RZWCbp563PBx7BtKdue5I2W85wmPRpiO65whM3PSAvtZAND+lP+MF9QHJ+TtqMSPPtd+bdb1DKqUncua3DychaMj4wrY+eTiDjKGmkA9le9AJAVzPGcUq28sXUUOMDxKZ5ulPySuxDpBNTneMuF1TujagZd9Poy8hDyN2tSp1WBOurdzT/3dSHGg6tLMfvItOHL7EE9fPf3vusEZYIIXIxNnr7He0P/BDmqkzV9OF4ofKeFvWBXBP6vUH74ypp0rAkYij3B1E+f5JkUZlg8ZlWhU//QSukJOmJU5kJFuIey8GnlNDDYA+vONHvfg==
+X-OriginatorOrg: aspeedtech.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB7362.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9475d214-bcd6-4a39-4986-08df3e0d268e
+X-MS-Exchange-CrossTenant-originalarrivaltime: 09 Nov 2026 02:57:11.1662
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 43d4aa98-e35b-4575-8939-080e90d5a249
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: b+600HePRCtb7CjFkyXpFdCfFq7+d3g2pbYc0xdFBdmqFfdOQJy6PIpTUIXzEAvbCd2qp02N9f81VH/HDjg7+awnP9kOxOA8cMvxBZm0CSI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYPPR06MB8051
+X-purgate-ID: tlsNG-bad1c0/1794193038-BD0CD034-C8A0672F/0/0
 X-purgate-type: clean
-X-purgate-size: 16599
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-purgate-size: 935
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
+	autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: David Woodhouse <dwmw@amazon.co.uk>
+Hi Junjie,
 
-KVM_SET_TSC_KHZ changes the vCPU's TSC scaling ratio but does not
-update the VM-wide cur_tsc_scaling_ratio used by get_kvmclock().
-This causes get_kvmclock() to use a stale (default 1:1) ratio when
-computing the KVM clock, leading to drift between the host-side
-kvmclock and what the guest observes.
+> transfers
+>=20
+> Hi Jamin,
+>=20
+> On Mon, Nov 02, 2026 at 09:22:23AM +0000, Jamin Lin wrote:
+> > +    if (!s->host_connected || !device || !device->attached) {
+> > +        return usb_redir_ioerror;
+> > +    }
+>=20
+> The device stays in USB_STATE_ATTACHED until the announce BH resets it, s=
+o a
+> control_packet in the same read as hello passes this check and hits the
+> USB_STATE_DEFAULT assert in usb_handle_packet(). Checking
+> device_announced here would cover it.
+>=20
+> For whenever you respin: stop_transfers() on a reset drops packets the cl=
+ient
+> may still cancel; usbredirhost answers them first.
+>=20
+> Tested: usb-storage exported from ast2600-evb enumerates behind qemu-xhci
+> and usb-ehci, usb-audio behind qemu-xhci, and each SET_INTERFACE alt 1 is
+> followed by an ep_info with the iso OUT endpoint.
+>=20
+> Junjie
 
-Fix this by calling kvm_synchronize_tsc() after changing the TSC
-frequency. This:
- - Updates cur_tsc_scaling_ratio (consumed by pvclock_update_vm_gtod_copy)
- - Ensures the TSC value is continuous across the frequency change
- - Triggers kvm_track_tsc_matching() for proper masterclock handling
- - Establishes the new TSC generation for subsequent vCPUs to match
-
-Since kvm_synchronize_tsc() previously inferred "userspace wrote the
-TSC" from being given a non-NULL value, and this new call is a purely
-kernel-internal resynchronization, make that an explicit
-'user_initiated' parameter instead. Otherwise the kernel's own call
-would set kvm->arch.user_set_tsc and incorrectly enable the 1-second
-slop heuristic before userspace has ever written a TSC value, breaking
-the restore of a guest with less than one second of runtime.
-
-The resynchronization is skipped in two cases. At vCPU creation (which
-comes through here with the default frequency), the vCPU is not yet
-counted in online_vcpus, so synchronizing would corrupt the VM-wide
-matching state — and leave it corrupted if creation subsequently
-fails; the initial synchronization in kvm_arch_vcpu_postcreate()
-covers it. And when the frequency is unchanged, there is nothing to
-re-synchronize: opening a new generation for a no-op ioctl would
-needlessly orphan the matched state of the sibling vCPUs.
-
-The preserved value is sampled as a {guest TSC, host clock} tuple
-and handed to the synchronization together with its reference point,
-so the new offset is computed against the host TSC the sample was
-taken at — not against "now". The guest TSC keeps counting through
-the frequency change, and any delay between sample and installation
-(preemption included) costs nothing. The new frequency itself is only
-committed once set_tsc_khz() can no longer fail; a failed ioctl must
-leave no trace, or a retry with the still-active frequency would
-wrongly look like a change and open a gratuitous generation.
-
-Because the internal sample is exact, it is not given the 1-second
-slop window intended for the racy legacy userspace API: a vCPU on the
-generation's timeline still matches within a 1ms window, but one which
-genuinely diverged (a guest TSC_ADJUST write, or a deliberate
-sub-second offset) keeps its exact value rather than being snapped
-back onto the generation by up to a second. Setting a frequency which
-no longer needs catchup also clears the always-catchup state which an
-earlier above-host-rate setting on scaling-less hardware left behind,
-and which otherwise persisted for the life of the vCPU.
-
-Only preserve the TSC value across a frequency change for a vCPU
-which has run, or whose TSC userspace has explicitly written (tracked
-with a new per-vCPU user_set_tsc flag — the VM-wide flag would make
-one vCPU's restored TSC cause a sibling's unrestored, creation-time
-value to be preserved, clobbering the generation it could otherwise
-match). A never-run vCPU holds nothing worth preserving, so
-synchronize it as for a zero write, placing it on the generation's
-timeline at the new frequency.
-
-A KVM_GET_CLOCK issued before the resulting masterclock update is
-serviced still returns the correct time: the masterclock parameters
-are consumed as one self-consistent snapshot, and a host TSC delta
-scaled by the snapshot's ratio and converted by its mul/shift yields
-nanoseconds independent of the guest frequency they encode.
-
-Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
----
- Documentation/virt/kvm/api.rst  |   8 ++
- arch/x86/include/asm/kvm_host.h |   1 +
- arch/x86/kvm/msrs.c             |   2 +-
- arch/x86/kvm/x86.c              | 156 +++++++++++++++++++++++++++-----
- arch/x86/kvm/x86.h              |   2 +-
- 5 files changed, 142 insertions(+), 27 deletions(-)
-
-diff --git a/Documentation/virt/kvm/api.rst b/Documentation/virt/kvm/api.rst
-index ddc61ea36ac5..9487afc4431f 100644
---- a/Documentation/virt/kvm/api.rst
-+++ b/Documentation/virt/kvm/api.rst
-@@ -2023,6 +2023,14 @@ If the KVM_CAP_VM_TSC_CONTROL capability is advertised, this can also
- be used as a vm ioctl to set the initial tsc frequency of subsequently
- created vCPUs.  Note, the vm ioctl is only allowed prior to creating vCPUs.
- 
-+Changing the frequency of a vCPU with the vcpu ioctl re-synchronizes
-+its TSC: for a vCPU which has run, or whose TSC userspace has written,
-+the current guest TSC value is preserved across the change (the TSC
-+offset, as visible through the KVM_VCPU_TSC_OFFSET attribute, is
-+rewritten accordingly); otherwise the vCPU is synchronized to the
-+VM's existing TSC timeline at the new frequency. Setting the current
-+frequency again is a no-op.
-+
- For TSC protected Confidential Computing (CoCo) VMs where TSC frequency
- is configured once at VM scope and remains unchanged during VM's
- lifetime, the vm ioctl should be used to configure the TSC frequency
-diff --git a/arch/x86/include/asm/kvm_host.h b/arch/x86/include/asm/kvm_host.h
-index 30e89e8fb975..8af808fbf6ce 100644
---- a/arch/x86/include/asm/kvm_host.h
-+++ b/arch/x86/include/asm/kvm_host.h
-@@ -888,6 +888,7 @@ struct kvm_vcpu_arch {
- 	u64 this_tsc_write;
- 	u64 this_tsc_generation;
- 	u64 this_tsc_freq_generation;
-+	bool user_set_tsc;
- 	bool tsc_catchup;
- 	bool tsc_always_catchup;
- 	s8 virtual_tsc_shift;
-diff --git a/arch/x86/kvm/msrs.c b/arch/x86/kvm/msrs.c
-index 26eb30f10c43..d07831b5dfb8 100644
---- a/arch/x86/kvm/msrs.c
-+++ b/arch/x86/kvm/msrs.c
-@@ -1645,7 +1645,7 @@ int kvm_set_msr_common(struct kvm_vcpu *vcpu, struct msr_data *msr_info)
- 		break;
- 	case MSR_IA32_TSC:
- 		if (msr_info->host_initiated) {
--			kvm_synchronize_tsc(vcpu, &data);
-+			kvm_synchronize_tsc(vcpu, &data, true);
- 		} else if (!vcpu->arch.guest_tsc_protected) {
- 			u64 adj = kvm_compute_l1_tsc_offset(vcpu, rdtsc(), data) -
- 				  vcpu->arch.l1_tsc_offset;
-diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-index 290a3c3bb44f..b47c36265c2f 100644
---- a/arch/x86/kvm/x86.c
-+++ b/arch/x86/kvm/x86.c
-@@ -1031,7 +1031,7 @@ static int set_tsc_khz(struct kvm_vcpu *vcpu, u32 user_tsc_khz, bool scale)
- 	/* Guest TSC same frequency as host TSC? */
- 	if (!scale) {
- 		kvm_vcpu_write_tsc_multiplier(vcpu, kvm_caps.default_tsc_scaling_ratio);
--		return 0;
-+		goto clear_catchup;
- 	}
- 
- 	/* TSC scaling supported? */
-@@ -1057,13 +1057,34 @@ static int set_tsc_khz(struct kvm_vcpu *vcpu, u32 user_tsc_khz, bool scale)
- 	}
- 
- 	kvm_vcpu_write_tsc_multiplier(vcpu, ratio);
-+
-+clear_catchup:
-+	/*
-+	 * A frequency which no longer needs catchup must also stop it: a
-+	 * previous above-host-rate setting on scaling-less hardware set
-+	 * the always-catchup flags, and nothing else ever clears them.
-+	 * Only undo that pairing — tsc_catchup alone also serves the
-+	 * unstable-host-TSC compensation in kvm_arch_vcpu_load().
-+	 */
-+	if (vcpu->arch.tsc_always_catchup) {
-+		vcpu->arch.tsc_always_catchup = 0;
-+		vcpu->arch.tsc_catchup = 0;
-+	}
- 	return 0;
- }
- 
--static int kvm_set_tsc_khz(struct kvm_vcpu *vcpu, u32 user_tsc_khz)
-+static void kvm_synchronize_tsc_at(struct kvm_vcpu *vcpu, u64 *value,
-+				   u64 host_tsc, s64 ns, bool user_initiated);
-+
-+static int kvm_set_tsc_khz(struct kvm_vcpu *vcpu, u32 user_tsc_khz, bool init)
- {
-+	bool freq_changed = (vcpu->arch.virtual_tsc_khz != user_tsc_khz);
- 	u32 thresh_lo, thresh_hi;
-+	u32 tsc_mult;
-+	s8 tsc_shift;
- 	int use_scaling = 0;
-+	u64 tsc, host_tsc;
-+	s64 ns;
- 
- 	/* tsc_khz can be zero if TSC calibration fails */
- 	if (user_tsc_khz == 0) {
-@@ -1074,9 +1095,7 @@ static int kvm_set_tsc_khz(struct kvm_vcpu *vcpu, u32 user_tsc_khz)
- 
- 	/* Compute a scale to convert nanoseconds in TSC cycles */
- 	kvm_get_time_scale(user_tsc_khz * 1000LL, NSEC_PER_SEC,
--			   &vcpu->arch.virtual_tsc_shift,
--			   &vcpu->arch.virtual_tsc_mult);
--	vcpu->arch.virtual_tsc_khz = user_tsc_khz;
-+			   &tsc_shift, &tsc_mult);
- 
- 	/*
- 	 * Compute the variation in TSC rate which is acceptable
-@@ -1091,7 +1110,67 @@ static int kvm_set_tsc_khz(struct kvm_vcpu *vcpu, u32 user_tsc_khz)
- 			 user_tsc_khz, thresh_lo, thresh_hi);
- 		use_scaling = 1;
- 	}
--	return set_tsc_khz(vcpu, user_tsc_khz, use_scaling);
-+
-+	/*
-+	 * Sample the guest TSC before changing the ratio, so continuity
-+	 * can be preserved across the change — as a {guest TSC, host
-+	 * clock} tuple, not a bare value: the synchronization below
-+	 * computes the new offset against the tuple's own reference
-+	 * point, so the guest TSC keeps counting through this function
-+	 * and any delay here (preemption included) costs nothing.
-+	 */
-+#ifdef CONFIG_X86_64
-+	if (!kvm_get_time_and_clockread(&ns, &host_tsc))
-+#endif
-+	{
-+		host_tsc = rdtsc();
-+		ns = get_kvmclock_base_ns();
-+	}
-+	tsc = kvm_read_l1_tsc(vcpu, host_tsc);
-+
-+	if (set_tsc_khz(vcpu, user_tsc_khz, use_scaling))
-+		return -1;
-+
-+	/*
-+	 * Commit the new frequency only once set_tsc_khz() can no longer
-+	 * fail: a failed ioctl must leave no trace, or a retry with the
-+	 * still-active frequency would wrongly look like a change.
-+	 */
-+	vcpu->arch.virtual_tsc_shift = tsc_shift;
-+	vcpu->arch.virtual_tsc_mult = tsc_mult;
-+	vcpu->arch.virtual_tsc_khz = user_tsc_khz;
-+
-+	/*
-+	 * At vCPU creation (@init) the vCPU is not yet counted in
-+	 * online_vcpus, so synchronizing here would corrupt the VM-wide
-+	 * matching state (and leave it corrupted if creation subsequently
-+	 * fails). The initial synchronization happens in
-+	 * kvm_arch_vcpu_postcreate() instead. An unchanged frequency is
-+	 * a no-op for synchronization: don't disturb the generation
-+	 * tracking of a configured vCPU.
-+	 */
-+	if (init || !freq_changed)
-+		return 0;
-+
-+	/*
-+	 * Changing the frequency changes the vCPU's position on the
-+	 * generation's cycle timeline, so re-synchronize. For a vCPU
-+	 * which has run, preserve the guest TSC value read above across
-+	 * the change; likewise if userspace has written a TSC on this
-+	 * vCPU — a zero write would discard it. Otherwise the vCPU holds
-+	 * only its creation-time synchronization, so synchronize as for
-+	 * a zero write. When the generation is already at the new
-+	 * frequency this places the vCPU on its timeline rather than
-+	 * opening a gratuitous new generation and orphaning the matched
-+	 * state of its siblings; the first vCPU to adopt a new frequency
-+	 * necessarily opens a new generation, starting at zero — mixed
-+	 * frequencies within a VM forfeit the master clock anyway.
-+	 */
-+	if (vcpu->arch.last_vmentry_cpu != -1 || vcpu->arch.user_set_tsc)
-+		kvm_synchronize_tsc_at(vcpu, &tsc, host_tsc, ns, false);
-+	else
-+		kvm_synchronize_tsc_at(vcpu, NULL, host_tsc, ns, false);
-+	return 0;
- }
- 
- static u64 compute_guest_tsc(struct kvm_vcpu *vcpu, s64 kernel_ns)
-@@ -1396,8 +1475,10 @@ static void __kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 offset, u64 tsc,
- 	if (vcpu->arch.guest_tsc_protected)
- 		return;
- 
--	if (user_set_tsc)
-+	if (user_set_tsc) {
- 		vcpu->kvm->arch.user_set_tsc = true;
-+		vcpu->arch.user_set_tsc = true;
-+	}
- 
- 	/*
- 	 * Track the TSC frequency, scaling ratio, and offset for the current
-@@ -1472,26 +1553,25 @@ static void __kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 offset, u64 tsc,
- 	kvm_track_tsc_matching(vcpu, !matched);
- }
- 
--void kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 *user_value)
-+/*
-+ * Synchronize the vCPU's TSC against an explicit {host_tsc, ns} reference
-+ * point: @value (when non-NULL) is the guest TSC *at* @host_tsc, not at
-+ * some unspecified "now". The offset is computed against that reference,
-+ * so a sampled value stays valid however much time passes between the
-+ * sampling and this call.
-+ */
-+static void kvm_synchronize_tsc_at(struct kvm_vcpu *vcpu, u64 *value,
-+				   u64 host_tsc, s64 ns, bool user_initiated)
- {
--	u64 data = user_value ? *user_value : 0;
-+	u64 data = value ? *value : 0;
- 	struct kvm *kvm = vcpu->kvm;
--	u64 offset, host_tsc, elapsed;
--	s64 ns;
-+	u64 offset, elapsed;
- 	unsigned long flags;
- 	bool matched = false;
- 	bool synchronizing = false;
- 
- 	raw_spin_lock_irqsave(&kvm->arch.tsc_write_lock, flags);
- 
--#ifdef CONFIG_X86_64
--	if (!kvm_get_time_and_clockread(&ns, &host_tsc))
--#endif
--	{
--		host_tsc = rdtsc();
--		ns = get_kvmclock_base_ns();
--	}
--
- 	offset = kvm_compute_l1_tsc_offset(vcpu, host_tsc, data);
- 	elapsed = ns - kvm->arch.cur_tsc_nsec;
- 
-@@ -1506,6 +1586,7 @@ void kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 *user_value)
- 			u64 tsc_exp = kvm->arch.cur_tsc_write +
- 						nsec_to_cycles(vcpu, elapsed);
- 			u64 tsc_hz = vcpu->arch.virtual_tsc_khz * 1000LL;
-+			u64 window;
- 			/*
- 			 * Here lies UAPI baggage: when a user-initiated TSC write has
- 			 * a small delta (1 second) of virtual cycle time against the
-@@ -1520,9 +1601,18 @@ void kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 *user_value)
- 			 * to this 'correction' to make it sync up with values that only
- 			 * come from the kernel's default vCPU creation. Make the 1-second
- 			 * slop hack only trigger if the user_set_tsc flag is already set.
-+			 *
-+			 * A kernel-internal write (a frequency change preserving the
-+			 * guest TSC) carries an exact value sampled with its own
-+			 * reference point, not a racy userspace one; a vCPU on the
-+			 * generation's line still matches it to within arithmetic
-+			 * rounding, but one which genuinely diverged (e.g. by a guest
-+			 * TSC_ADJUST write) must not be snapped back by up to a
-+			 * second. Use a 1ms window for those.
- 			 */
--			synchronizing = data < tsc_exp + tsc_hz &&
--					data + tsc_hz > tsc_exp;
-+			window = user_initiated ? tsc_hz : tsc_hz / 1000;
-+			synchronizing = data < tsc_exp + window &&
-+					data + window > tsc_exp;
- 		}
- 	}
- 
-@@ -1552,10 +1642,26 @@ void kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 *user_value)
- 		matched = true;
- 	}
- 
--	__kvm_synchronize_tsc(vcpu, offset, data, ns, matched, !!user_value);
-+	__kvm_synchronize_tsc(vcpu, offset, data, ns, matched, user_initiated);
- 	raw_spin_unlock_irqrestore(&kvm->arch.tsc_write_lock, flags);
- }
- 
-+void kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 *value, bool user_initiated)
-+{
-+	u64 host_tsc;
-+	s64 ns;
-+
-+#ifdef CONFIG_X86_64
-+	if (!kvm_get_time_and_clockread(&ns, &host_tsc))
-+#endif
-+	{
-+		host_tsc = rdtsc();
-+		ns = get_kvmclock_base_ns();
-+	}
-+
-+	kvm_synchronize_tsc_at(vcpu, value, host_tsc, ns, user_initiated);
-+}
-+
- #ifdef CONFIG_X86_64
- 
- static bool kvm_snapshot_has_tsc(struct system_time_snapshot *snap,
-@@ -3905,7 +4011,7 @@ long kvm_arch_vcpu_ioctl(struct file *filp,
- 		if (user_tsc_khz == 0)
- 			user_tsc_khz = tsc_khz;
- 
--		if (!kvm_set_tsc_khz(vcpu, user_tsc_khz))
-+		if (!kvm_set_tsc_khz(vcpu, user_tsc_khz, false))
- 			r = 0;
- 
- 		goto out;
-@@ -9680,7 +9786,7 @@ int kvm_arch_vcpu_create(struct kvm_vcpu *vcpu)
- 	kvm_xen_init_vcpu(vcpu);
- 	vcpu_load(vcpu);
- 	kvm_vcpu_after_set_cpuid(vcpu);
--	kvm_set_tsc_khz(vcpu, vcpu->kvm->arch.default_tsc_khz);
-+	kvm_set_tsc_khz(vcpu, vcpu->kvm->arch.default_tsc_khz, true);
- 	kvm_vcpu_reset(vcpu, false);
- 	kvm_init_mmu(vcpu);
- 	vcpu_put(vcpu);
-@@ -9724,7 +9830,7 @@ void kvm_arch_vcpu_postcreate(struct kvm_vcpu *vcpu)
- 		return;
- 	}
- 	vcpu_load(vcpu);
--	kvm_synchronize_tsc(vcpu, NULL);
-+	kvm_synchronize_tsc(vcpu, NULL, false);
- 	if (kvm_check_request(KVM_REQ_MASTERCLOCK_UPDATE, vcpu))
- 		kvm_update_masterclock(vcpu->kvm, NULL);
- 	vcpu_put(vcpu);
-diff --git a/arch/x86/kvm/x86.h b/arch/x86/kvm/x86.h
-index 436e2fb1396c..de4c86ea5a7d 100644
---- a/arch/x86/kvm/x86.h
-+++ b/arch/x86/kvm/x86.h
-@@ -330,7 +330,7 @@ uint64_t kvm_get_wall_clock_epoch(struct kvm *kvm);
- bool kvm_get_monotonic_and_clockread(s64 *kernel_ns, u64 *tsc_timestamp);
- int kvm_guest_time_update(struct kvm_vcpu *v);
- 
--void kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 *user_value);
-+void kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 *value, bool user_initiated);
- u64 kvm_scale_tsc(u64 tsc, u64 ratio);
- u64 kvm_read_l1_tsc(struct kvm_vcpu *vcpu, u64 host_tsc);
- u64 kvm_calc_nested_tsc_offset(u64 l1_offset, u64 l2_offset, u64 l2_multiplier);
--- 
-2.43.0
-
+Thanks for the review and suggestion.
+Will fix it.
+Jamin
 
