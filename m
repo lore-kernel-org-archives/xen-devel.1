@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9436D606A322
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2026 08:47:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4A5DB606A321
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2026 08:53:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=ekygNv+t
-Received: from list by lists.xenproject.org with outflank-mailman.1479675.1683583 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=X8Hq614D
+Received: from list by lists.xenproject.org with outflank-mailman.1479683.1683600 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQL1j-0006Ze-42; Mon, 09 Nov 2026 08:46:55 +0000
+	id 1xQL8M-0000Ra-3o; Mon, 09 Nov 2026 08:53:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1479675.1683583; Mon, 09 Nov 2026 08:46:55 +0000
+Received: by outflank-mailman (output) from mailman id 1479683.1683600; Mon, 09 Nov 2026 08:53:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQL1j-0006ZX-1M; Mon, 09 Nov 2026 08:46:55 +0000
-Received: by outflank-mailman (input) for mailman id 1479675;
- Mon, 09 Nov 2026 08:46:53 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xQL1h-0006ZR-Kg
- for xen-devel@lists.xenproject.org; Mon, 09 Nov 2026 08:46:53 +0000
+	id 1xQL8M-0000RT-16; Mon, 09 Nov 2026 08:53:46 +0000
+Received: by outflank-mailman (input) for mailman id 1479683;
+ Mon, 09 Nov 2026 08:53:44 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xQL8K-0000EL-Ik
+ for xen-devel@lists.xenproject.org; Mon, 09 Nov 2026 08:53:44 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xQL1g-00DpIH-7d
- for xen-devel@lists.xenproject.org; Mon, 09 Nov 2026 09:46:52 +0100
-Received: from [10.42.69.10] (helo=localhost)
+ id 1xQL8J-0035jS-RA
+ for xen-devel@lists.xenproject.org; Mon, 09 Nov 2026 09:53:43 +0100
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6af1886e-bab6-0a2a0a5309dd-0a2a450ac04e-46
- for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2026 09:46:52 +0100
+ id 6af18a11-e002-0a2a0a5209dd-0a2a4504b60c-20
+ for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2026 09:53:43 +0100
 Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6af1887b-f2d2-0a2a450a0019-d1558031b991-3
- for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2026 09:46:52 +0100
+ id 6af18a17-b57f-0a2a45040019-d1558031a5a2-3
+ for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2026 09:53:43 +0100
 Received: by mail-wm1-f49.google.com with SMTP id
- 5b1f17b1804b1-4a208d93758so5815205e9.3
- for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2026 00:46:52 -0800 (PST)
+ 5b1f17b1804b1-4a9a8d6cea8so6561865e9.1
+ for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2026 00:53:43 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4b90ee247e9sm130090425e9.6.2026.11.09.00.46.50
+ ffacd0b85a97d-49597090444sm9090594f8f.31.2026.11.09.00.53.41
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 09 Nov 2026 00:46:51 -0800 (PST)
+ Mon, 09 Nov 2026 00:53:42 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,58 +51,61 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1794214011; x=1794818811; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1794214423; x=1794819223; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=jIjlieLsOJl9780MYuScriiwvD39oNb9YFZMzcYzeWs=;
-        b=ekygNv+t+fSBZkN8JSCJtuKP/KjwokFMuECYrEwM84Yk2PWE6+9UYkKdrjTxWGM0MO
-         306L6/+aoczs68JbQIjZS40ECAAhn9ghCbbq7nwKGJfNCjjKxQVnTrp7hT/IybVcr8oO
-         Gih0MS8xqAnrF0Oh9aOqC+cZdPxAhCoCcp6BLTZDX5VHa3Wvr7PfjPP20zivnKpFzEsz
-         2GA6/yacQI91tNO/huJtrHU5pXX0tMTq1/Jh7R1FLfSUvzZSCMJjiFzPy2Z5vJzqWyeC
-         SYdP3MClrbfgzmae+e7ZKtDKUBwbi9r9GN3oSbia10ITeaaWpiaF/FdsDXSmGNV2tW+i
-         x3Kg==
+        bh=Ef96mEyve2ssqnVIwG11spX1QDYJ+ZZtXX0BmtsqsHQ=;
+        b=X8Hq614DDURicjJWghMaCIvDeVs+aDD428bCsRdhzEnfTtp/X8xiov8aW81U1UVSo+
+         hdm0vvhUbq97YgPXXs1K7VoANafLYSbIyEy2aXJvWN/4/M3O/7Yi4JxQqOdmzHF7stOO
+         Lpsy7CWijHvEsZObHcYTo59iQxu6CBnBE5uGe5UNqRvkBg37eupuhWM8VkQRSihndUY+
+         7OUKUYH+1pIH6j2eaiCNhZ59XgdM6YCGyMPqsRUA6d5t5GTT/MzVWmjXU4suCVqVE0Ih
+         tbXEPOolHGt86KPvEGE7yULr9TVI43z8c3sK5ddMg1FeVT71Dqwg51TLVQCK8muLqGXS
+         wG2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794214011; x=1794818811;
+        d=1e100.net; s=20260707; t=1794214423; x=1794819223;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=jIjlieLsOJl9780MYuScriiwvD39oNb9YFZMzcYzeWs=;
-        b=f8N0yntkfGt3UTrpaar8sJBBqmhhDp6chJYGMIaqFdrEaT8B/PsJFZ+I3KuH1Ulqj7
-         iwHRy6zDh0uuJlCZtXFaXFgmlQL5tjW23PnIdP5p66aJAVSMCoS2vFAxX7yeVp+5+QPn
-         aIcF9AgvssUgmbZqylwEETSuR7H5mawQiooOgY8YXw5F13kYrrQRnegxoZ79i/2RiPbP
-         /QHzanqcsRQQ8KMCVS1i+XwP/YIWwId0f2d/PVsAKdF550vTv+TUk1lcBVMkYXZMkEqr
-         Qiyi3jmt4nHW8262tzpm0pih5rKFESO/cNScWLxc/9nsVGX2Jk4YrpSQzQUcq2rqGh/2
-         ShXQ==
-X-Forwarded-Encrypted: i=1; AL+hErHUe+yheL1PTtxI2qT87ahyfE5rAXMHoE837QBRdszCZbB9GO67VYbQNOalsKwqZs3hHmPvfBPoOAc=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z9QDPNRhBRB6iPfL4Ru+ybZcEwdoetphnAnzRFrhRIJJfCSRMOx
-	Ol0zOLIAuL4aqBzu8Zb/iJamHNte7QgR2Jk5U4BI+jEGzQ/mot12GMd5qLaJkLY8RpVd6+Ygduq
-	IfQyxRQ==
-X-Gm-Gg: AYBFou3dcKGDyZStcwl7KIqnWFW/lXszUWsOlg56HSQ5h7GXrABmV9KRTQt/6YEyLx0
-	niJqSo/up9s+Z5ZSgsDG6AII8x19yl63/+9wHrvhCsqz0ZQpiummk7sLq7Gj0cfgBFHNq62/zw/
-	pGZrZxeri7FvTW+OCsw7en4SPTzjepmdaCS9C4rbd3K2ejngSqFl0BM4eWBYPdBQ97wl5H7OEhe
-	iPgxMdSweEZ1i3nlf8qVmIQfBJeFuYmwY78WasbKQXxAeShGAyEfHWFtiU5gACQeUOABxF1ihnr
-	1jaL6HWfZX9KKmngdbobAEVU3oNyo09N/LvcwCaCvWVk1JkpoctXLhF3hkIBPz0EZv9zDvshcOb
-	V6igkyoJrwpI62J44ygiB8JyMRz006zeBku2JYEWK4J9vvWttE6yK7yTRnFIm/U6FsjzBY8lix9
-	+oMj9zTkzph3dxeV/o6++wkSrDIfDHHOfku4yHx2SgtMgLgpMuMVuJaUF99IhXL2qbBqHfCqRKc
-	xehxBllrd0zQEfL5NJDpPp130dA6jNHIILQ156WzkPPQOGzhWNy2F9ilxRp9Y6Aqcn0VPwJS0Zi
-	KZtKZzcdZaV4Pdzp+vBCFmbcEdSYDfOrqUek2eBb9ftySKioZMsHZeLWNZ5BjMWMdsHDveXTgct
-	2OFKrJcP1zOmkxf4=
-X-Received: by 2002:a05:600c:c166:b0:4a2:1a:a116 with SMTP id 5b1f17b1804b1-4b943f76fd0mr65276925e9.0.1794214011536;
-        Mon, 09 Nov 2026 00:46:51 -0800 (PST)
-Message-ID: <827e9a54-cfba-4d18-b6de-fbbb7ccd7d5c@suse.com>
-Date: Mon, 9 Nov 2026 09:46:51 +0100
+        bh=Ef96mEyve2ssqnVIwG11spX1QDYJ+ZZtXX0BmtsqsHQ=;
+        b=ELIppmMfXAt29Fe+884QN2PeifD7AA4GaN+TNVzU2UmXpUPin0Jc8CDjL9znbw1AS2
+         /qSgio0DIEJfu6rzE09NMsPqCSp4X6BNv/B8xU8Qy+1RmgvKA0Zp/gL2hX23u4nY5DrL
+         opKfa4o0nj3PQCIMA2Xaz+BGv8cg+OB8bljKoLZmth/IPEVvmL2jdL+7SgoLF7VgW+VW
+         Xdg9SwuZUYImQRnCiy9Yjfv/oZ0gBugiZa2ladxcOM+/Qn24E308WMPt7FLV0HZ3QWj7
+         feedpJPhr647Ul9Ra2g43rpSChlwokXunD9abAzwpvQPBAIP4ESquiT87T906Bqx4ZSl
+         BoSg==
+X-Forwarded-Encrypted: i=1; AL+hErFznFwHlqJgyLWxlxg2EHqCRhxfR4XnQGgIGnL0LcO4ZTNbHXzMg0L08DIyc+Ca8DAgnBis3c+djHw=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z8biphZlPR31jJiKUCasUH4XhOHA8jl1liMKpPcsK6B+dzRfbx4
+	CALw/3u41qGaz4ol4pDr3sxZ/oMiGv0lDuRG+KHmALBJWHRp2O69KCFTutkWn0JDeg==
+X-Gm-Gg: AYBFou2G19XcCowfzK6S6pZ2LwAhzPIxNEU+ukfYhoRihzTcQBq2WwExmCxN8/2qLpb
+	sln6it+bJI1ZLVLP7bvNQIWWx94Hi6+ME313MLNw63aOHWqf9jNTYHsPh6A5B5sH4qyA3BhIKdJ
+	qN5+b0v4O8qehj+ziKUPQ+uQuUVGofmE4bzad9axSVFqRVeIdGKGAcB9rJnCS8QnKd9UYjMVQAS
+	ThcwuvF5FHnLsGLn1TE7+mNz9pNeHCa/Jpjyy80/yUG5y6wCJsrS8RiNpVCVdupqwapc0TLHstA
+	iuXnOHrVpXtu3Oh3ysfFaE98eaUQNecV99U0qe4gLLhEms9VvywDtktKgyn7TRPyxHF2oWgJZc7
+	8f3nzO5U1XHID240EG0OQTLEEATJUeP//fldsIIrivC5YUe9YMuNUOyUMf39ExSWbH2iaAwInq4
+	0iVJ0HXSGVe/XyQZRVDbb9HCja6RIHsmt5Btmx123wH8eEsoYxOkFluzdIXdPx9tVD/AgwbtMKc
+	rbrqU13UznmTLyzZXAAH8iixAjVjXK6pj/0l6uwG9tHhvv6z8gqlPjzOpIO1Ec+1ss/QkBzQF0t
+	h5m3bc50YmWxsJpvKcN9cSo8yJZMWjrV76ckMXLCxMnQ+ctFB3LMlHlV+pJDPFCdmTxhguu6Q1K
+	5JND21CNApPvOhrQ=
+X-Received: by 2002:a05:600c:4747:b0:4a1:c6f5:2450 with SMTP id 5b1f17b1804b1-4b963c7e7e1mr68417235e9.17.1794214422513;
+        Mon, 09 Nov 2026 00:53:42 -0800 (PST)
+Message-ID: <17b5bf66-8b37-427f-a2ab-06330c3f7265@suse.com>
+Date: Mon, 9 Nov 2026 09:53:42 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86/bitops: Improve code generation for __scanbit()
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>,
- Xen-devel <xen-devel@lists.xenproject.org>
-References: <20261106171204.2783260-1-andrew.cooper3@citrix.com>
+Subject: Re: [PATCH] xen/gnttab: _cache_flush refuse an owner without a grant
+ table
+To: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Stefano Stabellini <stefano.stabellini@amd.com>
+Cc: Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ Roger Pau Monne <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <20261107010623.192975-1-stefano.stabellini@amd.com>
+ <c28d472a-9642-4f12-955e-893916ba98f7@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -128,12 +131,12 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20261106171204.2783260-1-andrew.cooper3@citrix.com>
+In-Reply-To: <c28d472a-9642-4f12-955e-893916ba98f7@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1794214012-4BCD3CFC-40BF5F0F/10/78276251493
+X-purgate-ID: tlsNG-ebf023/1794214423-53CC7B50-73BD22F0/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 1345
+X-purgate-size: 2213
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -142,40 +145,61 @@ X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 06.11.2026 18:12, Andrew Cooper wrote:
-> There's no need for an alternative.  Use the same technique as arch_ffs() by
-> pre-loading the destination register using the caller chosen "zero case"
-> instead of -1.
+On 07.11.2026 02:37, Andrew Cooper wrote:
+> On 07/11/2026 1:06 am, Stefano Stabellini wrote:
+>> With CONFIG_STATIC_SHM, a shared memory region without a "role" is owned
+>> by dom_io. A cache flush on such a page then reaches grant_read_lock()
+>> with dom_io's NULL grant table. Reinstate the check, and give back the
+>> page reference taken by page_get_owner_and_reference().
+>>
+>> Fixes: bec8e3c1fb91 ("xen/gnttab: Drop owner->grant_table check in _cache_flush()")
+>> Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
+>> ---
+>>  xen/common/grant_table.c | 4 +++-
+>>  1 file changed, 3 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/xen/common/grant_table.c b/xen/common/grant_table.c
+>> index 2285c4aee8..999b10abcf 100644
+>> --- a/xen/common/grant_table.c
+>> +++ b/xen/common/grant_table.c
+>> @@ -3633,9 +3633,11 @@ static int _cache_flush(gnttab_cache_flush_t *cflush, grant_ref_t *cur_ref)
+>>  
+>>      page = mfn_to_page(mfn);
+>>      owner = page_get_owner_and_reference(page);
+>> -    if ( !owner )
+>> +    if ( !owner || !owner->grant_table )
+>>      {
+>>          rcu_unlock_domain(d);
+>> +        if ( owner )
+>> +            put_page(page);
+>>          return -EPERM;
+>>      }
+>>  
 > 
-> No functional change.
+> Seriously?
 > 
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> ---
-> CC: Jan Beulich <jbeulich@suse.com>
-> CC: Roger Pau Monné <roger@xenproject.org>
-> CC: Teddy Astie <teddy.astie@vates.tech>
+> We debated this at length in the security team, even the fact that
+> XSA-520 only applied to Xen 4.21 and older.
 > 
-> Slightly RFC.  I don't particualrly like forward-declaring ffsl(), but I don't
-> see another option while maintaining a non-tangled common/arch header split.
+> Now you're saying that claim in both the XSA-520 advisory and patch are
+> wrong, and therefore the owner path was not in fact dead code and a
+> MISRA violation.  This is the only reason why the patch ended up in this
+> form...
+> 
+> Nothing in CI noticed, not even the STATIC_SHM tests.
+> 
+> 
+> What I would like to do is a straight revert of bec8e3c1fb91, stating
+> that the claim is false, then apply the XSA-520 hunk with a different
+> commit message.   That way at least the logic ends up the same on all
+> branches of Xen (in this patch, you're reversed with rcu_unlock_domain()
+> vs the XSA-520 fix).
+> 
+> Thoughts?
 
-Forward-declaring isn't a problem by itself, just that imo that wants putting
-in xen/bitops.h, not ...
-
-> --- a/xen/arch/x86/include/asm/bitops.h
-> +++ b/xen/arch/x86/include/asm/bitops.h
-> @@ -320,18 +320,35 @@ extern unsigned int __find_first_zero_bit(
->  extern unsigned int __find_next_zero_bit(
->      const unsigned long *addr, unsigned int size, unsigned int offset);
->  
-> +static attr_const unsigned int ffsl(unsigned long x);
-
-... here. asm/bitops.h already isn't included at the very top of the file, so
-putting the decl there looks clean enough to me.
-
-(Another alternative would be to see about doing away with __scanbit().)
-
-With the decl moved:
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
++1, the more that we got a report for dom_xen as well. Yes, iirc it was
+me to put up the false claim, yet that was clearly under the assumption
+that Arm folks would double-check.
 
 Jan
 
