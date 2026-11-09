@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D4AD260A383F
-	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2026 01:21:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D562960A5BD1
+	for <xen-devel@archiver.kernel.org>; Mon,  9 Nov 2026 01:21:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=casper.20170209 header.b=UMiTYyaJ
-Received: from list by lists.xenproject.org with outflank-mailman.1479222.1683246 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=desiato.20200630 header.b=hiBv5jBk
+Received: from list by lists.xenproject.org with outflank-mailman.1479220.1683233 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQE4Y-0007U3-9m; Mon, 09 Nov 2026 01:21:22 +0000
+	id 1xQE4X-0007LH-I3; Mon, 09 Nov 2026 01:21:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1479222.1683246; Mon, 09 Nov 2026 01:21:22 +0000
+Received: by outflank-mailman (output) from mailman id 1479220.1683233; Mon, 09 Nov 2026 01:21:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQE4X-0007SC-Vr; Mon, 09 Nov 2026 01:21:21 +0000
-Received: by outflank-mailman (input) for mailman id 1479222;
- Mon, 09 Nov 2026 01:21:20 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xQE4X-0007Ig-CZ; Mon, 09 Nov 2026 01:21:21 +0000
+Received: by outflank-mailman (input) for mailman id 1479220;
+ Mon, 09 Nov 2026 01:21:19 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <BATV+a92e0821319b6b3898f8+8478+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1xQE4W-0006yC-2p
- for xen-devel@lists.xenproject.org; Mon, 09 Nov 2026 01:21:20 +0000
+ <BATV+eaa65bbd42d4fabe269c+8478+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 1xQE4V-0006y7-6N
+ for xen-devel@lists.xenproject.org; Mon, 09 Nov 2026 01:21:19 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xQE4V-0014kv-G0; Mon, 09 Nov 2026 02:21:19 +0100
-Received: from [10.42.69.7] (helo=localhost)
+ id 1xQE4U-0096DX-JT; Mon, 09 Nov 2026 02:21:18 +0100
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <BATV+a92e0821319b6b3898f8+8478+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6af11fc1-8faa-0a2a0a5109dd-0a2a45079da4-28
- for <multiple-recipients>; Mon, 09 Nov 2026 02:21:16 +0100
-Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ <BATV+eaa65bbd42d4fabe269c+8478+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 6af11fa8-bab6-0a2a0a5309dd-0a2a450cde16-40
+ for <multiple-recipients>; Mon, 09 Nov 2026 02:21:18 +0100
+Received: from [90.155.92.199] (helo=desiato.infradead.org)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <BATV+a92e0821319b6b3898f8+8478+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6af1200b-b4ea-0a2a45070019-5a9b322292ce-3
- for <multiple-recipients>; Mon, 09 Nov 2026 02:21:15 +0100
+ <BATV+eaa65bbd42d4fabe269c+8478+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 6af1200d-f479-0a2a450c0019-5a9b5cc7c58e-3
+ for <multiple-recipients>; Mon, 09 Nov 2026 02:21:17 +0100
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.100.1 #2 (Red Hat Linux))
- id 1xQE4P-00000007PwJ-2HJo; Mon, 09 Nov 2026 01:21:13 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.100.1 #2 (Red Hat Linux))
+ id 1xQE4Q-00000006AYD-28SP; Mon, 09 Nov 2026 01:21:14 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.5 #2 (Red
- Hat Linux)) id 1xQE4P-0000000EKVS-1Vui;
- Mon, 09 Nov 2026 01:21:13 +0000
+ Hat Linux)) id 1xQE4O-0000000EKUp-42LY;
+ Mon, 09 Nov 2026 01:21:12 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -48,17 +48,17 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=desiato.20200630 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
-	Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:
-	To:From:Reply-To:Content-ID:Content-Description;
-	bh=jhbHTsXlkafiijDqKYXVFTZ8kLMGsWqGWQ4/HbRTNCs=; b=UMiTYyaJUWRPpigzSX/2R4AfNf
-	Vms5l1HWVobQvkUIuIvqktD0UgljhqxSbtoiRrsneCppCdTNcKxy8ly0tJqBPhNnip96ELPYdAV46
-	pTVBeOf2FCjl/Af314myhUZtQJTMYO4fTEWjC7W4CRrHfJL9OCXfV0gY+9eWIvOmjvEfNd31l/eJf
-	R4VjoZJ9AcTbMWMfKdwocZ6BBEQZ90As+82F9cuKSVmnjwBy9MGTCNesvzdaYTKGxrPgjh1eH5vCX
-	Cj2T5dSA1IPFIUfOpUZYN5G+Li/Wd+b4emrOkVGbedGPy+R+eyALKGKOIA/+GXVUAjSqPdDoChUhj
-	VOAyAk6g==;
+	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
+	Reply-To:Content-Type:Content-ID:Content-Description;
+	bh=mKH9BxiVhD1hkWOxu0QRNvIl232YhI8uqiNY5R0UwSo=; b=hiBv5jBkYSiZPhUbCSbYAV4UiX
+	HUw7iYbz4jTQZqq2mmZJB/qs6XJq24lQ4vJZ8KIi1zlm/YPI1sYsH7f1IcHL77g7ARIFuYulKhV9c
+	uAXC395GnZXdnZKz5fgjlDWXM0eNlupAsEX+YCa1lRAVfhJDIDbyD0T3wcsJ7in1tABH8ejB7Iczw
+	Jhab0aU50aIjniJzFhCwA9aAAxJ6oDAUt3kXCbxlRThaEPukHYw38qmyyd66ibIgqR08beDzTNuuf
+	nssZomSuZ/0ThtPMevXApE/vrGgzDbYIzs2h0qKo2x3mus4SJ5ODfap1zJuDR2PVmlaHnv+3hj5Di
+	A7JT6Ibw==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: kvm@vger.kernel.org
 Cc: linux-kernel@vger.kernel.org,
@@ -87,225 +87,144 @@ Cc: linux-kernel@vger.kernel.org,
 	Dongli Zhang <dongli.zhang@oracle.com>,
 	joe.jin@oracle.com,
 	David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v12 21/24] KVM: selftests: Test that the first user TSC write is honoured exactly
-Date: Sun,  8 Nov 2026 17:21:07 -0800
-Message-ID: <20261109012112.3415328-22-dwmw2@infradead.org>
+Subject: [PATCH v12 12/24] UAPI: x86: Move pvclock-abi to UAPI for x86 platforms
+Date: Sun,  8 Nov 2026 17:20:58 -0800
+Message-ID: <20261109012112.3415328-13-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261109012112.3415328-1-dwmw2@infradead.org>
 References: <20261109012112.3415328-1-dwmw2@infradead.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-ef75cf/1794187276-A58C1AE4-8C1D779B/0/0
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
+X-purgate-ID: tlsNG-d25034/1794187278-77AD4A5B-A7AC93DF/0/0
 X-purgate-type: clean
-X-purgate-size: 7609
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-purgate-size: 3998
+X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: David Woodhouse <dwmw@amazon.co.uk>
+From: Jack Allister <jalliste@amazon.com>
 
-The 1-second "slop" heuristic in kvm_synchronize_tsc() is only
-supposed to apply between successive userspace TSC writes, i.e. once
-kvm->arch.user_set_tsc has been set by a previous write. The kernel's
-own internal TSC synchronization on vCPU creation (and frequency
-changes) must not arm it, otherwise the first genuine userspace write
-falling within 1 second of virtual cycle time of the kernel's default
-generation is "corrected" back to that generation instead of being
-honoured — breaking the restore of a guest with less than one second
-of runtime.
+A subsequent commit will provide a new KVM interface for performing a
+fixup/correction of the KVM clock against the reference TSC. The
+KVM_[GS]ET_CLOCK_GUEST API requires a pvclock_vcpu_time_info, as such
+the caller must know about this definition.
 
-Add a test which creates a vCPU and immediately performs a first
-host-initiated write of a TSC value corresponding to ~500ms of guest
-runtime, then verifies the value reads back exactly (modulo elapsed
-time) rather than being snapped back to the kernel's default
-generation near zero.
+Move the definition to the UAPI folder so that it is exported to
+usermode, change the type definitions to use the standard for UAPI
+exports, and add the Linux-syscall-note exception to the SPDX licence
+identifier as is conventional for exported headers.
 
+Define __KERNEL__ in scripts/xen-hypercalls.sh: the UAPI header now
+pulls in linux/types.h, and the script's raw $CPP invocation with
+$LINUXINCLUDE does not define it, which would trigger the "attempt to
+use kernel headers from user space" warning from the UAPI type
+headers.
+
+Signed-off-by: Jack Allister <jalliste@amazon.com>
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+Reviewed-by: Paul Durrant <paul@xen.org>
+Tested-by: Dongli Zhang <dongli.zhang@oracle.com>
 ---
- tools/testing/selftests/kvm/Makefile.kvm      |   1 +
- .../selftests/kvm/x86/tsc_user_set_test.c     | 153 ++++++++++++++++++
- 2 files changed, 154 insertions(+)
- create mode 100644 tools/testing/selftests/kvm/x86/tsc_user_set_test.c
+ MAINTAINERS                                   |  4 +--
+ arch/x86/include/{ => uapi}/asm/pvclock-abi.h | 27 ++++++++++---------
+ scripts/xen-hypercalls.sh                     |  2 +-
+ 3 files changed, 18 insertions(+), 15 deletions(-)
+ rename arch/x86/include/{ => uapi}/asm/pvclock-abi.h (82%)
 
-diff --git a/tools/testing/selftests/kvm/Makefile.kvm b/tools/testing/selftests/kvm/Makefile.kvm
-index 1edc78845fd3..fd063806a7fb 100644
---- a/tools/testing/selftests/kvm/Makefile.kvm
-+++ b/tools/testing/selftests/kvm/Makefile.kvm
-@@ -151,6 +151,7 @@ TEST_GEN_PROGS_x86 += x86/xcr0_cpuid_test
- TEST_GEN_PROGS_x86 += x86/xss_msr_test
- TEST_GEN_PROGS_x86 += x86/debug_regs
- TEST_GEN_PROGS_x86 += x86/tsc_msrs_test
-+TEST_GEN_PROGS_x86 += x86/tsc_user_set_test
- TEST_GEN_PROGS_x86 += x86/vmx_pmu_caps_test
- TEST_GEN_PROGS_x86 += x86/xen_cpuid_timing_test
- TEST_GEN_PROGS_x86 += x86/xen_migration_test
-diff --git a/tools/testing/selftests/kvm/x86/tsc_user_set_test.c b/tools/testing/selftests/kvm/x86/tsc_user_set_test.c
-new file mode 100644
-index 000000000000..a74eb78a975b
---- /dev/null
-+++ b/tools/testing/selftests/kvm/x86/tsc_user_set_test.c
-@@ -0,0 +1,153 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Test that the first userspace write to MSR_IA32_TSC takes effect
-+ * precisely, and is not subjected to the 1-second "slop" heuristic
-+ * which is only supposed to apply between successive *userspace*
-+ * writes (kvm->arch.user_set_tsc).
-+ *
-+ * The kernel synchronizes the TSC internally when a vCPU is created
-+ * (and when its frequency is set). If any of those kernel-internal
-+ * paths incorrectly sets user_set_tsc, then the first genuine write
-+ * from userspace which happens to fall within 1 second of virtual
-+ * cycle time of the kernel's default generation is "corrected" to
-+ * match that generation instead of being honoured exactly. That
-+ * breaks the restore of a guest which has genuinely been running
-+ * for less than one second.
-+ *
-+ * Simulate exactly that: create a vCPU (kernel establishes a default
-+ * TSC generation starting near zero), then perform the first
-+ * host-initiated write with a value corresponding to ~500ms of guest
-+ * runtime. If the slop heuristic fires, the written value is snapped
-+ * back to the kernel's generation (near zero) and the TSC reads back
-+ * hundreds of milliseconds low. Repeat with an explicit
-+ * KVM_SET_TSC_KHZ on the never-run vCPU before the write: that is
-+ * another kernel-internal synchronization which must not arm the
-+ * heuristic (nor open a generation that swallows the first write).
-+ */
-+#include "kvm_util.h"
-+#include "processor.h"
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 9fadc98d3c49..773f7c800f6a 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -14663,8 +14663,8 @@ S:	Supported
+ T:	git git://git.kernel.org/pub/scm/virt/kvm/kvm.git
+ F:	arch/um/include/asm/kvm_para.h
+ F:	arch/x86/include/asm/kvm_para.h
+-F:	arch/x86/include/asm/pvclock-abi.h
+ F:	arch/x86/include/uapi/asm/kvm_para.h
++F:	arch/x86/include/uapi/asm/pvclock-abi.h
+ F:	arch/x86/kernel/kvm.c
+ F:	arch/x86/kernel/kvmclock.c
+ F:	include/asm-generic/kvm_para.h
+@@ -29780,8 +29780,8 @@ R:	Boris Ostrovsky <boris.ostrovsky@oracle.com>
+ L:	xen-devel@lists.xenproject.org (moderated for non-subscribers)
+ S:	Supported
+ F:	arch/x86/configs/xen.config
+-F:	arch/x86/include/asm/pvclock-abi.h
+ F:	arch/x86/include/asm/xen/
++F:	arch/x86/include/uapi/asm/pvclock-abi.h
+ F:	arch/x86/platform/pvh/
+ F:	arch/x86/xen/
+ 
+diff --git a/arch/x86/include/asm/pvclock-abi.h b/arch/x86/include/uapi/asm/pvclock-abi.h
+similarity index 82%
+rename from arch/x86/include/asm/pvclock-abi.h
+rename to arch/x86/include/uapi/asm/pvclock-abi.h
+index b9fece5fc96d..6d70cf640362 100644
+--- a/arch/x86/include/asm/pvclock-abi.h
++++ b/arch/x86/include/uapi/asm/pvclock-abi.h
+@@ -1,6 +1,9 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
++/* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
+ #ifndef _ASM_X86_PVCLOCK_ABI_H
+ #define _ASM_X86_PVCLOCK_ABI_H
 +
-+/*
-+ * Returns false when the attempt was inconclusive: a snapped-back value
-+ * tracks time since vCPU creation, so if creation-to-write time gets
-+ * anywhere near the written 500ms, a buggy kernel's value could land
-+ * inside the assertions' tolerance and pass. The caller retries.
-+ */
-+static bool test_first_write(bool set_freq)
-+{
-+	struct kvm_vcpu *vcpu;
-+	struct kvm_vm *vm;
-+	u64 freq_khz, t_write, t_read, slack_cycles, mono_ns, create_ns, read_ns;
-+	struct timespec ts;
-+	int r;
++#include <linux/types.h>
 +
-+	clock_gettime(CLOCK_MONOTONIC_RAW, &ts);
-+	create_ns = ts.tv_sec * 1000000000ULL + ts.tv_nsec;
-+
-+	vm = vm_create_with_one_vcpu(&vcpu, NULL);
-+
-+	if (set_freq) {
-+		/*
-+		 * Halve the frequency so this is a real change, exercising
-+		 * the frequency resynchronization path rather than the
-+		 * unchanged-frequency no-op.
-+		 */
-+		r = __vcpu_ioctl(vcpu, KVM_GET_TSC_KHZ, NULL);
-+		TEST_ASSERT(r > 0, "KVM_GET_TSC_KHZ failed");
-+		vcpu_ioctl(vcpu, KVM_SET_TSC_KHZ,
-+			   (void *)(unsigned long)(r / 2));
-+	}
-+
-+	r = __vcpu_ioctl(vcpu, KVM_GET_TSC_KHZ, NULL);
-+	TEST_ASSERT(r > 0, "KVM_GET_TSC_KHZ failed");
-+	freq_khz = r;
-+
-+	/*
-+	 * The first user write: a guest TSC corresponding to 500ms of
-+	 * runtime. This is within 1s (of virtual cycle time) of the
-+	 * kernel's default generation, so it is exactly the case that
-+	 * the slop heuristic would destroy if it were (incorrectly)
-+	 * armed by the kernel's own internal TSC synchronization.
-+	 */
-+	t_write = freq_khz * 500ULL;		/* khz * ms = cycles */
-+
-+	/*
-+	 * Measure only the write..read window (a window measured from
-+	 * before creation would also bound a snapped-back value), and
-+	 * insist the write lands well before 500ms of creation time so
-+	 * a snapped-back value cannot sit inside the tolerance.
-+	 */
-+	clock_gettime(CLOCK_MONOTONIC_RAW, &ts);
-+	mono_ns = ts.tv_sec * 1000000000ULL + ts.tv_nsec;
-+
-+	if (mono_ns - create_ns > 250000000ULL) {
-+		pr_info("  creation took %lu ms, retrying for a conclusive run\n",
-+			(mono_ns - create_ns) / 1000000);
-+		kvm_vm_free(vm);
-+		return false;
-+	}
-+
-+	vcpu_set_msr(vcpu, MSR_IA32_TSC, t_write);
-+
-+	t_read = vcpu_get_msr(vcpu, MSR_IA32_TSC);
-+
-+	clock_gettime(CLOCK_MONOTONIC_RAW, &ts);
-+	read_ns = ts.tv_sec * 1000000000ULL + ts.tv_nsec;
-+
-+	/*
-+	 * Bound the whole creation..read interval too: a snapped-back
-+	 * value tracks it, so letting it approach the written 500ms
-+	 * (via a stall between the two MSR ioctls, which the slack
-+	 * below would otherwise absorb) would let a buggy kernel pass.
-+	 */
-+	if (read_ns - create_ns > 400000000ULL) {
-+		pr_info("  creation..read took %lu ms, retrying for a conclusive run\n",
-+			(read_ns - create_ns) / 1000000);
-+		kvm_vm_free(vm);
-+		return false;
-+	}
-+
-+	mono_ns = read_ns - mono_ns;
-+
-+	/*
-+	 * The TSC advances between the write and the read; bound the
-+	 * difference by the measured elapsed time around the two ioctls
-+	 * plus 10ms of slop, so a descheduled test cannot flake. If the
-+	 * write was snapped to the kernel's default generation, the
-+	 * value read back is ~500ms low (i.e. below t_write), which is
-+	 * unambiguous.
-+	 */
-+	slack_cycles = freq_khz * (mono_ns / 1000000ULL + 10);
-+
-+	TEST_ASSERT(t_read >= t_write,
-+		    "TSC went backwards from explicit write: wrote %lu, read %lu"
-+		    " (first userspace write was subjected to 1-second slop?)",
-+		    t_write, t_read);
-+	TEST_ASSERT(t_read - t_write < slack_cycles,
-+		    "TSC read back too far from written value: wrote %lu, read %lu",
-+		    t_write, t_read);
-+
-+	kvm_vm_free(vm);
-+	return true;
-+}
-+
-+static void run_first_write(bool set_freq)
-+{
-+	int i;
-+
-+	for (i = 0; i < 5; i++)
-+		if (test_first_write(set_freq))
-+			return;
-+
-+	TEST_FAIL("vCPU creation repeatedly too slow for a conclusive run");
-+}
-+
-+int main(void)
-+{
-+	run_first_write(false);
-+
-+	if (kvm_has_cap(KVM_CAP_TSC_CONTROL))
-+		run_first_write(true);
-+
-+	return 0;
-+}
+ #ifndef __ASSEMBLER__
+ 
+ /*
+@@ -24,20 +27,20 @@
+  */
+ 
+ struct pvclock_vcpu_time_info {
+-	u32   version;
+-	u32   pad0;
+-	u64   tsc_timestamp;
+-	u64   system_time;
+-	u32   tsc_to_system_mul;
+-	s8    tsc_shift;
+-	u8    flags;
+-	u8    pad[2];
++	__u32   version;
++	__u32   pad0;
++	__u64   tsc_timestamp;
++	__u64   system_time;
++	__u32   tsc_to_system_mul;
++	__s8    tsc_shift;
++	__u8    flags;
++	__u8    pad[2];
+ } __attribute__((__packed__)); /* 32 bytes */
+ 
+ struct pvclock_wall_clock {
+-	u32   version;
+-	u32   sec;
+-	u32   nsec;
++	__u32   version;
++	__u32   sec;
++	__u32   nsec;
+ } __attribute__((__packed__));
+ 
+ #define PVCLOCK_TSC_STABLE_BIT	(1 << 0)
+diff --git a/scripts/xen-hypercalls.sh b/scripts/xen-hypercalls.sh
+index f18b00843df3..51a722198997 100755
+--- a/scripts/xen-hypercalls.sh
++++ b/scripts/xen-hypercalls.sh
+@@ -5,7 +5,7 @@ shift
+ in="$@"
+ 
+ for i in $in; do
+-	eval $CPP $LINUXINCLUDE -dD -imacros "$i" -x c /dev/null
++	eval $CPP -D__KERNEL__ $LINUXINCLUDE -dD -imacros "$i" -x c /dev/null
+ done | \
+ awk '$1 == "#define" && $2 ~ /__HYPERVISOR_[a-z][a-z_0-9]*/ { v[$3] = $2 }
+ 	END {   print "/* auto-generated by scripts/xen-hypercall.sh */"
 -- 
 2.43.0
 
