@@ -2,46 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 29EE560A6F47
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2026 10:22:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0525F606A325
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2026 10:23:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=WrP2Pg4Q
-Received: from list by lists.xenproject.org with outflank-mailman.1481469.1685367 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=OvX5mWo+
+Received: from list by lists.xenproject.org with outflank-mailman.1481489.1685375 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQizX-0008U4-4u; Tue, 10 Nov 2026 10:22:15 +0000
+	id 1xQj0D-0000mL-Bs; Tue, 10 Nov 2026 10:22:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1481469.1685367; Tue, 10 Nov 2026 10:22:15 +0000
+Received: by outflank-mailman (output) from mailman id 1481489.1685375; Tue, 10 Nov 2026 10:22:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQizX-0008Tx-0k; Tue, 10 Nov 2026 10:22:15 +0000
-Received: by outflank-mailman (input) for mailman id 1481469;
- Tue, 10 Nov 2026 10:14:39 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <amir73il@gmail.com>) id 1xQisB-0004ot-HH
- for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 10:14:39 +0000
+	id 1xQj0D-0000mE-99; Tue, 10 Nov 2026 10:22:57 +0000
+Received: by outflank-mailman (input) for mailman id 1481489;
+ Tue, 10 Nov 2026 10:22:56 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xQj0C-0000kT-0j
+ for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 10:22:56 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xQisA-00E9lo-GK
- for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 11:14:38 +0100
-Received: from [10.42.69.2] (helo=localhost)
+ id 1xQj0A-00AcHe-6X
+ for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 11:22:54 +0100
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <amir73il@gmail.com>)
- id 6af2ee8a-e002-0a2a0a5209dd-0a2a4502bfec-24
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 11:14:38 +0100
-Received: from [209.85.208.41] (helo=mail-ed1-f41.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <amir73il@gmail.com>)
- id 6af2ee8e-6ca4-0a2a45020019-d155d029e9b8-3
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 11:14:38 +0100
-Received: by mail-ed1-f41.google.com with SMTP id
- 4fb4d7f45d1cf-6b56bbf8330so2383291a12.3
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 02:14:38 -0800 (PST)
-Received: from localhost (178-84-201-199.dynamic.upc.nl. [178.84.201.199])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c504a593eacsm90433466b.36.2026.11.10.02.14.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Nov 2026 02:14:36 -0800 (PST)
+ (envelope-from <jbeulich@suse.com>)
+ id 6af2f077-2eae-0a2a0a5409dd-0a2a4505e2e2-46
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 11:22:54 +0100
+Received: from [209.85.221.44] (helo=mail-wr1-f44.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6af2f07d-4cb1-0a2a45050019-d155dd2ce135-3
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 11:22:54 +0100
+Received: by mail-wr1-f44.google.com with SMTP id
+ ffacd0b85a97d-48dee593f18so1180829f8f.3
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 02:22:54 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4989a2a505asm2666450f8f.13.2026.11.10.02.22.52
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 10 Nov 2026 02:22:53 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -50,118 +49,127 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="In-Reply-To:Content-Disposition:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794305678; x=1794910478; darn=lists.xenproject.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=9WFltYRvNkpM0HMxRLJxGiCTEiP83WtKPHu+oXy3KTg=;
-        b=WrP2Pg4Q7t4/b0jQ7vkfc48t9U+zY8csmw/RLlmzMKzMrN8g/oNh5n4tC+MdlLRfd/
-         RAu6K5mX3lV+8/Dh6J1rbu8wEROkqOZ0sDcHhl1RJ5AvJqHjmmT5fntMpoWzWM7Lv73w
-         szPmWzp0Op+uKL2uKt6XpkuYMmVbvz0ImOjlQgkAH4UHqE9Cj3w+UXGUHK0eDrQoGcTb
-         W/Cr4Ssr2ThxTr90XZwWKqbuaquiIv4/FuKCSMPs9PXGaOZPZsy+31WrhKr66LCyt6hA
-         WVPE/+E8i4PW4Fz6oeJsjFSESedYfY25M+iG9BIUJZAOrpyKKXn/l+2mIphnzcmH+OM+
-         G1HQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794305678; x=1794910478;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=suse.com; s=google; t=1794306173; x=1794910973; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=9WFltYRvNkpM0HMxRLJxGiCTEiP83WtKPHu+oXy3KTg=;
-        b=AjHIeZwJT9WIJ7TH9r3KmuyF3knSyuTx+7HvUbx8jOopWpHmOlerpnUbctVy+6Vise
-         IF+BnV4H4u6sbC8GTO37NmkGBAMS1/GfeTsp1gYK1pscGy8iNDZp9iVOKnDPIw86FrZN
-         G+mzH2nJ8vEqs4Vj/bfBKUjxkIOz4yOUAyU7MiE40z7MuE4zyo7lFzLAaIfjWkU6RWKj
-         iQ+zWkeaiHiWCmjvLQZ3/8pK5Y1RqcQnINM70v+My4lqY3S1Ce1LOVT/fmEZJ18UVyIK
-         ZDrZJTAx8mR39BrH4ACWyYsmcf6JRC533hPAlCD51ORXC5y9ZSEkhzf/A+Vnkr+o7oPp
-         qoSw==
-X-Forwarded-Encrypted: i=1; AL+hErEqLLXBeB+d+RA0PGFaBEUAZhaDH+ChZvwHcpyVSQPtZTWJH6bxCpeGKzs009WqNA7yOPbQ+a72H/c=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z+CLIjCddcog5BIt3YjCZXlyK5bUZLYijeCcjRfESMSu3GQVDAN
-	7G1d80h5LBiVAllg7/GcSkXdgouLl8IFu8kyUp6wYV7E6JIUYW2vSmw5
-X-Gm-Gg: AYBFou1Xu3v1L721IJtdDTyjaUABXtCqN/jYS/6vNnAwZt5FHpj6MRu5Yj0bKQKQODP
-	Hv2XlXVmJR7w/Hrmr/jzr4mFz26wbjwPiXLvXwStFvbf+jMdDC6I6Uf8CHImQuVc6iDpYCCcUp6
-	TSlpggy5lxEETksVvurhyI4evnq31inHq9abYcPBuLhyLLBnGxC2bNDeRHbMFP1YBDUIWThHQvf
-	yUsE8ARLJ4akGXaDC2UTw1KcOr/cdzN7jRYoe2r4ZtFasmFs7mSjwY9lqS8rYyyjiOLOPZUvoIc
-	nC86tgcfNBwTWEqEGZdH/4iIq2wPAOXgZi/gWSGtNT+WK77EoPjwKqve/bXgFzCpuOH3JVO62LC
-	XIOtCumYwWdZI6tKLqmiKHlRresbaXwKt75UeXmATE7VzUQdkiSY6/LRtLSZzPUJ0a5jlOmL1Vi
-	h9I5FeX9CruYmmOB5+5vYGbilBigIajnn/B1n8/txj1Dzc2hn6KwVGEu0bC0nSGAOwf8IHfoWRt
-	HZqeWHjnm9OKPP0EszspeVDzEw8qVh3n9jHNOIVfRqUNwIYTj6ESxkAG9ixUYujZm0tdUDLx0GW
-	6UWKsFPJO0OgBcgH/nsxTYHtwdmSgt3dv6Pq+Akf1zurRqrnPkR4cFM2uLQePSNM6cPM9ndgy8g
-	m+UbE2+hwVd74
-X-Received: by 2002:a17:907:944d:b0:c41:4c20:5a80 with SMTP id a640c23a62f3a-c504963ce05mr189793966b.44.1794305677695;
-        Tue, 10 Nov 2026 02:14:37 -0800 (PST)
-Date: Tue, 10 Nov 2026 11:14:35 +0100
-From: Amir Goldstein <amir73il@gmail.com>
-To: Christian Brauner <brauner@kernel.org>
-Cc: linux-fsdevel@vger.kernel.org, Jann Horn <jannh@google.com>,
-	Chris Mason <mason@kernel.org>, Josef Bacik <josef@toxicpanda.com>,
-	Christoph Hellwig <hch@lst.de>, linux-block@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-nvme@lists.infradead.org,
-	Alexander Viro <viro@zeniv.linux.org.uk>, Jan Kara <jack@suse.cz>,
-	linux-scsi@vger.kernel.org, target-devel@vger.kernel.org,
-	driver-core@lists.linux.dev, linux-mm@kvack.org,
-	bpf@vger.kernel.org, linux-security-module@vger.kernel.org,
-	selinux@vger.kernel.org, apparmor@lists.ubuntu.com,
-	linux-nfs@vger.kernel.org, netdev@vger.kernel.org,
-	fuse-devel@lists.linux.dev, linux-efi@vger.kernel.org,
-	xen-devel@lists.xenproject.org, ocfs2-devel@lists.linux.dev,
-	linux-s390@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
-	linux-usb@vger.kernel.org, linux-erofs@lists.ozlabs.org,
-	linux-kselftest@vger.kernel.org
-Subject: Re: [PATCH RFC 38/41] fuse: refuse files on pseudo filesystems as
- passthrough backing files
-Message-ID: <avLui6Mpf8GbKbtc@amir-ThinkPad-T480>
-References: <20261110-work-loop-pseudo-v1-0-4c998976c6c7@kernel.org>
- <20261110-work-loop-pseudo-v1-38-4c998976c6c7@kernel.org>
+        bh=iBR2wZLecGrFbVs64gK9K3aryez+kLEYz5irsQEY5MI=;
+        b=OvX5mWo+38xVs411mvKjif2JkVxOdLut6dK78lKAP8f96XJllQ3nmbSXS/5dsSqCU9
+         oF47jwKS5d8z6CM/BF87iVrHQUB/9BFauxG2vnV4mEOt7pkJTnx1LTzT4z+WCsESRcpK
+         1KiFOU5WMvwcgqHyVvu31EKOABCrz0lVBXqsm/XJCjvh/O1RvzAHTI1jjg55w22q995w
+         +ae5LSDDKx/A452uRIX583qfzwOl7A4RlomN1VAbDIpI4Of8fshjlcyDZF91vl7q0n32
+         88je3As2CmbrkNEGoMem4eGj1tmgyIAEWWaEAx535sHuapnljkMxWeczUi3nvU3/etIC
+         D2Cg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794306173; x=1794910973;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=iBR2wZLecGrFbVs64gK9K3aryez+kLEYz5irsQEY5MI=;
+        b=qs2TPhD+vpy58PLKRVxxuftskpyQdu+eJxRzKdVK/M+seCdsBPqEjHAVu9l+j8m8jw
+         01bFsDeRE6hVQvo1ayvtFh/ivf3TlGifPh6Wy92jq7MRjx3KuG/T9NkEJQnEFThXgWU0
+         w7BDO5R/YAQIdZbXsGBMUAyxsrhBZ9eKOGpsq3hZlq2kGdkeqvWU84BFP03MnQJq5RIJ
+         X+52UOejDkddZOQkTRdXKDn0FKlHyR3F0RVuCGHE/FKigdheJGjx4MWFs3fq36uoJcHd
+         R6q48p2/XP8NSf19IGlv/TQKMlPUvgVPEsCe37NM2bVPZzDgQw9JURK4pjcF+PxrFdla
+         2YXA==
+X-Forwarded-Encrypted: i=1; AL+hErH41qNb5XeBV6jqzkUFRPhX7I0ssS/ug/ZwqW7O18OPoqUeZu1r2ZIn4MpBQZhRcgiJ+cad3rdJmxE=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z+l8pnypUJxOrg/LpsQFf8ekjDkZFbGU74fJgkmHQxNe3vfkeUx
+	tExNCOircy8KiL4Wc7+Q+R0/RNl9lhtng7D/WaCE/CLlWtWEUfQtoVmOZtdbv+beeA==
+X-Gm-Gg: AYBFou0pi2KWUAkxqcpyBPOXBvE8ovOPT9hFDCQbGrd/9sZAh04Zm0t6z6cS7K3zYs+
+	01MhR8JF1U5/eJbL6A9ER7SvuAsdcd4TRfdyW8crNxszVE/DaPuM26CPzcDh4CeDVWy172pt7gB
+	CCTw0ARHziTe+vwt70eU+TcWcwqfy2+bh5USzg9PmmruuNFxmk57fMRLX/yvhWIsg+GU0vCogRn
+	sbY6bTqO5tH3edE8tnWcfyr5DVEQxTa547OWBQ9GBZ8cnXb+T4IcMq4EwlkHR6rQgurC4wx3LDZ
+	PBI3SYyyVD5/5tgnP8eLMlQCpJuj0PpBbfxtmsbamiSUt0aKw9gAQooXPNXBrOw76Ety+urUrTr
+	zlWQBlMGz1HF7XrPf5VaWscve2b4vjvRmFNbYZCqOqX071Jfwxup5rh4Hmfn48lJBblU8awpXYW
+	ddQPXhyH//CjKW6LNmKpSBRfZjeQ7SXR1yWZx5/Yow5bvO2ldDh2cdNM2rvMU9qfFzITV7fyH8v
+	13j6uWz98M7qkbvUJ/JgXKe/awr3ueuOPXB9nzGMYWV2ooH4ixkC4r/e5jnbFhScNG0r/qz1L3/
+	0iEWF5nqO1TFjQQlCU4DTuoV6KNJtg9YD9Y41zeMYP9JMv7tOzJ20QHhR3NXiSH7I1WWX/8Z5ei
+	NC3AeIVIat4Q/EjwK
+X-Received: by 2002:a05:6000:2411:b0:48d:facb:5937 with SMTP id ffacd0b85a97d-4982b1957f0mr4079100f8f.7.1794306173563;
+        Tue, 10 Nov 2026 02:22:53 -0800 (PST)
+Message-ID: <d2ef64c7-0587-4fb1-b119-bbd11b987c3a@suse.com>
+Date: Tue, 10 Nov 2026 11:22:52 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261110-work-loop-pseudo-v1-38-4c998976c6c7@kernel.org>
-X-purgate-ID: tlsNG-720697/1794305678-30BC02AC-10D551BD/0/0
-X-purgate-type: clean
-X-purgate-size: 1221
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
-	autolearn=unavailable autolearn_force=no version=4.0.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] libxl: wait for QEMU exit before restarting a domain
+To: Jiaqing Zhao <Zhao.Jiaqing@amd.com>
+Cc: Anthony PERARD <anthony.perard@vates.tech>,
+ Juergen Gross <jgross@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Penny Zheng <penny.zheng@amd.com>, xen-devel@lists.xenproject.org
+References: <20261110100258.490701-1-Zhao.Jiaqing@amd.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20261110100258.490701-1-Zhao.Jiaqing@amd.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-c201ff/1794306174-730B22A1-4C90FC61/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 1206
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Tue, Nov 10, 2026 at 10:14:54AM +0100, Christian Brauner wrote:
-> The fuse server can register any regular file as a backing file. procfs
-> and binfmt_misc files are already refused by the stacking depth check as
-> both set s_stack_depth to FILESYSTEM_MAX_STACK_DEPTH. sysfs and the
-> other pseudo filesystems aren't. Reads and writes of the fuse file would
-> then be done on the pseudo file with the fuse server's credentials.
-> Refuse files on pseudo filesystems just like loop does.
+On 10.11.2026 11:02, Jiaqing Zhao wrote:
+> The PID-based device model destruction path returns immediately after
+> sending SIGHUP, before QEMU has necessarily exited. When an HVM guest
+> reboots with VNC enabled, the new QEMU process may fail to bind the VNC
+> port because the old process still holds it.
 > 
-> Signed-off-by: Christian Brauner (Amutable) <brauner@kernel.org>
+> Wait for QEMU to exit in a child process after signaling it for at most
+> 10 seconds. If waiting fails or times out, log the error and retain the
+> existing domain destruction behaviour.
+> 
+> Signed-off-by: Jiaqing Zhao <Zhao.Jiaqing@amd.com>
 > ---
->  fs/fuse/backing.c | 3 +++
->  1 file changed, 3 insertions(+)
-> 
-> diff --git a/fs/fuse/backing.c b/fs/fuse/backing.c
-> index 8c21a8a74efb..4e4fb810ddaa 100644
-> --- a/fs/fuse/backing.c
-> +++ b/fs/fuse/backing.c
-> @@ -147,6 +147,9 @@ static int fuse_backing_open_file(struct fuse_conn *fc, struct fuse_backing *fb,
->  		if (inode->i_sb->s_stack_depth >= fc->max_stack_depth)
->  			return -ELOOP;
->  
-> +		if (file_is_pseudo(file))
-> +			return -EINVAL;
-> +
->  		fb->type = FUSE_BACKING_PATH;
->  		fb->path = file->f_path;
->  		path_get(&fb->path);
-> 
-> -- 
-> 2.53.0
-> 
+> v2:
+> * Share the fork, error handling and child exit handling between UID and
+>   PID-based destruction paths.
+> * Reduce the device-model stop timeout from 60 to 10 seconds.
 
-Reviewed-by: Amir Goldstein <amir73il@gmail.com>
+As per my v1 comments I continue to question this.
 
+> * Handle unexpected errors from kill(pid, 0) explicitly.
+> * Fix misspelled "signaling" in commit message.
+> * Coding style fixes against tools/libs/light/CODING_STYLE.
+> ---
+> Cc: Anthony PERARD <anthony.perard@vates.tech>
+> Cc: Juergen Gross <jgross@suse.com>
+> Cc: Roger Pau Monné <roger@xenproject.com>
+
+You will want to use a correct address here (.org rather than .com).
+
+Jan
 
