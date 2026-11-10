@@ -2,48 +2,40 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 053C4606A321
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2026 09:59:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 82A5F606A336
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2026 09:59:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=epam.com header.i=@epam.com header.a=rsa-sha256 header.s=selector1 header.b=I3zbsP9F
-Received: from list by lists.xenproject.org with outflank-mailman.1481418.1685283 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=cortex-media.de header.i=@cortex-media.de header.a=rsa-sha256 header.s=20250930 header.b=nZU1uga3
+Received: from list by lists.xenproject.org with outflank-mailman.1481420.1685291 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQidL-0002Ya-Fo; Tue, 10 Nov 2026 09:59:19 +0000
+	id 1xQidf-0002yg-MO; Tue, 10 Nov 2026 09:59:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1481418.1685283; Tue, 10 Nov 2026 09:59:19 +0000
+Received: by outflank-mailman (output) from mailman id 1481420.1685291; Tue, 10 Nov 2026 09:59:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQidL-0002YT-CQ; Tue, 10 Nov 2026 09:59:19 +0000
-Received: by outflank-mailman (input) for mailman id 1481418;
- Tue, 10 Nov 2026 09:59:18 +0000
+	id 1xQidf-0002yX-Jh; Tue, 10 Nov 2026 09:59:39 +0000
+Received: by outflank-mailman (input) for mailman id 1481420;
+ Tue, 10 Nov 2026 09:59:38 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <dmytro_prokopchuk1@epam.com>) id 1xQidK-0002YJ-Qe
- for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 09:59:18 +0000
+ (envelope-from <pd@cortex-media.de>) id 1xQide-0002y0-68
+ for xen-devel@lists.xen.org; Tue, 10 Nov 2026 09:59:38 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xQidK-00AWiE-2t
- for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 10:59:18 +0100
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xQidd-00AWmV-F5
+ for xen-devel@lists.xen.org; Tue, 10 Nov 2026 10:59:37 +0100
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <dmytro_prokopchuk1@epam.com>)
- id 6af2eaee-2eae-0a2a0a5409dd-0a2a4504c440-34
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 10:59:17 +0100
-Received: from [52.101.72.113]
- (helo=AM0PR02CU008.outbound.protection.outlook.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <dmytro_prokopchuk1@epam.com>)
- id 6af2eaf5-b57f-0a2a45040019-346548712fab-3
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 10:59:17 +0100
-Received: from AM9PR03MB7526.eurprd03.prod.outlook.com (2603:10a6:20b:3de::17)
- by AS8PR03MB7906.eurprd03.prod.outlook.com (2603:10a6:20b:421::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.10; Tue, 10 Nov
- 2026 09:59:14 +0000
-Received: from AM9PR03MB7526.eurprd03.prod.outlook.com
- ([fe80::904d:5820:80e1:41ba]) by AM9PR03MB7526.eurprd03.prod.outlook.com
- ([fe80::904d:5820:80e1:41ba%3]) with mapi id 15.21.0592.009; Tue, 10 Nov 2026
- 09:59:14 +0000
+ (envelope-from <pd@cortex-media.de>)
+ id 6af2eb08-2eae-0a2a0a5409dd-0a2a4509928c-10
+ for <xen-devel@lists.xen.org>; Tue, 10 Nov 2026 10:59:37 +0100
+Received: from [136.243.217.222] (helo=mail.cortex-media.de)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <pd@cortex-media.de>)
+ id 6af2eb09-be1a-0a2a45090019-88f3d9debec4-3
+ for <xen-devel@lists.xen.org>; Tue, 10 Nov 2026 10:59:37 +0100
+Received: by mail.cortex-media.de (Postfix) id 494C338C044;
+ Tue, 10 Nov 2026 10:59:36 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,141 +44,207 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=a8l61o9hpx3EliHDyqi+xcCPwJzXmNb9A7y0nuUBAkHQZA3zZl4z/QdPT+J0ZK7FqnGEXzxa14iXQLAf6oG7x3HJ8VQKhhNEbAp5M4oeqWYuvTP6x14J0Y8QxFoO7SfO6S378PZ1wuLhgQ27vdTtWAfNG6RpgQHkOisN1mcXviDnU6HFz29PU+Xp16hFCr0jam2NNLxkY48q+ZwBD5tEqIdodSALt+ZADYLsJcmZOhpHwgL6ed0TSHPaO/nUF6tClnr9B202ESuXAH4iBBPgXJJPeshRNTv7SThGZAQYJflQ90BEjPdCGE6dIhR64yuqn8urhuiU1UZjcEO1cSdIdQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VyDvllBXRPxQSfWQLbgsaxP6xURaC1wpiaByY+WHwbU=;
- b=c3KJXzNSAjXz0ymguTXPdYv+rqdIw07pwD47gTYeOZZ9F6szU5KiQNYaPq0AWyJ3mL8WgbNFoMTXKw1YxBu1TJ9/GK9fY+GMB7ufeWr4WRiQ5KCrtF9myd9LbrQKscCjH3k+9hVhU1qFKRdkEseqEeuGScebb1YMqHvn8eh5wlt1L6Z22vtDBYoifaAmHnl5jKlqgQbKvieESfdhxxefyhIM17p+yayYgn9PDkW4nk43tcYX+NRqp8rebBlnAwJ9w3KbM+bADLAV39QbjRGl9DHWo1eW+LyOXIeAjpWXU2Xcm1v+Bew3gX26ahuWwnajsFahd4i2NugysQSMHV1AAQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VyDvllBXRPxQSfWQLbgsaxP6xURaC1wpiaByY+WHwbU=;
- b=I3zbsP9Fd3lk2iOOPVTq1MeMhmMMzx910bttV8RFk9WMqaWMo38olwY26NGLVxk8z0ooILcgLbzz9AS+YM5EOn+kfBbQXmOdpTNIJ2bu60El59eofpyn4u+5ey/siFK81eGSjjL8Xo8oMlYmH52yj06KfuBW3RO4sPej1vS7xfAaaKLBwa2ETCPDmH9Y2JT45sFsRv3zB1aSJ+8bwxqbJDUkHM/J9vWrGyb6Du88bUc19mBkc/2bPkg42XxNHQerwQEOtR/eJ2ECsqRLpmDdtMJxmxqugFQW9e4/DveGkqJtxxVFoVdu9IJFvgt0uWzO3sLLyv9whVCpIGGd0LTErA==
-From: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>, Dario Faggioli
-	<dfaggioli@suse.com>, Juergen Gross <jgross@suse.com>, George Dunlap
-	<gwd@xenproject.org>
-Subject: [PATCH] xen/sched: resolve MISRA R18.3 pointer comparison
-Thread-Topic: [PATCH] xen/sched: resolve MISRA R18.3 pointer comparison
-Thread-Index: AQHdcPokuddABcs0aEGWzDRXWlu8ug==
-Date: Tue, 10 Nov 2026 09:59:14 +0000
-Message-ID:
- <696c419c0f41bab22a02cff418eb78ce55ec5667.1794303077.git.dmytro_prokopchuk1@epam.com>
-Accept-Language: en-US, uk-UA, ru-RU
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AM9PR03MB7526:EE_|AS8PR03MB7906:EE_
-x-ms-office365-filtering-correlation-id: 6b509270-0374-4ea4-644d-08df3f1146da
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam:
- BCL:0;ARA:13230040|42112799006|376014|366016|23010399003|1800799024|10067099003|18002099003|38070700021|56012099006|11063799006|261021121427099003|261021123027099003|261102123227099003|261009223027099003|260925022911599003|261026121527099003|260925021311599003|260925021911599003;
-x-microsoft-antispam-message-info:
- ogQ/Ha0IYY7ZKYSKWhx+GnO3kYw94w7NETEWo2dsQxACsbe4Y8wpoQx3eziLf2slpeN6hlbhAxsD3nJFYDyi+aIwvTDwDputHj631Hy/NODBnP2E6cbeATasTvIRjoL3j9Oj+Lzxo2uJT6cuycjWATRbKg0D0inijw6pGL7iqJ0UXNPal7mMpfBoECxn0ZqazQ1XYkNFkMW4RKTwgfivdvsmY8t09LRL5pZFGBLrsBM5hwzWHVPHjVfnwBfiInbAS8fsw1FUZUla9XRbf4D7kPxvmvnHbL6Ci+MIUrBkX9ZqvINjqBXG+CFpgMFT5/R/SMtRZFhnrA19E7zBecm8TI7pv4bzWYRCCEO5gfiekGeWH6VTw7s0kYMK0DMZcAkS9jAyYnoUZzAC1UJFlw3FuEUFtrIDsXBHxn3tHW+1Xsq585y2oAL2COUmxCMjYpXn2gfD5f+vguFmuabzbMXjxubKKctjt6/Q8FTefF5FwpAwq9YYrQefpdL32z0mkoLiYkZW8NnhxPN7xyIN2ba0oqITSnHi2E8BLF/T0/VFD7NFewWfTo8/r9PSFy2LOFIVUqF7zD1r9EP/YqJPMqiaty7Agh7tFoEyXszeUEiCX0XMMkDk/c9txYUcxZYyB2by2oQ05FWFXlVJ8fczYvD2Ipv5Xm4k2Ks4KZrC3NN4o68MMOXVDoThDpIRXY3YI6O+J1LkqzbxNQspArcvv39kFFDVjqkSZXn+rmqsS1yxdb8=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM9PR03MB7526.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(42112799006)(376014)(366016)(23010399003)(1800799024)(10067099003)(18002099003)(38070700021)(56012099006)(11063799006)(261021121427099003)(261021123027099003)(261102123227099003)(261009223027099003)(260925022911599003)(261026121527099003)(260925021311599003)(260925021911599003);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?utf-8?B?S2swUGxyblVmR3M3YVo1SGRJQWxzT2ZyMkp0ZnM2MklrOVVCNkZCclpVT21Q?=
- =?utf-8?B?SThFY2FncEtsYXdIWDlJZGU5MEk3cEQvSVE3VVM0WFJyMVhZNW9LK1VPaFU2?=
- =?utf-8?B?SkZQYXlIclF0Q1lnZGtKRWlZdXVlelRPMXpoUFlyV09qNW54bWEzV09BRCsx?=
- =?utf-8?B?MUJxNm5RT1gzcmJSeEt3anpWUmk5a2w5U3ZZMmdGUFRwNVhjQjdITzdIWmdD?=
- =?utf-8?B?Y2RiM01Qa1VXOGU0VC9LSUYrd1krMWlKdmR3dFIwaHZKTTlWN21HOUNKSXE1?=
- =?utf-8?B?SXRyTkp6aE5NaWxPbW9GMEhKRzd6VW5iL0lhNndjWW5LdGl1cmRHWjgzR3ZW?=
- =?utf-8?B?MTBzOTY0QldrcXV4QUtoM08ralBZU2VpRVM2YW5sKzB5dGNCTWxFZVM1ZHBw?=
- =?utf-8?B?OGZVd0lobmsxZExxTVJhaUx6clg0MGFFcVc5WlZZa3B6UmRXYzVsVVQ2aENZ?=
- =?utf-8?B?KzBBUHdhSkNxSDNOZjZmQjNNQjFPa0FCVGZja1duKzZwSVhCZXp2bCtFMkJF?=
- =?utf-8?B?bm5vSUZZSnhqK1FHL2daODZaRkRkNlhwdmxOdXVzTG5CR3c0QWUxN2FWQkVh?=
- =?utf-8?B?ZUt3dXBlb2ZWNXB0TzRPVE5xMldFN3YxNUdSaUdvNEEyKzNpQnNCVTBXS3cz?=
- =?utf-8?B?Q204cGkxb1VuUXJONXBqNkxIVGxKK0JQWmVSQ0JPVDhpb1QweTk2UTBoVGh0?=
- =?utf-8?B?ZllsOGNPZU5mUjVDQkVYcUx6bVloN0FKbWp3VGFVUFhla2RZL0gzektjelll?=
- =?utf-8?B?SUxrVDh5MmVMcUlpZ0R0ak5TRk5XV2VyRElnWkNtMzlsVVlWbHp3ZnE5eDdj?=
- =?utf-8?B?S2F1WVplNmdEeGpPUnFsNzVlRjNCcDRCMTZtc29tV29RRjJVRkdtNEQyY1Mw?=
- =?utf-8?B?OHlxNVBzaVNpRjRXWTVOK1lJbFo0OGF3RVYyTUxZNXg2WjV6UUlFQlR1bEgx?=
- =?utf-8?B?bGZrNm44SnJ6b3IyZGlheWRPUjUwUkNHUjB0YVgrZ3FwV1NKZUVUcDVSUFoy?=
- =?utf-8?B?bW9ldG85bHNSR000ZlY2K2dGKzN6cjRFblFjbzNrWVh3cVBqMk81dFlKYmlj?=
- =?utf-8?B?U3VXK1VEUkpTT0NpUGo3b25aUUFkQ09VUHE0aGcvem9yK2ZSckp6SXJSbDFR?=
- =?utf-8?B?aWt6by83VFF6dlN6b0liWk5Td040bGJuTTdxS2h5Q0FOejNSWktPYU40NmUv?=
- =?utf-8?B?dEVsd2l1YS9oU2NQREdOaTdhSFhWWm9OVHBGUzYwUTB0WE9yRmZ4Umlqd0NF?=
- =?utf-8?B?TmkzNUMwNmFSMXdJOW94THV6Q1RseHBWM1VLbnNVU0FuWEtQeDJLT2liMnFZ?=
- =?utf-8?B?TmtZYWUvVCsxdHMzeEhXMnJrOTlQY1Z6TDE2ZElrYWp5b2hicWpCNUhjOXl3?=
- =?utf-8?B?UFAwVCtpaElzcy9mWCtPekUyV3BHRFRDTU1XcUtuSE93T3NmTG4yVW9acWgw?=
- =?utf-8?B?WkRmekljL0lzNDFERHRRQ2lwSUY5Slhxb0gzcHpZV1B4dThyUXhjeUtOR0NH?=
- =?utf-8?B?cUtQWHRRclFpWExDRmU4cGtNNWRwc0k4YTlSbVQ3UzFVMVkxcVdrTjdFdXdy?=
- =?utf-8?B?K09uV3RrSVAvK1hTL0xwYjR5bC9Fblh1M2UyQTRrQkx0RDBFWWFEQWVYRlJI?=
- =?utf-8?B?ZGQ0MDIvdkVZcWJyQ21iZnZHWEdXL3hQcnBad3dFTngxMkpTVXpYR3doQjVZ?=
- =?utf-8?B?R25xSTNzY2lWVDVReXI3eWpGZmVBZTBiWXpPc3J6NjVaclNmV0UreGFEOCtY?=
- =?utf-8?B?VGhuWkZkTGMwMXBmRlpyYm9QSGRZZU1XVjQ3QWdxTUJsL0dZWEVzM2UvRXlp?=
- =?utf-8?B?NWhXS0NHUkhqTzVXelBkVE15ak5wdTNYNDg3K2YxYVAvQVRNQVI3L1p0eDJq?=
- =?utf-8?B?N21pbDcxMnZ0UGtOcjJnVUZXSmQ1WWRqOWNUM3NRMVd5ZmIyN3ZGblRjR1k3?=
- =?utf-8?B?czg1TmxpdHN2RlRkWW1yekdsTVNCSXpiRDRHdENVVVdFSlEwS01YdndmT3ZS?=
- =?utf-8?B?TG9CQmJvV25KaS9QSHk1RE85dEtOY3hNRXhieEQvVkx2R1lHRHd1UnFrcWxP?=
- =?utf-8?B?Tm0xRnF4YUZCMmlFbStNdElhMk5PekIwVW0rN0ZjL3VoOVdjaG9uSEk2cy9z?=
- =?utf-8?B?cXhvZzJwMnJzUFNNUkdSUmRsbmY3U3QyT3dhNG5MazFaRGFOU1NYSHkvb1Zt?=
- =?utf-8?B?NFo0VU1sSjdmcWIzUFgvRldkYW4xdEVJMmREMlRncU5ITHhyVjVnNlg0Smpy?=
- =?utf-8?B?UXZRaWNVdmVxREo0UFIvcHpKbkxpbW9xY3piOTBrNDU3OEdWanVPWnI0UnVy?=
- =?utf-8?B?bWxrUWZXNVduRXhVVlA3cHdpMExFN0czMTBSQUJJMmhGMEtSSlhLMUJBVHh6?=
- =?utf-8?Q?OHI2dcV8R8E3lBc0=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20250930 header.d=cortex-media.de header.i="@cortex-media.de" header.h="Date:Subject:To:Cc:References:From:In-Reply-To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=cortex-media.de;
+	s=20250930; t=1794304777;
+	bh=FIeLTMyVt9iKTOkpPfn6ooiOvogWc2l6RJ2kX4CnMMM=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=nZU1uga3CoH8RMoF07CvpyldFX1aSE8MBWOrVMuK69fV4vJOV/ulZOyyT/ceTOzDq
+	 mH0OLclTiV2voAyqr4MVRAM3f2MppXqW38mt3EdNr/7V0ZSEVi0SB51OwuGHMFgHXG
+	 AgVbGCQuv5R3SHQUr2fQ9dcReMPO/XHaXmJH/VLUzr8c5ANlIzkVqXUqkQH7HDr1jP
+	 zwRVazYkqAtM0rZ8M1SZ8bClk23QNdPAX+JaSBj9EPc+frjK86S6PT4F98D8gzSjkR
+	 HKRQ2zMtIxjhnhye309/OIvIWkdE7Ztza958IegJU8/MRWZiFtOFOna0YSQzWGWGZH
+	 cv/9eI4vTLSHg==
+Message-ID: <d39dd9e5-b58c-4504-b559-cc449a8f7f87@cortex-media.de>
+Date: Tue, 10 Nov 2026 10:59:36 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AM9PR03MB7526.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6b509270-0374-4ea4-644d-08df3f1146da
-X-MS-Exchange-CrossTenant-originalarrivaltime: 10 Nov 2026 09:59:14.5380
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: X9SLmJCFGkdoC21SPgA02y3aOdRIjAUWNYCrYoQzdWNFvWG+IgGjLv0/yJK4PdQ7bvtQCnMJGZ0RZgNC76bzgg9hh416R+gIY9R8511rtXE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR03MB7906
-X-purgate-ID: tlsNG-ebf023/1794304757-52ECEB50-98376F0B/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [BUG] Xen BUG at mce_amd.c:100 (mc_ec2type) on Zen 3; host left
+ wedged, no reboot
+To: Jan Beulich <jbeulich@suse.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>, Jason Andryuk <jason.andryuk@amd.com>,
+ Soham Dandapat <soham.dandapat@amd.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xen.org
+References: <b9a98b3b-d11e-4463-ac80-4145ca991925@cortex-media.de>
+ <e32a3056-c025-4d89-a494-ad7e8b6e2580@citrix.com>
+ <b35c6a2f-753c-4691-aa9f-f67f2f7f37ef@cortex-media.de>
+ <eff24ce3-bb48-4d2b-993c-65974d3af00e@cortex-media.de>
+ <ad48ac1c-176d-407f-87e1-ae303e8eb195@suse.com>
+ <8138ed44-727f-45bc-9673-9684e922595b@cortex-media.de>
+ <ecfac9d0-eb72-4bb4-8aab-879cfa5dffd9@suse.com>
+ <2a44faa9-9a9f-4681-84d6-8267acbec9b0@cortex-media.de>
+ <a1785adc-93e9-42dc-a3cb-9e8edf00289c@suse.com>
+From: Peter Deggendorfer <pd@cortex-media.de>
+In-Reply-To: <a1785adc-93e9-42dc-a3cb-9e8edf00289c@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-bad1c0/1794304777-3A4DB034-23CC7C32/0/0
 X-purgate-type: clean
-X-purgate-size: 1984
-X-Spam-Status: No, score=-20.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
-	autolearn=ham autolearn_force=no version=4.0.1
+X-purgate-size: 7507
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-TUlTUkEgQyBSdWxlIDE4LjMgc3RhdGVzOiAiVGhlIHJlbGF0aW9uYWwgb3BlcmF0b3JzID4sID49
-LCA8IGFuZCA8PQ0Kc2hhbGwgbm90IGJlIGFwcGxpZWQgdG8gb2JqZWN0cyBvZiBwb2ludGVyIHR5
-cGUgZXhjZXB0IHdoZXJlIHRoZXkNCnBvaW50IGludG8gdGhlIHNhbWUgb2JqZWN0Ii4NCg0Kc2No
-ZWRfc3Bpbl9sb2NrX2RvdWJsZSgpIHRha2VzIHRoZSBsb2NrIGF0IHRoZSBsb3dlciBhZGRyZXNz
-IGZpcnN0Lg0KVGhlIHR3byBzcGlubG9ja190IHBvaW50ZXJzIGFyZSBub3QgcmVxdWlyZWQgdG8g
-cG9pbnQgaW50byB0aGUgc2FtZQ0Kb2JqZWN0LCBzbyBjb21wYXJlIHRoZSBhZGRyZXNzZXMgYXMg
-aW50ZWdlcnMuDQoNCnVuc2lnbmVkIGxvbmcgaXMgdGhlIHJpZ2h0IGludGVnZXIgdHlwZSBoZXJl
-LiBJdCBpcyBwb2ludGVyLXNpemVkIG9uDQpldmVyeSBhcmNoaXRlY3R1cmUgWGVuIHN1cHBvcnRz
-LCBzbyB0aGUgY2FzdCBrZWVwcyB0aGUgZnVsbCBhZGRyZXNzLA0KYW5kIGFuIHVuc2lnbmVkIGNv
-bXBhcmlzb24gc3RpbGwgbWVhbnMgImxvd2VyIGFkZHJlc3MgZmlyc3QiLiBBIHNpZ25lZA0KbG9u
-ZyB3b3VsZCBpbnRlcnByZXQgYW4gYWRkcmVzcyB3aXRoIHRoZSBoaWdoIGJpdCBzZXQgYXMgbmVn
-YXRpdmUsIHNvDQp0aGUgb3JkZXIgd291bGQgbm8gbG9uZ2VyIGZvbGxvdyB0aGF0IHJ1bGUuDQoN
-Ck5vIGZ1bmN0aW9uYWwgY2hhbmdlLg0KDQpTaWduZWQtb2ZmLWJ5OiBEbXl0cm8gUHJva29wY2h1
-ayA8ZG15dHJvX3Byb2tvcGNodWsxQGVwYW0uY29tPg0KLS0tDQpUZXN0IENJIHBpcGVsaW5lOg0K
-aHR0cHM6Ly9naXRsYWIuY29tL3hlbi1wcm9qZWN0L3Blb3BsZS9kaW1hcHJrcDRrL3hlbi8tL3Bp
-cGVsaW5lcy8zMDQ4ODAxOTQ1DQotLS0NCiB4ZW4vY29tbW9uL3NjaGVkL2NvcmUuYyB8IDIgKy0N
-CiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkNCg0KZGlmZiAt
-LWdpdCBhL3hlbi9jb21tb24vc2NoZWQvY29yZS5jIGIveGVuL2NvbW1vbi9zY2hlZC9jb3JlLmMN
-CmluZGV4IDg4YWU0MGY5NTQuLjEwYjZlZWNjY2QgMTAwNjQ0DQotLS0gYS94ZW4vY29tbW9uL3Nj
-aGVkL2NvcmUuYw0KKysrIGIveGVuL2NvbW1vbi9zY2hlZC9jb3JlLmMNCkBAIC0zNzcsNyArMzc3
-LDcgQEAgc3RhdGljIGFsd2F5c19pbmxpbmUgdm9pZCBzY2hlZF9zcGluX2xvY2tfZG91YmxlKA0K
-ICAgICB7DQogICAgICAgICAqZmxhZ3MgPSBfc3Bpbl9sb2NrX2lycXNhdmUobG9jazEpOw0KICAg
-ICB9DQotICAgIGVsc2UgaWYgKCBsb2NrMSA8IGxvY2syICkNCisgICAgZWxzZSBpZiAoICh1bnNp
-Z25lZCBsb25nKWxvY2sxIDwgKHVuc2lnbmVkIGxvbmcpbG9jazIgKQ0KICAgICB7DQogICAgICAg
-ICAqZmxhZ3MgPSBfc3Bpbl9sb2NrX2lycXNhdmUobG9jazEpOw0KICAgICAgICAgX3NwaW5fbG9j
-ayhsb2NrMik7DQotLSANCjIuNDMuMA0K
+Am 02.11.2026 um 13:54 schrieb Jan Beulich:
+> On 31.10.2026 14:44, Peter Deggendorfer wrote:
+>> As requested, I added a printk to mcheck_mca_logout(), and the BUG() in
+>> mc_ec2type() is still replaced. These are the only changes against the
+>> Debian package:
+>>
+>> --- a/xen/arch/x86/cpu/mcheck/mce_amd.c
+>> +++ b/xen/arch/x86/cpu/mcheck/mce_amd.c
+>> @@ -97,7 +97,7 @@
+>>        if ( errorcode & MC_EC_TLB_TYPE )
+>>            return MC_EC_TLB_TYPE;
+>>        /* Unreached */
+>> -    BUG();
+>> +    printk(XENLOG_WARNING "MCE: unknown AMD error code %#x\n", errorcode);
+>>        return 0;
+>>    }
+>>
+>> --- a/xen/arch/x86/cpu/mcheck/mce.c
+>> +++ b/xen/arch/x86/cpu/mcheck/mce.c
+>> @@ -304,3 +304,6 @@
+>>            if ( !(status & MCi_STATUS_VAL) )
+>>                continue; /* this bank has no valid telemetry */
+>>
+>> +        if ( who == MCA_POLLER )
+>> +            printk(XENLOG_WARNING "MCE: CPU%u bank %d status %#"PRIx64"\n",
+>> +                   smp_processor_id(), i, status);
+>>
+>>
+>> We now have some data points:
+>>
+>> (XEN) [2026-10-27 13:42:10.588] MCE: CPU2 bank 23 status 0x830824448b48ffff
+>> (XEN) [2026-10-27 18:19:55.593] MCE: CPU2 bank 23 status 0xffffffffffffffff
+>> (XEN) [2026-10-27 22:11:10.596] MCE: CPU2 bank 17 status 0xffff832036a40048
+>> (XEN) [2026-10-27 22:11:10.596] MCE: unknown AMD error code 0x48
+>> (XEN) [2026-10-28 00:33:55.597] MCE: CPU2 bank 10 status 0xffff82d04022a8af
+>> (XEN) [2026-10-28 05:26:40.599] MCE: CPU2 bank 17 status 0xffff82d0402408e3
+>> (XEN) [2026-10-29 23:17:25.618] MCE: CPU2 bank 17 status 0xffff82d04022a8af
+>> (XEN) [2026-10-30 03:25:10.622] MCE: CPU2 bank 23 status 0xffffffffffffffff
+>> (XEN) [2026-10-30 10:05:55.625] MCE: CPU2 bank 10 status 0xffffffffffffffff
+>> (XEN) [2026-10-31 00:58:10.625] MCE: CPU2 bank 17 status 0xffff888100b872e8
+>> (XEN) [2026-10-31 00:58:10.625] MCE: unknown AMD error code 0x72e8
+>> (XEN) [2026-10-31 04:17:55.632] MCE: CPU2 bank 23 status 0xffff831f00006000
+>> (XEN) [2026-10-31 04:17:55.632] MCE: unknown AMD error code 0x6000
+>>
+>> Only 3 of these would have hit the BUG(); the others have UC clear or
+>> an error code that happens to contain a type bit.
+>>
+>> The values look like pointers rather than status registers:
+>>
+>>     ffff82d040......  Xen text/data -- the prefix of every RIP in my
+>>                       earlier panic dumps
+>>     ffff831f........ / ffff8320........  same range as rsp in those
+>>                       dumps (e.g. ffff831fe6b3fc38, ffff832036a87c38)
+>>     ffff888100b872e8  dom0 Linux range?
+> Plus the very first of the entries above is a pointer value rotated by 16 bits.
+>
+>> Two things that make me doubt these are real status values at all:
+>> 0xffff82d04022a8af appears twice, 47 hours apart, for two different
+>> banks (10 and 17). And all timestamps are congruent mod 15 seconds,
+>> i.e. this is the poller hitting it on a small fraction of passes.
+> There's no question that the values are garbage. We just need to find out why
+> that is. As we have to explore all (remote) possibilities, first of all - you
+> don't play any games involving the XEN_MC_msrinject hypercall, do you? For
+> the immediate purpose here, and since ...
+
+No, I never used XEN_MC_msrinject hypercall on this host; it's a
+plain Debian trixie installation.
+
+
+>> I don't know where the read goes wrong.
+> ... I can't make sense of the behavior either, I'm inclined to suggest that
+> you add this hunk to your debugging patch:
+>
+> --- a/xen/arch/x86/cpu/mcheck/mce.h
+> +++ b/xen/arch/x86/cpu/mcheck/mce.h
+> @@ -79,7 +79,6 @@
+>   static inline uint64_t mca_rdmsr(unsigned int msr)
+>   {
+>       uint64_t val;
+> -    if (intpose_lookup(smp_processor_id(), msr, &val) == NULL)
+>           rdmsrl(msr, val);
+>       return val;
+>   }
+>
+>> /dev/mcelog records match the log lines one-to-one (same banks,
+>> same order, all CPU 2), but carry status zero in every case. The record's
+>> status comes from the second read in mca_init_bank(), before
+>> mcabank_clear(), so that second read returned 0.
+> Based on this observation, another thing you may want to try is extend the
+> existing hunk you have to
+>
+> --- a/xen/arch/x86/cpu/mcheck/mce.c
+> +++ b/xen/arch/x86/cpu/mcheck/mce.c
+> @@ -304,6 +304,17 @@
+>            if ( !(status & MCi_STATUS_VAL) )
+>                continue; /* this bank has no valid telemetry */
+>
+> +        if ( who == MCA_POLLER )
+> +        {
+> +            printk("MCE: CPU%u bank %d status %#"PRIx64"\n",
+> +                   smp_processor_id(), i, status);
+> +            status = mca_rdmsr(MSR_IA32_MCx_STATUS(i));
+> +            printk("MCE: CPU%u bank %d -> %#"PRIx64"\n",
+> +                   smp_processor_id(), i, status);
+> +            if ( !(status & MCi_STATUS_VAL) )
+> +                continue;
+> +        }
+> +
+>           /*
+>            * For Intel Latest CPU CMCI/MCE Handler caller, we need to
+>            * decide whether to clear bank by MCi_STATUS bit value such as
+>
+
+
+Since 2026-11-03 the host runs Xen 4.20.5-pre (Debian
+4.20.4+39-gf1e1321c87-0+deb13u1) with your two debugging hunks
+(intpose_lookup() removed from mca_rdmsr(), re-read in the poller) and
+your "x86/MCE: reduce redundant code" series (both patches). In 7 days:
+
+
+(XEN) [2026-11-03 13:54:50.378] MCE: CPU2 bank 25 status 0x8000001fe67e1163
+(XEN) [2026-11-03 13:54:50.378] MCE: CPU2 bank 25 -> 0
+(XEN) [2026-11-03 14:52:20.360] MCE: CPU2 bank 7 status 0x8000000080000000
+(XEN) [2026-11-03 14:52:20.360] MCE: CPU2 bank 7 -> 0
+(XEN) [2026-11-03 20:01:20.264] MCE: CPU2 bank 25 status 0xffff82d04022a8ef
+(XEN) [2026-11-03 20:01:20.264] MCE: CPU2 bank 25 -> 0
+(XEN) [2026-11-05 14:31:19.276] MCE: CPU2 bank 25 status 0x8000001fe67e1163
+(XEN) [2026-11-05 14:31:19.276] MCE: CPU2 bank 25 -> 0
+(XEN) [2026-11-06 11:27:18.812] MCE: CPU2 bank 24 status 0xffff832036a754c0
+(XEN) [2026-11-06 11:27:18.812] MCE: CPU2 bank 24 -> 0
+(XEN) [2026-11-06 18:26:48.671] MCE: CPU2 bank 7 status 0xffff831fe6b154c0
+(XEN) [2026-11-06 18:26:48.671] MCE: CPU2 bank 7 -> 0
+(XEN) [2026-11-07 06:31:48.345] MCE: CPU2 bank 16 status 0xffff8313f11d2010
+(XEN) [2026-11-07 06:31:48.345] MCE: CPU2 bank 16 -> 0
+(XEN) [2026-11-07 09:41:48.243] MCE: CPU2 bank 16 status 0xffffffffffffffff
+(XEN) [2026-11-07 09:41:48.243] MCE: CPU2 bank 16 -> 0
+(XEN) [2026-11-07 21:32:17.875] MCE: CPU2 bank 7 status 0xffff83203a5ea2d0
+(XEN) [2026-11-07 21:32:17.875] MCE: CPU2 bank 7 -> 0
+(XEN) [2026-11-08 06:25:47.633] MCE: CPU2 bank 16 status 0xffffffffffffffff
+(XEN) [2026-11-08 06:25:47.633] MCE: CPU2 bank 16 -> 0
+(XEN) [2026-11-08 15:11:17.390] MCE: CPU2 bank 16 status 0xffff82d040588f80
+(XEN) [2026-11-08 15:11:17.390] MCE: CPU2 bank 16 -> 0
+(XEN) [2026-11-09 07:29:46.980] MCE: CPU2 bank 16 status 0xffffffffffffffff
+(XEN) [2026-11-09 07:29:46.980] MCE: CPU2 bank 16 -> 0
+(XEN) [2026-11-09 10:49:46.880] MCE: CPU2 bank 7 status 0xffffffffffffffff
+(XEN) [2026-11-09 10:49:46.880] MCE: CPU2 bank 7 -> 0
+(XEN) [2026-11-09 13:09:16.822] MCE: CPU2 bank 7 status 0xffffffffffffffff
+(XEN) [2026-11-09 13:09:16.822] MCE: CPU2 bank 7 -> 0
+
+
+- All on CPU2. The re-read returned 0 in every case (14/14), so no
+   bank was processed and /dev/mcelog stayed empty.
+- Against this build's xen-syms.map: 0xffff82d04022a8ef is
+   timer.c#add_entry+0x4f, 0xffff82d040588f80 is irq_stat.
+
+Peter
+
 
