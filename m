@@ -2,60 +2,63 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D2F44606A321
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2026 14:30:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C6659606A321
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2026 14:35:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=RdbK5LS/
-Received: from list by lists.xenproject.org with outflank-mailman.1481894.1685786 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=selector1 header.b=LfG0wNvr;
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=selector1 header.b=LfG0wNvr
+Received: from list by lists.xenproject.org with outflank-mailman.1481905.1685795 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQmr3-0006JC-JO; Tue, 10 Nov 2026 14:29:45 +0000
+	id 1xQmwg-0008NS-9x; Tue, 10 Nov 2026 14:35:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1481894.1685786; Tue, 10 Nov 2026 14:29:45 +0000
+Received: by outflank-mailman (output) from mailman id 1481905.1685795; Tue, 10 Nov 2026 14:35:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQmr3-0006J5-Gc; Tue, 10 Nov 2026 14:29:45 +0000
-Received: by outflank-mailman (input) for mailman id 1481894;
- Tue, 10 Nov 2026 14:29:43 +0000
+	id 1xQmwg-0008NL-6d; Tue, 10 Nov 2026 14:35:34 +0000
+Received: by outflank-mailman (input) for mailman id 1481905;
+ Tue, 10 Nov 2026 14:35:32 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1xQmr1-0006In-JV
- for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 14:29:43 +0000
+ (envelope-from <Bertrand.Marquis@arm.com>) id 1xQmwe-0008Lo-Ne
+ for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 14:35:32 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xQmr1-006T8z-08
- for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 15:29:43 +0100
-Received: from [10.42.69.12] (helo=localhost)
+ id 1xQmwd-006U2m-Ro
+ for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 15:35:31 +0100
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6af32a46-2eae-0a2a0a5409dd-0a2a450c9d48-38
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 15:29:42 +0100
-Received: from [52.101.62.62]
- (helo=DM5PR21CU001.outbound.protection.outlook.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6af32a54-f479-0a2a450c0019-34653e3ea15b-3
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 15:29:42 +0100
-Received: from DS7P220CA0014.NAMP220.PROD.OUTLOOK.COM (2603:10b6:8:223::6) by
- CH0PR12MB8488.namprd12.prod.outlook.com (2603:10b6:610:18d::18) with
- Microsoft SMTP Server (version=TLS1_2,
+ (envelope-from <Bertrand.Marquis@arm.com>)
+ id 6af32bb2-8faa-0a2a0a5109dd-0a2a4504d496-6
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 15:35:31 +0100
+Received: from [52.101.66.64]
+ (helo=DUZPR83CU001.outbound.protection.outlook.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Bertrand.Marquis@arm.com>)
+ id 6af32bb2-b57f-0a2a45040019-34654240275b-3
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 15:35:31 +0100
+Received: from DUZPR01CA0057.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:469::6) by PAWPR08MB11087.eurprd08.prod.outlook.com
+ (2603:10a6:102:46b::18) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.8; Tue, 10 Nov
- 2026 14:27:20 +0000
-Received: from BN1PEPF00018549.namprd05.prod.outlook.com
- (2603:10b6:8:223:cafe::4) by DS7P220CA0014.outlook.office365.com
- (2603:10b6:8:223::6) with Microsoft SMTP Server (version=TLS1_3,
+ 2026 14:35:28 +0000
+Received: from MAD0EPF000008BC.eurprd04.prod.outlook.com
+ (2603:10a6:10:469:cafe::44) by DUZPR01CA0057.outlook.office365.com
+ (2603:10a6:10:469::6) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.615.8 via Frontend Transport; Tue, 10
- Nov 2026 14:27:20 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- BN1PEPF00018549.mail.protection.outlook.com (10.167.248.8) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.615.4 via Frontend Transport; Tue, 10 Nov 2026 14:27:20 +0000
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Tue, 10 Nov
- 2026 08:27:19 -0600
-Received: from [192.168.31.141] (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.53 via Frontend
- Transport; Tue, 10 Nov 2026 08:27:19 -0600
+ Nov 2026 14:35:25 +0000
+Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
+ MAD0EPF000008BC.mail.protection.outlook.com (10.167.241.171) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.615.4
+ via Frontend Transport; Tue, 10 Nov 2026 14:35:25 +0000
+Received: from AM6PR08MB4754.eurprd08.prod.outlook.com (2603:10a6:20b:c7::11)
+ by AS2PR08MB9198.eurprd08.prod.outlook.com (2603:10a6:20b:579::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.9; Tue, 10 Nov
+ 2026 14:34:51 +0000
+Received: from AM6PR08MB4754.eurprd08.prod.outlook.com
+ ([fe80::a011:ffac:e18d:5d83]) by AM6PR08MB4754.eurprd08.prod.outlook.com
+ ([fe80::a011:ffac:e18d:5d83%3]) with mapi id 15.21.0592.009; Tue, 10 Nov 2026
+ 14:34:51 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -64,214 +67,200 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"; dkim=pass header.s=selector1 header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=b2AazJm1KOan7o3xcETTcXWkA6z6Tn6i2AhB0MRy0Ib+1hz1+YePlGzC4kLkDWwLxEM4s8f6m3W80xegRp/L4FMhRx98973rQRDdjKt6A4vtwABcakIQ4in+2H1P9cDze4rM7o4/p1X9MP/ecvvWH+1Y5FnJosZ6236/LIZ9ZmrDra4mv6BXF/xT74OVrEAfG4xrBypolTbyKm/IayWRHyAdShcdlyLCHGdyEqHMRXUqQxn9I6a4TUzmrXaNo/WVvgA2UPoMuCq03dFD/gXhxdl/neKp7FTYAcrfkmA9dKJlLFgxfBQTPpBciHCyaCk3QgVlZYcSkZ/sFan01/QusA==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=6+iP7e/TZoNND1LvqmFEhaAdfLTzMt27JLbgCxF7u7E=;
+ b=hiLy020610JikiFi/O/MjsjfRSn4FelqZFYIKROKlyjGHVod3oFB1UrCfiTS9+13PeYCOqTfbHbMsRaZhOiVHEJ4U9U7W8t4Y6iW4bMbYWR7MPZJWJUOVg5ucRZ/Gz6JIKJ2flA+2ouoCwoxI+Y2DwAG8ufG6kbdPFzpG/0QjQvmvNojy5y9rAO9HhbaeeqjA6jD7cub3IwL6O7tLsvVhdMFOLUwL4DY9B9YtHuihrtqbiryK4Fi8I1dmcEOLlBIHBf28m6vDwsYgX7zbijxbSC7+Q3lKCZU2V2MQkpSKZru1kMFXikkp7whpqxAbtGgLvmx2NBQQmyHhtuwLKnAeg==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 4.158.2.129) smtp.rcpttodomain=epam.com smtp.mailfrom=arm.com; dmarc=pass
+ (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
+ (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
+ spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=6+iP7e/TZoNND1LvqmFEhaAdfLTzMt27JLbgCxF7u7E=;
+ b=LfG0wNvrYMqGP2D6B+AgMUn0lY7XonJVg/nJzApIewOJHEP8B/eZaCzDt3CYRNpfdcwjpt7l2wuzcmPNtjzXyM0X/f+RZC3j9yxv5Sefv+DhBddRcz702WeDRvN6uQVupclPThZIWNmHdd3jXGDHbKPi0cKkySG9SqKyQhmy3e8=
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 4.158.2.129) smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=arm.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
+ client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=uDJpSrQiv53PXkZQ0sHSXBLzY1tqORc1Ra2iJyVF2CJsk9NI6gZiQpM5FxbFOD+wdlWoJJeXxFGfZR6BTT1LXI+RDjMzUKNwwYdFIKRX0lni4dkot/WM5jrINGB1Ix7FJLLQY5K7ecQTLxGhyUT7WUvlLP+vmuNVu5qudUVofQbDWcj7VtBchArHkFCkK76orU6wR/JC4LEFiDUgGxTiTxtixmCmAyjbvjj8OT7PtF12Jc8a5eLdxTaDC4ygZcv+zooEQuDhJdO2ylfYF6JW3dxGYu/zawvEIRZUlTrI9vWqkbMEjthob1E7Qh4aUicTYB0M0aFeRd63Z0pAsN2qrA==
+ b=FmOJ2GOGAOw7geJXcopB490qcw+5GyzJtxePlUn1WyhzcRia8xv4Jzuy/5dzRHpntfizTGyhw3N3/xLRFmXpyrUxfySxRA0fBGVTUCjfENVHD6YXS3XPzheaRYuvYnMM83EeS+kgO87IvGIlft6iL6L+Dkc1bTjkHsCVQ2ztrUcU1MCZNnWzGXnLqw+7bAkW9pI8COBHs42vN7/z5MWRrTrlOOK7yKR2cO1lwdYOzK+srnmhlxb1+hB4BKx7W8wk1GUwlNtCzlh29VJZMDy6NeZfmX6h4kJgUm0c8R5yiPhQU93VxwLjTYVKrz8JAYHO4hxjVQGor25QWXIH3B+uKw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=quPG9Sq5MvpTcara0/p1JthR/s5Lk4XDxLq7gOIWmnI=;
- b=R+IF9jrqLUPnRHU6YKNR1DiT8FiHsHdNOc+grhsAEfEsyHyEmCJq7A/w87xQq88RXOWooeQ1GQgw40tdrZbcimf9hBNzs9CHGO+AYe3S7IOmomttm9PpGKBjqzktZIet3DRN8LUUVSfntDfmRmCrP3BppU6LvwOHXyApfv0doVr5adhqL/q0fFYiuOavyfBEyFK7nQRIiWPhldFVw5k9OOQWcw42tRerljeJLAmGi6BN7xsbY+rePhtBn2ltgKERu+BwJu0OFTKEaCJrp7zHwKsoHDEKZ9EfnwNcVed0vzPbmxSPQwtlkYtpV8ayAeymPxyWZyi7+vuCTA3YO3NlKA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=cyberperseus.com smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ bh=6+iP7e/TZoNND1LvqmFEhaAdfLTzMt27JLbgCxF7u7E=;
+ b=X+ah3aglVJBOOXrcwZpRCoC9s9EefW9UaO1TNsVzxtVzBHcxfdo8aegAZApbi2C96KK33IYRihHUonVn3YMq3zRRaeP1OH8sifa2AgUnaNo0mrjM2zCN86TrH/rwv3GNS+ylevNHAdR37xaIOJZp8aohE1ssd/uwessgJueiWI6QzMVF0tZBVc+q+61cmS3MGoNyhC5y5eaKTVXgfsRnZ3WvnnHzGGZ0qF7R9dbDTAKZj0MmmHzIDHZQvYosTAmsGQDAFx2N/I5ZY/PKj7dT36Vo8F5iByLhZSIvfl5uzpHipkH/XeBirKBeDzE1HTFDxEs/hftHZDNyTBd1+HEvTA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=quPG9Sq5MvpTcara0/p1JthR/s5Lk4XDxLq7gOIWmnI=;
- b=RdbK5LS/jIIfw4axCr9vFdgcf3wK1IVmStTT8vHlINhz1GXIiCfRlxorOL9VRSw7L+ZQfFtcpT6wXqInooY6Kw0Hc4p9jaoQL9KajT4IQ9lVTOYFNxi/rGezkdjY/iXxoogmjIZOh99zGNONUemoNc/gp/rgxixoAaAEGUy6TBU=
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Message-ID: <aa7eb7ea-faed-4772-a29f-47f12bd57c09@amd.com>
-Date: Tue, 10 Nov 2026 15:27:18 +0100
-X-Archived-By: <archiver.kernel.org>
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH] xen/device-tree: Experimental support for TI K3
- custom interrupt properties
-To: =?UTF-8?B?7KCV7ISd7Jqp?= <jed@cyberperseus.com>,
-	<xen-devel@lists.xenproject.org>
-References: <gab279844341.0.1792481113640@cyberperseus.com>
-From: "Orzel, Michal" <michal.orzel@amd.com>
+ bh=6+iP7e/TZoNND1LvqmFEhaAdfLTzMt27JLbgCxF7u7E=;
+ b=LfG0wNvrYMqGP2D6B+AgMUn0lY7XonJVg/nJzApIewOJHEP8B/eZaCzDt3CYRNpfdcwjpt7l2wuzcmPNtjzXyM0X/f+RZC3j9yxv5Sefv+DhBddRcz702WeDRvN6uQVupclPThZIWNmHdd3jXGDHbKPi0cKkySG9SqKyQhmy3e8=
+From: Bertrand Marquis <Bertrand.Marquis@arm.com>
+To: Mykola Kvach <mykola_kvach@epam.com>
+CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Stefano
+ Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Michal
+ Orzel <michal.orzel@amd.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Luca Fancellu <Luca.Fancellu@arm.com>
+Subject: Re: [PATCH v13 03/14] xen/arm: gic-v3: tolerate retained
+ redistributor LPI state across CPU_OFF
+Thread-Topic: [PATCH v13 03/14] xen/arm: gic-v3: tolerate retained
+ redistributor LPI state across CPU_OFF
+Thread-Index: AQHdZlcH8ffpXAdblEmVMEzSma2NmbcndI+A
+Date: Tue, 10 Nov 2026 14:34:51 +0000
+Message-ID: <0BB76C40-88AC-4719-84F3-52D491380271@arm.com>
+References: <cover.1793129971.git.mykola_kvach@epam.com>
+ <5fbe90be9e32464bf0f03f50614e65fd899d608c.1793129971.git.mykola_kvach@epam.com>
+In-Reply-To:
+ <5fbe90be9e32464bf0f03f50614e65fd899d608c.1793129971.git.mykola_kvach@epam.com>
+Accept-Language: en-GB, en-US
 Content-Language: en-US
-In-Reply-To: <gab279844341.0.1792481113640@cyberperseus.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN1PEPF00018549:EE_|CH0PR12MB8488:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1159a246-9a29-4b7a-a184-08df3f36baac
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-mailer: Apple Mail (2.3864.700.51.1.3)
+Authentication-Results-Original: mx.microsoft.com 1; dkim=none (message not
+ signed) header.d=none;dmarc=none action=none header.from=arm.com;
+x-ms-traffictypediagnostic:
+	AM6PR08MB4754:EE_|AS2PR08MB9198:EE_|MAD0EPF000008BC:EE_|PAWPR08MB11087:EE_
+X-MS-Office365-Filtering-Correlation-Id: de164125-473d-4433-2a83-08df3f37dbe2
+x-checkrecipientrouted: true
+nodisclaimer: true
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted:
+ BCL:0;ARA:13230040|23010399003|376014|1800799024|366016|10067099003|6133799003|18002099003|22082099003|261102123227099003|38070700021|261022105027099003|56012099006|261022075727099003|4143699003|11063799006|261026121527099003|261028144727099003|261026140227099003|261021121427099003;
+X-Microsoft-Antispam-Message-Info-Original:
+ kqbCxkpHbg+I3EjpSJSwNO16eliMisM5xlnQ5CmQzyoOf3TDTX0KKKpwEFXMSWoPcigFZ1KCwCEbVrVyFXzxAAxeemA6zeoU/Mg1fTqe9uzJnixyYNaXl+XeeM+mGxTZtLG9XChQ9aDrurWjqR9Qvp7bhpJ0lFQC4AulbNnYdOHDOB6DnJ947DcO7v+kpkLKvXTS0c8mNj7FirnFOHjGAMvZkaQEAUkIudxn2/bk/i1s6v6G7IuUSwFKSTzRGMaSk4QJp/biWn6T9+WzJvnRRjYhchfPmyWBRomrHX1mFQAh+TyNHNearKjqFD3h5mAbgqM2p3mAAa0fKzThcEQhmk3nSRU6mA/F76VW4oPuVxzn++gOVTQSW8daphQdicXJpReLvKQnP9O5HVoBPMhKQWjSdOUYyjT5uB2KcjqPG1xWrlBWZnxXeT/qUTedSGymzd9FjkW2l4F9w3zl/yKBTQ40WMFIYEi+te6+gE8WNn4anQ5dRCA4gTziDeONJO56O/J9I5F0dBRhe7sgSuBMOLoF+OnAAwL4tSLufkNImgjnBw4hHN7xIM/jycrI7xwCRaYR1p2NA6BOgKK4M/yEYsvBGjygKRRuLMyKXnuR94AaF4gROfQsTm2R569jhvXlwECNZ8kQU6uQeYHmrwXTlVfn/vjZQKK2v5hhlaqst5R1vJWZ/3bWgmnKi31BnHGzqcgshRyTAPPAhy9MsGfaQbCDJmInW8LTNEfpe/kiVAE=
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM6PR08MB4754.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(376014)(1800799024)(366016)(10067099003)(6133799003)(18002099003)(22082099003)(261102123227099003)(38070700021)(261022105027099003)(56012099006)(261022075727099003)(4143699003)(11063799006)(261026121527099003)(261028144727099003)(261026140227099003)(261021121427099003);DIR:OUT;SFP:1101;
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <93797E645DAD264FB2078EC6E3FFF807@eurprd08.prod.outlook.com>
+Content-Transfer-Encoding: quoted-printable
+X-Archived-By: <archiver.kernel.org>
+MIME-Version: 1.0
+X-Exchange-RoutingPolicyChecked:
+ PQ7gXwNgqv6mp2jyqXVgiy7jiuEISbFSW1id8k71aSMg/16SRsAKO+jK5XeIt4ELpfetK1MgVJhLrvpScEisfGfzDEIiRbhR697jpqtP8f3e9AuXv7bW30xGUMbero7//Qncz17NhgLxZxd4K7ucHB/Ri6PxPVzQlO+ZauI+nfzzjSHdJ0mXUQhtz/yWfnwbaM7djRC98R3RmRYGlf1ShIqN+Q8xoDVxo/yjFvEyjN9CFvo5r4ua0wjExdSjdm6ZoiQDTUJd7abxXi4exNWM58uFxniaOwWTTNfa1hTQhSzFvNptpBUtqOhFohb63q7nCvzLfsl6B2sYL3uWMrrqjw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR08MB9198
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ MAD0EPF000008BC.eurprd04.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+	dd3121e1-e90f-426f-6637-08df3f37c785
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700016|376014|1800799024|82310400026|23010399003|56012099006|11063799006|18002099003|22082099003|6133799003|10067099003|261009223027099003|261102123227099003|261026121527099003|261026140227099003|261021123027099003|261021121427099003|261022115727099003|261022105027099003|261022075727099003|261028144727099003|3023799007;
+	BCL:0;ARA:13230040|82310400026|14060799003|35042699022|36860700016|1800799024|23010399003|376014|11063799006|4143699003|56012099006|18002099003|22082099003|6133799003|10067099003|261102123227099003|261026121527099003|261026140227099003|261021121427099003|261022105027099003|261022075727099003|261028144727099003;
 X-Microsoft-Antispam-Message-Info:
-	da2aaIh/Am3AX0/ox4irpuJQ7h84NZHRcllZER+GY+Uj97MTgZM1BKyHK5pPO17Ac486qndoRHmigMY/gwkw0yuoB2LbI191CU/MCiNzfbwYOSc4c4TLib+p0wuEXcZImEc4bDcph+x0w1JJ+JMokNNd2QaJ6et0SZxZS4n5ThiKDVUUF+pzCebVVt/9tOCzCvADSbCA8p/+A4M/e+a2lf3e9VBYjuYQemNVhALYt9rELrilRkA853IcPe6dvKwluntIZoCG4pd/bQvgqH+XZp9z4jRimG7OlVhh0Q7iR9Qsv3l9SSMmOGC/bwdyyuVPI6TgG3LTNvGOIPPTxWCnt4kQ+cCkg2HYtddmv8/cba6lvlomM3FQTxOvh+lnbjorpEPLaUzIDbDokkhlemaySM6B/ulV8/W8RMpebFtRy5DvsUDYWShKTmEHoTHb8/YmzPko9sZVowe5cWxQ6GV5s/Y4hgZ/Wd7CMlKPxabUfFoWH7Er5P4RmEuug4U4nzQSvIVdUcMxpud8lx0T5zJavj5WcSEmStuHFQ7yvd8dkIltug08XoEMCIkHOVpzRHUe74i6pP0AWf8bcG8GAr3aU4lbTEPsgGUDd6WMlpKM5K8OPDIs7o6d+CjAHKguG0zFn4VHi5sVoU8zg5Ga3vpdG2y66ni/scVYqmIZnUftUeOmbPTdwF4hvT1mo8RI0gIDM+tA1F1Z5b0Xucgx59VQrQ==
+	X0qceLVX0Iz+FolzIMpriRXEmDmdMIROV6ESlGVhiYFBUS5UVdtZamjuKWX0jJbR7Nz4liggtSPbPEP8Jsc+1GN/tVbnC5vGvciVPU58fg6aBa5MBzlV9dN3ceuCbv1ic3NmEDWnWaZu0rT3xa5pVmWmQfbHvK+JAr+DoQLvSx+GLEb3Ta41GJZwRuZAU8og/idxIIxVuZbg2QbzoRrqhaMy3wamR2prm9h8e0w1cEnBs8riUw/n8bAUtGEmUKO/Jlxa12S7+FzCK3u3OEYG9ptpjeLBBPQnU0VBp40XGcnk4COiv0wZcQXRpwVGw4if4DUytJdZnXm+FoqlnajJBmE/wwU6PXQlY9ltlZzQyajRuNVicLHsAQxGC6+NCeCHb9YZf4ZL4jznkw54BZctpGTHHU2jPna8iigts+DssupFwZ/pI/iqgg1cxt93GTWNzSoGgiy/VGxG1SZWjLoUqLkXuhFYpKhjTl8xjGBqFuTTvzg+IXVpVq3WhXNLEbCi5Rq1flV9TTnSQV2z47UA5mbCFuhlT5GDIZSNUYM+brGd6YUqULFEVaH3BnMpVnyskkO5kk462BdhmwphQyIG17GS4k8cpThtq4FAJwT4s4O8zfsL0KfxkY4Qe2GXJPIJ1xziznyy06QoHkYZywopQyV+Sblt+vYqR2V5HbSYWGA7e3h0wNYvkwVbbf7l6e6bvWKaSaBBxzoxt3HQEClbPg==
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(376014)(1800799024)(82310400026)(23010399003)(56012099006)(11063799006)(18002099003)(22082099003)(6133799003)(10067099003)(261009223027099003)(261102123227099003)(261026121527099003)(261026140227099003)(261021123027099003)(261021121427099003)(261022115727099003)(261022105027099003)(261022075727099003)(261028144727099003)(3023799007);DIR:OUT;SFP:1101;
+	CIP:4.158.2.129;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:outbound-uk1.az.dlp.m.darktrace.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(14060799003)(35042699022)(36860700016)(1800799024)(23010399003)(376014)(11063799006)(4143699003)(56012099006)(18002099003)(22082099003)(6133799003)(10067099003)(261102123227099003)(261026121527099003)(261026140227099003)(261021121427099003)(261022105027099003)(261022075727099003)(261028144727099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	zGejFXvMQvJpN0uPXdJbx37JqIMltxhrPLVB6PrbFMU8DE4xIKhsLhhSCVsEQgdiJC+op0twtnDQ9NpUSJfTuEIvG+pDUNy7LfLKw2e1ExPs487yYSqXHglD3vFA9488uxWA8/FEyTjbWJ8sMdAfx7nj4D8FQcviSOuBJAJdrlj+3n7RsDO0HnSDyc0o2ahHzPeecrWUNOZrZQzZHGvIGbf1ik+E1q7Msy0zuQMuj7UchF6I1XfxXS0Lcz8aOVzhLsHzsDFdqmdnBIslFTBT+P28moqSRXs9+HtTyeTmPLc+657GX06uyhv+n18Cq5DJ04kwyXip5qmeVLzp0I1hJd/RtY7C9t7cmQshuizgo06USD4cn6WJ6lFWvXlFk2BtB+LGSbSxkO8WUh+zknt1emUO3CUJlaYzz38JPOro5UYGmU2c+/RQ1i3HY9qmWPvR
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Nov 2026 14:27:20.2106
+	wgbhC7OT5IM2FO7UE0OElpmZJYx3mtne/QhEum9D1o2Ip5T4rJI+BzC4SIJZWQREVijYdbAx3tfSLuNRVX3q+WYeJep7z5vnt6uPfffjsFu9RZPEu+wAqfLrDfbD5Z4/wWiOFmd9BAogORn+PopqT+iiR6dq33yHMUXYWfSvkHbh0TjyzIlcAvOBnSduS3ucsBWRwc+zTDXcewjjCuTmxaiadmPCkhhYqZ+GY9HzsbDZYlxBADGqfUzqBHZ3zdeBsN/74KyERLNJjpj5QRHpzP1q+umIPpHJkntXhJGVyyeNKXtE1P6CDA/D2j2zzP5+dXID4q16M+ZzehEE29k3vnBPo07tkg1vY745yfqTtBixaINCNEBAtTzP2q94jIoBwpI/Hdl8zGTOT+c8XG2WjtRkRkFJtv3sf/S9QTSrY7TUqtStDACx91AeYistcfyy
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Nov 2026 14:35:25.3075
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1159a246-9a29-4b7a-a184-08df3f36baac
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-Network-Message-Id: de164125-473d-4433-2a83-08df3f37dbe2
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[4.158.2.129];Helo=[outbound-uk1.az.dlp.m.darktrace.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BN1PEPF00018549.namprd05.prod.outlook.com
+	MAD0EPF000008BC.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR12MB8488
-X-purgate-ID: tlsNG-d25034/1794320982-00CCBA5B-6C653E4F/0/0
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR08MB11087
+X-purgate-ID: tlsNG-ebf023/1794321331-C34C3B50-482D82F6/0/0
 X-purgate-type: clean
-X-purgate-size: 5236
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=4.0.1
+X-purgate-size: 3548
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+Hi Mykola,
 
+> On 27 Oct 2026, at 22:05, Mykola Kvach <mykola_kvach@epam.com> wrote:
+>=20
+> PSCI does not guarantee that a GICv3 redistributor is powered down across
+> CPU_OFF -> CPU_ON.
+>=20
+> DEN0022F.b says CPU_OFF powers down the calling core (5.5) and CPU_ON
+> brings the core back with a defined initial CPU state (5.6, 6.4).
+> However, PSCI leaves interrupt migration and GIC re-initialization to the
+> supervisory software/firmware stack: the caller must migrate interrupts
+> away before CPU_OFF (5.5.2), and the execution context that is lost in a
+> powerdown state must be saved and restored by software (6.8). PSCI also
+> calls out GIC management explicitly in 6.8, including retargeting SPIs,
+> preventing PPIs/SGIs from targeting a powered down CPU, and reinitializin=
+g
+> the CPU interface after CPU_ON.
+>=20
+> This matches the GIC architecture. IHI0069H.b Chapter 11.1 requires the P=
+E
+> and CPU interface to share a power domain, but explicitly allows the
+> associated redistributor, distributor, and ITS to remain powered while th=
+e
+> PE and CPU interface are off. All other GIC power-management behavior is
+> IMPLEMENTATION DEFINED. DEN0050D Chapter 4.2, "Generic Interrupt
+> Controller (GIC)", says the GICv3 redistributor may live either in the AP
+> core power domain or in a relatively always-on parent domain. So after
+> CPU_OFF -> CPU_ON a secondary CPU can legitimately come back to a live
+> redistributor with GICR_CTLR.EnableLPIs still set.
+>=20
+> Handle that case in the LPI setup path instead of assuming a fully reset
+> redistributor.
+>=20
+> The LPI path needs special care because the GIC spec makes redistributor
+> LPI state sticky and partially implementation defined. IHI0069H.b 5.1.1
+> and 5.1.2 say that changing GICR_PROPBASER or GICR_PENDBASER while
+> GICR_CTLR.EnableLPIs =3D=3D 1 is UNPREDICTABLE. After clearing EnableLPIs=
+,
+> software must wait for GICR_CTLR.RWP =3D=3D 0 before touching the pending
+> table. The architecture also permits implementations where, once
+> EnableLPIs has been set, clearing it again is not guaranteed to work.
+> Where an ITS is present, the spec strongly recommends moving LPIs to
+> another redistributor before clearing EnableLPIs.
+>=20
+> Because of that, treat a retained EnableLPIs state as valid when the
+> redistributor still points at Xen's expected PROPBASER/PENDBASER tables.
+> Only try to clear EnableLPIs when the retained configuration does not
+> match Xen's state, and wait for RWP before reprogramming the tables.
+>=20
+> This is also consistent with platform firmware reality: PSCI and the GIC
+> architecture allow platform-specific redistributor power handling, and no=
+t
+> all platform firmware implementations force a full redistributor power-of=
+f
+> through implementation-defined controls during CPU_OFF. Xen therefore nee=
+ds
+> to tolerate retained redistributor state on secondary CPU bring-up.
+>=20
+> Keep gicv3_populate_rdist() resident as well, because gicv3_cpu_init()
+> reuses it on secondary CPU bring-up after init.
+>=20
+> Tested using Xen's non-boot CPU disable/enable path on Arm
+> FVP_Base_RevC-2xAEMvA, both with and without:
+> -C gic_distributor.allow-LPIEN-clear=3D1
+> -C gic_distributor.GICR-clear-enable-supported=3D1
+> and on Orange Pi 5.
+>=20
+> Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+> Reviewed-by: Luca Fancellu <luca.fancellu@arm.com>
 
-On 20-Oct-26 09:25, 정석용 wrote:
-> Hello,
-> 
-> This RFC patch adds support for Texas Instruments (TI) K3 custom 
-> interrupt properties ('ti,interrupt-ranges' and 'ti,intr-trigger-type') 
-> in Xen's device tree parser.
-> 
-> On TI K3 platforms, certain devices use these custom properties instead 
-> of the standard 'interrupts' property due to the TI-SCI interrupt router 
-> architecture. Currently, Xen fails to parse these nodes, preventing 
-> proper interrupt configuration for those devices.
-> 
-> To address this, the attached experimental patch extends 
-> dt_number_of_irq() and dt_device_get_raw_irq() to parse 
-> 'ti,interrupt-ranges' and calculate raw IRQs accordingly.
-> 
-> However, this implementation has several limitations and is far from ideal:
-> 1. Vendor-specific properties are hardcoded into Xen's common 
->    device tree parser.
-> 2. Manual index calculations and magic numbers are used rather than 
->    leveraging a proper abstraction layer.
-> 
-> We would greatly appreciate community feedback on the following points:
-> - Is there a preferred way to handle vendor-specific interrupt 
->   bindings like this within Xen's DT framework?
-> - Would it be better to refactor this logic into a separate 
->   architecture-specific or controller-specific layer, or is there 
->   an existing mechanism we missed?
-> 
-> Any advice, suggestions, or architectural guidance is welcome.
-One way is to add a new platform like TI K3 for your boards (listing proper
-compatibles) and implement a new platform hook for custom IRQ translation (e.g.
-platform_irq_xlate()). AFAICT you don't need to implement other hooks like
-.init, .smc, etc. because the platform functions should always check for the
-hook being non-NULL. The platform gets registered provided there was a
-successful compatible match. The new hook could take a dt node pointer to the
-device node and to the interrupt parent (INTR in your case) and return a GIC SPI.
+Thanks for the added TODO comment.
 
-NIT: please use Xen coding style.
-NIT: remember to use Signed-off-by for the submission
+Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
 
-~Michal
-
-> 
-> Best regards,
-> Jed
-> 
-> ---
->  xen/common/device-tree/device-tree.c | 64 ++++++++++++++++++++++++++--
->  1 file changed, 60 insertions(+), 4 deletions(-)
-> 
-> diff --git a/xen/common/device-tree/device-tree.c b/xen/common/device-tree/device-tree.c
-> index 0b5375f151..a084f03487 100644
-> --- a/xen/common/device-tree/device-tree.c
-> +++ b/xen/common/device-tree/device-tree.c
-> @@ -1123,8 +1123,23 @@ unsigned int dt_number_of_irq(const struct dt_device_node *device)
->  
->      /* Get the interrupts property */
->      intspec = dt_get_property(device, "interrupts", &intlen);
-> -    if ( intspec == NULL )
-> -        return 0;
-> +    if ( intspec == NULL ) {
-> +        int i, retintnum = 0;
-> +        intspec = dt_get_property(device, "ti,interrupt-ranges", &intlen);
-> +        if(intspec == NULL) {
-> +            return 0;
-> +        }
-> +        intlen /= sizeof(*intspec);
-> +        dt_dprintk(" using 'ti,interrupt-ranges' property\n");
-> +
-> +        for( i = 2 ; i < intlen; i+=3){
-> +            retintnum += be32_to_cpu(intspec[i]);
-> +        }
-> +        dt_dprintk(" intspec=%d intlen=%d\n", be32_to_cpu(*intspec), retintnum);
-> +
-> +        return retintnum;
-> +    }
-> +
->      intlen /= sizeof(*intspec);
->  
->      dt_dprintk(" using 'interrupts' property\n");
-> @@ -1578,8 +1593,49 @@ int dt_device_get_raw_irq(const struct dt_device_node *device,
->  
->      /* Get the interrupts property */
->      intspec = dt_get_property(device, "interrupts", &intlen);
-> -    if ( intspec == NULL )
-> -        return -EINVAL;
-> +    if ( intspec == NULL ){
-> +        int i = 0, newidx = 0, curmax = 0, triggertype = 4;
-> +        u32 typelen;
-> +
-> +        intspec = dt_get_property(device, "ti,interrupt-ranges", &intlen);
-> +        if(intspec == NULL) {
-> +            return -EINVAL;
-> +        }
-> +        intlen /= sizeof(*intspec);
-> +        dt_dprintk(" using 'ti,interrupt-ranges' property\n");
-> +        dt_dprintk(" intspec=%d intlen=%d\n", be32_to_cpu(*intspec), intlen);
-> +
-> +        p = dt_irq_find_parent(device);
-> +        if ( p == NULL )
-> +            return -EINVAL;
-> +
-> +        i = 0;
-> +        newidx = index;
-> +        curmax = be32_to_cpu(intspec[i + 2]);
-> +        while(newidx >= curmax){
-> +            newidx -= curmax;
-> +
-> +            i += 3;
-> +            curmax = be32_to_cpu(intspec[i + 2]);
-> +        }
-> +
-> +        tmp = dt_get_property(device, "ti,intr-trigger-type", &typelen);
-> +        if(tmp != NULL) {
-> +            dt_dprintk(" using 'ti,intr-trigger-type' property\n");
-> +            dt_dprintk(" tmp=%d typelen=%d\n", be32_to_cpu(*tmp), typelen);
-> +
-> +            triggertype = be32_to_cpu(*tmp);
-> +        }
-> +
-> +        out_irq->specifier[0] = 0;
-> +        out_irq->specifier[1] = be32_to_cpu(intspec[i + 1]) + newidx - 32;
-> +        out_irq->specifier[2] = triggertype;
-> +        out_irq->size = 3;
-> +        out_irq->controller = p;
-> +
-> +        return 0;
-> +    }
-> +
->      intlen /= sizeof(*intspec);
->  
->      dt_dprintk(" using 'interrupts' property\n");
+Cheers
+Bertrand
 
 
