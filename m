@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 85111606A330
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2026 13:59:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3184A606A330
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2026 14:05:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=aLTT6xuC
-Received: from list by lists.xenproject.org with outflank-mailman.1481848.1685751 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=JX0I3jqQ
+Received: from list by lists.xenproject.org with outflank-mailman.1481860.1685758 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQmNP-0004lb-G2; Tue, 10 Nov 2026 13:59:07 +0000
+	id 1xQmTE-0006wm-6a; Tue, 10 Nov 2026 14:05:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1481848.1685751; Tue, 10 Nov 2026 13:59:07 +0000
+Received: by outflank-mailman (output) from mailman id 1481860.1685758; Tue, 10 Nov 2026 14:05:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQmNP-0004lT-Cc; Tue, 10 Nov 2026 13:59:07 +0000
-Received: by outflank-mailman (input) for mailman id 1481848;
- Tue, 10 Nov 2026 13:59:05 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xQmNN-0004l9-L2
- for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 13:59:05 +0000
+	id 1xQmTE-0006wf-3m; Tue, 10 Nov 2026 14:05:08 +0000
+Received: by outflank-mailman (input) for mailman id 1481860;
+ Tue, 10 Nov 2026 14:05:07 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xQmTC-0006vZ-Vx
+ for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 14:05:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xQmNM-00EI7l-SS
- for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 14:59:04 +0100
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xQmTC-000eJM-5Q
+ for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 15:05:06 +0100
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6af32314-bab6-0a2a0a5309dd-0a2a4508d20c-38
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 14:59:04 +0100
-Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6af32481-bab6-0a2a0a5309dd-0a2a450ac4e8-36
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 15:05:06 +0100
+Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6af32328-f659-0a2a45080019-d155802df0df-3
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 14:59:04 +0100
-Received: by mail-wm1-f45.google.com with SMTP id
- 5b1f17b1804b1-4a35d5d4a20so24511785e9.2
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 05:59:04 -0800 (PST)
+ id 6af32491-f2d2-0a2a450a0019-d1558029d5ae-3
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 15:05:06 +0100
+Received: by mail-wm1-f41.google.com with SMTP id
+ 5b1f17b1804b1-4a2000d5fb1so11912915e9.1
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 06:05:06 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4ba0204ee67sm67771745e9.13.2026.11.10.05.59.03
+ 5b1f17b1804b1-4ba0237204csm49096465e9.4.2026.11.10.06.05.04
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 10 Nov 2026 05:59:03 -0800 (PST)
+ Tue, 10 Nov 2026 06:05:05 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,60 +51,62 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1794319144; x=1794923944; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1794319505; x=1794924305; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=8oWI6KSgQGvjA8OXqgOile+qmGJ7ltWuL7UT/yRCwiQ=;
-        b=aLTT6xuCBLXmEs9LrJhxAWQihQ42KDXlCvmXCwBvoJENZ1ZhyDyptsLYvHYmIt30kg
-         x4lAKG7Y5viWJQHUG1GQBwPuhk42idxDtrxcfyYfl5hcCoAelOTO4DrA16zrUb0iNhzo
-         g1eeSpGwFNDz7CoLwoWoJY/RVLQ82pZF3oRatz9ABc3WpXMG+BchhI1jy8AYI8nwQ6GC
-         IfjK+/Sf9jpfJUChJ1EHRE5KU11lIBU2kYbTpr8536X1TLClHt+jFrunk2x/aisHjsBX
-         BTeLXUS2uMDFEPDA5b9A59nVo+eHymnHL1amnBpHANLBJX9JFly0P+k6ty1TW+AL0Jej
-         eaaw==
+        bh=kvzMhA0BMWYo0aDhByE1fezhm7CQRx8mwSsIu3tNhUU=;
+        b=JX0I3jqQNjM/rbmywx8j96GeDhnalv6EPCIkyJVTofyZW6HHfmTpLDP/X00iyE086m
+         pVWQwreZQELOoIRo3phbrLbyyFCE+8guDpkqnwC7LIWzA5ErHpQ7JhgylBJ2xKNkIvVw
+         Bta6wMFFzawQdyb9Hpfxit60ad9rhQsr4ftyuE72vlgxIfjhU5MXw5wRIO3E/DTWTp3G
+         qZW80WJ7ap+v5PqCC4XaJZupPWdNSxsP86fV/v/TOIhg+FuPehgjOb/qt15i+I7MIeCB
+         cmjxtFSQPQ7R9P26XaLWUzU9Ef9Q/uiKUAK4fikiA7HfSL0sNwMZWiFfm4hRCa6PMS1A
+         EYng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794319144; x=1794923944;
+        d=1e100.net; s=20260707; t=1794319505; x=1794924305;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=8oWI6KSgQGvjA8OXqgOile+qmGJ7ltWuL7UT/yRCwiQ=;
-        b=EF5jASqnuZKvWAeCpmDNWwt0a1IjrJiokszTXUEXSLfMx4hBII4VuG9HyoXXSD2D6o
-         2sN3+7gj9XJXpNd/gmrGV3z1LZfm4NkG2sflj53yhygQNMhe+eORiKkMbMXazQb+KINH
-         ACpYVjn+HLCCKld6rJyeZ5KE9U783QIbGzA/s6/4fDZanzShtz7nI7+ngdeaFRR+Gfwn
-         R5XgIUjn3dRZI+GwBqXKLGtcO95w9L27Ztl3tklNHMGQEQ6NJceMvpzFfXtbQyI4RBmV
-         Am5ifspfYiUDqc6Kcl1DZDXzlR3e1q8dOmc0Zdt8G7wHQYkAyXwHsQsaGWjhTFR55L5s
-         GYKw==
-X-Forwarded-Encrypted: i=1; AL+hErGV68hay1fd9iVIpS/mTL5VqX0Y1ElRDKxw+i/Q21T58DYD8LQpVX7UDKWMhq+c1d/L8+hEO87c5aE=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z/6TBIUeHBcvf2kYMWhJ7iS2HbPRKQGuAcvHHaGjf/t42iI5tOm
-	fUTfZrxCMU3xiePYHhFCcSPmHjK33ocX5QrZl9u3L2FLMZ0SPd4JjR35JXL7QJnLNg==
-X-Gm-Gg: AYBFou2bCayDG5ZVN79q9vQZF9/ROhLYIuv/ag2OP2f2iF98eiH1sh3Qnwr3CVF98co
-	MNuOi302j/eZ3boq8zj0JNPIGypZ3a0+56QSdO/CxCR/aLhrN31nw2rOTI0WX8d1lJzbNDfn+Fw
-	xTIEPZGke0NronFsJVpMFHNucayK+UiYb7WIdQOgMCszckN6M0FOsQ+5tMdlEjXlhlRFTXhCcGP
-	ygDi8miH8Y0qc8D9mNzxnwEhA9SF3VgPCHQtkmof2uxBHldOsShTKczhCd/fR7j/taMUymq8zXk
-	dU7+Bvv8KPQL7D+CgUaRk5I8fUC3+AUQKT2an16zMPltU+eUVj68y/T4nbotu/n0/seNsw+/4zo
-	C7WZqW2GMobZmo2qVxgpRFr7iE/pHdknG8/0OoFQPedbqcRgx7X/89h5rwv2G9jLth1iu7wRiXp
-	ar/0mYHQXa4st7ou59zuZmuHUoPcPiW/uwyto0CV/5p4++qJsEQ/xWkQ2LQ5WSv5wmpyJJ1FNkh
-	0QZE9Fd8ZDVvGi8TfaS9MWI4cWVZtz44ZpQU8CVaGiRKuD7DhEoY1zP4iymd2ZDb27luUSA9TPJ
-	cYa0+AERmgDmu9dncskEA0SBKLKWJL/6gjiI4nRGIZGjSYQI+LPcoLMMF5DdpXDer6QEGBAVgIC
-	6gCR8c6v9yiiDXRv6UtAES0ytMaxRMqTbNnedvA==
-X-Received: by 2002:a05:600c:1d8c:b0:4a1:f625:2108 with SMTP id 5b1f17b1804b1-4ba0235658bmr47421215e9.33.1794319143592;
-        Tue, 10 Nov 2026 05:59:03 -0800 (PST)
-Message-ID: <be1c388f-e69a-42ca-9d21-219af6b01571@suse.com>
-Date: Tue, 10 Nov 2026 14:59:02 +0100
+        bh=kvzMhA0BMWYo0aDhByE1fezhm7CQRx8mwSsIu3tNhUU=;
+        b=iA/hXHcIHd97BVIGxAY0pwaSd0NDf9Cd9VHw01TT/MhuErfKWDeuRLj9gSYi6HLTXE
+         eWNs6RWrZ6LXbn2dZ+AcJCoK78GYWrZK7wrImig+7gghs15B8tObJBDIlj9kN2N5pyfP
+         +0abiipzdXNuOpa6OlaBF2hU0MLMW9utKfXQsRcqJLiqNnsGYcnx/D7h1lhncDaWaxls
+         6dBsEnfFyLpKeDe/+Cu9Z4g1gzSNwpsfu51mUYo/2Za1ekf4Fi0ViftDdcLtgzARwO2g
+         gI6suXIjGt6M1++A1IM8FdfCboxwdxnLsZ3zbAuI9XzDPe0HAU5LB8Me+/t6cUoTaMz5
+         mwBQ==
+X-Forwarded-Encrypted: i=1; AL+hErFBIh0Hl0BBErUYa//UGZUEks3nn8pNMcufUcx3gN6Qc0iztd1YM0j0dBTVaEAQWUFxNUmxsML5Smo=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z8vFy46QsuwsRE3erMZ6rf7NsMkbZxWlVuoH/JoQIwIK3kmwq4c
+	gTwLAAMzt5uQ33nFXsqCEf4fJfoYFmC/RjfzyZ/8NA0x+/ZWER+iuqWCJn0jPYi7mA==
+X-Gm-Gg: AYBFou2/J1Q6e2ffMvYw55wAazn4uQaRSP3+aAVDo0/OSSMe8Sfmr9JPAA9PPU1NJDv
+	3jecVK9GzQljrO244BbiAxJLHnKEaMJePNQGIxkUnI1VhRuWyZAeljj8et0tRqnWGG6xspSkOJy
+	Py86znca4/XvdMUPp1RPeBroCTwdRiAJbXw0Y37ybmVg9EIVQzYukCAtQf0TidSRg0d4Zj0IYej
+	aCuPRBhprW018m8uZoZJHgyO6q68edWQTW219jP0uej83tPDNKUOd031Sy6DGUbIhdSBN73B4Ak
+	mWbrkMAF43YcqBsWs32BsukWtArH0olq/t0lVEGa6UH+X5AcxOdusgLGOazWML6kYotOrSncIyb
+	+/Q1NKSCyVHmwLv4LAHFL3id6gg4HieirwvV+QceaYg0PmlIH4D0WeFkx5A5YoJxoDn2jiTj3E+
+	fiPlwD3lsGQoS3lS0zIM+KA2D2LISKFrwUl7avdNiuIHttjWrY1LL+W7s81wDWkEIqr2BJsLFp9
+	OjeWroKJaZIk0gY9hbnAT5JM8p7EuRM5n2GpSS08C/N4sxAzXfaJByVWTjdSp6AZsQA67R3i/zY
+	fQVpToHQCQ0SyGLvWoXCt1b7bDoll2kFsxVO2OZ2FIZscaU0eFOXI30MrkNFZJOE32dHsWdE6EN
+	hL/n0Xx/nrxM66T+0MA==
+X-Received: by 2002:a05:600c:37c3:b0:4a0:1c0e:b057 with SMTP id 5b1f17b1804b1-4ba02305538mr43866145e9.4.1794319505466;
+        Tue, 10 Nov 2026 06:05:05 -0800 (PST)
+Message-ID: <f68f4464-1434-4314-bf3c-7eb367f0a1b9@suse.com>
+Date: Tue, 10 Nov 2026 15:05:03 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] automation/eclair: deviate R2.6 for the x86 emulator
-To: Shuaidong Chen <shuaidong.chen@amd.com>
+Subject: Re: [PATCH] x86/pv: free the shared_info page switch_compat()
+ replaces
+To: George Dunlap <gwd@xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Nicola Vetrini <nicola.vetrini@bugseng.com>,
- Alejandro Vallejo <alejandro.garciavallejo@amd.com>,
- xen-devel@lists.xenproject.org
-References: <20261110134902.2891528-1-shuaidong.chen@amd.com>
+ Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
+References: <20261110110500.27221-1-gwd@xenproject.org>
+ <ec93ec9a-2fd3-4dcc-94f8-35376cb03363@suse.com>
+ <CAFLBxZbndoe49Zcurk6ZM04niye=jRsEcD_=mnSoKQUuXPRZew@mail.gmail.com>
+ <8d2ecf68-6c34-4a59-9fbf-0e3f67a338d7@suse.com>
+ <CAFLBxZZA0ZYrjHC5TCNt53HLuq-fDxkNyXdM1iOua8u2EaJnKg@mail.gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -130,42 +132,73 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20261110134902.2891528-1-shuaidong.chen@amd.com>
+In-Reply-To: <CAFLBxZZA0ZYrjHC5TCNt53HLuq-fDxkNyXdM1iOua8u2EaJnKg@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c1860d/1794319144-CEF5F87B-ABF7E525/10/78276251493
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-4011c0/1794319506-526DECFC-FB16316A/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 1094
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-purgate-size: 2942
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 10.11.2026 14:49, Shuaidong Chen wrote:
-> MISRA C:2012 Rule 2.6 (advisory) states that "a function should not
-> contain unused label declarations".
+On 10.11.2026 14:52, George Dunlap wrote:
+> On Tue, Nov 10, 2026 at 1:21 PM Jan Beulich <jbeulich@suse.com> wrote:
+>> What I asked for here is that we free the page if its refcount is zero
+>> (the common case), exactly as you do (via RCU). Yet we would skip the
+>> freeing (and leak the page) in the unexpected case of the refcount not
+>> being zero after the put_page_alloc_ref().
 > 
-> Depending on which parts of the x86 emulator are compiled in, some of
-> its labels end up with no goto targeting them.  For example, with
-> CONFIG_HVM=n private.h defines X86EMUL_NO_FPU, X86EMUL_NO_MMX and
-> X86EMUL_NO_SIMD: the CASE_SIMD_* macros then expand to plain labels
-> instead of case labels, and the gotos to several hand-written simd_*
-> labels are preprocessed out, leaving 91 unused labels in
-> x86_emulate.c.  The build already acknowledges this by passing
-> -Wno-unused-label for that object.
+> OK, I think I see.  Yes, I'd considered that.  I mean, to be honest,
+> the whole xenheap allocation thing is janky; somehow we've taken a
+> useful, well-understood primitive that should work simply and
+> consistently (dropping the last ref causes a free) and added extra
+> bits so that it's fragile once again.  (If shared_info were a domheap
+> page, do_settime() would just grab a ref, map & access the page, then
+> drop the ref, knowing the page wouldn't be freed while it held the
+> ref, and *would* once it was dropped.)
 > 
-> Annotating these labels would only add churn to the emulator.  As done
-> for Rule 16.2, deviate the rule for the emulator as a whole.
+> Given that dropping a ref doesn't automatically / atomically free the
+> page, it seems like the rule should be that you *never* grab a ref to
+> a xenheap page, unless you've gone through the rest of the code and
+> verified that the freeing path works correctly.
 > 
-> Signed-off-by: Shuaidong Chen <shuaidong.chen@amd.com>
+> And given *that*, since nobody else is currently grabbing the ref, not
+> checking the refcount should be safe.
+> 
+> I suppose you'll say, sure, but this is a non-hot path, and if we ever
+> *do* free with an outstanding refcount it's a security issue, so why
+> not be safe?  You have to draw the line on internal consistency checks
+> *somewhere*; I'd leave the check off, but I can add it if you really
+> want.
 
-Acked-by: Jan Beulich <jbeulich@suse.com> # docs/misra/
+But is this only an _internal_ consistency check? Can't a toolstack or
+DM map a domain's shared-info page (as soon as it exists)? IOW I didn't
+think of the check as a consistency one at all, but rather as a guard
+towards e.g. toolstack behavior changing.
 
-As on a few earlier occasions, the constraint on the ack can be dropped
-if/when Nicola or somebody else have confirmed / acked the .ecl change.
+>>> Now that we have the RCU version implemented and tested, I think we
+>>> should keep it.  It's safe now, and we can keep it safe in the future.
+>>> If you want we could add a comment to the field warning that no
+>>> references should be taken to it because it may change; but honestly
+>>> that seems like overkill to me.
+>>
+>> For the field I'm not concerned - it's purpose is clear, and anyone
+>> trying to add obtaining of a ref using it as input will hopefully be
+>> caught the latest during review. It's a ref existing ahead of the
+>> put_page_alloc_ref() which worries me (some).
+> 
+> For clarity, I meant a comment on d->shared_info, saying not to retain
+> pointers into it outside of a domain rcu_lock; and I guess now also
+> adding not to grab an additional reference to it without coordinating
+> free-on-last-reference properly.  But as I said, both should be a
+> general rule, not something we need to add to each data structure
+> affected.
+
+Okay, looks like we agree here then that no new commentary needs adding.
 
 Jan
 
