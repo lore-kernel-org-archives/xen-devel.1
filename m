@@ -2,45 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 87A9860710C5
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2026 10:21:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 29EE560A6F47
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2026 10:22:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=O/KK+xtG
-Received: from list by lists.xenproject.org with outflank-mailman.1481474.1685356 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=WrP2Pg4Q
+Received: from list by lists.xenproject.org with outflank-mailman.1481469.1685367 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQiyB-0007Qm-Lk; Tue, 10 Nov 2026 10:20:51 +0000
+	id 1xQizX-0008U4-4u; Tue, 10 Nov 2026 10:22:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1481474.1685356; Tue, 10 Nov 2026 10:20:51 +0000
+Received: by outflank-mailman (output) from mailman id 1481469.1685367; Tue, 10 Nov 2026 10:22:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQiyB-0007Qf-JD; Tue, 10 Nov 2026 10:20:51 +0000
-Received: by outflank-mailman (input) for mailman id 1481474;
- Tue, 10 Nov 2026 10:20:50 +0000
+	id 1xQizX-0008Tx-0k; Tue, 10 Nov 2026 10:22:15 +0000
+Received: by outflank-mailman (input) for mailman id 1481469;
+ Tue, 10 Nov 2026 10:14:39 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xQiyA-0007QZ-DY
- for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 10:20:50 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <amir73il@gmail.com>) id 1xQisB-0004ot-HH
+ for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 10:14:39 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xQiy9-005c6R-N0
- for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 11:20:49 +0100
+ id 1xQisA-00E9lo-GK
+ for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 11:14:38 +0100
 Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6af2effe-e002-0a2a0a5209dd-0a2a4502d0a6-16
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 11:20:49 +0100
-Received: from [209.85.221.41] (helo=mail-wr1-f41.google.com)
+ (envelope-from <amir73il@gmail.com>)
+ id 6af2ee8a-e002-0a2a0a5209dd-0a2a4502bfec-24
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 11:14:38 +0100
+Received: from [209.85.208.41] (helo=mail-ed1-f41.google.com)
  by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6af2f001-6ca4-0a2a45020019-d155dd29ecad-3
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 11:20:49 +0100
-Received: by mail-wr1-f41.google.com with SMTP id
- ffacd0b85a97d-498f5fa4f70so192240f8f.0
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 02:20:49 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-498362eb158sm4184391f8f.36.2026.11.10.02.20.48
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 10 Nov 2026 02:20:48 -0800 (PST)
+ (envelope-from <amir73il@gmail.com>)
+ id 6af2ee8e-6ca4-0a2a45020019-d155d029e9b8-3
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 11:14:38 +0100
+Received: by mail-ed1-f41.google.com with SMTP id
+ 4fb4d7f45d1cf-6b56bbf8330so2383291a12.3
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 02:14:38 -0800 (PST)
+Received: from localhost (178-84-201-199.dynamic.upc.nl. [178.84.201.199])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c504a593eacsm90433466b.36.2026.11.10.02.14.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 10 Nov 2026 02:14:36 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,116 +50,118 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="In-Reply-To:Content-Disposition:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1794306049; x=1794910849; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=+4IARZkpVYLkyFh4VU5qTYN8gJUqWWMYrKK9AnH4iz0=;
-        b=O/KK+xtGOE5gyGouBGlZ7N2hQmfYb4KNM+Cye0tcxN/MpZ5BkJS8eJoL3ZxRhtSb25
-         488xXtSJGljvUGeD0sW1q/wuRyZWwEQ+WCDgyHOHSL/OjFprDeokR44PizAAIPA+zSeM
-         yTOEsXRnxtDI2AoSZNW/gb1HV2XaIk0usLMuPGN/c+VDhucZ9a6qzfo9I853qVtZ0F1C
-         AunjWL6FN/YpiKN9XNUDQMo9yw9ghNxY1biCUuTwgbUevsZfiPSArdvscI5bmcSUMQQQ
-         6hUbts945OZBmsaiPghaflqNXAuLq61cUCXfnAVmfxY+mCumPJsvyDbyRgRx4LGAQ2cA
-         YDGg==
+        d=gmail.com; s=20260707; t=1794305678; x=1794910478; darn=lists.xenproject.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=9WFltYRvNkpM0HMxRLJxGiCTEiP83WtKPHu+oXy3KTg=;
+        b=WrP2Pg4Q7t4/b0jQ7vkfc48t9U+zY8csmw/RLlmzMKzMrN8g/oNh5n4tC+MdlLRfd/
+         RAu6K5mX3lV+8/Dh6J1rbu8wEROkqOZ0sDcHhl1RJ5AvJqHjmmT5fntMpoWzWM7Lv73w
+         szPmWzp0Op+uKL2uKt6XpkuYMmVbvz0ImOjlQgkAH4UHqE9Cj3w+UXGUHK0eDrQoGcTb
+         W/Cr4Ssr2ThxTr90XZwWKqbuaquiIv4/FuKCSMPs9PXGaOZPZsy+31WrhKr66LCyt6hA
+         WVPE/+E8i4PW4Fz6oeJsjFSESedYfY25M+iG9BIUJZAOrpyKKXn/l+2mIphnzcmH+OM+
+         G1HQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794306049; x=1794910849;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=+4IARZkpVYLkyFh4VU5qTYN8gJUqWWMYrKK9AnH4iz0=;
-        b=Z/ULB0bYJu01nevUvaDNXAKlsuNvF0TAOdlLuPejtIgvzw9A3lV2t/+EO1qkoiHUpS
-         pT7IrBcKAr2pRrzBWpiBe40a3GD66+rBBpjmD8YEg11HaaEmWHxvbTfyvMbIwWKiRkh3
-         JBPJ8bQ9K2uIwApYBySrvWtPU1KsEv1Ays9GrpLOXJaOYAucuZWsqG9QJiJEBjxXUWRj
-         IjJONToiOLp3QXdOV6wGepG66c8uFA3lJ/FSRNx965aRIuV3wTm+FWYpVoqc+9nFLP3N
-         USVxirEyjx5Eq8UtrXzsrrZ1hXZ6N+RxyN1JOY91bsq+BUn0K100gjnC7peVkMWSMtU+
-         +ooA==
-X-Forwarded-Encrypted: i=1; AL+hErEmpeL3LbwKbeI+5zu+cYnHTzZ26ILPud9A/17e1H11uMWjMuPrbHt9OtJL9VA8MCKYlSTwXAYlc+c=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z+wUyw9hPZZ3zAZ8JCcO6wHhu5tq5z9MNHc3dCZcDU+uY9sLS98
-	O01y5Yw0C8je7KrrWiTZReRWGu5BXi9fWkSABz+Hp86LLPFYEw1BqAJsXrN1CIYLsQ==
-X-Gm-Gg: AYBFou38IVtOq1NqM62JKZAmThC4MDSmbqCkP8J+1TY1tJecFdQ456xEHE2xi91nX+R
-	pBeLVD0EFHoa7+ix4nlL+REEo3eW4NVktiR/YiRT/eqAHhPYbpOcISe73d20WW+IvRkhI34hFGV
-	7ODdb4rVM3shHZBVBjdfHNr1wvklBbUPM8C2U+J7hXVr8QfjdoAvqra3pM/8q7Demtorc5W3xvd
-	PEVX0fkhB7DLoAhKvxxm9RmojIw7tx1rAUcZF1GccNsGRDNZ15TiBsGjrZeHLesNQXjzK7tBKEO
-	OGGcLwktPyPeljwBIpBkUeWrMqhktQ2Xw/3mpI6Fy8fV+ckJLfK4s0vknVCbdh9UWUfGstFZV6y
-	f1nUOBm3MZmyU8WGuRpD7EGLHqYxKQT8n3Q39SvYjoMT8qMFEyd6RufISUb1GVCCu82DmUEaZw0
-	nhQiX8uhHCFlaeNKN61FIilhnG+u1/DkNNibeXDJgneTnTkLw9ovlg660heeVTfkUgVTWWmA1Ql
-	yc9Xy1vuff3eeUTEoB8vVI0BBq8CJNEtIpOm0N61Bst0o2Hjkpq2zjcjIzXdgdaSpUuM+HNGN0J
-	mcdC4Ds5RWfaPGQm03WnJSsKjyU6DKzJWs01hgYx/u8pZ9FzSV6aggAu3lx4/DyRLXSC/PaDNTW
-	HuX4PfE3+9TAdi1E6PDifULwuomSd6mDpEhWSmA==
-X-Received: by 2002:a05:6000:2212:b0:48e:8882:6d91 with SMTP id ffacd0b85a97d-4982ba32847mr4400061f8f.1.1794306048833;
-        Tue, 10 Nov 2026 02:20:48 -0800 (PST)
-Message-ID: <924d8b0d-5dde-4616-bdca-3115e3adc3bd@suse.com>
-Date: Tue, 10 Nov 2026 11:20:47 +0100
+        d=1e100.net; s=20260707; t=1794305678; x=1794910478;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=9WFltYRvNkpM0HMxRLJxGiCTEiP83WtKPHu+oXy3KTg=;
+        b=AjHIeZwJT9WIJ7TH9r3KmuyF3knSyuTx+7HvUbx8jOopWpHmOlerpnUbctVy+6Vise
+         IF+BnV4H4u6sbC8GTO37NmkGBAMS1/GfeTsp1gYK1pscGy8iNDZp9iVOKnDPIw86FrZN
+         G+mzH2nJ8vEqs4Vj/bfBKUjxkIOz4yOUAyU7MiE40z7MuE4zyo7lFzLAaIfjWkU6RWKj
+         iQ+zWkeaiHiWCmjvLQZ3/8pK5Y1RqcQnINM70v+My4lqY3S1Ce1LOVT/fmEZJ18UVyIK
+         ZDrZJTAx8mR39BrH4ACWyYsmcf6JRC533hPAlCD51ORXC5y9ZSEkhzf/A+Vnkr+o7oPp
+         qoSw==
+X-Forwarded-Encrypted: i=1; AL+hErEqLLXBeB+d+RA0PGFaBEUAZhaDH+ChZvwHcpyVSQPtZTWJH6bxCpeGKzs009WqNA7yOPbQ+a72H/c=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z+CLIjCddcog5BIt3YjCZXlyK5bUZLYijeCcjRfESMSu3GQVDAN
+	7G1d80h5LBiVAllg7/GcSkXdgouLl8IFu8kyUp6wYV7E6JIUYW2vSmw5
+X-Gm-Gg: AYBFou1Xu3v1L721IJtdDTyjaUABXtCqN/jYS/6vNnAwZt5FHpj6MRu5Yj0bKQKQODP
+	Hv2XlXVmJR7w/Hrmr/jzr4mFz26wbjwPiXLvXwStFvbf+jMdDC6I6Uf8CHImQuVc6iDpYCCcUp6
+	TSlpggy5lxEETksVvurhyI4evnq31inHq9abYcPBuLhyLLBnGxC2bNDeRHbMFP1YBDUIWThHQvf
+	yUsE8ARLJ4akGXaDC2UTw1KcOr/cdzN7jRYoe2r4ZtFasmFs7mSjwY9lqS8rYyyjiOLOPZUvoIc
+	nC86tgcfNBwTWEqEGZdH/4iIq2wPAOXgZi/gWSGtNT+WK77EoPjwKqve/bXgFzCpuOH3JVO62LC
+	XIOtCumYwWdZI6tKLqmiKHlRresbaXwKt75UeXmATE7VzUQdkiSY6/LRtLSZzPUJ0a5jlOmL1Vi
+	h9I5FeX9CruYmmOB5+5vYGbilBigIajnn/B1n8/txj1Dzc2hn6KwVGEu0bC0nSGAOwf8IHfoWRt
+	HZqeWHjnm9OKPP0EszspeVDzEw8qVh3n9jHNOIVfRqUNwIYTj6ESxkAG9ixUYujZm0tdUDLx0GW
+	6UWKsFPJO0OgBcgH/nsxTYHtwdmSgt3dv6Pq+Akf1zurRqrnPkR4cFM2uLQePSNM6cPM9ndgy8g
+	m+UbE2+hwVd74
+X-Received: by 2002:a17:907:944d:b0:c41:4c20:5a80 with SMTP id a640c23a62f3a-c504963ce05mr189793966b.44.1794305677695;
+        Tue, 10 Nov 2026 02:14:37 -0800 (PST)
+Date: Tue, 10 Nov 2026 11:14:35 +0100
+From: Amir Goldstein <amir73il@gmail.com>
+To: Christian Brauner <brauner@kernel.org>
+Cc: linux-fsdevel@vger.kernel.org, Jann Horn <jannh@google.com>,
+	Chris Mason <mason@kernel.org>, Josef Bacik <josef@toxicpanda.com>,
+	Christoph Hellwig <hch@lst.de>, linux-block@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-nvme@lists.infradead.org,
+	Alexander Viro <viro@zeniv.linux.org.uk>, Jan Kara <jack@suse.cz>,
+	linux-scsi@vger.kernel.org, target-devel@vger.kernel.org,
+	driver-core@lists.linux.dev, linux-mm@kvack.org,
+	bpf@vger.kernel.org, linux-security-module@vger.kernel.org,
+	selinux@vger.kernel.org, apparmor@lists.ubuntu.com,
+	linux-nfs@vger.kernel.org, netdev@vger.kernel.org,
+	fuse-devel@lists.linux.dev, linux-efi@vger.kernel.org,
+	xen-devel@lists.xenproject.org, ocfs2-devel@lists.linux.dev,
+	linux-s390@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
+	linux-usb@vger.kernel.org, linux-erofs@lists.ozlabs.org,
+	linux-kselftest@vger.kernel.org
+Subject: Re: [PATCH RFC 38/41] fuse: refuse files on pseudo filesystems as
+ passthrough backing files
+Message-ID: <avLui6Mpf8GbKbtc@amir-ThinkPad-T480>
+References: <20261110-work-loop-pseudo-v1-0-4c998976c6c7@kernel.org>
+ <20261110-work-loop-pseudo-v1-38-4c998976c6c7@kernel.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/2] Xen/gnttab: improve error handling in
- gnttab_dma_{alloc,free}_pages()
-To: Juergen Gross <jgross@suse.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
- xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org
-References: <20261110095605.369848-1-jgross@suse.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20261110095605.369848-1-jgross@suse.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1794306049-F3EBB2AC-985BB957/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 697
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=4.0.1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261110-work-loop-pseudo-v1-38-4c998976c6c7@kernel.org>
+X-purgate-ID: tlsNG-720697/1794305678-30BC02AC-10D551BD/0/0
+X-purgate-type: clean
+X-purgate-size: 1221
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
+	autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 10.11.2026 10:56, Juergen Gross wrote:
-> This small series is V2 of a patch Jan sent out early this year.
-> I just added patch 1 due to some remarks Jan made when sending out
-> his patch, and then removed some now stale parts of his patch.
+On Tue, Nov 10, 2026 at 10:14:54AM +0100, Christian Brauner wrote:
+> The fuse server can register any regular file as a backing file. procfs
+> and binfmt_misc files are already refused by the stacking depth check as
+> both set s_stack_depth to FILESYSTEM_MAX_STACK_DEPTH. sysfs and the
+> other pseudo filesystems aren't. Reads and writes of the fuse file would
+> then be done on the pseudo file with the fuse server's credentials.
+> Refuse files on pseudo filesystems just like loop does.
 > 
-> Jan Beulich (1):
->   Xen/gnttab: improve error handling in gnttab_dma_{alloc,free}_pages()
+> Signed-off-by: Christian Brauner (Amutable) <brauner@kernel.org>
+> ---
+>  fs/fuse/backing.c | 3 +++
+>  1 file changed, 3 insertions(+)
 > 
-> Juergen Gross (1):
->   xen: don't allow gnttab_dma_[alloc|free]_pages() in PV guest
+> diff --git a/fs/fuse/backing.c b/fs/fuse/backing.c
+> index 8c21a8a74efb..4e4fb810ddaa 100644
+> --- a/fs/fuse/backing.c
+> +++ b/fs/fuse/backing.c
+> @@ -147,6 +147,9 @@ static int fuse_backing_open_file(struct fuse_conn *fc, struct fuse_backing *fb,
+>  		if (inode->i_sb->s_stack_depth >= fc->max_stack_depth)
+>  			return -ELOOP;
+>  
+> +		if (file_is_pseudo(file))
+> +			return -EINVAL;
+> +
+>  		fb->type = FUSE_BACKING_PATH;
+>  		fb->path = file->f_path;
+>  		path_get(&fb->path);
 > 
->  drivers/xen/grant-table.c | 36 ++++++++++++++++++++++++++++++------
->  1 file changed, 30 insertions(+), 6 deletions(-)
+> -- 
+> 2.53.0
+> 
 
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Amir Goldstein <amir73il@gmail.com>
 
-(Whether that's meaningful in the Linux world on patch 1 I don't know.)
-
-Jan
 
