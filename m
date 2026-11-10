@@ -2,54 +2,51 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 742EA606A325
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F353E606A31C
 	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2026 09:56:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=susede1 header.b=HfHO/LM/;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=susede1 header.b=HfHO/LM/
-Received: from list by lists.xenproject.org with outflank-mailman.1481384.1685248 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1481385.1685257 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQiaP-0007b0-Do; Tue, 10 Nov 2026 09:56:17 +0000
+	id 1xQiaV-0007ud-Kc; Tue, 10 Nov 2026 09:56:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1481384.1685248; Tue, 10 Nov 2026 09:56:17 +0000
+Received: by outflank-mailman (output) from mailman id 1481385.1685257; Tue, 10 Nov 2026 09:56:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQiaP-0007as-7w; Tue, 10 Nov 2026 09:56:17 +0000
-Received: by outflank-mailman (input) for mailman id 1481384;
- Tue, 10 Nov 2026 09:56:15 +0000
+	id 1xQiaV-0007uS-FG; Tue, 10 Nov 2026 09:56:23 +0000
+Received: by outflank-mailman (input) for mailman id 1481385;
+ Tue, 10 Nov 2026 09:56:21 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jgross@suse.com>) id 1xQiaN-0007YS-Te
- for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 09:56:15 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xQiaT-0007tB-SU
+ for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 09:56:21 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xQiaN-00A8Go-6j
- for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 10:56:15 +0100
-Received: from [10.42.69.2] (helo=localhost)
+ id 1xQiaT-00A8KZ-8h
+ for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 10:56:21 +0100
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jgross@suse.com>)
- id 6af2ea3a-8faa-0a2a0a5109dd-0a2a45028f62-22
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 10:56:15 +0100
-Received: from [195.135.223.131] (helo=smtp-out2.suse.de)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6af2ea3c-bab6-0a2a0a5309dd-0a2a45069278-48
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 10:56:21 +0100
+Received: from [195.135.223.130] (helo=smtp-out1.suse.de)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jgross@suse.com>)
- id 6af2ea3e-6ca4-0a2a45020019-c387df83db58-3
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 10:56:15 +0100
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ id 6af2ea44-195a-0a2a45060019-c387df82b9f4-3
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 10:56:20 +0100
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id A901B1F7EE;
- Tue, 10 Nov 2026 09:56:14 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 5412421F2E;
+ Tue, 10 Nov 2026 09:56:20 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 5E0691339F;
- Tue, 10 Nov 2026 09:56:14 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 04CFF1339F;
+ Tue, 10 Nov 2026 09:56:19 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id ICdQDT7q8mpaCgAAD6G6ig
- (envelope-from <jgross@suse.com>); Tue, 10 Nov 2026 09:56:14 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id p/aFM0Pq8mpgCgAAD6G6ig
+ (envelope-from <jgross@suse.com>); Tue, 10 Nov 2026 09:56:19 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -58,133 +55,115 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding:In-Reply-To:References"; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding:In-Reply-To:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1794304574; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=pwY9LfeqcRS7j1sr/gpJK/qWawtftlvmsiGAP+uG4hU=;
-	b=HfHO/LM/+l1w+qhfmqU/ecJ8ZK1QLIWUmAWOIAwPicL4GjlpglWqR3g5H/SwLOfbLBhO06
-	7WLq+tzMTYnOnRqgy+fU/E1nyBZ7UALUUH2/pThlTRupAZfAil8fw56CLxxakWH57oB0pk
-	I7SHD345kPjsN/qk8voaxzXoD6qa/8s=
-Authentication-Results: smtp-out2.suse.de;
+Authentication-Results: eu.smtp.expurgate.cloud; none
+Authentication-Results: smtp-out1.suse.de;
 	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1794304574; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=pwY9LfeqcRS7j1sr/gpJK/qWawtftlvmsiGAP+uG4hU=;
-	b=HfHO/LM/+l1w+qhfmqU/ecJ8ZK1QLIWUmAWOIAwPicL4GjlpglWqR3g5H/SwLOfbLBhO06
-	7WLq+tzMTYnOnRqgy+fU/E1nyBZ7UALUUH2/pThlTRupAZfAil8fw56CLxxakWH57oB0pk
-	I7SHD345kPjsN/qk8voaxzXoD6qa/8s=
 From: Juergen Gross <jgross@suse.com>
 To: linux-kernel@vger.kernel.org
-Cc: Juergen Gross <jgross@suse.com>,
+Cc: Jan Beulich <jbeulich@suse.com>,
+	Juergen Gross <jgross@suse.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH v2 1/2] xen: don't allow gnttab_dma_[alloc|free]_pages() in PV guest
-Date: Tue, 10 Nov 2026 10:56:04 +0100
-Message-ID: <20261110095605.369848-2-jgross@suse.com>
+Subject: [PATCH v2 2/2] Xen/gnttab: improve error handling in gnttab_dma_{alloc,free}_pages()
+Date: Tue, 10 Nov 2026 10:56:05 +0100
+Message-ID: <20261110095605.369848-3-jgross@suse.com>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261110095605.369848-1-jgross@suse.com>
 References: <20261110095605.369848-1-jgross@suse.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-15.80 / 50.00];
-	SUSE_INTERNAL_BYPASS(-9.00)[];
-	REPLY(-4.00)[];
-	BAYES_HAM(-3.00)[100.00%];
-	MID_CONTAINS_FROM(1.00)[];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	R_MISSING_CHARSET(0.50)[];
-	NEURAL_HAM_SHORT(-0.20)[-0.996];
-	MIME_GOOD(-0.10)[text/plain];
-	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	FROM_HAS_DN(0.00)[];
-	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,suse.com:email];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[5];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	RCVD_TLS_ALL(0.00)[]
-X-Spam-Score: -15.80
+X-Rspamd-Pre-Result: action=no action;
+	module=replies;
+	Message is reply to one we originated
+X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
+X-Spamd-Result: default: False [-4.00 / 50.00];
+	REPLY(-4.00)[]
+X-Spam-Score: -4.00
 X-Spam-Level: 
-X-purgate-ID: tlsNG-720697/1794304575-676BF2AC-09F87BDE/35/110847
-X-purgate-type: clean
-X-purgate-size: 1921
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+X-Rspamd-Queue-Id: 5412421F2E
+X-Rspamd-Pre-Result: action=no action;
+	module=replies;
+	Message is reply to one we originated
+X-Rspamd-Action: no action
+X-purgate-ID: tlsNG-16d1c6/1794304580-1F2C677B-8087210B/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 2571
+X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Today gnttab_dma_alloc_pages() or gnttab_dma_free_pages are never
-called when running as a PV guest, but this holds for in-tree callers
-only.
+From: Jan Beulich <jbeulich@suse.com>
 
-Bail out early when being called in PV mode in order to ensure no out
-of tree module or future use cases are violating this assumption.
+Both decrease-reservation and populate-physmap can succeed partially. For
+the former this may be pretty unlikely, but clearly the latter can hit
+both out-of-memory conditions in the hypervisor or denial because of the
+allocation exceeding the domain's allowance (there's no interaction with
+the balloon driver here either).
 
-This enables to safely remove PV-only code from both functions.
+In gnttab_dma_free_pages() we simply can't give back to the system what
+hasn't been re-filled with backing memory. For gnttab_dma_alloc_pages()
+both parts of the overall region need dealing with differently.
 
+While no present caller of gnttab_dma_free_pages() checks its return
+value, also don't use -EFAULT there: It really is an out-of-memory
+condition. (In gnttab_dma_alloc_pages() -EFAULT doesn't look quite right
+either, but I couldn't think of a clearly better error code there.)
+
+Fixes: 9bdc7304f536 ("xen/grant-table: Allow allocating buffers suitable for DMA")
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- drivers/xen/grant-table.c | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 deletions(-)
+ drivers/xen/grant-table.c | 25 ++++++++++++++++++++++++-
+ 1 file changed, 24 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/xen/grant-table.c b/drivers/xen/grant-table.c
-index 604c4eea5930..56a497987942 100644
+index 56a497987942..2a520080a570 100644
 --- a/drivers/xen/grant-table.c
 +++ b/drivers/xen/grant-table.c
-@@ -1063,6 +1063,9 @@ int gnttab_dma_alloc_pages(struct gnttab_dma_alloc_args *args)
- 	size_t size;
- 	int i, ret;
- 
-+	if (WARN_ON(xen_pv_domain()))
-+		return -EINVAL;
-+
- 	if (args->nr_pages < 0 || args->nr_pages > (INT_MAX >> PAGE_SHIFT))
- 		return -ENOMEM;
- 
-@@ -1090,8 +1093,6 @@ int gnttab_dma_alloc_pages(struct gnttab_dma_alloc_args *args)
- 		xenmem_reservation_scrub_page(page);
- 	}
- 
--	xenmem_reservation_va_mapping_reset(args->nr_pages, args->pages);
--
+@@ -1096,6 +1096,24 @@ int gnttab_dma_alloc_pages(struct gnttab_dma_alloc_args *args)
  	ret = xenmem_reservation_decrease(args->nr_pages, args->frames);
  	if (ret != args->nr_pages) {
  		pr_debug("Failed to decrease reservation for DMA buffer\n");
-@@ -1120,6 +1121,9 @@ int gnttab_dma_free_pages(struct gnttab_dma_alloc_args *args)
- 	size_t size;
- 	int i, ret;
- 
-+	if (WARN_ON(xen_pv_domain()))
-+		return -EINVAL;
++		if (ret >= 0) {
++			/* Free the part where decrease didn't work. */
++			size_t done = ret << PAGE_SHIFT;
 +
- 	gnttab_pages_clear_private(args->nr_pages, args->pages);
- 
- 	for (i = 0; i < args->nr_pages; i++)
-@@ -1133,9 +1137,6 @@ int gnttab_dma_free_pages(struct gnttab_dma_alloc_args *args)
++			if (args->coherent)
++				dma_free_coherent(args->dev, size - done,
++						  args->vaddr + done,
++						  args->dev_bus_addr + done);
++			else
++				dma_free_wc(args->dev, size - done,
++					    args->vaddr + done,
++					    args->dev_bus_addr + done);
++
++			if (!ret) /* Nothing else to do? */
++				return -EFAULT;
++
++			args->nr_pages = ret;
++		}
+ 		ret = -EFAULT;
+ 		goto fail;
+ 	}
+@@ -1132,7 +1150,12 @@ int gnttab_dma_free_pages(struct gnttab_dma_alloc_args *args)
+ 	ret = xenmem_reservation_increase(args->nr_pages, args->frames);
+ 	if (ret != args->nr_pages) {
+ 		pr_debug("Failed to increase reservation for DMA buffer\n");
+-		ret = -EFAULT;
++		/* Can only free what has been re-filled. */
++		if (!ret)
++			return -ENOMEM;
++		if (ret > 0)
++			args->nr_pages = ret;
++		ret = -ENOMEM;
+ 	} else {
  		ret = 0;
  	}
- 
--	xenmem_reservation_va_mapping_update(args->nr_pages, args->pages,
--					     args->frames);
--
- 	size = args->nr_pages << PAGE_SHIFT;
- 	if (args->coherent)
- 		dma_free_coherent(args->dev, size,
 -- 
 2.56.0
 
