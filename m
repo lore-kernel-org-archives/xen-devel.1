@@ -2,45 +2,35 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 75BC0606A31C
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2026 11:03:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6F940606A330
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2026 11:05:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=Yx+gGX5P
-Received: from list by lists.xenproject.org with outflank-mailman.1481526.1685421 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=2lN3dCoU
+Received: from list by lists.xenproject.org with outflank-mailman.1481534.1685431 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQjct-0000F6-S9; Tue, 10 Nov 2026 11:02:55 +0000
+	id 1xQjf3-000120-7h; Tue, 10 Nov 2026 11:05:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1481526.1685421; Tue, 10 Nov 2026 11:02:55 +0000
+Received: by outflank-mailman (output) from mailman id 1481534.1685431; Tue, 10 Nov 2026 11:05:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQjct-0000Ez-Pb; Tue, 10 Nov 2026 11:02:55 +0000
-Received: by outflank-mailman (input) for mailman id 1481526;
- Tue, 10 Nov 2026 11:02:54 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xQjcs-0000Et-KN
- for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 11:02:54 +0000
-Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xQjcr-00078I-PH
- for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 12:02:53 +0100
-Received: from [10.42.69.1] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6af2f9dd-2eae-0a2a0a5409dd-0a2a45018186-2
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 12:02:53 +0100
-Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6af2f9dd-5984-0a2a45010019-d1558034cdbf-3
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 12:02:53 +0100
-Received: by mail-wm1-f52.google.com with SMTP id
- 5b1f17b1804b1-4a20bdaf39cso19974525e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 03:02:53 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4ba01ff3428sm67126715e9.15.2026.11.10.03.02.51
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 10 Nov 2026 03:02:52 -0800 (PST)
+	id 1xQjf3-00011t-4J; Tue, 10 Nov 2026 11:05:09 +0000
+Received: by outflank-mailman (input) for mailman id 1481534;
+ Tue, 10 Nov 2026 11:05:07 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <gwd@xenproject.org>) id 1xQjf1-00011n-HS
+ for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 11:05:07 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.98.2)
+ (envelope-from <gwd@xenproject.org>) id 1xQjf1-000000067uE-0MFC;
+ Tue, 10 Nov 2026 11:05:07 +0000
+Received: from [217.155.165.12]
+ (helo=4b664947-eb84-4a1c-9b91-21fc87073f93.fritz.box.net)
+ by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.98.2)
+ (envelope-from <gwd@xenproject.org>) id 1xQjf1-0000000HPwA-1JL3;
+ Tue, 10 Nov 2026 11:05:07 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,145 +39,182 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1794308573; x=1794913373; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=7W3MnSLYWfQfsv2mizkN2KiSB/csCWpz+tJH2iF1nqM=;
-        b=Yx+gGX5Pn/UuR9KgzbysIb62AR3lnmrrxa02rCkDLT8366+EnJD0EIjTEKgB9M3XDG
-         9sH5WEUMs2CKZR/QAXjN6vzQIyw2tWSvRnnxd6k+SlrJhM2ZXL15un4n1hcemSHOXjsz
-         XQcF/feaxE4pq+Ta+zvZVSkF+Ps8cLgeM0g6tWERPC+yqc3taygCs5T+bfrhiE5gPtvw
-         seMAJj5YX/Jm+md4K4FTri3S1/RwPLqyWV8MTHIVByGiDrX6au8A7qYlonuVO5LH+M1O
-         imS4GBt3qxb/h1tTJmDFTFzF1Dy5wHNGd+VkmR0EewkSBxx95DniToGkKyjU1WPuBoVf
-         akwg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794308573; x=1794913373;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=7W3MnSLYWfQfsv2mizkN2KiSB/csCWpz+tJH2iF1nqM=;
-        b=NuiA9JCpSgz6aiq7mDaQxKymHtddffq/8AN3zF+vB71yiOIj8o6d304/jO1EQvErgZ
-         qq6R5/ur4W23T+uscaoTabyijzAl41tRI3hQI0ZH9TGUoa+VuXSFqa1ojaCEa6iD0p9P
-         cRHaZpMLCFqYD9u7cA61x37Elmx8rHC6j/JyW5KGr5niEKfBLS2jfsOU+OzUiyJj8DdI
-         0P7fFiRthPzMIxA+oegrl0/F7gjFEge/n9vd3G/iRoLiv0knfVMM4Me8cOi4i9XEFLHl
-         00hwmjttGLpHAjOJRAjeYaGx4U6bBf5ceR78egtpK41K5Ju3Ob7Um7KVn7hbea8VrRot
-         Miww==
-X-Forwarded-Encrypted: i=1; AL+hErE6ijI3Z9Mm07eOg/RBtB7r0/VHUltHL5u1nX7uhafn4l+iNLHBWt0AKfgQ7t+50G/GL7W3s7Sxs8Y=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z/E5DX5f6B83XGZEhaiCYhavMDj0fDcfurPoOxVAr8VCslbEqNf
-	zSqNASkM5lYP8+PCpVUiaRYJbiEP07D1eJmlHdyFb87FKXhpdSJimEZaRY6En1mnIw==
-X-Gm-Gg: AYBFou3IL57wriESz0Ya5NFgt4PdRnzisNjWpLqGAGxjdmyomlUtBdyCoR/KgCpwdDx
-	z/0gA898x+vY8/FvOg7RkbMkJfAINamW2izyLjOKmOYZpdZjxi4sDeOsKIBtpAapCQlXyt/VsnD
-	98kcSyG51ej1+Kkt5VvcpvCyNG+/6CR5k3xSFog7ptD6BMfN1gTi5qDx9N84KYJejDfZyatNf1d
-	KY9ltwc1vf096Ds9kkKrF1pyiCCP19x8jQzuIbihs8m9HcUyAGceDV1VTDPNgrgDTFWlXu7vt9p
-	3TknqrBvAw72dw9VUwzLaLA4iJTQkzNd/FYsSYszpFwuy3Z8B51T5Rq//IhzNoOBw1A/vtwXEub
-	wAKCGvRo2tGbNClFKa3g4dxYhFcIj0FSTVGfe6Z6303ngnu0eJ7B9cs3cN1A+TvJlUAz4eFGetP
-	sO+uqQ3xfsHD3qM7yjcrPd8nSkb7GVg3mYebxBGSeM3it/G/iRltOp25+Sld1dYZ3C4bCI3bpUC
-	4cBks5NtEDmIStaI2pIQdmaeF7K0ldYVBHATBXSwsAujncc7ufNpqULpY6btuJAdqf/a8bJ9Qtw
-	/hmRaWZetrKGHVfdH/c8RqDGfJse2DcZZvkcnnf3wyvDz3C750aYJRCWzWgvgoH/4EDObt3qFJX
-	8vAnn2rsngu0mHXHSS93SPrv8p0mlMXEHBBrXsTk=
-X-Received: by 2002:a05:600c:4f86:b0:49c:d019:70c5 with SMTP id 5b1f17b1804b1-4ba022c9c7dmr39870505e9.0.1794308572680;
-        Tue, 10 Nov 2026 03:02:52 -0800 (PST)
-Message-ID: <35bf81cf-594f-4fff-ad3f-13cccf559d72@suse.com>
-Date: Tue, 10 Nov 2026 12:02:51 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
+	Message-ID:Date:Subject:Cc:To:From;
+	bh=ZEw6NHp/22gMco07BUEhZfZRjVEg7f7ZcgTkDRMQDZQ=; b=2lN3dCoUOETQeEQKN5UmLOTkyz
+	a6Dwf6A3tbAzE23FqriFPKfJelm03q9IZzDCY/y0YsYWj8eSqQ0KHfM1ns8+xoIbklZkLTbN/Yg5P
+	sPo6DKd7P8cxcDhA+X3ld6+DhyKeKHKCfJBYk8oEUF5TavPyDrhHYxprzZTliaY9Jww8=;
+From: George Dunlap <gwd@xenproject.org>
+To: xen-devel@lists.xenproject.org
+Cc: Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Teddy Astie <teddy.astie@vates.tech>
+Subject: [PATCH] x86/pv: free the shared_info page switch_compat() replaces
+Date: Tue, 10 Nov 2026 11:05:00 +0000
+Message-ID: <20261110110500.27221-1-gwd@xenproject.org>
+X-Mailer: git-send-email 2.56.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v13 04/14] xen/percpu: defer freeing per-CPU areas after
- resume failures
-To: Mykola Kvach <mykola_kvach@epam.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1793129971.git.mykola_kvach@epam.com>
- <3f0239435a9013b5ea35dda4ddd0253ef42e26ee.1793129971.git.mykola_kvach@epam.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <3f0239435a9013b5ea35dda4ddd0253ef42e26ee.1793129971.git.mykola_kvach@epam.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1794308573-1F063757-8582848D/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 2023
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 27.10.2026 22:05, Mykola Kvach wrote:
-> When a CPU fails to come back during system resume, cpu_up() sends
-> CPU_UP_CANCELED. After trying the other CPUs, enable_nonboot_cpus()
-> sends CPU_RESUME_FAILED for the same CPU.
-> 
-> On architectures which do not park offline CPUs, both notifications
-> queue free_percpu_area(). The release metadata, including the rcu_head,
-> is stored in that CPU's per-CPU area. The first callback may already
-> have freed the area when the second notification arrives, or the same
-> rcu_head may be queued twice. The CPU_RESUME_FAILED callbacks also need
-> the area to clean up timers and CPU-pool state.
+For a 32-bit PV guest, switch_compat() replaces a shared_info page
+above 4GiB with one below, and drops the old page with a bare
+put_page().
 
-I think there's another change needed, for the change you presently do
-to not cause a leak: If enable_nonboot_cpus() calls cpu_up() for a CPU
-whose bit isn't set in frozen_cpus, and if that call fails, the CPU
-later wouldn't have the CPU_RESUME_FAILED notification sent for it.
-IOW the freeing would then not happen at all. Question is whether
-simply setting the bit in frozen_cpus would be correct: Notify
-handlers may not expect CPU_RESUME_FAILED for a CPU which wasn't
-online at the point of suspend.
+Unfortunately, this violates the expected
+xenheap-page-shared-with-guest freeing discipline.  Xenheap pages
+don't start with a reference count, and aren't put back into the
+allocation pool after their reference count drops to zero; they're
+removed from the domain's xenheap list, but someone needs to
+explicitly call free_xenheap_page() on them for them to return to
+their pool.
 
-> --- a/xen/common/percpu.c
-> +++ b/xen/common/percpu.c
-> @@ -82,6 +82,15 @@ static int cf_check cpu_percpu_callback(
->          break;
->  
->      case CPU_UP_CANCELED:
-> +        /*
-> +         * On resume, CPU_RESUME_FAILED is sent after all CPUs have been
-> +         * tried. Keep the area alive for its cleanup callbacks and let
-> +         * that notification release it.
-> +         */
-> +        if ( system_state == SYS_STATE_resume )
-> +            break;
-> +        fallthrough;
-> +
->      case CPU_DEAD:
->      case CPU_RESUME_FAILED:
->          if ( !park_offline_cpus && system_state != SYS_STATE_suspend )
+d->shared_info here only has a non-zero reference count because it was
+shared with a guest; and the thing that holds that reference is the
+PGC_allocated bit.  Dropping the reference without having been the one
+to clear the PGC_allocated bit puts the page in an invalid state.
 
-Nit: While generally we want blank lines between non-fall-through
-case blocks, imo between fall-through ones such blank lines would
-better be omitted, to make the falling through visually easier to
-notice.
+If there are no outstanding references to d->shared_info when
+switch_compat() happens, the result for pages moved this way is merely
+a memory leak: the page is removed from the xenheap list, and nothing
+ever calls free_xenheap_page() on it.  So whenever this path is
+triggered, a page is leaked.
 
-Jan
+Theoretically, if there *is* an outstanding reference to
+d->shared_info, *and* that reference is still held when the domain is
+destroyed, then the result is a reference count underflow: Because the
+reference count never drops to zero, the page stays on the xenheap
+list; then during domain destruction, relinquish_memory() walks the
+list, sees the PGC_allocated bit, and calls put_page() again --
+potentially dropping the page count to zero.  When the other reference
+holder drops their reference, the count underflows.  (put_page() only
+ASSERT()s that the count is non-zero, so this wouldn't cause a crash
+in a release build; and the page is never freed, so other potential
+hazards of general ref count underflow are avoided.)  Fortunately this
+is impossible with the in-tree toolstack, which only switches a domain
+while building or restoring it, and doesn't have a mapping of
+shared_info that it holds across that call.
+
+Release the page the way domain destruction releases d->shared_info:
+drop the allocation reference with put_page_alloc_ref(), as
+relinquish_memory() does, which clears PGC_allocated and takes the page
+off the xenheap list once nothing else refers to it, and free it with
+free_xenheap_page() once an RCU grace period has passed.
+
+The free waits for the grace period because do_settime() writes every
+domain's wallclock holding only wc_lock and the domain list's RCU read
+lock, neither of which excludes switch_compat(), through a pointer it
+may have read before the switch.  The RCU callback uses the domain's
+own RCU head, d->rcu, and holds a reference to the domain.  That
+reference keeps the domain from being destroyed, and its struct freed,
+before the callback has run.  It also keeps d->rcu's only other user,
+domain_destroy(), from queueing the head in the meantime; if the
+callback drops the last reference, domain_destroy() queues d->rcu
+again, which RCU has finished with by then.  No other reference to the
+page is expected: with no memory, the domain has no page tables that
+could map it, and the in-tree toolstack holds no mapping of it across
+the switch.
+
+Also allocate the new page into a local variable rather than straight
+into d->shared_info: if the allocation failed, a concurrent
+do_settime() could dereference the NULL pointer before the old value
+was restored.
+
+Fixes: 8a9255405ca6 ("x86/domain: adjust limitation on shared_info allocation below 4G")
+Suggested-by: Jan Beulich <jbeulich@suse.com>
+Assisted-by: Claude Code:claude-opus-5-5
+Signed-off-by: George Dunlap <gwd@xenproject.org>
+---
+ xen/arch/x86/include/asm/domain.h |  3 +++
+ xen/arch/x86/pv/domain.c          | 33 +++++++++++++++++++++++++------
+ 2 files changed, 30 insertions(+), 6 deletions(-)
+
+diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
+index 634d0710bf..906078641c 100644
+--- a/xen/arch/x86/include/asm/domain.h
++++ b/xen/arch/x86/include/asm/domain.h
+@@ -302,6 +302,9 @@ struct pv_domain
+ 
+     /* Maximum physical-address bitwidth supported by this guest. */
+     unsigned int physaddr_bitsize;
++
++    /* shared_info page switch_compat() replaced, until it is freed. */
++    void *old_shared_info;
+ #endif
+ 
+     /* map_domain_page() mapping cache. */
+diff --git a/xen/arch/x86/pv/domain.c b/xen/arch/x86/pv/domain.c
+index 0c42ae58aa..dc481bcc07 100644
+--- a/xen/arch/x86/pv/domain.c
++++ b/xen/arch/x86/pv/domain.c
+@@ -231,6 +231,14 @@ unsigned long pv_make_cr4(const struct vcpu *v)
+ }
+ 
+ #ifdef CONFIG_PV32
++static void cf_check _free_old_shared_info(struct rcu_head *head)
++{
++    struct domain *d = container_of(head, struct domain, rcu);
++
++    FREE_XENHEAP_PAGE(d->arch.pv.old_shared_info);
++    put_domain(d);
++}
++
+ int switch_compat(struct domain *d)
+ {
+     struct vcpu *v;
+@@ -256,16 +264,16 @@ int switch_compat(struct domain *d)
+     if ( virt_to_maddr(d->shared_info) >> 32 )
+     {
+         shared_info_t *prev = d->shared_info;
++        shared_info_t *next = alloc_xenheap_pages(0, MEMF_bits(32));
+ 
+-        d->shared_info = alloc_xenheap_pages(0, MEMF_bits(32));
+-        if ( !d->shared_info )
++        if ( !next )
+         {
+-            d->shared_info = prev;
+             rc = -ENOMEM;
+             goto undo_and_fail;
+         }
+-        clear_page(d->shared_info);
+-        share_xen_page_with_guest(virt_to_page(d->shared_info), d, SHARE_rw);
++        clear_page(next);
++        share_xen_page_with_guest(virt_to_page(next), d, SHARE_rw);
++        d->shared_info = next;
+         /*
+          * Ensure all pointers to the old shared_info page are replaced.  vCPUs
+          * below XEN_LEGACY_MAX_VCPUS may have stashed a pointer to
+@@ -273,7 +281,20 @@ int switch_compat(struct domain *d)
+          */
+         for_each_vcpu ( d, v )
+             vcpu_info_reset(v);
+-        put_page(virt_to_page(prev));
++
++        /*
++         * Drop the allocation reference, which takes the page off the
++         * domain's xenheap list, and free the page once an RCU grace period
++         * has passed: do_settime() may still be writing through a pointer to
++         * it.  The reference taken on the domain keeps it alive until then,
++         * and keeps domain_destroy(), the only other user of d->rcu, from
++         * queueing it while the callback is pending.
++         */
++        put_page_alloc_ref(virt_to_page(prev));
++        ASSERT(!d->arch.pv.old_shared_info);
++        d->arch.pv.old_shared_info = prev;
++        get_knownalive_domain(d);
++        call_rcu(&d->rcu, _free_old_shared_info);
+     }
+ 
+     for_each_vcpu( d, v )
+-- 
+2.56.0
+
 
