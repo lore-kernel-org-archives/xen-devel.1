@@ -2,47 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 02407606A741
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2026 13:09:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A85F60A5BD1
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2026 13:10:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=isslab-korea-ac-kr.20260707.gappssmtp.com header.i=@isslab-korea-ac-kr.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=ABxA9w8H
-Received: from list by lists.xenproject.org with outflank-mailman.1481730.1685651 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=yIbetTNt
+Received: from list by lists.xenproject.org with outflank-mailman.1481749.1685668 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQlbF-0001ZG-DT; Tue, 10 Nov 2026 13:09:21 +0000
+	id 1xQlcM-0003qU-W3; Tue, 10 Nov 2026 13:10:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1481730.1685651; Tue, 10 Nov 2026 13:09:21 +0000
+Received: by outflank-mailman (output) from mailman id 1481749.1685668; Tue, 10 Nov 2026 13:10:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQlbF-0001Z9-Al; Tue, 10 Nov 2026 13:09:21 +0000
-Received: by outflank-mailman (input) for mailman id 1481730;
- Tue, 10 Nov 2026 13:09:19 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xQlcM-0003qN-Sm; Tue, 10 Nov 2026 13:10:30 +0000
+Received: by outflank-mailman (input) for mailman id 1481749;
+ Tue, 10 Nov 2026 13:10:29 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <yhlee@isslab.korea.ac.kr>) id 1xQlbD-0001Nx-FN
- for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 13:09:19 +0000
+ (envelope-from <Shuaidong.Chen@amd.com>) id 1xQlcL-0003pv-6i
+ for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 13:10:29 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xQlbC-0069tW-SD
- for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 14:09:18 +0100
-Received: from [10.42.69.12] (helo=localhost)
+ id 1xQlcK-00BBOk-Cm
+ for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 14:10:28 +0100
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <yhlee@isslab.korea.ac.kr>)
- id 6af31778-8faa-0a2a0a5109dd-0a2a450cd0fe-14
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 14:09:18 +0100
-Received: from [74.125.82.45] (helo=mail-dl1-f45.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <yhlee@isslab.korea.ac.kr>)
- id 6af31307-f479-0a2a450c0019-4a7d522dcc32-3
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 13:50:17 +0100
-Received: by mail-dl1-f45.google.com with SMTP id
- a92af1059eb24-170135e43c7so2998791c88.0
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 04:50:16 -0800 (PST)
-Received: from yhlee-960QFG.Davolink
- ([2406:5900:1044:110c:88e2:4271:a9b8:cc50])
- by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-1b3b5b79649sm7614830c88.21.2026.11.10.04.50.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Nov 2026 04:50:14 -0800 (PST)
+ (envelope-from <Shuaidong.Chen@amd.com>)
+ id 6af317b6-2eae-0a2a0a5409dd-0a2a4505e19a-42
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 14:10:27 +0100
+Received: from [52.101.43.51]
+ (helo=SJ2PR03CU001.outbound.protection.outlook.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Shuaidong.Chen@amd.com>)
+ id 6af317c1-4cb1-0a2a45050019-34652b331909-3
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 14:10:27 +0100
+Received: from BL0PR12MB4754.namprd12.prod.outlook.com (2603:10b6:208:8e::26)
+ by MN0PR12MB6080.namprd12.prod.outlook.com (2603:10b6:208:3c8::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.8; Tue, 10 Nov
+ 2026 13:10:17 +0000
+Received: from BL0PR12MB4754.namprd12.prod.outlook.com
+ ([fe80::ebe5:87e:6d95:580c]) by BL0PR12MB4754.namprd12.prod.outlook.com
+ ([fe80::ebe5:87e:6d95:580c%4]) with mapi id 15.21.0569.009; Tue, 10 Nov 2026
+ 13:10:17 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,234 +52,166 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=isslab-korea-ac-kr.20260707.gappssmtp.com header.i="@isslab-korea-ac-kr.20260707.gappssmtp.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=isslab-korea-ac-kr.20260707.gappssmtp.com; s=20260707; t=1794315015; x=1794919815; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=0zzG+r0Nc7NWPddTHndjZ7UDJBk8q3WCOKQ3/5tvZ+I=;
-        b=ABxA9w8H3FEgzNVx9AbTMuHpWFuC8wLNGC9bKDWUCLdnw9olSGeFOGZ7e26sKnPsRD
-         7m2yE1y3ZFp4f1AWxwCNH/dGOFzF5dQiQcTGvZTFUdSE+ZWGY8lZFyOQ6Mn/Bv51dkGg
-         yJ8mCoJPjY1+Zfa7ekxnlHPfM34RKGEcw4SCU07cLmbOyrHkpnTK576ZieQfR8r02lm4
-         lSqiym9uilN197F6WT0Lb/z/NK9Mmf5pZ9Jq1Vd+u1ShjmWU4G5703i4b+2T7CFXHX3j
-         GDCeKrghlBsNDJyVr6WLUAsk2IYNcMnL4uAWtwtIKRrYjPJM9jDxDj+LtYTWozdflieW
-         gyIg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794315015; x=1794919815;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=0zzG+r0Nc7NWPddTHndjZ7UDJBk8q3WCOKQ3/5tvZ+I=;
-        b=1g/0fIax+ahMeD1LaTf2+WEL7CRFpgkxUfqFLgwwLIPll19nQXM/YaxkFi+VmSvUZ/
-         mnGb5sKG2BG2HS3vMLD4+dheqReWSu3tSZKSmy5mJRAy5Nkix1GrNYOIH7k5laJFP79X
-         E99IeDJIADvbbmtXYU8shRw6oUXRwirFPVPKkfOs3c8BMLXT/YqtsnnBunwSCQ++E2Vf
-         Sff/4swnyskkTjDAbLJUe3eMqp55+u1nVKBBDglucOSmWS83bENWm6WdyeYCzvy+8bE1
-         oJ99xZXTA5v1o40/bYARlbVem45qcUPvhfaylDiVIzsF12KS3zNOZ+KDQcJYpAms6fCi
-         F6qQ==
-X-Forwarded-Encrypted: i=1; AL+hErHHRCouINxVV8hMILKhboEwXo+0MohHvaO+64X38Way1IevustRGTctg4rt7KDMEsIJmUUFTb28bek=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z/3KPwpw+4dZi42ML19oovEtyZBzYb2SsXxEm0xNzpqMjfqdyZW
-	uoIuc6n3X0PCL61BudDvEyCOW2uRjD3NPRlw98hv3pc4iwK5ZurYYSx/ik9dF2yDUCg=
-X-Gm-Gg: AYBFou12TtI4pyrgrznQj4jM+agXrdRz9Pyhzos8Y0fPhKi6p/dN/+NJs7AoAxNn0qZ
-	mznAMEeTUnMgxGA8ZeTAGZej/7+GCe+GZEL6v01ScM6oPnkRXpXCE4G1wZhPnkNlPJ1wpEkP4kQ
-	2Zc3Amv7EuXUA8x7sMtRKX7CgU2QIp744JQQXhyVBdXUZNCkkT9DZoN1Jixm0o2V6x7BozTn2FH
-	e+Z8TREynslObTCnIGvCJIfaXQuwvUn7iJJJm7bXvRFUw9gkxUC05edBCWVXU4i+Lkj93AUPzNy
-	ahImOwSJ6HZZWCFDyRezhjyhnrJ8sD4HVYjDzfSY/67i7M8ax1N497ZselnP/b7oVWbIirTBJan
-	8qd8wd0VmGrEe1gh0URFK7Ng8vs6styZXrTBANfqaB9eLtWAHQ46DdN1NsWQQpA50gB3c4FApDv
-	s1QoBPtG94LZDhOcZP/GU+kuBLRAkTGpShNTrDngCTES85Y55FDMOQtL/PwR0e6q6b1v3T7ada+
-	vC4fEWWPcO/7rNis3vOFI76I8TNxtJ3w3BJLytX7QzsoNLYYKV6kcc3t/d3fiJXL8FNAXyJmm+7
-	dquPpdf9oFNi789S/jDr1aqS+Gm1iL5K7GKe3y2kWs32bPmr4HyWVLKgiXdu0u0e1F9JFiN4Zrj
-	XvYWn7pNdx7mEdnNItiyEgCsmmFBySNmoYlvQgwNYzcyIulYZtFTX53xaRxs=
-X-Received: by 2002:a05:701b:465c:b0:1b3:a8a3:c6de with SMTP id a92af1059eb24-1b3b5e65237mr3442597c88.5.1794315014837;
-        Tue, 10 Nov 2026 04:50:14 -0800 (PST)
-From: Yehyeong Lee <yhlee@isslab.korea.ac.kr>
-To: jgross@suse.com,
-	sstabellini@kernel.org
-Cc: oleksandr_tyshchenko@epam.com,
-	boris.ostrovsky@oracle.com,
-	xen-devel@lists.xenproject.org,
-	linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Subject: [PATCH v2 1/2] xen/pvcalls: unwind pvcalls_new_active_socket() step by step
-Date: Tue, 10 Nov 2026 21:50:01 +0900
-Message-ID: <20261110125002.46683-2-yhlee@isslab.korea.ac.kr>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261110125002.46683-1-yhlee@isslab.korea.ac.kr>
-References: <20261110125002.46683-1-yhlee@isslab.korea.ac.kr>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=W9w+zUIBHIVa+sambrbhqo0veEydkqR1fxCQeZWDc3X3HcavxtdCBfak/P5fURn+/wsCiXi3Fr+hyLE4RoIpvUn1T/PlU/FnET0kb8siEFJr+uZh4V8mhvmVAsFVPiSlysJJvg+wZlhqf0in7ltorOu89bx9+sIKuwHIWieZdG0V61QZgPz9zkfJwtJIUNeCUfOqwAgtuPtQSL3hxlpibRTCfEO3PKVhw3aEPXcN0gUtl6qOphZW1fP5cd4d7GRz7pxZs7kQPQxgD3/oFuXOjKT9To1MhQiq72Gv2oE4eYknxR6tPRV3faXdjRH3VfJCbAWRu/6qKD7MamK1l7UWbQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ORIXRxBWxF5bDZDrVCcKh591romBOFDqJSpUOA00wpU=;
+ b=EMXQnY8FTLSqsTgdL6knZbmA4V5Pt+X8D7iy67B1n3cERUf9pX+EfC39upo6qpqmZN750wsW74V+uhatCpLHg8XS4Zc1BQRB+ELM3HQgYvOIBQZEenvdjxwR8/07pBYTq7OPcoHoPKWtZW7Fv83VoOK7IrxEjcHS80kd1a9OtS3/q9KdAPP/UCYVIxZWdOvKDZJh8uE9yoD8w4srTFOuEtShPg7Z9oJBTLhs1fl5uKLR5Y867TM2Xz2HwRtNcGp+mRoCt1DGGLR3rL4lgCyp59Pqmq+Amrv8QMuKPgZJZ17t3hE6PkHP8ZTB4QY4bZsXiwnZNd5FZsKb5k8+CdbCSg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ORIXRxBWxF5bDZDrVCcKh591romBOFDqJSpUOA00wpU=;
+ b=yIbetTNtbT4AyC9tCol413FH5IbGqa538YO6L3K/WjigzvWd78xDf8pDOef2r77EEiY9+oyKNChgs3VTeH2wmSsmmBqBXgPnGIusyJG9/UuqDLCE26PaG2JTVkbyJWtdWV4rl/kG4L2+v0cEGAplmtsantbrC0c/pEF/J/UiYPo=
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Message-ID: <4fbd1e45-159d-4483-989a-e2f37e182aee@amd.com>
+Date: Tue, 10 Nov 2026 21:09:47 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 2/2] misra: deviate R2.6 for the labels generated by
+ CASE_SIMD_*
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Nicola Vetrini <nicola.vetrini@bugseng.com>,
+ Doug Goldstein <cardoe@cardoe.com>, Michal Orzel <michal.orzel@amd.com>,
+ Julien Grall <julien@xen.org>, Anthony PERARD <anthony.perard@vates.tech>,
+ Teddy Astie <teddy.astie@vates.tech>,
+ Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>,
+ Grygorii Strashko <grygorii_strashko@epam.com>,
+ Penny Zheng <penny.zheng@amd.com>, Ray Huang <Ray.Huang@amd.com>,
+ xen-devel@lists.xenproject.org
+References: <20261110071231.2888628-1-shuaidong.chen@amd.com>
+ <20261110071231.2888628-3-shuaidong.chen@amd.com>
+ <49b1f05e-ed9b-49fc-84db-ede026e55343@suse.com>
+Content-Language: en-US
+From: "Chen, Shuaidong" <Shuaidong.Chen@amd.com>
+In-Reply-To: <49b1f05e-ed9b-49fc-84db-ede026e55343@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: SI2PR01CA0001.apcprd01.prod.exchangelabs.com
+ (2603:1096:4:191::13) To BL0PR12MB4754.namprd12.prod.outlook.com
+ (2603:10b6:208:8e::26)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d25034/1794315017-76ADCA5B-EEAB3CB7/10/78177266408
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL0PR12MB4754:EE_|MN0PR12MB6080:EE_
+X-MS-Office365-Filtering-Correlation-Id: b06808bf-8768-4944-a56c-08df3f2bf6f3
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|366016|1800799024|376014|7416014|23010399003|4143699003|56012099006|11063799006|22082099003|18002099003|10067099003|261028144727099003|261102123227099003|261021123027099003|261021121427099003|261026121527099003|261026140227099003|261022105027099003|261022075727099003;
+X-Microsoft-Antispam-Message-Info:
+	ehMdYNzFk6+KJFLnxeOXdRJInRFYB4o2ggQPM8qXKwvkbwoXu9d4CM/q6ybQ+RJ5fwlHvy9pxFZXj7Jt1KS47CF0HypjrFdPgCCpN3kNYl+kXuj7+3NW597O2oIkZs7Eq71n52WPINzz3WgBSQyK/julkFYWIzbSNqqpj10o4nmACIWerJmp+nxylkNA8CmxsMw1nuMgl2EKlblRcggCLMD9HoeGIItkF9YOKg+hN5gAtQ1FAUZbzh89P8Zly8l8rH9x+oOXGlfOR3bL8+O4pHw91DKaOFHR4y4KDPxPgifVCl+3ZnOQJLemrxXop2tzfiCCmWaiyPtwH9UPBrJYQUL4wREzE3sldJWqoxp7DdfD1zQzCIrFm8MUgeiTLwfCjhWPEu8mignYYLnIkLE42+wVxClnuCq6gPxJkdecJvxEIKcWXXGKqm3vPf/w6CYMU/XyqcuEeWJHOtBDqEc+3r6Na9r3K1n2frgZ0HdpUo4dwWR/wOnCjj0gmmDY/Qt+bDVqAAVeBnReLBWoTn4Pd9nCDo3twnuzwEakkubnn+CFjc82TZPzCxo88SJarjQFjJ60B6HFbrbUEHo2Nq8xV45v7wURfNP8Qvm1TIrma3cW7GRt3i7M4/WDabLVW3bRRmqkwG+DKFrd8KEEkrN2/9Zm74gtOOlPPnsA9L23Us0=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BL0PR12MB4754.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(7416014)(23010399003)(4143699003)(56012099006)(11063799006)(22082099003)(18002099003)(10067099003)(261028144727099003)(261102123227099003)(261021123027099003)(261021121427099003)(261026121527099003)(261026140227099003)(261022105027099003)(261022075727099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?dzQ4WDdnZkZHbVcxaVVBZXRyekZTRUFqeVNJaGk0a1ZVOWRHNmpiT25ncDNC?=
+ =?utf-8?B?R2xPNDBsb1B0cjU4SnR4VjRZbmQrUHpIN3FrMVZINlZPM0ZRTW9ZSlFzMnd0?=
+ =?utf-8?B?eFJpY0VaM3U1OXZUQkdsWDVIejQ4M24xS0VjSzZXOTZReFhLVHlkS2tmbXcy?=
+ =?utf-8?B?MXdEUEpWSlV6ZTJrQ3RWSGwrYUEwaUlyQVE3MUdoNWE5VTFoR3RhbnBKeGo2?=
+ =?utf-8?B?eVRoendpZXROMTF0ckR3TXd4YXdWSHhFY1JSR01YaEJCaTZrT0xtZVJ2U2pH?=
+ =?utf-8?B?Q1A1ZGdFMXRWaTB1Qkx5dVpBSk4zTGxxM0ZLYTdGUDEvUjVMN1hGZVBtRVo4?=
+ =?utf-8?B?V1UvbUkxZDN2cGhoM2oxUDV1MGlpZS9WRmIvOFllRnlHVks2M1JQY3Rmcyt4?=
+ =?utf-8?B?ZFRyM25xaWlBWjNoeUp3cnQyTXZMUUprSllobnlRVnRZR3JnNzZlbHgvWjZC?=
+ =?utf-8?B?R29MMU9NQS9EOWRFS0p0M1VZSmRYYlJmVGNnT2Nrd0k5UWNMMk1xQUdsUk52?=
+ =?utf-8?B?Z0drQlFyYmE1YWJSeEVVTmwrOEZIODdJMWtCWmdTQVZybjg5Sk83VUpsR3Bn?=
+ =?utf-8?B?LzA0a3JjbWQ1RzBSdHVqeGRhY3BxeVFjbHNNdnprKzQvYm9TZVUrUFR4dytx?=
+ =?utf-8?B?R0IyTjdtZDNLNmZwdkNqR3RmcUEvb0l0akRkbW5xWXlSRzllbzR0ZC9EUW00?=
+ =?utf-8?B?UDRKMzFkRmY4YUpHdXl3Y0xFQVlidVl1d1VhZG5hQ2UzMFJSVkg4VDNkbXZy?=
+ =?utf-8?B?dFRGMFVKMmdiOHVjUUUrY1pvWUhYZWJnQlk5NkF2NU5uSTR1U1ArQjZWMTFi?=
+ =?utf-8?B?akdsTFdocG5seUQ3bHVvZWxHR21XUnRuMktyUkxUM2xnbmRpQVdXYXlsN21U?=
+ =?utf-8?B?d0x5Zm5rNUhkYUxzR1NyaHBkd3RvS0NqRXpsL3dvOHk4QWgydXRxU2NReXFx?=
+ =?utf-8?B?TWdVTHFFK2R4dEtKRGlHYmxrclZhWVlITkc4a1o3ajlEcmRyQnFRVEhwVHJm?=
+ =?utf-8?B?NnVQRE9LODlscW03K2M3OFFHejJDZ3Y0VFIzOVVSbDBDalRIMlVrRENDQ0ZN?=
+ =?utf-8?B?d3R5VjVCc1ptMWFiZU9KY1FxR2l0cFRORW5XanMyVitDak5xcnppQVQwMlpC?=
+ =?utf-8?B?Sm45Z1QrWW0zZnQ0SWt0MWRQL09KVjMxaGI1NDBLQ3YwcDlXWUY1UEhmYkF6?=
+ =?utf-8?B?Vnl1L2xCTkNDUUlKQjF1dnBTdnh2SnM2OHV6ckdtS2tVNWRHMTJLM2c4U3lN?=
+ =?utf-8?B?UTdiYUthVHNqYlFrRXk3Um1FeDRsOEhMdDZmbXpuN1hFNTd3SlBXOU9nUUl0?=
+ =?utf-8?B?eTBUS3NyS3ozYVd5SlNjNlN6T2cwRE01RjB5eW1XMDArNnVBM0dqbmtDU3JR?=
+ =?utf-8?B?ZGZTNkMyZ2FtZUZnbVM0UGRqbG1waTg3KzFGV2RCYWNpbUtUKzRyeXlBaUpZ?=
+ =?utf-8?B?WEgvU1F6TU0yOXk5REZPVVExMW9yQ0ZaNER2VEhTR0czUUc3bjBRKzFNQnA2?=
+ =?utf-8?B?NlFwRjF4ZUQwOHRRaHJoMUR5alphclIzdnNiUFdCazFhRndSYytPK25JQ0h0?=
+ =?utf-8?B?OE5xR1lmdFNTcHhFYlNYUlBCaTd3VUpaMGI5emlhYlFPZTVHUzNaV2VMNkht?=
+ =?utf-8?B?bDhuL1VUMzhZZGpqcWhGRHFZU2ZNaGhSaDhBb0xyRVhMY0d2b243ZzRCSy9k?=
+ =?utf-8?B?Yjh2Znk2S0pVVXlWVnp5bHNzREU5ZDE5MFNFMjg2TDNXRTZMZHFFaWpFcnNI?=
+ =?utf-8?B?SVVOcmhTZ1dvcDJMeXlTSVl5MHVtcFdDZlpmeTFtb0EycmYyMjNpc1NwaDRN?=
+ =?utf-8?B?aEY5MjZvWkFLV0Q2ZktSRWxSU3lubUJRRUZSODM2YUk0NmZsUjNxTmhSemNL?=
+ =?utf-8?B?aFFDWW5YQkZoMFBSSEg0Vi8rdnU1MFZ4TjB0QjNFRTUwWjRycFBhSzJDK0kv?=
+ =?utf-8?B?K0Y5RDVPQTRJR3Q2a0U4bXA5aVkxY2FQeUFYNG5UTkJvTnF5L1E0cG1KbUlS?=
+ =?utf-8?B?MHEwKzR6cTc4cFNZRzNPU2FTM3pIdDcxV1RtTmVwS0xpanpOaWV4cTMxMk9Y?=
+ =?utf-8?B?ZTVUYTNYaGpxa3VYcGgrNDMvNFVqMVBCOGZKQWtIa0dsVm90TTlROTcyZ0FF?=
+ =?utf-8?B?YmJUTDAwa3BvZEJlNis0aEFJSkMvRExjM0QrRVBLZDdCYzc0WHlITksrcVZm?=
+ =?utf-8?B?NnpuRnpKWnFxRnVFZnFxUk1MODJyVVZMYStGc1VUb0dJd2ZEWCsxZmxLK1pJ?=
+ =?utf-8?B?bERWRHlTUEJJRWFYWkJQQlVqOUxUUDFwM2JNdS92MXlvWTh6Q1Q2MVlaOXVo?=
+ =?utf-8?Q?GoVrWjsaFZ7GJW3nYI?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b06808bf-8768-4944-a56c-08df3f2bf6f3
+X-MS-Exchange-CrossTenant-AuthSource: BL0PR12MB4754.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Nov 2026 13:10:17.3168
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: JnWDGMTJkxnNn9crbPy1/YnDizJ7P1HZ/g+hLKxeBEa7Ycbf8wkPU2uEU65nn4Rd9h2AhUSDeEbdcOz7l+ZVvQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB6080
+X-purgate-ID: tlsNG-c201ff/1794316227-72AB72A1-1038879C/0/0
 X-purgate-type: clean
-X-purgate-size: 7181
-X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=4.0.1
+X-purgate-size: 1913
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Every error path in pvcalls_new_active_socket() jumps to one shared label
-that does list_del(&map->list) and then hands map to
-pvcalls_back_release_active().  But map comes from kzalloc() and its
-list_head is only published at the very end of the function, after the last
-of those jumps:
 
-	down(&fedata->socket_lock);
-	list_add_tail(&map->list, &fedata->socket_mappings);
-	up(&fedata->socket_lock);
+On 11/10/2026 5:41 PM, Jan Beulich wrote:
+> On 10.11.2026 08:12, Shuaidong Chen wrote:
+>> MISRA C:2012 Rule 2.6 (advisory) states that "a function should not
+>> contain unused label declarations".
+>>
+>> When SIMD emulation is compiled out of the x86 emulator (CONFIG_HVM=n),
+>> private.h defines X86EMUL_NO_SIMD and the CASE_SIMD_* macros
+>> deliberately expand to plain identifiers instead of case labels, so
+>> that the opcode switch builds without conditionals around every case.
+>> The labels they produce (e.g. Cs0x0f_0x2b) are never the target of a
+>> goto, and the build already passes -Wno-unused-label for this object.
+>>
+>> These cannot be annotated in the source: ECLAIR reports them at the
+>> macro's use site, while __maybe_unused could only live in the macro's
+>> replacement list, out of reach of the existing text-based R2.6
+>> deviation.  Extend that deviation to labels coming from the expansion
+>> of a CASE_SIMD_* macro, and document it.
+> __maybe_unused could be passed as another argument into the macros. That
+> would feel redundant, but if that's the only way to please Eclair, maybe
+> that's the way to go.
+That would work for Eclair, but it means touching all 82 use sites and
+every CASE_SIMD_* definition, which is the kind of churn you'd rather
+avoid.
+>
+> Like for the other patch I'd also like to understand why fiddling with
+> emulator code suddenly becomes necessary, when we already have a blanket
+> exclusion for e.g. rule 16.2.
+It isn't necessary. I'll send a v2 that drops patch 1 and replaces this
+patch with an R2.6 deviation for the emulator as a whole, modelled on
+the existing R16.2 one. It covers all 91 reports without touching the
+emulator source, and -Wno-unused-label stays as it is.
+>
+> Finally, for both patches - aren't your Cc lists excessively long?
+Sorry. I'll trim it for v2.
+>
+> Jan
 
-so on the error path map->list is still {NULL, NULL} and __list_del()
-writes through a NULL pointer.
-
-A frontend gets there with one value it owns: the ring_order field of the
-page it granted.  Anything above MAX_RING_ORDER takes the second goto, and
-nothing else in the function has run by then.
-
-The result is an oops in whichever context handled the request - the
-pvcalls-back threaded IRQ handler for PVCALLS_CONNECT, mappass->wq for
-PVCALLS_ACCEPT - and because it happens after down(&fedata->socket_lock)
-that semaphore is never released, so every later operation on the frontend
-blocks on it and the backend never completes backend_disconnect().  (With
-CONFIG_DEBUG_LIST the list_del() only reports and returns, and
-pvcalls_back_release_active() then runs on a map whose irq is still 0 and
-whose bytes, ioworker.wq and saved_data_ready are all NULL.)
-
-A frontend asking for ring_order 5, on a dom0 built with KASAN
-(the request was issued by a test-only change to the frontend):
-
-[  133.728877] pvcalls_new_active_socket frontend requested ring_order 5, which is > MAX (4)
-[  133.732868] Oops: general protection fault, probably for non-canonical address 0xdffffc0000000001: 0000 [#1] SMP KASAN NOPTI
-[  133.737910] KASAN: null-ptr-deref in range [0x0000000000000008-0x000000000000000f]
-[  133.741666] CPU: 0 UID: 0 PID: 133 Comm: irq/39-pvcalls- Not tainted 7.3.0-kCTLblk2-15482-g21a7f44fd076-dirty #1 PREEMPT(full)
-[  133.746986] Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS 1.16.3-debian-1.16.3-2 04/01/2014
-[  133.751512] RIP: 0010:pvcalls_new_active_socket+0x821/0xb90
-[  133.754237] Code: 48 89 fa 48 c1 ea 03 80 3c 02 00 0f 85 f6 01 00 00 48 8d 79 08 4c 8b 6b 08 48 b8 00 00 00 00 00 fc ff df 48 89 fa 48 c1 ea 03 <80> 3c 02 00 0f 85 14 02 00 00 4c 89 ea 4c 89 69 08 48 b8 00 00 00
-[  133.763126] RSP: 0018:ffffc900004afb38 EFLAGS: 00010202
-[  133.765861] RAX: dffffc0000000000 RBX: ffff88810886c900 RCX: 0000000000000000
-[  133.769348] RDX: 0000000000000001 RSI: 0000000000000246 RDI: 0000000000000008
-[  133.772787] RBP: 1ffff92000095f6b R08: 0000000000000001 R09: fffff52000095f58
-[  133.776260] R10: 0000000000000003 R11: ffff888100077320 R12: ffff88810858b410
-[  133.779823] R13: 0000000000000000 R14: ffff88810858b460 R15: ffff88810858b400
-[  133.783382] FS:  0000000000000000(0000) GS:ffff8881b034c000(0000) knlGS:0000000000000000
-[  133.787351] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-[  133.790308] CR2: 00000000006042c0 CR3: 0000000108400001 CR4: 0000000000770ef0
-[  133.793822] PKRU: 55555554
-[  133.795347] Call Trace:
-[  133.796778]  <TASK>
-[  133.798082]  ? __pfx_pvcalls_new_active_socket+0x10/0x10
-[  133.800801]  ? security_socket_post_create+0x4d/0x60
-[  133.803275]  ? release_sock+0x1a/0x1d0
-[  133.805182]  pvcalls_back_event+0x1b09/0x23e0
-[  133.807431]  ? __pfx_pvcalls_back_event+0x10/0x10
-[  133.809814]  ? __pfx__raw_spin_lock_irqsave+0x10/0x10
-[  133.812251]  ? __pfx_pvcalls_back_event+0x10/0x10
-[  133.814554]  irq_thread_fn+0x86/0x150
-[  133.816468]  irq_thread+0x2da/0x580
-[  133.818363]  ? __pfx_irq_thread_fn+0x10/0x10
-[  133.820586]  ? __pfx_irq_thread+0x10/0x10
-[  133.822670]  ? __kthread_parkme+0x88/0x170
-[  133.824803]  ? __pfx_irq_thread+0x10/0x10
-[  133.827153]  ? __pfx_irq_thread+0x10/0x10
-[  133.829304]  kthread+0x2c8/0x3b0
-[  133.831176]  ? recalc_sigpending+0x15c/0x1e0
-[  133.833570]  ? __pfx_kthread+0x10/0x10
-[  133.835572]  ret_from_fork+0x373/0x5b0
-[  133.837581]  ? __pfx_ret_from_fork+0x10/0x10
-[  133.839978]  ? __switch_to+0x3c4/0xb40
-[  133.841984]  ? __pfx_kthread+0x10/0x10
-[  133.843970]  ret_from_fork_asm+0x1a/0x30
-[  133.846031]  </TASK>
-[  133.847420] Modules linked in:
-[  133.849240] ---[ end trace 0000000000000000 ]---
-
-Give each failure its own label, so that only resources that were actually
-acquired are released and the list the map was never added to is left
-alone.  The map is not published anywhere at that point, so the error path
-needs no socket_lock at all.  sock_release() stays in the callee on every
-error path, the way
-commit 8fafac202d18 ("xen/pvcalls-back: fix double frees with pvcalls_new_active_socket()")
-arranged it.
-
-Fixes: 5db4d286a8ef ("xen/pvcalls: implement connect command")
-Cc: stable@vger.kernel.org
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
-Signed-off-by: Yehyeong Lee <yhlee@isslab.korea.ac.kr>
----
-v2: no change (Reviewed-by added).  v1: https://lore.kernel.org/all/20261109122324.30134-1-yhlee@isslab.korea.ac.kr/
-
- drivers/xen/pvcalls-back.c | 25 +++++++++++++++----------
- 1 file changed, 15 insertions(+), 10 deletions(-)
-
-diff --git a/drivers/xen/pvcalls-back.c b/drivers/xen/pvcalls-back.c
-index ba62651a7f338b..dcefa91a40cd05 100644
---- a/drivers/xen/pvcalls-back.c
-+++ b/drivers/xen/pvcalls-back.c
-@@ -337,7 +337,7 @@ static struct sock_mapping *pvcalls_new_active_socket(
- 
- 	ret = xenbus_map_ring_valloc(fedata->dev, &ref, 1, &page);
- 	if (ret < 0)
--		goto out;
-+		goto out_map;
- 	map->ring = page;
- 	map->ring_order = map->ring->ring_order;
- 	/* first read the order, then map the data ring */
-@@ -345,19 +345,19 @@ static struct sock_mapping *pvcalls_new_active_socket(
- 	if (map->ring_order > MAX_RING_ORDER) {
- 		pr_warn("%s frontend requested ring_order %u, which is > MAX (%u)\n",
- 				__func__, map->ring_order, MAX_RING_ORDER);
--		goto out;
-+		goto out_unmap_ring;
- 	}
- 	ret = xenbus_map_ring_valloc(fedata->dev, map->ring->ref,
- 				     (1 << map->ring_order), &page);
- 	if (ret < 0)
--		goto out;
-+		goto out_unmap_ring;
- 	map->bytes = page;
- 
- 	ret = bind_interdomain_evtchn_to_irqhandler_lateeoi(
- 			fedata->dev, evtchn,
- 			pvcalls_back_conn_event, 0, "pvcalls-backend", map);
- 	if (ret < 0)
--		goto out;
-+		goto out_unmap_bytes;
- 	map->irq = ret;
- 
- 	map->data.in = map->bytes;
-@@ -365,7 +365,7 @@ static struct sock_mapping *pvcalls_new_active_socket(
- 
- 	map->ioworker.wq = alloc_ordered_workqueue("pvcalls_io", 0);
- 	if (!map->ioworker.wq)
--		goto out;
-+		goto out_unbind;
- 	atomic_set(&map->io, 1);
- 	INIT_WORK(&map->ioworker.register_work,	pvcalls_back_ioworker);
- 
-@@ -381,11 +381,16 @@ static struct sock_mapping *pvcalls_new_active_socket(
- 	write_unlock_bh(&map->sock->sk->sk_callback_lock);
- 
- 	return map;
--out:
--	down(&fedata->socket_lock);
--	list_del(&map->list);
--	pvcalls_back_release_active(fedata->dev, fedata, map);
--	up(&fedata->socket_lock);
-+
-+out_unbind:
-+	unbind_from_irqhandler(map->irq, map);
-+out_unmap_bytes:
-+	xenbus_unmap_ring_vfree(fedata->dev, map->bytes);
-+out_unmap_ring:
-+	xenbus_unmap_ring_vfree(fedata->dev, (void *)map->ring);
-+out_map:
-+	sock_release(sock);
-+	kfree(map);
- 	return NULL;
- }
- 
 -- 
-2.43.0
+Thx and BRs,
+Shuaidong Chen
 
 
