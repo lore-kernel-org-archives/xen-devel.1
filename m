@@ -2,47 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1837260A260D
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2026 13:15:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ADF0E606A335
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2026 13:21:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=selector1 header.b=EeIvDtBI
-Received: from list by lists.xenproject.org with outflank-mailman.1481767.1685687 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=BSqHEck7
+Received: from list by lists.xenproject.org with outflank-mailman.1481777.1685696 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQlhK-0005bb-Sx; Tue, 10 Nov 2026 13:15:38 +0000
+	id 1xQlmT-0008AK-Ei; Tue, 10 Nov 2026 13:20:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1481767.1685687; Tue, 10 Nov 2026 13:15:38 +0000
+Received: by outflank-mailman (output) from mailman id 1481777.1685696; Tue, 10 Nov 2026 13:20:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQlhK-0005bU-OI; Tue, 10 Nov 2026 13:15:38 +0000
-Received: by outflank-mailman (input) for mailman id 1481767;
- Tue, 10 Nov 2026 13:15:38 +0000
+	id 1xQlmT-0008A8-AN; Tue, 10 Nov 2026 13:20:57 +0000
+Received: by outflank-mailman (input) for mailman id 1481777;
+ Tue, 10 Nov 2026 13:20:56 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xQlhJ-0005bM-R5
- for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 13:15:38 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xQlmS-0008A2-06
+ for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 13:20:56 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xQlhJ-007OBd-3A
- for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 14:15:37 +0100
-Received: from [10.42.69.2] (helo=localhost)
+ id 1xQlmR-006DMM-D4
+ for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 14:20:55 +0100
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6af318f1-8faa-0a2a0a5109dd-0a2a4502ac6a-20
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 14:15:36 +0100
-Received: from [40.93.198.20]
- (helo=CY7PR03CU001.outbound.protection.outlook.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6af318f7-6ca4-0a2a45020019-285dc6143669-3
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 14:15:36 +0100
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
- by CHXPR03MB989197.namprd03.prod.outlook.com (2603:10b6:610:2f9::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.8; Tue, 10 Nov
- 2026 13:15:33 +0000
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::a70d:dc32:bba8:ce37%4]) with mapi id 15.21.0615.007; Tue, 10 Nov 2026
- 13:15:33 +0000
+ (envelope-from <jbeulich@suse.com>)
+ id 6af31a2b-2eae-0a2a0a5409dd-0a2a450ae736-42
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 14:20:55 +0100
+Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6af31a37-f2d2-0a2a450a0019-d155802ccd25-3
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 14:20:55 +0100
+Received: by mail-wm1-f44.google.com with SMTP id
+ 5b1f17b1804b1-4a20bdaf39cso21537825e9.1
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 05:20:55 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4ba02387ad9sm74358935e9.5.2026.11.10.05.20.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 10 Nov 2026 05:20:54 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,378 +49,214 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=B7X99LjmSSvsFcSvDNOLQkLB0QFNSdv0ezmK5DmwFtP9iZIL4e1I5XLKQW+82vhxBvum+yPf56LIKdaVmfMo4Nv9dypGwMzb/EryI3VSj/RjEZgov5OxYpSIEM0HHN6Cn3ROoeQlwdDZvT1VHgNM6F60ZicsAKCPEa6mLh1yTfob/7EXSj9Y9OECmjISZG41hX/7LTBzf4C1cN1uvpQdIybhKks21nbwRGPJ4Yawk6WDvTaIxEpE77rwpPM40uWVKHKGLgvSYgoDdyPZugDymPrq0V/+zdWLWZU1XSldN6yem0NPab6v9PdPCEfZh9KiaqxNM2da2FUD10ZejDKYpw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=e4ZgCJOANt4PVPCl77/++w9gsNSig0s4H7Z/JmYf6Is=;
- b=H3o6MfOxDnPpdXXwvg6bQ4861Jm1OfnjOJ1VMe6eQhP7cKgduJe7lH/jkKB2Js5nUc4tCxpfPvNtNVefHqmiZIvzZvtjnbgO73o/HngiUsT5FbDunXu068BCob/w+lPpL4PQS60a4pSuz2IdrwsiEuM20RxcUqIgO2eQn6NvgL6lKNta8FMImLn237z6WYUR64QaJ4nCltnes+JgCfhLkriZdUG7uYPMXE01TptNWwlRGoJ6B5jLijn+dd+w/EBC5vNTkZRGj2qG4ijb0MOlr6bNwjklXFZhaWtkWY6rGrmUOL27Y3EsKR75Z1PofUC+ZYAyppOAKYJ0wo2VAyeC3w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=e4ZgCJOANt4PVPCl77/++w9gsNSig0s4H7Z/JmYf6Is=;
- b=EeIvDtBIUPY58GtCtOpCJ50iyLhUJQQnN+MSuiPON4nP0va11uvF7cby4LFAMqFDBi8PiJDwmLt+M6/9c0LG1SEf9l5MH9VnTGy7vUCoMf2l9VGqyeW3KNKs49pdEVIw9Ft4Na2w2CBMfS/EmvOKj+TuKC2/7f79E6ASj8Mwfdg=
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <f9ffba74-3b4a-49a7-abaf-1c062993a531@citrix.com>
-Date: Tue, 10 Nov 2026 13:15:29 +0000
-User-Agent: Mozilla Thunderbird
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>
-Subject: Re: [PATCH v5 4/4] x86: prefer shadow stack for producing call traces
-To: Jan Beulich <jbeulich@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <d0de0425-a0fd-4ced-9768-ff102b953a22@suse.com>
- <bfec463b-a4dd-4a4a-bafb-c596f83630a1@suse.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <bfec463b-a4dd-4a4a-bafb-c596f83630a1@suse.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: PAZP264CA0049.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:1fc::16) To CH8PR03MB8275.namprd03.prod.outlook.com
- (2603:10b6:610:2b9::7)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1794316855; x=1794921655; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=t9Y5FefKYQGHjju5gxChqLuvtSJTFYHIjDOUB5O7rSA=;
+        b=BSqHEck7+TSHQDysfVZ0kcQjJxfAVyhFx0FrECFp9SQjA2DGiu07GO0GxTUIKXNv31
+         i1rCEHY2eGIG9h6eQ+eRFaG+HURV4/2QI0KeMBWcbb/txr1kKFIfNXgj1Am4RYWi1Vyi
+         XIq5Lksx3RzcvJCJpayvPgfS7qvuWOJsP03f+eVuElLUzmXmTf2skytYyJyoy7Oa5kdI
+         /LdCK6xD8VuCSZEF/bs/RwraW3iLa02+qF/dcvdjNnycsaV+PM5nUiRqoO4F74ntLPXn
+         00Rk0rvLaeP+SQpgKctWeZuTPmMw1pcnzxqHVip+Uwl8rc+Z0KdaQ/v8YyE5vaMKS8k5
+         cOZA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794316855; x=1794921655;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=t9Y5FefKYQGHjju5gxChqLuvtSJTFYHIjDOUB5O7rSA=;
+        b=o0E0T1Qy9V5snxAcl7nQzcdyqQitTH6RLENFmLYh5egh8rpxcXXck0CTBUvzBftnmS
+         XwgRwKHqQJtYI7Gmm0ir7jPOJxbeynAJ3J918nPVQc8FjlfcC3ouz8hU+WkmY3alrvIG
+         EjSIc2ZWuxG7hkjgzknSnJmZ4t3yLoTCQ4rMjAcukt5Ir0m4htUNymh8zFV69CKEQo9Z
+         YVIIe4Yr/mSivq3fmT3ZehtumX8GudEX3vbWcOznsZfYXqvQRxeUCvDgUx1iKQONFA8m
+         9LQlbxIp+juaIyFXdds+nxmQXQvFSMl0Qh8MOo0/FbuPF0xrM+ullpQqez2XRvujTNS1
+         9gcw==
+X-Forwarded-Encrypted: i=1; AL+hErHaiiuUutw0eq9sWGGkCNgHixfUy7YwQgiwpo0SPcH1OqYKVhSlbq+TzDKHRcvA5BqSavYh93sSz8o=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z/AlQW9VW1p9pfUN0ctwDdMa+6psg5PtR89goo7Y7GZ1ug9ETo5
+	PKtvO/wZ8m2xGzyb1XpGe8Kps3yeLN3ljR5hZrz7FnJSqZlAnil1ulT3wj+lSQCqtA==
+X-Gm-Gg: AYBFou2uH9fbT35oV8Hhf0Q5eSzTOHqWQQm60mzUIQEL3jlmQp/FOyah+8Wm2Yt25Oz
+	yRskHAjv2VdyuooUY/20iYqVGicEfzMAc3QsMFnaC09Di2nn5iGvPc0TBygb36vZltfuyl5jXo1
+	1hBOhaD/tSJ0G8SQrrfETu3vOngd42wLwL75r4xwyfLtxIWUYD5xmg8ehP9Kv/gDb74cAO9oDoA
+	5d3J0XNN5LsQ2ar63ku5WIHb6X6MR9BETmQlzKyHdHrJIeEy40W2vV8jLBSsjCjh3A1ZbJj7JEz
+	Fo3nh9peJczs6Zh2A0nWb5dhVu8yL6O3e6e65jiGf0m5jbG2fD/tGP+EGrUatbW+/n7G7etLGye
+	7TaW7v/8UmqSXo2tWhUwG/hGg23mXNjuEocJn1/lQAq4D4N/AK9HLqya3snDFH0Tm5GYDI0SSnY
+	laFtKB0KwND4aXztiLSj6/ARlxg6UMyqATId7p6kJWPFIjxXqEG2JUoLRqEUgyuKDQSBg0ZT32L
+	FhiuETs4HESef2DsaN+NIyrhJswjm0N+wdYehiEwqPPUGPK4uyqzigb20L9JjNu1hu9VEpSnWEG
+	YfKUjgek21YwFehyuOzq+n+eNYm593b+5EAyU9EA+I0gBnsK9wE4HVP6V4657+lmqExejKW9vi5
+	09NV4w7hExPvQNN81
+X-Received: by 2002:a05:600c:474c:b0:4a1:acaa:9d4c with SMTP id 5b1f17b1804b1-4ba0234f937mr46634615e9.25.1794316854541;
+        Tue, 10 Nov 2026 05:20:54 -0800 (PST)
+Message-ID: <8d2ecf68-6c34-4a59-9fbf-0e3f67a338d7@suse.com>
+Date: Tue, 10 Nov 2026 14:20:53 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|CHXPR03MB989197:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3f6b599b-85a5-442f-472f-08df3f2cb38a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|376014|366016|1800799024|5023799004|4143699003|11063799006|56012099006|261022113327099003|261022105027099003|261022075727099003|261021121427099003|261021123027099003|261021130227099003|261021135927099003|261026121527099003|261022115727099003|261028144727099003|261102123227099003|261009223027099003|261026140227099003|10067099003|18002099003|22082099003|6133799003|3023799007;
-X-Microsoft-Antispam-Message-Info:
-	Q+k8Z24VDp3m+vui798l2H+ei5rsErLk9MTrJvFyg8AXUsgWg6v8ScriTkcUOHj5rOGg7kmcUBPj4ejVp6hpY1dqGo8svHqQAgTGjKfOA43YfYkNSBlm4JWXQZHHkkIrVNuf/MQupKWDnMcXvYGLpzADew64nym6vlSVz568gLZWu+C6NxKuG4SxJFwNY0TqshsP3PpS1Eo5ShoE/+8RFGhFRb8eVOf2lTDvbS3+doDy/ZACPJQgYzN9Z9cQmq9I2JJEKcO1CL1BbXKI4d7lSA5d2pkk42+KSiOf2bfrCszd76ACdyAdOElL1osH3nghRTIXEqB6BuXAVS8uHi9O5vyMpUujKFf66qfF22ji/vWQdiIgsBGpy6XGPE2xZyIykhrMg5hxy5S1fUOcaMNy5D1m4dQKRcvmkvTk9DTymTXTpwhyzAV8TGlaNgYTbrbEVR5o4kn+dh1FNIivASmgphbpvjvKwDWalxZ/s6R2Vu6is8g7sz6IXeMbkEuJazJmGx7s+AiYcGe47WsNOUOALIcGBjSgbtySK5OZQV5sg3CVZamA+v5J7kjvhshw1iy/3hqpXEgvunKq/l0GlX2PBmF1tX70Xr/8wdPikECX2IBhRjOF4czGKXvgo5lr1QKcANBs8Y2ro1hvJeUrfHmWMtfDcQwHScfMs4N9vb0WiBI=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(376014)(366016)(1800799024)(5023799004)(4143699003)(11063799006)(56012099006)(261022113327099003)(261022105027099003)(261022075727099003)(261021121427099003)(261021123027099003)(261021130227099003)(261021135927099003)(261026121527099003)(261022115727099003)(261028144727099003)(261102123227099003)(261009223027099003)(261026140227099003)(10067099003)(18002099003)(22082099003)(6133799003)(3023799007);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?cTFpd0tDNzlDQVlSNzdzY0lIekRqeVJpY3k0WXdZWUk5QXJiak9lcHVNVjcv?=
- =?utf-8?B?ODhJTnhZUWhIOXhGSWwrYVcrYkVsSUZ4Z0p4ZXNqSEVueTlkdmJLbnBhRmlE?=
- =?utf-8?B?cncxVHdqbFdOb2JscDQxcTZSdG9WajV0MktHcjU5V1B2WXRKb2dkTWg4aWRN?=
- =?utf-8?B?MExsOGxQMW1qdGhyNi8xdm5lY3hYNXN5cnQ5ejRFNkJlRGVYRXN4ejQxOGFn?=
- =?utf-8?B?ODZ4Mm1BcUhOTlY4NnVUYkxHUCt1Y0w3ZTc0TDIxdjNzUVNya0dVTHJsSkE2?=
- =?utf-8?B?Zk5EbndSS2gvQ2FCVGdFckJ5YmMyTWxjSHlGYUcxN05haHlqR2Q3VlNTSk9k?=
- =?utf-8?B?c0pFRExBNlBiSVN4d0NwSXV2SzBmWUZWY2kvOGlBdm03bXFsaUVMV1lFYi81?=
- =?utf-8?B?TDNYOFJsaER2UUtnRW5mQjVjM0JydkwzVDhpTlowWWdMeC94VDYzQVRZbXdr?=
- =?utf-8?B?bjFEMFdHcGNjanZmaklhT2FaQmlYc1ZESUhHdkJWOXhxeHJPN0Y2TCtHUk5z?=
- =?utf-8?B?TE5OSnNhZ2tzd2JKeGdUUkFuSUxCU1A1Tlo0SXhnSXlrOThGRER3OEVFRXJp?=
- =?utf-8?B?ZklYWS9uSEJ1dm12OGJBK2h1UWl4MVp3NWdpQ1B4NFRoZVlmSGgxRXp4Rjd0?=
- =?utf-8?B?RzN0MCt6ZVEvQXAyUzN2bm9DSE5DaXZWZWluZkpYSlRuOUNQYWtJdXlabDQv?=
- =?utf-8?B?VkM3NGJTY2IzNjR6a1ppSmFrS0tRZEp2Um1KMk5NVWpBZDRiRUs5T3A1NURK?=
- =?utf-8?B?TGRVYVR3Q29PcXVldktSRUE1QXhPNUV2eWl6TE82bTYxSXpFRUZwdkdMU0pQ?=
- =?utf-8?B?eEE1SXV1emhQdWhhb2haTWpiN1RhYzFIQnJFNXlBL1E1eU80bnVGVUJVZitR?=
- =?utf-8?B?SjNyV05SZnVMd2I5TVZTQU1QRHhhTjJyWTcrRmdvK2owVUVLV2d1MU5NWGt4?=
- =?utf-8?B?Z0lML0U0eDllWFJVWDlWcDRzZDA2VzVzNmJ1c1F0VDJ6Q1ZmY0NzQm5palBj?=
- =?utf-8?B?UW9MeFhLMmVScmw0RTN4Z2k2Qm53cHBacVp0c2pUckpxQkprV3RUSlY3ZlV2?=
- =?utf-8?B?NEJUanhDSS9ldnR6MVNJb2dzTHFsT05QZ0E2MjNycHJWME14ejFXNUFrT1I3?=
- =?utf-8?B?aXdCWVNLM2RtUU5mUnRuc3RMV01PekF6UjVadzhvM0NXa3dYd1JweFJkSUlY?=
- =?utf-8?B?YWR0K1d2OVRUSlVmdTJkbXhsQnNKRWhaRmVBWHA3V3dzZEpvRXlhSDdCRWI3?=
- =?utf-8?B?VFpqd2JPVnM0NEM1TnA4REdrbFoxU2trdndlT3E4Wlh6d0t5Z0Z6Qk1KM0M3?=
- =?utf-8?B?WEdlU0ZaSkQzc0xtSTIxcDBJVXQ1VkdxSTZLMmpYUWt6UlNiZjFkaEtoRWJ6?=
- =?utf-8?B?UFZBaWkwbXhEYTl0dWRXc2JqVXhucDVWalI1SzREcnp4SmlqdWtkUk91SDhx?=
- =?utf-8?B?N2kyenFXZVRVL2U2dUZlRkxQdFV1NEozbVo3OXNvMlhLZHJaeVFIL0YwU1Mw?=
- =?utf-8?B?UmpwTTR6QnpNcmtPS25SMXhnSGVpMWxBUVdPNmpDZlNFeE53WkR5ZnhaUHBs?=
- =?utf-8?B?TUFCRG56aEJFdmlXUkRtd3Y2d053WkRYcitZUWxMMmJ4M3dwYXladGQvaHlO?=
- =?utf-8?B?QXhucmEzQ09tMzhYalArNUI2YW5mYWpWa1BQM2YvSUl3Ti9VanR0VjkzNXB4?=
- =?utf-8?B?YzY2UC84Zktnb1R5bmJUckhNSlk1MzRIazBXdXRKN2JKSkRza2tZMkVVTklC?=
- =?utf-8?B?UGErQ0hHRHA0TWQralBUK3A2d3FxRnBvVWY1MHpObTAzRzM4V3J1WlA5NDB6?=
- =?utf-8?B?cDRlNm5EcEVzMEo4Q00zVEk1elNpMHlpL0xlMVNxbTVwSERGN0ViVWJtNldI?=
- =?utf-8?B?ZEE2MVYzTE5Ya3BTQXZGNnYrUk5xTFE5RFNueW1IOS9GbUsvd282dFFtdU5P?=
- =?utf-8?B?SW04ejZrelJSaTVDRnFPT0FKUlJHRk9ZVW9GNE5FZWxLWW9MR0xaemwzNmdz?=
- =?utf-8?B?UmZiRks1UjIzSTU2cmpzOXRSeWVQc3ZEazlRalhLZ001QmYvVGcvZWlqcDRo?=
- =?utf-8?B?eDZkbXlEbVpSY1NOZGZNMlFnY3U2Q29VNXlET09nZ1dENjB3VlludTc3b2xQ?=
- =?utf-8?B?M3YwMTdZNzVGUnpYak1hNlBvMkxpNU9MeFpsOFBYS1U3MmpOcGt6aE1hMXNS?=
- =?utf-8?B?L0ZBZlY2aDdaUlZjaHVZRlpkbmRod3l2Zm5YUE9OZzRJZWtPcXBxcDhYRlR6?=
- =?utf-8?B?NnpXcmk3czQ2Zk4yS1BMclY2NjBXMEFpL3loOHQ2Y2NMQ3ZwZVRRWjNGNzly?=
- =?utf-8?B?aFVqN3VTWWFzOHhEenFiYjdRSWZzbW5yN3p6ektUWHk0QURmUis2M01nOUQ0?=
- =?utf-8?Q?6nQZBdcJkE0LtRq0=3D?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3f6b599b-85a5-442f-472f-08df3f2cb38a
-X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Nov 2026 13:15:33.5012
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: VIV0SQOwhX6wi4fdQnkW2qvfiCdMfHXHDPkKesDCq2bOV0vcoHNjpPeoLP80R+L5znxwiRYcwso3dyfc7tSjXbSYJsuHJi4ecq9xZdJWjB4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CHXPR03MB989197
-X-purgate-ID: tlsNG-720697/1794316536-F30B02AC-55C3DD7E/10/78276251493
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] x86/pv: free the shared_info page switch_compat()
+ replaces
+To: George Dunlap <gwd@xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
+References: <20261110110500.27221-1-gwd@xenproject.org>
+ <ec93ec9a-2fd3-4dcc-94f8-35376cb03363@suse.com>
+ <CAFLBxZbndoe49Zcurk6ZM04niye=jRsEcD_=mnSoKQUuXPRZew@mail.gmail.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <CAFLBxZbndoe49Zcurk6ZM04niye=jRsEcD_=mnSoKQUuXPRZew@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-4011c0/1794316855-50CCBCFC-E4759C7F/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 7675
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=4.0.1
+X-purgate-size: 5961
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 09/11/2026 1:09 pm, Jan Beulich wrote:
-> Shadow stacks contain little more than return addresses, and they in
-> particular allow precise call traces also with FRAME_POINTER=n:
->
-> (XEN) Xen call trace:
-> (XEN)    [<ffff82d04032d730>] R extable.c#search_one_extable+0x70/0x73
-> (XEN)    [<ffff82d04032d802>] C search_exception_table+0xc2/0x177
-> (XEN)    [<ffff82d040358378>] C traps.c#extable_fixup.isra.0+0x18/0x6c
-> (XEN)    [<ffff82d040358e3b>] C do_invalid_op+0xab/0x106
-> (XEN)    [<ffff82d040201d98>] C x86_64/entry.S#handle_exception_saved+0x88/0xf4
-> (XEN)    [<ffff82d07fffe044>] E ffff82d07fffe044
-> (XEN)    [<ffff82d040412db0>] C stub_selftest+0xd0/0x168
-> (XEN)    [<ffff82d0403508d6>] C setup.c#init_done+0x116/0x15a
->
-> as opposed to this counterpart (earlier during the same boot, before CET
-> is enabled):
->
-> (XEN) Xen call trace:
-> (XEN)    [<ffff82d04032d730>] R extable.c#search_one_extable+0x70/0x73
-> (XEN)    [<ffff82d04032d802>] S search_exception_table+0xc2/0x177
-> (XEN)    [<ffff82d040358378>] S traps.c#extable_fixup.isra.0+0x18/0x6c
-> (XEN)    [<ffff82d040358e3b>] S do_invalid_op+0xab/0x106
-> (XEN)    [<ffff82d040201d98>] S x86_64/entry.S#handle_exception_saved+0x88/0xf4
-> (XEN)    [<ffff82d040412db0>] S stub_selftest+0xd0/0x168
-> (XEN)    [<ffff82d0403d0cc9>] S do_initcalls+0x29/0x38
-> (XEN)    [<ffff82d04041adf2>] S __start_xen+0x1c72/0x2235
-> (XEN)    [<ffff82d040288a57>] S __high_start+0xb7/0xc0
->
-> (note the entirely missing entry for the stub itself [1]; sadly there are
-> no stray entries there).
->
-> [1] Arguably we could teach FRAME_POINTER=n traces to recognize stubs as
->     well. But not FRAME_POINTER=y ones. In fact, what's missing there
->     isn't the stub itself, but (of course) its immediate caller.
->
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+On 10.11.2026 13:24, George Dunlap wrote:
+> On Tue, Nov 10, 2026 at 11:33 AM Jan Beulich <jbeulich@suse.com> wrote:
+>>
+>> On 10.11.2026 12:05, George Dunlap wrote:
+>>> For a 32-bit PV guest, switch_compat() replaces a shared_info page
+>>> above 4GiB with one below, and drops the old page with a bare
+>>> put_page().
+>>>
+>>> Unfortunately, this violates the expected
+>>> xenheap-page-shared-with-guest freeing discipline.  Xenheap pages
+>>> don't start with a reference count, and aren't put back into the
+>>> allocation pool after their reference count drops to zero; they're
+>>> removed from the domain's xenheap list, but someone needs to
+>>> explicitly call free_xenheap_page() on them for them to return to
+>>> their pool.
+>>>
+>>> d->shared_info here only has a non-zero reference count because it was
+>>> shared with a guest; and the thing that holds that reference is the
+>>> PGC_allocated bit.  Dropping the reference without having been the one
+>>> to clear the PGC_allocated bit puts the page in an invalid state.
+>>>
+>>> If there are no outstanding references to d->shared_info when
+>>> switch_compat() happens, the result for pages moved this way is merely
+>>> a memory leak: the page is removed from the xenheap list, and nothing
+>>> ever calls free_xenheap_page() on it.  So whenever this path is
+>>> triggered, a page is leaked.
+>>>
+>>> Theoretically, if there *is* an outstanding reference to
+>>> d->shared_info, *and* that reference is still held when the domain is
+>>> destroyed, then the result is a reference count underflow: Because the
+>>> reference count never drops to zero, the page stays on the xenheap
+>>> list; then during domain destruction, relinquish_memory() walks the
+>>> list, sees the PGC_allocated bit, and calls put_page() again --
+>>> potentially dropping the page count to zero.  When the other reference
+>>> holder drops their reference, the count underflows.  (put_page() only
+>>> ASSERT()s that the count is non-zero, so this wouldn't cause a crash
+>>> in a release build; and the page is never freed, so other potential
+>>> hazards of general ref count underflow are avoided.)  Fortunately this
+>>> is impossible with the in-tree toolstack, which only switches a domain
+>>> while building or restoring it, and doesn't have a mapping of
+>>> shared_info that it holds across that call.
+>>>
+>>> Release the page the way domain destruction releases d->shared_info:
+>>> drop the allocation reference with put_page_alloc_ref(), as
+>>> relinquish_memory() does, which clears PGC_allocated and takes the page
+>>> off the xenheap list once nothing else refers to it, and free it with
+>>> free_xenheap_page() once an RCU grace period has passed.
+>>>
+>>> The free waits for the grace period because do_settime() writes every
+>>> domain's wallclock holding only wc_lock and the domain list's RCU read
+>>> lock, neither of which excludes switch_compat(), through a pointer it
+>>> may have read before the switch.  The RCU callback uses the domain's
+>>> own RCU head, d->rcu, and holds a reference to the domain.  That
+>>> reference keeps the domain from being destroyed, and its struct freed,
+>>> before the callback has run.  It also keeps d->rcu's only other user,
+>>> domain_destroy(), from queueing the head in the meantime; if the
+>>> callback drops the last reference, domain_destroy() queues d->rcu
+>>> again, which RCU has finished with by then.  No other reference to the
+>>> page is expected: with no memory, the domain has no page tables that
+>>> could map it, and the in-tree toolstack holds no mapping of it across
+>>> the switch.
+>>
+>> Yet there's still the theoretical possibility of there being some other
+>> mapping. In such a case imo we'd better avoid the freeing, accepting
+>> the leak (with a log message perhaps).
+> 
+> [snip]
+> 
+>>> Suggested-by: Jan Beulich <jbeulich@suse.com>
+>>
+>> Did I? (I don't seem to recall.)
+> 
+> I sent an earlier version of the patch to the security team due to the
+> theoretical underflow (which was in the end deemed not a security
+> issue); that version kept the page and freed it when the domain was
+> destroyed.  In response, you wrote:
+> 
+> 8<---
+> 
+> As to the patch: I understand the need for deferred freeing of the
+> page, but does it really need deferring as much? Wouldn't RCU-based
+> freeing suffice (there can't be any other references to this page
+> without the domain having been launched, or without the domain
+> having at least some memory assigned to it, so it could have page
+> tables referencing the page)?
+> 
+> --->8
 
-Sorry, but this commit message is still deceptive to read.  Please
-reformat it as:
+Oh, I see.
 
----8<---
-Shadow stacks contain little more than return addresses, and they in
-particular allow precise call traces also with FRAME_POINTER=n:
+> Which, naturally, required me to become familiar with how Xen's RCU
+> system worked enough to get it implemented.  (Claude did the writing,
+> but I need to understand things well enough to direct it and review
+> the results.)  I don't think it's unreasonable for me to be annoyed
+> that you're now saying you want it back the way I wrote it originally.
 
-Compare a WARN() in stub_selftest() which runs twice on boot, first
-without Shadow Stacks:
+But I didn't ask for that. Now that I read your reply, I think I see
+how you may have extended my reply to arrive there, though.
 
-    (XEN) Xen call trace:
-    ...
-    (XEN)    [<ffff82d040288a57>] S __high_start+0xb7/0xc0
+What I asked for here is that we free the page if its refcount is zero
+(the common case), exactly as you do (via RCU). Yet we would skip the
+freeing (and leak the page) in the unexpected case of the refcount not
+being zero after the put_page_alloc_ref().
 
-and later with Shadow Stacks:
+> Now that we have the RCU version implemented and tested, I think we
+> should keep it.  It's safe now, and we can keep it safe in the future.
+> If you want we could add a comment to the field warning that no
+> references should be taken to it because it may change; but honestly
+> that seems like overkill to me.
 
-    (XEN) Xen call trace:
-    ...
-    (XEN)    [<ffff82d0403508d6>] C setup.c#init_done+0x116/0x15a
+For the field I'm not concerned - it's purpose is clear, and anyone
+trying to add obtaining of a ref using it as input will hopefully be
+caught the latest during review. It's a ref existing ahead of the
+put_page_alloc_ref() which worries me (some).
 
-
-Note that ...
----8<---
-
-This way you are presenting the information in chronological order, as
-well as stating which has CET enabled and which does not.
-
-We probably ought to teach the emulation stubs about
-CONFIG_FRAME_POINTER.  It should be consistent 
-
-
-> ---
-> While the 'E' for exception frames is probably okay, I'm not overly
-> happy with the 'C' (for CET). I would have preferred 'S' (for shadow),
-> but we use that character already.
->
-> As an alternative to suppressing output for the top level exception
-> frame, adding the new code ahead of the 'R' output line (and then also
-> ahead of the stack top read) could be considered.
->
-> Quite likely a number of other uses of is_active_kernel_text() also want
-> amending with in_stub().
-> ---
-> v3: Correct "link to other shadow stack" check. Don't log a line for the
->     (impossible) PV case. Add example stack trace to description.
-> v2: IS_ENABLED() -> #ifdef. Re-base.
->
-> --- a/xen/arch/x86/traps.c
-> +++ b/xen/arch/x86/traps.c
-> @@ -48,6 +48,7 @@
->  #include <asm/shared.h>
->  #include <asm/shstk.h>
->  #include <asm/smp.h>
-> +#include <asm/stubs.h>
->  #include <asm/system.h>
->  #include <asm/traps.h>
->  #include <asm/uaccess.h>
-> @@ -705,6 +706,13 @@ unsigned long get_stack_dump_bottom(unsi
->      }
->  }
->  
-> +#ifdef CONFIG_XEN_SHSTK
-> +static bool in_stub(unsigned long addr)
-> +{
-> +    return !((this_cpu(stubs.addr) ^ addr) >> STUB_BUF_SHIFT);
-> +}
-> +#endif
-
-static inline, or __maybe_unused.  This stub needs using elsewhere, and
-has nothing to do with XEN_SHSTK beyond the first user.
-
-> +
->  #if !defined(CONFIG_FRAME_POINTER)
->  
->  /*
-> @@ -797,6 +805,49 @@ static void show_trace(const struct cpu_
->           !is_active_kernel_text(tos) )
->          printk("   [<%p>] R %pS\n", _p(regs->rip), _p(regs->rip));
->  
-> +#ifdef CONFIG_XEN_SHSTK
-> +    if ( rdssp() != SSP_NO_SHSTK )
-
-Thinking about it, the entry condition wants to be regs->entry_ssp.
-
-If shadow stacks where enabled at the time of taking the exception/etc,
-that's good enough.
-
-> +    {
-> +        const unsigned long *ptr = _p(regs->entry_ssp);
-
-Something Linux is gaining might be worth using here.
-
-+struct fred_shstk_entry_frame {
-+    u64 ssef_ssp;
-+    u64 ssef_lip;
-+    u64 ssef_cs;
-+};
-
-(Names subject to improvement, especially as this is not actually FRED
-related, although cs does get extended with SL and WFE when FRED is
-enabled.)
-
-The logic below will render incorrectly on the IST stacks, I think.
-
-In those cases, we'll get an entry_ssp pointing at the IST shstk with {
-ssp, lip, cs, (maybe) sup token }, where what we want to do for
-rendering the dump is to follow ssp first to get to the outer context
-and then walk up.  This is different from rendering regs->rsp which
-starts from the outer context.
-
-
-> +        unsigned int n;
-> +
-> +        for ( n = 0; (unsigned long)ptr & (PAGE_SIZE - sizeof(*ptr)); ++n )
-> +        {
-> +            unsigned long val = *ptr;
-> +
-> +            if ( is_active_kernel_text(val) || in_stub(val) )
-> +            {
-> +                /* Normal return address entry.  */
-> +                printk("   [<%p>] C %pS\n", _p(val), _p(val));
-> +                ++ptr;
-> +            }
-> +            else if ( !((val ^ (unsigned long)ptr) >>
-> +                        (PAGE_SHIFT + STACK_ORDER)) )
-> +            {
-> +                if ( val & (sizeof(val) - 1) )
-> +                {
-> +                    /* Most likely a supervisor token. */
-> +                    break;
-> +                }
-
-Supervisors tokens only exist in !opt_fred cases.  But I don't see how
-this is a valid check for one.  You're looking for non-zero in the
-bottom 3 bits, but that's potentially ambiguous with cs and fails to
-spot a non-busy token.
-
-The distinguishing characteristic of a supervisor token is that it is
-it's own address, so check (val ^ ptr) >> 1.
-
-> +
-> +                /*
-> +                 * Ought to be a hypervisor interruption frame.  But don't
-> +                 * (re)log the current frame's %rip.
-> +                 */
-> +                if ( n || ptr[1] != regs->rip )
-> +                    printk("   [<%p>] E %pS\n", _p(ptr[1]), _p(ptr[1]));
-
-Ah - this n is the thing covering the fact that you didn't move to the
-outer context originally.  Please do that and drop this.
-
-If we're going to start using E here, we should make the FRAME_POINTER
-side match.  When printing something we've identified as a stub, we
-ought to say "in stub" rather than leaving it as a raw number.
-
-Not for this patch, but it might be nice to identify EFI ranges too,
-because that's the only other case where we commonly get raw numbers.
-
-> +                ptr = _p(val);
-> +            }
-> +            else /* Bogus. */
-> +                break;
-> +        }
-> +
-> +        /* Fall back to legacy stack trace if nothing was logged at all. */
-> +        if ( n )
-> +            return;
-
-This comment wants to be after the return, not before it.
-
-~Andrew
-
-> +    }
-> +#endif /* CONFIG_XEN_SHSTK */
-> +
->      if ( fault )
->      {
->          printk("   [Fault on access]\n");
->
-
+Jan
 
