@@ -2,45 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 06D8D606AF39
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2026 13:29:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EA5FA606A31C
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2026 13:47:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=QRHVXTmj
-Received: from list by lists.xenproject.org with outflank-mailman.1481804.1685714 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=fw2RK9lI
+Received: from list by lists.xenproject.org with outflank-mailman.1481821.1685723 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQlul-0001pC-II; Tue, 10 Nov 2026 13:29:31 +0000
+	id 1xQmCM-0008M7-0t; Tue, 10 Nov 2026 13:47:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1481804.1685714; Tue, 10 Nov 2026 13:29:31 +0000
+Received: by outflank-mailman (output) from mailman id 1481821.1685723; Tue, 10 Nov 2026 13:47:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQlul-0001p5-EX; Tue, 10 Nov 2026 13:29:31 +0000
-Received: by outflank-mailman (input) for mailman id 1481804;
- Tue, 10 Nov 2026 13:29:30 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xQluk-0001oz-Ok
- for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 13:29:30 +0000
+	id 1xQmCL-0008Lw-Sf; Tue, 10 Nov 2026 13:47:41 +0000
+Received: by outflank-mailman (input) for mailman id 1481821;
+ Tue, 10 Nov 2026 13:47:40 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <Shuaidong.Chen@amd.com>) id 1xQmCK-0008KV-JQ
+ for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 13:47:40 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xQluk-0001cC-1e
- for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 14:29:30 +0100
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xQmCJ-00D1Mf-Ur
+ for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 14:47:39 +0100
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6af31c2f-2eae-0a2a0a5409dd-0a2a4508aeda-32
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 14:29:29 +0100
-Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6af31c39-f659-0a2a45080019-d1558032dc67-3
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 14:29:29 +0100
-Received: by mail-wm1-f50.google.com with SMTP id
- 5b1f17b1804b1-4a60f9474c4so24779355e9.0
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 05:29:29 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4ba01fe61e6sm66461405e9.6.2026.11.10.05.29.28
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 10 Nov 2026 05:29:29 -0800 (PST)
+ (envelope-from <Shuaidong.Chen@amd.com>)
+ id 6af32071-8faa-0a2a0a5109dd-0a2a4502bfec-38
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 14:47:39 +0100
+Received: from [52.101.193.2]
+ (helo=CH1PR05CU001.outbound.protection.outlook.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Shuaidong.Chen@amd.com>)
+ id 6af32079-6ca4-0a2a45020019-3465c102f498-4
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 14:47:39 +0100
+Received: from BL0PR12MB4754.namprd12.prod.outlook.com (2603:10b6:208:8e::26)
+ by SA1PR12MB9003.namprd12.prod.outlook.com (2603:10b6:806:389::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.11; Tue, 10 Nov
+ 2026 13:47:35 +0000
+Received: from BL0PR12MB4754.namprd12.prod.outlook.com
+ ([fe80::ebe5:87e:6d95:580c]) by BL0PR12MB4754.namprd12.prod.outlook.com
+ ([fe80::ebe5:87e:6d95:580c%4]) with mapi id 15.21.0569.009; Tue, 10 Nov 2026
+ 13:47:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,55 +52,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1794317369; x=1794922169; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=3CEnf9ISm+pAqdXGR+GsPMALLF9N6rWMVDZURTaZiVw=;
-        b=QRHVXTmjpc6mX83t5UG3I3+L9S+AncBpUfw/zWHWK7EW81G89p1YwXCiMqVLTClmQH
-         eUptDmEWzEnU5dR6xsPPFYtVIM8TJQaWC9g6+LAYfuCObWV+FQwe249yQu4O5+8C9mH3
-         e61M4rqScvRu9u1IPwus/c8JIshXcl9AP5wUbDhGiKLwNUs0rCO/813vjpCfyiROec6x
-         BgZrSDXaSfnp8OkjAAm2TCQtIucHb249CrEJggdti4o2jKwVDS6syES0c/wMeKUfRio+
-         T2dAq9kO/R/vMTBJhh9rnqptF1r/JsR3lxalgt0nYtFckIh/HW8PZP6wbyGuNuRFfNEE
-         TK4Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794317369; x=1794922169;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=3CEnf9ISm+pAqdXGR+GsPMALLF9N6rWMVDZURTaZiVw=;
-        b=0r6Jsgk0uKEmmT/6LljnbeKJaw9vqaCWpVmL4L9UwO9WA6tvFVFTOlr9GvQh+ZQ+3j
-         RyhOn8SjBFC3QdMqBmhlWQVsroNZ7FsMW21pIqwlOM3f6aY4qH+6c+zAQ94/tKk2zP96
-         AjOsoBl9CkRxC/M02yAg5tztzyig2oCQUod2EDNopQEtLa6iDQiOqyvH/fur2/qfaSb9
-         MamHg0I0bEtP7YmyA7mdifXbtJWBatavLCYG8xUMnfjE1jsGE1Im7XD1JwQXHgqIO40O
-         ScYsuQ3X6ddzvCSd//twO6fZhNRlI6oZUZY/owvKtbQ8PDNtko31hE5vNGKqi9AMMCmp
-         ryEw==
-X-Forwarded-Encrypted: i=1; AL+hErGDroLTlD50jMXZF/H7PFIV9xmz3st12FSAqhO0pG24ET4MXlt+fEssABJQ8trzUIKFetyIQRmjW/U=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z982/13lu9R/U5bYLlIHweqyr+3GqTJFs1llf4ZzMPnwrPSP1QE
-	zDTaOPqlyJ6xQbfaOjuKVbtNedxbTmEhbgBOXxIMrpi7MvBse9pw47uQyZsoQht0ZA==
-X-Gm-Gg: AYBFou2s66ggeu1iH4qBXTsdXM8AkC2ri3f0ouSpvO9gGZd/2dAhHN9jHoX1Hdgke/o
-	9hcbm+5u5u4jzbmIiFCkxZImhYAGhYlVUIXssWs6rUGeIWFDCwJ73ulgFshUcBJheWn5zmiW/Tm
-	7pSzODyjW9jf4DgIfzyr3tzM3nQLNQPrNKiaZCLwLEWZj2cmtNQ5cWKpg51IT29MnzjSYHsuqCl
-	PC5jQPRZVo6chuH4KHwcDocKgFoT8maOVcfevhH9QqcyX3wFHa0bi0RPr5InJZPZMf+035Sufq2
-	YaAcm5rGvz8aYh7tOZqZC7V9sIfZLivSPpk19F24p0QBvDKGRmg5UKIFD3PRjHclI8eypZ3p/9U
-	Z62ZfSx8JYX0tVGDrUL+mn17dTYkWP2un7rko6VsEkiOU6XrMqyRrBtEf+6Anck1dw83MG/EJbJ
-	ZRv23oAlhym3SlL9WRe3mWkDE8qbRZNoigPCAoks6LNYYrJdqcWVwGXduRlaqZS3KnC4PPIrbb0
-	LWFTqoUE5mesYVC4dCAOijhzgLMiqHzm44W6ou2UC79pikMAME/hnThZBmgOPY20TrOMxgTKqW3
-	xvA5NM9nuo7RzpPAi+dBHP4ReQAB77JcyT2+YsZv5DfJYEkatotx5RSLBOmPfdHs13wNTmhhNqx
-	bRuBk6jVY39AZqlKF
-X-Received: by 2002:a05:600c:4f4e:b0:4a2:10f9:37ce with SMTP id 5b1f17b1804b1-4ba0233e9dfmr50612105e9.15.1794317369391;
-        Tue, 10 Nov 2026 05:29:29 -0800 (PST)
-Message-ID: <93875740-8661-41af-b4d9-836a4ae85dbc@suse.com>
-Date: Tue, 10 Nov 2026 14:29:28 +0100
-X-Archived-By: <archiver.kernel.org>
-MIME-Version: 1.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=LHKy9Q8SZlv7KNFPy0VnwdJU/HiPRPhK11rCivUk8krDFn4EWL1/L4CSD9ThsFeyVEX/p3Gf9OABOxn9rXCbvyLWOvcPit5Gxtp/FkmhbK3XDlPyWq+Vo66qrW2MdpeRvqkqDbuW2hzBSoCx9N1/WrLLzAwv0FS6UtZ+gDW02dlxU926MDeuoAceDPUqq30nIfDx05eBYppdrhCQ97R9EEVU3zoJwB+I0E/HtsN9z2psX33UvWiCuF19sbEWl0FB/PD9L/u0ObX81VTDqAiOQ39CXLqtvWO580lATcpwFQFpq0kWd2qJvrzM8S15ilncn/pim+IYQ+56BWzMrSJSzA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=kuOC0z7hPR0t72EWgKTlQyVtr1z3gRV6UdQk15BflLQ=;
+ b=JCEuZs1FleHb3XBNg7pVDof0LbZYqO1zZCPIjJF5Wn6uRIMo5EyoAkBy7KxSRinpUXTS5aPg9L17dO1aZ3Y2MLk4XLLhda7zL4dPjJ+/CmHx2XlSeIqqgE7rq+tCgVgOKvCEZHD3kIm+jfYsAn7YvR33ZEXTnfb9THGiQwi5uBSjNtXzj8hD0Dl4SYm4NDlIz4ixaN34JaL0dhXF/3XW1TkbNgOf1wX/p390T6rXayIsgQV0fBVhzv/uNgdEfJDCQ/WPgTddlT0jRHB7RsoFRnYdF9fZloZRtjKNIbABB6C4QZ1sPBwICys1ayJ5HbF24s9b3EToh0wesVzkRLqccg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=kuOC0z7hPR0t72EWgKTlQyVtr1z3gRV6UdQk15BflLQ=;
+ b=fw2RK9lIR9d22oJlBMpiljjdXdaFzPW4mWRKVqk7iILB24nZtgjHSZZIq4K6IMlM9/19mmR7XsDlLxhhGZZPnZNf9XWKRvz3jdMeUxfmRSLoZ3h3z6vozTJ2y0+z+gme+GnYuCrpujmGH1fF2wvSZCWML4pCHzPr3BiyfVJ7R5o=
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Message-ID: <6204b804-47da-434b-85a2-3843a7a0972e@amd.com>
+Date: Tue, 10 Nov 2026 21:47:27 +0800
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v2] automation/eclair: deviate R2.6 for the x86 emulator
-To: Shuaidong Chen <shuaidong.chen@amd.com>
+To: Jan Beulich <jbeulich@suse.com>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  Stefano Stabellini <sstabellini@kernel.org>,
@@ -105,79 +81,138 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  Alejandro Vallejo <alejandro.garciavallejo@amd.com>,
  xen-devel@lists.xenproject.org
 References: <20261110132442.2891216-1-shuaidong.chen@amd.com>
+ <93875740-8661-41af-b4d9-836a4ae85dbc@suse.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20261110132442.2891216-1-shuaidong.chen@amd.com>
-Content-Type: text/plain; charset=UTF-8
+From: "Chen, Shuaidong" <Shuaidong.Chen@amd.com>
+In-Reply-To: <93875740-8661-41af-b4d9-836a4ae85dbc@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c1860d/1794317369-CF15E87B-29F4A115/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 1812
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+X-ClientProxiedBy: TYCP286CA0219.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:400:3c5::15) To BL0PR12MB4754.namprd12.prod.outlook.com
+ (2603:10b6:208:8e::26)
+X-Archived-By: <archiver.kernel.org>
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL0PR12MB4754:EE_|SA1PR12MB9003:EE_
+X-MS-Office365-Filtering-Correlation-Id: 19b86920-7db3-4a5e-00bb-08df3f312cb5
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|366016|376014|23010399003|1800799024|261026135527099003|261102123227099003|11063799006|4143699003|261021133027099003|261022075727099003|261021121427099003|261021130227099003|261021123027099003|261021135927099003|261022105027099003|261026121527099003|261022113327099003|261026140227099003|261022115727099003|261026130827099003|261009223027099003|261028144727099003|56012099006|22082099003|18002099003|10067099003;
+X-Microsoft-Antispam-Message-Info:
+	qiZvPxOI8e604RoPKjqqda2jLdId9Ntp30TDYI+Hs4yiTbUyeU9JqUuGfQe0BYyIVPmi9gt5vV0RRohokw6F0M0I+62AS2ibJMN2+D2A8aKsYByHbzerYX4AYnmUG7eDAhT4XuJCq5m2kiDm9/YZDlPR1neE9hey+yHDCbHz8Gd2JZkXP3VsrbZtyTNYTzCvhJNOhRqV39/JCwkQzY3TLHy4wWgbaCayRJofaU0bX1jqAyViXRdT6mPsoe9j02NsXMVBCVXe60EpZt1FCwdm6uYtItIpANks4rQMvq+elY1rw1hko+XScxVOdEzpjuDj1ls1L1UtGJmHMOeg44kYaM5nadxcCU8ZjXKKAsFQYqdiePvUeKs4CGnardEMdW3nFcpPVNe0kmFE81+vwBHuocns8/J8ixJ7qLXbSOlU0jjLScf8YYuIK65GkpByrZMud9pP0vS/VXq9BR0Ky7Wm4ffqrFyRKqT5cYpRvnthDNtQ32UfwKj7TFMAkEAqFIanY+LR+W1ZcrfQMKwFAR/BEaDgzJviZlkMGDSH8pxa+ATVuJeAkGGWr5Z86D8ZmNZDmqEl+aGa3T92k00+GurWcwuBqErrFtTBmCBmeVXVexrh+yVS+1Q44g2ZjQPMnbJkO99ztjIJOCbvHG8naaW2+o3eznzGmIdHONjV+USWU5k=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BL0PR12MB4754.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(23010399003)(1800799024)(261026135527099003)(261102123227099003)(11063799006)(4143699003)(261021133027099003)(261022075727099003)(261021121427099003)(261021130227099003)(261021123027099003)(261021135927099003)(261022105027099003)(261026121527099003)(261022113327099003)(261026140227099003)(261022115727099003)(261026130827099003)(261009223027099003)(261028144727099003)(56012099006)(22082099003)(18002099003)(10067099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?bkgwL1dNODBKbFdQYTNlZFlpRkhVRDZMNkRwZ0tvcjNyQ1JVYkxDWUF1RmRt?=
+ =?utf-8?B?LzdhQ2RGQlVESHI4S3M0b0s0V1ZRRWJMdTFBUUVhcmVobGVmclJkU05SNyt3?=
+ =?utf-8?B?bVJsdmg0UGRXSlJuZm5WWEFhSjNTdWpxaS9hOFJ2NzZxcEpmQzk4MDlMcndw?=
+ =?utf-8?B?UVlDUUpQcW5iazRFanE4c3doblMxWXM1My95UWN1TWcxNHpTYzdNWEc4UWNZ?=
+ =?utf-8?B?ekJPd2QycGxLS2Z0dVVNOFZ1ZWlPU092ejFQanZINjN4emF5SUwwSXBXa2FW?=
+ =?utf-8?B?bjhYUTV0REVSZTRoVTNNTzYxbFFFYzlLdUNaMnJXR0llUnN1Y0NWVkQ5b0Fl?=
+ =?utf-8?B?eE5MU0RYYW44ZzlEL0dLdFpyWmMzQ2RScnNFa05ac3RLUXBjYjdQOGdKWWxn?=
+ =?utf-8?B?NVJaM1hMWFNOeGNZOGdsWTN3QUJTclZaeFFUUWdHbHBiWUVsSUZnd1dHZXF0?=
+ =?utf-8?B?S3AycnAvYjJwL0ZpbC9jUmU5dklpVE1qQzJ2cE4zd3YxQVY4T2dxSTl0elcr?=
+ =?utf-8?B?MGdObmVKMkp0S3pkL2hGSitDUjl0SzVtY2F5TzNDZTdZSlVPaGNrd2xsS29G?=
+ =?utf-8?B?eTVjVFVQeHZpbjI0TitST3pEeXU0aW1Hekp3cklxL0xERTJOd0tTcVZmTUNU?=
+ =?utf-8?B?eGFvUzZSNzd6ZHVleWcwSHlTMnZmQVRscGUvRHhpVWxZRGsvOXMvVjN5S0pk?=
+ =?utf-8?B?Q1hqWXB4TEZjVDRJNFllQTFKbG5MNjJxaHRuaTFhNElpc3hwcWNEcEtSWTM0?=
+ =?utf-8?B?NTJWSEdrMlIwUSs0eW02RnVKNEFtR3BQNXFRMUhlekRyU0dtaUNEcmJsRFlp?=
+ =?utf-8?B?QU1kMTd3TnRFK0t4UnBzMDVVbTdrekMzU0hhRU5JczZjNFU5MkhneGxtdUxu?=
+ =?utf-8?B?RGFhc2ZVclJmWkg0TzZmSTdIdUMyL1VZTm9SY0J6TWRTZDNmVERHWjlQbFJR?=
+ =?utf-8?B?NXBqTW0rdlRqTzdWOUtyTGt2Lzl3Y1lVNUlXMEE2R2RTUVYvTEhaUG81TFVw?=
+ =?utf-8?B?R2VtSGowRHBWSzJVazJJS2Ird2dzcDljWDE5VlEwMzJQV1ZadExlSGpuNS9q?=
+ =?utf-8?B?U1hRZ2wrWjBaTFphaUlvNVRiSE5mbzBuc3JUa3BlcXFhVngvdjAzbUFKSDRl?=
+ =?utf-8?B?Z2RMN3F0S01rZ2hsWElHRlUvbXBsbGtGaTMrQjkrS0pvVlRmT2p5Y1o4VjFS?=
+ =?utf-8?B?ajhwMHNDaU9NRnlhRWVSelB0b3FvVnZJUHlrRHQwK2JkbWRSVFV6RTFTcGYy?=
+ =?utf-8?B?N280ZVN3NXJ6L1BYSktVTXhPemNQTHpwVzRUa3kxd09IMDhxRjVXNXp3czhF?=
+ =?utf-8?B?S3F0bHFIblJlK3N6bjE0RDlnVG4rUi9VSEtBYys2a3c2L0pZZktvRUNBdXNK?=
+ =?utf-8?B?OXFvWmYvUmNuL2lNRlVUbmNZdEZuVGZCdFBsMEJMaXRGRXZGeEFqY29sNzhj?=
+ =?utf-8?B?bUZKenQwd25tekJ2M05UeVkxMGdvSmhEcDQ0ekh0clh4cHNNWWhId2RpOEgr?=
+ =?utf-8?B?Q2VCazN2U0MzV0xrclc1VnY5Rk1sTGI2Q0xBUFJJVXhnZXZ4ZnZrSjBFcVZM?=
+ =?utf-8?B?bTJLUklkYnlmRi9EMzdtc21wWXRuQnRFRmcyMjI3RkFMdDhBaThEUTJhNTZE?=
+ =?utf-8?B?UXpFeXB1ZTc0aXZvRERMZEo4NDRTNVVuaWVmQ2pTdXJUemFKKzN2TW0xdEQy?=
+ =?utf-8?B?b2VMaVBXeVRKL3BzWlkrb3N0ekMxN3MyWUF3S2FPeDBqWC9LdEttdjJMQUtN?=
+ =?utf-8?B?QmFlMVhKRHhXTUJnTXhuT29FYldpNkpNdFhNdlFUZUFFVVdnQUdkcWQrTWlL?=
+ =?utf-8?B?N1Q0QW5yQmY5UTA2VUZHREFidzZzRVFOd2xDdGNUS0Rsa0RJSlVCYVdvUXF5?=
+ =?utf-8?B?cEZiOExKM09uSlVwc3VJd09vK20xbUJsdDhMRTlSL3AzWXJrL2RSdEovbXFS?=
+ =?utf-8?B?VEZmQ0RVaUZESXNtVzVNSVpZUmM3R2Y5ZUMyUFJTKzVVRndDbmM3WFltOXZa?=
+ =?utf-8?B?aWJheHRBSUduVnh2U3o2alFzSlZzWGtEL0l5T2Z4MFFLZVd1U3dIQ2RTRlZO?=
+ =?utf-8?B?MGZMbGE2VzVXbHlxQXloOHF1WTVxeHJIbTF1WXlMWEszUzJqVUNCcVRYVlZs?=
+ =?utf-8?B?NGk1Z082MGhXYVlhTFMzdmZyWDE4WDRrb012SjhNUzUvSGJ3SFhsbmtEcUJr?=
+ =?utf-8?B?Vm9zbnZjK1pZbjRqRGxkM2p6ZFN4ZDhvbTlnUXdiT2wyMUhiVG5UZ2dCRkpX?=
+ =?utf-8?B?Y0huNjE4STNpdGdkam5XTmp6UDl4SDZURTR0NVNUVTdxenhYRDR6SFprb0J2?=
+ =?utf-8?Q?P7letrsHSAcGPlY0xY?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 19b86920-7db3-4a5e-00bb-08df3f312cb5
+X-MS-Exchange-CrossTenant-AuthSource: BL0PR12MB4754.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Nov 2026 13:47:34.8852
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: asEZbWIURMdlD5lEVWVuoE6Vt01slJbSl8636FQge52G55FK11zQHa5lO4mg1LUmPvByJFmZfkFEU3+l4jcgUQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB9003
+X-purgate-ID: tlsNG-720697/1794318459-309C32AC-E9AB0DB4/0/0
+X-purgate-type: clean
+X-purgate-size: 2312
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 10.11.2026 14:24, Shuaidong Chen wrote:
-> --- a/automation/eclair_analysis/ECLAIR/deviations.ecl
-> +++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
-> @@ -55,6 +55,11 @@ removed by the compiler, the resulting slowdown is negligible."
->  -config=MC3A2.R2.6,reports+={deliberate, "any_area(text(^.*__maybe_unused.*$))"}
->  -doc_end
->  
-> +-doc_begin="With CONFIG_HVM=n the FPU, MMX and SIMD parts of the x86 emulator are compiled out, leaving labels with no goto targeting them, many generated by the CASE_SIMD_* macros.
-> +Annotating them would only add churn to the emulator, therefore it is deemed better to leave such files as is."
-> +-config=MC3A2.R2.6,reports+={deliberate, "any_area(any_loc(file(^xen/arch/x86/x86_emulate/.*$)))"}
-> +-doc_end
 
-Both the doc above and the one below specifically mention HVM=n. Yet the
-config= doesn't (and can't, aiui) limit things to that case. Imo either
-the HVM=n mention wants dropping, or this deviation wants putting in
-place only when actually HVM=n.
+On 11/10/2026 9:29 PM, Jan Beulich wrote:
+> On 10.11.2026 14:24, Shuaidong Chen wrote:
+>> --- a/automation/eclair_analysis/ECLAIR/deviations.ecl
+>> +++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
+>> @@ -55,6 +55,11 @@ removed by the compiler, the resulting slowdown is negligible."
+>>   -config=MC3A2.R2.6,reports+={deliberate, "any_area(text(^.*__maybe_unused.*$))"}
+>>   -doc_end
+>>   
+>> +-doc_begin="With CONFIG_HVM=n the FPU, MMX and SIMD parts of the x86 emulator are compiled out, leaving labels with no goto targeting them, many generated by the CASE_SIMD_* macros.
+>> +Annotating them would only add churn to the emulator, therefore it is deemed better to leave such files as is."
+>> +-config=MC3A2.R2.6,reports+={deliberate, "any_area(any_loc(file(^xen/arch/x86/x86_emulate/.*$)))"}
+>> +-doc_end
+> Both the doc above and the one below specifically mention HVM=n. Yet the
+> config= doesn't (and can't, aiui) limit things to that case. Imo either
+> the HVM=n mention wants dropping, or this deviation wants putting in
+> place only when actually HVM=n.
+>
+> Jan
+Right, I'll drop the HVM=n mention. Limiting the deviation to HVM=n
+would need the ECLAIR setup to load config conditionally, which seems
+excessive here. With HVM=y the emulator has no unused labels anyway
+(-Wno-unused-label is only passed for !HVM), so the wider scope doesn't
+hide anything. HVM=n stays in the commit message only as the example.
 
-Jan
+v3 to follow.
+>
+>> --- a/docs/misra/deviations.rst
+>> +++ b/docs/misra/deviations.rst
+>> @@ -116,6 +116,14 @@ Deviations related to MISRA C:2012 Rules:
+>>          such labels poses no risks.
+>>        - Tagged as `deliberate` for ECLAIR.
+>>   
+>> +   * - R2.6
+>> +     - With CONFIG_HVM=n the FPU, MMX and SIMD parts of the x86 emulator are
+>> +       compiled out, leaving labels with no goto targeting them, many of them
+>> +       generated by the CASE_SIMD_* macros. Annotating them would only add
+>> +       churn to the emulator, therefore it is deemed better to leave such
+>> +       files as is.
+>> +     - Tagged as `deliberate` for ECLAIR.
+>> +
+>>      * - R3.1
+>>        - Comments starting with '/\*' and containing URLs are safe as they are
+>>          not instances of commented-out code.
 
-> --- a/docs/misra/deviations.rst
-> +++ b/docs/misra/deviations.rst
-> @@ -116,6 +116,14 @@ Deviations related to MISRA C:2012 Rules:
->         such labels poses no risks.
->       - Tagged as `deliberate` for ECLAIR.
->  
-> +   * - R2.6
-> +     - With CONFIG_HVM=n the FPU, MMX and SIMD parts of the x86 emulator are
-> +       compiled out, leaving labels with no goto targeting them, many of them
-> +       generated by the CASE_SIMD_* macros. Annotating them would only add
-> +       churn to the emulator, therefore it is deemed better to leave such
-> +       files as is.
-> +     - Tagged as `deliberate` for ECLAIR.
-> +
->     * - R3.1
->       - Comments starting with '/\*' and containing URLs are safe as they are
->         not instances of commented-out code.
+-- 
+Thx and BRs,
+Shuaidong Chen
 
 
