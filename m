@@ -2,57 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7329B606A31C
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2026 10:03:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 697C6606A330
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2026 10:07:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=ZB5S3Iso
-Received: from list by lists.xenproject.org with outflank-mailman.1481446.1685330 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=Y/xYB/VQ
+Received: from list by lists.xenproject.org with outflank-mailman.1481454.1685338 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQihO-0006it-Kp; Tue, 10 Nov 2026 10:03:30 +0000
+	id 1xQilW-0000D7-96; Tue, 10 Nov 2026 10:07:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1481446.1685330; Tue, 10 Nov 2026 10:03:30 +0000
+Received: by outflank-mailman (output) from mailman id 1481454.1685338; Tue, 10 Nov 2026 10:07:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQihO-0006im-I2; Tue, 10 Nov 2026 10:03:30 +0000
-Received: by outflank-mailman (input) for mailman id 1481446;
- Tue, 10 Nov 2026 10:03:29 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xQilW-0000D0-6I; Tue, 10 Nov 2026 10:07:46 +0000
+Received: by outflank-mailman (input) for mailman id 1481454;
+ Tue, 10 Nov 2026 10:07:45 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Zhao.Jiaqing@amd.com>) id 1xQihM-0006ig-Lh
- for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 10:03:29 +0000
+ (envelope-from <jgross@suse.com>) id 1xQilV-0000Ba-7A
+ for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 10:07:45 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xQihL-00AY2S-S7
- for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 11:03:27 +0100
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xQilU-00ACFL-Gl
+ for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 11:07:44 +0100
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Zhao.Jiaqing@amd.com>)
- id 6af2ebec-e002-0a2a0a5209dd-0a2a4508c390-10
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 11:03:27 +0100
-Received: from [52.101.57.52]
- (helo=BN8PR05CU002.outbound.protection.outlook.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Zhao.Jiaqing@amd.com>)
- id 6af2ebee-f659-0a2a45080019-34653934bf7d-3
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 11:03:27 +0100
-Received: from PH8PR21CA0010.namprd21.prod.outlook.com (2603:10b6:510:2ce::10)
- by IA1PR12MB6460.namprd12.prod.outlook.com (2603:10b6:208:3a8::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.12; Tue, 10 Nov
- 2026 10:03:16 +0000
-Received: from SJ1PEPF000026C5.namprd04.prod.outlook.com
- (2603:10b6:510:2ce:cafe::74) by PH8PR21CA0010.outlook.office365.com
- (2603:10b6:510:2ce::10) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.639.0 via Frontend Transport; Tue, 10
- Nov 2026 10:03:15 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- SJ1PEPF000026C5.mail.protection.outlook.com (10.167.244.102) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.615.4 via Frontend Transport; Tue, 10 Nov 2026 10:03:15 +0000
-Received: from zjiaqing-dev.amd.com (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Tue, 10 Nov
- 2026 04:03:13 -0600
+ (envelope-from <jgross@suse.com>)
+ id 6af2ece9-2eae-0a2a0a5409dd-0a2a450a9340-24
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 11:07:44 +0100
+Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jgross@suse.com>)
+ id 6af2ecf0-f2d2-0a2a450a0019-d1558029e1e1-3
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 11:07:44 +0100
+Received: by mail-wm1-f41.google.com with SMTP id
+ 5b1f17b1804b1-4afe2d546f9so24812645e9.3
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 02:07:44 -0800 (PST)
+Received: from ?IPV6:2a00:12d0:afa3:c01:92cc:e257:77ba:97a1?
+ (2a00-12d0-afa3-c01-92cc-e257-77ba-97a1.ip.tng.de.
+ [2a00:12d0:afa3:c01:92cc:e257:77ba:97a1])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4ba0203a6b0sm58365255e9.5.2026.11.10.02.07.43
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 10 Nov 2026 02:07:43 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -61,332 +52,191 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=PVAM6Uc5Jp+DA6ga/0YGKGwPkmJSqkk/PM7+ZIRd24GzPIjqfsZQaPTta8xjM3I8ndotukbf208Gi+4jBXJxokBlQ6e7KjB8HStsnbqpq/XOzBXxz1gRuKWEZVrZyAcZpOJ05qo4qQWHIUzHyOjVAHeGoiKLD00f3SAsn1YB1Dh/olNe6uAsvIMYaYaTqhSBbX5LkFxGiqGvFjii1v/5552AD7fYlic12wuAqPyWsjvFnpvibuK7S8sY9FURiB4kjfVoPCOgTP0lclYS19nr4GX9U/WNNFfhSx3H4/EGmiK2QdQEwcSE0HEAMQgO1t5gxzesMRMDzTWmN1aQP3YeKA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1bLaUGZF+nFYvn/iMsThKV8FR7ACpLtWV3STHpO+91k=;
- b=bkamV6uQvBXWI2gL1XSEVHDcpg+E93HSe9paY1/Ise7FcP5RO0A20hTtx+mPNk8PvBGFSPHfzrJDjOEAlqTb6IMt/z/sRVWJb9H8CaKazqZGh/0kqahXaVf2h/FLOA/Gdwv9lI2jX/imjy23MAw7I01WHua9V+fFoq2SfGi9C8EmibZdkpF2AtOWyuw3FGlC2JYu84INX55SoHQ5YWMSrKvune1nhn/fZeGiwk5ez2k1Gemu/6gQ7nVlC7CKQiAkz+AytFSDsNY01+RIR4UeCNISt58c/6Yc2CuH9wUKZvLqXmwM1ke0SVhONGB8ot0GoD//q68Gs6cx8RRxhVjqYA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1bLaUGZF+nFYvn/iMsThKV8FR7ACpLtWV3STHpO+91k=;
- b=ZB5S3IsoHvJDpJLWqAJyr3Tx4DzBLEQOPUgps87x8hXFHieUWIeT2RbEUebPyBEtR+VjACQMp/O1TE+OgEslruf+HG7VuLobh6MMYlhwHQKnR4CQtkUJCHh24s/pTTBAxM5ekbplh78G/qsXCKjZouZ20/4ob0SM6kmMKoRKgto=
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-From: Jiaqing Zhao <Zhao.Jiaqing@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Jiaqing Zhao <Zhao.Jiaqing@amd.com>, Anthony PERARD
-	<anthony.perard@vates.tech>, Juergen Gross <jgross@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.com>, "Stefano
- Stabellini" <sstabellini@kernel.org>, Penny Zheng <penny.zheng@amd.com>
-Subject: [PATCH v2] libxl: wait for QEMU exit before restarting a domain
-Date: Tue, 10 Nov 2026 18:02:57 +0800
-Message-ID: <20261110100258.490701-1-Zhao.Jiaqing@amd.com>
-X-Mailer: git-send-email 2.53.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1794305264; x=1794910064; darn=lists.xenproject.org;
+        h=content-type:in-reply-to:autocrypt:from:content-language:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=xGsK3yBvD3dY+fIGOvU+/f6W2zSWjZOAbooLra3Z8sU=;
+        b=Y/xYB/VQ59u7eMSfWSRit7w28vz3P6Rvd8SyTbmesVa6QLgZ3wbbqCJsPdKEn22iCu
+         XEEvJyopSqfKSX2tBnuQYwHAdYCq4VlRsxQSqtB/ZhZ81BTw6MJgUDK64mu4Wx6pukdC
+         4X/+8+LjDrTs8Iv/+wcIK41ZIs8k8rRTIW5ZJu8HUi/sXN8LCj4ZpalB0E8FbRlNzyjj
+         H9N8w9jLG0678OJhi1cS8i1E2dab1V3zYtdmrHTY0ZuUNem9Od3VxbAtFJZu3OZ+btN5
+         r15ZvatrYwoEyoPW8HBDpMQ8a8St3tJbKsKjDrXIwPV0nkIJ9RgMoGM53WKjwjAftlnC
+         WEwQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794305264; x=1794910064;
+        h=content-type:in-reply-to:autocrypt:from:content-language:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=xGsK3yBvD3dY+fIGOvU+/f6W2zSWjZOAbooLra3Z8sU=;
+        b=QubRcOd6+peOCqNUY1Fsgm3ZK8RxLHH67dt2cBFHbHk2LN3/5kbbj3oWBXI2gAg9ei
+         ifvGvDEQEXdmQyZ9ojGXQ6JQAowzbiCcOMkZXhrI3n8L4974WhgFdD4lQ4Ljk69/WSL/
+         FldP0RewpG5I1hTuacQycP54/2AhKFpnVTY+K+gcIq03S7AHdUeEH6RMpo7oPDjsy872
+         5FTXqEaXZoMrOXXriVzHmB0fbhkSJSpFm+zU3P5zsiOQ2RqEBmEfLJMmpl4TJ1N9NBHq
+         VpXuZTDZL7er1/2OYUBRnH/bfCX4mqy/zCUou/8fJz80aDwh0a+L8nbQOchZa+X/5HB2
+         XERw==
+X-Forwarded-Encrypted: i=1; AL+hErFLuEUi5aggeAA92lCpAaHGPqG2f7Q+w0hFwLYnph8cFvXrQbyVDhBZMdHJP5Q5CaZZ5r6QUmEsr90=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z/yA5MQSq9B86gG+ygBRcTVRIPelIrhYF8x3n4pssM/UWeXooqv
+	dtJImHMng4ItxhAeUv1P6gd5ddehC9j/Vv+3IGPYE4YzJIYc4sGH7zfzLNp+qh3fRoc=
+X-Gm-Gg: AYBFou0BO2iY9RN2eyP0wcVR/MgcpSdjn+3xYt3oxEmTdFdiOHnY7ONmt6NQL67Dgth
+	nxXXCxhJyMGTcPF5hFNYxZbfTlAriZ5YK8E2mSQ+EUeZutBe7EdVhKUwC0nLRaUAEZZ2aWNI6XB
+	SiwMgoQrCW2KMip0xhszD9KafZ2WqHl3OHVbzVmTMeL9dZ6ZJ2LVltOoMZaf41NimzZb45KbwNP
+	hTWB1ruw2oODmlIT42kGeDxL+YGYumJtTj0VdyV+XtoKpQIg9hHxySy44dJe3mcnFr4nEGz25We
+	S/sV6VTII6jGO8tRJqhkvsI+x4B++jrkaaptFWs6GC9FUm9GfNq6h6ZaclPatJKbQY3fvu++LAJ
+	ChMOyP3ffkunv9b5HIlcHrdwgsTwQloeYw4/SJTVsSVlttj8iqbZBkcRNUEb1ye3L9fm4hehOga
+	nnQ1OQljx1qo6cJDMuu/CQt3Q1HxkXRJ+Agcv40uPuYUHQacbwWsTB1TRhOJzemZoSjaRaa83Ve
+	c4hZ5qdT+8ZinJkf2u3qyw9EkmZTi185XWDrg8a0kDYfcDZhiMKvC8VN85/FvW51I93P+GtdPc0
+	OMFixze8XqWdbA0uTuaGAyUop0Kh7b7KsJ6exLFRGMrCe2MuqEndwqcLGToKCwm3/8BJmBJcTSz
+	fV5kMdWjQnQnZJNkrAo1s6G6HKPHmzQneQtQ6smvvlv8q3k1C0BKm1h07hraGM8CpIAO2dd42
+X-Received: by 2002:a05:600c:3e15:b0:4a2:5ca:767f with SMTP id 5b1f17b1804b1-4ba02307c34mr31970825e9.4.1794305263593;
+        Tue, 10 Nov 2026 02:07:43 -0800 (PST)
+Message-ID: <26ba4ecc-0a97-45a5-b39a-d7f1fb9b33a5@suse.com>
+Date: Tue, 10 Nov 2026 11:07:42 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
- (10.181.42.216)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF000026C5:EE_|IA1PR12MB6460:EE_
-X-MS-Office365-Filtering-Correlation-Id: fd40b9d4-42e5-44e9-1904-08df3f11d685
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|36860700016|82310400026|376014|1800799024|18002099003|6133799003|5023799004|56012099006|11063799006|10067099003|261026121527099003|261028144727099003|261021121427099003|261102124527099003|261022115727099003|261022075727099003|261021123027099003|261022105027099003|261102123227099003|261026140227099003|261009223027099003;
-X-Microsoft-Antispam-Message-Info:
-	+WB7xVqxR7HIaeXsUqHtiS1r2spU8XFgqIOH2CWKl5xEPtHLT5JxYYWOpgOHs3xv77v5ZL/1vI8U4LcstNARflav2NOcE9caPnAu9w6Vs8UuvmWTlostJQear02fU1+SrwNImKHlbGBrTdIttkkN6kFznJZWafdMCH12Xmzd5ehf5q134FwD1zV/djV2kfKXe+w/iM2RFgyWTrXDSThENr8CcVKDOcjhOo1OzndfFwAOziTKxoF68A+lbBVStdtU3qyzV4ovs1BlcaA8DmElZr8cQ0mtyvrrFCEXZqW3+RpY5Q5fC09AMNt+2TUB2Y0GNabfObIJVrTR1lDRFN9wrACVq0dUCIBoKLaL+FVwwBEvi99Nwehp4ukbN2nvuGBZua1sn8ml69N2+dbHOWU21FVrL/qKGvCxq7ElNR6E8036ee+OiAmbATxpYE0u3xxILq/JQdMJ3pCpGreF/W1NkR83g9+Qn8wIwXsdEipTLjET0az6pzkbgizRf0u0dlQnZP/ghRlVrZVE3PhU1UgmVfeMpjPtpvfT6DQzEFJnKQa/iWPiPycUlQ5794QKm7fl3vEU+mwc2FZutWbQNWL1+RtOqjklUpYy5ZnruNwx5AmrHkLH+whqTjzjYlxAuQn1mnghRCb0pi8sfedHDpIdQ7Pthh0zx9nld4uuTAeoHsfIfejVGg3dVv6Vma/ElHoJ8IKMRFmpJRKa4DqbQEexTQ==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(23010399003)(36860700016)(82310400026)(376014)(1800799024)(18002099003)(6133799003)(5023799004)(56012099006)(11063799006)(10067099003)(261026121527099003)(261028144727099003)(261021121427099003)(261102124527099003)(261022115727099003)(261022075727099003)(261021123027099003)(261022105027099003)(261102123227099003)(261026140227099003)(261009223027099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	sKqW1X+NoL4RwaMcUoEON9iOfu6vFhY0eBA0nTiXX7Y8u/7qHXlzG8OYCV6xdltWxhu6yghzz0VUG68GuGmChkiI/GoO/AKXQlEEbMbkNanAoy3sqlETq8reYQzsiHe+3YpK5YinGmobqDqh0VN02I4K5LCuI+ogXR0spDtEETWQoGW63lWCj8i6O5bmFov6xFof35JjmHFW1+Z3cydCImyS/8lJUE/e7eL5nJqB2UhiDguuX/XUwQBqMMpdd+R3A2rHdNQ38YCacFiJoJ7ISeV49D8smCre2XYUR2OZmO2vn5+YzLVgdv8TFsgpbc+Qqm3bAyBzR8R4EDOHRlcDetGLzmvCD8/fzF5ueiGE7DJhzB24TWj+wpY/BnQn3XTbEzu0pHUrPsYmP9EEyg7yDhFNvYT3xv99NsBfMytkcf03k9GzjSokJfpg/4lm0lKA
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Nov 2026 10:03:15.4960
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: fd40b9d4-42e5-44e9-1904-08df3f11d685
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SJ1PEPF000026C5.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6460
-X-purgate-ID: tlsNG-c1860d/1794305007-D6F5F87B-01E25A0E/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/2] xen: don't allow gnttab_dma_[alloc|free]_pages()
+ in PV guest
+To: Andrew Cooper <andrew.cooper3@citrix.com>, linux-kernel@vger.kernel.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ xen-devel@lists.xenproject.org
+References: <20261110095605.369848-1-jgross@suse.com>
+ <20261110095605.369848-2-jgross@suse.com>
+ <b17bbf33-1b4a-4491-b9dd-4ca1bad1876f@citrix.com>
+Content-Language: en-US
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Autocrypt: addr=jgross@suse.com; keydata=
+ xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
+ ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
+ dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
+ NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
+ XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
+ AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
+ CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
+ mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
+ G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
+ kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
+ Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
+ RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
+ vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
+ sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
+ aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
+ w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
+ auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
+ 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
+ fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
+ HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
+ QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
+ ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
+In-Reply-To: <b17bbf33-1b4a-4491-b9dd-4ca1bad1876f@citrix.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------TtuF7cHMmXscsrdnH1gYPpJ2"
+X-purgate-ID: tlsNG-4011c0/1794305264-538D5CFC-7FA47BB8/35/110847
 X-purgate-type: clean
-X-purgate-size: 9880
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+X-purgate-size: 5351
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The PID-based device model destruction path returns immediately after
-sending SIGHUP, before QEMU has necessarily exited. When an HVM guest
-reboots with VNC enabled, the new QEMU process may fail to bind the VNC
-port because the old process still holds it.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------TtuF7cHMmXscsrdnH1gYPpJ2
+Content-Type: multipart/mixed; boundary="------------qgsximp9r0ts5B0VjZR4a75R";
+ protected-headers="v1"; hp="clear"
+Message-ID: <26ba4ecc-0a97-45a5-b39a-d7f1fb9b33a5@suse.com>
+Date: Tue, 10 Nov 2026 11:07:42 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/2] xen: don't allow gnttab_dma_[alloc|free]_pages()
+ in PV guest
+To: Andrew Cooper <andrew.cooper3@citrix.com>, linux-kernel@vger.kernel.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ xen-devel@lists.xenproject.org
+References: <20261110095605.369848-1-jgross@suse.com>
+ <20261110095605.369848-2-jgross@suse.com>
+ <b17bbf33-1b4a-4491-b9dd-4ca1bad1876f@citrix.com>
+Content-Language: en-US
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Autocrypt: addr=jgross@suse.com; keydata=
+ xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
+ ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
+ dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
+ NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
+ XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
+ AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
+ CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
+ mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
+ G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
+ kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
+ Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
+ RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
+ vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
+ sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
+ aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
+ w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
+ auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
+ 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
+ fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
+ HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
+ QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
+ ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
+In-Reply-To: <b17bbf33-1b4a-4491-b9dd-4ca1bad1876f@citrix.com>
 
-Wait for QEMU to exit in a child process after signaling it for at most
-10 seconds. If waiting fails or times out, log the error and retain the
-existing domain destruction behaviour.
+--------------qgsximp9r0ts5B0VjZR4a75R
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-Signed-off-by: Jiaqing Zhao <Zhao.Jiaqing@amd.com>
----
-v2:
-* Share the fork, error handling and child exit handling between UID and
-  PID-based destruction paths.
-* Reduce the device-model stop timeout from 60 to 10 seconds.
-* Handle unexpected errors from kill(pid, 0) explicitly.
-* Fix misspelled "signaling" in commit message.
-* Coding style fixes against tools/libs/light/CODING_STYLE.
----
-Cc: Anthony PERARD <anthony.perard@vates.tech>
-Cc: Juergen Gross <jgross@suse.com>
-Cc: Roger Pau Monné <roger@xenproject.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Penny Zheng <penny.zheng@amd.com>
----
- tools/libs/light/libxl_aoutils.c  |  8 ++-
- tools/libs/light/libxl_dm.c       | 98 +++++++++++++++++++++----------
- tools/libs/light/libxl_domain.c   |  2 +-
- tools/libs/light/libxl_internal.h |  3 +-
- 4 files changed, 75 insertions(+), 36 deletions(-)
+T24gMTAuMTEuMjYgMTA6NTksIEFuZHJldyBDb29wZXIgd3JvdGU6DQo+IE9uIDEwLzExLzIw
+MjYgOTo1NiBhbSwgSnVlcmdlbiBHcm9zcyB3cm90ZToNCj4+IFRvZGF5IGdudHRhYl9kbWFf
+YWxsb2NfcGFnZXMoKSBvciBnbnR0YWJfZG1hX2ZyZWVfcGFnZXMgYXJlIG5ldmVyDQo+PiBj
+YWxsZWQgd2hlbiBydW5uaW5nIGFzIGEgUFYgZ3Vlc3QsIGJ1dCB0aGlzIGhvbGRzIGZvciBp
+bi10cmVlIGNhbGxlcnMNCj4+IG9ubHkuDQo+Pg0KPj4gQmFpbCBvdXQgZWFybHkgd2hlbiBi
+ZWluZyBjYWxsZWQgaW4gUFYgbW9kZSBpbiBvcmRlciB0byBlbnN1cmUgbm8gb3V0DQo+PiBv
+ZiB0cmVlIG1vZHVsZSBvciBmdXR1cmUgdXNlIGNhc2VzIGFyZSB2aW9sYXRpbmcgdGhpcyBh
+c3N1bXB0aW9uLg0KPj4NCj4+IFRoaXMgZW5hYmxlcyB0byBzYWZlbHkgcmVtb3ZlIFBWLW9u
+bHkgY29kZSBmcm9tIGJvdGggZnVuY3Rpb25zLg0KPj4NCj4+IFNpZ25lZC1vZmYtYnk6IEp1
+ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4NCj4+IC0tLQ0KPj4gICBkcml2ZXJzL3hl
+bi9ncmFudC10YWJsZS5jIHwgMTEgKysrKysrLS0tLS0NCj4+ICAgMSBmaWxlIGNoYW5nZWQs
+IDYgaW5zZXJ0aW9ucygrKSwgNSBkZWxldGlvbnMoLSkNCj4+DQo+PiBkaWZmIC0tZ2l0IGEv
+ZHJpdmVycy94ZW4vZ3JhbnQtdGFibGUuYyBiL2RyaXZlcnMveGVuL2dyYW50LXRhYmxlLmMN
+Cj4+IGluZGV4IDYwNGM0ZWVhNTkzMC4uNTZhNDk3OTg3OTQyIDEwMDY0NA0KPj4gLS0tIGEv
+ZHJpdmVycy94ZW4vZ3JhbnQtdGFibGUuYw0KPj4gKysrIGIvZHJpdmVycy94ZW4vZ3JhbnQt
+dGFibGUuYw0KPj4gQEAgLTEwNjMsNiArMTA2Myw5IEBAIGludCBnbnR0YWJfZG1hX2FsbG9j
+X3BhZ2VzKHN0cnVjdCBnbnR0YWJfZG1hX2FsbG9jX2FyZ3MgKmFyZ3MpDQo+PiAgIAlzaXpl
+X3Qgc2l6ZTsNCj4+ICAgCWludCBpLCByZXQ7DQo+PiAgIA0KPj4gKwlpZiAoV0FSTl9PTih4
+ZW5fcHZfZG9tYWluKCkpKQ0KPj4gKwkJcmV0dXJuIC1FSU5WQUw7DQo+IA0KPiBUaGlzIHdp
+bGwgZ2V0IHZlcnkgc3BhbW15IGlmIGhpdC7CoCBXQVJOX09OX09OQ0UoKSA/DQpJJ2QgcmF0
+aGVyIGhhdmUgaXQgc3BhbW15IHRoYW4gYnVyaWVkIHNvbWV3aGVyZSBpbiB0aGUgbG9ncy4N
+Cg0KQWRkaXRpb25hbGx5IEkgZXhwZWN0IGFueSBpbGxlZ2FsIHVzZXIgZ2l2aW5nIHVwIHF1
+aXRlIGZhc3QgaWYgbm8gYWxsb2NhdGlvbg0KYXQgYWxsIGZvciBETUEgaXMgd29ya2luZy4g
+Oi0pDQoNCg0KSnVlcmdlbg0K
 
-diff --git a/tools/libs/light/libxl_aoutils.c b/tools/libs/light/libxl_aoutils.c
-index c2d42e7cac..977a2705a8 100644
---- a/tools/libs/light/libxl_aoutils.c
-+++ b/tools/libs/light/libxl_aoutils.c
-@@ -628,10 +628,11 @@ void libxl__kill(libxl__gc *gc, pid_t pid, int sig, const char *what)
- 
- /* Generic function to signal (HUP) a pid stored in xenstore */
- int libxl__kill_xs_path(libxl__gc *gc, const char *xs_path_pid,
--                        const char *what)
-+                        const char *what, pid_t *pid_r)
- {
-     const char *xs_pid;
--    int ret, pid;
-+    int ret;
-+    pid_t pid;
- 
-     ret = libxl__xs_read_checked(gc, XBT_NULL, xs_path_pid, &xs_pid);
-     if (ret || !xs_pid) {
-@@ -640,6 +641,9 @@ int libxl__kill_xs_path(libxl__gc *gc, const char *xs_path_pid,
-         goto out;
-     }
-     pid = atoi(xs_pid);
-+    if (pid_r) {
-+        *pid_r = pid;
-+    }
- 
-     ret = kill(pid, SIGHUP);
-     if (ret < 0 && errno == ESRCH) {
-diff --git a/tools/libs/light/libxl_dm.c b/tools/libs/light/libxl_dm.c
-index 511ec76a65..104c48a07d 100644
---- a/tools/libs/light/libxl_dm.c
-+++ b/tools/libs/light/libxl_dm.c
-@@ -2859,7 +2859,7 @@ static void device_model_probe_spawn_outcome(libxl__egc *egc,
- 
-     /* Ensure our QEMU command line probe is killed. */
-     rc = libxl__kill_xs_path(gc, dmss->spawn.pidpath,
--                             "qemu command-line probe");
-+                             "qemu command-line probe", NULL);
-     if (rc) {
-         LOGD(WARN, dmss->guest_domid,
-              "Killing qemu command-line probe pid from path %s",
-@@ -3420,9 +3420,10 @@ out:
- }
- 
- /* Generic function to signal a Qemu instance to exit */
--static int kill_device_model(libxl__gc *gc, const char *xs_path_pid)
-+static int kill_device_model(libxl__gc *gc, const char *xs_path_pid,
-+                             pid_t *pid_r)
- {
--    return libxl__kill_xs_path(gc, xs_path_pid, "Device Model");
-+    return libxl__kill_xs_path(gc, xs_path_pid, "Device Model", pid_r);
- }
- 
- /* Helper to destroy a Qdisk backend */
-@@ -3433,7 +3434,7 @@ int libxl__destroy_qemu_xenpv_backend(libxl__gc *gc, uint32_t domid)
- 
-     pid_path = GCSPRINTF("libxl/%u/qdisk-backend-pid", domid);
- 
--    rc = kill_device_model(gc, pid_path);
-+    rc = kill_device_model(gc, pid_path, NULL);
-     if (rc)
-         goto out;
- 
-@@ -3454,6 +3455,30 @@ static void kill_device_model_uid_cb(libxl__egc *egc,
-                                      libxl__ev_child *destroyer,
-                                      pid_t pid, int status);
- 
-+/* Wait in a child so the libxl event loop is not blocked. */
-+static int wait_device_model_pid_child(libxl__gc *gc, uint32_t domid,
-+                                       pid_t pid)
-+{
-+    unsigned int i;
-+    int r;
-+
-+    for (i = 0; i < LIBXL_DEVICE_MODEL_STOP_TIMEOUT * 10; i++) {
-+        r = kill(pid, 0);
-+        if (r) {
-+            if (errno == ESRCH)
-+                return 0;
-+            LOGED(ERROR, domid,
-+                  "Failed checking device model [%d] state", pid);
-+            return ERROR_FAIL;
-+        }
-+        usleep(100000);
-+    }
-+
-+    LOGD(ERROR, domid,
-+         "Timed out waiting for device model [%d] to exit", pid);
-+    return ERROR_TIMEDOUT;
-+}
-+
- /*
-  * If we have a uid, we shouldn't kill by pid.  This is because a
-  * hostile QEMU might have exited, in which case the pid we have may
-@@ -3477,6 +3502,7 @@ void libxl__destroy_device_model(libxl__egc *egc,
-     int domid = ddms->domid;
-     char *path;
-     const char *dm_kill_uid_str = NULL;
-+    pid_t dm_pid;
-     int reaper_pid;
- 
-     ddms->rc = 0;
-@@ -3513,46 +3539,54 @@ void libxl__destroy_device_model(libxl__egc *egc,
-     if (dm_kill_uid_str) {
-         LOGD(DEBUG, domid, "Found DM uid %s, destroying by uid",
-              dm_kill_uid_str);
-+    } else {
-+        /*
-+         * No uid to kill; attempt to kill by pid.
-+         */
-+        LOGD(DEBUG, domid, "Didn't find dm UID; destroying by pid");
- 
--        reaper_pid = libxl__ev_child_fork(gc, &ddms->destroyer,
--                                          kill_device_model_uid_cb);
--        if (reaper_pid < 0) {
--            rc = ERROR_FAIL;
-+        path = GCSPRINTF("/local/domain/%d/image/device-model-pid", domid);
-+        rc = kill_device_model(gc, path, &dm_pid);
-+        if (rc) {
-             ACCUMULATE_RC(ddms->rc);
--            /*
--             * Note that if this fails, we still don't kill by pid, to
--             * make sure that an untrusted DM has not "maliciously"
--             * exited (potentially causing us to kill an unrelated
--             * process which happened to get the same pid).
--             */
-+            LOGD(ERROR, domid,
-+                 "Killing device model pid from path %s", path);
-             goto out;
-         }
- 
--        if (!reaper_pid) {  /* child */
--            rc = kill_device_model_uid_child(ddms, dm_kill_uid_str);
--            assert(rc <= 0 && rc >= -125);
--            _exit(-rc);
--        }
-+        LOGD(DEBUG, domid,
-+             "Waiting for device model [%d] to exit", dm_pid);
-+    }
- 
-+    reaper_pid = libxl__ev_child_fork(gc, &ddms->destroyer,
-+                                      kill_device_model_uid_cb);
-+    if (reaper_pid < 0) {
-+        rc = ERROR_FAIL;
-+        ACCUMULATE_RC(ddms->rc);
-+        LOGD(ERROR, domid, "Unable to fork device model destroyer");
-         /*
--         * Parent of successful fork; execution will pick up in
--         * kill_device_model_uid_cb when child exits
-+         * Note that if uid fails, we still don't kill by pid, to
-+         * make sure that an untrusted DM has not "maliciously"
-+         * exited (potentially causing us to kill an unrelated
-+         * process which happened to get the same pid).
-          */
--        return;
-+        goto out;
-+    }
-+
-+    if (!reaper_pid) {  /* child */
-+        if (dm_kill_uid_str)
-+            rc = kill_device_model_uid_child(ddms, dm_kill_uid_str);
-+        else
-+            rc = wait_device_model_pid_child(gc, domid, dm_pid);
-+        assert(rc <= 0 && rc >= -125);
-+        _exit(-rc);
-     }
- 
-     /*
--     * No uid to kill; attept to kill by pid.
-+     * Parent of successful fork; execution will pick up in
-+     * kill_device_model_uid_cb when child exits
-      */
--    LOGD(DEBUG, domid, "Didn't find dm UID; destroying by pid");
--
--    path = GCSPRINTF("/local/domain/%d/image/device-model-pid", domid);
--    rc = kill_device_model(gc, path);
--
--    if (rc) {
--        ACCUMULATE_RC(ddms->rc);
--        LOGD(ERROR, domid, "Killing device model pid from path %s", path);
--    }
-+    return;
- 
- out:
-     /*
-diff --git a/tools/libs/light/libxl_domain.c b/tools/libs/light/libxl_domain.c
-index 37fcd92871..6e332cfed7 100644
---- a/tools/libs/light/libxl_domain.c
-+++ b/tools/libs/light/libxl_domain.c
-@@ -1270,7 +1270,7 @@ static void dm_destroy_cb(libxl__egc *egc,
-         libxl__stubdomain_is_linux_running(gc, target_domid)) {
-         char *path = GCSPRINTF("/local/domain/%d/image/qmp-proxy-pid", domid);
- 
--        libxl__kill_xs_path(gc, path, "QMP Proxy");
-+        libxl__kill_xs_path(gc, path, "QMP Proxy", NULL);
-         /* qmp-proxy for stubdom registers target_domid's QMP sockets. */
-         libxl__qmp_cleanup(gc, target_domid);
-     }
-diff --git a/tools/libs/light/libxl_internal.h b/tools/libs/light/libxl_internal.h
-index b65e0064b9..b4a8273b3e 100644
---- a/tools/libs/light/libxl_internal.h
-+++ b/tools/libs/light/libxl_internal.h
-@@ -97,6 +97,7 @@
- /* QEMU may be slow to load and start due to a bug in Linux where the I/O
-  * subsystem sometime produce high latency under load. */
- #define LIBXL_DEVICE_MODEL_START_TIMEOUT 60
-+#define LIBXL_DEVICE_MODEL_STOP_TIMEOUT 10
- #define LIBXL_DEVICE_MODEL_SAVE_FILE XEN_LIB_DIR "/qemu-save" /* .$domid */
- #define LIBXL_DEVICE_MODEL_RESTORE_FILE XEN_LIB_DIR "/qemu-resume" /* .$domid */
- #define LIBXL_QMP_CMD_TIMEOUT 10
-@@ -2659,7 +2660,7 @@ bool libxl__async_exec_inuse(const libxl__async_exec_state *aes);
- _hidden void libxl__kill(libxl__gc *gc, pid_t pid, int sig, const char *what);
- /* kill SIGHUP a pid stored in xenstore */
- _hidden int libxl__kill_xs_path(libxl__gc *gc, const char *xs_path_pid,
--                                const char *what);
-+                                const char *what, pid_t *pid_r);
- 
- /*----- device addition/removal -----*/
- 
--- 
-2.53.0
+--------------qgsximp9r0ts5B0VjZR4a75R--
 
+--------------TtuF7cHMmXscsrdnH1gYPpJ2
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmry7O4FAwAAAAAACgkQsN6d1ii/Ey/T
+Cwf/Tb+AVxXrbuvFoZ0LYX4wsA3Zp7tmM72RVwUDR+7DnfAt9KWN7r0YaiD7SN8dlzZzFDQHnexJ
+C/Ah4ryCfnlmtmcoCtTfTZKaEvbimlVMzmn/M+iEmjv152ygYU3Nzw/tXfeTlY+KALnG7PVCNShe
+vOicu3gwkfRBWMPDhOSI/vj3FwaBQCEHrpBHY0+LzbXgdC6ArqPuw5IRUrN71HxlWY/vrcZfi0E0
+iqDQmIEgj/flGZUquXjqw8pC/ROC4oq+QQblPVhBq7wMwndPZsMGUUhECM5SJc+xeFrkexKL85q+
+JK2yTy119TuUrfl3cBZGtRUAgPtwRPyhek26+HH3qw==
+=tx1f
+-----END PGP SIGNATURE-----
+
+--------------TtuF7cHMmXscsrdnH1gYPpJ2--
 
