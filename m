@@ -2,58 +2,58 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7EFD9606FE26
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2026 12:58:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6F5F0606D5D2
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2026 12:59:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.a=rsa-sha256 header.s=susede2_rsa header.b=xph88wH+;
-	dkim=pass header.d=suse.cz header.i=@suse.cz header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=3cVo9nCM;
-	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.a=rsa-sha256 header.s=susede2_rsa header.b=xph88wH+;
-	dkim=neutral header.d=suse.cz header.i=@suse.cz header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=3cVo9nCM
-Received: from list by lists.xenproject.org with outflank-mailman.1481665.1685579 (Exim 4.92)
+	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.a=rsa-sha256 header.s=susede2_rsa header.b=c9mE+CRT;
+	dkim=pass header.d=suse.cz header.i=@suse.cz header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=kal9kkyQ;
+	dkim=pass (1024-bit key) header.d=suse.cz header.i=@suse.cz header.a=rsa-sha256 header.s=susede2_rsa header.b=c9mE+CRT;
+	dkim=neutral header.d=suse.cz header.i=@suse.cz header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=kal9kkyQ
+Received: from list by lists.xenproject.org with outflank-mailman.1481682.1685587 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQlQG-0003cK-SK; Tue, 10 Nov 2026 12:58:00 +0000
+	id 1xQlRI-0004bo-4j; Tue, 10 Nov 2026 12:59:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1481665.1685579; Tue, 10 Nov 2026 12:58:00 +0000
+Received: by outflank-mailman (output) from mailman id 1481682.1685587; Tue, 10 Nov 2026 12:59:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQlQG-0003cC-N2; Tue, 10 Nov 2026 12:58:00 +0000
-Received: by outflank-mailman (input) for mailman id 1481665;
- Tue, 10 Nov 2026 12:57:59 +0000
+	id 1xQlRI-0004bd-0j; Tue, 10 Nov 2026 12:59:04 +0000
+Received: by outflank-mailman (input) for mailman id 1481682;
+ Tue, 10 Nov 2026 12:59:03 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jack@suse.cz>) id 1xQlQF-0003bF-Hg
- for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 12:57:59 +0000
+ (envelope-from <jack@suse.cz>) id 1xQlRG-0004bB-Qd
+ for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 12:59:03 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xQlQE-000RQQ-Ue
- for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 13:57:58 +0100
-Received: from [10.42.69.12] (helo=localhost)
+ id 1xQlRG-00CrS3-3R
+ for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 13:59:02 +0100
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jack@suse.cz>)
- id 6af314bf-8faa-0a2a0a5109dd-0a2a450ca5c0-44
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 13:57:58 +0100
-Received: from [195.135.223.131] (helo=smtp-out2.suse.de)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6af3150f-8faa-0a2a0a5109dd-0a2a450bbc6c-16
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 13:59:01 +0100
+Received: from [195.135.223.130] (helo=smtp-out1.suse.de)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jack@suse.cz>)
- id 6af314d6-f479-0a2a450c0019-c387df838092-3
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 13:57:58 +0100
+ id 6af31515-b7e8-0a2a450b0019-c387df829520-3
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 13:59:01 +0100
 Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 9B25E1F387;
- Tue, 10 Nov 2026 12:57:58 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 96EA721C3C;
+ Tue, 10 Nov 2026 12:59:01 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 6FF141339F;
- Tue, 10 Nov 2026 12:57:58 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 6DE921339F;
+ Tue, 10 Nov 2026 12:59:01 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id FK6SEtYU82qxRQAAD6G6ig
- (envelope-from <jack@suse.cz>); Tue, 10 Nov 2026 12:57:58 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id B0aKEhUV82qHRgAAD6G6ig
+ (envelope-from <jack@suse.cz>); Tue, 10 Nov 2026 12:59:01 +0000
 Received: by quack.suse.cz (Postfix, from userid 1000)
- id 15B65224ED; Tue, 10 Nov 2026 13:57:58 +0100 (CET)
+ id 0FDA5224EF; Tue, 10 Nov 2026 13:59:01 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -64,40 +64,40 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede2_rsa header.d=suse.cz header.i="@suse.cz" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References"; dkim=permerror header.s=susede2_ed25519 header.d=suse.cz header.i="@suse.cz"; dkim=pass header.s=susede2_rsa header.d=suse.cz header.i="@suse.cz" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References"; dkim=permerror header.s=susede2_ed25519 header.d=suse.cz header.i="@suse.cz"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-	t=1794315478; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1794315541; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=7u2HJ+t6im2/188SWjC78CxpZGXhauj6sAa+Bj5Q2xU=;
-	b=xph88wH+Cy4MXPY3pDS5PKcSUzHmc+SEQP8d3AyFmCy2YYggWiv8xaF2611c3F4yHIaS3n
-	dOTrXXIx6QtAs+h+dq6T4SaRrTqgpHek+kx6gSsXXKEhEsdSk6oTrIEhb22EzUz/Ph4jEi
-	GJqUWg2KgmeP3xzrUh4+nn9lwCWSLr8=
+	bh=uXIEEsQfVTIPoYksjJrq5Bxki7KhKYAms5GVjwoGo8Y=;
+	b=c9mE+CRTtVzWwHCARJ1vd96Xho3nI/pS4LksT/7Mtmz/enT3ot6Jv+ishWlr43gZSQip4n
+	SM34HuYF7Cvf9TdHqnHerexkyr7m27gwbghlt5kBxleXZTpWWWludIkY/uX/1xq2ZGF1Cl
+	84ZWSnV4g+NJIksQj9LF3uDbQvrtb1Q=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-	s=susede2_ed25519; t=1794315478;
+	s=susede2_ed25519; t=1794315541;
 	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=7u2HJ+t6im2/188SWjC78CxpZGXhauj6sAa+Bj5Q2xU=;
-	b=3cVo9nCMZ1HraZx1ANnHnRX3eVA0FntbrI5ij7LYl/xiVKi3TDwJJMtHtmc9R005dJKVoZ
-	492ApFvso7WI9fDw==
-Authentication-Results: smtp-out2.suse.de;
+	bh=uXIEEsQfVTIPoYksjJrq5Bxki7KhKYAms5GVjwoGo8Y=;
+	b=kal9kkyQ8SEr1Uo3AFh1O8jXLtIAjDTFZiXwnabICsxjbUs+efcLTV1NmhR9cGdyfqXeRJ
+	S89Jh74CnobXgdBQ==
+Authentication-Results: smtp-out1.suse.de;
 	none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-	t=1794315478; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1794315541; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=7u2HJ+t6im2/188SWjC78CxpZGXhauj6sAa+Bj5Q2xU=;
-	b=xph88wH+Cy4MXPY3pDS5PKcSUzHmc+SEQP8d3AyFmCy2YYggWiv8xaF2611c3F4yHIaS3n
-	dOTrXXIx6QtAs+h+dq6T4SaRrTqgpHek+kx6gSsXXKEhEsdSk6oTrIEhb22EzUz/Ph4jEi
-	GJqUWg2KgmeP3xzrUh4+nn9lwCWSLr8=
+	bh=uXIEEsQfVTIPoYksjJrq5Bxki7KhKYAms5GVjwoGo8Y=;
+	b=c9mE+CRTtVzWwHCARJ1vd96Xho3nI/pS4LksT/7Mtmz/enT3ot6Jv+ishWlr43gZSQip4n
+	SM34HuYF7Cvf9TdHqnHerexkyr7m27gwbghlt5kBxleXZTpWWWludIkY/uX/1xq2ZGF1Cl
+	84ZWSnV4g+NJIksQj9LF3uDbQvrtb1Q=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-	s=susede2_ed25519; t=1794315478;
+	s=susede2_ed25519; t=1794315541;
 	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=7u2HJ+t6im2/188SWjC78CxpZGXhauj6sAa+Bj5Q2xU=;
-	b=3cVo9nCMZ1HraZx1ANnHnRX3eVA0FntbrI5ij7LYl/xiVKi3TDwJJMtHtmc9R005dJKVoZ
-	492ApFvso7WI9fDw==
-Date: Tue, 10 Nov 2026 13:57:58 +0100
+	bh=uXIEEsQfVTIPoYksjJrq5Bxki7KhKYAms5GVjwoGo8Y=;
+	b=kal9kkyQ8SEr1Uo3AFh1O8jXLtIAjDTFZiXwnabICsxjbUs+efcLTV1NmhR9cGdyfqXeRJ
+	S89Jh74CnobXgdBQ==
+Date: Tue, 10 Nov 2026 13:59:01 +0100
 From: Jan Kara <jack@suse.cz>
 To: Christian Brauner <brauner@kernel.org>
 Cc: linux-fsdevel@vger.kernel.org, Jann Horn <jannh@google.com>, 
@@ -111,16 +111,15 @@ Cc: linux-fsdevel@vger.kernel.org, Jann Horn <jannh@google.com>,
 	linux-efi@vger.kernel.org, xen-devel@lists.xenproject.org, ocfs2-devel@lists.linux.dev, 
 	linux-s390@vger.kernel.org, linuxppc-dev@lists.ozlabs.org, linux-usb@vger.kernel.org, 
 	Amir Goldstein <amir73il@gmail.com>, linux-erofs@lists.ozlabs.org, linux-kselftest@vger.kernel.org
-Subject: Re: [PATCH RFC 10/41] nullfs: use fc_init_pseudo()
-Message-ID: <josp5gwkmm4f6pk572b564xfjk77wz7jk24pajp5pr3qfdtljh@ihi2c3w4mpp4>
+Subject: Re: [PATCH RFC 14/41] debugfs: use fc_init_pseudo()
+Message-ID: <tqopv6vbmzwwjyp24wch4hw526xibknezzimun4tniww2dq7wu@ajdlmym5ihdu>
 References: <20261110-work-loop-pseudo-v1-0-4c998976c6c7@kernel.org>
- <20261110-work-loop-pseudo-v1-10-4c998976c6c7@kernel.org>
+ <20261110-work-loop-pseudo-v1-14-4c998976c6c7@kernel.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20261110-work-loop-pseudo-v1-10-4c998976c6c7@kernel.org>
-X-Spam-Level: 
+In-Reply-To: <20261110-work-loop-pseudo-v1-14-4c998976c6c7@kernel.org>
 X-Spamd-Result: default: False [-16.80 / 50.00];
 	SUSE_INTERNAL_BYPASS(-9.00)[];
 	REPLY(-4.00)[];
@@ -144,11 +143,12 @@ X-Spamd-Result: default: False [-16.80 / 50.00];
 	RCVD_TLS_LAST(0.00)[];
 	TO_MATCH_ENVRCPT_ALL(0.00)[];
 	DKIM_SIGNED(0.00)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,suse.cz:email,suse.com:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email,suse.cz:email,imap1.dmz-prg2.suse.org:helo]
 X-Spam-Score: -16.80
-X-purgate-ID: tlsNG-d25034/1794315478-77ED2A5B-6A6AE14A/0/0
+X-Spam-Level: 
+X-purgate-ID: tlsNG-42698a/1794315541-186CA9EA-AC8E49A7/0/0
 X-purgate-type: clean
-X-purgate-size: 1159
+X-purgate-size: 1302
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -157,43 +157,45 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Tue 10-11-26 10:14:26, Christian Brauner wrote:
-> Initialize nullfs as a pseudo filesystem instead of raising
-> SB_I_NOEXEC and SB_I_NODEV by hand. This adds SB_I_PSEUDO.
+On Tue 10-11-26 10:14:30, Christian Brauner wrote:
+> Initialize debugfs as a pseudo filesystem. This raises SB_I_PSEUDO and
+> also SB_I_NOEXEC and SB_I_NODEV. debugfs never holds executables or
+> device nodes.
+> 
+> SB_I_NOEXEC also refuses PROT_EXEC mappings. The debugfs files that
+> can be mapped, kcov, relay channels and powernv's memtrace, map data.
 > 
 > Signed-off-by: Christian Brauner (Amutable) <brauner@kernel.org>
 
-Looks good. Feel free to add:
+OK, makes sense. Feel free to add:
 
 Reviewed-by: Jan Kara <jack@suse.cz>
 
 								Honza
-
 > ---
->  fs/nullfs.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+>  fs/debugfs/inode.c | 2 ++
+>  1 file changed, 2 insertions(+)
 > 
-> diff --git a/fs/nullfs.c b/fs/nullfs.c
-> index 319c2f5c5a67..2fe24cb97160 100644
-> --- a/fs/nullfs.c
-> +++ b/fs/nullfs.c
-> @@ -2,6 +2,7 @@
->  /* Copyright (c) 2026 Christian Brauner <brauner@kernel.org> */
->  #include <linux/fs/super_types.h>
+> diff --git a/fs/debugfs/inode.c b/fs/debugfs/inode.c
+> index b4915551ad31..f163f0bc5703 100644
+> --- a/fs/debugfs/inode.c
+> +++ b/fs/debugfs/inode.c
+> @@ -15,6 +15,7 @@
+>  #include <linux/module.h>
+>  #include <linux/fs.h>
 >  #include <linux/fs_context.h>
 > +#include <linux/pseudo_fs.h>
->  #include <linux/magic.h>
->  #include <linux/splice.h>
->  #include <linux/uio.h>
-> @@ -174,7 +175,7 @@ static int nullfs_init_fs_context(struct fs_context *fc)
->  {
->  	fc->ops		= &nullfs_fs_context_ops;
->  	fc->sb_flags	|= SB_NOUSER;
-> -	fc->s_iflags	|= SB_I_NOEXEC | SB_I_NODEV;
+>  #include <linux/fs_parser.h>
+>  #include <linux/pagemap.h>
+>  #include <linux/init.h>
+> @@ -317,6 +318,7 @@ static int debugfs_init_fs_context(struct fs_context *fc)
+>  	fsi->mode = DEBUGFS_DEFAULT_MODE;
+>  
+>  	fc->s_fs_info = fsi;
 > +	fc_init_pseudo(fc);
+>  	fc->ops = &debugfs_context_ops;
 >  	return 0;
 >  }
->  
 > 
 > -- 
 > 2.53.0
