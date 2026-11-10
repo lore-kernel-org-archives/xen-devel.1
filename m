@@ -2,48 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 91BF9606A31C
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2026 07:28:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 50356606A31C
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2026 07:28:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=aspeedtech.com header.i=@aspeedtech.com header.a=rsa-sha256 header.s=selector1 header.b=rk9f2UVt
-Received: from list by lists.xenproject.org with outflank-mailman.1480739.1684573 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=aspeedtech.com header.i=@aspeedtech.com header.a=rsa-sha256 header.s=selector1 header.b=oC0iQiwT
+Received: from list by lists.xenproject.org with outflank-mailman.1480731.1684533 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQgHf-0004UO-2Q; Tue, 10 Nov 2026 07:28:47 +0000
+	id 1xQgHW-0003KO-8f; Tue, 10 Nov 2026 07:28:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1480739.1684573; Tue, 10 Nov 2026 07:28:46 +0000
+Received: by outflank-mailman (output) from mailman id 1480731.1684533; Tue, 10 Nov 2026 07:28:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQgHe-0004SZ-Pa; Tue, 10 Nov 2026 07:28:46 +0000
-Received: by outflank-mailman (input) for mailman id 1480739;
- Tue, 10 Nov 2026 07:28:44 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xQgHW-0003KG-41; Tue, 10 Nov 2026 07:28:38 +0000
+Received: by outflank-mailman (input) for mailman id 1480731;
+ Tue, 10 Nov 2026 07:28:36 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jamin_lin@aspeedtech.com>) id 1xQgHc-0004L6-NT
- for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 07:28:44 +0000
+ (envelope-from <jamin_lin@aspeedtech.com>) id 1xQgHU-000353-I6
+ for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 07:28:36 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xQgHb-00GPH4-V9
- for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 08:28:43 +0100
+ id 1xQgHT-004zvm-Ut
+ for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 08:28:35 +0100
 Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jamin_lin@aspeedtech.com>)
- id 6af2c7a7-8faa-0a2a0a5109dd-0a2a45049db2-2
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 08:28:43 +0100
-Received: from [40.107.44.81]
- (helo=SEYPR02CU001.outbound.protection.outlook.com)
+ id 6af2c799-bab6-0a2a0a5309dd-0a2a450495de-34
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 08:28:35 +0100
+Received: from [52.101.127.134]
+ (helo=TYDPR03CU002.outbound.protection.outlook.com)
  by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jamin_lin@aspeedtech.com>)
- id 6af2c7a9-b57f-0a2a45040019-286b2c51a3da-3
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 08:28:43 +0100
+ id 6af2c796-b57f-0a2a45040019-34657f8617e3-7
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 08:28:35 +0100
 Received: from SEZPR06MB7362.apcprd06.prod.outlook.com (2603:1096:101:253::10)
  by KUYPR06MB8987.apcprd06.prod.outlook.com (2603:1096:d10:9a::24)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.8; Tue, 10 Nov
- 2026 07:28:34 +0000
+ 2026 07:28:26 +0000
 Received: from SEZPR06MB7362.apcprd06.prod.outlook.com
  ([fe80::cd2d:35d2:a702:1de6]) by SEZPR06MB7362.apcprd06.prod.outlook.com
  ([fe80::cd2d:35d2:a702:1de6%4]) with mapi id 15.21.0615.005; Tue, 10 Nov 2026
- 07:28:34 +0000
+ 07:28:26 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -54,20 +54,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=aspeedtech.com header.i="@aspeedtech.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=B7Qz8X/PEoD86Jb9HZH4I8IQ8F6Nk8at/J0vo4xSHrkTTbReAUAVYPmx7HsmUCFQV1BRSjgCAqHW5rjEAGsm1tOT0jed9BrcRS8X/jfroBzqRiaqFiNeZb9kaAW2gKx7WsAIStKmm3rnjjDCUIDcFdp7iDFwXx56p/v4eRmwxDC5zzksySEfla1ng5b1mX9qFzeCWHKIu8BvoCPXXfXrToR3VPSCJ6Zxky4Vut6fOglVGstjDX3+RnYIBqPbueQ0vhMDcWBQ0rRPye2YoR8B0jMwlLlZDqIPc0o8+NCbXS+V5SH9IpwYKlPfXfF3uZISetxGCgTV2P6Ywx614J1aCg==
+ b=E1fP/ArXKv+nCIT+w9jgZDGh2dZN0+Im7Omg1l2v94nGYJwtUxpQjTjxRgtsbTq+xgXU0aSkExIL0mKWGEvvZ+YPpjw57DRQScGuEAih8WC/SYlPSvM6fAaRUtE6+eVeDGAYkZkmRzRTkxcjyQepLWVlq7RDki4J0GMwd2i0yudXE6b/GU+WDXdI0+gtUTvh2a+2UKqV9NpWDLc7EKn0qd5zQcBWMo+sn9++7S6v+vuqxJ2/ELSlqBgT4JP4W23StJ6Hf0g3eei7+BeWLqCiCYNsl1iNFtgyiQKi9zutrmnLzqSim76IxV+CSqqMixyliJ1aD29+jCR1a/cequOxAg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=h0Wi8pcjCzVI/25GAwV4gAuJfwyQPtS6TbTYXqQJyxE=;
- b=TaPatWceQwkPMN4Trl7MOTVu1vQTqNxys6ci5sSa6g6/SgqGCv7ad6uQshWZep8lc5dN4SYQOKvEXOdDL8tITyNclkN6XlF8IRWTe+4W37pxxKnlzRsTH53sdNaBFLYDJoOLT6/BpvSfQqiqEzOfTw1LyAjDspHWb5KJPB1sBtoOBAheKxoqpYZa+vIDYauQ/teM1WfypDJ7Z+0hrRV+QIq5RQxochVTYV8hd2QU36xzOtKRHC20gYBgDbVMuRgv+x7c6zG7VWM7ziGWbkl6OX/WRC/sFsjABel1+ak7i5XoQlToSCf4ot2JAo1Eofg1W+GmxxSn2o92Z5E4Y1qVSw==
+ bh=3vQWGbEtGscPdmHA2ADzQG0gFnAv52CUriCVqN3tajs=;
+ b=cc71tyy0xkgQESw2mkaq2f8pbCJOXZwI9EneETrkzhLgYkkgSpFYoJtIKIRzs9VZaJ6Kr33Pw6Ky/WY08DgGyF9FDq6RAikrdf0fUN51lNk0RyDvDXTFUtZ8IC/QESaSjzaxKfmJeuDk72vlvNEV6DR9KlCkoUXD+PrPQRNmyU9gelQW6Bdibb/lwgS7bkWLu/GngxzmQeWbRbhdnTqp4DK40lStmDT6fTxcaJFwCFTB+6C2GfjjvWMdsy+TG2BKEdSXxYcxnSo04thhMvlF0W+G/EXg7ccJYsxm3NXihsa37hYlRIlekmgCvhDkVAt8Rp6YzYZBpLhiznS9aepZEA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=aspeedtech.com; dmarc=pass action=none
  header.from=aspeedtech.com; dkim=pass header.d=aspeedtech.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aspeedtech.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=h0Wi8pcjCzVI/25GAwV4gAuJfwyQPtS6TbTYXqQJyxE=;
- b=rk9f2UVtGHiR7K0yFxz84Ienh3jDffHV5IxsDerxVeXF2ZyXAS3J505GSQdTabGZPCfAMl+NI2VVlhbhJtwpbJ+3ByiwM0Iv/4QQupLYx+zSjm018afHIwFVtPRGG5dHa2WPVC9P2F79wnw5VJl7FC21K2Tvr3Vhlu94/MPbPJc4O/gluEvpRkfKOGLx5+rAXdA6MU11n35WhXaHr43bkkqGDUzfq40L1ZjSN3WpK5NjySjzFLmTlBrRuP8bpQ5+mrq63p+ZntK+/SW8+1b8Abf1w59jW2WREGfanicLlJ4jnlXtg8p0pR92GoCWDrVintvCvpmHwUZ1W7ktaKLflA==
+ bh=3vQWGbEtGscPdmHA2ADzQG0gFnAv52CUriCVqN3tajs=;
+ b=oC0iQiwTLn0IaLV/3VHepJQHzXhcgOQ5A/x8zi4fK+QE3oNRkEyFj7UJklUMs2VOiRJvnddJVBzldaUYsrU1FXJav/48z3Fnxb5DE6ofYYtE5g57v/MvIMVNqxBmrDKompV3WIAHJNry0jrDCpLtMy8bJrUxID/NXmtXO8DlEEow1sZnEfnystc2cK2nxvcv1J8GZ7gtV30mGLVajF4F67Kliio5YNNA9y1lfAz4qc8QQobAoJB86DqOmM2eTi8lrlYvBosiZtnUoRhKWm41P+A+2AXgSzf2lnwiDOR4nKbaglbPL/0eqjBBwgyZd1X8m2vjP4jZ5dg0qZuJHoh+tw==
 From: Jamin Lin <jamin_lin@aspeedtech.com>
 To: "berrange@redhat.com" <berrange@redhat.com>, "junjie.cao@linux.dev"
 	<junjie.cao@linux.dev>, "kraxel@redhat.com" <kraxel@redhat.com>,
@@ -84,13 +84,13 @@ To: "berrange@redhat.com" <berrange@redhat.com>, "junjie.cao@linux.dev"
 	<qemu-devel@nongnu.org>, "open list:ASPEED BMCs" <qemu-arm@nongnu.org>, "open
  list:X86 Xen CPUs" <xen-devel@lists.xenproject.org>
 CC: Jamin Lin <jamin_lin@aspeedtech.com>, Troy Lee <troy_lee@aspeedtech.com>
-Subject: [PATCH v9 10/19] docs/system/devices/usb: Note the automatic hub
- change
-Thread-Topic: [PATCH v9 10/19] docs/system/devices/usb: Note the automatic hub
- change
-Thread-Index: AQHdcOUXXeP+rsu8KE6Ii/LyMMZ2iw==
-Date: Tue, 10 Nov 2026 07:28:33 +0000
-Message-ID: <20261110072818.2883349-11-jamin_lin@aspeedtech.com>
+Subject: [PATCH v9 05/19] hw/usb/hcd-ohci: Add an auto-hub property and leave
+ it off
+Thread-Topic: [PATCH v9 05/19] hw/usb/hcd-ohci: Add an auto-hub property and
+ leave it off
+Thread-Index: AQHdcOUToE+IwdinPU2SGrliqKVNgQ==
+Date: Tue, 10 Nov 2026 07:28:26 +0000
+Message-ID: <20261110072818.2883349-6-jamin_lin@aspeedtech.com>
 References: <20261110072818.2883349-1-jamin_lin@aspeedtech.com>
 In-Reply-To: <20261110072818.2883349-1-jamin_lin@aspeedtech.com>
 Accept-Language: zh-TW, en-US
@@ -101,68 +101,68 @@ authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=aspeedtech.com;
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: SEZPR06MB7362:EE_|KUYPR06MB8987:EE_
-x-ms-office365-filtering-correlation-id: 9b07bf1b-0291-426b-4db7-08df3efc3a49
+x-ms-office365-filtering-correlation-id: 4a1c67aa-b9b3-46f2-1f00-08df3efc35f5
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam:
- BCL:0;ARA:13230040|1800799024|366016|23010399003|376014|7416014|22082099003|18002099003|10067099003|921020|38070700021|56012099006|261102123227099003|261022105027099003|261021123027099003|261021121427099003|261009223027099003|261028144727099003|261026140227099003|261026121527099003;
+ BCL:0;ARA:13230040|1800799024|366016|23010399003|376014|7416014|22082099003|18002099003|10067099003|921020|38070700021|56012099006|261102123227099003|261021121427099003|261009223027099003|261026121527099003;
 x-microsoft-antispam-message-info:
- 4WLH+cqL/gLoSEbNdd5FFgNFTTzZpwtJ9r/Y8hvHbuUGfpH6SkS5dDYNnkz7BkXwJ0W3roB2RqXQvkP421YJJ/B7e8Ek6cncbivRoNkwhjeh4nDCqPST/d4a45dPmplMzO1UO6f6PbdpmBwzlgnVZeAcFtN8a2ncobo97HzZVP/3Kj2iNz4eh8hUc9t9BbpEpZ02YXHF4hl0DHe8BpyRIQ1WQOjZu+WsT2vWsOwxK9j1ydW3VFE2Y7+4zQ2Q3+xAPkHfa0R9Cs10CDMbukIt1Xs+1VMeTmZEj+UWTmw19akwEvTl3sXM1TN0RnuV6Hp9vxRIFMV2LSC7ysjqoeOtAG3rZnz5ExeD7M8C2Vy1xD4kCXXp4qjmNq1NkZ69mu6nnYs7/JSNea+ab9PybS9zLSzhr3u6GhVdpAx8TFHr71mIBCBFZdOJwCaZx1bVmubyifvKP6uYD90Vi2twboRNOwLB0h2dwZT+RRN9aX/W2mN/6FifLeGgYWZyVhGjCZZcMbhUv5Ge6VpCbAnf+uAgo01A4t5rE+oYXRIs6mWVyKaUj8QIb0BKdkSQIgdW5cuYUz/qzwSTe2crIz9s90igVCnUtnFfY/ypH4DZahrUhgIeUHi/nOetuKC5YPxk1bUFCn25jQPRG5OD/sm5dxudmFApAtZbWX774129DoHHGfIMTJVsmBcpNDAuti4iw7jL0hk9G2PGRH9IfwddLcCJPoAK1kIi3R73WcL2NYm7nD8=
+ e+EP5aiVJoMCY6+oL/wRqDbNzDfgR6kaHxJBRgKP20emnEyozzNsW/u89koLceCgkpmdBjZg0XRPDqaQT1RvAfyUVSNl4fzubc1ku8nf5F/mCBa10gYliVK4pDCxvxA8/AlblHuPFsL5C7jlVPWK4gbmaG9CzJevY+IuhwxjIXns2H/2qwBwjMs/CqKrg643K5eT9PI7KVJU78KWEEKfXNh/aclmCcGeW6e7p3KQrz6VNZewB3vdbj+XQEOlmvs/3Bl8BhrEZzASoDtKU/r9gQAK0GVVcT/ytkdQYAgVr/xFFdqIIEoFG4k3fxZ8JIcFuHOyq8ZVOtO551ijjT/kw7ptJEjDAjmXhtWC1ekhyn6/mxLhTMSkTGm+z5O+qdL/9Wg2gS1DQUbPpfym+QFN9YqRtNBk7r9eJ3E5avYK3wa3WxcSaRnDJ23E957ERBbhGRT3XAUwTh9dzl4yLiOSTbpXCtjSpgnlxDMJtwm7JwKUgc5fYHzAtpKsKlZOXFi9sAyLDS7fPITTjJb0ETLSNNjQdO8/oQM8P5pFROi4Dwm4DaR5EPU6QDBvbSQLLb6sB6J638lgzTqJ7GorK448a9i6GtVJCAhdHTXJAtc4jNLwvsG1iKQVsRiM5ri5Qd3SzvunnODSTWw07MIfLBVj9T3CykQMmXbkvqnc2lsuJfZ9/s4lYKq71apUno+gd8PGxg1rWbwqEhiVouw6I5nQw31+eRZvZETq/pAtvW06UQAEX8lN91y1AJ9ToGtCNMKe
 x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SEZPR06MB7362.apcprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(23010399003)(376014)(7416014)(22082099003)(18002099003)(10067099003)(921020)(38070700021)(56012099006)(261102123227099003)(261022105027099003)(261021123027099003)(261021121427099003)(261009223027099003)(261028144727099003)(261026140227099003)(261026121527099003);DIR:OUT;SFP:1102;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SEZPR06MB7362.apcprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(23010399003)(376014)(7416014)(22082099003)(18002099003)(10067099003)(921020)(38070700021)(56012099006)(261102123227099003)(261021121427099003)(261009223027099003)(261026121527099003);DIR:OUT;SFP:1102;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?PD0REbv9viYxDtJCcZTDrjVV32gO425OJ55bEEpg5wNmRMb4WeF1pxFnj7?=
- =?iso-8859-1?Q?7N5Qc/wGivEcUJTVFpNIM5jFJRTJD3uPFqqeaHtR5bhYpyUvhrUeI644N5?=
- =?iso-8859-1?Q?ARaDLo69se+iowQQ+TzD5y5ivXG7vzqGojr+ulOfAW0Yzx3P1VHmsIEiWD?=
- =?iso-8859-1?Q?yzeiObgVdJ6q52/iSxR0H5hX+GJZsDYPxhOl4FhEIzAtPWQRYokE56nZyG?=
- =?iso-8859-1?Q?nE6/jul4sgBYCcGcwtjRaGaLffnxKKZRNAFV+BxEu35UJqLMkcntN7YLc7?=
- =?iso-8859-1?Q?pNW3G82JOztfzKXa3G2RkU+PzV5qiMXNd7iWdc7r0mCpgFhz/Lh4cYm19R?=
- =?iso-8859-1?Q?5s1l7JNi6Eg+qHg8dgcizNxuhnDsejGX9+7n72E5GqpP9aRKeHta4cEc50?=
- =?iso-8859-1?Q?5JytSy7Ht8GJoZvu6G5ycnl6ydGWEwMnJdeN7eAj0z3Z8BgvE4aeZlHlen?=
- =?iso-8859-1?Q?DtFdtxSZ5PmJ9LRqDKYg6e1XrPckLQdJ1FsxVUKrHgq81VvAa79qzrCfUu?=
- =?iso-8859-1?Q?j/+bdF9tZLYALGHjpIAEc9NqUu6mEWo2+IT8UVS9+9L6Dt4CC6cIuClsEb?=
- =?iso-8859-1?Q?HSeAnZ6lgPA/7vG4IUFIIjKAPZSmt363o2LBW6U38lwAxDcqBAedo90h3O?=
- =?iso-8859-1?Q?RA7F8UtQ0HhF4plzvzvC3L8Boy28dOBqfwMvL8o8lvOxuCJu81Xc3TWuz+?=
- =?iso-8859-1?Q?dgeiCOEd2AaOkpMMIlL+1Zy+tq2SGq4t1nMQ87EYs7sWUXSVI9D/PNiaEn?=
- =?iso-8859-1?Q?Ntn1N9RLQyDsM3V6EgFudbblOEEDG0AGbM9B/lA+K3g2UcSsdOOMSFBtxY?=
- =?iso-8859-1?Q?3Bl5YLmqmhBdp+obLmebOJ5jrcM5J5JArAxnT68zT9SMqWvKPHa5SIXW4j?=
- =?iso-8859-1?Q?+6yq6203+w02pFhClLV51T1k/ajknp78NXfZOZ7mP0ne0Gk4cnqA+FUwNN?=
- =?iso-8859-1?Q?9rIaM9tl0LG+O52QSidyHv3tVRRZNHyX0Aa2xzj0SSaBIgFdzXpaMSzWp+?=
- =?iso-8859-1?Q?s/kb6+Ol/8+miI7weBj1uECD4moXOfUF8oopZHcPtDGlZaK5DLxNJOOiCA?=
- =?iso-8859-1?Q?t5HFh9Ihn8if6zxQ7wvifPrqrYkdXXunE7oilCYVZGgG5xy9rWPmRFvsv3?=
- =?iso-8859-1?Q?JQqIrupiiE1tz+kphh3R0VEIUxbRGjiHV6W3ffMHSlsrhim51R1jHJ5NEM?=
- =?iso-8859-1?Q?ja7gTQU3rD2pwYXyv/15Nqo65ESEZJWap9EcZCVlPE0P2HlLDEldHgtRFB?=
- =?iso-8859-1?Q?NjTtWme9aEBWNkYZZOjBdyYmatw7pLjY5gE2WYbXP8zv8UOEp0abN3PQp6?=
- =?iso-8859-1?Q?T66gjCCTEUSal+tx1uX998gfvvg3pa1HY++vZ63a1QHA4WUAFIP7vMjJEq?=
- =?iso-8859-1?Q?DiqdR9lsUEbAbH8r8zd9q5aG6IM/7i7ri/6RXXdJFZJug9lRj3CspThlx/?=
- =?iso-8859-1?Q?yj96WGmTUmi0F32cseFvss8mq/7FvcXD45YLAr0ApUgN9v4yfmTspLCzKm?=
- =?iso-8859-1?Q?9kSdyDDqi1NC9Mo+6MhKsjB2yOnD6BRmNFEYbh/1UoRYRtj8jsA/jrTLAx?=
- =?iso-8859-1?Q?dNZ9XoBQdB/wAq3dyVHLX+rNbqic33HA5k5xCd2yArJK+rhLeyTLzR+kHV?=
- =?iso-8859-1?Q?fGM9cR8bInTDfrqpaqLa2zuFdMoRoeE08+m6uKnUb9pJ61z7iCpLFvWxQv?=
- =?iso-8859-1?Q?yC4DNUKsOwA343hPRYhH54rltcgqr26lkciXd7L5eNfkD6KXzJjZc4u1eL?=
- =?iso-8859-1?Q?S/i3sj6tElTPHpn1AW5G2SJVLDISj8Eimtng8d0Lw0H94xTFPkBwk/e+w7?=
- =?iso-8859-1?Q?4AVIGVRMPw=3D=3D?=
+ =?iso-8859-1?Q?VEidfjyG2e6iOBJP0wEwO415h6w3oWtI5DQHSddDSP+EodRK2abZhlqRGq?=
+ =?iso-8859-1?Q?PJYpxxpZDnKMX7yjGwXBgg1XCJwjyJ4+hFOrbh7JoLZeZM4Q5sVjLVac56?=
+ =?iso-8859-1?Q?ZIroWSnLEUA/uPRsccFZf42H5mqa39T92yE4uR99VgislzDJnGvTxz/apy?=
+ =?iso-8859-1?Q?C51KkNP9/Ek4ICemH89MKZswW8XoK59zWSEdp6D0wuIWzL9AAxwRh4vEvd?=
+ =?iso-8859-1?Q?SA5fPtfNCl9Ajz5r1yxQFvWLmF5SSFEWbGQdIOEu9p0gWvvlnNGl1QI2XK?=
+ =?iso-8859-1?Q?RlVlvlPlzcQrr/wYpBuGhwXYqV410+d0DIg0GpjsWKjIp6FXjaKJZEBMkm?=
+ =?iso-8859-1?Q?//duvbpD6NCkZYGbRiwqlF/4dYbZ/JYIERG9Mq23BJ3ycuOhktSypmgjSB?=
+ =?iso-8859-1?Q?4MQ/9ut9sqri2bF6cpxZqpDnLHH567eDlecSTlMeJZJxCVSle1uen50QHh?=
+ =?iso-8859-1?Q?uKPVRR37Z9mSEzFfQ+JYzOXUqexQnm/InkhoH0o+ZKhf1uMK5rFvtstmpJ?=
+ =?iso-8859-1?Q?iIwyuebWBu1q2t5BbsGKV4j9fSyM1GNnqjvOymvH8USKeL2GqYstpVRVNC?=
+ =?iso-8859-1?Q?WxlrtTU5qrOr/l7qKQJXnxbYTRVDYd98B+LUHZm+JNh4vX08zJL0VJD7Rz?=
+ =?iso-8859-1?Q?/oPyFIj2qMrnZC3sd1ZECe/vI94KmTcrnzZfOJZfnwI45auKWfi5GNroAM?=
+ =?iso-8859-1?Q?ADpZXMRNR3022MskEmFKsofpBY+FHAiKPZqr9sUgYwrRprjDJClqkOEI7n?=
+ =?iso-8859-1?Q?+JIpXunXJ03QBGxkrWYNXlnHYLSLPR+j3fnJqtIDvF7H2dASG4pC/n8lVk?=
+ =?iso-8859-1?Q?vEio0JG00cMBFPqPDwisPiS6bP1Kntat0lpPKgwtLUk9Not0yVO935slUd?=
+ =?iso-8859-1?Q?HLpjMZyFuN4WQDMOhMmVOcgDbaOjt+0fiWJtfheMlCR8sf0rHwRgbY/xMA?=
+ =?iso-8859-1?Q?DMMtXidQjQq0f+h7FfLM+5OIyWqFPxmT10clFB3WQmPlapiR7oGdUmj/v9?=
+ =?iso-8859-1?Q?tNExV1r/qY5zn+VR8RBMsoCfKr2fVQ4McalNdYEV8svxETzniXcTW/NKWb?=
+ =?iso-8859-1?Q?OCYBiWoJmWoWvvH7YwsfWn5TfHccoFr1XCHPmjKv1aDkKtVLFWtpfFr+S5?=
+ =?iso-8859-1?Q?swoDbZxWpkl+QwhniaePVbkUUuwwdAm1Eg+CAge3UrSk/DM5wN3UwV8wpU?=
+ =?iso-8859-1?Q?zTVsMz44soCpl5KFGkpr2URnYIyzP3F4Wz9Z3ICXpJnMbtQ7mWL0ngVTuC?=
+ =?iso-8859-1?Q?Z1YNs9StCKsf8rKG3ETZ0SaLEibG8f29VyuxWzdD0SaBbxMHTkL1y1AkIa?=
+ =?iso-8859-1?Q?wnnWk+ZfMj3z2Znzo48z1KoSzP7fqJ8sqBtznSxt2sQIW462Q1xtz+/6Qi?=
+ =?iso-8859-1?Q?dQM++e2qLy/NgL9lyFGCx63hJ5oIeCeuZsbCs/MeH7QZ+30xz011s/bXfu?=
+ =?iso-8859-1?Q?DA4vZyutTwM/3My9dwbvDhT+eO/8qhIdSBjzQACNE6g7BGcm9geUIQxB8q?=
+ =?iso-8859-1?Q?AsdmCpMx9khGYoCsyN1hFbVJppVrqe26ocIzag6FhIjik5UNE3SPQ0XaBS?=
+ =?iso-8859-1?Q?bdsgTyyj0XRDve7jsqbKyG3dE145bYbiwgSkXoA6mLgTd4XRo9TmDZ7649?=
+ =?iso-8859-1?Q?K8MduCvcH1wJ5KXQQA7YPfaVu4pg8Y5EodIWHxixA2RyTvFVLLkgx1fqLf?=
+ =?iso-8859-1?Q?g0cDtlyNNV3q/qd2SoorPk1vi43oJiPjsjVhc8ee8xtrIGndP/SIsXeu/p?=
+ =?iso-8859-1?Q?8ueJINVy971gLJZjLIkP0pFK+E6jpa9/IpY3nPQYOD7JRyJADmgoC8xbzF?=
+ =?iso-8859-1?Q?kyTzVnV0PA=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-Exchange-RoutingPolicyChecked:
-	sbwTgQy5zlIYgs31LfNbp0hAHDsdG3G51xR5VX+1tYl5MCsUswRusHOYk8K0+HwNbBsjgWud28DxUkB0pJE7ojI4TbTJBImUudCVuwLet72WVkQdjpPD5zm8MxMB+2tsj8XgTV0Prpr3nSzxf189PZtVS0LjVzKpfFfX8JyST/vNjJefn/MFSr70d3W7NCNMugKYs9rBfAyhkjHS05v395PYblDkD8YRNwhbWKBajmKh8dEJEf9ER7/lD82ki4wiGTAWm7wRQc5Rb5NqK5GnnqDf1IdejMK8rsKuxskkkGpDug1u2KBqOZla7UCXRczVXAUF7V6jcsi+eJiZi3L0wQ==
+	oIvP/kX7fdEORsaYp1IEnnOJ0i1LDls5so/d1U149KuqaWuKRCs8icP+zxEblkOo2+kvlxPHg33vvRUIYq5jAclAvxh1otH/9jqycuUnYMAbdJXVsFWaowk9jLfi/JZHGKuFgGDH4+m1W5bQfqmiBvYCSSVwcBX61jRyv772y+kZThyFdt0Q3m+uSAoA3XkjVSNWHkJPsmPMKE1Zv5UxyuMBngB3XbxcuwPZfR6IhX7EEIrlDr4cfbyfucpMh8SOmsXAXGdwGe6vWwGnEPYlGk6f8b/ZOv/I8gbSOKVDEALvLGM7FSvl+SXVGV2hfr0yVjenqoXrLWvfojQkwWe51Q==
 X-OriginatorOrg: aspeedtech.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB7362.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9b07bf1b-0291-426b-4db7-08df3efc3a49
-X-MS-Exchange-CrossTenant-originalarrivaltime: 10 Nov 2026 07:28:33.9956
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4a1c67aa-b9b3-46f2-1f00-08df3efc35f5
+X-MS-Exchange-CrossTenant-originalarrivaltime: 10 Nov 2026 07:28:26.7150
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: 43d4aa98-e35b-4575-8939-080e90d5a249
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: I1qg1jSNeW3rlmQbwkJB2GkO3NeeXy66aOw7L1xfCShmLv59qKQfDqt88dN7yUyqPdO9Sk57m+Ibxktq1CXV5VMgmHK9hfHB9ByR7gpqqeM=
+X-MS-Exchange-CrossTenant-userprincipalname: ng4mRPJbfi47q4FyzpQ4P6WIhPgBl+51DyaQxk9/BWzywC6BloR9uY7064GHIosdgwVKXzd9QLGLbw9idM7q4JecmtyeONHMwgbEALCmUQo=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: KUYPR06MB8987
-X-purgate-ID: tlsNG-ebf023/1794295723-518D1B50-EFC40D02/0/0
+X-purgate-ID: tlsNG-ebf023/1794295715-504DBB50-7CB76EE8/0/0
 X-purgate-type: clean
-X-purgate-size: 1704
+X-purgate-size: 4389
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -171,47 +171,107 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The automatic hub is now off for a new machine type. Say how to get a=0A=
-hub back: plug in a usb-hub, or turn auto-hub back on for the=0A=
-controller.=0A=
+Add auto-hub and leave it off. hw_compat_11_1 turns it on for=0A=
+pci-ohci and sysbus-ohci, so an older machine type keeps the hub it=0A=
+has today and a guest saved by an older QEMU still loads.=0A=
 =0A=
-TODO: The text says 12.0. That is right once the compat entries move=0A=
-to hw_compat_11_2.=0A=
+pc87560-ohci is its own PCI front end, not a pci-ohci, so it defines=0A=
+the property itself.=0A=
 =0A=
-Suggested-by: Junjie Cao <junjie.cao@linux.dev>=0A=
+A companion OHCI adds its ports to the EHCI bus instead of making one,=0A=
+so there the EHCI property decides.=0A=
+=0A=
+TODO: Move the entries to hw_compat_11_2 before merge. The series=0A=
+goes into 12.0, so 11.2 is an old machine type too. hw_compat_11_2=0A=
+does not exist yet.=0A=
+=0A=
+Suggested-by: Gerd Hoffmann <kraxel@redhat.com>=0A=
 Signed-off-by: Jamin Lin <jamin_lin@aspeedtech.com>=0A=
 ---=0A=
- docs/system/devices/usb.rst | 17 +++++++++++++++--=0A=
- 1 file changed, 15 insertions(+), 2 deletions(-)=0A=
+ hw/usb/hcd-ohci.h        | 1 +=0A=
+ hw/core/machine.c        | 2 ++=0A=
+ hw/usb/hcd-ohci-pci.c    | 1 +=0A=
+ hw/usb/hcd-ohci-sysbus.c | 1 +=0A=
+ hw/usb/hcd-ohci.c        | 1 +=0A=
+ hw/usb/pc87560-ohci.c    | 1 +=0A=
+ 6 files changed, 7 insertions(+)=0A=
 =0A=
-diff --git a/docs/system/devices/usb.rst b/docs/system/devices/usb.rst=0A=
-index dc694d23c2..dc73c4048e 100644=0A=
---- a/docs/system/devices/usb.rst=0A=
-+++ b/docs/system/devices/usb.rst=0A=
-@@ -3,8 +3,21 @@ USB emulation=0A=
+diff --git a/hw/usb/hcd-ohci.h b/hw/usb/hcd-ohci.h=0A=
+index d079f8d24e..43240622ef 100644=0A=
+--- a/hw/usb/hcd-ohci.h=0A=
++++ b/hw/usb/hcd-ohci.h=0A=
+@@ -98,6 +98,7 @@ struct OHCIState {=0A=
  =0A=
- QEMU can emulate a PCI UHCI, OHCI, EHCI or XHCI USB controller. You can=0A=
- plug virtual USB devices or real host USB devices (only works with=0A=
--certain host operating systems). QEMU will automatically create and=0A=
--connect virtual USB hubs as necessary to connect multiple USB devices.=0A=
-+certain host operating systems).=0A=
-+=0A=
-+A machine type older than 12.0 plugs a virtual USB hub into the last=0A=
-+free port, so that more devices fit. A newer one does not, and a=0A=
-+device that finds no free port fails.=0A=
-+=0A=
-+There are two ways to get a hub back. One is to add a hub yourself.=0A=
-+Put it on the command line before the other USB devices::=0A=
-+=0A=
-+    -device usb-hub=0A=
-+=0A=
-+The other is to turn the automatic hub back on. Use the name of your=0A=
-+USB controller, for example::=0A=
-+=0A=
-+    -global piix3-usb-uhci.auto-hub=3Don=0A=
+     bool big_endian;=0A=
+     bool consistency_check;=0A=
++    bool auto_hub;=0A=
+ };=0A=
  =0A=
- USB controllers=0A=
- ~~~~~~~~~~~~~~~=0A=
+ #define TYPE_SYSBUS_OHCI "sysbus-ohci"=0A=
+diff --git a/hw/core/machine.c b/hw/core/machine.c=0A=
+index f79337e7d7..22d2b83459 100644=0A=
+--- a/hw/core/machine.c=0A=
++++ b/hw/core/machine.c=0A=
+@@ -47,6 +47,8 @@ GlobalProperty hw_compat_11_1[] =3D {=0A=
+     { "pci-ehci-usb", "auto-hub", "on" },=0A=
+     { "base-xhci", "auto-hub", "on" },=0A=
+     { "pci-uhci-usb", "auto-hub", "on" },=0A=
++    { "sysbus-ohci", "auto-hub", "on" },=0A=
++    { "pci-ohci", "auto-hub", "on" },=0A=
+ };=0A=
+ const size_t hw_compat_11_1_len =3D G_N_ELEMENTS(hw_compat_11_1);=0A=
+ =0A=
+diff --git a/hw/usb/hcd-ohci-pci.c b/hw/usb/hcd-ohci-pci.c=0A=
+index 70c9e9ac4f..11c754a948 100644=0A=
+--- a/hw/usb/hcd-ohci-pci.c=0A=
++++ b/hw/usb/hcd-ohci-pci.c=0A=
+@@ -112,6 +112,7 @@ static const Property ohci_pci_properties[] =3D {=0A=
+     DEFINE_PROP_STRING("masterbus", OHCIPCIState, masterbus),=0A=
+     DEFINE_PROP_UINT32("num-ports", OHCIPCIState, num_ports, 3),=0A=
+     DEFINE_PROP_UINT32("firstport", OHCIPCIState, firstport, 0),=0A=
++    DEFINE_PROP_BOOL("auto-hub", OHCIPCIState, state.auto_hub, false),=0A=
+ };=0A=
+ =0A=
+ static const VMStateDescription vmstate_ohci =3D {=0A=
+diff --git a/hw/usb/hcd-ohci-sysbus.c b/hw/usb/hcd-ohci-sysbus.c=0A=
+index 4f51eebccb..69f38b9fce 100644=0A=
+--- a/hw/usb/hcd-ohci-sysbus.c=0A=
++++ b/hw/usb/hcd-ohci-sysbus.c=0A=
+@@ -61,6 +61,7 @@ static const Property ohci_sysbus_properties[] =3D {=0A=
+     DEFINE_PROP_UINT32("num-ports", OHCISysBusState, num_ports, 3),=0A=
+     DEFINE_PROP_UINT32("firstport", OHCISysBusState, firstport, 0),=0A=
+     DEFINE_PROP_UINT64("dma-offset", OHCISysBusState, dma_offset, 0),=0A=
++    DEFINE_PROP_BOOL("auto-hub", OHCISysBusState, ohci.auto_hub, false),=
+=0A=
+ };=0A=
+ =0A=
+ static void ohci_sysbus_class_init(ObjectClass *klass, const void *data)=
+=0A=
+diff --git a/hw/usb/hcd-ohci.c b/hw/usb/hcd-ohci.c=0A=
+index 5e5fe41f47..2c25829b76 100644=0A=
+--- a/hw/usb/hcd-ohci.c=0A=
++++ b/hw/usb/hcd-ohci.c=0A=
+@@ -1987,6 +1987,7 @@ void usb_ohci_init(OHCIState *ohci, DeviceState *dev,=
+ uint32_t num_ports,=0A=
+         }=0A=
+     } else {=0A=
+         usb_bus_new(&ohci->bus, sizeof(ohci->bus), &ohci_bus_ops, dev);=0A=
++        ohci->bus.auto_hub =3D ohci->auto_hub;=0A=
+         for (i =3D 0; i < num_ports; i++) {=0A=
+             usb_register_port(&ohci->bus, &ohci->rhport[i].port,=0A=
+                               ohci, i, &ohci_port_ops,=0A=
+diff --git a/hw/usb/pc87560-ohci.c b/hw/usb/pc87560-ohci.c=0A=
+index cc00f6e936..66c1e62d48 100644=0A=
+--- a/hw/usb/pc87560-ohci.c=0A=
++++ b/hw/usb/pc87560-ohci.c=0A=
+@@ -296,6 +296,7 @@ static const Property ohci_pci_properties[] =3D {=0A=
+     DEFINE_PROP_STRING("masterbus", OHCIPCIState, masterbus),=0A=
+     DEFINE_PROP_UINT32("num-ports", OHCIPCIState, num_ports, 3),=0A=
+     DEFINE_PROP_UINT32("firstport", OHCIPCIState, firstport, 0),=0A=
++    DEFINE_PROP_BOOL("auto-hub", OHCIPCIState, state.auto_hub, false),=0A=
+ };=0A=
+ =0A=
+ static const VMStateDescription vmstate_ohci =3D {=0A=
 -- =0A=
 2.43.0=0A=
 
