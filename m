@@ -2,48 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 065A360A263A
-	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2026 05:34:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C7026606A31C
+	for <xen-devel@archiver.kernel.org>; Tue, 10 Nov 2026 07:10:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=valinux.co.jp header.i=@valinux.co.jp header.a=rsa-sha256 header.s=selector1 header.b=sfBMvj9H
-Received: from list by lists.xenproject.org with outflank-mailman.1480652.1684432 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=EufH1Kwb
+Received: from list by lists.xenproject.org with outflank-mailman.1480674.1684441 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQeUq-0001qU-IW; Tue, 10 Nov 2026 05:34:16 +0000
+	id 1xQfzg-0006IR-8D; Tue, 10 Nov 2026 07:10:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1480652.1684432; Tue, 10 Nov 2026 05:34:16 +0000
+Received: by outflank-mailman (output) from mailman id 1480674.1684441; Tue, 10 Nov 2026 07:10:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xQeUq-0001qL-FS; Tue, 10 Nov 2026 05:34:16 +0000
-Received: by outflank-mailman (input) for mailman id 1480652;
- Tue, 10 Nov 2026 05:34:15 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xQfzg-0006IK-5i; Tue, 10 Nov 2026 07:10:12 +0000
+Received: by outflank-mailman (input) for mailman id 1480674;
+ Tue, 10 Nov 2026 06:35:04 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <nishimura@valinux.co.jp>) id 1xQeUp-0001pb-ER
- for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 05:34:15 +0000
+ (envelope-from <ma.mandourr@gmail.com>) id 1xQfRg-0001fP-3B
+ for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 06:35:04 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xQeUo-004jDx-RY
- for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 06:34:14 +0100
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xQfRf-00Gp7q-96
+ for xen-devel@lists.xenproject.org; Tue, 10 Nov 2026 07:35:03 +0100
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <nishimura@valinux.co.jp>)
- id 6af2acae-e002-0a2a0a5209dd-0a2a45088a08-48
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 06:34:14 +0100
-Received: from [40.107.74.134]
- (helo=OS0P286CU010.outbound.protection.outlook.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <nishimura@valinux.co.jp>)
- id 6af2acd4-f659-0a2a45080019-286b4a86a733-3
- for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 06:34:14 +0100
-Received: from TYCP286MB2019.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:15b::9)
- by OSZP286MB1798.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:1bb::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.13; Tue, 10 Nov
- 2026 05:34:11 +0000
-Received: from TYCP286MB2019.JPNP286.PROD.OUTLOOK.COM
- ([fe80::1150:c5cb:d781:8147]) by TYCP286MB2019.JPNP286.PROD.OUTLOOK.COM
- ([fe80::1150:c5cb:d781:8147%5]) with mapi id 15.21.0592.012; Tue, 10 Nov 2026
- 05:34:11 +0000
+ (envelope-from <ma.mandourr@gmail.com>)
+ id 6af2bb15-bab6-0a2a0a5309dd-0a2a4509d526-6
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 07:35:03 +0100
+Received: from [209.85.216.44] (helo=mail-pj1-f44.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <ma.mandourr@gmail.com>)
+ id 6af2bb15-be1a-0a2a45090019-d155d82cd46f-3
+ for <xen-devel@lists.xenproject.org>; Tue, 10 Nov 2026 07:35:02 +0100
+Received: by mail-pj1-f44.google.com with SMTP id
+ 98e67ed59e1d1-3b0d09df973so1277588a91.0
+ for <xen-devel@lists.xenproject.org>; Mon, 09 Nov 2026 22:35:02 -0800 (PST)
+Received: from cs-arch-srv04.cmpt.sfu.ca (cs-arch-srv04.cmpt.sfu.ca.
+ [142.58.10.48]) by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-3b16708f533sm2560410a91.2.2026.11.09.22.35.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Nov 2026 22:35:00 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,249 +50,333 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=uwiTp7UUAobgDgg1JzKbMAFlFNIwYlRX2+MLrcupKrFjcIGVU7juwRPRboBXS0EL0ubHRPP3Ec25s0A3FXZKnGKXjXtgK0+nozVOfLFWxJtxKWq+ZqM4nbRurwv9Zve/FgSkCUVzX2pMjnL5dOFlbbHH+ruZkk1BukTQat2UVgYExGBVt+Sv8wlaa9hC1GAvPI/NB7dagAcm0l2tHWZVUShJUD6LXfuz4gylua71ECsR6fvwwXTmze/Br4+oI3GJunZyhTCtdQZu0aFhedlvQRimjR5Ag2xylWV1m1y69cTdk5ovfejOSL7//RdlLCsoQEX+wYD8bfvvT6ZqBHtNAQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=j3V8l/mNWRz2YJFIRXoVS8SRruajOHQneJcfEo6dcAM=;
- b=PKa121g/OteZJL5Cl9wsvwccSHiYu+I0uwdl20XHytDGF/5Hezeqgs2UPW6W+75xtKpphR2ZBA55mooXtM+0qIPbpPlgMYIKhuPOAvqp3U82RDgj3AKNHZrmf+9keT17f78pKwNXfKwof14s5EtHuF/OScNddTBsRt/XUq/zS1QVZiGdnEbG1YsWaaNG/gbbIuhZeiPK4FKkBF2+Tgnm7ICVokjee8aJlU8vbYWZB6NrlkGMRnsAkYbrTeIMnnmnCia5gHVxrg/oPQT/KREMDEqyjU7ed7G9vB77n47cyDgAn4FSWrqIuRpqDkKSlPyQ9Nj2c1Kszj+h1JZxLpXtYg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
- header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=j3V8l/mNWRz2YJFIRXoVS8SRruajOHQneJcfEo6dcAM=;
- b=sfBMvj9HoGE+ecY0gAggq9juKGXGyxYWGCyYxaysCeUH9Ldp4KEgSeR94E6nHGhCSm9iwotRP6KDi4Yz793Jv86XOiNKrFxdSDSTYQHm+MJDHPSmBgMf9Gd7SYcuxTeCRe5Gkn9JXiMKjxxwVCF6UsPQE0sQZJ77+2A+oS13Emo=
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=valinux.co.jp;
-Date: Tue, 10 Nov 2026 14:30:39 +0900
-From: Daisuke Nishimura <nishimura@valinux.co.jp>
-To: <xen-devel@lists.xenproject.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
-	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, Michal Orzel
-	<michal.orzel@amd.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Leonid Komarianskyi <leonid_komarianskyi@epam.com>
-Subject: [PATCH 1/2] xen/arm: Track the minimum number of PMU counters
- across CPUs
-Message-ID: <20261110143039.00003cd4@valinux.co.jp>
-In-Reply-To: <20261110140828.00001529@valinux.co.jp>
-References: <20261110140828.00001529@valinux.co.jp>
-Organization: VA Linux Systems Japan K.K.
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.51; x86_64-w64-mingw32)
-Content-Type: text/plain; charset="US-ASCII"
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: TY4PR01CA0038.jpnprd01.prod.outlook.com
- (2603:1096:405:2bd::11) To TYCP286MB2019.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:400:15b::9)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1794292501; x=1794897301; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=0lqZDBduZu05Iia47gN/7mGdgXvDzEOEnsPvIYGH5T4=;
+        b=EufH1KwbL1huH2eRS+OxaZbwYasvTK2K+vvdvcoP33aCwQn7/NGqxM02l1jLiAlMHu
+         aj89ePLnp4k10DBAYa3sZlMqB5ACy9hATtDjUKNWs4CHJk4J+F2fUK6PipnDOuVR6YV8
+         HXsrbkT5NEFjvcy6KB0VMZmDz2p8UZyUZftmgKRJnYnTInnX8ZYdfH+afy9k3L00ckNu
+         Auz0AGXCCz1y9RMXSmmhQUGsFsYGmspq6iuPrVSNuGs5ef/eacuB6V1KEy9u2KlZYfxp
+         xytmRSHA9Kwk1HGJfNCTxXSjCYb+Sr9AuBeo5OBM/UvnbL2xg5HOTOOiyOhkUmjYFj5+
+         d5DQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794292501; x=1794897301;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=0lqZDBduZu05Iia47gN/7mGdgXvDzEOEnsPvIYGH5T4=;
+        b=qGTtuZZcLXnzLQj67kbGLm+drs7c4Z3+qOGvZnQ79pCHBBNBhE54Yur1BqpwxKzxbk
+         PVCp666tTbKw99wvMD1dP8k+iALEeDhliaQ8L5ejTw7lkmUR4I1v4VMq7L09IuTAD552
+         FRCmayQ+HBLmj4S0FZlZcDtRUEFMpwB1KuA4K1DJc1V1Swt/uopE8YTAnvG4he1r3pvj
+         +KhUAqMhe3YC+MegaTF/9d9JMgUEQspNqmmBLVJZZ6+yuNQuHdF90JEFVmG8J6oAGtil
+         cRk4QyfeT9WE8AgrunkIBAe0AxbZw3gKGP4VsO6n3ZHCU80KzHCI73YXfYFeUu1muFtf
+         eZ4w==
+X-Gm-Message-State: APuU4Z+cbWMH4rwd98owUkC9VlmtAf/KTb0V5M+j36hb83AlSD0X/Ab5
+	3Jrg5z8t1WoZCs9IVhCe31FqmIIrT+hpkhNSWSMdPZO1vW1wOO+XhZY6zGCYVhxA
+X-Gm-Gg: AYBFou28/eGD/PC7NUUOImG1bd+C4AbaLbwzl6jGZUIW2ErsfNh3AFx1+txof7Gs0vO
+	vSEsYUMrYy68O3ienWMZ92cNKHa5lR5lN0UaeM+74uXrPhXpCwbQWJuYPb4qnmNNXL5BNtxejsn
+	0iPED1kQDcmhDXAEPhJdoKr3DJ03b9xLyn/PKttrWpLl6vd/MgVnMTvIJlynsrsUb2DJG22ZUsr
+	NehagtkeNXAL6ShsIkUtg7sCYWFqkS6uvxD8/iwCrznmg3+xVywRedi9uY3ACl6n6OBSiOaC9Ki
+	Ol/oydRdjQiY7b3Azsq1flIhQ9kfR8ti4Djvc5FFtjLIdwC52t5tkYB6l87RCMJcF/z0MCpr2fo
+	cs6t/WxYqvVwWU6o7qjL34ez/pjJnn1g8YbpBYZzBsACZqcGXb9bx0SnskbRTOoRE5eUYQmTrTq
+	iS5cuRXhWQyvwrMK9qVzAJOzXSwE5VtJ9VGL2fbYGYHBviUt2RxkoCUgp7N12c2PdRNZ6FVq/Su
+	aXmeVSmPFO/2fpmzC0uaMK3Z8N0lNG11XSc1HpYm9TwGSIIamarPCbqZINywTZ5KzLgPEOKI7l8
+	mzVTRxWEdRBTHHfd6mb+KvF6n43fWlNvawJE240rv03iIQHULE1zPcJdkDXlJSb0YOjL1Zzy/kS
+	S5YrIy9jqk7WH8EgOpyHOW6ryVnSkkLv3V5gNkdKQg9ntTC1nX8lyxMUvVcmb0Qm7YWJCxRv2ZB
+	gW2hykShmbHA==
+X-Received: by 2002:a17:90b:1a8e:b0:3a8:5cab:1009 with SMTP id 98e67ed59e1d1-3b166fb76a8mr1996164a91.46.1794292500677;
+        Mon, 09 Nov 2026 22:35:00 -0800 (PST)
+From: Mahmoud Abumandour <ma.mandourr@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Teddy Astie <teddy.astie@vates.tech>,
+	Mahmoud Abumandour <ma.mandourr@gmail.com>
+Subject: [PATCH] x86/nestedhvm: process the MSR-load and MSR-store areas of L1's VMCS
+Date: Mon,  9 Nov 2026 22:33:34 -0800
+Message-Id: <20261110063334.2029620-1-ma.mandourr@gmail.com>
+X-Mailer: git-send-email 2.25.1
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: TYCP286MB2019:EE_|OSZP286MB1798:EE_
-X-MS-Office365-Filtering-Correlation-Id: c175897d-af8e-4ba1-9a4e-08df3eec3f9c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|23010399003|366016|1800799024|261021121427099003|261021123027099003|261022105027099003|261009223027099003|261028144727099003|261022075727099003|261026140227099003|56012099006|261026121527099003|261102123227099003|22082099003|18002099003|6133799003|10067099003|3023799007;
-X-Microsoft-Antispam-Message-Info:
-	ctW6Lpm9y6YuW+Gb65VxG4ODuikAlKddeBv8BGrh3f8tl6anttR4WOzPcYzPSsByEkf6XoQuOMlnz2BoAY72vwCPBoXV1pWgXeuW77ZOIGx6ZRg3CPwajJaPeHl2H7m5QGkPhFwd+FdSelDUqBqkeZ/AwrA8fIVbv8GQZN0HsUQI8vMCK9X1+dBarpJnBqJbOpaFNMbreBtKl2OlktnFev48YYVeV09/rm3bSzG5fO8vbYomayU6QAAqVzJACUxxwtka0S0l3u5mdCGE8ubcXUOG3PmK0hAQ0rMRmRLzout2/FjG3Oj44IYLx50ZnKQc+epDNEhttqqRLJVIvWZE5NnMecE3HvoUux3ly60NNBaFWMBQ5ydSofyGtDe9bxWgWZmwVBDOddwDq2bfN4mrHG3/yUz13TVZOoSj7yd2U3OV8q82LcaARvgXSyJdX0UvglGOE9i8M1WoYcEOzhZ90y6/eyYN61xX2I9QLl6iLKygbVRqQ73hccXfj/AA9+Z5t5GjHoKodi5fyL/xaDaIHGPGx7iaT71C5wiWT+rXVq7wlZVe/UatqtKa1wbRW5/bm/kCh8HdtVQbCWWxIlvR16vY34XUhbAgatBOptxlTWXSpPvL5wUh3cnzONK5Cx0izKWhF/TUV/VNFd6uCaSZYbNpcD0OQ4CfFTzi7eoMYvs=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TYCP286MB2019.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(376014)(23010399003)(366016)(1800799024)(261021121427099003)(261021123027099003)(261022105027099003)(261009223027099003)(261028144727099003)(261022075727099003)(261026140227099003)(56012099006)(261026121527099003)(261102123227099003)(22082099003)(18002099003)(6133799003)(10067099003)(3023799007);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?jNUmhpNW7eafsxPbDCxMjrsU4t9Ja8bqULlIIVXIi/vkxz3a7zFrunNA0MrO?=
- =?us-ascii?Q?mROnlpjbqjzVfgrWbSlVSevy6QQ/kDG9GXDlYzgN+9y1wxZC8zVUSM8KEifu?=
- =?us-ascii?Q?bZa6/fI/y53YdtpbRUQuwpB4XRZ/6t5zcDORSmvL0krgSMHtjmcmDh3RUqe4?=
- =?us-ascii?Q?h0UWJupr5Z8UR3P6x65+29CwkCshWKrUKTsjXjI+Cwq9Q4hVdjbiu9uJm7v5?=
- =?us-ascii?Q?UocC9wNkvQ+ed4sH0FmkoF5ISiac2GDIXvY3ABk0GpOj2ZD4r4VvsoFG3nxl?=
- =?us-ascii?Q?jhMsDPYLNShSNrT99rvhVSnMB8Vqk5aa9Mxac1CBciHxwxkIYQXzKJD+htV/?=
- =?us-ascii?Q?bjANHP+ytVNewLc7DR00mOkeMFDf6vgCmKGsN/HlOYrww3Xor6UYuW0TNOT8?=
- =?us-ascii?Q?lnlr9sTzkINVbr4wDZzakcbjGcw+gq7WMYOx5awnWXbj/COnzWJ2YVXmLn3a?=
- =?us-ascii?Q?JvvdApTozWYsZ2IBPvnIHckbLRi+Wmk7g4rSRrBvF3R5w7T9qvOJBKbVyDHd?=
- =?us-ascii?Q?57hTHI3yf+UgVtVCI/yFTZ8wzCa15WTIL4WEPnr/vhi0Z0CqKKHB/CqFrgN4?=
- =?us-ascii?Q?/oG74a5vpTKTApv6Dnee8m5O1a1Ku/mgqeKtnJvA2nxi4Y9n2OyilecIipeD?=
- =?us-ascii?Q?SJspgXncMcn+68PoDW9N6B6FftC9+Lkm3DK6Z5k6uP69OwAAVXd2kAmeEXLR?=
- =?us-ascii?Q?TgYx4eKSQfQsk59gom14cVkjqcpNuS3FmzaZmvjtjD38voao/dggMem6nVMg?=
- =?us-ascii?Q?Hm93yadypXn+GfFuzZQQF5EAAbedb07Ah9zp4OeN3E4ECrEO4UzIQgYQWCSV?=
- =?us-ascii?Q?nzqKAxhzscueRJb3YBWszGkgOz4pNNrrCfuTYRk2DN1DsEiQWmHQViKNCOgs?=
- =?us-ascii?Q?RvrbiTRPNdMCQDv7OX32FKD0yoxbq1bYZ1t7ViW2UmVLmKJPPp5iismGx3pc?=
- =?us-ascii?Q?ZIiBVv5Y/F2t/oBiEl/WisyjbDsHyEUJUiXNUG1MLn0ss8hJjMz3HjOGQa+G?=
- =?us-ascii?Q?/AOv6xDbdXZFXzHaR3dlO3t/jR6aOl+F8W0YGp2DzHUGiaL/5s9U6ws8hQ0A?=
- =?us-ascii?Q?Ywa3qAyPF1L8GwaASW+pYhtVxF4CTrWaB6rju1UEwBGK8a8aznsDZVeIL5aj?=
- =?us-ascii?Q?FGD4UQtnnlxQDuB3aLX6YuVWLGu6mwVDhigHeWk9KvS2kgOqUD0w6N7BThFS?=
- =?us-ascii?Q?7iDVWXaNINoDUed6ig26BR2B66vDtRFIiLUew5zJdWwKy1WAbNR2SC9o8IFw?=
- =?us-ascii?Q?QNcLG9meWpLZm01Xk82iNOhFGQ78AKrUBeUX2/d7HEz5Bub3jTE8UqJRjMxE?=
- =?us-ascii?Q?PN1PGLsA7OuyQO6jcYPAUmP0KwERPgyn7suNB+mwQgpfA4NzbYhJ4Bi9ZwaD?=
- =?us-ascii?Q?7+WM+uFnPHn8Z2X3fQ+kmw/rL8u2NBWVmfWHZ0oMelqRnuBYGXkrkS+ZWWlI?=
- =?us-ascii?Q?dD4PnQJWIzFW4mQzlPgoJoxtbkl5YzkUups03na0hy6WTewh4JZElLqWO3n5?=
- =?us-ascii?Q?qZvpcmoz1q6g4P/NZap60UCK3f07986T8gpcT6FBfj+kbLTDFy9W6YwI82xi?=
- =?us-ascii?Q?powSrtMOEMUM3fuVPsZReerdYAWnYu2QM6jAp6Zhj5HsS3+h3MHNJUNOjdv6?=
- =?us-ascii?Q?zhUqzbEeUzRwPSN5BamdCVGgH4Y9woxUWXOHx/sPxW40ipzgG2LUHm+kdk/q?=
- =?us-ascii?Q?eTHCbIuIfn+n9BvS9qsTnDBQK7u3fb6gORp7/RoQz+6I5yq38GOwCfmYx6jb?=
- =?us-ascii?Q?i43GMnMXlg=3D=3D?=
-X-OriginatorOrg: valinux.co.jp
-X-MS-Exchange-CrossTenant-Network-Message-Id: c175897d-af8e-4ba1-9a4e-08df3eec3f9c
-X-MS-Exchange-CrossTenant-AuthSource: TYCP286MB2019.JPNP286.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Nov 2026 05:34:11.1165
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: mlmplA2zuj4vXa+UVx8rE/CSQpsAGo70K+er61K8shMHPl3txn3+MBrsqb5OJmd6B+Dy45pA8bt9Ic26hS7wuw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: OSZP286MB1798
-X-purgate-ID: tlsNG-c1860d/1794288854-CFED287B-6974AE90/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-bad1c0/1794292502-FC212034-AC172E0D/0/0
 X-purgate-type: clean
-X-purgate-size: 5384
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_2 autolearn=ham
-	autolearn_force=no version=4.0.1
+X-purgate-size: 10587
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On heterogeneous systems (e.g. a big.LITTLE system), the number of
-PMU counters (PMCR_EL0.N) may differ between cores.
-Any counter count reported to guests therefore needs to be valid
-no matter which CPU their vCPUs run on.
+Nothing in vvmx.c reads the VM-entry MSR-load, VM-exit MSR-store or VM-exit
+MSR-load area of L1's VMCS, so L2 runs with the listed MSRs as the previous
+L2 or L1 left them, and L1 gets neither L2's values stored nor its own
+loaded back. Process each area where the SDM does, with the SDM's checks,
+an entry as a WRMSR or RDMSR at CPL 0 that L1 does not intercept. A bad
+VM-entry entry fails the VM entry with exit reason 34 and leaves the VMCS
+unlaunched, a bad VM-exit entry is a VMX abort, which crashes the domain,
+and IA32_VMX_MISC now recommends the 512 entries an area may hold.
 
-Read PMCR_EL0.N once on the boot CPU and on each secondary CPU that
-stays online, and keep the smallest value in 'system_pmu_num_cntrs'.
-The update happens in update_system_features(), which is not called
-for CPUs being parked. Secondary CPUs are brought up sequentially,
-so no locking is needed.
-
-To be able to do that in common code, move the PMCR_EL0.N field
-definitions to asm/processor.h and provide the PMCR_EL0 -> PMCR
-alias for arm32 builds.
-
-Signed-off-by: Daisuke Nishimura <nishimura@valinux.co.jp>
+Fixes: 9390642b7fa5 ("Nested VMX: Switch shadow/virtual VMCS between n1/n2 guests.")
+Assisted-by: Claude:claude-opus-5-5
+Signed-off-by: Mahmoud Abumandour <ma.mandourr@gmail.com>
 ---
- xen/arch/arm/arm64/cpufeature.c       |  6 ++++++
- xen/arch/arm/cpufeature.c             | 21 +++++++++++++++++++++
- xen/arch/arm/include/asm/cpregs.h     |  1 +
- xen/arch/arm/include/asm/cpufeature.h |  7 ++++++-
- xen/arch/arm/include/asm/processor.h  |  4 ++++
- xen/arch/arm/setup.c                  |  1 +
- 6 files changed, 39 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/arm/arm64/cpufeature.c
-b/xen/arch/arm/arm64/cpufeature.c index 6fb8974ade..b32f924fc0 100644
---- a/xen/arch/arm/arm64/cpufeature.c
-+++ b/xen/arch/arm/arm64/cpufeature.c
-@@ -567,6 +567,12 @@ static void sanitize_reg(u64 *cur_reg, u64
-new_reg, const char *reg_name, */
- void update_system_features(const struct cpuinfo_arm *new)
+Found by a fuzzer for VMX isolation.
+
+A VMX abort crashes the domain as vvmx.c does elsewhere when nested VMX
+cannot continue.
+
+Alternatives: hvm_triple_fault(), which applies the domain's triple-fault
+action (reboot by default), as KVM does, or hvm_vcpu_down() on the aborting
+vCPU alone with the VMX-abort indicator written, which is closest to the
+SDM but needs more code. Happy to switch to either.
+
+ xen/arch/x86/hvm/vmx/vvmx.c             | 135 ++++++++++++++++++++----
+ xen/arch/x86/include/asm/hvm/vmx/vmcs.h |   1 +
+ 2 files changed, 117 insertions(+), 19 deletions(-)
+
+diff --git a/xen/arch/x86/hvm/vmx/vvmx.c b/xen/arch/x86/hvm/vmx/vvmx.c
+index 3309432873..af93beacb1 100644
+--- a/xen/arch/x86/hvm/vmx/vvmx.c
++++ b/xen/arch/x86/hvm/vmx/vvmx.c
+@@ -23,6 +23,8 @@
+ static DEFINE_PER_CPU(u64 *, vvmcs_buf);
+ 
+ static void nvmx_purge_vvmcs(struct vcpu *v);
++static int set_vvmcs_launched(struct list_head *launched_list,
++                              unsigned long vvmcs_mfn);
+ 
+ static bool nvmx_vcpu_in_vmx(const struct vcpu *v)
  {
-+       /*
-+        * Keep track of the smallest number of PMU counters across the
-+        * CPUs that stay online (this function is not called for cores
-+        * that are being parked).
-+        */
-+       update_system_pmu_num_cntrs();
-
- #define SANITIZE_REG(field, num, reg)  \
-        sanitize_reg(&system_cpuinfo.field.bits[num],
- new->field.bits[num], \ diff --git a/xen/arch/arm/cpufeature.c
- b/xen/arch/arm/cpufeature.c index 8d8cd19a96..6ce55a0f68 100644
---- a/xen/arch/arm/cpufeature.c
-+++ b/xen/arch/arm/cpufeature.c
-@@ -17,6 +17,27 @@ DECLARE_BITMAP(cpu_hwcaps, ARM_NCAPS);
-
- struct cpuinfo_arm __read_mostly domain_cpuinfo;
-
-+/* Minimum number of PMU counters across all online CPUs. */
-+unsigned int __read_mostly system_pmu_num_cntrs = UINT_MAX;
+@@ -1212,11 +1214,67 @@ static void nvmx_clear_vmcs_pointer(struct vcpu *v, struct vmcs_struct *vvmcs)
+     __vmwrite(VMWRITE_BITMAP, 0);
+ }
+ 
+-static void virtual_vmentry(struct cpu_user_regs *regs)
++/* The longest MSR list that IA32_VMX_MISC recommends to L1. */
++#define NVMX_MAX_MSRS 512
 +
-+/*
-+ * On heterogeneous systems the number of PMU counters may differ
-+ * between cores. Keep the smallest value seen on CPUs that stay
-+ * online, so that guests can be given a number of counters that is
-+ * usable no matter which CPU their vCPUs run on.
-+ *
-+ * Called once on the boot CPU and once on every secondary CPU during
-+ * bring-up; CPUs are started sequentially, so no locking is needed.
-+ */
-+void update_system_pmu_num_cntrs(void)
++/* A nonempty MSR area must be 16-byte aligned and within MAXPHYADDR. */
++static bool msr_area_valid(const struct vcpu *v, unsigned int addr_field,
++                           unsigned int count_field)
 +{
-+    unsigned int n = (unsigned int)(READ_SYSREG(PMCR_EL0) >>
-+                     PMCR_N_SHIFT) & PMCR_N_MASK;
++    uint64_t addr = get_vvmcs(v, addr_field);
++    uint64_t count = get_vvmcs(v, count_field);
++    unsigned int width = v->domain->arch.cpuid->extd.maxphysaddr;
 +
-+    if ( n < system_pmu_num_cntrs )
-+        system_pmu_num_cntrs = n;
++    return !count ||
++           (!(addr & 0xf) && !(addr >> width) &&
++            !((addr + count * sizeof(struct vmx_msr_entry) - 1) >> width));
 +}
 +
- #ifdef CONFIG_ARM_64
- static bool has_sb_instruction(const struct arm_cpu_capabilities
-*entry) {
-diff --git a/xen/arch/arm/include/asm/cpregs.h
-b/xen/arch/arm/include/asm/cpregs.h index 3f62b38dc0..fc0a7c6da3 100644
---- a/xen/arch/arm/include/asm/cpregs.h
-+++ b/xen/arch/arm/include/asm/cpregs.h
-@@ -480,6 +480,7 @@
- #define MIDR_EL1                MIDR
- #define MPIDR_EL1               MPIDR
- #define PAR_EL1                 PAR
-+#define PMCR_EL0                PMCR
- #define SCTLR_EL1               SCTLR
- #define SCTLR_EL2               HSCTLR
- #define TCR_EL1                 TTBCR
-diff --git a/xen/arch/arm/include/asm/cpufeature.h
-b/xen/arch/arm/include/asm/cpufeature.h index c554686415..1ff31ab9b4
-100644 --- a/xen/arch/arm/include/asm/cpufeature.h
-+++ b/xen/arch/arm/include/asm/cpufeature.h
-@@ -465,14 +465,19 @@ struct cpuinfo_arm {
-
- extern struct cpuinfo_arm system_cpuinfo;
-
-+/* Minimum number of PMU counters usable on all online CPUs. */
-+extern unsigned int system_pmu_num_cntrs;
++/*
++ * Load or store an MSR area of L1's VMCS, each entry as an unintercepted
++ * WRMSR or RDMSR.  Returns 0, or the 1-based index of the failing entry.
++ */
++static unsigned int process_msr_area(struct vcpu *v, unsigned int addr_field,
++                                     unsigned int count_field)
++{
++    paddr_t addr = get_vvmcs(v, addr_field);
++    unsigned int i, count = get_vvmcs(v, count_field);
++    struct vmx_msr_entry ent;
 +
- extern void identify_cpu(struct cpuinfo_arm *c);
-
-+void update_system_pmu_num_cntrs(void);
++    for ( i = 0; i < count; i++, addr += sizeof(ent) )
++    {
++        if ( i == NVMX_MAX_MSRS ||
++             hvm_copy_from_guest_phys(&ent, addr,
++                                      sizeof(ent)) != HVMTRANS_okay ||
++             ent.mbz ||
++             (ent.index >= MSR_X2APIC_FIRST && ent.index <= MSR_X2APIC_LAST) )
++            return i + 1;
 +
- #ifdef CONFIG_ARM_64
- extern void update_system_features(const struct cpuinfo_arm *new);
- #else
- static inline void update_system_features(const struct cpuinfo_arm
-*cpuinfo) {
--    /* Not supported on arm32 */
-+    update_system_pmu_num_cntrs();
++        if ( addr_field == VM_EXIT_MSR_STORE_ADDR )
++        {
++            if ( hvm_msr_read_intercept(ent.index, &ent.data) != X86EMUL_OKAY ||
++                 hvm_copy_to_guest_phys(addr + offsetof(struct vmx_msr_entry,
++                                                        data),
++                                        &ent.data, sizeof(ent.data),
++                                        v) != HVMTRANS_okay )
++                return i + 1;
++        }
++        else if ( ent.index == MSR_FS_BASE || ent.index == MSR_GS_BASE ||
++                  hvm_msr_write_intercept(ent.index, ent.data,
++                                          false) != X86EMUL_OKAY )
++            return i + 1;
++    }
++
++    return 0;
++}
++
++/* Returns 0, or the 1-based index of the failing MSR-load entry. */
++static unsigned int virtual_vmentry(struct cpu_user_regs *regs)
+ {
+     struct vcpu *v = current;
+     struct nestedvcpu *nvcpu = &vcpu_nestedhvm(v);
+     unsigned long lm_l1, lm_l2;
++    unsigned int msr_fail;
+ 
+     vmx_vmcs_switch(v->arch.hvm.vmx.vmcs_pa, nvcpu->nv_n2vmcx_pa);
+ 
+@@ -1277,6 +1335,15 @@ static void virtual_vmentry(struct cpu_user_regs *regs)
+         }
+     }
+ 
++    /* MSRs load last, and only a successful entry launches the VMCS. */
++    msr_fail = process_msr_area(v, VM_ENTRY_MSR_LOAD_ADDR,
++                                VM_ENTRY_MSR_LOAD_COUNT);
++    if ( !msr_fail &&
++         set_vvmcs_launched(&vcpu_2_nvmx(v).launched_list,
++                            PFN_DOWN(v->arch.hvm.vmx.vmcs_shadow_maddr)) < 0 )
++        domain_crash(v->domain);
++
++    return msr_fail;
  }
- #endif
-
-diff --git a/xen/arch/arm/include/asm/processor.h
-b/xen/arch/arm/include/asm/processor.h index 8ee8f88fb4..24ab182f84
-100644 --- a/xen/arch/arm/include/asm/processor.h
-+++ b/xen/arch/arm/include/asm/processor.h
-@@ -446,6 +446,10 @@
- #define HDCR_TPM        (_AC(1,U)<<6)           /* Trap Performance
-Monitors accesses */ #define HDCR_TPMCR      (_AC(1,U)<<5)           /*
-Trap PMCR accesses */
-
-+/* PMCR_EL0/PMCR Number of event counters field, bits [15:11] */
-+#define PMCR_N_SHIFT       11
-+#define PMCR_N_MASK        0x1F
+ 
+ static void sync_vvmcs_guest_state(struct vcpu *v, struct cpu_user_regs *regs)
+@@ -1454,19 +1521,37 @@ static void nvmx_update_apicv(struct vcpu *v)
+     }
+ }
+ 
+-static void virtual_vmexit(struct cpu_user_regs *regs)
++/*
++ * A VM exit, or with msr_fail a VM entry that failed loading MSRs, which
++ * records only the exit reason and qualification and saves nothing.
++ */
++static void virtual_vmexit(struct cpu_user_regs *regs, unsigned int msr_fail)
+ {
+     struct vcpu *v = current;
+     struct nestedvcpu *nvcpu = &vcpu_nestedhvm(v);
+-    unsigned long lm_l1, lm_l2;
++    unsigned long lm_l1, lm_l2, intr_info = 0;
+ 
+-    sync_vvmcs_ro(v);
+-    sync_vvmcs_guest_state(v, regs);
+-    sync_exception_state(v);
++    if ( msr_fail )
++    {
++        intr_info = get_vvmcs(v, VM_ENTRY_INTR_INFO);
++        set_vvmcs(v, VM_EXIT_REASON,
++                  VMX_EXIT_REASONS_FAILED_VMENTRY | EXIT_REASON_MSR_LOADING);
++        set_vvmcs(v, EXIT_QUALIFICATION, msr_fail);
++    }
++    else
++    {
++        sync_vvmcs_ro(v);
++        sync_vvmcs_guest_state(v, regs);
++        sync_exception_state(v);
+ 
+-    if ( nvmx_ept_enabled(v) && hvm_pae_enabled(v) &&
+-         !hvm_long_mode_active(v) )
+-        shadow_to_vvmcs_bulk(v, ARRAY_SIZE(gpdpte_fields), gpdpte_fields);
++        if ( nvmx_ept_enabled(v) && hvm_pae_enabled(v) &&
++             !hvm_long_mode_active(v) )
++            shadow_to_vvmcs_bulk(v, ARRAY_SIZE(gpdpte_fields), gpdpte_fields);
 +
- #define HSR_EC_SHIFT                26
++        if ( process_msr_area(v, VM_EXIT_MSR_STORE_ADDR,
++                              VM_EXIT_MSR_STORE_COUNT) )
++            domain_crash(v->domain, "%pv VMX abort: storing MSRs failed\n", v);
++    }
+ 
+     /* This will clear current pCPU bit in p2m->dirty_cpumask */
+     np2m_schedule(NP2M_SCHEDLE_OUT);
+@@ -1490,6 +1575,9 @@ static void virtual_vmexit(struct cpu_user_regs *regs)
+     vmx_update_exception_bitmap(v);
+ 
+     load_vvmcs_host_state(v);
++    /* A failed VM entry keeps its interruption information. */
++    if ( msr_fail )
++        set_vvmcs(v, VM_ENTRY_INTR_INFO, intr_info);
+ 
+     if ( lm_l1 != lm_l2 )
+         paging_update_paging_modes(v);
+@@ -1499,6 +1587,9 @@ static void virtual_vmexit(struct cpu_user_regs *regs)
+     /* VM exit clears all bits except bit 1 */
+     regs->rflags = X86_EFLAGS_MBS;
+ 
++    if ( process_msr_area(v, VM_EXIT_MSR_LOAD_ADDR, VM_EXIT_MSR_LOAD_COUNT) )
++        domain_crash(v->domain, "%pv VMX abort: loading MSRs failed\n", v);
++
+     if ( cpu_has_vmx_virtual_intr_delivery )
+         nvmx_update_apicv(v);
+ 
+@@ -1553,9 +1644,14 @@ void asmlinkage nvmx_switch_guest(void)
+         return;
+ 
+     if ( nestedhvm_vcpu_in_guestmode(v) && nvcpu->nv_vmexit_pending )
+-        virtual_vmexit(regs);
++        virtual_vmexit(regs, 0);
+     else if ( !nestedhvm_vcpu_in_guestmode(v) && nvcpu->nv_vmentry_pending )
+-        virtual_vmentry(regs);
++    {
++        unsigned int msr_fail = virtual_vmentry(regs);
++
++        if ( msr_fail )
++            virtual_vmexit(regs, msr_fail);
++    }
+ }
+ 
+ /*
+@@ -1704,6 +1800,11 @@ static enum vmx_insn_errno nvmx_vmresume(struct vcpu *v)
+             goto invalid_control_state;
+     }
+ 
++    if ( !msr_area_valid(v, VM_EXIT_MSR_STORE_ADDR, VM_EXIT_MSR_STORE_COUNT) ||
++         !msr_area_valid(v, VM_EXIT_MSR_LOAD_ADDR, VM_EXIT_MSR_LOAD_COUNT) ||
++         !msr_area_valid(v, VM_ENTRY_MSR_LOAD_ADDR, VM_ENTRY_MSR_LOAD_COUNT) )
++        goto invalid_control_state;
++
+     nvcpu->nv_vmentry_pending = 1;
+ 
+     return VMX_INSN_SUCCEED;
+@@ -1777,15 +1878,10 @@ static int nvmx_handle_vmlaunch(struct cpu_user_regs *regs)
+         return X86EMUL_OKAY;
+     }
+     else {
++        /* virtual_vmentry() launches the VMCS. */
+         rc = nvmx_vmresume(v);
+         if ( rc )
+             vmfail_valid(regs, rc);
+-        else
+-        {
+-            if ( set_vvmcs_launched(&nvmx->launched_list,
+-                                    PFN_DOWN(v->arch.hvm.vmx.vmcs_shadow_maddr)) < 0 )
+-                return X86EMUL_UNHANDLEABLE;
+-        }
+         rc = X86EMUL_OKAY;
+     }
+     return rc;
+@@ -2354,8 +2450,9 @@ int nvmx_msr_read_intercept(unsigned int msr, u64 *msr_content)
+         data = hvm_cr4_guest_valid_bits(d);
+         break;
+     case MSR_IA32_VMX_MISC:
+-        /* Do not support CR3-targets or activity states. */
+-        data = host_data & ~(VMX_MISC_CR3_TARGET | VMX_MISC_ACTIVITY_MASK);
++        /* No CR3-targets or activity states; MSR lists of NVMX_MAX_MSRS. */
++        data = host_data & ~(VMX_MISC_CR3_TARGET | VMX_MISC_ACTIVITY_MASK |
++                             VMX_MISC_MAX_MSRS);
+         break;
+     case MSR_IA32_VMX_EPT_VPID_CAP:
+         data = nept_get_ept_vpid_cap();
+diff --git a/xen/arch/x86/include/asm/hvm/vmx/vmcs.h b/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
+index d0716e97d2..24b502382f 100644
+--- a/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
++++ b/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
+@@ -304,6 +304,7 @@ void vmx_vmcs_reload(struct vcpu *v);
+ #define VMX_MISC_ACTIVITY_MASK                  0x000001c0
+ #define VMX_MISC_PROC_TRACE                     0x00004000
+ #define VMX_MISC_CR3_TARGET                     0x01ff0000
++#define VMX_MISC_MAX_MSRS                       0x0e000000
+ #define VMX_MISC_VMWRITE_ALL                    0x20000000
+ 
+ #define VMX_TSC_MULTIPLIER_MAX                  0xffffffffffffffffULL
+-- 
+2.25.1
 
- #define HSR_EC_UNKNOWN              0x00
-diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-index 2cd1c021b5..474ab5deda 100644
---- a/xen/arch/arm/setup.c
-+++ b/xen/arch/arm/setup.c
-@@ -117,6 +117,7 @@ static void __init processor_id(void)
-     struct cpuinfo_arm *c = &system_cpuinfo;
-
-     identify_cpu(c);
-+    update_system_pmu_num_cntrs();
-     current_cpu_data = *c;
-
-     if ( c->midr.implementer < ARRAY_SIZE(processor_implementers) &&
---
-2.43.0
 
