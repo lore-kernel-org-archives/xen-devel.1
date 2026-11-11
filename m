@@ -2,44 +2,44 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3720E606A8B2
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E05E606A8B3
 	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2026 18:09:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=casper.20170209 header.b=fgVrUACa
-Received: from list by lists.xenproject.org with outflank-mailman.1484482.1687839 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=desiato.20200630 header.b=rdCdM0Bg
+Received: from list by lists.xenproject.org with outflank-mailman.1484491.1687905 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRClL-0000JY-7E; Wed, 11 Nov 2026 18:09:35 +0000
+	id 1xRClR-0001ye-UO; Wed, 11 Nov 2026 18:09:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1484482.1687839; Wed, 11 Nov 2026 18:09:34 +0000
+Received: by outflank-mailman (output) from mailman id 1484491.1687905; Wed, 11 Nov 2026 18:09:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRClK-0000HV-IJ; Wed, 11 Nov 2026 18:09:34 +0000
-Received: by outflank-mailman (input) for mailman id 1484482;
- Wed, 11 Nov 2026 18:09:31 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xRClR-0001wf-9j; Wed, 11 Nov 2026 18:09:41 +0000
+Received: by outflank-mailman (input) for mailman id 1484491;
+ Wed, 11 Nov 2026 18:09:32 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <BATV+abad5507353db368323c+8480+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1xRClH-00089O-Gl
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 18:09:31 +0000
+ <BATV+6fbd95a72608138381e9+8480+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 1xRClI-0008Am-CK
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 18:09:32 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xRClG-00FSoo-Tg; Wed, 11 Nov 2026 19:09:30 +0100
-Received: from [10.42.69.10] (helo=localhost)
+ id 1xRClH-001L0E-OW; Wed, 11 Nov 2026 19:09:31 +0100
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <BATV+abad5507353db368323c+8480+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6af4af53-2eae-0a2a0a5409dd-0a2a450aba5c-4
- for <multiple-recipients>; Wed, 11 Nov 2026 19:09:30 +0100
-Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ <BATV+6fbd95a72608138381e9+8480+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 6af4af58-e002-0a2a0a5209dd-0a2a450baae0-14
+ for <multiple-recipients>; Wed, 11 Nov 2026 19:09:31 +0100
+Received: from [90.155.92.199] (helo=desiato.infradead.org)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <BATV+abad5507353db368323c+8480+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6af4af55-f2d2-0a2a450a0019-5a9b3222ba54-3
- for <multiple-recipients>; Wed, 11 Nov 2026 19:09:25 +0100
+ <BATV+6fbd95a72608138381e9+8480+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 6af4af5b-b7e8-0a2a450b0019-5a9b5cc7cf88-3
+ for <multiple-recipients>; Wed, 11 Nov 2026 19:09:31 +0100
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.100.1 #2 (Red Hat Linux))
- id 1xRCl9-0000000CKvf-2M2F; Wed, 11 Nov 2026 18:09:23 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.100.1 #2 (Red Hat Linux))
+ id 1xRClB-00000009PvM-3ChP; Wed, 11 Nov 2026 18:09:30 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.5 #2 (Red
- Hat Linux)) id 1xRCl9-0000000HWsu-1UOe;
+ Hat Linux)) id 1xRCl9-0000000HWsS-0BMB;
  Wed, 11 Nov 2026 18:09:23 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -48,17 +48,17 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=desiato.20200630 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
-	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=mKH9BxiVhD1hkWOxu0QRNvIl232YhI8uqiNY5R0UwSo=; b=fgVrUACaSLph0J26X6E/7/ickG
-	K3hS2UAraMzNHVHR2xkmPOrKX5AWdkNZ7oeNDrtt6pCdiGRLupJwii0llUquynMXlz8ehO5gqHKZ/
-	LlusvvLB8cDDCGYWPA97DJuDxBDNgikoDSBuosnQOTWifs5oXmIBM4b574rSa0FqdIhcYpcTVN825
-	ff9cnbKHI+kdyVlzabIpLVrfUWJb4D6fKPlbkHhJ8f5fQeRT6XvfdXbg5S0HzJAYhQMN6+0qRsonE
-	tIfL4thRfwH/L2EDJolKRkyypzcIDGzsXVywbP/wFBejG/rKp13lKdeQYqbPkG/4K98Cob01nZEcY
-	OMkEqRyQ==;
+	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:
+	To:From:Reply-To:Content-ID:Content-Description;
+	bh=1V/mMwjMcC+MDxHM1oxRcKL+FYzfa4UsShC/QgnT6ts=; b=rdCdM0Bga8RtX//t2h5oWGV5nk
+	NrobMdHnlsWWu0fgt/I6d+ha7L+1JiD2Yc69jvBxcI0t87Fu1wdOzrbXUF9Sl9320wCVdwrZw9cJj
+	NbhmdPRAuOGTvIuEGQLSGH9X+krDkyse4Uw4uoGtbdSBbLPrCx26hLJfYW/Yiz3obm/FgivEyR71R
+	KOTaGZLj6mqMvr1sMoN9zYhouAr/CwehIYcUGB+yqMCzdNILkxNX+221aePpyOCf+nOIMb5T6xD5m
+	B1LVp9DnDtrKs93W47JR2nQ+MoRKidU8EDEwvrJ/xvN0opSznxIg6wJh1sgPhmS7Vl3rjPD7iBDcr
+	4P99dECw==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: kvm@vger.kernel.org
 Cc: linux-kernel@vger.kernel.org,
@@ -87,144 +87,212 @@ Cc: linux-kernel@vger.kernel.org,
 	Dongli Zhang <dongli.zhang@oracle.com>,
 	joe.jin@oracle.com,
 	David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v13 14/26] UAPI: x86: Move pvclock-abi to UAPI for x86 platforms
-Date: Wed, 11 Nov 2026 10:09:10 -0800
-Message-ID: <20261111180922.4177927-15-dwmw2@infradead.org>
+Subject: [PATCH v13 07/26] KVM: x86: Don't latch the Hyper-V TSC page from a superseded snapshot
+Date: Wed, 11 Nov 2026 10:09:03 -0800
+Message-ID: <20261111180922.4177927-8-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261111180922.4177927-1-dwmw2@infradead.org>
 References: <20261111180922.4177927-1-dwmw2@infradead.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-4011c0/1794420570-5A1DDCFC-51B6E4A1/0/0
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
+X-purgate-ID: tlsNG-42698a/1794420571-190CD9EA-54AE56BD/0/0
 X-purgate-type: clean
-X-purgate-size: 3998
-X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-purgate-size: 7902
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Jack Allister <jalliste@amazon.com>
+From: David Woodhouse <dwmw@amazon.co.uk>
 
-A subsequent commit will provide a new KVM interface for performing a
-fixup/correction of the KVM clock against the reference TSC. The
-KVM_[GS]ET_CLOCK_GUEST API requires a pvclock_vcpu_time_info, as such
-the caller must know about this definition.
+The Hyper-V TSC page is rewritten from kvm_guest_time_update() when its
+HOST_CHANGED state is set, and latches to HV_TSC_PAGE_SET, which blocks
+further rewrites. But the state is set before the new pvclock snapshot
+is published (setting it takes hv_lock, a mutex, so it cannot happen
+inside the tsc_write_lock section), and nothing validates the snapshot
+the consumer is holding. Two interleavings latch stale parameters which
+nothing then rewrites until some unrelated clock event invalidates the
+page again:
 
-Move the definition to the UAPI folder so that it is exported to
-usermode, change the type definitions to use the standard for UAPI
-exports, and add the Linux-syscall-note exception to the SPDX licence
-identifier as is conventional for exported headers.
+ - A vCPU handling an unrelated KVM_REQ_CLOCK_UPDATE completes its
+   pvclock read, is preempted (or sleeps in kvm_write_guest(), holding
+   hv_lock), a KVM_SET_CLOCK completes meanwhile, and the vCPU then
+   writes the page from the old snapshot and sets HV_TSC_PAGE_SET —
+   consuming the state intended for the new one.
 
-Define __KERNEL__ in scripts/xen-hypercalls.sh: the UAPI header now
-pulls in linux/types.h, and the script's raw $CPP invocation with
-$LINUXINCLUDE does not define it, which would trigger the "attempt to
-use kernel headers from user space" warning from the UAPI type
-headers.
+ - The state is consumed legitimately an instant before the publish,
+   writing values which were current at that moment and superseded the
+   next; the CLOCK_UPDATE broadcast which follows the publish finds
+   HV_TSC_PAGE_SET and rewrites nothing.
 
-Signed-off-by: Jack Allister <jalliste@amazon.com>
+For a KVM_SET_CLOCK stepping kvmclock_offset — a live migration
+restore — the page is left disagreeing with the restored clock by the
+full step.
+
+Close the first at the consumer: kvm_hv_setup_tsc_page() revalidates
+the pvclock seqcount under hv_lock — it must be under the lock, or the
+consumer could be preempted between a check and the consumption — and
+requeues the clock update rather than consume the state against a
+superseded snapshot. Close the second by re-marking the page once the
+new snapshot is published, with a CLOCK_UPDATE queued on every vCPU
+behind the re-mark: the broadcast from kvm_end_pvclock_update() can
+have been entirely consumed by then, and no vCPU in particular is
+guaranteed to ever run again. The hv_lock mutex which lets a consumer
+sleep across the whole update is also what serializes its write
+against the re-mark, so the queued consumer always finds either fresh
+page contents or the HOST_CHANGED state; guests which never enabled
+the page skip the broadcast entirely.
+
+Fixes: cc9cfddb0433 ("KVM: x86: hyper-v: Track Hyper-V TSC page status")
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-Reviewed-by: Paul Durrant <paul@xen.org>
-Tested-by: Dongli Zhang <dongli.zhang@oracle.com>
 ---
- MAINTAINERS                                   |  4 +--
- arch/x86/include/{ => uapi}/asm/pvclock-abi.h | 27 ++++++++++---------
- scripts/xen-hypercalls.sh                     |  2 +-
- 3 files changed, 18 insertions(+), 15 deletions(-)
- rename arch/x86/include/{ => uapi}/asm/pvclock-abi.h (82%)
+ arch/x86/kvm/hyperv.c | 20 ++++++++++++++++++--
+ arch/x86/kvm/hyperv.h | 10 ++++++----
+ arch/x86/kvm/x86.c    | 36 +++++++++++++++++++++++++++++++++++-
+ 3 files changed, 59 insertions(+), 7 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 9fadc98d3c49..773f7c800f6a 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -14663,8 +14663,8 @@ S:	Supported
- T:	git git://git.kernel.org/pub/scm/virt/kvm/kvm.git
- F:	arch/um/include/asm/kvm_para.h
- F:	arch/x86/include/asm/kvm_para.h
--F:	arch/x86/include/asm/pvclock-abi.h
- F:	arch/x86/include/uapi/asm/kvm_para.h
-+F:	arch/x86/include/uapi/asm/pvclock-abi.h
- F:	arch/x86/kernel/kvm.c
- F:	arch/x86/kernel/kvmclock.c
- F:	include/asm-generic/kvm_para.h
-@@ -29780,8 +29780,8 @@ R:	Boris Ostrovsky <boris.ostrovsky@oracle.com>
- L:	xen-devel@lists.xenproject.org (moderated for non-subscribers)
- S:	Supported
- F:	arch/x86/configs/xen.config
--F:	arch/x86/include/asm/pvclock-abi.h
- F:	arch/x86/include/asm/xen/
-+F:	arch/x86/include/uapi/asm/pvclock-abi.h
- F:	arch/x86/platform/pvh/
- F:	arch/x86/xen/
+diff --git a/arch/x86/kvm/hyperv.c b/arch/x86/kvm/hyperv.c
+index 5d2e3617c952..56da410a7f32 100644
+--- a/arch/x86/kvm/hyperv.c
++++ b/arch/x86/kvm/hyperv.c
+@@ -1182,9 +1182,11 @@ static inline bool tsc_page_update_unsafe(struct kvm_hv *hv)
+ 		hv->hv_tsc_emulation_control;
+ }
  
-diff --git a/arch/x86/include/asm/pvclock-abi.h b/arch/x86/include/uapi/asm/pvclock-abi.h
-similarity index 82%
-rename from arch/x86/include/asm/pvclock-abi.h
-rename to arch/x86/include/uapi/asm/pvclock-abi.h
-index b9fece5fc96d..6d70cf640362 100644
---- a/arch/x86/include/asm/pvclock-abi.h
-+++ b/arch/x86/include/uapi/asm/pvclock-abi.h
-@@ -1,6 +1,9 @@
--/* SPDX-License-Identifier: GPL-2.0 */
-+/* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
- #ifndef _ASM_X86_PVCLOCK_ABI_H
- #define _ASM_X86_PVCLOCK_ABI_H
+-void kvm_hv_setup_tsc_page(struct kvm *kvm,
+-			   struct pvclock_vcpu_time_info *hv_clock)
++void kvm_hv_setup_tsc_page(struct kvm_vcpu *v,
++			   struct pvclock_vcpu_time_info *hv_clock,
++			   unsigned int seq)
+ {
++	struct kvm *kvm = v->kvm;
+ 	struct kvm_hv *hv = to_kvm_hv(kvm);
+ 	u32 tsc_seq;
+ 	u64 gfn;
+@@ -1202,6 +1204,20 @@ void kvm_hv_setup_tsc_page(struct kvm *kvm,
+ 	if (!(hv->hv_tsc_page & HV_X64_MSR_TSC_REFERENCE_ENABLE))
+ 		return;
+ 
++	/*
++	 * @hv_clock derives from the pvclock snapshot current at @seq.
++	 * Consuming the HOST_CHANGED state against a superseded snapshot
++	 * would latch stale parameters as HV_TSC_PAGE_SET, which nothing
++	 * then rewrites; the check must be made here, under hv_lock, or
++	 * this vCPU could be preempted between a check and the
++	 * consumption while an update completes. Leave the state alone
++	 * and requeue; the retry reads the new snapshot.
++	 */
++	if (read_seqcount_retry(&kvm->arch.pvclock_sc, seq)) {
++		kvm_make_request(KVM_REQ_CLOCK_UPDATE, v);
++		return;
++	}
 +
-+#include <linux/types.h>
+ 	gfn = hv->hv_tsc_page >> HV_X64_MSR_TSC_REFERENCE_ADDRESS_SHIFT;
+ 	/*
+ 	 * Because the TSC parameters only vary when there is a
+diff --git a/arch/x86/kvm/hyperv.h b/arch/x86/kvm/hyperv.h
+index 622a6553e9ac..62e7922440aa 100644
+--- a/arch/x86/kvm/hyperv.h
++++ b/arch/x86/kvm/hyperv.h
+@@ -284,8 +284,9 @@ static inline bool kvm_hv_invtsc_suppressed(struct kvm_vcpu *vcpu)
+ 
+ void kvm_hv_process_stimers(struct kvm_vcpu *vcpu);
+ 
+-void kvm_hv_setup_tsc_page(struct kvm *kvm,
+-			   struct pvclock_vcpu_time_info *hv_clock);
++void kvm_hv_setup_tsc_page(struct kvm_vcpu *v,
++			   struct pvclock_vcpu_time_info *hv_clock,
++			   unsigned int seq);
+ void kvm_hv_request_tsc_page_update(struct kvm *kvm);
+ 
+ void kvm_hv_xsaves_xsavec_maybe_warn(struct kvm_vcpu *vcpu);
+@@ -377,8 +378,9 @@ static inline void kvm_hv_nested_transtion_tlb_flush(struct kvm_vcpu *vcpu,
+ 
+ int kvm_hv_vcpu_flush_tlb(struct kvm_vcpu *vcpu);
+ #else /* CONFIG_KVM_HYPERV */
+-static inline void kvm_hv_setup_tsc_page(struct kvm *kvm,
+-					 struct pvclock_vcpu_time_info *hv_clock) {}
++static inline void kvm_hv_setup_tsc_page(struct kvm_vcpu *v,
++					 struct pvclock_vcpu_time_info *hv_clock,
++					 unsigned int seq) {}
+ static inline void kvm_hv_request_tsc_page_update(struct kvm *kvm) {}
+ static inline void kvm_hv_xsaves_xsavec_maybe_warn(struct kvm_vcpu *vcpu) {}
+ static inline void kvm_hv_init_vm(struct kvm *kvm) {}
+diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
+index 05c801973a7f..f7af94d8b3bb 100644
+--- a/arch/x86/kvm/x86.c
++++ b/arch/x86/kvm/x86.c
+@@ -1789,6 +1789,36 @@ static void kvm_end_pvclock_update(struct kvm *kvm)
+ 		kvm_clear_request(KVM_REQ_MCLOCK_INPROGRESS, vcpu);
+ }
+ 
++/*
++ * Re-mark the Hyper-V TSC page once a new pvclock snapshot is published:
++ * the mark made before the update may have been legitimately consumed an
++ * instant before the publish, writing values the publish then superseded.
++ * The consumer must be queued after the re-mark: the CLOCK_UPDATE
++ * broadcast from kvm_end_pvclock_update() can have been entirely consumed
++ * by the time the re-mark lands, since a consumer may sleep in
++ * kvm_hv_setup_tsc_page() (hv_lock is a mutex) across the whole update —
++ * the same sleep which serializes it against this re-mark. Queue on
++ * every vCPU: any one suffices (the page is VM-wide), but none in
++ * particular is guaranteed to ever run again.
++ */
++static void kvm_hv_remark_tsc_page(struct kvm *kvm)
++{
++#ifdef CONFIG_KVM_HYPERV
++	kvm_hv_request_tsc_page_update(kvm);
 +
- #ifndef __ASSEMBLER__
++	/*
++	 * Racy, but benign: a transition to HV_TSC_PAGE_SET in the
++	 * instants after the re-mark means a consumer has just written
++	 * the page from the current snapshot, and a guest which never
++	 * enabled the page (UNSET/BROKEN, the common case) needs no
++	 * broadcast at all.
++	 */
++	if (READ_ONCE(to_kvm_hv(kvm)->hv_tsc_page_status) ==
++	    HV_TSC_PAGE_HOST_CHANGED)
++		kvm_make_all_cpus_request(kvm, KVM_REQ_CLOCK_UPDATE);
++#endif
++}
++
+ static void kvm_update_masterclock(struct kvm *kvm)
+ {
+ 	kvm_hv_request_tsc_page_update(kvm);
+@@ -1961,6 +1991,7 @@ int kvm_guest_time_update(struct kvm_vcpu *v)
+ 	} while (read_seqcount_retry(&ka->pvclock_sc, seq));
+ #else
+ 	const bool use_master_clock = false;
++	unsigned int seq = read_seqcount_begin(&ka->pvclock_sc);
+ #endif
+ 	/*
+ 	 * Ensure reading the TSC+frequency pair is done on the same CPU.  When
+@@ -2056,7 +2087,7 @@ int kvm_guest_time_update(struct kvm_vcpu *v)
+ 		hv_clock.flags &= ~PVCLOCK_GUEST_STOPPED;
+ 	}
  
- /*
-@@ -24,20 +27,20 @@
-  */
+-	kvm_hv_setup_tsc_page(v->kvm, &hv_clock);
++	kvm_hv_setup_tsc_page(v, &hv_clock, seq);
  
- struct pvclock_vcpu_time_info {
--	u32   version;
--	u32   pad0;
--	u64   tsc_timestamp;
--	u64   system_time;
--	u32   tsc_to_system_mul;
--	s8    tsc_shift;
--	u8    flags;
--	u8    pad[2];
-+	__u32   version;
-+	__u32   pad0;
-+	__u64   tsc_timestamp;
-+	__u64   system_time;
-+	__u32   tsc_to_system_mul;
-+	__s8    tsc_shift;
-+	__u8    flags;
-+	__u8    pad[2];
- } __attribute__((__packed__)); /* 32 bytes */
+ #ifdef CONFIG_KVM_XEN
+ 	/*
+@@ -4572,6 +4603,9 @@ static int kvm_vm_ioctl_set_clock(struct kvm *kvm, void __user *argp)
+ 		now_raw_ns = get_kvmclock_base_ns();
+ 	ka->kvmclock_offset = data.clock - now_raw_ns;
+ 	kvm_end_pvclock_update(kvm);
++
++	/* As in kvm_update_masterclock(): re-mark after publishing. */
++	kvm_hv_remark_tsc_page(kvm);
+ 	return 0;
+ }
  
- struct pvclock_wall_clock {
--	u32   version;
--	u32   sec;
--	u32   nsec;
-+	__u32   version;
-+	__u32   sec;
-+	__u32   nsec;
- } __attribute__((__packed__));
- 
- #define PVCLOCK_TSC_STABLE_BIT	(1 << 0)
-diff --git a/scripts/xen-hypercalls.sh b/scripts/xen-hypercalls.sh
-index f18b00843df3..51a722198997 100755
---- a/scripts/xen-hypercalls.sh
-+++ b/scripts/xen-hypercalls.sh
-@@ -5,7 +5,7 @@ shift
- in="$@"
- 
- for i in $in; do
--	eval $CPP $LINUXINCLUDE -dD -imacros "$i" -x c /dev/null
-+	eval $CPP -D__KERNEL__ $LINUXINCLUDE -dD -imacros "$i" -x c /dev/null
- done | \
- awk '$1 == "#define" && $2 ~ /__HYPERVISOR_[a-z][a-z_0-9]*/ { v[$3] = $2 }
- 	END {   print "/* auto-generated by scripts/xen-hypercall.sh */"
 -- 
 2.43.0
 
