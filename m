@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0B63A606A33C
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2026 14:24:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D7023606A321
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2026 14:24:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=WhGSZ9Zo
-Received: from list by lists.xenproject.org with outflank-mailman.1483778.1687136 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=Tc4MxeXa
+Received: from list by lists.xenproject.org with outflank-mailman.1483786.1687145 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xR9FO-0002mG-D5; Wed, 11 Nov 2026 14:24:22 +0000
+	id 1xR9Fj-0003HA-NE; Wed, 11 Nov 2026 14:24:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1483778.1687136; Wed, 11 Nov 2026 14:24:22 +0000
+Received: by outflank-mailman (output) from mailman id 1483786.1687145; Wed, 11 Nov 2026 14:24:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xR9FO-0002m7-9o; Wed, 11 Nov 2026 14:24:22 +0000
-Received: by outflank-mailman (input) for mailman id 1483778;
- Wed, 11 Nov 2026 14:24:21 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xR9FN-0002l3-Ah
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 14:24:21 +0000
+	id 1xR9Fj-0003H3-K5; Wed, 11 Nov 2026 14:24:43 +0000
+Received: by outflank-mailman (input) for mailman id 1483786;
+ Wed, 11 Nov 2026 14:24:42 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xR9Fi-0003Gn-PT
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 14:24:42 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xR9FM-00GMyo-Nq
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 15:24:20 +0100
-Received: from [10.42.69.7] (helo=localhost)
+ id 1xR9Fi-0006Qt-69
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 15:24:42 +0100
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6af47a91-8faa-0a2a0a5109dd-0a2a4507d7e8-4
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 15:24:20 +0100
-Received: from [209.85.221.48] (helo=mail-wr1-f48.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6af47aa6-bab6-0a2a0a5309dd-0a2a45099fe8-10
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 15:24:42 +0100
+Received: from [209.85.128.51] (helo=mail-wm1-f51.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6af47a94-b4ea-0a2a45070019-d155dd30adaa-3
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 15:24:20 +0100
-Received: by mail-wr1-f48.google.com with SMTP id
- ffacd0b85a97d-48e10a70540so1966741f8f.1
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 06:24:20 -0800 (PST)
+ id 6af47aa9-be1a-0a2a45090019-d1558033e81c-3
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 15:24:42 +0100
+Received: by mail-wm1-f51.google.com with SMTP id
+ 5b1f17b1804b1-49d05d51553so22575135e9.2
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 06:24:41 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-498365cbbe5sm12527380f8f.42.2026.11.11.06.24.18
+ 5b1f17b1804b1-4bb4c5202f4sm173965e9.12.2026.11.11.06.24.40
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Nov 2026 06:24:18 -0800 (PST)
+ Wed, 11 Nov 2026 06:24:40 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,52 +51,52 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1794407060; x=1795011860; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1794407081; x=1795011881; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=ENiUMWYjoTv5oytUFd7mvjFfA3odhY6gUV2WS7ldYx8=;
-        b=WhGSZ9ZoavnEPwviflUecbAEk7iIpE1C+W1mHyLyL9WQyTcRFdcPikHKteinDxuLYK
-         jcgsXGPAKAD+NsHyekggix1SiA4XbdEBZCCducOxpLdjdHHL2eEcgpPHWno1b6E91NLv
-         3hXVSzS9cCFFN0XykCSCykGFxGJPTFyNHB9dFnvGk2VRMiAhbhuS3nPudT0sJStU3br1
-         hc9y6BznfwINftTxpOwC1LIwvFip/c1msKKJ4eRx8rUCck/1M3RWX9HSPs47wS4EPckk
-         khKh+7wSt57fTHglfD5vH1IOPb1TaO5XlNzcCSckleTPwnhWXubATwkDgWR++vzjzKlW
-         1SQQ==
+        bh=P/DlLEIyPeOpj4zKyWi62w1Q9dNY6I9tt8Tm2qptmxw=;
+        b=Tc4MxeXaJtq3KU76RILfUm6hkLWUSISebmLRlKDWM+Gzlp0rStxacRq7EKk3sHSBEz
+         A6B+3K4GUUcshCdbROYJ1KJYjPIQTbN7cCZNC6LcsYysTAws9+qWWZR98sW5gVxhaO3v
+         6FTHCuR+1+1Uw8PxS9t7kAafj40tOcvAks4fMPRiaetPz05A+Fhm5R0n+YsP+HNn34O4
+         BAaGRlyWOMSLYaZCaHnAXOym7Pkl2A7uB9+t8kmy5aJ3GFIef/+CNgV/DypCKq3eYzVQ
+         /xNEpttCXtucbVHxAZg7y3omALVVBkIYZ3GbBf9EgK/zMAyDndVG3bExvW/Yi2KBIU4H
+         YoDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794407060; x=1795011860;
+        d=1e100.net; s=20260707; t=1794407081; x=1795011881;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=ENiUMWYjoTv5oytUFd7mvjFfA3odhY6gUV2WS7ldYx8=;
-        b=mWW13XW5yobJSEFGTJbJQG62+7hAL4QRCmNxEeP+R8ot5/iofWNypK1Y79oIg7R4rH
-         na0mWeL8GJpoNpXDXG+EHqb95OUggIbZdZEkSCX7ooxcuB9ThP908Q6F7xViwwZ86QMe
-         PA74r4mLlJlNjiBUH99EjUGWyqTQwMv/HjqXv/wu5OOem7wjmcr2nAse5SKodfz7LtxB
-         2OiymAlzhUXm0pu58IFkruV8f80WwBm3+5wiUxHpq5ktiWiJMlaUj20GsbKTlkvSDadz
-         VWcHL6vSwkQtYvmnq1SjCB/vbNqFCwH5E/2QHD4KboQOvZUQC8R03heAll9MZEQW4miY
-         KpCw==
-X-Gm-Message-State: APuU4Z999+/gvzapPjxJTg2OXVH7CYg4yrJNHP+Os2LGWlj6KjB9w7qd
-	7m5aJ8JzPBvuLZgiP6HRq0XLBRcDRtmjm+cpvG8aGQUoyHsVPmEk2mbnakB5eoHbFBCzOwA/Hwh
-	+kLkY/w==
-X-Gm-Gg: AYBFou3OeiOZlWGGS2K6jxLPZi+7idx9tQraRroYNRxPr3fPzaIoup0AFYrDp29JylP
-	rPYxWoiAwoVc9XL0QQRkaLjswHS9OcmT1Ifv5LzSdityUdyDoKWnPE3gi1rCm5GqwDQBV6iga1Q
-	xPNhANrIJjTELgAO+0PI1MDIn+xwyJEvxIqno1lk+/rpTR8FSpkVDAlIqqjQknIYL933EnD/U3D
-	66gb4goBhiC7vTi756T0f1pup6b8R5GHpKLaFbbuLPMxcwVuMMeDEpwxKknU/hA2zDk3bRggshP
-	moo3VoYA2qN1p80nQ4dZc3DeuXgoph+VaShFYPLeFIi0H1laF1sEiXQX+kggPfHI1FIT9TRjzXK
-	ZrQjejBLD0YX0V8snw6pd2SkSuaz2V7mvSQS+VveWiWEMOu5smhO5M/H8mwZFJe2zuXNm9/NIRG
-	bDgYWYP78Uhzx8F6ktz7oYmT6jchxWIMitdvyE4QTQfL21vBZHppM/VkWJk195KG0J1Bk3an78+
-	bIQdNbWjas4S84xViiX0BcPcuxQRwfiMaoCiiFl+wdkQIh/upQ8N71k8ziknHCZfVMX8sdqQdBc
-	yjg4EX98Pp1Bcfo+gqt71e8YWCSHztvhnBjxB+p0s81RPMVvTuiDtfSlHL90RiK3DsAJ1N+R8tv
-	Xg2uPKD8uP+c/BU4zPQ==
-X-Received: by 2002:a5d:5f91:0:b0:492:b5e9:4916 with SMTP id ffacd0b85a97d-499c64055a9mr4226176f8f.24.1794407060063;
-        Wed, 11 Nov 2026 06:24:20 -0800 (PST)
-Message-ID: <67bcd46e-28dd-4b17-a4e6-48d8c9b8906b@suse.com>
-Date: Wed, 11 Nov 2026 15:24:18 +0100
+        bh=P/DlLEIyPeOpj4zKyWi62w1Q9dNY6I9tt8Tm2qptmxw=;
+        b=jVOiwICDHmOY3FsX0FYY7J3wapnwujva2J+0Oga+xqokMxpLn9w3pYhjck9cx8ctls
+         KZWlblfuwf1fdVmJVG3S/WJMfToWJcHfiMWRun77pOsji7y2I39IqdT+IXWZfCH3uUl/
+         iYHo1npYVLB1ucPJdD5glJ4G8HxMtBNsO8lZjuKh5DLaCA7B/vGZLjYBqEho+fJhsvFm
+         WIAAUVQaVChnMCE60O6PtwK6XTT8OaoFDVeQnRXep087Ww6v7qeA3PIULJs6Tj+7qAJ9
+         h90d3ZWSekgr8hkP3GHWAqjIJApRF0Q4abYG20pRM7EIWHdHrdScrxNRMyp+dBs33b6V
+         5CfQ==
+X-Gm-Message-State: APuU4Z/9QQ++qBMQobua7/C1WrzOcSt/oQj+9AabhPpiREOoocSQGz7Q
+	Fa/0tiN9YuRdBSawOgdPBZiLv941U2XoBd+S/Gv4ZiembJkrBUUwVBDmdNNNwjhmcunBolN2zck
+	aBXdeqA==
+X-Gm-Gg: AYBFou3dPXT6ps2bs4tjVG4mU6gri/ySZDawBmYQ0794As0eCcPFmVrb/aXrOaLLWnx
+	WeXg2kI2x6F4i2ak9RaHX/FkqL02jByZjRJJqzLghAeAmGxqpD9MwVM5HhJn+/ZXgF9Wc1zI+iY
+	nyKHYPgST4JwJTHNdcpfGMEYfJFDzUpsCg3xaaRBjTAVyoZ+861905WQhgvfEFxyAXNk73LFUBi
+	XKjd3AVE6IuGkkhr4kSDqXrQUbAH1Gn1ufmlHgVuvEx6repyqMsxv5YaSBWpOSEH+ihM1C9Fpuh
+	cnUmP/lN7ynvGLwu97p2P6cGVsLG/Zs0HXA1y3Ozs5EO0rTw84Eoot7Q4rxK7QoLxyEII/slGjj
+	DIhR0VPazh86TkD6tz90/JoNlEEKW1Oyi42ImrUgkPgIjwZ6jrblRDyQWVsxSDfOOPZxjiMHj5c
+	r9xg/HyrKlCt2mss9Wr9fvmeeth+9CQbVc0NGBspdP0BM4/Nmvy9Kp/dx/GuWvb11IFcufBp9oh
+	iKNrtXtuF58FImWVvS6+c/Aj7VmyybWoH34dQAu5D3b0U1MB0+wKEX4KrDo1JXMn9nWYjnDuqQE
+	PmP4GZMKYcekaD98iSkM/CR4hjNQr56STDdsFdPtoSBcQl+RF9KRUxJts6nj3TBkZ7hEZPPvA7M
+	mAM9cd5l2MSEnpgZSUA==
+X-Received: by 2002:a05:600c:3544:b0:4a4:de70:2ad4 with SMTP id 5b1f17b1804b1-4ba0938e165mr46957415e9.22.1794407081479;
+        Wed, 11 Nov 2026 06:24:41 -0800 (PST)
+Message-ID: <c697a485-5977-4759-adfc-cf44d6f2d502@suse.com>
+Date: Wed, 11 Nov 2026 15:24:39 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 09/30] x86emul: APX_F REX2 testing
+Subject: [PATCH 10/30] x86emul: support JMPABS
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -130,9 +130,9 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <17d56a5d-41f2-4691-aea7-d6dfdde5ad32@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ef75cf/1794407060-A7AD0AE4-A20C721F/10/78276251493
+X-purgate-ID: tlsNG-bad1c0/1794407082-3BCD7034-6284A34A/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 8858
+X-purgate-size: 2706
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -141,227 +141,81 @@ X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Re-use the blowfish code for this, by replacing uses of %r8, %r9, and
-%r10-%r15 with %r18, %r19, and %r20-%r25 respectively.
-
-At the same time consume fuzzing input to prefill the eGPR-s when
-accessible.
-
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-SDE: -future (9.38.0 or later)
----
-load_egpr() doesn't strictly need the __builtin_constant_p() dependency.
-I coded it up to make sure previous open-coding of the logic would be
-replaced by binary-identical code. If we want to keep it, check_egpr()
-may want to gain an equivalent alternative.
 
---- a/tools/fuzz/x86_instruction_emulator/fuzz-emul.c
-+++ b/tools/fuzz/x86_instruction_emulator/fuzz-emul.c
-@@ -1031,6 +1031,56 @@ int LLVMFuzzerTestOneInput(const uint8_t
- 
-     disable_hooks(&ctxt);
- 
-+    if ( cpu_has_apx_f )
-+    {
-+        uint64_t egpr[16];
-+
-+        /* Pre-seed the eGPR-s if enough input data is available. */
-+        if ( input_avail(&state, sizeof(egpr)) )
-+        {
-+            input_read(&state, egpr, sizeof(egpr));
-+
-+            /*
-+             * These are "mov %0, %%r<N>" encoded with hand-crafted REX2
-+             * prefixes.  The arrangement is such that no REX prefix would
-+             * be emitted, as that would conflict with the REX2 we want.
-+             */
-+            asm volatile ( ".byte 0xd5, 0x48; mov      (%0), %%eax"
-+                           :: "R" (egpr), "m" (egpr[0]) );
-+            asm volatile ( ".byte 0xd5, 0x48; mov     8(%0), %%ecx"
-+                           :: "R" (egpr), "m" (egpr[1]) );
-+            asm volatile ( ".byte 0xd5, 0x48; mov 0x2*8(%0), %%edx"
-+                           :: "R" (egpr), "m" (egpr[2]) );
-+            asm volatile ( ".byte 0xd5, 0x48; mov 0x3*8(%0), %%ebx"
-+                           :: "R" (egpr), "m" (egpr[3]) );
-+            asm volatile ( ".byte 0xd5, 0x48; mov 0x4*8(%0), %%esp"
-+                           :: "R" (egpr), "m" (egpr[4]) );
-+            asm volatile ( ".byte 0xd5, 0x48; mov 0x5*8(%0), %%ebp"
-+                           :: "R" (egpr), "m" (egpr[5]) );
-+            asm volatile ( ".byte 0xd5, 0x48; mov 0x6*8(%0), %%esi"
-+                           :: "R" (egpr), "m" (egpr[6]) );
-+            asm volatile ( ".byte 0xd5, 0x48; mov 0x7*8(%0), %%edi"
-+                           :: "R" (egpr), "m" (egpr[7]) );
-+
-+            asm volatile ( ".byte 0xd5, 0x4c; mov 0x8*8(%0), %%eax"
-+                           :: "R" (egpr), "m" (egpr[8]) );
-+            asm volatile ( ".byte 0xd5, 0x4c; mov 0x9*8(%0), %%ecx"
-+                           :: "R" (egpr), "m" (egpr[9]) );
-+            asm volatile ( ".byte 0xd5, 0x4c; mov 0xa*8(%0), %%edx"
-+                           :: "R" (egpr), "m" (egpr[10]) );
-+            asm volatile ( ".byte 0xd5, 0x4c; mov 0xb*8(%0), %%ebx"
-+                           :: "R" (egpr), "m" (egpr[11]) );
-+            asm volatile ( ".byte 0xd5, 0x4c; mov 0xc*8(%0), %%esp"
-+                           :: "R" (egpr), "m" (egpr[12]) );
-+            asm volatile ( ".byte 0xd5, 0x4c; mov 0xd*8(%0), %%ebp"
-+                           :: "R" (egpr), "m" (egpr[13]) );
-+            asm volatile ( ".byte 0xd5, 0x4c; mov 0xe*8(%0), %%esi"
-+                           :: "R" (egpr), "m" (egpr[14]) );
-+            asm volatile ( ".byte 0xd5, 0x4c; mov 0xf*8(%0), %%edi"
-+                           :: "R" (egpr), "m" (egpr[15]) );
-+        }
-+    }
-+
-     do {
-         /* FIXME: Until we actually implement SIGFPE handling properly */
-         setup_fpu_exception_handler();
---- a/tools/tests/x86_emulator/Makefile
-+++ b/tools/tests/x86_emulator/Makefile
-@@ -40,6 +40,7 @@ else
- 
- blowfish-cflags := ""
- blowfish-cflags-x86_32 := "-mno-accumulate-outgoing-args -Dstatic="
-+blowfish-cflags-x86_64 := "-DREX2 -Dstatic="
- 
- 3dnow-vecs := 8
- 3dnow-ints :=
-@@ -265,7 +266,7 @@ $(TARGET): $(OBJS)
- 
- .PHONY: clean
- clean:
--	rm -rf $(TARGET) *.o *~ core *.bin x86_emulate
-+	rm -rf $(TARGET) *.o *~ core *.bin blowfish.s x86_emulate
- 	rm -rf $(addsuffix .h,$(TESTCASES)) $(addsuffix -opmask.h,$(OPMASK))
- 	rm -rf $(addsuffix .c,$(filter-out blowfish,$(TESTCASES)))
- 
 --- a/tools/tests/x86_emulator/test_x86_emulator.c
 +++ b/tools/tests/x86_emulator/test_x86_emulator.c
-@@ -57,6 +57,80 @@ static bool blowfish_check_regs(const st
-     return regs->eax == 2 && regs->edx == 1;
- }
+@@ -1979,6 +1979,22 @@ int main(int argc, char **argv)
  
-+#ifdef __x86_64__
-+# ifdef __APX_F__
-+#  error "Needs re-work with APX_F available to the compiler"
-+# endif
-+# define load_egpr(reg, val) do { \
-+    BUILD_BUG_ON(!((reg) & 0x10)); \
-+    if ( !__builtin_constant_p(val) ) \
-+        /* mov %rax, %r\reg */ \
-+        asm volatile ( ".byte 0xd5, 0x18 | %c[rex_b]\n\t" \
-+                       ".byte 0x89, 0xc0 | %c[rm]" \
-+                       :: [rm] "i" ((reg) & 7), \
-+                          [rex_b] "i" ((bool)((reg) & 8)), \
-+                          "a" ((val) + 0UL) ); \
-+    else if ( (val) <= 0xffffffffUL ) \
-+        /* mov $ui32, %r\reg */ \
-+        asm volatile ( ".byte 0xd5, 0x10 | %c[rex_b]\n\t" \
-+                       ".byte 0xb8 | %c[r]\n\t" \
-+                       ".long %P[v]" \
-+                       :: [r] "i" ((reg) & 7), \
-+                          [rex_b] "i" ((bool)((reg) & 8)), \
-+                          [v] "i" ((val) + 0UL) ); \
-+    else \
-+        /* mov $ui64, %r\reg */ \
-+        asm volatile ( ".byte 0xd5, 0x18 | %c[rex_b]\n\t" \
-+                       ".byte 0xb8 | %c[r]\n\t" \
-+                       ".quad %P[v]" \
-+                       :: [r] "i" ((reg) & 7), \
-+                          [rex_b] "i" ((bool)((reg) & 8)), \
-+                          [v] "i" ((val) + 0UL) ); \
-+} while ( false )
+         cpu_policy.feat.movrs = movrs;
+     }
 +
-+# define check_egpr(reg, val) ({ \
-+    bool zf; \
-+    BUILD_BUG_ON(!((reg) & 0x10)); \
-+    /* cmp %rax, %r\reg */ \
-+    asm ( ".byte 0xd5, 0x18 | %c[rex_b]\n\t" \
-+          ".byte 0x39, 0xc0 | %c[rm]\n\t" \
-+          "sete %[res]" \
-+          : [res] "=qm" (zf) \
-+          : [rm] "i" ((reg) & 7), \
-+            [rex_b] "i" ((bool)((reg) & 8)), \
-+            "a" ((val) + 0UL) ); \
-+    zf; \
-+})
-+
-+static void blowfish_rex2_set_regs(struct cpu_user_regs *regs)
-+{
-+    /*
-+     * %r12...%r15 are preserved as per the ABI.  The REX2 test blob has them
-+     * replaced by %r22...%r25, which therefore take the same (preserved) role.
-+     * Seed them with recognizable values, for blowfish_rex2_check_regs() to
-+     * check.
-+     */
-+    load_egpr(22, 0x16000016);
-+    load_egpr(23, 0x17000017);
-+    load_egpr(24, 0x18000018);
-+    load_egpr(25, 0x19000019);
-+}
-+
-+static bool blowfish_rex2_check_regs(const struct cpu_user_regs *regs)
-+{
-+    return blowfish_check_regs(regs) &&
-+           check_egpr(22, 0x16000016) &&
-+           check_egpr(23, 0x17000017) &&
-+           check_egpr(24, 0x18000018) &&
-+           check_egpr(25, 0x19000019);
-+}
-+
-+static bool check_apx_f(void)
-+{
-+    return cpu_has_apx_f;
-+}
-+#endif /* __x86_64__ */
-+
- static bool simd_check__3dnow(void)
- {
-     return cpu_has_3dnow_ext && cpu_has_sse;
-@@ -303,6 +377,13 @@ static const struct {
-       .check_regs = blowfish_check_regs }
- #ifdef __x86_64__
-     BLOWFISH(64, blowfish, ),
-+    { .code = blowfish_x86_64_DREX2,
-+      .size = sizeof(blowfish_x86_64_DREX2),
-+      .bitness = 64,
-+      .name = "blowfish (REX2)",
-+      .check_cpu = check_apx_f,
-+      .set_regs = blowfish_rex2_set_regs,
-+      .check_regs = blowfish_rex2_check_regs },
- #endif
-     BLOWFISH(32, blowfish, ),
-     BLOWFISH(32, blowfish (push), _mno_accumulate_outgoing_args),
---- a/tools/tests/x86_emulator/testcase.mk
-+++ b/tools/tests/x86_emulator/testcase.mk
-@@ -23,13 +23,29 @@ endif
++    printf("%-40s", "Testing jmpabs $0x123456789abc...");
++    if ( cpu_has_apx_f )
++    {
++        instr[0] = 0xd5; instr[1] = 0x00; instr[2] = 0xa1;
++        instr[3] = 0xbc; instr[4] = 0x9a; instr[5] = 0x78; instr[6] = 0x56;
++        instr[7] = 0x34; instr[8] = 0x12; instr[9] = 0; instr[10] = 0;
++        regs.rip = (unsigned long)&instr[0];
++        rc = x86_emulate(&ctxt, &emulops);
++        if ( (rc != X86EMUL_OKAY) ||
++             (regs.rip != 0x123456789abcUL) )
++            goto fail;
++        printf("okay\n");
++    }
++    else
++        printf("skipped\n");
+ #endif /* x86-64 */
  
- endif
+     printf("%-40s", "Testing shld $1,%ecx,(%edx)...");
+--- a/xen/arch/x86/x86_emulate/decode.c
++++ b/xen/arch/x86/x86_emulate/decode.c
+@@ -689,6 +689,13 @@ decode_onebyte(struct x86_emulate_state
+         s->ea.mem.off = insn_fetch_bytes(s->ad_bytes);
+         break;
  
-+# For now don't assume an APX_F-capable compiler. Hand-craft eGPR uses instead.
-+# In an attempt to have the compiler make more use of %r8 ... %r15, prevent it
-+# from using %rbx and %rbp.  We can't also disallow %rax, %rcx, %rdx, %rsi, and
-+# %rdi, as those are the hard-wired operands of certain insns.  Since the blob
-+# is self-contained, we can then exchange %r8 ... %r15 to become %r18 ... %r25.
-+CFLAGS-REX2 := -fomit-frame-pointer -ffixed-rbx -ffixed-rbp
-+SED-REX2 := -e 's,%r1,%r2,g' -e 's,%r8,%r18,g' -e 's,%r9,%r19,g'
++    case X86EMUL_OPC_REX2 | 0xa1: /* jmpabs */
++        if ( s->ad_bytes == 8 ) /* Fetch more bytes to obtain imm64. */
++            s->imm1 = ((uint32_t)s->imm1 |
++                       ((uint64_t)insn_fetch_type(uint32_t) << 32));
++        ctxt->opcode |= MASK_INSR(s->vex.pfx, X86EMUL_OPC_PFX_MASK);
++        break;
 +
- LDFLAGS_DIRECT += $(shell { $(LD) -v --warn-rwx-segments; } >/dev/null 2>&1 && echo --no-warn-rwx-segments)
+     case 0xb8 ... 0xbf: /* mov imm{16,32,64},r{16,32,64} */
+         if ( s->op_bytes == 8 ) /* Fetch more bytes to obtain imm64. */
+             s->imm1 = ((uint32_t)s->imm1 |
+@@ -1948,6 +1955,16 @@ int x86emul_decode(struct x86_emulate_st
+     {
+         s->modrm_mod = 0xff;
+         s->modrm_reg = s->modrm_rm = s->modrm = 0;
++
++        switch ( opcode )
++        {
++        case X86EMUL_OPC_REX2 | 0xa1:
++            d = DstImplicit | SrcImm;
++            break;
++
++        default:
++            break;
++        }
+     }
  
- .PHONY: all
- all: $(TESTCASE).bin
+     if ( override_seg != x86_seg_none )
+--- a/xen/arch/x86/x86_emulate/x86_emulate.c
++++ b/xen/arch/x86/x86_emulate/x86_emulate.c
+@@ -2237,6 +2237,13 @@ x86_emulate(
+         _regs.ah = (_regs.eflags & EFLAGS_MASK) | X86_EFLAGS_MBS;
+         break;
  
- %.bin: %.c
-+ifeq ($(filter -DREX2,$($(TESTCASE)-cflags)),)
- 	$(CC) $(filter-out -M% .%,$(CFLAGS)) -c $<
-+else
-+	rm -f $*.o
-+	$(CC) $(filter-out -M% .%,$(CFLAGS)) $(CFLAGS-REX2) -S $< -o $*.s
-+	sed $(SED-REX2) -i $*.s
-+	$(AS) -o $*.o $*.s
-+	rm -f $*.s
-+endif
- 	$(LD) $(LDFLAGS_DIRECT) -N -Ttext 0x100000 -o $*.tmp $*.o
- 	$(OBJCOPY) -O binary -R .note.gnu.property $*.tmp $@
- 	rm -f $*.tmp
++    case X86EMUL_OPC_REX2 | 0xa1: /* jmpabs */
++        generate_exception_if(ad_bytes != 8 || op_bytes != 4, X86_EXC_UD);
++        generate_exception_if(!is_canonical_address(imm1), X86_EXC_GP, 0);
++        _regs.r(ip) = imm1;
++        singlestep = _regs.eflags & X86_EFLAGS_TF;
++        break;
++
+     case 0xa4 ... 0xa5: /* movs */ {
+         unsigned long nr_reps = get_rep_prefix(true, true);
+ 
 
 
