@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 51276606A326
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2026 14:25:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F149A606A326
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2026 14:25:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=YAc7ZdgG
-Received: from list by lists.xenproject.org with outflank-mailman.1483793.1687155 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=EoRMndGq
+Received: from list by lists.xenproject.org with outflank-mailman.1483802.1687163 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xR9G6-0003j7-Ut; Wed, 11 Nov 2026 14:25:06 +0000
+	id 1xR9GQ-0004CL-4s; Wed, 11 Nov 2026 14:25:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1483793.1687155; Wed, 11 Nov 2026 14:25:06 +0000
+Received: by outflank-mailman (output) from mailman id 1483802.1687163; Wed, 11 Nov 2026 14:25:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xR9G6-0003j0-RA; Wed, 11 Nov 2026 14:25:06 +0000
-Received: by outflank-mailman (input) for mailman id 1483793;
- Wed, 11 Nov 2026 14:25:05 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xR9G5-0003hX-7t
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 14:25:05 +0000
+	id 1xR9GQ-0004CE-28; Wed, 11 Nov 2026 14:25:26 +0000
+Received: by outflank-mailman (input) for mailman id 1483802;
+ Wed, 11 Nov 2026 14:25:24 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xR9GO-0004AM-Eb
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 14:25:24 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xR9G4-0041yT-KR
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 15:25:04 +0100
-Received: from [10.42.69.2] (helo=localhost)
+ id 1xR9GN-00B0dQ-Rd
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 15:25:23 +0100
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6af47ab6-2eae-0a2a0a5409dd-0a2a4502bbb4-32
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 15:25:04 +0100
-Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6af47ad3-bab6-0a2a0a5309dd-0a2a4509956a-0
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 15:25:23 +0100
+Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6af47ac0-6ca4-0a2a45020019-d1558029c923-3
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 15:25:04 +0100
-Received: by mail-wm1-f41.google.com with SMTP id
- 5b1f17b1804b1-4a20bde60a0so33073325e9.3
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 06:25:04 -0800 (PST)
+ id 6af47ad3-be1a-0a2a45090019-d1558035e0ef-3
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 15:25:23 +0100
+Received: by mail-wm1-f53.google.com with SMTP id
+ 5b1f17b1804b1-4a3517554f7so34035875e9.2
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 06:25:23 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4ba01fe64bcsm138422575e9.8.2026.11.11.06.25.02
+ 5b1f17b1804b1-4bb4c524faesm156925e9.15.2026.11.11.06.25.22
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Nov 2026 06:25:03 -0800 (PST)
+ Wed, 11 Nov 2026 06:25:22 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,52 +51,52 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1794407104; x=1795011904; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1794407123; x=1795011923; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=ExWQ0tm6tc/si7fWXX6k16GDSyAhiQgG2Ro0EjqwRXU=;
-        b=YAc7ZdgGmv3POb/2rRB2z0U1xMptG8fK5MPMnXfZ8Q40+YX47LU5fSaXC9vh+LBaGR
-         NqwowqaaqEn10ZfINBjntYWHF25bA/T+IZu1Wa+fHwnK/kTTNVW78m0o04mCVw+BMV9B
-         lNgb7XBa9KZnnFHEbf/+W7etnsixjDspOZkigGh33Ol7CTTO/vpfr1YOv+K4ZqZdUcuz
-         T0tiSIDjU60YZyA7r3za/iOtsHS7i/E0qErbvJPzbScySW0ZCzdrgW7XLI8gsRyq+ETV
-         hvTOYx+22Isqe7H9dr5KgQ+19E5nMS3faJgxhUsg5QnbURtV3X6O9fATt9rsOGAz+xCY
-         IYnQ==
+        bh=+206HPHozIy3x30BwZ6PRDUBWjasoW1k6gEHdydinwI=;
+        b=EoRMndGqi/1WM2LZUuEOyzviClbvaxR/RxKF39pnAUjOkPfTp5LqLkrxukOstqjSpC
+         85Nefn6hStcswmfEnACYkI/LQbvOc7b3W3kSFsck0YrUeof51kHP6SqE3j2q8Tkn2VbN
+         Fzgi7lKXRVTq/IOXZEpRkrZ/2g5WGSnVajBN4vYW3O/pcwP8m4bPlOCRrELusNR+qFgs
+         L9huGrA/txu4hT+c8wa2BHWS2kYRfK3wYM73JbEQownrAqtBM3VvooPHJ8gZho3iSyYp
+         7HVvo+kZ537cCjPg6KlMAgst84ByV/mhUirj4lCIjx5AZUbbrp6p9XImMKptKGSct1nm
+         YiZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794407104; x=1795011904;
+        d=1e100.net; s=20260707; t=1794407123; x=1795011923;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=ExWQ0tm6tc/si7fWXX6k16GDSyAhiQgG2Ro0EjqwRXU=;
-        b=oOv3gCDa2PMomJCk9SsR9gn+grwYI9eO1MwZ6jX/ogwJopAKIwuyPewdCnKT01Rxpc
-         oQhZhhK8jZPIlAHAFbcUY2zidilxlnf0J5utDUAFlGJwcSsHrs+0tmad/tSH50PxLv0B
-         bRS28elSuPFbHJi1ww/MswHw/EVr+G9EA4REzUMz4ZHPmv+DGSF3Vn/nTNdVfyysCfth
-         b7MaJNHTY8KFHXI2+lvTPxXhADnt1nQD35NOj82+xK2p/q8Yvj+4zaZqujG1aJ4rUXTA
-         gXrSbpfoHJqmgXHCSO+0g/rQJvGxROUfdPk2dzBcUxOTzSICUNvV7c8Le3gimYgkqaX0
-         dKOg==
-X-Gm-Message-State: APuU4Z/Mc6nbr4sOHSc+z8haNEGm5vxt1dFL8t5XQI5HIZdPWtdKC02h
-	VXk95sm+nZBHl0JdN2VX9lXCQjg0VsmL9no3zbk10npMHv7sTo9z9IvvMR/uunOxPE5h8DLK7UP
-	EJ8/9VQ==
-X-Gm-Gg: AYBFou0Q6ks4k7+H+A/p4S/StpwZtGTD2b+hcRwba+KxMBdoYGMUZqydckhUecLYbZD
-	qWAR/VLmsMiqBjjMXd2Zm4fY9tD44QAQE0ncjIYUTmVd6xwKqe7/Szx4Q1XxRweIkBtmKiibzmI
-	o7FvawhCMOhT8S6dWTgPTT+djMFFbqIBXJPZ4fSbroT9z6F1oSNGv9urd8qhkNbONtha4SP2Wbs
-	AnzFrw5088nubqPfw3fHZa5OfgBIdi6wCDsAZRTrYJI+mVsIVLg+Q7OxGV3SyCENs+bRfOnGxLN
-	El3IETy22KPRz4sHL0lt9P5GoOYKkpRgbthsEwsyYj9h17UiEahLGjaIA9HKFcCE/tN62tB4Y7D
-	D7SzWlFlgJCXRSIhGnAME9Byduw1Zjku7x5dWAwyMP8OBP7y/j6wD7nJHWMJAXZpzu3T8DCNjtU
-	YBAFTyj46Q4CxXDSrcw3+MvR9uJEPgnWAav0Gsw3oitf9rJ8iQfaYrHr2kToQU87e6drpFZ+Fhz
-	XgBEgaYQUH0N4T6gBL0fBUcx+x3Igt/fO5dMLBfn5N36GYlDvpVW0tcOMclC0ciHreKf7HqW2Wx
-	TINZDnwQXpxr09zx6dt+B/WAMFEkmGBka7TR/6JPZGH4kQNbORI2P3wJOMKMqPI4ihvexvfMkJn
-	l+gRtjEZhUJVbGVQSIzE=
-X-Received: by 2002:a05:600c:310e:b0:4a2:c9b:9b98 with SMTP id 5b1f17b1804b1-4ba0936d857mr46895405e9.17.1794407103590;
-        Wed, 11 Nov 2026 06:25:03 -0800 (PST)
-Message-ID: <d66233f2-4f55-4e54-aee3-b3f987a5c6c3@suse.com>
-Date: Wed, 11 Nov 2026 15:25:02 +0100
+        bh=+206HPHozIy3x30BwZ6PRDUBWjasoW1k6gEHdydinwI=;
+        b=ba7yVFoM7iFsywc2gbj8MAgkFg4xV+WYbCSCol/MAzdor9h0l/dxuIS7hms+4HnMmz
+         L7l7FIzMQzAdpD4l9YoPN8Dao7UcPdFfLAn2NqmMJg8QPRAQPSs1dSt4a3wWbnSLDXhM
+         v6MTelh7wCjfI9EzXOQbJ3D6GTCBAbi8bZS1FJmhMixSCEjeTt9Pix167uIHSyGSXRTj
+         //ODmoKF+UmQvuBH3YEXJ4/3IvC7f2MyKLMa7etsp+VoMZQRND5cHMWfqDP//AjWLQV5
+         Aq7ccl4YF/aANcTxCAdT733yfPzeG3rE0XIb5L7vwg6k0hl/x+AL1OdQYeCRqcD4ZntR
+         2q6g==
+X-Gm-Message-State: APuU4Z8t8gpKRDE9/4AfCbJU4pccSOjO0a2xAjoosYyuLF5rpIJH+hi0
+	sjlwxVTXW6nKQt6PI7PKDuHAKBdXxVOJf2trj/RpFyX1gKU5yNzz/NyxWj1xvLcowSyoEQC4KvZ
+	T8Gezpw==
+X-Gm-Gg: AYBFou07mRPzW6HoAdIp1cT45G9ScJ0TFYWFLNMQW7DVrdvIB3pGm3/9PJQJvNZJLWq
+	csz3KufiaS8CkNihI+3jSk97k+NN30WPQJpuagpLSYTzcBpBS8+9yfBkT8legKPuQRvtcQX7fad
+	yH+DRZjTPcoNysKxZmzv4ss4Jcxbokeag7mc1f81+Ph093fMotBRXDPCZ/2Twxm30NVQgzCAJwJ
+	fu9Kzy68538NmcJa59SfgexzAtFXYZsDn4NKFvlkTgsMn7fLR5wiFtoo8IV1JGz/2L8XDTojCZ0
+	IhcvQN55cVVx6SqxJ5++a4VP27l6HJupeZ26oW0kvINgp2F9/zk9F6j2nmJhsv5A5wsm+VEFhsu
+	7N9bIpIv/02foE9uhyurONq73wbTWYlts8r9ha2VwOGSAmHgg7QxcRR+8WK+y7RwK8WP1iYO0g5
+	XX9qHU45OKd0MYZRLM9SuyYLHeyu8JviUt2ffSMSJQPAq6jdIrckkIRkc8I8F73bIMRA3G11jSo
+	8++p24npB6WFSZEUEbquOr80FBXw/Cim67+JGsQMw42JlsyzqxEn0A8sG1EVOGKroTwS+ogJ2k9
+	Pzz7ulKmsrYVaj948LfsZMwWhZxr2peozT7xSY3DVC9ARse150o5EPapkdlslTjb8xRyxFe0F1b
+	/H/Ymm6XBL98oEwhq
+X-Received: by 2002:a05:600c:c167:b0:4a1:a6e0:4ce4 with SMTP id 5b1f17b1804b1-4ba093acf6dmr43136745e9.33.1794407123193;
+        Wed, 11 Nov 2026 06:25:23 -0800 (PST)
+Message-ID: <080b311d-1882-4cef-8a56-7bd819fd7840@suse.com>
+Date: Wed, 11 Nov 2026 15:25:22 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 11/30] x86emul: switch to EVEX.R{3,4} nomenclature
+Subject: [PATCH 12/30] x86emul: switch to EVEX.B{3,4} nomenclature
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -130,9 +130,9 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <17d56a5d-41f2-4691-aea7-d6dfdde5ad32@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1794407104-31FD62AC-292587D5/10/78276251493
+X-purgate-ID: tlsNG-bad1c0/1794407123-BEEDE034-53B37E1E/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 11585
+X-purgate-size: 11699
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -141,242 +141,319 @@ X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The APX spec renames the R and R' fields, and it can be expected for the
-SDM to follow once APX stuff is folded in. The new naming is also better
-to reflect in our structure field identifiers.
+The APX spec renames the B field and adds a new one for the 5th base
+address register bit; it can be expected for the SDM to follow once APX
+stuff is folded in. The new naming is also better to reflect in our
+structure field identifiers.
 
-Like we represent VEX.R and EVEX.R3 in rex_prefix, also represent
-EVEX.R4 in rex2_prefix, simplifying the modrm_reg calculation.
+Like we represent VEX.B and EVEX.B3 in rex_prefix, also represent
+EVEX.B4 in rex2_prefix, allowing to leave various decode_reg()
+invocations untouched.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
+---
+Raising of #UD on an unduly set EVEX.B4 follows what the spec says: It's
+ignored. While that matches EVEX.B3 (and VEX.B) treatment, what the spec
+says is apparently wrong for EVEX.R{3,4}, which aren't ignored as per
+what the SDM specifies. Hence the overall situation isn't really clear.
 
 --- a/tools/tests/x86_emulator/evex-disp8.c
 +++ b/tools/tests/x86_emulator/evex-disp8.c
-@@ -939,10 +939,10 @@ static void test_one(const struct test *
+@@ -938,9 +938,9 @@ static void test_one(const struct test *
+         uint8_t raw[3];
          struct {
              uint8_t opcx:3;
-             uint8_t mbz:1;
--            uint8_t R:1;
-+            uint8_t r4:1;
-             uint8_t b:1;
+-            uint8_t mbz:1;
++            uint8_t b4:1;
+             uint8_t r4:1;
+-            uint8_t b:1;
++            uint8_t b3:1;
              uint8_t x:1;
--            uint8_t r:1;
-+            uint8_t r3:1;
+             uint8_t r3:1;
              uint8_t pfx:2;
-             uint8_t mbs:1;
-             uint8_t reg:4;
 @@ -955,7 +955,7 @@ static void test_one(const struct test *
          };
      } evex = {
          .opcx = test->spc, .pfx = test->pfx, .lr = vl,
--        .R = 1, .b = 1, .x = 1, .r = 1, .mbs = 1,
-+        .r4 = 1, .b = 1, .x = 1, .r3 = 1, .mbs = 1,
+-        .r4 = 1, .b = 1, .x = 1, .r3 = 1, .mbs = 1,
++        .r4 = 1, .b3 = 1, .x = 1, .r3 = 1, .mbs = 1,
          .reg = 0xf, .RX = 1, .opmsk = sg,
      };
  
 --- a/xen/arch/x86/x86_emulate/decode.c
 +++ b/xen/arch/x86/x86_emulate/decode.c
-@@ -1280,7 +1280,12 @@ int x86emul_decode(struct x86_emulate_st
+@@ -1276,15 +1276,23 @@ int x86emul_decode(struct x86_emulate_st
+                         s->evex.raw[1] = s->vex.raw[1];
+                         s->evex.raw[2] = insn_fetch_type(uint8_t);
+ 
+-                        generate_exception_if(!s->evex.mbs || s->evex.mbz, X86_EXC_UD);
++                        generate_exception_if(!s->evex.mbs, X86_EXC_UD);
++                        generate_exception_if((!(s->xcr0 & X86_XCR0_APX) &&
++                                               s->evex.b4),
++                                              X86_EXC_UD);
                          generate_exception_if(!s->evex.opmsk && s->evex.z, X86_EXC_UD);
  
                          if ( !mode_64bit() )
--                            s->evex.R = 1;
-+                            s->evex.r4 = 1;
-+                        else if ( s->xcr0 & X86_XCR0_APX )
 +                        {
-+                            if ( !s->evex.r4 )
-+                                s->rex2_prefix |= REX_R;
+                             s->evex.r4 = 1;
++                            s->evex.b4 = 0;
 +                        }
+                         else if ( s->xcr0 & X86_XCR0_APX )
+                         {
+                             if ( !s->evex.r4 )
+                                 s->rex2_prefix |= REX_R;
++                            if ( s->evex.b4 )
++                                s->rex2_prefix |= REX_B;
+                         }
  
                          s->vex.opcx = s->evex.opcx;
+@@ -1320,6 +1328,16 @@ int x86emul_decode(struct x86_emulate_st
+                         d = twobyte_table[0x3a].desc;
                          break;
-@@ -1394,8 +1399,7 @@ int x86emul_decode(struct x86_emulate_st
-         d &= ~ModRM;
- #undef ModRM /* Only its aliases are valid to use from here on. */
-         s->modrm_reg = ((s->rex_prefix & 4) << 1) | ((s->modrm & 0x38) >> 3) |
--                       ((evex_encoded() ? !s->evex.R
--                                        : !!(s->rex2_prefix & REX_R)) << 4);
-+                       (!!(s->rex2_prefix & REX_R) << 4);
-         s->modrm_rm  = s->modrm & 0x07;
  
-         /*
++                    case evex_map4:
++                        if ( !mode_64bit() || !evex_encoded() )
++                        {
++                            rc = X86EMUL_UNRECOGNIZED;
++                            goto done;
++                        }
++
++                        s->promoted_evex = true;
++                        break;
++
+                     case evex_map5:
+                         if ( !evex_encoded() )
+                         {
+@@ -1832,10 +1850,56 @@ int x86emul_decode(struct x86_emulate_st
+ 
+         if ( s->modrm_mod == 3 )
+         {
++            bool rm_is_gpr = s->promoted_evex;
++
++            /* Originally VEX- (now EVEX-)encoded GPR insns. */
++            if ( (s->evex.opcx == vex_0f38 || s->evex.opcx == vex_0f3a ||
++                  s->evex.opcx == vex_map7) &&
++                 b >= 0xf0 )
++                rm_is_gpr = true;
++
++            /* A few other insns also encode a GPR in ModR/M.rm. */
++            switch ( opcode )
++            {
++            case X86EMUL_OPC_EVEX(0x0f, 0x92):      /* kmovw r,k */
++            case X86EMUL_OPC_EVEX_66(0x0f, 0x92):   /* kmovb r,k */
++            case X86EMUL_OPC_EVEX_F2(0x0f, 0x92):   /* kmov{d,q} r,k */
++
++            case X86EMUL_OPC_EVEX_F3(0x0f, 0x2a):   /* vcvtsi2ss */
++            case X86EMUL_OPC_EVEX_F2(0x0f, 0x2a):   /* vcvtsi2sd */
++            case X86EMUL_OPC_EVEX_F3(5, 0x2a):      /* vcvtsi2sh */
++
++            case X86EMUL_OPC_EVEX_F3(0x0f, 0x7b):   /* vcvtusi2ss */
++            case X86EMUL_OPC_EVEX_F2(0x0f, 0x7b):   /* vcvtusi2sd */
++            case X86EMUL_OPC_EVEX_F3(5, 0x7b):      /* vcvtusi2sh */
++
++            case X86EMUL_OPC_EVEX_66(0x0f, 0x6e):   /* vmov{d,q} r/m,xmm */
++            case X86EMUL_OPC_EVEX_66(5, 0x6e):      /* vmovw r/m16,xmm */
++
++            case X86EMUL_OPC_EVEX_66(0x0f, 0x7e):   /* vmov{d,q} xmm,r/m */
++            case X86EMUL_OPC_EVEX_66(5, 0x7e):      /* vmovw xmm,r/m16 */
++
++            case X86EMUL_OPC_EVEX_66(0x0f38, 0x7a): /* vpbroadcastb */
++            case X86EMUL_OPC_EVEX_66(0x0f38, 0x7b): /* vpbroadcastw */
++            case X86EMUL_OPC_EVEX_66(0x0f38, 0x7c): /* vpbroadcast{d,q} */
++
++            case X86EMUL_OPC_EVEX_66(0x0f3a, 0x14): /* vpextrb */
++            case X86EMUL_OPC_EVEX_66(0x0f3a, 0x15): /* vpextrw */
++            case X86EMUL_OPC_EVEX_66(0x0f3a, 0x16): /* vpextr{d,q} */
++            case X86EMUL_OPC_EVEX_66(0x0f3a, 0x17): /* vextractps */
++
++            case X86EMUL_OPC_EVEX_66(0x0f, 0xc4):   /* vpinsrw */
++            case X86EMUL_OPC_EVEX_66(0x0f3a, 0x20): /* vpinsrb */
++            case X86EMUL_OPC_EVEX_66(0x0f3a, 0x22): /* vpinsr{d,q} */
++                rm_is_gpr = true;
++                break;
++            }
++
+             generate_exception_if(d & vSIB, X86_EXC_UD);
+             s->modrm_rm |= ((s->rex_prefix & 1) << 3) |
+-                           ((evex_encoded() ? !s->evex.x
+-                                            : !!(s->rex2_prefix & REX_B)) << 4);
++                           ((evex_encoded() && !rm_is_gpr
++                             ? !s->evex.x
++                             : !!(s->rex2_prefix & REX_B)) << 4);
+             s->ea.type = OP_REG;
+         }
+         else if ( ad_bytes == 2 )
 --- a/xen/arch/x86/x86_emulate/private.h
 +++ b/xen/arch/x86/x86_emulate/private.h
-@@ -236,10 +236,10 @@ union evex {
+@@ -202,7 +202,8 @@ enum vex_opcx {
+     vex_0f,
+     vex_0f38,
+     vex_0f3a,
+-    evex_map5 = 5,
++    evex_map4,
++    evex_map5,
+     evex_map6,
+     vex_map7,
+ };
+@@ -235,9 +236,9 @@ union evex {
+     uint8_t raw[3];
      struct {             /* SDM names */
          uint8_t opcx:3;  /* mmm */
-         uint8_t mbz:1;
--        uint8_t R:1;     /* R' */
-+        uint8_t r4:1;    /* R4 (aka R') */
-         uint8_t b:1;     /* B */
+-        uint8_t mbz:1;
++        uint8_t b4:1;    /* B4 */
+         uint8_t r4:1;    /* R4 (aka R') */
+-        uint8_t b:1;     /* B */
++        uint8_t b3:1;    /* B3 (aka B) */
          uint8_t x:1;     /* X */
--        uint8_t r:1;     /* R */
-+        uint8_t r3:1;    /* R3 (aka R) */
+         uint8_t r3:1;    /* R3 (aka R) */
          uint8_t pfx:2;   /* pp */
-         uint8_t mbs:1;
-         uint8_t reg:4;   /* vvvv */
+@@ -260,6 +261,7 @@ struct x86_emulate_state {
+         ext_0f   = vex_0f,
+         ext_0f38 = vex_0f38,
+         ext_0f3a = vex_0f3a,
++        ext_map4 = evex_map4,
+         ext_map5 = evex_map5,
+         ext_map6 = evex_map6,
+         ext_map7 = vex_map7,
+@@ -322,6 +324,7 @@ struct x86_emulate_state {
+     bool not_64bit; /* Instruction not available in 64bit. */
+     bool fpu_ctrl;  /* Instruction is an FPU control one. */
+     bool fp16;      /* Instruction has half-precision FP or BF16 source. */
++    bool promoted_evex; /* From legacy/VEX, i.e. ND / NF / SCC capable. */
+     opcode_desc_t desc;
+     union vex vex;
+     union evex evex;
 --- a/xen/arch/x86/x86_emulate/x86_emulate.c
 +++ b/xen/arch/x86/x86_emulate/x86_emulate.c
-@@ -3774,7 +3774,8 @@ x86_emulate(
-         /* Convert GPR destination to %rAX and memory operand to (%rCX). */
-         rex_prefix &= ~REX_R;
-         vex.r = 1;
--        evex.r = 1;
-+        evex.r3 = 1;
-+        evex.r4 = 1;
+@@ -3511,7 +3511,8 @@ x86_emulate(
          if ( ea.type == OP_MEM )
          {
-             rex_prefix &= ~REX_B;
-@@ -3825,7 +3826,8 @@ x86_emulate(
-     CASE_SIMD_SCALAR_FP(_EVEX, 0x0f, 0x2d): /* vcvts{s,d}2si xmm/mem,reg */
-     CASE_SIMD_SCALAR_FP(_EVEX, 0x0f, 0x78): /* vcvtts{s,d}2usi xmm/mem,reg */
-     CASE_SIMD_SCALAR_FP(_EVEX, 0x0f, 0x79): /* vcvts{s,d}2usi xmm/mem,reg */
--        generate_exception_if((evex.reg != 0xf || !evex.RX || !evex.R ||
-+        generate_exception_if((evex.reg != 0xf || !evex.RX ||
-+                               (!(state->xcr0 & X86_XCR0_APX) && !evex.r4) ||
-                                evex.opmsk ||
-                                (ea.type != OP_REG && evex.brs)),
-                               X86_EXC_UD);
-@@ -4465,7 +4467,7 @@ x86_emulate(
-     case X86EMUL_OPC_EVEX_66(0x0f38, 0x27): /* vptestm{d,q} [xyz]mm/mem,[xyz]mm,k{k} */
-     case X86EMUL_OPC_EVEX_66(0x0f38, 0x29): /* vpcmpeqq [xyz]mm/mem,[xyz]mm,k{k} */
-     case X86EMUL_OPC_EVEX_66(0x0f38, 0x37): /* vpcmpgtq [xyz]mm/mem,[xyz]mm,k{k} */
--        generate_exception_if(!evex.r || !evex.R || evex.z, X86_EXC_UD);
-+        generate_exception_if(!evex.r3 || !evex.r4 || evex.z, X86_EXC_UD);
-         if ( b & (ext == ext_0f38 ? 1 : 2) )
+             /* convert memory operand to (%rAX) */
+-            evex.b = 1;
++            evex.b3 = 1;
++            evex.b4 = 0;
+             opc[1] &= 0x38;
+         }
+         insn_bytes = EVEX_PFX_BYTES + 2;
+@@ -3724,7 +3725,8 @@ x86_emulate(
+         opc = init_evex(stub);
+         opc[0] = b;
+         /* Convert memory/GPR source to %rAX. */
+-        evex.b = 1;
++        evex.b3 = 1;
++        evex.b4 = 0;
+         if ( !mode_64bit() )
+             evex.w = 0;
+         /*
+@@ -3780,7 +3782,8 @@ x86_emulate(
          {
-             generate_exception_if(b != 0x27 && evex.w != (b & 1), X86_EXC_UD);
-@@ -5447,7 +5449,7 @@ x86_emulate(
-         generate_exception_if((evex.w != (evex.pfx & VEX_PREFIX_DOUBLE_MASK) ||
-                                (ea.type != OP_REG && evex.brs &&
-                                 (evex.pfx & VEX_PREFIX_SCALAR_MASK)) ||
--                               !evex.r || !evex.R || evex.z),
-+                               !evex.r3 || !evex.r4 || evex.z),
-                               X86_EXC_UD);
-         visa_check(f);
-         if ( ea.type != OP_REG || !evex.brs )
-@@ -6003,7 +6005,7 @@ x86_emulate(
+             rex_prefix &= ~REX_B;
+             vex.b = 1;
+-            evex.b = 1;
++            evex.b3 = 1;
++            evex.b4 = 0;
+             opc[1] = 0x01;
  
-     case X86EMUL_OPC_EVEX_F3(0x0f38, 0x29): /* vpmov{b,w}2m [xyz]mm,k */
-     case X86EMUL_OPC_EVEX_F3(0x0f38, 0x39): /* vpmov{d,q}2m [xyz]mm,k */
--        generate_exception_if(!evex.r || !evex.R, X86_EXC_UD);
-+        generate_exception_if(!evex.r3 || !evex.r4, X86_EXC_UD);
-         /* fall through */
-     case X86EMUL_OPC_EVEX_F3(0x0f38, 0x28): /* vpmovm2{b,w} k,[xyz]mm */
-     case X86EMUL_OPC_EVEX_F3(0x0f38, 0x38): /* vpmovm2{d,q} k,[xyz]mm */
-@@ -6268,7 +6270,7 @@ x86_emulate(
-         goto avx512f_no_sae;
- 
-     case X86EMUL_OPC_EVEX_66(0x0f38, 0x8f): /* vpshufbitqmb [xyz]mm/mem,[xyz]mm,k{k} */
--        generate_exception_if(evex.w || !evex.r || !evex.R || evex.z, X86_EXC_UD);
-+        generate_exception_if(evex.w || !evex.r3 || !evex.r4 || evex.z, X86_EXC_UD);
-         /* fall through */
-     case X86EMUL_OPC_EVEX_66(0x0f38, 0x54): /* vpopcnt{b,w} [xyz]mm/mem,[xyz]mm{k} */
-         visa_check(_bitalg);
-@@ -6345,7 +6347,7 @@ x86_emulate(
- 
-     case X86EMUL_OPC_EVEX_F2(0x0f38, 0x68): /* vp2intersect{d,q} [xyz]mm/mem,[xyz]mm,k+1 */
-         vcpu_must_have(avx512_vp2intersect);
--        generate_exception_if(evex.opmsk || !evex.r || !evex.R, X86_EXC_UD);
-+        generate_exception_if(evex.opmsk || !evex.r3 || !evex.r4, X86_EXC_UD);
-         op_bytes = 16 << evex.lr;
-         goto avx512f_no_sae;
- 
-@@ -6655,8 +6657,8 @@ x86_emulate(
-         pevex->pfx = vex_f3; /* vmovdqu{32,64} */
-         pevex->w = b & 1;
-         /* Switch to sib_index as source. */
--        pevex->r = !mode_64bit() || !(state->sib_index & 0x08);
--        pevex->R = !mode_64bit() || !(state->sib_index & 0x10);
-+        pevex->r3 = !mode_64bit() || !(state->sib_index & 0x08);
-+        pevex->r4 = !mode_64bit() || !(state->sib_index & 0x10);
-         opc[1] = (state->sib_index & 7) << 3;
- 
-         invoke_stub("", "", "=m" (index) : "a" (&index));
-@@ -6810,8 +6812,8 @@ x86_emulate(
-         pevex->pfx = vex_f3; /* vmovdqu{32,64} */
-         pevex->w = b & 1;
-         /* Switch to sib_index as source. */
--        pevex->r = !mode_64bit() || !(state->sib_index & 0x08);
--        pevex->R = !mode_64bit() || !(state->sib_index & 0x10);
-+        pevex->r3 = !mode_64bit() || !(state->sib_index & 0x08);
-+        pevex->r4 = !mode_64bit() || !(state->sib_index & 0x10);
-         opc[1] = (state->sib_index & 7) << 3;
- 
-         invoke_stub("", "", "=m" (index) : "a" (&index));
-@@ -7403,7 +7405,7 @@ x86_emulate(
- 
-     case X86EMUL_OPC_EVEX_F2(0x0f3a, 0x66): /* vfpclassbf16 $imm8,[xyz]mm/mem,k{k} */
-     case X86EMUL_OPC_EVEX_F2(0x0f3a, 0xc2): /* vcmpbf16 $imm8,[xyz]mm/mem,[xyz]mm,k{k} */
--        generate_exception_if(!evex.r || !evex.R || evex.z, X86_EXC_UD);
-+        generate_exception_if(!evex.r3 || !evex.r4 || evex.z, X86_EXC_UD);
-         fallthrough;
-     case X86EMUL_OPC_EVEX_F2(0x0f3a, 0x08): /* vrndscalebf16 $imm8,[xyz]mm/mem,[xyz]mm{k} */
-     case X86EMUL_OPC_EVEX_F2(0x0f3a, 0x26): /* vgetmantbf16 $imm8,[xyz]mm/mem,[xyz]mm{k} */
-@@ -7507,13 +7509,15 @@ x86_emulate(
-         goto pextr;
- 
-     case X86EMUL_OPC_EVEX_66(0x0f, 0xc5):   /* vpextrw $imm8,xmm,reg */
--        generate_exception_if(ea.type != OP_REG || !evex.R, X86_EXC_UD);
-+        generate_exception_if(ea.type != OP_REG ||
-+                              (!(state->xcr0 & X86_XCR0_APX) && !evex.r4),
-+                              X86_EXC_UD);
-         /* Convert to alternative encoding: We want to use a memory operand. */
+             rc = ops->read(ea.mem.seg, ea.mem.off, mmvalp,
+@@ -3869,7 +3872,8 @@ x86_emulate(
+             /* Convert memory operand to (%rAX). */
+             rex_prefix &= ~REX_B;
+             vex.b = 1;
+-            evex.b = 1;
++            evex.b3 = 1;
++            evex.b4 = 0;
+             opc[1] &= 0x38;
+         }
+         if ( evex_encoded() )
+@@ -4560,7 +4564,8 @@ x86_emulate(
+         opc = init_evex(stub);
+         opc[0] = b;
+         /* Convert memory/GPR operand to (%rAX). */
+-        evex.b = 1;
++        evex.b3 = 1;
++        evex.b4 = 0;
+         if ( !mode_64bit() )
+             evex.w = 0;
+         opc[1] = modrm & 0x38;
+@@ -5464,7 +5469,8 @@ x86_emulate(
+         if ( ea.type == OP_MEM )
+         {
+             /* convert memory operand to (%rAX) */
+-            evex.b = 1;
++            evex.b3 = 1;
++            evex.b4 = 0;
+             opc[1] &= 0x38;
+         }
+         opc[2] = imm1;
+@@ -6410,7 +6416,8 @@ x86_emulate(
+         opc = init_evex(stub);
+         opc[0] = b;
+         /* Convert GPR source to %rAX. */
+-        evex.b = 1;
++        evex.b3 = 1;
++        evex.b4 = 0;
+         if ( !mode_64bit() )
+             evex.w = 0;
+         opc[1] = modrm & 0xf8;
+@@ -6647,7 +6654,8 @@ x86_emulate(
+          */
+         pevex->opmsk = 0;
+         /* Use (%rax) as destination and modrm_reg as source. */
+-        pevex->b = 1;
++        pevex->b3 = 1;
++        pevex->b4 = 0;
+         opc[1] = (modrm_reg & 7) << 3;
+         pevex->RX = 1;
+         place_ret(&opc[2]);
+@@ -6712,7 +6720,8 @@ x86_emulate(
+         opc[0] = 0x6f; /* vmovdqa{32,64} */
+         pevex->opmsk = 0;
+         /* Use modrm_reg as destination and (%rax) as source. */
+-        pevex->b = 1;
++        pevex->b3 = 1;
++        pevex->b4 = 0;
+         opc[1] = (modrm_reg & 7) << 3;
+         pevex->RX = 1;
+         place_ret(&opc[2]);
+@@ -6802,7 +6811,8 @@ x86_emulate(
+         pevex->opcx = vex_0f;
+         opc[0] = 0x7f; /* vmovdqa{32,64} */
+         /* Use (%rax) as destination and modrm_reg as source. */
+-        pevex->b = 1;
++        pevex->b3 = 1;
++        pevex->b4 = 0;
+         opc[1] = (modrm_reg & 7) << 3;
+         pevex->RX = 1;
+         place_ret(&opc[2]);
+@@ -7468,7 +7478,9 @@ x86_emulate(
+         opc[0] = b;
+         /* Convert memory/GPR operand to (%rAX). */
+         rex_prefix &= ~REX_B;
+-        evex.b = vex.b = 1;
++        vex.b = 1;
++        evex.b3 = 1;
++        evex.b4 = 0;
+         if ( !mode_64bit() )
+             evex.w = vex.w = 0;
+         opc[1] = modrm & 0x38;
+@@ -7516,7 +7528,7 @@ x86_emulate(
          evex.opcx = ext_0f3a;
          b = 0x15;
          modrm <<= 3;
--        evex.r = evex.b;
--        evex.R = evex.x;
-+        evex.r3 = evex.b;
-+        evex.r4 = evex.x;
+-        evex.r3 = evex.b;
++        evex.r3 = evex.b3;
+         evex.r4 = evex.x;
          /* fall through */
      case X86EMUL_OPC_EVEX_66(0x0f3a, 0x14): /* vpextrb $imm8,xmm,r/m */
-     case X86EMUL_OPC_EVEX_66(0x0f3a, 0x15): /* vpextrw $imm8,xmm,r/m */
-@@ -7665,7 +7669,7 @@ x86_emulate(
-     case X86EMUL_OPC_EVEX_66(0x0f3a, 0x1f): /* vpcmp{d,q} $imm8,[xyz]mm/mem,[xyz]mm,k{k} */
-     case X86EMUL_OPC_EVEX_66(0x0f3a, 0x3e): /* vpcmpu{b,w} $imm8,[xyz]mm/mem,[xyz]mm,k{k} */
-     case X86EMUL_OPC_EVEX_66(0x0f3a, 0x3f): /* vpcmp{b,w} $imm8,[xyz]mm/mem,[xyz]mm,k{k} */
--        generate_exception_if(!evex.r || !evex.R || evex.z, X86_EXC_UD);
-+        generate_exception_if(!evex.r3 || !evex.r4 || evex.z, X86_EXC_UD);
-         if ( !(b & 0x20) )
-             goto avx512f_imm8_no_sae;
-     avx512bw_imm:
-@@ -7942,7 +7946,7 @@ x86_emulate(
-     case X86EMUL_OPC_EVEX_66(0x0f3a, 0x66): /* vfpclassp{s,d} $imm8,[xyz]mm/mem,k{k} */
-     case X86EMUL_OPC_EVEX_66(0x0f3a, 0x67): /* vfpclasss{s,d} $imm8,xmm/mem,k{k} */
-         visa_check(dq);
--        generate_exception_if(!evex.r || !evex.R || evex.z, X86_EXC_UD);
-+        generate_exception_if(!evex.r3 || !evex.r4 || evex.z, X86_EXC_UD);
-         if ( !(b & 1) )
-             goto avx512f_imm8_no_sae;
-         generate_exception_if(evex.brs, X86_EXC_UD);
-@@ -7952,7 +7956,7 @@ x86_emulate(
-     case X86EMUL_OPC_EVEX(0x0f3a, 0x66): /* vfpclassph $imm8,[xyz]mm/mem,k{k} */
-     case X86EMUL_OPC_EVEX(0x0f3a, 0x67): /* vfpclasssh $imm8,xmm/mem,k{k} */
-         visa_check(_fp16);
--        generate_exception_if(evex.w || !evex.r || !evex.R || evex.z, X86_EXC_UD);
-+        generate_exception_if(evex.w || !evex.r3 || !evex.r4 || evex.z, X86_EXC_UD);
-         if ( !(b & 1) )
-             goto avx512f_imm8_no_sae;
-         generate_exception_if(evex.brs, X86_EXC_UD);
-@@ -7974,7 +7978,7 @@ x86_emulate(
-         /* fall through */
-     case X86EMUL_OPC_EVEX(0x0f3a, 0xc2): /* vcmpph $imm8,[xyz]mm/mem,[xyz]mm,k{k} */
-         visa_check(_fp16);
--        generate_exception_if(evex.w || !evex.r || !evex.R || evex.z, X86_EXC_UD);
-+        generate_exception_if(evex.w || !evex.r3 || !evex.r4 || evex.z, X86_EXC_UD);
-         if ( ea.type != OP_REG || !evex.brs )
-             avx512_vlen_check(evex.pfx & VEX_PREFIX_SCALAR_MASK);
-         goto simd_imm8_zmm;
-@@ -8206,7 +8210,8 @@ x86_emulate(
- 
-     CASE_SIMD_SCALAR_FP(_EVEX, 5, 0x6c): /* vcvtts{s,d}2usis xmm/mem,reg */
-     CASE_SIMD_SCALAR_FP(_EVEX, 5, 0x6d): /* vcvtts{s,d}2sis xmm/mem,reg */
--        generate_exception_if((evex.reg != 0xf || !evex.RX || !evex.R ||
-+        generate_exception_if((evex.reg != 0xf || !evex.RX ||
-+                               (!(state->xcr0 & X86_XCR0_APX) && !evex.r4) ||
-                                evex.opmsk),
-                               X86_EXC_UD);
-         vcpu_must_have(avx10, 2);
+@@ -7600,7 +7612,8 @@ x86_emulate(
+         {
+             /* Convert memory operand to (%rAX). */
+             vex.b = 1;
+-            evex.b = 1;
++            evex.b3 = 1;
++            evex.b4 = 0;
+             opc[1] &= 0x38;
+         }
+         opc[2] = imm1;
 
 
