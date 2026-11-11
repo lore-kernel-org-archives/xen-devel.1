@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5AA03606A332
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2026 15:09:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28C07606A339
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2026 15:09:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=FbarL08w
-Received: from list by lists.xenproject.org with outflank-mailman.1484101.1687460 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=OX6S3Wl8
+Received: from list by lists.xenproject.org with outflank-mailman.1484111.1687470 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xR9wp-0003tq-GF; Wed, 11 Nov 2026 15:09:15 +0000
+	id 1xR9xF-0004Q9-Pf; Wed, 11 Nov 2026 15:09:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1484101.1687460; Wed, 11 Nov 2026 15:09:15 +0000
+Received: by outflank-mailman (output) from mailman id 1484111.1687470; Wed, 11 Nov 2026 15:09:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xR9wp-0003tg-Cb; Wed, 11 Nov 2026 15:09:15 +0000
-Received: by outflank-mailman (input) for mailman id 1484101;
- Wed, 11 Nov 2026 15:09:14 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xR9wo-0003tJ-5Y
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 15:09:14 +0000
+	id 1xR9xF-0004Q2-M6; Wed, 11 Nov 2026 15:09:41 +0000
+Received: by outflank-mailman (input) for mailman id 1484111;
+ Wed, 11 Nov 2026 15:09:39 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xR9xD-0004Og-OI
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 15:09:39 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xR9wn-00GVF0-IY
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 16:09:13 +0100
-Received: from [10.42.69.12] (helo=localhost)
+ id 1xR9xD-000san-4v
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 16:09:39 +0100
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6af4850d-bab6-0a2a0a5309dd-0a2a450c86ae-32
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 16:09:13 +0100
-Received: from [209.85.221.45] (helo=mail-wr1-f45.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6af48528-e002-0a2a0a5209dd-0a2a450a96a8-46
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 16:09:39 +0100
+Received: from [209.85.221.46] (helo=mail-wr1-f46.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6af48518-f479-0a2a450c0019-d155dd2de80a-3
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 16:09:12 +0100
-Received: by mail-wr1-f45.google.com with SMTP id
- ffacd0b85a97d-48e09aa5264so1912530f8f.2
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 07:09:12 -0800 (PST)
+ id 6af48532-f2d2-0a2a450a0019-d155dd2ed516-3
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 16:09:39 +0100
+Received: by mail-wr1-f46.google.com with SMTP id
+ ffacd0b85a97d-48e47347279so2119163f8f.1
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 07:09:39 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-49836c83432sm10600394f8f.58.2026.11.11.07.09.11
+ ffacd0b85a97d-498366c43f4sm13760286f8f.47.2026.11.11.07.09.37
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Nov 2026 07:09:11 -0800 (PST)
+ Wed, 11 Nov 2026 07:09:38 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,52 +51,52 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1794409752; x=1795014552; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1794409778; x=1795014578; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=Z8MgELEc9aTyqsjv3fCF2C2ELfZEbfQ7S/mxrrvD4Cg=;
-        b=FbarL08wPwSNQW/0J7oD8I6gju8Besx+VPyI2PUC+CqsihJZIqboAbHmnzwZ4i2Fjr
-         Huv1KMhMgRfOIC+7eXLnF5PTOmsaFNgOudlwurT+zDCiIb4k3N20/ySJWQuu+0j/c1PQ
-         hXudAhMLtywXRO5moqx2FOvrlJCV3rbTZT39QGud/BQz3d6wGtDISNa8VGFe9bDikUwt
-         AU3vDL2a+fjJki20s+dqBbrLkz+E5kT/VAII7faEpzj1qMxvmG8qRd2JfozVoP5TI4Eq
-         VqKu5KMa5hrDyf1TZKTXVuWIQNqO8gUCitCZizr5GBRuyEEt/RZ6Xz6Fw2qBMk5VqJh+
-         wLRg==
+        bh=j+HRafowVzhMpQ18hCG1Z90E/2luXimwcSrktnm6AAc=;
+        b=OX6S3Wl8jU07GS9vAizexrDfm95/Xy6wjIGxSH2HMTop0zDiqkK1R1kB5q9BsHasUt
+         zEhVrR4i+vCh0YB5BX7q2Cr7qwZDlJ3NctSAaRK9P06+CaENY7q5VLROi/Cv1U7WkZj0
+         K75KJ2uo5B6WEN+8cpDc6UezdgzjQ58rDTamaqSZ36uJjNcSHi04FCYxgTAIRNaakIYP
+         6XsQYls28pioGoDhShI17kPxUWFrtIIYUUt/IrvsLKgK/TFVzG2B3I351fqK8jhjBu1F
+         INfWJu0rCA3mKJdk8ctg188C0i7+f2U2Wz/TIMKjsyXNgMSerRN6FTdUSS/hhvsGQrJL
+         eTWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794409752; x=1795014552;
+        d=1e100.net; s=20260707; t=1794409778; x=1795014578;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=Z8MgELEc9aTyqsjv3fCF2C2ELfZEbfQ7S/mxrrvD4Cg=;
-        b=sgnR7yiF00r0rYsXBeSoP0ZQkUbt29+m2je9MGP+kcPcImOq3QJS6R+VSjfBj05hKj
-         DDr8qNzWOdBNFKb5tOAMOOZ6aicndnzzuf7Of+0rqK4VHIQRnsIorZl4DL3T/6j6Im9U
-         MTolarLgkLCy5Or2lcPhosv//ELwhnzcxYJaB2v3LMVoJ70V5ZG10Uo9++P5wlLTUbKY
-         UgssalP4SZrbg29zgYvIJDfuZVj2Zuz0fntqcEf8fTT+MfqnQBS9IX68g4sUkmcnnBij
-         nETGbVtUMOe/nkbWcPljUjyzE9GUt2kKEbJVNaE0ybxn16ekBcNPQjmBzEBxc9szhQE6
-         pUCg==
-X-Gm-Message-State: APuU4Z8HybBC8F0xDRBsMrnKCZ66NikYUIz8ZKBIUNIq0xhsYm+e5tY+
-	NHYVKmY8G2vJF6E7N7PsKC1OCwHvhP7BuDBQWImtdO5DirO/XlWkkMwXRXGDaNuUCXeLZFR2Pj5
-	cJL2ExQ==
-X-Gm-Gg: AYBFou3Sk9u/bSLN1XMM7CuGSwZwA0md/C2oFWakGGYd+BTOzwe0GMdYHPwymz7MZIN
-	d4hO/Qdu1DNZIcxWZr98V9Qi5waGM5JtCOYuHPVIh8G51ja1FShVPv6ohfO+pvotr9fURI53c5s
-	oV/x0fKA/jKE8efGs79WFg9+xhECSGnNQxe6LaVKHXRSIy7iG6Y7retEDeZ4gdnlCp9OkF8t+7n
-	IiLK8Up0hMmytTX83ML9cMBUdHuxAzPLWV4R9UtrTE3I2V/jql4FYCySeNAKXmZIBWXcugOT4SM
-	cbPPIesnoDGGID7q3smqOkxYGohDrNvsI70vO3Bq567LhzkHQU1obzpGePyo475LC0ENVSabiBp
-	pMffG8EmU6ko25U0GvRcU3iRN7v4Jb1DWhBoFcEWNzeg4wn1fzrirWSkOYPCgoXAL782fZU0t/V
-	tzVYvwAqM0kGf5H4CD1he/M/zURO28ywj1GX1ZnTl7aygoT6AhLS5xzetmwNkKD+jt17AyTT2U/
-	kh7PVqcPOy9U3nNQDKZRiwkWYU69WokgkPA0bf1zEUy2J3owaPR7BJBLxN/qRxHRNyMXD+t4MDv
-	fUA69v44yKJhOYvtk8whDIrDjBTuN7Ds4ZlcarwE0HZTsHECE6O9q0eJcMtkQCr8huLS6q0+rBi
-	mDSQ+fDuDMQmNePE1
-X-Received: by 2002:a05:6000:2611:b0:490:d197:bde8 with SMTP id ffacd0b85a97d-499c150ed5bmr4335557f8f.0.1794409751917;
-        Wed, 11 Nov 2026 07:09:11 -0800 (PST)
-Message-ID: <29775774-e0b4-490a-9e88-476b0bdb3c9b@suse.com>
-Date: Wed, 11 Nov 2026 16:09:10 +0100
+        bh=j+HRafowVzhMpQ18hCG1Z90E/2luXimwcSrktnm6AAc=;
+        b=JzeLvyRCzhGR6n7G8K9zvgJTskAUnq+a3GpnqNHLiGDwruorROux4Ng9toxN6e8JrZ
+         dJnkLkkJmojxRQEtF2IaD2FI+IFNUAmyU1/mAXHu812wnp3kk4q2Xjd3w4ZbrLwfyKqv
+         obpsvuZUrEnW8iWZHygaggX64B/YrM8NIasM7gKHFSGaPR2zojktRihUIWEv9wOmoFMR
+         xuJksgA1ciX2IrPYle/qopafWPK6Rp/E32C5vANn7QadBjb1Z61E4Je3RSX2xEHmJ4Nj
+         nvhkyf0+vxoiNV6DNJ9DHe0QzR5q5+zDnuQ1UPIzLJQWY9Xj2zt/14u2bB62YrSNmhRh
+         iqPQ==
+X-Gm-Message-State: APuU4Z/Oi0HW30bViaDO3Or+vQlRFwUi3XhM2/yoSKiAWguKfj0oV0sK
+	Ojgzh/s7iM2/sU+h3iDEoXTn15L0YJB9j5blhdVMPOBoRQECU9Z7T2JiSfPQ4X8UHR+VJUN1UC9
+	CoyUt6g==
+X-Gm-Gg: AYBFou1HuvBFnYVEVRhGHP6MNpj3zkUpXvkfc+lA4Q2ZKu7rLilMH6urSRHh5rbwG4L
+	uQz6o/yxQivVQrb58euvumtI3SndIcqB3whWBCqWKlIup85CBC0Y6NLbDUTcPL71Tj7nrUoliH/
+	Fj0cGURca/2m9C+IUHrzJZv1FC5/HgS4bC7WcnIdoJKlpBRXQUs9YpucqOWSRoHbXH3c3BJ67Ab
+	G69XbPP+vFid3e/SD8TxAgTewueA55pAC3NTJUXTt7UaCvVWcMyaboJsDZzfUyInDIpw7s+BMXg
+	YdvhzACFbwt9JmOqxFx11eidDXY5+ptTU7Ko8JoTH7s1rAnQK49r+Ybxr80D4zyWO3AK1DToSi8
+	OeKaVsG0PQuSCt3kO73SyIcidn2KVplqpHaqLotxr1jEZIBEwIULXWg+xagU87XnSHDvub5Y4/9
+	Xq8+uVymdhRSziN/XftzBKL9OA2AMAQKFUqXT5A7dkj9GywYWcTQmgdNQMYkHHUj7j584JhoWz4
+	8iryWNjpeE92fiT/qMZtn8XwS1gUFkoOGoOLSxW2tpW425LJDOkiT9ocjR/eFFSjZgOVucUXW9f
+	F03t/AnE/ZGgG4Vfz3I402/s0tWp8TtaAz1Hs5KqT9+VgwprJKM9Wv2oUmAaAP/99EQyzcNTASq
+	W2tB4NkAFfIrah4td++k=
+X-Received: by 2002:a05:6000:491a:b0:491:ef47:72d7 with SMTP id ffacd0b85a97d-499c764a742mr4493002f8f.12.1794409778383;
+        Wed, 11 Nov 2026 07:09:38 -0800 (PST)
+Message-ID: <5b5ae401-5fd2-45e6-a77a-925c7e5925e5@suse.com>
+Date: Wed, 11 Nov 2026 16:09:37 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v4 06/28] x86/CPUID: enable AMX leaves
+Subject: [PATCH v4 07/28] x86: XFD enabling
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -130,9 +130,9 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <0407294d-d605-41f3-a16b-1505d897ef3f@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d25034/1794409752-5093EA5B-3EEEE31D/10/78276251493
+X-purgate-ID: tlsNG-4011c0/1794409779-589C9CFC-8F4CC95E/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 22246
+X-purgate-size: 11914
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -141,621 +141,361 @@ X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-This requires bumping the number of basic leaves we support. Apart from
-this the logic is modeled as closely as possible after that of leaf 7
-handling.
+Just like for XCR0 we generally want to run with the guest settings of
+the involved MSRs while in Xen. Hence saving/restoring of guest values
+needs to only happen during context switch.
 
-The checks in x86_cpu_policies_are_compatible() may be more strict than
-they ultimately need to be, but I'd rather start being on the safe side.
+Due to the way XFD_ERR is updated by the hardware when #NM is
+intercepted, we need to keep XFD_ERR intercepted as well when #NM is.
+This way (like for PV) we can properly determine whether a particular
+instance of #NM was due to a new bit in the MSR having become set, or
+because of lazy-FPU handling.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
-The explicit amx_int8 etc feature checks in two places aren't really
-nice, as they would need amending with each new feature. Using just
-amx_tile there, otoh, doesn't look to be enough to qualify the tmul
-leaf.
-
-It's not clear to me in how far libxl_cpuid.c would want extending: It
-doesn't look to offer a way to override the maximum subleaf of leaf 7.
-In fact I can't seem to be able to spot a max extended leaf override
-mechanism either.
-
-How a toolstack side equivalent (if any) of the init_dom0_cpuid_policy()
-change would look like is entirely unclear to me. How much should we
-take from the max policy, and how much should we require the user to
-specify (and how would the latter look like)? We did discuss default-
-enabling sub-features (i.e. AMX-* here when AMX-TILE is enabled), but
-besides there still not being logic for this that also doesn't easily
-extend to entire feature-dependent leaves.
+v4: Properly add the two MSRs to all four lists of MSRs to migrate
+    (instead of just one of them). Move XFD_ERR handling to
+    *_[gs]et_reg(), adjusting it for VMX. Also fiddle with
+    do_device_not_available() and vmx_vmexit_handler(). Don't write
+    XFD_ERR from paravirt_ctxt_switch_to(). Clear XFD_ERR in
+    vmx_save_guest_msrs(). Tie XFD_ERR interception to that of #NM.
+    Use wrmsrns(). Re-base.
+v3: New.
 ---
-v4: Add missing checks in x86_cpu_policy_fill_native() and
-    recalculate_cpuid_policy(). Add logic to init_dom0_cpuid_policy().
-    Add AMX-FP16 and AMX-COMPLEX. Also check tmul leaf in
-    build_assertions(). Only cover palette 1 in struct cpu_policy. Address
-    Misra concerns. Re-base.
-v2: New.
+I wasn't sure whether we want to have AMX depend on XFD. Purely from a
+spec pov the two are independent features (without XFD one simply
+wouldn't have a way to disable it for the purpose of lazy allocation of
+state saving space).
 
---- a/tools/tests/cpu-policy/test-cpu-policy.c
-+++ b/tools/tests/cpu-policy/test-cpu-policy.c
-@@ -200,6 +200,40 @@ static void test_cpuid_serialise_success
-             },
-             .nr_leaves = 4 + 0xd + 1 + 1,
-         },
-+
-+        /* Leaf 0x1d serialisation stops at max_palette. */
-+        {
-+            .name = "empty leaf 0x1d",
-+            .p = {
-+                .basic.max_leaf = 0x1d,
-+            },
-+            .nr_leaves = 4 + 0x1d + 1,
-+        },
-+        {
-+            .name = "partial leaf 0x1d",
-+            .p = {
-+                .basic.max_leaf = 0x1d,
-+                .tile.max_palette = 1,
-+            },
-+            .nr_leaves = 4 + 0x1d + 1 + 1,
-+        },
-+
-+        /* Leaf 0x1e serialisation stops at 0. */
-+        {
-+            .name = "empty leaf 0x1e",
-+            .p = {
-+                .basic.max_leaf = 0x1e,
-+            },
-+            .nr_leaves = 4 + 0x1e + 1,
-+        },
-+        {
-+            .name = "partial leaf 0x1e",
-+            .p = {
-+                .basic.max_leaf = 0x1e,
-+                .tmul.maxk = 16,
-+            },
-+            .nr_leaves = 4 + 0x1e + 1,
-+        },
-     };
- 
-     printf("Testing CPUID serialise success:\n");
-@@ -338,6 +372,14 @@ static void test_cpuid_deserialise_failu
-             .leaf = { .leaf = 0xd, .subleaf = CPUID_GUEST_NR_XSTATE },
-         },
-         {
-+            .name = "OoB tile leaf",
-+            .leaf = { .leaf = 0x1d, .subleaf = CPUID_GUEST_NR_PALETTE },
-+        },
-+        {
-+            .name = "OoB tmul leaf",
-+            .leaf = { .leaf = 0x1e, .subleaf = CPUID_GUEST_NR_TMUL },
-+        },
-+        {
-             .name = "OoB extd leaf",
-             .leaf = { .leaf = 0x80000000 | CPUID_GUEST_NR_EXTD },
-         },
-@@ -444,6 +486,8 @@ static void test_cpuid_out_of_range_clea
-                 .topo.raw[0].a = 0xc2,
-                 .xstate.raw[0].a = 0xc2,
-                 .xstate.raw[1].a = 0xc2,
-+                .tile.raw[0].a = 0xc2,
-+                .tmul.raw[0].a = 0xc2,
-             },
-         },
-         {
-@@ -459,6 +503,8 @@ static void test_cpuid_out_of_range_clea
-                 .topo.raw[0].a = 0xc2,
-                 .xstate.raw[0].a = 0xc2,
-                 .xstate.raw[1].a = 0xc2,
-+                .tile.raw[0].a = 0xc2,
-+                .tmul.raw[0].a = 0xc2,
-             },
-         },
-         {
-@@ -473,6 +519,8 @@ static void test_cpuid_out_of_range_clea
-                 .topo.raw[0].a = 0xc2,
-                 .xstate.raw[0].a = 0xc2,
-                 .xstate.raw[1].a = 0xc2,
-+                .tile.raw[0].a = 0xc2,
-+                .tmul.raw[0].a = 0xc2,
-             },
-         },
-         {
-@@ -486,6 +534,8 @@ static void test_cpuid_out_of_range_clea
-                 .topo.raw[1].b = 0xc2,
-                 .xstate.raw[0].a = 0xc2,
-                 .xstate.raw[1].a = 0xc2,
-+                .tile.raw[0].a = 0xc2,
-+                .tmul.raw[0].a = 0xc2,
-             },
-         },
-         {
-@@ -500,6 +550,8 @@ static void test_cpuid_out_of_range_clea
- 
-                 .xstate.raw[2].b = 0xc2,
-                 .xstate.raw[3].b = 0xc2,
-+                .tile.raw[0].a = 0xc2,
-+                .tmul.raw[0].a = 0xc2,
-             },
-         },
-         {
-@@ -542,6 +594,34 @@ static void test_cpuid_out_of_range_clea
-             },
-         },
-         {
-+            .name = "tile no palette",
-+            .nr_markers = 0,
-+            .p = {
-+                /* First two subleaves invalid as a pair.  Others cleared. */
-+                .basic.max_leaf = 0x1d,
-+                .xstate.xcr0_low = XSTATE_FP_SSE,
-+
-+                .tile.raw[0].a = 0xc2,
-+                .tile.raw[1].b = 0xc2,
-+                .tmul.raw[0].a = 0xc2,
-+            },
-+        },
-+        {
-+            .name = "tile palette 1",
-+            .nr_markers = 1,
-+            .p = {
-+                /* First two subleaves valid as a pair.  Others cleared. */
-+                .basic.max_leaf = 0x1d,
-+                .feat.amx_tile = 1,
-+                .xstate.xcr0_low = XSTATE_FP_SSE | X86_XCR0_TILE_CFG |
-+                                   X86_XCR0_TILE_DATA,
-+                .tile.raw[0].a = 1,
-+                .tile.raw[1].b = 0xc2,
-+
-+                .tmul.raw[0].a = 0xc2,
-+            },
-+        },
-+        {
-             .name = "extd",
-             .nr_markers = 1,
-             .p = {
-@@ -636,6 +716,24 @@ static void test_cpuid_maximum_leaf_shri
-             },
-         },
-         {
-+            .name = "tile",
-+            .p = {
-+                /* Subleaf 1 only with some valid value. */
-+                .basic.max_leaf = 0x1d,
-+                .tile.raw[0].a = 1,
-+                .tile.raw[1].a = 1024,
-+            },
-+        },
-+        {
-+            .name = "tmul",
-+            .p = {
-+                /* Subleaf 0 only with some valid values. */
-+                .basic.max_leaf = 0x1e,
-+                .tmul.maxk = 16,
-+                .tmul.maxn = 16,
-+            },
-+        },
-+        {
-             .name = "extd",
-             .p = {
-                 /* Commonly available information only. */
-@@ -655,6 +753,7 @@ static void test_cpuid_maximum_leaf_shri
- 
-         p->basic.max_leaf = ARRAY_SIZE(p->basic.raw) - 1;
-         p->feat.max_subleaf = ARRAY_SIZE(p->feat.raw) - 1;
-+        p->tile.max_palette = ARRAY_SIZE(p->tile.raw) - 1;
-         p->extd.max_leaf = 0x80000000 | (ARRAY_SIZE(p->extd.raw) - 1);
- 
-         x86_cpu_policy_shrink_max_leaves(p);
-@@ -672,6 +771,10 @@ static void test_cpuid_maximum_leaf_shri
-              fail("  Test %s feat fail - expected %#x, got %#x\n",
-                   t->name, t->p.feat.max_subleaf, p->feat.max_subleaf);
- 
-+        if ( p->tile.max_palette != t->p.tile.max_palette )
-+             fail("  Test %s tile fail - expected %#x, got %#x\n",
-+                  t->name, t->p.tile.max_palette, p->tile.max_palette);
-+
-         free(p);
-     }
- }
+TBD: Formally #NM injection in do_device_not_available() may need to use
+     struct x86_event's data field, yet it's not quite clear to me whether
+     that's really necessary there.
+
 --- a/xen/arch/x86/cpu-policy.c
 +++ b/xen/arch/x86/cpu-policy.c
-@@ -256,6 +256,31 @@ static void recalculate_xstate(struct cp
+@@ -241,6 +241,9 @@ static void recalculate_xstate(struct cp
+         p->xstate.xss_high  = (xstates & XSTATE_XSAVES_ONLY) >> 32;
      }
- }
  
-+static void recalculate_tile(struct cpu_policy *p)
-+{
-+    if ( !p->feat.amx_tile )
++    if ( p->xstate.xfd )
++        ecx_mask |= XSTATE_XFD;
++
+     /* Subleafs 2+ */
+     xstates &= ~XSTATE_FP_SSE;
+     BUILD_BUG_ON(ARRAY_SIZE(p->xstate.comp) < 63);
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -2036,6 +2036,12 @@ void cf_check paravirt_ctxt_switch_to(st
+ 
+     if ( cpu_has_msr_tsc_aux )
+         wrmsr_tsc_aux(v->arch.msrs->tsc_aux);
++
++    if ( v->domain->arch.cpuid->xstate.xfd )
 +    {
-+        memset(&p->tile, 0, sizeof(p->tile));
-+        memset(&p->tmul, 0, sizeof(p->tmul));
-+        return;
++        wrmsrns(MSR_XFD, v->arch.msrs->xfd);
++        /* XFD_ERR is kept at zero at all times when Xen is "owning" the MSR. */
 +    }
-+
-+    p->tile.raw[0].b = 0;
-+    p->tile.raw[0].c = 0;
-+    p->tile.raw[0].d = 0;
-+
-+    if ( p->tile.max_palette >= 1 )
-+    {
-+        p->tile.raw[1].c &= 0x0000ffff;
-+        p->tile.raw[1].d = 0;
-+    }
-+
-+    p->tmul.raw[0].a = 0;
-+    p->tmul.raw[0].b &= 0x00ffffff;
-+    p->tmul.raw[0].c = 0,
-+    p->tmul.raw[0].d = 0;
-+}
-+
- /*
-  * Misc adjustments to the policy.  Mostly clobbering reserved fields and
-  * duplicating shared fields.  Intentionally hidden fields are annotated.
-@@ -275,7 +300,8 @@ static void recalculate_misc(struct cpu_
- 
-     p->basic.raw[0xc] = EMPTY_LEAF;
- 
--    zero_leaves(p->basic.raw, 0xe, 0x23);
-+    zero_leaves(p->basic.raw, 0xe, 0x1c);
-+    zero_leaves(p->basic.raw, 0x1f, 0x23);
- 
-     p->avx10.raw[0].b &= 0x000700ff;
-     p->avx10.raw[0].c = 0;
-@@ -410,6 +436,7 @@ void __init calculate_host_cpu_policy(vo
- 
-     x86_cpu_featureset_to_policy(boot_cpu_data.x86_capability, p);
-     recalculate_xstate(p);
-+    recalculate_tile(p);
- 
-     /* When vPMU is disabled, drop it from the host policy. */
-     if ( vpmu_mode == XENPMU_MODE_OFF )
-@@ -432,6 +459,7 @@ static void __init guest_common_max_leav
- {
-     p->basic.max_leaf       = ARRAY_SIZE(p->basic.raw) - 1;
-     p->feat.max_subleaf     = ARRAY_SIZE(p->feat.raw) - 1;
-+    p->tile.max_palette     = ARRAY_SIZE(p->tile.raw) - 1;
-     p->avx10.max_subleaf    = ARRAY_SIZE(p->avx10.raw) - 1;
-     p->apx.max_subleaf      = ARRAY_SIZE(p->apx.raw) - 1;
-     p->extd.max_leaf        = 0x80000000U + ARRAY_SIZE(p->extd.raw) - 1;
-@@ -442,6 +470,7 @@ static void __init guest_common_default_
- {
-     p->basic.max_leaf       = host_cpu_policy.basic.max_leaf;
-     p->feat.max_subleaf     = host_cpu_policy.feat.max_subleaf;
-+    p->tile.max_palette     = host_cpu_policy.tile.max_palette;
-     p->avx10.max_subleaf    = host_cpu_policy.avx10.max_subleaf;
-     p->apx.max_subleaf      = host_cpu_policy.apx.max_subleaf;
-     p->extd.max_leaf        = host_cpu_policy.extd.max_leaf;
-@@ -772,6 +801,7 @@ static void __init calculate_pv_max_poli
-     sanitise_featureset(fs);
-     x86_cpu_featureset_to_policy(fs, p);
-     recalculate_xstate(p);
-+    recalculate_tile(p);
- 
-     p->extd.raw[0xa] = EMPTY_LEAF; /* No SVM for PV guests. */
- }
-@@ -812,6 +842,7 @@ static void __init calculate_pv_def_poli
- 
-     x86_cpu_featureset_to_policy(fs, p);
-     recalculate_xstate(p);
-+    recalculate_tile(p);
  }
  
- static void __init calculate_hvm_max_policy(void)
-@@ -942,6 +973,7 @@ static void __init calculate_hvm_max_pol
-     sanitise_featureset(fs);
-     x86_cpu_featureset_to_policy(fs, p);
-     recalculate_xstate(p);
-+    recalculate_tile(p);
- 
-     /* It's always possible to emulate CPUID faulting for HVM guests */
-     p->platform_info.cpuid_faulting = true;
-@@ -994,6 +1026,7 @@ static void __init calculate_hvm_def_pol
- 
-     x86_cpu_featureset_to_policy(fs, p);
-     recalculate_xstate(p);
-+    recalculate_tile(p);
- }
- 
- void __init init_guest_cpu_policies(void)
-@@ -1054,6 +1087,7 @@ void recalculate_cpuid_policy(struct dom
- 
-     p->basic.max_leaf   = min(p->basic.max_leaf,   max->basic.max_leaf);
-     p->feat.max_subleaf = min(p->feat.max_subleaf, max->feat.max_subleaf);
-+    p->tile.max_palette = min(p->tile.max_palette, max->tile.max_palette);
-     p->avx10.max_subleaf = min(p->avx10.max_subleaf, max->avx10.max_subleaf);
-     p->apx.max_subleaf  = min(p->apx.max_subleaf, max->apx.max_subleaf);
-     p->extd.max_leaf    = 0x80000000U | min(p->extd.max_leaf & 0xffff,
-@@ -1102,6 +1136,8 @@ void recalculate_cpuid_policy(struct dom
- 
-     if ( p->basic.max_leaf < XSTATE_CPUID )
-         __clear_bit(X86_FEATURE_XSAVE, fs);
-+    if ( p->basic.max_leaf < 0x1d )
-+        __clear_bit(X86_FEATURE_AMX_TILE, fs);
-     if ( p->basic.max_leaf < 0x24 )
-         __clear_bit(X86_FEATURE_AVX10, fs);
-     if ( p->basic.max_leaf < 0x29 )
-@@ -1130,6 +1166,7 @@ void recalculate_cpuid_policy(struct dom
-     p->extd.maxlinaddr = p->extd.lm ? 48 : 32;
- 
-     recalculate_xstate(p);
-+    recalculate_tile(p);
-     recalculate_misc(p);
- 
-     for ( i = 0; i < ARRAY_SIZE(p->cache.raw); ++i )
-@@ -1201,6 +1238,11 @@ void __init init_dom0_cpuid_policy(struc
-          * Default-off features with their own leaves need those leaves
-          * re-populated from the max policy.
-          */
-+        if ( p->feat.amx_tile )
+ static void _update_runstate_area(struct vcpu *v)
+--- a/xen/arch/x86/domctl.c
++++ b/xen/arch/x86/domctl.c
+@@ -1153,6 +1153,8 @@ long arch_do_domctl(
+         static const uint32_t msrs_to_send[] = {
+             MSR_SPEC_CTRL,
+             MSR_INTEL_MISC_FEATURES_ENABLES,
++            MSR_XFD,
++            MSR_XFD_ERR,
+             MSR_TSC_AUX,
+             MSR_AMD64_DR0_ADDRESS_MASK,
+             MSR_AMD64_DR1_ADDRESS_MASK,
+@@ -1250,6 +1252,8 @@ long arch_do_domctl(
+                 {
+                 case MSR_SPEC_CTRL:
+                 case MSR_INTEL_MISC_FEATURES_ENABLES:
++                case MSR_XFD:
++                case MSR_XFD_ERR:
+                 case MSR_TSC_AUX:
+                 case MSR_AMD64_DR0_ADDRESS_MASK:
+                 case MSR_AMD64_DR1_ADDRESS_MASK ... MSR_AMD64_DR3_ADDRESS_MASK:
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -1396,6 +1396,8 @@ static const uint32_t msrs_to_send[] = {
+     MSR_USER_MSR_CTL,
+     MSR_SPEC_CTRL,
+     MSR_INTEL_MISC_FEATURES_ENABLES,
++    MSR_XFD,
++    MSR_XFD_ERR,
+     MSR_PKRS,
+     MSR_IA32_BNDCFGS,
+     MSR_IA32_XSS,
+@@ -1551,6 +1553,8 @@ static int cf_check hvm_load_cpu_msrs(st
+         case MSR_USER_MSR_CTL:
+         case MSR_SPEC_CTRL:
+         case MSR_INTEL_MISC_FEATURES_ENABLES:
++        case MSR_XFD:
++        case MSR_XFD_ERR:
+         case MSR_PKRS:
+         case MSR_IA32_BNDCFGS:
+         case MSR_IA32_XSS:
+--- a/xen/arch/x86/hvm/vmx/vmcs.c
++++ b/xen/arch/x86/hvm/vmx/vmcs.c
+@@ -1210,6 +1210,12 @@ static int construct_vmcs(struct vcpu *v
+         if ( (vmexit_ctl & VM_EXIT_CLEAR_BNDCFGS) &&
+              (vmentry_ctl & VM_ENTRY_LOAD_BNDCFGS) )
+             vmx_clear_msr_intercept(v, MSR_IA32_BNDCFGS, VMX_MSR_RW);
++
++        if ( d->arch.cpuid->xstate.xfd )
 +        {
-+            p->tile = max->tile;
-+            p->tmul = max->tmul;
++            vmx_clear_msr_intercept(v, MSR_XFD, VMX_MSR_RW);
++            vmx_clear_msr_intercept(v, MSR_XFD_ERR, VMX_MSR_RW);
 +        }
-         if ( p->feat.avx10 )
-             p->avx10 = max->avx10;
-         if ( p->feat.apx_f )
-@@ -1237,6 +1279,10 @@ static void __init __maybe_unused build_
-                  sizeof(raw_cpu_policy.feat.raw));
-     BUILD_BUG_ON(sizeof(raw_cpu_policy.xstate) !=
-                  sizeof(raw_cpu_policy.xstate.raw));
-+    BUILD_BUG_ON(sizeof(raw_cpu_policy.tile) !=
-+                 sizeof(raw_cpu_policy.tile.raw));
-+    BUILD_BUG_ON(sizeof(raw_cpu_policy.tmul) !=
-+                 sizeof(raw_cpu_policy.tmul.raw));
-     BUILD_BUG_ON(sizeof(raw_cpu_policy.avx10) !=
-                  sizeof(raw_cpu_policy.avx10.raw));
-     BUILD_BUG_ON(sizeof(raw_cpu_policy.apx) !=
---- a/xen/arch/x86/cpuid.c
-+++ b/xen/arch/x86/cpuid.c
-@@ -226,6 +226,22 @@ void guest_cpuid(const struct vcpu *v, u
-             *res = array_access_nospec(p->xstate.raw, subleaf);
-             break;
- 
-+        case 0x1d:
-+            ASSERT(p->tile.max_palette < ARRAY_SIZE(p->tile.raw));
-+            if ( subleaf > min_t(uint32_t, p->tile.max_palette,
-+                                 ARRAY_SIZE(p->tile.raw) - 1) )
-+                return;
-+
-+            *res = array_access_nospec(p->tile.raw, subleaf);
-+            break;
-+
-+        case 0x1e:
-+            if ( subleaf >= ARRAY_SIZE(p->tmul.raw) )
-+                return;
-+
-+            *res = array_access_nospec(p->tmul.raw, subleaf);
-+            break;
-+
-         case 0x24:
-             ASSERT(p->avx10.max_subleaf < ARRAY_SIZE(p->avx10.raw));
-             if ( subleaf > min_t(uint32_t, p->avx10.max_subleaf,
---- a/xen/arch/x86/lib/cpu-policy/copy-to-buffer.c
-+++ b/xen/arch/x86/lib/cpu-policy/copy-to-buffer.c
-@@ -123,6 +123,19 @@ int x86_cpuid_copy_to_buffer(const struc
-             break;
-         }
- 
-+        case 0x1d:
-+            for ( subleaf = 0;
-+                  subleaf <= MIN(p->tile.max_palette,
-+                                 ARRAY_SIZE(p->tile.raw) - 1); ++subleaf )
-+                COPY_LEAF(leaf, subleaf, &p->tile.raw[subleaf]);
-+            break;
-+
-+        case 0x1e:
-+            for ( subleaf = 0;
-+                  subleaf <= ARRAY_SIZE(p->tmul.raw) - 1; ++subleaf )
-+                COPY_LEAF(leaf, subleaf, &p->tmul.raw[subleaf]);
-+            break;
-+
-         case 0x24:
-             for ( subleaf = 0;
-                   subleaf <= MIN(p->avx10.max_subleaf,
---- a/xen/arch/x86/lib/cpu-policy/copy-from-buffer.c
-+++ b/xen/arch/x86/lib/cpu-policy/copy-from-buffer.c
-@@ -108,6 +108,20 @@ int x86_cpuid_copy_from_buffer(struct cp
-                 array_access_nospec(p->xstate.raw, data.subleaf) = l;
-                 break;
- 
-+            case 0x1d:
-+                if ( data.subleaf >= ARRAY_SIZE(p->tile.raw) )
-+                    goto out_of_range;
-+
-+                array_access_nospec(p->tile.raw, data.subleaf) = l;
-+                break;
-+
-+            case 0x1e:
-+                if ( data.subleaf >= ARRAY_SIZE(p->tmul.raw) )
-+                    goto out_of_range;
-+
-+                array_access_nospec(p->tmul.raw, data.subleaf) = l;
-+                break;
-+
-             case 0x24:
-                 if ( data.subleaf >= ARRAY_SIZE(p->avx10.raw) )
-                     goto out_of_range;
---- a/xen/arch/x86/lib/cpu-policy/cpuid.c
-+++ b/xen/arch/x86/lib/cpu-policy/cpuid.c
-@@ -129,7 +129,7 @@ void x86_cpu_policy_fill_native(struct c
-         switch ( i )
-         {
-         case 0x4: case 0x7: case 0xb: case 0xd:
--        case 0x24: case 0x29:
-+        case 0x1d: case 0x1e: case 0x24: case 0x29:
-             /* Multi-invocation leaves.  Deferred. */
-             continue;
-         }
-@@ -223,6 +223,18 @@ void x86_cpu_policy_fill_native(struct c
-         }
      }
  
-+    if ( p->basic.max_leaf >= 0x1d )
-+    {
-+        cpuid_count_leaf(0x1d, 0, &p->tile.raw[0]);
-+
-+        for ( i = 1; i <= MIN(p->tile.max_palette,
-+                              ARRAY_SIZE(p->tile.raw) - 1); ++i )
-+            cpuid_count_leaf(0x1d, i, &p->tile.raw[i]);
-+    }
-+
-+    if ( p->basic.max_leaf >= 0x1e )
-+        cpuid_count_leaf(0x1e, 0, &p->tmul.raw[0]);
-+
-     if ( p->basic.max_leaf >= 0x24 )
-     {
-         cpuid_count_leaf(0x24, 0, &p->avx10.raw[0]);
-@@ -310,6 +322,20 @@ void x86_cpu_policy_clear_out_of_range_l
-                     ARRAY_SIZE(p->xstate.raw) - 1);
-     }
- 
-+    if ( p->basic.max_leaf < 0x1d ||
-+         (cpu_policy_xstates(p) &
-+          (X86_XCR0_TILE_CFG | X86_XCR0_TILE_DATA)) !=
-+         (X86_XCR0_TILE_CFG | X86_XCR0_TILE_DATA) )
-+        memset(p->tile.raw, 0, sizeof(p->tile.raw));
-+    else
-+        zero_leaves(p->tile.raw, p->tile.max_palette + 1,
-+                    ARRAY_SIZE(p->tile.raw) - 1);
-+
-+    if ( p->basic.max_leaf < 0x1e || !p->tile.max_palette ||
-+         (!p->feat.amx_int8 && !p->feat.amx_bf16 &&
-+          !p->feat.amx_fp16 && !p->feat.amx_complex) )
-+        memset(p->tmul.raw, 0, sizeof(p->tmul.raw));
-+
-     if ( p->basic.max_leaf < 0x24 )
-         memset(p->avx10.raw, 0, sizeof(p->avx10.raw));
- 
-@@ -328,6 +354,8 @@ void __init x86_cpu_policy_bound_max_lea
-         min_t(uint32_t, p->basic.max_leaf, ARRAY_SIZE(p->basic.raw) - 1);
-     p->feat.max_subleaf =
-         min_t(uint32_t, p->feat.max_subleaf, ARRAY_SIZE(p->feat.raw) - 1);
-+    p->tile.max_palette =
-+        min_t(uint32_t, p->tile.max_palette, ARRAY_SIZE(p->tile.raw) - 1);
-     p->avx10.max_subleaf =
-         min_t(uint32_t, p->avx10.max_subleaf, ARRAY_SIZE(p->avx10.raw) - 1);
-     p->apx.max_subleaf =
-@@ -359,6 +387,21 @@ void x86_cpu_policy_shrink_max_leaves(st
+     /* I/O access bitmap. */
+--- a/xen/arch/x86/hvm/vmx/vmx.c
++++ b/xen/arch/x86/hvm/vmx/vmx.c
+@@ -729,6 +729,14 @@ static void vmx_save_guest_msrs(struct v
       */
-     p->basic.raw[0xd] = p->xstate.raw[0];
+     v->arch.hvm.vmx.shadow_gs = read_gs_shadow();
  
-+    for ( i = p->tile.max_palette; i; --i )
-+        if ( p->tile.raw[i].a | p->tile.raw[i].b |
-+             p->tile.raw[i].c | p->tile.raw[i].d )
-+            break;
-+    if ( i )
-+        p->tile.max_palette = i;
-+    else
++    if ( v->domain->arch.cpuid->xstate.xfd )
 +    {
-+        ASSERT(!p->feat.amx_tile);
-+        zero_leaves(p->tile.raw, 0, 0);
-+    }
-+    p->basic.raw[0x1d] = p->tile.raw[0];
-+
-+    p->basic.raw[0x1e] = p->tmul.raw[0];
-+
-     p->basic.raw[0x24] = p->avx10.raw[0];
- 
-     p->basic.raw[0x29] = p->apx.raw[0];
---- a/xen/arch/x86/lib/cpu-policy/policy.c
-+++ b/xen/arch/x86/lib/cpu-policy/policy.c
-@@ -24,6 +24,30 @@ int x86_cpu_policies_are_compatible(cons
-     if ( guest->feat.max_subleaf > host->feat.max_subleaf )
-         FAIL_CPUID(7, 0);
- 
-+    if ( (guest->feat.amx_tile && !guest->tile.max_palette) ||
-+         guest->tile.max_palette > host->tile.max_palette )
-+        FAIL_CPUID(0x1d, 0);
-+
-+    if ( guest->tile.max_palette >= 1 )
-+    {
-+        const typeof(guest->tile.palette1) *gt = &guest->tile.palette1,
-+                                           *ht = &host->tile.palette1;
-+
-+        if ( gt->tot_bytes != ht->tot_bytes ||
-+             gt->bytes_per_tile != ht->bytes_per_tile ||
-+             gt->bytes_per_row != ht->bytes_per_row ||
-+             !gt->num_regs || gt->num_regs > ht->num_regs ||
-+             !gt->max_rows || gt->max_rows > ht->max_rows )
-+            FAIL_CPUID(0x1d, 1);
++        msrs->xfd = rdmsr(MSR_XFD);
++        msrs->xfd_err = rdmsr(MSR_XFD_ERR);
++        if ( msrs->xfd_err )
++            wrmsrns(MSR_XFD_ERR, 0);
 +    }
 +
-+    if ( ((guest->feat.amx_int8 || guest->feat.amx_bf16 ||
-+           guest->feat.amx_fp16 || guest->feat.amx_complex) &&
-+          (!guest->tmul.maxk || !guest->tmul.maxn)) ||
-+         guest->tmul.maxk > host->tmul.maxk ||
-+         guest->tmul.maxn > host->tmul.maxn )
-+        FAIL_CPUID(0x1e, 0);
+ #ifdef CONFIG_VMTRACE
+     if ( v->arch.hvm.vmx.ipt_active )
+     {
+@@ -754,6 +762,13 @@ static void vmx_restore_guest_msrs(struc
+     if ( cpu_has_msr_tsc_aux )
+         wrmsr_tsc_aux(msrs->tsc_aux);
+ 
++    if ( v->domain->arch.cpuid->xstate.xfd )
++    {
++        wrmsrns(MSR_XFD, msrs->xfd);
++        if ( msrs->xfd_err )
++            wrmsrns(MSR_XFD_ERR, msrs->xfd_err);
++    }
 +
-     if ( guest->avx10.version > host->avx10.version ||
-          guest->avx10.max_subleaf > host->avx10.max_subleaf )
-         FAIL_CPUID(0x24, 0);
---- a/xen/arch/x86/lib/cpu-policy/private.h
-+++ b/xen/arch/x86/lib/cpu-policy/private.h
-@@ -15,13 +15,17 @@
+ #ifdef CONFIG_VMTRACE
+     if ( v->arch.hvm.vmx.ipt_active )
+     {
+@@ -2780,6 +2795,12 @@ static uint64_t cf_check vmx_get_reg(str
+     case MSR_PKRS:
+         return (v == curr) ? rdpkrs() : msrs->pkrs;
  
- #else
- 
-+#include <assert.h>
- #include <errno.h>
- #include <inttypes.h>
- #include <stdbool.h>
- #include <stddef.h>
- #include <string.h>
- 
-+#define ASSERT assert
++    case MSR_XFD_ERR:
++        if ( v != curr )
++            return msrs->xfd_err;
++        val = rdmsr(MSR_XFD_ERR);
++        return val;
 +
- #include <xen/asm/msr-index.h>
-+#include <xen/asm/x86-defns.h>
- #include <xen/asm/x86-vendors.h>
+     case MSR_SHADOW_GS_BASE:
+         if ( v != curr )
+             return v->arch.hvm.vmx.shadow_gs;
+@@ -2840,6 +2861,12 @@ static void cf_check vmx_set_reg(struct
+         if ( v == curr )
+             wrpkrs(val);
+         return;
++
++    case MSR_XFD_ERR:
++        msrs->xfd_err = val;
++        if ( v == curr )
++            wrmsrns(MSR_XFD_ERR, val);
++        return;
+     }
  
- #include <xen-tools/common-macros.h>
+     /* Logic which maybe requires remote VMCS acquisition. */
+--- a/xen/arch/x86/include/asm/guest-msr.h
++++ b/xen/arch/x86/include/asm/guest-msr.h
+@@ -64,6 +64,12 @@ struct vcpu_msrs
+         };
+     } misc_features_enables;
+ 
++    /* 0x000001c4 - MSR_XFD */
++    uint64_t xfd;
++
++    /* 0x000001c5 - MSR_XFD_ERR */
++    uint64_t xfd_err;
++
+ #ifdef CONFIG_VMTRACE
+     /*
+      * 0x00000560 ... 57x - MSR_RTIT_*
+--- a/xen/arch/x86/include/asm/msr-index.h
++++ b/xen/arch/x86/include/asm/msr-index.h
+@@ -124,6 +124,10 @@
+ #define MSR_TEMPERATURE_TARGET              0x000001a2
+ #define MSR_PACKAGE_THERM_STATUS            0x000001b1
+ 
++/* Bits within these two MSRs share positions with XCR0. */
++#define MSR_XFD                             0x000001c4
++#define MSR_XFD_ERR                         0x000001c5
++
+ #define MSR_FRED_RSP_SL0                    0x000001cc
+ #define MSR_FRED_RSP_SL1                    0x000001cd
+ #define MSR_FRED_RSP_SL2                    0x000001ce
+--- a/xen/arch/x86/include/asm/xstate.h
++++ b/xen/arch/x86/include/asm/xstate.h
+@@ -38,9 +38,11 @@ extern uint32_t mxcsr_mask;
+ 
+ #define XSTATE_XSS     (1U << 0)
+ #define XSTATE_ALIGN64 (1U << 1)
++#define XSTATE_XFD     (1U << 2)
+ 
+ extern u64 xfeature_mask;
+ extern u64 xstate_align;
++extern uint64_t xfd_mask;
+ 
+ #define xstate_offset(n) (raw_cpu_policy.xstate.comp[n].offset)
+ #define xstate_size(n)   (raw_cpu_policy.xstate.comp[n].size)
+--- a/xen/arch/x86/msr.c
++++ b/xen/arch/x86/msr.c
+@@ -220,6 +220,17 @@ int guest_rdmsr(struct vcpu *v, uint32_t
+         *val = msrs->misc_features_enables.raw;
+         break;
+ 
++    case MSR_XFD:
++        if ( !cp->xstate.xfd )
++            goto gp_fault;
++        *val = v == curr && is_hvm_domain(d) ? rdmsr(msr) : msrs->xfd;
++        break;
++
++    case MSR_XFD_ERR:
++        if ( !cp->xstate.xfd )
++            goto gp_fault;
++        goto get_reg;
++
+     case MSR_P5_MC_ADDR:
+     case MSR_P5_MC_TYPE:
+     case MSR_IA32_MCG_CAP     ... MSR_IA32_MCG_CTL:      /* 0x179 -> 0x17b */
+@@ -549,6 +560,21 @@ int guest_wrmsr(struct vcpu *v, uint32_t
+         break;
+     }
+ 
++    case MSR_XFD:
++        if ( !cp->xstate.xfd ||
++             (val & ~(cpu_policy_xstates(cp) & xfd_mask)) )
++            goto gp_fault;
++        if ( v == curr )
++            wrmsrns(msr, val);
++        msrs->xfd = val;
++        break;
++
++    case MSR_XFD_ERR:
++        if ( !cp->xstate.xfd ||
++             (val & ~(cpu_policy_xstates(cp) & xfd_mask)) )
++            goto gp_fault;
++        goto set_reg;
++
+     case MSR_IA32_MCG_CAP     ... MSR_IA32_MCG_CTL:      /* 0x179 -> 0x17b */
+     case MSR_IA32_MCx_CTL2(0) ... MSR_IA32_MCx_CTL2(31): /* 0x280 -> 0x29f */
+     case MSR_IA32_MCx_CTL(0)  ... MSR_IA32_MCx_MISC(31): /* 0x400 -> 0x47f */
+--- a/xen/arch/x86/pv/emulate.c
++++ b/xen/arch/x86/pv/emulate.c
+@@ -102,6 +102,9 @@ uint64_t pv_get_reg(struct vcpu *v, unsi
+     case MSR_SPEC_CTRL:
+         return msrs->spec_ctrl.raw;
+ 
++    case MSR_XFD_ERR:
++        return msrs->xfd_err;
++
+     default:
+         printk(XENLOG_G_ERR "%s(%pv, 0x%08x) Bad register\n",
+                __func__, v, reg);
+@@ -123,6 +126,10 @@ void pv_set_reg(struct vcpu *v, unsigned
+         msrs->spec_ctrl.raw = val;
+         break;
+ 
++    case MSR_XFD_ERR:
++        msrs->xfd_err = val;
++        break;
++
+     default:
+         printk(XENLOG_G_ERR "%s(%pv, 0x%08x, 0x%016"PRIx64") Bad register\n",
+                __func__, v, reg, val);
+--- a/xen/arch/x86/traps.c
++++ b/xen/arch/x86/traps.c
+@@ -36,6 +36,7 @@
+ #include <asm/flushtlb.h>
+ #include <asm/fsgsbase.h>
+ #include <asm/gdbsx.h>
++#include <asm/guest-msr.h>
+ #include <asm/i387.h>
+ #include <asm/io.h>
+ #include <asm/irq-vectors.h>
+@@ -2019,6 +2020,22 @@ void asmlinkage do_device_not_available(
+     }
+ 
+ #ifdef CONFIG_PV
++    if ( curr->arch.msrs->xfd )
++    {
++        uint64_t xfd_err = rdmsr(MSR_XFD_ERR);
++
++        if ( xfd_err )
++        {
++            curr->arch.msrs->xfd_err |= xfd_err;
++
++            /* Bits in XFD_ERR are sticky; clear the MSR right away. */
++            wrmsrns(MSR_XFD_ERR, 0);
++
++            pv_inject_hw_exception(X86_EXC_NM, X86_EVENT_NO_EC);
++            return;
++        }
++    }
++
+     if ( !(curr->arch.pv.ctrlreg[0] & X86_CR0_TS) )
+     {
+         ASSERT_UNREACHABLE();
+--- a/xen/arch/x86/xstate.c
++++ b/xen/arch/x86/xstate.c
+@@ -30,6 +30,10 @@
+ u64 __read_mostly xfeature_mask;
+ 
+ u64 __read_mostly xstate_align;
++
++/* Mask of XSAVE/XRSTOR features supporting XFD. */
++uint64_t __ro_after_init xfd_mask;
++
+ static unsigned int __read_mostly xstate_features;
+ 
+ uint32_t __read_mostly mxcsr_mask = 0x0000ffbf;
+@@ -114,6 +118,11 @@ static int setup_xstate_features(bool bs
+             __set_bit(leaf, &xstate_align);
+         else
+             BUG_ON(!(ecx & XSTATE_ALIGN64) != !test_bit(leaf, &xstate_align));
++
++        if ( bsp && (ecx & XSTATE_XFD) )
++            __set_bit(leaf, &xfd_mask);
++        else
++            BUG_ON(!(ecx & XSTATE_XFD) != !test_bit(leaf, &xfd_mask));
+     }
+ 
+     return 0;
 --- a/xen/include/xen/lib/x86/cpu-policy.h
 +++ b/xen/include/xen/lib/x86/cpu-policy.h
-@@ -66,6 +66,8 @@ const char *x86_cpuid_vendor_to_str(unsi
- #define CPUID_GUEST_NR_FEAT       (2u + 1)
- #define CPUID_GUEST_NR_TOPO       (1u + 1)
- #define CPUID_GUEST_NR_XSTATE     (62u + 1)
-+#define CPUID_GUEST_NR_PALETTE    (1u + 1)
-+#define CPUID_GUEST_NR_TMUL       (0u + 1)
- #define CPUID_GUEST_NR_AVX10      (1u + 1)
- #define CPUID_GUEST_NR_APX        (0u + 1)
- #define CPUID_GUEST_NR_EXTD_INTEL (0x8u + 1)
-@@ -268,6 +270,35 @@ struct cpu_policy
+@@ -265,7 +265,7 @@ struct cpu_policy
+         /* Per-component common state.  Valid for i >= 2. */
+         struct xstate_component {
+             uint32_t size, offset;
+-            bool xss:1, align:1;
++            bool xss:1, align:1, xfd:1;
+             uint32_t _res_d;
          } comp[CPUID_GUEST_NR_XSTATE];
      } xstate;
+--- a/xen/tools/gen-cpuid.py
++++ b/xen/tools/gen-cpuid.py
+@@ -259,7 +259,7 @@ def crunch_numbers(state):
+         # are instructions built on top of base XSAVE, while others are new
+         # instruction groups which are specified to require XSAVE for state
+         # management.
+-        XSAVE: [XSAVEOPT, XSAVEC, XGETBV1, XSAVES,
++        XSAVE: [XSAVEOPT, XSAVEC, XGETBV1, XSAVES, XFD,
+                 AVX, MPX, PKU, AMX_TILE, APX_F, LWP],
  
-+    /* Structured tile information leaf: 0x00000001d[xx] */
-+    union {
-+        struct cpuid_leaf raw[CPUID_GUEST_NR_PALETTE];
-+        struct {
-+            /* Subleaf 0. */
-+            uint32_t max_palette;
-+            uint32_t /* b */:32, /* c */:32, /* d */:32;
-+
-+            /* Palette (subleaf) 1. */
-+            struct {
-+                uint16_t tot_bytes, bytes_per_tile;
-+                uint16_t bytes_per_row, num_regs;
-+                uint16_t max_rows, :16;
-+                uint32_t /* d */:32;
-+            } palette1;
-+        };
-+    } tile;
-+
-+    /* Structured tmul information leaf: 0x00000001e[xx] */
-+    union {
-+        struct cpuid_leaf raw[CPUID_GUEST_NR_TMUL];
-+        struct {
-+            /* Subleaf 0. */
-+            uint32_t /* a */:32;
-+            uint32_t maxk:8, maxn:16, :8;
-+            uint32_t /* c */:32, /* d */:32;
-+        };
-+    } tmul;
-+
-     /* Structured AVX10 information leaf: 0x000000024[xx] */
-     union {
-         struct cpuid_leaf raw[CPUID_GUEST_NR_AVX10];
+         # AVX is taken to mean hardware support for 256bit registers (which in
 
 
