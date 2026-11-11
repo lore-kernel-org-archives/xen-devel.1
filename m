@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC2D6606A339
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2026 14:22:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A292F606A32E
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2026 14:22:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=Vvke75cd
-Received: from list by lists.xenproject.org with outflank-mailman.1483736.1687091 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=UD3wrNnF
+Received: from list by lists.xenproject.org with outflank-mailman.1483744.1687099 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xR9DH-0000Ii-VZ; Wed, 11 Nov 2026 14:22:11 +0000
+	id 1xR9Dg-0000mL-9x; Wed, 11 Nov 2026 14:22:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1483736.1687091; Wed, 11 Nov 2026 14:22:11 +0000
+Received: by outflank-mailman (output) from mailman id 1483744.1687099; Wed, 11 Nov 2026 14:22:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xR9DH-0000IN-Sl; Wed, 11 Nov 2026 14:22:11 +0000
-Received: by outflank-mailman (input) for mailman id 1483736;
- Wed, 11 Nov 2026 14:22:11 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xR9DH-0000Gw-Bv
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 14:22:11 +0000
+	id 1xR9Dg-0000mE-6i; Wed, 11 Nov 2026 14:22:36 +0000
+Received: by outflank-mailman (input) for mailman id 1483744;
+ Wed, 11 Nov 2026 14:22:35 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xR9Df-0000lR-9c
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 14:22:35 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xR9DG-00Erq2-OP
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 15:22:10 +0100
-Received: from [10.42.69.12] (helo=localhost)
+ id 1xR9De-00EL5Y-Mr
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 15:22:34 +0100
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6af479f9-e002-0a2a0a5209dd-0a2a450cd056-38
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 15:22:10 +0100
-Received: from [209.85.221.41] (helo=mail-wr1-f41.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6af47a1d-bab6-0a2a0a5309dd-0a2a4507c7a8-46
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 15:22:34 +0100
+Received: from [209.85.221.54] (helo=mail-wr1-f54.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6af47a12-f479-0a2a450c0019-d155dd29e9af-3
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 15:22:10 +0100
-Received: by mail-wr1-f41.google.com with SMTP id
- ffacd0b85a97d-492fcbfaa88so2164142f8f.3
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 06:22:10 -0800 (PST)
+ id 6af47a2a-b4ea-0a2a45070019-d155dd36b16f-3
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 15:22:34 +0100
+Received: by mail-wr1-f54.google.com with SMTP id
+ ffacd0b85a97d-492fcbfaa87so2122810f8f.3
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 06:22:34 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-498361f674fsm11562818f8f.33.2026.11.11.06.22.04
+ ffacd0b85a97d-498363e0019sm11875514f8f.38.2026.11.11.06.22.31
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Nov 2026 06:22:05 -0800 (PST)
+ Wed, 11 Nov 2026 06:22:32 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,52 +51,52 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1794406930; x=1795011730; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1794406954; x=1795011754; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=JBifMFgvHI+ewQOQ1WhI9tctDriGhQToLS2DiBFAxvI=;
-        b=Vvke75cdaYrVj5zwkxga0i3iXk+Qwgp45zD56fBhPIDK2w7eS/RRjwtfax85C3bgZU
-         ID0sdoOUF1pTtSFiWIBqPhg0h0SYm4h9pta/VkNQlKjq6H5nnRlm0k8grybPL1uSsGCx
-         nfnrsEQSaSzVT00FIuY5wacXEg9QUUnkbL9Jsmxggigf72H7AD243nlguKXknQR3NERT
-         pZpHSHFRDfGX0Mw6hXTBeHWCvh+OeqifvLOAjTNVOJVug01X4OLpn12Em8rQXgkHdJxm
-         fGqMiuuhUjJKu+lbIFB7fkTXVc+pf0VLuSau7GCHy4iy8O37ce4KAgDDM55HxXeYIGt7
-         ONRg==
+        bh=IfLujnHHAQq7n/CJq+iWqDq2gS8o3naHckvvIycPxJY=;
+        b=UD3wrNnFSRsLYtmsKdXvoKKWRtbOfg4ipF441QBhG6Cd6aoPDcdL/bUMM/RS3uHF/r
+         ei1tJpT43PtkVHbw4u14Grx1PIB4mF3TpDndXjl23rEVImCRGSa80dLthLMHlejz5t2G
+         XoVvaTaNrfLL7nUlm2F8/3DrrIc00lUqdynf4xEqqivc+27Devz9Mk9IVyUM2hTkO1Cs
+         ulK07i0Xowdm1ALgDVCPVSPpETpsgPP8LVfSD+/n7oo5XAfQZOWPOW7Q9IiV6Vy8QIpL
+         wgOFu78z3CSKNXw5h1HR22PkNBAg9D72a1d/kKBD/UAi7HmjMFgOLUPKuctX7/Uo5iiw
+         6zKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794406930; x=1795011730;
+        d=1e100.net; s=20260707; t=1794406954; x=1795011754;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=JBifMFgvHI+ewQOQ1WhI9tctDriGhQToLS2DiBFAxvI=;
-        b=NXW3Fo1P84SWanj2BxmCTZHdrQ0KMl3/rIlHcLR1rQgoKJF1iLvOXZBn7KmKd1idiI
-         6bncM0V6k5QDkCW8Bp+SH5hl7CRQTAMoxh4wPr4s0v/8UpOAsD2tEGjHu+7SOh+QCFeo
-         XS5FDxAjwRUQhNl58qsYxQclGBGgQ//+VVGrn39qwilc5HUxo5h/6g3Vwm+95Mv10Dhb
-         kKHN4TRRtlLNvG5vrhn9igJ+pL0xWTzSeTf6euq9LWmi+pjy+kb5du9v/HOzC9mLBxtM
-         OQY/CZDWyZ+TzuD9BPSHqCO8pr3FV07vwRB/LtFoO+Q/aqShtTU5Ap8n0BEv+M0kT5KD
-         V4oQ==
-X-Gm-Message-State: APuU4Z8NtxXvL8vHDGel1MTVBpMm3ABzwso3bLPMTNbjzHgb4JdtE8RU
-	2nyGqaM50UNjZeb/kLAz1rrvnB8NC3+F7D96u1D9QmLoHWppdT9EXRA1IuYj5UsJrcCaBk20zpx
-	cqTmTxA==
-X-Gm-Gg: AYBFou1P7g9Eu222c5DR204QnW4jCz8iip/gVhQ0NlsSHOZHTCf5TKSGfsRPd6njpoG
-	h8eKwgzpJGraiOdaJ188cjcvHuMZ80ySlaXDe4dKdHJ2TQqFutgmYiSY9ZC9gbrmaRaJrfelOxi
-	OBhEGADn3e2RM1jU/ojunScATeyTnmO+bBdnUjfVmNkaBrIVTF30NNfZ/J2GrnSAGrBtBaj7fMm
-	t52wxw+dDJQrXynImjCbw2mC96rZ88GF13UfT5NS96ih8G43s3Zkt1dCnb8Jr67CfP//uX5TVdj
-	Dvzi52ubKhdTht/Aemt3npo12ojTRZ1CcYdifig819Gf1m7TuXXRafgr0v8c1GXGAPRK+VZBqc1
-	PaXCWX0WK/SJ0bSaSd1MMUuJTTEfet5lKfwnrm4XEyTffs7TU+IYoLJX0sUDc9sKgFd1DMLHXFh
-	PHEAi9Or1lerk7lYC7xkUY8fILBV70e3YnQxp80joRMq9DR76mhF+ri9SlkhaiieUfpp7o6f8YY
-	P+jvwoETJfmCThh5Tu4jcg9JTJNGMu7KMI9aQsJKN7fXzbRAj+K9U1M6Co2LfhJgRshM5pvngXq
-	FuO/MBksv3CK+ytGmUxE1rsAdhSjiUkiG3KMzxEFuL0yYEjPOHyWpwgSlXF3w4VsmqEJ1ohKtws
-	y9QPxG5CTStjvizFg4Q==
-X-Received: by 2002:a05:6000:41cb:b0:492:7efe:3fc5 with SMTP id ffacd0b85a97d-499c7a24b66mr4734859f8f.23.1794406930015;
-        Wed, 11 Nov 2026 06:22:10 -0800 (PST)
-Message-ID: <1d17f501-5754-4e7c-baab-6178de5e6f08@suse.com>
-Date: Wed, 11 Nov 2026 15:22:04 +0100
+        bh=IfLujnHHAQq7n/CJq+iWqDq2gS8o3naHckvvIycPxJY=;
+        b=OKW57jXpNjy30QSgApY27LYkuDZ2wY/vZrfddnhIwGxypNcWSSTl+C2GyLAZE/M6Zd
+         G7K1mBHn6mgswL8bHOG9y1eMLfTcRwhT/dehyOpMI0C/GN5DHRcWkTMxV8femCghI566
+         qcM10RJW/El1NBrlyhhC4KNCJCjB70VHJOjRrFasDArJx4k1K13Mo0pDxlR9W9uIkLFW
+         xid62SLagnO569xElleFAjiHKpVP4CvmfOUVQFA4Y9IBX6x/ggH4UR+Wab/p6qLndlFR
+         9WYgdTmM5/HBv84dUekzIl0liOImBbyBIAF1lyCBck4GACj+qposcBQbDMu+hWFU+FxN
+         tbhg==
+X-Gm-Message-State: APuU4Z/EoAypdhA1zWWlNXpvmWNjh81RhG2qv17pbqiio9tjvaPeMlca
+	g4edlxOk5JWLSy6lSHQQVdL7zJq+YOEDO8ESoY63Nl9YXbrngsAxVegqKASH38L5N9VDObhaBu1
+	dFpdJ8A==
+X-Gm-Gg: AYBFou0877pocuk+gzqWLTpP6Mgi+7dmFzw61gBqK63iAV4DeVoMBlznfmul2CQSMBe
+	6/4GeCqBqT0djXp1PKHpFPOpwGxZaBbLrqEe8A+6wlbgfbu1QE5UmzLPg6YE8cOG3i0CdV2K87b
+	fVZfV3Rg+sBgKlWneDgQkuu/X4mzF1puDr1RbF5IMKg/LnOKQ1FYnLqHMoI/vWoEeHVgp/ce97H
+	fas568Y91QNGAM9AjrqqJoA3DPhH3aBhcHtj4W9Y+15oLMx0lqF8DC/VYmstWRCRsJcHrfdQMSb
+	PlQmXqH+dQfRi0bmXq7U7mLN8UX+q4TFyAkaJOa3xIADgPh3uHT1yTNQRc5SCVdzqFOBdFqeyZE
+	yQ6qlx4RFxmXJRY4RvuxqDuG0dyOUTQUH6lxrnCh2B8W5W6IkzCECtx07fTaFcd+ZUx34TKXFhG
+	js6iiv5qmZuVESGlU9HV5Y/0La4Bh+V1mZLLsNRrr88ktpGgSvzS4XJOCGhKysBJtpuNbhjbpJ4
+	Ges2OLZGfzdG+CM7S5j9GQvm9in5GX9JxfgA17E0XILkdq31EvL7I4M0VwjPgwZZMw+Qdgkjgd8
+	QCo2EMQhPMwkkwTgumzudykSp4Y9LZuO3VYYedDdrUjJoiei9CmtXknbkK3e1Uzs63oQixutlhd
+	0fWsLlh71fOrH4K6w
+X-Received: by 2002:a05:6000:2501:b0:48f:bb68:4e83 with SMTP id ffacd0b85a97d-499c5d47d63mr4784285f8f.9.1794406953990;
+        Wed, 11 Nov 2026 06:22:33 -0800 (PST)
+Message-ID: <01eb736f-2b1e-43bf-ab4a-5e5bbb67d212@suse.com>
+Date: Wed, 11 Nov 2026 15:22:31 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 04/30] x86emul: add eGPR parameter to decode_gpr()
+Subject: [PATCH 05/30] x86emul: replace earlier relaxation of decode_gpr()
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -130,9 +130,9 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <17d56a5d-41f2-4691-aea7-d6dfdde5ad32@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d25034/1794406930-002F0A5B-196C09AC/10/78276251493
+X-purgate-ID: tlsNG-ef75cf/1794406954-370DDAE4-D32E4452/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 24634
+X-purgate-size: 7285
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -141,678 +141,208 @@ X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The respective structure is introduced empty here, for this to be a
-purely mechanical change. Note however that NULL is passed in a few
-cases, when eGPR-s can't come into play (e.g. for insns not valid in
-64-bit mode, or for encodings [e.g. VEX] which cannot specify eGPR-s).
-
-While doing this rename decode_gpr()'s last parameter, though: "modrm"
-clearly has been misleading at best.
+Handle eGPR-s in a new out-of-line helper, while restoring some code to
+the state before commit e8af03bf9a32 ("x86emul: prepare for AVX512F S/G
+insns"). Some of the function invocations are "just in case"; to allow
+these to continue to work without adding logic to tell whether for a
+particular insn a particular operand is a GPR or another knd of
+register, record register numbers in the new structure in all cases,
+while fetching register values only when eGPR-s are actually enabled.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
+---
+The almost-pure C variant of the register latching would be something
+like
 
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -2179,7 +2179,8 @@ int hvm_set_efer(uint64_t value)
- int hvm_mov_to_cr(unsigned int cr, unsigned int gpr)
- {
-     struct vcpu *curr = current;
--    unsigned long val = *decode_gpr(guest_cpu_user_regs(), gpr);
-+    struct egpr egpr = {};
-+    unsigned long val = *decode_gpr(guest_cpu_user_regs(), &egpr, gpr);
-     int rc;
+           switch ( reg )
+           {
+#define CASE(regno, basereg)                                          \
+           case regno:                                                \
+               /* REX2 prefixes with W, R4 and possibly R3 set. */    \
+               asm ( ".byte 0xd5, 0x48 | %c1; mov %%" #basereg ", %0" \
+                     : "+m" (egpr->val[i])                            \
+                     : "i" ((regno & 8) >> 1) )
+
+           CASE(16, eax); break;
+           CASE(17, ecx); break;
+           CASE(18, edx); break;
+           CASE(19, ebx); break;
+           CASE(20, esp); break;
+           CASE(21, ebp); break;
+           CASE(22, esi); break;
+           CASE(23, edi); break;
+           CASE(24, eax); break;
+           CASE(25, ecx); break;
+           CASE(26, edx); break;
+           CASE(27, ebx); break;
+           CASE(28, esp); break;
+           CASE(29, ebp); break;
+           CASE(30, esi); break;
+           CASE(31, edi); break;
+#undef CASE
+
+           default:
+               ASSERT_UNREACHABLE();
+               break;
+           }
+
+which, because of the way the compiler translates the switch(), ends up
+larger without (imo) being that much easier to read.
+
+--- a/tools/fuzz/x86_instruction_emulator/Makefile
++++ b/tools/fuzz/x86_instruction_emulator/Makefile
+@@ -32,7 +32,7 @@ GCOV_FLAGS := --coverage
  
-     TRACE(TRC_HVM_CR_WRITE64, cr, val, val >> 32);
-@@ -2228,7 +2229,8 @@ int hvm_mov_to_cr(unsigned int cr, unsig
- int hvm_mov_from_cr(unsigned int cr, unsigned int gpr)
- {
-     struct vcpu *curr = current;
--    unsigned long val = 0, *reg = decode_gpr(guest_cpu_user_regs(), gpr);
-+    struct egpr egpr = {};
-+    unsigned long val = 0, *reg = decode_gpr(guest_cpu_user_regs(), &egpr, gpr);
+ OBJS := fuzz-emul.o x86-emulate.o
+ OBJS += x86_emulate/0f01.o x86_emulate/0fae.o x86_emulate/0fc7.o
+-OBJS += x86_emulate/decode.o x86_emulate/fpu.o
++OBJS += x86_emulate/decode.o x86_emulate/fpu.o x86_emulate/util.o
  
-     switch ( cr )
-     {
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -4718,12 +4718,13 @@ void asmlinkage vmx_vmexit_handler(struc
-     case EXIT_REASON_URDMSR: /* NB: User-MSR bitmap was checked by the CPU. */
-     {
-         uint64_t msr_content = 0;
-+        struct egpr egpr = {};
+ WRAPPED = $(shell sed -n 's,^ *WRAP(\([[:alnum:]_]*\));,\1,p' \
+                       ../../tests/x86_emulator/x86-emulate.h)
+--- a/tools/tests/x86_emulator/x86-emulate.h
++++ b/tools/tests/x86_emulator/x86-emulate.h
+@@ -143,6 +143,8 @@ static inline uint64_t xgetbv(uint32_t x
+     return ((uint64_t)hi << 32) | lo;
+ }
  
-         switch ( hvm_msr_read_intercept(vmread(EXIT_QUALIFICATION),
-                                         &msr_content) )
-         {
-         case X86EMUL_OKAY:
--            *decode_gpr(regs, msr_imm_gpr()) = msr_content;
-+            *decode_gpr(regs, &egpr, msr_imm_gpr()) = msr_content;
-             update_guest_eip(); /* Safe: URDMSR / RDMSR <imm> */
-             break;
- 
-@@ -4743,9 +4744,13 @@ void asmlinkage vmx_vmexit_handler(struc
-         }
-         fallthrough;
-     case EXIT_REASON_UWRMSR: /* NB: User-MSR bitmap was checked by the CPU. */
-+    {
-+        struct egpr egpr = {};
++#define get_xcr0() xgetbv(0)
 +
-         exit_qualification = vmread(EXIT_QUALIFICATION);
-         switch ( hvm_msr_write_intercept(exit_qualification,
--                                         *decode_gpr(regs, msr_imm_gpr()),
-+                                         *decode_gpr(regs, &egpr,
-+                                                     msr_imm_gpr()),
-                                          true) )
-         {
-         case X86EMUL_OKAY:
-@@ -4757,6 +4762,7 @@ void asmlinkage vmx_vmexit_handler(struc
-             break;
-         }
-         break;
-+    }
+ /* Intentionally checking OSXSAVE here. */
+ #define cpu_has_xsave     (cpu_policy.basic.raw[1].c & (1u << 27))
  
-     case EXIT_REASON_VMXOFF:
-     case EXIT_REASON_VMXON:
---- a/xen/arch/x86/hvm/vmx/vvmx.c
-+++ b/xen/arch/x86/hvm/vmx/vvmx.c
-@@ -360,10 +360,10 @@ enum vmx_insn_errno set_vvmcs_real_safe(
-     return virtual_vmcs_vmwrite_safe(v, encoding, val);
- }
+@@ -225,6 +227,8 @@ void wrpkru(unsigned int val);
+                                      xcr0_mask(0xe6))
+ #define cpu_has_avx10_2_aux         (cpu_policy.avx10.avx10_v2_aux && \
+                                      xcr0_mask(0xe6))
++#define cpu_has_apx_f               (cpu_policy.feat.apx_f && \
++                                     xcr0_mask(X86_XCR0_APX))
  
--static unsigned long reg_read(struct cpu_user_regs *regs,
-+static unsigned long reg_read(struct cpu_user_regs *regs, struct egpr *egpr,
-                               unsigned int index)
- {
--    unsigned long val = *decode_gpr(regs, index);
-+    unsigned long val = *decode_gpr(regs, egpr, index);
+ #define cpu_has_xgetbv1             (cpu_has_xsave && cpu_policy.xstate.xgetbv1)
  
-     /*
-      * Outside of 64-bit mode, zero-extend the result from 32 bits, like
-@@ -377,7 +377,7 @@ static unsigned long reg_read(struct cpu
-     return val;
- }
- 
--static void reg_write(struct cpu_user_regs *regs,
-+static void reg_write(struct cpu_user_regs *regs, struct egpr *egpr,
-                       unsigned int index,
-                       unsigned long value)
- {
-@@ -389,7 +389,7 @@ static void reg_write(struct cpu_user_re
-      */
-     if ( !hvm_long_mode_active(current) )
-         value = (uint32_t)value;
--    *decode_gpr(regs, index) = value;
-+    *decode_gpr(regs, egpr, index) = value;
- }
- 
- static inline u32 __n2_pin_exec_control(struct vcpu *v)
-@@ -413,6 +413,7 @@ static inline u32 __n2_secondary_exec_co
- }
- 
- static int decode_vmx_inst(struct cpu_user_regs *regs,
-+                           struct egpr *egpr,
-                            struct vmx_inst_decoded *decode,
-                            unsigned long *poperandS, unsigned int size)
- {
-@@ -429,7 +430,7 @@ static int decode_vmx_inst(struct cpu_us
-         decode->type = VMX_INST_MEMREG_TYPE_REG;
-         decode->reg1 = info.fields.reg1;
-         if ( poperandS != NULL )
--            *poperandS = reg_read(regs, decode->reg1);
-+            *poperandS = reg_read(regs, egpr, decode->reg1);
-     }
-     else
-     {
-@@ -443,10 +444,10 @@ static int decode_vmx_inst(struct cpu_us
-         seg_base = seg.base;
- 
-         base = info.fields.base_reg_invalid ? 0 :
--            reg_read(regs, info.fields.base_reg);
-+            reg_read(regs, egpr, info.fields.base_reg);
- 
-         index = info.fields.index_reg_invalid ? 0 :
--            reg_read(regs, info.fields.index_reg);
-+            reg_read(regs, egpr, info.fields.index_reg);
- 
-         scale = 1 << info.fields.scaling;
- 
-@@ -1558,7 +1559,7 @@ void asmlinkage nvmx_switch_guest(void)
-  * VMX instructions handling
+--- a/xen/arch/x86/x86_emulate/util.c
++++ b/xen/arch/x86/x86_emulate/util.c
+@@ -7,6 +7,74 @@
   */
  
--static int nvmx_handle_vmxon(struct cpu_user_regs *regs)
-+static int nvmx_handle_vmxon(struct cpu_user_regs *regs, struct egpr *egpr)
- {
-     struct vcpu *v=current;
-     struct nestedvmx *nvmx = &vcpu_2_nvmx(v);
-@@ -1568,7 +1569,7 @@ static int nvmx_handle_vmxon(struct cpu_
-     uint32_t nvmcs_revid;
-     int rc;
- 
--    rc = decode_vmx_inst(regs, &decode, &gpa, sizeof(gpa));
-+    rc = decode_vmx_inst(regs, egpr, &decode, &gpa, sizeof(gpa));
-     if ( rc != X86EMUL_OKAY )
-         return rc;
- 
-@@ -1787,7 +1788,7 @@ static int nvmx_handle_vmlaunch(struct c
-     return rc;
- }
- 
--static int nvmx_handle_vmptrld(struct cpu_user_regs *regs)
-+static int nvmx_handle_vmptrld(struct cpu_user_regs *regs, struct egpr *egpr)
- {
-     struct vcpu *v = current;
-     struct vmx_inst_decoded decode;
-@@ -1795,7 +1796,7 @@ static int nvmx_handle_vmptrld(struct cp
-     unsigned long gpa = 0;
-     int rc;
- 
--    rc = decode_vmx_inst(regs, &decode, &gpa, sizeof(gpa));
-+    rc = decode_vmx_inst(regs, egpr, &decode, &gpa, sizeof(gpa));
-     if ( rc != X86EMUL_OKAY )
-         return rc;
- 
-@@ -1863,7 +1864,7 @@ out:
-     return X86EMUL_OKAY;
- }
- 
--static int nvmx_handle_vmptrst(struct cpu_user_regs *regs)
-+static int nvmx_handle_vmptrst(struct cpu_user_regs *regs, struct egpr *egpr)
- {
-     struct vcpu *v = current;
-     struct vmx_inst_decoded decode;
-@@ -1872,7 +1873,7 @@ static int nvmx_handle_vmptrst(struct cp
-     unsigned long gpa = 0;
-     int rc;
- 
--    rc = decode_vmx_inst(regs, &decode, &gpa, sizeof(gpa));
-+    rc = decode_vmx_inst(regs, egpr, &decode, &gpa, sizeof(gpa));
-     if ( rc != X86EMUL_OKAY )
-         return rc;
- 
-@@ -1888,7 +1889,7 @@ static int nvmx_handle_vmptrst(struct cp
-     return X86EMUL_OKAY;
- }
- 
--static int nvmx_handle_vmclear(struct cpu_user_regs *regs)
-+static int nvmx_handle_vmclear(struct cpu_user_regs *regs, struct egpr *egpr)
- {
-     struct vcpu *v = current;
-     struct vmx_inst_decoded decode;
-@@ -1898,7 +1899,7 @@ static int nvmx_handle_vmclear(struct cp
-     void *vvmcs;
-     int rc;
- 
--    rc = decode_vmx_inst(regs, &decode, &gpa, sizeof(gpa));
-+    rc = decode_vmx_inst(regs, egpr, &decode, &gpa, sizeof(gpa));
-     if ( rc != X86EMUL_OKAY )
-         return rc;
- 
-@@ -1952,7 +1953,7 @@ out:
-     return X86EMUL_OKAY;
- }
- 
--static int nvmx_handle_vmread(struct cpu_user_regs *regs)
-+static int nvmx_handle_vmread(struct cpu_user_regs *regs, struct egpr *egpr)
- {
-     struct vcpu *v = current;
-     struct vmx_inst_decoded decode;
-@@ -1960,7 +1961,7 @@ static int nvmx_handle_vmread(struct cpu
-     u64 value = 0;
-     int rc;
- 
--    rc = decode_vmx_inst(regs, &decode, NULL, 0);
-+    rc = decode_vmx_inst(regs, egpr, &decode, NULL, 0);
-     if ( rc != X86EMUL_OKAY )
-         return rc;
- 
-@@ -1970,7 +1971,7 @@ static int nvmx_handle_vmread(struct cpu
-         return X86EMUL_OKAY;
-     }
- 
--    rc = get_vvmcs_safe(v, reg_read(regs, decode.reg2), &value);
-+    rc = get_vvmcs_safe(v, reg_read(regs, egpr, decode.reg2), &value);
-     if ( rc != VMX_INSN_SUCCEED )
-     {
-         vmfail(regs, rc);
-@@ -1986,7 +1987,7 @@ static int nvmx_handle_vmread(struct cpu
-             return X86EMUL_EXCEPTION;
-         break;
-     case VMX_INST_MEMREG_TYPE_REG:
--        reg_write(regs, decode.reg1, value);
-+        reg_write(regs, egpr, decode.reg1, value);
-         break;
-     }
- 
-@@ -1994,7 +1995,7 @@ static int nvmx_handle_vmread(struct cpu
-     return X86EMUL_OKAY;
- }
- 
--static int nvmx_handle_vmwrite(struct cpu_user_regs *regs)
-+static int nvmx_handle_vmwrite(struct cpu_user_regs *regs, struct egpr *egpr)
- {
-     struct vcpu *v = current;
-     struct vmx_inst_decoded decode;
-@@ -2003,7 +2004,7 @@ static int nvmx_handle_vmwrite(struct cp
-     enum vmx_insn_errno err;
-     int rc;
- 
--    rc = decode_vmx_inst(regs, &decode, &operand, 0);
-+    rc = decode_vmx_inst(regs, egpr, &decode, &operand, 0);
-     if ( rc != X86EMUL_OKAY )
-         return rc;
- 
-@@ -2013,7 +2014,7 @@ static int nvmx_handle_vmwrite(struct cp
-         return X86EMUL_OKAY;
-     }
- 
--    vmcs_encoding = reg_read(regs, decode.reg2);
-+    vmcs_encoding = reg_read(regs, egpr, decode.reg2);
-     err = set_vvmcs_safe(v, vmcs_encoding, operand);
-     if ( err != VMX_INSN_SUCCEED )
-     {
-@@ -2039,16 +2040,16 @@ static int nvmx_handle_vmwrite(struct cp
-     return X86EMUL_OKAY;
- }
- 
--static int nvmx_handle_invept(struct cpu_user_regs *regs)
-+static int nvmx_handle_invept(struct cpu_user_regs *regs, struct egpr *egpr)
- {
-     struct vmx_inst_decoded decode;
-     unsigned long eptp;
-     int ret;
- 
--    if ( (ret = decode_vmx_inst(regs, &decode, &eptp, 16)) != X86EMUL_OKAY )
-+    if ( (ret = decode_vmx_inst(regs, egpr, &decode, &eptp, 16)) != X86EMUL_OKAY )
-         return ret;
- 
--    switch ( reg_read(regs, decode.reg2) )
-+    switch ( reg_read(regs, egpr, decode.reg2) )
-     {
-     case INVEPT_SINGLE_CONTEXT:
-     {
-@@ -2067,16 +2068,16 @@ static int nvmx_handle_invept(struct cpu
-     return X86EMUL_OKAY;
- }
- 
--static int nvmx_handle_invvpid(struct cpu_user_regs *regs)
-+static int nvmx_handle_invvpid(struct cpu_user_regs *regs, struct egpr *egpr)
- {
-     struct vmx_inst_decoded decode;
-     unsigned long vpid;
-     int ret;
- 
--    if ( (ret = decode_vmx_inst(regs, &decode, &vpid, 16)) != X86EMUL_OKAY )
-+    if ( (ret = decode_vmx_inst(regs, egpr, &decode, &vpid, 16)) != X86EMUL_OKAY )
-         return ret;
- 
--    switch ( reg_read(regs, decode.reg2) )
-+    switch ( reg_read(regs, egpr, decode.reg2) )
-     {
-     /* Just invalidate all tlb entries for all types! */
-     case INVVPID_INDIVIDUAL_ADDR:
-@@ -2094,9 +2095,11 @@ static int nvmx_handle_invvpid(struct cp
-     return X86EMUL_OKAY;
- }
- 
--int nvmx_handle_vmx_insn(struct cpu_user_regs *regs, unsigned int exit_reason)
-+int nvmx_handle_vmx_insn(struct cpu_user_regs *regs,
-+                         unsigned int exit_reason)
- {
-     struct vcpu *curr = current;
-+    struct egpr egpr = {};
-     int ret;
- 
-     if ( !(curr->arch.hvm.guest_cr[4] & X86_CR4_VMXE) ||
-@@ -2130,27 +2133,27 @@ int nvmx_handle_vmx_insn(struct cpu_user
-         break;
- 
-     case EXIT_REASON_VMXON:
--        ret = nvmx_handle_vmxon(regs);
-+        ret = nvmx_handle_vmxon(regs, &egpr);
-         break;
- 
-     case EXIT_REASON_VMCLEAR:
--        ret = nvmx_handle_vmclear(regs);
-+        ret = nvmx_handle_vmclear(regs, &egpr);
-         break;
- 
-     case EXIT_REASON_VMPTRLD:
--        ret = nvmx_handle_vmptrld(regs);
-+        ret = nvmx_handle_vmptrld(regs, &egpr);
-         break;
- 
-     case EXIT_REASON_VMPTRST:
--        ret = nvmx_handle_vmptrst(regs);
-+        ret = nvmx_handle_vmptrst(regs, &egpr);
-         break;
- 
-     case EXIT_REASON_VMREAD:
--        ret = nvmx_handle_vmread(regs);
-+        ret = nvmx_handle_vmread(regs, &egpr);
-         break;
- 
-     case EXIT_REASON_VMWRITE:
--        ret = nvmx_handle_vmwrite(regs);
-+        ret = nvmx_handle_vmwrite(regs, &egpr);
-         break;
- 
-     case EXIT_REASON_VMLAUNCH:
-@@ -2162,11 +2165,11 @@ int nvmx_handle_vmx_insn(struct cpu_user
-         break;
- 
-     case EXIT_REASON_INVEPT:
--        ret = nvmx_handle_invept(regs);
-+        ret = nvmx_handle_invept(regs, &egpr);
-         break;
- 
-     case EXIT_REASON_INVVPID:
--        ret = nvmx_handle_invvpid(regs);
-+        ret = nvmx_handle_invvpid(regs, &egpr);
-         break;
- 
-     default:
-@@ -2699,7 +2702,9 @@ int nvmx_n2_vmexit_handler(struct cpu_us
-             {
-             case VMX_CR_ACCESS_TYPE_MOV_TO_CR:
-             {
--                val = reg_read(regs, qual.gpr);
-+                struct egpr egpr = {};
+ #include "private.h"
++#ifdef __XEN__
++#include <asm/xstate.h>
++#endif
 +
-+                val = reg_read(regs, &egpr, qual.gpr);
- 
-                 if ( qual.cr == 0 )
-                 {
---- a/xen/arch/x86/x86_emulate/0fae.c
-+++ b/xen/arch/x86/x86_emulate/0fae.c
-@@ -176,7 +176,7 @@ int x86emul_0fae(struct x86_emulate_stat
-         fail_if(!ops->read_segment);
-         if ( (rc = ops->read_segment(seg, &sreg, ctxt)) != X86EMUL_OKAY )
-             goto done;
--        dst->reg = decode_gpr(regs, s->modrm_rm);
-+        dst->reg = decode_gpr(regs, &s->egpr, s->modrm_rm);
-         if ( !(s->modrm_reg & 2) )
-         {
-             /* rd{f,g}sbase */
---- a/xen/arch/x86/x86_emulate/decode.c
-+++ b/xen/arch/x86/x86_emulate/decode.c
-@@ -1827,7 +1827,7 @@ int x86emul_decode(struct x86_emulate_st
-                                      !s->evex.RX) << 4;
-                 else if ( s->sib_index != 4 )
-                 {
--                    s->ea.mem.off = *decode_gpr(ctxt->regs, s->sib_index);
-+                    s->ea.mem.off = *decode_gpr(ctxt->regs, &s->egpr, s->sib_index);
-                     s->ea.mem.off <<= s->sib_scale;
-                 }
-                 if ( (s->modrm_mod == 0) && ((sib_base & 7) == 5) )
-@@ -1847,13 +1847,13 @@ int x86emul_decode(struct x86_emulate_st
-                     s->ea.mem.off += ctxt->regs->r(bp);
-                 }
-                 else
--                    s->ea.mem.off += *decode_gpr(ctxt->regs, sib_base);
-+                    s->ea.mem.off += *decode_gpr(ctxt->regs, &s->egpr, sib_base);
-             }
-             else
-             {
-                 generate_exception_if(d & vSIB, X86_EXC_UD);
-                 s->modrm_rm |= (s->rex_prefix & 1) << 3;
--                s->ea.mem.off = *decode_gpr(ctxt->regs, s->modrm_rm);
-+                s->ea.mem.off = *decode_gpr(ctxt->regs, &s->egpr, s->modrm_rm);
-                 if ( (s->modrm_rm == 5) && (s->modrm_mod != 0) )
-                     s->ea.mem.seg = x86_seg_ss;
-             }
---- a/xen/arch/x86/x86_emulate/private.h
-+++ b/xen/arch/x86/x86_emulate/private.h
-@@ -336,6 +336,8 @@ struct x86_emulate_state {
- 
-     unsigned long ip;
- 
-+    struct egpr egpr;
++unsigned long *decode_egpr(struct egpr *egpr, unsigned int reg)
++{
++    unsigned int i;
 +
-     struct stub_exn *stub_exn;
++    for ( i = 0; i < ARRAY_SIZE(egpr->regno); ++i )
++    {
++       unsigned int xcr0 = 0;
++
++       if ( egpr->regno[i] == reg )
++           break;
++
++       if ( egpr->regno[i] )
++           continue;
++
++       egpr->regno[i] = reg;
++
++       /*
++        * Obtain the active XCR0 here, for not having emulation context or an
++        * ops structure available, as this is a utility function used also
++        * from outside of the emulator.
++        */
++       if ( cpu_has_apx_f )
++           xcr0 = get_xcr0();
++
++       /* Fetch the register value if accessible. */
++       if ( xcr0 & X86_XCR0_APX )
++       {
++#ifdef __x86_64__
++           asm ( "sub	$17, %[reg]\n\t"
++
++                 /* mov %r16, (%rdi) */
++                 ".byte 0xd5, 0x48; mov %%eax, (%%rdi)\n\t"
++
++                 /* cfcmovz %r17, (%rdi) */
++                 ".byte 0x62, 0xe4, 0xfc, 0x0c, 0x44, 0x0f\n\t"
++
++                 ".irp n, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30\n\t"
++
++                 "dec	%[reg]\n\t"
++
++                 /* cfcmovz %r\n, (%rdi) */
++                 ".byte 0x62, 0x64 + ((~\\n & 8) << 4), 0xfc, 0x0c\n\t"
++                 ".byte 0x44, 0x07 + ((\\n & 7) << 3)\n\t"
++
++                 ".endr\n\t"
++
++                 /* cfcmovg %r31, (%rdi) */
++                 ".byte 0x62, 0x64, 0xfc, 0x0c, 0x4f, 0x3f"
++
++                 : [reg] "+r" (reg), "=m" (egpr->val[i])
++                 : "D" (&egpr->val[i]) );
++
++           egpr->orig[i] = egpr->val[i];
++#endif
++       }
++
++       break;
++    }
++
++    ASSERT(i < ARRAY_SIZE(egpr->val));
++
++    /* Note that this also acts as array_access_nospec() stand-in. */
++    return &egpr->val[i & (ARRAY_SIZE(egpr->val) - 1)];
++}
  
- #ifndef NDEBUG
---- a/xen/arch/x86/x86_emulate/x86_emulate.c
-+++ b/xen/arch/x86/x86_emulate/x86_emulate.c
-@@ -1168,7 +1168,8 @@ const uint8_t cpu_user_regs_gpr_offsets[
- };
- 
- static void *_decode_gpr(
--    struct cpu_user_regs *regs, unsigned int modrm_reg, bool legacy)
-+    struct cpu_user_regs *regs, struct egpr *egpr, unsigned int modrm_reg,
-+    bool legacy)
- {
-     static const uint8_t byte_reg_offsets[] = {
-         offsetof(struct cpu_user_regs, al),
-@@ -1182,7 +1183,7 @@ static void *_decode_gpr(
-     };
- 
-     if ( !legacy )
--        return decode_gpr(regs, modrm_reg);
-+        return decode_gpr(regs, egpr, modrm_reg);
- 
-     /* Check that the array is a power of two. */
-     BUILD_BUG_ON(ARRAY_SIZE(byte_reg_offsets) &
-@@ -1200,7 +1201,7 @@ static unsigned long *decode_vex_gpr(
-     unsigned int vex_reg, struct cpu_user_regs *regs,
-     const struct x86_emulate_ctxt *ctxt)
- {
--    return decode_gpr(regs, ~vex_reg & (mode_64bit() ? 0xf : 7));
-+    return decode_gpr(regs, NULL, ~vex_reg & (mode_64bit() ? 0xf : 7));
- }
- 
- #define visa_check(subfeat) \
-@@ -1370,7 +1371,8 @@ x86_emulate(
-     generate_exception_if(state->not_64bit && mode_64bit(), X86_EXC_UD);
- 
-     if ( ea.type == OP_REG )
--        ea.reg = _decode_gpr(&_regs, modrm_rm, (d & ByteOp) && !rex_prefix && !vex.opcx);
-+        ea.reg = _decode_gpr(&_regs, &state->egpr, modrm_rm,
-+                             (d & ByteOp) && !rex_prefix && !vex.opcx);
- 
-     memset(mmvalp, 0xaa /* arbitrary */, sizeof(*mmvalp));
- 
-@@ -1384,13 +1386,14 @@ x86_emulate(
-         src.type = OP_REG;
-         if ( d & ByteOp )
-         {
--            src.reg = _decode_gpr(&_regs, modrm_reg, !rex_prefix && !vex.opcx);
-+            src.reg = _decode_gpr(&_regs, &state->egpr, modrm_reg,
-+                                  !rex_prefix && !vex.opcx);
-             src.val = *(uint8_t *)src.reg;
-             src.bytes = 1;
-         }
-         else
-         {
--            src.reg = decode_gpr(&_regs, modrm_reg);
-+            src.reg = decode_gpr(&_regs, &state->egpr, modrm_reg);
-             switch ( (src.bytes = op_bytes) )
-             {
-             case 2: src.val = *(uint16_t *)src.reg; break;
-@@ -1496,13 +1499,14 @@ x86_emulate(
-         dst.type = OP_REG;
-         if ( d & ByteOp )
-         {
--            dst.reg = _decode_gpr(&_regs, modrm_reg, !rex_prefix && !vex.opcx);
-+            dst.reg = _decode_gpr(&_regs, &state->egpr, modrm_reg,
-+                                  !rex_prefix && !vex.opcx);
-             dst.val = *(uint8_t *)dst.reg;
-             dst.bytes = 1;
-         }
-         else
-         {
--            dst.reg = decode_gpr(&_regs, modrm_reg);
-+            dst.reg = decode_gpr(&_regs, &state->egpr, modrm_reg);
-             switch ( (dst.bytes = op_bytes) )
-             {
-             case 2: dst.val = *(uint16_t *)dst.reg; break;
-@@ -1739,7 +1743,7 @@ x86_emulate(
- 
-     case 0x40 ... 0x4f: /* inc/dec reg */
-         dst.type  = OP_REG;
--        dst.reg   = decode_gpr(&_regs, b & 7);
-+        dst.reg   = decode_gpr(&_regs, NULL, b & 7);
-         dst.bytes = op_bytes;
-         dst.val   = *dst.reg;
-         if ( b & 8 )
-@@ -1749,12 +1753,14 @@ x86_emulate(
-         break;
- 
-     case 0x50 ... 0x57: /* push reg */
--        src.val = *decode_gpr(&_regs, (b & 7) | ((rex_prefix & 1) << 3));
-+        src.val = *decode_gpr(&_regs, &state->egpr,
-+                              (b & 7) | ((rex_prefix & 1) << 3));
-         goto push;
- 
-     case 0x58 ... 0x5f: /* pop reg */
-         dst.type  = OP_REG;
--        dst.reg   = decode_gpr(&_regs, (b & 7) | ((rex_prefix & 1) << 3));
-+        dst.reg   = decode_gpr(&_regs, &state->egpr,
-+                               (b & 7) | ((rex_prefix & 1) << 3));
-         dst.bytes = op_bytes;
-         if ( mode_64bit() && (dst.bytes == 4) )
-             dst.bytes = 8;
-@@ -1768,7 +1774,7 @@ x86_emulate(
-         ea.val = _regs.esp;
-         for ( i = 0; i < 8; i++ )
-         {
--            void *reg = decode_gpr(&_regs, i);
-+            void *reg = decode_gpr(&_regs, NULL, i);
- 
-             if ( (rc = ops->write(x86_seg_ss, sp_pre_dec(op_bytes),
-                                   reg != &_regs.esp ? reg : &ea.val,
-@@ -1780,7 +1786,7 @@ x86_emulate(
-     case 0x61: /* popa */
-         for ( i = 0; i < 8; i++ )
-         {
--            void *reg = decode_gpr(&_regs, 7 - i);
-+            void *reg = decode_gpr(&_regs, NULL, 7 - i);
- 
-             if ( (rc = read_ulong(x86_seg_ss, sp_post_inc(op_bytes),
-                                   &dst.val, op_bytes, ctxt, ops)) != 0 )
-@@ -2079,7 +2085,8 @@ x86_emulate(
-     case 0x91 ... 0x97: /* xchg reg,%%rax */
-         dst.type = OP_REG;
-         dst.bytes = op_bytes;
--        dst.reg  = decode_gpr(&_regs, (b & 7) | ((rex_prefix & 1) << 3));
-+        dst.reg  = decode_gpr(&_regs, &state->egpr,
-+                              (b & 7) | ((rex_prefix & 1) << 3));
-         dst.val  = *dst.reg;
-         goto xchg;
- 
-@@ -2325,13 +2332,15 @@ x86_emulate(
-     }
- 
-     case 0xb0 ... 0xb7: /* mov imm8,r8 */
--        dst.reg = _decode_gpr(&_regs, (b & 7) | ((rex_prefix & 1) << 3),
-+        dst.reg = _decode_gpr(&_regs, &state->egpr,
-+                              (b & 7) | ((rex_prefix & 1) << 3),
-                               !rex_prefix);
-         dst.val = src.val;
-         break;
- 
-     case 0xb8 ... 0xbf: /* mov imm{16,32,64},r{16,32,64} */
--        dst.reg = decode_gpr(&_regs, (b & 7) | ((rex_prefix & 1) << 3));
-+        dst.reg = decode_gpr(&_regs, &state->egpr,
-+                             (b & 7) | ((rex_prefix & 1) << 3));
-         dst.val = src.val;
-         break;
- 
-@@ -3787,7 +3796,7 @@ x86_emulate(
-         }
-         place_ret(&opc[2]);
- 
--        ea.reg = decode_gpr(&_regs, modrm_reg);
-+        ea.reg = decode_gpr(&_regs, &state->egpr, modrm_reg);
-         invoke_stub("", "", "=a" (*ea.reg) : "c" (mmvalp), "m" (*mmvalp));
- 
-         put_stub(stub);
-@@ -5079,7 +5088,7 @@ x86_emulate(
-         place_ret(&opc[2]);
- 
-         copy_VEX(opc, vex);
--        ea.reg = decode_gpr(&_regs, modrm_rm);
-+        ea.reg = decode_gpr(&_regs, NULL, modrm_rm);
-         invoke_stub("", "", "=m" (dummy) : "a" (*ea.reg));
- 
-         put_stub(stub);
-@@ -5094,7 +5103,7 @@ x86_emulate(
-         generate_exception_if(vex.l || vex.reg != 0xf || ea.type != OP_REG,
-                               X86_EXC_UD);
-         dst = ea;
--        dst.reg = decode_gpr(&_regs, modrm_reg);
-+        dst.reg = decode_gpr(&_regs, NULL, modrm_reg);
- 
-         if ( vex.pfx == vex_f2 )
-         {
-@@ -5219,7 +5228,7 @@ x86_emulate(
-         else
-         {
-             shift = src.val;
--            src.reg = decode_gpr(&_regs, modrm_reg);
-+            src.reg = decode_gpr(&_regs, &state->egpr, modrm_reg);
-             src.val = truncate_word(*src.reg, dst.bytes);
-         }
- 
-@@ -5321,7 +5330,7 @@ x86_emulate(
- 
-     case X86EMUL_OPC(0x0f, 0xb6): /* movzx rm8,r{16,32,64} */
-         /* Recompute DstReg as we may have decoded AH/BH/CH/DH. */
--        dst.reg   = decode_gpr(&_regs, modrm_reg);
-+        dst.reg   = decode_gpr(&_regs, &state->egpr, modrm_reg);
-         dst.bytes = op_bytes;
-         dst.val   = (uint8_t)src.val;
-         break;
-@@ -5380,7 +5389,7 @@ x86_emulate(
- 
-     case X86EMUL_OPC(0x0f, 0xbe): /* movsx rm8,r{16,32,64} */
-         /* Recompute DstReg as we may have decoded AH/BH/CH/DH. */
--        dst.reg   = decode_gpr(&_regs, modrm_reg);
-+        dst.reg   = decode_gpr(&_regs, &state->egpr, modrm_reg);
-         dst.bytes = op_bytes;
-         dst.val   = (int8_t)src.val;
-         break;
-@@ -5524,7 +5533,8 @@ x86_emulate(
- 
-     case X86EMUL_OPC(0x0f, 0xc8) ... X86EMUL_OPC(0x0f, 0xcf): /* bswap */
-         dst.type = OP_REG;
--        dst.reg  = decode_gpr(&_regs, (b & 7) | ((rex_prefix & 1) << 3));
-+        dst.reg  = decode_gpr(&_regs, &state->egpr,
-+                              (b & 7) | ((rex_prefix & 1) << 3));
-         switch ( dst.bytes = op_bytes )
-         {
-         default: /* case 2: */
+ unsigned int x86_insn_length(const struct x86_emulate_state *s,
+                              const struct x86_emulate_ctxt *ctxt)
 --- a/xen/arch/x86/x86_emulate/x86_emulate.h
 +++ b/xen/arch/x86/x86_emulate/x86_emulate.h
-@@ -634,12 +634,16 @@ int x86_emulate_wrapper(
+@@ -634,27 +634,36 @@ int x86_emulate_wrapper(
  /* Map GPRs by ModRM encoding to their offset within struct cpu_user_regs. */
  extern const uint8_t cpu_user_regs_gpr_offsets[X86_NR_GPRS];
  
-+struct egpr {
-+};
++/*
++ * APX insn can reference up to 4 GPRs: Either up to three register operands
++ * or up to two register operands and one memory operand, the latter using
++ * potentially both base and index register.
++ */
+ struct egpr {
++	unsigned char regno[4];
++	unsigned long val[4], orig[4];
+ };
+ 
++unsigned long *decode_egpr(struct egpr *egpr, unsigned int reg);
 +
  /*
-  * Given the 'reg' portion of a ModRM byte, and a register block, return a
-  * pointer into the block that addresses the relevant register.
+- * Given the 'reg' portion of a ModRM byte, and a register block, return a
+- * pointer into the block that addresses the relevant register.
++ * Given the 'reg' portion of a ModRM byte, and a pair of register blocks,
++ * return a pointer into either block that addresses the relevant register.
   */
  static inline unsigned long *decode_gpr(struct cpu_user_regs *regs,
--                                        unsigned int modrm)
-+                                        struct egpr *egpr,
-+                                        unsigned int reg)
+                                         struct egpr *egpr,
+                                         unsigned int reg)
  {
++    if ( reg & 0x10 )
++        return decode_egpr(egpr, reg);
++
      /* Check that the array is a power of two. */
      BUILD_BUG_ON(ARRAY_SIZE(cpu_user_regs_gpr_offsets) &
-@@ -651,9 +655,9 @@ static inline unsigned long *decode_gpr(
-      * hence truncation is what we want (bits not ignored will get checked
-      * elsewhere).
-      */
--    modrm &= ARRAY_SIZE(cpu_user_regs_gpr_offsets) - 1;
-+    reg &= ARRAY_SIZE(cpu_user_regs_gpr_offsets) - 1;
+                  (ARRAY_SIZE(cpu_user_regs_gpr_offsets) - 1));
  
--    return (void *)regs + cpu_user_regs_gpr_offsets[modrm];
-+    return (void *)regs + cpu_user_regs_gpr_offsets[reg];
- }
+-    /*
+-     * Note that this also acts as array_access_nospec() stand-in.  Higher
+-     * bits may legitimately come in set here, from EVEX decoding, and
+-     * hence truncation is what we want (bits not ignored will get checked
+-     * elsewhere).
+-     */
++    ASSERT(reg < ARRAY_SIZE(cpu_user_regs_gpr_offsets));
++
++    /* Note that this also acts as array_access_nospec() stand-in. */
+     reg &= ARRAY_SIZE(cpu_user_regs_gpr_offsets) - 1;
  
- /* Unhandleable read, write or instruction fetch */
+     return (void *)regs + cpu_user_regs_gpr_offsets[reg];
 
 
