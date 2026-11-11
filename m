@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A540C606A326
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2026 15:18:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C3C7C606A324
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2026 15:18:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=POgwWYm0
-Received: from list by lists.xenproject.org with outflank-mailman.1484264.1687630 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=ci2ITb/6
+Received: from list by lists.xenproject.org with outflank-mailman.1484268.1687640 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRA5V-00064e-Kc; Wed, 11 Nov 2026 15:18:13 +0000
+	id 1xRA5q-0006QW-TB; Wed, 11 Nov 2026 15:18:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1484264.1687630; Wed, 11 Nov 2026 15:18:13 +0000
+Received: by outflank-mailman (output) from mailman id 1484268.1687640; Wed, 11 Nov 2026 15:18:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRA5V-00064X-Hr; Wed, 11 Nov 2026 15:18:13 +0000
-Received: by outflank-mailman (input) for mailman id 1484264;
- Wed, 11 Nov 2026 15:18:12 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xRA5U-00062b-0K
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 15:18:12 +0000
+	id 1xRA5q-0006QM-PW; Wed, 11 Nov 2026 15:18:34 +0000
+Received: by outflank-mailman (input) for mailman id 1484268;
+ Wed, 11 Nov 2026 15:18:33 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xRA5p-0006Pz-He
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 15:18:33 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xRA5T-00F2tU-69
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 16:18:11 +0100
+ id 1xRA5o-00EUYS-Uu
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 16:18:32 +0100
 Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6af48730-2eae-0a2a0a5409dd-0a2a45039648-12
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 16:18:11 +0100
-Received: from [209.85.221.43] (helo=mail-wr1-f43.google.com)
+ id 6af4873e-8faa-0a2a0a5109dd-0a2a4503aee0-28
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 16:18:32 +0100
+Received: from [209.85.221.41] (helo=mail-wr1-f41.google.com)
  by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6af48733-fae8-0a2a45030019-d155dd2bd018-3
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 16:18:11 +0100
-Received: by mail-wr1-f43.google.com with SMTP id
- ffacd0b85a97d-48e20ed3b9dso2915001f8f.2
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 07:18:11 -0800 (PST)
+ id 6af48748-fae8-0a2a45030019-d155dd29e08e-3
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 16:18:32 +0100
+Received: by mail-wr1-f41.google.com with SMTP id
+ ffacd0b85a97d-48b001cd92bso1763103f8f.2
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 07:18:32 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb4c6955c6sm236795e9.5.2026.11.11.07.18.09
+ ffacd0b85a97d-49835f1772dsm11600037f8f.31.2026.11.11.07.18.31
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Nov 2026 07:18:10 -0800 (PST)
+ Wed, 11 Nov 2026 07:18:31 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,52 +51,52 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1794410290; x=1795015090; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1794410312; x=1795015112; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=r0OmIUfbEkcsIgU0y7uqnsPc3T3JqZqllvlDZYnJxH4=;
-        b=POgwWYm0sdodzV++Bdhb7umFRNpH0cEESoFk+jJCx94QCxXUUKyl3bNuIE9GmL/6nE
-         RSwzQdctEFVz7nKqQHTcKYRxc0HYIANOY040a5aXW5rQ+Oi7t7KTOEsuA+Kcm3xFgjHF
-         2SkFC5SrkBOi8mIK+cgV4cnLguTZTQB92TnvBgFtmTU6YuqYhkuSg+XvtJkkETjIxYXk
-         DWfSHYk43fj6weMnna8XfST2kTwEa6kOjAIACMdaGToHEpO0bcyah5dTHlA2faHO21zx
-         yW3C6I6VU4KvfHD4adiUSVxGWMrdO5jliCC9CjkNs8vOAwFvzjcPSzHYhbNoHuxyGXZ6
-         +ygg==
+        bh=OvqAPG6CT2RbvL3bLsOtVhKVKwAJOZOUSlUMozoAAj4=;
+        b=ci2ITb/6GYj5dO42+5X9/WNuh/Iui/3ztjBm3YnqSj7ml60klI39HHPUrcdbYEafHG
+         0vcrY5L6lPKhz0zJP5wBWfMmp6r51nwWgPGaFWxG+bfOC0I5fHChUukt4SgepJsSLtK5
+         zfuVMGr4KHvoYpP7TVAVK40xH2wLBn3JJzdwz4kRKVyRwdvpbecRzK/MHeWTC+b7jke1
+         ykbqm1ekscVSuGMtzRwoW3nKVlt/Elyf1WyJug1Zre7SU8cq3SgfbkoqIAQmBUPnaZsO
+         BzJnFPUOJU4b5Vg1N3lJQ9C6Sq5d2XjA4iXktD/I/PjakhG4XC4PDIy93csEjeyIRRMA
+         IvoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794410290; x=1795015090;
+        d=1e100.net; s=20260707; t=1794410312; x=1795015112;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=r0OmIUfbEkcsIgU0y7uqnsPc3T3JqZqllvlDZYnJxH4=;
-        b=B0xBdMM1ry4EVxbSxAMzftz9dWFUs3nG8oB7u9hKHbxVB18gSOVJx4ORz/oHf2+cdT
-         /nVNSFpoPzGYT2EY2REobTf12F6e9kxMiG0Qq64KGGT+XGMJswXKj6OAQtxJI1xf4PW4
-         iB62V574Kh8UmoI9FSzUa7jajj3SFBLUZJo9GG/idtTfnSpjKNEfbzO+mV+rdwONFgMI
-         xpf5QF65SXYV+dhEceWWrRo7AS3Tzi8B7ZJqCv6DqDHsqmFftvwTJXnLh8SdqLCM825R
-         A7qrQjVKbcTOldubHNvokKBmXvM9r5KNhYpUjOwfw9Q/ZCBFgwdeQJkFAFxXrHSpoXC+
-         ym9A==
-X-Gm-Message-State: APuU4Z9Gt0W3xEx/Uu4/hRk4bPzXrr6WVSw23JegjUJF2t4ZheCZ9ETH
-	Q0USezA28exZsp2TIXEpbnBGeGLlX/L4KkZJ3jX4kGHvFY+XmSAMDNWrrIA4R9+1Vz/+KpmvUx1
-	bRPnkZA==
-X-Gm-Gg: AYBFou0fCGgT9e7jj49vr+co19o1VkgTejGOsMtfTLN4ZPcx0qk/Sk5oKA3DrggIeFW
-	KHFhZeMs+CSEDAlvNKXnYAx0cttWMhHy5OEmSK3HbyFyTPea6S7y5UKMgOlt3N6hmTOzKPKybeg
-	K79l6q5PRhJXshBZp4TjN/f1kvSBA/c61YSyTFv7bCtek0cVHhUXc38Oehp2ugE97XA+mAhiWnz
-	l3OWyr59FCOseIRjM8qlNluv4MVeMeHFLFIJtQWBvZJXvmGtiangOZwGkJz2Z2yBj7SF/zGrB9/
-	wgB1BJT+pCAey4A82WAo4k7LAg/z78XURl2COEBKzIFhGcediG1ofihe/Nu+oLvGuls69hZMSnm
-	gcL4bZ3Nrws2F67tTqgfnlw376gs6UPN8R4UAgYbTUevhxv4xly5QSYU1ACivjSnozxxXJ2MKX1
-	nRm2Ut/PL5YQhcDCeM1pgX3mCYulBDzKtATPjGkVyBmeZkK7ErNMalnvoyMuUERNhvGE4H751MI
-	sPy5w06xdjVrrjEmGNrPpkaocQq2bHM6q0ZHSMgnZrvXRdxZrsyn2ZhtNJWEIGfpO/J1DE2fnqX
-	CBdot8x05iA8fs/87xIh7HPdaVbb5xycv2rSky7jWVK5GCMWqcp04CpkiB2FjhmyDq2yIMe/eRe
-	4lvexcnDC4y2i1bwr
-X-Received: by 2002:a05:600c:3b93:b0:49d:1fa8:b266 with SMTP id 5b1f17b1804b1-4ba093c512fmr52543745e9.26.1794410290535;
-        Wed, 11 Nov 2026 07:18:10 -0800 (PST)
-Message-ID: <b337f3d3-206f-481c-8ea2-7d02dcde69b8@suse.com>
-Date: Wed, 11 Nov 2026 16:18:09 +0100
+        bh=OvqAPG6CT2RbvL3bLsOtVhKVKwAJOZOUSlUMozoAAj4=;
+        b=dzf4zd7jK3QyL4pdAkiBIJ99w1HboFDgQAvwXFoIW3NV2TnNv2D1BXbZMNCQS4oG2Q
+         xW1now6k512QG1LANo6bYOYlL2BFcUQC+2WNboE5z8+uCJa3NvkvazbzBcUio05bT2wI
+         lQDnpZSep1c+itlidwyMEBC4xJZmYWNYf3oIV80K868FOmg1cmtJQXjYWidIj2CHKKyN
+         HEVEdPHeX1702xnUxTStk/M7f1uA+27PTaYuWoj4KN27Ry8F3GKPQ+Fby0dvNaXX5Kxz
+         k/IaW31PJLPv4sjyHeDCbma9gchL9BbzZGSkkysul0OxND5XQ3b2i3dm7NbykUtc8vhl
+         6ouA==
+X-Gm-Message-State: APuU4Z8G1f4D0oquCCOsATo0VcYWTWQGtaVFtE5m/1B9Ol2Dc8l3MShg
+	pa5TrUsZwas+nvHBiFSTKazlclwLxwLQwKni3FbqSEPLcqHHa5YE1o7gYxyjUOVdPEEtVRJp9Yv
+	MzVp32Q==
+X-Gm-Gg: AYBFou3zykuW9jPqD5HiV6YXCYers2WIe6MG4J5VN9q8wi0aOl3TWN0giajAyosY/3n
+	7xng1r9qoM4XUbro9o8pkiunypOBHjaYE/5UggEMeYIVZ6ovzdvE6y+hBIYV2985nDtArq7SwFu
+	iWZSU/zRnUz/ikH06qurQB2GQNxcoIzC0HtGdMiw/KqdXxJ0xKSVBfOeHrOu8DlOoAsXHvYfFwL
+	Mfkz4zLH3IEyaOGMzlbfwJ3V3UgBX6jwmbGKxkPuP9uhVRuO2XoTLNqa6qKh+2vB7LpASDy11+0
+	48QEZ5rlJ3+nvwwwtRI/7aamWq0OZfEXIjaYIo8RLduzKtxy0ipvR/kpQfwSUyA7FAGtq3NaN8N
+	HT16U0YM8ggwhC9lHbwvuzn+HlbnsbqJcQdObiEVKYX4CcMEHcc/FzAXPr7Z19lYu4x7ZtnoTM4
+	1R8ZGl8vhWxxHA151iOXew9mdIAVz4YgeP2jGcMsCt6WBMKxO1ixVzxBt3xneMKzqSukJhht3oz
+	KJVwdiJ37bAPMv6OAMV68OsdiMqkKQS/qhHxUG5oXGtxlIHmUGqVL4IWBZt9lPcXOqd3pjSw1pb
+	f3AxqmhYCutVH+8QI/DJLEFPbzOdJIsccT7A64WriKjKglAwsx0yuyE6/jrKpMHHj6MClrmIXYY
+	BRnTowU9xk4OmysDNmw==
+X-Received: by 2002:a05:6000:611:b0:48b:9d2:1a6a with SMTP id ffacd0b85a97d-499c5783b39mr5190705f8f.1.1794410312226;
+        Wed, 11 Nov 2026 07:18:32 -0800 (PST)
+Message-ID: <42ffc6e1-cf6a-45f6-b8fd-4dfd7f9c4810@suse.com>
+Date: Wed, 11 Nov 2026 16:18:31 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v4 24/28] x86/CPUID: enable ACE
+Subject: [PATCH v4 25/28] x86emul: enable tile management insns for ACE
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -130,251 +130,232 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <0407294d-d605-41f3-a16b-1505d897ef3f@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-33051d/1794410291-6D8D54E9-C2D2DB23/10/78276251493
+X-purgate-ID: tlsNG-33051d/1794410312-7488A4E9-F690A4B0/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 8723
-X-Spam-Status: No, score=-13.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-purgate-size: 8466
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,UNWANTED_LANGUAGE_BODY,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=4.0.1
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-..., keeping it unavailable to guests of course.
+These are being re-used from AMX, just that with ACE (alone) palette 1
+isn't usable, while palette 2 cannot be used with AMX (alone).
 
-Also include the little bit of XCR0 handling adjustment which is needed.
+While there also introduce the other two X86EMUL_FPU_*ace*, even if only
+X86EMUL_FPU_acecfg is needed right here.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
+SDE: ???
+---
 v4: New.
 
---- a/tools/tests/cpu-policy/test-cpu-policy.c
-+++ b/tools/tests/cpu-policy/test-cpu-policy.c
-@@ -623,6 +623,19 @@ static void test_cpuid_out_of_range_clea
-             },
-         },
-         {
-+            .name = "tile palette 2",
-+            .nr_markers = 1,
-+            .p = {
-+                /* First and third subleaves valid as a pair.  Others cleared. */
-+                .basic.max_leaf = 0x1d,
-+                .feat.ace = 1,
-+                .xstate.xcr0_low = XSTATE_FP_SSE | X86_XCR0_TILE_CFG |
-+                                   X86_XCR0_TILE_DATA | X86_XCR0_BSR,
-+                .tile.raw[0].a = 2,
-+                .tile.raw[2].b = 0xc2,
-+            },
-+        },
-+        {
-             .name = "extd",
-             .nr_markers = 1,
-             .p = {
-@@ -726,6 +739,15 @@ static void test_cpuid_maximum_leaf_shri
-             },
-         },
-         {
-+            .name = "ace v1",
-+            .p = {
-+                /* Subleaf 2 only with some valid value. */
-+                .basic.max_leaf = 0x1d,
-+                .tile.raw[0].a = 2,
-+                .tile.raw[2].a = 1,
-+            },
-+        },
-+        {
-             .name = "tmul",
-             .p = {
-                 /* Subleaf 0 only with some valid values. */
---- a/xen/arch/x86/cpu-policy.c
-+++ b/xen/arch/x86/cpu-policy.c
-@@ -217,7 +217,9 @@ static void recalculate_xstate(struct cp
-     if ( p->feat.pku )
-         xstates |= X86_XCR0_PKRU;
+--- a/tools/tests/x86_emulator/evex-disp8.c
++++ b/tools/tests/x86_emulator/evex-disp8.c
+@@ -1202,6 +1202,12 @@ static const struct test amx_tile[] = {
+     INSN(tilestored,  f3, 0f38, 4b, el, d, no),
+ };
  
--    if ( p->feat.amx_tile )
-+    if ( p->feat.ace )
-+        xstates |= X86_XCR0_TILE_CFG | X86_XCR0_TILE_DATA | X86_XCR0_BSR;
-+    else if ( p->feat.amx_tile )
-         xstates |= X86_XCR0_TILE_CFG | X86_XCR0_TILE_DATA;
- 
-     if ( p->feat.apx_f )
-@@ -262,9 +264,11 @@ static void recalculate_xstate(struct cp
- static void recalculate_tile(struct cpu_policy *p)
- {
-     if ( !p->feat.amx_tile )
-+        memset(&p->tmul, 0, sizeof(p->tmul));
++static const struct test ace[] = {
++    /* Element size is set arbitrarily here. See test_one(). */
++    INSN(ldtilecfg,     , 0f38, 49, el,    b, no),
++    INSN(sttilecfg,   66, 0f38, 49, el,    b, no),
++};
 +
-+    if ( !p->feat.amx_tile && !p->feat.ace )
-     {
-         memset(&p->tile, 0, sizeof(p->tile));
--        memset(&p->tmul, 0, sizeof(p->tmul));
-         return;
-     }
+ static const struct test amx_movrs[] = {
+     /* Element size assumes a 1x1 matrix here. See test_one(). */
+     INSN(tileloaddrs,   f2, 0f38, 4a, el, d, no),
+@@ -1842,6 +1848,7 @@ void evex_disp8_test(void *instr, struct
+         } \
+     } while ( false )
  
-@@ -278,6 +282,14 @@ static void recalculate_tile(struct cpu_
-         p->tile.raw[1].d = 0;
-     }
- 
-+    if ( p->tile.max_palette >= 2 )
-+    {
-+        p->tile.raw[1].a &= 0x000000ff;
-+        p->tile.raw[1].b = 0;
-+        p->tile.raw[1].c = 0;
-+        p->tile.raw[1].d = 0;
-+    }
-+
-     p->tmul.raw[0].a = 0;
-     p->tmul.raw[0].b &= 0x00ffffff;
-     p->tmul.raw[0].c = 0,
-@@ -1245,11 +1257,10 @@ void __init init_dom0_cpuid_policy(struc
-          * Default-off features with their own leaves need those leaves
-          * re-populated from the max policy.
-          */
--        if ( p->feat.amx_tile )
--        {
-+        if ( p->feat.amx_tile || p->feat.ace )
-             p->tile = max->tile;
-+        if ( p->feat.amx_tile )
-             p->tmul = max->tmul;
--        }
-         if ( p->feat.avx10 )
-             p->avx10 = max->avx10;
-         if ( p->feat.apx_f )
---- a/xen/arch/x86/include/asm/x86-defns.h
-+++ b/xen/arch/x86/include/asm/x86-defns.h
-@@ -110,13 +110,14 @@
- #define X86_XCR0_TILE_CFG         (_AC(1, ULL) << 17)
- #define X86_XCR0_TILE_DATA        (_AC(1, ULL) << 18)
- #define X86_XCR0_APX              (_AC(1, ULL) << 19)
-+#define X86_XCR0_BSR              (_AC(1, ULL) << 20)
- #define X86_XCR0_LWP              (_AC(1, ULL) << 62)
- 
- #define X86_XCR0_STATES                                                 \
-     (X86_XCR0_X87 | X86_XCR0_SSE | X86_XCR0_YMM | X86_XCR0_BNDREGS |    \
-      X86_XCR0_BNDCSR | X86_XCR0_OPMASK | X86_XCR0_ZMM |                 \
-      X86_XCR0_HI_ZMM | X86_XCR0_PKRU | X86_XCR0_TILE_CFG |              \
--     X86_XCR0_TILE_DATA | X86_XCR0_APX |                                \
-+     X86_XCR0_TILE_DATA | X86_XCR0_APX | X86_XCR0_BSR |                 \
-      X86_XCR0_LWP)
- 
- #define X86_XSS_STATES                                                  \
---- a/xen/arch/x86/lib/cpu-policy/cpuid.c
-+++ b/xen/arch/x86/lib/cpu-policy/cpuid.c
-@@ -409,7 +409,7 @@ void x86_cpu_policy_shrink_max_leaves(st
-         p->tile.max_palette = i;
-     else
-     {
--        ASSERT(!p->feat.amx_tile);
-+        ASSERT(!p->feat.amx_tile && !p->feat.ace);
-         zero_leaves(p->tile.raw, 0, 0);
-     }
-     p->basic.raw[0x1d] = p->tile.raw[0];
---- a/xen/arch/x86/lib/cpu-policy/policy.c
-+++ b/xen/arch/x86/lib/cpu-policy/policy.c
-@@ -25,6 +25,7 @@ int x86_cpu_policies_are_compatible(cons
-         FAIL_CPUID(7, 0);
- 
-     if ( (guest->feat.amx_tile && !guest->tile.max_palette) ||
-+         (guest->feat.ace && guest->tile.max_palette < 2) ||
-          guest->tile.max_palette > host->tile.max_palette )
-         FAIL_CPUID(0x1d, 0);
- 
-@@ -41,6 +42,10 @@ int x86_cpu_policies_are_compatible(cons
-             FAIL_CPUID(0x1d, 1);
-     }
- 
-+    if ( guest->tile.max_palette >= 2 &&
-+         guest->tile.ace.version > host->tile.ace.version )
-+        FAIL_CPUID(0x1d, 2);
-+
-     if ( guest->tmul.max_subleaf > host->tmul.max_subleaf ||
-          ((guest->feat.amx_int8 || guest->feat.amx_bf16 ||
-            guest->feat.amx_fp16 || guest->feat.amx_complex ||
---- a/xen/arch/x86/x86_emulate/decode.c
-+++ b/xen/arch/x86/x86_emulate/decode.c
-@@ -1603,7 +1603,8 @@ int x86emul_decode(struct x86_emulate_st
-          * environments.
-          */
-         if ( !mode_64bit() )
--            s->xcr0 &= ~(X86_XCR0_TILE_CFG | X86_XCR0_TILE_DATA | X86_XCR0_APX);
-+            s->xcr0 &= ~(X86_XCR0_TILE_CFG | X86_XCR0_TILE_DATA | X86_XCR0_APX |
-+                         X86_XCR0_BSR);
-     }
- 
-     /* Prefix bytes. */
---- a/xen/arch/x86/xstate.c
-+++ b/xen/arch/x86/xstate.c
-@@ -642,6 +642,10 @@ static bool valid_xcr0(uint64_t xcr0)
-     if ( !(xcr0 & X86_XCR0_TILE_CFG) != !(xcr0 & X86_XCR0_TILE_DATA) )
-         return false;
- 
-+    /* BSR requires TILE{CFG,DATA} to also be set. */
-+    if ( (xcr0 & X86_XCR0_BSR) && !(xcr0 & X86_XCR0_TILE_CFG) )
-+        return false;
-+
-     return true;
++        RUN(ace);
+         RUN(adx);
+         RUN(amx_movrs);
+         RUN(amx_tile);
+--- a/tools/tests/x86_emulator/x86-emulate.h
++++ b/tools/tests/x86_emulator/x86-emulate.h
+@@ -233,6 +233,10 @@ void wrpkru(unsigned int val);
+ #define cpu_has_cmpccxadd            cpu_policy.feat.cmpccxadd
+ #define cpu_has_avx_ifma            (cpu_policy.feat.avx_ifma && xcr0_mask(6))
+ #define cpu_has_movrs                cpu_policy.feat.movrs
++#define cpu_has_ace                 (cpu_policy.feat.ace && \
++                                     xcr0_mask(X86_XCR0_TILE_CFG | \
++                                               X86_XCR0_TILE_DATA | \
++                                               X86_XCR0_BSR))
+ #define cpu_has_avx_vnni_int8       (cpu_policy.feat.avx_vnni_int8 && \
+                                      xcr0_mask(6))
+ #define cpu_has_avx_ne_convert      (cpu_policy.feat.avx_ne_convert && \
+--- a/xen/arch/x86/x86_emulate/private.h
++++ b/xen/arch/x86/x86_emulate/private.h
+@@ -621,6 +621,7 @@ amd_like(const struct x86_emulate_ctxt *
+ #define vcpu_has_msrlist()     (ctxt->cpuid->feat.msrlist)
+ #define vcpu_has_movrs()       (ctxt->cpuid->feat.movrs)
+ #define vcpu_has_msr_imm()     (ctxt->cpuid->feat.msr_imm)
++#define vcpu_has_ace()         (ctxt->cpuid->feat.ace)
+ #define vcpu_has_avx_vnni_int8() (ctxt->cpuid->feat.avx_vnni_int8)
+ #define vcpu_has_avx_ne_convert() (ctxt->cpuid->feat.avx_ne_convert)
+ #define vcpu_has_amx_complex() (ctxt->cpuid->feat.amx_complex)
+--- a/xen/arch/x86/x86_emulate/x86_emulate.c
++++ b/xen/arch/x86/x86_emulate/x86_emulate.c
+@@ -176,6 +176,7 @@ static void sttilecfg(struct x86_tilecfg
  }
  
-@@ -877,7 +881,10 @@ static void __init noinline xstate_check
-     if ( cpu_has_xsaves && boot_cpu_has(X86_FEATURE_ARCH_LBR) )
-         check_new_xstate(&s, X86_XSS_LBR);
+ #define PALETTE_AMX 1
++#define PALETTE_ACE 2
  
--    if ( boot_cpu_has(X86_FEATURE_AMX_TILE) )
-+    if ( boot_cpu_has(X86_FEATURE_ACE) )
-+        check_new_xstate(&s,
-+                         X86_XCR0_TILE_DATA | X86_XCR0_TILE_CFG | X86_XCR0_BSR);
-+    else if ( boot_cpu_has(X86_FEATURE_AMX_TILE) )
-         check_new_xstate(&s, X86_XCR0_TILE_DATA | X86_XCR0_TILE_CFG);
+ #define PALETTE(pal...) TOK_OR(1U << PALETTE_, ## pal)
  
-     if ( cpu_has_apx_f )
---- a/xen/include/public/arch-x86/cpufeatureset.h
-+++ b/xen/include/public/arch-x86/cpufeatureset.h
-@@ -355,6 +355,7 @@ XEN_CPUFEATURE(UC_LOCK_DIS,        13*32
+@@ -192,6 +193,9 @@ static bool tile_valid(unsigned int tile
+                 */
+                tilecfg->colsb[tile] && tilecfg->rows[tile];
  
- /* Intel-defined CPU features, CPUID level 0x00000007:1.ecx, word 14 */
- XEN_CPUFEATURE(MSR_IMM,            14*32+ 5) /*s  RDMSR/WRMSRNS with immediate operand */
-+XEN_CPUFEATURE(ACE,                14*32+11) /*   AI Compute Extensions */
- 
- /* Intel-defined CPU features, CPUID level 0x00000007:1.edx, word 15 */
- XEN_CPUFEATURE(AVX_VNNI_INT8,      15*32+ 4) /*A  AVX-VNNI-INT8 Instructions */
---- a/xen/include/xen/lib/x86/cpu-policy.h
-+++ b/xen/include/xen/lib/x86/cpu-policy.h
-@@ -67,7 +67,7 @@ const char *x86_cpuid_vendor_to_str(unsi
- #define CPUID_GUEST_NR_FEAT       (2u + 1)
- #define CPUID_GUEST_NR_TOPO       (1u + 1)
- #define CPUID_GUEST_NR_XSTATE     (62u + 1)
--#define CPUID_GUEST_NR_PALETTE    (1u + 1)
-+#define CPUID_GUEST_NR_PALETTE    (2u + 1)
- #define CPUID_GUEST_NR_TMUL       (1u + 1)
- #define CPUID_GUEST_NR_AVX10      (1u + 1)
- #define CPUID_GUEST_NR_APX        (0u + 1)
-@@ -286,6 +286,14 @@ struct cpu_policy
-                 uint16_t max_rows, :16;
-                 uint32_t /* d */:32;
-             } palette1;
++    case PALETTE_ACE:
++        return (palettes & PALETTE(ACE)) && tile < 8;
 +
-+            /* Palette (subleaf) 2 (ACE). */
-+            struct {
-+                uint32_t version:8, :24;
-+                uint32_t /* b */:32;
-+                uint32_t /* c */:32;
-+                uint32_t /* d */:32;
-+            } ace;
-         };
-     } tile;
+     default:
+         break;
+     }
+@@ -511,6 +515,10 @@ int x86emul_get_fpu(
  
---- a/xen/tools/gen-cpuid.py
-+++ b/xen/tools/gen-cpuid.py
-@@ -314,6 +314,8 @@ def crunch_numbers(state):
-         # AVX10 discrete features.
-         AVX10: [AVX10_BMM, AVX10_V1_AUX, AVX10_V2_AUX],
+     switch ( type )
+     {
++    case X86EMUL_FPU_zmm_ace:
++        if ( !(state->xcr0 & X86_XCR0_BSR) )
++            return X86EMUL_UNHANDLEABLE;
++        fallthrough;
+     case X86EMUL_FPU_zmm_tile:
+         ASSERT(mode_64bit());
+         if ( !(state->xcr0 & X86_XCR0_TILE_CFG) ||
+@@ -533,6 +541,11 @@ int x86emul_get_fpu(
+             return X86EMUL_UNHANDLEABLE;
+         break;
  
-+        AVX10_V2_AUX: [ACE],
++    case X86EMUL_FPU_acecfg:
++    case X86EMUL_FPU_ace:
++        if ( !(state->xcr0 & X86_XCR0_BSR) )
++            return X86EMUL_UNHANDLEABLE;
++        fallthrough;
+     case X86EMUL_FPU_tilecfg:
+     case X86EMUL_FPU_tile:
+         ASSERT(mode_64bit());
+@@ -579,6 +592,7 @@ int x86emul_get_fpu(
+         switch ( type )
+         {
+         case X86EMUL_FPU_zmm_tile:
++        case X86EMUL_FPU_zmm_ace:
+             xcr0_needed = X86_XCR0_TILE_DATA;
+             fallthrough;
+         default:
+@@ -595,9 +609,11 @@ int x86emul_get_fpu(
+             break;
+ 
+         case X86EMUL_FPU_tilecfg:
++        case X86EMUL_FPU_acecfg:
+             break;
+ 
+         case X86EMUL_FPU_tile:
++        case X86EMUL_FPU_ace:
+             xcr0_needed = X86_XCR0_TILE_DATA;
+             break;
+         }
+@@ -6672,7 +6688,8 @@ x86_emulate(
+             switch ( modrm )
+             {
+             case 0xc0: /* tilerelease */
+-                vcpu_must_have(amx_tile);
++                if ( !vcpu_has_ace() )
++                    vcpu_must_have(amx_tile);
+                 get_fpu(X86EMUL_FPU_tilecfg);
+                 op_bytes = 1; /* fake */
+                 goto simd_0f_common;
+@@ -6686,8 +6703,8 @@ x86_emulate(
+         {
+         case 0: /* ldtilecfg mem */
+             generate_exception_if(vex.reg != 0xf, X86_EXC_UD);
+-            vcpu_must_have(amx_tile);
+-            get_fpu(X86EMUL_FPU_tilecfg);
++            if ( !vcpu_has_ace() )
++                vcpu_must_have(amx_tile);
+             rc = ops->read(ea.mem.seg, ea.mem.off, mmvalp, 64, ctxt);
+             if ( rc != X86EMUL_OKAY )
+                 goto done;
+@@ -6697,12 +6714,15 @@ x86_emulate(
+             switch ( mmvalp->tilecfg.palette )
+             {
+             case 0: /* init */
++                get_fpu(X86EMUL_FPU_tilecfg);
+                 break;
+ 
+             case PALETTE_AMX:
+             {
+                 const typeof(cp->tile.palette1) *palette = &cp->tile.palette1;
+ 
++                generate_exception_if(!vcpu_has_amx_tile(), X86_EXC_UD);
++                get_fpu(X86EMUL_FPU_tilecfg);
+                 generate_exception_if(memchr_inv(mmvalp->tilecfg.res, 0,
+                                                  sizeof(mmvalp->tilecfg.res)),
+                                       X86_EXC_GP, 0);
+@@ -6729,6 +6749,20 @@ x86_emulate(
+                 break;
+             }
+ 
++            case PALETTE_ACE:
++                generate_exception_if(!vcpu_has_ace(), X86_EXC_UD);
++                get_fpu(X86EMUL_FPU_acecfg);
++                generate_exception_if(memchr_inv(((void *)mmvalp +
++                                                  endof_field(struct x86_tilecfg,
++                                                              palette)),
++                                                 0,
++                                                 (sizeof(mmvalp->tilecfg) -
++                                                  endof_field(struct x86_tilecfg,
++                                                              palette))),
++                                      X86_EXC_GP, 0);
 +
-         # Extensions with VEX/EVEX encodings keyed to a separate feature
-         # flag are made dependents of their respective legacy feature.
-         PCLMULQDQ: [VPCLMULQDQ],
++                break;
++
+             default:
+                 generate_exception(X86_EXC_GP, 0);
+             }
+@@ -6751,7 +6785,8 @@ x86_emulate(
+         switch ( modrm_reg & 7 )
+         {
+         case 0: /* sttilecfg mem */
+-            vcpu_must_have(amx_tile);
++            if ( !vcpu_has_ace() )
++                vcpu_must_have(amx_tile);
+             get_fpu(X86EMUL_FPU_tilecfg);
+             op_bytes = 64;
+             goto simd_0f_common;
+@@ -6765,11 +6800,12 @@ x86_emulate(
+             switch ( modrm_rm & 7 )
+             {
+             case 0: /* tilezero */
+-                vcpu_must_have(amx_tile);
++                if ( !vcpu_has_ace() )
++                    vcpu_must_have(amx_tile);
+                 get_fpu(X86EMUL_FPU_tile);
+                 sttilecfg(&mmvalp->tilecfg);
+                 generate_exception_if(!tile_valid(modrm_reg, &mmvalp->tilecfg,
+-                                                  PALETTE(AMX)),
++                                                  PALETTE(AMX, ACE)),
+                                       X86_EXC_UD);
+                 op_bytes = 1; /* fake */
+                 goto simd_0f_common;
+--- a/xen/arch/x86/x86_emulate/x86_emulate.h
++++ b/xen/arch/x86/x86_emulate/x86_emulate.h
+@@ -88,6 +88,9 @@ enum x86_emulate_fpu_type {
+     X86EMUL_FPU_tilecfg, /* AMX configuration (tilecfg) */
+     X86EMUL_FPU_tile, /* AMX instruction set (%tmm0-%tmmN) */
+     X86EMUL_FPU_zmm_tile, /* AMX and AVX512/AVX10 instruction sets */
++    X86EMUL_FPU_acecfg, /* ACE configuration (tilecfg) */
++    X86EMUL_FPU_ace, /* ACE instruction set (%tmm0-%tmmN, %bsr0) */
++    X86EMUL_FPU_zmm_ace, /* ACE plus %zmmN */
+     /* This sentinel will never be passed to ->get_fpu(). */
+     X86EMUL_FPU_none
+ };
 
 
