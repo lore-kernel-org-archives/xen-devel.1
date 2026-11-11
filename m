@@ -2,38 +2,38 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4B0C7606A88B
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2026 15:05:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1484012.1687378 (Exim 4.92)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C7B8606A8A7
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2026 15:05:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1484021.1687387 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xR9sc-00079l-ST; Wed, 11 Nov 2026 15:04:54 +0000
+	id 1xR9sp-0007YR-9P; Wed, 11 Nov 2026 15:05:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1484012.1687378; Wed, 11 Nov 2026 15:04:54 +0000
+Received: by outflank-mailman (output) from mailman id 1484021.1687387; Wed, 11 Nov 2026 15:05:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xR9sc-00079e-Pl; Wed, 11 Nov 2026 15:04:54 +0000
-Received: by outflank-mailman (input) for mailman id 1484012;
- Wed, 11 Nov 2026 15:04:53 +0000
+	id 1xR9sp-0007YI-6Y; Wed, 11 Nov 2026 15:05:07 +0000
+Received: by outflank-mailman (input) for mailman id 1484021;
+ Wed, 11 Nov 2026 15:05:06 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <hch@lst.de>) id 1xR9sb-000793-Gs
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 15:04:53 +0000
+ (envelope-from <hch@lst.de>) id 1xR9so-0007XU-CW
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 15:05:06 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xR9sa-00F04W-U0
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 16:04:52 +0100
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xR9sn-00F04W-Oh
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 16:05:05 +0100
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <hch@lst.de>)
- id 6af4840c-2eae-0a2a0a5409dd-0a2a4501997e-30
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 16:04:52 +0100
+ id 6af4840f-2eae-0a2a0a5409dd-0a2a4507d0c4-26
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 16:05:05 +0100
 Received: from [213.95.11.211] (helo=verein.lst.de)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <hch@lst.de>)
- id 6af48414-5984-0a2a45010019-d55f0bd3e685-3
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 16:04:52 +0100
+ id 6af48421-b4ea-0a2a45070019-d55f0bd38951-3
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 16:05:05 +0100
 Received: by verein.lst.de (Postfix, from userid 2407)
- id A445568D12; Wed, 11 Nov 2026 16:04:50 +0100 (CET)
+ id F080D68D13; Wed, 11 Nov 2026 16:05:02 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -43,7 +43,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; none
-Date: Wed, 11 Nov 2026 16:04:49 +0100
+Date: Wed, 11 Nov 2026 16:05:02 +0100
 From: Christoph Hellwig <hch@lst.de>
 To: Christian Brauner <brauner@kernel.org>
 Cc: linux-fsdevel@vger.kernel.org, Jann Horn <jannh@google.com>,
@@ -61,16 +61,16 @@ Cc: linux-fsdevel@vger.kernel.org, Jann Horn <jannh@google.com>,
 	linux-s390@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
 	linux-usb@vger.kernel.org, Amir Goldstein <amir73il@gmail.com>,
 	linux-erofs@lists.ozlabs.org, linux-kselftest@vger.kernel.org
-Subject: Re: [PATCH RFC 06/41] proc: use fc_init_pseudo()
-Message-ID: <20261111150449.GC10644@lst.de>
-References: <20261110-work-loop-pseudo-v1-0-4c998976c6c7@kernel.org> <20261110-work-loop-pseudo-v1-6-4c998976c6c7@kernel.org>
+Subject: Re: [PATCH RFC 08/41] mqueue: use fc_init_pseudo()
+Message-ID: <20261111150502.GD10644@lst.de>
+References: <20261110-work-loop-pseudo-v1-0-4c998976c6c7@kernel.org> <20261110-work-loop-pseudo-v1-8-4c998976c6c7@kernel.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20261110-work-loop-pseudo-v1-6-4c998976c6c7@kernel.org>
+In-Reply-To: <20261110-work-loop-pseudo-v1-8-4c998976c6c7@kernel.org>
 User-Agent: Mutt/1.5.17 (2007-11-01)
-X-purgate-ID: tlsNG-d62444/1794409492-BEE60757-28177973/0/0
+X-purgate-ID: tlsNG-ef75cf/1794409505-350CDAE4-B54B23C7/0/0
 X-purgate-type: clean
 X-purgate-size: 62
 X-Spam-Status: No, score=-10.3 required=3.0 tests=BAYES_00,
