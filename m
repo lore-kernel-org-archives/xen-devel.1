@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 80323606A338
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2026 14:21:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E112D606A331
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2026 14:21:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=BTGJx8Lw
-Received: from list by lists.xenproject.org with outflank-mailman.1483717.1687064 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=UCH9WIno
+Received: from list by lists.xenproject.org with outflank-mailman.1483721.1687074 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xR9C1-0007Oz-3z; Wed, 11 Nov 2026 14:20:53 +0000
+	id 1xR9CR-0007kI-BH; Wed, 11 Nov 2026 14:21:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1483717.1687064; Wed, 11 Nov 2026 14:20:53 +0000
+Received: by outflank-mailman (output) from mailman id 1483721.1687074; Wed, 11 Nov 2026 14:21:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xR9C1-0007Os-1D; Wed, 11 Nov 2026 14:20:53 +0000
-Received: by outflank-mailman (input) for mailman id 1483717;
- Wed, 11 Nov 2026 14:20:51 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xR9Bz-0007Ok-KA
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 14:20:51 +0000
+	id 1xR9CR-0007kB-7t; Wed, 11 Nov 2026 14:21:19 +0000
+Received: by outflank-mailman (input) for mailman id 1483721;
+ Wed, 11 Nov 2026 14:21:17 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xR9CP-0007jq-Ja
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 14:21:17 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xR9Bz-00ErYO-0g
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 15:20:51 +0100
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xR9CP-00EKcj-0P
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 15:21:17 +0100
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6af479c1-8faa-0a2a0a5109dd-0a2a450199ac-4
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 15:20:50 +0100
-Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6af479c8-bab6-0a2a0a5309dd-0a2a45059c5e-48
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 15:21:16 +0100
+Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6af479c2-5984-0a2a45010019-d1558035d89c-3
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 15:20:50 +0100
-Received: by mail-wm1-f53.google.com with SMTP id
- 5b1f17b1804b1-4a210470b49so26682035e9.2
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 06:20:50 -0800 (PST)
+ id 6af479dc-4cb1-0a2a45050019-d155802bc16e-3
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 15:21:16 +0100
+Received: by mail-wm1-f43.google.com with SMTP id
+ 5b1f17b1804b1-4a5036bbac7so20720325e9.3
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 06:21:16 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb4c518a6asm33735e9.10.2026.11.11.06.20.49
+ 5b1f17b1804b1-4ba01fe2c5asm219346005e9.5.2026.11.11.06.21.15
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Nov 2026 06:20:49 -0800 (PST)
+ Wed, 11 Nov 2026 06:21:15 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,52 +51,52 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1794406850; x=1795011650; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1794406876; x=1795011676; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=B/I1H+e5/JfrForg2ReUVUl5ReLr7VIekFarbzejtLs=;
-        b=BTGJx8LwywWhdI2NZERge7IppKFx6oAOkbA95WPqBcRAhCBYAQLPH8aeTlo2j1Zo6Y
-         7bXAVVs9nmD0VF5uFCQS/3fGV+KTvi3VpTIEu4UZHnthqp0rGysGm43EbYBYk7Aqtids
-         Z1zYhGlXU/5LHvixoahphMp5uGb9M6g1k2+yzNsMtN6EIH+Ftn+5NaaUo/MfIeW23TTZ
-         EBEEJnexCcbMPYfQAloi1hf8RJFTql23KwJEYw1NWfWj9/PKdd4KKA78pff4V1Us2Xm9
-         7Lto0iPoVR52JArVlWPain0qr9YkEW07z4dMmzSjuNNQ2dmHIlrbRB8glCFx5H6TIBad
-         iyeA==
+        bh=t4ILqBhaZ7bQTm1WQpT8wEWQPQ4i8TREUn6rrui/tyA=;
+        b=UCH9WIno9ou7P/2RSIhE62MIlONNZMfOcynQEFiAHIOOs2zrRjLKTZ9ckdQtw/vl7r
+         8Ely1+ggbNbQpBw7TOADXiz9MxRBWKGpZwB+UoE3/n197xaaYuM32dVyRoxezDhSbOaZ
+         kUZwMrpakFUIFJCIpH8N8cm9HSVlm43WndkvMxyUejFR99kSMSEyLV4oAK9csxQuJ6g/
+         BMmL+3QZg0QE/l3Buw+rqjPCbZq05AySuv0FyaYzN+36yqCQKokQJd5cjtyJvwhx76Z0
+         aAnndQ0yvZ/FDflxHKk9Gtm8zvcjS+eaehwQ/K0TzKcSyA1zvwGOXdYOsiSuQuqmHAmn
+         38Mw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794406850; x=1795011650;
+        d=1e100.net; s=20260707; t=1794406876; x=1795011676;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=B/I1H+e5/JfrForg2ReUVUl5ReLr7VIekFarbzejtLs=;
-        b=iFjShHZ3wS4mevbk1NInf+MjnmrlxnrRxtW3Z7qnvwBqsU4iQ8yT3lyflXk/tSPgBG
-         GySzpSqNFAgfMGoFbbx4C2Qe7TLLlwXEuyBoHSNaeweDmFyBK4l2Oe9lVai7QCvMg5x1
-         OYRaIQUgCpKDY8uBTuU6Csbo4Bl7UgD2C6edc6lDu5PhHcNHIs7q6BCvd12PdVKA4hyL
-         Vd3eRtySZFBGUfAnqFvETMsSE9sBqZc2PVxP+geeZvzJ8UQtG5psHcZ2UjCcynjCdpdz
-         PDwKOvoAsCfOIlZlZUcAyZ7IP0wcVwoQveTpqr31t9hNTgs2M3pp/06FGSxG05POyrrK
-         KG8Q==
-X-Gm-Message-State: APuU4Z8SOgj8PaxSMYCjHRCQInXB9+jkx0gSunhO0GIgu1JOnsxlBwVp
-	O6neVYpqBaJ8FZApoTHIiOUBLJL8MzI2EefLEDw1/1Hrhv69BzAWA6B8hI+WK4vbtmRwoIFvtLh
-	RtAHZxA==
-X-Gm-Gg: AYBFou0RbicLGI3FRNQH3sZ2Q3PSpCay21uovRr8FSajZSbHOGVSEH0IiYJOA5/XXvm
-	1O9Fm87dOCjrAE/mOk12uCN01EIGiSPFUmzto5DylPdKSdTXyAES+T4UBRRMsRbcqSltcJ43Fmg
-	4CEqRBPFeSQFgOldoYLVekRLvFeFEURrYfoYhQ6EuDzYqJ4iZWu6MubhW9wToCf7Fzx1PjEIkbk
-	21+gvyUyLkvJXTJR8wRQdtgeTH+N4tAS2AEZAKoRtTBwJiPzjIW0Tst4i71hUcoYSkDQMHjnwbS
-	iEh1YIaELWu7cn72HP5HCIX9112P/uUdBFT6NKbxkLg74Ae+kQ1kUyHyoSR8jdDVubHSCJfvZp8
-	9v5y0nvnTjoY+KSKVw6PmwCCwFEYwOi8BKq5TkZMkJYezrlTINI/rfapJEilAgplIFMLqbxG+Co
-	PwZEbtpEZZ0EQueZoWcc0+M6DcBj/6XSbtT9ESSGSOYCd5kSTnw2yjcI7IEuNvisOynTD1Buuwr
-	5UxH9GQfLHGyf/xpfABNlZP4rguwdbOSNrD4STKMc7Qp6J8Cb9f7aN9twvslcBt+R7Z/VTsnwT8
-	wfWJ6IOO/8BfXQ+hijKL8FEczgFxIb7rdrVCCYFllcJ6P5yA/jLz8ztotCx2broz6CKDjbC7qAv
-	TMQ9l1tdVJrjWG7/p
-X-Received: by 2002:a05:600c:4f4a:b0:4a1:7e76:d02f with SMTP id 5b1f17b1804b1-4ba0938a45bmr56301555e9.14.1794406850232;
-        Wed, 11 Nov 2026 06:20:50 -0800 (PST)
-Message-ID: <749c1efe-aa8b-41b2-86bc-1d21631bd85f@suse.com>
-Date: Wed, 11 Nov 2026 15:20:49 +0100
+        bh=t4ILqBhaZ7bQTm1WQpT8wEWQPQ4i8TREUn6rrui/tyA=;
+        b=X0HxBCkaX/AubseO3OErMt62SVoYsJG9OXsTRcFtCHF7o/8hz3ch7rlHH74O/lEdo9
+         ZS/aY4n8/fvEpD0Ak90K6b+6xmNVDx3GqS/qriNir4wqzCZLX5xP8gnitEpStBEo+Ihr
+         mX6E62IDoUR3ynMFj1Nr7SGlOcnOBACvvyill8Et53WzqtrJLY6UxNFEC+wwDslIYsj+
+         tXufnU5I/WhmozM4nt+zPtcWOaVdXK+B8OhW75DcoZg7h0d9xDmrIq+Z2NvoL4X5agpl
+         bsvulMl/6dhLILbqON0OtqB1oec4rVrwzU2OwQDIo5EKW2ce/owZhWT8P+Xmkm6z6m5X
+         6NSA==
+X-Gm-Message-State: APuU4Z+AOKFnfJCgVLHwIkmDigNj/dgPB2pyWc8VQYOHDnGjWnODdBbZ
+	q16tOjB4GdauISvWotWx7ixF0AGB53mYnbeq98EsMjFZ+il1Kwv2PBIO1C/2YT0DfMXSFCO60Rv
+	AAJbhhw==
+X-Gm-Gg: AYBFou24gSlI0uX88fG0fude8Qf4CPhF51JgqVdyKMpa9lVssh2+sWjpxaluNGBJ+4+
+	fuMT4Kg+pKhb8sQQLQ6KObJeDXWnBlg+eUFFfOVb9bXYBQV/xLT4TDmoX9jgbNQE4z77UJjB1yn
+	wnPLV2qJYzwk5JrE1Nx5QpoqFlL0Yoq4EEFMutKUEamQbFF89Bc6mkcpdHWC5PbUZJl7invi52a
+	qXUnNQT8TNbMHunDkOyFExWMTyt0m3EtvkRHnjEUR3/oHQHY5744RIfLVyssa6jKG3azZknRO9G
+	yXJ2ir9jtUYS9gr2s5BhybmPuwmjA5jMvBPLjpSnZ2kSnOVsk/oy4a6l/nS0e/82/0cOnxq8Z6P
+	D45a6S/QRJqAiCQHVvvYp/XyKaIKqM6zN0x5dZLql0dLxInQfeSrkUAB5Uy/ZoziaUb8Pmk9/vJ
+	KEyrFqwzzbVsAnKcnfjBvvxCqfU7ZpYW0YKtBxNcAbf1Bb5cOsZwvDQDkG/f58XYmkFcOIwAfC7
+	BPDWOIluNmwufTFLCa/s929xk3JiOAhZL8AS5hMQWKVL9s1xhpjOdIqQUyjRgTZG7HnUbHVmHTy
+	FFOAcv4tDQLT1p32hUmxUNfIsjuMk+vzhLLR2EmiuZbl6NPil/a/gT5NserbSTvkjshf2gGn6zO
+	yBreNe2U6STUXgi3IrNYq7enbp1Rw4Wr8zUuO5g==
+X-Received: by 2002:a05:600c:e545:b0:4a1:ac66:6059 with SMTP id 5b1f17b1804b1-4ba093bdb35mr35150355e9.26.1794406876303;
+        Wed, 11 Nov 2026 06:21:16 -0800 (PST)
+Message-ID: <160681f6-5c72-4319-93cb-3a15ef5b9ca1@suse.com>
+Date: Wed, 11 Nov 2026 15:21:14 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 01/30] x86/CPUID: introduce APX_F
+Subject: [PATCH 02/30] x86/CPUID: enable APX sub-leaf
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -130,9 +130,9 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <17d56a5d-41f2-4691-aea7-d6dfdde5ad32@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1794406850-1F86F757-3B234455/10/78276251493
+X-purgate-ID: tlsNG-c201ff/1794406876-251182A1-ADB7526A/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 1797
+X-purgate-size: 11971
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -141,39 +141,314 @@ X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add basic definitions and the dependencies of the feature.
+The logic is modeled as closely as possible after that of leaf 7 and AVX10
+sub-leaf handling.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
+--- a/tools/libs/light/libxl_cpuid.c
++++ b/tools/libs/light/libxl_cpuid.c
+@@ -344,6 +344,7 @@ int libxl_cpuid_parse_config(libxl_cpuid
+         MSR_ENTRY(0x10a, CPUID_REG_EDX),
+         CPUID_ENTRY(0x80000021, NA, CPUID_REG_ECX),
+         CPUID_ENTRY(0x00000024,  1, CPUID_REG_ECX),
++        CPUID_ENTRY(0x00000029,  0, CPUID_REG_EBX),
+ #undef MSR_ENTRY
+ #undef CPUID_ENTRY
+     };
+--- a/tools/misc/xen-cpuid.c
++++ b/tools/misc/xen-cpuid.c
+@@ -39,6 +39,7 @@ static const struct {
+     { "MSR_ARCH_CAPS.hi",         "m10Ah" },
+     { "CPUID 0x80000021.ecx",      "e21c" },
+     { "CPUID 0x00000024:1.ecx",    "24c1" },
++    { "CPUID 0x00000029:0.ebx",    "29b0" },
+ };
+ 
+ #define COL_ALIGN "24"
+--- a/xen/arch/x86/cpu/common.c
++++ b/xen/arch/x86/cpu/common.c
+@@ -605,6 +605,11 @@ void identify_cpu(struct cpuinfo_x86 *c)
+ 				    &tmp);
+ 	}
+ 
++	if (cpu_has(c, X86_FEATURE_APX_F) && c->cpuid_level >= 0x29)
++		cpuid_count(0x29, 0, &tmp,
++			    &c->x86_capability[FEATURESET_29b0],
++			    &tmp, &tmp);
++
+ 	if (test_bit(X86_FEATURE_ARCH_CAPS, c->x86_capability)) {
+ 		val = rdmsr(MSR_ARCH_CAPABILITIES);
+ 		c->x86_capability[FEATURESET_m10Al] = val;
+--- a/xen/arch/x86/cpu-policy.c
++++ b/xen/arch/x86/cpu-policy.c
+@@ -287,6 +287,13 @@ static void recalculate_misc(struct cpu_
+         memset(p->avx10.raw, 0, sizeof(p->avx10.raw));
+     }
+ 
++    zero_leaves(p->basic.raw, 0x25, 0x28);
++
++    p->apx.raw[0].c = 0;
++    p->apx.raw[0].d = 0;
++    if ( !p->feat.apx_f )
++        memset(p->apx.raw, 0, sizeof(p->apx.raw));
++
+     p->extd.e1d &= ~CPUID_COMMON_1D_FEATURES;
+ 
+     /* Most of Power/RAS hidden from guests. */
+@@ -423,6 +430,7 @@ static void __init guest_common_max_leav
+     p->basic.max_leaf       = ARRAY_SIZE(p->basic.raw) - 1;
+     p->feat.max_subleaf     = ARRAY_SIZE(p->feat.raw) - 1;
+     p->avx10.max_subleaf    = ARRAY_SIZE(p->avx10.raw) - 1;
++    p->apx.max_subleaf      = ARRAY_SIZE(p->apx.raw) - 1;
+     p->extd.max_leaf        = 0x80000000U + ARRAY_SIZE(p->extd.raw) - 1;
+ }
+ 
+@@ -432,6 +440,7 @@ static void __init guest_common_default_
+     p->basic.max_leaf       = host_cpu_policy.basic.max_leaf;
+     p->feat.max_subleaf     = host_cpu_policy.feat.max_subleaf;
+     p->avx10.max_subleaf    = host_cpu_policy.avx10.max_subleaf;
++    p->apx.max_subleaf      = host_cpu_policy.apx.max_subleaf;
+     p->extd.max_leaf        = host_cpu_policy.extd.max_leaf;
+ }
+ 
+@@ -1043,6 +1052,7 @@ void recalculate_cpuid_policy(struct dom
+     p->basic.max_leaf   = min(p->basic.max_leaf,   max->basic.max_leaf);
+     p->feat.max_subleaf = min(p->feat.max_subleaf, max->feat.max_subleaf);
+     p->avx10.max_subleaf = min(p->avx10.max_subleaf, max->avx10.max_subleaf);
++    p->apx.max_subleaf  = min(p->apx.max_subleaf, max->apx.max_subleaf);
+     p->extd.max_leaf    = 0x80000000U | min(p->extd.max_leaf & 0xffff,
+                                             ((p->x86_vendor & (X86_VENDOR_AMD |
+                                                                X86_VENDOR_HYGON))
+@@ -1091,6 +1101,8 @@ void recalculate_cpuid_policy(struct dom
+         __clear_bit(X86_FEATURE_XSAVE, fs);
+     if ( p->basic.max_leaf < 0x24 )
+         __clear_bit(X86_FEATURE_AVX10, fs);
++    if ( p->basic.max_leaf < 0x29 )
++        __clear_bit(X86_FEATURE_APX_F, fs);
+ 
+     sanitise_featureset(fs);
+ 
+@@ -1188,6 +1200,8 @@ void __init init_dom0_cpuid_policy(struc
+          */
+         if ( p->feat.avx10 )
+             p->avx10 = max->avx10;
++        if ( p->feat.apx_f )
++            p->apx = max->apx;
+     }
+ 
+     /*
+@@ -1222,6 +1236,8 @@ static void __init __maybe_unused build_
+                  sizeof(raw_cpu_policy.xstate.raw));
+     BUILD_BUG_ON(sizeof(raw_cpu_policy.avx10) !=
+                  sizeof(raw_cpu_policy.avx10.raw));
++    BUILD_BUG_ON(sizeof(raw_cpu_policy.apx) !=
++                 sizeof(raw_cpu_policy.apx.raw));
+     BUILD_BUG_ON(sizeof(raw_cpu_policy.extd) !=
+                  sizeof(raw_cpu_policy.extd.raw));
+ }
+--- a/xen/arch/x86/cpuid.c
++++ b/xen/arch/x86/cpuid.c
+@@ -235,6 +235,15 @@ void guest_cpuid(const struct vcpu *v, u
+             *res = array_access_nospec(p->avx10.raw, subleaf);
+             break;
+ 
++        case 0x29:
++            ASSERT(p->apx.max_subleaf < ARRAY_SIZE(p->apx.raw));
++            if ( subleaf > min_t(uint32_t, p->apx.max_subleaf,
++                                 ARRAY_SIZE(p->apx.raw) - 1) )
++                return;
++
++            *res = array_access_nospec(p->apx.raw, subleaf);
++            break;
++
+         default:
+             *res = array_access_nospec(p->basic.raw, leaf);
+             break;
+--- a/xen/arch/x86/lib/cpu-policy/copy-to-buffer.c
++++ b/xen/arch/x86/lib/cpu-policy/copy-to-buffer.c
+@@ -130,6 +130,13 @@ int x86_cpuid_copy_to_buffer(const struc
+                 COPY_LEAF(leaf, subleaf, &p->avx10.raw[subleaf]);
+             break;
+ 
++        case 0x29:
++            for ( subleaf = 0;
++                  subleaf <= MIN(p->apx.max_subleaf,
++                                 ARRAY_SIZE(p->apx.raw) - 1); ++subleaf )
++                COPY_LEAF(leaf, subleaf, &p->apx.raw[subleaf]);
++            break;
++
+         default:
+             COPY_LEAF(leaf, XEN_CPUID_NO_SUBLEAF, &p->basic.raw[leaf]);
+             break;
+--- a/xen/arch/x86/lib/cpu-policy/copy-from-buffer.c
++++ b/xen/arch/x86/lib/cpu-policy/copy-from-buffer.c
+@@ -115,6 +115,13 @@ int x86_cpuid_copy_from_buffer(struct cp
+                 array_access_nospec(p->avx10.raw, data.subleaf) = l;
+                 break;
+ 
++            case 0x29:
++                if ( data.subleaf >= ARRAY_SIZE(p->apx.raw) )
++                    goto out_of_range;
++
++                array_access_nospec(p->apx.raw, data.subleaf) = l;
++                break;
++
+             default:
+                 if ( data.subleaf != XEN_CPUID_NO_SUBLEAF )
+                     goto out_of_range;
+--- a/xen/arch/x86/lib/cpu-policy/cpuid.c
++++ b/xen/arch/x86/lib/cpu-policy/cpuid.c
+@@ -83,6 +83,7 @@ void x86_cpu_policy_to_featureset(
+     fs[FEATURESET_m10Ah]     = p->arch_caps.hi;
+     fs[FEATURESET_e21c]      = p->extd.e21c;
+     fs[FEATURESET_24c1]      = p->avx10._24c1;
++    fs[FEATURESET_29b0]      = p->apx._29b0;
+ }
+ 
+ void x86_cpu_featureset_to_policy(
+@@ -108,6 +109,7 @@ void x86_cpu_featureset_to_policy(
+     p->arch_caps.hi          = fs[FEATURESET_m10Ah];
+     p->extd.e21c             = fs[FEATURESET_e21c];
+     p->avx10._24c1           = fs[FEATURESET_24c1];
++    p->apx._29b0             = fs[FEATURESET_29b0];
+ }
+ 
+ void x86_cpu_policy_recalc_synth(struct cpu_policy *p)
+@@ -127,7 +129,7 @@ void x86_cpu_policy_fill_native(struct c
+         switch ( i )
+         {
+         case 0x4: case 0x7: case 0xb: case 0xd:
+-        case 0x24:
++        case 0x24: case 0x29:
+             /* Multi-invocation leaves.  Deferred. */
+             continue;
+         }
+@@ -230,6 +232,15 @@ void x86_cpu_policy_fill_native(struct c
+             cpuid_count_leaf(0x24, i, &p->avx10.raw[i]);
+     }
+ 
++    if ( p->basic.max_leaf >= 0x29 )
++    {
++        cpuid_count_leaf(0x29, 0, &p->apx.raw[0]);
++
++        for ( i = 1; i <= MIN(p->apx.max_subleaf,
++                              ARRAY_SIZE(p->apx.raw) - 1); ++i )
++            cpuid_count_leaf(0x24, i, &p->apx.raw[i]);
++    }
++
+     /* Extended leaves. */
+     cpuid_leaf(0x80000000U, &p->extd.raw[0]);
+     for ( i = 1; i <= MIN(p->extd.max_leaf & 0xffffU,
+@@ -302,6 +313,9 @@ void x86_cpu_policy_clear_out_of_range_l
+     if ( p->basic.max_leaf < 0x24 )
+         memset(p->avx10.raw, 0, sizeof(p->avx10.raw));
+ 
++    if ( p->basic.max_leaf < 0x29 )
++        memset(p->apx.raw, 0, sizeof(p->apx.raw));
++
+     zero_leaves(p->extd.raw,
+                 ((p->extd.max_leaf >> 16) == 0x8000
+                  ? (p->extd.max_leaf & 0xffff) + 1 : 0),
+@@ -316,6 +330,8 @@ void __init x86_cpu_policy_bound_max_lea
+         min_t(uint32_t, p->feat.max_subleaf, ARRAY_SIZE(p->feat.raw) - 1);
+     p->avx10.max_subleaf =
+         min_t(uint32_t, p->avx10.max_subleaf, ARRAY_SIZE(p->avx10.raw) - 1);
++    p->apx.max_subleaf =
++        min_t(uint32_t, p->apx.max_subleaf, ARRAY_SIZE(p->apx.raw) - 1);
+     p->extd.max_leaf = 0x80000000U | min_t(uint32_t, p->extd.max_leaf & 0xffff,
+                                            ARRAY_SIZE(p->extd.raw) - 1);
+ }
+@@ -345,6 +361,8 @@ void x86_cpu_policy_shrink_max_leaves(st
+ 
+     p->basic.raw[0x24] = p->avx10.raw[0];
+ 
++    p->basic.raw[0x29] = p->apx.raw[0];
++
+     for ( i = p->basic.max_leaf; i; --i )
+         if ( p->basic.raw[i].a | p->basic.raw[i].b |
+              p->basic.raw[i].c | p->basic.raw[i].d )
+--- a/xen/arch/x86/lib/cpu-policy/policy.c
++++ b/xen/arch/x86/lib/cpu-policy/policy.c
+@@ -28,6 +28,9 @@ int x86_cpu_policies_are_compatible(cons
+          guest->avx10.max_subleaf > host->avx10.max_subleaf )
+         FAIL_CPUID(0x24, 0);
+ 
++    if ( guest->apx.max_subleaf > host->apx.max_subleaf )
++        FAIL_CPUID(0x29, 0);
++
+     if ( guest->extd.max_leaf > host->extd.max_leaf )
+         FAIL_CPUID(0x80000000U, NA);
+ 
 --- a/xen/include/public/arch-x86/cpufeatureset.h
 +++ b/xen/include/public/arch-x86/cpufeatureset.h
-@@ -367,6 +367,7 @@ XEN_CPUFEATURE(USER_MSR,           15*32
- XEN_CPUFEATURE(UIRET_UIF,          15*32+17) /*   UIRET updates UIF */
- XEN_CPUFEATURE(CET_SSS,            15*32+18) /*   CET Supervisor Shadow Stacks safe to use */
- XEN_CPUFEATURE(AVX10,              15*32+19) /*a  AVX10 Converged Vector ISA */
-+XEN_CPUFEATURE(APX_F,              15*32+21) /*   APX Foundation Instructions */
- XEN_CPUFEATURE(SLSM,               15*32+24) /*   Static Lockstep Mode */
+@@ -416,6 +416,9 @@ XEN_CPUFEATURE(AVX10_BMM,          19*32
+ XEN_CPUFEATURE(AVX10_V1_AUX,       19*32+ 2) /*a  AVX10 V1 Auxiliary Instructions */
+ XEN_CPUFEATURE(AVX10_V2_AUX,       19*32+ 3) /*a  AVX10 V2 Auxiliary Instructions */
  
- /* Intel-defined CPU features, MSR_ARCH_CAPS 0x10a.eax, word 16 */
++/* Intel-defined CPU features, CPUID level 0x00000029:0.ebx, word 20 */
++XEN_CPUFEATURE(APX_NCI_NDD_NF,     20*32+ 0) /*a  APX NCI/NDD/NF instruction forms */
++
+ #endif /* XEN_CPUFEATURE */
+ 
+ /* Clean up from a default include.  Close the enum (for C). */
+--- a/xen/include/xen/lib/x86/cpu-policy.h
++++ b/xen/include/xen/lib/x86/cpu-policy.h
+@@ -24,6 +24,7 @@
+ #define FEATURESET_m10Ah     17 /* 0x0000010a.edx      */
+ #define FEATURESET_e21c      18 /* 0x80000021.ecx      */
+ #define FEATURESET_24c1      19 /* 0x00000024:1.ecx    */
++#define FEATURESET_29b0      20 /* 0x00000029:0.ebx    */
+ 
+ struct cpuid_leaf
+ {
+@@ -60,12 +61,13 @@ unsigned int x86_cpuid_lookup_vendor(uin
+  */
+ const char *x86_cpuid_vendor_to_str(unsigned int vendor);
+ 
+-#define CPUID_GUEST_NR_BASIC      (0x24u + 1)
++#define CPUID_GUEST_NR_BASIC      (0x29u + 1)
+ #define CPUID_GUEST_NR_CACHE      (5u + 1)
+ #define CPUID_GUEST_NR_FEAT       (2u + 1)
+ #define CPUID_GUEST_NR_TOPO       (1u + 1)
+ #define CPUID_GUEST_NR_XSTATE     (62u + 1)
+ #define CPUID_GUEST_NR_AVX10      (1u + 1)
++#define CPUID_GUEST_NR_APX        (0u + 1)
+ #define CPUID_GUEST_NR_EXTD_INTEL (0x8u + 1)
+ #define CPUID_GUEST_NR_EXTD_AMD   (0x21u + 1)
+ #define CPUID_GUEST_NR_EXTD       MAX(CPUID_GUEST_NR_EXTD_INTEL, \
+@@ -287,6 +289,20 @@ struct cpu_policy
+         };
+     } avx10;
+ 
++    /* Structured APX information leaf: 0x000000029[xx] */
++    union {
++        struct cpuid_leaf raw[CPUID_GUEST_NR_APX];
++        struct {
++            /* Subleaf 0. */
++            uint32_t max_subleaf;
++            union {
++                uint32_t _29b0;
++                struct { DECL_BITFIELD(29b0); };
++            };
++            uint32_t /* c */:32, /* d */:32;
++        };
++    } apx;
++
+     /* Extended leaves: 0x800000xx */
+     union {
+         struct cpuid_leaf raw[CPUID_GUEST_NR_EXTD];
 --- a/xen/tools/gen-cpuid.py
 +++ b/xen/tools/gen-cpuid.py
-@@ -260,7 +260,7 @@ def crunch_numbers(state):
-         # instruction groups which are specified to require XSAVE for state
-         # management.
-         XSAVE: [XSAVEOPT, XSAVEC, XGETBV1, XSAVES,
--                AVX, MPX, PKU, AMX_TILE, LWP],
-+                AVX, MPX, PKU, AMX_TILE, APX_F, LWP],
+@@ -355,6 +355,9 @@ def crunch_numbers(state):
+         # computational instructions.  All further AMX features are built on top
+         # of AMX-TILE.
+         AMX_TILE: [AMX_BF16, AMX_INT8, AMX_FP16, AMX_COMPLEX],
++
++        # APX discrete features.
++        APX_F: [APX_NCI_NDD_NF],
+     }
  
-         # AVX is taken to mean hardware support for 256bit registers (which in
-         # practice depends on the VEX prefix to encode), and the instructions
-@@ -283,7 +283,7 @@ def crunch_numbers(state):
-         # NO_LMSL indicates the absense of Long Mode Segment Limits, which
-         # have been dropped in hardware.
-         LM: [CX16, PCID, LAHF_LM, PAGE1GB, PKU, NO_LMSL, AMX_TILE, CMPCCXADD,
--             LKGS, MOVRS, MSRLIST, USER_MSR, MSR_IMM],
-+             LKGS, MOVRS, MSRLIST, USER_MSR, MSR_IMM, APX_F],
- 
-         # AMD K6-2+ and K6-III processors shipped with 3DNow+, beyond the
-         # standard 3DNow in the earlier K6 processors.
+     deep_features = tuple(sorted(deps.keys()))
 
 
