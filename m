@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 63EEF606A326
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2026 14:29:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3D4AB606A326
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2026 14:29:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=dYZNh8UA
-Received: from list by lists.xenproject.org with outflank-mailman.1483872.1687235 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=MrrLngMn
+Received: from list by lists.xenproject.org with outflank-mailman.1483877.1687244 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xR9Jd-0000Li-Ob; Wed, 11 Nov 2026 14:28:45 +0000
+	id 1xR9Jz-0000wt-WD; Wed, 11 Nov 2026 14:29:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1483872.1687235; Wed, 11 Nov 2026 14:28:45 +0000
+Received: by outflank-mailman (output) from mailman id 1483877.1687244; Wed, 11 Nov 2026 14:29:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xR9Jd-0000Lb-KZ; Wed, 11 Nov 2026 14:28:45 +0000
-Received: by outflank-mailman (input) for mailman id 1483872;
- Wed, 11 Nov 2026 14:28:44 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xR9Jc-0000LL-Dl
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 14:28:44 +0000
+	id 1xR9Jz-0000wk-TH; Wed, 11 Nov 2026 14:29:07 +0000
+Received: by outflank-mailman (input) for mailman id 1483877;
+ Wed, 11 Nov 2026 14:29:06 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xR9Jy-0000sd-4y
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 14:29:06 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xR9Jb-0007C5-Qj
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 15:28:43 +0100
-Received: from [10.42.69.12] (helo=localhost)
+ id 1xR9Jx-003hG3-9t
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 15:29:05 +0100
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6af47b89-8faa-0a2a0a5109dd-0a2a450cdf14-28
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 15:28:43 +0100
-Received: from [209.85.221.45] (helo=mail-wr1-f45.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6af47b9c-e002-0a2a0a5209dd-0a2a450bcb06-32
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 15:29:05 +0100
+Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6af47b9b-f479-0a2a450c0019-d155dd2de966-3
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 15:28:43 +0100
-Received: by mail-wr1-f45.google.com with SMTP id
- ffacd0b85a97d-492fcbfaa88so2168996f8f.3
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 06:28:43 -0800 (PST)
+ id 6af47bb0-b7e8-0a2a450b0019-d1558032dd9d-3
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 15:29:04 +0100
+Received: by mail-wm1-f50.google.com with SMTP id
+ 5b1f17b1804b1-4b4571ff080so36317975e9.1
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 06:29:04 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-49835c37bdfsm11340780f8f.22.2026.11.11.06.28.42
+ 5b1f17b1804b1-4ba08ddbe68sm105983125e9.0.2026.11.11.06.29.03
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Nov 2026 06:28:42 -0800 (PST)
+ Wed, 11 Nov 2026 06:29:03 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,52 +51,52 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1794407323; x=1795012123; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1794407344; x=1795012144; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=3wfbK0r4fmBpQ8Z07vItFdEXf7EROQmnR+ISoMNQo0M=;
-        b=dYZNh8UAvf46WiQm7k2QuM/6UjYP+uqhrtTRX9j85sJ18FXII4S8wk2CCCMBPbo8Js
-         qL3FS+0L3fSVlz52OEbNaO/cDrW4wyRwJ943wV1sBgrcjaWvXM1QDfIuPNLCyKxMY9nj
-         an5wUzrfr8vUI+sO9pMk+Pb2dfXPqdKrJIzcAzq5iv3d93+lfCsv09Xl9ZYaq5Ei95+G
-         aO2pX0lI1U6GO3HKqd4NEIkxBh2hqKaOv55M1vMr/4TnXR5rPu5Kif4Qh6mkA0ikQNiC
-         sVqwmqjiWgL5WxOKQfcbwjePzkvjFKV6wIqOwkapyuu1/c1u2WNgZk1g8Drm4PD4NODu
-         2dBg==
+        bh=kxwGG1x4f3VPbG+NGTRO4U6fSz2zvB2rcandCXS1HdI=;
+        b=MrrLngMnAxeCmmR+710INmi0gyURn68391QyqkBt0l+esKw/8IoBoxlhPzmJKjvN1O
+         P9VVxewYXMM8q2m6ym5Ono+hs7nattNP4ZoseHRTfiOwTnxwSRo7ju5KqjVmlaOMspNS
+         jBKqT/xrviMv8QrdNbfb2oHR57XJRXoz9orXLeX8o+QpAtRsVtFMz1FtIyxXyOX1lDZB
+         HPNXL1U0eXVl/QZaN2UYo/s+1l6hUWt/h4qWZnmAri4sx1bXykJ6KfCJ7sWofX1f1ypJ
+         PDsiD2hY2SsbXZrmRSuovHOje2O7GfzwxWlm0qjKhs/CrEk9aGyEP2329Rkla/OQnIht
+         7ucw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794407323; x=1795012123;
+        d=1e100.net; s=20260707; t=1794407344; x=1795012144;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=3wfbK0r4fmBpQ8Z07vItFdEXf7EROQmnR+ISoMNQo0M=;
-        b=b5b+9ML/Lyvs4e30s57u1fWRlifGRYqWAEK+2IiHE+LI6TEbFc49hmqICG1IE2G6IT
-         jryjb9CVt7qUnMCvSTn8fAi9/os2jCoXZIBNmZGzQIB5vyu0Q9h2IVZXR2tCjRDG24wQ
-         TAiRHeVucHuLY9ElbFcfFR+uN//ihxuc5EEojDHX6GrRwsGiix4jaKlJ1xj2ti5Aol1u
-         f+l9orSLnxin3XuUI5iA8R321cKokDtxCmjOniHtngz92Re8BtcELjU2ro4MY5Ek5pQ3
-         RqcPRS6cQxk4zspmBM4EU3rbICa6wzTLFanXv01ajJmRWvAsi4z0Y4V3vprkYudGy3En
-         m5KQ==
-X-Gm-Message-State: APuU4Z/QcDdSChOl8kIOAW9eOQpb1g2amEEkcq+RrHYKEWelzZeKp1Ty
-	IHyKvNBE2ZD1oZeN0Rwh7G3u9vdnh4bobbu3NKD1m55OM4eIQzZJGOf1IXRL9GdeKkTF/1ZblZX
-	iBDfRiw==
-X-Gm-Gg: AYBFou0JHt9+HrQ/PcnpunpulEU/qSJBJX5lGMxntbMWDzlc+xpLe4F3cQ9wb2vbYYl
-	wzEhRt4VAYLm6rRKA0aQN5Tmp2YjCUrL7y18hOATeVaGrGQmJp89+hR6X4QfZu7T4n78E0xCwKI
-	4o4p1tMnqnR9JlF/lOIon5yxWM/87ltuIwr1fAeGDDCXKRqMGGSdF/0i3h35xJRX/HrflIcY98Z
-	aK2O0Qp/uX5SaR1cuAD7SwIju3SPq5McsDwqin69b/ZJ0tPtCl8zc2Un9LM2vWwpVGYnneYCV4n
-	w/FBp7saWmvuyHoOnFzZykDWB1S6EIev10jZvyG3N9qtb9T108OpVozx/2njicWpw9WehqjoaOk
-	XxlRSLxeg+YJQC4TTZZxIKUyQ0a0ZV5wjfEctp3DvB/DBOmM9AUKxqHFD12XIC5Qf/iSTz4qZSU
-	koSNoc1vyLbdCVA+l9JsXbDsSCl3ssh5YnIi9EMR44A6j/GlQ713k3Mf2w2UuPdlPt3GO3X4PKQ
-	6dawjKUOxrDWobo6QjHB82i9TUrT+qDRuzejXbrQRnUI+yfqkcmVnnas6z4yOPz+hVTphxp7Vmr
-	JhtAGcXhiFCD/+2/VI77d440s7ZSLrpFcawe9LkH+IACNNCXXhS9SLA4w7piLpi74mwhg0ceV9J
-	54DYXwz9D/knI7qu59Wsc0+yc9yEARPtQvlSyVrE=
-X-Received: by 2002:a05:6000:4a15:b0:490:76de:c78b with SMTP id ffacd0b85a97d-499c7ef50c2mr3964609f8f.34.1794407323039;
-        Wed, 11 Nov 2026 06:28:43 -0800 (PST)
-Message-ID: <6843916f-7fa0-40ea-a5e1-a90a5aefbb7d@suse.com>
-Date: Wed, 11 Nov 2026 15:28:42 +0100
+        bh=kxwGG1x4f3VPbG+NGTRO4U6fSz2zvB2rcandCXS1HdI=;
+        b=e0z+7FDOFegnMtv8QLSpnHChVplsu51qs6gdCnmCRFXCEAS00Ae2M3PhJJQLwetda+
+         0OdIPhfqOwJ7vmMQCr92WVxVVQep+8XkLR9FHDjQUUlre+OZhfi8lLFlDCY/DEwYVL38
+         E0MQTPGPSALTInuRlynJTCMplrR4GRqzcnPhSVcxQUdVFjXkzIu7jBLGBsOXawm9zXba
+         Wcu1lA+PUUs6qS6SedVOUadi8acQsZhL/0aT+vbaLxAYrZJi8PvQyrzklpQgmyk48MhZ
+         ioXvjlkfHo4Rh9vPG99gRyY7kzah0FOnP+DQ5wNpICfL6G0IvIavMI/AmCq9ayZTQm7l
+         lBEA==
+X-Gm-Message-State: APuU4Z9n8mvbSOzzU3H4RXkm49DK1ZnzE/7/k4kXGwGDQMghOt3BybC/
+	PizinU4YXZ/QPfvXHpUESsK3a2abiShmzgdJrieRDsCTKR0zITtcFaPU7CNEW8Tme4vjLgtFDHj
+	eFuZh6g==
+X-Gm-Gg: AYBFou3PMp9N3/dO7EkAzW2h/jME+qK9hyTvt+Y6UcAOSOGoGeUTCigyKPcxdqKddxQ
+	XPtKh8MHLl+FZ62ndJtNeZ+jfgTd2ZtoljWy09mJI1uLsoLzb1uTn4VOtdm++D4cd0y7Y1yzFRj
+	uZLl6WGRN1MEpw6mSi1QgtsbgmbRl3/8OJxHCvYm1vCyawbOv7LOkr8jhuf4B0aWoEGjJMXFLXm
+	VWkY9crykwADK4m0Q5Km3+drkiFfcYowjFl0IGKRgV3OgvwryTLLhzbt08vb30PsckJ9mdm9vaT
+	pFgjqTk/r3qFPF7OY+b3mauLbl1E77xnC4NI5cqmBdJPKxto84XgqzjiOYCTSmFSgtDtEK/Ry6B
+	yt2Epn4en2ho0LZ9cjY2L4CybB4gSe4/+6DwrydTXQr3zdQdJ35KkVVlsPQj+8h8TJnBDdvFTSA
+	4MvounrOeVv1nr4P4WFgKd2WcMH0CLzJROGUhWdvSYQpVbudDkGpjaiVWUDdF2V4dpOw+wMApWX
+	KP4Uj4W+O4C3+A6HG0ZKDrgRm2Pur21rTLEI/VdjhNI5rIcukO9FA7av23vsUI5Y+VhGMUWg5hx
+	lNhBpdo3YCQDOAw3ZAul4OsmLWTtR84gZdmZJwA9lUu4YqnM01jihyWPHQ8rttqoeLIwO2YaaFs
+	MB02iBNFSem79Qfec
+X-Received: by 2002:a05:600c:1549:b0:4a2:cbe:bebc with SMTP id 5b1f17b1804b1-4ba0938ba0amr46600255e9.23.1794407344212;
+        Wed, 11 Nov 2026 06:29:04 -0800 (PST)
+Message-ID: <daacdf57-8f0f-4949-89da-720aa6c1c13b@suse.com>
+Date: Wed, 11 Nov 2026 15:29:03 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 20/30] x86emul: support APX+AVX512 insns
+Subject: [PATCH 21/30] x86emul: support APX+BMI1 insns
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -130,9 +130,9 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <17d56a5d-41f2-4691-aea7-d6dfdde5ad32@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d25034/1794407323-014C7A5B-10561EBC/10/78276251493
+X-purgate-ID: tlsNG-42698a/1794407344-1B8D19EA-49BBE00A/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 12417
+X-purgate-size: 13473
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -141,319 +141,359 @@ X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-It's KMOV{B,W,D,Q} which gain straight EVEX-encoded counterparts. Like
-the VEX forms require special treatment, so do the EVEX ones. Respective
-code is being cloned, with mode_64bit() conditionals dropped.
-
-While adjusting the testharness'es Makefile, drop -Os from the non-APX
-opmask test as well - for an assembly source that option is meaningless.
+Promoted-from-VEX insns are again handled by transforming them to their
+VEX counterparts, while the sole promoted-from-legacy insn has respective
+logic re-used just like was done for other ones in the same category.
+Common EVEX.NF handling takes care of the EFLAGS aspect, except for the
+APX-NCI-NDD-NF checking when EVEX.nf is set: For insns in map 2 (0f38) and
+subsequently map3 (0f3a), replicating the same logic in decode_0f{38,3a}()
+feels undesirable.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
-The spec says EVEX.B4 is ignored for opcode 0x93. While that matches
-the fact that EVEX.B3 is also ignored, other similar statments in spec
-version 005 (especially as to EVEX.R4 vs EVEX.R3) aren't consistent.
-Hence this may need adjustment.
+RFC: In evex-disp8.c's ESZ_dq handling we special-case Map4 to append an
+     'l' suffix rather than a 'd' one. If we wanted this to be
+     cosmetically correct also for the promoted VEX encodings, further
+     special casing would need to happen there. I'm simply uncertain if
+     that's worth it.
 
-The checking of the 4th EVEX byte is going to re-appear for a number of
-further insns. It may therefore want folding into a wrapper macro. Just
-that I don't seem to be able to think of a good name for such a macro.
-
-Is simply forcing EVEX encodings (without also involving eGPR-s) enough
-of a testing approach?
-
---- a/tools/tests/x86_emulator/Makefile
-+++ b/tools/tests/x86_emulator/Makefile
-@@ -172,7 +172,8 @@ $(1)-cflags := $(foreach vec,$($(1:-gf=)
- 	         "-D_$(vec) -mgfni -m$(1:-gf=) $(call non-sse,$(1)) -Os -DVEC_SIZE=$(vec)")
- endef
- define opmask-defs
--$(1)-opmask-cflags := $(foreach vec,$($(1)-opmask-vecs), "-D_$(vec) -m$(1) -Os -DSIZE=$(vec)")
-+$(1)-opmask-cflags := $(foreach vec,$($(1)-opmask-vecs), "-D_$(vec) -m$(1) -DSIZE=$(vec)")
-+$(1)-opmask-cflags-x86_64 := $(foreach vec,$($(1)-opmask-vecs), "-D_$(vec) -mapxf -m$(1) -DSIZE=$(vec)")
- endef
- 
- $(foreach flavor,$(SIMD) $(FMA),$(eval $(call simd-defs,$(flavor))))
-@@ -214,6 +215,9 @@ $(addsuffix -opmask.h,$(OPMASK)): %.h: o
- 	    for cflags in $($*-cflags) $($*-cflags-$(arch)); do \
- 		$(MAKE) -f testcase.mk TESTCASE=$* XEN_TARGET_ARCH=$(arch) $*-cflags="$$cflags" all; \
- 		prefix=$(shell echo $(subst -,_,$*) | sed -e 's,^\([0-9]\),_\1,'); \
-+		if [ "$$cflags" != "$${cflags%apx*}" ]; then \
-+			prefix=$${prefix%opmask}apx; \
-+		fi; \
- 		flavor=$$(echo $${cflags} | sed -e 's, .*,,' -e 'y,-=,__,') ; \
- 		(echo 'static const unsigned int __attribute__((section(".test, \"ax\", @progbits #")))' \
- 		      "$${prefix}_$(arch)$${flavor}[] = {"; \
 --- a/tools/tests/x86_emulator/evex-disp8.c
 +++ b/tools/tests/x86_emulator/evex-disp8.c
-@@ -1103,6 +1103,29 @@ static const struct test adx[] = {
-     INSN(adox,      f3, map4, 66,    el,   dq, no),
+@@ -1126,6 +1126,16 @@ static const struct test avx512f[] = {
+ //       kmovw,       ,   0f, 93,           w
  };
  
-+static const struct test avx512bw[] = {
-+//       kmov,      f2,   0f, 92,          dq
-+//       kmov,      f2,   0f, 93,          dq
-+    INSN(kmovd,     66,   0f, 90,    el,    d, no),
-+    INSN(kmovd,     66,   0f, 91,    el,    d, no),
-+    INSN(kmovq,       ,   0f, 90,    el,    q, no),
-+    INSN(kmovq,       ,   0f, 91,    el,    q, no),
-+};
-+
-+static const struct test avx512dq[] = {
-+    INSN(kmovb,     66,   0f, 90,    el,    b, no),
-+    INSN(kmovb,     66,   0f, 91,    el,    b, no),
-+//       kmovb,     66,   0f, 92,           b
-+//       kmovb,     66,   0f, 93,           b
-+};
-+
-+static const struct test avx512f[] = {
-+    INSN(kmovw,       ,   0f, 90,    el,    w, no),
-+    INSN(kmovw,       ,   0f, 91,    el,    w, no),
-+//       kmovw,       ,   0f, 92,           w
-+//       kmovw,       ,   0f, 93,           w
++static const struct test bmi1[] = {
++    INSN(andn,        , 0f38, f2,    el,   dq, no),
++    INSN(bextr,       , 0f38, f7,    el,   dq, no),
++    INSNX(blsi,       , 0f38, f3, 3, el,   dq, no),
++    INSNX(blsmsk,     , 0f38, f3, 2, el,   dq, no),
++    INSNX(blsr,       , 0f38, f3, 1, el,   dq, no),
++    INSN(tzcnt,       , map4, f4,    el,   dq, no),
++    INSN(tzcntw,    66, map4, f4,    el,    w, no),
 +};
 +
  static const unsigned char vl_all[] = { VL_512, VL_128, VL_256 };
  static const unsigned char vl_128[] = { VL_128 };
  static const unsigned char vl_no128[] = { VL_512, VL_256 };
-@@ -1261,7 +1284,17 @@ static void test_one(const struct test *
-         evex.w = 1;
-         /* fall through */
- #endif
--    case ESZ_d: case ESZ_d_nb:
-+    case ESZ_d:
-+#ifdef __x86_64__
-+        /*
-+         * KMOVD don't follow the general pattern: They have EVEX.W set despite
-+         * having a DWORD operand.
-+         */
-+        if ( test->spc == SPC_0f && (test->opc | 1) == 0x91 )
-+            evex.w = 1;
-+        /* fall through */
-+#endif
-+    case ESZ_d_nb:
-         esz = 4;
-         break;
- 
-@@ -1678,6 +1711,9 @@ void evex_disp8_test(void *instr, struct
-     } while ( false )
- 
-         RUN(adx);
-+        RUN(avx512f);
-+        RUN(avx512dq);
-+        RUN(avx512bw);
+@@ -1714,6 +1724,7 @@ void evex_disp8_test(void *instr, struct
+         RUN(avx512f);
+         RUN(avx512dq);
+         RUN(avx512bw);
++        RUN(bmi1);
  
  #undef RUN
  
---- a/tools/tests/x86_emulator/opmask.S
-+++ b/tools/tests/x86_emulator/opmask.S
-@@ -8,6 +8,12 @@
- #  define R(x) e##x
- # endif
- # define DATA(x) x(%rip)
-+# ifdef __APX_F__
-+#  define kmovb {evex} kmovb
-+#  define kmovd {evex} kmovd
-+#  define kmovq {evex} kmovq
-+#  define kmovw {evex} kmovw
-+# endif
- #endif
- 
- #if SIZE == 1
 --- a/tools/tests/x86_emulator/predicates.c
 +++ b/tools/tests/x86_emulator/predicates.c
-@@ -1787,6 +1787,18 @@ static const struct evex {
-     { { 0x7f }, 2, T, W, pfx_66, Wn, Ln }, /* vmovdqa{32,64} */
-     { { 0x7f }, 2, T, W, pfx_f3, Wn, Ln }, /* vmovdqu{32,64} */
-     { { 0x7f }, 2, T, W, pfx_f2, Wn, Ln }, /* vmovdqu{8,16} */
+@@ -2066,6 +2066,13 @@ static const struct evex {
+     { { 0xdd }, 2, T, R, pfx_66, WIG, Ln }, /* vaesenclast */
+     { { 0xde }, 2, T, R, pfx_66, WIG, Ln }, /* vaesdec */
+     { { 0xdf }, 2, T, R, pfx_66, WIG, Ln }, /* vaesdeclast */
 +#ifdef __x86_64__
-+    { { 0x90 }, 2, T, R, pfx_no, Wn, L0 }, /* kmov{w,q} */
-+    { { 0x90 }, 2, T, R, pfx_66, Wn, L0 }, /* kmov{b,d} */
-+    { { 0x91 }, 2, N, W, pfx_no, Wn, L0 }, /* kmov{w,q} */
-+    { { 0x91 }, 2, N, W, pfx_66, Wn, L0 }, /* kmov{b,d} */
-+    { { 0x92, 0xc0 }, 2, F, N, pfx_no, W0, L0 }, /* kmovw */
-+    { { 0x92, 0xc0 }, 2, F, N, pfx_66, W0, L0 }, /* kmovb */
-+    { { 0x92, 0xc0 }, 2, F, N, pfx_f2, Wn, L0 }, /* kmov{d,q} */
-+    { { 0x93, 0xc0 }, 2, F, N, pfx_no, W0, L0 }, /* kmovw */
-+    { { 0x93, 0xc0 }, 2, F, N, pfx_66, W0, L0 }, /* kmovb */
-+    { { 0x93, 0xc0 }, 2, F, N, pfx_f2, Wn, L0 }, /* kmov{d,q} */
++    { { 0xf2 }, 2, T, R, pfx_no, Wn, L0 }, /* andn */
++    { { 0xf3, 0x08 }, 2, T, R, pfx_no, Wn, L0 }, /* blsr */
++    { { 0xf3, 0x10 }, 2, T, R, pfx_no, Wn, L0 }, /* blsmsk */
++    { { 0xf3, 0x18 }, 2, T, R, pfx_no, Wn, L0 }, /* blsi */
++    { { 0xf7 }, 2, T, R, pfx_no, Wn, L0 }, /* bextr */
 +#endif
-     { { 0xc2 }, 3, T, R, pfx_no, W0, Ln }, /* vcmpps */
-     { { 0xc2 }, 3, T, R, pfx_66, W1, Ln }, /* vcmppd */
-     { { 0xc2 }, 3, T, R, pfx_f3, W0, LIG }, /* vcmpss */
+ }, evex_0f3a[] = {
+     { { 0x00 }, 3, T, R, pfx_66, W1, L1|L2 }, /* vpermq */
+     { { 0x01 }, 3, T, R, pfx_66, W1, L1|L2 }, /* vpermpd */
+@@ -2339,6 +2346,8 @@ static const struct evex {
+     { { 0xf0 }, 2, T, R, pfx_no, Wn, L0 }, /* crc32 */
+     { { 0xf1 }, 2, T, R, pfx_no, Wn, L0 }, /* crc32 */
+     { { 0xf1 }, 2, T, R, pfx_66, Wn, L0 }, /* crc32 */
++    { { 0xf4 }, 2, T, R, pfx_no, Wn, L0 }, /* tzcnt */
++    { { 0xf4 }, 2, T, R, pfx_66, Wn, L0 }, /* tzcnt */
+     { { 0xf6, 0x00 }, 3, T, R, pfx_no, WIG, L0, SCC }, /* ctest<scc> */
+     { { 0xf6, 0x10 }, 2, T, W, pfx_no, WIG, L0, ND }, /* not */
+     { { 0xf6, 0x18 }, 2, T, W, pfx_no, WIG, L0, ND }, /* neg */
 --- a/tools/tests/x86_emulator/test_x86_emulator.c
 +++ b/tools/tests/x86_emulator/test_x86_emulator.c
-@@ -348,6 +348,23 @@ static bool simd_check_avx512fp16_vl(voi
-            cpu_has_avx10;
- }
- 
-+#ifdef __x86_64__
-+static bool simd_check_avx512f_apx(void)
-+{
-+    return simd_check_avx512f_opmask() && check_apx_f();
-+}
+@@ -2687,6 +2687,30 @@ int main(int argc, char **argv)
+              (regs.eflags & 0xfeb) != 0x202 || !check_eip(andn) )
+             goto fail;
+         printf("okay\n");
 +
-+static bool simd_check_avx512bw_apx(void)
-+{
-+    return simd_check_avx512bw_opmask() && check_apx_f();
-+}
++#if defined(__x86_64__) && \
++    (defined(__clang__) ? __clang_major__ >= 18 : __GNUC__ >= 14)
++        if ( cpu_has_apx_f )
++        {
++            decl_insn(andn_apx);
 +
-+static bool simd_check_avx512dq_apx(void)
-+{
-+    return simd_check_avx512dq_opmask() && check_apx_f();
-+}
-+#endif /* __x86_64__ */
++            printf("%-40s", "Testing andn (%rdx),%r17d,%r19d...");
 +
- static void simd_set_regs(struct cpu_user_regs *regs)
- {
-     if ( cpu_has_mmx )
-@@ -532,6 +549,13 @@ static const struct {
-     SIMD(OPMASK+DQ/w, avx512dq_opmask,         2),
-     SIMD(OPMASK+BW/d, avx512bw_opmask,         4),
-     SIMD(OPMASK+BW/q, avx512bw_opmask,         8),
-+#ifdef __x86_64__
-+    SIMD_(64, OPMASK+APX/w,     avx512f_apx,   2),
-+    SIMD_(64, OPMASK+DQ+APX/b, avx512dq_apx,   1),
-+    SIMD_(64, OPMASK+DQ+APX/w, avx512dq_apx,   2),
-+    SIMD_(64, OPMASK+BW+APX/d, avx512bw_apx,   4),
-+    SIMD_(64, OPMASK+BW+APX/q, avx512bw_apx,   8),
++            asm volatile ( put_insn(andn_apx, "andn (%0), %%r17d, %%r19d")
++                           :: "d" (NULL) );
++            set_insn(andn_apx);
++
++            load_egpr(17, 0xcccc3333);
++            regs.eflags = EFLAGS_ALWAYS_SET | X86_EFLAGS(OF, SF, ZF, CF);
++            rc = x86_emulate(&ctxt, &emulops);
++            if ( (rc != X86EMUL_OKAY) || !check_egpr(19, 0x32108888) ||
++                 !check_egpr(17, 0xcccc3333) || *res != 0xfedcba98 ||
++                 (regs.eflags & EFLAGS_MASK) != EFLAGS_ALWAYS_SET ||
++                 !check_eip(andn_apx) )
++                goto fail;
++            printf("okay\n");
++        }
 +#endif
-     SIMD(AVX512F f32 scalar,  avx512f,        f4),
-     SIMD(AVX512F f32x16,      avx512f,      64f4),
-     SIMD(AVX512F f64 scalar,  avx512f,        f8),
+     }
+     else
+         printf("skipped\n");
+@@ -2731,6 +2755,34 @@ int main(int argc, char **argv)
+              (regs.eflags & 0xf6b) != 0x202 || !check_eip(bextr64) )
+             goto fail;
+         printf("okay\n");
++
++# if defined(__clang__) ? __clang_major__ >= 18 : __GNUC__ >= 14
++        if ( cpu_has_apx_f )
++        {
++            decl_insn(bextr_apx);
++
++            printf("%-40s", "Testing bextr %r25,(%r26),%r27...");
++
++            asm volatile ( put_insn(bextr_apx, "bextr %r25, (%r26), %r27") );
++            set_insn(bextr_apx);
++
++            load_egpr(26, (unsigned long)res);
++            regs.r10    = 0;
++            load_egpr(25, 0x211e);
++            regs.r9     = 0;
++            regs.eflags = EFLAGS_ALWAYS_SET | X86_EFLAGS(OF, ZF, CF);
++            rc = x86_emulate(&ctxt, &emulops);
++            if ( (rc != X86EMUL_OKAY) || !check_egpr(25, 0x211e) ||
++                 !check_egpr(27,
++                             (((unsigned long)(res[1] << 1) << 1) |
++                              (res[0] >> 30))) ||
++                 ((regs.eflags & EFLAGS_MASK & ~X86_EFLAGS(AF, PF)) !=
++                  EFLAGS_ALWAYS_SET) ||
++                 !check_eip(bextr_apx) )
++                goto fail;
++            printf("okay\n");
++        }
++# endif
+ #endif
+     }
+     else
+@@ -2755,6 +2807,29 @@ int main(int argc, char **argv)
+              !check_eip(blsi) )
+             goto fail;
+         printf("okay\n");
++
++#if defined(__x86_64__) && \
++    (defined(__clang__) ? __clang_major__ >= 18 : __GNUC__ >= 14)
++        if ( cpu_has_apx_f )
++        {
++            decl_insn(blsi_apx);
++
++            printf("%-40s", "Testing blsi (%rdx),%r25d...");
++
++            asm volatile ( put_insn(blsi_apx, "blsi (%0), %%r25d")
++                           :: "d" (NULL) );
++            set_insn(blsi_apx);
++
++            regs.eflags = EFLAGS_ALWAYS_SET | X86_EFLAGS(OF, SF, ZF);
++            rc = x86_emulate(&ctxt, &emulops);
++            if ( (rc != X86EMUL_OKAY) || !check_egpr(25, 8) ||
++                 (regs.eflags & (EFLAGS_MASK & ~X86_EFLAGS(AF, PF))) !=
++                  (EFLAGS_ALWAYS_SET | X86_EFLAGS_CF) ||
++                 !check_eip(blsi_apx) )
++                goto fail;
++            printf("okay\n");
++        }
++#endif
+     }
+     else
+         printf("skipped\n");
+@@ -2776,6 +2851,29 @@ int main(int argc, char **argv)
+              !check_eip(blsmsk) )
+             goto fail;
+         printf("okay\n");
++
++#if defined(__x86_64__) && \
++    (defined(__clang__) ? __clang_major__ >= 18 : __GNUC__ >= 14)
++        if ( cpu_has_apx_f )
++        {
++            decl_insn(blsmsk_apx);
++
++            printf("%-40s", "Testing blsmsk (%rdx),%r17d...");
++
++            asm volatile ( put_insn(blsmsk_apx, "blsmsk (%0), %%r17d")
++                           :: "d" (NULL) );
++            set_insn(blsmsk_apx);
++
++            regs.eflags = EFLAGS_ALWAYS_SET | X86_EFLAGS(OF, SF, ZF, CF);
++            rc = x86_emulate(&ctxt, &emulops);
++            if ( (rc != X86EMUL_OKAY) || !check_egpr(17, 0xf) ||
++                 (regs.eflags & (EFLAGS_MASK & ~X86_EFLAGS(AF, PF))) !=
++                  EFLAGS_ALWAYS_SET ||
++                 !check_eip(blsmsk_apx) )
++                goto fail;
++            printf("okay\n");
++        }
++#endif
+     }
+     else
+         printf("skipped\n");
+@@ -2820,6 +2918,34 @@ int main(int argc, char **argv)
+ #endif
+ 
+         printf("okay\n");
++
++#if defined(__x86_64__) && \
++    (defined(__clang__) ? __clang_major__ >= 18 : __GNUC__ >= 14)
++        if ( true /* cpu_has_apx_nci_ndd_nf */ )
++        {
++            decl_insn(blsr_apx);
++
++            cpu_policy.apx.apx_nci_ndd_nf = true;
++
++            printf("%-40s", "Testing {nf}blsr (%rdx),%ecx...");
++
++            asm volatile ( put_insn(blsr_apx, "%{nf%} blsr (%0), %%ecx")
++                           :: "d" (NULL) );
++            set_insn(blsr_apx);
++
++            regs.rcx = 0;
++            regs.eflags = EFLAGS_ALWAYS_SET | X86_EFLAGS(OF, SF, ZF, CF);
++            rc = x86_emulate(&ctxt, &emulops);
++            if ( (rc != X86EMUL_OKAY) || regs.rcx != 0xfedcba90 ||
++                 (regs.eflags !=
++                  (EFLAGS_ALWAYS_SET | X86_EFLAGS(OF, SF, ZF, CF))) ||
++                 !check_eip(blsr_apx) )
++                goto fail;
++            printf("okay\n");
++
++            cpu_policy.apx.apx_nci_ndd_nf = nci_ndd_nf;
++        }
++#endif
+     }
+     else
+         printf("skipped\n");
 --- a/xen/arch/x86/x86_emulate/decode.c
 +++ b/xen/arch/x86/x86_emulate/decode.c
-@@ -1100,18 +1100,35 @@ decode_twobyte(struct x86_emulate_state
-         }
+@@ -788,6 +788,10 @@ static const struct map4_table {
+         [vex_np] = { },
+         [vex_66] = { },
+     },
++    [0xf4] = { /* TZCNT ({,d,q}word) */
++        [vex_np] = { .nf = true, .nci_ndd_nf = true },
++        [vex_66] = { .nf = true, .nci_ndd_nf = true },
++    },
+     [0xf6] = { /* Grp3 (byte); most attributes depend on modrm_reg */
+         [vex_np] = { .byte = true, .nci_ndd_nf = true },
+     },
+@@ -1263,6 +1267,12 @@ decode_0f38(struct x86_emulate_state *s,
+     case X86EMUL_OPC_VEX_F2(0, 0xf7): /* shrx */
          break;
  
-+    case X86EMUL_OPC_EVEX(0, 0x90):    /* kmov{w,q} */
-+    case X86EMUL_OPC_EVEX_66(0, 0x90): /* kmov{b,d} */
-+        s->promoted_evex = true;
-+        fallthrough;
-     case X86EMUL_OPC_VEX(0, 0x90):    /* kmov{w,q} */
-     case X86EMUL_OPC_VEX_66(0, 0x90): /* kmov{b,d} */
-         s->desc = DstReg | SrcMem | Mov;
-         s->simd_size = simd_other;
-         break;
- 
-+    case X86EMUL_OPC_EVEX(0, 0x91):    /* kmov{w,q} */
-+    case X86EMUL_OPC_EVEX_66(0, 0x91): /* kmov{b,d} */
-+        s->promoted_evex = true;
-+        fallthrough;
-     case X86EMUL_OPC_VEX(0, 0x91):    /* kmov{w,q} */
-     case X86EMUL_OPC_VEX_66(0, 0x91): /* kmov{b,d} */
-         s->desc = DstMem | SrcReg | Mov;
-         s->simd_size = simd_other;
-         break;
- 
-+    case X86EMUL_OPC_EVEX(0, 0x92):    /* kmovw */
-+    case X86EMUL_OPC_EVEX_66(0, 0x92): /* kmovb */
-+    case X86EMUL_OPC_EVEX_F2(0, 0x92): /* kmov{d,q} */
-+    case X86EMUL_OPC_EVEX(0, 0x93):    /* kmovw */
-+    case X86EMUL_OPC_EVEX_66(0, 0x93): /* kmovb */
-+    case X86EMUL_OPC_EVEX_F2(0, 0x93): /* kmov{d,q} */
++    case X86EMUL_OPC_EVEX(0, 0xf2):    /* andn */
++    case X86EMUL_OPC_EVEX(0, 0xf3):    /* Grp 17 */
++    case X86EMUL_OPC_EVEX(0, 0xf7):    /* bextr */
 +        s->promoted_evex = true;
 +        break;
 +
-     case 0xae:
-         ctxt->opcode |= MASK_INSR(s->vex.pfx, X86EMUL_OPC_PFX_MASK);
-         /* fall through */
+     case 0xf8:
+         if ( s->modrm_mod == 3 ) /* u{rd,wr}msr */
+         {
 --- a/xen/arch/x86/x86_emulate/x86_emulate.c
 +++ b/xen/arch/x86/x86_emulate/x86_emulate.c
-@@ -5316,6 +5316,16 @@ x86_emulate(
- 
- #ifndef X86EMUL_NO_SIMD
- 
-+    case X86EMUL_OPC_EVEX(0x0f, 0x91):    /* kmov{w,q} k,mem */
-+    case X86EMUL_OPC_EVEX_66(0x0f, 0x91): /* kmov{b,d} k,mem */
-+        generate_exception_if(ea.type != OP_MEM, X86_EXC_UD);
-+        fallthrough;
-+    case X86EMUL_OPC_EVEX(0x0f, 0x90):    /* kmov{w,q} k/mem,k */
-+    case X86EMUL_OPC_EVEX_66(0x0f, 0x90): /* kmov{b,d} k/mem,k */
-+        generate_exception_if((evex.lr || evex.brs || evex.opmsk ||
-+                               !evex.r3 || !evex.r4),
-+                              X86_EXC_UD);
-+        goto kmov;
-     case X86EMUL_OPC_VEX(0x0f, 0x91):    /* kmov{w,q} k,mem */
-     case X86EMUL_OPC_VEX_66(0x0f, 0x91): /* kmov{b,d} k,mem */
-         generate_exception_if(ea.type != OP_MEM, X86_EXC_UD);
-@@ -5323,6 +5333,7 @@ x86_emulate(
-     case X86EMUL_OPC_VEX(0x0f, 0x90):    /* kmov{w,q} k/mem,k */
-     case X86EMUL_OPC_VEX_66(0x0f, 0x90): /* kmov{b,d} k/mem,k */
-         generate_exception_if(vex.l || !vex.r, X86_EXC_UD);
-+    kmov:
-         if ( vex.w )
-         {
-             visa_check(bw);
-@@ -5353,6 +5364,13 @@ x86_emulate(
-         insn_bytes = PFX_BYTES + 2;
+@@ -5694,8 +5694,12 @@ x86_emulate(
+             emulate_2op_SrcV_nobyte("btc", src, dst, _regs.eflags);
          break;
  
-+    case X86EMUL_OPC_EVEX(0x0f, 0x92):    /* kmovw r32,k */
-+    case X86EMUL_OPC_EVEX_66(0x0f, 0x92): /* kmovb r32,k */
-+    case X86EMUL_OPC_EVEX_F2(0x0f, 0x92): /* kmov{d,q} reg,k */
-+        generate_exception_if((evex.lr || evex.brs || evex.opmsk ||
-+                               !evex.r4 || !evex.RX),
-+                              X86_EXC_UD);
++    case X86EMUL_OPC_EVEX   (4, 0xf4): /* tzcnt r/m,reg */
++    case X86EMUL_OPC_EVEX_66(4, 0xf4): /* tzcnt r/m,r16 */
++        vcpu_must_have(bmi1);
 +        fallthrough;
-     case X86EMUL_OPC_VEX(0x0f, 0x92):    /* kmovw r32,k */
-     case X86EMUL_OPC_VEX_66(0x0f, 0x92): /* kmovb r32,k */
-     case X86EMUL_OPC_VEX_F2(0x0f, 0x92): /* kmov{d,q} reg,k */
-@@ -5381,8 +5399,8 @@ x86_emulate(
-         opc[1] = modrm & 0xf8;
-         place_ret(&opc[2]);
- 
--        copy_VEX(opc, vex, false);
--        ea.reg = decode_gpr(&_regs, NULL, modrm_rm);
-+        copy_VEX(opc, vex, state->promoted_evex);
-+        ea.reg = decode_gpr(&_regs, &state->egpr, modrm_rm);
-         invoke_stub("", "", "=m" (dummy) : "a" (*ea.reg));
- 
-         put_stub(stub);
-@@ -5391,13 +5409,19 @@ x86_emulate(
-         dst.type = OP_NONE;
+     case X86EMUL_OPC(0x0f, 0xbc): /* bsf or tzcnt */
+-        if ( vex.pfx == vex_f3 )
++        if ( vex.pfx == vex_f3 || state->promoted_evex )
+             emulate_2op_SrcV_srcmem("tzcnt", src, dst, _regs.eflags);
+         else
+         {
+@@ -7386,6 +7390,12 @@ x86_emulate(
+         }
          break;
  
-+    case X86EMUL_OPC_EVEX(0x0f, 0x93):    /* kmovw k,r32 */
-+    case X86EMUL_OPC_EVEX_66(0x0f, 0x93): /* kmovb k,r32 */
-+    case X86EMUL_OPC_EVEX_F2(0x0f, 0x93): /* kmov{d,q} k,reg */
-+        generate_exception_if((evex.lr || evex.brs || evex.opmsk || !evex.RX),
++    case X86EMUL_OPC_EVEX(0x0f38, 0xf2):    /* andn r/m,r,r */
++    case X86EMUL_OPC_EVEX(0x0f38, 0xf7):    /* bextr r,r/m,r */
++        generate_exception_if((evex.z || evex.lr || evex.brs ||
++                               (evex.opmsk & 3)),
 +                              X86_EXC_UD);
 +        fallthrough;
-     case X86EMUL_OPC_VEX(0x0f, 0x93):    /* kmovw k,r32 */
-     case X86EMUL_OPC_VEX_66(0x0f, 0x93): /* kmovb k,r32 */
-     case X86EMUL_OPC_VEX_F2(0x0f, 0x93): /* kmov{d,q} k,reg */
-         generate_exception_if(vex.l || vex.reg != 0xf || ea.type != OP_REG,
-                               X86_EXC_UD);
-         dst = ea;
--        dst.reg = decode_gpr(&_regs, NULL, modrm_reg);
-+        dst.reg = decode_gpr(&_regs, &state->egpr, modrm_reg);
- 
-         if ( vex.pfx == vex_f2 )
-         {
-@@ -5425,7 +5449,7 @@ x86_emulate(
-         opc[1] = modrm & 0xc7;
-         place_ret(&opc[2]);
- 
--        copy_VEX(opc, vex, false);
-+        copy_VEX(opc, vex, state->promoted_evex);
-         invoke_stub("", "", "=a" (dst.val) : [dummy] "i" (0));
- 
-         put_stub(stub);
-@@ -8950,7 +8974,12 @@ x86_emulate(
-         EXPECT(op_bytes);
-         EXPECT(opc);
- 
--        if ( evex_encoded() )
+     case X86EMUL_OPC_VEX(0x0f38, 0xf2):    /* andn r/m,r,r */
+     case X86EMUL_OPC_VEX(0x0f38, 0xf5):    /* bzhi r,r/m,r */
+     case X86EMUL_OPC_VEX_F3(0x0f38, 0xf5): /* pext r/m,r,r */
+@@ -7411,17 +7421,30 @@ x86_emulate(
+         if ( !mode_64bit() )
+             pvex->w = 0;
+         pvex->reg = 0xf; /* rAX */
 +        if ( state->promoted_evex )
 +        {
-+            place_ret(&opc[insn_bytes - PFX_BYTES]);
-+            copy_VEX(opc, vex, true);
++            /* See copy_VEX(). */
++            pvex->opcx &= 7;
++            src.reg = decode_evex_gpr(evex.reg | (evex.RX << 4), &_regs,
++                                      &state->egpr, ctxt);
 +        }
-+        else if ( evex_encoded() )
++        else
++            src.reg = decode_vex_gpr(vex.reg, &_regs, ctxt);
+         buf[3] = b;
+         buf[4] = 0x09; /* reg=rCX r/m=(%rCX) */
+         place_ret(&buf[5]);
+ 
+-        src.reg = decode_vex_gpr(vex.reg, &_regs, ctxt);
+         emulate_stub([dst] "=&c" (dst.val), "[dst]" (&src.val), "a" (*src.reg));
+ 
+         put_stub(stub);
+         break;
+     }
+ 
++    case X86EMUL_OPC_EVEX(0x0f38, 0xf3): /* Grp 17 */
++        generate_exception_if((evex.z || evex.lr || evex.brs ||
++                               (evex.opmsk & 3)),
++                              X86_EXC_UD);
++        fallthrough;
+     case X86EMUL_OPC_VEX(0x0f38, 0xf3): /* Grp 17 */
+     {
+         uint8_t *buf = get_stub(stub);
+@@ -7447,11 +7470,19 @@ x86_emulate(
+         if ( !mode_64bit() )
+             pvex->w = 0;
+         pvex->reg = 0xf; /* rAX */
++        if ( state->promoted_evex )
++        {
++            /* See copy_VEX(). */
++            pvex->opcx &= 7;
++            dst.reg = decode_evex_gpr(evex.reg | (evex.RX << 4), &_regs,
++                                      &state->egpr, ctxt);
++        }
++        else
++            dst.reg = decode_vex_gpr(vex.reg, &_regs, ctxt);
+         buf[3] = b;
+         buf[4] = (modrm & 0x38) | 0x01; /* r/m=(%rCX) */
+         place_ret(&buf[5]);
+ 
+-        dst.reg = decode_vex_gpr(vex.reg, &_regs, ctxt);
+         emulate_stub("=&a" (dst.val), "c" (&src.val));
+ 
+         put_stub(stub);
+@@ -8976,6 +9007,14 @@ x86_emulate(
+ 
+         if ( state->promoted_evex )
          {
-             place_ret(&opc[insn_bytes - EVEX_PFX_BYTES]);
-             copy_EVEX(opc, evex);
++            /*
++             * This, while seemingly inapplicable to SCC insns, is simply
++             * benign there: They require the feature irrespective of the
++             * setting of what elsewhere is EVEX.nf.
++             */
++            if ( EVEX_NF(&evex) )
++                vcpu_must_have(apx_nci_ndd_nf);
++
+             place_ret(&opc[insn_bytes - PFX_BYTES]);
+             copy_VEX(opc, vex, true);
+         }
 
 
