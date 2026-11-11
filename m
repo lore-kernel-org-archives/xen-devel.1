@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 90824606A321
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2026 14:30:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E37A606A332
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2026 14:30:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=UZPOutsq
-Received: from list by lists.xenproject.org with outflank-mailman.1483902.1687270 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=Jecc3FNs
+Received: from list by lists.xenproject.org with outflank-mailman.1483908.1687279 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xR9L9-0003if-18; Wed, 11 Nov 2026 14:30:19 +0000
+	id 1xR9LW-0004AY-81; Wed, 11 Nov 2026 14:30:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1483902.1687270; Wed, 11 Nov 2026 14:30:19 +0000
+Received: by outflank-mailman (output) from mailman id 1483908.1687279; Wed, 11 Nov 2026 14:30:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xR9L8-0003iY-Un; Wed, 11 Nov 2026 14:30:18 +0000
-Received: by outflank-mailman (input) for mailman id 1483902;
- Wed, 11 Nov 2026 14:30:18 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xR9L7-0003ff-TZ
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 14:30:18 +0000
+	id 1xR9LW-0004AR-54; Wed, 11 Nov 2026 14:30:42 +0000
+Received: by outflank-mailman (input) for mailman id 1483908;
+ Wed, 11 Nov 2026 14:30:40 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xR9LU-00048x-NW
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 14:30:40 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xR9L7-000l9W-82
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 15:30:17 +0100
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xR9LT-003hib-7P
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 15:30:39 +0100
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6af47bf8-8faa-0a2a0a5109dd-0a2a4501c402-2
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 15:30:17 +0100
-Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6af47c0e-e002-0a2a0a5209dd-0a2a450b8766-6
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 15:30:39 +0100
+Received: from [209.85.221.46] (helo=mail-wr1-f46.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6af47bf9-5984-0a2a45010019-d1558036ec78-3
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 15:30:17 +0100
-Received: by mail-wm1-f54.google.com with SMTP id
- 5b1f17b1804b1-4a2d6d01ecbso20451535e9.0
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 06:30:17 -0800 (PST)
+ id 6af47c0f-b7e8-0a2a450b0019-d155dd2eddee-3
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 15:30:39 +0100
+Received: by mail-wr1-f46.google.com with SMTP id
+ ffacd0b85a97d-492690dd5daso2558679f8f.1
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 06:30:39 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb4c524faesm403955e9.15.2026.11.11.06.30.15
+ ffacd0b85a97d-49884b99869sm10246320f8f.4.2026.11.11.06.30.38
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Nov 2026 06:30:15 -0800 (PST)
+ Wed, 11 Nov 2026 06:30:38 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,52 +51,52 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1794407417; x=1795012217; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1794407438; x=1795012238; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=Pd4Hs3mt0nDAxz//BysCCFqqUZlFJ9dNrV/g+ANkI+Q=;
-        b=UZPOutsqtx9CmqiorqPjwPoYSPTfatPiQRba4eo+8bXrEAQVVeBFWGZHR3tyal0w24
-         HP3fm7JWObelkMbscwWT3+O3B0ALsLE9VEmeQsKeh62fZkMSxbu0/bq9XBK0rA0Yvhrd
-         Z2QHI/asLWq6Xtkz+t3YgFqIaLyQEenlKzm+6vUcQAheYme87o0u19cy5cFsu5W28/v1
-         GmWzrkJZy9oPBFClbrVgUZKa2l+HGyS5AIji+WXV9QKrH0OVlrIOfVeRD7hHQ2L/sLBG
-         /FPGHg5OPDg13NS/Fzp+CRDWTZrXq+R/AZrvepQQQlEsUzJLTNMRwIK3FiS/vo8FrfRy
-         WkQw==
+        bh=0Ij+lnc6GDQFa55px/rkcg0Zu08IoisQRrZTE/uNLLs=;
+        b=Jecc3FNs75NJDjZLtOvY/+tBQ4FrOYcGf5sw8myTssi2ERzsOufP4zES71xoYUFWnR
+         9QqlZ4CSEU+QGN0cevvENjJtBszePjg13ApwN83ey01N7Dh3f8sX9RNKip98UpfDxXYX
+         MzjI5/EYqlr3nbZS5tl6iDxZMHb55HPO4kBNLA0HyQO6eC7he+/1zW7kRlyeJZ7b6NJY
+         Ro2soMFw/7qX+v92IwNhSdNxbnp2dp/Qz08SlF8mnknthbXQjPrXwqCOVMq1BFkdbyDy
+         My1ZBMBzPJlxi16RhiJFe7XftghtP1Xgd8E1KWxyxTpxsC4/6xJdaqohVZNwAStqFWdW
+         daxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794407417; x=1795012217;
+        d=1e100.net; s=20260707; t=1794407438; x=1795012238;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=Pd4Hs3mt0nDAxz//BysCCFqqUZlFJ9dNrV/g+ANkI+Q=;
-        b=JL1r8atJ7k9DlC73Z+TZ5JEOuP7MKu4nGzlKAMaVTXLxfnRyW1cpUgVTPXz2bbC8qC
-         4w3WWG6fRxCyCJX98PWeJMcfAms4ndhgGefLTo6jjNCmnzEiUd98pBp7lHPj6SgR2L2m
-         5HN/MyTuLoI5freFymGzhh+IE31GYZeeE3Q/UbJ57tV8Q8FBpMfL68Mi9C/jQpnp5N6X
-         19kc84+LtAzGoN7upjb2clOFo7+DzeZncD1m3kdCeW3XrXNlX/oQv0iTdpjSmcC6GioK
-         GVcwwzJ7Dk2w30qb3yKd7c/SEs6Xw8TAwwIu0pWGd/7L9alQH+FyOvlmn7Xbnq4U2zmU
-         pOPg==
-X-Gm-Message-State: APuU4Z+qZsYy1JB8VSM/+5m01ee21AFXaaMxYwQgYGtept7Kbt2/rmgJ
-	YRNLF/uRsL6XAP+3dMDBUefjR9yLL6Jy/E5t0uAmEImm2lJoplof5Dg4U21BgNAoX80gk5gBKtm
-	SvlUHCw==
-X-Gm-Gg: AYBFou02dqtSxbSuA/EgPKcGVld7oXzrvFZlse0cyODpG3+nHRnVy5OH9Xoy7ZOr5bo
-	OIZ9Lgqx6udZe/cEOE+6tQYdnNlmyeh48xpYWw1/4Gl05eXOfVzVvsqzZbL2HiiZT0PWJB8Fz0E
-	XDroA7seVtd2TaSVyy/uanas8BKG2Bd9zV+i2x1of+50/noYc5gyI43VpsQBi/vDElzZ6C+Vm0D
-	AbIicQylnPZdMttkgYA/Jc8iWNzv38pE6o1ecfQ99IAyo0rQe1n2p/I3NWlfHlXOGsFdVuoUwy0
-	uwrS1kcFT5zIVm6nguZoxn1oYJZ/UrDMfUupWOS9a449Neq2ooCatAv/Q4Nj3b4LAwT/M4d0+Tf
-	X/mBczLif2SX8x9WIqajU1w+nDAkJl3rs7yvX72/nwAuI320YNKy12pMcEDxn0h4R622lJGm1vE
-	73V8HlIGVj0JJ4ewBhR45b2wD4zqBqy5b6HYlogozAXS+F1otvV6itNK1rdq1qro7ii1Kb4GyjT
-	GyqtRYucKhRB5qNdRQebgDnQwQ7sTev16qOkkGDEeTmFFOAgSA88AeuK0LQMTA/I2EhEQIy0ead
-	Yq5vyBwKcWXJVDhq2y9WdzdMsZS7whdBawb6XLON18PrDd4fEgvJfMpNTVCbGt9ndJ1tWVH2nnM
-	iyzy6NDeIHFyj3H/CX4Nl7NC6KgP+IYv6MVzwjA==
-X-Received: by 2002:a05:600c:190a:b0:4a1:f99e:f22d with SMTP id 5b1f17b1804b1-4ba0936c0d2mr50378535e9.6.1794407416356;
-        Wed, 11 Nov 2026 06:30:16 -0800 (PST)
-Message-ID: <c508a20b-059a-4c65-b335-be6d29769a38@suse.com>
-Date: Wed, 11 Nov 2026 15:30:15 +0100
+        bh=0Ij+lnc6GDQFa55px/rkcg0Zu08IoisQRrZTE/uNLLs=;
+        b=cSLjH0p8aFlAyJEUdDVf5ISw3AbzgEuz6gt5N5bngTQkdOOycBEkfUJJ4i7CXyblq2
+         V1moneeiJrLWoMbhrlmGNHgzxR41imUSWJ2Jx0Y4m9850zUEUbSaZI4e93fZdRoPJtiZ
+         ylc2LH6VRaEiIgn2bp72IqWGofoYUwOJCSZYzEyTfk+nQ8yz2u41sM4ICVdFQHiV2SLH
+         W/KmhA1MaV9Ga6sR+KGbZ2a4g8mlqfazH4IaIsUE88DI1B7hCm9XsqoN8DVALnvspqZi
+         zyYDV3Ni68Qv4O0TDznb9bccl5S/XfHlwLqdtMc1Ffc6RCJ2ytzEIGNGG6uUNQfNm01t
+         5SMA==
+X-Gm-Message-State: APuU4Z8OHziP8Bd9E+Qg3OXeVsG7Em63yfVKJ/gzeaKK3cF/UhEKOLN+
+	76Bp99sQjBN0ltD+NEm7GPsRQdoWHuiQclyBw6LjpnW5J2bcGnQyyLwpwd9+TxH9Duipiwzts68
+	6w3eBMA==
+X-Gm-Gg: AYBFou12UaXyfN9shKQVho99IfUcs+/FK52tanuC8VNBJ+e2m5nXGZ40p42PBkPAG96
+	q7cEiJfYv3aIOn1P1vRBxQ7YKPsYth7FrOKsKLkiiajwMphfv4hVPbWc5QONzSM7EyiVROcIVik
+	jTrdwHbzE4srv8J1pLVUkmvRc3Vr82czCmYpAgnVs/rI21LqWDio9KLHJzOXh4lhUNQGjJ8R9Zm
+	ZJG65+40y9vETlSreGgI4sJlM9fEsVw+53yKz5tryFgwExiYnkKHyntsbbSpSxGHY11FluGQbTx
+	uBl5mM2yBltoyDvj/yq/AqIhpZnb95j7YIxSNxGDbp8aWSgA136P6XeeZ/zOxQEgqaGXgbXHm/G
+	foD18va298d+nIUgr3/JKQzcsbbc9VVsmnhyroyhWVyLq04OekD9cOdCFoKqGsNvDGEJz3LgdVF
+	29cNilpc+p0rSHn5IoC86cQ5PkqaG36CWIZiRNOZtnncoWq43zQ/YsbCEre7KkO15lVAO0wXTqC
+	/2HK45zAdxq9Kf8M6w5jh4HAdz0qi77mrEAoKSkzOWnlyHoZMEg89vNbeZY2/G+giXQuKy3dZIw
+	HDFCCc0g36RDb37AzHH9IqtWHQkAFrXhdLUgjGieTTFxUDH4I8gM/pQFDI5lzVzGYEKH8aFFTll
+	WKs8GufJ9ETqgjw6dZg==
+X-Received: by 2002:a05:6000:1a85:b0:490:50c1:f352 with SMTP id ffacd0b85a97d-499c9bc1486mr4763046f8f.39.1794407438607;
+        Wed, 11 Nov 2026 06:30:38 -0800 (PST)
+Message-ID: <ea577b42-efe7-424f-99f7-129d0fac7f65@suse.com>
+Date: Wed, 11 Nov 2026 15:30:37 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 24/30] x86emul: support APX+{LZ,POP}CNT insns
+Subject: [PATCH 25/30] x86emul: support APX+MOVBE insn
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -130,9 +130,9 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <17d56a5d-41f2-4691-aea7-d6dfdde5ad32@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1794407417-1DA7E757-34D13772/10/78276251493
+X-purgate-ID: tlsNG-42698a/1794407439-A8AC89EA-7F3A138C/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 6814
+X-purgate-size: 4931
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -144,160 +144,123 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 Besides adding table entries and case labels there's very little to do
 here; generic map 4 handling takes care of things.
 
-To aid making the connection between ABM and LZCNT (the sole insn the
-feature bit covers), amend the comment in cpufeatures.h at the same
-time.
-
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
 --- a/tools/tests/x86_emulator/evex-disp8.c
 +++ b/tools/tests/x86_emulator/evex-disp8.c
-@@ -1154,6 +1154,16 @@ static const struct test bmi2[] = {
-     INSN(shrx,      f2, 0f38, f7,    el,   dq, no),
+@@ -1159,6 +1159,13 @@ static const struct test lzcnt[] = {
+     INSN(lzcntw,    66, map4, f5,    el,    w, no),
  };
  
-+static const struct test lzcnt[] = {
-+    INSN(lzcnt,       , map4, f5,    el,   dq, no),
-+    INSN(lzcntw,    66, map4, f5,    el,    w, no),
++static const struct test movbe[] = {
++    INSN(movbe,       , map4, 60,    el,   dq, no),
++    INSN(movbe,       , map4, 61,    el,   dq, no),
++    INSN(movbew,    66, map4, 60,    el,    w, no),
++    INSN(movbew,    66, map4, 61,    el,    w, no),
 +};
 +
-+static const struct test popcnt[] = {
-+    INSN(popcnt,      , map4, 88,    el,   dq, no),
-+    INSN(popcntw,   66, map4, 88,    el,    w, no),
-+};
-+
- static const unsigned char vl_all[] = { VL_512, VL_128, VL_256 };
- static const unsigned char vl_128[] = { VL_128 };
- static const unsigned char vl_no128[] = { VL_512, VL_256 };
-@@ -1745,6 +1755,8 @@ void evex_disp8_test(void *instr, struct
-         RUN(bmi1);
+ static const struct test popcnt[] = {
+     INSN(popcnt,      , map4, 88,    el,   dq, no),
+     INSN(popcntw,   66, map4, 88,    el,    w, no),
+@@ -1756,6 +1763,7 @@ void evex_disp8_test(void *instr, struct
          RUN(bmi2);
          RUN(cmpccxadd);
-+        RUN(lzcnt);
-+        RUN(popcnt);
+         RUN(lzcnt);
++        RUN(movbe);
+         RUN(popcnt);
  
  #undef RUN
- 
 --- a/tools/tests/x86_emulator/predicates.c
 +++ b/tools/tests/x86_emulator/predicates.c
-@@ -2260,6 +2260,8 @@ static const struct evex {
-     { { 0x84 }, 2, T, R, pfx_no, WIG, L0, SCC }, /* ctest<scc> */
-     { { 0x85 }, 2, T, R, pfx_no, Wn, L0, SCC }, /* ctest<scc> */
-     { { 0x85 }, 2, T, R, pfx_66, Wn, L0, SCC }, /* ctest<scc> */
-+    { { 0x88 }, 2, T, R, pfx_no, Wn, L0 }, /* popcnt */
-+    { { 0x88 }, 2, T, R, pfx_66, Wn, L0 }, /* popcnt */
-     { { 0x8f, 0xc0 }, 2, F, R, pfx_no, Wn, L0, ND }, /* pop2 */
-     { { 0xa5 }, 2, T, W, pfx_no, Wn, L0, ND }, /* shld */
-     { { 0xa5 }, 2, T, W, pfx_66, Wn, L0, ND }, /* shld */
-@@ -2344,6 +2346,8 @@ static const struct evex {
-     { { 0xf1 }, 2, T, R, pfx_66, Wn, L0 }, /* crc32 */
-     { { 0xf4 }, 2, T, R, pfx_no, Wn, L0 }, /* tzcnt */
-     { { 0xf4 }, 2, T, R, pfx_66, Wn, L0 }, /* tzcnt */
-+    { { 0xf5 }, 2, T, R, pfx_no, Wn, L0 }, /* lzcnt */
-+    { { 0xf5 }, 2, T, R, pfx_66, Wn, L0 }, /* lzcnt */
-     { { 0xf6, 0x00 }, 3, T, R, pfx_no, WIG, L0, SCC }, /* ctest<scc> */
-     { { 0xf6, 0x10 }, 2, T, W, pfx_no, WIG, L0, ND }, /* not */
-     { { 0xf6, 0x18 }, 2, T, W, pfx_no, WIG, L0, ND }, /* neg */
+@@ -2202,6 +2202,10 @@ static const struct evex {
+     CND(0x40,   2, T, R, pfx_no, Wn, L0, ND ), /* {,cf}cmov<cc> */ \
+     CND(0x40,   2, T, R, pfx_66, Wn, L0, ND ), /* {,cf}cmov<cc> */ \
+     CND(0x40,   2, T, W, pfx_f2, WIG, L0 ), /* set<cc> */
++    { { 0x60 }, 2, T, R, pfx_no, Wn, L0 }, /* movbe */
++    { { 0x60 }, 2, T, R, pfx_66, Wn, L0 }, /* movbe */
++    { { 0x61 }, 2, T, W, pfx_no, Wn, L0 }, /* movbe */
++    { { 0x61 }, 2, T, W, pfx_66, Wn, L0 }, /* movbe */
+     { { 0x66 }, 2, T, R, pfx_66, Wn, L0 }, /* adcx */
+     { { 0x66 }, 2, T, R, pfx_f3, Wn, L0 }, /* adox */
+     { { 0x69 }, 6, T, R, pfx_no, Wn, L0 }, /* imul */
 --- a/tools/tests/x86_emulator/test_x86_emulator.c
 +++ b/tools/tests/x86_emulator/test_x86_emulator.c
-@@ -2516,6 +2516,26 @@ int main(int argc, char **argv)
-              (regs.eip != (unsigned long)&instr[5]) )
-             goto fail;
-         printf("okay\n");
+@@ -2475,6 +2475,35 @@ int main(int argc, char **argv)
+         goto fail;
+     printf("okay\n");
+ 
++#ifdef __x86_64__
++    printf("%-40s", "Testing movbe %rax,%rcx...");
++    instr[0] = 0x62; instr[1] = 0xf4; instr[2] = 0xfc; instr[3] = 0x08;
++    instr[4] = 0x60; instr[5] = 0xc8;
++    regs.rip = (unsigned long)&instr[0];
++    rc = x86_emulate(&ctxt, &emulops);
++    if ( (rc != X86EMUL_OKAY) ||
++         (regs.rcx != 0x1234567800000000UL) ||
++         (regs.rip != (unsigned long)&instr[6]) )
++        goto fail;
++    printf("okay\n");
 +
-+        if ( true /* cpu_has_apx_nci_ndd_nf */ )
-+        {
-+            cpu_policy.apx.apx_nci_ndd_nf = true;
++    if ( cpu_has_apx_f )
++    {
++        printf("%-40s", "Testing movbe %r30w,2(%r31)...");
++        instr[1] = 0x4c; instr[2] = 0x7d;
++        instr[4] = 0x61; instr[5] = 0x77; instr[6] = 0x02;
++        regs.rip = (unsigned long)&instr[0];
++        load_egpr(30, 0x12345678);
++        load_egpr(31, (unsigned long)res);
++        rc = x86_emulate(&ctxt, &emulops);
++        if ( (rc != X86EMUL_OKAY) ||
++             (*res != 0x78561234) ||
++             (regs.rip != (unsigned long)&instr[7]) )
++            goto fail;
++        printf("okay\n");
++    }
++#endif
 +
-+            printf("%-40s", "Testing {nf}popcnt (%rdx),%rcx...");
-+            instr[0] = 0x62; instr[1] = 0xf4; instr[2] = 0xfc; instr[3] = 0x0c;
-+            instr[4] = 0x88; instr[5] = 0x0a;
-+            res[1]      = 0x23456789;
-+            regs.eflags = EFLAGS_MASK;
-+            regs.rip    = (unsigned long)&instr[0];
-+            rc = x86_emulate(&ctxt, &emulops);
-+            if ( (rc != X86EMUL_OKAY) || regs.rcx != 34 ||
-+                 (regs.eflags != EFLAGS_MASK) ||
-+                 (regs.rip != (unsigned long)&instr[6]) )
-+                goto fail;
-+            printf("okay\n");
-+
-+            cpu_policy.apx.apx_nci_ndd_nf = nci_ndd_nf;
-+        }
- #endif
-     }
-     else
+     printf("%-40s", "Testing popcnt (%edx),%cx...");
+     if ( cpu_has_popcnt )
+     {
 --- a/tools/tests/x86_emulator/x86-emulate.h
 +++ b/tools/tests/x86_emulator/x86-emulate.h
-@@ -234,6 +234,7 @@ void wrpkru(unsigned int val);
- #define cpu_has_xgetbv1             (cpu_has_xsave && cpu_policy.xstate.xgetbv1)
- 
- #define cpu_has_3dnow_ext            cpu_policy.extd._3dnowext
-+#define cpu_has_lzcnt                cpu_policy.extd.abm
- #define cpu_has_sse4a                cpu_policy.extd.sse4a
- #define cpu_has_xop                 (cpu_policy.extd.xop  && xcr0_mask(6))
- #define cpu_has_fma4                (cpu_policy.extd.fma4 && xcr0_mask(6))
+@@ -168,6 +168,7 @@ void wrpkru(unsigned int val);
+ #define cpu_has_fma                 (cpu_policy.basic.fma && xcr0_mask(6))
+ #define cpu_has_sse4_1               cpu_policy.basic.sse4_1
+ #define cpu_has_sse4_2               cpu_policy.basic.sse4_2
++#define cpu_has_movbe                cpu_policy.basic.movbe
+ #define cpu_has_popcnt               cpu_policy.basic.popcnt
+ #define cpu_has_aesni                cpu_policy.basic.aesni
+ #define cpu_has_avx                 (cpu_policy.basic.avx  && xcr0_mask(6))
 --- a/xen/arch/x86/x86_emulate/decode.c
 +++ b/xen/arch/x86/x86_emulate/decode.c
-@@ -730,6 +730,10 @@ static const struct map4_table {
-         [vex_np] = { },
-         [vex_66] = { },
+@@ -691,6 +691,14 @@ static const struct map4_table {
+         [vex_f2] = { .to_mem = true, .byte = true, .nd = true,
+                      .nci_ndd_nf = true },
      },
-+    [0x88] = { /* POPCNT ({,d,q}word) */
-+        [vex_np] = { .nf = true, .nci_ndd_nf = true },
-+        [vex_66] = { .nf = true, .nci_ndd_nf = true },
++    [0x60] = { /* MOVBE ({,d,q}word) */
++        [vex_np] = { },
++        [vex_66] = { },
 +    },
-     [0x8f] = { /* Grp1a */
-         [vex_np] = { .nd = true },
-     },
-@@ -792,6 +796,10 @@ static const struct map4_table {
-         [vex_np] = { .nf = true, .nci_ndd_nf = true },
-         [vex_66] = { .nf = true, .nci_ndd_nf = true },
-     },
-+    [0xf5] = { /* LZCNT ({,d,q}word) */
-+        [vex_np] = { .nf = true, .nci_ndd_nf = true },
-+        [vex_66] = { .nf = true, .nci_ndd_nf = true },
++    [0x61] = { /* MOVBE ({,d,q}word) */
++        [vex_np] = { .to_mem = true },
++        [vex_66] = { .to_mem = true },
 +    },
-     [0xf6] = { /* Grp3 (byte); most attributes depend on modrm_reg */
-         [vex_np] = { .byte = true, .nci_ndd_nf = true },
-     },
+     [0x66] = {
+         [vex_66] = { .nd = true }, /* ADCX */
+         [vex_f3] = { .nd = true }, /* ADOX */
 --- a/xen/arch/x86/x86_emulate/x86_emulate.c
 +++ b/xen/arch/x86/x86_emulate/x86_emulate.c
-@@ -5668,7 +5668,9 @@ x86_emulate(
-         dst.val = (uint16_t)src.val;
-         break;
- 
--    case X86EMUL_OPC_F3(0x0f, 0xb8): /* popcnt r/m,r */
-+    case X86EMUL_OPC_F3  (0x0f, 0xb8): /* popcnt r/m,r */
-+    case X86EMUL_OPC_EVEX   (4, 0x88): /* popcnt r/m,reg */
-+    case X86EMUL_OPC_EVEX_66(4, 0x88): /* popcnt r/m,r16 */
-         vcpu_must_have(popcnt);
-         asm ( "popcnt %1,%0" : "=r" (dst.val) : "rm" (src.val) );
-         _regs.eflags &= ~EFLAGS_MASK;
-@@ -5709,8 +5711,12 @@ x86_emulate(
-         }
-         break;
- 
-+    case X86EMUL_OPC_EVEX   (4, 0xf5): /* lzcnt r/m,reg */
-+    case X86EMUL_OPC_EVEX_66(4, 0xf5): /* lzcnt r/m,r16 */
-+        vcpu_must_have(lzcnt);
+@@ -7345,6 +7345,11 @@ x86_emulate(
+     case X86EMUL_OPC(0x0f38, 0xf0): /* movbe m,r */
+     case X86EMUL_OPC(0x0f38, 0xf1): /* movbe r,m */
+         generate_exception_if(ea.type != OP_MEM, X86_EXC_UD);
 +        fallthrough;
-     case X86EMUL_OPC(0x0f, 0xbd): /* bsr or lzcnt */
--        if ( vex.pfx == vex_f3 )
-+        if ( vex.pfx == vex_f3 || state->promoted_evex )
-             emulate_2op_SrcV_srcmem("lzcnt", src, dst, _regs.eflags);
-         else
++    case X86EMUL_OPC_EVEX   (4, 0x60): /* movbe r/m,reg */
++    case X86EMUL_OPC_EVEX_66(4, 0x60): /* movbe r/m,r16 */
++    case X86EMUL_OPC_EVEX   (4, 0x61): /* movbe reg,r/m */
++    case X86EMUL_OPC_EVEX_66(4, 0x61): /* movbe r16,r/m */
+         vcpu_must_have(movbe);
+         switch ( op_bytes )
          {
---- a/xen/include/public/arch-x86/cpufeatureset.h
-+++ b/xen/include/public/arch-x86/cpufeatureset.h
-@@ -159,7 +159,7 @@ XEN_CPUFEATURE(CMP_LEGACY,    3*32+ 1) /
- XEN_CPUFEATURE(SVM,           3*32+ 2) /*h  Secure virtual machine */
- XEN_CPUFEATURE(EXTAPIC,       3*32+ 3) /*   Extended APIC space */
- XEN_CPUFEATURE(CR8_LEGACY,    3*32+ 4) /*S  CR8 in 32-bit mode */
--XEN_CPUFEATURE(ABM,           3*32+ 5) /*A  Advanced bit manipulation */
-+XEN_CPUFEATURE(ABM,           3*32+ 5) /*A  LZCNT insn (Advanced Bit Manipulation) */
- XEN_CPUFEATURE(SSE4A,         3*32+ 6) /*A  SSE-4A */
- XEN_CPUFEATURE(MISALIGNSSE,   3*32+ 7) /*A  Misaligned SSE mode */
- XEN_CPUFEATURE(3DNOWPREFETCH, 3*32+ 8) /*A  3DNow prefetch instructions */
 
 
