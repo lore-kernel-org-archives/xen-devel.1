@@ -2,44 +2,44 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F153D606A8B0
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2026 18:09:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3720E606A8B2
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2026 18:09:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=casper.20170209 header.b=sZNh/csW
-Received: from list by lists.xenproject.org with outflank-mailman.1484479.1687818 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=casper.20170209 header.b=fgVrUACa
+Received: from list by lists.xenproject.org with outflank-mailman.1484482.1687839 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRClJ-0008Il-6q; Wed, 11 Nov 2026 18:09:33 +0000
+	id 1xRClL-0000JY-7E; Wed, 11 Nov 2026 18:09:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1484479.1687818; Wed, 11 Nov 2026 18:09:33 +0000
+Received: by outflank-mailman (output) from mailman id 1484482.1687839; Wed, 11 Nov 2026 18:09:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRClI-0008H9-S7; Wed, 11 Nov 2026 18:09:32 +0000
-Received: by outflank-mailman (input) for mailman id 1484479;
- Wed, 11 Nov 2026 18:09:30 +0000
+	id 1xRClK-0000HV-IJ; Wed, 11 Nov 2026 18:09:34 +0000
+Received: by outflank-mailman (input) for mailman id 1484482;
+ Wed, 11 Nov 2026 18:09:31 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <BATV+abad5507353db368323c+8480+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1xRClG-00083j-LP
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 18:09:30 +0000
+ id 1xRClH-00089O-Gl
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 18:09:31 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xRClG-004Gts-27; Wed, 11 Nov 2026 19:09:30 +0100
-Received: from [10.42.69.5] (helo=localhost)
+ id 1xRClG-00FSoo-Tg; Wed, 11 Nov 2026 19:09:30 +0100
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
  <BATV+abad5507353db368323c+8480+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6af4af50-bab6-0a2a0a5309dd-0a2a4505b6ee-20
+ id 6af4af53-2eae-0a2a0a5409dd-0a2a450aba5c-4
  for <multiple-recipients>; Wed, 11 Nov 2026 19:09:30 +0100
 Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
  <BATV+abad5507353db368323c+8480+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6af4af59-4cb1-0a2a45050019-5a9b3222c2d2-3
- for <multiple-recipients>; Wed, 11 Nov 2026 19:09:29 +0100
+ id 6af4af55-f2d2-0a2a450a0019-5a9b3222ba54-3
+ for <multiple-recipients>; Wed, 11 Nov 2026 19:09:25 +0100
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
  by casper.infradead.org with esmtpsa (Exim 4.100.1 #2 (Red Hat Linux))
- id 1xRClA-0000000CKxH-09O8; Wed, 11 Nov 2026 18:09:24 +0000
+ id 1xRCl9-0000000CKvf-2M2F; Wed, 11 Nov 2026 18:09:23 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.5 #2 (Red
- Hat Linux)) id 1xRCl9-0000000HWtd-3VQ5;
+ Hat Linux)) id 1xRCl9-0000000HWsu-1UOe;
  Wed, 11 Nov 2026 18:09:23 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -48,17 +48,17 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
-	Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:
-	To:From:Reply-To:Content-ID:Content-Description;
-	bh=UkL+2EqqLZWeKCYphLSu8F5DwrRa+T7c95HDl48bUzo=; b=sZNh/csWJLZTNxolsU2BKknfNs
-	Qo3U14mot2qyCMtFvD9jtZisiBr/I7ogzhnU9xRkrWV6H9GRcR77uA+SP/DW9/oFAKho1+vpbl6nV
-	k/o+ygtKtoplpCD0cOl+l/V8tA3N0rZrux2exarY//L0Puagr8bACfFFjR6w0BlPgn5ab+YfmqTjt
-	jvtgW2NeNsopaInB7Vj/ZfQ4Btlijyx2r1SZ3HApttlBpFSzD74xX4GjcxzaTM6YtpdfJW9kyPvkt
-	zamsqJf7mfEI0WtfR0/adfos4lWf3nhifZQy/BgisEixdn03aiKUwnz6N/iUGoRuQCP+gdIcrCye1
-	gtHpGXVg==;
+	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
+	Reply-To:Content-Type:Content-ID:Content-Description;
+	bh=mKH9BxiVhD1hkWOxu0QRNvIl232YhI8uqiNY5R0UwSo=; b=fgVrUACaSLph0J26X6E/7/ickG
+	K3hS2UAraMzNHVHR2xkmPOrKX5AWdkNZ7oeNDrtt6pCdiGRLupJwii0llUquynMXlz8ehO5gqHKZ/
+	LlusvvLB8cDDCGYWPA97DJuDxBDNgikoDSBuosnQOTWifs5oXmIBM4b574rSa0FqdIhcYpcTVN825
+	ff9cnbKHI+kdyVlzabIpLVrfUWJb4D6fKPlbkHhJ8f5fQeRT6XvfdXbg5S0HzJAYhQMN6+0qRsonE
+	tIfL4thRfwH/L2EDJolKRkyypzcIDGzsXVywbP/wFBejG/rKp13lKdeQYqbPkG/4K98Cob01nZEcY
+	OMkEqRyQ==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: kvm@vger.kernel.org
 Cc: linux-kernel@vger.kernel.org,
@@ -87,152 +87,144 @@ Cc: linux-kernel@vger.kernel.org,
 	Dongli Zhang <dongli.zhang@oracle.com>,
 	joe.jin@oracle.com,
 	David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v13 24/26] KVM: x86/xen: Drop open-coded fallback clock read in kvm_xen_start_timer()
-Date: Wed, 11 Nov 2026 10:09:20 -0800
-Message-ID: <20261111180922.4177927-25-dwmw2@infradead.org>
+Subject: [PATCH v13 14/26] UAPI: x86: Move pvclock-abi to UAPI for x86 platforms
+Date: Wed, 11 Nov 2026 10:09:10 -0800
+Message-ID: <20261111180922.4177927-15-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261111180922.4177927-1-dwmw2@infradead.org>
 References: <20261111180922.4177927-1-dwmw2@infradead.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-c201ff/1794420569-F68B62A1-930C26D8/0/0
+X-purgate-ID: tlsNG-4011c0/1794420570-5A1DDCFC-51B6E4A1/0/0
 X-purgate-type: clean
-X-purgate-size: 5513
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-purgate-size: 3998
+X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: David Woodhouse <dwmw@amazon.co.uk>
+From: Jack Allister <jalliste@amazon.com>
 
-When no coherent (CLOCK_MONOTONIC, TSC) pair was available,
-kvm_xen_start_timer() computed one from separate ktime_get() and
-rdtsc() calls rather than using get_kvmclock_ns(), with a comment
-explaining that the latter had a systemic error from scaling host TSC
-directly to nanoseconds instead of scaling to the guest TSC first.
+A subsequent commit will provide a new KVM interface for performing a
+fixup/correction of the KVM clock against the reference TSC. The
+KVM_[GS]ET_CLOCK_GUEST API requires a pvclock_vcpu_time_info, as such
+the caller must know about this definition.
 
-Commit abdef42276d8 ("KVM: x86: Fix KVM clock precision in
-get_kvmclock() with TSC scaling") removed that systemic error: in
-master clock mode, get_kvmclock_ns() now scales the host TSC delta to
-the guest TSC and converts it with the guest's own mul/shift,
-computing precisely what the guest would.
+Move the definition to the UAPI folder so that it is exported to
+usermode, change the type definitions to use the standard for UAPI
+exports, and add the Linux-syscall-note exception to the SPDX licence
+identifier as is conventional for exported headers.
 
-The fallback is also nearly unreachable. It sits behind the
-use_master_clock check, so on 32-bit (where the master clock is never
-active) it is dead code, and on 64-bit kvm_get_monotonic_and_clockread()
-can only fail there if the host clocksource changed after the last
-master clock update, in the window before the resulting masterclock
-update is processed. In exactly that window get_kvmclock_ns() takes
-its raw-clock fallback path rather than the guest TSC computation,
-which is continuous with the last valid snapshot — though up to
-~0.1ppm of the snapshot's age (multiplier quantization) away from the
-guest's own pvclock arithmetic — and tolerable for the timers that
-can be started before the pending masterclock update lands (the
-clocksource change is noticed via a two-stage deferral, so it is not
-strictly one).
+Define __KERNEL__ in scripts/xen-hypercalls.sh: the UAPI header now
+pulls in linux/types.h, and the script's raw $CPP invocation with
+$LINUXINCLUDE does not define it, which would trigger the "attempt to
+use kernel headers from user space" warning from the UAPI type
+headers.
 
-Drop it and fall back to the existing get_kvmclock_ns() path.
-
+Signed-off-by: Jack Allister <jalliste@amazon.com>
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+Reviewed-by: Paul Durrant <paul@xen.org>
+Tested-by: Dongli Zhang <dongli.zhang@oracle.com>
 ---
- arch/x86/kvm/xen.c | 50 +++++++++++++++++++++++-----------------------
- 1 file changed, 25 insertions(+), 25 deletions(-)
+ MAINTAINERS                                   |  4 +--
+ arch/x86/include/{ => uapi}/asm/pvclock-abi.h | 27 ++++++++++---------
+ scripts/xen-hypercalls.sh                     |  2 +-
+ 3 files changed, 18 insertions(+), 15 deletions(-)
+ rename arch/x86/include/{ => uapi}/asm/pvclock-abi.h (82%)
 
-diff --git a/arch/x86/kvm/xen.c b/arch/x86/kvm/xen.c
-index 6aa00f746cba..2a157cba1c7c 100644
---- a/arch/x86/kvm/xen.c
-+++ b/arch/x86/kvm/xen.c
-@@ -188,7 +188,7 @@ static void kvm_xen_start_timer(struct kvm_vcpu *vcpu, u64 guest_abs,
- 	struct kvm_vcpu_xen *xen = &vcpu->arch.xen;
- 	int64_t kernel_now, delta;
- 	uint64_t guest_now;
--	int r = -EOPNOTSUPP;
-+	bool fallback = true;
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 9fadc98d3c49..773f7c800f6a 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -14663,8 +14663,8 @@ S:	Supported
+ T:	git git://git.kernel.org/pub/scm/virt/kvm/kvm.git
+ F:	arch/um/include/asm/kvm_para.h
+ F:	arch/x86/include/asm/kvm_para.h
+-F:	arch/x86/include/asm/pvclock-abi.h
+ F:	arch/x86/include/uapi/asm/kvm_para.h
++F:	arch/x86/include/uapi/asm/pvclock-abi.h
+ F:	arch/x86/kernel/kvm.c
+ F:	arch/x86/kernel/kvmclock.c
+ F:	include/asm-generic/kvm_para.h
+@@ -29780,8 +29780,8 @@ R:	Boris Ostrovsky <boris.ostrovsky@oracle.com>
+ L:	xen-devel@lists.xenproject.org (moderated for non-subscribers)
+ S:	Supported
+ F:	arch/x86/configs/xen.config
+-F:	arch/x86/include/asm/pvclock-abi.h
+ F:	arch/x86/include/asm/xen/
++F:	arch/x86/include/uapi/asm/pvclock-abi.h
+ F:	arch/x86/platform/pvh/
+ F:	arch/x86/xen/
  
- 	/*
- 	 * The guest provides the requested timeout in absolute nanoseconds
-@@ -210,6 +210,7 @@ static void kvm_xen_start_timer(struct kvm_vcpu *vcpu, u64 guest_abs,
- 	do {
- 		struct pvclock_vcpu_time_info hv_clock;
- 		uint64_t host_tsc, guest_tsc;
-+		int r = -EOPNOTSUPP;
+diff --git a/arch/x86/include/asm/pvclock-abi.h b/arch/x86/include/uapi/asm/pvclock-abi.h
+similarity index 82%
+rename from arch/x86/include/asm/pvclock-abi.h
+rename to arch/x86/include/uapi/asm/pvclock-abi.h
+index b9fece5fc96d..6d70cf640362 100644
+--- a/arch/x86/include/asm/pvclock-abi.h
++++ b/arch/x86/include/uapi/asm/pvclock-abi.h
+@@ -1,6 +1,9 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
++/* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
+ #ifndef _ASM_X86_PVCLOCK_ABI_H
+ #define _ASM_X86_PVCLOCK_ABI_H
++
++#include <linux/types.h>
++
+ #ifndef __ASSEMBLER__
  
- 		if (!cpu_feature_enabled(X86_FEATURE_CONSTANT_TSC) ||
- 		    !vcpu->kvm->arch.use_master_clock)
-@@ -230,43 +231,42 @@ static void kvm_xen_start_timer(struct kvm_vcpu *vcpu, u64 guest_abs,
- 		if (r)
- 			break;
+ /*
+@@ -24,20 +27,20 @@
+  */
  
-+		/*
-+		 * With use_master_clock set, the clocksource was TSC-based
-+		 * when the master clock was last updated. The clockread can
-+		 * only fail here if the clocksource has changed since, in
-+		 * which case a masterclock update is already pending and
-+		 * get_kvmclock_ns() returns the raw-clock fallback value —
-+		 * continuous with the last valid snapshot, though it may
-+		 * sit up to ~0.1ppm of the snapshot's age away from the
-+		 * guest's own pvclock arithmetic. Only timers armed
-+		 * before the pending update is consumed see it.
-+		 */
- 		if (!IS_ENABLED(CONFIG_64BIT) ||
--		    !kvm_get_monotonic_and_clockread(&kernel_now, &host_tsc)) {
--			/*
--			 * Don't fall back to get_kvmclock_ns() because it's
--			 * broken; it has a systemic error in its results
--			 * because it scales directly from host TSC to
--			 * nanoseconds, and doesn't scale first to guest TSC
--			 * and *then* to nanoseconds as the guest does.
--			 *
--			 * There is a small error introduced here because time
--			 * continues to elapse between the ktime_get() and the
--			 * subsequent rdtsc(). But not the systemic drift due
--			 * to get_kvmclock_ns().
--			 */
--			kernel_now = ktime_get(); /* This is CLOCK_MONOTONIC */
--			host_tsc = rdtsc();
--		}
-+		    !kvm_get_monotonic_and_clockread(&kernel_now, &host_tsc))
-+			break;
+ struct pvclock_vcpu_time_info {
+-	u32   version;
+-	u32   pad0;
+-	u64   tsc_timestamp;
+-	u64   system_time;
+-	u32   tsc_to_system_mul;
+-	s8    tsc_shift;
+-	u8    flags;
+-	u8    pad[2];
++	__u32   version;
++	__u32   pad0;
++	__u64   tsc_timestamp;
++	__u64   system_time;
++	__u32   tsc_to_system_mul;
++	__s8    tsc_shift;
++	__u8    flags;
++	__u8    pad[2];
+ } __attribute__((__packed__)); /* 32 bytes */
  
- 		/* Calculate the guest kvmclock as the guest would do it. */
- 		guest_tsc = kvm_read_l1_tsc(vcpu, host_tsc);
- 		guest_now = __pvclock_read_cycles(&hv_clock, guest_tsc);
-+		fallback = false;
- 	} while (0);
+ struct pvclock_wall_clock {
+-	u32   version;
+-	u32   sec;
+-	u32   nsec;
++	__u32   version;
++	__u32   sec;
++	__u32   nsec;
+ } __attribute__((__packed__));
  
--	if (r) {
-+	if (fallback) {
- 		/*
--		 * Without CONSTANT_TSC, get_kvmclock_ns() is the only option.
-+		 * Without CONSTANT_TSC and the master clock,
-+		 * get_kvmclock_ns() is the only option.
- 		 *
- 		 * Also if the guest PV clock hasn't been set up yet, as is
- 		 * likely to be the case during migration when the vCPU has
- 		 * not been run yet. It would be possible to calculate the
- 		 * scaling factors properly in that case but there's not much
--		 * point in doing so. The get_kvmclock_ns() drift accumulates
--		 * over time, so it's OK to use it at startup. Besides, on
--		 * migration there's going to be a little bit of skew in the
--		 * precise moment at which timers fire anyway. Often they'll
--		 * be in the "past" by the time the VM is running again after
--		 * migration.
-+		 * point in doing so. Without the master clock, the
-+		 * get_kvmclock_ns() drift accumulates over time, so it's OK
-+		 * to use it at startup. Besides, on migration there's going
-+		 * to be a little bit of skew in the precise moment at which
-+		 * timers fire anyway. Often they'll be in the "past" by the
-+		 * time the VM is running again after migration.
- 		 */
- 		guest_now = get_kvmclock_ns(vcpu->kvm);
- 		kernel_now = ktime_get();
+ #define PVCLOCK_TSC_STABLE_BIT	(1 << 0)
+diff --git a/scripts/xen-hypercalls.sh b/scripts/xen-hypercalls.sh
+index f18b00843df3..51a722198997 100755
+--- a/scripts/xen-hypercalls.sh
++++ b/scripts/xen-hypercalls.sh
+@@ -5,7 +5,7 @@ shift
+ in="$@"
+ 
+ for i in $in; do
+-	eval $CPP $LINUXINCLUDE -dD -imacros "$i" -x c /dev/null
++	eval $CPP -D__KERNEL__ $LINUXINCLUDE -dD -imacros "$i" -x c /dev/null
+ done | \
+ awk '$1 == "#define" && $2 ~ /__HYPERVISOR_[a-z][a-z_0-9]*/ { v[$3] = $2 }
+ 	END {   print "/* auto-generated by scripts/xen-hypercall.sh */"
 -- 
 2.43.0
 
