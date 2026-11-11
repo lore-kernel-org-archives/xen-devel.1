@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C3C7C606A324
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2026 15:18:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E8F23606A324
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2026 15:19:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=ci2ITb/6
-Received: from list by lists.xenproject.org with outflank-mailman.1484268.1687640 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=RD6DwODg
+Received: from list by lists.xenproject.org with outflank-mailman.1484275.1687648 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRA5q-0006QW-TB; Wed, 11 Nov 2026 15:18:34 +0000
+	id 1xRA6J-00077A-89; Wed, 11 Nov 2026 15:19:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1484268.1687640; Wed, 11 Nov 2026 15:18:34 +0000
+Received: by outflank-mailman (output) from mailman id 1484275.1687648; Wed, 11 Nov 2026 15:19:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRA5q-0006QM-PW; Wed, 11 Nov 2026 15:18:34 +0000
-Received: by outflank-mailman (input) for mailman id 1484268;
- Wed, 11 Nov 2026 15:18:33 +0000
+	id 1xRA6J-000773-5Z; Wed, 11 Nov 2026 15:19:03 +0000
+Received: by outflank-mailman (input) for mailman id 1484275;
+ Wed, 11 Nov 2026 15:19:01 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xRA5p-0006Pz-He
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 15:18:33 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xRA6H-000746-Ij
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 15:19:01 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xRA5o-00EUYS-Uu
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 16:18:32 +0100
-Received: from [10.42.69.3] (helo=localhost)
+ id 1xRA6G-000HI2-Vi
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 16:19:00 +0100
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6af4873e-8faa-0a2a0a5109dd-0a2a4503aee0-28
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 16:18:32 +0100
-Received: from [209.85.221.41] (helo=mail-wr1-f41.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6af48756-2eae-0a2a0a5409dd-0a2a45059f04-22
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 16:19:00 +0100
+Received: from [209.85.221.48] (helo=mail-wr1-f48.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6af48748-fae8-0a2a45030019-d155dd29e08e-3
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 16:18:32 +0100
-Received: by mail-wr1-f41.google.com with SMTP id
- ffacd0b85a97d-48b001cd92bso1763103f8f.2
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 07:18:32 -0800 (PST)
+ id 6af48764-4cb1-0a2a45050019-d155dd30ed50-3
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 16:19:00 +0100
+Received: by mail-wr1-f48.google.com with SMTP id
+ ffacd0b85a97d-49134c8509fso2701454f8f.1
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 07:19:00 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-49835f1772dsm11600037f8f.31.2026.11.11.07.18.31
+ ffacd0b85a97d-4983284c9b1sm10672932f8f.6.2026.11.11.07.18.59
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Nov 2026 07:18:31 -0800 (PST)
+ Wed, 11 Nov 2026 07:18:59 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,52 +51,52 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1794410312; x=1795015112; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1794410340; x=1795015140; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=OvqAPG6CT2RbvL3bLsOtVhKVKwAJOZOUSlUMozoAAj4=;
-        b=ci2ITb/6GYj5dO42+5X9/WNuh/Iui/3ztjBm3YnqSj7ml60klI39HHPUrcdbYEafHG
-         0vcrY5L6lPKhz0zJP5wBWfMmp6r51nwWgPGaFWxG+bfOC0I5fHChUukt4SgepJsSLtK5
-         zfuVMGr4KHvoYpP7TVAVK40xH2wLBn3JJzdwz4kRKVyRwdvpbecRzK/MHeWTC+b7jke1
-         ykbqm1ekscVSuGMtzRwoW3nKVlt/Elyf1WyJug1Zre7SU8cq3SgfbkoqIAQmBUPnaZsO
-         BzJnFPUOJU4b5Vg1N3lJQ9C6Sq5d2XjA4iXktD/I/PjakhG4XC4PDIy93csEjeyIRRMA
-         IvoA==
+        bh=KVmPDwxZITmtgoC5eUf4o9Ip79E/bn+hiU5X7sRYdI8=;
+        b=RD6DwODgE1Zxo+s5ADues6psRpgu7EAPxo1+BYJnsAHmmui/8leWv4L5+6F3y5bbxv
+         O++xQN213wfmP6s1nUyFvTF9hoe+gpZq7EIev2u+bc2K8H6ZUbmWyVTp11b+0UgyZVIF
+         gAmGhhBCrBAxv68XFQwvqVcfCNFxEWI/am5kNeKpJ1hyPdNTqcLIfBuzAZUcS6h8Mzu4
+         XsormVe6Y5svznNAgHu7j8D8bBKiPkmvXR5FAd11PEnKvjrNiw6W50Viqs2vxHICOGfR
+         veCJ2YIfjPRjFibLsuTxXBLKI/1/nXQut8ldVASmFa0Xy/3Cfy/jIOh50cvbkQbvE99P
+         w2GA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794410312; x=1795015112;
+        d=1e100.net; s=20260707; t=1794410340; x=1795015140;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=OvqAPG6CT2RbvL3bLsOtVhKVKwAJOZOUSlUMozoAAj4=;
-        b=dzf4zd7jK3QyL4pdAkiBIJ99w1HboFDgQAvwXFoIW3NV2TnNv2D1BXbZMNCQS4oG2Q
-         xW1now6k512QG1LANo6bYOYlL2BFcUQC+2WNboE5z8+uCJa3NvkvazbzBcUio05bT2wI
-         lQDnpZSep1c+itlidwyMEBC4xJZmYWNYf3oIV80K868FOmg1cmtJQXjYWidIj2CHKKyN
-         HEVEdPHeX1702xnUxTStk/M7f1uA+27PTaYuWoj4KN27Ry8F3GKPQ+Fby0dvNaXX5Kxz
-         k/IaW31PJLPv4sjyHeDCbma9gchL9BbzZGSkkysul0OxND5XQ3b2i3dm7NbykUtc8vhl
-         6ouA==
-X-Gm-Message-State: APuU4Z8G1f4D0oquCCOsATo0VcYWTWQGtaVFtE5m/1B9Ol2Dc8l3MShg
-	pa5TrUsZwas+nvHBiFSTKazlclwLxwLQwKni3FbqSEPLcqHHa5YE1o7gYxyjUOVdPEEtVRJp9Yv
-	MzVp32Q==
-X-Gm-Gg: AYBFou3zykuW9jPqD5HiV6YXCYers2WIe6MG4J5VN9q8wi0aOl3TWN0giajAyosY/3n
-	7xng1r9qoM4XUbro9o8pkiunypOBHjaYE/5UggEMeYIVZ6ovzdvE6y+hBIYV2985nDtArq7SwFu
-	iWZSU/zRnUz/ikH06qurQB2GQNxcoIzC0HtGdMiw/KqdXxJ0xKSVBfOeHrOu8DlOoAsXHvYfFwL
-	Mfkz4zLH3IEyaOGMzlbfwJ3V3UgBX6jwmbGKxkPuP9uhVRuO2XoTLNqa6qKh+2vB7LpASDy11+0
-	48QEZ5rlJ3+nvwwwtRI/7aamWq0OZfEXIjaYIo8RLduzKtxy0ipvR/kpQfwSUyA7FAGtq3NaN8N
-	HT16U0YM8ggwhC9lHbwvuzn+HlbnsbqJcQdObiEVKYX4CcMEHcc/FzAXPr7Z19lYu4x7ZtnoTM4
-	1R8ZGl8vhWxxHA151iOXew9mdIAVz4YgeP2jGcMsCt6WBMKxO1ixVzxBt3xneMKzqSukJhht3oz
-	KJVwdiJ37bAPMv6OAMV68OsdiMqkKQS/qhHxUG5oXGtxlIHmUGqVL4IWBZt9lPcXOqd3pjSw1pb
-	f3AxqmhYCutVH+8QI/DJLEFPbzOdJIsccT7A64WriKjKglAwsx0yuyE6/jrKpMHHj6MClrmIXYY
-	BRnTowU9xk4OmysDNmw==
-X-Received: by 2002:a05:6000:611:b0:48b:9d2:1a6a with SMTP id ffacd0b85a97d-499c5783b39mr5190705f8f.1.1794410312226;
-        Wed, 11 Nov 2026 07:18:32 -0800 (PST)
-Message-ID: <42ffc6e1-cf6a-45f6-b8fd-4dfd7f9c4810@suse.com>
-Date: Wed, 11 Nov 2026 16:18:31 +0100
+        bh=KVmPDwxZITmtgoC5eUf4o9Ip79E/bn+hiU5X7sRYdI8=;
+        b=z+EQQT1jipRapwY2FGPC8fKh0UYV8LvaxpKe2Jot0Cb0KaqgRGx0eMXkDi4c0HB/Uf
+         D/El9zrYjlASHt/zzvzbEZo8R0V3aG+t1Uf3dFve+9EblReOZDNq53JAIItYoyD1jwgt
+         t3yh53DBikViLF76t2fF4Waxn2SUTvf5dFkLvdPlg7pdf+qYiS89KDp+1kGx74Swn3Sa
+         pIW/zNi7q0+GWQZucAd+d40QvQwT6TJmwAMJEDV3lBqPguz6HIUCay7ThdsuU0ZmcPRc
+         6IR0sJccSOF9W/nEwGlBJE3nqDJt68ZT3JEPGJwWOw6ZDl3RE1CuhU9yWPmV/PDHOOHV
+         PO8g==
+X-Gm-Message-State: APuU4Z/hki94TbSnuNcB2orEHR6LESprzLByRy2vOeVwN0MG0U0HkRGm
+	2fQW956AVWzFVLcgKPVbyOY5JPDOCnWa+/drK78KV6Gv/6csln+wANX5+mbgikwXGrh5FhAR2V2
+	O9OGetA==
+X-Gm-Gg: AYBFou3L1prDOfTIgZzqDg8ef+SeDROEPHeJ0GzMEQuoWu/fZu3B8TgIu57OskUMnyr
+	Jd37kOL+SSp92oYbs+N1exNOcFjdnVAxm40k2QXogeEAYjfT8iPcmXMm5uhwhHo5Sat1EcXEaC4
+	GP1JvccZF+rdELtZOeNw93ISZELTvfCPynZVcf28CVC6x6hVrUWpAuU1QXs7pLaoG8Wxq1n1UNg
+	uHKM4R/IVc/1O5FV6xXdRjAS6x5ohf0G+NbpIFIjycAKkzUuFlBGTrJKspnMWQDkWk005WhULN6
+	SGuRJ6EUG45lYIRXmMkXM+5GaNDGDO7G0boDGdnFJEglGCWJR6R4OfgK3P0H0DItZgO2zxCVXhV
+	XTa7h+a9u/51/+vAHzxaNu7N075q/OzwVPB6JXMtnl2ypTM6t3ajrT0cjRcPeJOerA6xROMhDCr
+	Xf/Hj37o+bvIZKSzhLyUISO3CZgXFVB1MaD+O7fnOc/7wvYla0F//b5ELZZl9FQ4njc+lpuF4b5
+	1pC+h6xasofARIc8liqhG6fMIp/IPhcIY1zhSsM4XL5eJ1cIJ4leSGfNdyybn16LFL5NKq2LHGE
+	RrK0dKzSwBa9w1idZWbaY+34oD+9Nv85rjRz5yxM2yGRZtyVUrwB37trsOYbrdO97jrHw+cI+0T
+	UywSBpCBMFwDfbWOofpaceDAn+y7qM91gnap5XQ==
+X-Received: by 2002:a05:6000:26c6:b0:498:b92a:30b with SMTP id ffacd0b85a97d-499c68d2ddfmr4874924f8f.15.1794410340236;
+        Wed, 11 Nov 2026 07:19:00 -0800 (PST)
+Message-ID: <f1f6617a-db03-447d-b237-3b9658a342e8@suse.com>
+Date: Wed, 11 Nov 2026 16:18:59 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v4 25/28] x86emul: enable tile management insns for ACE
+Subject: [PATCH v4 26/28] x86emul: enable tile data movement insns for ACE
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -130,9 +130,9 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <0407294d-d605-41f3-a16b-1505d897ef3f@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-33051d/1794410312-7488A4E9-F690A4B0/10/78276251493
+X-purgate-ID: tlsNG-c201ff/1794410340-736BD2A1-3C99919C/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 8466
+X-purgate-size: 10124
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -141,221 +141,214 @@ X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-These are being re-used from AMX, just that with ACE (alone) palette 1
-isn't usable, while palette 2 cannot be used with AMX (alone).
-
-While there also introduce the other two X86EMUL_FPU_*ace*, even if only
-X86EMUL_FPU_acecfg is needed right here.
+Most of these are being re-used from AMX, only TILEMOVCOL and TILEMOVROW
+moving to tile are new.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
 SDE: ???
 ---
+While all ACE-E<n> right now merely say "#UD if TILES_CONFIGURED == 0",
+that's reportedly be incorrect. A requirement for the new insns (enabled
+here and/or by later patches) is that the selected palette be palette 2.
+By implication for the original AMX insns this then also means that they
+need to have palette 1 in use. Except for the few which are available with
+either palette.
+---
 v4: New.
 
---- a/tools/tests/x86_emulator/evex-disp8.c
-+++ b/tools/tests/x86_emulator/evex-disp8.c
-@@ -1202,6 +1202,12 @@ static const struct test amx_tile[] = {
-     INSN(tilestored,  f3, 0f38, 4b, el, d, no),
- };
+--- a/tools/tests/x86_emulator/predicates.c
++++ b/tools/tests/x86_emulator/predicates.c
+@@ -1948,11 +1948,12 @@ static const struct evex {
+     { { 0x49, 0x00 }, 2, F, W, pfx_66, W0, L0 }, /* sttilecfg */
+     { { 0x4a, VSIB(0) }, 3, F, R, pfx_66, W0, L0 }, /* tileloaddrst1 */
+     { { 0x4a, VSIB(0) }, 3, F, R, pfx_f2, W0, L0 }, /* tileloaddrs */
+-    { { 0x4a, 0xc0 }, 2, F, N, pfx_66, W0, L2 }, /* tilemovrow */
++    { { 0x4a, 0xc0 }, 2, F, N, pfx_66, Wn, L2 }, /* tilemovrow */
+     { { 0x4a, 0xc0 }, 2, F, N, pfx_f3, W0, L2 }, /* tcvtrowd2ps */
+     { { 0x4b, VSIB(0) }, 3, F, R, pfx_66, W0, L0 }, /* tileloaddt1 */
+     { { 0x4b, VSIB(0) }, 3, F, W, pfx_f3, W0, L0 }, /* tilestored */
+     { { 0x4b, VSIB(0) }, 3, F, R, pfx_f2, W0, L0 }, /* tileloadd */
++    { { 0x4b, 0xc0 }, 2, F, N, pfx_66, W1, L2 }, /* tilemovcol */
+     { { 0x4c }, 2, T, R, pfx_66, Wn, Ln }, /* vrcp14p{s,d} */
+     { { 0x4d }, 2, T, R, pfx_66, Wn, LIG }, /* vrcp14s{s,d} */
+     { { 0x4e }, 2, T, R, pfx_66, Wn, Ln }, /* vrsqrt14p{s,d} */
+@@ -2108,7 +2109,7 @@ static const struct evex {
+     { { 0x04 }, 3, T, R, pfx_66, W0, Ln }, /* vpermilps */
+     { { 0x05 }, 3, T, R, pfx_66, W1, Ln }, /* vpermilpd */
+     { { 0x07, 0xc0 }, 3, F, N, pfx_no, W0, L2 }, /* tcvtrowps2phh */
+-    { { 0x07, 0xc0 }, 3, F, N, pfx_66, W0, L2 }, /* tilemovrow */
++    { { 0x07, 0xc0 }, 3, F, N, pfx_66, Wn, L2 }, /* tilemovrow */
+     { { 0x07, 0xc0 }, 3, F, N, pfx_f3, W0, L2 }, /* tcvtrowd2ps */
+     { { 0x07, 0xc0 }, 3, F, N, pfx_f2, W0, L2 }, /* tcvtrowps2bf16h */
+     { { 0x08 }, 3, T, R, pfx_no, W0, Ln }, /* vrndscaleph */
+@@ -2140,6 +2141,7 @@ static const struct evex {
+     { { 0x26 }, 3, T, R, pfx_f2, W0, Ln }, /* vgetmantbf16 */
+     { { 0x27 }, 3, T, R, pfx_no, W0, LIG }, /* vgetmantsh */
+     { { 0x27 }, 3, T, R, pfx_66, Wn, LIG }, /* vgetmants{s,d} */
++    { { 0x2f, 0xc0 }, 3, F, N, pfx_66, W1, L2 }, /* tilemovcol */
+     { { 0x38 }, 3, T, R, pfx_66, Wn, L1|L2 }, /* vinserti{32x4,64x2} */
+     { { 0x39 }, 3, T, W, pfx_66, Wn, L1|L2 }, /* vextracti{32x4,64x2} */
+     { { 0x3a }, 3, T, R, pfx_66, Wn, L2 }, /* vinserti{32x8,64x4} */
+--- a/xen/arch/x86/x86_emulate/decode.c
++++ b/xen/arch/x86/x86_emulate/decode.c
+@@ -493,6 +493,7 @@ static const struct ext0f3a_table {
+     [0x25] = { .simd_size = simd_packed_int, .d8s = d8s_vl },
+     [0x26] = { .simd_size = simd_packed_fp, .two_op = 1, .d8s = d8s_vl },
+     [0x27] = { .simd_size = simd_scalar_vexw, .d8s = d8s_dq },
++    [0x2f] = { .simd_size = simd_other, .two_op = 1 },
+     [0x30 ... 0x33] = { .simd_size = simd_other, .two_op = 1 },
+     [0x38] = { .simd_size = simd_128, .d8s = 4 },
+     [0x3a] = { .simd_size = simd_256, .d8s = d8s_vl_by_2 },
+@@ -1315,6 +1316,7 @@ decode_0f38(struct x86_emulate_state *s,
+         break;
  
-+static const struct test ace[] = {
-+    /* Element size is set arbitrarily here. See test_one(). */
-+    INSN(ldtilecfg,     , 0f38, 49, el,    b, no),
-+    INSN(sttilecfg,   66, 0f38, 49, el,    b, no),
-+};
-+
- static const struct test amx_movrs[] = {
-     /* Element size assumes a 1x1 matrix here. See test_one(). */
-     INSN(tileloaddrs,   f2, 0f38, 4a, el, d, no),
-@@ -1842,6 +1848,7 @@ void evex_disp8_test(void *instr, struct
-         } \
-     } while ( false )
+     case X86EMUL_OPC_EVEX_66(0, 0x4a): /* tileloaddrst1 / tilemovrow */
++    case X86EMUL_OPC_EVEX_66(0, 0x4b): /* tileloaddt1 / tilemovcol */
+         if ( s->modrm_mod == 3 )
+         {
+     case X86EMUL_OPC_EVEX_F3(0, 0x4a): /* tcvtrowd2ps */
+@@ -1324,7 +1326,6 @@ decode_0f38(struct x86_emulate_state *s,
+         fallthrough;
+     case X86EMUL_OPC_EVEX(0, 0x49):    /* ldtilecfg */
+     case X86EMUL_OPC_EVEX_F2(0, 0x4a): /* tileloaddrs */
+-    case X86EMUL_OPC_EVEX_66(0, 0x4b): /* tileloaddt1 */
+     case X86EMUL_OPC_EVEX_F2(0, 0x4b): /* tileloadd */
+     case X86EMUL_OPC_EVEX_66(0, 0xe0) ...
+          X86EMUL_OPC_EVEX_66(0, 0xef): /* cmp<cc>xadd */
+@@ -2112,7 +2113,7 @@ int x86emul_decode(struct x86_emulate_st
+                 generate_exception_if(evex_encoded() && !s->evex.u,
+                                       X86_EXC_UD);
  
-+        RUN(ace);
-         RUN(adx);
-         RUN(amx_movrs);
-         RUN(amx_tile);
---- a/tools/tests/x86_emulator/x86-emulate.h
-+++ b/tools/tests/x86_emulator/x86-emulate.h
-@@ -233,6 +233,10 @@ void wrpkru(unsigned int val);
- #define cpu_has_cmpccxadd            cpu_policy.feat.cmpccxadd
- #define cpu_has_avx_ifma            (cpu_policy.feat.avx_ifma && xcr0_mask(6))
- #define cpu_has_movrs                cpu_policy.feat.movrs
-+#define cpu_has_ace                 (cpu_policy.feat.ace && \
-+                                     xcr0_mask(X86_XCR0_TILE_CFG | \
-+                                               X86_XCR0_TILE_DATA | \
-+                                               X86_XCR0_BSR))
- #define cpu_has_avx_vnni_int8       (cpu_policy.feat.avx_vnni_int8 && \
-                                      xcr0_mask(6))
- #define cpu_has_avx_ne_convert      (cpu_policy.feat.avx_ne_convert && \
---- a/xen/arch/x86/x86_emulate/private.h
-+++ b/xen/arch/x86/x86_emulate/private.h
-@@ -621,6 +621,7 @@ amd_like(const struct x86_emulate_ctxt *
- #define vcpu_has_msrlist()     (ctxt->cpuid->feat.msrlist)
- #define vcpu_has_movrs()       (ctxt->cpuid->feat.movrs)
- #define vcpu_has_msr_imm()     (ctxt->cpuid->feat.msr_imm)
-+#define vcpu_has_ace()         (ctxt->cpuid->feat.ace)
- #define vcpu_has_avx_vnni_int8() (ctxt->cpuid->feat.avx_vnni_int8)
- #define vcpu_has_avx_ne_convert() (ctxt->cpuid->feat.avx_ne_convert)
- #define vcpu_has_amx_complex() (ctxt->cpuid->feat.amx_complex)
+-                if ( b != 0x4a || s->modrm_mod != 3 )
++                if ( (b | 1) != 0x4b || s->modrm_mod != 3 )
+                    d |= vSIB;
+             }
+             s->simd_size = ext0f38_table[b].simd_size;
 --- a/xen/arch/x86/x86_emulate/x86_emulate.c
 +++ b/xen/arch/x86/x86_emulate/x86_emulate.c
-@@ -176,6 +176,7 @@ static void sttilecfg(struct x86_tilecfg
- }
+@@ -6818,7 +6818,13 @@ x86_emulate(
  
- #define PALETTE_AMX 1
-+#define PALETTE_ACE 2
+     case X86EMUL_OPC_EVEX_66(0x0f38, 0x4a): /* tileloaddrst1 mem,tmm */
+         if ( ea.type != OP_MEM )
+-            goto tilemovrow;
++        {
++            if ( evex.w )
++                vcpu_must_have(ace);
++            else if ( !vcpu_has_ace() )
++                vcpu_must_have(amx_avx512);
++            goto tilemov_gpr;
++        }
+         fallthrough;
+     case X86EMUL_OPC_EVEX_F2(0x0f38, 0x4a): /* tileloaddrs mem,tmm */
+         generate_exception_if((evex.lr || evex.brs || evex.opmsk || !evex.RX),
+@@ -6830,6 +6836,13 @@ x86_emulate(
+         goto tile_load_store;
  
- #define PALETTE(pal...) TOK_OR(1U << PALETTE_, ## pal)
- 
-@@ -192,6 +193,9 @@ static bool tile_valid(unsigned int tile
-                 */
-                tilecfg->colsb[tile] && tilecfg->rows[tile];
- 
-+    case PALETTE_ACE:
-+        return (palettes & PALETTE(ACE)) && tile < 8;
-+
-     default:
-         break;
-     }
-@@ -511,6 +515,10 @@ int x86emul_get_fpu(
- 
-     switch ( type )
-     {
-+    case X86EMUL_FPU_zmm_ace:
-+        if ( !(state->xcr0 & X86_XCR0_BSR) )
-+            return X86EMUL_UNHANDLEABLE;
+     case X86EMUL_OPC_EVEX_66(0x0f38, 0x4b): /* tileloaddt1 mem,tmm */
++        if ( ea.type != OP_MEM )
++        {
++            generate_exception_if(!evex.w, X86_EXC_UD);
++            vcpu_must_have(ace);
++            goto tilemov_gpr;
++        }
 +        fallthrough;
-     case X86EMUL_FPU_zmm_tile:
-         ASSERT(mode_64bit());
-         if ( !(state->xcr0 & X86_XCR0_TILE_CFG) ||
-@@ -533,6 +541,11 @@ int x86emul_get_fpu(
-             return X86EMUL_UNHANDLEABLE;
-         break;
+     case X86EMUL_OPC_EVEX_F3(0x0f38, 0x4b): /* tilestored tmm,mem */
+     case X86EMUL_OPC_EVEX_F2(0x0f38, 0x4b): /* tileloadd mem,tmm */
+         generate_exception_if(evex.lr || evex.brs || evex.opmsk || !evex.RX,
+@@ -6999,7 +7012,6 @@ x86_emulate(
+         generate_exception_if(vex.w, X86_EXC_UD);
+         goto simd_0f_avx2;
  
-+    case X86EMUL_FPU_acecfg:
-+    case X86EMUL_FPU_ace:
-+        if ( !(state->xcr0 & X86_XCR0_BSR) )
-+            return X86EMUL_UNHANDLEABLE;
-+        fallthrough;
-     case X86EMUL_FPU_tilecfg:
-     case X86EMUL_FPU_tile:
-         ASSERT(mode_64bit());
-@@ -579,6 +592,7 @@ int x86emul_get_fpu(
-         switch ( type )
-         {
-         case X86EMUL_FPU_zmm_tile:
-+        case X86EMUL_FPU_zmm_ace:
-             xcr0_needed = X86_XCR0_TILE_DATA;
-             fallthrough;
-         default:
-@@ -595,9 +609,11 @@ int x86emul_get_fpu(
-             break;
+-    tilemovrow:                             /* tilemovrow r32,tmm,zmm */
+     case X86EMUL_OPC_EVEX_F3(0x0f38, 0x4a): /* tcvtrowd2ps r32,tmm,zmm */
+     case X86EMUL_OPC_EVEX   (0x0f38, 0x6d): /* tcvtrowps2phh r32,tmm,zmm */
+     case X86EMUL_OPC_EVEX_66(0x0f38, 0x6d): /* tcvtrowps2phl r32,tmm,zmm */
+@@ -7008,20 +7020,36 @@ x86_emulate(
+         if ( ea.type != OP_REG )
+             goto unrecognized_insn;
+         vcpu_must_have(amx_avx512);
+-        generate_exception_if((evex.w || evex.brs || evex.opmsk ||
+-                               evex.lr != 2 ||
++        generate_exception_if(evex.w, X86_EXC_UD);
++    tilemov_gpr:                            /* tilemovrow r32,tmm,zmm */
++                                            /* tilemovrow r32,zmm,tmm */
++                                            /* tilemovcol r32,zmm,tmm */
++        generate_exception_if((evex.brs || evex.opmsk || evex.lr != 2 ||
+                                (!evex.RX && !(state->xcr0 & X86_XCR0_APX))),
+                               X86_EXC_UD);
  
-         case X86EMUL_FPU_tilecfg:
-+        case X86EMUL_FPU_acecfg:
-             break;
+     tilemov:
+-        get_fpu(X86EMUL_FPU_zmm_tile);
++        get_fpu(X86EMUL_FPU_tilecfg);
+         sttilecfg(&mmvalp->tilecfg);
++        put_fpu(X86EMUL_FPU_tilecfg, false, state, ctxt, ops);
++        fpu_type = X86EMUL_FPU_none;
  
-         case X86EMUL_FPU_tile:
-+        case X86EMUL_FPU_ace:
-             xcr0_needed = X86_XCR0_TILE_DATA;
-             break;
-         }
-@@ -6672,7 +6688,8 @@ x86_emulate(
-             switch ( modrm )
-             {
-             case 0xc0: /* tilerelease */
--                vcpu_must_have(amx_tile);
-+                if ( !vcpu_has_ace() )
-+                    vcpu_must_have(amx_tile);
-                 get_fpu(X86EMUL_FPU_tilecfg);
-                 op_bytes = 1; /* fake */
-                 goto simd_0f_common;
-@@ -6686,8 +6703,8 @@ x86_emulate(
-         {
-         case 0: /* ldtilecfg mem */
-             generate_exception_if(vex.reg != 0xf, X86_EXC_UD);
--            vcpu_must_have(amx_tile);
--            get_fpu(X86EMUL_FPU_tilecfg);
-+            if ( !vcpu_has_ace() )
-+                vcpu_must_have(amx_tile);
-             rc = ops->read(ea.mem.seg, ea.mem.off, mmvalp, 64, ctxt);
-             if ( rc != X86EMUL_OKAY )
-                 goto done;
-@@ -6697,12 +6714,15 @@ x86_emulate(
-             switch ( mmvalp->tilecfg.palette )
-             {
-             case 0: /* init */
-+                get_fpu(X86EMUL_FPU_tilecfg);
-                 break;
- 
-             case PALETTE_AMX:
-             {
-                 const typeof(cp->tile.palette1) *palette = &cp->tile.palette1;
- 
-+                generate_exception_if(!vcpu_has_amx_tile(), X86_EXC_UD);
-+                get_fpu(X86EMUL_FPU_tilecfg);
-                 generate_exception_if(memchr_inv(mmvalp->tilecfg.res, 0,
-                                                  sizeof(mmvalp->tilecfg.res)),
-                                       X86_EXC_GP, 0);
-@@ -6729,6 +6749,20 @@ x86_emulate(
-                 break;
-             }
- 
-+            case PALETTE_ACE:
-+                generate_exception_if(!vcpu_has_ace(), X86_EXC_UD);
-+                get_fpu(X86EMUL_FPU_acecfg);
-+                generate_exception_if(memchr_inv(((void *)mmvalp +
-+                                                  endof_field(struct x86_tilecfg,
-+                                                              palette)),
-+                                                 0,
-+                                                 (sizeof(mmvalp->tilecfg) -
-+                                                  endof_field(struct x86_tilecfg,
-+                                                              palette))),
-+                                      X86_EXC_GP, 0);
+-        generate_exception_if(!tile_valid(modrm_rm, &mmvalp->tilecfg,
+-                                          PALETTE(AMX)),
+-                              X86_EXC_UD);
+-        generate_exception_if(mmvalp->tilecfg.colsb[modrm_rm] & 3,
+-                              X86_EXC_UD);
++        if ( evex.w )
++            generate_exception_if(!tile_valid(modrm_reg, &mmvalp->tilecfg,
++                                              PALETTE(ACE)),
++                                  X86_EXC_UD);
++        else
++        {
++            generate_exception_if(!tile_valid(modrm_rm, &mmvalp->tilecfg,
++                                              PALETTE(AMX, ACE)),
++                                  X86_EXC_UD);
++            generate_exception_if((mmvalp->tilecfg.palette == PALETTE_AMX &&
++                                   (mmvalp->tilecfg.colsb[modrm_rm] & 3)),
++                                  X86_EXC_UD);
++        }
 +
-+                break;
++        get_fpu(mmvalp->tilecfg.palette == PALETTE_AMX ? X86EMUL_FPU_zmm_tile
++                                                       : X86EMUL_FPU_zmm_ace);
+ 
+         /*
+          * Note: For the immediate forms this decodes %rax, but the value isn't
+@@ -8331,8 +8359,26 @@ x86_emulate(
+         fault_suppression = false;
+         goto avx512f_imm8_no_sae;
+ 
+-    case X86EMUL_OPC_EVEX   (0x0f3a, 0x07): /* tcvtrowps2phh $imm8,tmm,zmm */
++    case X86EMUL_OPC_EVEX_66(0x0f3a, 0x2f): /* tilemovcol $imm8,zmm,tmm */
++        if ( ea.type != OP_REG )
++            goto unrecognized_insn;
++        generate_exception_if(!evex.w, X86_EXC_UD);
++        vcpu_must_have(ace);
++        goto tilemov_imm;
 +
-             default:
-                 generate_exception(X86_EXC_GP, 0);
-             }
-@@ -6751,7 +6785,8 @@ x86_emulate(
-         switch ( modrm_reg & 7 )
-         {
-         case 0: /* sttilecfg mem */
--            vcpu_must_have(amx_tile);
-+            if ( !vcpu_has_ace() )
-+                vcpu_must_have(amx_tile);
-             get_fpu(X86EMUL_FPU_tilecfg);
-             op_bytes = 64;
-             goto simd_0f_common;
-@@ -6765,11 +6800,12 @@ x86_emulate(
-             switch ( modrm_rm & 7 )
-             {
-             case 0: /* tilezero */
--                vcpu_must_have(amx_tile);
-+                if ( !vcpu_has_ace() )
-+                    vcpu_must_have(amx_tile);
-                 get_fpu(X86EMUL_FPU_tile);
-                 sttilecfg(&mmvalp->tilecfg);
-                 generate_exception_if(!tile_valid(modrm_reg, &mmvalp->tilecfg,
--                                                  PALETTE(AMX)),
-+                                                  PALETTE(AMX, ACE)),
-                                       X86_EXC_UD);
-                 op_bytes = 1; /* fake */
-                 goto simd_0f_common;
---- a/xen/arch/x86/x86_emulate/x86_emulate.h
-+++ b/xen/arch/x86/x86_emulate/x86_emulate.h
-@@ -88,6 +88,9 @@ enum x86_emulate_fpu_type {
-     X86EMUL_FPU_tilecfg, /* AMX configuration (tilecfg) */
-     X86EMUL_FPU_tile, /* AMX instruction set (%tmm0-%tmmN) */
-     X86EMUL_FPU_zmm_tile, /* AMX and AVX512/AVX10 instruction sets */
-+    X86EMUL_FPU_acecfg, /* ACE configuration (tilecfg) */
-+    X86EMUL_FPU_ace, /* ACE instruction set (%tmm0-%tmmN, %bsr0) */
-+    X86EMUL_FPU_zmm_ace, /* ACE plus %zmmN */
-     /* This sentinel will never be passed to ->get_fpu(). */
-     X86EMUL_FPU_none
- };
+     case X86EMUL_OPC_EVEX_66(0x0f3a, 0x07): /* tilemovrow $imm8,tmm,zmm */
++                                            /* tilemovrow $imm8,zmm,tmm */
++        if ( ea.type == OP_REG )
++        {
++            if ( evex.w )
++                vcpu_must_have(ace);
++            else if ( !vcpu_has_ace() )
++                vcpu_must_have(amx_avx512);
++            goto tilemov_imm;
++        }
++        goto unrecognized_insn;
++
++    case X86EMUL_OPC_EVEX   (0x0f3a, 0x07): /* tcvtrowps2phh $imm8,tmm,zmm */
+     case X86EMUL_OPC_EVEX_F3(0x0f3a, 0x07): /* tcvtrowd2ps $imm8,tmm,zmm */
+     case X86EMUL_OPC_EVEX_F2(0x0f3a, 0x07): /* tcvtrowps2bf16h $imm8,tmm,zmm */
+     case X86EMUL_OPC_EVEX_F3(0x0f3a, 0x77): /* tcvtrowps2bf16l $imm8,tmm,zmm */
+@@ -8340,8 +8386,10 @@ x86_emulate(
+         if ( ea.type != OP_REG )
+             goto unrecognized_insn;
+         vcpu_must_have(amx_avx512);
+-        generate_exception_if((evex.w || evex.brs || evex.opmsk ||
+-                               evex.lr != 2 || evex.reg != 0xf || !evex.RX),
++        generate_exception_if(evex.w, X86_EXC_UD);
++    tilemov_imm:
++        generate_exception_if((evex.brs || evex.opmsk || evex.lr != 2 ||
++                               evex.reg != 0xf || !evex.RX),
+                               X86_EXC_UD);
+         goto tilemov;
+ 
 
 
