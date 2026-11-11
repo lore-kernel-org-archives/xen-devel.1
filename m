@@ -2,44 +2,44 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5521C606A8B1
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2026 18:09:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CB9AD606A8AF
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2026 18:09:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=casper.20170209 header.b=RO98a0B7
-Received: from list by lists.xenproject.org with outflank-mailman.1484487.1687880 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=desiato.20200630 header.b=B0c6cVsS
+Received: from list by lists.xenproject.org with outflank-mailman.1484476.1687803 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRClO-0001CW-Sr; Wed, 11 Nov 2026 18:09:38 +0000
+	id 1xRClI-0008Ag-6B; Wed, 11 Nov 2026 18:09:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1484487.1687880; Wed, 11 Nov 2026 18:09:38 +0000
+Received: by outflank-mailman (output) from mailman id 1484476.1687803; Wed, 11 Nov 2026 18:09:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRClO-00018r-2z; Wed, 11 Nov 2026 18:09:38 +0000
-Received: by outflank-mailman (input) for mailman id 1484487;
- Wed, 11 Nov 2026 18:09:31 +0000
+	id 1xRClI-0008AY-3F; Wed, 11 Nov 2026 18:09:32 +0000
+Received: by outflank-mailman (input) for mailman id 1484476;
+ Wed, 11 Nov 2026 18:09:30 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <BATV+abad5507353db368323c+8480+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1xRClH-00089Q-HG
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 18:09:31 +0000
+ <BATV+6fbd95a72608138381e9+8480+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 1xRClG-0007s2-6A
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 18:09:30 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xRClG-00Gwen-UJ; Wed, 11 Nov 2026 19:09:30 +0100
-Received: from [10.42.69.7] (helo=localhost)
+ id 1xRClF-00Gwen-Gg; Wed, 11 Nov 2026 19:09:29 +0100
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <BATV+abad5507353db368323c+8480+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6af4af58-8faa-0a2a0a5109dd-0a2a4507e552-4
- for <multiple-recipients>; Wed, 11 Nov 2026 19:09:30 +0100
-Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ <BATV+6fbd95a72608138381e9+8480+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 6af4af3c-8faa-0a2a0a5109dd-0a2a45069894-48
+ for <multiple-recipients>; Wed, 11 Nov 2026 19:09:28 +0100
+Received: from [90.155.92.199] (helo=desiato.infradead.org)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <BATV+abad5507353db368323c+8480+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6af4af55-b4ea-0a2a45070019-5a9b3222c96c-3
- for <multiple-recipients>; Wed, 11 Nov 2026 19:09:25 +0100
+ <BATV+6fbd95a72608138381e9+8480+infradead.org+dwmw2@desiato.srs.infradead.org>)
+ id 6af4af57-195a-0a2a45060019-5a9b5cc7d51a-3
+ for <multiple-recipients>; Wed, 11 Nov 2026 19:09:28 +0100
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
- by casper.infradead.org with esmtpsa (Exim 4.100.1 #2 (Red Hat Linux))
- id 1xRCl9-0000000CKvX-1aUq; Wed, 11 Nov 2026 18:09:23 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.100.1 #2 (Red Hat Linux))
+ id 1xRClB-00000009PvN-3CJy; Wed, 11 Nov 2026 18:09:25 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.5 #2 (Red
- Hat Linux)) id 1xRCl9-0000000HWse-0mBy;
+ Hat Linux)) id 1xRCl9-0000000HWsW-0ONu;
  Wed, 11 Nov 2026 18:09:23 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -48,17 +48,17 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=desiato.20200630 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
 	Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:
 	To:From:Reply-To:Content-ID:Content-Description;
-	bh=rukGdvZHi+FYhueyc7C7kJqyRtxzfRo4uOsIZilmUF4=; b=RO98a0B7yQvAbZcLbDxRyDWDE5
-	s1WsfHsDLoUB6ke24xUkdT14WCZ7nyXPDpjPEYombjtX59iNOL/LbKsHxhcb7So2o5DWKS/h5SKoP
-	n6h/DeoanEookLBmxtYUdkNfhvnGZGsRoOqDQM1LtqnQRCi8Mfdngja01poMjmPGotwO4stJnryH5
-	QLbsApgO2GilT/H0+/I+942mIHdlZekyse+kIn4iGXgtKZj3TanL9Z/e0PmcFp+8LnOaamiev4skt
-	OUKu9voFytCpj/XFSPl5j/Z2QtoPxrHmtzj/EEXrWwFREd2u1y0vRTCgNTYeuvuM30/ACbW6lMd61
-	hfmFH4tw==;
+	bh=vWs4t5uxl9jHxvt00tM8dY6zv888q/Xb7jvTWjeauvw=; b=B0c6cVsSxce2OrrqxC/zRui5F5
+	Dz5AvMue4Sv/ggFoLJPcscu4jQ2t/mbe8NsBBgsFONIdLXMf/1TuOTjrC7eg84Jy4OEEfhzW0BxBk
+	zmhWDaef/8um3IflDZOaVmKbiXcFF06V2cA+cpTEjwebiyWi/Sqh6m8QDYSIa30HzqvMw+txcFOuY
+	3ReiaJO74Zg1lCyFEgM6kWjc3yF0DWQoR5Yyq3W6IpzbgMIp/giuE6K0lPyEPnG6ah46LNofAyBfg
+	9BVFanOuzGu6OxCh6bGsQ1IX5MGwusfghV698fp+p5F8OJSgzwtbhC2Zy5hHCwaF6ezbMujeTZ1sC
+	cQl6Yh+A==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: kvm@vger.kernel.org
 Cc: linux-kernel@vger.kernel.org,
@@ -87,9 +87,9 @@ Cc: linux-kernel@vger.kernel.org,
 	Dongli Zhang <dongli.zhang@oracle.com>,
 	joe.jin@oracle.com,
 	David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v13 10/26] KVM: x86: Re-synchronize TSC after KVM_SET_TSC_KHZ
-Date: Wed, 11 Nov 2026 10:09:06 -0800
-Message-ID: <20261111180922.4177927-11-dwmw2@infradead.org>
+Subject: [PATCH v13 08/26] KVM: x86: Avoid redundant masterclock updates from multiple vCPUs
+Date: Wed, 11 Nov 2026 10:09:04 -0800
+Message-ID: <20261111180922.4177927-9-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261111180922.4177927-1-dwmw2@infradead.org>
 References: <20261111180922.4177927-1-dwmw2@infradead.org>
@@ -98,10 +98,10 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-ef75cf/1794420570-A50CDAE4-1F2AB3D8/0/0
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
+X-purgate-ID: tlsNG-16d1c6/1794420568-1FECC77B-24D56A9F/0/0
 X-purgate-type: clean
-X-purgate-size: 20993
+X-purgate-size: 10605
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -112,513 +112,282 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-KVM_SET_TSC_KHZ changes the vCPU's TSC scaling ratio but not the
-VM-wide cur_tsc_scaling_ratio used by get_kvmclock(), which then
-computes the KVM clock with a stale ratio and drifts away from what
-the guest observes.
+When a masterclock update is triggered (e.g. by the clocksource change
+notifier), KVM_REQ_MASTERCLOCK_UPDATE is set on all vCPUs, and each of
+them independently re-executed the whole pvclock_update_vm_gtod_copy()
+sequence, serialized only by tsc_write_lock. Every redundant
+re-snapshot moves the reference point.
 
-Re-synchronize the TSC after a frequency change. That updates the
-VM-wide scaling ratio, keeps the guest TSC value continuous across the
-change, and establishes the new generation for subsequent vCPUs to
-match. Two cases are skipped: vCPU creation, which is not yet counted
-in online_vcpus (the postcreate synchronization covers it), and an
-unchanged frequency, which is documented as a no-op — tested before
-anything which could fail, since creation commits a frequency even
-when set_tsc_khz() cannot honour it, and a repeated set of that same
-frequency must not turn into -EINVAL.
+Let the first vCPU to take the lock do the update and clear the
+request on the others, which then bail out; the caller in
+vcpu_enter_guest() uses the non-clearing kvm_test_request(), since the
+clearing happens under the lock. Concurrent updaters are refcounted:
+each broadcasts its KVM_REQ_MCLOCK_INPROGRESS kicks before contending
+for the lock, and only the last one out releases them, so a finishing
+updater cannot free vCPUs into the guest while another update is in
+flight. The seqcount write section opens before the pending requests
+are consumed — a vCPU which sees its request gone and heads into
+kvm_guest_time_update() spins until the new snapshot is live — and
+closes before the KVM_REQ_CLOCK_UPDATE broadcast, so readers do not
+spin across the request loops. Those loops run with interrupts off
+under tsc_write_lock: bounded by the vCPU count, paid once per
+deduplicated update.
 
-The preserved value is sampled as a {guest TSC, host clock} tuple and
-the new offset is computed against the tuple's own reference point,
-not against "now", so delay between sample and installation costs
-nothing. Preemption stays disabled from the sample until
-tsc_write_lock is held: this task's own preempt notifier is the one
-writer which could apply a pending backwards-TSC compensation to the
-offset the sample was read through, and one still pending at the lock
-is folded in there. A failed ioctl commits nothing, so a retry does
-not masquerade as a frequency change (creation commits regardless, as
-it always has — its caller ignores the return value).
+Since the update now consumes pending requests, the Hyper-V
+reenlightenment notifier must invalidate the Hyper-V TSC page itself;
+previously a surviving request refreshed the page later.
 
-A kernel-internal call is distinguished from a userspace write by an
-explicit user_initiated parameter: the internal call must not set
-user_set_tsc and arm the 1-second slop heuristic before userspace has
-ever written a TSC. Because the internal sample is exact it gets a 1ms
-matching window instead of the legacy API's 1-second slop: a vCPU on
-the generation's timeline still matches, but one which genuinely
-diverged (a guest TSC_ADJUST write) keeps its exact value. Values
-preserved from the old frequency diverge from the new generation's
-line at |F1-F2| per unit time — the honest cost of preserving them.
+Deduplication also strips the paper off an old race on the Hyper-V
+TSC page which the preceding commit fixed properly: every vCPU
+re-running the broadcast used to re-mark the page by accident, so the
+masterclock update paths must now re-mark it on purpose, as
+KVM_SET_CLOCK already does, once the new snapshot is published.
 
-Only a vCPU which has run, or whose TSC userspace explicitly wrote,
-has a value worth preserving; track that with a new per-vCPU
-user_set_tsc flag, since the VM-wide flag would let one vCPU's
-restored TSC cause a sibling's unrestored creation-time value to be
-preserved. A never-run vCPU is synchronized as for a zero write,
-landing on the generation's timeline at the new frequency.
-
-The arithmetic corners — a tuple sampled just before a sibling opens a
-newer generation, the wrap-safe matching window, the zero clamp for an
-unrun vCPU forced onto a younger generation — are documented where
-they live, in __kvm_synchronize_tsc_at(). The virtual_tsc_mult/shift
-pair is still published non-atomically, exactly as it always was. A
-KVM_GET_CLOCK issued before the resulting masterclock update is
-serviced still returns the correct time: the masterclock snapshot is
-self-consistent, and the ns it yields is independent of the guest
-frequency it encodes.
-
+Suggested-by: Dongli Zhang <dongli.zhang@oracle.com>
+Tested-by: Dongli Zhang <dongli.zhang@oracle.com>
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- Documentation/virt/kvm/api.rst  |   8 +
  arch/x86/include/asm/kvm_host.h |   1 +
- arch/x86/kvm/msrs.c             |   2 +-
- arch/x86/kvm/x86.c              | 284 ++++++++++++++++++++++++++++----
- arch/x86/kvm/x86.h              |   2 +-
- 5 files changed, 260 insertions(+), 37 deletions(-)
+ arch/x86/kvm/msrs.c             |  11 ++-
+ arch/x86/kvm/x86.c              | 122 +++++++++++++++++++++++++++-----
+ 3 files changed, 115 insertions(+), 19 deletions(-)
 
-diff --git a/Documentation/virt/kvm/api.rst b/Documentation/virt/kvm/api.rst
-index ddc61ea36ac5..9487afc4431f 100644
---- a/Documentation/virt/kvm/api.rst
-+++ b/Documentation/virt/kvm/api.rst
-@@ -2023,6 +2023,14 @@ If the KVM_CAP_VM_TSC_CONTROL capability is advertised, this can also
- be used as a vm ioctl to set the initial tsc frequency of subsequently
- created vCPUs.  Note, the vm ioctl is only allowed prior to creating vCPUs.
- 
-+Changing the frequency of a vCPU with the vcpu ioctl re-synchronizes
-+its TSC: for a vCPU which has run, or whose TSC userspace has written,
-+the current guest TSC value is preserved across the change (the TSC
-+offset, as visible through the KVM_VCPU_TSC_OFFSET attribute, is
-+rewritten accordingly); otherwise the vCPU is synchronized to the
-+VM's existing TSC timeline at the new frequency. Setting the current
-+frequency again is a no-op.
-+
- For TSC protected Confidential Computing (CoCo) VMs where TSC frequency
- is configured once at VM scope and remains unchanged during VM's
- lifetime, the vm ioctl should be used to configure the TSC frequency
 diff --git a/arch/x86/include/asm/kvm_host.h b/arch/x86/include/asm/kvm_host.h
-index 3f5aa1d3f6bb..773df58898ea 100644
+index 74306a81e882..3f5aa1d3f6bb 100644
 --- a/arch/x86/include/asm/kvm_host.h
 +++ b/arch/x86/include/asm/kvm_host.h
-@@ -888,6 +888,7 @@ struct kvm_vcpu_arch {
- 	u64 this_tsc_write;
- 	u64 this_tsc_generation;
- 	u64 this_tsc_freq_generation;
-+	bool user_set_tsc;
- 	bool tsc_catchup;
- 	bool tsc_always_catchup;
- 	s8 virtual_tsc_shift;
+@@ -1241,6 +1241,7 @@ struct kvm_arch {
+ 	raw_spinlock_t tsc_write_lock;
+ 	u32 cur_tsc_khz;
+ 	u64 cur_tsc_scaling_ratio;
++	int mclock_updaters; /* protected by tsc_write_lock */
+ 	u64 cur_tsc_nsec;
+ 	u64 cur_tsc_write;
+ 	u64 cur_tsc_offset;
 diff --git a/arch/x86/kvm/msrs.c b/arch/x86/kvm/msrs.c
-index 26eb30f10c43..d07831b5dfb8 100644
+index a2dffa1c706f..26eb30f10c43 100644
 --- a/arch/x86/kvm/msrs.c
 +++ b/arch/x86/kvm/msrs.c
-@@ -1645,7 +1645,7 @@ int kvm_set_msr_common(struct kvm_vcpu *vcpu, struct msr_data *msr_info)
- 		break;
- 	case MSR_IA32_TSC:
- 		if (msr_info->host_initiated) {
--			kvm_synchronize_tsc(vcpu, &data);
-+			kvm_synchronize_tsc(vcpu, &data, true);
- 		} else if (!vcpu->arch.guest_tsc_protected) {
- 			u64 adj = kvm_compute_l1_tsc_offset(vcpu, rdtsc(), data) -
- 				  vcpu->arch.l1_tsc_offset;
+@@ -1278,10 +1278,15 @@ static void kvm_write_system_time(struct kvm_vcpu *vcpu, gpa_t system_time,
+ 	struct kvm_arch *ka = &vcpu->kvm->arch;
+ 
+ 	if (vcpu->vcpu_id == 0 && !host_initiated) {
+-		if (ka->boot_vcpu_runs_old_kvmclock != old_msr)
++		/*
++		 * Store the flag before requesting the masterclock update:
++		 * the update may now be performed by another vCPU (which
++		 * consumes this request), and it must observe the new value.
++		 */
++		if (ka->boot_vcpu_runs_old_kvmclock != old_msr) {
++			ka->boot_vcpu_runs_old_kvmclock = old_msr;
+ 			kvm_make_request(KVM_REQ_MASTERCLOCK_UPDATE, vcpu);
+-
+-		ka->boot_vcpu_runs_old_kvmclock = old_msr;
++		}
+ 	}
+ 
+ 	vcpu->arch.time = system_time;
 diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-index 1d4b66257b35..cf35363366f1 100644
+index f7af94d8b3bb..0b3b04a156da 100644
 --- a/arch/x86/kvm/x86.c
 +++ b/arch/x86/kvm/x86.c
-@@ -1073,10 +1073,20 @@ static int set_tsc_khz(struct kvm_vcpu *vcpu, u32 user_tsc_khz, bool scale)
+@@ -1756,13 +1756,72 @@ static void pvclock_update_vm_gtod_copy(struct kvm *kvm)
+ 
+ static void kvm_make_mclock_inprogress_request(struct kvm *kvm)
+ {
++	unsigned long flags;
++
++	/*
++	 * Count updaters in flight: several can broadcast their
++	 * KVM_REQ_MCLOCK_INPROGRESS kicks and then contend for
++	 * tsc_write_lock, and whoever finishes (or bails out) first must
++	 * not clear the kicks out from under the updates still pending —
++	 * vCPUs would re-enter the guest mid-update and miss the
++	 * un-kicked KVM_REQ_CLOCK_UPDATE made at the end.
++	 */
++	raw_spin_lock_irqsave(&kvm->arch.tsc_write_lock, flags);
++	kvm->arch.mclock_updaters++;
++	raw_spin_unlock_irqrestore(&kvm->arch.tsc_write_lock, flags);
++
+ 	kvm_make_all_cpus_request(kvm, KVM_REQ_MCLOCK_INPROGRESS);
+ }
+ 
+-static void __kvm_start_pvclock_update(struct kvm *kvm)
++/* Drop an updater; the last one out re-allows guest entries. */
++static void kvm_put_mclock_updater(struct kvm *kvm)
++{
++	struct kvm_vcpu *vcpu;
++	unsigned long i;
++
++	lockdep_assert_held(&kvm->arch.tsc_write_lock);
++
++	if (--kvm->arch.mclock_updaters)
++		return;
++
++	kvm_for_each_vcpu(i, vcpu, kvm)
++		kvm_clear_request(KVM_REQ_MCLOCK_INPROGRESS, vcpu);
++}
++
++static bool __kvm_start_pvclock_update(struct kvm *kvm, struct kvm_vcpu *requesting_vcpu)
+ {
++	struct kvm_vcpu *vcpu;
++	unsigned long i;
++
+ 	raw_spin_lock_irq(&kvm->arch.tsc_write_lock);
++
++	/*
++	 * If another vCPU already did the update while we were waiting
++	 * for the lock, our request will have been cleared. Bail out,
++	 * dropping this updater's hold on KVM_REQ_MCLOCK_INPROGRESS.
++	 */
++	if (requesting_vcpu &&
++	    !kvm_test_request(KVM_REQ_MASTERCLOCK_UPDATE, requesting_vcpu)) {
++		kvm_put_mclock_updater(kvm);
++		raw_spin_unlock_irq(&kvm->arch.tsc_write_lock);
++		return false;
++	}
++
++	/*
++	 * Open the seqcount before consuming the other vCPUs' requests:
++	 * a vCPU which sees its KVM_REQ_MASTERCLOCK_UPDATE gone and goes
++	 * straight to kvm_guest_time_update() must then spin on the
++	 * seqcount until the new snapshot is live, rather than read the
++	 * old one (and, via kvm_hv_setup_tsc_page(), consume the Hyper-V
++	 * TSC page's pending state against it).
++	 */
+ 	write_seqcount_begin(&kvm->arch.pvclock_sc);
++
++	/* The update is VM-wide; prevent other vCPUs from redoing it. */
++	kvm_for_each_vcpu(i, vcpu, kvm)
++		kvm_clear_request(KVM_REQ_MASTERCLOCK_UPDATE, vcpu);
++
++	return true;
+ }
+ 
+ static void kvm_start_pvclock_update(struct kvm *kvm)
+@@ -1770,7 +1829,7 @@ static void kvm_start_pvclock_update(struct kvm *kvm)
+ 	kvm_make_mclock_inprogress_request(kvm);
+ 
+ 	/* no guest entries from this point */
+-	__kvm_start_pvclock_update(kvm);
++	__kvm_start_pvclock_update(kvm, NULL);
+ }
+ 
+ static void kvm_end_pvclock_update(struct kvm *kvm)
+@@ -1779,14 +1838,22 @@ static void kvm_end_pvclock_update(struct kvm *kvm)
+ 	struct kvm_vcpu *vcpu;
+ 	unsigned long i;
+ 
++	/*
++	 * The new snapshot is complete; close the seqcount first so
++	 * readers stop spinning while the requests are broadcast. The
++	 * CLOCK_UPDATE requests must precede the release of the
++	 * INPROGRESS holds, so that a vCPU allowed back into the guest
++	 * is guaranteed to refresh its pvclock on the way in.
++	 */
+ 	write_seqcount_end(&ka->pvclock_sc);
+-	raw_spin_unlock_irq(&ka->tsc_write_lock);
++
+ 	kvm_for_each_vcpu(i, vcpu, kvm)
+ 		kvm_make_request(KVM_REQ_CLOCK_UPDATE, vcpu);
+ 
+-	/* guest entries allowed */
+-	kvm_for_each_vcpu(i, vcpu, kvm)
+-		kvm_clear_request(KVM_REQ_MCLOCK_INPROGRESS, vcpu);
++	/* guest entries allowed, unless another update is in flight */
++	kvm_put_mclock_updater(kvm);
++
++	raw_spin_unlock_irq(&ka->tsc_write_lock);
+ }
+ 
+ /*
+@@ -1819,12 +1886,27 @@ static void kvm_hv_remark_tsc_page(struct kvm *kvm)
+ #endif
+ }
+ 
+-static void kvm_update_masterclock(struct kvm *kvm)
++static void kvm_update_masterclock(struct kvm *kvm, struct kvm_vcpu *vcpu)
+ {
++	/*
++	 * The Hyper-V TSC page request is made before the dedupe check
++	 * in __kvm_start_pvclock_update() because it takes a mutex and
++	 * so cannot sit inside the tsc_write_lock critical section where
++	 * the winning updater is known. A losing vCPU may therefore mark
++	 * the page HOST_CHANGED after the winner has already rewritten
++	 * it; the next clock update then rewrites the page again with
++	 * the same contents, which the TSC-page sequence protocol makes
++	 * safe against concurrently running guests.
++	 */
+ 	kvm_hv_request_tsc_page_update(kvm);
+-	kvm_start_pvclock_update(kvm);
+-	pvclock_update_vm_gtod_copy(kvm);
+-	kvm_end_pvclock_update(kvm);
++	kvm_make_mclock_inprogress_request(kvm);
++
++	if (__kvm_start_pvclock_update(kvm, vcpu)) {
++		pvclock_update_vm_gtod_copy(kvm);
++		kvm_end_pvclock_update(kvm);
++
++		kvm_hv_remark_tsc_page(kvm);
++	}
+ }
+ 
+ /*
+@@ -4604,7 +4686,6 @@ static int kvm_vm_ioctl_set_clock(struct kvm *kvm, void __user *argp)
+ 	ka->kvmclock_offset = data.clock - now_raw_ns;
+ 	kvm_end_pvclock_update(kvm);
+ 
+-	/* As in kvm_update_masterclock(): re-mark after publishing. */
+ 	kvm_hv_remark_tsc_page(kvm);
  	return 0;
  }
+@@ -6961,9 +7042,18 @@ static void kvm_hyperv_tsc_notifier(void)
+ 	kvm_caps.max_guest_tsc_khz = tsc_khz;
  
--static int kvm_set_tsc_khz(struct kvm_vcpu *vcpu, u32 user_tsc_khz)
-+static void __kvm_synchronize_tsc_at(struct kvm_vcpu *vcpu, u64 *value,
-+				     u64 host_tsc, s64 ns,
-+				     bool user_initiated);
-+
-+static int kvm_set_tsc_khz(struct kvm_vcpu *vcpu, u32 user_tsc_khz, bool init)
- {
-+	bool freq_changed = (vcpu->arch.virtual_tsc_khz != user_tsc_khz);
- 	u32 thresh_lo, thresh_hi;
-+	u32 tsc_mult;
-+	s8 tsc_shift;
- 	int use_scaling = 0;
-+	u64 tsc, host_tsc;
-+	unsigned long flags;
-+	s64 ns;
- 
- 	/* tsc_khz can be zero if TSC calibration fails */
- 	if (user_tsc_khz == 0) {
-@@ -1085,11 +1095,19 @@ static int kvm_set_tsc_khz(struct kvm_vcpu *vcpu, u32 user_tsc_khz)
- 		return -1;
- 	}
- 
-+	/*
-+	 * Setting the current frequency again is a no-op, as documented
-+	 * — unconditionally, including a frequency the hardware could
-+	 * not honour at vCPU creation (which commits it regardless):
-+	 * re-running set_tsc_khz() would turn the documented no-op into
-+	 * -EINVAL.
-+	 */
-+	if (!init && !freq_changed)
-+		return 0;
-+
- 	/* Compute a scale to convert nanoseconds in TSC cycles */
- 	kvm_get_time_scale(user_tsc_khz * 1000LL, NSEC_PER_SEC,
--			   &vcpu->arch.virtual_tsc_shift,
--			   &vcpu->arch.virtual_tsc_mult);
--	vcpu->arch.virtual_tsc_khz = user_tsc_khz;
-+			   &tsc_shift, &tsc_mult);
- 
- 	/*
- 	 * Compute the variation in TSC rate which is acceptable
-@@ -1104,7 +1122,92 @@ static int kvm_set_tsc_khz(struct kvm_vcpu *vcpu, u32 user_tsc_khz)
- 			 user_tsc_khz, thresh_lo, thresh_hi);
- 		use_scaling = 1;
- 	}
--	return set_tsc_khz(vcpu, user_tsc_khz, use_scaling);
-+
-+	/*
-+	 * Sample the guest TSC before changing the ratio, so continuity
-+	 * can be preserved across the change — as a {guest TSC, host
-+	 * clock} tuple, not a bare value: the synchronization below
-+	 * computes the new offset against the tuple's own reference
-+	 * point, so the guest TSC keeps counting through this function.
-+	 * Preemption stays disabled from the sample until tsc_write_lock
-+	 * is held — not for timing, but because this task's own preempt
-+	 * notifier (kvm_sched_in -> kvm_arch_vcpu_load) is the one
-+	 * writer which could apply a pending backwards-TSC compensation
-+	 * to the offset the sample was read through; a compensation
-+	 * still pending when the lock is taken is folded in there.
-+	 */
-+	if (!init) {
-+		preempt_disable();
-+#ifdef CONFIG_X86_64
-+		if (!kvm_get_time_and_clockread(&ns, &host_tsc))
-+#endif
-+		{
-+			unsigned long irqflags;
-+
-+			/*
-+			 * The two reads must form one coherent reference
-+			 * point.
-+			 */
-+			local_irq_save(irqflags);
-+			host_tsc = rdtsc();
-+			ns = get_kvmclock_base_ns();
-+			local_irq_restore(irqflags);
-+		}
-+		tsc = kvm_read_l1_tsc(vcpu, host_tsc);
-+	}
-+
-+	/*
-+	 * Commit the new frequency only once set_tsc_khz() can no longer
-+	 * fail: a failed ioctl must leave no trace, or a retry with the
-+	 * still-active frequency would wrongly look like a change. The
-+	 * exception is vCPU creation (@init), whose caller ignores the
-+	 * return value: commit the requested frequency even when the
-+	 * hardware cannot scale to it, as creation always has, rather
-+	 * than leave the vCPU with the zeroed frequency from allocation
-+	 * (KVM_GET_TSC_KHZ would report 0, and the catchup path would
-+	 * compute with a zero mult).
-+	 */
-+	if (set_tsc_khz(vcpu, user_tsc_khz, use_scaling) && !init) {
-+		preempt_enable();
-+		return -1;
-+	}
-+
-+	vcpu->arch.virtual_tsc_shift = tsc_shift;
-+	vcpu->arch.virtual_tsc_mult = tsc_mult;
-+	vcpu->arch.virtual_tsc_khz = user_tsc_khz;
-+
-+	/*
-+	 * At vCPU creation (@init) the vCPU is not yet counted in
-+	 * online_vcpus, so synchronizing here would corrupt the VM-wide
-+	 * matching state (and leave it corrupted if creation subsequently
-+	 * fails). The initial synchronization happens in
-+	 * kvm_arch_vcpu_postcreate() instead.
-+	 */
-+	if (init)
-+		return 0;
-+
-+	/*
-+	 * Changing the frequency changes the vCPU's position on the
-+	 * generation's cycle timeline, so re-synchronize. For a vCPU
-+	 * which has run, preserve the guest TSC value read above across
-+	 * the change; likewise if userspace has written a TSC on this
-+	 * vCPU — a zero write would discard it. Otherwise the vCPU holds
-+	 * only its creation-time synchronization, so synchronize as for
-+	 * a zero write. When the generation is already at the new
-+	 * frequency this places the vCPU on its timeline rather than
-+	 * opening a gratuitous new generation and orphaning the matched
-+	 * state of its siblings; the first vCPU to adopt a new frequency
-+	 * necessarily opens a new generation, starting at zero — mixed
-+	 * frequencies within a VM forfeit the master clock anyway.
-+	 */
-+	raw_spin_lock_irqsave(&vcpu->kvm->arch.tsc_write_lock, flags);
-+	preempt_enable();
-+	if (vcpu->arch.last_vmentry_cpu != -1 || vcpu->arch.user_set_tsc)
-+		__kvm_synchronize_tsc_at(vcpu, &tsc, host_tsc, ns, false);
-+	else
-+		__kvm_synchronize_tsc_at(vcpu, NULL, host_tsc, ns, false);
-+	raw_spin_unlock_irqrestore(&vcpu->kvm->arch.tsc_write_lock, flags);
-+	return 0;
- }
- 
- static u64 compute_guest_tsc(struct kvm_vcpu *vcpu, s64 kernel_ns)
-@@ -1458,8 +1561,10 @@ static void __kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 offset, u64 tsc,
- 		return;
- 	}
- 
--	if (user_set_tsc)
-+	if (user_set_tsc) {
- 		vcpu->kvm->arch.user_set_tsc = true;
-+		vcpu->arch.user_set_tsc = true;
-+	}
- 
- 	vcpu->arch.last_guest_tsc = tsc;
- 
-@@ -1511,40 +1616,84 @@ static void __kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 offset, u64 tsc,
- 	kvm_track_tsc_matching(vcpu, !matched);
- }
- 
--void kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 *user_value)
-+/*
-+ * Synchronize the vCPU's TSC against an explicit {host_tsc, ns} reference
-+ * point: @value (when non-NULL) is the guest TSC *at* @host_tsc, not at
-+ * some unspecified "now". The offset is computed against that reference,
-+ * so a sampled value stays valid however much time passes between the
-+ * sampling and this call.
-+ */
-+static void __kvm_synchronize_tsc_at(struct kvm_vcpu *vcpu, u64 *value,
-+				     u64 host_tsc, s64 ns,
-+				     bool user_initiated)
- {
--	u64 data = user_value ? *user_value : 0;
-+	u64 data = value ? *value : 0;
- 	struct kvm *kvm = vcpu->kvm;
--	u64 offset, host_tsc, elapsed;
--	s64 ns;
--	unsigned long flags;
-+	u64 elapsed_cycles = 0;
-+	s64 elapsed;
-+	u64 offset;
- 	bool matched = false;
- 	bool synchronizing = false;
- 
--	raw_spin_lock_irqsave(&kvm->arch.tsc_write_lock, flags);
-+	lockdep_assert_held(&kvm->arch.tsc_write_lock);
- 
--#ifdef CONFIG_X86_64
--	if (!kvm_get_time_and_clockread(&ns, &host_tsc))
--#endif
--	{
--		host_tsc = rdtsc();
--		ns = get_kvmclock_base_ns();
--	}
-+	/*
-+	 * A backwards-TSC compensation pending now was not in a sampled
-+	 * @value: it is applied to the vCPU's offset only at vcpu_load,
-+	 * and the sample was read through the uncompensated offset. Fold
-+	 * it in (scaled as adjust_tsc_offset_host() would), since
-+	 * __kvm_synchronize_tsc() clears the pending adjustment as
-+	 * superseded by the absolute offset installed here. A
-+	 * user-initiated value is the desired guest TSC *now*, and needs
-+	 * no correction.
-+	 */
-+	if (unlikely(vcpu->arch.tsc_offset_adjustment) &&
-+	    value && !user_initiated)
-+		data += kvm_scale_tsc(vcpu->arch.tsc_offset_adjustment,
-+				      vcpu->arch.l1_tsc_scaling_ratio);
- 
- 	offset = kvm_compute_l1_tsc_offset(vcpu, host_tsc, data);
-+
-+	/*
-+	 * The {host_tsc, ns} reference may have been sampled before a
-+	 * concurrent synchronization (on another vCPU) opened a newer
-+	 * generation, making the elapsed time negative. The anchored
-+	 * offset above is still exact either way; extrapolate the
-+	 * generation's line backwards for the matching comparison, so
-+	 * that the error stays at |F1-F2| times the sampling skew.
-+	 * Snapping to the generation's origin instead would inflate it
-+	 * to the full guest frequency times the skew, spuriously
-+	 * splitting the generation when two vCPUs race through
-+	 * KVM_SET_TSC_KHZ.
-+	 */
- 	elapsed = ns - kvm->arch.cur_tsc_nsec;
- 
- 	if (vcpu->arch.virtual_tsc_khz) {
--		if (data == 0) {
+ 	list_for_each_entry(kvm, &vm_list, vm_list) {
+-		__kvm_start_pvclock_update(kvm);
 +		/*
-+		 * Keep the cycle count as a magnitude with the sign taken
-+		 * from @elapsed itself: a genuinely huge positive elapsed
-+		 * time (a u32-limit frequency and a weeks-old generation)
-+		 * must extrapolate mod 2^64, as the guest's real TSC
-+		 * would wrap, not read as negative.
++		 * Invalidate the Hyper-V TSC page explicitly: the update
++		 * below consumes any pending KVM_REQ_MASTERCLOCK_UPDATE,
++		 * which would otherwise have refreshed the page from
++		 * kvm_update_masterclock().
 +		 */
-+		elapsed_cycles = nsec_to_cycles(vcpu, elapsed >= 0 ? elapsed
-+								   : -elapsed);
++		kvm_hv_request_tsc_page_update(kvm);
++		__kvm_start_pvclock_update(kvm, NULL);
+ 		pvclock_update_vm_gtod_copy(kvm);
+ 		kvm_end_pvclock_update(kvm);
 +
-+		if (!value || (data == 0 && user_initiated)) {
- 			/*
--			 * Force synchronization when creating a vCPU, or when
--			 * userspace explicitly writes a zero value.
-+			 * Force synchronization when creating a vCPU, or
-+			 * when userspace explicitly writes a zero value —
-+			 * but not for an internal preserved sample which
-+			 * happens to be exactly zero: NULL, not zero, is
-+			 * the no-value case.
- 			 */
- 			synchronizing = true;
--		} else if (kvm->arch.user_set_tsc) {
--			u64 tsc_exp = kvm->arch.cur_tsc_write +
--						nsec_to_cycles(vcpu, elapsed);
-+		} else if (kvm->arch.user_set_tsc || !user_initiated) {
-+			u64 tsc_exp = elapsed >= 0 ?
-+				kvm->arch.cur_tsc_write + elapsed_cycles :
-+				kvm->arch.cur_tsc_write - elapsed_cycles;
- 			u64 tsc_hz = vcpu->arch.virtual_tsc_khz * 1000LL;
-+			u64 window;
- 			/*
- 			 * Here lies UAPI baggage: when a user-initiated TSC write has
- 			 * a small delta (1 second) of virtual cycle time against the
-@@ -1559,9 +1708,35 @@ void kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 *user_value)
- 			 * to this 'correction' to make it sync up with values that only
- 			 * come from the kernel's default vCPU creation. Make the 1-second
- 			 * slop hack only trigger if the user_set_tsc flag is already set.
-+			 *
-+			 * A kernel-internal write (a frequency change preserving the
-+			 * guest TSC) carries an exact value sampled with its own
-+			 * reference point, not a racy userspace one; a vCPU on the
-+			 * generation's line still matches it to within arithmetic
-+			 * rounding, but one which genuinely diverged (e.g. by a guest
-+			 * TSC_ADJUST write) must not be snapped back by up to a
-+			 * second. Use a 1ms window for those, unconditionally —
-+			 * the sample's exactness owes nothing to the legacy API's
-+			 * flag. A frequency *change* still only matches siblings
-+			 * converted within 1ms·F2/|F1-F2| of the first: values
-+			 * preserved from the old frequency genuinely diverge from
-+			 * the new generation's line at |F1-F2| per unit time.
- 			 */
--			synchronizing = data < tsc_exp + tsc_hz &&
--					data + tsc_hz > tsc_exp;
-+			/*
-+			 * 1ms of cycles is virtual_tsc_khz by definition;
-+			 * dividing tsc_hz would need libgcc's __udivdi3
-+			 * on i386.
-+			 */
-+			window = user_initiated ? tsc_hz :
-+						  vcpu->arch.virtual_tsc_khz;
-+			/*
-+			 * Wrap-safe |data - tsc_exp| < window: tsc_exp
-+			 * may itself have wrapped when elapsed_cycles is
-+			 * negative and exceeds the generation's origin
-+			 * value; the difference is still correct mod 2^64.
-+			 */
-+			synchronizing = (u64)(data - tsc_exp + window) <
-+					2 * window;
- 		}
++		kvm_hv_remark_tsc_page(kvm);
  	}
  
-@@ -1579,10 +1754,19 @@ void kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 *user_value)
- 		 * "now": the matching window slides forward with wall time,
- 		 * anchored on the generation's origin alone (a matched
- 		 * write no longer updates any stored reference point).
-+		 * A negative elapsed time (the tuple sampled just
-+		 * before a sibling opened this generation) must not wrap
-+		 * below zero: the wrapped value would land in
-+		 * last_guest_tsc, and an unstable-TSC host would
-+		 * re-anchor the guest TSC to it at the next vcpu_load.
+ 	mutex_unlock(&kvm_lock);
+@@ -8367,8 +8457,8 @@ static int vcpu_enter_guest(struct kvm_vcpu *vcpu)
+ 			kvm_mmu_free_obsolete_roots(vcpu);
+ 		if (kvm_check_request(KVM_REQ_MIGRATE_TIMER, vcpu))
+ 			__kvm_migrate_timers(vcpu);
+-		if (kvm_check_request(KVM_REQ_MASTERCLOCK_UPDATE, vcpu))
+-			kvm_update_masterclock(vcpu->kvm);
++		if (kvm_test_request(KVM_REQ_MASTERCLOCK_UPDATE, vcpu))
++			kvm_update_masterclock(vcpu->kvm, vcpu);
+ 		if (kvm_check_request(KVM_REQ_GLOBAL_CLOCK_UPDATE, vcpu))
+ 			kvm_gen_kvmclock_update(vcpu);
+ 		if (kvm_check_request(KVM_REQ_CLOCK_UPDATE, vcpu)) {
+@@ -9766,13 +9856,13 @@ void kvm_arch_vcpu_postcreate(struct kvm_vcpu *vcpu)
+ 		 * master clock does not stay in its previous mode with
+ 		 * running siblings keeping PVCLOCK_TSC_STABLE_BIT.
  		 */
--		u64 delta = nsec_to_cycles(vcpu, elapsed);
--
--		data = kvm->arch.cur_tsc_write + delta;
-+		if (elapsed < 0 &&
-+		    elapsed_cycles > kvm->arch.cur_tsc_write)
-+			data = 0;
-+		else if (elapsed < 0)
-+			data = kvm->arch.cur_tsc_write - elapsed_cycles;
-+		else
-+			data = kvm->arch.cur_tsc_write + elapsed_cycles;
- 
- 		if (!kvm_check_tsc_unstable())
- 			offset = kvm->arch.cur_tsc_offset;
-@@ -1591,8 +1775,38 @@ void kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 *user_value)
- 		matched = true;
- 	}
- 
--	__kvm_synchronize_tsc(vcpu, offset, data, ns, matched, !!user_value);
--	raw_spin_unlock_irqrestore(&kvm->arch.tsc_write_lock, flags);
-+	__kvm_synchronize_tsc(vcpu, offset, data, ns, matched, user_initiated);
-+}
-+
-+static void kvm_synchronize_tsc_at(struct kvm_vcpu *vcpu, u64 *value,
-+				   u64 host_tsc, s64 ns, bool user_initiated)
-+{
-+	unsigned long flags;
-+
-+	raw_spin_lock_irqsave(&vcpu->kvm->arch.tsc_write_lock, flags);
-+	__kvm_synchronize_tsc_at(vcpu, value, host_tsc, ns, user_initiated);
-+	raw_spin_unlock_irqrestore(&vcpu->kvm->arch.tsc_write_lock, flags);
-+}
-+
-+void kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 *value, bool user_initiated)
-+{
-+	u64 host_tsc;
-+	s64 ns;
-+
-+#ifdef CONFIG_X86_64
-+	if (!kvm_get_time_and_clockread(&ns, &host_tsc))
-+#endif
-+	{
-+		unsigned long flags;
-+
-+		/* The two reads must form one coherent reference point. */
-+		local_irq_save(flags);
-+		host_tsc = rdtsc();
-+		ns = get_kvmclock_base_ns();
-+		local_irq_restore(flags);
-+	}
-+
-+	kvm_synchronize_tsc_at(vcpu, value, host_tsc, ns, user_initiated);
- }
- 
- #ifdef CONFIG_X86_64
-@@ -4035,7 +4249,7 @@ long kvm_arch_vcpu_ioctl(struct file *filp,
- 		if (user_tsc_khz == 0)
- 			user_tsc_khz = tsc_khz;
- 
--		if (!kvm_set_tsc_khz(vcpu, user_tsc_khz))
-+		if (!kvm_set_tsc_khz(vcpu, user_tsc_khz, false))
- 			r = 0;
- 
- 		goto out;
-@@ -9814,7 +10028,7 @@ int kvm_arch_vcpu_create(struct kvm_vcpu *vcpu)
- 	kvm_xen_init_vcpu(vcpu);
- 	vcpu_load(vcpu);
- 	kvm_vcpu_after_set_cpuid(vcpu);
--	kvm_set_tsc_khz(vcpu, vcpu->kvm->arch.default_tsc_khz);
-+	kvm_set_tsc_khz(vcpu, vcpu->kvm->arch.default_tsc_khz, true);
- 	kvm_vcpu_reset(vcpu, false);
- 	kvm_init_mmu(vcpu);
- 	vcpu_put(vcpu);
-@@ -9873,7 +10087,7 @@ void kvm_arch_vcpu_postcreate(struct kvm_vcpu *vcpu)
+-		kvm_update_masterclock(vcpu->kvm);
++		kvm_update_masterclock(vcpu->kvm, NULL);
  		return;
  	}
  	vcpu_load(vcpu);
--	kvm_synchronize_tsc(vcpu, NULL);
-+	kvm_synchronize_tsc(vcpu, NULL, false);
+ 	kvm_synchronize_tsc(vcpu, NULL);
  	if (kvm_check_request(KVM_REQ_MASTERCLOCK_UPDATE, vcpu))
- 		kvm_update_masterclock(vcpu->kvm, NULL);
+-		kvm_update_masterclock(vcpu->kvm);
++		kvm_update_masterclock(vcpu->kvm, NULL);
  	vcpu_put(vcpu);
-diff --git a/arch/x86/kvm/x86.h b/arch/x86/kvm/x86.h
-index 436e2fb1396c..de4c86ea5a7d 100644
---- a/arch/x86/kvm/x86.h
-+++ b/arch/x86/kvm/x86.h
-@@ -330,7 +330,7 @@ uint64_t kvm_get_wall_clock_epoch(struct kvm *kvm);
- bool kvm_get_monotonic_and_clockread(s64 *kernel_ns, u64 *tsc_timestamp);
- int kvm_guest_time_update(struct kvm_vcpu *v);
  
--void kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 *user_value);
-+void kvm_synchronize_tsc(struct kvm_vcpu *vcpu, u64 *value, bool user_initiated);
- u64 kvm_scale_tsc(u64 tsc, u64 ratio);
- u64 kvm_read_l1_tsc(struct kvm_vcpu *vcpu, u64 host_tsc);
- u64 kvm_calc_nested_tsc_offset(u64 l1_offset, u64 l2_offset, u64 l2_multiplier);
+ 	/* poll control enabled by default */
 -- 
 2.43.0
 
