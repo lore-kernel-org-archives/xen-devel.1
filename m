@@ -2,55 +2,35 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A9794606A326
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2026 16:21:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5F9F7606A31C
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2026 17:15:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=susede1 header.b=fv66gJBZ;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=susede1 header.b=fv66gJBZ
-Received: from list by lists.xenproject.org with outflank-mailman.1484372.1687703 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=fgqkU0Bn
+Received: from list by lists.xenproject.org with outflank-mailman.1484428.1687738 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRB4J-0006HW-UC; Wed, 11 Nov 2026 16:21:03 +0000
+	id 1xRBuJ-0007qR-9N; Wed, 11 Nov 2026 17:14:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1484372.1687703; Wed, 11 Nov 2026 16:21:03 +0000
+Received: by outflank-mailman (output) from mailman id 1484428.1687738; Wed, 11 Nov 2026 17:14:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRB4J-0006HN-Pi; Wed, 11 Nov 2026 16:21:03 +0000
-Received: by outflank-mailman (input) for mailman id 1484372;
- Wed, 11 Nov 2026 16:21:02 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xRBuJ-0007qK-6q; Wed, 11 Nov 2026 17:14:47 +0000
+Received: by outflank-mailman (input) for mailman id 1484428;
+ Wed, 11 Nov 2026 17:14:46 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jgross@suse.com>) id 1xRB4I-0006HH-Id
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 16:21:02 +0000
-Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xRB4H-004LtL-HA
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 17:21:01 +0100
-Received: from [10.42.69.3] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jgross@suse.com>)
- id 6af495de-e002-0a2a0a5209dd-0a2a4503ae26-34
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 17:21:01 +0100
-Received: from [195.135.223.130] (helo=smtp-out1.suse.de)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jgross@suse.com>)
- id 6af495ed-fae8-0a2a45030019-c387df8290ae-3
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 17:21:01 +0100
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id B1B6121EF2;
- Wed, 11 Nov 2026 16:21:00 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 54DCB134E5;
- Wed, 11 Nov 2026 16:21:00 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id wT6iCuyV9GrxAgAAD6G6ig
- (envelope-from <jgross@suse.com>); Wed, 11 Nov 2026 16:21:00 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xRBuI-0007q9-4S
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 17:14:46 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.98.2)
+ (envelope-from <gwd@xenproject.org>) id 1xRBuH-00000008UXv-1vLw;
+ Wed, 11 Nov 2026 17:14:45 +0000
+Received: from [217.155.165.12]
+ (helo=4b664947-eb84-4a1c-9b91-21fc87073f93.fritz.box.net)
+ by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.98.2)
+ (envelope-from <gwd@xenproject.org>) id 1xRBuH-0000000FCa8-2sIG;
+ Wed, 11 Nov 2026 17:14:45 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -59,89 +39,78 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding"; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1794414060; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=ovtHzQePYK6PCYm9IDijsu/IhzPBWBbP8apsONau8Uw=;
-	b=fv66gJBZLsCDMyh5pQG7nVcNzpA4yEh5AkPU688Q2KboxeRUP8ND+MObvTOI6ypgmPCLgh
-	b6jD39b7EXsl8DVih6dxXGA8lQxtrQh1Yh53VC0S3LdWVcchCZuYBFQ3BrsYLjHotRw2Il
-	0m8t4Iruy5nISemX984c+bhGJve4V1Q=
-Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.com header.s=susede1 header.b=fv66gJBZ
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1794414060; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=ovtHzQePYK6PCYm9IDijsu/IhzPBWBbP8apsONau8Uw=;
-	b=fv66gJBZLsCDMyh5pQG7nVcNzpA4yEh5AkPU688Q2KboxeRUP8ND+MObvTOI6ypgmPCLgh
-	b6jD39b7EXsl8DVih6dxXGA8lQxtrQh1Yh53VC0S3LdWVcchCZuYBFQ3BrsYLjHotRw2Il
-	0m8t4Iruy5nISemX984c+bhGJve4V1Q=
-From: Juergen Gross <jgross@suse.com>
-To: linux-kernel@vger.kernel.org,
-	linux-block@vger.kernel.org
-Cc: Juergen Gross <jgross@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Jens Axboe <axboe@kernel.dk>,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH 0/3] xen-blkback: do some I/O statistics rework
-Date: Wed, 11 Nov 2026 17:20:55 +0100
-Message-ID: <20261111162058.804033-1-jgross@suse.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
+	Message-ID:Date:Subject:Cc:To:From;
+	bh=fgoZGcBdYHUqOg9maa78GDVmQKMaog+TgDYIaaX+ybc=; b=fgqkU0BngJki1RBMHzgwdIb55S
+	R3ON0IptGU/ecYrz1Owz3NycdFVHf9264zJjAcJDh8twZu3r+V+W6M/UEs9nMpIuxEZc4prtzBWLM
+	3/74TiX3vYbNDvHC87cYEnyxZUzrUrpnFridLkVReec67ack0TFXoCqcnmBBnumGk/Qo=;
+From: George Dunlap <gwd@xenproject.org>
+To: xen-devel@lists.xenproject.org
+Cc: Anthony PERARD <anthony.perard@vates.tech>,
+	Juergen Gross <jgross@suse.com>
+Subject: [PATCH v2 1/2] tools/libs/guest: re-read dominfo after changing a PV guest's width on restore
+Date: Wed, 11 Nov 2026 17:14:40 +0000
+Message-ID: <20261111171441.23101-1-gwd@xenproject.org>
 X-Mailer: git-send-email 2.56.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-12.01 / 50.00];
-	SUSE_INTERNAL_BYPASS(-9.00)[];
-	BAYES_HAM(-3.00)[100.00%];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	ARC_NA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo,suse.com:dkim];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[6];
-	RCVD_TLS_ALL(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	DKIM_TRACE(0.00)[suse.com:+]
-X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
-X-Rspamd-Action: no action
-X-Spam-Score: -12.01
-X-Spam-Level: 
-X-Rspamd-Queue-Id: B1B6121EF2
-X-purgate-ID: tlsNG-33051d/1794414061-754844E9-13B53C3F/35/110847
-X-purgate-type: clean
-X-purgate-size: 521
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Some rework of the blkback statics data handling.
+The x86 PV restore code reads the domain's information once, when the
+stream starts, and keeps it in ctx->dominfo.  When the X86_PV_INFO
+record gives a width other than the domain's, handle_x86_pv_info()
+changes it with XEN_DOMCTL_set_address_size, and then refreshes only
+the guest's width and page-table levels.
 
-Juergen Gross (3):
-  xen-blkback: Remove statistics logging on console
-  xen-blkback: move statistics data into sub-structure
-  xen-blkback: make statistics data persistent across disconnect/connect
+Since 8a9255405ca6 ("x86/domain: adjust limitation on shared_info
+allocation below 4G"), making a domain 32-bit may replace a
+shared_info page (if the originally allocated page was above 4GiB).
+The shared_info_frame read when the stream started will refer to a
+freed page.  handle_shared_info() maps that frame to write the
+SHARED_INFO record, and process_start_info() puts it in the guest's
+start_info.  Xen holds no reference to the replaced page by then, so
+the mapping fails, and with it the restore of any 32-bit PV guest
+whose shared_info page was moved.
 
- drivers/block/xen-blkback/blkback.c | 39 ++++++-----------------------
- drivers/block/xen-blkback/common.h  | 22 ++++++++++------
- drivers/block/xen-blkback/xenbus.c  | 22 ++++++++++++----
- 3 files changed, 38 insertions(+), 45 deletions(-)
+Re-read the domain's information after changing its width.
 
+Fixes: 8a9255405ca6 ("x86/domain: adjust limitation on shared_info allocation below 4G")
+Assisted-by: Claude Code:claude-opus-5-5
+Signed-off-by: George Dunlap <gwd@xenproject.org>
+---
+Not tested end to end: no 32-bit PV guest here can suspend.  Restore's
+steps replayed from dom0 on staging, on an Intel box (create a PV
+domain, read its info, make it 32-bit, populate 1GiB, then map the
+frame read first): that map fails with -EBUSY every time, while the
+frame read after the switch maps.  Build-tested.
+---
+ tools/libs/guest/xg_sr_restore_x86_pv.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/tools/libs/guest/xg_sr_restore_x86_pv.c b/tools/libs/guest/xg_sr_restore_x86_pv.c
+index 876748c11e..b72cacd000 100644
+--- a/tools/libs/guest/xg_sr_restore_x86_pv.c
++++ b/tools/libs/guest/xg_sr_restore_x86_pv.c
+@@ -646,6 +646,12 @@ static int handle_x86_pv_info(struct xc_sr_context *ctx,
+         }
+ 
+         /* Domain's information changed, better to refresh. */
++        if ( xc_domain_getinfo_single(xch, ctx->domid, &ctx->dominfo) < 0 )
++        {
++            PERROR("Failed to refresh dominfo for d%d", ctx->domid);
++            return -1;
++        }
++
+         rc = x86_pv_domain_info(ctx);
+         if ( rc != 0 )
+         {
 -- 
 2.56.0
 
