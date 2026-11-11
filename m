@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 62DA5606A88E
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2026 15:10:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10133606A327
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2026 15:10:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=LX9re6gN
-Received: from list by lists.xenproject.org with outflank-mailman.1484114.1687477 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=WH7MOZNg
+Received: from list by lists.xenproject.org with outflank-mailman.1484126.1687487 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xR9xc-0005Hq-4S; Wed, 11 Nov 2026 15:10:04 +0000
+	id 1xR9xy-0006KS-A7; Wed, 11 Nov 2026 15:10:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1484114.1687477; Wed, 11 Nov 2026 15:10:04 +0000
+Received: by outflank-mailman (output) from mailman id 1484126.1687487; Wed, 11 Nov 2026 15:10:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xR9xc-0005HI-0K; Wed, 11 Nov 2026 15:10:04 +0000
-Received: by outflank-mailman (input) for mailman id 1484114;
- Wed, 11 Nov 2026 15:10:03 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xR9xa-0004vV-VT
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 15:10:03 +0000
+	id 1xR9xy-0006KL-77; Wed, 11 Nov 2026 15:10:26 +0000
+Received: by outflank-mailman (input) for mailman id 1484126;
+ Wed, 11 Nov 2026 15:10:24 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xR9xw-0006Jm-Jj
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 15:10:24 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xR9xa-00B9W1-51
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 16:10:02 +0100
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xR9xw-000G3w-0J
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 16:10:24 +0100
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6af48548-8faa-0a2a0a5109dd-0a2a4501bb1a-6
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 16:10:02 +0100
-Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6af4855f-8faa-0a2a0a5109dd-0a2a4503da40-0
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 16:10:23 +0100
+Received: from [209.85.221.47] (helo=mail-wr1-f47.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6af48549-5984-0a2a45010019-d1558034bd92-3
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 16:10:02 +0100
-Received: by mail-wm1-f52.google.com with SMTP id
- 5b1f17b1804b1-4a4d7ae1ae9so30315905e9.1
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 07:10:02 -0800 (PST)
+ id 6af4855f-fae8-0a2a45030019-d155dd2fac2f-3
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 16:10:23 +0100
+Received: by mail-wr1-f47.google.com with SMTP id
+ ffacd0b85a97d-48e3b22e971so1776442f8f.0
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 07:10:23 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4988f5b1ce3sm9875989f8f.14.2026.11.11.07.10.01
+ ffacd0b85a97d-49836c83432sm10605139f8f.58.2026.11.11.07.10.22
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Nov 2026 07:10:01 -0800 (PST)
+ Wed, 11 Nov 2026 07:10:23 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,52 +51,52 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1794409801; x=1795014601; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1794409823; x=1795014623; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=HdWkJonNTG0SjeO8q3p5ecEM3PnVNlFpISGnraMjkhw=;
-        b=LX9re6gNyYtchi2WJkNOIqDdL6WUg97806bjSKgWuL7nJ8ceAktlIknNSIe0Dd816h
-         aXhY4aFwiTTkswUorJ//HbLOrsLvRIOH2jjd1jPesQMcgHP6nyBcx6U2OZQRgbXTn17s
-         IW2cDJyrWMHEAHDVFneHQof7sC/1gD/NFYTr5s4BK35kmwD+fCH7yxeFDR3KkKxssLBk
-         Hxt/eTpfXlKx0D93Hceg3DjmJcROgy1Xpc9j89WFNbCmzE9DBSl70iYNTaOeU6efXQWj
-         6E7sulsOOlkhNqYfWwlHlYtdon5Ew3stex9OHcuI9pp0YpY/uncAV8GtbonFZToZQdZ1
-         pnEA==
+        bh=ZOAN/M2CHBmUnwjbqmYq8KCFwtdLwPuUvzg+BCF6FpY=;
+        b=WH7MOZNg5kwa41d9dVdylV0w0ZsyzayM/09grS6joTTLEl0X1ypjyBPThqenXQnja8
+         rXpmzlY57CAK0tz380nkv+cUeL9SIneTy/VFaU1R5RIVsj+adV3sk4gm0HJLXxmcytBY
+         upGIAS5ECP9U55ZcbbB71h6QcjTP+Pv7xWZX+Xb9wBALZePRE5tXMq2zL9QXYXllCeUx
+         gbRL3odtcrpPTmME4nIURIYun6BBvTotOm0isEGC8JL3rjvdqo0INBbkt7cwYinLFIU9
+         UEpGzEtbwEv/Ly+MU8OjDwjpbohgXE+vS2xum8zdrbHqwVx0XW+Yj66GOPoBpNGWRzef
+         KJ7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794409801; x=1795014601;
+        d=1e100.net; s=20260707; t=1794409823; x=1795014623;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=HdWkJonNTG0SjeO8q3p5ecEM3PnVNlFpISGnraMjkhw=;
-        b=uo+O7co5sEIJyJiPt5/4rSSco058eI1O3CZ1wObPSPJLZtEFuAaYfyXv5E8JntStDM
-         ZiCGLqu3/b2Lw77q1MY9s83Xp8iLugqc3ZTAHM2dvQzyOwRL0uk1m8RW6G+B8wbYH01C
-         qi1odFEUDcqBuOxa+V0480OCj8JtM8OIytZ3+X6dowQTlNb92aThEoQv8B4/m0uZsS1n
-         c1d87GKSMMped2FLigI8ux9eTDzK6hepcHNQ/Rpkrpl7RNxuNvWSFjdbHMcKbD/cfuKu
-         OeWFeH6KUxBpE16X/7v40yVMSayEzqAdgGJ0iHjowJ+p1WvqgwzCg9ciair3B9aDKZkm
-         dOUA==
-X-Gm-Message-State: APuU4Z/t/bCZ2duBX1SMWNORdkiHDSB2c3iXWBk8BM0AjGETuki/Wwp+
-	ZFo7c5au9BLnrKOloMNLQbWIgvVpm29KfGkp4al+r56GTK040xb4TA9lFt3KlKIlRVxL1KO33Ub
-	Yir+SBg==
-X-Gm-Gg: AYBFou3bffUx5LRGhxaj8Zu8U72zA2LPIa9/ky0wTbeT4x7KjFiDOdkk5vYyBp7mZqy
-	rB+ODvIQKSinSYXQTlbP4WMXnAyZICFxqzO44clR9ST5hhHKzVjC0AIeqoPEVK/Lg4bDuJS8nO4
-	jXUOTJzQO2vlTamAqAEHthD/XlMCoXE5+efh/gd6e3y07RZz4RHVGEMYKObYSsquPP7/73EyCLv
-	mAj/BywQaDp8Dfp3VGoTSN+RL9b2rAm4YqPnAVEfmVDWrosnRcUuSw7sXBfO1BBqmYS8RDpSVwJ
-	yGwN9mwhOudR2dPtKCP/eldR0jpyhqtNhb8/9/yYQquxmu1F/lmKBgeHQx+2lY0BaOFkHZ3vU+j
-	PZcU/9fsuobrBRDYtsOCAB8tkuwt0cZ2XE20Z0Sfv353VOHMn9UAHmpzvSdD3DyaJksXd6CPAt9
-	pDJbZ9e0xnQnXNdDG5uY1OJX0Jtis/rpvJ8gixwUTsh4fma7uN1tSN14Gi4c+ETSJBzFZNPyp7v
-	PzaLOOfGMU8Ylj68GULXZ0uTOMcf1Z5lPbwHL6+L1HWgCWaAUuLd7PPqWuLraD1LRix9NGSGS5X
-	s1xAo8j+PC6KqOj5jx4+qyGBJE6TldLAZ10RISlxxVAz6FloWMzumCS8O2Jswhqcj1RiXynmq59
-	aY9ifjvG0Kx4NOCC88nTRJpe46+KyQgur2otqE5k=
-X-Received: by 2002:a05:600c:3e87:b0:4b7:6a8b:9df2 with SMTP id 5b1f17b1804b1-4ba0936f37bmr48040575e9.25.1794409801536;
-        Wed, 11 Nov 2026 07:10:01 -0800 (PST)
-Message-ID: <175d5317-8670-44f0-a24c-b5379b2399fb@suse.com>
-Date: Wed, 11 Nov 2026 16:10:00 +0100
+        bh=ZOAN/M2CHBmUnwjbqmYq8KCFwtdLwPuUvzg+BCF6FpY=;
+        b=M7/irwwX/o9OtW4nXQnXg5zmGdZRCYLNloy5mEnKY3wgrNTVgpNK6VPPd+xFJOe/ha
+         Xt+c0XzumGD3OrPuZMUU0oa6oSvh15kXhRNqITnYKKQiSmEi+g/YPByvboFHC3IIp6Dd
+         +DITMOpLdysh5tkRQUuDHtTnXNLDXwuX2Jngj23oJOZsnDxYRTgB5YB2Gio9JyZcE7Oh
+         WzGqOgK+o0pejkJW0s/z0NtIDwFUIB1QLlt3QAPYCxlbNvFU9dp/C6RPXqAZcwoL0v4p
+         sm5iDCIdo1X0XlejUn/Xxqc81B/ukO4VBlhglS/8PE00vvDizW46MlJs4qCRyJHUFuA7
+         q5NQ==
+X-Gm-Message-State: APuU4Z8qWFP4DUBwmo4AekwskX3rYEXPhI2HoLIvGCs8ULoJ4wtuWOU6
+	OTlpQoG4xl7YqxhM9UkNWYbKVsbuKY2mYMADp+t7RZw4kyLuJa28wKolSLjspMELzo5aH8O11o/
+	koNSong==
+X-Gm-Gg: AYBFou01BRVZXZeXrLrNjbRQueHNC/3VlPuduYRYRHfnCROnX/eeoEIbhtQofZdy6I1
+	Kf+bQMB/SRplna24KvTh65PwtUZMXH060TAmWtnzSZi4yzHcHcJLlZ3u9nJzsW1H7yL3gTTj0VG
+	Ez8yU7Cn5lKKO/lNURyX8Q8KQTTqF/0ZboGSlFRs1FcVTyEGKbycR6imeNCWZks0Sgw8amyCUPn
+	LY0EO6ZBUVKMvplcUSil/jQlAtlTtfv6g5hbJ9utURXWN2xDSnJJD0TUyVXU6UBUZHWvXS4nHI/
+	SSRD1QbcEh3REkF5i2w9kA4pIIK947rdBwDGx3O0k+O0ieb7j+QPgrcgK8wwNp1Z2jYW4a8T3O8
+	djg86Il7gtiuTeucDrjKiLwfncP+coB2APOCePZiQvg8zKBYmu/R+KKzCXkgDX3N7ccJafz88M3
+	O3MOPRkeR+3XU8V7zBC/sRVhZoL2MJ/+653gPxctFvWQe5GW2Oh38zTJOpfaRuWXacQsulrL2Gt
+	LDHWO4nvvIzQizwjcuX3UjILsqjb91XKsrln+ikRt2u+Cpisolrv0lmpwA5s6P9R62z8QtSckMg
+	531rw0IBNap8GPQTjnW94Et2XYo3tuxasl35OpVSYoTTKaj+rYYTHH4ZFmm6yplb/LV+QJah5Vj
+	4Z/qVNtarWSUySGpLsUTVCuUntMuKeBtdwdboB7M=
+X-Received: by 2002:a05:6000:41cb:b0:492:ea10:b073 with SMTP id ffacd0b85a97d-499c5e3c126mr4664578f8f.18.1794409823371;
+        Wed, 11 Nov 2026 07:10:23 -0800 (PST)
+Message-ID: <90813371-3bb0-4b61-a630-452aa8315fda@suse.com>
+Date: Wed, 11 Nov 2026 16:10:22 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v4 08/28] x86emul: introduce X86EMUL_FPU_{tilecfg,tile}
+Subject: [PATCH v4 09/28] x86emul: support TILERELEASE
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -130,9 +130,9 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <0407294d-d605-41f3-a16b-1505d897ef3f@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1794409802-BEC61757-D7825061/10/78276251493
+X-purgate-ID: tlsNG-33051d/1794409823-74C884E9-DE83316D/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 3704
+X-purgate-size: 3533
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -141,105 +141,86 @@ X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-These will be used by AMX insns. They're not sensitive to CR0.TS, but
-instead some are sensitive to XFD.
+This is relatively straightforward, and hence best suited to introduce a
+few other general pieces.
+
+Testing of this will be added once a sensible test can be put together,
+i.e. when support for other insns is also there.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
 v4: Use X86_EXC_*. Re-base.
-v3: Separate X86EMUL_FPU_tilecfg. Use XFD alternative logic instead of
-    checking CR0.TS.
 v2: New.
 
---- a/xen/arch/x86/x86_emulate/x86_emulate.c
-+++ b/xen/arch/x86/x86_emulate/x86_emulate.c
-@@ -425,6 +425,14 @@ int x86emul_get_fpu(
-             return X86EMUL_UNHANDLEABLE;
-         break;
- 
+--- a/tools/tests/x86_emulator/predicates.c
++++ b/tools/tests/x86_emulator/predicates.c
+@@ -1343,6 +1343,7 @@ static const struct vex {
+     { { 0x45 }, 2, T, R, pfx_66, Wn, Ln }, /* vpsrlv{d,q} */
+     { { 0x46 }, 2, T, R, pfx_66, W0, Ln }, /* vpsravd */
+     { { 0x47 }, 2, T, R, pfx_66, Wn, Ln }, /* vpsllv{d,q} */
++    { { 0x49, 0xc0 }, 2, F, N, pfx_no, W0, L0 }, /* tilerelease */
+     { { 0x50 }, 2, T, R, pfx_no, W0, Ln }, /* vpdpbuud */
+     { { 0x50 }, 2, T, R, pfx_66, W0, Ln }, /* vpdpbusd */
+     { { 0x50 }, 2, T, R, pfx_f3, W0, Ln }, /* vpdpbsud */
+--- a/tools/tests/x86_emulator/x86-emulate.c
++++ b/tools/tests/x86_emulator/x86-emulate.c
+@@ -227,6 +227,10 @@ int emul_test_get_fpu(
+             break;
+     default:
+         return X86EMUL_UNHANDLEABLE;
++
 +    case X86EMUL_FPU_tilecfg:
 +    case X86EMUL_FPU_tile:
-+        ASSERT(mode_64bit());
-+        if ( !(state->xcr0 & X86_XCR0_TILE_CFG) ||
-+             !(state->xcr0 & X86_XCR0_TILE_DATA) )
-+            return X86EMUL_UNHANDLEABLE;
-+        break;
-+
-     default:
-         break;
++        return cpu_has_amx_tile ? X86EMUL_OKAY : X86EMUL_UNHANDLEABLE;
      }
-@@ -434,6 +442,7 @@ int x86emul_get_fpu(
-     if ( rc == X86EMUL_OKAY )
-     {
-         unsigned long cr0;
-+        uint64_t xcr0_needed = 0;
+     return X86EMUL_OKAY;
+ }
+--- a/xen/arch/x86/x86_emulate/private.h
++++ b/xen/arch/x86/x86_emulate/private.h
+@@ -604,6 +604,7 @@ amd_like(const struct x86_emulate_ctxt *
+ #define vcpu_has_avx512_vp2intersect() (ctxt->cpuid->feat.avx512_vp2intersect)
+ #define vcpu_has_serialize()   (ctxt->cpuid->feat.serialize)
+ #define vcpu_has_tsxldtrk()    (ctxt->cpuid->feat.tsxldtrk)
++#define vcpu_has_amx_tile()    (ctxt->cpuid->feat.amx_tile)
+ #define vcpu_has_sha512()      (ctxt->cpuid->feat.sha512)
+ #define vcpu_has_sm3()         (ctxt->cpuid->feat.sm3)
+ #define vcpu_has_sm4()         (ctxt->cpuid->feat.sm4)
+--- a/xen/arch/x86/x86_emulate/decode.c
++++ b/xen/arch/x86/x86_emulate/decode.c
+@@ -363,6 +363,7 @@ static const struct ext0f38_table {
+     [0x43] = { .simd_size = simd_scalar_vexw, .d8s = d8s_dq },
+     [0x44] = { .simd_size = simd_packed_int, .two_op = 1, .d8s = d8s_vl },
+     [0x45 ... 0x47] = { .simd_size = simd_packed_int, .d8s = d8s_vl },
++    [0x49] = { .simd_size = simd_other, .two_op = 1 },
+     [0x4c] = { .simd_size = simd_packed_fp, .two_op = 1, .d8s = d8s_vl },
+     [0x4d] = { .simd_size = simd_scalar_vexw, .d8s = d8s_dq },
+     [0x4e] = { .simd_size = simd_packed_fp, .two_op = 1, .d8s = d8s_vl },
+--- a/xen/arch/x86/x86_emulate/x86_emulate.c
++++ b/xen/arch/x86/x86_emulate/x86_emulate.c
+@@ -6548,6 +6548,24 @@ x86_emulate(
+         generate_exception_if(vex.l, X86_EXC_UD);
+         goto simd_0f_avx;
  
-         fail_if(type == X86EMUL_FPU_fpu && !ops->put_fpu);
- 
-@@ -458,15 +467,46 @@ int x86emul_get_fpu(
-             /* Should be unreachable if VEX decoding is working correctly. */
-             ASSERT((cr0 & X86_CR0_PE) && !(ctxt->regs->eflags & X86_EFLAGS_VM));
-         }
--        if ( cr0 & X86_CR0_EM )
-+
-+        switch ( type )
++    case X86EMUL_OPC_VEX(0x0f38, 0x49):
++        generate_exception_if(!mode_64bit() || vex.l || vex.w, X86_EXC_UD);
++        if ( ea.type == OP_REG )
 +        {
-+        default:
-+            if ( cr0 & X86_CR0_EM )
++            switch ( modrm )
 +            {
-+                generate_exception_if(type == X86EMUL_FPU_fpu, X86_EXC_NM);
-+                generate_exception_if(type == X86EMUL_FPU_mmx, X86_EXC_UD);
-+                generate_exception_if(type == X86EMUL_FPU_xmm, X86_EXC_UD);
++            case 0xc0: /* tilerelease */
++                vcpu_must_have(amx_tile);
++                get_fpu(X86EMUL_FPU_tilecfg);
++                op_bytes = 1; /* fake */
++                goto simd_0f_common;
++
++            default:
++                goto unrecognized_insn;
 +            }
-+            generate_exception_if((cr0 & X86_CR0_TS) &&
-+                                  (type != X86EMUL_FPU_wait ||
-+                                   (cr0 & X86_CR0_MP)),
-+                                  X86_EXC_NM);
-+            break;
-+
-+        case X86EMUL_FPU_tilecfg:
-+            break;
-+
-+        case X86EMUL_FPU_tile:
-+            xcr0_needed = X86_XCR0_TILE_DATA;
-+            break;
 +        }
++        goto unimplemented_insn;
 +
-+        if ( xcr0_needed && ctxt->cpuid->xstate.xfd )
-         {
--            generate_exception_if(type == X86EMUL_FPU_fpu, X86_EXC_NM);
--            generate_exception_if(type == X86EMUL_FPU_mmx, X86_EXC_UD);
--            generate_exception_if(type == X86EMUL_FPU_xmm, X86_EXC_UD);
-+            uint64_t xfd;
-+
-+            fail_if(!ops->read_msr);
-+            rc = ops->read_msr(MSR_XFD, &xfd, ctxt);
-+            if ( rc == X86EMUL_OKAY && (xfd & xcr0_needed) )
-+            {
-+                fail_if(!ops->write_msr);
-+                rc = ops->read_msr(MSR_XFD_ERR, &xfd, ctxt);
-+                if ( rc == X86EMUL_OKAY )
-+                    rc = ops->write_msr(MSR_XFD_ERR, xfd | xcr0_needed, ctxt,
-+                                        false);
-+                generate_exception_if(rc == X86EMUL_OKAY, X86_EXC_NM);
-+            }
-         }
--        generate_exception_if((cr0 & X86_CR0_TS) &&
--                              (type != X86EMUL_FPU_wait || (cr0 & X86_CR0_MP)),
--                              X86_EXC_NM);
-     }
- 
-  done:
---- a/xen/arch/x86/x86_emulate/x86_emulate.h
-+++ b/xen/arch/x86/x86_emulate/x86_emulate.h
-@@ -85,6 +85,8 @@ enum x86_emulate_fpu_type {
-     X86EMUL_FPU_ymm, /* AVX/XOP instruction set (%ymm0-%ymm7/15) */
-     X86EMUL_FPU_opmask, /* AVX512 opmask instruction set (%k0-%k7) */
-     X86EMUL_FPU_zmm, /* AVX512 instruction set (%zmm0-%zmm7/31) */
-+    X86EMUL_FPU_tilecfg, /* AMX configuration (tilecfg) */
-+    X86EMUL_FPU_tile, /* AMX instruction set (%tmm0-%tmmN) */
-     /* This sentinel will never be passed to ->get_fpu(). */
-     X86EMUL_FPU_none
- };
+     case X86EMUL_OPC_VEX   (0x0f38, 0x50): /* vpdpbuud [xy]mm/mem,[xy]mm,[xy]mm */
+     case X86EMUL_OPC_VEX_F3(0x0f38, 0x50): /* vpdpbsud [xy]mm/mem,[xy]mm,[xy]mm */
+     case X86EMUL_OPC_VEX_F2(0x0f38, 0x50): /* vpdpbssd [xy]mm/mem,[xy]mm,[xy]mm */
 
 
