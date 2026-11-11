@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A292F606A32E
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2026 14:22:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2D17A606A330
+	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2026 14:23:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=UD3wrNnF
-Received: from list by lists.xenproject.org with outflank-mailman.1483744.1687099 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=DMf7AUzp
+Received: from list by lists.xenproject.org with outflank-mailman.1483754.1687110 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xR9Dg-0000mL-9x; Wed, 11 Nov 2026 14:22:36 +0000
+	id 1xR9E2-0001IL-IV; Wed, 11 Nov 2026 14:22:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1483744.1687099; Wed, 11 Nov 2026 14:22:36 +0000
+Received: by outflank-mailman (output) from mailman id 1483754.1687110; Wed, 11 Nov 2026 14:22:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xR9Dg-0000mE-6i; Wed, 11 Nov 2026 14:22:36 +0000
-Received: by outflank-mailman (input) for mailman id 1483744;
- Wed, 11 Nov 2026 14:22:35 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xR9Df-0000lR-9c
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 14:22:35 +0000
+	id 1xR9E2-0001IE-Dw; Wed, 11 Nov 2026 14:22:58 +0000
+Received: by outflank-mailman (input) for mailman id 1483754;
+ Wed, 11 Nov 2026 14:22:57 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xR9E1-0001Hu-EA
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 14:22:57 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xR9De-00EL5Y-Mr
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 15:22:34 +0100
-Received: from [10.42.69.7] (helo=localhost)
+ id 1xR9E0-009nxa-R3
+ for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 15:22:56 +0100
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6af47a1d-bab6-0a2a0a5309dd-0a2a4507c7a8-46
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 15:22:34 +0100
-Received: from [209.85.221.54] (helo=mail-wr1-f54.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6af47a3e-8faa-0a2a0a5109dd-0a2a450aa768-6
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 15:22:56 +0100
+Received: from [209.85.221.48] (helo=mail-wr1-f48.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6af47a2a-b4ea-0a2a45070019-d155dd36b16f-3
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 15:22:34 +0100
-Received: by mail-wr1-f54.google.com with SMTP id
- ffacd0b85a97d-492fcbfaa87so2122810f8f.3
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 06:22:34 -0800 (PST)
+ id 6af47a40-f2d2-0a2a450a0019-d155dd30cd3d-3
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 15:22:56 +0100
+Received: by mail-wr1-f48.google.com with SMTP id
+ ffacd0b85a97d-48dfc0421d9so2756100f8f.1
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 06:22:56 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-498363e0019sm11875514f8f.38.2026.11.11.06.22.31
+ ffacd0b85a97d-49835f1772dsm11365450f8f.31.2026.11.11.06.22.55
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Nov 2026 06:22:32 -0800 (PST)
+ Wed, 11 Nov 2026 06:22:55 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,52 +51,52 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1794406954; x=1795011754; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1794406976; x=1795011776; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=IfLujnHHAQq7n/CJq+iWqDq2gS8o3naHckvvIycPxJY=;
-        b=UD3wrNnFSRsLYtmsKdXvoKKWRtbOfg4ipF441QBhG6Cd6aoPDcdL/bUMM/RS3uHF/r
-         ei1tJpT43PtkVHbw4u14Grx1PIB4mF3TpDndXjl23rEVImCRGSa80dLthLMHlejz5t2G
-         XoVvaTaNrfLL7nUlm2F8/3DrrIc00lUqdynf4xEqqivc+27Devz9Mk9IVyUM2hTkO1Cs
-         ulK07i0Xowdm1ALgDVCPVSPpETpsgPP8LVfSD+/n7oo5XAfQZOWPOW7Q9IiV6Vy8QIpL
-         wgOFu78z3CSKNXw5h1HR22PkNBAg9D72a1d/kKBD/UAi7HmjMFgOLUPKuctX7/Uo5iiw
-         6zKw==
+        bh=umnEjovUfv7X/taEQdVSmRqldhYDGqR1rPbx7QNhAxg=;
+        b=DMf7AUzpXKKrRJWnWmESJAw/oGb3Sf3SIQaNnHNFCdVQ2KRxq47nffoIdyIDMhGx0M
+         wn/N8gDlKDzvO2Ll9Daxdr13I3nXo6PPEFUikrgm710lyWATVeQWL5JswSH3n3at5c6m
+         PwpsBusLcHrylGNPaOCkRtt1W1WIC0hMmmoiBI23zzU2dlEUdZ5c2tVsd4CBjvRkXIE0
+         9428GAFnJLz66K/+yXF9byLEP48TvYP9jFfNtcpRZb7dT/aiE2lrcTp35r2/yuJIOLVl
+         HXYHsXk1BvH6Guw4CP+Z55ACKJPvLbupA6qyrnGZouAcH2/FFMPhH2IA62kxXtL4iTAB
+         bc0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794406954; x=1795011754;
+        d=1e100.net; s=20260707; t=1794406976; x=1795011776;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=IfLujnHHAQq7n/CJq+iWqDq2gS8o3naHckvvIycPxJY=;
-        b=OKW57jXpNjy30QSgApY27LYkuDZ2wY/vZrfddnhIwGxypNcWSSTl+C2GyLAZE/M6Zd
-         G7K1mBHn6mgswL8bHOG9y1eMLfTcRwhT/dehyOpMI0C/GN5DHRcWkTMxV8femCghI566
-         qcM10RJW/El1NBrlyhhC4KNCJCjB70VHJOjRrFasDArJx4k1K13Mo0pDxlR9W9uIkLFW
-         xid62SLagnO569xElleFAjiHKpVP4CvmfOUVQFA4Y9IBX6x/ggH4UR+Wab/p6qLndlFR
-         9WYgdTmM5/HBv84dUekzIl0liOImBbyBIAF1lyCBck4GACj+qposcBQbDMu+hWFU+FxN
-         tbhg==
-X-Gm-Message-State: APuU4Z/EoAypdhA1zWWlNXpvmWNjh81RhG2qv17pbqiio9tjvaPeMlca
-	g4edlxOk5JWLSy6lSHQQVdL7zJq+YOEDO8ESoY63Nl9YXbrngsAxVegqKASH38L5N9VDObhaBu1
-	dFpdJ8A==
-X-Gm-Gg: AYBFou0877pocuk+gzqWLTpP6Mgi+7dmFzw61gBqK63iAV4DeVoMBlznfmul2CQSMBe
-	6/4GeCqBqT0djXp1PKHpFPOpwGxZaBbLrqEe8A+6wlbgfbu1QE5UmzLPg6YE8cOG3i0CdV2K87b
-	fVZfV3Rg+sBgKlWneDgQkuu/X4mzF1puDr1RbF5IMKg/LnOKQ1FYnLqHMoI/vWoEeHVgp/ce97H
-	fas568Y91QNGAM9AjrqqJoA3DPhH3aBhcHtj4W9Y+15oLMx0lqF8DC/VYmstWRCRsJcHrfdQMSb
-	PlQmXqH+dQfRi0bmXq7U7mLN8UX+q4TFyAkaJOa3xIADgPh3uHT1yTNQRc5SCVdzqFOBdFqeyZE
-	yQ6qlx4RFxmXJRY4RvuxqDuG0dyOUTQUH6lxrnCh2B8W5W6IkzCECtx07fTaFcd+ZUx34TKXFhG
-	js6iiv5qmZuVESGlU9HV5Y/0La4Bh+V1mZLLsNRrr88ktpGgSvzS4XJOCGhKysBJtpuNbhjbpJ4
-	Ges2OLZGfzdG+CM7S5j9GQvm9in5GX9JxfgA17E0XILkdq31EvL7I4M0VwjPgwZZMw+Qdgkjgd8
-	QCo2EMQhPMwkkwTgumzudykSp4Y9LZuO3VYYedDdrUjJoiei9CmtXknbkK3e1Uzs63oQixutlhd
-	0fWsLlh71fOrH4K6w
-X-Received: by 2002:a05:6000:2501:b0:48f:bb68:4e83 with SMTP id ffacd0b85a97d-499c5d47d63mr4784285f8f.9.1794406953990;
-        Wed, 11 Nov 2026 06:22:33 -0800 (PST)
-Message-ID: <01eb736f-2b1e-43bf-ab4a-5e5bbb67d212@suse.com>
-Date: Wed, 11 Nov 2026 15:22:31 +0100
+        bh=umnEjovUfv7X/taEQdVSmRqldhYDGqR1rPbx7QNhAxg=;
+        b=1osL+gVJPulWNwf7njsBrrFiqdlfNuEGEVeHMEdes4Z4sXVIa4CuB0qUaGUB8jE8tV
+         nxRgDlRac1T+wEMnBx5HISdlo/jFP/L9uSQVpsRjsomADTgLwoFEAlQRKQRg51PAPcve
+         Ds905b7jPT7Hu29YsjRej5HBDjBVDA1maOQjSQ0gVkUXeDcBUVZq7SlANju9+Ptw0fXq
+         ep8PKL2cQV51KZe4kVTIoaKmFbYYwP5P2SiY85Hn0RncFgBiThTeOoNtnDvLew4VyTXT
+         JvUBFBgX3DOW6OOmXW6/OnHXvrJ6hDaZ2JZB5EjWdc3ZtJqSHqV2GU65sNkB4GC7TIS4
+         Szyw==
+X-Gm-Message-State: APuU4Z/jweOEM72VGRoslPPBFzrXv9BC2EX2ilRDZl02sRQOJuazKMMe
+	OEEgxnj799zN1nKv+2T8mPDY/TDb/Xn/x+bqwus6lYtTgkuq5bcz7YIbfDbZsqhyLMTn9q8ETm/
+	SoNGVbg==
+X-Gm-Gg: AYBFou1gGvknJKF8IVBDQ6+RQAQVswr75GOVf4sDVeDHHfRwwECMzgzgwNUYuqJVZCH
+	wV+UJ8VZEXIT6+MLB7mhUs73Wjoa7R2mfflzr9OLO6jlR3XbHA1ihr4ky+00Ejp+ISx13anpG4L
+	O0u/Tb/cIP/y28yGINjAgLYC0ogEVEjFy3NMw3Tn0bkJsNif0sUccMBnx2OlSPgX9nubyMiHU2t
+	56w6gl7mJ7g6IEBwdjWp+0A98ICvwRcyRZkNi99E5uJ2g/g2R/EN1zEG/HtBxEin+ErC4G3/BoT
+	Ey3p4GT7ZlvGD/Am5RI1DVmftFEbGtYSs1+FeF44WlnsU8z9Dp2NHQ4wnkRqAychhMpNmmjNIRG
+	sBDNvy4/4jKbSY2rQsTu2WlFYqPUXaDhuB/qRF2BnLviIvnK1UQKejKwLkRFQ52OfHDo1peT5ZJ
+	wTu47lTY7GGZd2ODj67MHXkVFKqgQMIl/47+GGGwVmnviMNb8C/hn9p6OEEcCYdToZu9OyeZAtQ
+	Hnz6TNNsZNxsjsSZLg4JeWzufRvj5Jb2+L6hBzFnUpsoEtZLgmjz7xzGGIXxj2XmyYXDXXQa2vB
+	FSqyzXRrGnxA7rDLvzGBiravjh/ueL2K/LO/pTnhnx5+XSfWAzn2YHE7Oug8RK9wK5HzZvk5hG3
+	d0eiR7weNTdMIh/y+
+X-Received: by 2002:a5d:5f50:0:b0:492:3982:a80c with SMTP id ffacd0b85a97d-499c73686e2mr4362223f8f.29.1794406976175;
+        Wed, 11 Nov 2026 06:22:56 -0800 (PST)
+Message-ID: <4a7b8a45-9e70-4c64-a1ce-bf6e9f403253@suse.com>
+Date: Wed, 11 Nov 2026 15:22:54 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 05/30] x86emul: replace earlier relaxation of decode_gpr()
+Subject: [PATCH 06/30] VMX: support APX
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -130,9 +130,9 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <17d56a5d-41f2-4691-aea7-d6dfdde5ad32@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ef75cf/1794406954-370DDAE4-D32E4452/10/78276251493
+X-purgate-ID: tlsNG-4011c0/1794406976-58BC8CFC-DD77310A/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 7285
+X-purgate-size: 7509
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -141,208 +141,190 @@ X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Handle eGPR-s in a new out-of-line helper, while restoring some code to
-the state before commit e8af03bf9a32 ("x86emul: prepare for AVX512F S/G
-insns"). Some of the function invocations are "just in case"; to allow
-these to continue to work without adding logic to tell whether for a
-particular insn a particular operand is a GPR or another knd of
-register, record register numbers in the new structure in all cases,
-while fetching register values only when eGPR-s are actually enabled.
+While the CR-access exit qualification is extended in place (with the
+new bit previously having been reserved/zero), a new Extended
+Instruction Information VMCS field is being introduced.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
-The almost-pure C variant of the register latching would be something
-like
+hvm_monitor_descriptor_access() would need passing the extended
+instruction info, too, but that then further requires an interface
+change to also get that additional piece of data out to the monitor.
 
-           switch ( reg )
-           {
-#define CASE(regno, basereg)                                          \
-           case regno:                                                \
-               /* REX2 prefixes with W, R4 and possibly R3 set. */    \
-               asm ( ".byte 0xd5, 0x48 | %c1; mov %%" #basereg ", %0" \
-                     : "+m" (egpr->val[i])                            \
-                     : "i" ((regno & 8) >> 1) )
+While for the descriptor exit insn info the existing fields don't allow
+easy extension, the USER_MSR one in principle would. Version 003 of the
+specification, having gained URDMSR/UWRMSR as insns, says nothing either
+way, so the extended structure is used as necessary for the time being.
+Sadly whether it's reg1 or reg2 that ought to be used also doesn't
+really become clear. For now I'm assuming that reg1 represents
+ModR/M.rm while reg2 represents ModR/M.reg, deduced from instr-info
+definitions for descriptor access insns plus that for VMREAD/VMWRITE.
 
-           CASE(16, eax); break;
-           CASE(17, ecx); break;
-           CASE(18, edx); break;
-           CASE(19, ebx); break;
-           CASE(20, esp); break;
-           CASE(21, ebp); break;
-           CASE(22, esi); break;
-           CASE(23, edi); break;
-           CASE(24, eax); break;
-           CASE(25, ecx); break;
-           CASE(26, edx); break;
-           CASE(27, ebx); break;
-           CASE(28, esp); break;
-           CASE(29, ebp); break;
-           CASE(30, esi); break;
-           CASE(31, edi); break;
-#undef CASE
-
-           default:
-               ASSERT_UNREACHABLE();
-               break;
-           }
-
-which, because of the way the compiler translates the switch(), ends up
-larger without (imo) being that much easier to read.
-
---- a/tools/fuzz/x86_instruction_emulator/Makefile
-+++ b/tools/fuzz/x86_instruction_emulator/Makefile
-@@ -32,7 +32,7 @@ GCOV_FLAGS := --coverage
+--- a/xen/arch/x86/hvm/vmx/vmx.c
++++ b/xen/arch/x86/hvm/vmx/vmx.c
+@@ -4204,7 +4204,18 @@ static int vmx_handle_apic_write(void)
  
- OBJS := fuzz-emul.o x86-emulate.o
- OBJS += x86_emulate/0f01.o x86_emulate/0fae.o x86_emulate/0fc7.o
--OBJS += x86_emulate/decode.o x86_emulate/fpu.o
-+OBJS += x86_emulate/decode.o x86_emulate/fpu.o x86_emulate/util.o
- 
- WRAPPED = $(shell sed -n 's,^ *WRAP(\([[:alnum:]_]*\));,\1,p' \
-                       ../../tests/x86_emulator/x86-emulate.h)
---- a/tools/tests/x86_emulator/x86-emulate.h
-+++ b/tools/tests/x86_emulator/x86-emulate.h
-@@ -143,6 +143,8 @@ static inline uint64_t xgetbv(uint32_t x
-     return ((uint64_t)hi << 32) | lo;
- }
- 
-+#define get_xcr0() xgetbv(0)
+ static unsigned int msr_imm_gpr(void)
+ {
+-    msr_imm_instr_info_t info = { .raw = vmread(VMX_INSTRUCTION_INFO) };
++    msr_imm_instr_info_t info;
 +
- /* Intentionally checking OSXSAVE here. */
- #define cpu_has_xsave     (cpu_policy.basic.raw[1].c & (1u << 27))
- 
-@@ -225,6 +227,8 @@ void wrpkru(unsigned int val);
-                                      xcr0_mask(0xe6))
- #define cpu_has_avx10_2_aux         (cpu_policy.avx10.avx10_v2_aux && \
-                                      xcr0_mask(0xe6))
-+#define cpu_has_apx_f               (cpu_policy.feat.apx_f && \
-+                                     xcr0_mask(X86_XCR0_APX))
- 
- #define cpu_has_xgetbv1             (cpu_has_xsave && cpu_policy.xstate.xgetbv1)
- 
---- a/xen/arch/x86/x86_emulate/util.c
-+++ b/xen/arch/x86/x86_emulate/util.c
-@@ -7,6 +7,74 @@
-  */
- 
- #include "private.h"
-+#ifdef __XEN__
-+#include <asm/xstate.h>
-+#endif
-+
-+unsigned long *decode_egpr(struct egpr *egpr, unsigned int reg)
-+{
-+    unsigned int i;
-+
-+    for ( i = 0; i < ARRAY_SIZE(egpr->regno); ++i )
++    if ( cpu_has_apx_f )
 +    {
-+       unsigned int xcr0 = 0;
++        extended_instr_info_t xinfo =
++            { .raw = vmread(EXTENDED_INSTRUCTION_INFO) };
 +
-+       if ( egpr->regno[i] == reg )
-+           break;
-+
-+       if ( egpr->regno[i] )
-+           continue;
-+
-+       egpr->regno[i] = reg;
-+
-+       /*
-+        * Obtain the active XCR0 here, for not having emulation context or an
-+        * ops structure available, as this is a utility function used also
-+        * from outside of the emulator.
-+        */
-+       if ( cpu_has_apx_f )
-+           xcr0 = get_xcr0();
-+
-+       /* Fetch the register value if accessible. */
-+       if ( xcr0 & X86_XCR0_APX )
-+       {
-+#ifdef __x86_64__
-+           asm ( "sub	$17, %[reg]\n\t"
-+
-+                 /* mov %r16, (%rdi) */
-+                 ".byte 0xd5, 0x48; mov %%eax, (%%rdi)\n\t"
-+
-+                 /* cfcmovz %r17, (%rdi) */
-+                 ".byte 0x62, 0xe4, 0xfc, 0x0c, 0x44, 0x0f\n\t"
-+
-+                 ".irp n, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30\n\t"
-+
-+                 "dec	%[reg]\n\t"
-+
-+                 /* cfcmovz %r\n, (%rdi) */
-+                 ".byte 0x62, 0x64 + ((~\\n & 8) << 4), 0xfc, 0x0c\n\t"
-+                 ".byte 0x44, 0x07 + ((\\n & 7) << 3)\n\t"
-+
-+                 ".endr\n\t"
-+
-+                 /* cfcmovg %r31, (%rdi) */
-+                 ".byte 0x62, 0x64, 0xfc, 0x0c, 0x4f, 0x3f"
-+
-+                 : [reg] "+r" (reg), "=m" (egpr->val[i])
-+                 : "D" (&egpr->val[i]) );
-+
-+           egpr->orig[i] = egpr->val[i];
-+#endif
-+       }
-+
-+       break;
++        ASSERT(xinfo.mem_reg);
++        return xinfo.reg1;
 +    }
 +
-+    ASSERT(i < ARRAY_SIZE(egpr->val));
-+
-+    /* Note that this also acts as array_access_nospec() stand-in. */
-+    return &egpr->val[i & (ARRAY_SIZE(egpr->val) - 1)];
-+}
++    info.raw = vmread(VMX_INSTRUCTION_INFO);
  
- unsigned int x86_insn_length(const struct x86_emulate_state *s,
-                              const struct x86_emulate_ctxt *ctxt)
---- a/xen/arch/x86/x86_emulate/x86_emulate.h
-+++ b/xen/arch/x86/x86_emulate/x86_emulate.h
-@@ -634,27 +634,36 @@ int x86_emulate_wrapper(
- /* Map GPRs by ModRM encoding to their offset within struct cpu_user_regs. */
- extern const uint8_t cpu_user_regs_gpr_offsets[X86_NR_GPRS];
- 
-+/*
-+ * APX insn can reference up to 4 GPRs: Either up to three register operands
-+ * or up to two register operands and one memory operand, the latter using
-+ * potentially both base and index register.
-+ */
- struct egpr {
-+	unsigned char regno[4];
-+	unsigned long val[4], orig[4];
- };
- 
-+unsigned long *decode_egpr(struct egpr *egpr, unsigned int reg);
-+
- /*
-- * Given the 'reg' portion of a ModRM byte, and a register block, return a
-- * pointer into the block that addresses the relevant register.
-+ * Given the 'reg' portion of a ModRM byte, and a pair of register blocks,
-+ * return a pointer into either block that addresses the relevant register.
-  */
- static inline unsigned long *decode_gpr(struct cpu_user_regs *regs,
-                                         struct egpr *egpr,
-                                         unsigned int reg)
+     return info.gpr;
+ }
+--- a/xen/arch/x86/hvm/vmx/vvmx.c
++++ b/xen/arch/x86/hvm/vmx/vvmx.c
+@@ -418,17 +418,34 @@ static int decode_vmx_inst(struct cpu_us
+                            unsigned long *poperandS, unsigned int size)
  {
-+    if ( reg & 0x10 )
-+        return decode_egpr(egpr, reg);
-+
-     /* Check that the array is a power of two. */
-     BUILD_BUG_ON(ARRAY_SIZE(cpu_user_regs_gpr_offsets) &
-                  (ARRAY_SIZE(cpu_user_regs_gpr_offsets) - 1));
+     struct vcpu *v = current;
+-    union vmx_inst_info info;
++    union extended_instr_info info;
+     struct segment_register seg;
+     unsigned long base, index, seg_base, disp, offset;
+     unsigned int scale;
  
--    /*
--     * Note that this also acts as array_access_nospec() stand-in.  Higher
--     * bits may legitimately come in set here, from EVEX decoding, and
--     * hence truncation is what we want (bits not ignored will get checked
--     * elsewhere).
--     */
-+    ASSERT(reg < ARRAY_SIZE(cpu_user_regs_gpr_offsets));
-+
-+    /* Note that this also acts as array_access_nospec() stand-in. */
-     reg &= ARRAY_SIZE(cpu_user_regs_gpr_offsets) - 1;
+-    __vmread(VMX_INSTRUCTION_INFO, &offset);
+-    info.word = offset;
++    if ( cpu_has_apx_f )
++        info.raw = vmread(EXTENDED_INSTRUCTION_INFO);
++    else
++    {
++        union vmx_inst_info iinfo = { .word = vmread(VMX_INSTRUCTION_INFO) };
  
-     return (void *)regs + cpu_user_regs_gpr_offsets[reg];
+-    if ( info.fields.memreg ) {
++        info.raw               = 0;
++        info.scaling           = iinfo.fields.scaling;
++        info.addr_size         = iinfo.fields.addr_size;
++        info.mem_reg           = iinfo.fields.memreg;
++        info.segment_reg       = iinfo.fields.segment;
++        info.index_reg_invalid = iinfo.fields.index_reg_invalid;
++        info.base_reg_invalid  = iinfo.fields.base_reg_invalid;
++        info.reg1              = iinfo.fields.reg1;
++        info.index_reg         = iinfo.fields.index_reg;
++        info.base_reg          = iinfo.fields.base_reg;
++        info.reg2              = iinfo.fields.reg2;
++    }
++
++    if ( info.mem_reg )
++    {
+         decode->type = VMX_INST_MEMREG_TYPE_REG;
+-        decode->reg1 = info.fields.reg1;
++        decode->reg1 = info.reg1;
+         if ( poperandS != NULL )
+             *poperandS = reg_read(regs, egpr, decode->reg1);
+     }
+@@ -438,18 +455,17 @@ static int decode_vmx_inst(struct cpu_us
+ 
+         decode->type = VMX_INST_MEMREG_TYPE_MEMORY;
+ 
+-        if ( info.fields.segment > x86_seg_gs )
++        if ( info.segment_reg > x86_seg_gs )
+             goto gp_fault;
+-        hvm_get_segment_register(v, info.fields.segment, &seg);
++        hvm_get_segment_register(v, info.segment_reg, &seg);
+         seg_base = seg.base;
+ 
+-        base = info.fields.base_reg_invalid ? 0 :
+-            reg_read(regs, egpr, info.fields.base_reg);
++        base = info.base_reg_invalid ? 0 : reg_read(regs, egpr, info.base_reg);
+ 
+-        index = info.fields.index_reg_invalid ? 0 :
+-            reg_read(regs, egpr, info.fields.index_reg);
++        index = info.index_reg_invalid ? 0 :
++            reg_read(regs, egpr, info.index_reg);
+ 
+-        scale = 1 << info.fields.scaling;
++        scale = 1 << info.scaling;
+ 
+         __vmread(EXIT_QUALIFICATION, &disp);
+ 
+@@ -457,14 +473,14 @@ static int decode_vmx_inst(struct cpu_us
+             size = 4 << mode_64bit;
+ 
+         offset = base + index * scale + disp;
+-        switch ( info.fields.addr_size )
++        switch ( info.addr_size )
+         {
+         case 0: offset = (uint16_t)offset; break;
+         case 1: offset = (uint32_t)offset; break;
+         default:                           break;
+         }
+ 
+-        base = !mode_64bit || info.fields.segment >= x86_seg_fs ?
++        base = !mode_64bit || info.segment_reg >= x86_seg_fs ?
+                seg_base + offset : offset;
+         if ( offset + size - 1 < offset ||
+              (mode_64bit ?
+@@ -490,7 +506,7 @@ static int decode_vmx_inst(struct cpu_us
+         decode->len = size;
+     }
+ 
+-    decode->reg2 = info.fields.reg2;
++    decode->reg2 = info.reg2;
+ 
+     return X86EMUL_OKAY;
+ 
+--- a/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
++++ b/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
+@@ -505,6 +505,7 @@ enum vmcs_field {
+     SPEC_CTRL_MASK                  = 0x0000204a,
+     SPEC_CTRL_SHADOW                = 0x0000204c,
+     GUEST_PHYSICAL_ADDRESS          = 0x00002400,
++    EXTENDED_INSTRUCTION_INFO       = 0x00002406,
+     VMCS_LINK_POINTER               = 0x00002800,
+     GUEST_IA32_DEBUGCTL             = 0x00002802,
+     GUEST_PAT                       = 0x00002804,
+--- a/xen/arch/x86/include/asm/hvm/vmx/vmx.h
++++ b/xen/arch/x86/include/asm/hvm/vmx/vmx.h
+@@ -245,8 +245,8 @@ typedef union cr_access_qual {
+                  access_type:2,  /* VMX_CR_ACCESS_TYPE_* */
+                  lmsw_op_type:1, /* 0 => reg, 1 => mem   */
+                  :1,
+-                 gpr:4,
+-                 :4;
++                 gpr:5,
++                 :3;
+         uint16_t lmsw_data;
+         uint32_t :32;
+     };
+@@ -598,4 +598,27 @@ typedef union msr_imm_instr_info {
+     };
+ } msr_imm_instr_info_t;
+ 
++/* VM-Exit extended instruction info for APX */
++typedef union extended_instr_info {
++    unsigned long raw;
++    struct {
++        unsigned int scaling          :2,  /* bits 0:1 - Scaling */
++                     addr_size        :2;  /* bits 2:3 - Address size */
++        bool         mem_reg          :1;  /* bit 4 - Mem/Reg */
++        unsigned int operand_size     :2,  /* bits 5:6 - Operand size */
++                     segment_reg      :3;  /* bits 7:9 - Segment register */
++        bool         index_reg_invalid:1,  /* bit 10 - Index register invalid */
++                     base_reg_invalid :1;  /* bit 11 - Base register invalid */
++        unsigned int                  :4,  /* bits 12:15 - Undefined */
++                     reg1             :5,  /* bits 16:20 - Reg1 */
++                                      :3,  /* bits 21:23 - Undefined */
++                     index_reg        :5,  /* bits 24:28 - Index register */
++                                      :3,  /* bits 29:31 - Undefined */
++                     base_reg         :5,  /* bits 32:36 - Base register */
++                                      :3,  /* bits 37:39 - Undefined */
++                     reg2             :5,  /* bits 40:44 - Reg2 */
++                                      :19; /* bits 45:63 - Undefined */
++    };
++} extended_instr_info_t;
++
+ #endif /* __ASM_X86_HVM_VMX_VMX_H__ */
 
 
