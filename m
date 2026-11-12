@@ -2,46 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 724D2606A337
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2026 04:47:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 05683606A31C
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2026 04:52:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=pNr960ls
-Received: from list by lists.xenproject.org with outflank-mailman.1485090.1688395 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=mCckb7on
+Received: from list by lists.xenproject.org with outflank-mailman.1485098.1688404 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRMih-0004Co-5B; Thu, 12 Nov 2026 04:47:31 +0000
+	id 1xRMnb-0005o3-LV; Thu, 12 Nov 2026 04:52:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1485090.1688395; Thu, 12 Nov 2026 04:47:31 +0000
+Received: by outflank-mailman (output) from mailman id 1485098.1688404; Thu, 12 Nov 2026 04:52:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRMih-0004Cf-10; Thu, 12 Nov 2026 04:47:31 +0000
-Received: by outflank-mailman (input) for mailman id 1485090;
- Thu, 12 Nov 2026 04:47:30 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xRMnb-0005nw-IM; Thu, 12 Nov 2026 04:52:35 +0000
+Received: by outflank-mailman (input) for mailman id 1485098;
+ Thu, 12 Nov 2026 04:52:34 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ma.mandourr@gmail.com>) id 1xRMif-0004CZ-UG
- for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 04:47:30 +0000
+ (envelope-from <ma.mandourr@gmail.com>) id 1xRMna-0005nq-HK
+ for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 04:52:34 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xRMie-00Cb1g-Sz
- for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 05:47:28 +0100
-Received: from [10.42.69.7] (helo=localhost)
+ id 1xRMnZ-005KYo-Fm
+ for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 05:52:33 +0100
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <ma.mandourr@gmail.com>)
- id 6af544d8-e002-0a2a0a5209dd-0a2a4507e70a-12
- for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 05:47:28 +0100
-Received: from [209.85.215.179] (helo=mail-pg1-f179.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6af545fa-8faa-0a2a0a5109dd-0a2a45058cd4-14
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 05:52:33 +0100
+Received: from [209.85.216.46] (helo=mail-pj1-f46.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <ma.mandourr@gmail.com>)
- id 6af544de-b4ea-0a2a45070019-d155d7b3d822-3
- for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 05:47:28 +0100
-Received: by mail-pg1-f179.google.com with SMTP id
- 41be03b00d2f7-cd62c570b5dso2355673a12.2
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 20:47:27 -0800 (PST)
+ id 6af5460f-4cb1-0a2a45050019-d155d82eb12f-3
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 05:52:33 +0100
+Received: by mail-pj1-f46.google.com with SMTP id
+ 98e67ed59e1d1-3b15e46698aso1925625a91.3
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 20:52:32 -0800 (PST)
 Received: from cs-arch-srv04.cmpt.sfu.ca (cs-arch-srv04.cmpt.sfu.ca.
  [142.58.10.48]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-cdd8d79d406sm2187387a12.17.2026.11.11.20.47.25
+ 98e67ed59e1d1-3b197c6c9c5sm2490661a91.1.2026.11.11.20.52.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Nov 2026 20:47:25 -0800 (PST)
+ Wed, 11 Nov 2026 20:52:30 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,43 +52,43 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794458846; x=1795063646; darn=lists.xenproject.org;
+        d=gmail.com; s=20260707; t=1794459151; x=1795063951; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=2+dJk09S+6bQtbHtJHd1AoWeYtEP5tfHh8DUksgsO7k=;
-        b=pNr960ls40CoYzvJw8ro9bbRfEYhGz9yeIwWMAnRnYMMEE9shLic2WVKh8Wl38aZ+z
-         AC2UXnYs3UmTNd2fr8jvOVAMpI7A79/3Opxth/qJ8ujE59AS4E813qhAM5/UFBN5pwBJ
-         F3UaftDc6n2hOv3pqhODpJ07YSp9uaPZIJwcLVGq8mGSHYuw+f4HZItL2ORYztdikkCr
-         2cH25VrVyfkmJJPedmvYTqMV8Xto+0cbCIIQVr2RxyPIyKiDa5+tBEH9W/Dkld+L9IQd
-         1aupQhzbWxUnlPX956hhwsAax1jcqq+trcERZ84R2F9L8Z9GnBb/Bs81PCC9O589gSZR
-         yVjw==
+        bh=QuxgXMedaSlq9j81wCA34TaV3I3Ea839vO9apCgYBLc=;
+        b=mCckb7onRxj6xBF4hCr+N8ZoR6CbBEP6ZFsvlczK2YxPGckbftqlsAfzVGva3K+cXX
+         3Sc6V39dpWXTuWj3IV3BLOyxabqk3HAGMeGQjeNYgkrgBiKvewrKRY6UUhXkHLDoyhQN
+         iOwQVS85c8l57+XFQM6aP7HVRojqEGFqVz74vYYH8U5pOvMWsKU8A07smBCC2kJND0GL
+         +FIB5cAuKUBEBlP83qIDxSmOZQxF37ApqW13N6wsNIoShVrdktAX5Y9gru9sBYZgkekQ
+         w4ztgvUM9CQVolNxHO2MyrhOIPMdB9gLstUm3P0fvcANDWUMZNzZqUQNZSEJED2ZmzXA
+         YpMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794458846; x=1795063646;
+        d=1e100.net; s=20260707; t=1794459151; x=1795063951;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=2+dJk09S+6bQtbHtJHd1AoWeYtEP5tfHh8DUksgsO7k=;
-        b=EmVOcoV8ZmaQhiMDbxkYsS38bfOUcPWJkV76Cwjcg9s0n5lwT3M4WaU+gyyQfMmXmI
-         RoIsd0aSRQZY39n/+eJrzVteVr/c8EcmnVWDWgpeT0VwbjA83r3KGzbmAZRM46rB3/eE
-         8f44J7wp9XW3Cq0AAYyi0Evcb9lZzo0Xi7KqV+XooRRC6LamIl7qcPsb22mZJw+wbBHI
-         GtIMRhOe4mHwrnunerzZEWAkficiymhFTbi5Q3YFvbKo4r55LWt9hd2ICfvPz66QsT/P
-         YYZ08UrY/93Rdo4JQLqYak9c+YYzJP06/whFzNUIzRONcGd35BCqHjfzL4p/VARsLJuu
-         NBGQ==
-X-Gm-Message-State: APuU4Z8qF91zisVPGZAFl9NbJhHKwKguwKoYUfQOSczI7rCil6az5/FZ
-	+0BoXkqcBcY70ppw1DCjABAoWO7Dh/s6qFFsg4n5YcTu7doXys7e+hJpUrpAeQ==
-X-Gm-Gg: AYBFou0xZrj44ZvoxxEyNikSrVKKE6z+B6SiskqzYJdAW4TWlJP/vqDp5WEK6DeQRx1
-	EYG/8Ftm/ZVTk05d4hjvRgWphBVmU8fakkNMFX+DZPAf6X7+fL1RuTkg3bDwgdZe85VZjgq4tTN
-	qFKfv63MKAR22jdMwRVyyMHeikS+tZS1/6JhB1bdEZa4ErV8ohg3eikat24NPpAGy54i9aKfG+f
-	EdY8JEIEsuEFCOWKH0xvMlV8ho95UBziuCTsvfZ/XnSXR/bTgt09URrj9xKl65dk2y+NuvD6jrz
-	j4HsUfBuS66ZqlWkjirhYI9vLEItcBWGQf122gbDLJRBxs++DW2Uu741Y/Oe41vCiSfAqF2TxJj
-	1xvHVyCX9UMrf2dOS6afFex7ENFcvsbWTETo0xrK3kyvdh5Lk0jB5Yvs/2QE/NU3H2HCuBxi/hG
-	kq2SqQflXmxEs4Q8qMRgyGDOy4ALQrs8rZUSCSpxwvKJcoJtF9eTe0KOQuAmpF/La9CEZ6locf2
-	PCkQDkHgXrexg1wsCRgPrKlM7aM8OMz078BqX/oCtON9jEnHi3pQ1MR0dXajhnuioXg2gHh1Pjw
-	KjBYzTrmtRH9M07u1ZYc9xULZXYlkUywCDUNluGDfclAcl862+8mFWN7aQn9M8WIi7a8xCNaJ64
-	3vqXsG2fpb4odXC3SfXXMyxcNkxAcS0mfCJz3BAibWMkz/ZtV070XLt8OPlw2k26oEyQXNVH0Hb
-	7Cowez7ntWCAjq0cUXvcGE00veH42sFEYR
-X-Received: by 2002:a05:6372:a709:b0:3f1:fdd4:572b with SMTP id adf61e73a8af0-3f2fda991f5mr4616390637.36.1794458846002;
-        Wed, 11 Nov 2026 20:47:26 -0800 (PST)
+        bh=QuxgXMedaSlq9j81wCA34TaV3I3Ea839vO9apCgYBLc=;
+        b=TQLcGtf9A6686cI92a2uFAWxF8/X2KvFA04PYtUlmYuOvoU935TIbLy4WGpwmvwcdy
+         Doshv1me3aVpf2YQQemy+AE1f+P64vZLag29QJBVBadwZ677yMLNiJzL0m5kxJAeRCVg
+         sZU6jGEjagG+gHv/AOd3qlfK3TWyDNFarLa3XDA0U1um5tNziwHrBkTVq4CR+iRmJnUU
+         eVBgnF+SfTKngaRhW5/yptiNxYD5XX74HKmLdXNc/BEsfxLW4wOydW0T/mYbJ/hCEVs2
+         +GzocizJh32T3ewjkDMVn6n64ASGnKWqIarKcOZegws6jAB4WxBemuthBgAUYliN1xfs
+         5qHA==
+X-Gm-Message-State: APuU4Z8WBnsI7v5CceJpO10X4NwTKrIDTc14vrEY1sHXWtG6esHee9vJ
+	0CkpOmD/hoC6b99xYMvs39kOf3ztHMoGhe0YmvOnSbuUCYaJUPgCxEH8fJ62Lg==
+X-Gm-Gg: AYBFou0XmCHUMzVcFfG5xPg0R1R7JWijHljwqh0ELfBVltUNhaRxAs7aaNSelvXfbSf
+	r/i3SqBEkYwvheRQIrROITBic/YOmQowX2Zehb+oXTwVhLwI/KWXvsinPhe/sMPYKqGsd3bM29C
+	i6jr/Pcx/GEC05VEykpUD7dYFyTvMkBKgCWC7oIJ949DjLulqhxKSpxfFNtEltNpt14VCO6CvBn
+	Z1WK/F/NHBVFN8C4595tytKpho8KOKl3Ae2w6HE9wt2BrUtsyxbKuGAEIXY9v4WQmeQcqSfyhvp
+	oynhEOJHK6CyKQw8xxTThZMSuNJRu12Qt1OuTLSnREcdesNIhTNuS0EHfjS7/4/5iG93vXJ1dDH
+	NAXDLT8+6Yx2XJ1axpeXooQjVZKl/eUIlaMsx6wCVSjrWr4JrZlEjcXSvezcDVs+atsTZlSi621
+	pHvKXrFf7o8oD61ldN7yNQbvxlCGQDfdOKQmQ8PQ/yBfnwc29SEx6WN0EWj/4F5YlGUJIvss3Op
+	Bz+df9yecfNRh/lqjhyz081SvRuZL7RpJunrKkGO2Wo4lNONLVeBOmLZ5eu6ye/Cjwl0wyjAaPR
+	2XtUADZAGNi19c940j3emwhzOv2GVT9QKaaM3FoknhlUsb/MUdyScw+1qXeYbkkSTMhj0JqNI+Q
+	FxbT6XQR6h1V3nH2qisj5gQm8KxVvPu9tWAIiVJiZjIq3G09nIDYVbHDk+jbnpTHNFbiLgZ651j
+	vYo9idctRExWXwAyO7M4nJClv1tk+D4v8g
+X-Received: by 2002:a17:90b:1d0c:b0:3a8:c0cd:57f3 with SMTP id 98e67ed59e1d1-3b182e6a2ecmr3850271a91.18.1794459151157;
+        Wed, 11 Nov 2026 20:52:31 -0800 (PST)
 From: Mahmoud Abumandour <ma.mandourr@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Jan Beulich <jbeulich@suse.com>,
@@ -96,21 +96,21 @@ Cc: Jan Beulich <jbeulich@suse.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
 	Teddy Astie <teddy.astie@vates.tech>,
 	Mahmoud Abumandour <ma.mandourr@gmail.com>
-Subject: [PATCH v2] x86/nestedhvm: process the MSR-load and MSR-store areas of L1's VMCS
-Date: Wed, 11 Nov 2026 20:47:24 -0800
-Message-Id: <20261112044724.1039961-1-ma.mandourr@gmail.com>
+Subject: [PATCH v3] x86/nestedhvm: process the MSR-load and MSR-store areas of L1's VMCS
+Date: Wed, 11 Nov 2026 20:52:30 -0800
+Message-Id: <20261112045230.1043334-1-ma.mandourr@gmail.com>
 X-Mailer: git-send-email 2.25.1
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1794458848-36CDFAE4-8452A79A/0/0
+X-purgate-ID: tlsNG-c201ff/1794459153-24F1F2A1-FB4EA109/0/0
 X-purgate-type: clean
-X-purgate-size: 10663
-X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-purgate-size: 10764
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
@@ -125,7 +125,10 @@ and IA32_VMX_MISC now recommends the 512 entries an area may hold.
 
 Fixes: 9390642b7fa5 ("Nested VMX: Switch shadow/virtual VMCS between n1/n2 guests.")
 Assisted-by: Claude:claude-opus-5-5
+Signed-off-by: Mahmoud Abumandour <ma.mandourr@gmail.com>
 ---
+Changes in v3:
+- add signed-off-by line
 Changes in v2:
 - use paddr_t and unsigned int in msr_area_valid() (Jan)
 - reword process_msr_area()'s comment (Jan)
