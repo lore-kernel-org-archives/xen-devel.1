@@ -2,45 +2,40 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 76790606A321
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2026 10:38:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=aUhoC6fe
-Received: from list by lists.xenproject.org with outflank-mailman.1485498.1688710 (Exim 4.92)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F1335606A887
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2026 10:44:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1485508.1688719 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRSCI-0007S7-P6; Thu, 12 Nov 2026 10:38:26 +0000
+	id 1xRSHV-0000a6-90; Thu, 12 Nov 2026 10:43:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1485498.1688710; Thu, 12 Nov 2026 10:38:26 +0000
+Received: by outflank-mailman (output) from mailman id 1485508.1688719; Thu, 12 Nov 2026 10:43:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRSCI-0007S0-MJ; Thu, 12 Nov 2026 10:38:26 +0000
-Received: by outflank-mailman (input) for mailman id 1485498;
- Thu, 12 Nov 2026 10:38:25 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xRSCH-0007Rt-MI
- for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 10:38:25 +0000
+	id 1xRSHV-0000Zz-6T; Thu, 12 Nov 2026 10:43:49 +0000
+Received: by outflank-mailman (input) for mailman id 1485508;
+ Thu, 12 Nov 2026 10:43:48 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
+ id 1xRSHU-0000Zt-3A
+ for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 10:43:48 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xRSCH-00CPht-2u
- for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 11:38:25 +0100
-Received: from [10.42.69.11] (helo=localhost)
+ id 1xRSHT-00GuNq-89
+ for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 11:43:47 +0100
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6af59716-e002-0a2a0a5209dd-0a2a450bd09c-46
- for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 11:38:25 +0100
-Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6af59720-b7e8-0a2a450b0019-d155802cb475-3
- for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 11:38:24 +0100
-Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-4b7252a32c8so44326145e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 02:38:24 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-498362eb158sm15665111f8f.36.2026.11.12.02.38.23
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 12 Nov 2026 02:38:24 -0800 (PST)
+ (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
+ id 6af59860-bab6-0a2a0a5309dd-0a2a45078a4a-10
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 11:43:47 +0100
+Received: from [160.101.131.9] (helo=na1pdmzitismtp02.tibco.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
+ id 6af593ec-b4ea-0a2a45070019-a065830989b8-3
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 11:24:45 +0100
+Received: from fedora (unknown [10.113.40.46])
+ by na1pdmzitismtp02.tibco.com (Postfix) with ESMTPS id 87AC78515832;
+ Thu, 12 Nov 2026 05:23:27 -0500 (EST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,140 +44,127 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1794479904; x=1795084704; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=bRNdrRLVs1XU3292BWj6wd7lAPcnf29IH4cpZCkTm8k=;
-        b=aUhoC6fea7aSym/yRXKSxIcE/oC1Ce4hE5TwMmLOzhNpgzlGKBx8NiQkpUNAGKaMTE
-         0zMfL7xQ/lfTk5Wd2y36riG+67/+h97PgvueairjFcc5IQLY3AjyWOItyqJb28UrImev
-         7+TeWL7lhV0GNZT8y+t6E6+B2zqHDznQLw9bOaaglLTa3XzndIhGKvwjzqpoKI2iyK6/
-         i71ya1MuV+8aJcTFSXT5ycXu1frMe7NKYPpKjejffFNrGtDUJkKZBLkHsy23C+Jw39eV
-         ZjF+zVXyEPFNR9Yr3bjhP7B8vwmK1i+yf6oq2ejO94Fsy9mg151cI2WvpO+0c7fGcxHk
-         SRLQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794479904; x=1795084704;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=bRNdrRLVs1XU3292BWj6wd7lAPcnf29IH4cpZCkTm8k=;
-        b=mkKQxdQBeCnq6z3GhSKEI77oBBYcayiFZPq0QkWdJIDtdJnhbCmWR1aHUhvL/kFKzv
-         YFVy76NFnl84F3tCOHLLPx9wigID9GNvJADldYJSKUTjeMEXswOWWCZc7BP3tFbt+WiH
-         B+OFpP2z1W5uqJwERytpYBvrPa3OWfojYa8ZsVTAfhqUx+eCJptv4OyRLjF5nNJ9O3lR
-         mYY/9ypKdoiCo1s2SOjy0DYrTZrEm7aG4SnhoKS4Bmeyjf2N21iAGQeE00AUuwLXrG49
-         Y8AqcnPMkB722SNhCa9iD43VdUTnUVa1HEro7iByCjJ2K50ngJzD+E0o3YiT7SnGok8E
-         73CQ==
-X-Forwarded-Encrypted: i=1; AL+hErGDXhbSYFtPxivxrxc61SpXA+LdJBBQhfXdxRVaNMErYQbmFm4nEc6xf8MKp2zEC4emZAIu70F9Pfo=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z8ydqHAKjDKSr1fkTYXf2mHLhcEgMBGROfHDPMXxChx/giMaeHq
-	5eQiDXqqI+7uGvkOhkJYbxhDZrts7A36S4Et989Z7MR1ABDKBHcy8BKAHMIHUzcZbd1O356W6j9
-	1NR6gPw==
-X-Gm-Gg: AYBFou1LDScTm83lu7SNX29ThCxsf6ZnByGTLJ1zTO0xWCoB5BJTI+5571eZOyAgJMk
-	Ix9Q0hkjvG0w+HwVtnzRsqUTLA+STEsbNfvDgu0uuZzKc/ufGuO0jXoo6enLUPbCZMNhseE4kxz
-	j24KB1HtA+EDydiWnvSxIpQw2jQ//Vpf2ocBpSr2A81+JlOs80D7e7Tnn12YJm40O+B94Gyql1K
-	I69vPAKiRPfnVO4Sh5s6Dxvv40LXDxTekpio0nFSlHxNlv6vPPr1h2XRWSekEQqJecHQg1g77zC
-	i1ZqJjYIAAkw2TMIUVz93kMMbH74ve0/EZT5G8kicCnQC5QKlMYQFpB5ve2WIfBbYv5O+0coYq/
-	8DElSpZHWJjQi7KyC+u8DuHmCeA8q57MlHULY2AqUONH/yeVqFh0T8TtMRmFbtsk+BjYZ9Au+XP
-	uhJ7WGruFCzIdZ8mMJLjzzvx2BqDgaefC4wqtOn17bV4Z+vHiSO3XhY/POkwZQoCp7pFHo6ObIu
-	tdSLycZiSzTnZW5hiZ80vxnUS3k9baUZbocpqqFJ+49NE+LZj/JCM7xkSgnp5O34nmndksoEYd7
-	wI51DLgC7Q3TjAvrylF+JcbrQRhUg23QSbIJ4J1vYRr+Gm73z3OhNHTI9aV+84BFP8Qcwl/8qut
-	PyNFiT3LtkOhb6oFDNA==
-X-Received: by 2002:a05:600c:b99:b0:4a2:c2b:a91b with SMTP id 5b1f17b1804b1-4ba09363ffcmr87340675e9.10.1794479904292;
-        Thu, 12 Nov 2026 02:38:24 -0800 (PST)
-Message-ID: <90380d1f-cf67-4026-aed8-1a1ba1e388f4@suse.com>
-Date: Thu, 12 Nov 2026 11:38:23 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; none
+From: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
+To: ross.lagerwall@citrix.com,
+	stephen.cheng@citrix.com
+Cc: xen-devel@lists.xenproject.org,
+	andrew.cooper3@citrix.com,
+	jason.andryuk@amd.com,
+	jbeulich@suse.com,
+	roger@xenproject.org,
+	teddy.astie@vates.tech
+Subject: Re: Re: [PATCH] x86/nsvm: Fix L2 VINTR intercept merging when only Xen intercepts L1
+Date: Thu, 12 Nov 2026 10:24:30 +0000
+Message-ID: <20261112102436.886286-1-abdelkareem.abdelsaamad@citrix.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <e3105225-de64-49e1-9254-45917ad5bb13@citrix.com>
+References: <e3105225-de64-49e1-9254-45917ad5bb13@citrix.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86emul: Treat the vector of INT imm8 as unsigned
-To: Stephen Cheng <stephen.cheng@citrix.com>
-Cc: andrew.cooper3@citrix.com, roger@xenproject.org,
- ross.lagerwall@citrix.com, teddy.astie@vates.tech,
- xen-devel@lists.xenproject.org
-References: <47ed6cbd-77af-4328-858c-80d0ecae50c3@suse.com>
- <20261112103134.113023-1-stephen.cheng@citrix.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20261112103134.113023-1-stephen.cheng@citrix.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-42698a/1794479904-18AC89EA-8980C06C/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 1831
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=4.0.1
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-ef75cf/1794479085-A70DDAE4-3D9AD70A/1/8925369682
+X-purgate-type: clean
+X-purgate-size: 5124
+X-Spam-Status: No, score=-21.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 12.11.2026 11:31, Stephen Cheng wrote:
-> On 12.11.2026 10:29, Jan Beulich wrote:
->> On 12.11.2026 08:23, Stephen Cheng wrote:
->>> The decoder sign-extends all 8-bit immediates (SrcImmByte). For INT
->>> imm8 the immediate is the vector, which is unsigned. So INT $0x80 to
->>> INT $0xff put a negative vector into the event (e.g. -128 for 0x80).
->>>
->>> hvm_inject_event() then fails its "vector == event->vector" assertion,
->>> and a debug Xen panics. An HVM guest can trigger this with the forced
->>> emulation prefix (hvm_fep).
->>>
->>> Cast the vector to uint8_t, as is already done for the port of IN/OUT
->>> and the operand of AAM/AAD.
->>
->> I'm afraid this isn't sufficient: At least x86_insn_immediate() is also
->> affected, and then also for the other insns you mention above plus quite
->> a few more (in particular uniformly for 0F, 0F3A and XOP08). I think
->> this needs sorting in x86_decode_onebyte() for all of the former (some
->> of which I then need to mirror into the APX series for Map4), and in the
->> switch() below setting ctxt->opcode and s->desc (where decode_*() are
->> called) for the latter three.
->>
->> There'll then want to be a 2nd Fixes: tag for the commit which
->> introduced x86_insn_immediate().
-> 
-> Thanks Jan, I see. I'll move the fix into the decoder and add the 2nd
-> Fixes: tag in v2.
-> 
-> Two questions:
-> 
-> 1. Which other one-byte insns do you mean by "quite a few more"? I can
->    see the shift/rotate counts (C0, C1). Are there others?
+On 11/5/6 16:16 PM, Ross Lagerwall wrote:
+>On 11/3/26 4:59 PM, Abdelkareem Abdelsaamad wrote:
+>> When nesting SVM, if the L1 hypervisor has not requested a virtual interrupt
+>> (VINTR) intercept for L2, Xen should not force one. L2 execution should remain
+>> isolated from the L1 VINTR state, and there should be no expectation that L2
+>> execution results in an L1 VINTR becoming deliverable.
+>> 
+>> Currently, if Xen intercepts the VINTR for its own L1 management, this
+>> intercept incorrectly forces an intercept during L2 execution even when L1
+>> intended for L2 to run without it. This breaks the expected transparency of L1
+>> configuration and introduces unnecessary VMEXITs.
+>> 
+>> Furthermore, handling this forced VMEXIT_VINTR can cause a pending L1 virtual
+>> interrupt to be incorrectly delivered to L2. This occurs because when the
+>> intercept is determined to be requested solely by the host
+>> (returning NESTEDHVM_VMEXIT_HOST), svm_vmexit_handler does not switch to the
+>> correct VMCB context before evaluating the interrupt injection.
+>> 
+>> Fix this by ensuring the L2 VINTR intercept bit in the L2 execution VMCB solely
+>> reflects the L1's explicit configuration for its guest, independent of Xen's
+>> internal L1 intercept state.
+>> 
+>> Signed-off-by: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
+>> ---
+>> Testing:
+>>   - Test setup using a custom XTF nested virtualization setup:
+>>     1. An L1 maskable interrupt is triggered while L1 has physical interrupts
+>>        disabled (via the CLI), leaving the interrupt pending.
+>>     2. L2 is launched via VMRUN with an active, deliverable virtual interrupt
+>>        configured in its VMCB (L2 EFLAGS.IF = 1, L2 vGIF is unmasked,
+>>        V_IRQ_PENDING is set and L2 V_IRQ is injected on a distinct vector from
+>>        the pending L1 interrupt).
+>>     3. Xen enables L1's VINTR_INTERCEPT to catch the next available VINTR
+>>        window. L2's VINTR_INTERCEPT is kept cleared.
+>> 
+>>     Results:
+>>       - Old Behaviour: If the pending L1 maskable interrupt vector has no
+>>         handler mapped in the L2 IDT, L2 immediately crashes. Otherwise,
+>>         the L1 maskable interrupt is incorrectly leaked and delivered into
+>>         the L2 guest.
+>>       - New Behaviour: The L1 maskable interrupt is securely withheld from L2
+>>         and correctly delivered back to the L1 context upon the next window.
+>> 
+>>     Note on Test scenario:
+>>     I think the same window race can also result when having an injected L1
+>>     maskable interrupt handler that temporarily raise the TPR to block
+>>     lower-priority interrupts, with the intention to be lowering the TPR
+>>     asynchronously later, then executing the L2 VMRUN in between.
+>> 
+>>   - CI tests:
+>> https://gitlab.com/xen-project/people/aabdelsa/xen/-/pipelines/3023453459
+>> ---
+>>   xen/arch/x86/hvm/svm/nestedsvm.c | 3 +++
+>>   1 file changed, 3 insertions(+)
+>> 
+>> diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
+>> index 128008321d..21b50a59b0 100644
+>> --- a/xen/arch/x86/hvm/svm/nestedsvm.c
+>> +++ b/xen/arch/x86/hvm/svm/nestedsvm.c
+>> @@ -403,6 +403,9 @@ static int nsvm_vmcb_prepare4vmrun(struct vcpu *v, struct cpu_user_regs *regs)
+>>       n2vmcb->_general2_intercepts =
+>>           n1vmcb->_general2_intercepts | ns_vmcb->_general2_intercepts;
+>>   
+>> +    if ( !(ns_vmcb->_general1_intercepts & GENERAL1_INTERCEPT_VINTR) )
+>> +        n2vmcb->_general1_intercepts &= ~GENERAL1_INTERCEPT_VINTR;
+>> +
+>
+>If L0 wants to inject an interrupt but the VINTR intercept is not enabled, how
+>would it detect when it can inject the interrupt? In particular, if VMCB(1-2)
+>has V_INTR_MASKING=0 and L2 sets EFLAGS.IF=1, the interrupt should be
+>delivered but L0 won't notice.
+I do not follow on this. My reading of the APM about the V_INTR_MASKING is
+that it is intended to decouple the control of the physical and the virtual
+interrupt's EFLAGS.IF. Specifically, when it is set, the host's EFLAGS.IF at
+the time of VMRUN determines whether maskable physical interrupts are masked or
+not. The host and guest values of EFLAGS.IF remain distinct.
 
-Having done the APX side change, it may indeed be just those in the base
-opcode map. "quite a few" covered the other opcode maps which I did
-mention.
+If the L0 wants to detect L1's interrupt window is open, it checks against L1's
+EFLAGS. In the scenario when the L1 configured the L2 with EFLAGS.IF as
+enabled (1) but the L1 itself has EFLAGS.IF cleared (0) and so it is in
+interrupt shadow, and the L1 then runs the L2. My understanding is that the L2
+should not be intercepted as nothing changed for the L1's state (L1's EFLAGS.IF
+remains cleared). Only when the L0 wants to detect that the L2's interrupt
+window is open, it explicitely intercepts the VMCB02 in
+svm_intr_assist->svm_enable_intr_window?
 
-> 2. Should I keep the existing (uint8_t) casts at the IN/OUT and AAM/AAD
->    use sites, or drop them?
+Or do you mean that during nested runs, L0 needs to intercept when the virtual
+interrupt window opens to know when physical interrupts become deliverable—
+since from L2's perspective, L1's virtual interrupts act as physical
+interrupts? If the answer is yes, What VMEXIT should be injected back to L1? Is
+this VMEXIT_INTR?
 
-I'd prefer if they were dropped in exchange.
-
-Jan
 
