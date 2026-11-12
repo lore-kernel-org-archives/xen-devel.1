@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 06410606A327
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2026 11:57:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 343A8606A321
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2026 11:57:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ijwXl9aQ
-Received: from list by lists.xenproject.org with outflank-mailman.1485657.1688813 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=QmELgtuv
+Received: from list by lists.xenproject.org with outflank-mailman.1485662.1688826 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRTQG-0005oA-U8; Thu, 12 Nov 2026 11:56:56 +0000
+	id 1xRTQH-00064r-HF; Thu, 12 Nov 2026 11:56:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1485657.1688813; Thu, 12 Nov 2026 11:56:56 +0000
+Received: by outflank-mailman (output) from mailman id 1485662.1688826; Thu, 12 Nov 2026 11:56:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRTQG-0005nW-Nx; Thu, 12 Nov 2026 11:56:56 +0000
-Received: by outflank-mailman (input) for mailman id 1485657;
- Thu, 12 Nov 2026 11:51:19 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xRTQH-00062D-Bu; Thu, 12 Nov 2026 11:56:57 +0000
+Received: by outflank-mailman (input) for mailman id 1485662;
+ Thu, 12 Nov 2026 11:51:23 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <holyting07@gmail.com>) id 1xRTKp-0005a1-DS
- for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 11:51:19 +0000
+ (envelope-from <holyting07@gmail.com>) id 1xRTKt-0005bN-Jx
+ for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 11:51:23 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xRTKo-003gWe-QS
- for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 12:51:18 +0100
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xRTKt-00H88Z-0q
+ for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 12:51:23 +0100
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <holyting07@gmail.com>)
- id 6af5a823-bab6-0a2a0a5309dd-0a2a4508dff0-32
- for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 12:51:18 +0100
-Received: from [209.85.216.45] (helo=mail-pj1-f45.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6af5a838-e002-0a2a0a5209dd-0a2a450ab1ee-14
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 12:51:22 +0100
+Received: from [209.85.215.182] (helo=mail-pg1-f182.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <holyting07@gmail.com>)
- id 6af5a835-f659-0a2a45080019-d155d82db4f4-3
- for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 12:51:18 +0100
-Received: by mail-pj1-f45.google.com with SMTP id
- 98e67ed59e1d1-3b10ca4e3f9so2375741a91.0
- for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 03:51:18 -0800 (PST)
+ id 6af5a838-f2d2-0a2a450a0019-d155d7b6b4a5-3
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 12:51:22 +0100
+Received: by mail-pg1-f182.google.com with SMTP id
+ 41be03b00d2f7-cd61cef87f1so2016623a12.0
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 03:51:21 -0800 (PST)
 Received: from Soun ([211.176.214.155]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3b197c42a4csm4538630a91.4.2026.11.12.03.51.15
+ 98e67ed59e1d1-3b197c42a4csm4538630a91.4.2026.11.12.03.51.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Nov 2026 03:51:16 -0800 (PST)
+ Thu, 12 Nov 2026 03:51:19 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,59 +51,59 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794484277; x=1795089077; darn=lists.xenproject.org;
+        d=gmail.com; s=20260707; t=1794484280; x=1795089080; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=9E20EbwIjTi+wfLtCh2CvjL1HiP4RRaKiCZgKQ0LTcU=;
-        b=ijwXl9aQPrRevEsSOOGfKENsh1y3fPGUOqxfPbX5zulEMLmss6Xyml1WJxnZLnJkzv
-         evnniYmHPbXNklaeJcC1qOCzCFFf25ET2RbPu78wS2dCNAzGC0bcgXhOZJU9V+zRKXmw
-         qR/9QrS462qg6IwIN4fw0qtpfVRyh2V12+vkcBmISBg0NOpYzMQazDqRgt5YdJSnXlYK
-         M0XrELlhq0JVHPrEImylznR75sYx2b01iUEb0lbf5ioTBK2fsiD2qLLinzNvHlqMTTFq
-         5yBSBS/FMEP4fAbcEwE5ZaNbPdK+l8UKVYSh/OvXzVKBWTvYXXVeHtzihjgwR0mRGsUk
-         p+WQ==
+        bh=WQ8QG17P3Y8DiLIc7VFs/FvC5yBJsW5SXVDTD633UI4=;
+        b=QmELgtuvv0BcKpGaG0RUfK/hM+17d9db7+vmiwDkeyU32zMFgptPLyUNiRkf64iHJb
+         m9SR9uUiWBdo14Do0jcfVNF99qhCodfzvYNAjCMH8g/zQlowcfxq4QSCWy5iqZbp63bc
+         a+xG4Ufr6SK6TkQDvZn88qN1bSU2K03bkfltTw+FuqdG3vhUy/PpAGqhyuF3JmEwMm3j
+         s8II+jyQnoifzDzqFIBafmP5r7r3dYaMqntmkq9Z69VSkCyEJRuSU4bOdUq4GNkEh0Xo
+         6jNg43XjZU2NqkbUD/WMasjFE9BY9ljv64kgRSJeZb17s8FFVU7WvE+tf0ZzCGjqhHlz
+         3wEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794484277; x=1795089077;
+        d=1e100.net; s=20260707; t=1794484280; x=1795089080;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=9E20EbwIjTi+wfLtCh2CvjL1HiP4RRaKiCZgKQ0LTcU=;
-        b=G23J5yldYmSNuV+si54OYXPffMxCs46xyB5LBYgvK4aikdolAh2F9cHaoSjdZwNvot
-         pzr6SUrrGShs+qGGWG+JjIvww+OqhayKm0ZEtKILQFG5QMar3cmigclht7VPDKt+KHFQ
-         ZL0yRzv6rC5f11b79/KB/LA3a4KMXeSdlWKAT0JPRyjr4rbMPweovaqX7Hk32AU+4gjt
-         5z22kwqVFF71lMf/o7/YH/tvtpTdsCV2dED1V1efKvDRWyxr+mETspzl7XzX8t1MIy9K
-         ycTtHwwAMeF35//JuvpahF8/gUdPPmEaFM+VULpp9OyysUq/47YcXWCXZaXtNdt5npUB
-         GnZA==
-X-Gm-Message-State: APuU4Z8XCRWkbVl6xTdRlRJRUxMyM/BMY+xu3ej6Qt51Qbhnxy8z4Otf
-	E4JiTgzG6gyfvKbspnLt++vmxRMSXfQkC8SvIgx1DqxTWkjTc1rC1lo7
-X-Gm-Gg: AYBFou1GeO7sYVh17YZvbabMnyLxwIeiKMcRhugckXhoQqXQDApdvsbu0jL9jhFIhDS
-	27uYVJ5Y6AlUE7oJIEcMF0fVgeb0WTyjToFn6FpQ1lQKd1zNTjY4AxszDvKMilqA1u98BBehm2c
-	SSdYo8UdS8s6DKf4JU2lJN3fqsQulWkz5fyXvf1UHBt64DnXWbwNLLJOwG+MoIRbrdAzBSe5aV7
-	KPWSqscoUlBJwV4UWngpE9/LtFI/7FP+qRZxFCXPFNViZYOeZfnjt/oxxhoRSWTgVane8o1xBd7
-	9Al4RdGl5favFZvVG3oCBxnT03aN4pAnw/7HMX37BVeUL2R1FoLSOkuoa49Ykq4RMShNxjw9ioj
-	ZR7w1c94Ub81AJLSOl9lB8sXsSpK3CGsrGA50BoKkPRlDV6pviZ16K6JyrND3TpUVyUNMwGhuBS
-	QKMhell0UKZW+801hTRqzGcigJIpStIGfkw1u+npQRrozKRMpYNP7Nx7cncjiz+gT7orCqJcSO5
-	qGcAmbUbLwNZ7ddZBgUdkUw/sm1GAqMFNNec9j83W8hk2Q2IOj8AvdSMBTk+jUzdtRn35My1vuj
-	6cXgUJeEYmrjsihegt+I+Lg/dIeRqnWGq6JY2g//hUUjNhpH9x2Wnc/mNeWfwts6XdHPizpZgN1
-	Wbftm7WwDA8xHByMX
-X-Received: by 2002:a17:90b:1c01:b0:3ac:6fcf:81a2 with SMTP id 98e67ed59e1d1-3b182fa3b9emr4999530a91.57.1794484276563;
-        Thu, 12 Nov 2026 03:51:16 -0800 (PST)
+        bh=WQ8QG17P3Y8DiLIc7VFs/FvC5yBJsW5SXVDTD633UI4=;
+        b=HJw5EoNCJFf3EIfta9yOL9IboYY1dq6bnzyNqk6BXOYWll/miDmEwVdiPgoE3/SjfJ
+         qNBHnt3B/VmdJllvZTBi0u/mY0/l1I3xe6wGOG2cc/7LJ+c6v2D4o5E4G3i4MuR56jyf
+         m6g0h+ShqsOS2DmIbK6kMDq4lKLvxPof0pBLRQMPVV6Shg7rO7laIm0V3a1/Cq0X78DE
+         CZHwhvXGuN/QLtPjxj3/cSsU3Xv7QdC5/eaHcK0vUT5tbjoO+dSLwwSK11AY7Z6JDkDt
+         5X8K57eAOwLMz6Nss+uXrQQxKp3ZO9mkjY8+DOWZGlg2xlfuNnEXZX1FH/p8QN9O77vw
+         uxNg==
+X-Gm-Message-State: APuU4Z/y6muRI+p1nmrnlxodf0zGbSDWaJStreZKjNgl+r7fEvZ4bKdN
+	XPgxPh3zPZIuXfIoNrgvvV0jj3SY4DS40NowPvmkwB9zT4gSzz+x8im3
+X-Gm-Gg: AYBFou21vV4oZ+yd5m7wFqb6Wb4DMuqD5IYBeu5I1fz/Owhmxaq9nEH5BZRjct+MBM+
+	JS1BYSg6PaJTbeJWVIiXYwvZxysHyJ62OFOPcLH62QtIYIZmkdENLRLOTcziWeryq1IoufJOzai
+	4fzQC/IWGvN6Sv50ID32rh7WvTMDSk24286ZUZ2NXEOXYK0oQblIVr3+Yp6s4zPfnBsofkPdPdA
+	ifoYwYxlqKWRARJ1xcJbeCoLIpRo1uxx/EnXCsLlHgmwazfwy3a39UwjYUQwmv99eTIH/MkmJxL
+	rVo+n9BGCejPI9zGoSO8vXd4GskOJ9JSQJeqxjxrXH45OfAYW2Xk6o13N3vpe2ON+Ww3h3MSvWB
+	nZ/hXh9ZhTI/V5VjWuKXvOfVOqN1n3QDevg2zOaRELPs9Dk06L0yZdhB1rLPp1/2R0X7cUt5wk8
+	ykQJHaYKAqk8/E2chb7J4w9azpEtmAbORQ1QE7x6u/MGTVN14JnMrLpWXqZDNVWm/bhMEoWW5s+
+	1upg4l3q8rQYOHQR9BDgzPFDDyt0GGk9bfRVZPhh1yvnidYVbISUKmpUT4uai8cb6XbFAQJNlcY
+	CDCJR+7EtP/s3hPxjGj2Zr+c/ZxBlcSYhSnCH4P5whkMfUGzDmzFB35vAuMvQexvegDxLB+jzAM
+	jIRGX38jERC0E97Y/
+X-Received: by 2002:a17:90b:3e8e:b0:3ab:7031:d962 with SMTP id 98e67ed59e1d1-3b182f407cdmr5266435a91.41.1794484280033;
+        Thu, 12 Nov 2026 03:51:20 -0800 (PST)
 From: SounLabs <holyting07@gmail.com>
 To: Anthony PERARD <anthony.perard@vates.tech>
 Cc: xen-devel@lists.xenproject.org,
 	SounLabs <holyting07@gmail.com>
-Subject: [PATCH 2/4] libfsimage/reiserfs: validate item counts and journal length
-Date: Thu, 12 Nov 2026 20:49:47 +0900
-Message-ID: <20261112114949.9936-3-holyting07@gmail.com>
+Subject: [PATCH 4/4] libfsimage/xfs: bound inline extent count and directory btree traversals
+Date: Thu, 12 Nov 2026 20:49:49 +0900
+Message-ID: <20261112114949.9936-5-holyting07@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20261112114949.9936-1-holyting07@gmail.com>
 References: <20261112114949.9936-1-holyting07@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1794484278-CCF4F87B-FE6DF68C/0/0
+X-purgate-ID: tlsNG-4011c0/1794484282-589C9CFC-B7DFF5FC/0/0
 X-purgate-type: clean
-X-purgate-size: 5199
+X-purgate-size: 5877
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
@@ -113,129 +113,157 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 libfsimage is used by pygrub to parse the filesystem of an untrusted guest
-disk image from dom0.  Three reiserfs on-disk counts are used without
-validation:
+disk image from dom0.  Several xfs on-disk fields are used without validation,
+leading to an out-of-bounds read and to unbounded tree descents that loop
+forever:
 
- - block_head.blk_nr_item is iterated as item headers / keys in search_stat()
-   and next_key() without checking they fit in the block (heap OOB read).
- - item_head.ih_entry_count is iterated as directory headers in reiserfs_dir()
-   without bounding it to the item body (heap OOB read).
- - the journal descriptor/commit j_len indexes commit.j_realblock[], which
-   holds JOURNAL_TRANS_HALF entries, in journal_init() and block_read()
-   without a bound (stack OOB read).
+ - init_extents(), XFS_DINODE_FMT_EXTENTS: di_nextents is taken as the number
+   of inline extent records; next_extent() then iterates that many records from
+   the inode data fork without checking they fit (heap OOB read).
 
-Check each count against the structure that holds it: blk_nr_item against the
-block size when a node is read (including the root), ih_entry_count against
-ih_item_len, and j_len against 2 * JOURNAL_TRANS_HALF.
+ - init_extents(), XFS_DINODE_FMT_BTREE: the root-to-leaf descent follows
+   bb_level/ptr0 with no depth limit, so a node whose bb_level does not
+   decrease (e.g. one pointing to itself) loops forever.
 
-Same class of issue as XSA-497 (iso9660).  pygrub is only security supported
-when run de-privileged (XSA-508), so this is hardening rather than a security
-fix.
+ - first_dentry(), directory da-btree: the root-to-leaf descent assigns
+   xfs.dablk = btree[0].before with no depth limit or cycle detection, so a
+   self-referential or cyclic directory node loops forever.  This is the loop
+   reached by the di_nextents reproducer as well, which therefore triggers
+   both the OOB read above and this unbounded da-descent hang.  When the
+   descent is bounded and the directory yields no entries, first_dentry()
+   returns NULL and the caller in xfs_dir() dereferenced that NULL name via
+   substring(dirname, NULL) (NULL read).
+
+Cap di_nextents to the number of records that fit in the inode data fork,
+bound both the bmap btree and the directory da-btree descents to a fixed
+maximum depth, and have xfs_dir() fail the lookup gracefully when a directory
+yields no first entry.
+
+Same class of issue as XSA-497 (iso9660); the superblock sanity check added
+by XSA-443 does not cover these inode-level and btree-level fields.  pygrub is
+only security supported when run de-privileged (XSA-508), so this is hardening
+rather than a security fix.
 
 Signed-off-by: SounLabs <holyting07@gmail.com>
 ---
- tools/libfsimage/reiserfs/fsys_reiserfs.c | 46 ++++++++++++++++++++++-
- 1 file changed, 45 insertions(+), 1 deletion(-)
+ tools/libfsimage/xfs/fsys_xfs.c | 57 +++++++++++++++++++++++++++++++--
+ 1 file changed, 54 insertions(+), 3 deletions(-)
 
-diff --git a/tools/libfsimage/reiserfs/fsys_reiserfs.c b/tools/libfsimage/reiserfs/fsys_reiserfs.c
-index 10ca657476..395488245b 100644
---- a/tools/libfsimage/reiserfs/fsys_reiserfs.c
-+++ b/tools/libfsimage/reiserfs/fsys_reiserfs.c
-@@ -420,6 +420,13 @@ block_read (fsi_file_t *ffi, int blockNr, int start, int len, char *buffer)
- 	    return 0;
- 
- 	  j_len = desc.j_len;
-+	  /* See journal_init(): j_len must not index commit.j_realblock[]
-+	   * (JOURNAL_TRANS_HALF entries) out of bounds. */
-+	  if (j_len > JOURNAL_TRANS_HALF * 2)
-+	    {
-+	      errnum = ERR_FSYS_CORRUPT;
-+	      return 0;
-+	    }
- 	  while (i < j_len && i < JOURNAL_TRANS_HALF)
- 	    if (desc.j_realblock[i++] == blockNr)
- 	      goto found;
-@@ -497,7 +504,11 @@ journal_init (fsi_file_t *ffi)
-       commit_block = (desc_block + desc.j_len + 1) & (block_count - 1);
-       journal_read (ffi, commit_block, sizeof (commit), (char *) &commit);
-       if (desc.j_trans_id != commit.j_trans_id
--	  || desc.j_len != commit.j_len)
-+	  || desc.j_len != commit.j_len
-+	  /* j_len indexes desc.j_realblock[] and commit.j_realblock[],
-+	   * which together hold at most 2 * JOURNAL_TRANS_HALF entries;
-+	   * a larger (attacker-controlled) value reads past 'commit'. */
-+	  || desc.j_len > JOURNAL_TRANS_HALF * 2)
- 	/* no more valid transactions */
- 	break;
-       
-@@ -555,6 +566,8 @@ journal_init (fsi_file_t *ffi)
-   return errnum == 0;
+diff --git a/tools/libfsimage/xfs/fsys_xfs.c b/tools/libfsimage/xfs/fsys_xfs.c
+index e98b367901..7fbd78a122 100644
+--- a/tools/libfsimage/xfs/fsys_xfs.c
++++ b/tools/libfsimage/xfs/fsys_xfs.c
+@@ -201,20 +201,42 @@ di_read (fsi_file_t *ffi, xfs_ino_t ino)
+ 	return 1;
  }
  
-+static int blkh_nr_item_ok (char *cache, unsigned int blocksize);
++/* An XFS bmap btree is only a handful of levels deep; use a generous cap
++ * to bound a traversal that would otherwise loop forever on a node whose
++ * bb_level does not decrease (e.g. one that points to itself). */
++#define XFS_BM_MAXLEVELS 32
 +
- /* check filesystem types and read superblock into memory buffer */
- static int
- reiserfs_mount (fsi_file_t *ffi, const char *options)
-@@ -646,6 +659,8 @@ reiserfs_mount (fsi_file_t *ffi, const char *options)
- 
-   if (INFO->tree_depth >= MAX_HEIGHT)
-     return 0;
-+  if (! blkh_nr_item_ok (ROOT, INFO->blocksize))
-+    return 0;
-   if (INFO->tree_depth == DISK_LEAF_NODE_LEVEL)
-     {
-       /* There is only one node in the whole filesystem, 
-@@ -676,6 +691,22 @@ reiserfs_mount (fsi_file_t *ffi, const char *options)
-  * efficient, but this really doesn't hurt for grub.  
-  */
- 
-+/* A block_head's blk_nr_item is attacker-controlled.  Confirm the keys or
-+ * item headers it claims actually fit inside the on-disk block, so the
-+ * item/key scans in search_stat() and next_key() cannot run past the
-+ * cached block. */
-+static int
-+blkh_nr_item_ok (char *cache, unsigned int blocksize)
-+{
-+  unsigned int nr = BLOCKHEAD (cache)->blk_nr_item;
-+  if (BLOCKHEAD (cache)->blk_level == DISK_LEAF_NODE_LEVEL)
-+    /* leaf: block_head followed by nr_item item headers */
-+    return (unsigned long) nr * IH_SIZE + BLKH_SIZE <= blocksize;
-+  /* internal: block_head, nr_item keys, nr_item + 1 disk-child pointers */
-+  return (unsigned long) nr * (KEY_SIZE + DC_SIZE) + DC_SIZE + BLKH_SIZE
-+	 <= blocksize;
-+}
++/* A directory da-btree is likewise only a few levels deep; bound the
++ * root-to-leaf descent in first_dentry() so a node whose btree[0].before
++ * never reaches a leaf (e.g. one that points to itself) cannot loop forever. */
++#define XFS_DA_MAXLEVELS 32
 +
- /* Read in the node at the current path and depth into the node cache.
-  * You must set INFO->blocks[depth] before.
-  */
-@@ -707,6 +738,11 @@ read_tree_node (fsi_file_t *ffi, unsigned int blockNr, int depth)
-       errnum = ERR_FSYS_CORRUPT;
-       return 0;
-     }
-+  if (! blkh_nr_item_ok (cache, INFO->blocksize))
-+    {
-+      errnum = ERR_FSYS_CORRUPT;
-+      return 0;
-+    }
+ static void
+ init_extents (fsi_file_t *ffi)
+ {
+ 	xfs_bmbt_ptr_t ptr0;
+ 	xfs_btree_lblock_t h;
++	int levels;
  
-   INFO->blocks[depth] = blockNr;
-   return cache;
-@@ -1140,6 +1176,14 @@ reiserfs_dir (fsi_file_t *ffi, char *dirname)
- 	  name_end = INFO->current_item + INFO->current_ih->ih_item_len;
- 	  de_head = (struct reiserfs_de_head *) INFO->current_item;
- 	  num_entries = INFO->current_ih->u.ih_entry_count;
-+	  /* ih_entry_count is attacker-controlled; the directory headers it
-+	   * counts (DEH_SIZE each) must fit within this item's body. */
-+	  if ((unsigned long) num_entries * DEH_SIZE
-+	      > INFO->current_ih->ih_item_len)
-+	    {
-+	      errnum = ERR_FSYS_CORRUPT;
-+	      return 0;
-+	    }
- 	  while (num_entries > 0)
- 	    {
- 	      char *filename = INFO->current_item + de_head->deh_location;
+ 	switch (icore.di_format) {
+-	case XFS_DINODE_FMT_EXTENTS:
++	case XFS_DINODE_FMT_EXTENTS: {
++		/* di_nextents is attacker-controlled; the inline extent
++		 * records (xfs_bmbt_rec_32_t each) must fit in the inode's
++		 * data fork, or next_extent() reads past the inode buffer. */
++		int fork_bytes =
++		    (icore.di_forkoff ? (icore.di_forkoff << 3) : xfs.isize)
++		    - (int) offsetof(xfs_dinode_t, di_u);
++		unsigned int maxext = fork_bytes > 0
++		    ? (unsigned int) fork_bytes / sizeof(xfs_bmbt_rec_32_t) : 0;
+ 		xfs.xt = inode->di_u.di_bmx;
+ 		xfs.nextents = le32 (icore.di_nextents);
++		if (xfs.nextents > maxext)
++			xfs.nextents = maxext;
+ 		break;
++	}
+ 	case XFS_DINODE_FMT_BTREE:
+ 		ptr0 = xfs.ptr0;
+-		for (;;) {
++		for (levels = 0; ; levels++) {
+ 			xfs.daddr = fsb2daddr (le64(ptr0));
+ 			devread (ffi, xfs.daddr, 0,
+ 				 sizeof(xfs_btree_lblock_t), (char *)&h);
+@@ -224,6 +246,12 @@ init_extents (fsi_file_t *ffi)
+ 				xfs.fpos = sizeof(xfs_btree_block_t);
+ 				return;
+ 			}
++			if (levels >= XFS_BM_MAXLEVELS) {
++				/* malformed btree: refuse to iterate */
++				xfs.nextents = 0;
++				xfs.next = 0;
++				return;
++			}
+ 			devread (ffi, xfs.daddr, xfs.btnode_ptr0_off,
+ 				 sizeof(xfs_bmbt_ptr_t), (char *)&ptr0);
+ 		}
+@@ -392,6 +420,8 @@ next_dentry (fsi_file_t *ffi, xfs_ino_t *ino)
+ static char *
+ first_dentry (fsi_file_t *ffi, xfs_ino_t *ino)
+ {
++	int da_levels;
++
+ 	xfs.forw = 0;
+ 	switch (icore.di_format) {
+ 	case XFS_DINODE_FMT_LOCAL:
+@@ -413,7 +443,7 @@ first_dentry (fsi_file_t *ffi, xfs_ino_t *ino)
+ 			xfs.dablk = (1ULL << 35) >> xfs.blklog;
+ #define h		((xfs_dir2_leaf_hdr_t *)dirbuf)
+ #define n		((xfs_da_intnode_t *)dirbuf)
+-			for (;;) {
++			for (da_levels = 0; ; da_levels++) {
+ 				xfs_dabread (ffi);
+ 				if ((n->hdr.info.magic == le16(XFS_DIR2_LEAFN_MAGIC))
+ 				    || (n->hdr.info.magic == le16(XFS_DIR2_LEAF1_MAGIC))) {
+@@ -421,6 +451,16 @@ first_dentry (fsi_file_t *ffi, xfs_ino_t *ino)
+ 					xfs.forw = le32 (h->info.forw);
+ 					break;
+ 				}
++				if (da_levels >= XFS_DA_MAXLEVELS) {
++					/* malformed directory da-btree: a node
++					 * that never descends to a leaf (e.g. a
++					 * btree[0].before that points to itself)
++					 * would otherwise loop forever.  Treat
++					 * the directory as empty. */
++					xfs.dirmax = 0;
++					xfs.forw = 0;
++					break;
++				}
+ 				xfs.dablk = le32 (n->btree[0].before);
+ 			}
+ #undef n
+@@ -602,6 +642,17 @@ xfs_dir (fsi_file_t *ffi, char *dirname)
+ 		*rest = 0;
+ 
+ 		name = first_dentry (ffi, &new_ino);
++		if (name == NULL) {
++			/* A malformed directory (e.g. one whose da-btree
++			 * descent was bounded above) yields no entries;
++			 * fail the lookup instead of dereferencing NULL. */
++			if (print_possibilities < 0)
++				return 1;
++
++			errnum = ERR_FILE_NOT_FOUND;
++			*rest = ch;
++			return 0;
++		}
+ 		for (;;) {
+ 			cmp = (!*dirname) ? -1 : substring (dirname, name);
+ #ifndef STAGE1_5
 -- 
 2.52.0.windows.1
 
