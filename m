@@ -2,40 +2,37 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F1335606A887
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2026 10:44:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1485508.1688719 (Exim 4.92)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A8658606A327
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2026 10:50:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=1QRRskg/
+Received: from list by lists.xenproject.org with outflank-mailman.1485526.1688730 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRSHV-0000a6-90; Thu, 12 Nov 2026 10:43:49 +0000
+	id 1xRSNH-00019B-TM; Thu, 12 Nov 2026 10:49:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1485508.1688719; Thu, 12 Nov 2026 10:43:49 +0000
+Received: by outflank-mailman (output) from mailman id 1485526.1688730; Thu, 12 Nov 2026 10:49:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRSHV-0000Zz-6T; Thu, 12 Nov 2026 10:43:49 +0000
-Received: by outflank-mailman (input) for mailman id 1485508;
- Thu, 12 Nov 2026 10:43:48 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xRSNH-000194-Pu; Thu, 12 Nov 2026 10:49:47 +0000
+Received: by outflank-mailman (input) for mailman id 1485526;
+ Thu, 12 Nov 2026 10:49:46 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
- id 1xRSHU-0000Zt-3A
- for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 10:43:48 +0000
-Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xRSHT-00GuNq-89
- for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 11:43:47 +0100
-Received: from [10.42.69.7] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
- id 6af59860-bab6-0a2a0a5309dd-0a2a45078a4a-10
- for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 11:43:47 +0100
-Received: from [160.101.131.9] (helo=na1pdmzitismtp02.tibco.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
- id 6af593ec-b4ea-0a2a45070019-a065830989b8-3
- for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 11:24:45 +0100
-Received: from fedora (unknown [10.113.40.46])
- by na1pdmzitismtp02.tibco.com (Postfix) with ESMTPS id 87AC78515832;
- Thu, 12 Nov 2026 05:23:27 -0500 (EST)
+ (envelope-from <gwd@xenproject.org>) id 1xRSNG-00018y-BA
+ for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 10:49:46 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.98.2)
+ (envelope-from <gwd@xenproject.org>) id 1xRSNF-0000000AZI0-3upe
+ for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 10:49:46 +0000
+Received: from mail-lj1-f181.google.com ([209.85.208.181])
+ by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.98.2)
+ (envelope-from <gwd@xenproject.org>) id 1xRSNG-00000009gu0-1XLa
+ for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 10:49:46 +0000
+Received: by mail-lj1-f181.google.com with SMTP id
+ 38308e7fff4ca-3ae0eb56ba1so23719461fa.2
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 02:49:46 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -44,127 +41,186 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; none
-From: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
-To: ross.lagerwall@citrix.com,
-	stephen.cheng@citrix.com
-Cc: xen-devel@lists.xenproject.org,
-	andrew.cooper3@citrix.com,
-	jason.andryuk@amd.com,
-	jbeulich@suse.com,
-	roger@xenproject.org,
-	teddy.astie@vates.tech
-Subject: Re: Re: [PATCH] x86/nsvm: Fix L2 VINTR intercept merging when only Xen intercepts L1
-Date: Thu, 12 Nov 2026 10:24:30 +0000
-Message-ID: <20261112102436.886286-1-abdelkareem.abdelsaamad@citrix.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <e3105225-de64-49e1-9254-45917ad5bb13@citrix.com>
-References: <e3105225-de64-49e1-9254-45917ad5bb13@citrix.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:Content-Type:Cc
+	:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version;
+	bh=FE8s2AEw/jTWWbe/SEouDGAGpKEWMzP1ixxSzY56EfU=; b=1QRRskg/i4ykC9bbuPgoVZ0Ygo
+	f8lANNGvDKzochNgSO2eF1emD/VXUY62P1oSUXwtWx7K7zVJVhWmRE2DfPEMvUyUjj5CZmQ857CqM
+	mmuEBTgGUK561Bn7s52QcgL2hX+Ilf1Tu7OK0qCq9t64/kvMFJKgDc6D+GuOH5IAk7Y4=;
+X-Forwarded-Encrypted: i=1; AL+hErGk2mfnYQF6sMPhmOpMA9n6fVmacd0sofMqGxAzJMYvkD92QSuB23C9mmh4ELdJVyWK3ySRKiiv030=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z+TMMivoXz14m3ku6mYJrRP10PJRfR8GRcap+18XlAcVm3wvzTg
+	YxNG60fxJM4/iItnv+I4BvasJfknSo4BX5j72ELPyDVkUDyt2VnWc+WovYw/3bNKwAv5R5x3kWz
+	2I4bvyY8VhMw10FlfTWwfl9taqwieaxM=
+X-Received: by 2002:a2e:a881:0:b0:3aa:ee7a:5466 with SMTP id
+ 38308e7fff4ca-3ae1268ad2bmr11007131fa.16.1794480585044; Thu, 12 Nov 2026
+ 02:49:45 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1794479085-A70DDAE4-3D9AD70A/1/8925369682
-X-purgate-type: clean
-X-purgate-size: 5124
-X-Spam-Status: No, score=-21.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=4.0.1
+References: <20261111171441.23101-1-gwd@xenproject.org> <20261111171441.23101-2-gwd@xenproject.org>
+ <cffc77e4-4904-4958-ae0c-48da52b42327@suse.com> <CAFLBxZZHTc7AuRjNtoxrGSn_R53SaEgf23_u_7CidYp9Sta-6g@mail.gmail.com>
+ <ca582cff-5ef1-4bca-ad9d-fec4bcdefc69@suse.com>
+In-Reply-To: <ca582cff-5ef1-4bca-ad9d-fec4bcdefc69@suse.com>
+From: George Dunlap <gwd@xenproject.org>
+Date: Thu, 12 Nov 2026 10:49:32 +0000
+X-Gmail-Original-Message-ID: <CAFLBxZb7i_kaS4--HGk3a81wK1HQ1V-itCJu4nF8jB_f0-YrhA@mail.gmail.com>
+X-Gm-Features: AclHuK8VIJaN8Fien2MFcVSUg5R92CAD3y2KSjytwTMrwmenaR7qdDyfN4wNqIc
+Message-ID: <CAFLBxZb7i_kaS4--HGk3a81wK1HQ1V-itCJu4nF8jB_f0-YrhA@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] x86/pv: free the shared_info page switch_compat() replaces
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
+	Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=-11.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,
+	SPF_HELO_PASS,SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 11/5/6 16:16 PM, Ross Lagerwall wrote:
->On 11/3/26 4:59 PM, Abdelkareem Abdelsaamad wrote:
->> When nesting SVM, if the L1 hypervisor has not requested a virtual interrupt
->> (VINTR) intercept for L2, Xen should not force one. L2 execution should remain
->> isolated from the L1 VINTR state, and there should be no expectation that L2
->> execution results in an L1 VINTR becoming deliverable.
->> 
->> Currently, if Xen intercepts the VINTR for its own L1 management, this
->> intercept incorrectly forces an intercept during L2 execution even when L1
->> intended for L2 to run without it. This breaks the expected transparency of L1
->> configuration and introduces unnecessary VMEXITs.
->> 
->> Furthermore, handling this forced VMEXIT_VINTR can cause a pending L1 virtual
->> interrupt to be incorrectly delivered to L2. This occurs because when the
->> intercept is determined to be requested solely by the host
->> (returning NESTEDHVM_VMEXIT_HOST), svm_vmexit_handler does not switch to the
->> correct VMCB context before evaluating the interrupt injection.
->> 
->> Fix this by ensuring the L2 VINTR intercept bit in the L2 execution VMCB solely
->> reflects the L1's explicit configuration for its guest, independent of Xen's
->> internal L1 intercept state.
->> 
->> Signed-off-by: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
->> ---
->> Testing:
->>   - Test setup using a custom XTF nested virtualization setup:
->>     1. An L1 maskable interrupt is triggered while L1 has physical interrupts
->>        disabled (via the CLI), leaving the interrupt pending.
->>     2. L2 is launched via VMRUN with an active, deliverable virtual interrupt
->>        configured in its VMCB (L2 EFLAGS.IF = 1, L2 vGIF is unmasked,
->>        V_IRQ_PENDING is set and L2 V_IRQ is injected on a distinct vector from
->>        the pending L1 interrupt).
->>     3. Xen enables L1's VINTR_INTERCEPT to catch the next available VINTR
->>        window. L2's VINTR_INTERCEPT is kept cleared.
->> 
->>     Results:
->>       - Old Behaviour: If the pending L1 maskable interrupt vector has no
->>         handler mapped in the L2 IDT, L2 immediately crashes. Otherwise,
->>         the L1 maskable interrupt is incorrectly leaked and delivered into
->>         the L2 guest.
->>       - New Behaviour: The L1 maskable interrupt is securely withheld from L2
->>         and correctly delivered back to the L1 context upon the next window.
->> 
->>     Note on Test scenario:
->>     I think the same window race can also result when having an injected L1
->>     maskable interrupt handler that temporarily raise the TPR to block
->>     lower-priority interrupts, with the intention to be lowering the TPR
->>     asynchronously later, then executing the L2 VMRUN in between.
->> 
->>   - CI tests:
->> https://gitlab.com/xen-project/people/aabdelsa/xen/-/pipelines/3023453459
->> ---
->>   xen/arch/x86/hvm/svm/nestedsvm.c | 3 +++
->>   1 file changed, 3 insertions(+)
->> 
->> diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
->> index 128008321d..21b50a59b0 100644
->> --- a/xen/arch/x86/hvm/svm/nestedsvm.c
->> +++ b/xen/arch/x86/hvm/svm/nestedsvm.c
->> @@ -403,6 +403,9 @@ static int nsvm_vmcb_prepare4vmrun(struct vcpu *v, struct cpu_user_regs *regs)
->>       n2vmcb->_general2_intercepts =
->>           n1vmcb->_general2_intercepts | ns_vmcb->_general2_intercepts;
->>   
->> +    if ( !(ns_vmcb->_general1_intercepts & GENERAL1_INTERCEPT_VINTR) )
->> +        n2vmcb->_general1_intercepts &= ~GENERAL1_INTERCEPT_VINTR;
->> +
+On Thu, Nov 12, 2026 at 9:46=E2=80=AFAM Jan Beulich <jbeulich@suse.com> wro=
+te:
 >
->If L0 wants to inject an interrupt but the VINTR intercept is not enabled, how
->would it detect when it can inject the interrupt? In particular, if VMCB(1-2)
->has V_INTR_MASKING=0 and L2 sets EFLAGS.IF=1, the interrupt should be
->delivered but L0 won't notice.
-I do not follow on this. My reading of the APM about the V_INTR_MASKING is
-that it is intended to decouple the control of the physical and the virtual
-interrupt's EFLAGS.IF. Specifically, when it is set, the host's EFLAGS.IF at
-the time of VMRUN determines whether maskable physical interrupts are masked or
-not. The host and guest values of EFLAGS.IF remain distinct.
+> On 12.11.2026 10:30, George Dunlap wrote:
+> > On Thu, Nov 12, 2026 at 8:28=E2=80=AFAM Jan Beulich <jbeulich@suse.com>=
+ wrote:
+> >>
+> >> On 11.11.2026 18:14, George Dunlap wrote:
+> >>> For a 32-bit PV guest, switch_compat() replaces a shared_info page
+> >>> above 4GiB with one below, and drops the old page with a bare
+> >>> put_page().
+> >>>
+> >>> Unfortunately, this violates the expected
+> >>> xenheap-page-shared-with-guest freeing discipline.  Xenheap pages
+> >>> don't start with a reference count, and aren't put back into the
+> >>> allocation pool after their reference count drops to zero; they're
+> >>> removed from the domain's xenheap list, but someone needs to
+> >>> explicitly call free_xenheap_page() on them for them to return to
+> >>> their pool.
+> >>>
+> >>> d->shared_info here only has a non-zero reference count because it wa=
+s
+> >>> shared with a guest; and the thing that holds that reference is the
+> >>> PGC_allocated bit.  Dropping the reference without having been the on=
+e
+> >>> to clear the PGC_allocated bit puts the page in an invalid state.
+> >>>
+> >>> If there are no outstanding references to d->shared_info when
+> >>> switch_compat() happens, the result for pages moved this way is merel=
+y
+> >>> a memory leak: the page is removed from the xenheap list, and nothing
+> >>> ever calls free_xenheap_page() on it.  So whenever this path is
+> >>> triggered, a page is leaked.
+> >>>
+> >>> Theoretically, if there *is* an outstanding reference to
+> >>> d->shared_info, *and* that reference is still held when the domain is
+> >>> destroyed, then the result is a reference count underflow: Because th=
+e
+> >>> reference count never drops to zero, the page stays on the xenheap
+> >>> list; then during domain destruction, relinquish_memory() walks the
+> >>> list, sees the PGC_allocated bit, and calls put_page() again --
+> >>> potentially dropping the page count to zero.  When the other referenc=
+e
+> >>> holder drops their reference, the count underflows.  (put_page() only
+> >>> ASSERT()s that the count is non-zero, so this wouldn't cause a crash
+> >>> in a release build; and the page is never freed, so other potential
+> >>> hazards of general ref count underflow are avoided.)  Fortunately thi=
+s
+> >>> is impossible with the in-tree toolstack, which only switches a domai=
+n
+> >>> while building or restoring it, and doesn't have a mapping of
+> >>> shared_info that it holds across that call.
+> >>>
+> >>> Release the page the way domain destruction releases d->shared_info:
+> >>> drop the allocation reference with put_page_alloc_ref(), as
+> >>> relinquish_memory() does, which clears PGC_allocated and takes the pa=
+ge
+> >>> off the xenheap list once nothing else refers to it, and free it with
+> >>> free_xenheap_page() once an RCU grace period has passed.
+> >>>
+> >>> The free waits for the grace period because do_settime() writes every
+> >>> domain's wallclock holding only wc_lock and the domain list's RCU rea=
+d
+> >>> lock, neither of which excludes switch_compat(), through a pointer it
+> >>> may have read before the switch.  The RCU callback uses the domain's
+> >>> own RCU head, d->rcu, and holds a reference to the domain.  That
+> >>> reference keeps the domain from being destroyed, and its struct freed=
+,
+> >>> before the callback has run.  It also keeps d->rcu's only other user,
+> >>> domain_destroy(), from queueing the head in the meantime; if the
+> >>> callback drops the last reference, domain_destroy() queues d->rcu
+> >>> again, which RCU has finished with by then.  No other reference to th=
+e
+> >>> page is expected: with no memory, the domain has no page tables that
+> >>> could map it, and the in-tree toolstack holds no mapping of it across
+> >>> the switch.  If something holds one all the same (a toolstack that
+> >>> mapped the page before the switch, for instance), leave the page alon=
+e
+> >>> and leak it, rather than free a page that is still in use.
+> >>>
+> >>> Freeing the page relies on "tools/libs/guest: re-read dominfo after
+> >>> changing a PV guest's width on restore", without which restoring a
+> >>> 32-bit PV guest maps the replaced page by the frame number it read
+> >>> before the switch.  Once the page is freed, that frame can come back =
+as
+> >>> one of the restored domain's own pages, which restore would then writ=
+e
+> >>> the saved shared_info into.
+> >>>
+> >>> Also allocate the new page into a local variable rather than straight
+> >>> into d->shared_info: if the allocation failed, a concurrent
+> >>> do_settime() could dereference the NULL pointer before the old value
+> >>> was restored.
+> >>>
+> >>> Fixes: 8a9255405ca6 ("x86/domain: adjust limitation on shared_info al=
+location below 4G")
+> >>> Suggested-by: Jan Beulich <jbeulich@suse.com>
+> >>> Assisted-by: Claude Code:claude-opus-5-5
+> >>> Signed-off-by: George Dunlap <gwd@xenproject.org>
+> >>> ---
+> >>> Changes in v2:
+> >>> - If the page is still referenced once its allocation reference has
+> >>>   been dropped, leak it rather than free it (Jan).
+> >>> - Depends on a new patch, "tools/libs/guest: re-read dominfo after
+> >>>   changing a PV guest's width on restore".
+> >>
+> >> Actually, is there a dependency here as in "must be applied in this
+> >> order"? It looks to me as if the 2nd patch going in first wouldn't
+> >> make the situation worse.
+> >
+> > Before patch 2, the stale frame will always have a refcount of 0, so
+> > the map will always fail, causing the restore to fail.  (And in the
+> > case of a live migrate, causing the attempted sending domain to
+> > resume.)
+> >
+> > After patch 2, the stale frame may be in one of three states:
+> >
+> > a) Free, refcount of zero.  libxc's map will fail the same way,
+> > failing the restore.
+> >
+> > b) Allocated to a different domain.  This will also fail, because it
+> > will have the wrong domain, failing the restore.
+> >
+> > c) Allocated to the same domain.  In this case, the map will succeed:
+> > libxc will restore the contents into the wrong page, and then write a
+> > truncated frame into the start_info that it passes to the guest.  This
+> > is a lot worse than the failed restore.
+> >
+> > In Claude's experiments, on an idle system, the page gets re-allocated
+> > to the same domain 10/10 times.
+>
+> Hmm, all of this to me reads like an analysis of what happens if only
+> patch 1 went in. But the question was whether putting in patch 2 without
+> patch 1 would cause things to be worse than before.
 
-If the L0 wants to detect L1's interrupt window is open, it checks against L1's
-EFLAGS. In the scenario when the L1 configured the L2 with EFLAGS.IF as
-enabled (1) but the L1 itself has EFLAGS.IF cleared (0) and so it is in
-interrupt shadow, and the L1 then runs the L2. My understanding is that the L2
-should not be intercepted as nothing changed for the L1's state (L1's EFLAGS.IF
-remains cleared). Only when the L0 wants to detect that the L2's interrupt
-window is open, it explicitely intercepts the VMCB02 in
-svm_intr_assist->svm_enable_intr_window?
+I'm a bit confused.  Are we talking about the same patch 1 and 2?  If
+we put in the current patch we're discussing, "[PATCH v2 2/2] x86/pv:
+free the shared_info page switch_compat() replaces", without 1/2, then
+we'll have the issue described above until patch 1 is applied.  1/2
+fixes the stale-shared_info-on-restore problem before 2/2 enables the
+old shared_info to actually be freed and reused.
 
-Or do you mean that during nested runs, L0 needs to intercept when the virtual
-interrupt window opens to know when physical interrupts become deliverable—
-since from L2's perspective, L1's virtual interrupts act as physical
-interrupts? If the answer is yes, What VMEXIT should be injected back to L1? Is
-this VMEXIT_INTR?
+I don't see how putting patch 1/2 in without patch 2/2 would cause the
+issues described.
 
+ -George
 
