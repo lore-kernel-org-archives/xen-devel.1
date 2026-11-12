@@ -2,48 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9BB7160A261A
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2026 09:23:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BA056606A33A
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2026 09:30:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=epam.com header.i=@epam.com header.a=rsa-sha256 header.s=selector1 header.b=FFD0ZqRo
-Received: from list by lists.xenproject.org with outflank-mailman.1485301.1688513 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=MQJF4gjO
+Received: from list by lists.xenproject.org with outflank-mailman.1485311.1688521 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRR1j-0005H0-Tu; Thu, 12 Nov 2026 09:23:27 +0000
+	id 1xRR7x-00066j-HA; Thu, 12 Nov 2026 09:29:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1485301.1688513; Thu, 12 Nov 2026 09:23:27 +0000
+Received: by outflank-mailman (output) from mailman id 1485311.1688521; Thu, 12 Nov 2026 09:29:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRR1j-0005Gt-QB; Thu, 12 Nov 2026 09:23:27 +0000
-Received: by outflank-mailman (input) for mailman id 1485301;
- Thu, 12 Nov 2026 09:23:27 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <milan_djokic@epam.com>) id 1xRR1i-0005Gn-SH
- for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 09:23:27 +0000
+	id 1xRR7x-00066c-Dm; Thu, 12 Nov 2026 09:29:53 +0000
+Received: by outflank-mailman (input) for mailman id 1485311;
+ Thu, 12 Nov 2026 09:29:52 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xRR7w-00066W-2y
+ for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 09:29:52 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xRR1i-0067KT-8y
- for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 10:23:26 +0100
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xRR7v-0039U4-7S
+ for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 10:29:51 +0100
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <milan_djokic@epam.com>)
- id 6af5858d-e002-0a2a0a5209dd-0a2a450481aa-2
- for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 10:23:26 +0100
-Received: from [52.101.70.72]
- (helo=AS8PR04CU009.outbound.protection.outlook.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <milan_djokic@epam.com>)
- id 6af5858d-b57f-0a2a45040019-34654648e215-4
- for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 10:23:26 +0100
-Received: from AS2PR03MB9587.eurprd03.prod.outlook.com (2603:10a6:20b:595::7)
- by GV1PR03MB10606.eurprd03.prod.outlook.com (2603:10a6:150:20b::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.12; Thu, 12 Nov
- 2026 09:23:21 +0000
-Received: from AS2PR03MB9587.eurprd03.prod.outlook.com
- ([fe80::daa7:3b97:acb3:67d5]) by AS2PR03MB9587.eurprd03.prod.outlook.com
- ([fe80::daa7:3b97:acb3:67d5%5]) with mapi id 15.21.0615.009; Thu, 12 Nov 2026
- 09:23:21 +0000
+ (envelope-from <jbeulich@suse.com>)
+ id 6af58707-e002-0a2a0a5209dd-0a2a4503835a-34
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 10:29:50 +0100
+Received: from [209.85.221.45] (helo=mail-wr1-f45.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6af5870e-fae8-0a2a45030019-d155dd2db109-3
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 10:29:50 +0100
+Received: by mail-wr1-f45.google.com with SMTP id
+ ffacd0b85a97d-492fcbfaa87so2646331f8f.3
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 01:29:50 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4984e26f8e3sm14454283f8f.1.2026.11.12.01.29.49
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 12 Nov 2026 01:29:49 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,190 +49,120 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=sXmAmpoDltJ31XbEhFHVOvcgMRVVvIw5PncLLU+yMqpPuJVax1wmoertxrEaGYOzYMA87lQFCD0o4PxoBX0vQnbZAAioII2wgSYvpvyVJI9eIk3AcmESkCPdY5M/X/GQ0lLvD0i/JaxctIzz/ADyfxPFA0ceYcSPbQaHV86FdJoAvz64Bc1a+QuElaJDNeKtsC+1kV+FD2Abh2q+9ppg3BNis+wz1SWJff0CCKo1WKKEYLhtssG5FBd81GJZ+z9uHB7P7bWZD+Khyi1P5tgTs35SagHnXEyhf1MOej+5VxU6TB2CBTHbo1aZ62rievFKCmjM37WA5DRlXaMNFy2PNg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=FxoS37EGXz+MVs9RHxOKuPWx2brVhwlA60wLcjsF79E=;
- b=rN7in52U6PaDt9tsAu36OxK0KdO2d5iTbc1ke4LC1sVW8/qmmZmk56kSVijeyP2xBiFMp7elfRwUSeVItFp7PTbTMmshJD//FUdqTZfGUb70GxQFQ0RguL5PooaGR1R99v3op69GBETQncvgaaakAh6nojEs5XCrbVqomrv1plsmIuA0LsJjRfHxJ4Ln+wh5Rl7vIhcZTglIhs1WqN1wCbNf8vL2gCnGcf6Jf7aIdcQnGsK3AUe/WWWnB/O50wARrPtmAxrLE0BtcJ5WwKKewnR/2cB24P4nJjWuyI2B5diMbNbDui4eABROTVFmBgo+kG+7BkcMovB/cwLStWcP9A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FxoS37EGXz+MVs9RHxOKuPWx2brVhwlA60wLcjsF79E=;
- b=FFD0ZqRofwHvlmCHwpzOrWl6TXP3jVk69MuhMQCE6iHPWrm2ew7cnajANetMnt9WcDCvR+gMlYLv6ylq1IQ1Atjhj7T7EH9PnjskSoz4SjakNG/X0G6EamfI8Uu049AXAMFqMcXCg/L92x+87p/ZWfeEujBhg2qje3gK/ouniBPSUhxTS2dC3BXKmmjBdu0xYhLKMRgtCfcylGYtHisRaUAD/1F1A/kN27FUQpRHcWScyDJhAL5BAyHFcShL8HwOnsQKFS5DXtf/jggkLobqNsCDBmtCvi3HWGa6nEM8wSu6ADqS833R+W5EvPeCW2xmuwRmhFjkD6IETszruo3UTQ==
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-Message-ID: <ad98f3ed-7259-4980-8da2-dca2e859d25e@epam.com>
-Date: Thu, 12 Nov 2026 10:23:18 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 21/22] libxl/arm: Introduce domctl command for IOMMU
- vSID mapping
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Anthony PERARD <anthony.perard@vates.tech>,
- Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- "Daniel P. Smith" <dpsmith@apertussolutions.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <cover.1793726692.git.milan_djokic@epam.com>
- <ee5fcdb5f74ab0c367e3006310b556bc4f5250da.1793726692.git.milan_djokic@epam.com>
- <17601420-778b-4b68-983b-656edf3124cc@suse.com>
-Content-Language: en-US
-From: Milan Djokic <milan_djokic@epam.com>
-In-Reply-To: <17601420-778b-4b68-983b-656edf3124cc@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR06CA0191.eurprd06.prod.outlook.com
- (2603:10a6:803:c8::48) To AS2PR03MB9587.eurprd03.prod.outlook.com
- (2603:10a6:20b:595::7)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1794475790; x=1795080590; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=GBV8EYxrpRbZ5v1pGMJwJmOL6/IkWsocLD039XQe/to=;
+        b=MQJF4gjOag0Bym9bWPEJuBJM+b2rfk5nqR1cPgJssPLs03tFJHvhJAGUfynhS17Fa8
+         NqUq5DA+cUdOGTQG/nYphzewf9mphwbCuV8VNI0ZoCJRc++GgXc1GgrcGxGbuojCfiHL
+         9MBA6iW2UOBr0KmKcqnVJWv8oVeT1kJFBumnWbYmIgEd0xYLbEMPy75++MQmMrUbYrPc
+         vNCwPuWuswbbodZcZLq9UfF4MxOKaQUoHDmAaZDwuyfrcxLXGN+euuohWSem2HdkpRv6
+         G6F+vgrAZh7vKKtniJKVpwMcdpru1/raJtTrGKNAOugkTrcEysgfFZESEXfQt8sbBo/J
+         eqrA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794475790; x=1795080590;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=GBV8EYxrpRbZ5v1pGMJwJmOL6/IkWsocLD039XQe/to=;
+        b=2kO8RJBaL8+J+zjJJ+h1PChV33A/4hEU23ZPO3C8NQ8g5uZnak46ria7ERxNK+LIhj
+         4w3eZHmp0hoPISPTgcj6z8ax/pySKzyap3BYzy1hb8ABu8HPat3Djqd7OARiJd6Jj9Lt
+         tpxJk7o1VKQG8gOeskgM+DktHlaK1cGAdSWHcKvP8C6lYHsqMxeDwgWqoU7NFnvuanV1
+         KAeG/JrXXcwlBBiKnrtXXAGUXSxx21mVYqaO0rjHiDDY1oc2jMmOuOHRh3+qsK3mDMUE
+         dwqZ/RYDi2UZNg5PCoCs9E1rGNTA4hg+mRSaThXMsGVp0aGrS/aVlunU7BBIbuVOPjZd
+         Xhxw==
+X-Forwarded-Encrypted: i=1; AL+hErHKsBapHcLZYF3Rrh6QM5ma8H6Q+UBOKBUBMC9sJTtm24TAO+Oywqt9Q5wVf1BlrGmPr1j09aKeS0Y=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z/dV6VOA9FQSMAr9wQLUunhZ66F0K7E0gkv2v8avqx7KPkAkTaA
+	eNiFcFDiVhK7zQd3GNx4zmIsn9j7zXRBKTO4pwb3E1VaePuZVPIb227ozqUUb06SUw==
+X-Gm-Gg: AYBFou2M2opFZDacOewgxGweVX6qN21W9L4R8mvfA/NmCf+0zuSDvTERUJYEu08N92s
+	SX4sH6JwBRrz3r6HxXWfGD9ZBPSrFalBUjcRnd+eVmfikCZjbxN5nsNQIaGCDrgFGQB2N97LdnW
+	Rc/uGa1Pu490uc8m4aHwR3aqjMJ3cP7/sLlEwYuJK125L4iCPSAdGM+Cn+IMv91jLUW2lhGUUd8
+	pSi9Sa/GRlzwRUOoQZ+VK7cwoVM12+PwNKXeXpjo6KU7Lx41HrvV8pB4AttXiibBEKvA/7Qn3P9
+	pF5an5wkU4a6nsfm/aQOkAK5dpboRHoFgh+id2hx15j178vioFOsqHTLDNcJXsl+yXF5DYV+6hU
+	KlMgZuT0v571V773gqkVQ5VPIKIp/eWX1FuWr9y+c9vlUzjqiZvqIkSPJNN2c2FoasPl84CosZJ
+	MPGw0XeT+xUutL7QyweQ3TYZPFZZ06ggmjNXjo74a7oooMVNDdIEW5F5c5dFYYqcy2PdCYcBXdQ
+	v+3FrPkPGBq4Ifw2oCPOJxdIZQRqTJPbcpD1OEPBKqcHxzJyD+kfgGKg6VaFPEcwsgNIucfhn4Z
+	4h5oV6kWiC5mkdzlXxhhAR4llx4MY4Wtffcg63WEk3fnD8ieqkJF6eFJpU7sRpZxvis656NptRt
+	EDlbZRLN7cZIWqi9I
+X-Received: by 2002:a05:6000:186c:b0:48f:e879:5887 with SMTP id ffacd0b85a97d-499c640643fmr9126563f8f.28.1794475790276;
+        Thu, 12 Nov 2026 01:29:50 -0800 (PST)
+Message-ID: <47ed6cbd-77af-4328-858c-80d0ecae50c3@suse.com>
+Date: Thu, 12 Nov 2026 10:29:49 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS2PR03MB9587:EE_|GV1PR03MB10606:EE_
-X-MS-Office365-Filtering-Correlation-Id: b61bb257-cf01-4b9c-609d-08df409e983d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|7416014|366016|376014|1800799024|18002099003|22082099003|10067099003|4143699003|11063799006|261028144727099003|261022105027099003|261026121527099003|261026140227099003|261009223027099003|56012099006;
-X-Microsoft-Antispam-Message-Info:
-	NGsiWyU0KwW5L+ZkT8kFqFHWJ9RIbW0FwHh7+kOn9d+5jYhp1Jpus5DERPALvsUqD7Bmpd51pdWFh9HdGZk0o065PYtdZE1rETeSSrzx2UD/fCyH1C5r+nxRNMWIvKaDKOOaTONZQwZ9bflPtvEAgsIWW+U+G2cRGu+E+Wtkf4PLGCOw2Z8JnYcGUWhccBFFv1vaTEjI+VEyfOoWHl1WeCOI/awR/W/mGnkoKoNl4sdKzt6ygPgi6rzrhAx2YWaVHoH0AqtPF7O/e1KEv0zbsBuVKMcxTJERLP4rLEaRiH58DqZnpF9kB+0r+FQa10iuoC22yETZdDCJCjMoDhHh14rREoUPw4X1Yvz9cz/A+vO1Gns7VCQmRZRuGwbO3sU+5RHEllzCFSmKD0m8m7ZIvtMt1oCyGrFcYI0+xJa8HydaI7oMfGAPb2qPHrj6f4CusGdRgPvyDnSEDkKxbKJv694Qf37k0T1+rHm2S0nPgNiDnryKqdF82//C/HBStoV6Cw19vMDLae7qUB/T4RdEDIOZR9k1le0K0Y7mX7ZgjE/Y/OAw7Tv7BkXue45O1plHTb/e0bYbqpbyhxvKkl+j/Rt+bYhly9MKUAklEK7+6v4GpKJiTw2j6O2TnR6JjTbjCaX+C5tqmX3QYgtl3utff4ltOI9M2X4B41rLlVMyVqM=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS2PR03MB9587.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(7416014)(366016)(376014)(1800799024)(18002099003)(22082099003)(10067099003)(4143699003)(11063799006)(261028144727099003)(261022105027099003)(261026121527099003)(261026140227099003)(261009223027099003)(56012099006);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?dVp6Q0IrUTloY1BzWXhNVDJGeHQvdDlndzlxTTFKRmNNL2tBVWtCZFhDZTcr?=
- =?utf-8?B?dDhOUU55MmlHdWw2K2ZUWFRJaldzdktqYmNOUDUvMGdDYW8rY3NUWmRYc1Bv?=
- =?utf-8?B?cnp3TytrUHBLdDdnQ0JPWHIzaXM4aXBPb0p5SVZiNHE4SWdiYk1iR3VEU3Vj?=
- =?utf-8?B?dTFkZFdKZGYxeGp0YzY1UVZaQVlNVDQzcmdOd2VWN3lmUDlKV0NMSXc4QUVw?=
- =?utf-8?B?d0M1OEFrMWtYT0h2RTlKK2JZRHZ5c3ozL2M2Sjg1b1ZQTjVrcHUwNkZ4c2dO?=
- =?utf-8?B?V1BUY05sL2l0enBpVDdsYkFCdWIycVF5WHUrbjd3REgzbk14T0VuOVVxWjZs?=
- =?utf-8?B?d3pBY2dDbGExZjNRcWdraTAyVFV5YXVCZXJIdzFic1ZIQmxaNmhwUkp2WWRk?=
- =?utf-8?B?Q2k3UC9CTkRzZGJxOFJidWlSam5UQzd6dWJDdWFGaFVYYXVzSHo1L3dwVEFu?=
- =?utf-8?B?Z2x1RkZqbmpKdDh4LytXZDBYQTJIUHBlK1NDMi9xQUxzakkzTWtVejlrSEpS?=
- =?utf-8?B?UlZNNmNMait2VWgrSngxT0JGbzJ6YjVOeGdOVE1PL0FET1dLaEVNbzhHOTlH?=
- =?utf-8?B?eG9JVjc5dGoyYmtLZ2ZkSnc5RXJxNXMzRWlPcC94cElONG9xb0NsQzVjdU5Y?=
- =?utf-8?B?VHJSa1ZCS2hrRWNXTVl4KzFGWFlLUk1TeDd5NkVlZnBqTlJNZ3ZZWXMwZ3l2?=
- =?utf-8?B?UnEwQitiWFQvWDJqUk9YelVQT0M0SURDb2lzNkgwRll3WEFOTkk3TE84dmpj?=
- =?utf-8?B?SllIQll4bFd3bEs5aGZCTHhIeWJzRTA5TlJpTW9YeVYxOHpIb3p0V09xQ3B5?=
- =?utf-8?B?aGlGT1A4SXVJOHhBczBpZGtMYVgrS0tLR3VUdjVXbkRxcFlNV1ZBU1hvYXNE?=
- =?utf-8?B?MTcyc25XTmJTQ2NQeGRuTS9CVllKUmlkdXRVaXJIZGlPSnpGWTBCN1B6Rnk0?=
- =?utf-8?B?dWY4bXpRTWVpTE9Vd2hXOEs4alEwVU5FK21nV0VTTHNFaGJicEpESVVDV2xn?=
- =?utf-8?B?MU1NejQ2VVJCSFZwSHFEUUxWNnlPZEU0WkswQ3REc2J3RmJDOVNMMHVoQi9k?=
- =?utf-8?B?c0FONDcvWFBLSXUwOGQ2MWpQSklWOWJvaWhtV3VqdC9zTFNaYy85alFIMHdh?=
- =?utf-8?B?NFF2MkEyc3ZPN0hvTnVBYnYyNXFxYVcrSWtrTWo2QXBlRVR6NGJZcjBLMlkv?=
- =?utf-8?B?TjVPVmtVV2pqZUtlNlRTU2VqMHdrRktwOWZXaHoydC80THRlYzd1R1RaZmFv?=
- =?utf-8?B?MW1lWEwrQ1pnalNJeVR6OHFYRDBKR0M2anlIV0xXd3BtdUxMNml5UGRqaTJ6?=
- =?utf-8?B?ZTBnT2Y4VUlJamJic29nV3o2bkxIV1EreDhQVjF0RVVuVk1PT3I2SFFkM2pL?=
- =?utf-8?B?Y3VUYlpKblMrOTA4U1VhUm5tTERPL0FMaW1zZU9pUmdnYU9VUzlMcjJqRUFV?=
- =?utf-8?B?TUtwZEFra2pBWkJkQnZoc29RcG55OXkrdDdBMm1rSkZhdFdkSi8xVmxuaVg0?=
- =?utf-8?B?ejM5SXhmTUpqYzdNTUhKN2c0REQ1SVdDNGxLSDhsMU9DY3k5YzlYcG93bTFh?=
- =?utf-8?B?djFTT2k0aUdRVDEvd1RlTmNsRHJzUnhqdjhYd3piNWhZeWF5V0dxdktMQzd0?=
- =?utf-8?B?Z1hIT1FmK09lZXhsMGUwVDMxRDI2VVBtbk93S2J2aXEwVFJ3clYwd0w4T3dy?=
- =?utf-8?B?a1AwbDg1RFBheTJjdFdLUkdNYk9IaGM3S3JxY0xqY05lZjRCM2cvSTZLYWNU?=
- =?utf-8?B?TlNFV085K215WGtTVjhabWVJK2JScHpFVytyYy9nbFliY2hnanVpdkQwVDRS?=
- =?utf-8?B?ZmtoMXkwL0UxQ0pEc0c1WllwbEZqY1dJKzJIRXFRVm05bGR4WDZIWHlPZ0Zr?=
- =?utf-8?B?N1RzY0FzS01SdmlzWWNtSkdmTmVFWWJQWVZQK0xGU3duUXh0bUJUdlgwODN4?=
- =?utf-8?B?ZGpoYjh3VDMzUkNpNUlWK0ZjeTNjYWtJSEswcEJZNVdDVHBuR1dzcVJya05t?=
- =?utf-8?B?cGE3cERiQWZnZm5WZ0xxWFlhNDgwNnhyS3hkQTVzcmk4dkUwMS84S200TDRt?=
- =?utf-8?B?UnBqSG9VRFozL0sya2R5TW8wZFBxYmtOMDMvdVVKZkJBL1BIclNFZ0w5dlJi?=
- =?utf-8?B?SEgwdndvU29pU2VwcG1WbkhVcCtIT1JJWCt0STkyeGlpNngrdndaVjh6Uzd2?=
- =?utf-8?B?M1hoZEpGSmFGZ2hGQXR3SVVwYnZxOXNHZG5iWDNiZ2JiTjV5cXZVUStkUHpp?=
- =?utf-8?B?eVBOSzVGMUVlQTNGaksyb3Z0WFhWNjhZZVo3RGFOWnFYK0I0bFhkSWZGUjJK?=
- =?utf-8?B?dks0L2RMbTNmb3M4ajBwYWh6cytZejdZZGFJL1loQnhQZmxsNXMyQT09?=
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b61bb257-cf01-4b9c-609d-08df409e983d
-X-MS-Exchange-CrossTenant-AuthSource: AS2PR03MB9587.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Nov 2026 09:23:21.4669
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: SvK7f6ujwie1kShbQu9Gy+8gcV2L+qw/8FQJZUW6jDnYrD0lzRgvFGPVRN3gvK8v+4xrqgvZXPmkZsgU3HwuVA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR03MB10606
-X-purgate-ID: tlsNG-ebf023/1794475406-538C1B50-29B6F53E/0/0
-X-purgate-type: clean
-X-purgate-size: 2602
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] x86emul: Treat the vector of INT imm8 as unsigned
+To: Stephen Cheng <stephen.cheng@citrix.com>
+Cc: Ross Lagerwall <ross.lagerwall@citrix.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
+References: <20261112072303.86955-1-stephen.cheng@citrix.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20261112072303.86955-1-stephen.cheng@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-33051d/1794475790-6F2C84E9-0B232E66/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 1122
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Jan,
-
-On 11/4/26 07:32, Jan Beulich wrote:
-> On 03.11.2026 18:30, Milan Djokic wrote:
->> --- a/xen/include/public/domctl.h
->> +++ b/xen/include/public/domctl.h
->> @@ -1279,6 +1279,26 @@ struct xen_domctl_get_domain_state {
->>       uint64_t unique_id;      /* Unique domain identifier. */
->>   };
->>   
->> +/*
->> + * XEN_DOMCTL_viommu_alloc_vsid_range
->> + *
->> + * Allocate guest vSID range and
->> + * establish pSID->vSID mapping for target range and physical IOMMU (phandle).
->> + * Allocated range is continous
->> + */
->> +struct xen_domctl_viommu_alloc_vsid_range {
->> +    /* IN: Range first pSID  */
->> +    uint32_t first_psid;
->> +    /* IN: Physical IOMMU phandle behind which the target device streams are configured */
->> +    uint32_t phandle;
->> +    /* IN: Number of vSIDs to allocate */
->> +    uint16_t nr_sids;
->> +    /* padding, must be 0 */
->> +    uint16_t pad;
->> +    /* OUT: Mapped range first vSID */
->> +    uint32_t first_vsid;
->> +};
->> +
->>   struct xen_domctl {
->>   /* Stable domctl ops: interface_version is required to be 0.  */
->>       uint32_t cmd;
->> @@ -1371,6 +1391,7 @@ struct xen_domctl {
->>   #define XEN_DOMCTL_gsi_permission                88
->>   #define XEN_DOMCTL_set_llc_colors                89
->>   #define XEN_DOMCTL_get_domain_state              90 /* stable interface */
->> +#define XEN_DOMCTL_viommu_alloc_vsid_range       91
->>   #define XEN_DOMCTL_gdbsx_guestmemio            1000
->>   #define XEN_DOMCTL_gdbsx_pausevcpu             1001
->>   #define XEN_DOMCTL_gdbsx_unpausevcpu           1002
->> @@ -1439,6 +1460,7 @@ struct xen_domctl {
->>   #endif
->>           struct xen_domctl_set_llc_colors    set_llc_colors;
->>           struct xen_domctl_get_domain_state  get_domain_state;
->> +        struct xen_domctl_viommu_alloc_vsid_range viommu_alloc_vsid_range;
->>           uint8_t                             pad[128];
->>       } u;
->>   };
+On 12.11.2026 08:23, Stephen Cheng wrote:
+> The decoder sign-extends all 8-bit immediates (SrcImmByte). For INT
+> imm8 the immediate is the vector, which is unsigned. So INT $0x80 to
+> INT $0xff put a negative vector into the event (e.g. -128 for 0x80).
 > 
-> One way or another this new sub-op wants explicitly marking as Arm-only.
-> The specific interface doesn't look like it might be meant to be arch-
-> independent, i.e. it's not just the fact that only Arm implements the
-> sub-op for now.
+> hvm_inject_event() then fails its "vector == event->vector" assertion,
+> and a debug Xen panics. An HVM guest can trigger this with the forced
+> emulation prefix (hvm_fep).
 > 
+> Cast the vector to uint8_t, as is already done for the port of IN/OUT
+> and the operand of AAM/AAD.
 
-Agreed. This operation is specific to the ARM vIOMMU implementation, so 
-it makes sense to explicitly mark it as ARM-only. I'll update this by 
-guarding the sub-op structure definition, similarly to other 
-architecture-specific operations.
-In theory, this operation could also be used for future RISC-V vIOMMU 
-support, but I think that's a long shot at this point.
+I'm afraid this isn't sufficient: At least x86_insn_immediate() is also
+affected, and then also for the other insns you mention above plus quite
+a few more (in particular uniformly for 0F, 0F3A and XOP08). I think
+this needs sorting in x86_decode_onebyte() for all of the former (some
+of which I then need to mirror into the APX series for Map4), and in the
+switch() below setting ctxt->opcode and s->desc (where decode_*() are
+called) for the latter three.
 
-> Jan
+There'll then want to be a 2nd Fixes: tag for the commit which
+introduced x86_insn_immediate().
 
-BR,
-Milan
-
+Jan
 
