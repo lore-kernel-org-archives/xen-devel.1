@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 87DA1606A323
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2026 11:47:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 06410606A327
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2026 11:57:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=I1jFDI4R
-Received: from list by lists.xenproject.org with outflank-mailman.1485641.1688791 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ijwXl9aQ
+Received: from list by lists.xenproject.org with outflank-mailman.1485657.1688813 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRTHK-0003pZ-2M; Thu, 12 Nov 2026 11:47:42 +0000
+	id 1xRTQG-0005oA-U8; Thu, 12 Nov 2026 11:56:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1485641.1688791; Thu, 12 Nov 2026 11:47:42 +0000
+Received: by outflank-mailman (output) from mailman id 1485657.1688813; Thu, 12 Nov 2026 11:56:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRTHJ-0003pS-Vw; Thu, 12 Nov 2026 11:47:41 +0000
-Received: by outflank-mailman (input) for mailman id 1485641;
- Thu, 12 Nov 2026 11:47:40 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xRTHH-0003mf-Ro
- for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 11:47:39 +0000
+	id 1xRTQG-0005nW-Nx; Thu, 12 Nov 2026 11:56:56 +0000
+Received: by outflank-mailman (input) for mailman id 1485657;
+ Thu, 12 Nov 2026 11:51:19 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <holyting07@gmail.com>) id 1xRTKp-0005a1-DS
+ for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 11:51:19 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xRTHH-002uw8-4i
- for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 12:47:39 +0100
+ id 1xRTKo-003gWe-QS
+ for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 12:51:18 +0100
 Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6af5a74f-2eae-0a2a0a5409dd-0a2a4508dc86-32
- for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 12:47:39 +0100
-Received: from [209.85.221.42] (helo=mail-wr1-f42.google.com)
+ (envelope-from <holyting07@gmail.com>)
+ id 6af5a823-bab6-0a2a0a5309dd-0a2a4508dff0-32
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 12:51:18 +0100
+Received: from [209.85.216.45] (helo=mail-pj1-f45.google.com)
  by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6af5a75a-f659-0a2a45080019-d155dd2ac5e8-3
- for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 12:47:39 +0100
-Received: by mail-wr1-f42.google.com with SMTP id
- ffacd0b85a97d-49318428d98so2238709f8f.1
- for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 03:47:38 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-498369a3fd2sm17047711f8f.52.2026.11.12.03.47.37
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 12 Nov 2026 03:47:38 -0800 (PST)
+ (envelope-from <holyting07@gmail.com>)
+ id 6af5a835-f659-0a2a45080019-d155d82db4f4-3
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 12:51:18 +0100
+Received: by mail-pj1-f45.google.com with SMTP id
+ 98e67ed59e1d1-3b10ca4e3f9so2375741a91.0
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 03:51:18 -0800 (PST)
+Received: from Soun ([211.176.214.155]) by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-3b197c42a4csm4538630a91.4.2026.11.12.03.51.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 12 Nov 2026 03:51:16 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,242 +49,194 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1794484058; x=1795088858; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=WFzUbNmeeFcb1CUAG5I30PaPyIGPOjIiV0yIqq+rSxk=;
-        b=I1jFDI4R2JwvycvlP2MNCIsvGqH5evOzGeDPwjbp0FWcA8QduMMoWLLs41a4qwdPuC
-         rOZQi6anr+S5VBm0prCkoARvFxYkXb40gZ0NJYgB78Qm3eLQ7+H+IWlYoV4Z0s2E08B2
-         hjWmbcvGtFjdstcCJ//sMF1JBJ4inz1+l5T3BL/FN1Nb+vebRSBoA7R8t20zidkUjMU/
-         3dDBS5/mDG5nnD4FsP1oG4TxoJN6N9akj94ydwIwC9ZQVJhgwNGXGKlcpkdOEG/KAWaE
-         NxiDh2l+i/trWhBTWfgjAlv4ne5v6sStKFp0QvriG6d1aicxgM+3kvRDBQTX8ldwie1W
-         g/nw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794484058; x=1795088858;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20260707; t=1794484277; x=1795089077; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=WFzUbNmeeFcb1CUAG5I30PaPyIGPOjIiV0yIqq+rSxk=;
-        b=qaHKBkmHG9lY6bCb21D8dFahYNkZnY9ucVIlbFXDRdSEFqqWdATcRDoFsAqfJl98Nd
-         KEcehCBEqiC8FFV4jVHT9NVoW8cZotzuScZ5DycGZqwoeyk7lN+Lz0HXKpjHJkrlxMcs
-         0c91BnvRh+KvpWABi6xhUX+AJaA3vZAiTJT8SU73xEdvYdszHSOzFohdb76kBFa12jHE
-         CqmY2tkJg3nqG3olBNrjVl1Lv6LgVwNbkgUqbLrt99gRcI5p8vG0HG8JXJf62h9Piixz
-         LVgQ8TDZWivlmaO3fK9LNgPMQINd+4DwkkVLM5y2EZ1NjH/PmIba/4meTDbIawXJ+jnL
-         0UCw==
-X-Forwarded-Encrypted: i=1; AL+hErGMaStjftzUtQxw99u/SP+DP1U9wdUGGBsw8Z1rZxtgX00eIkTReuH86+WoCb8/Mj2hYSUvO+VfOCE=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z9FIhnkc3JtvCN/DiZ/m/zFKLb+VFj4kHLtPuR8I+nviUtt4nM/
-	ahifmqgiwMMCHNKluuxRDYtsOPxPN70f8MQeIo+Iq5uXRTT5aj6p6mjlTEiLo+CuTOfxxX/0Mw8
-	XMmp6KA==
-X-Gm-Gg: AYBFou3Jl4UZXNK49I7q4bXGsqnxfT7QmGS0ck1jX8SZLL4G12kM1A94nx8tmCupBi2
-	gD6pNqHiTOH1S8EUd0Cgec52glOpUhh/nt12nmtLIMvMB73KFXcWWS/TBarjkPV6WQhPs1Tc4c8
-	3rkwPRt/rTdkPZw+4q7iVRIRnIN/51FXEROrTrPd+87Dv+Zu4DwvBv15fxkGvwOCNm2mfg2i+3s
-	o1rjHwBHVdrCy9ZglooVqh1UajuQnBWSniviJelvEkYtz3U15qqTRf4auQH4YKq5KNYpnTKmLm8
-	fKZRGrCCqUAu0s8RBX/6LMp7ieDeW7X+RyDUYFubvVonjYqs49ESqzsOCrSTQ1BHqlcFhEvUyMA
-	aBgEQx1fMb5P7R6FWZ6jswt5YPRLmxKk9QZ5B82p39sALBxTkENzWby3toB6K5RTXYNSAhQEY82
-	aiAE8/z1p7A3fQhO6QTV/vkFLgR6M2ki/bpyo97DG5pOqcYj+YXUoOOizrcNFz445WeXENssALQ
-	brDp5P8hOyASb8h1oISXOGZkP8d07RiODBdFC3L1VRkCQkmGct+o6VlyT5RyljLkrJN/Xx7iiF0
-	g4ohp2Yd5pmzEtJdtqEgbUuAxSSBNTAiPw+iWYGCU2bZJjbpTwnN2QWh6TgMuM55BnhFEsjFBU5
-	mhRri9b2+ht5CAcwB
-X-Received: by 2002:a5d:59ca:0:b0:48f:bcdf:6f68 with SMTP id ffacd0b85a97d-499c68d4ab5mr9569751f8f.37.1794484058400;
-        Thu, 12 Nov 2026 03:47:38 -0800 (PST)
-Message-ID: <a994168d-23c0-44c2-bafa-a7aacfc1851d@suse.com>
-Date: Thu, 12 Nov 2026 12:47:37 +0100
+        bh=9E20EbwIjTi+wfLtCh2CvjL1HiP4RRaKiCZgKQ0LTcU=;
+        b=ijwXl9aQPrRevEsSOOGfKENsh1y3fPGUOqxfPbX5zulEMLmss6Xyml1WJxnZLnJkzv
+         evnniYmHPbXNklaeJcC1qOCzCFFf25ET2RbPu78wS2dCNAzGC0bcgXhOZJU9V+zRKXmw
+         qR/9QrS462qg6IwIN4fw0qtpfVRyh2V12+vkcBmISBg0NOpYzMQazDqRgt5YdJSnXlYK
+         M0XrELlhq0JVHPrEImylznR75sYx2b01iUEb0lbf5ioTBK2fsiD2qLLinzNvHlqMTTFq
+         5yBSBS/FMEP4fAbcEwE5ZaNbPdK+l8UKVYSh/OvXzVKBWTvYXXVeHtzihjgwR0mRGsUk
+         p+WQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794484277; x=1795089077;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=9E20EbwIjTi+wfLtCh2CvjL1HiP4RRaKiCZgKQ0LTcU=;
+        b=G23J5yldYmSNuV+si54OYXPffMxCs46xyB5LBYgvK4aikdolAh2F9cHaoSjdZwNvot
+         pzr6SUrrGShs+qGGWG+JjIvww+OqhayKm0ZEtKILQFG5QMar3cmigclht7VPDKt+KHFQ
+         ZL0yRzv6rC5f11b79/KB/LA3a4KMXeSdlWKAT0JPRyjr4rbMPweovaqX7Hk32AU+4gjt
+         5z22kwqVFF71lMf/o7/YH/tvtpTdsCV2dED1V1efKvDRWyxr+mETspzl7XzX8t1MIy9K
+         ycTtHwwAMeF35//JuvpahF8/gUdPPmEaFM+VULpp9OyysUq/47YcXWCXZaXtNdt5npUB
+         GnZA==
+X-Gm-Message-State: APuU4Z8XCRWkbVl6xTdRlRJRUxMyM/BMY+xu3ej6Qt51Qbhnxy8z4Otf
+	E4JiTgzG6gyfvKbspnLt++vmxRMSXfQkC8SvIgx1DqxTWkjTc1rC1lo7
+X-Gm-Gg: AYBFou1GeO7sYVh17YZvbabMnyLxwIeiKMcRhugckXhoQqXQDApdvsbu0jL9jhFIhDS
+	27uYVJ5Y6AlUE7oJIEcMF0fVgeb0WTyjToFn6FpQ1lQKd1zNTjY4AxszDvKMilqA1u98BBehm2c
+	SSdYo8UdS8s6DKf4JU2lJN3fqsQulWkz5fyXvf1UHBt64DnXWbwNLLJOwG+MoIRbrdAzBSe5aV7
+	KPWSqscoUlBJwV4UWngpE9/LtFI/7FP+qRZxFCXPFNViZYOeZfnjt/oxxhoRSWTgVane8o1xBd7
+	9Al4RdGl5favFZvVG3oCBxnT03aN4pAnw/7HMX37BVeUL2R1FoLSOkuoa49Ykq4RMShNxjw9ioj
+	ZR7w1c94Ub81AJLSOl9lB8sXsSpK3CGsrGA50BoKkPRlDV6pviZ16K6JyrND3TpUVyUNMwGhuBS
+	QKMhell0UKZW+801hTRqzGcigJIpStIGfkw1u+npQRrozKRMpYNP7Nx7cncjiz+gT7orCqJcSO5
+	qGcAmbUbLwNZ7ddZBgUdkUw/sm1GAqMFNNec9j83W8hk2Q2IOj8AvdSMBTk+jUzdtRn35My1vuj
+	6cXgUJeEYmrjsihegt+I+Lg/dIeRqnWGq6JY2g//hUUjNhpH9x2Wnc/mNeWfwts6XdHPizpZgN1
+	Wbftm7WwDA8xHByMX
+X-Received: by 2002:a17:90b:1c01:b0:3ac:6fcf:81a2 with SMTP id 98e67ed59e1d1-3b182fa3b9emr4999530a91.57.1794484276563;
+        Thu, 12 Nov 2026 03:51:16 -0800 (PST)
+From: SounLabs <holyting07@gmail.com>
+To: Anthony PERARD <anthony.perard@vates.tech>
+Cc: xen-devel@lists.xenproject.org,
+	SounLabs <holyting07@gmail.com>
+Subject: [PATCH 2/4] libfsimage/reiserfs: validate item counts and journal length
+Date: Thu, 12 Nov 2026 20:49:47 +0900
+Message-ID: <20261112114949.9936-3-holyting07@gmail.com>
+X-Mailer: git-send-email 2.52.0.windows.1
+In-Reply-To: <20261112114949.9936-1-holyting07@gmail.com>
+References: <20261112114949.9936-1-holyting07@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] x86/pv: free the shared_info page switch_compat()
- replaces
-To: George Dunlap <gwd@xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
-References: <20261111171441.23101-1-gwd@xenproject.org>
- <20261111171441.23101-2-gwd@xenproject.org>
- <cffc77e4-4904-4958-ae0c-48da52b42327@suse.com>
- <CAFLBxZZHTc7AuRjNtoxrGSn_R53SaEgf23_u_7CidYp9Sta-6g@mail.gmail.com>
- <ca582cff-5ef1-4bca-ad9d-fec4bcdefc69@suse.com>
- <CAFLBxZb7i_kaS4--HGk3a81wK1HQ1V-itCJu4nF8jB_f0-YrhA@mail.gmail.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <CAFLBxZb7i_kaS4--HGk3a81wK1HQ1V-itCJu4nF8jB_f0-YrhA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1794484059-CE34587B-A7125EE1/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 7404
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=4.0.1
+X-purgate-ID: tlsNG-c1860d/1794484278-CCF4F87B-FE6DF68C/0/0
+X-purgate-type: clean
+X-purgate-size: 5199
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 12.11.2026 11:49, George Dunlap wrote:
-> On Thu, Nov 12, 2026 at 9:46 AM Jan Beulich <jbeulich@suse.com> wrote:
->>
->> On 12.11.2026 10:30, George Dunlap wrote:
->>> On Thu, Nov 12, 2026 at 8:28 AM Jan Beulich <jbeulich@suse.com> wrote:
->>>>
->>>> On 11.11.2026 18:14, George Dunlap wrote:
->>>>> For a 32-bit PV guest, switch_compat() replaces a shared_info page
->>>>> above 4GiB with one below, and drops the old page with a bare
->>>>> put_page().
->>>>>
->>>>> Unfortunately, this violates the expected
->>>>> xenheap-page-shared-with-guest freeing discipline.  Xenheap pages
->>>>> don't start with a reference count, and aren't put back into the
->>>>> allocation pool after their reference count drops to zero; they're
->>>>> removed from the domain's xenheap list, but someone needs to
->>>>> explicitly call free_xenheap_page() on them for them to return to
->>>>> their pool.
->>>>>
->>>>> d->shared_info here only has a non-zero reference count because it was
->>>>> shared with a guest; and the thing that holds that reference is the
->>>>> PGC_allocated bit.  Dropping the reference without having been the one
->>>>> to clear the PGC_allocated bit puts the page in an invalid state.
->>>>>
->>>>> If there are no outstanding references to d->shared_info when
->>>>> switch_compat() happens, the result for pages moved this way is merely
->>>>> a memory leak: the page is removed from the xenheap list, and nothing
->>>>> ever calls free_xenheap_page() on it.  So whenever this path is
->>>>> triggered, a page is leaked.
->>>>>
->>>>> Theoretically, if there *is* an outstanding reference to
->>>>> d->shared_info, *and* that reference is still held when the domain is
->>>>> destroyed, then the result is a reference count underflow: Because the
->>>>> reference count never drops to zero, the page stays on the xenheap
->>>>> list; then during domain destruction, relinquish_memory() walks the
->>>>> list, sees the PGC_allocated bit, and calls put_page() again --
->>>>> potentially dropping the page count to zero.  When the other reference
->>>>> holder drops their reference, the count underflows.  (put_page() only
->>>>> ASSERT()s that the count is non-zero, so this wouldn't cause a crash
->>>>> in a release build; and the page is never freed, so other potential
->>>>> hazards of general ref count underflow are avoided.)  Fortunately this
->>>>> is impossible with the in-tree toolstack, which only switches a domain
->>>>> while building or restoring it, and doesn't have a mapping of
->>>>> shared_info that it holds across that call.
->>>>>
->>>>> Release the page the way domain destruction releases d->shared_info:
->>>>> drop the allocation reference with put_page_alloc_ref(), as
->>>>> relinquish_memory() does, which clears PGC_allocated and takes the page
->>>>> off the xenheap list once nothing else refers to it, and free it with
->>>>> free_xenheap_page() once an RCU grace period has passed.
->>>>>
->>>>> The free waits for the grace period because do_settime() writes every
->>>>> domain's wallclock holding only wc_lock and the domain list's RCU read
->>>>> lock, neither of which excludes switch_compat(), through a pointer it
->>>>> may have read before the switch.  The RCU callback uses the domain's
->>>>> own RCU head, d->rcu, and holds a reference to the domain.  That
->>>>> reference keeps the domain from being destroyed, and its struct freed,
->>>>> before the callback has run.  It also keeps d->rcu's only other user,
->>>>> domain_destroy(), from queueing the head in the meantime; if the
->>>>> callback drops the last reference, domain_destroy() queues d->rcu
->>>>> again, which RCU has finished with by then.  No other reference to the
->>>>> page is expected: with no memory, the domain has no page tables that
->>>>> could map it, and the in-tree toolstack holds no mapping of it across
->>>>> the switch.  If something holds one all the same (a toolstack that
->>>>> mapped the page before the switch, for instance), leave the page alone
->>>>> and leak it, rather than free a page that is still in use.
->>>>>
->>>>> Freeing the page relies on "tools/libs/guest: re-read dominfo after
->>>>> changing a PV guest's width on restore", without which restoring a
->>>>> 32-bit PV guest maps the replaced page by the frame number it read
->>>>> before the switch.  Once the page is freed, that frame can come back as
->>>>> one of the restored domain's own pages, which restore would then write
->>>>> the saved shared_info into.
->>>>>
->>>>> Also allocate the new page into a local variable rather than straight
->>>>> into d->shared_info: if the allocation failed, a concurrent
->>>>> do_settime() could dereference the NULL pointer before the old value
->>>>> was restored.
->>>>>
->>>>> Fixes: 8a9255405ca6 ("x86/domain: adjust limitation on shared_info allocation below 4G")
->>>>> Suggested-by: Jan Beulich <jbeulich@suse.com>
->>>>> Assisted-by: Claude Code:claude-opus-5-5
->>>>> Signed-off-by: George Dunlap <gwd@xenproject.org>
->>>>> ---
->>>>> Changes in v2:
->>>>> - If the page is still referenced once its allocation reference has
->>>>>   been dropped, leak it rather than free it (Jan).
->>>>> - Depends on a new patch, "tools/libs/guest: re-read dominfo after
->>>>>   changing a PV guest's width on restore".
->>>>
->>>> Actually, is there a dependency here as in "must be applied in this
->>>> order"? It looks to me as if the 2nd patch going in first wouldn't
->>>> make the situation worse.
->>>
->>> Before patch 2, the stale frame will always have a refcount of 0, so
->>> the map will always fail, causing the restore to fail.  (And in the
->>> case of a live migrate, causing the attempted sending domain to
->>> resume.)
->>>
->>> After patch 2, the stale frame may be in one of three states:
->>>
->>> a) Free, refcount of zero.  libxc's map will fail the same way,
->>> failing the restore.
->>>
->>> b) Allocated to a different domain.  This will also fail, because it
->>> will have the wrong domain, failing the restore.
->>>
->>> c) Allocated to the same domain.  In this case, the map will succeed:
->>> libxc will restore the contents into the wrong page, and then write a
->>> truncated frame into the start_info that it passes to the guest.  This
->>> is a lot worse than the failed restore.
->>>
->>> In Claude's experiments, on an idle system, the page gets re-allocated
->>> to the same domain 10/10 times.
->>
->> Hmm, all of this to me reads like an analysis of what happens if only
->> patch 1 went in. But the question was whether putting in patch 2 without
->> patch 1 would cause things to be worse than before.
-> 
-> I'm a bit confused.  Are we talking about the same patch 1 and 2?  If
-> we put in the current patch we're discussing, "[PATCH v2 2/2] x86/pv:
-> free the shared_info page switch_compat() replaces", without 1/2, then
-> we'll have the issue described above until patch 1 is applied.
+libfsimage is used by pygrub to parse the filesystem of an untrusted guest
+disk image from dom0.  Three reiserfs on-disk counts are used without
+validation:
 
-Right, but is this any worse than the situation without either patch
-applied?
+ - block_head.blk_nr_item is iterated as item headers / keys in search_stat()
+   and next_key() without checking they fit in the block (heap OOB read).
+ - item_head.ih_entry_count is iterated as directory headers in reiserfs_dir()
+   without bounding it to the item body (heap OOB read).
+ - the journal descriptor/commit j_len indexes commit.j_realblock[], which
+   holds JOURNAL_TRANS_HALF entries, in journal_init() and block_read()
+   without a bound (stack OOB read).
 
->  1/2
-> fixes the stale-shared_info-on-restore problem before 2/2 enables the
-> old shared_info to actually be freed and reused.
-> 
-> I don't see how putting patch 1/2 in without patch 2/2 would cause the
-> issues described.
+Check each count against the structure that holds it: blk_nr_item against the
+block size when a node is read (including the root), ih_entry_count against
+ih_item_len, and j_len against 2 * JOURNAL_TRANS_HALF.
 
-No question that applying in-order will yield a good result. The question
-is whether I need to wait with putting in patch 2 until patch 1 has been
-acked.
+Same class of issue as XSA-497 (iso9660).  pygrub is only security supported
+when run de-privileged (XSA-508), so this is hardening rather than a security
+fix.
 
-Jan
+Signed-off-by: SounLabs <holyting07@gmail.com>
+---
+ tools/libfsimage/reiserfs/fsys_reiserfs.c | 46 ++++++++++++++++++++++-
+ 1 file changed, 45 insertions(+), 1 deletion(-)
+
+diff --git a/tools/libfsimage/reiserfs/fsys_reiserfs.c b/tools/libfsimage/reiserfs/fsys_reiserfs.c
+index 10ca657476..395488245b 100644
+--- a/tools/libfsimage/reiserfs/fsys_reiserfs.c
++++ b/tools/libfsimage/reiserfs/fsys_reiserfs.c
+@@ -420,6 +420,13 @@ block_read (fsi_file_t *ffi, int blockNr, int start, int len, char *buffer)
+ 	    return 0;
+ 
+ 	  j_len = desc.j_len;
++	  /* See journal_init(): j_len must not index commit.j_realblock[]
++	   * (JOURNAL_TRANS_HALF entries) out of bounds. */
++	  if (j_len > JOURNAL_TRANS_HALF * 2)
++	    {
++	      errnum = ERR_FSYS_CORRUPT;
++	      return 0;
++	    }
+ 	  while (i < j_len && i < JOURNAL_TRANS_HALF)
+ 	    if (desc.j_realblock[i++] == blockNr)
+ 	      goto found;
+@@ -497,7 +504,11 @@ journal_init (fsi_file_t *ffi)
+       commit_block = (desc_block + desc.j_len + 1) & (block_count - 1);
+       journal_read (ffi, commit_block, sizeof (commit), (char *) &commit);
+       if (desc.j_trans_id != commit.j_trans_id
+-	  || desc.j_len != commit.j_len)
++	  || desc.j_len != commit.j_len
++	  /* j_len indexes desc.j_realblock[] and commit.j_realblock[],
++	   * which together hold at most 2 * JOURNAL_TRANS_HALF entries;
++	   * a larger (attacker-controlled) value reads past 'commit'. */
++	  || desc.j_len > JOURNAL_TRANS_HALF * 2)
+ 	/* no more valid transactions */
+ 	break;
+       
+@@ -555,6 +566,8 @@ journal_init (fsi_file_t *ffi)
+   return errnum == 0;
+ }
+ 
++static int blkh_nr_item_ok (char *cache, unsigned int blocksize);
++
+ /* check filesystem types and read superblock into memory buffer */
+ static int
+ reiserfs_mount (fsi_file_t *ffi, const char *options)
+@@ -646,6 +659,8 @@ reiserfs_mount (fsi_file_t *ffi, const char *options)
+ 
+   if (INFO->tree_depth >= MAX_HEIGHT)
+     return 0;
++  if (! blkh_nr_item_ok (ROOT, INFO->blocksize))
++    return 0;
+   if (INFO->tree_depth == DISK_LEAF_NODE_LEVEL)
+     {
+       /* There is only one node in the whole filesystem, 
+@@ -676,6 +691,22 @@ reiserfs_mount (fsi_file_t *ffi, const char *options)
+  * efficient, but this really doesn't hurt for grub.  
+  */
+ 
++/* A block_head's blk_nr_item is attacker-controlled.  Confirm the keys or
++ * item headers it claims actually fit inside the on-disk block, so the
++ * item/key scans in search_stat() and next_key() cannot run past the
++ * cached block. */
++static int
++blkh_nr_item_ok (char *cache, unsigned int blocksize)
++{
++  unsigned int nr = BLOCKHEAD (cache)->blk_nr_item;
++  if (BLOCKHEAD (cache)->blk_level == DISK_LEAF_NODE_LEVEL)
++    /* leaf: block_head followed by nr_item item headers */
++    return (unsigned long) nr * IH_SIZE + BLKH_SIZE <= blocksize;
++  /* internal: block_head, nr_item keys, nr_item + 1 disk-child pointers */
++  return (unsigned long) nr * (KEY_SIZE + DC_SIZE) + DC_SIZE + BLKH_SIZE
++	 <= blocksize;
++}
++
+ /* Read in the node at the current path and depth into the node cache.
+  * You must set INFO->blocks[depth] before.
+  */
+@@ -707,6 +738,11 @@ read_tree_node (fsi_file_t *ffi, unsigned int blockNr, int depth)
+       errnum = ERR_FSYS_CORRUPT;
+       return 0;
+     }
++  if (! blkh_nr_item_ok (cache, INFO->blocksize))
++    {
++      errnum = ERR_FSYS_CORRUPT;
++      return 0;
++    }
+ 
+   INFO->blocks[depth] = blockNr;
+   return cache;
+@@ -1140,6 +1176,14 @@ reiserfs_dir (fsi_file_t *ffi, char *dirname)
+ 	  name_end = INFO->current_item + INFO->current_ih->ih_item_len;
+ 	  de_head = (struct reiserfs_de_head *) INFO->current_item;
+ 	  num_entries = INFO->current_ih->u.ih_entry_count;
++	  /* ih_entry_count is attacker-controlled; the directory headers it
++	   * counts (DEH_SIZE each) must fit within this item's body. */
++	  if ((unsigned long) num_entries * DEH_SIZE
++	      > INFO->current_ih->ih_item_len)
++	    {
++	      errnum = ERR_FSYS_CORRUPT;
++	      return 0;
++	    }
+ 	  while (num_entries > 0)
+ 	    {
+ 	      char *filename = INFO->current_item + de_head->deh_location;
+-- 
+2.52.0.windows.1
+
 
