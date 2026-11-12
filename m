@@ -2,46 +2,43 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C6FDE606A335
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2026 05:40:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 99F55606A31C
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2026 06:05:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=HPRBAdhJ
-Received: from list by lists.xenproject.org with outflank-mailman.1485120.1688413 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=yahoo.com header.i=@yahoo.com header.a=rsa-sha256 header.s=s2048 header.b=F+m434hx
+Received: from list by lists.xenproject.org with outflank-mailman.1485046.1688422 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRNXW-0003sf-6E; Thu, 12 Nov 2026 05:40:02 +0000
+	id 1xRNw5-0007tR-4g; Thu, 12 Nov 2026 06:05:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1485120.1688413; Thu, 12 Nov 2026 05:40:02 +0000
+Received: by outflank-mailman (output) from mailman id 1485046.1688422; Thu, 12 Nov 2026 06:05:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRNXW-0003s8-3T; Thu, 12 Nov 2026 05:40:02 +0000
-Received: by outflank-mailman (input) for mailman id 1485120;
- Thu, 12 Nov 2026 05:40:01 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xRNw5-0007tK-0o; Thu, 12 Nov 2026 06:05:25 +0000
+Received: by outflank-mailman (input) for mailman id 1485046;
+ Thu, 12 Nov 2026 01:50:39 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ma.mandourr@gmail.com>) id 1xRNXU-0003hn-Uf
- for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 05:40:00 +0000
+ (envelope-from <casey@schaufler-ca.com>) id 1xRJxW-0007Cq-V7
+ for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 01:50:38 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xRNXT-005j5y-TS
- for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 06:39:59 +0100
-Received: from [10.42.69.2] (helo=localhost)
+ id 1xRJxW-00B6wx-4Z
+ for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 02:50:38 +0100
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ma.mandourr@gmail.com>)
- id 6af55112-8faa-0a2a0a5109dd-0a2a45029530-18
- for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 06:39:59 +0100
-Received: from [209.85.216.49] (helo=mail-pj1-f49.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <ma.mandourr@gmail.com>)
- id 6af5512e-6ca4-0a2a45020019-d155d831c553-3
- for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 06:39:59 +0100
-Received: by mail-pj1-f49.google.com with SMTP id
- 98e67ed59e1d1-3ac78f4c10bso2040497a91.1
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 21:39:59 -0800 (PST)
-Received: from cs-arch-srv04.cmpt.sfu.ca (cs-arch-srv04.cmpt.sfu.ca.
- [142.58.10.48]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3b197c8aae8sm2718109a91.14.2026.11.11.21.39.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Nov 2026 21:39:57 -0800 (PST)
+ (envelope-from <casey@schaufler-ca.com>)
+ id 6af51ae6-8faa-0a2a0a5109dd-0a2a4507acd8-22
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 02:50:37 +0100
+Received: from [66.163.188.212] (helo=sonic311-31.consmr.mail.ne1.yahoo.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <casey@schaufler-ca.com>)
+ id 6af51b6c-b4ea-0a2a45070019-42a3bcd48bfb-3
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 02:50:37 +0100
+Received: from sonic.gate.mail.ne1.yahoo.com by
+ sonic311.consmr.mail.ne1.yahoo.com with HTTP; Thu, 12 Nov 2026 01:50:35 +0000
+Received: by hermes--production-gq1-fd7994565-9vhlr (Yahoo Inc. Hermes SMTP
+ Server) with ESMTPA ID 15d81e1a8a6348ae9dcd84771e3b8196; 
+ Thu, 12 Nov 2026 01:50:33 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -50,124 +47,120 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794461998; x=1795066798; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=UTurnFPFeSTNzOL1j7FGTs7ghAwGXevqTOEMLjH5zYs=;
-        b=HPRBAdhJyaQn1VmgpBmCNtqOeMcPVKGN9APZem5ocY4rRpELAeyC4kbSA0/RFzpkdW
-         H1uGxJ8dtxiJSvCiUkoz8PnutlnxmOM8YR3u+XOGzB4RxfqrvpafPMU3DjKvgJTC+7XB
-         X/RexaKrYZkYzaPyXFt+3YXqZ9MJmxC+lHPJ+CsI2u0ToOsR8yEaxPxRRQxb30iTHMfL
-         Ft5TuuHE4/EalmQqWPZEeT3CHrwhViv8+ibkHd8LC6SnlJbp8xGVB3rx2IDpSZApKnr0
-         q/iOTgj1dbkxZfhk6AznYehKWNvwjeB+6HUrZPzDYWpCFDA5rrDm2gSwxgLGiCbudvo1
-         e9bw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794461998; x=1795066798;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=UTurnFPFeSTNzOL1j7FGTs7ghAwGXevqTOEMLjH5zYs=;
-        b=G1csegfupZ55o3ULHtctDSgsyOY4aS0zeLyIaaI4Gu1RSsBCtFuL43hg4Wy46uLn/H
-         dkaxq6dbgslojynQJRsB/dAHcmqwQe+CWdqvH9FgOqVu/e4QuzQjzbXkSKNG31kIWeMv
-         BBnvg3/D0lwQ+T9UrXiAmZ5HpzxAkd/775tMiU2yw0r1Ut8vXqpujYGxPVAR/lKgh4Gx
-         hWQUVUj5F5WwVBWMWx8/DJpMHGWhz6NGiFMSyqO2UyF3/odJYPcYB7rj79ElfTNGnaWA
-         tESF3UREi2e6PsQtcm0rjVYauq42Kb0VNBCoBMK8kOsogJG0LKEPUpvbC1V/NE7aOPuB
-         0qQA==
-X-Gm-Message-State: APuU4Z/vXXUkEfIzgpS/VMLeC1nK06HFC9LHOwHzmXjqMnzg+dTVM30L
-	Wdn2D3UbCxWciVyGpz6LJCvaoBtvlyg/47qgZrbBaKA/jexlbR9QpM1PZhLvIQ==
-X-Gm-Gg: AYBFou2dRqyDz2iXFG9ycZrAIfo9f+lvGZHhhiz+y1/r44j7iL0Rm+RLXd18EAxtpb+
-	Ye4P1AI1EEQXTmG7TrMVGLguK5AIcDX62xdmA2Ad0mORaCaDsoBs4prUOX866Nn1V+zovaFxqE5
-	5jyQJDBCdygc8UUKn2lbwIud3SgmXE0ODf8i+dmDHQWt1O/AElguybEx8buwH/6sYDhPu5RjK5t
-	qxOlwmTp0AspmigBf/R2h5knBaw8ZKcuZLZgjXoc3Rr+9seVgVeEBfDgdlMUjGvGp+t2Nw4ESLn
-	x5H0stFI7pGZBYQRclrscFn+MKfMnCzVVeFAQ1vcHjtOVVMiQMRUJO3Okr8M2GdHLNjRFnFSZjx
-	a1OWlE0mitt68dOxKeJ+r7Fci7XBeUxHBBPFuLzA4F5mC78B2SX/aChbZVQPyzhrM4f+LWiuPF+
-	5Qe/s0UFxSICBiqmPpK7FGzlGM4LLm7asg/FI8k112BSQ9UnAawuNCdMPhp1VJBl+dkNggoJnbd
-	NzuwlByqawfjw9FIt3ovhtn2337eCTxw/16r0mjTsBIAeDe4jikjn2+g9R8KFoXvRGhhsDJwwH5
-	OSn3RNd22HKoWBlh26vayUmC2fBz+zKaG9Bq6edm2avQhNHfVT0ckSWjO3ITvvBvGxpMxPISC0p
-	bAi4UJzoL6e0BU+Mc1j3lGSGJsNmW0O4PpvmktuT93PMkypsgcgOAH0xUzxCQ8JmFUaVcnAl0sF
-	hNJVtSEaTNnQ==
-X-Received: by 2002:a17:90b:4a88:b0:3ac:9d14:feb1 with SMTP id 98e67ed59e1d1-3b182fe6d1dmr4248352a91.43.1794461997638;
-        Wed, 11 Nov 2026 21:39:57 -0800 (PST)
-From: Mahmoud Abumandour <ma.mandourr@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Teddy Astie <teddy.astie@vates.tech>,
-	Mahmoud Abumandour <ma.mandourr@gmail.com>
-Subject: [PATCH] x86/nestedhvm: load host state at virtual VM exit as the SDM does
-Date: Wed, 11 Nov 2026 21:39:56 -0800
-Message-Id: <20261112053956.1070108-1-ma.mandourr@gmail.com>
-X-Mailer: git-send-email 2.25.1
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=s2048 header.d=yahoo.com header.i="@yahoo.com" header.h="Date:Subject:To:Cc:References:From:In-Reply-To:Content-Type"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1794448235; bh=O8h9fybdyu+Al7CdWlfRBQ6LgqQutaBSF+Rc2HGjCVE=; h=Date:Subject:To:Cc:References:From:In-Reply-To:Content-Type:From:Subject:Reply-To:Content-Type; b=F+m434hxnazo+znIsDN87b1q6q2BjDXrSK85l4sPO4/7/Nv6ouklEMGBpfrTHUnO8eGiNQoV5Bbw/uB3JZACliQBg8PtdTRYRP97HHZoegx3ArYwH69kAdVaUPkV7WcyNd89YKs91cZCwmWeziNsUM+FCRLahqzZW3a6Ku8pvIiJlMO/7XaKbdkzRicymfmmSk9XFsFNG+fkHI8UO70pZ1hFT9v2XQiwRrAslvpHUFbDR+3rpTT4Ikh/N/oSBL0qRMnhxDrBkdI0Mmku6tTsyJWpgcJjSTSvBuepznmh0kGiP8yElqSHRAm6ov8qvVTBbZJZj+71HtVfmpD+WAp7XA==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1794448235; bh=cB6ms4YZu3OSr7Oj5Ktyy9vRYllWqlKKBSjCDtAOhd3=; h=X-Sonic-MF:Date:Subject:To:From:From:Subject; b=Wh5tO+A7k6l9RAB9CmF+7nFPpV+s7vwQOvHRCpB836zmpk+EmZdiT1obFQYb3eEYUV/ZZrDMNSGrpqiSFrVBvEAP1+BcX3bVXL8AkZe5aM0djERGyxVy+oivb40ItIA89tHRP/kW5BzO7GaPGZrOTfFkDQF1HHnKQVH/ifoH5PYTL/BXjLkbPViq5JKecTMlRIryhz3iU6NkOHkP1F3oliaijdeTD+Tk00HCA4w802Q1PFZvsZSndMk6hlb4A1wMRPh3z4tVeu12oZckS5JIJR1ywCFknBKWBE+hVxojbZ57Qr3RCaKJrua5vLBD1s/SnsdmRZ+/JLOhUlVDaAQyJw==
+X-YMail-OSG: zqmnDtkVM1n5t6ueog55b_vkFHSYM5E1qoECEJywzBr3UwiKAfUIVI_o6w7R9SH
+ CQ1t93f4qyBpZEcVGjU2OBO9C0Of8.lRAD_UtcVdUMSf6_GiG98G7rNXb1ZhUGsyYLDyJE5oLG69
+ MPpknxdoviNcfunvMa.q1ATsxUiRNZaaYFEtaSi7o3ARz3uzFbYwa4zXUFVTxVNR1M4yEm8E_vMu
+ CX3lc6b1b0MWbnmh3DAeGebLmTpZwI12LuF9QH7MRRpV.Y7YkiPkkooycQl42qWPa_ZCsKSCVnTi
+ cfYjzn7ZtEqmGYVjYEY1kEbVCA4JoS5GMMDKMoO39G5YhBugROnX2jrgGh0AwdwAby30.ZBxmd.l
+ S62hS2hlPvIDoPxGhzS2whxCcIZrt8XbiUGRsBq2lfu8t9x.TIubZ4wIiRqzfDYoZIwioLDCjm6k
+ .cljRFJEOnSix_ImX_sSyVP7eQAAEJ1GsHeUHb7atzAIHDlw0lV7YT_EQZaDbjuCghjYyGwMa7FJ
+ LxdRDFOXlr05WMcbROqV0a4sd0J7UyT01rGVa2p8mqlfg_ZPSk1p0.zKLMJDr5A1o8n0sxe4LbiR
+ qbREBgT6XAwECEJNbNHKO1YTM4iOmevp8GvnGDd6MDNapigfFoPwfu59SMy7zYd9LO3Z8_0VkIJt
+ aPlGTgcyxBF.v1wQggIdb30_WaSmydGJlcGPdQ03irHq2wrwxiCoQO6IJUZEr0jypo3mUQnAGyDG
+ k9vUUntKtCsyi.w0t_vFjR1T1M3Z6Xk5RLKDL9njS7LNW.CupQSEmNQ1GkX7kSwPFQP21HwmyMsp
+ i9SdJowJ0s5y.bw2SrHxrP7sM6YbNToNL5ZVELMODpe5VuCBtDWl7VcCxYMmahr5455.ZE_hGmHs
+ LrmFJx1uQ46OcZ2Ii956498sukETOy0INQsrtoq.ypS01I6QTO8GSI7rVFeq81ZNfcHhvUGJ06ME
+ B8yJmeeVBase_8cBDx_Yk7y0xRppCWZz9S9bNwiHzQcmhSHJ99JaTf4E0zOIsgLWqU5tZh4wLZKp
+ MnYneLIuBkBNwjBcYTuKXcpCwff8fTcsfan2g9ag6_HRqbKvb3lqTrnQRPIG.IGMBIXdu4D1HB2r
+ Ygn65JHFmN1QF2ROBGshwilsGajQNSqHXHgx.co9RO5Evfjv8vx67t__1ew7rn3sc1C.7W_m4N4M
+ cSR8SYdV43PcknGSee9yB1x8pWannWLYRUROzisZnoPLwDPX1S0a5pIeYojUo9jnHaAdfaOw5IJs
+ bc0nB3tQZQ.0b782FrYX_n_pf05DxifKK1hrJ0OqXSo23BlRt.p63_4auT8X4tq9HTs9fxQLg0OA
+ ydi2BtTIKopjFdQtWH0NOUC1U6_wILbgtZfZnlVsbVhHJ7Tk.UZGmAVff_vQl8b4id5D4T9jwtS9
+ 8nKfk1Ghey2tqeZDF9SgVACRH_x6kJa81R1e4J_83TMyBY4Ays_MTt39YbFzXRfBMRqG0I92h9IS
+ Xl4i4wMK_gUqmjpP0P_oaDsTzptxLp7NMOmOY3T81w3i60pQpmuYMvggEU3dv.ebRC4Brat.KcXq
+ ZyjrZ4BouQUvapbNSNNP1Y253sBId7Ys37DryRT0fCsyFp6LIN0DYA1xElaICSH34S2v84muDGZe
+ .CGRnjEo0Q2679LeUfRrG7eDmdHtGbtXa02kyQjntuOc7VrR9y8jRUHqkLiiITgSdxH1QGB5PWuQ
+ ARpFP1xjX3OHKFGeQd7o8WX3xDhKeppcWAPJEhIosno79RY0IQ4.4JX7WCaXgDYbj6BL4okuPPnu
+ 9CEiWKr_A1oRBHcXo_t2XyX1N2Jd1tPqjLAB1WY0vIGe1SVdGRdRloM6.RT24mU1pbFP4DjeRn1w
+ _aXrAymHoztvd7BVNk78MI6f1URU2iBFJ6msmP6JgXQac5cfrtvlS9yn2eohnwEPfv__IKNy26n1
+ mYs7i0yOvj6LH9jEvBJfejsFOAeuf8LBdL.MbTk8ZZiVorhzaxO81Zf4PRAQwZfM29CLtP5dAKbb
+ klVicXy3HgsPrMZiM94qTb2yOlO2WSLEgrPS_2Vx31FNEHJNJpuKXHkfgTtKgjLPmpCr4Taq44yO
+ KB8vbaoDybAHzNwFN22pWQG3NDp.x8aciLmMT8fUQgwMgW8NlLKb6ErL7ChYlwsHUhzhzMbUfvnT
+ 2bA6QlHpoN4OcRsGeb2ygbIpUCMhvL1tqClAnkg41oGlCJa3crNRCKKeXXqZBarf9KzLHJa8i581
+ 0YgHHROuHzbtZ8GRm6ggBoLbsrITMfTGKIshO9uwpGYYxl6nVscbC6LtZUsxlV5iP8t8XsYi.ga0
+ EDsRWYHlK
+X-Sonic-MF: <casey@schaufler-ca.com>
+X-Sonic-ID: 4e6572e0-628c-4102-8309-f6caa349ac8e
+Message-ID: <41617b0a-90d9-484e-a143-78e2a92e872c@schaufler-ca.com>
+Date: Wed, 11 Nov 2026 17:50:30 -0800
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1794461999-30FCE2AC-17516D8B/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [apparmor] [PATCH RFC 19/41] smack: use fc_init_pseudo() for
+ smackfs
+To: Christian Brauner <brauner@kernel.org>, linux-fsdevel@vger.kernel.org
+Cc: linux-efi@vger.kernel.org, Jan Kara <jack@suse.cz>,
+ Amir Goldstein <amir73il@gmail.com>, linux-nvme@lists.infradead.org,
+ fuse-devel@lists.linux.dev, linux-mm@kvack.org,
+ target-devel@vger.kernel.org, linux-kselftest@vger.kernel.org,
+ Chris Mason <mason@kernel.org>, Christoph Hellwig <hch@lst.de>,
+ linux-s390@vger.kernel.org, linux-erofs@lists.ozlabs.org,
+ linux-scsi@vger.kernel.org, xen-devel@lists.xenproject.org,
+ driver-core@lists.linux.dev, Jann Horn <jannh@google.com>,
+ selinux@vger.kernel.org, apparmor@lists.ubuntu.com,
+ Josef Bacik <josef@toxicpanda.com>, linux-block@vger.kernel.org,
+ ocfs2-devel@lists.linux.dev, Alexander Viro <viro@zeniv.linux.org.uk>,
+ linux-nfs@vger.kernel.org, netdev@vger.kernel.org,
+ linux-usb@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-security-module@vger.kernel.org, bpf@vger.kernel.org,
+ linuxppc-dev@lists.ozlabs.org, Casey Schaufler <casey@schaufler-ca.com>
+References: <20261110-work-loop-pseudo-v1-0-4c998976c6c7@kernel.org>
+ <20261110-work-loop-pseudo-v1-19-4c998976c6c7@kernel.org>
+Content-Language: en-US
+From: Casey Schaufler <casey@schaufler-ca.com>
+In-Reply-To: <20261110-work-loop-pseudo-v1-19-4c998976c6c7@kernel.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Mailer: WebService/1.1.26943 mail.backend.jedi.jws.acl:role.jedi.acl.token.atz.jws.hermes.yahoo
+X-purgate-ID: tlsNG-ef75cf/1794448237-370DDAE4-9F90091B/0/0
 X-purgate-type: clean
-X-purgate-size: 2408
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-purgate-size: 1155
+X-Spam-Status: No, score=-15.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=unavailable
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-load_vvmcs_host_state() leaves the GDTR and IDTR limits at L1's earlier
-values instead of 0xffff, and zeroes the VM-entry interruption-information
-field, of which a VM exit clears only the valid bit. It also never brings
-L1's EFER up to date. With "load IA32_EFER" L1 keeps L2's EFER.SCE and
-EFER.NXE instead of HOST_EFER's, and without it L1 gets its own earlier
-EFER back instead of keeping L2's.
+On 11/10/2026 1:14 AM, Christian Brauner via AppArmor wrote:
+> Initialize smackfs as a pseudo filesystem. This raises SB_I_PSEUDO and
+> also SB_I_NOEXEC and SB_I_NODEV. smackfs never holds executables or
+> device nodes.
+>
+> Signed-off-by: Christian Brauner (Amutable) <brauner@kernel.org>
 
-Fixes: 9390642b7fa5 ("Nested VMX: Switch shadow/virtual VMCS between n1/n2 guests.")
-Signed-off-by: Mahmoud Abumandour <ma.mandourr@gmail.com>
----
- xen/arch/x86/hvm/vmx/vvmx.c | 19 ++++++++++++++++++-
- 1 file changed, 18 insertions(+), 1 deletion(-)
+Please include me at least as a CC on Smack patches.
+I ain't dead yet. Nonetheless,
 
-diff --git a/xen/arch/x86/hvm/vmx/vvmx.c b/xen/arch/x86/hvm/vmx/vvmx.c
-index 29e48387a1..fc2cf08fef 100644
---- a/xen/arch/x86/hvm/vmx/vvmx.c
-+++ b/xen/arch/x86/hvm/vmx/vvmx.c
-@@ -1317,9 +1317,24 @@ static void load_vvmcs_host_state(struct vcpu *v)
-     if ( rc == X86EMUL_EXCEPTION )
-         hvm_inject_hw_exception(X86_EXC_GP, 0);
- 
-+    /* SDM 28.5.2 (Loading Host Segment and Descriptor-Table Registers). */
-+    __vmwrite(GUEST_GDTR_LIMIT, 0xffff);
-+    __vmwrite(GUEST_IDTR_LIMIT, 0xffff);
-+
-     control = get_vvmcs(v, VM_EXIT_CONTROLS);
-     if ( control & VM_EXIT_LOAD_HOST_PAT )
-         hvm_set_guest_pat(v, get_vvmcs(v, HOST_PAT));
-+
-+    /*
-+     * LMA and LME follow "host address-space size" (virtual_vmexit()); the
-+     * other bits are HOST_EFER's with "load IA32_EFER", and L2's without.
-+     */
-+    if ( control & VM_EXIT_LOAD_HOST_EFER )
-+        v->arch.hvm.guest_efer =
-+            (get_vvmcs(v, HOST_EFER) & ~(EFER_LMA | EFER_LME)) |
-+            (v->arch.hvm.guest_efer & (EFER_LMA | EFER_LME));
-+    hvm_update_guest_efer(v);
-+
-     if ( control & VM_EXIT_LOAD_PERF_GLOBAL_CTRL )
-     {
-         rc = hvm_msr_write_intercept(MSR_CORE_PERF_GLOBAL_CTRL,
-@@ -1330,7 +1345,9 @@ static void load_vvmcs_host_state(struct vcpu *v)
- 
-     hvm_set_tsc_offset(v, v->arch.hvm.cache_tsc_offset);
- 
--    set_vvmcs(v, VM_ENTRY_INTR_INFO, 0);
-+    /* A VM exit clears only the valid bit of this entry control. */
-+    set_vvmcs(v, VM_ENTRY_INTR_INFO,
-+              get_vvmcs(v, VM_ENTRY_INTR_INFO) & ~INTR_INFO_VALID_MASK);
- 
-     if ( v->arch.hvm.vmx.exec_control & CPU_BASED_ACTIVATE_MSR_BITMAP )
-         __vmwrite(MSR_BITMAP, virt_to_maddr(v->arch.hvm.vmx.msr_bitmap));
--- 
-2.25.1
+Acked-by: Casey Schaufler <casey@schaufler-ca.com>
 
+> ---
+>  security/smack/smackfs.c | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/security/smack/smackfs.c b/security/smack/smackfs.c
+> index a72bc7fabea9..4a56bbeaeca3 100644
+> --- a/security/smack/smackfs.c
+> +++ b/security/smack/smackfs.c
+> @@ -25,6 +25,7 @@
+>  #include <linux/magic.h>
+>  #include <linux/mount.h>
+>  #include <linux/fs_context.h>
+> +#include <linux/pseudo_fs.h>
+>  #include "smack.h"
+>  
+>  #define BEBITS	(sizeof(__be32) * 8)
+> @@ -2880,6 +2881,7 @@ static const struct fs_context_operations smk_context_ops = {
+>   */
+>  static int smk_init_fs_context(struct fs_context *fc)
+>  {
+> +	fc_init_pseudo(fc);
+>  	fc->ops = &smk_context_ops;
+>  	return 0;
+>  }
+>
 
