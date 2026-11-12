@@ -2,64 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0DB41606A8BE
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2026 14:27:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6F757606A31C
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2026 14:37:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=EM5R8fUY
-Received: from list by lists.xenproject.org with outflank-mailman.1485942.1688963 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=ACL53L8e
+Received: from list by lists.xenproject.org with outflank-mailman.1485966.1688973 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRVlS-0001Mu-LV; Thu, 12 Nov 2026 14:26:58 +0000
+	id 1xRVvF-0003H0-Ln; Thu, 12 Nov 2026 14:37:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1485942.1688963; Thu, 12 Nov 2026 14:26:58 +0000
+Received: by outflank-mailman (output) from mailman id 1485966.1688973; Thu, 12 Nov 2026 14:37:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRVlS-0001Mn-IJ; Thu, 12 Nov 2026 14:26:58 +0000
-Received: by outflank-mailman (input) for mailman id 1485942;
- Thu, 12 Nov 2026 14:26:56 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1xRVlQ-0001Mg-B8
- for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 14:26:56 +0000
+	id 1xRVvF-0003Gt-IH; Thu, 12 Nov 2026 14:37:05 +0000
+Received: by outflank-mailman (input) for mailman id 1485966;
+ Thu, 12 Nov 2026 14:37:04 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xRVvE-0003Gn-Mx
+ for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 14:37:04 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xRVlP-007T8t-O1
- for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 15:26:55 +0100
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xRVvE-000mQ3-3w
+ for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 15:37:04 +0100
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6af5ccab-8faa-0a2a0a5109dd-0a2a4508d36e-8
- for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 15:26:55 +0100
-Received: from [52.101.201.19]
- (helo=PH7PR06CU001.outbound.protection.outlook.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6af5cca8-f659-0a2a45080019-3465c913e93a-3
- for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 15:26:50 +0100
-Received: from CH2PR10CA0002.namprd10.prod.outlook.com (2603:10b6:610:4c::12)
- by FT1PR12MB266007.namprd12.prod.outlook.com (2603:10b6:170:26::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.10; Thu, 12 Nov
- 2026 14:26:44 +0000
-Received: from CH01EPF000BE948.namprd02.prod.outlook.com
- (2603:10b6:610:4c:cafe::78) by CH2PR10CA0002.outlook.office365.com
- (2603:10b6:610:4c::12) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.592.13 via Frontend Transport; Thu,
- 12 Nov 2026 14:26:44 +0000
-Received: from satlexmb08.amd.com (165.204.84.17) by
- CH01EPF000BE948.mail.protection.outlook.com (10.167.244.196) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.615.4 via Frontend Transport; Thu, 12 Nov 2026 14:26:44 +0000
-Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Thu, 12 Nov
- 2026 08:26:43 -0600
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb09.amd.com
- (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Thu, 12 Nov
- 2026 08:26:43 -0600
-Received: from [192.168.31.141] (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.53 via Frontend
- Transport; Thu, 12 Nov 2026 08:26:42 -0600
+ (envelope-from <jbeulich@suse.com>)
+ id 6af5cf07-2eae-0a2a0a5409dd-0a2a4502cd30-26
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 15:37:04 +0100
+Received: from [209.85.128.51] (helo=mail-wm1-f51.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6af5cf0f-6ca4-0a2a45020019-d1558033bc1f-3
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 15:37:04 +0100
+Received: by mail-wm1-f51.google.com with SMTP id
+ 5b1f17b1804b1-4a5087a5348so38366065e9.0
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 06:37:03 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4ba0950394fsm104185115e9.2.2026.11.12.06.37.02
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 12 Nov 2026 06:37:03 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -68,191 +49,167 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Ax+EL02xgXhYTX4UQDDJeOMdHOfwRk9ok0S+oFO0tZk+LOTNIR1zh9Y7BnZmDmazobo1SLMJ37HTu1jAxrD5uK6RaKSGRQ1Nh6t/gGMJGXnK7mrr/rGGsYoaTvnUycPQnBTYIBSVHM/9emqRaarK4LiEOBUi4jlCTKIR1ae0xZq4DeemQ3I+J5mWh8T3lXKsZB+dgZMohTqhzQAyk9cm44MBwodzHgEKiEfsXBTBfmsfZt2WmjQOIj5aurMwo0l3xL9U+KsyrU1cVRr0BeH2awJKoHZpzc4Y4BjEVeIS5pYTbfWcZmun0L5RmRSBykLnjttuYLj+6QXB8yww9uirLQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=n3Ur7SyTxbHj/FuD+0bFpx2ILyvf+Iy9HXvkHNYCe5o=;
- b=s0jI40jVsQpP1Uh+u3SER/R+3c05g6YZNRr4vKgGzDapPaAaGf3x9wNzAuaW/t3AcmwWP+UrVrAGo+MSohIf9kaVimUMArsnKEmtQG7UCtpt/qYzhTq4BHns2zjTHiDG2O/PrGw2RUxw1Rk5P4PKldTjoOscG1PHVuTDUt7A1o6W8dYRREXO7gVWUOdUXL15D3ixQ8DNXESyAd4kQosnlWO2RFeuob1xUW76msl50HIZIg9DHAyFH632ByjELCoUIxu7c/A39oICpISS08EwXO14XvOxLfTvCXxr3Hyw7mrrUbxxV3uEeohijRQpwNLzNo22puasJKIommxARzYqJA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=gmail.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=n3Ur7SyTxbHj/FuD+0bFpx2ILyvf+Iy9HXvkHNYCe5o=;
- b=EM5R8fUYBj5wBiTWuZn3ke7qWPdkUrZTGxMbIvWJ+lMyaNBZnli1Xa55CMeLNnuflgsydHqpGbsYKORxqg67TfSOjDDgsHK0Y+C9oFBOmhH0e4tGmsOuFTPoCc09OiswR/UHKqTeQmuX7TmElq3XzYWUT6ERp43xlGPlr8FaE0s=
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Message-ID: <f1257512-67cf-481d-a411-2511a3165c5b@amd.com>
-Date: Thu, 12 Nov 2026 15:26:41 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1794494223; x=1795099023; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
+         :content-language:references:cc:to:from:subject:user-agent
+         :mime-version:date:message-id:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=VAnX1Ol9YBg1iGfGjhmhcUONI091r4BZ1NGsR0g3yQg=;
+        b=ACL53L8e8YBVrVCOsP37NZbJ/ldeRHhFmE99IGk105aOLDXwTXdCCUElnYzIK5Kr0g
+         FCnWS5PdO4hhoPGE1fFM/u/eW/pYUyU1J38FPLZFnyY53xvMlDpkkAr+mr6RE6s3HAB/
+         fstNpL5P0y/M4vXYN70vZafIe6W38ZxKa2ZLLT2yWRKZYNWNDrB2+ZnTjxR46yX7gUOF
+         D4VMFYPtTz4p5IJNfCmQlGz+XQb61NhtKRX2kw4/BOpWXjDrLXlequ662gTfdeEjjp+a
+         Rh2ZyEKB1Bs2vU3ooBgWGM67Lhl0DDWAUGodC7cnHywPzcDU66s9TaGE0RgIVQfp3Vm7
+         HV2Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794494223; x=1795099023;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
+         :content-language:references:cc:to:from:subject:user-agent
+         :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=VAnX1Ol9YBg1iGfGjhmhcUONI091r4BZ1NGsR0g3yQg=;
+        b=rg6qGxamQXBAfdqg4x+pIClZ1scB9zE/GXX3Y/RZeuV+YnzzZcMISakM+fusFXFv7M
+         /hHh1URffg1al2Hxcfhh5Q9k0RSFkdupC5kQpVz8dEXLZ0q+DzCTlEZo8tpRdOHyTnSz
+         iewz9n9NO7RoZPcBikoEsoIgYpsrcJD/SrLCFn5cEAAv5AjnTH29le0eZkkc/BpeLdur
+         3BDZVq7ydPjoxFyATbmWdrZZNyE8yHaMQ0PDDEBN2jgF+46R7KvdKZaWDkFB6dKiPUq2
+         mgAMZbKd4gdZSsDw8Fcr38DjVzMSToHx4zRDpCmkevKISQ+renjmvmZA29MXrJol5AeI
+         MnIg==
+X-Forwarded-Encrypted: i=1; AL+hErGPituH7Us3VFfB3vKbAPabCYg1UEcXNGTs3tu+1fKKuFIzXRjeoURrDoNwWxdNvfqOJO1JK1KUPFc=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z8KI65eOhqTgVn2Nplwt2BatovolYXHnHcWJDMBrKOiUp8apFB7
+	Ej44nCNcndk4dcQAXP7yaTrIWv7aZ8uH8Kzzu2KXse8pBEfT5OZ+XYGtE+3xyTfXBQ==
+X-Gm-Gg: AYBFou0VeHvbQXq2aC7iJjMgLIJhz6KLNNBMMCmNzuqPKl2YpkMSIMWe6J6cP5Gw+yi
+	iLWVDclvHt8MdBlfehC0byJe9tAy4opHYzPohZdpezQboV+oRqxIxi1a/BJYinO0er8RRYyumHq
+	OHPnSkL9ytmUF7bql55QZgw+5A4Q9bJmxlA61O5Q4lOcyCRxDjIT2LmCEbfpIVsXewC9MujBU9X
+	jxD/eyS7csE+62dXRIV9qPj0DmNmi7JztOZIy0jIjQ1FA103ulwALldxs4ZqKiC6dYym0GpWdDj
+	Opt+G+RMKXPzO7FHoeR9J0wvVLUkNMYv8mvyI06tBjApySh5mJr6/APuvdYCrTtPCrnq8MpmVGc
+	E3Qm8MR9eludPpbjFvjxCICqq4G2z8w83zmijfJQELMU2SF42aKNhhAvH/cexKgFrSETufaq63Z
+	OT4rgatBUBovE4wTPilZs+6damhZRey1A1higX5GYLL/5IZ6qHk1Epw0zuNH7i5Ko9Fby9jiMrS
+	fbHTzqbA50ZTVyVbdYSkeZvCMJFA3ucEXmsuNBGB4gJPNfW/RJtldBPaAeV18areOderm10JSD5
+	2OWNrW/k/+LX3+cyZjysSMl7iEL/oMSPc2aGrJyUDCy8Fnhkpbbv3DUM644zkUkYQFaG1KX9mDT
+	tcf1E8E49xOHRVZxWbw==
+X-Received: by 2002:a05:600c:1989:b0:4a1:e0db:8cf8 with SMTP id 5b1f17b1804b1-4ba0931beb1mr107545725e9.3.1794494223463;
+        Thu, 12 Nov 2026 06:37:03 -0800 (PST)
+Message-ID: <2756951f-ffff-4d1a-8795-42e9fd93518b@suse.com>
+Date: Thu, 12 Nov 2026 15:37:02 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4] xen/arm: validate non-common page-table ranges
-To: =?UTF-8?Q?Gabriel_Quint=C3=A1ns_Souto?= <gabi.qs.mail@gmail.com>,
-	<xen-devel@lists.xenproject.org>
-CC: <sstabellini@kernel.org>, <julien@xen.org>, <bertrand.marquis@arm.com>,
-	<Volodymyr_Babchuk@epam.com>
-References: <20261110145231.7409-1-gabi.qs.mail@gmail.com>
-From: "Orzel, Michal" <michal.orzel@amd.com>
+Subject: Re: [PATCH v5 2/6] x86: rearrange how mod_l*_entry() functions call
+ UPDATE_ENTRY
+From: Jan Beulich <jbeulich@suse.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: roger@xenproject.org, teddy.astie@vates.tech,
+ Kevin Lampis <kevin.lampis@citrix.com>, xen-devel@lists.xenproject.org
+References: <20261112100005.324440-1-kevin.lampis@citrix.com>
+ <20261112100005.324440-3-kevin.lampis@citrix.com>
+ <a3417b2a-11b1-4075-b4d3-fb8ad6cbe482@citrix.com>
+ <d61b44e4-aace-4162-86b9-adc268ecdec2@suse.com>
 Content-Language: en-US
-In-Reply-To: <20261110145231.7409-1-gabi.qs.mail@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH01EPF000BE948:EE_|FT1PR12MB266007:EE_
-X-MS-Office365-Filtering-Correlation-Id: c2d5f513-78a2-4c23-b2ab-08df40c8fa3f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|1800799024|23010399003|36860700016|82310400026|10067099003|5023799004|11063799006|56012099006|261022105027099003|261028144727099003|261026121527099003|261026140227099003|261021123027099003|261021121427099003|261102123227099003|261009223027099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info:
-	df2i7LI8N3kTdKKpl8syvywWedcjrc9hBLXH062/jwxOw4qkqmmup/8byDe0KTiOK0ZAAIDSWlO8zQaKlN0GJWt1dZ03XwcB8TJzzQAMY0ZeMFJTIY1qDDi3sa/PTIJFh4bRl1x6S/ZzulVOBxK/crTYueL6yaoAP7AmO0QRJomhuH0P3H0/Xti2TA8NGs+GPi3VMUQs3LmMc6M8dcq7Wn2LXBNhi+QDGcUM52Ui/ZU1CoZtO0YgUF6hYt7AGb111Wo3vEoSAyhU2qeEJEYZ+c98k4m74gz0RczM+J2TKiPQqA3XkFxCzQpxSwb+Y9PTc798LpwzxsgCUTynspMtuTKV7WaHTosVc99Fpe3FahbDzp3wosWHoo30EOROnY6n/V7FaQwMEo7lVRj8vkHAreX9QEXtCrHlEv37VW/6cYkGGaXwwGiTMc1zPPQKHUhVo5Vd2jz2AAkvdb4Rov5JfFoCrq4yOdnFCxUBxXs59VoPEQQGr5Bf89B13kSqW+JKx5UYmBtZIDlTMqYX05XmbixYRf2J/k5qkMUSMn+ExmAm7pSZjrIwvubC5YZbbk64x5qI2oos7pvnus2XWW2F6MmnDE5wXwljmhfVfvbpBLLjJdCzbqWqGZ8nhnShjxlbJCRu8x64Q/ItogIfgB85s5CXRwvpVceWaTnimJhv+mgc2lu+JHHqE222I8+h+l5oSiQSCkIzRj/kVHxziQOZNw==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(1800799024)(23010399003)(36860700016)(82310400026)(10067099003)(5023799004)(11063799006)(56012099006)(261022105027099003)(261028144727099003)(261026121527099003)(261026140227099003)(261021123027099003)(261021121427099003)(261102123227099003)(261009223027099003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	tAWGn61GFeRz2/7bhkCdVeOBUJkiSKBHXpl5y0s15deAIhElFS2C7nb1/nRt26UQVIpVQ53Bqdvtit/yk77KraEQoeVuaupZY9LLo62zxG8+quH2JiwBQy5c3aWZlztA7x5vdSisf35M1ICv1gxvMLou+y3nsW1+Vf2ZDqRyB/PbsQISBu6MnYvprFYb7fHiDpMSzXdqE6o/9+/n0Lkzbk3RV4+PvlvtnEICNiW+NFJBZZgne4XrGoy2OiZqeN39GBJXDvPDQMO108CedCZhyqSddluAD8PirkQOwbOZ0HUETcPQ7H4PTyo5+Om7fRtM/6axy5Ydfq4Hk9f2qduvZvVM/KCNBKSi9tQT1Xe3FOwPxeRuaava5pOZX2kStH35/e3hXnImsJN2707ReZGZAa4jCHPyDffRmSg5IcfuA6sIReh8gRROSbs+rZxktRxp
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Nov 2026 14:26:44.5437
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: c2d5f513-78a2-4c23-b2ab-08df40c8fa3f
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CH01EPF000BE948.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: FT1PR12MB266007
-X-purgate-ID: tlsNG-c1860d/1794493615-CC97287B-6B701720/0/0
-X-purgate-type: clean
-X-purgate-size: 4004
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=4.0.1
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <d61b44e4-aace-4162-86b9-adc268ecdec2@suse.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-720697/1794494224-F1AAD2AC-D7A21F7B/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 2421
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-
-
-On 10-Nov-26 15:52, Gabriel Quintáns Souto wrote:
-> On arm32, page-tables are different on each CPUs, although they share some
-> common mappings.
-Please say that the non-common area is the per-CPU domheap mapping.
-
+On 12.11.2026 15:10, Jan Beulich wrote:
+> On 12.11.2026 14:56, Andrew Cooper wrote:
+>> On 12/11/2026 10:00 am, Kevin Lampis wrote:
+>>> --- a/xen/arch/x86/mm.c
+>>> +++ b/xen/arch/x86/mm.c
+>>> @@ -2197,12 +2197,12 @@ static int mod_l1_entry(l1_pgentry_t *pl1e, l1_pgentry_t nl1e,
+>>>  {
+>>>      l1_pgentry_t ol1e = l1e_read(pl1e);
+>>>      struct domain *pt_dom = pt_vcpu->domain;
+>>> -    int rc = 0;
+>>>  
+>>>      ASSERT(!paging_mode_refcounts(pt_dom));
+>>>  
+>>>      if ( l1e_get_flags(nl1e) & _PAGE_PRESENT )
+>>>      {
+>>> +        int rc;
+>>>          struct page_info *page = NULL;
+>>>          uint32_t disallow = l1_disallow_mask(pt_dom);
+>>>  
+>>> @@ -2276,16 +2276,14 @@ static int mod_l1_entry(l1_pgentry_t *pl1e, l1_pgentry_t nl1e,
+>>>          }
+>>>          if ( page )
+>>>              put_page(page);
+>>> -
+>>> -        UPDATE_ENTRY(l1, pl1e, ol1e, nl1e, gl1mfn, pt_vcpu, update_flags);
+>>>      }
+>>>      else if ( pv_l1tf_check_l1e(pt_dom, nl1e) )
+>>>          return -ERESTART;
+>>> -    else
+>>> -        UPDATE_ENTRY(l1, pl1e, ol1e, nl1e, gl1mfn, pt_vcpu, update_flags);
+>>> +
+>>> +    UPDATE_ENTRY(l1, pl1e, ol1e, nl1e, gl1mfn, pt_vcpu, update_flags);
+>>>  
+>>>      put_page_from_l1e(ol1e, pt_dom);
+>>> -    return rc;
+>>> +    return 0;
+>>>  }
+>>>  
+>>>  
+>>> @@ -2300,7 +2298,6 @@ static int mod_l2_entry(l2_pgentry_t *pl2e,
+>>>      struct domain *d = vcpu->domain;
+>>>      struct page_info *l2pg = mfn_to_page(mfn);
+>>>      unsigned long type = l2pg->u.inuse.type_info;
+>>> -    int rc = 0;
+>>>  
+>>>      if ( unlikely(!is_guest_l2_slot(d, type, pgentry_ptr_to_slot(pl2e))) )
+>>>      {
+>>> @@ -2313,6 +2310,8 @@ static int mod_l2_entry(l2_pgentry_t *pl2e,
+>>>  
+>>>      if ( l2e_get_flags(nl2e) & _PAGE_PRESENT )
+>>>      {
+>>> +        int rc;
+>>> +
+>>>          if ( unlikely(l2e_get_flags(nl2e) & L2_DISALLOW_MASK) )
+>>>          {
+>>>              gdprintk(XENLOG_WARNING, "Bad L2 flags %x\n",
+>>> @@ -2331,17 +2330,15 @@ static int mod_l2_entry(l2_pgentry_t *pl2e,
+>>>  
+>>>          if ( unlikely((rc = get_page_from_l2e(nl2e, mfn, d, 0)) < 0) )
+>>>              return rc;
+>>
+>> Looking further through the call tree, I'm now confident that
+>> get_page_from_l?e() can't return a positive number.
 > 
-> The xen_pt_update function assumed that only said mappings would be
-> modified, but did not check this assumption.
-> 
-> Add a range check to reject modifications to non-common mappings.
-> 
-> Signed-off-by: Gabriel Quintáns Souto <gabi.qs.mail@gmail.com>
-> ---
-> v4:
->  - Rebased onto staging (v3 was diffed against v2).
-> 
-> v3:
->  - Dropped accidentally tracked patch file from commit.
-> 
-> v2:
-> - Inverted polarity of xen_pt_range_is_non_common() as suggested.
-> - Moved xen_pt_range_is_common() implementation to arch-specific headers
-> (arm32 vs arm64) instead of keeping #ifdef CONFIG_ARM_32 in pt.c (tried
-> IS_ENABLED() for DCE, but ARM64 lacks definitions for
-> DOMHEAP_VIRT_START/TEMPORARY_AREA_ADDR, breaking the build).
-> - Added ASSERT_UNREACHABLE() on failure path in xen_pt_update().
-> ---
->  xen/arch/arm/include/asm/arm32/mm.h | 24 ++++++++++++++++++++++++
->  xen/arch/arm/include/asm/arm64/mm.h | 10 ++++++++++
->  xen/arch/arm/mmu/pt.c               | 14 +++++++-------
->  3 files changed, 41 insertions(+), 7 deletions(-)
-> 
-> diff --git a/xen/arch/arm/include/asm/arm32/mm.h b/xen/arch/arm/include/asm/arm32/mm.h
-> index 856f2db..c7d09d3 100644
-> --- a/xen/arch/arm/include/asm/arm32/mm.h
-> +++ b/xen/arch/arm/include/asm/arm32/mm.h
-> @@ -16,6 +16,30 @@ static inline bool arch_mfns_in_directmap(unsigned long mfn, unsigned long nr)
->      return false;
->  }
->  
-> +static inline bool ranges_overlap(unsigned long start1, unsigned long size1,
-> +                           unsigned long start2, unsigned long size2)
-> +{
-> +    if ( start1 < start2 )
-> +        return start2 - start1 < size1;
-> +
-> +    return start1 - start2 < size2;
-> +}
-> +
-> +/*
-> + * On ARM32, page-tables differ between CPUs, so not all mappings are common.
-> + */
-> +static inline bool xen_pt_range_is_common(unsigned long virt,
-> +                                       unsigned long size)
-> +{
-> +    unsigned long temporary_start = TEMPORARY_AREA_ADDR(0);
-There's no need to check for TEMPORARY area. It's only ever used in boot
-pgtables, not in runtime tables. Therefore what we need is just the following:
-virt < DOMHEAP_VIRT_START && size <= DOMHEAP_VIRT_START - virt
-without any helper.
+> They can return L{2,4}E_RECURSIVE (i.e. 1).
 
-BTW. This patch breaks Arm32 MPU build. If at all, the helper should be placed
-under mmu/.
+Oh, sorry, these constants are still only local to my tree.
 
-
-> +    unsigned long temporary_size = XEN_PT_LEVEL_SIZE(1);
-> +
-> +    return !ranges_overlap(virt, size,
-> +                          DOMHEAP_VIRT_START, DOMHEAP_VIRT_SIZE) &&
-> +           !ranges_overlap(virt, size,
-> +                          temporary_start, temporary_size);
-> +}
-> +
->  bool init_domheap_mappings(unsigned int cpu);
->  
->  static inline void arch_setup_page_tables(void)
-> diff --git a/xen/arch/arm/include/asm/arm64/mm.h b/xen/arch/arm/include/asm/arm64/mm.h
-> index b4f7545..a3cb56d 100644
-> --- a/xen/arch/arm/include/asm/arm64/mm.h
-> +++ b/xen/arch/arm/include/asm/arm64/mm.h
-> @@ -12,6 +12,16 @@ static inline bool arch_mfns_in_directmap(unsigned long mfn, unsigned long nr)
->      return true;
->  }
->  
-> +/*
-> + * On ARM64, the Xen page-tables are shared by all the CPUs,
-> + * any range is therefore common.
-> + */
-> +static inline bool xen_pt_range_is_common(unsigned long virt,
-> +                                          unsigned long size)
-> +{
-> +    return true;
-> +}
-> +
->  void arch_setup_page_tables(void);
->  
->  void update_boot_mapping(bool enable);
-> diff --git a/xen/arch/arm/mmu/pt.c b/xen/arch/arm/mmu/pt.c
-> index 81fe121..42fa79a 100644
-> --- a/xen/arch/arm/mmu/pt.c
-> +++ b/xen/arch/arm/mmu/pt.c
-> @@ -13,6 +13,7 @@
->  
->  #include <asm/current.h>
->  #include <asm/fixmap.h>
-> +#include <asm/mmu/layout.h>
-Is this needed?
-
-~Michal
-
+Jan
 
