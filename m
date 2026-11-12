@@ -2,45 +2,74 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 72FA5606A88F
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Nov 2026 12:19:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 247B4606A332
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Nov 2026 12:19:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=google header.b=WgMxrg0z
-Received: from list by lists.xenproject.org with outflank-mailman.1487423.1689855 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=ford.com header.i=@ford.com header.a=rsa-sha256 header.s=ppford header.b=G9Ykkhyz;
+	dkim=pass (1024-bit key, unprotected) header.d=azureford.onmicrosoft.com header.i=@azureford.onmicrosoft.com header.a=rsa-sha256 header.s=selector2-azureford-onmicrosoft-com header.b=Jpv5gyLg;
+	dkim=pass (2048-bit key, unprotected) header.d=saarlouis.ford.com header.i=@saarlouis.ford.com header.a=rsa-sha256 header.s=ppserprodsaar header.b=SAE+FeDp;
+	dkim=neutral header.d=ford.com header.i=@ford.com header.a=rsa-sha256 header.s=ppfserpocford header.b=otTDQfbW
+Received: from list by lists.xenproject.org with outflank-mailman.1487424.1689864 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRqF8-0006KV-HV; Fri, 13 Nov 2026 12:18:58 +0000
+	id 1xRqF9-0006Wl-OY; Fri, 13 Nov 2026 12:18:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1487423.1689855; Fri, 13 Nov 2026 12:18:58 +0000
+Received: by outflank-mailman (output) from mailman id 1487424.1689864; Fri, 13 Nov 2026 12:18:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRqF8-0006KO-Ev; Fri, 13 Nov 2026 12:18:58 +0000
-Received: by outflank-mailman (input) for mailman id 1487423;
- Fri, 13 Nov 2026 12:18:57 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xRqF7-0006KC-A1
- for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 12:18:57 +0000
+	id 1xRqF9-0006We-Ld; Fri, 13 Nov 2026 12:18:59 +0000
+Received: by outflank-mailman (input) for mailman id 1487424;
+ Fri, 13 Nov 2026 12:18:58 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <dmukhin@ford.com>) id 1xRqF7-0006KD-Ap
+ for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 12:18:58 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xRqF6-002xnM-N2
+ id 1xRqF6-0053sB-Nl
  for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 13:18:56 +0100
-Received: from [10.42.69.9] (helo=localhost)
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6af70023-e002-0a2a0a5209dd-0a2a4509899c-28
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 13:18:56 +0100
-Received: from [209.85.221.41] (helo=mail-wr1-f41.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6af70030-be1a-0a2a45090019-d155dd29f067-3
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 13:18:56 +0100
-Received: by mail-wr1-f41.google.com with SMTP id
- ffacd0b85a97d-491971ac844so1090055f8f.2
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 04:18:56 -0800 (PST)
-Received: from localhost.localdomain (host-78-146-248-75.as13285.net.
- [78.146.248.75]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-49c608c5debsm4825237f8f.42.2026.11.13.04.18.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Nov 2026 04:18:54 -0800 (PST)
+ (envelope-from <dmukhin@ford.com>)
+ id 6af7002f-8faa-0a2a0a5109dd-0a2a4502bf10-8
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 13:18:55 +0100
+Received: from [148.163.146.23] (helo=mx0a-00498f03.pphosted.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <dmukhin@ford.com>)
+ id 6af70029-6ca4-0a2a45020019-94a39217d9ca-3
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 13:18:50 +0100
+Received: from pps.filterd (m0482516.ppops.net [127.0.0.1])
+ by m0482516.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 6ADBwuPV726725
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 04:18:48 -0800
+Received: from bl2pr02cu003.outbound.protection.outlook.com
+ (mail-eastusazon11011049.outbound.protection.outlook.com [52.101.52.49])
+ by m0482516.ppops.net (PPS) with ESMTPS id 4hx0xsrstv-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 04:18:48 -0800 (PST)
+Received: from CH0PR04CA0031.namprd04.prod.outlook.com (2603:10b6:610:77::6)
+ by MN6PR16MB5353.namprd16.prod.outlook.com (2603:10b6:208:471::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.10; Fri, 13 Nov
+ 2026 12:18:46 +0000
+Received: from MN1PEPF000793FC.namprd05.prod.outlook.com
+ (2603:10b6:610:77:cafe::6b) by CH0PR04CA0031.outlook.office365.com
+ (2603:10b6:610:77::6) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.615.8 via Frontend Transport; Fri, 13
+ Nov 2026 12:18:45 +0000
+Received: from mx0b-00498f04.pphosted.com (148.163.138.245) by
+ MN1PEPF000793FC.mail.protection.outlook.com (10.167.249.199) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.615.4
+ via Frontend Transport; Fri, 13 Nov 2026 12:18:45 +0000
+Received: from pps.filterd (m0373461.ppops.net [127.0.0.1])
+ by mx0b-00498f04.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6ACFcflV035161
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 13:20:50 -0500
+Received: from smtp-us.ser.proofpoint.com (pmta-usw.ser.proofpoint.com
+ [50.112.124.217])
+ by mx0b-00498f04.pphosted.com (PPS) with ESMTPS id 4htkgbp8hn-17
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 13:20:49 -0500 (EST)
+Received: from localhost ([19.12.76.221]) by cmsmtp with ESMTPSA
+ id RZPixLxYkQVyyRZPjxMzYu; Thu, 12 Nov 2026 18:20:49 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,451 +78,234 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=ppford header.d=ford.com header.i="@ford.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=selector2-azureford-onmicrosoft-com header.d=azureford.onmicrosoft.com header.i="@azureford.onmicrosoft.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"; dkim=pass header.s=ppserprodsaar header.d=saarlouis.ford.com header.i="@saarlouis.ford.com" header.h="Cc:Content-Transfer-Encoding:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=ppfserpocford header.d=ford.com header.i="@ford.com" header.h="Cc:Content-Transfer-Encoding:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ford.com; h=cc
+	:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=ppford; bh=iu8
+	8BXIsjZUIxJM2ma9TdD9eNdYGgctO4D7rLHkMF4k=; b=G9YkkhyzgCQENpI4zWq
+	mdRgJG5PmCeiTDXWnqtxjbDr49OmtdxUW8L8QaC2b1RZHoHUQoAWl6pi4DUBiUc2
+	Hy5ClzFfqRu2OV7Pd9aVlHSN/qqdn6gbb3e5ZyoBovg3nj8sDqpRcKXlQv58YyTS
+	/cHrGk+tRnRMHPlx5KpiQrr0XGPKygXlIkKnoGhhxEXd2E62x6HLS4ng2Cw3OTVK
+	offEmOVz79wcHrjSBXfO2T5NYdUEkLGWeKtgVrJ1z3X3t2VYZE8TUU/+2hDDhbr9
+	pkXKIHjCyvxdNT6GoyAPQH1OtIFsgaRiQhCZ6qwQ3LxSBCoPYQP1savLl0UI5Kh0
+	A6A==
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=I4A6YtH2G9r1lJPAFIMGDHraA0AH3UEsCzda14EDzZcrqZCS0UX4cR6Duk5dpmvRTQqKzxHGBkHcw0mJhVRkIuwu0GDq2j8LmdM/n7xrO4374Uzx6NQsClSuhvnunx1vJmZ4M+bfXIsg2VpyYmiMHo9uOyiUyPZ08obuqcQu23ci/qHu+NC8+kUA23g7rsfM+r02Ydko7d3gWIew1WN04S2RrgbFVa+gLx2VMpEz2NSToByzg7YQeFEeofLYlSLLmu7P7ugp9BmmxQmjSDtp1EahjMxZxrbowalxm/lki7692H4WZJwF/HRv9IpFiPsnKq8hI2Syq+i0wIgB1DJKUQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=iu88BXIsjZUIxJM2ma9TdD9eNdYGgctO4D7rLHkMF4k=;
+ b=DqqxyqgTYrk00Sk5PnMPRQkS8V+xUT9BJkg5JfJi30WQtECZ9NO9gMRj6W8qP+tfo0DSqWxRxtXKlA4+7sjidnMeC2lHmP6phTtMRtluK1pIcrcmuje6FuRJH1PNqeRQdvXgF38eAZ+90myR0JYZ8zTjyxBkMOuQLD2sHgsVZnT7ZlLiX6QA6LMETCr7/BctnbPVdHdgg75HRCTONByhoD8Y5CODGZnTgnoW0kdPd5TwfrtcBTI4GlJ7rHsG/HLQMKQZpqd7DMAWBTcMR5hXIcmTvXTIA2FeZ/12WZt3V6X3NmpiIDOyda2E2BpO8Komz6+PSnmY23z6VnxdhDTrRQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 148.163.138.245) smtp.rcpttodomain=lists.xenproject.org
+ smtp.mailfrom=ford.com; dmarc=pass (p=reject sp=reject pct=100) action=none
+ header.from=ford.com; dkim=pass (signature was verified)
+ header.d=saarlouis.ford.com; dkim=pass (signature was verified)
+ header.d=ford.com; arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1794572336; x=1795177136; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=icHw+7+BEaIPv6qNiV1pDdXJebzX17Hn5m/7YAJVtpU=;
-        b=WgMxrg0zqtE5Eti6NN6rMAJT6LfnMYCEiKEhz2GO6g/VQ+3Rpp9t1ryHyQzX20xk++
-         tdfMy8InsmXcGbmopH0vOnSCiRmX0N82VBn9jl0rkoRbADdUV2O31V9adgshptyfs3br
-         JEQK6D04vxIk5VwfFX0csbFTtI5SitzjdJeTo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794572336; x=1795177136;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=icHw+7+BEaIPv6qNiV1pDdXJebzX17Hn5m/7YAJVtpU=;
-        b=0zouxQEeGU4O6rMUmWnk+swdxK7qiCba1ZgVuxvPn0jfCiOaoBMNrDNGTvbTRzPT6a
-         jIzA8krEAAETHfhiZopsDGuSTOJsGvnFOPkHY7UO3pFnaJKplATyG5x1Y9dfUCDqkPUM
-         yb6cPT3hvW+L+OQxv8XosB8u5W27pbFKPIXSxJjXdvjUmgQC8mFWajKn+JSux6GdFmxr
-         2J6guEo8Wyv36S4xJKdGL7hxhCFcf6SIT/oQHqmZigt5pblPCWVDamcGOax+tNr3WmRD
-         QRzrnHOVMt6m6/Ee5LX1GkZg4yrrcAEeKGiIEA6nvVNn+9zZkPc0BwrGxQtReT1zDUIY
-         wn3w==
-X-Gm-Message-State: APuU4Z+ZyJh4nq6AX3RtZ71bT4nQdBecvsO3HbH+oRMS9tNH1KT3xXw1
-	Xc0un/VvahqoRlQj+3uKeridhYuX+geaetrp5DvPwEVa90xsgnm2M0ATr/ciYQekKvwMGTGWRFB
-	Xnozw
-X-Gm-Gg: AYBFou3b3QImlgfNGSQRBU1gl6HY/gXZaJdUYrHpTmt2FbyLfJU3yRb0sU8WgRsdWkj
-	/WV3ji6FEiJwrx1GxLJ4++NuGBeDhArz3ZZ31a/ifMc7hTUVvS9Q+igxmexy6kHMUmwGQwnoDsN
-	xjWm2NDotGmTasXYiC6m8zb+WiOa/KsXf7GQGC9WW8/TzpDEKgoPBWzaniiiMK4xub0NdW5cosp
-	dr85UK6zs6GOI89Nyfh3ABZnWNyCzjiORaJmLO5jURweOYblH/5tv+QhrFTAsn6DE/kGWgfbhBy
-	9RzFZroMys9lgKeFzYxDKLQv8HQeB30+mATDfNFT8CGrG1kQiCcJuXg2oTf6wp6bBE3NTDVr6it
-	4lUeVUW4r+Da6IBm7sTpS4joqHCkzmktZDM2eBIwJnAX1f+2QlEH9Po7RlTI+PeI7XOdbcCp7em
-	X8zthKRHgpWw+7Jg+N3g/phrJdjmkRSRXT8RkdK8l6JATHEuT7KJIUqzzXCLQrXmpjWE7eKVr7L
-	QChu5SJ5CdY+PNACE2OBXX2ukE/GUOgOYLL3LECbq8Wp+jL7motTRaYVSgzcyo8ngWqF28BlMNt
-	2LiRutJbb6tAtzhqOqIlJm7gX9CRY2uctjuIjzzSskxPW/u2R/KIWYI3P6nl7uv99TQK8nb3gD8
-	Ku34=
-X-Received: by 2002:a05:6000:2508:b0:498:a72d:c097 with SMTP id ffacd0b85a97d-49c70ed7c56mr5855212f8f.19.1794572335163;
-        Fri, 13 Nov 2026 04:18:55 -0800 (PST)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH] x86/aepi: Fully remove dead code
-Date: Fri, 13 Nov 2026 12:18:50 +0000
-Message-Id: <20261113121850.3423155-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
+ d=azureford.onmicrosoft.com; s=selector2-azureford-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=iu88BXIsjZUIxJM2ma9TdD9eNdYGgctO4D7rLHkMF4k=;
+ b=Jpv5gyLg69HtUB97cQ/jZaRd912p3+AqdpVlqlaC2eNCfls/UjzhBbBe6sMD5+wVG0E1uWmJKMX22On8jaChK2/MutYEiXxvUMa57+JxcHK5yw/uHlR5vKTUT27KbG7WlwsHR6wige/w6seVRTcZSYEgt4eCXu9XuLAGvdbS5Ug=
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 148.163.138.245) smtp.mailfrom=ford.com; dkim=pass (signature was
+ verified) header.d=saarlouis.ford.com;dkim=pass (signature was verified)
+ header.d=ford.com;dmarc=pass action=none header.from=ford.com;
+Received-SPF: Pass (protection.outlook.com: domain of ford.com designates
+ 148.163.138.245 as permitted sender) receiver=protection.outlook.com;
+ client-ip=148.163.138.245; helo=mx0b-00498f04.pphosted.com; pr=C
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	saarlouis.ford.com; h=cc:content-transfer-encoding:date:from
+	:in-reply-to:message-id:mime-version:references:subject:to; s=
+	ppserprodsaar; bh=iu88BXIsjZUIxJM2ma9TdD9eNdYGgctO4D7rLHkMF4k=; b=
+	SAE+FeDppnhjBsFCamV1u/FwHKLlKaV1/GoKm8eVE8TtWucQczibjntvtE+b2ddu
+	gfTECcvJAvtBql+RCnKoeoAhSh/fD1vCTIsqEuAWfHN7VSiHfskgLyc9xcVEqt+4
+	PYkOpmX5/opnRIMBW4PlTlWQmLNYAspCTuK1gcUMQEardabgcbrHG6iPw2fGRY2+
+	w9RgQgW2Bixby/IYvEzQQZPvlMMZjghuRGuMoj6piDJP1Z5gE0tz+nDqbvsx3Mio
+	GVKVaDW1GNms43TEqir9avEZEvRv6vBd3vfIk1aICeAueqQIxbf7JE7E/V8c3XYR
+	L/abRwPBWsW7g+//UN2OQQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ford.com; h=cc
+	:content-transfer-encoding:date:from:in-reply-to:message-id
+	:mime-version:references:subject:to; s=ppfserpocford; bh=iu88BXI
+	sjZUIxJM2ma9TdD9eNdYGgctO4D7rLHkMF4k=; b=otTDQfbWtjVv7BL9GuynMFV
+	H6c2R75g+pSzsegLzZtrvo4+RU/Y1Gs8qe41T1n7FN5DA399OdK/A3Upz6FX5SWG
+	Oei/VwFg6PU3k9o39Y7yew5c1zpEXvIVGLiNR+j+dImentQaXjEChpfEMUfoJCil
+	6HxHmTjsOIMjbJGcjMc13Udzd3+3G+sGoXX3tjESH9oWhrxse3WNUBWVDCyhh4GK
+	4Y9+78VwEyNaFPLTYKt1Pu6s53X9Q4h0FzNFr6VI60OAKMNPr9eI6MFapii0F4ru
+	x8i+YiX0UPnx5mkuQ8kvRKcaFXoe9xUAH3MIqXJS1GUboazQEYh/5d9VJwHM3nA=
+	=
+X-Mailer: SER-76bead168636dc6ed1c9e51ce4dea80dbdd4163750742b614a4d871e565792b7
+X-Cloudmark-MID: RZPixLxYkQVyyRZPjxMzYu
+X-Proofpoint-CID: eb09f7eb-2dc2-34ab-a188-7b293c1db1fe
+From: dmukhin@ford.com
+To: xen-devel@lists.xenproject.org
+Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com,
+        julien@xen.org, michal.orzel@amd.com, roger@xenproject.org,
+        sstabellini@kernel.org, dmukhin@xen.org,
+        Denis Mukhin <dmukhin@ford.com>
+Subject: [PATCH v6 1/2] xen/console: add build-time rate-limiting controls
+Date: Thu, 12 Nov 2026 10:20:41 -0800
+Message-ID: <20261112182042.1104699-2-dmukhin@ford.com>
+X-Mailer: git-send-email 2.56.0
+In-Reply-To: <20261112182042.1104699-1-dmukhin@ford.com>
+References: <20261112182042.1104699-1-dmukhin@ford.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1794572336-BC2F4034-65DA628B/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 9527
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+PSER-M365-App: SER-APP
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-12_02,2026-11-11_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0
+ spamscore=0 malwarescore=0 lowpriorityscore=0 adultscore=0 phishscore=0
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
+ definitions=main-2611120072
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MN1PEPF000793FC:EE_|MN6PR16MB5353:EE_
+Content-Type: text/plain
+X-MS-Office365-Filtering-Correlation-Id: a07d3929-aeb0-40b5-01bc-08df418043a9
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|82310400026|23010399003|376014|36860700016|18002099003|22082099003|6133799003|10067099003|11063799006|261026121527099003|56012099006|261102123227099003|261028144727099003|261022113327099003|261022075727099003|261021123027099003|261021121427099003|261009223027099003|261022105027099003|261026140227099003;
+X-Microsoft-Antispam-Message-Info:
+	8AOVsvKHPlESMz8LAWvs3le9PuXHsASmeucZyhWsPlvnycNpOzEV84XUvEdesyEgnUEoKBOFuNLHGm+BXWb9PaN+6FYomW3A2kIu5vMj2qJNBBLTShO41vQZ1qqa8TnciFwWq4d0UDALDgemw3xZV1PCwpgUrBMDdbqmSWBMGePP71Cbq5xVfplqYj4Ok25yKmcsSMzNlWHk56xExyFmtWD681TBhBLNkeVlHvsGVfTAfoYXsJkTnKcbFpjH5XkauRTPLkwr+hdqpxgsWGVy7NhX/bRTPamJ1JFtZz4lRNM/wkthW/r8Xw+Q46meSVInZKbvYu+IQagpFuy9GqQQ8PAPgGPpaZ0TrDiO/v29VXHn6Np0sWA+cdqYfN2gNmUXSMQJSSf4TYZKIRtGgXSFL0yRCmgTCw7NgjJwinVQFS05GWY06ZtuXCbKBI9EvEJx9Xh56tfQ4n9NTyCiWX3Zyu3a/e0RZokxu90qFzVM2+pR9VdaErrRM6FpPnb2ETocbb+E+IpqbGP1N9KmYs0yF3oZckeH3bFTXYUr5yeIkAiG/qYoQ27pMXDP3A+3IYXX2LUviAZTgUqTU9ov932B3ti4mzANzZtVo0ieVmnH58kTvIttLsepMiKLGoLkcC0QXiZszg7dP/P1vCAExeDKuNcHYmZYpODqesrJtEjeegsuIqLXIycxMLKS9awLAdH5sTUJUocfCdkzTU8IhbE+JA==
+X-Forefront-Antispam-Report:
+	CIP:148.163.138.245;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mx0b-00498f04.pphosted.com;PTR:mx0b-00498f04.pphosted.com;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(23010399003)(376014)(36860700016)(18002099003)(22082099003)(6133799003)(10067099003)(11063799006)(261026121527099003)(56012099006)(261102123227099003)(261028144727099003)(261022113327099003)(261022075727099003)(261021123027099003)(261021121427099003)(261009223027099003)(261022105027099003)(261026140227099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	HwrqEYzQ1gVG09m7cR7GsWKOQiGXd4u0OB3vrlkqrOY3VjzAJxBFCaWie3qP3H9bJp3Fwgkz4jzyS1L6yo1qT3q46mFWWapT69KLKt3ZDQ0C2OJRqU7K0vDLnNlUtgkC3Q3cQ1WVNJLxGo5X0yyfvxijpDIdI7m4bn5kPBlHXtjZORZk+RiKAJKMrwj/nnV4yJQ5djfb5RlgBH85AKoWABj1Clo33iPBRZkhSMzckc5IArodis9QNLek4TvBjfNXbVHuQN12LCoEEUCBSBCiYDmryX18z7RD6eVONAVum9MnWanV9SLEBtJvazsMtFaK8/Fp9D186IWya3GHHX/gbM3ky6bYDiWyQCeGOjzsBnxbmCjTB6wYKmp4JNSj1IxqKZce92pCR24dgFqTIyMGbFQBTp36Nb26OsgNmSZYVGEkR85Gnt6hjOImkdtf/ult
+X-Exchange-RoutingPolicyChecked:
+	dsFJigSIkwRbx6dO4J37fdvSF8KG01zNkJp35T5K9yRtKMLJ9l99ujEdtEvwMQLz1wx+ckWLctEYRjZljOlwwwDIpDkivPxKodCuqkZ/lPYm5kQBqZUpfWlP/uwu13belAncqcf2eE9SWW27GQqqolKOv4LgtooRVJXIpqfSNrCPyVd4cD4fu9GG0P3wFpsMyHF2YhVwUUPnQZsC++vj7ERwmct37cj7PZU6SdC7Ivc2qSIkoxFadFc3EezpTF8rJBS6ytAf7BkRsyREqvu1GmJy/o69J79hPSyPqONyEY+/PX2C8Eu0yM8cmFL+kVc9G7aMppCpp09dPduD4uwmCQ==
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
+	iFdocKYOI+d+68cpXyprQ68dhnDtwIK+/YBldb1r4MMT7maBqpVI8R4320EBVIu5ogIim1vrCknJVEjLLG52eelDReXTfUuqRDpiyZ4tsb4AQz6CfQa7DKUszFZhoask8V/1iswtxf4EmfeVHZZyxn1wYpLdwqmdwI4INK0WejuQSub2pxfMsGH6u6ZRaPbx4sR5vFKY3zGwxcVwytzGtf/FlFVNg1Nmg/0UTOT7NprAIsCeRbDuTuas3GiCW1oQtplV9tYoKi5VSHM1h8G3Ce12ih5DBpO64sXvT4MVuMceqH7E8JHM1eazLpWzWas7XwURv+QPy71T1UIingPkTJ5xtIAT/kyY95t3SPZLz9VdwBofZt1BF1wSQjTNUKyxna0Y7rAFNm/3IsaaYIWo4RbkWzT+3i+PItMZ60iLP2944F6HREQRqKB4FhkUFDwSn+bTXRCwZkFQkL4bCjzeJbt2K9REaCHDCJdftcubu/3vRwJ0cn34+Aa3a5SZanDYsqEdnZ03McaplHLNU2HZn05Uu9u238B0y3BAji/zWlc4ETg4wHpholKei8OUEW256Po5ybDqGDMPZVBIXgy9IGEJCGvFogFxTRMl6nSZ1Ur2ewlVWWx17Ii0rZmdOWxzAAp53c97PM7yLqaQkbXgpg==
+X-OriginatorOrg: ford.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Nov 2026 12:18:45.5654
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a07d3929-aeb0-40b5-01bc-08df418043a9
+X-MS-Exchange-CrossTenant-Id: c990bb7a-51f4-439b-bd36-9c07fb1041c0
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=c990bb7a-51f4-439b-bd36-9c07fb1041c0;Ip=[148.163.138.245];Helo=[mx0b-00498f04.pphosted.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	MN1PEPF000793FC.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN6PR16MB5353
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEzMDA0OCBTYWx0ZWRfX6HaoxYPnlqm+
+ qVRHzJIAajY5Ht68sMSq5s4BHwQuZroMSmb+t9KarjaJAowI4SO2wIYzyDAbZdIZwaEKIjBmB+G
+ kC08lNufw2bMzBpZdsClSrTRwlEOKN0d+4GMm9GjIjH0SHbXIk4qubob12I/ywz53WahtYekME6
+ 8OCa10l9HnWZJlPF5iK46aka/AqrmXfUGbuZs/YsFPCKa54lIiRWKGC5O/RXo8Rswuw7JvrX+zN
+ qChlmuQfXDx7WrdG+7eEgBESS08X2bbg0t0AXqg0w+FLMdRXuqULFW7Pqi0lns//oO5mTDqggkG
+ amJUyZghe0XXa0u12uGIJSjZaw7fIgqg52xcaecLCN/v/URG8WQieX4eLlWtseNTABU34SOkcoc
+ Wux/Sc2bF4eYwAUsAEoezONt6sRZF5J8Jr3LMi+mzyVU87VeHjRExRB9bWULmgk+0jE8z1hIzZH
+ Gnuy7+Mr2FpFJL53BGA==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEzMDA0OCBTYWx0ZWRfXx66GiXNzMKDj
+ xXmoMT7oYmNP+7SszxLx5kNcDK6J1aQMF2LGCeQ0JYhkh9i9lkOqMwnIZUtcViRdP7mfjSfFZAA
+ tT9cQJLdmULXKS2YN+RO/X9Pb6BlXAxrtoCwNrhxQFuMbYGZ7zhw
+X-Authority-Analysis: v=2.4 cv=C7h8WgP+ c=1 sm=1 tr=0 ts=6af70028 cx=c_pps
+ a=23BBZRleo/1KOgyGqX6yRw==:117 a=b7IhknPlfT0FN1EembXvig==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=zJRp6_cAMcgA:10 a=3PXLN80vpJUA:10
+ a=6NUGLSImWEsA:10 a=w9pew1qAHqMA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=P_n1zlmtWsCQbjROFjcg:22 a=NvsXeTrgx-CJMFV-xl94:22 a=cbNQJ9GKAAAA:8
+ a=NNVgaHFa0Tc0tJPwRXQA:9 a=DqJYxgmhk6moR-_7_KoZ:22 a=WmVTiCyuxqgg3mnwYu6p:22
+X-Proofpoint-GUID: ad2Q-qFiyzcVUTZPmksrbKsuYDqYsEPO
+X-Proofpoint-ORIG-GUID: ad2Q-qFiyzcVUTZPmksrbKsuYDqYsEPO
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-13_04,2026-11-11_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0
+ lowpriorityscore=0 malwarescore=0 priorityscore=1501 impostorscore=0
+ clxscore=1015 bulkscore=0 spamscore=0 adultscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611130048
+X-purgate-ID: tlsNG-720697/1794572330-30FCE2AC-E71F5539/0/0
+X-purgate-type: clean
+X-purgate-size: 2559
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
 	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-These were marked "currently dead" in commit e681c0408564 ("ACPI/ERST: fix
-signed/unsigned type conflicts") in 2014.  They're no-less dead 12 years
-later.
+From: Denis Mukhin <dmukhin@ford.com>
 
-No functional change.
+Introduce CONFIG_PRINTK_RATELIMIT_MS and CONFIG_PRINTK_RATELIMIT_BURST
+for configuring rate-limiting policy at the compile time.
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Use symbols for global rate-limiting initialization in the console driver.
+
+Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 ---
-CC: Jan Beulich <jbeulich@suse.com>
-CC: Roger Pau Monné <roger@xenproject.org>
-CC: Teddy Astie <teddy.astie@vates.tech>
+Changes since v5:
+- updated notes on security supportable rate-limiting configurations
 ---
- xen/arch/x86/cpu/mcheck/mce-apei.c |  40 ----
- xen/drivers/acpi/apei/erst.c       | 286 -----------------------------
- 2 files changed, 326 deletions(-)
+ xen/common/Kconfig         | 30 ++++++++++++++++++++++++++++++
+ xen/drivers/char/console.c |  6 ++++--
+ 2 files changed, 34 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/x86/cpu/mcheck/mce-apei.c b/xen/arch/x86/cpu/mcheck/mce-apei.c
-index 0b1c9902c0bd..f5737aa14630 100644
---- a/xen/arch/x86/cpu/mcheck/mce-apei.c
-+++ b/xen/arch/x86/cpu/mcheck/mce-apei.c
-@@ -87,43 +87,3 @@ int apei_write_mce(struct mce *m)
+diff --git a/xen/common/Kconfig b/xen/common/Kconfig
+index 5b289e444fa5..539cccf21029 100644
+--- a/xen/common/Kconfig
++++ b/xen/common/Kconfig
+@@ -675,4 +675,34 @@ config PM_STATS
+ 	  Enable collection of performance management statistics to aid in
+ 	  analyzing and tuning power/performance characteristics of the system
  
- 	return erst_write(&rcd.hdr);
- }
--
--#ifndef NDEBUG /* currently dead code */
--
--ssize_t apei_read_mce(struct mce *m, u64 *record_id)
--{
--	struct cper_mce_record rcd;
--	ssize_t len;
--
--	if (!m || !record_id)
--		return -EINVAL;
--
--	len = erst_read_next(&rcd.hdr, sizeof(rcd));
--	if (len <= 0)
--		return len;
--	/* Can not skip other records in storage via ERST unless clear them */
--	else if (len != sizeof(rcd) ||
--		 uuid_le_cmp(rcd.hdr.creator_id, CPER_CREATOR_MCE)) {
--		printk(KERN_WARNING
--			"MCE-APEI: Can not skip the unknown record in ERST");
--		return -EIO;
--	}
--
--	memcpy(m, &rcd.mce, sizeof(*m));
--	*record_id = rcd.hdr.record_id;
--
--	return sizeof(*m);
--}
--
--/* Check whether there is record in ERST */
--bool apei_check_mce(void)
--{
--	return erst_get_record_count() > 0;
--}
--
--int apei_clear_mce(u64 record_id)
--{
--	return erst_clear(record_id);
--}
--
--#endif /* currently dead code */
-diff --git a/xen/drivers/acpi/apei/erst.c b/xen/drivers/acpi/apei/erst.c
-index 76f799c0ab44..195b527cfda4 100644
---- a/xen/drivers/acpi/apei/erst.c
-+++ b/xen/drivers/acpi/apei/erst.c
-@@ -382,74 +382,6 @@ static int erst_get_erange(struct erst_erange *range)
- 	return 0;
++menu "Console rate-limiting"
++	visible if EXPERT
++
++config PRINTK_RATELIMIT_MS
++	int "printk rate-limiting time window (milliseconds)"
++	default 5000
++	help
++	  Specifies the time window, in milliseconds, for rate-limited printk
++	  messages. No more than `CONFIG_PRINTK_RATELIMIT_BURST` messages will be
++	  printed within this window.
++
++	  Setting this value to 0 disables rate-limiting entirely.
++
++	  Rate-limiting configurations within [0..5000) milliseconds are not
++	  security supported.
++
++config PRINTK_RATELIMIT_BURST
++	int "printk rate-limited message burst size"
++	default 10
++	help
++	  Defines the maximum number of rate-limited printk messages that may
++	  be printed within each `CONFIG_PRINTK_RATELIMIT_MS` time window.
++
++	  Setting this value to 0 disables rate-limiting entirely.
++
++	  Rate-limiting configurations with burst size larger than default 10
++	  are not security supported.
++
++endmenu
++
+ endmenu
+diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
+index e4df0bbc2eec..1a8beb6665c1 100644
+--- a/xen/drivers/char/console.c
++++ b/xen/drivers/char/console.c
+@@ -1330,10 +1330,12 @@ bool __printk_ratelimit(unsigned int ratelimit_ms,
  }
  
--#ifndef NDEBUG /* currently dead code */
--
--static ssize_t __erst_get_record_count(void)
--{
--	struct apei_exec_context ctx;
--	int rc;
--	u64 output;
--	ssize_t count;
--
--	erst_exec_ctx_init(&ctx);
--	rc = apei_exec_run(&ctx, ACPI_ERST_GET_RECORD_COUNT);
--	if (rc)
--		return rc;
--	count = output = apei_exec_ctx_get_output(&ctx);
--	return count >= 0 && count == output ? count : -ERANGE;
--}
--
--ssize_t erst_get_record_count(void)
--{
--	ssize_t count;
--	unsigned long flags;
--
--	if (!erst_enabled)
--		return -ENODEV;
--
--	spin_lock_irqsave(&erst_lock, flags);
--	count = __erst_get_record_count();
--	spin_unlock_irqrestore(&erst_lock, flags);
--
--	return count;
--}
--
--static int __erst_get_next_record_id(u64 *record_id)
--{
--	struct apei_exec_context ctx;
--	int rc;
--
--	erst_exec_ctx_init(&ctx);
--	rc = apei_exec_run(&ctx, ACPI_ERST_GET_RECORD_ID);
--	if (rc)
--		return rc;
--	*record_id = apei_exec_ctx_get_output(&ctx);
--
--	return 0;
--}
--
--/*
-- * Get the record ID of an existing error record on the persistent
-- * storage. If there is no error record on the persistent storage, the
-- * returned record_id is APEI_ERST_INVALID_RECORD_ID.
-- */
--int erst_get_next_record_id(u64 *record_id)
--{
--	int rc;
--	unsigned long flags;
--
--	if (!erst_enabled)
--		return -ENODEV;
--
--	spin_lock_irqsave(&erst_lock, flags);
--	rc = __erst_get_next_record_id(record_id);
--	spin_unlock_irqrestore(&erst_lock, flags);
--
--	return rc;
--}
--
--#endif /* currently dead code */
--
- static int __erst_write_to_storage(u64 offset)
+ /* Minimum time in ms between messages */
+-static const unsigned int printk_ratelimit_ms = 5 * 1000;
++static const unsigned int printk_ratelimit_ms =
++    CONFIG_PRINTK_RATELIMIT_MS;
+ 
+ /* Number of messages we send before ratelimiting */
+-static const unsigned int printk_ratelimit_burst = 10;
++static const unsigned int printk_ratelimit_burst =
++    CONFIG_PRINTK_RATELIMIT_BURST;
+ 
+ bool printk_ratelimit(void)
  {
- 	struct apei_exec_context ctx;
-@@ -489,92 +421,6 @@ static int __erst_write_to_storage(u64 offset)
- 	return erst_errno(val);
- }
- 
--#ifndef NDEBUG /* currently dead code */
--
--static int __erst_read_from_storage(u64 record_id, u64 offset)
--{
--	struct apei_exec_context ctx;
--	u64 timeout = FIRMWARE_TIMEOUT;
--	u64 val;
--	int rc;
--
--	erst_exec_ctx_init(&ctx);
--	rc = apei_exec_run(&ctx, ACPI_ERST_BEGIN_READ);
--	if (rc)
--		return rc;
--	apei_exec_ctx_set_input(&ctx, offset);
--	rc = apei_exec_run(&ctx, ACPI_ERST_SET_RECORD_OFFSET);
--	if (rc)
--		return rc;
--	apei_exec_ctx_set_input(&ctx, record_id);
--	rc = apei_exec_run(&ctx, ACPI_ERST_SET_RECORD_ID);
--	if (rc)
--		return rc;
--	rc = apei_exec_run(&ctx, ACPI_ERST_EXECUTE_OPERATION);
--	if (rc)
--		return rc;
--	for (;;) {
--		rc = apei_exec_run(&ctx, ACPI_ERST_CHECK_BUSY_STATUS);
--		if (rc)
--			return rc;
--		val = apei_exec_ctx_get_output(&ctx);
--		if (!val)
--			break;
--		if (erst_timedout(&timeout, SPIN_UNIT))
--			return -EIO;
--	};
--	rc = apei_exec_run(&ctx, ACPI_ERST_GET_COMMAND_STATUS);
--	if (rc)
--		return rc;
--	val = apei_exec_ctx_get_output(&ctx);
--	rc = apei_exec_run(&ctx, ACPI_ERST_END);
--	if (rc)
--		return rc;
--
--	return erst_errno(val);
--}
--
--static int __erst_clear_from_storage(u64 record_id)
--{
--	struct apei_exec_context ctx;
--	u64 timeout = FIRMWARE_TIMEOUT;
--	u64 val;
--	int rc;
--
--	erst_exec_ctx_init(&ctx);
--	rc = apei_exec_run(&ctx, ACPI_ERST_BEGIN_CLEAR);
--	if (rc)
--		return rc;
--	apei_exec_ctx_set_input(&ctx, record_id);
--	rc = apei_exec_run(&ctx, ACPI_ERST_SET_RECORD_ID);
--	if (rc)
--		return rc;
--	rc = apei_exec_run(&ctx, ACPI_ERST_EXECUTE_OPERATION);
--	if (rc)
--		return rc;
--	for (;;) {
--		rc = apei_exec_run(&ctx, ACPI_ERST_CHECK_BUSY_STATUS);
--		if (rc)
--			return rc;
--		val = apei_exec_ctx_get_output(&ctx);
--		if (!val)
--			break;
--		if (erst_timedout(&timeout, SPIN_UNIT))
--			return -EIO;
--	}
--	rc = apei_exec_run(&ctx, ACPI_ERST_GET_COMMAND_STATUS);
--	if (rc)
--		return rc;
--	val = apei_exec_ctx_get_output(&ctx);
--	rc = apei_exec_run(&ctx, ACPI_ERST_END);
--	if (rc)
--		return rc;
--
--	return erst_errno(val);
--}
--
--#endif /* currently dead code */
--
- /* NVRAM ERST Error Log Address Range is not supported yet */
- static int __erst_write_to_nvram(const struct cper_record_header *record)
- {
-@@ -582,24 +428,6 @@ static int __erst_write_to_nvram(const struct cper_record_header *record)
- 	return -ENOSYS;
- }
- 
--#ifndef NDEBUG /* currently dead code */
--
--static int __erst_read_to_erange_from_nvram(u64 record_id, u64 *offset)
--{
--	printk(KERN_WARNING
--		"NVRAM ERST Log Address Range is not implemented yet\n");
--	return -ENOSYS;
--}
--
--static int __erst_clear_from_nvram(u64 record_id)
--{
--	printk(KERN_WARNING
--		"NVRAM ERST Log Address Range is not implemented yet\n");
--	return -ENOSYS;
--}
--
--#endif /* currently dead code */
--
- int erst_write(const struct cper_record_header *record)
- {
- 	int rc;
-@@ -639,120 +467,6 @@ int erst_write(const struct cper_record_header *record)
- 	return rc;
- }
- 
--#ifndef NDEBUG /* currently dead code */
--
--static int __erst_read_to_erange(u64 record_id, u64 *offset)
--{
--	int rc;
--
--	if (erst_erange.attr & ERST_RANGE_NVRAM)
--		return __erst_read_to_erange_from_nvram(
--			record_id, offset);
--
--	rc = __erst_read_from_storage(record_id, 0);
--	if (rc)
--		return rc;
--	*offset = 0;
--
--	return 0;
--}
--
--static ssize_t __erst_read(u64 record_id, struct cper_record_header *record,
--			   size_t buflen)
--{
--	int rc;
--	u64 offset;
--	ssize_t len;
--	struct cper_record_header *rcd_tmp;
--
--	rc = __erst_read_to_erange(record_id, &offset);
--	if (rc)
--		return rc;
--	rcd_tmp = erst_erange.vaddr + offset;
--	if (rcd_tmp->record_length > buflen)
--		return -ENOBUFS;
--	len = rcd_tmp->record_length;
--	if (len < 0)
--		return -ERANGE;
--	memcpy(record, rcd_tmp, len);
--
--	return len;
--}
--
--/*
-- * If return value > buflen, the buffer size is not big enough,
-- * else if return value < 0, something goes wrong,
-- * else everything is OK, and return value is record length
-- */
--ssize_t erst_read(u64 record_id, struct cper_record_header *record,
--		  size_t buflen)
--{
--	ssize_t len;
--	unsigned long flags;
--
--	if (!erst_enabled)
--		return -ENODEV;
--
--	spin_lock_irqsave(&erst_lock, flags);
--	len = __erst_read(record_id, record, buflen);
--	spin_unlock_irqrestore(&erst_lock, flags);
--	return len;
--}
--
--/*
-- * If return value > buflen, the buffer size is not big enough,
-- * else if return value = 0, there is no more record to read,
-- * else if return value < 0, something goes wrong,
-- * else everything is OK, and return value is record length
-- */
--ssize_t erst_read_next(struct cper_record_header *record, size_t buflen)
--{
--	int rc;
--	ssize_t len;
--	unsigned long flags;
--	u64 record_id;
--
--	if (!erst_enabled)
--		return -ENODEV;
--
--	spin_lock_irqsave(&erst_lock, flags);
--	rc = __erst_get_next_record_id(&record_id);
--	if (rc) {
--		spin_unlock_irqrestore(&erst_lock, flags);
--		return rc;
--	}
--	/* no more record */
--	if (record_id == APEI_ERST_INVALID_RECORD_ID) {
--		spin_unlock_irqrestore(&erst_lock, flags);
--		return 0;
--	}
--
--	len = __erst_read(record_id, record, buflen);
--	spin_unlock_irqrestore(&erst_lock, flags);
--
--	return len;
--}
--
--int erst_clear(u64 record_id)
--{
--	int rc;
--	unsigned long flags;
--
--	if (!erst_enabled)
--		return -ENODEV;
--
--	spin_lock_irqsave(&erst_lock, flags);
--	if (erst_erange.attr & ERST_RANGE_NVRAM)
--		rc = __erst_clear_from_nvram(record_id);
--	else
--		rc = __erst_clear_from_storage(record_id);
--	spin_unlock_irqrestore(&erst_lock, flags);
--
--	return rc;
--}
--
--#endif /* currently dead code */
--
- static int __init erst_check_table(struct acpi_table_erst *erst_tab)
- {
- 	if (erst_tab->header.length < sizeof(*erst_tab))
 -- 
-2.39.5
+2.56.0
 
 
