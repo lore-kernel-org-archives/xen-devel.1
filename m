@@ -2,47 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D0BB606A327
-	for <xen-devel@archiver.kernel.org>; Wed, 11 Nov 2026 22:00:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 724D2606A337
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2026 04:47:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=R8Wxw4uX
-Received: from list by lists.xenproject.org with outflank-mailman.1485004.1688333 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=pNr960ls
+Received: from list by lists.xenproject.org with outflank-mailman.1485090.1688395 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRGMf-0001Vm-4F; Wed, 11 Nov 2026 22:00:21 +0000
+	id 1xRMih-0004Co-5B; Thu, 12 Nov 2026 04:47:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1485004.1688333; Wed, 11 Nov 2026 22:00:21 +0000
+Received: by outflank-mailman (output) from mailman id 1485090.1688395; Thu, 12 Nov 2026 04:47:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRGMf-0001Vf-17; Wed, 11 Nov 2026 22:00:21 +0000
-Received: by outflank-mailman (input) for mailman id 1485004;
- Wed, 11 Nov 2026 22:00:19 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xRMih-0004Cf-10; Thu, 12 Nov 2026 04:47:31 +0000
+Received: by outflank-mailman (input) for mailman id 1485090;
+ Thu, 12 Nov 2026 04:47:30 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <patchwork-bot+netdevbpf@kernel.org>)
- id 1xRGMd-0001VZ-Ix
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 22:00:19 +0000
+ (envelope-from <ma.mandourr@gmail.com>) id 1xRMif-0004CZ-UG
+ for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 04:47:30 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xRGMc-00137n-QQ
- for xen-devel@lists.xenproject.org; Wed, 11 Nov 2026 23:00:18 +0100
-Received: from [10.42.69.11] (helo=localhost)
+ id 1xRMie-00Cb1g-Sz
+ for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 05:47:28 +0100
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <patchwork-bot+netdevbpf@kernel.org>)
- id 6af4e559-bab6-0a2a0a5309dd-0a2a450b9712-22
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 23:00:18 +0100
-Received: from [172.105.4.254] (helo=tor.source.kernel.org)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <patchwork-bot+netdevbpf@kernel.org>)
- id 6af4e571-b7e8-0a2a450b0019-ac6904fed6c8-3
- for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 23:00:18 +0100
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id BA8C963B34;
- Wed, 11 Nov 2026 22:00:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6A5971F00A05;
- Wed, 11 Nov 2026 22:00:16 +0000 (UTC)
-Received: from [10.30.226.235] (localhost [IPv6:::1])
- by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- 5E1C9391AFAA; Wed, 11 Nov 2026 22:00:16 +0000 (UTC)
+ (envelope-from <ma.mandourr@gmail.com>)
+ id 6af544d8-e002-0a2a0a5209dd-0a2a4507e70a-12
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 05:47:28 +0100
+Received: from [209.85.215.179] (helo=mail-pg1-f179.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <ma.mandourr@gmail.com>)
+ id 6af544de-b4ea-0a2a45070019-d155d7b3d822-3
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 05:47:28 +0100
+Received: by mail-pg1-f179.google.com with SMTP id
+ 41be03b00d2f7-cd62c570b5dso2355673a12.2
+ for <xen-devel@lists.xenproject.org>; Wed, 11 Nov 2026 20:47:27 -0800 (PST)
+Received: from cs-arch-srv04.cmpt.sfu.ca (cs-arch-srv04.cmpt.sfu.ca.
+ [142.58.10.48]) by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-cdd8d79d406sm2187387a12.17.2026.11.11.20.47.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 11 Nov 2026 20:47:25 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,187 +50,336 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Subject:From:Date:References:In-Reply-To:To:Cc"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794434416;
-	bh=unfiBAflFFEpCG3dRIJsCPzJVGSDGkOzgz05GrP4H0Q=;
-	h=Subject:From:Date:References:In-Reply-To:To:Cc;
-	b=R8Wxw4uXdPmZcmviyqNzouiTY4Z5vcHhax05dunRoLL1halGvB1EW6hlFeQIkOA92
-	 3v33rdnIStYl8z/fGOzr1zO/TClpKTxXWFvyyA7yQu8lozQFW7pRzIG2djA78w5gAQ
-	 ZAtv2WMZeNzopwKrjXi93BcKjpfZB+3fpFZ27W7H5BgjQC6H2tJZbE3MTsjSziNBDZ
-	 6jO6jsoXbKcPIj4oA2FoIsa7+HQ7cR4yZnKGiMzqs1y3nTmgPXd8dwvaCoCf2NvpfM
-	 qyNGuO19dUaB5HUMtr7Pq0TFxJmCqrsNB+80NcHI83/V5Vp5Pt913EBZGIdpPX8S+1
-	 glDL0d/6+Mc2w==
-Content-Type: text/plain; charset="utf-8"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1794458846; x=1795063646; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=2+dJk09S+6bQtbHtJHd1AoWeYtEP5tfHh8DUksgsO7k=;
+        b=pNr960ls40CoYzvJw8ro9bbRfEYhGz9yeIwWMAnRnYMMEE9shLic2WVKh8Wl38aZ+z
+         AC2UXnYs3UmTNd2fr8jvOVAMpI7A79/3Opxth/qJ8ujE59AS4E813qhAM5/UFBN5pwBJ
+         F3UaftDc6n2hOv3pqhODpJ07YSp9uaPZIJwcLVGq8mGSHYuw+f4HZItL2ORYztdikkCr
+         2cH25VrVyfkmJJPedmvYTqMV8Xto+0cbCIIQVr2RxyPIyKiDa5+tBEH9W/Dkld+L9IQd
+         1aupQhzbWxUnlPX956hhwsAax1jcqq+trcERZ84R2F9L8Z9GnBb/Bs81PCC9O589gSZR
+         yVjw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794458846; x=1795063646;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=2+dJk09S+6bQtbHtJHd1AoWeYtEP5tfHh8DUksgsO7k=;
+        b=EmVOcoV8ZmaQhiMDbxkYsS38bfOUcPWJkV76Cwjcg9s0n5lwT3M4WaU+gyyQfMmXmI
+         RoIsd0aSRQZY39n/+eJrzVteVr/c8EcmnVWDWgpeT0VwbjA83r3KGzbmAZRM46rB3/eE
+         8f44J7wp9XW3Cq0AAYyi0Evcb9lZzo0Xi7KqV+XooRRC6LamIl7qcPsb22mZJw+wbBHI
+         GtIMRhOe4mHwrnunerzZEWAkficiymhFTbi5Q3YFvbKo4r55LWt9hd2ICfvPz66QsT/P
+         YYZ08UrY/93Rdo4JQLqYak9c+YYzJP06/whFzNUIzRONcGd35BCqHjfzL4p/VARsLJuu
+         NBGQ==
+X-Gm-Message-State: APuU4Z8qF91zisVPGZAFl9NbJhHKwKguwKoYUfQOSczI7rCil6az5/FZ
+	+0BoXkqcBcY70ppw1DCjABAoWO7Dh/s6qFFsg4n5YcTu7doXys7e+hJpUrpAeQ==
+X-Gm-Gg: AYBFou0xZrj44ZvoxxEyNikSrVKKE6z+B6SiskqzYJdAW4TWlJP/vqDp5WEK6DeQRx1
+	EYG/8Ftm/ZVTk05d4hjvRgWphBVmU8fakkNMFX+DZPAf6X7+fL1RuTkg3bDwgdZe85VZjgq4tTN
+	qFKfv63MKAR22jdMwRVyyMHeikS+tZS1/6JhB1bdEZa4ErV8ohg3eikat24NPpAGy54i9aKfG+f
+	EdY8JEIEsuEFCOWKH0xvMlV8ho95UBziuCTsvfZ/XnSXR/bTgt09URrj9xKl65dk2y+NuvD6jrz
+	j4HsUfBuS66ZqlWkjirhYI9vLEItcBWGQf122gbDLJRBxs++DW2Uu741Y/Oe41vCiSfAqF2TxJj
+	1xvHVyCX9UMrf2dOS6afFex7ENFcvsbWTETo0xrK3kyvdh5Lk0jB5Yvs/2QE/NU3H2HCuBxi/hG
+	kq2SqQflXmxEs4Q8qMRgyGDOy4ALQrs8rZUSCSpxwvKJcoJtF9eTe0KOQuAmpF/La9CEZ6locf2
+	PCkQDkHgXrexg1wsCRgPrKlM7aM8OMz078BqX/oCtON9jEnHi3pQ1MR0dXajhnuioXg2gHh1Pjw
+	KjBYzTrmtRH9M07u1ZYc9xULZXYlkUywCDUNluGDfclAcl862+8mFWN7aQn9M8WIi7a8xCNaJ64
+	3vqXsG2fpb4odXC3SfXXMyxcNkxAcS0mfCJz3BAibWMkz/ZtV070XLt8OPlw2k26oEyQXNVH0Hb
+	7Cowez7ntWCAjq0cUXvcGE00veH42sFEYR
+X-Received: by 2002:a05:6372:a709:b0:3f1:fdd4:572b with SMTP id adf61e73a8af0-3f2fda991f5mr4616390637.36.1794458846002;
+        Wed, 11 Nov 2026 20:47:26 -0800 (PST)
+From: Mahmoud Abumandour <ma.mandourr@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Teddy Astie <teddy.astie@vates.tech>,
+	Mahmoud Abumandour <ma.mandourr@gmail.com>
+Subject: [PATCH v2] x86/nestedhvm: process the MSR-load and MSR-store areas of L1's VMCS
+Date: Wed, 11 Nov 2026 20:47:24 -0800
+Message-Id: <20261112044724.1039961-1-ma.mandourr@gmail.com>
+X-Mailer: git-send-email 2.25.1
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH net-next v4 00/15] net: skbuff: follow-ups to the BUG_ON()
- removal
-From: patchwork-bot+netdevbpf@kernel.org
-Message-Id: 
- <179443441492.1663612.10817269880170067726.git-patchwork-notify@kernel.org>
-Date: Wed, 11 Nov 2026 22:00:14 +0000
-References: 
- <20261104-b4-skbuff-bug-on-followups-v4-0-b7ffeb364f5d@toxicpanda.com>
-In-Reply-To: 
- <20261104-b4-skbuff-bug-on-followups-v4-0-b7ffeb364f5d@toxicpanda.com>
-To: Josef Bacik <josef@toxicpanda.com>
-Cc: davem@davemloft.net, edumazet@kernel.org, kuba@kernel.org,
- pabeni@redhat.com, horms@kernel.org, andrew+netdev@lunn.ch, jgross@suse.com,
- sstabellini@kernel.org, willemdebruijn.kernel@gmail.com, fmancera@suse.de,
- almasrymina@google.com, david.laight.linux@gmail.com, netdev@vger.kernel.org,
- xen-devel@lists.xenproject.org, willemb@google.com
-X-purgate-ID: tlsNG-42698a/1794434418-AB8D19EA-7267431F/0/0
+X-purgate-ID: tlsNG-ef75cf/1794458848-36CDFAE4-8452A79A/0/0
 X-purgate-type: clean
-X-purgate-size: 8398
-X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY autolearn=ham autolearn_force=no version=4.0.1
+X-purgate-size: 10663
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hello:
+Nothing in vvmx.c reads the VM-entry MSR-load, VM-exit MSR-store or VM-exit
+MSR-load area of L1's VMCS, so L2 runs with the listed MSRs as the previous
+L2 or L1 left them, and L1 gets neither L2's values stored nor its own
+loaded back. Process each area where the SDM does, with the SDM's checks,
+an entry as a WRMSR or RDMSR at CPL 0 that L1 does not intercept. A bad
+VM-entry entry fails the VM entry with exit reason 34 and leaves the VMCS
+unlaunched, a bad VM-exit entry is a VMX abort, which crashes the domain,
+and IA32_VMX_MISC now recommends the 512 entries an area may hold.
 
-This series was applied to netdev/net-next.git (main)
-by Jakub Kicinski <kuba@kernel.org>:
+Fixes: 9390642b7fa5 ("Nested VMX: Switch shadow/virtual VMCS between n1/n2 guests.")
+Assisted-by: Claude:claude-opus-5-5
+---
+Changes in v2:
+- use paddr_t and unsigned int in msr_area_valid() (Jan)
+- reword process_msr_area()'s comment (Jan)
 
-On Wed, 04 Nov 2026 20:47:12 +0000 you wrote:
-> v1: https://lore.kernel.org/all/20261019-b4-skbuff-bug-on-followups-v1-0-41dbef50b9f7@toxicpanda.com/
-> v2: https://lore.kernel.org/all/20261021-b4-skbuff-bug-on-followups-v2-0-2aa780a03524@toxicpanda.com/
-> v3: https://lore.kernel.org/all/20261103-b4-skbuff-bug-on-followups-v3-0-54ad0ab57614@toxicpanda.com/
-> 
-> v3->v4:
-> - 1: the !sg && csum branch of skb_segment() returns -EFAULT instead of
->   -ENOMEM when skb_copy_bits() fails, like the branch next to it.  The
->   new cases in 12 made that stand out.  I kept Mina's Reviewed-by.
-> - 12: run the nested and short skb cases without SG too (Willem).
-> - 11: no code change.  The commit message was wrong that the path
->   without SG was fine before.  Three of the new cases in 12 hit the NULL
->   pointer dereference without SG if the list_skb check in the clone
->   branch condition is taken out, because the walk reads list_skb before
->   it looks at SG.
-> - Picked up Mina's Reviewed-by on 1 and Acked-by on 4, Willem's
->   Reviewed-by on 11 and 12, and Juergen's Reviewed-by on 13.
-> - No other changes, same base as v3.
-> v2->v3:
-> - 1, 2, 6: move the frag_list recursion into a noinline function, so
->   that taking the address of a local there doesn't give the helpers a
->   stack protector (Paolo).  On x86_64 defconfig plus CONFIG_IP_SCTP
->   none of skb_copy_and_csum_bits(), skb_checksum_full(),
->   skb_crc32c_full() or the two wrappers has one now, and
->   __ip_append_data(), __ip6_append_data() and skb_segment() are
->   unchanged.  The callers that pass a local do gain one.  Besides the
->   seven I listed on v2, that's __skb_gro_checksum_complete() and
->   skb_checksum_help(), which are converted in this version, and
->   skb_crc32c_csum_help().
-> - 1: put the Fixes: tags back (Fernando, Sashiko).  csump in the
->   prototype, and drop the "Both of above in one bottle" comment
->   (Fernando).  skb_copy_and_csum_dev() zeroes the whole frame when the
->   copy fails, since leaving the checksum alone doesn't guarantee a bad
->   one (Sashiko).
-> - 2, 6: the kernel-doc describes the unreadable check as it is, the
->   wrappers don't blame unreadable frags for -EINVAL, and the commit
->   messages say what changes for a failing frag_list member (Fernando,
->   Sashiko).
-> - 2: convert skb_checksum_help() too, as 6 does for its crc32c twin, and
->   add Fixes: 20ddd0fd2fcd.
-> - 3: convert __skb_gro_checksum_complete() too (Fernando, Sashiko).
->   Take the skb off CHECKSUM_COMPLETE on failure.  Otherwise conntrack,
->   which doesn't drop on a bad checksum, leaves the pseudo-header sum in
->   skb->csum and TCP's validation accepts the packet after all
->   (Sashiko).  Update the comments, and add Fixes: 65249feb6b3d.
-> - 4: the commit message was wrong that devmem TX reaches this checksum.
->   Its skbs carry SKBFL_SHARED_FRAG, so the segment fails to linearize
->   first.  The patch is hardening, and the commit message says so now.
-> - 5: when the tail can't be checksummed but what's left can be read,
->   set CHECKSUM_NONE instead of failing the trim, which dropped packets
->   that used to be accepted (Sashiko).  Retitled, and add Fixes: tags.
-> - 7, 8: add the Fixes: tags for the original commits, and correct the
->   history in 8's commit message (Sashiko).  8 also says what it takes
->   to reach the memcpy().
-> - 7: reject a negative @len or @hlen on entry.  The reorder left nothing
->   ahead of the skb_put(), which panics on one.
-> - 8: the truesize check refuses the coalesce instead of only warning,
->   and runs before the head is stolen.  With len unsigned and nothing
->   else, an skb with a len above INT_MAX went from refused to coalesced.
-> - 9: check data_len > len directly and zero the frame.  The old check
->   missed CHECKSUM_PARTIAL (Sashiko).  Retitled.
-> - 10: drop both len > 0 tests, and correct what the commit message says
->   they covered (Sashiko).
-> - 9, 10: drop the Fixes: tags.  Both problems are older than the commits
->   the tags named, and neither has a known trigger.
-> - 11: Willem, this one changed again after you OK'd the walk up front.
->   A nested frag_list is only one way for the walk to run out of members.
->   A len that counts bytes the skb doesn't hold gets to the same NULL
->   pointer dereference, and the walk up front doesn't catch that.  So the
->   patch now checks for a NULL list_skb in the three places where the
->   walk moves on to it, and that's all it does: no pass up front, which
->   also takes care of the cost you pointed out for BIG TCP, and none of
->   v2's skb_has_frag_list() tests.  You asked on v2 whether the first two
->   checks were needed.  For a nested frag_list they weren't, for this
->   they are.  12 has a case for each, and taking any one of the three
->   checks out brings the oops back.  The path without SG is left alone
->   again.  The commit message says that IP reassembly does nest
->   frag_lists, just not on GSO skbs (Sashiko).  Retitled.
-> - 12: add four cases for a len that counts bytes the skb doesn't hold.
->   Retitled.
-> - 13: correct what the commit message says about when bounce_skb() runs
->   and when skb_copy_bits() fails.
-> - 14: update the comment above skb_nsg() (Sashiko).
-> - 15: one more stale comment, in net_test.c.
-> - Picked up Fernando's Reviewed-by on 4.  Dropped Mina's on 1 and
->   Fernando's on 2, since the frag_list loop moved in both, and Willem's
->   on 12, since it grew.
-> - Shortened the commit messages.
-> - Rebased onto current net-next.
-> v1->v2:
-> - skb_segment(): check each frag_list member as the walk takes it,
->   instead of an extra pass over the frag_list up front (Willem).
-> - KUnit test: braces around the suppressed skb_segment() call (Willem),
->   and the comment update for the non-uniform case moved into the same
->   patch (Mina).
-> - Picked up Willem's Reviewed-by and Mina's Acked-bys.
-> 
-> [...]
+Found by a fuzzer for VMX isolation.
 
-Here is the summary with links:
-  - [net-next,v4,01/15] net: skbuff: make skb_copy_and_csum_bits() report unreadable frags
-    https://git.kernel.org/netdev/net-next/c/23fe6ac2e97a
-  - [net-next,v4,02/15] net: skbuff: add skb_checksum_full() that reports failure
-    https://git.kernel.org/netdev/net-next/c/2a1e46c16105
-  - [net-next,v4,03/15] net: skbuff: fail checksum validation when the skb can't be checksummed
-    https://git.kernel.org/netdev/net-next/c/3fe3f8beef7e
-  - [net-next,v4,04/15] net: skbuff: fail segmentation when a segment can't be checksummed
-    https://git.kernel.org/netdev/net-next/c/7fec569df355
-  - [net-next,v4,05/15] net: skbuff: drop hw csum if trim can't checksum tail
-    https://git.kernel.org/netdev/net-next/c/05938d3edbdb
-  - [net-next,v4,06/15] net: skbuff: add skb_crc32c_full() that reports failure
-    https://git.kernel.org/netdev/net-next/c/b8f3a11ff453
-  - [net-next,v4,07/15] net: skbuff: let skb_zerocopy() copy a short skb without head_frag
-    https://git.kernel.org/netdev/net-next/c/86cc1a8a942b
-  - [net-next,v4,08/15] net: skbuff: make skb_try_coalesce()'s len unsigned
-    https://git.kernel.org/netdev/net-next/c/b242a00c2bc3
-  - [net-next,v4,09/15] net: skbuff: reject data_len > len in copy_and_csum_dev
-    https://git.kernel.org/netdev/net-next/c/3133a780ef89
-  - [net-next,v4,10/15] net: skbuff: reject a negative length in skb_copy_and_csum_bits()
-    https://git.kernel.org/netdev/net-next/c/2173a320e20d
-  - [net-next,v4,11/15] net: skbuff: don't run off frag_list in skb_segment()
-    https://git.kernel.org/netdev/net-next/c/e447e46ce976
-  - [net-next,v4,12/15] net: test the skb layouts skb_segment() refuses
-    https://git.kernel.org/netdev/net-next/c/7d02a2b23764
-  - [net-next,v4,13/15] xen-netfront: don't BUG() when skb_copy_bits() fails in bounce_skb()
-    https://git.kernel.org/netdev/net-next/c/ece597f62085
-  - [net-next,v4,14/15] net/tls: don't BUG() on leftover length in __skb_nsg()
-    https://git.kernel.org/netdev/net-next/c/e021a72ee9cb
-  - [net-next,v4,15/15] net: update comments that still describe the skb BUG_ON()s
-    https://git.kernel.org/netdev/net-next/c/c0073ae6e9d3
+A VMX abort crashes the domain as vvmx.c does elsewhere when nested VMX
+cannot continue.
 
-You are awesome, thank you!
+Alternatives: hvm_triple_fault(), which applies the domain's triple-fault
+action (reboot by default), as KVM does, or hvm_vcpu_down() on the aborting
+vCPU alone with the VMX-abort indicator written, which is closest to the
+SDM but needs more code. Happy to switch to either.
+
+ xen/arch/x86/hvm/vmx/vvmx.c             | 136 ++++++++++++++++++++----
+ xen/arch/x86/include/asm/hvm/vmx/vmcs.h |   1 +
+ 2 files changed, 118 insertions(+), 19 deletions(-)
+
+diff --git a/xen/arch/x86/hvm/vmx/vvmx.c b/xen/arch/x86/hvm/vmx/vvmx.c
+index 3309432873..dc5f4b7bfe 100644
+--- a/xen/arch/x86/hvm/vmx/vvmx.c
++++ b/xen/arch/x86/hvm/vmx/vvmx.c
+@@ -23,6 +23,8 @@
+ static DEFINE_PER_CPU(u64 *, vvmcs_buf);
+ 
+ static void nvmx_purge_vvmcs(struct vcpu *v);
++static int set_vvmcs_launched(struct list_head *launched_list,
++                              unsigned long vvmcs_mfn);
+ 
+ static bool nvmx_vcpu_in_vmx(const struct vcpu *v)
+ {
+@@ -1212,11 +1214,68 @@ static void nvmx_clear_vmcs_pointer(struct vcpu *v, struct vmcs_struct *vvmcs)
+     __vmwrite(VMWRITE_BITMAP, 0);
+ }
+ 
+-static void virtual_vmentry(struct cpu_user_regs *regs)
++/* The longest MSR list that IA32_VMX_MISC recommends to L1. */
++#define NVMX_MAX_MSRS 512
++
++/* A nonempty MSR area must be 16-byte aligned and within MAXPHYADDR. */
++static bool msr_area_valid(const struct vcpu *v, unsigned int addr_field,
++                           unsigned int count_field)
++{
++    paddr_t addr = get_vvmcs(v, addr_field);
++    unsigned int count = get_vvmcs(v, count_field);
++    unsigned int width = v->domain->arch.cpuid->extd.maxphysaddr;
++
++    return !count ||
++           (!(addr & 0xf) && !(addr >> width) &&
++            !((addr + count * sizeof(struct vmx_msr_entry) - 1) >> width));
++}
++
++/*
++ * Process an MSR load or store area of L1's VMCS, each entry as an
++ * unintercepted WRMSR or RDMSR.  Returns 0, or the 1-based index of the
++ * failing entry.
++ */
++static unsigned int process_msr_area(struct vcpu *v, unsigned int addr_field,
++                                     unsigned int count_field)
++{
++    paddr_t addr = get_vvmcs(v, addr_field);
++    unsigned int i, count = get_vvmcs(v, count_field);
++    struct vmx_msr_entry ent;
++
++    for ( i = 0; i < count; i++, addr += sizeof(ent) )
++    {
++        if ( i == NVMX_MAX_MSRS ||
++             hvm_copy_from_guest_phys(&ent, addr,
++                                      sizeof(ent)) != HVMTRANS_okay ||
++             ent.mbz ||
++             (ent.index >= MSR_X2APIC_FIRST && ent.index <= MSR_X2APIC_LAST) )
++            return i + 1;
++
++        if ( addr_field == VM_EXIT_MSR_STORE_ADDR )
++        {
++            if ( hvm_msr_read_intercept(ent.index, &ent.data) != X86EMUL_OKAY ||
++                 hvm_copy_to_guest_phys(addr + offsetof(struct vmx_msr_entry,
++                                                        data),
++                                        &ent.data, sizeof(ent.data),
++                                        v) != HVMTRANS_okay )
++                return i + 1;
++        }
++        else if ( ent.index == MSR_FS_BASE || ent.index == MSR_GS_BASE ||
++                  hvm_msr_write_intercept(ent.index, ent.data,
++                                          false) != X86EMUL_OKAY )
++            return i + 1;
++    }
++
++    return 0;
++}
++
++/* Returns 0, or the 1-based index of the failing MSR-load entry. */
++static unsigned int virtual_vmentry(struct cpu_user_regs *regs)
+ {
+     struct vcpu *v = current;
+     struct nestedvcpu *nvcpu = &vcpu_nestedhvm(v);
+     unsigned long lm_l1, lm_l2;
++    unsigned int msr_fail;
+ 
+     vmx_vmcs_switch(v->arch.hvm.vmx.vmcs_pa, nvcpu->nv_n2vmcx_pa);
+ 
+@@ -1277,6 +1336,15 @@ static void virtual_vmentry(struct cpu_user_regs *regs)
+         }
+     }
+ 
++    /* MSRs load last, and only a successful entry launches the VMCS. */
++    msr_fail = process_msr_area(v, VM_ENTRY_MSR_LOAD_ADDR,
++                                VM_ENTRY_MSR_LOAD_COUNT);
++    if ( !msr_fail &&
++         set_vvmcs_launched(&vcpu_2_nvmx(v).launched_list,
++                            PFN_DOWN(v->arch.hvm.vmx.vmcs_shadow_maddr)) < 0 )
++        domain_crash(v->domain);
++
++    return msr_fail;
+ }
+ 
+ static void sync_vvmcs_guest_state(struct vcpu *v, struct cpu_user_regs *regs)
+@@ -1454,19 +1522,37 @@ static void nvmx_update_apicv(struct vcpu *v)
+     }
+ }
+ 
+-static void virtual_vmexit(struct cpu_user_regs *regs)
++/*
++ * A VM exit, or with msr_fail a VM entry that failed loading MSRs, which
++ * records only the exit reason and qualification and saves nothing.
++ */
++static void virtual_vmexit(struct cpu_user_regs *regs, unsigned int msr_fail)
+ {
+     struct vcpu *v = current;
+     struct nestedvcpu *nvcpu = &vcpu_nestedhvm(v);
+-    unsigned long lm_l1, lm_l2;
++    unsigned long lm_l1, lm_l2, intr_info = 0;
+ 
+-    sync_vvmcs_ro(v);
+-    sync_vvmcs_guest_state(v, regs);
+-    sync_exception_state(v);
++    if ( msr_fail )
++    {
++        intr_info = get_vvmcs(v, VM_ENTRY_INTR_INFO);
++        set_vvmcs(v, VM_EXIT_REASON,
++                  VMX_EXIT_REASONS_FAILED_VMENTRY | EXIT_REASON_MSR_LOADING);
++        set_vvmcs(v, EXIT_QUALIFICATION, msr_fail);
++    }
++    else
++    {
++        sync_vvmcs_ro(v);
++        sync_vvmcs_guest_state(v, regs);
++        sync_exception_state(v);
+ 
+-    if ( nvmx_ept_enabled(v) && hvm_pae_enabled(v) &&
+-         !hvm_long_mode_active(v) )
+-        shadow_to_vvmcs_bulk(v, ARRAY_SIZE(gpdpte_fields), gpdpte_fields);
++        if ( nvmx_ept_enabled(v) && hvm_pae_enabled(v) &&
++             !hvm_long_mode_active(v) )
++            shadow_to_vvmcs_bulk(v, ARRAY_SIZE(gpdpte_fields), gpdpte_fields);
++
++        if ( process_msr_area(v, VM_EXIT_MSR_STORE_ADDR,
++                              VM_EXIT_MSR_STORE_COUNT) )
++            domain_crash(v->domain, "%pv VMX abort: storing MSRs failed\n", v);
++    }
+ 
+     /* This will clear current pCPU bit in p2m->dirty_cpumask */
+     np2m_schedule(NP2M_SCHEDLE_OUT);
+@@ -1490,6 +1576,9 @@ static void virtual_vmexit(struct cpu_user_regs *regs)
+     vmx_update_exception_bitmap(v);
+ 
+     load_vvmcs_host_state(v);
++    /* A failed VM entry keeps its interruption information. */
++    if ( msr_fail )
++        set_vvmcs(v, VM_ENTRY_INTR_INFO, intr_info);
+ 
+     if ( lm_l1 != lm_l2 )
+         paging_update_paging_modes(v);
+@@ -1499,6 +1588,9 @@ static void virtual_vmexit(struct cpu_user_regs *regs)
+     /* VM exit clears all bits except bit 1 */
+     regs->rflags = X86_EFLAGS_MBS;
+ 
++    if ( process_msr_area(v, VM_EXIT_MSR_LOAD_ADDR, VM_EXIT_MSR_LOAD_COUNT) )
++        domain_crash(v->domain, "%pv VMX abort: loading MSRs failed\n", v);
++
+     if ( cpu_has_vmx_virtual_intr_delivery )
+         nvmx_update_apicv(v);
+ 
+@@ -1553,9 +1645,14 @@ void asmlinkage nvmx_switch_guest(void)
+         return;
+ 
+     if ( nestedhvm_vcpu_in_guestmode(v) && nvcpu->nv_vmexit_pending )
+-        virtual_vmexit(regs);
++        virtual_vmexit(regs, 0);
+     else if ( !nestedhvm_vcpu_in_guestmode(v) && nvcpu->nv_vmentry_pending )
+-        virtual_vmentry(regs);
++    {
++        unsigned int msr_fail = virtual_vmentry(regs);
++
++        if ( msr_fail )
++            virtual_vmexit(regs, msr_fail);
++    }
+ }
+ 
+ /*
+@@ -1704,6 +1801,11 @@ static enum vmx_insn_errno nvmx_vmresume(struct vcpu *v)
+             goto invalid_control_state;
+     }
+ 
++    if ( !msr_area_valid(v, VM_EXIT_MSR_STORE_ADDR, VM_EXIT_MSR_STORE_COUNT) ||
++         !msr_area_valid(v, VM_EXIT_MSR_LOAD_ADDR, VM_EXIT_MSR_LOAD_COUNT) ||
++         !msr_area_valid(v, VM_ENTRY_MSR_LOAD_ADDR, VM_ENTRY_MSR_LOAD_COUNT) )
++        goto invalid_control_state;
++
+     nvcpu->nv_vmentry_pending = 1;
+ 
+     return VMX_INSN_SUCCEED;
+@@ -1777,15 +1879,10 @@ static int nvmx_handle_vmlaunch(struct cpu_user_regs *regs)
+         return X86EMUL_OKAY;
+     }
+     else {
++        /* virtual_vmentry() launches the VMCS. */
+         rc = nvmx_vmresume(v);
+         if ( rc )
+             vmfail_valid(regs, rc);
+-        else
+-        {
+-            if ( set_vvmcs_launched(&nvmx->launched_list,
+-                                    PFN_DOWN(v->arch.hvm.vmx.vmcs_shadow_maddr)) < 0 )
+-                return X86EMUL_UNHANDLEABLE;
+-        }
+         rc = X86EMUL_OKAY;
+     }
+     return rc;
+@@ -2354,8 +2451,9 @@ int nvmx_msr_read_intercept(unsigned int msr, u64 *msr_content)
+         data = hvm_cr4_guest_valid_bits(d);
+         break;
+     case MSR_IA32_VMX_MISC:
+-        /* Do not support CR3-targets or activity states. */
+-        data = host_data & ~(VMX_MISC_CR3_TARGET | VMX_MISC_ACTIVITY_MASK);
++        /* No CR3-targets or activity states; MSR lists of NVMX_MAX_MSRS. */
++        data = host_data & ~(VMX_MISC_CR3_TARGET | VMX_MISC_ACTIVITY_MASK |
++                             VMX_MISC_MAX_MSRS);
+         break;
+     case MSR_IA32_VMX_EPT_VPID_CAP:
+         data = nept_get_ept_vpid_cap();
+diff --git a/xen/arch/x86/include/asm/hvm/vmx/vmcs.h b/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
+index d0716e97d2..24b502382f 100644
+--- a/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
++++ b/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
+@@ -304,6 +304,7 @@ void vmx_vmcs_reload(struct vcpu *v);
+ #define VMX_MISC_ACTIVITY_MASK                  0x000001c0
+ #define VMX_MISC_PROC_TRACE                     0x00004000
+ #define VMX_MISC_CR3_TARGET                     0x01ff0000
++#define VMX_MISC_MAX_MSRS                       0x0e000000
+ #define VMX_MISC_VMWRITE_ALL                    0x20000000
+ 
+ #define VMX_TSC_MULTIPLIER_MAX                  0xffffffffffffffffULL
 -- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
-
+2.25.1
 
 
