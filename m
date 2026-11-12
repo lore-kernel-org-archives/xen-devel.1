@@ -2,37 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 037E8606A333
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2026 12:17:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C9760606A31C
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2026 12:21:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=ICoKO1Mg
-Received: from list by lists.xenproject.org with outflank-mailman.1485728.1688863 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=KhxCAZsp
+Received: from list by lists.xenproject.org with outflank-mailman.1485736.1688874 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRTju-0003mE-Km; Thu, 12 Nov 2026 12:17:14 +0000
+	id 1xRToG-0005dy-57; Thu, 12 Nov 2026 12:21:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1485728.1688863; Thu, 12 Nov 2026 12:17:14 +0000
+Received: by outflank-mailman (output) from mailman id 1485736.1688874; Thu, 12 Nov 2026 12:21:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRTju-0003m7-Hl; Thu, 12 Nov 2026 12:17:14 +0000
-Received: by outflank-mailman (input) for mailman id 1485728;
- Thu, 12 Nov 2026 12:17:13 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xRTjt-0003m1-H9
- for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 12:17:13 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xRTjt-0000000Ab9I-0YXE
- for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 12:17:13 +0000
-Received: from mail-lj1-f179.google.com ([209.85.208.179])
- by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xRTjt-0000000B85j-2Swp
- for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 12:17:13 +0000
-Received: by mail-lj1-f179.google.com with SMTP id
- 38308e7fff4ca-3adef977ad9so32374891fa.1
- for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 04:17:13 -0800 (PST)
+	id 1xRToG-0005dr-1h; Thu, 12 Nov 2026 12:21:44 +0000
+Received: by outflank-mailman (input) for mailman id 1485736;
+ Thu, 12 Nov 2026 12:21:42 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xRToE-0005dl-UZ
+ for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 12:21:42 +0000
+Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
+ id 1xRToE-0072eG-4D
+ for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 13:21:42 +0100
+Received: from [10.42.69.7] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6af5af42-2eae-0a2a0a5409dd-0a2a4507cfb8-46
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 13:21:42 +0100
+Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6af5af55-b4ea-0a2a45070019-d155802de1ac-3
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 13:21:42 +0100
+Received: by mail-wm1-f45.google.com with SMTP id
+ 5b1f17b1804b1-4afe2d546f9so51368455e9.3
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 04:21:41 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-498361f6bacsm16905828f8f.35.2026.11.12.04.21.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 12 Nov 2026 04:21:41 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -41,149 +49,115 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:Content-Type:Cc
-	:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version;
-	bh=/RBDK27rNppXvTIvghtW/9+UMS5eDgasp08AH9LSq4I=; b=ICoKO1MgiPzjWOxYvZkTTKcN+f
-	ni+82XxYLDUeItGhBSS5EBUqaz+KiYSgvzNOINKc9UqU/fLJvwLa27vWdDUaWy3KcLIDVOTm3p6kw
-	fgVyws2QL4Ppxdjo0IeUFO2N/dbhtc3Y8ggn/2tcJUgEQplDwaL9IxBrM9PB+CWIJpFs=;
-X-Gm-Message-State: APuU4Z/M6BSnb0wALq/Wx5jNB5VWXPaWVzedcZEYdlmHDXl5JbnNVYhO
-	oIYeROWUa0V8R5X5qoHFaXwO063JLHqbasP07NFj4FwudUDIVPeakLHotpTZG9LpmcAyYAx3IJr
-	qMfmQBcpkYQnVbDv+Fuxcy9Hx9qQtDHI=
-X-Received: by 2002:a2e:b8c3:0:b0:3ac:a2b0:ac56 with SMTP id
- 38308e7fff4ca-3ae126dfdf1mr13678401fa.29.1794485832227; Thu, 12 Nov 2026
- 04:17:12 -0800 (PST)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1794486101; x=1795090901; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=k4ShMyBPQKWmQvT1Qil1aqabqL+vJ1Au85n1s1OJynE=;
+        b=KhxCAZspZ5xFvUkE6eiswXmaU8JLMlfv0lDyJ1YNHailtKqjFCuhAOgwt/Z8ne9llL
+         OGCNXXUasMAUc8lriqzOFj0Mrc0JueHHQ8Nci6bgf8r7ZMXJ7BpoeoJIAa4oLxwF6IGG
+         LHWxxY42yjBZbY7QeKIdetN2/WTuzN5d6wOq5aBW3heSR6I4/3QRDTjWxkMIbdv9OX2o
+         NGAlA79PUX694xBaEfneif7eDTZt06mqdS5/+FaxgcGGzepJ8auN6ppIkj6gX3nhiRZz
+         ma5X1kc696vwujosTIPdwwd8excyZiGVVU48DrpHvP8jFlIPsZIugYMU2ToJStU9bGwB
+         4WWA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794486101; x=1795090901;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=k4ShMyBPQKWmQvT1Qil1aqabqL+vJ1Au85n1s1OJynE=;
+        b=ue7EpnPaR3/dSg5sutTEnKFqY5Yl6j7OXkEActcJsNqzLKv1sFTw2VIhLJOD3NQzNN
+         QmHIVe+g2I+YvAge/tdj2Nr6xhAjuTbMt/JtikKIms/JoH15NQV00hrapUSeNUBzTfHK
+         0In0yUmEszzio4NiW48JTs3SJb/d2knmtBIvmWh5BS3cW80KHTUFRFBIWLfcG4qHq0zZ
+         pP0t109dAYWL4xnCzKw2IVJbS1bAJUs9K8qLdsI/b2y0mZi5kRDR+1IUbu3v9WK8xbi5
+         3mBeI2ZzsYoUJR4e1W6H+PeaKOJKsSaZVhouro5waDFjkfTVSLZOy97jEnsKSbivmiPQ
+         NgSQ==
+X-Forwarded-Encrypted: i=1; AL+hErHhKYZPoFwslRv6OOKt7A+Tt12DKn9mNJ9Ma0UfI2Jk7XOFuwxchalQTq0RLll6a91xjbjEiztJP1E=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z9ntivETpcWXwmZfhHDjgNqavkWkw+3yTtIYLeHnh5N9x6gvxM3
+	947RLgs8Lm6xtiWqNGGdHmZ9TH3eFkbRujStfTk1oDJaNp8By4YHGfGuASmrMJ7bGQ==
+X-Gm-Gg: AYBFou3BuBhbmbYQnBQjBdbU0ldi3X9f6cxdYbTLuNdaSD7w7l0msl8ChzC9gmAkV6U
+	xL64nH5JP80c6bmeXQhBjAExylat3IeAdlloL/lUhqbfEol69V+ODjFS2RzeUBZzw93jlI7gtVZ
+	V7/+seNaDisVxbH/t3XvH2xbS4zuVtpYl0w8Uxp//AHpiwWUzvOtOJ6AqJaCCJ6xoMDKp+NvAx7
+	lJFjN29NpQL6r+Nu+8Xij+yuRnsbXJCqcnU1CGWeeYTOWHAq1NeU4tQbebGK/Ta5aS3yCAX5zhS
+	n36YXyDWu8LxaZrm9KwXx036lHRziS2ZjHxSWq4qJjj1OUB6PM3gl7vZNgoT4vEw6q2vq0/YBum
+	GaaEMqiqp3lK+RqEM01S4NYF8UOFCbQhc/oDTdjWdMfkKDGkXtxplFt+j9opEYF5Qv5KGKulQXC
+	dLzHZKv5pZyztU+K1gzO6vklM+I4KxIOffvqtSyKE14VfycCYOZ7ExZzLyop+86ehl91hN7smae
+	Nzk+h17t7p5xDL/Wzz9jSNB+MNKLYqPszgNLxy2MMazogXGzCRCQcb9ATwSZkDH9+eIcHa+j3ki
+	7W0c8nNrVojIxiHxLmaAuZj2LjNzrn/ACKywLBMZrPvwhkqgOGi4L/8Are5Sa0B6fOqn+HSCdAE
+	Qx+NMx+CglhtfXQsJKw==
+X-Received: by 2002:a05:600c:1986:b0:4a1:f7f4:7cf1 with SMTP id 5b1f17b1804b1-4ba09376d2dmr97352705e9.11.1794486101539;
+        Thu, 12 Nov 2026 04:21:41 -0800 (PST)
+Message-ID: <6e606aa8-67d1-4f88-8b42-ad33ce20ab85@suse.com>
+Date: Thu, 12 Nov 2026 13:21:40 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <20261007104051.48841-1-gwd@xenproject.org> <20261007104051.48841-16-gwd@xenproject.org>
- <asfoWIoeqPRX9SC-@Mac.lan> <CAFLBxZajMZSo6JP-Ui3Vpk8wdnWX1RtTULbYWsWPY5TjSs3JGQ@mail.gmail.com>
- <atEDXIYFICPlsMVl@Mac.lan>
-In-Reply-To: <atEDXIYFICPlsMVl@Mac.lan>
-From: George Dunlap <gwd@xenproject.org>
-Date: Thu, 12 Nov 2026 12:16:58 +0000
-X-Gmail-Original-Message-ID: <CAFLBxZZUrcmOHCDS_Za26o031XiCtWsNK-8Rsi7=JEqTCQF-9Q@mail.gmail.com>
-X-Gm-Features: AclHuK-S5iVzWpwuhp1V6fS0MEHBaKZlVODcslY-p5BH9GAxPJ8QWBYPFKBC5zY
-Message-ID: <CAFLBxZZUrcmOHCDS_Za26o031XiCtWsNK-8Rsi7=JEqTCQF-9Q@mail.gmail.com>
-Subject: Re: [PATCH v3 15/18] x86/mm: flush owned pages before reuse with the
- sparse directmap view
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
-Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>, 
-	Andrew Cooper <andrew.cooper3@citrix.com>, Teddy Astie <teddy.astie@vates.tech>, 
-	Anthony PERARD <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, 
-	Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-6.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS
-	autolearn=no autolearn_force=no version=4.0.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] xen/riscv: add cf_check to vcpu_imsic_{init,deinit}()
+ declarations
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <20261112114647.229806-1-oleksii.kurochko@gmail.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20261112114647.229806-1-oleksii.kurochko@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-ef75cf/1794486102-376D2AE4-DD1958A4/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 623
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Thu, Oct 15, 2026 at 5:46=E2=80=AFPM Roger Pau Monn=C3=A9 <roger@xenproj=
-ect.org> wrote:
->
-> On Wed, Oct 14, 2026 at 04:34:54PM +0100, George Dunlap wrote:
-> > On Thu, Oct 8, 2026 at 8:00=E2=80=AFPM Roger Pau Monn=C3=A9 <roger@xenp=
-roject.org> wrote:
-> > >
-> > > On Wed, Oct 07, 2026 at 11:40:48AM +0100, George Dunlap wrote:
-> > > > Since d7bf1b8ea275 ("x86/mm: limit deferred TLB flushing to PV doma=
-in
-> > > > support") a page freed by its owner is flushed from TLBs before it =
-is
-> > > > handed out again only in builds with PV support, on the premise tha=
-t PV
-> > > > domains, with their (limited) control over the host MMU and over wh=
-en
-> > > > flushes happen, are the only ones to leave stale entries behind.
-> > > >
-> > > > Xen's transient mappings of domain pages are another source.  The
-> > > > mapcache zaps a slot when it is unmapped but defers the flush: the
-> > > > slot's translation can stay in the TLB of the CPU which used it unt=
-il
-> > > > that CPU next flushes, by which time the page may have been freed a=
-nd
-> > > > handed to another domain.  Before "x86/hvm: introduce per-vCPU
-> > > > mapcache for vCPU-PT domains", only PV vCPUs use the mapcache, so t=
-he
-> > > > PV condition covers it.  Now that the vCPUs of an HVM domain with
-> > > > per-vCPU page-tables have one as well.
-> > > >
-> > > > While the full directmap is loaded in every context, stale transien=
-t
-> > > > mappings only map what's already mapped in the full directmap.  On =
-the
-> > > > sparse view of the directmap, a stale translation of a page handed =
-to
-> > > > another domain would keep it reachable from a context which has
-> > > > nothing to do with it.
-> > >
-> > > But if it's handed to another domain, then it also hasn't gone throug=
-h
-> > > a free cycle, which is what pg->u.free.need_tlbflush covers?
-> >
-> > Sorry, the wording there is a bit imprecise; it should be "a stale
-> > translation of a page *freed and then* handed to another domain".
-> >
-> > Apart from things like steal_page(), which doesn't apply to HVM guests
-> > AFAIK, there isn't any way to hand a page to another domain, is there?
-> >
-> > I guess there's dom_cow for memory sharing; but that's experimental.
-> > We should just document that ASI + memory sharing isn't supported at
-> > the moment, and work out the details when that's wanted.
-> >
-> > > > So flush owned pages before reuse wherever a sparse view is
-> > > > configured, as before d7bf1b8ea275.  In builds without PV support,
-> > > > mark_page_free() now also asks a new hook,
-> > > > arch_freed_pages_need_tlbflush(), declared with the xenheap hooks t=
-he
-> > > > sparse view already uses.  x86 answers with sparse_dmap_configured(=
-);
-> > > > without CONFIG_SPARSE_DIRECTMAP, and on other architectures, the
-> > > > answer is no.  Builds with PV support flush as before, and HVM-only
-> > > > builds keep d7bf1b8ea275's saving unless a sparse view is configure=
-d,
-> > > > which nothing does until a later patch.
-> > >
-> > > I think this is not fully correct, in fact I think we need to flush
-> > > the map cache on every return to guest, otherwise you risk leaking
-> > > contents between processes running on the same vCPU (and by extension
-> > > the same physical CPU).
-> > >
-> > > We either need a flush flush before returning to guest, or we need to
-> > > invalidate every page that unmapped from the mapcache.
-> >
-> > This is a good point, but it's raising the bar significantly in terms
-> > of what kinds of attacks we're trying to defend against.  Stack rubble
-> > could technically contain sensitive guest data, but is much harder to
-> > take advantage of than the full direct map, and XSAVE registers in the
-> > xenheap; so it's delayed until later.  I think this is the same kind
-> > of thing: Yes, pages mapped by a hypercall may contain sensitive data
-> > relevant to other processes, but it's kind of like stack rubble: much
-> > less useful.
-> >
-> > My recommendation is that we put this off, past moving XSAVE out of
-> > the xenheap, and treat it as another level of safety.
->
-> Up to a degree there's also a performance aspect here: when you set
-> pg->u.free.need_tlbflush that triggers a host-wide flush on the next
-> allocation (if needed, which is likely the case for systems running
-> HVM-only domains).  However if we do the flush on mapcahce unmap,
-> that can be a single invlpg on the local CPU.  As systems grow larger,
-> a host-wide TLB flush is quite a bottleneck, and it also introduces
-> interference to remote CPUs.
->
-> I would rather not re-enable the usage of pg->u.free.need_tlbflush, as
-> I think for a complete ASI solution we will need to solve this
-> flushing TLB entries when pages are unmapped from the mapcache.  I
-> would possibly leave this with a TODO or comment somewhere.
+On 12.11.2026 12:46, Oleksii Kurochko wrote:
+> vcpu_imsic_init() and vcpu_imsic_deinit() are indirect call targets, as
+> vAPLIC's vcpu_init and vcpu_deinit callbacks, and are defined cf_check
+> accordingly. Their declarations in asm/imsic.h lack the attribute,
+> though, while cf_check is to be present on the declarations as well.
+> 
+> Add cf_check to the declarations, so that they match the definitions.
+> 
+> Fixes: 9164a97efbeb ("xen/riscv: introduce minimal virtual APLIC (vAPLIC) infrastructure")
+> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 
-BTW, the INVLPG approach is significantly more expensive; a single
-copy_from_guest requires walking the guest pagetables, each of which
-needs to be mapped and unmapped; so something as simple as EVTCHN_send
-requires 5 INVLPG's per hypercall.  Hackbench is a guest-IPI-heavy
-workload, whose overhead between v3's approach and v4's appraoch goes
-from 5.5% to 14.9% on my local test box.
+Acked-by: Jan Beulich <jbeulich@suse.com>
 
- -George
 
