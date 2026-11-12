@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1EBF606A8AF
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2026 14:06:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 84DFE606A31C
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2026 14:10:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=W6M16Ica
-Received: from list by lists.xenproject.org with outflank-mailman.1485886.1688928 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=OOtV/xyT
+Received: from list by lists.xenproject.org with outflank-mailman.1485899.1688936 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRVRo-00054N-GI; Thu, 12 Nov 2026 14:06:40 +0000
+	id 1xRVVY-0006vS-1R; Thu, 12 Nov 2026 14:10:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1485886.1688928; Thu, 12 Nov 2026 14:06:40 +0000
+Received: by outflank-mailman (output) from mailman id 1485899.1688936; Thu, 12 Nov 2026 14:10:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRVRo-00054G-CT; Thu, 12 Nov 2026 14:06:40 +0000
-Received: by outflank-mailman (input) for mailman id 1485886;
- Thu, 12 Nov 2026 14:06:39 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xRVRn-00054A-PK
- for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 14:06:39 +0000
+	id 1xRVVX-0006vL-UR; Thu, 12 Nov 2026 14:10:31 +0000
+Received: by outflank-mailman (input) for mailman id 1485899;
+ Thu, 12 Nov 2026 14:10:30 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xRVVW-0006vF-N7
+ for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 14:10:30 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xRVRm-0074xc-Ih
- for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 15:06:38 +0100
-Received: from [10.42.69.3] (helo=localhost)
+ id 1xRVVW-007Puv-3V
+ for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 15:10:30 +0100
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6af5c7e7-2eae-0a2a0a5409dd-0a2a4503e87e-26
- for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 15:06:38 +0100
-Received: from [209.85.221.42] (helo=mail-wr1-f42.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6af5c8ce-8faa-0a2a0a5109dd-0a2a45019712-12
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 15:10:29 +0100
+Received: from [209.85.128.51] (helo=mail-wm1-f51.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6af5c7ee-fae8-0a2a45030019-d155dd2ac16e-3
- for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 15:06:38 +0100
-Received: by mail-wr1-f42.google.com with SMTP id
- ffacd0b85a97d-49412eb1474so2627395f8f.3
- for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 06:06:38 -0800 (PST)
+ id 6af5c8d4-5984-0a2a45010019-d1558033b0e1-3
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 15:10:29 +0100
+Received: by mail-wm1-f51.google.com with SMTP id
+ 5b1f17b1804b1-4a35ac4475dso30516465e9.2
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 06:10:29 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-49835c37bdfsm16773130f8f.22.2026.11.12.06.06.37
+ 5b1f17b1804b1-4ba08ddbe68sm222315795e9.0.2026.11.12.06.10.27
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 12 Nov 2026 06:06:37 -0800 (PST)
+ Thu, 12 Nov 2026 06:10:28 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,58 +51,60 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1794492398; x=1795097198; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1794492628; x=1795097428; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Oxj7K62qqCscxdGLQ7Y5gP4o8MJFzRXhaqya2kTuafg=;
-        b=W6M16IcaO9q7lzSD/fIz64rwKZ0uebrLw7mCcE8y31HST5/F4/qIM6pJclclW2gMqO
-         u/hnh9wJsT62pw0k/1UjIZsWusf/UVdwfCeNaWziLfVPOHqB2CL1PcOWoJaDDTYAXEGa
-         4UvnSm1wDXp1tQ3UhZXo0xTjvyqFe9kl+scb2nYRZ8dUzKDLVZc2icQbM4CDNzJ3ZPBK
-         q6apCkOYorGE10SD48utTwr1PRkKPgshBuz2hMqAlJ+A1qCVUIdQWroEhWEjPf+frWxF
-         oVjdtXR4GMjjc+f12oLIvtZs/d8XYJKyzl1mOlt+3yr+uW8YpQ7R346eHdWjhBQeCGgN
-         m3Hw==
+        bh=r0BdJ6L3J9o/WnmrFkJmyX+LAqZGJWY+1hidMzAaPaE=;
+        b=OOtV/xyTOExrbTdA9g4aznJS/9dO9MiK3rpQniY2tu3EGJehc5ZCw0DeflKNacEHva
+         BDz1hkPpuyh10dJCXVwGWkNgn23deC9LuGcojlqanFeryrjQsa8BOmdwIPuu7IDSrCFG
+         xO6cmxKBqO/GzCgiNDKsRYnGQ4/puX9nJzlfiLTjmNDSnKTv8hRv+bhnfrLujX7TXxLi
+         Z/5U8liU3lVdnVYyKyB57BbCRS0HU+NnSVtsk4D0PHtYp8RFtSa+cjKCdb5Ih+ClAvcR
+         GkbowziyweokDPI3U8OH1HNPce4G/FllmNiaHTwkNYgYWlJ8oXk9i0+MetZM7GPEiMzR
+         g0Ow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794492398; x=1795097198;
+        d=1e100.net; s=20260707; t=1794492628; x=1795097428;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Oxj7K62qqCscxdGLQ7Y5gP4o8MJFzRXhaqya2kTuafg=;
-        b=ebvwZlv9lBbwT8phq9nHmhQBVCru9TiLjql+zLK+OjbU1JdsCPTNvktCQJwFIymHbG
-         nY/noubYONScPmAFOY/9nt3RkJvOHC92LMkc7dlcUaZ7hDUcIWlsssJ7/1hqzJlfj/gf
-         qDqQQoKN5MnMpcks/LqpBjWtGb3bldFG+UzQRyJuknKfswfh5liSbE2+ZZPjOrpynQho
-         WnNYAK2WLB7SziU94pMUr+sriR5o83L86KvULxTJNbovSKWn6X2EgKCt0JtA4q2FrXr5
-         ePxpag4nN/pnK2YU6DeEiJL6hwcQlfxleAe3CRxw16itGWVqyP/uTRe2bQzsnF4f1GFv
-         DjBA==
-X-Forwarded-Encrypted: i=1; AL+hErG1WogFeqFaKsFYL8pqPeogBKO+9p+0YFgKtYYygCoXgFEZShXJlrqwjTAW2Jky6X0oZwEri3BIFKk=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z9UwIclXTBTDTNvywVTtZNPPNxeAJzv2kFEWmRcxKZolxm8arFG
-	gpK4Ljhei2zHtuOKGIGdb9UhBLIdIctk79rg5lMqCEHRp7nsjUkI69La3mvF3O0eXA==
-X-Gm-Gg: AYBFou2PR3Oqka0B+NX0mfTme0XlvTSP6WvCrACqlau45izaQEC9H6j+O/luuRj699j
-	q7/5YW2uff/THSU7D4gDkmjl9b2uU1671wS/tVkMLIw9AWQWwyUqv0j+BTRq99z0XNLjGdQZALn
-	i0JnvFQlaI2nHzClt0pCaJH7Z9EyJCNOeeelza6FIDFKfikfUFfPKMSfTBTHtDR+2d5egrN4nfG
-	b81ztBRvtD77erBe3O6YuyW0LHtdTeiAAJsBl6tFOypHnAQ1Zb3AAd4Qipp9j5/7Z96JZkbHzHJ
-	3WxUcVo9u0LjBUucm5tBslabY0ObuC7SkUp51J/eDFVLyqn1UApFzHsk6vMBC4MyC9yc2FlstX5
-	2iUjSX9EF/d7Rl1ZML0xsa35L6Xu6V+dsmGXOQOtz8P6GYgSgJauNuO+LhCh8Ka8xNgotFbx4OZ
-	81rB++DsdbDB7S0J7jznrK61aO5tQbeQgfwb493TlUUiabAiyywBUUQkURJqaaWZqOOxAMfl+hG
-	dZtHXfckiZsXrBOY1qDc60yR+7w0TPcGzszCUHKKw2WkkKLuYHbKNGgOwrxdxJHN1v6Xc0g4B8B
-	HoF9nY46byACUcNIJ6n69mADPY6UcZqgLCuFWVCAsrCdPN1SeKnQ2OPVX2bHtsj3UIeRCGSuZTy
-	/7MlB4/61UCRDvarj
-X-Received: by 2002:a5d:5d09:0:b0:499:81db:47a3 with SMTP id ffacd0b85a97d-499c7271480mr11068398f8f.11.1794492397901;
-        Thu, 12 Nov 2026 06:06:37 -0800 (PST)
-Message-ID: <e2f8d1c2-fb3d-4232-ab64-ee53d2a4d86e@suse.com>
-Date: Thu, 12 Nov 2026 15:06:36 +0100
+        bh=r0BdJ6L3J9o/WnmrFkJmyX+LAqZGJWY+1hidMzAaPaE=;
+        b=wSMd3K1DBuWxa8fh/INGYA91T7qWik1b059Jk3GAxx1XhlB06DczpyWW7F4/eybTEd
+         L0THq7rLhRh3Mdg858Hu0wFWNLpCoVUjiRjupqZxTD+3d9IXN5mUA1+nCVrgwdUFt7P5
+         w8FrLgK+sab9v2hGKhISFkMBByoYXky1f4EtP+zSs7SHxnrVafaoTQaEPIL1LbCkk+nR
+         78N051AbmVAFUghjyY3mkkt1oRw16VsVo6SIQ5F3bDzytEwWRv6paG7Il2j2FNEg537S
+         yIH+kYmT88G+/Mg6w3n7b8IcGbkJCRetHktf6WJOw23afAyeDoQ9ByUZvi1nE3SNWZYD
+         pH6w==
+X-Forwarded-Encrypted: i=1; AL+hErGaRZ29vhSxDWM2vUHU8y8oBKcfLXmL9CbisUM/IDc8HJfTp5CfpUTlmbjs/38FBG30gpQlOSmM6W8=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z9s1PlOWf5GIdp/CJGwdIFqFRgRKJ+rZ0wSEnwgen/J/C/m4JXf
+	V9D9AV1IMXMdpbpLiCUTYloOJhdKs2I0PnqPMv5/UY5utx2zkLwGKJXbRnR7KKunsahk0wJ0XCW
+	heaKiLg==
+X-Gm-Gg: AYBFou2RH6LL1cbFAPl0GPOxU28Drvw7HBeuqKT1C7vBCsxID3Kq4GwgEdEa+OBOA65
+	bjr6lq1XZszCNjmeoA19jIu5TljnfPudDFnNSmk3JIKbWu8A8ao0Jr4qmOB8mlOKQFEfSfGfMSe
+	AmsSTcAfxV9qWiyRzro9sc3/EPIV37ORAhnSwTu0BX+Rc9vN1a9yRfQ18JQdWOAbogm5Mnrw7Ru
+	LhF3VYtjAtGmAl9sdZM6YT3TVIf7/tLmmd+Y3EC1ftCchKig9Szar6E62qHuSjkAUgqlqOb9PvM
+	IZtkuLhShqL58hErlgy9fWxz2ZAnq1NUuGhcxbV+eVPsMEra6A9pB5S125aeV1Ewig1vgQlvwaM
+	6T8pEVirMgu0K2TCWoDNz0HMG7fc6UF1p12NvTNrXWQj3DVnEU+FUUfwtpJCnbPvVwfFbHIp+4Q
+	Llnsx/X6Tke/zINxiE6aFxwKdtwd3FaN535aZ7miXr/lGD3aOpSdfwL0lkwSlvhoTWbIJ7mLWMr
+	l6iBQuwP5oGw4u5hq1hUeW/AhnMyQrx6njLCrvPHkBMv79lht1jtZ5kYADBAOG1WEMGT9n7zjvi
+	oRTBMlbYHb/XHKvj8a6OV/G2MSUt2HTwfqijZ5S9/ZwJsJz12Km1mtzDs5Z40sSgEfloX4gXWTu
+	Qxguuf0I4AmQgcKNb
+X-Received: by 2002:a05:600c:5488:b0:4a2:e0c:2b0a with SMTP id 5b1f17b1804b1-4ba09376ebdmr110202655e9.16.1794492628512;
+        Thu, 12 Nov 2026 06:10:28 -0800 (PST)
+Message-ID: <d61b44e4-aace-4162-86b9-adc268ecdec2@suse.com>
+Date: Thu, 12 Nov 2026 15:10:27 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 4/6] x86: extend do_mmu_update() to support returning
- the old PTE value
-To: Kevin Lampis <kevin.lampis@citrix.com>
-Cc: andrew.cooper3@citrix.com, roger@xenproject.org, teddy.astie@vates.tech,
- xen-devel@lists.xenproject.org
+Subject: Re: [PATCH v5 2/6] x86: rearrange how mod_l*_entry() functions call
+ UPDATE_ENTRY
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: roger@xenproject.org, teddy.astie@vates.tech,
+ Kevin Lampis <kevin.lampis@citrix.com>, xen-devel@lists.xenproject.org
 References: <20261112100005.324440-1-kevin.lampis@citrix.com>
- <20261112100005.324440-5-kevin.lampis@citrix.com>
+ <20261112100005.324440-3-kevin.lampis@citrix.com>
+ <a3417b2a-11b1-4075-b4d3-fb8ad6cbe482@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -128,68 +130,118 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20261112100005.324440-5-kevin.lampis@citrix.com>
+In-Reply-To: <a3417b2a-11b1-4075-b4d3-fb8ad6cbe482@citrix.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-33051d/1794492398-7468B4E9-617191ED/10/78276251493
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-d62444/1794492629-1E27A757-6BEDC542/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 2194
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+X-purgate-size: 3892
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 12.11.2026 11:00, Kevin Lampis wrote:
-> --- a/xen/arch/x86/mm.c
-> +++ b/xen/arch/x86/mm.c
-> @@ -4123,6 +4123,7 @@ long do_mmu_update(
->          case MMU_NORMAL_PT_UPDATE:
->          case MMU_PT_UPDATE_PRESERVE_AD:
->          case MMU_PT_UPDATE_NO_TRANSLATE:
-> +        case MMU_PT_UPDATE_SWAP:
->          {
->              p2m_type_t p2mt;
->  
-> @@ -4184,37 +4185,79 @@ long do_mmu_update(
->                       update_flags = PTE_UPDATE_PRESERVE_AD;
->                  else if ( cmd == MMU_PT_UPDATE_NO_TRANSLATE )
->                       update_flags = PTE_UPDATE_NO_TRANSLATE;
-> +                else if ( cmd == MMU_PT_UPDATE_SWAP )
-> +                     update_flags = PTE_UPDATE_SWAP;
->  
->                  switch ( page->u.inuse.type_info & PGT_type_mask )
->                  {
->                  case PGT_l1_page_table:
-> +                {
-> +                    l1_pgentry_t ol1e = {};
->                      rc = mod_l1_entry(va, l1e_from_intpte(req.val), mfn,
-> -                                      update_flags, v, pg_owner, NULL);
-> -                    break;
-> +                                      update_flags, v, pg_owner, &ol1e);
->  
-> +                    if ( !rc && cmd == MMU_PT_UPDATE_SWAP )
-> +                    {
-> +                        req.val = ol1e.l1;
+On 12.11.2026 14:56, Andrew Cooper wrote:
+> On 12/11/2026 10:00 am, Kevin Lampis wrote:
+>> bloat-o-meter:
+>> Function                                     old     new   delta
+>> mod_l1_entry                                1186    1113     -73
+>> do_mmu_update                               5546    5392    -154
+> 
+> This was only for the sample I pasted inline.  For this patch it's
+> 
+> add/remove: 0/0 grow/shrink: 1/5 up/down: 10/-641 (-631)
+> Function                                     old     new   delta
+> mod_l1_entry.cold                             56      66     +10
+> mod_l1_entry                                1891    1885      -6
+> mod_l4_entry.cold                             39      31      -8
+> do_mmu_update.cold                           122     112     -10
+> mod_l4_entry                                 917     760    -157
+> do_mmu_update                               5745    5285    -460
+> 
+> although it's not particularly relevant to live in the commit message. 
+> (I use it as a litmus test that the changes are along the expected lines.)
+> 
+> For the commit message, you probably want "Fold two UPDATE_ENTRY() paths
+> together, in preparation for an upcoming change." or so.
+> 
+>>
+>> Signed-off-by: Kevin Lampis <kevin.lampis@citrix.com>
+>>
+>> ---
+>> Changes in v5:
+>> - New patch
+>> ---
+>>  xen/arch/x86/mm.c | 45 +++++++++++++++++++--------------------------
+>>  1 file changed, 19 insertions(+), 26 deletions(-)
+>>
+>> diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+>> index e42cd33c0d09..dc0e0d451c02 100644
+>> --- a/xen/arch/x86/mm.c
+>> +++ b/xen/arch/x86/mm.c
+>> @@ -2197,12 +2197,12 @@ static int mod_l1_entry(l1_pgentry_t *pl1e, l1_pgentry_t nl1e,
+>>  {
+>>      l1_pgentry_t ol1e = l1e_read(pl1e);
+>>      struct domain *pt_dom = pt_vcpu->domain;
+>> -    int rc = 0;
+>>  
+>>      ASSERT(!paging_mode_refcounts(pt_dom));
+>>  
+>>      if ( l1e_get_flags(nl1e) & _PAGE_PRESENT )
+>>      {
+>> +        int rc;
+>>          struct page_info *page = NULL;
+>>          uint32_t disallow = l1_disallow_mask(pt_dom);
+>>  
+>> @@ -2276,16 +2276,14 @@ static int mod_l1_entry(l1_pgentry_t *pl1e, l1_pgentry_t nl1e,
+>>          }
+>>          if ( page )
+>>              put_page(page);
+>> -
+>> -        UPDATE_ENTRY(l1, pl1e, ol1e, nl1e, gl1mfn, pt_vcpu, update_flags);
+>>      }
+>>      else if ( pv_l1tf_check_l1e(pt_dom, nl1e) )
+>>          return -ERESTART;
+>> -    else
+>> -        UPDATE_ENTRY(l1, pl1e, ol1e, nl1e, gl1mfn, pt_vcpu, update_flags);
+>> +
+>> +    UPDATE_ENTRY(l1, pl1e, ol1e, nl1e, gl1mfn, pt_vcpu, update_flags);
+>>  
+>>      put_page_from_l1e(ol1e, pt_dom);
+>> -    return rc;
+>> +    return 0;
+>>  }
+>>  
+>>  
+>> @@ -2300,7 +2298,6 @@ static int mod_l2_entry(l2_pgentry_t *pl2e,
+>>      struct domain *d = vcpu->domain;
+>>      struct page_info *l2pg = mfn_to_page(mfn);
+>>      unsigned long type = l2pg->u.inuse.type_info;
+>> -    int rc = 0;
+>>  
+>>      if ( unlikely(!is_guest_l2_slot(d, type, pgentry_ptr_to_slot(pl2e))) )
+>>      {
+>> @@ -2313,6 +2310,8 @@ static int mod_l2_entry(l2_pgentry_t *pl2e,
+>>  
+>>      if ( l2e_get_flags(nl2e) & _PAGE_PRESENT )
+>>      {
+>> +        int rc;
+>> +
+>>          if ( unlikely(l2e_get_flags(nl2e) & L2_DISALLOW_MASK) )
+>>          {
+>>              gdprintk(XENLOG_WARNING, "Bad L2 flags %x\n",
+>> @@ -2331,17 +2330,15 @@ static int mod_l2_entry(l2_pgentry_t *pl2e,
+>>  
+>>          if ( unlikely((rc = get_page_from_l2e(nl2e, mfn, d, 0)) < 0) )
+>>              return rc;
+> 
+> Looking further through the call tree, I'm now confident that
+> get_page_from_l?e() can't return a positive number.
 
-If you didn't open-code l1e_get_intpte() here, it would become more obvious
-that the INTPTE -> L<n>E done in mod_l<n>_entry() is simply being reversed
-here. If ol1e was of type intpte_t, doing the update in update_intpte() (and
-not UPDATE_ENTRY()) would become feasible. Since intpte_t is a mere alias of
-uint64_t, passing &req.val into mod_l<n>_entry() directly would then also
-become possible. Less redundancy would be the result.
-
-> +                        if ( unlikely(copy_field_to_guest(ureqs, &req, val)) )
-> +                            rc = -EFAULT;
-> +                    }
-> +                    break;
-> +                }
->                  case PGT_l2_page_table:
-> +                {
-
-If changes next to these case labels would remain, please also add the so
-far missing blank lines between non-fall-through case blocks.
+They can return L{2,4}E_RECURSIVE (i.e. 1).
 
 Jan
 
