@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E336606A31C
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2026 09:46:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A50B606A31C
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Nov 2026 09:56:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=OLQpEQhu
-Received: from list by lists.xenproject.org with outflank-mailman.1485355.1688580 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=R9oKnAg9
+Received: from list by lists.xenproject.org with outflank-mailman.1485368.1688590 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRRO7-0002IW-Ps; Thu, 12 Nov 2026 09:46:35 +0000
+	id 1xRRXB-0004FG-LG; Thu, 12 Nov 2026 09:55:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1485355.1688580; Thu, 12 Nov 2026 09:46:35 +0000
+Received: by outflank-mailman (output) from mailman id 1485368.1688590; Thu, 12 Nov 2026 09:55:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRRO7-0002IP-MO; Thu, 12 Nov 2026 09:46:35 +0000
-Received: by outflank-mailman (input) for mailman id 1485355;
- Thu, 12 Nov 2026 09:46:34 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xRRO6-0002IJ-B5
- for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 09:46:34 +0000
+	id 1xRRXB-0004F9-G4; Thu, 12 Nov 2026 09:55:57 +0000
+Received: by outflank-mailman (input) for mailman id 1485368;
+ Thu, 12 Nov 2026 09:55:56 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xRRXA-0004F3-Mz
+ for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 09:55:56 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xRRO5-00GikK-G9
- for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 10:46:33 +0100
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xRRXA-006F9G-2a
+ for xen-devel@lists.xenproject.org; Thu, 12 Nov 2026 10:55:56 +0100
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6af58aed-bab6-0a2a0a5309dd-0a2a4504e836-44
- for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 10:46:33 +0100
-Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6af58d1b-2eae-0a2a0a5409dd-0a2a450bdd4c-32
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 10:55:56 +0100
+Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6af58af8-b57f-0a2a45040019-d1558034dca8-3
- for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 10:46:32 +0100
-Received: by mail-wm1-f52.google.com with SMTP id
- 5b1f17b1804b1-4a60f9474c4so49868705e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 01:46:32 -0800 (PST)
+ id 6af58d2b-b7e8-0a2a450b0019-d155802cdcf7-3
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 10:55:55 +0100
+Received: by mail-wm1-f44.google.com with SMTP id
+ 5b1f17b1804b1-4a60f9474c4so49988805e9.0
+ for <xen-devel@lists.xenproject.org>; Thu, 12 Nov 2026 01:55:55 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb4e258e8dsm88660515e9.4.2026.11.12.01.46.31
+ 5b1f17b1804b1-4bb51de7b91sm25348125e9.6.2026.11.12.01.55.54
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 12 Nov 2026 01:46:31 -0800 (PST)
+ Thu, 12 Nov 2026 01:55:55 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,61 +51,58 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1794476792; x=1795081592; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1794477355; x=1795082155; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=eHoEZOhCLsy6xeN21p2gmlzbTzw9O7oEZoifZdgeMek=;
-        b=OLQpEQhuMcV5H5CCxIRYaHF5yYdFs3ZSZj4T92mmQajRAE1ktiOUjVKn4H3pJw78v3
-         lOwx81cVjMCZfPAfaKWLjF8v81DOu5DNIax5IQgtWmeUtHm+Ip14NOHT1GfQiw7OL8mO
-         VMykRqIiicwXEba3kVRQlni/au5b4NWH6ZsidlPmRZDZBlFUVl7eEHYF785dDz63wShF
-         l2u6MpPKI4DqcJkcm9uTZeYRhnt3fUwqLuzWC6AAth69wu/tBpVz0PKYVHbYoWEdg/BF
-         AE89KkuJxPzO9KgsPR1viwu80UTj1hJVVbwO3WrJ5HQW2fUv4kjIUoCO6YYnyf5bPI9l
-         9g+Q==
+        bh=UMtgbvwOSwc2en+3aRDLSPIcqsvGN2d+qVVWpax/JDY=;
+        b=R9oKnAg9y8ajoG9UhmwxxFtYfb7j1aGih3gllh8dc5fQX2da1bW/snBYT0nilCMKQv
+         8vSfZshvmpYzwnfylahYd7oIwRJVfEipT83S8/3ze8qj9Dydt0o0YWfLuK8iz2RXTM7B
+         5TKIWtJ5JDu1wIYsmhHPpEWPUsVij5u2YVBoWWCSKTU6NoP9tHBiGIN9/FHZxx2F/NbF
+         xOajNsI67HSPfnzp9yEGU8wsaoGsWiYfhs3yqK4m2iBvQPabSvKFBARpJv74MIi9/scl
+         +fR63prRiECg8h+MUvClBQRDZA2ovMqs4Zx7Gx+MOxlBl6wP4IYx5jOpbcv09+3icXqh
+         cYiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794476792; x=1795081592;
+        d=1e100.net; s=20260707; t=1794477355; x=1795082155;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=eHoEZOhCLsy6xeN21p2gmlzbTzw9O7oEZoifZdgeMek=;
-        b=ZnU2lBIhH6QdEYw6D9YpWlkzHEjdLhZhF/6mzrewrQeMXeni5ei8H380WsZi2wh+Uc
-         0WOB5wD8oAH4fTbEQfQDx8EjQ09Cwl8f9J+GjNjrJLOXNHjk1XGS9GXqjM0tIJMi9aUQ
-         NooVo04kLVU1q6hO4hXkv9SXjpp56tyFbHgQQGffrfvH+64g4tUU0c06cZIFHeS+Nmef
-         ZBPBDm8J95vcQgDHJm5MhC89Qad+htW/k+7dVU0F0QVMdaxWpZCEsY9pIrX2N8i2MPFZ
-         Ahxn7YQvZv9lqrF+AWyxoS1NHBX5YkiEPNIXabqQzRF5+sD6DprS82oKsOZcmL72BoZv
-         aVXw==
-X-Forwarded-Encrypted: i=1; AL+hErGPTpU9wKsLDUf4JPXm6s9cyE3z5gFbWtzRjvmSyTPtmdRnKIktzwQLSt02929OTtjQTEt9d7KFrxU=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z8oD9F19nsH9Ej2NJcEY5cB8yzNvGLW5EO7eoZamywywg0FeE3a
-	Crf7UKcNDFmobygQZlJ8uatWw6CFli+KRst9LJzXQZtxmHOMYYKzfj8gJCGUfbeJpQ==
-X-Gm-Gg: AYBFou3Yw5DcEo9etvACdy/BaO84FNZl+37FhAX/jCVQzImp47EANwnXnb4QSHyiAVH
-	yNF1UwoGZyC7tvotmKD2vZvhMuYvbUJz2khZdiOXpAUPIBDm/gt6wfpHUf8Rg0KXM6MfWZoTor9
-	v07LPtFfQl+2rqnGaVPC4jh7HhNqcwvkWk33930UIgTPxH3OAmGiRUxVYmIoi3RnFGo6nqaoyXm
-	zX1x1g0ob+24gJyks2ANe07Y5ldipMHNSH9TM5BtRJypMLddcNAskgavWFe7IPEr7XCWMD4/vPI
-	QrdKXgzbnyyDN2S+E5svWfENBshXhgQ/G/sDKQ+ctTjJPKkd/BX3N1jUuIzNNeNCH8FVFzVstYH
-	vI2N8e71Ywg8XQ/wuTIUmU40kTTFe9sc7ta8nT1qxonw0bitcIEIIGzmexAMbKAxKVAyb6NZran
-	ifSQyv4Urlba3onx0pWYvx6vzxzc4KfUR1saKP9oTVfZi7krrRPVZPt9sCUr+akb5x8OqWz3sZu
-	pc/7BsNwOO+NuFAXxgCVUeZ2l2VFvkNv6bMGNagRs372SiNf3VL7HZed50PX1ilm3p1xndyfS/Y
-	VAeoQ5kvjQbq/5xP+yob04GZD/+Z0RN0MLOGOhM1sSBrDgCznzytw+BGM7IPNJdN6f7zmoaZhCn
-	gcd0blwZqeB+Fco4MO5GioNesB5cLzRgSN7JCLv0=
-X-Received: by 2002:a05:600c:840e:b0:4b0:c1ae:829 with SMTP id 5b1f17b1804b1-4ba093a9516mr94187025e9.30.1794476792158;
-        Thu, 12 Nov 2026 01:46:32 -0800 (PST)
-Message-ID: <ca582cff-5ef1-4bca-ad9d-fec4bcdefc69@suse.com>
-Date: Thu, 12 Nov 2026 10:46:31 +0100
+        bh=UMtgbvwOSwc2en+3aRDLSPIcqsvGN2d+qVVWpax/JDY=;
+        b=tFwXyzTfQcPc1Mzv4XiVY0tknK5zgkK7EP6In3xSBMwhD62S2QC421+SgUfVzaR0qR
+         55zpr/boPSl98BGnm+1JUqfZfjdB4q7b/iJvG61gNGwWBZNsbc9TmNAYRX3DOBxOh+6d
+         VryEj4lsKCXKbI6ijPqduynQtAtF8Pk/9OqSgRnTSojXZ83657KNHR/GnL4MVUjtwDyN
+         NiOuOaSt6Fr/CiBtnoaqfFTvFzbbPi/4NrMAQyhA0cwqLtVw5BvF6RLMvfKij8M7Lq5F
+         uauNviKz3fR31TN3T7fw++FsP6li0kt6WcF7g1EM/W2J1GLnZ44nAYargEBA5WHfE6To
+         EIHw==
+X-Forwarded-Encrypted: i=1; AL+hErHE1+bq+DPgsw27ilx2nkZUbNOZKDW5bukEbymdCjoeO6+whllZDuy5YBBppsMlpVAyJYou0udcNTw=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z+vsWXQjW1RP8w5PCyC0z4X0a++hcpRvK+YzEEI4zSPS2fJwhvc
+	+6em7RSr+owc/37QgwpnPTFUaZeiAR6IH596NXbxBcej0YVS7FUlA3SwODbnwpJg7g==
+X-Gm-Gg: AYBFou27IfCmmZ14vp1EYlCgHEhljd6I+wrz3e6a9KYlp9O0KBOOjfcfjsg7MqGMW1q
+	fJBw56+DJnGdYsb7pNJR7VN+TwUS9U/YGya261p4f4zQbB8etOsyasZRlyMFFixcg7ISnbfIoqb
+	zUP2ieUZz0HKde2lrdaMzwphmfmG2CZklHvDtLzHsupyZvLRuj7EmyTSLgHVntuXXFRaDei79N/
+	QDM9GsehFZTAopD5egw3qHeRf4gakYcUqDFC6hxPhrIx6P4Td74tJqp0lYEJQJZLvh4nTWMOZus
+	yvXLaFglHWMSmzHK+Wvm1Ryvtr3D7em0XCK87Vr6twC5sVBYD3w0vJpD23pq9sWM1JsI4PuW+0k
+	5mtEEZsqqKZY7Um0vxskVtMEo3kPDAFEZfcM1WQS2bUDBJnvC/u0wSLfGqk3Qv8SE9CaUmilSWZ
+	qlGNWOA9S7HTaKhU4zr/S431n6wJiCFFJLJnkGGCimuuX6hI2LoUwn8cFTlgJiU9JkNFbmSvECM
+	nctVXJyI1NvOxDGoKjU+cZEqBx9UHiMDGzWKDlDFxCqOqxCxyREMDz0HLT6XtCpSqJJyspx6Gx9
+	UTIejOvfS0tHod3UNSRBkKdZG349uqLsMeV+6oCXkrsDsQlnwdKu7RfyYO95XLqpDrPLDoUVYFP
+	aMzoPSUqpDG6Qg1lW
+X-Received: by 2002:a05:600c:8b24:b0:4a2:a9:ed87 with SMTP id 5b1f17b1804b1-4ba0938a10dmr87173065e9.19.1794477355506;
+        Thu, 12 Nov 2026 01:55:55 -0800 (PST)
+Message-ID: <3bfdadf2-6e5a-4533-a3a1-d8c86b0bb9d7@suse.com>
+Date: Thu, 12 Nov 2026 10:55:54 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] x86/pv: free the shared_info page switch_compat()
- replaces
-To: George Dunlap <gwd@xenproject.org>
+Subject: Re: [PATCH v3] x86/nestedhvm: process the MSR-load and MSR-store
+ areas of L1's VMCS
+To: Mahmoud Abumandour <ma.mandourr@gmail.com>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
-References: <20261111171441.23101-1-gwd@xenproject.org>
- <20261111171441.23101-2-gwd@xenproject.org>
- <cffc77e4-4904-4958-ae0c-48da52b42327@suse.com>
- <CAFLBxZZHTc7AuRjNtoxrGSn_R53SaEgf23_u_7CidYp9Sta-6g@mail.gmail.com>
+References: <20261112045230.1043334-1-ma.mandourr@gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -131,12 +128,12 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <CAFLBxZZHTc7AuRjNtoxrGSn_R53SaEgf23_u_7CidYp9Sta-6g@mail.gmail.com>
+In-Reply-To: <20261112045230.1043334-1-ma.mandourr@gmail.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1794476792-532CCB50-A14F801A/10/78276251493
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-42698a/1794477356-AB8D19EA-596E9064/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 6288
+X-purgate-size: 898
 X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
@@ -145,121 +142,20 @@ X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 12.11.2026 10:30, George Dunlap wrote:
-> On Thu, Nov 12, 2026 at 8:28 AM Jan Beulich <jbeulich@suse.com> wrote:
->>
->> On 11.11.2026 18:14, George Dunlap wrote:
->>> For a 32-bit PV guest, switch_compat() replaces a shared_info page
->>> above 4GiB with one below, and drops the old page with a bare
->>> put_page().
->>>
->>> Unfortunately, this violates the expected
->>> xenheap-page-shared-with-guest freeing discipline.  Xenheap pages
->>> don't start with a reference count, and aren't put back into the
->>> allocation pool after their reference count drops to zero; they're
->>> removed from the domain's xenheap list, but someone needs to
->>> explicitly call free_xenheap_page() on them for them to return to
->>> their pool.
->>>
->>> d->shared_info here only has a non-zero reference count because it was
->>> shared with a guest; and the thing that holds that reference is the
->>> PGC_allocated bit.  Dropping the reference without having been the one
->>> to clear the PGC_allocated bit puts the page in an invalid state.
->>>
->>> If there are no outstanding references to d->shared_info when
->>> switch_compat() happens, the result for pages moved this way is merely
->>> a memory leak: the page is removed from the xenheap list, and nothing
->>> ever calls free_xenheap_page() on it.  So whenever this path is
->>> triggered, a page is leaked.
->>>
->>> Theoretically, if there *is* an outstanding reference to
->>> d->shared_info, *and* that reference is still held when the domain is
->>> destroyed, then the result is a reference count underflow: Because the
->>> reference count never drops to zero, the page stays on the xenheap
->>> list; then during domain destruction, relinquish_memory() walks the
->>> list, sees the PGC_allocated bit, and calls put_page() again --
->>> potentially dropping the page count to zero.  When the other reference
->>> holder drops their reference, the count underflows.  (put_page() only
->>> ASSERT()s that the count is non-zero, so this wouldn't cause a crash
->>> in a release build; and the page is never freed, so other potential
->>> hazards of general ref count underflow are avoided.)  Fortunately this
->>> is impossible with the in-tree toolstack, which only switches a domain
->>> while building or restoring it, and doesn't have a mapping of
->>> shared_info that it holds across that call.
->>>
->>> Release the page the way domain destruction releases d->shared_info:
->>> drop the allocation reference with put_page_alloc_ref(), as
->>> relinquish_memory() does, which clears PGC_allocated and takes the page
->>> off the xenheap list once nothing else refers to it, and free it with
->>> free_xenheap_page() once an RCU grace period has passed.
->>>
->>> The free waits for the grace period because do_settime() writes every
->>> domain's wallclock holding only wc_lock and the domain list's RCU read
->>> lock, neither of which excludes switch_compat(), through a pointer it
->>> may have read before the switch.  The RCU callback uses the domain's
->>> own RCU head, d->rcu, and holds a reference to the domain.  That
->>> reference keeps the domain from being destroyed, and its struct freed,
->>> before the callback has run.  It also keeps d->rcu's only other user,
->>> domain_destroy(), from queueing the head in the meantime; if the
->>> callback drops the last reference, domain_destroy() queues d->rcu
->>> again, which RCU has finished with by then.  No other reference to the
->>> page is expected: with no memory, the domain has no page tables that
->>> could map it, and the in-tree toolstack holds no mapping of it across
->>> the switch.  If something holds one all the same (a toolstack that
->>> mapped the page before the switch, for instance), leave the page alone
->>> and leak it, rather than free a page that is still in use.
->>>
->>> Freeing the page relies on "tools/libs/guest: re-read dominfo after
->>> changing a PV guest's width on restore", without which restoring a
->>> 32-bit PV guest maps the replaced page by the frame number it read
->>> before the switch.  Once the page is freed, that frame can come back as
->>> one of the restored domain's own pages, which restore would then write
->>> the saved shared_info into.
->>>
->>> Also allocate the new page into a local variable rather than straight
->>> into d->shared_info: if the allocation failed, a concurrent
->>> do_settime() could dereference the NULL pointer before the old value
->>> was restored.
->>>
->>> Fixes: 8a9255405ca6 ("x86/domain: adjust limitation on shared_info allocation below 4G")
->>> Suggested-by: Jan Beulich <jbeulich@suse.com>
->>> Assisted-by: Claude Code:claude-opus-5-5
->>> Signed-off-by: George Dunlap <gwd@xenproject.org>
->>> ---
->>> Changes in v2:
->>> - If the page is still referenced once its allocation reference has
->>>   been dropped, leak it rather than free it (Jan).
->>> - Depends on a new patch, "tools/libs/guest: re-read dominfo after
->>>   changing a PV guest's width on restore".
->>
->> Actually, is there a dependency here as in "must be applied in this
->> order"? It looks to me as if the 2nd patch going in first wouldn't
->> make the situation worse.
+On 12.11.2026 05:52, Mahmoud Abumandour wrote:
+> Nothing in vvmx.c reads the VM-entry MSR-load, VM-exit MSR-store or VM-exit
+> MSR-load area of L1's VMCS, so L2 runs with the listed MSRs as the previous
+> L2 or L1 left them, and L1 gets neither L2's values stored nor its own
+> loaded back. Process each area where the SDM does, with the SDM's checks,
+> an entry as a WRMSR or RDMSR at CPL 0 that L1 does not intercept. A bad
+> VM-entry entry fails the VM entry with exit reason 34 and leaves the VMCS
+> unlaunched, a bad VM-exit entry is a VMX abort, which crashes the domain,
+> and IA32_VMX_MISC now recommends the 512 entries an area may hold.
 > 
-> Before patch 2, the stale frame will always have a refcount of 0, so
-> the map will always fail, causing the restore to fail.  (And in the
-> case of a live migrate, causing the attempted sending domain to
-> resume.)
-> 
-> After patch 2, the stale frame may be in one of three states:
-> 
-> a) Free, refcount of zero.  libxc's map will fail the same way,
-> failing the restore.
-> 
-> b) Allocated to a different domain.  This will also fail, because it
-> will have the wrong domain, failing the restore.
-> 
-> c) Allocated to the same domain.  In this case, the map will succeed:
-> libxc will restore the contents into the wrong page, and then write a
-> truncated frame into the start_info that it passes to the guest.  This
-> is a lot worse than the failed restore.
-> 
-> In Claude's experiments, on an idle system, the page gets re-allocated
-> to the same domain 10/10 times.
+> Fixes: 9390642b7fa5 ("Nested VMX: Switch shadow/virtual VMCS between n1/n2 guests.")
+> Assisted-by: Claude:claude-opus-5-5
+> Signed-off-by: Mahmoud Abumandour <ma.mandourr@gmail.com>
 
-Hmm, all of this to me reads like an analysis of what happens if only
-patch 1 went in. But the question was whether putting in patch 2 without
-patch 1 would cause things to be worse than before.
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
-Jan
 
