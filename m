@@ -2,45 +2,51 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E7201606A333
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Nov 2026 10:55:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EDA8D606BDAF
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Nov 2026 11:00:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=google header.b=up4R3wkj
-Received: from list by lists.xenproject.org with outflank-mailman.1487255.1689708 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=hqZYsjl7
+Received: from list by lists.xenproject.org with outflank-mailman.1487264.1689717 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRowN-0006VM-Vp; Fri, 13 Nov 2026 10:55:31 +0000
+	id 1xRp0U-00071O-IJ; Fri, 13 Nov 2026 10:59:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1487255.1689708; Fri, 13 Nov 2026 10:55:31 +0000
+Received: by outflank-mailman (output) from mailman id 1487264.1689717; Fri, 13 Nov 2026 10:59:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRowN-0006VF-T6; Fri, 13 Nov 2026 10:55:31 +0000
-Received: by outflank-mailman (input) for mailman id 1487255;
- Fri, 13 Nov 2026 10:55:30 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xRowM-0006V9-HO
- for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 10:55:30 +0000
+	id 1xRp0U-00071H-Fb; Fri, 13 Nov 2026 10:59:46 +0000
+Received: by outflank-mailman (input) for mailman id 1487264;
+ Fri, 13 Nov 2026 10:59:45 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1d490296f0006d3f@swg.vates.tech>)
+ id 1xRp0S-000713-RB
+ for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 10:59:45 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xRowL-00Fja4-Qf
- for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 11:55:29 +0100
+ id 1xRp0S-0066eh-0S
+ for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 11:59:44 +0100
 Received: from [10.42.69.6] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6af6ec9a-bab6-0a2a0a5309dd-0a2a4506842c-18
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 11:55:29 +0100
-Received: from [209.85.221.53] (helo=mail-wr1-f53.google.com)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1d490296f0006d3f@swg.vates.tech>)
+ id 6af6ed98-e002-0a2a0a5209dd-0a2a4506968a-12
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 11:59:43 +0100
+Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
  by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6af6eca1-195a-0a2a45060019-d155dd35d8f5-3
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 11:55:29 +0100
-Received: by mail-wr1-f53.google.com with SMTP id
- ffacd0b85a97d-498f5fa5103so317404f8f.2
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 02:55:29 -0800 (PST)
-Received: from [192.168.1.51] (host-78-146-248-75.as13285.net. [78.146.248.75])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-49c77393700sm4028795f8f.18.2026.11.13.02.55.26
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 13 Nov 2026 02:55:28 -0800 (PST)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1d490296f0006d3f@swg.vates.tech>)
+ id 6af6ed9f-195a-0a2a45060019-b9ff1c1294c1-3
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 11:59:43 +0100
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a1d490296f0006d3f.006 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Fri, 13 Nov 2026 10:59:40 +0000
+Received: from [100.68.94.6] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
+ [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 5E1BC81C2F;
+ Fri, 13 Nov 2026 11:59:39 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,252 +55,135 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:To:Subject:Cc:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1794567329; x=1795172129; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:to:subject:cc:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=sS2L53F7LAkyHD5eyE5a18DH85AkaMP9KbWFqjQE5u4=;
-        b=up4R3wkjScABY+tXtepYb6IDWhSDlCi9aM9KGeEG+EWXPwRWFeG2M9lCMjXPRTTEvV
-         K9O5twnFDlQ+nOdCa/6d71SUWYkPTo/DSnNKrIkXrcEmTykhtGwa3Bsuu1B3Oan1SLrN
-         MF57XrEUBhFECbywvKlh8R0NNKJlAUNQDtC2c=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794567329; x=1795172129;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:to:subject:cc:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=sS2L53F7LAkyHD5eyE5a18DH85AkaMP9KbWFqjQE5u4=;
-        b=qTaSLs6VWy7apbOL7W+Pkr8VVXqX3pMySr6Aw61tbtH8IAk2d5J7h2IJMMFlwfFOQx
-         iOdnhYca6ptmkD4iFEJjSBkOXgku01S3+XqNHJKoK4PQqd+4pXZ+p1mYiWZNPdigxOj8
-         PYoBTPE3DDDTqso7F0rwXrH4x5AGg0KvA5qKeo5cCav+Mr+ydu9vyoZ1bzm//DMajiKP
-         BXc0xUwW2xK4DwqlVhVb2bwOlxbJBf8fRLqSDnBaig/mMSyIuAiBgaAebnw9fJUv1pOQ
-         QcDJihUviGt2A81E5B2b4pJB6neRgZRxMFitgoussWaBYArnXQeZrYUdK7OICKx466Yt
-         /FZQ==
-X-Forwarded-Encrypted: i=1; AL+hErFBWpwT3cSEriSSNQNRgFBng0aKbzfkB4dFtvHc5f1ZixGxOluFplgofQEdYfRErGP1II+DUBkmaUw=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z/AdEGSOyIqVf/fhunXpcYaOyOdI5oCU+JRw4V1ZWCSqLiyE96h
-	wITFmoDKDIHvEtheJHqkGTLIv4ElmXwJ/S7gogPQGp6rJdvp30XAEg6pRqUoKk2bPfM=
-X-Gm-Gg: AYBFou1IUuGEQ2vvqVnERgriO9dWrZSLPsk9mxaovAYg7bw9YIYU7U8RXQe6f+POfwn
-	fTaGHPGnHmKLNwQ5ThqKk0RHZOHMv85Us1XTqUUowlOoMg/9r29KJz9HltZTczFhiiZUFrjUbTK
-	euW/l/eCEWhFzh+WI4zpgsqJyvvKEX+1mw0xhtDCd9JkxZGA7J+hlWhXREDt50WO94YA6Uo9Uzb
-	bNlDEE9kl+xe+5zmHq/QofNFOWo+93PyuZDVZBvHGIc+w/QB1IMUJTPUBWkh3qx2R7A3GQw6j1n
-	SinLaWo/MDdwB3r7uqlTcWjg5brOidlRIzoHc45twql+u58HPt49zbvm7D+XU5mnemJchbIlRMA
-	kQ8E7zcYARdyrowAWCPzpdlEj2La//1bGPUpmBcgoo0LBDkB2DwnBObiIpinG8bs8j9K23zUThP
-	0uHaUOvqfzUSWO8Pr5vU74Q2Dt8qv7SbEkKQC9e5sIel8CgbhtETdC3OJae/RFfh2PuhME8c5yE
-	oAmgp/bihOrdzOCBETSCOAW67D8CkTV76VFMB6RHXOpkM4Bhsjl7QmVgXBMlx+7jLRAdEXUPjZy
-	/6v1mxQdVs/OLQNwPPaCr4tQCBpYUWQpC5sZFzc4WmxYQ/XZWna3SkypjB+zVQ11wbUQDQ==
-X-Received: by 2002:a05:6000:430d:b0:48f:bbf3:cf52 with SMTP id ffacd0b85a97d-49c73350e7bmr5274214f8f.52.1794567328782;
-        Fri, 13 Nov 2026 02:55:28 -0800 (PST)
-Message-ID: <5b1832a9-013d-4695-b089-333181157f8a@citrix.com>
-Date: Fri, 13 Nov 2026 10:55:26 +0000
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=WPtP2MQskPM8UmGqKce7n9iWdAsWFlNYMnzHqhZaXaM=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:feedback-id;
+ b=hqZYsjl7ycZMsOd6ZGb9dQneN98adNtlUDnDTneb2mtFrcwiUR+phBTAVBHg4qB1TKEndURlA
+ V6CjtHhEO7dbNVM1Qmw3aEIC+2XGbz8l1CWT07LhNu4/RnYFqVyAtRqRlDDAVl19HNmVH/1egh+
+ oqgrJz1bYXBMthMG9XgNdA/HZ7Utz9ScUf+gNaQX88pP/QYGE7GDYz4YbDISl+T2sU/O5NOH4lB
+ ZtAWIVblAKv178KUYoRHQRmBu4MB80hQm/EbZGN1x/xc6rnwEOvPV14cMWhtkQqr54ZnfE9KP2z
+ B0ydnsbNx91CsUFTva7dwZgMjF7b12Rh89CcP/Nav4Mg==
+X-Zone-Loop: 2d33bed46736319e2d7cbfe9e7a15500c2254f96ee79
+x-campaign-type: default
+x-transaction-id: d761f17d-1bc8-418a-81bd-56ae1ea9aebc
+x-swg-uid: 01-f3e38bbf-5a38-4cbc-9106-376cd72fdef5
+X-Mailer: Sweego
+Message-ID:
+ <1794567580.8631fc262581453bbf619ec5b2062170.1a1d490296f0006d3f@vates.tech>
+x-swg-bid: 1794567580.8631fc262581453bbf619ec5b2062170.1a1d490296f0006d3f
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Date: Fri, 13 Nov 2026 11:59:33 +0100
+Subject: [PATCH] xen/riscv: bound each IMSIC MMIO regset by the per-group
+ hart slots
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Cc: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Teddy Astie <teddy.astie@vates.tech>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Timothy Pearson <tpearson@raptorengineering.com>,
- Ross Lagerwall <ross.lagerwall@citrix.com>
-Subject: Re: [PATCH] xen/link: Don't separate .data.read_mostly from .data
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
- Xen-devel <xen-devel@lists.xenproject.org>
-References: <20261112185824.3302712-1-andrew.cooper3@citrix.com>
- <66c8bb12-1139-4689-99a0-3bef189ba5e9@gmail.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <66c8bb12-1139-4689-99a0-3bef189ba5e9@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-16d1c6/1794567329-F7ACA77B-F4B645E1/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 5138
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yWMQQrCMBBFr1Jm7aBJQMGriItkOk1HSFoyqQild
+ zfR5fu8/3ZQLsIK92GHwm9RWXIDcxqAZp8jo4yNwV7s1RjjcJIPSlIhTEkWHCuSc+bmyfLEBO2
+ 3Fm7Sr/l4/lm38GKqPdSN4JUxFJ9p7tO2nrX6KDnCcXwB0BPLUpIAAAA=
+X-Change-ID: 20261113-fix-imsic-mmio-dt-c3317ac2efec
+To: xen-devel@lists.xenproject.org
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
+ Connor Davis <connojdavis@gmail.com>, 
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>, 
+ Andrew Cooper <andrew.cooper3@citrix.com>, 
+ Anthony PERARD <anthony.perard@vates.tech>, 
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, 
+ Julien Grall <julien@xen.org>, 
+ =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
+ Stefano Stabellini <sstabellini@kernel.org>, 
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794567574; l=2870;
+ i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
+ bh=qoi0+YBmThIl+PFjANGmt1scZgvo0AhtaL3wKpUiWa8=;
+ b=RmpusZsoylYSmOms89fpChUlxKiBGR/KadBUhoEwLIFBkmO9AzJRWRBijlVjw+RBAZZ/4k44j
+ lAmqMeDyavdADKKaQbqqHDW2vWLT8BfjMPQz9vkvWoQiVP6UQ/DKUQj
+X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
+ pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1794567579561
+X-purgate-ID: tlsNG-16d1c6/1794567583-1F6C877B-8358DA42/0/0
+X-purgate-type: clean
+X-purgate-size: 2872
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=4.0.1
+	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 13/11/2026 8:51 am, Oleksii Kurochko wrote:
->
->
-> On 11/12/26 7:58 PM, Andrew Cooper wrote:
->> This appears to be an error in x86 which got copied into all other
->> architectures.  .data.read_mostly is an internal detail, and none of the
->> similar sections get exposed externally.
->>
->> Simply place .data.read_mostly in .data.
->>
->> No functional change.
->>
->> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
->> ---
->> CC: Jan Beulich <jbeulich@suse.com>
->> CC: Roger Pau Monné <roger@xenproject.org>
->> CC: Teddy Astie <teddy.astie@vates.tech>
->> CC: Stefano Stabellini <sstabellini@kernel.org>
->> CC: Julien Grall <julien@xen.org>
->> CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
->> CC: Bertrand Marquis <bertrand.marquis@arm.com>
->> CC: Michal Orzel <michal.orzel@amd.com>
->> CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
->> CC: Baptiste Le Duc <baptiste.le-duc@vates.tech>
->> CC: Timothy Pearson <tpearson@raptorengineering.com>
->> CC: Ross Lagerwall <ross.lagerwall@citrix.com>
->>
->> This is to simplfy the script checking that xen.efi's section
->> attributes/alignments are correct for UEFI SecureBoot.
->> ---
->>   xen/arch/arm/xen.lds.S   | 8 +++-----
->>   xen/arch/ppc/xen.lds.S   | 8 +++-----
->>   xen/arch/riscv/xen.lds.S | 7 ++-----
->>   xen/arch/x86/xen.lds.S   | 4 +---
->>   4 files changed, 9 insertions(+), 18 deletions(-)
->>
->> diff --git a/xen/arch/arm/xen.lds.S b/xen/arch/arm/xen.lds.S
->> index d1bb6c62d208..8d0954c90afd 100644
->> --- a/xen/arch/arm/xen.lds.S
->> +++ b/xen/arch/arm/xen.lds.S
->> @@ -86,16 +86,14 @@ SECTIONS
->>         __ro_after_init_end = .;
->>     } : text
->>   -  .data.read_mostly : {
->> -       *(.data.read_mostly)
->> -  } :text
->> -
->>     . = ALIGN(SMP_CACHE_BYTES);
->>     .data : {                    /* Data */
->> -       *(.data.page_aligned)
->> +       *(.data.read_mostly)
->>            HYPFS_PARAM
->>   +       *(.data.page_aligned)
->> +
->>          *(.data .data.*)
->>          CONSTRUCTORS
->>     } :text
->> diff --git a/xen/arch/ppc/xen.lds.S b/xen/arch/ppc/xen.lds.S
->> index cddb70855307..b2159279169c 100644
->> --- a/xen/arch/ppc/xen.lds.S
->> +++ b/xen/arch/ppc/xen.lds.S
->> @@ -77,16 +77,14 @@ SECTIONS
->>           __ro_after_init_end = .;
->>       } :text
->>   -    DECL_SECTION(.data.read_mostly) {
->> -        *(.data.read_mostly)
->> -    } :text
->> -
->>       . = ALIGN(PAGE_SIZE);
->>       DECL_SECTION(.data) {                    /* Data */
->> -        *(.data.page_aligned)
->> +        *(.data.read_mostly)
->>             HYPFS_PARAM
->>   +        *(.data.page_aligned)
->> +
->>           *(.data .data.*)
->>           CONSTRUCTORS
->>       } :text
->> diff --git a/xen/arch/riscv/xen.lds.S b/xen/arch/riscv/xen.lds.S
->> index 250ee3f36f4f..d1c5ce59c90d 100644
->> --- a/xen/arch/riscv/xen.lds.S
->> +++ b/xen/arch/riscv/xen.lds.S
->> @@ -84,16 +84,13 @@ SECTIONS
->>           __ro_after_init_end = .;
->>       } : text
->>   -    .data.read_mostly : {
->> -        *(.data.read_mostly)
->> -    } :text
->> -
->>       . = ALIGN(PAGE_SIZE);
->>       .data : {                    /* Data */
->> -        *(.data.page_aligned)
->> +        *(.data.read_mostly)
->>             HYPFS_PARAM
->>   +        *(.data.page_aligned)
->>           *(.sdata .sdata.*)
->>           *(.data .data.*)
->>           CONSTRUCTORS
->> diff --git a/xen/arch/x86/xen.lds.S b/xen/arch/x86/xen.lds.S
->> index 925848980219..99802aed4e13 100644
->> --- a/xen/arch/x86/xen.lds.S
->> +++ b/xen/arch/x86/xen.lds.S
->> @@ -295,13 +295,11 @@ SECTIONS
->>       __2M_rwdata_start = .;       /* Start of 2M superpages, mapped
->> RW. */
->>     . = ALIGN(SMP_CACHE_BYTES);
->> -  DECL_SECTION(.data.read_mostly) {
->> +  DECL_SECTION(.data) {
->>          *(.data.read_mostly)
->>            HYPFS_PARAM
->> -  } PHDR(text)
->>   -  DECL_SECTION(.data) {
->>          *(.data.page_aligned)
->>          *(.data .data.*)
->>     } PHDR(text)
->
-> The ordering is preserved, but the alignment between the two isn't.
-> Today the ALIGN() before .data sits between .data.read_mostly and
-> regular .data.  After this patch it sits before .data.read_mostly, and
-> the only thing separating it from *(.sdata/.data) is
-> *(.data.page_aligned), which has no inputs on RISC-V, PPC or Arm with
-> CONFIG_MPU. So the tail of .data.read_mostly will share a cache line
-> with ordinary .data, which is the false sharing __read_mostly is meant
-> to avoid (IIUC).
+imsic_init() requires every MMIO register set to be exactly
+IMSIC_HART_SIZE(guest_index_bits) * nr_parent_irqs bytes, i.e. to cover
+the interrupt files of all harts listed in interrupts-extended. This only
+holds when the DT describes a single register set.
 
-__read_mostly is indeed meant to reduce false sharing, but this patch
-does not introduce any.
+When harts are split into groups (riscv,group-index-bits > 0), each group
+has its own register set, which only covers the harts of that group. For
+example, the SpacemiT V100 IMSIC node describes two 2 MiB register sets,
+each holding 64 hart slots of 32 KiB, with 128 parent interrupts in total.
+Xen expects 4 MiB per register set and fails with:
 
-HYPFS_PARAM should have been read_mostly to begin with, and page
-alignment is greater th cache alignment so there's no sharing there either.
+  IMSIC MMIO size is incorrect 2097152, expected MMIO size: 4194304
 
-~Andrew
+A register set can also be smaller than its slot space, when the number
+of harts in a group is not a power of two.
+
+Check instead that a register set does not exceed the address space of
+one group of BIT(hart_index_bits) hart slots.
+
+While at it, print the MMIO sizes in hex, so they can be compared directly
+with the reg property of the DT node.
+
+Fixes: c9bd8b322ecb ("xen/riscv: imsic_init() implementation")
+Assisted-by: Claude:claude-opus-5-5
+Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+---
+ xen/arch/riscv/imsic.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/xen/arch/riscv/imsic.c b/xen/arch/riscv/imsic.c
+index 44b8640ea3..255ac44b52 100644
+--- a/xen/arch/riscv/imsic.c
++++ b/xen/arch/riscv/imsic.c
+@@ -416,8 +416,8 @@ int __init imsic_init(const struct dt_device_node *node)
+     for ( unsigned int i = 0; i < nr_mmios; i++ )
+     {
+         unsigned int guest_bits = imsic_cfg.guest_index_bits;
+-        unsigned long expected_mmio_size =
+-            IMSIC_HART_SIZE(guest_bits) * nr_parent_irqs;
++        unsigned long max_mmio_regset_size =
++            IMSIC_HART_SIZE(guest_bits) * BIT(imsic_cfg.hart_index_bits, U);
+ 
+         rc = dt_device_get_address(node, i, &mmios[i].base_addr,
+                                    &mmios[i].size);
+@@ -442,11 +442,11 @@ int __init imsic_init(const struct dt_device_node *node)
+             goto imsic_init_err;
+         }
+ 
+-        if ( mmios[i].size != expected_mmio_size )
++        if ( mmios[i].size > max_mmio_regset_size )
+         {
+             rc = -EINVAL;
+-            printk(XENLOG_ERR "%s: IMSIC MMIO size is incorrect %ld, expected MMIO size: %ld\n",
+-                   node->name, mmios[i].size, expected_mmio_size);
++            printk(XENLOG_ERR "%s: IMSIC MMIO regset %u size %#lx larger than max %#lx\n",
++                   node->name, i, mmios[i].size, max_mmio_regset_size);
+             goto imsic_init_err;
+         }
+     }
+
+---
+base-commit: 97bf370375113caf92fccf04e2877fc6b5ff887f
+change-id: 20261113-fix-imsic-mmio-dt-c3317ac2efec
+
+Best regards,
+--  
+Baptiste Le Duc <baptiste.le-duc@vates.tech>
+
 
