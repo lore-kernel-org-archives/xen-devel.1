@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 70A4B606A32D
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Nov 2026 15:49:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3788E606A332
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Nov 2026 15:49:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=dG172Z4Q
-Received: from list by lists.xenproject.org with outflank-mailman.1487730.1690052 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=sVyczNPO
+Received: from list by lists.xenproject.org with outflank-mailman.1487737.1690084 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRtWp-0003NQ-IM; Fri, 13 Nov 2026 15:49:27 +0000
+	id 1xRtWw-0004Ss-Mf; Fri, 13 Nov 2026 15:49:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1487730.1690052; Fri, 13 Nov 2026 15:49:27 +0000
+Received: by outflank-mailman (output) from mailman id 1487737.1690084; Fri, 13 Nov 2026 15:49:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRtWo-0003Ln-OA; Fri, 13 Nov 2026 15:49:26 +0000
-Received: by outflank-mailman (input) for mailman id 1487730;
- Fri, 13 Nov 2026 15:49:24 +0000
+	id 1xRtWv-0004P2-69; Fri, 13 Nov 2026 15:49:33 +0000
+Received: by outflank-mailman (input) for mailman id 1487737;
+ Fri, 13 Nov 2026 15:49:29 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xRtWm-0002z4-PX
- for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 15:49:24 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xRtWq-0003fb-Ru
+ for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 15:49:28 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xRtWm-00AqPc-68
- for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 16:49:24 +0100
-Received: from [10.42.69.11] (helo=localhost)
+ id 1xRtWq-00AqRw-8W
+ for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 16:49:28 +0100
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6af73181-bab6-0a2a0a5309dd-0a2a450bba04-6
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 16:49:24 +0100
-Received: from [209.85.221.54] (helo=mail-wr1-f54.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6af73183-8faa-0a2a0a5109dd-0a2a450a8adc-16
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 16:49:28 +0100
+Received: from [209.85.221.48] (helo=mail-wr1-f48.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6af73183-b7e8-0a2a450b0019-d155dd36ac09-3
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 16:49:24 +0100
-Received: by mail-wr1-f54.google.com with SMTP id
- ffacd0b85a97d-48e3b22e971so549314f8f.0
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 07:49:24 -0800 (PST)
+ id 6af73188-f2d2-0a2a450a0019-d155dd30a8a4-3
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 16:49:28 +0100
+Received: by mail-wr1-f48.google.com with SMTP id
+ ffacd0b85a97d-4910b863b84so1324459f8f.0
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 07:49:28 -0800 (PST)
 Received: from fedora (user-109-243-65-71.play-internet.pl. [109.243.65.71])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-49c5f1c0e0dsm5786493f8f.15.2026.11.13.07.49.22
+ ffacd0b85a97d-49c5f1c0e0dsm5786493f8f.15.2026.11.13.07.49.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Nov 2026 07:49:23 -0800 (PST)
+ Fri, 13 Nov 2026 07:49:27 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,42 +51,42 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794584963; x=1795189763; darn=lists.xenproject.org;
+        d=gmail.com; s=20260707; t=1794584968; x=1795189768; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=IkdgcnMywWPxKm6hXmAPKzX9CTqSlpcehh5F4omzwKM=;
-        b=dG172Z4QdI1vytkAS5BLVJqhgpu2+lyl8IyDLaDiPc3yZbi9qgRG6rkTT77jr2U+Mb
-         xZWVJReIJfhkLt61TvJi0yZh/DzJDx8icaXOZlUpdFKSiFpiB57AESWvLRLym5G6rpAv
-         46eYYNL2O0ZcHhp2h+7pbY6qMDf9rNg/lktsd+M5AAIIHuJiWhCRxQI/h1c9NgGxAl3x
-         eNFHmDNEittm5tFJ+zabVoJgQvFzKC+T1OTi5SNEuORFCoaKXzNPrXXkor4bQLusgkLZ
-         +kMqmx9HPr4EZ8NBxvdZdBbneAwjuLMYIBSAwS42G79G2L8JhYH9vq+/uoreaKzQzkjo
-         bY6A==
+        bh=HnbLkBCaQmJCPPz2OoO2v3ph+wl5t46MRt1Xo8JrrZ4=;
+        b=sVyczNPObZOA8sExYh6iH2vXO+EERhuj16gVW+iFb++GFAlumpwsZh/CsAR1Bf6syY
+         7RuLSqdMAn0c+xksaimXq/Qvzm1IJ7sVcVg7NPJ9KJSlS2s2xSNmIgixr8g3IwtlRQdi
+         V7TaOY9GpzWKIehCwfjs0bSQ17hRLcq1WrBa46ftsgCNxrHZgaIS6qlq/RrkmOWgSUU1
+         sh1LhlL+PK2o8LZZxMcc5E3BAZ5g2wr1myuOoOJCd6w37zSDPMJa40Xet0QS/mat7kG+
+         hN0u7SChzEYTzmuVZj0auuWSDIskWyNxxPoT5ykmzzOwIhc8aRwoc4nBBTr/UCkjf6eR
+         nA5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794584963; x=1795189763;
+        d=1e100.net; s=20260707; t=1794584968; x=1795189768;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=IkdgcnMywWPxKm6hXmAPKzX9CTqSlpcehh5F4omzwKM=;
-        b=r4JxGz/+0q8uUE3yvMjGNq4yR8zvOZBaX/63NsCkwr6eEKzcInlPS5Rk1tiebnWUPY
-         3mHQAJeo7ZrnvvTGPN2Y1aB0Ur7q8/6gucQDUkT34Q0GqOD9p3+fLEz1XpZx3V/bm4OG
-         gkIxTpRHflm4j7flZFLZt7scOQ4r/Vd23oZm5D4wy9eb7JGipbUt+tYmIZUXOCiilZpd
-         C1cd7wyzdcj7Tc/FH10kgxHC17G3+z08Myl695lHcfQq+v2H6wYPsXPOCcHcpXLys9R+
-         uO+HmW38ZK7RZULHCsLEQqnrsfzRH8j8GYd/s1XtTxuiCtXtb/IlfFkxeallUjrXi8JZ
-         5lPA==
-X-Gm-Message-State: APuU4Z93d6qSnZu7jUnOKPEhMIAarGrbQFWVSmjq5phuITCD9WwZQ43u
-	lCClqrfiyk6tqn9dpZb8YjY4VekSsqeTw/pXzbAI7XtqVuNqLuRBF6NRHswJLw==
-X-Gm-Gg: AYBFou0+o5lDSayklWN/+nP8d3dbhhnv10mgLoH2iCKDPpIui2SJ/Qb1XEBuTsnN1xg
-	9wM+EcDlA5pDTFe8z1057tpHgSAS7T8RLd2N2zQc99ERbaCizjyjB/mevBXmczHN8d/ni1IsDwd
-	qk+XyWo0I2bqnZ3zOtHc+DwOgxSEzegQUZ4+7XSAmyqTgG94235Dlp+QPvK5ajxYk1aP6Lxy6aZ
-	RqAtRrIOmijxSO82Uu+LvpIgAteW0pNzuoUTxsIyQFNmx5eChkU8zoHP3s4GH9viqpATCf+ThC0
-	4OuyIEN+2qlL9tLImzXJW0HTzLWrdrkkAWTVAYQ29r339Ob7BRihN1C2brNMhLQHNrzDf6m/Emv
-	PDjUKIMHuKRjRgA7x2hX99DWs+JnItKO6umdtrUGhJrVuNXNbt9GJtYgPbsbgEnF6YoOieces/H
-	SSAQpggkm88b5tDyeCPe8UzQH3mBp09G3ymvPNYgoFjOgvmdprenxm5q57MoFre6Pmu2DfBE7F2
-	HJ1FTYpSdOpU1SKjNCjmAJ64tWQhxqAyH7FH95WFkRXUJFk/HIWLD7yqqSi18JYdFxLArMR/2hg
-	5UsCwcgVSBYMWoU5fwx0V3uZQKMetLxixBXeWN9smXKwutZMmtciXFuxKTlRQg5VX7YDzA==
-X-Received: by 2002:a05:6000:25e7:b0:48f:bb68:4e83 with SMTP id ffacd0b85a97d-49c73164334mr6760861f8f.9.1794584963487;
-        Fri, 13 Nov 2026 07:49:23 -0800 (PST)
+        bh=HnbLkBCaQmJCPPz2OoO2v3ph+wl5t46MRt1Xo8JrrZ4=;
+        b=s2yL5o1rruuz3Cslhq/pSSxGshM5n5nXJLn6Tc/0J/GQb83zxoGh84K4KEvQinq62g
+         JYPrWlCQCGCz7AIzo4NNJGIkbhke8zWSkT0WGwwwwoVcV5M1MJlQKBnxJbyAlT/qmioj
+         IQ3v1vKRTGeRhzovqb0/b/so7GmUGxSVQAHx/qHfLfO9c9rDCnPTPuX3Skpn44VM8+Jk
+         FR+Ly3/7Aoc+vYxNOIGu9xYBrIEPe/3fmT5ZFQz5Zi/QMHF9Rz6GH3pc6I49hh7D6bbN
+         Kp/5Pu26hd4GzVIugZegEGruaZutK+tQR7sB0IWKVcXpqVBhjHjw6Sbt/VdDOGYGE//m
+         KHYA==
+X-Gm-Message-State: APuU4Z+6V8XHYxiinzD1W0ISIM11gS3ef1e5cNL4bBqPMBiQ576WDNaW
+	/PcqpRQvO/ceXlPMxQjrgfOERRq+CuspfAkD16m/zmDDzChQL+T9RC9Z/YZAAQ==
+X-Gm-Gg: AYBFou18WmfZ2jA/9NfoJ5H6fZ6ipCahODewwJi0yubFDD4TgIDpM5K2Ykat2a/wMyN
+	WI0fBBfigKvPM6ZDO0TG4GG1oP8eIkfvdX9FiabtZfrjMfPB8GiYdZLPOl0AO9KghzPPddoxIrA
+	lLG1oTLUhyS8g7v6RbTLcif6jXpQvjdF0d6QTiE1923eWFJTRIJWY41i8Qo1VY/QtiZnNMuMOWM
+	ock68V4+psmFf5HmPiadtGiqyvu+YBzbT7eVAx7gG+8PDvqLfv2rkIO32h6u+y1CPIX43rL3t3h
+	WtpLwOTEnbAYel44+bLUNJfjI+GI154O0f4OkuWk0ep/djf+uGmx93CqjU8VwqBRU3zhaJDRRYE
+	BkUgOMi6RBwLt0NRfgKGnb5vg9aoTyJq1nKvqxuhKZyyREsWWEcOrxf/KiBIeVxDpr0oaEsBobm
+	IqeS9RaHo5KsnIUn9uZYeY6ZCAur6Q7zy5xeKqD8K0vG2KqzsAQgXNhfHijZHsiYvM7lCM7YKxi
+	pigVuONRU4h4JztJVFapov9FzDrLSPF6yeDmX0zahKh6IECX1VvEHn12izjXDPqUSr9Awn0Z8Vm
+	ZvnhHEKlPAM+3wt1rspuvYrCsMask3yeaHLhjIiE0BgwsFNvOzYD9DiN7E8NPOR7foIV
+X-Received: by 2002:a05:6000:1787:b0:495:728a:5f6f with SMTP id ffacd0b85a97d-49c70823789mr6920294f8f.19.1794584967515;
+        Fri, 13 Nov 2026 07:49:27 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -101,18 +101,18 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v4 15/42] xen/riscv: add guest page fault handling stub
-Date: Fri, 13 Nov 2026 16:48:36 +0100
-Message-ID: <7bbd0bce42dcbff08ec4bb12c3831ae498196bfd.1794562488.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v4 19/42] xen/riscv: add guest memory read helper
+Date: Fri, 13 Nov 2026 16:48:40 +0100
+Message-ID: <3fceebfe7b50e267c57d8c2af9fe75e9e9ef3146.1794562488.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <cover.1794562488.git.oleksii.kurochko@gmail.com>
 References: <cover.1794562488.git.oleksii.kurochko@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-42698a/1794584964-ABAD09EA-1100C5D0/10/73395122804
+X-purgate-ID: tlsNG-4011c0/1794584968-585CBCFC-36B7EEFF/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 12386
+X-purgate-size: 10742
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
@@ -121,361 +121,240 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add a handler for guest page faults and hook it into the trap path,
-providing the trap-side entry point for the MMIO dispatch.
+Introduce read_guest() to allow Xen to safely read guest memory using
+HLV/HLVX instructions while reliably capturing trap context.
 
-This will be used, for example, to trap accesses to APLIC registers so
-that a guest can initialize and drive an emulated interrupt controller.
+This is required for instruction fetch emulation and MMIO decoding, where
+Xen must inspect guest memory that may not be directly accessible and may
+fault.
 
-A G-stage (stage-2) fault has one of three causes, reported via scause:
-- Fetch fault: guest tried to execute from a guest-physical address
-  that is unmapped or that G-stage marks non-executable. Never
-  emulatable (nothing to emulate a fetch into). On real hardware
-  this raises an instruction access fault, so Xen reflects the same
-  fault back to the guest. Decided here.
+The implementation is based on kvm_riscv_vcpu_unpriv_read() from Linux,
+with one deviation: the hlv/hlvx instructions translate the guest address
+through the live vsatp/hgatp CSRs, i.e. through the address space of the
+currently running vCPU, so the function can only be called safely for
+current. Instead of taking a struct vcpu argument, it always operates on
+current directly.
 
-- Load fault / Store fault: this is where MMIO emulation hooks in. Not
-  in scope of this patch.
-
-Any of these three faults is instead reported via a pseudoinstruction
-in htinst, when both:
-
-(a) the fault is caused by an implicit memory access for VS-stage
-    address translation, and
-(b) htval holds a nonzero value: the guest-physical address of that
-    VS-stage PTE, not of the guest's original access.
-
-However, none of these paths consult the p2m first, and the future MMIO path
-won't either: RISC-V has no populate-on-demand, no paging, and no
-mem_access, so every guest mapping is established eagerly. A G-stage
-fault therefore never indicates a mapping Xen could lazily resolve to
-let the access complete.
-
-resolve_faulting_gpa() is a stub which always fails for now, so any guest
-page fault other than one taken on an implicit access for VS-stage
-translation currently crashes the domain. That one is reflected to the
-guest through trap_redirect(), which is still a BUG_ON() placeholder
-though, and so takes the host down. This is no worse than before this
-patch, where these traps fell through to do_unexpected_trap() and die().
+do_trap() looks up the exception table for any trap taken in Xen
+context, so a fault of these accesses reaches its fixup. Update the
+comments there, which still name only probing accesses and say that Xen
+can't take a guest page fault itself.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in v4:
- - Drop the from_guest local and the paragraph on it in the commit
-   message: "xen/riscv: look up the exception table for any trap taken
-   in Xen context" introduces it now.
- - Update the commit message.
- - Rewrite the comment ahead of the htinst_is_pseudo() check along the
-   lines of the commit message.
- - Drop __func__ from the domain_crash() messages: they are unique
-   enough.
- - Drop the comment ahead of the definition of trap_redirect(): it
-   duplicates the one on its declaration.
+ - Update the comments in do_trap() on the exception table lookup and
+   on the guest page fault case. "xen/riscv: look up the exception table
+   for any trap taken in Xen context" used to do that, but went to
+   staging without it.
+ - Move the comment describing read_guest() to its declaration in
+   asm/guest_access.h.
+ - Explain the check of bits[1:0] of the first halfword fetched by
+   read_guest().
 ---
 Changes in v3:
- - Update the commit message.
- - Make resolve_faulting_gpa() return an error, which the caller checks.
- - Add a FIXME about guest page tables residing in emulated MMIO.
- - Don't refer to fixup_exception() in the comment ahead of
-   BUG_ON(!from_guest): it isn't consulted for guest page faults yet.
- - Mention the from_guest local in the commit message.
- - Say in the comment above resolve_faulting_gpa() that it stores the address
-   in @gf->gpa.
- - Make emulate_store() take a pointer to const, as emulate_load() does:
-   neither modifies *gf.
+ - Rename riscv_read_guest() to read_guest().
+ - Document that @trap must be zero-initialised by the caller: it is
+   written only when an access faults, so trap->scause == 0 on return is
+   what tells the caller that the read succeeded.
+ - Drop the ASSERT() on hstatus.SPV: vcpu_guest_cpu_user_regs(current)
+   is the guest frame whatever context Xen is in, so SPV is always set in
+   it and the check couldn't catch a call made from a nested trap. State
+   in the comment above read_guest() that it must not be called from a
+   nested trap taken in HS-mode instead.
+ - Declare read_guest() in asm/guest_access.h.
 ---
 Changes in v2:
- - Introduce struct guest_fault.
- - Change the prototypes of emulate_{load,store}() to take a non-const
-   struct guest_fault, as emulation has to write the destination
-   register and advance sepc.
- - Add handling of pseudoinstructions before the call of
-   emulate_{load,store}.
- - Rename get_fault_gpa to resolve_faulting_gpa and change its prototype
-   to take struct guest_fault.
- - Add handling of CAUSE_FETCH_GUEST_PAGE_FAULT now.
- - Document why the p2m is not consulted before a fault is injected, and
-   add a BUILD_BUG_ON() on CONFIG_VM_EVENT to catch that assumption
-   breaking.
- - Print the fault cause in the domain_crash() message rather than
-   deriving an access type string which cannot cover every case.
- - Move code to introduced emulate.c instead of having it in traps.c
+ - Rename riscv_vcpu_unpriv_read() to riscv_read_guest() and make the guest
+   address the first parameter. "unprivileged" described how hlv/hlvx perform
+   the access rather than what the helper is for, and "unprivileged guest"
+   reads as a synonym for DomU although the helper works for any domain.
+ - Drop the hstatus save/restore and the local_irq_save() protecting it:
+   hstatus already belongs to the vCPU which trapped, as Xen never installs
+   a value of its own and does not reschedule before returning to the guest.
+   ASSERT() hstatus.SPV in the saved copy instead, which also documents that
+   the helper is only usable while handling a trap from a guest.
+ - Poison val with ~0UL and make [val] "+&r": the fixup for the first access
+   resumes past the loads without writing it, so a caller which checks
+   trap->scause is no longer handed an uninitialized value.
+ - Describe the trap_info write with a "+m" (*trap) operand instead of a
+   "memory" clobber; the exception handler writes that structure and nothing
+   else.
+ - Combine the two halfwords with slli/or instead of sll/add, and use bnez
+   for the instruction length check.
+ - Turn the hlv.d/hlv.w selection into #if/#elif with an #error default,
+   rather than silently using hlv.w for anything that is not RV64.
+ - Document that at most two halfwords are fetched, i.e. that encodings
+   wider than 32 bits are unsupported and cannot be completed by calling the
+   helper again at guest_addr + 4, since the length check would then be
+   applied to a continuation halfword.
 ---
 ---
- xen/arch/riscv/Makefile              |   1 +
- xen/arch/riscv/emulate.c             | 177 +++++++++++++++++++++++++++
- xen/arch/riscv/include/asm/emulate.h |  10 ++
- xen/arch/riscv/include/asm/traps.h   |   3 +
- xen/arch/riscv/traps.c               |  18 +++
- 5 files changed, 209 insertions(+)
- create mode 100644 xen/arch/riscv/emulate.c
- create mode 100644 xen/arch/riscv/include/asm/emulate.h
+ xen/arch/riscv/guestcopy.c                | 68 +++++++++++++++++++++++
+ xen/arch/riscv/include/asm/guest_access.h | 28 ++++++++++
+ xen/arch/riscv/traps.c                    | 13 +++--
+ 3 files changed, 104 insertions(+), 5 deletions(-)
 
-diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
-index 5454517724bd..2b84dace6bd5 100644
---- a/xen/arch/riscv/Makefile
-+++ b/xen/arch/riscv/Makefile
-@@ -6,6 +6,7 @@ obj-y += domain.o
- obj-y += domain-build.init.o
- obj-$(CONFIG_DOM0LESS_BOOT) += dom0less-build.init.o
- obj-$(CONFIG_EARLY_PRINTK) += early_printk.o
-+obj-y += emulate.o
- obj-y += entry.o
- obj-y += extable.o
- obj-y += guestcopy.o
-diff --git a/xen/arch/riscv/emulate.c b/xen/arch/riscv/emulate.c
-new file mode 100644
-index 000000000000..de8c09fe1505
---- /dev/null
-+++ b/xen/arch/riscv/emulate.c
-@@ -0,0 +1,177 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+
-+/*
-+ * RISC-V instruction emulation for trapped guest accesses
-+ */
-+
-+#include <xen/bug.h>
-+#include <xen/errno.h>
-+#include <xen/sched.h>
-+#include <xen/types.h>
-+
-+#include <asm/csr.h>
-+#include <asm/current.h>
-+#include <asm/emulate.h>
-+#include <asm/riscv_encoding.h>
+diff --git a/xen/arch/riscv/guestcopy.c b/xen/arch/riscv/guestcopy.c
+index 8a89212e0bea..283a96322caa 100644
+--- a/xen/arch/riscv/guestcopy.c
++++ b/xen/arch/riscv/guestcopy.c
+@@ -6,6 +6,7 @@
+ #include <xen/string.h>
+ 
+ #include <asm/guest_access.h>
 +#include <asm/traps.h>
-+
-+/*
-+ * The hardware-reported details of a guest page fault, gathered once by
-+ * handle_guest_page_fault() and passed down to the emulation of the faulted
-+ * access.
-+ */
-+struct guest_fault {
-+    /* The guest register state. */
-+    struct cpu_user_regs *regs;
-+    /* scause: a fetch, a load or a store/AMO guest page fault. */
-+    unsigned long cause;
-+    /*
-+     * htinst: the trapped instruction in its transformed form, or one of the
-+     * special values (zero, or a pseudoinstruction).
-+     */
-+    unsigned long htinst;
-+    /* htval: as written by hardware; see resolve_faulting_gpa(). */
-+    unsigned long htval;
-+    /* stval: the guest virtual address of the faulting access. */
-+    unsigned long stval;
-+    /* The faulting guest physical address, filled by resolve_faulting_gpa(). */
-+    paddr_t gpa;
-+};
-+
-+/*
-+ * Is @htinst one of the special pseudoinstruction values, reported for a guest
-+ * page fault taken on an implicit memory access done for VS-stage address
-+ * translation?
-+ *
-+ * It is enough to check only bits[1:0] as according to the spec:
-+ *
-+ * The value is one of the special pseudoinstructions defined later, all of
-+ * which have bits 1:0 equal to 00.
-+ */
-+static bool htinst_is_pseudo(unsigned long htinst)
-+{
-+    return htinst && !(htinst & 3);
-+}
-+
-+/*
-+ * Reconstruct the guest physical address the access faulted on into @gf->gpa.
-+ */
-+static int resolve_faulting_gpa(struct guest_fault *gf)
-+{
-+    return -EOPNOTSUPP;
-+}
-+
-+static int emulate_load(const struct guest_fault *gf)
-+{
-+    return -EOPNOTSUPP;
-+}
-+
-+static int emulate_store(const struct guest_fault *gf)
-+{
-+    return -EOPNOTSUPP;
-+}
-+
-+static void inject_access_fault(const struct guest_fault *gf)
-+{
-+    struct trap_info utrap = {
-+        .sepc = gf->regs->sepc,
-+        .stval = gf->stval,
-+    };
-+
-+    switch ( gf->cause )
-+    {
-+    case CAUSE_FETCH_GUEST_PAGE_FAULT:
-+        utrap.scause = CAUSE_FETCH_ACCESS;
-+        break;
-+
-+    case CAUSE_LOAD_GUEST_PAGE_FAULT:
-+        utrap.scause = CAUSE_LOAD_ACCESS;
-+        break;
-+
-+    case CAUSE_STORE_GUEST_PAGE_FAULT:
-+        utrap.scause = CAUSE_STORE_ACCESS;
-+        break;
-+
-+    default:
-+        domain_crash(current->domain, "Impossible cause (%#lx)?\n", gf->cause);
-+        return;
-+    }
-+
-+    trap_redirect(&utrap);
-+}
-+
-+void handle_guest_page_fault(struct cpu_user_regs *regs, unsigned long cause)
-+{
-+    struct guest_fault gf = {
-+        .regs = regs,
-+        .cause = cause,
-+        .gpa = INVALID_PADDR,
-+    };
-+    int rc;
-+
-+    gf.htinst = csr_read(CSR_HTINST);
-+    gf.htval = csr_read(CSR_HTVAL);
-+    gf.stval = csr_read(CSR_STVAL);
-+
-+    /*
-+     * htinst reports one of the special pseudoinstruction values when both:
-+     *   (a) the fault is caused by an implicit memory access for VS-stage
-+     *       address translation
-+     *   (b) htval holds a nonzero value: the guest physical address of that
-+     *       VS-stage PTE, not of the guest's original access, which is
-+     *       unknown as VS-stage translation didn't complete.
-+     *
-+     * No access to emulate then: to match bare hardware behavior, inject an
-+     * access fault of the ORIGINAL access type (Instruction, Load, or
-+     * Store/AMO) that initiated the address translation.
-+     *
-+     * FIXME: This assumes that guest page tables never reside in an emulated
-+     * MMIO region, i.e. that an implicit access faulting at G-stage always
-+     * targets an unpopulated GPA. Guests may (even transiently) place page
-+     * tables in MMIO-backed memory, e.g. a video frame buffer. Supporting
-+     * that would require walking the VS-stage page tables in software,
-+     * accessing the PTEs (including A/D updates) through the MMIO handlers,
-+     * and then emulating the original access, instead of injecting a fault.
-+     */
-+    if ( htinst_is_pseudo(gf.htinst) )
-+    {
-+        inject_access_fault(&gf);
-+
-+        return;
-+    }
-+
-+    rc = resolve_faulting_gpa(&gf);
-+    if ( rc )
-+        goto out;
-+
-+    switch ( cause )
-+    {
-+    case CAUSE_LOAD_GUEST_PAGE_FAULT:
-+        rc = emulate_load(&gf);
-+        break;
-+
-+    case CAUSE_STORE_GUEST_PAGE_FAULT:
-+        rc = emulate_store(&gf);
-+        break;
-+
-+    case CAUSE_FETCH_GUEST_PAGE_FAULT:
-+        /*
-+         * Guest is trying to reach unmapped/unpopulated, or G-stage PTE doesn't
-+         * allow execution (X=0). Generate fetch fault in this case.
-+         */
-+        inject_access_fault(&gf);
-+        return;
-+
-+    default:
-+        ASSERT_UNREACHABLE();
-+        rc = -EOPNOTSUPP;
-+
-+        break;
-+    }
-+
-+ out:
-+    if ( rc )
-+        domain_crash(current->domain,
-+                     "unable to handle guest page fault (cause=%#lx) at gpa %#"PRIpaddr"\n",
-+                     cause, gf.gpa);
-+}
-diff --git a/xen/arch/riscv/include/asm/emulate.h b/xen/arch/riscv/include/asm/emulate.h
-new file mode 100644
-index 000000000000..59e69ca6794c
---- /dev/null
-+++ b/xen/arch/riscv/include/asm/emulate.h
-@@ -0,0 +1,10 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+
-+#ifndef RISCV_EMULATE_H
-+#define RISCV_EMULATE_H
-+
-+struct cpu_user_regs;
-+
-+void handle_guest_page_fault(struct cpu_user_regs *regs, unsigned long cause);
-+
-+#endif /* RISCV_EMULATE_H */
-diff --git a/xen/arch/riscv/include/asm/traps.h b/xen/arch/riscv/include/asm/traps.h
-index 3f2b5b7ccb5f..a7c79ae6165b 100644
---- a/xen/arch/riscv/include/asm/traps.h
-+++ b/xen/arch/riscv/include/asm/traps.h
-@@ -17,6 +17,9 @@ void do_trap(struct cpu_user_regs *cpu_regs);
- void handle_trap(void);
- void trap_init(void);
  
-+/* Reflect @trap back to the guest, i.e. enter its VS-mode trap handler. */
-+void trap_redirect(const struct trap_info *trap);
-+
- #endif /* __ASSEMBLER__ */
- 
- #endif /* RISCV_TRAPS_H */
-diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
-index efeba0a9ce03..db8873d1e43f 100644
---- a/xen/arch/riscv/traps.c
-+++ b/xen/arch/riscv/traps.c
-@@ -14,6 +14,7 @@
- 
- #include <asm/extable.h>
- #include <asm/cpufeature.h>
-+#include <asm/emulate.h>
- #include <asm/intc.h>
- #include <asm/processor.h>
- #include <asm/riscv_encoding.h>
-@@ -225,6 +226,18 @@ void do_trap(struct cpu_user_regs *cpu_regs)
-         vsbi_handle_ecall(cpu_regs);
-         break;
- 
-+    case CAUSE_FETCH_GUEST_PAGE_FAULT:
-+    case CAUSE_LOAD_GUEST_PAGE_FAULT:
-+    case CAUSE_STORE_GUEST_PAGE_FAULT:
-+        /*
-+         * Xen doesn't access guest memory, so it can't take a guest page
-+         * fault itself: only a guest can get here.
-+         */
-+        BUG_ON(!from_guest);
-+
-+        handle_guest_page_fault(cpu_regs, cause);
-+        break;
-+
-     case CAUSE_ILLEGAL_INSTRUCTION:
-         if ( do_bug_frame(cpu_regs, pc) >= 0 )
-         {
-@@ -294,3 +307,8 @@ enum mc_disposition arch_do_multicall_call(struct mc_state *state)
-     BUG_ON("unimplemented");
-     return mc_continue;
+ #define COPY_from_guest     0U
+ #define COPY_to_guest       BIT(0, U)
+@@ -114,3 +115,70 @@ unsigned long copy_to_guest_phys(struct domain *d, paddr_t gpa, void *buf,
+     return copy_guest(buf, gpa, len, GPA_INFO(d),
+                       COPY_to_guest | COPY_gpa);
  }
 +
-+void trap_redirect(const struct trap_info *trap)
++unsigned long read_guest(unsigned long guest_addr, bool read_insn,
++                         struct trap_info *trap)
 +{
-+    BUG_ON("unimplemented");
++    /*
++     * Poison the result: if the very first access faults, the fixup skips
++     * over the loads without writing it. Callers must check trap->scause.
++     */
++    unsigned long val = ~0UL, tmp;
++
++    /*
++     * hlv/hlvx use hstatus.SPVP for the privilege of the access, and the
++     * live vsatp/hgatp for the translation. Xen never installs a value of
++     * its own in hstatus (it is only saved on trap entry and restored
++     * before sret) and it doesn't reschedule before returning to the
++     * guest, so all three still belong to the vCPU which trapped.
++     */
++    if ( read_insn )
++    {
++        asm volatile ( "\n"
++            "1: hlvx.hu %[val], (%[addr])\n"
++            ASM_EXTABLE_TRAP_INFO(1b, 3f, %[ti])
++            /*
++             * bits[1:0] != 0b11: 16-bit (compressed) instruction, nothing
++             * more to read.
++             */
++            "   andi %[tmp], %[val], 3\n"
++            "   addi %[tmp], %[tmp], -3\n"
++            "   bnez %[tmp], 3f\n"
++            "   addi %[addr], %[addr], 2\n"
++            "\n"
++            "2: hlvx.hu %[tmp], (%[addr])\n"
++            ASM_EXTABLE_TRAP_INFO(2b, 3f, %[ti])
++            "   slli %[tmp], %[tmp], 16\n"
++            "   or %[val], %[val], %[tmp]\n"
++            "3:\n"
++        : [val] "+&r" (val), [tmp] "=&r" (tmp), [addr] "+&r" (guest_addr),
++          "+m" (*trap)
++        : [ti] "r" (trap) );
++
++        /*
++         * Although HLVX instructions' explicit memory accesses require execute
++         * permissions, they still raise the same exceptions as other load
++         * instructions, rather than raising fetch exceptions instead.
++         */
++        if ( trap->scause == CAUSE_LOAD_PAGE_FAULT )
++            trap->scause = CAUSE_FETCH_PAGE_FAULT;
++    }
++    else
++    {
++        asm volatile ( "\n"
++            "1: "
++#if defined(CONFIG_RISCV_64)
++            "hlv.d %[val], (%[addr])\n"
++#elif defined(CONFIG_RISCV_32)
++            "hlv.w %[val], (%[addr])\n"
++#else
++# error "unsupported RISC-V variant: no hlv for a machine word"
++#endif
++            "2:\n"
++            ASM_EXTABLE_TRAP_INFO(1b, 2b, %[ti])
++        : [val] "+&r" (val), "+m" (*trap)
++        : [addr] "r" (guest_addr), [ti] "r" (trap) );
++    }
++
++    return val;
 +}
+diff --git a/xen/arch/riscv/include/asm/guest_access.h b/xen/arch/riscv/include/asm/guest_access.h
+index e94aa838a3e7..77911bffbdbf 100644
+--- a/xen/arch/riscv/include/asm/guest_access.h
++++ b/xen/arch/riscv/include/asm/guest_access.h
+@@ -5,6 +5,7 @@
+ #include <xen/types.h>
+ 
+ struct domain;
++struct trap_info;
+ 
+ unsigned long raw_copy_to_guest(void *to, const void *from, unsigned len);
+ unsigned long raw_copy_from_guest(void *to, const void *from, unsigned len);
+@@ -25,6 +26,33 @@ unsigned long raw_clear_guest(void *to, unsigned int len);
+ unsigned long copy_to_guest_phys(struct domain *d, paddr_t gpa, void *buf,
+                                  unsigned long len);
+ 
++/*
++ * Read machine word from guest memory
++ *
++ * @guest_addr: Guest address to read
++ * @read_insn: Flag representing whether we are reading instruction
++ * @trap: Output pointer to trap details if something went wrong during read.
++ *        It must be zero-initialised by the caller: it is written only when
++ *        an access faults, so trap->scause == 0 on return is what tells the
++ *        caller that the read succeeded.
++ *
++ * The hlv/hlvx instructions translate guest_addr through the live
++ * vsatp/hgatp CSRs, so the read is only meaningful for the address
++ * space of the currently running vCPU. It must therefore only be called
++ * while handling a trap taken from that vCPU, never from a nested trap
++ * taken in HS-mode, which may have interrupted Xen at a point where
++ * hstatus, vsatp or hgatp don't belong to the vCPU.
++ *
++ * At most two halfwords are fetched when @read_insn is true, i.e. encodings
++ * wider than 32 bits are not supported. Such an encoding cannot be completed
++ * by calling this function again at @guest_addr + 4: the length check is
++ * applied to the first halfword read, which would then be a continuation of
++ * the instruction rather than its opcode. It is up to the caller to reject
++ * anything that is neither a 16- nor a 32-bit encoding.
++ */
++unsigned long read_guest(unsigned long guest_addr, bool read_insn,
++                         struct trap_info *trap);
++
+ #endif /* RISCV_GUEST_ACCESS_H */
+ /*
+  * Local variables:
+diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
+index 3672774271ff..97e604091458 100644
+--- a/xen/arch/riscv/traps.c
++++ b/xen/arch/riscv/traps.c
+@@ -197,9 +197,11 @@ void do_trap(struct cpu_user_regs *cpu_regs)
+     bool from_guest = cpu_regs->hstatus & HSTATUS_SPV;
+ 
+     /*
+-     * A synchronous trap taken in Xen context may come from a probing access
+-     * like csr_read_safe(), covered by an exception table entry which resumes
+-     * execution past the faulting instruction.
++     * A synchronous trap taken in Xen context may come from an access done on
++     * a vCPU's behalf, e.g. the hlv/hlvx sequences in read_guest(),
++     * or from a probing access like csr_read_safe(). Both are covered by
++     * exception table entries which record the fault details for the caller
++     * and resume execution past the faulting instruction.
+      *
+      * Traps taken from the guest must never be fixed up: sepc is then a guest
+      * address, which the guest could point at an address listed in the
+@@ -230,8 +232,9 @@ void do_trap(struct cpu_user_regs *cpu_regs)
+     case CAUSE_LOAD_GUEST_PAGE_FAULT:
+     case CAUSE_STORE_GUEST_PAGE_FAULT:
+         /*
+-         * Xen doesn't access guest memory, so it can't take a guest page
+-         * fault itself: only a guest can get here.
++         * A guest page fault taken in Xen context comes from an hlv/hlvx
++         * access made on a vCPU's behalf and is dealt with by the
++         * fixup_exception() above, so only a guest can get here.
+          */
+         BUG_ON(!from_guest);
+ 
 -- 
 2.56.1
 
