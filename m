@@ -2,46 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98F8B606B12F
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Nov 2026 10:18:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A02A0606A31C
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Nov 2026 10:26:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=amutable-com.20260707.gappssmtp.com header.i=@amutable-com.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=hlZm1rKC
-Received: from list by lists.xenproject.org with outflank-mailman.1487111.1689645 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=amutable-com.20260707.gappssmtp.com header.i=@amutable-com.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=NSd45dLl
+Received: from list by lists.xenproject.org with outflank-mailman.1487192.1689654 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRoLy-0005xK-Dg; Fri, 13 Nov 2026 10:17:54 +0000
+	id 1xRoTq-0000Zz-4w; Fri, 13 Nov 2026 10:26:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1487111.1689645; Fri, 13 Nov 2026 10:17:54 +0000
+Received: by outflank-mailman (output) from mailman id 1487192.1689654; Fri, 13 Nov 2026 10:26:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRoLy-0005xB-AB; Fri, 13 Nov 2026 10:17:54 +0000
-Received: by outflank-mailman (input) for mailman id 1487111;
- Fri, 13 Nov 2026 10:17:53 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xRoTq-0000Zs-2G; Fri, 13 Nov 2026 10:26:02 +0000
+Received: by outflank-mailman (input) for mailman id 1487192;
+ Fri, 13 Nov 2026 10:26:01 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <alex@amutable.com>) id 1xRoLx-0005wo-24
- for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 10:17:53 +0000
+ (envelope-from <alex@amutable.com>) id 1xRoTp-0000Zm-I4
+ for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 10:26:01 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xRoLw-004bna-F6
- for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 11:17:52 +0100
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xRoTo-006kgJ-Qd
+ for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 11:26:00 +0100
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <alex@amutable.com>)
- id 6af6e3c4-bab6-0a2a0a5309dd-0a2a4508c5c6-40
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 11:17:52 +0100
-Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6af6e5b6-2eae-0a2a0a5409dd-0a2a4505da18-16
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 11:26:00 +0100
+Received: from [74.125.225.138] (helo=mail-wm2-f10.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <alex@amutable.com>)
- id 6af6e3d0-f659-0a2a45080019-d1558032f094-3
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 11:17:52 +0100
-Received: by mail-wm1-f50.google.com with SMTP id
- 5b1f17b1804b1-4a35d5d4a20so13807615e9.2
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 02:17:52 -0800 (PST)
+ id 6af6e5b8-4cb1-0a2a45050019-4a7de18ac8f2-3
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 11:26:00 +0100
+Received: by mail-wm2-f10.google.com with SMTP id
+ 5b1f17b1804b1-4b80834ce1aso1170655e9.1
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 02:26:00 -0800 (PST)
 Received: from [10.0.0.233] (tmo-086-54.customers.d1-online.com.
  [80.187.86.54]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-49c7da37b19sm3937770f8f.5.2026.11.13.02.17.49
+ 5b1f17b1804b1-4bb4e2538b9sm244439965e9.1.2026.11.13.02.25.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Nov 2026 02:17:51 -0800 (PST)
+ Fri, 13 Nov 2026 02:25:59 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,50 +52,51 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=amutable-com.20260707.gappssmtp.com header.i="@amutable-com.20260707.gappssmtp.com" header.h="MIME-Version:User-Agent:Content-Transfer-Encoding:Content-Type:References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=amutable-com.20260707.gappssmtp.com; s=20260707; t=1794565072; x=1795169872; darn=lists.xenproject.org;
+        d=amutable-com.20260707.gappssmtp.com; s=20260707; t=1794565560; x=1795170360; darn=lists.xenproject.org;
         h=mime-version:user-agent:content-transfer-encoding:content-type
          :references:in-reply-to:date:cc:to:from:subject:message-id:from:to
          :cc:subject:date:message-id:reply-to:content-type;
-        bh=zqPqkCGOaO5RL/5NE1UeXRxAO7AqEHmUDDsiHSGxDsA=;
-        b=hlZm1rKCzkJmMvwLl5dOVO79uZFzPa7ZaWPlVbp1TF+freINcMnly6npF6lnrWyeId
-         DKznxNYcsX7bFczy9S3t/f8AnD5k21uUa4nflwOGHVeD7WQ/UyL+w1O/nM5MnySa/c8z
-         e/edVaqSm12Cz2IAmtGcmPMp3lr6il3QT6JULUETQb2EKl2VvYBVQ59LWv8tyUw7N7o1
-         Cgqpe8/Xs1sNeDU3Td6PR+KcoUJuVlA7KfkXb4bMaD8QsCABClmlYtGN05a62Q5z7QSs
-         tW0ADV+sNpa58saxmvaxEOmH2sCEoynGmaNb8C/4fZq7Xo7oc6INYiZMYGA3862ihDLm
-         8ECQ==
+        bh=5OyDtStyAeBedN7jaZpmypaL0n4+GQJgji3UYOQMX7Y=;
+        b=NSd45dLlZjhc5DRiM5TGjhUIbeuPeMewekAA5L9RKDKZ1A4YlLA3pr2hU5/0vw0AQ9
+         CYYI/xjCFRWT/rUFxWHnd6M02T+6DrgvUf4pZGjP5x7lVwNRSXmuFpXLVIWswkpNjS86
+         giF4rOe9Avy+oiQ7Fs5zxiWfNLIZfOC6ktnTwYI3Ttu0+rj1G+GnJLta2Tz92rt7guCN
+         H6FvB/JYwFBiR8tLZ8IfUESHZADgvjICswohJAVRE+nj7LiNyepA1Ff0mDFxgGAKD6mu
+         pat6lSzWPY7eqx/1LzY//+xHF6zGvnIwRx6ydv5owCW1ra0CVbvG603we/PiUjqsWq1A
+         s/ag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794565072; x=1795169872;
+        d=1e100.net; s=20260707; t=1794565560; x=1795170360;
         h=mime-version:user-agent:content-transfer-encoding:content-type
          :references:in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=zqPqkCGOaO5RL/5NE1UeXRxAO7AqEHmUDDsiHSGxDsA=;
-        b=yZAGYqteQxFJMDYsdxjtUKZoCrTzJQs459RSKM/PaBNs0BBwaxFl8i2YPO17ALwYX1
-         4nVUeziJOzTZJ3sVEh6HnZw1pqpCHblG9nQWwmxOWYbCoI/W/tNyU9zoWpL1BaowNG5+
-         yFV7TICCtQHhJ8yL5KCZKsj14I2zpCEuSIhO+YliBIqmIy0ADRwwPTQkiYJumgxxYEgI
-         K7iSHpGiz0byTM3B+8LuIZPsxU+2OxuSPQFLxFcCVT+snDAoafJ9PodqO/t6O9XgOKLi
-         CUYgQekB4EjV7NAUMbN77M7HY2vL+9z19ZYuRktvi1770rL0kfNBxj6P7/zNYXIJBxpe
-         nmtQ==
-X-Forwarded-Encrypted: i=1; AL+hErFdZNetEEdcssHBsyY0OCtEqHsLvJC6NgKg1XYghEOj/EKZtIox703Y1WszPcjGKFJCuiQLQWXUPHo=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z812lKDn+4gUb+bN0pNt25ivGJBrr23vk3NdEuwYhqrjEvesekq
-	uSrBcx7P98z3eXBJq3YuHkmiluLNdwf8j14t2G7bjn3sYUImeIc+SaSFuuh6M/+NzH24
-X-Gm-Gg: AYBFou22TejX0h/8ZN0wu0PfWWxsfukEVoNhF9sKOk3nqYWIW+7CayKceOAhlgBJpav
-	gDXDsuFiEHe6FqoAj2ErIjAWqPEVbZq79RyrpBoZavPT2kK3ce+nS/udaFX66SLzYSsiHrx/N0D
-	uYqjzsWKZClBeLA4y7lF6pKVq/R11EaFxkMJAYN00baO5ZysohRa4xlow9AqNMDXv5TMxmYte3O
-	H9QPPZSgcgtm1H9839huG/FxFH+Y/lYtnF7Fcf8Dr612GA9mGJyIq0vxvOE5JDIl8d+KbB2CLVH
-	WSVHtHrPU00h1N6zVcCYhyGZDyWQ079FrjXyBhiCjpgo+cdmjlnOFddPgkXoYVwzssETzCoi73V
-	0hAn5iAOa/bpPxbZBiaaq0DG3ATcerVF1lbkGztrDWX18dvcBL3WRl9OATO2oSl4+aa0AkK7e2h
-	/I06H+yJAABDZiIw4TZw1/FCoWMQEwF4tiqzmIqrTvS2fiiR/tLIwPHh1lbgIdQqkp5r4dHC2bR
-	q/eUhy90/dtbhulDtz94hL95Cliq9aDvdyLzAoO6HfwbxuBRhFN9VvO48DNpU2owXFrYoNTG6ns
-	yIQJyTeCsDITeZ6nsLR3C1i62nGMKlkKNiMBML3Vq3jBwxtacJHUDijg4BVUOg8=
-X-Received: by 2002:a05:600c:45d4:b0:4a0:23f:8b0d with SMTP id 5b1f17b1804b1-4bb559f6f31mr43851425e9.2.1794565071804;
-        Fri, 13 Nov 2026 02:17:51 -0800 (PST)
-Message-ID: <7cde6f3091f9d90593e4a6441723b6b889cc4024.camel@amutable.com>
-Subject: Re: [PATCH RFC 35/41] zloop: refuse zone files on pseudo filesystems
+        bh=5OyDtStyAeBedN7jaZpmypaL0n4+GQJgji3UYOQMX7Y=;
+        b=Ov9uhXH+iUlG79gE2ciXGc542ifIYC0acXYcuH4RNbxW0kcl2V0WpJKMhtkj2zf9aN
+         jHTZ2ViFahGw2XuUyDpp8CzWRfVdFqzaeq0LBi7K4hoyEXzsS/plOZRI5aTlEM027Xj+
+         H2s9QBKoa8T+dnZhC727AmcNzRhRo/yWE8SbcTE9Zwc75IuB4lpsotftXwjZgaoth8qr
+         wiyuM1aNfQHKPckB50M9pt7kS39TrdEx/pEIULrtpd8TG+cpJ6dbalM7DpOiJk2o6rOt
+         2FjkbfagDU6r7uIiz0Mh8G/1ZMBelHlSrIsWzwlkpClqCo0MsdsqNSQ/8iM/0ePPmFAp
+         Dlfw==
+X-Forwarded-Encrypted: i=1; AL+hErHizol5tQuIn+BykX6gmmOODXkWsYJIQzQwCtQgNy0RozmoL5LBtCgP+1KBzUZI88OkHVE/bi0aPPs=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z/GgV0d7+CMzps8vQYhcdQARGh8BDm7/++F4roAmsg8TnIcKuxZ
+	ijWAnkAUxwvrR9dFYBwKyis59SYl9pnG42KjO+/Z0pijFl3uRv+kUG1l0M6ufxasaJT3
+X-Gm-Gg: AYBFou1i/1ULFhGYl4ZO/BqPxuAA+ZF1qSJVPOVEd/17sw+gOI2kaBJfLPJ4mZYyyV9
+	mBZgatQFdIEWvD/t/Oq0yKqqS5nZ8mEWzVr9q2SsiNzYThdUheEt4kxlDTb4qApDDeKUKDrxK5r
+	OyjgF6CZ2PC/nbqKGkBfoxOrqpr40oloOEQ6Q1wuD07m35LVLA3NMQffN2xrkzq1UGysZg3HuXs
+	9Y5XgW+rZhNS4eySJF/bRHYhZcaB7bL/STrn2vexH7Ls960CXcB5YmtpUqshdfVU78VwQWpMgG+
+	dm5X+RjRI/NgAFhPpFbq7rL9JfVuG2WWftXBQRs08Ki5QVlj78jtxt5q87EJbqEB0GHuBCmp4jp
+	BYODw089ewhEsHWOPTLUx3G17uQu5XD9IeyqCu5eaEchD1AkEqM04l9k7HZLc/x4WBiVwkY90QR
+	XszHQeztqLa29PQ7FlTKcUwJ7giVFacy4hhUnsF72cYZz29k5DbKzJu2kiffcJmMgSRjsqZ4vCx
+	423xuM66AwN6yGFvpPOpUqp+DD1aTtaxdj2nKHX+0e+ZUBUi2GRSwKelEZaiDETIQmwBHnsoc6i
+	KHBt60azNVrzQ5sBHK+d9RR0r+WIYr3Qjhk6RcaN7JQzgyilprL5Jyl/CUOD5aE=
+X-Received: by 2002:a05:600c:4e49:b0:4a1:78c5:79f5 with SMTP id 5b1f17b1804b1-4bb55aa999dmr38995625e9.33.1794565560090;
+        Fri, 13 Nov 2026 02:26:00 -0800 (PST)
+Message-ID: <fb1d72cf25d10a960da627f6d93a3e041820ed3a.camel@amutable.com>
+Subject: Re: [PATCH RFC 38/41] fuse: refuse files on pseudo filesystems as
+ passthrough backing files
 From: Alexander Mikhalitsyn <alex@amutable.com>
-To: Christian Brauner <brauner@kernel.org>, linux-fsdevel@vger.kernel.org
-Cc: Jann Horn <jannh@google.com>, Chris Mason <mason@kernel.org>, Josef
- Bacik	 <josef@toxicpanda.com>, Christoph Hellwig <hch@lst.de>, 
+To: Christoph Hellwig <hch@lst.de>, Christian Brauner <brauner@kernel.org>
+Cc: linux-fsdevel@vger.kernel.org, Jann Horn <jannh@google.com>, Chris Mason
+	 <mason@kernel.org>, Josef Bacik <josef@toxicpanda.com>, 
 	linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, 
 	linux-nvme@lists.infradead.org, Alexander Viro <viro@zeniv.linux.org.uk>,
  Jan Kara <jack@suse.cz>, linux-scsi@vger.kernel.org,
@@ -109,56 +110,37 @@ Cc: Jann Horn <jannh@google.com>, Chris Mason <mason@kernel.org>, Josef
  linuxppc-dev@lists.ozlabs.org, 	linux-usb@vger.kernel.org, Amir Goldstein
  <amir73il@gmail.com>, 	linux-erofs@lists.ozlabs.org,
  linux-kselftest@vger.kernel.org
-Date: Fri, 13 Nov 2026 11:17:48 +0100
-In-Reply-To: <20261110-work-loop-pseudo-v1-35-4c998976c6c7@kernel.org>
+Date: Fri, 13 Nov 2026 11:25:57 +0100
+In-Reply-To: <20261111151202.GA11391@lst.de>
 References: <20261110-work-loop-pseudo-v1-0-4c998976c6c7@kernel.org>
-	 <20261110-work-loop-pseudo-v1-35-4c998976c6c7@kernel.org>
+	 <20261110-work-loop-pseudo-v1-38-4c998976c6c7@kernel.org>
+	 <20261111151202.GA11391@lst.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 User-Agent: Evolution 3.56.2-0+deb13u1 
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-purgate-ID: tlsNG-c1860d/1794565072-D735D87B-EFF58BA2/0/0
+X-purgate-ID: tlsNG-c201ff/1794565560-F44A42A1-0F11F438/0/0
 X-purgate-type: clean
-X-purgate-size: 1035
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY autolearn=unavailable autolearn_force=no
-	version=4.0.1
+X-purgate-size: 373
+X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY autolearn=no
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Tue, 2026-11-10 at 10:14 +0100, Christian Brauner wrote:
-> zloop opens its zone files by name below the base directory but a
-> bind
-> mount can put any file there, including a procfs or sysfs file.
-> Refuse
-> files on pseudo filesystems as zone files just like loop does.
->=20
-> Signed-off-by: Christian Brauner (Amutable) <brauner@kernel.org>
+Hi Christoph,
 
-Reviewed-by: Alexander Mikhalitsyn <alex@amutable.com>
+On Wed, 2026-11-11 at 16:12 +0100, Christoph Hellwig wrote:
+> I've seen setups where people use fuse to mediate access to sysfs
+> sysfs in odd ways.=C2=A0 No idea if that's still around, but if so, this
+> patch will break it.
 
-> ---
-> =C2=A0drivers/block/zloop.c | 5 +++++
-> =C2=A01 file changed, 5 insertions(+)
->=20
-> diff --git a/drivers/block/zloop.c b/drivers/block/zloop.c
-> index 65634a39b0bf..dcc06dd47b04 100644
-> --- a/drivers/block/zloop.c
-> +++ b/drivers/block/zloop.c
-> @@ -1137,6 +1137,11 @@ static int zloop_init_zone(struct zloop_device
-> *zlo, struct zloop_options *opts,
-> =C2=A0		goto out_fput;
-> =C2=A0	}
-> =C2=A0
-> +	if (file_is_pseudo(zone->file)) {
-> +		ret =3D -EINVAL;
-> +		goto out_fput;
-> +	}
-> +
-> =C2=A0	if (zlo->block_size) {
-> =C2=A0		ret =3D zloop_get_block_size(zlo, zone);
-> =C2=A0		if (ret)
+
+Oh, that's painful. Do they use backing files for that?
+It's a relatively new feature in FUSE...
+
+Kind regards,
+Alex
 
