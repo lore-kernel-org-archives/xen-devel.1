@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E25A2606A330
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Nov 2026 15:50:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B0F1D606A323
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Nov 2026 15:50:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=SI1fSNST
-Received: from list by lists.xenproject.org with outflank-mailman.1487815.1690224 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=GlsBFf5z
+Received: from list by lists.xenproject.org with outflank-mailman.1487847.1690277 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRtXY-0003Tg-LC; Fri, 13 Nov 2026 15:50:12 +0000
+	id 1xRtXl-0005oY-Tl; Fri, 13 Nov 2026 15:50:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1487815.1690224; Fri, 13 Nov 2026 15:50:12 +0000
+Received: by outflank-mailman (output) from mailman id 1487847.1690277; Fri, 13 Nov 2026 15:50:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRtXX-0003Nn-HM; Fri, 13 Nov 2026 15:50:11 +0000
-Received: by outflank-mailman (input) for mailman id 1487815;
- Fri, 13 Nov 2026 15:49:53 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xRtXE-0007zR-9R
- for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 15:49:52 +0000
+	id 1xRtXk-0005i3-6p; Fri, 13 Nov 2026 15:50:24 +0000
+Received: by outflank-mailman (input) for mailman id 1487847;
+ Fri, 13 Nov 2026 15:50:05 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xRtXP-0001p6-TY
+ for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 15:50:04 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xRtXD-000WGx-Km
- for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 16:49:51 +0100
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xRtXP-003haT-87
+ for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 16:50:03 +0100
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6af7318a-e002-0a2a0a5209dd-0a2a45018afe-30
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 16:49:51 +0100
-Received: from [209.85.221.45] (helo=mail-wr1-f45.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6af731a1-bab6-0a2a0a5309dd-0a2a45098582-38
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 16:50:03 +0100
+Received: from [209.85.221.41] (helo=mail-wr1-f41.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6af7319f-5984-0a2a45010019-d155dd2dccf8-3
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 16:49:51 +0100
-Received: by mail-wr1-f45.google.com with SMTP id
- ffacd0b85a97d-490585eddfcso1090705f8f.0
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 07:49:51 -0800 (PST)
+ id 6af731ab-be1a-0a2a45090019-d155dd29e130-3
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 16:50:03 +0100
+Received: by mail-wr1-f41.google.com with SMTP id
+ ffacd0b85a97d-48dee593f18so1633781f8f.3
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 07:50:03 -0800 (PST)
 Received: from fedora (user-109-243-65-71.play-internet.pl. [109.243.65.71])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-49c5f1c0e0dsm5786493f8f.15.2026.11.13.07.49.48
+ ffacd0b85a97d-49c5f1c0e0dsm5786493f8f.15.2026.11.13.07.49.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Nov 2026 07:49:49 -0800 (PST)
+ Fri, 13 Nov 2026 07:50:01 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,43 +51,42 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794584991; x=1795189791; darn=lists.xenproject.org;
+        d=gmail.com; s=20260707; t=1794585003; x=1795189803; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ACRbM99fXT4N8Q3efscts8vr2WDDKzF4cPGElUboo7g=;
-        b=SI1fSNSTinkFbXAZhgQZ0HlhK0GvjnNXLRIK96EUl+TO8yG2H1j0gDIivTUv055p2F
-         UmNnfPV8MGTJiZYdIfYKQz6W5ZqOQJ3rYtfeQ9F5B1PQSEJ1E1qjH5SWnl8JCMd4cG5v
-         R5iREv+8wJtKxTVfMxJBAp6W26XVfGClQNkcV1a6x/OKChuE5TKBtuL862GU0kQ1jlnw
-         5C4DdjCwdN+HtlTL0VCWL4GP/we5/29MhwZ9usuUkmC37UInZC1RS8jBgB5RjFjHUrSa
-         5VrOz5EVOESOPQZoTr/vozAAOkeXFHxxQHoafharFSYsmDBKQPEzLinuszCPLUuSzIoN
-         TotQ==
+        bh=awVcFEIzO2kV3B2iUFfBQPLC0SoCEsGO8OXz78F7I30=;
+        b=GlsBFf5zk5bVxiTp/SDh+vNmpLaBHxPFOBSciD76xnSD/Kh8UhJR2tlXGD7I0ehiF3
+         RlaSh8NK+WvjtUOqTwGWeRJANc9y7Acp9NiKo467FPExjXAbURzV+78LJgk1qsS6vBWo
+         paDGPmRsouP2f3Dglyk96PQeK0E9plJHmd9ZbT1Zd/3AidziCCwqXqRbZ/OicSqFSZl1
+         V4ST5qMJwnoaf9kGMDRPYKaIOMSK6R1lksAG0Ec0y6uc2Pp2EUT30FCbEUySoq5wsKpD
+         Uyjmi7URro7JMXT/UNbi0vRmmwjkRAk+lZOpD0UFmwP8jNwNqSrYaJlf0VS/Jx+PVjgL
+         vuUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794584991; x=1795189791;
+        d=1e100.net; s=20260707; t=1794585003; x=1795189803;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ACRbM99fXT4N8Q3efscts8vr2WDDKzF4cPGElUboo7g=;
-        b=D9cOaFOxfo9r7HfgXh0rbK+wE7SBuczJ4OvYONZHqG9BeAH0n54fQ73oIB6POtJcFJ
-         z0t7umdGUmT2wqh+OcKbmVzhLaruGYtVhBgdBmEwtmmyav3qs0fcJ9Uz+uXXB04agBMe
-         bgGfJdp4PSu5qwZD2MOhx/QSQxx5BdrOe22Hh/9ShlYsi0fze7iZAxYpyjYdqLqqpz50
-         GoebqVSjqmZe85QaLjdzhlvc+b+l5lmO8eOiKvw0s9ZRYZrj2MpEJraEZtOyoKisM6t9
-         QfitTwNZne1k5/CxhmVAdNBuQ50Vn/jnANjM4F3UoeQWNaEwe/MXRO4oJlsRGESy3XbO
-         9M7Q==
-X-Gm-Message-State: APuU4Z8nN/g47h1DXdfbwTpowR5ER7mCHxafLZbLIMU+AZzqZtBazaw6
-	Sp6hOBYTOmo14TLZLoS+9FIltTKPWzVuLt74VoYIO3trTcZWk+YfLT+VEp7bwg==
-X-Gm-Gg: AYBFou2h3sU/fXWb8Fpmhoku/U7FUy0bLsQCneVGr3Vtc8mWUH3KiR8FcZjB8lJJ6yG
-	gvYWQ/lz4d30kXCXNyMEdOfnRP2wRx+oAgPRCT84iVyHE/4UclooRVTSN3tVCkIXflATWFbL58I
-	U8aYdyExObvKCrx14FOjyh9sw4VCvuhmuDWwRIFGjBSvsBjHh18kT7aT2kBZH0yAx91MJpHJDpg
-	ogPQxckeXkWUdkdt+Uv7OrLO745unPUz0w/pc3rIPk4ve+ScHmOVz3KcZ1L2Zsl2BekPHDaRm9q
-	pKSDneZPLZ286ti5UNq1qKhebBoskUmKEBsUVa/WLySHJY57pDDMANmDkDYF1ds/LAdH04f4SBO
-	LLPbX4ntUdvgw+HW8z+jtvPNqDpdidS+xBrVSGPBZ6ui6X+tBLJHVf+/nZEzA/NlQaCAtDOU+MP
-	u5gVhSJYQgHOoV2WRPjPZNve3c1ahj69ZxdQXASfgeJFLUx76pHAv3KIvvgCfGWgiuANgr7S/EZ
-	8n0i5qLfEoMgF5ltG3YtBNtrOiNs1+vgqEmB+cCER80szqkNEqc6qlM8rKFyrZRp6D0mw4Lg7Mk
-	6u226hISBHuQzuLq1YsYNmAXgpZiJID8S73yzzhReoo0f3DZjLuC2neTguMfYF9yufiNQ7FbCWQ
-	QBA30yhRI+v4BFQ==
-X-Received: by 2002:a05:6000:24c6:b0:491:273c:9649 with SMTP id ffacd0b85a97d-49c70b051dcmr7408972f8f.15.1794584990899;
-        Fri, 13 Nov 2026 07:49:50 -0800 (PST)
+        bh=awVcFEIzO2kV3B2iUFfBQPLC0SoCEsGO8OXz78F7I30=;
+        b=OUXC3JSVasvltsQ8pBEeXP3QIO+eq0VE7rigsmSK9sfSoqiRmopuFHG1DMIDUAi4Vk
+         zxZVZ+B5VWLIdGFxfjofXHuDIzVVbaJcT16tQzz6GJonH0UwFyBorKu1DREkWX52ww4U
+         G0hwxkok17mGDAGUgHhyvXQQEAUwNBqnqQreZhIlG42e7GNp5yxbEXJSgWHtn+CRJAo6
+         9Ib0js2Aewk6E36R7QdBSlUmXW10iFKxJeWQn7J2qnomIOmUDIPOzZkZZBJ57slpLfSv
+         4ynFKC4Y9zOYxoIG74k0IIsUlWbIVXEjNk7q2/P+KZtn9P71tGXunOA66Rg+6Z0MK2yz
+         JV2w==
+X-Gm-Message-State: APuU4Z+H/4zS/UB0xE6N4wMJMqMwuK4UFtP2UAs/L3dn9vvRiKewXfKP
+	eKQf4anFCVkFqtCPvC0Tr3gDWCwkKbeaIUWC5cz4qcPNjenBjXZZFAMkFgNZfw==
+X-Gm-Gg: AYBFou0yDqoaIzJ3v8gUzIN8AuUgDv8TmNPT8e6MRDGoQx4hspfyJgnFfCtiuNxbnZC
+	orzGePZaxWIeaLALttUFUr5GzWjW6aZ2G1cCR9+MHLTwV6OHSGj74ocUhrvJ1IEeNnNor6I5Mc2
+	DkmQzUCEp5gky6OWHj3ExFyg7OVnHM8xCWr6oASnlVnGbCIZxafU7X7cQgI4L0cR4o4I8Z12Yp0
+	h16uFEknvhMk7wenY3KF1ZojvIIpn3W+dPq0RSJyVSUo039JhzhVFeo4y7LXyDvnIDZShV2GNwE
+	XOKzg6mOcHeANowiSGKrYxuo/HuoD8Vrm+AsFD9YpsDccaPFmPPbRbkeZOQuJ0NM7IJro3r5ndT
+	H4I+g90SolywHOybs937iY2PTghOaTqIVqvOhZgbIju6bdGkX/PiBZt0ilj96usIT/H5QPIBN8G
+	tiHKWVtgnPMc2u1wQRvw/7kii0kOu31WYN2Y3mSXL9DPE/n8z3G/bYe6pXZfGhOuzPzNPpkZp1K
+	tXshDfNI8Ezg6i6miYzRvjPEavrcqjpjc2AUw14pHPw9ulhIo9AbfJrR2XpgBMDEFYH1Mlz3Mu+
+	ZDHSC3hq1s9oA22Ob10Xc/MZfHsHjNK+N+ljFaOnrYUYQeGkobQsVnvpj6MYHWlwEMiN
+X-Received: by 2002:a05:6000:2906:b0:492:ac00:b3b7 with SMTP id ffacd0b85a97d-49c708236e5mr6970058f8f.27.1794585002288;
+        Fri, 13 Nov 2026 07:50:02 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -102,18 +101,18 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v4 35/42] xen/riscv: move a vCPU's guest interrupt file on its way to the guest
-Date: Fri, 13 Nov 2026 16:48:56 +0100
-Message-ID: <ee4f883ece499ca810c1f0a339e2a6bbae751cea.1794562488.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v4 41/42] xen/riscv: emulate the pending bits and MSIs of virtual vAPLIC sources
+Date: Fri, 13 Nov 2026 16:49:02 +0100
+Message-ID: <ae62ba462ffdf6feddbba54b9b9847fbb64f69cc.1794562488.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <cover.1794562488.git.oleksii.kurochko@gmail.com>
 References: <cover.1794562488.git.oleksii.kurochko@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d62444/1794584991-1EA66757-4C4A608A/10/73395122804
+X-purgate-ID: tlsNG-bad1c0/1794585003-FD86F034-45F821B8/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 8957
+X-purgate-size: 19733
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
@@ -122,229 +121,511 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-When migrating a vCPU between pCPUs the hypervisor must also migrate
-the associated virtual interrupt state. arch_move_irqs() is the
-per-arch hook called by generic code to trigger that.
+A virtual source, one which is reserved for a domain but which no h/w
+IRQ is routed to, is the interrupt line of a device emulated by Xen. It
+has nothing in the physical APLIC, so vAPLIC has to keep the state of
+its registers and send its MSIs itself. Its sourcecfg[], enable bit and
+target[] are emulated already, but its pending bit has so far read as
+zero and ignored writes, and nothing has sent its MSIs.
 
-Replace the static inline BUG_ON placeholder in asm/irq.h with a real
-implementation in intc.c dispatching through a new move_irqs vintc_ops
-callback, which a vINTC may leave unset.
+So, following the AIA spec for MSI delivery mode, keep the pending bits
+of the virtual sources in a new regs.ip[], and the level of their lines,
+on which their rectified input values depend, in a new
+vaplic_source.level, and send their MSIs from a new
+vaplic_forward_msis(). The pending bits of the h/w sources aren't
+copied, as the h/w changes them by itself.
 
-vAPLIC does leave it unset. arch_move_irqs() is called once the
-scheduler has moved a vCPU to another pCPU, but not necessarily from
-either of the two pCPUs, and in sched_unit_migrate_finish() only after
-the scheduler locks have been dropped: by then any vcpu_wake() can have
-the vCPU picked up by its new pCPU and switched in. Moving the vCPU's
-guest interrupt file from there would race with the vCPU running, which
-could then enter the guest with hstatus.VGEIN still naming the old
-file, i.e. a file of the new pCPU's IMSIC which may belong to another
-vCPU. Worse, the hstatus.VGEIN written at the end of the move would go
-into the saved context of a running vCPU, which the next trap from the
-guest overwrites.
-
-With a and b being the old and the new interrupt file of v:
-
-    pCPU migrating v                  new pCPU of v
-    ----------------                  -------------
-    sched_unit_migrate_finish():
-      move v to the new pCPU,
-      drop the scheduler locks
-                                      vcpu_wake(v)
-    arch_move_irqs(v):                v switched in, enters the guest
-      take, clear and map file b      with hstatus.VGEIN still naming
-      retarget the APLIC to file b    file a, i.e. a file of this
-      sync, save and clear file a     pCPU's IMSIC
-      fill file b
-      hstatus.VGEIN = b  ---------->  lost: the next trap from the
-                                      guest overwrites the frame
-
-The file is thus moved by the vCPU itself, on its way back to the
-guest: as long as a vCPU runs on a pCPU, it can neither run on nor be
-moved to any other one. For that, add a vintc_ops.enter_guest callback,
-which a vINTC may leave unset too, run by the new vintc_enter_guest()
-from check_for_pcpu_work() for the vCPU about to enter the guest. Wire
-it up in vAPLIC with imsic_migrate_vcpu(). A move then goes as follows:
-
-    old pCPU of v                     new pCPU of v
-    -------------                     -------------
-    v switched out: HGEIE[a] = 1
-    v moved to the new pCPU,
-    arch_move_irqs(v): no .move_irqs
-                                      v switched in, on its way to the
-                                      guest in check_for_pcpu_work():
-                                      vintc_enter_guest(v):
-                                        take, clear and map file b
-                                        retarget the APLIC to file b
-    sync, save and clear file a  <-IPI-
-    HGEIE[a] = 0
-                                        fill file b
-                                        hstatus.VGEIN = b
-                                      sret: the guest uses file b
+Nothing changes vaplic_source.level yet: that is left as a TODO for the
+emulators of devices with an interrupt line.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in v4:
- - Don't implement vintc_ops.move_irqs for vAPLIC: arch_move_irqs() can
-   be called with the vCPU free to run on its new pCPU, so moving the
-   vCPU's guest interrupt file from there would race with the vCPU
-   running. Add vintc_ops.enter_guest instead, run by
-   vintc_enter_guest() from check_for_pcpu_work(), and implement it for
-   vAPLIC with imsic_migrate_vcpu().
- - Let a vINTC leave vintc_ops.move_irqs unset.
- - Make imsic_migrate_vcpu() cf_check, as it is an indirect call target.
- - Move right after "xen/riscv: restore register state in the new IMSIC
-   VS-file", so that the hooks are wired up to a complete move of the
-   vCPU's guest interrupt file.
- - Drop the Acked-by and the Reviewed-by, as the patch changed.
- - Rename from "xen/riscv: introduce arch_move_irqs()", as the
-   vCPU's guest interrupt file is moved on its way to the guest
-   rather than by arch_move_irqs().
- - Update the commit message accordingly.
----
-Changes in v3:
- - Update the commit message: drop the two last paragraphs as they are
-   stale.
----
-Changes in v2:
  - New patch.
 ---
 ---
- xen/arch/riscv/imsic.c             |  2 +-
- xen/arch/riscv/include/asm/imsic.h |  2 +-
- xen/arch/riscv/include/asm/intc.h  | 11 +++++++++++
- xen/arch/riscv/include/asm/irq.h   |  5 +----
- xen/arch/riscv/intc.c              | 20 ++++++++++++++++++++
- xen/arch/riscv/traps.c             |  2 ++
- xen/arch/riscv/vaplic.c            |  7 +++++++
- 7 files changed, 43 insertions(+), 6 deletions(-)
+ xen/arch/riscv/include/asm/vaplic.h |  16 ++
+ xen/arch/riscv/vaplic.c             | 314 +++++++++++++++++++++++-----
+ 2 files changed, 275 insertions(+), 55 deletions(-)
 
-diff --git a/xen/arch/riscv/imsic.c b/xen/arch/riscv/imsic.c
-index adacac5c7268..49b2d8cbb004 100644
---- a/xen/arch/riscv/imsic.c
-+++ b/xen/arch/riscv/imsic.c
-@@ -1335,7 +1335,7 @@ static void imsic_vsfile_move(struct vcpu *v)
-  * nor be moved to another one, so its file can't be in use elsewhere while
-  * it is moved.
-  */
--void imsic_migrate_vcpu(struct vcpu *v)
-+void cf_check imsic_migrate_vcpu(struct vcpu *v)
- {
-     ASSERT(v == current);
-     ASSERT(!local_irq_is_enabled());
-diff --git a/xen/arch/riscv/include/asm/imsic.h b/xen/arch/riscv/include/asm/imsic.h
-index f7e537be29b4..488ce652f0b6 100644
---- a/xen/arch/riscv/include/asm/imsic.h
-+++ b/xen/arch/riscv/include/asm/imsic.h
-@@ -133,6 +133,6 @@ int imsic_map_guest_file(struct vcpu *v, unsigned int vsfile_id);
- 
- void imsic_vsfile_attach(struct vcpu *v);
- 
--void imsic_migrate_vcpu(struct vcpu *v);
-+void cf_check imsic_migrate_vcpu(struct vcpu *v);
- 
- #endif /* RISCV_IMSIC_H */
-diff --git a/xen/arch/riscv/include/asm/intc.h b/xen/arch/riscv/include/asm/intc.h
-index 58196927aab2..d188a45b3fe1 100644
---- a/xen/arch/riscv/include/asm/intc.h
-+++ b/xen/arch/riscv/include/asm/intc.h
-@@ -70,6 +70,15 @@ struct vintc_ops {
- 
-     /* Restore vINTC state of the vCPU being switched in */
-     void (*ctxt_switch_to)(struct vcpu *n);
-+
-+    /* Move interrupts of vCPU to a different pCPU */
-+    void (*move_irqs)(struct vcpu *v);
+diff --git a/xen/arch/riscv/include/asm/vaplic.h b/xen/arch/riscv/include/asm/vaplic.h
+index e2e4611f69c2..f2c768e84b11 100644
+--- a/xen/arch/riscv/include/asm/vaplic.h
++++ b/xen/arch/riscv/include/asm/vaplic.h
+@@ -39,6 +39,15 @@ struct vaplic_source {
+      *    guest changes.
+      */
+     uint32_t sourcecfg;
 +
 +    /*
-+     * Update vINTC state of the current vCPU, which is about to enter the
-+     * guest.
++     * Level of the line of a virtual source, protected by vaplic->lock.
++     *
++     * TODO: nothing drives it yet. The emulator of a device with an interrupt
++     * line will have to, and to call vaplic_forward_msis() for a source a
++     * change of the level makes pending.
 +     */
-+    void (*enter_guest)(struct vcpu *v);
++    bool level;
  };
  
- struct vintc {
-@@ -103,4 +112,6 @@ int vintc_reserve_virq(const struct domain *d, unsigned int virq);
- void vintc_ctxt_switch_from(struct vcpu *p);
- void vintc_ctxt_switch_to(struct vcpu *n);
+ struct vaplic_regs {
+@@ -56,6 +65,13 @@ struct vaplic_regs {
+      */
+     uint32_t *ie;
  
-+void vintc_enter_guest(struct vcpu *v);
++    /*
++     * Interrupt-pending bits of the virtual sources, a word per 32 sources.
++     * Those of the h/w sources change in the h/w by themselves, so they are
++     * read from the h/w instead.
++     */
++    uint32_t *ip;
 +
- #endif /* RISCV_INTC_H */
-diff --git a/xen/arch/riscv/include/asm/irq.h b/xen/arch/riscv/include/asm/irq.h
-index 2eb68a5baf04..38277d94c7cf 100644
---- a/xen/arch/riscv/include/asm/irq.h
-+++ b/xen/arch/riscv/include/asm/irq.h
-@@ -41,10 +41,7 @@ struct irq_desc *irq_to_desc(unsigned int irq);
- struct cpu_user_regs;
- struct dt_device_node;
- 
--static inline void arch_move_irqs(struct vcpu *v)
--{
--    BUG_ON("unimplemented");
--}
-+void arch_move_irqs(struct vcpu *v);
- 
- int platform_get_irq(const struct dt_device_node *device, int index);
- 
-diff --git a/xen/arch/riscv/intc.c b/xen/arch/riscv/intc.c
-index 70dfe6cd6f34..449f6b252414 100644
---- a/xen/arch/riscv/intc.c
-+++ b/xen/arch/riscv/intc.c
-@@ -204,3 +204,23 @@ void vintc_ctxt_switch_to(struct vcpu *n)
- 
-     ops->ctxt_switch_to(n);
- }
-+
-+/* Move vCPU's IRQs from one pCPU to another */
-+void arch_move_irqs(struct vcpu *v)
-+{
-+    const struct vintc_ops *ops = v->domain->arch.vintc->ops;
-+
-+    if ( ops->move_irqs )
-+        ops->move_irqs(v);
-+}
-+
-+/* Update vINTC state of @v, the vCPU about to enter the guest. */
-+void vintc_enter_guest(struct vcpu *v)
-+{
-+    const struct vintc_ops *ops = v->domain->arch.vintc->ops;
-+
-+    ASSERT(v == current);
-+
-+    if ( ops->enter_guest )
-+        ops->enter_guest(v);
-+}
-diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
-index 93996580cccf..aea57595c1ab 100644
---- a/xen/arch/riscv/traps.c
-+++ b/xen/arch/riscv/traps.c
-@@ -177,6 +177,8 @@ static void check_for_pcpu_work(void)
- {
-     struct vcpu *curr = current;
- 
-+    vintc_enter_guest(curr);
-+
-     vcpu_sync_interrupts(curr);
- 
-     vcpu_flush_interrupts(curr);
+     /*
+      * Indexed by source number. The array holds d->arch.vintc->nr_virqs
+      * elements; sources[0] is unused as APLIC interrupt sources start from 1.
 diff --git a/xen/arch/riscv/vaplic.c b/xen/arch/riscv/vaplic.c
-index eb2a263ceecb..b849ea1c97e8 100644
+index e2995375a98a..ba0a867f6988 100644
 --- a/xen/arch/riscv/vaplic.c
 +++ b/xen/arch/riscv/vaplic.c
-@@ -623,6 +623,13 @@ static const struct vintc_ops vintc_ops = {
-      */
-     .ctxt_switch_from = imsic_ctxt_switch_from,
-     .ctxt_switch_to = imsic_ctxt_switch_to,
-+    /*
-+     * No .move_irqs: the scheduler calls arch_move_irqs() from any pCPU, and
-+     * in sched_unit_migrate_finish() with the vCPU free to run on its new
-+     * pCPU meanwhile, while a guest interrupt file can only be moved safely
-+     * by the vCPU itself. It moves it on its way to the guest instead.
-+     */
-+    .enter_guest = imsic_migrate_vcpu,
- };
+@@ -32,17 +32,14 @@ unsigned int __ro_after_init guest_aplic_num_sources;
+ /*
+  * Only a h/w source of a domain, one a h/w IRQ is routed to (see
+  * vintc.hw_irqs), may be accessed in the h/w. A virtual source has nothing
+- * there: its sourcecfg[], target[] and enable bit are emulated, and the rest
+- * of its registers, until they are emulated too, read as zero and ignore
+- * writes, like those of a source not assigned to the domain.
++ * there: all its registers are emulated.
+  *
+  * A write passed through to the h/w can thus affect only the h/w sources of
+- * the domain: a write to setip[], clrip[], setie[] or clrie[] is masked
++ * the domain: a write to setip[], in_clrip[], setie[] or clrie[] is masked
+  * with them, which leaves the bits of the other sources at 0, i.e. untouched,
+- * and {set,clr}ipnum, setipnum_le and sourcecfg[] name a source checked to
+- * be one of them. route_irq_to_guest() never assigns a source to more than
+- * one domain, or to both a domain and Xen, and as virq == pirq, no
+- * translation is needed either.
++ * and sourcecfg[] names a source checked to be one of them.
++ * route_irq_to_guest() never assigns a source to more than one domain, or to
++ * both a domain and Xen, and as virq == pirq, no translation is needed either.
+  */
+ static bool vaplic_is_hw_source(const struct domain *d, unsigned int irqn)
+ {
+@@ -93,6 +90,37 @@ static bool vaplic_source_is_active(const struct domain *d, unsigned int irqn)
+            APLIC_SOURCECFG_SM_INACTIVE;
+ }
  
- int domain_vaplic_init(struct domain *d)
++/* Whether virtual source @src is level-sensitive. */
++static bool vaplic_is_level(const struct vaplic_source *src)
++{
++    unsigned int sm = MASK_EXTR(src->sourcecfg, APLIC_SOURCECFG_SM);
++
++    return (sm == APLIC_SOURCECFG_SM_LEVEL_HIGH) ||
++           (sm == APLIC_SOURCECFG_SM_LEVEL_LOW);
++}
++
++/*
++ * The rectified input value of virtual source @src: the level of its line,
++ * inverted for an Edge0 or Level0 source, and zero for an inactive or
++ * Detached one.
++ */
++static bool vaplic_rectified_input(const struct vaplic_source *src)
++{
++    switch ( MASK_EXTR(src->sourcecfg, APLIC_SOURCECFG_SM) )
++    {
++    case APLIC_SOURCECFG_SM_EDGE_RISE:
++    case APLIC_SOURCECFG_SM_LEVEL_HIGH:
++        return src->level;
++
++    case APLIC_SOURCECFG_SM_EDGE_FALL:
++    case APLIC_SOURCECFG_SM_LEVEL_LOW:
++        return !src->level;
++
++    default:
++        return false;
++    }
++}
++
+ /* Emulate a read of target[@irqn]. */
+ static uint32_t vaplic_target_read(const struct domain *d, unsigned int irqn)
+ {
+@@ -392,36 +420,102 @@ static void vaplic_sourcecfg_write(const struct domain *d, unsigned int irqn,
+         value = APLIC_SOURCECFG_SM_INACTIVE;
+ 
+     /*
+-     * The enable bit of an inactive source is read-only zero, and stays zero
+-     * when the source becomes active again, so making the source inactive
+-     * clears it: the h/w does so for a h/w source, and the guest's view has
+-     * to follow. vaplic->lock keeps a concurrent write to an enable register
+-     * from setting the bit meanwhile: such a write sees either the source
+-     * still active, and then its bit is cleared here afterwards, or the
+-     * source inactive, and then it doesn't set the bit. IRQs are already off
+-     * under src->lock.
++     * vaplic->lock keeps a concurrent write to an enable or pending register
++     * from setting a bit of the source while it is made inactive: such a
++     * write sees either the source still active, and then its bit is cleared
++     * below afterwards, or the source inactive, and then it doesn't set the
++     * bit. IRQs are already off under src->lock.
+      */
+     spin_lock(&vaplic->lock);
+ 
+     write_atomic(&src->sourcecfg, value);
+ 
++    /*
++     * According to the AIA spec:
++     *   Whenever interrupt source i is inactive in an interrupt domain, the
++     *   corresponding interrupt-pending and interrupt-enable bits within the
++     *   domain are read-only zeros, [...]. If source i is changed from
++     *   inactive to an active mode, the interrupt source's pending and
++     *   enable bits remain zeros, unless set automatically [...].
++     *
++     * So making the source inactive clears them. For a h/w source, the h/w
++     * clears its own bits and regs.ie[] follows; regs.ip[] holds none of
++     * them.
++     */
+     if ( !vaplic_source_is_active(d, irqn) )
++    {
+         write_atomic(&vaplic->regs.ie[irqn / IRQS_PER_WORD],
+                      vaplic->regs.ie[irqn / IRQS_PER_WORD] &
+                      ~BIT(irqn % IRQS_PER_WORD, U));
++        vaplic->regs.ip[irqn / IRQS_PER_WORD] &= ~BIT(irqn % IRQS_PER_WORD, U);
++    }
++    /*
++     * The pending bit of a level-sensitive source is cleared whenever its
++     * rectified input value is low, which the new source mode may make it.
++     * The AIA spec permits a write to sourcecfg[] not to set the pending bit
++     * when the value is high under the new source mode, so it is left alone
++     * then. The h/w takes care of all that for a h/w source.
++     */
++    else if ( !vaplic_is_hw_source(d, irqn) && vaplic_is_level(src) &&
++              !vaplic_rectified_input(src) )
++        vaplic->regs.ip[irqn / IRQS_PER_WORD] &= ~BIT(irqn % IRQS_PER_WORD, U);
+ 
+     spin_unlock(&vaplic->lock);
+ 
++    /* No MSI to send: this write can only clear the enable and pending bits. */
++
++    spin_unlock_irqrestore(&src->lock, flags);
++}
++
++/*
++ * Forward by MSI the pending and enabled virtual sources among @srcs, word
++ * @word_idx in the setip[] layout.
++ */
++static void vaplic_forward_msis(const struct domain *d, unsigned int word_idx,
++                                uint32_t srcs)
++{
++    struct vaplic *vaplic = to_vaplic(d);
++    uint32_t ready;
++
++    ASSERT(spin_is_locked(&vaplic->lock));
++
+     /*
+-     * TODO: when the pending bit of a virtual source is emulated:
+-     *  - making the source inactive has to clear it too;
+-     *  - a write which leaves the source active may change its rectified
+-     *    input value, which may set its pending bit (or, for a
+-     *    level-sensitive source, clear it). If domaincfg.IE is 1, a source
+-     *    which is then pending and enabled has to get its MSI sent.
++     * According to the AIA spec:
++     *   An MSI is sent for a specific source only when the source's
++     *   corresponding pending and enable bits are both one and the IE field
++     *   of register domaincfg is also one.
+      */
++    if ( !(vaplic->regs.domaincfg & APLIC_DOMAINCFG_IE) )
++        return;
+ 
+-    spin_unlock_irqrestore(&src->lock, flags);
++    /* The h/w forwards the MSIs of the h/w sources by itself. */
++    ready = srcs & vaplic_virtual_sources(d, word_idx) &
++            vaplic->regs.ie[word_idx] & vaplic->regs.ip[word_idx];
++
++    for_each_set_bit ( bit, ready )
++    {
++        const struct vaplic_source *src =
++            &vaplic->regs.sources[word_idx * IRQS_PER_WORD + bit];
++        /*
++         * src->lock can't be taken under vaplic->lock (see the lock order in
++         * struct vaplic), so target is read without it, but only once, so
++         * that the hart index and the EIID come from the same value. An MSI
++         * racing with a write to target[] may reach the old target, which the
++         * AIA spec allows an APLIC too.
++         */
++        uint32_t target = read_atomic(&src->target);
++        const struct vcpu *v = vaplic_target_decode_vcpu(d, target);
++
++        if ( v )
++            vcpu_imsic_inject(v, MASK_EXTR(target, APLIC_TARGET_EIID));
++    }
++
++    /*
++     * According to the AIA spec:
++     *   If and when an MSI is sent, the source's interrupt pending bit is
++     *   cleared.
++     */
++    vaplic->regs.ip[word_idx] &= ~ready;
+ }
+ 
+ /* Emulate a read of setie[@word_idx]. */
+@@ -471,11 +565,8 @@ static void vaplic_setie_write(const struct domain *d, unsigned int word_idx,
+         aplic_hw_write_reg(offsetof(struct aplic_regs, setie[word_idx]),
+                            value & hw_srcs);
+ 
+-    /*
+-     * TODO: when the pending bits of a virtual source are emulated, if
+-     * domaincfg.IE is 1, a source this write has enabled which is pending
+-     * has to get its MSI sent.
+-     */
++    /* A pending virtual source this write has enabled gets its MSI now. */
++    vaplic_forward_msis(d, word_idx, value & ~hw_srcs);
+ 
+     spin_unlock_irqrestore(&vaplic->lock, flags);
+ }
+@@ -537,15 +628,20 @@ static void vaplic_domaincfg_write(const struct domain *d, uint32_t value)
+     spin_lock_irqsave(&vaplic->lock, flags);
+ 
+     old = vaplic->regs.domaincfg;
++
++    /* vaplic_forward_msis() below has to see the new IE. */
+     vaplic->regs.domaincfg = domaincfg;
+ 
+-    /* Only a change of IE has anything to do with the h/w. */
++    /* Only a change of IE needs more than storing the new value. */
+     if ( (old ^ domaincfg) & APLIC_DOMAINCFG_IE )
+     {
+         for ( i = 0; i < vaplic_nr_words(d); i++ )
+         {
+             uint32_t hw_srcs = vaplic_hw_sources(d, i);
+ 
++            /* The pending and enabled virtual sources get their MSIs now. */
++            vaplic_forward_msis(d, i, ~0U);
++
+             if ( !hw_srcs )
+                 continue;
+ 
+@@ -558,11 +654,127 @@ static void vaplic_domaincfg_write(const struct domain *d, uint32_t value)
+         }
+     }
+ 
++    spin_unlock_irqrestore(&vaplic->lock, flags);
++}
++
++/*
++ * The bits of @srcs, virtual sources in setip[@word_idx], whose pending bits
++ * a write to setip[] can set.
++ */
++static uint32_t vaplic_pendable_sources(const struct domain *d,
++                                        unsigned int word_idx, uint32_t srcs)
++{
++    const struct vaplic *vaplic = to_vaplic(d);
++    uint32_t pendable = 0;
++
++    ASSERT(spin_is_locked(&vaplic->lock));
++
++    for_each_set_bit ( bit, srcs )
++    {
++        unsigned int irqn = word_idx * IRQS_PER_WORD + bit;
++        const struct vaplic_source *src = &vaplic->regs.sources[irqn];
++
++        /*
++         * The pending bit of an inactive source is read-only zero. For a
++         * level-sensitive one in MSI delivery mode, according to the AIA spec:
++         *   The pending bit may also be set by a relevant write to a setip or
++         *   setipnum register when the rectified input value is high, but not
++         *   when the rectified input value is low.
++         */
++        if ( vaplic_source_is_active(d, irqn) &&
++             (!vaplic_is_level(src) || vaplic_rectified_input(src)) )
++            pendable |= BIT(bit, U);
++    }
++
++    return pendable;
++}
++
++/*
++ * Emulate a read of setip[@word_idx] (@setip) or of in_clrip[@word_idx]: the
++ * pending bits or the rectified input values of the sources.
++ */
++static uint32_t vaplic_ip_read(const struct domain *d, unsigned int word_idx,
++                               bool setip)
++{
++    struct vaplic *vaplic = to_vaplic(d);
++    uint32_t hw_srcs = vaplic_hw_sources(d, word_idx);
++    uint32_t virt_srcs = vaplic_virtual_sources(d, word_idx);
++    unsigned long flags;
++    uint32_t val = 0;
++
++    if ( !hw_srcs && !virt_srcs )
++        return 0;
++
++    word_idx = array_index_nospec(word_idx, vaplic_nr_words(d));
++
+     /*
+-     * TODO: when the pending bits of a virtual source are forwarded by MSI,
+-     * setting IE has to get the MSI of each pending and enabled virtual
+-     * source sent.
++     * vaplic->lock makes the read atomic as a whole, against a write to
++     * setip[] or in_clrip[] which changes both kinds of bits.
+      */
++    spin_lock_irqsave(&vaplic->lock, flags);
++
++    if ( hw_srcs )
++        val = aplic_hw_read_reg(setip ? offsetof(struct aplic_regs,
++                                                 setip[word_idx])
++                                      : offsetof(struct aplic_regs,
++                                                 in_clrip[word_idx])) &
++              hw_srcs;
++
++    if ( setip )
++        val |= vaplic->regs.ip[word_idx] & virt_srcs;
++    else
++    {
++        for_each_set_bit ( bit, virt_srcs )
++        {
++            const struct vaplic_source *src =
++                &vaplic->regs.sources[word_idx * IRQS_PER_WORD + bit];
++
++            if ( vaplic_rectified_input(src) )
++                val |= BIT(bit, U);
++        }
++    }
++
++    spin_unlock_irqrestore(&vaplic->lock, flags);
++
++    return val;
++}
++
++/*
++ * Emulate a write of @value to setip[@word_idx] (@setip) or to
++ * in_clrip[@word_idx].
++ */
++static void vaplic_ip_write(const struct domain *d, unsigned int word_idx,
++                            uint32_t value, bool setip)
++{
++    struct vaplic *vaplic = to_vaplic(d);
++    uint32_t hw_srcs = vaplic_hw_sources(d, word_idx);
++    uint32_t virt_srcs = vaplic_virtual_sources(d, word_idx);
++    unsigned long flags;
++
++    value &= hw_srcs | virt_srcs;
++    if ( !value )
++        return;
++
++    word_idx = array_index_nospec(word_idx, vaplic_nr_words(d));
++
++    spin_lock_irqsave(&vaplic->lock, flags);
++
++    if ( value & hw_srcs )
++        aplic_hw_write_reg(setip ? offsetof(struct aplic_regs, setip[word_idx])
++                                 : offsetof(struct aplic_regs,
++                                            in_clrip[word_idx]),
++                           value & hw_srcs);
++
++    if ( setip )
++    {
++        vaplic->regs.ip[word_idx] |=
++            vaplic_pendable_sources(d, word_idx, value & virt_srcs);
++
++        /* An enabled source this write has made pending gets its MSI now. */
++        vaplic_forward_msis(d, word_idx, value & virt_srcs);
++    }
++    else
++        vaplic->regs.ip[word_idx] &= ~(value & virt_srcs);
+ 
+     spin_unlock_irqrestore(&vaplic->lock, flags);
+ }
+@@ -636,7 +848,6 @@ static bool vaplic_emulate_load(const struct vcpu *curr, paddr_t addr,
+     const struct domain *currd = curr->domain;
+     const struct vaplic *vaplic = to_vaplic(currd);
+     const unsigned int offset = addr - vaplic->regs_start;
+-    uint32_t hw_srcs;
+     unsigned int i;
+ 
+     ASSERT(curr == current);
+@@ -661,9 +872,9 @@ static bool vaplic_emulate_load(const struct vcpu *curr, paddr_t addr,
+     case APLIC_SETIP_BASE ... APLIC_SETIP_LAST:
+     case APLIC_CLRIP_BASE ... APLIC_CLRIP_LAST:
+         i = regoffset_to_word_idx(offset & APLIC_SETCLR_OFFSET_MASK);
+-        hw_srcs = vaplic_hw_sources(currd, i);
++        *out = vaplic_ip_read(currd, i, offset <= APLIC_SETIP_LAST);
+ 
+-        break;
++        return true;
+ 
+     case APLIC_SETIE_BASE ... APLIC_SETIE_LAST:
+         i = regoffset_to_word_idx(offset & APLIC_SETCLR_OFFSET_MASK);
+@@ -730,10 +941,6 @@ static bool vaplic_emulate_load(const struct vcpu *curr, paddr_t addr,
+ 
+         return false;
+     }
+-
+-    *out = aplic_hw_read_reg(offset) & hw_srcs;
+-
+-    return true;
+ }
+ 
+ static bool vaplic_emulate_store(const struct vcpu *curr, paddr_t addr,
+@@ -801,22 +1008,22 @@ static bool vaplic_emulate_store(const struct vcpu *curr, paddr_t addr,
+ 
+     case APLIC_SETIP_BASE ... APLIC_SETIP_LAST:
+     case APLIC_CLRIP_BASE ... APLIC_CLRIP_LAST:
+-    {
+-        unsigned int word_idx =
+-            regoffset_to_word_idx(offset & APLIC_SETCLR_OFFSET_MASK);
++        vaplic_ip_write(currd,
++                        regoffset_to_word_idx(offset &
++                                              APLIC_SETCLR_OFFSET_MASK),
++                        value, offset <= APLIC_SETIP_LAST);
+ 
+-        value &= vaplic_hw_sources(currd, word_idx);
+-
+-        break;
+-    }
++        return true;
+ 
+     case APLIC_SETIPNUM:
+     case APLIC_CLRIPNUM:
+     case APLIC_SETIPNUM_LE:
+-        if ( !value || !vaplic_is_hw_source(currd, value) )
+-            return true;
++        if ( vaplic_is_assigned(currd, value) )
++            vaplic_ip_write(currd, value / IRQS_PER_WORD,
++                            BIT(value % IRQS_PER_WORD, U),
++                            offset != APLIC_CLRIPNUM);
+ 
+-        break;
++        return true;
+ 
+     /* Not implemented by vAPLIC, see vaplic_emulate_load(). */
+     case APLIC_MMSICFGADDR:
+@@ -849,11 +1056,6 @@ static bool vaplic_emulate_store(const struct vcpu *curr, paddr_t addr,
+ 
+         return false;
+     }
+-
+-    /* Passed through to the h/w, see vaplic_is_hw_source(). */
+-    aplic_hw_write_reg(offset, value);
+-
+-    return true;
+ }
+ 
+ static int __init cf_check vaplic_make_domu_dt_node(struct kernel_info *kinfo)
+@@ -1028,7 +1230,8 @@ int domain_vaplic_init(struct domain *d)
+         spin_lock_init(&vaplic->regs.sources[i].lock);
+ 
+     vaplic->regs.ie = xvzalloc_array(uint32_t, vaplic_nr_words(d));
+-    if ( !vaplic->regs.ie )
++    vaplic->regs.ip = xvzalloc_array(uint32_t, vaplic_nr_words(d));
++    if ( !vaplic->regs.ie || !vaplic->regs.ip )
+     {
+         domain_vaplic_deinit(d);
+ 
+@@ -1065,6 +1268,7 @@ void domain_vaplic_deinit(struct domain *d)
+ 
+     vaplic = to_vaplic(d);
+     d->arch.vintc = NULL;
++    xvfree(vaplic->regs.ip);
+     xvfree(vaplic->regs.ie);
+     xvfree(vaplic->regs.sources);
+     xvfree(vaplic);
 -- 
 2.56.1
 
