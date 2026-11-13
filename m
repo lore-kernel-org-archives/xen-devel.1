@@ -2,54 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8788D606A331
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Nov 2026 11:07:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5D1CE606A321
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Nov 2026 11:08:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=susede1 header.b=ThWEZ0GL;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=susede1 header.b=ThWEZ0GL
-Received: from list by lists.xenproject.org with outflank-mailman.1487279.1689726 (Exim 4.92)
+	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=google header.b=iejqbENq
+Received: from list by lists.xenproject.org with outflank-mailman.1487281.1689736 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRp85-0000Ik-8T; Fri, 13 Nov 2026 11:07:37 +0000
+	id 1xRp8b-0000Ys-Fv; Fri, 13 Nov 2026 11:08:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1487279.1689726; Fri, 13 Nov 2026 11:07:37 +0000
+Received: by outflank-mailman (output) from mailman id 1487281.1689736; Fri, 13 Nov 2026 11:08:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRp85-0000IP-5e; Fri, 13 Nov 2026 11:07:37 +0000
-Received: by outflank-mailman (input) for mailman id 1487279;
- Fri, 13 Nov 2026 11:07:36 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xRp8b-0000Yl-Cm; Fri, 13 Nov 2026 11:08:09 +0000
+Received: by outflank-mailman (input) for mailman id 1487281;
+ Fri, 13 Nov 2026 11:08:08 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jgross@suse.com>) id 1xRp84-0000IH-4l
- for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 11:07:36 +0000
+ (envelope-from <andrew.cooper3@citrix.com>) id 1xRp8a-0000Yd-K4
+ for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 11:08:08 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xRp83-00Fn0p-HR
- for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 12:07:35 +0100
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xRp8a-0068p9-0c
+ for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 12:08:08 +0100
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jgross@suse.com>)
- id 6af6ef6b-8faa-0a2a0a5109dd-0a2a450188a6-24
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 12:07:35 +0100
-Received: from [195.135.223.130] (helo=smtp-out1.suse.de)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jgross@suse.com>)
- id 6af6ef77-5984-0a2a45010019-c387df829124-3
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 12:07:35 +0100
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 0D9A221F2C;
- Fri, 13 Nov 2026 11:07:35 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 8D3B3134C3;
- Fri, 13 Nov 2026 11:07:34 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id asp9F3bv9mrqKQAAD6G6ig
- (envelope-from <jgross@suse.com>); Fri, 13 Nov 2026 11:07:34 +0000
+ (envelope-from <andrew.cooper3@citrix.com>)
+ id 6af6ef97-bab6-0a2a0a5309dd-0a2a4507ee10-2
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 12:08:07 +0100
+Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <andrew.cooper3@citrix.com>)
+ id 6af6ef97-b4ea-0a2a45070019-d155802bd8f5-3
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 12:08:07 +0100
+Received: by mail-wm1-f43.google.com with SMTP id
+ 5b1f17b1804b1-4a210470b49so6163755e9.2
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 03:08:07 -0800 (PST)
+Received: from [192.168.1.51] (host-78-146-248-75.as13285.net. [78.146.248.75])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4bb566cec2esm35351575e9.1.2026.11.13.03.08.06
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 13 Nov 2026 03:08:06 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -58,35 +50,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Autocrypt"; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Autocrypt"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1794568055; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=fuJLgv3neErX9bqIT5nV3BmhjdxgUOBknh7JNjqd7C8=;
-	b=ThWEZ0GLlsVkeA3Dt7QhKJN5l//7Uy1GbRGmTnG2pU/3++95cxlpMn07Kvo8Sh8zr+qUqt
-	W+gJf+MsvlH6r1XM0R3bOKOWJmAddBG6K0GQkp05H4WUD1wI1ir/pi+HZ7DzGOo9mfaIXq
-	K7HfPN+inlkKITFLz+MOWyC/iHxzQks=
-Authentication-Results: smtp-out1.suse.de;
-	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1794568055; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=fuJLgv3neErX9bqIT5nV3BmhjdxgUOBknh7JNjqd7C8=;
-	b=ThWEZ0GLlsVkeA3Dt7QhKJN5l//7Uy1GbRGmTnG2pU/3++95cxlpMn07Kvo8Sh8zr+qUqt
-	W+gJf+MsvlH6r1XM0R3bOKOWJmAddBG6K0GQkp05H4WUD1wI1ir/pi+HZ7DzGOo9mfaIXq
-	K7HfPN+inlkKITFLz+MOWyC/iHxzQks=
-Message-ID: <3a570f50-4a26-4faf-bd98-5e8ff1bf2d08@suse.com>
-Date: Fri, 13 Nov 2026 12:07:33 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:To:Subject:Cc:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1794568087; x=1795172887; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:to:subject:cc:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=QS9bf1IobbOIotKh3VTuTbeh7Hn+DqKh/HcGHkOex68=;
+        b=iejqbENqo1ZomKhIEN5eZWd5bTMY4a7hMtEE4gZ+FrV84+yyS1GE3RCP4tduWlTxP1
+         bOY03Z4DfP4AUowkGFvp3hBONg4HjqpbiheGnZRuEMvFLizNC3YHO/Oz6zHUGwbBTHM0
+         LjsoKLK8QZ+Pie/IrLHeh3ylyQsU5vVT9KZA4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794568087; x=1795172887;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:to:subject:cc:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=QS9bf1IobbOIotKh3VTuTbeh7Hn+DqKh/HcGHkOex68=;
+        b=D86lc9Jl9xxnqVY/hw+qH8AdVO1/Sc1Qzb7GajSHGa4q3rJnEZ2r37wchV4gswchPW
+         NE/S9Chi1vJPn2rRz/og2CTsinYqpEOjvHxQYH+QVCpeRtzX9Xp4L8lsrCY4lIBORmZN
+         eQus2yzGajZZlYF6DoCjuGN3P5IwOGSkbhE4IPdEsAU947+Ky1fIwwj9arunZ4ap58m5
+         HfAe14s6P2+jy4Cem5+3n61tucddPUTYB83LujNxgJQkPZJ74WSCHvtIEBfWSIbBFDWU
+         HUvSJDZAR+zxMaS7Oi7uuSfR+1rx1AjsiQMHd4YixttfOX1D3Q1YYlXkX8FUaDgh8OVy
+         KKfg==
+X-Forwarded-Encrypted: i=1; AL+hErGXPgMIW01mX2UEWtlgQ5xAwHMU4CfOySTjhJdY9fuf8C566mfIJpEqQkip2rD20oEFPKzK+Vr5GGE=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z8fpglsruU6+UEudvJGff8aKURII68mYfMKI3hBAPBtifvd3eoe
+	P8pOHyt5eLyd0T8LOUS1wT/sMOxDG+XFRjoOOYBFOBHVDmQSPINTIBoK2UOpqx1Y6R4=
+X-Gm-Gg: AYBFou3rw9HErhMiV7FGg5yBsx4NMwDpIA7QaFqL2JJb7kw4+PvQS7Ys8l2EKVIzhbx
+	ritz9EKw4/BnfaTSdmzXNdgNALcrSb932Xcu7tM9g/2ZKrPhirsAzuRmm47uonLdrgbjyzRDp9H
+	mdB5WNFrcwIb3QplAaXDlstAi2KIL98qj8Diyp/we7eDWK2dJhiOcVU1J61UGVb/FOZJ5B6qojH
+	/dQVXi47Nyaj+PIQ1GbomJYGvyOqqbOrtvVS5bXzON35hphp1X30jkQsUjgjz4exqSDmKrnUi+r
+	GrbR3G/m5s+luOpxkmIfxiNwPtCdIBUgDb9pk/dajsStlYL3Kbo/UFmknG4GnhaTxiGEurT4JE/
+	BPwAtCLrKdZ8x5wja42Y+TVCSILOCDQraEBHOBb58fC3Ss9dsLRt2egMdG+089wqZ+Vgt8AyDKw
+	877iu2D/B5iA156JnJsiF2xnFhbQLJ2d84sypU2RWDattmRKW54cFewBUVLUoCOph2OroyB5b5p
+	O8KFe1uORZ094waJKgKj8GZImiq+h1f+iTNICr8RPgp1I3IFjYN6EivXPy9rVUIhEGRl8+yv5kl
+	FojtMp1xoudvff+yvIG0j9x005eZv9J2CBOsJVQeaWVFHbTV3Qb4rvBsaMKolxOd+tJ/9J6HW9t
+	ZLZ/5xEIks8eOJek=
+X-Received: by 2002:a05:600c:354a:b0:4a2:18d4:f9e0 with SMTP id 5b1f17b1804b1-4bb55abaedcmr42056205e9.25.1794568087160;
+        Fri, 13 Nov 2026 03:08:07 -0800 (PST)
+Message-ID: <cebace3c-0a33-4e48-9c6b-a2dbdbc7db26@citrix.com>
+Date: Fri, 13 Nov 2026 11:08:06 +0000
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/link: Move SCHEDULER_ARRAY into .rodata
-From: Juergen Gross <jgross@suse.com>
-To: Andrew Cooper <andrew.cooper3@citrix.com>,
- "Orzel, Michal" <michal.orzel@amd.com>,
- Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
  <roger@xenproject.org>, Teddy Astie <teddy.astie@vates.tech>,
  Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
@@ -95,180 +102,88 @@ Cc: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
  Oleksii Kurochko <oleksii.kurochko@gmail.com>,
  Baptiste Le Duc <baptiste.le-duc@vates.tech>,
  Timothy Pearson <tpearson@raptorengineering.com>
+Subject: Re: [PATCH] xen/link: Move SCHEDULER_ARRAY into .rodata
+To: "Orzel, Michal" <michal.orzel@amd.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
 References: <20261112183620.3277591-1-andrew.cooper3@citrix.com>
  <df33fa53-8de3-47ed-984c-f23bc7161965@amd.com>
  <c5e2bffd-5576-46dd-a555-ef45066f35f8@citrix.com>
- <06fde455-ffd9-4cd5-823f-10d7728512ae@suse.com>
-Content-Language: en-US
-Autocrypt: addr=jgross@suse.com; keydata=
- xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
- ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
- dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
- NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
- XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
- AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
- CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
- mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
- G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
- kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
- Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
- RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
- vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
- sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
- aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
- w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
- auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
- 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
- fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
- HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
- QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
- ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
-In-Reply-To: <06fde455-ffd9-4cd5-823f-10d7728512ae@suse.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------cuwm9OggRG4QezIaeHSHtFRA"
-X-Spam-Level: 
-X-Spamd-Result: default: False [-9.98 / 50.00];
-	SUSE_INTERNAL_BYPASS(-9.00)[];
-	BAYES_HAM(-3.00)[100.00%];
-	NEURAL_SPAM_LONG(2.81)[0.804];
-	SIGNED_PGP(-2.00)[];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MIME_GOOD(-0.20)[multipart/signed,multipart/mixed,text/plain];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_BASE64_TEXT(0.10)[];
-	XM_UA_NO_VERSION(0.01)[];
-	TO_DN_ALL(0.00)[];
-	MIME_TRACE(0.00)[0:+,1:+,2:+,3:~];
-	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	ARC_NA(0.00)[];
-	FREEMAIL_ENVRCPT(0.00)[gmail.com];
-	RCVD_TLS_ALL(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[suse.com,xenproject.org,vates.tech,kernel.org,xen.org,epam.com,arm.com,gmail.com,raptorengineering.com];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[];
-	HAS_ATTACHMENT(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo]
-X-Spam-Score: -9.98
-X-purgate-ID: tlsNG-d62444/1794568055-1E465757-0F3CB5F7/35/110847
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <c5e2bffd-5576-46dd-a555-ef45066f35f8@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-ef75cf/1794568087-A6CDFAE4-48447D00/0/0
 X-purgate-type: clean
-X-purgate-size: 6195
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+X-purgate-size: 807
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
 	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------cuwm9OggRG4QezIaeHSHtFRA
-Content-Type: multipart/mixed; boundary="------------mSAD8nFtG71eaUxEm8CCrQey";
- protected-headers="v1"; hp="clear"
-Message-ID: <3a570f50-4a26-4faf-bd98-5e8ff1bf2d08@suse.com>
-Date: Fri, 13 Nov 2026 12:07:33 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/link: Move SCHEDULER_ARRAY into .rodata
-From: Juergen Gross <jgross@suse.com>
-To: Andrew Cooper <andrew.cooper3@citrix.com>,
- "Orzel, Michal" <michal.orzel@amd.com>,
- Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Teddy Astie <teddy.astie@vates.tech>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Timothy Pearson <tpearson@raptorengineering.com>
-References: <20261112183620.3277591-1-andrew.cooper3@citrix.com>
- <df33fa53-8de3-47ed-984c-f23bc7161965@amd.com>
- <c5e2bffd-5576-46dd-a555-ef45066f35f8@citrix.com>
- <06fde455-ffd9-4cd5-823f-10d7728512ae@suse.com>
-Content-Language: en-US
-Autocrypt: addr=jgross@suse.com; keydata=
- xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
- ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
- dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
- NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
- XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
- AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
- CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
- mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
- G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
- kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
- Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
- RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
- vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
- sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
- aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
- w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
- auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
- 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
- fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
- HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
- QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
- ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
-In-Reply-To: <06fde455-ffd9-4cd5-823f-10d7728512ae@suse.com>
+On 13/11/2026 9:47 am, Andrew Cooper wrote:
+> On 13/11/2026 7:31 am, Orzel, Michal wrote:
+>> On 12-Nov-26 19:36, Andrew Cooper wrote:
+>>> This is a list of pointers which is only ever read.
+>> I think that's not true. See sched_test_func() macro in scheduler_init() that
+>> assigns NULL in case the scheduler does not implement the required hook.
+> Lovely, sorry I misread the const on the name there.
+>
+> sched_test_func() on the other hand can be delete.  We can force those
+> checks at compiletime.
+>
+> But, there's the global init case.  None of the current global init
+> hooks do anything except return 0, but I suppose in principle that may
+> want to stay.
+>
+> I suppose I'll keep SCHEDULER_ARRAY in read_mostly for now.
 
---------------mSAD8nFtG71eaUxEm8CCrQey
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+Actually no.  They should be in ro_after_init.
 
-T24gMTMuMTEuMjYgMTE6MTEsIEp1ZXJnZW4gR3Jvc3Mgd3JvdGU6DQo+IE9uIDEzLjExLjI2
-IDEwOjQ3LCBBbmRyZXcgQ29vcGVyIHdyb3RlOg0KPj4gT24gMTMvMTEvMjAyNiA3OjMxIGFt
-LCBPcnplbCwgTWljaGFsIHdyb3RlOg0KPj4+DQo+Pj4gT24gMTItTm92LTI2IDE5OjM2LCBB
-bmRyZXcgQ29vcGVyIHdyb3RlOg0KPj4+PiBUaGlzIGlzIGEgbGlzdCBvZiBwb2ludGVycyB3
-aGljaCBpcyBvbmx5IGV2ZXIgcmVhZC4NCj4+PiBJIHRoaW5rIHRoYXQncyBub3QgdHJ1ZS4g
-U2VlIHNjaGVkX3Rlc3RfZnVuYygpIG1hY3JvIGluIHNjaGVkdWxlcl9pbml0KCkgdGhhdA0K
-Pj4+IGFzc2lnbnMgTlVMTCBpbiBjYXNlIHRoZSBzY2hlZHVsZXIgZG9lcyBub3QgaW1wbGVt
-ZW50IHRoZSByZXF1aXJlZCBob29rLg0KPj4NCj4+IExvdmVseSwgc29ycnkgSSBtaXNyZWFk
-IHRoZSBjb25zdCBvbiB0aGUgbmFtZSB0aGVyZS4NCj4+DQo+PiBzY2hlZF90ZXN0X2Z1bmMo
-KSBvbiB0aGUgb3RoZXIgaGFuZCBjYW4gYmUgZGVsZXRlLsKgIFdlIGNhbiBmb3JjZSB0aG9z
-ZQ0KPj4gY2hlY2tzIGF0IGNvbXBpbGV0aW1lLg0KPj4NCj4+IEJ1dCwgdGhlcmUncyB0aGUg
-Z2xvYmFsIGluaXQgY2FzZS7CoCBOb25lIG9mIHRoZSBjdXJyZW50IGdsb2JhbCBpbml0DQo+
-PiBob29rcyBkbyBhbnl0aGluZyBleGNlcHQgcmV0dXJuIDAsIGJ1dCBJIHN1cHBvc2UgaW4g
-cHJpbmNpcGxlIHRoYXQgbWF5DQo+PiB3YW50IHRvIHN0YXkuDQo+IA0KPiBUaGlzIGNhbiBl
-YXNpbHkgYmUgaGFuZGxlZCBwZXItc2NoZWR1bGVyOg0KPiANCj4gLSBtYWtlIC5nbG9iYWxf
-aW5pdCByZXR1cm4gdm9pZA0KPiAtIGluIGNhc2UgYSBnbG9iYWxfaW5pdCBob29rIGZhaWxz
-LCBsZXQgaXQgc2V0IGEgc3RhdGljIHZhcmlhYmxlIGluIHRoZQ0KPiAgwqAgc2NoZWR1bGVy
-LCByZXN1bHRpbmcgaW4gYW55IC5pbml0KCkgY2FsbCBmb3IgdGhhdCBzY2hlZHVsZXIgdG8g
-ZmFpbA0KPiANCj4gVGhpcyB3aWxsIGF2b2lkIGFueSBuZWVkIHRvIE5VTEwgYSBzY2hlZHVs
-ZXIgaW4gdGhlIGFycmF5IChhc3N1bWluZw0KPiBzY2hlZF90ZXN0X2Z1bmMoKSBoYXMgYmVl
-biByZW1vdmVkLCB0b28pLg0KVGhpbmtpbmcgbW9yZSBhYm91dCBpdDogdGhpcyBzY2hlbWUg
-d291bGQgZXZlbiBhbGxvdyB0byBkcm9wIHRoZSAuZ2xvYmFsX2luaXQNCmhvb2sgY29tcGxl
-dGVseS4gSWYgYSBzY2hlZHVsZXIgbmVlZHMgdGhhdCwgY2FsbCBpdCBmcm9tIHRoZSAuaW5p
-dCBob29rIHRoZQ0KZmlyc3QgdGltZSB0aGF0IGlzIGJlaW5nIGNhbGxlZC4gQXMgdGhlcmUg
-YXJlIG5ldmVyIGNvbmN1cnJlbnQgY2FsbHMgb2YgLmluaXQNCihvbmx5IGNhbGxlZCBlaXRo
-ZXIgYXQgYm9vdCBmb3IgdGhlIGRlZmF1bHQgc2NoZWR1bGVyLCBvciB1bmRlciBjcHVwb29s
-X2xvY2spLA0KdGhlcmUgaXMgbm8gbmVlZCBmb3IgbW9yZSB0aGFuIGEgc2ltcGxlIHBlci1z
-Y2hlZHVsZXIgdmFyaWFibGUgdGVsbGluZyB0aGF0DQp0aGUgZ2xvYmFsIGluaXQgZnVuY3Rp
-b24gaGFzIGJlZW4gY2FsbGVkIGFuZCBpbmRpY2F0aW5nIGEgcG9zc2libGUgZmFpbHVyZSBv
-Zg0KaXQuDQoNCg0KSnVlcmdlbg0K
-
---------------mSAD8nFtG71eaUxEm8CCrQey--
-
---------------cuwm9OggRG4QezIaeHSHtFRA
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmr273YFAwAAAAAACgkQsN6d1ii/Ey8q
-2Af8DK4ikAtebNey278ETI5RYv/pAuFP+gPTjNBZJr84eVjOOY9zllZhY+9+htA9YhZduw4nWBCg
-6cpCPjikV7PMoMdqjUD0p7LxPaZW8tRwQsisSSDQBTW4J3+WZthoT1Fy3lozSdbSXrZaU6s6rgt/
-3XPNoMcZkO2oZtbZgO/3KyJv18QXaylPS6aovGQU8nfqeCrgR2YehD4q/QfZJKu/ZqM75zQ4vPo+
-tff/I4ewhww6XDk8MRiNxsHwpJfnPtTeKjewnVeUykA9EEQPB+jM4sPgI2uRD5xj333hXceKmQJe
-hJHB3srRbHLhxpolujW4ijZjL0PIPVjkCF6dBVGA7Q==
-=f5u6
------END PGP SIGNATURE-----
-
---------------cuwm9OggRG4QezIaeHSHtFRA--
+~Andrew
 
