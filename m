@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2699C606A31C
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Nov 2026 11:48:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B4473606A323
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Nov 2026 11:50:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Rdu7Aa3k
-Received: from list by lists.xenproject.org with outflank-mailman.1487344.1689772 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=DE4DGlI8
+Received: from list by lists.xenproject.org with outflank-mailman.1487348.1689782 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRplL-00081R-1K; Fri, 13 Nov 2026 11:48:11 +0000
+	id 1xRpnE-00016r-GF; Fri, 13 Nov 2026 11:50:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1487344.1689772; Fri, 13 Nov 2026 11:48:11 +0000
+Received: by outflank-mailman (output) from mailman id 1487348.1689782; Fri, 13 Nov 2026 11:50:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRplK-00081K-Ut; Fri, 13 Nov 2026 11:48:10 +0000
-Received: by outflank-mailman (input) for mailman id 1487344;
- Fri, 13 Nov 2026 11:48:10 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xRplK-00081B-5u
- for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 11:48:10 +0000
+	id 1xRpnE-00016k-Bp; Fri, 13 Nov 2026 11:50:08 +0000
+Received: by outflank-mailman (input) for mailman id 1487348;
+ Fri, 13 Nov 2026 11:50:07 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xRpnD-00010Y-6j
+ for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 11:50:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xRplJ-009yb8-Ex
- for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 12:48:09 +0100
+ id 1xRpnC-00AFye-Jc
+ for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 12:50:06 +0100
 Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6af6f8f2-8faa-0a2a0a5109dd-0a2a450bb256-18
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 12:48:09 +0100
-Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
+ id 6af6f965-e002-0a2a0a5209dd-0a2a450bb926-26
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 12:50:06 +0100
+Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
  by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6af6f8f9-b7e8-0a2a450b0019-d155802ad917-3
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 12:48:09 +0100
-Received: by mail-wm1-f42.google.com with SMTP id
- 5b1f17b1804b1-4a35db1f202so5850965e9.3
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 03:48:09 -0800 (PST)
+ id 6af6f96e-b7e8-0a2a450b0019-d155802ded57-3
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 12:50:06 +0100
+Received: by mail-wm1-f45.google.com with SMTP id
+ 5b1f17b1804b1-4a1b07c3c5fso12327015e9.1
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 03:50:06 -0800 (PST)
 Received: from [192.168.1.6] (user-109-243-65-71.play-internet.pl.
  [109.243.65.71]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-49c5fb58fefsm5405789f8f.26.2026.11.13.03.48.07
+ 5b1f17b1804b1-4bb4e29d24dsm152404235e9.11.2026.11.13.03.50.04
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 13 Nov 2026 03:48:08 -0800 (PST)
+ Fri, 13 Nov 2026 03:50:05 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,66 +51,74 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794570489; x=1795175289; darn=lists.xenproject.org;
+        d=gmail.com; s=20260707; t=1794570606; x=1795175406; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=kT5AakMM7bhWHzM4vswrNL0FHCSeO06mbVWNVLkUTaQ=;
-        b=Rdu7Aa3kBlyjAR5mjuY2G/QDIZBbc0yvCvYmj+RahtPbLAt2ljjkq02H15NPx7yJEE
-         tJ1clrVVWs2ICs35LiWeJV5FzrU0pyEAda1lGmofA7EJw68hORuaE9NJSvF0IX4y36cE
-         tJCWdWQKGL+ryR3lwoDG07+46+HGPqjmcYvq35dcQm9/AFpPmulpJDmcc+7gE5N1TCUE
-         WiD7Lv5PtX5+uK+kNoSXiBQQUBE8ZjXlRyXf/6pdEg9t/ab7w6v6Mg4DErZSxP26qrdr
-         owwD55LPNTMREpAv4uFt31FdVQK0Bv5oZ+xD6gSVQsQ9VfLCed+ln8a9CHdrv5yIc8S7
-         vh4w==
+        bh=rLx99/ZjVTe3HJ1l2gnPlhLM6D11tPxPRltGr94qPaE=;
+        b=DE4DGlI8lRJdl43IkjnismKLmee50IcTaHujNUAKJA9cX5DLdpK8G+QHcvSuBAmdsZ
+         FYv2vscJyETmdPVx1z4/UwF9fJPjvksOdEBMcCVkOVtsCDNTMP9SY4Iqi25l/bQSMNih
+         q+gODoVQcgE66Cis04rbG9FHblbskaqpzaYklOhdviPkAZef2rx9xmwivI0I/qHkVW4G
+         JC7AuhLbWhjD0F68NTp2mbqJi+4sR35DJeFu3VdvoD4KZ+N3vjuCpy0XqGHbD5TxFHCU
+         VSM7vuwdhcg0pS/WPRcA0WuJ0z6q9/9P0gudMX5dsE1/3RTQKZmjWGiC9INUZC6+VX1G
+         GVhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794570489; x=1795175289;
+        d=1e100.net; s=20260707; t=1794570606; x=1795175406;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=kT5AakMM7bhWHzM4vswrNL0FHCSeO06mbVWNVLkUTaQ=;
-        b=giSDTAijGp5eh4EzK0opofZPXHkKoN6POR0NmJPvMkQ/xuzc1dHUKhJzTiisXdvgOd
-         ZDZtJGlJMw5sb5KT63MZG12YE3yaUnu9WMug5on0ttJiVRDznb80t6YnGf95KvPmGZE6
-         09BcM1twEyvn99UmJMUS+og+LLvHR8FmMW5bhpr7RkSVXKGywOE9MmgDd+SdybdLEYny
-         uImraKOjbscmvXgkluFA7axSMz1EuG/MzQRj1fNafSQF/+3wIUpxzyRAd6PSnidfq7hY
-         ec0HURtQI24wETicWS/2xDaIBDUXKfz17UZfJFnEYkYCgDng+wyyDCtN8YbiEv1zOWKa
-         y0xQ==
-X-Forwarded-Encrypted: i=1; AL+hErHLZBdtfNoq27LALPHCi9IMS3nWHeXIGa96B3fG1BDnwh3fEYfWM3lYrUzJwUi5zhSuZDFtlDn8MpI=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z8vAQDUvXHs3tRg27ro2bpV7agTrOumjB5pDnoRhPoR7QE9BQ1v
-	S7OwPF6hIFTeY/FqTUUdVBI9W23syD4AH6f32QsZgALpk4eRbrS+BNc7
-X-Gm-Gg: AYBFou1W+AdReAOq3rAxOdr70FWMfmbECjGdvkgE79hKQmad1kGku7umdAphPbdwDrL
-	g7yZOwQLaD3UjvA5Dk8r7Ie8QIP1s7vxbgyxpri8A3RYhPuR3Xy6+vc+EqUWZYA5hg14L0tJed6
-	c0/DJSosLD4J187ztIuO1eRaXCo3uphz4BRfMueKSGuyx+U3DWmru99M0ZHG0EvZbhAC1HsrrxX
-	uODSvmve1koLEaTY7bwO/F+0vGmuhSzBE0uklIS2Bfy/NA4QQFhrSwMhwDSQvzysZBTqXyXUu43
-	Y6kqWJeJoJUyfB6uEuPtEYsb48OViU18gaf7vXc7SS5LACU22wkZ+oeohiyXb3l2hnAGdGCeyK/
-	3lOazifDghWBBMnVOz+HX0kHs/OSdC/zYnKYVFTJx7DexapuWtcFr2nnFH378kt1aUcCT/Vx9gk
-	MgYtWt3vw+HGCOhYOnJPbfuG8SRakJ2ITIjybElpz1jHB/nLVTg+GbeiyAHr64LoOT9HsFhhV10
-	SXNx8Sg/1vyZ+ly3eL8kbrI0HOes/xN0CLOcMA7/HVHMAkZbjP77hvrW2rAnNJtfS/XpRC7pp2Y
-	gG/GSLAdMyuDhrKhtO8DY7mcEre8McwKwt6AG7LpBbL7et+tj618XdIlF2AuQ4zT5pLDhWVkSC5
-	dfA==
-X-Received: by 2002:a05:600c:870f:b0:4ba:495c:3798 with SMTP id 5b1f17b1804b1-4bb55af1377mr43811575e9.35.1794570488624;
-        Fri, 13 Nov 2026 03:48:08 -0800 (PST)
-Message-ID: <5de39c17-a325-4702-8145-036c7258cca6@gmail.com>
-Date: Fri, 13 Nov 2026 12:48:05 +0100
+        bh=rLx99/ZjVTe3HJ1l2gnPlhLM6D11tPxPRltGr94qPaE=;
+        b=plU4+t7GrQd3yQxzJe2I/HJWDo2fawAj/e7fx7CQhVOOzuNfqP7cFc8RYmP3m5ZK3E
+         W5T3LwDFS7Bql9yy+qZDZjJOw4Gt/IuGNq+A3bP8nMWXbwefp12SBDPUfG2bYvRCqwIS
+         NXVrrAgHv4ybpaB+/+sHQ71J9SLBjmRx0OHjD8nhIXWHvkjiT+kjpF1Xqu8aRHOoRnRI
+         Yo5r5LuOJ3J0c20BsvmKpmEP0Su0D40gseXkkLs1B7S25YLuKX3s6BM0YHWI4y8e+8bL
+         xhFf8vOLx2sbOQnyvcae7/u2MvovVDtzutXThPZfyLgxGl/ZwpVQzPyORX7XQTdmfL7R
+         gnuw==
+X-Forwarded-Encrypted: i=1; AL+hErG8V6AW3ZF8ysI5og1bLpx2GBTEDCGwMwTFaUlzIR5pn+DQqeX7X1fY3dZKLBMVHfCD2bQJSC5+Ig4=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z+bUTn8GKVNWxK+Wu/QnqxU/fhzzuda9FBJFEd995PlTJkD9BGO
+	JBtZHIcegtzt9uRoMjvDds9b7JLBCtYO3bZrSvsw0rEDYLSeT0qwV3/t
+X-Gm-Gg: AYBFou0CXnpvisyPLc9NaKm+6x425FceIMQ4XzLJJK9MreX7eyQER3qxDw9bdn5DV5s
+	LVm37zcxDLz8Obe5Uizvxp3z3Nv9KWGFN2v5yN9IxkhJRdaui758CNZcTVqjg29NlSaqsQPtpQq
+	C7HV2pM9Tkgp/QrsGmFes60e77TPwR3LJXdRAUo9B/mZjXsydbwmulgTLFTAYsZU9Th6uG+fxXO
+	X5VnZMLLhYXILfmYllzzJtsi7Pe7kia0G9NadFp7dPCmJy6sZKrkAZU0FQZfvlGVRP1X/U+YFJE
+	w9Lp7ve7iD0i5WWwEnlR7zYESry6bDxU0JhJjEa6A6BPmuBEO+4HiMbbcVqjStH/fgeb4JLHSBU
+	kVs0J5r7W4LlE4KjTm2nlkqtloY4cGEaRfmFUJxfQSYgJNvW4GI6dFTucyv/QiQqt55cCVGsjUD
+	g1mMVIGpM8XhStFikQRCI1JT1SFVK946YniCcy3/VhCByCCGHHDzcC5mSxGHzgvd91z29Hk4YoP
+	ahQzdOwk7ZPBxjWYOJBpXpBXhLmf+At1oPL+yojJW7H26F4eX/3dSxk5kNrkGwU9/319W8SgHi5
+	S1sfigqJfLzEX16wa6SsVS9qPPhrq9Dlh4RJ6HLnsJ2iyY0pXZkut1A5Z2SDsahKSFUhaDVRyJV
+	iKmU=
+X-Received: by 2002:a05:600c:34d0:b0:4a2:133:45e1 with SMTP id 5b1f17b1804b1-4bb55a59f41mr48336405e9.24.1794570605675;
+        Fri, 13 Nov 2026 03:50:05 -0800 (PST)
+Message-ID: <555e4be7-0734-4f02-b556-82a538238e05@gmail.com>
+Date: Fri, 13 Nov 2026 12:50:04 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 04/26] emul/ns16x50: implement emulator stub
-To: dmukhin@ford.com, xen-devel@lists.xenproject.org
-Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com,
- julien@xen.org, michal.orzel@amd.com, roger@xenproject.org,
- sstabellini@kernel.org, xakep.amatop@gmail.com, dmukhin@xen.org
-References: <20261111194800.1070016-1-dmukhin@ford.com>
- <20261111194800.1070016-5-dmukhin@ford.com>
+Subject: Re: [PATCH] xen/link: Don't separate .data.read_mostly from .data
+To: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Teddy Astie <teddy.astie@vates.tech>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Timothy Pearson <tpearson@raptorengineering.com>,
+ Ross Lagerwall <ross.lagerwall@citrix.com>
+References: <20261112185824.3302712-1-andrew.cooper3@citrix.com>
+ <66c8bb12-1139-4689-99a0-3bef189ba5e9@gmail.com>
+ <5b1832a9-013d-4695-b089-333181157f8a@citrix.com>
 Content-Language: en-US
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <20261111194800.1070016-5-dmukhin@ford.com>
+In-Reply-To: <5b1832a9-013d-4695-b089-333181157f8a@citrix.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-42698a/1794570489-19AC09EA-58DD8F3D/10/73395122804
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-42698a/1794570606-AB2DC9EA-B2D5B752/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 13782
+X-purgate-size: 5460
 X-Spam-Status: No, score=-14.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
@@ -121,441 +129,140 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 
 
-On 11/11/26 8:47 PM, dmukhin@ford.com wrote:
-> From: Denis Mukhin <dmukhin@ford.com>
+On 11/13/26 11:55 AM, Andrew Cooper wrote:
+> On 13/11/2026 8:51 am, Oleksii Kurochko wrote:
+>>
+>>
+>> On 11/12/26 7:58 PM, Andrew Cooper wrote:
+>>> This appears to be an error in x86 which got copied into all other
+>>> architectures.  .data.read_mostly is an internal detail, and none of the
+>>> similar sections get exposed externally.
+>>>
+>>> Simply place .data.read_mostly in .data.
+>>>
+>>> No functional change.
+>>>
+>>> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+>>> ---
+>>> CC: Jan Beulich <jbeulich@suse.com>
+>>> CC: Roger Pau Monné <roger@xenproject.org>
+>>> CC: Teddy Astie <teddy.astie@vates.tech>
+>>> CC: Stefano Stabellini <sstabellini@kernel.org>
+>>> CC: Julien Grall <julien@xen.org>
+>>> CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+>>> CC: Bertrand Marquis <bertrand.marquis@arm.com>
+>>> CC: Michal Orzel <michal.orzel@amd.com>
+>>> CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+>>> CC: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+>>> CC: Timothy Pearson <tpearson@raptorengineering.com>
+>>> CC: Ross Lagerwall <ross.lagerwall@citrix.com>
+>>>
+>>> This is to simplfy the script checking that xen.efi's section
+>>> attributes/alignments are correct for UEFI SecureBoot.
+>>> ---
+>>>    xen/arch/arm/xen.lds.S   | 8 +++-----
+>>>    xen/arch/ppc/xen.lds.S   | 8 +++-----
+>>>    xen/arch/riscv/xen.lds.S | 7 ++-----
+>>>    xen/arch/x86/xen.lds.S   | 4 +---
+>>>    4 files changed, 9 insertions(+), 18 deletions(-)
+>>>
+>>> diff --git a/xen/arch/arm/xen.lds.S b/xen/arch/arm/xen.lds.S
+>>> index d1bb6c62d208..8d0954c90afd 100644
+>>> --- a/xen/arch/arm/xen.lds.S
+>>> +++ b/xen/arch/arm/xen.lds.S
+>>> @@ -86,16 +86,14 @@ SECTIONS
+>>>          __ro_after_init_end = .;
+>>>      } : text
+>>>    -  .data.read_mostly : {
+>>> -       *(.data.read_mostly)
+>>> -  } :text
+>>> -
+>>>      . = ALIGN(SMP_CACHE_BYTES);
+>>>      .data : {                    /* Data */
+>>> -       *(.data.page_aligned)
+>>> +       *(.data.read_mostly)
+>>>             HYPFS_PARAM
+>>>    +       *(.data.page_aligned)
+>>> +
+>>>           *(.data .data.*)
+>>>           CONSTRUCTORS
+>>>      } :text
+>>> diff --git a/xen/arch/ppc/xen.lds.S b/xen/arch/ppc/xen.lds.S
+>>> index cddb70855307..b2159279169c 100644
+>>> --- a/xen/arch/ppc/xen.lds.S
+>>> +++ b/xen/arch/ppc/xen.lds.S
+>>> @@ -77,16 +77,14 @@ SECTIONS
+>>>            __ro_after_init_end = .;
+>>>        } :text
+>>>    -    DECL_SECTION(.data.read_mostly) {
+>>> -        *(.data.read_mostly)
+>>> -    } :text
+>>> -
+>>>        . = ALIGN(PAGE_SIZE);
+>>>        DECL_SECTION(.data) {                    /* Data */
+>>> -        *(.data.page_aligned)
+>>> +        *(.data.read_mostly)
+>>>              HYPFS_PARAM
+>>>    +        *(.data.page_aligned)
+>>> +
+>>>            *(.data .data.*)
+>>>            CONSTRUCTORS
+>>>        } :text
+>>> diff --git a/xen/arch/riscv/xen.lds.S b/xen/arch/riscv/xen.lds.S
+>>> index 250ee3f36f4f..d1c5ce59c90d 100644
+>>> --- a/xen/arch/riscv/xen.lds.S
+>>> +++ b/xen/arch/riscv/xen.lds.S
+>>> @@ -84,16 +84,13 @@ SECTIONS
+>>>            __ro_after_init_end = .;
+>>>        } : text
+>>>    -    .data.read_mostly : {
+>>> -        *(.data.read_mostly)
+>>> -    } :text
+>>> -
+>>>        . = ALIGN(PAGE_SIZE);
+>>>        .data : {                    /* Data */
+>>> -        *(.data.page_aligned)
+>>> +        *(.data.read_mostly)
+>>>              HYPFS_PARAM
+>>>    +        *(.data.page_aligned)
+>>>            *(.sdata .sdata.*)
+>>>            *(.data .data.*)
+>>>            CONSTRUCTORS
+>>> diff --git a/xen/arch/x86/xen.lds.S b/xen/arch/x86/xen.lds.S
+>>> index 925848980219..99802aed4e13 100644
+>>> --- a/xen/arch/x86/xen.lds.S
+>>> +++ b/xen/arch/x86/xen.lds.S
+>>> @@ -295,13 +295,11 @@ SECTIONS
+>>>        __2M_rwdata_start = .;       /* Start of 2M superpages, mapped
+>>> RW. */
+>>>      . = ALIGN(SMP_CACHE_BYTES);
+>>> -  DECL_SECTION(.data.read_mostly) {
+>>> +  DECL_SECTION(.data) {
+>>>           *(.data.read_mostly)
+>>>             HYPFS_PARAM
+>>> -  } PHDR(text)
+>>>    -  DECL_SECTION(.data) {
+>>>           *(.data.page_aligned)
+>>>           *(.data .data.*)
+>>>      } PHDR(text)
+>>
+>> The ordering is preserved, but the alignment between the two isn't.
+>> Today the ALIGN() before .data sits between .data.read_mostly and
+>> regular .data.  After this patch it sits before .data.read_mostly, and
+>> the only thing separating it from *(.sdata/.data) is
+>> *(.data.page_aligned), which has no inputs on RISC-V, PPC or Arm with
+>> CONFIG_MPU. So the tail of .data.read_mostly will share a cache line
+>> with ordinary .data, which is the false sharing __read_mostly is meant
+>> to avoid (IIUC).
 > 
-> Define the placeholder for NS16550 UART emulator.
+> __read_mostly is indeed meant to reduce false sharing, but this patch
+> does not introduce any.
 > 
-> Implement alloc/free vUART hooks, add stub for I/O port handler,
-> initialize emulator state and define debug logging facilities.
-> 
-> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
-> ---
->   xen/common/emul/vuart/Makefile  |   1 +
->   xen/common/emul/vuart/ns16x50.c | 417 ++++++++++++++++++++++++++++++++
->   2 files changed, 418 insertions(+)
->   create mode 100644 xen/common/emul/vuart/ns16x50.c
-> 
-> diff --git a/xen/common/emul/vuart/Makefile b/xen/common/emul/vuart/Makefile
-> index 97f792dc6641..fe904f6cb65d 100644
-> --- a/xen/common/emul/vuart/Makefile
-> +++ b/xen/common/emul/vuart/Makefile
-> @@ -1 +1,2 @@
->   obj-y += vuart.o
-> +obj-$(CONFIG_VUART_NS16X50) += ns16x50.o
+> HYPFS_PARAM should have been read_mostly to begin with, and page
+> alignment is greater th cache alignment so there's no sharing there either.
+Thanks for clarifying. Then:
 
-CONFIG_VUART_NS16X50 appears only in 16/26, so this file and everything
-added to it by 05..15 isn't compiled at all until then. Introducing the
-Kconfig option (EXPERT, default n) in this patch would make each of the
-following patches build-tested on its own.
-
-> diff --git a/xen/common/emul/vuart/ns16x50.c b/xen/common/emul/vuart/ns16x50.c
-> new file mode 100644
-> index 000000000000..6e1cfecbaa55
-> --- /dev/null
-> +++ b/xen/common/emul/vuart/ns16x50.c
-> @@ -0,0 +1,417 @@
-> +/* SPDX-License-Identifier: GPL-2.0-only */
-> +/*
-> + * NS16550-compatible UART Emulator.
-> + *
-> + * See:
-> + * - Serial and UART Tutorial:
-> + *     https://download.freebsd.org/doc/en/articles/serial-uart/serial-uart_en.pdf
-> + * - UART w/ 16 byte FIFO:
-> + *     https://www.ti.com/lit/ds/symlink/tl16c550c.pdf
-> + * - UART w/ 64 byte FIFO:
-> + *     https://www.ti.com/lit/ds/symlink/tl16c750.pdf
-> + * - DesignWare DW_apb_uart Databook, v4.02a:
-> + *     https://iccircle.com/static/upload/img20240313113905.pdf
-
-I can't open this link: "The requested URL was not found on this server.".
-
-> + *
-> + * Limitations:
-> + * - Only x86;
-> + * - Only Xen console as a backend, no inter-domain communication (similar to
-> + *   vpl011 on Arm);
-> + * - Only 8n1 emulation (8-bit data, no parity, 1 stop bit);
-> + * - No baud rate emulation (reports 115200 baud to the guest OS);
-> + * - No FIFO-less mode emulation;
-> + * - No RX FIFO interrupt moderation (FCR) emulation;
-> + * - No integration w/ VM snapshotting (HVM_REGISTER_SAVE_RESTORE() and
-> + *   friends);
-> + * - No ISA IRQ sharing allowed;
-> + * - No MMIO-based UART emulation.
-> + */
-> +
-> +#define pr_prefix               "ns16x50"
-> +#define pr_fmt(fmt)             pr_prefix ": " fmt
-> +
-> +#ifdef CONFIG_VUART_NS16X50_DEBUG
-> +#define guest_prefix            "FROM GUEST "
-
-Nit: unused until 11/26; I'd introduce it together with its user.
-
-> +#define ns16x50_log_level       2
-> +#else
-> +#define guest_prefix            ""
-> +#define ns16x50_log_level       0
-> +#endif
-
-Are these defines used anywhere outside this file? I couldn't find any 
-usage outside this file, so please move them after the includes.
-
-I'm not sure whether there is a specific CODING_STYLE rule for this, but 
-looking at other files, includes usually come before defines, except in 
-cases where there is a good reason to use the opposite order.
-
-> +
-> +#include <asm/x86_emulate.h>
-> +
-> +#include <xen/8250-uart.h>
-
-This is common code, but it depends on x86 in several places:
-X86EMUL_OKAY (and with it the whole x86 instruction emulator header),
-register_portio_handler(), and later in the series vPIC/vIOAPIC,
-ioports_deny_access() and the emuirq claim. The register model itself
-(registers, FIFOs, IIR) is architecture-neutral, though. I'd separate
-the two: keep ns16x50_access() and the register emulation common, and
-put the transport (portio handler) and the IRQ line handling behind a
-couple of per-arch hooks, either under #ifdef CONFIG_X86 or in a small
-arch file. An MMIO-based variant would then only need another
-transport.
-
-Nit: xen/ headers usually come before asm/ ones.
-
-> +#include <xen/console.h>
-> +#include <xen/err.h>
-> +#include <xen/iocap.h>
-> +#include <xen/resource.h>
-> +#include <xen/vuart.h>
-> +#include <xen/xvmalloc.h>
-> +
-> +#include <public/io/console.h>
-> +
-> +#define ns16x50_log(n, lvl, vdev, fmt, args...) \
-> +do { \
-> +    if ( ns16x50_log_level >= n ) \
-> +        gprintk(lvl, pr_fmt("%s: " fmt), (vdev)->name, ## args); \
-> +} while (0)
-> +
-> +#define ns16x50_err(vdev, fmt, args...) \
-> +    ns16x50_log(0, XENLOG_ERR, vdev, fmt, ## args)
-> +#define ns16x50_warn(vdev, fmt, args...) \
-> +    ns16x50_log(1, XENLOG_WARNING, vdev, fmt, ## args)
-> +#define ns16x50_info(vdev, fmt, args...) \
-> +    ns16x50_log(2, XENLOG_INFO, vdev, fmt, ## args)
-> +#define ns16x50_debug(vdev, fmt, args...) \
-> +    ns16x50_log(3, XENLOG_DEBUG, vdev, fmt, ## args)
-
-ns16x50_log_level is at most 2, so ns16x50_debug() never prints, even
-with CONFIG_VUART_NS16X50_DEBUG=y. Is that intended? The same applies
-to the "ns16x50_log_level >= 3" checks added later in the series.
-
-> +
-> +/*
-> + * Number of supported registers in the UART.
-> + */
-> +#define NS16X50_REGS_NUM        (UART_SCR + 1)
-> +
-> +/*
-> + * Number of emulated registers.
-> + *
-> + * - Emulated registers [0..NS16X50_REGS_NUM] are R/W registers for DLAB=0.
-> + * - DLAB=1, R/W, DLL         = (NS16X50_REGS_NUM + 0)
-> + * - DLAB=1, R/W, DLM         = (NS16X50_REGS_NUM + 1)
-> + */
-> +#define NS16X50_EMU_REGS_NUM    (NS16X50_REGS_NUM + 2)
-> +
-> +/*
-> + * Virtual ns16x50 device state.
-> + */
-> +struct vuart_ns16x50 {
-> +    uint8_t regs[NS16X50_EMU_REGS_NUM]; /* Emulated registers */
-> +    const struct vuart_info *info;      /* UART description */
-> +    struct domain *owner;               /* Owner domain */
-> +    const char *name;                   /* Device name */
-> +    spinlock_t lock;                    /* Protection */
-
-The comment here isn't really useful. Could we clarify, at least, then 
-what it protects?
-
-> +    struct xencons_interface cons;      /* Emulated RX/TX FIFOs */
-> +};
-> +
-> +static inline void ns16x50_lock_init(struct vuart_ns16x50 *vdev)
-> +{
-> +    spin_lock_init(&vdev->lock);
-> +}
-> +
-> +static inline void ns16x50_lock(struct vuart_ns16x50 *vdev,
-> +                                unsigned long *flags)
-> +{
-> +    spin_lock(&vdev->lock);
-> +}
-> +
-> +static inline bool ns16x50_trylock(struct vuart_ns16x50 *vdev,
-> +                                   unsigned long *flags)
-> +{
-> +    return spin_trylock(&vdev->lock);
-> +}
-> +
-> +static inline void ns16x50_unlock(struct vuart_ns16x50 *vdev,
-> +                                  unsigned long *flags)
-> +{
-> +    spin_unlock(&vdev->lock);
-> +}
-
-Are these wrappers are really useful?
-
-Also, flags is never used by any of the wrappers. If they are meant to 
-become spin_lock_irqsave() at some point, please say so; otherwise plain
-spin_lock() calls would be simpler.
-
-> +
-> +/*
-> + * Emulate 8-bit write access to ns16x50 register.
-> + */
-
-Will this comment be extended in later patches? if no, then it should be 
-/* ... */ style here. The similar could be applied then for other 
-similar functions.
-
-> +static int ns16x50_io_write8(
-> +    struct vuart_ns16x50 *vdev, uint32_t reg, uint8_t *data)
-> +{
-> +    int rc = 0;
-> +
-> +    return rc;
-> +}
-> +
-
-[ ... ]
-
-> +
-> +static void ns16x50_access(int dir, unsigned int type,
-> +                           unsigned long addr, unsigned int size,
-> +                           uint32_t *data)
-> +{
-> +    const char op = (dir == IOREQ_WRITE) ? 'W' : 'R';
-> +    struct domain *d = rcu_lock_current_domain();
-> +    struct vuart *vuart = vuart_find_by_resource(d, type, addr, size);
-> +    struct vuart_ns16x50 *vdev = NULL;
-> +    const struct domain *owner;
-> +    const struct vuart_info *info;
-> +    const char *as;
-> +    uint32_t reg;
-> +    unsigned long flags;
-> +    int rc;
-> +
-> +    if ( !vuart )
-> +    {
-> +        printk(XENLOG_ERR "%c @ %#"PRIx64" %d: not initialized\n",
-> +               op, addr, size);
-
-addr is unsigned long and size is unsigned int: %#lx and %u.
-PRIx64 only happens to work on x86-64, and this is common code. The
-same goes for the other messages in this function.
-
-> +
-> +        ASSERT_UNREACHABLE();
-> +        goto out;
-> +    }
-> +
-> +    vdev = vuart->vdev;
-> +    ASSERT(vdev);
-> +
-> +    ns16x50_lock(vdev, &flags);
-> +
-> +    owner = vuart->owner;
-> +    ASSERT(owner);
-> +
-> +    if ( d != owner )
-> +    {
-> +        ns16x50_err(vdev, "%c @ %#"PRIx64" %d: does not match current domain %pd\n",
-> +                    op, addr, size, d);
-> +
-> +        ASSERT_UNREACHABLE();
-> +        goto out_unlock;
-> +    }
-> +
-> +    info = vuart->info;
-> +    ASSERT(info);
-> +    as = (info->base_type & IORESOURCE_IO) ? "ioport": "iomem";
-> +
-> +    reg = addr - info->base_addr;
-> +    if ( !IS_ALIGNED(reg, size) )
-> +    {
-> +        ns16x50_err(vdev, "%c %s %#"PRIx64" %d: unaligned access\n",
-> +                    op, as, addr, size);
-> +        goto out_unlock;
-> +    }
-> +
-> +    if ( reg >= NS16X50_REGS_NUM )
-> +    {
-> +        ns16x50_err(vdev, "%c %s %#"PRIx64" %d: LCR=%#02x %#02x %#x: not implemented\n",
-> +                    op, as, addr, size, vdev->regs[UART_LCR], reg, *data);
-> +        goto out_unlock;
-> +    }
-> +
-> +    if ( dir == IOREQ_WRITE )
-> +        rc = ns16x50_io_write(vdev, reg, size, data);
-> +    else
-> +        rc = ns16x50_io_read(vdev, reg, size, data);
-> +
-> +
-
-Nit: double blank line.
-
-> +    if ( rc == 0 )
-> +        ns16x50_debug(vdev, "%c %s %#"PRIx64" %d: LCR=%#02x %#02x %#08x\n",
-> +                      op, as, addr, size, vdev->regs[UART_LCR], reg, *data);
-> +    else
-> +        ns16x50_err(vdev, "%c %s %#"PRIx64" %d: LCR=%#02x %#02x %#08x: unsupported access\n",
-> +                    op, as, addr, size, vdev->regs[UART_LCR], reg, *data);
-> +
-> +out_unlock:
-> +    ns16x50_unlock(vdev, &flags);
-> +out:
-> +    rcu_unlock_domain(d);
-> +}
-> +
-> +/*
-> + * Emulate I/O access to ns16x50 register.
-> + * Note, emulation always returns X86EMUL_OKAY, once I/O port trap is enabled.
-> + */
-> +static int cf_check ns16x50_io_handle(
-> +    int dir, unsigned int addr, unsigned int size, uint32_t *data)
-> +{
-> +    ns16x50_access(dir, IORESOURCE_IO, addr, size, data);
-> +
-> +    return X86EMUL_OKAY;
-
-As I mentioned above I am not sure that we should have x86-specific 
-things in common code.
-
-> +}
-> +
-> +static void ns16x50_reset(struct vuart_ns16x50 *vdev)
-> +{
-> +    memset(vdev->regs, 0, sizeof(vdev->regs));
-> +}
-> +
-> +static int ns16x50_init(void *arg)
-> +{
-> +    struct vuart_ns16x50 *vdev = arg;
-> +    const struct vuart_info *info;
-> +    struct domain *d;
-> +
-> +    ASSERT(vdev);
-> +
-> +    d = vdev->owner;
-> +    info = vdev->info;
-> +
-> +    if ( info->base_type & IORESOURCE_IO )
-> +    {
-> +        register_portio_handler(d, info->base_addr, info->size, ns16x50_io_handle);
-> +    }
-> +    else if ( info->base_type & IORESOURCE_MEM )
-> +    {
-> +        BUG_ON("unimplemented");
-> +    }
-
-Nit: no braces around single statements.
-
-> +    else
-> +        ASSERT_UNREACHABLE();
-> +
-> +    ns16x50_reset(vdev);
-> +
-> +    return 0;
-> +}
-
-Bringing the host down for an unsupported configuration is a bit harsh;
-returning -EOPNOTSUPP would make domain creation fail instead. And in a
-release build, the last branch returns success without any I/O handler
-registered; it should return an error (e.g. -EINVAL) after the
-ASSERT_UNREACHABLE().
-
-> +
-> +static void cf_check ns16x50_deinit(void *arg)
-
-Nit: ns16x50_deinit() is only called directly, so cf_check isn't
-needed (ns16x50_init() doesn't have it either).
-
-> +{
-> +    struct vuart_ns16x50 *vdev = arg;
-> +
-> +    ASSERT(vdev);
-> +}
-> +
-> +static void * cf_check ns16x50_alloc(struct domain *d, const struct vuart_info *info)
-> +{
-> +    struct vuart_ns16x50 *vdev;
-> +    int rc;
-> +
-> +    if ( !is_hvm_domain(d) )
-> +    {
-> +        ns16x50_err(info, "not an HVM domain\n");
-> +        return ERR_PTR(-ENOSYS);
-
-Why ENOSYS?
-
-Also, ns16x50_err() is meant to take a struct vuart_ns16x50 and
-dereferences (vdev)->name; passing a struct vuart_info only compiles
-because both happen to have a name member. A separate macro (or passing
-info->name explicitly) would make that less accidental.
-
-The same is true for other use cases of nx16x50_err() below.
-
-> +    }
-> +
-> +    if ( vuart_find_by_resource(d, info->base_type, info->base_addr,
-> +                                info->size) )
-> +    {
-> +        ns16x50_err(info, "already registered\n");
-> +        return ERR_PTR(-EBUSY);
-> +    }
-
-Can it be triggered?
-
-vuart_find_by_resource() only looks at d->console->vuart, vuart_init() 
-returns -EBUSY before calling alloc() if that is set, and it assigns it 
-only after alloc() has returned. So inside alloc() it is always NULL. 
-Unless multiple vUARTs per domain are planned, I'd drop the check; the 
--EBUSY in vuart_init() already covers it. Am I missing something?
-
-> +
-> +    vdev = xvzalloc(typeof(*vdev));
-> +    if ( !vdev )
-> +    {
-> +        ns16x50_err(info, "failed to allocate memory\n");
-> +        return ERR_PTR(-ENOMEM);
-> +    }
-> +
-> +    ns16x50_lock_init(vdev);
-> +
-> +    vdev->name = info->name;
-> +    vdev->owner = d;
-> +    vdev->info = info;
-
-Nit: vdev->name duplicates vdev->info->name.
-
-> +
-> +    rc = ns16x50_init(vdev);
-> +    if ( rc )
-> +    {
-> +        xvfree(vdev);
-> +        return ERR_PTR(rc);
-> +    }
-> +
-> +    return vdev;
-> +}
-> +
-
-[ ... ]
+Reviewed-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 
 ~ Oleksii
-
 
