@@ -2,46 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 44556606A32D
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 45915606A32E
 	for <xen-devel@archiver.kernel.org>; Fri, 13 Nov 2026 10:12:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=amutable-com.20260707.gappssmtp.com header.i=@amutable-com.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=NYrBcVyQ
-Received: from list by lists.xenproject.org with outflank-mailman.1486987.1689518 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=amutable-com.20260707.gappssmtp.com header.i=@amutable-com.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=uDj1qMhi
+Received: from list by lists.xenproject.org with outflank-mailman.1486983.1689508 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRoGe-0006LZ-WB; Fri, 13 Nov 2026 10:12:24 +0000
+	id 1xRoGe-00063G-7M; Fri, 13 Nov 2026 10:12:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1486987.1689518; Fri, 13 Nov 2026 10:12:24 +0000
+Received: by outflank-mailman (output) from mailman id 1486983.1689508; Fri, 13 Nov 2026 10:12:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRoGe-0006IK-Ps; Fri, 13 Nov 2026 10:12:24 +0000
-Received: by outflank-mailman (input) for mailman id 1486987;
- Fri, 13 Nov 2026 10:06:02 +0000
+	id 1xRoGd-00060L-OL; Fri, 13 Nov 2026 10:12:23 +0000
+Received: by outflank-mailman (input) for mailman id 1486983;
+ Fri, 13 Nov 2026 10:05:36 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <alex@amutable.com>) id 1xRoAU-0003TU-Nu
- for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 10:06:02 +0000
+ (envelope-from <alex@amutable.com>) id 1xRoA4-0003Ro-Ef
+ for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 10:05:36 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xRoAU-002UHG-0w
- for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 11:06:02 +0100
-Received: from [10.42.69.10] (helo=localhost)
+ id 1xRoA3-002UEc-RU
+ for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 11:05:35 +0100
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <alex@amutable.com>)
- id 6af6e100-bab6-0a2a0a5309dd-0a2a450aa392-18
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 11:06:01 +0100
-Received: from [209.85.208.49] (helo=mail-ed1-f49.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6af6e0dc-e002-0a2a0a5209dd-0a2a4501e0d2-42
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 11:05:35 +0100
+Received: from [209.85.218.50] (helo=mail-ej1-f50.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <alex@amutable.com>)
- id 6af6e109-f2d2-0a2a450a0019-d155d031ddb8-3
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 11:06:01 +0100
-Received: by mail-ed1-f49.google.com with SMTP id
- 4fb4d7f45d1cf-6b408f2d936so1445741a12.1
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 02:06:01 -0800 (PST)
+ id 6af6e0ef-5984-0a2a45010019-d155da32c04a-3
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 11:05:35 +0100
+Received: by mail-ej1-f50.google.com with SMTP id
+ a640c23a62f3a-c247f6687dcso182009266b.2
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 02:05:35 -0800 (PST)
 Received: from [10.0.0.233] (tmo-086-54.customers.d1-online.com.
  [80.187.86.54]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c5095b8651bsm73693366b.78.2026.11.13.02.05.59
+ a640c23a62f3a-c5095b7b2c9sm75811766b.73.2026.11.13.02.05.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Nov 2026 02:06:01 -0800 (PST)
+ Fri, 13 Nov 2026 02:05:21 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,46 +52,47 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=amutable-com.20260707.gappssmtp.com header.i="@amutable-com.20260707.gappssmtp.com" header.h="MIME-Version:User-Agent:Content-Transfer-Encoding:Content-Type:References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=amutable-com.20260707.gappssmtp.com; s=20260707; t=1794564361; x=1795169161; darn=lists.xenproject.org;
+        d=amutable-com.20260707.gappssmtp.com; s=20260707; t=1794564335; x=1795169135; darn=lists.xenproject.org;
         h=mime-version:user-agent:content-transfer-encoding:content-type
          :references:in-reply-to:date:cc:to:from:subject:message-id:from:to
          :cc:subject:date:message-id:reply-to:content-type;
-        bh=TjkCmA8zoLhZK8u7U4HhR7QcElVzore/o+jClE5BdRs=;
-        b=NYrBcVyQNQLRijv5X1ZPigGfmAlhtSQFV9xH6hTQeQ6lIChhy4CfT/R+jeN7Dblffr
-         uJ3IjUP+BioUBpk4yA0KH79IEs2HhMXNTZflG5ExhQo+5x8Yxusd919szqTEklu1nl/i
-         QxstPBmzF7YHsguK0pi4hOlec2EkZGNUR85pIsBb6P+/6KqxZWlVBfNTi+b+iIax3pn0
-         hd9ZXq2SQDZI7JXg79ArQML5gUWYxG+wntcpwLm4exdAK7BzW2uxHcNdIR1KeCfKpt/M
-         I3sFFWvBB61xsiUDN3g/4+XpvrxqdoKMh5geSFTcLAka0h89NcwdF8FJk1pwYZQ0Cx3c
-         Dy1Q==
+        bh=fNM18G1T3F0ezY9f7dMoEwC6d3kOVWk14Z1vuqkOGWM=;
+        b=uDj1qMhisu2XGEUoDOwkvTVoR3UZQDMlTCKP4acrEXThIqb5PObNjQWi9cQ1/ouJKn
+         rMBGPySosT2qQuxnOFk0rBGeuLGa65fm9pJQ3iLYUSW5e4mB4+82AulfhmWnQA6Rbzh2
+         K9ZIjmgjVvgg4zWAF0Q8eOuklX8spEFIoL5Bsm9IJVGckgmzol+0OQYybhE1N9tXgQLZ
+         lmZBOAs/pUP1mwX/azOdEvqcQX/J1oGdWvO0WS+5jrIqEUjji2eZyyhcUHQM8+WnRhJC
+         oD0aiTK6bpNuIPi6vyJFDkiEbsPPFFvI2ti8xqXTgImd/27wi3+CtKwL843D2/Z6FJMq
+         HjoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794564361; x=1795169161;
+        d=1e100.net; s=20260707; t=1794564335; x=1795169135;
         h=mime-version:user-agent:content-transfer-encoding:content-type
          :references:in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=TjkCmA8zoLhZK8u7U4HhR7QcElVzore/o+jClE5BdRs=;
-        b=1nSMWEH9BLdZP4gNfEYSog2lbVnuj/WqCOgeo3NeoQG4Ct0guJrSzqedGs9T0kpvrY
-         nkwtvRMZQxctNcbRunT09ElKDlJtYWt6Dn2QLrhNUaS9FB1g8iKRNp4jSVIYFsB5rsG+
-         3NzZxWy6HSNOZ/o7Azm9xC0llwUgLMlPlc3+SaeN/PYUIs5/QtRcPXTlJLPE32295ylF
-         Y0cBgmz7WzxTXiUlw8xCeSAjqITYc6PO0zGiHkZdjKzHonOkw25pMV+HyjKQwOQs9hw5
-         YkSA5rd8fq3rA5H8HC6XoMRIwV+Ytndi0jHVfPzHDchAq0l+ZagKcj+w+TITLyHKgZ3H
-         +gQA==
-X-Forwarded-Encrypted: i=1; AL+hErHIeBM++7bIey9xkCqK+FLqDcyk17kcj5JYCWitvzxh4z6zdSpVespd+w/R2ul2LbT9TAEzAiGo/LE=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z8RT2/JG+ludrAstCof0sTN7TE60UvsAFfukxdIQHDLHKpYWbkw
-	auL3j8a4u1PvbrnDEgOS2dq6FLyI/wn7MBCaaOtovCpCQjMkyY4z9Y/Z0i9mo6cTYQzb
-X-Gm-Gg: AYBFou1jYwbFpKp7B3kfjvjliLudGkmNs7qV7mNWFzmOsO3YpRy8u+8z9phB5Oqg43v
-	UgI+/2eotjoL6WgzVsogNHvxBsN+o0dT2UjFpqD6yYepTZUpZj/kGO8bKKLOdZ/miv8mqS5jsPe
-	Yuoho2qfAZQYMP2uofTB7+YtE8EqMYHDX2wNs9c7igOB1+TBl3wB/ZGFD7AlbTcPVILgmpjsoyR
-	yx9B1fqYFiCrLTehSxt9JWHd22W5wf+j3ryRfxiLgMTBmjY88cd73azTLzRoojjWTQuuTFHRDdT
-	CLkcMAOycl3LBSMKoov9HBo9WqaAuf0ClnnkLm4NwmV65hwjKzilp3AY1MWi2GDsySl6ckZZig1
-	YKtkDJekw/EiQQvZLbIpRMBmdixl1yOZqzG8NxORIIwC+9EHrsMeW4GmCyvBM9YG7P+FTurMgkj
-	W2DtpRkpZppU0Zhd2f+ItXoSCixABit7VJVOYHBQhFlv1o97en7Wij/E/sFHXzoo1NoNvxFu+S6
-	5dgJgEcQfDkJuZdbdARJ33yd9epxjA9eI/HlW2jwdqP4TfwstxeRa6AG77CvFUGVAwcXXK5PEj8
-	fN07tdJF2AeZ0Lka40upQ74ZCi4r2Oh/6kIlc7c1vOwcmEKIxUipP3GyjFQh43s=
-X-Received: by 2002:a17:906:ef07:b0:c4d:5820:325a with SMTP id a640c23a62f3a-c50963dc627mr169588066b.39.1794564361325;
-        Fri, 13 Nov 2026 02:06:01 -0800 (PST)
-Message-ID: <e8b71a2778d7d7797d433e7bac1a37ee64aaa30c.camel@amutable.com>
-Subject: Re: [PATCH RFC 15/41] tracefs: use fc_init_pseudo()
+        bh=fNM18G1T3F0ezY9f7dMoEwC6d3kOVWk14Z1vuqkOGWM=;
+        b=JrQQ2jLuNSlFPt5fKnhj53lPfmYLm+HtJF3cLwttVQ0s8PLmP3kHOdSoQgTFMprSEx
+         j/x1heTzAzXh42E8Uk37HmWlQnN2bAKKhEQ6JrtD1eGg+H5AXpq9S7X5T1+FaebZ8DYT
+         z4TaaVkmhZXvPI+ASVte1BSxrmfuMUzT2KQRa9gaVpF/q0cFLoOPEgnJ+6W4x/FoBhrf
+         pqpK+kbKxgIvB5EHy58S+FgVapfntuexePZc60xkkFgwgMtO0tk4o7nNsJzHaVCIF7Cx
+         rS6lu/1xC6nCdgPefhZOo8E0b5aYT9Vlot/MiVYv9qs3jK4o1tYizo7CEVFhcB7uFb97
+         Tqew==
+X-Forwarded-Encrypted: i=1; AL+hErFfdI3zWT1+Ss5AAuX+ZgYK20gF8/5WD8qB43V5UXqn7G8dlXyuFuyqa0qlx3C0ZMUST7zOpq/MW2w=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z8c6AfXeUUj+lMWGsT2tAmXke1m9nKnQIjqVKOB2ku5CBMS4EnS
+	NJh9EFEDISUmYmO2adHfSvszWj5TzzYhAs/mT/lcK6fCeaNMkNtAWw8Us07gg2V86czucK6HOHL
+	2yAGwjXh3BO8=
+X-Gm-Gg: AYBFou3tl+4nchvMaHdb+8FobytCq6O6+F0GzLMPRDertUqRG8Uj4OmaQwgdKNxZZ0U
+	TqTzQAzYHTWXUqlO1wbwf6DHa0MefKvx6KABySJhtsGDQ4Xi2IUKWvQzLXaBXDhAoL0vgO5+J1i
+	0IaAXec7Tti6OJ/LV3Qt7/8bwOE9j1djClpt3hSW0UePnViypIWVCOKsxPKPbMjxqa8R72L4FMK
+	T+lEFrH2Khrs+qeDsR3yqpg1+CVQeXs/COT6f2GcYj9Z6ACga8wWKNWpFt7K+MRuKrC5oGvBIaJ
+	NhDd0XSvxeSCdYp5TbSFA/8ZiizUYHSS6HfJBQJooX9gV9g7RIAlNzIHoMppGVfrZD8Zi/7/KqI
+	HOBNB7X1Sc0p2eFMCK7jvLR4p6GvdC5PM6E5pz11NUUU91WTCRkVpNGMQ5TWjp1KZgGuOi03pdj
+	r2uVVEyIS7AMEAoQOHsDT+bhHQ45vNrQHgYr4cVv+NnX+V5sUoJMe0+LPNZ0znbkCUT4yKfE9zS
+	lk01mlMd/Ml7crGrm8SGEYt3jqhr7zZ7YV/5ahAqbz5fAdZ035YzdZW9h24qiWDEEgAmkfftyX+
+	vdOXvaDTPD4Xy0AASDnFOR90twR1zn4J+z4+zqrRtFAtzR0NfBM8aMdA+jMPumE=
+X-Received: by 2002:a17:907:608f:b0:c43:eae5:ee80 with SMTP id a640c23a62f3a-c5096398b03mr148720566b.17.1794564321873;
+        Fri, 13 Nov 2026 02:05:21 -0800 (PST)
+Message-ID: <08fa1be263cf4a3db6b3e5ec2847107fba7acfba.camel@amutable.com>
+Subject: Re: [PATCH RFC 13/41] devpts: use fc_init_pseudo()
 From: Alexander Mikhalitsyn <alex@amutable.com>
 To: Christian Brauner <brauner@kernel.org>, linux-fsdevel@vger.kernel.org
 Cc: Jann Horn <jannh@google.com>, Chris Mason <mason@kernel.org>, Josef
@@ -109,18 +110,18 @@ Cc: Jann Horn <jannh@google.com>, Chris Mason <mason@kernel.org>, Josef
  linuxppc-dev@lists.ozlabs.org, 	linux-usb@vger.kernel.org, Amir Goldstein
  <amir73il@gmail.com>, 	linux-erofs@lists.ozlabs.org,
  linux-kselftest@vger.kernel.org
-Date: Fri, 13 Nov 2026 11:05:59 +0100
-In-Reply-To: <20261110-work-loop-pseudo-v1-15-4c998976c6c7@kernel.org>
+Date: Fri, 13 Nov 2026 11:05:19 +0100
+In-Reply-To: <20261110-work-loop-pseudo-v1-13-4c998976c6c7@kernel.org>
 References: <20261110-work-loop-pseudo-v1-0-4c998976c6c7@kernel.org>
-	 <20261110-work-loop-pseudo-v1-15-4c998976c6c7@kernel.org>
+	 <20261110-work-loop-pseudo-v1-13-4c998976c6c7@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 User-Agent: Evolution 3.56.2-0+deb13u1 
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-purgate-ID: tlsNG-4011c0/1794564361-4B4D7CFC-3A97C0A5/0/0
+X-purgate-ID: tlsNG-d62444/1794564335-1DE78757-D798A9A6/0/0
 X-purgate-type: clean
-X-purgate-size: 1311
+X-purgate-size: 1166
 X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
@@ -130,42 +131,38 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 On Tue, 2026-11-10 at 10:14 +0100, Christian Brauner wrote:
-> Initialize tracefs as a pseudo filesystem. This raises SB_I_PSEUDO
-> and
-> also SB_I_NOEXEC and SB_I_NODEV. tracefs never holds executables or
-> device nodes.
->=20
-> SB_I_NOEXEC also refuses PROT_EXEC mappings. The only tracefs files
-> that can be mapped are the ring buffers and __rb_map_vma() refuses
-> VM_EXEC already.
+> Initialize devpts as a pseudo filesystem. This raises SB_I_PSEUDO and
+> SB_I_NOEXEC. devpts never holds executables. devpts_fill_super()
+> keeps
+> clearing SB_I_NODEV for the pty device nodes.
 >=20
 > Signed-off-by: Christian Brauner (Amutable) <brauner@kernel.org>
 
 Reviewed-by: Alexander Mikhalitsyn <alex@amutable.com>
 
 > ---
-> =C2=A0fs/tracefs/inode.c | 2 ++
+> =C2=A0fs/devpts/inode.c | 2 ++
 > =C2=A01 file changed, 2 insertions(+)
 >=20
-> diff --git a/fs/tracefs/inode.c b/fs/tracefs/inode.c
-> index 5020365ca704..e04febd868eb 100644
-> --- a/fs/tracefs/inode.c
-> +++ b/fs/tracefs/inode.c
-> @@ -12,6 +12,7 @@
-> =C2=A0#include <linux/module.h>
+> diff --git a/fs/devpts/inode.c b/fs/devpts/inode.c
+> index bd1e8eb26edb..47ef12241d92 100644
+> --- a/fs/devpts/inode.c
+> +++ b/fs/devpts/inode.c
+> @@ -13,6 +13,7 @@
+> =C2=A0#include <linux/init.h>
 > =C2=A0#include <linux/fs.h>
 > =C2=A0#include <linux/fs_context.h>
 > +#include <linux/pseudo_fs.h>
 > =C2=A0#include <linux/fs_parser.h>
-> =C2=A0#include <linux/kobject.h>
+> =C2=A0#include <linux/sched.h>
 > =C2=A0#include <linux/namei.h>
-> @@ -510,6 +511,7 @@ static int tracefs_init_fs_context(struct
+> @@ -438,6 +439,7 @@ static int devpts_init_fs_context(struct
 > fs_context *fc)
-> =C2=A0	fsi->mode =3D TRACEFS_DEFAULT_MODE;
+> =C2=A0		fsi->mount_opts.reserve =3D true;
 > =C2=A0
 > =C2=A0	fc->s_fs_info =3D fsi;
 > +	fc_init_pseudo(fc);
-> =C2=A0	fc->ops =3D &tracefs_context_ops;
+> =C2=A0	fc->ops =3D &devpts_context_ops;
 > =C2=A0	return 0;
 > =C2=A0}
 
