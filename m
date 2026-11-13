@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3569F606A334
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Nov 2026 15:50:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 41384606A338
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Nov 2026 15:50:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Qxr5gQ7a
-Received: from list by lists.xenproject.org with outflank-mailman.1487786.1690174 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=o0qU8dka
+Received: from list by lists.xenproject.org with outflank-mailman.1487798.1690188 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRtXL-0000o5-DG; Fri, 13 Nov 2026 15:49:59 +0000
+	id 1xRtXP-0001Rq-3m; Fri, 13 Nov 2026 15:50:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1487786.1690174; Fri, 13 Nov 2026 15:49:58 +0000
+Received: by outflank-mailman (output) from mailman id 1487798.1690188; Fri, 13 Nov 2026 15:50:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRtXK-0000h0-3b; Fri, 13 Nov 2026 15:49:58 +0000
-Received: by outflank-mailman (input) for mailman id 1487786;
- Fri, 13 Nov 2026 15:49:44 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xRtX5-0006IQ-Bi
- for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 15:49:43 +0000
+	id 1xRtXN-0001M0-Ax; Fri, 13 Nov 2026 15:50:01 +0000
+Received: by outflank-mailman (input) for mailman id 1487798;
+ Fri, 13 Nov 2026 15:49:47 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xRtX8-0006u4-6J
+ for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 15:49:46 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xRtX4-004T1N-N3
- for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 16:49:42 +0100
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xRtX7-000WGx-Hn
+ for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 16:49:45 +0100
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6af73196-2eae-0a2a0a5409dd-0a2a4504bfec-0
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 16:49:42 +0100
-Received: from [209.85.221.43] (helo=mail-wr1-f43.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6af73193-e002-0a2a0a5209dd-0a2a4506dcbe-24
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 16:49:45 +0100
+Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6af73196-b57f-0a2a45040019-d155dd2ba83e-3
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 16:49:42 +0100
-Received: by mail-wr1-f43.google.com with SMTP id
- ffacd0b85a97d-4910b863b84so1324633f8f.0
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 07:49:42 -0800 (PST)
+ id 6af73199-195a-0a2a45060019-d1558029d530-3
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 16:49:45 +0100
+Received: by mail-wm1-f41.google.com with SMTP id
+ 5b1f17b1804b1-4a2000d5fb1so5709655e9.1
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 07:49:45 -0800 (PST)
 Received: from fedora (user-109-243-65-71.play-internet.pl. [109.243.65.71])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-49c5f1c0e0dsm5786493f8f.15.2026.11.13.07.49.40
+ ffacd0b85a97d-49c5f1c0e0dsm5786493f8f.15.2026.11.13.07.49.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Nov 2026 07:49:41 -0800 (PST)
+ Fri, 13 Nov 2026 07:49:44 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,43 +51,43 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794584982; x=1795189782; darn=lists.xenproject.org;
+        d=gmail.com; s=20260707; t=1794584985; x=1795189785; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=yfoEH08SnVd7voBkOOlwylfmHTiwkQJP7iFDqgJ9zDk=;
-        b=Qxr5gQ7ap1eepvJgP/Ezd+sdX2iv20+EGFrRgmjml4sZdwtoZjXUnQvN5JTHcJm/34
-         chQMit4hiS4+iEs5pCxTA2mvvAEkkTfSvz+sEefXMPY6fFFc+ieFisCXzeeEA7q8m+U7
-         JYGHPHmVL4gk9mMM1a9S679ZhHfNr9VZw+/rmh9M14NzgLuSo0TVP+IRJBqqyWRi8c9H
-         Vd5/5wo6PuKTbLOemJf/51YJ2xAyYq5jnbY/8LeIzM1dskt6L+6vjRmRuO8HiXenN0AR
-         A0ob5gKVg1Opbh/RLRFm0JiGiuS+jLq1YTkQt1NcwZsmPqGjS9gKDSHsjgvgSucW6ExJ
-         5fGg==
+        bh=MjYvaprK7CG4YJcBEyVwTdpxbIjhantZ5n1hTme2Bvw=;
+        b=o0qU8dka4LkgO5Xz6TpORzdo7qTRhVqyEhSZ4Fa5igpVj51hU8dAZSY2JxX6zJsLgN
+         NiowG+6o8X1trqmATe6JritrCnac4YDhUVDtCAASbAjA7CAwAJY21QegvpTEQ80zmylW
+         SJtbFdS/EiMNs3l2+RaUSkXncktYkSzUDxuTwgMP1r3EsBylNAWm3ft9vkBcwlbXOg5/
+         qFdGmwzEiwkk3NBqwuIramrnJhicIbk/pMsnQdBj/ct9GOEUgakiwRoIEa2x+qzmvBK/
+         7mWVXs/7gDxNpYJtPjRoR+lEew+wMhMolDk6ogZXhEMlRdR6/txGBcxNRfHgHX6FHMZA
+         +B4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794584982; x=1795189782;
+        d=1e100.net; s=20260707; t=1794584985; x=1795189785;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=yfoEH08SnVd7voBkOOlwylfmHTiwkQJP7iFDqgJ9zDk=;
-        b=QSekWUOR2P4tx4KzCe1p9D6OlUM6DyZo3Z/vEsectMERJeRR1qVHPUW2rG+VdryDKU
-         RCa8Mr8+k0wh96xzpc1ezBCQggvNZQTsHbd2InZqv/BAtrjH2FRid2AkejHie4j3nBd3
-         ZSnvQSO1avWCWacxiYk56DqKXAq9R4zEw+im0L4+U6llxC44x7ZVwJ3Hr/USdru72DMw
-         BIZROvpLZQg4kBrAqIqhKExxItZ4vH1Ny5zYP+X0p6Hqk4E/Oxiq6eq9YHQVeC103DJy
-         EPqfbcwj4uQL4Vg4wJzWDIyTbmfSZ7H9c+UWboKne/rJjNKyg8C1QYotjx4yq7q2aL/d
-         hUAg==
-X-Gm-Message-State: APuU4Z8v76+wStpuOPtxX6fjgocTAUAMfgc4YWZP9P45SvVIYkufE8m8
-	LqeU5qluzhB0DYTnGKAHryI25+PrfhsG79QTfUdxppjEQHcR4Dnwsa40b7XM+A==
-X-Gm-Gg: AYBFou1yXvQ2i8YCniLbXyX7zPoThhp9wOu7IT2KMgRmAo9J/RF5LoDdVkfzyHhgZt5
-	rQKx2cMKiQle/vmsRqoLMoLw7lA7PLRiGhagH0IgPazPCi3/ch0T5oynCvz8QbatXAQpMAuK3No
-	fW354QoXyuvWh5p3SgcNHNtPpR4R4WDUFaIChgLQyk1ndPTxKrL2wjZP2kj6lZP8ubnNbwLMAds
-	/1TEvcLumMpajxYY39363BVWORmeVyPRlig9PWGTseCHBEDObyUj49NA1VG2YlMxhP1//gCoBDZ
-	nIsLTbVYbdU+w8DByh68JlFeYlPM+LMBG0//yQzDcepwiDMJeZdc/lh0UcRIJltn2S1MjVZFNoV
-	01KOiJYyUGVJF2VUxKOQwOEIbwAph4EkvtPNbUR8nZv1WlOmqEtE3JoyQmjlWcigSU6CGwo8gTB
-	Aq7ulAl1XnREeTAPsUHhYBobtYl/GlUQ/nhjn5iBjKI/Zh4wMISf/j+hBNmQ5Og7yi8Z8ahocJ1
-	DK41q1LRlzkmwC/Xivpx5KujcrYYl2YbQmxdtz8OtgN/4vVaX7lDQjv5wNmIygo05XkUC+uSAZJ
-	EPAcU/SxkzZViY6LCivtMKPkzoFyHTEqBBDU3vs1K8WlcHXcTEHoWte4Wllpv9M5ZVNXcCuvEH3
-	7rfHS4oHppbkimQ==
-X-Received: by 2002:a05:6000:29ce:b0:492:9c9:65de with SMTP id ffacd0b85a97d-49c6f5e833bmr4971805f8f.5.1794584981974;
-        Fri, 13 Nov 2026 07:49:41 -0800 (PST)
+        bh=MjYvaprK7CG4YJcBEyVwTdpxbIjhantZ5n1hTme2Bvw=;
+        b=SQQTH9YEmJq61qYSmJHzib4fEBoQ6i+D2WTtyFm7iSa+TAy1QxTv0I0WRdUDg+tidk
+         RN+d4G7wL1590llKi8XJh2PSxU2/cGMFvda7AVvvQYC/ivkLfIX7uSrByWDcvOGuGtU4
+         CqnFhaMPxOhAxLFBrJeVgpSg7nNG6UOSuI/nVAgpkvgdqneJOi+oo3vXtgWv3SJGcx8H
+         qAROIG5UIeQKaOvDFc69SOxFbDUgywTksMkH8TzM4ZV+84S8EoHv6mo7CIQ8QmsqrCRV
+         tIggliAhG0nCiVj3oAuGg851f0Dp4GruhC2dr8EYCw8Bvn+KCsy7nd5LOUhu6JfzdHJK
+         fhlQ==
+X-Gm-Message-State: APuU4Z//hnsyc8Skr+94DA811m+iLZd141hm5PBwqyVIf/GqDJuVTs7Y
+	P8oNwG0p7H3KZ5JqK9+Upv7KwUIupuuVJDIxeMjUWB6Kc9VkMwirSxc6hh+Vkg==
+X-Gm-Gg: AYBFou1Sze75S1WTNQKu1z/sNFii52gKb941DEpLaOMxlPYBP+zlrFYhoMfc6g2JxYd
+	IoX4R/fPOQQwsou+UamuY0cOVslgrkxyz2BK4mut4hJj6aw+ZEPCt+rAIVnCscCI286OwmPp0GO
+	OxGUp3WvjIannoPkyKEG/apt1jJn0OlIe4V/lIuZ3DZpOmkVXg3KzE3v7tkXQa2KGFqonT/V9Ul
+	rsfiNHCaTb6mZ7M9g/1VxHPnRDZhvnMRnelzQxaDoSx8wHwreMqyIthzuCk3L0LyWO0tHbH7+jR
+	btLWLbBgi8O0SRZp0nTe3kw1zeArhzhooi+CXRShEXzpctviOSskVHql0LYp2mUDF8oEDEIYW7M
+	r2t9JPaU3vhRGarQQ+OoPpuiSSXJBN/V9F+KyQLertFUdZpdnRMZ+R6Lk8/7slsedH1TW5ca4DE
+	rVe1m6Bd2Kk1LzLeWbdVct8PkSgU7MBdiM6sqrk8Yxc2VBSIV2/y98Xpo3t05Rhfxxc+6epAecc
+	wWEBDKMbfz/m0KHKX/NyD34gkvwhNzRGCUpsBQCY+rkRJe0Vv4Fwa8cjvJGFl/SxZpHxANKNyaD
+	1PLJVbzQ36K87Lx5Zw/3UOzVAJYtbTm8ElXDC+B3NOA4+XkcIw5M74GgcudhNLBwWGhgjYNHzkp
+	CqcFy0sG1JO0F2A==
+X-Received: by 2002:a05:600c:1d10:b0:4b2:3c81:d1 with SMTP id 5b1f17b1804b1-4bb55a65ea5mr58628525e9.5.1794584984673;
+        Fri, 13 Nov 2026 07:49:44 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -102,18 +102,18 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v4 30/42] xen/riscv: implement APLIC-IMSIC-hart sync barrier for vCPU migration
-Date: Fri, 13 Nov 2026 16:48:51 +0100
-Message-ID: <2a550952791c51f2f895e954da6f280a42d13cbe.1794562488.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v4 32/42] xen/riscv: remap interrupts to new IMSIC VS-file
+Date: Fri, 13 Nov 2026 16:48:53 +0100
+Message-ID: <cd42546d29e683f0aa0cab44f0ec5622f48075c0.1794562488.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <cover.1794562488.git.oleksii.kurochko@gmail.com>
 References: <cover.1794562488.git.oleksii.kurochko@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1794584982-C1ED6B50-82263122/10/73395122804
+X-purgate-ID: tlsNG-16d1c6/1794584985-FDE0E77B-3E7433AE/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 11948
+X-purgate-size: 9956
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
@@ -122,303 +122,247 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-When a vCPU is moved to a different guest interrupt file, MSIs that the
-APLIC has already sent towards the old file may still be in flight. They
-must land before the old file's state is saved and the switch is done,
-otherwise they would be lost.
+Implement the first steps of migrating a vCPU to a different guest
+interrupt file: take a new one on the vCPU's new pCPU with
+imsic_vsfile_acquire(), which brings it to a clean state, maps it into
+the guest's G-stage in place of the old one and records it in the
+vCPU's IMSIC state. Then, if any interrupts at an APLIC are forwarded by
+MSIs to the old interrupt file, reconfigure the APLIC to send them to
+the new interrupt file.
 
-To wait for them, use the APLIC's genmsi register. Writing it makes the
-APLIC itself send an MSI (an "extempore" MSI) with a given interrupt
-identity to a given hart. genmsi can only target the hart's hypervisor-
-level interrupt file, not a guest one, but the AIA spec guarantees that
-all MSIs previously sent by the same APLIC to the same hart become
-visible at the hart's IMSIC before the extempore MSI does. So once the
-extempore MSI has been delivered, no older MSI from this APLIC to the
-hart can still be in flight, whichever interrupt file it targets.
+Synchronize with the APLIC to ensure that no straggler MSIs will arrive
+at the old interrupt file by running imsic_aplic_sync() on the pCPU
+which owns that file, through the new imsic_call_on_cpu(): unlike the
+new file, the old one belongs to another pCPU, which an IPI has to be
+sent to.
 
-genmsi's Busy bit clearing only tells that the APLIC has sent the
-extempore MSI, not that it has arrived, so the sequence described in the
-AIA spec under "Synchronizing interactions between a hart and the APLIC"
-is split in two. aplic_genmsi_barrier() does the APLIC side, while
-imsic_aplic_sync() does the hart side: it clears the pending bit of the
-reserved identity before the genmsi write and spins on it afterwards,
-which is what tells that the extempore MSI, and hence every older MSI
-from this APLIC to this hart, has really arrived. Keeping the hart side
-in imsic.c leaves the APLIC code free of the IMSIC local CSR accessors.
+The move maps the new file into the guest's G-stage, which takes the
+p2m lock, and sends IPIs to the pCPU owning the old file, both of which
+need IRQs enabled, while imsic_migrate_vcpu() is called with them
+disabled. So do it in the new imsic_vsfile_move() and have
+imsic_migrate_vcpu() enable IRQs around it, only when there is
+something to move, which takes them to be disabled on entry, as an
+ASSERT() checks.
 
-The last interrupt identity (nr_ids) is reserved for this purpose. As
-Xen gives each APLIC source the EIID equal to its number, the sources
-from nr_ids on are left unused, so that none of them can satisfy the
-barrier early.
+Only a h/w file of another pCPU is moved: imsic_vsfile_needs_move()
+keeps imsic_vsfile_move() from being reached for any other, as an
+ASSERT() there checks.
 
-Migration doesn't use the barrier at this stage, so imsic_aplic_sync()
-is marked __maybe_unused for now.
+Keep the BUG_ON("unimplemented") placeholder at the end of
+imsic_vsfile_move() to guard against silent incorrect behaviour or
+unexpected panics in guest VMs until the move is fully implemented.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in v4:
- - Order the pending bit clear before the genmsi write with
-   RISCV_FENCE(o, o).
- - Replace the sync_id field of struct imsic_config with imsic_sync_id(),
-   as it always equals nr_ids.
- - Limit the APLIC sources Xen uses to the identities below the reserved
-   ones, as told by the new imsic_nr_free_ids(), and turn the sync_id
-   check in imsic_irq_enable() into an ASSERT().
- - Mark imsic_aplic_sync() __maybe_unused rather than referencing it
-   from imsic_migrate_vcpu(), which now comes after this patch.
+ - Fold in "xen/riscv: prepare new IMSIC VS-file": with
+   imsic_vsfile_acquire() already introduced by "xen/riscv: introduce
+   IMSIC h/w interrupt file attaching to vcpu", taking and zeroing out
+   the new file is a single call.
+ - Move imsic_vsfile_acquire(), imsic_update_state(), the stubs of
+   imsic_map_guest_file() and vgein_release() and the IOMMU TODO out of
+   this patch, as they come with the attach now.
+ - Move the file in the new imsic_vsfile_move(), which
+   imsic_migrate_vcpu() runs with IRQs enabled, as imsic_migrate_vcpu()
+   is now called with them disabled, by the vCPU itself on its way back
+   to the guest.
+ - Introduce imsic_call_on_cpu() here rather than in "xen/riscv:
+   introduce IMSIC h/w interrupt file attaching to vcpu", as the old
+   file is the first one to belong to another pCPU.
+ - Don't panic() for a vCPU without a h/w file:
+   imsic_vsfile_needs_move() keeps such a vCPU from being moved at all,
+   so just ASSERT() it.
+ - Update the commit message accordingly.
 ---
 Changes in v3:
- - Rename from "xen/riscv: implement APLIC-hart sync barrier for vCPU
-   migration", as the barrier waits for the MSIs to reach the hart's IMSIC.
- - Re-word the commit message, describing in it how the sequence is split
-   between aplic_genmsi_barrier() and imsic_aplic_sync().
- - Move imsic_aplic_sync(), imsic_local_is_pending() and imsic_csr_read()
-   here from "xen/riscv: remap interrupts to new IMSIC VS-file", so that
-   both halves of the synchronization sequence are introduced together.
- - s/aplic_hart_field/aplic_hart_index/ following the rename of the helper
-   in "xen/riscv: implement virtual APLIC MMIO emulation".
- - Drop masking of sync_id with APLIC_TARGET_EIID, which could silently
-   chop off bits; instead add BUILD_BUG_ON() and ASSERT() to make it
-   explicit that sync_id always fits into the EIID field.
- - Drop the redundant parentheses around the macro argument in
-   imsic_csr_read().
- - Use unsigned int for isel in imsic_local_is_pending() and drop the
-   redundant !! as the function returns bool.
- - Rename the unused argument of imsic_aplic_sync() to unused.
+ - Update the commit message.
+ - Move imsic_aplic_sync() and imsic_local_is_pending() to "xen/riscv:
+   implement APLIC-IMSIC-hart sync barrier for vCPU migration" and only
+   call the helper here.
+ - compare old_vsfile_cpu against CPU_NONE instead of NR_CPUS.
+ - Call vaplic_reconfigure_target() instead of aplic_reconfigure_target().
+ - Update the comment at the start of the migration: at that point the new
+   IMSIC VS-file is only being prepared, the interrupt producers are moved
+   to it later.
+ - Factor taking a h/w guest interrupt file (assign, zero out, map into
+   G-stage and record in the per-vCPU IMSIC state) out of
+   imsic_migrate_vcpu() into imsic_vsfile_acquire(), introduced here
+   instead of in "xen/riscv: introduce IMSIC h/w interrupt file attaching
+   to vcpu".
+ - Crash the domain instead of BUG_ON()ing when no h/w guest interrupt
+   file is free, and report which file could not be mapped.
+ - Introduce the vgein_release() stub here, together with its first
+   user: release the h/w guest interrupt file taken by
+   imsic_vsfile_acquire() if mapping it into the guest fails. Drop the
+   stray "\n" from its BUG_ON().
+ - Clarify the comment ahead of imsic_vsfile_acquire() on why setting
+   hstatus.VGEIN is left to the caller.
+ - Implement imsic_update_state() here instead of leaving it a stub until
+   "xen/riscv: introduce IMSIC h/w interrupt file attaching to vcpu": all
+   it needs, vsfile_lock and CPU_NONE, is available already. The s/w
+   IMSIC VS-file is recorded with vsfile_cpu == CPU_NONE rather than
+   NR_CPUS.
+ - Make imsic_update_state() static and drop its declaration from
+   asm/imsic.h: imsic_vsfile_acquire() is its only user.
 ---
 Changes in v2:
  - New patch.
 ---
 ---
- xen/arch/riscv/aplic.c             | 51 ++++++++++++++++++++++++++++++
- xen/arch/riscv/imsic.c             | 47 +++++++++++++++++++++++++++
- xen/arch/riscv/include/asm/aplic.h |  3 ++
- xen/arch/riscv/include/asm/imsic.h | 23 ++++++++++++++
- 4 files changed, 124 insertions(+)
+ xen/arch/riscv/imsic.c | 103 +++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 99 insertions(+), 4 deletions(-)
 
-diff --git a/xen/arch/riscv/aplic.c b/xen/arch/riscv/aplic.c
-index 825eb60bf444..0be62c9d90f1 100644
---- a/xen/arch/riscv/aplic.c
-+++ b/xen/arch/riscv/aplic.c
-@@ -27,7 +27,9 @@
- #include <asm/imsic.h>
- #include <asm/intc.h>
- #include <asm/io.h>
-+#include <asm/processor.h>
- #include <asm/riscv_encoding.h>
-+#include <asm/smp.h>
- 
- static struct aplic_priv aplic = {
-     .lock = SPIN_LOCK_UNLOCKED,
-@@ -185,6 +187,37 @@ void aplic_hw_write_reg(unsigned int offset, uint32_t value)
-     spin_unlock_irqrestore(&aplic.lock, flags);
- }
- 
-+/*
-+ * As needed, synchronize with all IOMMUs and APLICs to ensure that no
-+ * straggler MSIs will arrive at the old interrupt file after this step.
-+ */
-+void aplic_genmsi_barrier(void)
-+{
-+    const struct imsic_config *imsic = imsic_get_config();
-+    unsigned int cpu = smp_processor_id();
-+    unsigned long flags;
-+    uint32_t val;
-+
-+    /*
-+     * imsic_sync_id() is nr_ids, which imsic_parse_node() limits to
-+     * IMSIC_MAX_ID, so it always fits into the EIID field.
-+     */
-+    BUILD_BUG_ON(IMSIC_MAX_ID > MASK_EXTR(~0U, APLIC_TARGET_EIID));
-+    ASSERT(imsic_sync_id(imsic) <= IMSIC_MAX_ID);
-+
-+    val = MASK_INSR(aplic_hart_index(cpu), APLIC_TARGET_HART_IDX) |
-+          imsic_sync_id(imsic);
-+
-+    spin_lock_irqsave(&aplic.lock, flags);
-+
-+    writel(val, &aplic.regs->genmsi);
-+
-+    while ( readl(&aplic.regs->genmsi) & APLIC_GENMSI_BUSY )
-+        cpu_relax();
-+
-+    spin_unlock_irqrestore(&aplic.lock, flags);
-+}
-+
- static void __init aplic_init_hw_interrupts(void)
- {
-     unsigned int i;
-@@ -215,6 +248,7 @@ static int __init cf_check aplic_init(void)
-     uint64_t size, paddr;
-     const struct dt_device_node *imsic_node;
-     const struct dt_device_node *node = aplic_info.node;
-+    const struct imsic_config *imsic;
-     int rc;
- 
-     /* Check for associated imsic node */
-@@ -239,6 +273,23 @@ static int __init cf_check aplic_init(void)
-         panic("%s: failed to get number of interrupt sources\n",
-               node->full_name);
- 
-+    /*
-+     * Xen drives the APLIC in MSI delivery mode only, mapping each source 1:1
-+     * to an interrupt identity of its own IMSIC interrupt file: source i is
-+     * given EIID i (see aplic_set_irq_affinity()). Hence only the sources
-+     * numbered up to imsic_nr_free_ids() can be used: the identities above
-+     * are either reserved or not implemented.
-+     */
-+    imsic = imsic_get_config();
-+    if ( aplic_info.num_irqs > imsic_nr_free_ids(imsic) )
-+    {
-+        printk(XENLOG_WARNING
-+               "%s: only %u of %u interrupt sources usable with %u IMSIC identities\n",
-+               node->full_name, imsic_nr_free_ids(imsic), aplic_info.num_irqs,
-+               imsic->nr_ids);
-+        aplic_info.num_irqs = imsic_nr_free_ids(imsic);
-+    }
-+
-     guest_aplic_num_sources = min(GUEST_APLIC_MAX_SOURCES, aplic_info.num_irqs);
- 
-     if ( aplic_info.num_irqs > ARRAY_SIZE(aplic.regs->sourcecfg) )
 diff --git a/xen/arch/riscv/imsic.c b/xen/arch/riscv/imsic.c
-index 259cf7418f00..3d947226f371 100644
+index 48214ab0d363..690a83fd6866 100644
 --- a/xen/arch/riscv/imsic.c
 +++ b/xen/arch/riscv/imsic.c
-@@ -27,6 +27,7 @@
- #include <xen/xvmalloc.h>
+@@ -565,7 +565,9 @@ int cf_check vcpu_imsic_init(struct vcpu *v)
  
- #include <asm/aia.h>
-+#include <asm/aplic.h>
- #include <asm/imsic.h>
- #include <asm/p2m.h>
- #include <asm/vaplic.h>
-@@ -62,6 +63,12 @@ static unsigned int __ro_after_init guest_num_msis;
- #define IMSIC_DISABLE_EITHRESHOLD   1
- #define IMSIC_ENABLE_EITHRESHOLD    0
- 
-+#define imsic_csr_read(c)       \
-+({                              \
-+    csr_write(CSR_SISELECT, c); \
-+    csr_read(CSR_SIREG);        \
-+})
-+
- #define imsic_csr_write(c, v)   \
- do {                            \
-     csr_write(CSR_SISELECT, c); \
-@@ -178,6 +185,8 @@ void imsic_irq_enable(unsigned int irq)
-      * spin_lock_irqsave() should be used instead of spin_lock().
-      */
-     ASSERT(!local_irq_is_enabled());
-+    /* aplic_init() keeps the APLIC sources off the reserved identities. */
-+    ASSERT(irq && irq <= imsic_nr_free_ids(&imsic_cfg));
- 
-     spin_lock(&imsic_cfg.lock);
-     /*
-@@ -217,6 +226,15 @@ void imsic_irq_disable(unsigned int irq)
-     spin_unlock(&imsic_cfg.lock);
- }
- 
-+static bool imsic_local_is_pending(unsigned int id)
-+{
-+    unsigned int isel =
-+        (id / BITS_PER_LONG) * (BITS_PER_LONG / IMSIC_EIPx_BITS) + IMSIC_EIP0;
-+    unsigned long bit = BIT(id % BITS_PER_LONG, UL);
-+
-+    return imsic_csr_read(isel) & bit;
-+}
-+
- /* Callers aren't intended to changed imsic_cfg so return const. */
- const struct imsic_config *imsic_get_config(void)
- {
-@@ -587,6 +605,35 @@ static void imsic_vsfile_deselect(const struct imsic_vsfile_ctx *ctx)
+ /*
+  * Arguments of the imsic_vsfile_local_*() helpers, which work on a guest
+- * interrupt file of the pCPU they run on.
++ * interrupt file of the pCPU they run on. Those run on another pCPU go
++ * through imsic_call_on_cpu(), which passes a single pointer, hence the
++ * arguments are bundled.
+  */
+ struct imsic_vsfile_data {
+     /* Guest interrupt file to work on, i.e. the hstatus.VGEIN selecting it. */
+@@ -605,6 +607,33 @@ static void imsic_vsfile_deselect(const struct imsic_vsfile_ctx *ctx)
      csr_write(CSR_VSISELECT, ctx->vsiselect);
  }
  
 +/*
-+ * Ensure that all the MSIs the APLIC has already generated for the hart this
-+ * runs on have really reached the hart's IMSIC.
++ * Execute func() on the pCPU which owns the IMSIC interrupt file func() is
++ * going to work with.
 + *
-+ * The barrier is the one described by the AIA specification in
-+ * "Synchronizing interactions between a hart and the APLIC": ask the APLIC to
-+ * send an MSI to the hart itself and wait until it shows up as pending in the
-+ * hart's own interrupt file. As it says nothing about MSIs on their way to
-+ * any other hart, it has to be executed by the pCPU owning the interrupt file
-+ * the MSIs were being sent to.
++ * An IMSIC VS-file is reachable only through hstatus.VGEIN of the hart the
++ * file belongs to, and a guest interrupt file index is meaningless on any
++ * other hart, so such work always has to be done by that very hart.
++ *
++ * The local case runs with IRQs disabled to provide func() with the same
++ * environment it is given when it is called from the function call IPI
++ * handler.
 + */
-+static void __maybe_unused imsic_aplic_sync(void *unused)
++static void imsic_call_on_cpu(unsigned int cpu, void (*func)(void *),
++                              struct imsic_vsfile_data *data)
 +{
-+    imsic_local_eix_update(imsic_sync_id(&imsic_cfg), 1, true, false);
++    if ( cpu == smp_processor_id() )
++    {
++        unsigned long flags;
 +
-+    /*
-+     * For FENCE, a CSR write counts as device output, which neither
-+     * spin_lock() nor writel() in aplic_genmsi_barrier() orders before the
-+     * write to genmsi: should the IMSIC see the clear after the extempore
-+     * MSI, the loop below would never end.
-+     */
-+    RISCV_FENCE(o, o);
-+
-+    aplic_genmsi_barrier();
-+
-+    while ( !imsic_local_is_pending(imsic_sync_id(&imsic_cfg)) )
-+        cpu_relax();
++        local_irq_save(flags);
++        func(data);
++        local_irq_restore(flags);
++    }
++    else
++        on_selected_cpus(cpumask_of(cpu), func, data, 1);
 +}
 +
- static void imsic_vsfile_local_clear(const struct imsic_vsfile_data *idata)
+ /*
+  * Ensure that all the MSIs the APLIC has already generated for the hart this
+  * runs on have really reached the hart's IMSIC.
+@@ -616,7 +645,7 @@ static void imsic_vsfile_deselect(const struct imsic_vsfile_ctx *ctx)
+  * any other hart, it has to be executed by the pCPU owning the interrupt file
+  * the MSIs were being sent to.
+  */
+-static void __maybe_unused imsic_aplic_sync(void *unused)
++static void cf_check imsic_aplic_sync(void *unused)
  {
-     unsigned int i;
-diff --git a/xen/arch/riscv/include/asm/aplic.h b/xen/arch/riscv/include/asm/aplic.h
-index b2f1d140f6f8..37584039107b 100644
---- a/xen/arch/riscv/include/asm/aplic.h
-+++ b/xen/arch/riscv/include/asm/aplic.h
-@@ -89,6 +89,7 @@
- #define APLIC_SETIPNUM_BE               0x2004
+     imsic_local_eix_update(imsic_sync_id(&imsic_cfg), 1, true, false);
  
- #define APLIC_GENMSI                    0x3000
-+#define APLIC_GENMSI_BUSY               BIT(12, U)
- 
- #define APLIC_TARGET_BASE               0x3004
- #define APLIC_TARGET_LAST               0x3ffc
-@@ -173,4 +174,6 @@ struct aplic_regs {
- uint32_t aplic_hw_read_reg(unsigned int offset);
- void aplic_hw_write_reg(unsigned int offset, uint32_t value);
- 
-+void aplic_genmsi_barrier(void);
-+
- #endif /* RISCV_APLIC_H */
-diff --git a/xen/arch/riscv/include/asm/imsic.h b/xen/arch/riscv/include/asm/imsic.h
-index 090e902e4579..1f3ccfbccd1e 100644
---- a/xen/arch/riscv/include/asm/imsic.h
-+++ b/xen/arch/riscv/include/asm/imsic.h
-@@ -69,6 +69,29 @@ struct imsic_config {
-     spinlock_t lock;
- };
+@@ -1077,7 +1106,8 @@ void imsic_vsfile_attach(struct vcpu *v)
+  * A vCPU without a h/w file has none to move.
+  *
+  * No lock is needed: vsfile_cpu of a running vCPU is changed only by the vCPU
+- * itself, when it acquires a file in imsic_vsfile_attach().
++ * itself, when it acquires a file in imsic_vsfile_attach() or
++ * imsic_migrate_vcpu().
+  *
+  * TODO: a s/w file, once supported, has to be moved too.
+  */
+@@ -1090,6 +1120,63 @@ static bool imsic_vsfile_needs_move(const struct vcpu *v)
+     return cpu != CPU_NONE && cpu != smp_processor_id();
+ }
  
 +/*
-+ * The identities of Xen's own interrupt file are allocated statically:
-+ *  - the reserved ones are taken from the top down; so far that's only the
-+ *    last one, nr_ids, for APLIC-to-hart synchronization;
-+ *  - 1 .. imsic_nr_free_ids(), i.e. all those below the reserved ones, are
-+ *    left for the APLIC sources, as Xen gives source N the EIID N
-+ *    (aplic_init() drops the sources which don't fit).
-+ * A new reserved identity has to be taken below the lowest one reserved so
-+ * far, with imsic_nr_free_ids() lowered accordingly.
++ * Move the h/w guest interrupt file of @v to the pCPU @v runs on, following
++ * "Migrating a virtual hart to a different guest interrupt file" in the AIA
++ * spec. Only called by imsic_migrate_vcpu(), see the requirements there.
 + */
-+
-+/* Interrupt identity reserved for APLIC-to-hart synchronization. */
-+static inline unsigned int imsic_sync_id(const struct imsic_config *cfg)
++static void imsic_vsfile_move(struct vcpu *v)
 +{
-+    return cfg->nr_ids;
++    struct imsic_vsfile_data vsfile_data = {
++        .nr_eix = imsic_cfg.nr_eix,
++    };
++    struct vimsic_state *imsic_state = v->arch.vimsic_state;
++    unsigned long flags;
++    unsigned int old_vsfile_id;
++    unsigned int old_vsfile_cpu;
++
++    ASSERT(local_irq_is_enabled());
++    ASSERT(imsic_vsfile_needs_move(v));
++
++    read_lock_irqsave(&imsic_state->vsfile_lock, flags);
++    old_vsfile_id = imsic_state->guest_file_id;
++    old_vsfile_cpu = imsic_state->vsfile_cpu;
++    read_unlock_irqrestore(&imsic_state->vsfile_lock, flags);
++
++    /*
++     * At this point, all interrupt producers are still using the old IMSIC
++     * VS-file. Allocate and clear the new one before redirecting anything
++     * to it.
++     */
++
++    /* Zero-out, map and start to use the new IMSIC VS-file */
++    vsfile_data.hgei = imsic_vsfile_acquire(v);
++    if ( !vsfile_data.hgei )
++        return;
++
++    /*
++     * If any interrupts at an APLIC are forwarded by MSIs to the old interrupt
++     * file, reconfigure the APLIC to send them to the new interrupt file.
++     */
++    vaplic_reconfigure_target(v);
++
++    /*
++     * Synchronizing interactions between a hart and the APLIC.
++     *
++     * The MSIs to be flushed are the ones still on their way to the old
++     * interrupt file, so the barrier has to be done by the pCPU which owns
++     * that file.
++     */
++    imsic_call_on_cpu(old_vsfile_cpu, imsic_aplic_sync, NULL);
++
++    /*
++     * At this point, all interrupt producers have been moved
++     * to the new IMSIC VS-file.
++     */
++
++    BUG_ON("unimplemented");
 +}
 +
-+/* Interrupt identities 1 .. imsic_nr_free_ids() aren't reserved. */
-+static inline unsigned int imsic_nr_free_ids(const struct imsic_config *cfg)
-+{
-+    return imsic_sync_id(cfg) - 1;
-+}
-+
- struct vimsic_state {
-     /* IMSIC VS-file */
-     rwlock_t vsfile_lock;
+ /*
+  * Make the h/w guest interrupt file of @v belong to the pCPU @v runs on.
+  *
+@@ -1101,9 +1188,17 @@ static bool imsic_vsfile_needs_move(const struct vcpu *v)
+ void imsic_migrate_vcpu(struct vcpu *v)
+ {
+     ASSERT(v == current);
++    ASSERT(!local_irq_is_enabled());
+ 
+     if ( !imsic_vsfile_needs_move(v) )
+         return;
+ 
+-    BUG_ON("unimplemented");
++    /*
++     * The move maps the new file into the guest's G-stage, which takes the
++     * p2m lock, and sends IPIs to the pCPU owning the old file: both need
++     * IRQs enabled.
++     */
++    local_irq_enable();
++    imsic_vsfile_move(v);
++    local_irq_disable();
+ }
 -- 
 2.56.1
 
