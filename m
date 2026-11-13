@@ -2,46 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 23926606A8AD
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Nov 2026 10:13:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28847606A337
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Nov 2026 10:14:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=amutable-com.20260707.gappssmtp.com header.i=@amutable-com.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=WaBQogdc
-Received: from list by lists.xenproject.org with outflank-mailman.1487017.1689583 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=amutable-com.20260707.gappssmtp.com header.i=@amutable-com.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=Hje2XmHF
+Received: from list by lists.xenproject.org with outflank-mailman.1487020.1689590 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRoHx-0000y0-FB; Fri, 13 Nov 2026 10:13:45 +0000
+	id 1xRoIL-0001X3-LT; Fri, 13 Nov 2026 10:14:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1487017.1689583; Fri, 13 Nov 2026 10:13:45 +0000
+Received: by outflank-mailman (output) from mailman id 1487020.1689590; Fri, 13 Nov 2026 10:14:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRoHx-0000xs-Ag; Fri, 13 Nov 2026 10:13:45 +0000
-Received: by outflank-mailman (input) for mailman id 1487017;
- Fri, 13 Nov 2026 10:13:43 +0000
+	id 1xRoIL-0001Wv-IY; Fri, 13 Nov 2026 10:14:09 +0000
+Received: by outflank-mailman (input) for mailman id 1487020;
+ Fri, 13 Nov 2026 10:14:07 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <alex@amutable.com>) id 1xRoHv-0000x2-Jk
- for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 10:13:43 +0000
+ (envelope-from <alex@amutable.com>) id 1xRoIJ-0001WF-Is
+ for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 10:14:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xRoHv-003Fqv-0X
- for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 11:13:43 +0100
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xRoII-009cRK-Vt
+ for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 11:14:06 +0100
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <alex@amutable.com>)
- id 6af6e2cc-e002-0a2a0a5209dd-0a2a45099988-28
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 11:13:42 +0100
-Received: from [209.85.208.51] (helo=mail-ed1-f51.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6af6e2e5-2eae-0a2a0a5409dd-0a2a4506a332-34
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 11:14:06 +0100
+Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <alex@amutable.com>)
- id 6af6e2d6-be1a-0a2a45090019-d155d033b45c-3
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 11:13:42 +0100
-Received: by mail-ed1-f51.google.com with SMTP id
- 4fb4d7f45d1cf-6b757029223so1116385a12.0
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 02:13:42 -0800 (PST)
+ id 6af6e276-195a-0a2a45060019-d1558032d11c-3
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 11:12:06 +0100
+Received: by mail-wm1-f50.google.com with SMTP id
+ 5b1f17b1804b1-4a214c5c4c0so10660835e9.3
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 02:12:06 -0800 (PST)
 Received: from [10.0.0.233] (tmo-086-54.customers.d1-online.com.
  [80.187.86.54]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-49c603f4d29sm4332158f8f.35.2026.11.13.02.13.40
+ 5b1f17b1804b1-4bb4e2842e6sm142085915e9.4.2026.11.13.02.12.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Nov 2026 02:13:42 -0800 (PST)
+ Fri, 13 Nov 2026 02:12:05 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,47 +52,47 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=amutable-com.20260707.gappssmtp.com header.i="@amutable-com.20260707.gappssmtp.com" header.h="MIME-Version:User-Agent:Content-Transfer-Encoding:Content-Type:References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=amutable-com.20260707.gappssmtp.com; s=20260707; t=1794564822; x=1795169622; darn=lists.xenproject.org;
+        d=amutable-com.20260707.gappssmtp.com; s=20260707; t=1794564726; x=1795169526; darn=lists.xenproject.org;
         h=mime-version:user-agent:content-transfer-encoding:content-type
          :references:in-reply-to:date:cc:to:from:subject:message-id:from:to
          :cc:subject:date:message-id:reply-to:content-type;
-        bh=ycFr7tcHP3BtNSevVHScuCcUOF/OuOrXOdu+rsUd7U8=;
-        b=WaBQogdc3CUKMpYpQrFTTjXPi6scjqs4d7IBuRLdKcbKqdSzcU8XmwSAPDt861LWcg
-         GKJGnzjc2/E6S2FBrAkIDzYCYNapLFct97w/CR6F67lnLe+Dqbi2awEcimgNw4Jt+i+/
-         OhtJQ15snRonGUdsObGwxjsmbaWG3navikRUzNNWu8cvysPaC/PnpTdww5iioCSiGpJ/
-         XZ1AbpNLG6LUgCjo6yOSeQuFRgQoTUUM8AEAmJ+xpiOo4UR7sPdUrdC9DcVt8xFjaJfJ
-         9P3haYgYzyRyeElKnYn9QSMtnbJb1RtYwN0WUn5OuOwhXRfXg9LMTLNoM/Ij7NY6QLrW
-         n7vg==
+        bh=C9TZKYRayQVC7UyXoancZRI4bPIYIHY06/n7s/4tB9k=;
+        b=Hje2XmHF+RBk/S2K2WxR9YtH9Y9THGD6fjPI1+0kagja3X+R8eGc7jn+5VYM+Lihpo
+         aDTjwtb6FSRlBArdOirJP4OPAf8fJ7mcd8rN3qJQawqHvOTxhQVBB5Rmbfsy3xDSPPQH
+         FuY1/IN+XNYNMsLoxqlblxQxqNHqjGL01KqUyOnmZxIYusvstIQIOMYEZIpT2bnKFokw
+         cCYjxSL2zoOMgVxhAwODVji0QluCUSNFn/Epg3K9EyHMUwyCAAyDO/6ZuDLuijk/CtaP
+         TCqOOl8lDJ8iJbN0j4vOZVVG42AopoatnRbj0f3cfgMDh9SPaORwSvo/AIAn6aVSKFE/
+         3iYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794564822; x=1795169622;
+        d=1e100.net; s=20260707; t=1794564726; x=1795169526;
         h=mime-version:user-agent:content-transfer-encoding:content-type
          :references:in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=ycFr7tcHP3BtNSevVHScuCcUOF/OuOrXOdu+rsUd7U8=;
-        b=nbORTew2gKx+lYACmVIK4GVGohqJdhZqVlsy4kkq6PuV9BRQHzNLjBAJn2mMR0ZjjJ
-         bEq+hyrB9OeqVI3tpFBowb7+Tae1B2rjEdzIpqhG8TtnpDgAmf5Qwh/e1N+ZsIpC6WRs
-         NTp4ogLjkr3MQI8r7Dxwhs/ldtY/fn8IePAJmKOij4XsO/WPJZ/vB42CvKIkc6OeoUW2
-         9dKrITHC97fzsHSCnfLw+btlO3oZ06nVb1xuuYQlztSVgdzy31B/dT3NZNUrJesEVsuz
-         r/nu/6yc403D45p/ivlSWjf9+dIBy1B68T7FEf3DJG+E8tRmWrlAdPLaBMZJmymBCJic
-         z3iQ==
-X-Forwarded-Encrypted: i=1; AL+hErGBircrBrXx5WWLbWaCV+mJ0luwM9764v0269J5ceKYMPSc7LM460vlPFofBnioYQPpxtwFEdeaBnk=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z8gk8Fuh1xYmSy1OxNnJX3PmX9GUkIidcfgnXg2OLdn054wONPT
-	ohlDg/EssYakH+BTMZim6cG8U59rwOytqqdU0P+V3o+Yxe4RPCSSGCmuP0VRRJ6+qWcN
-X-Gm-Gg: AYBFou1Ow2nVegmhYcpLoU4QDL0XUQCnho6IPsa5Ro6aJP03Hppn6mfFS3Tb8glxVuO
-	qYOyjGmJGsj0jPV5IbW5Hirxlkqg5vXCrzRLrLlPdEUcvTgvDCwoUolL9NCBSGv5G9VC6qt+A2a
-	n43mGV8eu3O4Qpyx3+8ZuKS9xQpE1eltafGDSUKHASAMrJlGJesqahCIE/hTr7Z0iZBjBM/ZEiz
-	oZS7G9QroVm5bY8rEPf5QA073r/EjA1XyUqTPNzLADQINDozSuY/8wM0PkxLLIOu/rcume2gVzG
-	aM+ZwHHifgrcISiR8HwqHXMtUh8iV6639ks4xfaSAe7QyIUECwklF2JMSpK3F+6jZHsxjv2Kb/v
-	s+5HUslhB2pmqz1X1786PkLT5HS1sATJ313OlAyZuTJr2MK3H80Dj90FbLIfcxU5INV9PYrwdQN
-	T/bYt4Z5jchvT1qmOPDZKXUIBN4b6o32IvJtk5VAY3prfIuE7DxFXXirQwaW5EvCyhcOZtBX4JG
-	ihrrTCWYCth4okVtKZKplnHookuSzXT+u+XEEIY0v3YKU+lbVGbWbwiFxdMNGsUb9N9urO+Dc6X
-	Y4Qh+PGMX/GvwpYdKIQlmSyZxt/WyBC2bbNHrh6hXjqeZCmKgYFELBDdXV2IWwzGTJ6O/fjCYA3
-	Zpn9ED1oj
-X-Received: by 2002:a05:6402:208c:20b0:6b5:69f4:e7ce with SMTP id 4fb4d7f45d1cf-6b7c0c62bacmr1415990a12.39.1794564822367;
-        Fri, 13 Nov 2026 02:13:42 -0800 (PST)
-Message-ID: <3546dd28b1d63c1478d391a2015fff4c1b976639.camel@amutable.com>
-Subject: Re: [PATCH RFC 24/41] efivarfs: use fc_init_pseudo()
+        bh=C9TZKYRayQVC7UyXoancZRI4bPIYIHY06/n7s/4tB9k=;
+        b=qNhnVod8FUeX/YinLKU3R7zQPINBhl39DsBsHWaJtn2Z4dylv96Ag1sjkgzmFrk90N
+         vfkIKfrNJIqGAEelBrM7pwp8bvglf8iasRyYnU7XNUT35ieU7WpQAeCpoxiUB6RD3k4b
+         IMz2/d2uBNOaR5WpIHY5s7yCdTed7zD0gA95RmS3tJgqrhscvPNglZ6sP+c00rqezA92
+         sc+axXsgTrtVTt5i6zLlW1+/AhpthVeGaYsJ3fsqpxwAT6iFs9CTbpZbbscnnjVPPGfz
+         nv0FZP+7NutH2LdCSXd6MgwBzKVUu5PY/r2oT8rAV9hPMWWxktGUq+I/q7exAZBFfZzU
+         +H8Q==
+X-Forwarded-Encrypted: i=1; AL+hErEmLXYEX6fgVrjXIYtpIBFLf1SSIxNew29+nDgffqQhqdoPzyKtuk9iYmplKAe514V9epVHF5J4FME=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z8cv90Qa8WiF4wHPXYcKKrE0IDSlZfr0rfhvMjaut5JVYyYMOoR
+	USAfslZ364wRZL2kw3bVBfhKlTkgxHbeZh58Iu3AHQizlDr2t4aOm0KLSod6stHP0mww
+X-Gm-Gg: AYBFou2CmT/YmNV+wuSnYXBJYgqK7cSQtEsYpNIr77LsLXDujUlZ9SHJofw0/avdcvI
+	1c5Yy6tj6Y3+Oog3CiGv2Sbyg3ox436f4VfQQU5PVYAuhWw3OwLu9XPaAFqP1KHdgjyTp6s9yjv
+	aoAMtp64dH/edVpncc5Yu9ffEHetpAblD0qFiuttP/3OJwiEtbb/FZcY/emE7d81H43rabk+49K
+	mxMmKkrjPWgjebfqdIEZzby9g1vYs/8JXCaeyJnMqCYE8LGf8wiuCsvN4XNwHrD1yo69C3uce6o
+	ZjiqlokLv2OiN1rNfx2u15rYwv+BK+uYa9mQHGdgny4ww9cipJNjwFqfSv+E+eLYsF7cKm+K4vi
+	Tc9PRdS9E9itONYdOq3osIDC7LpacHgv2CHoBe1W+00onWNhgA9zKylgRkBTkQq1OH+55z5yYlc
+	lJpQQBE4oW4EpVh7IY+N99bKb2zuxsoiL2Kq2evUiFoAqJ1CoHmeUG0chrt3SM5njmI8n7TSNqo
+	hA83EP4RQlP3fEgqyb0V+epNk4nEfkpeAyNJbJ/wzPD5Eztdixp1tvsRm9j+FZD07bLUyhWQ4YH
+	KOyg5F6A6bcT/x49jTPkCSlOWepWo9f9U02ew3zaO0mb/8D3SDb8QzS6rhpyBGxYODgKPTJDbYR
+	wHV9nKl9Y
+X-Received: by 2002:a05:600c:c4a3:b0:4a1:6992:f861 with SMTP id 5b1f17b1804b1-4bb55a02932mr40317635e9.1.1794564726124;
+        Fri, 13 Nov 2026 02:12:06 -0800 (PST)
+Message-ID: <82d691d2db7579d9630bf89f73132e36124bf74e.camel@amutable.com>
+Subject: Re: [PATCH RFC 19/41] smack: use fc_init_pseudo() for smackfs
 From: Alexander Mikhalitsyn <alex@amutable.com>
 To: Christian Brauner <brauner@kernel.org>, linux-fsdevel@vger.kernel.org
 Cc: Jann Horn <jannh@google.com>, Chris Mason <mason@kernel.org>, Josef
@@ -110,18 +110,18 @@ Cc: Jann Horn <jannh@google.com>, Chris Mason <mason@kernel.org>, Josef
  linuxppc-dev@lists.ozlabs.org, 	linux-usb@vger.kernel.org, Amir Goldstein
  <amir73il@gmail.com>, 	linux-erofs@lists.ozlabs.org,
  linux-kselftest@vger.kernel.org
-Date: Fri, 13 Nov 2026 11:13:40 +0100
-In-Reply-To: <20261110-work-loop-pseudo-v1-24-4c998976c6c7@kernel.org>
+Date: Fri, 13 Nov 2026 11:12:03 +0100
+In-Reply-To: <20261110-work-loop-pseudo-v1-19-4c998976c6c7@kernel.org>
 References: <20261110-work-loop-pseudo-v1-0-4c998976c6c7@kernel.org>
-	 <20261110-work-loop-pseudo-v1-24-4c998976c6c7@kernel.org>
+	 <20261110-work-loop-pseudo-v1-19-4c998976c6c7@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 User-Agent: Evolution 3.56.2-0+deb13u1 
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-purgate-ID: tlsNG-bad1c0/1794564822-3BCD7034-41578150/0/0
+X-purgate-ID: tlsNG-16d1c6/1794564726-F500977B-E35A4196/0/0
 X-purgate-type: clean
-X-purgate-size: 1114
+X-purgate-size: 1153
 X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
@@ -131,9 +131,9 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 On Tue, 2026-11-10 at 10:14 +0100, Christian Brauner wrote:
-> Initialize efivarfs as a pseudo filesystem. This raises SB_I_PSEUDO
+> Initialize smackfs as a pseudo filesystem. This raises SB_I_PSEUDO
 > and
-> also SB_I_NOEXEC and SB_I_NODEV. efivarfs never holds executables or
+> also SB_I_NOEXEC and SB_I_NODEV. smackfs never holds executables or
 > device nodes.
 >=20
 > Signed-off-by: Christian Brauner (Amutable) <brauner@kernel.org>
@@ -141,28 +141,28 @@ On Tue, 2026-11-10 at 10:14 +0100, Christian Brauner wrote:
 Reviewed-by: Alexander Mikhalitsyn <alex@amutable.com>
 
 > ---
-> =C2=A0fs/efivarfs/super.c | 2 ++
+> =C2=A0security/smack/smackfs.c | 2 ++
 > =C2=A01 file changed, 2 insertions(+)
 >=20
-> diff --git a/fs/efivarfs/super.c b/fs/efivarfs/super.c
-> index 12746ced6dc6..e598d42c5f42 100644
-> --- a/fs/efivarfs/super.c
-> +++ b/fs/efivarfs/super.c
-> @@ -8,6 +8,7 @@
-> =C2=A0#include <linux/efi.h>
-> =C2=A0#include <linux/fs.h>
+> diff --git a/security/smack/smackfs.c b/security/smack/smackfs.c
+> index a72bc7fabea9..4a56bbeaeca3 100644
+> --- a/security/smack/smackfs.c
+> +++ b/security/smack/smackfs.c
+> @@ -25,6 +25,7 @@
+> =C2=A0#include <linux/magic.h>
+> =C2=A0#include <linux/mount.h>
 > =C2=A0#include <linux/fs_context.h>
 > +#include <linux/pseudo_fs.h>
-> =C2=A0#include <linux/fs_parser.h>
-> =C2=A0#include <linux/module.h>
-> =C2=A0#include <linux/pagemap.h>
-> @@ -554,6 +555,7 @@ static int efivarfs_init_fs_context(struct
-> fs_context *fc)
-> =C2=A0	}
+> =C2=A0#include "smack.h"
 > =C2=A0
-> =C2=A0	fc->s_fs_info =3D sfi;
+> =C2=A0#define BEBITS	(sizeof(__be32) * 8)
+> @@ -2880,6 +2881,7 @@ static const struct fs_context_operations
+> smk_context_ops =3D {
+> =C2=A0 */
+> =C2=A0static int smk_init_fs_context(struct fs_context *fc)
+> =C2=A0{
 > +	fc_init_pseudo(fc);
-> =C2=A0	fc->ops =3D &efivarfs_context_ops;
-> =C2=A0
+> =C2=A0	fc->ops =3D &smk_context_ops;
 > =C2=A0	return 0;
+> =C2=A0}
 
