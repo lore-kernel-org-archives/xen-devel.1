@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 70D98606A331
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Nov 2026 15:49:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 18FB3606A33B
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Nov 2026 15:49:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=p0Ja2P2q
-Received: from list by lists.xenproject.org with outflank-mailman.1487719.1690009 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=S3SnsO+F
+Received: from list by lists.xenproject.org with outflank-mailman.1487729.1690045 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRtWi-0002Dk-A6; Fri, 13 Nov 2026 15:49:20 +0000
+	id 1xRtWo-0003EN-7b; Fri, 13 Nov 2026 15:49:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1487719.1690009; Fri, 13 Nov 2026 15:49:20 +0000
+Received: by outflank-mailman (output) from mailman id 1487729.1690045; Fri, 13 Nov 2026 15:49:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRtWi-0002DK-4W; Fri, 13 Nov 2026 15:49:20 +0000
-Received: by outflank-mailman (input) for mailman id 1487719;
- Fri, 13 Nov 2026 15:49:18 +0000
+	id 1xRtWn-0003CQ-PG; Fri, 13 Nov 2026 15:49:25 +0000
+Received: by outflank-mailman (input) for mailman id 1487729;
+ Fri, 13 Nov 2026 15:49:24 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xRtWf-0001my-UR
- for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 15:49:18 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xRtWl-0002oO-VY
+ for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 15:49:24 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xRtWf-004Sxq-BO
- for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 16:49:17 +0100
+ id 1xRtWl-004Sxq-BP
+ for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 16:49:23 +0100
 Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6af7316c-2eae-0a2a0a5409dd-0a2a450abfba-32
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 16:49:17 +0100
-Received: from [209.85.221.49] (helo=mail-wr1-f49.google.com)
+ id 6af7316c-2eae-0a2a0a5409dd-0a2a450abfba-48
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 16:49:23 +0100
+Received: from [209.85.221.53] (helo=mail-wr1-f53.google.com)
  by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6af7317d-f2d2-0a2a450a0019-d155dd31f138-3
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 16:49:17 +0100
-Received: by mail-wr1-f49.google.com with SMTP id
- ffacd0b85a97d-492f563d1c6so781095f8f.3
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 07:49:17 -0800 (PST)
+ id 6af73183-f2d2-0a2a450a0019-d155dd35ec5d-3
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 16:49:23 +0100
+Received: by mail-wr1-f53.google.com with SMTP id
+ ffacd0b85a97d-498f5fa4f70so1623083f8f.0
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 07:49:23 -0800 (PST)
 Received: from fedora (user-109-243-65-71.play-internet.pl. [109.243.65.71])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-49c5f1c0e0dsm5786493f8f.15.2026.11.13.07.49.15
+ ffacd0b85a97d-49c5f1c0e0dsm5786493f8f.15.2026.11.13.07.49.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Nov 2026 07:49:15 -0800 (PST)
+ Fri, 13 Nov 2026 07:49:21 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,42 +51,42 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794584957; x=1795189757; darn=lists.xenproject.org;
+        d=gmail.com; s=20260707; t=1794584963; x=1795189763; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=wbZ25+VoKaaV7qnPyVDlQn3gP5b3NvB2ZMaNYVvtdFY=;
-        b=p0Ja2P2qSavn7QZ5GRdgpJZzOTXD/BZCaJslBPFEF4ez6Oa8H891rUxE/hyz6ZdNLt
-         dnKAteYob58x43M5shjjivI8tTnkHt4yVT+FKWSW5kJzuV3LLrY6mpqrbA08JzVifho6
-         QVydVC6+PediD1JznbWubevwFAN/wTa9V/85uPwE2jlcIW02ZZxva3ziSYyqjxtvIBP/
-         09GXxk7PRptSbeUWTHBIIbjyHK5txNbtxajbmtIVXrOjSg+tb+Qzz9JKy34acU/v+V1A
-         /f7YF4IeOqAB84+f0B4rTZOHqF8jJ2S/ZVuKNHEB5+CkW+dxMf1uXDKz+F2K5+qm/u2B
-         T2uA==
+        bh=YgKGKu2B2DfNPM8Jfl8yeXveSgFEe1J/mq1EwtQrJ94=;
+        b=S3SnsO+FavBJBG/7MKPMvMKF05GHcvvvbUYHB6Iyqiu2DSH7OXexBfvqjZlUK3Nsb5
+         p6OwEW4Awkjm6EHVBaOVRWK21GB5rIKKzzA9BF00vf51p6a/kLO2Aae96GwLC6LTNCtX
+         T9vpdwEWaZo8nVhN5pVjmoG/IUaDtiSYcrgnqOizqHVxuPcd/SyxeO176Zoq5XLqjy84
+         sRpe+ih8MWU2Z5WiQPL6fQ8k4Uo8+bYHhcbxactG0VB58U0nMcwIjW5VkX4vYmy5VFKt
+         32+P9ZpmodGia0Uvccgj0KxcFi3smdxgKdeGCz/3jalkX8mSqGSXOYLGmQH/Dr4VPHmp
+         mJfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794584957; x=1795189757;
+        d=1e100.net; s=20260707; t=1794584963; x=1795189763;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=wbZ25+VoKaaV7qnPyVDlQn3gP5b3NvB2ZMaNYVvtdFY=;
-        b=CrG94aIbxaRR2oyublsHe8213ybVC+ytZAWAlg44jPFt1/XpY7dnvUwrYnqPC3s7dp
-         hRDtRZxbV5nRAADkRQBUGcYOGOqrGrXTidr9HLcTsmgxwe4pUWpWhYD5Nk8VIVvEhod+
-         a32X8v5Mv2BUxjsq4y0MuECs6XwfDgyxrXQhc3hk+PsSs4vTVVvLBV5ClywCJziefiYa
-         92Z0+Kd9DtKc2gaCCNywlrylxAptZXXmpROkJ040Kph49l1/l6DLsPGpv4C4FXmXRtnj
-         NxQW5k8OeWgz2XqrYDXtwrKAC6Gv4WUAMrCufzpxDUClvd8Zf5x7Vss54gKEYMgcImsb
-         cgwQ==
-X-Gm-Message-State: APuU4Z/3XgWJRJpqTr475EvAuIg1yHVVXCRiwV0wF9P8VEjMze8OvpT6
-	SdGVApOX3oAwElD7zMul3iZtt1x73JYR923y2Agd4Q6F8Cs6h+UImLAdH2wfHQ==
-X-Gm-Gg: AYBFou386NkvgtmhubOdknzaK/U+dVBJnQR3DgJNh1QEAdap46+fqNy7ympaFFKcJj5
-	LtG+0bcXCqFwtFN/0ODkkNHj/P9XTS1WrCb3jhdYWbQftl7DKrSTjLfIqmdYc7EdVEI/s+fUXY/
-	SoEhIC2g5mfvdzUBmpzZ4roVJU0a2gjH427ShQHCQsslhO9M+zZHa16Sj93OiPp6gHxHCOxTEP9
-	kJixLfy3Uqt3bR94skfqeyKJUR1UZfRd5fVpGF9jKOrwnnNSgjAU1869eqt58WQW7DUlslSPPjv
-	JN8ljnBW3bvD9huBiZXigJIFDos/PVTwbRTJ7AlA0kBVc85cAF8HD1Ju7vkFUFBPvoaUWvw6nJ2
-	vFHopkzuekOsZtDsO37GiatUQaKz9lWKttBxYeJEZB50dhWBced7uCd5WMtlNPfQ4NTMmzGYvRz
-	24b7tgyKGt5J+yx3xCKRQtqgi58aH+TBtHX5ZiuA2vn7ML4G9/7Oa9TorFZCLopOvFbbToo4dfb
-	2/1GHh2o5mlXQ9fGCeSdOAlhgK+Lnz1Mh98QA87qxLeklP9Ejz3yV1TyTJWk9N5rbBtBbDi+iwf
-	CVXzseTK64BnYEUEnQwDEqWCYe+ywSpijgENy4lzrVqbRfsSMWXrEhO1ZrVL2XVEEtcm
-X-Received: by 2002:adf:e00d:0:10b0:490:6fbc:9457 with SMTP id ffacd0b85a97d-49c72c9c6f6mr4954052f8f.41.1794584956088;
-        Fri, 13 Nov 2026 07:49:16 -0800 (PST)
+        bh=YgKGKu2B2DfNPM8Jfl8yeXveSgFEe1J/mq1EwtQrJ94=;
+        b=QIJCAelrKb8E0FdrLy/FzLqA5Ud3SSQ+/SynXLXG+4GBMQDx0OUPIaeaIpamK6lxaa
+         83VXp7GW0o0gUaacSr5LjIZZY/E3yyHluQqZod/kPgu6B3DLFNuAvrfj4N5xdkGq2yPY
+         OJ5O3d5hZU8nqPXGfiyIYXhAvDPX5xrjvX2SX/3Y6VWVcyaSviQdH386vQaZl9mRbqgQ
+         JMR82CMasLz+MqDhyBki+7lGFKcoC8qLWSPzuf9JPfm8PDVOqC0lp+Zmg58VSGF4VcqP
+         aNG5x3TVbUbXFPRk/fv4IDAiuoKcoDJ3BeCssfVD4S4hHvF2fugHrosKfXErsUfa8KcU
+         qmvw==
+X-Gm-Message-State: APuU4Z+Mcpw4sY35Tf9zy+GfUL8/hhlUy8OJb5h5KKTFrvQT2bRlLxcp
+	DGakOEPfXRucMsiUgHt89SahJrC51YKcPUhSF3PgUAfqZ3YnSFu7+mwO/SHc7w==
+X-Gm-Gg: AYBFou2nP2rC8FiOjsJ3a446H3oS+kmFvwsLH19D6Zfhys+CHlkeGlbLYLrCPchCORN
+	vXPLQSarI2sl4GYsxhiaMpznD3I88P5Wci5BZGKcKkROpLDiYbrMASYo7ssYY4Fv1yEaIVvcNx5
+	l+x3eVJQqJPwTGMDaVBKUF1dFUT/8lglShPXJVFcKNHekxBeNw/R5QsFd03TjpRvxOVQldLfjQj
+	DPZ/mBr5vAATUW6s8XlUxthgBzrSuoWI/jw9d3QiKdHFKaje4FEIpySMyNRClz+WMChNV5Hvuul
+	Txo5WbopEDvD52YvFQ7ni7D9YiqU8MR5zZn7DR5Zej0Zj41oycAo4QzBTSA14MDcxNQsAzMRxc+
+	ubrU3HzwyW3Jd4e/6d/z2zuzwZQfiPhqkgLcSBz055w0ZmLewLEw9yZhvGtwRcXqFtWQ56prBgo
+	Z4c+nwX5Qiij0LaeiuAjpfX1CAfvFbiUASy8eYen4tCxS4IifJBkfI0fb6rr4Z0vrV3Jdy2Rbzq
+	Z1QKoQzDV6wNA84iazju/dYOm4p5ghQ41vZHffVd4fOrFJV7pdNUTdcdulJ498ZqNmKRcrQfE8d
+	NKLyA0KGPRa8i4GvEA9qApgDP5aY1vNeKX9KSDzDinTP9kixMpKws8bN2mKWVvpqjG4g
+X-Received: by 2002:a05:6000:2c07:b0:49d:7e8c:e8ad with SMTP id ffacd0b85a97d-49d7e8ceb27mr1781597f8f.35.1794584962482;
+        Fri, 13 Nov 2026 07:49:22 -0800 (PST)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -101,1010 +101,553 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v4 09/42] xen/riscv: implement virtual APLIC MMIO emulation
-Date: Fri, 13 Nov 2026 16:48:30 +0100
-Message-ID: <9e6fbb0f0b4f5584ba7c71f4a84b726749267041.1794562488.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v4 14/42] xen/riscv: extend exception tables with type and data fields
+Date: Fri, 13 Nov 2026 16:48:35 +0100
+Message-ID: <bd00ba03c1a8a0ba750c6e8402557c4fc5919161.1794562488.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <cover.1794562488.git.oleksii.kurochko@gmail.com>
 References: <cover.1794562488.git.oleksii.kurochko@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1794584957-50ECACFC-60DB642C/10/73395122804
+X-purgate-ID: tlsNG-4011c0/1794584963-59FDECFC-F566F2FF/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 38667
-X-Spam-Status: No, score=-19.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FORGED_GMAIL_RCVD,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+X-purgate-size: 21408
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Guests running under Xen program interrupt routing by writing to APLIC
-MMIO registers. Xen must intercept these accesses to enforce interrupt
-isolation between domains and to translate guest routing intent into the
-underlying physical MSI topology.
+Extend the RISC-V exception table format to include a type and
+auxiliary data field.
 
-Only the h/w (passed-through) sources of a domain, the ones a h/w IRQ is
-routed to (see vintc->hw_irqs), are emulated, by passing the accesses to
-their registers through to the physical APLIC. A virtual source has
-nothing in the h/w, so it reads as zero and ignores writes, like a
-source which isn't assigned to the domain.
+The existing format only supports simple fixups. Some use cases require
+additional context from the fault (e.g. capturing trap information),
+which cannot be expressed with the current EX_TYPE_FIXUP entries.
 
-Register the vAPLIC range with the MMIO dispatch and emulate the accesses:
- - reads and writes are masked with the domain's h/w sources, so that a
-   guest can neither observe nor affect interrupts it does not own;
- - target registers are shadowed per source, so that a guest reads back
-   what it wrote, or zero while the source is inactive, as target[i] is
-   then read-only zero. Of a value written, only Hart Index and EIID are
-   kept: Guest Index is read-only zero, as a guest's harts don't
-   implement the H extension, and bit 11 is reserved. The h/w register
-   instead gets the hart index and guest interrupt file of the pCPU the
-   target vCPU's interrupt file lives on, as the APLIC uses these fields
-   directly to compute the MSI address. As long as the target vCPU has
-   no h/w guest interrupt file, only the shadow copy is updated;
- - vAPLIC is a leaf interrupt domain, so a source can't be delegated: a
-   write to sourcecfg[] with D (bit 10) set zeroes the whole register,
-   as the AIA spec requires for a leaf domain;
- - the registers a supervisor-level domain with domaincfg.BE hardwired
-   to 0 doesn't implement, i.e. the MSI address configuration ones and
-   setipnum_be, read as zero and ignore writes, as the AIA spec makes
-   the bytes of a register which isn't implemented read-only zero;
- - only MSI delivery mode is emulated, so domaincfg.DM is hardwired to 1
-   and the region holds no IDC structures;
- - domaincfg.IE isn't honoured: the h/w forwards the MSIs of the h/w
-   sources whatever its value is. Linux as a guest sets IE before it
-   enables any source and never clears it, so a write may set IE, but
-   not clear it. This is temporary: honouring IE needs the guest's view
-   of the enable bits of the h/w sources to be kept, which is left to a
-   separate patch.
+Introduce a generic ASM_EXTABLE_RAW() helper to describe entries with a
+handler type and associated data. Reimplement ASM_EXTABLE() in terms of
+it using EX_TYPE_FIXUP for compatibility.
 
-Co-developed-by: Romain Caritey <Romain.Caritey@microchip.com>
+Add EX_TYPE_TRAP_INFO to allow handlers to retrieve trap state
+(sepc/scause/stval) and pass it to the fixup path. The data field is
+used to encode which GPR contains a pointer to a struct trap_info.
+Provide ASM_EXTABLE_TRAP_INFO() as a convenience wrapper for this case,
+and pass the trap cause down to fixup_exception() for it.
+
+Also add gpr-num.h, providing symbolic GPR numbers for use in assembly
+and inline asm. It is derived from Linux 6.16, with the register list
+turned into a GPR_LIST() macro instead of being open-coded with .irp, so
+that it can be used from C as well.
+
+Resolving a GPR number to the saved value of the register relies on
+struct cpu_user_regs holding x0..x31 contiguously and in register-number
+order. Add regs_gpr_ptr() for that, and check the layout against
+GPR_LIST() at build time. x0..x31 don't have to start at offset 0 of the
+structure, so anchor REG_PTR() at ->zero too, rather than at the
+structure itself, which relied on them doing so.
+
+Update the exception handling code to dispatch based on the entry type.
+
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
-The state of virtual sources, which devices emulated by Xen need, isn't
-emulated here. It is introduced at the end of this series, by
-"xen/riscv: emulate vAPLIC sourcecfg[], setie[] and domaincfg.IE",
-"xen/riscv: emulate target[] of virtual vAPLIC sources",
-"xen/riscv: emulate the pending bits and MSIs of virtual vAPLIC
-sources" and "xen/riscv: drive the line of a virtual vAPLIC source".
-
-All the patches connected to virtual interrupts support for vAPLIC/vIMSIC
-were tested on [1]. This branch is based on Denis M's framework which should
-be soon sent to ML. Note that in [1] RISC-V is only draft version and
-it has been ported in a quick way just to verify virtual interrupts are
-working.
-
-[1] https://gitlab.com/xen-project/people/olkur/xen/-/tree/riscv-vuart-support-wip?ref_type=heads
----
 Changes in v4:
-- Turn AUTH_IRQ_BIT() into a function, vaplic_is_hw_source(), as it
-  now tells whether a source is a h/w one.
-- Emulate only the h/w sources of the domain, the ones in
-  vintc->hw_irqs: a virtual source reads as zero and ignores writes.
-- Zero sourcecfg[] on a write with D set, as the AIA spec requires for a
-  leaf domain, instead of crashing the domain, and log it at debug level.
-  Drop APLIC_SOURCECFG_WMASK, as SM is then the only field a write may
-  change.
-- Emulate a read of sourcecfg[] instead of crashing the domain on it: a
-  h/w source reads the h/w register, which a write goes to, and any other
-  source reads as zero.
-- Make mmsiaddrcfg, mmsiaddrcfgh, smsiaddrcfg, smsiaddrcfgh and
-  setipnum_be read-only zero instead of crashing the domain on an access
-  to them, and add APLIC_MMSICFGADDR{,H} and APLIC_SETIPNUM_BE.
-- Make Guest Index of a target register read-only zero and drop the
-  reserved bit 11, keeping Hart Index and EIID of the value written,
-  instead of ignoring a write with a non-zero Guest Index as a whole.
-- Sort <xen/sched.h> before <xen/sections.h>.
-- Drop inline from generate_auth_mask().
-- Compute the register offset as addr - regs_start: masking addr with
-  APLIC_CTRL_REGION_OFFSET_MASK aliased the accesses beyond the first
-  16 KiB onto its registers and relied on GUEST_APLIC_S_BASE being
-  16 KiB aligned. Drop APLIC_CTRL_REGION_OFFSET_MASK.
-- Hardwire domaincfg.DM to 1, as only MSI delivery mode is emulated, and
-  drop the handling of a target register write in direct delivery mode.
-- Let a write to domaincfg set IE, but not clear it, as IE isn't
-  honoured.
-- Size the vAPLIC region with no IDC structures, as an interrupt domain
-  which supports only MSI delivery mode needs none, and rename the
-  parameter of APLIC_SIZE() to nr_idcs to make that clear.
-- Make target[i] read-only zero while source i is inactive.
-- Use array_index_nospec() for the guest-controlled indexes into
-  hw_irqs[] and sources[] after they are bounds-checked.
-- Add a comment on why the writes passed through to the h/w can affect
-  only the h/w sources of the domain.
-- Drop the comment claiming that the value read is zero-extended to the
-  guest register width: it is the load emulation which extends it, as the
-  instruction requires.
-- Constify target_vcpu in the target register emulation.
-- Put the arguments of the "Unhandled APLIC write" message on one line.
-- Rename the vCPU parameter of vaplic_mmio_{read,write}() to curr, as it
-  is always current.
-- Drop the "VAPLIC:" prefix of the gdprintk() messages in
-  vaplic_mmio_{read,write}() and add a blank line before the return
-  following them.
-- Add a TODO comment about genmsi, which isn't emulated yet.
-- Don't claim in the comment on writing the h/w target register that the
-  stored copy reaches the h/w later, as nothing in this patch does that.
-- Update the commit message for the changes above.
-- Move the definitions of APLIC_TARGET_IPRIO{,_DEFAULT}, and the
-  switch of aplic_init_hw_interrupts() to them, to a separate patch.
-- Emulate a write to target[] in vaplic_target_write() instead of in
-  vaplic_emulate_store(), and drop the comments repeating the code or
-  struct vaplic_source.
-- Read target[] under the lock of the source, so that a write is seen
-  only once the h/w register follows it.
-- Move aplic_hart_index() and the APLIC_xMSICFGADDR_PPN_* macros to
-  "xen/riscv: build the target hart index via aplic_hart_index()", which
-  now comes first.
+ - Pass the cause to the fixup_exception() call in do_trap(), which
+   "xen/riscv: look up the exception table for any trap taken in Xen
+   context" has moved ahead of the cause switch, and mention
+   EX_TYPE_TRAP_INFO in the comment above it.
+ - Update the commit message.
+ - gpr-num.h: name the assembler GPR_NUM_EQU() in the comment of its C
+   flavour instead of referring to "the __ASSEMBLER__ flavour above",
+   which was hard to tie to a particular comment.
 ---
 Changes in v3:
-- sourcecfg store emulation: mask the guest value with the new
-  APLIC_SOURCECFG_WMASK (D and SM are the only implemented fields, all the
-  other bits are reserved and read as zero) instead of rejecting the write
-  when the value is above APLIC_SOURCECFG_SM_LEVEL_LOW. The dropped check
-  compared the whole value against 7 rather than the SM field, so a legal
-  SM with anything set in the reserved bits 9:3 was rejected. SM is WARL
-  and vAPLIC keeps no shadow copy of sourcecfg[], so a reserved SM value
-  is left to the h/w to normalize; add a TODO covering what will have to be
-  emulated here once sourcecfg[] is shadowed.
-- Introduce APLIC_SOURCECFG_WMASK in asm/aplic.h.
-- target store emulation: reword the comment about a non-zero guest index
-  to say that such a write is illegal and is therefore ignored as a whole,
-  that the shadow copy keeps the zero it was allocated with, and that
-  aplic_msi_target_gen() overwrites the field with vcpu_guest_file_id()
-  anyway. Drop the now-redundant "Ignore such writes ..." comment.
-- s/aplic_hart_field/aplic_hart_index/ (and the local variable with it):
-  the value is the APLIC "Hart Index", not a field of it.
-- Clarify the MSI target address documentation above aplic_hart_index():
-  name the Guest Index in the address formula, say that the APLIC computes
-  the MSI target address itself in MSI delivery mode, and label the two
-  parts of the 14-bit Hart Index field as g and h to match the surrounding
-  text.
-- Don't add the MSI target address scheme diagram to asm/imsic.h: it
-  would duplicate the one documented above aplic_hart_index().
-- Fix the comment on APLIC_TARGET_IPRIO: the field exists when the target
-  is in direct delivery mode (domaincfg.DM = 0), not "in DM mode".
-- Rearrange the case blocks of vaplic_emulate_load() and
-  vaplic_emulate_store() primarily by register offset: APLIC_DOMAINCFG
-  comes first and APLIC_SOURCECFG handling directly follows it; the
-  set/clr-num registers are also listed in offset order. No functional
-  change.
-- Rename the first parameter of aplic_msi_target_gen() from target_vcpu
-  to v.
-- Use a const-qualified pointer in aplic_hw_read_reg()'s cast to match
-  readl()'s prototype.
-- Put APLIC_xMSICFGADDR_PPN_HHX_MASK(), APLIC_xMSICFGADDR_PPN_LHX_MASK()
-  and APLIC_xMSICFGADDR_PPN_LHX_SHIFT() on a single line each.
-- Use gdprintk() instead of dprintk() for guest-triggered messages in
-  vaplic.c and drop the redundant "is passed" from the word_idx message.
-- Call domain_vaplic_deinit() in both failure paths of
-  domain_vaplic_init() instead of open-coding the clean-up.
-- aplic_msi_target_gen() takes the hart index from the pCPU the vCPU's
-  interrupt file lives on (vsfile_cpu) instead of v->processor, which may
-  already name the new pCPU while the vCPU is being migrated. Callers
-  have to hold vsfile_lock until the value is written to the h/w, which
-  the vAPLIC target write path now does.
-- A target register write for a vCPU which has no h/w guest interrupt file
-  yet (its vsfile_cpu is CPU_NONE) only updates the stored copy; the h/w
-  register isn't programmed, as there is neither a hart nor a guest
-  interrupt file to point it at. Add a TODO about s/w guest interrupt
-  files, for which the h/w register will have to be written too.
-- Turn vaplic_regs.target[] into vaplic_regs.sources[], an array of
-  struct vaplic_source holding the guest's view of the target register
-  together with a per-source lock which keeps the stored copy and the h/w
-  target register updated as a pair. Document how many elements it holds
-  and why index 0 is unused.
-- Drop the emulation of target register writes in direct delivery mode:
-  such writes are ignored with a one-time warning. Resolve the target
-  vCPU only in the MSI delivery mode path, where it is used.
+ - Update the commit message.
+ - Keep the name of the asm_extable assembler macro: renaming it to
+   _asm_extable was unrelated to this patch.
+ - Replace regs_get_gpr() in extable.c with regs_gpr_ptr() in asm/regs.h,
+   returning where the register's value is saved rather than the value
+   itself, so that a single helper serves code which reads a guest register
+   as well as code which writes one. Anchor the array access at
+   &regs->zero rather than casting regs itself, matching the relaxed
+   layout requirement below, and bound the index with array_index_nospec()
+   so that release builds, where the ASSERT() is compiled out, cannot read
+   past the register frame. Add NR_GPRS instead of open-coding 32.
+ - Move the layout BUILD_BUG_ON()s out of regs_get_gpr() into
+   build_assertions() in domain.c, so that they no longer sit in one
+   particular consumer of the mapping.
+ - Anchor those checks at offsetof(struct cpu_user_regs, zero) rather than
+   at offset 0: the x0..x31 block only has to be contiguous and in
+   register-number order, it no longer has to sit at the start of the
+   structure. Update the comment above struct cpu_user_regs accordingly,
+   keeping the "->zero must read as 0" requirement as a separate point.
+ - REG_PTR(): anchor at &regs->zero for the same reason.
+ - gpr-num.h: move the part of the comment describing the generation of the
+   .L_gpr_num_<name> symbols down to the construct which actually generates
+   them; GPR_LIST() itself has other users.
+ - gpr-num.h: emit the separator ahead of each list entry instead of after
+   it, so that the expansion doesn't end with one and whatever follows a use
+   of the list has to supply its own; ASM_EXTABLE_TRAP_INFO() supplies the
+   "\n" it needs.
+ - gpr-num.h: state in the file header what was changed compared to the
+   Linux original.
+ - asm/extable.h: no functional change, put EX_TRAP_INFO_REG() on a single
+   line and reflow the comment describing the exception table entry format.
+ - Drop BUG_ON() in ex_handler_trap_info() as trap_info pointer should be
+   guaranteed properly filled by compilation process.
 ---
 Changes in v2:
- - Shadow the guest-written target registers in a per-domain array and
-   serve reads of APLIC_TARGET_* from it: the hardware register holds the
-   value produced by aplic_msi_target_gen() (physical hart field, VS-file
-   id), so reading it back would expose the host layout and return
-   something the guest never wrote. A non-zero guest index is dropped with
-   a one-time warning instead of being echoed back.
- - aplic_hart_field(): take a CPU id instead of a hartid and derive both
-   the group and the hart index from msi->base_addr + msi->offset - the
-   hart index bits are a part of that offset, so the hartid can't be used
-   as the hart index. Add APLIC_xMSICFGADDR_PPN_LHX_{MASK,SHIFT} for that.
- - Document the IMSIC MSI target address layout and the APLIC hart index
-   packing above aplic_hart_field(), and correct the corresponding diagram
-   in asm/imsic.h.
- - Drop the mask parameter of aplic_hw_read_reg() and apply the
-   authorization mask in vaplic_emulate_load() instead.
- - vaplic_emulate_{load,store}(): return bool instead of int, rename v/d to
-   curr/currd and add ASSERT(curr == current).
- - Use domain_vcpu() instead of open-coded d->vcpu[] indexing when
-   resolving the target hart index.
- - s/APLIC_REG_OFFSET_MASK/APLIC_CTRL_REGION_OFFSET_MASK/.
- - Update store emulation handling for target register to be able to deal
-   with target format in both cases (MSI and Direct).
- - Update store emulation handling of domaincfg. There is no need to force
-   DM/IE mode here (it will be forced/checked on Xen irq handler side).
- - Rename APLIC_DEFAULT_PRIORITY and move to aplic.h as default prioity
-   value is used in vaplic code too now.
+ - regs_get_gpr(): take a GPR number instead of a byte offset, dropping the
+   multiplication at the call site. A non-multiple-of-8 offset is now
+   unrepresentable.
+ - regs_get_gpr(): ASSERT(num < 32) instead of a range check returning 0,
+   which isn't usable as an error indicator. No num == 0 check: reading x0
+   is harmless out of context, and a NULL trap_info is caught by the
+   existing BUG_ON() where the dereference happens.
+ - regs_get_gpr(): index the register frame as an array, constify regs and
+   drop the pointless inline.
+ - Anchor the first BUILD_BUG_ON() at offsetof(..., zero) == 0 rather than
+   at ra, pinning both ends of the x0..x31 range.
+ - Drop MAX_REG_OFFSET; asm/processor.h is no longer touched by this patch.
+ - ex_handler_trap_info(): use regs->sepc and the cause passed down from
+   do_trap() instead of re-reading CSR_SEPC/CSR_SCAUSE; fixup_exception()
+   gains a cause parameter. stval stays a CSR read as do_trap() doesn't
+   read it.
+ - asm/extable.h: revert the .word -> .long change, the extra parens and the
+   stray semicolon after .popsection; use .half for the new type and data
+   fields to match .word.
+ - Make GPR_LIST() the single source of the ABI-name -> register-number
+   mapping, and check struct cpu_user_regs against it at build time, so the
+   two can no longer diverge.
+ - Add the explanatory comment above sturc cpu_user_regs to explain an
+   ordering of x0-x31 registers.
 ---
 ---
- xen/arch/riscv/aplic-priv.h         |   2 +
- xen/arch/riscv/aplic.c              |  49 +++
- xen/arch/riscv/include/asm/aplic.h  |  28 +-
- xen/arch/riscv/include/asm/vaplic.h |  19 ++
- xen/arch/riscv/vaplic.c             | 504 +++++++++++++++++++++++++++-
- 5 files changed, 591 insertions(+), 11 deletions(-)
+ xen/arch/riscv/domain.c                     | 22 ++++++++
+ xen/arch/riscv/extable.c                    | 48 +++++++++++++++-
+ xen/arch/riscv/include/asm/extable.h        | 61 ++++++++++++++-------
+ xen/arch/riscv/include/asm/gpr-num.h        | 53 ++++++++++++++++++
+ xen/arch/riscv/include/asm/processor.h      | 14 ++++-
+ xen/arch/riscv/include/asm/regs.h           | 23 +++++++-
+ xen/arch/riscv/include/asm/riscv_encoding.h |  7 ++-
+ xen/arch/riscv/include/asm/traps.h          |  6 ++
+ xen/arch/riscv/traps.c                      |  5 +-
+ 9 files changed, 212 insertions(+), 27 deletions(-)
+ create mode 100644 xen/arch/riscv/include/asm/gpr-num.h
 
-diff --git a/xen/arch/riscv/aplic-priv.h b/xen/arch/riscv/aplic-priv.h
-index 009020c83fb9..9e85343cce0f 100644
---- a/xen/arch/riscv/aplic-priv.h
-+++ b/xen/arch/riscv/aplic-priv.h
-@@ -47,4 +47,6 @@ struct aplic_priv {
-  */
- extern unsigned int guest_aplic_num_sources;
- 
-+uint32_t aplic_msi_target_gen(const struct vcpu *v, uint32_t base_val);
-+
- #endif /* RISCV_APLIC_PRIV_H */
-diff --git a/xen/arch/riscv/aplic.c b/xen/arch/riscv/aplic.c
-index 29663bc29b7b..51d7eae4617a 100644
---- a/xen/arch/riscv/aplic.c
-+++ b/xen/arch/riscv/aplic.c
-@@ -15,6 +15,7 @@
- #include <xen/init.h>
- #include <xen/irq.h>
- #include <xen/mm.h>
-+#include <xen/sched.h>
- #include <xen/sections.h>
- #include <xen/spinlock.h>
- #include <xen/types.h>
-@@ -125,6 +126,54 @@ static unsigned long aplic_hart_index(unsigned int cpu)
-     return (g << lhxw) | h;
- }
- 
-+/*
-+ * v->processor can't be used here: during a migration it names the new pCPU
-+ * before the interrupt file is moved there. The caller has to hold
-+ * vsfile_lock until the result is written to the h/w.
-+ */
-+uint32_t aplic_msi_target_gen(const struct vcpu *v, uint32_t base_val)
-+{
-+    const struct vimsic_state *vimsic_state = v->arch.vimsic_state;
-+    unsigned int guest_id = vcpu_guest_file_id(v);
-+    unsigned long hart_index;
-+
-+    ASSERT(rw_is_locked(&vimsic_state->vsfile_lock));
-+    ASSERT(vimsic_state->vsfile_cpu < NR_CPUS);
-+
-+    hart_index = aplic_hart_index(vimsic_state->vsfile_cpu);
-+
-+    base_val &= APLIC_TARGET_EIID;
-+    base_val |= MASK_INSR(guest_id, APLIC_TARGET_GUEST_IDX);
-+    base_val |= MASK_INSR(hart_index, APLIC_TARGET_HART_IDX);
-+
-+    return base_val;
-+}
-+
-+uint32_t aplic_hw_read_reg(unsigned int offset)
-+{
-+    unsigned long flags;
-+    uint32_t val;
-+
-+    ASSERT((offset < aplic.size) && IS_ALIGNED(offset, sizeof(uint32_t)));
-+
-+    spin_lock_irqsave(&aplic.lock, flags);
-+    val = readl((const volatile void __iomem *)aplic.regs + offset);
-+    spin_unlock_irqrestore(&aplic.lock, flags);
-+
-+    return val;
-+}
-+
-+void aplic_hw_write_reg(unsigned int offset, uint32_t value)
-+{
-+    unsigned long flags;
-+
-+    ASSERT((offset < aplic.size) && IS_ALIGNED(offset, sizeof(uint32_t)));
-+
-+    spin_lock_irqsave(&aplic.lock, flags);
-+    writel(value, (volatile void __iomem *)aplic.regs + offset);
-+    spin_unlock_irqrestore(&aplic.lock, flags);
-+}
-+
- static void __init aplic_init_hw_interrupts(void)
- {
-     unsigned int i;
-diff --git a/xen/arch/riscv/include/asm/aplic.h b/xen/arch/riscv/include/asm/aplic.h
-index 93f0033b52d0..b2f1d140f6f8 100644
---- a/xen/arch/riscv/include/asm/aplic.h
-+++ b/xen/arch/riscv/include/asm/aplic.h
-@@ -27,8 +27,6 @@
-  * Blocks of related constants are sorted by register offset.
-  */
- 
--#define APLIC_CTRL_REGION_OFFSET_MASK       0x3fff
--
- #define APLIC_DOMAINCFG                     0x0000
- /*
-  * domaincfg read-only fields (AIA spec):
-@@ -39,6 +37,13 @@
- #define  APLIC_DOMAINCFG_IE             BIT(8, U)
- #define  APLIC_DOMAINCFG_DM             BIT(2, U)
- #define  APLIC_DOMAINCFG_BE             BIT(0, U)
-+/*
-+ * The bits a write may change. DM is WARL and hardwired to 1 as only MSI
-+ * delivery mode is emulated. Everything else, including the read-only zero
-+ * bit 7 and the reserved bits, has to read back as zero, and BE is WARL and
-+ * hardwired to 0 as Xen is little-endian only.
-+ */
-+#define  APLIC_DOMAINCFG_WMASK          APLIC_DOMAINCFG_IE
- 
- #define APLIC_SOURCECFG_BASE            0x0004
- #define APLIC_SOURCECFG_LAST            0x0ffc
-@@ -59,6 +64,8 @@
- #define   APLIC_SOURCECFG_SM_LEVEL_HIGH 0x6
- #define   APLIC_SOURCECFG_SM_LEVEL_LOW  0x7
- 
-+#define APLIC_MMSICFGADDR               0x1bc0
-+#define APLIC_MMSICFGADDRH              0x1bc4
- #define APLIC_SMSICFGADDR               0x1bc8
- #define APLIC_SMSICFGADDRH              0x1bcc
- 
-@@ -79,6 +86,7 @@
- #define APLIC_CLRIENUM                  0x1fdc
- 
- #define APLIC_SETIPNUM_LE               0x2000
-+#define APLIC_SETIPNUM_BE               0x2004
- 
- #define APLIC_GENMSI                    0x3000
- 
-@@ -98,8 +106,17 @@
- #define APLIC_MIN_SIZE                  0x4000
- #define APLIC_SIZE_ALIGN(x)             ROUNDUP(x, APLIC_MIN_SIZE)
- 
--#define APLIC_SIZE(nr_cpus) \
--    (APLIC_MIN_SIZE + APLIC_SIZE_ALIGN(APLIC_IDC_SIZE * (nr_cpus)))
-+#define APLIC_SIZE(nr_idcs) \
-+    (APLIC_MIN_SIZE + APLIC_SIZE_ALIGN(APLIC_IDC_SIZE * (nr_idcs)))
-+
-+/*
-+ * Using setip is fine here, as all SET* and CLR* register groups consist of 32
-+ * registers and therefore have identical sizes.
-+ *
-+ * Lowest 2 bits are always zero for SET* and CLR* registers.
-+ */
-+#define APLIC_SETCLR_OFFSET_MASK \
-+    (sizeof_field(struct aplic_regs, setip) - sizeof(uint32_t))
- 
- #define APLIC_xMSICFGADDR_PPN_SHIFT IMSIC_MMIO_PAGE_SHIFT
- 
-@@ -153,4 +170,7 @@ struct aplic_regs {
-     uint32_t target[1023];      /* 0x3004 */
- };
- 
-+uint32_t aplic_hw_read_reg(unsigned int offset);
-+void aplic_hw_write_reg(unsigned int offset, uint32_t value);
-+
- #endif /* RISCV_APLIC_H */
-diff --git a/xen/arch/riscv/include/asm/vaplic.h b/xen/arch/riscv/include/asm/vaplic.h
-index dcbe0d59a886..9a121904a346 100644
---- a/xen/arch/riscv/include/asm/vaplic.h
-+++ b/xen/arch/riscv/include/asm/vaplic.h
-@@ -11,6 +11,7 @@
- #define RISCV_VAPLIC_H
- 
- #include <xen/kernel.h>
-+#include <xen/spinlock.h>
- #include <xen/types.h>
- 
+diff --git a/xen/arch/riscv/domain.c b/xen/arch/riscv/domain.c
+index a65de57e486f..7be019e2ad12 100644
+--- a/xen/arch/riscv/domain.c
++++ b/xen/arch/riscv/domain.c
+@@ -12,6 +12,7 @@
+ #include <asm/cpufeature.h>
+ #include <asm/csr.h>
+ #include <asm/current.h>
++#include <asm/gpr-num.h>
  #include <asm/intc.h>
-@@ -19,13 +20,31 @@ struct domain;
+ #include <asm/mmio.h>
+ #include <asm/riscv_encoding.h>
+@@ -478,9 +479,30 @@ void context_switch(struct vcpu *prev, struct vcpu *next)
  
- #define to_vaplic(d) container_of((d)->arch.vintc, struct vaplic, vintc)
- 
-+/* State of one vAPLIC interrupt source. */
-+struct vaplic_source {
-+    /* Protects target together with the h/w target register of the source. */
-+    spinlock_t lock;
-+
-+    /* Guest's view of the APLIC target register. */
-+    uint32_t target;
-+};
-+
- struct vaplic_regs {
-     uint32_t domaincfg;
-+
-+    /*
-+     * Indexed by source number. The array holds d->arch.vintc->nr_virqs
-+     * elements; sources[0] is unused as APLIC interrupt sources start from 1.
-+     */
-+    struct vaplic_source *sources;
- };
- 
- struct vaplic {
-     struct vintc vintc;
-     struct vaplic_regs regs;
-+
-+    paddr_t regs_start;
-+    unsigned int regs_size;
- };
- 
- int domain_vaplic_init(struct domain *d);
-diff --git a/xen/arch/riscv/vaplic.c b/xen/arch/riscv/vaplic.c
-index 6fbdc07805fd..7898455b4934 100644
---- a/xen/arch/riscv/vaplic.c
-+++ b/xen/arch/riscv/vaplic.c
-@@ -11,12 +11,14 @@
- #include <xen/errno.h>
- #include <xen/fdt-kernel.h>
- #include <xen/libfdt/libfdt.h>
-+#include <xen/nospec.h>
- #include <xen/sched.h>
- #include <xen/xvmalloc.h>
- 
- #include <asm/aia.h>
- #include <asm/imsic.h>
- #include <asm/intc.h>
-+#include <asm/mmio.h>
- #include <asm/vaplic.h>
- 
- #include "aplic-priv.h"
-@@ -27,23 +29,428 @@ unsigned int __ro_after_init guest_aplic_num_sources;
- 
- #define FDT_VAPLIC_INT_CELLS 2
- 
-+/*
-+ * Only a h/w source of a domain, one a h/w IRQ is routed to (see
-+ * vintc.hw_irqs), may be accessed in the h/w. A virtual source has nothing
-+ * there: until its state is emulated, it reads as zero and ignores writes,
-+ * like a source not assigned to the domain.
-+ */
-+static bool vaplic_is_hw_source(const struct domain *d, unsigned int irqn)
-+{
-+    const struct vintc *vintc = d->arch.vintc;
-+
-+    return (irqn < vintc->nr_virqs) &&
-+           test_bit(array_index_nospec(irqn, vintc->nr_virqs),
-+                    vintc->hw_irqs);
-+}
-+
-+/*
-+ * Convert a byte offset (within a SETIP/CLRIP/SETIE/CLRIE register group) to
-+ * a 32-bit word index into the hw_irqs bitmap. Each word covers 32
-+ * interrupt sources. For SOURCECFG and TARGET groups the same division also
-+ * yields the interrupt number directly, because those arrays store one 32-bit
-+ * register per source.
-+ */
-+#define regoffset_to_word_idx(reg_val) ((reg_val) / sizeof(uint32_t))
-+
-+/*
-+ * vAPLIC keeps no shadow copy of sourcecfg[], and a guest's writes to it go
-+ * straight to the h/w register, so it is the h/w register which tells whether
-+ * a source is active.
-+ */
-+static bool vaplic_source_is_active(unsigned int irqn)
-+{
-+    uint32_t sourcecfg = aplic_hw_read_reg(APLIC_SOURCECFG_BASE +
-+                                           (irqn - 1) * sizeof(uint32_t));
-+
-+    /*
-+     * A source is inactive if it is delegated to a child domain (D = 1), in
-+     * which case the low bits hold the Child Index rather than SM, or if it
-+     * isn't delegated and SM is Inactive.
-+     */
-+    return !(sourcecfg & APLIC_SOURCECFG_D) &&
-+           (MASK_EXTR(sourcecfg, APLIC_SOURCECFG_SM) !=
-+            APLIC_SOURCECFG_SM_INACTIVE);
-+}
-+
-+static uint32_t vaplic_target_read(const struct domain *d, unsigned int irqn)
-+{
-+    struct vaplic *vaplic = to_vaplic(d);
-+    struct vaplic_source *src;
-+    unsigned long flags;
-+    uint32_t val = 0;
-+
-+    /* target[0] doesn't exist so irqn == 0 should be impossible */
-+    if ( !irqn || irqn >= vaplic->vintc.nr_virqs )
-+        return 0;
-+
-+    irqn = array_index_nospec(irqn, vaplic->vintc.nr_virqs);
-+    src = &vaplic->regs.sources[irqn];
-+
-+    /*
-+     * src->lock makes the read atomic as a whole, against a write to
-+     * target[] which changes both this copy and the h/w register.
-+     */
-+    spin_lock_irqsave(&src->lock, flags);
-+
-+    /* target[i] is read-only zero while source i is inactive. */
-+    if ( vaplic_source_is_active(irqn) )
-+        val = src->target;
-+
-+    spin_unlock_irqrestore(&src->lock, flags);
-+
-+    return val;
-+}
-+
-+/* Emulate a write of @value to target[@irqn]. */
-+static void vaplic_target_write(const struct domain *d, unsigned int irqn,
-+                                uint32_t value)
-+{
-+    struct vaplic *vaplic = to_vaplic(d);
-+    struct vimsic_state *vimsic_state;
-+    const struct vcpu *target_vcpu;
-+    struct vaplic_source *src;
-+    unsigned long flags;
-+
-+    if ( !vaplic_is_hw_source(d, irqn) )
-+        return;
-+
-+    irqn = array_index_nospec(irqn, d->arch.vintc->nr_virqs);
-+
-+    /* target[i] is read-only zero while source i is inactive. */
-+    if ( !vaplic_source_is_active(irqn) )
-+        return;
-+
-+    target_vcpu = domain_vcpu(d, MASK_EXTR(value, APLIC_TARGET_HART_IDX));
-+    if ( !target_vcpu )
-+    {
-+        gdprintk(XENLOG_ERR, "Invalid vCPU id in target register\n");
-+
-+        return;
-+    }
-+
-+    /*
-+     * Guest Index names an interrupt file of a nested guest, and the AIA
-+     * spec makes it read-only zero unless the domain's harts implement the
-+     * H extension, which a guest's harts don't. Bit 11 is reserved and reads
-+     * as zero, so only Hart Index and EIID are kept.
-+     * What ends up in the h/w register is Xen's own value anyway:
-+     * aplic_msi_target_gen() takes only EIID from it.
-+     */
-+    value &= APLIC_TARGET_HART_IDX | APLIC_TARGET_EIID;
-+
-+    src = &vaplic->regs.sources[irqn];
-+    vimsic_state = target_vcpu->arch.vimsic_state;
-+
-+    spin_lock_irqsave(&src->lock, flags);
-+
-+    write_atomic(&src->target, value);
-+
-+    /* IRQs are already off under src->lock. */
-+    read_lock(&vimsic_state->vsfile_lock);
-+
-+    /*
-+     * The h/w register names the hart and the guest interrupt file MSIs are
-+     * sent to, and there is none of either until the target vCPU is given a
-+     * h/w guest interrupt file, so until then only the stored copy is
-+     * updated.
-+     *
-+     * TODO: once s/w guest interrupt files are supported, a vCPU using one
-+     * still needs its MSIs, so the h/w register will have to be written for
-+     * it too, pointing at an interrupt file Xen receives them in on the
-+     * vCPU's behalf.
-+     */
-+    if ( vimsic_state->vsfile_cpu != CPU_NONE )
-+        aplic_hw_write_reg(offsetof(struct aplic_regs, target[irqn - 1]),
-+                           aplic_msi_target_gen(target_vcpu, value));
-+
-+    read_unlock(&vimsic_state->vsfile_lock);
-+
-+    spin_unlock_irqrestore(&src->lock, flags);
-+}
-+
-+static uint32_t generate_auth_mask(const struct domain *currd,
-+                                   unsigned int word_idx)
-+{
-+    unsigned int nr_words = DIV_ROUND_UP(currd->arch.vintc->nr_virqs,
-+                                         sizeof(uint32_t) * BITS_PER_BYTE);
-+    unsigned int first_bit;
-+
-+    if ( word_idx >= nr_words )
-+    {
-+        gdprintk(XENLOG_DEBUG, "incorrect word_idx(%u)\n", word_idx);
-+
-+        return 0;
-+    }
-+
-+    first_bit = array_index_nospec(word_idx, nr_words) *
-+                sizeof(uint32_t) * BITS_PER_BYTE;
-+
-+    return currd->arch.vintc->hw_irqs[first_bit / BITS_PER_LONG] >>
-+           (first_bit % BITS_PER_LONG);
-+}
-+
-+static bool vaplic_emulate_load(const struct vcpu *curr, paddr_t addr,
-+                                uint32_t *out)
-+{
-+    const struct domain *currd = curr->domain;
-+    const struct vaplic *vaplic = to_vaplic(currd);
-+    const unsigned int offset = addr - vaplic->regs_start;
-+    uint32_t auth_mask;
-+    unsigned int i;
-+
-+    ASSERT(curr == current);
-+
-+    switch ( offset )
-+    {
-+    case APLIC_DOMAINCFG:
-+        *out = vaplic->regs.domaincfg;
-+
-+        return true;
-+
-+    case APLIC_SOURCECFG_BASE ... APLIC_SOURCECFG_LAST:
-+        /*
-+         * Look at vaplic_emulate_store() for explanation why APLIC_DOMAINCFG
-+         * is subtracted.
-+         */
-+        i = regoffset_to_word_idx(offset - APLIC_DOMAINCFG);
-+        *out = vaplic_is_hw_source(currd, i) ? aplic_hw_read_reg(offset) : 0;
-+
-+        return true;
-+
-+    case APLIC_SETIP_BASE ... APLIC_SETIP_LAST:
-+    case APLIC_CLRIP_BASE ... APLIC_CLRIP_LAST:
-+    case APLIC_SETIE_BASE ... APLIC_SETIE_LAST:
-+        i = regoffset_to_word_idx(offset & APLIC_SETCLR_OFFSET_MASK);
-+        auth_mask = generate_auth_mask(currd, i);
-+
-+        break;
-+
-+    case APLIC_SETIPNUM:
-+    case APLIC_CLRIPNUM:
-+    case APLIC_SETIENUM:
-+    case APLIC_CLRIE_BASE ... APLIC_CLRIE_LAST:
-+    case APLIC_CLRIENUM:
-+    case APLIC_SETIPNUM_LE:
-+        /*
-+         * Based on the RISC-V AIA spec a read of these registers
-+         * always returns zero
-+         */
-+        *out = 0;
-+
-+        return true;
-+
-+    /*
-+     * vAPLIC is a supervisor-level domain with BE hardwired to 0, and such
-+     * a domain doesn't implement these registers: the MSI address
-+     * configuration ones exist in machine-level domains only, and
-+     * setipnum_be isn't needed by a little-endian only domain. Bytes of a
-+     * register which isn't implemented are read-only zero, like other
-+     * reserved bytes.
-+     */
-+    case APLIC_MMSICFGADDR:
-+    case APLIC_MMSICFGADDRH:
-+    case APLIC_SMSICFGADDR:
-+    case APLIC_SMSICFGADDRH:
-+    case APLIC_SETIPNUM_BE:
-+        *out = 0;
-+
-+        return true;
-+
-+    case APLIC_TARGET_BASE ... APLIC_TARGET_LAST:
-+        /*
-+         * As target registers start from 1:
-+         *  0x3000 genmsi
-+         *  0x3004 target[1]
-+         *  0x3008 target[2]
-+         *   ...
-+         *  0x3FFC target[1023]
-+         * It is necessary to calculate an interrupt number by subtracting
-+         * APLIC_GENMSI instead of APLIC_TARGET_BASE.
-+         */
-+        i = regoffset_to_word_idx(offset - APLIC_GENMSI);
-+
-+        *out = vaplic_is_hw_source(currd, i) ? vaplic_target_read(currd, i) : 0;
-+
-+        return true;
-+
-+    /*
-+     * TODO: emulate genmsi. A write to it has to send an extempore MSI to
-+     * the target vCPU, and a guest typically waits for that MSI to become
-+     * pending in its interrupt file. Just recording the written value would
-+     * leave such a guest waiting forever, so until genmsi is emulated, an
-+     * access to it is treated as an unhandled one, which gets the domain
-+     * crashed.
-+     */
-+    case APLIC_GENMSI:
-+    default:
-+        gdprintk(XENLOG_WARNING, "Unhandled APLIC read at offset %#x\n",
-+                 offset);
-+
-+        return false;
-+    }
-+
-+    *out = aplic_hw_read_reg(offset) & auth_mask;
-+
-+    return true;
-+}
-+
-+static bool vaplic_emulate_store(const struct vcpu *curr, paddr_t addr,
-+                                 uint32_t value)
-+{
-+    const struct domain *currd = curr->domain;
-+    struct vaplic *vaplic = to_vaplic(currd);
-+    unsigned int offset = addr - vaplic->regs_start;
-+
-+    ASSERT(curr == current);
-+
-+    switch ( offset )
-+    {
-+    case APLIC_DOMAINCFG:
-+        /*
-+         * TODO: domaincfg.IE isn't honoured: the h/w forwards the MSIs of the
-+         * h/w sources whatever its value is. Linux as a guest sets IE before
-+         * it enables any source and never clears it, so a write may set IE,
-+         * but not clear it.
-+         */
-+        vaplic->regs.domaincfg |= value & APLIC_DOMAINCFG_WMASK;
-+
-+        return true;
-+
-+    case APLIC_SOURCECFG_BASE ... APLIC_SOURCECFG_LAST:
-+        /*
-+         * vAPLIC is a leaf domain: it has no child domain a source could be
-+         * delegated to. With D = 1, the low bits of the value would hold a
-+         * Child Index rather than SM, and for a leaf domain the AIA spec
-+         * makes such a write set the entire register to zero instead.
-+         */
-+        if ( value & APLIC_SOURCECFG_D )
-+        {
-+            gdprintk(XENLOG_DEBUG,
-+                     "sourcecfg write with D set at offset %#x, zeroing it\n",
-+                     offset);
-+
-+            value = 0;
-+        }
-+
-+        /*
-+         * SM is the only field left, the other bits are reserved and read as
-+         * zero, so ignore what a guest writes to them.
-+         */
-+        value &= APLIC_SOURCECFG_SM;
-+
-+        /*
-+         * SM is WARL, so the reserved values 0x2 and 0x3 need no handling
-+         * here: vAPLIC keeps no shadow copy of sourcecfg[], the value is
-+         * written straight to the h/w register and is read back from it, so
-+         * it is the h/w which substitutes a legal value for an illegal one.
-+         *
-+         * TODO: when vAPLIC starts to shadow sourcecfg[], the WARL behaviour
-+         * will have to be emulated here instead, e.g.:
-+         *   if ( value == 0x2 || value == 0x3 )
-+         *       value = APLIC_SOURCECFG_SM_INACTIVE;
-+         */
-+
-+        /*
-+         * As sourcecfg register starts from 1:
-+         *   0x0000 domaincfg
-+         *   0x0004 sourcecfg[1]
-+         *   0x0008 sourcecfg[2]
-+         *    ...
-+         *   0x0FFC sourcecfg[1023]
-+         * It is necessary to calculate an interrupt number by subtracting
-+         * APLIC_DOMAINCFG instead of APLIC_SOURCECFG_BASE.
-+         */
-+        if ( !vaplic_is_hw_source(currd,
-+                                  regoffset_to_word_idx(offset -
-+                                                        APLIC_DOMAINCFG)) )
-+            /* Interrupt not enabled, ignore it */
-+            return true;
-+
-+        break;
-+
-+    case APLIC_SETIP_BASE ... APLIC_SETIP_LAST:
-+    case APLIC_CLRIP_BASE ... APLIC_CLRIP_LAST:
-+    case APLIC_SETIE_BASE ... APLIC_SETIE_LAST:
-+    case APLIC_CLRIE_BASE ... APLIC_CLRIE_LAST:
-+    {
-+        unsigned int word_idx =
-+            regoffset_to_word_idx(offset & APLIC_SETCLR_OFFSET_MASK);
-+
-+        value &= generate_auth_mask(currd, word_idx);
-+
-+        break;
-+    }
-+
-+    case APLIC_SETIPNUM:
-+    case APLIC_CLRIPNUM:
-+    case APLIC_SETIENUM:
-+    case APLIC_CLRIENUM:
-+    case APLIC_SETIPNUM_LE:
-+        if ( !value || !vaplic_is_hw_source(currd, value) )
-+            return true;
-+
-+        break;
-+
-+    /* Not implemented by vAPLIC, see vaplic_emulate_load(). */
-+    case APLIC_MMSICFGADDR:
-+    case APLIC_MMSICFGADDRH:
-+    case APLIC_SMSICFGADDR:
-+    case APLIC_SMSICFGADDRH:
-+    case APLIC_SETIPNUM_BE:
-+        return true;
-+
-+    case APLIC_TARGET_BASE ... APLIC_TARGET_LAST:
-+        /*
-+         * Look at vaplic_emulate_load() for explanation why APLIC_GENMSI is
-+         * subtracted.
-+         */
-+        vaplic_target_write(currd,
-+                            regoffset_to_word_idx(offset - APLIC_GENMSI),
-+                            value);
-+
-+        return true;
-+
-+    /* TODO: emulate genmsi, see vaplic_emulate_load(). */
-+    case APLIC_GENMSI:
-+    default:
-+        gdprintk(XENLOG_WARNING,
-+                 "Unhandled APLIC write at offset %#x (value %#x)\n",
-+                 offset, value);
-+
-+        return false;
-+    }
-+
-+    /*
-+     * What is left is passed through to the h/w, which can affect only the
-+     * h/w sources of currd:
-+     *  - setip, clrip, setie and clrie are write-1-to-set/clear, and the
-+     *    value was masked with currd's h/w sources above, so the bits of
-+     *    the other sources are written as 0, which leaves them untouched;
-+     *  - {set,clr}i{p,e}num, setipnum_le and sourcecfg[] name one source,
-+     *    which was checked above to be a h/w source of currd.
-+     * route_irq_to_guest() never assigns a source to more than one domain,
-+     * or to both a domain and Xen, and as virq == pirq, no translation is
-+     * needed either.
-+     */
-+    aplic_hw_write_reg(offset, value);
-+
-+    return true;
-+}
-+
- static int __init cf_check vaplic_make_domu_dt_node(struct kernel_info *kinfo)
+ static void __init __maybe_unused build_assertions(void)
  {
--    struct domain *d = kinfo->bd.d;
-     int res;
-     void *fdt = kinfo->fdt;
-     unsigned int msi_parent_phandle;
-     char vaplic_name[32];
--    unsigned int aplic_size = APLIC_SIZE(d->max_vcpus);
-     const __be32 reg[] = {
-         cpu_to_be32(GUEST_APLIC_S_BASE >> 32),
-         cpu_to_be32(GUEST_APLIC_S_BASE),
-         cpu_to_be32(0),
--        cpu_to_be32(aplic_size),
-+        cpu_to_be32(APLIC_SIZE(0)),
-     };
- 
--    BUILD_BUG_ON(APLIC_SIZE(MAX_VIRT_CPUS) > UINT_MAX);
--
-     res = snprintf(vaplic_name, ARRAY_SIZE(vaplic_name), "/soc/aplic@%lx",
-                    GUEST_APLIC_S_BASE);
-     if ( res >= sizeof(vaplic_name) )
-@@ -95,6 +502,57 @@ static const struct vintc_init_ops __initconstrel init_ops = {
-     .make_domu_dt_node = vaplic_make_domu_dt_node,
- };
- 
-+static enum io_state cf_check vaplic_mmio_read(struct vcpu *curr,
-+                                               mmio_info_t *info)
-+{
-+    uint32_t val;
++/*
++ * GPR_LIST() puts nothing between its entries, so the separator has to come
++ * from here. It is emitted ahead of each entry rather than after it, so that
++ * the expansion doesn't end with one and its use below can be terminated like
++ * an ordinary statement.
++ */
++#define CHECK_GPR_INDEX(num, name)                          \
++    ; BUILD_BUG_ON(offsetof(struct cpu_user_regs, name) !=  \
++                   offsetof(struct cpu_user_regs, zero) +   \
++                   (num) * sizeof(unsigned long))
 +
-+    ASSERT(curr == current);
-+
-+    if ( info->len != sizeof(uint32_t) ||
-+         !IS_ALIGNED(info->gpa, sizeof(uint32_t)) )
-+    {
-+        gdprintk(XENLOG_DEBUG,
-+                 "unaligned/wrong-width read gpa=%"PRIpaddr" len=%u\n",
-+                 info->gpa, info->len);
-+
-+        return IO_ABORT;
-+    }
-+
-+    if ( !vaplic_emulate_load(curr, info->gpa, &val) )
-+        return IO_ABORT;
-+
-+    info->data = val;
-+
-+    return IO_HANDLED;
-+}
-+
-+static enum io_state cf_check vaplic_mmio_write(struct vcpu *curr,
-+                                                const mmio_info_t *info)
-+{
-+    ASSERT(curr == current);
-+
-+    if ( info->len != sizeof(uint32_t) ||
-+         !IS_ALIGNED(info->gpa, sizeof(uint32_t)) )
-+    {
-+        gdprintk(XENLOG_DEBUG,
-+                 "unaligned/wrong-width write gpa=%"PRIpaddr" len=%u\n",
-+                 info->gpa, info->len);
-+
-+        return IO_ABORT;
-+    }
-+
-+    if ( !vaplic_emulate_store(curr, info->gpa, info->data) )
-+        return IO_ABORT;
-+
-+    return IO_HANDLED;
-+}
-+
-+static const struct mmio_handler_ops vaplic_mmio_ops = {
-+    .read  = vaplic_mmio_read,
-+    .write = vaplic_mmio_write,
-+};
-+
- static const struct vintc_ops vintc_ops = {
-     .vcpu_init = vcpu_imsic_init,
-     .vcpu_deinit = vcpu_imsic_deinit,
-@@ -103,6 +561,8 @@ static const struct vintc_ops vintc_ops = {
- int domain_vaplic_init(struct domain *d)
- {
-     struct vaplic *vaplic = xvzalloc(struct vaplic);
-+    unsigned int i;
-+    int rc;
- 
-     if ( !vaplic )
-         return -ENOMEM;
-@@ -111,7 +571,7 @@ int domain_vaplic_init(struct domain *d)
-     d->arch.vintc->ops = &vintc_ops;
-     d->arch.vintc->init_ops = &init_ops;
- 
--    vaplic->regs.domaincfg = APLIC_DOMAINCFG_RO;
-+    vaplic->regs.domaincfg = APLIC_DOMAINCFG_RO | APLIC_DOMAINCFG_DM;
- 
      /*
-      * APLIC source 0 is reserved; sources are numbered
-@@ -123,7 +583,36 @@ int domain_vaplic_init(struct domain *d)
+      * Enforce the requirement documented in struct cpu_info that
+      * guest_cpu_user_regs must be the first field.
       */
-     d->arch.vintc->nr_virqs = guest_aplic_num_sources + 1;
- 
--    return 0;
-+    /* Slot 0 is unused: APLIC source numbering starts at 1 (see used_irqs). */
-+    vaplic->regs.sources = xvzalloc_array(struct vaplic_source,
-+                                          d->arch.vintc->nr_virqs);
-+    if ( !vaplic->regs.sources )
-+    {
-+        domain_vaplic_deinit(d);
+     BUILD_BUG_ON(offsetof(struct cpu_info, guest_cpu_user_regs));
 +
-+        return -ENOMEM;
-+    }
-+
-+    for ( i = 0; i < d->arch.vintc->nr_virqs; i++ )
-+        spin_lock_init(&vaplic->regs.sources[i].lock);
-+
-+    vaplic->regs_start = GUEST_APLIC_S_BASE;
 +    /*
-+     * IDC structures are used only in direct delivery mode, so the control
-+     * region of vAPLIC, which supports MSI delivery mode only, holds none.
-+     *
-+     * TODO: should direct delivery mode ever be supported, the region will
-+     * have to hold an IDC structure per vCPU, i.e. be APLIC_SIZE(d->max_vcpus)
-+     * here and in vaplic_make_domu_dt_node().
++     * Enforce the requirement documented in struct cpu_user_regs that the
++     * x0..x31 fields are contiguous and in architectural register-number
++     * order, which is what lets a register number be resolved to its saved
++     * value by indexing them as an array anchored at ->zero.
 +     */
-+    vaplic->regs_size = APLIC_SIZE(0);
++    GPR_LIST(CHECK_GPR_INDEX);
 +
-+    rc = register_mmio_handler(d, &vaplic_mmio_ops,
-+                               vaplic->regs_start, vaplic->regs_size);
-+    if ( rc )
-+        domain_vaplic_deinit(d);
++#undef CHECK_GPR_INDEX
+ }
+diff --git a/xen/arch/riscv/extable.c b/xen/arch/riscv/extable.c
+index 5b89c4278c65..19d9e3617c81 100644
+--- a/xen/arch/riscv/extable.c
++++ b/xen/arch/riscv/extable.c
+@@ -6,8 +6,11 @@
+ #include <xen/sort.h>
+ #include <xen/virtual_region.h>
+ 
++#include <asm/csr.h>
+ #include <asm/extable.h>
+ #include <asm/processor.h>
++#include <asm/regs.h>
++#include <asm/traps.h>
+ 
+ #define EX_FIELD(ptr, field) ((unsigned long)&(ptr)->field + (ptr)->field)
+ 
+@@ -32,6 +35,12 @@ static void __init cf_check swap_ex(void *a, void *b)
+ 
+     x->fixup = y->fixup + delta;
+     y->fixup = tmp.fixup - delta;
 +
-+    return rc;
++    x->type = y->type;
++    y->type = tmp.type;
++
++    x->data = y->data;
++    y->data = tmp.data;
  }
  
- void domain_vaplic_deinit(struct domain *d)
-@@ -135,5 +624,6 @@ void domain_vaplic_deinit(struct domain *d)
- 
-     vaplic = to_vaplic(d);
-     d->arch.vintc = NULL;
-+    xvfree(vaplic->regs.sources);
-     xvfree(vaplic);
+ static int cf_check cmp_ex(const void *a, const void *b)
+@@ -59,7 +68,26 @@ static void ex_handler_fixup(const struct exception_table_entry *ex,
+     regs->sepc = ex_fixup(ex);
  }
+ 
+-bool fixup_exception(struct cpu_user_regs *regs)
++static void ex_handler_trap_info(const struct exception_table_entry *ex,
++                                 struct cpu_user_regs *regs,
++                                 unsigned long cause)
++{
++    struct trap_info *trap_info =
++        (struct trap_info *)*regs_gpr_ptr(regs, ex->data);
++
++    /*
++     * Only stval still needs a CSR read: sepc and scause were already
++     * captured by the trap entry path and do_trap() respectively. Latch
++     * trap_info->sepc before regs->sepc is pointed at the fixup code.
++     */
++    trap_info->sepc = regs->sepc;
++    trap_info->scause = cause;
++    trap_info->stval = csr_read(CSR_STVAL);
++
++    regs->sepc = ex_fixup(ex);
++}
++
++bool fixup_exception(struct cpu_user_regs *regs, unsigned long cause)
+ {
+     unsigned long pc = regs->sepc;
+     const struct virtual_region *region = find_text_region(pc);
+@@ -77,7 +105,23 @@ bool fixup_exception(struct cpu_user_regs *regs)
+     if ( !ex )
+         return false;
+ 
+-    ex_handler_fixup(ex, regs);
++    switch ( ex->type )
++    {
++    case EX_TYPE_FIXUP:
++        ex_handler_fixup(ex, regs);
++        break;
++
++    case EX_TYPE_TRAP_INFO:
++        ex_handler_trap_info(ex, regs, cause);
++        break;
++
++    default:
++        printk(XENLOG_ERR
++               "Unsupported exception table entry type %u for pc %#lx\n",
++               ex->type, pc);
++
++        return false;
++    }
+ 
+     return true;
+ }
+diff --git a/xen/arch/riscv/include/asm/extable.h b/xen/arch/riscv/include/asm/extable.h
+index 0209b2f3bfa5..76dadb3b9b21 100644
+--- a/xen/arch/riscv/include/asm/extable.h
++++ b/xen/arch/riscv/include/asm/extable.h
+@@ -3,17 +3,24 @@
+ #ifndef RISCV_EXTABLE_H
+ #define RISCV_EXTABLE_H
+ 
++#include <asm/gpr-num.h>
++
++#define EX_TYPE_FIXUP       0
++#define EX_TYPE_TRAP_INFO   1
++
+ #ifdef __ASSEMBLER__
+ 
+-#define ASM_EXTABLE(insn, fixup) \
+-    .pushsection .ex_table, "a"; \
+-    .balign     4;               \
+-    .word       (insn) - .;      \
+-    .word       (fixup) - .;     \
++#define ASM_EXTABLE_RAW(insn, fixup, type, data)    \
++    .pushsection .ex_table, "a";                    \
++    .balign     4;                                  \
++    .word       (insn) - .;                         \
++    .word       (fixup) - .;                        \
++    .half       (type);                             \
++    .half       (data);                             \
+     .popsection
+ 
+ .macro asm_extable, insn, fixup
+-    ASM_EXTABLE(\insn, \fixup)
++    ASM_EXTABLE_RAW(\insn, \fixup, EX_TYPE_FIXUP, 0)
+ .endm
+ 
+ #else /* __ASSEMBLER__ */
+@@ -23,20 +30,35 @@
+ 
+ struct cpu_user_regs;
+ 
+-#define ASM_EXTABLE(insn, fixup)      \
+-    ".pushsection .ex_table, \"a\"\n" \
+-    ".balign    4\n"                  \
+-    ".word      (" #insn " - .)\n"    \
+-    ".word      (" #fixup " - .)\n"   \
++#define ASM_EXTABLE_RAW(insn, fixup, type, data)    \
++    ".pushsection .ex_table, \"a\"\n"               \
++    ".balign    4\n"                                \
++    ".word      (" insn ") - .\n"                   \
++    ".word      (" fixup ") - .\n"                  \
++    ".half      (" type ")\n"                       \
++    ".half      (" data ")\n"                       \
+     ".popsection\n"
+ 
++#define ASM_EXTABLE(insn, fixup)    \
++    ASM_EXTABLE_RAW(#insn, #fixup, __stringify(EX_TYPE_FIXUP), "0")
++
++#define EX_TRAP_INFO_REG(gpr) "(.L_gpr_num_" #gpr ")"
++
++#define ASM_EXTABLE_TRAP_INFO(insn, fixup, data)                    \
++    DEFINE_ASM_GPR_NUMS "\n"                                        \
++    ASM_EXTABLE_RAW(#insn, #fixup, __stringify(EX_TYPE_TRAP_INFO),  \
++                    EX_TRAP_INFO_REG(data))
++
+ /*
+- * The exception table consists of pairs of relative offsets: the first
+- * is the relative offset to an instruction that is allowed to fault,
+- * and the second is the relative offset at which the program should
+- * continue. No general-purpose registers are modified by the exception
+- * handling mechanism itself, so it is up to the fixup code to handle
+- * any necessary state cleanup.
++ * Each exception table entry consists of two relative offsets and a
++ * handler description: `insn` is the relative offset to an instruction
++ * that is allowed to fault, `fixup` is the relative offset at which the
++ * program should continue in case of a fault, `type` selects how the exception
++ * is handled (EX_TYPE_*), and `data` holds auxiliary information for the
++ * handler (e.g. for EX_TYPE_TRAP_INFO, the number of the GPR that contains a
++ * pointer to a struct trap_info). No general-purpose registers are
++ * modified by the exception handling mechanism itself, so it is up to
++ * the fixup code to handle any necessary state cleanup.
+  *
+  * The exception table and fixup code live out of line with the main
+  * instruction path. This means when everything is well, we don't even
+@@ -45,14 +67,15 @@ struct cpu_user_regs;
+  */
+ struct exception_table_entry {
+     int32_t insn, fixup;
++    uint16_t type, data;
+ };
+ 
+ extern struct exception_table_entry __start___ex_table[];
+ extern struct exception_table_entry __stop___ex_table[];
+ 
+ void sort_exception_tables(void);
+-bool fixup_exception(struct cpu_user_regs *regs);
++bool fixup_exception(struct cpu_user_regs *regs, unsigned long cause);
+ 
+-#endif /* __ASSEMBLY__ */
++#endif /* __ASSEMBLER__ */
+ 
+ #endif /* RISCV_EXTABLE_H */
+diff --git a/xen/arch/riscv/include/asm/gpr-num.h b/xen/arch/riscv/include/asm/gpr-num.h
+new file mode 100644
+index 000000000000..6da5450c0757
+--- /dev/null
++++ b/xen/arch/riscv/include/asm/gpr-num.h
+@@ -0,0 +1,53 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * Based on Linux 6.16 arch/riscv/include/asm/gpr-num.h, with the
++ * register list turned into GPR_LIST() instead of being open-coded
++ * with .irp, so that it can also be used outside of assembly.
++ */
++#ifndef RISCV_GPR_NUM_H
++#define RISCV_GPR_NUM_H
++
++/*
++ * GPRs by ABI name, together with their register number (x0 .. x31).
++ *
++ * This is the single source of truth for the mapping; users expand it with
++ * their own per-register macro. Among them, the layout of struct cpu_user_regs
++ * is checked against this list at build time (see build_assertions() in
++ * domain.c), so neither list can be changed without the other.
++ */
++#define GPR_LIST(x)                                 \
++    x(0,  zero) x(1,  ra)  x(2,  sp)  x(3,  gp)     \
++    x(4,  tp)   x(5,  t0)  x(6,  t1)  x(7,  t2)     \
++    x(8,  s0)   x(9,  s1)  x(10, a0)  x(11, a1)     \
++    x(12, a2)   x(13, a3)  x(14, a4)  x(15, a5)     \
++    x(16, a6)   x(17, a7)  x(18, s2)  x(19, s3)     \
++    x(20, s4)   x(21, s5)  x(22, s6)  x(23, s7)     \
++    x(24, s8)   x(25, s9)  x(26, s10) x(27, s11)    \
++    x(28, t3)   x(29, t4)  x(30, t5)  x(31, t6)
++
++/* Number of GPRs described by GPR_LIST(). */
++#define NR_GPRS 32
++
++#ifdef __ASSEMBLER__
++
++/*
++ * Generate the .L_gpr_num_<name> assembler symbols, used to turn a register
++ * name emitted by the compiler into a register number.
++ *
++ * The separator is emitted ahead of each entry rather than after it, so that
++ * the expansion doesn't end with one: whatever follows a use of the list has
++ * to supply its own separator, instead of silently relying on a trailing one.
++ */
++#define GPR_NUM_EQU(num, name)  ; .equ .L_gpr_num_##name, num
++GPR_LIST(GPR_NUM_EQU)
++#undef GPR_NUM_EQU
++
++#else /* __ASSEMBLER__ */
++
++/* See the comment above the assembler GPR_NUM_EQU() about the separator. */
++#define GPR_NUM_EQU(num, name)  "\n.equ .L_gpr_num_" #name ", " #num
++#define DEFINE_ASM_GPR_NUMS     GPR_LIST(GPR_NUM_EQU)
++
++#endif /* __ASSEMBLER__ */
++
++#endif /* RISCV_GPR_NUM_H */
+diff --git a/xen/arch/riscv/include/asm/processor.h b/xen/arch/riscv/include/asm/processor.h
+index 007c22d2e611..83dd59a27295 100644
+--- a/xen/arch/riscv/include/asm/processor.h
++++ b/xen/arch/riscv/include/asm/processor.h
+@@ -12,7 +12,19 @@
+ 
+ #ifndef __ASSEMBLER__
+ 
+-/* On stack VCPU state */
++/*
++ * On stack VCPU state.
++ *
++ * The x0..x31 fields must remain contiguous and in architectural
++ * register-number order: code which resolves a register number to its saved
++ * value indexes them as an array anchored at ->zero. Where that block sits
++ * within the structure is of no interest, but nothing may be inserted in
++ * between its fields. The layout is checked against GPR_LIST() at build
++ * time; see build_assertions() in domain.c.
++ *
++ * ->zero additionally has to always read as 0, since it supplies the value
++ * of x0 when x0 is used as a source operand.
++ */
+ struct cpu_user_regs
+ {
+     unsigned long zero;
+diff --git a/xen/arch/riscv/include/asm/regs.h b/xen/arch/riscv/include/asm/regs.h
+index 24674d37cfe4..00aa6ff964e8 100644
+--- a/xen/arch/riscv/include/asm/regs.h
++++ b/xen/arch/riscv/include/asm/regs.h
+@@ -5,16 +5,35 @@
+ #ifndef __ASSEMBLER__
+ 
+ #include <xen/bug.h>
++#include <xen/nospec.h>
+ 
+-#define hyp_mode(r)     (0)
++#include <asm/gpr-num.h>
++#include <asm/processor.h>
+ 
+-struct cpu_user_regs;
++#define hyp_mode(r)     (0)
+ 
+ static inline bool guest_mode(const struct cpu_user_regs *r)
+ {
+     BUG_ON("unimplemented");
+ }
+ 
++/*
++ * Resolve an architectural register number to where its value is saved in
++ * @regs. Relies on x0..x31 being laid out as an array anchored at ->zero; see
++ * the comment above struct cpu_user_regs.
++ */
++static inline unsigned long *regs_gpr_ptr(struct cpu_user_regs *regs,
++                                          unsigned int num)
++{
++    ASSERT(num < NR_GPRS);
++
++    /*
++     * Not a speculation concern, but a convenient way to keep the access in
++     * bounds in release builds, where the assertion above is compiled out.
++     */
++    return &(&regs->zero)[array_index_nospec(num, NR_GPRS)];
++}
++
+ #endif /* __ASSEMBLER__ */
+ 
+ #endif /* RISCV_REGS_H */
+diff --git a/xen/arch/riscv/include/asm/riscv_encoding.h b/xen/arch/riscv/include/asm/riscv_encoding.h
+index 481ee2813b0e..887edce6b604 100644
+--- a/xen/arch/riscv/include/asm/riscv_encoding.h
++++ b/xen/arch/riscv/include/asm/riscv_encoding.h
+@@ -903,8 +903,13 @@
+ #define REG_OFFSET(insn, pos)		\
+ 	(SHIFT_RIGHT((insn), (pos) - LOG_REGBYTES) & REG_MASK)
+ 
++/*
++ * The x0..x31 block of struct cpu_user_regs is not required to sit at the
++ * start of the structure, so anchor the offset at ->zero (x0) rather than
++ * at the structure itself.
++ */
+ #define REG_PTR(insn, pos, regs)	\
+-	(unsigned long *)((unsigned long)(regs) + REG_OFFSET(insn, pos))
++	(unsigned long *)((unsigned long)&(regs)->zero + REG_OFFSET(insn, pos))
+ 
+ #define GET_RM(insn)			(((insn) >> 12) & 7)
+ 
+diff --git a/xen/arch/riscv/include/asm/traps.h b/xen/arch/riscv/include/asm/traps.h
+index 08c6215e931a..3f2b5b7ccb5f 100644
+--- a/xen/arch/riscv/include/asm/traps.h
++++ b/xen/arch/riscv/include/asm/traps.h
+@@ -7,6 +7,12 @@
+ 
+ #ifndef __ASSEMBLER__
+ 
++struct trap_info {
++    register_t sepc;
++    register_t scause;
++    register_t stval;
++};
++
+ void do_trap(struct cpu_user_regs *cpu_regs);
+ void handle_trap(void);
+ void trap_init(void);
+diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
+index 2db3b74f95cf..efeba0a9ce03 100644
+--- a/xen/arch/riscv/traps.c
++++ b/xen/arch/riscv/traps.c
+@@ -202,7 +202,8 @@ void do_trap(struct cpu_user_regs *cpu_regs)
+      *
+      * Traps taken from the guest must never be fixed up: sepc is then a guest
+      * address, which the guest could point at an address listed in the
+-     * exception table, making Xen act on an entry fully under guest control.
++     * exception table, making Xen act on an entry (and, for EX_TYPE_TRAP_INFO,
++     * write through a pointer) fully under guest control.
+      *
+      * Interrupts must be excluded too: one taken at an address which happens
+      * to be listed in the exception table would otherwise be "fixed up" as if
+@@ -212,7 +213,7 @@ void do_trap(struct cpu_user_regs *cpu_regs)
+      * that only runs for traps taken from the guest.
+      */
+     if ( !from_guest && !(cause & CAUSE_IRQ_FLAG) &&
+-         fixup_exception(cpu_regs) )
++         fixup_exception(cpu_regs, cause) )
+         return;
+ 
+     switch ( cause )
 -- 
 2.56.1
 
