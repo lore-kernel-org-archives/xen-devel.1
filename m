@@ -2,47 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F4C4606A31C
-	for <xen-devel@archiver.kernel.org>; Fri, 13 Nov 2026 11:24:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4BF4E606A327
+	for <xen-devel@archiver.kernel.org>; Fri, 13 Nov 2026 11:43:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=isslab-korea-ac-kr.20260707.gappssmtp.com header.i=@isslab-korea-ac-kr.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=JmB8IVCw
-Received: from list by lists.xenproject.org with outflank-mailman.1487317.1689754 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=google header.b=g+uYoFU+
+Received: from list by lists.xenproject.org with outflank-mailman.1487336.1689763 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRpOT-00049I-2W; Fri, 13 Nov 2026 11:24:33 +0000
+	id 1xRpgs-0007NI-HE; Fri, 13 Nov 2026 11:43:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1487317.1689754; Fri, 13 Nov 2026 11:24:33 +0000
+Received: by outflank-mailman (output) from mailman id 1487336.1689763; Fri, 13 Nov 2026 11:43:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xRpOS-00049B-VN; Fri, 13 Nov 2026 11:24:32 +0000
-Received: by outflank-mailman (input) for mailman id 1487317;
- Fri, 13 Nov 2026 11:24:31 +0000
+	id 1xRpgs-0007NB-E7; Fri, 13 Nov 2026 11:43:34 +0000
+Received: by outflank-mailman (input) for mailman id 1487336;
+ Fri, 13 Nov 2026 11:43:33 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <yhlee@isslab.korea.ac.kr>) id 1xRpOR-000495-GT
- for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 11:24:31 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xRpgr-0007N5-Ka
+ for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 11:43:33 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xRpOQ-00FqYW-3C
- for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 12:24:30 +0100
-Received: from [10.42.69.10] (helo=localhost)
+ id 1xRpgr-0074Nj-1S
+ for xen-devel@lists.xenproject.org; Fri, 13 Nov 2026 12:43:33 +0100
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <yhlee@isslab.korea.ac.kr>)
- id 6af6f356-bab6-0a2a0a5309dd-0a2a450aedc0-34
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 12:24:29 +0100
-Received: from [74.125.82.181] (helo=mail-dy1-f181.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <yhlee@isslab.korea.ac.kr>)
- id 6af6eef6-f2d2-0a2a450a0019-4a7d52b5bc4a-3
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 12:05:27 +0100
-Received: by mail-dy1-f181.google.com with SMTP id
- 5a478bee46e88-3791619605cso1756774eec.0
- for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 03:05:27 -0800 (PST)
-Received: from yhlee-960QFG.Davolink
- ([2406:5900:1044:110c:7e8c:590a:782b:a57b])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-379565d3e37sm7110033eec.24.2026.11.13.03.05.22
+ (envelope-from <andrew.cooper3@citrix.com>)
+ id 6af6f7da-e002-0a2a0a5209dd-0a2a4503c698-46
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 12:43:32 +0100
+Received: from [209.85.128.47] (helo=mail-wm1-f47.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <andrew.cooper3@citrix.com>)
+ id 6af6f7e4-fae8-0a2a45030019-d155802fedf3-3
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 12:43:32 +0100
+Received: by mail-wm1-f47.google.com with SMTP id
+ 5b1f17b1804b1-4a1b07c3c5fso12203565e9.1
+ for <xen-devel@lists.xenproject.org>; Fri, 13 Nov 2026 03:43:32 -0800 (PST)
+Received: from localhost.localdomain (host-78-146-248-75.as13285.net.
+ [78.146.248.75]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4bb4e28d0b2sm118287175e9.7.2026.11.13.03.43.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Nov 2026 03:05:24 -0800 (PST)
+ Fri, 13 Nov 2026 03:43:31 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,83 +49,115 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=isslab-korea-ac-kr.20260707.gappssmtp.com header.i="@isslab-korea-ac-kr.20260707.gappssmtp.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=isslab-korea-ac-kr.20260707.gappssmtp.com; s=20260707; t=1794567925; x=1795172725; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=xRGKkjeOSqGcAp5GlRiWRSP+3SQ9eykn8zcI3aD1Tfs=;
-        b=JmB8IVCw0FsGKCIVQ5bu11DV4pQeeStYR/eBDde9OfBX1UxGBR24Ve04nup6CqquJ3
-         8jWF07WcsNsXNJ+rtRo83QUNqwumCLfQKOg6IlcfmZhY1ic3yxCX/CjApDjzhyleaq0L
-         t8yTrgv0OZAZYrL2Z0z9vyVcO0H/BC3byVtQs3aH7oeNfYXFNqPT+7aon6Gix5IsJ6kf
-         Fq8yN3eMwVYenZZCToX+btkTqSTC7OKGLk2JSDOKIf9m6uXpP+JcxqL7201k5pKRfxEo
-         E65THd6EAzrGWNiNDvKwFVOMO1GSe1oy8hzgfCAZr07+4QxFA9/w/ZbJBGGgPLEFq4Bx
-         YaAA==
+        d=citrix.com; s=google; t=1794570212; x=1795175012; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=U5QC4tu4WUnL5LaCYFm+NZG2TShIkrteVa2dR52dHDs=;
+        b=g+uYoFU+qu/O7j9r/3KkrRfenH3Jf5H83GoTETSX3jWIoxzCkieYsyZEXjvhDQJ2XT
+         ju15niIg4rMa/YLPSPan4K4HcDQMHCJ/mWpBJx7Ym7sL8WtZwPbi/9aazwwrcl5xql51
+         AK6OUjFYlaAJCzm4dZyRwB3QOpZY08yz6lW2A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794567925; x=1795172725;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=xRGKkjeOSqGcAp5GlRiWRSP+3SQ9eykn8zcI3aD1Tfs=;
-        b=WE4J878b5ksfSXyqlLIZ+l1eEmr2yR0V2oLvv28MA1tf/cQhFlJ+6Mj5OS0duYujGQ
-         x8/5dapfIjc+mmhUPXFSbYQTw/t66xuTioBQIy9kerOniDKoi0gShIqWa/ixmXKlzArL
-         0ypC6mzIn/fyzNPHAaw88L1c1CzZf2OzUIG4W5dOTQz44dcvEVRNpzeenSFkYhHdUtai
-         c4NOR2SKYK3V1TatP9gSGkkM16YaMxRLaLvG22iXO771lXz0BqWtZ1ngD+4T04dOV3tR
-         aJWVpqZye4DI/VyIACkQlviFnVz3ZjkL6Tm1Y3GNRdz1UzXQ2nDX8CZpm72Gvzg+UNk/
-         DhFg==
-X-Forwarded-Encrypted: i=1; AL+hErHp3RXd0aqq27Bre9+LXmqREB/9QBf58vLAUA2Fxvi8tfS8jxgnkP/8XX/rc6b+BU+/cGsUy8Qf/Eo=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z9BNeChXUhGixoqTWoZQizQKwkh1WZTVD/HuCFvRbDLUlxofqWl
-	OWox4jv5ZweXsQVOPnY9Q7cW+hblkUd8LsKUzbokDSXra5INsi0v1i/28X+xLx1uStQ=
-X-Gm-Gg: AYBFou0o6xNVzFldLrUZu6nTMZ+JXor7fjtp3BJfAdNxNDArh4Hlr6VKhdSv04dNaV/
-	CVWOmL6ZE8cLNXPQr9nHeSc+qngPsqfMu+2yCMNIgwMDGQ5Oc5fR/5GGtZiLdIgLZ63WEKHeE57
-	pWCrlKY+Rt8F8UsH99HqiZOvughtbmJODqx6x9G11Xb5vxdBfFHJdCmloRQQEqSfp4r1UKqyAFE
-	J3g06id7lKKNxEedoOF9dnn+YEePyIoXRrHwmYC24TcV5Sjys4Gu4/W4LB2X1Vba5wkQ6oBSldM
-	WzlNaY76+O7dk0hXcwynraKWx6oh7QYfjU37BhYj619r/5HOg12ECvfzlWsG/144Hdo8LhW+Ya4
-	w+u60Nw29mErL4IocKHrv8F8lAAgIMnjkEEMW9r3hmT/uNRqzQMKeCJH9/bH+ZDmDLq20AgGyaQ
-	ORMzuGqkSteOAy66Wfm0QnI0fYQMXLK65XaZ0O1PzTSmFjrKIPRqrpGCpvqMBigVt6Cc9Jr1+lB
-	6NTrxQZDIecxnjfVAGdElgODZkWDAltspT+ypvg3ihA2NOv7tB+nvSgI0+BNTd+3oCpeY85qY8y
-	VK+ICxqDG+GxZd5Nj33XKo+T5hW4SX1f6Tfk0cGx8zEPEuRWAlX+ZU0izsKuIIjkO641L5ZvPvf
-	XjqunWnvgRTd8UxhweEOonrOEZFYJ04h/RKQ8MQ==
-X-Received: by 2002:a05:693c:2808:b0:36d:f004:ae6e with SMTP id 5a478bee46e88-3796721cff0mr1863856eec.34.1794567925307;
-        Fri, 13 Nov 2026 03:05:25 -0800 (PST)
-From: Yehyeong Lee <yhlee@isslab.korea.ac.kr>
-To: jgross@suse.com
-Cc: sstabellini@kernel.org,
-	oleksandr_tyshchenko@epam.com,
-	xen-devel@lists.xenproject.org,
-	linux-scsi@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	martin.petersen@oracle.com,
-	stable@vger.kernel.org
-Subject: Re: [PATCH] xen/scsiback: unbind the IRQ before draining in-flight requests
-Date: Fri, 13 Nov 2026 20:05:15 +0900
-Message-ID: <20261113110515.147043-1-yhlee@isslab.korea.ac.kr>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <353a0b62-0396-48c4-9e5d-fae5351d6abd@suse.com>
-References: <20261109122654.30859-1-yhlee@isslab.korea.ac.kr> <353a0b62-0396-48c4-9e5d-fae5351d6abd@suse.com>
+        d=1e100.net; s=20260707; t=1794570212; x=1795175012;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=U5QC4tu4WUnL5LaCYFm+NZG2TShIkrteVa2dR52dHDs=;
+        b=fdT4Oxx1Dn28Ea4C7q0x1SCUhboxSpBh9Kj9MtNytn2yfjWlyN+NOzmfAxfeaOlF2m
+         AaU2tYmg2kAbRwPgQdLk4bnLlaqHe1Wr8uW7CkwZtU1ZD/KORjS0C6UziL4ZRGAQNl9s
+         JD43qGjZ1my358Ilo+a07LVXWrXbbaCDCN9BLFCYKwW7+bgtHD1H4wDulPtqUii+1zrE
+         yzdI7/Dsko30ecIlR0M03bHJDyK1dwHDX3YZC/FMI3wqLCrWmhPXhZyDiUYfIPWSUJk1
+         3o2j+hub39tQj1zVh1bva1w4RdNMAPxpOmh7R5oPQqR/T43CR5z7kAJubDlc5FVVYR7A
+         8jNA==
+X-Gm-Message-State: APuU4Z81eZEyiRbK1SWKl5rzwGYs7/f6FgdJW5r8J79edDnv+HJGo/3j
+	lfdT2fb3j9U62Q1+oH/CjAWhZ/HRD/j3OVfY1ezRXq7mpLgCQZ135zt3Dklih7L3xfpqHImvFtp
+	PVhNB
+X-Gm-Gg: AYBFou3wYfuA21hbFQiEQR6NSosl+eCclkHiZ3Q9y33qR2pyPXdeu8k800w4A9Gmv5P
+	V86UZdp+grVTyMUYEaczWe66SZFT3W1gL0xSuHRCGvxzZ40EZ2RUESJe7iRqBPFiUDH+qLhecpn
+	iwZM24x0DRaOMRzq8/Blr+KfY35jTmNHkdmmeDaIvSupg5rGv7NQSJeYo4SElp1GpN3a9eglVjo
+	Wvo4rYu5fbBe1qWi0kjiP+rLsLDNGohL1QNnNET8c0vORzUMY0PeRZDpEKZvsGJ3OYGWMmhjqoH
+	VCIf/2fA37CRIQTe4wl5rJTM4k5L+WcIXjoUTd2LRvQxGEF39aLt9lAP6nwk7BSBlCRBrA7cgA4
+	RLpbbQQV8LJC5T8a1+0dS4naM69tZmqppoaMa4rqPS7fpsdQncyb5gKoHv0xccKku8ASihsChfs
+	eqAoRWDzYia6vkChEsa8RYMTCdo+iS+ps2JzoewDvuZOmiAn+XGBD1RFxqIduAfiT2WptYghw9f
+	Ye4ho0M8SiS3DIs+15zg2dJJJ/bXMyjHAiTBChMvecFGVVBSSAgBLpHHxYuq2vszklrhPQdS/Zd
+	wOr9cLY/RoEYl5CGGm6UpfIgZvGNw74OZw/w0dMcOqDbuu88veYeu4ck0E5rtC4rTTvnKrOfjaG
+	ptEn9X0MS5/dIemmVyT97HYXN
+X-Received: by 2002:a05:600c:8189:b0:4a3:598e:e7a8 with SMTP id 5b1f17b1804b1-4bb559f72b1mr49931535e9.4.1794570211589;
+        Fri, 13 Nov 2026 03:43:31 -0800 (PST)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Teddy Astie <teddy.astie@vates.tech>
+Subject: [PATCH] x86/boot: Reduce verbosity in reloc_trampoline??()
+Date: Fri, 13 Nov 2026 11:43:29 +0000
+Message-Id: <20261113114329.3403782-1-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1794567927-528DDCFC-97A23693/10/78177266408
-X-purgate-type: clean
-X-purgate-size: 413
-X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-purgate-ID: tlsNG-33051d/1794570212-7448C4E9-C9CD3304/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 1799
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Wed, Nov 11, 2026 at 08:58:51AM +0100, Juergen Gross wrote:
-> Reviewed-by: Juergen Gross <jgross@suse.com>
+The name 'trampoline_ptr' is voluminous without merit.
 
-Thanks, Juergen.  v2 changes the code after the Sashiko report: it now
-disables the IRQ before the drain and unbinds it only after the drain,
-so I did not carry your Reviewed-by over:
+Shorten it to just ptr.  No functional change.
 
-https://lore.kernel.org/all/20261113110036.146860-1-yhlee@isslab.korea.ac.kr/
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <jbeulich@suse.com>
+CC: Roger Pau Monné <roger@xenproject.org>
+CC: Teddy Astie <teddy.astie@vates.tech>
+---
+ xen/arch/x86/boot/reloc-trampoline.c | 14 +++++---------
+ 1 file changed, 5 insertions(+), 9 deletions(-)
 
-Best regards,
-Yehyeong Lee
+diff --git a/xen/arch/x86/boot/reloc-trampoline.c b/xen/arch/x86/boot/reloc-trampoline.c
+index e35e7c78aa86..f52b9b265b42 100644
+--- a/xen/arch/x86/boot/reloc-trampoline.c
++++ b/xen/arch/x86/boot/reloc-trampoline.c
+@@ -18,7 +18,7 @@ void reloc_trampoline64(void)
+ #endif
+ {
+     uint32_t phys = trampoline_phys;
+-    const int32_t *trampoline_ptr;
++    const int32_t *ptr;
+ 
+     /*
+      * Apply relocations to trampoline.
+@@ -26,13 +26,9 @@ void reloc_trampoline64(void)
+      * This modifies the trampoline in place within Xen, so that it will
+      * operate correctly when copied into place.
+      */
+-    for ( trampoline_ptr = __trampoline_rel_start;
+-          trampoline_ptr < __trampoline_rel_stop;
+-          ++trampoline_ptr )
+-        *(uint32_t *)(*trampoline_ptr + (long)trampoline_ptr) += phys;
++    for ( ptr = __trampoline_rel_start; ptr < __trampoline_rel_stop; ++ptr )
++        *(uint32_t *)(*ptr + (long)ptr) += phys;
+ 
+-    for ( trampoline_ptr = __trampoline_seg_start;
+-          trampoline_ptr < __trampoline_seg_stop;
+-          ++trampoline_ptr )
+-        *(uint16_t *)(*trampoline_ptr + (long)trampoline_ptr) = phys >> 4;
++    for ( ptr = __trampoline_seg_start; ptr < __trampoline_seg_stop; ++ptr )
++        *(uint16_t *)(*ptr + (long)ptr) = phys >> 4;
+ }
+
+base-commit: 97bf370375113caf92fccf04e2877fc6b5ff887f
+-- 
+2.39.5
+
 
