@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 834EC606A31F
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 66DC6606A31E
 	for <xen-devel@archiver.kernel.org>; Sun, 15 Nov 2026 10:14:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=chrisdown.name header.i=@chrisdown.name header.a=rsa-sha256 header.s=google header.b=XUgtLiDe
-Received: from list by lists.xenproject.org with outflank-mailman.1489358.1691010 (Exim 4.92)
+	dkim=pass (1024-bit key) header.d=chrisdown.name header.i=@chrisdown.name header.a=rsa-sha256 header.s=google header.b=AbjyQl0H
+Received: from list by lists.xenproject.org with outflank-mailman.1489362.1691021 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSXEs-0005Bz-6B; Sun, 15 Nov 2026 10:13:34 +0000
+	id 1xSXEs-0005IG-OU; Sun, 15 Nov 2026 10:13:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1489358.1691010; Sun, 15 Nov 2026 10:13:34 +0000
+Received: by outflank-mailman (output) from mailman id 1489362.1691021; Sun, 15 Nov 2026 10:13:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSXEs-0005Br-1I; Sun, 15 Nov 2026 10:13:34 +0000
-Received: by outflank-mailman (input) for mailman id 1489358;
- Sat, 14 Nov 2026 20:05:59 +0000
+	id 1xSXEs-0005Fb-HE; Sun, 15 Nov 2026 10:13:34 +0000
+Received: by outflank-mailman (input) for mailman id 1489362;
+ Sat, 14 Nov 2026 20:06:04 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <chris@chrisdown.name>) id 1xSK0c-0002JT-VQ
- for xen-devel@lists.xenproject.org; Sat, 14 Nov 2026 20:05:59 +0000
+ (envelope-from <chris@chrisdown.name>) id 1xSK0i-0002LG-0y
+ for xen-devel@lists.xenproject.org; Sat, 14 Nov 2026 20:06:04 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xSK0c-00AcqK-Ao
- for xen-devel@lists.xenproject.org; Sat, 14 Nov 2026 21:05:58 +0100
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xSK0h-001vHR-E5
+ for xen-devel@lists.xenproject.org; Sat, 14 Nov 2026 21:06:03 +0100
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <chris@chrisdown.name>)
- id 6af8bee1-e002-0a2a0a5209dd-0a2a45018f4c-36
- for <xen-devel@lists.xenproject.org>; Sat, 14 Nov 2026 21:05:58 +0100
-Received: from [209.85.210.181] (helo=mail-pf1-f181.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6af8bef5-2eae-0a2a0a5409dd-0a2a4507a38e-32
+ for <xen-devel@lists.xenproject.org>; Sat, 14 Nov 2026 21:06:03 +0100
+Received: from [209.85.215.169] (helo=mail-pg1-f169.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <chris@chrisdown.name>)
- id 6af8bf24-5984-0a2a45010019-d155d2b5cdb1-3
- for <xen-devel@lists.xenproject.org>; Sat, 14 Nov 2026 21:05:57 +0100
-Received: by mail-pf1-f181.google.com with SMTP id
- d2e1a72fcca58-8b5e5e64494so1463745b3a.1
- for <xen-devel@lists.xenproject.org>; Sat, 14 Nov 2026 12:05:57 -0800 (PST)
+ id 6af8bf29-b4ea-0a2a45070019-d155d7a9e473-3
+ for <xen-devel@lists.xenproject.org>; Sat, 14 Nov 2026 21:06:03 +0100
+Received: by mail-pg1-f169.google.com with SMTP id
+ 41be03b00d2f7-cdb628232d2so2076436a12.0
+ for <xen-devel@lists.xenproject.org>; Sat, 14 Nov 2026 12:06:02 -0800 (PST)
 Received: from [172.22.0.2] ([64.16.22.130]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-8bed12a8172sm2271197b3a.13.2026.11.14.12.05.52
+ 98e67ed59e1d1-3b1b1e9ef15sm5258887a91.0.2026.11.14.12.05.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 14 Nov 2026 12:05:54 -0800 (PST)
+ Sat, 14 Nov 2026 12:06:00 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,44 +51,44 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=chrisdown.name header.i="@chrisdown.name" header.h="User-Agent:Message-ID:Content-Disposition:Content-Type:MIME-Version:References:In-Reply-To:Subject:Cc:To:From:Date"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chrisdown.name; s=google; t=1794686756; x=1795291556; darn=lists.xenproject.org;
+        d=chrisdown.name; s=google; t=1794686761; x=1795291561; darn=lists.xenproject.org;
         h=user-agent:message-id:content-disposition:content-type:mime-version
          :references:in-reply-to:subject:cc:to:from:date:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=SncZUWGrBOxT9WurRufkDIe8hGFcWm37DANGybHY+fQ=;
-        b=XUgtLiDeJgK8iPm3xbvpxhDL4Kks7K5YpE3rgDVEzCpsty9cosrir9KpKZPqyv7Bap
-         U/zv9yG8xpi5Dgj9pPo0QT1qcL8Arelq/3MLDYci1jhslxYc5U+6r5aOenIwFhlBBItS
-         wLyulwPhJJpQVS25/GpNCMgJJ2qvzpCqDEqIM=
+        bh=L9fh6nGpkdQ3PKE1Pv6VuACg3WWhS00/MicQv00SggM=;
+        b=AbjyQl0HyfJF7cOtMOa+zkIcMT/XTeQuCrAzuHAEzWHogPmfHAvp+VAd/WYr23oMji
+         bVM61Cxs/Rk5/gv/OLOPb+fUfC3s06hF4t31Pk+YkaoPDPjNIJuGuSWX6BYoHkqKISqs
+         070ShKtoh+Xg9N/9wENvYZ0JH8+HqfdJQcRSo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794686756; x=1795291556;
+        d=1e100.net; s=20260707; t=1794686761; x=1795291561;
         h=user-agent:message-id:content-disposition:content-type:mime-version
          :references:in-reply-to:subject:cc:to:from:date:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=SncZUWGrBOxT9WurRufkDIe8hGFcWm37DANGybHY+fQ=;
-        b=AdEStuua9aOzw0KdWND+92eEV+xKJnYU2sc6NxXc57KVTKmNADxU4ndAW/UN1uNoBy
-         K1ExCMY7llOmz6ptPLFgEvljh0sCjTfAe6oeMkxKlPW67lSDhQWIFCS+D8feoS5t2MXa
-         KQBpPtq8cJRHsDR/SjJLzAkhnfA0Bevt/p1EveYyAzUVl1sG+dJIm4sXDrMB0CXvxiaR
-         2OUlZnzfeDJ9yX47P2qwvVhgZ7awAjeK3twKgUaSybFRD2EH5QPZdZI7Qx3K5PIvrpV0
-         jaAoQGUUyf+9mBAWft6Kpup92KsZijRvjQGj1DSZXeHAm0z/V94EWB8WqOcQUXeWd6TQ
-         aj6Q==
-X-Forwarded-Encrypted: i=1; AL+hErEYlVhRXNG52XxTktbLFZsZdWWWpxKAZg7cdZNyb7w6rFkJ0MD/rPhiyIwcuH8NyPO7FS7jby7UcAo=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z875S+Tfi9F+cHAbQUcz43DociYLv80lK+yLMM9I/LxXNmqI/aM
-	5i1AULS6xTj1mFb7QCd8+fJtGbzJWTTZgS9kp2B+qZb5CTPiWKlw5fV16vgjihpGUWA=
-X-Gm-Gg: AYBFou13lb70TY/0btG577ycuXKHJgQPiKdACKn2GYwlxUu0ElBd3i0sA4FoRVRqO1Z
-	jh9vPZ+deukXGFnnUYPkSN+mBy4jWXq7Ct7SioIwQo9JTHeSRk7O4mUaXR6Fxf54mxOzMTHLvAU
-	bzmDGiI3y5JMjkLDX1r5NOhJuWmj+4WzrKxDQdjk8Byum9mS/IB3oHmw7MQ62gr/ZCMzk+F4c+C
-	q/n3+Yx3Ugg5X/oaNIGehMc4RZdaxE69wn/KchI3ZZueDhC5zMFi+QkOa8UbDylS4eSyL9k58p2
-	AKgaEvWCOMIqh2OuPlydjxo65eI4pH19FIH+dqMgKKBbX0HsjaYXH7iwPE3oUFJDU2Srm2mwpUn
-	kBc/pXINNMqSFIcev3pUm7exuiof19mcNNowXPWJ/1w+PefYalZu3uZ3cBtKaP5FcY8TSQGvrM7
-	myUXqtaRWP+m+vtsf71+t6fcyAEWwsbvQ03vFI4rIfaJIJ1zN6M5/KozWkpdG+KYd3CqYYKugaV
-	6lWXpK7aa5uAMtjIHm4lDhwp6NehyalVABFc2MpY6Kky56PZeP2oO6txq957eq+ulL9AKaL8qHo
-	rDNxkC1tnvbF0NbAHfHxWoj8iBiR0ARecrB5orm0DbO1Zh9ZoCh6KAAOUnNxdPlEzSHlhuhQysO
-	KOoL4EWA5V70aJP1AiX7vbRlqkRn/RLvPBPlPXiZBc9WvVo+V72Ohw2P5byqTYW4OtoT5h+jEP4
-	kmceJqbf9ijHZqv0P6sdYub/RPWl46/MHX73umjs77YFhi4N7RHYrlNuUH
-X-Received: by 2002:a05:6a21:748b:b0:3e3:37ff:3795 with SMTP id adf61e73a8af0-3f7a4dbfbbfmr5517650637.7.1794686756009;
-        Sat, 14 Nov 2026 12:05:56 -0800 (PST)
-Date: Sat, 14 Nov 2026 12:05:50 -0800
+        bh=L9fh6nGpkdQ3PKE1Pv6VuACg3WWhS00/MicQv00SggM=;
+        b=gQxNp+0MwcnPfMGcSoNI3ocZlpEDTmMOFrsrficayfULbT9ezbEZHujGGUIZegcG4j
+         myb290LDOmHY9U3SG+r891U2uqZGjc/MAF0ZXWkjQU36A4DmRxzgwI6OMh2/WuDxDf9Y
+         YesdKt8ySIyU20qD5wxIMK3qRgZGnje5DvomQm2iTQyiW1GQc2VG2gUlfCXwP7O8Un3v
+         hpsBrYwoUcqks+VT8v0AsarjUpbKFyLKceQhp423cFB7d46bG5OgRGNptHKrqVZ9BuFv
+         WG1mVXbcUsmPt5O+6wyBvVi+jzTHsemhEEDHcCmbbxx32kR0pYAks4GQOuo4Be80sgDm
+         j6rg==
+X-Forwarded-Encrypted: i=1; AL+hErGFaXXrZ6XnG4RahQgsK5jQ59eq77ry3D9fCnpsyvhm/G4WVaapetuXIS54QgOekCPBu/91tFiSFts=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z8ufz1GX3HGuDXoB5NVQzaucRYfQwm1Bx6rF2MtfBjpGBWwNwlP
+	tIstyIZ+5DWRgJGrBtnJWfcHC5UDFLDznlkS7xkzcUZ1wqiMyl/Wi8mc8GlojdQ7GAU=
+X-Gm-Gg: AYBFou3Q2BOJdLG51bMiABoDj/an/W9nbW4POf1eqrUfDxtwrsGiX5OOnWV7+X03IK+
+	4Sz+vUI4EUnXYioC1ubs9g4bOc9kwH+MMW/VEP4ipGvMpx8eOYXfVLt+XoBAyHDXrDdewrY3m9t
+	2Lxq9ZshNqSN3f89LYgKA6T9bB0531feQQ1cB47ZxcE4D9p6pIUbAo85KzGh/kRH7US1mO0Idtb
+	WmScJlNpCokzWFV+9lQUNTNLdqW7XYDMmtEEZ7mdC8xhrKmF+AVx36IlgVfqVcGHclZLyReNW8W
+	CutAIy23Fk4KwXhmX9UVif4TGRfVNHQIA/g8ynZikpBIPb9FjpKcfpxQl6ENNzNR0vxUGNYw/6i
+	dq4kTOnN3D9UXzIbc0vqh0ccWPd3DdYH6uoad0XIPwQsUCm1Paomkc2cgqQ9l30HuHv3FNKv3yH
+	9oz8K239nZXIzdzcCGBeCfCI86DQaEGbRxqomPqdxgS2A3pqovPZYFNmT+7FWHUestAG3o40gUz
+	+gfCm3L3TzkFo5a4Ps6pt3WpCcLgc8mbQ0ld1CNRT/kv7QlVJyjuCWGaX/G2MuAYn5pt35CGVet
+	HKf7eplj3alKSaosJP3xPd5S64iq/iI4ax0WDJpXcsNMNZ8No9Nsu+yCgGolB0pXKYpPMfnYIuX
+	995Ci/ME4WurfyrREHbZppOTnS1hZ1dLwwwBTfZtQUi7etW2jCfGEKV8dSrKgtDftGqK3YZBes4
+	0GABjcUJAiaLK9BM4s1F6qd9qRQuk0zKbxdEr5RWVE1W285gZCLzJ/mFnm
+X-Received: by 2002:a17:90b:2584:b0:3ac:9f00:3bc7 with SMTP id 98e67ed59e1d1-3b1b0ba61famr5629200a91.33.1794686761104;
+        Sat, 14 Nov 2026 12:06:01 -0800 (PST)
+Date: Sat, 14 Nov 2026 12:05:57 -0800
 From: Chris Down <chris@chrisdown.name>
 To: Christian Brauner <brauner@kernel.org>
 Cc: linux-fsdevel@vger.kernel.org, Jann Horn <jannh@google.com>,
@@ -104,46 +104,62 @@ Cc: linux-fsdevel@vger.kernel.org, Jann Horn <jannh@google.com>,
 	xen-devel@lists.xenproject.org, ocfs2-devel@lists.linux.dev,
 	linux-s390@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
 	linux-usb@vger.kernel.org, Amir Goldstein <amir73il@gmail.com>,
-	linux-erofs@lists.ozlabs.org, linux-kselftest@vger.kernel.org,
-	stable@vger.kernel.org, Alexander Mikhalitsyn <alex@amutable.com>,
-	Breno Leitao <leitao@debian.org>, Casey Schaufler <casey@schaufler-ca.com>,
-	Chuck Lever <cel@kernel.org>, Sashiko <sashiko-bot@kernel.org>
-Subject: Re: [PATCH RFC v2 00/42] fs: don't use pseudo filesystem files as
-	storage
-In-Reply-To: <20261114-work-loop-pseudo-v2-0-98639a2286fb@kernel.org>
+	linux-erofs@lists.ozlabs.org, linux-kselftest@vger.kernel.org
+Subject: Re: [PATCH RFC v2 33/42] fs: add file_check_backing()
+In-Reply-To: <20261114-work-loop-pseudo-v2-33-98639a2286fb@kernel.org>
 References: <20261114-work-loop-pseudo-v2-0-98639a2286fb@kernel.org>
+	<20261114-work-loop-pseudo-v2-33-98639a2286fb@kernel.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Disposition: inline
-Message-ID: <20261114120550.0c9e73aa12a3072c@chrisdown.name>
+Message-ID: <20261114120557.4bc1eb6e57218cdc@chrisdown.name>
 User-Agent: Mutt/2.4.3 (cc9e3943) (2026-10-09)
-X-purgate-ID: tlsNG-d62444/1794686758-BF063757-96A5A8B8/0/0
+X-purgate-ID: tlsNG-ef75cf/1794686763-37CD7AE4-5190CA85/0/0
 X-purgate-type: clean
-X-purgate-size: 529
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-purgate-size: 1600
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=unavailable
-	autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 Hi Christian,
 
-Patches 1-11, 13-16, 18-26, 28, 31, 32, 34-37 and 39-42 look good to me,
-so for those please feel free to add:
+Christian Brauner writes:
+>+	/* Look through stacking filesystems at the inode with the data. */
+>+	if (d_real_inode(file->f_path.dentry)->i_sb->s_iflags & SB_I_PSEUDO)
+>+		return -EINVAL;
 
-Reviewed-by: Chris Down <chris@chrisdown.name>
+This looks good in general, but what the bots said about O_PATH files
+here is real. With FMODE_PATH this is reached for a file that was never
+opened, so on overlayfs nothing has been through ovl_open() to look up
+the lowerdata of a metacopy file yet. ovl_d_real() then does the lookup
+itself, and when that fails it hits the WARN(1) at its end and returns
+the overlayfs dentry, so the check passes as well.
 
-I've also tested 5, 6, 34-37, 41 and 42. The selftests all pass with the
-series applied, and a uid 0 without capabilities can no longer change
-/sys/kernel/reboot/mode through a loop device. So for those, please also
-feel free to add:
+Only fuse passes FMODE_PATH, so it takes CAP_SYS_ADMIN to get there, but
+it's easy to trigger with that. From a quick test with a metacopy file
+whose redirect into a data-only layer points at nothing, registering an
+O_PATH fd of it with FUSE_DEV_IOC_BACKING_OPEN gives
 
-Tested-by: Chris Down <chris@chrisdown.name>
+     ovl_d_real(/f, 0): real dentry not found
+     WARNING: fs/overlayfs/super.c:79 at ovl_d_real+0xc9/0x210
+     [...]
+      file_check_backing+0x308/0x5e0
+      fuse_backing_new+0x219/0x4a0
+      fuse_backing_open+0xe8/0x390
+      fuse_dev_ioctl+0x53a/0x7d0
 
-I've replied separately to 17 and 33.
+and the ioctl still succeeds. A normal open of that file fails with
+ENOENT, so nothing could have used it as a backing file anyway, but with
+panic_on_warn this is now a panic.
+
+Maybe ovl_d_real() should just stop warning when the lookup fails, now
+that it has a caller that isn't trace_uprobe? The check would still pass
+for an O_PATH file whose lowerdata couldn't be looked up at that point,
+though.
 
 Thanks!
 
