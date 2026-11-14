@@ -2,43 +2,43 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F6576070523
-	for <xen-devel@archiver.kernel.org>; Sat, 14 Nov 2026 13:07:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ED970606B9A2
+	for <xen-devel@archiver.kernel.org>; Sat, 14 Nov 2026 13:08:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=RP6bdqxg
-Received: from list by lists.xenproject.org with outflank-mailman.1488792.1690593 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Ji+nEVur
+Received: from list by lists.xenproject.org with outflank-mailman.1488802.1690602 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSDTv-00052a-Sn; Sat, 14 Nov 2026 13:07:47 +0000
+	id 1xSDU3-0005Sk-5Z; Sat, 14 Nov 2026 13:07:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1488792.1690593; Sat, 14 Nov 2026 13:07:47 +0000
+Received: by outflank-mailman (output) from mailman id 1488802.1690602; Sat, 14 Nov 2026 13:07:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSDTv-00052S-Op; Sat, 14 Nov 2026 13:07:47 +0000
-Received: by outflank-mailman (input) for mailman id 1488792;
- Sat, 14 Nov 2026 13:07:46 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xSDU3-0005Sd-0C; Sat, 14 Nov 2026 13:07:55 +0000
+Received: by outflank-mailman (input) for mailman id 1488802;
+ Sat, 14 Nov 2026 13:07:53 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <brauner@kernel.org>) id 1xSDTu-0004ej-4L
- for xen-devel@lists.xenproject.org; Sat, 14 Nov 2026 13:07:46 +0000
+ (envelope-from <brauner@kernel.org>) id 1xSDU1-0005PL-FE
+ for xen-devel@lists.xenproject.org; Sat, 14 Nov 2026 13:07:53 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xSDTt-002ar2-Hi
- for xen-devel@lists.xenproject.org; Sat, 14 Nov 2026 14:07:45 +0100
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xSDU0-005kN0-R4
+ for xen-devel@lists.xenproject.org; Sat, 14 Nov 2026 14:07:52 +0100
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <brauner@kernel.org>)
- id 6af85d0a-bab6-0a2a0a5309dd-0a2a4508b4f2-12
- for <xen-devel@lists.xenproject.org>; Sat, 14 Nov 2026 14:07:45 +0100
-Received: from [172.105.4.254] (helo=tor.source.kernel.org)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6af85d01-e002-0a2a0a5209dd-0a2a450bea8c-30
+ for <xen-devel@lists.xenproject.org>; Sat, 14 Nov 2026 14:07:52 +0100
+Received: from [172.234.252.31] (helo=sea.source.kernel.org)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <brauner@kernel.org>)
- id 6af85d20-f659-0a2a45080019-ac6904fe908c-3
- for <xen-devel@lists.xenproject.org>; Sat, 14 Nov 2026 14:07:45 +0100
+ id 6af85d27-b7e8-0a2a450b0019-aceafc1fb55a-3
+ for <xen-devel@lists.xenproject.org>; Sat, 14 Nov 2026 14:07:52 +0100
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 0EA3F6272D;
+ by sea.source.kernel.org (Postfix) with ESMTP id 219C04329D;
+ Sat, 14 Nov 2026 13:07:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 377B01F000CA;
  Sat, 14 Nov 2026 13:07:44 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 254A51F000C4;
- Sat, 14 Nov 2026 13:07:36 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,23 +49,23 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="From:Date:Subject:References:In-Reply-To:To:Cc"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794661663;
-	bh=PsEZAEo2EWjwlrQyS8FDrkYLrSxc4EoXaQ3VAa3T0to=;
+	s=k20260515; t=1794661671;
+	bh=HLEBqcSKp1qX1T09y3XaYhOvlZUW+haNA06sn1fKMTM=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=RP6bdqxgYdTOvKQFb6NUJlAnzP0iuFZn14JV3dopj4eOhvt4mal1MYZtl7BQYCoxt
-	 w45XbT2grNM6Qg55/tsCLUdM0CQBOxLR2Kunja7yy54lP9Qfg63cbpj/uCek58LMdr
-	 2g0icThdvpsN4HTsfTKz9VeiMePWjWf1Q1K5NnEjU8lTRxQrEHOb8z5qeiSteKne2v
-	 cZsD/rPxnGg04mAtEBHiWHv5l/XXKkWr1ku1sBIHTZe1CFwHTqP1ghScoLp+fr2OPo
-	 fJrxBzLLgHTvheGhtWCqgnNRz1198UueTs5pHbgLcHIkedb4JvrikevLf2qm5DDpBH
-	 /871dihUSqoKg==
+	b=Ji+nEVurWmAWGlYK/nkfcItaW59n2bZXGZcxHBK4OdfGaK8u3mxnvdkxxHgDIydSr
+	 p/UqYko0xoSz4+2DnS47tPHRl2jWXh7tXIePEIQLB3C3jGbWQ9Au7YS1vvY5l7fUr5
+	 ph8m8OZcq0Am7xu1jp3h10AkrRPVtHIVmgjmJ4PmRoVOvpEKw36sGP9bQXZx0UwMKH
+	 HxikLBXNjHLBDBGgc6E13ZKeQwUfqBkSNN+kiTaJ4yJMSSYs09p0VgPuGTW3tcdwiR
+	 GA0Rcmh4JRimAm3px4/WK7WlefYTOW4KsqGKwhhMFZ1acn+6sH08twTlVYAZESB1es
+	 3OH10sFCA79yg==
 From: Christian Brauner <brauner@kernel.org>
-Date: Sat, 14 Nov 2026 14:01:59 +0100
-Subject: [PATCH RFC v2 18/42] selinux: use fc_init_pseudo() for selinuxfs
+Date: Sat, 14 Nov 2026 14:02:00 +0100
+Subject: [PATCH RFC v2 19/42] smack: use fc_init_pseudo() for smackfs
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261114-work-loop-pseudo-v2-18-98639a2286fb@kernel.org>
+Message-Id: <20261114-work-loop-pseudo-v2-19-98639a2286fb@kernel.org>
 References: <20261114-work-loop-pseudo-v2-0-98639a2286fb@kernel.org>
 In-Reply-To: <20261114-work-loop-pseudo-v2-0-98639a2286fb@kernel.org>
 To: linux-fsdevel@vger.kernel.org
@@ -85,19 +85,20 @@ Cc: Jann Horn <jannh@google.com>, Chris Mason <mason@kernel.org>,
  Amir Goldstein <amir73il@gmail.com>, linux-erofs@lists.ozlabs.org, 
  linux-kselftest@vger.kernel.org, 
  "Christian Brauner (Amutable)" <brauner@kernel.org>, 
+ Casey Schaufler <casey@schaufler-ca.com>, 
  Alexander Mikhalitsyn <alex@amutable.com>
 X-Mailer: b4 0.17-dev-ce4c1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1689; i=brauner@kernel.org;
- h=from:subject:message-id; bh=Eg4JynB39S+cJriPMxPoEFKswaAikvmz7VyAKkVX+DM=;
- b=owGbwMvMwCU28Zj0gdSKO4sYT6slMWT9iKlyMVy9yP1TKKNxrIjSmW/cGdIrJik/frn0dv3to
- /8K4+ukO0pZGMS4GGTFFFkc2k3C5ZbzVGw2ytSAmcPKBDKEgYtTACYSMIHhv2uEhSiX6eXHduxb
- hf4+qrT5tnTptBUl2zO0TXL7X/736WFkWNSWEJ/+ZOJcg73v3vA+s01c+03lUdAuJu+uVeeshCM
- ymAA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1015; i=brauner@kernel.org;
+ h=from:subject:message-id; bh=mE4jYSsHEwuAZf3nmG7Zw4WEpYRZ8AUzYrhlfcWNpTk=;
+ b=kA0DAAoWkcYbwGV43KIByyZiAGr4XHvIqDUMQ3Y3FWiJAOR/6/2bqf9F3aGnkKR/Ws7txmnIJ
+ oh1BAAWCgAdFiEEQIc0Vx6nDHizMmkokcYbwGV43KIFAmr4XHsACgkQkcYbwGV43KJGMAD9GRGB
+ jgYj+fXNJRfyU9Ary0JbYVPSrhncPXZR9kWxX5sBAJyDlhh8buWDux0CUa6zjYdeue58XdJanKh
+ tYMsz8+gL
 X-Developer-Key: i=brauner@kernel.org; a=openpgp;
  fpr=4880B8C9BD0E5106FC070F4F7B3C391EFEA93624
-X-purgate-ID: tlsNG-c1860d/1794661665-D634587B-B85760FA/0/0
+X-purgate-ID: tlsNG-42698a/1794661672-184CB9EA-B19EBBFF/0/0
 X-purgate-type: clean
-X-purgate-size: 1691
+X-purgate-size: 1017
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -106,51 +107,35 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Initialize selinuxfs as a pseudo filesystem. This raises SB_I_PSEUDO and
-SB_I_NOEXEC. selinuxfs never holds executables. SB_I_NOEXEC also
-refuses PROT_EXEC mappings but the status and policy files are only
-ever mapped for reading.
+Initialize smackfs as a pseudo filesystem. This raises SB_I_PSEUDO and
+also SB_I_NOEXEC and SB_I_NODEV. smackfs never holds executables or
+device nodes.
 
-But selinuxfs needs device nodes. The kernel replaces file descriptors
-with /sys/fs/selinux/null on exec via dentry_open() which doesn't care
-about SB_I_NODEV. Android init however opens /sys/fs/selinux/null by
-path as /dev/null doesn't exist yet at that point. So clear SB_I_NODEV
-again in sel_fill_super().
-
+Acked-by: Casey Schaufler <casey@schaufler-ca.com>
 Reviewed-by: Alexander Mikhalitsyn <alex@amutable.com>
 Signed-off-by: Christian Brauner (Amutable) <brauner@kernel.org>
 ---
- security/selinux/selinuxfs.c | 5 +++++
- 1 file changed, 5 insertions(+)
+ security/smack/smackfs.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/security/selinux/selinuxfs.c b/security/selinux/selinuxfs.c
-index 310e19efff1d0..d7ae853b6d685 100644
---- a/security/selinux/selinuxfs.c
-+++ b/security/selinux/selinuxfs.c
-@@ -18,6 +18,7 @@
- #include <linux/vmalloc.h>
- #include <linux/fs.h>
+diff --git a/security/smack/smackfs.c b/security/smack/smackfs.c
+index a72bc7fabea99..4a56bbeaeca37 100644
+--- a/security/smack/smackfs.c
++++ b/security/smack/smackfs.c
+@@ -25,6 +25,7 @@
+ #include <linux/magic.h>
+ #include <linux/mount.h>
  #include <linux/fs_context.h>
 +#include <linux/pseudo_fs.h>
- #include <linux/hex.h>
- #include <linux/mount.h>
- #include <linux/mutex.h>
-@@ -1852,6 +1853,9 @@ static int sel_fill_super(struct super_block *sb, struct fs_context *fc)
- 		/* last one */ {"", NULL, 0}
- 	};
+ #include "smack.h"
  
-+	/* Android init opens the null device below by path. */
-+	sb->s_iflags &= ~SB_I_NODEV;
-+
- 	ret = selinux_fs_info_create(sb);
- 	if (ret)
- 		goto err;
-@@ -1955,6 +1959,7 @@ static const struct fs_context_operations sel_context_ops = {
- 
- static int sel_init_fs_context(struct fs_context *fc)
+ #define BEBITS	(sizeof(__be32) * 8)
+@@ -2880,6 +2881,7 @@ static const struct fs_context_operations smk_context_ops = {
+  */
+ static int smk_init_fs_context(struct fs_context *fc)
  {
 +	fc_init_pseudo(fc);
- 	fc->ops = &sel_context_ops;
+ 	fc->ops = &smk_context_ops;
  	return 0;
  }
 
