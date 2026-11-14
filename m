@@ -2,41 +2,41 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C0556606FAD6
-	for <xen-devel@archiver.kernel.org>; Sat, 14 Nov 2026 20:27:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A62A4606FAD6
+	for <xen-devel@archiver.kernel.org>; Sat, 14 Nov 2026 20:28:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=wKQjtRiF
-Received: from list by lists.xenproject.org with outflank-mailman.1489375.1690868 (Exim 4.92)
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=K+RxW3IU
+Received: from list by lists.xenproject.org with outflank-mailman.1489381.1690928 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSKLX-000593-9T; Sat, 14 Nov 2026 20:27:35 +0000
+	id 1xSKLb-0006c3-3c; Sat, 14 Nov 2026 20:27:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1489375.1690868; Sat, 14 Nov 2026 20:27:35 +0000
+Received: by outflank-mailman (output) from mailman id 1489381.1690928; Sat, 14 Nov 2026 20:27:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSKLX-00056p-4B; Sat, 14 Nov 2026 20:27:35 +0000
-Received: by outflank-mailman (input) for mailman id 1489375;
- Sat, 14 Nov 2026 20:27:33 +0000
+	id 1xSKLa-0006b7-VA; Sat, 14 Nov 2026 20:27:38 +0000
+Received: by outflank-mailman (input) for mailman id 1489381;
+ Sat, 14 Nov 2026 20:27:37 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <rdunlap@infradead.org>) id 1xSKLU-00052g-OX
- for xen-devel@lists.xenproject.org; Sat, 14 Nov 2026 20:27:33 +0000
+ (envelope-from <rdunlap@infradead.org>) id 1xSKLZ-0005mf-2i
+ for xen-devel@lists.xenproject.org; Sat, 14 Nov 2026 20:27:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xSKLT-009vN1-VB
- for xen-devel@lists.xenproject.org; Sat, 14 Nov 2026 21:27:31 +0100
+ id 1xSKLY-009vN1-Fz
+ for xen-devel@lists.xenproject.org; Sat, 14 Nov 2026 21:27:36 +0100
 Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <rdunlap@infradead.org>)
- id 6af8c3c4-2eae-0a2a0a5409dd-0a2a4507e2d0-32
- for <xen-devel@lists.xenproject.org>; Sat, 14 Nov 2026 21:27:31 +0100
+ id 6af8c3c4-2eae-0a2a0a5409dd-0a2a4507e2d0-36
+ for <xen-devel@lists.xenproject.org>; Sat, 14 Nov 2026 21:27:36 +0100
 Received: from [198.137.202.133] (helo=bombadil.infradead.org)
  by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <rdunlap@infradead.org>)
- id 6af8c430-b4ea-0a2a45070019-c689ca858cd0-3
- for <xen-devel@lists.xenproject.org>; Sat, 14 Nov 2026 21:27:29 +0100
+ id 6af8c436-b4ea-0a2a45070019-c689ca85a3a0-3
+ for <xen-devel@lists.xenproject.org>; Sat, 14 Nov 2026 21:27:36 +0100
 Received: from [50.53.43.113] (helo=bombadil.infradead.org)
  by bombadil.infradead.org with esmtpsa (Exim 4.100.1 #2 (Red Hat Linux))
- id 1xSKKv-0000000Giga-2gx2; Sat, 14 Nov 2026 20:26:57 +0000
+ id 1xSKLD-0000000Giga-0Wfi; Sat, 14 Nov 2026 20:27:15 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -45,17 +45,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=bombadil.20210309 header.d=infradead.org header.i="@infradead.org" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=bombadil.20210309 header.d=infradead.org header.i="@infradead.org" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
-	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=agUQr/AxBpqR/yoTMSgCDqpX2NxV6QO4XNqgDEsecWM=; b=wKQjtRiFnFlUm+odGRkSre2RML
-	kUbFmePzfrRwfhs83dMhMRZrv/ciIAAPcjOtKw/5hdld85CdWM4AxdrdTgsD880DWDNdXmFuFIErS
-	0IMkezq8UeG9DkfgVsC5G5kkBgJvDEZz7G+EHy0RW0Lzv7Qd/nCZaf6v+cXrkPJkx3GLNPvuSwDBa
-	7XAdBzY1kcvZjJJtEBYz7HmZpeD7KWVbRyAC3J6vng0QRm/e0NV7tKqBDqVCSfsHg211Qio6A8wik
-	gKq8tpH8joqM/xI+N5OezTWpFykZVnxctwGt4ZFbDae9ou4ACwTgcy//9967ywPfn/XG6456ddH+F
-	mi0BZo+A==;
+	Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:
+	To:From:Sender:Reply-To:Content-ID:Content-Description;
+	bh=g4Lr1iIWwCQDLrfv4xinJtkANuRZUZ3Hye3ay62BdDM=; b=K+RxW3IUjPLut10UJdZN3BFbmh
+	pNxgVj59+6O/xkEPsB1hqiX0K6qZJW5/M8/WqEV1J7uMnx4KuEIEFt0PDhNvNcwHr2uGYrrUYIwcE
+	gtcxC7ZIsLuo69Ei00wEPYqF7uh+iWtquvhO3gwZQqnj+BOkE3qYRmomz1FB4DYyLM5e+4m7yTRmn
+	VucLIkmDKfNlqGfpBae0bAvW/bzkfaOJqgckrrJ4zF1mbFGvbDxX3S9VlDpAP5qmgkUnrmxxb4L0D
+	9Zo2mI2kpwS22kcR/S14ACNaGrbtHanSEoj1F3pzRF7XLKfrnQnw7bMTvvwNNW+4Bb7gQaOVbRqc7
+	vcfk00zQ==;
 From: Randy Dunlap <rdunlap@infradead.org>
 To: linux-kernel@vger.kernel.org
 Cc: Randy Dunlap <rdunlap@infradead.org>,
@@ -144,18 +144,19 @@ Cc: Randy Dunlap <rdunlap@infradead.org>,
 	Matthew Brost <matthew.brost@intel.com>,
 	=?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
 	intel-xe@lists.freedesktop.org
-Subject: [PATCH 01/12] docs: ioctl-number: update MM entries
-Date: Sat, 14 Nov 2026 12:26:39 -0800
-Message-ID: <20261114202653.3113381-2-rdunlap@infradead.org>
+Subject: [PATCH 09/12] docs: ioctl-number: update virtualization entries
+Date: Sat, 14 Nov 2026 12:26:47 -0800
+Message-ID: <20261114202653.3113381-10-rdunlap@infradead.org>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261114202653.3113381-1-rdunlap@infradead.org>
 References: <20261114202653.3113381-1-rdunlap@infradead.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1794688051-35AC0AE4-5EED38FB/0/0
+X-purgate-ID: tlsNG-ef75cf/1794688056-3C610AE4-5AC3194E/0/0
 X-purgate-type: clean
-X-purgate-size: 2212
+X-purgate-size: 3723
 X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
@@ -164,7 +165,7 @@ X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add ioctl number entries for test_hmm_uapi and gup_test.
+Update the list of files where virtualization ioctls are defined.
 
 Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
 ---
@@ -175,33 +176,59 @@ take all of these through the docs-next tree.]
 Cc: Jonathan Corbet <corbet@lwn.net>
 Cc: Shuah Khan <skhan@linuxfoundation.org>
 Cc: linux-doc@vger.kernel.org
-Cc: David Hildenbrand <david@kernel.org>
-Cc: Andrew Morton <akpm@linux-foundation.org>
-Cc: Jason Gunthorpe <jgg@nvidia.com>
-Cc: Leon Romanovsky <leonro@nvidia.com>
-Cc: linux-mm@kvack.org
+Cc: Juergen Gross <jgross@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: xen-devel@lists.xenproject.org
+Cc: Hans de Goede <hansg@kernel.org>
+Cc: Arnd Bergmann <arnd@arndb.de>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: "Michael S. Tsirkin" <mst@redhat.com>
+Cc: Jason Wang <jasowangio@gmail.com>
+Cc: Eugenio Pérez <eperezma@redhat.com>
+Cc: Sean Christopherson <seanjc@google.com>
+Cc: Paolo Bonzini <pbonzini@redhat.com>
+Cc: kvm@vger.kernel.org
+Cc: virtualization@lists.linux.dev
 
- Documentation/userspace-api/ioctl/ioctl-number.rst |    4 ++++
- 1 file changed, 4 insertions(+)
+ Documentation/userspace-api/ioctl/ioctl-number.rst |    6 ++++++
+ 1 file changed, 6 insertions(+)
 
---- linux-next-20261111.orig/Documentation/userspace-api/ioctl/ioctl-number.rst
-+++ linux-next-20261111/Documentation/userspace-api/ioctl/ioctl-number.rst
-@@ -147,6 +147,8 @@ Code  Seq#    Include File
- 'G'   00-0F  xen/gntalloc.h, xen/gntdev.h                              conflict!
- 'H'   00-7F  linux/hiddev.h                                            conflict!
- 'H'   00-0F  linux/hidraw.h                                            conflict!
-+'H'   00-0F  lib/test_hmm_uapi.h                                       conflict!
-+                                                                       <mailto:linux-mm@kvack.org>
- 'H'   01     linux/mei.h                                               conflict!
- 'H'   02     linux/mei.h                                               conflict!
- 'H'   03     linux/mei.h                                               conflict!
-@@ -252,6 +254,8 @@ Code  Seq#    Include File
- 'f'   81-8F  linux/fsverity.h
- 'g'   00-0F  linux/usb/gadgetfs.h
- 'g'   20-2F  linux/usb/g_printer.h
-+'g'   01-0F  mm/gup_test.h                                             conflict!
-+                                                                       <mailto:linux-mm@kvack.org>
- 'h'   00-7F                                                            conflict! Charon filesystem
-                                                                        <mailto:zapman@interlan.net>
- 'h'   00-1F  linux/hpet.h                                              conflict!
+--- linux-next-20261113.orig/Documentation/userspace-api/ioctl/ioctl-number.rst
++++ linux-next-20261113/Documentation/userspace-api/ioctl/ioctl-number.rst
+@@ -200,6 +200,7 @@ Code  Seq#    Include File
+ 'M'   01-03  drivers/scsi/megaraid/megaraid_sas.h
+ 'M'   00-03  drivers/video/fbdev/mb862xx/mb862xxfb.h
+ 'M'   00-0F  drivers/video/fsl-diu-fb.h                                conflict!
++'M'   01-03  xen/interface/xen-mca.h                                   conflict!
+ 'N'   00-1F  drivers/usb/scanner.h
+ 'N'   40-7F  uapi/linux/nvme_ioctl.h
+ 'N'   80-83  uapi/linux/ntsync.h and uapi/linux/nvme_ioctl.h           conflict!
+@@ -239,6 +240,7 @@ Code  Seq#    Include File
+ 'U'   64     drivers/usb/misc/usbtest.c                                conflict!
+ 'V'   all    linux/vt.h                                                conflict!
+ 'V'   all    linux/videodev2.h                                         conflict!
++'V'   00-1F  linux/vboxguest.h                                         conflict!
+ 'V'   C0     linux/ivtvfb.h                                            conflict!
+ 'V'   C0     linux/ivtv.h                                              conflict!
+ 'V'   C0     media/si4713.h                                            conflict!
+@@ -357,6 +359,7 @@ Code  Seq#    Include File
+ '|'   80-9F  samples/                                                  Any sample and example drivers
+ 0x80  00-1F  linux/fb.h
+ 0x81  00-1F  linux/vduse.h
++             drivers/vdpa/vdpa_user/vduse_dev.c
+ 0x89  00-07  asm-generic/sockios.h
+ 0x89  06-07  linux/sockios.h
+ 0x89  0B-DF  linux/sockios.h
+@@ -398,8 +401,11 @@ Code  Seq#    Include File
+                                                                        <mailto:kvm@vger.kernel.org>
+ 0xAE  40-FF  linux/kvm.h                                               Kernel-based Virtual Machine
+                                                                        <mailto:kvm@vger.kernel.org>
++0xAE  C6     arch/x86/kvm/x86.c                                        X86 KVM
+ 0xAE  20-3F  linux/nitro_enclaves.h                                    Nitro Enclaves
+ 0xAF  00-1F  linux/fsl_hypervisor.h                                    Freescale hypervisor
++0xAF  00-8F  linux/vhost.h                                             conflict!
++0xAF  31-32  drivers/vhost/test.h                                      conflict!
+ 0xB0  all                                                              RATIO devices in development:
+                                                                        <mailto:vgo@ratio.de>
+ 0xB1  00-1F                                                            PPPoX
 
