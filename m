@@ -2,55 +2,43 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A8663606A334
-	for <xen-devel@archiver.kernel.org>; Sat, 14 Nov 2026 06:46:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2456C606A327
+	for <xen-devel@archiver.kernel.org>; Sat, 14 Nov 2026 10:39:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=susede1 header.b=IRlQRwNY;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=susede1 header.b=IVmNh9of
-Received: from list by lists.xenproject.org with outflank-mailman.1488442.1690387 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Ozu7z0Kj
+Received: from list by lists.xenproject.org with outflank-mailman.1488568.1690413 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xS7WH-0002OG-0r; Sat, 14 Nov 2026 06:45:49 +0000
+	id 1xSB9l-0001wR-Bj; Sat, 14 Nov 2026 10:38:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1488442.1690387; Sat, 14 Nov 2026 06:45:48 +0000
+Received: by outflank-mailman (output) from mailman id 1488568.1690413; Sat, 14 Nov 2026 10:38:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xS7WG-0002O4-S8; Sat, 14 Nov 2026 06:45:48 +0000
-Received: by outflank-mailman (input) for mailman id 1488442;
- Sat, 14 Nov 2026 06:45:47 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xSB9l-0001wJ-6Q; Sat, 14 Nov 2026 10:38:49 +0000
+Received: by outflank-mailman (input) for mailman id 1488568;
+ Sat, 14 Nov 2026 10:38:48 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jgross@suse.com>) id 1xS7WF-0002Ny-9T
- for xen-devel@lists.xenproject.org; Sat, 14 Nov 2026 06:45:47 +0000
+ (envelope-from <brauner@kernel.org>) id 1xSB9j-0001wD-TQ
+ for xen-devel@lists.xenproject.org; Sat, 14 Nov 2026 10:38:47 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xS7WE-000gsV-MS
- for xen-devel@lists.xenproject.org; Sat, 14 Nov 2026 07:45:46 +0100
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xSB9j-006Lq1-AW
+ for xen-devel@lists.xenproject.org; Sat, 14 Nov 2026 11:38:47 +0100
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jgross@suse.com>)
- id 6af8037d-bab6-0a2a0a5309dd-0a2a450489be-16
- for <xen-devel@lists.xenproject.org>; Sat, 14 Nov 2026 07:45:46 +0100
-Received: from [195.135.223.130] (helo=smtp-out1.suse.de)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jgross@suse.com>)
- id 6af80399-b57f-0a2a45040019-c387df82dc2c-3
- for <xen-devel@lists.xenproject.org>; Sat, 14 Nov 2026 07:45:46 +0100
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 26F2022132;
- Sat, 14 Nov 2026 06:45:44 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id D306F134C3;
- Sat, 14 Nov 2026 06:45:43 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id wurwKZcD+Gr1SgAAD6G6ig
- (envelope-from <jgross@suse.com>); Sat, 14 Nov 2026 06:45:43 +0000
+ (envelope-from <brauner@kernel.org>)
+ id 6af839cb-2eae-0a2a0a5409dd-0a2a450c94d0-22
+ for <xen-devel@lists.xenproject.org>; Sat, 14 Nov 2026 11:38:47 +0100
+Received: from [172.234.252.31] (helo=sea.source.kernel.org)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <brauner@kernel.org>)
+ id 6af83a35-f479-0a2a450c0019-aceafc1fcd7a-3
+ for <xen-devel@lists.xenproject.org>; Sat, 14 Nov 2026 11:38:46 +0100
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id 967DE413E2;
+ Sat, 14 Nov 2026 10:38:44 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3CE541F000C4;
+ Sat, 14 Nov 2026 10:38:38 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -59,118 +47,61 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding"; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1794638745; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=fucPP4GY9TYbpnSOLboBx5LigJVO7vm1ZbjZjrxd49g=;
-	b=IRlQRwNYWgcBlvDkO1+9QVbpACg5XFFoyNpJ5OYzzoJbgqL2+ZaOg8eLzdVlR2wxAHOT34
-	+YSutWbM0APnGddpYAp4aPDDhy1nlqvB4UgXTK89w8zNqRMiQ1qUJcqaZPUgAsquXx/PS3
-	hUJ4oL0NGsUmkE6hXuQymlJdfGur2jI=
-Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.com header.s=susede1 header.b=IVmNh9of
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1794638744; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=fucPP4GY9TYbpnSOLboBx5LigJVO7vm1ZbjZjrxd49g=;
-	b=IVmNh9ofnS4WCXTPjidUheDvLwK79GEhZDIWaDRPWEFs07sybFEryfNgpoNFEk0BhdluIz
-	80GtVdWJ3lF4pwTMXmYVdH5ot+z+K+AcVlW+mJj5p0U3aeRuyTmEX8xgVx2nClmsvTGPbC
-	IzT8s2gkKOaB24C+QgWqoRbJKnZNTJc=
-From: Juergen Gross <jgross@suse.com>
-To: torvalds@linux-foundation.org
-Cc: linux-kernel@vger.kernel.org,
-	xen-devel@lists.xenproject.org,
-	sstabellini@kernel.org
-Subject: [GIT PULL] xen: branch for v7.4-rc3
-Date: Sat, 14 Nov 2026 07:45:43 +0100
-Message-ID: <20261114064543.1079564-1-jgross@suse.com>
-X-Mailer: git-send-email 2.56.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:From:To:Cc:Subject:References:In-Reply-To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794652724;
+	bh=f0g6P6hsNAkBmmk1dhVL/yqmLVxvhNEJRF73P8Hffz8=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=Ozu7z0Kj1tHIOD24bkiz6twDQ59H2LG047bnoA597yeAQD+7loV9AVNQq6/EfNxmA
+	 RAV43n2Xp3rFswhwCvrdVPjCv2twIaBECTwXwjSyPBKOEecSJccYi16iPUffdcy+kX
+	 2KsSYHa0TM5q3kVm9Et0sKjXOYpfJER4fjfggVZYik+Tlk8iLg4VYcTfwPq6hSWTb+
+	 FqNtagBKrLecsr9nZyvU/RGWRSqwrFdabGVO12uSaA2rrQgzv6ROpsZEsD9jdN00pG
+	 9AVp7r2bVcIF0aGX9qNUD3D/9g7VuGmG+jesekdRYeqNRWWlH0zjJp4ZwQJyQCg3y0
+	 VLaLdAkJXNuOg==
+Date: Sat, 14 Nov 2026 11:38:35 +0100
+From: Christian Brauner <brauner@kernel.org>
+To: Christoph Hellwig <hch@lst.de>
+Cc: linux-fsdevel@vger.kernel.org, Jann Horn <jannh@google.com>, 
+	Chris Mason <mason@kernel.org>, Josef Bacik <josef@toxicpanda.com>, linux-block@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-nvme@lists.infradead.org, 
+	Alexander Viro <viro@zeniv.linux.org.uk>, Jan Kara <jack@suse.cz>, linux-scsi@vger.kernel.org, 
+	target-devel@vger.kernel.org, driver-core@lists.linux.dev, linux-mm@kvack.org, 
+	bpf@vger.kernel.org, linux-security-module@vger.kernel.org, selinux@vger.kernel.org, 
+	apparmor@lists.ubuntu.com, linux-nfs@vger.kernel.org, netdev@vger.kernel.org, 
+	fuse-devel@lists.linux.dev, linux-efi@vger.kernel.org, xen-devel@lists.xenproject.org, 
+	ocfs2-devel@lists.linux.dev, linux-s390@vger.kernel.org, linuxppc-dev@lists.ozlabs.org, 
+	linux-usb@vger.kernel.org, Amir Goldstein <amir73il@gmail.com>, 
+	linux-erofs@lists.ozlabs.org, linux-kselftest@vger.kernel.org, stable@vger.kernel.org
+Subject: Re: [PATCH RFC 01/41] loop: refuse backing files that aren't open
+ for reading
+Message-ID: <20261114-erfrieren-vorher-taktieren-ef10b08e210f@brauner>
+References: <20261110-work-loop-pseudo-v1-0-4c998976c6c7@kernel.org>
+ <20261110-work-loop-pseudo-v1-1-4c998976c6c7@kernel.org>
+ <20261111145555.GA9996@lst.de>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 26F2022132
-X-Spam-Level: 
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-12.01 / 50.00];
-	SUSE_INTERNAL_BYPASS(-9.00)[];
-	BAYES_HAM(-3.00)[100.00%];
-	MID_CONTAINS_FROM(1.00)[];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	TO_DN_NONE(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	FROM_EQ_ENVFROM(0.00)[];
-	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	DNSWL_BLOCKED(0.00)[2a07:de40:b281:106:10:150:64:167:received,2a07:de40:b281:104:10:150:64:97:from];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:dkim,imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo];
-	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	RCVD_COUNT_TWO(0.00)[2];
-	RCVD_TLS_ALL(0.00)[];
-	RCPT_COUNT_THREE(0.00)[4];
-	DKIM_TRACE(0.00)[suse.com:+]
-X-Spam-Score: -12.01
-X-purgate-ID: tlsNG-ebf023/1794638746-530CDB50-987CBE8F/35/110847
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20261111145555.GA9996@lst.de>
+X-purgate-ID: tlsNG-d25034/1794652727-51F33A5B-3AC01A3A/0/0
 X-purgate-type: clean
-X-purgate-size: 1285
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=4.0.1
+X-purgate-size: 525
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
+	autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Linus,
+On Wed, Nov 11, 2026 at 03:55:55PM +0100, Christoph Hellwig wrote:
+> But i wonder if we want a thin wrapper around ->read_iter/_write_iter
+> to do this check so that it matches the normal read/write path?
 
-Please git pull the following tag:
+Yes, I had thought about that as well. We could use
+vfs_iocb_iter_{read,write}() for that but it's not thin at all and
+brings in the LSM into these codepaths where they shouldn't meddle.
 
- git://git.kernel.org/pub/scm/linux/kernel/git/xen/tip.git for-linus-7.4a-rc3-tag
-
-xen: branch for v7.4-rc3
-
-It contains a bunch of isolated fixes of Xen related drivers.
-
-
-Thanks.
-
-Juergen
-
- drivers/xen/gntdev.c       |  8 ++++++--
- drivers/xen/grant-table.c  | 48 +++++++++++++++++++++++++++++++++++++++-------
- drivers/xen/platform-pci.c | 14 +++++++-------
- drivers/xen/privcmd.c      | 15 +++++++++++++++
- drivers/xen/pvcalls-back.c | 26 +++++++++++++++----------
- 5 files changed, 85 insertions(+), 26 deletions(-)
-
-Andrey Misiurov (1):
-      xen/gntdev: fix deadlock between map ioctl and mmap
-
-Jan Beulich (1):
-      Xen/gnttab: improve error handling in gnttab_dma_{alloc,free}_pages()
-
-Juergen Gross (1):
-      xen: don't allow gnttab_dma_[alloc|free]_pages() in PV guest
-
-Kavitha Daula (1):
-      xen/grant-table: annotate on-stack work in gnttab_unmap_refs_sync()
-
-Qihang (1):
-      xen/privcmd: fix double free when an irqfd is shut down twice
-
-Teshan Kannangara (1):
-      xen/platform-pci: Disable device before releasing PCI regions
-
-Yehyeong Lee (2):
-      xen/pvcalls: unwind pvcalls_new_active_socket() step by step
-      xen/pvcalls: destroy the per-socket workqueue on release
+So maybe as a follow-up series with a new
+vfs_iocb_iter_{read,write}_raw() or whatever. Feel free to make a
+suggestion.
 
