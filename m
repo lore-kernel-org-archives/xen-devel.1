@@ -2,52 +2,43 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F3E59606A327
-	for <xen-devel@archiver.kernel.org>; Sat, 14 Nov 2026 21:45:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 89A7E606A333
+	for <xen-devel@archiver.kernel.org>; Sat, 14 Nov 2026 21:55:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=KnrLqGAW
-Received: from list by lists.xenproject.org with outflank-mailman.1489515.1690974 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=FIy92zB+
+Received: from list by lists.xenproject.org with outflank-mailman.1489533.1690984 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSLYG-0006al-FN; Sat, 14 Nov 2026 21:44:48 +0000
+	id 1xSLi4-00009u-AI; Sat, 14 Nov 2026 21:54:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1489515.1690974; Sat, 14 Nov 2026 21:44:48 +0000
+Received: by outflank-mailman (output) from mailman id 1489533.1690984; Sat, 14 Nov 2026 21:54:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSLYG-0006aa-CC; Sat, 14 Nov 2026 21:44:48 +0000
-Received: by outflank-mailman (input) for mailman id 1489515;
- Sat, 14 Nov 2026 21:44:47 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1dc04fa9d0006d3f@swg.vates.tech>)
- id 1xSLYE-0006aU-Jm
- for xen-devel@lists.xenproject.org; Sat, 14 Nov 2026 21:44:47 +0000
+	id 1xSLi4-00009n-6d; Sat, 14 Nov 2026 21:54:56 +0000
+Received: by outflank-mailman (input) for mailman id 1489533;
+ Sat, 14 Nov 2026 21:54:54 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <brauner@kernel.org>) id 1xSLi2-00008a-6L
+ for xen-devel@lists.xenproject.org; Sat, 14 Nov 2026 21:54:54 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xSLYC-007Otv-DE
- for xen-devel@lists.xenproject.org; Sat, 14 Nov 2026 22:44:44 +0100
-Received: from [10.42.69.7] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1dc04fa9d0006d3f@swg.vates.tech>)
- id 6af8d5f1-bab6-0a2a0a5309dd-0a2a45079938-24
- for <xen-devel@lists.xenproject.org>; Sat, 14 Nov 2026 22:44:44 +0100
-Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1dc04fa9d0006d3f@swg.vates.tech>)
- id 6af8d646-b4ea-0a2a45070019-b9ff1c239377-3
- for <xen-devel@lists.xenproject.org>; Sat, 14 Nov 2026 22:44:38 +0100
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a1dc04fa9d0006d3f.004 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Sat, 14 Nov 2026 21:44:36 +0000
-Received: from leducb.tail4c4a28.ts.net
- (lfbn-gre-1-371-96.w90-112.abo.wanadoo.fr [90.112.87.96])
- (Authenticated sender: baptiste.le-duc)
- by mail2.vates.fr (Postfix) with ESMTPSA id D9F2681F96;
- Sat, 14 Nov 2026 22:44:34 +0100 (CET)
+ id 1xSLi1-00A3GC-6F
+ for xen-devel@lists.xenproject.org; Sat, 14 Nov 2026 22:54:53 +0100
+Received: from [10.42.69.6] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <brauner@kernel.org>)
+ id 6af8d897-8faa-0a2a0a5109dd-0a2a4506cb94-8
+ for <xen-devel@lists.xenproject.org>; Sat, 14 Nov 2026 22:54:53 +0100
+Received: from [172.234.252.31] (helo=sea.source.kernel.org)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <brauner@kernel.org>)
+ id 6af8d8ab-195a-0a2a45060019-aceafc1f9742-3
+ for <xen-devel@lists.xenproject.org>; Sat, 14 Nov 2026 22:54:52 +0100
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id E15E0447B9;
+ Sat, 14 Nov 2026 21:54:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2BCA71F000C4;
+ Sat, 14 Nov 2026 21:54:43 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -56,95 +47,66 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=W4R7HyVOUuL/vKZC/L2/PKt+YEhuS++aKp5MIMK2ya4=;
- h=from:subject:date:message-id:to:cc:mime-version:content-transfer-encoding:feedback-id;
- b=KnrLqGAWAhJEik3AklfK/W77+Vt4vGDrBcd2D+Xc1ixNHNz9RC9bni5To/Q66qap24TvMvBhC
- fAjmODOiYiQGj2LTOrQcv5v1bE0+uV8Nlz+QatXS1+WE8Gl2mwOt1j5QHM9TS2WTtQyhAT1NnI/
- 6E8v8sISWzYuXDdu8f/3xC/3mDtANv58bUaUtsaczDabci1TjRSN7AGZe6C82rY6UNyyztrgonL
- HCOiaFr8hNIeGO6BdCyt/Rpj7pYE4g6amxJVBJYT+SBcZhydLfdJ3oaGrt9++EHppE/lWchoQ3G
- ko0EQU1v2Vjdb7aIKOJiyT0CcBgQoBCcaFRHtZImDQNQ==
-X-Zone-Loop: 976b161cbbad4c5af438248f3a50c61a21113cfc6a00
-x-campaign-type: default
-x-transaction-id: 3d04caa3-557f-4517-bcb8-0d51455a1dd1
-x-swg-uid: 01-13ba1d1a-e542-4aa2-9dab-f1c1584cf0e6
-X-Mailer: Sweego
-Message-ID:
- <1794692676.8631fc262581453bbf619ec5b2062170.1a1dc04fa9d0006d3f@vates.tech>
-x-swg-bid: 1794692676.8631fc262581453bbf619ec5b2062170.1a1dc04fa9d0006d3f
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-To: xen-devel@lists.xenproject.org
-Cc: Baptiste Le Duc <baptiste.le-duc@vates.tech>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
-Subject: [PATCH] Drop the CREDITS file
-Date: Sat, 14 Nov 2026 22:44:23 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:From:To:Cc:Subject:References:In-Reply-To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794693290;
+	bh=MU5XNgGhJm4qGtdrFglh8iv5ciWWvcUh9TpKkyBJYjo=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=FIy92zB+Q6XXV11Bx9r1d6hblgiehsd1O2WYa4ANqHuoaMNzzpTo/kyfrrl5vWJqU
+	 ntQlUQLehZaQBgb5PHB5XgsgvcpzvDKacjzaPI1D0mhsgTUlE44bsX7wUuFZlbKEVy
+	 2bf9iGRkxrODGLkzXesChHlOpfKM10Ar21sYj0wFzavx9W02CRh/nVciBf1lbn33of
+	 RFNAI7U3T2zGoe8QK8NctZ4IPimWP2/h2Wjo3dajkFGo7hKnMdTyDdQrkd/NIOxJeq
+	 4KueXIk2XzkN6Oe+3U49dByhB2/gIMk6xuZPod2J7aymfou+3hjeBLx6QqpqyydE14
+	 fsnMkL8jCu8lw==
+Date: Sat, 14 Nov 2026 22:54:42 +0100
+From: Christian Brauner <brauner@kernel.org>
+To: Chris Down <chris@chrisdown.name>
+Cc: linux-fsdevel@vger.kernel.org, Jann Horn <jannh@google.com>, 
+	Chris Mason <mason@kernel.org>, Josef Bacik <josef@toxicpanda.com>, 
+	Christoph Hellwig <hch@lst.de>, linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-nvme@lists.infradead.org, Alexander Viro <viro@zeniv.linux.org.uk>, 
+	Jan Kara <jack@suse.cz>, linux-scsi@vger.kernel.org, target-devel@vger.kernel.org, 
+	driver-core@lists.linux.dev, linux-mm@kvack.org, bpf@vger.kernel.org, 
+	linux-security-module@vger.kernel.org, selinux@vger.kernel.org, apparmor@lists.ubuntu.com, 
+	linux-nfs@vger.kernel.org, netdev@vger.kernel.org, fuse-devel@lists.linux.dev, 
+	linux-efi@vger.kernel.org, xen-devel@lists.xenproject.org, ocfs2-devel@lists.linux.dev, 
+	linux-s390@vger.kernel.org, linuxppc-dev@lists.ozlabs.org, linux-usb@vger.kernel.org, 
+	Amir Goldstein <amir73il@gmail.com>, linux-erofs@lists.ozlabs.org, linux-kselftest@vger.kernel.org, 
+	Alexander Mikhalitsyn <alex@amutable.com>
+Subject: Re: [PATCH RFC v2 17/42] securityfs: use fc_init_pseudo()
+Message-ID: <20261114-wohnprojekt-rational-ersetzbar-b338c88cba70@brauner>
+References: <20261114-work-loop-pseudo-v2-0-98639a2286fb@kernel.org>
+ <20261114-work-loop-pseudo-v2-17-98639a2286fb@kernel.org>
+ <20261114120555.cbfaf8ab8a92fb25@chrisdown.name>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1794692675061
-X-purgate-ID: tlsNG-ef75cf/1794692684-34AC8AE4-F5B48F29/0/0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20261114120555.cbfaf8ab8a92fb25@chrisdown.name>
+X-purgate-ID: tlsNG-16d1c6/1794693293-FE87577B-1EECD9B9/0/0
 X-purgate-type: clean
-X-purgate-size: 1406
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
-	version=4.0.1
+X-purgate-size: 862
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
+	autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-CREDITS was introduced in 2013 to record Jeremy Fitzhardinge's pvops
-work when he was dropped from MAINTAINERS. No other entry has been added
-since, although many maintainers have stepped down, and nothing in the
-tree refers to it.
+On Sat, Nov 14, 2026 at 12:05:55PM -0800, Chris Down wrote:
+> Not a big deal, but userspace can see that node too, as
+> /sys/kernel/security/apparmor/.null. Opening it by path works in current
+> kernels and fails with EACCES after this patch. Now, I don't know of
+> anything that does that, but selinuxfs gets SB_I_NODEV cleared again in
+> the next patch for the same kind of node, so I think we should do the
+> same thing here. If not, it would be good to have a line in the
+> changelog saying that opening it by path is meant to stop working.
 
-A credits file holding a single 13 year old entry gives a misleading
-picture of who contributed to Xen. The git history, which keeps earlier
-MAINTAINERS entries, is the actual record, so retire the file rather
-than leave it unmaintained. Therefore, Jeremy's credit is not lost
-because his work remains recorded in the git history.
+Yeah, seems fine. Though, afaict aa refuses every read and write on
+.null in aa_file_perm(). So this change only moves the EACCES from
+read()/write() to open(). But I guess open() failing might be an issue,
+idk.
 
-Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
----
- CREDITS | 16 ----------------
- 1 file changed, 16 deletions(-)
- delete mode 100644 CREDITS
-
-diff --git a/CREDITS b/CREDITS
-deleted file mode 100644
-index 3ddcdbaac6..0000000000
---- a/CREDITS
-+++ /dev/null
-@@ -1,16 +0,0 @@
--    This is at least a partial credits-file of people that have
--    contributed to the Xen project.  It is sorted by name and
--    formatted to allow easy grepping and beautification by
--    scripts.  The fields are: name (N), email (E), web-address
--    (W), PGP key ID and fingerprint (P), description (D), and
--    snail-mail address (S).
--    Thanks,
--
--            Xen team
------------
--
--N: Jeremy Fitzhardinge
--E: jeremy@goop.org
--W: http://www.goop.org/~jeremy
--P: 1B40B6D0
--D: Linux pvops
--- 
-2.56.0
-
+I really really dislike this device node abuse on for both lsms. It's
+sketchy as hell.
 
