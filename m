@@ -2,41 +2,47 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D75E5606A339
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 17:17:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 03C97606A323
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 17:27:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=BgcEBeD0
-Received: from list by lists.xenproject.org with outflank-mailman.1491330.1692167 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=selector1 header.b=f++2UuCG
+Received: from list by lists.xenproject.org with outflank-mailman.1491343.1692175 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xT0KD-0005Rs-6o; Mon, 16 Nov 2026 17:17:01 +0000
+	id 1xT0UM-0007by-7h; Mon, 16 Nov 2026 17:27:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1491330.1692167; Mon, 16 Nov 2026 17:17:01 +0000
+Received: by outflank-mailman (output) from mailman id 1491343.1692175; Mon, 16 Nov 2026 17:27:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xT0KD-0005Rl-3d; Mon, 16 Nov 2026 17:17:01 +0000
-Received: by outflank-mailman (input) for mailman id 1491330;
- Mon, 16 Nov 2026 17:17:00 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <amir73il@gmail.com>) id 1xT0KC-0005Rf-22
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 17:17:00 +0000
+	id 1xT0UM-0007br-58; Mon, 16 Nov 2026 17:27:30 +0000
+Received: by outflank-mailman (input) for mailman id 1491343;
+ Mon, 16 Nov 2026 17:27:28 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xT0UK-0007bl-Op
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 17:27:28 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xT0KB-00Bntw-1z
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 18:16:59 +0100
+ id 1xT0UK-00CpG7-4y
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 18:27:28 +0100
 Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <amir73il@gmail.com>)
- id 6afb3a86-2eae-0a2a0a5409dd-0a2a4506a996-6
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 18:16:58 +0100
-Received: from [209.85.208.46] (helo=mail-ed1-f46.google.com)
+ (envelope-from <andrew.cooper@citrix.com>)
+ id 6afb3ce3-8faa-0a2a0a5109dd-0a2a4506c700-44
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 18:27:28 +0100
+Received: from [52.101.56.34]
+ (helo=BN1PR04CU002.outbound.protection.outlook.com)
  by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <amir73il@gmail.com>)
- id 6afb3a8a-195a-0a2a45060019-d155d02ead74-3
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 18:16:58 +0100
-Received: by mail-ed1-f46.google.com with SMTP id
- 4fb4d7f45d1cf-6b577addee9so5914741a12.1
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 09:16:58 -0800 (PST)
+ (envelope-from <andrew.cooper@citrix.com>)
+ id 6afb3cfe-195a-0a2a45060019-34653822ce69-3
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 18:27:27 +0100
+Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
+ by SA6PR03MB7950.namprd03.prod.outlook.com (2603:10b6:806:432::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.13; Mon, 16 Nov
+ 2026 17:27:21 +0000
+Received: from CH8PR03MB8275.namprd03.prod.outlook.com
+ ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
+ ([fe80::a70d:dc32:bba8:ce37%4]) with mapi id 15.21.0615.013; Mon, 16 Nov 2026
+ 17:27:21 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -45,299 +51,176 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1794849418; cv=none;
-        d=google.com; s=arc-20260327;
-        b=pcgjnD7vyeTrvZftbV6bntC4CCFRV4ruYyTozw38wguZ3xGCTbe+1rO4F3OYCrOKDa
-         cqqmZjurYdrrBEP8yV9WhuE+8k4lsqjcMCkZVGF4sdHNtCtXSX4q49tliXdy0dUTDAcm
-         bbANOPiwniDJphCpvL4A1NKCEOBhlAQ40y6CZDTiZtwe8U0R5pIyP2GS7BFIctzWwh0i
-         /RHR+cZLPikf7iiuqi/v9mWDs6ybwViF95FZU3bVAm776WhON+ijI4vD/EV+B5quTp2Q
-         ImrBRhL8gWclYwFOyc1KJeur071fqrpJMIST3Jh6clOcGe4qleEO0t2C+4fY8hzCuz8G
-         Y4jA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=cvhlwTnVB5qObUR1donDWKQFcI5lhmN3ZPbArGLp5LQ=;
-        fh=A/QZTOwH9bnBjude2HrSym+VigDmJeRXLehGjG1n24g=;
-        b=RsubAN+BXby2B3foueSrH+MOmPdn9Z9u+bs5MMdVhEZgp8FaDXaW0XjEuQgJIJv4L8
-         KsWVTZYx8sYSw4+w9NrfM100/J6pmcGMQBAVA8STroTGgvAKzE+qJWbiVs/rA9GeE+QB
-         m6g3bJ3L1eiMpM7vk59dIKN/pGpTQ1F9nu4PZ3zU849+UutKv4FY+YB5rIZT68bKd+TP
-         Bxs9FMhpHRE3lkte+4Z9MdkY7fACxMKXTUmhkImbzLIjJePUZ0/vhLjIazLKReA7DUAK
-         7qjSfkKNd7JO+JDQKt/nKsaI7F2LAT+XIxSiZH0kvGWZdfIr4FRxKo4oCRUb33w+WO18
-         bKSg==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794849418; x=1795454218; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=cvhlwTnVB5qObUR1donDWKQFcI5lhmN3ZPbArGLp5LQ=;
-        b=BgcEBeD0xW4+QlMIWTWSNbIE+wySSAO0tH4noOo8xIzObyWfQvoysQM5Z0DHS8A6ih
-         +fkibnZmZW5rYTpLXqtehKb++y03dtXe1ujMe8vyTkWu3eBQPVVnISwupYTRtgQf/l+Z
-         2zxavETj/ZZrzocUQE1TpYptIPWyx1mWB6DdOGdNGK/hC38dtzYgZhbnrzMrXgTIzJ0I
-         sE5aSqCA5G7EuLt5VJMLrAlCTgXu9o0+NJogNWdTBytN3miRRA09EpDYjxfQiA0ATduU
-         aGrgaVruOOgLcISPJAQfuAowLQ4kkG/6yoMktG9TvsB6GsxulN4Ny6cWLaU5KzBZBgj7
-         jLPg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794849418; x=1795454218;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=cvhlwTnVB5qObUR1donDWKQFcI5lhmN3ZPbArGLp5LQ=;
-        b=yX80m4rjUAfQ21R/IOrnSqyCZ6WJ5IVvBZuBYs0//NZpFuEjgNt/QIte6fc7UTx+Ra
-         ZkNQNdrUXn4YMhBlGVUKZWcMlIY9FaI/lB294n6orzWr0Pumm2v0BGbR0wawKoBuTuOz
-         KKDps1QDcC5tFFbd7b42uhEtnGNfKtsFcVbzor/3LUAlQqYGwNOP2DH4KO9BLqfZFXCJ
-         HPm52qvXJucvPwXZ1cCMjqESJ0GybW8q9g9ItC9tB1143VXD15K2FwolTneZGUE1NMHz
-         wLPECNIc97fQFDmA3f5jWb9w0qGA836JAqgq+5FAEEK6JKGv3HbVMqWNX+0LCszB2FbB
-         v3xA==
-X-Forwarded-Encrypted: i=1; AL+hErEf0fuGODdZ7lueJJ5jzEy69CIW20W7tpWKIP4hiwwcvWJcBtLuh5xOG5XkrS7YdyMIhPtXFSBk+6s=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z9Inv4f+5/V8iJJrIylza3AW7mFNKV/DVIdl69CgOmkOXhfizcH
-	KKlfZ/eGzJdlGCU7Jpxx2mHIlY3oMT51n2jl4KDI/6pE4wTdKhLh8+CcVYxp1KeWT+KSTgscejQ
-	QEsFa5ItEiOGCJ5i0nmCeuWbPDKrimc0=
-X-Gm-Gg: AYBFou1kOXrR2qmvzm7I+DZRQE31CXdHPtOt0+w8tDXQ+mCyUULYAJPHh2LAA5Nnqe0
-	ZpnB3/bFK2fSauBf3pl1Ph/4dgn4s7gJlFc7n6UKboinn1y0cE95XgDlo1cVUpqqiHBCbX8bEgj
-	0XcXIzBl+d/i1+gf5dWedkpuL6Of6JXitwsEvCNvFRznP8getLvqjhKlSbB7JRXNd2TNdlLv8P+
-	V/NH18UaHNhYm5WFOPWtnAQn1GHRAq2HwlslrGR2Yh3aITW7KDyK2musEQmzApj4QqZvCbgnMfq
-	/y4a9oiOTFlv3fgeDGICfLKilptm1Qh8baRQPvbrtQgC2fo29JRVDTv4mcwGqvaYUjjUdBiaFbE
-	53/joYGFX5TRM77UdGrU97kK4iupyz1JTeOGG92Drw20WyWy+rf1wqrfW5xi6GSGmFXKPhoIKrB
-	ENmY1hFeXve/sRawg=
-X-Received: by 2002:aa7:c258:0:b0:6b7:d69a:a3d3 with SMTP id
- 4fb4d7f45d1cf-6b7d69aa8fbmr5089335a12.39.1794849418257; Mon, 16 Nov 2026
- 09:16:58 -0800 (PST)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=wStmPDkOkbahI4aIlfdQX9Go9ZAVBjlY+QSiC1LpeVSNNOR28lfVu09wjj5k5Zhmgf3DTuUbSHSIhUgStGvJcYRhBbgFzdB/A0NHIQZKS+228328hYaq3xuZIqD0w0hzXDAQHGdAh2IrTjbQrX9QPmqPunUFznCVB6DqERuULa7Qfnnfh5u/Lr7s+Yida+boiGnCEsN/ZjemKrW1zXgb4MLzd/B8yum+OQK8xWl3xhIx9eMWRp1HkSn0sFku8IlMS/fm1Dg+IS85kkCDvsqBFoXAdjAYEf4dKGAcBST4Ac2GHOu62aFvhbRoIFQlP+8phPdK7zSzMYX+6BIDky67xw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=I7VyZ0E9T178nEzqqQkuwsaD+DcwoFaqI4duEm8u6XM=;
+ b=ifrLG8RGlQrabE5payM8pgj2QrBMCw529JOWVoDMrCJx3Xnu3EGbPe85jF+VvciIdl8QxBx3DDQ5D1+MI9cd5naWcJ7lqOYzDxQIIcONzApUhw2EI8gYa6b1bWqsZJBtad/6ekQ56X7E4bFRmk6hzckXcIAQwe31aBRffNXxDX3J5yIxrijOjoOL9+j20sjpbelM8LMOD1QtDoy+Y3fVu1mzlb4QBOU7Dl6MyXBxzLaj0XDmxU2BLadqG9dbsVHZ4l1MTlIX1IN0fuShXBS/ytFYFL1pAXmNJi/A4JJssg3BGY+SMvRM4PC0nYeJQuLpEQJhDQdbJMU8orvsDwbzyQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=I7VyZ0E9T178nEzqqQkuwsaD+DcwoFaqI4duEm8u6XM=;
+ b=f++2UuCGrxVEeHjCony0Rtp1sl0AZvRhwR8/QIPTYx2K134FVFCGtUcTWXfsv9Tng0RWHvImfo3R1OG6z/34e0W/B2ldivOXX7KUDGU7r3SoHC7BWF1Ppvj4U1CwPLi2xBKE8OYIet+Ii2k6UsGmgg+HJYH2FfAOBxsKy24a3oc=
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+Message-ID: <5f9e8365-74c4-43a3-9732-109905b7eee3@citrix.com>
+Date: Mon, 16 Nov 2026 17:27:16 +0000
+User-Agent: Mozilla Thunderbird
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Teddy Astie <teddy.astie@vates.tech>
+Subject: Re: [PATCH v4 1/3] common: introduce "brk" allocator
+To: Jan Beulich <jbeulich@suse.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <640c0ea5-fbbf-436d-b150-4537cbe98fdf@suse.com>
+ <43e47410-7d5c-43c1-bff5-8e1ce3746b7d@suse.com>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <43e47410-7d5c-43c1-bff5-8e1ce3746b7d@suse.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: LO4P265CA0103.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:2c3::6) To CH8PR03MB8275.namprd03.prod.outlook.com
+ (2603:10b6:610:2b9::7)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <20261116-work-loop-pseudo-v3-0-8cbbea1cf34f@kernel.org> <20261116-work-loop-pseudo-v3-34-8cbbea1cf34f@kernel.org>
-In-Reply-To: <20261116-work-loop-pseudo-v3-34-8cbbea1cf34f@kernel.org>
-From: Amir Goldstein <amir73il@gmail.com>
-Date: Mon, 16 Nov 2026 18:16:46 +0100
-X-Gm-Features: AclHuK_s2Kpb4OdbgPngYJl9gLHjfhlAmiJMqLtxRnpTDibz-Ni4SZJspSV9laM
-Message-ID: <CAOQ4uxjJVgy-skUbbScfz=eAEATf=iMpqRHNshX=eKu3oiwnrA@mail.gmail.com>
-Subject: Re: [PATCH RFC v3 34/44] selftests/ovl: test data-only layers on
- pseudo filesystems
-To: Christian Brauner <brauner@kernel.org>
-Cc: linux-fsdevel@vger.kernel.org, Jann Horn <jannh@google.com>, 
-	Chris Mason <mason@kernel.org>, Josef Bacik <josef@toxicpanda.com>, Christoph Hellwig <hch@lst.de>, 
-	linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-nvme@lists.infradead.org, Alexander Viro <viro@zeniv.linux.org.uk>, 
-	Jan Kara <jack@suse.cz>, linux-scsi@vger.kernel.org, target-devel@vger.kernel.org, 
-	driver-core@lists.linux.dev, linux-mm@kvack.org, bpf@vger.kernel.org, 
-	linux-security-module@vger.kernel.org, selinux@vger.kernel.org, 
-	apparmor@lists.ubuntu.com, linux-nfs@vger.kernel.org, netdev@vger.kernel.org, 
-	fuse-devel@lists.linux.dev, linux-efi@vger.kernel.org, 
-	xen-devel@lists.xenproject.org, ocfs2-devel@lists.linux.dev, 
-	linux-s390@vger.kernel.org, linuxppc-dev@lists.ozlabs.org, 
-	linux-usb@vger.kernel.org, linux-erofs@lists.ozlabs.org, 
-	linux-kselftest@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-16d1c6/1794849418-FE07177B-E56E5294/0/0
-X-purgate-type: clean
-X-purgate-size: 6384
-X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FORGED_GMAIL_RCVD,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY autolearn=unavailable autolearn_force=no
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|SA6PR03MB7950:EE_
+X-MS-Office365-Filtering-Correlation-Id: e949ad75-2b2a-4607-d03a-08df4406deff
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|23010399003|366016|1800799024|376014|18002099003|22082099003|6133799003|11063799006|4143699003|10067099003|261021121427099003|56012099006|261009223027099003|261102123227099003;
+X-Microsoft-Antispam-Message-Info:
+	+bHtweNPwYTmVDg72Vvw+IOlVweFLuTC7E0jp+spNOHHvxsWqg2ZwFEQKoDGlmbO3tcvehSr8w+lNmS5Drjc+5EPQolx2oW26BJ8629SdiMSfD2KlPU2HBkvcWV/8xbdsRDKmR+V3jpW3+n/7lkZ6ob4Fg7rIQpEEfFfQi0EW9T/l+eT4l2V7CS/Id+2SDT60Z1qOeI2Svj14sRCuZGEiJl7R2BH3gIfyH87rNWlEKfgOcLr2gV7vhi+zWhc7EP1s0nLE+sX8RdlURJpb5pCm5zNVTyzoO3R4HHFx4fMX/w5pGZq58bAmxxpPKRkHAgZG2wMKVhs4nEgJFQWmBxkPzFl1C0267AF+vykVjhxXhC4CNlplGoZlvlJRZiOVf2BhhZgvAtBy+NAyinRltMsvyGv0OJrOhfP3K9sjuEGqTUHS8aHM9/b8gifhcBt3quXh+zE81Tc83w5yfazbmtipnC7Yyau2QC6XznpWAswSDuwlA00qjwCZPg2NCrPqj0lrilxHx8LhPRdwPSDlvJvgx7zMimMxKn7Z1m+e2Rd92Op/G7aIeP6rtX+DIlTnZ+uDOyfcuBUcpV0tr0rIVGRJnKszXTEf1RfIU7jYSGlmhTTh9y87fgmMUj+2ZKJO8vey7d9WF2yoZWpC4e0dAocVPbtk0P7vQTNsM/sIRW6Lgc=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(366016)(1800799024)(376014)(18002099003)(22082099003)(6133799003)(11063799006)(4143699003)(10067099003)(261021121427099003)(56012099006)(261009223027099003)(261102123227099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?TUxYdWdteTFKNldmVVBpVFFnRzkrQm1sVHNEc3lLNEcwaVJPVkdqRjc2NTBW?=
+ =?utf-8?B?VHJJdnQ4WUdKemd2Q2c0Q25ZTW9ibStyeVh4L0xybmtjSlRiQTR6QTdhN3Rx?=
+ =?utf-8?B?akRwYWl6WUNBeDJLUVcrWlBMeEQwbGFSZldHdzMyTnJxaHJhbW9ITElXQmVo?=
+ =?utf-8?B?TFV6S1FHN1ArRHVSdm9QU2NGNWdVNWV2dVhsMmY3UGFkdVRIZ1p4d3o5Nk1a?=
+ =?utf-8?B?MFB6UDJ6c2ZqeUZTZUI0REN3YVp4dENIdEhhdGRaazUyZzdYT1A0dHdQVEor?=
+ =?utf-8?B?Qmp3ajFkSGthNnhJZklJck1PRzVzVUZOdVpmV1pETXZVZDQ5RzArdjB6OG04?=
+ =?utf-8?B?b0ljeTlvWStLUnhwd1I0Q2lZTElNVEJGVUZMYUhnTENxbUNndktzMlZ4a29a?=
+ =?utf-8?B?OHczcGpBY1lGK3BSRjlteHBkRjA4STRGVkNLUEdqUm0va0xtWXUwTFo1Vzll?=
+ =?utf-8?B?eTVDRXJjL0svanR0NENHS3RwQmhEQk5KMFNPb0FLWHZsazBCMDhxbzMzSlVH?=
+ =?utf-8?B?b0xPRjlQNitoL1pkb084VXlZMWxCNjJGMjJCTXVVL2hSL3Z1bm5BL1BPRDdX?=
+ =?utf-8?B?eGY0RDhHVW4zQStaNzRIU3lKdFRONGJqSXNUREJqVjlicmpxR3Z0M1NuTlU4?=
+ =?utf-8?B?VGxISlVDdWN2V2Z5R3FLdFB6MG9uVGk3R0tOUXZ3SndjTFB1dlVWSDVXZ0hh?=
+ =?utf-8?B?QzEvdlRzeFBaR3RYVHloVWVobkY1YkRzREJXSGFDSk96VkU0Q09oNlJIL0hV?=
+ =?utf-8?B?cjNmM043VDhKR3BDM2NqNGFuSWxPaXRyUjhObXZsS2s3TjdlYTBGdHdBc2Zz?=
+ =?utf-8?B?aC9BSTc5QS8zTnphZ2w4elpEck1JeUIzWXhkS3FHaUdHY2ZQc0JSK1loalBP?=
+ =?utf-8?B?NVZvQ3RKYVIvaERkdmlkeWFjTHl2QXdiOGg5RFdhTEFkQlhoN2FWZ2t1dTMv?=
+ =?utf-8?B?SE1UMGlkbDBEaklBODNIYzZXdU5wVUZpSS9sMmJzV1VpUmVEemxKOEgrZHN5?=
+ =?utf-8?B?T2dMcDE5ZmRlZHViZVJzRWpYMSs0VEs5Rm5aK3k3akhXQ09IU3pkK3RmbER4?=
+ =?utf-8?B?L3ZkekJFeHhyOE5aQ1ViSEpjVVV4WS9jczU4NEpTNC84ekVXdWZ6Yzh2NTYx?=
+ =?utf-8?B?NWJCSllSOXBEMk5FdjBTVUJhS1pIY1g4WFlvV1lyL2JYZWI5S1I3d0V4RTY0?=
+ =?utf-8?B?K2JHUmNodDduVk5rbzJScFB2YW5hOXhzVGEwTTRrQkZqZjlpczlOdElkVlM0?=
+ =?utf-8?B?aEwxRVZJdGwzcjFrV3RnSWt4WHZxc3dpQmU4VTE4aWxlSkl6R2tqbUlYQUFK?=
+ =?utf-8?B?d3Z3TjVQQ05nNlJKaGdibVBkZGtkYkRVWjV5RC9HVWg3RW1jaFIyNGJ2NDd4?=
+ =?utf-8?B?RWF2ZjVMN29kUzVMaysxK1hlY3ZmTGJ5bXo0QmpZZVhxR05rL1p5RG1EWFVn?=
+ =?utf-8?B?QmdBQ2RCWjFONlNYOEJXc0xvWFppdUNZSXJYMmhjb1lhSUlMb1BCMld1a1Nv?=
+ =?utf-8?B?VFhrcE45aTdFUnlJWkdmRGhPNE95RGFOYkd6dm5NTE5WVFNMUWU5RzBTYnFJ?=
+ =?utf-8?B?QjZCbkZOUXdrOXRMRlNPWU1TT1dmcFBvNDczTGJJN0t5YlF4NHE0Y0lpdmtR?=
+ =?utf-8?B?cS91M2NoWUVhVTNrL3lMeUtsZ3UwVWYwbmRDc3VQNnJVMzRlVEdzOEZwRXk3?=
+ =?utf-8?B?ZEhWamlxdnJaSm9SQlIzYVpzUHJScnNhRGtuRUlXOEI3MXRxaGczODhkcWNl?=
+ =?utf-8?B?RkcrMDhaSXJPS3AzNHcwV3dRTklvdTcrV2pXRUExZlB2L2hyZ1BKbVJNckFC?=
+ =?utf-8?B?THNpK1UxWG1BN3NZWlJjNzBIa1QyMTkvWE1NWEhiS25kZC9uTFZNZ21Qdjdu?=
+ =?utf-8?B?clZKNlVMMG5GWkUwaDUvcnF4RVJVTmdqcDlzaGR2aEdFNVl2NncxL2dEcDkw?=
+ =?utf-8?B?WXB5WjFseVlBRis4cEFxdDFndTl0ZCtlK05XQldRS0N6a1pmS1BtVXhYYTk1?=
+ =?utf-8?B?Q2lEWms0VXlEYm5DckZjQjNQaHAyN2pXUnpQRVlsQzh6ejR1T2NVVlZIaTFC?=
+ =?utf-8?B?UTd1VGc4NFlxZENsRDdoUmt4Q1lpNDk5R3lJb2hjeVdzVm4rQW9KekJXSzlz?=
+ =?utf-8?B?cTFySlAzUnZpNjVOcG8zWHpUT1FNU0VxOTIrSnYxVlFXb21Xb2oxMHJyZEgy?=
+ =?utf-8?B?dXIrR21oRjZzZXRxNFBicFJldGY3M3R3WEN6dHh5SGJBcmhrcWtIbFhVdU5k?=
+ =?utf-8?B?TzA1MXB3YmE2dk4vQmExSlRPS0hXUmVTcTM1eVl4RU9lclVrRjNydGN0bHlt?=
+ =?utf-8?B?RFpLejhISDU5aTBxSEkwejJlZDRJcFE4Z2NxVWxtYzViTjZvSW1LZz09?=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e949ad75-2b2a-4607-d03a-08df4406deff
+X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Nov 2026 17:27:21.3381
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: rfznmYXE2YMKMxOeoVURVfGDvmesUkC6tmuQ64CqXzmMgHEIcUiRDe7GAM6DEWyze/fmgq/vYqtayVcDK3Ua9uy8c4+ck5sJLrQwhGTSzig=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA6PR03MB7950
+X-purgate-ID: tlsNG-16d1c6/1794850048-1F6C877B-D8C8A6F1/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 722
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Mon, Nov 16, 2026 at 12:10=E2=80=AFPM Christian Brauner <brauner@kernel.=
-org> wrote:
+On 03/11/2026 12:49 pm, Jan Beulich wrote:
+> ... to replace (on x86) ebmalloc(), and then to find further use(s) to
+> allow recovering memory which is needed very early (and hence needs
+> setting up statically), but may not fully be used (or not be used at all).
 >
-> Add tests that overlayfs refuses data-only layers on pseudo filesystems:
+> Note that unlike free_ebmalloc_unused_mem(), brk_free_unused() (once
+> other code is converted) will be able to free part of the BRK space even
+> in the xen.efi case on x86. That would happen if BRK space extends across
+> a 2Mb boundary, and actual use stops before that boundary.
 >
-> - sysfs and procfs via the "::" separator in "lowerdir=3D"
-> - sysfs and procfs via "datadir+" by path
-> - sysfs and procfs via "datadir+" by file descriptor
-> - tmpfs as data-only layer
-> - sysfs as regular lower layer
->
-> The last two must keep mounting.
->
-> Signed-off-by: Christian Brauner (Amutable) <brauner@kernel.org>
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
 
-Reviewed-by: Amir Goldstein <amir73il@gmail.com>
-
-> ---
->  .../selftests/filesystems/overlayfs/.gitignore     |   1 +
->  .../selftests/filesystems/overlayfs/Makefile       |   1 +
->  .../filesystems/overlayfs/pseudo_datadir.c         | 131 +++++++++++++++=
-++++++
->  3 files changed, 133 insertions(+)
->
-> diff --git a/tools/testing/selftests/filesystems/overlayfs/.gitignore b/t=
-ools/testing/selftests/filesystems/overlayfs/.gitignore
-> index b343cc430051d..e1410fee2269d 100644
-> --- a/tools/testing/selftests/filesystems/overlayfs/.gitignore
-> +++ b/tools/testing/selftests/filesystems/overlayfs/.gitignore
-> @@ -3,3 +3,4 @@ dev_in_maps
->  set_layers_via_fds
->  idmapped_mounts
->  automount_in_layer
-> +pseudo_datadir
-> diff --git a/tools/testing/selftests/filesystems/overlayfs/Makefile b/too=
-ls/testing/selftests/filesystems/overlayfs/Makefile
-> index 382a59bda5e70..ace75f5627e0f 100644
-> --- a/tools/testing/selftests/filesystems/overlayfs/Makefile
-> +++ b/tools/testing/selftests/filesystems/overlayfs/Makefile
-> @@ -10,6 +10,7 @@ TEST_GEN_PROGS :=3D dev_in_maps
->  TEST_GEN_PROGS +=3D set_layers_via_fds
->  TEST_GEN_PROGS +=3D idmapped_mounts
->  TEST_GEN_PROGS +=3D automount_in_layer
-> +TEST_GEN_PROGS +=3D pseudo_datadir
->
->  include ../../lib.mk
->
-> diff --git a/tools/testing/selftests/filesystems/overlayfs/pseudo_datadir=
-.c b/tools/testing/selftests/filesystems/overlayfs/pseudo_datadir.c
-> new file mode 100644
-> index 0000000000000..3b59fd3e9f5c2
-> --- /dev/null
-> +++ b/tools/testing/selftests/filesystems/overlayfs/pseudo_datadir.c
-> @@ -0,0 +1,131 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +#define _GNU_SOURCE
-> +
-> +#include <errno.h>
-> +#include <fcntl.h>
-> +#include <sched.h>
-> +#include <stdbool.h>
-> +#include <stdio.h>
-> +#include <sys/mount.h>
-> +#include <sys/stat.h>
-> +#include <unistd.h>
-> +
-> +#include "kselftest_harness.h"
-> +#include "../wrappers.h"
-> +
-> +static int setup_tmp(void)
-> +{
-> +       if (unshare(CLONE_NEWNS))
-> +               return -errno;
-> +       if (sys_mount(NULL, "/", NULL, MS_REC | MS_PRIVATE, NULL))
-> +               return -errno;
-> +       if (sys_mount("tmpfs", "/tmp", "tmpfs", 0, NULL))
-> +               return -errno;
-> +       if (mkdir("/tmp/lower", 0755) || mkdir("/tmp/data", 0755) ||
-> +           mkdir("/tmp/merged", 0755))
-> +               return -errno;
-> +       return 0;
-> +}
-> +
-> +/* Mount an overlayfs with the legacy "lowerdir=3D" option. */
-> +static int mount_lowerdir(const char *lowerdir)
-> +{
-> +       char opts[256];
-> +
-> +       snprintf(opts, sizeof(opts), "lowerdir=3D%s", lowerdir);
-> +       if (sys_mount("overlay", "/tmp/merged", "overlay", MS_RDONLY, opt=
-s))
-> +               return -errno;
-> +       if (umount2("/tmp/merged", 0))
-> +               return -errno;
-> +       return 0;
-> +}
-> +
-> +static int set_layer(int fd_context, const char *key, const char *path,
-> +                    bool by_fd)
-> +{
-> +       int fd, ret =3D 0;
-> +
-> +       if (!by_fd) {
-> +               if (sys_fsconfig(fd_context, FSCONFIG_SET_STRING, key, pa=
-th, 0))
-> +                       return -errno;
-> +               return 0;
-> +       }
-> +
-> +       fd =3D open(path, O_DIRECTORY | O_CLOEXEC);
-> +       if (fd < 0)
-> +               return -errno;
-> +       if (sys_fsconfig(fd_context, FSCONFIG_SET_FD, key, NULL, fd))
-> +               ret =3D -errno;
-> +       close(fd);
-> +       return ret;
-> +}
-> +
-> +/* Create an overlayfs with "lowerdir+" and "datadir+" through fsconfig.=
- */
-> +static int fsmount_layers(const char *lower, const char *data, bool by_f=
-d)
-> +{
-> +       int fd_context, fd_mnt, ret;
-> +
-> +       fd_context =3D sys_fsopen("overlay", FSOPEN_CLOEXEC);
-> +       if (fd_context < 0)
-> +               return -errno;
-> +
-> +       ret =3D set_layer(fd_context, "lowerdir+", lower, by_fd);
-> +       if (ret)
-> +               goto out;
-> +       ret =3D set_layer(fd_context, "datadir+", data, by_fd);
-> +       if (ret)
-> +               goto out;
-> +
-> +       if (sys_fsconfig(fd_context, FSCONFIG_CMD_CREATE, NULL, NULL, 0))=
- {
-> +               ret =3D -errno;
-> +               goto out;
-> +       }
-> +
-> +       fd_mnt =3D sys_fsmount(fd_context, FSMOUNT_CLOEXEC, 0);
-> +       if (fd_mnt < 0)
-> +               ret =3D -errno;
-> +       else
-> +               close(fd_mnt);
-> +out:
-> +       close(fd_context);
-> +       return ret;
-> +}
-> +
-> +TEST(datadir_sysfs)
-> +{
-> +       ASSERT_EQ(setup_tmp(), 0);
-> +
-> +       EXPECT_EQ(mount_lowerdir("/tmp/lower::/sys/kernel"), -EINVAL);
-> +       EXPECT_EQ(fsmount_layers("/tmp/lower", "/sys/kernel", false), -EI=
-NVAL);
-> +       EXPECT_EQ(fsmount_layers("/tmp/lower", "/sys/kernel", true), -EIN=
-VAL);
-> +}
-> +
-> +TEST(datadir_procfs)
-> +{
-> +       ASSERT_EQ(setup_tmp(), 0);
-> +
-> +       EXPECT_EQ(mount_lowerdir("/tmp/lower::/proc"), -EINVAL);
-> +       EXPECT_EQ(fsmount_layers("/tmp/lower", "/proc", false), -EINVAL);
-> +       EXPECT_EQ(fsmount_layers("/tmp/lower", "/proc", true), -EINVAL);
-> +}
-> +
-> +TEST(datadir_tmpfs)
-> +{
-> +       ASSERT_EQ(setup_tmp(), 0);
-> +
-> +       EXPECT_EQ(mount_lowerdir("/tmp/lower::/tmp/data"), 0);
-> +       EXPECT_EQ(fsmount_layers("/tmp/lower", "/tmp/data", false), 0);
-> +       EXPECT_EQ(fsmount_layers("/tmp/lower", "/tmp/data", true), 0);
-> +}
-> +
-> +TEST(lowerdir_sysfs)
-> +{
-> +       ASSERT_EQ(setup_tmp(), 0);
-> +
-> +       EXPECT_EQ(mount_lowerdir("/sys/kernel:/tmp/lower"), 0);
-> +       EXPECT_EQ(mount_lowerdir("/sys/kernel::/tmp/data"), 0);
-> +       EXPECT_EQ(fsmount_layers("/sys/kernel", "/tmp/data", false), 0);
-> +       EXPECT_EQ(fsmount_layers("/sys/kernel", "/tmp/data", true), 0);
-> +}
-> +
-> +TEST_HARNESS_MAIN
->
-> --
-> 2.53.0
->
+Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
