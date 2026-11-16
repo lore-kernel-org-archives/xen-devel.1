@@ -2,43 +2,43 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D8274608379F
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 11:11:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E114F6073B1E
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 11:11:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Tsq4iuTK
-Received: from list by lists.xenproject.org with outflank-mailman.1490633.1691627 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=N0jLVzlU
+Received: from list by lists.xenproject.org with outflank-mailman.1490638.1691637 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSuby-0006sw-G7; Mon, 16 Nov 2026 11:10:58 +0000
+	id 1xSuc5-0007E5-Od; Mon, 16 Nov 2026 11:11:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1490633.1691627; Mon, 16 Nov 2026 11:10:58 +0000
+Received: by outflank-mailman (output) from mailman id 1490638.1691637; Mon, 16 Nov 2026 11:11:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSuby-0006sp-DL; Mon, 16 Nov 2026 11:10:58 +0000
-Received: by outflank-mailman (input) for mailman id 1490633;
- Mon, 16 Nov 2026 11:10:56 +0000
+	id 1xSuc5-0007Dx-Kj; Mon, 16 Nov 2026 11:11:05 +0000
+Received: by outflank-mailman (input) for mailman id 1490638;
+ Mon, 16 Nov 2026 11:11:03 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <brauner@kernel.org>) id 1xSubw-0006ny-NK
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 11:10:56 +0000
+ (envelope-from <brauner@kernel.org>) id 1xSuc3-0007A0-U3
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 11:11:03 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xSubw-00CwWk-00
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 12:10:56 +0100
-Received: from [10.42.69.7] (helo=localhost)
+ id 1xSuc3-000NCB-AO
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 12:11:03 +0100
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <brauner@kernel.org>)
- id 6afae4b8-8faa-0a2a0a5109dd-0a2a45079a7c-38
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 12:10:55 +0100
-Received: from [172.105.4.254] (helo=tor.source.kernel.org)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6afae4b1-bab6-0a2a0a5309dd-0a2a4504cf04-42
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 12:11:03 +0100
+Received: from [172.234.252.31] (helo=sea.source.kernel.org)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <brauner@kernel.org>)
- id 6afae4be-b4ea-0a2a45070019-ac6904febb62-3
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 12:10:55 +0100
+ id 6afae4c5-b57f-0a2a45040019-aceafc1fa84c-3
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 12:11:02 +0100
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 82A4762972;
+ by sea.source.kernel.org (Postfix) with ESMTP id 5FCBB462F8;
+ Mon, 16 Nov 2026 11:11:01 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B256B1F000C4;
  Mon, 16 Nov 2026 11:10:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 416851F000C5;
- Mon, 16 Nov 2026 11:10:47 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,24 +49,24 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="From:Date:Subject:References:In-Reply-To:To:Cc"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794827454;
-	bh=BY87H/RnXilQq13XAhtvlglG6136WbkekRPXJvo2I3U=;
+	s=k20260515; t=1794827461;
+	bh=+1Ha5ASlzziEtpwFumlx1jHdeafb0Uk6ledTOHN/+BQ=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=Tsq4iuTKRhulkomOLwfJCGY7RSUTospv3OqWJbcYQQFjEoKupjSCxw6Yy3rPq4pB9
-	 +LrXvKA4rBly7ufMqZGGURI/PkATv40fMYkjtpqcL/tNHRyeTByFbJTZmujbH0d7/Q
-	 HXCq2zQGevHC5tGi3GM/YXAFadxr211gKZs+efK2OMgZEBHzheaSEy+WXOjCe8RO5r
-	 TJ2bRHJjwjB/ITjzevhBLxBTbfuTMUOIvIjO5xZFZMBmnzadWnSvOl1+uUswfItRJz
-	 cvn+ZB4G6vMTJzmJfSaWRJJZDIQQXhCz05Bm/gc8LbBO51UdG9XgtkJRygpVExqJdR
-	 0R8YByohYWTAQ==
+	b=N0jLVzlUI4/sjWNYOt0rXQTtyrgdKf5Y0kTKuip2dZyDj+4g/Ze7OYrLUiUsPPEye
+	 CjUN4xKWTGOixjV4KcD/jZgCYY6N/+4Z8JHcT7hLcQcrx8q02xe7tYXpY71+xQEHQi
+	 DyFRbLRY7DB9BBOX6LHXYX8dkO5Z1aVdfUmhEIvTLaHSBWeb+l8zD8roBzYXX4rqBT
+	 yE74qV89FpLs5TJU9EwHKj4pCX4TE4X3Kq2ekdC7rThFYLz4eNiPgoOfUI1au18Vyn
+	 pkNLVmlzaNlj37i5uxQXej7cjjXciz8n3fqCszEa5y6nV+Axoq1qL8ATP7YBXt6Xvi
+	 rOa1KxM4tYdvg==
 From: Christian Brauner <brauner@kernel.org>
-Date: Mon, 16 Nov 2026 12:05:12 +0100
-Subject: [PATCH RFC v3 39/44] target: fileio: refuse files on pseudo
- filesystems as backing files
+Date: Mon, 16 Nov 2026 12:05:13 +0100
+Subject: [PATCH RFC v3 40/44] fuse: refuse files on pseudo filesystems as
+ passthrough backing files
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261116-work-loop-pseudo-v3-39-8cbbea1cf34f@kernel.org>
+Message-Id: <20261116-work-loop-pseudo-v3-40-8cbbea1cf34f@kernel.org>
 References: <20261116-work-loop-pseudo-v3-0-8cbbea1cf34f@kernel.org>
 In-Reply-To: <20261116-work-loop-pseudo-v3-0-8cbbea1cf34f@kernel.org>
 To: linux-fsdevel@vger.kernel.org
@@ -85,20 +85,19 @@ Cc: Jann Horn <jannh@google.com>, Chris Mason <mason@kernel.org>,
  linuxppc-dev@lists.ozlabs.org, linux-usb@vger.kernel.org, 
  Amir Goldstein <amir73il@gmail.com>, linux-erofs@lists.ozlabs.org, 
  linux-kselftest@vger.kernel.org, 
- "Christian Brauner (Amutable)" <brauner@kernel.org>, 
- Sashiko <sashiko-bot@kernel.org>, Chris Down <chris@chrisdown.name>
+ "Christian Brauner (Amutable)" <brauner@kernel.org>
 X-Mailer: b4 0.17-dev-ce4c1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2223; i=brauner@kernel.org;
- h=from:subject:message-id; bh=11gfWGw/ZwPDfVFtqD+CkdePFs+glK5xVNQbp3ek2T8=;
- b=owGbwMvMwCU28Zj0gdSKO4sYT6slMWT9etzj8cs54I/rlC7xuCARluu5a1aodKvyswTvkD6zv
- 1dfVPVMRykLgxgXg6yYIotDu0m43HKeis1GmRowc1iZQIYwcHEKwETirBj+e2jMajfMFJqpekRG
- aqlo40Pe5TUVy7c/+DD7XlLpsaZOLoa/knzXPN++Mv3K99Ndbp9ymKjRnUWue9I2sb1mqWq5pLu
- bHQA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3093; i=brauner@kernel.org;
+ h=from:subject:message-id; bh=Qkr0BYXyDd+I7xUdfK34CTesF8mQyxzVRm4u7QW4pjc=;
+ b=owGbwMvMwCU28Zj0gdSKO4sYT6slMWT9etz7YYleq5CAw4X4sGW+b2Uz1jbJrH8r5vBSK3KaB
+ H95VsCxjlIWBjEuBlkxRRaHdpNwueU8FZuNMjVg5rAygQxh4OIUgImcncTI8K+t9HbCCqNJecsr
+ BR3atl39NOkGq5CQkcDVYiVj2Y+rnRkZWv6WG+e4sr/I3r2+LPNhivaEm6fb0rycv4m/V7qxpnQ
+ JFwA=
 X-Developer-Key: i=brauner@kernel.org; a=openpgp;
  fpr=4880B8C9BD0E5106FC070F4F7B3C391EFEA93624
-X-purgate-ID: tlsNG-ef75cf/1794827455-3C817AE4-42ABF560/0/0
+X-purgate-ID: tlsNG-ebf023/1794827463-514D3B50-1B651277/0/0
 X-purgate-type: clean
-X-purgate-size: 2225
+X-purgate-size: 3095
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -107,59 +106,77 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-fd_dev_name can name any file including files on procfs or sysfs. The
-initiator then gets to read and write kernel interfaces through the LUN
-with kernel credentials. Refuse files on pseudo filesystems just like
-loop does by switching to file_check_backing().
+The fuse server can register any regular file as a backing file. procfs
+and binfmt_misc files are already refused by the stacking depth check as
+both set s_stack_depth to FILESYSTEM_MAX_STACK_DEPTH. sysfs and the
+other pseudo filesystems aren't. Reads and writes of the fuse file would
+then be done on the pseudo file with the fuse server's credentials.
+Refuse files on pseudo filesystems just like loop does.
 
-Do the same for the protection file. With DIF protection enabled the
-fileio backend keeps the protection information in a second file. It is
-named like the backing file with ".protection" appended and
-fd_init_prot() opens it by path. Whatever that path leads to was taken
-without any checks.
+Note that the backing file is only registered here and opened again for
+every fuse file that uses it. Only its path is used and O_PATH file
+descriptors are allowed since commit efad7153bf93 ("fuse: allow O_PATH
+fd for FUSE_DEV_IOC_BACKING_OPEN"). So pass FMODE_PATH to
+file_check_backing() to keep them working.
 
-Note that the helper only accepts regular files and block devices as
-backing file and only regular files as protection file. So far the
-backing file could be anything with ->read_iter() and ->write_iter()
-including character devices and FIFOs.
+The file that reads and writes are actually done on is opened in
+fuse_passthrough_open() with the flags of the fuse file. So check that
+file as well and pass the mode the fuse file was opened with. It has
+the same path as the registered file so files on pseudo filesystems are
+already refused. But this also makes sure that the backing file
+implements ->read_iter() if the fuse file is opened for reading and
+->write_iter() if it is opened for writing. Like the other failures to
+set up passthrough this fails the open with EIO.
 
-Reported-by: Sashiko <sashiko-bot@kernel.org>
-Closes: https://lore.kernel.org/all/sashiko-outbox-206765@kernel.org
-Reviewed-by: Chris Down <chris@chrisdown.name>
-Tested-by: Chris Down <chris@chrisdown.name>
+Reviewed-by: Amir Goldstein <amir73il@gmail.com>
+Suggested-by: Amir Goldstein <amir73il@gmail.com>
+Link: https://lore.kernel.org/all/CAOQ4uxhGxpBtMZ5kfuzR1tQAewiecoX7UjXQRo91QjJHH9T_Yw@mail.gmail.com
 Signed-off-by: Christian Brauner (Amutable) <brauner@kernel.org>
 ---
- drivers/target/target_core_file.c | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
+ fs/fuse/backing.c     | 4 ++++
+ fs/fuse/passthrough.c | 7 +++++++
+ 2 files changed, 11 insertions(+)
 
-diff --git a/drivers/target/target_core_file.c b/drivers/target/target_core_file.c
-index a5391e57e9aa5..c747cc4a647ff 100644
---- a/drivers/target/target_core_file.c
-+++ b/drivers/target/target_core_file.c
-@@ -145,8 +145,8 @@ static int fd_configure_device(struct se_device *dev)
- 	}
- 	fd_dev->fd_file = file;
+diff --git a/fs/fuse/backing.c b/fs/fuse/backing.c
+index 8c21a8a74efb9..7527f3ecb90dc 100644
+--- a/fs/fuse/backing.c
++++ b/fs/fuse/backing.c
+@@ -147,6 +147,10 @@ static int fuse_backing_open_file(struct fuse_conn *fc, struct fuse_backing *fb,
+ 		if (inode->i_sb->s_stack_depth >= fc->max_stack_depth)
+ 			return -ELOOP;
  
--	if (!file->f_op->read_iter || !file->f_op->write_iter) {
--		pr_err("FILEIO: %s lacks ->read_iter or ->write_iter\n",
-+	if (file_check_backing(file, FMODE_READ | FMODE_WRITE, S_IFBLK)) {
-+		pr_err("FILEIO: %s can't be used as a backing file\n",
- 		       fd_dev->fd_dev_name);
- 		ret = -EINVAL;
- 		goto fail;
-@@ -861,6 +861,12 @@ static int fd_init_prot(struct se_device *dev)
- 		ret = PTR_ERR(prot_file);
- 		return ret;
- 	}
++		err = file_check_backing(file, FMODE_PATH, 0);
++		if (err)
++			return err;
 +
-+	if (file_check_backing(prot_file, FMODE_READ | FMODE_WRITE, 0)) {
-+		pr_err("FILEIO: %s can't be used as a protection file\n", buf);
-+		filp_close(prot_file, NULL);
-+		return -EINVAL;
-+	}
- 	fd_dev->fd_prot_file = prot_file;
+ 		fb->type = FUSE_BACKING_PATH;
+ 		fb->path = file->f_path;
+ 		path_get(&fb->path);
+diff --git a/fs/fuse/passthrough.c b/fs/fuse/passthrough.c
+index 0ed964c479d96..fc8979ac96a21 100644
+--- a/fs/fuse/passthrough.c
++++ b/fs/fuse/passthrough.c
+@@ -183,6 +183,7 @@ int fuse_passthrough_open(struct file *file, struct fuse_backing *fb)
+ {
+ 	struct fuse_file *ff = file->private_data;
+ 	struct file *backing_file;
++	int err;
  
- 	return 0;
+ 	if (fb->type == FUSE_BACKING_EXTMAP) {
+ 		if (fuse_backing_is_dax(fb) != !!IS_DAX(file_inode(file)))
+@@ -201,6 +202,12 @@ int fuse_passthrough_open(struct file *file, struct fuse_backing *fb)
+ 	if (IS_ERR(backing_file))
+ 		return fuse_EIO("failed to open backing file (%ld)", PTR_ERR(backing_file));
+ 
++	err = file_check_backing(backing_file, file->f_mode & (FMODE_READ | FMODE_WRITE), 0);
++	if (err) {
++		fput(backing_file);
++		return fuse_EIO("invalid backing file (%d)", err);
++	}
++
+ 	ff->passthrough = backing_file;
+ 	ff->cred = get_cred(fb->cred);
+ 
 
 -- 
 2.53.0
