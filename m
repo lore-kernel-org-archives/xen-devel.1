@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5F4BF606A322
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 16:50:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 00A8D606A329
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 16:59:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=XNwgBws9
-Received: from list by lists.xenproject.org with outflank-mailman.1491291.1692140 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ezx/dzXk
+Received: from list by lists.xenproject.org with outflank-mailman.1491306.1692148 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSzuP-00082X-L2; Mon, 16 Nov 2026 16:50:21 +0000
+	id 1xT03O-0000tk-IO; Mon, 16 Nov 2026 16:59:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1491291.1692140; Mon, 16 Nov 2026 16:50:21 +0000
+Received: by outflank-mailman (output) from mailman id 1491306.1692148; Mon, 16 Nov 2026 16:59:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSzuP-00082Q-IQ; Mon, 16 Nov 2026 16:50:21 +0000
-Received: by outflank-mailman (input) for mailman id 1491291;
- Mon, 16 Nov 2026 16:50:19 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xSzuN-000826-KW
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 16:50:19 +0000
+	id 1xT03O-0000td-FO; Mon, 16 Nov 2026 16:59:38 +0000
+Received: by outflank-mailman (input) for mailman id 1491306;
+ Mon, 16 Nov 2026 16:59:37 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xT03M-0000tX-VX
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 16:59:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xSzuM-001QHQ-Q6
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 17:50:18 +0100
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xT03M-00FESH-5W
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 17:59:36 +0100
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6afb3445-bab6-0a2a0a5309dd-0a2a4501c3d0-16
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 17:50:18 +0100
-Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6afb344a-5984-0a2a45010019-d155802ba5ab-3
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 17:50:18 +0100
-Received: by mail-wm1-f43.google.com with SMTP id
- 5b1f17b1804b1-4a9a8d6cea8so272195e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 08:50:18 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb783f8220sm648545e9.5.2026.11.16.08.50.17
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6afb366d-bab6-0a2a0a5309dd-0a2a450cc442-22
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 17:59:35 +0100
+Received: from [209.85.221.43] (helo=mail-wr1-f43.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6afb3677-f479-0a2a450c0019-d155dd2bada5-3
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 17:59:35 +0100
+Received: by mail-wr1-f43.google.com with SMTP id
+ ffacd0b85a97d-48e10a70540so2042210f8f.1
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 08:59:35 -0800 (PST)
+Received: from [192.168.1.6] (user-109-243-65-71.play-internet.pl.
+ [109.243.65.71]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-49c5fe373casm22634208f8f.30.2026.11.16.08.59.34
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 16 Nov 2026 08:50:17 -0800 (PST)
+ Mon, 16 Nov 2026 08:59:34 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,115 +49,304 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Cc:Content-Language:References:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1794847818; x=1795452618; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :cc:content-language:references:to:subject:user-agent:mime-version
+        d=gmail.com; s=20260707; t=1794848375; x=1795453175; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=9PlopzTDntie1pFYTKWJpgecUbpN0L2zkM7CHaaUnVE=;
-        b=XNwgBws9e0DdRxXD9deK3PrCuuxpX4j/wVNLvI9V9RVMeeSSl/ywPd1uFaUnxroJSN
-         5FecGeeva1fdvxLdQMyu5Yu/96zBxrnxXyAMJ3dvwXsA5SOmRAMeOTRTctK/pOYpuvkm
-         7V2JFVthgGMwdMj9wOROvLen6WQGOEAw1icexhwqUGwkaDfLt5RaHJIzz+ybU9LZq7bQ
-         lMcTbN/FmBRJDbN/j+AaqDpfSEXz1PYsL8XuvzzWRJjSNZKlSdTgqsJUgAMd7wMyKkOU
-         jMr4zFpsEuVIM/we1eLLLp79J/yn4Q+6exmHCU4TkoW84p1mvazfBHB34dJ/Kw7JO2mZ
-         GYgA==
+        bh=11hWju9Np8lUvXVYnrnINx0cHMByRr1FjhFzK8LAUzA=;
+        b=ezx/dzXkmwvirrAosp+YubQJaidnl9uhaqXgLNORhcJpoQ8S/2ULd11BXeGFOiAF2e
+         5k6KiSd7pv0QJgb5Z/jVUU5ukX349+jrKm60Imq5YgwR9lKkvwXfKq8pM6S0xnTe4L+I
+         Fg4tEoV5nQZNhRJPn8rfbX1RkEoz5xd9hbzpsHo22CBJz8UoxdyUp4xwRzVqXZRWNqtw
+         B9qUKv42k9fSndwmk1mKeMofPlaxaI0sUjawTAdZob5zXv45/06SfqJbVaLkI6mwZ4QD
+         A0KKGohGXTibtQKnsluTenjlRvftIZmVY1JKkxooYnC8sABPCpJUff0qCXg+/8npQelw
+         LnFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794847818; x=1795452618;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :cc:content-language:references:to:subject:user-agent:mime-version
+        d=1e100.net; s=20260707; t=1794848375; x=1795453175;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=9PlopzTDntie1pFYTKWJpgecUbpN0L2zkM7CHaaUnVE=;
-        b=KwzbGUw3zZlRzq8BQbqxTmJljRZk9FuTBcVvlGO8lhaD7vtkCyv+pL1XdcDswQf3mI
-         IjWMQO9riFhNqk4rTOxv01UeetvS0yJ3/ssQGU7H/vRScXk1Eo3lb+JcoVfZAKCzlX4a
-         /MFa7LtPWWEtUJNfioGHtxTk/nsABQXOPGs3V2tXbStoHFUwZ2UYOgiY9Eqkz9sCwhWr
-         SE2z1Aiekppwjse2IwWEo6bQG18vKrBz/yt0yT8oujHdG6z6AYH+AFZqwlxvuBJgZaDb
-         E+P/8PTRwjJseWsoG67RjVjH0/AOkjKTduBY4upzpQXyDZofJGdAGtWIGKWmKZV5etjO
-         fzOA==
-X-Gm-Message-State: APuU4Z+fchrYSgLEFES6+u+f+9JOEbLiuDOGUR3JemLHPPqdi5cspJLT
-	Ff3gPr+HzAJf3bYXddrpej3gtK3RxEgfLD6U3iopZmP2PBptQiN7vjf7H/3oOBiNjQ==
-X-Gm-Gg: AYBFou0Jaw/hB6wvs6ka/fUM9fmOyyI2TV4pW/y+m1KpKJLIF1nvyoi80e4+B3D5yPO
-	2rjdaV4siCofd5JyqXOtwceP3Gc446A6w/ARcoj2tHXX/g/90CXMmzXP/OSsDOAJ1SJ9t8DISqK
-	kY3+USvza53oAHEteYzONqy0gq+XBkH4XE/F8bF/86M2fPDiJMTqYRr41p3x3q0D1EErpY/vsia
-	LFiUk34q7V+Y/F/zpHdRuLGMqKjIEX864e/+VmeiOv50eQYOKRYWxKgzlwYXy9KygPNghxLdXop
-	c5XGGjTmRGzgOuWmppghYicVlxRUS6Th/ghBZI7Em3SjGnB3246/vNXFVI7eL9fhWE0CiJcQ7r9
-	6KOeRGZ+3JKjP8Py1vDuAeRp9O382pBi5onO5GonucgrhquBQsdjA0fPYLcBsdOEO44Z0WYthqC
-	24Duk+qaSzYWJtwtDLB8b7lciYvfRbjDSOK6VzQcnIv4pZZWLDgADqp96Rg4EVKMxzuBDUGZMFi
-	oyjMM/ilcLdhAE5SKG76BxQ70/XJrhOi1wX+4y8CaNyaorw17Hy9lDC3Kw7oPQa1Jiwd4CtEOLa
-	32Tl1MZSm/iXXwU1aaVx0chNwjqXB2ut1qUNYk7o26DYMQGp5i10VXCNYgzzKKHr1h3/9s0C9i9
-	t1hK1/lRgzASlCL53
-X-Received: by 2002:a05:600c:81c5:b0:4a2:18c4:61a5 with SMTP id 5b1f17b1804b1-4bb7837a43fmr1688565e9.6.1794847818058;
-        Mon, 16 Nov 2026 08:50:18 -0800 (PST)
-Message-ID: <83f59bf3-89a9-400a-a34b-ff14f27c97ca@suse.com>
-Date: Mon, 16 Nov 2026 17:50:16 +0100
+        bh=11hWju9Np8lUvXVYnrnINx0cHMByRr1FjhFzK8LAUzA=;
+        b=UPqLWQnWGznEm+m6xL3Ryaxyd5/17TQXMlqHZALHjwbXLAoa6spAIIKYog2clBhkpN
+         SPwBCrn3OcZ9kc95Eyo4G3unNy+ViJRiKCKZm8h/aXTuVXwwDkLVs+usyxH2Jto+mIgO
+         0XCKVgCdo2C+ziNWBKFxUmLirKV+4n4uqOkpuiCkdvsu2fY5uksvOTSfrT1YfyJi1/bV
+         2uVDTAWineWJdtmYC73PGavNa7lTqnSG5JJhISg8hlSC753X8VMPrSeiRaRJCfr077QI
+         1ToReWyGXcTgwgtKKg0BP99zKgzwt8AumGapx1jZowMmrr9LKpBzPIO1gWGu4dsU5Q8/
+         TjaA==
+X-Forwarded-Encrypted: i=1; AL+hErF6/IztnCppY66rn5HI9FepFOjOU4ugFWx9Y+Us2SwqdBddUX52BT2cdirdt6DN4OpPxCukPyuO1VI=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z9epWg6gjNQOyxNsxIF8IRzGE+I7r/fOkouUMhjjFJ4s2lNF3hJ
+	uVYzvnx5AEesE0AqsQTZiVcy4uEl8659x7WCRDWXj6fkFvs+guS3oSyK
+X-Gm-Gg: AZFdTZdoxXB4hF/QjdWodnuvuG0ORhH8b5WnJnwa4XHCn9AO7eHkavl/oTg4qsA+lbY
+	xsVfRA+tEcZKyOLWng4au8dCMRzrHb1xdtPKVc7HUAE+FvQHtZEZjCRtoR3oJUvFQY99jx0YXv4
+	fN2V9BhjPksiSkktCCEulAxwKZUwokXj8n19oTOz2cv9cp95CtUqdqKE71SJrGH44Zqjr6hKETg
+	NKXvTRo8maA5DoiZZgWj+hxX67uvl2P4egByv9WtJF1n5Fn4yAzqRu3TD9lkzT+BRWPhSj/X8mm
+	Gu2YyB+Hgv3SilqYfts5Kn5AQCgoBFTAAi4DA05pT5PwsBqgJCRHjPrP7L+2KE8nBCw+ytwCowy
+	aZKPPPinWdf70dF5L1NvvpyvwMArzW47KAh+UxgjO6kfh/96Cv31cDD9qRk5yzp+p0XumzV5ygQ
+	k+RUvsBnq/3E3JVJYlk2gwp1e7GQluHPQo+eW/aGBGJnGoQlL3rzlI8Dgo2LVVBuB1yzfqGcVAA
+	ISsQOlo1zjVRCgc5zEjdFNzpWliqJzlskjM6d0ookL6vKon1wGQ/oqZAyjZI+eCaeDyI29ymM2T
+	aDHzUGkRvdy6X8SYRsmYnpAB1SQKlvMnCsxFg6sOQK4+eJP/qdlbFvgF9DB/cbor4HIVuDt27lW
+	bLA==
+X-Received: by 2002:a05:6000:402b:b0:48d:f237:df09 with SMTP id ffacd0b85a97d-49c73631322mr24272986f8f.21.1794848375221;
+        Mon, 16 Nov 2026 08:59:35 -0800 (PST)
+Message-ID: <8018d1c8-a6d1-4454-9aa4-f7bdf528f637@gmail.com>
+Date: Mon, 16 Nov 2026 17:59:32 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] xen/riscv: bound each IMSIC MMIO regset by the
- per-group hart slots
-To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-References: <1794842995.8631fc262581453bbf619ec5b2062170.1a1e4faaa300006d3f@vates.tech>
- <c9bbf2e0-9334-423a-ace9-9e50ee712986@gmail.com>
- <1794847326.8631fc262581453bbf619ec5b2062170.1a1e53cc2430006d3f@vates.tech>
+Subject: Re: [PATCH v8 07/26] emul/ns16x50: implement IER/IIR registers
+To: dmukhin@ford.com, xen-devel@lists.xenproject.org
+Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com,
+ julien@xen.org, michal.orzel@amd.com, roger@xenproject.org,
+ sstabellini@kernel.org, xakep.amatop@gmail.com, dmukhin@xen.org
+References: <20261111194800.1070016-1-dmukhin@ford.com>
+ <20261111194800.1070016-8-dmukhin@ford.com>
 Content-Language: en-US
-Cc: xen-devel@lists.xenproject.org
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1794847326.8631fc262581453bbf619ec5b2062170.1a1e53cc2430006d3f@vates.tech>
-Content-Type: text/plain; charset=UTF-8
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <20261111194800.1070016-8-dmukhin@ford.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1794847818-1D87F757-D104AC1E/10/78276251493
+X-purgate-ID: tlsNG-d25034/1794848375-5290EA5B-26A5BEFA/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 686
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+X-purgate-size: 7208
+X-Spam-Status: No, score=-14.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
 	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=4.0.1
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 16.11.2026 17:42, Baptiste Le Duc wrote:
-> On 11/16/26 5:34 PM, Oleksii Kurochko wrote:
+
+
+On 11/11/26 8:47 PM, dmukhin@ford.com wrote:
+> From: Denis Mukhin <dmukhin@ford.com>
 > 
->>> -        if ( mmios[i].size != expected_mmio_size )
->>> +        /* A register set must not run past the end of its group. */
->>> +        offset = mmios[i].base_addr & (group_size - 1);
->>> +        if ( mmios[i].size + offset > group_size )
->>
->> This can overflow for a bogus, huge size from the DT and then pass. As 
->> offset is always below group_size,
-> Oh yeah, thanks.
->>
->>          if ( mmios[i].size > group_size - offset )
->>
->> can't.
-> Jan, do you think it needs a new version for this overflow?
+> Add interrupt enable register emulation (IER) and interrupt identity
+> reason (IIR) register emulation to the I/O port handler.
+> 
+> Also add routines for asserting/deasserting the virtual ns16x50
+> interrupt line as a dependent on IIR code. Add vPIC handling (HVM).
+> 
+> Latch the interrupt line state to avoid poke ns16x50_irq_check() on
+> every I/O register access.
 
-I can do this adjustment as well while committing.
+ns16x50_irq_check() is still called on every access; what the latch
+avoids is calling hvm_isa_irq_{,de}assert() when the line level hasn't
+changed. Maybe "Latch the line state, so that vPIC is only told about
+level changes"
 
-Jan
+> 
+> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+> ---
+>   xen/common/emul/vuart/ns16x50.c | 112 ++++++++++++++++++++++++++++++++
+>   1 file changed, 112 insertions(+)
+> 
+> diff --git a/xen/common/emul/vuart/ns16x50.c b/xen/common/emul/vuart/ns16x50.c
+> index 2371aa32d03f..7c5cdc99cfa7 100644
+> --- a/xen/common/emul/vuart/ns16x50.c
+> +++ b/xen/common/emul/vuart/ns16x50.c
+> @@ -88,6 +88,7 @@ struct vuart_ns16x50 {
+>       const char *name;                   /* Device name */
+>       spinlock_t lock;                    /* Protection */
+>       struct xencons_interface cons;      /* Emulated RX/TX FIFOs */
+> +    bool irq_asserted;                  /* IRQ line status */
+>   };
+>   
+>   static inline void ns16x50_lock_init(struct vuart_ns16x50 *vdev)
+> @@ -113,6 +114,101 @@ static inline void ns16x50_unlock(struct vuart_ns16x50 *vdev,
+>       spin_unlock(&vdev->lock);
+>   }
+>   
+> +static bool cf_check ns16x50_iir_check_lsi(const struct vuart_ns16x50 *vdev)
+> +{
+> +    return false;
+> +}
+> +
+> +static bool cf_check ns16x50_iir_check_rda(const struct vuart_ns16x50 *vdev)
+> +{
+> +    return false;
+> +}
+> +
+> +static bool cf_check ns16x50_iir_check_thr(const struct vuart_ns16x50 *vdev)
+> +{
+> +    return false;
+> +}
+> +
+> +static bool cf_check ns16x50_iir_check_msi(const struct vuart_ns16x50 *vdev)
+> +{
+> +    return false;
+> +}
+> +
+> +/*
+> + * Get the interrupt identity reason.
+> + *
+> + * IIR is re-calculated once called, because ns16x50 always reports high
+> + * priority events first.
+> + */
+> +static uint8_t ns16x50_iir_get(const struct vuart_ns16x50 *vdev)
+> +{
+> +    /*
+> +     * Interrupt identity reasons by priority.
+> +     * NB: high priority are at lower indexes below.
+> +     */
+> +    static const struct {
+> +        bool (*check)(const struct vuart_ns16x50 *vdev);
+> +        uint8_t ier;
+> +        uint8_t iir;
+> +    } iir_by_prio[] = {
+> +        [0] = { ns16x50_iir_check_lsi, UART_IER_ELSI,   UART_IIR_LSI },
+> +        [1] = { ns16x50_iir_check_rda, UART_IER_ERDAI,  UART_IIR_RDA },
+> +        [2] = { ns16x50_iir_check_thr, UART_IER_ETHREI, UART_IIR_THR },
+> +        [3] = { ns16x50_iir_check_msi, UART_IER_EMSI,   UART_IIR_MSI },
+> +    };
+
+The priority order matches the 16550 (LSI > RDA > THRE > MSI). This
+costs up to four indirect calls on every register access, though, and
+each check is a one-liner. A plain sequence of ifs would be shorter,
+avoid the cf_check annotations, and read just as well:
+
+     if ( (ier & UART_IER_ELSI) && (regs[UART_LSR] & UART_LSR_MASK) )
+         iir = UART_IIR_LSI;
+     else if ( (ier & UART_IER_ERDAI) && !ns16x50_fifo_rx_empty(vdev) )
+         iir = UART_IIR_RDA;
+     ...
+
+I am not going to insist on that probably it isn't really big cost...
+
+> +    const uint8_t *regs = vdev->regs;
+> +    uint8_t iir = 0;
+> +    unsigned int i;
+> +
+> +    for ( i = 0; i < ARRAY_SIZE(iir_by_prio); i++ )
+> +    {
+> +        if ( (regs[UART_IER] & iir_by_prio[i].ier) &&
+> +             iir_by_prio[i].check(vdev) )
+> +            break;
+> +
+> +    }
+
+Nit: stray blank line before the closing brace.
+
+> +    if ( i == ARRAY_SIZE(iir_by_prio) )
+> +        iir |= UART_IIR_NOINT;
+> +    else
+> +        iir |= iir_by_prio[i].iir;
+> +
+> +    if ( regs[UART_FCR] & UART_FCR_ENABLE )
+> +        iir |= UART_IIR_FE;
+> +
+> +    return iir;
+> +}
+> +
+> +/*
+> + * Assert/deassert virtual ns16x50 interrupt line.
+> + */
+
+Nit: the comment should be like /* ... */ here.
+
+> +static void ns16x50_irq_check(struct vuart_ns16x50 *vdev)
+> +{
+> +    const struct vuart_info *info = vdev->info;
+> +    struct domain *d = vdev->owner;
+> +    uint8_t iir = ns16x50_iir_get(vdev);
+> +    bool asserted = !(iir & UART_IIR_NOINT);
+> +
+> +    if ( asserted == vdev->irq_asserted )
+> +        return;
+> +
+> +    vdev->irq_asserted = asserted;
+> +
+> +    if ( has_vpic(d) )
+> +    {
+> +        if ( asserted )
+> +            hvm_isa_irq_assert(d, info->irq, vioapic_get_vector);
+
+The return value (the vector) is ignored, so the get_vector callback
+isn't needed: the other callers that don't use it (rtc.c, pmtimer.c,
+dm.c) pass NULL. But I am not x86 person so probably I am missing something.
+
+> +        else
+> +            hvm_isa_irq_deassert(d, info->irq);
+> +    }
+> +    else
+> +        ASSERT_UNREACHABLE();
+
+More generally, everything below the latch is x86-specific (has_vpic(),
+hvm_isa_irq_{,de}assert(), and in 21/26 has_vioapic() and the
+edge-only hvm_ioapic_assert()), while this is common code. The common
+part only needs to say "the line is now high/low"; I'd put that behind
+a single per-arch hook, e.g.
+
+     void vuart_arch_set_irq_level(struct domain *d, unsigned int irq,
+                                   bool level);
+
+implemented for x86 with the vPIC/vIOAPIC logic above.
+
+> +
+> +    ns16x50_debug(vdev, "IRQ#%d IIR %#02x %s\n",
+
+Nit: info->irq is unsigned (%u), and %#02x doesn't pad: the 0x prefix
+counts towards the width, so it'd be %#04x.
+
+
+> +                  info->irq,
+> +                  iir,
+> +                  asserted ? "assert" : "deassert");
+> +}
+> +
+>   /*
+>    * Emulate 8-bit write access to ns16x50 register.
+>    */
+> @@ -143,6 +239,10 @@ static int ns16x50_io_write8(
+>               regs[NS16X50_REGS_NUM + UART_DLM] = val;
+>           }
+>           /* DLAB=0 */
+> +        else
+> +        {
+> +            regs[UART_IER] = val & UART_IER_ALL_INTR;
+> +        }
+
+Nit: no braces around a single statement.
+
+>           break;
+>   
+>       /* NB: Firmware (e.g. OVMF) may rely on SCR presence. */
+> @@ -155,6 +255,8 @@ static int ns16x50_io_write8(
+>           break;
+>       }
+>   
+> +    ns16x50_irq_check(vdev);
+> +
+>       return rc;
+>   }
+>   
+
+[...]
+
+> @@ -398,6 +507,7 @@ static void ns16x50_reset(struct vuart_ns16x50 *vdev)
+>       const uint16_t divisor = (UART_CLOCK_HZ / 115200) >> 4;
+>   
+>       memset(vdev->regs, 0, sizeof(vdev->regs));
+> +    vdev->irq_asserted = false;
+>   
+>       /* NB: report 115200 baud rate. */
+>       vdev->regs[NS16X50_REGS_NUM + UART_DLL] = divisor & UINT8_MAX;
+> @@ -428,6 +538,8 @@ static int ns16x50_init(void *arg)
+>   
+>       ns16x50_reset(vdev);
+>   
+> +    ns16x50_irq_check(vdev);
+> +
+
+After the reset IER is 0 and irq_asserted is false, so this returns
+early. It's harmless, but it isn't needed.
+
+>       return 0;
+>   }
+>   
+
+~ Oleksii
 
