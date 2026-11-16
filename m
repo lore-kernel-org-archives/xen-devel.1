@@ -2,48 +2,55 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 79B66606A32A
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 14:42:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CE5B0606A890
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 15:02:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=epam.com header.i=@epam.com header.a=rsa-sha256 header.s=selector1 header.b=qQsbQvKk
-Received: from list by lists.xenproject.org with outflank-mailman.1491037.1691981 (Exim 4.92)
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=susede1 header.b=p0nFWKMk;
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=susede1 header.b=lFy47sA2
+Received: from list by lists.xenproject.org with outflank-mailman.1491099.1692006 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSxu1-0007Qb-Gd; Mon, 16 Nov 2026 14:41:49 +0000
+	id 1xSyDq-00056g-Cs; Mon, 16 Nov 2026 15:02:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1491037.1691981; Mon, 16 Nov 2026 14:41:49 +0000
+Received: by outflank-mailman (output) from mailman id 1491099.1692006; Mon, 16 Nov 2026 15:02:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSxu1-0007Q6-8W; Mon, 16 Nov 2026 14:41:49 +0000
-Received: by outflank-mailman (input) for mailman id 1491037;
- Mon, 16 Nov 2026 14:41:47 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xSyDq-00056Z-9m; Mon, 16 Nov 2026 15:02:18 +0000
+Received: by outflank-mailman (input) for mailman id 1491099;
+ Mon, 16 Nov 2026 15:02:17 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Oleksii_Moisieiev@epam.com>) id 1xSxtz-0006hm-9P
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 14:41:47 +0000
+ (envelope-from <jgross@suse.com>) id 1xSyDo-00056Q-SF
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 15:02:17 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xSxty-00BMqu-Ki
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 15:41:46 +0100
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xSyDo-00FgEe-1C
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 16:02:16 +0100
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Oleksii_Moisieiev@epam.com>)
- id 6afb161a-2eae-0a2a0a5409dd-0a2a4504af3c-48
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 15:41:46 +0100
-Received: from [52.101.66.113]
- (helo=DUZPR83CU001.outbound.protection.outlook.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Oleksii_Moisieiev@epam.com>)
- id 6afb1627-b57f-0a2a45040019-346542718d39-8
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 15:41:46 +0100
-Received: from GVXPR03MB11113.eurprd03.prod.outlook.com
- (2603:10a6:150:2a9::22) by GV2PR03MB11211.eurprd03.prod.outlook.com
- (2603:10a6:150:30d::9) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.14; Mon, 16 Nov
- 2026 14:41:41 +0000
-Received: from GVXPR03MB11113.eurprd03.prod.outlook.com
- ([fe80::13a1:97f6:9d2b:f8cf]) by GVXPR03MB11113.eurprd03.prod.outlook.com
- ([fe80::13a1:97f6:9d2b:f8cf%6]) with mapi id 15.21.0592.012; Mon, 16 Nov 2026
- 14:41:41 +0000
+ (envelope-from <jgross@suse.com>)
+ id 6afb1aef-bab6-0a2a0a5309dd-0a2a4507aec4-46
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 16:02:15 +0100
+Received: from [195.135.223.130] (helo=smtp-out1.suse.de)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jgross@suse.com>)
+ id 6afb1af7-b4ea-0a2a45070019-c387df82c7ee-3
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 16:02:15 +0100
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 1F9B9221FE;
+ Mon, 16 Nov 2026 15:02:14 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id A86BC13408;
+ Mon, 16 Nov 2026 15:02:11 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id hUAkH/Ma+2qnDwAAD6G6ig
+ (envelope-from <jgross@suse.com>); Mon, 16 Nov 2026 15:02:11 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,324 +59,382 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=g8S9qF/4GD/VP5fQV5sOJQaCWqWqQ4vJaJpAKAXdtlyfGPllMvNe4tHPzxoTqZiCdGZzrW3IlQ2Ot/YHayTgyxkfXAh/hlHB6a7sO7BW0Pkv7Xkvtjc6jJtD3z2x7QCaQGUzeuL34NHVHCR38RivV6uVCO7Wj/f5nJ6wB+f6pmtW04wrDVwXAbK2kt1MNmnQFAOAwATvWVXYVhMjGXMgIbUE1uy3ovvtdY812x/aq5DiJYDzegvND/okshlzjg2GBbOUEI9C6bgzLvOlRfudY1Z3vaxz4J+paSKw8BwnBn+odpirc3T0abXVVvuqLyO2Jeqk0gP9zd47r31z7e432A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3DYIXbzLMR33EgXn2802OVqeBnV2sN4/5SZ9JohGO9E=;
- b=IF6DmR+sGym4WNWg1Lgo/mqFuAk+dhNTSPeQzfROeqfL2/xPn82Ttb68vCUyxEg/m6abw/Vo0e8GlH868cqh+HOvoEp1Yjrmy7QONL2MGqkWvqOaAks/fbH/Y6Ss/q/z3Hjk6Vsmr3SIwSjwzgPxuWvssBgtjWm1Q/V3RoWKcpwLVdwNTEgKuVPZ2aUVi/ch3Puv3al+XyVJ5qAMPgd5kRXLtyf0cQRwXFGh/N0PsKGrGfjuhH4TZjrMfoF46fTU8r3gokM79M/Inc+SSJ3TVsRk0b0hH+Mftn7g5n2MjP3zO8ZtrCLSyZa3a5QFwDqu25+pYiJkJ+eLH8T4SDmK9g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3DYIXbzLMR33EgXn2802OVqeBnV2sN4/5SZ9JohGO9E=;
- b=qQsbQvKkCeVb4AZDSI2WVDz8zRZGA4R2KiODMUHTZtKj0Sbkw6b5ZL2CCO+m34+fYybf53GXy17edWrWNPV/b0s0y1idyZ/hDcEqzo5hZOUl97P3MS1oC6HstuPECg83fafRInIla4b2n3uHvpYJYm6zkpQYBGg4umVxe1zhAMi7Mb69aK5LNnmySHmwwCj+cqI4KSLrz6CiEN8Dgf2nQGbahh1EIshI0DQYa0p9No5QUJZmgkkmMuITultnexisnKR2+RoMs08J8r1psg+bqKtib1U4qwcEsuh2rX5HfmX2cK6nhkzQ5hbgMmaxZN3WG9VC59J4uyzybKsV2KXIQQ==
-From: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
-	<anthony.perard@vates.tech>, Bertrand Marquis <bertrand.marquis@arm.com>, Jan
- Beulich <jbeulich@suse.com>, Juergen Gross <jgross@suse.com>, Julien Grall
-	<julien@xen.org>, Michal Orzel <michal.orzel@amd.com>, Oleksii Moisieiev
-	<Oleksii_Moisieiev@epam.com>, =?iso-8859-1?Q?Roger_Pau_Monn=E9?=
-	<roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Grygorii Strashko
-	<grygorii_strashko@epam.com>
-Subject: [PATCH v16 5/6] tools/xl/libxl: wire up SCMI SMC multi-agent
- configuration
-Thread-Topic: [PATCH v16 5/6] tools/xl/libxl: wire up SCMI SMC multi-agent
- configuration
-Thread-Index: AQHdddiX8LH/GhthO0m5LuxgjklNCg==
-Date: Mon, 16 Nov 2026 14:41:40 +0000
-Message-ID:
- <4fedbb5bffdfe96365e530c985e89cd50b61fb5d.1794839953.git.oleksii_moisieiev@epam.com>
-References: <cover.1794839953.git.oleksii_moisieiev@epam.com>
-In-Reply-To: <cover.1794839953.git.oleksii_moisieiev@epam.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: GVXPR03MB11113:EE_|GV2PR03MB11211:EE_
-x-ms-office365-filtering-correlation-id: 080acd82-5cce-491d-8fa0-08df43efba79
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam:
- BCL:0;ARA:13230040|23010399003|7416014|1800799024|376014|366016|261026140227099003|261026121527099003|261028144727099003|261021121427099003|261021123027099003|261022075727099003|261022105027099003|261102123227099003|38070700021|56012099006|11063799006|10067099003|22082099003|18002099003|261009223027099003|6133799003;
-x-microsoft-antispam-message-info:
- 5ZqCR2OgUgbVJNm0FneTzYPhKSGMCxukDPYJDppjv9S0egxeT5Qe6uYXkZXRnDYsbuZ1mcKFodAJoXTr8ZJwWInWYGDakdv8/B0FyKZuUKKWWD7ZDqXQRAw3oghLR9w4N2Xlja8h8YRZwgQ1crmH1W6KXQyNfnTIX2no4e4NcxOAD6ga+e8ktV3LBOIpgyxKxxigqMiGCGGxRO7SRkfhYj7eyltwrtA/wobKjJoHkQ2hhMMlG/X9DXTfH8Cl6O1rekuunbwmDd7t5oBz81F8jr/a+UQGAc7sDUP96NfVv6DW7pu/y9xz7vsmPribDWzdSUC7Mkhq7Sqq6Eias9dCtaqOkjb6VX4hFOJjmK8mfxFQBnchD/Qj73SZEANXKtzn40Qus2k4J3EOa4FJP0gDWiZH6A7D3im+e238mcMBrV2Xq9bxTaEl4iI6FvKP+2d5CVrhwYZkrSimwoV37BGO8Gj38aFKE1UmG1Fnv8Owe1L+jhatBcxqHYPWaDqMpeiLA+/Xo6tN9te44LQ6fzPuTq8vPlrfnxkiq3V7hVdackGTWRNK9u6g7Iey6FkiutGq7VtUgvfRZeSu0iYdpmCWbTNgcbFG/NkpZB/P+sWj7UG0F7Fp0qm7Lt1a47qMMhPgXMn42GsQ9vAsE/xlVO6Xb3LeRD29AkL/Oqy/aE5elXAAmycpIrOXpSpUZlNuPejU1in8MiD86fpokDN2UDHOdMz9FGH5IaAg0WlAYsfOyCM=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GVXPR03MB11113.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(7416014)(1800799024)(376014)(366016)(261026140227099003)(261026121527099003)(261028144727099003)(261021121427099003)(261021123027099003)(261022075727099003)(261022105027099003)(261102123227099003)(38070700021)(56012099006)(11063799006)(10067099003)(22082099003)(18002099003)(261009223027099003)(6133799003);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?rNZJLlW5pX6ex6KcIRfoiYEH9+9TguqtJglD5Lo7uxuCeC5FNjSlJ2JOW/?=
- =?iso-8859-1?Q?ziDdrZTuDXgqSBoU9xRkgd8mCw8vWxwycnoeRbwydHer7l7ignlLXiRjRR?=
- =?iso-8859-1?Q?AwlAjQ1wKi/uQpVHqf3nfgy5l0RzIVK+FppRF8C4PxwqiVnLOJ4b0QLxx9?=
- =?iso-8859-1?Q?kdTfvFWtpH+Myq/mxc13F44wmymOJeZRiM7M7Td2zWDIX4y30f565bfZt5?=
- =?iso-8859-1?Q?Ex8fnMNtVBh2WXT/PVFQi1I+EJe03ckZNbC9bWUy7JrOQL6F6lqCD0964a?=
- =?iso-8859-1?Q?sCXnrDl+XXGw4CCiDwPWudcnlj3fLseIcOtY66a3zKgQmEFu+TyEhSWwvx?=
- =?iso-8859-1?Q?0Lkkuao+eFpFzzkojHA92cKsXr/mgK4eHZuccly5lLqCd/Nue2TWfoTjGB?=
- =?iso-8859-1?Q?VXImFcpztv8qB6c23rWkJJD93Q0j8Veqc+Qq6f7IXRL8IXnmeMpcImg0SM?=
- =?iso-8859-1?Q?9gQbk4+JsSR0FgyUHaTTxGYvwlZXONRVaXnjy/tdNZsL7PpYESKCr/AHo2?=
- =?iso-8859-1?Q?Rl0+EreNgG70Pbx+0X3oGJxzmZbL4kP74kPCXJwrx6o22NFPY7YfXyU/xs?=
- =?iso-8859-1?Q?z0qaJOBu4+Iev9Zqp9jVHOW+nb2g0awFlY/O8ECU9Kefki3pVWHx4MIAUU?=
- =?iso-8859-1?Q?fBGoA66rB21dqTi6wiT/Q9XNuMk6kcxzSIB/dGDgYa8rr2QGrs2vA8e79r?=
- =?iso-8859-1?Q?IgcnFxNcCZujG60pgwYuIUhmqATC2t9eMQhaQBH0Gkf9E0kcLxjjx5ChQi?=
- =?iso-8859-1?Q?6mJi0Ry18RybOFpM4mZV7EkQOkR/S5KLv3sRqN/zJcUIPHJLmENcaIdR7g?=
- =?iso-8859-1?Q?I+kIqqhEWE0VRhaqRaDyqXNumOkGUFzpVknhhQ0g2wdjYv8VixwFGcBJy6?=
- =?iso-8859-1?Q?7Z2v8KutPGv7sqVx5XxB45WMFqwwcv4q2OHtJ3LP5fS5HPUJnwkZKBLMlO?=
- =?iso-8859-1?Q?PDOGEpxg3QSOzEw6vJXuh1lGF3ybWlXiNA1QIX80lORxEf1Z0TcVLMIjWR?=
- =?iso-8859-1?Q?8dV59PvrMgalD15IKZB3KSjqFHKZJKoJh/OCGyTlu2X7ALsAcwawms1Ifd?=
- =?iso-8859-1?Q?eFYft5rqxE6xBdwxyea6z+6A5EfyzrL9OHPe3R9ngQygBLdBWCngVy8KPu?=
- =?iso-8859-1?Q?nVGRfxhqhY+CjM1rD8/jZGNslrpQaaFtc2KzVMe1z7ITkQ/4ZuQd0C2qGT?=
- =?iso-8859-1?Q?rLh0tv0Fm8ppdxGqD4+HHNHXWX1FdAlv59pFmFrqI9ku85rFR7Ya1FTMiu?=
- =?iso-8859-1?Q?9mJvn/hm6DUTNZXkZUBMMSdc5lp36oO/nwKDutKH6BABhieUytyu5GpL+8?=
- =?iso-8859-1?Q?F6clcE05nsrqRlRvxNkNWvjliOz0eLU23Icr7XfLU3msbSenoOfYKR2PdF?=
- =?iso-8859-1?Q?jbJBWMKHpafDbKCU23z+WvYIK4XxWhJnslI2jQC75qwWJ8ZRLKMAG6NVEy?=
- =?iso-8859-1?Q?24AezCmZ9yCZHyq988x5sNHdPrh4oz8NdRfVEbIR6ESTLWv3Ay44I5CBFH?=
- =?iso-8859-1?Q?XnZ7L07Jgw2d+qJWWlk6HRSufH7MoCOt+E2O+1B7IsVZKwT8VIY8eXJhg6?=
- =?iso-8859-1?Q?fyVxLbqEKiA2B7F1f27qNYAu4bKglUD2dGQBsZstAjRaOWr1fwvAweSv1B?=
- =?iso-8859-1?Q?oWQVwNEHIG1xdneTtqkHyvpIkvj0dXMqSROokjCis36tfOkS2DDQQiZKlP?=
- =?iso-8859-1?Q?ogGsC1yVg1yKjvBHW6qT6EHZFq/3Rxm/45yiQokIVHaxaK8/bi7XBNx8Ts?=
- =?iso-8859-1?Q?5VOB1YEXxu3LzwRwwI4zyUlG/nipBFeKkxUVUTMU2tn2cCDGT2QMexLS9U?=
- =?iso-8859-1?Q?xIfQt1FubjGXHaQVOrkrykR+WAodNM4=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding"; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1794841335; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=Q+aLKABTECa9GprVZgmAzE4WawSa4i6T98FbM/Je+D8=;
+	b=p0nFWKMkQ212vpp6QMGe7r6gtY9zUUISRGxcSQOPb5msW/zWe60xID6YyYtsy3C3YP86ni
+	wmD9QqXYezEViO9QQ80QFmVQRmjEvxwQMW6bt40k4Zfl6bSylXVFo9jcoPVaqHN6/hygOT
+	F1QyYJEKiBqKtSlqGu+GGRGbFVAbdlA=
+Authentication-Results: smtp-out1.suse.de;
+	dkim=pass header.d=suse.com header.s=susede1 header.b=lFy47sA2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1794841334; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=Q+aLKABTECa9GprVZgmAzE4WawSa4i6T98FbM/Je+D8=;
+	b=lFy47sA2pm7jH6+qZvogJ0mQe+TjaL7We9G5bNM5Kh3Z/+iOLEXrqYIfcveLAzo46Xnv27
+	0zkMdR0B0N+PSM247DO/0tAUJtRjjbdKYuYi2XEBS4UX/Uw9jeIrZPh9ETOpWEVLBUj7tG
+	eepceVbCeVX/SMhSSvg1TLLhnfJw6WQ=
+From: Juergen Gross <jgross@suse.com>
+To: linux-kernel@vger.kernel.org,
+	x86@kernel.org,
+	virtualization@lists.linux.dev,
+	linux-ide@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	linux-fbdev@vger.kernel.org,
+	linux-crypto@vger.kernel.org,
+	linux-gpio@vger.kernel.org,
+	linux-perf-users@vger.kernel.org,
+	linux-hyperv@vger.kernel.org,
+	kvm@vger.kernel.org,
+	linux-edac@vger.kernel.org,
+	linux-pci@vger.kernel.org,
+	linux-pm@vger.kernel.org,
+	linux-coco@lists.linux.dev,
+	linux-acpi@vger.kernel.org,
+	linux-hwmon@vger.kernel.org,
+	linux-mtd@lists.infradead.org,
+	platform-driver-x86@vger.kernel.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Thomas Gleixner <tglx@kernel.org>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Ajay Kaher <ajay.kaher@broadcom.com>,
+	Alexey Makhalov <alexey.makhalov@broadcom.com>,
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
+	Damien Le Moal <dlemoal@kernel.org>,
+	Niklas Cassel <cassel@kernel.org>,
+	David Airlie <airlied@redhat.com>,
+	Helge Deller <deller@gmx.de>,
+	linux-geode@lists.infradead.org,
+	Olivia Mackall <olivia@selenic.com>,
+	Herbert Xu <herbert@gondor.apana.org.au>,
+	Linus Walleij <linusw@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Arnaldo Carvalho de Melo <acme@kernel.org>,
+	Namhyung Kim <namhyung@kernel.org>,
+	Mark Rutland <mark.rutland@arm.com>,
+	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+	Jiri Olsa <jolsa@kernel.org>,
+	Ian Rogers <irogers@google.com>,
+	Adrian Hunter <adrian.hunter@intel.com>,
+	James Clark <james.clark@linaro.org>,
+	Haiyang Zhang <haiyangz@microsoft.com>,
+	Wei Liu <wei.liu@kernel.org>,
+	Dexuan Cui <decui@microsoft.com>,
+	Sean Christopherson <seanjc@google.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Josh Poimboeuf <jpoimboe@kernel.org>,
+	Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
+	Pu Wen <puwen@hygon.cn>,
+	Tony Luck <tony.luck@intel.com>,
+	Reinette Chatre <reinette.chatre@intel.com>,
+	Ben Horgan <ben.horgan@arm.com>,
+	Dave Martin <Dave.Martin@arm.com>,
+	James Morse <james.morse@arm.com>,
+	Babu Moger <babu.moger@amd.com>,
+	Drew Fustini <fustini@kernel.org>,
+	Tony W Wang-oc <TonyWWang-oc@zhaoxin.com>,
+	Vitaly Kuznetsov <vkuznets@redhat.com>,
+	Andy Lutomirski <luto@kernel.org>,
+	Bjorn Helgaas <bhelgaas@google.com>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Pavel Machek <pavel@kernel.org>,
+	Kiryl Shutsemau <kas@kernel.org>,
+	Rick Edgecombe <rick.p.edgecombe@intel.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Len Brown <lenb@kernel.org>,
+	Viresh Kumar <viresh.kumar@linaro.org>,
+	Huang Rui <ray.huang@amd.com>,
+	Mario Limonciello <mario.limonciello@amd.com>,
+	Perry Yuan <perry.yuan@amd.com>,
+	K Prateek Nayak <kprateek.nayak@amd.com>,
+	Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>,
+	Yazen Ghannam <yazen.ghannam@amd.com>,
+	Guenter Roeck <linux@roeck-us.net>,
+	Artem Bityutskiy <artem.bityutskiy@linux.intel.com>,
+	Artem Bityutskiy <dedekind1@gmail.com>,
+	Arnd Bergmann <arnd@arndb.de>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Miquel Raynal <miquel.raynal@bootlin.com>,
+	Richard Weinberger <richard@nod.at>,
+	Vignesh Raghavendra <vigneshr@ti.com>,
+	Ashok Raj <ashok.raj.linux@gmail.com>,
+	Hans de Goede <hansg@kernel.org>,
+	=?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+	Rajneesh Bhardwaj <irenic.rajneesh@gmail.com>,
+	Xi Pardee <xi.pardee@linux.intel.com>,
+	Daniel Lezcano <daniel.lezcano@kernel.org>,
+	Zhang Rui <rui.zhang@intel.com>,
+	Lukasz Luba <lukasz.luba@arm.com>,
+	xen-devel@lists.xenproject.org
+Subject: [PATCH v6 00/12] x86/msr: Drop 32-bit MSR interfaces
+Date: Mon, 16 Nov 2026 16:01:56 +0100
+Message-ID: <20261116150208.1572254-1-jgross@suse.com>
+X-Mailer: git-send-email 2.56.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: GVXPR03MB11113.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 080acd82-5cce-491d-8fa0-08df43efba79
-X-MS-Exchange-CrossTenant-originalarrivaltime: 16 Nov 2026 14:41:40.0775
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: MYEJN5j6JZXzW/3RH/0xJsxgUwFkDLbTfOIIn7cr+klL52OromRNXyrs8EaAS3nvkdo34VzDbjNNomUnk3spjMgT5C9SDHR4M1rph2d1Heg=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR03MB11211
-X-purgate-ID: tlsNG-ebf023/1794840106-516D2B50-AAA39C5A/0/0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 1F9B9221FE
+X-Spam-Level: 
+X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
+X-Rspamd-Action: no action
+X-Spamd-Result: default: False [-11.01 / 50.00];
+	SUSE_INTERNAL_BYPASS(-9.00)[];
+	BAYES_HAM(-3.00)[100.00%];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	MIME_GOOD(-0.10)[text/plain];
+	MX_GOOD(-0.01)[];
+	FROM_HAS_DN(0.00)[];
+	URIBL_BLOCKED(0.00)[imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo,suse.com:dkim];
+	ARC_NA(0.00)[];
+	DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[suse.com,kernel.org,redhat.com,alien8.de,linux.intel.com,zytor.com,broadcom.com,gmx.de,lists.infradead.org,selenic.com,gondor.apana.org.au,infradead.org,arm.com,google.com,intel.com,linaro.org,microsoft.com,hygon.cn,amd.com,zhaoxin.com,oracle.com,roeck-us.net,gmail.com,arndb.de,linuxfoundation.org,bootlin.com,nod.at,ti.com,lists.xenproject.org];
+	DKIM_TRACE(0.00)[suse.com:+];
+	TO_DN_SOME(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_TLS_ALL(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[95];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[];
+	R_RATELIMIT(0.00)[to_ip_from(RLw7a7tks1xijzu4pa8t4mi4c3)];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:dkim,imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo]
+X-Spam-Score: -11.01
+X-purgate-ID: tlsNG-ef75cf/1794841335-A70DDAE4-93599EE1/35/110847
 X-purgate-type: clean
-X-purgate-size: 7327
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
-	version=4.0.1
+X-purgate-size: 10502
+X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Plumb the SCMI SMC multi-agent type through the toolstack:
+For accessing the MSR registers on the local CPU, there are 2 types of
+interfaces: the "modern" 64-bit ones (rdmsrq() etc.) and the 32-bit
+ones (rdmsr() etc.) which are using the upper and lower 32-bit halves
+of the 64-bit wide MSR register values.
 
-- Extend libxl_arm_sci_type enumeration with scmi_smc_multiagent (value 2)
-- Add agent_id field to libxl_arm_sci structure for per-domain agent assign=
-ment
-- Update libxl_arm.c to translate libxl config to XEN_DOMCTL_CONFIG_ARM_SCI=
-_SCMI_SMC_MA
-  and pass agent_id to the hypervisor via xen_domctl_createdomain
-- Add xl.cfg parsing for arm_sci=3D"type=3Dscmi_smc_multiagent,agent_id=3DN=
-"
-- Document the new xl.cfg options in xl.cfg.5.pod.in
+The 32-bit interfaces are not optimal for 3 reasons:
 
-This completes the userspace side of multi-agent SCMI, allowing xl create
-and dom0less configurations to assign unique agent_id values to domains.
+- They are based on primitives using 64-bit sized values anyway.
 
-Series-changes 12:
-- reject agent_id in xl.cfg when the ARM_SCI type is not
-  scmi_smc_multiagent, instead of parsing it and discarding it
-- perform the check after the option loop, as type and agent_id may be
-  given in either order
+- Modern x86 CPUs have added support for MSR access instructions using
+  an immediate value instead of a register for addressing the MSR,
+  while the value is in a 64-bit register.
 
-Signed-off-by: Grygorii Strashko <grygorii_strashko@epam.com>
-Signed-off-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
----
+- rdmsr() is a macro storing the upper and lower 32-bit halves in
+  variables specified as macro parameters. This is obscuring variable
+  assignment through a macro. Additionally rdmsrq() is mimicking this
+  pattern by being a macro, too, with the target variable specified as
+  a parameter as well.
 
-(no changes since v11)
+For those reasons drop the 32-bit interfaces for accessing the x86 MSR
+registers completely and only use the 64-bit variants.
 
-Changes in v11:
-- Fix agent_id documentation: clarify it applies to SCMI SMC
-multi-agent support only, not plain SCMI SMC (reviewer feedback)
-- Remove "non-zero" from agent_id description to match accepted
-range [0..254]
-- Remove "UINT8_MAX (255) is treated as invalid" from user
-documentation as unnecessary implementation detail
-- Add LIBXL_HAVE_SCMI_SMC_MULTIAGENT feature macro in libxl.h to
-advertise the new scmi_smc_multiagent type and agent_id field
-- Add agent_id validation in
-libxl__arch_domain_build_info_setdefault() to reject invalid values at
-the libxl level, not only in xl
+This allows to switch all "high-level" MSR access macros to inline
+functions in the end.
 
-Changes in v10:
-- Split hypervisor and toolstack changes into separate commits
+This series will be used as the base for further reorganisation of the
+MSR access functions, especially for completely inlining the MSR
+access instructions even with paravirtualization being active.
 
- docs/man/xl.cfg.5.pod.in         | 13 +++++++++++++
- tools/include/libxl.h            |  8 ++++++++
- tools/libs/light/libxl_arm.c     | 13 +++++++++++++
- tools/libs/light/libxl_types.idl |  4 +++-
- tools/xl/xl_parse.c              | 27 +++++++++++++++++++++++++++
- 5 files changed, 64 insertions(+), 1 deletion(-)
+Based on kernel 7.4-rc3.
 
-diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
-index b19c25c8d1..9d38ac0f7e 100644
---- a/docs/man/xl.cfg.5.pod.in
-+++ b/docs/man/xl.cfg.5.pod.in
-@@ -3184,8 +3184,21 @@ single SCMI OSPM agent support.
- Should be used together with B<scmi-smc-passthrough> Xen command line
- option.
-=20
-+=3Ditem B<scmi_smc_multiagent>
-+
-+Enables ARM SCMI SMC multi-agent support for the guest by enabling SCMI ov=
-er
-+SMC calls forwarding from domain to the EL3 firmware (like Trusted Firmwar=
-e-A)
-+with a multi SCMI OSPM agent support. The SCMI B<agent_id> should be
-+specified for the guest.
-+
- =3Dback
-=20
-+=3Ditem B<agent_id=3DNUMBER>
-+
-+Specifies an ARM SCI agent id for the guest. This option is mandatory
-+if the SCMI SMC multi-agent support is enabled for the guest. The agent id=
-s of
-+domains existing on a single host must be unique and in the range [0..254]=
-.
-+
- =3Dback
-=20
- =3Dback
-diff --git a/tools/include/libxl.h b/tools/include/libxl.h
-index d294fb36bd..be25f23288 100644
---- a/tools/include/libxl.h
-+++ b/tools/include/libxl.h
-@@ -326,6 +326,14 @@
-  */
- #define LIBXL_HAVE_BUILDINFO_ARCH_ARM_SCI 1
-=20
-+/*
-+ * LIBXL_HAVE_SCMI_SMC_MULTIAGENT indicates that the
-+ * LIBXL_ARM_SCI_TYPE_SCMI_SMC_MULTIAGENT value is available in the
-+ * libxl_arm_sci_type enumeration and the agent_id field is available
-+ * in the libxl_arm_sci structure.
-+ */
-+#define LIBXL_HAVE_SCMI_SMC_MULTIAGENT 1
-+
- /*
-  * LIBXL_HAVE_SOFT_RESET indicates that libxl supports performing
-  * 'soft reset' for domains and there is 'soft_reset' shutdown reason
-diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
-index aa8fa852fc..f92922abea 100644
---- a/tools/libs/light/libxl_arm.c
-+++ b/tools/libs/light/libxl_arm.c
-@@ -237,6 +237,10 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
-     case LIBXL_ARM_SCI_TYPE_SCMI_SMC:
-         config->arch.arm_sci_type =3D XEN_DOMCTL_CONFIG_ARM_SCI_SCMI_SMC;
-         break;
-+    case LIBXL_ARM_SCI_TYPE_SCMI_SMC_MULTIAGENT:
-+        config->arch.arm_sci_type =3D XEN_DOMCTL_CONFIG_ARM_SCI_SCMI_SMC_M=
-A;
-+        config->arch.arm_sci_agent_id =3D d_config->b_info.arch_arm.arm_sc=
-i.agent_id;
-+        break;
-     default:
-         LOG(ERROR, "Unknown ARM_SCI type %d",
-             d_config->b_info.arch_arm.arm_sci.type);
-@@ -1897,6 +1901,15 @@ int libxl__arch_domain_build_info_setdefault(libxl__=
-gc *gc,
-         }
-     }
-=20
-+    /* Sanitise ARM SCI agent_id parameter */
-+    if (b_info->arch_arm.arm_sci.type =3D=3D LIBXL_ARM_SCI_TYPE_SCMI_SMC_M=
-ULTIAGENT &&
-+        b_info->arch_arm.arm_sci.agent_id >=3D UINT8_MAX) {
-+        LOG(ERROR,
-+            "Invalid ARM SCI agent_id: %u. Valid range is [0..254]",
-+            b_info->arch_arm.arm_sci.agent_id);
-+        return ERROR_FAIL;
-+    }
-+
-     if (b_info->type !=3D LIBXL_DOMAIN_TYPE_PV)
-         return 0;
-=20
-diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_type=
-s.idl
-index d819955108..9b38c8f6de 100644
---- a/tools/libs/light/libxl_types.idl
-+++ b/tools/libs/light/libxl_types.idl
-@@ -555,11 +555,13 @@ libxl_sve_type =3D Enumeration("sve_type", [
-=20
- libxl_arm_sci_type =3D Enumeration("arm_sci_type", [
-     (0, "none"),
--    (1, "scmi_smc")
-+    (1, "scmi_smc"),
-+    (2, "scmi_smc_multiagent")
-     ], init_val =3D "LIBXL_ARM_SCI_TYPE_NONE")
-=20
- libxl_arm_sci =3D Struct("arm_sci", [
-     ("type", libxl_arm_sci_type),
-+    ("agent_id", uint8)
-     ])
-=20
- libxl_rdm_reserve =3D Struct("rdm_reserve", [
-diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
-index 01783731b5..6bb3325c98 100644
---- a/tools/xl/xl_parse.c
-+++ b/tools/xl/xl_parse.c
-@@ -1290,6 +1290,7 @@ static int parse_arm_sci_config(XLU_Config *cfg, libx=
-l_arm_sci *arm_sci,
-                                 const char *str)
- {
-     int ret =3D 0;
-+    int agent_id_set =3D 0;
-     char *buf2, *ptr;
-     char *oparg;
-=20
-@@ -1308,9 +1309,35 @@ static int parse_arm_sci_config(XLU_Config *cfg, lib=
-xl_arm_sci *arm_sci,
-             }
-         }
-=20
-+        if (MATCH_OPTION("agent_id", ptr, oparg)) {
-+            unsigned long val =3D parse_ulong(oparg);
-+
-+            if ( val >=3D UINT8_MAX ) {
-+                fprintf(stderr, "An invalid ARM_SCI agent_id specified (%l=
-u). Valid range [0..254]\n",
-+                        val);
-+                ret =3D ERROR_INVAL;
-+                goto out;
-+            }
-+            arm_sci->agent_id =3D val;
-+            agent_id_set =3D 1;
-+        }
-+
-         ptr =3D strtok(NULL, ",");
-     }
-=20
-+    /*
-+     * agent_id only means something to the multi-agent driver, and
-+     * libxl__arch_domain_prepare_config() only reads it for that type.
-+     * Reject it elsewhere instead of silently dropping it. The check is d=
-one
-+     * after the loop because the options may be given in any order.
-+     */
-+    if (agent_id_set &&
-+        arm_sci->type !=3D LIBXL_ARM_SCI_TYPE_SCMI_SMC_MULTIAGENT) {
-+        fprintf(stderr,
-+                "ARM_SCI agent_id is only supported with type=3Dscmi_smc_m=
-ultiagent\n");
-+        ret =3D ERROR_INVAL;
-+    }
-+
- out:
-     free(buf2);
-     return ret;
---=20
-2.43.0
+IMHO at least patches 2 and 3 should be applied rather sooner than later
+in order to avoid new instances of the 32-bit variants of the *_safe()
+functions creeping in again.
+
+Changes in V2:
+- dropped already applied patches
+- added patch 1
+- rebased
+
+Changes in V3:
+- small fixes in patches 4 and 13
+- rebased
+
+Changes in V4:
+- rebased
+
+Changes in V5:
+- patch 9 of V4 has been applied
+- rebased
+
+Changes in V6:
+- rebased
+
+Juergen Gross (12):
+  x86/cpu: Fix coding style violation
+  x86/msr: Remove wrmsr_safe()
+  x86/msr: Remove rdmsr_safe()
+  drivers/ata: Stop using 32-bit MSR interfaces
+  agp/nvidia: Stop using 32-bit MSR interfaces
+  fbdev/geode: Stop using 32-bit MSR interfaces
+  hw_random/via-rng: Stop using 32-bit MSR interfaces
+  drivers/gpio: Stop using 32-bit MSR interfaces
+  x86/msr: Remove wrmsr()
+  x86/msr: Remove rdmsr()
+  treewide: convert rdmsrq() from a macro to an inline function
+  x86/msr: Simplify some rdmsrq() use cases
+
+ arch/x86/coco/sev/core.c                      |  2 +-
+ arch/x86/events/amd/brs.c                     |  4 +-
+ arch/x86/events/amd/core.c                    |  8 +--
+ arch/x86/events/amd/ibs.c                     | 30 +++++------
+ arch/x86/events/amd/lbr.c                     | 16 ++----
+ arch/x86/events/amd/power.c                   |  8 +--
+ arch/x86/events/amd/uncore.c                  |  4 +-
+ arch/x86/events/core.c                        | 20 ++++----
+ arch/x86/events/intel/core.c                  | 15 ++----
+ arch/x86/events/intel/cstate.c                |  5 +-
+ arch/x86/events/intel/ds.c                    |  2 +-
+ arch/x86/events/intel/knc.c                   | 10 ++--
+ arch/x86/events/intel/lbr.c                   | 25 +++-------
+ arch/x86/events/intel/p4.c                    |  6 +--
+ arch/x86/events/intel/p6.c                    |  4 +-
+ arch/x86/events/intel/pt.c                    | 12 ++---
+ arch/x86/events/intel/uncore.c                |  6 +--
+ arch/x86/events/intel/uncore_nhmex.c          |  4 +-
+ arch/x86/events/intel/uncore_snb.c            |  2 +-
+ arch/x86/events/intel/uncore_snbep.c          |  6 +--
+ arch/x86/events/msr.c                         |  2 +-
+ arch/x86/events/perf_event.h                  |  6 +--
+ arch/x86/events/rapl.c                        |  6 +--
+ arch/x86/events/zhaoxin/core.c                | 10 ++--
+ arch/x86/hyperv/hv_apic.c                     |  9 ++--
+ arch/x86/hyperv/hv_init.c                     | 26 +++++-----
+ arch/x86/hyperv/hv_spinlock.c                 |  2 +-
+ arch/x86/include/asm/apic.h                   |  7 +--
+ arch/x86/include/asm/debugreg.h               |  6 +--
+ arch/x86/include/asm/fsgsbase.h               |  2 +-
+ arch/x86/include/asm/kvm_host.h               | 10 ----
+ arch/x86/include/asm/msr.h                    | 39 ++-------------
+ arch/x86/include/asm/paravirt.h               | 26 +---------
+ arch/x86/kernel/apic/apic.c                   | 14 +++---
+ arch/x86/kernel/apic/apic_numachip.c          |  6 +--
+ arch/x86/kernel/cet.c                         |  2 +-
+ arch/x86/kernel/cpu/amd.c                     | 14 +++---
+ arch/x86/kernel/cpu/aperfmperf.c              |  8 +--
+ arch/x86/kernel/cpu/bugs.c                    | 12 ++---
+ arch/x86/kernel/cpu/bus_lock.c                |  8 +--
+ arch/x86/kernel/cpu/centaur.c                 |  8 +--
+ arch/x86/kernel/cpu/common.c                  | 12 ++---
+ arch/x86/kernel/cpu/feat_ctl.c                |  4 +-
+ arch/x86/kernel/cpu/hygon.c                   |  4 +-
+ arch/x86/kernel/cpu/intel.c                   |  6 +--
+ arch/x86/kernel/cpu/intel_epb.c               |  4 +-
+ arch/x86/kernel/cpu/mce/amd.c                 |  4 +-
+ arch/x86/kernel/cpu/mce/core.c                |  8 +--
+ arch/x86/kernel/cpu/mce/inject.c              |  2 +-
+ arch/x86/kernel/cpu/mce/intel.c               | 18 +++----
+ arch/x86/kernel/cpu/mce/p5.c                  |  8 +--
+ arch/x86/kernel/cpu/mce/winchip.c             |  2 +-
+ arch/x86/kernel/cpu/microcode/intel.c         |  2 +-
+ arch/x86/kernel/cpu/mshyperv.c                |  6 +--
+ arch/x86/kernel/cpu/mtrr/amd.c                |  4 +-
+ arch/x86/kernel/cpu/mtrr/cleanup.c            |  4 +-
+ arch/x86/kernel/cpu/mtrr/generic.c            | 32 ++++++------
+ arch/x86/kernel/cpu/mtrr/mtrr.c               |  2 +-
+ arch/x86/kernel/cpu/resctrl/core.c            |  2 +-
+ arch/x86/kernel/cpu/resctrl/monitor.c         |  4 +-
+ arch/x86/kernel/cpu/resctrl/pseudo_lock.c     |  4 +-
+ arch/x86/kernel/cpu/resctrl/rdtgroup.c        |  2 +-
+ arch/x86/kernel/cpu/topology.c                |  2 +-
+ arch/x86/kernel/cpu/topology_amd.c            |  4 +-
+ arch/x86/kernel/cpu/transmeta.c               |  8 +--
+ arch/x86/kernel/cpu/tsx.c                     | 10 ++--
+ arch/x86/kernel/cpu/umwait.c                  |  2 +-
+ arch/x86/kernel/cpu/zhaoxin.c                 |  4 +-
+ arch/x86/kernel/fpu/core.c                    |  2 +-
+ arch/x86/kernel/hpet.c                        |  2 +-
+ arch/x86/kernel/kvm.c                         |  2 +-
+ arch/x86/kernel/mmconf-fam10h_64.c            |  6 +--
+ arch/x86/kernel/process.c                     |  4 +-
+ arch/x86/kernel/process_64.c                  | 14 +++---
+ arch/x86/kernel/shstk.c                       |  8 +--
+ arch/x86/kernel/traps.c                       |  4 +-
+ arch/x86/kernel/tsc.c                         |  2 +-
+ arch/x86/kernel/tsc_msr.c                     |  6 +--
+ arch/x86/kernel/tsc_sync.c                    |  6 +--
+ arch/x86/kvm/msrs.c                           |  2 +-
+ arch/x86/kvm/svm/pmu.c                        |  4 +-
+ arch/x86/kvm/svm/svm.c                        |  6 +--
+ arch/x86/kvm/vmx/main.c                       |  2 +-
+ arch/x86/kvm/vmx/nested.c                     |  4 +-
+ arch/x86/kvm/vmx/pmu_intel.c                  |  8 +--
+ arch/x86/kvm/vmx/sgx.c                        |  6 +--
+ arch/x86/kvm/vmx/tdx.c                        |  2 +-
+ arch/x86/kvm/vmx/vmx.c                        | 40 +++++++--------
+ arch/x86/kvm/x86.c                            |  6 +--
+ arch/x86/lib/insn-eval.c                      |  6 +--
+ arch/x86/lib/msr-smp.c                        |  2 +-
+ arch/x86/mm/pat/memtype.c                     |  2 +-
+ arch/x86/pci/amd_bus.c                        |  8 +--
+ arch/x86/platform/olpc/olpc-xo1-rtc.c         |  6 +--
+ arch/x86/platform/olpc/olpc-xo1-sci.c         |  2 +-
+ arch/x86/power/cpu.c                          | 10 ++--
+ arch/x86/realmode/init.c                      |  2 +-
+ arch/x86/virt/hw.c                            |  8 +--
+ arch/x86/virt/svm/sev.c                       | 22 ++++----
+ arch/x86/virt/vmx/tdx/tdx.c                   |  2 +-
+ arch/x86/xen/suspend.c                        |  2 +-
+ drivers/acpi/processor_perflib.c              |  2 +-
+ drivers/ata/pata_cs5535.c                     | 24 ++++-----
+ drivers/ata/pata_cs5536.c                     | 17 +++----
+ drivers/char/agp/nvidia-agp.c                 | 32 ++++++------
+ drivers/char/hw_random/via-rng.c              | 29 +++++------
+ drivers/cpufreq/acpi-cpufreq.c                |  8 +--
+ drivers/cpufreq/amd-pstate.c                  |  4 +-
+ drivers/cpufreq/e_powersaver.c                | 20 ++++----
+ drivers/cpufreq/intel_pstate.c                | 26 +++++-----
+ drivers/cpufreq/longhaul.c                    | 12 ++---
+ drivers/cpufreq/longrun.c                     | 16 +++---
+ drivers/cpufreq/powernow-k7.c                 | 10 ++--
+ drivers/cpufreq/powernow-k8.c                 |  8 +--
+ drivers/cpufreq/speedstep-centrino.c          |  4 +-
+ drivers/cpufreq/speedstep-lib.c               | 14 +++---
+ drivers/edac/amd64_edac.c                     |  6 +--
+ drivers/edac/intel-bff.c                      |  4 +-
+ drivers/gpio/gpio-cs5535.c                    | 10 ++--
+ drivers/hv/mshv_vtl_main.c                    |  2 +-
+ drivers/hwmon/hwmon-vid.c                     |  4 +-
+ drivers/idle/intel_idle.c                     | 26 +++++-----
+ drivers/misc/cs5535-mfgpt.c                   |  6 +--
+ drivers/mtd/nand/raw/cs553x_nand.c            |  6 +--
+ drivers/platform/x86/intel/ifs/load.c         | 10 ++--
+ drivers/platform/x86/intel/ifs/runtest.c      |  8 +--
+ drivers/platform/x86/intel/pmc/cnp.c          |  2 +-
+ .../intel/speed_select_if/isst_if_mbox_msr.c  |  6 +--
+ .../intel/speed_select_if/isst_tpmi_core.c    |  2 +-
+ drivers/platform/x86/intel_ips.c              | 20 ++++----
+ drivers/powercap/intel_rapl_msr.c             |  2 +-
+ drivers/thermal/intel/intel_hfi.c             |  8 +--
+ drivers/thermal/intel/therm_throt.c           | 22 ++++----
+ drivers/thermal/intel/x86_pkg_temp_thermal.c  |  6 +--
+ drivers/video/fbdev/geode/display_gx.c        |  8 +--
+ drivers/video/fbdev/geode/gxfb_core.c         |  2 +-
+ drivers/video/fbdev/geode/lxfb_ops.c          | 50 +++++++++----------
+ drivers/video/fbdev/geode/suspend_gx.c        | 24 +++++----
+ drivers/video/fbdev/geode/video_gx.c          |  8 +--
+ include/linux/cs5535.h                        | 10 ++--
+ 140 files changed, 572 insertions(+), 690 deletions(-)
+
+-- 
+2.56.0
+
 
