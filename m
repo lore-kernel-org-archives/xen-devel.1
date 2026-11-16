@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD317606A332
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 13:30:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 67E5E606A323
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 13:36:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=OVBSo/kk
-Received: from list by lists.xenproject.org with outflank-mailman.1490910.1691844 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=dGUFO0aF
+Received: from list by lists.xenproject.org with outflank-mailman.1490924.1691853 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSwmb-0005aQ-9w; Mon, 16 Nov 2026 13:30:05 +0000
+	id 1xSwsS-0006mg-U3; Mon, 16 Nov 2026 13:36:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1490910.1691844; Mon, 16 Nov 2026 13:30:05 +0000
+Received: by outflank-mailman (output) from mailman id 1490924.1691853; Mon, 16 Nov 2026 13:36:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSwmb-0005Zm-6k; Mon, 16 Nov 2026 13:30:05 +0000
-Received: by outflank-mailman (input) for mailman id 1490910;
- Mon, 16 Nov 2026 13:30:04 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xSwma-0005S4-IB
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 13:30:04 +0000
+	id 1xSwsS-0006mZ-Qx; Mon, 16 Nov 2026 13:36:08 +0000
+Received: by outflank-mailman (input) for mailman id 1490924;
+ Mon, 16 Nov 2026 13:36:08 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xSwsS-0006mT-47
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 13:36:08 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xSwmZ-00B8iX-Uj
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 14:30:03 +0100
-Received: from [10.42.69.5] (helo=localhost)
+ id 1xSwsR-006lp1-GW
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 14:36:07 +0100
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6afb0555-e002-0a2a0a5209dd-0a2a4505bd86-34
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 14:30:03 +0100
-Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6afb06c5-2eae-0a2a0a5409dd-0a2a450ca55a-22
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 14:36:07 +0100
+Received: from [209.85.221.44] (helo=mail-wr1-f44.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6afb055b-4cb1-0a2a45050019-d155802dd18a-3
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 14:30:03 +0100
-Received: by mail-wm1-f45.google.com with SMTP id
- 5b1f17b1804b1-4a214c5c4c0so34905115e9.3
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 05:30:03 -0800 (PST)
+ id 6afb06c7-f479-0a2a450c0019-d155dd2cccfb-3
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 14:36:07 +0100
+Received: by mail-wr1-f44.google.com with SMTP id
+ ffacd0b85a97d-490585eddfcso2490605f8f.0
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 05:36:07 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb729b2801sm71445905e9.5.2026.11.16.05.30.02
+ ffacd0b85a97d-49c609c8a77sm22644855f8f.49.2026.11.16.05.36.06
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 16 Nov 2026 05:30:02 -0800 (PST)
+ Mon, 16 Nov 2026 05:36:06 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,56 +51,60 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1794835803; x=1795440603; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1794836167; x=1795440967; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Cq/cmM6202bEZFiSO6/sxMllmXT3tXSpJ/XXaMY5Tj4=;
-        b=OVBSo/kk9MU4B/LLhMrACsw2wPva2n+kicrB5IkiXkmi8Zo7CWXTmJvIzZIFEeN6XX
-         1Ty7Bol2+bAO8ipRye1Gi1/15azqa0srynC8d/7lNLsCsokhsQ7P7V25T1zLTeNOxOQC
-         EObNvOfSz3RHvxBRISl4xRFLUWXX3XRS1wuv/g+fQx1s5DWAMWMSUEzPReIGYXzcJPVz
-         Vcdcg+euq6e1Kdy97/+SCDM8frNt92Q6fPZXG8VAJ4ONV4X63uO+EgZIT84muZ0MVgnc
-         YZ74uOfwm3vOh3OZQ2nXSgg537LuSiEUtVfi8NEeS8EZ5IsWpG2aQOfNPMJiB2tOFlKZ
-         aKoQ==
+        bh=CCHQc7jnb0JLMq8gidShY5BO6cTdSxwMxfyJmzh/rEw=;
+        b=dGUFO0aFA+PtrNEGGqoRJ8BFOnQyOSb3/af3EyBeF8Sog/BHxuTvwhNdhaWjPmjAQs
+         kKHB/GmBoz/XQL1CxhRL8WOWBhzgKTmUqiva1/kI6lL46VGBchiAKQIz1TpgxP1fNiMS
+         mL9n8AYNHVTZqfIlFS/PPU/kWY9NBHTCPajw9gaq4Jq5/rZUhhqXOsNV13nXBNOXdJ5z
+         OIFAEz3kRuqxwYEWPx9tvQcDDotsyA/lj1nnaUzbVpaKttTkMtxMx8rUZPp9CoDqFYa2
+         j9beg5QOkJyZUY3Dm+TPhrzrzxt+v3OR6ozilU5lDbLzzi0yXVZVBie7iUxo+PTKYLwS
+         QLdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794835803; x=1795440603;
+        d=1e100.net; s=20260707; t=1794836167; x=1795440967;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Cq/cmM6202bEZFiSO6/sxMllmXT3tXSpJ/XXaMY5Tj4=;
-        b=fKRH9+u1N0Sp6YNL0mjjpUBZTMKnlMF2sdOZk9N7Ntu+TU8opR+OoZlTGjiz/MmTrJ
-         M7NjgBG1FPdZN3BudoJfGnlsNi5THzwvz25V9jVtEnvrpo6eNNCTpBBK7Kbg304RnB9O
-         RIGSh9ksYu8hHlnQTVRyUttbpu5n5HUIrcWtV+bOYddF8u2psVFW6odLETJRyKDelIX2
-         ujNqELwgc2v2Z0VQhn4AKTCttLvmBLI93NfAADQVX9jJa1jWJHRO8oJ37zYT87Lvda0X
-         MQqhzFSPhqqXb29HsIa2tAbypyw6IQ8dRe8gLM9TEBN9j+8ksc7eMyhIDpMcywI0aPJz
-         B7zQ==
-X-Forwarded-Encrypted: i=1; AL+hErHy7pkBCEbfG9YMmVd6f8fuvvkU9Jd1+gi0qJ+69OISlfC0CYqB02Ks7+wQpYX1IqRy2+2oxeLoSWU=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z9IZIKZ6OPOjcimW2GD4RBiXQaj829Qg9AkyQ+C8iHz3e/4fs71
-	CTrv7EdX9q4ohWDLDUN0ryH7uG2zcW5BMFnVpQjXgL+b/q5/ovCufHMvJ7A7+f/ETA==
-X-Gm-Gg: AYBFou2u75tFDB6OX+raK51p3b0Kuz1j//txxt3r/UiGn2jI4MYE0b6PYQQB/bmMPQc
-	yKKlJuXMoR0aisLz7/tg6x2NdY8o2OigHshy8JnFhel5E8cRZRN9Cfu0oIXvKe91XDGQvw7oYnQ
-	mNbSvrOTeczf3qXls62e9aiJvavcox10mfk1jn9NhtgLPn/q2dD3FIrxROUVM/kGJXTWPhc7Mc+
-	WN74oqH3ArsfssF15r2nv16IXA1No/ZVikZEIbpW75zRxWATmVP2y4+LUBumCelOJifqSl6N7Kx
-	mvU2i0FH8I8scct0tm34WdVJHs4XLAycjpuEUAe1IYB7ivIhOPqSsxhpTgO3ypnEM3JiDMBkdaS
-	zm1JJVlvQy5sjOldCk74PPEG5R+uhThcA8cO05XIdZt851jipqyyOWVtNNkK7FZONtf0vM8XJW4
-	kTCDerLOTdr8j9GTAii+NfqJ5jdk7K/CjxSENoBiDiz8oHiQ+3suPAQ9X9lhCbU5nyfFHwqGd/g
-	IN53xXa/vjF65oZF9xJBP/v67xzrhwyB0dfih181zwXWE/IL1tIqXfK267c9T8w0wBpAWEWNP6U
-	BeE5mW1MzW0djp7HZ7yxzNkpp8qAU93QZYNJxAbVZAunWiWZXu0yU1aywUHYYt3lR138tMaNwaq
-	o82H1HBTrdfCaamxclw==
-X-Received: by 2002:a05:600c:a012:b0:4b8:d17e:da27 with SMTP id 5b1f17b1804b1-4bb55a85101mr210765035e9.27.1794835803006;
-        Mon, 16 Nov 2026 05:30:03 -0800 (PST)
-Message-ID: <6213ab52-73ad-46d8-83eb-0ab7161b2a8f@suse.com>
-Date: Mon, 16 Nov 2026 14:30:01 +0100
+        bh=CCHQc7jnb0JLMq8gidShY5BO6cTdSxwMxfyJmzh/rEw=;
+        b=V7Zzpw9Yn5X0prBJ9Ixj04Ffb9tepITPIn+4r/twSRQMed5Gx7uWMVwS9zxvT8M6ee
+         weHI5G1QseUGbBjC86LOyM/+XyrYIgw7+XgDoJBbXNgk+QxgKUlLsV+EiiDB6r4pqkDi
+         z4jJ4fWAL8Ov1FTK91pNk8CQGqyqYk/iDb6busyMAiWvBMts6n50fPlNhA6SRDio4jdP
+         fxuW6Oz94t77Cohtj81yLXXx44W9GWf5upr65hSchwMvj53vGjNipdn/qZ70YO4gJXMB
+         8QotLkFgSNkaS5ey5eHnaz1z7BrFt4CbR+mCbsrOfy0iMK5K1oAd36RmoDH45bZCTEUL
+         Ilag==
+X-Forwarded-Encrypted: i=1; AL+hErHFtdavrD2CeyTEIWefvkSru+xSRwZQZGyDJN9webAM2YORl5BQ+6UMH5o17CEAdPpjRANFH+1n+c4=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z+KSgdAqrf/a/acDo/d0zyq4Hmye3VldQNoh/xEQSP8e0SBUu7a
+	vzf0sL36PwKQAnTDpxvIIvKsMcy2FKYVH4pCouFalV/ptpyklAgFQN49415QA3rmZQ==
+X-Gm-Gg: AZFdTZfHUyUcIXuehzVTbM8F+6aJ7rJ3r56YgiX0pYjoRg+0BI+CCDBldqqEdN014BP
+	3kLIG9Kj1lsJs5m2ZXrkTjjtb9thfdqj8Vkpd9qHFpXq3Q4FpOeStvggDuaDn/Df9eGkXUUjt+v
+	X0wAvQ92ZmXsC6vOKtLTYXaU9+XOSuIFPRfxjQBCzILsJAcu0BNZwOGzT7Y2IUgj95wsZn0k2nu
+	NKBbI5ENs8gxbmVPsiqO5M9wb1S4OrFojJyuBPpUZvnwVYVSVNHZ8XWc7/dQGzeebC3+5h3Ox0D
+	gDvxkeKp7fZj8bnmU2CptmCcofomipX84sC4wS+U4dWDvucA0kYpKDPMQX+vWKVRyIzr+xoKs6G
+	SzCcZoPotphZAluulBomlCi0oQW9Rj8MVaQhBH7n5n9TJKHtzrZUJv3pQOXraGnlrtlqs2/npYj
+	Vb4KCboihRsvY/tIur2ouozHd3yKrLs0gUhd1Rk3f46dLID8Flnq8MVqouPUfFmR1+zpKaf4g3k
+	h4GynnqaTeEVLg9nSCwKxi8Dd846lFgaPSy3dGZJ8N0ijXmHD+TKEJ6ADHgtn1F5O0lH8CFd/JN
+	FlnnnPOwmhdQ0uWuH4yYSka3lIiBFTSy/d3k2gKWaNzAPSo1VLdXNaxXn5xBxFn9mSEWnIWgLIu
+	RGB5DtpQehs+EdaxNgj7VvCOfsUolkwnG2zddOA==
+X-Received: by 2002:a05:6000:27db:10b0:49c:9e8a:31ad with SMTP id ffacd0b85a97d-49c9e8a32c3mr15834934f8f.42.1794836166812;
+        Mon, 16 Nov 2026 05:36:06 -0800 (PST)
+Message-ID: <e889dd9f-46df-4047-beb9-17187080cf86@suse.com>
+Date: Mon, 16 Nov 2026 14:36:05 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] libacpi: Build TPM2 tables for the TIS interface
+Subject: Re: [PATCH 2/4] hvmloader: Support the TIS interface for TPM 2.0
 To: Jason Andryuk <jason.andryuk@amd.com>
-Cc: Anthony PERARD <anthony.perard@vates.tech>, xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>, Julien Grall <julien@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>,
+ Anthony PERARD <anthony.perard@vates.tech>, xen-devel@lists.xenproject.org
 References: <20261106231526.482418-1-jason.andryuk@amd.com>
- <20261106231526.482418-2-jason.andryuk@amd.com>
+ <20261106231526.482418-3-jason.andryuk@amd.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -126,133 +130,34 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20261106231526.482418-2-jason.andryuk@amd.com>
+In-Reply-To: <20261106231526.482418-3-jason.andryuk@amd.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c201ff/1794835803-2551A2A1-66884748/10/78276251493
+X-purgate-ID: tlsNG-d25034/1794836167-02CDBA5B-3BEBB55B/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 4678
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+X-purgate-size: 658
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 On 07.11.2026 00:15, Jason Andryuk wrote:
-> --- a/tools/libacpi/Makefile
-> +++ b/tools/libacpi/Makefile
-> @@ -16,7 +16,7 @@ C_SRC-$(CONFIG_ARM_64) = dsdt_anycpu_arm.c
->  DSDT_FILES ?= $(C_SRC-y)
->  C_SRC = $(addprefix $(ACPI_BUILD_DIR)/, $(DSDT_FILES))
->  H_SRC = $(addprefix $(ACPI_BUILD_DIR)/, ssdt_s3.h ssdt_s4.h ssdt_pm.h)
-> -H_SRC += $(addprefix $(ACPI_BUILD_DIR)/, ssdt_tpm.h ssdt_tpm2.h ssdt_laptop_slate.h)
-> +H_SRC += $(addprefix $(ACPI_BUILD_DIR)/, ssdt_tpm.h ssdt_tpm2.h ssdt_tpm2_tis.h ssdt_laptop_slate.h)
-
-I think it's time to wrap this line.
-
-> --- a/tools/libacpi/build.c
-> +++ b/tools/libacpi/build.c
-> @@ -11,6 +11,7 @@
->  #include "ssdt_s4.h"
->  #include "ssdt_tpm.h"
->  #include "ssdt_tpm2.h"
-> +#include "ssdt_tpm2_tis.h"
->  #include "ssdt_pm.h"
->  #include "ssdt_laptop_slate.h"
->  #include <xen/hvm/hvm_info_table.h>
-> @@ -444,17 +445,30 @@ static int construct_secondary_tables(struct acpi_ctxt *ctxt,
->              break;
+> --- a/tools/firmware/hvmloader/util.c
+> +++ b/tools/firmware/hvmloader/util.c
+> @@ -922,7 +922,17 @@ void hvmloader_acpi_build_tables(struct acpi_config *config,
 >  
 >          case 2:
-> -            /*
-> -             * Check VID stored in bits 37:32 (3rd 16 bit word) of CRB
-> -             * identifier register.  See table 16 of TCG PC client platform
-> -             * TPM profile specification for TPM 2.0.
-> -             */
-> -            if ( config->crb_id[2] == 0 || config->crb_id[2] == 0xffff )
-> -                break;
-> +            if ( config->tpm_interface == ACPI_TPM_INTERFACE_TIS )
+>              config->table_flags |= ACPI_HAS_TPM;
+> -            config->crb_id = (uint16_t *)TPM_CRB_INTF_ID;
+> +            if ( !strcmp(xenstore_read("platform/tpm-interface", "crb"),
+> +                         "tis") )
 
-Better use switch() right away?
-
-> +            {
-> +                if ( config->tis_hdr[0] == 0 || config->tis_hdr[0] == 0xffff ||
-> +                     config->tis_hdr[1] == 0 || config->tis_hdr[1] == 0xffff )
-> +                    break;
->  
-> -            ssdt = ctxt->mem_ops.alloc(ctxt, sizeof(ssdt_tpm2), 16);
-> -            if (!ssdt) return -1;
-> -            memcpy(ssdt, ssdt_tpm2, sizeof(ssdt_tpm2));
-> +                ssdt = ctxt->mem_ops.alloc(ctxt, sizeof(ssdt_tpm2_tis), 16);
-> +                if (!ssdt) return -1;
-
-Please can we not gain further instances of this style-violating code? It
-would be nice if ...
-
-> +                memcpy(ssdt, ssdt_tpm2_tis, sizeof(ssdt_tpm2_tis));
-> +            }
-> +            else
-> +            {
-> +                /*
-> +                 * Check VID stored in bits 37:32 (3rd 16 bit word) of CRB
-> +                 * identifier register.  See table 16 of TCG PC client
-> +                 * platform TPM profile specification for TPM 2.0.
-> +                 */
-> +                if ( config->crb_id[2] == 0 || config->crb_id[2] == 0xffff )
-> +                    break;
-> +
-> +                ssdt = ctxt->mem_ops.alloc(ctxt, sizeof(ssdt_tpm2), 16);
-> +                if (!ssdt) return -1;
-
-... the one you re-indent could be corrected as well. Actually, can't
-we consolidate both allocation and ...
-
-> +                memcpy(ssdt, ssdt_tpm2, sizeof(ssdt_tpm2));
-
-... copying paths by way of having another pair of local variables
-(pointer and size)?
-
-> @@ -471,8 +485,17 @@ static int construct_secondary_tables(struct acpi_ctxt *ctxt,
->              tpm2->header.creator_id   = ACPI_CREATOR_ID;
->              tpm2->header.creator_revision = ACPI_CREATOR_REVISION;
->              tpm2->platform_class = TPM2_ACPI_CLASS_CLIENT;
-> -            tpm2->control_area_address = TPM_CRB_CTRL_REQ;
-> -            tpm2->start_method = TPM2_START_METHOD_CRB;
-> +            if ( config->tpm_interface == ACPI_TPM_INTERFACE_TIS )
-> +            {
-> +                /* The FIFO interface has no control area. */
-> +                tpm2->control_area_address = 0;
-
-There is a memset() earlier on, so only the comment looks to be needed
-here.
-
-> --- /dev/null
-> +++ b/tools/libacpi/ssdt_tpm2_tis.asl
-> @@ -0,0 +1,25 @@
-> +/* SPDX-License-Identifier: LGPL-2.1-only */
-> +/*
-> + * ssdt_tpm2_tis.asl
-> + */
-> +
-> +/* SSDT for TPM 2.0 TIS Interface for Xen with Qemu device model. */
-> +
-> +DefinitionBlock ("SSDT_TPM2_TIS.aml", "SSDT", 2, "Xen", "HVM", 0)
-> +{
-> +    Device (TPM)
-> +    {
-> +        Name (_HID, "MSFT0101" /* TPM 2.0 Security Device */)  // _HID: Hardware ID
-> +        Name (_CRS, ResourceTemplate ()  // _CRS: Current Resource Settings
-> +        {
-> +            Memory32Fixed (ReadWrite,
-> +                0xFED40000,         // Address Base
-> +                0x00005000,         // Address Length
-> +                )
-
-I know you're only following what we do elsewhere (i.e. this isn't a
-request for you to change anything), but I wonder how we could make sure
-that such seemingly arbitrary address range allocations won't ever
-conflict. (I assume the base address is dictated by qemu?)
+If you only care about the result being (not) equal to "tis", why pass in
+"crb"? Preferably with "" passed in:
+Acked-by: Jan Beulich <jbeulich@suse.com> # tools/firmware/hvmloader/
 
 Jan
 
