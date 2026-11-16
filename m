@@ -2,43 +2,43 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D4F8C606A897
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 11:11:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5ABF0606B1A1
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 11:12:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=TgjMN56K
-Received: from list by lists.xenproject.org with outflank-mailman.1490649.1691647 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=NaYwloll
+Received: from list by lists.xenproject.org with outflank-mailman.1490657.1691654 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSucR-0007wz-Vt; Mon, 16 Nov 2026 11:11:27 +0000
+	id 1xSucp-0008RG-4o; Mon, 16 Nov 2026 11:11:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1490649.1691647; Mon, 16 Nov 2026 11:11:27 +0000
+Received: by outflank-mailman (output) from mailman id 1490657.1691654; Mon, 16 Nov 2026 11:11:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSucR-0007vs-Rr; Mon, 16 Nov 2026 11:11:27 +0000
-Received: by outflank-mailman (input) for mailman id 1490649;
- Mon, 16 Nov 2026 11:11:26 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xSucp-0008R7-1l; Mon, 16 Nov 2026 11:11:51 +0000
+Received: by outflank-mailman (input) for mailman id 1490657;
+ Mon, 16 Nov 2026 11:11:49 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <brauner@kernel.org>) id 1xSucQ-0007qy-Fg
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 11:11:26 +0000
+ (envelope-from <brauner@kernel.org>) id 1xSucn-0008Pp-BF
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 11:11:49 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xSucP-00CwnI-SL
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 12:11:25 +0100
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xSucm-00AdsD-Nx
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 12:11:48 +0100
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <brauner@kernel.org>)
- id 6afae4d3-8faa-0a2a0a5109dd-0a2a4509eaec-46
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 12:11:25 +0100
+ id 6afae4f0-bab6-0a2a0a5309dd-0a2a450bb77e-24
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 12:11:48 +0100
 Received: from [172.105.4.254] (helo=tor.source.kernel.org)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <brauner@kernel.org>)
- id 6afae4dc-be1a-0a2a45090019-ac6904fe9a1a-3
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 12:11:25 +0100
+ id 6afae4b7-b7e8-0a2a450b0019-ac6904fed598-3
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 12:10:48 +0100
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 0AA1162967;
- Mon, 16 Nov 2026 11:11:24 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B07B31F000C5;
- Mon, 16 Nov 2026 11:11:16 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 1333A6296B;
+ Mon, 16 Nov 2026 11:10:47 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 16C3E1F000C4;
+ Mon, 16 Nov 2026 11:10:39 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,23 +49,24 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="From:Date:Subject:References:In-Reply-To:To:Cc"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794827483;
-	bh=8CwpxM6nYTuBn1diZMKE8u8L7OG7WlbpBDnW4TTBYyk=;
+	s=k20260515; t=1794827446;
+	bh=zLEVq+Bpv9BnXZuXWTCC/0nvI0V4xS0vAuEcIsGc5V4=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=TgjMN56KOGGjy4LWUYsZ8zVo89DB80z6mNiJUIXdyCxzkfdDPL0CceRNnYEB5ZMAg
-	 PvkD68BWJ9caW2s/BGPrGC91Iq9CXON0BvEYC4o9C6G7FIaTwo+zxVlOEz2OOHPj5k
-	 4vXH0MjVLq/jft4abkooK+ZUvlfxnZFbaMziEvjtIgG2hkF85u9Jdu0B1Z0thxS1Vt
-	 ZGARk4NS/4O6UY4E9/nGiGeDdufCKu3ZzScYIpnsUw2WoGqih1dN6XANIxyQsbx8j7
-	 /P5GGzoXoUbjqBYgg50FlLRHJWxCQQmcH0xslfduPPlaC1VbV4Z1ZBjTDb0GhtHuP2
-	 ZujQbdQe5sKRQ==
+	b=NaYwlolld2jESWvGwOaWTxEbVaAHPZNh1LLvFE6S5MpCcqk+cf+N1nQf8Dku2zsdc
+	 XyHOtJ8BMGc1mA3Vrxn4Eg8Q093MTrz9Iup09iiuZHg7wX4L2QsIw7SS3rcteqNV4x
+	 b2D0jxB3MFKFxVIJVhXxLhRSg7PnHC/W5FlkEc/+kxEk8S4+luBw2VcOlfQxewVtA2
+	 Je4f2PghzObAunRtq7HCf0FD4sQiGwd31Mb5U6ODKV2wDoPSHpEqY7liE2IB/srDhO
+	 TJV0xsiM7pK3poFBzZlAc0Ax4uP8AaKDIftyXzMvuQ3xcrXUli/E6mrcx/WrTrnOUK
+	 ao8EBSnzLQ2lQ==
 From: Christian Brauner <brauner@kernel.org>
-Date: Mon, 16 Nov 2026 12:05:16 +0100
-Subject: [PATCH RFC v3 43/44] acct: refuse files on pseudo filesystems
+Date: Mon, 16 Nov 2026 12:05:11 +0100
+Subject: [PATCH RFC v3 38/44] nvmet: refuse files on pseudo filesystems as
+ namespace backing files
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261116-work-loop-pseudo-v3-43-8cbbea1cf34f@kernel.org>
+Message-Id: <20261116-work-loop-pseudo-v3-38-8cbbea1cf34f@kernel.org>
 References: <20261116-work-loop-pseudo-v3-0-8cbbea1cf34f@kernel.org>
 In-Reply-To: <20261116-work-loop-pseudo-v3-0-8cbbea1cf34f@kernel.org>
 To: linux-fsdevel@vger.kernel.org
@@ -85,20 +86,19 @@ Cc: Jann Horn <jannh@google.com>, Chris Mason <mason@kernel.org>,
  Amir Goldstein <amir73il@gmail.com>, linux-erofs@lists.ozlabs.org, 
  linux-kselftest@vger.kernel.org, 
  "Christian Brauner (Amutable)" <brauner@kernel.org>, 
- Alexander Mikhalitsyn <alex@amutable.com>, 
  Chris Down <chris@chrisdown.name>
 X-Mailer: b4 0.17-dev-ce4c1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1795; i=brauner@kernel.org;
- h=from:subject:message-id; bh=TBLyDKw5rIlrAxe1WyLhAIBRdo8Sa0ool6FMcens/Cw=;
- b=owGbwMvMwCU28Zj0gdSKO4sYT6slMWT9ejzBrFZos83lvdOmyU1dbrg+U5ejPTdxwtWo7L1VD
- VNiDrWpdZSyMIhxMciKKbI4tJuEyy3nqdhslKkBM4eVCWQIAxenAEyE7zkjQ4fU9EqupZErcpbM
- YdFl11N9/mKWoNrBrC3H9UQXrluybwojw9s/fcqVr01abSYZ5cX71J9+ofyxLFboXoAX66kl1eu
- TOQE=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1522; i=brauner@kernel.org;
+ h=from:subject:message-id; bh=tRTfMWpi6lEvvGl+lxY+pO25cW/8KtdlIZFwjvLJslM=;
+ b=owGbwMvMwCU28Zj0gdSKO4sYT6slMWT9etxtsODnTr4jerrvH7gkzS+68Piv7P69JfsYWHfKz
+ ZL03KHzv6OUhUGMi0FWTJHFod0kXG45T8Vmo0wNmDmsTCBDGLg4BWAiu6oZ/nC0OV4+zWbuG5Od
+ WKaZOmHv+rI3Rj5uPGlXu0xNsxL5oxgZJuv++PSw7/mNRcX/gqK/z/nk5+TzYvUj1cNC/H+yOEQ
+ Y+AA=
 X-Developer-Key: i=brauner@kernel.org; a=openpgp;
  fpr=4880B8C9BD0E5106FC070F4F7B3C391EFEA93624
-X-purgate-ID: tlsNG-bad1c0/1794827485-FD06B034-CFA8614C/0/0
+X-purgate-ID: tlsNG-42698a/1794827448-188C99EA-B7B4F160/0/0
 X-purgate-type: clean
-X-purgate-size: 1797
+X-purgate-size: 1524
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -107,49 +107,43 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-acct(2) already refuses to write its records to files on kernel internal
-filesystems and to procfs and sysfs files. It recognizes the latter two
-by FS_USERNS_MOUNT_RESTRICTED which misses every other pseudo
-filesystem. So a cgroup2 or binfmt_misc file is accepted as the
-accounting file.
+The file backend takes any file that can be opened for reading and
+writing. With buffered_io=1 that includes files on procfs or sysfs which
+then get read and written by a kernel worker on behalf of the host.
+Refuse files on pseudo filesystems just like loop does by switching to
+file_check_backing().
 
-The records are written with the credentials of whoever turned on
-accounting so this isn't abusable the way loop is. But files on pseudo
-filesystems aren't a place to store accounting records. Use
-file_check_backing() to refuse all of them.
+Note that the helper only accepts regular files and block devices. A
+block device ends up in the file backend when buffered_io is set. But
+so far the file backend also took anything else with ->read_iter() and
+->write_iter() such as character devices and FIFOs. The size of the
+namespace is the size of the inode which is zero for all of them. So
+such a namespace was unusable anyway. Refuse them.
 
-SB_NOUSER doesn't need to be checked separately anymore. It is only
-raised by pseudo filesystems and by tmpfs instances that are either
-kernel internal or can't be mounted.
-
-Suggested-by: Alexander Mikhalitsyn <alex@amutable.com>
-Link: https://lore.kernel.org/r/ae189903d4cda27130317a9312d94b53d07415ba.camel@amutable.com
 Reviewed-by: Chris Down <chris@chrisdown.name>
 Tested-by: Chris Down <chris@chrisdown.name>
 Signed-off-by: Christian Brauner (Amutable) <brauner@kernel.org>
 ---
- kernel/acct.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ drivers/nvme/target/io-cmd-file.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/kernel/acct.c b/kernel/acct.c
-index c440d43479ca5..0c502f778fde0 100644
---- a/kernel/acct.c
-+++ b/kernel/acct.c
-@@ -245,11 +245,11 @@ static int acct_on(const char __user *name)
- 		return -EACCES;
+diff --git a/drivers/nvme/target/io-cmd-file.c b/drivers/nvme/target/io-cmd-file.c
+index dfa8aa46188c8..2249ad3bb46d8 100644
+--- a/drivers/nvme/target/io-cmd-file.c
++++ b/drivers/nvme/target/io-cmd-file.c
+@@ -47,10 +47,9 @@ int nvmet_file_ns_enable(struct nvmet_ns *ns)
+ 		return ret;
+ 	}
  
- 	/* Exclude kernel internal filesystems. */
--	if (file_inode(file)->i_sb->s_flags & (SB_NOUSER | SB_KERNMOUNT))
-+	if (file_inode(file)->i_sb->s_flags & SB_KERNMOUNT)
- 		return -EINVAL;
+-	if (!ns->file->f_op->read_iter || !ns->file->f_op->write_iter) {
+-		ret = -EINVAL;
++	ret = file_check_backing(ns->file, FMODE_READ | FMODE_WRITE, S_IFBLK);
++	if (ret)
+ 		goto err;
+-	}
  
--	/* Exclude procfs and sysfs. */
--	if (file_inode(file)->i_sb->s_type->fs_flags & FS_USERNS_MOUNT_RESTRICTED)
-+	/* Exclude pseudo filesystems. */
-+	if (file_check_backing(file, 0, 0))
- 		return -EINVAL;
+ 	nvmet_file_ns_revalidate(ns);
  
- 	if (!(file->f_mode & FMODE_CAN_WRITE))
 
 -- 
 2.53.0
