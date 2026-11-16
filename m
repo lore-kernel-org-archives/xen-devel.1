@@ -2,45 +2,64 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 18FEB606A897
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 08:59:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9E23D606A336
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 09:15:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=cYB4rR1W
-Received: from list by lists.xenproject.org with outflank-mailman.1490292.1691231 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=b37ZX1DX
+Received: from list by lists.xenproject.org with outflank-mailman.1490300.1691242 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSsXy-0002N6-Dp; Mon, 16 Nov 2026 08:58:42 +0000
+	id 1xSso0-0006Ja-PD; Mon, 16 Nov 2026 09:15:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1490292.1691231; Mon, 16 Nov 2026 08:58:42 +0000
+Received: by outflank-mailman (output) from mailman id 1490300.1691242; Mon, 16 Nov 2026 09:15:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSsXy-0002Mz-Ay; Mon, 16 Nov 2026 08:58:42 +0000
-Received: by outflank-mailman (input) for mailman id 1490292;
- Mon, 16 Nov 2026 08:58:41 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xSsXx-0002Mt-An
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 08:58:41 +0000
+	id 1xSso0-0006JP-LF; Mon, 16 Nov 2026 09:15:16 +0000
+Received: by outflank-mailman (input) for mailman id 1490300;
+ Mon, 16 Nov 2026 09:15:15 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <Michal.Orzel@amd.com>) id 1xSsnz-0006JJ-Ky
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 09:15:15 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xSsXw-00HSw4-5K
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 09:58:40 +0100
-Received: from [10.42.69.5] (helo=localhost)
+ id 1xSsny-00BB8Y-5F
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 10:15:14 +0100
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6afac5b0-e002-0a2a0a5209dd-0a2a45058eb8-44
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 09:58:40 +0100
-Received: from [209.85.221.48] (helo=mail-wr1-f48.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6afac5bf-4cb1-0a2a45050019-d155dd30d449-3
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 09:58:39 +0100
-Received: by mail-wr1-f48.google.com with SMTP id
- ffacd0b85a97d-49a92144733so1198311f8f.0
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 00:58:39 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-49c5f78214dsm21181731f8f.25.2026.11.16.00.58.38
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 16 Nov 2026 00:58:38 -0800 (PST)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6afac9a0-bab6-0a2a0a5309dd-0a2a45038988-6
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 10:15:13 +0100
+Received: from [52.101.48.30]
+ (helo=MW6PR02CU001.outbound.protection.outlook.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6afac99f-fae8-0a2a45030019-3465301e53d3-4
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 10:15:13 +0100
+Received: from SJ0PR03CA0089.namprd03.prod.outlook.com (2603:10b6:a03:331::34)
+ by DSVPR12MB449095.namprd12.prod.outlook.com (2603:10b6:8:4fe::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.14; Mon, 16 Nov
+ 2026 09:15:09 +0000
+Received: from MWH0EPF000A672F.namprd04.prod.outlook.com
+ (2603:10b6:a03:331:cafe::57) by SJ0PR03CA0089.outlook.office365.com
+ (2603:10b6:a03:331::34) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.615.14 via Frontend Transport; Mon,
+ 16 Nov 2026 09:15:08 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ MWH0EPF000A672F.mail.protection.outlook.com (10.167.249.21) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.615.4 via Frontend Transport; Mon, 16 Nov 2026 09:15:07 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.57; Mon, 16 Nov
+ 2026 03:15:02 -0600
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.57; Mon, 16 Nov
+ 2026 03:15:02 -0600
+Received: from [192.168.31.141] (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.57 via Frontend
+ Transport; Mon, 16 Nov 2026 03:15:00 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,206 +68,103 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1794819519; x=1795424319; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=A3+rTk3NF67z+zczejY3jr4X1jSLwzIn21QfM+bykHY=;
-        b=cYB4rR1WygPmv8F4PFqtnAaMEFEAxkleZMbYO1dKbaSsShHgEI0uSZ5rG2HJCfIQwR
-         QfGRIE3FZ8UhoTU9pM0n4USdAZCo8iPsjYzB6QnVlHfbcTjFTHZpEQNe3f6zDu56hAtO
-         /NMCWoeJ2/gb3a2jQ4g5eyBm+UiNGp+vAh9aZekm9XkW9bQlvhn0oFEiKac8Tqr3ivAh
-         tZoDFNTw/6yz/SWQlnJAMvB22nKOeCY1quhEdODyBAf9zCiVqbv8+zFwKdhwA7PnJH5v
-         mvnwZ8E3mTWd6WxhU/WzzzAKKEwwM0taWfiF9xKFQPB/DAtMYPm4LKCVK2c2v8OQqioG
-         gwlw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794819519; x=1795424319;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=A3+rTk3NF67z+zczejY3jr4X1jSLwzIn21QfM+bykHY=;
-        b=DKvpuoJ8128a9DORf4VLTFeC4ZuMaaACKTBDCZY5T870jmBzei/1Fm4S9AHs1ZiZo7
-         F9OC8Z0oFZ1Rs/rBC0GlyAldzRJON8HNogjwfeO0QBLQMEru0Bnq0StVdamu2RyR83wG
-         ScXVQHe8xtLcBL1s3b1nAhKupasu25RWpbZiG9G0ghub9aJziudopTt3tEgf+9y9C57q
-         v8c3BaoIjD8H/eeico0aM73v0j1X836aE1D4bTGLVQeSAJ1hZJ9AA9EDs5P8YEOKU+Zp
-         uHSc1TWtboY1p26cU8d+jRnJHeuNgG3gX80k/6ji2WxMsOwEEuuhO1CGJOZFL0onZKlU
-         pqoA==
-X-Forwarded-Encrypted: i=1; AL+hErHWDR8BOYWuXBDu56jGp/Us3MJ7FKlnQ3pIvxhgiqlxJBBkaF+c+G2okUcAmYUt9SE0WbztIe9T5fA=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z+tubsuwg4GZOdZsbQJ/spjOq0gxjcuaTyhR4N96l+nW05gF0LC
-	EDkEFyLCodxTyMHbeB4G9FLpJCNyqywcFcHt5iATes+cm+8qGG5qLBklq6DE41xHuA==
-X-Gm-Gg: AZFdTZc63IOA6zfo/d+mRCTWC+tOxMwTVc9UB9YCe9zoNfEGCor4ugYPGFi4lR5AD5w
-	y+2OfG9LknzFK+ImqPybuB25SX1S1sdSnhwb9oP8gTApNyCCApm7W6YSYuxNXyuTZj8YpLgmq1K
-	d7at2TiZHvEEHp8RDLQNB0ifjCNXmARK+IdJUMBQ4eBO9RPFUUWR/wB5MjKVQt4gkQYckiEjll1
-	lz348JwDzl4hySAz7GxCfg0/FJSn+1hGXZGSKj1e3Dd81yBvjMNk4vIi4SnJYdUU/vWk8e2c8Oa
-	udZs4Z4Megt5xKmM6ekqzFT25bCGl7OHAc03082rL+TdLgPGuarE0Bo3TUFyFr+cu+M29ZeUAQY
-	8zD0yh6UZK5DPyYsIjJYoQOJMuTkMQMzfoHKIaCHmSw74GiqIu3CbJjG61xMhbpBeDeYXGM9C0l
-	ybpdHJr63HhV4NpwQkx+gw6ADT18wJ0oomCv9JCXltfV1SoWpTfPTOvFD/lwK6PvQySMUE7msNs
-	BeH+NwIMLaoX7lOlTCH9m9RbKXmtgWBmq/viURepTPVmIgViz0Acc3HZ+E0OVEsyxfnPAqfcKuA
-	z+fqiyu+QBMX4qZJvrZvGwCIMnBATmCYnqqUK7OOIQlChS3ok0dczOGR7RY3pwB17MkdapcMW93
-	rK/MWaQPgqxMPmOaMfg==
-X-Received: by 2002:a05:6000:25f1:b0:48a:fba3:d5b1 with SMTP id ffacd0b85a97d-49c7381a73amr19979286f8f.55.1794819519357;
-        Mon, 16 Nov 2026 00:58:39 -0800 (PST)
-Message-ID: <6c7b2b79-629e-4540-b94f-d88a2f039394@suse.com>
-Date: Mon, 16 Nov 2026 09:58:38 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=g82t2Pyy3DgISJU+F0XKm0wQXw4lGHbjCmYY1NAHmS2u9/rYJYqRhV9dn7lugAzbPP404qYt894aKmXjdUQ5bZkJ/5JHe02nIX+bzKIweNKktwN8pcCmbRvoYxhd8GzN/n8jRbi+Ba1rFY5TI18zIuQJSsAzPwx3lr0HkQqbk8RkaXBSykjW1KL+m9Emmkd9uXYBV2LRgslCxc8D9TpBnCYzYtjNyNtf6g8weSU9vXwaE/TvD3tqIRpCcPEULi2b8yBY6BdEpcQ87Nyajf3UPOl94JeDmfDsHavjUrtjffpoTNclzRniHQxLpdg7qhYFjW5KCE0ObNT0Htx+wPTHuQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=/mr0bP6bkLX247dxuec/Rng2W59iThAyc7t9N1pmBv4=;
+ b=nXshC2SPZSiYmDSW/3BiIGECKfcCMHU691JZs7HrjVAKNCKdwAxXeIdDsDWISnRDl9ktkyq7sVQs9j8sGAoKAQddtDdB8y2KfwRCV4Thn6mkYFCpIPri1Cny8HfCqQrCvGtSNVG8fvB0kwaD5FL2hr8ZNK39Aivyu6Xs3MOgHHw8ftt/GskTHFzch+Y/tlO6Q5O6u5AFHnawrGHCYbRgvIvw2H0jOkO1dV7V+9NuQHJhwxh6t9CETLWughjtoItSQzVVW4alms+6dv9cDUydQaH90J8zJVfOqfOLH8BgXYnOX9hveraKB6LrizlKMVBF0RuyrBO/uXjH6G+7yHfQxg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=/mr0bP6bkLX247dxuec/Rng2W59iThAyc7t9N1pmBv4=;
+ b=b37ZX1DXdHI/rpT81WWuTinu6tTuR1SYC+cFvWw5bAY5/68rMGBKITI/u2+b4tu6xoXHYYxG0+sdGVrNmgBKWYpvOs7z0AETAZlAamkpbiwo9+FlHfUmXakE9oVgqS8dKLDGRcADH6Eht7SAlGevvYzgsLjWdPRaUVwPL1hWZF0=
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Message-ID: <f6508bde-7024-4b5b-a1f2-993cf0effb0e@amd.com>
+Date: Mon, 16 Nov 2026 10:15:00 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] x86emul: Zero-extend unsigned 8-bit immediates when
- decoding
-To: Stephen Cheng <stephen.cheng@citrix.com>
-Cc: Ross Lagerwall <ross.lagerwall@citrix.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
-References: <20261116012748.4872-1-stephen.cheng@citrix.com>
+From: "Orzel, Michal" <michal.orzel@amd.com>
+Subject: Re: [PATCH] xen/arm: vpl011: record the virq only once it is reserved
+To: Stefano Stabellini <stefano.stabellini@amd.com>,
+	<xen-devel@lists.xenproject.org>
+CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, "Volodymyr
+ Babchuk" <Volodymyr_Babchuk@epam.com>
+References: <20261114020040.4154189-1-stefano.stabellini@amd.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20261116012748.4872-1-stephen.cheng@citrix.com>
-Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <20261114020040.4154189-1-stefano.stabellini@amd.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c201ff/1794819520-243112A1-273DE1E1/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 4317
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=4.0.1
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MWH0EPF000A672F:EE_|DSVPR12MB449095:EE_
+X-MS-Office365-Filtering-Correlation-Id: 63697b52-e7bd-492d-871c-08df43c21bbf
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700016|82310400026|1800799024|376014|23010399003|18002099003|22082099003|261009223027099003|11063799006|56012099006|10067099003|261028144727099003|261026121527099003|261026140227099003|261022105027099003|261021135927099003;
+X-Microsoft-Antispam-Message-Info:
+	h7mk6O6IpI48Oer6NMlR/+GxueoxrYc88PP1vX7WGwRxYf45c53AnFQ0vQ6yO3f9HqKUWNMWCw+AXiUEgBILXWWyCjToXHTHVp23CxEkeWJVyArTwm4YK+FbuJJ2raiBLv6Igi0RD2vMK9D7/uIPM0z4v6N84wfdsfSsFRFJ2WYWStRIogleMYM1MTkw6jbzglGI7eWnbGFwZqt7VhZKg6m5l6s1ovjPSMxK8+UGWRlG8Ck/0p7MZpRk2FgcKexKAx0BBazvvwgL0WfdJ26vtdhm5chabA6sBjDG3QJM73+kQOtvY/ZQZYCdEIy8aY/52pHzGjW2Uezj//frwsJUWB3PQI6j0VGQhYQSREvvZiAHTHaiQ14DC1gFku3OON3SgLX6EgTzh3ukjs8lGLS+HaRhskwgRs4KZcbIk7+Dn8uSUouaDx8CWgUyAd0yypaUy6WYCnczjhRSyfGjlf/TizEcy0/89odyqvajo1tHdp7tMTTr62QC3egu6A8KvV2CPH1fdXy/Cium+1dz4AnXrAPr+0MVN+txJGVMlOpQgOKgyLgWI+wqWQnmlz7XFDCKpRzIM/MY0Otc/Ui5LLSBwiC7ZZ65EcCaz76L/JQxNl21kLM+THjZzVXbOdzgqHrKK3r/R1rpZcpgDFqJQS0s7v4ckAsiW7LBK6iaE/cWlxZkyt2gW1jX7CN3MkljePutLRXEWY7DD1L432dMObgBvQ==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(82310400026)(1800799024)(376014)(23010399003)(18002099003)(22082099003)(261009223027099003)(11063799006)(56012099006)(10067099003)(261028144727099003)(261026121527099003)(261026140227099003)(261022105027099003)(261021135927099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	HLEI7nyinbUc+tpdHe8FI7PZTzgB0KnkNm9gKHxaB5sbJOj/8HOVMG8gGvwzLBjYzsnt1Msbd60zSO/4+hbw/t+RzdsMeFBCpi6+6oYH/HHfag4fju05oCJTzdSZu/I6431AWtjxsZ6PzyzeUnvpl9mHPP6NbhGWFp7QVAxjXb83LtCgkQuy0C7oHOOY7EMTS9ecDGcxwI6XOHOO5GbBliaYphVrf+xJVdHUHJ+L61ihKbp0Cvc573sj8s8afjM+3lxLmt/nw89gD695rELf2EvzuhojEBLpO7al0vSbpfpGUYVzuqPNnxtAh7r2jtt94SkH45Cr23q49giI4itfRX9BVD08ZrLitMPsbS11t5wHacRgP4V/XxcdlyzMdBLoX1H1tN1F7v1AxdAgA40k4obCDC00eSRiKnQhX4j5hRcdHpRmrUPmtg4V30SJWRMr
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Nov 2026 09:15:07.6795
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 63697b52-e7bd-492d-871c-08df43c21bbf
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	MWH0EPF000A672F.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DSVPR12MB449095
+X-purgate-ID: tlsNG-33051d/1794820513-6D4D74E9-E26321F6/0/0
+X-purgate-type: clean
+X-purgate-size: 1049
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 16.11.2026 02:27, Stephen Cheng wrote:
-> The decoder sign-extends all 8-bit immediates. This is right for e.g.
-> Jcc rel8 and Grp1 (83), but some 8-bit immediates are unsigned: the
-> vector of INT, the port of IN/OUT, the base of AAM/AAD, the count of
-> the Grp2 shifts (C0, C1), and the 8-bit immediates in the 0F, 0F3A and
-> XOP08 maps. For these, s->imm1 holds a wrong value for 0x80 and above.
-> x86_insn_immediate() can return this value too.
+
+
+On 14-Nov-26 03:00, Stefano Stabellini wrote:
+> domain_vpl011_init() sets vpl011->virq before vgic_reserve_virq() claims
+> it, and both a refused reservation and a failed
+> alloc_unbound_xen_event_channel() take the out1 error path into
+> domain_vpl011_deinit(), which frees vpl011->virq. That clears the
+> allocation bit of an interrupt the vPL011 never reserved, so an
+> interrupt held by another user can be handed out a second time.
+Who is the other user here? The virq is either GUEST_VPL011_SPI or the
+Xen UART IRQ. libxl rejects a passthrough IRQ that matches the vpl011
+SPI, dom0less reserves the vpl011 virq before passthrough and panics
+on failure, and the Xen UART cannot be assigned. AFAICT there is no issue as of
+today and this should be explained in the commit msg.
+
 > 
-> The worst case is INT $0x80 to INT $0xff, which puts a negative vector
-> into the event (e.g. -128 for 0x80). hvm_inject_event() then fails its
-> "vector == event->vector" assertion, and a debug Xen panics. An HVM
-> guest can trigger this with the forced emulation prefix (hvm_fep).
+> Record the virq only after the reservation succeeds.
 > 
-> Zero-extend these immediates in the decoder, and drop the (uint8_t)
-> casts at the IN/OUT and AAM/AAD use sites, which are not needed any
-> more.
-> 
-> Fixes: 653cae725cea ("x86/32on64: use generic instruction decoding for call gate emulation")
-> Fixes: 52053d5fc2f9 ("x86/emul: Drop swint_emulate infrastructure")
-> Assisted-by: Claude:claude-opus-5-5
-> Signed-off-by: Stephen Cheng <stephen.cheng@citrix.com>
+> Fixes: 08bbc1c02d38 ("xen/arm: vpl011: Fix domain_vpl011_init error path")
+The SHA is wrong - unknown revision. That said, I think this should be
+1ee1e4b0d1ff instead.
 
-Looks largely good to me now, just a few minor things:
+~Michal
 
-> --- a/xen/arch/x86/x86_emulate/decode.c
-> +++ b/xen/arch/x86/x86_emulate/decode.c
-> @@ -650,10 +650,19 @@ decode_onebyte(struct x86_emulate_state *s,
->      case 0xc4: /* les */
->      case 0xc5: /* lds */
->      case 0xce: /* into */
-> +    case 0xd6: /* salc / udb */
-> +        s->not_64bit = true;
-> +        break;
-> +
->      case 0xd4: /* aam */
->      case 0xd5: /* aad */
-> -    case 0xd6: /* salc / udb */
->          s->not_64bit = true;
-> +        fallthrough;
-> +    case 0xc0: case 0xc1: /* Grp2 */
-> +    case 0xcd: /* int imm8 */
-> +    case 0xe4 ... 0xe7: /* in/out imm8 */
-> +        /* The 8-bit immediate is unsigned. */
-> +        s->imm1 = (uint8_t)s->imm1;
->          break;
-
-This now separate case block needs to move down. All such switch() statements
-aim at having their case blocks sorted by lowest-numbered case each. There
-may be anomalies to that rule, but we want to make sure to reduce their set,
-not increase it.
-
-> @@ -1796,6 +1805,8 @@ int x86emul_decode(struct x86_emulate_state *s,
->          break;
->  
->      case ext_0f:
-> +        if ( (d & SrcMask) == SrcImmByte )
-> +            s->imm1 = (uint8_t)s->imm1;
->          rc = decode_twobyte(s, ctxt, ops);
->          break;
->  
-> @@ -1804,6 +1815,7 @@ int x86emul_decode(struct x86_emulate_state *s,
->          break;
->  
->      case ext_0f3a:
-> +        s->imm1 = (uint8_t)s->imm1;
->          d = ext0f3a_table[b].to_mem ? DstMem | SrcReg : DstReg | SrcMem;
->          if ( ext0f3a_table[b].two_op )
->              d |= TwoOp;
-> @@ -1814,6 +1826,7 @@ int x86emul_decode(struct x86_emulate_state *s,
->          break;
->  
->      case ext_8f08:
-> +        s->imm1 = (uint8_t)s->imm1;
->          d = DstReg | SrcMem;
->          if ( ext8f08_table[b].two_op )
->              d |= TwoOp;
-
-All of these three may benefit from having a brief comment added, e.g.
-"All immediates in this encoding space are unsigned ones."
-
-Also, just to mention - in the APX series, where I've done the respective
-adjustments already, I've deliberately avoided the use of casts. "&= 0xff"
-is shorter, and avoiding casts is generally a worthwhile goal imo.
-
-> --- a/xen/arch/x86/x86_emulate/x86_emulate.c
-> +++ b/xen/arch/x86/x86_emulate/x86_emulate.c
-> @@ -2505,7 +2505,7 @@ x86_emulate(
->  
->      case 0xd4: /* aam */
->      case 0xd5: /* aad */
-> -        n = (uint8_t)src.val;
-> +        n = src.val;
->          if ( b & 0x01 )
->              _regs.ax = (uint8_t)(_regs.al + (_regs.ah * n));
->          else
-> @@ -2561,7 +2561,7 @@ x86_emulate(
->      case 0xed: /* in %dx,%eax */
->      case 0xee: /* out %al,%dx */
->      case 0xef: /* out %eax,%dx */ {
-> -        unsigned int port = ((b < 0xe8) ? (uint8_t)src.val : _regs.dx);
-> +        unsigned int port = ((b < 0xe8) ? src.val : _regs.dx);
->  
->          op_bytes = !(b & 1) ? 1 : (op_bytes == 8) ? 4 : op_bytes;
->          if ( (rc = ioport_access_check(port, op_bytes, ctxt, ops)) != 0 )
-
-How about an ASSERT() each, to make sure the handling doesn't break again?
-
-Jan
 
