@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E2D94606A31C
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 15:48:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3D2BD606A31C
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 15:58:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=ZTPsIfyZ
-Received: from list by lists.xenproject.org with outflank-mailman.1491183.1692078 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=PLzN+rM9
+Received: from list by lists.xenproject.org with outflank-mailman.1491194.1692086 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSyw1-000872-Kr; Mon, 16 Nov 2026 15:47:57 +0000
+	id 1xSz6F-0002Iy-LZ; Mon, 16 Nov 2026 15:58:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1491183.1692078; Mon, 16 Nov 2026 15:47:57 +0000
+Received: by outflank-mailman (output) from mailman id 1491194.1692086; Mon, 16 Nov 2026 15:58:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSyw1-00086v-HP; Mon, 16 Nov 2026 15:47:57 +0000
-Received: by outflank-mailman (input) for mailman id 1491183;
- Mon, 16 Nov 2026 15:47:56 +0000
+	id 1xSz6F-0002Ir-Iw; Mon, 16 Nov 2026 15:58:31 +0000
+Received: by outflank-mailman (input) for mailman id 1491194;
+ Mon, 16 Nov 2026 15:58:29 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xSyvz-00085b-US
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 15:47:56 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xSz6D-0002Ie-JU
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 15:58:29 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xSyvz-008X5u-AB
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 16:47:55 +0100
-Received: from [10.42.69.10] (helo=localhost)
+ id 1xSz6C-008YtA-H6
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 16:58:28 +0100
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6afb257f-bab6-0a2a0a5309dd-0a2a450ae69e-36
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 16:47:55 +0100
-Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6afb280a-2eae-0a2a0a5409dd-0a2a450ca170-38
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 16:58:28 +0100
+Received: from [209.85.221.54] (helo=mail-wr1-f54.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6afb25aa-f2d2-0a2a450a0019-d155802bad6a-3
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 16:47:55 +0100
-Received: by mail-wm1-f43.google.com with SMTP id
- 5b1f17b1804b1-4b79502c27aso29329605e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 07:47:55 -0800 (PST)
+ id 6afb2824-f479-0a2a450c0019-d155dd36c048-3
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 16:58:28 +0100
+Received: by mail-wr1-f54.google.com with SMTP id
+ ffacd0b85a97d-491aaed7565so1715355f8f.2
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 07:58:28 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb55ae5299sm316347395e9.11.2026.11.16.07.47.53
+ ffacd0b85a97d-49c7390fe82sm23896042f8f.17.2026.11.16.07.58.26
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 16 Nov 2026 07:47:54 -0800 (PST)
+ Mon, 16 Nov 2026 07:58:27 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,60 +49,68 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Cc:Content-Language:References:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1794844074; x=1795448874; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1794844708; x=1795449508; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :cc:content-language:references:to:subject:user-agent:mime-version
+         :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=P6qjjXbFlhk8OziYkHHPgTHcawNYgWBVea5G8hCwYgk=;
-        b=ZTPsIfyZtXi94T0KWC3LuoHAgRL6hCAVKBWhxFhsIxQdYt9+TCphHoLJ9APlYPtT3N
-         ch2jvu5mWPi7lDjigfxCr6kimP/wAv9g5jNkHAb558zcXQ2NXoKWVguOjbd2/eGaexCS
-         63bl2e6+b/8ECivCVTuCWr+Tbifxn/IWel8gRZrSOB6FTEaJWGw+u3FIuRQyEL1jiXzl
-         7EySgQugVKAF3/U1XaZnvzaKyuQyKcBL16K9b1EiyeGtcbkpVH7jnzp2JlR3yxgnDx+A
-         NKix2BYHtsvRdmecMCIKNWnFJQrt83o5efN8b6+l4BnfyM3eLFq8IUeWUqWdwcmhqdHf
-         s0ZA==
+        bh=S75vfLM6jYvnyqv9enpeOGGpJB4QD+xJuboc1fPv5xM=;
+        b=PLzN+rM9G9U41NpqVpP6H9geTVZu6Deih//Ok9T44wNEYGOYjgCNQBUzM8pCC+yMog
+         0oseWy+RNqvtN9zli9Xd6tmX2H/LsREJyZMX83nPKmWU8UUQ12roG7i1O/SMRH/y0966
+         ZQ1mpbmurIaueMHevQS1Lj5gs7RoydFIdwwmhBZEWzlwycrVUTjztjctZbCHOJ112ve7
+         BRtFNTD8bZj0kowaXeN8PCSkXfk2crhGlQjYymEEMrqu/H0jx73rWTEqCi5AOGXM+FZS
+         0tgr95Q81/gtpY61aPJpTp0jzfEffyWFRJ308ZPSIWOexG6wNih8fG4XrDPKRlEurdZF
+         NrOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794844074; x=1795448874;
+        d=1e100.net; s=20260707; t=1794844708; x=1795449508;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :cc:content-language:references:to:subject:user-agent:mime-version
+         :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=P6qjjXbFlhk8OziYkHHPgTHcawNYgWBVea5G8hCwYgk=;
-        b=M3Y/GhG2H4xru7bfTIKcjKT2DRTKL91M0v4Tveuy3gX/ELGLL/R5porT3Bm7VDTncJ
-         gDiyrh1DJXCtz1IEJ7DdB+ZXA7vKO8mf8E0Hv778H+q+QCOEPJs1Jgoh+oTYMeNWZT0x
-         UXgK4NFOjVwXZUOOouA31StGUfNIP74SvvYQYPMlpquBEbU181Jd4jJtWYVJ5JtP0fst
-         CEwxqPyZeRJuSQB/seWDGkRBMUAi0b0SOQiOXI0b5x0MgbudbA3uEh+34C+1joOqIYgk
-         mkZ+456z+47TOaRovyplf36CC8Xfb78VtaWhdDSzcRs5yYNn4Jw6ktLAIhWHYHBAuyIx
-         pAnQ==
-X-Gm-Message-State: APuU4Z9dzaTE0be+iwYVEX0GlOCwiDNLShAAE/Gg29aqX09DWLoUsgQD
-	KFiuFTvN5wG26k5hZ+4bWb161m6cXaKwf3OLu94qOIVMiv0aYpi9awhjEI6A8I6NlQ==
-X-Gm-Gg: AYBFou391ZLcIuUk/7ALIgoMRS0okXguVUy4PcIVoj2p6ciPCn81io4TM/r5AmWeBkY
-	0zf8/rdoY/00/LNb9w+RCac+g+5Hjjg+/4dO1mXqHgZvDsO+Oh8nZk5QbqbTKJzfN4xUsQP0hvj
-	kS3N9w55YIKac33NfkVvSMgaQ1b164BkmlkXb1QSSOTDfm8CvBOS7Huvm8iYq6IOzpPieZ38V06
-	/XcBbp6JM7SwiOJNK+pP90J2zw+XFsjXNKmMVXrFSHPgUBvZreGir1vtHWbwkfNAtO4w8e5Xq6/
-	/tBr6CcoEC2hp34PndtOryDL9XIf0NbjP6RZbdOMTw5BTsTVEkXLn7zKur9A08+M/PSGNX6kYxN
-	4W5Yj8Yb58CxhWjFDj6Eyl333yBJrhtCJVwpnFuCpjJzSjE5MZWKDo4aeIfdU0CYuhOQkgLishK
-	nLtiFOC3vxmqJTccieNS+Y3YdoMcllcONzKwPNBHIbJ8bMFSy59YNgmLfpz/GvOPir5z7NdRYVm
-	aWGjymppbcFlfVfpZQsEjJMWdQ8Ge6BWz1QJg/bjipc3TUAc42o1QSV4P02ylXmFzx+SuTizau4
-	5Ih3ogQRPCBSqIgxaDbG36yuYODMqJz8Qo2jyeByb8GyrvIYpm+EC7oIVcezRUOGQbLr1KEaI/r
-	1u/YnMsYZW/0eAwiN2g==
-X-Received: by 2002:a05:600c:8b4c:b0:4b7:6b96:e431 with SMTP id 5b1f17b1804b1-4bb55ab56ffmr242967165e9.28.1794844074520;
-        Mon, 16 Nov 2026 07:47:54 -0800 (PST)
-Message-ID: <866f84bf-4cfc-4f93-8e88-02d8a7311321@suse.com>
-Date: Mon, 16 Nov 2026 16:47:53 +0100
+        bh=S75vfLM6jYvnyqv9enpeOGGpJB4QD+xJuboc1fPv5xM=;
+        b=nF3wgMUXYArt5v8+t7piKX7nbikyJe9lr0NDR4QzEOKAJaDgIzJlsFPlFXQ8xUPU7H
+         u2fRXiAuVrBYyYmDduYlPbzTkwTqEO8Ee/b+KAWGQZIO5P7CR2OVpBlqe9HCA30zDGBE
+         ps1nKuPGPWVGPRcFMOj2Zpl6cy/6vhc6wIe5QjFUqWPXUTyOlAcj1yS78qX6AHJj5h59
+         /gAzuZaz3TRTBztO9eTxev3KEZa5WF7AAJlmHbRG2whBXMZuz/aCUrWf2tepXQqNW4aK
+         wzH4J+rqlWFJ9TSZX3QqnA5j4B+bu+PbVQiu+XRfBYsjF/adDTj6L27o00H75E9mQg6u
+         BDZQ==
+X-Forwarded-Encrypted: i=1; AL+hErFCl9SbdZ0Yaq2Y3rqae1gMZOtyaSnZEQ+avNK3hAQLpYnbWJ5kPwmWF+/z2e3MJk8Hvzcjf4ruTzQ=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z92DU6ZfRW/Gnmep5LEfgQdVrUgHGOoKYQH//6POrj/tX+OZfp3
+	/3MwrjpWmVNt0N4Q3I3NPZ9SwXmzxYuKc34m3BuALmeHZ7CrU17Zryd0dNjjK6cK7kVwoNN+LSI
+	eFZQ0yA==
+X-Gm-Gg: AZFdTZfusD+G4aGLz3Rs6Y+xiYrdUak/YnG8Wxo0eyycpmhWxoQhy6nfJVDRnI91/as
+	s9FRGMOw2u6u9w0LAwHt8mrmJmn68Fd52Nmv7wE+Y18zVEhL0J6fXYYIMGtg25GnKICShErhdYB
+	1DXr2tBDwiPlPr2D6TPGM2f1e18lER2+2Oy084pFilG7fXxmCjaADklJOHPHvIE6EnQwuqF3665
+	/ZXOoQsDLKImvjbqColhDAoy37oRZ5ueRYsNvgL8vy+QvemlEFEtSWuGaXgTrdvdfKTCYZ7hE6I
+	SzFNW/Gx0CqINIqQcoYHZukmR8iZBV0OtnIqeP2neb4qdbGkCNgpCcvAeEPNXrgcLO0NIeCJ4jQ
+	WmYohMB2cg8zksjTxCcmy/ny1TNwRMb1fcm5o4QBy3C7XUJ1k5eJkcK5DBtyNmRAqY6/tW87fQf
+	SL/hiJ+EPGMyY0UpJzzskCvWIfK385g+eJI6ZpkdORb102/1SJwT5kmeY4++udgJ7m6gzaKWH83
+	sY6DT1Z+qMVo6SSBwK8uiVgSepNLRzT3wSlcHjVCk1S0znTSh/3FEOOIcxpMDv4nqpK1yPfZt4O
+	BibrIxkdmO3Y1B+GGqIJz6Hq3RHHoajUyeiOsixZh5+TCtajevlOE/wX8SRaT4MQGL9+/A+lhvC
+	7CNdVZX43WrrWB6Qk
+X-Received: by 2002:a05:6000:2408:b0:490:6327:96da with SMTP id ffacd0b85a97d-49c6b788747mr32543315f8f.0.1794844707789;
+        Mon, 16 Nov 2026 07:58:27 -0800 (PST)
+Message-ID: <a7396d64-3251-431d-a24c-afcc6c1f6e0c@suse.com>
+Date: Mon, 16 Nov 2026 16:58:26 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] xen/riscv: bound each IMSIC MMIO regset by the
- per-group hart slots
-To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-References: <1794842995.8631fc262581453bbf619ec5b2062170.1a1e4faaa300006d3f@vates.tech>
- <d37e0e49-3822-4088-9016-31178facac0c@suse.com>
- <1794843902.8631fc262581453bbf619ec5b2062170.1a1e50881df0006d3f@vates.tech>
+Subject: Re: [PATCH v13 04/14] xen/percpu: defer freeing per-CPU areas after
+ resume failures
+To: Mykola Kvach <xakep.amatop@gmail.com>
+Cc: Mykola Kvach <mykola_kvach@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1793129971.git.mykola_kvach@epam.com>
+ <3f0239435a9013b5ea35dda4ddd0253ef42e26ee.1793129971.git.mykola_kvach@epam.com>
+ <35bf81cf-594f-4fff-ad3f-13cccf559d72@suse.com>
+ <CAGeoDV8bMiJFZ9X6G3e+qEP3xnbrsd-ycHiscidzR9PPx7PN4g@mail.gmail.com>
 Content-Language: en-US
-Cc: xen-devel@lists.xenproject.org
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
@@ -127,12 +135,12 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1794843902.8631fc262581453bbf619ec5b2062170.1a1e50881df0006d3f@vates.tech>
+In-Reply-To: <CAGeoDV8bMiJFZ9X6G3e+qEP3xnbrsd-ycHiscidzR9PPx7PN4g@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-4011c0/1794844075-591C5CFC-F22566DC/10/78276251493
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-d25034/1794844708-76CDBA5B-4341F747/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 1595
+X-purgate-size: 2138
 X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
@@ -140,35 +148,48 @@ X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 16.11.2026 16:45, Baptiste Le Duc wrote:
->>> +    /*
->>> +     * Parent irq i is given hart slot i, counting slots across the register
->>> +     * sets in order. A slot with no hart behind it therefore shifts every
->>> +     * later irq one slot early, onto the previous hart's interrupt file.
->>> +     * Counting can't tell that from harmless unused slots at the end, hence
->>> +     * only a warning.
->>> +     */
->>> +    if ( nr_slots > nr_parent_irqs )
->>> +        printk(XENLOG_WARNING
->>> +               "%s: %lu hart slots in IMSIC MMIO regsets for %u parent irqs, unused slots must only be at the end of the last regset\n",
->>
->> I'll leave full review to Oleksii, just a remark here: This wants shortening some.
->> Not only for source line length (we allow going past 80 cols, but please not this
->> much), but also for what actually ends up on a serial console. For example, I
->> wonder whether what follows after the comma really needs to go to the log. If the
->> message appears, context info can be obtained by consulting the source.
->>
-> I kept the literal on one line so it can be grepped, as CODING_STYLE
-> asks, but I see the point is rather to keep the message itself short.
-> I'll drop the part after the comma, the comment above already explains
-> it:
+On 16.11.2026 16:15, Mykola Kvach wrote:
+> Hi Jan,
 > 
->      printk(XENLOG_WARNING "%s: %lu hart slots for %u parent irqs\n",
->             node->name, nr_slots, nr_parent_irqs);
+> Thank you for the review.
+> 
+> On Tue, Nov 10, 2026 at 1:03 PM Jan Beulich <jbeulich@suse.com> wrote:
+>>
+>> On 27.10.2026 22:05, Mykola Kvach wrote:
+>>> When a CPU fails to come back during system resume, cpu_up() sends
+>>> CPU_UP_CANCELED. After trying the other CPUs, enable_nonboot_cpus()
+>>> sends CPU_RESUME_FAILED for the same CPU.
+>>>
+>>> On architectures which do not park offline CPUs, both notifications
+>>> queue free_percpu_area(). The release metadata, including the rcu_head,
+>>> is stored in that CPU's per-CPU area. The first callback may already
+>>> have freed the area when the second notification arrives, or the same
+>>> rcu_head may be queued twice. The CPU_RESUME_FAILED callbacks also need
+>>> the area to clean up timers and CPU-pool state.
+>>
+>> I think there's another change needed, for the change you presently do
+>> to not cause a leak: If enable_nonboot_cpus() calls cpu_up() for a CPU
+>> whose bit isn't set in frozen_cpus, and if that call fails, the CPU
+>> later wouldn't have the CPU_RESUME_FAILED notification sent for it.
+>> IOW the freeing would then not happen at all. Question is whether
+>> simply setting the bit in frozen_cpus would be correct: Notify
+>> handlers may not expect CPU_RESUME_FAILED for a CPU which wasn't
+>> online at the point of suspend.
+> 
+> CPUs outside frozen_cpus are only tried when park_offline_cpus is true.
+> In that case, the existing !park_offline_cpus check already prevents
+> freeing their per-CPU areas.
+> 
+> When park_offline_cpus is false, CPUs outside frozen_cpus are skipped.
+> A failed cpu_up() leaves the bit set, so CPU_RESUME_FAILED is sent.
+> 
+> Am I missing a case where this patch would introduce a leak?
 
-And just to clarify - no need to send a v3 just for this. If no other
-change is needed before this can go in, the change can be made while
-committing.
+No, you're right. What I'd like to ask for is an adjustment to the last
+sentence of the description: "does not take this release path" is
+ambiguous, because the notifiers are the same everywhere. What's skipped
+(for both of the notifier codes of interest here) is the call to
+free_percpu_area(). I'd appreciate if you could disambiguate that.
 
 Jan
 
