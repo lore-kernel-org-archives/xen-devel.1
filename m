@@ -2,43 +2,41 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A6B62606A32A
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 21:19:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 986AA606A32A
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 22:22:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=lJ46xkcL
-Received: from list by lists.xenproject.org with outflank-mailman.1491563.1692296 (Exim 4.92)
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=VThYQCTK
+Received: from list by lists.xenproject.org with outflank-mailman.1491588.1692306 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xT46s-0000oS-Na; Mon, 16 Nov 2026 21:19:30 +0000
+	id 1xT551-00064v-2M; Mon, 16 Nov 2026 22:21:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1491563.1692296; Mon, 16 Nov 2026 21:19:30 +0000
+Received: by outflank-mailman (output) from mailman id 1491588.1692306; Mon, 16 Nov 2026 22:21:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xT46s-0000oI-Kj; Mon, 16 Nov 2026 21:19:30 +0000
-Received: by outflank-mailman (input) for mailman id 1491563;
- Mon, 16 Nov 2026 21:19:29 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xT550-00064o-UN; Mon, 16 Nov 2026 22:21:38 +0000
+Received: by outflank-mailman (input) for mailman id 1491588;
+ Mon, 16 Nov 2026 22:21:37 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <sstabellini@kernel.org>) id 1xT46r-0000nq-Bv
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 21:19:29 +0000
+ (envelope-from <rdunlap@infradead.org>) id 1xT54y-00064i-V5
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 22:21:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xT46q-00FkWp-Kk
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 22:19:28 +0100
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xT54y-0027nA-3h
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 23:21:36 +0100
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <sstabellini@kernel.org>)
- id 6afb7319-e002-0a2a0a5209dd-0a2a4504ae38-30
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 22:19:28 +0100
-Received: from [172.234.252.31] (helo=sea.source.kernel.org)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <sstabellini@kernel.org>)
- id 6afb735e-b57f-0a2a45040019-aceafc1f9f2e-3
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 22:19:27 +0100
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id D74FF41804;
- Mon, 16 Nov 2026 21:19:25 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A19F01F000C4;
- Mon, 16 Nov 2026 21:19:23 +0000 (UTC)
+ (envelope-from <rdunlap@infradead.org>)
+ id 6afb8186-e002-0a2a0a5209dd-0a2a450aa7da-38
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 23:21:35 +0100
+Received: from [198.137.202.133] (helo=bombadil.infradead.org)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <rdunlap@infradead.org>)
+ id 6afb81ed-f2d2-0a2a450a0019-c689ca85ec54-3
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 23:21:34 +0100
+Received: from [50.53.43.113] (helo=[192.168.254.34])
+ by bombadil.infradead.org with esmtpsa (Exim 4.100.1 #2 (Red Hat Linux))
+ id 1xT54Y-000000042c2-2GpG; Mon, 16 Nov 2026 22:21:10 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -47,73 +45,172 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:From:To:cc:Subject:In-Reply-To:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794863965;
-	bh=r+aIJPrcv/6jqNiqvoDZbj0ty6chj9nLzftqu/jVFF8=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References;
-	b=lJ46xkcLMEGO0f5T0uxLO4DA/YmS9sR1nrlVFW8glYqiwpgaSA7k8j+vrq6BWa9iZ
-	 uTYiRqok1/JliQsEAcIGEgMjn0l6bU9yeoUyna3CtRDhuDuWgHIHbtePzJErc9L6Nf
-	 6xp9g0yaa94sphClL5PDusJeVTlhm4v+WRFkafBFQVz5yN/isCzQ5wp2QyO0PpgZt2
-	 6/EaialiKpr1dfnq1E3A34fOM5t9cK8F/gZWYhd03HheR5STZpb8q0Nf+T34a4L+5j
-	 GG5IxbOarzhVbil2fr5MR2HqpPSFGNyDk2G+oqiFhMikOnpzAhvo4BEYJjoDH9yUWN
-	 Rt3pzVjakVt1Q==
-Date: Mon, 16 Nov 2026 13:19:20 -0800 (PST)
-From: Stefano Stabellini <sstabellini@kernel.org>
-To: Julian Vetter <julian.vetter@vates.tech>
-cc: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, qemu-devel@nongnu.org, 
-    Stefano Stabellini <sstabellini@kernel.org>, 
-    Anthony PERARD <anthony@xenproject.org>, 
-    "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
-    xen-devel@lists.xenproject.org, Peng Fan <peng.fan@nxp.com>
-Subject: Re: [PATCH] hw/xen: Mark legacy Xen backends as hotpluggable
-In-Reply-To: <1794814281.8631fc262581453bbf619ec5b2062170.1a1e34487400006d3f@vates.tech>
-Message-ID: <552c4efb-3108-1259-9aa1-acc404b6bed7@kernel.org>
-References: <20261116-qemu-xen-usb-v1-1-bff36d5b646b@nxp.com> <1794814281.8631fc262581453bbf619ec5b2062170.1a1e34487400006d3f@vates.tech>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=bombadil.20210309 header.d=infradead.org header.i="@infradead.org" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
+	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
+	bh=BXL/fDhspKdov1Fv9R2cAMXBgedf/LG6cvi6/7Jo65c=; b=VThYQCTK0+YExl2+ZO7Tuknnrf
+	6kyowduHpBQVpfb7n1tSXedtpFNkU4jMk3jIu9Hkgh6YTzADUmrCxgKLrv9IjmY8LwM/wyAWTvTDD
+	e/sSQp4UOb5tjuY3MxqRJvsxNsiNknNcq0RGaoSG8yJ8wUiQCVmAZBGlVLxfcZjyr94azpjr9IOnd
+	AWdz3ni0uhKjLd3gREkk+4rC3s26NSvhlfY2UUaXgX8uIh0R2U5pwjQCQjGVYJS1A2bXWMI8l49wW
+	l2fyCL1r+D2yYRXbpcd1pUH4Eqp+JWnGEwFXHp6SFfFUzbYmxjvOpOGIgf4yt8A3Gek5Rph3JughC
+	ysCNVjJg==;
+Message-ID: <65bab646-fbf6-4da0-b833-2314d568a845@infradead.org>
+Date: Mon, 16 Nov 2026 14:21:07 -0800
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-X-purgate-ID: tlsNG-ebf023/1794863968-C3AC0B50-0DC64FC2/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 09/12] docs: ioctl-number: update virtualization entries
+To: Sean Christopherson <seanjc@google.com>
+Cc: linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+ Shuah Khan <skhan@linuxfoundation.org>, linux-doc@vger.kernel.org,
+ David Hildenbrand <david@kernel.org>,
+ Andrew Morton <akpm@linux-foundation.org>, Jason Gunthorpe <jgg@nvidia.com>,
+ Leon Romanovsky <leonro@nvidia.com>, linux-mm@kvack.org,
+ Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+ linux-sound@vger.kernel.org, Jens Axboe <axboe@kernel.dk>,
+ linux-block@vger.kernel.org, Marcel Holtmann <marcel@holtmann.org>,
+ Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
+ linux-bluetooth@vger.kernel.org,
+ Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
+ Jason Wang <jasowangio@gmail.com>, David Heidelberg <david@ixit.cz>,
+ oe-linux-nfc@lists.linux.dev, Chas Williams <3chas3@gmail.com>,
+ linux-atm-general@lists.sourceforge.net,
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@kernel.org>,
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+ netdev@vger.kernel.org, Helge Deller <deller@gmx.de>,
+ linux-fbdev@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ MPT-FusionLinux.pdl@broadcom.com,
+ "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
+ "Martin K. Petersen" <mkp@kernel.org>, linux-scsi@vger.kernel.org,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
+ Zhihao Cheng <chengzhihao1@huawei.com>, linux-mtd@lists.infradead.org,
+ Neill Kapron <nkapron@google.com>, Andrey Konovalov <andreyknvl@gmail.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-usb@vger.kernel.org,
+ Juergen Gross <jgross@suse.com>, Stefano Stabellini
+ <sstabellini@kernel.org>, xen-devel@lists.xenproject.org,
+ Hans de Goede <hansg@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
+ "Michael S. Tsirkin" <mst@redhat.com>, =?UTF-8?Q?Eugenio_P=C3=A9rez?=
+ <eperezma@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ kvm@vger.kernel.org, virtualization@lists.linux.dev, Jan Kara
+ <jack@suse.cz>, linux-fsdevel@vger.kernel.org, Theodore Ts'o
+ <tytso@mit.edu>, linux-ext4@vger.kernel.org,
+ Mike Marshall <hubcap@omnibond.com>, devel@lists.orangefs.org,
+ Paulo Alcantara <pc@manguebit.org>, Namjae Jeon <linkinjeon@kernel.org>,
+ linux-cifs@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
+ Chao Yu <chao@kernel.org>, linux-f2fs-devel@lists.sourceforge.net,
+ Florian Fainelli <florian.fainelli@broadcom.com>,
+ Broadcom internal kernel review list
+ <bcm-kernel-feedback-list@broadcom.com>,
+ linux-rpi-kernel@lists.infradead.org, linux-arm-kernel@lists.infradead.org,
+ Tzung-Bi Shih <tzungbi@kernel.org>, Benson Leung <bleung@chromium.org>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ amd-gfx@lists.freedesktop.org, Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin
+ <tursulin@ursulin.net>, intel-gfx@lists.freedesktop.org,
+ Matthew Brost <matthew.brost@intel.com>,
+ =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
+ intel-xe@lists.freedesktop.org
+References: <20261114202653.3113381-1-rdunlap@infradead.org>
+ <20261114202653.3113381-10-rdunlap@infradead.org>
+ <avsSjioXqbCOn834@seanjc-mac.roam.internal>
+Content-Language: en-US
+From: Randy Dunlap <rdunlap@infradead.org>
+In-Reply-To: <avsSjioXqbCOn834@seanjc-mac.roam.internal>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-4011c0/1794867695-532D8CFC-1D62D1C4/0/0
 X-purgate-type: clean
-X-purgate-size: 1396
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY autolearn=unavailable autolearn_force=no
-	version=4.0.1
+X-purgate-size: 3844
+X-Spam-Status: No, score=-15.1 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=unavailable
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Mon, 16 Nov 2026, Julian Vetter wrote:
-> On 11/16/26 03:56, Peng Fan (OSS) wrote:
-> 
-> > diff --git a/hw/xen/xen-legacy-backend.c b/hw/xen/xen-legacy-backend.c
-> > index 7977b527127..bf4396c9460 100644
-> > --- a/hw/xen/xen-legacy-backend.c
-> > +++ b/hw/xen/xen-legacy-backend.c
-> > @@ -640,6 +640,13 @@ static void xendev_class_init(ObjectClass *klass, const void *data)
-> >       DeviceClass *dc = DEVICE_CLASS(klass);
-> >   
-> >       set_bit(DEVICE_CATEGORY_MISC, dc->categories);
-> > +    /*
-> > +     * Legacy Xen backends are created and destroyed dynamically from
-> > +     * xenstore at runtime, after the machine has been initialized.
-> > +     * TYPE_DYNAMIC_SYS_BUS_DEVICE marks devices as not hotpluggable,
-> > +     * so override that here.
-> > +     */
-> > +    dc->hotpluggable = true;
-> >       dc->bus_type = TYPE_XENSYSBUS;
-> >   }
-> >   
-> 
-> This also fixes the legacy vfb/vkbd backends with -machine xenpv 
-> (qemu-system-i386 -xen-attach -machine xenpv -vga xenfb) on an arm64 Xen 
-> 4.21 host. Without this fix QEMU exits with "Device 'xen-backend' does 
-> not support hotplugging" as soon as the backends are created from 
-> xenstore. Tested on top of QEMU 10.1.0 with an arm64 Debian 13 guest 
-> (xen-fbfront/xen-kbdfront).
-> 
-> Tested-by: Julian Vetter <julian.vetter@vates.tech>
 
-Acked-by: Stefano Stabellini <sstabellini@kernel.org>
+
+On 11/16/26 6:26 AM, Sean Christopherson wrote:
+> On Sat, Nov 14, 2026, Randy Dunlap wrote:
+>> Update the list of files where virtualization ioctls are defined.
+>>
+>> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
+>> ---
+>> [Since having multiple maintainers trying to merge these would
+>> cause some conflicts, it would be more manageable for Jon to
+>> take all of these through the docs-next tree.]
+>>
+>> Cc: Jonathan Corbet <corbet@lwn.net>
+>> Cc: Shuah Khan <skhan@linuxfoundation.org>
+>> Cc: linux-doc@vger.kernel.org
+>> Cc: Juergen Gross <jgross@suse.com>
+>> Cc: Stefano Stabellini <sstabellini@kernel.org>
+>> Cc: xen-devel@lists.xenproject.org
+>> Cc: Hans de Goede <hansg@kernel.org>
+>> Cc: Arnd Bergmann <arnd@arndb.de>
+>> Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+>> Cc: "Michael S. Tsirkin" <mst@redhat.com>
+>> Cc: Jason Wang <jasowangio@gmail.com>
+>> Cc: Eugenio Pérez <eperezma@redhat.com>
+>> Cc: Sean Christopherson <seanjc@google.com>
+>> Cc: Paolo Bonzini <pbonzini@redhat.com>
+>> Cc: kvm@vger.kernel.org
+>> Cc: virtualization@lists.linux.dev
+>>
+>>  Documentation/userspace-api/ioctl/ioctl-number.rst |    6 ++++++
+>>  1 file changed, 6 insertions(+)
+>>
+>> --- linux-next-20261113.orig/Documentation/userspace-api/ioctl/ioctl-number.rst
+>> +++ linux-next-20261113/Documentation/userspace-api/ioctl/ioctl-number.rst
+>> @@ -200,6 +200,7 @@ Code  Seq#    Include File
+>>  'M'   01-03  drivers/scsi/megaraid/megaraid_sas.h
+>>  'M'   00-03  drivers/video/fbdev/mb862xx/mb862xxfb.h
+>>  'M'   00-0F  drivers/video/fsl-diu-fb.h                                conflict!
+>> +'M'   01-03  xen/interface/xen-mca.h                                   conflict!
+>>  'N'   00-1F  drivers/usb/scanner.h
+>>  'N'   40-7F  uapi/linux/nvme_ioctl.h
+>>  'N'   80-83  uapi/linux/ntsync.h and uapi/linux/nvme_ioctl.h           conflict!
+>> @@ -239,6 +240,7 @@ Code  Seq#    Include File
+>>  'U'   64     drivers/usb/misc/usbtest.c                                conflict!
+>>  'V'   all    linux/vt.h                                                conflict!
+>>  'V'   all    linux/videodev2.h                                         conflict!
+>> +'V'   00-1F  linux/vboxguest.h                                         conflict!
+>>  'V'   C0     linux/ivtvfb.h                                            conflict!
+>>  'V'   C0     linux/ivtv.h                                              conflict!
+>>  'V'   C0     media/si4713.h                                            conflict!
+>> @@ -357,6 +359,7 @@ Code  Seq#    Include File
+>>  '|'   80-9F  samples/                                                  Any sample and example drivers
+>>  0x80  00-1F  linux/fb.h
+>>  0x81  00-1F  linux/vduse.h
+>> +             drivers/vdpa/vdpa_user/vduse_dev.c
+>>  0x89  00-07  asm-generic/sockios.h
+>>  0x89  06-07  linux/sockios.h
+>>  0x89  0B-DF  linux/sockios.h
+>> @@ -398,8 +401,11 @@ Code  Seq#    Include File
+>>                                                                         <mailto:kvm@vger.kernel.org>
+>>  0xAE  40-FF  linux/kvm.h                                               Kernel-based Virtual Machine
+>>                                                                         <mailto:kvm@vger.kernel.org>
+>> +0xAE  C6     arch/x86/kvm/x86.c                                        X86 KVM
+> 
+> I'd rather omit this entry.  0xAE C6 is covered by the entry above, and the horror
+> in arch/x86/kvm/x86.c is purely a 32-bit compatibility alias for an ioctl that is
+> defined in kvm.h (the structure payload defines an pointer instead of a __u64).
+
+OK.
+
+> If it's a sticking point, e.g. this will trip automated tooling over and over, then
+> I vote to move the relevant definitions to uapi headers, e.g.
+
+I don't know of anything like that.
+
+-- 
+~Randy
+
 
