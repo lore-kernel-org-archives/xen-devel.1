@@ -2,43 +2,43 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 358CA606A797
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 11:29:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A799606A791
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 11:30:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=l+BIJEfb
-Received: from list by lists.xenproject.org with outflank-mailman.1490736.1691691 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=b8+ShhPz
+Received: from list by lists.xenproject.org with outflank-mailman.1490743.1691700 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSuu9-0006Vz-7W; Mon, 16 Nov 2026 11:29:45 +0000
+	id 1xSuuc-00085a-DJ; Mon, 16 Nov 2026 11:30:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1490736.1691691; Mon, 16 Nov 2026 11:29:45 +0000
+Received: by outflank-mailman (output) from mailman id 1490743.1691700; Mon, 16 Nov 2026 11:30:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSuu9-0006Vq-3i; Mon, 16 Nov 2026 11:29:45 +0000
-Received: by outflank-mailman (input) for mailman id 1490736;
- Mon, 16 Nov 2026 11:29:43 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xSuuc-00085T-AD; Mon, 16 Nov 2026 11:30:14 +0000
+Received: by outflank-mailman (input) for mailman id 1490743;
+ Mon, 16 Nov 2026 11:30:12 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <brauner@kernel.org>) id 1xSuu7-0006Vk-K6
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 11:29:43 +0000
+ (envelope-from <brauner@kernel.org>) id 1xSuua-00085A-AN
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 11:30:12 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xSuu6-00D0ok-Si
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 12:29:42 +0100
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xSuuZ-007bzA-MR
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 12:30:11 +0100
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <brauner@kernel.org>)
- id 6afae911-e002-0a2a0a5209dd-0a2a4508a478-44
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 12:29:42 +0100
-Received: from [172.234.252.31] (helo=sea.source.kernel.org)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6afae93e-e002-0a2a0a5209dd-0a2a4501abfc-16
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 12:30:11 +0100
+Received: from [172.105.4.254] (helo=tor.source.kernel.org)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <brauner@kernel.org>)
- id 6afae4af-f659-0a2a45080019-aceafc1fec2e-3
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 12:10:41 +0100
+ id 6afae4cd-5984-0a2a45010019-ac6904fe99b4-3
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 12:11:10 +0100
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id AFAFB462F9;
- Mon, 16 Nov 2026 11:10:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A58D71F000C5;
- Mon, 16 Nov 2026 11:10:32 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id E0A6F62964;
+ Mon, 16 Nov 2026 11:11:08 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B90BD1F000C4;
+ Mon, 16 Nov 2026 11:11:01 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,24 +49,24 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="From:Date:Subject:References:In-Reply-To:To:Cc"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794827439;
-	bh=TMBBwOCxq0RbA3xkr3IQCANlyHiMKhXi962Ec8MHN/8=;
+	s=k20260515; t=1794827468;
+	bh=OTEjlmIJyKpC5NfEWKTxGQBI4o98SYAhIwo6Ai+LDGM=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=l+BIJEfbLhnCAiQ9KjFFbH+KikDuWf7Rh0M/jNYiYLFM3JBoCkTU1QtWjpGfqyuFA
-	 CSiogIgrJTCRIfQqExj48VIInR4+j/p1TBSDSDU3KHVkiSv4VTwVuUQsOXXPwbSjGT
-	 3yic+O5L+OrlvIDI19sfN+4rh3qdY6Q1ReyaauwTlqsXASNdOse/Fh7GmwTFTBPEMk
-	 V7YwmUvz678MdFDVA72s+VOIEk7DPWPvjqCbYbQRAxRHaDgQOErh9yRIemYiG+jRQ/
-	 TEIFcXsS9+XxNmw10KCpA2RC6gwbTOP/zd6mhzzP3q8aoDPq5vCZ1BkJL96CD5g30G
-	 1pPnYhru7oOKg==
+	b=b8+ShhPzXQ5lKArD/6+ZRe9DOjMyoKKAtnYUlLtEIbco9DLALBR0Fd2WDzfzWc/xq
+	 +KykUFg8yMY6Kd78+glVS3d4yeckJ0NZgym4qTmABG1DSqtV08TKvEgKTSRPYYc8FP
+	 3A/zUYyTBLJdxk3fLBWngqH38gEefnGvMYwPDcaoLTEerXzCHabY1vE4quu1HkYEqI
+	 xK7UXhuJplVmiu7BnozU6NuKxVhigBCbUzntJkdDKhMU1U4LXEjJVGGRKv6uioBtRs
+	 sd3pKHijxRAVRCt9esuvtmGbmGhGQspe3OfnCiNM1Ut6Q2kagZYzQsqGYzonRHSJSV
+	 uP0mNwhmOYf2A==
 From: Christian Brauner <brauner@kernel.org>
-Date: Mon, 16 Nov 2026 12:05:10 +0100
-Subject: [PATCH RFC v3 37/44] zloop: refuse zone files on pseudo
- filesystems
+Date: Mon, 16 Nov 2026 12:05:14 +0100
+Subject: [PATCH RFC v3 41/44] usb: gadget: f_mass_storage: refuse files on
+ pseudo filesystems
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261116-work-loop-pseudo-v3-37-8cbbea1cf34f@kernel.org>
+Message-Id: <20261116-work-loop-pseudo-v3-41-8cbbea1cf34f@kernel.org>
 References: <20261116-work-loop-pseudo-v3-0-8cbbea1cf34f@kernel.org>
 In-Reply-To: <20261116-work-loop-pseudo-v3-0-8cbbea1cf34f@kernel.org>
 To: linux-fsdevel@vger.kernel.org
@@ -89,17 +89,17 @@ Cc: Jann Horn <jannh@google.com>, Chris Mason <mason@kernel.org>,
  Alexander Mikhalitsyn <alex@amutable.com>, 
  Chris Down <chris@chrisdown.name>
 X-Mailer: b4 0.17-dev-ce4c1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1558; i=brauner@kernel.org;
- h=from:subject:message-id; bh=XfUA5+m77vNauXdxpoCEKQvxsNkJs1ZrQCEAfm8XKRY=;
- b=owGbwMvMwCU28Zj0gdSKO4sYT6slMWT9etzJVXe0X6Zm0vH193d2OB6eMv+pg2Z/9ALRRoMZX
- vcmSG3X6yhlYRDjYpAVU2RxaDcJl1vOU7HZKFMDZg4rE8gQBi5OAZjI+08M/3QZMiNqd39IqXkk
- 99PB+YDugQoTg8Xv32en/V7x56/opmMM//NviaY8nxghcZ4/+eSWhcd/HHTXfr+Mf/LvXWXB0xs
- lLRkB
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2207; i=brauner@kernel.org;
+ h=from:subject:message-id; bh=9yOpMEvSpwTZ88CI4cJoJKFDpbu7ZmjHFE7v8Gz8hhc=;
+ b=owGbwMvMwCU28Zj0gdSKO4sYT6slMWT9etynd0NX1vPeFOdEtq9nL7ydJOxr3SZTcqJWrC/8P
+ 8+eTSY8HaUsDGJcDLJiiiwO7Sbhcst5KjYbZWrAzGFlAhnCwMUpABNpsmJk2P/2xMUG9fKOCS+q
+ pmtt5+OefHRG0P2je5ZsqZU7vHHpSW+GvxKn1gcduJD7d9+yy53iOseiZErr8u6GsuasXRM//eL
+ OvXwA
 X-Developer-Key: i=brauner@kernel.org; a=openpgp;
  fpr=4880B8C9BD0E5106FC070F4F7B3C391EFEA93624
-X-purgate-ID: tlsNG-c1860d/1794827441-D614687B-6F3DF818/2/79622920316
+X-purgate-ID: tlsNG-d62444/1794827470-BE27A757-297CC1F1/2/79622920316
 X-purgate-type: clean
-X-purgate-size: 1560
+X-purgate-size: 2209
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -108,43 +108,58 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-zloop opens its zone files by name below the base directory but a bind
-mount can put any file there, including a procfs or sysfs file. Refuse
-files on pseudo filesystems as zone files just like loop does by
-switching to file_check_backing().
+fsg_lun_open() takes any regular file as the backing file of a LUN. The
+file-storage kthread then reads and writes it with kernel_read() and
+kernel_write() on behalf of the USB host. With a procfs or sysfs file
+behind a LUN the host gets to read and write kernel interfaces with
+kernel credentials. Refuse files on pseudo filesystems just like loop
+does by switching to file_check_backing().
 
-Note that the helper only accepts regular files. So far zloop took
-anything with ->read_iter() and ->write_iter() as a zone file. That
-includes character devices, FIFOs and block devices if someone put them
-where zloop expects a zone file. Zone files are created by zloop itself
-and zloop truncates them to size and to reset and finish zones which
-only works for regular files. So refuse everything else.
+The helper also does the file type and readability checks. So the
+messages for an unsuitable backing file become one. It looks at the
+inode of the file instead of the host of ->f_mapping. For regular files
+and block devices both have the same type. It also wants ->read_iter()
+where FMODE_CAN_READ was enough so far. But kernel_read() never worked
+without ->read_iter() anyway.
 
 Reviewed-by: Alexander Mikhalitsyn <alex@amutable.com>
 Reviewed-by: Chris Down <chris@chrisdown.name>
-Tested-by: Chris Down <chris@chrisdown.name>
 Signed-off-by: Christian Brauner (Amutable) <brauner@kernel.org>
 ---
- drivers/block/zloop.c | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+ drivers/usb/gadget/function/storage_common.c | 11 +++--------
+ 1 file changed, 3 insertions(+), 8 deletions(-)
 
-diff --git a/drivers/block/zloop.c b/drivers/block/zloop.c
-index 65634a39b0bfc..6f79b9ddbbe00 100644
---- a/drivers/block/zloop.c
-+++ b/drivers/block/zloop.c
-@@ -1132,10 +1132,9 @@ static int zloop_init_zone(struct zloop_device *zlo, struct zloop_options *opts,
- 		return PTR_ERR(zone->file);
- 	}
+diff --git a/drivers/usb/gadget/function/storage_common.c b/drivers/usb/gadget/function/storage_common.c
+index 75831f2c7abeb..af0c37a9fe029 100644
+--- a/drivers/usb/gadget/function/storage_common.c
++++ b/drivers/usb/gadget/function/storage_common.c
+@@ -205,23 +205,18 @@ int fsg_lun_open(struct fsg_lun *curlun, const char *filename)
+ 	if (!(filp->f_mode & FMODE_WRITE))
+ 		ro = 1;
  
--	if (!zone->file->f_op->read_iter || !zone->file->f_op->write_iter) {
--		ret = -EINVAL;
-+	ret = file_check_backing(zone->file, FMODE_READ | FMODE_WRITE, 0);
-+	if (ret)
- 		goto out_fput;
+-	inode = filp->f_mapping->host;
+-	if ((!S_ISREG(inode->i_mode) && !S_ISBLK(inode->i_mode))) {
+-		LINFO(curlun, "invalid file type: %s\n", filename);
+-		goto out;
 -	}
+-
+ 	/*
+ 	 * If we can't read the file, it's no good.
+ 	 * If we can't write the file, use it read-only.
+ 	 */
+-	if (!(filp->f_mode & FMODE_CAN_READ)) {
+-		LINFO(curlun, "file not readable: %s\n", filename);
++	if (file_check_backing(filp, FMODE_READ, S_IFBLK)) {
++		LINFO(curlun, "invalid backing file: %s\n", filename);
+ 		goto out;
+ 	}
+ 	if (!(filp->f_mode & FMODE_CAN_WRITE))
+ 		ro = 1;
  
- 	if (zlo->block_size) {
- 		ret = zloop_get_block_size(zlo, zone);
++	inode = filp->f_mapping->host;
+ 	size = i_size_read(inode);
+ 	if (size < 0) {
+ 		LINFO(curlun, "unable to find file size: %s\n", filename);
 
 -- 
 2.53.0
