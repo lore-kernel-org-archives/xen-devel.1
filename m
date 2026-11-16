@@ -2,41 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 986AA606A32A
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 22:22:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 135F9606A31C
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 22:26:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=VThYQCTK
-Received: from list by lists.xenproject.org with outflank-mailman.1491588.1692306 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=google header.b=IOD5vZky
+Received: from list by lists.xenproject.org with outflank-mailman.1491599.1692315 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xT551-00064v-2M; Mon, 16 Nov 2026 22:21:39 +0000
+	id 1xT59K-0006pW-HY; Mon, 16 Nov 2026 22:26:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1491588.1692306; Mon, 16 Nov 2026 22:21:39 +0000
+Received: by outflank-mailman (output) from mailman id 1491599.1692315; Mon, 16 Nov 2026 22:26:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xT550-00064o-UN; Mon, 16 Nov 2026 22:21:38 +0000
-Received: by outflank-mailman (input) for mailman id 1491588;
- Mon, 16 Nov 2026 22:21:37 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xT59K-0006pP-DR; Mon, 16 Nov 2026 22:26:06 +0000
+Received: by outflank-mailman (input) for mailman id 1491599;
+ Mon, 16 Nov 2026 22:26:04 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <rdunlap@infradead.org>) id 1xT54y-00064i-V5
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 22:21:37 +0000
+ (envelope-from <andrew.cooper3@citrix.com>) id 1xT59I-0006pJ-FG
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 22:26:04 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xT54y-0027nA-3h
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 23:21:36 +0100
-Received: from [10.42.69.10] (helo=localhost)
+ id 1xT59H-00FrKy-Rq
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 23:26:03 +0100
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <rdunlap@infradead.org>)
- id 6afb8186-e002-0a2a0a5209dd-0a2a450aa7da-38
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 23:21:35 +0100
-Received: from [198.137.202.133] (helo=bombadil.infradead.org)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <rdunlap@infradead.org>)
- id 6afb81ed-f2d2-0a2a450a0019-c689ca85ec54-3
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 23:21:34 +0100
-Received: from [50.53.43.113] (helo=[192.168.254.34])
- by bombadil.infradead.org with esmtpsa (Exim 4.100.1 #2 (Red Hat Linux))
- id 1xT54Y-000000042c2-2GpG; Mon, 16 Nov 2026 22:21:10 +0000
+ (envelope-from <andrew.cooper3@citrix.com>)
+ id 6afb828e-bab6-0a2a0a5309dd-0a2a450cb2aa-32
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 23:26:03 +0100
+Received: from [209.85.221.54] (helo=mail-wr1-f54.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <andrew.cooper3@citrix.com>)
+ id 6afb82fb-f479-0a2a450c0019-d155dd36f025-3
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 23:26:03 +0100
+Received: by mail-wr1-f54.google.com with SMTP id
+ ffacd0b85a97d-491971ac844so3462348f8f.2
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 14:26:03 -0800 (PST)
+Received: from localhost.localdomain (host-78-146-248-75.as13285.net.
+ [78.146.248.75]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-49c5d223b21sm27292099f8f.2.2026.11.16.14.26.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 16 Nov 2026 14:26:01 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -45,172 +50,105 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=bombadil.20210309 header.d=infradead.org header.i="@infradead.org" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
-	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
-	bh=BXL/fDhspKdov1Fv9R2cAMXBgedf/LG6cvi6/7Jo65c=; b=VThYQCTK0+YExl2+ZO7Tuknnrf
-	6kyowduHpBQVpfb7n1tSXedtpFNkU4jMk3jIu9Hkgh6YTzADUmrCxgKLrv9IjmY8LwM/wyAWTvTDD
-	e/sSQp4UOb5tjuY3MxqRJvsxNsiNknNcq0RGaoSG8yJ8wUiQCVmAZBGlVLxfcZjyr94azpjr9IOnd
-	AWdz3ni0uhKjLd3gREkk+4rC3s26NSvhlfY2UUaXgX8uIh0R2U5pwjQCQjGVYJS1A2bXWMI8l49wW
-	l2fyCL1r+D2yYRXbpcd1pUH4Eqp+JWnGEwFXHp6SFfFUzbYmxjvOpOGIgf4yt8A3Gek5Rph3JughC
-	ysCNVjJg==;
-Message-ID: <65bab646-fbf6-4da0-b833-2314d568a845@infradead.org>
-Date: Mon, 16 Nov 2026 14:21:07 -0800
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1794867963; x=1795472763; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=jyFXJmnEADHcqDPhGx/kRZ6k5hoXysYI+LgxAK7Q3rE=;
+        b=IOD5vZkyofmoXqeqFhq/Oz3FlSAKR5TxHgGtRXKD2dhhRuLD8Eus/5sytklF2doODq
+         r+M57PrLieEkQGer+eyQIrJGFzEC/KWIVLK00CcyoUdyTLGsK8V9VCXF9iUOhpYzvH70
+         IBShCqqWEVkt6Kyl0/zMxqI4NheY4YMQmQ2IQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794867963; x=1795472763;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=jyFXJmnEADHcqDPhGx/kRZ6k5hoXysYI+LgxAK7Q3rE=;
+        b=qprEfAd9vmwhKp1kZk/+bSNLBPyJ1T8f7du32b0tsGeYC4tavQyeFd2kEK7LitbJdI
+         OtgAXbvEO4BK/QPqVHwHDV6TGAOpksMBgKOGVD9fmHNYFtmF682P2G+qXPLU6KWbA3YF
+         /oLMp83qjaK/WWgoPMWqGgGII+TiJB0Fy19m45PXwn3lRu4GyEGyxPsimMz5eYkB/qVY
+         1H3zMCzJYW+Htlyg72JwHD03C2dtNDQbcrP0imeSPO9msoUD8/BBFk5cf1qP0ofLcarm
+         SNVry1ZQOQ7ud/5MiUYfIftALO36+DEChHWPTL0MGuX0epe/Xd1yWS/yzT+5IUMufiUK
+         G1dw==
+X-Gm-Message-State: APuU4Z8kKeGwt6beXaPfiYOMJ4087DP68cweBNQmDA6ZC0K+mfUzSk9X
+	ADA9Icze3cL/KC0z43K0mWp273JcDLJNfcnT6DSjtdWCfVXVXKxpZFZZjSbgzu4v/NJ4aTlvYBv
+	Sojcd
+X-Gm-Gg: AZFdTZeCU0TTZVE9SYmKVTAE/CLq4/2ptbBNYMPJl0MKR/bEnvUjPrpMrBFOu1Vkew7
+	q8pnW472P2OlLMzLEoIfBY5+K9MP3v2VjYbP2ovr7CgLLXHNb9xxf6oWWpdm8RCCZAXsl3Xz9e6
+	vUZ0cLDi8ax9izuOfyI0cK8WeS1M2Cxy2nZXeUxJw/23lUG9TvfGcqzx2VYnqgGj4B7qqVKeY8A
+	dD44HCIV/c71c1XY3XRz0Nx8WnsGgGO/aM0pFBIVFBMR/lUZo6OLXL14jDXZMgTswpviYLmu1Tp
+	wkUPR2c5UOqkoIm+u2X/a2qA5tCWDWjEdYH5e5Jz89StH0l9kzllEjTK6Jl4AhTlNWYcviDLVL6
+	PClFUQ5OHO0nuOI9Jyf+rPrbisK4C4rfamnUAHdYH6uDvAj+RTZUKhdYc2ZzrW0t0w6G6wBC0JX
+	//fbx8sRQnTd5hlyuDry0CPEDNcy3UHURrEFMAPbRut42Hj5LUQgfzlUeMzGRa8JimXZKlkTNth
+	i6hhM9igxYp8IXprXW/k9zod2xEJtLtNyp0nDd2tcWLdd+LRmG87nKek+48Q9tBBDfA7JP9mENY
+	tePz6/2/vWqt39MEMIkL/RpXHGy2tAVhvk+PRVlNy0RD9raqt5aOtd7zpFPi37P1lz87i2DHIkk
+	YbJ4=
+X-Received: by 2002:a05:6000:400e:b0:4a2:6542:989a with SMTP id ffacd0b85a97d-4a265429a6dmr6158924f8f.52.1794867961804;
+        Mon, 16 Nov 2026 14:26:01 -0800 (PST)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Olivier Lambert <olivier.lambert@vates.tech>,
+	Andrii Sultanov <andriy.sultanov@vates.tech>,
+	Guillaume Thouvenin <guillaume.thouvenin@vates.tech>
+Subject: [PATCH] tools/ocaml: Fix OoB read in stub_syslog()
+Date: Mon, 16 Nov 2026 22:25:59 +0000
+Message-Id: <20261116222559.3824604-1-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 09/12] docs: ioctl-number: update virtualization entries
-To: Sean Christopherson <seanjc@google.com>
-Cc: linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
- Shuah Khan <skhan@linuxfoundation.org>, linux-doc@vger.kernel.org,
- David Hildenbrand <david@kernel.org>,
- Andrew Morton <akpm@linux-foundation.org>, Jason Gunthorpe <jgg@nvidia.com>,
- Leon Romanovsky <leonro@nvidia.com>, linux-mm@kvack.org,
- Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
- linux-sound@vger.kernel.org, Jens Axboe <axboe@kernel.dk>,
- linux-block@vger.kernel.org, Marcel Holtmann <marcel@holtmann.org>,
- Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
- linux-bluetooth@vger.kernel.org,
- Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
- Jason Wang <jasowangio@gmail.com>, David Heidelberg <david@ixit.cz>,
- oe-linux-nfc@lists.linux.dev, Chas Williams <3chas3@gmail.com>,
- linux-atm-general@lists.sourceforge.net,
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@kernel.org>,
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
- netdev@vger.kernel.org, Helge Deller <deller@gmx.de>,
- linux-fbdev@vger.kernel.org, dri-devel@lists.freedesktop.org,
- MPT-FusionLinux.pdl@broadcom.com,
- "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
- "Martin K. Petersen" <mkp@kernel.org>, linux-scsi@vger.kernel.org,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
- Zhihao Cheng <chengzhihao1@huawei.com>, linux-mtd@lists.infradead.org,
- Neill Kapron <nkapron@google.com>, Andrey Konovalov <andreyknvl@gmail.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-usb@vger.kernel.org,
- Juergen Gross <jgross@suse.com>, Stefano Stabellini
- <sstabellini@kernel.org>, xen-devel@lists.xenproject.org,
- Hans de Goede <hansg@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
- "Michael S. Tsirkin" <mst@redhat.com>, =?UTF-8?Q?Eugenio_P=C3=A9rez?=
- <eperezma@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- kvm@vger.kernel.org, virtualization@lists.linux.dev, Jan Kara
- <jack@suse.cz>, linux-fsdevel@vger.kernel.org, Theodore Ts'o
- <tytso@mit.edu>, linux-ext4@vger.kernel.org,
- Mike Marshall <hubcap@omnibond.com>, devel@lists.orangefs.org,
- Paulo Alcantara <pc@manguebit.org>, Namjae Jeon <linkinjeon@kernel.org>,
- linux-cifs@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>,
- Chao Yu <chao@kernel.org>, linux-f2fs-devel@lists.sourceforge.net,
- Florian Fainelli <florian.fainelli@broadcom.com>,
- Broadcom internal kernel review list
- <bcm-kernel-feedback-list@broadcom.com>,
- linux-rpi-kernel@lists.infradead.org, linux-arm-kernel@lists.infradead.org,
- Tzung-Bi Shih <tzungbi@kernel.org>, Benson Leung <bleung@chromium.org>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Alex Deucher <alexander.deucher@amd.com>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- amd-gfx@lists.freedesktop.org, Jani Nikula <jani.nikula@linux.intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin
- <tursulin@ursulin.net>, intel-gfx@lists.freedesktop.org,
- Matthew Brost <matthew.brost@intel.com>,
- =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
- intel-xe@lists.freedesktop.org
-References: <20261114202653.3113381-1-rdunlap@infradead.org>
- <20261114202653.3113381-10-rdunlap@infradead.org>
- <avsSjioXqbCOn834@seanjc-mac.roam.internal>
-Content-Language: en-US
-From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <avsSjioXqbCOn834@seanjc-mac.roam.internal>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1794867695-532D8CFC-1D62D1C4/0/0
+X-purgate-ID: tlsNG-d25034/1794867963-010C9A5B-05D2536A/0/0
 X-purgate-type: clean
-X-purgate-size: 3844
-X-Spam-Status: No, score=-15.1 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=unavailable
+X-purgate-size: 1629
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+__syslog_facility_table[] maps Ocaml LOG_* facilities indices to local system
+indices.  The final line is intended to initialise 6 entries in the table, but
+only initalises one with the logical OR of 6 facilities, making the table 5
+entries too short.
 
+This is probably a copy&paste error from Ocaml, where | is right operator to
+use for a list of this nature.
 
-On 11/16/26 6:26 AM, Sean Christopherson wrote:
-> On Sat, Nov 14, 2026, Randy Dunlap wrote:
->> Update the list of files where virtualization ioctls are defined.
->>
->> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
->> ---
->> [Since having multiple maintainers trying to merge these would
->> cause some conflicts, it would be more manageable for Jon to
->> take all of these through the docs-next tree.]
->>
->> Cc: Jonathan Corbet <corbet@lwn.net>
->> Cc: Shuah Khan <skhan@linuxfoundation.org>
->> Cc: linux-doc@vger.kernel.org
->> Cc: Juergen Gross <jgross@suse.com>
->> Cc: Stefano Stabellini <sstabellini@kernel.org>
->> Cc: xen-devel@lists.xenproject.org
->> Cc: Hans de Goede <hansg@kernel.org>
->> Cc: Arnd Bergmann <arnd@arndb.de>
->> Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
->> Cc: "Michael S. Tsirkin" <mst@redhat.com>
->> Cc: Jason Wang <jasowangio@gmail.com>
->> Cc: Eugenio Pérez <eperezma@redhat.com>
->> Cc: Sean Christopherson <seanjc@google.com>
->> Cc: Paolo Bonzini <pbonzini@redhat.com>
->> Cc: kvm@vger.kernel.org
->> Cc: virtualization@lists.linux.dev
->>
->>  Documentation/userspace-api/ioctl/ioctl-number.rst |    6 ++++++
->>  1 file changed, 6 insertions(+)
->>
->> --- linux-next-20261113.orig/Documentation/userspace-api/ioctl/ioctl-number.rst
->> +++ linux-next-20261113/Documentation/userspace-api/ioctl/ioctl-number.rst
->> @@ -200,6 +200,7 @@ Code  Seq#    Include File
->>  'M'   01-03  drivers/scsi/megaraid/megaraid_sas.h
->>  'M'   00-03  drivers/video/fbdev/mb862xx/mb862xxfb.h
->>  'M'   00-0F  drivers/video/fsl-diu-fb.h                                conflict!
->> +'M'   01-03  xen/interface/xen-mca.h                                   conflict!
->>  'N'   00-1F  drivers/usb/scanner.h
->>  'N'   40-7F  uapi/linux/nvme_ioctl.h
->>  'N'   80-83  uapi/linux/ntsync.h and uapi/linux/nvme_ioctl.h           conflict!
->> @@ -239,6 +240,7 @@ Code  Seq#    Include File
->>  'U'   64     drivers/usb/misc/usbtest.c                                conflict!
->>  'V'   all    linux/vt.h                                                conflict!
->>  'V'   all    linux/videodev2.h                                         conflict!
->> +'V'   00-1F  linux/vboxguest.h                                         conflict!
->>  'V'   C0     linux/ivtvfb.h                                            conflict!
->>  'V'   C0     linux/ivtv.h                                              conflict!
->>  'V'   C0     media/si4713.h                                            conflict!
->> @@ -357,6 +359,7 @@ Code  Seq#    Include File
->>  '|'   80-9F  samples/                                                  Any sample and example drivers
->>  0x80  00-1F  linux/fb.h
->>  0x81  00-1F  linux/vduse.h
->> +             drivers/vdpa/vdpa_user/vduse_dev.c
->>  0x89  00-07  asm-generic/sockios.h
->>  0x89  06-07  linux/sockios.h
->>  0x89  0B-DF  linux/sockios.h
->> @@ -398,8 +401,11 @@ Code  Seq#    Include File
->>                                                                         <mailto:kvm@vger.kernel.org>
->>  0xAE  40-FF  linux/kvm.h                                               Kernel-based Virtual Machine
->>                                                                         <mailto:kvm@vger.kernel.org>
->> +0xAE  C6     arch/x86/kvm/x86.c                                        X86 KVM
-> 
-> I'd rather omit this entry.  0xAE C6 is covered by the entry above, and the horror
-> in arch/x86/kvm/x86.c is purely a 32-bit compatibility alias for an ioctl that is
-> defined in kvm.h (the structure payload defines an pointer instead of a __u64).
+Fixes: ea8ddf27e5c8 ("ocaml: add logging bindings.")
+Assisted-by: LLM
+Reported-by: Olivier Lambert <olivier.lambert@vates.tech>
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Andrew Cooper <andrew.cooper3@citrix.com>
+CC: Andrii Sultanov <andriy.sultanov@vates.tech>
+CC: Guillaume Thouvenin <guillaume.thouvenin@vates.tech>
 
-OK.
+This is only an issue if you modify oxenstored.conf to use one of these
+facilities.
+---
+ tools/ocaml/xenstored/syslog_stubs.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> If it's a sticking point, e.g. this will trip automated tooling over and over, then
-> I vote to move the relevant definitions to uapi headers, e.g.
+diff --git a/tools/ocaml/xenstored/syslog_stubs.c b/tools/ocaml/xenstored/syslog_stubs.c
+index 760e78ff73dc..16c7202d39ba 100644
+--- a/tools/ocaml/xenstored/syslog_stubs.c
++++ b/tools/ocaml/xenstored/syslog_stubs.c
+@@ -30,7 +30,7 @@ static int __syslog_facility_table[] = {
+ 	LOG_AUTH, LOG_AUTHPRIV, LOG_CRON, LOG_DAEMON, LOG_FTP, LOG_KERN,
+ 	LOG_LOCAL0, LOG_LOCAL1, LOG_LOCAL2, LOG_LOCAL3,
+ 	LOG_LOCAL4, LOG_LOCAL5, LOG_LOCAL6, LOG_LOCAL7,
+-	LOG_LPR | LOG_MAIL | LOG_NEWS | LOG_SYSLOG | LOG_USER | LOG_UUCP
++	LOG_LPR, LOG_MAIL, LOG_NEWS, LOG_SYSLOG, LOG_USER, LOG_UUCP,
+ };
+ 
+ value stub_syslog(value facility, value level, value msg)
 
-I don't know of anything like that.
-
+base-commit: 97bf370375113caf92fccf04e2877fc6b5ff887f
 -- 
-~Randy
+2.39.5
 
 
