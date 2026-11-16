@@ -2,46 +2,41 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 135F9606A31C
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 22:26:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 439D3606A331
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 23:20:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=google header.b=IOD5vZky
-Received: from list by lists.xenproject.org with outflank-mailman.1491599.1692315 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=DnudpLzG
+Received: from list by lists.xenproject.org with outflank-mailman.1491530.1692326 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xT59K-0006pW-HY; Mon, 16 Nov 2026 22:26:06 +0000
+	id 1xT5zN-0000N4-GC; Mon, 16 Nov 2026 23:19:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1491599.1692315; Mon, 16 Nov 2026 22:26:06 +0000
+Received: by outflank-mailman (output) from mailman id 1491530.1692326; Mon, 16 Nov 2026 23:19:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xT59K-0006pP-DR; Mon, 16 Nov 2026 22:26:06 +0000
-Received: by outflank-mailman (input) for mailman id 1491599;
- Mon, 16 Nov 2026 22:26:04 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xT5zN-0000Mx-DP; Mon, 16 Nov 2026 23:19:53 +0000
+Received: by outflank-mailman (input) for mailman id 1491530;
+ Mon, 16 Nov 2026 20:04:09 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper3@citrix.com>) id 1xT59I-0006pJ-FG
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 22:26:04 +0000
+ (envelope-from <andrii.nakryiko@gmail.com>) id 1xT2vx-0003ov-PG
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 20:04:09 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xT59H-00FrKy-Rq
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 23:26:03 +0100
-Received: from [10.42.69.12] (helo=localhost)
+ id 1xT2vx-007m8H-5X
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 21:04:09 +0100
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6afb828e-bab6-0a2a0a5309dd-0a2a450cb2aa-32
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 23:26:03 +0100
-Received: from [209.85.221.54] (helo=mail-wr1-f54.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6afb82fb-f479-0a2a450c0019-d155dd36f025-3
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 23:26:03 +0100
-Received: by mail-wr1-f54.google.com with SMTP id
- ffacd0b85a97d-491971ac844so3462348f8f.2
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 14:26:03 -0800 (PST)
-Received: from localhost.localdomain (host-78-146-248-75.as13285.net.
- [78.146.248.75]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-49c5d223b21sm27292099f8f.2.2026.11.16.14.26.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Nov 2026 14:26:01 -0800 (PST)
+ (envelope-from <andrii.nakryiko@gmail.com>)
+ id 6afb619c-bab6-0a2a0a5309dd-0a2a4505cd28-32
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 21:04:09 +0100
+Received: from [209.85.221.50] (helo=mail-wr1-f50.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <andrii.nakryiko@gmail.com>)
+ id 6afb61b8-4cb1-0a2a45050019-d155dd32d936-3
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 21:04:09 +0100
+Received: by mail-wr1-f50.google.com with SMTP id
+ ffacd0b85a97d-4a32576da88so240832f8f.3
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 12:04:09 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -50,105 +45,155 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
+ARC-Seal: i=1; a=rsa-sha256; t=1794859448; cv=none;
+        d=google.com; s=arc-20260327;
+        b=mGY2r3R/0mKLELg9FTtu0lWZkJM9vGtNzcX+IppNQEjE2/RzajT41sdKEFS8nyxATP
+         dLJ7zNwjTjhayTTRAFNGFZp/UufXq4aHPZGsZ01ZHeJt4gIUKYPAV7723XYWOqDXiKHx
+         BwatyME0VSo5w7HTvpW7PRllAh49Bmy8upp0nDEa/JYpcfP8Up+7db9LtdNV9sm8xUZd
+         c1ihGpvQYjQ0uGdE30ASI+Rj8hSr9XBS4TX25ktd6+s9TtG6lUethJQ4XVgur1HqLmCA
+         dnHvyiajzrjie6o7zC2kN5tejLM8cAH0A+3/W/WBk6xSeaT1WW3pA/CutoiinZQYGocO
+         8UQg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=FEtpE65JhLGyAYaL/FOW2ebUIws2WwBZ/4Zy8VNXUuw=;
+        fh=frq2Wzn0iQg3cXh9oDaaiTcrknmdL2uNu8alNe8QCjU=;
+        b=X//rvuDXvE7h3CM3CIQfG+Pmn7gTi0UiNw0vNPfaPorDQ6GoDGhxeGrA81xPVPFEiz
+         4E6qqnYt12f9dDIgiiB8mrV2QMeCFOA8zDtJt/fnt/LTcJZcoI7U6KbTSe1I9zH1UKkM
+         cDD50iZ5RxoTwkf9hgKr3ot5va9kCmWZYb+NaQ4EgMYQufzMsa4MZFlL65nLOBiW86fI
+         ic6NdcVkhvgY63dIVwqlcwadNRZcBJdaw0o8BAR/6nPLt9rtV30/0nBNXB/fwQq+3tz+
+         oMZsDl9TfW7CJcCc6BLml83bPG9BLoSBOC/zGonlCCxlyhprRo0q0IrUuOUIbGb/K7nH
+         Snag==;
+        darn=lists.xenproject.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1794867963; x=1795472763; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=jyFXJmnEADHcqDPhGx/kRZ6k5hoXysYI+LgxAK7Q3rE=;
-        b=IOD5vZkyofmoXqeqFhq/Oz3FlSAKR5TxHgGtRXKD2dhhRuLD8Eus/5sytklF2doODq
-         r+M57PrLieEkQGer+eyQIrJGFzEC/KWIVLK00CcyoUdyTLGsK8V9VCXF9iUOhpYzvH70
-         IBShCqqWEVkt6Kyl0/zMxqI4NheY4YMQmQ2IQ=
+        d=gmail.com; s=20260707; t=1794859448; x=1795464248; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=FEtpE65JhLGyAYaL/FOW2ebUIws2WwBZ/4Zy8VNXUuw=;
+        b=DnudpLzGXJZAkCG/SrjJZbxl9TU/uDuSlgU6vO7o6OoL9sElMxFrUIddeo3KOmGOfL
+         Vueqm0/ahTjeZZbylVn1HzS4nhYhH3wgngFq5LZCpRQYShKgjtfjojemja/QQighkSRc
+         nIjh8GNcOGqlclp9xRREl2LkKg2N+DH1IwFZCVmeWqNtzdaUyxp2PqEA5wCM9MVjshGN
+         x25MV86RDcwgP8J8lJosqR8NTW7guOd6vbZHtTIyMKFS1dCC4qj1yOtBa2SsVca+GzaY
+         uDIZaVaOBEQoQYPmhus14tqpH0OTxPueEIlfDl/eQJQKbW6LHA0DgQOfBigR78SkYDzA
+         pw9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794867963; x=1795472763;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=jyFXJmnEADHcqDPhGx/kRZ6k5hoXysYI+LgxAK7Q3rE=;
-        b=qprEfAd9vmwhKp1kZk/+bSNLBPyJ1T8f7du32b0tsGeYC4tavQyeFd2kEK7LitbJdI
-         OtgAXbvEO4BK/QPqVHwHDV6TGAOpksMBgKOGVD9fmHNYFtmF682P2G+qXPLU6KWbA3YF
-         /oLMp83qjaK/WWgoPMWqGgGII+TiJB0Fy19m45PXwn3lRu4GyEGyxPsimMz5eYkB/qVY
-         1H3zMCzJYW+Htlyg72JwHD03C2dtNDQbcrP0imeSPO9msoUD8/BBFk5cf1qP0ofLcarm
-         SNVry1ZQOQ7ud/5MiUYfIftALO36+DEChHWPTL0MGuX0epe/Xd1yWS/yzT+5IUMufiUK
-         G1dw==
-X-Gm-Message-State: APuU4Z8kKeGwt6beXaPfiYOMJ4087DP68cweBNQmDA6ZC0K+mfUzSk9X
-	ADA9Icze3cL/KC0z43K0mWp273JcDLJNfcnT6DSjtdWCfVXVXKxpZFZZjSbgzu4v/NJ4aTlvYBv
-	Sojcd
-X-Gm-Gg: AZFdTZeCU0TTZVE9SYmKVTAE/CLq4/2ptbBNYMPJl0MKR/bEnvUjPrpMrBFOu1Vkew7
-	q8pnW472P2OlLMzLEoIfBY5+K9MP3v2VjYbP2ovr7CgLLXHNb9xxf6oWWpdm8RCCZAXsl3Xz9e6
-	vUZ0cLDi8ax9izuOfyI0cK8WeS1M2Cxy2nZXeUxJw/23lUG9TvfGcqzx2VYnqgGj4B7qqVKeY8A
-	dD44HCIV/c71c1XY3XRz0Nx8WnsGgGO/aM0pFBIVFBMR/lUZo6OLXL14jDXZMgTswpviYLmu1Tp
-	wkUPR2c5UOqkoIm+u2X/a2qA5tCWDWjEdYH5e5Jz89StH0l9kzllEjTK6Jl4AhTlNWYcviDLVL6
-	PClFUQ5OHO0nuOI9Jyf+rPrbisK4C4rfamnUAHdYH6uDvAj+RTZUKhdYc2ZzrW0t0w6G6wBC0JX
-	//fbx8sRQnTd5hlyuDry0CPEDNcy3UHURrEFMAPbRut42Hj5LUQgfzlUeMzGRa8JimXZKlkTNth
-	i6hhM9igxYp8IXprXW/k9zod2xEJtLtNyp0nDd2tcWLdd+LRmG87nKek+48Q9tBBDfA7JP9mENY
-	tePz6/2/vWqt39MEMIkL/RpXHGy2tAVhvk+PRVlNy0RD9raqt5aOtd7zpFPi37P1lz87i2DHIkk
-	YbJ4=
-X-Received: by 2002:a05:6000:400e:b0:4a2:6542:989a with SMTP id ffacd0b85a97d-4a265429a6dmr6158924f8f.52.1794867961804;
-        Mon, 16 Nov 2026 14:26:01 -0800 (PST)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Olivier Lambert <olivier.lambert@vates.tech>,
-	Andrii Sultanov <andriy.sultanov@vates.tech>,
-	Guillaume Thouvenin <guillaume.thouvenin@vates.tech>
-Subject: [PATCH] tools/ocaml: Fix OoB read in stub_syslog()
-Date: Mon, 16 Nov 2026 22:25:59 +0000
-Message-Id: <20261116222559.3824604-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
+        d=1e100.net; s=20260707; t=1794859448; x=1795464248;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=FEtpE65JhLGyAYaL/FOW2ebUIws2WwBZ/4Zy8VNXUuw=;
+        b=2mHaTyJXglR0/R0+FpCDMygRVgrZ76KiNbyJV14Hp/3L/0Aj5KREakHr8bJicHXcUf
+         nutwQzfHCTdqchStzaMtskKE0Rb3RGLCX5QFPHK6Kos5kVBWyX6T0HATV+9jO0DEuaoe
+         eD6OhyMqskOJkGbcxSN/5j/R5aIQXRnwwyrTVcaWzeaoP3GNyPCiIfGTLWExRF35kxEQ
+         LSpH61Can59E0K8qfGrXStjdOYYooBD0TAbP9kC8YXGKzbQQISwjERo+E/DrQBjqGUNp
+         XSLuXlZVhjHrJPayavM/3Ws/sH7Wito0VLuVPvCNK1RjxjuOZXrPR9P7etTWPCns0ST5
+         LepA==
+X-Forwarded-Encrypted: i=1; AL+hErGaLplfDO6nhaZ/iJe/u+ALftzQBvus3up6zCIgNjY/BxfhGx23w1B5oKx5SoTpk8pFbLFKEWen14I=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z/OGtOAKDS9hZRdGKMFTesXDOq6RP5KKEi5XzaUtVwos4NOoELb
+	bBb2sXY71/GbufS+wSl0XbbPN+jwbQtdwYCUBA/XH0EAKKt9PG/ZCLXa9ECyRwAJsYRcrECv4H3
+	qSyJNEPf0puNS3fWhQy2Sp+HcxW4AdPg=
+X-Gm-Gg: AZFdTZcX+p5ZpT4AP5ogiFukAgPBf1VAy3hR1cCx1zOnXOc1gndN1HivoqWBoUguQ0h
+	1R2RK3JXUQmzyzYbGm7UD7deIn3z+OesdKGsMxDIYl9oo9wPgLiFH6VFCsJOa0acy+d2RqGmlMb
+	zASJqDeRh0eLrwi8UPsquvJoNDuenRmTrB4ugONbCrDhZMobxw/8K3KgIbpiy+XiFgZBJmCO46Q
+	9qOn+6qFaljIKiAyggHqp9/Szn6xKtfPHvYlSsOgf5Wuw1DGV6RFFGhEUiE3LloCyY2GivPulYi
+	xg/2nQkThXATk6OHCdNhEN0vIBZRO4jnJXo/A99MnEjMvY3epVoVLD+ZEzUmIEs8ObrNwJyWB3a
+	MGnklXqHv4o8mG3Ws1YAQDGd7jU9vz1EpdQytWCYRrGmK34YsB8DwWcAiZ9vx07Zd585AnJrjgX
+	WM6iVaarOcl4LhB5PBzpA=
+X-Received: by 2002:a05:6000:4692:b0:491:3fdd:af34 with SMTP id
+ ffacd0b85a97d-49d61c80db3mr13343868f8f.36.1794859448335; Mon, 16 Nov 2026
+ 12:04:08 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d25034/1794867963-010C9A5B-05D2536A/0/0
+References: <20261116-work-loop-pseudo-v3-0-8cbbea1cf34f@kernel.org> <20261116-work-loop-pseudo-v3-9-8cbbea1cf34f@kernel.org>
+In-Reply-To: <20261116-work-loop-pseudo-v3-9-8cbbea1cf34f@kernel.org>
+From: Andrii Nakryiko <andrii.nakryiko@gmail.com>
+Date: Mon, 16 Nov 2026 12:03:57 -0800
+X-Gm-Features: Aa3M54q6P4M0RFDCKQ8HHGNCWJafItTSPdWR1qNwVGtToDAv2VOv8vDfWHzYR6A
+Message-ID: <CAEf4BzbLFVawibuX0wk=8uzy0WZSYHbkgK55d7rqLab2qAM1Fg@mail.gmail.com>
+Subject: Re: [PATCH RFC v3 09/44] bpf: use fc_init_pseudo() for bpffs
+To: Christian Brauner <brauner@kernel.org>
+Cc: linux-fsdevel@vger.kernel.org, Jann Horn <jannh@google.com>, 
+	Chris Mason <mason@kernel.org>, Josef Bacik <josef@toxicpanda.com>, Christoph Hellwig <hch@lst.de>, 
+	linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-nvme@lists.infradead.org, Alexander Viro <viro@zeniv.linux.org.uk>, 
+	Jan Kara <jack@suse.cz>, linux-scsi@vger.kernel.org, target-devel@vger.kernel.org, 
+	driver-core@lists.linux.dev, linux-mm@kvack.org, bpf@vger.kernel.org, 
+	linux-security-module@vger.kernel.org, selinux@vger.kernel.org, 
+	apparmor@lists.ubuntu.com, linux-nfs@vger.kernel.org, netdev@vger.kernel.org, 
+	fuse-devel@lists.linux.dev, linux-efi@vger.kernel.org, 
+	xen-devel@lists.xenproject.org, ocfs2-devel@lists.linux.dev, 
+	linux-s390@vger.kernel.org, linuxppc-dev@lists.ozlabs.org, 
+	linux-usb@vger.kernel.org, Amir Goldstein <amir73il@gmail.com>, 
+	linux-erofs@lists.ozlabs.org, linux-kselftest@vger.kernel.org, 
+	Alexander Mikhalitsyn <alex@amutable.com>, Chris Down <chris@chrisdown.name>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-purgate-ID: tlsNG-c201ff/1794859449-F6AB72A1-DE4787E7/0/0
 X-purgate-type: clean
-X-purgate-size: 1629
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+X-purgate-size: 1680
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
+	autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-__syslog_facility_table[] maps Ocaml LOG_* facilities indices to local system
-indices.  The final line is intended to initialise 6 entries in the table, but
-only initalises one with the logical OR of 6 facilities, making the table 5
-entries too short.
+On Mon, Nov 16, 2026 at 3:21=E2=80=AFAM Christian Brauner <brauner@kernel.o=
+rg> wrote:
+>
+> Initialize bpffs as a pseudo filesystem instead of raising
+> SB_I_NOEXEC and SB_I_NODEV by hand. This adds SB_I_PSEUDO.
+>
+> Reviewed-by: Christoph Hellwig <hch@lst.de>
+> Reviewed-by: Alexander Mikhalitsyn <alex@amutable.com>
+> Reviewed-by: Chris Down <chris@chrisdown.name>
+> Signed-off-by: Christian Brauner (Amutable) <brauner@kernel.org>
+> ---
+>  kernel/bpf/inode.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
 
-This is probably a copy&paste error from Ocaml, where | is right operator to
-use for a list of this nature.
+Acked-by: Andrii Nakryiko <andrii@kernel.org>
 
-Fixes: ea8ddf27e5c8 ("ocaml: add logging bindings.")
-Assisted-by: LLM
-Reported-by: Olivier Lambert <olivier.lambert@vates.tech>
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Andrew Cooper <andrew.cooper3@citrix.com>
-CC: Andrii Sultanov <andriy.sultanov@vates.tech>
-CC: Guillaume Thouvenin <guillaume.thouvenin@vates.tech>
-
-This is only an issue if you modify oxenstored.conf to use one of these
-facilities.
----
- tools/ocaml/xenstored/syslog_stubs.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/tools/ocaml/xenstored/syslog_stubs.c b/tools/ocaml/xenstored/syslog_stubs.c
-index 760e78ff73dc..16c7202d39ba 100644
---- a/tools/ocaml/xenstored/syslog_stubs.c
-+++ b/tools/ocaml/xenstored/syslog_stubs.c
-@@ -30,7 +30,7 @@ static int __syslog_facility_table[] = {
- 	LOG_AUTH, LOG_AUTHPRIV, LOG_CRON, LOG_DAEMON, LOG_FTP, LOG_KERN,
- 	LOG_LOCAL0, LOG_LOCAL1, LOG_LOCAL2, LOG_LOCAL3,
- 	LOG_LOCAL4, LOG_LOCAL5, LOG_LOCAL6, LOG_LOCAL7,
--	LOG_LPR | LOG_MAIL | LOG_NEWS | LOG_SYSLOG | LOG_USER | LOG_UUCP
-+	LOG_LPR, LOG_MAIL, LOG_NEWS, LOG_SYSLOG, LOG_USER, LOG_UUCP,
- };
- 
- value stub_syslog(value facility, value level, value msg)
-
-base-commit: 97bf370375113caf92fccf04e2877fc6b5ff887f
--- 
-2.39.5
-
+> diff --git a/kernel/bpf/inode.c b/kernel/bpf/inode.c
+> index c6f328e4752e1..57cf3775c0766 100644
+> --- a/kernel/bpf/inode.c
+> +++ b/kernel/bpf/inode.c
+> @@ -15,6 +15,7 @@
+>  #include <linux/namei.h>
+>  #include <linux/fs.h>
+>  #include <linux/fs_context.h>
+> +#include <linux/pseudo_fs.h>
+>  #include <linux/fs_parser.h>
+>  #include <linux/kdev_t.h>
+>  #include <linux/filter.h>
+> @@ -1197,8 +1198,6 @@ static int bpf_fill_super(struct super_block *sb, s=
+truct fs_context *fc)
+>         sb->s_magic =3D BPF_FS_MAGIC;
+>         sb->s_op =3D &bpf_super_ops;
+>         sb->s_xattr =3D bpf_fs_xattr_handlers;
+> -       sb->s_iflags |=3D SB_I_NOEXEC;
+> -       sb->s_iflags |=3D SB_I_NODEV;
+>         sb->s_time_gran =3D 1;
+>
+>         inode =3D bpf_get_inode(sb, NULL, S_IFDIR | 0777);
+> @@ -1261,6 +1260,7 @@ static int bpf_init_fs_context(struct fs_context *f=
+c)
+>         opts->delegate_attachs =3D 0;
+>
+>         fc->s_fs_info =3D opts;
+> +       fc_init_pseudo(fc);
+>         fc->ops =3D &bpf_context_ops;
+>         return 0;
+>  }
+>
+> --
+> 2.53.0
+>
+>
 
