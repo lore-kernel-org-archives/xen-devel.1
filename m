@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF0B0606A332
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 16:48:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5F4BF606A322
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 16:50:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=UglobtYo
-Received: from list by lists.xenproject.org with outflank-mailman.1491280.1692132 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=XNwgBws9
+Received: from list by lists.xenproject.org with outflank-mailman.1491291.1692140 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSzsm-0006O4-DA; Mon, 16 Nov 2026 16:48:40 +0000
+	id 1xSzuP-00082X-L2; Mon, 16 Nov 2026 16:50:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1491280.1692132; Mon, 16 Nov 2026 16:48:40 +0000
+Received: by outflank-mailman (output) from mailman id 1491291.1692140; Mon, 16 Nov 2026 16:50:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSzsm-0006Nw-8N; Mon, 16 Nov 2026 16:48:40 +0000
-Received: by outflank-mailman (input) for mailman id 1491280;
- Mon, 16 Nov 2026 16:48:38 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xSzsk-0006Nl-IM
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 16:48:38 +0000
+	id 1xSzuP-00082Q-IQ; Mon, 16 Nov 2026 16:50:21 +0000
+Received: by outflank-mailman (input) for mailman id 1491291;
+ Mon, 16 Nov 2026 16:50:19 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xSzuN-000826-KW
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 16:50:19 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xSzsj-001S31-Ni
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 17:48:37 +0100
-Received: from [10.42.69.10] (helo=localhost)
+ id 1xSzuM-001QHQ-Q6
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 17:50:18 +0100
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6afb33c4-2eae-0a2a0a5409dd-0a2a450adf92-40
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 17:48:37 +0100
-Received: from [209.85.221.50] (helo=mail-wr1-f50.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6afb3445-bab6-0a2a0a5309dd-0a2a4501c3d0-16
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 17:50:18 +0100
+Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6afb33e5-f2d2-0a2a450a0019-d155dd32c533-3
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 17:48:37 +0100
-Received: by mail-wr1-f50.google.com with SMTP id
- ffacd0b85a97d-4a2f4ca0dcfso227800f8f.1
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 08:48:37 -0800 (PST)
+ id 6afb344a-5984-0a2a45010019-d155802ba5ab-3
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 17:50:18 +0100
+Received: by mail-wm1-f43.google.com with SMTP id
+ 5b1f17b1804b1-4a9a8d6cea8so272195e9.1
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 08:50:18 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb7839cabbsm913335e9.11.2026.11.16.08.48.36
+ 5b1f17b1804b1-4bb783f8220sm648545e9.5.2026.11.16.08.50.17
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 16 Nov 2026 08:48:36 -0800 (PST)
+ Mon, 16 Nov 2026 08:50:17 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,59 +49,61 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:Autocrypt:Subject:From:Cc:To:Content-Language:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Cc:Content-Language:References:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1794847717; x=1795452517; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=bOpdM1tsusqt8PWe0cs7ddGgtaHubeZXHBV6Lb6oMjg=;
-        b=UglobtYoZUzmTIbMGw1QPJU8jgzbux1RtJi52gCG8Ae5qmhswbmB4EJiUU1D/65bEV
-         FBNJF3A7VADGNHoPJmBR6bGrnf9EkJlR/XYauwiUXAegbYEygNgSGBN1fiBupd85Oqjw
-         vyExkSAmTXnWZKe3rvg96c+A9oVCv0dhruSVbhrGEqHfSOsEhgBxV2sVqn6JSD8a3AFl
-         RK6JNr6rTRb8MmZS9ErKjAzSvVwEHIsIgouzR61qPWBYumpFaZJ7tkOrtYJE3sG6Lp0d
-         xSM//VOnewDs1u+dTt7BKsO12Yk4hTo8eFtup8vvXSKi2KOXP/RhVKHYq2ohZIkqhoJr
-         3q9Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794847717; x=1795452517;
-        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=suse.com; s=google; t=1794847818; x=1795452618; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :cc:content-language:references:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=bOpdM1tsusqt8PWe0cs7ddGgtaHubeZXHBV6Lb6oMjg=;
-        b=CulZy/YNuroGrVW90JVGbdJc49Wv8+QFeFL6ahAQcSFu74NUnIQ7GIWhgdf1fgyVxW
-         CRzDgr7+wTZwx/gw3puQuAXzAEOgEwSmZZJ6zQhnfxIh8DYKG3uZKHTuyJ3yx1uIeUhq
-         zJeMh2WJirQWwS6YJo+Li82OQVI/dRqTYxgsulS5QzpuU2JJu7LBXsqM/fKhY12Oitq4
-         u89gt/pvCTajOLo6H3X1sj56gvVu/kMpzKURHkTj87OWsK60iQkvLEH4sKCp+CIb9Dyq
-         q7wF7l1LkVUHsENHk5ufZ5mC7dHT03u4WPBkRVipxJOI3ys2FYXuKoXHnCS8jAG9E7CW
-         4s9g==
-X-Gm-Message-State: APuU4Z+25RwFyWzGIMHU0zdHKTkTlUQRH9PWNSmrYtlObKdZvx5DkM3n
-	ydLFkbJ3+xQO+3Xf/sjb/W0B3N755LzmLdiT2nu7N+75CuQXcUwFQ+h8bBs5y1biA1oc/ZxHXeQ
-	1h9tBmQ==
-X-Gm-Gg: AYBFou2KIyoYHFGw1Eh2R59YD+1GORC4fht1Z38KPQZMivDHvAhHnUQ5QLVWbBUDWUn
-	Jqu0Ap/eZ88ZwrdE6yx+BktM4SP6EZFHiudQpZl0rysC33GGAADs5B4tb7ZAWugnrdfDb+BaX40
-	LzMD5+VOSEV0N68QyCYM8YXBJSLSPnl/msNXhonaGERrOsHi6yBQVRiHGywRGQ442hL5O1//dqM
-	K+IQp4c0+cqYqWCwB42VDUI/xKL05Np/RGSXbx1ZjlB622kr1XKT3OgQAh3XrSoos4OVj2AYdYf
-	ayNDYGaDZ5tmHaDVckBBukQne+TJUhyIbKP3lOs4rwbQRiTMhyZUCQETmrdBLFcgOD7VGmU/+kh
-	SWtlE9lr6AilGe7lwZnQWErYNfRvSSNom9THG9sY/5Aw4MoCV2YQIlTKJNOW6j25PvDLSt5jW5x
-	tczGps+rhzqYsSpRdTV2LIPDo3qvUKvVgTOInlISeVGR7AmyR5PIeOpoUlSdCnRmmPUEGwKxzDC
-	iepFy4/iNe+eU2HJQt6PxDF+4yyzrd7gmQEPWDJMfCbJotMla2ht498OF5fZK1bX7u9x5KwySB1
-	ohEsqqgSOulfBS4Zjb2WjYMnlwe2p++PvJvHXLxdZoqFBbz/Y9r6oqXByJsMev5Z46KcmH6fCoe
-	RgBXiTqqH9kVd+2XfRqs2hS/OSE9KYpCr9Buc9w==
-X-Received: by 2002:a05:600d:82c7:b0:4bb:69f2:87f7 with SMTP id 5b1f17b1804b1-4bb69f28901mr130414265e9.18.1794847716894;
-        Mon, 16 Nov 2026 08:48:36 -0800 (PST)
-Message-ID: <181dc3b6-0737-428d-8491-b4b2ced2bd84@suse.com>
-Date: Mon, 16 Nov 2026 17:48:35 +0100
+        bh=9PlopzTDntie1pFYTKWJpgecUbpN0L2zkM7CHaaUnVE=;
+        b=XNwgBws9e0DdRxXD9deK3PrCuuxpX4j/wVNLvI9V9RVMeeSSl/ywPd1uFaUnxroJSN
+         5FecGeeva1fdvxLdQMyu5Yu/96zBxrnxXyAMJ3dvwXsA5SOmRAMeOTRTctK/pOYpuvkm
+         7V2JFVthgGMwdMj9wOROvLen6WQGOEAw1icexhwqUGwkaDfLt5RaHJIzz+ybU9LZq7bQ
+         lMcTbN/FmBRJDbN/j+AaqDpfSEXz1PYsL8XuvzzWRJjSNZKlSdTgqsJUgAMd7wMyKkOU
+         jMr4zFpsEuVIM/we1eLLLp79J/yn4Q+6exmHCU4TkoW84p1mvazfBHB34dJ/Kw7JO2mZ
+         GYgA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794847818; x=1795452618;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :cc:content-language:references:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=9PlopzTDntie1pFYTKWJpgecUbpN0L2zkM7CHaaUnVE=;
+        b=KwzbGUw3zZlRzq8BQbqxTmJljRZk9FuTBcVvlGO8lhaD7vtkCyv+pL1XdcDswQf3mI
+         IjWMQO9riFhNqk4rTOxv01UeetvS0yJ3/ssQGU7H/vRScXk1Eo3lb+JcoVfZAKCzlX4a
+         /MFa7LtPWWEtUJNfioGHtxTk/nsABQXOPGs3V2tXbStoHFUwZ2UYOgiY9Eqkz9sCwhWr
+         SE2z1Aiekppwjse2IwWEo6bQG18vKrBz/yt0yT8oujHdG6z6AYH+AFZqwlxvuBJgZaDb
+         E+P/8PTRwjJseWsoG67RjVjH0/AOkjKTduBY4upzpQXyDZofJGdAGtWIGKWmKZV5etjO
+         fzOA==
+X-Gm-Message-State: APuU4Z+fchrYSgLEFES6+u+f+9JOEbLiuDOGUR3JemLHPPqdi5cspJLT
+	Ff3gPr+HzAJf3bYXddrpej3gtK3RxEgfLD6U3iopZmP2PBptQiN7vjf7H/3oOBiNjQ==
+X-Gm-Gg: AYBFou0Jaw/hB6wvs6ka/fUM9fmOyyI2TV4pW/y+m1KpKJLIF1nvyoi80e4+B3D5yPO
+	2rjdaV4siCofd5JyqXOtwceP3Gc446A6w/ARcoj2tHXX/g/90CXMmzXP/OSsDOAJ1SJ9t8DISqK
+	kY3+USvza53oAHEteYzONqy0gq+XBkH4XE/F8bF/86M2fPDiJMTqYRr41p3x3q0D1EErpY/vsia
+	LFiUk34q7V+Y/F/zpHdRuLGMqKjIEX864e/+VmeiOv50eQYOKRYWxKgzlwYXy9KygPNghxLdXop
+	c5XGGjTmRGzgOuWmppghYicVlxRUS6Th/ghBZI7Em3SjGnB3246/vNXFVI7eL9fhWE0CiJcQ7r9
+	6KOeRGZ+3JKjP8Py1vDuAeRp9O382pBi5onO5GonucgrhquBQsdjA0fPYLcBsdOEO44Z0WYthqC
+	24Duk+qaSzYWJtwtDLB8b7lciYvfRbjDSOK6VzQcnIv4pZZWLDgADqp96Rg4EVKMxzuBDUGZMFi
+	oyjMM/ilcLdhAE5SKG76BxQ70/XJrhOi1wX+4y8CaNyaorw17Hy9lDC3Kw7oPQa1Jiwd4CtEOLa
+	32Tl1MZSm/iXXwU1aaVx0chNwjqXB2ut1qUNYk7o26DYMQGp5i10VXCNYgzzKKHr1h3/9s0C9i9
+	t1hK1/lRgzASlCL53
+X-Received: by 2002:a05:600c:81c5:b0:4a2:18c4:61a5 with SMTP id 5b1f17b1804b1-4bb7837a43fmr1688565e9.6.1794847818058;
+        Mon, 16 Nov 2026 08:50:18 -0800 (PST)
+Message-ID: <83f59bf3-89a9-400a-a34b-ff14f27c97ca@suse.com>
+Date: Mon, 16 Nov 2026 17:50:16 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] xen/riscv: bound each IMSIC MMIO regset by the
+ per-group hart slots
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+References: <1794842995.8631fc262581453bbf619ec5b2062170.1a1e4faaa300006d3f@vates.tech>
+ <c9bbf2e0-9334-423a-ace9-9e50ee712986@gmail.com>
+ <1794847326.8631fc262581453bbf619ec5b2062170.1a1e53cc2430006d3f@vates.tech>
 Content-Language: en-US
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>
+Cc: xen-devel@lists.xenproject.org
 From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH] x86emul: MOVRS are NOREP
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -125,35 +127,37 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <1794847326.8631fc262581453bbf619ec5b2062170.1a1e53cc2430006d3f@vates.tech>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1794847717-595C3CFC-01A195EB/10/78276251493
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-d62444/1794847818-1D87F757-D104AC1E/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 700
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-purgate-size: 686
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-REP prefixes alter the encoding (to, presently, #UD), which wants
-reflecting in what is recorded during decode.
+On 16.11.2026 17:42, Baptiste Le Duc wrote:
+> On 11/16/26 5:34 PM, Oleksii Kurochko wrote:
+> 
+>>> -        if ( mmios[i].size != expected_mmio_size )
+>>> +        /* A register set must not run past the end of its group. */
+>>> +        offset = mmios[i].base_addr & (group_size - 1);
+>>> +        if ( mmios[i].size + offset > group_size )
+>>
+>> This can overflow for a bogus, huge size from the DT and then pass. As 
+>> offset is always below group_size,
+> Oh yeah, thanks.
+>>
+>>          if ( mmios[i].size > group_size - offset )
+>>
+>> can't.
+> Jan, do you think it needs a new version for this overflow?
 
-Fixes: 59b18eb757db ("x86emul: support non-SIMD MOVRS")
-Reported-by: Roger Pau Monné <roger.pau@amd.com>
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
+I can do this adjustment as well while committing.
 
---- a/xen/arch/x86/x86_emulate/decode.c
-+++ b/xen/arch/x86/x86_emulate/decode.c
-@@ -918,6 +918,8 @@ decode_0f38(struct x86_emulate_state *s,
-         s->desc = DstReg | SrcMem | Mov;
-         if ( !(ctxt->opcode & 1) )
-             s->desc |= ByteOp;
-+        if ( s->vex.pfx >= vex_f3 )
-+            ctxt->opcode |= MASK_INSR(s->vex.pfx, X86EMUL_OPC_PFX_MASK);
-         s->simd_size = simd_none;
-         break;
- 
+Jan
 
