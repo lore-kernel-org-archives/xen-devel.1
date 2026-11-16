@@ -2,48 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D6C30606A323
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 08:40:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C4D2606A323
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 08:40:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=epam.com header.i=@epam.com header.a=rsa-sha256 header.s=selector1 header.b=jTA9BFr4
-Received: from list by lists.xenproject.org with outflank-mailman.1490268.1691204 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=epam.com header.i=@epam.com header.a=rsa-sha256 header.s=selector1 header.b=oxsQrtno
+Received: from list by lists.xenproject.org with outflank-mailman.1490270.1691223 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSsGE-0006KK-BK; Mon, 16 Nov 2026 08:40:22 +0000
+	id 1xSsGF-0006j0-UD; Mon, 16 Nov 2026 08:40:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1490268.1691204; Mon, 16 Nov 2026 08:40:22 +0000
+Received: by outflank-mailman (output) from mailman id 1490270.1691223; Mon, 16 Nov 2026 08:40:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSsGE-0006KD-8c; Mon, 16 Nov 2026 08:40:22 +0000
-Received: by outflank-mailman (input) for mailman id 1490268;
- Mon, 16 Nov 2026 08:40:21 +0000
+	id 1xSsGF-0006in-OI; Mon, 16 Nov 2026 08:40:23 +0000
+Received: by outflank-mailman (input) for mailman id 1490270;
+ Mon, 16 Nov 2026 08:40:22 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Mykyta_Poturai@epam.com>) id 1xSsGD-0006IY-49
+ (envelope-from <Mykyta_Poturai@epam.com>) id 1xSsGD-0006Il-RO
  for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 08:40:21 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xSsGC-0070BM-Fw
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 09:40:20 +0100
+ id 1xSsGD-0070BM-7e
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 09:40:21 +0100
 Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Mykyta_Poturai@epam.com>)
- id 6afac171-8faa-0a2a0a5109dd-0a2a4502a3ca-6
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 09:40:20 +0100
+ id 6afac171-8faa-0a2a0a5109dd-0a2a4502a3ca-12
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 09:40:21 +0100
 Received: from [52.101.72.113]
  (helo=AM0PR02CU008.outbound.protection.outlook.com)
  by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <Mykyta_Poturai@epam.com>)
- id 6afac174-6ca4-0a2a45020019-34654871f831-3
+ id 6afac174-6ca4-0a2a45020019-34654871f831-5
  for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 09:40:20 +0100
 Received: from AS2PR03MB9076.eurprd03.prod.outlook.com (2603:10a6:20b:5fb::5)
  by AS8PR03MB6839.eurprd03.prod.outlook.com (2603:10a6:20b:29a::10)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.14; Mon, 16 Nov
- 2026 08:40:18 +0000
+ 2026 08:40:19 +0000
 Received: from AS2PR03MB9076.eurprd03.prod.outlook.com
  ([fe80::bfe6:8f84:2f09:349c]) by AS2PR03MB9076.eurprd03.prod.outlook.com
  ([fe80::bfe6:8f84:2f09:349c%3]) with mapi id 15.21.0615.009; Mon, 16 Nov 2026
- 08:40:18 +0000
+ 08:40:19 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -54,33 +54,33 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ImMXTBxkntsNCsc8mI2oDlOPo3cMFbh5dQcJx9GG/f6GJx6cxCd4wzopdqgtmxIXgsv0FJgz65JGKd3CVlvz6JYHsy/d1a1J9Qg9NoTc6zROjt+kZka9pskFiTOL0Cw7Uvjp5HGUlxwT4ltwfWXzsieEu/dTePCzb0s7KLoOmuskOG6CS84bs1FFUSFydIhPS/bCbwPmjGtgoKYo52dWhDlcrHPwOWAlIwCBbbcwQbz0xzWvrgbdc3sDst5phpjn2d4tSIlalT3ta/9PTj0xeTHmOgamNKhxL0GsqKq1Bt16RTjHfpvKA/FdaXj8Z1WmBlYfdNs+pEIRCsIjSqsHzg==
+ b=nQ+H+9L6xb0dJ+gqjMShP0nhR+rmvJZ1U6UDX0dJrbWEt/UZSnwWcFXpRzoUhPmJipS7AHiPru+k8fx2Fe+hOk/iR5gme6GdduqctLOjzHHQ3obckNLFmd2FWNB3FMCjcErf0Vr2H0LzU2vUIS2Jgy/sfi1PxsWGo3ietN6NJoxSd2eXozzMebLvQiROPdYWWJbOHnwhjl4g0gsHS4XvoKgvZIATVsZRz8jRcwnvhdJ42dbUotjZCNLaYn282vjjuDfvSHwNwc1EE1kkdySiekXjlphvivYTohBmVe1kLDwu1m3wSvQI2XBYDq6KxpinytmfZvm7d+fOz8tXJaN0uQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=XhT1RCekLw+BX01i9UD9UGm/jvbKqEJuiOR0KsBNI/8=;
- b=trE/84MJ/YOI3d+we+wbUkbR9t1OV4OtZNwXVpsxe4QaKHE5YEf6nbUFQTw7GfDVrvI656ZauyOHHiaLYI3dtYJEBhVa1pdr5xikEPsDCY02Pd4QxmyIMAbRpKdLjrQP56Wb0c3G3Yy2y63g269ryhqKrhBSBurpeOqy+KZ8Jpb7O+uYyT+vfAKpTmVaQQocFgLO1g83lx9pGOqyQDD4d1C9nZSFqhXtZoU2huYkYp/A08NA+qctlrEFi4LuZHDxD1hU7HP5+5YnILrEik0/VAKK4t3q7U7bW5ZsMOWbWiGkmemeAgFksZ1VSmmG8/0Z11mEc8+gGR4mUwrHN6txdg==
+ bh=XTxm5m4FP+hzQnpGiRPxKxWKCD2d2IuIBmvOjgaaa3Q=;
+ b=Yt5fT6cxlEnS0ZbUVCjttq2icJ6/uOQQ0NpmTQQma6d86Fmknrv7LTIiVYJVg6xfMI8CoBjynRik14VWo+FWvBECbqVXKyPTpRdj4QzcUAFGjtx0jPA8Ge6ilJswhjQ1gSgyaOMMmORvMzhHOXudFn25+09G56/kFK9rB4zYR4XMMQF/tQpW/Yhb6UYuUp65Q76ycuDZ6zxA+UekeQqAYzD3ceZ4rGgQXUmmO6sJAQzUiORRKmvC52YwOvBLsGAOEC+Dalkw6OY59TS0kgSBVgcwbnM4Dgzhi72xUSCC81Z90Ru7K5uBwKJnWMUU0gUIBKA2fXvJlxl2Wdi26RpwBQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=XhT1RCekLw+BX01i9UD9UGm/jvbKqEJuiOR0KsBNI/8=;
- b=jTA9BFr4sUwahdN1zgh+hnpt058aVLdtPK5iPQ8wZezrjjox04P1/too9JpukhqbAZ+VpkxPlQRFKSilfMYbsqn3gY1vJjpZFwuBRni/urFjb9URjjGbCb+VPVubs+JWG7/3wz9WtgMlcpmIgYyX8w/kbi8r0iIdOiMMsnWHH8uHQozAlkYAH2PJ9ZtQEjo/gYYCaIGQB9hJRZT82yDlLj2TvvNqSEgcfXrYYFh7UwP0U9xrmHnKM/ZASxlT2RkYkPUJaJ5GLTh0W5QIexgE5bZd8Fln0Z5iox8ekcC0v1sHemUAEIDoEkUjp0qzUvELoMeqK4NYDJv7QIoSzUGaYQ==
+ bh=XTxm5m4FP+hzQnpGiRPxKxWKCD2d2IuIBmvOjgaaa3Q=;
+ b=oxsQrtnoMqcF7YNrEjqEhhFekXllVcXwad3Ox2zra3iN32H7RFKTrKiqA7JQmuPOGoYTm5ITdprqthJJ4gq5h/sT6LbjcMOaC194Keihh9Wu73LVYj51Qkz7OhjlHnAI6nyItxFekI0ur9RHi2YyYJ41KNINYbG2I+nv51w1kd+Cgw18Kc47cmd+w0aAe3MWZT2HyZsRwgCu7yb/SHr2ujxB/zHHqtHMWtbZeFG2ocx12nO64qrAOoZNh16+CneQxfuDf+jKM7tv908cDjWzfcOMMO2tIJfwv+6B+A5sLK9YKfqPyc3CJ54aXO1ZeW5A0DEjwwGfvoIs1HAAm7Nu8Q==
 From: Mykyta Poturai <Mykyta_Poturai@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Mykyta Poturai <Mykyta_Poturai@epam.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, Julien
- Grall <julien@xen.org>, =?iso-8859-1?Q?Roger_Pau_Monn=E9?=
-	<roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>, Bertrand
- Marquis <bertrand.marquis@arm.com>, Volodymyr Babchuk
-	<Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v1 0/2] Add R-Car Gen5 PCI host support
-Thread-Topic: [PATCH v1 0/2] Add R-Car Gen5 PCI host support
-Thread-Index: AQHddaYbeaWcLQ03g02AvTf+IOUjJA==
-Date: Mon, 16 Nov 2026 08:40:18 +0000
-Message-ID: <cover.1794817300.git.mykyta_poturai@epam.com>
+CC: Mykyta Poturai <Mykyta_Poturai@epam.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, Volodymyr
+ Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v1 2/2] pci/rcar: Add support for Gen5 PCI host
+Thread-Topic: [PATCH v1 2/2] pci/rcar: Add support for Gen5 PCI host
+Thread-Index: AQHddaYcAIucuvPO/0quJ8il+q1yMg==
+Date: Mon, 16 Nov 2026 08:40:19 +0000
+Message-ID:
+ <2871b83d934f6254fd593ff9fc75de03728b69ac.1794817300.git.mykyta_poturai@epam.com>
+References: <cover.1794817300.git.mykyta_poturai@epam.com>
+In-Reply-To: <cover.1794817300.git.mykyta_poturai@epam.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach:
@@ -89,48 +89,48 @@ authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: AS2PR03MB9076:EE_|AS8PR03MB6839:EE_
-x-ms-office365-filtering-correlation-id: e63ac834-72a4-4e4b-17a5-08df43bd3e4d
+x-ms-office365-filtering-correlation-id: bba381d0-c483-487c-1ba5-08df43bd3ecf
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam:
- BCL:0;ARA:13230040|366016|1800799024|376014|23010399003|18002099003|261009223027099003|261022105027099003|261021123027099003|261021121427099003|261102123227099003|261102130727099003|261028144727099003|261026121527099003|261026140227099003|11063799006|56012099006|10067099003|38070700021;
+ BCL:0;ARA:13230040|366016|1800799024|376014|23010399003|6133799003|22082099003|18002099003|261009223027099003|261022105027099003|261021123027099003|261021121427099003|261102123227099003|261028144727099003|261026121527099003|261026140227099003|11063799006|56012099006|10067099003|38070700021;
 x-microsoft-antispam-message-info:
- O5TUTRmDMm3ukOtswghaaFMuyTU2T08M5+FG58AhRAqAJYJvi10rz8e20aJwsN0TlAeQrTjeiTwekxw+vjgFN6eJRq791/cQCQlYRaSGTrB6kDJs2wZQlHEomitD/EzfJ6fkSJG1R1XMFzuGRG66Em83Hv0utuwnnBdG+KZtJfsVKAiQWKsE8cMu8QSImUtDobnzLSMognL9EAprncrERinKXYKenVp18E7MGAIFsfJqvcHABmK+3ztncQfH6oLdd4D2r+iAWKbhPx5/a7y08Y4Pt9PfQtIeK6bFskjb5lP2giP0XATSpVgrkVHlHPVsItrccLkrw9jGZ6Odd8/8SGLSlI/fwEIlB/BESdOUCmy+ocWc+w+3gajqqRVPvTUOVTqFAPl61A/lfEuSweB12MQb9KjjuJ6QBNdgAXbdlUe7Wb5Opmya4EKCKpVl7o5eylbfPTuaXIKupI3qV64IWVmDsIe353zwpDfo+zzTfHZyHDhRPjrayEUDrnskRP5nVZmquKzhWIPOO0Xd9py1BRNo9zXdLANCzpfMSBXFkZUn+hqnqyF/92iwB4RXxFBocV5YV3kahqdJJ4BOhdQ54VlJZ4uPFpZ698qs4wTjTsbdO6kuBeSzPgJ7tr1eRQwZoJ2x8Kl5BwQHlzqX53FnnALeTjwVLdFYWtW2lavzLSZugBAu2nQOR3bW3ovmDkI3Zzdmr+HG4Ke7vGsRjCUcTnjjAs4o9Cxse2sFTz2v0XM=
+ cLdZIC8pMzXVCVbglBalQ6V7xObPOhLpS+iookp8twnt3DMbFTzYz9Do6bKsFaOQyZPTAgcc34GNZ+Dw1IrDu1h64O86pKpsQZlrBDvz5CTHUyVG/e+SxO5I7yWUH9Vv9t8+cziWlwq/5DkbZW+ZSwPJGsKgG/HwFlJQ4qscRLRoQM38EO/FYlIGdXVyO2qky+qWfth23uITKHeT4dZNg5ebuLUr1+iqDNc9CLzx6iwZmwt2yJiray2/hjPMIgrt9ClUclgBHbL48PmJC7h89BpsoA2xoVmquwG4iinkfXmMcEqTWMgNqCMYJ2062WTXNi/hmZ4yM1SE3sN00lo6SnZvhvSv/9Mcv0LzOY+2JYqhfZZUR4Ky1/2EFq9p2RmkEyMIP8FMh6n7rltRxpeHr77X0nv019VwLC79B+8bzI4nn0CqbY8A8dQ8w5jopD1NAtjWEzBOZKRoSp1CNy7LcHkaXb9xOf5JBTaBbORVpoaHIGJJLKqPPB0QvmzFDseEpteQ3xVllttJrYfvjM9tj30Lm+mC3t0M9cjqvITyp1EGXnZcM5DYkGkoWfjg/IV3w4WADiTNjBP1IuMgA8YIhinXgkNWaIhMwj7jCs8cdz7JW709jfQ1xNLOqEgGhv7x0edBsKEW8ylTbbtAHQOEaMbredu4+xy95sOraiRc+eKJbY4/1fTXr9vKSKsrdlXpkmjI74QUC2VAujZfz0Kz6KoJYqhXc7yGiGZItbiUf8U=
 x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS2PR03MB9076.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(23010399003)(18002099003)(261009223027099003)(261022105027099003)(261021123027099003)(261021121427099003)(261102123227099003)(261102130727099003)(261028144727099003)(261026121527099003)(261026140227099003)(11063799006)(56012099006)(10067099003)(38070700021);DIR:OUT;SFP:1102;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS2PR03MB9076.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(23010399003)(6133799003)(22082099003)(18002099003)(261009223027099003)(261022105027099003)(261021123027099003)(261021121427099003)(261102123227099003)(261028144727099003)(261026121527099003)(261026140227099003)(11063799006)(56012099006)(10067099003)(38070700021);DIR:OUT;SFP:1102;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?Ehy4eiMhEPf/rWY1/ZkoJhArtUcL3Zr5GdDPec/sLF9bYSaoM9fyCkil8l?=
- =?iso-8859-1?Q?Zg1Wy8MtKysS+pNz1+CSkWCRVgQBdEdg9Sd1vvQ28ec+D8cslxh0/IYeh2?=
- =?iso-8859-1?Q?FIcfyCT8jUNAz9Gqu2sre7CZQQM67RNTgBxU/uvJj3YbBkGwHR2ADd9TIT?=
- =?iso-8859-1?Q?4XvqgDDZ1irEWXuI88v2yykXEiuK9fzNHUwUuIZQ/snkOL4VCfP+nHzhEg?=
- =?iso-8859-1?Q?48tXdNJZp9nINDeTXWLqJivljR0Dql75UxQ0SkAoCRmn+nQ8XnBil1uI3n?=
- =?iso-8859-1?Q?vRPZCuGCl10QfEIrokQgr+qoOaobdRgvLzQcMzS77eyvtAxfVnf+LLLwny?=
- =?iso-8859-1?Q?BRd9cL3rJtEYDUd0JxyV7lkR85Ek/cXXnz7nCG9ZLfu+cu4d+oL8tzP2Ig?=
- =?iso-8859-1?Q?t0kQoLsQ5P0mKcUMSCrkqXen1wH8xhFcxRRiD4aipde/0jz8CIIcwVKMlP?=
- =?iso-8859-1?Q?zQ2//HT2lRnShVzk25n6E+RsUxl0l7wm84mWkDnSLZNOU8Hr7j20CqJ9/h?=
- =?iso-8859-1?Q?MVHjiuQvPhG4bJLAKsD24+rAutDytop0riLNVA7V/WB9QErH6bi0i+tQ1z?=
- =?iso-8859-1?Q?3EREIUM6Z9dP805kzfQhC6VfvlUHJ4DEw6IzksJEkT6ntJfkw4surTydj8?=
- =?iso-8859-1?Q?30BtJBjZomhbyatbf8tSuXgqaEsYmds4f/IcfnWccxJgNJhYzcbkzbmqU6?=
- =?iso-8859-1?Q?TpTH3jcGRi8QP13gBNUZriWIKPfSihfgHurT45kWSuZlOdFVPu4ZeGwo3+?=
- =?iso-8859-1?Q?/w0Dawa9GEtnxTqTOz3PzE533z7HoIYBk+S+5lOhRdEixicHjCbO6VzUs0?=
- =?iso-8859-1?Q?jrARmiI+5aAaaDxHViiu+AdiAy8heetPcC/FgFhYf2FkrrFBqxHcDWPsKf?=
- =?iso-8859-1?Q?+rRnhZ08ERTtZAtoUveKD0QixRH9Ikd3KArdfNzejaQf6KP8ZimIWctZfk?=
- =?iso-8859-1?Q?egXOhdBA6gGKiTfMB0I0NDLUJV21WFSRlGCP9xG3gXp4Qw/nzxjCPamb62?=
- =?iso-8859-1?Q?4aaKFaQOtlNX9gZD1g1TsX9m6ZLp5dkQFZpHK11b+unBOeQ5L2YDItoaTo?=
- =?iso-8859-1?Q?W3i35AD2QvNWpQDF57P/RU/31kdZjJfYo6D2r+By5XMqvn0roslxyvQSst?=
- =?iso-8859-1?Q?iWEX3cpEWdX7FtgYLsxA2QrOeD8uGRaz+N6AMwf10IqFtX01vbgLElj2bH?=
- =?iso-8859-1?Q?1OMNlsBQVoWmj8W05/eqonnyOdZ0eyrCzb5XATHTR0x9Q9nCt+o0BdmxWi?=
- =?iso-8859-1?Q?93lD7g8NY7a0+wYKI69mHAaeYS2CP/Kawpq0uQyCfL9BNUulBrZpDrWiby?=
- =?iso-8859-1?Q?CO+rJvCv0vi4G/+31oPVdEIOj5Wa3XwL5YQ8H89rLog2jAtUTfYas+QbP+?=
- =?iso-8859-1?Q?qC2fltU6V8KrY5Z7Vwr8W2/bzelq2eWZJVt2Di3lCH5JWRo74H2LM+BDct?=
- =?iso-8859-1?Q?x7dcfGyT6bQH36L1WOBI1MO3kE0LJdFk8JhgtUgGaobMx5AsF4LsY6kMqU?=
- =?iso-8859-1?Q?16L2gV7XWWM5eYYCdluIxZLuH+fZHyoY/TIrpe4GvAA1VGukRgPhXmtPYS?=
- =?iso-8859-1?Q?o3ssuSNhrzG49KuWA7sm2kYhQ/u+tNz3bIyuI6gxeiB2SDyU4O8Uuv7Szr?=
- =?iso-8859-1?Q?0ooH07nU8LhIIvqSNjpWjZeFuf282RrMXGedHPDoTuBrzsNrGBjJhTCcGc?=
- =?iso-8859-1?Q?cCV/06xWSGDdJPCNl9yWIDqnzadSQUTDHFuABtC/8054/kqxuFOCKQuhWu?=
- =?iso-8859-1?Q?FezG8jzbZmwt3fASV4xK9/zuq4MHaMzUpDuUd2n7VHu/4r8kyhN3CiQTlQ?=
- =?iso-8859-1?Q?RYKH9+Cmag=3D=3D?=
+ =?iso-8859-1?Q?nyrE5vXuQ49lutcBO/FzJ9ka2iomWI3RuR5VzboSU/aqXLktSL/KbSgVM3?=
+ =?iso-8859-1?Q?1ao9TnYtWY1Rc4scKYsogvmPafx/ZrP12PJvbpzV3KkZHxRVy0gP2pIRCa?=
+ =?iso-8859-1?Q?gChSHPg1InCPUmEB2n6NXPNl48vi8JOT7693/HoofLIin7Mvd5cgbPGPg0?=
+ =?iso-8859-1?Q?0a5V4dRpI+bk/VaQ7dhi+Yhp/FLTMvZ4MQ6d+TJie99/qRxeBenzK4Oekn?=
+ =?iso-8859-1?Q?xUg34BtOTGq85Uwd07OOAahO6feefFKQR5alGUnw2+n14NzSkwlejNqUGW?=
+ =?iso-8859-1?Q?IZgw4tbLkbB/IFqloXWQ64InfylCe3HAtuTdjqzs8k5NwlKOioklz+Jq9H?=
+ =?iso-8859-1?Q?GKowZT1JQvR+l+by9H9rnpxVETY8WX82AbMQZ06JmwP4yUpflr2+hPpEsk?=
+ =?iso-8859-1?Q?2F9ZjIJnbVc7gRWSrMzo+ugHa2jYGJbTBHNLbYKcKO7OLJa8kKEk/ItqnY?=
+ =?iso-8859-1?Q?hmtXo+RjKiPVZVU2tt0j+xd9nizqXn9Moj4IriN99+skGTG6iKTsRoIfo8?=
+ =?iso-8859-1?Q?WaBpHpxZ4H6IfuNzoopISfqoYiBnX3UN+zoeSK9e16keAQ46p8ModpLj5z?=
+ =?iso-8859-1?Q?mvR/WDuFZOa/rKv3PKo9aJHviU8QZuH+8DoWmd5aoQU8/5o3+NzJMaRJar?=
+ =?iso-8859-1?Q?b+xRAUWiV+cYHqd32m667eYc2L0/sN2CRcF9L/xUuzNNKdVPzXAedZRS4O?=
+ =?iso-8859-1?Q?3/zGewBWkaMCvk4J418SoP4DOH+yaRzkejkdYegV7NYCcZEhfaBd1pesy/?=
+ =?iso-8859-1?Q?CmQ8R6A0MJjKzqy8Crz1Mrloltd0aoolt3SkOe5qSDgy98zVsarxOaqo9+?=
+ =?iso-8859-1?Q?kD46Xhyj0TxOqgSP/VGD8Va35j7No3ppyyz7YKQRLXtlIY9hPmXlY5+roo?=
+ =?iso-8859-1?Q?HsrABL4IqMDmCqn7k5USKtAnkaSWvWBXlbRYgUZM/zwanzdEouu/vPgnDg?=
+ =?iso-8859-1?Q?qU37A8nXSK2LoobkmNZug555TXkVZnxNFq/HdgBo6+9Lvw6aUG+G5lhE/W?=
+ =?iso-8859-1?Q?rK5eXZibuvljGGW680nNNkXNErZaVNy0IM31fkB40H5ZYhyi6BjvfbGJ37?=
+ =?iso-8859-1?Q?458hUB+xWp3lJaB2e2N0jM2wPmQetArKmItULcwQmriAgZNA738KG71b1f?=
+ =?iso-8859-1?Q?hX5lM+jVj9ujiiPSa+h+nzN61Bo2vHRAG9FsXdwsb0QrLOfWP2rMEBNtpW?=
+ =?iso-8859-1?Q?FZoAdXNpo12hzummXGwsEsZ6jjAJezFjmWGEkEhkTIeEq7Wlzz8lOozTLM?=
+ =?iso-8859-1?Q?8oYnO9gOs7UtW/5x8YHCobWNEhwvid4OTBORpFqpJmpcCU5IFpL3S5RFMX?=
+ =?iso-8859-1?Q?6EX2kuT5hfe6HscExJmmoZivacllGnPq9GAdoA2SdpkzYmRj4b3m6uUcZq?=
+ =?iso-8859-1?Q?XVJz5Pgcdi9W05J6LWkvRYTLiNv6D7zdnC4TLPtA5H9/PssvmWPCP7VAMq?=
+ =?iso-8859-1?Q?Bz8UMDR11VFnfKKS3aqBpqfARjbqGLXvAF1+nkbV76RTeqCZj/1+wIIX5M?=
+ =?iso-8859-1?Q?r6sRdklxnipWYTNl8AYrQc69mcSFPIXfy5tam2c8D2rnCcsFrA1jK5K62C?=
+ =?iso-8859-1?Q?8ocm/ZleZzdi6HZyLMqchdjR/9Ex/oedElRCnEZHERBHUBtT15lWryUIfg?=
+ =?iso-8859-1?Q?v8RIENG1l3Q1M66Iy9YsCJy1V6Jzit2YlzXhEcVnmGV6MGTxjkM9K57gU+?=
+ =?iso-8859-1?Q?JWuftOhQ7WNVcwCvIEoF4LuqgOU5qcCvxMY8412VeuC9eBIM8efQiiGRAY?=
+ =?iso-8859-1?Q?qBsElhIimK1JpT9Y/fmMZW7VlB6x9/YPp6GUpQpJIhw/WfsRDCQstlvYWb?=
+ =?iso-8859-1?Q?OQf1uUUTQg=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 X-Archived-By: <archiver.kernel.org>
@@ -138,48 +138,112 @@ MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: AS2PR03MB9076.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e63ac834-72a4-4e4b-17a5-08df43bd3e4d
-X-MS-Exchange-CrossTenant-originalarrivaltime: 16 Nov 2026 08:40:18.2609
+X-MS-Exchange-CrossTenant-Network-Message-Id: bba381d0-c483-487c-1ba5-08df43bd3ecf
+X-MS-Exchange-CrossTenant-originalarrivaltime: 16 Nov 2026 08:40:19.1515
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: FIeHes0mEoOTxHHs8EkMsItGA6ULJI6RveJHhWj3MnLiN4dj+1yB6qdB5O/98V5bGHaJDKzJm4uMNBDynDR/+Q==
+X-MS-Exchange-CrossTenant-userprincipalname: 9s78dGQJE5ndCR76jn25lIPBkdYWVSQfjBPVDd/rLMSBoeqiCh6U/qisGvM98w3X9jFF5MxdlwC/ZXIBZdscxA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR03MB6839
-X-purgate-ID: tlsNG-720697/1794818420-F1AAD2AC-39A993AE/0/0
+X-purgate-ID: tlsNG-720697/1794818420-67CBA2AC-B0C0FE9D/0/0
 X-purgate-type: clean
-X-purgate-size: 1082
-X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
-	autolearn=ham autolearn_force=no version=4.0.1
+X-purgate-size: 3003
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add R-Car Gen5 PCI host support to the existing Gen4 driver. Gen5 uses
-the same DesignWare integration and register layout, so one driver
-covers both.
+Add support for Renesas R-Car Gen5 PCI host controller. This includes
+updating the device tree match table to recognize the new compatible
+string "renesas,rcar-gen5-pcie6" and ensuring that the OSID registers
+are only initialized when they are supported by the hardware.
 
-Drop the generation number from the driver file and static symbols. Keep
-the rcar4_ prefix on the exported OSID helpers, as the BDF-to-OSID
-registers only exist on Gen4.
+Gen5 hosts do not expose the "app" register range, so only look it up
+on Gen4.
 
-Add the "renesas,rcar-gen5-pcie6" compatible and skip the "app" register
-range on Gen5, as the hardware does not have it.
+Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
+---
+ xen/arch/arm/pci/pci-host-rcar.c | 17 ++++++++++++++---
+ 1 file changed, 14 insertions(+), 3 deletions(-)
 
-Mykyta Poturai (2):
-  pci/rcar: Rename PCI host rcar4 to rcar
-  pci/rcar: Add support for Gen5 PCI host
-
- MAINTAINERS                                   |  2 +-
- xen/arch/arm/pci/Makefile                     |  2 +-
- .../pci/{pci-host-rcar4.c =3D> pci-host-rcar.c} | 49 ++++++++++++-------
- .../pci/{pci-host-rcar4.h =3D> pci-host-rcar.h} |  6 +--
- xen/drivers/passthrough/arm/ipmmu-vmsa.c      |  2 +-
- 5 files changed, 36 insertions(+), 25 deletions(-)
- rename xen/arch/arm/pci/{pci-host-rcar4.c =3D> pci-host-rcar.c} (81%)
- rename xen/arch/arm/pci/{pci-host-rcar4.h =3D> pci-host-rcar.h} (88%)
-
+diff --git a/xen/arch/arm/pci/pci-host-rcar.c b/xen/arch/arm/pci/pci-host-r=
+car.c
+index 5f184d5ebc..87b3ccbc1c 100644
+--- a/xen/arch/arm/pci/pci-host-rcar.c
++++ b/xen/arch/arm/pci/pci-host-rcar.c
+@@ -17,6 +17,9 @@
+=20
+ #define RCAR_DWC_VERSION     0x520A
+=20
++#define RCAR_GEN4    4
++#define RCAR_GEN5    5
++
+ /* PCIE BDF-OSID assignment */
+ #define CNVID(n)             (0x700 + ((n) * 4))
+ #define CNVID_CNV_EN         (1U << 31)
+@@ -87,8 +90,9 @@ static const struct pci_ecam_ops rcar_pcie_child_ops =3D =
+{
+ };
+=20
+ static const struct dt_device_match __initconstrel rcar_pcie_dt_match[] =
+=3D {
+-    { .compatible =3D "renesas,r8a779f0-pcie" },
+-    { .compatible =3D "renesas,r8a779g0-pcie" },
++    { .compatible =3D "renesas,r8a779f0-pcie", .data =3D (void *)RCAR_GEN4=
+ },
++    { .compatible =3D "renesas,r8a779g0-pcie", .data =3D (void *)RCAR_GEN4=
+ },
++    { .compatible =3D "renesas,rcar-gen5-pcie6", .data =3D (void *)RCAR_GE=
+N5 },
+     {},
+ };
+=20
+@@ -182,6 +186,7 @@ void rcar4_pcie_bdf_msk_set(struct pci_host_bridge *bri=
+dge, unsigned int reg_id,
+ static int __init pci_host_rcar_probe(struct dt_device_node *dev,
+                                       const void *data)
+ {
++    const struct dt_device_match *match;
+     struct pci_host_bridge *bridge;
+     paddr_t app_phys_addr;
+     paddr_t app_size;
+@@ -194,6 +199,11 @@ static int __init pci_host_rcar_probe(struct dt_device=
+_node *dev,
+     bridge =3D dw_pcie_host_probe(dev, data, &rcar_pcie_ops,
+                                 &rcar_pcie_child_ops);
+=20
++    match =3D dt_match_node(rcar_pcie_dt_match, dev);
++    ASSERT(match);
++    if ( match->data !=3D (void *)RCAR_GEN4 )
++        goto skip_app;
++
+     app_idx =3D dt_property_match_string(dev, "reg-names", "app");
+     if ( app_idx < 0 )
+     {
+@@ -218,6 +228,7 @@ static int __init pci_host_rcar_probe(struct dt_device_=
+node *dev,
+     printk("APP at [mem 0x%" PRIpaddr "-0x%" PRIpaddr "]\n", app_phys_addr=
+,
+            app_phys_addr + app_size - 1);
+=20
++skip_app:
+     dw_pcie_set_priv(bridge, priv);
+     dw_pcie_set_version(bridge, RCAR_DWC_VERSION);
+=20
+@@ -227,7 +238,7 @@ err:
+     return ret;
+ }
+=20
+-DT_DEVICE_START(pci_gen, "PCI HOST R-CAR GEN4", DEVICE_PCI_HOSTBRIDGE)
++DT_DEVICE_START(pci_gen, "PCI HOST R-CAR GEN4/GEN5", DEVICE_PCI_HOSTBRIDGE=
+)
+ .dt_match =3D rcar_pcie_dt_match,
+ .init =3D pci_host_rcar_probe,
+ DT_DEVICE_END
 --=20
 2.56.1
 
