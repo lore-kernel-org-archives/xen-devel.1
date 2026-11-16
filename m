@@ -2,54 +2,55 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4FEC4606A31C
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 18:39:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C83A606A331
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 18:40:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=susede1 header.b=IMajUjko;
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=susede1 header.b=IMajUjko
-Received: from list by lists.xenproject.org with outflank-mailman.1491451.1692230 (Exim 4.92)
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=susede1 header.b=d7/gxS2i;
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=susede1 header.b=d7/gxS2i
+Received: from list by lists.xenproject.org with outflank-mailman.1491464.1692238 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xT1c0-0007yC-E1; Mon, 16 Nov 2026 18:39:28 +0000
+	id 1xT1cq-0001Iz-MA; Mon, 16 Nov 2026 18:40:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1491451.1692230; Mon, 16 Nov 2026 18:39:28 +0000
+Received: by outflank-mailman (output) from mailman id 1491464.1692238; Mon, 16 Nov 2026 18:40:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xT1c0-0007y5-B4; Mon, 16 Nov 2026 18:39:28 +0000
-Received: by outflank-mailman (input) for mailman id 1491451;
- Mon, 16 Nov 2026 18:39:27 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xT1cq-0001Is-JA; Mon, 16 Nov 2026 18:40:20 +0000
+Received: by outflank-mailman (input) for mailman id 1491464;
+ Mon, 16 Nov 2026 18:40:19 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jgross@suse.com>) id 1xT1bz-0007xS-QA
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 18:39:27 +0000
+ (envelope-from <jgross@suse.com>) id 1xT1cp-0001IX-Oe
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 18:40:19 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xT1by-00FRIy-VK
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 19:39:26 +0100
-Received: from [10.42.69.10] (helo=localhost)
+ id 1xT1co-001gAB-Tv
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 19:40:18 +0100
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jgross@suse.com>)
- id 6afb4dc7-8faa-0a2a0a5109dd-0a2a450a946e-18
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 19:39:26 +0100
+ id 6afb4e06-e002-0a2a0a5209dd-0a2a4503a7be-20
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 19:40:18 +0100
 Received: from [195.135.223.130] (helo=smtp-out1.suse.de)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jgross@suse.com>)
- id 6afb4dde-f2d2-0a2a450a0019-c387df82abc8-3
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 19:39:26 +0100
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ id 6afb4e12-fae8-0a2a45030019-c387df82a3b4-3
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 19:40:18 +0100
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 0B2352212D;
- Mon, 16 Nov 2026 18:39:26 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 5D2F92230D;
+ Mon, 16 Nov 2026 18:40:18 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 6773A1334C;
- Mon, 16 Nov 2026 18:39:25 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id C4AC91334C;
+ Mon, 16 Nov 2026 18:40:17 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id TF/kD91N+2pEdwAAD6G6ig
- (envelope-from <jgross@suse.com>); Mon, 16 Nov 2026 18:39:25 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id WpBNJhFO+2qQeAAAD6G6ig
+ (envelope-from <jgross@suse.com>); Mon, 16 Nov 2026 18:40:17 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -60,79 +61,86 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding:In-Reply-To:References"; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1794854366; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1794854418; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=WiLPMJra74PW0xgwwjwYiXFhect3nTl/hOqzAmmuizQ=;
-	b=IMajUjkoAbfzgUkyt7ltz1uN5wc7y40UeKjZAPxhQW0EWunT5AE7Gpm9Aa608QIWwBi7mQ
-	Bvf1yh6yt/ek6DTIc8JQCnDvgqIoHkmlIdB1wzCs+ZxZw1gX9xqOYknKZqvq21bG23fnvn
-	/Crq0iR3gWG/ywHoN/BhNP/SNCJtr4Q=
+	bh=EstgW3BFXnX4df1tuW4tEnqzE/nSwaIt9m5b3CVovjM=;
+	b=d7/gxS2iZEwV2qSsgM3D9VB3DqJoIXkBbK34RIXkiYBiBqLSS44U5xzn70VLA90JNCFh48
+	n9lh//HAd7jumt+fyh0dHjuX3ABGmQMQ1TfANBfPGVvGpqPJZ4+l5hzjeIrznVt0iQDecI
+	FBq78T/n3jVhalWndFmr4Sb9YWq3aZg=
 Authentication-Results: smtp-out1.suse.de;
-	none
+	dkim=pass header.d=suse.com header.s=susede1 header.b="d7/gxS2i"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1794854366; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1794854418; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=WiLPMJra74PW0xgwwjwYiXFhect3nTl/hOqzAmmuizQ=;
-	b=IMajUjkoAbfzgUkyt7ltz1uN5wc7y40UeKjZAPxhQW0EWunT5AE7Gpm9Aa608QIWwBi7mQ
-	Bvf1yh6yt/ek6DTIc8JQCnDvgqIoHkmlIdB1wzCs+ZxZw1gX9xqOYknKZqvq21bG23fnvn
-	/Crq0iR3gWG/ywHoN/BhNP/SNCJtr4Q=
+	bh=EstgW3BFXnX4df1tuW4tEnqzE/nSwaIt9m5b3CVovjM=;
+	b=d7/gxS2iZEwV2qSsgM3D9VB3DqJoIXkBbK34RIXkiYBiBqLSS44U5xzn70VLA90JNCFh48
+	n9lh//HAd7jumt+fyh0dHjuX3ABGmQMQ1TfANBfPGVvGpqPJZ4+l5hzjeIrznVt0iQDecI
+	FBq78T/n3jVhalWndFmr4Sb9YWq3aZg=
 From: Juergen Gross <jgross@suse.com>
 To: linux-kernel@vger.kernel.org,
 	x86@kernel.org,
-	linux-hyperv@vger.kernel.org,
-	kvm@vger.kernel.org
+	virtualization@lists.linux.dev
 Cc: Juergen Gross <jgross@suse.com>,
-	Haiyang Zhang <haiyangz@microsoft.com>,
-	Wei Liu <wei.liu@kernel.org>,
-	Dexuan Cui <decui@microsoft.com>,
 	Thomas Gleixner <tglx@kernel.org>,
 	Ingo Molnar <mingo@redhat.com>,
 	Borislav Petkov <bp@alien8.de>,
 	Dave Hansen <dave.hansen@linux.intel.com>,
 	"H. Peter Anvin" <hpa@zytor.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Vitaly Kuznetsov <vkuznets@redhat.com>,
-	Sean Christopherson <seanjc@google.com>,
+	Ajay Kaher <ajay.kaher@broadcom.com>,
+	Alexey Makhalov <alexey.makhalov@broadcom.com>,
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
 	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Josh Poimboeuf <jpoimboe@kernel.org>,
+	Peter Zijlstra <peterz@infradead.org>,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH v6 03/17] x86/msr: Minimize usage of native_*() msr access functions
-Date: Mon, 16 Nov 2026 19:38:51 +0100
-Message-ID: <20261116183905.1591611-4-jgross@suse.com>
+Subject: [PATCH v6 12/17] x86/paravirt: Split off MSR related hooks into new header
+Date: Mon, 16 Nov 2026 19:39:00 +0100
+Message-ID: <20261116183905.1591611-13-jgross@suse.com>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261116183905.1591611-1-jgross@suse.com>
 References: <20261116183905.1591611-1-jgross@suse.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-11.80 / 50.00];
+X-Rspamd-Queue-Id: 5D2F92230D
+X-Spam-Level: 
+X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
+X-Rspamd-Action: no action
+X-Spamd-Result: default: False [-12.01 / 50.00];
 	SUSE_INTERNAL_BYPASS(-9.00)[];
 	BAYES_HAM(-3.00)[100.00%];
 	MID_CONTAINS_FROM(1.00)[];
 	NEURAL_HAM_LONG(-1.00)[-1.000];
 	R_MISSING_CHARSET(0.50)[];
-	NEURAL_HAM_SHORT(-0.20)[-0.996];
+	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	ARC_NA(0.00)[];
+	MX_GOOD(-0.01)[];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	URIBL_BLOCKED(0.00)[imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo,suse.com:dkim,suse.com:email];
 	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	URIBL_BLOCKED(0.00)[suse.com:email,imap1.dmz-prg2.suse.org:helo];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	RCVD_TLS_ALL(0.00)[];
+	DKIM_TRACE(0.00)[suse.com:+];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[zytor.com:email,imap1.dmz-prg2.suse.org:helo,suse.com:email];
-	RCVD_TLS_ALL(0.00)[]
-X-Spam-Score: -11.80
-X-Spam-Level: 
-X-purgate-ID: tlsNG-4011c0/1794854366-5A5DBCFC-FF1C16EC/35/110847
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
+	R_RATELIMIT(0.00)[to_ip_from(RLkdkdrsxe9hqhhs5ask8616i6)];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:dkim,suse.com:email,imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo]
+X-Spam-Score: -12.01
+X-purgate-ID: tlsNG-33051d/1794854418-75C804E9-1CFE4CA9/35/110847
 X-purgate-type: clean
-X-purgate-size: 5326
+X-purgate-size: 8121
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -141,158 +149,265 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-In order to prepare for some MSR access function reorg work, switch
-most users of native_{read|write}_msr[_safe]() to the more generic
-rdmsr*()/wrmsr*() variants.
+Move the WRMSR, RDMSR and RDPMC related parts of paravirt.h and
+paravirt_types.h into a new header file paravirt-msr.h.
 
-For now this will have some intermediate performance impact with
-paravirtualization configured when running on bare metal, but this
-is a prereq change for the planned direct inlining of the rdmsr/wrmsr
-instructions with this configuration.
-
-The main reason for this switch is the planned move of the MSR trace
-function invocation from the native_*() functions to the generic
-rdmsr*()/wrmsr*() variants. Without this switch the users of the
-native_*() functions would lose the related tracing entries.
-
-Note that the Xen related MSR access functions will not be switched,
-as these will be handled after the move of the trace hooks.
+Switch all moved helper functions to __always_inline.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Acked-by: Sean Christopherson <seanjc@google.com>
-Acked-by: Wei Liu <wei.liu@kernel.org>
-Reviewed-by: H. Peter Anvin (Intel) <hpa@zytor.com>
 ---
- arch/x86/hyperv/ivm.c          |  2 +-
- arch/x86/kernel/cpu/mshyperv.c |  4 ++--
- arch/x86/kernel/kvmclock.c     |  2 +-
- arch/x86/kvm/svm/svm.c         | 16 ++++++++--------
- arch/x86/xen/pmu.c             |  4 ++--
- 5 files changed, 14 insertions(+), 14 deletions(-)
+V3:
+- new patch
+V4:
+- always use __always_inline
+---
+ arch/x86/include/asm/msr.h            |  2 +-
+ arch/x86/include/asm/paravirt-msr.h   | 56 +++++++++++++++++++++++++++
+ arch/x86/include/asm/paravirt.h       | 55 --------------------------
+ arch/x86/include/asm/paravirt_types.h | 13 -------
+ arch/x86/kernel/paravirt.c            | 14 ++++---
+ arch/x86/xen/enlighten_pv.c           | 11 +++---
+ tools/objtool/check.c                 |  1 +
+ 7 files changed, 73 insertions(+), 79 deletions(-)
+ create mode 100644 arch/x86/include/asm/paravirt-msr.h
 
-diff --git a/arch/x86/hyperv/ivm.c b/arch/x86/hyperv/ivm.c
-index 2ce4dfe53472..a74f121f2a02 100644
---- a/arch/x86/hyperv/ivm.c
-+++ b/arch/x86/hyperv/ivm.c
-@@ -328,7 +328,7 @@ int hv_snp_boot_ap(u32 apic_id, unsigned long start_ip, unsigned int cpu)
- 	savesegment(ds, vmsa->ds.selector);
- 	hv_populate_vmcb_seg(vmsa->ds, vmsa->gdtr.base);
+diff --git a/arch/x86/include/asm/msr.h b/arch/x86/include/asm/msr.h
+index 36c80fcec71e..72f079df643d 100644
+--- a/arch/x86/include/asm/msr.h
++++ b/arch/x86/include/asm/msr.h
+@@ -322,7 +322,7 @@ static inline u64 native_read_pmc(int counter)
+ }
  
--	vmsa->efer = native_read_msr(MSR_EFER);
-+	vmsa->efer = rdmsrq(MSR_EFER);
- 
- 	vmsa->cr4 = native_read_cr4();
- 	vmsa->cr3 = __native_read_cr3();
-diff --git a/arch/x86/kernel/cpu/mshyperv.c b/arch/x86/kernel/cpu/mshyperv.c
-index 91bbffbf5412..eab5516bc243 100644
---- a/arch/x86/kernel/cpu/mshyperv.c
-+++ b/arch/x86/kernel/cpu/mshyperv.c
-@@ -114,7 +114,7 @@ u64 hv_para_get_synic_register(unsigned int reg)
+ #ifdef CONFIG_PARAVIRT_XXL
+-#include <asm/paravirt.h>
++#include <asm/paravirt-msr.h>
+ #else
+ static __always_inline u64 read_msr(u32 msr)
  {
- 	if (WARN_ON(!ms_hyperv.paravisor_present || !hv_is_synic_msr(reg)))
- 		return ~0ULL;
--	return native_read_msr(reg);
-+	return rdmsrq(reg);
+diff --git a/arch/x86/include/asm/paravirt-msr.h b/arch/x86/include/asm/paravirt-msr.h
+new file mode 100644
+index 000000000000..3a39dfa3fe3e
+--- /dev/null
++++ b/arch/x86/include/asm/paravirt-msr.h
+@@ -0,0 +1,56 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++#ifndef _ASM_X86_PARAVIRT_MSR_H
++#define _ASM_X86_PARAVIRT_MSR_H
++
++#include <asm/paravirt_types.h>
++
++struct pv_msr_ops {
++	/* Unsafe MSR operations.  These will warn or panic on failure. */
++	u64 (*read_msr)(u32 msr);
++	void (*write_msr)(u32 msr, u64 val);
++
++	/* Safe MSR operations.  Returns 0 or -EIO. */
++	int (*read_msr_safe)(u32 msr, u64 *val);
++	int (*write_msr_safe)(u32 msr, u64 val);
++
++	u64 (*read_pmc)(int counter);
++} __no_randomize_layout;
++
++extern struct pv_msr_ops pv_ops_msr;
++
++static __always_inline u64 read_msr(u32 msr)
++{
++	return PVOP_CALL1(u64, pv_ops_msr, read_msr, msr);
++}
++
++static __always_inline void write_msr(u32 msr, u64 val)
++{
++	PVOP_VCALL2(pv_ops_msr, write_msr, msr, val);
++}
++
++static __always_inline void write_msrns(u32 msr, u64 val)
++{
++	PVOP_VCALL2(pv_ops_msr, write_msr, msr, val);
++}
++
++static __always_inline int read_msr_safe(u32 msr, u64 *val)
++{
++	return PVOP_CALL2(int, pv_ops_msr, read_msr_safe, msr, val);
++}
++
++static __always_inline int write_msr_safe(u32 msr, u64 val)
++{
++	return PVOP_CALL2(int, pv_ops_msr, write_msr_safe, msr, val);
++}
++
++static __always_inline int write_msrns_safe(u32 msr, u64 val)
++{
++	return PVOP_CALL2(int, pv_ops_msr, write_msr_safe, msr, val);
++}
++
++static __always_inline u64 do_rdpmc(int counter)
++{
++	return PVOP_CALL1(u64, pv_ops_msr, read_pmc, counter);
++}
++
++#endif /* _ASM_X86_PARAVIRT_MSR_H */
+diff --git a/arch/x86/include/asm/paravirt.h b/arch/x86/include/asm/paravirt.h
+index c79522588842..eb16d55f94d3 100644
+--- a/arch/x86/include/asm/paravirt.h
++++ b/arch/x86/include/asm/paravirt.h
+@@ -130,61 +130,6 @@ static inline void __write_cr4(unsigned long x)
+ 	PVOP_VCALL1(pv_ops, cpu.write_cr4, x);
  }
  
- /*
-@@ -124,7 +124,7 @@ void hv_para_set_synic_register(unsigned int reg, u64 val)
+-static inline u64 paravirt_read_msr(u32 msr)
+-{
+-	return PVOP_CALL1(u64, pv_ops, cpu.read_msr, msr);
+-}
+-
+-static inline void paravirt_write_msr(u32 msr, u64 val)
+-{
+-	PVOP_VCALL2(pv_ops, cpu.write_msr, msr, val);
+-}
+-
+-static inline int paravirt_read_msr_safe(u32 msr, u64 *val)
+-{
+-	return PVOP_CALL2(int, pv_ops, cpu.read_msr_safe, msr, val);
+-}
+-
+-static inline int paravirt_write_msr_safe(u32 msr, u64 val)
+-{
+-	return PVOP_CALL2(int, pv_ops, cpu.write_msr_safe, msr, val);
+-}
+-
+-static __always_inline u64 read_msr(u32 msr)
+-{
+-	return paravirt_read_msr(msr);
+-}
+-
+-static inline void write_msr(u32 msr, u64 val)
+-{
+-	paravirt_write_msr(msr, val);
+-}
+-
+-static __always_inline void write_msrns(u32 msr, u64 val)
+-{
+-	paravirt_write_msr(msr, val);
+-}
+-
+-static inline int write_msr_safe(u32 msr, u64 val)
+-{
+-	return paravirt_write_msr_safe(msr, val);
+-}
+-
+-static __always_inline int write_msrns_safe(u32 msr, u64 val)
+-{
+-	return paravirt_write_msr_safe(msr, val);
+-}
+-
+-static __always_inline int read_msr_safe(u32 msr, u64 *p)
+-{
+-	return paravirt_read_msr_safe(msr, p);
+-}
+-
+-static __always_inline u64 do_rdpmc(int counter)
+-{
+-	return PVOP_CALL1(u64, pv_ops, cpu.read_pmc, counter);
+-}
+-
+ static inline void paravirt_alloc_ldt(struct desc_struct *ldt, unsigned entries)
  {
- 	if (WARN_ON(!ms_hyperv.paravisor_present || !hv_is_synic_msr(reg)))
- 		return;
--	native_write_msr(reg, val);
-+	wrmsrq(reg, val);
- }
+ 	PVOP_VCALL2(pv_ops, cpu.alloc_ldt, ldt, entries);
+diff --git a/arch/x86/include/asm/paravirt_types.h b/arch/x86/include/asm/paravirt_types.h
+index b4c4a23e77a1..2459163fa196 100644
+--- a/arch/x86/include/asm/paravirt_types.h
++++ b/arch/x86/include/asm/paravirt_types.h
+@@ -58,19 +58,6 @@ struct pv_cpu_ops {
+ 	void (*cpuid)(unsigned int *eax, unsigned int *ebx,
+ 		      unsigned int *ecx, unsigned int *edx);
  
- u64 hv_get_msr(unsigned int reg)
-diff --git a/arch/x86/kernel/kvmclock.c b/arch/x86/kernel/kvmclock.c
-index cb3d0ca1fa22..6ddef8b5426a 100644
---- a/arch/x86/kernel/kvmclock.c
-+++ b/arch/x86/kernel/kvmclock.c
-@@ -219,7 +219,7 @@ static void kvm_setup_secondary_clock(void)
- void kvmclock_disable(void)
- {
- 	if (msr_kvm_system_time)
--		native_write_msr(msr_kvm_system_time, 0);
-+		wrmsrq(msr_kvm_system_time, 0);
- }
+-	/* Unsafe MSR operations.  These will warn or panic on failure. */
+-	u64 (*read_msr)(u32 msr);
+-	void (*write_msr)(u32 msr, u64 val);
+-
+-	/*
+-	 * Safe MSR operations.
+-	 * Returns 0 or -EIO.
+-	 */
+-	int (*read_msr_safe)(u32 msr, u64 *val);
+-	int (*write_msr_safe)(u32 msr, u64 val);
+-
+-	u64 (*read_pmc)(int counter);
+-
+ 	void (*start_context_switch)(struct task_struct *prev);
+ 	void (*end_context_switch)(struct task_struct *next);
+ #endif
+diff --git a/arch/x86/kernel/paravirt.c b/arch/x86/kernel/paravirt.c
+index 00b59d774389..739dbfd8aadf 100644
+--- a/arch/x86/kernel/paravirt.c
++++ b/arch/x86/kernel/paravirt.c
+@@ -110,11 +110,6 @@ struct paravirt_patch_template pv_ops = {
+ 	.cpu.read_cr0		= native_read_cr0,
+ 	.cpu.write_cr0		= native_write_cr0,
+ 	.cpu.write_cr4		= native_write_cr4,
+-	.cpu.read_msr		= native_read_msr,
+-	.cpu.write_msr		= native_write_msr,
+-	.cpu.read_msr_safe	= native_read_msr_safe,
+-	.cpu.write_msr_safe	= native_write_msr_safe,
+-	.cpu.read_pmc		= native_read_pmc,
+ 	.cpu.load_tr_desc	= native_load_tr_desc,
+ 	.cpu.set_ldt		= native_set_ldt,
+ 	.cpu.load_gdt		= native_load_gdt,
+@@ -212,6 +207,15 @@ struct paravirt_patch_template pv_ops = {
+ };
  
- static void __init kvmclock_init_mem(void)
-diff --git a/arch/x86/kvm/svm/svm.c b/arch/x86/kvm/svm/svm.c
-index a432b878c683..64f609d1ee59 100644
---- a/arch/x86/kvm/svm/svm.c
-+++ b/arch/x86/kvm/svm/svm.c
-@@ -415,12 +415,12 @@ static void svm_init_erratum_383(void)
- 		return;
+ #ifdef CONFIG_PARAVIRT_XXL
++struct pv_msr_ops pv_ops_msr = {
++	.read_msr	= native_read_msr,
++	.write_msr	= native_write_msr,
++	.read_msr_safe	= native_read_msr_safe,
++	.write_msr_safe	= native_write_msr_safe,
++	.read_pmc	= native_read_pmc,
++};
++EXPORT_SYMBOL(pv_ops_msr);
++
+ NOKPROBE_SYMBOL(native_load_idt);
+ #endif
  
- 	/* Use _safe variants to not break nested virtualization */
--	if (native_read_msr_safe(MSR_AMD64_DC_CFG, &val))
-+	if (rdmsrq_safe(MSR_AMD64_DC_CFG, &val))
- 		return;
+diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
+index c5117a7730d6..a4719762d7ea 100644
+--- a/arch/x86/xen/enlighten_pv.c
++++ b/arch/x86/xen/enlighten_pv.c
+@@ -1360,11 +1360,6 @@ asmlinkage __visible void __init xen_start_kernel(struct start_info *si)
+ 	pv_ops.cpu.read_cr0 = xen_read_cr0;
+ 	pv_ops.cpu.write_cr0 = xen_write_cr0;
+ 	pv_ops.cpu.write_cr4 = xen_write_cr4;
+-	pv_ops.cpu.read_msr = xen_read_msr;
+-	pv_ops.cpu.write_msr = xen_write_msr;
+-	pv_ops.cpu.read_msr_safe = xen_read_msr_safe;
+-	pv_ops.cpu.write_msr_safe = xen_write_msr_safe;
+-	pv_ops.cpu.read_pmc = xen_read_pmc;
+ 	pv_ops.cpu.load_tr_desc = paravirt_nop;
+ 	pv_ops.cpu.set_ldt = xen_set_ldt;
+ 	pv_ops.cpu.load_gdt = xen_load_gdt;
+@@ -1385,6 +1380,12 @@ asmlinkage __visible void __init xen_start_kernel(struct start_info *si)
+ 	pv_ops.cpu.start_context_switch = xen_start_context_switch;
+ 	pv_ops.cpu.end_context_switch = xen_end_context_switch;
  
- 	val |= (1ULL << 47);
++	pv_ops_msr.read_msr = xen_read_msr;
++	pv_ops_msr.write_msr = xen_write_msr;
++	pv_ops_msr.read_msr_safe = xen_read_msr_safe;
++	pv_ops_msr.write_msr_safe = xen_write_msr_safe;
++	pv_ops_msr.read_pmc = xen_read_pmc;
++
+ 	xen_init_irq_ops();
  
--	native_write_msr_safe(MSR_AMD64_DC_CFG, val);
-+	wrmsrq_safe(MSR_AMD64_DC_CFG, val);
- 
- 	erratum_383_found = true;
- }
-@@ -473,8 +473,8 @@ static void svm_init_os_visible_workarounds(void)
- 		return;
- 
- 	if (!this_cpu_has(X86_FEATURE_OSVW) ||
--	    native_read_msr_safe(MSR_AMD64_OSVW_ID_LENGTH, &len) ||
--	    native_read_msr_safe(MSR_AMD64_OSVW_STATUS, &status))
-+	    rdmsrq_safe(MSR_AMD64_OSVW_ID_LENGTH, &len) ||
-+	    rdmsrq_safe(MSR_AMD64_OSVW_STATUS, &status))
- 		len = status = 0;
- 
- 	if (status == READ_ONCE(osvw_status) && len >= READ_ONCE(osvw_len))
-@@ -2156,7 +2156,7 @@ static bool is_erratum_383(void)
- 	if (!erratum_383_found)
- 		return false;
- 
--	if (native_read_msr_safe(MSR_IA32_MC0_STATUS, &value))
-+	if (rdmsrq_safe(MSR_IA32_MC0_STATUS, &value))
- 		return false;
- 
- 	/* Bit 62 may or may not be set for this mce */
-@@ -2167,11 +2167,11 @@ static bool is_erratum_383(void)
- 
- 	/* Clear MCi_STATUS registers */
- 	for (i = 0; i < 6; ++i)
--		native_write_msr_safe(MSR_IA32_MCx_STATUS(i), 0);
-+		wrmsrq_safe(MSR_IA32_MCx_STATUS(i), 0);
- 
--	if (!native_read_msr_safe(MSR_IA32_MCG_STATUS, &value)) {
-+	if (!rdmsrq_safe(MSR_IA32_MCG_STATUS, &value)) {
- 		value &= ~(1ULL << 2);
--		native_write_msr_safe(MSR_IA32_MCG_STATUS, value);
-+		wrmsrq_safe(MSR_IA32_MCG_STATUS, value);
- 	}
- 
- 	/* Flush tlb to evict multi-match entries */
-diff --git a/arch/x86/xen/pmu.c b/arch/x86/xen/pmu.c
-index 3f4dd3f50f56..25f434b6b903 100644
---- a/arch/x86/xen/pmu.c
-+++ b/arch/x86/xen/pmu.c
-@@ -324,7 +324,7 @@ static u64 xen_amd_read_pmc(int counter)
- 		u64 val;
- 
- 		msr = amd_counters_base + (counter * amd_msr_step);
--		native_read_msr_safe(msr, &val);
-+		rdmsrq_safe(msr, &val);
- 		return val;
- 	}
- 
-@@ -350,7 +350,7 @@ static u64 xen_intel_read_pmc(int counter)
- 		else
- 			msr = MSR_IA32_PERFCTR0 + counter;
- 
--		native_read_msr_safe(msr, &val);
-+		rdmsrq_safe(msr, &val);
- 		return val;
- 	}
+ 	/*
+diff --git a/tools/objtool/check.c b/tools/objtool/check.c
+index 931c5c412f15..c7df519d9992 100644
+--- a/tools/objtool/check.c
++++ b/tools/objtool/check.c
+@@ -530,6 +530,7 @@ static struct {
+ } pv_ops_tables[] = {
+ 	{ .name = "pv_ops", },
+ 	{ .name = "pv_ops_lock", },
++	{ .name = "pv_ops_msr", },
+ 	{ .name = NULL, .idx_off = -1 }
+ };
  
 -- 
 2.56.0
