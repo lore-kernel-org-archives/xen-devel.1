@@ -2,45 +2,43 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 74140606A32A
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 10:43:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E0991606BE24
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 11:06:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=bVE1knFf
-Received: from list by lists.xenproject.org with outflank-mailman.1490348.1691295 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Ftb5hbDR
+Received: from list by lists.xenproject.org with outflank-mailman.1490373.1691303 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSuAv-0000Le-0j; Mon, 16 Nov 2026 10:43:01 +0000
+	id 1xSuXL-0005N8-Nv; Mon, 16 Nov 2026 11:06:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1490348.1691295; Mon, 16 Nov 2026 10:43:00 +0000
+Received: by outflank-mailman (output) from mailman id 1490373.1691303; Mon, 16 Nov 2026 11:06:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSuAu-0000LX-UP; Mon, 16 Nov 2026 10:43:00 +0000
-Received: by outflank-mailman (input) for mailman id 1490348;
- Mon, 16 Nov 2026 10:42:59 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xSuAt-0000Kq-QM
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 10:42:59 +0000
+	id 1xSuXL-0005N1-LN; Mon, 16 Nov 2026 11:06:11 +0000
+Received: by outflank-mailman (input) for mailman id 1490373;
+ Mon, 16 Nov 2026 11:06:10 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <brauner@kernel.org>) id 1xSuXK-0005Mv-9S
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 11:06:10 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xSuAt-000FSf-6Z
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 11:42:59 +0100
+ id 1xSuXJ-00AcKk-Lx
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 12:06:09 +0100
 Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6afade2f-bab6-0a2a0a5309dd-0a2a4507d676-10
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 11:42:58 +0100
-Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
+ (envelope-from <brauner@kernel.org>)
+ id 6afae39d-8faa-0a2a0a5109dd-0a2a4507928c-22
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 12:06:09 +0100
+Received: from [172.234.252.31] (helo=sea.source.kernel.org)
  by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6afade32-b4ea-0a2a45070019-d1558030d116-3
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 11:42:58 +0100
-Received: by mail-wm1-f48.google.com with SMTP id
- 5b1f17b1804b1-4a214c5c4c0so32990235e9.3
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 02:42:58 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb4e252f7fsm385622505e9.2.2026.11.16.02.42.57
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 16 Nov 2026 02:42:58 -0800 (PST)
+ (envelope-from <brauner@kernel.org>)
+ id 6afae39e-b4ea-0a2a45070019-aceafc1f92fa-3
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 12:06:07 +0100
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id 8B7CF41843;
+ Mon, 16 Nov 2026 11:06:05 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1506A1F000C4;
+ Mon, 16 Nov 2026 11:05:56 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,169 +47,331 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1794825778; x=1795430578; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
-         :content-language:references:cc:to:from:subject:user-agent
-         :mime-version:date:message-id:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=IMDIl7IvFSLH6ugmLYJHgGhkqfzt+9T+2QkVdjjrGVw=;
-        b=bVE1knFf07Q7m+h2PUeEJuIGv7EvQ0BJqBWut/o+aM69l4nmolZRe7cNsxFp56s9mY
-         ZtzFk14BiAxuoAHMlrafi6Jw7w9n+P6YxNsZ2SwiitjrCcVI9zxWf89kbyyLrfJq2RGs
-         PTd93cEBH/JgxC3nycQitB683wN2SXeJaFFoNZAP/jjtquRhg78c0pwt3lHSH5V5bktm
-         vUNchUGDfxk9RThNtv6AU86zVfrVV3RtfCbHpf44ROnvDQC+Q/aPyVq2ObHRXhoWlwNu
-         eji6bEHKkmbM/RX/Mc1x6SLG6aYSqOxAgo65oLBCjK94Uy2DestRAVqDgTsl/Ych9UgB
-         Ol8w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794825778; x=1795430578;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
-         :content-language:references:cc:to:from:subject:user-agent
-         :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=IMDIl7IvFSLH6ugmLYJHgGhkqfzt+9T+2QkVdjjrGVw=;
-        b=aquybJpznFOLxGn5QbMOMPoo2Mh0F1+A57i5ajftKBDbGOfjnKBQCs/plyKH4rLKmS
-         ot8EMlIR5YrneDPeRf6Ogbth8uh3jcnI9J3IsDcpRfvHpEAlXpynqO3BGJTAB3xDzig6
-         CRMAHBT8mVTTyoo/ND4c1vWOW26toGoAAF0a2VLMSbLbfaKJ0Z01+z/8F1sUljkHmfKp
-         4cPrUPFSboGmFHx/wOLZOS/wmJNF3Z6dtggI+uCMkxLNVeYYZLTVYvm3YiRTFhJT8DhZ
-         WpuTS7LHLf00q86P7AmU4AF/7N4oViSazD9gCZLRsBCPWkJjee4LWIJ7G1tdzbpUz24y
-         oAQw==
-X-Forwarded-Encrypted: i=1; AL+hErFf7MPoqD/KIjFqkECqbiD1Xol8WM2DFeRI+Meuoo3i634Hti24vuq0ynuHSPk6Qaaqk7yJKGCgzZo=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z8IdErYyca+/uVuYPEZqRoXE7EMnVnhmLDsI2Iaa1OyYNEpMADw
-	rZBAsuhHAdXPZ5MdNJl8xu/6uB+Y9jlTy/eYANNHVKYzZhhKjLC0Bd3IpvFTAj1I6i2h0/s8kPf
-	U3tjsMQ==
-X-Gm-Gg: AYBFou3A6Ygnb68YeKr4Y8KUeD9q04U2Loubp22i/AEEjJjsxB9Hcj6hd5z3CGSLeNl
-	iB9VsjMoGHQqkKT1y+MBqzQzDQguGx8/pSJQKDJ5o2DyQmvTyD9KSafwtz/I+xEk+RbEPxq0HFX
-	tma2xWmQ71JQ+QdcKsuYCmKjgqkArsz7aSGfAmIKdEBGoCzY1kTv3bokcWsBEkdlkoaKbtx3EOf
-	zY7FUsMbFz5CagEacDFLqZzKZ0bGvEdHdtcA3Bu66CzsDXfyafVE+qRGsLuLsluJUoaUjpsXJpc
-	UoYwgyJCgFw7JllmJi4Fhc2fbawTiJNCluBBh9nmYt0/l9U9wTg4V/QUUaWUSg+qlI1tDMrAfMF
-	pqoMSk66mTF1NieVAiYdSHZEL3BjHGT4NKj/lyUMwvDq9znBt2hoNAyQHnaYqZkXbQpC+wKAw30
-	36Hl0cwWY9rSNkM1HObcRp5wE9ylv4uG31+GdnR4QwgeDVAsPSsIEjA3BFv5NjX6lDVwScIMLzw
-	jYOypPQs4Pa+l10N7py4S4oDpXxPdexP45fCeqWW8omtFeNQrGZw9FiRZ3lTSzj0oFAdKsUytdL
-	YfOpM+P6Y/g8c0Ug0uym2hwnPDouOVg/T08xz35owXWtomOul3J4P4v4s1iO+C5colCcm6lZrfO
-	1zvasvktXkRone6iz
-X-Received: by 2002:a05:600c:1daa:b0:4a1:9663:7633 with SMTP id 5b1f17b1804b1-4bb55a47625mr212609765e9.11.1794825778394;
-        Mon, 16 Nov 2026 02:42:58 -0800 (PST)
-Message-ID: <500d7369-bc32-4745-a83d-e6b0ba50239b@suse.com>
-Date: Mon, 16 Nov 2026 11:42:57 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="From:Subject:Date:To:Cc"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794827165;
+	bh=e0NdapISO7PccEe+J1PNsovhyllFhzOUrTJOSP5Geu0=;
+	h=From:Subject:Date:To:Cc;
+	b=Ftb5hbDRPHfk4mqY+as6cITFuaLQGaWxutA89/20IINyG8AWvhacek97p5schkdpC
+	 AyYCKPKL3dzJKwIZjvpzwCDvwctfPx6EDdUfErpK2yneg2+klODDipbjTse0NZAQMF
+	 KDfFh7yWIdi4wOGp4Gne0XRg41oYQhFJGYdhf8OxI7T9/jZ4mlgBePeiQFCrMoaNms
+	 2lxrbE0M2koxPrbSXipDSd8QPoEpcTLzX03l3nBGYs3qh6mdF/e7kYBCkbShJStWdN
+	 f7wfXyOSdMJZFERdfnsQJIkWQxHMv4idAUXl3qYD1xhtNrNtVTGk743z+jh6oSNcXR
+	 Zr17+PGdeh04A==
+From: Christian Brauner <brauner@kernel.org>
+Subject: [PATCH RFC v3 00/44] fs: don't use pseudo filesystem files as
+ storage
+Date: Mon, 16 Nov 2026 12:04:33 +0100
+Message-Id: <20261116-work-loop-pseudo-v3-0-8cbbea1cf34f@kernel.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 4/4] x86: prefer shadow stack for producing call traces
-From: Jan Beulich <jbeulich@suse.com>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Teddy Astie <teddy.astie@vates.tech>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <d0de0425-a0fd-4ced-9768-ff102b953a22@suse.com>
- <bfec463b-a4dd-4a4a-bafb-c596f83630a1@suse.com>
- <f9ffba74-3b4a-49a7-abaf-1c062993a531@citrix.com>
- <699227cb-3cc3-40d4-affd-8648e71aa9a4@suse.com>
-Content-Language: en-US
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <699227cb-3cc3-40d4-affd-8648e71aa9a4@suse.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1794825778-356C2AE4-8B6E41DC/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 2744
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=4.0.1
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/23OQQ6CMBAF0KuYri1pCymtKxMTD+DWuChlgAqhp
+ AXUEO4uhY1GlzPz5+VPyIMz4NFhNyEHo/HGtssQ73dIV6otAZt8mREjjFNKJH5YV+PG2g53Hob
+ cYiGJSBLKBRQULW+dg8I8V/KKLucTum1LP2R30H3AQixTHnDmVKursApsFNhoY6NwD7nK+N661
+ 1pwpCu6daHkt8tIMcGJllLIlGuu02MNroUmsq5ce4zsU0j+CGwRpOCxVIwJXmRfwjzPb0rOqWw
+ yAQAA
+X-Change-ID: 20261109-work-loop-pseudo-890844168ef1
+To: linux-fsdevel@vger.kernel.org
+Cc: Jann Horn <jannh@google.com>, Chris Mason <mason@kernel.org>, 
+ Josef Bacik <josef@toxicpanda.com>, Christoph Hellwig <hch@lst.de>, 
+ linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-nvme@lists.infradead.org, Alexander Viro <viro@zeniv.linux.org.uk>, 
+ Jan Kara <jack@suse.cz>, linux-scsi@vger.kernel.org, 
+ target-devel@vger.kernel.org, driver-core@lists.linux.dev, 
+ linux-mm@kvack.org, bpf@vger.kernel.org, 
+ linux-security-module@vger.kernel.org, selinux@vger.kernel.org, 
+ apparmor@lists.ubuntu.com, linux-nfs@vger.kernel.org, 
+ netdev@vger.kernel.org, fuse-devel@lists.linux.dev, 
+ linux-efi@vger.kernel.org, xen-devel@lists.xenproject.org, 
+ ocfs2-devel@lists.linux.dev, linux-s390@vger.kernel.org, 
+ linuxppc-dev@lists.ozlabs.org, linux-usb@vger.kernel.org, 
+ Amir Goldstein <amir73il@gmail.com>, linux-erofs@lists.ozlabs.org, 
+ linux-kselftest@vger.kernel.org, 
+ "Christian Brauner (Amutable)" <brauner@kernel.org>, stable@vger.kernel.org, 
+ Alexander Mikhalitsyn <alex@amutable.com>, 
+ Chris Down <chris@chrisdown.name>, Breno Leitao <leitao@debian.org>, 
+ Casey Schaufler <casey@schaufler-ca.com>, Chuck Lever <cel@kernel.org>, 
+ Sashiko <sashiko-bot@kernel.org>, Gao Xiang <xiang@kernel.org>
+X-Mailer: b4 0.17-dev-ce4c1
+X-Developer-Signature: v=1; a=openpgp-sha256; l=12804; i=brauner@kernel.org;
+ h=from:subject:message-id; bh=GZSpSgaz8UmPZAvkrresyb8T5SRXAMQwIkGeKnPuIsY=;
+ b=owGbwMvMwCU28Zj0gdSKO4sYT6slMWT9ehzH4Hyo+U/eC2+RpLWuBhl3ZV67Rsptc52x/+TZj
+ d6/L33Y01HKwiDGxSArpsji0G4SLrecp2KzUaYGzBxWJrAhXJwCMJGp1xkZvv3acip/dtPH9U2a
+ 2dPYXzy2dAiZMfHZt4DlhYkdAQukcxj+lzJqzgt7/jnyxBv3QqHff/6e9VG69ef7iY76S//+eHy
+ S4wQA
+X-Developer-Key: i=brauner@kernel.org; a=openpgp;
+ fpr=4880B8C9BD0E5106FC070F4F7B3C391EFEA93624
+X-purgate-ID: tlsNG-ef75cf/1794827167-34ECEAE4-5E402907/0/0
+X-purgate-type: clean
+X-purgate-size: 12806
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=unavailable
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 16.11.2026 11:32, Jan Beulich wrote:
-> On 10.11.2026 14:15, Andrew Cooper wrote:
->> On 09/11/2026 1:09 pm, Jan Beulich wrote:
->>> +        for ( n = 0; (unsigned long)ptr & (PAGE_SIZE - sizeof(*ptr)); ++n )
->>> +        {
->>> +            unsigned long val = *ptr;
->>> +
->>> +            if ( is_active_kernel_text(val) || in_stub(val) )
->>> +            {
->>> +                /* Normal return address entry.  */
->>> +                printk("   [<%p>] C %pS\n", _p(val), _p(val));
->>> +                ++ptr;
->>> +            }
->>> +            else if ( !((val ^ (unsigned long)ptr) >>
->>> +                        (PAGE_SHIFT + STACK_ORDER)) )
->>> +            {
->>> +                if ( val & (sizeof(val) - 1) )
->>> +                {
->>> +                    /* Most likely a supervisor token. */
->>> +                    break;
->>> +                }
->>> +
->>> +                /*
->>> +                 * Ought to be a hypervisor interruption frame.  But don't
->>> +                 * (re)log the current frame's %rip.
->>> +                 */
->>> +                if ( n || ptr[1] != regs->rip )
->>> +                    printk("   [<%p>] E %pS\n", _p(ptr[1]), _p(ptr[1]));
->>
->> Ah - this n is the thing covering the fact that you didn't move to the
->> outer context originally.  Please do that and drop this.
-> 
-> Why would I duplicate the move-to-outer-context code (just below)? We may
-> need to move between contexts more than once, after all.
-> 
->> If we're going to start using E here, we should make the FRAME_POINTER
->> side match.
-> 
-> Perhaps, but not in this patch.
-> 
->>   When printing something we've identified as a stub, we
->> ought to say "in stub" rather than leaving it as a raw number.
-> 
-> Can do, albeit like you said for the use of E above this then likely wants
-> mirroring to normal frames as well, again not in this patch though. (At
-> which point the #ifdef you complained about above would simply go away.)
-> Will you be okay with
-> 
->             if ( is_active_kernel_text(val) )
->             {
->                 /* Normal return address entry.  */
->                 printk("   [<%p>] C %pS\n", _p(val), _p(val));
->                 ++ptr;
->             }
->             else if ( in_stub(val) )
->             {
->                 /* Stub return address entry.  */
->                 printk("   [<%p>] C <stub>\n", _p(val));
->                 ++ptr;
->             }
->             else if ( ... )
-> 
-> ?
+Loop happily takes any regular file with ->read_iter() as a backing
+file and any file that also has ->write_iter() as a writable one. A few
+examples:
 
-Hmm, something similar would then be needed for the E case as well. (In
-fact the above should be extremely unlikely to take effect, as in the
-middle of a stub there shouldn't normally occur anything other than
-exceptions.)
+* /proc/kcore attaches read-only as a loop device the size of the
+  kernel's virtual address space (64 PiB with 5-level paging)
+* sysfs attributes attach read-write as 4096 byte loop devices
+* using /sys/kernel/mm/transparent_hugepage/enabled for the loop device
+  and writing a block to the loop device changes the THP setting
 
-Jan
+It's not just silly. It's abusable (is that a word?). Loop calls
+->read_iter() and ->write_iter() of the backing file directly from its
+kworker which runs with kernel credentials.
+
+But pseudo files enforce part of their access rules at read and write
+against the caller. So dozens of sysfs ->show() and ->store() methods
+call capable().
+
+But setting up a loop device requires no capabilities. It only requires
+access to the device nodes. So whoever has a loop device skips all of
+the capable() checks.
+
+A couple of fun examples:
+
+On v7.4-rc1 uid 0 without any capabilities can't kill a process of uid
+1000 and can't poison its memory either:
+
+    $ grep CapEff /proc/self/status
+    CapEff: 0000000000000000
+    $ kill -9 327
+    bash: kill: (327) - Operation not permitted
+    $ echo 0x220689000 > /sys/devices/system/memory/hard_offline_page
+    bash: echo: write error: Operation not permitted
+
+But put hard_offline_page behind a loop device, write a block
+containing 0x220689000 to the loop device and the loop worker happily
+does it:
+
+    Memory failure: 0x220689: recovery action for dirty LRU page: Recovered
+    MCE: Killing victim:327 due to hardware memory corruption fault at 7f468e972000
+
+That hard_offline_page is a write-only file doesn't stop loop from
+using it as a writable backing file either.
+
+Other fun examples:
+
+(1) soft-block radios via /sys/class/rfkill/rfkill*/soft
+    (CAP_NET_ADMIN)
+
+(2) change the reboot mode via /sys/kernel/reboot/mode (CAP_SYS_BOOT)
+
+(3) reconfigure md arrays via /sys/block/md*/md/. md_attr_store()
+    requires CAP_SYS_ADMIN for every md attribute.
+
+(4) reconfigure scsi disks via /sys/class/scsi_disk/*/allow_restart and
+    friends (CAP_SYS_ADMIN)
+
+(5) read dmi-sysfs attributes (CAP_SYS_ADMIN)
+
+And an unprivileged container that was handed a loop device can change
+gro_flush_timeout of its own network devices. That usually requires
+CAP_NET_ADMIN in the initial user namespace (via sysfs and via netlink).
+
+I've reproduced that all on v7.4-rc1.
+
+Aaaand zloop, the nvme target's file backend, the scsi target's fileio
+backend, fuse passthrough and the usb mass storage gadget have the same
+problem. erofs takes pseudo files as images for file-backed mounts as
+well. It reads them with the mounter's credentials though so that's just
+silly and not abusable. Same for acct(2) which happily writes its
+records to cgroup2 or binfmt_misc files.
+
+Fwiw, device mapper doesn't need anything. It only takes block devices.
+md's deprecated bitmap file is fine as well. It maps the file with
+bmap() which no pseudo filesystem implements.
+
+So this series adds SB_I_PSEUDO to state that the regular files of a
+filesystem are kernel interfaces and not storage and makes all eight
+refuse such files.
+
+I didn't want to sprinkle SB_I_PSEUDO over all pseudo filesystems one by
+one. Instead there's now a common initialization point for all of them
+via fc_init_pseudo().
+
+init_pseudo() uses it for the internal pseudo filesystems and all
+mountable pseudo filesystems call it from their ->init_fs_context().
+
+kernfs does it once in kernfs_get_tree(). It raises SB_I_PSEUDO,
+SB_I_NOEXEC and SB_I_NODEV. Pseudo filesystems never hold executables
+and generally never hold device nodes. Some of them raised SB_I_NOEXEC
+and SB_I_NODEV already, most didn't.
+
+I went through every single one of them. None of them needs to execute
+anything. The files that can be mmap()ed map data and the tracing ring
+buffer refuses VM_EXEC anyway.
+
+SB_I_NODEV is cleared again by devpts, binderfs, selinuxfs and
+securityfs. The first two did that already. selinuxfs needs it because
+Android init opens /sys/fs/selinux/null by path as /dev/null doesn't
+exist yet at that point. securityfs needs it for AppArmor's .null device
+node. On exec AppArmor puts it in place of file descriptors the new
+profile isn't allowed to use and those can be reopened via
+/proc/<pid>/fd/<nr>. Note that systemd mounts most of these filesystems
+with noexec and nodev already.
+
+file_check_backing() looks at d_real_data_inode(). overlayfs happily
+stacks on top of sysfs, cgroup2, debugfs, tracefs, configfs and
+securityfs and reads of such overlayfs files are served by the pseudo
+file. Only procfs and binfmt_misc are refused as they set s_stack_depth
+to FILESYSTEM_MAX_STACK_DEPTH and efivarfs as it has its own ->d_hash()
+and ->d_compare().
+
+Whether all pseudo filesystems should refuse stacking is a separate
+discussion. overlayfs reads the lower file with the mounter's
+credentials so a root-mounted overlayfs on top of a sysfs directory
+hands capability gated reads to every reader. With SB_I_PSEUDO overlayfs
+could easily refuse them.
+
+The first three patches are independent fixes. Loop never checked
+whether its backing file is open for reading. It relied on
+vfs_iter_read() refusing such files. Direct I/O never went through
+vfs_iter_read() and since v6.15 buffered I/O doesn't either. So whoever
+has a loop device can read files they could only open for writing. And
+the nvme target's file backend and the scsi target's fileio backend call
+->read_iter() and ->write_iter() without checking that they exist.
+
+Signed-off-by: Christian Brauner (Amutable) <brauner@kernel.org>
+---
+Changes in v3:
+- Rebase onto vfs-7.5.lookup which has "fs: let d_real() fail" v2:
+  https://patch.msgid.link/20261116-work-ovl-d_real-v2-0-90564c4ae347@kernel.org
+- file_check_backing(): use d_real_data_inode() and fail with its error.
+  For an O_PATH file on overlayfs the data might not have been looked up
+  yet and when that lookup failed ovl_d_real() warned and the check
+  passed. (Chris, sashiko, bpf-ci)
+- ovl: refuse data-only layers on pseudo filesystems. (Amir)
+- fuse: also check the backing file that fuse_passthrough_open() opens
+  for io. (Amir)
+- securityfs: clear SB_I_NODEV again. AppArmor's .null device node can
+  be opened by path and via /proc/<pid>/fd/<nr>. (Chris)
+- selftests: add fuse passthrough tests and tests for overlayfs
+  data-only layers on pseudo filesystems.
+- Collect tags.
+- Link to v2: https://patch.msgid.link/20261114-work-loop-pseudo-v2-0-98639a2286fb@kernel.org
+
+Changes in v2:
+- Add file_check_backing() and use it in all consumers. It replaces
+  file_is_pseudo() and most of the open-coded file type, open mode and
+  method checks.
+- nvmet, fileio and zloop refuse everything that isn't a regular file
+  or, for nvmet and fileio, a block device.
+- fileio: check the protection file as well. (sashiko)
+- acct: refuse files on all pseudo filesystems. (Alexander)
+- selftests: add nvmet (Bui), fileio, zloop, link, FIFO and character
+  device tests.
+- Collect tags. They are dropped on the patches that changed.
+- Link to v1: https://patch.msgid.link/20261110-work-loop-pseudo-v1-0-4c998976c6c7@kernel.org
+
+---
+Christian Brauner (44):
+      loop: refuse backing files that aren't open for reading
+      nvmet: check that the file backend supports ->{read,write}_iter
+      target: fileio: check that the backing file supports ->{read,write}_iter
+      fs: add SB_I_PSEUDO
+      kernfs: use fc_init_pseudo()
+      proc: use fc_init_pseudo()
+      binfmt_misc: use fc_init_pseudo()
+      mqueue: use fc_init_pseudo()
+      bpf: use fc_init_pseudo() for bpffs
+      nullfs: use fc_init_pseudo()
+      failfs: use fc_init_pseudo()
+      rust_binderfs: use fc_init_pseudo()
+      devpts: use fc_init_pseudo()
+      debugfs: use fc_init_pseudo()
+      tracefs: use fc_init_pseudo()
+      configfs: use fc_init_pseudo()
+      securityfs: use fc_init_pseudo()
+      selinux: use fc_init_pseudo() for selinuxfs
+      smack: use fc_init_pseudo() for smackfs
+      apparmor: use fc_init_pseudo() for apparmorfs
+      nfsd: use fc_init_pseudo()
+      sunrpc: use fc_init_pseudo() for rpc_pipefs
+      fuse: use fc_init_pseudo() for fusectl
+      efivarfs: use fc_init_pseudo()
+      pstore: use fc_init_pseudo()
+      xenfs: use fc_init_pseudo()
+      openpromfs: use fc_init_pseudo()
+      ocfs2: use fc_init_pseudo() for dlmfs
+      s390/hypfs: use fc_init_pseudo()
+      powerpc/spufs: use fc_init_pseudo()
+      usb: gadget: f_fs: use fc_init_pseudo()
+      usb: gadget: gadgetfs: use fc_init_pseudo()
+      ovl: refuse data-only layers on pseudo filesystems
+      selftests/ovl: test data-only layers on pseudo filesystems
+      fs: add file_check_backing()
+      loop: refuse files on pseudo filesystems as backing files
+      zloop: refuse zone files on pseudo filesystems
+      nvmet: refuse files on pseudo filesystems as namespace backing files
+      target: fileio: refuse files on pseudo filesystems as backing files
+      fuse: refuse files on pseudo filesystems as passthrough backing files
+      usb: gadget: f_mass_storage: refuse files on pseudo filesystems
+      erofs: refuse files on pseudo filesystems as backing files
+      acct: refuse files on pseudo filesystems
+      selftests/filesystems: add backing file tests for pseudo files
+
+ arch/powerpc/platforms/cell/spufs/inode.c          |   2 +
+ arch/s390/hypfs/inode.c                            |   2 +
+ drivers/android/binder/rust_binderfs.c             |   3 +-
+ drivers/block/loop.c                               |  14 +-
+ drivers/block/zloop.c                              |   5 +-
+ drivers/nvme/target/io-cmd-file.c                  |   4 +
+ drivers/target/target_core_file.c                  |  14 +
+ drivers/usb/gadget/function/f_fs.c                 |   2 +
+ drivers/usb/gadget/function/storage_common.c       |  11 +-
+ drivers/usb/gadget/legacy/inode.c                  |   2 +
+ drivers/xen/xenfs/super.c                          |   2 +
+ fs/binfmt_misc.c                                   |   5 +-
+ fs/configfs/mount.c                                |   2 +
+ fs/debugfs/inode.c                                 |   2 +
+ fs/devpts/inode.c                                  |   2 +
+ fs/efivarfs/super.c                                |   2 +
+ fs/erofs/super.c                                   |   5 +-
+ fs/failfs.c                                        |   3 +-
+ fs/fuse/backing.c                                  |   4 +
+ fs/fuse/control.c                                  |   2 +
+ fs/fuse/passthrough.c                              |   7 +
+ fs/kernfs/mount.c                                  |   4 +-
+ fs/libfs.c                                         |   2 +-
+ fs/nfsd/nfsctl.c                                   |   2 +
+ fs/nullfs.c                                        |   3 +-
+ fs/ocfs2/dlmfs/dlmfs.c                             |   2 +
+ fs/openpromfs/inode.c                              |   2 +
+ fs/overlayfs/super.c                               |   8 +
+ fs/proc/root.c                                     |   4 +-
+ fs/pstore/inode.c                                  |   2 +
+ fs/read_write.c                                    |  53 ++
+ fs/tracefs/inode.c                                 |   2 +
+ include/linux/fs.h                                 |   2 +
+ include/linux/fs/super_types.h                     |   1 +
+ include/linux/pseudo_fs.h                          |  12 +
+ ipc/mqueue.c                                       |   3 +-
+ kernel/acct.c                                      |   6 +-
+ kernel/bpf/inode.c                                 |   4 +-
+ net/sunrpc/rpc_pipe.c                              |   2 +
+ security/apparmor/apparmorfs.c                     |   2 +
+ security/inode.c                                   |   4 +
+ security/selinux/selinuxfs.c                       |   5 +
+ security/smack/smackfs.c                           |   2 +
+ tools/testing/selftests/filesystems/.gitignore     |   1 +
+ tools/testing/selftests/filesystems/Makefile       |   2 +-
+ tools/testing/selftests/filesystems/config         |  16 +
+ .../selftests/filesystems/overlayfs/.gitignore     |   1 +
+ .../selftests/filesystems/overlayfs/Makefile       |   1 +
+ .../filesystems/overlayfs/pseudo_datadir.c         | 131 +++
+ .../selftests/filesystems/pseudo_backing_test.c    | 936 +++++++++++++++++++++
+ 50 files changed, 1271 insertions(+), 39 deletions(-)
+---
+base-commit: 68cb948e620cf297cee090d6effd04dfef6429de
+change-id: 20261109-work-loop-pseudo-890844168ef1
+
 
