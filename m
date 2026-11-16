@@ -2,40 +2,51 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3068A606A31C
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 15:16:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E795D606A32F
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 15:30:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=E66rnN7A
-Received: from list by lists.xenproject.org with outflank-mailman.1491117.1692024 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=ex4R6soc
+Received: from list by lists.xenproject.org with outflank-mailman.1491142.1692032 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSyR5-0007mM-17; Mon, 16 Nov 2026 15:15:59 +0000
+	id 1xSyed-0002GP-AD; Mon, 16 Nov 2026 15:29:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1491117.1692024; Mon, 16 Nov 2026 15:15:59 +0000
+Received: by outflank-mailman (output) from mailman id 1491142.1692032; Mon, 16 Nov 2026 15:29:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSyR4-0007mF-Ug; Mon, 16 Nov 2026 15:15:58 +0000
-Received: by outflank-mailman (input) for mailman id 1491117;
- Mon, 16 Nov 2026 15:15:58 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xSyR3-0007m9-UJ
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 15:15:58 +0000
+	id 1xSyed-0002GH-7R; Mon, 16 Nov 2026 15:29:59 +0000
+Received: by outflank-mailman (input) for mailman id 1491142;
+ Mon, 16 Nov 2026 15:29:58 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1e4faaa300006d3f@swg.vates.tech>)
+ id 1xSyeb-0002F3-V4
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 15:29:58 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xSyR3-00BTdL-5j
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 16:15:57 +0100
-Received: from [10.42.69.6] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <xakep.amatop@gmail.com>)
- id 6afb1e24-2eae-0a2a0a5409dd-0a2a45069684-36
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 16:15:57 +0100
-Received: from [209.85.167.49] (helo=mail-lf1-f49.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <xakep.amatop@gmail.com>)
- id 6afb1e2b-195a-0a2a45060019-d155a731b1a1-3
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 16:15:55 +0100
-Received: by mail-lf1-f49.google.com with SMTP id
- 2adb3069b0e04-5c14a204305so3210142e87.3
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 07:15:55 -0800 (PST)
+ id 1xSyeb-008TYq-3x
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 16:29:57 +0100
+Received: from [10.42.69.11] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1e4faaa300006d3f@swg.vates.tech>)
+ id 6afb2174-e002-0a2a0a5209dd-0a2a450bcb3c-8
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 16:29:57 +0100
+Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1e4faaa300006d3f@swg.vates.tech>)
+ id 6afb2174-b7e8-0a2a450b0019-b9ff1c238cdf-3
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 16:29:56 +0100
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a1e4faaa300006d3f.006 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Mon, 16 Nov 2026 15:29:55 +0000
+Received: from [192.168.1.52] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
+ [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 372E480AF1;
+ Mon, 16 Nov 2026 16:29:54 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -44,166 +55,202 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1794842155; cv=none;
-        d=google.com; s=arc-20260327;
-        b=NuzxEuub57B/MI+DCWaBn+4h1Xmb+oCDt4CAmYQSIcNXSHjl7sGRxpgfzZh7MUngap
-         H1oLjRBnM2n3Nxa7qW0iwtd/EBiYnXeKa0Lf9XIUAqG6aVY7XypiyekhGNfjHggbD/uA
-         YQHBdri7Tyq7/zn5oKnhqUOxvbA3Jhdz6u6ofHdMXJ0eOUBE9YjR8pzMvj/8kILLTJzH
-         YDJM1by5w86roYxLdkp+/zqs7jIm2TK1/zJJIaOsyRU3k1hjI3jWHdg6HdfNEMEhBNIN
-         eCdOGjNQrO0wdMGfSpz+iWjk9zP1U8dI43m5sg6yXL0ihIxdF6tE29AioM0UQ9TIYEMq
-         eiaQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=xreGGvHmp7BFTOpuP/eDux0gdC8b+52qsTKyGm3WBhs=;
-        fh=JawDij6L4UQ7rM+oaxbNI2C9l2y4YUH+di7F6HkBxh8=;
-        b=bwqi7ArNq+jbUz9KS1HjM6+qByAgfi0gN51bA3Onkihu1CyizqCmJpnKedVGC2AGzo
-         4tCYVabjBYHGwWnDbt9Cqp8b6W+b4FaltO/wc+YeaexQPtwTJMRIfdALetLZdh2Vp/BZ
-         PSkLvIbq8FKUjk5GAn6c1Poava19MDQbOnUMb1ajiy1wj1236kmXD81pRaR4cvBIyt5J
-         RoZhwZwE0tHDIqD0h+MSJCw2PmvpKVZLeI6HkbA2mnOPEtLxqDwj+Ua3B+VsYNM75iZ7
-         tlosAXrYwP/iIK9L5ahStP2US5B4LLAi+bIzuvvaIsWdjGCH62QmDv/VwuUf/4PBtALo
-         LmgA==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794842155; x=1795446955; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=xreGGvHmp7BFTOpuP/eDux0gdC8b+52qsTKyGm3WBhs=;
-        b=E66rnN7AB9tM251DNnOftmahFqKM/+Ms7KBEKsMYHjPPXnvALG4ux2YoSLaYb2CNHH
-         iwq+R5AG1TlVL0aYlKkVdG/jGqo3u87nDIle/TbLKQuBPR1bRhr1keZdEJZXkbP67Cun
-         WGE66S6QdX2eAcxMCMMrGPHFBRlOEOQJ56SPQ+j57SzmKS6LOv5HKb2eJIU3ftEp4V38
-         5NgPSvNQMp6kfJ81S670urX9nuvpBLrQyUBFjVGWDLXthQC9bgz6y5R0UttJUvYdeWBd
-         hFvlEOqxGQDadVU2U9ve4WlcMVg92z4IuxwLIc5ZBrUooQdwJvyNJzixn1ujnG66Uj8V
-         XChw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794842155; x=1795446955;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=xreGGvHmp7BFTOpuP/eDux0gdC8b+52qsTKyGm3WBhs=;
-        b=QsvFNkhTz8ZfbxaleJpIQ8RjJKXP1gTu4/TNjFsONsOcof8RVwBAgmUnZqH5RA+aZM
-         NoPBJS0i/lpkFzhixtqf/QfzV83jJRxxONEihLi7vJuE0CLVeEMfX77qymoIgQg4P4E7
-         J82mcec/3xWI2E7A9ELh3+PZ6q3J6gFmuyLXn9jXCvKJ9iotmEhTIFqPvI93iNZuUkFz
-         Gex+iK4q6wFQdWBknkhBRC6wuF+Eup7iX7h70fKvLaDI1fV/768QumJMIGBuswP4w2bt
-         OHl+447a2xmANWrItiJvm/LgOoz0vJckh1UHD094MyhbQL1vsY5l4Rrrs8KLrCRYntIB
-         zdzw==
-X-Forwarded-Encrypted: i=1; AL+hErFKVFRMSvfRZbdAnyrEJMh2Q5JZwEhUckE0MYDE3SA1pfgEsQfOm1UG5G1AE4QFr19aUZw+lzzMWuo=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z9vaQz8LiLsW8uIDYHDZhzDRCBapQjUzD2jQYbRr9aUQ7Usfdr5
-	6eMAAXL3UHJJG5gS6L/bj8hFT9F2HJ+/eWkHVkYhNZ6/jMenTV/fOwY8SfPog1bwUaJfj+I8urO
-	q/2TJ6AVtcrqeo/2/KsdOQGSH4/GAa7U=
-X-Gm-Gg: AYBFou3RtQqygTRKJn1UI8Okg5Zfas0IxMTnUlgDaFBTrEXdcoXWuxDrxTkbgEGKH08
-	qFSKwvzFwKJqN/T9230m1I+e5xb6P773HCWgakGrT0Axibzf0tJdMricOc0sgq+UqFggrBs64A3
-	hyBqKwffpY6/Gc9VdbG8xujZ+ZlQ26gV1kKOe9y/lh4m6+spofMF4WIA9+u/kfOYMPlLSMexakN
-	IR8DyoYwIu8TLwqYhbgFQadjK3iOVO8mSuoeV40c70V9FoCOj9vHyTxVEf4Kl0TjKtXLMnEEF0j
-	R4prIKtdF2c3qt1KNnRaTwWTijxDzLV+F6u0SLbfCnHKeltZZ1HiY7CnjqzlPS0yvPDhaNhPl2r
-	ilpjTtdScUalHw10cqZlBj/oBRpgRJHGvur8=
-X-Received: by 2002:a2e:a9a5:0:b0:3ac:fd58:5e7b with SMTP id
- 38308e7fff4ca-3ae2b4fad6bmr34405451fa.22.1794842155035; Mon, 16 Nov 2026
- 07:15:55 -0800 (PST)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=VpdmPBIzblWrOXn9dANHKUCTPRJh4pLdGE+TcF4+WoY=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:feedback-id;
+ b=ex4R6socd/WohiZ5/qtECsT9RttgIc3q4vvl9HaMY/0faWI+6vfzuTBcMxD7u9cwAjqnKL1NE
+ vn7WWqXoa2CJ1VR0S0MLZx1lZ9l0DDXYXPP8Dpg2KMZDwPEZaHn+jg8P5IlEwIUwv53ZFrk8qJb
+ 89D3+na6GX4pJrz6AJ/GGZrbDGYFwOuOLe9uBo4F0VRuGfNjG7BK2zKVCEANP8XZXUkqP78w7jV
+ JvEGvdD8i0k+2HOYygHVnIiFhjPaoGysNEL/M716GWV4I1oM3C+hFO5na3A67VYVWgTVRCrn8JL
+ JxrahGe/ip6wONY6SbeXiV9ZCB4byIPjwCpzy1iCE5Wg==
+X-Zone-Loop: c45def2d823d34da3acaaac641fba5377b0d7160f61b
+x-campaign-type: default
+x-transaction-id: 5c4ae456-11f8-4cd0-a431-aa01df7c7ebc
+x-swg-uid: 01-3d20aacc-74b6-4d80-8c4d-3d987145e1bb
+X-Mailer: Sweego
+Message-ID:
+ <1794842995.8631fc262581453bbf619ec5b2062170.1a1e4faaa300006d3f@vates.tech>
+x-swg-bid: 1794842995.8631fc262581453bbf619ec5b2062170.1a1e4faaa300006d3f
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Date: Mon, 16 Nov 2026 16:29:47 +0100
+Subject: [PATCH v2] xen/riscv: bound each IMSIC MMIO regset by the
+ per-group hart slots
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <cover.1793129971.git.mykola_kvach@epam.com> <3f0239435a9013b5ea35dda4ddd0253ef42e26ee.1793129971.git.mykola_kvach@epam.com>
- <35bf81cf-594f-4fff-ad3f-13cccf559d72@suse.com>
-In-Reply-To: <35bf81cf-594f-4fff-ad3f-13cccf559d72@suse.com>
-From: Mykola Kvach <xakep.amatop@gmail.com>
-Date: Mon, 16 Nov 2026 17:15:43 +0200
-X-Gm-Features: AclHuK_GBWgl6aSHnETyXcPLAH7wONdLEPp10B27K_hT6XAGJ4gAc1sxkjH6AUA
-Message-ID: <CAGeoDV8bMiJFZ9X6G3e+qEP3xnbrsd-ycHiscidzR9PPx7PN4g@mail.gmail.com>
-Subject: Re: [PATCH v13 04/14] xen/percpu: defer freeing per-CPU areas after
- resume failures
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Mykola Kvach <mykola_kvach@epam.com>, Andrew Cooper <andrew.cooper3@citrix.com>, 
-	Anthony PERARD <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, 
-	Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
-	Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-16d1c6/1794842155-1ECC577B-4D2BB848/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 2720
-X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FORGED_GMAIL_RCVD,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
-	autolearn=no autolearn_force=no version=4.0.1
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/32OwQ6CMAyGX4XsbNUNg8aT72E4jFKgJgyyjkVDe
+ Hc3vJuevvbv165KyDOJuher8hRZeHIJzKFQOFjXE3CbWJmzqbTWJXT8Bh6FEcaRJ2gDYFnqq0V
+ DHaFKe7OnFNqdz/rHsjQvwpBFOdFYIWi8dTjk1jKfJNieXZ+HA0uY/Gf/KOos+Xc8akh1pq6p0
+ NxaujyiDSTHQMldb9v2Bf5QWcjiAAAA
+X-Change-ID: 20261113-fix-imsic-mmio-dt-c3317ac2efec
+To: xen-devel@lists.xenproject.org
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
+ Connor Davis <connojdavis@gmail.com>, 
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>, 
+ Andrew Cooper <andrew.cooper3@citrix.com>, 
+ Anthony PERARD <anthony.perard@vates.tech>, 
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, 
+ Julien Grall <julien@xen.org>, 
+ =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
+ Stefano Stabellini <sstabellini@kernel.org>, 
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794842988; l=6134;
+ i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
+ bh=8w1tZklm4k9P4dnt2nrbTyM6AllfDpiEtBDalo4bDTU=;
+ b=DCfrFDH7g2H91/E//TTTSnnZY5S90VyrEcxYgytqq1X7UEgf4CFPi/2qSU5+WBftLGYIor1VP
+ I/8hCtF9L+1DL33KvfatT82Xf69UdsQLHYQwDiNkilTin/EA0o1aB5y
+X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
+ pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1794842994415
+X-purgate-ID: tlsNG-42698a/1794842996-198C19EA-9C4D845A/0/0
+X-purgate-type: clean
+X-purgate-size: 6136
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Jan,
+imsic_init() requires every MMIO register set to be exactly
+IMSIC_HART_SIZE(guest_index_bits) * nr_parent_irqs bytes, i.e. to cover
+the interrupt files of all harts listed in interrupts-extended. This only
+holds when the DT describes a single register set.
 
-Thank you for the review.
+When harts are split into groups (riscv,group-index-bits > 0), each group
+has its own register set, which only covers the harts of that group. For
+example, the SpacemiT V100 IMSIC node describes two 2 MiB register sets,
+each holding 64 hart slots of 32 KiB, with 128 parent interrupts in total.
+Xen expects 4 MiB per register set and panics with:
 
-On Tue, Nov 10, 2026 at 1:03=E2=80=AFPM Jan Beulich <jbeulich@suse.com> wro=
-te:
->
-> On 27.10.2026 22:05, Mykola Kvach wrote:
-> > When a CPU fails to come back during system resume, cpu_up() sends
-> > CPU_UP_CANCELED. After trying the other CPUs, enable_nonboot_cpus()
-> > sends CPU_RESUME_FAILED for the same CPU.
-> >
-> > On architectures which do not park offline CPUs, both notifications
-> > queue free_percpu_area(). The release metadata, including the rcu_head,
-> > is stored in that CPU's per-CPU area. The first callback may already
-> > have freed the area when the second notification arrives, or the same
-> > rcu_head may be queued twice. The CPU_RESUME_FAILED callbacks also need
-> > the area to clean up timers and CPU-pool state.
->
-> I think there's another change needed, for the change you presently do
-> to not cause a leak: If enable_nonboot_cpus() calls cpu_up() for a CPU
-> whose bit isn't set in frozen_cpus, and if that call fails, the CPU
-> later wouldn't have the CPU_RESUME_FAILED notification sent for it.
-> IOW the freeing would then not happen at all. Question is whether
-> simply setting the bit in frozen_cpus would be correct: Notify
-> handlers may not expect CPU_RESUME_FAILED for a CPU which wasn't
-> online at the point of suspend.
+  IMSIC MMIO size is incorrect 2097152, expected MMIO size: 4194304
 
-CPUs outside frozen_cpus are only tried when park_offline_cpus is true.
-In that case, the existing !park_offline_cpus check already prevents
-freeing their per-CPU areas.
+Check instead that a register set does not run past the end of the group it
+starts in, i.e. BIT(hart_index_bits) hart slots. A register set may be
+smaller than that, e.g. when a group holds a non-power-of-two number of
+harts.
 
-When park_offline_cpus is false, CPUs outside frozen_cpus are skipped.
-A failed cpu_up() leaves the bit set, so CPU_RESUME_FAILED is sent.
+Parent interrupt i gets the i-th hart slot of the register sets, taken in
+order. A slot with no hart behind it can be:
+- at the very end of the last register set, e.g. when a DT describes a
+  group by its full capacity: harmless, no interrupt is left to take it.
+- anywhere else: every later interrupt is shifted one slot early, onto the
+  previous hart's interrupt file.
 
-Am I missing a case where this patch would introduce a leak?
+Both show up as more slots than parent interrupts, so counting can't tell
+them apart. Refusing to boot would reject the valid DTs of the first case,
+so only warn: they keep booting, and broken ones get a hint as to why their
+interrupts are misrouted.
 
->
-> > --- a/xen/common/percpu.c
-> > +++ b/xen/common/percpu.c
-> > @@ -82,6 +82,15 @@ static int cf_check cpu_percpu_callback(
-> >          break;
-> >
-> >      case CPU_UP_CANCELED:
-> > +        /*
-> > +         * On resume, CPU_RESUME_FAILED is sent after all CPUs have be=
-en
-> > +         * tried. Keep the area alive for its cleanup callbacks and le=
-t
-> > +         * that notification release it.
-> > +         */
-> > +        if ( system_state =3D=3D SYS_STATE_resume )
-> > +            break;
-> > +        fallthrough;
-> > +
-> >      case CPU_DEAD:
-> >      case CPU_RESUME_FAILED:
-> >          if ( !park_offline_cpus && system_state !=3D SYS_STATE_suspend=
- )
->
-> Nit: While generally we want blank lines between non-fall-through
-> case blocks, imo between fall-through ones such blank lines would
-> better be omitted, to make the falling through visually easier to
-> notice.
+While at it, print the MMIO sizes in hex to match the DT reg property.
 
-Agreed, I'll remove the blank line after fallthrough.
+Fixes: c9bd8b322ecb ("xen/riscv: imsic_init() implementation")
+Assisted-by: Claude:claude-opus-5-5
+Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+---
+Changes in v2:
+- Bound a register set by the end of the group it starts in (offset +
+  size), not only by the group size.
+- Warn when the register sets hold more hart slots than parent
+  interrupts, as an unused slot before the end of the last register set
+  misroutes every following hart.
+- Reuse the group size for the base address mask.
+- Link to v1: https://patch.msgid.link/20261113-fix-imsic-mmio-dt-v1-1-10efb6c28de4@vates.tech
+---
+ xen/arch/riscv/imsic.c | 39 +++++++++++++++++++++++++++++----------
+ 1 file changed, 29 insertions(+), 10 deletions(-)
+
+diff --git a/xen/arch/riscv/imsic.c b/xen/arch/riscv/imsic.c
+index 44b8640ea3..48acc02440 100644
+--- a/xen/arch/riscv/imsic.c
++++ b/xen/arch/riscv/imsic.c
+@@ -381,7 +381,7 @@ void cf_check vcpu_imsic_deinit(struct vcpu *v)
+ int __init imsic_init(const struct dt_device_node *node)
+ {
+     int rc;
+-    unsigned long reloff, hartid;
++    unsigned long reloff, hartid, nr_slots = 0;
+     unsigned int nr_parent_irqs, index, nr_handlers = 0;
+     paddr_t base_addr;
+     unsigned int nr_mmios;
+@@ -415,9 +415,11 @@ int __init imsic_init(const struct dt_device_node *node)
+     /* Check MMIO register sets */
+     for ( unsigned int i = 0; i < nr_mmios; i++ )
+     {
+-        unsigned int guest_bits = imsic_cfg.guest_index_bits;
+-        unsigned long expected_mmio_size =
+-            IMSIC_HART_SIZE(guest_bits) * nr_parent_irqs;
++        /* Address space of one group: BIT(hart_index_bits) hart slots. */
++        unsigned long group_size = BIT(imsic_cfg.guest_index_bits +
++                                       imsic_cfg.hart_index_bits +
++                                       IMSIC_MMIO_PAGE_SHIFT, UL);
++        unsigned long offset;
+ 
+         rc = dt_device_get_address(node, i, &mmios[i].base_addr,
+                                    &mmios[i].size);
+@@ -429,9 +431,7 @@ int __init imsic_init(const struct dt_device_node *node)
+         }
+ 
+         base_addr = mmios[i].base_addr;
+-        base_addr &= ~(BIT(guest_bits +
+-                           imsic_cfg.hart_index_bits +
+-                           IMSIC_MMIO_PAGE_SHIFT, UL) - 1);
++        base_addr &= ~(group_size - 1);
+         base_addr &= ~((BIT(imsic_cfg.group_index_bits, UL) - 1) <<
+                        imsic_cfg.group_index_shift);
+         if ( base_addr != imsic_cfg.base_addr )
+@@ -442,15 +442,34 @@ int __init imsic_init(const struct dt_device_node *node)
+             goto imsic_init_err;
+         }
+ 
+-        if ( mmios[i].size != expected_mmio_size )
++        /* A register set must not run past the end of its group. */
++        offset = mmios[i].base_addr & (group_size - 1);
++        if ( mmios[i].size + offset > group_size )
+         {
+             rc = -EINVAL;
+-            printk(XENLOG_ERR "%s: IMSIC MMIO size is incorrect %ld, expected MMIO size: %ld\n",
+-                   node->name, mmios[i].size, expected_mmio_size);
++            printk(XENLOG_ERR
++                   "%s: IMSIC MMIO regset %u (offset %#lx + size %#lx) exceeds group size %#lx\n",
++                   node->name, i, offset, mmios[i].size, group_size);
+             goto imsic_init_err;
+         }
++
++        /* The last slot may be cut short, see the lookup below. */
++        nr_slots += DIV_ROUND_UP(mmios[i].size,
++                                 IMSIC_HART_SIZE(imsic_cfg.guest_index_bits));
+     }
+ 
++    /*
++     * Parent irq i is given hart slot i, counting slots across the register
++     * sets in order. A slot with no hart behind it therefore shifts every
++     * later irq one slot early, onto the previous hart's interrupt file.
++     * Counting can't tell that from harmless unused slots at the end, hence
++     * only a warning.
++     */
++    if ( nr_slots > nr_parent_irqs )
++        printk(XENLOG_WARNING
++               "%s: %lu hart slots in IMSIC MMIO regsets for %u parent irqs, unused slots must only be at the end of the last regset\n",
++               node->name, nr_slots, nr_parent_irqs);
++
+     /* Configure handlers for target CPUs */
+     for ( unsigned int i = 0; i < nr_parent_irqs; i++ )
+     {
+
+---
+base-commit: 97bf370375113caf92fccf04e2877fc6b5ff887f
+change-id: 20261113-fix-imsic-mmio-dt-c3317ac2efec
 
 Best regards,
-Mykola
+--  
+Baptiste Le Duc <baptiste.le-duc@vates.tech>
 
->
-> Jan
->
 
