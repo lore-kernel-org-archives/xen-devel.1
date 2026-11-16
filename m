@@ -2,48 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C4D2606A323
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 08:40:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 18FEB606A897
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Nov 2026 08:59:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=epam.com header.i=@epam.com header.a=rsa-sha256 header.s=selector1 header.b=oxsQrtno
-Received: from list by lists.xenproject.org with outflank-mailman.1490270.1691223 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=cYB4rR1W
+Received: from list by lists.xenproject.org with outflank-mailman.1490292.1691231 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSsGF-0006j0-UD; Mon, 16 Nov 2026 08:40:23 +0000
+	id 1xSsXy-0002N6-Dp; Mon, 16 Nov 2026 08:58:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1490270.1691223; Mon, 16 Nov 2026 08:40:23 +0000
+Received: by outflank-mailman (output) from mailman id 1490292.1691231; Mon, 16 Nov 2026 08:58:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xSsGF-0006in-OI; Mon, 16 Nov 2026 08:40:23 +0000
-Received: by outflank-mailman (input) for mailman id 1490270;
- Mon, 16 Nov 2026 08:40:22 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Mykyta_Poturai@epam.com>) id 1xSsGD-0006Il-RO
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 08:40:21 +0000
+	id 1xSsXy-0002Mz-Ay; Mon, 16 Nov 2026 08:58:42 +0000
+Received: by outflank-mailman (input) for mailman id 1490292;
+ Mon, 16 Nov 2026 08:58:41 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xSsXx-0002Mt-An
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 08:58:41 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xSsGD-0070BM-7e
- for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 09:40:21 +0100
-Received: from [10.42.69.2] (helo=localhost)
+ id 1xSsXw-00HSw4-5K
+ for xen-devel@lists.xenproject.org; Mon, 16 Nov 2026 09:58:40 +0100
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Mykyta_Poturai@epam.com>)
- id 6afac171-8faa-0a2a0a5109dd-0a2a4502a3ca-12
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 09:40:21 +0100
-Received: from [52.101.72.113]
- (helo=AM0PR02CU008.outbound.protection.outlook.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Mykyta_Poturai@epam.com>)
- id 6afac174-6ca4-0a2a45020019-34654871f831-5
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 09:40:20 +0100
-Received: from AS2PR03MB9076.eurprd03.prod.outlook.com (2603:10a6:20b:5fb::5)
- by AS8PR03MB6839.eurprd03.prod.outlook.com (2603:10a6:20b:29a::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.14; Mon, 16 Nov
- 2026 08:40:19 +0000
-Received: from AS2PR03MB9076.eurprd03.prod.outlook.com
- ([fe80::bfe6:8f84:2f09:349c]) by AS2PR03MB9076.eurprd03.prod.outlook.com
- ([fe80::bfe6:8f84:2f09:349c%3]) with mapi id 15.21.0615.009; Mon, 16 Nov 2026
- 08:40:19 +0000
+ (envelope-from <jbeulich@suse.com>)
+ id 6afac5b0-e002-0a2a0a5209dd-0a2a45058eb8-44
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 09:58:40 +0100
+Received: from [209.85.221.48] (helo=mail-wr1-f48.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6afac5bf-4cb1-0a2a45050019-d155dd30d449-3
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 09:58:39 +0100
+Received: by mail-wr1-f48.google.com with SMTP id
+ ffacd0b85a97d-49a92144733so1198311f8f.0
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 00:58:39 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-49c5f78214dsm21181731f8f.25.2026.11.16.00.58.38
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 16 Nov 2026 00:58:38 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,198 +49,206 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=nQ+H+9L6xb0dJ+gqjMShP0nhR+rmvJZ1U6UDX0dJrbWEt/UZSnwWcFXpRzoUhPmJipS7AHiPru+k8fx2Fe+hOk/iR5gme6GdduqctLOjzHHQ3obckNLFmd2FWNB3FMCjcErf0Vr2H0LzU2vUIS2Jgy/sfi1PxsWGo3ietN6NJoxSd2eXozzMebLvQiROPdYWWJbOHnwhjl4g0gsHS4XvoKgvZIATVsZRz8jRcwnvhdJ42dbUotjZCNLaYn282vjjuDfvSHwNwc1EE1kkdySiekXjlphvivYTohBmVe1kLDwu1m3wSvQI2XBYDq6KxpinytmfZvm7d+fOz8tXJaN0uQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=XTxm5m4FP+hzQnpGiRPxKxWKCD2d2IuIBmvOjgaaa3Q=;
- b=Yt5fT6cxlEnS0ZbUVCjttq2icJ6/uOQQ0NpmTQQma6d86Fmknrv7LTIiVYJVg6xfMI8CoBjynRik14VWo+FWvBECbqVXKyPTpRdj4QzcUAFGjtx0jPA8Ge6ilJswhjQ1gSgyaOMMmORvMzhHOXudFn25+09G56/kFK9rB4zYR4XMMQF/tQpW/Yhb6UYuUp65Q76ycuDZ6zxA+UekeQqAYzD3ceZ4rGgQXUmmO6sJAQzUiORRKmvC52YwOvBLsGAOEC+Dalkw6OY59TS0kgSBVgcwbnM4Dgzhi72xUSCC81Z90Ru7K5uBwKJnWMUU0gUIBKA2fXvJlxl2Wdi26RpwBQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=XTxm5m4FP+hzQnpGiRPxKxWKCD2d2IuIBmvOjgaaa3Q=;
- b=oxsQrtnoMqcF7YNrEjqEhhFekXllVcXwad3Ox2zra3iN32H7RFKTrKiqA7JQmuPOGoYTm5ITdprqthJJ4gq5h/sT6LbjcMOaC194Keihh9Wu73LVYj51Qkz7OhjlHnAI6nyItxFekI0ur9RHi2YyYJ41KNINYbG2I+nv51w1kd+Cgw18Kc47cmd+w0aAe3MWZT2HyZsRwgCu7yb/SHr2ujxB/zHHqtHMWtbZeFG2ocx12nO64qrAOoZNh16+CneQxfuDf+jKM7tv908cDjWzfcOMMO2tIJfwv+6B+A5sLK9YKfqPyc3CJ54aXO1ZeW5A0DEjwwGfvoIs1HAAm7Nu8Q==
-From: Mykyta Poturai <Mykyta_Poturai@epam.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Mykyta Poturai <Mykyta_Poturai@epam.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, Volodymyr
- Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v1 2/2] pci/rcar: Add support for Gen5 PCI host
-Thread-Topic: [PATCH v1 2/2] pci/rcar: Add support for Gen5 PCI host
-Thread-Index: AQHddaYcAIucuvPO/0quJ8il+q1yMg==
-Date: Mon, 16 Nov 2026 08:40:19 +0000
-Message-ID:
- <2871b83d934f6254fd593ff9fc75de03728b69ac.1794817300.git.mykyta_poturai@epam.com>
-References: <cover.1794817300.git.mykyta_poturai@epam.com>
-In-Reply-To: <cover.1794817300.git.mykyta_poturai@epam.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AS2PR03MB9076:EE_|AS8PR03MB6839:EE_
-x-ms-office365-filtering-correlation-id: bba381d0-c483-487c-1ba5-08df43bd3ecf
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam:
- BCL:0;ARA:13230040|366016|1800799024|376014|23010399003|6133799003|22082099003|18002099003|261009223027099003|261022105027099003|261021123027099003|261021121427099003|261102123227099003|261028144727099003|261026121527099003|261026140227099003|11063799006|56012099006|10067099003|38070700021;
-x-microsoft-antispam-message-info:
- cLdZIC8pMzXVCVbglBalQ6V7xObPOhLpS+iookp8twnt3DMbFTzYz9Do6bKsFaOQyZPTAgcc34GNZ+Dw1IrDu1h64O86pKpsQZlrBDvz5CTHUyVG/e+SxO5I7yWUH9Vv9t8+cziWlwq/5DkbZW+ZSwPJGsKgG/HwFlJQ4qscRLRoQM38EO/FYlIGdXVyO2qky+qWfth23uITKHeT4dZNg5ebuLUr1+iqDNc9CLzx6iwZmwt2yJiray2/hjPMIgrt9ClUclgBHbL48PmJC7h89BpsoA2xoVmquwG4iinkfXmMcEqTWMgNqCMYJ2062WTXNi/hmZ4yM1SE3sN00lo6SnZvhvSv/9Mcv0LzOY+2JYqhfZZUR4Ky1/2EFq9p2RmkEyMIP8FMh6n7rltRxpeHr77X0nv019VwLC79B+8bzI4nn0CqbY8A8dQ8w5jopD1NAtjWEzBOZKRoSp1CNy7LcHkaXb9xOf5JBTaBbORVpoaHIGJJLKqPPB0QvmzFDseEpteQ3xVllttJrYfvjM9tj30Lm+mC3t0M9cjqvITyp1EGXnZcM5DYkGkoWfjg/IV3w4WADiTNjBP1IuMgA8YIhinXgkNWaIhMwj7jCs8cdz7JW709jfQ1xNLOqEgGhv7x0edBsKEW8ylTbbtAHQOEaMbredu4+xy95sOraiRc+eKJbY4/1fTXr9vKSKsrdlXpkmjI74QUC2VAujZfz0Kz6KoJYqhXc7yGiGZItbiUf8U=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS2PR03MB9076.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(23010399003)(6133799003)(22082099003)(18002099003)(261009223027099003)(261022105027099003)(261021123027099003)(261021121427099003)(261102123227099003)(261028144727099003)(261026121527099003)(261026140227099003)(11063799006)(56012099006)(10067099003)(38070700021);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?nyrE5vXuQ49lutcBO/FzJ9ka2iomWI3RuR5VzboSU/aqXLktSL/KbSgVM3?=
- =?iso-8859-1?Q?1ao9TnYtWY1Rc4scKYsogvmPafx/ZrP12PJvbpzV3KkZHxRVy0gP2pIRCa?=
- =?iso-8859-1?Q?gChSHPg1InCPUmEB2n6NXPNl48vi8JOT7693/HoofLIin7Mvd5cgbPGPg0?=
- =?iso-8859-1?Q?0a5V4dRpI+bk/VaQ7dhi+Yhp/FLTMvZ4MQ6d+TJie99/qRxeBenzK4Oekn?=
- =?iso-8859-1?Q?xUg34BtOTGq85Uwd07OOAahO6feefFKQR5alGUnw2+n14NzSkwlejNqUGW?=
- =?iso-8859-1?Q?IZgw4tbLkbB/IFqloXWQ64InfylCe3HAtuTdjqzs8k5NwlKOioklz+Jq9H?=
- =?iso-8859-1?Q?GKowZT1JQvR+l+by9H9rnpxVETY8WX82AbMQZ06JmwP4yUpflr2+hPpEsk?=
- =?iso-8859-1?Q?2F9ZjIJnbVc7gRWSrMzo+ugHa2jYGJbTBHNLbYKcKO7OLJa8kKEk/ItqnY?=
- =?iso-8859-1?Q?hmtXo+RjKiPVZVU2tt0j+xd9nizqXn9Moj4IriN99+skGTG6iKTsRoIfo8?=
- =?iso-8859-1?Q?WaBpHpxZ4H6IfuNzoopISfqoYiBnX3UN+zoeSK9e16keAQ46p8ModpLj5z?=
- =?iso-8859-1?Q?mvR/WDuFZOa/rKv3PKo9aJHviU8QZuH+8DoWmd5aoQU8/5o3+NzJMaRJar?=
- =?iso-8859-1?Q?b+xRAUWiV+cYHqd32m667eYc2L0/sN2CRcF9L/xUuzNNKdVPzXAedZRS4O?=
- =?iso-8859-1?Q?3/zGewBWkaMCvk4J418SoP4DOH+yaRzkejkdYegV7NYCcZEhfaBd1pesy/?=
- =?iso-8859-1?Q?CmQ8R6A0MJjKzqy8Crz1Mrloltd0aoolt3SkOe5qSDgy98zVsarxOaqo9+?=
- =?iso-8859-1?Q?kD46Xhyj0TxOqgSP/VGD8Va35j7No3ppyyz7YKQRLXtlIY9hPmXlY5+roo?=
- =?iso-8859-1?Q?HsrABL4IqMDmCqn7k5USKtAnkaSWvWBXlbRYgUZM/zwanzdEouu/vPgnDg?=
- =?iso-8859-1?Q?qU37A8nXSK2LoobkmNZug555TXkVZnxNFq/HdgBo6+9Lvw6aUG+G5lhE/W?=
- =?iso-8859-1?Q?rK5eXZibuvljGGW680nNNkXNErZaVNy0IM31fkB40H5ZYhyi6BjvfbGJ37?=
- =?iso-8859-1?Q?458hUB+xWp3lJaB2e2N0jM2wPmQetArKmItULcwQmriAgZNA738KG71b1f?=
- =?iso-8859-1?Q?hX5lM+jVj9ujiiPSa+h+nzN61Bo2vHRAG9FsXdwsb0QrLOfWP2rMEBNtpW?=
- =?iso-8859-1?Q?FZoAdXNpo12hzummXGwsEsZ6jjAJezFjmWGEkEhkTIeEq7Wlzz8lOozTLM?=
- =?iso-8859-1?Q?8oYnO9gOs7UtW/5x8YHCobWNEhwvid4OTBORpFqpJmpcCU5IFpL3S5RFMX?=
- =?iso-8859-1?Q?6EX2kuT5hfe6HscExJmmoZivacllGnPq9GAdoA2SdpkzYmRj4b3m6uUcZq?=
- =?iso-8859-1?Q?XVJz5Pgcdi9W05J6LWkvRYTLiNv6D7zdnC4TLPtA5H9/PssvmWPCP7VAMq?=
- =?iso-8859-1?Q?Bz8UMDR11VFnfKKS3aqBpqfARjbqGLXvAF1+nkbV76RTeqCZj/1+wIIX5M?=
- =?iso-8859-1?Q?r6sRdklxnipWYTNl8AYrQc69mcSFPIXfy5tam2c8D2rnCcsFrA1jK5K62C?=
- =?iso-8859-1?Q?8ocm/ZleZzdi6HZyLMqchdjR/9Ex/oedElRCnEZHERBHUBtT15lWryUIfg?=
- =?iso-8859-1?Q?v8RIENG1l3Q1M66Iy9YsCJy1V6Jzit2YlzXhEcVnmGV6MGTxjkM9K57gU+?=
- =?iso-8859-1?Q?JWuftOhQ7WNVcwCvIEoF4LuqgOU5qcCvxMY8412VeuC9eBIM8efQiiGRAY?=
- =?iso-8859-1?Q?qBsElhIimK1JpT9Y/fmMZW7VlB6x9/YPp6GUpQpJIhw/WfsRDCQstlvYWb?=
- =?iso-8859-1?Q?OQf1uUUTQg=3D=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1794819519; x=1795424319; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=A3+rTk3NF67z+zczejY3jr4X1jSLwzIn21QfM+bykHY=;
+        b=cYB4rR1WygPmv8F4PFqtnAaMEFEAxkleZMbYO1dKbaSsShHgEI0uSZ5rG2HJCfIQwR
+         QfGRIE3FZ8UhoTU9pM0n4USdAZCo8iPsjYzB6QnVlHfbcTjFTHZpEQNe3f6zDu56hAtO
+         /NMCWoeJ2/gb3a2jQ4g5eyBm+UiNGp+vAh9aZekm9XkW9bQlvhn0oFEiKac8Tqr3ivAh
+         tZoDFNTw/6yz/SWQlnJAMvB22nKOeCY1quhEdODyBAf9zCiVqbv8+zFwKdhwA7PnJH5v
+         mvnwZ8E3mTWd6WxhU/WzzzAKKEwwM0taWfiF9xKFQPB/DAtMYPm4LKCVK2c2v8OQqioG
+         gwlw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794819519; x=1795424319;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=A3+rTk3NF67z+zczejY3jr4X1jSLwzIn21QfM+bykHY=;
+        b=DKvpuoJ8128a9DORf4VLTFeC4ZuMaaACKTBDCZY5T870jmBzei/1Fm4S9AHs1ZiZo7
+         F9OC8Z0oFZ1Rs/rBC0GlyAldzRJON8HNogjwfeO0QBLQMEru0Bnq0StVdamu2RyR83wG
+         ScXVQHe8xtLcBL1s3b1nAhKupasu25RWpbZiG9G0ghub9aJziudopTt3tEgf+9y9C57q
+         v8c3BaoIjD8H/eeico0aM73v0j1X836aE1D4bTGLVQeSAJ1hZJ9AA9EDs5P8YEOKU+Zp
+         uHSc1TWtboY1p26cU8d+jRnJHeuNgG3gX80k/6ji2WxMsOwEEuuhO1CGJOZFL0onZKlU
+         pqoA==
+X-Forwarded-Encrypted: i=1; AL+hErHWDR8BOYWuXBDu56jGp/Us3MJ7FKlnQ3pIvxhgiqlxJBBkaF+c+G2okUcAmYUt9SE0WbztIe9T5fA=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z+tubsuwg4GZOdZsbQJ/spjOq0gxjcuaTyhR4N96l+nW05gF0LC
+	EDkEFyLCodxTyMHbeB4G9FLpJCNyqywcFcHt5iATes+cm+8qGG5qLBklq6DE41xHuA==
+X-Gm-Gg: AZFdTZc63IOA6zfo/d+mRCTWC+tOxMwTVc9UB9YCe9zoNfEGCor4ugYPGFi4lR5AD5w
+	y+2OfG9LknzFK+ImqPybuB25SX1S1sdSnhwb9oP8gTApNyCCApm7W6YSYuxNXyuTZj8YpLgmq1K
+	d7at2TiZHvEEHp8RDLQNB0ifjCNXmARK+IdJUMBQ4eBO9RPFUUWR/wB5MjKVQt4gkQYckiEjll1
+	lz348JwDzl4hySAz7GxCfg0/FJSn+1hGXZGSKj1e3Dd81yBvjMNk4vIi4SnJYdUU/vWk8e2c8Oa
+	udZs4Z4Megt5xKmM6ekqzFT25bCGl7OHAc03082rL+TdLgPGuarE0Bo3TUFyFr+cu+M29ZeUAQY
+	8zD0yh6UZK5DPyYsIjJYoQOJMuTkMQMzfoHKIaCHmSw74GiqIu3CbJjG61xMhbpBeDeYXGM9C0l
+	ybpdHJr63HhV4NpwQkx+gw6ADT18wJ0oomCv9JCXltfV1SoWpTfPTOvFD/lwK6PvQySMUE7msNs
+	BeH+NwIMLaoX7lOlTCH9m9RbKXmtgWBmq/viURepTPVmIgViz0Acc3HZ+E0OVEsyxfnPAqfcKuA
+	z+fqiyu+QBMX4qZJvrZvGwCIMnBATmCYnqqUK7OOIQlChS3ok0dczOGR7RY3pwB17MkdapcMW93
+	rK/MWaQPgqxMPmOaMfg==
+X-Received: by 2002:a05:6000:25f1:b0:48a:fba3:d5b1 with SMTP id ffacd0b85a97d-49c7381a73amr19979286f8f.55.1794819519357;
+        Mon, 16 Nov 2026 00:58:39 -0800 (PST)
+Message-ID: <6c7b2b79-629e-4540-b94f-d88a2f039394@suse.com>
+Date: Mon, 16 Nov 2026 09:58:38 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AS2PR03MB9076.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: bba381d0-c483-487c-1ba5-08df43bd3ecf
-X-MS-Exchange-CrossTenant-originalarrivaltime: 16 Nov 2026 08:40:19.1515
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 9s78dGQJE5ndCR76jn25lIPBkdYWVSQfjBPVDd/rLMSBoeqiCh6U/qisGvM98w3X9jFF5MxdlwC/ZXIBZdscxA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR03MB6839
-X-purgate-ID: tlsNG-720697/1794818420-67CBA2AC-B0C0FE9D/0/0
-X-purgate-type: clean
-X-purgate-size: 3003
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] x86emul: Zero-extend unsigned 8-bit immediates when
+ decoding
+To: Stephen Cheng <stephen.cheng@citrix.com>
+Cc: Ross Lagerwall <ross.lagerwall@citrix.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
+References: <20261116012748.4872-1-stephen.cheng@citrix.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20261116012748.4872-1-stephen.cheng@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-c201ff/1794819520-243112A1-273DE1E1/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 4317
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
-	version=4.0.1
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add support for Renesas R-Car Gen5 PCI host controller. This includes
-updating the device tree match table to recognize the new compatible
-string "renesas,rcar-gen5-pcie6" and ensuring that the OSID registers
-are only initialized when they are supported by the hardware.
+On 16.11.2026 02:27, Stephen Cheng wrote:
+> The decoder sign-extends all 8-bit immediates. This is right for e.g.
+> Jcc rel8 and Grp1 (83), but some 8-bit immediates are unsigned: the
+> vector of INT, the port of IN/OUT, the base of AAM/AAD, the count of
+> the Grp2 shifts (C0, C1), and the 8-bit immediates in the 0F, 0F3A and
+> XOP08 maps. For these, s->imm1 holds a wrong value for 0x80 and above.
+> x86_insn_immediate() can return this value too.
+> 
+> The worst case is INT $0x80 to INT $0xff, which puts a negative vector
+> into the event (e.g. -128 for 0x80). hvm_inject_event() then fails its
+> "vector == event->vector" assertion, and a debug Xen panics. An HVM
+> guest can trigger this with the forced emulation prefix (hvm_fep).
+> 
+> Zero-extend these immediates in the decoder, and drop the (uint8_t)
+> casts at the IN/OUT and AAM/AAD use sites, which are not needed any
+> more.
+> 
+> Fixes: 653cae725cea ("x86/32on64: use generic instruction decoding for call gate emulation")
+> Fixes: 52053d5fc2f9 ("x86/emul: Drop swint_emulate infrastructure")
+> Assisted-by: Claude:claude-opus-5-5
+> Signed-off-by: Stephen Cheng <stephen.cheng@citrix.com>
 
-Gen5 hosts do not expose the "app" register range, so only look it up
-on Gen4.
+Looks largely good to me now, just a few minor things:
 
-Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
----
- xen/arch/arm/pci/pci-host-rcar.c | 17 ++++++++++++++---
- 1 file changed, 14 insertions(+), 3 deletions(-)
+> --- a/xen/arch/x86/x86_emulate/decode.c
+> +++ b/xen/arch/x86/x86_emulate/decode.c
+> @@ -650,10 +650,19 @@ decode_onebyte(struct x86_emulate_state *s,
+>      case 0xc4: /* les */
+>      case 0xc5: /* lds */
+>      case 0xce: /* into */
+> +    case 0xd6: /* salc / udb */
+> +        s->not_64bit = true;
+> +        break;
+> +
+>      case 0xd4: /* aam */
+>      case 0xd5: /* aad */
+> -    case 0xd6: /* salc / udb */
+>          s->not_64bit = true;
+> +        fallthrough;
+> +    case 0xc0: case 0xc1: /* Grp2 */
+> +    case 0xcd: /* int imm8 */
+> +    case 0xe4 ... 0xe7: /* in/out imm8 */
+> +        /* The 8-bit immediate is unsigned. */
+> +        s->imm1 = (uint8_t)s->imm1;
+>          break;
 
-diff --git a/xen/arch/arm/pci/pci-host-rcar.c b/xen/arch/arm/pci/pci-host-r=
-car.c
-index 5f184d5ebc..87b3ccbc1c 100644
---- a/xen/arch/arm/pci/pci-host-rcar.c
-+++ b/xen/arch/arm/pci/pci-host-rcar.c
-@@ -17,6 +17,9 @@
-=20
- #define RCAR_DWC_VERSION     0x520A
-=20
-+#define RCAR_GEN4    4
-+#define RCAR_GEN5    5
-+
- /* PCIE BDF-OSID assignment */
- #define CNVID(n)             (0x700 + ((n) * 4))
- #define CNVID_CNV_EN         (1U << 31)
-@@ -87,8 +90,9 @@ static const struct pci_ecam_ops rcar_pcie_child_ops =3D =
-{
- };
-=20
- static const struct dt_device_match __initconstrel rcar_pcie_dt_match[] =
-=3D {
--    { .compatible =3D "renesas,r8a779f0-pcie" },
--    { .compatible =3D "renesas,r8a779g0-pcie" },
-+    { .compatible =3D "renesas,r8a779f0-pcie", .data =3D (void *)RCAR_GEN4=
- },
-+    { .compatible =3D "renesas,r8a779g0-pcie", .data =3D (void *)RCAR_GEN4=
- },
-+    { .compatible =3D "renesas,rcar-gen5-pcie6", .data =3D (void *)RCAR_GE=
-N5 },
-     {},
- };
-=20
-@@ -182,6 +186,7 @@ void rcar4_pcie_bdf_msk_set(struct pci_host_bridge *bri=
-dge, unsigned int reg_id,
- static int __init pci_host_rcar_probe(struct dt_device_node *dev,
-                                       const void *data)
- {
-+    const struct dt_device_match *match;
-     struct pci_host_bridge *bridge;
-     paddr_t app_phys_addr;
-     paddr_t app_size;
-@@ -194,6 +199,11 @@ static int __init pci_host_rcar_probe(struct dt_device=
-_node *dev,
-     bridge =3D dw_pcie_host_probe(dev, data, &rcar_pcie_ops,
-                                 &rcar_pcie_child_ops);
-=20
-+    match =3D dt_match_node(rcar_pcie_dt_match, dev);
-+    ASSERT(match);
-+    if ( match->data !=3D (void *)RCAR_GEN4 )
-+        goto skip_app;
-+
-     app_idx =3D dt_property_match_string(dev, "reg-names", "app");
-     if ( app_idx < 0 )
-     {
-@@ -218,6 +228,7 @@ static int __init pci_host_rcar_probe(struct dt_device_=
-node *dev,
-     printk("APP at [mem 0x%" PRIpaddr "-0x%" PRIpaddr "]\n", app_phys_addr=
-,
-            app_phys_addr + app_size - 1);
-=20
-+skip_app:
-     dw_pcie_set_priv(bridge, priv);
-     dw_pcie_set_version(bridge, RCAR_DWC_VERSION);
-=20
-@@ -227,7 +238,7 @@ err:
-     return ret;
- }
-=20
--DT_DEVICE_START(pci_gen, "PCI HOST R-CAR GEN4", DEVICE_PCI_HOSTBRIDGE)
-+DT_DEVICE_START(pci_gen, "PCI HOST R-CAR GEN4/GEN5", DEVICE_PCI_HOSTBRIDGE=
-)
- .dt_match =3D rcar_pcie_dt_match,
- .init =3D pci_host_rcar_probe,
- DT_DEVICE_END
---=20
-2.56.1
+This now separate case block needs to move down. All such switch() statements
+aim at having their case blocks sorted by lowest-numbered case each. There
+may be anomalies to that rule, but we want to make sure to reduce their set,
+not increase it.
+
+> @@ -1796,6 +1805,8 @@ int x86emul_decode(struct x86_emulate_state *s,
+>          break;
+>  
+>      case ext_0f:
+> +        if ( (d & SrcMask) == SrcImmByte )
+> +            s->imm1 = (uint8_t)s->imm1;
+>          rc = decode_twobyte(s, ctxt, ops);
+>          break;
+>  
+> @@ -1804,6 +1815,7 @@ int x86emul_decode(struct x86_emulate_state *s,
+>          break;
+>  
+>      case ext_0f3a:
+> +        s->imm1 = (uint8_t)s->imm1;
+>          d = ext0f3a_table[b].to_mem ? DstMem | SrcReg : DstReg | SrcMem;
+>          if ( ext0f3a_table[b].two_op )
+>              d |= TwoOp;
+> @@ -1814,6 +1826,7 @@ int x86emul_decode(struct x86_emulate_state *s,
+>          break;
+>  
+>      case ext_8f08:
+> +        s->imm1 = (uint8_t)s->imm1;
+>          d = DstReg | SrcMem;
+>          if ( ext8f08_table[b].two_op )
+>              d |= TwoOp;
+
+All of these three may benefit from having a brief comment added, e.g.
+"All immediates in this encoding space are unsigned ones."
+
+Also, just to mention - in the APX series, where I've done the respective
+adjustments already, I've deliberately avoided the use of casts. "&= 0xff"
+is shorter, and avoiding casts is generally a worthwhile goal imo.
+
+> --- a/xen/arch/x86/x86_emulate/x86_emulate.c
+> +++ b/xen/arch/x86/x86_emulate/x86_emulate.c
+> @@ -2505,7 +2505,7 @@ x86_emulate(
+>  
+>      case 0xd4: /* aam */
+>      case 0xd5: /* aad */
+> -        n = (uint8_t)src.val;
+> +        n = src.val;
+>          if ( b & 0x01 )
+>              _regs.ax = (uint8_t)(_regs.al + (_regs.ah * n));
+>          else
+> @@ -2561,7 +2561,7 @@ x86_emulate(
+>      case 0xed: /* in %dx,%eax */
+>      case 0xee: /* out %al,%dx */
+>      case 0xef: /* out %eax,%dx */ {
+> -        unsigned int port = ((b < 0xe8) ? (uint8_t)src.val : _regs.dx);
+> +        unsigned int port = ((b < 0xe8) ? src.val : _regs.dx);
+>  
+>          op_bytes = !(b & 1) ? 1 : (op_bytes == 8) ? 4 : op_bytes;
+>          if ( (rc = ioport_access_check(port, op_bytes, ctxt, ops)) != 0 )
+
+How about an ASSERT() each, to make sure the handling doesn't break again?
+
+Jan
 
