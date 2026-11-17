@@ -2,51 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0052D606A32C
-	for <xen-devel@archiver.kernel.org>; Tue, 17 Nov 2026 16:02:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E5A9B606A31C
+	for <xen-devel@archiver.kernel.org>; Tue, 17 Nov 2026 16:34:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=SG5D/TY7
-Received: from list by lists.xenproject.org with outflank-mailman.1492862.1693110 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=APUPzylW
+Received: from list by lists.xenproject.org with outflank-mailman.1492894.1693142 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTLd2-0000rb-BR; Tue, 17 Nov 2026 16:01:52 +0000
+	id 1xTM8J-0006EQ-V3; Tue, 17 Nov 2026 16:34:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1492862.1693110; Tue, 17 Nov 2026 16:01:52 +0000
+Received: by outflank-mailman (output) from mailman id 1492894.1693142; Tue, 17 Nov 2026 16:34:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTLd2-0000rT-7P; Tue, 17 Nov 2026 16:01:52 +0000
-Received: by outflank-mailman (input) for mailman id 1492862;
- Tue, 17 Nov 2026 16:01:50 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1ea3e29060006d3f@swg.vates.tech>)
- id 1xTLd0-0000rN-Hn
- for xen-devel@lists.xenproject.org; Tue, 17 Nov 2026 16:01:50 +0000
+	id 1xTM8J-0006EJ-SI; Tue, 17 Nov 2026 16:34:11 +0000
+Received: by outflank-mailman (input) for mailman id 1492894;
+ Tue, 17 Nov 2026 16:34:10 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <olekstysh@gmail.com>) id 1xTM8I-0006Dj-GX
+ for xen-devel@lists.xenproject.org; Tue, 17 Nov 2026 16:34:10 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xTLcz-001eA2-NS
- for xen-devel@lists.xenproject.org; Tue, 17 Nov 2026 17:01:49 +0100
-Received: from [10.42.69.5] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1ea3e29060006d3f@swg.vates.tech>)
- id 6afc7a67-bab6-0a2a0a5309dd-0a2a4505e23c-16
- for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 17:01:49 +0100
-Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1ea3e29060006d3f@swg.vates.tech>)
- id 6afc7a6c-4cb1-0a2a45050019-b9ff1c238b19-3
- for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 17:01:49 +0100
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a1ea3e29060006d3f.001 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Tue, 17 Nov 2026 16:01:44 +0000
-Received: from [192.168.1.52] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
- [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
- by mail2.vates.fr (Postfix) with ESMTPSA id 030AF80A39
- for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 17:01:43 +0100 (CET)
+ id 1xTM8H-00Ct9M-TG
+ for xen-devel@lists.xenproject.org; Tue, 17 Nov 2026 17:34:09 +0100
+Received: from [10.42.69.4] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <olekstysh@gmail.com>)
+ id 6afc81e0-2eae-0a2a0a5409dd-0a2a4504d9e0-44
+ for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 17:34:09 +0100
+Received: from [209.85.208.181] (helo=mail-lj1-f181.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <olekstysh@gmail.com>)
+ id 6afc8201-b57f-0a2a45040019-d155d0b5e5c1-3
+ for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 17:34:09 +0100
+Received: by mail-lj1-f181.google.com with SMTP id
+ 38308e7fff4ca-3adfe77d336so713721fa.1
+ for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 08:34:09 -0800 (PST)
+Received: from [192.168.0.114] ([91.123.151.27])
+ by smtp.gmail.com with ESMTPSA id
+ 38308e7fff4ca-3ae2b4b1f68sm39877221fa.0.2026.11.17.08.34.06
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 17 Nov 2026 08:34:08 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -55,129 +50,130 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=vxqcjKMo4hpA0S37DUP4N+mY0v3Ab2sYYiFEJW2if7w=;
- h=from:subject:date:message-id:to:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
- b=SG5D/TY72mfgi3Mo0b5hGOT5+dvt8UU0n9MIsJ+PyBv+d+Zhm1tswfo18QOphNKBUUw9sLKe5
- Obw7eRr47Um92QlIXmNbcLmPQCWFYjxMUtH6tW0U1/FrVh6l3NT5iHXwJkBQzp69oYvLnuxTwCA
- J2UcqmIQkF8qJOBocYWusNo8BiDGx+uiahzvSU/eT2c18Qz/MBkQ0fYQGsY3xbwDVJsBJJwDvHh
- Yu98fCpHnsicAlpN/k3fWCbsqrp0Ews1GUTpLxSG9/rKdZHQ+6tewltn6Qhivok7geu6lgbP50c
- g5CWT3nxDEcTytlOQbfzc2y7ovqcnLiEf73WPc8SSP7w==
-X-Zone-Loop: 103598a72081e4bb43f45b756cf22867516fac7b731a
-x-campaign-type: default
-x-transaction-id: 38bb769d-4794-4174-95c1-45ce15403429
-x-swg-uid: 01-399ecc24-24ef-4522-b1da-ac87ac25cf9a
-X-Mailer: Sweego
-Message-ID:
- <1794931304.8631fc262581453bbf619ec5b2062170.1a1ea3e29060006d3f@vates.tech>
-x-swg-bid: 1794931304.8631fc262581453bbf619ec5b2062170.1a1ea3e29060006d3f
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-Date: Tue, 17 Nov 2026 17:01:43 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1794933249; x=1795538049; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=b4Mfy5RdLzTmhxN9VcE97uJlnIaWhvHDR3ofzo8USlE=;
+        b=APUPzylW+k8kT7aT3kh2ihw6DtPocOl4LVm8KS0281/o2nP6dcc1b7p7MWnpqiLtId
+         TaVvJjjG92BZSac97g4uSajTxH3udWsQocsiks4OlVgZDmXTLJTJdO7SbqALLhJZS6o3
+         PzmIBeQfM/nctAlyXnjzStr8NEX8sVZsXqx5s5qHNUDtqVG9d86heKieJeyYrxU6Swvx
+         JUGdpW5TnfE9ckz2xHFH8TmDhadiw2taLHPl6eMKqB66UJCoEOtfsypK+3O3lR17rJ09
+         ftXLa+7NXv5fhFYtTP5/KJaXD1L607Lsaadws1J55umxVruJ/hZtnxSipZrd0y4sKFo8
+         MFfw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794933249; x=1795538049;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=b4Mfy5RdLzTmhxN9VcE97uJlnIaWhvHDR3ofzo8USlE=;
+        b=08LiMmegnHEGc2DOooSWWM31caH7IUHELmY/v24KS6AkwyYxKeW3NkPcYaclwUJvVt
+         yvtmY0YAFE22tiARzp8t1vll338L5VTJYvpCGtEQOvKoyZ/QU4O/hbkD0d9sH/uiiwRy
+         sS49WIePXvPhHNeX95fpPeNxZ5wR63wDl2OJMEk619v+CGDUxWOPXwh7G4RpM/abed1v
+         V7Gs94xJUmQufsKXSB0wmcpcnqV1WqOAvhh5amzHaIhDG3iVAKHCs82B5C+88A6I9QRP
+         6Z7rsPmkVRSb+XBGPsmhXRQtRtMMWGicwKGN70t91KkP7Xnmoxhen1BlIqoBByg0G6j1
+         vX/g==
+X-Forwarded-Encrypted: i=1; AL+hErEY+U+i0mzo69CTU1A3Ft+eqzgtu1SI1wweGdBv+//RnGsNbM5VSTUvzyCphTnNq6CslM74/xAH2eg=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z/MjGykAalFshqtO49TT38/BjqwATBvloDoKkis198tCXpZwMDX
+	JM6X4CjciT5OZaL2ySGHzOhcAoA3S2+w0aqZj3nmy4GKaRbKqwHsVFQu
+X-Gm-Gg: AYBFou1e/ev+NBWFCt4JbU+W8A2bg/9nnnwcVAIpv28ZJIn+3e8IOwVQwiAtZAMURHN
+	1slq652WOwz8vxg92WFjpUjqNb30M1YHhsUoaExE44MdYm2u9zchvNKs/6wEVnNbnvH8ZHTN2Ut
+	lKFDyJv95LUflzVir9wfYaiiNgrjblpFV4fMeurq2ptgbUZSLdmcdKa3o9t6ys8Vzhz8GJ1cEFa
+	qhLQEUomwMyPLuZ6vVLxicxhvZrBIR5Xz46CskDLm/iAhNrYFwRd9WulK3CFGCqJn3BTjbPlQXB
+	561VWg626ZEdYif/+E/D5Pk9lPBbrp2pu96Etl9GPw5n2HmtQNUj6ni6lQsFyrBtjdlHhQZd18s
+	U1f2NVAvM+sBEEAgseMhBSAy2srDVjcr3KNlbjlEx1WBjGhsfpS+AxU4sumrlY2KrygmmVmXvk4
+	QTlvQAuz7yd/zs1P3uj0gmc+7/CSjX+X9um0d08wbjccviml4mtRNJWB9mY2wZkoA5izz1JjwlA
+	MKFVQ6VzA7Pf6+xcZXEftzIc7o+Kge5HP0q/jGtj7taThqRXS3f7YaijYgmxgUNzYvt3bpj9Pmo
+	EszgXvAEYBFsZTWs6nU1uLOR6I46FbI=
+X-Received: by 2002:a05:651c:1b0f:b0:3ac:e26b:d9cc with SMTP id 38308e7fff4ca-3ae2b4f84b8mr49851341fa.23.1794933248950;
+        Tue, 17 Nov 2026 08:34:08 -0800 (PST)
+Message-ID: <57aa4eef-5af7-4ae8-9be3-84671ded2d12@gmail.com>
+Date: Tue, 17 Nov 2026 18:34:06 +0200
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/riscv: sbi: fix kernel-doc parameter annotations
-To: xen-devel@lists.xenproject.org
-References: <20261117-riscv-kernel-doc-fix-v1-1-bc0a19f24cfa@baylibre.com>
-From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-Content-Language: en-US
-Autocrypt: addr=baptiste.le-duc@vates.tech; keydata=
- xsBNBGoPSX8BCADSuTikqW3FD4mscQugY1thRaKlIhcJ2G9YCWYXAlp+xosvTlzfIftOZZim
- 750MLvyKtLPkQzB6TZtFZBiexSraaF/MdDKRTT5DcVa3r7ZnHgqMclWlPa4ioysS4yFcJanL
- cyNOT7HUFvIdirMMqiViedfYtS0GORPBBPVISD6ClMz3ecHIxqllfq9CHYQn4amKEfHmh6tm
- Rufo4Gjl6x8cUFZZlRQf+aCmUzdSPA0P5u3sueYH1uEz4w/jbD53MlKqzCvxUeOsfS2swTQA
- 6mS9jIgOjNadpUTOzKfDHMgFirtG+HFpm45Nwp6KQizxgDVOfTnOfVHm5Gwqm3ETl9y5ABEB
- AAHNPEJhcHRpc3RlIExlIER1YyAoVmF0ZXMgWXViaWtleSkgPGJhcHRpc3RlLmxlLWR1Y0B2
- YXRlcy50ZWNoPsLAjgQTAQoAOBYhBGiSJ6HgW88MgT/gfu2Cu2XL9M6QBQJqD0l/AhsDBQsJ
- CAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEO2Cu2XL9M6QuMcH/ihiy/Nrxp919AmY0ENnc0NK
- r/2LDvW/hrX4FfbpxAmrGmQ7MU1aQTk0JDbfcsG8OYH6wO5sqnXb1gz50YrEdpfVSbHz5YTZ
- EhDIxE4g7NrvJZh3Qc0m0CAyjYTNHen7J6olVaCMjrOH7uRHUYZ7Pl3am9mZosfLmez/aWJO
- a6ihQxBXHI75brlk1teIURkep2kP7P0Flmfl4cA//saREoTF7GXCtjOSQk/xg8PP0Sswqp5G
- TdJptn3FQn6lAzfz0eFSYqkaoX2c2k1MDa7o+UX9cfGPL8ybMKnYkasLxck6eOWGJWf+YTrm
- ga/r0kBaftmqNDgt5nI2jNTDwZcT9g3OwE0Eag9JfwEIAM6IWbuBSvz+erv27oGDDpo8M6Fp
- dGUvft7v+WceHUfxiXpYFx9qgIU6XGy6y+3lJMAvNcltS8DuhioqMlfKRSYGKZlpliY65dNP
- 557IuM4ctVJ+I9CVclvv9eahARQKgF5auLJAAlvGSmU+ufNvlwTUmLIRcrPviTmB6X5jJYc+
- fiNeyI0HcsgcN21C0r62tUCypuZ+vgEJXw2bx1V8mVGZKxdGJPh58QF6kRK+xmd4kEComLGV
- BeM6BcVOtEjDcGNC0tLhXb0p9g1Ys55iA8sd6s4WacyolW2J6rwmcOkjiWexWw1caYgIWAV1
- 004M3gwUaOz0dGq2i7HQ0AiVfVkAEQEAAcLAdgQYAQoAIBYhBGiSJ6HgW88MgT/gfu2Cu2XL
- 9M6QBQJqD0l/AhsMAAoJEO2Cu2XL9M6QovYH/RjstyL5o/V5K74ylBtz0j5t3pLX5JKbwApi
- 656rGgDdqElImyvvZppNMl/mgHNzvxmfFAhJXnSX9f1fqVEQKOGEhLUastnl/ssBiE5x7btM
- V0GAffxXbXJZbVv4b/DI+gVrOPc2YXlVwruapvTZNtD3hqPrkjrmq5WTtGR2loIVSe62hmh0
- BGD2Fy79b/hYWyBqhayPBEjwGW75u4/yn+Yqy1PgG3hIcvg7GSuT3akhHZSB2Mbguzcoyf9Q
- DJl6t33JxPRkkNrEdkPPmRlQCTSiUkVjKqMDF3jlINWsJ5t4jKFsNF91ksdw7aQgiX+tQIpE
- ugMC1NuNi5dDGip66bw=
-In-Reply-To: <20261117-riscv-kernel-doc-fix-v1-1-bc0a19f24cfa@baylibre.com>
+Subject: Re: [PATCH v1 1/2] pci/rcar: Rename PCI host rcar4 to rcar
+To: Mykyta Poturai <Mykyta_Poturai@epam.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+References: <cover.1794817300.git.mykyta_poturai@epam.com>
+ <350d08bb0f494f96c02cedc4fa5e40673d512236.1794817300.git.mykyta_poturai@epam.com>
+Content-Language: ru
+From: Oleksandr Tyshchenko <olekstysh@gmail.com>
+In-Reply-To: <350d08bb0f494f96c02cedc4fa5e40673d512236.1794817300.git.mykyta_poturai@epam.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1794931304056
-X-purgate-ID: tlsNG-c201ff/1794931309-F62AB2A1-CFB3CA82/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-ebf023/1794933249-C08D9B50-77C72539/0/0
 X-purgate-type: clean
-X-purgate-size: 2279
-X-Spam-Status: No, score=-14.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FORGED_MUA_MOZILLA,
+X-purgate-size: 1838
+X-Spam-Status: No, score=-14.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
 	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
 	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Lgtm, thanks!
-Reviewed-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
 
-On 11/17/26 2:52 PM, Hiago De Franco wrote:
-> sbi_remote_sfence_vma() uses @hart_mask, while sbi_remote_hfence_gvma()
-> and sbi_remote_hfence_gvma_vmid() uses @cpu_mask without the @param
-> prefix. Fix and make all three consistent.
-> 
-> No functional change.
-> 
-> Signed-off-by: Hiago De Franco <hfranco@baylibre.com>
-> ---
->   xen/arch/riscv/include/asm/sbi.h | 6 +++---
->   1 file changed, 3 insertions(+), 3 deletions(-)
-> 
-> diff --git a/xen/arch/riscv/include/asm/sbi.h b/xen/arch/riscv/include/asm/sbi.h
-> index 2a245d0b42..c585845907 100644
-> --- a/xen/arch/riscv/include/asm/sbi.h
-> +++ b/xen/arch/riscv/include/asm/sbi.h
-> @@ -99,7 +99,7 @@ bool sbi_has_rfence(void);
->    * Returns 0 if IPI was sent to all the targeted harts successfully
->    * or negative value if start_addr or size is not valid.
->    *
-> - * @hart_mask a cpu mask containing all the target harts.
-> + * @param cpu_mask a cpu mask containing all the target CPUs (in Xen space).
->    * @param start virtual address start
->    * @param size virtual address range size
->    */
-> @@ -118,7 +118,7 @@ int sbi_remote_sfence_vma(const cpumask_t *cpu_mask, vaddr_t start,
->    *  - start_addr and size are both 0, or
->    *  - size is equal to 2^XLEN-1.
->    *
-> - * @cpu_mask a cpu mask containing all the target CPUs (in Xen space).
-> + * @param cpu_mask a cpu mask containing all the target CPUs (in Xen space).
->    * @param start virtual address start
->    * @param size virtual address range size
->    */
-> @@ -130,7 +130,7 @@ int sbi_remote_hfence_gvma(const cpumask_t *cpu_mask, vaddr_t start,
->    * instructions, covering the range of guest physical addresses
->    * in [start_addr, start_addr + size) only for the given VMID.
->    *
-> - * @cpu_mask a cpu mask containing all the target CPUs (in Xen space).
-> + * @param cpu_mask a cpu mask containing all the target CPUs (in Xen space).
->    * @param start virtual address start
->    * @param size virtual address range size
->    * @param vmid virtual machine id
-> 
-> ---
-> base-commit: aa6070d2c840301bceae28763d20a32c48f0d3e4
-> change-id: 20261117-riscv-kernel-doc-fix-39926007bff4
-> 
-> Best regards,
-> --
-> Hiago
 
+16.11.2026 10:40, Mykyta Poturai пишет:
+
+Hello Mykyta
+
+> Gen5 mostly reuses the same DesignWare integration and register layout
+> as Gen4, so one driver covers both. Drop the generation number from the
+> file and symbol names.
+
+NIT: But rcar4_pcie_osid_*, rcar4_pcie_bdf_msk_set, struct 
+rcar4_pcie_priv, etc keep the generation number. Yes, the reason (the 
+registers exist only on Gen4) is mentioned in cover letter, but this 
+will not be committed to git history. I would add a sentence in the 
+patch description.
+
+
+> 
+> Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
+> ---
+>   MAINTAINERS                                   |  2 +-
+>   xen/arch/arm/pci/Makefile                     |  2 +-
+>   .../pci/{pci-host-rcar4.c => pci-host-rcar.c} | 32 +++++++++----------
+>   .../pci/{pci-host-rcar4.h => pci-host-rcar.h} |  6 ++--
+>   xen/drivers/passthrough/arm/ipmmu-vmsa.c      |  2 +-
+>   5 files changed, 22 insertions(+), 22 deletions(-)
+>   rename xen/arch/arm/pci/{pci-host-rcar4.c => pci-host-rcar.c} (88%)
+>   rename xen/arch/arm/pci/{pci-host-rcar4.h => pci-host-rcar.h} (88%)
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index b804434d52..68b47adf81 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -504,7 +504,7 @@ T:	git https://xenbits.xenproject.org/git-http/qemu-xen.git
+>   RCAR PCI
+>   M:	Mykyta Poturai <mykyta_poturai@epam.com>
+>   S:	Supported
+> -F:	xen/arch/arm/pci/pci-host-rcar4.c
+> +F:	xen/arch/arm/pci/pci-host-rcar.c
+
+Remark: pci-host-rcar.h is not covered by the RCAR PCI entry. Yes, this 
+is pre-existing and not caused by the rename, I thought the line was 
+edited anyway, so it would be a cheap addition.
+
+I did not find any issues with current patch.
+
+Reviewed-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+
+>   
+...
+
+[snip]
 
