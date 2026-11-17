@@ -2,45 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 74F9E606A894
-	for <xen-devel@archiver.kernel.org>; Tue, 17 Nov 2026 08:41:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 23756606A881
+	for <xen-devel@archiver.kernel.org>; Tue, 17 Nov 2026 08:44:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=Z9ixtV+h
-Received: from list by lists.xenproject.org with outflank-mailman.1492040.1692717 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=amutable-com.20260707.gappssmtp.com header.i=@amutable-com.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=bj9iZDWz
+Received: from list by lists.xenproject.org with outflank-mailman.1492052.1692727 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTEkE-0007so-Ey; Tue, 17 Nov 2026 08:40:50 +0000
+	id 1xTEo2-0000Gn-4I; Tue, 17 Nov 2026 08:44:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1492040.1692717; Tue, 17 Nov 2026 08:40:50 +0000
+Received: by outflank-mailman (output) from mailman id 1492052.1692727; Tue, 17 Nov 2026 08:44:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTEkE-0007sg-CF; Tue, 17 Nov 2026 08:40:50 +0000
-Received: by outflank-mailman (input) for mailman id 1492040;
- Tue, 17 Nov 2026 08:40:49 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xTEkD-0007sY-5u
- for xen-devel@lists.xenproject.org; Tue, 17 Nov 2026 08:40:49 +0000
+	id 1xTEo2-0000Gg-1c; Tue, 17 Nov 2026 08:44:46 +0000
+Received: by outflank-mailman (input) for mailman id 1492052;
+ Tue, 17 Nov 2026 08:44:44 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <alex@amutable.com>) id 1xTEo0-0000GZ-OP
+ for xen-devel@lists.xenproject.org; Tue, 17 Nov 2026 08:44:44 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xTEkC-00GDvN-AK
- for xen-devel@lists.xenproject.org; Tue, 17 Nov 2026 09:40:48 +0100
-Received: from [10.42.69.2] (helo=localhost)
+ id 1xTEo0-009Yed-0k
+ for xen-devel@lists.xenproject.org; Tue, 17 Nov 2026 09:44:44 +0100
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6afc12fe-e002-0a2a0a5209dd-0a2a4502b7f8-46
- for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 09:40:48 +0100
-Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6afc1310-6ca4-0a2a45020019-d155802be546-3
- for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 09:40:48 +0100
-Received: by mail-wm1-f43.google.com with SMTP id
- 5b1f17b1804b1-4a207b02a2cso26004245e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 00:40:48 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb78422d2dsm76281845e9.10.2026.11.17.00.40.46
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 17 Nov 2026 00:40:47 -0800 (PST)
+ (envelope-from <alex@amutable.com>)
+ id 6afc13f4-bab6-0a2a0a5309dd-0a2a4505a4c6-6
+ for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 09:44:43 +0100
+Received: from [209.85.221.48] (helo=mail-wr1-f48.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <alex@amutable.com>)
+ id 6afc13f9-4cb1-0a2a45050019-d155dd30cdc8-3
+ for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 09:44:41 +0100
+Received: by mail-wr1-f48.google.com with SMTP id
+ ffacd0b85a97d-48dfc0421d9so3880506f8f.1
+ for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 00:44:41 -0800 (PST)
+Received: from ?IPv6:2003:cf:572c:2800:de4c:6789:33ce:97c2?
+ (p200300cf572c2800de4c678933ce97c2.dip0.t-ipconnect.de.
+ [2003:cf:572c:2800:de4c:6789:33ce:97c2])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-49d673ce75fsm19982260f8f.55.2026.11.17.00.44.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 17 Nov 2026 00:44:40 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,144 +52,253 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=amutable-com.20260707.gappssmtp.com header.i="@amutable-com.20260707.gappssmtp.com" header.h="MIME-Version:User-Agent:Content-Transfer-Encoding:Content-Type:References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1794904848; x=1795509648; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=kN6K6PN/jF+zdARGuEFTXGQaHJosBgB/D4PSv/RWkSg=;
-        b=Z9ixtV+hIReLAvVNuBoqFFfN08LzJ8HvViyMenC2EUvqhXgPg8TlVzf7QIyix3Ojj3
-         nC9Pw2wxSaE/cS4IVk8CVq4ldNs+p8qU9EQo0Ky+3okSk4gLWlRV4uca1eVSsOXezQf2
-         l7a3YPKY9/QW9felxgSEsBNdcITG7SQN/pq2i4VWPTXZYWBgvF1HRCaLA3/kugTWUVp0
-         nGN5O6n7TdXz7EqS3+FhDbWySUGfnM5sGReYsS2N3APS7QoxscdRQ5Ht0y68bkTTUmsl
-         RYjgBbzNoNASSlK2cP7smQ+ja/+QEI0AH5MEIRbdESeSqCNhNSJf/hRYWOmPUGHhfmNE
-         xtHA==
+        d=amutable-com.20260707.gappssmtp.com; s=20260707; t=1794905081; x=1795509881; darn=lists.xenproject.org;
+        h=mime-version:user-agent:content-transfer-encoding:content-type
+         :references:in-reply-to:date:cc:to:from:subject:message-id:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=YtgOPMlBsDbDRTTami0iaeC2PfdAlPMUJ3BhZBWqnDY=;
+        b=bj9iZDWzWcE8rFAq+m00a48/ApfTEpKk9VCOWmvnTCDYW0gg+QhAivs6nEVnI+en0n
+         liNAGcrzZ2MKxtETeyPYr3hN8wemQlGkjzzKoi7mJe91gN1BMd/sqdhLCK6zBxoMLUbi
+         PIAPIe1aUSlhZryLduMprIRg1rR4n26JcO4DJdhNtM1bH5Mo29tm9J8LjxOSuQEx+JvP
+         Wc8iixPJ495WzQEj78hmNEB6rQQckjt/KWUgI1z++Wjl9LFvaGi747Ehd+ySeaiqVzlR
+         TH6lho/N2kQe70nxI2/TKngkTt+/AxoGDbC3KAIjoK3zBMRMb6AOLGIioOW0Wsr8wies
+         UeMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794904848; x=1795509648;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=kN6K6PN/jF+zdARGuEFTXGQaHJosBgB/D4PSv/RWkSg=;
-        b=JMoANTox5ZZ6kmoD34XaZQWs8v/l4pM5sumJw9LW3s5hQK1lAgMWCGCyQcBDHlASoF
-         IjhWKu/WKPQmdoe3mZnSsEkJhpYRisWkCVqZKGNayhXHpAjZDd/aNPRmjuWcD0q+V4S2
-         SO/kBAWHqVka08CyTdI88N3YDQGQrsjVbh4liAnBGgIdf/jwHql1yVlaVXfgP/yKeZMs
-         wtwnysiO6Wp0Mv/8W0853gtoWVu6CIZCL3I8kyf1es7Nu+ATxNke9RZuI/Z/pt9dp40T
-         nSI9OVDyG4MD4gVmA+znSpMNtXYuGvxR9F+Vnldv14Nf/RY5dBDAUCljAipqazxQQAP3
-         FVVg==
-X-Gm-Message-State: APuU4Z/gjYbjtud6tLOqqWVDgKeQ+VeeHMhDnqqq5jw/jhhImioKE3EB
-	V1vIjHGrvgf6qdHxA94cvGo4iP8UZjQOho3jmXQWtRwhz68KBhPBNWCNpk3g3G/DAg==
-X-Gm-Gg: AYBFou0mzqQ7124mdi1SQ/u0gQSkVqPqtjelz2wNgbUtGELbUkdz6vVzYU5CT5qcz5J
-	KR21Eiw/3Ifsiispfg/LoOzwnOquBMYbDKN55LMEbEe12tG0QauPwqt0KsVuR8O3nLYEzXw83Gr
-	tbp1VgswuXJp8ITece2FxOKvBL75fYBcTefJJNhmudnlDw+6pK5JmZ97D8TykdH0vVm6qgAAkxi
-	iZeBKU+zELQOu01VuU580w806qN8IuFen4HMufTmdAtfQKHkyFasyo0Rb7SAxWfwp8fvCA5849a
-	CiRycm8i55W1YgNffz8SlIBNEDG8gIxRXfua2OOta5YJ+iSYMLtjT0VxYI0xmGB8WxCUoH0Ntag
-	hXZfJT98nrimFIi/SRkc9u8VwnMr5mBeKeS92LQFMHLNA54yE3u9lxhe759T48NO7+zLxGGjq9i
-	nUaEEU0YcCm3qCLXHDDBFll7JUKhTRxBv5Z8jMYzkzrzO35F+ZFnqrZNHWgRekj/lm8Zp3Ta9eM
-	8TPGBUrgQye8+QUQij36+H6lF0eKoV27vjZxcfJbHIX6aXyWiLomLJyq2fL2kA97Ylc9EN12+8p
-	wnRYoOhtEwZSqvpvys3smm5LhB/6i8braysniobjneYEekibX0w1uZwWnwc2VKJsK9p8uHkghBy
-	ZrYXyaw50GZsD1HHvhj8=
-X-Received: by 2002:a05:600c:1d0e:b0:4a1:825a:56fd with SMTP id 5b1f17b1804b1-4bb55aa28e9mr285284225e9.32.1794904847649;
-        Tue, 17 Nov 2026 00:40:47 -0800 (PST)
-Message-ID: <fbab32d4-fb1d-40da-a83f-05539489b876@suse.com>
-Date: Tue, 17 Nov 2026 09:40:46 +0100
+        d=1e100.net; s=20260707; t=1794905081; x=1795509881;
+        h=mime-version:user-agent:content-transfer-encoding:content-type
+         :references:in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=YtgOPMlBsDbDRTTami0iaeC2PfdAlPMUJ3BhZBWqnDY=;
+        b=qX8XS3Swx2nvOlvikiU+ebiEvAG/6++XpvChiiCZp3Q5L3TuNOYNvFq4YY5OZ15aRc
+         6FFjpyIMtowmuU+e+kL1vwyTZqdNjZiNP7UYAUsDEdaV8klU3fmGlTxf+wSsdEQ5r858
+         Ld1MjzrwBfsZ3jVyxK69PpasdU43ygEIBFdWWfcwujk/nVAAVBck0diizPb6VxiyL4y9
+         vi3owSm0eswIdPrc5t1ed9vx5NO25mxn9A/Dg+n52S5gChOteH4jZJEHwiM98sV4hgUT
+         1IjZkFvOj2rcs6Gpxt2irrXWF6cU8TM3L4xwKbHl9/eT/bYUmz+W3Na+c7JMDYopgxMR
+         xT4w==
+X-Forwarded-Encrypted: i=1; AL+hErEgQCwWp5qetDrEigLIPLrdLKdDek5WKaPnOntKsvYgTSoBWNyEInIecbtD5k74nRO24WPOMsKefqM=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z8meLwv5MiVCkDiUkWN8y/dg3xg6+c6GbTx2CeWS9D3sP1iDX0X
+	gutjxbSNNDAwGLA7yUp0D36Xrs9q+L9qbdrOmnFgKQljsXGraO/ksz0vi0/h1CMcXbam
+X-Gm-Gg: AZFdTZfVzIgsRce4DSKnXz8rhMH6Yuz2hBym+YOs5Ti/gUVvQNCV/q+KWs/vRI3Ftne
+	kINPItRyBWhNopBm373i1B/UzgSwjr0nY6OBFTNH92oZb4tkTfQ8tmlMHFiiSf/2OuA4WdUBPBc
+	e4KHJLjFtppVKv74bJSjBHe7si0HEi2fWjH/58lcfFqs4jAhbSx/Dc5luzpjZHQsmN0/ZRis55J
+	5X8dxBqT0Z45egzRiULb1wCecVovHY53V6VVhyFAIEiDPSkmNMsAFUW4k/Xk07pHnIGV1SJa0Ii
+	SyqI0+JjIZZAj85A3ucJlaW2VZjY08O/KkrNz07WZkKgNuNcj2NcIk7LfVe44aT4TjjzHAyWPen
+	TDoZqd7EHE5isI54ai2vgGLRtotJGZunzyO9jSwO+FXksnFUPhw3a1nT1BX2CWP84kyka0b7vp5
+	bUwXNs0411up8h34cNHrdD6pVtW1UieSqcHKxfQ0xyRz3bRqmA7OYDAqaJkFpwGnV/buHnOChYm
+	twVzfQuNezW6/ZCnDD1Ex5zMsJaNxkgcBzHZV0/9nnrY8caOsEGeg2+9ISHTxvlWHoH56s6//de
+	6FKS+S4wqnGdBMbA811ZWas0boV6WLL3NAdNirfyKxAe43rM1mQ8eHjhoKZGPQYUbCoB9N067Lr
+	gJCi6a7cPRurIdibAJr5SxNX/yXhYBZBMVOwnySmkcgcRjPpLSTZt6tU7OLopqYFShllSNuBIG3
+	QEuw==
+X-Received: by 2002:a05:6000:2411:b0:48f:f26d:c5c with SMTP id ffacd0b85a97d-49c70b051d1mr27471178f8f.9.1794905081269;
+        Tue, 17 Nov 2026 00:44:41 -0800 (PST)
+Message-ID: <d18a972cfc6a7d6da39ab9674903d7ae6e4c1826.camel@amutable.com>
+Subject: Re: [PATCH RFC v3 35/44] fs: add file_check_backing()
+From: Alexander Mikhalitsyn <alex@amutable.com>
+To: Christian Brauner <brauner@kernel.org>, linux-fsdevel@vger.kernel.org
+Cc: Jann Horn <jannh@google.com>, Chris Mason <mason@kernel.org>, Josef
+ Bacik	 <josef@toxicpanda.com>, Christoph Hellwig <hch@lst.de>, 
+	linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-nvme@lists.infradead.org, Alexander Viro <viro@zeniv.linux.org.uk>,
+ Jan Kara <jack@suse.cz>, linux-scsi@vger.kernel.org,
+ target-devel@vger.kernel.org, 	driver-core@lists.linux.dev,
+ linux-mm@kvack.org, bpf@vger.kernel.org, 
+	linux-security-module@vger.kernel.org, selinux@vger.kernel.org, 
+	apparmor@lists.ubuntu.com, linux-nfs@vger.kernel.org,
+ netdev@vger.kernel.org, 	fuse-devel@lists.linux.dev,
+ linux-efi@vger.kernel.org, 	xen-devel@lists.xenproject.org,
+ ocfs2-devel@lists.linux.dev, 	linux-s390@vger.kernel.org,
+ linuxppc-dev@lists.ozlabs.org, 	linux-usb@vger.kernel.org, Amir Goldstein
+ <amir73il@gmail.com>, 	linux-erofs@lists.ozlabs.org,
+ linux-kselftest@vger.kernel.org
+Date: Tue, 17 Nov 2026 09:44:39 +0100
+In-Reply-To: <20261116-work-loop-pseudo-v3-35-8cbbea1cf34f@kernel.org>
+References: <20261116-work-loop-pseudo-v3-0-8cbbea1cf34f@kernel.org>
+	 <20261116-work-loop-pseudo-v3-35-8cbbea1cf34f@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.56.2-0+deb13u1 
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/efi: Handle efi_memmap with Xen relocating itself
-To: =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Cc: xen-devel@lists.xenproject.org,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- "Daniel P. Smith" <dpsmith@apertussolutions.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>, Jason Andryuk <jason.andryuk@amd.com>
-References: <20261106231818.482564-1-jason.andryuk@amd.com>
- <avHikdwM2wR-GpON@mail-itl>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <avHikdwM2wR-GpON@mail-itl>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1794904848-F04A62AC-05CD5F06/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 1985
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+X-purgate-ID: tlsNG-c201ff/1794905081-2551A2A1-92322969/0/0
+X-purgate-type: clean
+X-purgate-size: 6251
+X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY autolearn=unavailable autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 09.11.2026 16:11, Marek Marczykowski-Górecki wrote:
-> On Fri, Nov 06, 2026 at 06:18:18PM -0500, Jason Andryuk wrote:
->> With Xen booting via Multiboot2/GRUB on an EFI platform, and modified to
->> use MULTIBOOT2_LOAD_PREFERENCE_LOW, Xen relocates itself with
->> move_xen().
->>
->> However a PVH dom0 shows:
->> kernel: Failed to lookup header 0x77ffd000 in Xen memory map: error -3
->> kernel: ACPI=0x77ffd000
->>
->> ... for all the Xen efi memory map lookups.  Dumping the memory map at
->> runtime showed it was scrubbed.  Because Xen relocated itself, the
->> original physical address referenced through a directmap address goes
->> stale.
->>
->> Add efi_arch_mmap_buffer_virt() to convert from the initial value to an
->> appropriate runtime value.  ARM uses Boot Services AllocatePool(), so it
->> must continue to use DIRECTMAP_VIRT_START.
->>
->> For x86, we use an offset into the loaded Xen binary at the time of the
->> call and add the to XEN_VIRT_START.  ebmalloc() allocates from the Xen
->> image memory, so it moves during relocation.  xen_phys_start is set for
->> xen.efi in efi_exit_boot(), but not for xen.gz, so it cannot be used
->> Use `lea __image_base__(%rip)` to get the current load address, and use
->> that to calculate the offset into the Xen image.  That offset is also
->> valid from XEN_VIRT_START.
->>
->> Fixes: c5b9805bc1f7 ("efi: create new early memory allocator")
->> Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
-> 
-> I did not tested this, but looks correct:
-> Reviewed-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+On Mon, 2026-11-16 at 12:05 +0100, Christian Brauner wrote:
+> Loop, zloop, the nvme target, the scsi target, fuse passthrough, the
+> usb
+> mass storage gadget, erofs and acct all take a file from userspace
+> and
+> use it as storage. Currently, each of them has its own idea of what
+> to
+> check before using a file like that:
+>=20
+> - loop and the gadget check for a regular file or a block device, the
+> =C2=A0 nvme target, the scsi target and zloop take any file type
+> - loop checks the open mode, the gadget checks FMODE_CAN_READ, the
+> nvme
+> =C2=A0 target, the scsi target and zloop only check for ->read_iter() and
+> =C2=A0 ->write_iter()
+> - apart from acct which refuses procfs and sysfs files none of them
+> =C2=A0 cares whether the file is a kernel interface
+>=20
+> Add a helper that does all of it in one place. It only accepts
+> regular
+> files and, if the caller passes S_IFBLK, block devices. It refuses
+> files
+> on pseudo filesystems. And it checks that the file is open for what
+> the
+> caller is going to do with it and implements ->read_iter() for
+> reading
+> and ->write_iter() for writing.
+>=20
+> O_PATH files are refused unless the caller passes FMODE_PATH. That is
+> for callers that only need the path of the file. fuse passthrough is
+> one of them and has accepted O_PATH file descriptors since commit
+> efad7153bf93 ("fuse: allow O_PATH fd for FUSE_DEV_IOC_BACKING_OPEN").
+>=20
+> Block devices are fine even though bdevfs is a pseudo filesystem. A
+> block device that userspace hands in is a device node on devtmpfs or
+> some other filesystem. Files on bdevfs only come from
+> bdev_file_open_by_*() and never end up here.
+>=20
+> The pseudo filesystem check looks at the inode that actually provides
+> the data via d_real_data_inode(). overlayfs accepts sysfs, cgroup2,
+> debugfs, tracefs, configfs and securityfs as lower layers and reads
+> of
+> such an overlayfs file are served by the file on the pseudo
+> filesystem.
+> Checking the overlayfs inode would miss that.
+>=20
+> For an O_PATH file nothing might have looked up the data yet.
+> overlayfs
+> only looks up the data of a metacopy file in a data-only layer when
+> the
+> file is opened. d_real_data_inode() does the lookup then and if that
+> fails we return the error.
+>=20
+> Note that the file type is taken from the inode of the file and not
+> from
+> the host of ->f_mapping like loop and the gadget do it. A driver can
+> point ->f_mapping somewhere else in ->open(). It makes no difference
+> for
+> block devices as both inodes are block devices.
+>=20
+> No functional changes. Nothing calls the helper yet.
+>=20
 
-Subsequent to you supplying this R-b I commented on naming aspects, which
-(after Jason's response) turned into a possible slight functional change
-as well. You're the maintainer, so if you say "commit as-is" I'll do so
-(with just the style issue taken care of), but as this isn't the only
-possible outcome, I'd like to ask for the decision either way to be made
-explicit.
+Reviewed-by: Alexander Mikhalitsyn <alex@amutable.com>
 
-Jan
+> Signed-off-by: Christian Brauner (Amutable) <brauner@kernel.org>
+> ---
+> =C2=A0fs/read_write.c=C2=A0=C2=A0=C2=A0 | 53
+> +++++++++++++++++++++++++++++++++++++++++++++++++++++
+> =C2=A0include/linux/fs.h |=C2=A0 2 ++
+> =C2=A02 files changed, 55 insertions(+)
+>=20
+> diff --git a/fs/read_write.c b/fs/read_write.c
+> index 6767283108991..9f1e7bfcbd4f1 100644
+> --- a/fs/read_write.c
+> +++ b/fs/read_write.c
+> @@ -866,6 +866,59 @@ static ssize_t do_loop_readv_writev(struct file
+> *filp, struct iov_iter *iter,
+> =C2=A0	return ret;
+> =C2=A0}
+> =C2=A0
+> +/**
+> + * file_check_backing - check that the kernel can use a file as
+> storage
+> + * @file: file that userspace handed in
+> + * @mode: FMODE_READ and/or FMODE_WRITE the kernel will do I/O with,
+> or
+> + *=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 FMODE_PATH if only the path=
+ of @file is used
+> + * @type: S_IFBLK if a block device is fine as well, 0 otherwise
+> + *
+> + * Call this where a file from userspace is taken as a backing file.
+> Only
+> + * regular files and, if @type is S_IFBLK, block devices are
+> storage. Files
+> + * on pseudo filesystems are kernel interfaces and are refused. The
+> file
+> + * must be open for @mode and implement ->read_iter() for reading
+> and
+> + * ->write_iter() for writing. O_PATH files are only fine with
+> FMODE_PATH.
+> + *
+> + * Return: 0 on success, -EBADF if @file isn't open for @mode, -
+> EINVAL if it
+> + * can't be used as storage, or the error from looking up the data
+> of @file
+> + * on a stacking filesystem.
+> + */
+> +int file_check_backing(const struct file *file, fmode_t mode,
+> umode_t type)
+> +{
+> +	fmode_t io =3D mode & (FMODE_READ | FMODE_WRITE);
+> +	/* Drivers may point ->f_mapping at something else. */
+> +	umode_t fmt =3D file_inode(file)->i_mode & S_IFMT;
+> +	struct inode *real_inode;
+> +
+> +	/* O_PATH files are only fine for callers that just use the
+> path. */
+> +	if ((file->f_mode & FMODE_PATH) && !(mode & FMODE_PATH))
+> +		return -EBADF;
+> +
+> +	if ((file->f_mode & io) !=3D io)
+> +		return -EBADF;
+> +
+> +	if (fmt !=3D S_IFREG && !(type =3D=3D S_IFBLK && fmt =3D=3D S_IFBLK))
+> +		return -EINVAL;
+> +
+> +	/* Look through stacking filesystems at the inode with the
+> data. */
+> +	real_inode =3D d_real_data_inode(file->f_path.dentry);
+> +	if (IS_ERR(real_inode))
+> +		return PTR_ERR(real_inode);
+> +	if (real_inode->i_sb->s_iflags & SB_I_PSEUDO)
+> +		return -EINVAL;
+> +
+> +	if ((mode & FMODE_READ) &&
+> +	=C2=A0=C2=A0=C2=A0 (!(file->f_mode & FMODE_CAN_READ) || !file->f_op-
+> >read_iter))
+> +		return -EINVAL;
+> +
+> +	if ((mode & FMODE_WRITE) &&
+> +	=C2=A0=C2=A0=C2=A0 (!(file->f_mode & FMODE_CAN_WRITE) || !file->f_op-
+> >write_iter))
+> +		return -EINVAL;
+> +
+> +	return 0;
+> +}
+> +EXPORT_SYMBOL_GPL(file_check_backing);
+> +
+> =C2=A0ssize_t vfs_iocb_iter_read(struct file *file, struct kiocb *iocb,
+> =C2=A0			=C2=A0=C2=A0 struct iov_iter *iter)
+> =C2=A0{
+> diff --git a/include/linux/fs.h b/include/linux/fs.h
+> index 99caef43ff3c4..b1c7ebafbadbe 100644
+> --- a/include/linux/fs.h
+> +++ b/include/linux/fs.h
+> @@ -2553,6 +2553,8 @@ static inline const struct inode
+> *file_user_inode(const struct file *f)
+> =C2=A0	return file_inode(f);
+> =C2=A0}
+> =C2=A0
+> +int file_check_backing(const struct file *file, fmode_t mode,
+> umode_t type);
+> +
+> =C2=A0static inline struct file *file_clone_open(struct file *file)
+> =C2=A0{
+> =C2=A0	return dentry_open(&file->f_path, file->f_flags, file-
+> >f_cred);
 
