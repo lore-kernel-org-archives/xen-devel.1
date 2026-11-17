@@ -2,45 +2,47 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E1344606A31C
-	for <xen-devel@archiver.kernel.org>; Tue, 17 Nov 2026 07:37:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6588D606A323
+	for <xen-devel@archiver.kernel.org>; Tue, 17 Nov 2026 07:39:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=JGLzMprK
-Received: from list by lists.xenproject.org with outflank-mailman.1491902.1692601 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=GhSGByOh
+Received: from list by lists.xenproject.org with outflank-mailman.1491914.1692611 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTDky-0007Bn-51; Tue, 17 Nov 2026 07:37:32 +0000
+	id 1xTDmh-0007y7-Fq; Tue, 17 Nov 2026 07:39:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1491902.1692601; Tue, 17 Nov 2026 07:37:32 +0000
+Received: by outflank-mailman (output) from mailman id 1491914.1692611; Tue, 17 Nov 2026 07:39:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTDky-0007Bg-16; Tue, 17 Nov 2026 07:37:32 +0000
-Received: by outflank-mailman (input) for mailman id 1491902;
- Tue, 17 Nov 2026 07:37:30 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xTDkw-0007AT-Bi
- for xen-devel@lists.xenproject.org; Tue, 17 Nov 2026 07:37:30 +0000
+	id 1xTDmh-0007y0-BK; Tue, 17 Nov 2026 07:39:19 +0000
+Received: by outflank-mailman (input) for mailman id 1491914;
+ Tue, 17 Nov 2026 07:39:17 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <visitorckw@gmail.com>) id 1xTDmf-0007xq-Eb
+ for xen-devel@lists.xenproject.org; Tue, 17 Nov 2026 07:39:17 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xTDkv-00H3si-Gs
- for xen-devel@lists.xenproject.org; Tue, 17 Nov 2026 08:37:29 +0100
-Received: from [10.42.69.10] (helo=localhost)
+ id 1xTDme-009GGz-QF
+ for xen-devel@lists.xenproject.org; Tue, 17 Nov 2026 08:39:16 +0100
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6afc0438-bab6-0a2a0a5309dd-0a2a450aa1b4-4
- for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 08:37:29 +0100
-Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6afc0438-f2d2-0a2a450a0019-d155802ed1d1-3
- for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 08:37:29 +0100
-Received: by mail-wm1-f46.google.com with SMTP id
- 5b1f17b1804b1-4a214c5c4c0so42415015e9.3
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 23:37:29 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb784e9073sm49549815e9.6.2026.11.16.23.37.27
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 16 Nov 2026 23:37:28 -0800 (PST)
+ (envelope-from <visitorckw@gmail.com>)
+ id 6afc0496-2eae-0a2a0a5409dd-0a2a4506bb44-40
+ for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 08:39:16 +0100
+Received: from [74.125.82.45] (helo=mail-dl1-f45.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <visitorckw@gmail.com>)
+ id 6afc04a3-195a-0a2a45060019-4a7d522ddcdf-3
+ for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 08:39:16 +0100
+Received: by mail-dl1-f45.google.com with SMTP id
+ a92af1059eb24-1b3beeaf6f9so5241886c88.0
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 23:39:16 -0800 (PST)
+Received: from visitorckw-work01.c.googlers.com.com
+ (55.11.81.34.bc.googleusercontent.com. [34.81.11.55])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-379563e6b6dsm74356425eec.21.2026.11.16.23.39.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 16 Nov 2026 23:39:12 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,240 +51,158 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1794901048; x=1795505848; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=lK3HnQoDy4/urQHKroF6YXDrqpcm5HrtMp5VZb0Uz7c=;
-        b=JGLzMprKxdpuAC+bpfDMbqs34bPHAZEez8S4T4m6MgeVHU1Ol5Nv7hyj2Sy55yugRp
-         f+OosN6/x7SW/YqrXGbwyeb+uvuqkBksGF8VQe8OMHw3viG6kzqNCBbXWTMXaOZIJOVx
-         Vt1SrA9a7PqiPlluam82AATR7N1uCuBptcLYb3xb7vm3Y1RLnfvsaewydmtppWJ3vqvW
-         glDmFSbcehg7llzarmTDJ6bYIX+7zXKIJRj3+1wtCFiceP3Spt1uRGBcE0/zKm/uT0iz
-         U+udtfRotGtQqOEx3eIMPiHbx/bX6X0XKWoYMntBTVj24JqUvG+lDZs6XBWZgWI3aFQY
-         a51A==
+        d=gmail.com; s=20260707; t=1794901154; x=1795505954; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=+s93m3mNuE5TzrRy6Xqxj2SKWP2Sf3U+Y71j/Vf2uJI=;
+        b=GhSGByOhf4dXPtlTwh7wOcsryM1Upt7IoJo76zCJKuR3dVUZMo/PYICek1Aj55FzpO
+         iexifUEZGw57ep9SlzJWUkGHrGyhO6WaOSlV/oQgNJzCkxdvcoIrySl52mSRYUlO3wDV
+         vGtXTMP71Nr/zfppeeAQ01jcVlVAXYB8pZGFS3MMJlhrVnkpN6KtIdbbamBOaa8klSYj
+         Qz2gqP/sZ1vqFQ7CyME5jRrdRjCsxcsLAddHQBakyPuHh2UnuWxo5ASmFHFS8pjuTRlO
+         36MUZs6wVtycQRJ9rizfFrYxjvHwRv4dtB0NH7SpYhbdIF9Ug6Pmn4dfD8zLpSfKtezn
+         MSLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794901048; x=1795505848;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20260707; t=1794901154; x=1795505954;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=lK3HnQoDy4/urQHKroF6YXDrqpcm5HrtMp5VZb0Uz7c=;
-        b=YWaszwCfJM2BpmX5qJbs0q8bn2NADBTZdEe1NPxh6TicxFYcEd+xrRChxdZxDB5ZB+
-         bYzY66v/CKgdxCnPsRm2RYi0UcVv0PzLv4EJnElhB8XwQrZDdwY7CjuXjbnRdNx2MJ3X
-         xaSGkVlUujIfBQhPs8g8C1MJjW5dEbULdGoDjX/KtXs9Rz+pIzzuY9wfuYGFgIADCCKe
-         cNKgvlPjwyxsl6ERccYQtz2cwqkYlL8wAPstMzam7V50KVl+7ZJniRO87sVMbxWgjT1t
-         ktERSPkd78EJ7fgOuB65PwbLr9No9qmFiQ+yVvSGJOT0OLBjs7Uu8K+7067mJ1e+gmju
-         GmVg==
-X-Forwarded-Encrypted: i=1; AL+hErHLqXRwfyaGs1fPhrfb9zDiK0EV3APjy+6sBD47h2Z58kFZThq/d74wLhdJ6vXRBVJ6/hZjJWsqRXc=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z/YtMsBaACrh+quVCFIwsYUpcjggjLFDn8GljJ6Mk4vtA4Bi78I
-	dJeEtUZuSb5k7vyFBzLM53j/rLZfPHAbncvC+17aFFVQNGBne7jKSb7eg9qIELRVkA==
-X-Gm-Gg: AYBFou0ov1tuTwNQqudohGH1HTYXoKpw0HTNm8ZHTc9ddk7Ops48lUm7s4oz/gjffki
-	4vRTdtIh71SNO4dRnKUdyffiIQwheZRoQAj/YeXPIOELof/je63dmnpDMvOTDgGydn/yMzGQZMw
-	KzsUcaR0niE+9K49yZcYVBLvpRXIFY7FA+ApuUAeV3UFCzXbDxRczc6mzEyoDobsRnD75xz6ehE
-	V6yiDxhc15nOFzx+T46obN/2T/i6fcvqn7bxhFA7fSJO0cvVhSmpSRWJkCDkyyA0aWsGMAaiLqL
-	Div90s13TX++fZBdLKvlg4ecHFBBYnWmLtQMeI+++4itZ63VhuOyONRjvhkfGtFacf2tv/Dz/kA
-	0bqp8S+hKt/rPIZwvDTMefwCDR3HeqxPLRhNYO4bOslRDL5VT3065i8YlK9CRSUDWNAcL7tkb0n
-	/R7uF1AvxoD0QwIV8whBKM5UyO/eszSQUEAzYFvgOZ/poKJVPYc8y00r6/ZErUYaKgzJHpjPEwL
-	AusZqBcYnirW/cluXR9hea8Iv88Loa0iTTw7WRMzJJbwl4GftV3OwL739LiEAO2QfCZd09bR7Mi
-	FtAZPcJs5IQdjPsb8brO3Dn/IjHI3XuIj91bSGMHADMuQLTQHp7NYGTg6L+meXgF3DWab+2MQiM
-	LqM5wHtLVsmGE7NDnUs4=
-X-Received: by 2002:a05:600c:c4a2:b0:4bb:7581:2bb9 with SMTP id 5b1f17b1804b1-4bb75812c05mr84748695e9.22.1794901048478;
-        Mon, 16 Nov 2026 23:37:28 -0800 (PST)
-Message-ID: <a9186c61-c21e-48b1-9fd4-ce2625ac1a83@suse.com>
-Date: Tue, 17 Nov 2026 08:37:27 +0100
+        bh=+s93m3mNuE5TzrRy6Xqxj2SKWP2Sf3U+Y71j/Vf2uJI=;
+        b=wHmD1Awl/5ExHv4U+v++UYoiAEAEpBZIa4/4LZjaZoOQRTlIGLmWcV4ZQvAFQK0oiq
+         WPe5yEfxCEsvBPQGxexfwTm3yPsjjlY32E7uuvMRqGC8vz00h0ppycNSfTxXPi7oYPTu
+         0w99LrT7kvJhut/3yPxz9nqOu2C9c/mTQ0Yw36KwyIk/nSc/tRXw2PEjuPKB5yQ6kLQ1
+         3UVrBVq5xuK7EOzoVOB3UKhN9CKIun0h0cZc3fGtJV0LLJwn/zYJdKtOk/AdZxluWohE
+         infHL0viQK1fz0IS417MONZi+VMyZwYTnQFW3hVVH1ZtUJE0jzbVXPF9Bvf+qwaLHm+/
+         95rg==
+X-Gm-Message-State: APuU4Z93SC3628v3tHMQ3f+07HPWVb3G4jF3ujRBPtz7YMIE/TRwwt/m
+	THZmOpV8VTQ7FAYN60bODww5tOrhhobtE7tg530legTnf6nPw6ZE/d7oYMAcUw==
+X-Gm-Gg: AZFdTZeDZuCVM5exnebwPgzr8Sbn6qqiRfz6CJWc2CX80PC52SWUexc50jZtBqU3yF9
+	OBXetOV0kKWI5dD+XcNDu4gCYim78dvH50uqySm7+A/fg7nloBgIWh48D6QKtG/GEHwSb5FaAQZ
+	9SN20UCRJniWK5224tcSIPa5oq+aTfDv37F+ghOptiExSP7idOxCKHZQtCcr+URPGzExXFDMxYp
+	pBJg5JqSSigpHCDe3fchar78+LEX9UfACik1DMU7mOIgWNAlwDk1+jc62eq6jAhVEOhVm5CPwWm
+	xwJD5BGB4NzRYSaC8EQS1mydGUnM8KmCOvfWd53J+TsaWpfY35m98l5cFRBJR47sIxkiyg56XDF
+	TA4PYdiL7Qb/UJTst3mCt8M/ihXkSoon9qoEhMUVUbUqMAB1vuDzdbXQBGOw43X1pJrJ32YRukV
+	P3NE0WbsOr7XXyszjAEEjLewwAc4l7Vsq7OJe8ZmQ4vSejwZJDWe0sdkXrQdHlT8ED/k9uHYVzB
+	bMG8Y/l/y9GXyWtdx6KJSgnU77eEDy4xmViR0V/deY/8qt9yfB4xcZqt3P48bcV7ApvShbTI6ND
+	QOeAPUZUEU+e4pS2SQrGBNTxXZriK5OvxW9W1/wpyeaKyLer1GbYwKMk5wH3o581OEuvqB7MgY1
+	Wz6unNMaX7dU7MCsJA4miT2JdJrhEkeqdr44FiF+HHJWE
+X-Received: by 2002:a05:693c:8206:b0:36f:f3b7:6dee with SMTP id 5a478bee46e88-37966e3ab88mr14116809eec.7.1794901153433;
+        Mon, 16 Nov 2026 23:39:13 -0800 (PST)
+From: Kuan-Wei Chiu <visitorckw@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: sstabellini@kernel.org,
+	julien@xen.org,
+	bertrand.marquis@arm.com,
+	michal.orzel@amd.com,
+	Volodymyr_Babchuk@epam.com,
+	Kuan-Wei Chiu <visitorckw@gmail.com>
+Subject: [PATCH v2] xen/arm: Preserve host GIC #interrupt-cells for Dom0
+Date: Tue, 17 Nov 2026 07:39:04 +0000
+Message-ID: <20261117073904.2281059-1-visitorckw@gmail.com>
+X-Mailer: git-send-email 2.56.1.703.gf848ed807c-goog
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 2/3] x86/EFI: replace ebmalloc()
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>,
- Marek Marczykowski <marmarek@invisiblethingslab.com>,
- Daniel Smith <dpsmith@apertussolutions.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <640c0ea5-fbbf-436d-b150-4537cbe98fdf@suse.com>
- <2d45d102-e26f-4e93-a213-b02fb685b6ef@suse.com>
- <c31e3a82-ea24-4985-8410-9cda5a9c9681@citrix.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <c31e3a82-ea24-4985-8410-9cda5a9c9681@citrix.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1794901049-506CECFC-1F472CBC/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 5784
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=4.0.1
+X-purgate-ID: tlsNG-16d1c6/1794901156-F500977B-51F637A2/0/0
+X-purgate-type: clean
+X-purgate-size: 3405
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 16.11.2026 19:13, Andrew Cooper wrote:
-> On 03/11/2026 12:50 pm, Jan Beulich wrote:
->> --- a/xen/arch/x86/include/asm/setup.h
->> +++ b/xen/arch/x86/include/asm/setup.h
->> @@ -9,6 +9,8 @@ extern const char __2M_rodata_start[], _
->>  extern char __2M_init_start[], __2M_init_end[];
->>  extern char __2M_rwdata_start[], __2M_rwdata_end[];
->>  
->> +extern unsigned long brk_end;
->> +
->>  extern unsigned long xenheap_initial_phys_start;
->>  extern uint64_t boot_tsc_stamp;
->>  
->> --- a/xen/arch/x86/setup.c
->> +++ b/xen/arch/x86/setup.c
->> @@ -1,6 +1,7 @@
->>  #include <xen/acpi.h>
->>  #include <xen/alternative-call.h>
->>  #include <xen/bitops.h>
->> +#include <xen/brk.h>
->>  #include <xen/console.h>
->>  #include <xen/cpu.h>
->>  #include <xen/cpuidle.h>
->> @@ -164,6 +165,8 @@ cpumask_t __read_mostly cpu_present_map;
->>  
->>  unsigned long __read_mostly xen_phys_start;
->>  
->> +unsigned long __ro_after_init brk_end;
->> +
-> 
-> I know it's only x86 which uses brk_end right now, but given uses such
-> as ...
-> 
-> 
->>  /* Only used in asm code and within this source file */
->>  char asmlinkage __section(".init.bss.stack_aligned") __aligned(STACK_SIZE)
->>      cpu0_stack[STACK_SIZE];
->> @@ -1157,7 +1160,6 @@ void asmlinkage __init noreturn __start_
->>      struct boot_info *bi;
->>      unsigned long raw_max_page;
->>      int i, j, bytes = 0;
->> -    unsigned long eb_start, eb_end;
->>      bool acpi_boot_table_init_done = false, relocated = false;
->>      bool vm_init_done = false;
->>      int ret;
->> @@ -1523,7 +1525,7 @@ void asmlinkage __init noreturn __start_
->>          /*
->>           * This needs to remain in sync with remove_xen_ranges() and the
->>           * respective reserve_e820_ram() invocation below. No need to
->> -         * query efi_boot_mem_unused() here, though.
->> +         * query brk_cease() here, though.
->>           */
->>          xen->start = virt_to_maddr(_stext);
->>          xen->size  = __2M_rwdata_end - _stext;
->> @@ -1667,20 +1669,12 @@ void asmlinkage __init noreturn __start_
->>      if ( !xen_phys_start )
->>          panic("Not enough memory to relocate Xen\n");
->>  
->> -    /* FIXME: Putting a hole in .bss would shatter the large page mapping. */
->> -    if ( using_2M_mapping() )
->> -        efi_boot_mem_unused(NULL, NULL);
->> -
->>      /* This needs to remain in sync with remove_xen_ranges(). */
->> -    if ( efi_boot_mem_unused(&eb_start, &eb_end) )
->> -    {
->> -        if ( !reserve_e820_ram(&boot_e820, __pa(_stext), __pa(eb_start)) ||
->> -             !reserve_e820_ram(&boot_e820, __pa(eb_end), __pa(__2M_rwdata_end)) )
->> -            panic("Failed to reserve Xen in E820\n");
->> -    }
->> -    else
->> -        if ( !reserve_e820_ram(&boot_e820, __pa(_stext), __pa(__2M_rwdata_end)) )
->> -            panic("Failed to reserve Xen in E820\n");
->> +    brk_end = brk_cease();
->> +    if ( using_2M_mapping() )
->> +        brk_end = PAGE_ALIGN_2M(brk_end);
->> +    if ( !reserve_e820_ram(&boot_e820, __pa(_stext), __pa(brk_end)) )
->> +        panic("Failed to reserve Xen in E820\n");
->>  
->>      /* Late kexec reservation (dynamic start address). */
->>      kexec_reserve_area();
->> @@ -2274,7 +2268,6 @@ __initcall(init_xen_cap_info);
->>  
->>  int __hwdom_init remove_xen_ranges(struct rangeset *r)
->>  {
->> -    paddr_t start, end;
->>      int rc;
->>  
->>      /* S3 resume code (and other real mode trampoline code) */
->> @@ -2296,26 +2289,10 @@ int __hwdom_init remove_xen_ranges(struc
->>          return rc;
->>  
->>      /* hypervisor .data + .bss */
->> -    if ( efi_boot_mem_unused(&start, &end) )
->> -    {
->> -        ASSERT(__pa(start) >= __pa(&__2M_rwdata_start));
->> -        rc = rangeset_remove_range(r, PFN_DOWN(__pa(&__2M_rwdata_start)),
->> -                                   PFN_DOWN(__pa(start) - 1));
->> -        if ( rc )
->> -            return rc;
->> -        ASSERT(__pa(end) <= __pa(&__2M_rwdata_end));
->> -        rc = rangeset_remove_range(r, PFN_DOWN(__pa(end)),
->> -                                   PFN_DOWN(__pa(&__2M_rwdata_end) - 1));
->> -        if ( rc )
->> -            return rc;
->> -    }
->> -    else
->> -    {
->> -        rc = rangeset_remove_range(r, PFN_DOWN(__pa(&__2M_rwdata_start)),
->> -                                   PFN_DOWN(__pa(&__2M_rwdata_end) - 1));
->> -        if ( rc )
->> -            return rc;
->> -    }
->> +    rc = rangeset_remove_range(r, PFN_DOWN(__pa(&__2M_rwdata_start)),
->> +                               PFN_DOWN(__pa(brk_end) - 1));
->> +    if ( rc )
->> +        return rc;
-> 
-> ... this, it clearly needs to be common in order for other architectures
-> to start using the allocator.
+Xen copies device interrupt properties from the host device tree to
+Dom0, but hardcodes #interrupt-cells to 3 in make_gic_node() and
+fdt_property_interrupts(). On GICv3 platforms where the host uses 4
+cells, Dom0 parses the copied specifiers as 3 cells each and fails to
+set up device interrupts.
 
-I don't see why this would necessarily be this way. This is x86-specific
-memory management, and other ports may have no need. I'd therefore prefer
-to leave brk_end x86-only until proven otherwise. It was, after all, a
-deliberate decision to make this x86-only.
+Propagate #interrupt-cells from the host GIC node in make_gic_node()
+and pad Dom0 interrupt specifiers with trailing zero cells in
+fdt_property_interrupts().
 
-> So, I think the variable ought to be in xen/brk.h and common/brk.c, and
-> with that, brk_cease() can lose the return value.
-> 
-> I know that's yet another change to both patches 1 and 2.  If you're
-> happy with this suggestion then consider both Reviewed-by: Andrew Cooper
-> <andrew.cooper3@citrix.com> in light of those changes.
+Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+---
+Changes in v2:
+- Add a comment in fdt_property_interrupts() explaining why only the
+hardware domain preserves the host GIC's #interrupt-cells and that
+extra cells beyond 3 are zero-padded.
 
-I'd prefer to commit patch 1 as is. Strictly speaking patches 2 and 3 can
-go in on top with Marek's R-b. As it's not clear whether your reply here
-is an objection to this patch, I'll go with just patches 1 and 3 for now.
-If need be, the adjustment you describe could easily be done by a small
-independent prep patch for the one here, or perhaps also right in this
-patch (yet as said, I'd prefer to keep things as-are).
+ xen/arch/arm/domain_build.c | 37 ++++++++++++++++++++++++++++++++++---
+ 1 file changed, 34 insertions(+), 3 deletions(-)
 
-Jan
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index 606e85818e..d5bb895a6e 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -654,12 +654,37 @@ static int __init fdt_property_interrupts(const struct kernel_info *kinfo,
+                                           unsigned int num_irq)
+ {
+     int res;
++    uint32_t intrcells = ARRAY_SIZE(intr[0]);
++    void *val;
++    unsigned int i, stride;
+ 
+-    res = fdt_property(kinfo->fdt, "interrupts",
+-                       intr, sizeof(intr[0]) * num_irq);
++    /*
++     * Only the hardware domain preserves the host GIC's #interrupt-cells,
++     * since its device interrupt properties are copied from the host DT;
++     * domUs always use a 3-cell virtual GIC. Any extra cells beyond the
++     * 3-cell specifier, such as the GICv3 PPI affinity partition, are
++     * zero-padded.
++     */
++    if ( is_hardware_domain(kinfo->bd.d) )
++    {
++        const struct dt_device_node *gic = dt_interrupt_controller;
++
++        if ( !dt_property_read_u32(gic, "#interrupt-cells", &intrcells) )
++            return -FDT_ERR_XEN(ENOENT);
++        if ( intrcells < ARRAY_SIZE(intr[0]) )
++            return -FDT_ERR_XEN(ERANGE);
++    }
++
++    stride = intrcells * sizeof(intr[0][0]);
++    res = fdt_property_placeholder(kinfo->fdt, "interrupts",
++                                   stride * num_irq, &val);
+     if ( res )
+         return res;
+ 
++    memset(val, 0, stride * num_irq);
++    for ( i = 0; i < num_irq; i++ )
++        memcpy((uint8_t *)val + i * stride, intr[i], sizeof(intr[0]));
++
+     res = fdt_property_cell(kinfo->fdt, "interrupt-parent",
+                             kinfo->phandle_intc);
+ 
+@@ -1320,6 +1345,7 @@ static int __init make_gic_node(const struct domain *d, void *fdt,
+     int res = 0;
+     const void *addrcells, *sizecells;
+     u32 addrcells_len, sizecells_len;
++    uint32_t intrcells;
+     const char *name;
+ 
+     /*
+@@ -1370,7 +1396,12 @@ static int __init make_gic_node(const struct domain *d, void *fdt,
+             return res;
+     }
+ 
+-    res = fdt_property_cell(fdt, "#interrupt-cells", 3);
++    if ( !dt_property_read_u32(gic, "#interrupt-cells", &intrcells) )
++        return -FDT_ERR_XEN(ENOENT);
++    if ( intrcells < 3 )
++        return -FDT_ERR_XEN(ERANGE);
++
++    res = fdt_property_cell(fdt, "#interrupt-cells", intrcells);
+     if ( res )
+         return res;
+ 
+-- 
+2.56.1.703.gf848ed807c-goog
+
 
