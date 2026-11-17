@@ -2,47 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7B500606A323
-	for <xen-devel@archiver.kernel.org>; Tue, 17 Nov 2026 07:37:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E1344606A31C
+	for <xen-devel@archiver.kernel.org>; Tue, 17 Nov 2026 07:37:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=qeoIK6DA
-Received: from list by lists.xenproject.org with outflank-mailman.1491900.1692591 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=JGLzMprK
+Received: from list by lists.xenproject.org with outflank-mailman.1491902.1692601 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTDke-0006uz-Tm; Tue, 17 Nov 2026 07:37:12 +0000
+	id 1xTDky-0007Bn-51; Tue, 17 Nov 2026 07:37:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1491900.1692591; Tue, 17 Nov 2026 07:37:12 +0000
+Received: by outflank-mailman (output) from mailman id 1491902.1692601; Tue, 17 Nov 2026 07:37:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTDke-0006us-Qt; Tue, 17 Nov 2026 07:37:12 +0000
-Received: by outflank-mailman (input) for mailman id 1491900;
- Tue, 17 Nov 2026 07:37:11 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <visitorckw@gmail.com>) id 1xTDkc-0006tg-SI
- for xen-devel@lists.xenproject.org; Tue, 17 Nov 2026 07:37:11 +0000
+	id 1xTDky-0007Bg-16; Tue, 17 Nov 2026 07:37:32 +0000
+Received: by outflank-mailman (input) for mailman id 1491902;
+ Tue, 17 Nov 2026 07:37:30 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xTDkw-0007AT-Bi
+ for xen-devel@lists.xenproject.org; Tue, 17 Nov 2026 07:37:30 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xTDkb-009FUS-Q5
- for xen-devel@lists.xenproject.org; Tue, 17 Nov 2026 08:37:09 +0100
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xTDkv-00H3si-Gs
+ for xen-devel@lists.xenproject.org; Tue, 17 Nov 2026 08:37:29 +0100
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <visitorckw@gmail.com>)
- id 6afc0417-e002-0a2a0a5209dd-0a2a4501dfe6-32
- for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 08:37:09 +0100
-Received: from [74.125.82.41] (helo=mail-dl1-f41.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <visitorckw@gmail.com>)
- id 6afc0424-5984-0a2a45010019-4a7d5229d5d2-3
- for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 08:37:09 +0100
-Received: by mail-dl1-f41.google.com with SMTP id
- a92af1059eb24-1b244fb7fffso5218069c88.1
- for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 23:37:09 -0800 (PST)
-Received: from visitorckw-work01.c.googlers.com.com
- (55.11.81.34.bc.googleusercontent.com. [34.81.11.55])
- by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-1b5031b2519sm34900721c88.13.2026.11.16.23.37.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Nov 2026 23:37:06 -0800 (PST)
+ (envelope-from <jbeulich@suse.com>)
+ id 6afc0438-bab6-0a2a0a5309dd-0a2a450aa1b4-4
+ for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 08:37:29 +0100
+Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6afc0438-f2d2-0a2a450a0019-d155802ed1d1-3
+ for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 08:37:29 +0100
+Received: by mail-wm1-f46.google.com with SMTP id
+ 5b1f17b1804b1-4a214c5c4c0so42415015e9.3
+ for <xen-devel@lists.xenproject.org>; Mon, 16 Nov 2026 23:37:29 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4bb784e9073sm49549815e9.6.2026.11.16.23.37.27
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 16 Nov 2026 23:37:28 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,190 +49,240 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794901027; x=1795505827; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=wB+MVHksxY6FBo20rR4RYQwd0UAu5+yVsD5hdbuMN6o=;
-        b=qeoIK6DAzBCwq0liuYOxXN7I+4vd+EHj9JR8rTRdMMjZ6c9JuYs9qHWy+BAkFKy9mo
-         fxmqJWsEMzzNjalAP5AmF5eemUGWKGQQASwEAhzcjN6FdTlFAH9LYnihc/PWoDMxnX6d
-         FAr/VY7/2XgbzO89JH2Kz0UA0oW8m+Xa3LBjhC2N8EXa9maA2qpfV6jepQ+X1XrzgU35
-         UOMPvm9A+Hy8qxSyyFQMipuWj/DLlrqDQPaC4wzwoGp5LTpz/DLSrkkd6gejWndP5Di2
-         faDl32ayhFzOklV99aJxE04i8io8S3YaPvwDcRkga4K2QiFTvkpC9IIuRaJFjZKfRprR
-         ZSrg==
+        d=suse.com; s=google; t=1794901048; x=1795505848; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=lK3HnQoDy4/urQHKroF6YXDrqpcm5HrtMp5VZb0Uz7c=;
+        b=JGLzMprKxdpuAC+bpfDMbqs34bPHAZEez8S4T4m6MgeVHU1Ol5Nv7hyj2Sy55yugRp
+         f+OosN6/x7SW/YqrXGbwyeb+uvuqkBksGF8VQe8OMHw3viG6kzqNCBbXWTMXaOZIJOVx
+         Vt1SrA9a7PqiPlluam82AATR7N1uCuBptcLYb3xb7vm3Y1RLnfvsaewydmtppWJ3vqvW
+         glDmFSbcehg7llzarmTDJ6bYIX+7zXKIJRj3+1wtCFiceP3Spt1uRGBcE0/zKm/uT0iz
+         U+udtfRotGtQqOEx3eIMPiHbx/bX6X0XKWoYMntBTVj24JqUvG+lDZs6XBWZgWI3aFQY
+         a51A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794901027; x=1795505827;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20260707; t=1794901048; x=1795505848;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=wB+MVHksxY6FBo20rR4RYQwd0UAu5+yVsD5hdbuMN6o=;
-        b=DZThkhzrUh2sI1hhU77O0H4KZFqD27ZGWD0Q6sHlB/wLr+yWFtFRDdKiMuYsl/pp0I
-         8f0G0y7Qf8RI2ze71WWbQPsClNg65V90rXexzb9bCex88hv+f5sqtpODxtI9gU4PC/31
-         seQxgU0ZaFruAGU062elpwF+Q6Z3HlQ7q0YPo+JmQfdrpOdtQ/J1qdCv087tcDv+SbQB
-         gI1UA59vGEhLPbLgCrsVA4/MtsKw7Zm5itfICoiz6YJvNA8EQm4CxF09vXQ8zCX/UVLV
-         RJOv41eNyzOpX5eKQqb+N/Wpo6X+EON1OcnoUTwrzOD2DutIRuXPOyjcsljTVwJFidHm
-         JNvw==
-X-Gm-Message-State: APuU4Z8JtQtX3WHu1LrC08eRnv7jcveZT6awjIHksm5fCvQ9JT2g400a
-	Pe0YRmHNK3hOGrN2k2Fny42YbPbexSQ45trNG12CZfvZd4usf5owaeNE6p5S7g==
-X-Gm-Gg: AYBFou0GaJJypmgtfQvnlMEwjgKpkmnU0rea7hZ3evmVfgxT1b1WE6Bpap77UCjltWk
-	Rrp+1z2NHQ2ztZI+uTo4HbzNJRoefHIrH8adrOycaa3/1+PCjoXvAMDCmrfEYPrrJ1rlLxKQyv6
-	gYl9hh0IChnxyfg3PiQ3SfxVVa44POsDWZZ+p9DiU+BlKMJ5ftwgJnByv2bDbSMlWdvPxtUPjup
-	1GlkAZQSSK3wouQVlA2A+zQq2B6NIlLQ7F203ze5OzI9EYnk2MgKO5df7Iq/sHYElEDeQCuJaFw
-	mukvF+1yX7XwhWRPZlLBMZyrUSrmi5kfljtcab2zpO4gFvk8KJXbyxa/NME6cUHlGHSMNpjA4s3
-	xV3lP+X/ae//eIvlqnEe5EuVMA4LADtzsaFkN5gw1PW6fLOgZbfEh2+CAtc1iWPwPeiqprs56jQ
-	mL8418xcGtL1umstKANKyBfzi0SlFkiUicvtkOnyfuOwBMz5QcRegK00bixl83SdY7/rUeyGNSn
-	bTwRFMFwJQRsjJReycBe+dPWg7iiKoG+jI/wxNckaj8xpPNQE4LH8bmBSW3YQVAXCskAxHs/wUP
-	9WPc1/xPP0itOyQcsuVcrRmruNh7TsUQCdIu6DIY6M8ctHouNiLWg2wJhWSdrQh86iPM5D+DlLJ
-	2vL12JYlYQ9FJEOsW8tzcYqE=
-X-Received: by 2002:a05:701b:4301:b0:14f:4b01:40a1 with SMTP id a92af1059eb24-1b502fe374dmr11620773c88.0.1794901027376;
-        Mon, 16 Nov 2026 23:37:07 -0800 (PST)
-From: Kuan-Wei Chiu <visitorckw@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: sstabellini@kernel.org,
-	julien@xen.org,
-	bertrand.marquis@arm.com,
-	michal.orzel@amd.com,
-	marscheng@google.com,
-	eleanor15x@gmail.com,
-	jserv@ccns.ncku.edu.tw,
-	Kuan-Wei Chiu <visitorckw@gmail.com>
-Subject: [PATCH v2] xen/dt: Skip non-RAM reserved-memory regions in make_memory_node()
-Date: Tue, 17 Nov 2026 07:36:55 +0000
-Message-ID: <20261117073655.2279142-1-visitorckw@gmail.com>
-X-Mailer: git-send-email 2.56.1.703.gf848ed807c-goog
+        bh=lK3HnQoDy4/urQHKroF6YXDrqpcm5HrtMp5VZb0Uz7c=;
+        b=YWaszwCfJM2BpmX5qJbs0q8bn2NADBTZdEe1NPxh6TicxFYcEd+xrRChxdZxDB5ZB+
+         bYzY66v/CKgdxCnPsRm2RYi0UcVv0PzLv4EJnElhB8XwQrZDdwY7CjuXjbnRdNx2MJ3X
+         xaSGkVlUujIfBQhPs8g8C1MJjW5dEbULdGoDjX/KtXs9Rz+pIzzuY9wfuYGFgIADCCKe
+         cNKgvlPjwyxsl6ERccYQtz2cwqkYlL8wAPstMzam7V50KVl+7ZJniRO87sVMbxWgjT1t
+         ktERSPkd78EJ7fgOuB65PwbLr9No9qmFiQ+yVvSGJOT0OLBjs7Uu8K+7067mJ1e+gmju
+         GmVg==
+X-Forwarded-Encrypted: i=1; AL+hErHLqXRwfyaGs1fPhrfb9zDiK0EV3APjy+6sBD47h2Z58kFZThq/d74wLhdJ6vXRBVJ6/hZjJWsqRXc=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z/YtMsBaACrh+quVCFIwsYUpcjggjLFDn8GljJ6Mk4vtA4Bi78I
+	dJeEtUZuSb5k7vyFBzLM53j/rLZfPHAbncvC+17aFFVQNGBne7jKSb7eg9qIELRVkA==
+X-Gm-Gg: AYBFou0ov1tuTwNQqudohGH1HTYXoKpw0HTNm8ZHTc9ddk7Ops48lUm7s4oz/gjffki
+	4vRTdtIh71SNO4dRnKUdyffiIQwheZRoQAj/YeXPIOELof/je63dmnpDMvOTDgGydn/yMzGQZMw
+	KzsUcaR0niE+9K49yZcYVBLvpRXIFY7FA+ApuUAeV3UFCzXbDxRczc6mzEyoDobsRnD75xz6ehE
+	V6yiDxhc15nOFzx+T46obN/2T/i6fcvqn7bxhFA7fSJO0cvVhSmpSRWJkCDkyyA0aWsGMAaiLqL
+	Div90s13TX++fZBdLKvlg4ecHFBBYnWmLtQMeI+++4itZ63VhuOyONRjvhkfGtFacf2tv/Dz/kA
+	0bqp8S+hKt/rPIZwvDTMefwCDR3HeqxPLRhNYO4bOslRDL5VT3065i8YlK9CRSUDWNAcL7tkb0n
+	/R7uF1AvxoD0QwIV8whBKM5UyO/eszSQUEAzYFvgOZ/poKJVPYc8y00r6/ZErUYaKgzJHpjPEwL
+	AusZqBcYnirW/cluXR9hea8Iv88Loa0iTTw7WRMzJJbwl4GftV3OwL739LiEAO2QfCZd09bR7Mi
+	FtAZPcJs5IQdjPsb8brO3Dn/IjHI3XuIj91bSGMHADMuQLTQHp7NYGTg6L+meXgF3DWab+2MQiM
+	LqM5wHtLVsmGE7NDnUs4=
+X-Received: by 2002:a05:600c:c4a2:b0:4bb:7581:2bb9 with SMTP id 5b1f17b1804b1-4bb75812c05mr84748695e9.22.1794901048478;
+        Mon, 16 Nov 2026 23:37:28 -0800 (PST)
+Message-ID: <a9186c61-c21e-48b1-9fd4-ce2625ac1a83@suse.com>
+Date: Tue, 17 Nov 2026 08:37:27 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 2/3] x86/EFI: replace ebmalloc()
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>,
+ Marek Marczykowski <marmarek@invisiblethingslab.com>,
+ Daniel Smith <dpsmith@apertussolutions.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <640c0ea5-fbbf-436d-b150-4537cbe98fdf@suse.com>
+ <2d45d102-e26f-4e93-a213-b02fb685b6ef@suse.com>
+ <c31e3a82-ea24-4985-8410-9cda5a9c9681@citrix.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <c31e3a82-ea24-4985-8410-9cda5a9c9681@citrix.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d62444/1794901029-1F063757-7EF648EA/0/0
-X-purgate-type: clean
-X-purgate-size: 4376
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-purgate-ID: tlsNG-4011c0/1794901049-506CECFC-1F472CBC/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 5784
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Xen creates a second /memory node for the hardware domain from
-bootinfo_get_reserved_mem() without checking whether those regions
-belong to host RAM. However, /reserved-memory can also describe non-RAM
-regions such as on-chip SRAM outside system RAM. For example, Linux's
-Documentation/devicetree/bindings/nvmem/rmem.yaml defines nvmem-rmem
-nodes under /reserved-memory, and the comment in Linux's
-early_init_dt_reserve_memory() notes that a no-map region may not be
-part of memory. Listing them in a /memory node causes the hardware
-domain to register non-RAM addresses as system RAM, conflicting with
-device MMIO mappings.
+On 16.11.2026 19:13, Andrew Cooper wrote:
+> On 03/11/2026 12:50 pm, Jan Beulich wrote:
+>> --- a/xen/arch/x86/include/asm/setup.h
+>> +++ b/xen/arch/x86/include/asm/setup.h
+>> @@ -9,6 +9,8 @@ extern const char __2M_rodata_start[], _
+>>  extern char __2M_init_start[], __2M_init_end[];
+>>  extern char __2M_rwdata_start[], __2M_rwdata_end[];
+>>  
+>> +extern unsigned long brk_end;
+>> +
+>>  extern unsigned long xenheap_initial_phys_start;
+>>  extern uint64_t boot_tsc_stamp;
+>>  
+>> --- a/xen/arch/x86/setup.c
+>> +++ b/xen/arch/x86/setup.c
+>> @@ -1,6 +1,7 @@
+>>  #include <xen/acpi.h>
+>>  #include <xen/alternative-call.h>
+>>  #include <xen/bitops.h>
+>> +#include <xen/brk.h>
+>>  #include <xen/console.h>
+>>  #include <xen/cpu.h>
+>>  #include <xen/cpuidle.h>
+>> @@ -164,6 +165,8 @@ cpumask_t __read_mostly cpu_present_map;
+>>  
+>>  unsigned long __read_mostly xen_phys_start;
+>>  
+>> +unsigned long __ro_after_init brk_end;
+>> +
+> 
+> I know it's only x86 which uses brk_end right now, but given uses such
+> as ...
+> 
+> 
+>>  /* Only used in asm code and within this source file */
+>>  char asmlinkage __section(".init.bss.stack_aligned") __aligned(STACK_SIZE)
+>>      cpu0_stack[STACK_SIZE];
+>> @@ -1157,7 +1160,6 @@ void asmlinkage __init noreturn __start_
+>>      struct boot_info *bi;
+>>      unsigned long raw_max_page;
+>>      int i, j, bytes = 0;
+>> -    unsigned long eb_start, eb_end;
+>>      bool acpi_boot_table_init_done = false, relocated = false;
+>>      bool vm_init_done = false;
+>>      int ret;
+>> @@ -1523,7 +1525,7 @@ void asmlinkage __init noreturn __start_
+>>          /*
+>>           * This needs to remain in sync with remove_xen_ranges() and the
+>>           * respective reserve_e820_ram() invocation below. No need to
+>> -         * query efi_boot_mem_unused() here, though.
+>> +         * query brk_cease() here, though.
+>>           */
+>>          xen->start = virt_to_maddr(_stext);
+>>          xen->size  = __2M_rwdata_end - _stext;
+>> @@ -1667,20 +1669,12 @@ void asmlinkage __init noreturn __start_
+>>      if ( !xen_phys_start )
+>>          panic("Not enough memory to relocate Xen\n");
+>>  
+>> -    /* FIXME: Putting a hole in .bss would shatter the large page mapping. */
+>> -    if ( using_2M_mapping() )
+>> -        efi_boot_mem_unused(NULL, NULL);
+>> -
+>>      /* This needs to remain in sync with remove_xen_ranges(). */
+>> -    if ( efi_boot_mem_unused(&eb_start, &eb_end) )
+>> -    {
+>> -        if ( !reserve_e820_ram(&boot_e820, __pa(_stext), __pa(eb_start)) ||
+>> -             !reserve_e820_ram(&boot_e820, __pa(eb_end), __pa(__2M_rwdata_end)) )
+>> -            panic("Failed to reserve Xen in E820\n");
+>> -    }
+>> -    else
+>> -        if ( !reserve_e820_ram(&boot_e820, __pa(_stext), __pa(__2M_rwdata_end)) )
+>> -            panic("Failed to reserve Xen in E820\n");
+>> +    brk_end = brk_cease();
+>> +    if ( using_2M_mapping() )
+>> +        brk_end = PAGE_ALIGN_2M(brk_end);
+>> +    if ( !reserve_e820_ram(&boot_e820, __pa(_stext), __pa(brk_end)) )
+>> +        panic("Failed to reserve Xen in E820\n");
+>>  
+>>      /* Late kexec reservation (dynamic start address). */
+>>      kexec_reserve_area();
+>> @@ -2274,7 +2268,6 @@ __initcall(init_xen_cap_info);
+>>  
+>>  int __hwdom_init remove_xen_ranges(struct rangeset *r)
+>>  {
+>> -    paddr_t start, end;
+>>      int rc;
+>>  
+>>      /* S3 resume code (and other real mode trampoline code) */
+>> @@ -2296,26 +2289,10 @@ int __hwdom_init remove_xen_ranges(struc
+>>          return rc;
+>>  
+>>      /* hypervisor .data + .bss */
+>> -    if ( efi_boot_mem_unused(&start, &end) )
+>> -    {
+>> -        ASSERT(__pa(start) >= __pa(&__2M_rwdata_start));
+>> -        rc = rangeset_remove_range(r, PFN_DOWN(__pa(&__2M_rwdata_start)),
+>> -                                   PFN_DOWN(__pa(start) - 1));
+>> -        if ( rc )
+>> -            return rc;
+>> -        ASSERT(__pa(end) <= __pa(&__2M_rwdata_end));
+>> -        rc = rangeset_remove_range(r, PFN_DOWN(__pa(end)),
+>> -                                   PFN_DOWN(__pa(&__2M_rwdata_end) - 1));
+>> -        if ( rc )
+>> -            return rc;
+>> -    }
+>> -    else
+>> -    {
+>> -        rc = rangeset_remove_range(r, PFN_DOWN(__pa(&__2M_rwdata_start)),
+>> -                                   PFN_DOWN(__pa(&__2M_rwdata_end) - 1));
+>> -        if ( rc )
+>> -            return rc;
+>> -    }
+>> +    rc = rangeset_remove_range(r, PFN_DOWN(__pa(&__2M_rwdata_start)),
+>> +                               PFN_DOWN(__pa(brk_end) - 1));
+>> +    if ( rc )
+>> +        return rc;
+> 
+> ... this, it clearly needs to be common in order for other architectures
+> to start using the allocator.
 
-Skip reserved-memory banks outside the host RAM banks reported by
-bootinfo_get_mem() in make_memory_node(). Skip this check when booted
-via EFI, where bootinfo_get_mem() only contains usable memory and does
-not include reserved regions.
+I don't see why this would necessarily be this way. This is x86-specific
+memory management, and other ports may have no need. I'd therefore prefer
+to leave brk_end x86-only until proven otherwise. It was, after all, a
+deliberate decision to make this x86-only.
 
-Fixes: 248faa637d2f ("xen/arm: add reserved-memory regions to the dom0 memory node")
-Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
----
-Changes in v2:
-- Skip the host RAM check when booted via EFI.
-- Drop the redundant !bank->size check from is_in_host_ram().
-- Extract the bank-filtering logic into skip_memory_bank() and update
-the stale comment in make_memory_node().
-- Expand the commit message to reference Linux's nvmem-rmem binding,
-early_init_dt_reserve_memory() comment, and EFI boot behavior.
+> So, I think the variable ought to be in xen/brk.h and common/brk.c, and
+> with that, brk_cease() can lose the return value.
+> 
+> I know that's yet another change to both patches 1 and 2.  If you're
+> happy with this suggestion then consider both Reviewed-by: Andrew Cooper
+> <andrew.cooper3@citrix.com> in light of those changes.
 
- xen/common/device-tree/domain-build.c | 50 +++++++++++++++++++++++++--
- 1 file changed, 47 insertions(+), 3 deletions(-)
+I'd prefer to commit patch 1 as is. Strictly speaking patches 2 and 3 can
+go in on top with Marek's R-b. As it's not clear whether your reply here
+is an objection to this patch, I'll go with just patches 1 and 3 for now.
+If need be, the adjustment you describe could easily be done by a small
+independent prep patch for the one here, or perhaps also right in this
+patch (yet as said, I'd prefer to keep things as-are).
 
-diff --git a/xen/common/device-tree/domain-build.c b/xen/common/device-tree/domain-build.c
-index 634a26946c..e58c340746 100644
---- a/xen/common/device-tree/domain-build.c
-+++ b/xen/common/device-tree/domain-build.c
-@@ -2,6 +2,7 @@
- 
- #include <xen/bootinfo.h>
- #include <xen/domain-layout.h>
-+#include <xen/efi.h>
- #include <xen/fdt-domain-build.h>
- #include <xen/init.h>
- #include <xen/lib.h>
-@@ -504,6 +505,42 @@ int __init make_chosen_node(const struct kernel_info *kinfo)
-     return res;
- }
- 
-+static bool __init is_in_host_ram(const struct membank *bank)
-+{
-+    const struct membanks *ram = bootinfo_get_mem();
-+    paddr_t start = bank->start;
-+    paddr_t end = start + bank->size;
-+    unsigned int i;
-+
-+    if ( end < start )
-+        return false;
-+
-+    for ( i = 0; i < ram->nr_banks; i++ )
-+    {
-+        paddr_t ram_start = ram->bank[i].start;
-+        paddr_t ram_end = ram_start + ram->bank[i].size;
-+
-+        if ( start < ram_start )
-+            return false;
-+
-+        if ( end <= ram_end )
-+            return true;
-+
-+        if ( start < ram_end )
-+            start = ram_end;
-+    }
-+
-+    return false;
-+}
-+
-+static bool __init skip_memory_bank(const struct membank *bank, bool check_ram)
-+{
-+    if ( bank->type != MEMBANK_DEFAULT )
-+        return true;
-+
-+    return check_ram && !is_in_host_ram(bank);
-+}
-+
- int __init make_memory_node(const struct kernel_info *kinfo, int addrcells,
-                             int sizecells, const struct membanks *mem)
- {
-@@ -513,13 +550,20 @@ int __init make_memory_node(const struct kernel_info *kinfo, int addrcells,
-     int nr_cells = 0;
-     __be32 reg[DT_MEM_NODE_REG_RANGE_SIZE];
-     __be32 *cells;
-+    bool check_ram;
- 
-     if ( mem->nr_banks == 0 )
-         return -ENOENT;
- 
--    /* find the first memory range that is reserved for device (or firmware) */
-+    /*
-+     * When booting via EFI, bootinfo_get_mem() only holds usable memory and
-+     * excludes reserved regions, so skip the host RAM check in that case.
-+     */
-+    check_ram = (mem == bootinfo_get_reserved_mem()) && !efi_enabled(EFI_BOOT);
-+
-+    /* Find the first memory bank to include in the /memory node. */
-     for ( i = 0; i < mem->nr_banks &&
--                 (mem->bank[i].type != MEMBANK_DEFAULT); i++ )
-+                 skip_memory_bank(&mem->bank[i], check_ram); i++ )
-         ;
- 
-     if ( i == mem->nr_banks )
-@@ -541,7 +585,7 @@ int __init make_memory_node(const struct kernel_info *kinfo, int addrcells,
-         u64 start = mem->bank[i].start;
-         u64 size = mem->bank[i].size;
- 
--        if ( mem->bank[i].type != MEMBANK_DEFAULT )
-+        if ( skip_memory_bank(&mem->bank[i], check_ram) )
-             continue;
- 
-         nr_cells += reg_size;
--- 
-2.56.1.703.gf848ed807c-goog
-
+Jan
 
