@@ -2,48 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 570FA606A31C
-	for <xen-devel@archiver.kernel.org>; Tue, 17 Nov 2026 08:25:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7818E606A31C
+	for <xen-devel@archiver.kernel.org>; Tue, 17 Nov 2026 08:26:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=amutable-com.20260707.gappssmtp.com header.i=@amutable-com.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=JoaZXa4u
-Received: from list by lists.xenproject.org with outflank-mailman.1491947.1692636 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=amutable-com.20260707.gappssmtp.com header.i=@amutable-com.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=ps98o6Iu
+Received: from list by lists.xenproject.org with outflank-mailman.1491957.1692646 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTEVc-0000VQ-GC; Tue, 17 Nov 2026 08:25:44 +0000
+	id 1xTEW0-00010u-NV; Tue, 17 Nov 2026 08:26:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1491947.1692636; Tue, 17 Nov 2026 08:25:44 +0000
+Received: by outflank-mailman (output) from mailman id 1491957.1692646; Tue, 17 Nov 2026 08:26:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTEVc-0000VF-DV; Tue, 17 Nov 2026 08:25:44 +0000
-Received: by outflank-mailman (input) for mailman id 1491947;
- Tue, 17 Nov 2026 08:25:42 +0000
+	id 1xTEW0-00010n-KU; Tue, 17 Nov 2026 08:26:08 +0000
+Received: by outflank-mailman (input) for mailman id 1491957;
+ Tue, 17 Nov 2026 08:26:07 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <alex@amutable.com>) id 1xTEVa-0000Ul-66
- for xen-devel@lists.xenproject.org; Tue, 17 Nov 2026 08:25:42 +0000
+ (envelope-from <alex@amutable.com>) id 1xTEVz-00010V-4r
+ for xen-devel@lists.xenproject.org; Tue, 17 Nov 2026 08:26:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xTEVZ-003aWQ-8I
- for xen-devel@lists.xenproject.org; Tue, 17 Nov 2026 09:25:41 +0100
-Received: from [10.42.69.10] (helo=localhost)
+ id 1xTEVy-003agx-HA
+ for xen-devel@lists.xenproject.org; Tue, 17 Nov 2026 09:26:06 +0100
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <alex@amutable.com>)
- id 6afc0f77-8faa-0a2a0a5109dd-0a2a450ad870-24
- for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 09:25:41 +0100
-Received: from [209.85.221.50] (helo=mail-wr1-f50.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6afc0f97-bab6-0a2a0a5309dd-0a2a4502dfe2-48
+ for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 09:26:06 +0100
+Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <alex@amutable.com>)
- id 6afc0f84-f2d2-0a2a450a0019-d155dd32ddcd-3
- for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 09:25:40 +0100
-Received: by mail-wr1-f50.google.com with SMTP id
- ffacd0b85a97d-492690dd5daso4102941f8f.1
- for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 00:25:40 -0800 (PST)
+ id 6afc0f9d-6ca4-0a2a45020019-d155802da5b5-3
+ for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 09:26:05 +0100
+Received: by mail-wm1-f45.google.com with SMTP id
+ 5b1f17b1804b1-4a9a8d6cea8so7875535e9.1
+ for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 00:26:05 -0800 (PST)
 Received: from ?IPv6:2003:cf:572c:2800:de4c:6789:33ce:97c2?
  (p200300cf572c2800de4c678933ce97c2.dip0.t-ipconnect.de.
  [2003:cf:572c:2800:de4c:6789:33ce:97c2])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-49c5ff2be55sm26907832f8f.28.2026.11.17.00.25.37
+ 5b1f17b1804b1-4bb7ad9430asm12629125e9.15.2026.11.17.00.26.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Nov 2026 00:25:38 -0800 (PST)
+ Tue, 17 Nov 2026 00:26:05 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -54,49 +54,48 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=amutable-com.20260707.gappssmtp.com header.i="@amutable-com.20260707.gappssmtp.com" header.h="MIME-Version:User-Agent:Content-Transfer-Encoding:Content-Type:References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=amutable-com.20260707.gappssmtp.com; s=20260707; t=1794903940; x=1795508740; darn=lists.xenproject.org;
+        d=amutable-com.20260707.gappssmtp.com; s=20260707; t=1794903965; x=1795508765; darn=lists.xenproject.org;
         h=mime-version:user-agent:content-transfer-encoding:content-type
          :references:in-reply-to:date:cc:to:from:subject:message-id:from:to
          :cc:subject:date:message-id:reply-to:content-type;
-        bh=UGlayfD5Z/El6cdpm6ie0HDMH84kD107OWGXScU9uXE=;
-        b=JoaZXa4uRoOQHDb4HuL6NUxrVFN+/I1gT1Uzo8lFm1BFeTkuUrjjffOhwzgZycXFrW
-         hcDjCt+hLX8wYqt/xUOuMU8PUVgk8FvFqrQhOavmPQff7jfUCqbIhd6qvPvJUN0AtUe3
-         kZ9aZ3ffOLSwcX714wZZa/S3mVNFYmCK/xAf5KZ0vaJSr6HtsyqwtUVnaZF6KaXT8+5z
-         2fBXQ5yi1sOBGyXlGUCHohxUoEluufEqmCmO6YcD829xs/HyL5kEF2Y13MPh0u1ITNDu
-         K7rCb05CanGnUOupIPJTJOA+S52WCjvJdzbcHpj0f6BB/vK/s3phyXdFGFj2rK7rXkUd
-         eGEw==
+        bh=z/NZRmC5bENRF/WsK1hUt6gARTy1xozW3x04wBCWbAk=;
+        b=ps98o6IuZ4it7JykLtHjh432+fac+hnIAdaQTZboyzjIRRqlY8eQWAuZJ3RdMlN9fS
+         7DEA6/st096Pi2ZKC4OxrXPR6gWyBP7hZkKjU13iYGEa5O6OSkwIQQTk9vdpYN8+KbBu
+         +xkcEQ3Sg7TSKsvAVQasLYR13pR2Vyz+2OVTtt742Pkhya6ZPdS53rKMra0Ne7aEaMiO
+         A8XSnQ+rrBlhT5HkHNfN4e3J5H00O60f2m7LekDhs0QizxgS2AaqoCSWT1/NNs/zDXOP
+         cfoWkp+k+h9h2X8Uc2YuvaCL4xSJvWek9wSNPN99zC4Ep6P8U4XkzO+HwAtrld005ntG
+         fF7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794903940; x=1795508740;
+        d=1e100.net; s=20260707; t=1794903965; x=1795508765;
         h=mime-version:user-agent:content-transfer-encoding:content-type
          :references:in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=UGlayfD5Z/El6cdpm6ie0HDMH84kD107OWGXScU9uXE=;
-        b=t6yCjBYDLojNa5wXww0+l26fHuavIwjSKGBjHGroV0fIhLFH//GK6P/lUkNtUEyOfX
-         N0j7LW6qSaUm06DOZ+pELR+2CnKTwn31cfYVqsSN/XkMV6pKhkewcDMFi/hUhUOHYHE1
-         S4cTZBSudrfVQVJ7JGVFrqh93Sf6eqpCoUS59Fui78qD3YzvvNSvJ/BXh1gk2kTUuN1J
-         Jp2JBFfxnNr1AnZrFIWTX3MivpRmOqkFweR9aaTkqSdqp9MExrjQFIsPp6ew4YFUKthT
-         14TiKYapUlMc+jnO766+TCwYUil/Q225gQTVer6O6uhgJGJpY9L4eWsLtGUaKgSzqYKY
-         G6qw==
-X-Forwarded-Encrypted: i=1; AL+hErGQU5YqtwCt2Zp2ciggq4hep4/+eWIOBZH1zHiXFtPu7QuSVyByLzAfL+uDKsr5oloDipo8tPL/9Y4=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z8CYZytbM+NRVv1XcjSZV1FmY7/orV9U8QzuaMqAiGK2MKhnp37
-	CPBLjf8OqSIl4QJHQB0+8oMN5SlzIsJI3VZWbhiRPZIj0jQHZjOlz5yjL0z4baJUJA61
-X-Gm-Gg: AZFdTZfNHmNgJbGvb26T65V/eWlpcBrfdr7PJOKleVwV8QiUBApzjXQrjGDIhwP/ECx
-	W81mZrfXhe3JCoKfIt40aJLIZU82H2BgZTU9+uafPgyW91o1ZoItJvmYLMDqG2PPrcGKWO4rHoz
-	lr6RPeDO00a82hS5j8epoZEk3sLhHWp68FzG1lq/6n2NVusGx/cj3og7B1nrwxgCAOKTx22Glh3
-	iJ0OnqexOrxLrVy2XlVwMKcniaxx36XvZ8VM2FVvF/If2OrAlpY+js6NCMU1I1N6tLKxAM++UqE
-	3apEK3gH4lDTTDcTP7LCHuDbv5MSfYkB9o61Go5GlyOOKxPv5Swq+QJeMFVHf0iPecwkcQ4PouZ
-	aB6rVbk7Yow/hNeWoU5YkUOcqcyseiXGFKzOsS/DsPaV6NNLzdIs9Vgw0KMP0VAMWZsvc+z/8iz
-	o7Xh+sV72r2DbNt3AXxmxg1bc+9VbmGHCPSnnQiNQI/43p3XEbATTRi0m2N8rwwfAF0fA+NVQf4
-	d5UO914if1As3T4PX0FXOd0BgT8InCmA2WBiY6lV9M19Al4kb5zCsgPsu6zNim74wkIdZbctMs4
-	NG7MvDn7HwcrsJ42/2ixhyR0Mv6YDfc5wqL6sczPNIMlheZRRpQXvWzvN8vmKzbjQDekbrrk6xI
-	wn54cO9H5nUXT9PLCqOfyJ4paSLlSvQA383776Xb7k3k1L2xWTC5RKHD0/gANDijoxB2OqR6ex6
-	FDfQ==
-X-Received: by 2002:a05:6000:2084:b0:492:46e:d4ce with SMTP id ffacd0b85a97d-49c6fd932c8mr25238543f8f.13.1794903938925;
-        Tue, 17 Nov 2026 00:25:38 -0800 (PST)
-Message-ID: <a9124bf1c858cef3e8ac06b1b2396dcb0e19e2a5.camel@amutable.com>
-Subject: Re: [PATCH RFC v3 02/44] nvmet: check that the file backend
- supports ->{read,write}_iter
+        bh=z/NZRmC5bENRF/WsK1hUt6gARTy1xozW3x04wBCWbAk=;
+        b=F8K1fINZZRheC3N/uI4ZdUCGSUF8uc7TE3n+zYfE1MdUJMwOaQU1bsLw9pnKrb6Uic
+         Ncqyo0oo7/cu64/BLe8JXHFUMgkJ8n/HO4MS0mTMyL3f9bCfbtQcvCWg4v5VAxbCDY9F
+         z8BwZ+LtcwSiZTf/zXh89aLBU4W6q0GltpoHhoqLU6Ym3tQxMBtNrZRUClXDaWJX3Xw8
+         6j0mCgXeZvf78qHr2KPwwLeniGBOr/Kob1kd75hWKhWzWiCiYs+dL7EfngJ3XgMo2gOj
+         YKUho5D20pC30ZMuLlGYcdnGDtsvfZg7a277Go+InD6+vScEUBWnZCuDeMnqwZ9+RXcb
+         Udnw==
+X-Forwarded-Encrypted: i=1; AL+hErG1CDXrxSfL82hvmsAFjG/d5jpNpi/RF5mL2Tqgv1b1l33ozOwO+JVJGBqbJySLHG94wuyhcLrV9NI=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z8Mx8MNg3YYioohwrxjE0oP4a1ktjWWGY5IoD7jqrIvHrUiNZ5v
+	RwjP6BCMKp/JxJ/VD1E0gALsc7aUgsxcuMpIbSAxIFxBy6QLlnNONPrmfkT0MhtQekix
+X-Gm-Gg: AYBFou1Q0P15WzEIyOCTL44F4fclo+PBEYSKaR/XH53WxC2fFzZq2BuA+V4mzQCc7N0
+	+npQMIX+AxgnFY2tCuzqpL/Na0VC2rcrI+6ZwWLL8/gc1lPQ4oPQhq8oCNnfDiSpHz8Tci1Pg0R
+	G//YyRAQ+J3cK+YTNgUfl2RQ3/365b7pIxZIstL4vnRcXAEC7kCAxUGCNHZcKOVkqg6sN5etLpb
+	YZbvMsvUgXZWJBibJwkJamc9XpwQCEmJOwcz1bK1ffXfYH4h/HQNH5MRZtxTiXacnhQxWmQ5M3s
+	TuQIRoBNpgfGAJOzB5KrZAPjR04KwEYeP2l5xWYv/F/S3jKspP1luQrDgZW2ExlNU2bHB0hpwjT
+	OSs7bTyysNxPMH4jZ9aooBdrmH7XAQGWKlCMtKD1ay9UM6TRsnFqUoS23afaWxMh7QQl9ODFOCN
+	nMTTmffdLn86r3d9BWZB/VTLkO0n0Tv0/Leow0MtKosrD5cEOii0q8JwZ8Loi6fCk8nGkrxPeHA
+	CLKPpB/u/pMFu020Id6UYMq9juLf75djc0inDNojeRuvkL7+OpyyjluCaUWTAdLKwxqrGwbLP7r
+	AFAZSQMAqaJ5/1WFuXuwlPoSM0btrRPRAn8id1LRwFuKp5b4WQpPK8q38zEBAo4ljbNAari+QPn
+	xrBjwqOJlm0mxmgk9Ww0qmLo36KOfkofd7rzrc52OqOderbERVTZ3civw
+X-Received: by 2002:a05:600c:5493:b0:4a1:c27d:e1a8 with SMTP id 5b1f17b1804b1-4bb783813a7mr42606245e9.10.1794903965400;
+        Tue, 17 Nov 2026 00:26:05 -0800 (PST)
+Message-ID: <88041240268f70b218de7dfd58c41977d03a60d3.camel@amutable.com>
+Subject: Re: [PATCH RFC v3 03/44] target: fileio: check that the backing
+ file supports ->{read,write}_iter
 From: Alexander Mikhalitsyn <alex@amutable.com>
 To: Christian Brauner <brauner@kernel.org>, linux-fsdevel@vger.kernel.org
 Cc: Jann Horn <jannh@google.com>, Chris Mason <mason@kernel.org>, Josef
@@ -114,18 +113,18 @@ Cc: Jann Horn <jannh@google.com>, Chris Mason <mason@kernel.org>, Josef
  linuxppc-dev@lists.ozlabs.org, 	linux-usb@vger.kernel.org, Amir Goldstein
  <amir73il@gmail.com>, 	linux-erofs@lists.ozlabs.org,
  linux-kselftest@vger.kernel.org, Chris Down	 <chris@chrisdown.name>
-Date: Tue, 17 Nov 2026 09:25:36 +0100
-In-Reply-To: <20261116-work-loop-pseudo-v3-2-8cbbea1cf34f@kernel.org>
+Date: Tue, 17 Nov 2026 09:26:03 +0100
+In-Reply-To: <20261116-work-loop-pseudo-v3-3-8cbbea1cf34f@kernel.org>
 References: <20261116-work-loop-pseudo-v3-0-8cbbea1cf34f@kernel.org>
-	 <20261116-work-loop-pseudo-v3-2-8cbbea1cf34f@kernel.org>
+	 <20261116-work-loop-pseudo-v3-3-8cbbea1cf34f@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 User-Agent: Evolution 3.56.2-0+deb13u1 
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-purgate-ID: tlsNG-4011c0/1794903941-4ABD8CFC-9048BB22/0/0
+X-purgate-ID: tlsNG-720697/1794903966-F26B72AC-6371175E/0/0
 X-purgate-type: clean
-X-purgate-size: 1587
+X-purgate-size: 1794
 X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
@@ -135,22 +134,20 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 On Mon, 2026-11-16 at 12:04 +0100, Christian Brauner wrote:
-> The file backend calls ->read_iter() and ->write_iter() of the
-> backing
-> file directly but never checks that they exist. Everything that isn't
-> a
-> block device ends up in the file backend. So a namespace pointing to
-> a
-> file without them calls a NULL pointer on its first I/O. Only
-> buffered_io=3D1 gets that far as the O_DIRECT open fails for such
-> files.
+> With fd_async_io=3D1 the fileio backend calls ->read_iter() and
+> ->write_iter() of the backing file directly. The synchronous path
+> goes
+> through vfs_iter_read() and vfs_iter_write() which check for them but
+> the aio path doesn't. So a backing file without them calls a NULL
+> pointer on its first I/O.
 >=20
-> Refuse them when the namespace is enabled the same way zloop does
-> since
-> commit 0c10f8a1a7ae ("zloop: check that the zone backing file support
-> ->{read,write}_iter").
+> Refuse such files when configuring the device. On the synchronous
+> path
+> every read or write that needed the missing method failed with EINVAL
+> anyway.
 >=20
-> Fixes: d5eff33ee6f8 ("nvmet: add simple file backed ns support")
+> Fixes: 769031c92c8b ("scsi: target: target/file: Add support of
+> direct and async I/O")
 > Reviewed-by: Jan Kara <jack@suse.cz>
 > Reviewed-by: Christoph Hellwig <hch@lst.de>
 > Reviewed-by: Chris Down <chris@chrisdown.name>
@@ -159,25 +156,30 @@ Reviewed-by: Alexander Mikhalitsyn <alex@amutable.com>
 
 > Signed-off-by: Christian Brauner (Amutable) <brauner@kernel.org>
 > ---
-> =C2=A0drivers/nvme/target/io-cmd-file.c | 5 +++++
-> =C2=A01 file changed, 5 insertions(+)
+> =C2=A0drivers/target/target_core_file.c | 8 ++++++++
+> =C2=A01 file changed, 8 insertions(+)
 >=20
-> diff --git a/drivers/nvme/target/io-cmd-file.c
-> b/drivers/nvme/target/io-cmd-file.c
-> index 695963dd932ee..dfa8aa46188c8 100644
-> --- a/drivers/nvme/target/io-cmd-file.c
-> +++ b/drivers/nvme/target/io-cmd-file.c
-> @@ -47,6 +47,11 @@ int nvmet_file_ns_enable(struct nvmet_ns *ns)
-> =C2=A0		return ret;
+> diff --git a/drivers/target/target_core_file.c
+> b/drivers/target/target_core_file.c
+> index ab9824a4852f1..a5391e57e9aa5 100644
+> --- a/drivers/target/target_core_file.c
+> +++ b/drivers/target/target_core_file.c
+> @@ -144,6 +144,14 @@ static int fd_configure_device(struct se_device
+> *dev)
+> =C2=A0		goto fail;
 > =C2=A0	}
-> =C2=A0
-> +	if (!ns->file->f_op->read_iter || !ns->file->f_op-
-> >write_iter) {
+> =C2=A0	fd_dev->fd_file =3D file;
+> +
+> +	if (!file->f_op->read_iter || !file->f_op->write_iter) {
+> +		pr_err("FILEIO: %s lacks ->read_iter or -
+> >write_iter\n",
+> +		=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 fd_dev->fd_dev_name);
 > +		ret =3D -EINVAL;
-> +		goto err;
+> +		goto fail;
 > +	}
 > +
-> =C2=A0	nvmet_file_ns_revalidate(ns);
-> =C2=A0
 > =C2=A0	/*
+> =C2=A0	 * If using a block backend with this struct file, we
+> extract
+> =C2=A0	 * fd_dev->fd_[block,dev]_size from struct block_device.
 
