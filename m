@@ -2,45 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 66415606A31C
-	for <xen-devel@archiver.kernel.org>; Tue, 17 Nov 2026 08:25:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 570FA606A31C
+	for <xen-devel@archiver.kernel.org>; Tue, 17 Nov 2026 08:25:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=HdEJQM8l
-Received: from list by lists.xenproject.org with outflank-mailman.1491942.1692627 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=amutable-com.20260707.gappssmtp.com header.i=@amutable-com.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=JoaZXa4u
+Received: from list by lists.xenproject.org with outflank-mailman.1491947.1692636 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTEVB-000069-8X; Tue, 17 Nov 2026 08:25:17 +0000
+	id 1xTEVc-0000VQ-GC; Tue, 17 Nov 2026 08:25:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1491942.1692627; Tue, 17 Nov 2026 08:25:17 +0000
+Received: by outflank-mailman (output) from mailman id 1491947.1692636; Tue, 17 Nov 2026 08:25:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTEVB-000061-5m; Tue, 17 Nov 2026 08:25:17 +0000
-Received: by outflank-mailman (input) for mailman id 1491942;
- Tue, 17 Nov 2026 08:25:15 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xTEV9-00005v-Gj
- for xen-devel@lists.xenproject.org; Tue, 17 Nov 2026 08:25:15 +0000
+	id 1xTEVc-0000VF-DV; Tue, 17 Nov 2026 08:25:44 +0000
+Received: by outflank-mailman (input) for mailman id 1491947;
+ Tue, 17 Nov 2026 08:25:42 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <alex@amutable.com>) id 1xTEVa-0000Ul-66
+ for xen-devel@lists.xenproject.org; Tue, 17 Nov 2026 08:25:42 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xTEV8-00Ak2V-Ec
- for xen-devel@lists.xenproject.org; Tue, 17 Nov 2026 09:25:14 +0100
-Received: from [10.42.69.3] (helo=localhost)
+ id 1xTEVZ-003aWQ-8I
+ for xen-devel@lists.xenproject.org; Tue, 17 Nov 2026 09:25:41 +0100
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6afc0f5f-e002-0a2a0a5209dd-0a2a4503db1c-32
- for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 09:25:14 +0100
-Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6afc0f69-fae8-0a2a45030019-d155802cdc0f-3
- for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 09:25:13 +0100
-Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-4bb6c7b6dbdso26196245e9.0
- for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 00:25:13 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb783853b5sm51434645e9.2.2026.11.17.00.25.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 17 Nov 2026 00:25:12 -0800 (PST)
+ (envelope-from <alex@amutable.com>)
+ id 6afc0f77-8faa-0a2a0a5109dd-0a2a450ad870-24
+ for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 09:25:41 +0100
+Received: from [209.85.221.50] (helo=mail-wr1-f50.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <alex@amutable.com>)
+ id 6afc0f84-f2d2-0a2a450a0019-d155dd32ddcd-3
+ for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 09:25:40 +0100
+Received: by mail-wr1-f50.google.com with SMTP id
+ ffacd0b85a97d-492690dd5daso4102941f8f.1
+ for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 00:25:40 -0800 (PST)
+Received: from ?IPv6:2003:cf:572c:2800:de4c:6789:33ce:97c2?
+ (p200300cf572c2800de4c678933ce97c2.dip0.t-ipconnect.de.
+ [2003:cf:572c:2800:de4c:6789:33ce:97c2])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-49c5ff2be55sm26907832f8f.28.2026.11.17.00.25.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 17 Nov 2026 00:25:38 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,167 +52,132 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=amutable-com.20260707.gappssmtp.com header.i="@amutable-com.20260707.gappssmtp.com" header.h="MIME-Version:User-Agent:Content-Transfer-Encoding:Content-Type:References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1794903913; x=1795508713; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=A/e7Pgzr1crb4oFCa7jFyqiS3XgiVyrISKnK13G9sqs=;
-        b=HdEJQM8li1sU6dfRGrxAE1qZuOmMpmmepPx+mr6Sv+vlVRoT7cRTlsjccwrOOXhd6A
-         37Sb3GCB8k5QJIA3KPz7fdreNEXLO5riYwqZ1hiGjx2jD4DDpFqdwxwENsUNX6CLsY3e
-         fLeH4vQxTYuWfKXgwKCvlyM0V1DpeZvdL68ojp0W3Pb+tpvJcGuWuBYsiYvLrXceZVf5
-         AsGrzmoB4hdF/eak/8eMQtnd90iSSkzQj2WseW0rrcb7Hc24+5xvEIfKxTWCcW0iDNtD
-         15bcrYQHGPp9UVw+kDcY4aC/MqGbxDIRCltjDWiiMUS4XudurYDHcRq5x8tGDLTKJ7lp
-         EFYg==
+        d=amutable-com.20260707.gappssmtp.com; s=20260707; t=1794903940; x=1795508740; darn=lists.xenproject.org;
+        h=mime-version:user-agent:content-transfer-encoding:content-type
+         :references:in-reply-to:date:cc:to:from:subject:message-id:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=UGlayfD5Z/El6cdpm6ie0HDMH84kD107OWGXScU9uXE=;
+        b=JoaZXa4uRoOQHDb4HuL6NUxrVFN+/I1gT1Uzo8lFm1BFeTkuUrjjffOhwzgZycXFrW
+         hcDjCt+hLX8wYqt/xUOuMU8PUVgk8FvFqrQhOavmPQff7jfUCqbIhd6qvPvJUN0AtUe3
+         kZ9aZ3ffOLSwcX714wZZa/S3mVNFYmCK/xAf5KZ0vaJSr6HtsyqwtUVnaZF6KaXT8+5z
+         2fBXQ5yi1sOBGyXlGUCHohxUoEluufEqmCmO6YcD829xs/HyL5kEF2Y13MPh0u1ITNDu
+         K7rCb05CanGnUOupIPJTJOA+S52WCjvJdzbcHpj0f6BB/vK/s3phyXdFGFj2rK7rXkUd
+         eGEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794903913; x=1795508713;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=A/e7Pgzr1crb4oFCa7jFyqiS3XgiVyrISKnK13G9sqs=;
-        b=dOEalilj6mfJArwEfD/A4PMKSABNhKJz3lRgTGzYjti3Dp5IK1v4oxL0KWsAu8e4AE
-         pJUBdBmVO0e9FH5w8Zo8lElM0P7f5fvvUFp6V1sKYViJtHGcD1gHzuH2emtEy1smB22V
-         cQzh434pSrD/HiIdkQM9cZnAIeGodQn9kfCi3ikf3RtIYb/zwHa3pokJwxCzRsCIvHoj
-         37Rkr/3RX2t2n8VVngBnlrCQl4CIr1iwniT2Gtg4AewHIwZx39OwVI8C1IJhvQHcwywS
-         MtmnhcOc0mEdtOAVRESr/U5OZvmuE7EGfz0wUhO1JkZYxpMcc0NTzkB6x6oj/Nm2amZw
-         iokA==
-X-Forwarded-Encrypted: i=1; AL+hErHsWs5hQOKYqEqRwXwwQ435uyl2boVVc9JNK/ywlkwX6VyKqKOhO+gLM4FhTPaAwV8CiIdDT4QiIDY=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z+mlg37DipwDU/7L9BPkmcJEtrkD2hlojzSKy6vTGNihMcN05gH
-	B8fkKucFoR3BLhX7HRkzQ80zTgMzh+gdiaziXCCQ8rXOvdjKN693i8fVkgabTAmWwA==
-X-Gm-Gg: AYBFou16hddw5iKGRspx7YbqQG7HswbHBMOvj+IrrwMikY8KsGk2GeCHVeZ+R6+sZmw
-	Ob3qVveSsfjQjD0NZ6C8VhBdZuEYC/y/n84pureT+XQnOUkBLdCVQspRiSpE70EPuRuJBN3rI4S
-	hG3HgW4uqdldauC/cTequT+A/Kcba9QuKWTsEFsJQSS3fnfDTVP0j5a/MGmeGE7GcxXaPFqMMy3
-	WRxuXS9y4daY/9iVOoSmP5QygYc9gwLCtI5cZ44OpI6nFDiYE6933Z1Vb0nx9A/ujwAWm2yPoP4
-	otPjBcTTprynQYFARxKzGX+w7I2HFezsVvqoiKrPYfzdq8rjbZNjK1x3LL6nc0pyA/EtvXUCVKj
-	c6WXdUy1bzLAffUQKhC1cjO9Db0ElwNEk2jTZyJTKBqrWUPFgvOP+TTmdo/wgYCpJ5sZg9lxGYS
-	euZL1Ddacx/fO4YmtS7zS2iSUsTN+DPn1HhWwNKGcHplpc1WITXMv8U80vIyCda4GEtY+oVN7hA
-	21GEn/3nJj5/2P8Gc/ywPEef24SfLymQ4giNJEJtMqAqfDBKIfwNzPYdZSQqUf+XRQnBv+gB2af
-	waMEuy8AQiw0qKi9LvzBtvpvPaWyyt+Lbg6Yu6CYQmEs4DOsuHYoEiGtmbdaSJEevj5jbBfrVX9
-	jTz36fWMPJQvKw1fyPg==
-X-Received: by 2002:a05:600c:501f:b0:4bb:76f6:d23a with SMTP id 5b1f17b1804b1-4bb779f5b93mr59729635e9.21.1794903912898;
-        Tue, 17 Nov 2026 00:25:12 -0800 (PST)
-Message-ID: <521ed475-45b0-4dfa-8b66-11d5f76a2a96@suse.com>
-Date: Tue, 17 Nov 2026 09:25:11 +0100
+        d=1e100.net; s=20260707; t=1794903940; x=1795508740;
+        h=mime-version:user-agent:content-transfer-encoding:content-type
+         :references:in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=UGlayfD5Z/El6cdpm6ie0HDMH84kD107OWGXScU9uXE=;
+        b=t6yCjBYDLojNa5wXww0+l26fHuavIwjSKGBjHGroV0fIhLFH//GK6P/lUkNtUEyOfX
+         N0j7LW6qSaUm06DOZ+pELR+2CnKTwn31cfYVqsSN/XkMV6pKhkewcDMFi/hUhUOHYHE1
+         S4cTZBSudrfVQVJ7JGVFrqh93Sf6eqpCoUS59Fui78qD3YzvvNSvJ/BXh1gk2kTUuN1J
+         Jp2JBFfxnNr1AnZrFIWTX3MivpRmOqkFweR9aaTkqSdqp9MExrjQFIsPp6ew4YFUKthT
+         14TiKYapUlMc+jnO766+TCwYUil/Q225gQTVer6O6uhgJGJpY9L4eWsLtGUaKgSzqYKY
+         G6qw==
+X-Forwarded-Encrypted: i=1; AL+hErGQU5YqtwCt2Zp2ciggq4hep4/+eWIOBZH1zHiXFtPu7QuSVyByLzAfL+uDKsr5oloDipo8tPL/9Y4=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z8CYZytbM+NRVv1XcjSZV1FmY7/orV9U8QzuaMqAiGK2MKhnp37
+	CPBLjf8OqSIl4QJHQB0+8oMN5SlzIsJI3VZWbhiRPZIj0jQHZjOlz5yjL0z4baJUJA61
+X-Gm-Gg: AZFdTZfNHmNgJbGvb26T65V/eWlpcBrfdr7PJOKleVwV8QiUBApzjXQrjGDIhwP/ECx
+	W81mZrfXhe3JCoKfIt40aJLIZU82H2BgZTU9+uafPgyW91o1ZoItJvmYLMDqG2PPrcGKWO4rHoz
+	lr6RPeDO00a82hS5j8epoZEk3sLhHWp68FzG1lq/6n2NVusGx/cj3og7B1nrwxgCAOKTx22Glh3
+	iJ0OnqexOrxLrVy2XlVwMKcniaxx36XvZ8VM2FVvF/If2OrAlpY+js6NCMU1I1N6tLKxAM++UqE
+	3apEK3gH4lDTTDcTP7LCHuDbv5MSfYkB9o61Go5GlyOOKxPv5Swq+QJeMFVHf0iPecwkcQ4PouZ
+	aB6rVbk7Yow/hNeWoU5YkUOcqcyseiXGFKzOsS/DsPaV6NNLzdIs9Vgw0KMP0VAMWZsvc+z/8iz
+	o7Xh+sV72r2DbNt3AXxmxg1bc+9VbmGHCPSnnQiNQI/43p3XEbATTRi0m2N8rwwfAF0fA+NVQf4
+	d5UO914if1As3T4PX0FXOd0BgT8InCmA2WBiY6lV9M19Al4kb5zCsgPsu6zNim74wkIdZbctMs4
+	NG7MvDn7HwcrsJ42/2ixhyR0Mv6YDfc5wqL6sczPNIMlheZRRpQXvWzvN8vmKzbjQDekbrrk6xI
+	wn54cO9H5nUXT9PLCqOfyJ4paSLlSvQA383776Xb7k3k1L2xWTC5RKHD0/gANDijoxB2OqR6ex6
+	FDfQ==
+X-Received: by 2002:a05:6000:2084:b0:492:46e:d4ce with SMTP id ffacd0b85a97d-49c6fd932c8mr25238543f8f.13.1794903938925;
+        Tue, 17 Nov 2026 00:25:38 -0800 (PST)
+Message-ID: <a9124bf1c858cef3e8ac06b1b2396dcb0e19e2a5.camel@amutable.com>
+Subject: Re: [PATCH RFC v3 02/44] nvmet: check that the file backend
+ supports ->{read,write}_iter
+From: Alexander Mikhalitsyn <alex@amutable.com>
+To: Christian Brauner <brauner@kernel.org>, linux-fsdevel@vger.kernel.org
+Cc: Jann Horn <jannh@google.com>, Chris Mason <mason@kernel.org>, Josef
+ Bacik	 <josef@toxicpanda.com>, Christoph Hellwig <hch@lst.de>, 
+	linux-block@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-nvme@lists.infradead.org, Alexander Viro <viro@zeniv.linux.org.uk>,
+ Jan Kara <jack@suse.cz>, linux-scsi@vger.kernel.org,
+ target-devel@vger.kernel.org, 	driver-core@lists.linux.dev,
+ linux-mm@kvack.org, bpf@vger.kernel.org, 
+	linux-security-module@vger.kernel.org, selinux@vger.kernel.org, 
+	apparmor@lists.ubuntu.com, linux-nfs@vger.kernel.org,
+ netdev@vger.kernel.org, 	fuse-devel@lists.linux.dev,
+ linux-efi@vger.kernel.org, 	xen-devel@lists.xenproject.org,
+ ocfs2-devel@lists.linux.dev, 	linux-s390@vger.kernel.org,
+ linuxppc-dev@lists.ozlabs.org, 	linux-usb@vger.kernel.org, Amir Goldstein
+ <amir73il@gmail.com>, 	linux-erofs@lists.ozlabs.org,
+ linux-kselftest@vger.kernel.org, Chris Down	 <chris@chrisdown.name>
+Date: Tue, 17 Nov 2026 09:25:36 +0100
+In-Reply-To: <20261116-work-loop-pseudo-v3-2-8cbbea1cf34f@kernel.org>
+References: <20261116-work-loop-pseudo-v3-0-8cbbea1cf34f@kernel.org>
+	 <20261116-work-loop-pseudo-v3-2-8cbbea1cf34f@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.56.2-0+deb13u1 
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] x86emul: Zero-extend unsigned 8-bit immediates when
- decoding
-To: Stephen Cheng <stephen.cheng@citrix.com>
-Cc: Ross Lagerwall <ross.lagerwall@citrix.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
-References: <20261117025010.229327-1-stephen.cheng@citrix.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20261117025010.229327-1-stephen.cheng@citrix.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-33051d/1794903913-6D2D84E9-DE403F16/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 3303
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=4.0.1
+X-purgate-ID: tlsNG-4011c0/1794903941-4ABD8CFC-9048BB22/0/0
+X-purgate-type: clean
+X-purgate-size: 1587
+X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY autolearn=unavailable autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 17.11.2026 03:50, Stephen Cheng wrote:
-> The decoder sign-extends all 8-bit immediates. This is right for e.g.
-> Jcc rel8 and Grp1 (83), but some 8-bit immediates are unsigned: the
-> vector of INT, the port of IN/OUT, the base of AAM/AAD, the count of
-> the Grp2 shifts (C0, C1), and the 8-bit immediates in the 0F, 0F3A and
-> XOP08 maps. For these, s->imm1 holds a wrong value for 0x80 and above.
-> x86_insn_immediate() can return this value too.
-> 
-> The worst case is INT $0x80 to INT $0xff, which puts a negative vector
-> into the event (e.g. -128 for 0x80). hvm_inject_event() then fails its
-> "vector == event->vector" assertion, and a debug Xen panics. An HVM
-> guest can trigger this with the forced emulation prefix (hvm_fep).
-> 
-> Zero-extend these immediates in the decoder. At the IN/OUT and AAM/AAD
-> use sites, replace the (uint8_t) casts, which are not needed any more,
-> with ASSERT()s.
-> 
-> Fixes: 653cae725cea ("x86/32on64: use generic instruction decoding for call gate emulation")
-> Fixes: 52053d5fc2f9 ("x86/emul: Drop swint_emulate infrastructure")
-> Assisted-by: Claude:claude-opus-5-5
-> Signed-off-by: Stephen Cheng <stephen.cheng@citrix.com>
+On Mon, 2026-11-16 at 12:04 +0100, Christian Brauner wrote:
+> The file backend calls ->read_iter() and ->write_iter() of the
+> backing
+> file directly but never checks that they exist. Everything that isn't
+> a
+> block device ends up in the file backend. So a namespace pointing to
+> a
+> file without them calls a NULL pointer on its first I/O. Only
+> buffered_io=3D1 gets that far as the O_DIRECT open fails for such
+> files.
+>=20
+> Refuse them when the namespace is enabled the same way zloop does
+> since
+> commit 0c10f8a1a7ae ("zloop: check that the zone backing file support
+> ->{read,write}_iter").
+>=20
+> Fixes: d5eff33ee6f8 ("nvmet: add simple file backed ns support")
+> Reviewed-by: Jan Kara <jack@suse.cz>
+> Reviewed-by: Christoph Hellwig <hch@lst.de>
+> Reviewed-by: Chris Down <chris@chrisdown.name>
 
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Alexander Mikhalitsyn <alex@amutable.com>
 
-> @@ -1804,6 +1816,8 @@ int x86emul_decode(struct x86_emulate_state *s,
->          break;
->  
->      case ext_0f3a:
-> +        /* All immediates in this encoding space are unsigned ones. */
-> +        s->imm1 &= 0xff;
->          d = ext0f3a_table[b].to_mem ? DstMem | SrcReg : DstReg | SrcMem;
->          if ( ext0f3a_table[b].two_op )
->              d |= TwoOp;
-
-RORX in this space is interesting. Both AMD and Intel implicitly say the
-immediate there is unsigned (by clarifying that the upper few bits are
-ignored), but (largely like for VPROTx below, just with directions
-reversed) one can view negative values are rotates to the left.
-
-> @@ -1814,6 +1828,8 @@ int x86emul_decode(struct x86_emulate_state *s,
->          break;
->  
->      case ext_8f08:
-> +        /* All immediates in this encoding space are unsigned ones. */
-> +        s->imm1 &= 0xff;
->          d = DstReg | SrcMem;
->          if ( ext8f08_table[b].two_op )
->              d |= TwoOp;
-
-I think I'll adjust this comment slightly: For VPROTx one can look at the
-immediate as both signed and unsigned: "When the count value is negative,
-bits are rotated to the right". I.e. I'll do s/are/can be viewed as/.
-
-Would you further be up to following up with another, smaller patch
-dealing with a similar issue? XOP0A has a 32-bit immediate, which we
-(apparently wrongly) sign-extend, as all three insns there use only the
-low 16 bits anyway. (This only affects x86_insn_immediate() afaics.)
-This may extend elsewhere, so the scope of this isn't entirely clear just
-yet: For example, MOV (opcode B8) in 64-bit mode without REX.W zero-
-extends its immediate. The zero-extension we do in decode_onebyte() for
-the REX.W case wants pulling out. The 16-bit forms may also better zero-
-extend their immediates.
-
-While benign there (for now), I'll adjust the JMPABS patch in the APX
-series accordingly as well. Similarly Map7 handling will want to have
-the immediate zero-extended (for now uniformly), even if again only for
-x86_insn_immediate()'s sake.
-
-Jan
+> Signed-off-by: Christian Brauner (Amutable) <brauner@kernel.org>
+> ---
+> =C2=A0drivers/nvme/target/io-cmd-file.c | 5 +++++
+> =C2=A01 file changed, 5 insertions(+)
+>=20
+> diff --git a/drivers/nvme/target/io-cmd-file.c
+> b/drivers/nvme/target/io-cmd-file.c
+> index 695963dd932ee..dfa8aa46188c8 100644
+> --- a/drivers/nvme/target/io-cmd-file.c
+> +++ b/drivers/nvme/target/io-cmd-file.c
+> @@ -47,6 +47,11 @@ int nvmet_file_ns_enable(struct nvmet_ns *ns)
+> =C2=A0		return ret;
+> =C2=A0	}
+> =C2=A0
+> +	if (!ns->file->f_op->read_iter || !ns->file->f_op-
+> >write_iter) {
+> +		ret =3D -EINVAL;
+> +		goto err;
+> +	}
+> +
+> =C2=A0	nvmet_file_ns_revalidate(ns);
+> =C2=A0
+> =C2=A0	/*
 
