@@ -2,46 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E5A9B606A31C
-	for <xen-devel@archiver.kernel.org>; Tue, 17 Nov 2026 16:34:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2ACF0606A31C
+	for <xen-devel@archiver.kernel.org>; Tue, 17 Nov 2026 16:34:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=APUPzylW
-Received: from list by lists.xenproject.org with outflank-mailman.1492894.1693142 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=NDCj74cc
+Received: from list by lists.xenproject.org with outflank-mailman.1492892.1693134 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTM8J-0006EQ-V3; Tue, 17 Nov 2026 16:34:11 +0000
+	id 1xTM89-000606-Od; Tue, 17 Nov 2026 16:34:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1492894.1693142; Tue, 17 Nov 2026 16:34:11 +0000
+Received: by outflank-mailman (output) from mailman id 1492892.1693134; Tue, 17 Nov 2026 16:34:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTM8J-0006EJ-SI; Tue, 17 Nov 2026 16:34:11 +0000
-Received: by outflank-mailman (input) for mailman id 1492894;
- Tue, 17 Nov 2026 16:34:10 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <olekstysh@gmail.com>) id 1xTM8I-0006Dj-GX
- for xen-devel@lists.xenproject.org; Tue, 17 Nov 2026 16:34:10 +0000
+	id 1xTM89-0005zz-Lu; Tue, 17 Nov 2026 16:34:01 +0000
+Received: by outflank-mailman (input) for mailman id 1492892;
+ Tue, 17 Nov 2026 16:34:00 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xTM88-0005zs-Gp
+ for xen-devel@lists.xenproject.org; Tue, 17 Nov 2026 16:34:00 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xTM8H-00Ct9M-TG
- for xen-devel@lists.xenproject.org; Tue, 17 Nov 2026 17:34:09 +0100
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xTM87-00FyNG-IL
+ for xen-devel@lists.xenproject.org; Tue, 17 Nov 2026 17:33:59 +0100
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <olekstysh@gmail.com>)
- id 6afc81e0-2eae-0a2a0a5409dd-0a2a4504d9e0-44
- for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 17:34:09 +0100
-Received: from [209.85.208.181] (helo=mail-lj1-f181.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <olekstysh@gmail.com>)
- id 6afc8201-b57f-0a2a45040019-d155d0b5e5c1-3
- for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 17:34:09 +0100
-Received: by mail-lj1-f181.google.com with SMTP id
- 38308e7fff4ca-3adfe77d336so713721fa.1
- for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 08:34:09 -0800 (PST)
-Received: from [192.168.0.114] ([91.123.151.27])
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6afc81e7-e002-0a2a0a5209dd-0a2a4508e7b8-26
+ for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 17:33:59 +0100
+Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6afc81f7-f659-0a2a45080019-d1558032d1aa-3
+ for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 17:33:59 +0100
+Received: by mail-wm1-f50.google.com with SMTP id
+ 5b1f17b1804b1-4a214c5c4c0so462225e9.3
+ for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 08:33:59 -0800 (PST)
+Received: from ?IPV6:2a01:cb15:80c6:e800:d2ca:523:c712:18a6?
+ ([2a01:cb15:80c6:e800:d2ca:523:c712:18a6])
  by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-3ae2b4b1f68sm39877221fa.0.2026.11.17.08.34.06
+ ffacd0b85a97d-4a43775f9b9sm5210508f8f.26.2026.11.17.08.33.57
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 17 Nov 2026 08:34:08 -0800 (PST)
+ Tue, 17 Nov 2026 08:33:57 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,70 +52,66 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794933249; x=1795538049; darn=lists.xenproject.org;
+        d=gmail.com; s=20260707; t=1794933239; x=1795538039; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=b4Mfy5RdLzTmhxN9VcE97uJlnIaWhvHDR3ofzo8USlE=;
-        b=APUPzylW+k8kT7aT3kh2ihw6DtPocOl4LVm8KS0281/o2nP6dcc1b7p7MWnpqiLtId
-         TaVvJjjG92BZSac97g4uSajTxH3udWsQocsiks4OlVgZDmXTLJTJdO7SbqALLhJZS6o3
-         PzmIBeQfM/nctAlyXnjzStr8NEX8sVZsXqx5s5qHNUDtqVG9d86heKieJeyYrxU6Swvx
-         JUGdpW5TnfE9ckz2xHFH8TmDhadiw2taLHPl6eMKqB66UJCoEOtfsypK+3O3lR17rJ09
-         ftXLa+7NXv5fhFYtTP5/KJaXD1L607Lsaadws1J55umxVruJ/hZtnxSipZrd0y4sKFo8
-         MFfw==
+        bh=uVNdihODAD1cwkDc7P0uT3pquGbIVAI9DIgYlIawNRA=;
+        b=NDCj74cc5fZADCGc/uZ/Vvkz4t9KvN02Z6W5CwdR0ExV8emZm44t7DezjmroYHaukC
+         alPICpNx+P2qVHYKol0q2EKfhRT5t4w6a6JsFYK3JIOakGWOcQJB3DDbeoP+vbqBlM8s
+         djty5VCCl2tB9NAmS57621V2hZKvWk3Wow8ejahQIS8iFE0y2USfBgZouYSaGC1XD4HY
+         g4TznAVDvqKIKdONXXEEibJyKy68s551/cMcVBpcCsF+3BsTeV+RO8qsQR7Du6R7m1jI
+         8WqUFFYxy4W5QqlraCDGO9UEDn17vUplq9KRtti/vw16snzkxt17Pg5Rw1TNT7ayUdvg
+         WS2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794933249; x=1795538049;
+        d=1e100.net; s=20260707; t=1794933239; x=1795538039;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=b4Mfy5RdLzTmhxN9VcE97uJlnIaWhvHDR3ofzo8USlE=;
-        b=08LiMmegnHEGc2DOooSWWM31caH7IUHELmY/v24KS6AkwyYxKeW3NkPcYaclwUJvVt
-         yvtmY0YAFE22tiARzp8t1vll338L5VTJYvpCGtEQOvKoyZ/QU4O/hbkD0d9sH/uiiwRy
-         sS49WIePXvPhHNeX95fpPeNxZ5wR63wDl2OJMEk619v+CGDUxWOPXwh7G4RpM/abed1v
-         V7Gs94xJUmQufsKXSB0wmcpcnqV1WqOAvhh5amzHaIhDG3iVAKHCs82B5C+88A6I9QRP
-         6Z7rsPmkVRSb+XBGPsmhXRQtRtMMWGicwKGN70t91KkP7Xnmoxhen1BlIqoBByg0G6j1
-         vX/g==
-X-Forwarded-Encrypted: i=1; AL+hErEY+U+i0mzo69CTU1A3Ft+eqzgtu1SI1wweGdBv+//RnGsNbM5VSTUvzyCphTnNq6CslM74/xAH2eg=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z/MjGykAalFshqtO49TT38/BjqwATBvloDoKkis198tCXpZwMDX
-	JM6X4CjciT5OZaL2ySGHzOhcAoA3S2+w0aqZj3nmy4GKaRbKqwHsVFQu
-X-Gm-Gg: AYBFou1e/ev+NBWFCt4JbU+W8A2bg/9nnnwcVAIpv28ZJIn+3e8IOwVQwiAtZAMURHN
-	1slq652WOwz8vxg92WFjpUjqNb30M1YHhsUoaExE44MdYm2u9zchvNKs/6wEVnNbnvH8ZHTN2Ut
-	lKFDyJv95LUflzVir9wfYaiiNgrjblpFV4fMeurq2ptgbUZSLdmcdKa3o9t6ys8Vzhz8GJ1cEFa
-	qhLQEUomwMyPLuZ6vVLxicxhvZrBIR5Xz46CskDLm/iAhNrYFwRd9WulK3CFGCqJn3BTjbPlQXB
-	561VWg626ZEdYif/+E/D5Pk9lPBbrp2pu96Etl9GPw5n2HmtQNUj6ni6lQsFyrBtjdlHhQZd18s
-	U1f2NVAvM+sBEEAgseMhBSAy2srDVjcr3KNlbjlEx1WBjGhsfpS+AxU4sumrlY2KrygmmVmXvk4
-	QTlvQAuz7yd/zs1P3uj0gmc+7/CSjX+X9um0d08wbjccviml4mtRNJWB9mY2wZkoA5izz1JjwlA
-	MKFVQ6VzA7Pf6+xcZXEftzIc7o+Kge5HP0q/jGtj7taThqRXS3f7YaijYgmxgUNzYvt3bpj9Pmo
-	EszgXvAEYBFsZTWs6nU1uLOR6I46FbI=
-X-Received: by 2002:a05:651c:1b0f:b0:3ac:e26b:d9cc with SMTP id 38308e7fff4ca-3ae2b4f84b8mr49851341fa.23.1794933248950;
-        Tue, 17 Nov 2026 08:34:08 -0800 (PST)
-Message-ID: <57aa4eef-5af7-4ae8-9be3-84671ded2d12@gmail.com>
-Date: Tue, 17 Nov 2026 18:34:06 +0200
+        bh=uVNdihODAD1cwkDc7P0uT3pquGbIVAI9DIgYlIawNRA=;
+        b=zaOrGKlDNob5HOz0f4wed5J6P/itsqYcG1Rs7Lg0u+WAbsurDJ4aIuOGkvS8HLZLBt
+         EGwi8h+cZ4LxB3Ihyt85CnUFvQ96rst8k+T02LeXtuhLu+XFLQioQZlSQijG3b8miLLc
+         VKBxumKjqRF/Lc3dGtEYYiimTj5CA3Pf/aQYbwhYNz5/r5g0oyHAHHbtqxUTFTBt3eO2
+         SgexOMXJy1/lCUmoRhnsOKRNrO+Rz201RgdLjx3IA2+sJ3eYko5btyzZ2OHjgeg6TXZV
+         e+f01ma2OlpC+dDaROXj1dKgUpne44nXEd/4V5aP2AEmVKffJH6b6a+T25yxNiJ/NHMJ
+         mazQ==
+X-Forwarded-Encrypted: i=1; AL+hErGqNFtlXahpZ3+O14B2LSUv/gvj98l1S90uAliLifXnKjnwUApe9xG5zoMAhoorHSExwYzTdjALKsI=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z+dN56v+tBYN4GzlbAFyhJsCiFW6svvEstnkf1QkdaOXlKlEEg+
+	ZI3CBu7j3oNpOUfwkxw40lloYlq2GgA6pWV1Sk8OrH08sVXym1rSj5t2
+X-Gm-Gg: AYBFou1W6hGhWjlxdFUuhQQs6VtxyJEMSXQBvVlopsnWPPNmCw8hZINfIh5s22/IEbZ
+	rJw2UUMMi4/EW0rj7f6lrbdKlcr+aHSyj1jNXme2ugNWPX20ZP0WiWg/I24u8HjSnQwdT5iTGJZ
+	KojDU8F59u8D5wP3hnxPy0+yg9W/i9XB1sBM1hcxhWjfATRpiSSmgWEy+i6J4IA8CpBjpFedfn5
+	3uBfuis/6MG7sg4dmmIhxvImorcoIus5X4kWCkoyxqvN2cGZ14ySHFsFEwG90VfI+zcrIcisrQX
+	iOVuTXw3R9B4MJTZw9ahTikZeUXR/GoMMe1tQfbQfgBadbY4pGf3dugpsYzwDPrWPCsv6Ib0RMb
+	HqMpRzBj9H5BqxHENJo/uXWI6PhZYTG1gd4oCLJgM2T5gAVnGuFkAugxBouBdIZvKZWmLQQk5Dm
+	UHJI0ympAdOWEc7WD7KV/lVm83GPVhuoKzMmK2qR8yf5fN41MAzuGefD14r88+1i1fw/UeopoY8
+	M5qPbO89y17OLVuH2NUrw965OyCk9DOcjuhcB2aC9JWWsf/UhMYnXryzv2VDxmclNFGSep/SW2I
+	ys1U+G847aAhuG6wj/D0TULYDF7eaICZOgO44SsCxSIXhwjyGQ+lq2nDXIw6SVYSqm9UGVxPTLt
+	dWFeglWH7ZThzuNJxRmsdFQmuc0CtoKc=
+X-Received: by 2002:a05:600c:3d91:b0:4bb:6861:657d with SMTP id 5b1f17b1804b1-4bb686166e8mr211490435e9.21.1794933238776;
+        Tue, 17 Nov 2026 08:33:58 -0800 (PST)
+Message-ID: <2c4f0ced-7bae-423c-9265-fe0fcbb3dbfb@gmail.com>
+Date: Tue, 17 Nov 2026 17:33:57 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/2] pci/rcar: Rename PCI host rcar4 to rcar
-To: Mykyta Poturai <Mykyta_Poturai@epam.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
- Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <cover.1794817300.git.mykyta_poturai@epam.com>
- <350d08bb0f494f96c02cedc4fa5e40673d512236.1794817300.git.mykyta_poturai@epam.com>
-Content-Language: ru
-From: Oleksandr Tyshchenko <olekstysh@gmail.com>
-In-Reply-To: <350d08bb0f494f96c02cedc4fa5e40673d512236.1794817300.git.mykyta_poturai@epam.com>
+Subject: Re: [PATCH v8 08/26] emul/ns16x50: implement LCR/LSR registers
+To: dmukhin@ford.com, xen-devel@lists.xenproject.org
+Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com,
+ julien@xen.org, michal.orzel@amd.com, roger@xenproject.org,
+ sstabellini@kernel.org, xakep.amatop@gmail.com, dmukhin@xen.org
+References: <20261111194800.1070016-1-dmukhin@ford.com>
+ <20261111194800.1070016-9-dmukhin@ford.com>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <20261111194800.1070016-9-dmukhin@ford.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1794933249-C08D9B50-77C72539/0/0
-X-purgate-type: clean
-X-purgate-size: 1838
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-c1860d/1794933239-D7B5987B-A679A5A7/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 3905
 X-Spam-Status: No, score=-14.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
@@ -126,54 +122,118 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 
 
-16.11.2026 10:40, Mykyta Poturai пишет:
+On 11/11/26 8:47 PM, dmukhin@ford.com wrote:
+> From: Denis Mukhin <dmukhin@ford.com>
+> 
+> Add LCR/LSR registers implementation to the I/O port handler.
+> 
+> Add implementation of ns16x50_dlab_get() and ns16x50_iir_check_lsi().
 
-Hello Mykyta
-
-> Gen5 mostly reuses the same DesignWare integration and register layout
-> as Gen4, so one driver covers both. Drop the generation number from the
-> file and symbol names.
-
-NIT: But rcar4_pcie_osid_*, rcar4_pcie_bdf_msk_set, struct 
-rcar4_pcie_priv, etc keep the generation number. Yes, the reason (the 
-registers exist only on Gen4) is mentioned in cover letter, but this 
-will not be committed to git history. I would add a sentence in the 
-patch description.
-
+There's no ns16x50_dlab_get() in this patch, or anywhere in the series;
+DLAB is tested open-coded as regs[UART_LCR] & UART_LCR_DLAB. Either the
+sentence is stale or the helper got lost (a helper would indeed be nice,
+as that expression appears four times by now).
 
 > 
-> Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
+> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 > ---
->   MAINTAINERS                                   |  2 +-
->   xen/arch/arm/pci/Makefile                     |  2 +-
->   .../pci/{pci-host-rcar4.c => pci-host-rcar.c} | 32 +++++++++----------
->   .../pci/{pci-host-rcar4.h => pci-host-rcar.h} |  6 ++--
->   xen/drivers/passthrough/arm/ipmmu-vmsa.c      |  2 +-
->   5 files changed, 22 insertions(+), 22 deletions(-)
->   rename xen/arch/arm/pci/{pci-host-rcar4.c => pci-host-rcar.c} (88%)
->   rename xen/arch/arm/pci/{pci-host-rcar4.h => pci-host-rcar.h} (88%)
+>   xen/common/emul/vuart/ns16x50.c | 23 ++++++++++++++++++++++-
+>   1 file changed, 22 insertions(+), 1 deletion(-)
 > 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index b804434d52..68b47adf81 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -504,7 +504,7 @@ T:	git https://xenbits.xenproject.org/git-http/qemu-xen.git
->   RCAR PCI
->   M:	Mykyta Poturai <mykyta_poturai@epam.com>
->   S:	Supported
-> -F:	xen/arch/arm/pci/pci-host-rcar4.c
-> +F:	xen/arch/arm/pci/pci-host-rcar.c
-
-Remark: pci-host-rcar.h is not covered by the RCAR PCI entry. Yes, this 
-is pre-existing and not caused by the rename, I thought the line was 
-edited anyway, so it would be a cheap addition.
-
-I did not find any issues with current patch.
-
-Reviewed-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-
+> diff --git a/xen/common/emul/vuart/ns16x50.c b/xen/common/emul/vuart/ns16x50.c
+> index 7c5cdc99cfa7..e80815ccf6e2 100644
+> --- a/xen/common/emul/vuart/ns16x50.c
+> +++ b/xen/common/emul/vuart/ns16x50.c
+> @@ -64,6 +64,11 @@ do { \
+>   #define ns16x50_debug(vdev, fmt, args...) \
+>       ns16x50_log(3, XENLOG_DEBUG, vdev, fmt, ## args)
 >   
-...
+> +/*
+> + * Helper register definitions.
+> + */
 
-[snip]
+Nit: Single line comment should be enough here so please use /* ... */
+
+> +#define UART_LSR_MASK           (UART_LSR_OE | UART_LSR_BI)
+
+Nit: this is local to the emulator, but uses the UART_ prefix of
+xen/8250-uart.h, so it looks like a register definition from there. Also
+"MASK" doesn't say what it is: these are the LSR bits that raise the LSI
+and are cleared by reading LSR. On a 16550 that's all four error bits
+(OE, PE, FE, BI); the emulator never sets PE and FE (nor BI, as far as I
+can see), but including them would match the datasheet and cost
+nothing. Maybe NS16X50_LSR_ERRORS?
+
+> +
+>   /*
+>    * Number of supported registers in the UART.
+>    */
+
+
+Nit: Single line comment should be enough here so please use /* ... */
+
+> @@ -116,7 +121,7 @@ static inline void ns16x50_unlock(struct vuart_ns16x50 *vdev,
+>   
+>   static bool cf_check ns16x50_iir_check_lsi(const struct vuart_ns16x50 *vdev)
+>   {
+> -    return false;
+> +    return vdev->regs[UART_LSR] & UART_LSR_MASK;
+>   }
+>   
+>   static bool cf_check ns16x50_iir_check_rda(const struct vuart_ns16x50 *vdev)
+> @@ -245,11 +250,16 @@ static int ns16x50_io_write8(
+>           }
+>           break;
+>   
+> +    case UART_LCR:
+> +        regs[UART_LCR] = val;
+> +        break;
+> +
+>       /* NB: Firmware (e.g. OVMF) may rely on SCR presence. */
+>       case UART_SCR:
+>           regs[UART_SCR] = val;
+>           break;
+>   
+> +    case UART_LSR: /* RO */
+>       default:
+
+A write to LSR (or later MSR) ends up in ns16x50_err(), i.e. a
+guest-triggerable error message per access. Real 16550s ignore such
+writes (the TL16C550C datasheet only says writing LSR isn't
+recommended), so silently ignoring them, or at most a debug message,
+seems more appropriate. The same applies to the other "unsupported
+access" paths in ns16x50_access().
+
+>           rc = -EINVAL;
+>           break;
+> @@ -346,6 +356,15 @@ static int ns16x50_io_read8(
+>           val = ns16x50_iir_get(vdev);
+>           break;
+>   
+> +    case UART_LCR:
+> +        val = regs[UART_LCR];
+> +        break;
+> +
+> +    case UART_LSR:
+> +        val = regs[UART_LSR];
+> +        regs[UART_LSR] = val & ~UART_LSR_MASK;
+> +        break;
+> +
+>       case UART_SCR:
+>           val = regs[UART_SCR];
+>           break;
+> @@ -509,6 +528,8 @@ static void ns16x50_reset(struct vuart_ns16x50 *vdev)
+>       memset(vdev->regs, 0, sizeof(vdev->regs));
+>       vdev->irq_asserted = false;
+>   
+> +    vdev->regs[UART_LSR] = UART_LSR_THRE | UART_LSR_TEMT;
+> +
+
+Matches the 16550 reset value of LSR (0x60).
+
+>       /* NB: report 115200 baud rate. */
+>       vdev->regs[NS16X50_REGS_NUM + UART_DLL] = divisor & UINT8_MAX;
+>       vdev->regs[NS16X50_REGS_NUM + UART_DLM] = (divisor >> 8) & UINT8_MAX;
+
+~ Oleksii
 
