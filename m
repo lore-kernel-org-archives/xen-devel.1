@@ -2,51 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A55D606A32F
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2026 09:05:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC9C6606A32C
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2026 09:12:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=ctLKwhtX
-Received: from list by lists.xenproject.org with outflank-mailman.1494080.1693760 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=bGSGidBv
+Received: from list by lists.xenproject.org with outflank-mailman.1494090.1693767 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTbbP-00043a-SD; Wed, 18 Nov 2026 09:05:15 +0000
+	id 1xTbhr-00066s-E6; Wed, 18 Nov 2026 09:11:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1494080.1693760; Wed, 18 Nov 2026 09:05:15 +0000
+Received: by outflank-mailman (output) from mailman id 1494090.1693767; Wed, 18 Nov 2026 09:11:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTbbP-00043T-NV; Wed, 18 Nov 2026 09:05:15 +0000
-Received: by outflank-mailman (input) for mailman id 1494080;
- Wed, 18 Nov 2026 09:05:14 +0000
+	id 1xTbhr-00066l-BK; Wed, 18 Nov 2026 09:11:55 +0000
+Received: by outflank-mailman (input) for mailman id 1494090;
+ Wed, 18 Nov 2026 09:11:54 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1ede71fe40006d3f@swg.vates.tech>)
- id 1xTbbN-00043N-Jp
- for xen-devel@lists.xenproject.org; Wed, 18 Nov 2026 09:05:14 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xTbhq-00066f-GA
+ for xen-devel@lists.xenproject.org; Wed, 18 Nov 2026 09:11:54 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xTbbM-000SJb-OX
- for xen-devel@lists.xenproject.org; Wed, 18 Nov 2026 10:05:12 +0100
-Received: from [10.42.69.4] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1ede71fe40006d3f@swg.vates.tech>)
- id 6afd6a3d-8faa-0a2a0a5109dd-0a2a4504b6e2-42
- for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 10:05:12 +0100
-Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1ede71fe40006d3f@swg.vates.tech>)
- id 6afd6a48-b57f-0a2a45040019-b9ff1c23a0bf-3
- for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 10:05:12 +0100
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a1ede71fe40006d3f.003 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Wed, 18 Nov 2026 09:05:09 +0000
-Received: from [192.168.1.14] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
- [90.18.187.194]) (Authenticated sender: teddy.astie@vates.tech)
- by mail2.vates.fr (Postfix) with ESMTPSA id C0841804C8;
- Wed, 18 Nov 2026 10:05:08 +0100 (CET)
+ id 1xTbhp-000U7B-Sa
+ for xen-devel@lists.xenproject.org; Wed, 18 Nov 2026 10:11:53 +0100
+Received: from [10.42.69.9] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6afd6bd8-2eae-0a2a0a5409dd-0a2a4509c9d8-10
+ for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 10:11:53 +0100
+Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6afd6bd9-be1a-0a2a45090019-d1558029b4e9-3
+ for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 10:11:53 +0100
+Received: by mail-wm1-f41.google.com with SMTP id
+ 5b1f17b1804b1-4bb69f5b161so4504045e9.0
+ for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 01:11:53 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4bb78422d2dsm188324875e9.10.2026.11.18.01.11.52
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 18 Nov 2026 01:11:52 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -55,200 +49,150 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=XPCdiU6K1aYORIrfMe/JZDa0ps9KN6GCom3OFGkq+hQ=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=ctLKwhtXv7ALLbpUsn2tOLEBT0AH0pOJi0nBtXd6YQNFXANMbYe8djjxkwQS9NZkIX0rkx5kW
- DTiIGiE4nAM/AuoK4m0rjuBKVOZqI9Dlx9U23ROaiPdov4wDBEpK8Bq8x97UMT07m6DArPtLG5F
- vRfx2whZ/fui8vR0EsqL0/swee6nhBjIr9lHszVLMvSmoviVwsq/tvxqw1L/xIxx4w3FWZilDBw
- 7aNq+j6rFQrSuPCpwtLqdlj0GsVRDGB0y403htfxIRufFAifc3k5JJqygj3tqudkV/ekxcklQVp
- gB623QykHbKooJni7HDapkhB5429rH4zVIwai1XVlEcA==
-X-Zone-Loop: 8e429bde8223e6968c9b55ec7fc4b6f37b0fa8a1f59c
-x-campaign-type: default
-x-transaction-id: 468e144a-ae8c-442e-8fa6-315b5772eb01
-x-swg-uid: 01-7c6e1bac-2443-4094-aebc-531db406cc53
-X-Mailer: Sweego
-Message-ID:
- <1794992709.8631fc262581453bbf619ec5b2062170.1a1ede71fe40006d3f@vates.tech>
-x-swg-bid: 1794992709.8631fc262581453bbf619ec5b2062170.1a1ede71fe40006d3f
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-Date: Wed, 18 Nov 2026 10:05:04 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1794993113; x=1795597913; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=LvkYIFPnR+UFtN+aOzqZ3Zynfu9Dz52iRzf4nUeu1ao=;
+        b=bGSGidBvyZtTtdvnwmDwhar5jKS4o2JQq7ANNmFr1uEIGiCgOR5LGvcYvfnodQt7M1
+         gykfkF8GUYEGXfi0Stf1OCTFF+hgi4lXyK3Lkh9pwq1JhXJGivGc/u/H9sqMFGzREjRk
+         QiXoBSnmidDoY9P8y02FxxdA4H2y8hgqWjFaxjxM2tuRzicMXuFIqfZNskSLi24SyRV8
+         ONskCL3UmVpd0YvADrx7RLjs0S4bWkEoi+896PGTSSdxbLUBXqc79XTVkZAoAed3TB50
+         dk1ARWezTkWDnl6cCe35ibm/aWvf5hUxvOWkRLe8xq32NRU2u/56OUHIJq79+Z6KrSum
+         7i6Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794993113; x=1795597913;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=LvkYIFPnR+UFtN+aOzqZ3Zynfu9Dz52iRzf4nUeu1ao=;
+        b=nOJzIAUMK6sbftKgFfMbVT764ZW9CLZNX/HHMpAy9cZ4ytcxdYWkFgdZhE/u3BOX5Z
+         0cJEvQi+bFcgUOoHKNY6NO/HDnRV1U+UjuhgFkfqs8A9jMbuE7cZS9Zas9DegCl7X0t7
+         Nvukzza/PYbwolUTVjzDzDweA7tzaKhnqw+y/pXuGe8AoJwE4BopYYgflH5gZk3HiHyi
+         Ob6CAddXWdtkYz4dnrrXcVH5F+AgXW8SQFoG0m4h1tEtDjfDVSkVAReZtoPz40V/si8f
+         jH/xxf8mibp5mxH6WWep1q3FejzB+VJL6BpBnbJH1LXdpg8QnLc4V/ACdPnt5eJhoIPI
+         xywg==
+X-Forwarded-Encrypted: i=1; AL+hErEOIP4q5jwdObx26lKARafPkN82OtvEJ8jLL1wTtGFBctZAIHsphGgDrMV8iGWu78ewBOjK838aBmo=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z9ktaWvmw6NiftOek6ADn6954lduDehoamvVmjPUaQgix1uFJav
+	m/7V0ySQOxCfE6SZ/QhNqXc6N7G8p3IvXqCUVLlfywPsNqgHCxkxur1bHiOoyQyhYw==
+X-Gm-Gg: AYBFou3FHydcuzAcqWxwNvJaq6IFI7RuVmX1CcYdNt4K7irQNkW0PSbVEtnU3JZtVac
+	B+s/W6we8lXbqIOXAr3AEL84xtFsza8H1gfGjrKealCUKGXNCfEKokxMGv5Yyab8i1b1nnNPhoT
+	DNzbAaPWylx1akOv9BCL3c+kM3J4u3sIPtz1aPiCtcvgAr9RhhnGxmgkSOuul1178Lk2GzRUBIn
+	W/3VhoVA9okZe45IwdF9YPvocclUY6sSlXbXtt4PkfIRj1pHd4+/TV7i/uOZuGrWk2DCayah9Fz
+	FTrKNxv9JST2VxYXIvsdgW8WnRWUHuI9jXFpqbPQhJdbngIebZ7nWlT8Hu9eAeTMrKiHV+roqj2
+	tWZ3QA9LknAK6mA+Bju3+4yX+ukH8JYiio/uLhJdcJ36hqFhS9xJlmJM/oTPQ/uYqz9vYeIkr8u
+	3zccvt5cnAhzRPhuc1IILTHkH0PMGKQ0u4jBafYQCeua4v8F6g2bySq9se0h2o8rebq0g8iQGQD
+	Vyuxbe8id/EQ+N5sj9ADJQXZbFOHGf9ILi72hMwtzvVOVrcMWmiNQTv6wrCx1QnmsEGve6CGLek
+	FXsxSAg/FTPNlbN2oU46985FmQhGoP66z9XTwqvaMu9jFCB79fjrCfVLL9ZIBgc/QTFk6ppw5Fw
+	wf4JKIzzViEM7bXrbVg==
+X-Received: by 2002:a05:600c:800c:b0:4a1:c5eb:b445 with SMTP id 5b1f17b1804b1-4bb7da3d581mr36535525e9.35.1794993113207;
+        Wed, 18 Nov 2026 01:11:53 -0800 (PST)
+Message-ID: <4b2c79a8-c9e1-4b6c-800f-10b68ff24343@suse.com>
+Date: Wed, 18 Nov 2026 10:11:51 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86/hvm: Don't save or load HVM context of a domain with
- no vCPUs
-To: Lin Liu <lin.liu01@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
- <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>
-References: <0ccd6c2bb95cfdd80f430aebf62d788c825ae939.1794985346.git.lin.liu01@citrix.com>
+Subject: Re: [PATCH] x86emul: Zero-extend the XOP0A and MOV B8+r immediates
+ when decoding
+To: Stephen Cheng <stephen.cheng@citrix.com>
+Cc: Ross Lagerwall <ross.lagerwall@citrix.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
+References: <20261118085711.564158-1-stephen.cheng@citrix.com>
 Content-Language: en-US
-From: Teddy Astie <teddy.astie@vates.tech>
-Autocrypt: addr=teddy.astie@vates.tech; keydata=
- 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
- x9fhaZEsniw8/bYgC3igkk5YJiOa
-In-Reply-To: <0ccd6c2bb95cfdd80f430aebf62d788c825ae939.1794985346.git.lin.liu01@citrix.com>
-X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.23f.76e42051d0b4066.1a1ede71d14.d703c31f61c67a1=-"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1794992708888
-X-purgate-ID: tlsNG-ebf023/1794992712-C32CCB50-52C12D42/0/0
-X-purgate-type: clean
-X-purgate-size: 4176
-X-Spam-Status: No, score=-14.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FORGED_MUA_MOZILLA,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20261118085711.564158-1-stephen.cheng@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-bad1c0/1794993113-FDC6D034-003C0FBC/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 2670
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
----=Part.23f.76e42051d0b4066.1a1ede71d14.d703c31f61c67a1=-
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+On 18.11.2026 09:57, Stephen Cheng wrote:
+> The decoder sign-extends the 32-bit immediate of the XOP0A insns
+> (BEXTR, LWPINS, LWPVAL), but this immediate is unsigned. It also
+> sign-extends the immediate of MOV B8+r without REX.W, while with REX.W
+> the low half is already zero-extended to build the 64-bit immediate.
+> In 64-bit mode MOV r32,imm32 zero-extends into the full register, and
+> no form of B8+r sign-extends its immediate. Emulation uses only the low
+> bits, so only x86_insn_immediate() returns a wrong value. No current
+> caller reads it for these insns.
+> 
+> Zero-extend the XOP0A immediate, as commit aa6070d2c840 ("x86emul:
+> Zero-extend unsigned 8-bit immediates when decoding") did for the 0F,
+> 0F3A and XOP08 maps. For MOV B8+r, zero-extend the immediate for all
+> operand sizes, and keep only the fetch of the high half in the REX.W
+> path. Other insns' 16-bit immediates are left as they are for now.
+> 
+> Fixes: 653cae725cea ("x86/32on64: use generic instruction decoding for call gate emulation")
+> Requested-by: Jan Beulich <jbeulich@suse.com>
+> Assisted-by: Claude:claude-opus-5-5
+> Signed-off-by: Stephen Cheng <stephen.cheng@citrix.com>
 
-Le 18/11/2026 =C3=A0 08:06, Lin Liu a =C3=A9crit=C2=A0:
-> XEN_DOMCTL_createdomain allocates d->vcpu[] but the vCPUs themselves are
-> only created by a later XEN_DOMCTL_max_vcpus=2E  In that window
-> XEN_DOMCTL_gethvmcontext{,_partial} on the domain reach the per-domain
-> save handlers with d->vcpu[0] =3D=3D NULL=2E  A dom0 tool polling xen-hv=
-mctx
-> across all domains while a VM was being restored took the host down:
->=20
->    (XEN) HVM d25 save: PIC
->    (XEN) RIP:    e008:[<ffff82d04030dc98>] arch/x86/hvm/vpic=2Ec#vpic_sa=
-ve+0x8/0x8f
->    (XEN) rdi: 0000000000000000
->    (XEN) Xen call trace:
->    (XEN)    [<ffff82d04030dc98>] R arch/x86/hvm/vpic=2Ec#vpic_save+0x8/0=
-x8f
->    (XEN)    [<ffff82d04021009f>] S arch/x86/hvm/save=2Ec#hvm_save=2Ecold=
-+0x9b/0xf7
->    (XEN)    [<ffff82d04036d99c>] S arch_do_domctl+0x1a2c/0x28a6
->    (XEN)    [<ffff82d04025341a>] S do_domctl+0x139a/0x1642
->    (XEN)    [<ffff82d04033331e>] S pv_hypercall+0x3ae/0x59a
->    (XEN)    [<ffff82d0402003b5>] S lstar_enter+0x105/0x10a
->    (XEN)
->    (XEN) Panic on CPU 0:
->    (XEN) FATAL PAGE FAULT
->    (XEN) [error_code=3D0000]
->    (XEN) Faulting linear address: 0000000000000018
->=20
-> XEN_DOMCTL_sethvmcontext has the same problem on the load side, e=2Eg=2E
-> pit_load() uses d->vcpu[0] for the guest time=2E
->=20
-> Refuse to save or load the whole context until vCPU 0 exists, and look u=
-p
-> the vCPU in hvm_save_one() with domain_vcpu(), failing with -ENOENT as
-> for other absent vCPUs=2E
->=20
-> Fixes: d0d8980138c4 ("x86/hvm: remove redundant save functions")
-> Assisted-by: Claude:claude-opus-5
-> Signed-off-by: Lin Liu <lin=2Eliu01@citrix=2Ecom>
-> ---
->   xen/arch/x86/hvm/save=2Ec | 15 ++++++++-------
->   1 file changed, 8 insertions(+), 7 deletions(-)
->=20
-> diff --git a/xen/arch/x86/hvm/save=2Ec b/xen/arch/x86/hvm/save=2Ec
-> index 8ab6405706=2E=2E48f8229061 100644
-> --- a/xen/arch/x86/hvm/save=2Ec
-> +++ b/xen/arch/x86/hvm/save=2Ec
-> @@ -139,12 +139,11 @@ int hvm_save_one(struct domain *d, unsigned int ty=
-pecode, unsigned int instance,
->            !hvm_sr_handlers[typecode]=2Esave )
->           return -EINVAL;
->  =20
-> -    if ( hvm_sr_handlers[typecode]=2Ekind !=3D HVMSR_PER_VCPU )
-> -        v =3D d->vcpu[0];
-> -    else if ( instance >=3D d->max_vcpus || !d->vcpu[instance] )
-> +    /* Per-domain records are saved via vCPU 0, absent before max_vcpus=
-=2E */
-> +    v =3D domain_vcpu(d, hvm_sr_handlers[typecode]=2Ekind =3D=3D HVMSR_=
-PER_VCPU
-> +                       ? instance : 0);
-> +    if ( !v )
->           return -ENOENT;
-> -    else
-> -        v =3D d->vcpu[instance];
->       ctxt=2Esize =3D hvm_sr_handlers[typecode]=2Esize;
->       ctxt=2Edata =3D xmalloc_bytes(ctxt=2Esize);
->       if ( !ctxt=2Edata )
-> @@ -203,7 +202,8 @@ int hvm_save(struct domain *d, hvm_domain_context_t =
-*h)
->       struct hvm_save_end end;
->       unsigned int i;
->  =20
-> -    if ( d->is_dying )
-> +    /* Per-domain handlers are passed vCPU 0=2E */
-> +    if ( d->is_dying || !d->vcpu[0] )
->           return -EINVAL;
->  =20
->       hdr=2Emagic =3D HVM_FILE_MAGIC;
-> @@ -291,7 +291,8 @@ int hvm_load(struct domain *d, bool real, hvm_domain=
-_context_t *h)
->       struct hvm_save_descriptor *desc;
->       int rc;
->  =20
-> -    if ( d->is_dying )
-> +    /* Some per-domain loaders use vCPU 0=2E */
-> +    if ( d->is_dying || !d->vcpu[0] )
->           return -EINVAL;
->  =20
->       /* Get at the save header, which must be first */
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
-Reviewed-by: Teddy Astie <teddy=2Eastie@vates=2Etech>
+> I left the 16-bit immediates of other insns as they are, because
+> changing the shared fetch would affect many insns.
 
-We probably want to refactor parts of this function to avoid duplication=
-=20
-(repeated hvm_sr_handlers[typecode], hvm_sr_handlers[typecode]=2Ekind =3D=
-=3D=20
-HVMSR_PER_VCPU, =2E=2E=2E)=2E But that's better done in a separate patch=
-=2E
+Sure. For ALU insns with 16-bit operand size it is ambiguous anyway whether
+to treat the unused bits as sign- or zero-extended.
 
-Teddy
+> --- a/xen/arch/x86/x86_emulate/decode.c
+> +++ b/xen/arch/x86/x86_emulate/decode.c
+> @@ -683,9 +683,10 @@ decode_onebyte(struct x86_emulate_state *s,
+>          break;
+>  
+>      case 0xb8 ... 0xbf: /* mov imm{16,32,64},r{16,32,64} */
+> +        /* The immediate is zero-extended, not sign-extended. */
+> +        s->imm1 &= s->op_bytes == 2 ? 0xffff : 0xffffffffU;
+>          if ( s->op_bytes == 8 ) /* Fetch more bytes to obtain imm64. */
+> -            s->imm1 = ((uint32_t)s->imm1 |
+> -                       ((uint64_t)insn_fetch_type(uint32_t) << 32));
+> +            s->imm1 |= (uint64_t)insn_fetch_type(uint32_t) << 32;
+>          break;
 
+You covering the 16-bit case here as well makes me wonder about the 8-bit
+one. I think we want to be consistent: Either we leave the 16-bit form
+alone here (then a v2 would be needed), and then we don't need to do
+anything else for the 8-bit form. Or we make the 8-bit form match the 16-
+bit one (then another small patch amending the earlier one would be
+needed, while this patch could go in as-is). Personally I favor the
+former option, as that's less change in behavior (and less churn) overall.
 
--- 
-Teddy Astie | Vates XCP-ng Developer
-
-XCP-ng & Xen Orchestra - Vates s=
-olutions
-
-web: https://vates=2Etech
----=Part.23f.76e42051d0b4066.1a1ede71d14.d703c31f61c67a1=---
+Jan
 
