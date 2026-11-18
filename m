@@ -2,51 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 09F15606A31C
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2026 15:01:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 37655606A330
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2026 15:12:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=D2572sYO
-Received: from list by lists.xenproject.org with outflank-mailman.1494678.1694064 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=LC/QUI3N
+Received: from list by lists.xenproject.org with outflank-mailman.1494710.1694073 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTh9l-00016d-KQ; Wed, 18 Nov 2026 15:01:05 +0000
+	id 1xThKY-00038T-Nq; Wed, 18 Nov 2026 15:12:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1494678.1694064; Wed, 18 Nov 2026 15:01:05 +0000
+Received: by outflank-mailman (output) from mailman id 1494710.1694073; Wed, 18 Nov 2026 15:12:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTh9l-00016W-HO; Wed, 18 Nov 2026 15:01:05 +0000
-Received: by outflank-mailman (input) for mailman id 1494678;
- Wed, 18 Nov 2026 14:53:36 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <devnull+shyckless.gmail.com@kernel.org>)
- id 1xTh2W-0007dW-6Q
- for xen-devel@lists.xenproject.org; Wed, 18 Nov 2026 14:53:36 +0000
+	id 1xThKY-00038M-Kd; Wed, 18 Nov 2026 15:12:14 +0000
+Received: by outflank-mailman (input) for mailman id 1494710;
+ Wed, 18 Nov 2026 15:12:13 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xThKX-00038G-Fu
+ for xen-devel@lists.xenproject.org; Wed, 18 Nov 2026 15:12:13 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xTh2V-002iV1-7r
- for xen-devel@lists.xenproject.org; Wed, 18 Nov 2026 15:53:35 +0100
+ id 1xThKW-008jqs-SL
+ for xen-devel@lists.xenproject.org; Wed, 18 Nov 2026 16:12:12 +0100
 Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <devnull+shyckless.gmail.com@kernel.org>)
- id 6afdbbda-bab6-0a2a0a5309dd-0a2a450b8a90-36
- for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 15:53:35 +0100
-Received: from [172.105.4.254] (helo=tor.source.kernel.org)
+ (envelope-from <jbeulich@suse.com>)
+ id 6afdc042-2eae-0a2a0a5409dd-0a2a450bce44-34
+ for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 16:12:12 +0100
+Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
  by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <devnull+shyckless.gmail.com@kernel.org>)
- id 6afdbbed-b7e8-0a2a450b0019-ac6904feb97e-3
- for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 15:53:34 +0100
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 22EE960F75;
- Wed, 18 Nov 2026 14:53:33 +0000 (UTC)
-Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
- (No client certificate requested)
- by smtp.kernel.org (Postfix) with ESMTPS id 678C31F000C4;
- Wed, 18 Nov 2026 14:53:32 +0000 (UTC)
-Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
- by lkml.kernel.org (Postfix) with ESMTP id ECFD04ADF5;
- Wed, 18 Nov 2026 14:53:31 +0000 (UTC)
+ (envelope-from <jbeulich@suse.com>)
+ id 6afdc04c-b7e8-0a2a450b0019-d1558029ed9f-3
+ for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 16:12:12 +0100
+Received: by mail-wm1-f41.google.com with SMTP id
+ 5b1f17b1804b1-4a1b07c3c5fso10687445e9.1
+ for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 07:12:12 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4bb783862d6sm131255405e9.2.2026.11.18.07.12.11
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 18 Nov 2026 07:12:11 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -55,145 +49,107 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="From:Date:Subject:To:Cc:Reply-To"
-Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
-ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1795013612;
-	b=oGKtrIkr2Wv9BIdul9AeXXL/7AUJRYdXSPS3zAV1K9x8pOQptpFXrGZcmojnfDDQkSP+
-	 fg52RYyL6E0ulGHomVvugDkwn4yxd3Mer0+f/nW3HyI8tWirFJ0TTXgwT0PTDQ0EtfUJK
-	 SX/oW4fgkbR2QXxoBMcDgwucKP5BiAH0zB5XOU5Ika1qDB0zOsqel7BTNATbMqcQpmYV2
-	 /8FHO3lewJn4yu7/1/kxuN/g7Oh1+j8byTQ+L0ZPu1/CVaHZi6r0zNYNkG8WNvO4J1cam
-	 ziA1DEkn07QdNm3bMU6X+UcmBsJrbkTnjJT47zB2Gt9RvCv5fvDZBf2TcFeKzX3GYog==
-ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795013612;
-	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:
-	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To;
-	bh=JhqkB8+ikY0EQHy0mFR/yHf+TqnBEpjGFQ+Trl/H16U=;
-	b=Sef5YFaPiNY9XIJ3KtqBbqW7W7u2RdSbkkrhfxw3xspkq+O793RyUove+h9c4rXp3WL5
-	 snC+uAPOjkjEFjWVhIsW86BZYyYKYSSPVqiEfem5qj6omIc3A9Gpgt5v3BNafvvMdfR+x
-	 BSdbRDFUUmJZHwbv/XerhMKDtKGOvGDL9F7CO/zSUxLVrEGKzJEZeUjQ4VFueVIDEJQOL
-	 +RWyf8DykIs7Z1fvDoNHxmioAoCJwfw/VwbOa+1+yc/kcfmk7/qpfZEKRHw2t3hRtitIc
-	 K+26OaAzV/AjIq+RqRUTHe9LoGGIMQhmT/AWTBeegzu+aUMHSN5YGPKSH6VHygYPvNg==
-ARC-Authentication-Results: i=1; smtp.kernel.org; 
-	arc=none smtp.remote-ip=100.80.115.77
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795013612;
-	bh=JhqkB8+ikY0EQHy0mFR/yHf+TqnBEpjGFQ+Trl/H16U=;
-	h=From:Date:Subject:To:Cc:Reply-To;
-	b=D2572sYOZOK3dO6DNHGR87m9WtzeiRfoNpMb4s+g3TzpORhBgYihQEU3Y5dOy6XI5
-	 LQDe9PoOEQqeLmQDl8wQ9h/pCtRM4csAGtc9Jc7P5dJsdbO7YYzdP7x4E00s+PP8KV
-	 IgqPQubm44A1KWorJMmEy/c/OQEdDAHLdMUUhg6NzEZFyVHZCHIdEn0k6hzow00pUl
-	 o7rqgnsMAU4bHHTlDQznz5QrD/pWopIb8BlGilPfdiJ/SHhuo2Cj8qYol0xmCAAcEx
-	 caT9+mMjhvSRJWij8MjhC22rjP0Mf0SxSYG1pMCp6JRGk4pIm97DmokvtysYKI/t4F
-	 G8EKxg3LmJu2Q==
-From: Suyuan Wang via B4 Relay <devnull+shyckless.gmail.com@kernel.org>
-Date: Wed, 18 Nov 2026 14:53:31 +0000
-Subject: [PATCH] xen/pvcalls: return -EINTR from recvmsg when the wait is
- interrupted
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1795014732; x=1795619532; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=7y8/JFODXEayvbJmnavHX3i9f1fPg62799kZs6FhA5s=;
+        b=LC/QUI3NYIWdJimFlyNP8bM0VHJ0txj0pj0sHPmoCA5WBvY47W4ZEtgvoZQhWjGvZH
+         sqaZXQL6I9lMDsKE2ta5pwV1iqGBg/gTn/jLn2+3ZT9LtAJzSIpqGOw6rHvkrKZnvJKs
+         7/d3C2NuWkfOPzvkxepV8Wp3qFJJb8e9v0yRSvT5fe24TC2P28qNCVMnzEk2fn77+Bs0
+         TbBcGbfQI44Kmo6FijPWT6D8ZoC4vBeJ8b7JDG4pDiFiGHe89L9TOvu0QR/aYD9V5EL+
+         Z8xtVvVPqzN/8GmIfAWlUbIO6PeCy6nfrO6gIVqnohNHKsmTMKc+1paTjN27gj2I+fWu
+         KCBQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795014732; x=1795619532;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=7y8/JFODXEayvbJmnavHX3i9f1fPg62799kZs6FhA5s=;
+        b=T3/UPAdAUlfvLx/GSBXg0y4ZMs2S4n0HpzT1+VzgrltuXtmUnhGekwJ7sETHhVhHgp
+         VOwYoSzpkISKTB3fbFzM1W+/1yI2nPPrBd+05lPEYU5Bdi6rVwr9bl6BdF88PbTTAW/i
+         cmtxncKUV3Qb3DVUYVY2f+inP42esXCYZ8cikjddysvpLhPDDzPNmqLRLJTg97jDhfEP
+         cCz7UYQsZzb/PgzWSRjjB9DR4H4ABr9qbhedyZXJwnRn/tesmT/z6oBf/RayK6TK1/Su
+         LfDUK8RkDw5dOI/J/XAAg3rdhsqYQcEXV3nFfaPXIJ4q/UQOf/dqa5PZAJkf/sfgtk7P
+         Jk5w==
+X-Forwarded-Encrypted: i=1; AL+hErE7+/s62Ccvi/PuL9m26k54ACOhmKW139Z83H7pErLFD1svk+JV3FYIU7gT+ODtZs7sAhoUiF747Bc=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z/R4+rUYa1LZiRwW2QBLgI5VPpvXAfgpbr2eH/wEIIgS8hMCBC8
+	/LIBZ99JLd3SDsRXwX5YA5QD17XcRq+fcPiKqU9f/1m3qUpmMtwscsEqPY7XxKz6QQ==
+X-Gm-Gg: AYBFou0Nl1zA+XLYpX2cp+ll96hhTQ0S0bKw0S8zdqTP5VY0OScP3Gkb1NN4VVGg/Lz
+	RxLRqJPzgSjN2W9R3TZrRHrybRVQLg2VnmIxZOyQjDWJo6trBEV0f5dSyWO4fe4cf0tbvCdBAcV
+	x7xW1FMPXNN8na5P/06W4D9HGRagj/Tz6uZ4sukwnBSbYTHoaz8qeLTO7Loe3dWmGflaPFp77fo
+	lpoitSiN/KHkDrWTMcAujEyGNXwHEXMaiIJW92XaJMB1sx0mfthpSvTlgWfdfUbE7uSAs+qBJkC
+	FsPuMblH913AsWyvUcMw7n8DGQYFE5sN1pwbk8T3VAfAtIxuWmH2/EBgD/ig3UvNSEKYIf4OEVj
+	BHsfBNUiR8JwFwyzWRsLWvnFYqU2qwJPg8ZUKkMvUkIOjW9Ljh9TormeZ5yy/Rmfzx0loBaCkK6
+	AjUs9m8CJTvLQzrLHnFs7/04X2PaAwiI7r6xKC3jXmiO2xH205GLrxDiN4PW4suRNeJnAapJJQ3
+	FpdSmpJdeSpWRVBMUfcGuFkKXylWXrHorsk+os70rNuAsN3tbKXNyFj7DcFmqvYHzBF2WhB226r
+	8UN7pyiJaqr9eHEpPf24w70RZX9HVpFQD1Dq7AX/JB1jSCieCQmNZhAWEDpmJ0XRjTtRRMyuPFA
+	aaJ8Q2FqXVA8FfLnBEQ==
+X-Received: by 2002:a05:600c:8b42:b0:4bb:7033:de79 with SMTP id 5b1f17b1804b1-4bb7da4afa7mr54493295e9.35.1795014732130;
+        Wed, 18 Nov 2026 07:12:12 -0800 (PST)
+Message-ID: <5e1f6c26-60d5-48ec-9f6a-cfac7d16ff81@suse.com>
+Date: Wed, 18 Nov 2026 16:12:10 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 03/28] x86/hvm: report SVM x2AVIC support
+To: dmukhin@ford.com
+Cc: andrew.cooper3@citrix.com, jason.andryuk@amd.com, roger@xenproject.org,
+ teddy.astie@vates.tech, dmukhin@xen.org, xen-devel@lists.xenproject.org
+References: <20261105013347.719392-1-dmukhin@ford.com>
+ <20261105013347.719392-4-dmukhin@ford.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20261105013347.719392-4-dmukhin@ford.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261118-xen-pvcalls-v1-1-5e9d662900a0@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAOq7/WoC/yXMQQqDMBBG4avIrBvIBBHxKtKFib86ElLJtCKId
- 29ql9/ivZMUWaDUVSdl7KLySgX8qCgsQ5phZCwmZ13DzK05kMy2hyFGNfCTr4Mdwd5RKbaMSY7
- 71j//1o9fEd6/BV3XF046lM9vAAAA
-X-Change-ID: 20261118-xen-pvcalls-ebfb4c0de1b2
-To: sstabellini@kernel.org, jgross@suse.com
-Cc: oleksandr_tyshchenko@epam.com, xen-devel@lists.xenproject.org, 
- linux-kernel@vger.kernel.org
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795013611; l=2573;
- i=shyckless@gmail.com; s=default; h=from:subject:message-id;
- bh=JS0N2by4izL7XI6U/P5YKixzFBa9rEd0luLKdyK1x98=;
- b=8hmEpcRcMvT3FgZ8jhjQzuy6IWqP2SSP25b2VY+7+Za5wAoI5L6TaM8tQaT4ccyBoc61ubOsj
- qWwMBB2oqy8CsaiwHbH+gXaG7fcVtJyGssZTqMFDNLJySiPErW/J6DP
-X-Developer-Key: i=shyckless@gmail.com; a=ed25519;
- pk=pMtccVGiWES3bV+7YBFuBclkvq2n2HBHQ5azaBrK2lY=
-X-Endpoint-Received: by B4 Relay for shyckless@gmail.com/default with
- auth_id=1498
-X-Original-From: Suyuan Wang <shyckless@gmail.com>
-Reply-To: shyckless@gmail.com
-X-purgate-ID: tlsNG-42698a/1795013615-AAEDE9EA-78EDC033/0/0
-X-purgate-type: clean
-X-purgate-size: 2626
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+X-purgate-ID: tlsNG-42698a/1795014732-186CA9EA-CEFB5701/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 316
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Suyuan Wang <stevewong@hust.edu.cn>
+On 05.11.2026 02:33, dmukhin@ford.com wrote:
+> From: Denis Mukhin <dmukhin@ford.com>
+> 
+> Report SVM AVIC support from CPUID Fn8000000A_EDX[X2AVIC](bit 18).
+> 
+> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 
-pvcalls_front_recvmsg() waits for data in a loop and ignores what
-wait_event_interruptible() returns:
+On addition to what others have said - can't this and the earlier patch
+simply be folded?
 
-    while (!(flags & MSG_DONTWAIT) && !pvcalls_front_read_todo(map)) {
-            wait_event_interruptible(map->active.inflight_conn_req,
-                                     pvcalls_front_read_todo(map));
-    }
-
-Once a signal is pending, wait_event_interruptible() returns
--ERESTARTSYS right away without sleeping, and the loop calls it again.
-The caller then spins with map->active.in_mutex held until data arrives
-or the backend reports an error. The signal can't be handled while it
-spins, so the task can't be killed either, and other readers of the
-socket block on in_mutex.
-
-Return -EINTR when the wait is interrupted, as pvcalls_front_accept()
-already does for its interruptible waits. Jump to the end of the
-function so that in_mutex is released and pvcalls_exit_sock() is
-called.
-
-Found with a static analysis tool and checked by hand.
-
-Fixes: ae0d04052e07 ("xen/pvcalls: implement recvmsg")
-Co-developed-by: Kaixuan Li <kaixuan.li@ntu.edu.sg>
-Signed-off-by: Kaixuan Li <kaixuan.li@ntu.edu.sg>
-Signed-off-by: Suyuan Wang <stevewong@hust.edu.cn>
----
-There are no in-tree callers of pvcalls_front_recvmsg(), so this only
-matters to code built on the exported frontend API. That's why I left
-out Cc: stable.
-
-Compile tested only (x86_64 with CONFIG_XEN_PVCALLS_FRONTEND=y, W=1 and
-sparse show no new warnings). I haven't run it in a Xen guest.
----
- drivers/xen/pvcalls-front.c | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/xen/pvcalls-front.c b/drivers/xen/pvcalls-front.c
-index 3e7aa807c317..5d6c8ba66849 100644
---- a/drivers/xen/pvcalls-front.c
-+++ b/drivers/xen/pvcalls-front.c
-@@ -693,8 +693,11 @@ int pvcalls_front_recvmsg(struct socket *sock, struct msghdr *msg, size_t len,
- 		len = XEN_FLEX_RING_SIZE(PVCALLS_RING_ORDER);
- 
- 	while (!(flags & MSG_DONTWAIT) && !pvcalls_front_read_todo(map)) {
--		wait_event_interruptible(map->active.inflight_conn_req,
--					 pvcalls_front_read_todo(map));
-+		if (wait_event_interruptible(map->active.inflight_conn_req,
-+					     pvcalls_front_read_todo(map))) {
-+			ret = -EINTR;
-+			goto out;
-+		}
- 	}
- 	ret = __read_ring(map->active.ring, &map->active.data,
- 			  &msg->msg_iter, len, flags);
-@@ -706,6 +709,7 @@ int pvcalls_front_recvmsg(struct socket *sock, struct msghdr *msg, size_t len,
- 	if (ret == -ENOTCONN)
- 		ret = 0;
- 
-+out:
- 	mutex_unlock(&map->active.in_mutex);
- 	pvcalls_exit_sock(sock);
- 	return ret;
-
-
-
-
+Jan
 
