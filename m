@@ -2,47 +2,57 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A49F60A260B
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2026 16:29:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0EEA1606A325
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2026 17:18:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=b9sitAsA
-Received: from list by lists.xenproject.org with outflank-mailman.1494840.1694127 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=V95IQ3UT
+Received: from list by lists.xenproject.org with outflank-mailman.1494908.1694135 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTiWV-0001bj-92; Wed, 18 Nov 2026 16:28:39 +0000
+	id 1xTjIY-0001Hk-Pt; Wed, 18 Nov 2026 17:18:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1494840.1694127; Wed, 18 Nov 2026 16:28:39 +0000
+Received: by outflank-mailman (output) from mailman id 1494908.1694135; Wed, 18 Nov 2026 17:18:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTiWV-0001bb-4A; Wed, 18 Nov 2026 16:28:39 +0000
-Received: by outflank-mailman (input) for mailman id 1494840;
- Wed, 18 Nov 2026 16:28:38 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xTiWU-0001bV-Fp
- for xen-devel@lists.xenproject.org; Wed, 18 Nov 2026 16:28:38 +0000
+	id 1xTjIY-0001Hd-My; Wed, 18 Nov 2026 17:18:18 +0000
+Received: by outflank-mailman (input) for mailman id 1494908;
+ Wed, 18 Nov 2026 17:18:17 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <Alejandro.GarciaVallejo@amd.com>) id 1xTjIX-0001HX-L1
+ for xen-devel@lists.xenproject.org; Wed, 18 Nov 2026 17:18:17 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xTiWT-006JJi-SQ
- for xen-devel@lists.xenproject.org; Wed, 18 Nov 2026 17:28:37 +0100
-Received: from [10.42.69.6] (helo=localhost)
+ id 1xTjIX-00279j-1J
+ for xen-devel@lists.xenproject.org; Wed, 18 Nov 2026 18:18:17 +0100
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6afdd230-bab6-0a2a0a5309dd-0a2a45069bec-8
- for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 17:28:37 +0100
-Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6afdd235-195a-0a2a45060019-d1558029b5f6-3
- for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 17:28:37 +0100
-Received: by mail-wm1-f41.google.com with SMTP id
- 5b1f17b1804b1-4bb68c197c7so17029865e9.1
- for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 08:28:37 -0800 (PST)
-Received: from ?IPV6:2a01:cb15:80c6:e800:d2ca:523:c712:18a6?
- (2a01cb1580c6e800d2ca0523c71218a6.ipv6.abo.wanadoo.fr.
- [2a01:cb15:80c6:e800:d2ca:523:c712:18a6])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb78430918sm137199665e9.13.2026.11.18.08.28.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 18 Nov 2026 08:28:36 -0800 (PST)
+ (envelope-from <Alejandro.GarciaVallejo@amd.com>)
+ id 6afdddc9-8faa-0a2a0a5109dd-0a2a450c9aee-16
+ for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 18:18:16 +0100
+Received: from [52.101.53.53]
+ (helo=BL0PR03CU003.outbound.protection.outlook.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Alejandro.GarciaVallejo@amd.com>)
+ id 6afdddd7-f479-0a2a450c0019-346535356642-3
+ for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 18:18:16 +0100
+Received: from SJ0PR05CA0037.namprd05.prod.outlook.com (2603:10b6:a03:33f::12)
+ by SJ1PR12MB6124.namprd12.prod.outlook.com (2603:10b6:a03:459::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.14; Wed, 18 Nov
+ 2026 17:18:13 +0000
+Received: from BY1PEPF000264B0.namprd02.prod.outlook.com
+ (2603:10b6:a03:33f:cafe::77) by SJ0PR05CA0037.outlook.office365.com
+ (2603:10b6:a03:33f::12) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.639.7 via Frontend Transport; Wed, 18
+ Nov 2026 17:18:12 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ BY1PEPF000264B0.mail.protection.outlook.com (10.167.242.119) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.615.4 via Frontend Transport; Wed, 18 Nov 2026 17:18:12 +0000
+Received: from espagarciav-lx01.amd.com (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.57; Wed, 18 Nov
+ 2026 11:18:10 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,347 +61,106 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795019317; x=1795624117; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=h5T3xCyatfdaUlUQvjiVAnmQQ0ghEvD+LlBF7/q3cCI=;
-        b=b9sitAsAzy5cv2Qgx0FWqoanMgrJZfMKFiZSjOnEYcHD5qvFBIoQk9UAqkAIvmF2yx
-         2vsk9cU2B3CyBxF4Yixjppr/B0G7HPgUrfpHnLf0ADZxkuZk07W4nkAn6D7+xSQySKuk
-         Z2zUtPc3/CC2z5yaaJQktf3qZe9ZhjN5wr06otrMi2/bCeyVRlPerzFfcaOq6XPeibx6
-         Y3yBH9W2cmD0t8GA4459jqFVZ51P0hvtzqlCMlK1GF/lrZtRL+KkMBnEsC1dzMt9SL+g
-         VrX/qds9vCnKDBE2wKv97AWuINW9nLGIGsqTXsO1CA0AOVp/SGKyogDsB9F9m8sZgfNG
-         4q2g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795019317; x=1795624117;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=h5T3xCyatfdaUlUQvjiVAnmQQ0ghEvD+LlBF7/q3cCI=;
-        b=j6S7mijfHAqaZzFxaCaHuIiq81sFaLwDCepHgTm4EjJbtkOOUWaTie8INtECuMPC46
-         vp6+JXCd5LDl/vyCTu2mbWIvi2SpEdqVQyLLjs1YLabLUdknP3rf2c49T5dsOCZvK1PK
-         143jiKc1MYLJ6rX13ZaoWBwMjRiXtyLJS1lKJtVSZPSlYumwm1MLCwvE8sB1BQduNitR
-         dERcKasjXMQUDNn6z/nrKx9smSmHvlzYgrquCBDK9CBrHHJkBtY1nHb5Pm+g4EZtCQBY
-         98aSUFZ41ZHVzDu3+lOeE5drt8G9mQSuYYLqix8sHMKbqJbDnMWik9YfQPS207J0U/vS
-         Da6A==
-X-Forwarded-Encrypted: i=1; AL+hErFN7ifrHUeTSb1ZtJgBVfLEiUTaxnJ+07lnIryU2Dg+I9ZvaeAFBaa7FiUh2k6mo3AjPcDDDzbC1B0=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z8JSWiB7JUrJ7wGGaJeUO5jGRKqY1LUrM097hDFgp09HQzHxNCI
-	5TAw39kTelnABCteUmJNHoNPWZEziGbGyCQNzVFGZry++Xxz22bO+m+w
-X-Gm-Gg: AYBFou000wDRR4gvXmx9FHgl8KAuv+EPkoWUGSycc+bSlAk+h86hiSortq5ikip48xC
-	zUvoQpMvmjwNbp98qDBY1WoBxH5lQsQMPhPmWnM2YAC5IJh69lxXV/t3ewjnJE5MGrlQL/y9POq
-	Ql/l0CngwelfcmExvk+Xeu6TQYJNpUP6iN9+CFE3Lgg12QycSEwlbPRxX0I6WtdV+UaKmRXu9G8
-	Hyn5pRufwRxfOJ34PN4IrBhiz6/BAn17TaGWQjt2VpYvKorB/fbL0944Ccz3OyThvqxVnnQFdiO
-	5HXEStO6UZuVsBPQ0XaNAI9rGk7OWBM/FfMgh108ObNAISebll7lEshVSxiCSmNYuPpUyO4ImQd
-	3V85AaCccAvwxVfxav8Et0gX7cTJ47fed0qovQ8MbOlFCCJZzyJq3VX/932+hUNenO8fCxhuoqT
-	VlrMkrwKxBflABvF0TUhFySJSHjkTEbZ/HM1EjMyQl611wJiSbhkEnQuOcE/WQX9YAFV7wprmVi
-	OC8lBnd/lwzOnJ+L/ayyAa4CzXvsqWQgQyWWjMcO/QhsowhnSqRzQ+iLBjT/tyzz6CUyoF/2+Kq
-	E74i2xxPOpDI0LIbNvYud7UEeOjiQRYD+0mmS6EjPFpjB59Fn8VBjjJSIWFM4bABVRmHpid+aHG
-	KZAMxYsSBGIsIiWWESeOU1HPOfD640P9YmXoddH4HTvkSmjFjUvjpjJ+1aahV1Ce5n4ZqyAg=
-X-Received: by 2002:a05:600c:138c:b0:4a3:5991:718 with SMTP id 5b1f17b1804b1-4bb7da15188mr62232915e9.16.1795019316997;
-        Wed, 18 Nov 2026 08:28:36 -0800 (PST)
-Message-ID: <a184e795-3b03-4d71-a4f2-24580d312da7@gmail.com>
-Date: Wed, 18 Nov 2026 17:28:36 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=PHGipCn1CUBqM4NHPCkH8zOLAc/9kKjJlbk/yEvlA/J5GSVuEwzVEGGhDitDmNQJXbg9l/qIRTO9hEBvdh7CSUMR3pZejY9YORrZ29VSJips/+84GykPhHHg7VSDM1t4rnlS3C3U7Rgye1oZ0xA6qCj779yjCLgNKOCdowygyDHz8qarjgEAnzu8qWHKtpiCDNMWSPaLw85+eZNwIVQ2MhEZ9I5YCUKY8+EnqcsaHo7ljxqi0T2mK7mFHLy0Jmb85TfwbZWbhmFA4kx7ZZqFzt+S8c8EgJ3lRO35qwzblknIg9r+BV07POJRN7KS0i4dMvHNbIMHWRWNkW4S+jlu6w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=RhCxaoYFdF/YkecV/5jll5MbBTtNX16YZDf7YohbE2k=;
+ b=bT1qS1YFYSbOmwMiY5NEP7zlNcaKsftEFZUZUrA23Sym7CaSQrUTmUjg/2bE2T8HzLaRBgmG6FQF0Zz/UtgDNu01TVdzP1Q6cSo1wTwLyzxx3nOMuWRzFAnu/9mLMCXbPu/xFfIFEkoOhtKa8lJjtEJeTW2SZmJJoss15yvNQPrQ7OXoProaZT8/GANqgBlje4elKZHlTC0fqdCG+xcI3h/fhoypie3b6nfdWE7zLkU69MpQYBRPfGoivXH86A6YQDrCVeWrfL3Tl8vE9qV3rLi8aQDnZZo+DLN6Z7fRnR09oRGISBYt4b48afU58OYlX4qG9IEHGzr+gaIrq/T2ig==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=RhCxaoYFdF/YkecV/5jll5MbBTtNX16YZDf7YohbE2k=;
+ b=V95IQ3UT3UbARivOlCJGHADs4uCmZEkOXWJdn3R2Ron6hvjNtw9rZbw4reoKtTbSuevIL/LvY2k4/ir5y3KOswyFSdH4eSpJltVjwASExJ2ekyh4yQgQW9ZW8YQd4ctM8riDsf2Xds+Gu6RBZ1jOrmxFIcdrlIDl7ffw/uqI6M0=
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+From: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Jan Beulich
+	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>, Teddy Astie
+	<teddy.astie@vates.tech>
+Subject: [PATCH 1/5] x86/cpu: Add break to early_cpu_init() switch
+Date: Wed, 18 Nov 2026 18:17:52 +0100
+Message-ID: <20261118171758.1125066-2-alejandro.garciavallejo@amd.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20261118171758.1125066-1-alejandro.garciavallejo@amd.com>
+References: <20261118171758.1125066-1-alejandro.garciavallejo@amd.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 10/26] emul/ns16x50: implement RBR register
-To: dmukhin@ford.com, xen-devel@lists.xenproject.org
-Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com,
- julien@xen.org, michal.orzel@amd.com, roger@xenproject.org,
- sstabellini@kernel.org, xakep.amatop@gmail.com, dmukhin@xen.org
-References: <20261111194800.1070016-1-dmukhin@ford.com>
- <20261111194800.1070016-11-dmukhin@ford.com>
-Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <20261111194800.1070016-11-dmukhin@ford.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-16d1c6/1795019317-F627077B-E7545646/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 9826
-X-Spam-Status: No, score=-14.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: satlexmb08.amd.com (10.181.42.217) To satlexmb07.amd.com
+ (10.181.42.216)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BY1PEPF000264B0:EE_|SJ1PR12MB6124:EE_
+X-MS-Office365-Filtering-Correlation-Id: cd936ef1-666b-4595-4e07-08df4597ec96
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700016|82310400026|1800799024|376014|23010399003|22082099003|18002099003|261009223027099003|11063799006|56012099006|261026121527099003|261102123227099003|10067099003|261021121427099003;
+X-Microsoft-Antispam-Message-Info:
+	FC+47tbPCmtoSg4gPN0gcqVu176g/BAmCERTEnpp2QXLhmxSeoF0e66DRPdoTIDMggcfMOVhlt0sjTkUQ5q7EpmklYyUf3ii4f6Fibt8raqC2oPNUbXDOHN6E5XnJwwDJA4sDb2yMTJrqbr0zOhugwJMi4R21ncu47wyBmxczW8vtsHwZwgayFWdaHwy7roP9MdoQGtc0pYFCtWCJEMap2gsmFRWfqk2/tubALRUD5wAI+Num8ngHmkbr6jIe8FsCUQ1b2QBJdDpxYuvlAI/dkGbq7gspPYIPuQalnfvDwuk9GLJugd7c1Feh0t6DSUfBl0TM7Ea39M76cK6xPZwa/xTWYsvXGhu8Q3H2HTfXqnfcOHwxKN8WBuqXgJqdhQ6A7dm33+0Bcai2gQF/POh4+VA8CJb1u8/XIwgwwP7DPtYXPr99SScpA9kyR3hKkR96H6IiCOjvTEp6VPFgysq+wshLfAN1bvi0Z/w29ZBmOWX3ZcxqejrEtYMcYsQLkRWvREieOP3VzRuk5clyUTDJoazn/2lWm5/nQGenI/xggJbQGhGGVNEF1ScGgZVD6qxmw8asDyiDZdECVvT6mrP+mzOpOSp+mHOHVyRkOIXxemQg93qVVje3tfJRWjLdGWXLFWkoXqKjZzlqJ+JnPTAwmqol2WbB5HTMrbJnJ1lnB4IknthItHw8lnbPqNw+JIPdbCua3k3zB375vtc6Z/nZQ==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(82310400026)(1800799024)(376014)(23010399003)(22082099003)(18002099003)(261009223027099003)(11063799006)(56012099006)(261026121527099003)(261102123227099003)(10067099003)(261021121427099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	/pGQQnXfkzdW71rtIIPv95XnsMxiQW1ZNl7OQTd80Liy5cHPYlF8uzmuv+pPg4ZwEqD+hDo3UxN8Q2dB3kldnHkyWXVm5CbIr8jAewjRP7sxo/YxZQzWkmuqeJ0/XDJfBUsAHGpN4uBPSXA/EkDRvNTd8IU+foGR5pnA5u6Nk9PF4rtyPH7UG6nRbd4w9BxKcZZUOK1Ii9L6WI8yxhiriW4dmaM627KjgQULhiRSDzmvuAud7731eELCBrOqEFCoNF0kkJ2/sRoXNu/eMKdT3uZDKxNQJLjQReSXRYxkoHRV3NNIp6vqojy53fM7Pknrrx/Dk2a+OEcjEvJwz045oi3y4JkvNKpI61qgG/EZ/+Dbm3HhFJbStbMohBSfVv5mpcasPLYFIPku0GOBHS+TzGoMToqAP21VyeaRMWyzTZgz+6ZUODYUgX5vZhEtyFSc
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Nov 2026 17:18:12.0220
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: cd936ef1-666b-4595-4e07-08df4597ec96
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BY1PEPF000264B0.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR12MB6124
+X-purgate-ID: tlsNG-d25034/1795022296-012C8A5B-356D36AD/0/0
+X-purgate-type: clean
+X-purgate-size: 700
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+MISRA C Rule 16.3 requires every switch clause to be terminated by an
+unconditional break statement.
 
+No functional change.
 
-On 11/11/26 8:47 PM, dmukhin@ford.com wrote:
-> From: Denis Mukhin <dmukhin@ford.com>
-> 
-> Add RBR register emulation to the I/O port handlder.
+Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+---
+ xen/arch/x86/cpu/common.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Nit: s/handlder/handler/ (also in 11/26).
-
-> 
-> Add RX FIFO management code since RBR depends on RX FIFO.
-> 
-> Emulator does not emulate NS8250 (no FIFO), NS16550a (16 bytes)
-> or NS16750 (64 bytes) precisely for simplicity. No baud rate
-> emulation either.
-> 
-> RX FIFO is emulated by means of using xencons_interface which
-> conveniently provides primitives for buffer management and later can be
-> used for inter-domain communication similarly to vpl011.
-> 
-> Account for DLL == 0: in this case, disable receiver.
-> 
-> Add UART_LSR_DR handling since it depends on RBR register access.
-> 
-> Implement put_rx() vUART hook for placing a character into the
-> emulated RX FIFO from console driver. That implements physical console
-> forwarding to the guest OS over emulated NS16550.
-> 
-> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
-> ---
->   xen/common/emul/vuart/ns16x50.c | 132 +++++++++++++++++++++++++++++++-
->   1 file changed, 130 insertions(+), 2 deletions(-)
-> 
-> diff --git a/xen/common/emul/vuart/ns16x50.c b/xen/common/emul/vuart/ns16x50.c
-> index 9f530e589495..d04caf2baf2c 100644
-> --- a/xen/common/emul/vuart/ns16x50.c
-> +++ b/xen/common/emul/vuart/ns16x50.c
-> @@ -123,6 +123,76 @@ static inline void ns16x50_unlock(struct vuart_ns16x50 *vdev,
->       spin_unlock(&vdev->lock);
->   }
->   
-> +static bool ns16x50_fifo_rx_empty(const struct vuart_ns16x50 *vdev)
-> +{
-> +    const struct xencons_interface *cons = &vdev->cons;
-> +
-> +    return cons->in_prod == cons->in_cons;
-> +}
-> +
-> +static bool ns16x50_fifo_rx_full(const struct vuart_ns16x50 *vdev)
-> +{
-> +    const struct xencons_interface *cons = &vdev->cons;
-> +
-> +    return cons->in_prod - cons->in_cons == ARRAY_SIZE(cons->in);
-> +}
-> +
-> +static void ns16x50_fifo_rx_reset(struct vuart_ns16x50 *vdev)
-> +{
-> +    struct xencons_interface *cons = &vdev->cons;
-> +
-> +    cons->in_cons = cons->in_prod;
-> +}
-> +
-> +/*
-> + * Transfer character from RX FIFO and return the RX FIFO status after the
-> + * transfer.
-> + */
-> +static int ns16x50_fifo_rx_getchar(struct vuart_ns16x50 *vdev, uint8_t *ptr)
-> +{
-> +    struct xencons_interface *cons = &vdev->cons;
-> +
-> +    if ( ns16x50_fifo_rx_empty(vdev) )
-> +        return -ENODATA;
-> +
-> +    *ptr = cons->in[MASK_XENCONS_IDX(cons->in_cons, cons->in)];
-> +    cons->in_cons++;
-> +
-> +    return ns16x50_fifo_rx_empty(vdev) ? -ENODATA : 0;
-> +}
-> +
-> +static int ns16x50_fifo_rx_putchar(struct vuart_ns16x50 *vdev, char c)
-> +{
-> +    struct xencons_interface *cons = &vdev->cons;
-> +    int rc;
-> +
-> +    /*
-> +     * FIFO-less 8250/16450 UARTs: newly arrived word overwrites the contents
-> +     * of the THR.
-> +     */
-> +    if ( ns16x50_fifo_rx_full(vdev) )
-> +    {
-> +        ns16x50_debug(vdev, "RX FIFO full; resetting\n");
-> +        ns16x50_fifo_rx_reset(vdev);
-> +        rc = -ENOSPC;
-> +    }
-
-On overrun this throws away the whole 1 KiB of buffered input and keeps
-the new character. A 16550 in FIFO mode does the opposite (SLLS177I,
-7.7.8, LSR bit 1): "an overrun error occurs only after the FIFO is full
-and the next character has been completely received in the shift
-register. [...] The character in the shift register is overwritten, but
-it is not transferred to the FIFO." I.e. set OE and drop the new
-character. Also, the comment talks about THR where RBR is meant.
-
-Also, the comment is mentioning FIFO-less but here we are implementing 
-FIFO-based UART. Don't we won't then separate such cases? (Another 
-question will it be really totally wrong to still have FIFO-based 
-emulation for FIFO-less UARTs which are mentioned in the comment?)
-
-> +    else
-> +        rc = 0;
-> +
-> +    cons->in[MASK_XENCONS_IDX(cons->in_prod, cons->in)] = c;
-> +    cons->in_prod++;
-> +
-> +    return rc;
-> +}
-> +
-> +static bool ns16x50_is_tranceiver_enabled(const struct vuart_ns16x50 *vdev)
-> +{
-> +    BUG_ON(vdev->regs[UART_LCR] & UART_LCR_DLAB);
-
-Nit: s/tranceiver/transceiver/. Also, all callers check DLAB first, but
-it's guest-controlled state on a guest-reachable path; ASSERT() seems
-enough.
-
-> +
-> +    /* DLL set to 0 disables serial communication. */
-> +    return vdev->regs[NS16X50_REGS_NUM + UART_DLL];
-> +}
-> +
->   static bool cf_check ns16x50_iir_check_lsi(const struct vuart_ns16x50 *vdev)
->   {
->       return vdev->regs[UART_LSR] & UART_LSR_MASK;
-> @@ -130,7 +200,7 @@ static bool cf_check ns16x50_iir_check_lsi(const struct vuart_ns16x50 *vdev)
->   
->   static bool cf_check ns16x50_iir_check_rda(const struct vuart_ns16x50 *vdev)
->   {
-> -    return false;
-> +    return !ns16x50_fifo_rx_empty(vdev);
->   }
->   
->   static bool cf_check ns16x50_iir_check_thr(const struct vuart_ns16x50 *vdev)
-> @@ -400,6 +470,17 @@ static int ns16x50_io_read8(
->           }
->   
->           /* DLAB=0 */
-> +        if ( !ns16x50_is_tranceiver_enabled(vdev) )
-> +            break;
-> +
-> +        /* NB: do not forget to clear overrun condition */
-> +        regs[UART_LSR] &= ~UART_LSR_OE;
-
-OE is cleared by reading LSR, not RBR: "OE is cleared every time the CPU
-reads the contents of the LSR" (same section), which 08/26 already
-implements. Clearing it here means a driver that reads RBR before LSR
-never sees the overrun.
-
-> +
-> +        if ( ns16x50_fifo_rx_getchar(vdev, &val) )
-> +            regs[UART_LSR] &= ~UART_LSR_DR;
-> +        else
-> +            regs[UART_LSR] |= UART_LSR_DR;
-> +
-
-LSR.DR is just "RX FIFO not empty", which ns16x50_iir_check_rda()
-already computes from the FIFO. Storing it in regs[UART_LSR] as well
-means four places have to update it by hand: the RBR read here,
-put_rx(), the FCR RX clear (12/26) and THR in loopback mode (11/26).
-They're all correct today, but the two copies can drift apart with the
-next change. Computing DR from the FIFO when LSR is read would remove
-those updates and keep LSR and IIR consistent by construction:
-
-     case UART_LSR:
-         val = regs[UART_LSR] & ~UART_LSR_DR;
-         if ( !ns16x50_fifo_rx_empty(vdev) )
-             val |= UART_LSR_DR;
-         regs[UART_LSR] &= ~UART_LSR_MASK;
-         break;
-
-Something like that?
-
->           break;
->   
->       case UART_IER: /* DLAB=0 --> UART_IER, DLAB=1 --> UART_DLM */
-> @@ -694,13 +775,60 @@ static void cf_check ns16x50_free(void *arg)
->       xvfree(arg);
->   }
->   
-> +static int cf_check ns16x50_put_rx(void *arg, char ch)
-> +{
-> +    struct vuart_ns16x50 *vdev = arg;
-> +    unsigned long flags;
-> +    uint8_t *regs;
-> +    int rc = -EBUSY;
-> +
-> +    ASSERT(vdev);
-> +
-> +    ns16x50_lock(vdev, &flags);
-
-Don't we have the issue with having a such lock here?
-
-This is reached from __serial_rx(), and on x86, when the physical UART
-uses its IRQ, that is hard IRQ context: ns16550_interrupt() ->
-serial_rx_interrupt() -> serial_rx() -> __serial_rx() -> vuart_put_rx().
-vdev->lock is otherwise taken by ns16x50_access() with IRQs enabled, so
-a serial IRQ arriving on a pCPU whose vCPU is inside ns16x50_access()
-spins forever, and CONFIG_DEBUG_LOCKS' check_lock() should trip on the
-mixed IRQ safety. The same applies to d->arch.hvm.irq_lock, taken under
-it via ns16x50_irq_check() -> hvm_isa_irq_assert(). Making vdev->lock
-IRQ-safe isn't enough because of the latter. If I didn't mistake 
-something then deferring the delivery out of IRQ context (e.g. queue the 
-character and let a tasklet update LSR/IIR and the IRQ line) would avoid 
-both.
-
-> +
-> +    regs = vdev->regs;
-> +
-> +    if ( vdev->regs[UART_LCR] & UART_LCR_DLAB )
-> +        ns16x50_debug(vdev, "THR/RBR access disabled: DLAB=1\n");
-
-DLAB only selects what offsets 0 and 1 decode to; reception continues,
-and the character is readable from RBR once DLAB is cleared. Dropping
-input is right for loopback (SIN is disconnected) and arguably for
-DLL == 0, but not here. (Each dropped character also produces a
-"failed to process console input" warning, see my reply to 01/26.)
-
-(ns16x50_is_tranceiver_enabled() would then need to lose its BUG_ON():
-it only looks at the stored DLL, which doesn't depend on DLAB.)
-
-
-> +    else if ( !ns16x50_is_tranceiver_enabled(vdev) )
-> +        ns16x50_debug(vdev, "THR/RBR access disabled: DLAB=0 DLL=0\n");
-> +    else if ( regs[UART_MCR] & UART_MCR_LOOP )
-> +        ns16x50_debug(vdev, "THR/RBR access disabled: DLAB=0 loopback mode\n");
-> +    else
-> +    {
-> +        const struct domain *d = vdev->owner;
-> +
-> +        /*
-> +         * Echo the user input on Xen console iff Xen console input is owned
-> +         * by ns16x50 domain.
-> +         * NB: use 'console_timestamps=none' to disable Xen timestamps.
-> +         */
-> +        if ( is_console_printable(ch) )
-> +            guest_printk(d, "%c", ch);
-
-The guest's tty already echoes the input, so every typed character
-appears twice on the Xen console, and the two streams interleave with
-guest output. Worse, the guest can't turn this echo off: when the guest
-disables echo (e.g. login prompting for a password), the characters are
-still printed by Xen. I'd drop it. Also, "iff Xen console input is
-owned by ns16x50 domain" is always true here, as __serial_rx() only
-calls this for the domain owning the input.
-
-> +
-> +        if ( ns16x50_fifo_rx_putchar(vdev, ch) )
-> +            regs[UART_LSR] |= UART_LSR_OE;
-> +
-> +        regs[UART_LSR] |= UART_LSR_DR;
-> +
-> +        /* TODO: check FCR when to fire an interrupt */
-> +        ns16x50_irq_check(vdev);> +
-> +        rc = 0;
-> +    }
-> +
-> +    ns16x50_unlock(vdev, &flags);
-> +
-> +    return rc;
-> +}
-> +
-
-~ Oleksii
+diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
+index 43785d19cc..54e3a02dd1 100644
+--- a/xen/arch/x86/cpu/common.c
++++ b/xen/arch/x86/cpu/common.c
+@@ -341,6 +341,7 @@ void __init early_cpu_init(bool verbose)
+ 		printk(XENLOG_ERR
+ 		       "Unrecognised or unsupported CPU vendor '%.12s'\n",
+ 		       c->x86_vendor_id);
++		break;
+ 	}
+ 
+ 	cpuid(0x00000001, &eax, &ebx, &ecx, &edx);
+-- 
+2.43.0
 
 
