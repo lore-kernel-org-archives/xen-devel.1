@@ -2,48 +2,47 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 25FB7606A31C
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2026 11:25:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 67D4E606A320
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2026 11:34:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=selector1 header.b=qLd2n2SV
-Received: from list by lists.xenproject.org with outflank-mailman.1494293.1693926 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=selector1 header.b=m2dJk4e0
+Received: from list by lists.xenproject.org with outflank-mailman.1494307.1693935 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTdms-0001ev-OF; Wed, 18 Nov 2026 11:25:14 +0000
+	id 1xTdvJ-0003gI-Gh; Wed, 18 Nov 2026 11:33:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1494293.1693926; Wed, 18 Nov 2026 11:25:14 +0000
+Received: by outflank-mailman (output) from mailman id 1494307.1693935; Wed, 18 Nov 2026 11:33:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTdms-0001eo-Ko; Wed, 18 Nov 2026 11:25:14 +0000
-Received: by outflank-mailman (input) for mailman id 1494293;
- Wed, 18 Nov 2026 11:25:13 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ross.lagerwall@citrix.com>) id 1xTdmr-0001eN-FJ
- for xen-devel@lists.xenproject.org; Wed, 18 Nov 2026 11:25:13 +0000
+	id 1xTdvJ-0003g7-DQ; Wed, 18 Nov 2026 11:33:57 +0000
+Received: by outflank-mailman (input) for mailman id 1494307;
+ Wed, 18 Nov 2026 11:33:55 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xTdvH-0003fe-7g
+ for xen-devel@lists.xenproject.org; Wed, 18 Nov 2026 11:33:55 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xTdmq-0021Ke-KX
- for xen-devel@lists.xenproject.org; Wed, 18 Nov 2026 12:25:12 +0100
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xTdvG-0083mi-JT
+ for xen-devel@lists.xenproject.org; Wed, 18 Nov 2026 12:33:54 +0100
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <ross.lagerwall@citrix.com>)
- id 6afd8b0e-2eae-0a2a0a5409dd-0a2a4504824a-26
- for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 12:25:12 +0100
-Received: from [40.93.201.48]
- (helo=CY3PR05CU001.outbound.protection.outlook.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6afd8d21-2eae-0a2a0a5409dd-0a2a450bb84a-4
+ for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 12:33:54 +0100
+Received: from [52.101.85.7]
+ (helo=BYAPR05CU005.outbound.protection.outlook.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <ross.lagerwall@citrix.com>)
- id 6afd8b16-b57f-0a2a45040019-285dc930139e-3
- for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 12:25:12 +0100
+ id 6afd8d20-b7e8-0a2a450b0019-3465550736f6-3
+ for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 12:33:54 +0100
 Received: from CH8PR03MB8274.namprd03.prod.outlook.com (2603:10b6:610:2ba::5)
- by SJ2PR03MB7166.namprd03.prod.outlook.com (2603:10b6:a03:4f8::20)
+ by CH2PR03MB5157.namprd03.prod.outlook.com (2603:10b6:610:9b::18)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.13; Wed, 18 Nov
- 2026 11:25:09 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.10; Wed, 18 Nov
+ 2026 11:33:51 +0000
 Received: from CH8PR03MB8274.namprd03.prod.outlook.com
  ([fe80::ebe2:32c1:d2be:a096]) by CH8PR03MB8274.namprd03.prod.outlook.com
  ([fe80::ebe2:32c1:d2be:a096%4]) with mapi id 15.21.0615.013; Wed, 18 Nov 2026
- 11:25:08 +0000
+ 11:33:51 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -54,109 +53,109 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=vJgKLig6WnslawOZfsuMRvdo23gTnsuta62R4N3FJIVavCfLLIJeWvj/+hKy9nrFJBr5ykFCtnFxXMF5pNrjmgU3qvERASh4AD3o1HHNd+sA+xkZ1z0Dgrn39vXThfaoDHCURfEf+j/iAfMcoqIXzCrHjyGPAMyaPpjmOYvk7UBiOc9uucfL7yASfoagu88bj9e5mAJh5jPtWPb94bWc0l/PSZ8jP3lbubPsGt0cTfqLfxAAhG1745zaXbNqcXUiWYBwb5Zd6Mq9Q84ept2+TQFvgUlt5AcWtZuyi9mNXdZumPfMgN31Yi7x5Cwudv26u/QSzuXlyAiOpjMg8qDe5Q==
+ b=ICtDAQOsmy7v2tRoBgI6rrk0oh6bdthjiaDGblT+n61lctGRUmn+RIIQ6Qj90usBSnQpk8eyBQoVbdL19b5QDi975yD0kc7Y6t3T89R9ZK3dwuQI9OywDiK+B6cy2yv5tTRxUAeS4384z4oyfSgwSWpbxVpa2wvwXwVqhZIwfj903OEaGd6eS4+b3ehKC9PwIzA3MaTdMxTZZhbJfkNijoNPBVtFKraRw5MbElMRjoYnscpCl23tH8D7ZREWsLgylbTAaTz54doBj6H+YIcxvPSeNSqZXSW1d8rluW8YSV4RfsBZwAyKWcEKCwMHBzQaLd9EEG4O5BrGoJ5lyFMm4A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=zM3k/2WCvMrCdMm27K8Fi760CqD+YE5EovKRW6Oi8RA=;
- b=i6vWGs2LH90jfHBwDZLypd1ubIiFjGbKc3D5yDCot8iIpR5qgKa1N+C7mube300eoDkzE/iG7AU7etPtKxDPrQIUpp/EDizxhO+75iQJGx1dvucnMnmyGPwZ85YMP6Dx0LJkOqZaHaB85eEyJ1ytBRKy6mpuI9svRwCpCYH6+ss5hC1f69Eb1o4K7GiOaV2VhevJRPRfkcwijAXXAHodRFyCX++hvsYvCJ+XtfI6vBic8x7EXM0kLe8ZlpQR21+AvnCe/WZAlV+n67tYeFL+u6PkRg2cwaLykE94nZJnrz594q7KtUrCJla0W+ebF2sGVhro2CSjkIG0/Z8jer+31Q==
+ bh=xSUAzgLSzifco2aLwCNpcKKxW9Zn1+5wKPWDUhL9JRo=;
+ b=FoIPOPWr2jtZjWeEQM4eAZ7R81bvHyrfPc1hs/e4lT0yq/ziU3qCMsAHjzXEmyfLaHBMy8UhyrGxtnNLy+qhPbxXAQAduC/aK8H2d+VnZz1Cpq0NASNmrk4SQTeq8U/R0M7E4qAC5SJsTyfSyBz1i/ZjC5ADTIL4vqobgLir/rPtv85q3bvHBSeMJdJUiW6KJ4HUWqSYM9KdhUOxxEiB8VFLZetONF3jbdY6/U9MleVPaoA7RdH1KoT3sPC3hDSKJpV32U4Dh15NeKLv418Wd3fcWjwSiaNEBZ39W9l0Qus5HZlkVo/SGHIQcLJtQPtGV9OoCBvI1tW77ZZPKbkUJw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
  dkim=pass header.d=citrix.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zM3k/2WCvMrCdMm27K8Fi760CqD+YE5EovKRW6Oi8RA=;
- b=qLd2n2SVmH/37PqLRraugs6QsZTLE3chLZ/6aS8gqviro951JXCAE8kdjax/wri2US74zXv/0avoaLZOafycRtthFbmou+xp51v/SdfAVb4+yoQLxiu6jB5rqBtvb4KRwFYkXyCt4AB4iq6IOzVrUv+XB+jGpvlfTwcL0BHwPn8=
+ bh=xSUAzgLSzifco2aLwCNpcKKxW9Zn1+5wKPWDUhL9JRo=;
+ b=m2dJk4e0/qXY8nU6jC3MpJEN/6sSdeLD4aulmge6gwrMT15ub6pJbraKp90FnYRpacUOxNsn49Ta/0oBRQyFfRssj3pB2fekOgwfmlykOyHTLAPqFKqQU78yVlBPnOpYJuWxyYm/SIrTwK+PsP81m/BkT8fsOIFkQNLI+hmY6CU=
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <75f37608-f3ef-48db-8e7b-4a1ba13a9ee0@citrix.com>
-Date: Wed, 18 Nov 2026 11:25:04 +0000
+Message-ID: <0ebb64bb-2758-46b2-8965-05589d0ed01d@citrix.com>
+Date: Wed, 18 Nov 2026 11:33:47 +0000
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/swiotlb: Check the segment boundary in
- range_straddles_page_boundary()
-To: Lin Liu <lin.liu01@citrix.com>, jgross@suse.com, sstabellini@kernel.org
-Cc: oleksandr_tyshchenko@epam.com, andrew.cooper3@citrix.com,
- xen-devel@lists.xenproject.org, iommu@lists.linux.dev,
- linux-kernel@vger.kernel.org
-References: <807c3b040b02d7d89f1cac76eb137afbee91015d.1794573814.git.lin.liu01@citrix.com>
+Subject: Re: [PATCH] nestedsvm: Ignore attempts to clear EFER.SVME from L2
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
+References: <20261113160242.695800-1-ross.lagerwall@citrix.com>
+ <5c372738-8d61-4673-9bab-d2246e120874@suse.com>
 Content-Language: en-US
 From: Ross Lagerwall <ross.lagerwall@citrix.com>
-In-Reply-To: <807c3b040b02d7d89f1cac76eb137afbee91015d.1794573814.git.lin.liu01@citrix.com>
+In-Reply-To: <5c372738-8d61-4673-9bab-d2246e120874@suse.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: LO4P123CA0218.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:1a6::7) To CH8PR03MB8274.namprd03.prod.outlook.com
+X-ClientProxiedBy: LO4P123CA0231.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:1a6::20) To CH8PR03MB8274.namprd03.prod.outlook.com
  (2603:10b6:610:2ba::5)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8274:EE_|SJ2PR03MB7166:EE_
-X-MS-Office365-Filtering-Correlation-Id: e5621488-14b5-407a-63e0-08df45669a47
+X-MS-TrafficTypeDiagnostic: CH8PR03MB8274:EE_|CH2PR03MB5157:EE_
+X-MS-Office365-Filtering-Correlation-Id: 653028e5-ed91-43e5-4125-08df4567d17c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|23010399003|1800799024|366016|18002099003|22082099003|6133799003|261009223027099003|261021121427099003|11063799006|56012099006|261028144727099003|261102123227099003|261021123027099003|261026121527099003|261022105027099003|261026140227099003|10067099003;
+	BCL:0;ARA:13230040|23010399003|366016|1800799024|376014|18002099003|22082099003|4143699003|11063799006|56012099006|261026140227099003|261022105027099003|261026121527099003|261028144727099003|10067099003;
 X-Microsoft-Antispam-Message-Info:
-	3hZTY/xAtJzjw/fFN09V3W/BtquT6aHipIx0FfBLebbSxgeJXfd5pPmfIlmI2qFDa+7VnPfHWdkUt0JFonFZnF1rb05do+VTJZ1wmLJVKgoKFqhAQS36cmfdd6XxfJvJqBR8vUSvXqzHJG5M3BB48/RraeTXEgv9GWxaQMyo1y4nSElokxdDjBxalgnBtigRgoHt6CwdMVnAf1RNXQDy7yKwUX15lmuutOU0Dre1PPF6ZviEN+KbD6a14EgCRikqRPt8V1agjc9Jy0kU1K6F2PYPDMJzGUT7qLot1EYeu6GyzIJKxxquSLbnHQXMTT5Nl/a7YwDKlNUxds4dgSSrsOJN5OIL2LypXa71byWH9HsNlgoVOGN4Cmbo1jQxRzPlxKbG1yjIMjb3RtxuodgCfPPeQ4G9pIRnfXAaV8Dkbr6Zp+lOrCWSxpmK7+FqCee5LvAEWByDO3LNu2ZGHQN5j9LVxtNcLJZWU4S0KWEsCs3kJSEkfVWQ1JNTRN6dHBI0YRsn5ExERJjJ5boSQvTqjMg3mPmkY32U519pJ6rSpqr3B699oZxzeqKBA02OSDCrYeAbi4mPJyv5QzpFF0xnWJiuVtqaJgECTggx1qcegSRzXRSsKFYxA/OkRMkTKOCZgrwEU6id93huKNCOoDXoS4trshD5shbgeX/JzNZFkes=
+	WuqGzAJgiGU69oPjtQGGmqDe8KPsC3lOO0pr4CDf9Vi6GtffgyDBhyZVqdT8xxxezsai8QfB62CIkVk1OwtTT+wJ4ZOCpNOPhjIBu/eP9gAVDpzA/JJ4MBSgLflIuzJ+inlET1vwF6zK1216z1NPfitPiNIF8CdcAL8OkCapTZ2ZFPyfEw0436v1KEamuJzpOMrPJj747qpqxXc65DJhtdBsqjZko2ycVk4sWHvIMKGAUHO+fOm9GYtI46UmMKJvk+dsvt+wGEHuXWpWeisP3zh0UpGpkpWBYprkGqXbcpB6YhXEDg4pXr657cVde9QHR5jvcJmJkqag5KX8CjbZwFcljCMN5MR2Q1pTk2efPuVYM7PNVzzCUkSgT0H6zxmOqoUOy/FlrdqcULs7Iky9hXAQef7Wd8YPZ7HQGH8nlB6xEzOoX6lIGAMdGmgfCBAPo18vbHew7ytTHTl5d52FSmQZj0LykcQqNy3+x8SVBDRpvXoZ++2RleizGNOB5AqaJTs2a/bpQaqmar+lsOrYQ6gcVhH9Syf4faloxU4hB5VR3L0qdvodZIAxas1uvh3JwHO2kkK3q/14ejnL/V0egwONk7LcA9X/P5qAEic0CcdZwSWhADiliEdO0SpJwHKEN/eR8gn/NpHMe1rr1rYgUJoPMnraqMwMoiCDrlKWYAE=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8274.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(23010399003)(1800799024)(366016)(18002099003)(22082099003)(6133799003)(261009223027099003)(261021121427099003)(11063799006)(56012099006)(261028144727099003)(261102123227099003)(261021123027099003)(261026121527099003)(261022105027099003)(261026140227099003)(10067099003);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8274.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(366016)(1800799024)(376014)(18002099003)(22082099003)(4143699003)(11063799006)(56012099006)(261026140227099003)(261022105027099003)(261026121527099003)(261028144727099003)(10067099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?U0pMUmtSQ3o0MjVaVzR3elhPdDhTSjFVdXZDRC9kNGRIVWdlYi9LVUUxc05P?=
- =?utf-8?B?VEkwUDFqUjd5L1E0Z01xbnpvOFliTVR0MnY3L01tY1ZYK052eEVMNUFXM09Q?=
- =?utf-8?B?S3g1RWVndnE2d0I2ckNDZGJWN0k1VUZNUjJrTWYwN3F4RHZsWnVFM3JZaHlM?=
- =?utf-8?B?VWZrZFlIaFNzMjVNbXhxVEpTNnZCVHVSbkEzZVR1MXQwa1ZzWG5nQzlYS1ps?=
- =?utf-8?B?MmpqUEdkSXNyT1BXeVVhbGJySWhhRlcyTEFBenU5d2ZISitITktvVXpGUld1?=
- =?utf-8?B?VCttRzFzY2czdFh4WWN3dXRYUGxrSDRGR3hDTjZKSWdtbHBjRDhvKzlBZGIx?=
- =?utf-8?B?MVJEWDhCS2Nvb1lHbTRmVGNES1ZSOFV2K0hGMHFUZkYxbXVoY1NTYU1ob1Vq?=
- =?utf-8?B?VGpvd2hGMVM3ZENYbTNHYkpDbWxmb2VRMHdwbEY0OVNTbHJPNDE2ZHhyNlpr?=
- =?utf-8?B?Z2hOcnExV0NHN2FLWVVwWDhRRGlWQTlsWDg3b2pxSnlqVHVKNW5BdWF5VVVE?=
- =?utf-8?B?YTN5Vk5rTHlPczNHQ0xCYmRPU0U1L0R2cVYrWGlVWXlQeEJEMnZlZFdjYVVM?=
- =?utf-8?B?bkJHZGZvRTFhNi9EWUhuV2tUaHFlNmhDWEVnTlhVNUtsZGZJV1h4RnB6cjhH?=
- =?utf-8?B?TStSc3IvKzM3VEVJN0ZOSXhQT2NsQk1GQVNoWUZrUTVBMXJodG1IMVFod2Yx?=
- =?utf-8?B?RWRlTEZPbFphVGM0NUVXOXlyU1BPQUx1bnJ0a05QOUVMSTRJRzhsT1MyZGMr?=
- =?utf-8?B?VkJ6aVNCbUlXeDJURE4xcW9hd0lZckR3dmN5TVVRQ3FnOFEvSmoyQ1FJSzcw?=
- =?utf-8?B?dERTWkdUMXpTNVdJTy9nbEZ1N0pCWEdYay92eE1sRXBTMk84cURMSnRLbUdK?=
- =?utf-8?B?S2ZEZVk0UVBwb0pZSjdxVS9WZ1BWN2FVUGJpYTgwb2tSUlhZZkpOeUpXTml4?=
- =?utf-8?B?dHNLaVYxb21TdHB2OTdWSC9FSmtNR3hrMlBZaTR2NFdPa3UxV29kYUdIYjF4?=
- =?utf-8?B?Q1JTbzEwUVpVTm8yOGZ2SnE3VjVoQlQ2bHpzUlBHWGs1MDc5TmcvNDg3dDhu?=
- =?utf-8?B?eEJmK0JCYUtzWTRjejFWSFc3MTZnc0VTQU9vQWxqZW9Id3hKRkNPYnpCRHdB?=
- =?utf-8?B?RWFtWGZMRENxOFpmTUpzK0VFUFRzZVRwQjNHNU1vN0JUc29HVk5sZTlJUVFY?=
- =?utf-8?B?WkpneVlTMUY0dVVTeXlwaUdJMkt0K1VzV2xTa2NzSVhkZ1JNSTJuZ2toRnN6?=
- =?utf-8?B?NmhiQm5CRFN5RVU3UFJ0dW15SUNLWjFUNDJkb1RPZDlmRDdyVVdzUEo0dVhj?=
- =?utf-8?B?T1FVcTJSQVRiWHpwellGUFBCVGZienhkbEYrYngybmxRSU5Nbjh0SERveTVQ?=
- =?utf-8?B?YzZ1TFlRRldyRlQ5NmY2c1hFclpXNmxDVFVva0U4NVNRb0wyanNLYU5hY2ZG?=
- =?utf-8?B?aVZmZGMyRlU5L1JWUHpkK1ZPVVlCZTI4dGZ5cVgrREZyQ3Fsd3RVSXhlT0R4?=
- =?utf-8?B?QmZidXpnTHdadVAvZ1VMc20yYUE3bEN0WFk5UmlIZ3IyQWlmK1RYck02VGM2?=
- =?utf-8?B?ckpXOThVQVF2em9SQVhoRzh2bXRLYldUd1g0NDdqcUpsenJiY2I4V0JQVkVS?=
- =?utf-8?B?OWhNanVwYzREamJNK1JhcHJZRUpRbmhKQ1oxN2FKNGM2aXovZ00wcjkxRHIx?=
- =?utf-8?B?Q1VaSUd3MGYyeUZVclJRNXgvZ1NRUHdoZnBzaDJTcXh1OGg3WXJjdFVMWXVL?=
- =?utf-8?B?bWdUZ2FnT1A2L0xFT1hDbTJXcWluOS9VWGdQMHpMR3IvbkQrZzdBNlhZWHFN?=
- =?utf-8?B?RUQ2UXBMdkRSWC8yOGN4RUc5TSt2ak1za3dlNzFZdEswQVNuc2pQcXl3VTZv?=
- =?utf-8?B?QlhLS3pkTWhwazdGQi91R2E1dVFYVDBQbEh4OEwrcHN3Qk1rdHJXV2hMK1ZX?=
- =?utf-8?B?Wm5XU0hFV3NqN3BWNjVkY0JJWUdBYkVVZVl4ZXlXb0dUMktPVEdteFNyenFt?=
- =?utf-8?B?ZEFON0IvQ2gzZUVEVnR6Rm5yNm00UTdCYzF1Qm5NemRzVWFiUmluRm9tdjVh?=
- =?utf-8?B?eWxJcGZneVE1N0p0aEJjdEhJK2FJRjVoNUFhZWRENWVic2Z2Lzc0ZHl0Tzlo?=
- =?utf-8?B?WVBIck5TUXJYSGtFUkwwTEpCNUllWE9kVHBONWFTRUVOcDV2YzR3OWo5RnVj?=
- =?utf-8?B?VVhNS1FOdjJ3U1NrQVFCdlp2a29WM2hwS3dVQVBSdXRraG9xd09UVzg4ekdL?=
- =?utf-8?B?UHR4TGtoNHZmOGs5Y3VHQ1BrRlc2ci80eTZ1MnJ3WDZGOEYzNDFidXJXdnpn?=
- =?utf-8?B?elk4ZElpZnRHWHZaWEUrZmpHb0I1cENzVk1oUEZSRkpGRUY1Mk5MZDlwUFpM?=
- =?utf-8?Q?PUw60wuOdxgGqqe8=3D?=
+	=?utf-8?B?UEdZV3lDQjcyR0pmaVMwMDArdWgxNzdReG1ZbUdEUWVaOWxVaERDd3BXeU56?=
+ =?utf-8?B?dHVpSlpYcm1nZXlpYkpCUkhicXVnUkRnb1NZMEl4cmQ5MERBRXFtV0ZWbEZO?=
+ =?utf-8?B?dlc0ZVUvYmczaTg2QTZHaDJYc0ZkUEZUSmRZdDJMNVh2bzdlZWFPc3dCMW5q?=
+ =?utf-8?B?M0tmVHZKc29TWlNRaWszUmdvNWhkQ21ENTZ0c3FlZndKNDkxdzNDeUFINE5Q?=
+ =?utf-8?B?Wi9yMkhMeVlYU3VmeEc4YWEydk9pRWMvMVlnNjVRRVBVb0NMQlVNeXpYSkpL?=
+ =?utf-8?B?Wk12RUV0Smd5c1NzSm91UGRxOWlQbjY1bjB2Z3ZqNW9qVkhYV1A5RVVSc0Jj?=
+ =?utf-8?B?eWVuaW9RN2RvWWZxZ1E4WTFWaVFEVlE3Rkx4Z3VuaDRKNm4waHkxUmhwZUFW?=
+ =?utf-8?B?QklVbnp1bVZDT1huaXp6UzZwdGZTTXlOcEFqMEhNS25HYlY0M05nWFVKNkhP?=
+ =?utf-8?B?MDVRNGNVRWVzU1c0clJZK0FteUZwSE95WlhwTXhST0FKMXJMc3N0eWRXWHJJ?=
+ =?utf-8?B?b3lxSUhYMWllalRRa3JJZ3c3T1ZiSkpNWVd2YWpCUWJwQ1JYSkxhTkJqaDN0?=
+ =?utf-8?B?Yk5JN2YzdXpES0NFOE5WVXpwRDl2cXArNjlNNDluWHJKb2xJWU1WaDhDR2Uz?=
+ =?utf-8?B?LzN1cmN4NXlXTEpCQ09NNjJ0YUVIM0VrVXRZeFBkaEltclZkaXJDZDJTWXJC?=
+ =?utf-8?B?Vmxmd01Mb293VEp1aDJxZ252Ung4RWo4VXk1a1YxdjBVZFBnZ2REYmVDWVM5?=
+ =?utf-8?B?UlduZGcrSitoY1FSUnBIai8yUDVYeW82Q0hzall2TXlpejRlUlVLS0hrUklp?=
+ =?utf-8?B?UVBPMTJFMnhSckZUWDBIREJlQVRqb0NORWZKQVZhOGszSy8wZ3FtQ0RVaEhR?=
+ =?utf-8?B?V3VOSUNEVDcyK2NpL21NMmFKc0d3RS9HTml1emxIYUtHdWVDelRmRlJkd2dM?=
+ =?utf-8?B?Z0Q4bHFrN3RpKzhMb2x0WDBmK0JuemFKYXByUmlSU1VLeURoa01DMzZWT0tE?=
+ =?utf-8?B?dHREUXNNRzdGMW9VcEdiVWdVQ0pSUzhvNzJ2VUJtWnJjUmQ5aW5zMFNLeFN5?=
+ =?utf-8?B?SEtBeW9JN2xNUnRjRFVCaFcyZlFxNVhMVVl5KzZGQTA4eDJpNFAyQUlCa3N2?=
+ =?utf-8?B?YStFM1B2M0w1MW0xV1ZYd21adHZEWXd2SjArTTRvcG0xdjFzOVI0SzNMMWJj?=
+ =?utf-8?B?SC8vNE92MXA1anQ3akhmNzZWQVJzYWxLMVBvMEgrem1IYXViVElZOFZRVEU0?=
+ =?utf-8?B?aCsyRnpHKzFPSDZSUjlYVGdQZTBzaU4wb0dSVUt6cjJhZjY2S1FhWXRka0Rl?=
+ =?utf-8?B?S1B5S0JBUENFWVRTd29EbHJWOG1ibk9oajR6ZGI4bFRHNmpLQ1JtMm5iVnJB?=
+ =?utf-8?B?RkZ3UUlRVUtZTU9pWXRpUUVzTW5YUUY1VURjS0lsOWxSenlkSWJaTnNSZTJm?=
+ =?utf-8?B?aEVpT2llS0RWczBVd3JubzRDbUJlNHIzdUp5WElxVUtLSzg3UG1ueVcyLzhY?=
+ =?utf-8?B?eGQ0a3gvSzVCYUM1ZWwrdW8wSHluYXh4Z2dpNENKckl3SC9VWm9LRnk2MGlX?=
+ =?utf-8?B?R0V0M1FXajJMMlNONjNldHFva3ZjWVpFcVdTQ2lWM0s4K2k1MDh3YjNvdXlS?=
+ =?utf-8?B?SjZzY2UrNWV4UndDMXpheXVONXdpRWNNdHpmUTZOUmt6TThtQ3dFSWdSNStx?=
+ =?utf-8?B?MzR1UlRidytoSUwvWTNLZ1FOZ3RnWXZtMllENUc1Ym5BWXJUUVc5RG5JMG1l?=
+ =?utf-8?B?d1BmTms1Y0FHUzh3Nk1IeEpaOG90M08vb0dZb2NSNDJ4c2NMK01OeEl3TXh6?=
+ =?utf-8?B?dWIrUnNFODQydHlkU1h0dE1GN0JuRlFvLzBxaE0vcE51eGdrOXZKQXR5NDNJ?=
+ =?utf-8?B?VnJDcmxCb2E5ZVV4L3h0UmhwZ1lFdjR2ekFmRFd1bXV2eVdKN0tSWC9CSm9O?=
+ =?utf-8?B?THZyNlhqcEJ3TXlCY3NMNWRjWnBCN0VROEY3TkV0MVRWQTdyTzV1Y1Y4OENq?=
+ =?utf-8?B?ZUkzY2NkSE9SQjhORDFUR25JNVdwcHREVWNpWmhOVUNXdWhhNUZzTUczUHhO?=
+ =?utf-8?B?OFhUb0NxTkltQlV3NXpMZGhTN1EzK1BUSFQwVFo0WWthY0M4YmhNQm8yeEgw?=
+ =?utf-8?B?bWsydXBNamJnMmRSa21JcUVmTFc5aHlJbHlScVFzVmNleGRXYXFCSWhtQ1Js?=
+ =?utf-8?B?dzlOSXBEWmR1R3RYK2JScTdwUEhXbUhyUDYxdkZHaStNUkZTUCtTajh0VXlk?=
+ =?utf-8?B?Z3VIMVVJMjNleE51bWY5ekh0MDR1QXFwQzRXOG9uNEVIaU13ZVU2L2FrUFQ2?=
+ =?utf-8?B?cUtJelREYXNGczRFVWQ5Z1pZWjYzQXpicUZIMDlBTDF0Qnk5ZzdiMFhWcXY1?=
+ =?utf-8?Q?N8U6NqqyJLlcUy74=3D?=
 X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e5621488-14b5-407a-63e0-08df45669a47
+X-MS-Exchange-CrossTenant-Network-Message-Id: 653028e5-ed91-43e5-4125-08df4567d17c
 X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8274.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Nov 2026 11:25:08.7997
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Nov 2026 11:33:50.9198
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: QljWTFRXLpqFRTDBEbDkjF57PWOS1jfDIIv3TLJ6ToqMMJbSRrCo2fKToj2DFvvohIntyvY1FVaxAUn7g5stKZ8fhabtYAhpXff5Wg0f/1I=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR03MB7166
-X-purgate-ID: tlsNG-ebf023/1795001112-522D4B50-1824AC21/0/0
-X-purgate-type: clean
-X-purgate-size: 2933
+X-MS-Exchange-CrossTenant-UserPrincipalName: 4FS/BItGXfxpVS9/UGpKG0wNG8yidRqlTP7LPR2rTozyx+EYGKx3hXFQmEWvtJa8JRtFFqcvLXbhy5pYL6Tzp0wtZQEc1+wHUQ654gN2Wy8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR03MB5157
+X-purgate-ID: tlsNG-42698a/1795001634-A88C99EA-3739C709/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 1432
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -165,70 +164,45 @@ X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 11/13/26 12:47 PM, Lin Liu wrote:
-> The block layer applies a device's DMA segment boundary to
-> pseudo-physical addresses, but in a Xen PV domain the bus address is the
-> machine address.  A range that is contiguous in both spaces can still
-> cross the boundary in machine space and reach the device.  AHCI declares
-> a 4 GiB boundary, and controllers that do not carry across it (e.g.
-> Marvell 88SE9230) then DMA the tail of the transfer 4 GiB too low.
+On 11/16/26 11:34 AM, Jan Beulich wrote:
+> On 13.11.2026 17:02, Ross Lagerwall wrote:
+>> The APM leaves it undefined what happens when the VMM doesn't intercept
+>> writes to EFER and EFER.SVME is cleared. The current implementation in
+>> Xen resets the nested state without doing a VMEXIT which is unexpected
+>> and may potentially hit a BUG or assertion failure.
+>>
+>> Therefore, implement the same behaviour as the APM documents for SEV-ES
+>> guests; ignore the attempt to clear it.
+>>
+>> Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
 > 
-> Make range_straddles_page_boundary() also reject a contiguous range that
-> crosses the device's segment boundary in bus space, so all its callers
-> cover it.  Streaming mappings are bounced; coherent allocations are
-> already naturally aligned via range_requires_alignment().
+> Acked-by: Jan Beulich <jbeulich@suse.com>
 > 
-> Signed-off-by: Lin Liu <lin.liu01@citrix.com>
-> ---
->   drivers/xen/swiotlb-xen.c | 16 +++++++++++-----
->   1 file changed, 11 insertions(+), 5 deletions(-)
-> 
-> diff --git a/drivers/xen/swiotlb-xen.c b/drivers/xen/swiotlb-xen.c
-> index e2538824e..181f8cef2 100644
-> --- a/drivers/xen/swiotlb-xen.c
-> +++ b/drivers/xen/swiotlb-xen.c
-> @@ -82,10 +82,13 @@ static inline bool range_requires_alignment(phys_addr_t p, size_t size)
->   	return IS_ALIGNED(p, algn) && !IS_ALIGNED(bus_addr, algn);
->   }
->   
-> -static inline int range_straddles_page_boundary(phys_addr_t p, size_t size)
-> +static inline int range_straddles_page_boundary(struct device *dev,
-> +						phys_addr_t p, size_t size)
->   {
->   	unsigned long next_bfn, xen_pfn = XEN_PFN_DOWN(p);
->   	unsigned int i, nr_pages = XEN_PFN_UP(xen_offset_in_page(p) + size);
-> +	unsigned long mask;
-> +	dma_addr_t dma;
->   
->   	next_bfn = pfn_to_bfn(xen_pfn);
->   
-> @@ -93,7 +96,10 @@ static inline int range_straddles_page_boundary(phys_addr_t p, size_t size)
->   		if (pfn_to_bfn(++xen_pfn) != ++next_bfn)
->   			return 1;
->   
-> -	return 0;
-> +	/* Contiguous, but may cross the segment boundary in bus space */
-> +	mask = dma_get_seg_boundary(dev);
-> +	dma = xen_phys_to_dma(dev, p);
-> +	return size - 1 <= mask && ((dma ^ (dma + size - 1)) & ~mask);
->   }
->   
->   static struct io_tlb_pool *xen_swiotlb_find_pool(struct device *dev,
-> @@ -158,7 +164,7 @@ xen_swiotlb_alloc_coherent(struct device *dev, size_t size,
->   
->   	*dma_handle = xen_phys_to_dma(dev, phys);
->   	if (*dma_handle + size - 1 > dma_mask ||
-> -	    range_straddles_page_boundary(phys, size) ||
-> +	    range_straddles_page_boundary(dev, phys, size) ||
->   	    range_requires_alignment(phys, size)) {
->   		if (xen_create_contiguous_region(phys, order, fls64(dma_mask),
->   				dma_handle) != 0)
 
-Is the change actually needed for alloc_coherent / free_coherent?
-The allocation from __get_free_pages() is naturally aligned and
-range_requires_alignment() requires it has the same alignment so it is
-naturally aligned in bus space. I don't think that it can cross a
-segment boundary then.
+Thanks
+
+>> ---
+>>
+>> Another option here could be to fail VMRUN if L1 does not intercept
+>> writes to EFER. However, this wouldn't match the behaviour of real
+>> processors and may cause incomplete toy hypervisors to unexpectedly
+>> fail.
+> 
+> +1
+> 
+>> --- a/xen/arch/x86/hvm/hvm.c
+>> +++ b/xen/arch/x86/hvm/hvm.c
+>> @@ -2156,9 +2156,15 @@ int hvm_set_efer(uint64_t value)
+>>          ((value & EFER_SVME) == 0 ) &&
+>>          ((value ^ v->arch.hvm.guest_efer) & EFER_SVME) )
+> 
+> Unrelated to your change, but: What is this? When we have checked that
+> SVME is clear in value, why would value need XORing with what's currently
+> in effect to figure whether a 1->0 transition is occurring?
+> 
+
+I agree that it is unnecessary. Looks like it has been that way since the code
+was added.
 
 Ross
 
