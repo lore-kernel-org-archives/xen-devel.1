@@ -2,45 +2,47 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 041C1606A320
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2026 15:34:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A49F60A260B
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2026 16:29:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=ahuaR7Z8
-Received: from list by lists.xenproject.org with outflank-mailman.1494784.1694118 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=b9sitAsA
+Received: from list by lists.xenproject.org with outflank-mailman.1494840.1694127 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xThfU-0000cl-Ak; Wed, 18 Nov 2026 15:33:52 +0000
+	id 1xTiWV-0001bj-92; Wed, 18 Nov 2026 16:28:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1494784.1694118; Wed, 18 Nov 2026 15:33:52 +0000
+Received: by outflank-mailman (output) from mailman id 1494840.1694127; Wed, 18 Nov 2026 16:28:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xThfU-0000ce-70; Wed, 18 Nov 2026 15:33:52 +0000
-Received: by outflank-mailman (input) for mailman id 1494784;
- Wed, 18 Nov 2026 15:33:50 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xThfS-0000cY-Dj
- for xen-devel@lists.xenproject.org; Wed, 18 Nov 2026 15:33:50 +0000
+	id 1xTiWV-0001bb-4A; Wed, 18 Nov 2026 16:28:39 +0000
+Received: by outflank-mailman (input) for mailman id 1494840;
+ Wed, 18 Nov 2026 16:28:38 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xTiWU-0001bV-Fp
+ for xen-devel@lists.xenproject.org; Wed, 18 Nov 2026 16:28:38 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xThfR-00577V-MV
- for xen-devel@lists.xenproject.org; Wed, 18 Nov 2026 16:33:49 +0100
-Received: from [10.42.69.10] (helo=localhost)
+ id 1xTiWT-006JJi-SQ
+ for xen-devel@lists.xenproject.org; Wed, 18 Nov 2026 17:28:37 +0100
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6afdc553-2eae-0a2a0a5409dd-0a2a450a8650-14
- for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 16:33:49 +0100
-Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6afdc55b-f2d2-0a2a450a0019-d1558032e8d8-3
- for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 16:33:47 +0100
-Received: by mail-wm1-f50.google.com with SMTP id
- 5b1f17b1804b1-49d05d51553so7847145e9.2
- for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 07:33:47 -0800 (PST)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4a656095f2csm5146726f8f.40.2026.11.18.07.33.45
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6afdd230-bab6-0a2a0a5309dd-0a2a45069bec-8
+ for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 17:28:37 +0100
+Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6afdd235-195a-0a2a45060019-d1558029b5f6-3
+ for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 17:28:37 +0100
+Received: by mail-wm1-f41.google.com with SMTP id
+ 5b1f17b1804b1-4bb68c197c7so17029865e9.1
+ for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 08:28:37 -0800 (PST)
+Received: from ?IPV6:2a01:cb15:80c6:e800:d2ca:523:c712:18a6?
+ (2a01cb1580c6e800d2ca0523c71218a6.ipv6.abo.wanadoo.fr.
+ [2a01:cb15:80c6:e800:d2ca:523:c712:18a6])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4bb78430918sm137199665e9.13.2026.11.18.08.28.36
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 18 Nov 2026 07:33:46 -0800 (PST)
+ Wed, 18 Nov 2026 08:28:36 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,195 +51,347 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1795016027; x=1795620827; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+        d=gmail.com; s=20260707; t=1795019317; x=1795624117; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=EWY3pwm8G0CH5mXCQfPSkMTlhzQGUpPLb9c0LRJHyqk=;
-        b=ahuaR7Z86RlDY/dfjUO2zaBdleXIZDiQ/Y4R+EEBZ4nsVWoUSPtyd+XDo+7RrxulEV
-         Vs2U1ZeyLSKiVpdfkFM2nmV4mqAm2m487D6bbOCZprG0s18fw3WVvepnAGHOLNszl5Rz
-         8J+1bdGa9iv5aEt1PbNtoC5jaWbgxYTXk6O8akmL2argeT9C+9aQphQ/8l65rW6KIc8D
-         SaiBAsSl4ewtcbhE4v4+64Mh+G6KGC6iPxTpLEohF1MxQpwxgHrb51Q/3kFBdRV5fyD3
-         1IYCMc0B56lvd2jgBAxfR5TZejOA6C8YIpwcf/gfVi/CbrZ/Jb4Ys65I2CrqkVfOHxX4
-         A2Fw==
+        bh=h5T3xCyatfdaUlUQvjiVAnmQQ0ghEvD+LlBF7/q3cCI=;
+        b=b9sitAsAzy5cv2Qgx0FWqoanMgrJZfMKFiZSjOnEYcHD5qvFBIoQk9UAqkAIvmF2yx
+         2vsk9cU2B3CyBxF4Yixjppr/B0G7HPgUrfpHnLf0ADZxkuZk07W4nkAn6D7+xSQySKuk
+         Z2zUtPc3/CC2z5yaaJQktf3qZe9ZhjN5wr06otrMi2/bCeyVRlPerzFfcaOq6XPeibx6
+         Y3yBH9W2cmD0t8GA4459jqFVZ51P0hvtzqlCMlK1GF/lrZtRL+KkMBnEsC1dzMt9SL+g
+         VrX/qds9vCnKDBE2wKv97AWuINW9nLGIGsqTXsO1CA0AOVp/SGKyogDsB9F9m8sZgfNG
+         4q2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795016027; x=1795620827;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+        d=1e100.net; s=20260707; t=1795019317; x=1795624117;
+        h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=EWY3pwm8G0CH5mXCQfPSkMTlhzQGUpPLb9c0LRJHyqk=;
-        b=UGl3whmjJg5DGy5vBVxBs/ThuR6lSfUJsMJPBnbrY4NyfJSqsQUz71dokXiZvKyysV
-         igF3DGgiVAE1vGJydxnyl09zTQLOUuAi0dcIFQ2+hIh5mq9xnAfisI/u8lbFmIJqQeBC
-         1Bhe6ZYS7TofFzUTxm5S2Mtc+RqQ8NgN07MZoU9XpP3q+215qTbsYJJxcDA7f7GPmiEt
-         V/lvjOz7gXUCgMl7jUoWxCugv+/a0L46ngbLUXDyiFJW7Bl99+4u6uq/mQ8RrNz/z5et
-         ReCg0Vu1trGs2meaYgVM4wULbJLvJMyluIsBcHBZ96Y5p1SE8WcID6ZSTcc2J6LX9wtX
-         iEkA==
-X-Forwarded-Encrypted: i=1; AL+hErH4KWTZA7/sNWnPynG8cK7pjf0hmTxlJ1i+FkhUrfd1xvSAEXAyYNOdGx229R/9UfDj4BNoQmXZioc=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z+4tmuDGfYOwm0LMCe3ciRTRXWBa7TRW028cNmao7aZbn7P0Ayn
-	fBCgfY1yWNfloZ9tE0Z3Au56zNXpcC8eCIeqFU7ZICr26hx7ys9b8NVYeb/P6rzZBg==
-X-Gm-Gg: AYBFou0ot/CQ6XxMfIfUWeZlDlAuWMj6VxjKaRMETsvaJ0ZI0qCXyBrHVRztP9vy/O1
-	MFdN570aFx1u4679PU2107Uvu5Hb8YdqzAQwLDtKUpZ4/d0TYYXjtXSzKBTAuQ8JDdWQhhCZFMD
-	MYjpNo8WgCPJIZQZmfYtvYO2xURx5pr1oVBLYOzhFfZO6Gyt/+V+iU5gYQPcl/1iRCKEVWPuiO5
-	wDWLBF6CrIdzkUjXt31Hner/TstmyzvGqOE/2udBYuuCPagHnZbGT1it276srWg+CgV88Zr2pzt
-	mtYi8DiqZ/PwXhsRSJYKSEdO3nhmH96TXHrrX5nhuaUAYe+9LaW3iaSZsIDpB+/WhsLKdGgBDZw
-	jBAOpXOvLJoh5Vi5zEF8ZATkAmUMXDrjKkMXwo2L9TADf5SgoJk/1nmYBYRfSshUW0IZDASbRso
-	OLKxyFK0DDa3bCppFjh2obB/w3IbFieWlJ5BtGi3jABj2KyBYOZokusG4ANZab9gYJc/Pnn3jGB
-	mySup7/izRsn2g8LNGeoZgVgsgWlhq6fKQJ6rHvgRuDhBNWO8EjiD1urjvVnaGn33fMqD6mpo5r
-	axuEKtdwMy/qQ06tu4dB9EOU3y0H3/Q+gI+DT6Tct+wzywGqJWBgHsZgwoaIcubnCNrzC9K3fwv
-	DybQM3hETgBA7bTqDZA==
-X-Received: by 2002:a05:600c:8b5c:b0:4a2:397:73f6 with SMTP id 5b1f17b1804b1-4bb7da13a97mr62650745e9.8.1795016026580;
-        Wed, 18 Nov 2026 07:33:46 -0800 (PST)
-Message-ID: <dd71f48b-f39c-4b7c-b298-f392686f5749@suse.com>
-Date: Wed, 18 Nov 2026 16:33:45 +0100
+        bh=h5T3xCyatfdaUlUQvjiVAnmQQ0ghEvD+LlBF7/q3cCI=;
+        b=j6S7mijfHAqaZzFxaCaHuIiq81sFaLwDCepHgTm4EjJbtkOOUWaTie8INtECuMPC46
+         vp6+JXCd5LDl/vyCTu2mbWIvi2SpEdqVQyLLjs1YLabLUdknP3rf2c49T5dsOCZvK1PK
+         143jiKc1MYLJ6rX13ZaoWBwMjRiXtyLJS1lKJtVSZPSlYumwm1MLCwvE8sB1BQduNitR
+         dERcKasjXMQUDNn6z/nrKx9smSmHvlzYgrquCBDK9CBrHHJkBtY1nHb5Pm+g4EZtCQBY
+         98aSUFZ41ZHVzDu3+lOeE5drt8G9mQSuYYLqix8sHMKbqJbDnMWik9YfQPS207J0U/vS
+         Da6A==
+X-Forwarded-Encrypted: i=1; AL+hErFN7ifrHUeTSb1ZtJgBVfLEiUTaxnJ+07lnIryU2Dg+I9ZvaeAFBaa7FiUh2k6mo3AjPcDDDzbC1B0=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z8JSWiB7JUrJ7wGGaJeUO5jGRKqY1LUrM097hDFgp09HQzHxNCI
+	5TAw39kTelnABCteUmJNHoNPWZEziGbGyCQNzVFGZry++Xxz22bO+m+w
+X-Gm-Gg: AYBFou000wDRR4gvXmx9FHgl8KAuv+EPkoWUGSycc+bSlAk+h86hiSortq5ikip48xC
+	zUvoQpMvmjwNbp98qDBY1WoBxH5lQsQMPhPmWnM2YAC5IJh69lxXV/t3ewjnJE5MGrlQL/y9POq
+	Ql/l0CngwelfcmExvk+Xeu6TQYJNpUP6iN9+CFE3Lgg12QycSEwlbPRxX0I6WtdV+UaKmRXu9G8
+	Hyn5pRufwRxfOJ34PN4IrBhiz6/BAn17TaGWQjt2VpYvKorB/fbL0944Ccz3OyThvqxVnnQFdiO
+	5HXEStO6UZuVsBPQ0XaNAI9rGk7OWBM/FfMgh108ObNAISebll7lEshVSxiCSmNYuPpUyO4ImQd
+	3V85AaCccAvwxVfxav8Et0gX7cTJ47fed0qovQ8MbOlFCCJZzyJq3VX/932+hUNenO8fCxhuoqT
+	VlrMkrwKxBflABvF0TUhFySJSHjkTEbZ/HM1EjMyQl611wJiSbhkEnQuOcE/WQX9YAFV7wprmVi
+	OC8lBnd/lwzOnJ+L/ayyAa4CzXvsqWQgQyWWjMcO/QhsowhnSqRzQ+iLBjT/tyzz6CUyoF/2+Kq
+	E74i2xxPOpDI0LIbNvYud7UEeOjiQRYD+0mmS6EjPFpjB59Fn8VBjjJSIWFM4bABVRmHpid+aHG
+	KZAMxYsSBGIsIiWWESeOU1HPOfD640P9YmXoddH4HTvkSmjFjUvjpjJ+1aahV1Ce5n4ZqyAg=
+X-Received: by 2002:a05:600c:138c:b0:4a3:5991:718 with SMTP id 5b1f17b1804b1-4bb7da15188mr62232915e9.16.1795019316997;
+        Wed, 18 Nov 2026 08:28:36 -0800 (PST)
+Message-ID: <a184e795-3b03-4d71-a4f2-24580d312da7@gmail.com>
+Date: Wed, 18 Nov 2026 17:28:36 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 08/28] x86/hvm: avic: add AVIC_INCOMP_IPI VMEXIT
- handler
-To: dmukhin@ford.com
-Cc: andrew.cooper3@citrix.com, jason.andryuk@amd.com, roger@xenproject.org,
- teddy.astie@vates.tech, dmukhin@xen.org, xen-devel@lists.xenproject.org
-References: <20261105013347.719392-1-dmukhin@ford.com>
- <20261105013347.719392-9-dmukhin@ford.com>
+Subject: Re: [PATCH v8 10/26] emul/ns16x50: implement RBR register
+To: dmukhin@ford.com, xen-devel@lists.xenproject.org
+Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com,
+ julien@xen.org, michal.orzel@amd.com, roger@xenproject.org,
+ sstabellini@kernel.org, xakep.amatop@gmail.com, dmukhin@xen.org
+References: <20261111194800.1070016-1-dmukhin@ford.com>
+ <20261111194800.1070016-11-dmukhin@ford.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20261105013347.719392-9-dmukhin@ford.com>
-Content-Type: text/plain; charset=UTF-8
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <20261111194800.1070016-11-dmukhin@ford.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-4011c0/1795016027-52ADCCFC-84777B96/10/78276251493
+X-purgate-ID: tlsNG-16d1c6/1795019317-F627077B-E7545646/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 3893
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+X-purgate-size: 9826
+X-Spam-Status: No, score=-14.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
 	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
 	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 05.11.2026 02:33, dmukhin@ford.com wrote:
-> @@ -235,6 +236,120 @@ void svm_avic_vmcb_destroy(struct vcpu *v)
->      vmcb->avic_vapic_bar = 0;
->  }
->  
-> +/*
-> + * Handle the AVIC_INCOMP_IPI #VMEXIT when AVIC is enabled.
-> + *
-> + * The hardware generates this fault when an IPI could not be delivered to
-> + * all targeted guest virtual processors because at least one guest virtual
-> + * processor was not allocated to a physical core at the time.
-> + */
-> +void svm_avic_vmexit_incomp_ipi(struct cpu_user_regs *regs)
+
+
+On 11/11/26 8:47 PM, dmukhin@ford.com wrote:
+> From: Denis Mukhin <dmukhin@ford.com>
+> 
+> Add RBR register emulation to the I/O port handlder.
+
+Nit: s/handlder/handler/ (also in 11/26).
+
+> 
+> Add RX FIFO management code since RBR depends on RX FIFO.
+> 
+> Emulator does not emulate NS8250 (no FIFO), NS16550a (16 bytes)
+> or NS16750 (64 bytes) precisely for simplicity. No baud rate
+> emulation either.
+> 
+> RX FIFO is emulated by means of using xencons_interface which
+> conveniently provides primitives for buffer management and later can be
+> used for inter-domain communication similarly to vpl011.
+> 
+> Account for DLL == 0: in this case, disable receiver.
+> 
+> Add UART_LSR_DR handling since it depends on RBR register access.
+> 
+> Implement put_rx() vUART hook for placing a character into the
+> emulated RX FIFO from console driver. That implements physical console
+> forwarding to the guest OS over emulated NS16550.
+> 
+> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+> ---
+>   xen/common/emul/vuart/ns16x50.c | 132 +++++++++++++++++++++++++++++++-
+>   1 file changed, 130 insertions(+), 2 deletions(-)
+> 
+> diff --git a/xen/common/emul/vuart/ns16x50.c b/xen/common/emul/vuart/ns16x50.c
+> index 9f530e589495..d04caf2baf2c 100644
+> --- a/xen/common/emul/vuart/ns16x50.c
+> +++ b/xen/common/emul/vuart/ns16x50.c
+> @@ -123,6 +123,76 @@ static inline void ns16x50_unlock(struct vuart_ns16x50 *vdev,
+>       spin_unlock(&vdev->lock);
+>   }
+>   
+> +static bool ns16x50_fifo_rx_empty(const struct vuart_ns16x50 *vdev)
 > +{
-> +    struct vcpu *v = current;
-> +    struct domain *d = v->domain;
-> +    struct svm_vcpu *sv = &v->arch.hvm.svm;
-> +    const struct vmcb_struct *vmcb = sv->vmcb;
-> +    uint32_t icrh = vmcb->exitinfo1 >> 32;
-> +    uint32_t icrl = vmcb->exitinfo1;
-> +    uint32_t id = vmcb->exitinfo2 >> 32;
-> +    uint32_t index = vmcb->exitinfo2 & 0x1FFU;
-
-0x1ffU please, to have the U better stand out.
-
-> +    if ( id >= AVIC_IPI_FAILURE_MAX )
-> +    {
-> +        domain_crash(
-> +            d, "%pv: AVIC: Unknown IPI interception (exitinfo1=%#"PRIx64" exitinfo2=%#"PRIx64")\n",
-> +            v, vmcb->exitinfo1, vmcb->exitinfo2);
-> +        return;
-> +    }
-
-Why can this code not live in the default: case further down?
-
-> +    BUG_ON(sv->avic_physical_id == NULL);
+> +    const struct xencons_interface *cons = &vdev->cons;
 > +
-> +    switch ( id )
-> +    {
-> +    case AVIC_IPI_FAILURE_INVALID_INT_TYPE:
-> +        /*
-> +         * AVIC hardware handles the delivery of IPIs when the specified
-> +         * Message Type is Fixed (also known as fixed delivery mode) and the
-> +         * Trigger Mode is edge-triggered. The hardware also supports self and
-> +         * broadcast delivery modes specified via the Destination
-> +         * Shorthand(DSH) field of the ICRL. Logical and physical APIC ID
-> +         * formats are supported. All other IPI types cause a #VMEXIT, which
-> +         * needs to emulated.
-> +         */
-> +        gprintk(XENLOG_ERR,
-> +                "%pv: AVIC: Invalid IPI type (icr=%#08x:%08x, idx=%u)"
-> +                " avic_physical_id=%#"PRIx64"\n",
-> +                v, icrh, icrl, index, ACCESS_ONCE(*sv->avic_physical_id));
+> +    return cons->in_prod == cons->in_cons;
+> +}
 > +
-> +        vlapic_reg_write(v, APIC_ICR2, icrh);
-> +        vlapic_reg_write(v, APIC_ICR,  icrl);
-
-Is this legitimate in x2APIC mode? Also, if this is what you introduce
-vlapic_reg_write() for, wouldn't this better be a dedicated ICR writing
-helper anyway?
-
-> --- a/xen/arch/x86/hvm/svm/vmcb.h
-> +++ b/xen/arch/x86/hvm/svm/vmcb.h
-> @@ -291,6 +291,13 @@ enum VMEXIT_EXITCODE
->      VMEXIT_BUS_LOCK         = 165, /* 0xa5 */
->      /* Remember to also update VMEXIT_NPF_PERFC! */
->      VMEXIT_NPF              = 1024, /* 0x400, nested paging fault */
+> +static bool ns16x50_fifo_rx_full(const struct vuart_ns16x50 *vdev)
+> +{
+> +    const struct xencons_interface *cons = &vdev->cons;
+> +
+> +    return cons->in_prod - cons->in_cons == ARRAY_SIZE(cons->in);
+> +}
+> +
+> +static void ns16x50_fifo_rx_reset(struct vuart_ns16x50 *vdev)
+> +{
+> +    struct xencons_interface *cons = &vdev->cons;
+> +
+> +    cons->in_cons = cons->in_prod;
+> +}
+> +
+> +/*
+> + * Transfer character from RX FIFO and return the RX FIFO status after the
+> + * transfer.
+> + */
+> +static int ns16x50_fifo_rx_getchar(struct vuart_ns16x50 *vdev, uint8_t *ptr)
+> +{
+> +    struct xencons_interface *cons = &vdev->cons;
+> +
+> +    if ( ns16x50_fifo_rx_empty(vdev) )
+> +        return -ENODATA;
+> +
+> +    *ptr = cons->in[MASK_XENCONS_IDX(cons->in_cons, cons->in)];
+> +    cons->in_cons++;
+> +
+> +    return ns16x50_fifo_rx_empty(vdev) ? -ENODATA : 0;
+> +}
+> +
+> +static int ns16x50_fifo_rx_putchar(struct vuart_ns16x50 *vdev, char c)
+> +{
+> +    struct xencons_interface *cons = &vdev->cons;
+> +    int rc;
 > +
 > +    /*
-> +     * AMD64 Architecture Programmer's Manual Volume 2: System Programming
-> +     * Table 15-22. Guest vAPIC Register Access Behavior
+> +     * FIFO-less 8250/16450 UARTs: newly arrived word overwrites the contents
+> +     * of the THR.
 > +     */
-> +    VMEXIT_AVIC_INCOMP_IPI  = 1025, /* 0x401 */
+> +    if ( ns16x50_fifo_rx_full(vdev) )
+> +    {
+> +        ns16x50_debug(vdev, "RX FIFO full; resetting\n");
+> +        ns16x50_fifo_rx_reset(vdev);
+> +        rc = -ENOSPC;
+> +    }
+
+On overrun this throws away the whole 1 KiB of buffered input and keeps
+the new character. A 16550 in FIFO mode does the opposite (SLLS177I,
+7.7.8, LSR bit 1): "an overrun error occurs only after the FIFO is full
+and the next character has been completely received in the shift
+register. [...] The character in the shift register is overwritten, but
+it is not transferred to the FIFO." I.e. set OE and drop the new
+character. Also, the comment talks about THR where RBR is meant.
+
+Also, the comment is mentioning FIFO-less but here we are implementing 
+FIFO-based UART. Don't we won't then separate such cases? (Another 
+question will it be really totally wrong to still have FIFO-based 
+emulation for FIFO-less UARTs which are mentioned in the comment?)
+
+> +    else
+> +        rc = 0;
 > +
->      /* Remember to also update SVM_PERF_EXIT_REASON_SIZE! */
->      VMEXIT_INVALID          =  -1
+> +    cons->in[MASK_XENCONS_IDX(cons->in_prod, cons->in)] = c;
+> +    cons->in_prod++;
+> +
+> +    return rc;
+> +}
+> +
+> +static bool ns16x50_is_tranceiver_enabled(const struct vuart_ns16x50 *vdev)
+> +{
+> +    BUG_ON(vdev->regs[UART_LCR] & UART_LCR_DLAB);
 
-Please pay attention to the pre-existing comments here.
+Nit: s/tranceiver/transceiver/. Also, all callers check DLAB first, but
+it's guest-controlled state on a guest-reachable path; ASSERT() seems
+enough.
 
-> --- a/xen/arch/x86/include/asm/hvm/svm-types.h
-> +++ b/xen/arch/x86/include/asm/hvm/svm-types.h
-> @@ -25,6 +25,16 @@ struct svm_domain {
->      uint64_t *avic_physical_id_table;
->  };
->  
-> +/* AVIC_INCOMP_IPI #VMEXIT reason. */
-> +enum avic_ipi_failure_cause {
-> +    AVIC_IPI_FAILURE_INVALID_INT_TYPE       = 0,
-> +    AVIC_IPI_FAILURE_TARGET_NOT_RUNNING     = 1,
-> +    AVIC_IPI_FAILURE_INVALID_TARGET         = 2,
-> +    AVIC_IPI_FAILURE_INVALID_BACKING_PAGE   = 3,
-> +    AVIC_IPI_FAILURE_INVALID_IPI_VECTOR     = 4,
-> +    AVIC_IPI_FAILURE_MAX,
+> +
+> +    /* DLL set to 0 disables serial communication. */
+> +    return vdev->regs[NS16X50_REGS_NUM + UART_DLL];
+> +}
+> +
+>   static bool cf_check ns16x50_iir_check_lsi(const struct vuart_ns16x50 *vdev)
+>   {
+>       return vdev->regs[UART_LSR] & UART_LSR_MASK;
+> @@ -130,7 +200,7 @@ static bool cf_check ns16x50_iir_check_lsi(const struct vuart_ns16x50 *vdev)
+>   
+>   static bool cf_check ns16x50_iir_check_rda(const struct vuart_ns16x50 *vdev)
+>   {
+> -    return false;
+> +    return !ns16x50_fifo_rx_empty(vdev);
+>   }
+>   
+>   static bool cf_check ns16x50_iir_check_thr(const struct vuart_ns16x50 *vdev)
+> @@ -400,6 +470,17 @@ static int ns16x50_io_read8(
+>           }
+>   
+>           /* DLAB=0 */
+> +        if ( !ns16x50_is_tranceiver_enabled(vdev) )
+> +            break;
+> +
+> +        /* NB: do not forget to clear overrun condition */
+> +        regs[UART_LSR] &= ~UART_LSR_OE;
 
-As per the comment towards the top, this last one shouldn't be needed
-(or else it's mis-named). I also don't see why for the others explicit
-values would need assigning.
+OE is cleared by reading LSR, not RBR: "OE is cleared every time the CPU
+reads the contents of the LSR" (same section), which 08/26 already
+implements. Clearing it here means a driver that reads RBR before LSR
+never sees the overrun.
 
-Jan
+> +
+> +        if ( ns16x50_fifo_rx_getchar(vdev, &val) )
+> +            regs[UART_LSR] &= ~UART_LSR_DR;
+> +        else
+> +            regs[UART_LSR] |= UART_LSR_DR;
+> +
+
+LSR.DR is just "RX FIFO not empty", which ns16x50_iir_check_rda()
+already computes from the FIFO. Storing it in regs[UART_LSR] as well
+means four places have to update it by hand: the RBR read here,
+put_rx(), the FCR RX clear (12/26) and THR in loopback mode (11/26).
+They're all correct today, but the two copies can drift apart with the
+next change. Computing DR from the FIFO when LSR is read would remove
+those updates and keep LSR and IIR consistent by construction:
+
+     case UART_LSR:
+         val = regs[UART_LSR] & ~UART_LSR_DR;
+         if ( !ns16x50_fifo_rx_empty(vdev) )
+             val |= UART_LSR_DR;
+         regs[UART_LSR] &= ~UART_LSR_MASK;
+         break;
+
+Something like that?
+
+>           break;
+>   
+>       case UART_IER: /* DLAB=0 --> UART_IER, DLAB=1 --> UART_DLM */
+> @@ -694,13 +775,60 @@ static void cf_check ns16x50_free(void *arg)
+>       xvfree(arg);
+>   }
+>   
+> +static int cf_check ns16x50_put_rx(void *arg, char ch)
+> +{
+> +    struct vuart_ns16x50 *vdev = arg;
+> +    unsigned long flags;
+> +    uint8_t *regs;
+> +    int rc = -EBUSY;
+> +
+> +    ASSERT(vdev);
+> +
+> +    ns16x50_lock(vdev, &flags);
+
+Don't we have the issue with having a such lock here?
+
+This is reached from __serial_rx(), and on x86, when the physical UART
+uses its IRQ, that is hard IRQ context: ns16550_interrupt() ->
+serial_rx_interrupt() -> serial_rx() -> __serial_rx() -> vuart_put_rx().
+vdev->lock is otherwise taken by ns16x50_access() with IRQs enabled, so
+a serial IRQ arriving on a pCPU whose vCPU is inside ns16x50_access()
+spins forever, and CONFIG_DEBUG_LOCKS' check_lock() should trip on the
+mixed IRQ safety. The same applies to d->arch.hvm.irq_lock, taken under
+it via ns16x50_irq_check() -> hvm_isa_irq_assert(). Making vdev->lock
+IRQ-safe isn't enough because of the latter. If I didn't mistake 
+something then deferring the delivery out of IRQ context (e.g. queue the 
+character and let a tasklet update LSR/IIR and the IRQ line) would avoid 
+both.
+
+> +
+> +    regs = vdev->regs;
+> +
+> +    if ( vdev->regs[UART_LCR] & UART_LCR_DLAB )
+> +        ns16x50_debug(vdev, "THR/RBR access disabled: DLAB=1\n");
+
+DLAB only selects what offsets 0 and 1 decode to; reception continues,
+and the character is readable from RBR once DLAB is cleared. Dropping
+input is right for loopback (SIN is disconnected) and arguably for
+DLL == 0, but not here. (Each dropped character also produces a
+"failed to process console input" warning, see my reply to 01/26.)
+
+(ns16x50_is_tranceiver_enabled() would then need to lose its BUG_ON():
+it only looks at the stored DLL, which doesn't depend on DLAB.)
+
+
+> +    else if ( !ns16x50_is_tranceiver_enabled(vdev) )
+> +        ns16x50_debug(vdev, "THR/RBR access disabled: DLAB=0 DLL=0\n");
+> +    else if ( regs[UART_MCR] & UART_MCR_LOOP )
+> +        ns16x50_debug(vdev, "THR/RBR access disabled: DLAB=0 loopback mode\n");
+> +    else
+> +    {
+> +        const struct domain *d = vdev->owner;
+> +
+> +        /*
+> +         * Echo the user input on Xen console iff Xen console input is owned
+> +         * by ns16x50 domain.
+> +         * NB: use 'console_timestamps=none' to disable Xen timestamps.
+> +         */
+> +        if ( is_console_printable(ch) )
+> +            guest_printk(d, "%c", ch);
+
+The guest's tty already echoes the input, so every typed character
+appears twice on the Xen console, and the two streams interleave with
+guest output. Worse, the guest can't turn this echo off: when the guest
+disables echo (e.g. login prompting for a password), the characters are
+still printed by Xen. I'd drop it. Also, "iff Xen console input is
+owned by ns16x50 domain" is always true here, as __serial_rx() only
+calls this for the domain owning the input.
+
+> +
+> +        if ( ns16x50_fifo_rx_putchar(vdev, ch) )
+> +            regs[UART_LSR] |= UART_LSR_OE;
+> +
+> +        regs[UART_LSR] |= UART_LSR_DR;
+> +
+> +        /* TODO: check FCR when to fire an interrupt */
+> +        ns16x50_irq_check(vdev);> +
+> +        rc = 0;
+> +    }
+> +
+> +    ns16x50_unlock(vdev, &flags);
+> +
+> +    return rc;
+> +}
+> +
+
+~ Oleksii
+
 
