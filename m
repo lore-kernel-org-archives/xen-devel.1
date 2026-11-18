@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0A53B606A31C
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2026 10:42:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A7641606A320
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2026 10:50:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=e+umhRuq
-Received: from list by lists.xenproject.org with outflank-mailman.1494236.1693856 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=ZKvErh9m
+Received: from list by lists.xenproject.org with outflank-mailman.1494243.1693866 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTd7O-0000p9-Do; Wed, 18 Nov 2026 10:42:22 +0000
+	id 1xTdEp-0001qp-56; Wed, 18 Nov 2026 10:50:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1494236.1693856; Wed, 18 Nov 2026 10:42:22 +0000
+Received: by outflank-mailman (output) from mailman id 1494243.1693866; Wed, 18 Nov 2026 10:50:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTd7O-0000p2-AO; Wed, 18 Nov 2026 10:42:22 +0000
-Received: by outflank-mailman (input) for mailman id 1494236;
- Wed, 18 Nov 2026 10:42:20 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xTd7M-0000oq-Mi
- for xen-devel@lists.xenproject.org; Wed, 18 Nov 2026 10:42:20 +0000
+	id 1xTdEp-0001qM-0y; Wed, 18 Nov 2026 10:50:03 +0000
+Received: by outflank-mailman (input) for mailman id 1494243;
+ Wed, 18 Nov 2026 10:50:01 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xTdEn-0001Y3-AT
+ for xen-devel@lists.xenproject.org; Wed, 18 Nov 2026 10:50:01 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xTd7M-000pYr-2G
- for xen-devel@lists.xenproject.org; Wed, 18 Nov 2026 11:42:20 +0100
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xTdEm-00EBmu-BI
+ for xen-devel@lists.xenproject.org; Wed, 18 Nov 2026 11:50:00 +0100
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6afd80fa-bab6-0a2a0a5309dd-0a2a45018f90-28
- for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 11:42:19 +0100
-Received: from [209.85.221.52] (helo=mail-wr1-f52.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6afd82cf-8faa-0a2a0a5109dd-0a2a4507e6c0-12
+ for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 11:50:00 +0100
+Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6afd810b-5bcc-0a2a45010019-d155dd34addc-3
- for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 11:42:19 +0100
-Received: by mail-wr1-f52.google.com with SMTP id
- ffacd0b85a97d-48e10a70540so423262f8f.1
- for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 02:42:19 -0800 (PST)
+ id 6afd82d8-b4ea-0a2a45070019-d1558034d1d4-3
+ for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 11:50:00 +0100
+Received: by mail-wm1-f52.google.com with SMTP id
+ 5b1f17b1804b1-4a214c5c4c0so8478125e9.3
+ for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 02:50:00 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb78386902sm148193965e9.1.2026.11.18.02.42.18
+ ffacd0b85a97d-4a655db6d45sm3953992f8f.33.2026.11.18.02.49.58
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 18 Nov 2026 02:42:19 -0800 (PST)
+ Wed, 18 Nov 2026 02:49:59 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,63 +51,65 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1794998539; x=1795603339; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1794999000; x=1795603800; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=u2u749tRlWNG8WFs3FLnm85cRXLv0FJlsCkVNX/QrPI=;
-        b=e+umhRuqlxhAlkK/CbXacXBsGt9tgzz+5FFIvy+sz6kQRFlp3pGbBz1VzGgxPk6g6f
-         MCFgGDVdtaqNsVMwsWJeKAU6/xsxYHtMd0u70G8VJuqGRSBxp0DtbDmYgpm0nB4OO2No
-         n8geHE4qh+ewc3u414Fp/v11jxzQVuSRN91VWAj9KqjHqxK+X8CjXr/ZiHGjqcLR0Fk+
-         g7kbs3jCPRTqmjZp/Elp6HhGid4FOvWelJoBaxmfxMNGO2KA2FOP8b+ug9nqqmwPZOg9
-         nloMIZPrU63XO9qfyz8tiC97YeR/DiEyauOU21Ysl4Mr+/veq/wAoROQHLChXNHLMHt8
-         hjxQ==
+        bh=SFq8B/M+hRSilgDDAQz/t+onz9lFcZOOfrVi7dovHcE=;
+        b=ZKvErh9md1Reu6pk8X0KsjOvAEN9GaAit7MA5AT3NCncbTTKQEgQWM19zGqlUlRC5e
+         GFd5fYgYFEaRZDxdrgeXCoqJsynx8a+aeYOoGXDTlsCSDzFDLnqJq4CLyhrl2dSgaMJF
+         MIdKtCg9bUgI8LGWaUEYn8RJI3hs7EZPHWwpoTh8Sd4BvyENhEvgpnpJY2FE/IbvvSd4
+         lTWJUcmeeS7tk6i7awVNsMogn6NNhdFfccxNWHP35cBPrxqAE0zB++QWA+jZkFFL+hxi
+         tFS9aUpOFtvIb0wA9MsBlnpunIYRfgd5+1vjphqSXxl/hIDY3CK6EfnqUtuZ69Ayar8u
+         RISQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794998539; x=1795603339;
+        d=1e100.net; s=20260707; t=1794999000; x=1795603800;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=u2u749tRlWNG8WFs3FLnm85cRXLv0FJlsCkVNX/QrPI=;
-        b=MHeGbEV5aj6DM160FQNeN6QXsWh4ps8l2+vRJ+sCEHBJiOsTkV7blMBWPsd+jEEpGq
-         QcXTIgwwCh5j8o+lr7nwcmkxMsheh6EivanKvLuqfh9JLX9uLAIr9YVq/hievuh8de5V
-         QjacB6XN9ap3yxjrBotx0Kdz4FN2tqiv4iNv2iC6x4fzo7F92c1HjfGTGz7PIAMPHiI+
-         GbykDexCmougOaoUQHBvNcRpE3cu/2uEkL6D7TchAJFejh0oNjUUwRFH67a+O6F7xuZY
-         mI0tBEDnpx+WCFXIUHGvk+kiqPuveOeZQiXT10g9XlWpH8wtkB/Y5lyvo5Ji/pgPy0gh
-         yIcg==
-X-Gm-Message-State: APuU4Z9AI3mEd4Jf9p0ZMhwwbbCA6FsWarQjMqQOcmfqpZA20dwjP00d
-	Hhdmo6hKKbr5u9Fmr8H6yFVXTj+JXEU65sYOPrqDOKIQY3E1bTAQS0kQ+C/JnhraBA==
-X-Gm-Gg: AYBFou3RYOTu37hBcvxc1jkkzizaGwmO6FF8XO5kR+YUTMq6lBRNYWjEwePE7cgbA5s
-	XopHXv+3Cy1UqlyeT4grGg3G748UrZ+rM0EFMfC29m89OhAzP6witL0kKzuLTrFizREs6YTAIDP
-	Qwa3mVML9vTBgzCA1MhjSz8Gk1XXRISsm4DFsPqMHG2K/liWNBoPz7EIPa5R29k7/8LJDkF4jLQ
-	z0bKC/GKSUUStQXefNs9StsLwP/O8s5xJJdobA6B0QpMItvy/7qMZImsBuQ/VZuCuV/tUAw7Un1
-	ZxCWDcK4davJp0rObAOL2+qdau68dRjTYGaZFZ8ZSqkm5iD6mac3zgHg1/6McdatK2ZAayIt1eN
-	bS6nKni+iLMMpVIn3hEhSFpkBq3QtGd+alyGbIVIE3ACgk+57/ck4UCpWFSwUe4xO3xh7KZV1tr
-	sntuj8LMbI/6Hy8OJ/RdT2BaHdE+YKRY1bQsB3dvuk1wGa3TBJrfTqFeUg1wjzvBs8lnWHIrSoN
-	jGzpBYCqFWs09AEckN1b5Kplqd1WAc1ZwrP04X3bRw2pQaPdmcn9BVa+oddeXTNEO4+tGyNkopB
-	M4Fd2/FxBqHy73cv5DljKQkaKujnN5wEgjLvYfhgDASW9RrKVjEhRoaDnHlZjQDsy9xmsUDmwdD
-	gmxtN2kGRsQWJN02/qw==
-X-Received: by 2002:a05:600c:a41:b0:4a4:3a2d:15da with SMTP id 5b1f17b1804b1-4bb7da1c81emr41262745e9.15.1794998539334;
-        Wed, 18 Nov 2026 02:42:19 -0800 (PST)
-Message-ID: <9090a0e8-86c2-4728-85b5-573c6517c384@suse.com>
-Date: Wed, 18 Nov 2026 11:42:18 +0100
+        bh=SFq8B/M+hRSilgDDAQz/t+onz9lFcZOOfrVi7dovHcE=;
+        b=ry0vr535+gv1RxazUZ/BKyPp06Jk+eOKvlF23BCBzWkKJKZeLtqSUwPAl7gsPq4m/y
+         Xe5twqi6N+nhlAn8042PVoxGAJpC8KtRDOABDutERF/WwRediAYhtoWSvHUeEWjg5f3N
+         WKB+80lbRy5zVSCHZDobmrWkwN2kO6rV7/LLz6Sl6vmiGPqEUnYUoQehzXU7GVkNkKvC
+         FqbZzZPv2dsTnsWLL+bwnknn7NdzJp0WCrmpfDxmYY0/72/Yp+DliI4caCwsu1fgAvtE
+         J+qizOnWzTepTbm1ux72rKrbXpeww/foJXzH2iZMI4AJtviXh9GB0w7yJrlIEF++CrmN
+         CxDA==
+X-Gm-Message-State: APuU4Z/gHlU7oOYIE2JL0t8/BpdUe/pAtAMuzVKHJkeXF6A7Cz4BHPht
+	n6zkVDW1bvf3YmpfHl8oXwRZo9nKR3Ocf3mRX9C9bUzXOZPwXDSbblS/UCGFfvt19A==
+X-Gm-Gg: AYBFou2LD6FYxbuBt12xL3s2lMTG+Ltr9nXWoTB6GHf5eolmeO+BZJUr6PnZOkxHdzg
+	45hhrWWtwieFaeLrpS44dIsHJzu7p84tZQ6SgUW3z/X1hoeiPxE91/HOgflun6IUqVxI94EKomY
+	hu6z5fbCEkSnhoZR79lWPkVJGksdIumc8NWahvW5UhOL3b4ope4VX+qal7Pnr7GyoaQ+XndviX3
+	3iwAQl+eNcJzQlkVsXhZltHuueSoWW0J38srEo80jkABYnMTXeTMvw1OzHCVjpYSWJ/f12dhfaX
+	iPAkFrV4fsEj6AnnhyZcoYtiYsGHGg6G4eVJtjCPnLljG+UfFAkYym7OoK00j0YhR7Gb9ByJBQC
+	4X8iYsv7UvG3r2qEd9eSWtSLQZfdiPL0Rh5x/TuNh2L6tXwVUIRJbq3i3GnkaYxbmjlYVUB6H8e
+	MCrI4+6nP5EDCrxWpoMBEE37UyeWs0CjEvg0IoKlTiT+AE81pRRh3hqb+ci8kbRmnSwzXyLD35B
+	03nOUqNzCzfisjk2Z9pq0QM5UjsH6IkRnO6ytfNl1qixXELUfhXZDeTiIgBzRbJr8aJmZh0u3IC
+	TZvri8LRRpwP3ItXfNvb6QdHvocFPfYOMpb992pRiR5RYRvMrDhDeNTq8rGX672V9Ii4NarvbaZ
+	KokT6u/NB2y1X993Z
+X-Received: by 2002:a05:600c:154a:b0:4a2:8c5:5e5 with SMTP id 5b1f17b1804b1-4bb7da12a6cmr43075015e9.7.1794998999644;
+        Wed, 18 Nov 2026 02:49:59 -0800 (PST)
+Message-ID: <cb819638-8a44-4485-8e50-9c1408f9ef28@suse.com>
+Date: Wed, 18 Nov 2026 11:49:58 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] memory: check incoming GFNs
-To: George Dunlap <gwd@xenproject.org>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
+Subject: Re: [PATCH v4 03/42] xen/riscv: introduce csr_volatile_read64()
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: xen-devel@lists.xenproject.org,
+ Romain Caritey <Romain.Caritey@microchip.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
  Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Oleksii Kurochko <oleksii.kurochko@gmail.com>,
- Community Manager <community.manager@xenproject.org>
-References: <b3b1f23e-a430-4772-af29-13e59cfeb640@suse.com>
- <CAFLBxZb_V0LM69OKPKabXnepH2nVYLN3tAMqpj9PbGsmoi5nPA@mail.gmail.com>
- <0a15b164-08c4-4275-a765-6b56e8c842fa@suse.com>
- <CAFLBxZZx=ke4DTduVmmWusoCH0AmD5MxWERjWMb8TiLGPBs5zw@mail.gmail.com>
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>
+References: <cover.1794562488.git.oleksii.kurochko@gmail.com>
+ <a5a546afe987f3f040c5b942ae01579c4854b94c.1794562488.git.oleksii.kurochko@gmail.com>
+ <1794995418.8631fc262581453bbf619ec5b2062170.1a1ee10758e0006d3f@vates.tech>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -133,104 +135,73 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <CAFLBxZZx=ke4DTduVmmWusoCH0AmD5MxWERjWMb8TiLGPBs5zw@mail.gmail.com>
+In-Reply-To: <1794995418.8631fc262581453bbf619ec5b2062170.1a1ee10758e0006d3f@vates.tech>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d62444/1794998539-4F54D5FD-5EE90460/10/78276251493
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-ef75cf/1794999000-360C5AE4-BAC0E6CE/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 4125
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-purgate-size: 2446
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 17.11.2026 18:31, George Dunlap wrote:
-> On Tue, Nov 17, 2026 at 2:06 PM Jan Beulich <jbeulich@suse.com> wrote:
->>> OK, so to begin with, this commit message hardly tells me anything I
->>> need to know.  "At best undefined", ok, but is that a problem?
+On 18.11.2026 10:50, Baptiste Le Duc wrote:
+>> On RV32 a 64-bit CSR is accessed as two halves, <csr> and <csr>H. Reading
+>> the halves with two separate instructions isn't always safe: for a CSR
+>> which hardware increments, a carry from the low half into the high one can
+>> happen in between, so a plain pair of reads can produce a value the CSR
+>> never held. Therefore the high half is re-read and the sequence retried if
+>> it changed in the meantime.
 >>
->> Maybe I've done / looked at too many UB patches over the last so many
->> years: To me it is out of question that UB is bad.
-> 
-> Our code isn't a hard-to-change standard.  If we want to define what
-> something means, we can just do it.  It's only a problem if (as seems
-> the case) code is written which assumes it's going to be aligned.
-> 
->>>  "For
->>> non-translated domains the same isn't true" -- sorry, does that mean
->>> behavior is worse than "at best undefined", or better?
+>> Only CSRs which change under Xen's feet need that, hence the name. The
+>> majority can be read with a plain pair of csr_read()s, so no helper for
+>> those is introduced here as there would be no user for it.
 >>
->> It's different. I'm not sure I'd call it "better" or "worse". Hence the
->> mere fact being stated.
-> 
-> But you're saying what it isn't, not what it is.  "For non-translated
-> domains, it isn't true that unaligned accesses are at best undefined."
->  What does that even mean?  I mean, now I know that you probably mean,
-> "For translated domains, unaligned accesses are problematic due to the
-> P2M's inherent tree structure.  On non-translated domains, gpfns are
-> just a jumble of numbers, so unaligned accesses aren't as
-> problematic."  That's not any longer than what you wrote, but it
-> actually makes it clear which is a problem and points you in the
-> direction of why.
-
-But "aren't as problematic" isn't what I want to express. There really
-should never have been a difference between translated and non-
-translated. It's just that the bad behavior was leveraged (or, see
-below, utilized) by carelessly written code which now we must not break.
-
-And btw, for translated domains the P2M structure also doesn't impose
-any constraints. Instead I view it as our desire that we want to
-reflect requests optimally in the P2M. Extents could have been
-expressed differently in the interface, in particular with size and
-alignment not tied together at all. For input extents there could have
-been merely a size, leaving it to the caller to specify suitably
-aligned start frame numbers. Alignment requirements really are
-necessary only for what is to be allocated.
-
-Overall I think my way of putting it still better fits the overall
-fuzzy situation.
-
->>> "...and domains
->>> may possibly be able to leverage present behavior" --   Is this
->>> attackers leveraging the present behavior to do evil, or clever OS
->>> writers leveraging the present behavior for good?
+>> Use it for CSR_TIME, which is exactly such a counter, and widen cycles_t to
+>> uint64_t. Otherwise get_cycles() would still truncate the time counter to
+>> 32 bits on RV32.
 >>
->> Or careless OS writers adjusting their code only until it works, not
->> until it matches the (largely unwritten) spec.
+>> No functional change on RV64.
+>>
+>> Fixes: a541ddadec0a ("xen/riscv: introduce time.h")
+>> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+>> ---
+>> Changes in v4:
+>>  - Take the CSR name without the CSR_ prefix, so that the macro parameter
+>>    is used as an operand of ## only (MISRA C Rule 20.12).
+>>  - Drop the (void) of the ...H constant on RV64.
+>>  - Initialise hi_ in its declaration.
 > 
-> "Leverage" implies gaining some advantage.  I wouldn't say that people
-> who wrote non-spec-compliant code that accidentally works to be
-> "leveraging" the behavior.
+> Jan gave his Reviewed-by on v3. It is gone in v4. Dropping it may be
+> fine given the macro rework, but please say so in the changelog :)
+> 
+>> [ ... 45 lines skipped ... ]
+>>  #else
+>>  #define csr_write64(name, val) csr_write(CSR_ ## name, val)
+>> +
+>> +#define csr_volatile_read64(name) csr_read(CSR_ ## name)
+> 
+> Nit: On v3 Jan suggested "#define csr_volatile_read64 csr_read64", and you
+> answered you would then move csr_read64() into this patch. In v4
+> csr_read64() still only comes with "xen/riscv: implement vCPU context
+> switching".
+> 
+> On RV64 I think it would read better like that:
+> #define csr_read64(name) csr_read(CSR_ ## name)
+> #define csr_volatile_read64(name) csr_read64(name)
 
-Is "utilize" any better then?
+#define csr_read64(name) csr_read(CSR_ ## name)
+#define csr_volatile_read64 csr_read64
 
->> Claude's description, while - as you say - helpful for you, isn't how
->> I'd like to see patch descriptions written. Many of your recent
->> descriptions resemble that style, and I'm only not opposing to that
->> because it's not wrong to do it like this. Still I, as a maintainer,
->> am not happy with such overly verbose descriptions. They remove focus
->> from the actual change / problem.
-> 
-> Your description made clear neither the change nor the problem.
-> 
-> The following facts need to be known to evaluate the patch properly:
-> 
-> - The public headers of XENMEM_{populate,decrease,exchange} say that
-> gpfns must be order-aligned, but the code has never enforced it.
-> 
-> - This is particularly problematic for translated domains [because of
-> how the P2M works?].  There's already been an XSA relating to the
-> above.
-> 
-> - Linux, up until 5.15, passed unaligned entries to XENMEM_exchange,
-> so we have to accommodate this for backwards compatibility.
-
-Well, okay, I've re-written (extended) those parts. As I'm uncertain
-whether Linux'es use of the behavior is fully gone (and hence whether
-5.15 is a valid boundary to draw), I'm going to continue to omit that
-detail though.
+i.e. matching what I suggested earlier. Otherwise what is passed into
+csr_volatile_read64() would be macro-expanded before further
+expanding csr_read64(), thus prepending CSR_ only to the result of
+that expansion. (In the common case there'll be no difference, but
+things can go wrong if some unexpected new #define appears.)
 
 Jan
 
