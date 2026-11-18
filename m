@@ -2,60 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC5D4606A31C
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2026 01:16:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DD990606A325
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2026 01:52:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=UGBfp9Pm
-Received: from list by lists.xenproject.org with outflank-mailman.1493503.1693471 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=epam.com header.i=@epam.com header.a=rsa-sha256 header.s=selector1 header.b=H1LnT72G
+Received: from list by lists.xenproject.org with outflank-mailman.1493556.1693480 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTUHT-0004Rg-Vw; Wed, 18 Nov 2026 01:16:11 +0000
+	id 1xTUpo-0002Qi-Fs; Wed, 18 Nov 2026 01:51:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1493503.1693471; Wed, 18 Nov 2026 01:16:11 +0000
+Received: by outflank-mailman (output) from mailman id 1493556.1693480; Wed, 18 Nov 2026 01:51:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTUHT-0004RZ-TB; Wed, 18 Nov 2026 01:16:11 +0000
-Received: by outflank-mailman (input) for mailman id 1493503;
- Wed, 18 Nov 2026 01:16:10 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xTUpo-0002Qb-Cm; Wed, 18 Nov 2026 01:51:40 +0000
+Received: by outflank-mailman (input) for mailman id 1493556;
+ Wed, 18 Nov 2026 01:51:39 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Jason.Andryuk@amd.com>) id 1xTUHS-0004RT-Fk
- for xen-devel@lists.xenproject.org; Wed, 18 Nov 2026 01:16:10 +0000
+ (envelope-from <Volodymyr_Babchuk@epam.com>) id 1xTUpm-0002QO-Rb
+ for xen-devel@lists.xenproject.org; Wed, 18 Nov 2026 01:51:39 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xTUHR-001ds6-PG
- for xen-devel@lists.xenproject.org; Wed, 18 Nov 2026 02:16:09 +0100
+ id 1xTUpm-00H2dr-8H
+ for xen-devel@lists.xenproject.org; Wed, 18 Nov 2026 02:51:38 +0100
 Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Jason.Andryuk@amd.com>)
- id 6afcfc15-8faa-0a2a0a5109dd-0a2a4507df02-22
- for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 02:16:09 +0100
-Received: from [52.101.57.67]
- (helo=BN8PR05CU002.outbound.protection.outlook.com)
+ (envelope-from <Volodymyr_Babchuk@epam.com>)
+ id 6afd0473-8faa-0a2a0a5109dd-0a2a45078e3e-48
+ for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 02:51:38 +0100
+Received: from [52.101.66.133]
+ (helo=DUZPR83CU001.outbound.protection.outlook.com)
  by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Jason.Andryuk@amd.com>)
- id 6afcfc58-b4ea-0a2a45070019-34653943565b-3
- for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 02:16:09 +0100
-Received: from DS1PR06CA0001.namprd06.prod.outlook.com (2603:10b6:8:458::11)
- by PH7PR12MB5901.namprd12.prod.outlook.com (2603:10b6:510:1d5::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.14; Wed, 18 Nov
- 2026 01:16:00 +0000
-Received: from CY8PEPF00000056.namprd05.prod.outlook.com
- (2603:10b6:8:458:cafe::af) by DS1PR06CA0001.outlook.office365.com
- (2603:10b6:8:458::11) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.615.13 via Frontend Transport; Wed,
- 18 Nov 2026 01:16:00 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- CY8PEPF00000056.mail.protection.outlook.com (10.167.247.59) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.615.4 via Frontend Transport; Wed, 18 Nov 2026 01:15:59 +0000
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.57; Tue, 17 Nov
- 2026 19:15:58 -0600
-Received: from [192.168.19.2] (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.57 via Frontend
- Transport; Tue, 17 Nov 2026 19:15:58 -0600
+ (envelope-from <Volodymyr_Babchuk@epam.com>)
+ id 6afd04a9-b4ea-0a2a45070019-346542851250-4
+ for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 02:51:38 +0100
+Received: from GV1PR03MB788477.eurprd03.prod.outlook.com
+ (2603:10a6:150:805::10) by AS8PR03MB9119.eurprd03.prod.outlook.com
+ (2603:10a6:20b:5b3::15) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.10; Wed, 18 Nov
+ 2026 01:51:36 +0000
+Received: from GV1PR03MB788477.eurprd03.prod.outlook.com
+ ([fe80::c759:686b:939a:1544]) by GV1PR03MB788477.eurprd03.prod.outlook.com
+ ([fe80::c759:686b:939a:1544%4]) with mapi id 15.21.0615.013; Wed, 18 Nov 2026
+ 01:51:36 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -64,187 +52,190 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=NZSPWUz+8n21punZ7xx7EYmUTpehWYRUjnZYYg7cr9hCgRYugocMFKv9ISz+B67MdClj3+CvYUZ/14yv44a8W9p63cvyC//HOLjnm613KL5Fx5JsBVFoQXqNr/LMcCsxwZYpACq0dWS7D0AZlfPEyrVvabZ1OHiEycChmw24KK8n9GNKWkG3wRysGw2uLKwJavDNTYhjapENmgJvUA+Y+bBtJRlCSuMmNw5MZE0woa459RPbxFnZesvUZUVFgj7OVLNYf91f+qhcKoLStaq/YL9O59faz62DgzvGALZyRSVy8HSHgl1IIfMj1XXeP3GFHRT3jitnFVcffa5pPPRKWg==
+ b=lazxLLIDSb7aiWUdPhfsdU6yGpm6yEEJArBvlfwRMbmIvEadmiaU1ds0zfdrOcGVCPqjd5FEpazpNoZ/1n0HeuZ89c2FFnT/aeBwMT46g6YKPkwRt/iwZEmSvOxNHDUmXA12Y4ciVtnTCT+OvFuz3JYvp8pJQKWCCbPEYY5czoOBonkrS4b7ml9Q2qzaPbtQq5j+6Rq2AzsvDYgdS/ZXh0e68gGnteviueuvFxFKsCTjH7EgTq77IjBInKvT8QaeUTxzk9ggGJjnp5EB72JHDe2BkUT41MxdTM0WlXbtc13fdmu30TzhvbbXztfA1YB6j2lQj2jGCmEjq1D0sToykg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=7tnln+QhO+xZpIzT0Ind+wT57cvYdAS/6n8WIGh/NKc=;
- b=NaBx90s3rSGmRVgEM9Kr/2T+4q67NRlgLRej5niwMINLREDWvQh2RUx30M21bfsfoENDA1VzBIkSvl0aRNwG2OyVYSmBOHmsSPhFN77xpzbezylRU4tyHspMSDSqhHL/cLAZ9TJ/iUubW+rAaaOaefpMhm6H9m9QDeuNBRI6ftnrO4YZDCsYXj0/V4k2+jaz3mHgYYhBnOAUYkka6aSNrdsK0+UxSStIamcz6W1lCvGZ1eJ3jYzu1i+YljXXiSeGHZ4AOxSpiazcbD8IZM2kR8xvp7sgcIfgjzD59Q3B9XNE1hkRkI6RrMMYIWkMUeDtibto38rkQ4iZmpoE/ks43Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ bh=EoT0SB2DS9g0syYnwJ+CH73SuQyEN+E328OgRYzVKB0=;
+ b=a7/CqDHDqncILxybzxHxYVHiuInbYWzyNndbo7pSAstcG7LYxzzyHONyikq9loKq0zP7OI6PqVq4kXvWQrU4kg7EB8l3Pw8zeXY9CDR/TcowWdB7iJh0H1MbGc5tcEZnbEkzH7NymMetBT8IvGYDt2zwAMtU9d8WyVab7s9U8hhvQALIJhn97fAzz2RhGfhPQB7Lf298Q11ImQthiMV63gq/5S9+KgIyaZUAgbM+So/6RHkyjidgc8sOrIgo0j39LP8IkflFZKGRkuPM46RdJDwkbgPeztqdKYkFQ07xN6aQJnqr3QKo1dJLlTxDruThoRWD2QWSNxsOWQ3E/eIUPw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7tnln+QhO+xZpIzT0Ind+wT57cvYdAS/6n8WIGh/NKc=;
- b=UGBfp9PmhrJN6y9jLSpptPD+uIurrSBSbsOgGz5EB/fXDqbsxQxwKQYe6nkEhT92PsB7o3OuwHmiBRorQiybjhiHl52tyvy4DstxxVVfLvP/8ZLCqMrkiz8NbGt1Ovg8WtbC+X9Oj2ccIjuLVS6MVj36yRfiS84h0YUALeTnPYM=
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Message-ID: <f4fd77a4-bdf2-4d29-bc3b-c8ce314f7385@amd.com>
-Date: Tue, 17 Nov 2026 20:15:57 -0500
+ bh=EoT0SB2DS9g0syYnwJ+CH73SuQyEN+E328OgRYzVKB0=;
+ b=H1LnT72GN5ercRQmNghJfgE4uezWNPJhFbZZvCcumPY3hSjX0NbxtN1BA/4rivyyeLj0bhK8r/Y2MHPlY1Ct4zlHVCubNlJSl2N0qXH6O0JfDJWcJpW9jXIjBlA0yUk+auiiedzofJkPKa5zmRcbJg8uE8WBkJC6md/CpP1QC+0ras1xMSh+KDOEb7MsgyBOvLLstdg3CV/ilIVGgWEzShMuHM3JWXjlmPG5Sf6VQQ82rWJE0tSeXH/LcwLcfoC414seHh9jMY16BEvvKxjTRPnM4jS/ddnp0gkXKzCeHWbrg4/F9PyqskLL9sqfF+JFW7nWfb/DuSgmu8oGg0rn/Q==
+From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+To: Mykola Kvach <Mykola_Kvach@epam.com>
+CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Andrew
+ Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
+	<anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, Jan Beulich
+	<jbeulich@suse.com>, Julien Grall <julien@xen.org>,
+	=?iso-8859-1?Q?Roger_Pau_Monn=E9?= <roger@xenproject.org>, Stefano Stabellini
+	<sstabellini@kernel.org>, Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH v14 04/15] xen/percpu: defer freeing per-CPU areas after
+ resume failures
+Thread-Topic: [PATCH v14 04/15] xen/percpu: defer freeing per-CPU areas after
+ resume failures
+Thread-Index: AQHddi+rPrDcM3j2gUuDy+04RxtZEbczEk+A
+Date: Wed, 18 Nov 2026 01:51:35 +0000
+Message-ID: <87cxs2oqjc.fsf@epam.com>
+References: <cover.1794873792.git.mykola_kvach@epam.com>
+	<3b0a92602e8cbc2f4df6b376876903e93850be3f.1794873792.git.mykola_kvach@epam.com>
+In-Reply-To:
+ <3b0a92602e8cbc2f4df6b376876903e93850be3f.1794873792.git.mykola_kvach@epam.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+user-agent: mu4e 1.14.4; emacs 31.1
+authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: GV1PR03MB788477:EE_|AS8PR03MB9119:EE_
+x-ms-office365-filtering-correlation-id: 2b8ff53a-c10e-4dfb-279c-08df45167aac
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|23010399003|42112799006|376014|1800799024|366016|22082099003|18002099003|261009223027099003|11063799006|56012099006|4143699003|261102123227099003|261026140227099003|261028144727099003|10067099003|261022105027099003|261021121427099003|261026121527099003|261022075727099003|38070700021;
+x-microsoft-antispam-message-info:
+ gjGa+9FgpKfDxBBrLwP5obPLdWGHrQYY3oyuAN322RqMFBBD645aXKOVYw+RijJzb1fYBW2eLKsFRknOjqWACuPu/H/WuAPvouVTKkfnF1zTjwk8LIlmeysBzF+tyoiyVBVJsCp9zvdZLBguDWjZOvG853MJgYpbmACwqLIqlJudOJWIhFW9yS2k9sAfT1pC25i++prCzzqxzSSFTwRJniR2sHWdS3rY7KtvKBcBN/Hn88AFajFJvhXC04ueuoxbmi9j+J4GCptr7IjVHK+RB4R5uX1/1uXZF0gLtjXwoHa91CT/Xm7KyZzAPGQtAqGLTXZ7GIiGCLxsCNPsIhXOdbOWiXdbZ1C6+L36YvcEBYzCD22L0rggdpee2yJPmT5Ab5WKXd+Eove8cUx7Z+ZvWRvGlnBM/M0YNu6NbJNi9COZeDLJykNW6fXvsD+pHFepA8ELRx9yKg33W0lYqUYxJB7rQG4KvvCtbvDNAP/EnBMoLOdrNE8niDsZXnzsPzvf4eWBDewfHgIb2yONoSN+mv3zFIEj8klAmUU/en1aIdoOij/oxRUlArwqFScoHj8viQJy9seI8EcxboYvi53yJgCZXNt/BdY7SW32z5/Tml8ksDFM50NyUT/Lo0NQXM2bsBipqiSK9gkLFDyhXetyXowNisza+6GZJR00lB0Z/VTjXorvg+SYYEAq57Bv47hu6Gvzgf9o/a+BABYi+AVgKeKcmbPGLPCQuPlM1CokhoY=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV1PR03MB788477.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(42112799006)(376014)(1800799024)(366016)(22082099003)(18002099003)(261009223027099003)(11063799006)(56012099006)(4143699003)(261102123227099003)(261026140227099003)(261028144727099003)(10067099003)(261022105027099003)(261021121427099003)(261026121527099003)(261022075727099003)(38070700021);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?iso-8859-1?Q?gkYr3eWPqBP03C9AF741W5los4zTCPvI6Xcykg1+U+p+iSMJAe8qFnWL1r?=
+ =?iso-8859-1?Q?P51VggzkaZjvYkal6UtBMs/8loTf5gGdP8+TsYGStSdNs9KmeDs4r79cQT?=
+ =?iso-8859-1?Q?ZhVp1WR6UZzA5zHhL1ryxm0GGgk2Y5lOHXBAK4XJ2wEK/w2RO6A8tChnR9?=
+ =?iso-8859-1?Q?dmdpHNswVf/qSWnbdCt7piINtthmj4xkCkpfwg6hmDR9aZrNMxIioEcnAI?=
+ =?iso-8859-1?Q?JsoWl/MeGVC0rfu9Z0/7gp42bcgQoEQm2vFK7LDdKv9RopE3Zd27EhyFTs?=
+ =?iso-8859-1?Q?0RXjMsWmL8e/ntZiIKoglc74dbQOCZ1CzYLPJrvbEM4UtQyafD7bs+YiYC?=
+ =?iso-8859-1?Q?jIUuknY79X/CFXX8sMwpXZw+vHqIkbwhRHwW9PXUtmrpee7e2GkSTlI+Pk?=
+ =?iso-8859-1?Q?zVkibrGuFzyftk21DYQELbaQJa1OYdc2ll7015wUTiDdp4k0hiszqU67TJ?=
+ =?iso-8859-1?Q?52l6C2+jKCmhIiNEHcLwSGhpnNiVJHlO3iUVboKpvcIgot8GO9TDTbjJWC?=
+ =?iso-8859-1?Q?S3WLLnUGPQQjmuDqed2jo6uiVAWohIyfvZ9EEdsmMamejWWTnm+lOdQY7P?=
+ =?iso-8859-1?Q?jjBDTFi0aO2Lw9Jov4LgfsRv03HpxPEhCRtkL8dYZYjRqwbvAxv6ujZ75W?=
+ =?iso-8859-1?Q?4hQ2/FLxhj1BEdrJIOHaViFBzm/nwMgpvHCjg7YXNWlrwXa6m9VyAVTa8P?=
+ =?iso-8859-1?Q?XmTUv8BU+jb/kEGnXxcn1OVFk2RBR68qq1n2Vfz0rdYlmorMe9O3cq0er6?=
+ =?iso-8859-1?Q?ALnE4OcKzujMl1LWOJK+JUWLYAHVutp9Sf763v5U9wSAckz/UrU9GCZpqk?=
+ =?iso-8859-1?Q?t7/Y87L/xurewtba+neytKA0gAiN8zW6s5AMmY/heE51mGenqOrjzQIy0F?=
+ =?iso-8859-1?Q?AhZOYgX8NF5YUOLwikhxqu3egJ4sr+ZOtQeo3CcT8Iqj+h1e4EcpWWXhY0?=
+ =?iso-8859-1?Q?SQCpv6V8LczuuxTfAR2vTA6oDqeMXtseKm03c74QDRqxfJ5OE7XO7Q1ZsU?=
+ =?iso-8859-1?Q?cjRbIuoXIAWXgdzcK2ooSv33DoN+hhXMBkgZ/Tih9HEuZs4fwPevoz8nS6?=
+ =?iso-8859-1?Q?quLywnUxeip+/n/a0Nqou8GnLCOZ6LfeeW9QlfmHYEaWuwHIQZM/P3HOSo?=
+ =?iso-8859-1?Q?DAGHu7TlrhlDgKrtQodPR0IEdkQ+dXxYOdH63CQAahbHn13Q14rJt8/BU5?=
+ =?iso-8859-1?Q?Z8aLQf0luUYrsL9y6dRcz+VI8iktaXfEgHxPAfeA14TFukwifu4t71KCVx?=
+ =?iso-8859-1?Q?z4NEOQhcP7RjzbFMvbEfZRjWwps6yjFcXFt2DjOPxUIuhZsfBSJcfowgPb?=
+ =?iso-8859-1?Q?73PHc1qvk5Q6JJdlHuOakgLrTB2Zo039yFWQfe5qAsBfMk/CbKAMSUz2zS?=
+ =?iso-8859-1?Q?ppwqyPjj3Se5qPSSBGPbQFM5KuqtGCKtYyyeLOkDM/FORrXTg/q5WQF2Hl?=
+ =?iso-8859-1?Q?OD86UaJGzRXqnM+wC3QXR2nGyY9QGorEKv5y1mpBu4JIK8qQ4qUnlVT61S?=
+ =?iso-8859-1?Q?ViW4H1qVUB9duqvK7+p2gFMtZ8SiEs12/Dolls6zckkp5X1B8BD6P4DYBT?=
+ =?iso-8859-1?Q?TTKWo0qXxuBrOMad/Hpw5XOjTJpcF+UE8tC4Mg20DiGQCwjKT5qFkdzI7R?=
+ =?iso-8859-1?Q?CGH3BbpGpgmW5QQHZ4t6UE0Tn6kQXyXFry+496CAHejMQ+Uq0e3gfKQZAq?=
+ =?iso-8859-1?Q?E+siM+cnFC7mNwefIaAq0BhY1dpv45/MARxZwGEQY2Boz9/BYGTilX5nnE?=
+ =?iso-8859-1?Q?SqpRpvX5Mftofur+ISar+QTGare/l6SwCxW2s631+D8Z3gFhf3poB6cEGs?=
+ =?iso-8859-1?Q?OoSyFhA94N7sWQixAujH+Hve7Ks8b68=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Jason Andryuk <jason.andryuk@amd.com>
-Subject: Re: [PATCH 1/4] libacpi: Build TPM2 tables for the TIS interface
-To: Jan Beulich <jbeulich@suse.com>
-CC: Anthony PERARD <anthony.perard@vates.tech>,
-	<xen-devel@lists.xenproject.org>
-References: <20261106231526.482418-1-jason.andryuk@amd.com>
- <20261106231526.482418-2-jason.andryuk@amd.com>
- <6213ab52-73ad-46d8-83eb-0ab7161b2a8f@suse.com>
-Content-Language: en-US
-In-Reply-To: <6213ab52-73ad-46d8-83eb-0ab7161b2a8f@suse.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY8PEPF00000056:EE_|PH7PR12MB5901:EE_
-X-MS-Office365-Filtering-Correlation-Id: 65b05881-f456-41e5-25da-08df45118148
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|376014|1800799024|36860700016|23010399003|6133799003|18002099003|261009223027099003|22082099003|261022075727099003|261022105027099003|261021130227099003|261021135927099003|261021133027099003|261102123227099003|261026130827099003|261028144727099003|261026121527099003|261026140227099003|261026135527099003|261022113327099003|261021121427099003|261022115727099003|261021123027099003|56012099006|11063799006|10067099003|4143699003;
-X-Microsoft-Antispam-Message-Info:
-	l3MrpIVIShcMzIkQLQvqLCCIf4N89MpHYqaVKjjdv0ARPqTglCwO4zMrU3NqMWmRrOQlVFhpIjISIPr+/nEHyluF9kh1oUYK9WouQUXexLZKkro2Et4vE5LwVe1z1uvQAu8WJQVnGi/98jwACTd07nhrorK+/+WfPqTDxZ9Gq9QTenXrSyG/BymFs5PJCkRlk2MyEZxffVbKvXqYdrpRVwiaBZSJsW2ObO+NkF2qdwnboHo6wlskrgh8YxsQDOZvMKrhL8YJP7vg8jsRilRIBO23q/rY8yJY+bTDhqECXmp4k6RUfAU6B4Z4l6HGtpuV5TlncgXiTOAhotSXf/fzBLhMSRR8wiBKg/uV/nmlIaXIO/qC9jpHikx1rcbow/jMPtiapquXGsixvFjDO8z7fQWcu2G4K88M81bpjIkN+r/+FBqF7acY54B8jzbE+L/JM00D0368t3aUB9Trg24raNcyDWSBKJEKwggaBjxjIUIFw2ZOWkB00qU0bwzI/p3aiGCKAwD7Huhro73MH3y16beZ2vt4uPhAqZQ21INbcewMlIn9kyW9CEfya3y/g6E1uvViZOJ/xs6AUcxr1Y/VLxKgx80vYb0OgkLSdrs2I9XIh+FTIXYxzkpegUKV9ZQiNCMPoxR7mb3ij8mKmF3gLRayCerKa+fTHoKK8xZ7RBvN4ctRrjJCS97CQfBf/xH0LednvpDem6KoerS8+BOKtA==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(1800799024)(36860700016)(23010399003)(6133799003)(18002099003)(261009223027099003)(22082099003)(261022075727099003)(261022105027099003)(261021130227099003)(261021135927099003)(261021133027099003)(261102123227099003)(261026130827099003)(261028144727099003)(261026121527099003)(261026140227099003)(261026135527099003)(261022113327099003)(261021121427099003)(261022115727099003)(261021123027099003)(56012099006)(11063799006)(10067099003)(4143699003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	9rtKt291F7LBL1gTPAfPLnPxnqCsQJYRIZk6KfTfjqlG61vhOBHQXZBEaJR8MtPHZg2W8wfQULYUNe0z6u/2I1tjrMgeB74yTMhhGbactCEzGMew+k4wsK1vH+aa3jOXqWTANvr8u6jSrxzZnPyNykgU2IgJF47QYx2PQeAXWKEVy2VfiHJjYswGK9KAgC0FN8Cd6l9dwDYcAikGXt1idp/O/mz0gCfKuNnNZqOHw6rj5d/xNcUwHNv1poYLx7FN0ETQSMrVkdLR4l3X9egL2+jlWPVBlQwSTbA+YmGCOG8Ds1T2xwTKowuTpgENN5N4M7zN1lw5FU1QhW0dICTUds2lEBGuqH842OsU3a37wJVkXUgk5GMkSyllGRvhfZUOhvw5fx5ZbVtHTNqE0VYnmQ9fd0kzdogUbxkJNm7/a7YtJ/sjrTgVpx1ly7gKdmHI
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Nov 2026 01:15:59.4788
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: GV1PR03MB788477.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2b8ff53a-c10e-4dfb-279c-08df45167aac
+X-MS-Exchange-CrossTenant-originalarrivaltime: 18 Nov 2026 01:51:35.9194
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 65b05881-f456-41e5-25da-08df45118148
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CY8PEPF00000056.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB5901
-X-purgate-ID: tlsNG-ef75cf/1794964569-36AD8AE4-9963800D/0/0
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: Gl4/2BsgS4Kl+/uH/vHMUWW3ir5ZBVPGqOmBZl+YOXiNGaImyHuIOVlCQEUJ+N3VkpEYE11VIlI9fwT1kWNWmDqc/IAtKxRQZxQvuCArgfw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR03MB9119
+X-purgate-ID: tlsNG-ef75cf/1794966698-A7AD0AE4-BE742591/0/0
 X-purgate-type: clean
-X-purgate-size: 4205
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+X-purgate-size: 2896
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 2026-11-16 08:30, Jan Beulich wrote:
-> On 07.11.2026 00:15, Jason Andryuk wrote:
+Hi,
 
->> @@ -444,17 +445,30 @@ static int construct_secondary_tables(struct acpi_ctxt *ctxt,
->>               break;
->>   
->>           case 2:
->> -            /*
->> -             * Check VID stored in bits 37:32 (3rd 16 bit word) of CRB
->> -             * identifier register.  See table 16 of TCG PC client platform
->> -             * TPM profile specification for TPM 2.0.
->> -             */
->> -            if ( config->crb_id[2] == 0 || config->crb_id[2] == 0xffff )
->> -                break;
->> +            if ( config->tpm_interface == ACPI_TPM_INTERFACE_TIS )
-> 
-> Better use switch() right away?
+CC'ed Juergen, because I have a question about cpupools.
 
-Well, I don't expect there to be more than these two on x86.
+Mykola Kvach <Mykola_Kvach@epam.com> writes:
 
->> +            {
->> +                if ( config->tis_hdr[0] == 0 || config->tis_hdr[0] == 0xffff ||
->> +                     config->tis_hdr[1] == 0 || config->tis_hdr[1] == 0xffff )
+> When a CPU fails to come back during system resume, cpu_up() sends
+> CPU_UP_CANCELED. After trying the other CPUs, enable_nonboot_cpus()
+> sends CPU_RESUME_FAILED for the same CPU.
+>
+> On architectures which do not park offline CPUs, both notifications
+> queue free_percpu_area(). The release metadata, including the rcu_head,
+> is stored in that CPU's per-CPU area. The first callback may already
+> have freed the area when the second notification arrives, or the same
+> rcu_head may be queued twice. The CPU_RESUME_FAILED callbacks also need
+> the area to clean up timers and CPU-pool state.
 
-I'm going to add a prerequisite patch that moves this probing into 
-hvmloader.
+A bit convoluted. As I see, problem is caused by the fact
+CPU_UP_CANCELED is a terminal state in a "simple" CPU up sequence, but
+is a transient state in a system resume sequence. As such, theoretically
+other per_cpu callbacks might have a similar issue when they don't
+expect one more "CPU state is bad" callback. I can see that
+common/timer.c also tries to handle both callbacks as terminal
+ones. Probably, you need a similar fix there as well.
 
-> 
->> +                memcpy(ssdt, ssdt_tpm2_tis, sizeof(ssdt_tpm2_tis));
->> +            }
->> +            else
->> +            {
->> +                /*
->> +                 * Check VID stored in bits 37:32 (3rd 16 bit word) of CRB
->> +                 * identifier register.  See table 16 of TCG PC client
->> +                 * platform TPM profile specification for TPM 2.0.
->> +                 */
->> +                if ( config->crb_id[2] == 0 || config->crb_id[2] == 0xffff )
->> +                    break;
->> +
->> +                ssdt = ctxt->mem_ops.alloc(ctxt, sizeof(ssdt_tpm2), 16);
->> +                if (!ssdt) return -1;
-> 
-> ... the one you re-indent could be corrected as well. Actually, can't
-> we consolidate both allocation and ...
-> 
->> +                memcpy(ssdt, ssdt_tpm2, sizeof(ssdt_tpm2));
-> 
-> ... copying paths by way of having another pair of local variables
-> (pointer and size)?
+Actually, I am not sure why do we need CPU_RESUME_FAILED in the first
+place. As I can see, only cpupool handles it in a sensible way. Which
+begs a question: why cpupool can't call cpupool_cpu_remove_forced() on
+CPU_UP_CANCELED instead?
 
-Yes, sounds good.
 
->> @@ -471,8 +485,17 @@ static int construct_secondary_tables(struct acpi_ctxt *ctxt,
->>               tpm2->header.creator_id   = ACPI_CREATOR_ID;
->>               tpm2->header.creator_revision = ACPI_CREATOR_REVISION;
->>               tpm2->platform_class = TPM2_ACPI_CLASS_CLIENT;
->> -            tpm2->control_area_address = TPM_CRB_CTRL_REQ;
->> -            tpm2->start_method = TPM2_START_METHOD_CRB;
->> +            if ( config->tpm_interface == ACPI_TPM_INTERFACE_TIS )
->> +            {
->> +                /* The FIFO interface has no control area. */
->> +                tpm2->control_area_address = 0;
-> 
-> There is a memset() earlier on, so only the comment looks to be needed
-> here.
 
-More local variables streamlines this away.
+>
+> Skip the per-CPU release for CPU_UP_CANCELED during resume. Let
+> CPU_RESUME_FAILED release the area after the other cleanup callbacks.
+>
+> This prepares the common code for Arm system suspend. x86 parks offline
+> CPUs, so the per-CPU notifier does not call free_percpu_area() for either
+> CPU_UP_CANCELED or CPU_RESUME_FAILED.
+>
+> Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+> ---
+> Changes in V14:
+> - Clarify that x86 skips free_percpu_area() for CPU_UP_CANCELED and
+>   CPU_RESUME_FAILED.
+> - Remove the blank line after fallthrough. No functional change.
+>
+> Changes in v13:
+> - New patch.
+> ---
+>  xen/common/percpu.c | 8 ++++++++
+>  1 file changed, 8 insertions(+)
+>
+> diff --git a/xen/common/percpu.c b/xen/common/percpu.c
+> index f180f37253..757de111db 100644
+> --- a/xen/common/percpu.c
+> +++ b/xen/common/percpu.c
+> @@ -82,6 +82,14 @@ static int cf_check cpu_percpu_callback(
+>          break;
+> =20
+>      case CPU_UP_CANCELED:
+> +        /*
+> +         * On resume, CPU_RESUME_FAILED is sent after all CPUs have been
+> +         * tried. Keep the area alive for its cleanup callbacks and let
+> +         * that notification release it.
+> +         */
+> +        if ( system_state =3D=3D SYS_STATE_resume )
+> +            break;
+> +        fallthrough;
+>      case CPU_DEAD:
+>      case CPU_RESUME_FAILED:
+>          if ( !park_offline_cpus && system_state !=3D SYS_STATE_suspend )
 
->> --- /dev/null
->> +++ b/tools/libacpi/ssdt_tpm2_tis.asl
->> @@ -0,0 +1,25 @@
->> +/* SPDX-License-Identifier: LGPL-2.1-only */
->> +/*
->> + * ssdt_tpm2_tis.asl
->> + */
->> +
->> +/* SSDT for TPM 2.0 TIS Interface for Xen with Qemu device model. */
->> +
->> +DefinitionBlock ("SSDT_TPM2_TIS.aml", "SSDT", 2, "Xen", "HVM", 0)
->> +{
->> +    Device (TPM)
->> +    {
->> +        Name (_HID, "MSFT0101" /* TPM 2.0 Security Device */)  // _HID: Hardware ID
->> +        Name (_CRS, ResourceTemplate ()  // _CRS: Current Resource Settings
->> +        {
->> +            Memory32Fixed (ReadWrite,
->> +                0xFED40000,         // Address Base
->> +                0x00005000,         // Address Length
->> +                )
-> 
-> I know you're only following what we do elsewhere (i.e. this isn't a
-> request for you to change anything), but I wonder how we could make sure
-> that such seemingly arbitrary address range allocations won't ever
-> conflict. (I assume the base address is dictated by qemu?)
-
-Yes, it is a hardcoded address in QEMU for TPM-TIS.  More generally, 
-0xfed4xxxx is standardized by the Trusted Computing Group for TPM TIS on 
-x86.
-
-ARM defines assorted GUEST_* values for ram and mmio.  Something like 
-that could be done for x86.  Though using them in an .asl file isn't 
-friendly.  TPM_REGISTER_BASE is already a define.  That could be placed 
-in the comment at least?
-
-Thanks,
-Jason
+--=20
+WBR, Volodymyr=
 
