@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D050D606A31C
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2026 07:37:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4814C606A32C
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Nov 2026 07:42:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=OiY28b9z
-Received: from list by lists.xenproject.org with outflank-mailman.1493867.1693583 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=dfqc/FOw
+Received: from list by lists.xenproject.org with outflank-mailman.1493879.1693592 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTaEN-0006E3-7t; Wed, 18 Nov 2026 07:37:23 +0000
+	id 1xTaIo-0007pv-Ob; Wed, 18 Nov 2026 07:41:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1493867.1693583; Wed, 18 Nov 2026 07:37:23 +0000
+Received: by outflank-mailman (output) from mailman id 1493879.1693592; Wed, 18 Nov 2026 07:41:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTaEN-0006Dw-4a; Wed, 18 Nov 2026 07:37:23 +0000
-Received: by outflank-mailman (input) for mailman id 1493867;
- Wed, 18 Nov 2026 07:37:21 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xTaEL-0006Dk-H6
- for xen-devel@lists.xenproject.org; Wed, 18 Nov 2026 07:37:21 +0000
+	id 1xTaIo-0007po-M1; Wed, 18 Nov 2026 07:41:58 +0000
+Received: by outflank-mailman (input) for mailman id 1493879;
+ Wed, 18 Nov 2026 07:41:57 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xTaIn-0007pi-Go
+ for xen-devel@lists.xenproject.org; Wed, 18 Nov 2026 07:41:57 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xTaEK-007Ay4-TP
- for xen-devel@lists.xenproject.org; Wed, 18 Nov 2026 08:37:20 +0100
-Received: from [10.42.69.5] (helo=localhost)
+ id 1xTaIm-007Xg8-Eb
+ for xen-devel@lists.xenproject.org; Wed, 18 Nov 2026 08:41:56 +0100
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6afd55b0-e002-0a2a0a5209dd-0a2a4505a7fe-2
- for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 08:37:20 +0100
-Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6afd56bf-8faa-0a2a0a5109dd-0a2a450bddb4-16
+ for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 08:41:56 +0100
+Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6afd55b0-4cb1-0a2a45050019-d1558036f144-3
- for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 08:37:20 +0100
-Received: by mail-wm1-f54.google.com with SMTP id
- 5b1f17b1804b1-4a140e7405dso6205895e9.3
- for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 23:37:20 -0800 (PST)
+ id 6afd56c4-b7e8-0a2a450b0019-d1558030bd82-3
+ for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 08:41:56 +0100
+Received: by mail-wm1-f48.google.com with SMTP id
+ 5b1f17b1804b1-4bb702a7548so5378925e9.1
+ for <xen-devel@lists.xenproject.org>; Tue, 17 Nov 2026 23:41:56 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb784231basm122965725e9.11.2026.11.17.23.37.19
+ 5b1f17b1804b1-4bb78420edasm184510775e9.9.2026.11.17.23.41.54
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 17 Nov 2026 23:37:19 -0800 (PST)
+ Tue, 17 Nov 2026 23:41:55 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,65 +51,63 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1794987440; x=1795592240; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1794987716; x=1795592516; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=m/3Dtdi2Uo97TYYCOWkT2wzwLisKI7lw0DjKCapkI8c=;
-        b=OiY28b9zzVD1MS9oyII80nplCvDyYzlYvLUX3oVSj13EjxkWaCbVsvDqrtAh+W6rdc
-         4NDm3evh94SughjqVWtyB5hQBx2TrbKQh53hc0mY25h6jHmP58fIOv8+0AOZde6994Vb
-         CuFO/ohUlWeRpEYjf0me+nv3Sd/aWxGGjI4AgDgrRvH4TrC8pYHvwIl8MyN3Mb8ftf0x
-         vwkYXdt23rvCxVKHMZPWS1Gr8Nh+W9dEnfmji+V1Nq62gOkbkRI0sEZT/uxVpBbFBJwY
-         eWEWLT6AJvonCHCsGd2ctLxHz9zQR10CR+qfqR1GsID1oJL0Lw78emW4reLpuR4YyBzL
-         mXkA==
+        bh=mgwBONhU4Y7ym/dmjDRFxkbaJz+HLE1/smGpGs1r2mM=;
+        b=dfqc/FOwLrXzHRBRkBTmmoXLI6ceZgsjGk/7IZhOvkitCqI9NhljLxIUUfaWFl52gq
+         bxTCq7NUocGw6f4R07daRmf3Y3+khQbZmbEwTWVu8JwBfY5iaIAhVvd7uuHzZsfHNxWI
+         ZlhYE80IKycDkRLPfHcm0w0ZCvWzdeYF5x/eGT6RLGyqfdu0iOhynIGgvNRS5/LdXFmV
+         o2e44swpY8HXjJrX5Ddio15UeBGlh89Ld5qigCKOp3x8m97Mh3AHL2SJ6AO45ug32KdH
+         2SL3fJYSv4ATjb0vy/fq4Tqi65U60vRAHAEPpaKlRedM0bC4YI8GAIv5MXZJFyI0RQ3M
+         dGLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794987440; x=1795592240;
+        d=1e100.net; s=20260707; t=1794987716; x=1795592516;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=m/3Dtdi2Uo97TYYCOWkT2wzwLisKI7lw0DjKCapkI8c=;
-        b=qR3vSNm+r2L05l5QywPVTL9/HHm3cOVUxpvbrKv4CrbD5Gpq28hrTTAgO6jw7j3zfl
-         tSDWy8GFsr5HX2U9ejmGQBk4Hv1M/ZQXXUptTQ5n1ueOHuiAUANFxkS0NfCQwPdZ7AeC
-         G0l0ZxLBRg6pSyqA2hYszWLtUiGifLyL1vTrMI/XjaTpv4VJaahXbnAGKB2AwZIyUF7O
-         sh3UvD7D6xHVlLeUJV1IDqU2NvgLn3lDEXoaJdHma5Gd+gJdR9q9yVjzUYvyx27bMbp3
-         biYqvD/JyXduq55VtpOW7lPas+lEW6qZUTZKrgu2pWCuL/k1G2xcg5POQqbTVn64aWQX
-         RLMA==
-X-Forwarded-Encrypted: i=1; AL+hErEnLxgUx4+8S/nFmELDYqVExQjzZMW/OqYwIm9cvD0YNlt61x+G1k5n/nuvD59dA/ePjuWA+AhTsAw=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z8xvP//ZDKCjoPTtlh6W/Gr1f2q7S5eUkh944Gq1fQpmCknq8z4
-	n2zwntVBQcNV5TGtJR9RJ2gXI/2JduHhysFZMbDleMThSS7iEwj3qxG4p29PJ6aiLw==
-X-Gm-Gg: AYBFou17lf7iGaWQKvC/CIT/Ck2RngEVSEtIhgyykXxszq8tw32VosNHy0/E3SOfIR7
-	XZqw4M3K6Q5rajQmrL7Cmqt0vsztx/DRh32bhrQioevh17Ovq4pyQ1oNK4FvUAEMa1FMABpQxTl
-	iwTZOyy7NFaxriaXVhrvYILl+f93h0S7bjeNhjYJNlc+mwAXPhc6L2TuzNGk8BsBGjTYOf1cdz6
-	h2oYi5yKSl6gawyOUsMwj+2/rnd8dcWh6gnyJESxDjg9U0zknEkrfVFvC5CcVUi1863zL8tBNvx
-	QsAmWxU3z1O0PEfeU2LLesJ7gLFSYQX2iLyNn4GYXSt6jhNx53GNy1bLLmtEgG9Q9G4EUZCuM6T
-	cE42mh1jk75J01Di/pwDt4LFOYy4m6yysgiq2eqQgaWfjbB+gJIUgnpglmHxUPgpTL1V6NVN4Ob
-	E+BdTypkCMxSRCdbADoUvISVOB1kLyzCHocBlt8JqIey5h+q4QLbjBppz2ua7bgmTzXak5WCjs5
-	JlrCPKI0dwsLCcN1+2vZsupQtc6TwqPYkZihtmESBuIfFy88L+yjPjl1eJfBGKL6ExUifCuX8tR
-	Rl5JiUqmy96jl8O17ysMaMIAnuraw3cWn7rjvajkDbLKUo+F+sBqyZvNEPuxM9gXb+lzvTTMg/f
-	e+FbR2sq3v142kHfFGg==
-X-Received: by 2002:a05:600c:3b8c:b0:4b7:6942:39bf with SMTP id 5b1f17b1804b1-4bb7da3a68bmr31814375e9.28.1794987440232;
-        Tue, 17 Nov 2026 23:37:20 -0800 (PST)
-Message-ID: <9e4452d3-a1a0-4b7c-94fa-08217973ce76@suse.com>
-Date: Wed, 18 Nov 2026 08:37:19 +0100
+        bh=mgwBONhU4Y7ym/dmjDRFxkbaJz+HLE1/smGpGs1r2mM=;
+        b=kAeIkuqj8zEWhERTY/Nhot2tmkmqv46WyUPRuFnjdIZJtQx2vXdDWsXmewxZY6Vwkz
+         zdZ9QDWKqXA6FEwXOcf/PVAhodf7vsrYAtIFMFsm/t2vdqvg/U5A/i5m/VFKac3xlXdA
+         /AVEW7991/5llPzRxrCjOU6IYSPhiZM/snm6N6uGqFeRFErl9jx+R6kIvDHrZ01djK0B
+         +86TgV+ZKfB73VdRcQEoaSfNFOogbXkcCO2MyvGPWPsCPSMfqj/ePdfxmWsRDU4OAnCr
+         ID0XMx6WRGBItOhPO9O9dXSs6BIVYKwsV+JVG3FB4TiDDOwdwxSRFtSKF0TDc++P2Z8G
+         Dfpg==
+X-Forwarded-Encrypted: i=1; AL+hErFsIcDpwWk9lNMpxglLXPMEDVc9+Knw/814V+kWmk+VVxqeiQDqAyWu64+/y9JSmmy6GPHK19z3uws=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z9HDS3hFcmSQaQPPg82AljKfuI1stO/Hg00vYkNXsw7g6IC5q82
+	+hoH9kpGSpcOE8jwfPjrJ2NH6YcnLlZmh3ksIMedJe2E1fDlZJ7niEb1s/eWV9ydCg==
+X-Gm-Gg: AYBFou3rM8aba9a/DqmGvz27gCUjknGYUrBP6OkLXjun8CWNwb98W8qLCCtsejOtphN
+	bFMdLisyrexaP4qN6XjReOzxxAuKLvhMK9CT+ZuvU4BZGlqxtTqJH4HlarPW2ZjH2YVatEtqd19
+	lOoV3Rezt0ORU5oHJebYlYtQtXn9psfH14j4qPnYWI/ktYFWMgT4ZVXW1hrgSENrvobWYLYtk/2
+	Qz3KEr4VAUclcr24egiMeRaOtTKOXOelVdble9LBxcQt9IERkpV1zj8lVuNiiGJaIsJ38a7QSZe
+	yTHvrc6+NJfnkI208kHpV6xdd7sPcA8uRw/8AEVdM2Yx8k7ikDvE6woWX6Wj9htJQcAP4xwrZuk
+	FlX/tLgT94ijzdL5+XXI57ZRfl98iH7j0llPavDL8HpkD/tIiNzioWkuR91zH8n4tE1Innleg2s
+	iiia6DpE5Ri9B/NEbVngF6dC0BdhlEOqlZtGUrZvxOUkt4Tz7DOLJ1DoKgB0Y4d1j+zUtFFfCVY
+	G0X6xJElJGjoq2NohkjV1cgPq8M6T8etk2ghm5EaOAnYSvuGrFlqk1s5LJyUv+5EuCViK4KxO73
+	NeR4bPwn1daITNh/NcG6cJoPrfq9nAz420wNRcLpTAGrBPmqtOrNJogon79LF6O9g2+DFw3HIXH
+	kHewa92Yks2KLrJkNYXk=
+X-Received: by 2002:a05:600c:c165:b0:4a3:59c9:a743 with SMTP id 5b1f17b1804b1-4bb7da3948amr27403075e9.27.1794987715879;
+        Tue, 17 Nov 2026 23:41:55 -0800 (PST)
+Message-ID: <3d675e31-a31d-4c93-952f-72280dd2f7db@suse.com>
+Date: Wed, 18 Nov 2026 08:41:54 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/3] xen/treewide: Remove NDEBUG
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+Subject: Re: [PATCH] xen/arm: deviate MISRA R11.8 for capability enable
+ callbacks
+To: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
  Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Xen-devel <xen-devel@lists.xenproject.org>
-References: <20261117115549.3872611-1-andrew.cooper3@citrix.com>
- <a3f79064-9030-4efd-9829-a408b73c81c9@suse.com>
- <4e7a7175-1f27-4d99-9c79-6723e1903742@citrix.com>
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <74ce8a8150674591c2b0daa672f8e2e00b2a1201.1794950154.git.dmytro_prokopchuk1@epam.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -135,41 +133,35 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <4e7a7175-1f27-4d99-9c79-6723e1903742@citrix.com>
+In-Reply-To: <74ce8a8150674591c2b0daa672f8e2e00b2a1201.1794950154.git.dmytro_prokopchuk1@epam.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c201ff/1794987440-F76BD2A1-F352BE10/10/78276251493
+X-purgate-ID: tlsNG-42698a/1794987716-192CC9EA-F1CB3F66/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 824
+X-purgate-size: 820
 X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=4.0.1
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 17.11.2026 19:28, Andrew Cooper wrote:
-> On 17/11/2026 12:43 pm, Jan Beulich wrote:
->> On 17.11.2026 12:55, Andrew Cooper wrote:
->>> We have two ways of spelling debug build in Xen.  Reduce this down to just one
->>> way.
->>>
->>> Andrew Cooper (3):
->>>   xen/treewide: Convert all #ifndef NDEBUG to CONFIG_DEBUG
->>>   xen/treewide: Convert all #ifdef NDEBUG to CONFIG_DEBUG
->>>   xen/config: Drop NDEBUG
->> While the ASSERT() related distinction was helpful imo, I don't mind the
->> folding:
->> Acked-by: Jan Beulich <jbeulich@suse.com>
-> 
-> Thanks.
-> 
-> I'm open to the idea of having CONFIG_ASSERTS separate from
-> CONFIG_DEBUG, but if we're going to do that, it should be a separate change.
+On 17.11.2026 22:31, Dmytro Prokopchuk1 wrote:
+> --- a/docs/misra/safe.json
+> +++ b/docs/misra/safe.json
+> @@ -124,6 +124,14 @@
+>          },
+>          {
+>              "id": "SAF-15-safe",
+> +            "analyser": {
+> +                "eclair": "MC3A2.R11.8"
+> +            },
+> +            "name": "Rule 11.8: cast const capabilities to void * for enable callback",
+> +            "text": "The Arm CPU capability enable callback takes void * to match the generic callback convention. The cast removes const only to pass a const struct arm_cpu_capabilities * into that signature. Existing enable implementations treat the pointer as const and do not modify the object."
+> +        },
 
-Just to confirm - yes, doing that separately (if at all) is what I, too, would
-have expected here.
+Do we really want to restrict this to Arm CPU cap handling? The same pattern
+could easily arise elsewhere.
 
 Jan
 
