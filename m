@@ -2,57 +2,57 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 97C17606A33F
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2026 14:45:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E9F42606A33E
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2026 14:45:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=CHeB56B8
-Received: from list by lists.xenproject.org with outflank-mailman.1496490.1694981 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=bpKvQ8W7
+Received: from list by lists.xenproject.org with outflank-mailman.1496489.1694971 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xU3OC-0005Zx-Bx; Thu, 19 Nov 2026 14:45:28 +0000
+	id 1xU3OA-0005NQ-41; Thu, 19 Nov 2026 14:45:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1496490.1694981; Thu, 19 Nov 2026 14:45:28 +0000
+Received: by outflank-mailman (output) from mailman id 1496489.1694971; Thu, 19 Nov 2026 14:45:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xU3OC-0005Zk-6k; Thu, 19 Nov 2026 14:45:28 +0000
-Received: by outflank-mailman (input) for mailman id 1496490;
- Thu, 19 Nov 2026 14:45:27 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xU3O9-0005NH-U2; Thu, 19 Nov 2026 14:45:25 +0000
+Received: by outflank-mailman (input) for mailman id 1496489;
+ Thu, 19 Nov 2026 14:45:25 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Alejandro.GarciaVallejo@amd.com>) id 1xU3OA-0005UU-UJ
- for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 14:45:27 +0000
+ (envelope-from <Alejandro.GarciaVallejo@amd.com>) id 1xU3O8-0005N9-MQ
+ for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 14:45:25 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xU3OA-006FQO-AM
- for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 15:45:26 +0100
-Received: from [10.42.69.12] (helo=localhost)
+ id 1xU3O7-009ksi-Qv
+ for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 15:45:23 +0100
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Alejandro.GarciaVallejo@amd.com>)
- id 6aff0b7c-bab6-0a2a0a5309dd-0a2a450cd60a-44
- for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 15:45:25 +0100
-Received: from [52.101.201.11]
- (helo=PH7PR06CU001.outbound.protection.outlook.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aff0b81-2eae-0a2a0a5409dd-0a2a4509db76-2
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 15:45:23 +0100
+Received: from [40.93.198.38]
+ (helo=CY7PR03CU001.outbound.protection.outlook.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <Alejandro.GarciaVallejo@amd.com>)
- id 6aff0b84-f479-0a2a450c0019-3465c90b3792-3
- for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 15:45:25 +0100
-Received: from MW4PR04CA0147.namprd04.prod.outlook.com (2603:10b6:303:84::32)
- by BL4PR12MB9481.namprd12.prod.outlook.com (2603:10b6:208:591::6)
+ id 6aff0b81-be1a-0a2a45090019-285dc6268d4c-3
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 15:45:22 +0100
+Received: from SJ2PR07CA0021.namprd07.prod.outlook.com (2603:10b6:a03:505::23)
+ by DSVPR12MB803185.namprd12.prod.outlook.com (2603:10b6:8:3ea::7)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.14; Thu, 19 Nov
- 2026 14:45:16 +0000
-Received: from BY1PEPF00026958.namprd05.prod.outlook.com
- (2603:10b6:303:84:cafe::5) by MW4PR04CA0147.outlook.office365.com
- (2603:10b6:303:84::32) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.615.10 via Frontend Transport; Thu,
- 19 Nov 2026 14:45:16 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.639.12; Thu, 19 Nov
+ 2026 14:45:18 +0000
+Received: from BY1PEPF00026959.namprd05.prod.outlook.com
+ (2603:10b6:a03:505:cafe::8d) by SJ2PR07CA0021.outlook.office365.com
+ (2603:10b6:a03:505::23) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.615.14 via Frontend Transport; Thu,
+ 19 Nov 2026 14:45:17 +0000
 Received: from satlexmb07.amd.com (165.204.84.17) by
- BY1PEPF00026958.mail.protection.outlook.com (10.167.244.168) with Microsoft
+ BY1PEPF00026959.mail.protection.outlook.com (10.167.244.170) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.639.5 via Frontend Transport; Thu, 19 Nov 2026 14:45:15 +0000
+ 15.21.639.5 via Frontend Transport; Thu, 19 Nov 2026 14:45:17 +0000
 Received: from espagarciav-lx01.amd.com (10.180.168.240) by satlexmb07.amd.com
  (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.57; Thu, 19 Nov
- 2026 08:45:09 -0600
+ 2026 08:45:12 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -63,20 +63,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ugEeFO92ljNbekcaqmr2pHK+TVFdKF1un0yRCIkG51kJn0GhK1dM6PZPxURO7h5Oe5VwreV2CLyLfvdLvdxpA4yNFl52FN+8G7B5915gQxVSDxVjXk6yRJz9stazh6CStDz94v4uOKX55qldb85TXzepnNGIQyrcBmHlBS89pYBz54C/2ZM5At+HuVKTJ2Jxhyg6Eb03P0xYEevdHvgZLY/u0w5PoC59r+QsDYzQVZq3Zc2+DH43U0FhtmG0eYbmCcDjTEXyB70JuifNteXUAr/OtNpG2JhtBlLho0/Qtdi4a1Skf+0uZEYK8NxCTBwjt+pi2/AcGMgJmV1nEz8tuA==
+ b=EFl8jWA3O1r0nncjQ+arQRjYyToDHmib/YColHRQPbYjbdD7kLTngsnvTew6e9tw+xCdCSRua4dGFjZmdhsNqE2WWN/Pi/wM54OaG9O4cMuTC7lVhMx/zSYoXGTwIybLht3KCstngk7BD0Uzf82RrD8CLRmXfGyPRQdfnKNcGav1NGX+EBCTb9bnb+BHwkUnRKCxa5HRjv89Hzo3KUY05SE375COOJmg7nsflXOstgaatUaGkiTjHTQCQF+8TfLnXFTa7fwhPHHK6AkEUjSyMwE8o6IKf9r8VhO3k8Q7zBkfDtk8m1+NLNrHtOWH96TSd/hrXhX59WDSnjQdODbaOA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=thPzFhszw77qbfHzc6yGFu8o7XzCPHwP+GovSWGl2Ls=;
- b=HVqmgsU2bHO4nTCkpsPbAmIJ9rSJfn7iu4W/TrDpkdSezqjBCRRBJVlcL9k+Ot2Q7BquIQIMAUNXJ+9WktawO4InJqESesSspVN9tPwXqs9XmX6VPEfgSKd2DalTh8FNYn9wN0gMNoMor/O8t3D8e/LQE/syLbcL+tMIswp+tivHRsgxL3PUQp4T2C9c+n6R1+VmG7HpgSfNHS48Y0vO/Uy2FToTOqHycIBWYlqOuLDzP5U8evl1lcEa/Og/OgWmYY/pfuDfTNIQObEtP+rsSfZG7RDIjB0ST0LOmX/NdowAL1sNbzcUxx97OUtDGr8M2SN+oyWGXZaZIfAOUyOEJg==
+ bh=pjE680tCzHv7ThRN5ULaAh4B3wEWHe2LOVsBNo7a9Ys=;
+ b=ud4IV4D8tN3YdUOd0xlrUrmkT5OdXc3qg+z7gBvchRXrtpUVfDV19IFywYiKyldJfW4IShVr1KqKn3cczDabuXQ5+MJEiuxnEcdEMNJrD/mGvO8VBOQeeLyhAzF6MoYIj5tdiFUw+Z0/TwVCZeyiq36VnhmXq65PhulqVGZPPW29JDzOsaQvaFBzZOyXdC7hdUHDtq3ZivEX8lTHxQObiJl0SEwK9/KVWGmWmYbsKWJTuelDr6FkrIp3S1GN+oW6Idp0ehbpvWSy9wFl2HSavOgB9pqyLftR34hqcBHNc+z5GO9P2muQSPOq+s31YNG4l/HzYeSEN/pMsHp2H7akDw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=thPzFhszw77qbfHzc6yGFu8o7XzCPHwP+GovSWGl2Ls=;
- b=CHeB56B85YqoxcJoPhEtI/mbTOIhZiuwqNxZ9qcPq32I1d+Z7xsd6Nrexokv6PcCkpTlZYGvjvTlrijPMvBFfYnEuZI61n03sksW0dMM2SVL5b/gleCxyg/u9rdMRzLxi1TKaVowXvHAaKt0KuAKXv2Gax+SFdcBikpTbTOLiVk=
+ bh=pjE680tCzHv7ThRN5ULaAh4B3wEWHe2LOVsBNo7a9Ys=;
+ b=bpKvQ8W7k51d33lGJSJV1d94ld0EEhpb/vN0k0MudMzUBCWBCboxs13vgGd0tipdHPUpY/2gF3HCKR7sR962yAL05cS+rTTMi2T4TiHpNNNc+aXQcTvak8Gn5ArN6foAUK46BgFkUjq+vZnxPWHgtnY5YxjcI/0geg1taLzfuLQ=
 X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
  is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -85,13 +85,16 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
 From: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Jan Beulich
-	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>, Teddy Astie
-	<teddy.astie@vates.tech>, Jason Andryuk <jason.andryuk@amd.com>
-Subject: [PATCH v2 2/3] x86/amd: Drop cpu_has_amd_erratum()
-Date: Thu, 19 Nov 2026 15:44:49 +0100
-Message-ID: <20261119144453.529009-3-alejandro.garciavallejo@amd.com>
+CC: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Nicola Vetrini
+	<nicola.vetrini@bugseng.com>, Doug Goldstein <cardoe@cardoe.com>, "Stefano
+ Stabellini" <sstabellini@kernel.org>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, "Julien
+ Grall" <julien@xen.org>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger@xenproject.org>
+Subject: [PATCH v2 3/3] eclair/x86: Scan in-scope files inside cpu/
+Date: Thu, 19 Nov 2026 15:44:50 +0100
+Message-ID: <20261119144453.529009-4-alejandro.garciavallejo@amd.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261119144453.529009-1-alejandro.garciavallejo@amd.com>
 References: <20261119144453.529009-1-alejandro.garciavallejo@amd.com>
@@ -103,33 +106,33 @@ X-ClientProxiedBy: satlexmb08.amd.com (10.181.42.217) To satlexmb07.amd.com
  (10.181.42.216)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BY1PEPF00026958:EE_|BL4PR12MB9481:EE_
-X-MS-Office365-Filtering-Correlation-Id: e88d1399-ec43-4ed6-d7f2-08df464bb99b
+X-MS-TrafficTypeDiagnostic: BY1PEPF00026959:EE_|DSVPR12MB803185:EE_
+X-MS-Office365-Filtering-Correlation-Id: a675e828-1352-4c2f-52f7-08df464bba71
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|376014|36860700016|82310400026|1800799024|261021135927099003|261021123027099003|11063799006|56012099006|261026140227099003|10067099003|261028144727099003|261021121427099003|261022105027099003|261026121527099003|261102123227099003|261009223027099003|22082099003|18002099003;
+	BCL:0;ARA:13230040|376014|36860700016|1800799024|82310400026|23010399003|10067099003|56012099006|11063799006|261021135927099003|261021123027099003|261009223027099003|261022105027099003|261026140227099003|261028144727099003|261026121527099003|18002099003|22082099003;
 X-Microsoft-Antispam-Message-Info:
-	TWAw7Zg4qeXQ2LDGy8Aup1oxFUo7qRxr5150GF7aKVGb0cOkgXgtVrwV+RVtQype04DdlW99RPL/Ev4jCAFZTrQnugG7PyDBMkp1Bg2yfUYV+YY+IAUKVXy1TsF1iGIKaXURVdYU6PyZDf2sYo6ISKlfmwgtGB1lFTZCUSSqqGZYNJTBqzBQWGov8eiDmGywHPoltlouDlpLAIgJgHRHAxxVPcP9rZpj0OFqpxzoWetpcDkuqDgLItMqbTENPfsnbt9LE9gBJ6Sok8/2wLroxJ1n10lQqtnPoDtjLVuqUAf++328TqwGB8rRvrD2iT9mXphfQ64+N4Ht+u1HdoKufo0Apki3BI78t9IrYHsLQzMiaU1Pf97mCUYY75ArdZNkubpv0uEupn+qvVs1FJTM/7x/rbdg8bpbT+dfeQ2oDoXeI7ww3JH1uBAJRJYsh7vic2mx0ar8/NSYjkPsC3xp8JPeBa927N1GgxOz9a2ULYDiKtF377ax1Y8/0e9jN5GkfuEpDGnMfuBL2dIF1N+Fqh0koAeXhi14HkrGGU6lUvdKG6x+3d/gJl3CHmRPCjgsdRJocTF69LE33lBstOuLmVL+jD8CTlKGMkcT2wOwaHe5X0aWL+IboTid6O3bQOqECg0Q5stmyy+MI8dt5OXcSKpYV3d8XKKEAPCHyHkd51NIqsr6DEczvZqBAZD3dEP0FY03KKrKHSt3aSSzE0lT5g==
+	Q2BkFhLfleCFNZ4NzYOPkeh7tFRu0bp/TFu5HTvCV1kPJKJMbgiEQhIb/sIknHh6Chtk+6TH2s3205bNHnWWYVx91S6HqgwYwIKRAUMQk104umWRymwGSGdlhxctuj/Nnq7e0qI5j0Ni9p5WI9h8ZQud12YhREz4npfaGSE0TDBiAt5G+ezjULB4FyCGTluY7MZB+FRA8259c40sCcmGw+dm2ZKim7opmq5d/jk/Kz5GFAeOvIFaaUBvKEVG92Z21uAoaWtKl9HiKxkqczHE7T0SkDkWtG7P3IVqXPl1SFTs3QL4LbOJnyZxTjPuEWMGfrrbyQiZTHAw9Ml6VmuJDpiwWvQgpuUny3LLp0Lu4p3goNCEg74HUPLRIEDfV+vE17N4pFaUaFPH76oA8oUHz+qrDnpXhyQSvjQKygSPfPLh/LZLi6dyW80HUCGdpz+Nff61HuqepJbCLLuclfMn1jm6hKJ1zksJnWwrn/ePbQsabJmAhaWWW95IBR1sWCrg1NFf7FX1XIdmoKyDwenKrH8G7kXbvg1DW561fK+6rJyr2I/szdrY7LifOMIB8Yx9Tc+TojmO6ccUkMLHIilLwYINn5cRXStjiam66BZQWfXbtN6n2jPvIY9ETdtOHE+Tuycxkw0qOJfgUdN/9YoQR9YSGmzvAyFTDHpOVlz5YUQFQFMtu8BpkYikfLY5y6afhivIOE+LeAvQEyZFmp1JoA==
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(23010399003)(376014)(36860700016)(82310400026)(1800799024)(261021135927099003)(261021123027099003)(11063799006)(56012099006)(261026140227099003)(10067099003)(261028144727099003)(261021121427099003)(261022105027099003)(261026121527099003)(261102123227099003)(261009223027099003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(36860700016)(1800799024)(82310400026)(23010399003)(10067099003)(56012099006)(11063799006)(261021135927099003)(261021123027099003)(261009223027099003)(261022105027099003)(261026140227099003)(261028144727099003)(261026121527099003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	WJ+zta0drAyKpd+MlhNPYbjWomXTl4SgSol8aMLJnd3nxplUPQm8UrJlX8SlCFLAq9ODp09eE9Ac6KjXLDGsW87Ao5pGbD2IxM31t9tvg24z2PCNDw0Djm9Abx76h8IC/Dqhjfir2XbxLHqJNX38/uar5OUVIBBZCT7AyViWilA5MK0t3SqrdG6+jbMczX7RKoYnxqjpU9VyFOY0kjJC9RzsqHZz16uG0hNSr1XdY7L8yka+7efhvgO/4025UQ2X6oB3ceFuUirY8nTgeBmxNXMfLxvOSXQQ2gnTXwZv8vggYwocsK8hmZlAaHAW2c5xYFgq8oySlABARcmnU+1h2QnHOzJUEfYTZFEG05nW8vxfVQZY6Ahzc1Rnfy1SVjKqGWv9PNG6ZrI9M4BdkP5hWtGpNN2esRTDEKnMbsQpeai9PQ9Ubx1sZkAZD01Nu5fW
+	MbFvVK6hK9lrA6VShk3QblSND9nv60/k18k+6WVmZ8nQO5KnSxxgblYT8uP4A1OUkrV5HQWFE5tkM3AUQw6jpv97h0G/sWg0ZrlCDPRJ0nSPjt191Qd334c7ZZDNd59bWuckPfFaav+oTF5BR8wjlZd4wfpNIl7kTPogBNcavHk6mrfHxBl7hCxiG0b2Fz+XPJ7JYZgJMigXBd+qudQoDwYR6QrxUaKkW9FbcNyfubn3RsSK+Ou1qs2/OjCGjXv176d7XPCMnWC0Tbh0tLWtucgtjc1FZLN1mqr5s+eX/cM/N/E85T4MtP4kbKCdkZRHDmG8wTIR+jjsDeNJ1Xz636HrJBJTzbvXG4Dfy5/CXIx6NDNNVVVGTj2f5RUJKJ4HfjOCG5KP/CPP30H5MkqZgWxgO0RFqNL2dhIZ/7FKHpNt792Zq4psHfQkILfc4z95
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Nov 2026 14:45:15.9126
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Nov 2026 14:45:17.3373
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e88d1399-ec43-4ed6-d7f2-08df464bb99b
+X-MS-Exchange-CrossTenant-Network-Message-Id: a675e828-1352-4c2f-52f7-08df464bba71
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BY1PEPF00026958.namprd05.prod.outlook.com
+	BY1PEPF00026959.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL4PR12MB9481
-X-purgate-ID: tlsNG-d25034/1795099525-5270FA5B-A928C57D/0/0
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DSVPR12MB803185
+X-purgate-ID: tlsNG-bad1c0/1795099523-FCC15034-4852C9C7/0/0
 X-purgate-type: clean
-X-purgate-size: 8986
+X-purgate-size: 2876
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -138,250 +141,77 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-cpu_has_amd_erratum() takes the family-model-stepping ranges of an
-erratum as variadic arguments, which MISRA C Rule 17.1 forbids, and the
-ranges themselves are packed into integers by AMD_MODEL_RANGE(), which
-makes them hard to read.
-
-Replace it with one static inline predicate per erratum in asm/amd.h,
-stating the vendor, family and models it covers.
-
-No functional change.
+Remove the exclusions now that all in-scope files inside are clean on
+the regression subset.
 
 Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+Acked-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 ---
- xen/arch/x86/cpu/amd.c                 | 32 +--------------
- xen/arch/x86/domain.c                  |  2 +-
- xen/arch/x86/hvm/svm/asid.c            |  2 +-
- xen/arch/x86/hvm/svm/svm.c             |  2 +-
- xen/arch/x86/include/asm/amd.h         | 55 ++++++++++----------------
- xen/arch/x86/x86_emulate/fpu.c         |  7 ++--
- xen/arch/x86/x86_emulate/x86_emulate.c |  5 ---
- 7 files changed, 27 insertions(+), 78 deletions(-)
+ .../eclair_analysis/ECLAIR/deviations.ecl     |  3 --
+ docs/misra/exclude-list.json                  | 36 -------------------
+ 2 files changed, 39 deletions(-)
 
-diff --git a/xen/arch/x86/cpu/amd.c b/xen/arch/x86/cpu/amd.c
-index 0515a314dc..a2386cbfa4 100644
---- a/xen/arch/x86/cpu/amd.c
-+++ b/xen/arch/x86/cpu/amd.c
-@@ -317,36 +317,6 @@ void amd_set_cpuid_user_dis(bool enable)
- 	wrmsrl(MSR_K8_HWCR, val);
- }
+diff --git a/automation/eclair_analysis/ECLAIR/deviations.ecl b/automation/eclair_analysis/ECLAIR/deviations.ecl
+index 58af4fb5cd..9aa443e8fd 100644
+--- a/automation/eclair_analysis/ECLAIR/deviations.ecl
++++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
+@@ -189,9 +189,6 @@ context of R7.2."
+ -file_tag+={adopted_r7_2,"^xen/include/efi/efiapi\\.h$"}
+ -file_tag+={adopted_r7_2,"^xen/include/efi/efidef\\.h$"}
+ -file_tag+={adopted_r7_2,"^xen/include/efi/efiprot\\.h$"}
+--file_tag+={adopted_r7_2,"^xen/arch/x86/cpu/intel\\.c$"}
+--file_tag+={adopted_r7_2,"^xen/arch/x86/cpu/amd\\.c$"}
+--file_tag+={adopted_r7_2,"^xen/arch/x86/cpu/common\\.c$"}
+ -config=MC3A2.R7.2,reports+={deliberate,"any_area(any_loc(file(adopted_r7_2)))"}
+ -doc_end
  
--/*
-- * Check for the presence of an AMD erratum. Arguments are defined in amd.h 
-- * for each known erratum. Return 1 if erratum is found.
-- */
--int cpu_has_amd_erratum(const struct cpuinfo_x86 *cpu, ...)
--{
--	va_list ap;
--	u32 range;
--	u32 ms;
--	
--	if (cpu->vendor != X86_VENDOR_AMD)
--		return 0;
--
--	/* Match family-model-stepping range */
--	va_start(ap, cpu);
--
--	ms = (cpu->model << 4) | cpu->stepping;
--	while ((range = va_arg(ap, int))) {
--		if ((cpu->family == AMD_MODEL_RANGE_FAMILY(range)) &&
--		    (ms >= AMD_MODEL_RANGE_START(range)) &&
--		    (ms <= AMD_MODEL_RANGE_END(range))) {
--			va_end(ap);
--			return 1;
--		}
--	}
--
--	va_end(ap);
--	return 0;
--}
--
- /*
-  * Disable C1-Clock ramping if enabled in PMM7.CpuLowPwrEnh on 8th-generation
-  * cores only. Assume BIOS has setup all Northbridges equivalently.
-@@ -1208,7 +1178,7 @@ static void cf_check init_amd(struct cpuinfo_x86 *c)
- 	if (c->family == 0x10)
- 		__clear_bit(X86_FEATURE_MONITOR, c->x86_capability);
- 
--	if (!cpu_has_amd_erratum(c, AMD_ERRATUM_121))
-+	if (!cpu_has_amd_erratum_121(c))
- 		opt_allow_unsafe = 1;
- 	else if (opt_allow_unsafe < 0)
- 		panic("Xen will not boot on this CPU for security reasons"
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index 74513a79a7..031b292b08 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -833,7 +833,7 @@ int arch_domain_create(struct domain *d,
-     if ( !is_hvm_domain(d) )
-         d->options |= XEN_DOMCTL_CDF_oos_off;
- 
--    if ( d->domain_id && cpu_has_amd_erratum(&boot_cpu_data, AMD_ERRATUM_121) )
-+    if ( d->domain_id && cpu_has_amd_erratum_121(&boot_cpu_data) )
-     {
-         if ( !opt_allow_unsafe )
+diff --git a/docs/misra/exclude-list.json b/docs/misra/exclude-list.json
+index 2b874dfd3b..a52f0d6429 100644
+--- a/docs/misra/exclude-list.json
++++ b/docs/misra/exclude-list.json
+@@ -33,42 +33,6 @@
+             "rel_path": "arch/x86/acpi/lib.c",
+             "comment": "Imported from Linux, ignore for now"
+         },
+-        {
+-            "rel_path": "arch/x86/cpu/amd.c",
+-            "comment": "Imported from Linux, ignore for now"
+-        },
+-        {
+-            "rel_path": "arch/x86/cpu/centaur.c",
+-            "comment": "Imported from Linux, ignore for now"
+-        },
+-        {
+-            "rel_path": "arch/x86/cpu/common.c",
+-            "comment": "Imported from Linux, ignore for now"
+-        },
+-        {
+-            "rel_path": "arch/x86/cpu/hygon.c",
+-            "comment": "Imported from Linux, ignore for now"
+-        },
+-        {
+-            "rel_path": "arch/x86/cpu/intel.c",
+-            "comment": "Imported from Linux, ignore for now"
+-        },
+-        {
+-            "rel_path": "arch/x86/cpu/intel_cacheinfo.c",
+-            "comment": "Imported from Linux, ignore for now"
+-        },
+-        {
+-            "rel_path": "arch/x86/cpu/mcheck/non-fatal.c",
+-            "comment": "Imported from Linux, ignore for now"
+-        },
+-        {
+-            "rel_path": "arch/x86/cpu/mtrr/*",
+-            "comment": "Imported from Linux, ignore for now"
+-        },
+-        {
+-            "rel_path": "arch/x86/cpu/mwait-idle.c",
+-            "comment": "Imported from Linux, ignore for now"
+-        },
          {
-diff --git a/xen/arch/x86/hvm/svm/asid.c b/xen/arch/x86/hvm/svm/asid.c
-index c8d86938d1..e070d97ef8 100644
---- a/xen/arch/x86/hvm/svm/asid.c
-+++ b/xen/arch/x86/hvm/svm/asid.c
-@@ -16,7 +16,7 @@ void svm_asid_init(const struct cpuinfo_x86 *c)
-     unsigned int nasids = 0;
- 
-     /* Check for erratum #170, and leave ASIDs disabled if it's present. */
--    if ( !cpu_has_amd_erratum(c, AMD_ERRATUM_170) )
-+    if ( !cpu_has_amd_erratum_170(c) )
-         nasids = cpuid_ebx(0x8000000aU);
- 
-     hvm_asid_init(nasids);
-diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
-index bfca1eda4a..fd89b9bd36 100644
---- a/xen/arch/x86/hvm/svm/svm.c
-+++ b/xen/arch/x86/hvm/svm/svm.c
-@@ -1439,7 +1439,7 @@ static void svm_init_erratum_383(const struct cpuinfo_x86 *c)
-     uint64_t msr_content;
- 
-     /* check whether CPU is affected */
--    if ( !cpu_has_amd_erratum(c, AMD_ERRATUM_383) )
-+    if ( !cpu_has_amd_erratum_383(c) )
-         return;
- 
-     /* use safe methods to be compatible with nested virtualization */
-diff --git a/xen/arch/x86/include/asm/amd.h b/xen/arch/x86/include/asm/amd.h
-index 762b1fbf7a..3ed133fcd5 100644
---- a/xen/arch/x86/include/asm/amd.h
-+++ b/xen/arch/x86/include/asm/amd.h
-@@ -6,43 +6,31 @@
- #define __AMD_H__
- 
- #include <asm/cpufeature.h>
-+#include <asm/x86-vendors.h>
- 
--/* AMD errata checking
-- *
-- * Errata are defined using the AMD_LEGACY_ERRATUM() macro, which takes a
-- * variable number of family-specific model-stepping ranges created by
-- * AMD_MODEL_RANGE().
-- *
-- * Example:
-- * #define AMD_ERRATUM_319                                              \
-- *   AMD_LEGACY_ERRATUM(AMD_MODEL_RANGE(0x10, 0x2, 0x1, 0x4, 0x2),      \
-- *                      AMD_MODEL_RANGE(0x10, 0x8, 0x0, 0x8, 0x0),      \
-- *                      AMD_MODEL_RANGE(0x10, 0x9, 0x0, 0x9, 0x0))
-- *   
-+/*
-+ * AMD errata Xen works around, each named after its number in the Revision
-+ * Guide for the families it affects.
-  */
-+static inline bool cpu_has_amd_erratum_121(const struct cpuinfo_x86 *c)
-+{
-+    return c->vendor == X86_VENDOR_AMD && c->family == 0xf && c->model <= 0x3f;
-+}
- 
--#define AMD_LEGACY_ERRATUM(...)         __VA_ARGS__, 0
--#define AMD_MODEL_RANGE(f, m_start, s_start, m_end, s_end)              \
--    (((f) << 24) | ((m_start) << 16) | ((s_start) << 12) | \
--     ((m_end) << 4) | (s_end))
--#define AMD_MODEL_RANGE_FAMILY(range)   (((range) >> 24) & 0xff)
--#define AMD_MODEL_RANGE_START(range)    (((range) >> 12) & 0xfff)
--#define AMD_MODEL_RANGE_END(range)      ((range) & 0xfff)
-+static inline bool cpu_has_amd_erratum_170(const struct cpuinfo_x86 *c)
-+{
-+    return c->vendor == X86_VENDOR_AMD && c->family == 0xf && c->model <= 0x67;
-+}
- 
--#define AMD_ERRATUM_121                                                 \
--    AMD_LEGACY_ERRATUM(AMD_MODEL_RANGE(0x0f, 0x0, 0x0, 0x3f, 0xf))
-+static inline bool cpu_has_amd_erratum_383(const struct cpuinfo_x86 *c)
-+{
-+    return c->vendor == X86_VENDOR_AMD && c->family == 0x10;
-+}
- 
--#define AMD_ERRATUM_170                                                 \
--    AMD_LEGACY_ERRATUM(AMD_MODEL_RANGE(0x0f, 0x0, 0x0, 0x67, 0xf))
--
--#define AMD_ERRATUM_383                                                 \
--    AMD_LEGACY_ERRATUM(AMD_MODEL_RANGE(0x10, 0x0, 0x0, 0xff, 0xf))
--
--#define AMD_ERRATUM_573							\
--    AMD_LEGACY_ERRATUM(AMD_MODEL_RANGE(0x0f, 0x0, 0x0, 0xff, 0xf),	\
--                       AMD_MODEL_RANGE(0x10, 0x0, 0x0, 0xff, 0xf),	\
--                       AMD_MODEL_RANGE(0x11, 0x0, 0x0, 0xff, 0xf),	\
--                       AMD_MODEL_RANGE(0x12, 0x0, 0x0, 0xff, 0xf))
-+static inline bool cpu_has_amd_erratum_573(const struct cpuinfo_x86 *c)
-+{
-+    return c->vendor == X86_VENDOR_AMD && c->family >= 0xf && c->family <= 0x12;
-+}
- 
- /*
-  * The Zen1 and Zen2 microarchitectures are implemented by AMD (Fam17h) and
-@@ -64,9 +52,6 @@
- #define is_zen5_uarch() (!boot_cpu_has(X86_FEATURE_FRED))
- #define is_zen6_uarch()   boot_cpu_has(X86_FEATURE_FRED)
- 
--struct cpuinfo_x86;
--int cpu_has_amd_erratum(const struct cpuinfo_x86 *cpu, ...);
--
- extern int8_t opt_allow_unsafe;
- 
- void fam10h_check_enable_mmcfg(void);
-diff --git a/xen/arch/x86/x86_emulate/fpu.c b/xen/arch/x86/x86_emulate/fpu.c
-index 88df238981..c024f3c601 100644
---- a/xen/arch/x86/x86_emulate/fpu.c
-+++ b/xen/arch/x86/x86_emulate/fpu.c
-@@ -12,10 +12,9 @@
- 
- #ifdef __XEN__
- # include <asm/amd.h>
--# define cpu_has_amd_erratum(nr) \
--         cpu_has_amd_erratum(&current_cpu_data, AMD_ERRATUM_##nr)
-+# define cpu_has_amd_erratum_573() cpu_has_amd_erratum_573(&current_cpu_data)
- #else
--# define cpu_has_amd_erratum(nr) 0
-+# define cpu_has_amd_erratum_573() false
- #endif
- 
- /* Floating point status word definitions. */
-@@ -133,7 +132,7 @@ int x86emul_fpu(struct x86_emulate_state *s,
-         switch ( s->modrm )
-         {
-         case 0xfb: /* fsincos */
--            fail_if(cpu_has_amd_erratum(573));
-+            fail_if(cpu_has_amd_erratum_573());
-             /* fall through */
-         case 0xc0 ... 0xc7: /* fld %stN */
-         case 0xc8 ... 0xcf: /* fxch %stN */
-diff --git a/xen/arch/x86/x86_emulate/x86_emulate.c b/xen/arch/x86/x86_emulate/x86_emulate.c
-index 09d43d204b..2027f7ee6a 100644
---- a/xen/arch/x86/x86_emulate/x86_emulate.c
-+++ b/xen/arch/x86/x86_emulate/x86_emulate.c
-@@ -12,7 +12,6 @@
- 
- # include <xen/event.h>
- 
--# include <asm/amd.h> /* cpu_has_amd_erratum() */
- # include <asm/processor.h> /* current_cpu_info */
- # include <asm/x86_emulate.h>
- # include <asm/xstate.h>
-@@ -22,9 +21,6 @@
- # undef cpuid
- # undef wbinvd
- 
--# define cpu_has_amd_erratum(nr) \
--         cpu_has_amd_erratum(&current_cpu_data, AMD_ERRATUM_##nr)
--
- #else /* !__XEN__ */
- 
- /* See gcc bug 100680, but here don't bother making this version dependent. */
-@@ -34,7 +30,6 @@
-      (typeof(x))x_;                        \
- })
- 
--# define cpu_has_amd_erratum(nr) 0
- # define cpu_has_mpx false
- # define read_bndcfgu() 0
- # define xstate_set_init(what)
+             "rel_path": "arch/x86/delay.c",
+             "comment": "Imported from Linux, ignore for now"
 -- 
 2.43.0
 
