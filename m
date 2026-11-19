@@ -2,34 +2,34 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 71E06606A339
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2026 21:30:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 65D89606A33F
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2026 21:30:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=S6Co78Iw
-Received: from list by lists.xenproject.org with outflank-mailman.1497123.1695480 (Exim 4.92)
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=S4up3/DH
+Received: from list by lists.xenproject.org with outflank-mailman.1497126.1695515 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xU9i9-0003KJ-86; Thu, 19 Nov 2026 21:30:29 +0000
+	id 1xU9iH-0004eW-1F; Thu, 19 Nov 2026 21:30:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1497123.1695480; Thu, 19 Nov 2026 21:30:29 +0000
+Received: by outflank-mailman (output) from mailman id 1497126.1695515; Thu, 19 Nov 2026 21:30:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xU9i8-0003GW-ED; Thu, 19 Nov 2026 21:30:28 +0000
-Received: by outflank-mailman (input) for mailman id 1497123;
+	id 1xU9iF-0004YI-C5; Thu, 19 Nov 2026 21:30:35 +0000
+Received: by outflank-mailman (input) for mailman id 1497126;
  Thu, 19 Nov 2026 21:30:19 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xU9hz-0001Cv-BF
+ (envelope-from <gwd@xenproject.org>) id 1xU9hz-0001D8-F6
  for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 21:30:19 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xU9hy-00000006tHb-3s0e;
+ (envelope-from <gwd@xenproject.org>) id 1xU9hy-00000006tHR-3jIy;
  Thu, 19 Nov 2026 21:30:19 +0000
 Received: from [217.155.165.12] (helo=Georges-MacBook-Pro-2.tail87ea19.ts.net)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xU9MX-0000000CVBH-2VNJ;
- Thu, 19 Nov 2026 21:08:09 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xU9Mx-0000000CVBH-1fqM;
+ Thu, 19 Nov 2026 21:08:35 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -39,27 +39,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:Content-Type:
-	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=xdrO5K/YS2R835ir7OGtBuIoygfpIodW4HkAjPJnUxc=; b=S6Co78Iw7ihcudJ9kcvJnMi8xr
-	n4oVQRJSCVmBKLWgR6vgbrfl3YuYsN2oVQGaCU1npDukSkMdCGJXInAQyJQ4DE4gRc5ak0ZEFfARF
-	5xOIpGb77j4rLnJcFXzl3mjP1sEBDE6eO9HOuU6Ke+04mhhGk4YUER2Z2nwK5XPn+Lw8=;
+	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
+	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
+	bh=sTjqPTsK2pi81b/09BzAb/eLP8sEK4iy5zRkCRfHDW0=; b=S4up3/DHzCHOKIGFdVJG22hkro
+	tmfg2V1atfdWR1N8wLqNJJoXuYmizxcRET+UIJRqNitqomHdRk9s0DS+UeRrBdRAQ6FNMRDj/bZfV
+	Eura4W4LRw70HVNoxwVt+FikfwA3RYIBtiAf1sLpvUv86YeHwwErXyEBmPlpBXeyntPQ=;
 From: George Dunlap <gwd@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
+Cc: Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
 	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v7 22/50] x86/mm: prepare create_perdomain_mapping() for per-vCPU perdomain areas
-Date: Thu, 19 Nov 2026 21:07:13 +0000
-Message-ID: <20261119-asi-hvm-v7-22-6551b6d5c879@xenproject.org>
+Subject: [PATCH v7 46/50] x86/cpufreq: move the CPU mask out of struct drv_cmd
+Date: Thu, 19 Nov 2026 21:07:37 +0000
+Message-ID: <20261119-asi-hvm-v7-46-6551b6d5c879@xenproject.org>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261119-asi-hvm-v7-0-6551b6d5c879@xenproject.org>
 References: <20261119-asi-hvm-v7-0-6551b6d5c879@xenproject.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
@@ -68,183 +66,117 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Roger Pau Monné <roger.pau@citrix.com>
+drv_read() and drv_write() take a struct drv_cmd, whose mask field
+says which CPUs to run the access on.  Only the initiator uses the
+mask, to route the call: do_drv_read() and do_drv_write(), which run
+on the target CPUs, never read it.  It may point at the initiator's
+stack (acpi_cpufreq_target()'s online_policy_cpus).
 
-We want to change per-domain mappings to be per-vCPU mappings.  In
-preparation for that, we want to arrange that
-create_perdomain_mapping() work either with a single perdomain area,
-or with a per-vCPU perdomain area.
+Drop the field and pass the mask to drv_read() and drv_write() as a
+parameter, so that the structure handed to the target CPUs holds only
+what they use.
 
-The remaining callers are already in a vCPU context.  This is no
-accident: much of the perdomain area has always been laid out in
-per-vCPU slices -- each vCPU has its own GDT/LDT window and its own
-COMPAT_ARG_XLAT pages, and now its own state window and
-map_domain_pages() slots -- and each vCPU's slice is set up as that vCPU
-is created.  For these callers, we just need to change the parameter
-from a domain pointer to a vCPU pointer.  Once the perdomain area
-itself becomes per-vCPU, the same calls will populate the owning
-vCPU's own area rather than slices of a shared one.
+No functional change.
 
-Note that we cannot yet do a parallel movement of
-free_perdomain_mappings(): the per-domain page-table hierarchy is
-still a single domain-wide structure shared by all vCPUs, so tearing
-it down from a per-vCPU path would pull the mappings out from under
-sibling vCPUs (e.g. on a partially failed, retryable
-XEN_DOMCTL_max_vcpus), and vCPU-create error paths can rely on domain
-destruction to free a partially set up hierarchy.  Once a domain's
-area is per-vCPU, a later change gives its vCPUs a teardown of their
-own; the domain-wide teardown stays for domains with a shared area, PV
-ones included.
+Groundwork for per-CPU stack mappings, to come as part of Address
+Space Isolation, which take away a CPU's access to other CPUs' stacks:
+a subsequent change passes the structure to the target CPUs by value,
+and a copy must carry no stack address.
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-4-8, Claude Code:claude-opus-5-5
+Assisted-by: Claude Code:claude-opus-4-8, Claude Code:claude-opus-5-5
 Signed-off-by: George Dunlap <gwd@xenproject.org>
 ---
 Changes in v7:
-- Convert the calls for the vCPU state window and the map_domain_pages()
-  slots too, which now come earlier in the series.
-
-Changes in v6:
-- Rebase over "x86/mm: allocate the per-domain L3 in
-  arch_domain_create()".
-- No longer add an implicit L3 creation in arch_vcpu_create().
-
-Changes in v5:
-- Message: the domain-wide mapcache is one pool, not per-vCPU windows:
-  drop it from the per-vCPU slices, and say "much of" the area.
-
-Changes in v4:
-- Message: drop a sentence repeating its paragraph, and say that the
-  domain-wide teardown stays for domains with a shared area (Roger).
-- End the comment in arch_vcpu_create() at the colon (Roger).
-
-Changes in v3:
-- Rebased onto staging without the GDT/LDT conversions (for the
-  HVM-only series): the capture parameters stay, as the PV GDT/LDT
-  stash still uses them.
-
-Changes in v2:
-- Added to the series
-
-Changes since the previously posted version:
-- Keep free_perdomain_mappings() (and hence perdomain teardown)
-  domain-scoped.
-- Keep the idle domain without a perdomain area.
-- Retitle (was: "x86/mm: switch {create,destroy}_perdomain_mapping()
-  domain parameter to vCPU"); destroy_perdomain_mapping() was switched
-  in a separate patch.
-- Split the removal of mapcache_domain_init()'s redundant
-  create_perdomain_mapping() call into its own (preceding) patch.
+- New in this version.
 ---
- xen/arch/x86/domain.c         | 2 +-
- xen/arch/x86/domain_page.c    | 8 ++++----
- xen/arch/x86/include/asm/mm.h | 2 +-
- xen/arch/x86/mm.c             | 3 ++-
- xen/arch/x86/pv/domain.c      | 2 +-
- xen/arch/x86/x86_64/mm.c      | 2 +-
- 6 files changed, 10 insertions(+), 9 deletions(-)
+ xen/arch/x86/acpi/cpufreq/acpi.c | 28 +++++++++++++---------------
+ 1 file changed, 13 insertions(+), 15 deletions(-)
 
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index 938523b789..6e33d56588 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -592,7 +592,7 @@ int arch_vcpu_create(struct vcpu *v)
-         BUILD_BUG_ON(VCPU_STATE_IDX_REGS >= VCPU_STATE_NR_PAGES);
-         BUILD_BUG_ON(VCPU_STATE_IDX_EMUL >= VCPU_STATE_NR_PAGES);
-         /* Page tables only; torn down with the rest of the per-domain area. */
--        rc = create_perdomain_mapping(d, VCPU_STATE_START(v),
-+        rc = create_perdomain_mapping(v, VCPU_STATE_START(v),
-                                       VCPU_STATE_NR_PAGES,
-                                       NIL(l1_pgentry_t *), NULL);
-         if ( rc != 0 )
-diff --git a/xen/arch/x86/domain_page.c b/xen/arch/x86/domain_page.c
-index ea759155da..dce66beccd 100644
---- a/xen/arch/x86/domain_page.c
-+++ b/xen/arch/x86/domain_page.c
-@@ -386,7 +386,7 @@ int mapcache_vcpu_init(struct vcpu *v)
-     /* The vCPU's stride of the multipage area. */
-     if ( !is_idle_domain(d) )
-     {
--        int rc = create_perdomain_mapping(d, MAPCACHE_MULTIPAGE_START(v),
-+        int rc = create_perdomain_mapping(v, MAPCACHE_MULTIPAGE_START(v),
-                                           MAPCACHE_MULTIPAGE_ENTRIES,
-                                           NIL(l1_pgentry_t *), NULL);
+diff --git a/xen/arch/x86/acpi/cpufreq/acpi.c b/xen/arch/x86/acpi/cpufreq/acpi.c
+index de67f1aee2..7f843bab60 100644
+--- a/xen/arch/x86/acpi/cpufreq/acpi.c
++++ b/xen/arch/x86/acpi/cpufreq/acpi.c
+@@ -90,7 +90,6 @@ typedef union {
  
-@@ -400,15 +400,15 @@ int mapcache_vcpu_init(struct vcpu *v)
-     if ( ents > dcache->entries )
-     {
-         /* Populate page tables. */
--        int rc = create_perdomain_mapping(d, MAPCACHE_VIRT_START, ents,
-+        int rc = create_perdomain_mapping(v, MAPCACHE_VIRT_START, ents,
-                                           NIL(l1_pgentry_t *), NULL);
- 
-         /* Populate bit maps. */
-         if ( !rc )
--            rc = create_perdomain_mapping(d, (unsigned long)dcache->inuse,
-+            rc = create_perdomain_mapping(v, (unsigned long)dcache->inuse,
-                                           nr, NULL, NIL(struct page_info *));
-         if ( !rc )
--            rc = create_perdomain_mapping(d, (unsigned long)dcache->garbage,
-+            rc = create_perdomain_mapping(v, (unsigned long)dcache->garbage,
-                                           nr, NULL, NIL(struct page_info *));
- 
-         if ( rc )
-diff --git a/xen/arch/x86/include/asm/mm.h b/xen/arch/x86/include/asm/mm.h
-index bbce8c401e..1ef05dcd46 100644
---- a/xen/arch/x86/include/asm/mm.h
-+++ b/xen/arch/x86/include/asm/mm.h
-@@ -607,7 +607,7 @@ int compat_arch_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
- #define IS_NIL(ptr) (!((uintptr_t)(ptr) + sizeof(*(ptr))))
- 
- struct page_info *allocate_perdomain_l3(struct domain *d);
--int create_perdomain_mapping(struct domain *d, unsigned long va,
-+int create_perdomain_mapping(struct vcpu *v, unsigned long va,
-                              unsigned int nr, l1_pgentry_t **pl1tab,
-                              struct page_info **ppg);
- void populate_perdomain_mapping(const struct vcpu *v, unsigned long va,
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index 7cfeceb8c6..26bc2cc229 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -6245,10 +6245,11 @@ struct page_info *allocate_perdomain_l3(struct domain *d)
-     return pg;
+ struct drv_cmd {
+     unsigned int type;
+-    const cpumask_t *mask;
+     drv_addr_union addr;
+     u32 val;
+ };
+@@ -137,25 +136,25 @@ static void cf_check do_drv_write(void *drvcmd)
+     }
  }
  
--int create_perdomain_mapping(struct domain *d, unsigned long va,
-+int create_perdomain_mapping(struct vcpu *v, unsigned long va,
-                              unsigned int nr, l1_pgentry_t **pl1tab,
-                              struct page_info **ppg)
+-static void drv_read(struct drv_cmd *cmd)
++static void drv_read(const cpumask_t *mask, struct drv_cmd *cmd)
  {
-+    struct domain *d = v->domain;
-     struct page_info *pg;
-     l3_pgentry_t *l3tab;
-     l2_pgentry_t *l2tab;
-diff --git a/xen/arch/x86/pv/domain.c b/xen/arch/x86/pv/domain.c
-index 28ea0742ab..f3c711b85b 100644
---- a/xen/arch/x86/pv/domain.c
-+++ b/xen/arch/x86/pv/domain.c
-@@ -313,7 +313,7 @@ int switch_compat(struct domain *d)
+     cmd->val = 0;
  
- static int pv_create_gdt_ldt_l1tab(struct vcpu *v)
- {
--    return create_perdomain_mapping(v->domain, GDT_VIRT_START(v),
-+    return create_perdomain_mapping(v, GDT_VIRT_START(v),
-                                     1U << GDT_LDT_VCPU_SHIFT,
-                                     v->domain->arch.pv.gdt_ldt_l1tab,
-                                     NULL);
-diff --git a/xen/arch/x86/x86_64/mm.c b/xen/arch/x86/x86_64/mm.c
-index f467ed426b..7b04537066 100644
---- a/xen/arch/x86/x86_64/mm.c
-+++ b/xen/arch/x86/x86_64/mm.c
-@@ -732,7 +732,7 @@ void __init zap_low_mappings(void)
+-    ASSERT(cpumask_weight(cmd->mask) == 1);
++    ASSERT(cpumask_weight(mask) == 1);
  
- int setup_compat_arg_xlat(struct vcpu *v)
- {
--    return create_perdomain_mapping(v->domain, ARG_XLAT_START(v),
-+    return create_perdomain_mapping(v, ARG_XLAT_START(v),
-                                     PFN_UP(COMPAT_ARG_XLAT_SIZE),
-                                     NULL, NIL(struct page_info *));
+     /* to reduce IPI for the sake of performance */
+-    if (likely(cpumask_test_cpu(smp_processor_id(), cmd->mask)))
++    if (likely(cpumask_test_cpu(smp_processor_id(), mask)))
+         do_drv_read((void *)cmd);
+     else
+-        on_selected_cpus(cmd->mask, do_drv_read, cmd, 1);
++        on_selected_cpus(mask, do_drv_read, cmd, 1);
  }
+ 
+-static void drv_write(struct drv_cmd *cmd)
++static void drv_write(const cpumask_t *mask, struct drv_cmd *cmd)
+ {
+-    if (cpumask_equal(cmd->mask, cpumask_of(smp_processor_id())))
++    if (cpumask_equal(mask, cpumask_of(smp_processor_id())))
+         do_drv_write((void *)cmd);
+     else
+-        on_selected_cpus(cmd->mask, do_drv_write, cmd, 1);
++        on_selected_cpus(mask, do_drv_write, cmd, 1);
+ }
+ 
+ static u32 get_cur_val(const cpumask_t *mask)
+@@ -193,9 +192,7 @@ static u32 get_cur_val(const cpumask_t *mask)
+         return 0;
+     }
+ 
+-    cmd.mask = cpumask_of(cpu);
+-
+-    drv_read(&cmd);
++    drv_read(cpumask_of(cpu), &cmd);
+     return cmd.val;
+ }
+ 
+@@ -256,6 +253,7 @@ static int cf_check acpi_cpufreq_target(
+     struct processor_performance *perf;
+     struct cpufreq_freqs freqs;
+     cpumask_t online_policy_cpus;
++    const cpumask_t *mask;
+     struct drv_cmd cmd;
+     unsigned int next_state = 0; /* Index into freq_table */
+     unsigned int next_perf_state = 0; /* Index into perf table */
+@@ -304,16 +302,16 @@ static int cf_check acpi_cpufreq_target(
+     }
+ 
+     if (policy->shared_type != CPUFREQ_SHARED_TYPE_ANY)
+-        cmd.mask = &online_policy_cpus;
++        mask = &online_policy_cpus;
+     else
+-        cmd.mask = cpumask_of(policy->cpu);
++        mask = cpumask_of(policy->cpu);
+ 
+     freqs.old = perf->states[perf->state].core_frequency * 1000;
+     freqs.new = data->freq_table[next_state].frequency;
+ 
+-    drv_write(&cmd);
++    drv_write(mask, &cmd);
+ 
+-    if (acpi_pstate_strict && !check_freqs(cmd.mask, freqs.new, data)) {
++    if (acpi_pstate_strict && !check_freqs(mask, freqs.new, data)) {
+         printk(KERN_WARNING "Fail transfer to new freq %d\n", freqs.new);
+         return -EAGAIN;
+     }
 -- 
 2.56.0
 
