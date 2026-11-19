@@ -2,41 +2,41 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E07A606A325
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2026 05:36:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0A927606A326
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2026 05:46:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=oPKecQNT
-Received: from list by lists.xenproject.org with outflank-mailman.1495591.1694457 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20260707 header.b=nXX0WfJq
+Received: from list by lists.xenproject.org with outflank-mailman.1495690.1694493 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTuoO-0002wk-BV; Thu, 19 Nov 2026 05:35:56 +0000
+	id 1xTuyA-0000Ad-L4; Thu, 19 Nov 2026 05:46:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1495591.1694457; Thu, 19 Nov 2026 05:35:56 +0000
+Received: by outflank-mailman (output) from mailman id 1495690.1694493; Thu, 19 Nov 2026 05:46:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTuoO-0002wV-7Z; Thu, 19 Nov 2026 05:35:56 +0000
-Received: by outflank-mailman (input) for mailman id 1495591;
- Thu, 19 Nov 2026 05:35:54 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xTuyA-0000AW-Hu; Thu, 19 Nov 2026 05:46:02 +0000
+Received: by outflank-mailman (input) for mailman id 1495690;
+ Thu, 19 Nov 2026 05:46:00 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <rdunlap@infradead.org>) id 1xTuoM-0002lI-Nq
- for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 05:35:54 +0000
+ (envelope-from <irogers@google.com>) id 1xTuy8-0000AP-OV
+ for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 05:46:00 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xTuoM-007s14-3B
- for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 06:35:54 +0100
+ id 1xTuy7-00AooK-L8
+ for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 06:45:59 +0100
 Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <rdunlap@infradead.org>)
- id 6afe8aa6-bab6-0a2a0a5309dd-0a2a450ca5be-42
- for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 06:35:54 +0100
-Received: from [198.137.202.133] (helo=bombadil.infradead.org)
+ (envelope-from <irogers@google.com>)
+ id 6afe8d01-8faa-0a2a0a5109dd-0a2a450c884a-26
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 06:45:59 +0100
+Received: from [209.85.160.174] (helo=mail-qt1-f174.google.com)
  by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <rdunlap@infradead.org>)
- id 6afe8ab8-f479-0a2a450c0019-c689ca85c53c-3
- for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 06:35:53 +0100
-Received: from [50.53.43.113] (helo=bombadil.infradead.org)
- by bombadil.infradead.org with esmtpsa (Exim 4.100.1 #2 (Red Hat Linux))
- id 1xTuoB-0000000Aufu-26GP; Thu, 19 Nov 2026 05:35:43 +0000
+ (envelope-from <irogers@google.com>)
+ id 6afe8d16-f479-0a2a450c0019-d155a0ae9126-3
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 06:45:59 +0100
+Received: by mail-qt1-f174.google.com with SMTP id
+ d75a77b69052e-55be673e029so117351cf.1
+ for <xen-devel@lists.xenproject.org>; Wed, 18 Nov 2026 21:45:59 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -45,187 +45,182 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=bombadil.20210309 header.d=infradead.org header.i="@infradead.org" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:
-	To:From:Sender:Reply-To:Content-ID:Content-Description;
-	bh=ELh5lc2aPOWRUhM5D4IHCHtXzMf4oMgv7S6UUVSFuJE=; b=oPKecQNTYubY0Dp8vcR5jIBDM2
-	3Go3aVyKAU8FdmIpJi0naXVl32KClQXNvqJdTYxwmyxklmJW1MrA7JPp/pE6mBxz2VslXr2LvZSl+
-	AsGoZqPUrizrPpY6noR/PEqIyZBoLu8l8FRiHTaAyMwQOskhrXcfXawpj9H2ly2y9+K2mcen5J5Di
-	Ll7sBPow7Tfn5dKijG8+yV7rRHysHc8oY+2/SqopSy+k/yed8FxbJcCx/nEhEQ43n7Bgb2Nd7MSgh
-	h1tzWKOF5S/oRaOnw2K7+kpqzYEXYQ9BLusF1w+9yCNworNuHqSQVRF0wWahdtCddIrUJPapoQNHk
-	wSYPaUjg==;
-From: Randy Dunlap <rdunlap@infradead.org>
-To: linux-kernel@vger.kernel.org
-Cc: Randy Dunlap <rdunlap@infradead.org>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	linux-doc@vger.kernel.org,
-	David Hildenbrand <david@kernel.org>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Jason Gunthorpe <jgg@nvidia.com>,
-	Leon Romanovsky <leonro@nvidia.com>,
-	linux-mm@kvack.org,
-	Jaroslav Kysela <perex@perex.cz>,
-	Takashi Iwai <tiwai@suse.com>,
-	linux-sound@vger.kernel.org,
-	Jens Axboe <axboe@kernel.dk>,
-	linux-block@vger.kernel.org,
-	Marcel Holtmann <marcel@holtmann.org>,
-	Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
-	linux-bluetooth@vger.kernel.org,
-	Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
-	Jason Wang <jasowangio@gmail.com>,
-	David Heidelberg <david@ixit.cz>,
-	oe-linux-nfc@lists.linux.dev,
-	Chas Williams <3chas3@gmail.com>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@kernel.org>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Paolo Abeni <pabeni@redhat.com>,
-	netdev@vger.kernel.org,
-	Helge Deller <deller@gmx.de>,
-	linux-fbdev@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	MPT-FusionLinux.pdl@broadcom.com,
-	"James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
-	"Martin K. Petersen" <mkp@kernel.org>,
-	linux-scsi@vger.kernel.org,
-	Miquel Raynal <miquel.raynal@bootlin.com>,
-	Richard Weinberger <richard@nod.at>,
-	Vignesh Raghavendra <vigneshr@ti.com>,
-	Zhihao Cheng <chengzhihao1@huawei.com>,
-	linux-mtd@lists.infradead.org,
-	Neill Kapron <nkapron@google.com>,
-	Andrey Konovalov <andreyknvl@gmail.com>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	linux-usb@vger.kernel.org,
-	Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	xen-devel@lists.xenproject.org,
-	Hans de Goede <hansg@kernel.org>,
-	Arnd Bergmann <arnd@arndb.de>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	=?UTF-8?q?Eugenio=20P=C3=A9rez?= <eperezma@redhat.com>,
-	Sean Christopherson <seanjc@google.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	kvm@vger.kernel.org,
-	virtualization@lists.linux.dev,
-	Jan Kara <jack@suse.cz>,
-	linux-fsdevel@vger.kernel.org,
-	"Theodore Ts'o" <tytso@mit.edu>,
-	linux-ext4@vger.kernel.org,
-	Mike Marshall <hubcap@omnibond.com>,
-	devel@lists.orangefs.org,
-	Paulo Alcantara <pc@manguebit.org>,
-	Namjae Jeon <linkinjeon@kernel.org>,
-	linux-cifs@vger.kernel.org,
-	Jaegeuk Kim <jaegeuk@kernel.org>,
-	Chao Yu <chao@kernel.org>,
-	linux-f2fs-devel@lists.sourceforge.net,
-	Florian Fainelli <florian.fainelli@broadcom.com>,
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
-	Tzung-Bi Shih <tzungbi@kernel.org>,
-	Benson Leung <bleung@chromium.org>,
-	David Airlie <airlied@gmail.com>,
-	Simona Vetter <simona@ffwll.ch>,
-	Alex Deucher <alexander.deucher@amd.com>,
-	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
-	amd-gfx@lists.freedesktop.org,
-	Jani Nikula <jani.nikula@linux.intel.com>,
-	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-	Rodrigo Vivi <rodrigo.vivi@intel.com>,
-	Tvrtko Ursulin <tursulin@ursulin.net>,
-	intel-gfx@lists.freedesktop.org,
-	Matthew Brost <matthew.brost@intel.com>,
-	=?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
-	intel-xe@lists.freedesktop.org
-Subject: [PATCH v2 09/12] docs: ioctl-number: update virtualization entries
-Date: Wed, 18 Nov 2026 21:35:10 -0800
-Message-ID: <20261119053514.255348-10-rdunlap@infradead.org>
-X-Mailer: git-send-email 2.56.1
-In-Reply-To: <20261119053514.255348-1-rdunlap@infradead.org>
-References: <20261119053514.255348-1-rdunlap@infradead.org>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=google.com header.i="@google.com" header.h="Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
+ARC-Seal: i=1; a=rsa-sha256; t=1795067158; cv=none;
+        d=google.com; s=arc-20260327;
+        b=Vz6zA4Qoe7lhtbn69/ARAczXXqeaO0KKDsTEh3nmIQtoOJzOPsN+2gaQ4n59WJbCgf
+         EXVpcoN0pGSpIug6JO/U5fQJ0xpnG1VVUqHxbWoN21n5ZOxFODIoSUzVQUWdY3xWtrKU
+         Kw833ndlZYoNKAmx0L0o9LVmIc0++I2lzCxaU5ro3c0Hj16DdiKGU40iBDLMhhpfCLWw
+         JDz+uR02qZFm5tiQ8cP/TupZby8x5HwCS17o0kdecpGycOfkcgKbMKCN8lmoLW8dOIvO
+         lwwgOQ8Kdap8gI/bMcIuSF+rgWW/oWFR2qRoNagqn3yHGpgCynj/Ew/NwFfCaAnAKwiX
+         wMlw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=cIkoHsOVRZS7gIowPl6xkao6tH+bfcK9X/Z+HF8PGU0=;
+        fh=YNw5Bu8yimON7VdOZW3GUBIittkH8mYhBJJox3P6BLw=;
+        b=d7ZbyoTfDzf7GSyJ5U5etoZeta9DiGe3EI4y8dhBkTrkYGhDGuplTpI0ct6i+ogqlc
+         Ei8pmzOXv8y/ohctWZEOwUO30WrbBe8LtocxkGuZoaj3qsLOVBdwLRNTU2YNScJx+aqS
+         hrQ2dsE2asE0Ubs77yStL6GYNZM2baluH9L8OpFuItdHafyIhwI75z5ulUkUCn3xGkBF
+         hKbWfJ7ho2RmPHEEtIizqzCe7MuYUZ3zeVpF+BTqNeotq7xAyYdUnl/AWfllYpZw/mze
+         rN6Cb6Xbk6s0OblQ2yWKZQA0HoaCwkMJkiwsxXvyj7/vfkrPj23YEGz7+cSmaK9XFcTa
+         nLpg==;
+        darn=lists.xenproject.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20260707; t=1795067158; x=1795671958; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=cIkoHsOVRZS7gIowPl6xkao6tH+bfcK9X/Z+HF8PGU0=;
+        b=nXX0WfJqFltgvyG3Ka3njMAcxH1bXgVZTRlo0wfTTUU5VYGEjISXuw/PwpnhG5IvGU
+         5I2DVDG3g8GJCvcGzqgiEffftqFJN7MksNPsYKWvqV4GReS5HTUN2adBZ7EFtsATOp2y
+         ksTCH4PMP6yNiwYtJGbG28D8fGL+AkYFuKGXiojk/tN44jP+pO+4fPl+pMqgMIN/8noj
+         9D1jC+yCHqJekMQ0qjMBCPuCCyzh/juLCF/dOlMmsjDQ1Z7cANy1JlOl6Ue+SlH43YHV
+         i0yAerVCXYPtp/ofYXqjVqVE4nmcdqw4lIH82XoV7GqClVRQ42vDJGXmMnNW4lrv7yS7
+         HHkw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795067158; x=1795671958;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=cIkoHsOVRZS7gIowPl6xkao6tH+bfcK9X/Z+HF8PGU0=;
+        b=Wchv+vXnLLEPQE8WGKv/2kB98U4dg33mRs07P7c6ZncH8fKSU8YS85R1pATH32EBR4
+         dH91uGB6LqiODBuUAfFoZXScy9HZqZo+6mwaGGHvsqSl99hTJnl55/KvBllvJ+RudYYZ
+         +xVUOH17ZYaXizIlYrZ3H5iWfdAiAeoGxUC7C3C6PIiP5vEropZ0Ng+J9PI1TOJqklQq
+         nddgMFEWdx2YS4X83iSIq2dgjPDCsadtBWRv1Pb1ELjvsiErH0evoBaUzQPx67ORz2Aq
+         GL2eGfE7Aqmx+jX1oU4LrUXs9LcAEXw62tCdPPNGLTajUen+WRMYMhm7ynHRVh7/JzJ3
+         383w==
+X-Forwarded-Encrypted: i=1; AL+hErHz5An9v2V6ymBfqi0C+GWnCZ3ru5R1cUZQ+S/4Q12sZrRSVMnbLno8XGh3VqXgpto6eNGHQHDirdI=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z9BGwGBcV8mDAs9crYjAuXv81fSEwsP578TCizDfp+WzDgvWMP+
+	vZp5n68SiXIQnUT8SmNR0NM5kf/yl0LQECeizReFr8r2NroAsaQVdYtYjm3flyVg3JYZCJzJsJ3
+	/AGnyTjrakbLdFgW7ReUr0jmdJtjBiMYkliTvF6O8
+X-Gm-Gg: AYBFou1OFG4JYcYsIcvBq6UmcvjmhkNlK6izkUyM5AfDWU6epTp7+vXLfliB2WvaYBD
+	d+jGQHLN0XJ1b/KkcaSdvSVN7N5Q2QKUT9HT65IUSxRsbuFqCx6QJ6Ry21l2/jwy+gvtdP3u490
+	+v2rqbIBcnaEoTuyae424dyZJW62Fv3/hr4JNnpWsOxnETSHtfVmtxQzJ3K7UUF463ZX69GULCR
+	2u+OQsmojVMfVzjaGiMzlIcnvzTIRtfl4+UEZsC8Lbnkw3rT/ltqGWMeIuEkeyiQbFPShcwYa16
+	biGHOCiFB8HEg4e8ydBBl2uqr+ckVnXhggxFl1NrRmJ/30/efCA2PNH2kTjcOoEQzV7vfY/sKVA
+	pl6cgBW4MwoYC8+Z/Whh5GnYK3hGBC+niXaAr
+X-Received: by 2002:a05:622a:4808:b0:536:934f:7da2 with SMTP id
+ d75a77b69052e-55d6c7995f9mr6557911cf.2.1795067157461; Wed, 18 Nov 2026
+ 21:45:57 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d25034/1795066554-77CD3A5B-EB8F9689/0/0
+References: <20261108223913.3624571-1-irogers@google.com> <20261108223913.3624571-10-irogers@google.com>
+ <DMYN979QJFNV.LM3T6O68OHW6@kernel.org>
+In-Reply-To: <DMYN979QJFNV.LM3T6O68OHW6@kernel.org>
+From: Ian Rogers <irogers@google.com>
+Date: Wed, 18 Nov 2026 21:45:45 -0800
+X-Gm-Features: Aa3M54p8GzPfKDPQ_HJcPbdLHGq3vwK7n9VGnVvnVB1ODjbFHeHwrlgOfVCaaEo
+Message-ID: <CAP-5=fXrMyfLFXq6CiqwWMSbtYVRNESxuDo-ddqNwDmq5Nm4SA@mail.gmail.com>
+Subject: Re: [PATCH v3 9/9] kobject: Require explicit initialization of struct kobj_type::release
+To: Danilo Krummrich <dakr@kernel.org>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Kees Cook <kees@kernel.org>, 
+	Miguel Ojeda <ojeda@kernel.org>, "Rafael J . Wysocki" <rafael@kernel.org>, 
+	Madhavan Srinivasan <maddy@linux.ibm.com>, Michael Ellerman <mpe@ellerman.id.au>, 
+	Nicholas Piggin <npiggin@gmail.com>, Christophe Leroy <chleroy@kernel.org>, Nayna Jain <nayna@linux.ibm.com>, 
+	Srish Srinivasan <ssrish@linux.ibm.com>, Mimi Zohar <zohar@linux.ibm.com>, 
+	Yoshinori Sato <ysato@users.sourceforge.jp>, Rich Felker <dalias@libc.org>, 
+	John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>, Juergen Gross <jgross@suse.com>, 
+	Stefano Stabellini <sstabellini@kernel.org>, 
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, Nathan Chancellor <nathan@kernel.org>, 
+	Nick Desaulniers <ndesaulniers@google.com>, Viresh Kumar <viresh.kumar@linaro.org>, 
+	Zhongqiu Han <zhongqiu.han@oss.qualcomm.com>, Alexander Aring <aahringo@redhat.com>, 
+	Felix Kuehling <felix.kuehling@amd.com>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, 
+	Zhihao Cheng <chengzhihao1@huawei.com>, Sumanth Korikkar <sumanthk@linux.ibm.com>, 
+	Bill Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>, driver-core@lists.linux.dev, 
+	llvm@lists.linux.dev, linux-hardening@vger.kernel.org, 
+	linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-acpi@vger.kernel.org, linux-pm@vger.kernel.org, 
+	linuxppc-dev@lists.ozlabs.org, linux-sh@vger.kernel.org, 
+	linux-s390@vger.kernel.org, gfs2@lists.linux.dev, 
+	xen-devel@lists.xenproject.org, linux-mtd@lists.infradead.org, 
+	amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, 
+	linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-purgate-ID: tlsNG-d25034/1795067159-76EDAA5B-B29DE801/0/0
 X-purgate-type: clean
-X-purgate-size: 3527
-X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+X-purgate-size: 2626
+X-Spam-Status: No, score=-18.3 required=3.0 tests=BAYES_00,DKIMWL_WL_MED,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=unavailable
+	UNPARSEABLE_RELAY,USER_IN_DEF_DKIM_WL autolearn=unavailable
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Update the list of files where virtualization ioctls are defined.
+On Wed, Nov 18, 2026 at 1:11=E2=80=AFPM Danilo Krummrich <dakr@kernel.org> =
+wrote:
+>
+> On Sun Nov 8, 2026 at 11:39 PM CET, Ian Rogers wrote:
+> >  static const struct kobj_type cpuregs_kobj_type =3D {
+> > +     /*
+> > +      * Pre-existing: info->kobj is embedded in per-CPU cpu_data;
+> > +      * cpuid_cpu_offline() only calls kobject_del().
+> > +      */
+>
+> All of these comments carry a =E2=80=9CPre-existing:=E2=80=9D prefix, but=
+ that doesn=E2=80=99t
+> distinguish cases with broken lifetime management from those where the st=
+orage
+> remains valid despite the API misuse.
+>
+> For example:
+>
+> > diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_xcp.c b/drivers/gpu/drm/=
+amd/amdgpu/amdgpu_xcp.c
+> > index ab14079d1c42..0847134a1391 100644
+> > --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_xcp.c
+> > +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_xcp.c
+> > @@ -797,6 +797,11 @@ static const struct sysfs_ops xcp_cfg_res_sysfs_op=
+s =3D {
+> >  };
+> >
+> >  static const struct kobj_type xcp_cfg_res_sysfs_ktype =3D {
+> > +     /*
+> > +      * Pre-existing: xcp_res is embedded in struct amdgpu_xcp_cfg
+> > +      * rather than freed individually by kobject_put().
+> > +      */
+> > +     .release =3D NULL,
+>
+> Being embedded in another structure doesn't explain what guarantees that =
+the
+> enclosing allocation outlives the kobject=E2=80=99s final cleanup.
+>
+> Could you please drop the =E2=80=9CPre-existing:=E2=80=9D prefix and make=
+ that distinction
+> explicit? For broken cases, describe the lifetime problem and mark it as =
+needing
+> a follow-up fix. For cases where the lifetime is safe, explain what guara=
+ntees
+> that safety, while acknowledging that omitting release() still violates t=
+he
+> documented API contract.
+>
+> Also, do you plan to follow up on those cases?
 
-Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
----
-v2: drop 0xAE, C6, arch/x86/kvm/x86.c (covered by line above;
-    Sean Christopherson)
+Makes complete sense, thanks Danilo!
 
-[Since having multiple maintainers trying to merge these would
-cause some conflicts, it would be more manageable for Jon to
-take all of these through the docs-next tree.]
+Auditing all 17 files in patch 9 with that distinction in mind:
+- Only 3 built-in sites (arm64 cpuinfo, ACPI hotplug profiles, and
+s390 sclp_mem) have backing storage that genuinely remains valid for
+the lifetime of the kernel.
+- The other 14 files either free/zero an enclosing dynamic or devm
+allocation without waiting for final kobject cleanup, or are tristate
+modules that unregister static kobjects/ksets on module_exit and can
+unmap module memory before delayed cleanup finishes.
 
-Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: Shuah Khan <skhan@linuxfoundation.org>
-Cc: linux-doc@vger.kernel.org
-Cc: Juergen Gross <jgross@suse.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel@lists.xenproject.org
-Cc: Hans de Goede <hansg@kernel.org>
-Cc: Arnd Bergmann <arnd@arndb.de>
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: Jason Wang <jasowangio@gmail.com>
-Cc: Eugenio Pérez <eperezma@redhat.com>
-Cc: Sean Christopherson <seanjc@google.com>
-Cc: Paolo Bonzini <pbonzini@redhat.com>
-Cc: kvm@vger.kernel.org
-Cc: virtualization@lists.linux.dev
+I've dropped the "Pre-existing:" prefix, documented the specific
+guarantee or FIXME lifetime hazard at each site in v4, and yes, I plan
+to send follow-up fixes to the respective subsystems once __must_init
+is in place.
 
- Documentation/userspace-api/ioctl/ioctl-number.rst |    5 +++++
- 1 file changed, 5 insertions(+)
+Thanks,
+Ian
 
---- linux-next-20261116.orig/Documentation/userspace-api/ioctl/ioctl-number.rst
-+++ linux-next-20261116/Documentation/userspace-api/ioctl/ioctl-number.rst
-@@ -198,6 +198,7 @@ Code  Seq#    Include File
- 'M'   01-03  drivers/scsi/megaraid/megaraid_sas.h
- 'M'   00-03  drivers/video/fbdev/mb862xx/mb862xxfb.h
- 'M'   00-0F  drivers/video/fsl-diu-fb.h                                conflict!
-+'M'   01-03  xen/interface/xen-mca.h                                   conflict!
- 'N'   00-1F  drivers/usb/scanner.h
- 'N'   40-7F  uapi/linux/nvme_ioctl.h
- 'N'   80-83  uapi/linux/ntsync.h and uapi/linux/nvme_ioctl.h           conflict!
-@@ -238,6 +239,7 @@ Code  Seq#    Include File
- 'U'   64     drivers/usb/misc/usbtest.c                                conflict!
- 'V'   all    linux/vt.h                                                conflict!
- 'V'   all    linux/videodev2.h                                         conflict!
-+'V'   00-1F  linux/vboxguest.h                                         conflict!
- 'V'   C0     linux/ivtvfb.h                                            conflict!
- 'V'   C0     linux/ivtv.h                                              conflict!
- 'V'   C0     media/si4713.h                                            conflict!
-@@ -356,6 +358,7 @@ Code  Seq#    Include File
- '|'   80-9F  samples/                                                  Any sample and example drivers
- 0x80  00-1F  linux/fb.h
- 0x81  00-1F  linux/vduse.h
-+             drivers/vdpa/vdpa_user/vduse_dev.c
- 0x89  00-07  asm-generic/sockios.h
- 0x89  06-07  linux/sockios.h
- 0x89  0B-DF  linux/sockios.h
-@@ -399,6 +402,8 @@ Code  Seq#    Include File
-                                                                        <mailto:kvm@vger.kernel.org>
- 0xAE  20-3F  linux/nitro_enclaves.h                                    Nitro Enclaves
- 0xAF  00-1F  linux/fsl_hypervisor.h                                    Freescale hypervisor
-+0xAF  00-8F  linux/vhost.h                                             conflict!
-+0xAF  31-32  drivers/vhost/test.h                                      conflict!
- 0xB0  all                                                              RATIO devices in development:
-                                                                        <mailto:vgo@ratio.de>
- 0xB1  00-1F                                                            PPPoX
+> Thanks,
+> Danilo
+>
 
