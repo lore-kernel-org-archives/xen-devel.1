@@ -2,34 +2,34 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2F6BB606A324
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E850B606A325
 	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2026 21:30:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=xUcokWrc
-Received: from list by lists.xenproject.org with outflank-mailman.1497116.1695423 (Exim 4.92)
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=wNcyFSN+
+Received: from list by lists.xenproject.org with outflank-mailman.1497113.1695403 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xU9i3-0001sR-9O; Thu, 19 Nov 2026 21:30:23 +0000
+	id 1xU9i1-0001WC-Qd; Thu, 19 Nov 2026 21:30:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1497116.1695423; Thu, 19 Nov 2026 21:30:23 +0000
+Received: by outflank-mailman (output) from mailman id 1497113.1695403; Thu, 19 Nov 2026 21:30:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xU9i2-0001pf-MC; Thu, 19 Nov 2026 21:30:22 +0000
-Received: by outflank-mailman (input) for mailman id 1497116;
+	id 1xU9i1-0001Tf-Jo; Thu, 19 Nov 2026 21:30:21 +0000
+Received: by outflank-mailman (input) for mailman id 1497113;
  Thu, 19 Nov 2026 21:30:19 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xU9hz-0001CK-5k
+ (envelope-from <gwd@xenproject.org>) id 1xU9hz-0001Bx-07
  for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 21:30:19 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xU9hy-00000006tGt-2y6e;
- Thu, 19 Nov 2026 21:30:19 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xU9hy-00000006tG9-1iLK;
+ Thu, 19 Nov 2026 21:30:18 +0000
 Received: from [217.155.165.12] (helo=Georges-MacBook-Pro-2.tail87ea19.ts.net)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xU9Mb-0000000CVBH-0TiD;
- Thu, 19 Nov 2026 21:08:13 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xU9MN-0000000CVBH-2vu6;
+ Thu, 19 Nov 2026 21:07:59 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -39,27 +39,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:Content-Type:
-	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=nrwbDtXKt+31nm2TnyNnVLPFupNYjy9rQsu/1DwGk0k=; b=xUcokWrc00QBw7bsoOGB48jGEL
-	S18+JUhfg5CkJGxSPSxsajTK02iJPTuyH3BkxwlON9sV6FfmP5BTc8N/YDYUeyu05eDfq9oZdZJrc
-	y4AHJrnIv3zSXA5ykqwagy6qx3MyNgegQ/Oa8ZQT4+oUjzjz6vJu6YOaOHKmHo5ciVAc=;
+	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
+	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
+	bh=WJ3aymglgYVjgjhwjh7T6Sw3B0M8iQ/bEW93NzEf/2U=; b=wNcyFSN+LXrrTZJeBAYTkDY7Un
+	YF9j0JV8jOqPs7bLGh2Y+8r72BPd5WMfDIoLEG8ZTzTfNH7eyBtV6nDyNuxMeBJQHGLyvmi2Sj4wX
+	OHl8VHPu1FX00c/zGuDJXfEV9koeS+VAknCFZF99oxyULlERg7gbKmCDGpm2d9dcq4CY=;
 From: George Dunlap <gwd@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
+Cc: Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v7 25/50] x86/hvm: introduce per-vCPU L3 page-table
-Date: Thu, 19 Nov 2026 21:07:16 +0000
-Message-ID: <20261119-asi-hvm-v7-25-6551b6d5c879@xenproject.org>
+	Teddy Astie <teddy.astie@vates.tech>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v7 12/50] x86/domain_page: introduce map_domain_pages()
+Date: Thu, 19 Nov 2026 21:07:03 +0000
+Message-ID: <20261119-asi-hvm-v7-12-6551b6d5c879@xenproject.org>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261119-asi-hvm-v7-0-6551b6d5c879@xenproject.org>
 References: <20261119-asi-hvm-v7-0-6551b6d5c879@xenproject.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
@@ -68,372 +70,379 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Roger Pau Monné <roger.pau@citrix.com>
+map_domain_page() maps a single page, so callers needing a virtually
+contiguous mapping of several (not necessarily physically contiguous)
+frames have had to fall back to vmap(), which maps whatever the frames
+hold in every context for the lifetime of the mapping, and whose
+vunmap() flushes every CPU's TLB, once per page.  Provide a multipage
+counterpart which maps them in the per-domain area of the calling
+vCPU's domain instead, which only that domain's page tables carry:
 
-Currently all of a domain's vCPUs share its per-domain area: one L3,
-referenced from every root page-table associated with the domain, so
-every mapping in it is visible to every vCPU of the domain.  Much of the
-area is already laid out in per-vCPU slices (each vCPU's COMPAT_ARG_XLAT
-pages, its state window and its map_domain_pages() slots, and for PV
-each vCPU's GDT/LDT window), but the visibility is domain-wide.  The
-per-vCPU state Xen keeps behind the state window -- the VMCB, the VMX
-guest MSR load/save list, the register frame, FPU/XSAVE state -- is
-therefore mapped in the page-tables of every vCPU of the domain, not
-only in its owner's.
+    map_domain_pages(mfn, nr) / unmap_domain_pages(ptr, nr)
 
-For HVM domains, allow each vCPU a per-domain area of its own instead
-("vCPU-PT").  HVM monitor tables are already per-vCPU, so this needs
-nothing at context switch: every monitor table carries its vCPU's own L3
-from creation, and the per-vCPU mappings, the state window's included,
-are isolated from other running vCPUs at once.  We will later build on
-this, adding a per-vCPU mapcache.
+Each vCPU has MAPCACHE_MULTIPAGE_ENTRIES slots of its own for such
+mappings, a fixed block at the end of the mapcache sub-area.  No
+single-page mapcache is needed: the multipage slots are in the same VA
+range whether or not the domain has one.  The mappings are
+order-aligned and tracked in a per-vCPU bitmap, and bypass the maphash
+and the deferred garbage/epoch machinery.
 
-Add pervcpu_l3_pg to the arch_vcpu struct, to correspond to the
-perdomain_l3_pg in the domain struct.  (We retain both so that vCPU-PT
-can be chosen domain by domain; PV domains always use the domain-wide
-L3.)  Modify arch_domain_create() to only allocate a per-domain L3 if
-vcpu_pt is not enabled for the domain; modify arch_vcpu_create() to
-allocate a per-vCPU L3 if it is.
+At unmap a mapping's PTEs are cleared, and a local flush done.  Since
+each vCPU has its own slots, the local flush suffices for correctness,
+although every vCPU's slots are in the domain's one L3: even if a stray
+TLB entry is speculatively loaded on another processor, no other vCPU
+will use that mapping, and it will be flushed before the vCPU which owns
+the slots runs on that CPU.
 
-In {create,populate,destroy}_perdomain_mapping(), if
-d->arch.asi.vcpu_pt, use pervcpu_l3_pg as the per-domain L3; otherwise,
-use perdomain_l3_pg.
-Introduce a helper, perdomain_l3(), to consistently choose the correct
-one.
+With regard to exposure: the domain's other vCPUs may be able to reach
+the mapping speculatively while it exists, and afterwards through a
+stale TLB entry until their CPU next flushes.  This doesn't expose
+anything new, as the page is already mapped in the directmap anyway
+(unless it's a PV domain and the page is past the short directmap), and
+it is less than vmap() exposes: every context carries the vmap area.
 
-Introduce free_pervcpu_mappings() to free this tree, called from
-arch_vcpu_destroy() on normal teardown.  Since the vcpu structure holds
-the only reference to pervcpu_l3_pg, arch_vcpu_create() must also call
-it on its error paths: nothing else records the allocation once the
-vcpu struct is torn down.  The domain-wide free_perdomain_mappings()
-keeps covering non-vCPU-PT domains.
+An unmap will BUG() when given a pointer or a @nr which indexes
+outside the vCPU's slots, unless that pointer is in the vmap area (see
+below).
 
-init_xen_l4_slots() is given the vCPU that a table is private to.
-Have it install that vCPU's perdomain_l3() in slot 260.
+These slots are not available before the first page-table switch in
+boot, nor with the idle vCPU's page tables loaded.  Currently no calls
+are made during boot, and the only known way to reach
+map_domain_pages() with the idle page tables loaded is on an error path
+that will already ultimately crash the host.  Nonetheless, for
+robustness, if called from a context where no mapping is available, it
+will fall back to using vmap(); and unmap recognizes such an address
+and vunmap()'s it.  This briefly exposes contents to every context,
+and requires a system-wide TLB shootdown on unmap, but allows
+execution to continue.  The alternative would be to BUG() in such a
+context.  The first fallback is logged.
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-4-8, Claude Code:claude-fable-5-1, Claude Code:claude-opus-5-5
+The handling of a lazy context switch in mapcache_current_vcpu() moves
+into pgtable_current_vcpu(), which map_domain_pages() uses whatever the
+domain: an IPI can switch away page tables held lazily at any time.
+
+Eight slots hold the largest mapping a known caller needs, a
+three-page XSAVE area (four slots, order 2), with room for a two-page
+mapping beside it.  The multipage area takes 256MiB of address space
+for MAX_VIRT_CPUS, and one L1 table per 64 vCPUs.  The slot bitmap is a
+field of struct arch_vcpu, as struct mapcache_vcpu exists for PV vCPUs
+only; it sits in the struct's tail padding, which leaves its size
+unchanged.
+
+Later patches convert the two known in-tree consumers.  Moving the
+XSAVE areas off the xenheap needs the primitive too: the XSAVE area
+exceeds one page on AMX-class hardware, and XSAVE/XRSTOR require it to
+be virtually contiguous.
+
+Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-5-5
 Signed-off-by: George Dunlap <gwd@xenproject.org>
 ---
 Changes in v7:
-- Rebased over the vCPU state window, which now comes earlier in the
-  series: populate_perdomain_mapping() takes its L3 from perdomain_l3()
-  too, the comments of unmap_vcpu_state() say what per-vCPU page-tables
-  change, and the message no longer promises the window.
-
-Changes in v6:
-- Port to new explicit L3 allocation regime.
+- Standalone on staging, without the per-vCPU mapcache or the asi=
+  option: the multipage slots are each vCPU's block of the domain-wide
+  multipage area, the slot bitmap is a field of struct arch_vcpu (in its
+  tail padding), and there is no vmap-strict sub-option; the vmap()
+  fallback and its message stay.
 
 Changes in v5:
-- init_xen_l4_slots()'s BUG_ON() follows slot 260 to perdomain_l3().
-- Message: all of a domain's vCPUs share its per-domain area; the
-  mapcache is not among the per-vCPU slices; the mode is "vCPU-PT".
-  The comment above init_xen_l4_slots() names perdomain_l3(v) and the
-  domain-wide L3.
-
-Changes in v4:
-- Rebase over earlier changes
-- d->arch.vcpu_pt is now d->arch.asi.vcpu_pt.
-- init_xen_l4_slots() taking a vCPU in place of the domain, and
-  promote_l4_table() failing while the domain has none, are now patches
-  of their own (Roger, Jan).
-- Drop the fail_early label: every cleanup step after fail: is safe
-  before its setup has run (Roger).
-- free_pervcpu_mappings(): clear the pointer, then free, as XFREE()
-  does (Roger).
-- Likewise in free_perdomain_mappings().
-
-Changes in v3:
-- HVM only: PV domains keep the domain-wide area, so the PV parts go
-  (the single-vCPU limit, the shadow refusals, the XPTI slot install).
-  init_xen_l4_slots() takes the vCPU as an extra, optional argument
-  rather than in place of the domain, so PV guest L4s, which no vCPU
-  owns, are promoted exactly as before.
-- Retitle (was: "x86/mm: introduce per-vCPU L3 page-table").
-- free_compat_arg_xlat()'s comment names free_pervcpu_mappings() as the
-  teardown for a vCPU-PT domain.
-
-Changes in v2:
-- Added to the series
-
-Changes since the previously posted version:
-- Expand the commit message with the motivation and the design
-  rationale.
-- Keep domain-wide freeing intact and introduce a vCPU-scoped
-  free_pervcpu_mappings() instead of re-scoping
-  free_perdomain_mappings(); fix the arch_vcpu_create() error-path
-  leaks of a partially built per-vCPU hierarchy.
-- Add a perdomain_l3() helper for the root selection, rather than
-  open-coding the vcpu_pt choice (and testing both root pointers) at
-  each site.
+- New in this version.
 ---
- xen/arch/x86/domain.c             | 17 +++++--
- xen/arch/x86/include/asm/domain.h |  4 ++
- xen/arch/x86/include/asm/mm.h     |  2 +
- xen/arch/x86/mm.c                 | 73 +++++++++++++++++++++++--------
- 4 files changed, 74 insertions(+), 22 deletions(-)
+ xen/arch/x86/domain_page.c        | 166 +++++++++++++++++++++++++++---
+ xen/arch/x86/include/asm/config.h |  11 ++
+ xen/arch/x86/include/asm/domain.h |   3 +
+ xen/include/xen/domain_page.h     |  21 ++++
+ 4 files changed, 188 insertions(+), 13 deletions(-)
 
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index 6e33d56588..1df6763530 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -576,9 +576,16 @@ int arch_vcpu_create(struct vcpu *v)
+diff --git a/xen/arch/x86/domain_page.c b/xen/arch/x86/domain_page.c
+index f02be1675b..ea759155da 100644
+--- a/xen/arch/x86/domain_page.c
++++ b/xen/arch/x86/domain_page.c
+@@ -6,6 +6,7 @@
+  * Copyright (c) 2003-2006, Keir Fraser <keir@xensource.com>
+  */
  
-     v->arch.flags = TF_kernel_mode;
++#include <xen/bitmap.h>
+ #include <xen/domain_page.h>
+ #include <xen/efi.h>
+ #include <xen/mm.h>
+@@ -18,24 +19,22 @@
+ #include <asm/hardirq.h>
+ #include <asm/setup.h>
  
-+    if ( d->arch.asi.vcpu_pt &&
-+         (v->arch.pervcpu_l3_pg = allocate_perdomain_l3(d)) == NULL )
+-static inline struct vcpu *mapcache_current_vcpu(void)
++/*
++ * The vCPU whose page tables are loaded here, and stay loaded until the
++ * caller is done with what it maps in them.
++ */
++static struct vcpu *pgtable_current_vcpu(void)
+ {
+-    const struct vcpu *v = this_cpu(pgtable_vcpu);
+     const struct vcpu *curr = current;
+ 
+-    /*
+-     * During early boot pgtable_vcpu is not set, callers must handle NULL.
+-     * Non-PV domains don't have a mapcache, the directmap covers all physical
+-     * address space.
+-     */
+-    if ( !v || !is_pv_vcpu(v) )
++    /* During early boot pgtable_vcpu is not set, callers must handle NULL. */
++    if ( !this_cpu(pgtable_vcpu) )
+         return NULL;
+ 
+     /*
+-     * If we are in a lazy context-switch state from a PV vCPU do a full switch
+-     * to the idle vCPU now, otherwise an incoming FLUSH_VCPU_STATE IPI would
+-     * change the page tables under our feet an invalidate any in-use mapcache
+-     * entries.
++     * If we are in a lazy context-switch state do a full switch to the idle
++     * vCPU now, otherwise an incoming FLUSH_VCPU_STATE IPI would change the
++     * page tables under our feet and invalidate any in-use mappings in them.
+      */
+     if ( unlikely(this_cpu(curr_vcpu) != curr) )
+     {
+@@ -54,6 +53,21 @@ static inline struct vcpu *mapcache_current_vcpu(void)
+     return ACCESS_ONCE(this_cpu(pgtable_vcpu));
+ }
+ 
++static inline struct vcpu *mapcache_current_vcpu(void)
++{
++    const struct vcpu *v = this_cpu(pgtable_vcpu);
++
++    /*
++     * During early boot pgtable_vcpu is not set, callers must handle NULL.
++     * Non-PV domains don't have a mapcache, the directmap covers all physical
++     * address space.
++     */
++    if ( !v || !is_pv_vcpu(v) )
++        return NULL;
++
++    return pgtable_current_vcpu();
++}
++
+ #define mapcache_l2_entry(e) ((e) >> PAGETABLE_ORDER)
+ #define MAPCACHE_L2_ENTRIES (mapcache_l2_entry(MAPCACHE_ENTRIES - 1) + 1)
+ #define MAPCACHE_L1ENT(idx) \
+@@ -223,6 +237,119 @@ void unmap_domain_page(const void *ptr)
+     local_irq_restore(flags);
+ }
+ 
++/*
++ * The mapcache index of @v's first map_domain_pages() slot: at its stride of
++ * the multipage area.
++ */
++static unsigned int multipage_first_slot(const struct vcpu *v)
++{
++    return PFN_DOWN(MAPCACHE_MULTIPAGE_START(v) - MAPCACHE_VIRT_START);
++}
++
++/*
++ * Multipage mappings come from slots of the vCPU whose page tables are
++ * loaded, which no other vCPU uses, and bypass the maphash and the
++ * garbage/epoch machinery: at unmap a mapping's PTEs are zapped, and their
++ * translations dropped from this CPU's TLB, at their addresses and at their
++ * aliases in the per-domain mirror.
++ */
++void *map_domain_pages(const mfn_t *mfn, unsigned int nr)
++{
++    unsigned long flags;
++    unsigned int i, first;
++    struct vcpu *v;
++    int idx;
++
++    if ( !nr || nr > MAPCACHE_MULTIPAGE_ENTRIES )
 +    {
-+        rc = -ENOMEM;
-+        goto fail;
++        ASSERT_UNREACHABLE();
++        return NULL;
 +    }
 +
-     rc = mapcache_vcpu_init(v);
-     if ( rc )
--        return rc;
-+        goto fail;
- 
-     if ( !is_idle_domain(d) )
-     {
-@@ -601,7 +608,7 @@ int arch_vcpu_create(struct vcpu *v)
-         paging_vcpu_init(v);
- 
-         if ( (rc = vcpu_init_fpu(v)) != 0 )
--            return rc;
-+            goto fail;
- 
-         vmce_init_vcpu(v);
- 
-@@ -654,6 +661,7 @@ int arch_vcpu_create(struct vcpu *v)
-     vcpu_regs_free(v);
-     xfree(v->arch.msrs);
-     v->arch.msrs = NULL;
-+    free_pervcpu_mappings(v);
- 
-     return rc;
- }
-@@ -676,6 +684,8 @@ void arch_vcpu_destroy(struct vcpu *v)
-         ASSERT_UNREACHABLE();
- 
-     vcpu_regs_free(v);
++    if ( nr == 1 )
++        return map_domain_page(mfn[0]);
 +
-+    free_pervcpu_mappings(v);
- }
++    /* Early boot, or the idle vCPU's page tables: no multipage slots. */
++    v = pgtable_current_vcpu();
++    if ( !v || is_idle_vcpu(v) )
++    {
++        printk_once(XENLOG_WARNING
++                    "%pS: map_domain_pages() falling back to vmap()\n",
++                    __builtin_return_address(0));
++        return vmap(mfn, nr);
++    }
++
++    first = multipage_first_slot(v);
++
++    local_irq_save(flags);
++
++    idx = bitmap_find_free_region(&v->arch.multipage_inuse,
++                                  MAPCACHE_MULTIPAGE_ENTRIES,
++                                  get_order_from_pages(nr));
++    if ( idx >= 0 )
++        for ( i = 0; i < nr; i++ )
++            l1e_write(&MAPCACHE_L1ENT(first + idx + i),
++                      l1e_from_mfn(mfn[i], __PAGE_HYPERVISOR_RW));
++
++    local_irq_restore(flags);
++
++    if ( idx < 0 )
++        return NULL;
++
++    return (void *)MAPCACHE_VIRT_START + pfn_to_paddr(first + idx);
++}
++
++void unmap_domain_pages(const void *ptr, unsigned int nr)
++{
++    unsigned long va = (unsigned long)ptr & PAGE_MASK;
++    unsigned long flags, slot;
++    unsigned int idx, first, i;
++    struct vcpu *v;
++
++    BUG_ON(!nr);
++
++    if ( nr == 1 )
++    {
++        unmap_domain_page(ptr);
++        return;
++    }
++
++    if ( va >= VMAP_VIRT_START && va < VMAP_VIRT_END )
++    {
++        vunmap((void *)va);
++        return;
++    }
++
++    v = pgtable_current_vcpu();
++    BUG_ON(!v || is_idle_vcpu(v) || va < MAPCACHE_VIRT_START);
++
++    first = multipage_first_slot(v);
++    slot = PFN_DOWN(va - MAPCACHE_VIRT_START);
++    BUG_ON(slot < first || slot - first >= MAPCACHE_MULTIPAGE_ENTRIES);
++
++    idx = slot - first;
++    BUG_ON(nr > MAPCACHE_MULTIPAGE_ENTRIES - idx);
++
++    local_irq_save(flags);
++
++    for ( i = 0; i < nr; i++ )
++    {
++        unsigned long addr = va + i * PAGE_SIZE;
++
++        ASSERT(l1e_get_flags(MAPCACHE_L1ENT(slot + i)) & _PAGE_PRESENT);
++        l1e_write(&MAPCACHE_L1ENT(slot + i), l1e_empty());
++        flush_tlb_one_local(addr);
++        if ( !is_pv_64bit_vcpu(v) )
++            flush_tlb_one_local(addr - PERDOMAIN_VIRT_START +
++                                PERDOMAIN_ALT_VIRT_START);
++    }
++
++    bitmap_release_region(&v->arch.multipage_inuse, idx,
++                          get_order_from_pages(nr));
++
++    local_irq_restore(flags);
++}
++
+ void mapcache_domain_init(struct domain *d)
+ {
+     struct mapcache_domain *dcache = &d->arch.pv.mapcache;
+@@ -237,7 +364,7 @@ void mapcache_domain_init(struct domain *d)
  
- int arch_sanitise_domain_config(const struct xen_domctl_createdomain *config)
-@@ -989,7 +999,8 @@ int arch_domain_create(struct domain *d,
+     BUILD_BUG_ON(MAPCACHE_VIRT_END + PAGE_SIZE * (3 +
+                  2 * PFN_UP(BITS_TO_LONGS(MAPCACHE_ENTRIES) * sizeof(long))) >
+-                 MAPCACHE_VIRT_START + (PERDOMAIN_SLOT_MBYTES << 20));
++                 MAPCACHE_MULTIPAGE_VIRT_START);
+     bitmap_pages = PFN_UP(BITS_TO_LONGS(MAPCACHE_ENTRIES) * sizeof(long));
+     dcache->inuse = (void *)MAPCACHE_VIRT_END + PAGE_SIZE;
+     dcache->garbage = dcache->inuse +
+@@ -254,6 +381,19 @@ int mapcache_vcpu_init(struct vcpu *v)
+     unsigned int ents = d->max_vcpus * MAPCACHE_VCPU_ENTRIES;
+     unsigned int nr = PFN_UP(BITS_TO_LONGS(ents) * sizeof(long));
  
-     psr_domain_init(d);
++    BUILD_BUG_ON(MAPCACHE_MULTIPAGE_ENTRIES > BITS_PER_LONG);
++
++    /* The vCPU's stride of the multipage area. */
++    if ( !is_idle_domain(d) )
++    {
++        int rc = create_perdomain_mapping(d, MAPCACHE_MULTIPAGE_START(v),
++                                          MAPCACHE_MULTIPAGE_ENTRIES,
++                                          NIL(l1_pgentry_t *), NULL);
++
++        if ( rc )
++            return rc;
++    }
++
+     if ( !is_pv_vcpu(v) || !dcache->inuse )
+         return 0;
  
--    if ( (d->arch.perdomain_l3_pg = allocate_perdomain_l3(d)) == NULL )
-+    if ( !d->arch.asi.vcpu_pt &&
-+         (d->arch.perdomain_l3_pg = allocate_perdomain_l3(d)) == NULL )
-     {
-         rc = -ENOMEM;
-         goto fail;
+diff --git a/xen/arch/x86/include/asm/config.h b/xen/arch/x86/include/asm/config.h
+index b3c68308ad..8e9b856a6c 100644
+--- a/xen/arch/x86/include/asm/config.h
++++ b/xen/arch/x86/include/asm/config.h
+@@ -279,10 +279,21 @@ extern unsigned long xen_phys_start;
+ 
+ /* map_domain_page() map cache. The second per-domain-mapping sub-area. */
+ #define MAPCACHE_VCPU_ENTRIES    (CONFIG_PAGING_LEVELS * CONFIG_PAGING_LEVELS)
++/* Multipage slots of each vCPU, at its stride of the multipage area. */
++#define MAPCACHE_MULTIPAGE_ORDER    3
++#define MAPCACHE_MULTIPAGE_ENTRIES  (1U << MAPCACHE_MULTIPAGE_ORDER)
+ #define MAPCACHE_ENTRIES         (MAX_VIRT_CPUS * MAPCACHE_VCPU_ENTRIES)
+ #define MAPCACHE_VIRT_START      PERDOMAIN_VIRT_SLOT(1)
+ #define MAPCACHE_VIRT_END        (MAPCACHE_VIRT_START + \
+                                   MAPCACHE_ENTRIES * PAGE_SIZE)
++/* The multipage area, at the end of the sub-area. */
++#define MAPCACHE_MULTIPAGE_VA_SHIFT (MAPCACHE_MULTIPAGE_ORDER + PAGE_SHIFT)
++#define MAPCACHE_MULTIPAGE_VIRT_START \
++    (MAPCACHE_VIRT_START + (PERDOMAIN_SLOT_MBYTES << 20) - \
++     (MAX_VIRT_CPUS << MAPCACHE_MULTIPAGE_VA_SHIFT))
++#define MAPCACHE_MULTIPAGE_START(v) \
++    (MAPCACHE_MULTIPAGE_VIRT_START + \
++     ((v)->vcpu_id << MAPCACHE_MULTIPAGE_VA_SHIFT))
+ 
+ /* Argument translation area. The third per-domain-mapping sub-area. */
+ #define ARG_XLAT_VIRT_START      PERDOMAIN_VIRT_SLOT(2)
 diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
-index 0ec0db0b91..17903d62cb 100644
+index 6ba59deeb5..3980d6228a 100644
 --- a/xen/arch/x86/include/asm/domain.h
 +++ b/xen/arch/x86/include/asm/domain.h
-@@ -329,6 +329,7 @@ struct monitor_write_data {
+@@ -685,6 +685,9 @@ struct arch_vcpu
  
- struct arch_domain
- {
-+    /* Domain-wide L3 for the per-domain slot; NULL in a vCPU-PT domain. */
-     struct page_info *perdomain_l3_pg;
+     struct vcpu_msrs *msrs;
  
-     /* I/O-port admin-specified access capabilities. */
-@@ -701,6 +702,9 @@ struct arch_vcpu
-     /* Which of the vCPU's map_domain_pages() slots are in use. */
-     unsigned long multipage_inuse;
- 
-+    /* Per-vCPU L3 for the per-domain slot; NULL in a non-vCPU-PT domain. */
-+    struct page_info *pervcpu_l3_pg;
++    /* Which of the vCPU's map_domain_pages() slots are in use. */
++    unsigned long multipage_inuse;
 +
      struct {
          bool next_interrupt_enabled;
      } monitor;
-diff --git a/xen/arch/x86/include/asm/mm.h b/xen/arch/x86/include/asm/mm.h
-index 3fa70e420b..c66969c093 100644
---- a/xen/arch/x86/include/asm/mm.h
-+++ b/xen/arch/x86/include/asm/mm.h
-@@ -369,6 +369,7 @@ int devalidate_page(struct page_info *page, unsigned long type,
-                          int preemptible);
- 
- void init_xen_pae_l2_slots(l2_pgentry_t *l2t, const struct domain *d);
-+struct page_info *perdomain_l3(const struct vcpu *v);
- void init_xen_l4_slots(l4_pgentry_t *l4t, mfn_t l4mfn,
-                        const struct vcpu *v, mfn_t sl4mfn, bool ro_mpt);
- void init_xen_l4_slots_pv(l4_pgentry_t *l4t, mfn_t l4mfn,
-@@ -620,6 +621,7 @@ void destroy_perdomain_mapping(const struct vcpu *v, unsigned long va,
- void unmap_vcpu_state(const struct vcpu *v, unsigned int idx, unsigned int nr);
- void unmap_vcpu_state_page(const void *va);
- void free_perdomain_mappings(struct domain *d);
-+void free_pervcpu_mappings(struct vcpu *v);
- 
- void __iomem *ioremap_wc(paddr_t pa, size_t len);
- 
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index 446732911b..d1fc57cf82 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -1685,6 +1685,18 @@ static int promote_l3_table(struct page_info *page)
- }
- #endif /* CONFIG_PV */
+diff --git a/xen/include/xen/domain_page.h b/xen/include/xen/domain_page.h
+index c89b149e54..bf45a4cf55 100644
+--- a/xen/include/xen/domain_page.h
++++ b/xen/include/xen/domain_page.h
+@@ -31,6 +31,27 @@ void *map_domain_page(mfn_t mfn);
+  */
+ void unmap_domain_page(const void *ptr);
  
 +/*
-+ * The root of the per-domain area in use by @v: the vCPU's own L3 for a
-+ * vCPU-PT domain, the domain-wide one otherwise.
++ * Map @nr page frames, not necessarily physically contiguous, at
++ * consecutive virtual addresses.  Returns the virtual address of the
++ * first frame, or NULL when no space is available.  As with
++ * map_domain_page(), the mapping is only valid within the current VCPU,
++ * and must be unmapped by it; unmap_domain_pages() takes the same @nr,
++ * and accepts a pointer carrying an in-page offset.  Implemented on x86
++ * only at present.
++ *
++ * @nr has an implementation-defined upper bound (x86:
++ * MAPCACHE_MULTIPAGE_ENTRIES).  Exceeding it is a caller bug rather than a
++ * transient failure, and fails the mapping; callers needing more pages
++ * than a per-VCPU window holds want vmap() directly.
++ *
++ * unmap_domain_pages() is fatal given a pointer or an @nr which indexes
++ * outside the current VCPU's multipage slots.  A wrong @nr within them
++ * is not detected: callers must pass the @nr they mapped with.
 + */
-+struct page_info *perdomain_l3(const struct vcpu *v)
-+{
-+    const struct domain *d = v->domain;
-+
-+    return d->arch.asi.vcpu_pt ? v->arch.pervcpu_l3_pg
-+                               : d->arch.perdomain_l3_pg;
-+}
++void *map_domain_pages(const mfn_t *mfn, unsigned int nr);
++void unmap_domain_pages(const void *ptr, unsigned int nr);
 +
  /*
-  * Fill an L4 with Xen entries.
-  *
-@@ -1783,8 +1795,11 @@ void init_xen_l4_slots(l4_pgentry_t *l4t, mfn_t l4mfn,
-                        const struct vcpu *v, mfn_t sl4mfn, bool ro_mpt)
- {
-     const struct domain *d = v->domain;
-+    struct page_info *l3_pg = perdomain_l3(v);
- 
--    _init_xen_l4_slots(l4t, l4mfn, d, d->arch.perdomain_l3_pg, sl4mfn, ro_mpt);
-+    BUG_ON(!l3_pg);
-+
-+    _init_xen_l4_slots(l4t, l4mfn, d, l3_pg, sl4mfn, ro_mpt);
- }
- 
- /*
-@@ -6275,7 +6290,7 @@ int create_perdomain_mapping(struct vcpu *v, unsigned long va,
-                              struct page_info **ppg)
- {
-     struct domain *d = v->domain;
--    struct page_info *pg;
-+    struct page_info *pg, *l3_pg = perdomain_l3(v);
-     l3_pgentry_t *l3tab;
-     l2_pgentry_t *l2tab;
-     l1_pgentry_t *l1tab;
-@@ -6284,12 +6299,12 @@ int create_perdomain_mapping(struct vcpu *v, unsigned long va,
-     ASSERT(va >= PERDOMAIN_VIRT_START &&
-            va < PERDOMAIN_VIRT_SLOT(PERDOMAIN_SLOTS));
- 
--    BUG_ON(!d->arch.perdomain_l3_pg);
-+    BUG_ON(!l3_pg);
- 
-     if ( !nr )
-         return 0;
- 
--    l3tab = __map_domain_page(d->arch.perdomain_l3_pg);
-+    l3tab = __map_domain_page(l3_pg);
- 
-     ASSERT(!l3_table_offset(va ^ (va + nr * PAGE_SIZE - 1)));
- 
-@@ -6396,7 +6411,7 @@ void populate_perdomain_mapping(const struct vcpu *v, unsigned long va,
-                                 const mfn_t *mfn, unsigned int nr,
-                                 unsigned int flags)
- {
--    struct page_info *l3_pg = v->domain->arch.perdomain_l3_pg;
-+    struct page_info *l3_pg = perdomain_l3(v);
-     const l3_pgentry_t *l3tab;
-     const l2_pgentry_t *l2tab;
-     l1_pgentry_t *l1tab = NULL;
-@@ -6448,16 +6463,16 @@ void destroy_perdomain_mapping(const struct vcpu *v, unsigned long va,
-                                unsigned int nr)
- {
-     const l3_pgentry_t *l3tab, *pl3e;
--    const struct domain *d = v->domain;
-+    struct page_info *l3_pg = perdomain_l3(v);
- 
-     ASSERT(va >= PERDOMAIN_VIRT_START &&
-            va < PERDOMAIN_VIRT_SLOT(PERDOMAIN_SLOTS));
-     ASSERT(!nr || !l3_table_offset(va ^ (va + nr * PAGE_SIZE - 1)));
- 
--    if ( !d->arch.perdomain_l3_pg )
-+    if ( !l3_pg )
-         return;
- 
--    l3tab = __map_domain_page(d->arch.perdomain_l3_pg);
-+    l3tab = __map_domain_page(l3_pg);
-     pl3e = l3tab + l3_table_offset(va);
- 
-     if ( l3e_get_flags(*pl3e) & _PAGE_PRESENT )
-@@ -6500,14 +6515,18 @@ void destroy_perdomain_mapping(const struct vcpu *v, unsigned long va,
-  * Take @nr slots of @v's state window, from @idx, out of the per-domain
-  * area, before the caller frees the pages behind them: the pages are the
-  * caller's own, and must not stay mapped once freed.  The window's
-- * translations are usable only on CPUs whose page-tables carry it: those of
-- * any of the domain's vCPUs, all in the domain's dirty mask.
-+ * translations are usable only on CPUs whose page-tables carry it, all in
-+ * the domain's dirty mask: with per-vCPU page-tables, the CPU running v or
-+ * holding it lazily; otherwise, those of any of the domain's vCPUs.
+  * Given a VA from map_domain_page(), return its underlying MFN.
   */
- void unmap_vcpu_state(const struct vcpu *v, unsigned int idx, unsigned int nr)
- {
-     const struct domain *d = v->domain;
- 
--    /* Beyond the stride is the next vCPU's window. */
-+    /*
-+     * Beyond the stride is the next vCPU's window, where the domain's vCPUs
-+     * share a per-domain area.
-+     */
-     BUG_ON(idx >= VCPU_STATE_NR_PAGES || nr > VCPU_STATE_NR_PAGES - idx);
- 
-     destroy_perdomain_mapping(v, VCPU_STATE_ADDR(v, idx), nr);
-@@ -6538,16 +6557,11 @@ void unmap_vcpu_state_page(const void *va)
-     }
- }
- 
--void free_perdomain_mappings(struct domain *d)
-+static void free_perdomain_l3(struct page_info *l3pg)
- {
--    l3_pgentry_t *l3tab;
-+    l3_pgentry_t *l3tab = __map_domain_page(l3pg);
-     unsigned int i;
- 
--    if ( !d->arch.perdomain_l3_pg )
--        return;
--
--    l3tab = __map_domain_page(d->arch.perdomain_l3_pg);
--
-     for ( i = 0; i < PERDOMAIN_SLOTS; ++i)
-         if ( l3e_get_flags(l3tab[i]) & _PAGE_PRESENT )
-         {
-@@ -6583,8 +6597,29 @@ void free_perdomain_mappings(struct domain *d)
-         }
- 
-     unmap_domain_page(l3tab);
--    free_domheap_page(d->arch.perdomain_l3_pg);
-+    free_domheap_page(l3pg);
-+}
-+
-+void free_perdomain_mappings(struct domain *d)
-+{
-+    struct page_info *l3pg = d->arch.perdomain_l3_pg;
-+
-+    if ( !l3pg )
-+        return;
-+
-     d->arch.perdomain_l3_pg = NULL;
-+    free_perdomain_l3(l3pg);
-+}
-+
-+void free_pervcpu_mappings(struct vcpu *v)
-+{
-+    struct page_info *l3pg = v->arch.pervcpu_l3_pg;
-+
-+    if ( !l3pg )
-+        return;
-+
-+    v->arch.pervcpu_l3_pg = NULL;
-+    free_perdomain_l3(l3pg);
- }
- 
- static void write_sss_token(unsigned long *ptr)
 -- 
 2.56.0
 
