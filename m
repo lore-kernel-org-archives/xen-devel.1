@@ -2,34 +2,34 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 65D89606A33F
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2026 21:30:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 21D84606A333
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2026 21:30:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=S4up3/DH
-Received: from list by lists.xenproject.org with outflank-mailman.1497126.1695515 (Exim 4.92)
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=ilmG/nwF
+Received: from list by lists.xenproject.org with outflank-mailman.1497130.1695539 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xU9iH-0004eW-1F; Thu, 19 Nov 2026 21:30:37 +0000
+	id 1xU9iM-0005pY-Pi; Thu, 19 Nov 2026 21:30:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1497126.1695515; Thu, 19 Nov 2026 21:30:36 +0000
+Received: by outflank-mailman (output) from mailman id 1497130.1695539; Thu, 19 Nov 2026 21:30:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xU9iF-0004YI-C5; Thu, 19 Nov 2026 21:30:35 +0000
-Received: by outflank-mailman (input) for mailman id 1497126;
+	id 1xU9iL-0005jC-IZ; Thu, 19 Nov 2026 21:30:41 +0000
+Received: by outflank-mailman (input) for mailman id 1497130;
  Thu, 19 Nov 2026 21:30:19 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xU9hz-0001D8-F6
+ (envelope-from <gwd@xenproject.org>) id 1xU9hz-0001DP-JA
  for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 21:30:19 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xU9hy-00000006tHR-3jIy;
+ (envelope-from <gwd@xenproject.org>) id 1xU9hy-00000006tHv-435x;
  Thu, 19 Nov 2026 21:30:19 +0000
 Received: from [217.155.165.12] (helo=Georges-MacBook-Pro-2.tail87ea19.ts.net)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xU9Mx-0000000CVBH-1fqM;
- Thu, 19 Nov 2026 21:08:35 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xU9MS-0000000CVBH-38W1;
+ Thu, 19 Nov 2026 21:08:04 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -41,18 +41,19 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=sTjqPTsK2pi81b/09BzAb/eLP8sEK4iy5zRkCRfHDW0=; b=S4up3/DHzCHOKIGFdVJG22hkro
-	tmfg2V1atfdWR1N8wLqNJJoXuYmizxcRET+UIJRqNitqomHdRk9s0DS+UeRrBdRAQ6FNMRDj/bZfV
-	Eura4W4LRw70HVNoxwVt+FikfwA3RYIBtiAf1sLpvUv86YeHwwErXyEBmPlpBXeyntPQ=;
+	bh=+ze/mUts7B6alTNouyX2ejvqaet9bE/wAgVhHkz5gYM=; b=ilmG/nwFH4OSj3N8LzNSXGXlVh
+	w39aXs5ImZz9gXsu3ax2DRKxXASCTcVw19UDfsZrH7yo8W4ZAKX3trNr7LyPI0J6HgO+V3+DaEo1G
+	kSnpWiAmPlcSnGy0LicN2m79heiFoGXMZ1sF7APIfCKFtBBuFcXskk73e9NqqM3AV6co=;
 From: George Dunlap <gwd@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>,
+Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
+	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
 	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v7 46/50] x86/cpufreq: move the CPU mask out of struct drv_cmd
-Date: Thu, 19 Nov 2026 21:07:37 +0000
-Message-ID: <20261119-asi-hvm-v7-46-6551b6d5c879@xenproject.org>
+Subject: [PATCH v7 17/50] x86/fpu: Pass explicit xsave areas to fpu_(f)xsave()
+Date: Thu, 19 Nov 2026 21:07:08 +0000
+Message-ID: <20261119-asi-hvm-v7-17-6551b6d5c879@xenproject.org>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261119-asi-hvm-v7-0-6551b6d5c879@xenproject.org>
 References: <20261119-asi-hvm-v7-0-6551b6d5c879@xenproject.org>
@@ -66,117 +67,125 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-drv_read() and drv_write() take a struct drv_cmd, whose mask field
-says which CPUs to run the access on.  Only the initiator uses the
-mask, to route the call: do_drv_read() and do_drv_write(), which run
-on the target CPUs, never read it.  It may point at the initiator's
-stack (acpi_cpufreq_target()'s online_policy_cpus).
+From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
 
-Drop the field and pass the mask to drv_read() and drv_write() as a
-parameter, so that the structure handed to the target CPUs holds only
-what they use.
+Have the save entry point fetch the vCPU's XSAVE area once, through
+the VCPU_MAP_XSAVE_AREA() seam, and pass the resulting pointer down
+explicitly: xsave() gains an area parameter in place of its internal
+dereference, and fpu_fxsave() takes the legacy region directly.  The
+lower-level helpers no longer know where a vCPU's save area lives,
+which is the property the coming relocation of guest save areas
+relies on; the vcpu pointers become const on the way.
 
 No functional change.
 
-Groundwork for per-CPU stack mappings, to come as part of Address
-Space Isolation, which take away a CPU's access to other CPUs' stacks:
-a subsequent change passes the structure to the target CPUs by value,
-and a copy must carry no stack address.
-
-Assisted-by: Claude Code:claude-opus-4-8, Claude Code:claude-opus-5-5
+Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+Assisted-by: Claude Code:claude-fable-5
 Signed-off-by: George Dunlap <gwd@xenproject.org>
----
-Changes in v7:
-- New in this version.
----
- xen/arch/x86/acpi/cpufreq/acpi.c | 28 +++++++++++++---------------
- 1 file changed, 13 insertions(+), 15 deletions(-)
 
-diff --git a/xen/arch/x86/acpi/cpufreq/acpi.c b/xen/arch/x86/acpi/cpufreq/acpi.c
-index de67f1aee2..7f843bab60 100644
---- a/xen/arch/x86/acpi/cpufreq/acpi.c
-+++ b/xen/arch/x86/acpi/cpufreq/acpi.c
-@@ -90,7 +90,6 @@ typedef union {
+---
+Revived from "x86: Address Space Isolation FPU preparations" v3 patch
+10/12 (<20250110132823.24348-11-alejandro.vallejo@cloud.com>, Acked-by
+Jan Beulich; no v4 was ever posted).
+
+Changes in v5:
+- New in this version.
+
+Changes since the previously posted version:
+ - Regenerated against the eager-FPU-only tree: the entry point is now
+   vcpu_save_fpu() (vcpu_xsave_mask()/_vcpu_save_fpu() no longer
+   exist), and the mask is always XSTATE_ALL.
+ - Expanded the commit message.
+---
+ xen/arch/x86/i387.c               | 18 ++++++++++++------
+ xen/arch/x86/include/asm/xstate.h |  2 +-
+ xen/arch/x86/xstate.c             |  3 +--
+ 3 files changed, 14 insertions(+), 9 deletions(-)
+
+diff --git a/xen/arch/x86/i387.c b/xen/arch/x86/i387.c
+index c6796bc97b..65491b5697 100644
+--- a/xen/arch/x86/i387.c
++++ b/xen/arch/x86/i387.c
+@@ -109,7 +109,8 @@ static inline void fpu_fxrstor(struct vcpu *v)
+ /*******************************/
  
- struct drv_cmd {
-     unsigned int type;
--    const cpumask_t *mask;
-     drv_addr_union addr;
-     u32 val;
- };
-@@ -137,25 +136,25 @@ static void cf_check do_drv_write(void *drvcmd)
-     }
- }
- 
--static void drv_read(struct drv_cmd *cmd)
-+static void drv_read(const cpumask_t *mask, struct drv_cmd *cmd)
+ /* Save x87 extended state */
+-static inline void fpu_xsave(struct vcpu *v)
++static inline void fpu_xsave(const struct vcpu *v,
++                             struct xsave_struct *xsave_area)
  {
-     cmd->val = 0;
+     bool ok;
  
--    ASSERT(cpumask_weight(cmd->mask) == 1);
-+    ASSERT(cpumask_weight(mask) == 1);
- 
-     /* to reduce IPI for the sake of performance */
--    if (likely(cpumask_test_cpu(smp_processor_id(), cmd->mask)))
-+    if (likely(cpumask_test_cpu(smp_processor_id(), mask)))
-         do_drv_read((void *)cmd);
-     else
--        on_selected_cpus(cmd->mask, do_drv_read, cmd, 1);
-+        on_selected_cpus(mask, do_drv_read, cmd, 1);
+@@ -119,15 +120,14 @@ static inline void fpu_xsave(struct vcpu *v)
+      */
+     ok = set_xcr0(v->arch.xcr0_accum | XSTATE_FP_SSE);
+     ASSERT(ok);
+-    xsave(v, XSTATE_ALL);
++    xsave(v, xsave_area, XSTATE_ALL);
+     ok = set_xcr0(v->arch.xcr0 ?: XSTATE_FP_SSE);
+     ASSERT(ok);
  }
  
--static void drv_write(struct drv_cmd *cmd)
-+static void drv_write(const cpumask_t *mask, struct drv_cmd *cmd)
+ /* Save x87 FPU, MMX, SSE and SSE2 state */
+-static inline void fpu_fxsave(struct vcpu *v)
++static inline void fpu_fxsave(const struct vcpu *v, fpusse_t *fpu_ctxt)
  {
--    if (cpumask_equal(cmd->mask, cpumask_of(smp_processor_id())))
-+    if (cpumask_equal(mask, cpumask_of(smp_processor_id())))
-         do_drv_write((void *)cmd);
+-    fpusse_t *fpu_ctxt = &v->arch.xsave_area->fpu_sse;
+     unsigned int fip_width = v->domain->arch.x87_fip_width;
+ 
+     if ( fip_width != 4 )
+@@ -192,15 +192,21 @@ void vcpu_restore_fpu(struct vcpu *v)
+  */
+ void vcpu_save_fpu(struct vcpu *v)
+ {
++    struct xsave_struct *xsave_area;
++
+     ASSERT(!is_idle_vcpu(v));
+ 
+     /* This can happen, if a paravirtualised guest OS has set its CR0.TS. */
+     clts();
+ 
++    xsave_area = VCPU_MAP_XSAVE_AREA(v);
++
+     if ( cpu_has_xsave )
+-        fpu_xsave(v);
++        fpu_xsave(v, xsave_area);
      else
--        on_selected_cpus(cmd->mask, do_drv_write, cmd, 1);
-+        on_selected_cpus(mask, do_drv_write, cmd, 1);
+-        fpu_fxsave(v);
++        fpu_fxsave(v, &xsave_area->fpu_sse);
++
++    VCPU_UNMAP_XSAVE_AREA(v, xsave_area);
  }
  
- static u32 get_cur_val(const cpumask_t *mask)
-@@ -193,9 +192,7 @@ static u32 get_cur_val(const cpumask_t *mask)
-         return 0;
-     }
- 
--    cmd.mask = cpumask_of(cpu);
--
--    drv_read(&cmd);
-+    drv_read(cpumask_of(cpu), &cmd);
-     return cmd.val;
+ /* Initialize FPU's context save area */
+diff --git a/xen/arch/x86/include/asm/xstate.h b/xen/arch/x86/include/asm/xstate.h
+index 0519379edb..40bb6f152e 100644
+--- a/xen/arch/x86/include/asm/xstate.h
++++ b/xen/arch/x86/include/asm/xstate.h
+@@ -95,7 +95,7 @@ uint64_t get_xcr0(void);
+ void set_msr_xss(u64 xss);
+ uint64_t get_msr_xss(void);
+ uint64_t read_bndcfgu(void);
+-void xsave(struct vcpu *v, uint64_t mask);
++void xsave(const struct vcpu *v, struct xsave_struct *ptr, uint64_t mask);
+ void xrstor(struct vcpu *v, uint64_t mask);
+ void xstate_set_init(uint64_t mask);
+ bool xsave_enabled(const struct vcpu *v);
+diff --git a/xen/arch/x86/xstate.c b/xen/arch/x86/xstate.c
+index 2eae3f098d..058bc4c0bc 100644
+--- a/xen/arch/x86/xstate.c
++++ b/xen/arch/x86/xstate.c
+@@ -304,9 +304,8 @@ void compress_xsave_states(struct vcpu *v, const void *src, unsigned int size)
+     VCPU_UNMAP_XSAVE_AREA(v, xstate);
  }
  
-@@ -256,6 +253,7 @@ static int cf_check acpi_cpufreq_target(
-     struct processor_performance *perf;
-     struct cpufreq_freqs freqs;
-     cpumask_t online_policy_cpus;
-+    const cpumask_t *mask;
-     struct drv_cmd cmd;
-     unsigned int next_state = 0; /* Index into freq_table */
-     unsigned int next_perf_state = 0; /* Index into perf table */
-@@ -304,16 +302,16 @@ static int cf_check acpi_cpufreq_target(
-     }
- 
-     if (policy->shared_type != CPUFREQ_SHARED_TYPE_ANY)
--        cmd.mask = &online_policy_cpus;
-+        mask = &online_policy_cpus;
-     else
--        cmd.mask = cpumask_of(policy->cpu);
-+        mask = cpumask_of(policy->cpu);
- 
-     freqs.old = perf->states[perf->state].core_frequency * 1000;
-     freqs.new = data->freq_table[next_state].frequency;
- 
--    drv_write(&cmd);
-+    drv_write(mask, &cmd);
- 
--    if (acpi_pstate_strict && !check_freqs(cmd.mask, freqs.new, data)) {
-+    if (acpi_pstate_strict && !check_freqs(mask, freqs.new, data)) {
-         printk(KERN_WARNING "Fail transfer to new freq %d\n", freqs.new);
-         return -EAGAIN;
-     }
+-void xsave(struct vcpu *v, uint64_t mask)
++void xsave(const struct vcpu *v, struct xsave_struct *ptr, uint64_t mask)
+ {
+-    struct xsave_struct *ptr = v->arch.xsave_area;
+     uint32_t hmask = mask >> 32;
+     uint32_t lmask = mask;
+     unsigned int fip_width = v->domain->arch.x87_fip_width;
 -- 
 2.56.0
 
