@@ -2,41 +2,41 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 60FD4606A326
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2026 05:36:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BB04D606A325
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2026 05:36:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=DGrnyfoW
-Received: from list by lists.xenproject.org with outflank-mailman.1495597.1694474 (Exim 4.92)
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=yNhn0nNT
+Received: from list by lists.xenproject.org with outflank-mailman.1495580.1694375 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTuoS-0003W6-8L; Thu, 19 Nov 2026 05:36:00 +0000
+	id 1xTuoD-0000ra-G1; Thu, 19 Nov 2026 05:35:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1495597.1694474; Thu, 19 Nov 2026 05:36:00 +0000
+Received: by outflank-mailman (output) from mailman id 1495580.1694375; Thu, 19 Nov 2026 05:35:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTuoS-0003Vz-5L; Thu, 19 Nov 2026 05:36:00 +0000
-Received: by outflank-mailman (input) for mailman id 1495597;
- Thu, 19 Nov 2026 05:35:58 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xTuoD-0000rS-Cn; Thu, 19 Nov 2026 05:35:45 +0000
+Received: by outflank-mailman (input) for mailman id 1495580;
+ Thu, 19 Nov 2026 05:35:43 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <rdunlap@infradead.org>) id 1xTuoQ-0003HG-Aj
- for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 05:35:58 +0000
+ (envelope-from <rdunlap@infradead.org>) id 1xTuo9-0000pn-F6
+ for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 05:35:43 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xTuoP-005g9V-M8
- for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 06:35:57 +0100
-Received: from [10.42.69.7] (helo=localhost)
+ id 1xTuo8-006lxA-FL
+ for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 06:35:40 +0100
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <rdunlap@infradead.org>)
- id 6afe8ab9-2eae-0a2a0a5409dd-0a2a45078126-6
- for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 06:35:57 +0100
+ id 6afe8aab-e002-0a2a0a5209dd-0a2a4502c7fe-0
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 06:35:39 +0100
 Received: from [198.137.202.133] (helo=bombadil.infradead.org)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <rdunlap@infradead.org>)
- id 6afe8abc-b4ea-0a2a45070019-c689ca85974a-3
- for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 06:35:57 +0100
+ id 6afe8aa9-4900-0a2a45020019-c689ca85a7ca-3
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 06:35:39 +0100
 Received: from [50.53.43.113] (helo=bombadil.infradead.org)
  by bombadil.infradead.org with esmtpsa (Exim 4.100.1 #2 (Red Hat Linux))
- id 1xTuoG-0000000Aufu-2x6D; Thu, 19 Nov 2026 05:35:48 +0000
+ id 1xTunv-0000000Aufu-0Tiz; Thu, 19 Nov 2026 05:35:27 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -50,12 +50,12 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=iUfRRM/uSWL5Pu2WYkuG9ZMjaMjQfW5Ts9TmnI1Vtsg=; b=DGrnyfoWAgDY4gTArjK85mpfLP
-	YUa39SWVXYFn/eK72WXlCXA9uuRyagIyIF1woWS4EdttvevIcGfjAAhDfNPyAIOfoJJ+XfJxm4mGT
-	bVkFVA7u20Klegz+Ue9YMX8fmqu38qLzw2l6Mvo1BQyhyJJNtM+c9MxognTzcG7V8vEGldl3RnhKr
-	KabGWOjeEC+yc7jJcccxprvCsyDQXoRtyIJIBftIP+C4EOe7n7gE7b/kw0/j0BAuO6DMIZSJhfRCO
-	H9dGPqwbToDijcg/PKpXyVcYExVa/obX176QmbjEtCpmdJ0iCHZ5xvENNH0DXE2DbvWCAV55csStZ
-	hDSDSL3g==;
+	bh=q4RqbTqrf5mX8cN4Vzs7NN9E5++HncNdO08vef8Myn4=; b=yNhn0nNT2kTjtdSzkIYIw4Y8vY
+	Wu8IMpwciBKK0mPRjwLp0J6lXnYl2QXRdoyGs7gEPlDNW7iR10NcDhumI86BcLgOaUX+PjrRV6xVb
+	8O58AE44qe860hoCGVid1vxjbYwpFG8l3RgpeRSDp5V4FTWtIrn7i+RinM2E7YjnLj4oqL80Wyf0/
+	/sgURq6tm/V4dsX6PlSh5f+qiQ7p9owDapXPkXxMVpSKTRzF2uGto4W4329bl1/byaHPJpz05ixrd
+	rcTtDdUsLaE/rONtAbOdlQSsjIoUrn1vdxur07cp/kvKJ+Wiq6GsRe5yp8eOJPJ3NCMaXF4hxg+uw
+	Z+U7uU6g==;
 From: Randy Dunlap <rdunlap@infradead.org>
 To: linux-kernel@vger.kernel.org
 Cc: Randy Dunlap <rdunlap@infradead.org>,
@@ -141,28 +141,27 @@ Cc: Randy Dunlap <rdunlap@infradead.org>,
 	Matthew Brost <matthew.brost@intel.com>,
 	=?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
 	intel-xe@lists.freedesktop.org
-Subject: [PATCH v2 11/12] docs: ioctl-number: update platform entries
-Date: Wed, 18 Nov 2026 21:35:12 -0800
-Message-ID: <20261119053514.255348-12-rdunlap@infradead.org>
+Subject: [PATCH v2 03/12] docs: ioctl-number: update block entries
+Date: Wed, 18 Nov 2026 21:35:04 -0800
+Message-ID: <20261119053514.255348-4-rdunlap@infradead.org>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261119053514.255348-1-rdunlap@infradead.org>
 References: <20261119053514.255348-1-rdunlap@infradead.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1795066557-A6EDEAE4-C44A5DE4/0/0
+X-purgate-ID: tlsNG-720697/1795066539-F89276C6-AFBEE3EA/0/0
 X-purgate-type: clean
-X-purgate-size: 2286
+X-purgate-size: 1726
 X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=4.0.1
+	UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=unavailable
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Update the list of platform/ files where ioctls are defined and update
-the ranges of function numbers that are used.
+Update the list of files where block ioctls are defined.
 
 Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
 ---
@@ -175,31 +174,30 @@ take all of these through the docs-next tree.]
 Cc: Jonathan Corbet <corbet@lwn.net>
 Cc: Shuah Khan <skhan@linuxfoundation.org>
 Cc: linux-doc@vger.kernel.org
-Cc: Florian Fainelli <florian.fainelli@broadcom.com>
-Cc: Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>
-Cc: Tzung-Bi Shih <tzungbi@kernel.org>
-Cc: Benson Leung <bleung@chromium.org>
+Cc: Jens Axboe <axboe@kernel.dk>
+Cc: linux-block@vger.kernel.org
 
- Documentation/userspace-api/ioctl/ioctl-number.rst |    3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ Documentation/userspace-api/ioctl/ioctl-number.rst |    4 ++++
+ 1 file changed, 4 insertions(+)
 
 --- linux-next-20261116.orig/Documentation/userspace-api/ioctl/ioctl-number.rst
 +++ linux-next-20261116/Documentation/userspace-api/ioctl/ioctl-number.rst
-@@ -434,6 +434,7 @@ Code  Seq#    Include File
- 0xBA  00-0F  uapi/linux/liveupdate.h                                   Pasha Tatashin
-                                                                        <mailto:pasha.tatashin@soleen.com>
- 0xC0  00-0F  linux/usb/iowarrior.h
-+0xC4  00-1F  platform/raspberrypi/vchiq-interface/vchiq_ioctl.h
- 0xCA  00-0F  uapi/misc/cxl.h                                           Dead since 6.15
- 0xCA  10-2F  uapi/misc/ocxl.h
- 0xCA  80-BF  uapi/scsi/cxlflash_ioctl.h                                Dead since 6.15
-@@ -446,7 +447,7 @@ Code  Seq#    Include File
- 0xDD  00-3F                                                            ZFCP device driver see drivers/s390/scsi/
-                                                                        <mailto:aherrman@de.ibm.com>
- 0xE5  00-3F  linux/fuse.h
--0xEC  00-01  linux/platform_data/cros_ec_chardev.h                     ChromeOS EC driver
-+0xEC  00-02  linux/platform_data/cros_ec_chardev.h                     ChromeOS EC driver
- 0xEE  00-09  uapi/linux/pfrut.h                                        Platform Firmware Runtime Update and Telemetry
- 0xEF  00-0F  uapi/linux/ntfs.h                                         NTFS
- 0xF3  00-3F  drivers/usb/misc/sisusbvga/sisusb.h                       sisfb
+@@ -78,6 +78,7 @@ Code  Seq#    Include File
+ 0x00  00-1F  linux/fb.h                                                conflict!
+ 0x00  00-1F  linux/wavefront.h                                         conflict!
+ 0x02  all    linux/fd.h
++             drivers/block/floppy.c
+ 0x03  all    linux/hdreg.h
+ 0x04  D2-DC  linux/umsdos_fs.h                                         Dead since 2.6.11, but don't reuse these.
+ 0x06  all    linux/lp.h
+@@ -90,6 +91,9 @@ Code  Seq#    Include File
+              linux/blkpg.h
+              linux/blkzoned.h
+              linux/blk-crypto.h
++             linux/blkdev.h
++             linux/blktrace_api.h
++             block/ioctl.c
+ 0x15  all    linux/fs.h                                                FS_IOC_* ioctls
+ 0x1b  all                                                              InfiniBand Subsystem
+                                                                        <http://infiniband.sourceforge.net/>
 
