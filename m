@@ -2,39 +2,41 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 119C1606A32C
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2026 04:35:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1495517.1694368 (Exim 4.92)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F28C8606A326
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2026 05:36:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=a7dJOzVX
+Received: from list by lists.xenproject.org with outflank-mailman.1495586.1694416 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTtrd-0007bS-7z; Thu, 19 Nov 2026 04:35:13 +0000
+	id 1xTuoF-0001Up-GU; Thu, 19 Nov 2026 05:35:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1495517.1694368; Thu, 19 Nov 2026 04:35:13 +0000
+Received: by outflank-mailman (output) from mailman id 1495586.1694416; Thu, 19 Nov 2026 05:35:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xTtrd-0007bK-2O; Thu, 19 Nov 2026 04:35:13 +0000
-Received: by outflank-mailman (input) for mailman id 1495517;
- Thu, 19 Nov 2026 04:35:11 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xTuoF-0001Qf-6K; Thu, 19 Nov 2026 05:35:47 +0000
+Received: by outflank-mailman (input) for mailman id 1495586;
+ Thu, 19 Nov 2026 05:35:46 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <lin.liu01@citrix.com>) id 1xTtrb-0007bB-Or
- for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 04:35:11 +0000
+ (envelope-from <rdunlap@infradead.org>) id 1xTuoE-000109-8J
+ for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 05:35:46 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xTtrb-007kF4-5O
- for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 05:35:11 +0100
-Received: from [10.42.69.3] (helo=localhost)
+ id 1xTuoD-00AnhR-If
+ for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 06:35:45 +0100
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <lin.liu01@citrix.com>)
- id 6afe7c5d-8faa-0a2a0a5109dd-0a2a450396ea-16
- for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 05:35:11 +0100
-Received: from [160.101.131.9] (helo=na1pdmzitismtp02.tibco.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <lin.liu01@citrix.com>)
- id 6afe7c7e-fae8-0a2a45030019-a06583099228-3
- for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 05:35:11 +0100
-Received: from cdev-nkg (unknown [10.113.40.46])
- by na1pdmzitismtp02.tibco.com (Postfix) with ESMTP id E413D8521FB1;
- Wed, 18 Nov 2026 23:33:39 -0500 (EST)
+ (envelope-from <rdunlap@infradead.org>)
+ id 6afe8aaf-8faa-0a2a0a5109dd-0a2a4504d170-2
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 06:35:45 +0100
+Received: from [198.137.202.133] (helo=bombadil.infradead.org)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <rdunlap@infradead.org>)
+ id 6afe8ab0-b57f-0a2a45040019-c689ca8590de-3
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 06:35:45 +0100
+Received: from [50.53.43.113] (helo=bombadil.infradead.org)
+ by bombadil.infradead.org with esmtpsa (Exim 4.100.1 #2 (Red Hat Linux))
+ id 1xTuo2-0000000Aufu-2Ea3; Thu, 19 Nov 2026 05:35:36 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -43,82 +45,161 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; none
-From: Lin Liu <lin.liu01@citrix.com>
-To: ross.lagerwall@citrix.com,
-	jgross@suse.com
-Cc: sstabellini@kernel.org,
-	oleksandr_tyshchenko@epam.com,
-	andrew.cooper3@citrix.com,
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=bombadil.20210309 header.d=infradead.org header.i="@infradead.org" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
+	:Reply-To:Content-Type:Content-ID:Content-Description;
+	bh=bp3l8rwDPkSKznuZqcxjKl6885TgLTXi4yzkCNzGJRw=; b=a7dJOzVXczfXW7dP1pQdgOXabl
+	T0lzpIGAB3rM4BqjplgBseKhONkiLo8FqjUjC/QeLtOEv1Fip7Bbg9rFvcPURlwylnMWRY0CpS/gv
+	JU5wUuCHK07Kd2uJzstOabVXyZt4lVxplH4grO2i0Fov9cE3snJQwplhvj1bAgYxpZKn2uuMCEksG
+	AEqoJVO3SCDTJYqtI6pdlYiu87NTCrn27queuBQpVaWEEtDQ4/KBC2+LoOVscqpeK5jjkQNZ/gjnG
+	dEOzIUzdnAi7f6M0OtHuWf8AhTPay2QWRe5zwdUlHnod8LdvXypaW4Mj5RRhyQEFTu5DHgX1YAaIh
+	vpjrd9Bw==;
+From: Randy Dunlap <rdunlap@infradead.org>
+To: linux-kernel@vger.kernel.org
+Cc: Randy Dunlap <rdunlap@infradead.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	linux-doc@vger.kernel.org,
+	David Hildenbrand <david@kernel.org>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Jason Gunthorpe <jgg@nvidia.com>,
+	Leon Romanovsky <leonro@nvidia.com>,
+	linux-mm@kvack.org,
+	Jaroslav Kysela <perex@perex.cz>,
+	Takashi Iwai <tiwai@suse.com>,
+	linux-sound@vger.kernel.org,
+	Jens Axboe <axboe@kernel.dk>,
+	linux-block@vger.kernel.org,
+	Marcel Holtmann <marcel@holtmann.org>,
+	Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
+	linux-bluetooth@vger.kernel.org,
+	Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
+	Jason Wang <jasowangio@gmail.com>,
+	David Heidelberg <david@ixit.cz>,
+	oe-linux-nfc@lists.linux.dev,
+	Chas Williams <3chas3@gmail.com>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@kernel.org>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>,
+	netdev@vger.kernel.org,
+	Helge Deller <deller@gmx.de>,
+	linux-fbdev@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	MPT-FusionLinux.pdl@broadcom.com,
+	"James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+	"Martin K. Petersen" <mkp@kernel.org>,
+	linux-scsi@vger.kernel.org,
+	Miquel Raynal <miquel.raynal@bootlin.com>,
+	Richard Weinberger <richard@nod.at>,
+	Vignesh Raghavendra <vigneshr@ti.com>,
+	Zhihao Cheng <chengzhihao1@huawei.com>,
+	linux-mtd@lists.infradead.org,
+	Neill Kapron <nkapron@google.com>,
+	Andrey Konovalov <andreyknvl@gmail.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	linux-usb@vger.kernel.org,
+	Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	xen-devel@lists.xenproject.org,
-	iommu@lists.linux.dev,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] xen/swiotlb: Check the segment boundary in range_straddles_page_boundary()
-Date: Thu, 19 Nov 2026 04:35:04 +0000
-Message-ID: <20261119043504.2013850-1-lin.liu01@citrix.com>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <8a57f3f6-c649-4be0-8e14-2cc16dd41f8f@suse.com>
-References: <807c3b040b02d7d89f1cac76eb137afbee91015d.1794573814.git.lin.liu01@citrix.com> <75f37608-f3ef-48db-8e7b-4a1ba13a9ee0@citrix.com> <8a57f3f6-c649-4be0-8e14-2cc16dd41f8f@suse.com>
+	Hans de Goede <hansg@kernel.org>,
+	Arnd Bergmann <arnd@arndb.de>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	=?UTF-8?q?Eugenio=20P=C3=A9rez?= <eperezma@redhat.com>,
+	Sean Christopherson <seanjc@google.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	kvm@vger.kernel.org,
+	virtualization@lists.linux.dev,
+	Jan Kara <jack@suse.cz>,
+	linux-fsdevel@vger.kernel.org,
+	"Theodore Ts'o" <tytso@mit.edu>,
+	linux-ext4@vger.kernel.org,
+	Mike Marshall <hubcap@omnibond.com>,
+	devel@lists.orangefs.org,
+	Paulo Alcantara <pc@manguebit.org>,
+	Namjae Jeon <linkinjeon@kernel.org>,
+	linux-cifs@vger.kernel.org,
+	Jaegeuk Kim <jaegeuk@kernel.org>,
+	Chao Yu <chao@kernel.org>,
+	linux-f2fs-devel@lists.sourceforge.net,
+	Florian Fainelli <florian.fainelli@broadcom.com>,
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
+	Tzung-Bi Shih <tzungbi@kernel.org>,
+	Benson Leung <bleung@chromium.org>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	Alex Deucher <alexander.deucher@amd.com>,
+	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+	amd-gfx@lists.freedesktop.org,
+	Jani Nikula <jani.nikula@linux.intel.com>,
+	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+	Rodrigo Vivi <rodrigo.vivi@intel.com>,
+	Tvrtko Ursulin <tursulin@ursulin.net>,
+	intel-gfx@lists.freedesktop.org,
+	Matthew Brost <matthew.brost@intel.com>,
+	=?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
+	intel-xe@lists.freedesktop.org
+Subject: [PATCH v2 06/12] docs: ioctl-number: update SCSI entries
+Date: Wed, 18 Nov 2026 21:35:07 -0800
+Message-ID: <20261119053514.255348-7-rdunlap@infradead.org>
+X-Mailer: git-send-email 2.56.1
+In-Reply-To: <20261119053514.255348-1-rdunlap@infradead.org>
+References: <20261119053514.255348-1-rdunlap@infradead.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-33051d/1795062911-766FB4E9-E3AE2522/0/0
+X-purgate-ID: tlsNG-ebf023/1795066545-C0AD8B50-FC75E018/0/0
 X-purgate-type: clean
-X-purgate-size: 1855
-X-Spam-Status: No, score=-6.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=no
+X-purgate-size: 2202
+X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=unavailable
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 18/11/2026 12:24, Jürgen Groß wrote:
-> On 18.11.26 12:25, Ross Lagerwall wrote:
->> Is the change actually needed for alloc_coherent / free_coherent?
->> The allocation from __get_free_pages() is naturally aligned and
->> range_requires_alignment() requires it has the same alignment so it is
->> naturally aligned in bus space. I don't think that it can cross a
->> segment boundary then.
->
-> Hmm, agreed.
+Update the list of files where SCSI ioctls are defined and update the
+ranges of function numbers that are used.
 
-Thanks both.  Agreed, the check is unnecessary for the coherent paths.
-I had noted this in the commit message ("coherent allocations are already
-naturally aligned via range_requires_alignment()"), but the code still
-changed them.
+Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
+---
+v2: no change
 
-For v2 I plan to leave range_straddles_page_boundary() and the coherent
-paths untouched, and check only streaming mappings, with a small helper
-next to range_straddles_page_boundary():
+[Since having multiple maintainers trying to merge these would
+cause some conflicts, it would be more manageable for Jon to
+take all of these through the docs-next tree.]
 
-/* Bus-contiguous, but may still cross the device's segment boundary */
-static inline bool range_crosses_seg_boundary(struct device *dev,
-					      dma_addr_t dma, size_t size)
-{
-	unsigned long mask = dma_get_seg_boundary(dev);
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: Shuah Khan <skhan@linuxfoundation.org>
+Cc: linux-doc@vger.kernel.org
+Cc: MPT-FusionLinux.pdl@broadcom.com
+Cc: "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>
+Cc: "Martin K. Petersen" <mkp@kernel.org>
+Cc: linux-scsi@vger.kernel.org
 
-	return size && ((dma ^ (dma + size - 1)) & ~mask);
-}
+ Documentation/userspace-api/ioctl/ioctl-number.rst |    3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-used in xen_swiotlb_map_phys():
-
-	if (dma_capable(dev, dev_addr, size, true, attrs) &&
-	    !dma_kmalloc_needs_bounce(dev, size, dir) &&
-	    !range_straddles_page_boundary(phys, size) &&
-	    !range_crosses_seg_boundary(dev, dev_addr, size) &&
-		!xen_arch_need_swiotlb(dev, phys, dev_addr) &&
-		!is_swiotlb_force_bounce(dev))
-		goto done;
-
-A mapping larger than the boundary window also takes the bounce path:
-swiotlb cannot find slots that do not span the boundary, so the mapping
-fails instead of the device being handed a crossing range.
-
-This is the shape of the version Jürgen first looked at, before the check
-was moved into the helper.
-
-I'll send v2 if you are both happy with that.
-
-Lin
+--- linux-next-20261116.orig/Documentation/userspace-api/ioctl/ioctl-number.rst
++++ linux-next-20261116/Documentation/userspace-api/ioctl/ioctl-number.rst
+@@ -187,7 +187,7 @@ Code  Seq#    Include File
+ 'I'   40-4F  linux/mISDNif.h                                           conflict!
+ 'K'   all    linux/kd.h
+ 'L'   00-1F  linux/loop.h                                              conflict!
+-'L'   10-1F  drivers/scsi/mpt3sas/mpt3sas_ctl.h                        conflict!
++'L'   10-21  drivers/scsi/mpt3sas/mpt3sas_ctl.h                        conflict!
+ 'L'   E0-FF  linux/ppdd.h                                              encrypted disk device driver
+                                                                        <http://linux01.gwdg.de/~alatham/ppdd.html>
+ 'L'   35-38  arch/m68k/include/asm/fbio.h
+@@ -259,6 +259,7 @@ Code  Seq#    Include File
+ 'c'   00-7F  linux/comstats.h                                          conflict!
+ 'c'   00-7F  linux/coda.h                                              conflict!
+ 'c'   00-1F  linux/chio.h                                              conflict!
++'c'   08     drivers/scsi/ch.c                                         conflict!
+ 'c'   80-9F  arch/s390/include/asm/chsc.h                              conflict!
+ 'c'   A0-AF  arch/x86/include/asm/msr.h conflict!
+ 'd'   00-FF  linux/char/drm/drm.h                                      conflict!
 
