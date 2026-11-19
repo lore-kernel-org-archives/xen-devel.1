@@ -2,43 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A0DAB606A325
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2026 19:32:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 86D40606A325
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2026 19:34:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20260707 header.b=GWt2mTS5
-Received: from list by lists.xenproject.org with outflank-mailman.1496909.1695237 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=HGOCQ5y3
+Received: from list by lists.xenproject.org with outflank-mailman.1496926.1695246 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xU7rq-0007xV-AV; Thu, 19 Nov 2026 19:32:22 +0000
+	id 1xU7tL-0000Kc-Ne; Thu, 19 Nov 2026 19:33:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1496909.1695237; Thu, 19 Nov 2026 19:32:22 +0000
+Received: by outflank-mailman (output) from mailman id 1496926.1695246; Thu, 19 Nov 2026 19:33:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xU7rq-0007xO-7a; Thu, 19 Nov 2026 19:32:22 +0000
-Received: by outflank-mailman (input) for mailman id 1496909;
- Thu, 19 Nov 2026 19:32:21 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <3WU3_agcKCVA096yw9Ay66y3w.u64Fw5-vwDw330ABA.Fw57961wuB.69y@flex--irogers.bounces.google.com>)
- id 1xU7ro-0007wr-Uf
- for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 19:32:21 +0000
+	id 1xU7tL-0000KV-Ks; Thu, 19 Nov 2026 19:33:55 +0000
+Received: by outflank-mailman (input) for mailman id 1496926;
+ Thu, 19 Nov 2026 19:33:54 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xU7tK-0000KN-8w
+ for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 19:33:54 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xU7ro-006thU-Ax
- for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 20:32:20 +0100
-Received: from [10.42.69.10] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <3WU3_agcKCVA096yw9Ay66y3w.u64Fw5-vwDw330ABA.Fw57961wuB.69y@flex--irogers.bounces.google.com>)
- id 6aff4e9e-bab6-0a2a0a5309dd-0a2a450aa8c2-34
- for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 20:32:20 +0100
-Received: from [209.85.167.197] (helo=mail-oi1-f197.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <3WU3_agcKCVA096yw9Ay66y3w.u64Fw5-vwDw330ABA.Fw57961wuB.69y@flex--irogers.bounces.google.com>)
- id 6aff4d5a-f2d2-0a2a450a0019-d155a7c5d817-3
- for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 20:26:19 +0100
-Received: by mail-oi1-f197.google.com with SMTP id
- 5614622812f47-4e937c5bd4fso152079b6e.2
- for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 11:26:19 -0800 (PST)
+ id 1xU7tJ-008DLZ-LT
+ for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 20:33:53 +0100
+Received: from [10.42.69.8] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6aff4f14-e002-0a2a0a5209dd-0a2a4508bc7e-8
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 20:33:53 +0100
+Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6aff4f21-f659-0a2a45080019-d1558034a988-3
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 20:33:53 +0100
+Received: by mail-wm1-f52.google.com with SMTP id
+ 5b1f17b1804b1-4bb77a462c6so10404565e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 11:33:53 -0800 (PST)
+Received: from [10.180.0.29] ([89.33.149.124])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4bb853a9846sm64873585e9.11.2026.11.19.11.33.52
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 19 Nov 2026 11:33:52 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -47,543 +49,452 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=google.com header.i="@google.com" header.h="Content-Type:Cc:To:From:Subject:Message-ID:References:Mime-Version:In-Reply-To:Date"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20260707; t=1795116378; x=1795721178; darn=lists.xenproject.org;
-        h=content-type:cc:to:from:subject:message-id:references:mime-version
-         :in-reply-to:date:from:to:cc:subject:date:message-id:reply-to
+        d=gmail.com; s=20260707; t=1795116833; x=1795721633; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=d2DVsEOIJmONwY68Fz20HCkoh5ZG0X1B/QknI6oOs3U=;
-        b=GWt2mTS5Ep4wXLiSNNIvPzGqV2ZYHisaoPRc4n++SOST5f2zrXPq/Kbkjv3Yej2+Q1
-         JWW++7hdzRnV9jjHC2mz289dOPGrPld0R/ePf6NZA1xXrMLE01e3lztaC5NNA1EQUOzR
-         n7SqoVrcudFfIBAtBbDFh2nQ14tNtUeixaFPiSK90wYecq3S8koTtdnSwsRtQK7UzhTe
-         fiQpQGiJpkWLR3GKlJ+xp7YMqwv2Llrr+Ft+80wffUjLFc7olulXzmuxRjFTd036PBBU
-         8BlKGwGzWU0WWmEyHIMBuoWcWEXPGCyKkfwssfabT3Zi0VGcmtN+GR2PavCR+BYRoaYl
-         PFcw==
+        bh=Bj3fOOM/9omYeFycRwzz+rO6VcFRXpatAlGW96Yv+BA=;
+        b=HGOCQ5y34loqFcTNb/p4HdzLVWdmDAhNkhp/1S3zMQyRlVCncf8XyvbxdF7Xy8/IdA
+         N9p1k6IfnijznnkUD0bhdBYZBYDrWK2IprIlQETUBHIbLp0DAD6P0PdK/KiBcDCgNAwN
+         JuWFoJ4WYJSBU+267375Z2Cy0kIcTs4iRStguI3sS9f5rIWoFbDgAEWtSemYGhMHPV/t
+         IOqfi/haSkJw+HG3eW0tu9lpBTnHlqd10eIshdx6ewlnJlBwFfT6CKuFc6SlesWkmTK/
+         +D/Rl34bcoCeNa8QZ+nTe2vkzWB5/wn9aL5BfzQjVB0SoYAhKDRH7nT2Vfq/wqHZmKWk
+         1Rpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795116378; x=1795721178;
-        h=content-type:cc:to:from:subject:message-id:references:mime-version
-         :in-reply-to:date:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20260707; t=1795116833; x=1795721633;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=d2DVsEOIJmONwY68Fz20HCkoh5ZG0X1B/QknI6oOs3U=;
-        b=pJ3XwsAeRI2MoPH7RDTjR72zmXJd8L8gNpYWKg/uak2cV4aBneXJsLipA2Pv0C8X75
-         MtqDe8gjJ6rQKwft8acL9HiMJbeLshbcFcqfWeBkodqA232ApEmQ/WZhMuREL8YShoi7
-         Z4Gb3jn0aNp84dpNJE3TLNADZuDsVSH/GEeNDG7uzBEE1eYD+Xlq1nZTr8QenPYNNvW3
-         IDirFh+aCibR3C0RJn4yPUTdQfXB1gqUmcN2vgrjJy4ie32i5F3T6x/m9mkyXB6X3GWQ
-         Q9MRkGsPyPbRx2Lpv1157t1UpgUco+n/EThROCOySOHxV4djFzBGJ0X21ScFp5IpPAvU
-         tTLQ==
-X-Forwarded-Encrypted: i=1; AL+hErEYWbckucsAi1X6k0A+J6J7u6I9ocnjPTpiQQ3c2HS+oupOJ66tkRIhJxPn94ggrT9xPrPzf5TYQSw=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z854VTv3rDjb0O0JC6dfSJla4LwwFj6LQ3gp/Qyy13wGnnOllRU
-	gcDgVlRjgI1AnVAtm21nwxcSzugeSzGgjsuzCBQufuaMvL5ihSfOKP3xVzPupMR5fpdiPT8uRLp
-	RNE+sgA++lw==
-X-Received: from jaqb6.prod.google.com ([2002:a05:6638:1a6:b0:61f:e4cd:8716])
- (user=irogers job=prod-delivery.src-stubby-dispatcher) by 2002:a05:6808:c3eb:b0:4b9:e5fa:8a17
- with SMTP id 5614622812f47-57a0a913526mr994137b6e.28.1795116377408; Thu, 19
- Nov 2026 11:26:17 -0800 (PST)
-Date: Thu, 19 Nov 2026 11:25:20 -0800
-In-Reply-To: <20261119192520.1983406-1-irogers@google.com>
+        bh=Bj3fOOM/9omYeFycRwzz+rO6VcFRXpatAlGW96Yv+BA=;
+        b=pIH3c4klbM5RkZqRUTUk2mzyc/isanE0UOq4Dj3/PTR4olh68T6xH1SjjGNHBq6vdd
+         ahzO7hk1r4NULot96LYrx/ucORJ8rbZv8nXUETGTcOH3F/J1ugCml6SMxu1eK9WN11ul
+         LanX5X80DoplZ7sC0L3ZVpEboz3YPK5TZB+twdvthnXWFWKc5ilIpw7w1iWFKYFYeVxu
+         7i8NxFnXr08bYEP2Zt+A+C8P5Qzzcvlg0tvx6uDhBOXaAOBDAJBuKdOKaXo93Ec8FVjh
+         UfoNjaT+r8ZGJdD92bbAVvfZwi06ZuSL/fzU92X/ErsMoYOotkeqr1REll/x9Ia3B5ZG
+         T9PQ==
+X-Gm-Message-State: APuU4Z9EPYTRDQTT7tvmRg+JAHhjysX49etoFYaV4yfmMz8fx5OJCnZs
+	9R2Gg3jWrTRnWTqKWFoy5KiMLjAUyY1p4rwRgPiodDbHbiGvZZuEHxlGQpBZuxry
+X-Gm-Gg: AYBFou03MMhnRXu2JteXvsNDfRfwz3T0jimVZTKD/G0xdtU0ZIa1yEQ6g36P80y8zOq
+	56ui8bVTiNNCWwz+VeVJbQ3mq7nsOF8GcdkezdvXxqXAtKQUDP/A7/TRbUdHxo1uNgRk7PrOw1S
+	JxQU4L/BDFcY5GKJHsAmREcCT/W6i8xNBIn2uYsKzRO88LThUZVmiWJm6RiG75lAbD/YMpKMjZT
+	U3uVwSmzQZEC9o2aXFyusFjmNgBMnJAmu81XK/4TQB2ohwTxHozm9WOoQYqurFtSByTS2Sq3VrN
+	fyKscd78xBdZlcpJAKuD/gDfTmRkjbF1rDIa0jQ3nkFd9YUJ21511pNP3Ke0apGC2POujWle5OT
+	XoEgUt5gCgSguPIsLM5y6GIQK3OhDGeYWCRt2spyyks9BbtzVNY52U7P80EWx9eScOS2pV/Ebhf
+	PtV3DNQIu2rS5mtqUFzbz5N2YBMam1S8AO57FxD6bJVmFOOmheIGOOd+N0MNv0gHivqQxRm4UrD
+	P6NCfFZvPf3audPMSkfPVP+CHPObWBnP8u2bmbxdQeOWkgoq50ticJxqP32+2tvO/1DYZijs9FY
+	0qfFlYq/Xz9sHSSWAOjJY+dUNlHo4VRAMO8vhDg=
+X-Received: by 2002:a05:600c:1d09:b0:4bb:66fd:ad68 with SMTP id 5b1f17b1804b1-4bb888160cdmr10766365e9.14.1795116832829;
+        Thu, 19 Nov 2026 11:33:52 -0800 (PST)
+Message-ID: <7bece561-1e8f-47d3-bf19-27fa5428c3ed@gmail.com>
+Date: Thu, 19 Nov 2026 20:33:51 +0100
 X-Archived-By: <archiver.kernel.org>
-Mime-Version: 1.0
-References: <20261119192520.1983406-1-irogers@google.com>
-X-Mailer: git-send-email 2.56.1.750.gf70dc682cf-goog
-Message-ID: <20261119192520.1983406-10-irogers@google.com>
-Subject: [PATCH v4 9/9] kobject: Require explicit initialization of struct kobj_type::release
-From: Ian Rogers <irogers@google.com>
-To: Danilo Krummrich <dakr@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
-	Kees Cook <kees@kernel.org>, Miguel Ojeda <ojeda@kernel.org>, 
-	"Rafael J . Wysocki" <rafael@kernel.org>
-Cc: Madhavan Srinivasan <maddy@linux.ibm.com>, Srish Srinivasan <ssrish@linux.ibm.com>, 
-	Michael Ellerman <mpe@ellerman.id.au>, Nicholas Piggin <npiggin@gmail.com>, 
-	Christophe Leroy <chleroy@kernel.org>, Nayna Jain <nayna@linux.ibm.com>, 
-	Mimi Zohar <zohar@linux.ibm.com>, Yoshinori Sato <ysato@users.sourceforge.jp>, 
-	Rich Felker <dalias@libc.org>, John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>, 
-	Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, 
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, Nathan Chancellor <nathan@kernel.org>, 
-	Nick Desaulniers <ndesaulniers@google.com>, Viresh Kumar <viresh.kumar@linaro.org>, 
-	Zhongqiu Han <zhongqiu.han@oss.qualcomm.com>, Alexander Aring <aahringo@redhat.com>, 
-	Felix Kuehling <felix.kuehling@amd.com>, 
-	"=?UTF-8?q?Christian=20K=C3=B6nig?=" <christian.koenig@amd.com>, Zhihao Cheng <chengzhihao1@huawei.com>, 
-	Sumanth Korikkar <sumanthk@linux.ibm.com>, Bill Wendling <morbo@google.com>, 
-	Justin Stitt <justinstitt@google.com>, driver-core@lists.linux.dev, llvm@lists.linux.dev, 
-	linux-hardening@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-acpi@vger.kernel.org, 
-	linux-pm@vger.kernel.org, linuxppc-dev@lists.ozlabs.org, 
-	linux-sh@vger.kernel.org, linux-s390@vger.kernel.org, gfs2@lists.linux.dev, 
-	xen-devel@lists.xenproject.org, linux-mtd@lists.infradead.org, 
-	amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, 
-	linux-kernel@vger.kernel.org, Ian Rogers <irogers@google.com>
-Content-Type: text/plain; charset="UTF-8"
-X-purgate-ID: tlsNG-4011c0/1795116379-51AC4CFC-904F0068/0/0
-X-purgate-type: clean
-X-purgate-size: 19290
-X-Spam-Status: No, score=-26.3 required=3.0 tests=BAYES_00,DKIMWL_WL_MED,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT,USER_IN_DEF_DKIM_WL
-	autolearn=unavailable autolearn_force=no version=4.0.1
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] xen/riscv: add support for riscv,isa-extensions
+ devicetree property
+To: cristian.andrei1423@gmail.com
+Cc: xen-devel@lists.xenproject.org, alistair.francis@wdc.com,
+ connojdavis@gmail.com, baptiste.le-duc@vates.tech,
+ community.manager@xenproject.org, andrew.cooper3@citrix.com,
+ anthony.perard@vates.tech, michal.orzel@amd.com, jbeulich@suse.com,
+ julien@xen.org, roger@xenproject.org, sstabellini@kernel.org,
+ dmukhin@ford.com
+References: <20261119154807.80195-1-cristian.andrei1423@gmail.com>
+ <av8uF5DrTmmDDFuP@kraken>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <av8uF5DrTmmDDFuP@kraken>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-c1860d/1795116833-D5F4787B-3D2BD97F/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 14661
+X-Spam-Status: No, score=-14.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Documentation/core-api/kobject.rst states:
+Hi Cristian,
 
-  "One important point cannot be overstated: every kobject must have a
-  release() method, and the kobject must persist (in a consistent state)
-  until that method is called. If these constraints are not met, the code
-  is flawed. Note that the kernel will warn you if you forget to provide
-  a release() method. Do not try to get rid of this warning by providing
-  an \"empty\" release function."
+For some reason, I can't find the original patch so I will respond as 
+reply to Denis's reply.
 
-Annotate struct kobj_type::release with __must_init so the compiler
-diagnoses any struct kobj_type initializer that omits .release.
+Thanks for the patch. The overall approach (prefer riscv,isa-extensions,
+fall back to riscv,isa per CPU) looks good to me. Some comments below.
 
-For the remaining legacy struct kobj_type definitions that still omit a
-release callback, explicitly initialize .release = NULL and document
-each site's lifetime status:
-- In built-in code where the backing storage is static, per-CPU, or
-  allocated once at boot and never freed (arm64 cpuinfo, ACPI hotplug
-  profiles, and s390 sclp_mem), note that omitting release() violates
-  the kobject API contract while explaining what guarantees the storage
-  outlives kobject cleanup.
-- In drivers and tristate modules with broken kobject lifetime
-  management (where enclosing dynamic or devm allocations are freed or
-  zeroed independently of kobject_put(), or where module unload unmaps
-  static kobjects/ksets while final or CONFIG_DEBUG_KOBJECT_RELEASE
-  delayed cleanup may still be pending), document the lifetime hazard
-  with a FIXME comment for follow-up fixes.
+On 11/19/26 6:12 PM, dmukhin@ford.com wrote:
+> On Thu, Nov 19, 2026 at 05:48:07PM +0200, cristian.andrei1423@gmail.com wrote:
+>> Xen panics when a CPU only has the riscv,isa-extensions property in
+>> the device tree. It only accepts the deprecated riscv,isa property,
+>> which forces users to use legacy devicetrees.
+>>
+>> Use riscv,isa-extensions if present, otherwise the legacy riscv,isa.
+>> If the new property is used, riscv,isa-extensions and riscv,isa-base
+>> must both be present and riscv,isa-base must exactly match the build
+>> string. Make a new shared helper riscv_isa_ext_check() which returns
+>> the exact state of the property: whether both are present or to use
+>> the legacy property. This helper makes both cpufeature.c and smpboot.c
+>> agree on which property a CPU uses.
+>>
+>> A CPU with neither property is skipped with a message. Make it now
+>> an error because a skipped CPU is left out of the intersection, so
+>> Xen could use extensions that CPU lacks.
 
-This change does not alter runtime behavior at these sites.
+This reads as if skipping were the new behaviour. Maybe something like:
 
-Link: https://lpc.events/event/20/contributions/2392/
-Signed-off-by: Ian Rogers <irogers@google.com>
----
- arch/arm64/kernel/cpuinfo.c                   |  7 +++++++
- drivers/acpi/sysfs.c                          |  7 +++++++
- drivers/dma/ioat/sysfs.c                      |  8 +++++++
- drivers/gpu/drm/amd/amdgpu/amdgpu_ualink.c    |  8 +++++++
- drivers/gpu/drm/amd/amdgpu/amdgpu_xcp.c       | 17 +++++++++++++++
- drivers/infiniband/hw/hfi1/sysfs.c            |  7 +++++++
- drivers/infiniband/hw/usnic/usnic_ib_sysfs.c  |  7 +++++++
- drivers/parisc/pdc_stable.c                   |  8 +++++++
- drivers/power/supply/ab8500_fg.c              |  8 +++++++
- drivers/s390/char/sclp_mem.c                  |  6 ++++++
- drivers/soc/hisilicon/kunpeng_hccs.c          | 18 ++++++++++++++++
- .../fbdev/omap2/omapfb/dss/display-sysfs.c    |  7 +++++++
- .../fbdev/omap2/omapfb/dss/manager-sysfs.c    |  8 +++++++
- .../fbdev/omap2/omapfb/dss/overlay-sysfs.c    |  7 +++++++
- fs/erofs/sysfs.c                              | 14 +++++++++++++
- fs/f2fs/sysfs.c                               | 21 +++++++++++++++++++
- fs/ocfs2/cluster/masklog.c                    |  7 +++++++
- include/linux/kobject.h                       |  2 +-
- 18 files changed, 166 insertions(+), 1 deletion(-)
+   "Currently, a CPU with neither property is skipped with a message.
+    Make this an error instead, as a skipped CPU is left out of the
+    intersection and Xen could then use extensions that CPU lacks."
 
-diff --git a/arch/arm64/kernel/cpuinfo.c b/arch/arm64/kernel/cpuinfo.c
-index 94e6cd211d70..7c374b8c25af 100644
---- a/arch/arm64/kernel/cpuinfo.c
-+++ b/arch/arm64/kernel/cpuinfo.c
-@@ -295,6 +295,13 @@ const struct seq_operations cpuinfo_op = {
- 
- 
- static const struct kobj_type cpuregs_kobj_type = {
-+	/*
-+	 * Omitting release() violates the kobject API contract, but lifetime
-+	 * is safe: info->kobj is embedded in built-in static per-CPU cpu_data
-+	 * that is never freed or passed to kobject_put() (CPU hotplug only
-+	 * toggles sysfs visibility via kobject_add() and kobject_del()).
-+	 */
-+	.release = NULL,
- 	.sysfs_ops = &kobj_sysfs_ops,
- };
- 
-diff --git a/drivers/acpi/sysfs.c b/drivers/acpi/sysfs.c
-index a4534b3e3cfb..d435b565ad19 100644
---- a/drivers/acpi/sysfs.c
-+++ b/drivers/acpi/sysfs.c
-@@ -975,6 +975,13 @@ static struct attribute *hotplug_profile_attrs[] = {
- ATTRIBUTE_GROUPS(hotplug_profile);
- 
- static const struct kobj_type acpi_hotplug_profile_ktype = {
-+	/*
-+	 * Omitting release() violates the kobject API contract, but lifetime
-+	 * is safe: hotplug->kobj is only embedded in static built-in
-+	 * struct acpi_scan_handler instances that are never unregistered or
-+	 * freed.
-+	 */
-+	.release = NULL,
- 	.sysfs_ops = &kobj_sysfs_ops,
- 	.default_groups = hotplug_profile_groups,
- };
-diff --git a/drivers/dma/ioat/sysfs.c b/drivers/dma/ioat/sysfs.c
-index 976134df8108..ec5a90c7aded 100644
---- a/drivers/dma/ioat/sysfs.c
-+++ b/drivers/dma/ioat/sysfs.c
-@@ -167,6 +167,14 @@ static const struct attribute *const ioat_attrs[] = {
- ATTRIBUTE_GROUPS(ioat);
- 
- const struct kobj_type ioat_ktype = {
-+	/*
-+	 * FIXME: Broken kobject lifetime (needs follow-up fix):
-+	 * ioat_kobject_del() calls kobject_put(&ioat_chan->kobj) and
-+	 * release_ioatdma() frees ioat_chan via kfree() without waiting for
-+	 * final kobject cleanup (use-after-free if a sysfs reference is held
-+	 * or under CONFIG_DEBUG_KOBJECT_RELEASE).
-+	 */
-+	.release = NULL,
- 	.sysfs_ops = &ioat_sysfs_ops,
- 	.default_groups = ioat_groups,
- };
-diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_ualink.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_ualink.c
-index d025b4183b29..5aa90f1271e4 100644
---- a/drivers/gpu/drm/amd/amdgpu/amdgpu_ualink.c
-+++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_ualink.c
-@@ -892,6 +892,14 @@ static const struct attribute_group ualink_xcp_info_group = {
- };
- 
- static const struct kobj_type ualink_xcp_info_ktype = {
-+	/*
-+	 * FIXME: Broken kobject lifetime (needs follow-up fix):
-+	 * xcp->ualink.kobj is embedded in adev->xcp_mgr;
-+	 * amdgpu_ualink_xcp_sysfs_remove() calls kobject_put() and
-+	 * amdgpu_device_fini_sw() later calls kfree(adev->xcp_mgr) without
-+	 * waiting for final kobject cleanup.
-+	 */
-+	.release = NULL,
- 	.sysfs_ops = &kobj_sysfs_ops
- };
- 
-diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_xcp.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_xcp.c
-index ab14079d1c42..8e21bf57596c 100644
---- a/drivers/gpu/drm/amd/amdgpu/amdgpu_xcp.c
-+++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_xcp.c
-@@ -797,6 +797,16 @@ static const struct sysfs_ops xcp_cfg_res_sysfs_ops = {
- };
- 
- static const struct kobj_type xcp_cfg_res_sysfs_ktype = {
-+	/*
-+	 * FIXME: Broken kobject lifetime (needs follow-up fix): xcp_res->kobj
-+	 * is embedded in struct amdgpu_xcp_cfg, freed by parent xcp_cfg->kobj's
-+	 * xcp_cfg_sysfs_release(). While an added child pins xcp_cfg->kobj
-+	 * until kobject_cleanup() finishes, if kobject_init_and_add() fails in
-+	 * amdgpu_xcp_cfg_sysfs_init() no parent reference is held and
-+	 * kfree(xcp_cfg) can race with delayed cleanup under
-+	 * CONFIG_DEBUG_KOBJECT_RELEASE.
-+	 */
-+	.release = NULL,
- 	.sysfs_ops = &xcp_cfg_res_sysfs_ops,
- 	.default_groups = xcp_cfg_res_sysfs_groups,
- };
-@@ -1061,6 +1071,13 @@ static const struct attribute_group amdgpu_xcp_attrs_group = {
- };
- 
- static const struct kobj_type xcp_sysfs_ktype = {
-+	/*
-+	 * FIXME: Broken kobject lifetime (needs follow-up fix): xcp->kobj is
-+	 * embedded in adev->xcp_mgr; amdgpu_xcp_sysfs_entries_fini() calls
-+	 * kobject_put() and amdgpu_device_fini_sw() later calls
-+	 * kfree(adev->xcp_mgr) without waiting for final kobject cleanup.
-+	 */
-+	.release = NULL,
- 	.sysfs_ops = &kobj_sysfs_ops,
- };
- 
-diff --git a/drivers/infiniband/hw/hfi1/sysfs.c b/drivers/infiniband/hw/hfi1/sysfs.c
-index 372cfd13dc61..dc6693822589 100644
---- a/drivers/infiniband/hw/hfi1/sysfs.c
-+++ b/drivers/infiniband/hw/hfi1/sysfs.c
-@@ -608,6 +608,13 @@ static const struct sysfs_ops sde_sysfs_ops = {
- };
- 
- static struct kobj_type sde_ktype = {
-+	/*
-+	 * FIXME: Broken kobject lifetime (needs follow-up fix):
-+	 * hfi1_verbs_unregister_sysfs() calls kobject_put(&dd->per_sdma[i].kobj)
-+	 * and sdma_clean() frees dd->per_sdma via kfree() without waiting for
-+	 * final kobject cleanup.
-+	 */
-+	.release = NULL,
- 	.sysfs_ops = &sde_sysfs_ops,
- };
- 
-diff --git a/drivers/infiniband/hw/usnic/usnic_ib_sysfs.c b/drivers/infiniband/hw/usnic/usnic_ib_sysfs.c
-index fdb63a8fb997..f6946524a562 100644
---- a/drivers/infiniband/hw/usnic/usnic_ib_sysfs.c
-+++ b/drivers/infiniband/hw/usnic/usnic_ib_sysfs.c
-@@ -245,6 +245,13 @@ static struct attribute *usnic_ib_qpn_default_attrs[] = {
- ATTRIBUTE_GROUPS(usnic_ib_qpn_default);
- 
- static struct kobj_type usnic_ib_qpn_type = {
-+	/*
-+	 * FIXME: Broken kobject lifetime (needs follow-up fix):
-+	 * usnic_ib_destroy_qp() calls kobject_put(&qp_grp->kobj) via
-+	 * usnic_ib_sysfs_qpn_remove() and RDMA core immediately frees qp_grp
-+	 * without waiting for final kobject cleanup.
-+	 */
-+	.release = NULL,
- 	.sysfs_ops = &usnic_ib_qpn_sysfs_ops,
- 	.default_groups = usnic_ib_qpn_default_groups,
- };
-diff --git a/drivers/parisc/pdc_stable.c b/drivers/parisc/pdc_stable.c
-index 6b567a74fc2c..1dc7d8ffdc73 100644
---- a/drivers/parisc/pdc_stable.c
-+++ b/drivers/parisc/pdc_stable.c
-@@ -484,6 +484,14 @@ ATTRIBUTE_GROUPS(paths_subsys);
- 
- /* Specific kobject type for our PDC paths */
- static const struct kobj_type ktype_pdcspath = {
-+	/*
-+	 * FIXME: Broken kobject lifetime (needs follow-up fix): pdcspath_entry
-+	 * instances are static in tristate module pdc_stable, and
-+	 * pdc_stable_exit() calls kobject_put(&entry->kobj); unloading the
-+	 * module unmaps the static storage without waiting for final kobject
-+	 * cleanup.
-+	 */
-+	.release = NULL,
- 	.sysfs_ops = &pdcspath_attr_ops,
- 	.default_groups = paths_subsys_groups,
- };
-diff --git a/drivers/power/supply/ab8500_fg.c b/drivers/power/supply/ab8500_fg.c
-index eddd3e853106..f5a0bb821ee8 100644
---- a/drivers/power/supply/ab8500_fg.c
-+++ b/drivers/power/supply/ab8500_fg.c
-@@ -2539,6 +2539,14 @@ static struct attribute *ab8500_fg_attrs[] = {
- ATTRIBUTE_GROUPS(ab8500_fg);
- 
- static const struct kobj_type ab8500_fg_ktype = {
-+	/*
-+	 * FIXME: Broken kobject lifetime (needs follow-up fix): fg_kobject is
-+	 * embedded in devm-allocated struct ab8500_fg; ab8500_fg_sysfs_exit()
-+	 * only calls kobject_del() (never kobject_put()) before devm frees the
-+	 * struct on unbind, and on ab8500_fg_sysfs_init() failure kobject_put()
-+	 * races with devm freeing the struct on probe failure.
-+	 */
-+	.release = NULL,
- 	.sysfs_ops = &ab8500_fg_sysfs_ops,
- 	.default_groups = ab8500_fg_groups,
- };
-diff --git a/drivers/s390/char/sclp_mem.c b/drivers/s390/char/sclp_mem.c
-index 6df1926d4c62..a46d27817281 100644
---- a/drivers/s390/char/sclp_mem.c
-+++ b/drivers/s390/char/sclp_mem.c
-@@ -305,6 +305,12 @@ static ssize_t sclp_memmap_on_memory_store(struct kobject *kobj, struct kobj_att
- }
- 
- static const struct kobj_type ktype = {
-+	/*
-+	 * Omitting release() violates the kobject API contract, but lifetime
-+	 * is safe: built-in sclp_init_mem() allocates sclp_mems once at boot
-+	 * and never calls kobject_put() or kfree() on it.
-+	 */
-+	.release = NULL,
- 	.sysfs_ops = &kobj_sysfs_ops,
- };
- 
-diff --git a/drivers/soc/hisilicon/kunpeng_hccs.c b/drivers/soc/hisilicon/kunpeng_hccs.c
-index 3b9fa3a74abd..bccd0ba95073 100644
---- a/drivers/soc/hisilicon/kunpeng_hccs.c
-+++ b/drivers/soc/hisilicon/kunpeng_hccs.c
-@@ -1038,6 +1038,12 @@ static struct attribute *hccs_port_default_attrs[] = {
- ATTRIBUTE_GROUPS(hccs_port_default);
- 
- static const struct kobj_type hccs_port_type = {
-+	/*
-+	 * FIXME: Broken kobject lifetime (needs follow-up fix): hccs_port_info
-+	 * is allocated via devm_kzalloc(), and devm frees it on unbind or probe
-+	 * failure without waiting for kobject_put(&port->kobj) final cleanup.
-+	 */
-+	.release = NULL,
- 	.sysfs_ops = &hccs_comm_ops,
- 	.default_groups = hccs_port_default_groups,
- };
-@@ -1110,6 +1116,12 @@ static struct attribute *hccs_die_default_attrs[] = {
- ATTRIBUTE_GROUPS(hccs_die_default);
- 
- static const struct kobj_type hccs_die_type = {
-+	/*
-+	 * FIXME: Broken kobject lifetime (needs follow-up fix): hccs_die_info
-+	 * is allocated via devm_kzalloc(), and devm frees it on unbind or probe
-+	 * failure without waiting for kobject_put(&die->kobj) final cleanup.
-+	 */
-+	.release = NULL,
- 	.sysfs_ops = &hccs_comm_ops,
- 	.default_groups = hccs_die_default_groups,
- };
-@@ -1213,6 +1225,12 @@ static struct attribute *hccs_chip_default_attrs[] = {
- ATTRIBUTE_GROUPS(hccs_chip_default);
- 
- static const struct kobj_type hccs_chip_type = {
-+	/*
-+	 * FIXME: Broken kobject lifetime (needs follow-up fix): hccs_chip_info
-+	 * is allocated via devm_kzalloc(), and devm frees it on unbind or probe
-+	 * failure without waiting for kobject_put(&chip->kobj) final cleanup.
-+	 */
-+	.release = NULL,
- 	.sysfs_ops = &hccs_comm_ops,
- 	.default_groups = hccs_chip_default_groups,
- };
-diff --git a/drivers/video/fbdev/omap2/omapfb/dss/display-sysfs.c b/drivers/video/fbdev/omap2/omapfb/dss/display-sysfs.c
-index ae937854403b..436ec9c8591b 100644
---- a/drivers/video/fbdev/omap2/omapfb/dss/display-sysfs.c
-+++ b/drivers/video/fbdev/omap2/omapfb/dss/display-sysfs.c
-@@ -304,6 +304,13 @@ static const struct sysfs_ops display_sysfs_ops = {
- };
- 
- static struct kobj_type display_ktype = {
-+	/*
-+	 * FIXME: Broken kobject lifetime (needs follow-up fix):
-+	 * display_uninit_sysfs() calls kobject_put(&dssdev->kobj) and
-+	 * immediately zeroes dssdev->kobj with memset(), corrupting any
-+	 * in-flight or delayed (CONFIG_DEBUG_KOBJECT_RELEASE) kobject cleanup.
-+	 */
-+	.release = NULL,
- 	.sysfs_ops = &display_sysfs_ops,
- 	.default_groups = display_sysfs_groups,
- };
-diff --git a/drivers/video/fbdev/omap2/omapfb/dss/manager-sysfs.c b/drivers/video/fbdev/omap2/omapfb/dss/manager-sysfs.c
-index 1b644be5fe2e..e4d61cf7e939 100644
---- a/drivers/video/fbdev/omap2/omapfb/dss/manager-sysfs.c
-+++ b/drivers/video/fbdev/omap2/omapfb/dss/manager-sysfs.c
-@@ -496,6 +496,14 @@ static const struct sysfs_ops manager_sysfs_ops = {
- };
- 
- static struct kobj_type manager_ktype = {
-+	/*
-+	 * FIXME: Broken kobject lifetime (needs follow-up fix): mgr->kobj is
-+	 * embedded in dynamically allocated managers[], zeroed in
-+	 * dss_manager_kobj_uninit() right after kobject_put(), and freed in
-+	 * dss_uninit_overlay_managers() without waiting for final kobject
-+	 * cleanup.
-+	 */
-+	.release = NULL,
- 	.sysfs_ops = &manager_sysfs_ops,
- 	.default_groups = manager_sysfs_groups,
- };
-diff --git a/drivers/video/fbdev/omap2/omapfb/dss/overlay-sysfs.c b/drivers/video/fbdev/omap2/omapfb/dss/overlay-sysfs.c
-index 1da4fb1c77b4..3960261cada0 100644
---- a/drivers/video/fbdev/omap2/omapfb/dss/overlay-sysfs.c
-+++ b/drivers/video/fbdev/omap2/omapfb/dss/overlay-sysfs.c
-@@ -429,6 +429,13 @@ static const struct sysfs_ops overlay_sysfs_ops = {
- };
- 
- static struct kobj_type overlay_ktype = {
-+	/*
-+	 * FIXME: Broken kobject lifetime (needs follow-up fix): ovl->kobj is
-+	 * embedded in dynamically allocated overlays[] and freed in
-+	 * dss_uninit_overlays() right after dss_overlay_kobj_uninit() calls
-+	 * kobject_put(), without waiting for final kobject cleanup.
-+	 */
-+	.release = NULL,
- 	.sysfs_ops = &overlay_sysfs_ops,
- 	.default_groups = overlay_sysfs_groups,
- };
-diff --git a/fs/erofs/sysfs.c b/fs/erofs/sysfs.c
-index dfcec9376cd5..3654a945b299 100644
---- a/fs/erofs/sysfs.c
-+++ b/fs/erofs/sysfs.c
-@@ -238,6 +238,13 @@ static const struct kobj_type erofs_sb_ktype = {
- static const struct kobj_type erofs_ktype = {
- 	.default_groups = erofs_groups,
- 	.sysfs_ops	= &erofs_attr_ops,
-+	/*
-+	 * FIXME: Broken kobject lifetime (needs follow-up fix): erofs_root is
-+	 * a static struct kset in tristate module erofs, and erofs_exit_sysfs()
-+	 * calls kset_unregister(); unloading the module unmaps the static
-+	 * storage without waiting for final kobject cleanup.
-+	 */
-+	.release	= NULL,
- };
- 
- static struct kset erofs_root = {
-@@ -247,6 +254,13 @@ static struct kset erofs_root = {
- static const struct kobj_type erofs_feat_ktype = {
- 	.default_groups = erofs_feat_groups,
- 	.sysfs_ops	= &erofs_attr_ops,
-+	/*
-+	 * FIXME: Broken kobject lifetime (needs follow-up fix): erofs_feat is
-+	 * a static struct kobject in tristate module erofs, and
-+	 * erofs_exit_sysfs() calls kobject_put(); unloading the module unmaps
-+	 * the static storage without waiting for final kobject cleanup.
-+	 */
-+	.release	= NULL,
- };
- 
- static struct kobject erofs_feat = {
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index 430356e500af..770ceb12e178 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -1683,6 +1683,13 @@ static const struct kobj_type f2fs_sb_ktype = {
- 
- static const struct kobj_type f2fs_ktype = {
- 	.sysfs_ops	= &f2fs_attr_ops,
-+	/*
-+	 * FIXME: Broken kobject lifetime (needs follow-up fix): f2fs_kset is
-+	 * a static struct kset in tristate module f2fs, and f2fs_exit_sysfs()
-+	 * calls kset_unregister(); unloading the module unmaps the static
-+	 * storage without waiting for final kobject cleanup.
-+	 */
-+	.release	= NULL,
- };
- 
- static struct kset f2fs_kset = {
-@@ -1697,6 +1704,13 @@ static const struct sysfs_ops f2fs_feat_attr_ops = {
- static const struct kobj_type f2fs_feat_ktype = {
- 	.default_groups = f2fs_feat_groups,
- 	.sysfs_ops	= &f2fs_feat_attr_ops,
-+	/*
-+	 * FIXME: Broken kobject lifetime (needs follow-up fix): f2fs_feat is
-+	 * a static struct kobject in tristate module f2fs, and
-+	 * f2fs_exit_sysfs() calls kobject_put(); unloading the module unmaps
-+	 * the static storage without waiting for final kobject cleanup.
-+	 */
-+	.release	= NULL,
- };
- 
- static struct kobject f2fs_feat = {
-@@ -1711,6 +1725,13 @@ static const struct sysfs_ops f2fs_tune_attr_ops = {
- static const struct kobj_type f2fs_tune_ktype = {
- 	.default_groups = f2fs_tune_groups,
- 	.sysfs_ops	= &f2fs_tune_attr_ops,
-+	/*
-+	 * FIXME: Broken kobject lifetime (needs follow-up fix): f2fs_tune is
-+	 * a static struct kobject in tristate module f2fs, and
-+	 * f2fs_exit_sysfs() calls kobject_put(); unloading the module unmaps
-+	 * the static storage without waiting for final kobject cleanup.
-+	 */
-+	.release	= NULL,
- };
- 
- static struct kobject f2fs_tune = {
-diff --git a/fs/ocfs2/cluster/masklog.c b/fs/ocfs2/cluster/masklog.c
-index 563881ddbf00..5a30f73d8d67 100644
---- a/fs/ocfs2/cluster/masklog.c
-+++ b/fs/ocfs2/cluster/masklog.c
-@@ -147,6 +147,13 @@ static const struct sysfs_ops mlog_attr_ops = {
- static struct kobj_type mlog_ktype = {
- 	.default_groups = mlog_default_groups,
- 	.sysfs_ops      = &mlog_attr_ops,
-+	/*
-+	 * FIXME: Broken kobject lifetime (needs follow-up fix): mlog_kset is
-+	 * a static struct kset in tristate module ocfs2_nodemanager, and
-+	 * mlog_sys_shutdown() calls kset_unregister(); unloading the module
-+	 * unmaps the static storage without waiting for final kobject cleanup.
-+	 */
-+	.release        = NULL,
- };
- 
- static struct kset mlog_kset = {
-diff --git a/include/linux/kobject.h b/include/linux/kobject.h
-index 55e37a5d405e..8a1332030884 100644
---- a/include/linux/kobject.h
-+++ b/include/linux/kobject.h
-@@ -114,7 +114,7 @@ void kobject_get_ownership(const struct kobject *kobj, kuid_t *uid, kgid_t *gid)
- char *kobject_get_path(const struct kobject *kobj, gfp_t flag);
- 
- struct kobj_type {
--	void (*release)(struct kobject *kobj);
-+	void (*release)(struct kobject *kobj) __must_init;
- 	const struct sysfs_ops *sysfs_ops;
- 	const struct attribute_group **default_groups;
- 	const struct kobj_ns_type_operations *(*child_ns_type)(const struct kobject *kobj);
--- 
-2.56.1.708.g77570a6a1d-goog
+Also, the same argument applies to CPU nodes for which
+dt_get_cpuid_from_node() fails: they are still silently skipped. Either
+handle them the same way or explain why that case is different.
+
+>>
+>> Add a per-CPU fallback so that any mix of new and legacy CPUs works.
+>> This deviates from Linux, which skips CPUs without riscv,isa-extensions
+>> and could assume extensions those CPUs lack.
+>>
+>> Add a first-CPU flag because with the new riscv,isa-extensions, a CPU's
+>> set can now be empty, which would make a later CPU appear as the first
+>> one. This couldn't happen with riscv,isa, where 'i' is always set.
+>>
+>> Use the new property in dt_processor_hartid(), with the legacy
+>> fallback, which also only used the legacy riscv,isa during
+>> interrupt-controller setup.
+>>
+>> Suggested-by: Denis Mukhin <dmukhin@ford.com>
+> 
+> This should be Oleksii's credentials, as Oleksii suggested that task.
+> 
+> With that updated, the code looks good to me:
+> 
+> Reviewed-by: Denis Mukhin <dmukhin@ford.com>
+> 
+> 
+>> Signed-off-by: Cristian Andrei <cristian.andrei1423@gmail.com>
+
+Nit: the author of the patch is set to just the e-mail address
+("cristian.andrei1423@gmail.com <cristian.andrei1423@gmail.com>"). 
+Please set your name so that it matches the Signed-off-by tag.
+
+>> ---
+>> Tested on QEMU (virt, aia=aplic-imsic, -cpu rv64,svpbmt=on),
+>> -smp 1/2: default DT, only-new, only-legacy, mixed (CPU 0 new,
+>> CPU 1 legacy, showing CPU 1 falling back) boot.
+>> CPU 1 base "rv32i" -> panic.
+>> CPU 1 with only one of the new pair (either one) -> panic.
+>> Neither property: untestable in QEMU as OpenSBI stops first.
+>>
+>>   CHANGELOG.md                            |   3 +
+>>   docs/misc/riscv/booting.txt             |   3 +-
+>>   xen/arch/riscv/cpufeature.c             | 135 ++++++++++++++----------
+>>   xen/arch/riscv/include/asm/cpufeature.h |   2 +
+>>   xen/arch/riscv/smpboot.c                |  26 ++++-
+>>   5 files changed, 109 insertions(+), 60 deletions(-)
+>>
+
+[...]
+
+>> diff --git a/xen/arch/riscv/cpufeature.c b/xen/arch/riscv/cpufeature.c
+>> index b1c614867c..844269df70 100644
+>> --- a/xen/arch/riscv/cpufeature.c
+>> +++ b/xen/arch/riscv/cpufeature.c
+>> @@ -42,10 +42,11 @@ struct riscv_isa_ext_data {
+>>    *
+>>    * These flags express Xen's policy, not the ISA's rules: extensions which
+>>    * are architecturally tied to one XLEN (Zilsd on RV32, say) need no special
+>> - * treatment here, as they can only ever appear in the "riscv,isa" of a host
+>> - * of that XLEN, and guest_isa is masked against the host ISA bitmap anyway.
+>> - * They are only of use for extensions Xen chooses not to expose to guests of
+>> - * a given width despite the hardware implementing them.
+>> + * treatment here, as they can only ever appear in the "riscv,isa" or
+>> + * "riscv,isa-extensions" of a host of that XLEN, and guest_isa is masked
+>> + * against the host ISA bitmap anyway. They are only of use for extensions
+>> + * Xen chooses not to expose to guests of a given width despite the hardware
+>> + * implementing them.
+>>    */
+>>   #define RISCV_ISA_EXT_GUEST_NONE 0
+>>   #define RISCV_ISA_EXT_GUEST_RV32 (1U << 0)
+>> @@ -455,10 +456,41 @@ static int __init riscv_isa_parse_string(const char *isa,
+>>       return -EINVAL;
+>>   }
+>>   
+>> -static void __init riscv_fill_hwcap_from_isa_string(void)
+>> +int riscv_isa_ext_check(const struct dt_device_node *cpu)
+>> +{
+
+Please add a comment above the function describing what the three
+return values mean (0: use riscv,isa-extensions, -EINVAL: broken
+riscv,isa-base/riscv,isa-extensions, -ENOENT: use legacy riscv,isa).
+Right now this has to be reverse-engineered from the callers.
+
+>> +    const char *base;
+>> +    const char *expected_base = IS_ENABLED(CONFIG_RISCV_64) ? "rv64i" : "rv32i";
+>> +    const char *node_name = dt_node_full_name(cpu);
+>> +    bool isa_ext_exists = dt_property_read_bool(cpu, "riscv,isa-extensions");
+>> +    bool isa_base_exists = !dt_property_read_string(cpu, "riscv,isa-base",
+>> +                                                    &base);
+>> +
+>> +    if ( isa_ext_exists && isa_base_exists )
+>> +    {
+>> +        if ( !strcmp(base, expected_base) )
+>> +            return 0;
+>> +        else
+>> +        {
+>> +            printk("%s: riscv,isa-base \"%s\" doesn't match %s\n",
+>> +                   node_name, base, expected_base);
+>> +            return -EINVAL;
+>> +        }
+>> +    }
+>> +    else if ( isa_ext_exists || isa_base_exists )
+>> +    {
+>> +        printk("%s: need both riscv,isa-extensions and riscv,isa-base\n",
+>> +               node_name);
+>> +        return -EINVAL;
+>> +    }
+>> +    else
+>> +        return -ENOENT;
+>> +}
+
+The "else" branches after "return" are not needed and only add
+indentation. Also, node_name is only used on the error paths, so it
+could be computed there (or dt_node_full_name() used directly). And the
+printk()s are missing a log level.
+
+Something like:
+
+     if ( !isa_ext_exists && !isa_base_exists )
+         return -ENOENT;
+
+     if ( !isa_ext_exists || !isa_base_exists )
+     {
+         printk(XENLOG_ERR "%s: need both riscv,isa-extensions and 
+riscv,isa-base\n",
+                dt_node_full_name(cpu));
+         return -EINVAL;
+     }
+
+     if ( strcmp(base, expected_base) )
+     {
+         printk(XENLOG_ERR "%s: riscv,isa-base \"%s\" doesn't match %s\n",
+                dt_node_full_name(cpu), base, expected_base);
+         return -EINVAL;
+     }
+
+     return 0;
+
+Do I miss something?
+
+>> +
+>> +static void __init riscv_fill_hwcap_from_dt(void)
+>>   {
+>>       const struct dt_device_node *cpus = dt_find_node_by_path("/cpus");
+>>       const struct dt_device_node *cpu;
+>> +    bool first_cpu = true;
+>>   
+>>       if ( !cpus )
+>>       {
+>> @@ -471,6 +503,7 @@ static void __init riscv_fill_hwcap_from_isa_string(void)
+>>           DECLARE_BITMAP(this_isa, RISCV_ISA_EXT_MAX);
+>>           const char *isa;
+>>           unsigned long cpuid;
+>> +        int ret;
+>>   
+>>           bitmap_zero(this_isa, RISCV_ISA_EXT_MAX);
+>>   
+>> @@ -483,57 +516,48 @@ static void __init riscv_fill_hwcap_from_isa_string(void)
+>>           if ( dt_get_cpuid_from_node(cpu, &cpuid) < 0 )
+>>               continue;
+>>   
+>> -        if ( dt_property_read_string(cpu, "riscv,isa", &isa) )
+>> +        ret = riscv_isa_ext_check(cpu);
+>> +
+>> +        /* Try riscv,isa-extensions, fall back to the deprecated riscv,isa */
+>> +        if ( !ret )
+>>           {
+>> -            printk("Unable to find \"riscv,isa\" devicetree entry "
+>> -                   "for DT's cpu%ld node\n", cpuid);
+>> -            continue;
+>> +            for ( unsigned int i = 0; i < ARRAY_SIZE(riscv_isa_ext); i++ )
+>> +                if ( dt_property_match_string(cpu, "riscv,isa-extensions",
+>> +                                              riscv_isa_ext[i].name) >= 0 )
+>> +                    __set_bit(riscv_isa_ext[i].id, this_isa);
+>>           }
+>> +        else if ( ret == -ENOENT &&
+>> +                  !dt_property_read_string(cpu, "riscv,isa", &isa) )
+>> +        {
+>> +            for ( unsigned int i = 0; (isa[i] != '\0'); i++ )
+>> +                if ( !isdigit(isa[i]) && (isa[i] != '_') && !islower(isa[i]) )
+>> +                    panic("DT binding: riscv,isa must be lowercase\n");
+>>   
+>> -        for ( unsigned int i = 0; (isa[i] != '\0'); i++ )
+>> -            if ( !isdigit(isa[i]) && (isa[i] != '_') && !islower(isa[i]) )
+>> -                panic("According to DT binding riscv,isa must be lowercase\n");
+
+Is there a reason to change this message? If not, I would keep it as is
+to reduce churn.
+
+>> -
+>> -        if ( riscv_isa_parse_string(isa, this_isa) )
+>> -            panic("Check riscv,isa in dts file\n");
+>> +            if ( riscv_isa_parse_string(isa, this_isa) )
+>> +                panic("cpu%lu: riscv,isa failed to parse \"%s\"\n",
+>> +                      cpuid, isa);
+>> +        }
+>> +        else if ( ret == -EINVAL )
+>> +            panic("cpu%lu: invalid riscv,isa-base/riscv,isa-extensions\n",
+>> +                  cpuid);
+>> +        else
+>> +            panic("Unable to find \"riscv,isa\" or \"riscv,isa-extensions\" "
+>> +                  "devicetree entry for DT's cpu%lu node\n", cpuid);
+
+Mixing the return code check with reading the riscv,isa property in one
+condition makes the last "else" ("-ENOENT and no riscv,isa") not obvious.
+I think a switch ( ret ), or handling -EINVAL first and then -ENOENT
+(with the riscv,isa lookup inside that branch), would be easier to
+follow.
+
+>>   
+>> -        if ( bitmap_empty(riscv_isa, RISCV_ISA_EXT_MAX) )
+>> +        /*
+>> +         * The intersection may legitimately become empty, so don't use
+>> +         * bitmap_empty(riscv_isa) to detect the first CPU.
+>> +         */
+>> +        if ( first_cpu )
+>> +        {
+>>               bitmap_copy(riscv_isa, this_isa, RISCV_ISA_EXT_MAX);
+>> +            first_cpu = false;
+>> +        }
+>>           else
+>>               bitmap_and(riscv_isa, riscv_isa, this_isa, RISCV_ISA_EXT_MAX);
+>>       }
+>>   }
+>>   
+
+[...]
+
+>>   bool riscv_isa_extension_available(const unsigned long *isa_bitmap,
+>>                                      enum riscv_isa_ext_id id)
+>>   {
+>> @@ -690,16 +714,10 @@ void __init riscv_fill_hwcap(void)
+>>       bool all_extns_available = true;
+>>       unsigned long tmp;
+>>   
+>> -    riscv_fill_hwcap_from_isa_string();
+>> +    riscv_fill_hwcap_from_dt();
+>>   
+>>       if ( bitmap_empty(riscv_isa, RISCV_ISA_EXT_MAX) )
+>> -    {
+>> -        const char *failure_msg = has_isa_extensions_property() ?
+>> -                                  "\"riscv,isa-extension\" isn't supported" :
+>> -                                  "\"riscv,isa\" parsing failed";
+>> -
+>> -        panic("HW capabilities parsing failed: %s\n", failure_msg);
+>> -    }
+>> +        panic("HW cap: no usable CPU node or extension found\n");
+
+
+With the per-CPU panics above, this can now only be reached if there is
+no /cpus node, no usable CPU node, or the intersection is empty. Maybe
+say so more explicitly, e.g. "No usable CPU node found or ISA
+intersection is empty".
+
+[...]
+
+>> diff --git a/xen/arch/riscv/smpboot.c b/xen/arch/riscv/smpboot.c
+>> index 3b8bf98e20..95c4d650ac 100644
+>> --- a/xen/arch/riscv/smpboot.c
+>> +++ b/xen/arch/riscv/smpboot.c
+>> @@ -7,6 +7,7 @@
+>>   #include <xen/types.h>
+>>   
+>>   #include <asm/current.h>
+>> +#include <asm/cpufeature.h>
+>>   
+>>   cpumask_t __read_mostly cpu_online_map;
+>>   cpumask_t __ro_after_init cpu_possible_map;
+>> @@ -77,9 +78,32 @@ int dt_processor_hartid(const struct dt_device_node *node,
+>>           return -ENODEV;
+>>       }
+>>   
+>> +    if ( (ret = riscv_isa_ext_check(node)) == -ENOENT )
+>> +    {
+>> +        printk(XENLOG_DEBUG "CPU with hartid=%#lx has no riscv,isa-base, "
+>> +               "falling back to legacy riscv,isa\n", *hartid);
+>> +        goto fallback_to_riscv_isa;
+>> +    }
+>> +
+>> +    if ( ret )
+>> +        return -ENODEV;
+>> +
+>> +    if ( dt_property_match_string(node, "riscv,isa-extensions", "i") < 0 ||
+>> +         dt_property_match_string(node, "riscv,isa-extensions", "m") < 0 ||
+>> +         dt_property_match_string(node, "riscv,isa-extensions", "a") < 0 )
+>> +    {
+>> +        printk("CPU with hartid=%#lx does not support ima\n", *hartid);
+>> +        return -ENODEV;
+>> +    }
+>> +
+>> +    return 0;
+>> +
+>> + fallback_to_riscv_isa:
+>> +
+
+It could be written without the label:
+
+     ret = riscv_isa_ext_check(node);
+     if ( ret != -ENOENT )
+     {
+         if ( ret )
+             return -ENODEV;
+
+         if ( dt_property_match_string(node, "riscv,isa-extensions", 
+"i") < 0 ||
+              dt_property_match_string(node, "riscv,isa-extensions", 
+"m") < 0 ||
+              dt_property_match_string(node, "riscv,isa-extensions", 
+"a") < 0 )
+         {
+             printk("CPU with hartid=%#lx does not support ima\n", *hartid);
+             return -ENODEV;
+         }
+
+         return 0;
+     }
+
+Also, the XENLOG_DEBUG message will be printed for every hart referenced
+from interrupts-extended of every IMSIC node on a legacy DT, so I would
+drop it.
+
+>>       if ( (ret = dt_property_read_string(node, "riscv,isa", &isa)) )
+>>       {
+>> -        printk("CPU with hartid=%#lx has no \"riscv,isa\" property\n", *hartid);
+>> +        printk("CPU with hartid=%#lx has no \"riscv,isa-base\" or "
+>> +               "\"riscv,isa\" property\n", *hartid);
+>>           return ret;
+>>       }
+>>   
+
+ > --- a/docs/misc/riscv/booting.txt
+ > +++ b/docs/misc/riscv/booting.txt
+[...]
+ > -them is missing from the riscv,isa or riscv,isa-extensions property 
+of the
+ > +them is missing from the riscv,isa or riscv,isa-extensions property 
+of the
+ > +CPU nodes:
+
+It might be worth adding that riscv,isa-extensions (together with
+riscv,isa-base) takes precedence when both are present.
+
+~ Oleksii
 
 
