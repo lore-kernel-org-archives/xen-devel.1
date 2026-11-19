@@ -2,34 +2,34 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE56A606A326
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2026 21:08:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B845606A320
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2026 21:08:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=rRJYE0sZ
-Received: from list by lists.xenproject.org with outflank-mailman.1497012.1695296 (Exim 4.92)
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=QWUaqxcT
+Received: from list by lists.xenproject.org with outflank-mailman.1497014.1695318 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xU9MF-00011V-El; Thu, 19 Nov 2026 21:07:51 +0000
+	id 1xU9MI-0001dC-3r; Thu, 19 Nov 2026 21:07:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1497012.1695296; Thu, 19 Nov 2026 21:07:51 +0000
+Received: by outflank-mailman (output) from mailman id 1497014.1695318; Thu, 19 Nov 2026 21:07:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xU9MF-00010e-8h; Thu, 19 Nov 2026 21:07:51 +0000
-Received: by outflank-mailman (input) for mailman id 1497012;
- Thu, 19 Nov 2026 21:07:49 +0000
+	id 1xU9MH-0001d1-W0; Thu, 19 Nov 2026 21:07:53 +0000
+Received: by outflank-mailman (input) for mailman id 1497014;
+ Thu, 19 Nov 2026 21:07:52 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xU9MD-0000xZ-OE
- for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 21:07:49 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xU9MG-0001Nr-G1
+ for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 21:07:52 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xU9MD-00000006sp4-0e0o;
- Thu, 19 Nov 2026 21:07:49 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xU9MF-00000006spN-1nDX;
+ Thu, 19 Nov 2026 21:07:51 +0000
 Received: from [217.155.165.12] (helo=Georges-MacBook-Pro-2.tail87ea19.ts.net)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xU9MD-0000000CVBH-0w4X;
- Thu, 19 Nov 2026 21:07:49 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xU9MF-0000000CVBH-20X1;
+ Thu, 19 Nov 2026 21:07:51 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -41,18 +41,20 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=eWMtDPgJrHXBwMZpbsBQzy6ElcDHbQygGOMEssB+fO8=; b=rRJYE0sZH+rfoGHsC9sQtjIBj5
-	npQrHfZVB6+AZZlHdVPL73ShhN29EOEypCHB1vCXy4J01v/qdHsNzq7H9IurUncjxvPIfn71pI4Ip
-	722lDG6f747JBbykyYmfnoIlE7KdRBLDop7sWyvtp7xvJYlbssCHSGa7Y8aKy4aCeVnw=;
+	bh=zLHsYZMmLdbgys4XIsnrAsiGwoLasz6qTkDC55i0Da0=; b=QWUaqxcTjZ8y75wsqSaEm+3Hes
+	oJDwFVrx+7eiu9ptjV7z2INHbqbcF9KBdRC3RSoVuU4ogy49gVUx0PIeOn/h/mjxNzJqebAOlQO5z
+	F4PSx02sJf0Y8NjzhL/DigO3N845QZ3tliDy6sIylYSjqAJshB2dtnS8dGyd4l/k4FZw=;
 From: George Dunlap <gwd@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>,
+Cc: Ross Lagerwall <ross.lagerwall@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Jason Andryuk <jason.andryuk@amd.com>,
 	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v7 02/50] x86/mm: introduce a per-vCPU state window in the perdomain area
-Date: Thu, 19 Nov 2026 21:06:53 +0000
-Message-ID: <20261119-asi-hvm-v7-2-6551b6d5c879@xenproject.org>
+Subject: [PATCH v7 04/50] x86/svm: restore guest debug registers in svm_do_resume()
+Date: Thu, 19 Nov 2026 21:06:55 +0000
+Message-ID: <20261119-asi-hvm-v7-4-6551b6d5c879@xenproject.org>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261119-asi-hvm-v7-0-6551b6d5c879@xenproject.org>
 References: <20261119-asi-hvm-v7-0-6551b6d5c879@xenproject.org>
@@ -66,210 +68,60 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Guest-owned register state that Xen keeps in always-mapped memory, on
-the xenheap or in the xmalloc pool, is to move to the domain heap,
-reached through mappings of its own rather than through the directmap.
-The long-lived per-vCPU structures involved (the SVM VMCB, the VMX
-guest MSR load/save list, the guest XSAVE area, and later the
-aggregated small per-vCPU allocations) all want the same shape: one or
-more domain-heap pages, mapped once at fixed per-vCPU virtual addresses
-for the life of the vCPU.
+svm_ctxt_switch_to() restores the guest's debug registers when its DR7
+enables any of them, which also updates the VMCB.  Do it in
+svm_do_resume() instead, which follows it whenever the vCPU is
+scheduled in.
 
-Add a fourth per-domain-mapping sub-area providing that destination: a
-small per-vCPU stride of page slots, with a fixed index assigned to
-each relocated structure and the page tables created at vCPU creation
-time.  Consumers allocate their own pages and install them with
-populate_perdomain_mapping(); the backing pages remain caller-owned,
-so their lifetime stays with the consumer, while the page tables are
-torn down with the rest of the per-domain area.
+svm_do_resume() also runs when a vCPU keeps running on its pCPU
+(continue_running()), without svm_ctxt_switch_to().  Where the guest's
+debug registers are already loaded, the restore does nothing:
+flag_dr_dirty records that they are, and only svm_save_dr() clears it,
+from svm_ctxt_switch_from().
 
-Before freeing their pages, consumers take them out of the window with
-unmap_vcpu_state(), on failure paths as at teardown: vCPU creation can
-fail once a consumer has mapped its pages, and the domain lives on.
-It flushes the domain's dirty CPUs: the window is in the per-domain
-area that all of the domain's vCPUs share, so these are the CPUs whose
-page-tables carry it.  So far that mask is empty on every call, as the
-vCPU has not run or the domain is paused.  A consumer reaching a page
-from another context, through a transient map_domain_page() mapping,
-drops the mapping with unmap_vcpu_state_page(), which also flushes this
-CPU's translations of it, there and at its alias in the per-domain
-mirror: the mapcache defers that flush, and the translations would
-otherwise outlive the mapping.
+This prepares for moving VMCBs off the xenheap and behind the vCPU
+state window: svm_ctxt_switch_to() runs before write_ptbase(), where
+the incoming vCPU's VMCB need not be mapped.
 
-The window has the same domain-wide visibility as the other
-per-domain sub-areas: each vCPU's stride, at virtual addresses keyed on
-vcpu_id, is mapped in the page tables of all of the domain's vCPUs.
-
-This is infrastructure for moving the SVM VMCB, the VMX MSR load/save
-lists, the saved register frames, the HVM emulator's caches and the
-guest XSAVE areas off the xenheap.  Slots specific to AMD or Intel can
-share the same space.  Nothing occupies the area yet; the only
-behavioural change is the page-table allocation itself and the failure
-path that comes with it: vCPU creation can now fail with -ENOMEM.
-Both apply to every guest vCPU, PV ones included.  A domain gets one
-L2 plus an L1 per 64 vCPUs: 2 pages for up to 64 vCPUs.  A PV domain's
-window stays empty until the register frames and XSAVE areas move
-there.
+Not yet run with a guest using debug registers.
 
 Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-5-5
 Signed-off-by: George Dunlap <gwd@xenproject.org>
 ---
+CC: Ross Lagerwall <ross.lagerwall@citrix.com>
+
 Changes in v7:
-- Standalone on staging, without per-vCPU page tables or the sparse
-  directmap view: create_perdomain_mapping() is given the domain, and
-  the comments and the message describe the domain-wide area and
-  staging's mapcache alone.  The window's comment in config.h says its
-  structures are kept on the domain heap, not out of always-mapped
-  memory.
-- Have AMD- and Intel-specific sections that share the same slots (Jan Beulich)
-
-Changes in v6:
-- Port over change to L3 allocation.
-
-Changes in v5:
-- Say that the PV register frames move into the window too, not only
-  the XSAVE areas.
-- Message and comments: "per-domain area", and which vCPUs share it.
+- Message: VMCBs move off the xenheap; before write_ptbase() the
+  incoming vCPU's VMCB need not be mapped.
 
 Changes in v4:
 - New in this version.
 ---
- xen/arch/x86/domain.c             | 12 +++++++++
- xen/arch/x86/include/asm/config.h | 23 ++++++++++++++++-
- xen/arch/x86/include/asm/mm.h     |  2 ++
- xen/arch/x86/mm.c                 | 42 +++++++++++++++++++++++++++++++
- 4 files changed, 78 insertions(+), 1 deletion(-)
+ xen/arch/x86/hvm/svm/svm.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index 74513a79a7..2407c575d9 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -517,6 +517,18 @@ int arch_vcpu_create(struct vcpu *v)
+diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
+index 00315e30d0..6419f3011e 100644
+--- a/xen/arch/x86/hvm/svm/svm.c
++++ b/xen/arch/x86/hvm/svm/svm.c
+@@ -957,8 +957,6 @@ static void cf_check svm_ctxt_switch_to(struct vcpu *v)
+      */
+     disable_each_ist(per_cpu(idt, cpu));
  
-     if ( !is_idle_domain(d) )
-     {
-+        BUILD_BUG_ON((MAX_VIRT_CPUS << VCPU_STATE_VA_SHIFT) >
-+                     (PERDOMAIN_SLOT_MBYTES << 20));
-+        BUILD_BUG_ON(VCPU_STATE_IDX_VMCB >= VCPU_STATE_NR_PAGES);
-+        BUILD_BUG_ON(VCPU_STATE_IDX_N2VMCB >= VCPU_STATE_NR_PAGES);
-+        BUILD_BUG_ON(VCPU_STATE_IDX_VMX_MSR >= VCPU_STATE_NR_PAGES);
-+        /* Page tables only; torn down with the rest of the per-domain area. */
-+        rc = create_perdomain_mapping(d, VCPU_STATE_START(v),
-+                                      VCPU_STATE_NR_PAGES,
-+                                      NIL(l1_pgentry_t *), NULL);
-+        if ( rc != 0 )
-+            goto fail;
-+
-         paging_vcpu_init(v);
+-    svm_restore_dr(v);
+-
+     svm_tsc_ratio_load(v);
  
-         if ( (rc = vcpu_init_fpu(v)) != 0 )
-diff --git a/xen/arch/x86/include/asm/config.h b/xen/arch/x86/include/asm/config.h
-index aebd3e8f45..b05dbd4a4b 100644
---- a/xen/arch/x86/include/asm/config.h
-+++ b/xen/arch/x86/include/asm/config.h
-@@ -158,7 +158,7 @@
- /* Slot 260: per-domain mappings (including map cache). */
- #define PERDOMAIN_VIRT_START    (PML4_ADDR(260))
- #define PERDOMAIN_SLOT_MBYTES   (PML4_ENTRY_BYTES >> (20 + PAGETABLE_ORDER))
--#define PERDOMAIN_SLOTS         3
-+#define PERDOMAIN_SLOTS         4
- #define PERDOMAIN_VIRT_SLOT(s)  (PERDOMAIN_VIRT_START + (s) * \
-                                  (PERDOMAIN_SLOT_MBYTES << 20))
- /* Slot 4: mirror of per-domain mappings (for compat xlat area accesses). */
-@@ -291,6 +291,27 @@ extern unsigned long xen_phys_start;
- #define ARG_XLAT_START(v)        \
-     (ARG_XLAT_VIRT_START + ((v)->vcpu_id << ARG_XLAT_VA_SHIFT))
+     if ( cpu_has_msr_tsc_aux )
+@@ -982,6 +980,8 @@ static void noreturn cf_check svm_do_resume(void)
+     bool vcpu_guestmode = false;
+     struct vlapic *vlapic = vcpu_vlapic(v);
  
-+/*
-+ * Per-vCPU state window. The fourth per-domain-mapping sub-area: a small
-+ * per-vCPU stride of page slots holding long-lived per-vCPU structures kept
-+ * on the domain heap, each mapped once for the life of the vCPU at a fixed
-+ * index within the stride.
-+ */
-+#define VCPU_STATE_SLOT          3
-+#define VCPU_STATE_VIRT_START    PERDOMAIN_VIRT_SLOT(VCPU_STATE_SLOT)
-+#define VCPU_STATE_ORDER         3
-+#define VCPU_STATE_NR_PAGES      (1U << VCPU_STATE_ORDER)
-+#define VCPU_STATE_VA_SHIFT      (VCPU_STATE_ORDER + PAGE_SHIFT)
-+#define VCPU_STATE_START(v)      \
-+    (VCPU_STATE_VIRT_START + ((v)->vcpu_id << VCPU_STATE_VA_SHIFT))
-+#define VCPU_STATE_ADDR(v, idx)  \
-+    (VCPU_STATE_START(v) + (idx) * PAGE_SIZE)
-+/* AMD-specific slots */
-+#define VCPU_STATE_IDX_VMCB      0
-+#define VCPU_STATE_IDX_N2VMCB    1
-+/* Intel-specific slots */
-+#define VCPU_STATE_IDX_VMX_MSR   0
++    svm_restore_dr(v);
 +
- #define ELFSIZE 64
+     if ( nestedhvm_enabled(v->domain) && nestedhvm_vcpu_in_guestmode(v) )
+         vcpu_guestmode = 1;
  
- #define ARCH_CRASH_SAVE_VMCOREINFO
-diff --git a/xen/arch/x86/include/asm/mm.h b/xen/arch/x86/include/asm/mm.h
-index 5de04b32aa..bbce8c401e 100644
---- a/xen/arch/x86/include/asm/mm.h
-+++ b/xen/arch/x86/include/asm/mm.h
-@@ -615,6 +615,8 @@ void populate_perdomain_mapping(const struct vcpu *v, unsigned long va,
-                                 unsigned int flags);
- void destroy_perdomain_mapping(const struct vcpu *v, unsigned long va,
-                                unsigned int nr);
-+void unmap_vcpu_state(const struct vcpu *v, unsigned int idx, unsigned int nr);
-+void unmap_vcpu_state_page(const void *va);
- void free_perdomain_mappings(struct domain *d);
- 
- void __iomem *ioremap_wc(paddr_t pa, size_t len);
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index 9e313e2a82..7cfeceb8c6 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -6470,6 +6470,48 @@ void destroy_perdomain_mapping(const struct vcpu *v, unsigned long va,
-     unmap_domain_page(l3tab);
- }
- 
-+/*
-+ * Take @nr slots of @v's state window, from @idx, out of the per-domain
-+ * area, before the caller frees the pages behind them: the pages are the
-+ * caller's own, and must not stay mapped once freed.  The window's
-+ * translations are usable only on CPUs whose page-tables carry it: those of
-+ * any of the domain's vCPUs, all in the domain's dirty mask.
-+ */
-+void unmap_vcpu_state(const struct vcpu *v, unsigned int idx, unsigned int nr)
-+{
-+    const struct domain *d = v->domain;
-+
-+    /* Beyond the stride is the next vCPU's window. */
-+    BUG_ON(idx >= VCPU_STATE_NR_PAGES || nr > VCPU_STATE_NR_PAGES - idx);
-+
-+    destroy_perdomain_mapping(v, VCPU_STATE_ADDR(v, idx), nr);
-+
-+    flush_tlb_mask(d->dirty_cpumask);
-+}
-+
-+/*
-+ * Drop a transient mapping of a page behind a vCPU's state window, and this
-+ * CPU's translations of it: at its address, and at its alias in the
-+ * per-domain mirror, which every domain but a 64-bit PV one has (flushing
-+ * that address there is harmless).  The mapcache does not drop them with
-+ * the slot's last mapping: it defers the flush, and CPUs running other vCPUs
-+ * of its domain may have cached the slot too.  A directmap address, where
-+ * the caller has no mapcache, needs nothing.
-+ */
-+void unmap_vcpu_state_page(const void *va)
-+{
-+    unsigned long addr = (unsigned long)va;
-+
-+    unmap_domain_page(va);
-+
-+    if ( addr < DIRECTMAP_VIRT_START )
-+    {
-+        flush_tlb_one_local(addr);
-+        flush_tlb_one_local(addr - PERDOMAIN_VIRT_START +
-+                            PERDOMAIN_ALT_VIRT_START);
-+    }
-+}
-+
- void free_perdomain_mappings(struct domain *d)
- {
-     l3_pgentry_t *l3tab;
 -- 
 2.56.0
 
