@@ -2,34 +2,34 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6ADE1606A320
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A0A7E606A324
 	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2026 21:08:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=YmDCvsAk
-Received: from list by lists.xenproject.org with outflank-mailman.1497016.1695335 (Exim 4.92)
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=jbSQKDjm
+Received: from list by lists.xenproject.org with outflank-mailman.1497011.1695290 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xU9MK-00025w-JX; Thu, 19 Nov 2026 21:07:56 +0000
+	id 1xU9MF-0000z4-54; Thu, 19 Nov 2026 21:07:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1497016.1695335; Thu, 19 Nov 2026 21:07:56 +0000
+Received: by outflank-mailman (output) from mailman id 1497011.1695290; Thu, 19 Nov 2026 21:07:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xU9MK-000253-FZ; Thu, 19 Nov 2026 21:07:56 +0000
-Received: by outflank-mailman (input) for mailman id 1497016;
- Thu, 19 Nov 2026 21:07:54 +0000
+	id 1xU9MF-0000yv-27; Thu, 19 Nov 2026 21:07:51 +0000
+Received: by outflank-mailman (input) for mailman id 1497011;
+ Thu, 19 Nov 2026 21:07:49 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xU9MI-0001jJ-FS
- for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 21:07:54 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xU9MD-0000s0-7I
+ for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 21:07:49 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xU9MH-00000006spf-2nct;
- Thu, 19 Nov 2026 21:07:53 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xU9MC-00000006sow-1BeK;
+ Thu, 19 Nov 2026 21:07:48 +0000
 Received: from [217.155.165.12] (helo=Georges-MacBook-Pro-2.tail87ea19.ts.net)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xU9MH-0000000CVBH-350g;
- Thu, 19 Nov 2026 21:07:53 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xU9MC-0000000CVBH-1Gdd;
+ Thu, 19 Nov 2026 21:07:48 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -39,27 +39,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
-	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=QX6LPitNcaMMSHbFzwtqwxuSj8fohpVVckzWpV8PEuI=; b=YmDCvsAkaWtLAEz3XiDfi1d0f8
-	yD5u3/hWWSMFiHAYaqpKZuAGHXY9XSCDLJBUxMH9bsZMndbewvTVhBYNA3yVD2zciMAumJkVN7PSY
-	p+WRIFpu0Uv0vTGkIZDOxzWZ1dCoz4vjAJ/kbJqLvy0aEKLULTNifVgW0Gb4xdVC8S3Y=;
+	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:Content-Type:
+	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
+	bh=RlvWFjY3FA1UlZtoLIasB8sIzj16ovPz8d5rWMaMYrQ=; b=jbSQKDjmsp/Kukm5vtVqPSTxwB
+	VkcTauoiP2opD1HVTj40jfkVoPs4+YFsdCoRrLbX52kXLbi3m3K76sKx/XleDnWzSuRbbvfIFbrfn
+	cPPYNUjPYGJhBK/nXhqhIbGjMvp1j3D/e32lh0E5uOwDu93e+WSqbBtVReD1ppDvOKyw=;
 From: George Dunlap <gwd@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Ross Lagerwall <ross.lagerwall@citrix.com>,
+Cc: =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Jason Andryuk <jason.andryuk@amd.com>,
 	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v7 06/50] x86/svm: allocate VMCBs from the domain heap behind the vCPU state window
-Date: Thu, 19 Nov 2026 21:06:57 +0000
-Message-ID: <20261119-asi-hvm-v7-6-6551b6d5c879@xenproject.org>
+Subject: [PATCH v7 01/50] x86/mm: introduce populate_perdomain_mapping()
+Date: Thu, 19 Nov 2026 21:06:52 +0000
+Message-ID: <20261119-asi-hvm-v7-1-6551b6d5c879@xenproject.org>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261119-asi-hvm-v7-0-6551b6d5c879@xenproject.org>
 References: <20261119-asi-hvm-v7-0-6551b6d5c879@xenproject.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
@@ -68,275 +68,147 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The VMCB holds the full guest register save area, and lives on the
-xenheap.  Move it to the domain heap and map it at a fixed slot in the
-owning vCPU's state window.  Hardware is unaffected: VMRUN, VMLOAD and
-VMSAVE address the VMCB physically, and vmcb_pa now derives from the
-page rather than from virt_to_maddr() on a directmap VA.
+From: Roger Pau Monné <roger.pau@citrix.com>
 
-A vCPU can have two VMCBs: the primary (nv_n1vmcx) and the nested L2
-one (nv_n2vmcx).  Both move, taking the first two slots in the window
-stride.  The nested code's swapping of svm->vmcb / svm->vmcb_pa
-between the two works unchanged, now swapping between two window VAs.
-free_vmcb() takes a VMCB out of the window with unmap_vcpu_state()
-before freeing the page: the window is in the per-domain area that all
-its domain's vCPUs share, which outlives a vCPU whose creation fails.
+The per-domain area has central machinery for building its page-tables
+and for managing the backing pages it owns itself:
+create_perdomain_mapping() / destroy_perdomain_mapping(), used by the
+mapcache and the compat argument-translation area.  What the interface
+lacks is a way to install a caller's own pages at a chosen address,
+which a per-vCPU state window, introduced by a later patch, needs: its
+users allocate their pages themselves and map them there.
 
-The window VA is for use in the owning vCPU's context only.
-SVM_MAP_VMCB() and SVM_MAP_VMCB_ONE() return it for v == current, and
-a transient map_domain_page() mapping otherwise, which SVM_UNMAP_VMCB()
-drops with unmap_vcpu_state_page(), along with this CPU's translations
-of it.  svm_ctxt_switch_to() no longer touches the VMCB, as it runs
-before write_ptbase(); svm_ctxt_switch_from() keeps dereferencing the
-window VA, as the outgoing page tables are still loaded at that point.
-svm_asm_do_resume() reads the VMCB's interrupt shadow through the
-window VA just before VMRUN, with the vCPU's own page tables loaded.
+Introduce populate_perdomain_mapping(v, va, mfn, nr, flags) for this.
+It writes the given MFNs, with the given page-table flags, into v's view
+of the per-domain area, walking the per-domain page-table structures
+with transient mappings, so v need not be current.  Callers don't need
+to know where the page-tables live or how the area is structured.
 
-Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-5-5
+We require the range to already have been populated down to the L1
+tables by create_perdomain_mapping().  TLB flushing is left to the
+caller.  A present entry not owned by the area (!_PAGE_AVAIL0) is
+replaced.  A present entry owned by the area (_PAGE_AVAIL0, installed
+by create_perdomain_mapping() itself) is never expected: such a page is
+referenced only by the mapping, and no caller replaces area-owned
+backing.  Should one ever do so, the page is leaked with a message
+rather than freed.
+
+The function is not for contexts with interrupts off: its users map
+their pages when allocating them.
+
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-4-8, Claude Code:claude-opus-5-5
 Signed-off-by: George Dunlap <gwd@xenproject.org>
 ---
-CC: Ross Lagerwall <ross.lagerwall@citrix.com>
-
 Changes in v7:
-- Rebase over "x86/svm: Drop 'struct' from the vmcb_struct type".
-- Standalone on staging, without per-vCPU page tables or the sparse
-  directmap view: the message and two comments say that the window VA
-  is for use in the owning vCPU's context only, and need not be mapped
-  before write_ptbase(), as the domain's vCPUs share the window.
+- Standalone on staging, without per-vCPU per-domain areas: the
+  domain's own L3, d->arch.perdomain_l3_pg, in place of perdomain_l3();
+  the message no longer speaks of an area of v's own.
 
 Changes in v5:
-- Describe the mapping in terms of SVM_MAP_VMCB(), SVM_MAP_VMCB_ONE()
-  and SVM_UNMAP_VMCB(), which clears the pointer (George).
-- v4's 26/30, "x86/svm: clear the VMCB clean bits in
-  svm_ctxt_switch_from()", is dropped.  Ross's "x86/svm: Don't clear
-  clean bits on every context switch", now in staging as 69633efbca3c,
-  removes the clearing from svm_ctxt_switch_to() instead.
-- svm_asm_do_resume() now reads the VMCB through svm.vmcb (staging's
-  "x86/svm: Work around VMRUN's corruption of VMCB.INTR_SHADOW"); it
-  runs in the vCPU's own context, where the window VA is valid.
+- Comment above populate_perdomain_mapping(): the range lies within one
+  sub-area (one PERDOMAIN_VIRT_SLOT()), not one "per-domain slot".
+- Message: "whether v has a per-domain area of its own or shares its
+  domain's".
 
 Changes in v4:
-- New in this version.
+- Re-introduced into the series.
+- HVM only: the users are the state window's, all of which map their
+  pages at allocation time, so drop the linear-mapping fast path and the
+  IRQs-off walk that context-switch callers needed, along with the
+  map_domain_page_irqoff() variants.
 ---
- xen/arch/x86/hvm/svm/nestedsvm.c |  8 +++---
- xen/arch/x86/hvm/svm/svm.c       | 10 ++++++++
- xen/arch/x86/hvm/svm/vmcb.c      | 43 ++++++++++++++++++++++----------
- xen/arch/x86/hvm/svm/vmcb.h      | 15 ++++++++---
- 4 files changed, 56 insertions(+), 20 deletions(-)
+ xen/arch/x86/include/asm/mm.h |  3 ++
+ xen/arch/x86/mm.c             | 62 +++++++++++++++++++++++++++++++++++
+ 2 files changed, 65 insertions(+)
 
-diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
-index fcd422a21e..aad878e0b7 100644
---- a/xen/arch/x86/hvm/svm/nestedsvm.c
-+++ b/xen/arch/x86/hvm/svm/nestedsvm.c
-@@ -71,10 +71,9 @@ int cf_check nsvm_vcpu_initialise(struct vcpu *v)
-         goto err;
-     memset(msrpm, 0x0, MSRPM_SIZE);
- 
--    nv->nv_n2vmcx = alloc_vmcb();
-+    nv->nv_n2vmcx = alloc_vmcb(v, VCPU_STATE_IDX_N2VMCB, &nv->nv_n2vmcx_pa);
-     if ( nv->nv_n2vmcx == NULL )
-         goto err;
--    nv->nv_n2vmcx_pa = virt_to_maddr(nv->nv_n2vmcx);
- 
-     return 0;
- 
-@@ -95,7 +94,10 @@ void cf_check nsvm_vcpu_destroy(struct vcpu *v)
-      * of l1 vmcb page.
-      */
-     if ( nv->nv_n1vmcx )
-+    {
-         v->arch.hvm.svm.vmcb = nv->nv_n1vmcx;
-+        v->arch.hvm.svm.vmcb_pa = nv->nv_n1vmcx_pa;
-+    }
- 
-     if ( svm->ns_cached_msrpm )
-     {
-@@ -113,7 +115,7 @@ void cf_check nsvm_vcpu_destroy(struct vcpu *v)
- 
-     if ( nv->nv_n2vmcx )
-     {
--        free_vmcb(nv->nv_n2vmcx);
-+        free_vmcb(v, VCPU_STATE_IDX_N2VMCB, nv->nv_n2vmcx_pa);
-         nv->nv_n2vmcx = NULL;
-         nv->nv_n2vmcx_pa = INVALID_PADDR;
-     }
-diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
-index a846328802..c4d91947ba 100644
---- a/xen/arch/x86/hvm/svm/svm.c
-+++ b/xen/arch/x86/hvm/svm/svm.c
-@@ -265,6 +265,10 @@ static void cf_check svm_enable_msr_interception(struct domain *d, uint32_t msr)
- 
- static void svm_save_dr(struct vcpu *v)
- {
-+    /*
-+     * @v is the outgoing vCPU, whose page tables are still loaded: the
-+     * VMCB's window VA serves, although current has moved on.
-+     */
-     struct vmcb *vmcb = v->arch.hvm.svm.vmcb;
-     unsigned int flag_dr_dirty = v->arch.hvm.flag_dr_dirty;
- 
-@@ -944,6 +948,12 @@ static void cf_check svm_ctxt_switch_to(struct vcpu *v)
- {
-     int cpu = smp_processor_id();
- 
-+    /*
-+     * NB we cannot access the VMCB here: this runs before
-+     * write_ptbase(), so the incoming vCPU's state window need not
-+     * be reachable yet.
-+     */
-+
-     /*
-      * This is required, because VMRUN does consistency check and some of the
-      * DOM0 selectors are pointing to invalid GDT locations, and cause AMD
-diff --git a/xen/arch/x86/hvm/svm/vmcb.c b/xen/arch/x86/hvm/svm/vmcb.c
-index bbeee4ec67..420ec7f85e 100644
---- a/xen/arch/x86/hvm/svm/vmcb.c
-+++ b/xen/arch/x86/hvm/svm/vmcb.c
-@@ -6,6 +6,7 @@
-  *
-  */
- 
-+#include <xen/domain_page.h>
- #include <xen/init.h>
- #include <xen/keyhandler.h>
- #include <xen/lib.h>
-@@ -23,30 +24,40 @@
- #include "svm.h"
- #include "vmcb.h"
- 
--struct vmcb *alloc_vmcb(void)
-+struct vmcb *alloc_vmcb(struct vcpu *v, unsigned int idx, paddr_t *pa)
- {
--    struct vmcb *vmcb;
-+    struct page_info *pg = alloc_domheap_page(v->domain, MEMF_no_owner);
-+    mfn_t mfn;
-+
-+    ASSERT(idx < VCPU_STATE_NR_PAGES);
- 
--    vmcb = alloc_xenheap_page();
--    if ( vmcb == NULL )
-+    if ( pg == NULL )
-     {
-         printk(XENLOG_WARNING "Warning: failed to allocate vmcb.\n");
-         return NULL;
-     }
- 
--    clear_page(vmcb);
--    return vmcb;
-+    mfn = page_to_mfn(pg);
-+    clear_domain_page(mfn);
-+    populate_perdomain_mapping(v, VCPU_STATE_ADDR(v, idx), &mfn, 1,
-+                               __PAGE_HYPERVISOR_RW);
-+    *pa = mfn_to_maddr(mfn);
-+
-+    return (struct vmcb *)VCPU_STATE_ADDR(v, idx);
+diff --git a/xen/arch/x86/include/asm/mm.h b/xen/arch/x86/include/asm/mm.h
+index 1cdd30f7e2..5de04b32aa 100644
+--- a/xen/arch/x86/include/asm/mm.h
++++ b/xen/arch/x86/include/asm/mm.h
+@@ -610,6 +610,9 @@ struct page_info *allocate_perdomain_l3(struct domain *d);
+ int create_perdomain_mapping(struct domain *d, unsigned long va,
+                              unsigned int nr, l1_pgentry_t **pl1tab,
+                              struct page_info **ppg);
++void populate_perdomain_mapping(const struct vcpu *v, unsigned long va,
++                                const mfn_t *mfn, unsigned int nr,
++                                unsigned int flags);
+ void destroy_perdomain_mapping(const struct vcpu *v, unsigned long va,
+                                unsigned int nr);
+ void free_perdomain_mappings(struct domain *d);
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index 2a01bc235e..9e313e2a82 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -6356,6 +6356,68 @@ int create_perdomain_mapping(struct domain *d, unsigned long va,
+     return rc;
  }
  
--void free_vmcb(struct vmcb *vmcb)
-+void free_vmcb(struct vcpu *v, unsigned int idx, paddr_t pa)
- {
--    free_xenheap_page(vmcb);
-+    ASSERT(idx < VCPU_STATE_NR_PAGES);
-+
-+    unmap_vcpu_state(v, idx, 1);
-+    free_domheap_page(maddr_to_page(pa));
- }
- 
- struct vmcb *svm_vmcb_map_one(const struct vcpu *v,
-                               struct vmcb *va, paddr_t pa)
- {
--    return va;
-+    return v == current ? va : map_domain_page(maddr_to_mfn(pa));
- }
- 
- struct vmcb *svm_vmcb_map(const struct vcpu *v)
-@@ -56,6 +67,8 @@ struct vmcb *svm_vmcb_map(const struct vcpu *v)
- 
- void svm_vmcb_unmap(const struct vcpu *v, const struct vmcb *vmcb)
- {
-+    if ( v != current )
-+        unmap_vcpu_state_page(vmcb);
- }
- 
- /* This function can directly access fields which are covered by clean bits. */
-@@ -219,26 +232,29 @@ int svm_create_vmcb(struct vcpu *v)
-     int rc;
- 
-     if ( (nv->nv_n1vmcx == NULL) &&
--         (nv->nv_n1vmcx = alloc_vmcb()) == NULL )
-+         (nv->nv_n1vmcx = alloc_vmcb(v, VCPU_STATE_IDX_VMCB,
-+                                     &nv->nv_n1vmcx_pa)) == NULL )
-     {
-         printk("Failed to create a new VMCB\n");
-         return -ENOMEM;
-     }
- 
-     svm->vmcb = nv->nv_n1vmcx;
-+    svm->vmcb_pa = nv->nv_n1vmcx_pa;
- 
-     vmcb = SVM_MAP_VMCB(v);
-     rc = construct_vmcb(v, vmcb);
-     SVM_UNMAP_VMCB(v, vmcb);
-     if ( rc != 0 )
-     {
--        free_vmcb(nv->nv_n1vmcx);
-+        free_vmcb(v, VCPU_STATE_IDX_VMCB, nv->nv_n1vmcx_pa);
-         nv->nv_n1vmcx = NULL;
-+        nv->nv_n1vmcx_pa = INVALID_PADDR;
-         svm->vmcb = NULL;
-+        svm->vmcb_pa = INVALID_PADDR;
-         return rc;
-     }
- 
--    svm->vmcb_pa = nv->nv_n1vmcx_pa = virt_to_maddr(svm->vmcb);
-     return 0;
- }
- 
-@@ -248,7 +264,7 @@ void svm_destroy_vmcb(struct vcpu *v)
-     struct svm_vcpu *svm = &v->arch.hvm.svm;
- 
-     if ( nv->nv_n1vmcx != NULL )
--        free_vmcb(nv->nv_n1vmcx);
-+        free_vmcb(v, VCPU_STATE_IDX_VMCB, nv->nv_n1vmcx_pa);
- 
-     if ( svm->msrpm != NULL )
-     {
-@@ -260,6 +276,7 @@ void svm_destroy_vmcb(struct vcpu *v)
-     nv->nv_n1vmcx = NULL;
-     nv->nv_n1vmcx_pa = INVALID_PADDR;
-     svm->vmcb = NULL;
-+    svm->vmcb_pa = INVALID_PADDR;
- }
- 
- static void svm_dump_sel(const char *name, const struct segment_register *s)
-diff --git a/xen/arch/x86/hvm/svm/vmcb.h b/xen/arch/x86/hvm/svm/vmcb.h
-index 070a44ff6c..6aaeb68507 100644
---- a/xen/arch/x86/hvm/svm/vmcb.h
-+++ b/xen/arch/x86/hvm/svm/vmcb.h
-@@ -536,12 +536,19 @@ struct vmcb {
-     uint64_t res18[291];
- };
- 
--struct vmcb *alloc_vmcb(void);
--void free_vmcb(struct vmcb *vmcb);
 +/*
-+ * VMCBs are domain-heap pages: hardware addresses them physically, and
-+ * Xen maps each one at a fixed slot in the owning vCPU's state window,
-+ * so the returned virtual address is for use in that vCPU's context only.
-+ * @idx is the VCPU_STATE_IDX_* slot to place the mapping in.
++ * Map @nr pages, @mfn[0..nr-1], at consecutive pages from @va in v's view of
++ * the per-domain area, with page-table @flags.  The range must lie within a
++ * single sub-area (one PERDOMAIN_VIRT_SLOT()), and must already have been
++ * plumbed down to the L1 tables by create_perdomain_mapping().  Present
++ * entries are replaced, and no TLB flushing is done.
++ *
++ * The walk maps the per-domain page-table pages transiently, so v need not
++ * be current.  It is not for contexts with interrupts disabled.
 + */
-+struct vmcb *alloc_vmcb(struct vcpu *v, unsigned int idx, paddr_t *pa);
-+void free_vmcb(struct vcpu *v, unsigned int idx, paddr_t pa);
- 
- /*
-- * Access a VMCB of a vCPU that may not be current.  SVM_MAP_VMCB() takes
-- * the active VMCB, SVM_MAP_VMCB_ONE() a specific one.
-+ * Access a VMCB of a vCPU that may not be current: the window VA for
-+ * current, a transient mapping otherwise.  SVM_MAP_VMCB() takes the active
-+ * VMCB, SVM_MAP_VMCB_ONE() a specific one.
-  */
- struct vmcb *svm_vmcb_map_one(const struct vcpu *v,
-                               struct vmcb *va, paddr_t pa);
++void populate_perdomain_mapping(const struct vcpu *v, unsigned long va,
++                                const mfn_t *mfn, unsigned int nr,
++                                unsigned int flags)
++{
++    struct page_info *l3_pg = v->domain->arch.perdomain_l3_pg;
++    const l3_pgentry_t *l3tab;
++    const l2_pgentry_t *l2tab;
++    l1_pgentry_t *l1tab = NULL;
++    unsigned int i;
++
++    ASSERT(va >= PERDOMAIN_VIRT_START &&
++           va < PERDOMAIN_VIRT_SLOT(PERDOMAIN_SLOTS));
++    ASSERT(!nr || !l3_table_offset(va ^ (va + nr * PAGE_SIZE - 1)));
++    ASSERT(local_irq_is_enabled());
++
++    if ( !nr )
++        return;
++
++    BUG_ON(!l3_pg);
++    l3tab = __map_domain_page(l3_pg);
++    BUG_ON(!(l3e_get_flags(l3tab[l3_table_offset(va)]) & _PAGE_PRESENT));
++    l2tab = map_l2t_from_l3e(l3tab[l3_table_offset(va)]);
++    unmap_domain_page(l3tab);
++
++    for ( i = 0; i < nr; i++, va += PAGE_SIZE )
++    {
++        l1_pgentry_t *pl1e;
++
++        if ( !l1tab || !l1_table_offset(va) )
++        {
++            const l2_pgentry_t *pl2e = &l2tab[l2_table_offset(va)];
++
++            unmap_domain_page(l1tab);
++            BUG_ON(!(l2e_get_flags(*pl2e) & _PAGE_PRESENT));
++            l1tab = map_l1t_from_l2e(*pl2e);
++        }
++
++        pl1e = &l1tab[l1_table_offset(va)];
++        if ( perdomain_l1e_needs_freeing(*pl1e) )
++        {
++            printk(XENLOG_ERR
++                   "%pv: leaking area-owned page %"PRI_mfn" at %#lx\n",
++                   v, mfn_x(l1e_get_mfn(*pl1e)), va);
++            ASSERT_UNREACHABLE();
++        }
++        l1e_write(pl1e, l1e_from_mfn(mfn[i], flags));
++    }
++
++    unmap_domain_page(l1tab);
++    unmap_domain_page(l2tab);
++}
++
+ void destroy_perdomain_mapping(const struct vcpu *v, unsigned long va,
+                                unsigned int nr)
+ {
 -- 
 2.56.0
 
