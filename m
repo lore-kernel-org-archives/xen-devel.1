@@ -2,43 +2,43 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7AC6E60A3806
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2026 19:26:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B98A60A263A
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2026 19:26:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20260707 header.b=iH8cuMkU
-Received: from list by lists.xenproject.org with outflank-mailman.1496844.1695183 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20260707 header.b=ExvQJ7nW
+Received: from list by lists.xenproject.org with outflank-mailman.1496851.1695201 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xU7lR-0002nF-9G; Thu, 19 Nov 2026 19:25:45 +0000
+	id 1xU7ld-0003Wx-Qx; Thu, 19 Nov 2026 19:25:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1496844.1695183; Thu, 19 Nov 2026 19:25:45 +0000
+Received: by outflank-mailman (output) from mailman id 1496851.1695201; Thu, 19 Nov 2026 19:25:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xU7lR-0002n8-6W; Thu, 19 Nov 2026 19:25:45 +0000
-Received: by outflank-mailman (input) for mailman id 1496844;
- Thu, 19 Nov 2026 19:25:44 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xU7ld-0003Wk-NU; Thu, 19 Nov 2026 19:25:57 +0000
+Received: by outflank-mailman (input) for mailman id 1496851;
+ Thu, 19 Nov 2026 19:25:56 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <3NU3_agcKCSwQZWOMZaOWWOTM.KWUfMV-LMdMTTQaba.fMVXZWRMKb.WZO@flex--irogers.bounces.google.com>)
- id 1xU7lQ-0002m3-30
- for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 19:25:44 +0000
+ <3QU3_agcKCTgcliaYlmaiiafY.WigrYh-XYpYffcmnm.rYhjlidYWn.ila@flex--irogers.bounces.google.com>)
+ id 1xU7lc-0003S8-94
+ for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 19:25:56 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xU7lP-00DAaF-Fq
- for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 20:25:43 +0100
-Received: from [10.42.69.10] (helo=localhost)
+ id 1xU7lb-009Gtq-Le
+ for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 20:25:55 +0100
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <3NU3_agcKCSwQZWOMZaOWWOTM.KWUfMV-LMdMTTQaba.fMVXZWRMKb.WZO@flex--irogers.bounces.google.com>)
- id 6aff4d37-2eae-0a2a0a5409dd-0a2a450a88ee-0
- for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 20:25:43 +0100
-Received: from [209.85.214.197] (helo=mail-pl1-f197.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ <3QU3_agcKCTgcliaYlmaiiafY.WigrYh-XYpYffcmnm.rYhjlidYWn.ila@flex--irogers.bounces.google.com>)
+ id 6aff4d00-bab6-0a2a0a5309dd-0a2a4501bb7a-44
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 20:25:55 +0100
+Received: from [209.85.167.197] (helo=mail-oi1-f197.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <3NU3_agcKCSwQZWOMZaOWWOTM.KWUfMV-LMdMTTQaba.fMVXZWRMKb.WZO@flex--irogers.bounces.google.com>)
- id 6aff4d35-f2d2-0a2a450a0019-d155d6c5a819-3
- for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 20:25:43 +0100
-Received: by mail-pl1-f197.google.com with SMTP id
- d9443c01a7336-2ee2d612733so9929625ad.0
- for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 11:25:42 -0800 (PST)
+ <3QU3_agcKCTgcliaYlmaiiafY.WigrYh-XYpYffcmnm.rYhjlidYWn.ila@flex--irogers.bounces.google.com>)
+ id 6aff4d42-5bcc-0a2a45010019-d155a7c5a84e-3
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 20:25:55 +0100
+Received: by mail-oi1-f197.google.com with SMTP id
+ 5614622812f47-5713cd0fb42so1691302b6e.0
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 11:25:55 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,45 +49,45 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=google.com header.i="@google.com" header.h="Content-Type:Cc:To:From:Subject:Message-ID:References:Mime-Version:In-Reply-To:Date"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20260707; t=1795116341; x=1795721141; darn=lists.xenproject.org;
+        d=google.com; s=20260707; t=1795116354; x=1795721154; darn=lists.xenproject.org;
         h=content-type:cc:to:from:subject:message-id:references:mime-version
          :in-reply-to:date:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=ALLBk8MdTkFwcPZqYQO+ZVSicu8jJEanZFGqZFoBPVY=;
-        b=iH8cuMkUaR5CE+IVSf+Z7l3Z51+jTV/vht+1CF9QjTbWi4mbVn6q39zAoJlWMDRgrJ
-         8RYbYOGp4h2ec03qZaWHXifYmYv7OLjE2M3gJj7FpAPQ974QXLRCuxNaC3w76J6DeiRP
-         S+z/MpOIzwa0utCUBtcQUydWbjr197ewLQmj6CNfj6uH4jOpYkQIfqfXG3zz+YBCYe/9
-         Tti0v6MdUrIk3p7cjrBMaZj0Kc/2Ha4GJUZlHSDyqe2Aq8w3YScWUtJHAYrrYKc1CX5b
-         xGFkvRN8PxyBVXpnwTJefxDDf7lQpmRJcmxu3i3GrWooyGGG0VfkZkYD7FSBWlvDr0m0
-         /KvA==
+        bh=ohgce9vn+z31zJY1A4d/uIcUdw7UhPIFGYmbETxOr2U=;
+        b=ExvQJ7nWUdCD3anPV0mnutgPMbpdFQUZTLZhCuOXimkTwgtKiiEiq5CjIGB/hyIsQb
+         mvrp9cAHRc4HOXFS3fMcR34kuJDPE2Z+Vir1X7eAXGagTBVpfcW7bQ83HWJDL3ZhfN1l
+         wtEdWv00Rk+x3qqdp1tvMOrieaoAgktagayWdIsc/9JgwU3x0limsT8opKWrw2V75Vrb
+         3ZD+Xz+lLrDziaoObi64ZPDQ4ejR2R3ipg1zgJRnpQNDYj3OP+PNp3nWYZ7LMDvACorM
+         PHwQOotSJnHwKSXNvt0Yh+MWR6pMRcOnmeZus9tCth2WGvhyOInhtP/foK5fu4rIBCmH
+         sYNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795116341; x=1795721141;
+        d=1e100.net; s=20260707; t=1795116354; x=1795721154;
         h=content-type:cc:to:from:subject:message-id:references:mime-version
          :in-reply-to:date:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ALLBk8MdTkFwcPZqYQO+ZVSicu8jJEanZFGqZFoBPVY=;
-        b=boLJWq+VWW51VXxx4upbS0TU2shkVvrw22UZPL3jajNA4LxYmzpYBuxY14ZT4BD87K
-         nyYDQtdLYfn4S2ET9oRZZK3yXGCx9OCENOq0fHIvlwedmArf+ehyIlHixHadoCbfHu5a
-         vji6k0tlYlLo6DvOqbFqPBo8C6HMU/e1qEIEctc4eY32IRVyidflsiM19a9eChfy9UD5
-         N2TqBsV4IrOkJTOQtmKmARay0j3NRON/DTvudCC1x8ue3ScyQfLjHuIf2bp2C6kcpo3/
-         h9jsv3HBc7J0352y39GY888WYHfp02TgTxo8lYj6yr93BLvAwrNzQl7AIvB0HtLgr7+u
-         58fw==
-X-Forwarded-Encrypted: i=1; AL+hErG1Nj6r+1gLYDHC0Rw7y5hLay2VNM243D0FdzzHBc/98AiWBS3QjWEjYnP8dtcg5MTe04EI75MJqGM=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z8CwxZHSxT+gCn9Dba5+anfb3S3soIweaMXy7jXZm2CtIu/LWRI
-	H9A2oEu+wFZ0jnHDRwAQ4y/80LnGwC/zlYKVIB0CGmnzmrDOY5nDRCfleLOwpAcNyYaVpsV+lvk
-	O6EpRRUKKBA==
-X-Received: from pleu15.prod.google.com ([2002:a17:903:41cf:b0:2ef:d860:1c85])
- (user=irogers job=prod-delivery.src-stubby-dispatcher) by 2002:a17:902:fda5:b0:2ed:fb0:bfd6
- with SMTP id d9443c01a7336-2f031e08699mr15736045ad.11.1795116341051; Thu, 19
- Nov 2026 11:25:41 -0800 (PST)
-Date: Thu, 19 Nov 2026 11:25:14 -0800
+        bh=ohgce9vn+z31zJY1A4d/uIcUdw7UhPIFGYmbETxOr2U=;
+        b=tCfJO/7aU+2P11UJ0DH5GtnMQICYfUiLGLm8UcRU+9Gla6JQbe/V/T4DdAlFqkRniu
+         aH8bdlz34B9gxG6vLeePyoa5RQnjzxls6Ub7Zrp1dyjxeTMAETsVfXHv3+h+Z3GVu+ha
+         w4mmuUttrl/UtMEi/9GUs2Ss5ezZDad9HNi6D9BWQz6YBweND8q3pIhIn4HHAdWRWNmO
+         3XL4wJgR5baQjl4PwFsIfp/urs2wJcXe1pt60+X0OPNZctMr1Svw3fXCSpnDWtmfSuDq
+         nj6VB1UkLl332E/z9SWPDMFrWGcSUDdITQb68fYP7sHs5yFaxOMUBsL6TsTHoxf0HpdF
+         vMfQ==
+X-Forwarded-Encrypted: i=1; AL+hErFjl/VeejIP8llULIUPlGdqImkOjem03ljsW1ibCMxAkikYXISWMAFl/x6g3O915+qp+F964o75zhs=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z+3SxEz6MjHOpARVhGMO8nQB4VaePiItl9pts0yL1SO8ps5bf8Q
+	aUOnhpQO+Beffl4HOBeQkHnhS4g4wuQ0z6axqMaHRGf7JBbo4qJJR6hi9+xBZVe9vwCG4c5LQ6R
+	Eowv0x5vlIA==
+X-Received: from ilbdx27-n1.prod.google.com ([2002:a05:6e02:421b:10b0:547:8b66:16bf])
+ (user=irogers job=prod-delivery.src-stubby-dispatcher) by 2002:a05:6808:2383:b0:572:f8ec:5340
+ with SMTP id 5614622812f47-5797dd97e12mr1569173b6e.40.1795116353256; Thu, 19
+ Nov 2026 11:25:53 -0800 (PST)
+Date: Thu, 19 Nov 2026 11:25:16 -0800
 In-Reply-To: <20261119192520.1983406-1-irogers@google.com>
 X-Archived-By: <archiver.kernel.org>
 Mime-Version: 1.0
 References: <20261119192520.1983406-1-irogers@google.com>
 X-Mailer: git-send-email 2.56.1.750.gf70dc682cf-goog
-Message-ID: <20261119192520.1983406-4-irogers@google.com>
-Subject: [PATCH v4 3/9] sh: sq: Add missing kobject release callback to ktype_percpu_entry
+Message-ID: <20261119192520.1983406-6-irogers@google.com>
+Subject: [PATCH v4 5/9] dlm: Wait for kobject release before freeing dlm_ls
 From: Ian Rogers <irogers@google.com>
 To: Danilo Krummrich <dakr@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
 	Kees Cook <kees@kernel.org>, Miguel Ojeda <ojeda@kernel.org>, 
@@ -113,49 +113,146 @@ Cc: Madhavan Srinivasan <maddy@linux.ibm.com>, Srish Srinivasan <ssrish@linux.ib
 	amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, 
 	linux-kernel@vger.kernel.org, Ian Rogers <irogers@google.com>
 Content-Type: text/plain; charset="UTF-8"
-X-purgate-ID: tlsNG-4011c0/1795116343-59BC0CFC-E1E6199E/0/0
+X-purgate-ID: tlsNG-d62444/1795116355-BDAE85FD-05A1CE68/0/0
 X-purgate-type: clean
-X-purgate-size: 1123
+X-purgate-size: 4540
 X-Spam-Status: No, score=-26.3 required=3.0 tests=BAYES_00,DKIMWL_WL_MED,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
 	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT,USER_IN_DEF_DKIM_WL
-	autolearn=unavailable autolearn_force=no version=4.0.1
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-In sq_dev_add(), sq_kobject[cpu] is dynamically allocated with
-kzalloc_obj() and initialized with ktype_percpu_entry. When
-sq_dev_remove() calls kobject_put(kobj), the kobject is never freed
-because ktype_percpu_entry lacks a .release callback.
+struct dlm_ls embeds a struct kobject (ls_kobj), but dlm_ktype lacked a
+.release callback and dlm freed the lockspace structure directly via
+kfree(ls). With CONFIG_DEBUG_KOBJECT_RELEASE=y, freeing ls before the
+delayed kobject release runs causes a use-after-free, and unloading the
+module while the delayed release is pending results in an instruction
+page fault.
 
-Provide a sq_kobj_release() callback that calls kfree(kobj).
+Add a completion ls_kobj_done and dlm_ls_release() to complete it when
+the last kobject reference is dropped, waiting for it in free_lockspace()
+before kfree(ls) and in the new_lockspace() error path before module_put().
+Also delete the kobject via kobject_del() before stopping dlm_recoverd
+to close the window where concurrent sysfs writes could wake the stopped
+recovery task.
 
-Fixes: d7c30c682a27 ("sh: Store Queue API rework.")
-Acked-by: John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>
+Fixes: 8a4cf500f1dd ("dlm: drop kobject release callback handling")
+Acked-by: Alexander Aring <aahringo@redhat.com>
 Signed-off-by: Ian Rogers <irogers@google.com>
 ---
- arch/sh/kernel/cpu/sh4/sq.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ fs/dlm/dlm_internal.h |  1 +
+ fs/dlm/lockspace.c    | 26 ++++++++++++++++++++------
+ 2 files changed, 21 insertions(+), 6 deletions(-)
 
-diff --git a/arch/sh/kernel/cpu/sh4/sq.c b/arch/sh/kernel/cpu/sh4/sq.c
-index 908a8e09113b..f33864958487 100644
---- a/arch/sh/kernel/cpu/sh4/sq.c
-+++ b/arch/sh/kernel/cpu/sh4/sq.c
-@@ -331,7 +331,13 @@ static const struct sysfs_ops sq_sysfs_ops = {
- 	.store	= sq_sysfs_store,
+diff --git a/fs/dlm/dlm_internal.h b/fs/dlm/dlm_internal.h
+index 74c2e77d1b55..95b3bff0cb57 100644
+--- a/fs/dlm/dlm_internal.h
++++ b/fs/dlm/dlm_internal.h
+@@ -576,6 +576,7 @@ struct dlm_ls {
+ 	int			ls_create_count; /* create/release refcount */
+ 	unsigned long		ls_flags;	/* LSFL_ */
+ 	struct kobject		ls_kobj;
++	struct completion	ls_kobj_done;
+ 
+ 	struct xarray		ls_lkbxa;
+ 	rwlock_t		ls_lkbxa_lock;
+diff --git a/fs/dlm/lockspace.c b/fs/dlm/lockspace.c
+index a9c98b4f378f..2dccd080a10f 100644
+--- a/fs/dlm/lockspace.c
++++ b/fs/dlm/lockspace.c
+@@ -179,7 +179,15 @@ static const struct sysfs_ops dlm_attr_ops = {
+ 	.store = dlm_attr_store,
  };
  
-+static void sq_kobj_release(struct kobject *kobj)
++static void dlm_ls_release(struct kobject *kobj)
 +{
-+	kfree(kobj);
++	struct dlm_ls *ls = container_of(kobj, struct dlm_ls, ls_kobj);
++
++	complete(&ls->ls_kobj_done);
 +}
 +
- static struct kobj_type ktype_percpu_entry = {
-+	.release	= sq_kobj_release,
- 	.sysfs_ops	= &sq_sysfs_ops,
- 	.default_groups	= sq_sysfs_groups,
+ static struct kobj_type dlm_ktype = {
++	.release        = dlm_ls_release,
+ 	.default_groups = dlm_groups,
+ 	.sysfs_ops     = &dlm_attr_ops,
  };
+@@ -355,6 +363,8 @@ static void free_lockspace(struct work_struct *work)
+ 	 */
+ 	rhashtable_free_and_destroy(&ls->ls_rsbtbl, rhash_free_rsb, NULL);
+ 
++	kobject_put(&ls->ls_kobj);
++	wait_for_completion(&ls->ls_kobj_done);
+ 	kfree(ls);
+ }
+ 
+@@ -435,7 +445,10 @@ static int new_lockspace(const char *name, const char *cluster,
+ 	ls->ls_lvblen = lvblen;
+ 	atomic_set(&ls->ls_count, 0);
+ 	init_waitqueue_head(&ls->ls_count_wait);
++	init_completion(&ls->ls_kobj_done);
+ 	ls->ls_flags = 0;
++	ls->ls_kobj.kset = dlm_kset;
++	kobject_init(&ls->ls_kobj, &dlm_ktype);
+ 
+ 	if (ops && dlm_config.ci_recover_callbacks) {
+ 		ls->ls_ops = ops;
+@@ -567,9 +580,7 @@ static int new_lockspace(const char *name, const char *cluster,
+ 	wait_event(ls->ls_recover_lock_wait,
+ 		   test_bit(LSFL_RECOVER_LOCK, &ls->ls_flags));
+ 
+-	ls->ls_kobj.kset = dlm_kset;
+-	error = kobject_init_and_add(&ls->ls_kobj, &dlm_ktype, NULL,
+-				     "%s", ls->ls_name);
++	error = kobject_add(&ls->ls_kobj, NULL, "%s", ls->ls_name);
+ 	if (error)
+ 		goto out_recoverd;
+ 	kobject_uevent(&ls->ls_kobj, KOBJ_ADD);
+@@ -582,7 +593,7 @@ static int new_lockspace(const char *name, const char *cluster,
+ 
+ 	error = do_uevent(ls, 1, 0);
+ 	if (error < 0)
+-		goto out_recoverd;
++		goto out_kobj;
+ 
+ 	/* wait until recovery is successful or failed */
+ 	wait_for_completion(&ls->ls_recovery_done);
+@@ -600,6 +611,8 @@ static int new_lockspace(const char *name, const char *cluster,
+ 	do_uevent(ls, 0, 0);
+ 	dlm_clear_members(ls);
+ 	kfree(ls->ls_node_array);
++ out_kobj:
++	kobject_del(&ls->ls_kobj);
+  out_recoverd:
+ 	dlm_recoverd_stop(ls);
+  out_callback:
+@@ -615,6 +628,7 @@ static int new_lockspace(const char *name, const char *cluster,
+ 	rhashtable_destroy(&ls->ls_rsbtbl);
+  out_lsfree:
+ 	kobject_put(&ls->ls_kobj);
++	wait_for_completion(&ls->ls_kobj_done);
+ 	kfree(ls);
+  out:
+ 	module_put(THIS_MODULE);
+@@ -740,6 +754,8 @@ static int release_lockspace(struct dlm_ls *ls, unsigned int release_option)
+ 	    dlm_user_daemon_available())
+ 		do_uevent(ls, 0, (release_option == DLM_RELEASE_RECOVER));
+ 
++	kobject_del(&ls->ls_kobj);
++
+ 	dlm_recoverd_stop(ls);
+ 
+ 	/* clear the LSFL_RUNNING flag to fast up
+@@ -759,8 +775,6 @@ static int release_lockspace(struct dlm_ls *ls, unsigned int release_option)
+ 
+ 	dlm_delete_debug_file(ls);
+ 
+-	kobject_put(&ls->ls_kobj);
+-
+ 	xa_destroy(&ls->ls_recover_xa);
+ 	kfree(ls->ls_recover_buf);
+ 
 -- 
 2.56.1.708.g77570a6a1d-goog
 
