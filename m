@@ -2,47 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB5D7606A33A
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2026 11:10:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 805F3606A324
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2026 11:15:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Ud/qdSgN
-Received: from list by lists.xenproject.org with outflank-mailman.1496094.1694739 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=e1gpmiHI
+Received: from list by lists.xenproject.org with outflank-mailman.1496102.1694746 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xU01T-00048H-DW; Thu, 19 Nov 2026 11:09:47 +0000
+	id 1xU06L-0005yu-Tt; Thu, 19 Nov 2026 11:14:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1496094.1694739; Thu, 19 Nov 2026 11:09:47 +0000
+Received: by outflank-mailman (output) from mailman id 1496102.1694746; Thu, 19 Nov 2026 11:14:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xU01T-000489-A0; Thu, 19 Nov 2026 11:09:47 +0000
-Received: by outflank-mailman (input) for mailman id 1496094;
- Thu, 19 Nov 2026 11:09:46 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xU01S-000482-Cl
- for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 11:09:46 +0000
+	id 1xU06L-0005yn-RL; Thu, 19 Nov 2026 11:14:49 +0000
+Received: by outflank-mailman (input) for mailman id 1496102;
+ Thu, 19 Nov 2026 11:14:49 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xU06L-0005yh-6v
+ for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 11:14:49 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xU01R-000JQZ-E2
- for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 12:09:45 +0100
-Received: from [10.42.69.12] (helo=localhost)
+ id 1xU06K-006peD-3s
+ for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 12:14:48 +0100
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6afed8ea-2eae-0a2a0a5409dd-0a2a450ce84a-38
- for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 12:09:45 +0100
-Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6afeda1f-e002-0a2a0a5209dd-0a2a4507b16e-12
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 12:14:47 +0100
+Received: from [209.85.221.45] (helo=mail-wr1-f45.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6afed8f9-f479-0a2a450c0019-d155802bb9ba-3
- for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 12:09:45 +0100
-Received: by mail-wm1-f43.google.com with SMTP id
- 5b1f17b1804b1-4bb6886d30aso18870795e9.3
- for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 03:09:45 -0800 (PST)
+ id 6afeda27-b4ea-0a2a45070019-d155dd2db9dd-3
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 12:14:47 +0100
+Received: by mail-wr1-f45.google.com with SMTP id
+ ffacd0b85a97d-491846221ffso1689770f8f.3
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 03:14:47 -0800 (PST)
 Received: from ?IPV6:2a01:cb15:80c6:e800:d2ca:523:c712:18a6?
- (2a01cb1580c6e800d2ca0523c71218a6.ipv6.abo.wanadoo.fr.
- [2a01:cb15:80c6:e800:d2ca:523:c712:18a6])
+ ([2a01:cb15:80c6:e800:d2ca:523:c712:18a6])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb8538b09bsm50463665e9.4.2026.11.19.03.09.44
+ ffacd0b85a97d-4a656c11f1csm10759531f8f.53.2026.11.19.03.14.46
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 19 Nov 2026 03:09:44 -0800 (PST)
+ Thu, 19 Nov 2026 03:14:46 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -53,164 +52,170 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795086585; x=1795691385; darn=lists.xenproject.org;
+        d=gmail.com; s=20260707; t=1795086887; x=1795691687; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=4kgd7tljBbSyJljch8P3A/KuRX44rni7MNKcH1t48G8=;
-        b=Ud/qdSgNr25YZBQMW4/dQDWA3wKnNxJDzeSJOtoWIiEqIaunQ5oabIv3dFbzRVGCR2
-         8hHMR9K2BRVMphGb0MJibyBhu/O8AGc1bPEj9OqBh6Dd/yTFPgSmiwFpK/OItl+qWxjd
-         AK0UqFhqoPMicrezo22rW/huk/GDw/0x48M5alMt+V/pnd73Ga2yavUU8IGxVF99WgOk
-         BMyAc/5NXI1/08p8ZFeaDocKmh1h9aklB3QmWFOWVjC3qpaeK9k0Z5PG894Bus2wubZo
-         MO6auAGvREdGt/fX8NTUIc+y3mNZiCQI9xEPNG6RN43USI757qgAfspfNJJVm6aHjVx8
-         WbFQ==
+        bh=Vf9wW6zqPIAJ8eo1HvLTT4cmSP8BzWEHUifI2SJO4Bc=;
+        b=e1gpmiHI2LpVYf3Ciu2j1n6gRdGf+U/LvFqeRm6fdI37zEVjRyO6kzN7hoEnlqybU0
+         6Ns8B2NY9z6/kaIkLdkmK1vZ6eAaGdAVGsmzHBWtBDimeBz0w5ht3vAQBAESBDoRrOh3
+         hN8JjK2Ya+tZBEGiEHNA1Sq9WT7mqcjGse2XphupTVATH+OQNKo2z+KBYTwBac3cPlUI
+         SHplSxiExpS6ioDXQ8jVM13Jca7eYvCPMSF0Omn6qp8Cl4W02RHEUixoLC1tE6K7g4/9
+         NCNu3cQPjvTS3EjYxIhqZ4xUkL/nvsxDkRPUx/x1h9brGBqRE+iYYyGn5vc7xqmSGRUI
+         fb6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795086585; x=1795691385;
+        d=1e100.net; s=20260707; t=1795086887; x=1795691687;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=4kgd7tljBbSyJljch8P3A/KuRX44rni7MNKcH1t48G8=;
-        b=22FbGk7VNv5GxuHMrZ1ezZkn0mpkBEfxU3wAvqeanone5mpbpOs8x8My5e2Q3gfYlE
-         Gf1FV+7xHxbNKXk5iEj29s/o71jhS10c1J91FQwR+soav9PVk132Jgbd9rbyZLvxiKH1
-         ntwU1+EqVauGsznRRIe6ieL+ho+ugbegL1cBChUGCakYdDHSW5mUsRxhKRhlsy0+/At6
-         +WzoUx2kNKm+OFCX2+RM7ViziquEkdqYLaYNnDPFqGN8UNBZ+qbAuZSTkPX8T17EhxkA
-         TeBeacBRW3g/G3piWuYvPbZpoFjT1visprsSp+ipec8o7rJGbRfaOIBXgmToRKvmu30m
-         Y+ng==
-X-Forwarded-Encrypted: i=1; AL+hErGqOsqtzll0uXLD4RpOViwgm8sda2zlZGDER7zPU2yAWnl+6x0rjVdY01jAx0hZejGEBTvobLipBgI=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z/QS5awRUsb6qsLmx5oQBnc2e8SXMIBZHZrfzZ2JA229ZJ8k3p6
-	4tTMx08jRKqmgR4EAjFq94B7BiAkMrVaw4bjKXbPfC1RohgU4TDRRTfA
-X-Gm-Gg: AYBFou0FgF6+dD/DGmlcxlfmASXGZqXBk1zXggocgn4BZQeo/mpyLd0fz369toQZUOn
-	ugTB9Nn19p3RYW2IauotqYimO3WnwXMfVgXrZqFatPqIei05G24Hb0RNee4shfJ401p8XtdQxVG
-	YIWqlpFR7Kt8MHnHVNsgnqKDL+Ud3uK2Ok8/yUyM+0aj4hi7SxNWoR5cIYAP2qNQTSooZjzBqNJ
-	tJxgGsXKrcHhF0PK8/nA4QA+P/cGQCjo2oUskohvP2SB3noQwf53n+6OAoUchWmktMbT/g25/Pn
-	zWepzpdDMv+sSmxWBAzVvJ7JpNEE9zTMGXbeHjJR48+iVqYIbIrGw7n7bSJFO0K9Q0FHTmBARqy
-	83mrK3u2//5IXGySJ2cVnSF+ectbCsmxcq04Yu/f3m9lXEoccIv212mWnY6VyVIcJ6BuGeO3mVA
-	xPq/jVriAUxnvgIpoZnEy9OWDP9dOpHAEuy4r112f9qH9BR4n9APW46V7PRBfd6kKPf1Vy7r/Pn
-	t1Bga4FhfkQfDPUiZRdsvdLR/ryuaPl9HIy65vlROPKKfO0zeyvvco2uuB8jRY5iGkWd90QuSPU
-	mw2xCkOvdIPAZcrtXuLsf4CBn1+f3gQxKkxnrg/rw7Jx+BdLSwlThAufuF2xgBe4wGlbKkBNqGM
-	0sAJFYLPjng5S7N+8WTXDofGXXdLRip52ZSBk+WfRovzu+8eaJEADhX2lNrGLV4Qb3hJ/x3o=
-X-Received: by 2002:a05:600c:1c1f:b0:4bb:6847:7943 with SMTP id 5b1f17b1804b1-4bb7da28927mr124545535e9.26.1795086584840;
-        Thu, 19 Nov 2026 03:09:44 -0800 (PST)
-Message-ID: <4c8566e0-86ca-4c18-90a4-1f44e4db6df2@gmail.com>
-Date: Thu, 19 Nov 2026 12:09:44 +0100
+        bh=Vf9wW6zqPIAJ8eo1HvLTT4cmSP8BzWEHUifI2SJO4Bc=;
+        b=OqrCuiQroVrFk2cwSlxy+8bSbEnQmELZbrX497RZtp1SWu6u76IzoFUWDJkUMd1v0p
+         aSan/EJvZ0LoC4RfX0LWuvBzl3ix5VDC2qqScZy4Ofk7yQVC1di1tRATtmiNGVx9LBDS
+         RHRwmcajGa7V0Ld35ySawlWnWi++cQXggIITHYAtuDX4lQHsG7dlrM3UngXEudf9LlWr
+         /pFkmPANtPQaAwF2LuO2YZzJ2KWPZEB2ghA9BdHF5khW6GAO7aWUmDfEFlALCmgT7w4v
+         B6bt9GF+bFFnYxs4mF5YygfRbJsXwsS8YSzILEkTSVzlWD+yf71ysyKcbpjklVJwB1KJ
+         5G3g==
+X-Forwarded-Encrypted: i=1; AL+hErGGs2t5ycfxpYzdbirmF5J4puiTEFQ2sjdF75FdVRb/adfwE6DLBpytKBUjv6zm7pzYVmivskh7MHs=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z+fk8OZTF0LlHDhHZt96QHsY+kdPQZ9x1LGQHnGws8FaG5uSmPY
+	eDwmbEji7USOuRBNZ36mqtj7iX38fCMEhKRBmw+UI0rmoC60PEn8B9PT6e2bD8Y8
+X-Gm-Gg: AZFdTZcUanGA+ifQD6+GFmJdHAb+jE+THlEIIADM7rX1/f/1zh2fMwEISrVWwcRfMEb
+	T6H6qu7NKYf/6oCPcJLpR4x0qBdUNigXkbUUpBr1/PGdm7Qx52Q3Xz+IdK6qJRaGgQJ3f5v0tbl
+	yXup3PIKco4twyBSwzZ1t/DqF4BCDC3kZtFGtoRnPsqmM1+wwuxta/kniJq9vgUvZ6Uyi5JaoT2
+	FJwh9BHDLsJHdn9dv3wLwm5Ep8ErnP/HhrpT66NZcO00ftbEPTzodDGIASYPNpshdZ+bLSw8zIN
+	U/KucX6Pnrr1JEDnusiaauG1Kkx5M0ZUftiB9QBTAs26El0F8QwbRYbut2VAxHRBshd9bVRBM7R
+	ZB29dIRQa47IoQBrZqe8++NJS3sbhysbGKyA+6FAZlFHo9Nr52prXN95z8XSTi5hFnpx1+0nq0r
+	sXXA/T2Ego0STVWbQW58O4xkePgyIsicaxAOT4RqepD+akeyMm7RkGMolLG0y5H8yf4MW4Jdwl/
+	UMDrgoiQHCuY2ywo9Meg2T/ByjAhE59eKBqLG1Ig3J65B/n59WhOMXkzEwUBvZ3vCixwUOf4HAK
+	a3JqeW47OsS8ayGZn6jete+Riy6VsIYWxc8rXvyuEdl9zYXM5cMmnmig+/NwbTBPStMlFSPfvnE
+	efv49JOMGK7o=
+X-Received: by 2002:a05:6000:184b:b0:48f:bcdf:6f7d with SMTP id ffacd0b85a97d-4a63b6fbd88mr12455792f8f.34.1795086887318;
+        Thu, 19 Nov 2026 03:14:47 -0800 (PST)
+Message-ID: <90615fba-8f94-4daa-b8d3-5a81f35fbf41@gmail.com>
+Date: Thu, 19 Nov 2026 12:14:46 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/6] CI: add a Debian 13 riscv64 QTB container
-To: Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- xen-devel@lists.xenproject.org
-Cc: Doug Goldstein <cardoe@cardoe.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Alejandro Vallejo <alejandro.garciavallejo@amd.com>,
- Zhang Zheng <zhangzheng@iscas.ac.cn>
-References: <1793714671.8631fc262581453bbf619ec5b2062170.1a1a1b9ce9c000403d@vates.tech/T/#u>
- <1793714905.8631fc262581453bbf619ec5b2062170.1a1a1bd621c000403d@vates.tech>
+Subject: Re: [PATCH v8 12/26] emul/ns16x50: implement FCR register
+ (write-only)
+To: dmukhin@ford.com, xen-devel@lists.xenproject.org
+Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com,
+ julien@xen.org, michal.orzel@amd.com, roger@xenproject.org,
+ sstabellini@kernel.org, xakep.amatop@gmail.com, dmukhin@xen.org
+References: <20261111194800.1070016-1-dmukhin@ford.com>
+ <20261111194800.1070016-13-dmukhin@ford.com>
 Content-Language: en-US
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <1793714905.8631fc262581453bbf619ec5b2062170.1a1a1bd621c000403d@vates.tech>
+In-Reply-To: <20261111194800.1070016-13-dmukhin@ford.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d25034/1795086585-020C1A5B-94C59988/10/63158204843
+X-purgate-ID: tlsNG-ef75cf/1795086887-37AD0AE4-B845D243/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 3135
-X-Spam-Status: No, score=-19.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-purgate-size: 3309
+X-Spam-Status: No, score=-14.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 
 
-On 11/3/26 3:08 PM, Baptiste Le Duc wrote:
-> The riscv64 QTB tests use QTB (QEMU Test Bench) Python package. QTB is part
-> of AMD's work on the 'safety' branch [1] of their QEMU fork and is not
-> upstream in QEMU yet. The tests also need pytest and qemu-system-riscv64.
+On 11/11/26 8:47 PM, dmukhin@ford.com wrote:
+> From: Denis Mukhin <dmukhin@ford.com>
 > 
-> Add debian:13-riscv64-qtb, a Debian Trixie container with those packages
-> and the QTB package installed from the python/ directory of AMD's QEMU
-> fork, at the commit pinned by QEMU_REPO/QEMU_COMMIT. Make it available to
-> containerize script as trixie-riscv64-qtb.
+> Add emulation logic for FCR register.
 > 
-> QTB depends on pexpect, ptyprocess, pygdbmi and qemu.qmp. Rather than
-> fetching them from PyPI, install them from the wheels vendored in the
-> python/wheels/ directory of the same fork commit, with pip --no-index.
+> Note, that does not hook FIFO interrupt moderation to the FIFO
+> management code for simplicity.
 > 
-> [1] https://gitlab.com/xen-project/people/amd/qemu/-/tree/safety?ref_type=heads
-> 
-> Suggested-by: Stefano Stabellini <sstabellini@kernel.org>
-> Assisted-by: Claude:claude-opus-5-5
-> Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 > ---
-> The CI jobs running the tests in this container come in a later patch.
-> ---
-> Changes in v3:
-> - Move the container from test-artifacts to xen.git (automation/build/),
->    renamed debian:13-riscv64-qtb.
-> - Install the QTB dependencies from the wheels vendored in the fork, with
->    pip --no-index.
-> - Add pytest, drop jinja2, yaml and device-tree-compiler.
-> - Comment that the pinned commit is the tip of the safety branch.
-> - Reword the commit title and message.
-> ---
->   automation/build/debian/13-riscv64-qtb.dockerfile | 47 +++++++++++++++++++++++
->   automation/scripts/containerize                   |  1 +
->   2 files changed, 48 insertions(+)
+>   xen/common/emul/vuart/ns16x50.c | 33 +++++++++++++++++++++++++++++++++
+>   1 file changed, 33 insertions(+)
 > 
-> diff --git a/automation/build/debian/13-riscv64-qtb.dockerfile b/automation/build/debian/13-riscv64-qtb.dockerfile
-> new file mode 100644
-> index 0000000000..34ca1f2b7d
-> --- /dev/null
-> +++ b/automation/build/debian/13-riscv64-qtb.dockerfile
-> @@ -0,0 +1,47 @@
-> +# syntax=docker/dockerfile:1
-> +FROM --platform=linux/amd64 debian:trixie-slim
-> +LABEL maintainer.name="The Xen Project"
-> +LABEL maintainer.email="xen-devel@lists.xenproject.org"
-> +
-> +ENV DEBIAN_FRONTEND=noninteractive
-> +
-> +ARG QEMU_REPO=https://gitlab.com/xen-project/people/amd/qemu.git
-> +# Tip of the safety branch
-> +ARG QEMU_COMMIT=24cd7e5c0d7e4db8e651f091d0b9da2e7c58dbab
-> +
-> +RUN <<EOF
-> +#!/bin/bash
-> +    set -eu
-> +
-> +    useradd --create-home user
-> +
-> +    apt-get update
-> +
-> +    DEPS=(# Base environment
-> +        ca-certificates
-> +        git
-> +        python3-minimal
-> +        python3-pip
+> diff --git a/xen/common/emul/vuart/ns16x50.c b/xen/common/emul/vuart/ns16x50.c
+> index 8d3845a8a4cd..404e12311090 100644
+> --- a/xen/common/emul/vuart/ns16x50.c
+> +++ b/xen/common/emul/vuart/ns16x50.c
+> @@ -436,6 +436,39 @@ static int ns16x50_io_write8(
+>           }
+>           break;
+>   
+> +    case UART_FCR: /* WO */
+> +        if ( val & UART_FCR_RSRVD0 )
+> +            ns16x50_warn(vdev, "FCR: attempt to set reserved bit: %x\n",
+> +                         UART_FCR_RSRVD0);
 
-Nit: the other dockerfiles put the comment on its own line after "DEPS=(".
-Also, python3-pip already pulls in python3, so python3-minimal looks
-redundant.
+Bits 4 and 5 are indeed reserved on the TL16C550C ("reserved for future
+use"), so warning is fine; with a local mask (02/26) the two checks
+collapse into one. Nit: %#x, as in the MCR warnings.
 
-Other LGTM:
-  Reviewed-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+> +
+> +        if ( val & UART_FCR_RSRVD1 )
+> +            ns16x50_warn(vdev, "FCR: attempt to set reserved bit: %x\n",
+> +                         UART_FCR_RSRVD1);
+> +
+> +        if ( val & UART_FCR_CLRX )
+> +        {
+> +            ns16x50_fifo_rx_reset(vdev);
+> +            regs[UART_LSR] &= ~UART_LSR_DR;
+> +        }
 
-I've also tested it by:
+One of the places that keeps LSR.DR in sync by hand, see 10/26.
 
-$ podman build -t qtb-review -f 
-automation/build/debian/13-riscv64-qtb.dockerfile automation/build/debian
+> +
+> +        if ( val & UART_FCR_CLTX )
+> +        {
+> +            ns16x50_fifo_tx_reset(vdev);
 
-And it looks everything is on the place so:
+The TX "FIFO" here is the line buffer of 11/26: everything in it has
+already been reported to the guest as transmitted (THRE and TEMT are
+set again right after each THR write), it just hasn't been printed yet
+because no newline arrived. Resetting it discards output the guest
+considers sent, e.g. a prompt without a trailing newline, whenever the
+guest clears the TX FIFO. Linux does that in serial8250_do_startup()
+and serial8250_do_shutdown(), via serial8250_clear_fifos(). Since TEMT
+says the transmitter is empty, there is nothing left to clear from the
+guest's point of view; I'd flush the buffer here instead of dropping
+it (or leave it alone).
+	
+> +
+> +            regs[UART_LSR] |= UART_LSR_THRE | UART_LSR_TEMT;
+> +            vdev->thr_pending = true;
+> +        }
+> +
+> +        if ( val & UART_FCR_ENABLE )
+> +            val &= UART_FCR_ENABLE | UART_FCR_DMA |
+> +                   UART_FCR_RTB0 | UART_FCR_RTB1;
+> +        else
+> +            val = 0;
 
-Tested-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+The datasheet (SLLS177I, 7.7.2) also says for bit 0: "Changing this bit
+clears the FIFOs", which isn't emulated: toggling FCR.ENABLE without
+CLRX/CLTX leaves stale RX data in place. QEMU handles it by forcing
+both clear bits when the enable bit changes:
+
+     if ((val ^ s->fcr) & UART_FCR_FE) {
+         val |= UART_FCR_XFR | UART_FCR_RFR;
+     }
+
+(and with the above, the TX part would then be a flush rather than a
+drop.)
+
+As for the mask, UART_FCR_RTB0 | UART_FCR_RTB1 is UART_FCR_TRG14, see
+my reply to 02/26.
+
+> +
+> +        regs[UART_FCR] = val;
+> +
+> +        break;
+> +
+>       case UART_LCR:
+>           regs[UART_LCR] = val;
+>           break;
 
 ~ Oleksii
 
