@@ -2,45 +2,41 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6E37F606A325
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2026 19:43:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 79AC2606A335
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2026 19:55:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=UcHygJsp
-Received: from list by lists.xenproject.org with outflank-mailman.1496934.1695255 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=stKYPTMS
+Received: from list by lists.xenproject.org with outflank-mailman.1496905.1695265 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xU82h-0002w4-IN; Thu, 19 Nov 2026 19:43:35 +0000
+	id 1xU8DZ-0005Tc-Lt; Thu, 19 Nov 2026 19:54:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1496934.1695255; Thu, 19 Nov 2026 19:43:35 +0000
+Received: by outflank-mailman (output) from mailman id 1496905.1695265; Thu, 19 Nov 2026 19:54:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xU82h-0002vx-Fj; Thu, 19 Nov 2026 19:43:35 +0000
-Received: by outflank-mailman (input) for mailman id 1496934;
- Thu, 19 Nov 2026 19:43:33 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xU82f-0002vr-Ge
- for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 19:43:33 +0000
+	id 1xU8DZ-0005TV-HV; Thu, 19 Nov 2026 19:54:49 +0000
+Received: by outflank-mailman (input) for mailman id 1496905;
+ Thu, 19 Nov 2026 19:32:08 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <shyckless@gmail.com>) id 1xU7rc-0007hH-Dj
+ for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 19:32:08 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xU82e-00AUb2-HG
- for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 20:43:32 +0100
-Received: from [10.42.69.10] (helo=localhost)
+ id 1xU7rb-008D79-C6
+ for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 20:32:07 +0100
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6aff5146-8faa-0a2a0a5109dd-0a2a450ae83e-26
- for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 20:43:32 +0100
-Received: from [209.85.221.44] (helo=mail-wr1-f44.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6aff5164-f2d2-0a2a450a0019-d155dd2ca947-3
- for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 20:43:32 +0100
-Received: by mail-wr1-f44.google.com with SMTP id
- ffacd0b85a97d-49d64a88222so885209f8f.1
- for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 11:43:32 -0800 (PST)
-Received: from [10.180.0.29] ([89.33.149.124])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4ab6bb98b4dsm1462523f8f.53.2026.11.19.11.43.31
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 19 Nov 2026 11:43:31 -0800 (PST)
+ (envelope-from <shyckless@gmail.com>)
+ id 6aff4e96-e002-0a2a0a5209dd-0a2a450cb5dc-48
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 20:32:07 +0100
+Received: from [209.85.221.48] (helo=mail-wr1-f48.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <shyckless@gmail.com>)
+ id 6aff4eb6-f479-0a2a450c0019-d155dd30e098-3
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 20:32:07 +0100
+Received: by mail-wr1-f48.google.com with SMTP id
+ ffacd0b85a97d-4aa5833c263so47775f8f.2
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 11:32:06 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,226 +45,190 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
+ARC-Seal: i=1; a=rsa-sha256; t=1795116726; cv=none;
+        d=google.com; s=arc-20260327;
+        b=X4h2oaX/CcWush2Es3/QHO/bPoBC+xf/k7dQ2MbWX9/FK1kFORuTuRj+5x2Gp4FsUr
+         S96hEj6GUo+WadIufO3Qy26NTaKmjsMVu1xkHzozA70/PI7jQAyuK1JSFR8HzLOzdOng
+         Ae6t8ddlk2pl75ZA1VHfyyHVwHePKl2RVymjJDU1r18uonkz3PcDBcCBap81z3pfAGmb
+         HfsxuQEk8yliRELuYqO58UxwmK4CxouonhFMgXXSK/Iu5mA84XYAh/WZ/MJP5h/IMVMK
+         QvgStKVx44Hf5SiRQwCoyLDRiVUdrhJEw4d/elWW3PtpOFn4ElFh/WVAKX10xPej/1A6
+         QyIw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=zHELh1wvQ9nrwWZUArifTWwLGXrX5lfqWf4Gv/ulNME=;
+        fh=a1Kfrk7nuDrlJfijhICnpfuCCPB9yKBd83Udh67O3II=;
+        b=cMCUWzEbrHl8g4/FTkYZQK0legvk78dAwoUVIK/gJaGEy6bs0S/T7axWuRx7WPQvHN
+         F6Gc5OtM49ocqdRuC0NScipYKYxUy8unobxWA0qnxdtmHiTs2v9bHkkriHwK4mYba5xs
+         I4pTa1/FCRNFl0Yr7Rc6rQmrAHoNmsOit+aaSECbSsNIMuSci8lexGFetKdXpxLJytif
+         wpqW2iQQBw8GnsCe7+K+42jC076VZBxijZ2DJCowELbNJEgJxdH4y1O7zm3A8FmthBQP
+         n7b0DImZpSnYxCjBYKSilSYwaOcmPx2MHqN7lHwt+niONBaYIm12Jx7j0GnXdF4dZ7la
+         uSbg==;
+        darn=lists.xenproject.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795117412; x=1795722212; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=4BP6iJjCVOotBmINKyc3WK6tbanzDtuDFU9gXuncIjI=;
-        b=UcHygJspbMxyGLqKAJnUioWT7/2XcAfMX8zMsmjtq2+M6BImXdizgolfPhoE8/e+5f
-         i0L4DS4cJ7OLAHOo4TX8m3JGYFQXVJ8zcgytdJOTTczfFqsRqb/DhwvSwG/X9OHiuBvX
-         95Gk1Y60cRMAcVtLOVA/i86TvggqOJJswpe4AbWwSDh/c7zOV6Byu8+GokafZF/moqQu
-         BJsvv9YjvsTXNYIHarJ5kYY+x3jsCQ3z1uUSH731OLKOvZic2/m+MxGgjOAF+CBb3Tqs
-         7cusrSPq93pesFoxJ/GQo1VuxucCKb5usssqUwh6w4G6iYun2TrC7nV/qVsFxkm5WSyA
-         ebMQ==
+        d=gmail.com; s=20260707; t=1795116726; x=1795721526; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=zHELh1wvQ9nrwWZUArifTWwLGXrX5lfqWf4Gv/ulNME=;
+        b=stKYPTMS357pF4hrmnct/WpO5N7oj0LDfVm8/d3Sa581sfZtHR982Re2TXtqNlSxZi
+         IR6SmtfOWX232Yl3NbnitCn4TXt1BHfMhdndTwQjO+/8ar1rp/kgI15ET58BXUAwRwNL
+         t8CzmEmlOm/89lusd02Tub0jYerXgBz4VpLzAh6WU28PYvI+y6G80lc463r9HQw3USPq
+         ppgIhwvjWYAL+HvIolJDqscGjlLI3JKN9bvB6cySIoZUncyJk/SNlv35kqrQe/5vnvp3
+         R2/sCMgdic0D4JPGwboA194OrJBdqxOhAUGSfW5pWE7/L9YcYq2plZ6ePH9dCnMcn87+
+         n0rA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795117412; x=1795722212;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=4BP6iJjCVOotBmINKyc3WK6tbanzDtuDFU9gXuncIjI=;
-        b=WbYtI3nEGR4wgvN+xSDXeG/pyBahd+BQ38hBFnqhhwq6hGj03yrWFWsAjaST6F5g+2
-         udjg/qDymSsS9YpUUz2hui/Q4YlHSzjGR34K+xUWw7+pNjEoH6ifsPGdfAPNDO5FSSK7
-         I1loA9BL71DX5vc0LGcdXny6Iho2f2f8a3iK3iqDaQ5SCTzqw4XcbgTOjACPsdCayUgJ
-         +cNOde8l/cbO0Jgf8oB+b42ONksOLBavQMhETS7/ZaDO4MVGB+M68N/wAwvAKKOg/aNI
-         UeC9I5roMqPoU7MrkImAgh3mDsTcnkMEJm5SzLlUxLGJ8lx6AZTulSTw0v4KE8Eax4/C
-         pJOg==
-X-Forwarded-Encrypted: i=1; AL+hErHeFbWaX7R+TVQOb33+pXjop8wPhZuI+cZ10r8RiIfSD2/ri5TOckoSF6JO7RCPwMNpS/NW/0mMA9Y=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z+NRZYPVffyeouRWk1g7T2vsbHQq7TPyu/J9Q90+U3lfVMjP5Yl
-	KTw5p7/kWQFjMjLNuVnjQPIST0U6KUxei8uidwnxrhPgL2CzFC0RfM+I
-X-Gm-Gg: AZFdTZcm78Tv2kB1iLNCHhY6yKgfWFsEcZ9/o3A4WP1N49Tlx3eFdn1dDvE7gD71bZr
-	OXng6yJwUm1PmhZgSaZtuYPLEF/2H+t8z5Jm3ZO3uyMIx0bio8NdzCUDMDmoFUxI08UGCKuG9q5
-	NeZx+buF5AZPlfPseMshauQOJX86roff6ONSu7hGVS0vrQZPfkgu6XPNowE/bZYG1J8sUnXy1vT
-	AVwU+lhia8jh/zfuNG4fM7XB6hLIf8in8eK6OPm0WXsZH33pYApNvshelFbAKHEic6Wfu2p/b7A
-	aLY1/JHeBCUk2c1BTaFzR8dpaiXKXVPWZq5w3f+PCqCs2xYPd7HkgWkCvwp1kzWI4QT7gz+4eSA
-	fEBpSekBjwWh0tf1Ka/eYJnVKuzEvFmBAX0XDtGsDw6Ugp78FwBIsb35QJHR5Iwzk6iODQcflqF
-	tBRhbCzos0hne39disQj4cz5zhm3blK25Gh1oRSD37/YS423fpFpe+RS9ncRf0IZWSXEAFGIlWv
-	g396UaRYk+h3dI3iTfdOnvjgDepZJz5JXa2jpb2A6bRdhY4QMgpsWju2vqJD8ejQW5MHG56gKAz
-	jolMKhWTh/32P9qBI5JexxuLR81I9dGtsiZD3jM=
-X-Received: by 2002:a05:6000:438a:b0:48e:127a:c914 with SMTP id ffacd0b85a97d-4aa545e25cdmr5864901f8f.5.1795117411839;
-        Thu, 19 Nov 2026 11:43:31 -0800 (PST)
-Message-ID: <51da3b24-58e1-4f16-af4e-c813531a7b8c@gmail.com>
-Date: Thu, 19 Nov 2026 20:43:30 +0100
+        d=1e100.net; s=20260707; t=1795116726; x=1795721526;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=zHELh1wvQ9nrwWZUArifTWwLGXrX5lfqWf4Gv/ulNME=;
+        b=U+/1ffYXZ/gPbDAb8a1+6z4hqR2KAKqsGzZqCX7o5uncYbFb2Ki2QoOipKzUY6H+VP
+         RtwV+24JyyA6V56uq9LFZwB9fH6N2MItSrVGKi6zWTrdStGT4ZJCRlnPGcLVn1LYa2Cb
+         cJBZc/izXU6WbDqAF7wQOSQi0MlvK1SGPUpyJwPzpPP9tdZxNRCDL04RXy6MVi/eoxOG
+         lEYdidpvlkyYC89ufPU5Xt+2G7rhRxTyF6KxcJdo5LSZtIXqHRVUm+PRKhvQpRx4ueNW
+         wH9tZNnd0RVf32jPVdi13bgCUWZk+9+kSBBm5v3QPwgLqeQHGHnNlidBxPvGNoiORvdE
+         M/fA==
+X-Forwarded-Encrypted: i=1; AL+hErEawUT0104sZjG9P7zVBNk0bzxUm2Jee0marKc2u4BThLvXkoQ55C+PaQ6COtXn8cY/Q45Zz4RMmJM=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z+QjX5q38zTNlK2hGtwam/Vh93EUrFcAaL5qFaPneOYcWZz7dlF
+	hjiZSGokgO/GY20vyNbJ4gkinKgzZvxc2yfbMkK5nvKdUSxJ47I6yWSF8X7UKgEs2F4iBMDTCxP
+	f6fNKctNfZO8k5AT3NukJz+d067iEnJU=
+X-Gm-Gg: AZFdTZeZ042vQ3RTmTP25qjj7UIzZQrNze/JUP7w8WcXmqzOxv/AOGjBZZkWGDcYsEh
+	rcZXn2L3uEg3DpCnKrEFoHt94wwGMHxE2R1eUIH2+8s2AfWN9E+NYyKIT4TYJcFoYUDH2+169Vt
+	FwQJYymZBnXTGZ4RO7AqXu9c+DwlUeWet1iRxs21FSeGvqUcIPkYFPNO9/RB8v96hOsMG6dRXfl
+	7nhAy0uYD3sYaHib1Dbe5HxvknvJvW9WuTinNx+MppLn/Q1BjXw+3SoFrTyXbZo4eqAsNu/SO71
+	3coFS0byfLEgIxmdhSoU7yKIjFLOG9H1hYDSohCbw3fhyKkjJrHUW1gNnEn0PBanln118dx1lkz
+	5CKR+7OUZAG86klRFLvpob22ussVT5IVpoA==
+X-Received: by 2002:a05:6000:4705:b0:48f:cb37:3ec3 with SMTP id
+ ffacd0b85a97d-4abb400c591mr853280f8f.41.1795116726352; Thu, 19 Nov 2026
+ 11:32:06 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 13/26] emul/ns16550: implement dump_state() hook
-To: dmukhin@ford.com, xen-devel@lists.xenproject.org
-Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com,
- julien@xen.org, michal.orzel@amd.com, roger@xenproject.org,
- sstabellini@kernel.org, xakep.amatop@gmail.com, dmukhin@xen.org
-References: <20261111194800.1070016-1-dmukhin@ford.com>
- <20261111194800.1070016-14-dmukhin@ford.com>
-Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <20261111194800.1070016-14-dmukhin@ford.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-4011c0/1795117412-4B0D9CFC-72C38034/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 5830
-X-Spam-Status: No, score=-14.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+References: <20261119-xen-tpmfront-v1-1-bfabbbed462a@gmail.com>
+ <av8Tr2jTQaOBOEid@kernel.org> <8c988944-34e3-4fc9-a323-daca101c1bab@suse.com>
+ <av8kIqYC04D5QdXf@kernel.org> <3b37565a-4dd7-454d-99b7-108b8e4e7133@suse.com>
+In-Reply-To: <3b37565a-4dd7-454d-99b7-108b8e4e7133@suse.com>
+From: Wong Steve <shyckless@gmail.com>
+Date: Fri, 20 Nov 2026 03:31:53 +0800
+X-Gm-Features: Aa3M54rJ-G9ninS-5Hi_IFXsKYFH3S7hyehBNAqEoZNCg_X0cyVis4rAtusXM0A
+Message-ID: <CA+X8Sdj4KRfJagaKHkcXrv370Si_WktanBqRN-SrB7qOMH=FAg@mail.gmail.com>
+Subject: Re: [PATCH] tpm: xen-tpmfront: fix use-after-free in backend_changed()
+To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Cc: Jarkko Sakkinen <jarkko@kernel.org>, jgg@ziepe.ca, linux-kernel@vger.kernel.org, 
+	sstabellini@kernel.org, linux-integrity@vger.kernel.org, 
+	xen-devel@lists.xenproject.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-purgate-ID: tlsNG-d25034/1795116727-51339A5B-14B80F43/0/0
+X-purgate-type: clean
+X-purgate-size: 3676
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+Hi Juergen, Jarkko,
 
+Thanks Juergen, that explains why nobody has run into it: with the
+stubdom backend the frontend never sees Closing or Closed, so this
+path is only reached with a backend that does close. I agree the
+normal state machine should stay.
 
-On 11/11/26 8:47 PM, dmukhin@ford.com wrote:
-> From: Denis Mukhin <dmukhin@ford.com>
+So with today's backend this is latent. Jarkko, if you prefer, I can
+send a v2 that says so in the commit message and drops the
+Cc: stable.
 
-At the commit subject:
+Thanks,
+Suyuan
 
-Nit: emul/ns16x50: like the rest of the series.
-
-> 
-> Implement dump_state() vUART hook for debugging UART state machine over
-> Xen console. dump_state() prints state of all emulated registers
-> (including state-less IIR) and state of RX/TX FIFOs.
-> 
-> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
-> ---
->   xen/common/emul/vuart/ns16x50.c | 64 ++++++++++++++++++++++++++++++++-
->   1 file changed, 63 insertions(+), 1 deletion(-)
-> 
-> diff --git a/xen/common/emul/vuart/ns16x50.c b/xen/common/emul/vuart/ns16x50.c
-> index 404e12311090..cda21c15cf78 100644
-> --- a/xen/common/emul/vuart/ns16x50.c
-> +++ b/xen/common/emul/vuart/ns16x50.c
-> @@ -728,6 +728,62 @@ static int ns16x50_io_read(
->       return rc;
->   }
->   
-> +static void cf_check ns16x50_dump_state(void *arg)
-> +{
-> +#ifdef CONFIG_VUART_NS16X50_DEBUG
-
-With the whole body under CONFIG_VUART_NS16X50_DEBUG, the 'q'
-keyhandler prints nothing for the vUART on a normal build, which is
-where a state dump is most useful. The function doesn't cost anything
-until someone presses 'q'; I'd drop the #ifdef (or, if it must stay,
-leave .dump_state NULL instead of registering an empty hook).
-
-> +    struct vuart_ns16x50 *vdev = arg;
-> +    const struct domain *d;
-> +    const struct vuart_info *info;
-> +    const struct xencons_interface *cons;
-> +    const uint8_t *regs;
-> +    const char *as = (info->base_type & IORESOURCE_IO) ? "ioport":
-> +                                                         "iomem";
-
-As mentioned in my reply to the cover letter, info is used before it
-is assigned; gcc rejects this with -Werror=uninitialized, so the series
-doesn't build with CONFIG_VUART_NS16X50_DEBUG=y. Computing as after
-info = vdev->info fixes it.
-
-> +    unsigned long flags;
-> +
-> +    ASSERT(vdev);
-> +
-> +    /* Allow printing state in case of a deadlock. */
-> +    if ( !ns16x50_trylock(vdev, &flags) )
-> +        return;
-> +
-> +    d = vdev->owner;
-> +    info = vdev->info;
-> +    cons = &vdev->cons;
-> +    regs = &vdev->regs[0];
-> +
-> +    printk("Virtual " pr_prefix " (%s) %s %#"PRIx64" IRQ#%d owner %pd\n",
-> +            vdev->name, as, info->base_addr, info->irq, d);
-
-Nits on the format strings: PRIpaddr for base_addr, %u for irq and the
-XENCONS_RING_IDX values, %zu for ARRAY_SIZE(), and PRIx8 for UART_RBR
-and friends, which are plain ints. Also the continuation lines are
-indented one column too far.
-
-> +
-> +    printk("  RX FIFO size %ld in_prod %d in_cons %d used %d\n",
-> +            ARRAY_SIZE(cons->in), cons->in_prod, cons->in_cons,
-> +            cons->in_prod - cons->in_cons);
-> +
-> +    printk("  TX FIFO size %ld out_prod %d out_cons %d used %d\n",
-> +            ARRAY_SIZE(cons->out), cons->out_prod, cons->out_cons,
-> +            cons->out_prod - cons->out_cons);
-> +
-> +    printk("  %02"PRIx8" RBR %02"PRIx8" THR %02"PRIx8" DLL %02"PRIx8" DLM %02"PRIx8"\n",
-> +            UART_RBR,
-> +            cons->in[MASK_XENCONS_IDX(cons->in_prod, cons->in)],
-> +            cons->out[MASK_XENCONS_IDX(cons->out_prod, cons->out)],
-> +            regs[NS16X50_REGS_NUM + UART_DLL],
-> +            regs[NS16X50_REGS_NUM + UART_DLM]);
-
-in_prod and out_prod point at the next free slot, so these print
-whatever stale byte happens to be there. For RBR, the character the
-guest will read next is in[in_cons] (only meaningful if the FIFO isn't
-empty); for THR, the last character written is out[out_prod - 1].
-
-> +
-> +    printk("  %02"PRIx8" IER %02"PRIx8"\n", UART_IER, regs[UART_IER]);
-> +
-> +    printk("  %02"PRIx8" FCR %02"PRIx8" IIR %02"PRIx8"\n",
-> +            UART_FCR, regs[UART_FCR], ns16x50_iir_get(vdev));
-> +
-> +    printk("  %02"PRIx8" LCR %02"PRIx8"\n", UART_LCR, regs[UART_LCR]);
-> +    printk("  %02"PRIx8" MCR %02"PRIx8"\n", UART_MCR, regs[UART_MCR]);
-> +    printk("  %02"PRIx8" LSR %02"PRIx8"\n", UART_LSR, regs[UART_LSR]);
-> +    printk("  %02"PRIx8" MSR %02"PRIx8"\n", UART_MSR, regs[UART_MSR]);
-> +    printk("  %02"PRIx8" SCR %02"PRIx8"\n", UART_SCR, regs[UART_SCR]);
-> +
-> +    ns16x50_unlock(vdev, &flags);
-> +#endif /* CONFIG_VUART_NS16X50_DEBUG */
-> +}
-> +
->   static void ns16x50_access(int dir, unsigned int type,
->                              unsigned long addr, unsigned int size,
->                              uint32_t *data)
-> @@ -794,6 +850,9 @@ static void ns16x50_access(int dir, unsigned int type,
->           rc = ns16x50_io_read(vdev, reg, size, data);
->   
->   
-> +    if ( ns16x50_log_level >= 3 )
-> +        ns16x50_dump_state(vdev);
-
-ns16x50_log_level is at most 2, so this never runs (see 04/26). If it
-did, it would run with vdev->lock held, so the trylock in
-ns16x50_dump_state() would fail and print nothing. I'd drop both
-call sites added here and keep dump_state() for the keyhandler only. 
-Another call site is here ...
-
-> +
->       if ( rc == 0 )
->           ns16x50_debug(vdev, "%c %s %#"PRIx64" %d: LCR=%#02x %#02x %#08x\n",
->                         op, as, addr, size, vdev->regs[UART_LCR], reg, *data);
-> @@ -971,6 +1030,9 @@ static int cf_check ns16x50_put_rx(void *arg, char ch)
->   
->       ns16x50_unlock(vdev, &flags);
->   
-> +    if ( ns16x50_log_level >= 3 )
-> +        ns16x50_dump_state(vdev);
-
-... ^.
-
-> +
->       return rc;
->   }
->   
-> @@ -979,7 +1041,7 @@ static int cf_check ns16x50_put_rx(void *arg, char ch)
->       .compatible = "ns16550",            \
->       .alloc      = ns16x50_alloc,        \
->       .free       = ns16x50_free,         \
-> -    .dump_state = NULL,                 \
-> +    .dump_state = ns16x50_dump_state,   \
->       .put_rx     = ns16x50_put_rx,       \
->   }
->   
-
-~ Oleksii
-
+J=C3=BCrgen Gro=C3=9F <jgross@suse.com> =E4=BA=8E2026=E5=B9=B411=E6=9C=8820=
+=E6=97=A5=E5=91=A8=E4=BA=94 00:32=E5=86=99=E9=81=93=EF=BC=9A
+>
+> On 19.11.26 17:30, Jarkko Sakkinen wrote:
+> > On Thu, Nov 19, 2026 at 04:35:02PM +0100, J=C3=BCrgen Gro=C3=9F wrote:
+> >> On 19.11.26 16:20, Jarkko Sakkinen wrote:
+> >>> On Thu, Nov 19, 2026 at 11:20:33AM +0000, Suyuan Wang via B4 Relay wr=
+ote:
+> >>>> From: Suyuan Wang <stevewong@hust.edu.cn>
+> >>>>
+> >>>> When the backend moves to Closing or Closed, backend_changed()
+> >>>> unregisters the device and then keeps using it:
+> >>>>
+> >>>>    device_unregister(&dev->dev);
+> >>>>    xenbus_frontend_closed(dev);
+> >>>>
+> >>>> The xenbus watch callback that calls backend_changed() does not hold=
+ a
+> >>>> reference to the device. The tpm_chip registered by xen-tpmfront has=
+ dev
+> >>>> as its parent and holds a reference to it, but tpmfront_remove() dro=
+ps
+> >>>> that reference when it unregisters the chip. So device_unregister() =
+can
+> >>>> release the last reference and free the xenbus_device, and
+> >>>> xenbus_frontend_closed(dev) then accesses freed memory.
+> >>>>
+> >>>> Take a temporary reference before unregistering and drop it after
+> >>>> xenbus_frontend_closed(). This keeps dev alive for the last access a=
+nd
+> >>>> keeps the existing order, in which TPM operations are stopped before
+> >>>> the frontend is marked Closed.
+> >>>>
+> >>>> Found with a static analysis tool and checked by hand.
+> >>>>
+> >>>> Fixes: e2683957fb26 ("drivers/tpm: add xen tpmfront interface")
+> >>>> Cc: stable@vger.kernel.org
+> >>>> Co-developed-by: Kaixuan Li <kaixuan.li@ntu.edu.sg>
+> >>>> Signed-off-by: Kaixuan Li <kaixuan.li@ntu.edu.sg>
+> >>>> Signed-off-by: Suyuan Wang <stevewong@hust.edu.cn>
+> >>>> ---
+> >>>> Compile tested on x86_64 (W=3D1, no new warnings). Not run with a Xe=
+n vTPM
+> >>>> backend.
+> >>>> ---
+> >>>>    drivers/char/tpm/xen-tpmfront.c | 3 +++
+> >>>>    1 file changed, 3 insertions(+)
+> >>>>
+> >>>> diff --git a/drivers/char/tpm/xen-tpmfront.c b/drivers/char/tpm/xen-=
+tpmfront.c
+> >>>> index 3c0cce57c4ae..1be925cca535 100644
+> >>>> --- a/drivers/char/tpm/xen-tpmfront.c
+> >>>> +++ b/drivers/char/tpm/xen-tpmfront.c
+> >>>> @@ -397,8 +397,11 @@ static void backend_changed(struct xenbus_devic=
+e *dev,
+> >>>>            case XenbusStateClosing:
+> >>>>            case XenbusStateClosed:
+> >>>> +          /* device_unregister() can drop the last reference to dev=
+ */
+> >>>> +          get_device(&dev->dev);
+> >>>>                    device_unregister(&dev->dev);
+> >>>>                    xenbus_frontend_closed(dev);
+> >>>> +          put_device(&dev->dev);
+> >>>
+> >>> Not a NAK but makes me wonder why this has not hit the wall ever.
+> >>>
+> >>> I.e. "feeling confused".
+> >> Is there any vtpm backend other than the stubdom based one?
+> >>
+> >> If not, then it is quite easy: this backend never switches state to
+> >> XenbusStateClosing or XenbusStateClosed.
+> >>
+> >>
+> >> Juergen
+> >
+> > Should it be removed use the default-fallback?
+> I don't think so.
+>
+> There might be other backends in future, so following the normal Xen PV-d=
+evice
+> state machine should be kept.
+>
+>
+> Juergen
 
