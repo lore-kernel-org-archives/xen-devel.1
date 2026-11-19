@@ -2,34 +2,34 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 73628606A325
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2026 21:31:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EDEBF606A324
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2026 21:31:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=3AaLheAU
-Received: from list by lists.xenproject.org with outflank-mailman.1497138.1695609 (Exim 4.92)
+	dkim=pass (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=dP2NRuiY
+Received: from list by lists.xenproject.org with outflank-mailman.1497139.1695630 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xU9ie-00018f-66; Thu, 19 Nov 2026 21:31:00 +0000
+	id 1xU9ij-000245-4G; Thu, 19 Nov 2026 21:31:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1497138.1695609; Thu, 19 Nov 2026 21:30:59 +0000
+Received: by outflank-mailman (output) from mailman id 1497139.1695630; Thu, 19 Nov 2026 21:31:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xU9ic-00011V-FK; Thu, 19 Nov 2026 21:30:58 +0000
-Received: by outflank-mailman (input) for mailman id 1497138;
+	id 1xU9ih-0001wJ-3Z; Thu, 19 Nov 2026 21:31:03 +0000
+Received: by outflank-mailman (input) for mailman id 1497139;
  Thu, 19 Nov 2026 21:30:20 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xU9hz-0001EK-Td
- for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 21:30:19 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xU9i0-0001EP-0K
+ for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 21:30:20 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xU9hz-00000006tJh-24TK;
+ (envelope-from <gwd@xenproject.org>) id 1xU9hz-00000006tJK-1fL2;
  Thu, 19 Nov 2026 21:30:19 +0000
 Received: from [217.155.165.12] (helo=Georges-MacBook-Pro-2.tail87ea19.ts.net)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xU9Me-0000000CVBH-08WG;
- Thu, 19 Nov 2026 21:08:16 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xU9Mp-0000000CVBH-0WZy;
+ Thu, 19 Nov 2026 21:08:27 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -39,27 +39,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:Content-Type:
-	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=dsCX5Nuo4b1o1vo+zAtU8JHiOOJTv3P1TTbOwNApgC4=; b=3AaLheAUO880XPW7svD33Ifd+t
-	UTeYs0m1K4Awfw23gCNUCkNdaI5LH+qUpf4eoOgqt+9MzWAv7nN8FQp9zwoFqtKL59O6r8SoEA0BB
-	5SLCU7mbqsn3Sd5m5n2lHtN2LFELzKmKdIOjyBkb7vLuEVy41vJ3jjHnHZSHrslXQLLk=;
+	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
+	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
+	bh=bmEQ9cEAXosZ62ttzIN9wMbJOrfPVactWu4o1BwmH3g=; b=dP2NRuiYSS+vRr5zADSv3L9jLy
+	l1QGc0Iim+76FmMRJSyOue52/xk/HqkuON+uyJlUi/3xhxmMvUdVG5ObkqO3RkCzopFTluYIE+qp1
+	6wGFBVfoNANYq1O5Z/ec8Nd1SdygrBb9c89mD/LI4mX6VUzrlbxozJTTFehuRoBZ+YIM=;
 From: George Dunlap <gwd@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v7 28/50] x86/domain_page: move struct mapcache_vcpu to struct arch_vcpu
-Date: Thu, 19 Nov 2026 21:07:19 +0000
-Message-ID: <20261119-asi-hvm-v7-28-6551b6d5c879@xenproject.org>
+Subject: [PATCH v7 38/50] x86/spec-ctrl: add the vmap-strict sub-option of asi=
+Date: Thu, 19 Nov 2026 21:07:29 +0000
+Message-ID: <20261119-asi-hvm-v7-38-6551b6d5c879@xenproject.org>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261119-asi-hvm-v7-0-6551b6d5c879@xenproject.org>
 References: <20261119-asi-hvm-v7-0-6551b6d5c879@xenproject.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
@@ -68,93 +70,125 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Roger Pau Monné <roger.pau@citrix.com>
+map_domain_pages() falls back to vmap() where the loaded page tables
+have no slots for a multipage mapping: before the first page-table
+switch in boot, or with the idle vCPU's page tables loaded.  Currently
+no calls are made during boot, and the only known way to reach
+map_domain_pages() with the idle page tables loaded is on an error path
+that will already ultimately crash the host.  The fallback briefly
+exposes the pages to every context, and requires a system-wide TLB
+shootdown on unmap, but allows execution to continue.
 
-struct mapcache_vcpu, the per-vCPU part of the mapcache (the maphash
-and the vCPU's shadow of the domain's TLB epoch), lives in struct
-pv_vcpu, as only PV vCPUs have a mapcache.  In preparation for
-implementing mapcaches for HVM domains, move it to struct arch_vcpu:
-v->arch.pv.mapcache becomes v->arch.mapcache.
+For those who want stricter isolation guarantees, at the risk that
+more situations might come up in the future, a new sub-option,
+asi=vmap-strict, off by default, makes the fallback a BUG() instead.
+The boot log reports its setting.
 
-struct pv_vcpu shrinks from 512 to 376 bytes, and struct vcpu grows
-from 2688 to 2880 bytes (x86_64, debug build), within its page: from
-here on HVM vCPUs carry the 136-byte struct mapcache_vcpu too, ahead of
-its use by those of vCPU-PT domains.
-
-No functional change.
-
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-4-8, Claude Code:claude-opus-5-5
+Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-5-5
 Signed-off-by: George Dunlap <gwd@xenproject.org>
-Reviewed-by: Roger Pau Monné <roger@xenproject.org>
 ---
 Changes in v7:
-- struct vcpu's sizes measured again: the register frame leaves it
-  earlier in the series now.
-
-Changes in v3:
-- New in this version, split out of "x86/hvm: introduce per-vCPU
-  mapcache for vCPU-PT domains" for review.
+- Split out of "x86/domain_page: introduce map_domain_pages()", which
+  now comes before the asi= option.
 ---
- xen/arch/x86/domain_page.c        | 6 +++---
- xen/arch/x86/include/asm/domain.h | 6 +++---
- 2 files changed, 6 insertions(+), 6 deletions(-)
+ docs/misc/xen-command-line.pandoc    | 10 +++++++++-
+ xen/arch/x86/domain_page.c           |  2 ++
+ xen/arch/x86/include/asm/spec_ctrl.h |  1 +
+ xen/arch/x86/spec_ctrl.c             |  7 +++++++
+ 4 files changed, 19 insertions(+), 1 deletion(-)
 
+diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
+index 092c858f34..52e10eb393 100644
+--- a/docs/misc/xen-command-line.pandoc
++++ b/docs/misc/xen-command-line.pandoc
+@@ -203,7 +203,7 @@ to appropriate auditing by Xen.  Argo is disabled by default.
+     buggy or malicious other domain spamming the ring.
+ 
+ ### asi (x86)
+-> `= List of [ <bool>, {pv,hvm,dom0}=<bool>, directmap=<bool>,
++> `= List of [ <bool>, {pv,hvm,dom0}=<bool>, {directmap,vmap-strict}=<bool>,
+ >              vcpu-pt=<bool> | vcpu-pt=hvm=<bool> ]`
+ 
+ > Default: `false`
+@@ -245,6 +245,14 @@ are meant to be used for debugging purposes only.**
+   and `dom0=`) set this too, on builds that support it; on other builds they
+   leave it off.
+ 
++* `vmap-strict` crashes the host when a multipage transient mapping
++  (`map_domain_pages()`) is requested where the loaded page-tables
++  have no slots for one: in early boot, or on the idle vCPU's
++  page-tables.  By default such a mapping falls back to `vmap()`,
++  which maps the pages in every context.  The first such mapping is
++  logged.  The option is for hosts where a crash is preferable to such
++  a mapping; none is known to be made in normal operation.
++
+ ### asid (x86)
+ > `= <boolean>`
+ 
 diff --git a/xen/arch/x86/domain_page.c b/xen/arch/x86/domain_page.c
-index 13b50d89e5..2ade2f9fd0 100644
+index 5fcce759dd..df1b78ccc5 100644
 --- a/xen/arch/x86/domain_page.c
 +++ b/xen/arch/x86/domain_page.c
-@@ -141,7 +141,7 @@ void *map_domain_page(mfn_t mfn)
-         return mfn_to_virt(mfn_x(mfn));
+@@ -18,6 +18,7 @@
+ #include <asm/flushtlb.h>
+ #include <asm/hardirq.h>
+ #include <asm/setup.h>
++#include <asm/spec_ctrl.h>
  
-     cache = vcpu_mapcache(v, &dcache);
--    vcache = &v->arch.pv.mapcache;
-+    vcache = &v->arch.mapcache;
-     if ( !cache->inuse )
-         return mfn_to_virt(mfn_x(mfn));
- 
-@@ -238,7 +238,7 @@ void unmap_domain_page(const void *ptr)
- 
-     idx = PFN_DOWN(va - MAPCACHE_VIRT_START);
-     mfn = l1e_get_pfn(MAPCACHE_L1ENT(idx));
--    hashent = &v->arch.pv.mapcache.hash[MAPHASH_HASHFN(mfn)];
-+    hashent = &v->arch.mapcache.hash[MAPHASH_HASHFN(mfn)];
- 
-     local_irq_save(flags);
- 
-@@ -464,7 +464,7 @@ int mapcache_vcpu_init(struct vcpu *v)
-     BUILD_BUG_ON(MAPHASHENT_NOTINUSE < MAPCACHE_ENTRIES);
-     for ( i = 0; i < MAPHASH_ENTRIES; i++ )
+ /* Whether the vCPU supports mapcache usage, might not be in use. */
+ static bool has_mapcache(const struct vcpu *v)
+@@ -417,6 +418,7 @@ void *map_domain_pages(const mfn_t *mfn, unsigned int nr)
+     v = pgtable_current_vcpu();
+     if ( !v || is_idle_vcpu(v) )
      {
--        struct vcpu_maphash_entry *hashent = &v->arch.pv.mapcache.hash[i];
-+        struct vcpu_maphash_entry *hashent = &v->arch.mapcache.hash[i];
++        BUG_ON(opt_vmap_strict);
+         printk_once(XENLOG_WARNING
+                     "%pS: map_domain_pages() falling back to vmap()\n",
+                     __builtin_return_address(0));
+diff --git a/xen/arch/x86/include/asm/spec_ctrl.h b/xen/arch/x86/include/asm/spec_ctrl.h
+index b62229ab5d..d9ad94ddb0 100644
+--- a/xen/arch/x86/include/asm/spec_ctrl.h
++++ b/xen/arch/x86/include/asm/spec_ctrl.h
+@@ -88,6 +88,7 @@ extern uint8_t default_scf;
+ extern int8_t opt_xpti_hwdom, opt_xpti_domu;
  
-         hashent->mfn = ~0UL; /* never valid to map */
-         hashent->idx = MAPHASHENT_NOTINUSE;
-diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
-index 39d9680bcf..d2515cd01a 100644
---- a/xen/arch/x86/include/asm/domain.h
-+++ b/xen/arch/x86/include/asm/domain.h
-@@ -542,9 +542,6 @@ struct arch_domain
+ extern bool opt_vcpu_pt_hwdom, opt_vcpu_pt_hvm;
++extern bool opt_vmap_strict;
  
- struct pv_vcpu
- {
--    /* map_domain_page() mapping cache. */
--    struct mapcache_vcpu mapcache;
--
-     unsigned int vgc_flags;
+ extern bool cpu_has_bug_l1tf;
+ extern int8_t opt_pv_l1tf_hwdom, opt_pv_l1tf_domu;
+diff --git a/xen/arch/x86/spec_ctrl.c b/xen/arch/x86/spec_ctrl.c
+index 5ed81b950c..3a1755aba4 100644
+--- a/xen/arch/x86/spec_ctrl.c
++++ b/xen/arch/x86/spec_ctrl.c
+@@ -86,6 +86,9 @@ bool __ro_after_init opt_bp_spec_reduce = true;
  
-     struct trap_info *trap_ctxt;
-@@ -646,6 +643,9 @@ struct arch_vcpu
- #define async_exception_state(t) async_exception_state[(t)-1]
-     uint8_t async_exception_mask;
+ static bool __initdata opt_ibpb_alt;
  
-+    /* map_domain_page() mapping cache. */
-+    struct mapcache_vcpu mapcache;
++/* BUG() where map_domain_pages() would fall back to vmap() (vmap-strict). */
++bool __ro_after_init opt_vmap_strict;
 +
-     /* Virtual Machine Extensions */
-     union {
-         struct pv_vcpu pv;
+ /* Give each vCPU of an HVM domain its own per-domain area (vCPU-PT). */
+ bool __ro_after_init opt_vcpu_pt_hvm;
+ bool __ro_after_init opt_vcpu_pt_hwdom;
+@@ -591,6 +594,8 @@ static int __init cf_check parse_asi(const char *s)
+                     rc = -EINVAL;
+                 }
+             }
++            else if ( (val = parse_boolean("vmap-strict", s, ss)) >= 0 )
++                opt_vmap_strict = val;
+             else if ( (val = parse_boolean("vcpu-pt", s, ss)) != -1 )
+             {
+                 switch ( val )
+@@ -841,6 +846,8 @@ static void __init print_details(enum ind_thunk thunk)
+             printk("  ASI features for PV VMs:%s\n",
+                    sparse_dmap_pv() && !opt_xpti_domu
+                                           ? " sparse-directmap" : " None");
++        printk("  ASI vmap-strict: %s\n",
++               opt_vmap_strict            ? "enabled"           : "disabled");
+     }
+ }
+ 
 -- 
 2.56.0
 
