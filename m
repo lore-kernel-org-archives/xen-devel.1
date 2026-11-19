@@ -2,51 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 44089606A33E
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2026 15:38:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB65D606A320
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2026 15:53:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=qXCC7KAQ
-Received: from list by lists.xenproject.org with outflank-mailman.1496589.1695068 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=RyrIXYy0
+Received: from list by lists.xenproject.org with outflank-mailman.1496607.1695077 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xU4Cx-000292-5d; Thu, 19 Nov 2026 15:37:55 +0000
+	id 1xU4Rm-0006MK-D2; Thu, 19 Nov 2026 15:53:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1496589.1695068; Thu, 19 Nov 2026 15:37:55 +0000
+Received: by outflank-mailman (output) from mailman id 1496607.1695077; Thu, 19 Nov 2026 15:53:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xU4Cx-00028v-2O; Thu, 19 Nov 2026 15:37:55 +0000
-Received: by outflank-mailman (input) for mailman id 1496589;
- Thu, 19 Nov 2026 15:37:53 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1f474f449000183d@swg.vates.tech>)
- id 1xU4Cv-00027W-Lr
- for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 15:37:53 +0000
+	id 1xU4Rm-0006MC-AS; Thu, 19 Nov 2026 15:53:14 +0000
+Received: by outflank-mailman (input) for mailman id 1496607;
+ Thu, 19 Nov 2026 15:48:12 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <cristian.andrei1423@gmail.com>) id 1xU4Mu-00051K-Jt
+ for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 15:48:12 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xU4Cv-00CgGV-2D
- for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 16:37:53 +0100
-Received: from [10.42.69.2] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1f474f449000183d@swg.vates.tech>)
- id 6aff17c7-bab6-0a2a0a5309dd-0a2a4502a4f6-34
- for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 16:37:52 +0100
-Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1f474f449000183d@swg.vates.tech>)
- id 6aff17d0-4900-0a2a45020019-b9ff1c23ae59-3
- for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 16:37:52 +0100
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a1f474f449000183d.009 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Thu, 19 Nov 2026 15:37:47 +0000
-Received: from [192.168.1.37] (lfbn-gre-1-56-253.w92-157.abo.wanadoo.fr
- [92.157.33.253]) (Authenticated sender: baptiste.le-duc)
- by mail2.vates.fr (Postfix) with ESMTPSA id 139E082AA7;
- Thu, 19 Nov 2026 16:37:47 +0100 (CET)
+ id 1xU4Mt-008oGL-P7
+ for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 16:48:11 +0100
+Received: from [10.42.69.1] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <cristian.andrei1423@gmail.com>)
+ id 6aff1a35-e002-0a2a0a5209dd-0a2a4501a488-10
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 16:48:11 +0100
+Received: from [209.85.221.53] (helo=mail-wr1-f53.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <cristian.andrei1423@gmail.com>)
+ id 6aff1a3b-5bcc-0a2a45010019-d155dd35f11d-3
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 16:48:11 +0100
+Received: by mail-wr1-f53.google.com with SMTP id
+ ffacd0b85a97d-492f563d1c6so949305f8f.3
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 07:48:11 -0800 (PST)
+Received: from localhost ([2a02:2f0b:8a03:1c01:b817:2e97:f268:2cbf])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4ab6baa3882sm247289f8f.49.2026.11.19.07.48.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 Nov 2026 07:48:10 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -55,93 +50,421 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=TLZD0N55QQr7dIh/Xgm3qejd1mtot3e5jxiXd41GFOU=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
- b=qXCC7KAQITUxe7N8p4XKJ4ClKjXcqANqgGvTazC2amCv8Tg2WQVVmdQ8ZdBMVNCjXAT0yLcUk
- h/tijbhjpvp4pUMCKZOv/NJAd8YZ5JCcfLKUS53thFGIzFNt2gl/XEIduCINhFjJgCZQHMk3EyW
- MxopPrieIFI/E9zdd6g60U4IT/DISjXiCnvrlZqznpP/AJ+eOgk4YLC2cYbdIvks6TaYHatwSf2
- z7Y4hOc0h8tZqzRTldAfm6KIeoCObvXFH5KSIjapE7Q+C8U8ku5MbSTy2IjzjUIyw3+MLYlKodw
- gm/B5me2/IUlXthopX8YwpjdEFRNYm5bm1ERJANEyGJQ==
-X-Zone-Loop: dabf2b70fa88cd58070d1506008f4ee2f98807e340fc
-x-campaign-type: default
-x-transaction-id: 3da95f61-db60-4b91-a80a-3c0f31f59125
-x-swg-uid: 01-ea4d8516-d819-4767-b1b7-e8553ad82a7a
-X-Mailer: Sweego
-Message-ID:
- <1795102667.8631fc262581453bbf619ec5b2062170.1a1f474f449000183d@vates.tech>
-x-swg-bid: 1795102667.8631fc262581453bbf619ec5b2062170.1a1f474f449000183d
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-Date: Thu, 19 Nov 2026 16:37:46 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1795103291; x=1795708091; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=LNS7/es9cdB66xJ/BxsmVpcG5swM8bae0WkYJZF8qY4=;
+        b=RyrIXYy0Lg2tW09G6BrMgv7M/c7JmAm51lMXaFJTCsGdNFESnUphduWUNsvueBpGIo
+         RkQzUyaphVySSYpZ9A0G3SEjltHUYWi7Uyv0pkhcixAZ03+fYEbt1n5lDRArcjxnrjGP
+         GbztamHaQ3+HOnD126mGbj4fjIz8r4sGN+Y4iBUvdrCqeF9QjMax8elnxD3we5SzWYI5
+         Og/3E5wy4yceFpZEurB3UwbyK1JUWA2lw3jjHgsDAjcEuTbddGlwtOT6TCnWHB65D89n
+         E8kSgHvbYCohc8B6Zne4gG4FoU3mTwfvuL3j95qBbmA1tDQeZ0PI5Tq3FFy79Co7sWZ/
+         uu9A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795103291; x=1795708091;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=LNS7/es9cdB66xJ/BxsmVpcG5swM8bae0WkYJZF8qY4=;
+        b=J4GHxxL3zEpf7O5sjrzgd2dS2wFt0fAqd/FWr09FHWL4c/vf1TCNOJwpNHkdlAkIT1
+         Re76UP7M3doeBjQp4TFJoiaqeFJH/AGMFzKPyDGnB7TCKr+ye02GFOTHpzBykMu2dgNI
+         L39hs1qw54gniL+4Ts43XZNseZRHtW4b8bolJnnEvuzjWY4agYUAXqLRzbJEpE6JMqLz
+         j/nf/Olk8518qSyxa8eV3p8T91flzk+Zdp/f2yDmaiQtkBJ37Q31++Ir/+dhakwsONtN
+         Tw2TtYQQ+4WZP9Yd+PJC6MI8gJRb630c0H4QZsVaIzC4PZ2tHlOZjk71e5bQWVMO14wD
+         EKNQ==
+X-Gm-Message-State: APuU4Z91TVBeRPkR2Am31DA2oJHxnr4vr4Uo1U0bODhOim3QfhTXphdF
+	UGBURLT5zeJhGyzY3vAiPjSOWPxOaoZUJJrgKUHksSxvpv47qU7v/EjL6Ry+UKAZ
+X-Gm-Gg: AZFdTZf85QR9vovFsb9GCptCoHbdczCWCRVg8mP8PVQj6+KtJASTNK17Vy/uipJA34p
+	LeCrI6v5skY9VcKYHDlrKDTQjq2USStBz/bPrudyib89HzVVogT3vCY6/NkdRdIgDNj+GDuoGlh
+	957b7kzMLFfWyjHCy26+WWT7RTFU6aSQBtREMpAhPbd/w/VPl0tAaapFBSKpD7Bb9PlzMiHmIhH
+	k+RKzY7xjjwczXEaVp14zxmj5UhWWXo9X7xBuuNNnVZ2uLEXHRu2ya6UKu3q79cDlSvR4exezIV
+	o+vWh4SN7FQg0lZPL5Sbf9aob4FFb3FAgNemyauRpH+ydDdO8WgcA8db2uHSJoAAsuXCDHJ6uC2
+	uuqH4ieF8kkwRoew1T0BsILIv5oFMwbN90gBYbLtIDFRBcX6j1T/mDjMDaNHfaEfqeKc4twQOv3
+	7v/q5JNWxxHuy+EAdnIVzdummLuqc0SFNtl+2nCywe3A0NRWzXLr8CDvU38V8ReEfoH5k6c+kPf
+	EMGuByPIPyOIIQuUSK/rR9/sv7YmPgniBohoKqtu58eqe+/ncsjWjep2zMTKSO6IBTj/hAcVt4y
+	hFe23cXhsWxmliX3U5w3cpDFc+X1omGV095r6+yTuaU=
+X-Received: by 2002:a5d:5888:0:b0:48b:1296:52ec with SMTP id ffacd0b85a97d-4a63a1e0211mr12136755f8f.18.1795103290837;
+        Thu, 19 Nov 2026 07:48:10 -0800 (PST)
+From: cristian.andrei1423@gmail.com
+To: xen-devel@lists.xenproject.org
+Cc: oleksii.kurochko@gmail.com,
+	alistair.francis@wdc.com,
+	connojdavis@gmail.com,
+	baptiste.le-duc@vates.tech,
+	community.manager@xenproject.org,
+	andrew.cooper3@citrix.com,
+	anthony.perard@vates.tech,
+	michal.orzel@amd.com,
+	jbeulich@suse.com,
+	julien@xen.org,
+	roger@xenproject.org,
+	sstabellini@kernel.org,
+	Cristian Andrei <cristian.andrei1423@gmail.com>,
+	Denis Mukhin <dmukhin@ford.com>
+Subject: [PATCH] xen/riscv: add support for riscv,isa-extensions devicetree property
+Date: Thu, 19 Nov 2026 17:48:07 +0200
+Message-ID: <20261119154807.80195-1-cristian.andrei1423@gmail.com>
+X-Mailer: git-send-email 2.56.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/6] CI: run the riscv64 smoke test with the QTB
- framework
-To: xen-devel@lists.xenproject.org
-Cc: Doug Goldstein <cardoe@cardoe.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>,
- Alejandro Vallejo <alejandro.garciavallejo@amd.com>,
- Zhang Zheng <zhangzheng@iscas.ac.cn>, Hiago De Franco <hfranco@baylibre.com>
-References: <20261103-qtb-framework-pytest-v3-0-3bd5f087bcc7@vates.tech>
-From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-Content-Language: en-US
-Autocrypt: addr=baptiste.le-duc@vates.tech; keydata=
- xsBNBGoPSX8BCADSuTikqW3FD4mscQugY1thRaKlIhcJ2G9YCWYXAlp+xosvTlzfIftOZZim
- 750MLvyKtLPkQzB6TZtFZBiexSraaF/MdDKRTT5DcVa3r7ZnHgqMclWlPa4ioysS4yFcJanL
- cyNOT7HUFvIdirMMqiViedfYtS0GORPBBPVISD6ClMz3ecHIxqllfq9CHYQn4amKEfHmh6tm
- Rufo4Gjl6x8cUFZZlRQf+aCmUzdSPA0P5u3sueYH1uEz4w/jbD53MlKqzCvxUeOsfS2swTQA
- 6mS9jIgOjNadpUTOzKfDHMgFirtG+HFpm45Nwp6KQizxgDVOfTnOfVHm5Gwqm3ETl9y5ABEB
- AAHNPEJhcHRpc3RlIExlIER1YyAoVmF0ZXMgWXViaWtleSkgPGJhcHRpc3RlLmxlLWR1Y0B2
- YXRlcy50ZWNoPsLAjgQTAQoAOBYhBGiSJ6HgW88MgT/gfu2Cu2XL9M6QBQJqD0l/AhsDBQsJ
- CAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEO2Cu2XL9M6QuMcH/ihiy/Nrxp919AmY0ENnc0NK
- r/2LDvW/hrX4FfbpxAmrGmQ7MU1aQTk0JDbfcsG8OYH6wO5sqnXb1gz50YrEdpfVSbHz5YTZ
- EhDIxE4g7NrvJZh3Qc0m0CAyjYTNHen7J6olVaCMjrOH7uRHUYZ7Pl3am9mZosfLmez/aWJO
- a6ihQxBXHI75brlk1teIURkep2kP7P0Flmfl4cA//saREoTF7GXCtjOSQk/xg8PP0Sswqp5G
- TdJptn3FQn6lAzfz0eFSYqkaoX2c2k1MDa7o+UX9cfGPL8ybMKnYkasLxck6eOWGJWf+YTrm
- ga/r0kBaftmqNDgt5nI2jNTDwZcT9g3OwE0Eag9JfwEIAM6IWbuBSvz+erv27oGDDpo8M6Fp
- dGUvft7v+WceHUfxiXpYFx9qgIU6XGy6y+3lJMAvNcltS8DuhioqMlfKRSYGKZlpliY65dNP
- 557IuM4ctVJ+I9CVclvv9eahARQKgF5auLJAAlvGSmU+ufNvlwTUmLIRcrPviTmB6X5jJYc+
- fiNeyI0HcsgcN21C0r62tUCypuZ+vgEJXw2bx1V8mVGZKxdGJPh58QF6kRK+xmd4kEComLGV
- BeM6BcVOtEjDcGNC0tLhXb0p9g1Ys55iA8sd6s4WacyolW2J6rwmcOkjiWexWw1caYgIWAV1
- 004M3gwUaOz0dGq2i7HQ0AiVfVkAEQEAAcLAdgQYAQoAIBYhBGiSJ6HgW88MgT/gfu2Cu2XL
- 9M6QBQJqD0l/AhsMAAoJEO2Cu2XL9M6QovYH/RjstyL5o/V5K74ylBtz0j5t3pLX5JKbwApi
- 656rGgDdqElImyvvZppNMl/mgHNzvxmfFAhJXnSX9f1fqVEQKOGEhLUastnl/ssBiE5x7btM
- V0GAffxXbXJZbVv4b/DI+gVrOPc2YXlVwruapvTZNtD3hqPrkjrmq5WTtGR2loIVSe62hmh0
- BGD2Fy79b/hYWyBqhayPBEjwGW75u4/yn+Yqy1PgG3hIcvg7GSuT3akhHZSB2Mbguzcoyf9Q
- DJl6t33JxPRkkNrEdkPPmRlQCTSiUkVjKqMDF3jlINWsJ5t4jKFsNF91ksdw7aQgiX+tQIpE
- ugMC1NuNi5dDGip66bw=
-In-Reply-To: <20261103-qtb-framework-pytest-v3-0-3bd5f087bcc7@vates.tech>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1795102667274
-X-purgate-ID: tlsNG-720697/1795102672-F158C6C6-519E90FC/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-d62444/1795103291-4E9475FD-734CF134/0/0
 X-purgate-type: clean
-X-purgate-size: 285
-X-Spam-Status: No, score=-9.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FORGED_MUA_MOZILLA,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
-	SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=4.0.1
+X-purgate-size: 13272
+X-Spam-Status: No, score=-14.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FORGED_GMAIL_RCVD,FREEMAIL_FORGED_FROMDOMAIN,
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-> Test CI pipeline:
-> https://gitlab.com/xen-project/people/baptleduc/xen/-/pipelines/TODO
+Xen panics when a CPU only has the riscv,isa-extensions property in
+the device tree. It only accepts the deprecated riscv,isa property,
+which forces users to use legacy devicetrees.
 
-Something definitely went wrong with my cover letter...
+Use riscv,isa-extensions if present, otherwise the legacy riscv,isa.
+If the new property is used, riscv,isa-extensions and riscv,isa-base
+must both be present and riscv,isa-base must exactly match the build
+string. Make a new shared helper riscv_isa_ext_check() which returns
+the exact state of the property: whether both are present or to use
+the legacy property. This helper makes both cpufeature.c and smpboot.c
+agree on which property a CPU uses.
 
-Here is the correct CI link: 
-https://gitlab.com/xen-project/people/baptleduc/xen/-/pipelines/3022361956
+A CPU with neither property is skipped with a message. Make it now
+an error because a skipped CPU is left out of the intersection, so
+Xen could use extensions that CPU lacks.
 
-Sorry for the noise.
+Add a per-CPU fallback so that any mix of new and legacy CPUs works.
+This deviates from Linux, which skips CPUs without riscv,isa-extensions
+and could assume extensions those CPUs lack.
+
+Add a first-CPU flag because with the new riscv,isa-extensions, a CPU's
+set can now be empty, which would make a later CPU appear as the first
+one. This couldn't happen with riscv,isa, where 'i' is always set.
+
+Use the new property in dt_processor_hartid(), with the legacy
+fallback, which also only used the legacy riscv,isa during
+interrupt-controller setup.
+
+Suggested-by: Denis Mukhin <dmukhin@ford.com>
+Signed-off-by: Cristian Andrei <cristian.andrei1423@gmail.com>
+---
+Tested on QEMU (virt, aia=aplic-imsic, -cpu rv64,svpbmt=on),
+-smp 1/2: default DT, only-new, only-legacy, mixed (CPU 0 new,
+CPU 1 legacy, showing CPU 1 falling back) boot.
+CPU 1 base "rv32i" -> panic.
+CPU 1 with only one of the new pair (either one) -> panic.
+Neither property: untestable in QEMU as OpenSBI stops first.
+
+ CHANGELOG.md                            |   3 +
+ docs/misc/riscv/booting.txt             |   3 +-
+ xen/arch/riscv/cpufeature.c             | 135 ++++++++++++++----------
+ xen/arch/riscv/include/asm/cpufeature.h |   2 +
+ xen/arch/riscv/smpboot.c                |  26 ++++-
+ 5 files changed, 109 insertions(+), 60 deletions(-)
+
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 225397f128..6bacd64f49 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -16,6 +16,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+      afterwards.
+ 
+ ### Added
++ - On RISC-V:
++   - Support for riscv,isa-extensions devicetree cpu property, alongside
++     the legacy riscv,isa.
+ 
+ ### Removed
+  - On Arm:
+diff --git a/docs/misc/riscv/booting.txt b/docs/misc/riscv/booting.txt
+index 14212ed62f..1505ae8c87 100644
+--- a/docs/misc/riscv/booting.txt
++++ b/docs/misc/riscv/booting.txt
+@@ -2,7 +2,8 @@ System requirements
+ ===================
+ 
+ The following extensions are required by Xen. Xen panics at boot if any of
+-them is missing from the riscv,isa property of the CPU nodes:
++them is missing from the riscv,isa or riscv,isa-extensions property of the
++CPU nodes:
+ - I, M, A, Zicsr, Zifencei:
+   Base ISA Xen is compiled for.
+ - C:
+diff --git a/xen/arch/riscv/cpufeature.c b/xen/arch/riscv/cpufeature.c
+index b1c614867c..844269df70 100644
+--- a/xen/arch/riscv/cpufeature.c
++++ b/xen/arch/riscv/cpufeature.c
+@@ -42,10 +42,11 @@ struct riscv_isa_ext_data {
+  *
+  * These flags express Xen's policy, not the ISA's rules: extensions which
+  * are architecturally tied to one XLEN (Zilsd on RV32, say) need no special
+- * treatment here, as they can only ever appear in the "riscv,isa" of a host
+- * of that XLEN, and guest_isa is masked against the host ISA bitmap anyway.
+- * They are only of use for extensions Xen chooses not to expose to guests of
+- * a given width despite the hardware implementing them.
++ * treatment here, as they can only ever appear in the "riscv,isa" or
++ * "riscv,isa-extensions" of a host of that XLEN, and guest_isa is masked
++ * against the host ISA bitmap anyway. They are only of use for extensions
++ * Xen chooses not to expose to guests of a given width despite the hardware
++ * implementing them.
+  */
+ #define RISCV_ISA_EXT_GUEST_NONE 0
+ #define RISCV_ISA_EXT_GUEST_RV32 (1U << 0)
+@@ -455,10 +456,41 @@ static int __init riscv_isa_parse_string(const char *isa,
+     return -EINVAL;
+ }
+ 
+-static void __init riscv_fill_hwcap_from_isa_string(void)
++int riscv_isa_ext_check(const struct dt_device_node *cpu)
++{
++    const char *base;
++    const char *expected_base = IS_ENABLED(CONFIG_RISCV_64) ? "rv64i" : "rv32i";
++    const char *node_name = dt_node_full_name(cpu);
++    bool isa_ext_exists = dt_property_read_bool(cpu, "riscv,isa-extensions");
++    bool isa_base_exists = !dt_property_read_string(cpu, "riscv,isa-base",
++                                                    &base);
++
++    if ( isa_ext_exists && isa_base_exists )
++    {
++        if ( !strcmp(base, expected_base) )
++            return 0;
++        else
++        {
++            printk("%s: riscv,isa-base \"%s\" doesn't match %s\n",
++                   node_name, base, expected_base);
++            return -EINVAL;
++        }
++    }
++    else if ( isa_ext_exists || isa_base_exists )
++    {
++        printk("%s: need both riscv,isa-extensions and riscv,isa-base\n",
++               node_name);
++        return -EINVAL;
++    }
++    else
++        return -ENOENT;
++}
++
++static void __init riscv_fill_hwcap_from_dt(void)
+ {
+     const struct dt_device_node *cpus = dt_find_node_by_path("/cpus");
+     const struct dt_device_node *cpu;
++    bool first_cpu = true;
+ 
+     if ( !cpus )
+     {
+@@ -471,6 +503,7 @@ static void __init riscv_fill_hwcap_from_isa_string(void)
+         DECLARE_BITMAP(this_isa, RISCV_ISA_EXT_MAX);
+         const char *isa;
+         unsigned long cpuid;
++        int ret;
+ 
+         bitmap_zero(this_isa, RISCV_ISA_EXT_MAX);
+ 
+@@ -483,57 +516,48 @@ static void __init riscv_fill_hwcap_from_isa_string(void)
+         if ( dt_get_cpuid_from_node(cpu, &cpuid) < 0 )
+             continue;
+ 
+-        if ( dt_property_read_string(cpu, "riscv,isa", &isa) )
++        ret = riscv_isa_ext_check(cpu);
++
++        /* Try riscv,isa-extensions, fall back to the deprecated riscv,isa */
++        if ( !ret )
+         {
+-            printk("Unable to find \"riscv,isa\" devicetree entry "
+-                   "for DT's cpu%ld node\n", cpuid);
+-            continue;
++            for ( unsigned int i = 0; i < ARRAY_SIZE(riscv_isa_ext); i++ )
++                if ( dt_property_match_string(cpu, "riscv,isa-extensions",
++                                              riscv_isa_ext[i].name) >= 0 )
++                    __set_bit(riscv_isa_ext[i].id, this_isa);
+         }
++        else if ( ret == -ENOENT &&
++                  !dt_property_read_string(cpu, "riscv,isa", &isa) )
++        {
++            for ( unsigned int i = 0; (isa[i] != '\0'); i++ )
++                if ( !isdigit(isa[i]) && (isa[i] != '_') && !islower(isa[i]) )
++                    panic("DT binding: riscv,isa must be lowercase\n");
+ 
+-        for ( unsigned int i = 0; (isa[i] != '\0'); i++ )
+-            if ( !isdigit(isa[i]) && (isa[i] != '_') && !islower(isa[i]) )
+-                panic("According to DT binding riscv,isa must be lowercase\n");
+-
+-        if ( riscv_isa_parse_string(isa, this_isa) )
+-            panic("Check riscv,isa in dts file\n");
++            if ( riscv_isa_parse_string(isa, this_isa) )
++                panic("cpu%lu: riscv,isa failed to parse \"%s\"\n",
++                      cpuid, isa);
++        }
++        else if ( ret == -EINVAL )
++            panic("cpu%lu: invalid riscv,isa-base/riscv,isa-extensions\n",
++                  cpuid);
++        else
++            panic("Unable to find \"riscv,isa\" or \"riscv,isa-extensions\" "
++                  "devicetree entry for DT's cpu%lu node\n", cpuid);
+ 
+-        if ( bitmap_empty(riscv_isa, RISCV_ISA_EXT_MAX) )
++        /*
++         * The intersection may legitimately become empty, so don't use
++         * bitmap_empty(riscv_isa) to detect the first CPU.
++         */
++        if ( first_cpu )
++        {
+             bitmap_copy(riscv_isa, this_isa, RISCV_ISA_EXT_MAX);
++            first_cpu = false;
++        }
+         else
+             bitmap_and(riscv_isa, riscv_isa, this_isa, RISCV_ISA_EXT_MAX);
+     }
+ }
+ 
+-static bool __init has_isa_extensions_property(void)
+-{
+-    const struct dt_device_node *cpus = dt_find_node_by_path("/cpus");
+-    const struct dt_device_node *cpu;
+-
+-    if ( !cpus )
+-    {
+-        printk("Missing /cpus node in the device tree?\n");
+-        return false;
+-    }
+-
+-    dt_for_each_child_node(cpus, cpu)
+-    {
+-        const char *isa;
+-
+-        if ( !dt_device_type_is_equal(cpu, "cpu") )
+-            continue;
+-
+-        if ( !dt_device_is_available(cpu) )
+-            continue;
+-
+-        if ( dt_property_read_string(cpu, "riscv,isa-extensions", &isa) )
+-            continue;
+-
+-        return true;
+-    }
+-
+-    return false;
+-}
+-
+ bool riscv_isa_extension_available(const unsigned long *isa_bitmap,
+                                    enum riscv_isa_ext_id id)
+ {
+@@ -690,16 +714,10 @@ void __init riscv_fill_hwcap(void)
+     bool all_extns_available = true;
+     unsigned long tmp;
+ 
+-    riscv_fill_hwcap_from_isa_string();
++    riscv_fill_hwcap_from_dt();
+ 
+     if ( bitmap_empty(riscv_isa, RISCV_ISA_EXT_MAX) )
+-    {
+-        const char *failure_msg = has_isa_extensions_property() ?
+-                                  "\"riscv,isa-extension\" isn't supported" :
+-                                  "\"riscv,isa\" parsing failed";
+-
+-        panic("HW capabilities parsing failed: %s\n", failure_msg);
+-    }
++        panic("HW cap: no usable CPU node or extension found\n");
+ 
+     if ( csr_read_safe(CSR_STIMECMP, &tmp) )
+     {
+@@ -707,9 +725,10 @@ void __init riscv_fill_hwcap(void)
+                 "SSTC detected; supported for Xen use, but not for guests\n");
+ 
+         /*
+-         * As there is no any guarantee that SSTC will be added to riscv,isa
+-         * property by OpenSBI(it doesn't add it now) or whatever ran before
+-         * Xen, it is needed to set this bit manually.
++         * As there is no any guarantee that SSTC will be added to
++         * riscv,isa or riscv,isa-extensions property by OpenSBI
++         * (it doesn't add it now) or whatever ran before Xen,
++         * it is needed to set this bit manually.
+          *
+          * Guest isolation is maintained by not setting ENVCFG_STCE in henvcfg.
+          */
+@@ -745,7 +764,7 @@ void __init riscv_fill_hwcap(void)
+         __set_bit(hw_update ? RISCV_ISA_EXT_svadu : RISCV_ISA_EXT_svade,
+                   riscv_isa);
+         printk(XENLOG_WARNING
+-               "Svade/Svadu missing from \"riscv,isa\" - probed as %s\n",
++               "Svade/Svadu missing from \"riscv,isa\" or \"riscv,isa-extensions\" - probed as %s\n",
+                hw_update ? "svadu" : "svade");
+     }
+ 
+diff --git a/xen/arch/riscv/include/asm/cpufeature.h b/xen/arch/riscv/include/asm/cpufeature.h
+index d42189e8eb..ef1d0e4889 100644
+--- a/xen/arch/riscv/include/asm/cpufeature.h
++++ b/xen/arch/riscv/include/asm/cpufeature.h
+@@ -47,6 +47,7 @@ enum riscv_isa_ext_id {
+ };
+ 
+ struct domain;
++struct dt_device_node;
+ 
+ void riscv_fill_hwcap(void);
+ void init_guest_isa(struct domain *d);
+@@ -54,6 +55,7 @@ const char *get_guest_isa_str(void);
+ 
+ bool riscv_isa_extension_available(const unsigned long *isa_bitmap,
+                                    enum riscv_isa_ext_id id);
++int riscv_isa_ext_check(const struct dt_device_node *cpu);
+ 
+ #endif /* __ASSEMBLER__ */
+ 
+diff --git a/xen/arch/riscv/smpboot.c b/xen/arch/riscv/smpboot.c
+index 3b8bf98e20..95c4d650ac 100644
+--- a/xen/arch/riscv/smpboot.c
++++ b/xen/arch/riscv/smpboot.c
+@@ -7,6 +7,7 @@
+ #include <xen/types.h>
+ 
+ #include <asm/current.h>
++#include <asm/cpufeature.h>
+ 
+ cpumask_t __read_mostly cpu_online_map;
+ cpumask_t __ro_after_init cpu_possible_map;
+@@ -77,9 +78,32 @@ int dt_processor_hartid(const struct dt_device_node *node,
+         return -ENODEV;
+     }
+ 
++    if ( (ret = riscv_isa_ext_check(node)) == -ENOENT )
++    {
++        printk(XENLOG_DEBUG "CPU with hartid=%#lx has no riscv,isa-base, "
++               "falling back to legacy riscv,isa\n", *hartid);
++        goto fallback_to_riscv_isa;
++    }
++
++    if ( ret )
++        return -ENODEV;
++
++    if ( dt_property_match_string(node, "riscv,isa-extensions", "i") < 0 ||
++         dt_property_match_string(node, "riscv,isa-extensions", "m") < 0 ||
++         dt_property_match_string(node, "riscv,isa-extensions", "a") < 0 )
++    {
++        printk("CPU with hartid=%#lx does not support ima\n", *hartid);
++        return -ENODEV;
++    }
++
++    return 0;
++
++ fallback_to_riscv_isa:
++
+     if ( (ret = dt_property_read_string(node, "riscv,isa", &isa)) )
+     {
+-        printk("CPU with hartid=%#lx has no \"riscv,isa\" property\n", *hartid);
++        printk("CPU with hartid=%#lx has no \"riscv,isa-base\" or "
++               "\"riscv,isa\" property\n", *hartid);
+         return ret;
+     }
+ 
+-- 
+2.56.0
+
 
