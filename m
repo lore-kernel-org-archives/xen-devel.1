@@ -2,43 +2,43 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1029B606A330
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2026 19:25:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 647F9606A32A
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Nov 2026 19:25:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20260707 header.b=DPSB9CXP
-Received: from list by lists.xenproject.org with outflank-mailman.1496840.1695157 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20260707 header.b=R6ZRvg4W
+Received: from list by lists.xenproject.org with outflank-mailman.1496846.1695192 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xU7lD-00027L-Gt; Thu, 19 Nov 2026 19:25:31 +0000
+	id 1xU7lX-00037I-Ij; Thu, 19 Nov 2026 19:25:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1496840.1695157; Thu, 19 Nov 2026 19:25:31 +0000
+Received: by outflank-mailman (output) from mailman id 1496846.1695192; Thu, 19 Nov 2026 19:25:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xU7lD-00027A-Bx; Thu, 19 Nov 2026 19:25:31 +0000
-Received: by outflank-mailman (input) for mailman id 1496840;
- Thu, 19 Nov 2026 19:25:30 +0000
+	id 1xU7lX-000376-Ep; Thu, 19 Nov 2026 19:25:51 +0000
+Received: by outflank-mailman (input) for mailman id 1496846;
+ Thu, 19 Nov 2026 19:25:50 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <3J03_agcKCR4CLIA8LMAIIAF8.6IGR8H-78P8FFCMNM.R8HJLID86N.ILA@flex--irogers.bounces.google.com>)
- id 1xU7lC-000274-Em
- for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 19:25:30 +0000
+ <3Ok3_agcKCTEVebTRefTbbTYR.PbZkRa-QRiRYYVfgf.kRacebWRPg.beT@flex--irogers.bounces.google.com>)
+ id 1xU7lW-00035L-3V
+ for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 19:25:50 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xU7lB-009Gok-RW
- for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 20:25:29 +0100
-Received: from [10.42.69.5] (helo=localhost)
+ id 1xU7lV-009Gtq-G6
+ for xen-devel@lists.xenproject.org; Thu, 19 Nov 2026 20:25:49 +0100
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <3J03_agcKCR4CLIA8LMAIIAF8.6IGR8H-78P8FFCMNM.R8HJLID86N.ILA@flex--irogers.bounces.google.com>)
- id 6aff4d1a-bab6-0a2a0a5309dd-0a2a4505d878-16
- for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 20:25:29 +0100
-Received: from [209.85.216.69] (helo=mail-pj1-f69.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ <3Ok3_agcKCTEVebTRefTbbTYR.PbZkRa-QRiRYYVfgf.kRacebWRPg.beT@flex--irogers.bounces.google.com>)
+ id 6aff4d00-bab6-0a2a0a5309dd-0a2a4501bb7a-34
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 20:25:49 +0100
+Received: from [74.125.82.198] (helo=mail-dy1-f198.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <3J03_agcKCR4CLIA8LMAIIAF8.6IGR8H-78P8FFCMNM.R8HJLID86N.ILA@flex--irogers.bounces.google.com>)
- id 6aff4d28-4cb1-0a2a45050019-d155d845d5a1-3
- for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 20:25:29 +0100
-Received: by mail-pj1-f69.google.com with SMTP id
- 98e67ed59e1d1-3b191f8a9b3so232012a91.1
- for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 11:25:29 -0800 (PST)
+ <3Ok3_agcKCTEVebTRefTbbTYR.PbZkRa-QRiRYYVfgf.kRacebWRPg.beT@flex--irogers.bounces.google.com>)
+ id 6aff4d3b-5bcc-0a2a45010019-4a7d52c6dd38-3
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 20:25:49 +0100
+Received: by mail-dy1-f198.google.com with SMTP id
+ 5a478bee46e88-3854627c1c8so72530eec.1
+ for <xen-devel@lists.xenproject.org>; Thu, 19 Nov 2026 11:25:48 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -47,44 +47,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=google.com header.i="@google.com" header.h="Content-Type:Cc:To:From:Subject:Message-ID:Mime-Version:Date"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=google.com header.i="@google.com" header.h="Content-Type:Cc:To:From:Subject:Message-ID:References:Mime-Version:In-Reply-To:Date"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20260707; t=1795116328; x=1795721128; darn=lists.xenproject.org;
-        h=content-type:cc:to:from:subject:message-id:mime-version:date:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=74VGOpSNCwDOLASOLNhvmRdqpZTelyvflsoJESldCvo=;
-        b=DPSB9CXPeeL5p3oOCUc3mkxGm4DMf5IcV2TrAYVOwYfbYiT40s+DWYVpEQH1bgfJ47
-         yl8d+WHGHb9S54uhPldrrlrLFp9TO4RpTMV078agmdWY3t3xqsz7cTMeAppQryQ5vyeh
-         sR//RhOPry6m5SHegQVOphcCUeW3iMKmNf9alM4cz8PZDYB9AsTcGfi6z/Y6tThFW7pW
-         QKa9Cbjtd0ZnUr274yqJLZrtNJcSC9yICQAYYgMy9la6zVIhmoBQNP09+uj/ZOgMUC4i
-         XrOoepALe0iyAayky/76dg2I36/W4bT2Y1MuaQ+IdZ2TZTulDiWwwGigioitvAaZch3I
-         EF5Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795116328; x=1795721128;
-        h=content-type:cc:to:from:subject:message-id:mime-version:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=google.com; s=20260707; t=1795116347; x=1795721147; darn=lists.xenproject.org;
+        h=content-type:cc:to:from:subject:message-id:references:mime-version
+         :in-reply-to:date:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=74VGOpSNCwDOLASOLNhvmRdqpZTelyvflsoJESldCvo=;
-        b=AGDDzCDS8LEMFWOqOdX0LJs+RUoT3dVgkUPdgdbLKKPxrRljcf2hod7CK6O4UUy9Km
-         nV3gzUnBl0DG5KxzWJAO4Ul46gLsV9XMikvUEeX35njz/m5W3UFgr2lx7OpjXkvCGDYX
-         ssUDcS94jPCQOjqRpDTC9tA+ZtdN25tojHNvUJRnNoS4Sm2/h/TZe1UISsmimxtl9sva
-         GmIrEUCV2SyNYfpck5KfPGLOcDnWyxACY7HfIabKBJeBW8Xid4VyJwejnYU+J6w8xA3W
-         jj3eXZK37n3IyvxgKZRj1Gqq3jfhC1xFSZmI5+l8fkgQkyHY30pSMCZR/Gx4GMoJAPRo
-         jMOQ==
-X-Forwarded-Encrypted: i=1; AL+hErE/s75z9vfZDtKFZFTqiq78VrktMeQ2i/sS5JIg1GitXeGZob5DsFEyCNMSnMzRNdH1EgbHrFdR6QA=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z/s18rBJtp2WzfEEW3YQXSOciTNhd04esufSW/LBqU07ATcRaGv
-	iW4GdeRpynmw3y8r/3QbeThP6DYGKsQhXvdn9tAaagjfhg41hzyRnsSLv+0PRhZxrFrWrXz1slk
-	oWhLLbXjK6g==
-X-Received: from pgjh5.prod.google.com ([2002:a63:df45:0:b0:cc7:d53a:a251])
- (user=irogers job=prod-delivery.src-stubby-dispatcher) by 2002:a17:90b:2e8c:b0:3b3:b373:6a6a
- with SMTP id 98e67ed59e1d1-3b41c9e45c3mr289799a91.28.1795116327397; Thu, 19
- Nov 2026 11:25:27 -0800 (PST)
-Date: Thu, 19 Nov 2026 11:25:11 -0800
+        bh=kkWfFph3Jhdo1iVdBmUApUet/72n0u945LBk/dYhnBA=;
+        b=R6ZRvg4WhvDYxiJZYziWUtEQ0SNsk534e6rXiKDGaURBmCRrUzFUyysvdB1Y1c22BZ
+         9GI0R5gpq7aBb6OmCW5nNmKZ3+sPyUCG+R1ns1GuFRDlmwlNHNTOAWk8BFemKfJofNkn
+         NPmzxKoaoEGmox6m+35hdCJTjtWzoKxUABMgWsiPgc9rw8h7QBVj7inRlNoVHRNppqPJ
+         f0erWqOwjS4N1LXVFShSla+lXPtvRGZ6GKwv+tM7DY+FqGNZL085LC2aiJp4VYlmbdC9
+         zCtQtx7qMjIW0ALCLcjOBJ/Tq3eviakaX1+0RjsVBed7fjcob3FgVDlcalrzgXwhnbiF
+         sKpQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795116347; x=1795721147;
+        h=content-type:cc:to:from:subject:message-id:references:mime-version
+         :in-reply-to:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=kkWfFph3Jhdo1iVdBmUApUet/72n0u945LBk/dYhnBA=;
+        b=1+XVRXaMHi+yxm6pAgIULoauCtpSchXSr2v6g4+umPPT+f8ByiSx5P5Kln6GwVi4OP
+         MOKBZzNbplVSCTAqAHT89HqjIHRW3qGg2rCe0zfyELpd6+CgpKj56WlH+3e5vX+TkZEv
+         tkuMagRJm5z89C5Z7Fvn+JrWQSvcSoNiKa9Z40ATiK9FGtsoiJORaTbZ92OCSOuMVr0s
+         9QBLY9jL5kdzyvbH1jOQmf39Zcv2aKEZMdLxKfDU18oVVl73kx/DGPniR5uiJilq060n
+         S41gVhz6nhrlnBE4B5/2MYMpnNQBLllRxHZrYR7YN+RPfE+ZDllAxBzl/Rcxf7NdhLdx
+         DcLg==
+X-Forwarded-Encrypted: i=1; AL+hErFmZpryNQcDFqclm6tNIo/IjBSjj37shprZYHa8A63UHDaEzCjBEk+y0EjtJ80zOybB4sLFZ7vUFAY=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z/80rXdlIL+zFshx6KGtKpQ2FdQNTfwDrPW2Kkqrje1IOUu7kwZ
+	6ETSzK7Oi96QVddXupOwEY/b+xqgUPPs36uBBuNRASWRAmqvQQBmPubZhDflrYSwIu/E7ncESxv
+	cjt7WNkEovA==
+X-Received: from dyvo18-n1.prod.google.com ([2002:a05:693c:41d2:10b0:370:f640:2508])
+ (user=irogers job=prod-delivery.src-stubby-dispatcher) by 2002:a05:693c:820d:b0:36d:394d:e690
+ with SMTP id 5a478bee46e88-38570b34f2fmr260461eec.40.1795116346621; Thu, 19
+ Nov 2026 11:25:46 -0800 (PST)
+Date: Thu, 19 Nov 2026 11:25:15 -0800
+In-Reply-To: <20261119192520.1983406-1-irogers@google.com>
 X-Archived-By: <archiver.kernel.org>
 Mime-Version: 1.0
+References: <20261119192520.1983406-1-irogers@google.com>
 X-Mailer: git-send-email 2.56.1.750.gf70dc682cf-goog
-Message-ID: <20261119192520.1983406-1-irogers@google.com>
-Subject: [PATCH v4 0/9] Add __must_init and require explicit kobj_type::release
+Message-ID: <20261119192520.1983406-5-irogers@google.com>
+Subject: [PATCH v4 4/9] cpufreq: governor: Initialize kobj_type release
+ callback statically
 From: Ian Rogers <irogers@google.com>
 To: Danilo Krummrich <dakr@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
 	Kees Cook <kees@kernel.org>, Miguel Ojeda <ojeda@kernel.org>, 
@@ -110,187 +114,108 @@ Cc: Madhavan Srinivasan <maddy@linux.ibm.com>, Srish Srinivasan <ssrish@linux.ib
 	amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, 
 	linux-kernel@vger.kernel.org, Ian Rogers <irogers@google.com>
 Content-Type: text/plain; charset="UTF-8"
-X-purgate-ID: tlsNG-c201ff/1795116329-73ABF2A1-D0EC2CDD/0/0
+X-purgate-ID: tlsNG-d62444/1795116349-BC6E65FD-854999FC/0/0
 X-purgate-type: clean
-X-purgate-size: 9572
-X-Spam-Status: No, score=-21.3 required=3.0 tests=BAYES_00,DKIMWL_WL_MED,
+X-purgate-size: 3807
+X-Spam-Status: No, score=-26.3 required=3.0 tests=BAYES_00,DKIMWL_WL_MED,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_GIT,USER_IN_DEF_DKIM_WL
-	autolearn=unavailable autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT,USER_IN_DEF_DKIM_WL
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Clang supports the 'require_explicit_initialization' attribute on struct
-fields to enforce that the field is explicitly initialized when an
-aggregate object is constructed, emitting -Wuninitialized-explicit-init
-(enabled by default) if the field is omitted.
+Export cpufreq_dbs_data_release() and initialize .kobj_type.release
+statically in the ondemand and conservative governors instead of
+assigning it at runtime in cpufreq_dbs_governor_init().
 
-Following discussion at the Linux Plumbers Conference [1], patch 1 adds
-the attribute to include/linux/compiler_attributes.h as __must_init. In
-v1 it was called __require_explicit_initialization. Kees picked up that
-patch with a first seq_file user [2], and in that thread Greg suggested
-the shorter __must_init spelling, which Kees and Miguel agreed to. As
-the attribute did not land in the v7.4 merge window, Kees asked that
-this series carry the renamed attribute.
+This prepares for annotating struct kobj_type::release with
+__must_init.
 
-As Documentation/core-api/kobject.rst notes:
-  "One important point cannot be overstated: every kobject must have a
-  release() method, and the kobject must persist (in a consistent state)
-  until that method is called. If these constraints are not met, the
-  code is flawed."
+Reviewed-by: Zhongqiu Han <zhongqiu.han@oss.qualcomm.com>
+Acked-by: Rafael J. Wysocki (Intel) <rafael@kernel.org> # cpufreq
+Acked-by: Viresh Kumar <viresh.kumar@linaro.org>
+Signed-off-by: Ian Rogers <irogers@google.com>
+---
+ drivers/cpufreq/cpufreq_conservative.c | 5 ++++-
+ drivers/cpufreq/cpufreq_governor.c     | 4 ++--
+ drivers/cpufreq/cpufreq_governor.h     | 1 +
+ drivers/cpufreq/cpufreq_ondemand.c     | 5 ++++-
+ 4 files changed, 11 insertions(+), 4 deletions(-)
 
-Annotating struct kobj_type::release caught struct kobj_type definitions
-across the tree that omitted .release:
-- Patches 2-8 fix struct kobj_type definitions where dynamically
-  allocated kobjects, ksets, or enclosing structures were either leaked
-  on kobject_put(), freed prematurely before kobject release, or missing
-  proper static initializers.
-- Patch 9 annotates struct kobj_type::release with __must_init and
-  explicitly sets .release = NULL on the remaining legacy struct
-  kobj_type definitions, distinguishing built-in sites whose backing
-  storage remains valid for the lifetime of the kernel (despite
-  violating the kobject API contract) from sites with broken kobject
-  lifetime management (marked with FIXME comments for follow-up fixes).
-
-Danilo Krummrich offered to route the series as a whole through the
-driver-core tree [3], and all subsystem maintainer Acked-by/Reviewed-by
-tags for patches 1-8 have now been collected. Follow-up patches are
-planned for the broken-lifetime sites documented in patch 9.
-
-Note on tool use: An LLM coding assistant was used to help audit the
-compiler diagnostics across the tree, draft the fixes and changelog
-descriptions, and verify builds and review feedback.
-
-Changes in v4:
-- Rebased on v7.4-rc3.
-- Patch 2 (powerpc/secvar): Add Reviewed-by from Srish Srinivasan and
-  Acked-by from Madhavan Srinivasan.
-- Patch 3 (sh: sq): Add Acked-by from John Paul Adrian Glaubitz.
-- Patch 5 (dlm): Clarify subject ("Wait for kobject release before
-  freeing dlm_ls") and update Fixes tag to commit 8a4cf500f1dd ("dlm:
-  drop kobject release callback handling") (reported by Sashiko).
-- Patch 6 (xen/sys-hypervisor): Add Reviewed-by from Juergen Gross.
-- Patch 7 (ubifs): Update Fixes tag to commit 2e3cbf425804 ("ubifs:
-  Export filesystem error counters") (reported by Sashiko).
-- Patch 9 (kobject): Drop the "Pre-existing:" comment prefix and
-  explicitly distinguish built-in sites whose storage outlives kobject
-  cleanup (arm64 cpuinfo, ACPI hotplug profiles, s390 sclp_mem) from
-  drivers and tristate modules with broken kobject lifetime management,
-  documenting each lifetime hazard with a FIXME comment for follow-up
-  fixes (requested by Danilo Krummrich).
-
-Changes in v3:
-- Rebased on v7.4-rc1.
-- Note in cover letter that patches 2 (powerpc/secvar), 3 (sh: sq), and
-  6 (xen/sys-hypervisor) are still awaiting subsystem Acked-by tags for
-  merging through the driver-core tree, and CC those maintainers on the
-  cover letter.
-- Patch 1: Add Reviewed-by from Kees Cook; clarify that LLVM issue
-  #232483 affects Clang versions prior to its upstream fix (pointed out
-  by Nathan Chancellor).
-- Patch 4 (cpufreq): Drop obsolete reference to cpufreq_governor_dbs in
-  the commit message per Zhongqiu Han; add Reviewed-by from Zhongqiu Han
-  and Acked-by from Rafael J. Wysocki and Viresh Kumar.
-- Patch 5 (dlm): Add Acked-by from Alexander Aring.
-- Patch 8 (drm/amdkfd): Add Reviewed-by from Felix Kuehling.
-- Patch 9 (kobject): Fix omapfb manager-sysfs.c and overlay-sysfs.c
-  comments to describe managers[] and overlays[] as dynamically
-  allocated rather than static and note the CONFIG_DEBUG_KOBJECT_RELEASE
-  hazard, fix a struct-vs-member wording nit in usnic_ib_sysfs.c, and
-  generalize the commit message note on CONFIG_DEBUG_KOBJECT_RELEASE
-  (reported by Sashiko).
-
-Changes in v2:
-- Rebased on v7.3-16928-g83f32c773255 (v7.4 merge window).
-- Patch 1: Rename __require_explicit_initialization to __must_init per
-  Greg Kroah-Hartman; document the Clang >= 20 requirement per Miguel
-  Ojeda; note the Clang gap for file-scope objects without an
-  initializer reported by Kees Cook; add tags from v1 and from Kees's
-  posting.
-- Move LLM assistance attribution from Assisted-by tags to this cover
-  letter per commit 1e035297ffda ("docs: remove Assisted-by
-  references").
-- Patch 4 (cpufreq): Use "cpufreq: governor:" prefix, drop Fixes tag,
-  fix typo, and remove the redundant runtime assignment in
-  cpufreq_dbs_governor_init() per Zhongqiu Han.
-- Dropped v1 patch 5 (ACPI: CPPC), already fixed upstream by
-  commit 27954e29d7de ("ACPI: CPPC: Release CPC descriptors through
-  kobject").
-- Patch 5 (dlm): Call kobject_del() before dlm_recoverd_stop() in
-  release_lockspace() and the new_lockspace() error path, and wait on a
-  new ls_kobj_done completion before freeing the lockspace or dropping
-  the module reference, avoiding races with delayed kobject release.
-- Dropped v1 patch 8 (s390/sclp_mem) per Sumanth Korikkar: the
-  /sys/firmware/memory/memoryX kobjects are permanent, so sclp_mem.c is
-  folded into patch 9 with .release = NULL.
-- Patch 7 (ubifs): Add Tested-by and Reviewed-by from Zhihao Cheng.
-- Patch 8 (drm/amdkfd): Check q->kobj.state_in_sysfs before
-  kobject_del() in kfd_procfs_del_queue().
-- Patch 9 (kobject): Cover sclp_mem.c and the new amdgpu_ualink.c
-  ualink_xcp_info_ktype, fix the overlay-sysfs.c comment, and prefix
-  legacy .release = NULL comments with "Pre-existing:".
-- Patch 9 (kobject): The ioat, kunpeng_hccs and omapfb display comments
-  now say that the existing teardown can use-after-free under
-  CONFIG_DEBUG_KOBJECT_RELEASE (reported by Sashiko). Fixing those
-  drivers is left to follow-up patches.
-
-v3: https://lore.kernel.org/all/20261108223913.3624571-1-irogers@google.com/
-v2: https://lore.kernel.org/all/20261027223847.652884-1-irogers@google.com/
-v1: https://lore.kernel.org/all/20261013223946.1836757-1-irogers@google.com/
-[1] https://lpc.events/event/20/contributions/2392/
-[2] https://lore.kernel.org/lkml/20261014225811.i.852-kees@kernel.org/
-[3] https://lore.kernel.org/all/DMLWX8NY1N1N.2OMQMQCIVRR18@kernel.org/
-
-Ian Rogers (9):
-  Compiler Attributes: Add __must_init macro
-  powerpc/secvar: Add missing kobject release callback to secvar_ktype
-  sh: sq: Add missing kobject release callback to ktype_percpu_entry
-  cpufreq: governor: Initialize kobj_type release callback statically
-  dlm: Wait for kobject release before freeing dlm_ls
-  xen/sys-hypervisor: Add release callback to hyp_sysfs_kobj_type
-  ubifs: sysfs: Use kset_create_and_add() for ubifs_kset
-  drm/amdkfd: Free queue in procfs_queue_type kobject release callback
-  kobject: Require explicit initialization of struct kobj_type::release
-
- Documentation/conf.py                         |  1 +
- arch/arm64/kernel/cpuinfo.c                   |  7 +++++
- arch/powerpc/kernel/secvar-sysfs.c            |  6 +++++
- arch/sh/kernel/cpu/sh4/sq.c                   |  6 +++++
- drivers/acpi/sysfs.c                          |  7 +++++
- drivers/cpufreq/cpufreq_conservative.c        |  5 +++-
- drivers/cpufreq/cpufreq_governor.c            |  4 +--
- drivers/cpufreq/cpufreq_governor.h            |  1 +
- drivers/cpufreq/cpufreq_ondemand.c            |  5 +++-
- drivers/dma/ioat/sysfs.c                      |  8 ++++++
- drivers/gpu/drm/amd/amdgpu/amdgpu_ualink.c    |  8 ++++++
- drivers/gpu/drm/amd/amdgpu/amdgpu_xcp.c       | 17 ++++++++++++
- drivers/gpu/drm/amd/amdkfd/kfd_process.c      | 12 ++++++---
- drivers/gpu/drm/amd/amdkfd/kfd_queue.c        |  5 +++-
- drivers/infiniband/hw/hfi1/sysfs.c            |  7 +++++
- drivers/infiniband/hw/usnic/usnic_ib_sysfs.c  |  7 +++++
- drivers/parisc/pdc_stable.c                   |  8 ++++++
- drivers/power/supply/ab8500_fg.c              |  8 ++++++
- drivers/s390/char/sclp_mem.c                  |  6 +++++
- drivers/soc/hisilicon/kunpeng_hccs.c          | 18 +++++++++++++
- .../fbdev/omap2/omapfb/dss/display-sysfs.c    |  7 +++++
- .../fbdev/omap2/omapfb/dss/manager-sysfs.c    |  8 ++++++
- .../fbdev/omap2/omapfb/dss/overlay-sysfs.c    |  7 +++++
- drivers/xen/sys-hypervisor.c                  |  6 +++++
- fs/dlm/dlm_internal.h                         |  1 +
- fs/dlm/lockspace.c                            | 26 ++++++++++++++-----
- fs/erofs/sysfs.c                              | 14 ++++++++++
- fs/f2fs/sysfs.c                               | 21 +++++++++++++++
- fs/ocfs2/cluster/masklog.c                    |  7 +++++
- fs/ubifs/sysfs.c                              | 24 +++++------------
- include/linux/compiler_attributes.h           | 12 +++++++++
- include/linux/kobject.h                       |  2 +-
- scripts/checkpatch.pl                         |  1 +
- tools/lib/python/kdoc/xforms_lists.py         |  1 +
- 34 files changed, 251 insertions(+), 32 deletions(-)
-
-
-base-commit: aebb7274476403040d582c61478df8f4a7bf9cd3
+diff --git a/drivers/cpufreq/cpufreq_conservative.c b/drivers/cpufreq/cpufreq_conservative.c
+index 02bfd46543e9..146a2353b1a2 100644
+--- a/drivers/cpufreq/cpufreq_conservative.c
++++ b/drivers/cpufreq/cpufreq_conservative.c
+@@ -318,7 +318,10 @@ static void cs_limits(struct cpufreq_policy *policy)
+ 
+ static struct dbs_governor cs_governor = {
+ 	.gov = CPUFREQ_DBS_GOVERNOR_INITIALIZER("conservative"),
+-	.kobj_type = { .default_groups = cs_groups },
++	.kobj_type = {
++		.release = cpufreq_dbs_data_release,
++		.default_groups = cs_groups,
++	},
+ 	.gov_dbs_update = cs_dbs_update,
+ 	.alloc = cs_alloc,
+ 	.free = cs_free,
+diff --git a/drivers/cpufreq/cpufreq_governor.c b/drivers/cpufreq/cpufreq_governor.c
+index f3bd3dbe7c41..f8b5aca09b6b 100644
+--- a/drivers/cpufreq/cpufreq_governor.c
++++ b/drivers/cpufreq/cpufreq_governor.c
+@@ -419,7 +419,7 @@ static void free_policy_dbs_info(struct policy_dbs_info *policy_dbs,
+ 	gov->free(policy_dbs);
+ }
+ 
+-static void cpufreq_dbs_data_release(struct kobject *kobj)
++void cpufreq_dbs_data_release(struct kobject *kobj)
+ {
+ 	struct dbs_data *dbs_data = to_dbs_data(to_gov_attr_set(kobj));
+ 	struct dbs_governor *gov = dbs_data->gov;
+@@ -427,6 +427,7 @@ static void cpufreq_dbs_data_release(struct kobject *kobj)
+ 	gov->exit(dbs_data);
+ 	kfree(dbs_data);
+ }
++EXPORT_SYMBOL_GPL(cpufreq_dbs_data_release);
+ 
+ int cpufreq_dbs_governor_init(struct cpufreq_policy *policy)
+ {
+@@ -488,7 +489,6 @@ int cpufreq_dbs_governor_init(struct cpufreq_policy *policy)
+ 	policy->governor_data = policy_dbs;
+ 
+ 	gov->kobj_type.sysfs_ops = &governor_sysfs_ops;
+-	gov->kobj_type.release = cpufreq_dbs_data_release;
+ 	ret = kobject_init_and_add(&dbs_data->attr_set.kobj, &gov->kobj_type,
+ 				   get_governor_parent_kobj(policy),
+ 				   "%s", gov->gov.name);
+diff --git a/drivers/cpufreq/cpufreq_governor.h b/drivers/cpufreq/cpufreq_governor.h
+index 806d8fb4dff1..1026712bb79b 100644
+--- a/drivers/cpufreq/cpufreq_governor.h
++++ b/drivers/cpufreq/cpufreq_governor.h
+@@ -150,6 +150,7 @@ static inline struct dbs_governor *dbs_governor_of(struct cpufreq_policy *policy
+ }
+ 
+ /* Governor callback routines */
++void cpufreq_dbs_data_release(struct kobject *kobj);
+ int cpufreq_dbs_governor_init(struct cpufreq_policy *policy);
+ void cpufreq_dbs_governor_exit(struct cpufreq_policy *policy);
+ int cpufreq_dbs_governor_start(struct cpufreq_policy *policy);
+diff --git a/drivers/cpufreq/cpufreq_ondemand.c b/drivers/cpufreq/cpufreq_ondemand.c
+index 9942dbb38dae..7386d043c665 100644
+--- a/drivers/cpufreq/cpufreq_ondemand.c
++++ b/drivers/cpufreq/cpufreq_ondemand.c
+@@ -374,7 +374,10 @@ static struct od_ops od_ops = {
+ 
+ static struct dbs_governor od_dbs_gov = {
+ 	.gov = CPUFREQ_DBS_GOVERNOR_INITIALIZER("ondemand"),
+-	.kobj_type = { .default_groups = od_groups },
++	.kobj_type = {
++		.release = cpufreq_dbs_data_release,
++		.default_groups = od_groups,
++	},
+ 	.gov_dbs_update = od_dbs_update,
+ 	.alloc = od_alloc,
+ 	.free = od_free,
 -- 
 2.56.1.708.g77570a6a1d-goog
 
