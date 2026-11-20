@@ -2,48 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 49715606A320
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2026 09:01:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A8C2E606A325
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2026 09:02:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=selector1 header.b=j18aIcft
-Received: from list by lists.xenproject.org with outflank-mailman.1497883.1695920 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=selector1 header.b=HolKXiD1
+Received: from list by lists.xenproject.org with outflank-mailman.1497891.1695930 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xUKUX-00062z-RG; Fri, 20 Nov 2026 09:01:09 +0000
+	id 1xUKW7-0006Vt-5C; Fri, 20 Nov 2026 09:02:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1497883.1695920; Fri, 20 Nov 2026 09:01:09 +0000
+Received: by outflank-mailman (output) from mailman id 1497891.1695930; Fri, 20 Nov 2026 09:02:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xUKUX-00062s-OS; Fri, 20 Nov 2026 09:01:09 +0000
-Received: by outflank-mailman (input) for mailman id 1497883;
- Fri, 20 Nov 2026 09:01:08 +0000
+	id 1xUKW7-0006Vm-2R; Fri, 20 Nov 2026 09:02:47 +0000
+Received: by outflank-mailman (input) for mailman id 1497891;
+ Fri, 20 Nov 2026 09:02:44 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <stephen.cheng@citrix.com>) id 1xUKUW-00062m-IC
- for xen-devel@lists.xenproject.org; Fri, 20 Nov 2026 09:01:08 +0000
+ (envelope-from <stephen.cheng@citrix.com>) id 1xUKW4-0006VX-Ni
+ for xen-devel@lists.xenproject.org; Fri, 20 Nov 2026 09:02:44 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xUKUV-004ifu-SR
- for xen-devel@lists.xenproject.org; Fri, 20 Nov 2026 10:01:07 +0100
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xUKW4-003Mcm-3k
+ for xen-devel@lists.xenproject.org; Fri, 20 Nov 2026 10:02:44 +0100
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <stephen.cheng@citrix.com>)
- id 6b000c50-2eae-0a2a0a5409dd-0a2a4504df84-24
- for <xen-devel@lists.xenproject.org>; Fri, 20 Nov 2026 10:01:07 +0100
-Received: from [40.107.201.53]
- (helo=CH4PR04CU002.outbound.protection.outlook.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6b000ca8-8faa-0a2a0a5109dd-0a2a4509cd14-30
+ for <xen-devel@lists.xenproject.org>; Fri, 20 Nov 2026 10:02:44 +0100
+Received: from [40.107.208.22]
+ (helo=PH0PR06CU001.outbound.protection.outlook.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <stephen.cheng@citrix.com>)
- id 6b000c51-b57f-0a2a45040019-286bc93588f1-4
- for <xen-devel@lists.xenproject.org>; Fri, 20 Nov 2026 10:01:06 +0100
+ id 6b000cb2-be1a-0a2a45090019-286bd0169719-3
+ for <xen-devel@lists.xenproject.org>; Fri, 20 Nov 2026 10:02:43 +0100
 Received: from CO1PR03MB7889.namprd03.prod.outlook.com (2603:10b6:303:275::14)
  by SA1PR03MB6419.namprd03.prod.outlook.com (2603:10b6:806:1c2::13)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.639.12; Fri, 20 Nov
- 2026 09:01:03 +0000
+ 2026 09:02:20 +0000
 Received: from CO1PR03MB7889.namprd03.prod.outlook.com
  ([fe80::2d02:5605:87a2:6767]) by CO1PR03MB7889.namprd03.prod.outlook.com
  ([fe80::2d02:5605:87a2:6767%4]) with mapi id 15.21.0639.011; Fri, 20 Nov 2026
- 09:01:02 +0000
+ 09:02:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -54,20 +54,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=sfPf/4IR9MYcAVGNDP/UkytWpz/euG839Tf22jP4txlpgiCSj2jeUQb/3jO3WcqgrM/jDCCc/aVJCh6koluAbk/n8B1LwVtZuzU75muR2NNkKrHnonLqpMnOV/Hl3snU4GXyhXx8gFqy4FYKEpk4B+Fx6KFFH6Qi0AAlVd1RWLE+iRaKn1T7DLjDCD3v1wwpfa57H+QcbjTJRnUUZq2yo3Uxe7pTygSW/rlYhKthv71uXYgNZ6wQ12KN/6abuHR05+SibaQpwJFsiElPruSbJrF1oimrdRmy81YqC7ezBJVTND0HBVXBeDA9X4zPW1evZsjimVm25xZBjvNudoDSYA==
+ b=GJVIQdU+UxoZ5yFtHCgPKx4Ikwifs9iXof70s0T5CqnhGVxV6mk2uFbLrcmN2N2d+uTaCQhu0msWpYxqHQo6yyg0FZvhCGj6Nk2/8Y95depC8guUXa8T5lgZ4ucVRPXQCWrYHX1/+3luEUbZ1teHxn/q/lwqsWNjkgA2mLQPexz7g0L/PKrYjVbn/n7HJqhsqrjyAskbmJ/s0IdRcHqcWSN1Uwj1JGlYsaIDM2hVW75ZpEssN9Cn8N1OIg1s2oZoIm4Rs6Zv9EdzGe1MIv/IYTjJH0MExi+ogWi+gcR417YiIiAMj0CF0y6MiOQA3LOGJy6gqgZJy1JOdaFzIfRPhQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=lJflN8Rfxna3WIqRcMlIFLSb59UL/P6t4+JtU6Q2ra0=;
- b=hRf2Dkyyo/bHu/ptNRBgnf9CM4c5nCeb3VDTMr6t7J02FjOFYSK7Fea9QsI/NK4DELUGCs7yP2wTXYAm+CLf20AOoAuIFTC5rZWmrXlAjYVF681OHsKc+cV+K+RrVz69eC4Xyr1cppsNdAdzACyAbzZyjkSCs5bGkc+zpK/2f3CkIBulIeAseB2sLl7pOuvWmy3r9uKAkz07p6vP8skxCSuucOumQ2KesGw/F78B4h/qvhsItx+ZAsVuy3q6rqKFbWJUzpQaU6/yrS29818ntGq87gPVmZV+Y2Gz5B/SyL/CGh97hmXQFIwTIrPHMBTKOQwjDXPhEzU4FO/h4E3W8A==
+ bh=HxXW2HUpvs5QX4GPROPRKxD07ArAj/dEkBBUcu/lCn8=;
+ b=tPs5I/t7E7OuSlNoCDQ2Rc/6GBZluCXJ4RcuzEajCkpzLKiKWC4YJifIaiQAt44EnLW6lXlDnEwa1NvCkoKeUtG3+R2DxL1aCjZUTwVI/LCsZTmGKrnIp/+QlP9Kzwv7n6L15CXfO6u6eeOBkVeRbCmSvfWXog1o+fie0kP4UA73ypGlOrGYBpolMRxkFNqh/g9xhdx3ZmNG8hRwdLdVOwvMKYlGT6ULdQNZ9V02dBlRgb2EU0dtbTLyNOJ4cTn1xJ1/A+pZFivkWVqEPwqPWa17LU5hjv+SOmsgX8epJhZFj4PntxQWN7PdNsnfPZWf6n9Rlt8v5/J59F1w9qq65Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
  dkim=pass header.d=citrix.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=lJflN8Rfxna3WIqRcMlIFLSb59UL/P6t4+JtU6Q2ra0=;
- b=j18aIcft5p3+aB80GS8dNkgkQ5dzlagGGEZQtTTmbZJ2fXQ+IdGlrsd/fPZ3hTbN7JjUO6ewezKy1B0NEIXApTuu9FFSYnEoHa1ifeDSfWMFOvyfnaGnTCEyXyQLuuik3py0e+/WtKcd2ZZVTf7R+OSW3lAipM164blFhQoporo=
+ bh=HxXW2HUpvs5QX4GPROPRKxD07ArAj/dEkBBUcu/lCn8=;
+ b=HolKXiD1BEvyU/fj+8EBBh8CBiGFAe1fYXbc/FDiY19q5ahk6TiUKvtohZ3a6CaD5itwuPAylWl+9oB6FqrtYTRrcXLqlNSStKwlYnbUKL370CyERchtNwV4ft8bVsR5W10vfmO1OAwxLfUUEzBuTW1LVkwTnTMHWqMVcBeYn9k=
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=citrix.com;
 From: Stephen Cheng <stephen.cheng@citrix.com>
@@ -78,127 +78,301 @@ Cc: Jan Beulich <jbeulich@suse.com>,
 	Jason Andryuk <jason.andryuk@amd.com>,
 	Teddy Astie <teddy.astie@vates.tech>,
 	Stephen Cheng <stephen.cheng@citrix.com>
-Subject: [PATCH v2 0/2] x86/nestedhvm: Fix #VMEXITs which L0 creates for L2 events
-Date: Fri, 20 Nov 2026 17:00:11 +0800
-Message-ID: <20261120090013.271926-1-stephen.cheng@citrix.com>
+Subject: [PATCH v2 1/2] x86/nestedsvm: Record NextRIP with the deferred #VMEXIT
+Date: Fri, 20 Nov 2026 17:00:12 +0800
+Message-ID: <20261120090013.271926-2-stephen.cheng@citrix.com>
 X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20261120090013.271926-1-stephen.cheng@citrix.com>
+References: <20261120090013.271926-1-stephen.cheng@citrix.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: TPYP295CA0058.TWNP295.PROD.OUTLOOK.COM (2603:1096:7d0:8::9)
- To CO1PR03MB7889.namprd03.prod.outlook.com (2603:10b6:303:275::14)
+X-ClientProxiedBy: KL1PR0401CA0017.apcprd04.prod.outlook.com
+ (2603:1096:820:f::22) To CO1PR03MB7889.namprd03.prod.outlook.com
+ (2603:10b6:303:275::14)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: CO1PR03MB7889:EE_|SA1PR03MB6419:EE_
-X-MS-Office365-Filtering-Correlation-Id: 15a2c7d5-b8e5-46c8-2ca8-08df46e4cd3e
+X-MS-Office365-Filtering-Correlation-Id: e3f63bf8-91e2-4bb4-7094-08df46e4fc25
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|376014|366016|1800799024|261022105027099003|10067099003|11063799006|56012099006|261009223027099003|261021123027099003|261102123227099003|261021121427099003|261028144727099003|261026140227099003|261026121527099003|18002099003;
+	BCL:0;ARA:13230040|23010399003|376014|366016|1800799024|261022105027099003|10067099003|261022075727099003|11063799006|56012099006|261009223027099003|261021123027099003|261102123227099003|261021121427099003|261028144727099003|261026140227099003|261026121527099003|18002099003|22082099003|6133799003|3023799007;
 X-Microsoft-Antispam-Message-Info:
-	u52GRatXVApxbyojte2DMsjBpM1y7tjcUYMYV8DTOQX+YXP//QJwDEhMQ7mBhdlX6OTICg0zKdXEuPeVSRrcI3seekEgg/ecy5oNNywUSr7s4IJ3ZMFYb44Q084L2E4O4KOib8iF8XTSruqc20JBXyD1xtNqutbO9+Cz8picO839DeGDI79DwfaGQUKzCv70thXCupIQE7is6VV0GA5KTBRBa0sEM93IFIS1LP8rrWsjgxmUc3JZPHLPREn9OIXqPMWrJqIiJsPL/KRXLd9QEKY5Ouram2lylzH/S8I9RZBG2zB7r9lkgdvl8lEW8ZbtzAHYLZlPiXhyenntx1lYWouAo3RyrZQssm+Q8ULEAr3pO0M+jS/zYjAjj71NzL7WnEGeKLQ5SZGVTA0pNBYKqDl8OiBaR3ed3OmnAFYvWvI0YzuS5Qv+0GRVh/cOqRf79j74Pu1zGCOkYoui3PLo5oRiMtqBjuZxoK7zRe3dRy30sUPIU7cY3o9+PCYjFc1iVuA6tdoMVGu5PrUOvo5sErMnFcKvLqWS+lkcLvslFO4d/6Q1kJdZhjr9kGlURk7mDpK4Pl3xLJXzhFljqmUKEim6hZvC36qTT2Bevt45DlTMgovGNPYemR+yRBy1knvO
+	etvURuHoGsUqRO5LeduCj8AnMCkulBCsxQ1cjmyYDj2lQzhWgJcmHX6odPfQ5BlyopJoAsjntHknLSfIzF4tIB4Ynu9ZVdS23IYM1GjDIT+oBk14HzbfzMzcEU/n3t4j/YYWkJU9ZH8kLewNUJzR80ImeZY+FMIbthMO5hUbm+A1/c+SRHEyCQVt+RpnkrU5KViOocAgZgkzOXG9AyJvmTRS570p24gtG+1XOw4oxiJJ9IPKWtU8fXia/eweiHoxa57i/4ToCm203wcHSgOWsXurijNxzVcBW/iiOJsRVIW52TPOBo07rvPnyKgMIELNV0/yA59Es8VP6nY2ne091W3vYfVn1YjtIq5wEZoGQQIHijMVEP6jwLTKbE9YFid67L7jPSZwquAj13wYlcjhpadjgI/flTSiaSdTyfFEUuYGMXrGC/HArKl/BWH6pR5cMIBqINd507MaJumgNMIWmSkq2ErNois9UxFGt8n8+BbUS41UnL+tFXAaLXN6dKhloAxtbSsBy7N5pRLkwKGgz7aD50OJ7VGcfKjJndY9/KpqFNur3R/Bvp/nb1I2dsVOEVMG0t5V8iZLP7OaMdCqPEB85My3TUuxOWgl+fxJPh/vI+zx/Uxok39oZ/EUPVF6uTGvS1muGHs2CkQ5cN7UZIn+ZqVbMdk30l7FH94Jta4=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR03MB7889.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(376014)(366016)(1800799024)(261022105027099003)(10067099003)(11063799006)(56012099006)(261009223027099003)(261021123027099003)(261102123227099003)(261021121427099003)(261028144727099003)(261026140227099003)(261026121527099003)(18002099003);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR03MB7889.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(376014)(366016)(1800799024)(261022105027099003)(10067099003)(261022075727099003)(11063799006)(56012099006)(261009223027099003)(261021123027099003)(261102123227099003)(261021121427099003)(261028144727099003)(261026140227099003)(261026121527099003)(18002099003)(22082099003)(6133799003)(3023799007);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?QWqi5FwoJyUUICRoSC3nhSgFqikRq++yaPTgTfbaFetzznCKECf38QtLoQSp?=
- =?us-ascii?Q?l+DMeNuYWqjGF2g7K3b8WiMu3lqOgQeYSgoRRnM6bVKZWnWjjZf5DwUNQDev?=
- =?us-ascii?Q?iGtN23sTNvkU/qBI0e+X4U/GLT6RsM35jHMk4CIkWf1zegQlo+R/efKMgDM3?=
- =?us-ascii?Q?lL+6Efkwe8l7SbqfHFzYCKKCAk52LnYqSyYRAQSZuyIBhjoIdq+8uCoUBzVI?=
- =?us-ascii?Q?8nEXZlOrI7XFC/ZZ5KKCFKoOc1DiPsacz7f1HcxsiiuUxUJCaL4cXxWaNaS6?=
- =?us-ascii?Q?u8GA98twYj4T/skhzxFYlTMgTrBrp8vkD6Ry5N6dZylST4jCtyuuri9uN17S?=
- =?us-ascii?Q?6X6IgZgdIE1cDRIaxAIFhpZClFSKsm6pcPmUMFq72K/ubuLJ25NLRcjh9Ii7?=
- =?us-ascii?Q?qJCwuP8Yln4vv5eXU+9Mo1BhDl/uaOXNJYQrStTWqnSAl/u8hgaEuKw21PmU?=
- =?us-ascii?Q?O3K0YiNP93mOAkiFBKIvZ5IHkC0mM6/7fFwnoFOofSE0ctahNzyKWRgvg+/x?=
- =?us-ascii?Q?Z7i6NR1OIFMJvH0l4o63qUM40bJqeSMPtD4zx0HecxhiAwW9ayl/utHGvgbm?=
- =?us-ascii?Q?/cwpfQ4POxOclb5pvAntHpBUMwWicJwzHrs/JleOqf8aYSyAVHuL0OoTzTn7?=
- =?us-ascii?Q?mpIkWetJP0PYkBUPgGOLcwXOPCeqjgNpFdbPmE//3O9QQEzqEWcK+U4HSYvY?=
- =?us-ascii?Q?m++EIKC8imjEj4x6WJrQX2aD0SERff1aTzE/fJLFlwy0I4I6SNZM//AKu9of?=
- =?us-ascii?Q?1gvoowzmdVM14xUF5iLBlYr4FuE7SyHzZ8sN22GqzDdU7WSx/3VFk9Su4tt/?=
- =?us-ascii?Q?yLKWdCMcd3sy0jS7WF/a7pdx5r+P7e3nBNss6nboUTn/dUONmPIXSTZ1Osey?=
- =?us-ascii?Q?0OQiVttxuuPPga58Yh1PQHGO/WJwUzdz2iK4Q/v3IKbZEeOXA0GqgsR0xIva?=
- =?us-ascii?Q?hzuw6IUqa8wVhLKxaVFktPNxReeUtxztYXLEyKK7SZcoiKixeyHNNTi4lq99?=
- =?us-ascii?Q?INmDGoNjrzhe1donSTOrX/XqxzLrKSaxl7yqqC6LybqT19pugBZvaTU2+WQF?=
- =?us-ascii?Q?Nh+yCc6t+y4YIU5dxk/4lFw3M1BUESQmypIxHQjmCswUnJQb4lB5IYSSjZRK?=
- =?us-ascii?Q?+eHHtvPvjQeeyxkJtabWdyG27n/El8fOnwJox89Og1DqmG3NpZtUyJjL8Kxj?=
- =?us-ascii?Q?b2ob4Jq/i80i+iQ0aF7Z7SRNtdufv+zEG1Mj/VZol1w+Krzqy348ZER6VqyD?=
- =?us-ascii?Q?W23iKaDQls2LQ1wofh+px+J09RmKrpG66qmRGvUh5XghkIcmSW+6zPtwPDDV?=
- =?us-ascii?Q?3GVDyInoGZVA7IfcBVDAi9oGK78YGuXLdMpSqpgVkaD20RNr5Tlub9U7hncB?=
- =?us-ascii?Q?w4TmXy5WdteZC+TE4+Xq3+EwjlOK1uA0H2VEKnfQleFP78mQICbl5jDMC25c?=
- =?us-ascii?Q?GZLyT58nEif3hDWkmIR7yqld9yMwNswA92bG5W4nJAJhJ3tjuAZ6RQi6PSHK?=
- =?us-ascii?Q?khcKKtbZ/lXuMWys6QvOb2X0Pe/kRVp9d8nHQuYMB0f4YoKbpjkVdBfVY2Qv?=
- =?us-ascii?Q?gwLGQLj/uzOqGbUQ45w4Xne0PDy7OqaGf7sYq0czaFcNeY1i++NVO1AJ6CnL?=
- =?us-ascii?Q?YIIhy2wMufKo875CPqWTATzppxphoJH30PPJQGq0ViFiO8xUS4/E5fT6RWhq?=
- =?us-ascii?Q?wSNGvKQlRlHLh3R0gbjHwWvbnAw0qJ8/LMO8Wp6n4DsLgR94TeUy6QkI9rKP?=
- =?us-ascii?Q?W2E0do0KMA=3D=3D?=
+	=?us-ascii?Q?e2hfDvYy6Vz5j6JX65DFo2w77Jb2dxXUKd3dxO6zw0P5Ztf+oVYEYXdvGxF8?=
+ =?us-ascii?Q?Gl+AD2leaYAdYzY+JjtAoOltGwn6BKRTFCrxj28HkUUlT7pRQ68RZ1Epuw4S?=
+ =?us-ascii?Q?7Wb6uQeIh1Co5nwYfnwCUClCt745f689qPvcI5HKJXLjHTlf1nDWthwjwAJL?=
+ =?us-ascii?Q?fFSfkRe5FeBv4+uz+AGoVQsqWdJuqwBZPNKj6Zczyevet3LruDEQblROiXyK?=
+ =?us-ascii?Q?EzLHBGtfusNEvBLXJP41Gp3ugIiIkvTGYtzIdwmxprzTs/AtC4WNX215HnhQ?=
+ =?us-ascii?Q?GdJZxMWV4yE8YfeodTLSbBtXZut3vRFPynIYOyqCF9HtjajlM12AZE3L0hBr?=
+ =?us-ascii?Q?thHCv7ozY88K5imxseTmPthcwYS9tjkfpcUk+CI49RiyJuM1IW+Iisq3rGz9?=
+ =?us-ascii?Q?6Lw6xgcmsz92riqSeIHqSrZY3dyA/fHPaQOWzOcdUSSvkHXkqL+mEC3+MBZj?=
+ =?us-ascii?Q?8ONYrbxMZwLRX+LM5m9Yu9IxxRP/kfEORkEO1uvCUGum4y/e9GxYkaWalV5i?=
+ =?us-ascii?Q?05MEPTK4o1XYNPDLDCNYdHmMq0fdDgffJDi9flT1TP3sem1X3nd5VKGhYBzZ?=
+ =?us-ascii?Q?mmj5t7PX3gnTYoWVygCg0z3em0aDnLgUFxBJSRfnYzPIPAFXEYlzNWCSIU3e?=
+ =?us-ascii?Q?RK2IrF2C1QB3s8AwFkouI2sgn8l1VbWrtTJLejWZ5OvmfPOHVPa5SZTJ60Vw?=
+ =?us-ascii?Q?BiWj1OXGn1yIUJOM0INKpFsGnA3xETFyimF/ITmOi/WMiakBfdQMqvvbHiZ3?=
+ =?us-ascii?Q?7fDXU7VUbK5TBDYFoUxyFbnqtIvotjskqdNE6gH+3w8Zo1kT5TCF2btg9dn2?=
+ =?us-ascii?Q?W5Zn6EmUxMow5xWM7hKn+mwnBqtZtltxRL8JN20xJc+N7PP/K/YZvv2dZ2+4?=
+ =?us-ascii?Q?8Db4LB/KA5eMD1JFex2ieGQwFbJlomtjjjBnDZGs0uo210KJq/OwnQLBz2cC?=
+ =?us-ascii?Q?uwARBUdXExtpwgcQj+E8yf4GcQqxtcYg+9qFNYiQbyUG1OC2Z9LQD+H+ugbs?=
+ =?us-ascii?Q?stLst4EOGaFXRklOSdj5Fy/F0ysckgMPZGlJY46hkd56TMUG3L+GTUKhX7aF?=
+ =?us-ascii?Q?HfYZOvgSw/mvmrgmp4z+bIVHdyhKjIbHCEW7cjXwXU0vUaqqHqtKWzfUVifq?=
+ =?us-ascii?Q?XxR3dyVuPx/MOmF6JuYHW0/cx0UDfgEWjV3xJh9sLrzZUvSQTJPA4fyjxnMp?=
+ =?us-ascii?Q?4JH/BDor/klZI7//JGgUHgPhvNAAPjCHGpW2BJwkH4HrUpVsPYw3e9bR+xTs?=
+ =?us-ascii?Q?Fv247x74fNrZanDfQBXdEqN9n6rMct0tjdotBP4f+gl5uiV52IVMADXXTyn6?=
+ =?us-ascii?Q?DKdYJiyDY6h4uRKzkT1Duu94sPn2JX1ZZYDCuRy23C8KJcImYBsxSucdFxFR?=
+ =?us-ascii?Q?BTqmc1NTQMka+RLAyssT9Pc2e3WmHDkIuiAQz6qADwXZRx54vlf1ydipdW0a?=
+ =?us-ascii?Q?frAVskXEQ5Q0GQjyklkuaN9MmD/XzO4gnh/M5E5CuP5R2zuaI1Y7vQ0JbA//?=
+ =?us-ascii?Q?ry9tST6nmyxpTL79YBApnP7pWIV4lBfaT/M1ixVoBI81vj18vDFAJUrNy2bs?=
+ =?us-ascii?Q?i24l3T2iI7NJs7yfm7F6WBmaUgZUdEgdAfBVqoP9iAbhXgUmo/S0hHGBMuOY?=
+ =?us-ascii?Q?rGTuzaOztcszp3Ap3FvljC48dva4ZuUvzw9F/gCNx7wYvJikdl73C6IXtHAP?=
+ =?us-ascii?Q?8YDxrZNYBdRKEn1CTvG5f4WztDFmElXOQ/rJF5I4OMxYonR6HqOC2S5p5e+b?=
+ =?us-ascii?Q?O2QxVTwKxw=3D=3D?=
 X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 15a2c7d5-b8e5-46c8-2ca8-08df46e4cd3e
+X-MS-Exchange-CrossTenant-Network-Message-Id: e3f63bf8-91e2-4bb4-7094-08df46e4fc25
 X-MS-Exchange-CrossTenant-AuthSource: CO1PR03MB7889.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Nov 2026 09:01:02.2527
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Nov 2026 09:02:20.8080
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: zxtiDYZhaHqr438VtBdfBuox9NiMZcZpH5Vd4PSquJojPOvJ7bsg7kudlFNGvhlkXmEyoulpGVFgEmhhORBjKP+cjz91LIqwoPw9fpp27CE=
+X-MS-Exchange-CrossTenant-UserPrincipalName: /h1aAqDw3FOgLjkM5qf4IBQR6n7fY2OhG80yWQoIClFypJE6gFO8iwEyQ0vUGcxg97Cq3G20M4zIefBVcTkktq1g/1AyMM2CXVaZGsWfNA0=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR03MB6419
-X-purgate-ID: tlsNG-ebf023/1795165267-51ED6B50-76877198/0/0
+X-purgate-ID: tlsNG-bad1c0/1795165364-FD469034-25E6EC4C/0/0
 X-purgate-type: clean
-X-purgate-size: 1875
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-purgate-size: 9113
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-When L0 handles an event of L2 itself, and L1 intercepts it, L0 creates
-the #VMEXIT to L1.  Two parts of that #VMEXIT are wrong:
+nsvm_vmcb_prepare4vmexit() copies NextRIP from the hardware #VMEXIT,
+but L0 also delivers #VMEXITs it creates itself, for which that value
+belongs to a different exit.  L1 should see the NextRIP which the APM
+defines for the #VMEXIT it gets: zero for most of them, such as an
+exception or an interrupt, and the next RIP for an intercepted
+instruction or INT3/INTO (AMD64 APM vol 2, publication 24593 rev 3.44,
+section 15.7.1).  For example:
 
- 1. NextRIP is copied from an earlier hardware #VMEXIT.
- 2. An emulated INT $n is treated as exception n, so the software
-    interrupt intercept is not checked.  For some n, L1 is crashed with
-    "Illegal exitcode".
+ 1. L1 intercepts #GP but not MSR accesses.
+ 2. L2 executes RDMSR of an MSR which Xen doesn't implement.
+ 3. Hardware exits to L0 with VMEXIT_MSR and NextRIP after the RDMSR.
+ 4. L0 handles the RDMSR itself and injects #GP into L2.
+ 5. L1 intercepts #GP, so L0 delivers VMEXIT_EXCEPTION_GP to L1.
+ 6. L1 sees NextRIP after the RDMSR, instead of 0.
 
-Patch 1 was sent alone on 22 Oct (no replies); it is only rebased and
-reworded here.  v1:
-https://lore.kernel.org/xen-devel/20261022090658.151682-1-stephen.cheng@citrix.com/
+Record NextRIP in ns_vmexit alongside the exitcode and exitinfo, and
+have each source of a #VMEXIT supply it: the hardware value for a
+reflected #VMEXIT, the next RIP for an INT3/INTO which L0 emulated, and
+zero for everything else, including a failed VMRUN.
 
-Patch 2 is new, and uses the NextRIP from patch 1 for INT $n, so I send
-them together.
-
-Both were found with nested-SVM XTF tests using the forced emulation
-prefix, and tested on AMD EPYC.  The VMX part of patch 2 is only build
-tested.
-
-Not fixed here: an ICEBP in L2 which L0 handles (always for a native
-ICEBP, since Xen intercepts it, or when emulated) is checked against the
-#DB intercept instead of the ICEBP intercept (APM 15.12.2).  I will send
-a fix separately.
-
+Fixes: 9a779e4fc161 ("Implement SVM specific part for Nested Virtualization")
+Assisted-by: Claude:claude-opus-5-5
+Signed-off-by: Stephen Cheng <stephen.cheng@citrix.com>
+---
 v2:
- - Rebased on current staging.
- - Reworded patch 1's commit message.
- - New patch 2.
+ - Rebased on current staging (struct vmcb_struct is now struct vmcb).
+ - Reworded the commit message: a #VMEXIT which L0 creates does not
+   always have NextRIP 0.
 
-Stephen Cheng (2):
-  x86/nestedsvm: Record NextRIP with the deferred #VMEXIT
-  x86/nestedhvm: Don't treat an emulated INT $n as an exception
+This is the #VMEXIT counterpart of commit 9d6b6e4f7394 ("x86/svm: Sync
+nextrip during virtual VMRUN").
 
- xen/arch/x86/hvm/hvm.c                   |  3 +-
- xen/arch/x86/hvm/svm/nestedhvm.h         |  5 +-
- xen/arch/x86/hvm/svm/nestedsvm.c         | 60 ++++++++++++++++++++----
- xen/arch/x86/hvm/svm/svm.c               |  8 ++--
- xen/arch/x86/hvm/vmx/vmx.c               |  6 +--
- xen/arch/x86/hvm/vmx/vvmx.c              | 10 +++-
- xen/arch/x86/include/asm/hvm/hvm.h       |  8 ++--
+BOUND's #BR is raised by the emulator as a plain hardware exception
+without an instruction length, so it still reports 0 rather than the
+next RIP.
+
+ xen/arch/x86/hvm/svm/nestedhvm.h         |  3 ++-
+ xen/arch/x86/hvm/svm/nestedsvm.c         | 32 ++++++++++++++++++++----
+ xen/arch/x86/hvm/svm/svm.c               |  8 +++---
  xen/arch/x86/include/asm/hvm/svm-types.h |  1 +
- xen/arch/x86/include/asm/hvm/vmx/vvmx.h  |  6 ++-
- 9 files changed, 80 insertions(+), 27 deletions(-)
+ 4 files changed, 35 insertions(+), 9 deletions(-)
 
-
-base-commit: 5b28c0efc1d5d73ce651ca651e103c45b6932f9d
+diff --git a/xen/arch/x86/hvm/svm/nestedhvm.h b/xen/arch/x86/hvm/svm/nestedhvm.h
+index 9bb04a04343..963390e8a99 100644
+--- a/xen/arch/x86/hvm/svm/nestedhvm.h
++++ b/xen/arch/x86/hvm/svm/nestedhvm.h
+@@ -28,7 +28,8 @@
+ 
+ int nestedsvm_vmcb_map(struct vcpu *v, uint64_t vmcbaddr);
+ void nestedsvm_vmexit_defer(struct vcpu *v,
+-    uint64_t exitcode, uint64_t exitinfo1, uint64_t exitinfo2);
++    uint64_t exitcode, uint64_t exitinfo1, uint64_t exitinfo2,
++    uint64_t nextrip);
+ enum nestedhvm_vmexits
+ nestedsvm_vmexit_n2n1(struct vcpu *v, struct cpu_user_regs *regs);
+ enum nestedhvm_vmexits
+diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
+index 366178ff54a..70ef50eb845 100644
+--- a/xen/arch/x86/hvm/svm/nestedsvm.c
++++ b/xen/arch/x86/hvm/svm/nestedsvm.c
+@@ -154,6 +154,7 @@ int cf_check nsvm_vcpu_reset(struct vcpu *v)
+     svm->ns_hostflags.raw = 0;
+     svm->ns_vmexit.exitinfo1 = 0;
+     svm->ns_vmexit.exitinfo2 = 0;
++    svm->ns_vmexit.nextrip = 0;
+ 
+     svm->ns_iomap = NULL;
+ 
+@@ -674,6 +675,7 @@ nsvm_vcpu_vmrun(struct vcpu *v, struct cpu_user_regs *regs)
+     if ( inst_len == 0 )
+     {
+         svm->ns_vmexit.exitcode = VMEXIT_SHUTDOWN;
++        svm->ns_vmexit.nextrip = 0;
+         return -1;
+     }
+ 
+@@ -695,6 +697,7 @@ nsvm_vcpu_vmrun(struct vcpu *v, struct cpu_user_regs *regs)
+     case NSVM_ERROR_VVMCB:
+         gdprintk(XENLOG_ERR, "inject VMEXIT(INVALID)\n");
+         svm->ns_vmexit.exitcode = VMEXIT_INVALID;
++        svm->ns_vmexit.nextrip = 0;
+         return -1;
+     case NSVM_ERROR_VMENTRY:
+     default:
+@@ -758,6 +761,7 @@ nsvm_vcpu_vmexit_inject(struct vcpu *v, struct cpu_user_regs *regs,
+     }
+ 
+     ns_vmcb->exitcode = exitcode;
++    ns_vmcb->nextrip = svm->ns_vmexit.nextrip;
+     ns_vmcb->event_inj.raw = 0;
+     return 0;
+ }
+@@ -765,10 +769,26 @@ nsvm_vcpu_vmexit_inject(struct vcpu *v, struct cpu_user_regs *regs,
+ int cf_check nsvm_vcpu_vmexit_event(
+     struct vcpu *v, const struct x86_event *event)
+ {
++    const struct vmcb *vmcb = v->arch.hvm.svm.vmcb;
++    uint64_t nextrip = 0;
++
+     ASSERT(vcpu_nestedhvm(v).nv_vvmcx != NULL);
+ 
++    /*
++     * An exception intercept saves NextRIP only for INT3, INTO and BOUND
++     * (AMD APM vol 2 rev 3.44, 15.7.1).  The emulator raises BOUND's #BR as
++     * a plain hardware exception, so only INT3/INTO can be recognised here.
++     * As in svm_inject_event(), truncate it outside of 64bit mode.
++     */
++    if ( event->type == X86_ET_SW_EXC )
++    {
++        nextrip = guest_cpu_user_regs()->rip + event->insn_len;
++        if ( !((vmcb_get_efer(vmcb) & EFER_LMA) && vmcb->cs.l) )
++            nextrip = (uint32_t)nextrip;
++    }
++
+     nestedsvm_vmexit_defer(v, VMEXIT_EXCEPTION_DE + event->vector,
+-                           event->error_code, event->data);
++                           event->error_code, event->data, nextrip);
+     return NESTEDHVM_VMEXIT_DONE;
+ }
+ 
+@@ -1036,8 +1056,7 @@ nsvm_vmcb_prepare4vmexit(struct vcpu *v, struct cpu_user_regs *regs)
+ 
+     /* LBR virtualization - keep lbr control as is */
+ 
+-    /* NextRIP */
+-    ns_vmcb->nextrip = n2vmcb->nextrip;
++    /* NextRIP is set by nsvm_vcpu_vmexit_inject(). */
+ 
+     /* Decode Assist */
+     ns_vmcb->guest_ins_len = n2vmcb->guest_ins_len;
+@@ -1191,7 +1210,8 @@ enum hvm_intblk cf_check nsvm_intr_blocked(struct vcpu *v)
+ /* VMEXIT emulation */
+ void
+ nestedsvm_vmexit_defer(struct vcpu *v,
+-    uint64_t exitcode, uint64_t exitinfo1, uint64_t exitinfo2)
++    uint64_t exitcode, uint64_t exitinfo1, uint64_t exitinfo2,
++    uint64_t nextrip)
+ {
+     struct nestedsvm *svm = &vcpu_nestedsvm(v);
+     struct vmcb *vmcb = v->arch.hvm.svm.vmcb;
+@@ -1204,6 +1224,7 @@ nestedsvm_vmexit_defer(struct vcpu *v,
+     svm->ns_vmexit.exitcode = exitcode;
+     svm->ns_vmexit.exitinfo1 = exitinfo1;
+     svm->ns_vmexit.exitinfo2 = exitinfo2;
++    svm->ns_vmexit.nextrip = nextrip;
+     vcpu_nestedhvm(v).nv_vmexit_pending = 1;
+ }
+ 
+@@ -1326,6 +1347,7 @@ nestedsvm_vcpu_vmexit(struct vcpu *v, struct cpu_user_regs *regs,
+ 
+         case NESTEDHVM_VMEXIT_ERROR:
+             exitcode = VMEXIT_INVALID;
++            vcpu_nestedsvm(v).ns_vmexit.nextrip = 0;
+             break;
+         default:
+             ASSERT(!nestedhvm_vcpu_in_guestmode(v));
+@@ -1445,7 +1467,7 @@ nestedsvm_vcpu_interrupt(struct vcpu *v, const struct hvm_intack intack)
+                                      guest_cpu_user_regs(), exitcode);
+     if ( ret )
+     {
+-        nestedsvm_vmexit_defer(v, exitcode, intack.source, exitinfo2);
++        nestedsvm_vmexit_defer(v, exitcode, intack.source, exitinfo2, 0);
+         return NSVM_INTR_FORCEVMEXIT;
+     }
+ 
+diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
+index bfca1eda4af..8b1ae241d46 100644
+--- a/xen/arch/x86/hvm/svm/svm.c
++++ b/xen/arch/x86/hvm/svm/svm.c
+@@ -1621,7 +1621,7 @@ static void svm_do_nested_pgfault(struct vcpu *v,
+     case -1:
+         ASSERT(nestedhvm_enabled(v->domain) && nestedhvm_vcpu_in_guestmode(v));
+         /* inject #VMEXIT(NPF) into guest. */
+-        nestedsvm_vmexit_defer(v, VMEXIT_NPF, pfec, gpa);
++        nestedsvm_vmexit_defer(v, VMEXIT_NPF, pfec, gpa, 0);
+         return;
+     }
+ 
+@@ -2564,7 +2564,7 @@ void asmlinkage svm_vmexit_handler(void)
+         enum nestedhvm_vmexits nsret;
+         struct nestedvcpu *nv = &vcpu_nestedhvm(v);
+         struct vmcb *ns_vmcb = nv->nv_vvmcx;
+-        uint64_t exitinfo1, exitinfo2;
++        uint64_t exitinfo1, exitinfo2, nextrip;
+ 
+         paging_update_nestedmode(v);
+ 
+@@ -2589,6 +2589,7 @@ void asmlinkage svm_vmexit_handler(void)
+              */
+             exitinfo1 = vmcb->exitinfo1;
+             exitinfo2 = vmcb->exitinfo2;
++            nextrip = vmcb->nextrip;
+             nv->nv_vmswitch_in_progress = 1;
+             nsret = nestedsvm_vmexit_n2n1(v, regs);
+             nv->nv_vmswitch_in_progress = 0;
+@@ -2596,7 +2597,8 @@ void asmlinkage svm_vmexit_handler(void)
+             {
+             case NESTEDHVM_VMEXIT_DONE:
+                 /* defer VMEXIT injection */
+-                nestedsvm_vmexit_defer(v, exit_reason, exitinfo1, exitinfo2);
++                nestedsvm_vmexit_defer(v, exit_reason, exitinfo1, exitinfo2,
++                                       nextrip);
+                 goto out;
+             case NESTEDHVM_VMEXIT_FATALERROR:
+                 gdprintk(XENLOG_ERR, "unexpected nestedsvm_vmexit() error\n");
+diff --git a/xen/arch/x86/include/asm/hvm/svm-types.h b/xen/arch/x86/include/asm/hvm/svm-types.h
+index 3475ed6a06d..81b997a15f7 100644
+--- a/xen/arch/x86/include/asm/hvm/svm-types.h
++++ b/xen/arch/x86/include/asm/hvm/svm-types.h
+@@ -74,6 +74,7 @@ struct nestedsvm {
+         uint64_t exitcode;  /* native exitcode to inject into l1 guest */
+         uint64_t exitinfo1; /* additional information to the exitcode */
+         uint64_t exitinfo2; /* additional information to the exitcode */
++        uint64_t nextrip;   /* NextRIP to report to the l1 guest */
+     } ns_vmexit;
+ 
+     union {
 -- 
 2.49.0
 
