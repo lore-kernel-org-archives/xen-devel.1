@@ -2,48 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C862B606A32C
-	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2026 16:08:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A4506606A320
+	for <xen-devel@archiver.kernel.org>; Fri, 20 Nov 2026 16:36:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=epam.com header.i=@epam.com header.a=rsa-sha256 header.s=selector1 header.b=cVjm9n8Q
-Received: from list by lists.xenproject.org with outflank-mailman.1498302.1696137 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=selector1 header.b=I4I0Z+rB
+Received: from list by lists.xenproject.org with outflank-mailman.1498334.1696146 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xUR9w-00031x-4T; Fri, 20 Nov 2026 16:08:20 +0000
+	id 1xURas-0007LW-5k; Fri, 20 Nov 2026 16:36:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1498302.1696137; Fri, 20 Nov 2026 16:08:20 +0000
+Received: by outflank-mailman (output) from mailman id 1498334.1696146; Fri, 20 Nov 2026 16:36:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xUR9w-00031q-18; Fri, 20 Nov 2026 16:08:20 +0000
-Received: by outflank-mailman (input) for mailman id 1498302;
- Fri, 20 Nov 2026 16:08:18 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xURas-0007LP-2K; Fri, 20 Nov 2026 16:36:10 +0000
+Received: by outflank-mailman (input) for mailman id 1498334;
+ Fri, 20 Nov 2026 16:36:08 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Mykola_Kvach@epam.com>) id 1xUR9u-00031k-H1
- for xen-devel@lists.xenproject.org; Fri, 20 Nov 2026 16:08:18 +0000
+ (envelope-from <ross.lagerwall@citrix.com>) id 1xURaq-0007LD-ET
+ for xen-devel@lists.xenproject.org; Fri, 20 Nov 2026 16:36:08 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xUR9t-0063AC-P0
- for xen-devel@lists.xenproject.org; Fri, 20 Nov 2026 17:08:17 +0100
+ id 1xURap-009teX-Qq
+ for xen-devel@lists.xenproject.org; Fri, 20 Nov 2026 17:36:07 +0100
 Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Mykola_Kvach@epam.com>)
- id 6b007071-2eae-0a2a0a5409dd-0a2a4505823c-0
- for <xen-devel@lists.xenproject.org>; Fri, 20 Nov 2026 17:08:17 +0100
-Received: from [52.101.70.98]
- (helo=AS8PR04CU009.outbound.protection.outlook.com)
+ (envelope-from <ross.lagerwall@citrix.com>)
+ id 6b0076e9-e002-0a2a0a5209dd-0a2a4505dd3c-28
+ for <xen-devel@lists.xenproject.org>; Fri, 20 Nov 2026 17:36:07 +0100
+Received: from [52.101.57.68]
+ (helo=BN8PR05CU002.outbound.protection.outlook.com)
  by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Mykola_Kvach@epam.com>)
- id 6b007071-4cb1-0a2a45050019-346546626b00-3
- for <xen-devel@lists.xenproject.org>; Fri, 20 Nov 2026 17:08:17 +0100
-Received: from DB3PR0302MB9208.eurprd03.prod.outlook.com
- (2603:10a6:10:430::13) by DBBPR03MB7113.eurprd03.prod.outlook.com
- (2603:10a6:10:208::5) with Microsoft SMTP Server (version=TLS1_2,
+ (envelope-from <ross.lagerwall@citrix.com>)
+ id 6b0076f5-4cb1-0a2a45050019-34653944a145-3
+ for <xen-devel@lists.xenproject.org>; Fri, 20 Nov 2026 17:36:06 +0100
+Received: from CH8PR03MB8274.namprd03.prod.outlook.com (2603:10b6:610:2ba::5)
+ by SAAPR03MB282009.namprd03.prod.outlook.com (2603:10b6:802:301::24)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.639.12; Fri, 20 Nov
- 2026 16:08:15 +0000
-Received: from DB3PR0302MB9208.eurprd03.prod.outlook.com
- ([fe80::f257:38e:c0af:df28]) by DB3PR0302MB9208.eurprd03.prod.outlook.com
- ([fe80::f257:38e:c0af:df28%5]) with mapi id 15.21.0639.011; Fri, 20 Nov 2026
- 16:08:15 +0000
+ 2026 16:35:30 +0000
+Received: from CH8PR03MB8274.namprd03.prod.outlook.com
+ ([fe80::ebe2:32c1:d2be:a096]) by CH8PR03MB8274.namprd03.prod.outlook.com
+ ([fe80::ebe2:32c1:d2be:a096%4]) with mapi id 15.21.0639.011; Fri, 20 Nov 2026
+ 16:35:30 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,336 +52,243 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Mh87b3xaANhCyI/pB7J8k11zR5BMoXGTaSHzBQ6as9j3cST3CuivcKM0UEf4MzigxNYr2F0JtQpj3zqL5drAgs+/5uOIjBSkzc5iSfLDmy4a1lL9Uj9Mwdq/7lFIVUN+QHGqszV8jGOYaRwS6FXj0jLz8spkO6qQzy/htDTarY7GFl1APTO7cATVk/eJle4wLyaoV9DCLLshM4hayAzXVxijfIGRpYZc5tpqCalqTtGZs56LNiugGEowiN6cBNKGYknLQoVxPUSNxIJmVolVKw6x3oIP+ubRTURvnarA6qwKlm8FRRJ+8tlLufr8kdJPp0W9BJdi5jo1IP6BAF6O6A==
+ b=XlOrN7Kcp8XU9vWbbmeavx7nIDsAMmzMevGNQk6UP5vHx8xwV5KJEoJnJRWuZ8H24tND779rDkuE3vrHySvmJ4vZn1P4HrcqghHlMhSnoHqrLf/gGZ6SvED7bOdjJS2d3Upr29MFoZI3HsIx3j3cBKi1yNAEjY6rYrX8IaAU2c8xECumfFt39h2wYgcEjAGOKKZfjD4Bw2G23eYr0UqqI9gtx0HM5W0eDqDrzwKn3ZXQ7j1d93PCocuMpYRrIT/a15LJZcnlUJcTZUOE248QvwRWiQsYag5zgzS36CwCoHRaacSWkwkzzfF6lZZmuKo7FdHAeFp3KZL+Q+1JtcMZIA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+SGl0uO3IilJGbFkVZBFXh9Xw3BZJkYmMsPYboFSYtk=;
- b=NgrEAtppYk6Jbc2HinUSMilFmO3pNxqNaXoBuo/OMFFLtKt678xEI7n+Ygx4MLWfEq8E6j4j2DuydvARUFqf6/LY8xFCige26S4LrBdSfIQktl9e1lm7sBp2Be9C37V93k0WlNfD64lfpxvuCjnP5Fer1MBwo5H5Y/yF8kAIZWTi0LGCO+AoILXBiColwHTc1uUT+KYh8pWN0bCSvpYF9W1z5aXOPVfzbJQWeMt4IOWixJHawm88L9mjAhEOvbvY9UUOxeyX0MGiArASeXmR3YjocEVKdGDUE3thwLlDLuBTwyCgu1qM+2xy0V+OR6WuXmSfHIFlDWnqWzMJ5ogkhQ==
+ bh=yTeqJmnCBhEKJWbkrtvtJBnxbAcpt2zFU1Mn89XlmXw=;
+ b=YyRWlgB95358Lgci9hzrVYbOV5OB9d9MkCzGerxCrROMhdbAwMTRvz5uwW9GnuWBLUPNhyu+M4gsji/xM1NSWhwka82/Pch9/b/nWytxAHmcWghclEiK+KSGzbF+bOukpPEJzyUTfEW396O35V2ARyAKi9WVdSfLQmaC31TX2xz1JrUrJBprOmR5OgW8BJFVb17tnzw804enqckK8O8N38nWnM5Ct+RPASMlRUgyZN9iR5/pf4uF7goXWRa6PreZUpLyzBOuPNsOxFVreCwJ04kIlM/wqHSNZt8mukS6jg1cev5W82XOibwlk72ZKLW6QTWW0ktitdQfHU0CQ2da3g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+SGl0uO3IilJGbFkVZBFXh9Xw3BZJkYmMsPYboFSYtk=;
- b=cVjm9n8QlKR5eNjUJjowm+DBVzYyZdLlQX9h4dyFieOrBHS6F2fapqWFHhbr5CtNfMU1TtCmG/0KQRUGA3BuWMUlsyx4TsICePcWUgsYFUeCdWNjVROmkH13b1fYtDBNLxnpLpbCt4ygTX64dVhe5hU1jnQpvXOioJou/gzoBjWxLiSAIacX965d+xDc+MVEsohGltEiGSyXY/HdmnaskNC5m83SU5gVHarJNbqOufrYJk0m6oVut2uvDj90vmfSgpe4L024Tj4cfMADOKSCduhyjwyMUfLnmiysLI3rIVQN6vMzlfIpOhCzZkjIirGHXbsg7u8s2jzRkFGwwIcHQQ==
-From: Mykola Kvach <Mykola_Kvach@epam.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
-	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, Michal Orzel
-	<michal.orzel@amd.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
-	<anthony.perard@vates.tech>, Jan Beulich <jbeulich@suse.com>,
-	=?iso-8859-1?Q?Roger_Pau_Monn=E9?= <roger@xenproject.org>, Teddy Astie
-	<teddy.astie@vates.tech>, Dario Faggioli <dfaggioli@suse.com>, Juergen Gross
-	<jgross@suse.com>, George Dunlap <gwd@xenproject.org>
-Subject: [PATCH v2] xen: handle domain_shutdown() return values
-Thread-Topic: [PATCH v2] xen: handle domain_shutdown() return values
-Thread-Index: AQHdeQlZ+G+2VicjqkaZFs1q+PJATg==
-Date: Fri, 20 Nov 2026 16:08:15 +0000
-Message-ID: <20261120160804.230032-1-mykola_kvach@epam.com>
-Accept-Language: en-US, uk-UA
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DB3PR0302MB9208:EE_|DBBPR03MB7113:EE_
-x-ms-office365-filtering-correlation-id: 6fe69ee4-7004-4550-e03e-08df47207c0e
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam:
- BCL:0;ARA:13230040|1800799024|366016|376014|7416014|23010399003|3023799007|18002099003|260925021311599003|260925022911599003|260925021911599003|261009223027099003|261021121427099003|261021123027099003|261022075727099003|261022105027099003|261028144727099003|261026140227099003|261026121527099003|56012099006|10067099003|261102123227099003|11063799006|5023799004|38070700021;
-x-microsoft-antispam-message-info:
- Nvp70TWZz2QMaZnyDimBRaOjBWswt1ZhXDaatK/87jOgeWkZECkifAo6kAT+8UzVOwjwZYiO6MRliAUYlYe+fa0I4BN58xNpmqDoYtLwOO2HWhpihjK15Rg0aGabZFFAexFMKg2tt37aPOjQRP3NbTB1O+WIwYbQ+iJaiQay41SxgTPehL2ZyZPoryoW1zRew6yO91zSXPX/VrnMgYu1VqfC+41qGcF78Tfi0gClJuuXA3MQmH8S7NS1d/FE0oh25rEPq9RYhxoapIqiICboefM03bdSnBUP6lDQm9pVEtzxLCe5DXQ2S7pbhnAYxHzhHlekU4+TEDz6C/IXkGCiKkNwJMzj4nEe6u0ZPmBH8cNXk0rbNkIuDF74PQVLR2qhC8naJLr5O3fqzsYfEzkoFy4isLyyNfSgAoNEgt6M/vIT+bmMjUeTNNNJk64Ew7IPQzLzPTzGxeLEk3faXh0Wp10ENHkgnIr8hTQRSxW6esn/bh9CvnMNIouysnclnwKNGG0icJnu9W1g/bbyvUWOPgeTkLBMRGoaFGOsegzKuI9lGOEvbJCgAPVYYqQZkWcAB/f907IdRfLM2iyZYZwTxkcklHGeo+YDLmmnS9fwMB9XcIvAS+LgXiYJqJA3IFrRHIuLskIviFT/ToG47VGGYICv1N2fjRXCPCYLQAPHK78=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB3PR0302MB9208.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(7416014)(23010399003)(3023799007)(18002099003)(260925021311599003)(260925022911599003)(260925021911599003)(261009223027099003)(261021121427099003)(261021123027099003)(261022075727099003)(261022105027099003)(261028144727099003)(261026140227099003)(261026121527099003)(56012099006)(10067099003)(261102123227099003)(11063799006)(5023799004)(38070700021);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?KSnLwpM5ecABh58RjhGje9wtE7N5ADjs2r9pCrea1rdF1ZbpEl2ZFQn6NF?=
- =?iso-8859-1?Q?r6vuGpVi0irNFCuAtQxxr5LKpGBLkmgGLdpQaBltQNxU8aFhxd3I5DHpeI?=
- =?iso-8859-1?Q?a69670zFApEl+QjzOsDCCdLLbfMqBkVjjaQw/oZoV3PA7A/jEOTkXO27TI?=
- =?iso-8859-1?Q?s2KIjPPu/PJZzWA8vAtYIWQYdpQkmo6CZ5sXmhpce61YPoZYJ68ptIcTYG?=
- =?iso-8859-1?Q?JuPcT74vDOwG+jdaGrLWZG8TXH4BQCSNKzkqIvXszVM3KqkplqvGNglJGA?=
- =?iso-8859-1?Q?LcbPVz4fRDfsCYjPw9bmBRaAaDEEpV2OKLRd3EtpRgMWSi+1Ccg6rtebVs?=
- =?iso-8859-1?Q?+FARn+vfsT2CwHzNDPxwlObDp0XOWM7bvwmF242lm5vMR7IPwGL/zwuE/s?=
- =?iso-8859-1?Q?WUTVzwdjV5pXHNPrV8xCbiUUPSNPN2P6d8LzELg8zSlcFb/icPH3L6OBB4?=
- =?iso-8859-1?Q?afcwNkvWaZ5k6dGkdFg3tzpFqUiO5MC5w/hWvZ0TNEw2skUZ0aAioKq2MZ?=
- =?iso-8859-1?Q?XEWFyOE2y+PsDNk99FAhIs+pWKBihjctthzTd3JEgF3UkCYXMOosP0eNCg?=
- =?iso-8859-1?Q?Cqj9VaTt/b54ouXqpzyvwBQjgmQlolIijhDQTs38Cq+ajIFtktiSOZPeHd?=
- =?iso-8859-1?Q?RlyrBCWlBUwSzJ1ZMOZfRS8zcfGH6tAb2IGHochmLAFQuIphF5+9pFPZkC?=
- =?iso-8859-1?Q?HedkIGURJLNNmBkvhLyLZWCIWmfK/fJF2gLBCWTP0fTEbOTXxI1yLB/F9i?=
- =?iso-8859-1?Q?pda4pWYLgNiy7PysTCovUmDWq4qd6zWb8Y9Xi2JAKnejTeY5wwc9/09eXB?=
- =?iso-8859-1?Q?ioSVaKPFTjjMWfTuqJyFy7etJYtu9WRUzlgBXnxVGHh3xUVjSZUYg/XNpI?=
- =?iso-8859-1?Q?+IXpoMqpNjfuXPy6XKbPrGvcDVlQN5CXKlKQyL+f7YExYa3+ZEP1bQK3Ho?=
- =?iso-8859-1?Q?zhns6tXkTMOWgyWwq29r37BHc5MTwDvbGKeNTD01qNWEjRghNta/njj6YG?=
- =?iso-8859-1?Q?qStC8JJ43ftufHPxjcwqT6c32N2RXCDs/ERfAp4hbcLMIXgVD7vgi25YE8?=
- =?iso-8859-1?Q?Qz7TsCmAkqVj7T2AJvauM/8ZzfomkiOjuAxQDZChELeBny7aspoRyqvJ5f?=
- =?iso-8859-1?Q?60yTqBLTkg3OZI0of+zBcJ2gMesMAYOPTtdYmef5+h5hqe7hOYUzPxyvtW?=
- =?iso-8859-1?Q?6s27CAS8fQMCs6m/nxyulEWMZFXxC3zqwf5yvvbyX/mJLYy9y2aqGIZ+5v?=
- =?iso-8859-1?Q?2jQV9ySmII4Cpul4B5JxawxaUgGSKSnsmzZu4iwa0SSdjQMpUsxy9z5nK2?=
- =?iso-8859-1?Q?OCSByT5HxZb/DmhT779FsJEWktkbvvTilcqDoOqkGfW5G+8r1rsCHqGdxr?=
- =?iso-8859-1?Q?rKXgg20PmeOptuESs+EMNJ95xWDY1Efwu3yVfd7meT512FaZdZM4f3A+cA?=
- =?iso-8859-1?Q?TGtaRFsuEGkPj1f5Ex5+3mVBDjaBgp42YO5dc3plu4x7f443+YZh8gT8ic?=
- =?iso-8859-1?Q?b6bVMJKkxCHLPsJMp6EPHAcz3v4P4EXLhQy/DgLtqJGavyF+0j3XCyonB8?=
- =?iso-8859-1?Q?anhk1aHMMwPzlVixn9qzmjqdP8jd1CR9gENdH3pBCA36hps5jvkFweVE+S?=
- =?iso-8859-1?Q?TRvCbFFS4erpBTM7hB6tOCPupdKA+rA/5J4Jw9ro+M5RuKlcJqm/gAm98p?=
- =?iso-8859-1?Q?n/OCEbTncLhTDEfo4LUH46VGEagJuxgCOsDzlp1V2HCIw/23jpNiU/8atc?=
- =?iso-8859-1?Q?gZdtly36DTbybOw+IYkCERYn+kV/zH36RExeZLVEgv1GmKBaeEswBBk7V4?=
- =?iso-8859-1?Q?NcRN+yJuPg=3D=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+ bh=yTeqJmnCBhEKJWbkrtvtJBnxbAcpt2zFU1Mn89XlmXw=;
+ b=I4I0Z+rBDpoO7XDEET+mBA7s9cLjnQlR9+/v9UYurxZNQr4cnoghzVCkP0hiApoV7SuSaabJpc8juodpfZa4EMlkK5HP32a/dsjQf6lcIWhSgxj4roFpSFg3eaOxmulCGcwd7zpJbp1zs0B4u5edUl5eX4yK7gPigJV2U/dVqCU=
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+From: Ross Lagerwall <ross.lagerwall@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Ross Lagerwall <ross.lagerwall@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Teddy Astie <teddy.astie@vates.tech>,
+	Jason Andryuk <jason.andryuk@amd.com>
+Subject: [PATCH v1 1/2] x86/nestedsvm: Handle CR8 accesses with V_INTR_MASKING=0 correctly
+Date: Fri, 20 Nov 2026 16:35:02 +0000
+Message-ID: <20261120163503.1907256-2-ross.lagerwall@citrix.com>
+X-Mailer: git-send-email 2.56.0
+In-Reply-To: <20261120163503.1907256-1-ross.lagerwall@citrix.com>
+References: <20261120163503.1907256-1-ross.lagerwall@citrix.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: LO4P265CA0210.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:33a::13) To CH8PR03MB8274.namprd03.prod.outlook.com
+ (2603:10b6:610:2ba::5)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH8PR03MB8274:EE_|SAAPR03MB282009:EE_
+X-MS-Office365-Filtering-Correlation-Id: d02ae264-fc3e-467c-54a4-08df47244a5d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|23010399003|1800799024|366016|376014|261026121527099003|261021123027099003|261021121427099003|261022105027099003|261028144727099003|261026140227099003|261102123227099003|5023799004|11063799006|56012099006|10067099003|261009223027099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	7quLY40GGPxm1SUOQs7jxWpCuPGiWDNrxvjmhyR/OgjTS85n2bjrW2r2rXu+82hg4Pu3FSXSPgafg9OdYvLGdPEtWl0QO5uj9ifFSgxqBmAWWbjmhLryvtP1l62HXJiau5YGrJzwsYhY9Ih2L00pyw/IyyMrwAc1rND1d+oIZNUH2S/LEGs8RhRHygD5JFhFIl9t/GCnn7pyPsfdfqrPs3Izp8gXfmaOHFag8E9t9zIe6+JGGp18oigBta6bqUJ9ZGhKw+LlSyaOyjoiBSZ52gIheHsjzJ1iAwmqjrGb+n6o7PBehYkO98ah4Uz4APV98UohFAgpxsR5kuGvII+1lgcMwSIU3PNIdQ9qYQEN3YDiicU2xVJSzhEMS/2WXNFF+vaOJ/IygvZaZIUEGrCJTPXg4FprhK7Zxs0qm5ABUApG+LjeAnU4m5fSKo9IBMkDUmcKUTbVNswsP+tr7AtdaaKoeVaoJ+jkWQFNzwObqL3+sImrampo2Mz6yoYO2yvFB3/j5aFy/mqHbxRgM0EAwXxTrxmFjXg/vojcOdpFdN9LtzRUjvlnoos+HgQ9jCqC/2XlL4qWFzwrRkbdWZvHwdqg7OnjcvM0FVe+lD8g481Of4U8ZRjZzDeQrAXkCv5VkaZvGxJOx6t9nnAJ9WxrEL3PsOZFWnrZDLQoySTfjbw=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8274.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(366016)(376014)(261026121527099003)(261021123027099003)(261021121427099003)(261022105027099003)(261028144727099003)(261026140227099003)(261102123227099003)(5023799004)(11063799006)(56012099006)(10067099003)(261009223027099003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?Tu8d9KxoPjYGonC+n6UxBQvDU+oi1wMBYJ58Sw1PxvJocgiXx9RDvy6X7To0?=
+ =?us-ascii?Q?V6eHXwD5rwPCZLh/sbGnAtl53ZE/PPSPdOe4QwnircRTgf54wbdxxZOjHUkC?=
+ =?us-ascii?Q?C8AYnm+UzyRuUkM7WCRXqg5Zt14t+heLTF8iZBWAPF3Z+XsicAGgD3KtPVA5?=
+ =?us-ascii?Q?HnlX9suGuh/LMs7EF0Qye2VMjCxrxitRJlqIQ004C4lYX6MY+c3utRp+yH//?=
+ =?us-ascii?Q?w+cJgJDWooH8K2SbgWpDNxFTG8M65waF9EokNbennPi1uEripR1O/2ya1jFL?=
+ =?us-ascii?Q?Pr2sD8LYyMBPrAOof+j9LRA42O6GzIRa6J+7/6j3DQYH05I0zYGqVUy+cqxL?=
+ =?us-ascii?Q?hvNeSWWWqVOWgRwVJkCguPU4joNLKiptvHXS/Mgrtt4eC4pxiMNb8rhzHtsQ?=
+ =?us-ascii?Q?TEljNlTWkIgY3nLg1mjnv10fZ+wQdgn4m9+tT48CNMVRpqEX5Q51ZztM2GD7?=
+ =?us-ascii?Q?PLmkgdxXr3aatHPAEtBfYWY+3qOxCNKtYElZUqiloIY9tIgS+J+jzsH701b5?=
+ =?us-ascii?Q?WuKBoI+0GZpRv0YbSOLAMQB8NyccL3S0/dwn4MBpptze3YeQ4LBjRFG4HCMT?=
+ =?us-ascii?Q?G3778EiJvMGMBvX+LsIHuhGx4EEW1BZAIogDbTj5YuJMiMUrj8SuZpzqJArC?=
+ =?us-ascii?Q?XxFHGbBNUC83+YC+x3sTnMwWV7GBllzr7ZrCt79NUdGZUUHMDgixH7dDD3pH?=
+ =?us-ascii?Q?RIb2mcHBfZ7AMFwT4Gau0B5hYqLmmrFjnquSWaIBLv71BjEw6vc3ofW5BUUt?=
+ =?us-ascii?Q?fn8lU2M3Q6KN1ak3lwzfU7b3xbUERqImBKrvnyR3zmmDQa5UehYTHsOui7jm?=
+ =?us-ascii?Q?dQASlPjdWqlLo+lqY0aV3NeYSrvoAauTmclFb/RmBED3DlVpbnr9hwTzDoul?=
+ =?us-ascii?Q?VqWrHnIO/gvJK7hdq9iuQSv2Ist9yQcbUU3MAa8Af+GPWnog6OEGvEQADOuV?=
+ =?us-ascii?Q?QkxgdWMQ/PVHioxOejwx9hF3M84tSdXzLGmvUP4cK6ckWLFOWe7vIDQvbWyE?=
+ =?us-ascii?Q?17SgFPsyWb3j5H814S3ofb1kMyF7pEZZQvvQi5uxuvfwuNGLR/fVa91ccb0t?=
+ =?us-ascii?Q?xiLlTsDUOAiJayoXwIwrlu+jSyP3RkW0r29onP/Zcy6kqTlaDQSdqWYR035G?=
+ =?us-ascii?Q?9wtZfQGGn463bxrXeny5sHicvfmgF3nW36zivanaBZM9rwSSahv3Jtu2u5Ap?=
+ =?us-ascii?Q?CwbpaAy4WaUWiya95C2z9totob+sg0Nbh/MY5kwS1+8JH2knoOP9+7juq1kT?=
+ =?us-ascii?Q?edrLybvsIOGuC4ZseJbh10agI9WTLM2qWcd3Qgn8vICww7e5oBZvkqYhxDuc?=
+ =?us-ascii?Q?nS9ZLqPXDLSwuqftIz232GNFKeKM/rsv4lkCq9+XqUPo3OlrEPgKNyBpiyT+?=
+ =?us-ascii?Q?qDATt3Cj92V7aByZVX5OfoIA36va/VN91Ky18dTAaS3SY22qefB4L/KZbmky?=
+ =?us-ascii?Q?BlKh9ueKts6V/QuL6tAuUH+ZsFx46TwLQjKCo8aXyGlx+IUySVydnbj/kXgk?=
+ =?us-ascii?Q?3McP7/NPvLh9KXXWFfXhPnks3RJS6nlmAxS3p6RjHAlBtbdB4V6DT7imUhCS?=
+ =?us-ascii?Q?A4YISA7v8twzC1IzvXrAh2CPpIfyL2Tfmu75Ecc+rZtT5/qQFfEqSBuJOQTZ?=
+ =?us-ascii?Q?ZOVTAfv+2rSQgXjt5xeTte/ElgAUC+UGlH8vP+W+5e05kbl5JkP0ZTPxouT+?=
+ =?us-ascii?Q?eTwiMHncb6+H6sIvWBVfC1lq520ufj7moT0KDXsbdpD/aJPhSubndbO6McwF?=
+ =?us-ascii?Q?+rLL7AmI2tnVeGjohhj3g/7hWbP2ZNg=3D?=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d02ae264-fc3e-467c-54a4-08df47244a5d
+X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8274.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DB3PR0302MB9208.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6fe69ee4-7004-4550-e03e-08df47207c0e
-X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Nov 2026 16:08:15.5297
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Nov 2026 16:35:30.2601
  (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: +Ub4eTTG0jCI4myIv0VOfNickokP4+ADNGGVWCxUq1ZufREH9bFll9Lt6t65f6psF+y+C5NzmsrIULBdRV6rLA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR03MB7113
-X-purgate-ID: tlsNG-c201ff/1795190897-732B32A1-31EDF89E/0/0
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: AYjhp3Oee/mrPI3EUR6PT8FX5bDAyQzjBV/rHjpK6Qbv5wY4YDSnJWz8u0c0pgUfFi47fnVC2ERT8/XALPWEGgFnAodAOZnv4oIqoOTc1xY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SAAPR03MB282009
+X-purgate-ID: tlsNG-c201ff/1795192566-F70B22A1-FD4BB644/0/0
 X-purgate-type: clean
-X-purgate-size: 8267
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+X-purgate-size: 4576
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
-	version=4.0.1
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Ten callers discard the value returned by domain_shutdown(). MISRA C
-Rule 17.7 requires the return value of a non-void function to be used,
-and Directive 4.7 requires callers to test returned error information.
+When V_INTR_MASKING=0, reads return the value in the APIC TPR and writes
+update the value in the APIC TPR and the V_TPR.
 
-Return the status to guests using the legacy SCHEDOP_shutdown hypercall.
-In PV shim mode, a cancelled suspend or a checkpoint returns 1. The
-legacy handler loses that result and returns 0, telling the guest it
-has resumed in a new domain.
+To implement this for Nested SVM, intercept reads and writes of CR8 when
+V_INTR_MASKING=0. For reads, simply return the value in Xen's emulated
+APIC. For writes, update the value in the emulated APIC as well as
+VMCB(0-2)'s V_TPR.
 
-Propagate the result from both remote shutdown operations. The explicit
-zero in XEN_DMOP_remote_shutdown dates from when domain_shutdown()
-returned void. Also propagate a failed poweroff from VCPUOP_down when
-the last vCPU goes down. On that path the shim has not taken the local
-vCPU offline, so reporting success would hide a failed request.
-
-On Arm, domain_shutdown() returns zero whenever it returns. Assert
-this in the PSCI poweroff and reset handlers so that a change to this
-assumption is caught in debug builds. Keep the call outside ASSERT().
-
-The HVM poweroff and triple-fault handlers, the domain crash path and
-the watchdog callback cannot return a shutdown error to a caller. Log
-these errors at guest error level. The configured triple-fault action
-can be suspend, so only a negative result indicates failure.
-
-Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
 ---
-Changes in v2:
-- Explain the MISRA rationale, the legacy suspend result and why the last
-  vCPU's poweroff result matters. Drop Suggested-by.
-- Use assertions for PSCI SYSTEM_OFF and SYSTEM_RESET on Arm.
-- Use guest-class error messages for shutdown failures. Include the target
-  domain when it can differ from the current domain, and the timer ID on
-  watchdog expiry.
-- Log poweroff failures in HVM release builds. For triple faults, report
-  only negative results, since a suspend action can return 1.
-- Drop the unreachable return at the end of do_sched_op_compat().
+ xen/arch/x86/hvm/emulate.c       |  1 +
+ xen/arch/x86/hvm/hvm.c           |  1 +
+ xen/arch/x86/hvm/svm/nestedsvm.c |  3 +++
+ xen/arch/x86/hvm/svm/svm.c       | 30 ++++++++++++++++++------------
+ xen/arch/x86/hvm/vmx/vmx.c       |  4 ++++
+ 5 files changed, 27 insertions(+), 12 deletions(-)
 
-Previous RFC:
-https://lore.kernel.org/xen-devel/95dacecdce8f8417562548e16a4d3e11c41a3f27.=
-1773923242.git.mykola_kvach@epam.com/
----
- xen/arch/arm/vpsci.c    |  8 ++++++--
- xen/arch/x86/compat.c   |  5 +----
- xen/arch/x86/hvm/dm.c   |  3 +--
- xen/arch/x86/hvm/hvm.c  | 12 ++++++++++--
- xen/common/domain.c     |  9 +++++++--
- xen/common/sched/core.c |  8 ++++++--
- 6 files changed, 31 insertions(+), 14 deletions(-)
-
-diff --git a/xen/arch/arm/vpsci.c b/xen/arch/arm/vpsci.c
-index 8c7a70c7a907cf96252ae60cabb3927e6a972a8a..ae92a336ede70e1e519703efb6d=
-0e8f23f7d3fbc 100644
---- a/xen/arch/arm/vpsci.c
-+++ b/xen/arch/arm/vpsci.c
-@@ -210,13 +210,17 @@ static int32_t do_psci_0_2_migrate_info_type(void)
- static void do_psci_0_2_system_off( void )
- {
-     struct domain *d =3D current->domain;
--    domain_shutdown(d,SHUTDOWN_poweroff);
-+    int rc =3D domain_shutdown(d, SHUTDOWN_poweroff);
-+
-+    ASSERT(!rc);
- }
-=20
- static void do_psci_0_2_system_reset(void)
- {
-     struct domain *d =3D current->domain;
--    domain_shutdown(d,SHUTDOWN_reboot);
-+    int rc =3D domain_shutdown(d, SHUTDOWN_reboot);
-+
-+    ASSERT(!rc);
- }
-=20
- static int32_t do_psci_1_0_system_suspend(register_t epoint, register_t ci=
-d)
-diff --git a/xen/arch/x86/compat.c b/xen/arch/x86/compat.c
-index 217b5b1fcc41700cde830a8c74f4c230d0e1d58c..ec3f253a8b46834932e05b53f7f=
-a7022774f187e 100644
---- a/xen/arch/x86/compat.c
-+++ b/xen/arch/x86/compat.c
-@@ -39,14 +39,11 @@ long do_sched_op_compat(int cmd, unsigned long arg)
-     case SCHEDOP_shutdown:
-         TRACE_TIME(TRC_SCHED_SHUTDOWN,
-                    current->domain->domain_id, current->vcpu_id, arg);
--        domain_shutdown(current->domain, (u8)arg);
--        break;
-+        return domain_shutdown(current->domain, (u8)arg);
-=20
-     default:
-         return -ENOSYS;
-     }
--
--    return 0;
- }
-=20
- /* Legacy hypercall (as of 0x00030202). */
-diff --git a/xen/arch/x86/hvm/dm.c b/xen/arch/x86/hvm/dm.c
-index 91f6ca669b2b4304c8c25265253778538eac1109..7528bb5b2c60948c388e2739624=
-589dc8a5b0d49 100644
---- a/xen/arch/x86/hvm/dm.c
-+++ b/xen/arch/x86/hvm/dm.c
-@@ -551,8 +551,7 @@ int dm_op(const struct dmop_args *op_args)
-         const struct xen_dm_op_remote_shutdown *data =3D
-             &op.u.remote_shutdown;
-=20
--        domain_shutdown(d, data->reason);
--        rc =3D 0;
-+        rc =3D domain_shutdown(d, data->reason);
+diff --git a/xen/arch/x86/hvm/emulate.c b/xen/arch/x86/hvm/emulate.c
+index cd2831d34b44..57e1fa7e5a2a 100644
+--- a/xen/arch/x86/hvm/emulate.c
++++ b/xen/arch/x86/hvm/emulate.c
+@@ -2376,6 +2376,7 @@ static int cf_check hvmemul_write_cr(
+         }
+ 
+         vlapic_set_reg(vcpu_vlapic(curr), APIC_TASKPRI, val << 4);
++        hvm_update_guest_cr(curr, 8);
+         rc = X86EMUL_OKAY;
          break;
-     }
-=20
+ 
 diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 4334ff678d348f1002d5b509daeef2bf4057d78e..98deb2eefc5127ec13fdd610a6c=
-2686c39939bb4 100644
+index 4334ff678d34..6a2a76339be1 100644
 --- a/xen/arch/x86/hvm/hvm.c
 +++ b/xen/arch/x86/hvm/hvm.c
-@@ -1720,8 +1720,12 @@ void hvm_vcpu_down(struct vcpu *v)
-     /* ... Shut down the domain if not. */
-     if ( online_count =3D=3D 0 )
-     {
-+        int rc;
+@@ -2205,6 +2205,7 @@ int hvm_mov_to_cr(unsigned int cr, unsigned int gpr)
+ 
+     case 8:
+         vlapic_set_reg(vcpu_vlapic(curr), APIC_TASKPRI, ((val & 0x0f) << 4));
++        hvm_update_guest_cr(curr, cr);
+         rc = X86EMUL_OKAY;
+         break;
+ 
+diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
+index 366178ff54a7..eeb9363dc061 100644
+--- a/xen/arch/x86/hvm/svm/nestedsvm.c
++++ b/xen/arch/x86/hvm/svm/nestedsvm.c
+@@ -394,6 +394,9 @@ static int nsvm_vmcb_prepare4vmrun(struct vcpu *v, struct cpu_user_regs *regs)
+ 
+     n2vmcb->_cr_intercepts =
+         n1vmcb->_cr_intercepts | ns_vmcb->_cr_intercepts;
++    if ( !svm->ns_hostflags.vintrmask )
++        n2vmcb->_cr_intercepts |=
++            CR_INTERCEPT_CR8_READ | CR_INTERCEPT_CR8_WRITE;
+     n2vmcb->_dr_intercepts =
+         n1vmcb->_dr_intercepts | ns_vmcb->_dr_intercepts;
+     n2vmcb->_exception_intercepts =
+diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
+index bfca1eda4af5..1043f4a988a8 100644
+--- a/xen/arch/x86/hvm/svm/svm.c
++++ b/xen/arch/x86/hvm/svm/svm.c
+@@ -104,6 +104,15 @@ static void cf_check svm_cpu_down(void)
+     write_efer(read_efer() & ~EFER_SVME);
+ }
+ 
++static void svm_update_tpr(struct vmcb *vmcb, struct vlapic *vlapic)
++{
++    /* Reflect the vlapic's TPR in the hardware vtpr */
++    vintr_t intr = vmcb_get_vintr(vmcb);
 +
-         gdprintk(XENLOG_INFO, "All CPUs offline -- powering off.\n");
--        domain_shutdown(d, SHUTDOWN_poweroff);
-+        rc =3D domain_shutdown(d, SHUTDOWN_poweroff);
-+        if ( unlikely(rc < 0) )
-+            printk(XENLOG_G_ERR "%pd: failed to power off: %d\n", d, rc);
-     }
- }
-=20
-@@ -1750,12 +1754,16 @@ void hvm_triple_fault(void)
-     struct vcpu *v =3D current;
-     struct domain *d =3D v->domain;
-     u8 reason =3D d->arch.hvm.params[HVM_PARAM_TRIPLE_FAULT_REASON];
-+    int rc;
-=20
-     gprintk(XENLOG_ERR,
-             "Triple fault - invoking HVM shutdown action %d\n",
-             reason);
-     vcpu_show_execution_state(v);
--    domain_shutdown(d, reason);
-+    rc =3D domain_shutdown(d, reason);
-+    if ( unlikely(rc < 0) )
-+        gprintk(XENLOG_ERR, "Failed to shut down after triple fault: %d\n"=
-,
-+                rc);
- }
-=20
- void hvm_inject_event(const struct x86_event *event)
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index f3a2634d5f985e094236f81c49acbf6f9ebc8d58..9253c811b520977a691f831fa97=
-9eb0df135af95 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -1358,6 +1358,8 @@ int domain_kill(struct domain *d)
-=20
- void __domain_crash(struct domain *d)
++    intr.tpr = (vlapic_get_reg(vlapic, APIC_TASKPRI) & 0xFF) >> 4;
++    vmcb_set_vintr(vmcb, intr);
++}
++
+ static void cf_check svm_update_guest_cr(
+     struct vcpu *v, unsigned int cr, unsigned int flags)
  {
-+    int rc;
+@@ -170,6 +179,13 @@ static void cf_check svm_update_guest_cr(
+ 
+         vmcb_set_cr4(vmcb, value);
+         break;
 +
-     if ( domain_shutting_down(d) )
-     {
-         /* Print nothing: the domain is already shutting down. */
-@@ -1374,7 +1376,10 @@ void __domain_crash(struct domain *d)
-                d->domain_id, current->domain->domain_id, smp_processor_id(=
-));
++    case 8:
++        if ( nestedhvm_vcpu_in_guestmode(v) &&
++             !vcpu_nestedsvm(v).ns_hostflags.vintrmask )
++            svm_update_tpr(vmcb, vcpu_vlapic(v));
++        break;
++
+     default:
+         BUG();
      }
-=20
--    domain_shutdown(d, SHUTDOWN_crash);
-+    rc =3D domain_shutdown(d, SHUTDOWN_crash);
-+    if ( unlikely(rc) )
-+        printk(XENLOG_G_ERR "Failed to shut down crashed domain %pd: %d\n"=
-,
-+               d, rc);
- }
-=20
-=20
-@@ -2198,7 +2203,7 @@ long common_vcpu_op(int cmd, struct vcpu *v, XEN_GUES=
-T_HANDLE_PARAM(void) arg)
-=20
-         if ( !rc ) /* Last vcpu going down? */
-         {
--            domain_shutdown(d, SHUTDOWN_poweroff);
-+            rc =3D domain_shutdown(d, SHUTDOWN_poweroff);
-             break;
-         }
-=20
-diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
-index 10b6eecccd3b39cfdc684e434e6eb9cdcd707417..d3aca88cc832fe76fcb914aa870=
-eaa82aef1113b 100644
---- a/xen/common/sched/core.c
-+++ b/xen/common/sched/core.c
-@@ -1588,6 +1588,7 @@ static void cf_check domain_watchdog_timeout(void *da=
-ta)
-      */
-     struct domain *d =3D _p((unsigned long)data & PAGE_MASK);
-     unsigned int id =3D (unsigned long)data & ~PAGE_MASK;
-+    int rc;
-=20
-     BUILD_BUG_ON(alignof(*d) < PAGE_SIZE);
-=20
-@@ -1595,7 +1596,10 @@ static void cf_check domain_watchdog_timeout(void *d=
-ata)
+@@ -959,14 +975,7 @@ static void noreturn cf_check svm_do_resume(void)
+     }
+ 
+     if ( !vcpu_guestmode && !vlapic_hw_disabled(vlapic) )
+-    {
+-        vintr_t intr;
+-
+-        /* Reflect the vlapic's TPR in the hardware vtpr */
+-        intr = vmcb_get_vintr(vmcb);
+-        intr.tpr = (vlapic_get_reg(vlapic, APIC_TASKPRI) & 0xFF) >> 4;
+-        vmcb_set_vintr(vmcb, intr);
+-    }
++        svm_update_tpr(vmcb, vlapic);
+ 
+     hvm_do_resume(v);
+ 
+@@ -3069,10 +3078,7 @@ void asmlinkage svm_vmexit_handler(void)
+     if ( vcpu_guestmode || vlapic_hw_disabled(vlapic) )
          return;
-=20
-     printk("Watchdog timer %u fired for %pd\n", id, d);
--    domain_shutdown(d, SHUTDOWN_watchdog);
-+    rc =3D domain_shutdown(d, SHUTDOWN_watchdog);
-+    if ( unlikely(rc) )
-+        printk(XENLOG_G_ERR "Watchdog timer %u failed to shut down %pd: %d=
-\n",
-+               id, d, rc);
+ 
+-    /* The exit may have updated the TPR: reflect this in the hardware vtpr */
+-    intr = vmcb_get_vintr(vmcb);
+-    intr.tpr = (vlapic_get_reg(vlapic, APIC_TASKPRI) & 0xFF) >> 4;
+-    vmcb_set_vintr(vmcb, intr);
++    svm_update_tpr(vmcb, vlapic);
  }
-=20
- static long domain_watchdog(struct domain *d, uint32_t id, uint32_t timeou=
-t)
-@@ -2027,7 +2031,7 @@ ret_t do_sched_op(int cmd, XEN_GUEST_HANDLE_PARAM(voi=
-d) arg)
-=20
-         ret =3D xsm_schedop_shutdown(XSM_DM_PRIV, currd, d);
-         if ( likely(!ret) )
--            domain_shutdown(d, sched_remote_shutdown.reason);
-+            ret =3D domain_shutdown(d, sched_remote_shutdown.reason);
-=20
-         rcu_unlock_domain(d);
- =
+ 
+ /*
+diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
+index 3c7374a9ff42..53d50a1bb329 100644
+--- a/xen/arch/x86/hvm/vmx/vmx.c
++++ b/xen/arch/x86/hvm/vmx/vmx.c
+@@ -1874,6 +1874,10 @@ static void cf_check vmx_update_guest_cr(
+             hvm_asid_flush_vcpu(v);
+         break;
+ 
++    case 8:
++        /* Nothing to do */
++        break;
++
+     default:
+         BUG();
+     }
+-- 
+2.56.0
+
 
