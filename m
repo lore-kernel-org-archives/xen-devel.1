@@ -2,46 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3435B606A32A
-	for <xen-devel@archiver.kernel.org>; Sun, 22 Nov 2026 09:54:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 954E7606A320
+	for <xen-devel@archiver.kernel.org>; Sun, 22 Nov 2026 09:54:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=LIhYJXO8
-Received: from list by lists.xenproject.org with outflank-mailman.1499536.1696305 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=OW2+reAW
+Received: from list by lists.xenproject.org with outflank-mailman.1499544.1696341 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xV4HN-00057T-RC; Sun, 22 Nov 2026 09:54:37 +0000
+	id 1xV4HZ-0006Ab-7h; Sun, 22 Nov 2026 09:54:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1499536.1696305; Sun, 22 Nov 2026 09:54:37 +0000
+Received: by outflank-mailman (output) from mailman id 1499544.1696341; Sun, 22 Nov 2026 09:54:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xV4HN-00057M-Nt; Sun, 22 Nov 2026 09:54:37 +0000
-Received: by outflank-mailman (input) for mailman id 1499536;
- Sun, 22 Nov 2026 09:54:36 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xV4HZ-0006AN-3U; Sun, 22 Nov 2026 09:54:49 +0000
+Received: by outflank-mailman (input) for mailman id 1499544;
+ Sun, 22 Nov 2026 09:54:47 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <haseebashraf091@gmail.com>) id 1xV4HL-0004mg-VM
- for xen-devel@lists.xenproject.org; Sun, 22 Nov 2026 09:54:36 +0000
+ (envelope-from <haseebashraf091@gmail.com>) id 1xV4HX-00066H-5o
+ for xen-devel@lists.xenproject.org; Sun, 22 Nov 2026 09:54:47 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xV4HL-00ExLX-4z
- for xen-devel@lists.xenproject.org; Sun, 22 Nov 2026 10:54:35 +0100
-Received: from [10.42.69.5] (helo=localhost)
+ id 1xV4HW-008zYS-Ib
+ for xen-devel@lists.xenproject.org; Sun, 22 Nov 2026 10:54:46 +0100
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <haseebashraf091@gmail.com>)
- id 6b02bbc6-bab6-0a2a0a5309dd-0a2a4505c3ae-6
- for <xen-devel@lists.xenproject.org>; Sun, 22 Nov 2026 10:54:35 +0100
-Received: from [209.85.221.45] (helo=mail-wr1-f45.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6b02bb91-2eae-0a2a0a5409dd-0a2a4504dd18-46
+ for <xen-devel@lists.xenproject.org>; Sun, 22 Nov 2026 10:54:46 +0100
+Received: from [209.85.128.51] (helo=mail-wm1-f51.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <haseebashraf091@gmail.com>)
- id 6b02bbda-4cb1-0a2a45050019-d155dd2dc49f-3
- for <xen-devel@lists.xenproject.org>; Sun, 22 Nov 2026 10:54:35 +0100
-Received: by mail-wr1-f45.google.com with SMTP id
- ffacd0b85a97d-4a7b8abe209so1735413f8f.0
- for <xen-devel@lists.xenproject.org>; Sun, 22 Nov 2026 01:54:35 -0800 (PST)
+ id 6b02bbe6-b57f-0a2a45040019-d1558033c164-3
+ for <xen-devel@lists.xenproject.org>; Sun, 22 Nov 2026 10:54:46 +0100
+Received: by mail-wm1-f51.google.com with SMTP id
+ 5b1f17b1804b1-4bb606491faso12391375e9.3
+ for <xen-devel@lists.xenproject.org>; Sun, 22 Nov 2026 01:54:46 -0800 (PST)
 Received: from PKL-HASEEBA-LT.. ([39.36.59.78])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb8849e598sm218409605e9.8.2026.11.22.01.54.32
+ 5b1f17b1804b1-4bb8849e598sm218409605e9.8.2026.11.22.01.54.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 22 Nov 2026 01:54:34 -0800 (PST)
+ Sun, 22 Nov 2026 01:54:45 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,43 +52,43 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795341274; x=1795946074; darn=lists.xenproject.org;
+        d=gmail.com; s=20260707; t=1795341286; x=1795946086; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=RLiorzuc0P93TyP+5tAC8yc+LVzrxd1znALUxbig4V0=;
-        b=LIhYJXO8YkYcw0DWuVNlGXNqORzSvZWiovfe0sNnrWFxxFm/8jN2i+QZekToOgHyQJ
-         ZCq0RE+fW4f5Dk7CVVEHqhrC45VmAkR6CKCZ8fGXmZVvObvMKrJAlmuuoLXri6GAycFT
-         pIYWjOwGam3AIdV1jNcl8cUqHJKaqvTp6A25AkN+qW/nbszBKP0ikIu3VHKOR6VU7qzF
-         sGzaMWiJ+rCSRj9c08N7aPCMHBOlAENM816k0itHNLaV09tK1KPN+9gZtAMMid36J43/
-         ugiYmfRYnu5e1RIvd5XpIh7G+/S+Ex3aaSA2NPZRyA1qdHni5O4tFnOD0finTs6687QH
-         2ySg==
+        bh=uRWbLZw3/yEQ5PXPC7OpQnHirRM8EvYxh4g9KylG2S8=;
+        b=OW2+reAWCeotFmyMeKdQhb03XTSIA2kgaY3KfiVWtzi+1QRtbKNv+OXXVurq4MN2Po
+         Z3nMNMNNDChBInZCPsdxtlakEygID5StDUiOXmuin5OEergmCNX4VX0bo1A/t8yMJ5j8
+         NdqVPriIBJmZUr5NiSPDA5EGRMd4iGwuA5YL2sFlMxqKyLaLStycWj8/h6pcpZzl/ghP
+         97dyr8vPI4LdY8gTtLA89inGdA+nqmZxEy80RP/08Jvox5MtPR0yoKKfCm9F8K/xifVN
+         Bl3OW7bYHx0gDlAXopazZ7FHEaPsfzIBf+tMfgEA5pEzkRSh9vlx1I5u7b99TBczC3DX
+         FLew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795341274; x=1795946074;
+        d=1e100.net; s=20260707; t=1795341286; x=1795946086;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=RLiorzuc0P93TyP+5tAC8yc+LVzrxd1znALUxbig4V0=;
-        b=OanK3suIei0T3aC70tBFCU0yKLM3WtnHSOnnY8K/nZjBU7m9oNdMWZDY6wNMwLOiVj
-         gxb0gtDNYHMozoIqzp9moVmF526nSHKmogjhgAnx4G96Oj8zGOnBv8X6CXKZ97QBU5De
-         pK8XeiVROWlZdU4gLMAwLJrmH43qCOAChKGxVGOKHfNr3lbr7tgfX85xRgmmhZJnS2UE
-         lub2QTfbJtjXbHT0OQlyiz/U/zNjJDA1Dx7U20VPzU5ifqrXGs7qVfFQQ9Tw9xhfsRYZ
-         QKtlFs8f1qBFn3bOo+eeywQxeUK0z011C/NTuzoCJeuG3Y2NKuDzc/6uyHz1qPWHBHEA
-         Kzlw==
-X-Gm-Message-State: APuU4Z+63HArqqGJ/rvcVo9gVHC9yu5/lkXboieHR6nKJeqcYlfGe/7g
-	3bxgADsthVhBcXBtYB3uBAUaYbd3r/5j5Yj6ot44BXhTHgOkjPq2oGfgxEImn31S/g4=
-X-Gm-Gg: AZFdTZc1jMtq5ejhwhQrxkc6Yk7/CHd5RwfEm/9U3uf3TFVgn8su/dZBGmtraKJ2jtU
-	gUcKUanZungixXjwdpk3Hpdt///EFy8oG1moDstZfZ0R98x0oqR+Ol7kVu5ay2Op0PBxHJpUh0m
-	X67nFLkpwQM5fRrEi8iwoFmdFrSgTDx2lkhzYmO1Z7qxjG6NnN+4Za7HokG3lQpfVvOLFTy4t09
-	KUP6oyb89yAdxZUmGQ/KVYNSMWMxLOpZJwuKaqV0Mq23uUfFqwqyIqZ3aeCRdSooDKmv9QS2QE1
-	4SCTdvfHcXkk9Klu1ojgMiYtVUH4dkCflL/R3ngJV2x1eb+wSjEiodTJd+e1Rz+hXqSvcaf96kU
-	SASXUffPljvpieSA21/jReWwpPzW/QYSlr8WaLB0HxVsJV1xcymRSiX1JE8gCNCSHauw5DFqm33
-	nloGfg32e2KXf5J+jr9sAHoUe1jLmLrNUZgk/Gxb136mDcSrPDIRC+7NuNx8CGFU4g6iJCWnt7b
-	uS7WC55bLCkCrRtQT2IJWTB6GT2i3BZerzlDDJtndASx9G1L6BmShnsnbTN2/Zc97X950pavC0S
-	DW2Z5YKx8p9NfQ8eKQ3quGu39EWV+efbki4Ujv+kaH+zWrWSMdSexlOIQSFs73Wwn/UUnVPTB/J
-	YTPqVVRy4SJPknUKUAOQ9Gh2j
-X-Received: by 2002:a05:600c:a11:b0:4bb:69f2:87f7 with SMTP id 5b1f17b1804b1-4bb88812c92mr185131325e9.18.1795341274467;
-        Sun, 22 Nov 2026 01:54:34 -0800 (PST)
+        bh=uRWbLZw3/yEQ5PXPC7OpQnHirRM8EvYxh4g9KylG2S8=;
+        b=r5gQ7xdeG33uTj0l2lKbLL/SM/pLp4RX9G7Tux6jCIxZoTIBofFf79zDnSfQ/xKEes
+         TV1ZYHRpy3Nsl4GDYaFyVa/s4IYplSJ/YCNegGdzhC7/+TJK5GbPmR8Mm5on46gs7fuB
+         mbbd6IMzFl7qEKz+lkzj6ibHd1cgO3Nw9P74BOrs6uZ0g7oh2IntNKxfK4+ov8qFcXWS
+         I0RuzVo7Uya6zL3YmuIMQNFW+GQl0fDLVdnU1qYN4AFBvvVQ+Hygfhe0Y/LtKDQkVta6
+         bjbAUBHH7dFENKscpT35n0H3DOVnBpW0TXw7Owq4KjSTKJ2WkXSLI6UXOXWp6JBxIUP4
+         IVYQ==
+X-Gm-Message-State: APuU4Z+EA2rIIqlIJ/Id7JNnQONqqPkpHAo4dufbFT39FTi60cCBn+IP
+	yOj1SaG8+OC2NQpU0AzGt7z/P3TOEqdtlIC8TSBGWb1ZhROyKBUZUyjkmvuaDy+Pzgg=
+X-Gm-Gg: AZFdTZedVX4aRVFGpbAhQezTBO4/EfGJf2fsOjXOOMzo5JKU7xWZJ5S2xVXmYb4mNsM
+	Cp0JziU6DiIzgPQtmzclfI6otm9K8mZxCMoAPOxbEBx+NSWPuBtulCdyt8c45Kn6mMUdWbPpm+8
+	6bSR64c9qLkWOqu1/C1kRZxCXKnQLN2DRWmGEGYO6FyDmztBl0N6RUSzpTMF2tRNjwBQuUe4Zuy
+	yRMpzinLCNqxQSUqMZjotTsjekij8hbzgM6Xuql09+i2LZWToD4Wwuwx0PXB5ezQjZ9tzXG4OFl
+	7rzvUGiN2d3bF+7OiOaTRSyeC/7zLQXRNGwtJYLOkiKs3qAeWRbrCjoQFDhMezwstAR65VC2XzV
+	FJOfN16t4b5MhwqdUnmSNSx373RB6HTHlL5JAU9/HmFyHn1thqwFAkuLoywpUf5/OQpemphQQtS
+	TrstBKyTkMgUzL8HpPEsjf//NF5rmPE21lXHW+IY5H7200HVUIsw716uU4D0j6m9o1/bXaIPNIH
+	chZlpiiZmMBUeNCkGPEMPrVlAImxoP6lN5eZ3NCYCL0xvFf+AzPCg6ZHThvb8bOdak1GGi/5TfM
+	j7V8iiocygWc5tjsOPu5ShCKZCV+nSF8v2xWmA1/lb3urMut3FDM72IDtnEMM/hWh67xbENVW1D
+	QEWJfnPWMvHH+t5xiVAXtQmzw
+X-Received: by 2002:a05:600c:674b:b0:4bb:6847:791f with SMTP id 5b1f17b1804b1-4bb8880f267mr170364285e9.7.1795341285907;
+        Sun, 22 Nov 2026 01:54:45 -0800 (PST)
 From: Haseeb Ashraf <haseebashraf091@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Haseeb Ashraf <haseeb.ashraf@siemens.com>,
@@ -97,157 +97,257 @@ Cc: Haseeb Ashraf <haseeb.ashraf@siemens.com>,
 	bertrand.marquis@arm.com,
 	michal.orzel@amd.com,
 	Volodymyr_Babchuk@epam.com,
-	Mohamed Mediouni <mohamed@unpredictable.fr>
-Subject: [XEN][PATCH v5 2/8] xen/arm: skip the stage-1 TLBI after IPA flush with FEAT_nTLBPA
-Date: Sun, 22 Nov 2026 14:54:16 +0500
-Message-ID: <784add5436718a89c30d1ce78d5ae5f644d986f6.1795336377.git.haseebashraf091@gmail.com>
+	andrew.cooper3@citrix.com,
+	anthony.perard@vates.tech,
+	jbeulich@suse.com,
+	roger@xenproject.org
+Subject: [XEN][PATCH v5 6/8] xen/arm: batch stage-2 removal with range flushes
+Date: Sun, 22 Nov 2026 14:54:20 +0500
+Message-ID: <4dbfc8f1332054d9883d2b6632741f5ee99aa6d1.1795336377.git.haseebashraf091@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1795336377.git.haseebashraf091@gmail.com>
 References: <cover.1795336377.git.haseebashraf091@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c201ff/1795341275-251182A1-32F69E8B/0/0
+X-purgate-ID: tlsNG-ebf023/1795341286-C04DBB50-26F9318F/0/0
 X-purgate-type: clean
-X-purgate-size: 5238
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-purgate-size: 8123
+X-Spam-Status: No, score=-20.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 From: Haseeb Ashraf <haseeb.ashraf@siemens.com>
 
-Without FEAT_nTLBPA, intermediate caching of translation table walks
-might include non-coherent physical translation caches. These caches
-can hold previously valid entries indexed by the physical address of a
-table entry or, for stage-1 walks, by its intermediate physical address.
-An IPA-based stage-2 invalidation does not remove the stage-1 entries,
-so it must be followed by a stage-1 invalidation.
+Removing pages from a guest p2m requires TLB invalidation. The cost is
+particularly high when Xen runs under another hypervisor, where each
+invalidation can trap to the outer hypervisor.
 
-FEAT_nTLBPA (ID_AA64MMFR1_EL1.nTLBPA) says that the implementation has
-no such caches. Detect it as a CPU capability and skip the follow-up
-stage-1 invalidation in flush_guest_tlb_range_ipa() when it is present.
-The broadcast TLBI completion sequence remains explicit.
+Add guest_physmap_remove_page_batch() to remove a list of pages under a
+single p2m write lock and invalidate each contiguous run of changed GFNs
+with one range-flush call. The range helper selects the TLBI method and
+uses a full-VMID flush when a range exceeds the supported limit. Patch 7
+adds the public hypercall that calls this helper.
 
-The local flush used when a pCPU switches between vCPUs of a domain
-stays unconditional. It drops the prior vCPU's stage-1 translations;
-FEAT_nTLBPA does not change that requirement.
+An entry is checked at removal time, so a duplicate or missing GFN is
+reported as -ENOENT, like single-page removal. Entries that were not
+changed are excluded from invalidation; a removal that fails after
+changing an entry is included.
 
-Suggested-by: Mohamed Mediouni <mohamed@unpredictable.fr>
+The caller must hold a reference on each page until the invalidation is
+complete. HAS_PHYSMAP_REMOVE_BATCH is selected for Arm MMU only; the MPU
+p2m has no TLB invalidation by range.
+
+Linux reference:
+- KVM: arm64: Use TLBI range-based instructions for unmap, which
+  similarly defers the stage-2 invalidation and coalesces it into
+  ranges:
+  https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/commit/?id=7657ea920c54218f123ddc1b572821695b669c13
+
 Signed-off-by: Haseeb Ashraf <haseeb.ashraf@siemens.com>
 ---
-Changes in v5:
-- Skip only the stage-1 invalidation that follows IPA invalidation.
-- Keep the local vCPU-switch flush unconditional.
-- Base the description on the ID register field.
+New in v5.
 
- xen/arch/arm/cpufeature.c                 | 12 ++++++++++++
- xen/arch/arm/include/asm/arm64/flushtlb.h |  7 +++++--
- xen/arch/arm/include/asm/cpufeature.h     |  6 ++++--
- xen/arch/arm/include/asm/processor.h      |  2 ++
- xen/arch/arm/mmu/p2m.c                    |  2 ++
- 5 files changed, 25 insertions(+), 4 deletions(-)
+ xen/arch/arm/Kconfig         |  1 +
+ xen/arch/arm/p2m.c           | 97 ++++++++++++++++++++++++++++++++----
+ xen/common/Kconfig           |  3 ++
+ xen/include/xen/p2m-common.h | 16 ++++++
+ 4 files changed, 106 insertions(+), 11 deletions(-)
 
-diff --git a/xen/arch/arm/cpufeature.c b/xen/arch/arm/cpufeature.c
-index 8d8cd19a96..0a87186a7e 100644
---- a/xen/arch/arm/cpufeature.c
-+++ b/xen/arch/arm/cpufeature.c
-@@ -18,6 +18,11 @@ DECLARE_BITMAP(cpu_hwcaps, ARM_NCAPS);
- struct cpuinfo_arm __read_mostly domain_cpuinfo;
+diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+index b9c5c40678..7ad676940b 100644
+--- a/xen/arch/arm/Kconfig
++++ b/xen/arch/arm/Kconfig
+@@ -85,6 +85,7 @@ config MMU
+ 	bool "MMU"
+ 	select ARCH_PAGING_MEMPOOL
+ 	select HAS_LLC_COLORING if !NUMA && ARM_64
++	select HAS_PHYSMAP_REMOVE_BATCH
+ 	select HAS_PMAP
+ 	select HAS_VMAP
+ 	select HAS_PASSTHROUGH
+diff --git a/xen/arch/arm/p2m.c b/xen/arch/arm/p2m.c
+index a39351ede9..c4f1f3709c 100644
+--- a/xen/arch/arm/p2m.c
++++ b/xen/arch/arm/p2m.c
+@@ -123,16 +123,18 @@ int p2m_insert_mapping(struct domain *d, gfn_t start_gfn, unsigned long nr,
+     return rc;
+ }
  
- #ifdef CONFIG_ARM_64
-+static bool has_ntlbpa(const struct arm_cpu_capabilities *entry)
-+{
-+    return system_cpuinfo.mm64.ntlbpa == MM64_NTLBPA_SUPPORT_IMP;
+-static inline int p2m_remove_mapping(struct domain *d,
++/*
++ * Remove [start_gfn, start_gfn + nr) from the p2m. The caller must hold the
++ * p2m write lock and is responsible for flushing any removed entries.
++ */
++static int p2m_remove_mapping_locked(struct p2m_domain *p2m,
+                                      gfn_t start_gfn,
+                                      unsigned long nr,
+                                      mfn_t mfn)
+ {
+-    struct p2m_domain *p2m = p2m_get_hostp2m(d);
+     unsigned long i;
+-    int rc;
+ 
+-    p2m_write_lock(p2m);
++    ASSERT(p2m_is_write_locked(p2m));
+ 
+     /*
+      * Before removing the GFN - MFN mapping for any RAM pages make sure
+@@ -150,17 +152,27 @@ static inline int p2m_remove_mapping(struct domain *d,
+ 
+         if ( p2m_is_any_ram(t) &&
+              (!mfn_valid(mfn) || !mfn_eq(mfn_add(mfn, i), mfn_return)) )
+-        {
+-            rc = -EILSEQ;
+-            goto out;
+-        }
++            return -EILSEQ;
+ 
+         i += (1UL << cur_order) -
+              ((gfn_x(start_gfn) + i) & ((1UL << cur_order) - 1));
+     }
+ 
+-    rc = p2m_set_entry(p2m, start_gfn, nr, INVALID_MFN,
+-                       p2m_invalid, p2m_access_rwx);
++    return p2m_set_entry(p2m, start_gfn, nr, INVALID_MFN,
++                         p2m_invalid, p2m_access_rwx);
 +}
 +
- static bool has_sb_instruction(const struct arm_cpu_capabilities *entry)
- {
-     return system_cpuinfo.isa64.sb;
-@@ -25,6 +30,13 @@ static bool has_sb_instruction(const struct arm_cpu_capabilities *entry)
- #endif
++static inline int p2m_remove_mapping(struct domain *d,
++                                     gfn_t start_gfn,
++                                     unsigned long nr,
++                                     mfn_t mfn)
++{
++    struct p2m_domain *p2m = p2m_get_hostp2m(d);
++    int rc;
++
++    p2m_write_lock(p2m);
++
++    rc = p2m_remove_mapping_locked(p2m, start_gfn, nr, mfn);
  
- static const struct arm_cpu_capabilities arm_features[] = {
-+#ifdef CONFIG_ARM_64
-+    {
-+        .desc = "Intermediate caching of translation table walks (nTLBPA)",
-+        .capability = ARM_HAS_NTLBPA,
-+        .matches = has_ntlbpa,
-+    },
-+#endif
- #ifdef CONFIG_ARM_64
-     {
-         .desc = "Speculation barrier instruction (SB)",
-diff --git a/xen/arch/arm/include/asm/arm64/flushtlb.h b/xen/arch/arm/include/asm/arm64/flushtlb.h
-index b3bce7baf2..ff2ce2bae2 100644
---- a/xen/arch/arm/include/asm/arm64/flushtlb.h
-+++ b/xen/arch/arm/include/asm/arm64/flushtlb.h
-@@ -188,8 +188,11 @@ static inline void flush_guest_tlb_range_ipa(paddr_t ipa, unsigned long size)
-      * with stage-1 and the old stage-2 translation. Linux does the same (see
-      * __kvm_tlb_flush_vmid_ipa()).
-      */
--    dsb(ish);
--    tlbi_vmalle1is();
-+    if ( !cpus_have_const_cap(ARM_HAS_NTLBPA) )
-+    {
-+        dsb(ish);
-+        tlbi_vmalle1is();
-+    }
+     /*
+      * The range that may have changed is known. Invalidate it instead of
+@@ -175,12 +187,75 @@ static inline int p2m_remove_mapping(struct domain *d,
+         p2m->need_flush = false;
+     }
  
-     tlbi_complete_broadcast();
+- out:
+     p2m_write_unlock(p2m);
+ 
+     return rc;
  }
-diff --git a/xen/arch/arm/include/asm/cpufeature.h b/xen/arch/arm/include/asm/cpufeature.h
-index c554686415..97e371724f 100644
---- a/xen/arch/arm/include/asm/cpufeature.h
-+++ b/xen/arch/arm/include/asm/cpufeature.h
-@@ -76,8 +76,9 @@
- #define ARM_WORKAROUND_BHB_SMCC_3 15
- #define ARM_HAS_SB 16
- #define ARM64_WORKAROUND_1508412 17
-+#define ARM_HAS_NTLBPA 18
  
--#define ARM_NCAPS           18
-+#define ARM_NCAPS           19
++#ifdef CONFIG_HAS_PHYSMAP_REMOVE_BATCH
++/* Whether the removal of an entry may have changed the p2m. */
++static bool removal_touched_p2m(int err)
++{
++    /* These are returned before the p2m is modified. */
++    return err != -ENOENT && err != -EILSEQ;
++}
++
++void guest_physmap_remove_page_batch(struct domain *d,
++                                     const xen_pfn_t *gpfns,
++                                     const mfn_t *mfns,
++                                     int *errs,
++                                     unsigned int count)
++{
++    struct p2m_domain *p2m = p2m_get_hostp2m(d);
++    unsigned int i;
++
++    p2m_write_lock(p2m);
++
++    /* A flush that is still pending covers more than this batch. */
++    p2m_tlb_flush_sync(p2m);
++
++    /* __p2m_set_entry() only sets p2m->need_flush for a removed entry. */
++    for ( i = 0; i < count; i++ )
++    {
++        if ( mfn_eq(mfns[i], INVALID_MFN) ||
++             mfn_eq(p2m_get_entry(p2m, _gfn(gpfns[i]), NULL, NULL, NULL, NULL),
++                    INVALID_MFN) )
++            errs[i] = -ENOENT;
++        else
++            errs[i] = p2m_remove_mapping_locked(p2m, _gfn(gpfns[i]), 1,
++                                                mfns[i]);
++    }
++
++    /*
++     * Invalidate each run of consecutive entries that may have changed.
++     * The range helper selects the TLBI method and falls back to a full-VMID
++     * flush for ranges beyond its per-CPU limit. Include an entry whose
++     * removal failed after changing the p2m.
++     */
++    if ( p2m->need_flush )
++    {
++        for ( i = 0; i < count; i++ )
++        {
++            unsigned int first = i;
++
++            if ( !removal_touched_p2m(errs[i]) )
++                continue;
++
++            while ( i + 1 < count && removal_touched_p2m(errs[i + 1]) &&
++                    gpfns[i + 1] == gpfns[i] + 1 )
++                i++;
++
++            p2m_force_tlb_flush_range_sync(p2m, pfn_to_paddr(gpfns[first]),
++                                           i - first + 1);
++        }
++
++        p2m->need_flush = false;
++    }
++
++    p2m_write_unlock(p2m);
++}
++#endif /* CONFIG_HAS_PHYSMAP_REMOVE_BATCH */
++
+ int map_regions_p2mt(struct domain *d,
+                      gfn_t gfn,
+                      unsigned long nr,
+diff --git a/xen/common/Kconfig b/xen/common/Kconfig
+index a619f2cef1..e687b59e8f 100644
+--- a/xen/common/Kconfig
++++ b/xen/common/Kconfig
+@@ -152,6 +152,9 @@ config HAS_KEXEC
+ config HAS_LLC_COLORING
+ 	bool
  
- #ifndef __ASSEMBLER__
++config HAS_PHYSMAP_REMOVE_BATCH
++	bool
++
+ config HAS_PIRQ
+ 	bool
  
-@@ -288,7 +289,8 @@ struct cpuinfo_arm {
-             unsigned long ets:4;
-             unsigned long __res2:4;
-             unsigned long afp:4;
--            unsigned long __res3:12;
-+            unsigned long ntlbpa:4;
-+            unsigned long __res3:8;
-             unsigned long ecbhb:4;
+diff --git a/xen/include/xen/p2m-common.h b/xen/include/xen/p2m-common.h
+index 0eb0619912..7a78c8b421 100644
+--- a/xen/include/xen/p2m-common.h
++++ b/xen/include/xen/p2m-common.h
+@@ -12,6 +12,22 @@ int __must_check
+ guest_physmap_remove_page(struct domain *d, gfn_t gfn, mfn_t mfn,
+                           unsigned int page_order);
  
-             /* MMFR2 */
-diff --git a/xen/arch/arm/include/asm/processor.h b/xen/arch/arm/include/asm/processor.h
-index 8ee8f88fb4..49774b65eb 100644
---- a/xen/arch/arm/include/asm/processor.h
-+++ b/xen/arch/arm/include/asm/processor.h
-@@ -487,6 +487,8 @@
- #ifdef CONFIG_ARM_64
- #define MM64_VMID_8_BITS_SUPPORT    0x0
- #define MM64_VMID_16_BITS_SUPPORT   0x2
-+#define MM64_NTLBPA_SUPPORT_NI      0x0
-+#define MM64_NTLBPA_SUPPORT_IMP     0x1
- #endif
- 
- #define MM64_MSA_PMSA_SUPPORT       0xf
-diff --git a/xen/arch/arm/mmu/p2m.c b/xen/arch/arm/mmu/p2m.c
-index b93ead6c46..3b1b9b394c 100644
---- a/xen/arch/arm/mmu/p2m.c
-+++ b/xen/arch/arm/mmu/p2m.c
-@@ -236,6 +236,8 @@ void p2m_restore_state(struct vcpu *n)
-      * All vCPUs of the domain share the same p2m and the same effective
-      * stage-2 translation regime. The stage-1 translations of the vCPU that
-      * ran last on this pCPU must not be used by this one.
-+     * This remains necessary with FEAT_nTLBPA, which only removes the
-+     * stage-1 invalidation following an IPA-based stage-2 invalidation.
-      */
-     if ( *last_vcpu_ran != INVALID_VCPU_ID && *last_vcpu_ran != n->vcpu_id )
-         flush_guest_tlb_s1_local();
++#ifdef CONFIG_HAS_PHYSMAP_REMOVE_BATCH
++/*
++ * Remove a batch of pages from a domain's p2m table.
++ *
++ * gpfns[] lists the frames. mfns[] holds, for each page the caller holds a
++ * reference on, its frame, or INVALID_MFN if there is no page. errs[]
++ * receives a result per entry. All entries are removed under one p2m write
++ * lock; changed contiguous runs are invalidated after processing the batch.
++ */
++void guest_physmap_remove_page_batch(struct domain *d,
++                                     const xen_pfn_t *gpfns,
++                                     const mfn_t *mfns,
++                                     int *errs,
++                                     unsigned int count);
++#endif
++
+ /* Map MMIO regions in the p2m: start_gfn and nr describe the range in
+  *  * the guest physical address space to map, starting from the machine
+  *   * frame number mfn. */
 
