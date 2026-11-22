@@ -2,41 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A491B606A320
-	for <xen-devel@archiver.kernel.org>; Sat, 21 Nov 2026 18:33:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 13012606A32A
+	for <xen-devel@archiver.kernel.org>; Sun, 22 Nov 2026 09:54:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=C+9pIBrB
-Received: from list by lists.xenproject.org with outflank-mailman.1499145.1696278 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=OxB7gloY
+Received: from list by lists.xenproject.org with outflank-mailman.1499538.1696323 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xUpst-0002u1-As; Sat, 21 Nov 2026 18:32:23 +0000
+	id 1xV4HS-0005a2-DK; Sun, 22 Nov 2026 09:54:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1499145.1696278; Sat, 21 Nov 2026 18:32:23 +0000
+Received: by outflank-mailman (output) from mailman id 1499538.1696323; Sun, 22 Nov 2026 09:54:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xUpst-0002tt-5e; Sat, 21 Nov 2026 18:32:23 +0000
-Received: by outflank-mailman (input) for mailman id 1499145;
- Sat, 21 Nov 2026 17:28:56 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xV4HS-0005Zv-AK; Sun, 22 Nov 2026 09:54:42 +0000
+Received: by outflank-mailman (input) for mailman id 1499538;
+ Sun, 22 Nov 2026 09:54:41 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <fengaojigui88@gmail.com>) id 1xUotU-00027Y-FF
- for xen-devel@lists.xenproject.org; Sat, 21 Nov 2026 17:28:56 +0000
+ (envelope-from <haseebashraf091@gmail.com>) id 1xV4HR-0005Yj-Eb
+ for xen-devel@lists.xenproject.org; Sun, 22 Nov 2026 09:54:41 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xUotT-008m6A-CK
- for xen-devel@lists.xenproject.org; Sat, 21 Nov 2026 18:28:55 +0100
-Received: from [10.42.69.12] (helo=localhost)
+ id 1xV4HQ-00ExLX-RN
+ for xen-devel@lists.xenproject.org; Sun, 22 Nov 2026 10:54:40 +0100
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <fengaojigui88@gmail.com>)
- id 6b01d4ce-e002-0a2a0a5209dd-0a2a450cdadc-2
- for <xen-devel@lists.xenproject.org>; Sat, 21 Nov 2026 18:28:55 +0100
-Received: from [74.125.230.73] (helo=mail-lr2-f9.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <fengaojigui88@gmail.com>)
- id 6b01d4d6-f479-0a2a450c0019-4a7de649ec97-3
- for <xen-devel@lists.xenproject.org>; Sat, 21 Nov 2026 18:28:55 +0100
-Received: by mail-lr2-f9.google.com with SMTP id
- 38308e7fff4ca-3ad106d6cbfso9426081fa.1
- for <xen-devel@lists.xenproject.org>; Sat, 21 Nov 2026 09:28:55 -0800 (PST)
+ (envelope-from <haseebashraf091@gmail.com>)
+ id 6b02bbc6-bab6-0a2a0a5309dd-0a2a4505c3ae-18
+ for <xen-devel@lists.xenproject.org>; Sun, 22 Nov 2026 10:54:40 +0100
+Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <haseebashraf091@gmail.com>)
+ id 6b02bbe0-4cb1-0a2a45050019-d155802cbdf4-3
+ for <xen-devel@lists.xenproject.org>; Sun, 22 Nov 2026 10:54:40 +0100
+Received: by mail-wm1-f44.google.com with SMTP id
+ 5b1f17b1804b1-4bb702a7548so16642405e9.1
+ for <xen-devel@lists.xenproject.org>; Sun, 22 Nov 2026 01:54:40 -0800 (PST)
+Received: from PKL-HASEEBA-LT.. ([39.36.59.78])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4bb8849e598sm218409605e9.8.2026.11.22.01.54.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 22 Nov 2026 01:54:39 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -45,219 +50,310 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1795282134; cv=none;
-        d=google.com; s=arc-20260327;
-        b=Wc3DWOOcPD+FTBVW+SEMVmOP2yHjPuUrozvJK3gbkuSvqu0IvI9QhI4W97oN1eKXBY
-         UR7E1EBenPXFRgJJJBMNrmwto4Id4NxSmxbwDuXkbQxwAnH5L1A9DVVT8rJPCZjIB08+
-         tt1n6T8niG//ts/pyCwwTjtiy3xMg9evJUolaChMvH4sjw2/t4h7tXSw0Gub/WHc8Eed
-         3+WG6/7JuzNapT7iFbj2sKH/2EiTw2IupR6hQ5xVXnTvDvtgWA8X1m1AZqQ1RzL+Ku2j
-         e4e7CVSJoprLFvPV9Kbo5ql8IuYHDeL3ImMyIjhWaSYD1r0HoJ6iDJdGqzLyajOLgv4T
-         HN3w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :mime-version:dkim-signature;
-        bh=DCLA3o2NGcsUsCeKdpfpu0O9OUOc9q0N8lXAsyG+wTU=;
-        fh=NtqU41rBBkZENgVqV2HtIBTK+Xy9L603M0ZkEykZDvQ=;
-        b=pkQIjK+LJJPpzavPLmIzMG2boBWUNDrf9OV7gB2sk5nm5aaCLvLId7HBrhXRkNRkVk
-         GOIuu9gEMaJRpwpzFGLK2Ibgl4tmim99qPAmzVYL79DFiaMbkLRVLVj/e2lWwlNwqexx
-         Ya+DzROXm3N6rePBEXhyDXpT5iR7WfPi4jY+E9+yp9nNJtY6CkR0yZDlhPcfxtyhb4qS
-         qcdf/DqC8MrI+/WMsxN7NZvUc4au3Rfnn6FfNX4DgCpQ1UlxAG2nJpIaDKdI1IljpjDO
-         9v0nQdt4/KdlFvDzFdsuIrUQE66aMYtecP2Kz4UQULzz0KKnYRzoMPQ3+hNSDI0BPXiq
-         tPiA==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795282134; x=1795886934; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=DCLA3o2NGcsUsCeKdpfpu0O9OUOc9q0N8lXAsyG+wTU=;
-        b=C+9pIBrBJouQHpdZtDCVtGi4wp9EDVqCRImmin9gh+lwt00Bu15VobxVceh9+eKxR8
-         vpMDGsx1zChdioYApxcIG2B0cJRwKNVe+bTr3mf7Bvdv+yhGH1oKGvVn7h0u5zwN54JD
-         SQjE9++KCGI0uvIJiPiqONTrlzdieikTtdeKtEjWasRVJHzYT8PPYTmXMe9XgSCizrHS
-         j/hef62Lxru1kqnBymxg6wVGRHgjfiwGzec4G+iL730qU69oOCTTmXUInh457HAc9xAI
-         b7gXf2dJnH1g2mfzyiE/LQegvnm2iF+R9X1kdUaFLgCA1rD/I80Jhr/RvNfzzKhBMiUj
-         ipPw==
+        d=gmail.com; s=20260707; t=1795341280; x=1795946080; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=fM8Pt+w103yss8koq0I3JGySpUK8NMJUieRlgYIlzMA=;
+        b=OxB7gloYsZVVZuRy3Pxv2Z9tl7oPEgzSfTDJqtK016rnNJUN+1R0jWakaz+M7i/Omt
+         J+izBJ1BBk2ZusYkzCm44hbAHyAdvJEkZ6D06Ldrri/jSC7l0gttQQf/OKytOb39HfUU
+         VT2lqaNfCiNum1Ib6L+qSTzmU1VHlHW04bHqtUjD2nVQFE4tIDWmgiJDL2Vxl76PGa8c
+         ABQTfAd66qaSGQJUv9e4sEBROjuo+MrIbIX+uA6eI6jq9sSPyS9QbyGiSlqRUXNC6FpP
+         4LNMXoLPOBfiJunTVrGjMmSX5Yeuad1/sJfq21U9/mtVv/AP4E5JHdfJTHwGiXeJSRv3
+         Umfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795282134; x=1795886934;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=DCLA3o2NGcsUsCeKdpfpu0O9OUOc9q0N8lXAsyG+wTU=;
-        b=H4994XZnFJoc1tAlMUk7CQA1/qGhzAV9ehmwOp6jyQ2MztKZJLrREMqFRuo5RAC7wP
-         PsJX3p6QJQTD/WWRHOvqnaspvPyXnhW3B2nbSjjsd5FZkpfd2G2tMXMBl30/ISs3I1qm
-         Jrw+rCMLIhYjceq11mbVVRE7l0KbpldHIwypgPOlpayscUKMIBsxcu8iqbVGQgzLuBLi
-         u8tcSPQR0a5yTQJDhd/wZ8st3bsEGA4r+mE7UR7FlQFf6x0icA+6OqUWRPjsNgQKKnpQ
-         BWH2T2uWWlc0zfG2CzsDS3r2vm2KVEc+RVHQahx2eXswja0QkaVxZ6n9oBrfKAxDtnMp
-         d0+w==
-X-Forwarded-Encrypted: i=1; AL+hErGz0/ll6waVV5VCnNDYyh423EM9Nk8iqQ6NJmtnWYRe0AnRjsCkDT4/nGnxJH3a+f74F3vmIfHfhgE=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z9iy+k1dDACkzuB+HeFZwFgqErMtCGLgBEZ8KFUUL16T80kCvwr
-	ZnS83e/60ojzgjOGP7+7eGeQC6ZG2TrrALz5LjO9UiGdxGuuuIEt1/JFV8cjLXfCNg3mltN9tmz
-	MtBxAEd6Zl3V4QNNynK9L7tuOZMtemlc=
-X-Gm-Gg: AZFdTZdM/QKIzkDH0pcNF7z0T8+vMxDFmEdndtMibgU4Z/vIg3uW1lQB3/QFygbUen0
-	/7aXeoIIOANTZqxbEHWI6Xs5IwSfW/RF2EMRn4O7G80XK9/irkd7AvT4n7Vi53tykQ63fxRJHiR
-	XAY/g7M/XTOxd30iKa0e4TG8ca1wF/rgPG7o610Y+JEDkzArNT2C8et0TwI0Bm/x9nGXcweMH5f
-	4b/e1mRU90vdznIRg2EUXdK0Kc9A6u/9J2vRFg19zJtU8qEf1wvx530VbG2LRyG+cS8THXdX/7k
-	5llJk9L5D3WjQw4HeR8LGSB6XMB2l4BJRiBDKMeYdVufj7vsq5n/P6iTNubVns++hQg7qIEAn/o
-	iuekdRY50uVwdbXCZbn/6A0ZpY5Gg4/Av5y3KyhH/qLIRemaPTrCrRpNkiAA9IRsuPIE=
-X-Received: by 2002:a05:651c:419b:b0:3a3:7682:49a1 with SMTP id
- 38308e7fff4ca-3ae7fa3ac6fmr17559001fa.22.1795282134270; Sat, 21 Nov 2026
- 09:28:54 -0800 (PST)
+        d=1e100.net; s=20260707; t=1795341280; x=1795946080;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=fM8Pt+w103yss8koq0I3JGySpUK8NMJUieRlgYIlzMA=;
+        b=HyzJY4NW147mHDZXhx4EBlDD/7/3cFoy1Qv3ZH5rnmeoLH1jZatZUdHvad0R+jE3B7
+         Kl1JjKUzaVuSEs9QyVWfPakj71gK8TDbr0Vo+goSjcRkyT+sVyEI3z+VMQuI0yIZxC0c
+         3weRz9FmQ807+Y0N514fq2oYPmtox5kpcmD59NKG03fwcu1ZbSo0Yo5VZpdrmN3kT2pB
+         p6H2ebNkFECO8/VjguV+aUoE8pSp8rU8Lv4Fo/m3xn8n712tQo8/42Emj2Jnu2hPn2yt
+         4DWHAhHxu/rkirOKFQa4xdBH4+HVlygv0ocCVV0Y9AleFFP1rhLT8LcUNieyLfbpMlO/
+         uLkA==
+X-Gm-Message-State: APuU4Z8fonDlHwP67266Q05+WDjdFvIb9xStmnn6sXiKbCkITfHjnNj0
+	ch8otALWUidzhnrMcwMyOeArrct1HKDvRoUY/fIuSok1TPqT9VyGDkQ2DQVcSzx9tEA=
+X-Gm-Gg: AZFdTZcYP9apDI6tVn9FehhxJCw8AdQXzcQu0vIx0LKdsrWMASF6BMfmprDcNthT1Hw
+	LbO8i/XpcuEtmz9vQ98UF+AmgAxksMrDB/BQ4UqsRPlEirKPEmsBQamxedA63haKXDQt3JZWhzV
+	ASwYoXaoK0gT0+36HV6iIjm+cx8Zj2ShATDjyvlhTzzt55C33YckYwnQf8wGs6RvxnCkFdhWDky
+	XJeNszWTC6AeJsKyckeORXG3KuxY54wjSa/DsibPIZVe9MP/l5bSAS6gIQ6B44oXYaSkq8Gm72d
+	mYsA8+okXGPPbY5N/YFFrNismHuad4kAD1X2jKdhb+ZqKvW7P+JPXxAssu+8XlJjuft7Xuo7Dvp
+	BkJw73Ur+5AG9ouKsAUMTlNBYdudOIN4/enyVsOx+SuvUnOsoD0VN6mBDJG7LlNjHmg3+fQ/YwN
+	Vi8HnxSN8mJuc5MZzZrfW0DNZzAIycd1hDu4nSn6jNLV54EFA/uxJwq4PreE4Ei2eqnETAKJkyL
+	bUg+rw5b5tw4E0cV0iGHT+AmclPVDuJ4M/NsFc2l37TYNkGnY9wZou5CnVfzZJw/Ie+i2ljiPEp
+	Wo7dhl4N8xo7n7Bc8CgWfe2xrdJwWTQk7TkHlcBTehx+pNShCcvh//BRcE0g/dfBs+wwlFhI8jp
+	K9CTU32dmvihQkmq3KmEMPKse
+X-Received: by 2002:a05:600c:1c1b:b0:4a7:a5db:a93e with SMTP id 5b1f17b1804b1-4bb887e2677mr202835235e9.4.1795341280198;
+        Sun, 22 Nov 2026 01:54:40 -0800 (PST)
+From: Haseeb Ashraf <haseebashraf091@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Haseeb Ashraf <haseeb.ashraf@siemens.com>,
+	sstabellini@kernel.org,
+	julien@xen.org,
+	bertrand.marquis@arm.com,
+	michal.orzel@amd.com,
+	Volodymyr_Babchuk@epam.com
+Subject: [XEN][PATCH v5 4/8] xen/arm64: use range TLBI for IPA flush with FEAT_TLBIRANGE
+Date: Sun, 22 Nov 2026 14:54:18 +0500
+Message-ID: <b79baebc670c76175341fde6d9e9582529c874c4.1795336377.git.haseebashraf091@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1795336377.git.haseebashraf091@gmail.com>
+References: <cover.1795336377.git.haseebashraf091@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-From: Zheng Zheng <fengaojigui88@gmail.com>
-Date: Sun, 22 Nov 2026 01:28:39 +0800
-X-Gm-Features: Aa3M54plDJziP3_T6TamE_LALOBZqkSmXnp5uvjP_CU0mpq17_H4ujLNSncIBDs
-Message-ID: <CAO-4RZ3VRVmg-8wrej_cs5fopaEjKLtusEAyah9G4y+XLcWj4Q@mail.gmail.com>
-Subject: [BUG] WARNING in __kvm_gpc_refresh (virt/kvm/pfncache.c:267, v7.4-rc3)
-To: pbonzini@redhat.com
-Cc: seanjc@google.com, dwmw@amazon.co.uk, kvm@vger.kernel.org, 
-	xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org, 
-	syzkaller-bugs@googlegroups.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-d25034/1795282135-77ED2A5B-952BA921/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-c201ff/1795341280-73ABF2A1-D5A54D98/0/0
 X-purgate-type: clean
-X-purgate-size: 5511
-X-Spam-Status: No, score=-7.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-purgate-size: 9019
+X-Spam-Status: No, score=-20.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
-	SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY autolearn=no
-	autolearn_force=no version=4.0.1
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Paolo, Sean, David,
+From: Haseeb Ashraf <haseeb.ashraf@siemens.com>
 
-We found a reproducible warning on v7.4-rc3 with syzkaller: the KVM guest
-page cache invariant "either gpa or uhva must be valid, but not both" is
-violated while KVM emulates a Xen event-channel send.  The supplied
-recipe reproduced on independent fresh VMs; no state snapshot is
-required.
+Invalidating a range of IPAs with TLBI IPAS2E1IS takes one broadcast
+instruction per page. With FEAT_TLBIRANGE, TLBI RIPAS2E1IS invalidates
+a range with at most four range operations when it fits the range limit
+of the instruction. Larger ranges fall back to a full VMID invalidation.
+When Xen runs on top of another hypervisor, each instruction also traps
+to it.
 
-Repository and reproducer:
+A range of one page costs one instruction either way. The gain is for
+multi-page ranges: the whole old block of a split superpage, a removal
+of several pages, and the batched removal added by patches 6 and 7.
+Without the feature, a block of 512 pages or more is flushed with the
+whole VMID, as before.
 
-  https://github.com/Zheng-zheng-codes/kvm-gpc-refresh-warning
-  commit f9bb1f09b4070e6b19fdc49a10297b2afe7e5fb8
+Detect the feature as a CPU capability, from ID_AA64ISAR0_EL1.TLB.
+When it is present, flush_guest_tlb_range_ipa() covers the range with
+one operation per scale, the largest first. Only a range that does not
+fit the largest operation is flushed with VMALLS12E1IS, which is the
+limit Linux uses (MAX_TLBI_RANGE_PAGES). Without the feature the
+per-page loop and its TLBI_MAX_PAGE_OPS bound are unchanged.
 
-Report
-------
+A range operation covers an even number of pages. Extend an odd range
+by one page to the next even boundary instead of ending with a single
+page TLBI IPAS2E1IS, which saves one instruction per range. A page
+more is always safe to invalidate, and extending to the neighbor
+that makes the range 2 page aligned never leaves the IPA space.
 
-  kvm_is_error_gpa(gpa) =3D=3D kvm_is_error_hva(uhva)
-  WARNING: arch/x86/kvm/../../../virt/kvm/pfncache.c:267 at
-__kvm_gpc_refresh+0x1692/0x1e40
-  RIP: 0010:__kvm_gpc_refresh+0x1692/0x1e40 virt/kvm/pfncache.c:267
-  Call Trace:
-   kvm_gpc_refresh+0xed/0x160 virt/kvm/pfncache.c:382
-   kvm_xen_set_evtchn.part.0+0x1b3/0x280 arch/x86/kvm/xen.c:2014
-   kvm_xen_set_evtchn arch/x86/kvm/xen.c:2115 [inline]
-   kvm_xen_hvm_evtchn_send+0x22f/0x290 arch/x86/kvm/xen.c:2105
+The operation is encoded with SYS so that no assembler support for
+FEAT_TLBIRANGE is required. Stage-2 of Xen does not use FEAT_LPA2, so
+BADDR holds IPA[48:12].
 
-The warning site:
+Linux references:
+- arm64: tlb: Use the TLBI RANGE feature in arm64, for the range
+  encoding and the scale decomposition:
+  https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/commit/?id=d1d3aa98b1d4826a19adfefb69b96142a0cac633
+- KVM: arm64: Implement __kvm_tlb_flush_vmid_range(), for the stage-2
+  IPA range invalidation:
+  https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/commit/?id=6354d15052ec88273c24beae4c99e31c3d3889b6
 
-  /* Either gpa or uhva must be valid, but not both */
-  if (WARN_ON_ONCE(kvm_is_error_gpa(gpa) =3D=3D kvm_is_error_hva(uhva)))
-          return -EINVAL;
+Signed-off-by: Haseeb Ashraf <haseeb.ashraf@siemens.com>
+---
+ xen/arch/arm/cpufeature.c                 |  14 +++
+ xen/arch/arm/include/asm/arm64/flushtlb.h | 113 ++++++++++++++++++++--
+ xen/arch/arm/include/asm/cpufeature.h     |   3 +-
+ 3 files changed, 121 insertions(+), 9 deletions(-)
 
-kvm_xen_set_evtchn() retries kvm_xen_set_evtchn_fast(), and on
--EWOULDBLOCK calls kvm_gpc_refresh(&kvm->arch.xen.shinfo_cache,
-PAGE_SIZE), which re-refreshes the gpc with whatever gpa/uhva state the
-cache currently holds.  In the failing run both representations were in
-the same error state, so the refresh warned and returned -EINVAL and the
-event-channel write failed.  The setup was a nested-KVM guest fuzzing the
-KVM ioctls, including Xen HVM shared-info/event-channel configuration.
-
-No memory corruption was observed; the effect is the WARN plus the failed
-evtchn delivery.
-
-Reproduction
-------------
-
-  git clone https://github.com/Zheng-zheng-codes/kvm-gpc-refresh-warning
-  cd kvm-gpc-refresh-warning
-
-  # boot v7.4-rc3 with the supplied kernel config
-  # using a Debian trixie x86_64 guest
-
-  # in the guest, as root:
-  syz-execprog -procs=3D1 -threaded -repeat=3D1 \
-      -executor ./syz-executor \
-      reproducer/repro.kernsight.prog
-
-The recipe is a state-reconstruction sequence (74 replay programs
-followed by the crashing testcase).  The warning depends on the kernel
-state built by the recipe; the testcase alone is not sufficient.  The
-recipe must run with -procs=3D1; using -procs=3D8 did not reproduce the
-warning under our tests.
-
-Expected result: within about two minutes of starting the reproducer the
-guest console shows
-
-  kvm_is_error_gpa(gpa) =3D=3D kvm_is_error_hva(uhva)
-  WARNING: arch/x86/kvm/../../../virt/kvm/pfncache.c:267 at
-__kvm_gpc_refresh+0x1692/0x1e40
-
-and the event-channel write that triggered it fails.  All five of our
-fresh-VM verification runs hit this at 120-121 seconds.
-
-Verification:
-
-- pipeline auto-repro: attempt 1 triggered (160 replay programs) but was
-  not verified within the 20-minute budget; attempt 2 verified
-  (confirmed=3Dtrue, status=3Dverified, fresh-VM recipe replay, 74 replay
-  programs, 2026-11-21T14:59:08Z)
-- stability on fresh VMs: five independent runs, 5/5 reproductions,
-  120-121 s to the warning in every run (2026-11-21, external-verify/)
-- C reproducer: not generated; the syzkaller recipe is the primary
-  reproducer
-
-Repository contents
--------------------
-
-  README.md               overview, analysis and verification table
-  environment.txt         kernel/guest hashes and exact QEMU command line
-  kernel.config           kernel configuration used for the reproduction
-  description             original crash title
-  SHA256SUMS              SHA-256 checksums covering every file in the
-repository
-                        (including the five verification runs and
-their HIT markers)
-  logs/                   original crash evidence
-    log0 =E2=80=94 fuzzer log of the verified attempt
-    machineInfo0 =E2=80=94 VM/environment record
-    report0 =E2=80=94 crash report of the verified attempt
-    title-stat =E2=80=94 occurrence statistics
-  reproducer/             the reproducer and its provenance
-    repro.kernsight.prog =E2=80=94 the reproducer: 74 replay programs follo=
-wed
-by the crashing testcase (log format)
-    repro.prog =E2=80=94 the crashing testcase alone (not sufficient)
-    repro.priming.prog =E2=80=94 the replay/priming prefix
-    repro.priming.json =E2=80=94 priming trace (candidate picks, distances)
-    repro.context.json =E2=80=94 reproduction context (fresh_vm_recipe_repl=
-ay)
-    repro.state.json =E2=80=94 measured 539-D pre-crash state vector
-    repro.report =E2=80=94 raw crash report of the reproduction
-    repro.stats =E2=80=94 phase/timing log of the reproduction
-    repro.README.txt =E2=80=94 original bundle description
-  external-verify/        five independent fresh-VM verification runs
-    README.md             methodology and per-run results
-    run-1 ... run-5/
-      serial.log =E2=80=94 full guest console of the run
-      run.log =E2=80=94 harness log with hashes and timings
-      HIT =E2=80=94 marker written when the target appeared
-
-Kernel/guest details:
-
-  kernel: v7.4-rc3, bzImage sha256
-    0c16409f8aec508ac44a63e631c2bd352536401f3fd0856df1d839fb953a1882
-  guest: Debian trixie x86_64, 6 GiB RAM, 4 vCPU, QEMU/KVM, nested KVM
-  boot: oops=3Dpanic panic_on_warn=3D1 hung_task_panic=3D0 kvm-intel.nested=
-=3D1
-  config: CONFIG_KASAN=3Dy, CONFIG_PROVE_LOCKING=3Dy, CONFIG_KVM=3Dy,
-    CONFIG_KVM_XEN=3Dy
-
-Thanks,
-Zheng
+diff --git a/xen/arch/arm/cpufeature.c b/xen/arch/arm/cpufeature.c
+index e4e0dd0922..05c4393324 100644
+--- a/xen/arch/arm/cpufeature.c
++++ b/xen/arch/arm/cpufeature.c
+@@ -39,6 +39,15 @@ static bool has_sb_instruction(const struct arm_cpu_capabilities *entry)
+ {
+     return system_cpuinfo.isa64.sb;
+ }
++
++static bool has_tlbi_range(const struct arm_cpu_capabilities *entry)
++{
++    /*
++     * ID_AA64ISAR0_EL1.TLB: 0b0001 is FEAT_TLBIOS, 0b0010 adds
++     * FEAT_TLBIRANGE.
++     */
++    return system_cpuinfo.isa64.tlb >= 2;
++}
+ #endif
+ 
+ static const struct arm_cpu_capabilities arm_features[] = {
+@@ -62,6 +71,11 @@ static const struct arm_cpu_capabilities arm_features[] = {
+         .capability = ARM_HAS_SB,
+         .matches = has_sb_instruction,
+     },
++    {
++        .desc = "Range-based TLB invalidation (FEAT_TLBIRANGE)",
++        .capability = ARM64_HAS_TLBI_RANGE,
++        .matches = has_tlbi_range,
++    },
+ #endif
+     {},
+ };
+diff --git a/xen/arch/arm/include/asm/arm64/flushtlb.h b/xen/arch/arm/include/asm/arm64/flushtlb.h
+index ff2ce2bae2..7dc8ae608a 100644
+--- a/xen/arch/arm/include/asm/arm64/flushtlb.h
++++ b/xen/arch/arm/include/asm/arm64/flushtlb.h
+@@ -133,6 +133,70 @@ static inline void tlbi_complete_broadcast(void)
+     isb();
+ }
+ 
++/*
++ * Range-based TLB invalidation (FEAT_TLBIRANGE), see Arm ARM
++ * (DDI 0487 M.d), C5.5.22 (TLBI RIPAS2E1IS).
++ *
++ * The operand of TLBI RIPAS2E1IS is:
++ *   [47:46] TG     translation granule, 0b01 for 4KB
++ *   [45:44] SCALE
++ *   [43:39] NUM
++ *   [38:37] TTL    0b00, no level hint
++ *   [36:0]  BADDR  IPA[48:12], Xen does not use FEAT_LPA2 for stage-2
++ * and the instruction invalidates (NUM + 1) * 2^(5 * SCALE + 1) pages.
++ *
++ * These are the same definitions as in Linux, see
++ * arch/arm64/include/asm/tlbflush.h.
++ */
++#define TLBI_RANGE_MAX_SCALE    3
++#define TLBI_RANGE_PAGES(num, scale) \
++    ((((unsigned long)(num)) + 1) << (5 * (scale) + 1))
++#define TLBI_RANGE_MAX_PAGES    TLBI_RANGE_PAGES(31, TLBI_RANGE_MAX_SCALE)
++/* Gives -1 to 31 for a range of up to TLBI_RANGE_MAX_PAGES pages. */
++#define TLBI_RANGE_NUM(pages, scale) \
++    ((long)((pages) >> (5 * (scale) + 1)) - 1)
++
++/*
++ * TLBI RIPAS2E1IS: invalidate a range of IPAs of the current VMID, in the
++ * inner-shareable domain. It is encoded as SYS #4, C8, C0, #2 so that no
++ * assembler support for FEAT_TLBIRANGE is required.
++ */
++static inline void tlbi_ripas2e1is(uint64_t op)
++{
++    asm_inline volatile(
++        "sys #4, c8, c0, #2, %0"
++        : : "r" (op) : "memory");
++}
++
++/*
++ * Invalidate an even number @pages, of at most TLBI_RANGE_MAX_PAGES, of
++ * stage-2 pages starting at @ipa, using at most one range operation per
++ * scale. The caller issues the barriers.
++ */
++static inline void tlbi_range_ipas2e1is(paddr_t ipa, unsigned long pages)
++{
++    int scale = TLBI_RANGE_MAX_SCALE;
++
++    while ( pages > 1 && scale >= 0 )
++    {
++        long num = TLBI_RANGE_NUM(pages, scale);
++
++        if ( num >= 0 )
++        {
++            uint64_t op = ((ipa >> PAGE_SHIFT) & 0x1fffffffffULL) |
++                          ((uint64_t)num << 39) |
++                          ((uint64_t)scale << 44) |
++                          (1ULL << 46);
++
++            tlbi_ripas2e1is(op);
++
++            ipa += (paddr_t)TLBI_RANGE_PAGES(num, scale) << PAGE_SHIFT;
++            pages -= TLBI_RANGE_PAGES(num, scale);
++        }
++        scale--;
++    }
++}
++
+ /*
+  * TLBI IPAS2E1IS: invalidate the stage-2 and combined entries of one IPA of
+  * the current VMID, in the inner-shareable domain. The caller issues the
+@@ -155,16 +219,42 @@ static inline void tlbi_vmalle1is(void)
+  * Flush a range of IPA's mappings from the TLB of all processors in the
+  * inner-shareable domain.
+  *
+- * A range of TLBI_MAX_PAGE_OPS pages or more is flushed with the whole
+- * VMID. Each page of the range costs a broadcast TLBI, and the limit bounds
+- * their number like MAX_DVM_OPS does in Linux. It is not a tuned value.
++ * With FEAT_TLBIRANGE, ranges larger than TLBI_RANGE_MAX_PAGES are flushed
++ * with the whole VMID. Without it, a range of TLBI_MAX_PAGE_OPS pages or
++ * more uses the whole VMID; each smaller range costs one broadcast TLBI per
++ * page. These limits bound instruction count; neither is a tuned crossover.
+  */
+ static inline void flush_guest_tlb_range_ipa(paddr_t ipa, unsigned long size)
+ {
+     unsigned long pages = size >> PAGE_SHIFT;
+-    paddr_t end = ipa + size;
++    bool range = cpus_have_const_cap(ARM64_HAS_TLBI_RANGE);
++
++    if ( !pages )
++        return;
+ 
+-    if ( pages >= TLBI_MAX_PAGE_OPS )
++    if ( range )
++    {
++        /*
++         * A range operation covers an even number of pages. Extend an odd
++         * range by one page, on the side that makes it 2 pages aligned: the
++         * neighbor is always inside the IPA space, and a page more is safe
++         * to invalidate.
++         */
++        if ( (pages & 1UL) != 0UL )
++        {
++            if ( (ipa & PAGE_SIZE) != 0UL )
++                ipa -= PAGE_SIZE;
++            pages++;
++        }
++
++        /* Same limit as Linux, one range operation per scale at most. */
++        if ( pages > TLBI_RANGE_MAX_PAGES )
++        {
++            flush_guest_tlb();
++            return;
++        }
++    }
++    else if ( pages >= TLBI_MAX_PAGE_OPS )
+     {
+         flush_guest_tlb();
+         return;
+@@ -175,10 +265,17 @@ static inline void flush_guest_tlb_range_ipa(paddr_t ipa, unsigned long size)
+      * stage 2 translations).
+      */
+     dsb(ishst); /* Ensure prior page-table updates have completed */
+-    for ( ; ipa < end; ipa += PAGE_SIZE )
++    if ( range )
++        tlbi_range_ipas2e1is(ipa, pages);
++    else
+     {
+-        /* Flush stage-2 TLBs for IPA address */
+-        tlbi_ipas2e1is(ipa);
++        paddr_t end = ipa + size;
++
++        for ( ; ipa < end; ipa += PAGE_SIZE )
++        {
++            /* Flush stage-2 TLBs for IPA address */
++            tlbi_ipas2e1is(ipa);
++        }
+     }
+ 
+     /*
+diff --git a/xen/arch/arm/include/asm/cpufeature.h b/xen/arch/arm/include/asm/cpufeature.h
+index 38e01aa94d..a4f7bcbe3e 100644
+--- a/xen/arch/arm/include/asm/cpufeature.h
++++ b/xen/arch/arm/include/asm/cpufeature.h
+@@ -78,8 +78,9 @@
+ #define ARM64_WORKAROUND_1508412 17
+ #define ARM_HAS_NTLBPA 18
+ #define ARM32_HAS_TLB_IPA 19
++#define ARM64_HAS_TLBI_RANGE 20
+ 
+-#define ARM_NCAPS           20
++#define ARM_NCAPS           21
+ 
+ #ifndef __ASSEMBLER__
+ 
 
