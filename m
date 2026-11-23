@@ -2,43 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AEA79606A31A
-	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2026 05:49:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A4367606A32E
+	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2026 05:50:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=m5brb9u8
-Received: from list by lists.xenproject.org with outflank-mailman.1500152.1696453 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=icedev.pl header.i=@icedev.pl header.a=rsa-sha256 header.s=google header.b=EXoFJ0v+
+Received: from list by lists.xenproject.org with outflank-mailman.1500205.1696462 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVMvj-0005g4-Qi; Mon, 23 Nov 2026 05:49:31 +0000
+	id 1xVMwb-0007AB-7P; Mon, 23 Nov 2026 05:50:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1500152.1696453; Mon, 23 Nov 2026 05:49:31 +0000
+Received: by outflank-mailman (output) from mailman id 1500205.1696462; Mon, 23 Nov 2026 05:50:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVMvj-0005ft-LO; Mon, 23 Nov 2026 05:49:31 +0000
-Received: by outflank-mailman (input) for mailman id 1500152;
- Mon, 23 Nov 2026 01:14:17 +0000
+	id 1xVMwb-0007A4-32; Mon, 23 Nov 2026 05:50:25 +0000
+Received: by outflank-mailman (input) for mailman id 1500205;
+ Mon, 23 Nov 2026 04:08:23 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <tzungbi@kernel.org>) id 1xVIdN-00037C-3A
- for xen-devel@lists.xenproject.org; Mon, 23 Nov 2026 01:14:17 +0000
+ (envelope-from <michal.leszczynski@itsecrnd.com>) id 1xVLLq-00004w-Ly
+ for xen-devel@lists.xenproject.org; Mon, 23 Nov 2026 04:08:23 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xVIdM-00Dv52-3I
- for xen-devel@lists.xenproject.org; Mon, 23 Nov 2026 02:14:16 +0100
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xVLLq-0008FE-2R
+ for xen-devel@lists.xenproject.org; Mon, 23 Nov 2026 05:08:22 +0100
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <tzungbi@kernel.org>)
- id 6b03932f-2eae-0a2a0a5409dd-0a2a45018240-22
- for <xen-devel@lists.xenproject.org>; Mon, 23 Nov 2026 02:14:16 +0100
-Received: from [172.234.252.31] (helo=sea.source.kernel.org)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <tzungbi@kernel.org>)
- id 6b039366-5bcc-0a2a45010019-aceafc1f898a-3
- for <xen-devel@lists.xenproject.org>; Mon, 23 Nov 2026 02:14:15 +0100
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id A90CD411F0;
- Mon, 23 Nov 2026 01:14:13 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D6C351F000C0;
- Mon, 23 Nov 2026 01:14:01 +0000 (UTC)
+ (envelope-from <michal.leszczynski@itsecrnd.com>)
+ id 6b03bc03-e002-0a2a0a5209dd-0a2a450ab902-32
+ for <xen-devel@lists.xenproject.org>; Mon, 23 Nov 2026 05:08:21 +0100
+Received: from [209.85.218.50] (helo=mail-ej1-f50.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <michal.leszczynski@itsecrnd.com>)
+ id 6b03bc35-f2d2-0a2a450a0019-d155da32d5fb-3
+ for <xen-devel@lists.xenproject.org>; Mon, 23 Nov 2026 05:08:21 +0100
+Received: by mail-ej1-f50.google.com with SMTP id
+ a640c23a62f3a-c50e26763a4so519731566b.1
+ for <xen-devel@lists.xenproject.org>; Sun, 22 Nov 2026 20:08:21 -0800 (PST)
+Received: from vmpc ([93.174.29.228]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c513aea8063sm366345366b.45.2026.11.22.20.08.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 22 Nov 2026 20:08:20 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -47,110 +49,119 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:From:To:Cc:Subject:References:In-Reply-To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795396453;
-	bh=1nAFz1rE2Zgq0kT2UJ5pKEhQqcU8lxqQXw2MrFx+Nfc=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=m5brb9u8foWKbi7SrlcdW6nE2yWIS8IEGVU5QHSZYMih+9IEkmiqaNM0lLx2EYbPE
-	 Ene3Ka2hJ1BAvW2vOWqYEoxo49rMX/8KuHKgTHWJQeFE3NrlIrAf3xeYL6VLmMY+/l
-	 ekFXnTI29+zSfV1Cj1JiY8g0iM3LpoM2wMrgHM/4k71UbfvjD94MuJKD4cUZLqKZBp
-	 tapIlLzsw5cg25rKFRJ3Wy6OzHRx9WFNJ4Dy/E+S8IHUzJbf1ziPCMSD/LFgujVS+y
-	 I6gkNfNt8+7zFmlY0xlcmT0RV+dcWLazJhMGzWNLJfBLUPxJ9MdE0Cw4N9AumibzJ+
-	 +Zbi9zcgZuE0w==
-Date: Mon, 23 Nov 2026 01:13:59 +0000
-From: Tzung-Bi Shih <tzungbi@kernel.org>
-To: Randy Dunlap <rdunlap@infradead.org>
-Cc: linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>, linux-doc@vger.kernel.org,
-	David Hildenbrand <david@kernel.org>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Jason Gunthorpe <jgg@nvidia.com>,
-	Leon Romanovsky <leonro@nvidia.com>, linux-mm@kvack.org,
-	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
-	linux-sound@vger.kernel.org, Jens Axboe <axboe@kernel.dk>,
-	linux-block@vger.kernel.org, Marcel Holtmann <marcel@holtmann.org>,
-	Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
-	linux-bluetooth@vger.kernel.org,
-	Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
-	Jason Wang <jasowangio@gmail.com>, David Heidelberg <david@ixit.cz>,
-	oe-linux-nfc@lists.linux.dev, Chas Williams <3chas3@gmail.com>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@kernel.org>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-	netdev@vger.kernel.org, Helge Deller <deller@gmx.de>,
-	linux-fbdev@vger.kernel.org, dri-devel@lists.freedesktop.org,
-	MPT-FusionLinux.pdl@broadcom.com,
-	"James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
-	"Martin K. Petersen" <mkp@kernel.org>, linux-scsi@vger.kernel.org,
-	Miquel Raynal <miquel.raynal@bootlin.com>,
-	Richard Weinberger <richard@nod.at>,
-	Vignesh Raghavendra <vigneshr@ti.com>,
-	Zhihao Cheng <chengzhihao1@huawei.com>,
-	linux-mtd@lists.infradead.org, Neill Kapron <nkapron@google.com>,
-	Andrey Konovalov <andreyknvl@gmail.com>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	linux-usb@vger.kernel.org, Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	xen-devel@lists.xenproject.org, Hans de Goede <hansg@kernel.org>,
-	Arnd Bergmann <arnd@arndb.de>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Eugenio =?iso-8859-1?Q?P=E9rez?= <eperezma@redhat.com>,
-	Sean Christopherson <seanjc@google.com>,
-	Paolo Bonzini <pbonzini@redhat.com>, kvm@vger.kernel.org,
-	virtualization@lists.linux.dev, Jan Kara <jack@suse.cz>,
-	linux-fsdevel@vger.kernel.org, Theodore Ts'o <tytso@mit.edu>,
-	linux-ext4@vger.kernel.org, Mike Marshall <hubcap@omnibond.com>,
-	devel@lists.orangefs.org, Paulo Alcantara <pc@manguebit.org>,
-	Namjae Jeon <linkinjeon@kernel.org>, linux-cifs@vger.kernel.org,
-	Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>,
-	linux-f2fs-devel@lists.sourceforge.net,
-	Florian Fainelli <florian.fainelli@broadcom.com>,
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
-	Benson Leung <bleung@chromium.org>,
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-	Alex Deucher <alexander.deucher@amd.com>,
-	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
-	amd-gfx@lists.freedesktop.org,
-	Jani Nikula <jani.nikula@linux.intel.com>,
-	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-	Rodrigo Vivi <rodrigo.vivi@intel.com>,
-	Tvrtko Ursulin <tursulin@ursulin.net>,
-	intel-gfx@lists.freedesktop.org,
-	Matthew Brost <matthew.brost@intel.com>,
-	Thomas =?iso-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>,
-	intel-xe@lists.freedesktop.org
-Subject: Re: [PATCH v2 11/12] docs: ioctl-number: update platform entries
-Message-ID: <awOTV4kbshpi_cxp@google.com>
-References: <20261119053514.255348-1-rdunlap@infradead.org>
- <20261119053514.255348-12-rdunlap@infradead.org>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=icedev.pl header.i="@icedev.pl" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=icedev.pl; s=google; t=1795406901; x=1796011701; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=+y4OO1MKIZbEdYCgmvXtDmq9X7oqv4bG74DNc8SSEqY=;
+        b=EXoFJ0v+8GdwdI99x+1wYkcNjkkDtyLCXRrE6rEzhfQTFB2yJnIgt1Lotdf+eu33hP
+         AK6xLYFf5Uxgqd4L5FVTLsDEl7Kr4ldDGorpZhO/mB9dxTwxZSoTB8DjmAXw5U5RhhBo
+         XJTPd9LnUk41xFrZj/c5hsv8r7Ebt5Go6jXbIRAV8571F1BQc6Y23BkNrc9NSa5Yfgky
+         hSyKh+btgYd34JttOUOAG4i3LArKQf4cNWqAiOonws+oIJQur+e2mBx/avQEsDD/4bFS
+         l1nYOPm46B60YY3z2FadAmuqIj4pXBQkWnn39D7Tsk3+SVu8Hj1Mu7IQNzqcz9SWhXM3
+         Eb2w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795406901; x=1796011701;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=+y4OO1MKIZbEdYCgmvXtDmq9X7oqv4bG74DNc8SSEqY=;
+        b=0CQEZBKcF7FKXimtPq48PT9Q2ytVoQf2K1m+npP+9DFqDOwObikQ+hP3n3+HZ1ft8Q
+         xwFl57ZnoO1iRtH0ANzp7U6Pj6HtiSqkNsc3LYIwp9CGlx4yDw93LjmDEfJMJUvtPw3V
+         UDTf9I/5WzuhQwLp5fhY1zrmOBOsHPrd9pHu5Ihx5pchnkkJF2hQQ7q1/+V5w6zcpnSM
+         181nQLMSjs+ZP39hjIZweK+K3Vxs0GifaIoCaKP6dWHcrmAEG+LupIIngIVQ5n3HWeIm
+         GeGk+LQA+/3/6th88/L5WyUFiEinQ8SBRrvnz4Cca/P9r7Z5HKFxOK4xafC6G5wuBSKE
+         Bnjg==
+X-Gm-Message-State: APuU4Z97y5RE3kdesgeoswHRjQ6Pigg9s4YlmU+m+yVmpLuHmFkcjQHI
+	cLXmwTFxeaNOIjk+4TCPD5jg4MkdIf5rA3cc1suAFFL6nJbnnGAbZWXyQi7nlvaSVEZtW6Jy1S3
+	pjenPiLo=
+X-Gm-Gg: AZFdTZfbKsa4QATsxYNrWwY4apUfK6mN8FvlcDlkHB9Z0EzaXFceZ5j7FgdrJ48owc9
+	GDi+wWcw0PdaiU3NDfYVSjL1xI+6Qt6bbrptM6VcmQJXpj3hs5PPDqa3v4xPKwuMOZFAB8AC9Hl
+	q0bBkg7fJyOAdC7I0yNEBaHU0zgkE0m1kSgOHbFhy0ah5s9DiebxsJ6c00bgKEEbSxfu0ekbHif
+	Ib9iQUFim8uY5NjnIMJRCZTnL/JBF/I31/FC8t+RqHbvzY39bCRp5+y06fYL2T4iEMmK3Q8ugMg
+	brym4dh/BhbrRW89cKD5On6nTzWtqUPOLSbn3TL1JqM5X6YNA4ln//pMc1K6Bu4AybvtX26B3dW
+	D0ULgoVRvdJfEi4kDSrCxtDiEqSodu3dGhI65BYC6OmlczS/YQ1chp1XOL0BnGMIomukEWGvRdj
+	5eNVVYVEBk6gP5xsxMiZATumS1mqDLydKSlgw7wdS4XHZFiMyBMnCk7iZsTbB+5ksV8mrN1Bw7Y
+	gCu3uY6ScEes+uth18dEaMO+2cbgPwNaWgmPHO7TxbSAGxDwpWm8rd9UAvP36thtJxPmTUnWZf8
+	fHo8eC0VowH1UdLoSN5aGHYyoTJn/TNNS9SPzGkVXrw06nmhVzfVbQ==
+X-Received: by 2002:a17:907:84c:b0:c2e:63ba:1f90 with SMTP id a640c23a62f3a-c513acb5be4mr869989766b.48.1795406901194;
+        Sun, 22 Nov 2026 20:08:21 -0800 (PST)
+From: =?UTF-8?q?Micha=C5=82=20Leszczy=C5=84ski?= <ml@icedev.pl>
+To: xen-devel@lists.xenproject.org
+Cc: =?UTF-8?q?Micha=C5=82=20Leszczy=C5=84ski?= <ml@icedev.pl>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Teddy Astie <teddy.astie@vates.tech>,
+	Tamas K Lengyel <tamas@tklengyel.com>
+Subject: [PATCH] x86/p2m: don't request mapcache invalidation for altp2m removals
+Date: Mon, 23 Nov 2026 05:07:12 +0100
+Message-ID: <20261123040805.23963-1-ml@icedev.pl>
+X-Mailer: git-send-email 2.53.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261119053514.255348-12-rdunlap@infradead.org>
-X-purgate-ID: tlsNG-d62444/1795396456-4F1435FD-C000225E/0/0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-4011c0/1795406901-51CC3CFC-D40E2F30/0/0
 X-purgate-type: clean
-X-purgate-size: 511
-X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY autolearn=unavailable autolearn_force=no
-	version=4.0.1
+X-purgate-size: 1993
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Wed, Nov 18, 2026 at 09:35:12PM -0800, Randy Dunlap wrote:
-> Update the list of platform/ files where ioctls are defined and update
-> the ranges of function numbers that are used.
-> 
-> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-> ---
-> v2: no change
-> 
-> [Since having multiple maintainers trying to merge these would
-> cause some conflicts, it would be more manageable for Jon to
-> take all of these through the docs-next tree.]
+From: Michał Leszczyński <ml@icedev.pl>
 
-Acked-by: Tzung-Bi Shih <tzungbi@kernel.org> # cros_ec
+Since commit 588d961d15d1, p2m_remove_entry() requests a mapcache
+invalidation for every removal, including altp2m entries removed via
+p2m_change_altp2m_gfn(). Device models map guest memory through the
+host p2m, so such removals cannot leave them with stale mappings.
+
+When the request is issued by another domain, every vCPU of the guest
+synchronously broadcasts IOREQ_TYPE_INVALIDATE on its next hypercall.
+DRAKVUF triggers this whenever it removes the last breakpoint from a
+page.
+
+This was measured on Xen 4.22.0 with QEMU 9.1 and a 2-vCPU Windows 10
+guest, benchmarking a dummy application which calls NtCreateFile in a loop
+while DRAKVUF's filetracer plugin is tracing those calls. On every such
+syscall entry, the plugin places a temporary trap on the return address,
+to be able to observe syscall's return value. The trap is removed after
+the observation is made. Thus, every syscall translates to altp2m entry
+addition and removal under this benchmark scenario.
+
+Without this change, each traced call took about 8.1 ms.
+With patch it goes down to about 0.19 ms (~43 times faster!)
+
+Only request the invalidation for the host p2m.
+
+Fixes: 588d961d15d1 ("IOREQ: refine when to send mapcache invalidation request")
+Backport: 4.15+
+Signed-off-by: Michał Leszczyński <ml@icedev.pl>
+---
+ xen/arch/x86/mm/p2m.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/xen/arch/x86/mm/p2m.c b/xen/arch/x86/mm/p2m.c
+index 52cadd9b25..bb0356396c 100644
+--- a/xen/arch/x86/mm/p2m.c
++++ b/xen/arch/x86/mm/p2m.c
+@@ -574,7 +574,8 @@ p2m_remove_entry(struct p2m_domain *p2m, gfn_t gfn, mfn_t mfn,
+         }
+     }
+ 
+-    ioreq_request_mapcache_invalidate(p2m->domain);
++    if ( p2m_is_hostp2m(p2m) )
++        ioreq_request_mapcache_invalidate(p2m->domain);
+ 
+     rc = p2m_set_entry(p2m, gfn, INVALID_MFN, page_order, p2m_invalid,
+                        p2m->default_access);
+-- 
+2.53.0
+
 
