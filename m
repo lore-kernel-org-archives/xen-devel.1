@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 25356606A331
-	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2026 07:47:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4A04A606F60F
+	for <xen-devel@archiver.kernel.org>; Mon, 23 Nov 2026 08:05:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=S5IeQo0B
-Received: from list by lists.xenproject.org with outflank-mailman.1500245.1696479 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=CzzDlcp/
+Received: from list by lists.xenproject.org with outflank-mailman.1500264.1696489 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVOlM-0005AK-BJ; Mon, 23 Nov 2026 07:46:56 +0000
+	id 1xVP2j-0000Io-8d; Mon, 23 Nov 2026 08:04:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1500245.1696479; Mon, 23 Nov 2026 07:46:56 +0000
+Received: by outflank-mailman (output) from mailman id 1500264.1696489; Mon, 23 Nov 2026 08:04:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVOlM-0005AC-7p; Mon, 23 Nov 2026 07:46:56 +0000
-Received: by outflank-mailman (input) for mailman id 1500245;
- Mon, 23 Nov 2026 07:46:54 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xVOlK-0005A2-4P
- for xen-devel@lists.xenproject.org; Mon, 23 Nov 2026 07:46:54 +0000
+	id 1xVP2j-0000Ih-4a; Mon, 23 Nov 2026 08:04:53 +0000
+Received: by outflank-mailman (input) for mailman id 1500264;
+ Mon, 23 Nov 2026 08:04:52 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xVP2i-0000IN-Dz
+ for xen-devel@lists.xenproject.org; Mon, 23 Nov 2026 08:04:52 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xVOlJ-0043e7-6F
- for xen-devel@lists.xenproject.org; Mon, 23 Nov 2026 08:46:53 +0100
+ id 1xVP2h-002rzI-FA
+ for xen-devel@lists.xenproject.org; Mon, 23 Nov 2026 09:04:51 +0100
 Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6b03ef65-2eae-0a2a0a5409dd-0a2a450ab232-24
- for <xen-devel@lists.xenproject.org>; Mon, 23 Nov 2026 08:46:53 +0100
-Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
+ id 6b03f392-2eae-0a2a0a5409dd-0a2a450aa198-48
+ for <xen-devel@lists.xenproject.org>; Mon, 23 Nov 2026 09:04:51 +0100
+Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
  by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6b03ef6c-f2d2-0a2a450a0019-d155802eed90-3
- for <xen-devel@lists.xenproject.org>; Mon, 23 Nov 2026 08:46:52 +0100
-Received: by mail-wm1-f46.google.com with SMTP id
- 5b1f17b1804b1-4bb85e07aadso35427555e9.1
- for <xen-devel@lists.xenproject.org>; Sun, 22 Nov 2026 23:46:52 -0800 (PST)
+ id 6b03f3a3-f2d2-0a2a450a0019-d1558030e85f-3
+ for <xen-devel@lists.xenproject.org>; Mon, 23 Nov 2026 09:04:51 +0100
+Received: by mail-wm1-f48.google.com with SMTP id
+ 5b1f17b1804b1-49d05d51553so20448355e9.2
+ for <xen-devel@lists.xenproject.org>; Mon, 23 Nov 2026 00:04:51 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb905f0f1csm141768565e9.0.2026.11.22.23.46.51
+ 5b1f17b1804b1-4bb8538b3a7sm379556105e9.3.2026.11.23.00.04.50
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 22 Nov 2026 23:46:52 -0800 (PST)
+ Mon, 23 Nov 2026 00:04:50 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,61 +51,60 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1795420012; x=1796024812; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1795421091; x=1796025891; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Bx5NiEtuTuz+JJMZ7z4EjIPNaKxhPhKorkWBeontews=;
-        b=S5IeQo0BRBpDpNj60/YrsKrfGFEdKN0aj5PSj+VQ5Lcctq8a38rNjDl7FpINi2b9GK
-         MUZTstf0GQsL2S195C1omtMQIV92OSA+jJcpwFnLpaxtsZzrtwppMHIwAgulTQoOJQN2
-         3/XKfYi3xVLiMhYuK9lwd92SDhN8FkicNZr2Np6WYnlSMFHFFGAlZtlPkWwPNec6GEwE
-         bfvFXipUfwy4u+eriat4kf93OV+TgnxchTDMzV/QWviBmVE9hbdGDskRtv1Fw5kX+pOe
-         MZPRkN3swoGPa4bE13FPakZSR7P4KJWD5ffuOkMP26Q4/QlbsZdEnw+TLX1r77Zr93cp
-         /j/w==
+        bh=5xectmDOxRnd4UNdzPo8Bnom/1nV3EDYUcIprZWZ3tY=;
+        b=CzzDlcp/QNv8eaVcMuw5RHbwWjZ9XI5SPxwJA3dDiRXN+lIbyk91bfoumPgsBeTe+2
+         J4jgsyUOrFC1URhaeYuoyhOQE6UlUkpps06qryNp+MtN2m5mx8eKK8N1uNOkzVaP6lLK
+         8JobqqOPIj/Urcof0bKXBdSS/igjNbXsDFEgWVoZ8sS/B0xgPjF82JG54D+HMKflh9rw
+         3G87xgDpAwpCXYlJFjUleSdEYjlj5h7Sn7M0Zadee1PjSYKfFBvzmXXfxUMzVeDtGSZs
+         WXuhFQzu3uCACvMyUd2jPElbdA4neR8hwuP70hpPoxlPb3jfKEFboa+64IDlr7y3KXAF
+         Ywhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795420012; x=1796024812;
+        d=1e100.net; s=20260707; t=1795421091; x=1796025891;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Bx5NiEtuTuz+JJMZ7z4EjIPNaKxhPhKorkWBeontews=;
-        b=tm8BrlEwTlToXPKBENO3G9/csbbuieAM27EhkWgHIehKcMKbGfCZHxRmeGlPXuGAAE
-         GZJScC7wOBqTvlfaZmF87bvvVACQZEXo8MQrdXdzECz3/jjwaTuAvDClQd9zA80O2Ids
-         WjPHmSbVXeZypF+wNuyxCGBJ1nOqMhhF3YqnRT6e2Ngr/vLRARlw7yC5B/G5/kNW4wMs
-         sZ5Ts9vR5COi3jh19k2guGmoaSx0DhuS0QTCScATrnPIsMEnVKDpNaF3zT4Kx2mPTb6b
-         5swph5rd2iNFxA85tMB8kSNlqV/ayXo5BYwg4pixuNqxl+IcE0UjZZN9ytCOv1fRajUX
-         526Q==
-X-Forwarded-Encrypted: i=1; AL+hErEfyB2m/oubEpuAPewv8s27H2qVxvqzeSORb2rSl0Qgzs0+63Yl+076jfN9YB3dn/IMCtpZP4YHTOA=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z//EHUO6pfg5BFUv0abfxX2j1eiN4MsLajh0gGv2xsPdyKkkXw3
-	DxB3zJ+/o9dGx4rs6FU7gwE+W2MQkEN10lyhIyWa3UaMtuxJ9EZkOCCFDVYeggQTKQ==
-X-Gm-Gg: AZFdTZfMrwmeEzzctljfNUMKKErlRD8piQPzYTDhtVASUHWnV/EscV5QHSU9poRQZpB
-	A7EsLoeQQC4Zg1Gg7Qc7Hd3yAoscsP5rVglIbgqkNaBsTxj5uBhJdIHuAR1h3GyNp48HU36ZvzE
-	3cCunuVy83JwaYqYvQf4G87COLmspE2fW1b40mYRgYYfoZsd9R8GT5q+QwLPwZsriz644rP1gXy
-	FuAQw+s94rKdukHhVXQOZdv1WBbTO0bQixMT+Btorx3iEr6xT8YpbLVgaBov9h3GYk1tivk7Jw5
-	Q6cLgrBTuwwnbc1OVvhjHadRIPtaIxifUH5C8dLd5bJ1g2irCjSgxxxATVtnam0yc9ysej2cB2M
-	WbQ9P5lC6nokOFmRZiGjskxPeksXkb50utkW9iVh4o8r9B1kiOEZ5soSQXPzMYmI0Kg7/8yJ1WW
-	cK8LkCsjOURh1qWDxBaf7BwybwBSqoM16BYR0jp753LqlhslVXoz+6yd3ElPZBORt/8g09FvOQD
-	i9vZDc8vaK1zL0UCdD13+RRdZ3gT8BE/VugZDxmWUYyWqzibJtovU01dWhXd0WaJYcn5iEBjDQ8
-	bmaNFJLLIniwZ4S6rMkPvbLS3mQtcfnXxvhQkiDBD3tqMe/XJiyWZHAE1lINgxnt6fwNMw8OMTW
-	farIHpixy/TO0ro5P6Q==
-X-Received: by 2002:a05:600c:8486:b0:4ac:aae6:6401 with SMTP id 5b1f17b1804b1-4bb8880606fmr216421555e9.12.1795420012397;
-        Sun, 22 Nov 2026 23:46:52 -0800 (PST)
-Message-ID: <4170e001-011c-44a6-8cae-8be277511081@suse.com>
-Date: Mon, 23 Nov 2026 08:46:51 +0100
+        bh=5xectmDOxRnd4UNdzPo8Bnom/1nV3EDYUcIprZWZ3tY=;
+        b=i5pKcgV6f5mJKhg2thWLCzLn1wRz4eymKy8GoLy5a2jquZwhiu44Qft6MDlQ3gMt+M
+         ABppk+rP+acmw7L/OFR440l+pXUFe6queLhFCnjWPawjCODdf4J4XwoRip5Rm2XBTGoA
+         MO39HS0yamLYO33ULwV1vdi6gF5HIBw/vKDAv7TOtm53kWZnscsqIByezWqwS3DPUZXZ
+         tDUtaRDm8fJ9mdTj3gFeAG7I770B5DNDoPYtZ13aOziOtxK8f5qWqt0D+0x4cz67UxU7
+         Hg8HEqf47WdconAkV8nm3aRBBeyUaejhui004TBgBPWRyhcqcXGKg7bVD8R3b1zq6gcB
+         usvA==
+X-Forwarded-Encrypted: i=1; AL+hErExN/Mjn0CRbx7nPlfUgV/cKwZdihtkN3DQtOSRjHHoNMkLIoHVps+KVIaGoaftjXyCpPxmE5u6KPw=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z+df2JJYfqZI3kGAYj2uIAWhZ1O15rNn9joX0l0SdE1oV6ljAwQ
+	1Xr8xNgkNx9qd523Dj4zLke2mcD12PnbH/7iQlm2QUsVYHO39SxvuZ+vLQfVgo2pbA==
+X-Gm-Gg: AZFdTZfSAjYl3lmn8XyEOeWOnUmp7ofnO/UUHAly8YFtPFfsx09EnUnONvJWA/zL7bI
+	OlCKjWLktR2WDaAo32GuWx5G+tOLRNGGWnuLG4ZOeqG1C+h+aW66/Lcn5rAuKaF2IWUK+tTqMlO
+	PhHj00M2CgBX/17kH3itV5Fgyz8CA70M/jjDijTrd+kXDdvPeo1Z9n7Hyb7bhei1UQkOal+1ui+
+	bpiolfR5AnCpSS1kgGKSbT1CqCd1NbsGPInf7V0qt3doeZIijgsYqVbRNWe6IrFFy68PO19FIy3
+	iyc39hVrQhgOe1WoR0emFMK6xDX2xfLFpsk4LWm8ovOceSeNe2ia0f19utcMrbzqTUhGqX7o2yd
+	XEYykqWkAy/+HntwnI1CO/23sbi90ka4DMbDGsnnECn7CE7CuhIVBV3PJ1hvAb+i8SJjuh8ad5Z
+	StpV8laxYhhfABOR0kCk7PLI4nH7itYxlfoJPXFV/yfOFmeOhhom+RFIL/xtgDi20wpanEVi0Y8
+	AxU55frE779j4Jy2kosOIm0Vw0+mcZ+iQuobo0/cn5MEK206YYlUWmYVya9I1Ro5vGVXHUyVdRF
+	QMC4DEUWzrq9HDmQixXV86q9WzySPzRaOoATgtM4Thse6EhhgdLomL98eXTArf+wqYIT8Rvv92s
+	iSDvSUUhgM035J1tO
+X-Received: by 2002:a05:600d:6510:10b0:4a1:811c:8078 with SMTP id 5b1f17b1804b1-4bb8881de57mr143684915e9.26.1795421090866;
+        Mon, 23 Nov 2026 00:04:50 -0800 (PST)
+Message-ID: <5ab98397-7a25-4571-a404-8f123bcf8921@suse.com>
+Date: Mon, 23 Nov 2026 09:04:49 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] x86/vlapic: size the all-ones broadcast by the
- sender's mode
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Stefano Stabellini <stefano.stabellini@amd.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
+Subject: Re: [PATCH] docs/misra: add Directive 4.3 to rules.rst
+To: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
-References: <20261119220003.38517-1-stefano.stabellini@amd.com>
- <6c0f9314-05ea-413d-89d2-5e63d0182065@suse.com>
- <63acd724-1eb6-e1da-a986-c8fdaf3e955b@kernel.org>
+ Stefano Stabellini <sstabellini@kernel.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <9981629dc9ea12a2bae9a06b70a4d2daa0556dc3.1795361846.git.dmytro_prokopchuk1@epam.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -131,67 +130,30 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <63acd724-1eb6-e1da-a986-c8fdaf3e955b@kernel.org>
+In-Reply-To: <9981629dc9ea12a2bae9a06b70a4d2daa0556dc3.1795361846.git.dmytro_prokopchuk1@epam.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-4011c0/1795420013-583CCCFC-639FA004/10/78276251493
+X-purgate-ID: tlsNG-4011c0/1795421091-595C3CFC-151B58FA/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 1970
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-purgate-size: 327
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 20.11.2026 22:55, Stefano Stabellini wrote:
-> On Fri, 20 Nov 2026, Jan Beulich wrote:
->> On 19.11.2026 23:00, Stefano Stabellini wrote:
->>> vlapic_match_dest() detects a broadcast by comparing the destination
->>> with all ones in the target's mode, but an IPI's destination has the
->>> width of the sender's mode.
->>>
->>> Use the sender's mode when there is one, as is_multicast_dest() does:
->>> whether a destination is a broadcast is decided by the sender. vIO-APIC
->>> and MSI destinations have no sender and are still compared in the
->>> target's mode.
->>
->> But that isn't right: Those simply cannot express wide target IDs. Aiui
->> 0xff is uniformly "broadcast" there. (Or alternatively 0xff cannot
->> validly be used in x2APIC mode, or even at all. I fear different sources
->> say different things as to the validity of this.)
->>
->> The situation is perhaps yet more fuzzy there with the 15-bit ID extension,
->> for which patches are floating around. All we've got in the tree so far is
->> XEN_HVM_CPUID_EXT_DEST_ID afaics.
->>
->> Overall with no sender it may be best to simply skip the broadcast check.
+On 22.11.2026 16:39, Dmytro Prokopchuk1 wrote:
+> Directive 4.3 is accepted and ECLAIR reports no violations for it,
+
+... and is already marked clean. Then ...
+
+> record it with the other directives.
 > 
-> Is this what you are thinking?
-> 
-> if ( source && dest == _VLAPIC_ID(source, 0xffffffffU) )
->     return true;
+> Signed-off-by: Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>
 
-Yes and ...
-
-> Note that this also drops the physical 0xff broadcast from IO-APIC/MSI
-> to xAPIC-mode vLAPICs.
-
-... yes. As said, I don't think I can establish, from the source I found,
-whether the above, ...
-
-> If 0xff is uniformly a broadcast for IO-APIC/MSI, the alternative is to
-> accept a physical 0xff from them for every vLAPIC, independent of the
-> target's mode:
-> 
-> case APIC_DEST_NOSHORT:
->     if ( source ? dest == _VLAPIC_ID(source, 0xffffffffU)
->                 : !dest_mode && dest == 0xff )
->         return true;
-
-... this, or yet something else is how hardware behaves (or at least is
-supposed to behave). You may be in a better position to find out than I
-am.
+Acked-by: Jan Beulich <jbeulich@suse.com>
 
 Jan
 
