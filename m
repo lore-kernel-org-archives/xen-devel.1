@@ -2,39 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 305DF606A683
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2026 09:18:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1500689.1696735 (Exim 4.92)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5F598606A32E
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2026 09:57:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=IoyQfgtX
+Received: from list by lists.xenproject.org with outflank-mailman.1500739.1696784 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVmfE-0000Hu-7z; Tue, 24 Nov 2026 09:18:12 +0000
+	id 1xVnHJ-0006PU-Eu; Tue, 24 Nov 2026 09:57:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1500689.1696735; Tue, 24 Nov 2026 09:18:12 +0000
+Received: by outflank-mailman (output) from mailman id 1500739.1696784; Tue, 24 Nov 2026 09:57:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVmfE-0000Hn-4z; Tue, 24 Nov 2026 09:18:12 +0000
-Received: by outflank-mailman (input) for mailman id 1500689;
- Tue, 24 Nov 2026 09:18:11 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <mark.syms@citrix.com>) id 1xVmfD-0000Hh-H4
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 09:18:11 +0000
+	id 1xVnHJ-0006PM-BQ; Tue, 24 Nov 2026 09:57:33 +0000
+Received: by outflank-mailman (input) for mailman id 1500739;
+ Tue, 24 Nov 2026 09:57:32 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xVnHI-0006PG-Ky
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 09:57:32 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xVmfC-00FcsF-Kl
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 10:18:10 +0100
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xVnHH-00865b-83
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 10:57:31 +0100
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <mark.syms@citrix.com>)
- id 6b05564c-bab6-0a2a0a5309dd-0a2a450184b8-18
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 10:18:10 +0100
-Received: from [160.101.131.9] (helo=na1pdmzitismtp02.tibco.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <mark.syms@citrix.com>)
- id 6b055651-5bcc-0a2a45010019-a0658309c38a-3
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 10:18:10 +0100
-Received: from mewpvdipd1070.citrite.net (unknown [10.113.40.46])
- by na1pdmzitismtp02.tibco.com (Postfix) with ESMTP id 5CC6184D50E7;
- Tue, 24 Nov 2026 04:16:31 -0500 (EST)
+ (envelope-from <jbeulich@suse.com>)
+ id 6b055f8b-e002-0a2a0a5209dd-0a2a4503e0ea-0
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 10:57:31 +0100
+Received: from [209.85.221.47] (helo=mail-wr1-f47.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6b055f8b-fae8-0a2a45030019-d155dd2fa4a9-3
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 10:57:31 +0100
+Received: by mail-wr1-f47.google.com with SMTP id
+ ffacd0b85a97d-490f38e9688so2999934f8f.0
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 01:57:31 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4ab6bb989b3sm27124749f8f.51.2026.11.24.01.57.29
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 24 Nov 2026 01:57:29 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -43,98 +49,112 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; none
-From: Mark Syms <mark.syms@citrix.com>
-To: Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Andrew Lunn <andrew+netdev@lunn.ch>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@kernel.org>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Paolo Abeni <pabeni@redhat.com>
-Cc: Jesper Dangaard Brouer <hawk@kernel.org>,
-	Alexei Starovoitov <ast@kernel.org>,
-	Daniel Borkmann <daniel@iogearbox.net>,
-	John Fastabend <john.fastabend@gmail.com>,
-	Stanislav Fomichev <sdf@fomichev.me>,
-	netdev@vger.kernel.org,
-	xen-devel@lists.xenproject.org,
-	bpf@vger.kernel.org,
-	Mark Syms <mark.syms@citrix.com>,
-	stable@vger.kernel.org
-Subject: [PATCH net] xen-netfront: unregister the XDP rxq before destroying its page_pool
-Date: Tue, 24 Nov 2026 09:18:06 +0000
-Message-ID: <20261124091806.2736453-1-mark.syms@citrix.com>
-X-Mailer: git-send-email 2.56.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:Autocrypt:Subject:From:Cc:To:Content-Language:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1795514251; x=1796119051; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=H+knVcH9kdTmKccqeloPhOnF2FOHCWkbP2GA8/m2E1Q=;
+        b=IoyQfgtX1/vZvvE6BlQ2U1KIWC/K/66oc4euhVpmZoEBp/QwhTh6u78Pyr5Pr2OJMe
+         BuB3M817H4cIaBY5yRmLNK+okPoDGZalPaulcX+E/F88XhYf3xDSw/W47BgpJKSwXljN
+         dpxBLMSDTgfag343Q2noAzPEwAkufdgWhD5ckLZHAeMyK/68iuaIgCMApCuCSZxXAQ9m
+         IjFnqEqZM5Ik90pRwX48Bf97tGmZkcx2yJm6Uf3WolmuUzvetyx/deGMIE5PLSzpGlGt
+         XBxAaTEFs0OHDMNQdBecDYf165KR3K0WEpxzuQ1K2CT5RK14IOHX2ZfWjvSj0Okw2dWL
+         lrkA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795514251; x=1796119051;
+        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=H+knVcH9kdTmKccqeloPhOnF2FOHCWkbP2GA8/m2E1Q=;
+        b=BqxE93970CZoUXgL5z6GzpGg8wgr4N0Bgr7NGXpd+aR7ycFQdijmaDHdmhR2Yl8EmB
+         1L/fKA/eZVZA7RrQ+vEJO+QRhazAhH+j7hCQj2u+EaK0uiVmfqvimbZQ9bx7BtiGu5v0
+         iU+LxPRWQfzTfZHgXBVUDQw300W+GL1TsAUJlOSYZhRDujeEirXtOGTLeDhHeW0c1Vyl
+         Jwd0xpaR8Pb/DvrUb0CG4+DbwHcf13m3jIzM04N8/2hJMJn8YhnPvGAtmMEKAEGmUvPO
+         5uDLF11RcD6GuTex2y+m01VYmxNu1dIl8+hWMwr5t7t3pXeyeOLsGh+ZhVA7DdhLvMji
+         jaNg==
+X-Gm-Message-State: APuU4Z/oXi7N25GfpJjUKA/SHBvaXDL5ks8y0CIkXX7liz1ALf7/to42
+	Zqe9Yuy/dIHMR3A4SwAT14mSfP6dkHeqYA4jYD3vCVLmNpfB5vhkL5CIGVePOPU4QbZvFa9B57q
+	odgr3Ug==
+X-Gm-Gg: AZFdTZfv7MG+gsMgqhllNTjB1D1nqXZxeKqyKndchhINZOWhz+Fjpu8hKOVPmu4ZyJi
+	j0KS5RdjcyI3D1zTfy/116uuJC2OJd1sSZTFyERw0UySooKVHr3RRKTMJaBg7BVhnDoQPsLcP4s
+	uYLplKvUor1NUPFHEQb81TECN0pphAy03DZWmOfyPfpryrD1EA6VWId0QcsnhmwXw0fC02BlkRH
+	vsDjqvVBWaRnXGUK5j+zkVIt0OW/5iA6l3yg3hPZlD1YeiZcSrXWscGOURKdxe7BAF3FFxEiDMP
+	lSlv7FvSUjmZ2UB0jtN40LD3h6FsDz7XF3rZvZdy3m3hy+DXc3YQ2POkA+Tmj++fDr14V1Zg/0i
+	GJJTNdwyXnhW5ClcG7WuYPJS1L/ZHMJ7AYBylw0r5FTuRWgsF7ZJl8WqtzSd2ISs9+lUXeBuWOM
+	oUqwyL/epW+DJG3t9yfMHyHD7Oc2b+3xmpyoKwEIpqowV5/JhZy7hAHBcT+ud/wlzaaW2U9b5IK
+	EhLSwJpJGkjSCoAZEXcSQe0fG1q/aWi8hJL4PX3Fc8c5FwvlCCbKcKyhHSmpNk3asxHbxJhKI2N
+	zhs+QV2gCHNq3PAuRyz09nvEX/ATg3fuBelv3qZvS2bGBWB0B25Elg7TcX3Tkr1s3gdDHlnMEaj
+	tXPGhRC3oj8vcWmY9fg==
+X-Received: by 2002:a05:6000:4310:b0:4a9:6c58:178a with SMTP id ffacd0b85a97d-4aa55bfeb43mr34784271f8f.12.1795514250967;
+        Tue, 24 Nov 2026 01:57:30 -0800 (PST)
+Message-ID: <20510674-1b6f-4e2d-a2b4-277b5650157f@suse.com>
+Date: Tue, 24 Nov 2026 10:57:28 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>
+From: Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH] x86/mkelf32: correct off-by-1 in empty PHDR checking loop
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d62444/1795511890-4D55D5FD-3AAC87C6/0/0
-X-purgate-type: clean
-X-purgate-size: 2448
-X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-purgate-ID: tlsNG-33051d/1795514251-764FC4E9-0AFD8F65/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 855
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Each receive queue registers its page_pool as the XDP memory model,
-which takes a second reference on the pool. On disconnect,
-xennet_disconnect_backend() calls page_pool_destroy() but never
-unregisters the rxq, so the pool's user count never reaches zero and
-the pool is never released, together with the receive buffers that
-xennet_release_rx_bufs() has just recycled into it. Every
-suspend/resume or backend reconnect therefore leaks one pool per
-receive queue. The pool never begins shutdown, so the page_pool stall
-warning does not fire and the leak is silent.
+To read the trailing PHDR, we need to seek to its start position within
+the file, not its ending one.
 
-Unregister the rxq before destroying the pool, and clear the pointer
-so that a second disconnect without a reconnect is harmless.
+Fixes: 54279f87ecbc ("x86/build: make linking work again with ld incapable of generating build ID")
+Reported-by: Roger Pau Monné <roger.pau@amd.com>
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-The leak was observed in CI testing: in XenServer suspend/resume
-stress runs, HVM guests lost available memory on every cycle until
-they stalled. Over 100 suspend/resume cycles the loss scaled with the
-number of VIFs, on Debian 12 (6.1.0-50) and Ubuntu 26.04 (7.0.0-30)
-guests alike; the missing unregister was then found by code
-inspection. Reproducing it needs no kernel modification: suspend and
-resume a guest repeatedly and compare MemAvailable.
-
-Tested on Debian 12 HVM guests on XenServer 9 (Xen 4.21, AMD EPYC),
-running two builds of the same 6.1.192 source with and without this
-patch. Over 100 suspend/resume cycles the unpatched kernel lost
-1107 KiB per cycle with one VIF and 2279 KiB with two; the patched
-kernel lost 51 and 42 KiB. On current mainline the patch builds
-without warnings at W=1 but was not boot-tested, and kernel selftests
-were not run.
-
-An AI coding assistant (Claude Code) was used to locate the cause,
-write the fix and draft this changelog.
-
-Fixes: 6c5aa6fc4def ("xen networking: add basic XDP support for xen-netfront")
-Cc: stable@vger.kernel.org
-Signed-off-by: Mark Syms <mark.syms@citrix.com>
----
- drivers/net/xen-netfront.c | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/drivers/net/xen-netfront.c b/drivers/net/xen-netfront.c
-index fdcb91042..b82b3bdb2 100644
---- a/drivers/net/xen-netfront.c
-+++ b/drivers/net/xen-netfront.c
-@@ -1860,7 +1860,10 @@ static void xennet_disconnect_backend(struct netfront_info *info)
- 		queue->tx.sring = NULL;
- 		queue->rx.sring = NULL;
- 
-+		if (xdp_rxq_info_is_reg(&queue->xdp_rxq))
-+			xdp_rxq_info_unreg(&queue->xdp_rxq);
- 		page_pool_destroy(queue->page_pool);
-+		queue->page_pool = NULL;
- 	}
- }
- 
--- 
-2.56.0
-
+--- a/xen/arch/x86/boot/mkelf32.c
++++ b/xen/arch/x86/boot/mkelf32.c
+@@ -320,7 +320,8 @@ int main(int argc, char **argv)
+     while ( in64_ehdr.e_phnum > num_phdrs )
+     {
+         (void)lseek(infd,
+-                    in64_ehdr.e_phoff + in64_ehdr.e_phnum * sizeof(in64_phdr),
++                    in64_ehdr.e_phoff + (in64_ehdr.e_phnum - 1) *
++                                        sizeof(in64_phdr),
+                     SEEK_SET);
+         do_read(infd, &in64_phdr, sizeof(in64_phdr));
+         endianadjust_phdr64(&in64_phdr);
 
