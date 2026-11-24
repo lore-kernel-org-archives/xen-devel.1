@@ -2,46 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 58276606A33D
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2026 18:22:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BDA79606A31E
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2026 18:54:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=G00D1RLZ
-Received: from list by lists.xenproject.org with outflank-mailman.1501386.1697488 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=arndb.de header.i=@arndb.de header.a=rsa-sha256 header.s=fm2 header.b=Ns0ocBa9;
+	dkim=pass (2048-bit key, unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.a=rsa-sha256 header.s=fm3 header.b=VyCHGOD7
+Received: from list by lists.xenproject.org with outflank-mailman.1501443.1697508 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVvA5-0005p0-VT; Tue, 24 Nov 2026 18:22:37 +0000
+	id 1xVveo-0003rd-H3; Tue, 24 Nov 2026 18:54:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1501386.1697488; Tue, 24 Nov 2026 18:22:37 +0000
+Received: by outflank-mailman (output) from mailman id 1501443.1697508; Tue, 24 Nov 2026 18:54:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVvA5-0005nt-Nh; Tue, 24 Nov 2026 18:22:37 +0000
-Received: by outflank-mailman (input) for mailman id 1501386;
- Tue, 24 Nov 2026 17:31:47 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xVveo-0003rW-EK; Tue, 24 Nov 2026 18:54:22 +0000
+Received: by outflank-mailman (input) for mailman id 1501443;
+ Tue, 24 Nov 2026 18:54:21 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <rnunez@baylibre.com>) id 1xVuMs-00050i-US
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 17:31:47 +0000
+ (envelope-from <arnd@arndb.de>) id 1xVvem-0003rQ-Hf
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 18:54:21 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xVuMs-004J4Q-Ap
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 18:31:46 +0100
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xVvel-008qjB-Iy
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 19:54:19 +0100
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <rnunez@baylibre.com>)
- id 6b05c9f2-bab6-0a2a0a5309dd-0a2a4504e6cc-42
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 18:31:46 +0100
-Received: from [209.85.222.42] (helo=mail-ua1-f42.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <rnunez@baylibre.com>)
- id 6b05ca01-b57f-0a2a45040019-d155de2abca8-3
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 18:31:46 +0100
-Received: by mail-ua1-f42.google.com with SMTP id
- a1e0cc1a2514c-9905d61449cso1286184241.0
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 09:31:45 -0800 (PST)
-Received: from [127.0.0.1] ([2804:7f0:7543:4532:5471:ddc9:4fc9:5])
- by smtp.gmail.com with ESMTPSA id
- 71dfb90a1353d-5ee8b6641d6sm14760703e0c.17.2026.11.24.09.31.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Nov 2026 09:31:44 -0800 (PST)
+ (envelope-from <arnd@arndb.de>)
+ id 6b05dd53-e002-0a2a0a5209dd-0a2a450ad690-6
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 19:54:19 +0100
+Received: from [103.168.172.139] (helo=flow-a4-smtp.messagingengine.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <arnd@arndb.de>)
+ id 6b05dd5a-f2d2-0a2a450a0019-67a8ac8bb31d-3
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 19:54:18 +0100
+Received: from ams-compute-02.internal (ams-compute-02.internal [10.64.2.62])
+ by mailflow.phl.internal (Postfix) with ESMTP id A38DE13802F8
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 13:54:17 -0500 (EST)
+Received: from ams-imap-03 ([10.64.2.23])
+ by ams-compute-02.internal (MEProxy); Tue, 24 Nov 2026 13:54:17 -0500
+Received: by mailuser.ams.internal (Postfix, from userid 501)
+ id 4968232A0099; Tue, 24 Nov 2026 13:53:40 -0500 (EST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -50,200 +50,150 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=baylibre.com header.i="@baylibre.com" header.h="Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1795541505; x=1796146305; darn=lists.xenproject.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=GkLo8KNHatVyEzmy+WAcfcbrVOPUa6Auy0tec9083fg=;
-        b=G00D1RLZrL/kjIGtkgNidzItDbfK2pJcncU2p1wZufXBltsxpsfo23XxWsCoQ1az9N
-         ZL56k7vRFdDC50gKS4ngFQicTlMuiTKCmuzcSVRjgJ/RQQ4zhiPYufuE+sdQgXDGioti
-         qAi0fuOEMVUaB7uzBf2lVLdPCvVHRJGxc/BBzkec9LMpI29bTFmrM57/Dj9+HhY269oK
-         GVPvRs/HOAQJ5UnruStkm5Mflera8omDDk0AMq9UZmvvCqHELiA27XfwdROXa9Fv4MX+
-         WIMqj02Jr7IVnMjo9HeS3BwQ4wsuVitWMfGzylG/9uF1GGFwZ/NrKpLjGc64S7Q1E3N3
-         1DwQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795541505; x=1796146305;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=GkLo8KNHatVyEzmy+WAcfcbrVOPUa6Auy0tec9083fg=;
-        b=UvEk+01Oc11DPknRIUS6MkQ7sNh5loB9cib5SuVExfi0cb3ms9bypvM0AQz3TvuhYs
-         33T+6FMJ0w4i3hvkNJYcHyXCJlk12gjpjubcWJc+ycFwVNx/KTxte7fIOnZlWyBStENC
-         e/wlF+Qhs0O2H1RxF6wGFX6YdlBLGVZnYMG9u2PACX39nB5FTlsIVoZTsFl+Z2faPkQY
-         /0QbOOSJsSpcnFAO8V16WKpv5GX1reu2uEMtvYVFqOkXNwdtA02abhzKIUvZRyGoUVG9
-         vU86ca2/afuAv0vvjDQDOUTJsNgmk5E2SkB6LPUEbDfrBgOUedrA/msj8aF7M6fRLOrT
-         7LRA==
-X-Gm-Message-State: APuU4Z/nRFF9WYXO4hVYJMOkCv4TkV+ZShArc0O8juu1ErF5wdEQJMWI
-	RqE2SbDfNQ5m+LAs8OjB2cyju9mvq8+5yMi7OxUWrptv+adSvS/8P0HnT9esdEghViY=
-X-Gm-Gg: AZFdTZdFuIcRdTvcyFDuxztx2GyAuYK1TyeVN6oNIc1A6z+cUhbfmGR2BVYtqJEFqpA
-	BrZcSw3YRX/zpfxOxEHATbhnNL1eGvWDRf87A5TSNfkdcgC89phZesSNWyfw0cYSbdNfepz2e2U
-	7H8DtMUSJfZVqz2BfQEHUYEkWM8v5nRIB0dY50jCX4iZhjOZLj7U8ESnJCiRJJJA5aONpBF6vH0
-	3mWmudKqB08IE2tHosBaFfV5Jh1tRwBmEhrl5tbJOaq3XkGk00iEc9BM5YfuoLpRqMGrGHueSAV
-	CmBHcphh+7eqtp5tyyesdYuWz41inYqg3x2X0Oz54H9pTTi7JasevAuClpfOTbEgPrny03xeoey
-	d9gMdRV+9L4pM8f5WNro5VYdZxJgUAotyNlhvYZJzJBT1ZVz7+nD4yUs+Cn2tlmAu7erSc8rxQQ
-	gT45M0fNm0ObQFe+tlYo1anYeOer35NS6NxlD5BNn4xMSYMZn2JOHmXOZnXpojWwHEgylnjNpHz
-	aPTrSNMRHH+QJYN38OJP4YBFJa5ay0rAVuh9HszLCEcLS1QZEk7WRsNkKKkujETyyhATFJjqrjR
-	rTcY2LOuzNpN3A8SESWizGw1bg==
-X-Received: by 2002:a05:6122:488e:b0:5ec:2c33:f782 with SMTP id 71dfb90a1353d-5ee8af71019mr8362715e0c.22.1795541504703;
-        Tue, 24 Nov 2026 09:31:44 -0800 (PST)
-From: Ronaldo Nunez <rnunez@baylibre.com>
-Date: Tue, 24 Nov 2026 14:30:54 -0300
-Subject: [PATCH v4 1/2] xen/ns16550: preserve XScale UUE bit in IER writes
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=fm2 header.d=arndb.de header.i="@arndb.de" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-Id:MIME-Version:References:Subject:To"; dkim=pass header.s=fm3 header.d=messagingengine.com header.i="@messagingengine.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:Feedback-ID:From:In-Reply-To:Message-Id:MIME-Version:References:Subject:To:X-ME-Proxy:X-ME-Sender"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arndb.de; h=cc
+	:cc:content-transfer-encoding:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm2; t=1795546436;
+	 x=1795553636; bh=iJ0bZtF+M32WhmItWYj3FSa2ZiQSpvoOogcaFVHVH5I=; b=
+	Ns0ocBa9uuJQNTtG3QfiU8sUxKT2BVab79oK6XioPic07HNY7BbGUro4492vDSKa
+	taWSB3j0rahIlRO5r8ZoxMAmIeofQrkEd2O7X1OMQEOOEmHkNvuaEYSDts/UAM8w
+	fED4InNTr0trVvSv57ETj3yHni+DAOQy8IgrUckr5I1xjqbrfGUxOwoJi0smwrAp
+	nxVmvZkiOxgeZLtuxZuUgSTF8HOJ38Mrh+Szpuf5yDk9lzFD74nKhq2IZnhfVZN/
+	vyB/Gl1S/ltyMKRNSc+WiurJ6LH/MJ4UcyvYBvhtsIXVP/k06hqmaXkoDI11XeA7
+	wlXBDaQ5dfB4kxGI+OVvoA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1795546436; x=
+	1795553636; bh=iJ0bZtF+M32WhmItWYj3FSa2ZiQSpvoOogcaFVHVH5I=; b=V
+	yCHGOD7HZXf+kTkcfTRyN6yTdKP309423KicUoIMqFh/OtFm+5uIv1vysvBFedjV
+	XJFPWePPRM0CnxRFksiKelXDd4qxik7aQ3mMcyBCJjLxhyAF1/B4D21N2RNJubIz
+	u5cBy+nZv7B/NkDxHFeW1hHCDPsd2Yncp7NFyXICp+R3pT0Y5ellhwQTcSjOD4Is
+	qcejxkzW8ihZzqAnjwKGNkFDJQStwnjJ8vVNe8gpcx5sVF8NLwPxyCUUnJOe3iXr
+	77Djsuz/1kfq3wwkXcMCZm5S41gIGVWAkWq3DEPG3YLiO4EDE4ry1FhRdzsZiw+Q
+	+pL5WKOI4leoxTvwkIf/g==
+X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-09;
+	repo=github.com/dkim2wg/interop; date=2026-11-03; sw=lmtpprox;
+	action=sign d=arndb.de a=rsa-sha256;
+DKIM2-Signature: i=1; m=1; t=1795546436; d=arndb.de;
+	mf=PGFybmRAYXJuZGIuZGU+;
+	rt=PHhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZz4=;
+	s=fm2:rsa-sha256:NwzcYQyYWLJaHSe62jA+NRI3ylgV6WPuaHVMfgzqs9gk2sY
+	HfbWuNnrnfqmLUQY6UOixc+zM2N9mSqlLZGrlQsRJmKlhXwGHDKbsJt80tuEKZVt
+	9KYw+HsU483Y1nVB08jCtRZ+aF+LsOT0W4ROQUWW2r04E1RibwJPE/d1o5IBsX9L
+	fxQ61E/mg96AE97vClkmBewdwPV3rADW6mIBm2tBf4vXBxuCILxJ48OAtBEUKzjy
+	Q7Gwz8YWmKdSphTFGkghh2R6MLDpbGQTwqrqEFM5dnAbhzym3jSLXnZ0pRqZigeb
+	+HXQ1Om0DmaIhBmK6kxUrpjeRi7396HnPtdJbEQ==;
+X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-09;
+	repo=github.com/dkim2wg/interop; date=2026-11-03; sw=lmtpprox;
+	action=mi-m=1; hc=12;
+	hn=cc,content-transfer-encoding,content-type,date,feedback-id,
+	from,in-reply-to,message-id,mime-version,references,subject,to;
+Message-Instance: m=1; h=sha256:JE9Pf+dIuvBMDyw467eQ/Tr4tyY4SBvJ9vbnWlDmBbU=:iJ0bZtF+M32WhmItWYj3FSa2ZiQSpvoOogcaFVHVH5I=;
+X-ME-Sender: <xms:NN0Fa_Dh16pBjRQMtmAQtpYpz28UEZAAlNWef9QDlR230iNPWwpgaA>
+    <xme:NN0FawWnt_cU2zPqxwlF3kn6lXR865LwUWDq-4TBjsqjqIqfahALCgQWW-0jyO7G3
+    I2uTFidD6Jk0Jt_ZRZrrybQhsZmf0PkwLrG07cX5Ey9rp4FNHu-UqM>
+X-ME-Proxy-Cause: dmFkZTFsQKpYLoHX3KE6zope7Xly27EYv6AQYyIF3Qau4aRC0vSHzWA0jMBeGZ/9+uCniy
+    PTkF5Fmn4ClSCnUsMdxXtnQhtPNPNvOPsMvdctlUYyw6p+0jhYlfcnMwYC+ka8/fLSpuKw
+    3YLhivPgri0MvBEeHeehNeV5wiFAsJv2bcNaHD7UboTSW+RjgcB42VuUlh1hahI0iQExPr
+    +XuV8lAvetVw7YfrG+rkJKl9bl6k1+Pc6YG1mdIQsn8HBaASQD8dGrUNem4yjy4NNXFr2o
+    l0vAJfxG5EW/9uTEMy9av1oYJYPAqHBvhuaThuRz9ZxrEhJBnZZaNefPyOfbd5a857jzji
+    xS3AH0yNi27nlGbP2enOJqlf9wVeoOUs7OcWrHRUnaD4wGX3BucglKw1DWVVHUPxhfMt+c
+    yYMsv9QYzlu0IncPWVnqsNMz+WiqY0HZprQifxi/zsPZ8ChkJiSCAB7jX698jdmSQw7t0Q
+    wldIOTkPNxc4rzT0CMfulFrj4Rm5L/cie4t1IvZQrqsjE2CBRn8iUu7yiZ0dS2UrGJdlIv
+    HMXP1d1uGpGRgLQ/rxCRTkol4EEsKGIX1Iz0tWkHIV/hA4OOaUelQC0/ml5S6Hx7O/VRRR
+    HHsnZozZEW2a8iAqfQuYUL98uV7rqteWCN+bZ4WQQO+0dMzPuH8W8HlVGiTA
+X-ME-Proxy: <xmx:PN0Fa_OfkSf0I2gz53d1q87MSYiyija7o2MtMOioAI-ZeTkir1jV5A>
+    <xmx:PN0Fa6p4AcKgvKj7Nxl2i9GHjEd2VbenjcJEjgY_FbTxdjTIKHGJeg>
+    <xmx:PN0Fa5WDuMRF3QKr7uInN4TtUt9GYOr8jpLSEeuwpRljz5xEyg6WqA>
+    <xmx:PN0Fazu29G7Wm_IQCdCnlJY6WRkfF9-85rVjBcVYL-WZQOkOQNyjOA>
+    <xmx:RN0Fa7HuB9LonHDmNq2kLPdcfAnhX1Syf3plWTxAvus5eCvT9QG1bsct>
+Feedback-ID: i56a14606:Fastmail
+X-Mailer: MessagingEngine.com Webmail Interface
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+X-ThreadId: Ai76fMdDSoMo
+Date: Tue, 24 Nov 2026 19:53:19 +0100
+From: "Arnd Bergmann" <arnd@arndb.de>
+To: "Lorenzo Stoakes" <ljs@kernel.org>,
+ "Andrew Morton" <akpm@linux-foundation.org>,
+ "Juergen Gross" <jgross@suse.com>,
+ "Stefano Stabellini" <sstabellini@kernel.org>,
+ "Oleksandr Tyshchenko" <oleksandr_tyshchenko@epam.com>,
+ "Madhavan Srinivasan" <maddy@linux.ibm.com>,
+ "Nicholas Piggin" <npiggin@gmail.com>,
+ "Michael Ellerman" <mpe@ellerman.id.au>,
+ "Christophe Leroy" <chleroy@kernel.org>,
+ "Ritesh Harjani (IBM)" <ritesh.list@gmail.com>,
+ "Shrikanth Hegde" <sshegde@linux.ibm.com>,
+ "Haiyang Zhang" <haiyangz@microsoft.com>, "Wei Liu" <wei.liu@kernel.org>,
+ "Dexuan Cui" <decui@microsoft.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ "Jason Wang" <jasowangio@gmail.com>,
+ =?UTF-8?Q?Eugenio_P=C3=A9rez?= <eperezma@redhat.com>,
+ "Xuan Zhuo" <xuanzhuo@linux.alibaba.com>,
+ "Jarkko Sakkinen" <jarkko@kernel.org>,
+ "Dave Hansen" <dave.hansen@linux.intel.com>,
+ "Thomas Gleixner" <tglx@kernel.org>, "Ingo Molnar" <mingo@redhat.com>,
+ "Borislav Petkov" <bp@alien8.de>, x86@kernel.org,
+ "H. Peter Anvin" <hpa@zytor.com>, "Jan Kara" <jack@suse.com>,
+ "Paul Moore" <paul@paul-moore.com>,
+ "Stephen Smalley" <stephen.smalley.work@gmail.com>,
+ =?UTF-8?Q?Ondrej_Mosn=C3=A1=C4=8Dek?= <omosnacek@gmail.com>,
+ "Joel Stanley" <joel@jms.id.au>,
+ "Andrew Jeffery" <andrew@codeconstruct.com.au>,
+ "Ryan Chen" <ryan_chen@aspeedtech.com>,
+ "'billy_tsai@aspeedtech.com'" <billy_tsai@aspeedtech.com>,
+ "Bjorn Andersson" <andersson@kernel.org>,
+ "Konrad Dybcio" <konradybcio@kernel.org>, "Abel Vesa" <abelvesa@kernel.org>,
+ "Jens Wiklander" <jenswi@kernel.org>, "Sumit Garg" <sumit.garg@kernel.org>,
+ "Scott Branden" <scott.branden@broadcom.com>,
+ "Broadcom internal kernel review list" <bcm-kernel-feedback-list@broadcom.com>,
+ "Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
+ "Richard Cochran" <richardcochran@gmail.com>,
+ "David Woodhouse" <dwmw2@infradead.org>,
+ "Andrew Lunn" <andrew+netdev@lunn.ch>,
+ "David S . Miller" <davem@davemloft.net>,
+ "Eric Dumazet" <edumazet@kernel.org>, "Jakub Kicinski" <kuba@kernel.org>,
+ "Paolo Abeni" <pabeni@redhat.com>
+Cc: xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org,
+ linuxppc-dev@lists.ozlabs.org, kvm@vger.kernel.org,
+ linux-hyperv@vger.kernel.org, virtualization@lists.linux.dev,
+ linux-sgx@vger.kernel.org, selinux@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, linux-aspeed@lists.ozlabs.org,
+ linux-arm-msm@vger.kernel.org, op-tee@lists.trustedfirmware.org,
+ Netdev <netdev@vger.kernel.org>, linux-mm@kvack.org
+Message-Id: <3208cde3-c5cf-4888-88f7-c77d7b0e5940@app.fastmail.com>
+In-Reply-To: <20261124-late-2026-mmap_prepare-v2-8-0b0d99d655f9@kernel.org>
+References: <20261124-late-2026-mmap_prepare-v2-0-0b0d99d655f9@kernel.org>
+ <20261124-late-2026-mmap_prepare-v2-8-0b0d99d655f9@kernel.org>
+Subject: Re: [PATCH v2 08/13] soc: aspeed: convert LPC and P2A control mmap hooks to
+ mmap_prepare
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261124-v4-uart-harndover-v4-1-90c4412cb95e@baylibre.com>
-References: <20261124-v4-uart-harndover-v4-0-90c4412cb95e@baylibre.com>
-In-Reply-To: <20261124-v4-uart-harndover-v4-0-90c4412cb95e@baylibre.com>
-To: xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, 
- Anthony PERARD <anthony.perard@vates.tech>, 
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, 
- Julien Grall <julien@xen.org>, 
- =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
- Stefano Stabellini <sstabellini@kernel.org>, 
- Zhang Zheng <zhangzheng@iscas.ac.cn>, Ronaldo Nunez <rnunez@baylibre.com>
-X-Mailer: b4 0.14.2
-X-purgate-ID: tlsNG-ebf023/1795541506-536C2B50-0283CB20/0/0
+X-purgate-ID: tlsNG-4011c0/1795546459-5A5DBCFC-6E73EB08/0/0
 X-purgate-type: clean
-X-purgate-size: 5188
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-purgate-size: 520
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY autolearn=unavailable autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Zhang Zheng <zhangzheng@iscas.ac.cn>
+On Tue, Nov 24, 2026, at 15:02, Lorenzo Stoakes (ARM) wrote:
+> Move from the deprecated mmap hook to the new mmap_prepare hook for both
+> the LPC control and P2A control drivers.
+>
+> Both remap a range of their reserved memory region, so use the PFN remap
+> mmap action to do so, retaining the -EAGAIN error on failure via the action
+> error override.
+>
+> Acked-by: Andrew Jeffery <andrew@codeconstruct.com.au>
+> Signed-off-by: Lorenzo Stoakes (ARM) <ljs@kernel.org>
 
-XScale-like UARTs are enabled by setting UART unit enable (UUE) bit
-in the IER register. Clearing IER to mask interrupts therefore also
-disables the UART, breaking both interrupt-driven and polled operation,
-and prevents Xen from taking control of the UART from the SBI (RISC-V
-IP variants).
-
-Introduce ns_write_ier() to set UART_IER_UUE whenever the port is
-flagged as an XScale device, and route all XScale-related IER writes
-through it. The flag is determined by matching "intel,xscale-uart", and
-that compatible is added to the DT match table so such UARTs are probed.
-
-Signed-off-by: Zhang Zheng <zhangzheng@iscas.ac.cn>
-Co-developed-by: Ronaldo Nunez <rnunez@baylibre.com>
-Signed-off-by: Ronaldo Nunez <rnunez@baylibre.com>
----
- xen/drivers/char/ns16550.c  | 23 ++++++++++++++++++-----
- xen/include/xen/8250-uart.h |  1 +
- 2 files changed, 19 insertions(+), 5 deletions(-)
-
-diff --git a/xen/drivers/char/ns16550.c b/xen/drivers/char/ns16550.c
-index be388c8e6582ec7f28a5926baae2c397fc984e77..01a55d2737d18b1985ba10488e98ac82ef8a9c8c 100644
---- a/xen/drivers/char/ns16550.c
-+++ b/xen/drivers/char/ns16550.c
-@@ -64,6 +64,7 @@ static struct ns16550 {
-     bool intr_works;
-     bool force_polling;
-     bool dw_usr_bsy;
-+    bool xscale;
- #ifdef NS16550_PCI
-     /* PCI card parameters. */
-     bool pb_bdf_enable;     /* if =1, pb-bdf effective, port behind bridge */
-@@ -168,6 +169,15 @@ static void ns_write_reg(const struct ns16550 *uart, unsigned int reg, u8 c)
-     }
- }
- 
-+static void ns_write_ier(const struct ns16550 *uart, u8 ier)
-+{
-+    /* XScale-like UART IP depends on the UUE bit being set */
-+    if ( uart->xscale )
-+        ier |= UART_IER_UUE;
-+
-+    ns_write_reg(uart, UART_IER, ier);
-+}
-+
- static int ns16550_ioport_invalid(struct ns16550 *uart)
- {
-     return ns_read_reg(uart, UART_IER) == 0xff;
-@@ -218,7 +228,7 @@ static void cf_check ns16550_interrupt(int irq, void *dev_id)
- 
-             /* Disable interrupt generation on the device and arm the timer. */
-             uart->force_polling = true;
--            ns_write_reg(uart, UART_IER, 0);
-+            ns_write_ier(uart, 0);
-             set_timer(&uart->timer, now + MILLISECS(uart->timeout_ms));
-             printk(XENLOG_WARNING
-                    "uart interrupt taking more than %ums, switched to polling\n",
-@@ -350,7 +360,7 @@ static void ns16550_setup_preirq(struct ns16550 *uart)
-     lcr = (uart->data_bits - 5) | ((uart->stop_bits - 1) << 2) | uart->parity;
- 
-     /* No interrupts. */
--    ns_write_reg(uart, UART_IER, 0);
-+    ns_write_ier(uart, 0);
- 
-     /* Handle the DesignWare 8250 'busy-detect' quirk. */
-     handle_dw_usr_busy_quirk(uart);
-@@ -446,7 +456,7 @@ static void ns16550_setup_postirq(struct ns16550 *uart)
-                      UART_MCR, UART_MCR_OUT2 | UART_MCR_DTR | UART_MCR_RTS);
- 
-         /* Enable receive interrupts. */
--        ns_write_reg(uart, UART_IER, UART_IER_ERDAI);
-+        ns_write_ier(uart, UART_IER_ERDAI);
-     }
- 
-     if ( uart->irq >= 0 )
-@@ -654,7 +664,7 @@ static void cf_check ns16550_start_tx(struct serial_port *port)
- 
-     /* Unmask transmit holding register empty interrupt if currently masked. */
-     if ( !(ier & UART_IER_ETHREI) )
--        ns_write_reg(uart, UART_IER, ier | UART_IER_ETHREI);
-+        ns_write_ier(uart, ier | UART_IER_ETHREI);
- }
- 
- static void cf_check ns16550_stop_tx(struct serial_port *port)
-@@ -664,7 +674,7 @@ static void cf_check ns16550_stop_tx(struct serial_port *port)
- 
-     /* Mask off transmit holding register empty interrupt if currently unmasked. */
-     if ( ier & UART_IER_ETHREI )
--        ns_write_reg(uart, UART_IER, ier & ~UART_IER_ETHREI);
-+        ns_write_ier(uart, ier & ~UART_IER_ETHREI);
- }
- 
- #ifdef CONFIG_ARM
-@@ -2034,6 +2044,8 @@ static int __init ns16550_uart_dt_init(struct dt_device_node *dev,
- 
-     uart->dw_usr_bsy = dt_device_is_compatible(dev, "snps,dw-apb-uart");
- 
-+    uart->xscale = dt_device_is_compatible(dev, "intel,xscale-uart");
-+
- #ifdef CONFIG_ARM
-     uart->vuart.base_addr = uart->io_base;
-     uart->vuart.size = uart->io_size;
-@@ -2055,6 +2067,7 @@ static const struct dt_device_match ns16550_dt_match[] __initconst =
-     DT_MATCH_COMPATIBLE("ns16550"),
-     DT_MATCH_COMPATIBLE("ns16550a"),
-     DT_MATCH_COMPATIBLE("snps,dw-apb-uart"),
-+    DT_MATCH_COMPATIBLE("intel,xscale-uart"),
-     DT_MATCH_COMPATIBLE("brcm,bcm2835-aux-uart"),
-     { /* sentinel */ },
- };
-diff --git a/xen/include/xen/8250-uart.h b/xen/include/xen/8250-uart.h
-index d13352940c13c50bac17d4cdf2f3bf584380776a..a9b567cb2e0cf00dc4804251824e07a00ea9e022 100644
---- a/xen/include/xen/8250-uart.h
-+++ b/xen/include/xen/8250-uart.h
-@@ -42,6 +42,7 @@
- #define UART_IER_ETHREI   0x02    /* tx reg. empty        */
- #define UART_IER_ELSI     0x04    /* rx line status       */
- #define UART_IER_EMSI     0x08    /* MODEM status         */
-+#define UART_IER_UUE      0x40    /* UART unit enable (XScale) */
- 
- /* Interrupt Identification Register */
- #define UART_IIR_NOINT    0x01    /* no interrupt pending */
-
--- 
-2.53.0
-
+Acked-by: Arnd Bergmann <arnd@arndb.de>
 
