@@ -2,43 +2,44 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 33FD5606A336
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2026 14:03:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1CE76606A69D
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2026 14:03:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=m5RF+lzm
-Received: from list by lists.xenproject.org with outflank-mailman.1500979.1697023 (Exim 4.92)
+	dkim=fail reason="signature verification failed" (2048-bit key, unprotected) header.d=outer-limits.org header.i=@outer-limits.org header.a=rsa-sha256 header.s=strato-dkim-0002 header.b=ZxxA3m22;
+	dkim=fail reason="signature verification failed" header.d=outer-limits.org header.i=@outer-limits.org header.a=ed25519-sha256 header.s=strato-dkim-0003 header.b=/l0jh14F
+Received: from list by lists.xenproject.org with outflank-mailman.1500980.1697033 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVr7G-0000Kq-Su; Tue, 24 Nov 2026 14:03:26 +0000
+	id 1xVr7N-0000Ye-3L; Tue, 24 Nov 2026 14:03:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1500979.1697023; Tue, 24 Nov 2026 14:03:26 +0000
+Received: by outflank-mailman (output) from mailman id 1500980.1697033; Tue, 24 Nov 2026 14:03:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVr7G-0000Kj-QK; Tue, 24 Nov 2026 14:03:26 +0000
-Received: by outflank-mailman (input) for mailman id 1500979;
- Tue, 24 Nov 2026 14:03:25 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xVr7N-0000YX-0A; Tue, 24 Nov 2026 14:03:33 +0000
+Received: by outflank-mailman (input) for mailman id 1500980;
+ Tue, 24 Nov 2026 14:03:31 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ljs@kernel.org>) id 1xVr7F-0000KY-4v
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 14:03:25 +0000
+ (envelope-from <julian@outer-limits.org>) id 1xVr7L-0000XV-Au
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 14:03:31 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xVr7D-009hvb-Nu
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 15:03:23 +0100
-Received: from [10.42.69.7] (helo=localhost)
+ id 1xVr7K-0021uR-Fd
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 15:03:30 +0100
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ljs@kernel.org>)
- id 6b059924-bab6-0a2a0a5309dd-0a2a4507aebe-18
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 15:03:23 +0100
-Received: from [172.234.252.31] (helo=sea.source.kernel.org)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <ljs@kernel.org>)
- id 6b059929-b4ea-0a2a45070019-aceafc1fa5ae-3
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 15:03:23 +0100
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 470F941AF3;
- Tue, 24 Nov 2026 14:03:21 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0C9741F000CF;
- Tue, 24 Nov 2026 14:03:04 +0000 (UTC)
+ (envelope-from <julian@outer-limits.org>)
+ id 6b059928-e002-0a2a0a5209dd-0a2a4501a4c0-26
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 15:03:30 +0100
+Received: from [81.169.146.164] (helo=mo4-p01-ob.smtp.rzone.de)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <julian@outer-limits.org>)
+ id 6b059932-5bcc-0a2a45010019-51a992a4970b-3
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 15:03:30 +0100
+Received: from [IPV6:2a01:e0a:db7:f20:154c:8407:cfb2:3d56]
+ by smtp.strato.de (RZmta 55.6.3 AUTH) with ESMTPSA id J82cde2AOE2pxn3
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
+ (Client did not present a certificate);
+ Tue, 24 Nov 2026 15:02:51 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -47,161 +48,167 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="From:Subject:Date:To:Cc"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795529001;
-	bh=Pcp6KuvRcMiXfM74bIVPa/vEkoJOU8lTqnsRQrOb5o4=;
-	h=From:Subject:Date:To:Cc;
-	b=m5RF+lzmoV0KlfOio0Dl2o69dI4rgtq9fEDM529z18h4bvXVByTYYPIrO3nfq66Al
-	 S7b0xt4Isk2RZvdXlVCnJO2H9ApRMebR+cuuc1Mh6rszX9Zhla035nI0F5C6x/MHLD
-	 XeitIh3tzBgM7PxhrmmkTyrk505660hD/3k2opBfr2SrNPC1Zqxuz4rugypmvl0YHv
-	 L7i+BrNOy0yloakdV4vIbbD9MhDsYIvWUGxQp/CF8ICGFRPZrqEcGhx7b//ugJyzLI
-	 jvC7NpeW/ds4v/oSUDD3cFClNVL2B4axAeKCDrEKLPDhequ6MiNoo2JytLwjxnVOOr
-	 e+11WXxZ6coOA==
-From: "Lorenzo Stoakes (ARM)" <ljs@kernel.org>
-Subject: [PATCH v2 00/13] mm: convert further simple mmap hooks to
- mmap_prepare
-Date: Tue, 24 Nov 2026 14:02:43 +0000
-Message-Id: <20261124-late-2026-mmap_prepare-v2-0-0b0d99d655f9@kernel.org>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=strato-dkim-0002 header.d=outer-limits.org header.i="@outer-limits.org" header.h="In-Reply-To:From:References:Cc:To:Subject:Date:Message-ID"; dkim=permerror header.s=strato-dkim-0003 header.d=outer-limits.org header.i="@outer-limits.org"
+ARC-Seal: i=1; a=rsa-sha256; t=1795528971; cv=none;
+    d=strato.com; s=strato-dkim-0002;
+    b=Oz3N7EWJm3kQNwAjNRfs1OGIzImvpM1H9oz8IGPTcJDp0GMlbZzJj9a5gk6EzIt5zc
+    p7TLNLlWvvJqBkvUIK8W4/6xWYgVNyQBHj16VPoHwPYbfQiSi2vimDipJYPDi2LLUZJz
+    AKGnu1thEpigitCJJQd1kPv5QwHFvECR4YTYiBMxf2rhN+hb9p5P3pmQ9Xr0KvNFklAk
+    FiJ88Fv6kiZT+a0QNq+F4Qu+QPLUj7HOdom/gyHHz/4zzd7MGG7zmtKw7rvN5uYSMLW+
+    CMpJi5SkiJGrmMeW3Z8/Ely6xNIV88QrPvzVcoNly4v4BjhC87Phexf1ZsMVm4ZDIM0J
+    /84A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1795528971;
+    s=strato-dkim-0002; d=strato.com;
+    h=In-Reply-To:From:References:Cc:To:Subject:Date:Message-ID:Cc:Date:
+    From:Subject:Sender;
+    bh=rK5kfjNFTMBhewZ2Z6PYZ/HR7jF5Lg7srSe2C6WvWcE=;
+    b=rLIsgIMvkCA6k5/tGVezAvKSvYthM0dngPI79VfeBUlQ/nmr9JlhyX5JNPgGh0kHm/
+    GrLuRIFV3X4VCN/IFT/14BpUWOiMNmw61BpnlNToVZdnFf+EK+bmaCDCGSwDeJDLvo5P
+    X80IHusxSkKlqOkFOT40X3AbfTcsgz7Ezrw5cJZofYflvGfOtpZh7tmMB7cSOxKQ20XO
+    myZhLV5F2oG75MN8J26oOcRGPxXkTIsN8GGfPZgzuYXG99TTUi0/8w09CJbmhEtivROP
+    zS2L48yUOmBNUqZEZLzQ5LPvA5b2u5WQqz+TmmxHlUwl0ZU/tBdOv6wpJMWYPoYkrt4d
+    2iLQ==
+ARC-Authentication-Results: i=1; strato.com;
+    arc=none;
+    dkim=none
+X-RZG-CLASS-ID: mo01
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1795528971;
+    s=strato-dkim-0002; d=outer-limits.org;
+    h=In-Reply-To:From:References:Cc:To:Subject:Date:Message-ID:Cc:Date:
+    From:Subject:Sender;
+    bh=rK5kfjNFTMBhewZ2Z6PYZ/HR7jF5Lg7srSe2C6WvWcE=;
+    b=ZxxA3m22F4pE9tjwwLc5iZb89jspyAzaylnQdnawXPfxLDTiCItJCkGzG9ozz3Blkm
+    zJlkpTtzGrI6NxGiGqXEvHhO5dY+LR6RIxeeB0mKzlt2m1RqsZMFUfyZzlhrkgjsTIos
+    +q2CugA/L8uPTUXab0DDgkCoaor1XNJ6AMIu2ANHb2F5RECXYEhBnPvpSGEnoruR9Ihy
+    FYe8whemkdQGM1oxKqTT0EUWWP4a9FgSXjv09Ls+zBtqQEfGaTL2XpJBWrroB8agQ19B
+    7J/FHEZ7MWxmjpgiZTlrCspL/qY8NAEwrg8UavzaI/grHW4XnMKd9c6gCfyeuWwYl3fx
+    MIiA==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1795528971;
+    s=strato-dkim-0003; d=outer-limits.org;
+    h=In-Reply-To:From:References:Cc:To:Subject:Date:Message-ID:Cc:Date:
+    From:Subject:Sender;
+    bh=rK5kfjNFTMBhewZ2Z6PYZ/HR7jF5Lg7srSe2C6WvWcE=;
+    b=/l0jh14FUsOWn6v9+bxJCXb76VsoD8nhysKYaiD0xS2EeK/UZocgjuuJ8Sk8kMFCng
+    WdqIYt7zT4JER62hluAQ==
+X-RZG-AUTH: ":JnkIfEGmW/AMJS6HttH4FbRVwc4dHlPLCp4e/IoHo8zEMMHAgwTfqBFXdk1Z4tK2c3m3zwosfchN4RSG/U9b98610tRpOA6sK6yiQZk="
+Message-ID: <f62e1e86-ae7c-498e-95e8-ec790e734a3c@outer-limits.org>
+Date: Tue, 24 Nov 2026 15:02:51 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: ARM EFI: should bootinfo memory banks be reset before retrying
+ ExitBootServices ?
+To: Pierre Gondois <pierre.gondois@arm.com>, xen-devel@lists.xenproject.org
+Cc: Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+ =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Luca Fancellu <Luca.Fancellu@arm.com>
+References: <3d783a50-06bc-4c6b-815e-bd42ce5e54d1@arm.com>
+Content-Language: en-US
+From: Julian Vetter <julian@outer-limits.org>
+Autocrypt: addr=julian@outer-limits.org; keydata=
+ xjMEaLvwgxYJKwYBBAHaRw8BAQdA6u9Gv9DAWoEq0Jh+krJQqvgA9crvjYIJ1zL38JLsdOLN
+ J0p1bGlhbiBWZXR0ZXIgPGp1bGlhbkBvdXRlci1saW1pdHMub3JnPsKTBBMWCgA7FiEEKsxf
+ M6APqlFEwlRheMhx4x8L9BsFAmi78IMCGwMFCwkIBwICIgIGFQoJCAsCBBYCAwECHgcCF4AA
+ CgkQeMhx4x8L9Bv4PAEAirijszkHGYvhggZvlSx20Pumm2rCol4OzlxO5BcFRMQBAP+PvG0d
+ H4/6nomybCtCDS2rHLv8mA1O4Zn/f073zGUJzjgEaLvwgxIKKwYBBAGXVQEFAQEHQNJXxAh6
+ JmVPz+Tw8W+SQ9nMlNV6KD8l0uLlSV/s1f0BAwEIB8J4BBgWCgAgFiEEKsxfM6APqlFEwlRh
+ eMhx4x8L9BsFAmi78IMCGwwACgkQeMhx4x8L9BvCRQEA6rFFo2ZiAMR6vT5iJvdWQpkqh1NH
+ XmyCC2h0RIqIEJQA/iAKZBD9h6RVoLScco+nlA+mppdkrg5lb2pvJpENMfQJ
+In-Reply-To: <3d783a50-06bc-4c6b-815e-bd42ce5e54d1@arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAA/3XNywqDQAyF4VcZsjZlMkUrrvoeRUrUqEO9DBmRF
- vHdi0KXXZ5/8Z0NoqiXCIXZQGX10c8TFMYlBuqep07QN1AYcNZlRJZw4EXwWDiOHJ5BJbAKWlf
- nt8ZdyZJAYiCotP59wo8yMdD7uMz6OX9WOuqPTP+RK6HFOs2Ym7biKuf7S3SS4TJrB+W+71+eu
- Pr9vQAAAA==
-X-Change-ID: 20261101-late-2026-mmap_prepare-02c87d23101e
-To: Andrew Morton <akpm@linux-foundation.org>, 
- Juergen Gross <jgross@suse.com>, 
- Stefano Stabellini <sstabellini@kernel.org>, 
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, 
- Madhavan Srinivasan <maddy@linux.ibm.com>, 
- Nicholas Piggin <npiggin@gmail.com>, Michael Ellerman <mpe@ellerman.id.au>, 
- "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>, 
- "Ritesh Harjani (IBM)" <ritesh.list@gmail.com>, 
- Shrikanth Hegde <sshegde@linux.ibm.com>, 
- Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>, 
- Dexuan Cui <decui@microsoft.com>, "Michael S. Tsirkin" <mst@redhat.com>, 
- Jason Wang <jasowangio@gmail.com>, 
- =?utf-8?q?Eugenio_P=C3=A9rez?= <eperezma@redhat.com>, 
- Xuan Zhuo <xuanzhuo@linux.alibaba.com>, Jarkko Sakkinen <jarkko@kernel.org>, 
- Dave Hansen <dave.hansen@linux.intel.com>, 
- Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, 
- Borislav Petkov <bp@alien8.de>, x86@kernel.org, 
- "H. Peter Anvin" <hpa@zytor.com>, Jan Kara <jack@suse.com>, 
- Paul Moore <paul@paul-moore.com>, 
- Stephen Smalley <stephen.smalley.work@gmail.com>, 
- =?utf-8?q?Ondrej_Mosn=C3=A1=C4=8Dek?= <omosnacek@gmail.com>, 
- Joel Stanley <joel@jms.id.au>, Andrew Jeffery <andrew@codeconstruct.com.au>, 
- Ryan Chen <ryan_chen@aspeedtech.com>, 
- Billy Tsai <billy_tsai@aspeedtech.com>, 
- Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
- Jens Wiklander <jenswi@kernel.org>, Sumit Garg <sumit.garg@kernel.org>, 
- Scott Branden <scott.branden@broadcom.com>, 
- Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
- Arnd Bergmann <arnd@arndb.de>, 
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
- Richard Cochran <richardcochran@gmail.com>, 
- David Woodhouse <dwmw2@infradead.org>, Andrew Lunn <andrew+netdev@lunn.ch>, 
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@kernel.org>, 
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>
-Cc: ljs@kernel.org, xen-devel@lists.xenproject.org, 
- linux-kernel@vger.kernel.org, linuxppc-dev@lists.ozlabs.org, 
- kvm@vger.kernel.org, linux-hyperv@vger.kernel.org, 
- virtualization@lists.linux.dev, linux-sgx@vger.kernel.org, 
- selinux@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
- linux-aspeed@lists.ozlabs.org, linux-arm-msm@vger.kernel.org, 
- op-tee@lists.trustedfirmware.org, netdev@vger.kernel.org, 
- linux-mm@kvack.org, Kameron Carr <kameroncarr@linux.microsoft.com>, 
- Michael Kelley <mhklinux@outlook.com>, Jan Kara <jack@suse.cz>, 
- Abel Vesa <abel.vesa@oss.qualcomm.com>, 
- Jens Wiklander <jens.wiklander@oss.qualcomm.com>, 
- David Woodhouse <dwmw@amazon.co.uk>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2820; i=ljs@kernel.org;
- h=from:subject:message-id; bh=cNcQh1oes+NuXX/SLhNhorMmsomyqOJdE2nbt8XExvk=;
- b=owGbwMvMwCV2fu7ZrsZH9SKMp9WSGLJZZ4rIHtHcwB4V8Hin/yxTxk7PB9MvbI3XXNtvsWVPh
- GZ0tPrsjlIWBjEuBlkxRZbnX8T3B4mEzeu84O8GM4eVCWQIAxenAEykXpmR4T6L/n7RH25zgz5/
- uKz5oG9xyJmgPXZrlS4HfLedtXeZAz8jw9ZDvbcNpRcv4J5c+V/n8+cDm1NbX87R834vLWG3KFv
- 2OzMA
-X-Developer-Key: i=ljs@kernel.org; a=openpgp;
- fpr=E7F417BF5214569E89D04F46CF9DCD8A81E27F14
-X-purgate-ID: tlsNG-ef75cf/1795529003-348C9AE4-8C8DBBDB/0/0
+X-purgate-ID: tlsNG-d62444/1795529010-BE0D55FD-F8293746/0/0
 X-purgate-type: clean
-X-purgate-size: 2822
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=unavailable
-	autolearn_force=no version=4.0.1
+X-purgate-size: 2597
+X-Spam-Status: No, score=-15.1 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Continue the conversion of users of the deprecated f_op->mmap callback to
-f_op->mmap_prepare. Keep things gentle this cycle by targeting simple
-cases.
+On 11/16/26 17:11, Pierre Gondois wrote:
+> Hello,
 
-No functional change intended.
+Hello Pierre,
+I can reproduce this on QEMU, and the change you suggest fixes it.
 
-Build tested on x86-64 (allmodconfig, each patch individually), i386,
-arm64 and ppc64le.
+My Setup:
+- QEMU 11.1.3: -M virt,virtualization=on,acpi=off -cpu cortex-a57 -smp 4 
+-m 4G
+- Firmware: qemu-efi-aarch64 2026.08+ds-3
+- Xen: staging 3b65ff9f372fb85 (debug, early printk on PL011), xen.efi 
+started directly from the UEFI shell
 
-Andrew - could you take this through your tree as it's a kernel-wide
-change?  Thanks!
+Without the change, the first ExitBootServices() call fails, 
+efi_exit_boot() retries, and every RAM bank is added a second time, and 
+Xen hits the BUG in bootmem_region_add():
 
-Signed-off-by: Lorenzo Stoakes (ARM) <ljs@kernel.org>
----
-v2:
-* Added tags, thanks everybody!
-* cc'd linux-mm, Andrew.
-* Dropped the vduse patch (was 4/14), as commit bb2e6f166547 ("vduse: fix
-  VA/PA confusion in the coherent page fault path") completely broke the
-  driver and was merged without testing as a hotfix. Conversion can wait
-  for that to get fixed.
+(XEN) RAM: 0000000040000000 - 000000004668ffff
+(XEN) RAM: 0000000040000000 - 000000004668ffff
+(XEN) RAM: 0000000046800000 - 000000004688ffff
+(XEN) RAM: 0000000046800000 - 000000004688ffff
+...
+(XEN) Xen BUG at common/page_alloc.c:308
+...
+(XEN) Xen call trace:
+(XEN)    [<00000a00002cb498>] page_alloc.c#bootmem_region_add+0xd8/0xec (PC)
+(XEN)    [<00000a00002cb694>] init_boot_pages+0x44/0x1b0 (LR)
+(XEN)    [<00000a00002cb694>] init_boot_pages+0x44/0x1b0
+(XEN)    [<00000a00002c54f0>] bootinfo.c#dt_unreserved_regions+0x70/0xac
+(XEN)    [<00000a00002c5c50>] populate_boot_allocator+0x124/0x1c8
+(XEN)    [<00000a00002e2c84>] setup_mm+0x60/0x84
+(XEN)    [<00000a00002e337c>] start_xen+0x118/0x988
+(XEN)    [<00000a00002001a4>] 
+arch/arm/arm64/head.S#primary_switched+0x4/0x24
+...
 
-v1:
-https://lore.kernel.org/r/20261105-late-2026-mmap_prepare-v1-0-c56aadfbab8a@kernel.org
+With your change applied, each bank is listed once and Xen boots through 
+to dom0:
 
----
-Lorenzo Stoakes (ARM) (13):
-      xen/privcmd: convert mmap hook to mmap_prepare
-      KVM: PPC: Book3S: convert spapr TCE mmap hook to mmap_prepare
-      mshv_vtl: convert mmap hooks to mmap_prepare
-      x86/sgx: convert vepc mmap hook to mmap_prepare
-      udf: convert mmap hook to mmap_prepare
-      selinuxfs: convert mmap hooks to mmap_prepare
-      xen: convert xenstore interface mmap hooks to mmap_prepare
-      soc: aspeed: convert LPC and P2A control mmap hooks to mmap_prepare
-      soc: qcom: rmtfs_mem: convert mmap hook to mmap_prepare
-      tee: convert shm mmap hook to mmap_prepare
-      misc: bcm-vk: convert mmap hook to mmap_prepare
-      ptp: vmclock: convert mmap hook to mmap_prepare
-      vhost-vdpa: convert mmap hook to mmap_prepare
+...
+(XEN) Checking for initrd in /chosen
+(XEN) RAM: 0000000040000000 - 000000004668ffff
+(XEN) RAM: 0000000046800000 - 000000004688ffff
+(XEN) RAM: 0000000046930000 - 0000000047a4ffff
+(XEN) RAM: 0000000047ff4000 - 000000013fffffff
+(XEN)
+(XEN) MODULE[0]: 0000000045b58000 - 0000000045ccafff Xen
+(XEN) MODULE[1]: 0000000045cf1000 - 0000000045df3fff Device Tree
+(XEN) MODULE[2]: 000000013dd4d000 - 000000013fffdf13 Ramdisk
+(XEN) MODULE[3]: 0000000041bf4000 - 0000000043ffffbf Kernel
+...
 
- arch/powerpc/kvm/book3s_64_vio.c        |  6 +++---
- arch/x86/kernel/cpu/sgx/virt.c          | 15 ++++++++-------
- drivers/hv/mshv_vtl_main.c              | 14 +++++++-------
- drivers/misc/bcm-vk/bcm_vk_dev.c        | 20 ++++++++++----------
- drivers/ptp/ptp_vmclock.c               | 19 +++++++++----------
- drivers/soc/aspeed/aspeed-lpc-ctrl.c    | 20 +++++++++-----------
- drivers/soc/aspeed/aspeed-p2a-ctrl.c    | 22 ++++++++--------------
- drivers/soc/qcom/rmtfs_mem.c            | 22 ++++++++++------------
- drivers/tee/tee_shm.c                   | 14 +++++++-------
- drivers/vhost/vdpa.c                    | 23 ++++++++++++-----------
- drivers/xen/privcmd.c                   | 11 +++++------
- drivers/xen/xenbus/xenbus_dev_backend.c | 14 ++++++--------
- drivers/xen/xenfs/xenstored.c           | 14 ++++++--------
- fs/udf/file.c                           |  8 ++++----
- security/selinux/selinuxfs.c            | 24 +++++++++++-------------
- 15 files changed, 115 insertions(+), 131 deletions(-)
----
-base-commit: 5bd93e4b0b357e9d0a13199887aacbf04d1ce216
-change-id: 20261101-late-2026-mmap_prepare-02c87d23101e
+I see in the x86 that the e820_raw.nr_map in 
+efi_arch_process_memory_map() is reset for each loop iteration. On Arm 
+the bank is appended to the previous iteration. So, I guess resetting 
+the banks is the right call?
 
-Cheers,
--- 
-Lorenzo Stoakes (ARM) <ljs@kernel.org>
+Pierre, are you planning to send this fix as a patch to the mailinglist? 
+If so, please add my:
+
+Tested-by: Julian Vetter <julian.vetter@vates.tech>
+
+Otherwise I'm happy to post the patch with your Suggested-by.
+
+Thank you,
+Julian
+
+> 
+> Regards,
+> 
+> Pierre
+> 
+> [1] https://github.com/tianocore/edk2/pull/12704
+> [2] https://github.com/tianocore/edk2/pull/13261#issuecomment-6774136145
+> 
+> 
+> 
+> 
 
 
