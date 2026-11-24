@@ -2,43 +2,43 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 29E53606B01E
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2026 14:06:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 53BEC606A684
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2026 14:06:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=PNip109e
-Received: from list by lists.xenproject.org with outflank-mailman.1501059.1697131 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=MQjYxltb
+Received: from list by lists.xenproject.org with outflank-mailman.1501069.1697142 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVrA5-0005j2-Sa; Tue, 24 Nov 2026 14:06:21 +0000
+	id 1xVrAL-0006Ck-3a; Tue, 24 Nov 2026 14:06:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1501059.1697131; Tue, 24 Nov 2026 14:06:21 +0000
+Received: by outflank-mailman (output) from mailman id 1501069.1697142; Tue, 24 Nov 2026 14:06:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVrA5-0005iv-PP; Tue, 24 Nov 2026 14:06:21 +0000
-Received: by outflank-mailman (input) for mailman id 1501059;
- Tue, 24 Nov 2026 14:06:20 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xVrAK-0006Ca-Vx; Tue, 24 Nov 2026 14:06:36 +0000
+Received: by outflank-mailman (input) for mailman id 1501069;
+ Tue, 24 Nov 2026 14:06:35 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ljs@kernel.org>) id 1xVrA4-0005hy-6K
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 14:06:20 +0000
+ (envelope-from <ljs@kernel.org>) id 1xVrAJ-0006AY-OC
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 14:06:35 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xVrA3-000YhQ-I6
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 15:06:19 +0100
-Received: from [10.42.69.5] (helo=localhost)
+ id 1xVrAJ-004Ttn-4D
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 15:06:35 +0100
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <ljs@kernel.org>)
- id 6b0599d7-bab6-0a2a0a5309dd-0a2a4505c5f2-18
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 15:06:19 +0100
-Received: from [172.234.252.31] (helo=sea.source.kernel.org)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6b0599e6-8faa-0a2a0a5109dd-0a2a4508a844-14
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 15:06:35 +0100
+Received: from [172.105.4.254] (helo=tor.source.kernel.org)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <ljs@kernel.org>)
- id 6b0599d9-4cb1-0a2a45050019-aceafc1fe6aa-3
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 15:06:19 +0100
+ id 6b0599e9-f659-0a2a45080019-ac6904febacc-3
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 15:06:34 +0100
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 6863040755;
+ by tor.source.kernel.org (Postfix) with ESMTP id 5EA04626B3;
+ Tue, 24 Nov 2026 14:06:33 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 108161F000D8;
  Tue, 24 Nov 2026 14:06:17 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7C24F1F000F0;
- Tue, 24 Nov 2026 14:06:02 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,23 +49,23 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="From:Date:Subject:References:In-Reply-To:To:Cc"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795529177;
-	bh=7FUmabyr4uQL+774Pvtn0Hclc0nu9L2r9AtaFETc/GA=;
+	s=k20260515; t=1795529193;
+	bh=hiMN3N/C7dD03jnJATzFgmGeR7RslpdlQJN0uDpFXN4=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=PNip109e1v8AW41xU7g1LBDLiTkaFRP8f4lZPkWTaQTZjRjFkQGMj8SHSlPBNZ2hH
-	 laeFtadOphJlM/Zu0+Ptde0v4sw3DIojGjlR2m3Qeu4CzKMRUAYso+tGP3tNzqdpUU
-	 3sU6lzTKuQWYqrxkL5hORf1O/+Hd+Wm4c8OvqIXcRd+ed0pWiVLiUh9729Yx9jx6Fi
-	 dgXnxqAfIA8dZQ6o3EwPJ+IUCAlYnXIx9hj5ELXrFUEkSnPqlONUQf1SpQ6qeJt9wO
-	 D7Z8L5+AC0tRE+/U+WmavqRwYF54su3iDaH7Xb22dOtX1vDC/N8NGim9zMmqD/7g1W
-	 xIohsVS5dOzsw==
+	b=MQjYxltb9Lfnf6aDL5OYh7Tos6dJojDYdjybWJGWVNjJ6hrbfTJ8ZPZVPi5MfppI5
+	 pdUQnhlSUzUdj9WwvNDPmbRseMIDLkEdFaRFtoVatla5/Fuct+95HTLcdwq0RgK5Iz
+	 lSsu0hFGoicau84trJRRHIYubGhANzW+wKee32pMvpdmDLHzDYkAv+Y+RDzUir64io
+	 phFuvBt5hilAeyamBQdkPJtFH3lrISngr5HW4k0UvMVP3HH3PL1ngrc6X66Vnf4wu6
+	 OIFJJXbthFCqR6CzeLnrWA1f90gLOeQTTF8hFzd8U/xnGyYmPicXDtHsxEyFNM3Xca
+	 hXGpkJf0v9gPA==
 From: "Lorenzo Stoakes (ARM)" <ljs@kernel.org>
-Date: Tue, 24 Nov 2026 14:02:54 +0000
-Subject: [PATCH v2 11/13] misc: bcm-vk: convert mmap hook to mmap_prepare
+Date: Tue, 24 Nov 2026 14:02:55 +0000
+Subject: [PATCH v2 12/13] ptp: vmclock: convert mmap hook to mmap_prepare
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261124-late-2026-mmap_prepare-v2-11-0b0d99d655f9@kernel.org>
+Message-Id: <20261124-late-2026-mmap_prepare-v2-12-0b0d99d655f9@kernel.org>
 References: <20261124-late-2026-mmap_prepare-v2-0-0b0d99d655f9@kernel.org>
 In-Reply-To: <20261124-late-2026-mmap_prepare-v2-0-0b0d99d655f9@kernel.org>
 To: Andrew Morton <akpm@linux-foundation.org>, 
@@ -110,19 +110,19 @@ Cc: ljs@kernel.org, xen-devel@lists.xenproject.org,
  selinux@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
  linux-aspeed@lists.ozlabs.org, linux-arm-msm@vger.kernel.org, 
  op-tee@lists.trustedfirmware.org, netdev@vger.kernel.org, 
- linux-mm@kvack.org
+ linux-mm@kvack.org, David Woodhouse <dwmw@amazon.co.uk>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2129; i=ljs@kernel.org;
- h=from:subject:message-id; bh=dRLES62L0oNx/h8n7oOxCXbdn7WuTRK+ZkJqntS+Ejg=;
- b=owGbwMvMwCV2fu7ZrsZH9SKMp9WSGLJZZ0rUZakxBThbH2CZem92EdvkV4oicReY36/xvsBfp
- jlz6+lPHaUsDGJcDLJiiizPv4jvDxIJm9d5wd8NZg4rE8gQBi5OAZjI0nBGho3CNY3Z605Z/zPu
- KRDaKl1vlbg8hjs3tHkrV62rTZVdHSPDdePvS9YekA+OrkzRyBNLVHkfcy3a4bNpv8ypohR7gQP
- sAA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2115; i=ljs@kernel.org;
+ h=from:subject:message-id; bh=cW06dufDxxurFECoGUtsKanmgN5mVh9JU1n9DwUlF+c=;
+ b=owGbwMvMwCV2fu7ZrsZH9SKMp9WSGLJZZ0rUB1lesPbqmbJgNvPOB1avtaw+P/x3Y3Hccft6P
+ pYlE/YpdpSyMIhxMciKKbI8/yK+P0gkbF7nBX83mDmsTCBDGLg4BWAiJ7cx/FO8oGkyMUCeZdmO
+ yW/19f9I/BF48NiouMQ8yLmwfZrEbkeGX8xe9be/bRf592j1j6f9U3c+nsYq1X3k/u9VLzZ8avR
+ lb+cGAA==
 X-Developer-Key: i=ljs@kernel.org; a=openpgp;
  fpr=E7F417BF5214569E89D04F46CF9DCD8A81E27F14
-X-purgate-ID: tlsNG-c201ff/1795529179-F66B52A1-F52C85C1/0/0
+X-purgate-ID: tlsNG-c1860d/1795529195-DF6D687B-F1DCAA88/0/0
 X-purgate-type: clean
-X-purgate-size: 2131
+X-purgate-size: 2117
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -132,62 +132,64 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 Move from the deprecated mmap hook to the new mmap_prepare hook, using the
-I/O PFN remap mmap action to map the BAR.
+I/O PFN remap mmap action to map the clock page and retaining the -EAGAIN
+error on failure via the action error override.
 
+Acked-by: David Woodhouse <dwmw@amazon.co.uk>
 Signed-off-by: Lorenzo Stoakes (ARM) <ljs@kernel.org>
 ---
- drivers/misc/bcm-vk/bcm_vk_dev.c | 20 ++++++++++----------
- 1 file changed, 10 insertions(+), 10 deletions(-)
+ drivers/ptp/ptp_vmclock.c | 19 +++++++++----------
+ 1 file changed, 9 insertions(+), 10 deletions(-)
 
-diff --git a/drivers/misc/bcm-vk/bcm_vk_dev.c b/drivers/misc/bcm-vk/bcm_vk_dev.c
-index 88ee3a417616..25a2b46ebad9 100644
---- a/drivers/misc/bcm-vk/bcm_vk_dev.c
-+++ b/drivers/misc/bcm-vk/bcm_vk_dev.c
-@@ -1201,9 +1201,9 @@ static long bcm_vk_reset(struct bcm_vk *vk, struct vk_reset __user *arg)
- 	return ret;
- }
- 
--static int bcm_vk_mmap(struct file *file, struct vm_area_struct *vma)
-+static int bcm_vk_mmap_prepare(struct vm_area_desc *desc)
- {
--	struct bcm_vk_ctx *ctx = file->private_data;
-+	struct bcm_vk_ctx *ctx = desc->file->private_data;
- 	struct bcm_vk *vk = container_of(ctx->miscdev, struct bcm_vk, miscdev);
- 	unsigned long pg_size;
- 
-@@ -1212,16 +1212,16 @@ static int bcm_vk_mmap(struct file *file, struct vm_area_struct *vma)
- 
- 	pg_size = ((pci_resource_len(vk->pdev, VK_MMAPABLE_BAR) - 1)
- 		    >> PAGE_SHIFT) + 1;
--	if (vma->vm_pgoff + vma_pages(vma) > pg_size)
-+	if (desc->pgoff + vma_desc_pages(desc) > pg_size)
- 		return -EINVAL;
- 
--	vma->vm_pgoff += (pci_resource_start(vk->pdev, VK_MMAPABLE_BAR)
--			  >> PAGE_SHIFT);
--	vma->vm_page_prot = pgprot_noncached(vma->vm_page_prot);
-+	desc->pgoff += (pci_resource_start(vk->pdev, VK_MMAPABLE_BAR)
-+			>> PAGE_SHIFT);
-+	desc->page_prot = pgprot_noncached(desc->page_prot);
-+
-+	mmap_action_ioremap_full(desc, desc->pgoff);
- 
--	return io_remap_pfn_range(vma, vma->vm_start, vma->vm_pgoff,
--				  vma->vm_end - vma->vm_start,
--				  vma->vm_page_prot);
-+	return 0;
- }
- 
- static long bcm_vk_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
-@@ -1262,7 +1262,7 @@ static const struct file_operations bcm_vk_fops = {
- 	.write = bcm_vk_write,
- 	.poll = bcm_vk_poll,
- 	.release = bcm_vk_release,
--	.mmap = bcm_vk_mmap,
-+	.mmap_prepare = bcm_vk_mmap_prepare,
- 	.unlocked_ioctl = bcm_vk_ioctl,
+diff --git a/drivers/ptp/ptp_vmclock.c b/drivers/ptp/ptp_vmclock.c
+index 7f25fe6c2ce2..6a1d5f40a566 100644
+--- a/drivers/ptp/ptp_vmclock.c
++++ b/drivers/ptp/ptp_vmclock.c
+@@ -364,27 +364,26 @@ struct vmclock_file_state {
+ 	atomic_t seq;
  };
  
+-static int vmclock_miscdev_mmap(struct file *fp, struct vm_area_struct *vma)
++static int vmclock_miscdev_mmap_prepare(struct vm_area_desc *desc)
+ {
+-	struct vmclock_file_state *fst = fp->private_data;
++	struct vmclock_file_state *fst = desc->file->private_data;
+ 	struct vmclock_state *st = fst->st;
+ 
+-	if ((vma->vm_flags & (VM_READ|VM_WRITE)) != VM_READ)
++	if (!vma_desc_test(desc, VMA_READ_BIT) ||
++	    vma_desc_test(desc, VMA_WRITE_BIT))
+ 		return -EROFS;
+ 
+ 	/*
+ 	 * Restrict the read-only mapping so it cannot be upgraded to
+ 	 * writable later with mprotect().
+ 	 */
+-	vm_flags_clear(vma, VM_MAYWRITE);
++	vma_desc_clear_flags(desc, VMA_MAYWRITE_BIT);
+ 
+-	if (vma->vm_end - vma->vm_start != PAGE_SIZE || vma->vm_pgoff)
++	if (vma_desc_size(desc) != PAGE_SIZE || desc->pgoff)
+ 		return -EINVAL;
+ 
+-	if (io_remap_pfn_range(vma, vma->vm_start,
+-			       st->res.start >> PAGE_SHIFT, PAGE_SIZE,
+-			       vma->vm_page_prot))
+-		return -EAGAIN;
++	mmap_action_ioremap_full(desc, st->res.start >> PAGE_SHIFT);
++	desc->action.error_override = -EAGAIN;
+ 
+ 	return 0;
+ }
+@@ -484,7 +483,7 @@ static const struct file_operations vmclock_miscdev_fops = {
+ 	.owner = THIS_MODULE,
+ 	.open = vmclock_miscdev_open,
+ 	.release = vmclock_miscdev_release,
+-	.mmap = vmclock_miscdev_mmap,
++	.mmap_prepare = vmclock_miscdev_mmap_prepare,
+ 	.read = vmclock_miscdev_read,
+ 	.poll = vmclock_miscdev_poll,
+ };
 
 -- 
 2.56.1
