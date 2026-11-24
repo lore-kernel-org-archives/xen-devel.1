@@ -2,48 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B6F060A2609
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2026 14:07:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 24AE8606A31E
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2026 14:37:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=T+3vKTAr
-Received: from list by lists.xenproject.org with outflank-mailman.1501091.1697160 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=ZFYCM0Ym
+Received: from list by lists.xenproject.org with outflank-mailman.1501131.1697172 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVrAw-0007KQ-I3; Tue, 24 Nov 2026 14:07:14 +0000
+	id 1xVreA-0005W2-SK; Tue, 24 Nov 2026 14:37:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1501091.1697160; Tue, 24 Nov 2026 14:07:14 +0000
+Received: by outflank-mailman (output) from mailman id 1501131.1697172; Tue, 24 Nov 2026 14:37:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVrAw-0007KJ-EN; Tue, 24 Nov 2026 14:07:14 +0000
-Received: by outflank-mailman (input) for mailman id 1501091;
- Tue, 24 Nov 2026 14:07:12 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jgross@suse.com>) id 1xVrAu-0007HE-PI
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 14:07:12 +0000
+	id 1xVreA-0005Vv-PN; Tue, 24 Nov 2026 14:37:26 +0000
+Received: by outflank-mailman (input) for mailman id 1501131;
+ Tue, 24 Nov 2026 14:37:25 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xVre9-0005Vp-Oj
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 14:37:25 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xVrAu-00GebH-5O
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 15:07:12 +0100
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xVre9-005hco-3T
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 15:37:25 +0100
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jgross@suse.com>)
- id 6b059a10-e002-0a2a0a5209dd-0a2a4504e746-0
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 15:07:12 +0100
-Received: from [209.85.218.45] (helo=mail-ej1-f45.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jgross@suse.com>)
- id 6b059a0f-b57f-0a2a45040019-d155da2db0f6-3
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 15:07:11 +0100
-Received: by mail-ej1-f45.google.com with SMTP id
- a640c23a62f3a-c4d2b741ed9so740776666b.2
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 06:07:11 -0800 (PST)
-Received: from ?IPV6:2a00:12d0:afa3:c01:92cc:e257:77ba:97a1?
- (2a00-12d0-afa3-c01-92cc-e257-77ba-97a1.ip.tng.de.
- [2a00:12d0:afa3:c01:92cc:e257:77ba:97a1])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c513afe01a0sm525452066b.68.2026.11.24.06.07.10
+ (envelope-from <jbeulich@suse.com>)
+ id 6b05a119-bab6-0a2a0a5309dd-0a2a4503afca-24
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 15:37:24 +0100
+Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6b05a124-fae8-0a2a45030019-d1558034c456-3
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 15:37:24 +0100
+Received: by mail-wm1-f52.google.com with SMTP id
+ 5b1f17b1804b1-4bb6adaf0f1so40445565e9.0
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 06:37:24 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4bb853ca452sm430567475e9.15.2026.11.24.06.37.23
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 24 Nov 2026 06:07:11 -0800 (PST)
+ Tue, 24 Nov 2026 06:37:24 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,92 +49,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1795529231; x=1796134031; darn=lists.xenproject.org;
-        h=content-type:in-reply-to:autocrypt:from:content-language:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=sgZu57YxOTl0zoXlXzQ5APmfEtF1ApqgxM4s40GuVlo=;
-        b=T+3vKTArLo0oeYAgyx/k8ak8GtuoOPYseE7EBICJFY3+XdId9OrMUrHBkQW3vyxJQz
-         ptmyWKsBqJ/QymljMwIn9cUIEBpwk8AO668gN7CD5M66McPNhugOdlKaitZT4aS2QRZ4
-         vmS19BivvenvWvXl6GNX7NIg93wlIlnoBCC9wWZldpXP8ItnyoHjgcTPsZwFEsq5VHGv
-         di93GX0k9t7CEhZ81RBtGne7Ur1aIxQAhYQZyA59r+t2IPO1zyshKxllhZLAw3vddmq8
-         rJBDwwnNOGxfApXmIfAMScHzqhli/ReqQUK5YBqnzYxlVZnl29esfrvKVdtkvGYKGZtw
-         /I7A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795529231; x=1796134031;
-        h=content-type:in-reply-to:autocrypt:from:content-language:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=suse.com; s=google; t=1795531044; x=1796135844; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=sgZu57YxOTl0zoXlXzQ5APmfEtF1ApqgxM4s40GuVlo=;
-        b=JfrUMsS5gUDXDoUXNvWxDgBfxzECaLx0/YArknoKOFanV9Puoz8FaiFjKs2DccGtxu
-         1pRQxNsPTrjCOieWeJa505CkqjoJ7bAYRd28UvbhYKlDweBX4e6iUd5MIVb9qJ6YjsUy
-         sdRDLIlXlOYpH2HxMSz6GURlivRz3P1ThyG9ukSfgsQ8Cqzqeenx+JTqkLGE4dOPnUZM
-         W2PUt61eK99z2aJZHgXnN6xX0C8ijFSZXIp+NhnvhPKD0irvcQOCgmbPdCMVYRQ8tNhf
-         7xhA8unWIkH4rjffWGLo0SEwIcoVcAMKVaM1yWB88mu+DLAW9aVXrMdMMzsGyeXr0wxw
-         y8eA==
-X-Forwarded-Encrypted: i=1; AL+hErGwe99B8ydwGEqXPiFwNUxEfCv9I6mdmNfE1Fyvh676kWvqezKCarksf2LqsueX54/1V4K43pkjh6M=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z+8uKxtDBqWrkSlyiOMFtlOHNzb9/d4CR3OyMeHaG78lkIg1R5E
-	YGgFI1NeQ5PTg9BBpML7ApuBQP+dpWBriSQIkT5SRoKoMObY2XbTgKwXfnOS6EQfe1Q=
-X-Gm-Gg: AZFdTZfITrtstBBf/1vMB0H1bY1f65gkJBC3kxlBB2i79/tcprygPnPyZjqE3Cz00ts
-	/HTvB1Uqbb+mjw6LsglqLUaosOIX2zKt68emrBGb7Te2BK4Sr18d7Tacb/zLVIQsnY/SKt5oyNX
-	e5a9yoEjba50LqtUgsx06+hzbLDNyKapGf2IUkKHIcjrRdNtvY9TZ4FCrQlVu24SOFeSYa/MgBH
-	Md5jbUObAYaVBlB1Q35dkLivDTQUAYHKLHZ9bWRk99qL6XbrioGPk5gzBXTPTlzP4i14hrx36EY
-	gmQL2yglyfwTeefl5gX/Lm4lqg9FP0p+F5qY0TyBtGNXdq3U4YiFCPiRlURNQCQ/ba46dhOZjLu
-	lThKhe1fsA7EULjTBWDmeoxqH42RVJNYm6EhzR10nOZBDXBEOAmOBHcS5VTUxcA0XOE7BndUa7H
-	pNfX/aA0IAC/JEImNcwHTdB6Lock3fPZgffsT7NIIicetO9TjN74/CRykqUkr+NmbbfVmQWDbSi
-	4e4ce6Q+WeQGQy8FeIunuNa35kF8bCB5h36gCYYUmLCAFWM7BzzlT56vXOe2y9YXsrzcqVNyrS0
-	w8BJXpUAY2yaJoSLdulr8LBD8CHiReR3XRRds5Udgu+kpjxTlHdk7kPOTzadSyj+3nISkB+vMm2
-	h5LEwnEQWWFZaPBs+oRr1JtXT81BIdj+19mwmdxWb0zk1JqmgvmA=
-X-Received: by 2002:a17:906:6bc9:b0:c46:ca3a:10d5 with SMTP id a640c23a62f3a-c513aad1846mr814527366b.45.1795529231350;
-        Tue, 24 Nov 2026 06:07:11 -0800 (PST)
-Message-ID: <01f14efb-5c70-40a3-b362-66c99d2c699d@suse.com>
-Date: Tue, 24 Nov 2026 15:07:10 +0100
+        bh=ySWrV4PJ1u06jC12dZLSaYpHRuZEDtJsinMGAg68/64=;
+        b=ZFYCM0Ym90twDYVe58Xhf8zeRbuoGYQwoBusKUSd3TzatyyFDR8s/tjEhAmDr7+vFJ
+         2GC4pbnuzfWNaeNVNGDPqT+zBbyiIfwpv1NkJl4bZJhIPiBXZ8pFiEuxeghYGjPjhvq7
+         4RC8XXz7TavwvdmHJ1eX41NNn4DnKEvWAz5ggxr1zR/LzvEWYVmtvV60kUes11HXOX7t
+         OFo+9AZsu0ojbnU+Zr7m8/q3xnxn7tBUg0AA+hLJ2sJBu9Rs1p3jv9xwsuYIO1Q+yM1F
+         /hjFasjcR6tA75gEhyb7JPvvPR2b/6Rda5D9veYYAQBKXeAM3I7pDCar+HBJ4kxZbm7J
+         MqMQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795531044; x=1796135844;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=ySWrV4PJ1u06jC12dZLSaYpHRuZEDtJsinMGAg68/64=;
+        b=nnMxh+3dDICSBs80fL1xZl0yt0KdTTtPMKCGWHX19tufDHsbD2pSpqKl1QhJsNXmgY
+         A5SbQrVKWKxHph9xXIJvCvxL0jYk/Qps4IzQlR40wcn24+vcueiGwAb1oAHwyyUPItoS
+         pwukfX6tmdbgr5Oa9RRHjZEuGL9dJeNraLFRmG4P5LCNNlzdlgcu6hIjv1Qz8NVvJPS8
+         ukKCtMzhAp+VGUoN7S6+SGKzPonvCdJ3jDePnPDSdwiInl6BD5LPelHhxrqajz0f1yNG
+         d49Zhy7wWs6kIrH1vmhCnyzfV1x36mQ1BwWgEdJzocCnDYp81vcoNCukBOoMUjeQ9i9s
+         BAeg==
+X-Forwarded-Encrypted: i=1; AL+hErFW7g49tNB7apoezcxA2WBfFSOgGaD+CRCNJ8im9CaJrYPx2tm1zz5BvBZLqfw1p4utDugRlsqLrGk=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z/YxPqv/PswlhkwOPYPMeA7KwC3UVs6gvkLuQElAG1dFypux7tv
+	Wdumznz2CnR94OfodsZ2+12nKey0h2vZs6H2zvWAX/KD2z7TmCpn21FQsa0PuWThcw==
+X-Gm-Gg: AZFdTZe6wvwJFyRnsSl4DzErknFTRQ9+UosaSMfjhPo/EiFcG/oSqLm3JJfCrLwTr2w
+	o81as7AwY5Hc6elLOKUJFqma+WOuTZ/cvsxuaBSjGV5dUGXjADPrGl/35Lxc+RWXgdQFqRCYHxB
+	f8NtrU7IpW7zhEzsRREVKtY7foKp2ox80oVzbvF1QkU3cn2QB+E1u2h0gtrauCfp0hzrEfbsaYD
+	HuAys0y+tGnW5H4QAeKjYHq9tXnjDK45JkoVFgmnNIMc8a1iHw4rWv604S5IKSuIQcTqUlwRSe7
+	lLOYNK0Z1vGokm1CWgnXTzjSAqODqCs6UnkTv29L4uHjYhB5CYct2Q/7ZIojyCUah4FPMNA8G8U
+	EmL5z6Xk9xnGn318arQvtOGUj/vRNc8NBVxpJ9FUeNmw8uPWfIeK9hb29JGfxpajvVIZBcNYvK4
+	5up0q9qqViqufNeUvj0VGH5/m4XT8SpXyYAC3tFrGTzF2XQX86qTZy1waW2xtRqWwKmTMFt2Y/v
+	1vfeRkbON5Vkf3XdjkuwNV+vAhLtJmvK8vOxntMAO20K+8tWt12zBgtem9UZJyIDFD4QaV578sD
+	ZXEClp+SuPo61C6VVa04aIzj3JYWoij6cWqGg4m3NB9X7lyci2Jrp43aJSMGrsMigt4gVrdq8bu
+	9GuiaDYEQOLYglCl5DQ==
+X-Received: by 2002:a05:600c:5303:b0:4ba:495c:2f5d with SMTP id 5b1f17b1804b1-4bb8880767amr271239625e9.9.1795531044353;
+        Tue, 24 Nov 2026 06:37:24 -0800 (PST)
+Message-ID: <baddd6ac-5aa7-468f-947a-65dcc24963e0@suse.com>
+Date: Tue, 24 Nov 2026 15:37:23 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH] xen/sched: fix potential NULL dereference in
  sched_move_domain()
-To: Jan Beulich <jbeulich@suse.com>
+To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
 Cc: Dario Faggioli <dfaggioli@suse.com>, George Dunlap <gwd@xenproject.org>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@amd.com>,
  xen-devel@lists.xenproject.org
 References: <20261124122004.2487366-1-jgross@suse.com>
  <52e2c84f-2e14-40cf-a515-d59bf32a3b5a@suse.com>
+ <01f14efb-5c70-40a3-b362-66c99d2c699d@suse.com>
 Content-Language: en-US
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Autocrypt: addr=jgross@suse.com; keydata=
- xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
- ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
- dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
- NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
- XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
- AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
- CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
- mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
- G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
- kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
- Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
- RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
- vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
- sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
- aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
- w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
- auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
- 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
- fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
- HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
- QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
- ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
-In-Reply-To: <52e2c84f-2e14-40cf-a515-d59bf32a3b5a@suse.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------s9Pg0fOCNhqZZPqNGeiABuAR"
-X-purgate-ID: tlsNG-ebf023/1795529232-528C9B50-106216F8/35/110847
-X-purgate-type: clean
-X-purgate-size: 7583
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <01f14efb-5c70-40a3-b362-66c99d2c699d@suse.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-33051d/1795531044-75C804E9-CA51632D/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 2996
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -146,126 +144,73 @@ X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------s9Pg0fOCNhqZZPqNGeiABuAR
-Content-Type: multipart/mixed; boundary="------------AL3ZZyzUWinTkqjCriLd7J50";
- protected-headers="v1"; hp="clear"
-Message-ID: <01f14efb-5c70-40a3-b362-66c99d2c699d@suse.com>
-Date: Tue, 24 Nov 2026 15:07:10 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/sched: fix potential NULL dereference in
- sched_move_domain()
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Dario Faggioli <dfaggioli@suse.com>, George Dunlap <gwd@xenproject.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@amd.com>,
- xen-devel@lists.xenproject.org
-References: <20261124122004.2487366-1-jgross@suse.com>
- <52e2c84f-2e14-40cf-a515-d59bf32a3b5a@suse.com>
-Content-Language: en-US
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Autocrypt: addr=jgross@suse.com; keydata=
- xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
- ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
- dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
- NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
- XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
- AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
- CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
- mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
- G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
- kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
- Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
- RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
- vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
- sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
- aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
- w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
- auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
- 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
- fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
- HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
- QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
- ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
-In-Reply-To: <52e2c84f-2e14-40cf-a515-d59bf32a3b5a@suse.com>
+On 24.11.2026 15:07, Jürgen Groß wrote:
+> On 24.11.26 14:57, Jan Beulich wrote:
+>> On 24.11.2026 13:20, Juergen Gross wrote:
+>>> If a dying domain has not all of its vcpus filled and it is moved from
+>>> a cpupool with gran=socket to one with gran=core,
+>>
+>> Why would a dying domain need moving in this way in the first place?
+> 
+> This is for avoiding a zombie domain blocking removal of a cpupool.
 
---------------AL3ZZyzUWinTkqjCriLd7J50
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+Ah, I see. Maybe say "zombie" then in place of just "dying"?
 
-T24gMjQuMTEuMjYgMTQ6NTcsIEphbiBCZXVsaWNoIHdyb3RlOg0KPiBPbiAyNC4xMS4yMDI2
-IDEzOjIwLCBKdWVyZ2VuIEdyb3NzIHdyb3RlOg0KPj4gSWYgYSBkeWluZyBkb21haW4gaGFz
-IG5vdCBhbGwgb2YgaXRzIHZjcHVzIGZpbGxlZCBhbmQgaXQgaXMgbW92ZWQgZnJvbQ0KPj4g
-YSBjcHVwb29sIHdpdGggZ3Jhbj1zb2NrZXQgdG8gb25lIHdpdGggZ3Jhbj1jb3JlLA0KPiAN
-Cj4gV2h5IHdvdWxkIGEgZHlpbmcgZG9tYWluIG5lZWQgbW92aW5nIGluIHRoaXMgd2F5IGlu
-IHRoZSBmaXJzdCBwbGFjZT8NCg0KVGhpcyBpcyBmb3IgYXZvaWRpbmcgYSB6b21iaWUgZG9t
-YWluIGJsb2NraW5nIHJlbW92YWwgb2YgYSBjcHVwb29sLg0KDQo+IFBvc3NpYmx5IGNvbm5l
-Y3RlZCB0byB0aGlzLCAuLi4NCj4gDQo+PiBpdCBtaWdodCBoYXBwZW4gdGhhdA0KPj4gZHVy
-aW5nIGFzc2lnbm1lbnQgb2YgdGhlIG5ldyB1bml0cyB0byB0aGUgdmNwdXMgYSBOVUxMIHBv
-aW50ZXIgaXMNCj4+IGJlaW5nIGRlcmVmZXJlbmNlZDoNCj4+DQo+PiAtIHN5c3RlbSBoYXMg
-MiBzb2NrZXRzIHdpdGggMiBjb3JlcyBlYWNoLCBlYWNoIGNvcmUgaGFzIDIgdGhyZWFkcw0K
-Pj4gLSBQb29sLTAgaGFzIGdyYW49Y29yZSwgb3RoZXIgY3B1cG9vbCBoYXMgZ3Jhbj1zb2Nr
-ZXQNCj4+IC0gZG9tYWluIHdpdGggbWF4X3ZjcHVzPTQgaGFzIG9ubHkgMyB2Y3B1cyBhbmQg
-aXMgaW4gY3B1cG9vbCB3aXRoDQo+PiAgICBncmFuPXNvY2tldA0KPj4gLSBkb21haW4gaXMg
-ZHlpbmcgYW5kIGlzIG1vdmVkIHRvIFBvb2wtMA0KPj4gLSBpbiBzY2hlZF9tb3ZlX2RvbWFp
-bigpIHRoaXMgcmVzdWx0cyBpbiB2Y3B1X2ZhaWxlZCBiZWluZyBzZXQgdG8NCj4+ICAgIHRy
-dWUgZm9yIHRoZSBsYXN0IHVuaXQgb2YgdGhlIGRvbWFpbiwgcmVzdWx0aW5nIGluIHRoZSB1
-bml0IG5vdA0KPj4gICAgYmVpbmcgYWxsb2NhdGVkICgiY29udGludWUiIHN0YXRlbWVudCBp
-cyBiZWluZyBoaXQpDQo+PiAtIGluIHRoZSBmb3JfZWFjaF92Y3B1KCkgbG9vcCBvZiBzY2hl
-ZF9tb3ZlX2RvbWFpbigpIGZvciB2Y3B1IDINCj4+ICAgIHRoZSB1bml0IHBvaW50ZXIgd2ls
-bCBiZSBzZXQgdG8gTlVMTCwgYXMgdW5pdC0+bmV4dF9pbl9saXN0IGlzIG5vdA0KPj4gICAg
-cG9wdWxhdGVkIGR1ZSB0byBhYm92ZSAiY29udGludWUiDQo+Pg0KPj4gRml4ZXM6IDQ4MzVj
-MDc4ZTVjZiAoInhlbi9zY2hlZDogY29yZTogc2tpcCBtaXNzaW5nIHZjcHUgc2xvdHMgaW4g
-c2NoZWRfbW92ZV9kb21haW4oKSIpDQo+PiBSZXBvcnRlZC1ieTogUm9nZXIgUGF1IE1vbm7D
-qSA8cm9nZXIucGF1QGFtZC5jb20+DQo+PiBTaWduZWQtb2ZmLWJ5OiBKdWVyZ2VuIEdyb3Nz
-IDxqZ3Jvc3NAc3VzZS5jb20+DQo+PiAtLS0NCj4+ICAgeGVuL2NvbW1vbi9zY2hlZC9jb3Jl
-LmMgfCAxMSArKysrKysrLS0tLQ0KPj4gICAxIGZpbGUgY2hhbmdlZCwgNyBpbnNlcnRpb25z
-KCspLCA0IGRlbGV0aW9ucygtKQ0KPj4NCj4+IGRpZmYgLS1naXQgYS94ZW4vY29tbW9uL3Nj
-aGVkL2NvcmUuYyBiL3hlbi9jb21tb24vc2NoZWQvY29yZS5jDQo+PiBpbmRleCAxMGI2ZWVj
-Y2NkLi5lZTcwNzdiODcwIDEwMDY0NA0KPj4gLS0tIGEveGVuL2NvbW1vbi9zY2hlZC9jb3Jl
-LmMNCj4+ICsrKyBiL3hlbi9jb21tb24vc2NoZWQvY29yZS5jDQo+PiBAQCAtODMwLDEwICs4
-MzAsMTMgQEAgaW50IHNjaGVkX21vdmVfZG9tYWluKHN0cnVjdCBkb21haW4gKmQsIHN0cnVj
-dCBjcHVwb29sICpjKQ0KPj4gICAgICAgICAgIGlmICggdW5pdC0+dW5pdF9pZCArIGdyYW4g
-PT0gdi0+dmNwdV9pZCApDQo+PiAgICAgICAgICAgICAgIHVuaXQgPSB1bml0LT5uZXh0X2lu
-X2xpc3Q7DQo+PiAgIA0KPj4gLSAgICAgICAgdW5pdC0+c3RhdGVfZW50cnlfdGltZSA9IG9s
-ZF91bml0LT5zdGF0ZV9lbnRyeV90aW1lOw0KPj4gLSAgICAgICAgdW5pdC0+cnVuc3RhdGVf
-Y250W3YtPnJ1bnN0YXRlLnN0YXRlXSsrOw0KPj4gLSAgICAgICAgLyogVGVtcG9yYXJpbHkg
-dXNlIG9sZCByZXNvdXJjZSBhc3NpZ25tZW50ICovDQo+PiAtICAgICAgICB1bml0LT5yZXMg
-PSBnZXRfc2NoZWRfcmVzKG5ld19jcHUpOw0KPj4gKyAgICAgICAgaWYgKCB1bml0ICkNCj4+
-ICsgICAgICAgIHsNCj4+ICsgICAgICAgICAgICB1bml0LT5zdGF0ZV9lbnRyeV90aW1lID0g
-b2xkX3VuaXQtPnN0YXRlX2VudHJ5X3RpbWU7DQo+PiArICAgICAgICAgICAgdW5pdC0+cnVu
-c3RhdGVfY250W3YtPnJ1bnN0YXRlLnN0YXRlXSsrOw0KPj4gKyAgICAgICAgICAgIC8qIFRl
-bXBvcmFyaWx5IHVzZSBvbGQgcmVzb3VyY2UgYXNzaWdubWVudCAqLw0KPj4gKyAgICAgICAg
-ICAgIHVuaXQtPnJlcyA9IGdldF9zY2hlZF9yZXMobmV3X2NwdSk7DQo+PiArICAgICAgICB9
-DQo+PiAgIA0KPj4gICAgICAgICAgIHYtPnNjaGVkX3VuaXQgPSB1bml0Ow0KPiANCj4gLi4u
-IGlzIHRoaXMgZmllbGQgYmVjb21pbmcgTlVMTCByZWFsbHkgb2theT8gUGVyaGFwcyBqdXN0
-IGZvciBkeWluZyBkb21haW5zDQo+IGl0IGlzLCBidXQgdGhlbiB0aGUgb3JpZ2luYWwgcXVl
-c3Rpb24gcmVtYWlucyB3aHkgdGhleSB3b3VsZCBuZWVkIG1vdmluZyBpbg0KPiB0aGUgZmly
-c3QgcGxhY2UuDQoNCk5vdCBzZXR0aW5nIGl0IHdvdWxkIGxlYXZlIGEgcG90ZW50aWFsIFVB
-RiwgYXMgdGhlIG9sZCB1bml0IHdpbGwgYmUgZnJlZWQuDQoNCj4gRnVydGhlciwgaWYgdGhp
-cyBpcyB0byBjb3ZlciBkeWluZyBkb21haW5zLCBtaWdodCB0aGUgaWYoKSBub3QgYmV0dGVy
-IGNoZWNrDQo+IGV4YWN0bHkgdGhhdCwgd2l0aCAobWF5YmUpIGFuIEFTU0VSVCh1bml0KSBp
-biBpdHMgYm9keT8NCg0KSG1tLCBub3Qgc3VyZS4gVGhlIEFTU0VSVCgpIGlzIG5vdCBuZWVk
-ZWQgSU1ITywgYXMgaXQganVzdCBjaGFuZ2VzIHRoZQ0KcmVhc29uIG9mIHRoZSBjcmFzaC4N
-Cg0KDQpKdWVyZ2VuDQoNCg==
+>> Possibly connected to this, ...
+>>
+>>> it might happen that
+>>> during assignment of the new units to the vcpus a NULL pointer is
+>>> being dereferenced:
+>>>
+>>> - system has 2 sockets with 2 cores each, each core has 2 threads
+>>> - Pool-0 has gran=core, other cpupool has gran=socket
+>>> - domain with max_vcpus=4 has only 3 vcpus and is in cpupool with
+>>>    gran=socket
+>>> - domain is dying and is moved to Pool-0
+>>> - in sched_move_domain() this results in vcpu_failed being set to
+>>>    true for the last unit of the domain, resulting in the unit not
+>>>    being allocated ("continue" statement is being hit)
+>>> - in the for_each_vcpu() loop of sched_move_domain() for vcpu 2
+>>>    the unit pointer will be set to NULL, as unit->next_in_list is not
+>>>    populated due to above "continue"
+>>>
+>>> Fixes: 4835c078e5cf ("xen/sched: core: skip missing vcpu slots in sched_move_domain()")
+>>> Reported-by: Roger Pau Monné <roger.pau@amd.com>
+>>> Signed-off-by: Juergen Gross <jgross@suse.com>
+>>> ---
+>>>   xen/common/sched/core.c | 11 +++++++----
+>>>   1 file changed, 7 insertions(+), 4 deletions(-)
+>>>
+>>> diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
+>>> index 10b6eecccd..ee7077b870 100644
+>>> --- a/xen/common/sched/core.c
+>>> +++ b/xen/common/sched/core.c
+>>> @@ -830,10 +830,13 @@ int sched_move_domain(struct domain *d, struct cpupool *c)
+>>>           if ( unit->unit_id + gran == v->vcpu_id )
+>>>               unit = unit->next_in_list;
+>>>   
+>>> -        unit->state_entry_time = old_unit->state_entry_time;
+>>> -        unit->runstate_cnt[v->runstate.state]++;
+>>> -        /* Temporarily use old resource assignment */
+>>> -        unit->res = get_sched_res(new_cpu);
+>>> +        if ( unit )
+>>> +        {
+>>> +            unit->state_entry_time = old_unit->state_entry_time;
+>>> +            unit->runstate_cnt[v->runstate.state]++;
+>>> +            /* Temporarily use old resource assignment */
+>>> +            unit->res = get_sched_res(new_cpu);
+>>> +        }
+>>>   
+>>>           v->sched_unit = unit;
+>>
+>> ... is this field becoming NULL really okay? Perhaps just for dying domains
+>> it is, but then the original question remains why they would need moving in
+>> the first place.
+> 
+> Not setting it would leave a potential UAF, as the old unit will be freed.
 
---------------AL3ZZyzUWinTkqjCriLd7J50--
+Sure, it needs setting, but setting to NULL when NULL may not work everywhere
+wouldn't be much better than leaving a dangling pointer.
 
---------------s9Pg0fOCNhqZZPqNGeiABuAR
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmsFmg4FAwAAAAAACgkQsN6d1ii/Ey/P
-hgf/YnVUPCOJ6BTk7ps7LtuCi9raGKc6W8PY8/iZpkXxdecwjzFUXYQY0gkfNzLbhzODkaBgYMTH
-Qc9bDusJQmGkEUcCLaQyxEImPDvvv1mz/sN/CjBWgxbkPnI4dJiWhutDYagE0dDa+P6S5Iz5NSnf
-ju+cnz/jE2wWaynG0emQ/jS7vSITe85boVChTUMD9IbpN078n6TXZzYPkVdcCQyooEEF8yohFaAw
-BAJN6ipKXSfjvzYD3EgwcCMGdg4Xo70/7gcn3uWkY2D0RL28uFw9ICUuSWmQoTfb12+Om1Wxa1Up
-Ulsw+JwPutfNDk4J1ot0dT1can40sSSExJgsNlYlqw==
-=UmOM
------END PGP SIGNATURE-----
-
---------------s9Pg0fOCNhqZZPqNGeiABuAR--
+Jan
 
