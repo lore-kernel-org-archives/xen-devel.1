@@ -2,43 +2,43 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1FEA5606A6A2
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2026 14:03:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 68108606A32D
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2026 14:04:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=lgnIva9K
-Received: from list by lists.xenproject.org with outflank-mailman.1500982.1697042 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=iHtmG7Cj
+Received: from list by lists.xenproject.org with outflank-mailman.1500987.1697051 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVr7U-0000oY-AF; Tue, 24 Nov 2026 14:03:40 +0000
+	id 1xVr7l-0001BU-ID; Tue, 24 Nov 2026 14:03:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1500982.1697042; Tue, 24 Nov 2026 14:03:40 +0000
+Received: by outflank-mailman (output) from mailman id 1500987.1697051; Tue, 24 Nov 2026 14:03:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVr7U-0000oR-7E; Tue, 24 Nov 2026 14:03:40 +0000
-Received: by outflank-mailman (input) for mailman id 1500982;
- Tue, 24 Nov 2026 14:03:39 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xVr7l-0001BJ-Eo; Tue, 24 Nov 2026 14:03:57 +0000
+Received: by outflank-mailman (input) for mailman id 1500987;
+ Tue, 24 Nov 2026 14:03:56 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ljs@kernel.org>) id 1xVr7T-0000nx-R5
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 14:03:39 +0000
+ (envelope-from <ljs@kernel.org>) id 1xVr7k-0001Aq-HW
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 14:03:56 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xVr7T-005Zjd-6m
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 15:03:39 +0100
+ id 1xVr7j-009i8x-U8
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 15:03:55 +0100
 Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <ljs@kernel.org>)
- id 6b05992a-2eae-0a2a0a5409dd-0a2a4502d174-48
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 15:03:39 +0100
-Received: from [172.234.252.31] (helo=sea.source.kernel.org)
+ id 6b05993b-bab6-0a2a0a5309dd-0a2a4502ccf2-48
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 15:03:55 +0100
+Received: from [172.105.4.254] (helo=tor.source.kernel.org)
  by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <ljs@kernel.org>)
- id 6b059939-4900-0a2a45020019-aceafc1fc882-3
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 15:03:38 +0100
+ id 6b05994a-4900-0a2a45020019-ac6904feaf18-3
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 15:03:55 +0100
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 4C35645ADA;
- Tue, 24 Nov 2026 14:03:37 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6EC9E1F000D2;
- Tue, 24 Nov 2026 14:03:22 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id A6127601D9;
+ Tue, 24 Nov 2026 14:03:53 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 388EC1F00AE3;
+ Tue, 24 Nov 2026 14:03:38 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,23 +49,24 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="From:Date:Subject:References:In-Reply-To:To:Cc"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795529017;
-	bh=QEgT8LA0rRCf6QNXkIxcU8G4AwB3CCCB3Sy/g9Ov95E=;
+	s=k20260515; t=1795529033;
+	bh=vJUBuFI/X4ybR5TQJo0mpuZGpnhQ+Y28O/2YwIAeUl0=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=lgnIva9KLMkUPJObpQOKYtz3otyVdfSMFpdn1jQwIpMlk520FFqMXVbw/h5rCk5aM
-	 ZcATjbGD+6/HreWcTYCyu4RHpZTCUrX6vOFINRYB7hegedAzZv3N3ozJ5fa11z9eaM
-	 gXXQWOhj64Q7pR47HsOyK6FGHG0uHoSfwTM6XiHuVS7myaCNjsnAuuXHUj/wq9U3p2
-	 lQW5/BHNg2s211IbQIjkhHQHG7z2O6su3Yfa2ykLBzNZFs2cu9h189uUCdMinPY7Ev
-	 uwAcxEkv+7zGOnE/QurKfUrnjuQWC6+1VYW3BugMR6VXffjfIIPgcP/WlsULN+XnOo
-	 BLi/c3ZTzPxGw==
+	b=iHtmG7CjTvXPz3lA7PVVVfcohJ6emKtmjQ2NVdO2YLbIRwOCJfD95zg5jaPopSYaS
+	 gj5YZqmFSdMCB9FUDQv5kkAhrEJtfG0JXoItpXFghN79meSem8VIAhQgIUFZSzsgAY
+	 r4LSrjk7SnXCqTh4BUkrSrsjPXB067ziolwbz+SPR2Ltp0YGJdQcNB/fTa+3srse0H
+	 /GlPyBuULOvYPhH5W1j1efHQ11GpECImbgYnAOTpdtXBpeseeeo4Fqv9cOfTrOTpvy
+	 kwrbQFsHkQGnl4n4jy0umpUo8SNKV+PrXpeTfoo5qbg7WgAkB1/06qMvPYru+IuxNi
+	 f+p2tfqpbV87w==
 From: "Lorenzo Stoakes (ARM)" <ljs@kernel.org>
-Date: Tue, 24 Nov 2026 14:02:44 +0000
-Subject: [PATCH v2 01/13] xen/privcmd: convert mmap hook to mmap_prepare
+Date: Tue, 24 Nov 2026 14:02:45 +0000
+Subject: [PATCH v2 02/13] KVM: PPC: Book3S: convert spapr TCE mmap hook to
+ mmap_prepare
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261124-late-2026-mmap_prepare-v2-1-0b0d99d655f9@kernel.org>
+Message-Id: <20261124-late-2026-mmap_prepare-v2-2-0b0d99d655f9@kernel.org>
 References: <20261124-late-2026-mmap_prepare-v2-0-0b0d99d655f9@kernel.org>
 In-Reply-To: <20261124-late-2026-mmap_prepare-v2-0-0b0d99d655f9@kernel.org>
 To: Andrew Morton <akpm@linux-foundation.org>, 
@@ -112,17 +113,17 @@ Cc: ljs@kernel.org, xen-devel@lists.xenproject.org,
  op-tee@lists.trustedfirmware.org, netdev@vger.kernel.org, 
  linux-mm@kvack.org
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1514; i=ljs@kernel.org;
- h=from:subject:message-id; bh=vbEx7oZObK1/uvpt+gmlwGGN8AqsAvHpQ+6B/bIbWLc=;
- b=owGbwMvMwCV2fu7ZrsZH9SKMp9WSGLJZZ4p9KnSRk7EO3//5aBbT8vkXtm3ydLgmlDTdz4Xh/
- 51DR51rO0pZGMS4GGTFFFmefxHfHyQSNq/zgr8bzBxWJpAhDFycAjCR/xmMDDNFecLfebbckfi4
- vE7/m/LcK2sOZZ1nm8rxbKGpph2foA/Df18VkyVbq9Zv5zmv/2rbIZaiJdcOXiqa8Xh3xbur6dX
- d2awA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1158; i=ljs@kernel.org;
+ h=from:subject:message-id; bh=gtiaF6eQ5l4kQG69nvAkqE3NZUUEizPFbGQry23tGvI=;
+ b=owGbwMvMwCV2fu7ZrsZH9SKMp9WSGLJZZ4oFbmu5VXls3dYr8f7eMuEO344nPNsfMWXNVf7Dq
+ qZ7i657dpSyMIhxMciKKbI8/yK+P0gkbF7nBX83mDmsTCBDGLg4BWAiU0IYGTbVO6rNXJEyv+mV
+ +9vcNeFPj7t/YJz3RnHNZ8l9hdoHV+1h+O8ze3Ji1SVFpXAe612GQm+U5O/yPeIyeLxitpextfz
+ t+xwA
 X-Developer-Key: i=ljs@kernel.org; a=openpgp;
  fpr=E7F417BF5214569E89D04F46CF9DCD8A81E27F14
-X-purgate-ID: tlsNG-720697/1795529019-F8F226C6-8F73FCB0/0/0
+X-purgate-ID: tlsNG-720697/1795529035-F972E6C6-08220422/0/0
 X-purgate-type: clean
-X-purgate-size: 1516
+X-purgate-size: 1160
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -131,47 +132,38 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Move from the deprecated mmap hook to the new mmap_prepare hook.
-
-The hook only sets VMA flags and operations. The VMA private data is
-already NULL at this point, so we no longer explicitly clear it.
+Move from the deprecated mmap hook to the new mmap_prepare hook. The hook
+only sets the VMA operations.
 
 Signed-off-by: Lorenzo Stoakes (ARM) <ljs@kernel.org>
 ---
- drivers/xen/privcmd.c | 11 +++++------
- 1 file changed, 5 insertions(+), 6 deletions(-)
+ arch/powerpc/kvm/book3s_64_vio.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/xen/privcmd.c b/drivers/xen/privcmd.c
-index 221b31611343..6d9e1fe03337 100644
---- a/drivers/xen/privcmd.c
-+++ b/drivers/xen/privcmd.c
-@@ -1645,14 +1645,13 @@ static const struct vm_operations_struct privcmd_vm_ops = {
- 	.fault = privcmd_fault
+diff --git a/arch/powerpc/kvm/book3s_64_vio.c b/arch/powerpc/kvm/book3s_64_vio.c
+index c5f3f5b29d89..05f6f2c9a432 100644
+--- a/arch/powerpc/kvm/book3s_64_vio.c
++++ b/arch/powerpc/kvm/book3s_64_vio.c
+@@ -247,9 +247,9 @@ static const struct vm_operations_struct kvm_spapr_tce_vm_ops = {
+ 	.fault = kvm_spapr_tce_fault,
  };
  
--static int privcmd_mmap(struct file *file, struct vm_area_struct *vma)
-+static int privcmd_mmap_prepare(struct vm_area_desc *desc)
+-static int kvm_spapr_tce_mmap(struct file *file, struct vm_area_struct *vma)
++static int kvm_spapr_tce_mmap_prepare(struct vm_area_desc *desc)
  {
- 	/* DONTCOPY is essential for Xen because copy_page_range doesn't know
- 	 * how to recreate these mappings */
--	vm_flags_set(vma, VM_IO | VM_PFNMAP | VM_DONTCOPY |
--			 VM_DONTEXPAND | VM_DONTDUMP);
--	vma->vm_ops = &privcmd_vm_ops;
--	vma->vm_private_data = NULL;
-+	vma_desc_set_flags(desc, VMA_IO_BIT, VMA_PFNMAP_BIT, VMA_DONTCOPY_BIT,
-+			   VMA_DONTEXPAND_BIT, VMA_DONTDUMP_BIT);
-+	desc->vm_ops = &privcmd_vm_ops;
- 
+-	vma->vm_ops = &kvm_spapr_tce_vm_ops;
++	desc->vm_ops = &kvm_spapr_tce_vm_ops;
  	return 0;
  }
-@@ -1681,7 +1680,7 @@ const struct file_operations xen_privcmd_fops = {
- 	.unlocked_ioctl = privcmd_ioctl,
- 	.open = privcmd_open,
- 	.release = privcmd_release,
--	.mmap = privcmd_mmap,
-+	.mmap_prepare = privcmd_mmap_prepare,
+ 
+@@ -282,7 +282,7 @@ static int kvm_spapr_tce_release(struct inode *inode, struct file *filp)
+ }
+ 
+ static const struct file_operations kvm_spapr_tce_fops = {
+-	.mmap           = kvm_spapr_tce_mmap,
++	.mmap_prepare	= kvm_spapr_tce_mmap_prepare,
+ 	.release	= kvm_spapr_tce_release,
  };
- EXPORT_SYMBOL_GPL(xen_privcmd_fops);
  
 
 -- 
