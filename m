@@ -2,48 +2,63 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AEA39606A331
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2026 15:30:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2F988606A323
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2026 16:37:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=mind.be header.i=@mind.be header.a=rsa-sha256 header.s=google header.b=TBXjU632
-Received: from list by lists.xenproject.org with outflank-mailman.1501218.1697264 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=selector1 header.b=XoDeLKdG;
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=selector1 header.b=XoDeLKdG
+Received: from list by lists.xenproject.org with outflank-mailman.1501240.1697293 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVsSw-0001dy-Co; Tue, 24 Nov 2026 15:29:54 +0000
+	id 1xVtVR-0003h7-AI; Tue, 24 Nov 2026 16:36:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1501218.1697264; Tue, 24 Nov 2026 15:29:54 +0000
+Received: by outflank-mailman (output) from mailman id 1501240.1697293; Tue, 24 Nov 2026 16:36:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVsSw-0001dr-A9; Tue, 24 Nov 2026 15:29:54 +0000
-Received: by outflank-mailman (input) for mailman id 1501218;
- Tue, 24 Nov 2026 15:29:53 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xVtVR-0003gy-5A; Tue, 24 Nov 2026 16:36:33 +0000
+Received: by outflank-mailman (input) for mailman id 1501240;
+ Tue, 24 Nov 2026 16:36:32 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <vitalii.komisarenko@essensium.com>)
- id 1xVsSt-0001dl-Si
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 15:29:53 +0000
+ (envelope-from <Pierre.Gondois@arm.com>) id 1xVtVP-0003gq-M8
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 16:36:32 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xVsSs-009z4X-Ox
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 16:29:50 +0100
-Received: from [10.42.69.12] (helo=localhost)
+ id 1xVtVO-00HAy5-Nb
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 17:36:30 +0100
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <vitalii.komisarenko@essensium.com>)
- id 6b05ad63-bab6-0a2a0a5309dd-0a2a450ceaf8-32
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 16:29:50 +0100
-Received: from [209.85.221.42] (helo=mail-wr1-f42.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <vitalii.komisarenko@essensium.com>)
- id 6b05ad6e-f479-0a2a450c0019-d155dd2ad85f-3
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 16:29:50 +0100
-Received: by mail-wr1-f42.google.com with SMTP id
- ffacd0b85a97d-498f5fa5103so2788800f8f.2
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 07:29:50 -0800 (PST)
-Received: from vk-HP-Laptop-14-ep1xxx (ptr-94-109-41-161.dyn.orange.be.
- [94.109.41.161]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4b33a596f9csm9250963f8f.12.2026.11.24.07.29.49
- for <xen-devel@lists.xenproject.org>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Nov 2026 07:29:49 -0800 (PST)
+ (envelope-from <Pierre.Gondois@arm.com>)
+ id 6b05bcfb-e002-0a2a0a5209dd-0a2a4505bb96-44
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 17:36:30 +0100
+Received: from [52.101.84.35]
+ (helo=DB3PR0202CU003.outbound.protection.outlook.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Pierre.Gondois@arm.com>)
+ id 6b05bd0d-4cb1-0a2a45050019-34655423b0f8-3
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 17:36:30 +0100
+Received: from DU2P250CA0025.EURP250.PROD.OUTLOOK.COM (2603:10a6:10:231::30)
+ by PAVPR08MB8800.eurprd08.prod.outlook.com (2603:10a6:102:2fc::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.639.12; Tue, 24 Nov
+ 2026 16:36:23 +0000
+Received: from DB1PEPF000509E5.eurprd03.prod.outlook.com
+ (2603:10a6:10:231:cafe::17) by DU2P250CA0025.outlook.office365.com
+ (2603:10a6:10:231::30) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.639.14 via Frontend Transport; Tue,
+ 24 Nov 2026 16:36:22 +0000
+Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
+ DB1PEPF000509E5.mail.protection.outlook.com (10.167.242.55) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.639.5
+ via Frontend Transport; Tue, 24 Nov 2026 16:36:22 +0000
+Received: from BESPR08MB999898.eurprd08.prod.outlook.com
+ (2603:10a6:b10:109::23) by DB9PR08MB8482.eurprd08.prod.outlook.com
+ (2603:10a6:10:3d6::9) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.639.14; Tue, 24 Nov
+ 2026 16:35:48 +0000
+Received: from BESPR08MB999898.eurprd08.prod.outlook.com
+ ([fe80::d62a:5300:bc89:9f62]) by BESPR08MB999898.eurprd08.prod.outlook.com
+ ([fe80::d62a:5300:bc89:9f62%6]) with mapi id 15.21.0639.012; Tue, 24 Nov 2026
+ 16:35:48 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,654 +67,199 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=mind.be header.i="@mind.be" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mind.be; s=google; t=1795534190; x=1796138990; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=acqc+s/Er8LH4l5HiJNGiLJSQqIrl8UyhK8RVjgGrIU=;
-        b=TBXjU632Y7PCxo7iODjScR8VM0/bMyHhBa4yZvNEFJO6c4AALvW2OUEKfuIC+twjnG
-         NstsE/YTiJlzdL0OJWXtLVN8goAPmWzVZwj8OniMyAYk6GWAB29hCo9WicNtiyrPubTo
-         uCj/gcH03V13r/HK0BXRQ0ckGftLP2pg1O8FcKq8aTU+47oqtHq6Lj/ZpL2ied5zWr4Z
-         bryg5QrkFjN5X8CBILZ+zSyipZQfa44/xTtLegosQlCR6JsqFaYVz/Sy0PaopRB66tne
-         h46Ku883B5adQkFG00HyiEzHFba1GpkQJUKMOvk8/X+qtSIkJHyuOVoLqt770zzlkSsO
-         tN9w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795534190; x=1796138990;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=acqc+s/Er8LH4l5HiJNGiLJSQqIrl8UyhK8RVjgGrIU=;
-        b=C8TzQgSvMfxXy1et/jDLuPedjY/5IgNNYBPIWQZ/Fr5GWwHj1hvCVeDZX6UkKWVuQ8
-         Gqp6R+R9g5I8mXcA7tEI4/qY9ecD3KPhQrfif5Gff5OLANq/VDHW6RV9zH5j00Edksmb
-         vvvhTXxVcK1bhhYvJIr1gN2o069d8kGl4hK2XXqD+inZum3sLDjqIM4YM7Yf5fFvyyUU
-         JmJ299yE5OPcr9es2Hv4Sz9EWzzxybkuJP1sPWnHMJSQxxP5n+PvSf2E+PkcZeia3hef
-         HF6p2JdwHINBMfoKfG67mZm9O4q4AmdXte6JZcnBB5ae+ZqEaf13q7TFPsULFiBsp8S4
-         NiXg==
-X-Gm-Message-State: APuU4Z8gTiNwHkSQu2/7cYGPlCq3zyp02XyQXo6FlmeU1uEHdJYxUoJ1
-	cYKbLk2w89NZ6iP/6BdchDZ1XpaM30QWEGYjM4IODthGXDCTGpzry8Oq3ig1V1CVDZAmvWYJBbZ
-	fSzZzVN4=
-X-Gm-Gg: AZFdTZfDb8N+YcyDwPwwtO/EKxxYrl7rmoJY5RRtn9t6HGa0b+Xp6wiL7QZJN/yJMtG
-	w8f/CHZ734ZT5T8PDOupioFWu9gbp2fglr8UBSKLVijzmjKuZYnidBlaGiYB1Odu6YAA0qTG1XV
-	NZLWgqCtYxVAUlQMCCTNiizgNUiKGnPmqYakK20q8Ppkaa43oxr7KtrBXwzJ7RRNtb14t/QHmav
-	528yxiPLtQWr834ctvtODFXlrGvqaePjvTAHL4nMoTvsI6Bdte9+N3Aa/LprTZxaOtfEkQ6w2IQ
-	GRFIx9JC3JoVm/MYBnDSgav8ySI7AsPCtt/ACGNUiBgeiodAal3k52gqv0iV9N4Nl0mjUV1q94I
-	412LM8whcnGE8jl7AdAQy2iOw2cDDULH0aeE01J/75tLYW0hordXb7S6MoQIQbcQpKvQRwuyvmM
-	79diTsiXMZbv0kaa0gbrWx00xQjgBJCAM6sKc8Q+RbwLpHP5Dmrma9/rFwBT7g5ZGEPV0pFKQQ7
-	7dedW0IIT1rsDYflemJRjEyB4EIQUV1nNCO4qtG02trn9IR9uhiii3tWs6QF8inXoYQlbPTheIS
-	DWui9zK0NxJ0VwUCuMVEfF6gn8gjSNelAPPCfwfnLmGAUBmTJQCgLvcifGEITjW9vvZJpNRJAsT
-	+NDI6TnU6SA==
-X-Received: by 2002:a05:6000:470b:b0:4a6:ac28:eb57 with SMTP id ffacd0b85a97d-4abb3678d7cmr30494184f8f.17.1795534189545;
-        Tue, 24 Nov 2026 07:29:49 -0800 (PST)
-From: Vitalii Komisarenko <vitalii.komisarenko@mind.be>
-To: xen-devel@lists.xenproject.org
-Subject: [PATCH] Add design note for using ceedling for tests
-Date: Tue, 24 Nov 2026 16:29:47 +0100
-Message-ID: <20261124152947.1403644-1-vitalii.komisarenko@mind.be>
-X-Mailer: git-send-email 2.53.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"; dkim=pass header.s=selector1 header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=wTkM4TFjm3XaeUP/Y5hSr+kKJQf5P62mfaBoNBhLyEB1nhLMy4PGnZviwCKGeyWJdMgsj82NTKzKiP2g2uXl8UEIcFoHK7ld0I4Tdh0mYI7vCfOCXZKMVNM/3oahd6CSIeW+RXlkmAGhuzIxYQdy+GriPRZVvsE5l6e3JcAMk9t5NgUXGhLfNbUkKoC9lX32AbcXHuqxo6fEM1Nm0eDLrB5V8hM3KelyEdMGLqcDoMR7ebYPOkmBuCEJOPxxFJrhBM9ELPa4bCde+jw1eGKhT62YtcqzIHs+RXNVPwzSd63o5veG/2rYtvU2E6dXUU0FydeN6kWOXbo8nh5pJEkOog==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=I0jaPzajAbeZEfoTdS4IUecfk/J2hlW785QNb0Hsa8A=;
+ b=mEXDzMowDCwNkLJFoRCLEYklJ0FgjzAqWNjDQl4nM+MoJKnH6PmPAtviSkcUw99a1zKZT/6aahh/WYwALZIkGqgm4Xe2gQn4KwLGklNpjebE2/fK6fDXfQRvJr0mtXZ0di82M/XY7KIWzZpSLhz0qEbbIJ1bPzBucNi65s+x0RGwpjrF1hiqc86isPBt8UM3K1aHZm0MSyf02lDCIYORc3vtyE0M19lZshQv1oTqWHbhB/eTDZJIAAB/rKje3k13quyYlSSWk3nRceC/2D7wYEPwJ9AYR8saV6kSPT4eI1K5Uyvgt+dV0TOTQGUeNlywdJNMznb3OOOOd1Il1tFVTQ==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 4.158.2.129) smtp.rcpttodomain=outer-limits.org smtp.mailfrom=arm.com;
+ dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
+ dkim=pass (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
+ spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=I0jaPzajAbeZEfoTdS4IUecfk/J2hlW785QNb0Hsa8A=;
+ b=XoDeLKdGjnYbzCVIzQNKstM/hL0MeRUWfDAl2OIIEuOzjFm6flVKIZYuT/GmXx3b6Kn6OQGN4Xq21f+aXGLrJr5HbAnxe9A5dyFhi7+aZUdOLVSGvR2g7CCz8hyla3HgWBaa5c+cTbyxqqM0F4bWzmcPZvl8cZcIyf2pJV0xAbM=
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 4.158.2.129) smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=arm.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
+ client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=p6zQlZWgfNB2OW2oL+sqOAh9MiBQh3tyz2owrx0PkfE/liZzuOA4JRo3I+rMCvNavuVrzbzTK1aq+2mO6LhH+m3kRCYOs8yQQQMZ9Psiz3Iari/9ZxVbzheg8gBqiYVXQ68AUO15CLdU5zhgSi7xVTxrLkr8Htf6oiqAr83DHhRXjVCCysG7ad41sXcKsgerK8cNmc+VevryDNBSdXS7vf86NZDWvLCjRYDyR/HJbntp+mGd2cYdlw25BkdXSxTNZ2bYr6cBlmijtGbwZIfNmIhYUPrEmkbJbybdTEO1TVGjn7wH1xWOvl6l0sv0obNH43ZpNm3O/adGAmofXqKWhg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=I0jaPzajAbeZEfoTdS4IUecfk/J2hlW785QNb0Hsa8A=;
+ b=WVdvuL1AWSy5EHJqk3V6Wvmo90CraHxrhkPNyOlfsgNELvrJJ6OMWJ/YDPpQ8lACapy6KjnypVLsdxNsSaHdyGdskMKJmxf6L3clSnTbumSCGJZdBtr3Ify+7LcldD5U3ZFTOieCJdqNxy3/46b2scB5tBhFTKeNvgQffXiBjXxyBxlZNwBXJu56x41Vs2+JlvH7xXIoSx7hcLRH0Dz46uGPuANq5zwW97Jq7yscOT6MlFDgwurcuni2amxwowOOcDcXgGkmf2oX/qh7xBj8kPkBPG4alUrddHVS4+r5ryiEXxb7rJKKqigK9Tzo3R8/tNhLoo1qT10GgU1O/sQtrw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=I0jaPzajAbeZEfoTdS4IUecfk/J2hlW785QNb0Hsa8A=;
+ b=XoDeLKdGjnYbzCVIzQNKstM/hL0MeRUWfDAl2OIIEuOzjFm6flVKIZYuT/GmXx3b6Kn6OQGN4Xq21f+aXGLrJr5HbAnxe9A5dyFhi7+aZUdOLVSGvR2g7CCz8hyla3HgWBaa5c+cTbyxqqM0F4bWzmcPZvl8cZcIyf2pJV0xAbM=
+Authentication-Results-Original: mx.microsoft.com 1; dkim=none (message not
+ signed) header.d=none;dmarc=none action=none header.from=arm.com;
+Message-ID: <9fa19cc8-91ad-45b8-bff4-afbd10219bbe@arm.com>
+Date: Tue, 24 Nov 2026 17:35:45 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: ARM EFI: should bootinfo memory banks be reset before retrying
+ ExitBootServices ?
+To: Julian Vetter <julian@outer-limits.org>, xen-devel@lists.xenproject.org
+Cc: Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+ =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Luca Fancellu <Luca.Fancellu@arm.com>
+References: <3d783a50-06bc-4c6b-815e-bd42ce5e54d1@arm.com>
+ <f62e1e86-ae7c-498e-95e8-ec790e734a3c@outer-limits.org>
+Content-Language: en-US
+From: Pierre Gondois <pierre.gondois@arm.com>
+In-Reply-To: <f62e1e86-ae7c-498e-95e8-ec790e734a3c@outer-limits.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: PR3P191CA0016.EURP191.PROD.OUTLOOK.COM
+ (2603:10a6:102:54::21) To BESPR08MB999898.eurprd08.prod.outlook.com
+ (2603:10a6:b10:109::23)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d25034/1795534190-008CDA5B-3B6569B5/0/0
+X-MS-TrafficTypeDiagnostic:
+	BESPR08MB999898:EE_|DB9PR08MB8482:EE_|DB1PEPF000509E5:EE_|PAVPR08MB8800:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1f391813-8cef-40d9-f408-08df4a4912f7
+x-checkrecipientrouted: true
+NoDisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted:
+ BCL:0;ARA:13230040|366016|376014|23010399003|1800799024|10067099003|4143699003|261022105027099003|261021121427099003|56012099006|260925021911599003|5023799004|260925022911599003|261028144727099003|260925021311599003|261026140227099003|261026121527099003|261009223027099003|261022075727099003|261102123227099003|11063799006|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info-Original:
+ wy9zpklzGBrQ45jnaJDDpT969tlT3ChjCGQ0dQCX21yKsExNHr6B463fL2rL2zYXqRiVV9m3s7bM990xEgrk7pWw5uwiL3ApUj91y1+5v2yOJTbOeWrn5Ji2fVHC8do/zXRqZYibioTvQoLnjhBCvI+MMfN6TolKdbxx2bGqJGEUqEE3nkrKCzeFaEaBusesRi7N6ihalvc2sIOSR1uoLgQuT18bowPp3NFmKdeOZoq2dh9ZF8ujDwcZ9f5R4Mf6ROybjQgJhZX7wEHm+8HfYPnPEvPbq0O2yRA7e27eutSULr09DRyuLskGNhTcnR7oJJN8A00lHYm483YwDsc5f9oI9a2wOzx9t0riyuahgiHJe+wvYQ+xFn8CktGzP8is9GleCd08U2vWkz+ZNJEfJ2F0u2w+i23oVsUKRDyF4Co/UaexrHo7ZFod01R4AhlG9Wr4xHu3/Sv5WqjpFeCti2Ap79/OIoAe4eDjRMNDNZL6uFsgitY9K7746iuuAhVk04YyfYyKIa2gktIJlXqqAbE51UoKBkKwEYyE/7ZMIGhZuXcVDyACrr+Bz3L9PGabL9Iojt6vbSww8YVq3lWRTudZq4CPNreXj4nRzdf2tkCLLIgX2hDRqZYcBPdHTO+qoneuKwuy4YlLL95uo1DQArsx/rlnZNmNQ0fI4A8Zgrc=
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BESPR08MB999898.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(23010399003)(1800799024)(10067099003)(4143699003)(261022105027099003)(261021121427099003)(56012099006)(260925021911599003)(5023799004)(260925022911599003)(261028144727099003)(260925021311599003)(261026140227099003)(261026121527099003)(261009223027099003)(261022075727099003)(261102123227099003)(11063799006)(18002099003)(22082099003);DIR:OUT;SFP:1101;
+X-Exchange-RoutingPolicyChecked:
+ CBZ/t0GcBaXptJz5cASpr1jPBXoCMaH59QfAExchBtNsznawO8LkKCpRec18L1mSw/mLGXkHCrSA9oAvn7JPHvT/Ye2dnQt5karPlcPoGNFJkmQ8FDcnSAGRKiJWu4BPoHKC8CYnhMI6ObmgLSdAS2TSSyUg6xN/PuZpmCG/OOhNEsiQVFPAMFHSOkFH0pqfVex33hFrmjtqekz7UTl3V3P0I5nB5HlrnZ40oMZcj77HxLTvas2JYwx+q1mNYJp4F1NJ0PSQJbzgFgNrKghapjxKf1Xd0ZoPt43H9QCWaC6cuf4rwdVoJc08NUjZaeJKESAP98kkDedPkbM7O9AbxA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR08MB8482
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ DB1PEPF000509E5.eurprd03.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+	32a2fe38-6fbc-4b41-745a-08df4a48fe75
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|35042699022|14060799003|36860700016|23010399003|1800799024|82310400026|376014|261026140227099003|261022075727099003|261022105027099003|261026121527099003|261028144727099003|261021121427099003|261102123227099003|10067099003|11063799006|5023799004|4143699003|56012099006|260925022911599003|260925021911599003|261009223027099003|18002099003|22082099003|260925021311599003;
+X-Microsoft-Antispam-Message-Info:
+	UhB+RjCyu+AsOsBY/Ee4akA4GKWINMlL/TzJIYTPPUEI+GoLDVXuiBzEWEhpvdTZM2lSt73iWhfU2ExhcEV7i6OeEpiIq0dMrIHf23xFK9p13w3Dp9EkIScEHsbbC+14E/Mp9pY6Th5XPHSV4suDJEx4XjhBkKN545TkbXRbOV+/OMHOCqOhrub0Y+pYS4j/2/tbuwjpP81KH6fZajk7MTCW6M12eHGhWuFTXcZOSWdMhka0QqZxdYdRfq2Mhdm8E83TAej0G6wmZ5lFxoHkhfzSM8kwU00iug1FWiB17ZvWn6V3b6/FEqbk+4+2kNa2HyJuNHfWrLffxq4kr9t3RfSe6l6coFkwd3Dp5R39ne9/ehnU7X1m8TMg7s1fk4L/Ww9oVQQNXs+o7EdBwk8/KN8VgIj/P39+7FYS+l1J9rKOLYFimEM7VqaRRP5cB8DJf2LTdbMf7oH5CsQQyuCRC7jdUV7rmx+GoGgTyWSae3oqVv3wglisQuXR/3SLe01ddveo6cehrCbCrDUVBl1mxCLYXtw7erd9JpseeM2YO998ES3Itwc01yCfUTrNQJKKG14UQxUQ2OCKnymrjzJjj2nC+PvqVe+sOHJupSZy7xz6kCiQNdp/JTlKqPzO4Pkk8Ay0+AfFTCMIDn6NS1ols29w1fld9mZBrZuJQgBkA5uLirdBEIkFtw5sW/kyVya6b1XSxMoA3ulNHJ6zFSAdxw==
+X-Forefront-Antispam-Report:
+	CIP:4.158.2.129;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:outbound-uk1.az.dlp.m.darktrace.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(35042699022)(14060799003)(36860700016)(23010399003)(1800799024)(82310400026)(376014)(261026140227099003)(261022075727099003)(261022105027099003)(261026121527099003)(261028144727099003)(261021121427099003)(261102123227099003)(10067099003)(11063799006)(5023799004)(4143699003)(56012099006)(260925022911599003)(260925021911599003)(261009223027099003)(18002099003)(22082099003)(260925021311599003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	fPUR/KIuNAE6DkQR3NTC1J2rUSfthmMG8SklOixT9zGqvZlkBzRQlJzCy4dwjy5bLK8SxMHDd0ZaGq86FX4mMhzl3lStZxGnfvSL6nmD0y0mGUGnzh495aBS1m4GUNDWtGxQ9WSm+Mxh5eDyDN2JwD4WQmtnRPjtVyOz1OVJQ0EWlkAF2c/GgVsJpmpT88xXBpLZmptK0kxpWVE3H7EZ6hMUyjz+W+NhX/jRA3GKbxT25Urf2dPNDdm/G0uQRw/q6b6E/cQVvqves46g3fJ1vhy/jmZiZCy5q9qvpaYou1a9iVubyTkybYoOg1w2yI9Jo5BNuc0Ik350NEzIk6H3KVIgfuGpv5gDOinWcGqnNURTLBnhs8wdLEzt6CLN6n1Yw1941XOpMEgDqWRDIPoruZVqYoywgCcdPicubA8gkoBbP9K8KV1ghe47VBCwnEwc
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Nov 2026 16:36:22.0200
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1f391813-8cef-40d9-f408-08df4a4912f7
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[4.158.2.129];Helo=[outbound-uk1.az.dlp.m.darktrace.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	DB1PEPF000509E5.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAVPR08MB8800
+X-purgate-ID: tlsNG-c201ff/1795538190-2491C2A1-E68587DB/0/0
 X-purgate-type: clean
-X-purgate-size: 25385
-X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-purgate-size: 2836
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Signed-off-by: Vitalii Komisarenko <vitalii.komisarenko@mind.be>
-Signed-off-by: Hugo Cornelis <hugo.cornelis@essensium.com>
----
- .../fusa-ceedling-design-note.rst             | 575 ++++++++++++++++++
- 1 file changed, 575 insertions(+)
- create mode 100644 docs/fusa/test_framework/fusa-ceedling-design-note.rst
+Hello Julian,
 
-diff --git a/docs/fusa/test_framework/fusa-ceedling-design-note.rst b/docs/fusa/test_framework/fusa-ceedling-design-note.rst
-new file mode 100644
-index 0000000000..4bee0b9b74
---- /dev/null
-+++ b/docs/fusa/test_framework/fusa-ceedling-design-note.rst
-@@ -0,0 +1,575 @@
-+:orphan:
-+
-+====================================================
-+Unit Testing Xen for Functional Safety with Ceedling
-+====================================================
-+
-+:Date: 2026-10-27
-+:Author: Vitalii Komisarenko, Hugo Cornelis
-+:Audience: Xen FuSa team
-+:Purpose: Design note -- the approach, rationale and developer guide for writing
-+          Xen functional-safety test procedures with Ceedling.
-+:Status: Draft
-+
-+.. contents::
-+   :local:
-+   :depth: 2
-+
-+Summary
-+=======
-+
-+The Xen Functional Safety (FuSa) effort verifies each low-level
-+requirement with executable test code -- a *test procedure* (TP) --
-+that traces back to the requirement it checks.  We write those TPs
-+with **Ceedling** (the Unity assertion library and the CMock mocking
-+generator, orchestrated by Ceedling).
-+
-+These three properties make Ceedling a good fit:
-+
-+* **Auto-mocking.** CMock generates mocks from headers, so a single
-+  Xen function can be isolated from its dependencies without
-+  hand-written stubs (such as device tree, platform, and per-CPU
-+  state).
-+* **Configurable toolchain.** Ceedling lets us override the compiler
-+  and the test runner, so tests are cross-compiled for ARM64 and
-+  executed under ``qemu`` on the target ISA.
-+* **Mature documentation.** Ceedling, Unity and CMock are well
-+  documented and the configuration is self-documenting.  This lowers
-+  onboarding cost and supports tool-qualification reasoning.
-+
-+Consequently, the FuSa effort does not need to modify the Xen source
-+under test.
-+
-+The rest of this note gives the rationale (why Ceedling), the
-+framework mechanics (how it works), and a step-by-step developer guide
-+with a complete worked example.
-+
-+
-+Context and goals
-+=================
-+
-+The FuSa approach is **requirements-based**:
-+
-+#. For each target function the control flow is analysed into
-+   low-level requirements (LLRs).
-+
-+#. Each LLR gets test cases (TCs) with boundary-value sub-cases.
-+
-+#. Each sub-case gets an executable test procedure (TP).
-+
-+#. Related LLRs trace back to the same high-level requirement (HLR).
-+   An HLR is authored by taking a product requirement plus the
-+   function's design spec and stating, in a "shall" form, what the
-+   implementation does to fulfil it.
-+
-+
-+Traceability is maintained from the test code back up to the
-+high-level requirements.  TPs are at the bottom of the ``HLR -> LLR ->
-+TC -> TP`` chain.
-+
-+Testing Xen source at this granularity has to satisfy several
-+constraints:
-+
-+* **C, at function granularity.** The units under test are individual
-+  Xen functions in C code (for example ``preinit_xen_time``).
-+* **Isolation from the rest of the hypervisor.** A C code function may
-+  pull in device-tree lookups, platform hooks, per-CPU state and ARM
-+  system registers.  These must be replaced with controllable
-+  substitutes.
-+* **The ARM target ISA.** The code reads ARM CPU registers and is
-+  built for ARM64.  Tests should be executed on that ISA.
-+* **Boundary-value, sub-case-structured tests.** TCs define
-+  equivalence classes, normal-range boundary values, and robustness
-+  conditions, with one TP per sub-case.
-+* **Traceability and evidence.** Each TP carries the TC ID it
-+  realises.  The effort must evidence requirement compliance and
-+  robustness alongside structural code coverage.
-+* **No source modification.** Instrumenting a function for testing
-+  must not change the Xen source under test.
-+
-+
-+The decision: Ceedling
-+======================
-+
-+What we chose
-+-------------
-+
-+**Ceedling** is a Ruby-orchestrated bundling of the **Unity**
-+assertion library and the **CMock** mocking generator.  It is chosen
-+as the unit-test framework for FuSa test procedures.  Tests live in
-+``xen-integration/automation/ceedling_test``, are built with an ARM64
-+cross-toolchain and are executed under ``qemu``.
-+
-+
-+How it meets our needs
-+----------------------
-+
-+Each constraint above maps onto a concrete capability (the mechanics
-+are detailed under `How Ceedling works`_):
-+
-+* **C-native testing.** Unity's ``TEST_ASSERT_*`` macros and CMock's
-+  generated mocks are plain C.  There is no C++/C impedance when
-+  asserting on C types or mocking C functions.
-+* **Auto-mocking of dependencies.** CMock generates a mock from a
-+  header by prefixing ``mock_`` (this is configurable) and isolating
-+  the unit under test without hand-written stubs.
-+* **White-box access to internals.** A TP compiles the unit under test
-+  so a test can drive internal paths and read file-scope state to test
-+  internals without editing the source.
-+* **Execution on the ARM target.** Ceedling's configurable tools
-+  cross-build with ``aarch64-linux-gnu-gcc`` and run the executable
-+  under ``qemu``, reflecting real ARM system-register
-+  behaviour.
-+* **A mocking model that matches boundary-value TCs.** Each sub-case
-+  is expressed as a small, explicit set of expectations with one TP
-+  per sub-case.
-+* **Coverage evidence.** Ceedling's ``gcov`` plugin produces statement and
-+  branch-coverage reports tying executed TPs to the LLR branches they
-+  cover (``./runtest.sh coverage``).  The same TPs also build with
-+  ``clang-19`` and ``llvm-cov`` source-based coverage
-+  (``./runtest.sh coverage-llvm``), which adds MC/DC.
-+* **Zero source footprint.** The source stays untouched at all times.
-+  A ``panic`` is intercepted by a small link-time shim.
-+* **Mature documentation and a self-documenting configuration.**
-+  Ceedling, Unity and CMock are well documented
-+  (`throwtheswitch.org <https://www.throwtheswitch.org/>`_),
-+  and the main Ceedling configuration file ``project.yml`` is
-+  commented option by option.  This makes onboarding straightforward
-+  and supports evaluation of tool workflows by users.
-+
-+
-+Alternatives considered
-+-----------------------
-+
-+* **Unity + CMock wired up by hand.** This is essentially what
-+  Ceedling *is*, minus the orchestration, mock generation and
-+  configuration.  Adopting Ceedling avoids rebuilding that
-+  boilerplate.
-+* **GoogleTest / GoogleMock.** These are C++-centric.  Mocking plain C
-+  functions and white-box testing of C static code is awkward and it
-+  adds an unused C++ toolchain.
-+* **In-hypervisor / kernel-style harnesses (e.g. KUnit-like).** These
-+  run tests inside or close to a running system rather than isolating
-+  a single function.  They do not give the per-function isolation or
-+  the requirement-to-test mapping that the FuSa process needs.
-+* **A bespoke harness.** Reinvents mocking and a runner, carries
-+  ongoing maintenance and has no ecosystem or documentation.
-+
-+
-+Trade-offs and limitations
-+--------------------------
-+
-+* **Ruby / Ceedling dependency.** Ceedling is a Ruby gem; CI must
-+  install Ruby and the gem and it is version-sensitive (for example it
-+  is installed with ``--no-document`` to work around an RDoc crash on
-+  Debian bookworm's Ruby). Downstream safety baselines pin
-+  the exact gem version in ``test_configure.sh`` for reproducible verification.
-+* **CMock fragility on complex headers.** Generating mocks from real
-+  Xen headers needs tuning and sometimes post-processing of the
-+  generated mocks (this is explained in the harness ``README.md``).
-+* **White-box coupling.** Compiling the ``.c`` in and overriding
-+  macros ties a TP to the source's internal structure.  Consequently,
-+  refactoring a unit can break tests.
-+* **qemu execution cost.** Running on the ARM target adds build and
-+  runtime overhead and requires managing prebuilt kernel/rootfs
-+  artifacts and ``qemu`` images.
-+
-+
-+Partials (not used) and static functions
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+Ceedling's ``partial`` module can expose ``static``/``inline``
-+functions and file-scoped ``static`` variables for direct testing, by
-+stripping the keywords and compiling a rewritten source file.  Xen
-+uses many ``static`` functions, so in principle partials would help.
-+
-+On this project, ``static`` functions are generally treated as
-+implementation details tested through public entry points, so the
-+``partials`` module is **not used**.  Note that because the ``.c`` file
-+is included directly, file-scope static functions and variables are
-+already in scope if an LLR or structural coverage objective requires
-+direct invocation.
-+
-+
-+How Ceedling works
-+==================
-+
-+Unity and CMock
-+---------------
-+
-+**Unity** provides the assertions (``TEST_ASSERT_TRUE``,
-+``TEST_ASSERT_EQUAL_*``, ...) and the test runner scaffolding.
-+**CMock** generates mock implementations of dependency functions so
-+the unit under test can be exercised in isolation and its
-+interactions checked.  Ceedling wires both together and drives the
-+build.
-+
-+
-+Auto-mocking (the ``mock_`` API)
-+--------------------------------
-+
-+Including ``mock_<header_filename>.h`` makes CMock generate a mock of
-+every function that ``<header_filename>.h`` declares (the ``mock_``
-+prefix is configured in ``project.yml``).  Each mocked function gains
-+a family of control functions, the ones used in the TPs being:
-+
-+* ``<fn>_ExpectAnyArgsAndReturn(value)`` -- expect a call (any
-+  arguments) and return ``value``.
-+* ``<fn>_IgnoreAndReturn(value)`` -- allow any number of calls, return
-+  ``value``; used for calls on the path that are not the point of the
-+  sub-case.
-+* ``<fn>_ReturnThruPtr_<arg>(ptr)`` -- fill an out-parameter through
-+  its pointer.
-+
-+
-+
-+The white-box test file
-+-----------------------
-+
-+A ``*.tp.c`` file compiles the unit under test *in*, under a
-+``CEEDLING_TEST`` guard, after including the mocks and redirecting
-+anything that cannot be mocked through a header:
-+
-+
-+.. code-block:: c
-+
-+    #ifdef CEEDLING_TEST
-+    #include "test_support.h"
-+
-+    #include "mock_device_tree.h"     // CMock mocks of the dependencies
-+    #include "mock_platform.h"        // (mock_cpu.h, mock_event.h,
-+    /* ... mock_softirq.h, mock_vgic.h, ... */
-+    #include "panic_trap.h"           // trap panic() instead of aborting
-+    #include "unity.h"
-+    #include <asm/time.h>
-+
-+    #define SYSTEM_CLKFREQ (1000 * 1000 * 1000) // 1GHz
-+
-+    // Redirect what cannot be mocked through a header to local fakes:
-+    #define get_cycles        fake_get_cycles
-+    #define READ_SYSREG(reg)  fake_read_sysreg(#reg)
-+
-+    #include "time.c"                  // the unit under test, compiled in
-+
-+    #undef get_cycles
-+    #undef READ_SYSREG
-+    #endif
-+
-+``setUp`` runs before each test and resets the fixtures, including the
-+panic trap:
-+
-+
-+.. code-block:: c
-+
-+    void setUp(void)
-+    {
-+        test_device_node.used_by = 0;
-+        read_sysreg_count = 0;
-+        mock_rate = 0;
-+        mock_cntfrq_el0 = SYSTEM_CLKFREQ;
-+        cpu_khz = 0;
-+        panic_trap_reset();
-+    }
-+
-+
-+This is what "white-box" means here: the test sees the unit's
-+internals (file-scope variables such as a device node's ``used_by`` or
-+``cpu_khz``) and can inject fakes for low-level accessors -- all
-+without touching the Xen source.
-+
-+
-+Trapping ``panic``
-+------------------
-+
-+Some requirements are about calling ``panic`` (stopping
-+initialization).  A real ``panic`` would end the test process, so
-+``libpanic_trap`` provides a ``panic`` definition that records the
-+call and ``longjmp``\ s back:
-+
-+
-+.. code-block:: c
-+
-+    bool panic_trap_run(void (*fn)(void)) {
-+        panic_active = 1;
-+        if (setjmp(panic_env) == 0) {
-+            fn();                 // returned normally -> no panic
-+            panic_active = 0;
-+            return false;
-+        }
-+        panic_active = 0;         // longjmp'd here from panic() -> panicked
-+        return true;
-+    }
-+
-+
-+So ``panic_trap_run(fn)`` returns ``true`` if ``fn`` panicked and
-+``false`` if it returned normally -- exactly what a pass/fail
-+assertion needs. (For functions with arguments or return values,
-+wrap the call in a parameterless local helper function).
-+
-+
-+Cross-compilation and execution under QEMU
-+------------------------------------------
-+
-+Ceedling's default runner executes the compiled test natively; the
-+Arm-target execution is built on its configurability rather than
-+provided out of the box.  In ``project.yml`` the ``:tools:`` point
-+compilation and linking at ``aarch64-linux-gnu-gcc``, and the test
-+runner is a project script (``test/script/run_qemu.sh``).  Tests are
-+therefore cross-built for arm64 and run under **full-system QEMU** (a
-+booted arm64 kernel/rootfs that executes the test), and the QEMU
-+return code becomes the pass/fail result.  The operational side of
-+this -- setup and commands -- is in `Developing a test procedure`_.
-+
-+
-+Developing a test procedure
-+===========================
-+
-+
-+Prerequisites and one-time setup
-+--------------------------------
-+
-+The harness targets ARM64 and runs under ``qemu``, so it needs a
-+cross-toolchain, ``qemu`` and Ceedling.  ``test_configure.sh``
-+automates the setup:
-+
-+* installs ``gcc-aarch64-linux-gnu``, ``libc6-dev-arm64-cross``,
-+  ``qemu-system-arm``, ``ipxe-qemu``, ``ruby`` and the tools needed to
-+  build Xen, and a pinned ``ceedling`` gem (the version is set in
-+  ``test_configure.sh``);
-+* resolves ``XEN_SOURCE`` and builds Xen for arm64 if its
-+  autogenerated headers (``asm-offsets.h``, ``compile.h``) are absent;
-+* prepares the ``qemu`` kernel/rootfs images from prebuilt artifacts;
-+* generates ``project.yml`` from ``project.yml.in`` with
-+  ``XEN_SOURCE`` resolved.
-+
-+
-+Harness layout and configuration
-+--------------------------------
-+
-+
-+.. code-block:: text
-+
-+    automation/ceedling_test/
-+        project.yml.in                     configuration template (XEN_SOURCE substituted in)
-+        gcov.yml                           Ceedling mixin for "runtest.sh coverage" (gcov)
-+        llvm-cov.yml                       Ceedling mixin for "runtest.sh coverage-llvm" (clang)
-+        test_configure.sh                  one-time environment setup
-+        runtest.sh                         build / clean / run / coverage wrapper around ceedling
-+        test/
-+            test_xen_time.tp.c             TPs for the time target
-+            test_xen_pt.tp.c               TPs for the pt target
-+            script/run_qemu.sh             QEMU runner invoked as the test executable
-+            script/run_qemu_gcov.sh        QEMU runner for gcov runs; collects the .gcda files
-+            script/make_llvm_project.rb    derives project-llvm.yml (clang compiler and linker)
-+            script/compare_coverage.py     writes coverage/comparison.md from both reports
-+            support/llvm-profile-list.txt  limits clang instrumentation to xen/arch/arm/*.c
-+        libpanic_trap/                     link-time shim that traps panic()
-+
-+
-+Key choices in ``project.yml`` and what they do in practice:
-+
-+* ``:defines:`` adds ``CEEDLING_TEST`` to every test build.  The
-+  ``*.tp.c`` files use it to guard the mock includes, the macro overrides
-+  and the ``#include`` of the unit under test.
-+* ``:tools:`` sets ``:test_compiler:`` and ``:test_linker:`` to
-+  ``aarch64-linux-gnu-gcc``, so tests are built for arm64, and
-+  ``:test_fixture:`` to ``test/script/run_qemu.sh``, which runs the test
-+  executable under QEMU and turns its exit code into the pass/fail result.
-+* ``:cmock:`` controls how mocks behave:
-+
-+  * ``:mock_prefix: 'mock_'`` -- including ``mock_<header>.h`` in a test
-+    is what makes Ceedling generate a mock of that header.
-+  * ``:when_ptr: :compare_data`` -- for a pointer argument, an
-+    expectation compares the data pointed to, not the pointer value.
-+  * ``:enforce_strict_ordering: true`` -- expected calls must happen in
-+    the order they were set, across all mocks; an out-of-order call fails
-+    the test.  ``:fail_on_unexpected_calls: true`` also fails any call
-+    that has no expectation.
-+  * ``:treat_externs: :include`` -- functions declared ``extern`` in a
-+    header are mocked as well.
-+  * ``:treat_inlines: :exclude`` -- ``static inline`` functions in headers
-+    are not mocked; their real bodies are compiled into the test, so their
-+    own dependencies must be mocked or available.
-+
-+* ``:gcov:`` in ``project.yml`` is not used for coverage runs.  The
-+  ``gcov.yml`` mixin, merged by ``./runtest.sh coverage``, enables the
-+  ``gcov`` plugin and sets the arm64 tools, the ``qemu`` runner and the
-+  ``gcovr`` reports; see `Building and running`_.
-+
-+
-+Worked example: ``preinit_xen_time`` "no compatible timer node"
-+---------------------------------------------------------------
-+
-+
-+The requirement and test chain
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+* **HLR** ``xen-req-a4fd1852-...`` (`time.hlr.req.md`_)
-+* **LLR** ``xen-req-a589eb2d-...`` -- *the* ``preinit_xen_time``
-+  *function shall, via* ``panic``\ *, stop system initialization when*
-+  ``dt_find_matching_node`` *fails to find a compatible timer node.*
-+  Trace Parent -> the HLR.  (`time.llr.req.md`_)
-+* **TC** ``xen-tc-9130877d-2309-468b-af15-d4d1bdabed98``
-+  (`time.tc.md`_), Requirement -> the LLR, with two sub-cases:
-+
-+  * **SC-01** -- a compatible node *is* found -> ``preinit_xen_time``
-+    must **not** panic.
-+  * **SC-02** -- no compatible node is found
-+    (``dt_find_matching_node`` returns ``NULL``) ->
-+    ``preinit_xen_time`` must panic.
-+
-+* **TP** -- one function per sub-case, in ``test_xen_time.tp.c``.
-+
-+
-+The test procedures
-+~~~~~~~~~~~~~~~~~~~
-+
-+.. code-block:: c
-+
-+    /// @procedureId xen-tc-9130_TP-01
-+    /// @testCaseId  xen-tc-9130877d-2309-468b-af15-d4d1bdabed98
-+    /// @subCase     xen-tc-9130-SC-01
-+    void test_xen_tc_9130_TP_01(void)
-+    {
-+        dt_find_matching_node_ExpectAnyArgsAndReturn(&test_device_node);
-+        dt_property_read_u32_IgnoreAndReturn(false);
-+        platform_init_time_IgnoreAndReturn(SUCCEED);
-+
-+        TEST_ASSERT_FALSE(panic_trap_run(preinit_xen_time));   // did not panic
-+    }
-+
-+    /// @procedureId xen-tc-9130_TP-02
-+    /// @testCaseId  xen-tc-9130877d-2309-468b-af15-d4d1bdabed98
-+    /// @subCase     xen-tc-9130-SC-02
-+    void test_xen_tc_9130_TP_02(void)
-+    {
-+        dt_find_matching_node_ExpectAnyArgsAndReturn(NULL);    // no timer node
-+
-+        TEST_ASSERT_TRUE(panic_trap_run(preinit_xen_time));    // must panic
-+    }
-+
-+
-+Reading it line by line:
-+
-+* ``dt_find_matching_node_ExpectAnyArgsAndReturn(...)`` drives the
-+  branch: returning a node exercises SC-01, returning ``NULL``
-+  exercises SC-02.
-+* ``_IgnoreAndReturn`` allows the other calls on the path without
-+  making them the point of the sub-case.
-+* ``panic_trap_run(preinit_xen_time)`` invokes the unit under test
-+  through the trap; ``TEST_ASSERT_FALSE`` / ``TEST_ASSERT_TRUE``
-+  assert the no-panic / panic outcome.
-+
-+The three tags are the links back up the chain: ``@subCase`` to the TC
-+sub-case, ``@testCaseId`` to the TC, ``@procedureId`` naming this TP.
-+The function name follows ``test_xen_tc_<first 8 digits of TC id>_TP_<nn>``,
-+one function per sub-case (using 8 hex digits avoids collisions across
-+large test suites).
-+
-+
-+Adding a test procedure
-+-----------------------
-+
-+#. **Find the TC and its sub-cases** and the LLR it verifies.
-+#. **Choose the target's *.tp.c** (e.g. ``test_xen_time.tp.c``); add a
-+   new ``test_<area>.tp.c`` only for a new target.
-+#. **Add mocks for any new dependency** by including its
-+   ``mock_<header_filename>.h``; for a dependency with no mockable
-+   header, add a local fake and a macro override (as with
-+   ``READ_SYSREG``).
-+#. **Write one function per sub-case**, named ``test_xen_tc_<first 8
-+   hexadecimal digits of TC id>_TP_<nn>``, with the three tags.
-+#. **Set expectations from the sub-case's Condition**, using the TC's
-+   boundary values.  For each valid partition these are ``min`` and ``max``,
-+   the values just inside them (``min+1``, ``max-1``), and the robustness
-+   values just outside (``min-1``, ``max+1``) where the type allows them, so
-+   the number of values depends on the partitions and the type.  Omit
-+   impossible combinations.
-+#. **Assert the expected output** with the appropriate
-+   ``TEST_ASSERT_*``; for a panic path, assert on
-+   ``panic_trap_run(...)``.
-+#. **Reset any new fixtures in** ``setUp``.
-+
-+
-+Building and running
-+--------------------
-+
-+From the harness directory, ``runtest.sh`` wraps ``ceedling``:
-+
-+.. code-block:: bash
-+
-+    ./runtest.sh build        # build all tests, do not run
-+    ./runtest.sh all          # run all tests
-+    ./runtest.sh time         # run only test_xen_time.tp
-+    ./runtest.sh rebuild      # clobber + build
-+    ./runtest.sh coverage     # clobber + build + coverage report
-+    ./runtest.sh clean        # clobber build output
-+
-+
-+or ``ceedling`` directly (``ceedling test:all``, ``ceedling
-+test:test_xen_time.tp``).  On first run ``runtest.sh`` generates
-+``project.yml`` from the template.  Tests are cross-built and run
-+under ``qemu``.  The ``qemu`` return code becomes the result (see the
-+"``qemu`` Return Code" section of the harness ``README.md``).  For
-+coverage, run ``./runtest.sh coverage``.  It merges the ``gcov.yml`` mixin,
-+runs every test under ``qemu`` with coverage, and writes ``gcovr`` reports
-+(HTML, text, Cobertura, JSON) to ``build/artifacts/gcov/gcovr/``.  Only the
-+Xen sources under ``xen/arch/arm/`` are instrumented and reported, so the
-+figures exclude the TPs, Unity, CMock and the mocks.
-+
-+
-+``./runtest.sh coverage-llvm`` builds the same TPs with ``clang-19`` and
-+``llvm-cov`` source-based coverage (``WITH_LLVM_COV=1 ./test_configure.sh``
-+installs the toolchain) and adds MC/DC, which ``gcov`` from gcc 12 does not
-+report.  ``./runtest.sh coverage-all`` runs both and writes
-+``coverage/comparison.md``.  The two reports are complementary.  ``gcov``
-+measures code built by gcc, the compiler ``test_configure.sh`` builds Xen
-+with, but its line and function attribution depends on what the optimizer
-+inlined or removed.  ``llvm-cov`` maps counts to source regions, so its
-+figures do not depend on the optimizer, and it measures MC/DC, but it
-+measures a clang build.  Where the two disagree on which lines or functions
-+are countable, the difference points at object code that is not directly
-+traceable to the source, which a Level A structural coverage analysis has
-+to account for.
-+
-+
-+Conventions
-+-----------
-+
-+* Mocks are prefixed ``mock_``; CMock enforces strict ordering and
-+  compares pointed-to data -- set expectations in call order.
-+* One TP function per TC sub-case; keep the three traceability tags
-+  accurate.
-+* Drive branches through mock return values and inputs; use the TC's
-+  boundary values.
-+* Keep the unit under test unmodified -- isolate with mocks, macro
-+  overrides and the panic trap, never by editing Xen source.
-+* ``static`` functions are normally covered through the public entry
-+  point.  This is not all or none: when an LLR or coverage objective needs
-+  one exercised directly, call it from the TP (the ``.c`` file is compiled
-+  in) or through a small test-only wrapper.
-+
-+
-+References
-+==========
-+
-+* Harness setup, run details, mock generation and QEMU return code:
-+  https://gitlab.com/xen-project/fusa/xen-integration/-/blob/test-airworthy/automation/ceedling_test/README.md
-+* Example mock usage (``xen-integration`` MR !26):
-+  https://gitlab.com/xen-project/fusa/xen-integration/-/merge_requests/26
-+* Ceedling (Unity + CMock): https://www.throwtheswitch.org/ceedling
-+
-+
-+.. Long source links are defined here and referenced by short names in the text.
-+
-+.. _time.hlr.req.md: https://gitlab.com/xen-project/fusa/requirements/-/blob/master/
-+   design_reqs/domain_creation_and_runtime/domain_fully_emulated_resources/arm64/
-+   time/time.hlr.req.md#high-level-requirement-xen-req-a4fd1852-3611-4f54-ac3b-fe2fa91abd52
-+
-+.. _time.llr.req.md: https://gitlab.com/xen-project/fusa/requirements/-/blob/master/
-+   design_reqs/domain_creation_and_runtime/domain_fully_emulated_resources/arm64/
-+   time/time.llr.req.md#low-level-requirement-xen-req-a589eb2d-abdf-4671-b1f9-f3b03d0f9e57
-+
-+.. _time.tc.md: https://gitlab.com/xen-project/fusa/test_specifications/-/blob/master/
-+   domain_creation_and_runtime/domain_fully_emulated_resources/arm64/
-+   time/time.tc.md#test-case-xen-tc-9130877d-2309-468b-af15-d4d1bdabed98
--- 
-2.53.0
+On 11/24/26 15:02, Julian Vetter wrote:
+> On 11/16/26 17:11, Pierre Gondois wrote:
+>> Hello,
+>
+> Hello Pierre,
+> I can reproduce this on QEMU, and the change you suggest fixes it.
+>
+> My Setup:
+> - QEMU 11.1.3: -M virt,virtualization=on,acpi=off -cpu cortex-a57 -smp 
+> 4 -m 4G
+> - Firmware: qemu-efi-aarch64 2026.08+ds-3
+> - Xen: staging 3b65ff9f372fb85 (debug, early printk on PL011), xen.efi 
+> started directly from the UEFI shell
+>
+> Without the change, the first ExitBootServices() call fails, 
+> efi_exit_boot() retries, and every RAM bank is added a second time, 
+> and Xen hits the BUG in bootmem_region_add():
+>
+> (XEN) RAM: 0000000040000000 - 000000004668ffff
+> (XEN) RAM: 0000000040000000 - 000000004668ffff
+> (XEN) RAM: 0000000046800000 - 000000004688ffff
+> (XEN) RAM: 0000000046800000 - 000000004688ffff
+> ...
+> (XEN) Xen BUG at common/page_alloc.c:308
+> ...
+> (XEN) Xen call trace:
+> (XEN)    [<00000a00002cb498>] 
+> page_alloc.c#bootmem_region_add+0xd8/0xec (PC)
+> (XEN)    [<00000a00002cb694>] init_boot_pages+0x44/0x1b0 (LR)
+> (XEN)    [<00000a00002cb694>] init_boot_pages+0x44/0x1b0
+> (XEN)    [<00000a00002c54f0>] bootinfo.c#dt_unreserved_regions+0x70/0xac
+> (XEN)    [<00000a00002c5c50>] populate_boot_allocator+0x124/0x1c8
+> (XEN)    [<00000a00002e2c84>] setup_mm+0x60/0x84
+> (XEN)    [<00000a00002e337c>] start_xen+0x118/0x988
+> (XEN)    [<00000a00002001a4>] 
+> arch/arm/arm64/head.S#primary_switched+0x4/0x24
+> ...
+>
+> With your change applied, each bank is listed once and Xen boots 
+> through to dom0:
+>
+> ...
+> (XEN) Checking for initrd in /chosen
+> (XEN) RAM: 0000000040000000 - 000000004668ffff
+> (XEN) RAM: 0000000046800000 - 000000004688ffff
+> (XEN) RAM: 0000000046930000 - 0000000047a4ffff
+> (XEN) RAM: 0000000047ff4000 - 000000013fffffff
+> (XEN)
+> (XEN) MODULE[0]: 0000000045b58000 - 0000000045ccafff Xen
+> (XEN) MODULE[1]: 0000000045cf1000 - 0000000045df3fff Device Tree
+> (XEN) MODULE[2]: 000000013dd4d000 - 000000013fffdf13 Ramdisk
+> (XEN) MODULE[3]: 0000000041bf4000 - 0000000043ffffbf Kernel
+> ...
+>
+> I see in the x86 that the e820_raw.nr_map in 
+> efi_arch_process_memory_map() is reset for each loop iteration. On Arm 
+> the bank is appended to the previous iteration. So, I guess resetting 
+> the banks is the right call?
+>
+> Pierre, are you planning to send this fix as a patch to the 
+> mailinglist? If so, please add my:
+>
+> Tested-by: Julian Vetter <julian.vetter@vates.tech>
+>
+> Otherwise I'm happy to post the patch with your Suggested-by.
+
+Thanks for reproducing/testing the issue. I'm not too familiar with
+
+Thanks for reproducing/testing the issue. I'm not too familiar with
+xen mailing list, so if you could send the patch it would be of
+great help,
+
+Regards,
+Pierre
 
 
