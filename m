@@ -2,44 +2,44 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 30455606A334
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1D645606A33F
 	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2026 23:23:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=desiato.20200630 header.b=olyREV0E
-Received: from list by lists.xenproject.org with outflank-mailman.1501502.1697586 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=casper.20170209 header.b=DDIp988r
+Received: from list by lists.xenproject.org with outflank-mailman.1501496.1697544 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVzqj-0000Aa-Hd; Tue, 24 Nov 2026 23:22:57 +0000
+	id 1xVzqh-0007vD-GB; Tue, 24 Nov 2026 23:22:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1501502.1697586; Tue, 24 Nov 2026 23:22:57 +0000
+Received: by outflank-mailman (output) from mailman id 1501496.1697544; Tue, 24 Nov 2026 23:22:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVzqj-00006v-4g; Tue, 24 Nov 2026 23:22:57 +0000
-Received: by outflank-mailman (input) for mailman id 1501502;
- Tue, 24 Nov 2026 23:22:54 +0000
+	id 1xVzqh-0007sF-CT; Tue, 24 Nov 2026 23:22:55 +0000
+Received: by outflank-mailman (input) for mailman id 1501496;
+ Tue, 24 Nov 2026 23:22:53 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <BATV+8ed7664ba4dc972f2276+8493+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 1xVzqg-0007oo-4k
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 23:22:54 +0000
+ <BATV+7be3010b4cb4d9f5c1a9+8493+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1xVzqd-0007o4-JY
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 23:22:53 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xVzqf-009ONz-HQ; Wed, 25 Nov 2026 00:22:53 +0100
-Received: from [10.42.69.6] (helo=localhost)
+ id 1xVzqc-009ONz-PJ; Wed, 25 Nov 2026 00:22:50 +0100
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <BATV+8ed7664ba4dc972f2276+8493+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 6b061bf9-2eae-0a2a0a5409dd-0a2a4506952e-32
- for <multiple-recipients>; Wed, 25 Nov 2026 00:22:53 +0100
-Received: from [90.155.92.199] (helo=desiato.infradead.org)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ <BATV+7be3010b4cb4d9f5c1a9+8493+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 6b061c37-2eae-0a2a0a5409dd-0a2a4508d374-16
+ for <multiple-recipients>; Wed, 25 Nov 2026 00:22:50 +0100
+Received: from [90.155.50.34] (helo=casper.infradead.org)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <BATV+8ed7664ba4dc972f2276+8493+infradead.org+dwmw2@desiato.srs.infradead.org>)
- id 6b061c4c-195a-0a2a45060019-5a9b5cc797b0-3
- for <multiple-recipients>; Wed, 25 Nov 2026 00:22:53 +0100
+ <BATV+7be3010b4cb4d9f5c1a9+8493+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 6b061c49-f659-0a2a45080019-5a9b3222e6ee-3
+ for <multiple-recipients>; Wed, 25 Nov 2026 00:22:49 +0100
 Received: from [2001:8b0:10b:1::425] (helo=i7.infradead.org)
- by desiato.infradead.org with esmtpsa (Exim 4.100.1 #2 (Red Hat Linux))
- id 1xVzqc-00000004eUz-1kfl; Tue, 24 Nov 2026 23:22:51 +0000
+ by casper.infradead.org with esmtpsa (Exim 4.100.1 #2 (Red Hat Linux))
+ id 1xVzqZ-0000000Gdhv-3Fud; Tue, 24 Nov 2026 23:22:48 +0000
 Received: from dwoodhou by i7.infradead.org with local (Exim 4.99.5 #2 (Red
- Hat Linux)) id 1xVzqZ-0000000061t-1D5p;
+ Hat Linux)) id 1xVzqZ-0000000061z-1Qql;
  Tue, 24 Nov 2026 23:22:47 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -48,17 +48,17 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=desiato.20200630 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="Sender:Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=Sender:Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
-	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=fWZq+phibeUOAuCvTbIBUu8IYuUINRpE+QvToHPSryc=; b=olyREV0EM42s4OFSemiYPWrcmz
-	nBl210NlEyXbsalTjLv/ZvSjQ9oY6zkhValMnTsqQ57gRPeEio/58Q3hOhBCPMob+Ion6pw7xgJDX
-	HcGSqj1ow9xIy5yr4tWm4q9ItKtX5H7M8llT6LGfUdJX3mR//BoqU81QK0bHhbkPMNSVXF9rfMIaG
-	HdFkc48goyA5+2S3JgsCi50vIQ/p4fRKaAIQelLGINLO1R5jKF3KUzxL4OojCMpxds+y8sevGkGQI
-	GMFVYtm8Fko+PMVNXTHT3lu5luX7EWk/CmgqJKOl12szWx3+LN3wJdND7tlcIQlgFqnNFEjhCwPg2
-	wxlQ/xIQ==;
+	d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:
+	To:From:Reply-To:Content-ID:Content-Description;
+	bh=omSfQRir3NOjvaxuaNmQVmaf9UjouyCVezkBBc8wqZc=; b=DDIp988rHTV7Y/YJBbUl8MtY+f
+	OSqNgMp//dwiaqlE3WGUaJXxYnmYB/NT/ba1puqnp8cX9ie0PYqlb9T+KM0U6hx5GGut/gkATWMH9
+	yP3Amt8TaJ3JOtwSmKg8N2zr/679L3/Rrv9kUFzfXVpbQXhGOdbkFebtVmzeorfbDYfOhvMCUYFUh
+	fcFMf8pLi9VAcogUdNbm4F1RVTCi7dY7TYoqSa11A2fXVoxW/ffIOIq+B+qD13h04kIj+5Et+uxcE
+	dZE11z2cqqphjDPQmPI1zJEE03phi+Dhnq5nY2/my1iWWGPTEcTWfK64JlzqroPoJHw16J1abaUHH
+	RR18poDw==;
 From: David Woodhouse <dwmw2@infradead.org>
 To: qemu-devel@nongnu.org
 Cc: xen-devel@lists.xenproject.org,
@@ -78,20 +78,21 @@ Cc: xen-devel@lists.xenproject.org,
 	Mark Syms <mark.syms@citrix.com>,
 	Feifan Qian <bea1e@proton.me>,
 	David Woodhouse <dwmw@amazon.co.uk>
-Subject: [PATCH v1 02/21] i386/xen: Don't resample GSI when per-vCPU upcall vector is in use
-Date: Tue, 24 Nov 2026 23:22:28 +0000
-Message-ID: <20261124232247.23169-3-dwmw2@infradead.org>
+Subject: [PATCH v1 04/21] hw/xen: Publish backend features before setting state to InitWait
+Date: Tue, 24 Nov 2026 23:22:30 +0000
+Message-ID: <20261124232247.23169-5-dwmw2@infradead.org>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261124232247.23169-1-dwmw2@infradead.org>
 References: <20261124232247.23169-1-dwmw2@infradead.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: David Woodhouse <dwmw2@infradead.org>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by desiato.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-16d1c6/1795562573-FD40B77B-285D270B/0/0
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-purgate-ID: tlsNG-c1860d/1795562570-D4B7187B-925E73E8/0/0
 X-purgate-type: clean
-X-purgate-size: 1674
+X-purgate-size: 3765
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -102,46 +103,82 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 From: David Woodhouse <dwmw@amazon.co.uk>
 
-The callback_via GSI (or PCI INTx) and the per-vCPU upcall vector are
-mutually exclusive delivery mechanisms for Xen event channel upcalls.
-Xen itself will never assert the callback GSI for a vCPU which has a
-per-vCPU upcall vector configured.
+The XenbusStateInitWait transition tells the frontend that the
+backend's parameters are readable, but xen_device_realize() set it
+before calling the implementation's realize method — which is what
+writes the feature nodes ('max-ring-page-order' et al. for xen-block,
+'feature-rx-copy' for xen-net).
 
-When the interrupt is acked, QEMU's resampling logic reasserts the
-GSI if evtchn_upcall_pending is still set. If the guest has configured
-a per-vCPU upcall vector, events are delivered through that vector and
-the GSI is unexpected; a guest which receives both the vector upcall
-and a spurious GSI interrupt for the same event can crash. This was
-observed in production with Windows guests on a different VMM which
-implements the same resampling logic.
+Linux blkfront reads 'max-ring-page-order' with xenbus_read_unsigned():
+no wait, no retry, default 0. Lose the race and it silently negotiates
+a single-page ring — 32 request slots instead of 256. A device
+hot-plugged into a running guest loses essentially every time; at boot
+the frontend doesn't come looking until long after realize finished.
+Netfront reads its feature nodes the same way.
 
-If a per-vCPU upcall vector is configured, don't resample the GSI;
-just deassert it.
+Commit 240cc11369fc ("hw/xen: Avoid crash when backend watch fires too
+early") introduced this by moving the realize call after the block of
+code which both populates the initial xenstore nodes *and* sets
+InitWait. The crash it fixed was real — xen-block's realize processes
+watch events via blkconf_geometry()'s aio_poll(), and the handlers fell
+over when the nodes didn't yet exist — but only the node population
+needed to come first.
 
-Fixes: ddf0fd9ae1fd ("hw/xen: Support HVM_PARAM_CALLBACK_TYPE_GSI callback")
+So keep the node population and the 'online' write before realize, and
+move only the InitWait transition after it. A watch event during
+realize now finds the frontend in Initialising and no backend 'state'
+node, which the handlers tolerate; none of the three realize
+implementations reads the backend state. Verified against the original
+2023 crash reproducer as well as the ring-order negotiation.
+
+Fixes: 240cc11369fc ("hw/xen: Avoid crash when backend watch fires too early")
+Reported-by: Mark Syms <mark.syms@citrix.com>
 Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 ---
- target/i386/kvm/xen-emu.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+ hw/xen/xen-bus.c | 16 +++++++++++++++-
+ 1 file changed, 15 insertions(+), 1 deletion(-)
 
-diff --git a/target/i386/kvm/xen-emu.c b/target/i386/kvm/xen-emu.c
-index 29364a92797..7337561b159 100644
---- a/target/i386/kvm/xen-emu.c
-+++ b/target/i386/kvm/xen-emu.c
-@@ -435,6 +435,13 @@ void kvm_xen_maybe_deassert_callback(CPUState *cs)
-         return;
+diff --git a/hw/xen/xen-bus.c b/hw/xen/xen-bus.c
+index 17bbbe2ea71..b75ce7f0957 100644
+--- a/hw/xen/xen-bus.c
++++ b/hw/xen/xen-bus.c
+@@ -1082,7 +1082,6 @@ static void xen_device_realize(DeviceState *dev, Error **errp)
+     xen_device_backend_printf(xendev, "hotplug-status", "connected");
+ 
+     xen_device_backend_set_online(xendev, true);
+-    xen_device_backend_set_state(xendev, XenbusStateInitWait);
+ 
+     if (!xen_device_frontend_exists(xendev)) {
+         xen_device_frontend_printf(xendev, "backend", "%s",
+@@ -1093,6 +1092,19 @@ static void xen_device_realize(DeviceState *dev, Error **errp)
+         xen_device_frontend_set_state(xendev, XenbusStateInitialising, true);
      }
  
-+    if (env->xen_vcpu_callback_vector) {
-+        BQL_LOCK_GUARD();
-+        env->xen_callback_asserted = false;
-+        xen_evtchn_set_callback_level(0);
-+        return;
-+    }
++    /*
++     * The implementation's realize method may write feature nodes to
++     * the backend area (e.g. 'max-ring-page-order' for xen-block,
++     * 'feature-rx-copy' for xen-net). It must be called after the
++     * backend and frontend areas are populated, because it can invoke
++     * aio_poll() (e.g. through blkconf_geometry()) and thus process
++     * watch events which need to read the 'state' nodes. But it must
++     * be called *before* the backend state is set to InitWait below,
++     * because InitWait is the frontend's cue that the backend's
++     * feature nodes can be read; a frontend which reads them promptly
++     * (as Linux blkfront and netfront do, without waiting or retrying)
++     * must not find them missing.
++     */
+     if (xendev_class->realize) {
+         xendev_class->realize(xendev, errp);
+         if (*errp) {
+@@ -1100,6 +1112,8 @@ static void xen_device_realize(DeviceState *dev, Error **errp)
+         }
+     }
+ 
++    xen_device_backend_set_state(xendev, XenbusStateInitWait);
 +
-     /* If the evtchn_upcall_pending flag is cleared, turn the GSI off. */
-     if (!vi->evtchn_upcall_pending) {
-         bql_lock();
+     xendev->exit.notify = xen_device_exit;
+     qemu_add_exit_notifier(&xendev->exit);
+     return;
 -- 
 2.43.0
 
