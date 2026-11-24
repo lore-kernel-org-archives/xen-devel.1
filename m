@@ -2,48 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D856606A31E
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2026 15:13:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7570D606A321
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2026 15:14:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=eLpWyOYZ
-Received: from list by lists.xenproject.org with outflank-mailman.1501198.1697246 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=OGarLdh+
+Received: from list by lists.xenproject.org with outflank-mailman.1501205.1697254 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVsCu-0006uA-RL; Tue, 24 Nov 2026 15:13:20 +0000
+	id 1xVsDx-0007T8-3D; Tue, 24 Nov 2026 15:14:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1501198.1697246; Tue, 24 Nov 2026 15:13:20 +0000
+Received: by outflank-mailman (output) from mailman id 1501205.1697254; Tue, 24 Nov 2026 15:14:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVsCu-0006u1-Nh; Tue, 24 Nov 2026 15:13:20 +0000
-Received: by outflank-mailman (input) for mailman id 1501198;
- Tue, 24 Nov 2026 15:13:19 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xVsDx-0007T1-0W; Tue, 24 Nov 2026 15:14:25 +0000
+Received: by outflank-mailman (input) for mailman id 1501205;
+ Tue, 24 Nov 2026 15:14:24 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jgross@suse.com>) id 1xVsCt-0006tt-4D
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 15:13:19 +0000
+ (envelope-from <jgross@suse.com>) id 1xVsDw-0007Sv-5b
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 15:14:24 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xVsCs-004jIN-Gt
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 16:13:18 +0100
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xVsDv-003wDw-HU
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 16:14:23 +0100
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jgross@suse.com>)
- id 6b05a978-bab6-0a2a0a5309dd-0a2a45049af0-22
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 16:13:18 +0100
-Received: from [209.85.218.51] (helo=mail-ej1-f51.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6b05a9c4-e002-0a2a0a5209dd-0a2a450c99fc-48
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 16:14:23 +0100
+Received: from [209.85.218.44] (helo=mail-ej1-f44.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jgross@suse.com>)
- id 6b05a98e-b57f-0a2a45040019-d155da33cd8d-3
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 16:13:18 +0100
-Received: by mail-ej1-f51.google.com with SMTP id
- a640c23a62f3a-c5118deebcfso684765566b.1
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 07:13:18 -0800 (PST)
+ id 6b05a9cf-f479-0a2a450c0019-d155da2ce825-3
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 16:14:23 +0100
+Received: by mail-ej1-f44.google.com with SMTP id
+ a640c23a62f3a-c516a1623d0so400248066b.2
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 07:14:23 -0800 (PST)
 Received: from ?IPV6:2a00:12d0:afa3:c01:92cc:e257:77ba:97a1?
  (2a00-12d0-afa3-c01-92cc-e257-77ba-97a1.ip.tng.de.
  [2a00:12d0:afa3:c01:92cc:e257:77ba:97a1])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c513ae8d0dbsm543097066b.31.2026.11.24.07.13.16
+ a640c23a62f3a-c513ae698ccsm534442066b.26.2026.11.24.07.14.21
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 24 Nov 2026 07:13:17 -0800 (PST)
+ Tue, 24 Nov 2026 07:14:22 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -54,50 +54,51 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1795533198; x=1796137998; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1795533263; x=1796138063; darn=lists.xenproject.org;
         h=content-type:in-reply-to:autocrypt:from:content-language:references
          :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=OavKAVZv+OA0pfYHqsDmPh81k4IRaCsSuMGSaPHhIPw=;
-        b=eLpWyOYZFx3ypTj8X8MlYUs1Pe9gxVPLjOwjTFfEYMtXfNL2uXNE1X7EM8aeBdSx1i
-         GRHnTagfvJg+gEpBtpRQsgV7azaq4P4syYTti/DcPWVgLkH6ZbK/CaUYQecn9Z+wBL7x
-         dSmTFTOeRRH9+lqvILqHfJKy6K1NKTphy4a+V9fusVd7vOMooSv77MGwNDbK33r+KTvl
-         PWg66JwFGHJjZMUV4fb9Mi/4nM/8XTX4L1WO6srxAqVd7Vty5g/UQdNWwf8BvZNgHtoX
-         +q4i9JtzX0PnH/Z0b6QBuueZelWYOo3mS7396yD+BYTSaqHVZEK73Gqoc1mXCHxor0u3
-         lqwg==
+        bh=PVJS6gkYs1IOy2J1QEN8soh2l1ljp7ZJVoiYPlTtrQ8=;
+        b=OGarLdh+jd9qHVf/Pfp14pS58PSDoPQl9bMKts8yPSdrsy2wFvn7/tL+e81OcZF/LX
+         9eE0CkCtPTrC7fYR93+SqzP4ZHAIw6Q/9TuN3cTVM991Uq212RFLouE45jJnDI2B04Er
+         y1OgHGuzdC/52XfhraeAmetAyyq2eoYBEDINAQ0xn47y6MNJ368lY9AJMpIBbo02BraM
+         q/ZGKmvKQzUBXGY2Vkg/kK5cm1NV/ChHAnN/z64KqIihzeW0Ir2VFKblLdM/Kgzq9jCb
+         tEZTRJl7feg6fdJNruqHnJmd1+5Vy+sjoHRTpCtNijoGWV9y6MVQUitW3B0BBUm5LjWB
+         igjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795533198; x=1796137998;
+        d=1e100.net; s=20260707; t=1795533263; x=1796138063;
         h=content-type:in-reply-to:autocrypt:from:content-language:references
          :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=OavKAVZv+OA0pfYHqsDmPh81k4IRaCsSuMGSaPHhIPw=;
-        b=cOQblbK3Z798HWktxXemxQIFm/3oQlc1CQIKUPnZz0IuGmR56DJgTnLvG1LTG4T7rw
-         3bFO1TAXSE27d4EFm4MJgNtpqCzMVC5LEIU7KL5uzXMVFfOQjSy+3cj60tNp/85PjcEH
-         L75zWLnH7BqrCUh9jmEHoh/qxACBQaCSgqJwZ76bBeph27+L07nY5FTl5vlcvgq8aakr
-         0SOpl4zdr720oGUs+RyHfeRsuPp54eZp5cx2lNWe+ZsXccoXhWd2x7yq16pC65VP/2+p
-         wc8jchlYMhcwt74dm33hSgU0kHBnTT5eMnJ0qvgkfjp9bvktidSsQS6oNAa6KXD/6ANP
-         JUcw==
-X-Gm-Message-State: APuU4Z8cTzUj3akEcyRUGeAeah9L7/K86z2LepfJo1liNKr2Xg1wo0Qd
-	MfNarSI1pSh1ucGjCPOJUEE2UfTOBit8NUh/28PZaM/4xvflK7llo8x2kzYyyeNj0sY=
-X-Gm-Gg: AZFdTZfwkafl1B75YQWhg/M7wBD4UDcYeV16AQuZCTCYbTlOzI8atONG09qIS8ICoMg
-	DSf9SR8X9HaxwOXlJh9q4X4pMJyNr5qpymt++V/XgZPA+JzNJaLrDQuDNoJv/Zz2/l7jepoSczB
-	Zn7XnBQoipfQAqZTTsXopkViEk0XBrjP+1tE9swlQ1a2Vhv9HVnABZBWHwHu5LxymPmNlrC3Y9w
-	1pTTj44ASxBA+yZ/j14yjqIKjHiG4TGDNOfZiedSFi/stpXTLJZj/U6ArNxF10KF/0u+fSszPdO
-	lc9KJlKksUUsz5tPps+0PFkhq0MVUkdII+q+9NHE2UgxhmtrGlYTIndDc0IWd/e9+GmCRiQ+8U1
-	a7YyPupMozzHC1B0lGKAfSu2wV7eFL3ljKYzZiLEFje0BTLt9kmncLPJVBibBqwTPYzxqAB42jm
-	pQlB+I9OHutVzaA068bI1o4sYNiay/TAy06koXRHKAolrgM8/PL3k+jxfhsOzufA/eQA6QNmVk3
-	rZbL8Jl52QPsE6+7a8VgrgxBEE0yOyhHw5f0uZFieWL/u1YetvuC3hSpzEvBjBFRD4x6DO+p2Xz
-	4q9Kjq6MZlNIjjtymfrD7xbL1SNTLpiBXPjtk8qUH553J6v08qN7YURwsRD5Ix3H+5dGNilIY5t
-	0JZD8UJBuR2ubwYTZUlkaKtOj7IhmI8V+9MHM7AULJw0dmhCA8eA=
-X-Received: by 2002:a17:907:e00b:20b0:c4d:22e2:1a2b with SMTP id a640c23a62f3a-c513a47e2ffmr818303866b.1.1795533197737;
-        Tue, 24 Nov 2026 07:13:17 -0800 (PST)
-Message-ID: <f9ddfaa9-9a78-4fcb-a142-6c466d215492@suse.com>
-Date: Tue, 24 Nov 2026 16:13:16 +0100
+        bh=PVJS6gkYs1IOy2J1QEN8soh2l1ljp7ZJVoiYPlTtrQ8=;
+        b=rg68TiALKNWnN84AQN09J8sk5FGq/jtZ5H+QDR9StmnoW6EcadW/NZnRqkhuOBToUt
+         SDV8kzKBR0qgKaBjmI3wSkE7GVeex3JW3HXJnMIykYKUQaWJYXtBGzl6mN/OstB2OJAX
+         vQYx5y9C361XYU4yRsk9Z/SwW+BdvBn+v9+n024XQ81ezvevp/iZ6g1Cix9sYHlkJmH/
+         eRfLfnppdfxA0JAYYBWO1GvS3KiRCfmdhd3PlwQcJGqMLSRWiFpcbHKFFa7z9Eflao+/
+         8uXpP6Nwj5DRAq2P9ocrLObXz07UC9UQg2gfsEie3saWNsVWuSXNzVyDhr7NdTtwqapB
+         VWKQ==
+X-Gm-Message-State: APuU4Z89LpschKyxXQwPFJLKpkcBRWORYrYsxijfQf75w2igvMx+1M5w
+	r3OL6+ellaEHZiIg/5TJxitotMqgr4qhvHC4fySaFjfr7iNIGfTF3gTxOZYVAC7sdB0=
+X-Gm-Gg: AZFdTZf+FFLWv2j26fo6QX3CRmuXdEwHK2eklziOXQwKA0hqzugHjbYm7a6O1SMDYdt
+	AV6ULjw17sVmNgJevYNsaiPG3ss99zhJmqDjc0ZOu3vtd5F1zS3uLt9oxrakCTzg6602gSBTCmU
+	jPPjWROii2zMjJW3JhTIPpAGPkbr+vm9cJKOQNXi6azKVpmjmB94QdjirZkmFpsj+xxMAZlUtfs
+	c3bk30SeOlc8cu4MOKy3CoV1soXlQHN23xRbdk+POXdubP7JzJuObYUeHgXNBqTVKZRBjPk3+6F
+	jt/Z7GQb7gCaumg1TQ6qJ8uhGUn9qmYLzziUvwcJeDDtfDjuaBHOmFLJ6wuJ1YL+kzIhouDU+Mz
+	CNAG/8UuR95nzz9bRfxzkatVPB/wbbcPhmEoDTrQXgPw2bW4vh3REE7zKXQPjdJjPNA+bEiiXWM
+	06W7K0m1rjKb53Q9JELUrfSMEEXh9D0GQNEORQZUFlNf+A4LcZsvq7yKjEWXV7tSxVI/MqOPOlC
+	TTQ1jVUJSgMzzmF4cgKUzo6+d1YfZG8sL0P7kM4xdecObTokEkLvznNAns9DYkWrajxhbPNJR9V
+	S0NJH5c8jwR5kBd9DGT7UWS7DjDTGBEbX+hXa6svi4zFoozz0Vdp6Jyxcl+4jvxVo3u1/qF3vxY
+	f6wOw0szGzROi7mJXX4voKL0SKZtAeWKwoGommGEOj0MffA7M/cs=
+X-Received: by 2002:a17:906:c14b:b0:c35:babe:ab44 with SMTP id a640c23a62f3a-c513a1e0076mr1490288666b.0.1795533262820;
+        Tue, 24 Nov 2026 07:14:22 -0800 (PST)
+Message-ID: <589d567e-912d-4913-9949-ee28dfd7f719@suse.com>
+Date: Tue, 24 Nov 2026 16:14:21 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 01/13] xen/privcmd: convert mmap hook to mmap_prepare
+Subject: Re: [PATCH v2 07/13] xen: convert xenstore interface mmap hooks to
+ mmap_prepare
 To: "Lorenzo Stoakes (ARM)" <ljs@kernel.org>,
  Andrew Morton <akpm@linux-foundation.org>,
  Stefano Stabellini <sstabellini@kernel.org>,
@@ -140,7 +141,7 @@ Cc: xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org,
  linux-arm-msm@vger.kernel.org, op-tee@lists.trustedfirmware.org,
  netdev@vger.kernel.org, linux-mm@kvack.org
 References: <20261124-late-2026-mmap_prepare-v2-0-0b0d99d655f9@kernel.org>
- <20261124-late-2026-mmap_prepare-v2-1-0b0d99d655f9@kernel.org>
+ <20261124-late-2026-mmap_prepare-v2-7-0b0d99d655f9@kernel.org>
 Content-Language: en-US
 From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
 Autocrypt: addr=jgross@suse.com; keydata=
@@ -166,13 +167,13 @@ Autocrypt: addr=jgross@suse.com; keydata=
  HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
  QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
  ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
-In-Reply-To: <20261124-late-2026-mmap_prepare-v2-1-0b0d99d655f9@kernel.org>
+In-Reply-To: <20261124-late-2026-mmap_prepare-v2-7-0b0d99d655f9@kernel.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------q205G5Arex3sh2KHaxisqvnr"
-X-purgate-ID: tlsNG-ebf023/1795533198-C14D3B50-CC1E634C/35/110847
+ boundary="------------rZw0QHKmzMvHx5VSPSOUKur0"
+X-purgate-ID: tlsNG-d25034/1795533263-034D7A5B-569EA107/35/110847
 X-purgate-type: clean
-X-purgate-size: 6329
+X-purgate-size: 6465
 X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
@@ -182,14 +183,15 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------q205G5Arex3sh2KHaxisqvnr
-Content-Type: multipart/mixed; boundary="------------AjT5XFhC0OM07fDCW0uVTora";
+--------------rZw0QHKmzMvHx5VSPSOUKur0
+Content-Type: multipart/mixed; boundary="------------1hIkmj8WyEEdRHjB5CXVAQ0q";
  protected-headers="v1"; hp="clear"
-Message-ID: <f9ddfaa9-9a78-4fcb-a142-6c466d215492@suse.com>
-Date: Tue, 24 Nov 2026 16:13:16 +0100
+Message-ID: <589d567e-912d-4913-9949-ee28dfd7f719@suse.com>
+Date: Tue, 24 Nov 2026 16:14:21 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 01/13] xen/privcmd: convert mmap hook to mmap_prepare
+Subject: Re: [PATCH v2 07/13] xen: convert xenstore interface mmap hooks to
+ mmap_prepare
 To: "Lorenzo Stoakes (ARM)" <ljs@kernel.org>,
  Andrew Morton <akpm@linux-foundation.org>,
  Stefano Stabellini <sstabellini@kernel.org>,
@@ -232,7 +234,7 @@ Cc: xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org,
  linux-arm-msm@vger.kernel.org, op-tee@lists.trustedfirmware.org,
  netdev@vger.kernel.org, linux-mm@kvack.org
 References: <20261124-late-2026-mmap_prepare-v2-0-0b0d99d655f9@kernel.org>
- <20261124-late-2026-mmap_prepare-v2-1-0b0d99d655f9@kernel.org>
+ <20261124-late-2026-mmap_prepare-v2-7-0b0d99d655f9@kernel.org>
 Content-Language: en-US
 From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
 Autocrypt: addr=jgross@suse.com; keydata=
@@ -258,38 +260,39 @@ Autocrypt: addr=jgross@suse.com; keydata=
  HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
  QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
  ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
-In-Reply-To: <20261124-late-2026-mmap_prepare-v2-1-0b0d99d655f9@kernel.org>
+In-Reply-To: <20261124-late-2026-mmap_prepare-v2-7-0b0d99d655f9@kernel.org>
 
---------------AjT5XFhC0OM07fDCW0uVTora
+--------------1hIkmj8WyEEdRHjB5CXVAQ0q
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: base64
 
 T24gMjQuMTEuMjYgMTU6MDIsIExvcmVuem8gU3RvYWtlcyAoQVJNKSB3cm90ZToNCj4gTW92
 ZSBmcm9tIHRoZSBkZXByZWNhdGVkIG1tYXAgaG9vayB0byB0aGUgbmV3IG1tYXBfcHJlcGFy
-ZSBob29rLg0KPiANCj4gVGhlIGhvb2sgb25seSBzZXRzIFZNQSBmbGFncyBhbmQgb3BlcmF0
-aW9ucy4gVGhlIFZNQSBwcml2YXRlIGRhdGEgaXMNCj4gYWxyZWFkeSBOVUxMIGF0IHRoaXMg
-cG9pbnQsIHNvIHdlIG5vIGxvbmdlciBleHBsaWNpdGx5IGNsZWFyIGl0Lg0KPiANCj4gU2ln
-bmVkLW9mZi1ieTogTG9yZW56byBTdG9ha2VzIChBUk0pIDxsanNAa2VybmVsLm9yZz4NCkFj
-a2VkLWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+DQoNCg0KSnVlcmdlbg0K
+ZSBob29rIGZvciB0aGUNCj4geGVuZnMgeHNkX2t2YSBmaWxlIGFuZCB0aGUgeGVuYnVzX2Jh
+Y2tlbmQgZGV2aWNlLCBib3RoIG9mIHdoaWNoIHJlbWFwIHRoZQ0KPiB4ZW5zdG9yZSBpbnRl
+cmZhY2UgcGFnZS4NCj4gDQo+IFVzZSB0aGUgUEZOIHJlbWFwIG1tYXAgYWN0aW9uIHRvIGRv
+IHNvLCByZXRhaW5pbmcgdGhlIC1FQUdBSU4gZXJyb3Igb24NCj4gZmFpbHVyZSB2aWEgdGhl
+IGFjdGlvbiBlcnJvciBvdmVycmlkZS4NCj4gDQo+IFNpZ25lZC1vZmYtYnk6IExvcmVuem8g
+U3RvYWtlcyAoQVJNKSA8bGpzQGtlcm5lbC5vcmc+DQpBY2tlZC1ieTogSnVlcmdlbiBHcm9z
+cyA8amdyb3NzQHN1c2UuY29tPg0KDQoNCkp1ZXJnZW4NCg==
 
+--------------1hIkmj8WyEEdRHjB5CXVAQ0q--
 
---------------AjT5XFhC0OM07fDCW0uVTora--
-
---------------q205G5Arex3sh2KHaxisqvnr
+--------------rZw0QHKmzMvHx5VSPSOUKur0
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmsFqYwFAwAAAAAACgkQsN6d1ii/Ey9P
-6wgAhB7FWWxaGPhKVeHejmUgx+jnN5sGJc29B5zeOJ/udOQfrpojRJR0JMaTJNeJ8g/QXkTWmCZt
-Zd6lRhkVQVMmVrlatIREKD6+lx0mr154pd31nTm9ffbjdyAK9RPk6czEHFUxkktbU/9vv+pBcZEa
-4SaEbJuidUtK7Vgek2j0JKYNWpqv8R80d+nRsMU+RX0YbRKCuT8Jtt3uB/TLb76UL/eK81vzE7j3
-bGBh83GA0cSOumIzSg72te0PCuz4U9UgccJbDbwLIPRkV2Gx83sLPaLOj5968cz/vyT0qZwJ5LfI
-2oGgirhriBPAdLJrm4WtpkDGIWO5CaJWyZf5I3zVZQ==
-=Eyqx
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmsFqc0FAwAAAAAACgkQsN6d1ii/Ey8U
+agf9EKmbZX8l548UDsdyJg6oJvCYHOXjuS/ExKBuNpmGhFgk7GREMY+3u3PwwH5i8jr55bbeWohR
+PQZmJLsVx91G2Go2UnTECf+ux5hcQK/L88QRCcbKXHLPL5o2jl4qSVtCpjc4+Zq8UulQYIwYP35a
+OS34bD2osQ81MOzn9C89cW+1W2vyw6436TybryP/f0H8AtinZ/cTr3yFyQO/tR2V2NBHtEzwqslP
+jNDjxr1xdpiDdCL4jZ8rdh7WfCE5cgGr89hzbDR9ZyzH4ka8x2ICUX++Mym777GSOuxLf3wzSPuW
+OkTRlKQEHsYqdVjYj7TAHGOBC56IwBlTfAmWefOR2g==
+=vFml
 -----END PGP SIGNATURE-----
 
---------------q205G5Arex3sh2KHaxisqvnr--
+--------------rZw0QHKmzMvHx5VSPSOUKur0--
 
