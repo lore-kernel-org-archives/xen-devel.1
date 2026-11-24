@@ -2,49 +2,49 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C88E1606A683
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2026 16:51:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A3A6C606A685
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2026 16:51:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=TzlkKMqS
-Received: from list by lists.xenproject.org with outflank-mailman.1501256.1697311 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=S7JKSv+3
+Received: from list by lists.xenproject.org with outflank-mailman.1501259.1697338 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVtjs-0007Ly-N6; Tue, 24 Nov 2026 16:51:28 +0000
+	id 1xVtk0-00082n-Ei; Tue, 24 Nov 2026 16:51:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1501256.1697311; Tue, 24 Nov 2026 16:51:28 +0000
+Received: by outflank-mailman (output) from mailman id 1501259.1697338; Tue, 24 Nov 2026 16:51:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVtjs-0007Lr-Jv; Tue, 24 Nov 2026 16:51:28 +0000
-Received: by outflank-mailman (input) for mailman id 1501256;
- Tue, 24 Nov 2026 16:51:28 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xVtjs-0007Lg-0s
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 16:51:28 +0000
+	id 1xVtk0-00082d-BF; Tue, 24 Nov 2026 16:51:36 +0000
+Received: by outflank-mailman (input) for mailman id 1501259;
+ Tue, 24 Nov 2026 16:51:34 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xVtjy-0007oQ-PY
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 16:51:34 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xVtjr-00HDqX-DE
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 17:51:27 +0100
-Received: from [10.42.69.5] (helo=localhost)
+ id 1xVtjx-002XqQ-MP
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 17:51:33 +0100
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a20e7825e70001cf5@swg.vates.tech>)
- id 6b05c084-8faa-0a2a0a5109dd-0a2a450591b8-16
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 17:51:27 +0100
-Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a20e7835460001cf5@swg.vates.tech>)
+ id 6b05c075-bab6-0a2a0a5309dd-0a2a4506b284-42
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 17:51:33 +0100
+Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a20e7825e70001cf5@swg.vates.tech>)
- id 6b05c08f-4cb1-0a2a45050019-b9ff1c2295f1-3
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 17:51:27 +0100
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a20e7835460001cf5@swg.vates.tech>)
+ id 6b05c095-195a-0a2a45060019-b9ff1c23ad3d-3
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 17:51:33 +0100
 Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
  (Authenticated sender:
  8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a20e7825e70001cf5.003 for <xen-devel@lists.xenproject.org>
+ by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a20e7835460001cf5.005 for <xen-devel@lists.xenproject.org>
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Tue, 24 Nov 2026 16:51:24 +0000
+ Tue, 24 Nov 2026 16:51:28 +0000
 Received: from localhost.localdomain (88-188-240-210.subs.proxad.net
  [88.188.240.210]) (Authenticated sender: teddy.astie)
- by mail2.vates.fr (Postfix) with ESMTPSA id 1384782EDA;
- Tue, 24 Nov 2026 17:51:24 +0100 (CET)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 184CA82B4D;
+ Tue, 24 Nov 2026 17:51:28 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -55,45 +55,50 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=rkai20etxpAMQDf3DG/ZnPm5YLiHW6GbY1suw54tucc=;
+ q=dns/txt; s=selector1; bh=O5UcJlrbTVtwPi5mf6lW3EM/Ud9RE85PuOuJY/RCIzs=;
  h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=TzlkKMqSjuWgmd4LSHxQt8Cw5byQk42Ko2TWU86u8Q2YBzmHO78Sb2+/ocjgG+ryqki+FkAaG
- s6gbbBveJCO9SURC5XpmZcclB/byHaBIQjAeM4yKApdkagacSiLgmRsORx/Za7jkDj8aA8vcC7U
- 9jgXSNXrHM8Dq2WkPbxXpPCVUoaTyrX80lLw1lW42+VC/WZpZNEF9Pt9MS6H45OWCdjnaPoWkQ9
- Al/kx87zIxoe5xNws5V3uKite4dtSowRJ7rc+uOpdKFJ7uEytcpScu694pL/fqLP73klQKrAB2T
- cv58RP4kxNHpkTxQA6X6pPKAQWNjTHbwNQyY67dqVn9A==
-X-Zone-Loop: 71e2da4af004bbcc8205b3a4b5764b86d38c0b9a4480
+ b=S7JKSv+3hbSyhbiYptAHbYfObMWwLMt4EArlX2Tc9sV+u7WmjwjgzJ+BoH7tfmmygjaPjXvmp
+ bdqwxvlhktWf/gRFOzbu9Qpt5T7wqdmtodLa0N0O6SlE2dxUJ4J4HZ7bVHRYBQa+lhtW6SiQXXK
+ z+0gsR1Pzp1DTwhNvX7+1rx5EJzVl2zkmus/YpMTAntxRclnjnqTkrxSSk23UyQgCVbcUPqFoCf
+ stlTS94qn+P/9NW9qIJLrVEGgcURDiP9J0xJqJqf0DF2aBvsroO+mpL+oXLduVLpEh0hrHXDUq1
+ z7+nZAPYVLFdhVv/NVkyrY0e3P5ipk+4IDMDRyqSrcpw==
+X-Zone-Loop: 6fa52714eb11cce395c90a4b602b112970526e6beddc
 x-campaign-type: default
-x-transaction-id: 76089c91-f140-448b-921f-7c9c777fed0d
-x-swg-uid: 01-fa24e2f3-03b9-4ced-b840-a78976b638d9
+x-transaction-id: 41ab0fa3-c432-4e3c-87fa-9c4929fdf0ef
+x-swg-uid: 01-fe0d13d3-01ce-4773-a8a5-0e2ae1c8ac96
 X-Mailer: Sweego
 Message-ID:
- <1795539084.8631fc262581453bbf619ec5b2062170.1a20e7825e70001cf5@vates.tech>
-x-swg-bid: 1795539084.8631fc262581453bbf619ec5b2062170.1a20e7825e70001cf5
+ <1795539088.8631fc262581453bbf619ec5b2062170.1a20e7835460001cf5@vates.tech>
+x-swg-bid: 1795539088.8631fc262581453bbf619ec5b2062170.1a20e7835460001cf5
 Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
 x-campaign-id: default
 x-client-id: 8631fc262581453bbf619ec5b2062170
 From: Teddy Astie <teddy.astie@vates.tech>
 To: xen-devel@lists.xenproject.org
 Cc: Teddy Astie <teddy.astie@vates.tech>,
-	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	Baptiste Le Duc <baptiste.le-duc@vates.tech>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: [RFC PATCH v2 01/13] x86/hvm: Use direct structures instead of guest handles
-Date: Tue, 24 Nov 2026 17:50:29 +0100
-In-Reply-To: <1795538976.8631fc262581453bbf619ec5b2062170.1a20e767cd30001cf5@vates.tech>
+Subject: [RFC PATCH v2 04/13] fastabi: Introduce xen_version op
+Date: Tue, 24 Nov 2026 17:50:32 +0100
+In-Reply-To: <20261124165041.653941-2-teddy.astie@vates.tech>
 References: <1795538976.8631fc262581453bbf619ec5b2062170.1a20e767cd30001cf5@vates.tech>
+ <20261124165041.653941-2-teddy.astie@vates.tech>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.12d.b157812cfadf7ccc.1a20e7823cc.3fb1a740ccce60b8=-"
+Content-Type: multipart/alternative; boundary="-=Part.130.ffe0d75469549cea.1a20e7833c5.23e8029e77f776a1=-"
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1795539084236
-X-purgate-ID: tlsNG-c201ff/1795539087-716AD2A1-6F8D2115/10/73395122804
+X-Bm-Transport-Timestamp: 1795539088325
+X-purgate-ID: tlsNG-16d1c6/1795539093-1F6C877B-04E0E579/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 7411
+X-purgate-size: 3597
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -102,255 +107,121 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
----=Part.12d.b157812cfadf7ccc.1a20e7823cc.3fb1a740ccce60b8=-
+---=Part.130.ffe0d75469549cea.1a20e7833c5.23e8029e77f776a1=-
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-That will be used later on for a new hypercall ABI=2E
+Only XENVER_version and XENVER_get_features are exposed=2E
 
 Signed-off-by: Teddy Astie <teddy=2Eastie@vates=2Etech>
 ---
 Cc: Baptiste Le Duc <baptiste=2Ele-duc@vates=2Etech>
 Cc: Oleksii Kurochko <oleksii=2Ekurochko@gmail=2Ecom>
 
- xen/arch/x86/hvm/hvm=2Ec | 126 +++++++++++++++++++++++------------------
- 1 file changed, 70 insertions(+), 56 deletions(-)
+ docs/guest-guide/fastabi/abi/version=2Eyml | 15 ++++++++++++
+ xen/common/fastabi=2Ec                     |  4 ++++
+ xen/common/kernel=2Ec                      | 30 ++++++++++++++++++++++++
+ xen/include/xen/fastabi=2Eh                |  1 +
+ 4 files changed, 50 insertions(+)
+ create mode 100644 docs/guest-guide/fastabi/abi/version=2Eyml
 
-diff --git a/xen/arch/x86/hvm/hvm=2Ec b/xen/arch/x86/hvm/hvm=2Ec
-index ef9c7cd057=2E=2E45d91ff62a 100644
---- a/xen/arch/x86/hvm/hvm=2Ec
-+++ b/xen/arch/x86/hvm/hvm=2Ec
-@@ -4094,19 +4094,14 @@ static int hvmop_flush_tlb_all(void)
-     return paging_flush_tlb(NULL) ? 0 : -ERESTART;
+diff --git a/docs/guest-guide/fastabi/abi/version=2Eyml b/docs/guest-guide=
+/fastabi/abi/version=2Eyml
+new file mode 100644
+index 0000000000=2E=2Ebce64a4d69
+--- /dev/null
++++ b/docs/guest-guide/fastabi/abi/version=2Eyml
+@@ -0,0 +1,15 @@
++name: version
++hypercall_index: 17
++
++subops:
++  version:
++    index: 0
++
++  get_features:
++    index: 6
++    input:
++      submap_idx: 2
++    output:
++      submap: 3
++    c_lang:
++      struct: xen_feature_info
+diff --git a/xen/common/fastabi=2Ec b/xen/common/fastabi=2Ec
+index 90228206de=2E=2E1e5d8bcd9c 100644
+--- a/xen/common/fastabi=2Ec
++++ b/xen/common/fastabi=2Ec
+@@ -15,6 +15,10 @@ void fastabi_dispatch(unsigned long index, struct cpu_u=
+ser_regs *regs)
+ {
+     switch (index) {
+     /* Wrappers over traditional hypercalls */
++    case __HYPERVISOR_xen_version:
++        do_xen_version_fast_op(regs);
++        break;
++
+     default:
+         fastabi_value_n(regs, 0) =3D -ENOSYS;
+         break;
+diff --git a/xen/common/kernel=2Ec b/xen/common/kernel=2Ec
+index 631c95c235=2E=2E10f5c628a8 100644
+--- a/xen/common/kernel=2Ec
++++ b/xen/common/kernel=2Ec
+@@ -11,6 +11,7 @@
+ #include <xen/version=2Eh>
+ #include <xen/sched=2Eh>
+ #include <xen/paging=2Eh>
++#include <xen/fastabi=2Eh>
+ #include <xen/guest_access=2Eh>
+ #include <xen/hypercall=2Eh>
+ #include <xen/hypfs=2Eh>
+@@ -768,6 +769,35 @@ long do_xen_version(int cmd, XEN_GUEST_HANDLE_PARAM(v=
+oid) arg)
+     return -ENOSYS;
  }
 =20
--static int hvmop_set_evtchn_upcall_vector(
--    XEN_GUEST_HANDLE_PARAM(xen_hvm_evtchn_upcall_vector_t) uop)
-+static int hvmop_set_evtchn_upcall_vector(xen_hvm_evtchn_upcall_vector_t =
-op)
- {
--    xen_hvm_evtchn_upcall_vector_t op;
-     struct domain *d =3D current->domain;
-     struct vcpu *v;
-=20
-     if ( !is_hvm_domain(d) )
-         return -EINVAL;
-=20
--    if ( copy_from_guest(&op, uop, 1) )
--        return -EFAULT;
--
-     if ( op=2Evector < 0x10 )
-         return -EINVAL;
-=20
-@@ -4396,26 +4391,21 @@ static int hvm_set_param(struct domain *d, uint32_=
-t index, uint64_t value)
-     return rc;
- }
-=20
--static int hvmop_set_param(
--    XEN_GUEST_HANDLE_PARAM(xen_hvm_param_t) arg)
-+static int hvmop_set_param(struct xen_hvm_param op)
- {
--    struct xen_hvm_param a;
-     struct domain *d;
-     int rc;
-=20
--    if ( copy_from_guest(&a, arg, 1) )
--        return -EFAULT;
--
--    if ( a=2Eindex >=3D HVM_NR_PARAMS )
-+    if ( op=2Eindex >=3D HVM_NR_PARAMS )
-         return -EINVAL;
-=20
--    d =3D rcu_lock_domain_by_any_id(a=2Edomid);
-+    d =3D rcu_lock_domain_by_any_id(op=2Edomid);
-     if ( d =3D=3D NULL )
-         return -ESRCH;
-=20
-     rc =3D -EINVAL;
-     if ( is_hvm_domain(d) )
--        rc =3D hvm_set_param(d, a=2Eindex, a=2Evalue);
-+        rc =3D hvm_set_param(d, op=2Eindex, op=2Evalue);
-=20
-     rcu_unlock_domain(d);
-     return rc;
-@@ -4506,31 +4496,21 @@ int hvm_get_param(struct domain *d, uint32_t index=
-, uint64_t *value)
-     return 0;
- };
-=20
--static int hvmop_get_param(
--    XEN_GUEST_HANDLE_PARAM(xen_hvm_param_t) arg)
-+static int hvmop_get_param(struct xen_hvm_param *op)
- {
--    struct xen_hvm_param a;
-     struct domain *d;
-     int rc;
-=20
--    if ( copy_from_guest(&a, arg, 1) )
--        return -EFAULT;
--
--    if ( a=2Eindex >=3D HVM_NR_PARAMS )
-+    if ( op->index >=3D HVM_NR_PARAMS )
-         return -EINVAL;
-=20
--    d =3D rcu_lock_domain_by_any_id(a=2Edomid);
-+    d =3D rcu_lock_domain_by_any_id(op->domid);
-     if ( d =3D=3D NULL )
-         return -ESRCH;
-=20
-     rc =3D -EINVAL;
--    if ( is_hvm_domain(d) && !(rc =3D hvm_get_param(d, a=2Eindex, &a=2Eva=
-lue)) )
--    {
--        rc =3D __copy_to_guest(arg, &a, 1) ? -EFAULT : 0;
--
--        HVM_DBG_LOG(DBG_LEVEL_HCALL, "get param %u =3D %"PRIx64,
--                    a=2Eindex, a=2Evalue);
--    }
-+    if ( is_hvm_domain(d) && !(rc =3D hvm_get_param(d, op->index, &op->va=
-lue)) )
-+        HVM_DBG_LOG(DBG_LEVEL_HCALL, "get param %u =3D %"PRIx64, a=2Einde=
-x, a=2Evalue);
-=20
-     rcu_unlock_domain(d);
-     return rc;
-@@ -5036,18 +5016,13 @@ static int compat_altp2m_op(
-     return rc;
- }
-=20
--static int hvmop_get_mem_type(
--    XEN_GUEST_HANDLE_PARAM(xen_hvm_get_mem_type_t) arg)
-+static int hvmop_get_mem_type(struct xen_hvm_get_mem_type *op)
- {
--    struct xen_hvm_get_mem_type a;
-     struct domain *d;
-     p2m_type_t t;
-     int rc;
-=20
--    if ( copy_from_guest(&a, arg, 1) )
--        return -EFAULT;
--
--    d =3D rcu_lock_domain_by_any_id(a=2Edomid);
-+    d =3D rcu_lock_domain_by_any_id(op->domid);
-     if ( d =3D=3D NULL )
-         return -ESRCH;
-=20
-@@ -5064,25 +5039,22 @@ static int hvmop_get_mem_type(
-      * type, not in allocating or unsharing=2E That'll happen
-      * on access=2E
-      */
--    get_gfn_query_unlocked(d, a=2Epfn, &t);
-+    get_gfn_query_unlocked(d, op->pfn, &t);
-     if ( p2m_is_mmio(t) )
--        a=2Emem_type =3D  HVMMEM_mmio_dm;
-+        op->mem_type =3D  HVMMEM_mmio_dm;
-     else if ( t =3D=3D p2m_ioreq_server )
--        a=2Emem_type =3D HVMMEM_ioreq_server;
-+        op->mem_type =3D HVMMEM_ioreq_server;
-     else if ( p2m_is_readonly(t) )
--        a=2Emem_type =3D  HVMMEM_ram_ro;
-+        op->mem_type =3D  HVMMEM_ram_ro;
-     else if ( p2m_is_ram(t) )
--        a=2Emem_type =3D  HVMMEM_ram_rw;
-+        op->mem_type =3D  HVMMEM_ram_rw;
-     else if ( p2m_is_pod(t) )
--        a=2Emem_type =3D  HVMMEM_ram_rw;
-+        op->mem_type =3D  HVMMEM_ram_rw;
-     else if ( p2m_is_grant(t) )
--        a=2Emem_type =3D  HVMMEM_ram_rw;
-+        op->mem_type =3D  HVMMEM_ram_rw;
-     else
--        a=2Emem_type =3D  HVMMEM_mmio_dm;
-+        op->mem_type =3D  HVMMEM_mmio_dm;
-=20
--    rc =3D -EFAULT;
--    if ( __copy_to_guest(arg, &a, 1) )
--        goto out;
-     rc =3D 0;
-=20
-  out:
-@@ -5105,28 +5077,70 @@ long do_hvm_op(unsigned long op, XEN_GUEST_HANDLE_=
-PARAM(void) arg)
-     switch ( op )
-     {
-     case HVMOP_set_evtchn_upcall_vector:
--        rc =3D hvmop_set_evtchn_upcall_vector(
--            guest_handle_cast(arg, xen_hvm_evtchn_upcall_vector_t));
++#ifdef CONFIG_FASTABI
++void do_xen_version_fast_op(struct cpu_user_regs *regs)
++{
++    long cmd =3D fastabi_value_n(regs, 1);
++    long rc =3D 0;
++
++    switch ( cmd ) {
++    case XENVER_version:
++        rc =3D (xen_major_version() << 16) | xen_minor_version();
++        break;
++    case XENVER_get_features:
 +    {
-+        struct xen_hvm_evtchn_upcall_vector op;
++        uint32_t submap =3D 0, submap_idx =3D fastabi_value_n(regs, 2);
 +
-+        if ( copy_from_guest(&op, arg, 1) )
-+        {
-+            rc =3D -EFAULT;
-+            break;
-+        }
++        rc =3D xenver_get_features(current->domain, submap_idx, &submap);
 +
-+        rc =3D hvmop_set_evtchn_upcall_vector(op);
-         break;
++        if ( !rc )
++            fastabi_value_n(regs, 3) =3D submap;
++        break;
 +    }
-    =20
-     case HVMOP_set_param:
--        rc =3D hvmop_set_param(
--            guest_handle_cast(arg, xen_hvm_param_t));
-+    {
-+        struct xen_hvm_param op;
-+       =20
-+        if ( copy_from_guest(&op, arg, 1) )
-+        {
-+            rc =3D -EFAULT;
-+            break;
-+        }
-+
-+        rc =3D hvmop_set_param(op);
-         break;
++    default:
++        rc =3D -ENOSYS;
++        break;
 +    }
-=20
-     case HVMOP_get_param:
--        rc =3D hvmop_get_param(
--            guest_handle_cast(arg, xen_hvm_param_t));
-+    {
-+        struct xen_hvm_param op;
-+       =20
-+        if ( copy_from_guest(&op, arg, 1) )
-+        {
-+            rc =3D -EFAULT;
-+            break;
-+        }
 +
-+        rc =3D hvmop_get_param(&op);
++    fastabi_value_n(regs, 0) =3D rc;
++}
++#endif
 +
-+        if ( !rc && copy_to_guest(arg, &op, 1) )
-+            rc =3D -EFAULT;
-         break;
-+    }
+ void print_cmdline(void)
+ {
+     const char *cmdline;
+diff --git a/xen/include/xen/fastabi=2Eh b/xen/include/xen/fastabi=2Eh
+index 9d0ca5264a=2E=2E2427093dc7 100644
+--- a/xen/include/xen/fastabi=2Eh
++++ b/xen/include/xen/fastabi=2Eh
+@@ -8,4 +8,5 @@
+ void fastabi_dispatch(unsigned long index, struct cpu_user_regs *regs);
+ void fastabi_make_continuation(void);
 =20
-     case HVMOP_flush_tlbs:
-         rc =3D guest_handle_is_null(arg) ? hvmop_flush_tlb_all() : -EINVA=
-L;
-         break;
-=20
-     case HVMOP_get_mem_type:
--        rc =3D hvmop_get_mem_type(
--            guest_handle_cast(arg, xen_hvm_get_mem_type_t));
-+    {
-+        struct xen_hvm_get_mem_type op;
-+
-+        if ( copy_from_guest(&op, arg, 1) )
-+        {
-+            rc =3D -EFAULT;
-+            break;
-+        }
-+       =20
-+        rc =3D hvmop_get_mem_type(&op);
-+
-+        if ( !rc && copy_to_guest(arg, &op, 1) )
-+            rc =3D -EFAULT;
-         break;
-+    }
-=20
-     case HVMOP_pagetable_dying:
-     {
++void do_xen_version_fast_op(struct cpu_user_regs *regs);
+ #endif /* XEN_FASTABI_H */
 --=20
 2=2E56=2E1
 
@@ -363,5 +234,5 @@ XCP-ng & Xen Orchestra - Vates s=
 olutions
 
 web: https://vates=2Etech
----=Part.12d.b157812cfadf7ccc.1a20e7823cc.3fb1a740ccce60b8=---
+---=Part.130.ffe0d75469549cea.1a20e7833c5.23e8029e77f776a1=---
 
