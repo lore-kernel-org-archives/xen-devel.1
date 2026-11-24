@@ -2,52 +2,39 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7CF18606A31E
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2026 08:59:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=g4fX+NPY
-Received: from list by lists.xenproject.org with outflank-mailman.1500676.1696722 (Exim 4.92)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 305DF606A683
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2026 09:18:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1500689.1696735 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVmMY-0005k3-Kz; Tue, 24 Nov 2026 08:58:54 +0000
+	id 1xVmfE-0000Hu-7z; Tue, 24 Nov 2026 09:18:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1500676.1696722; Tue, 24 Nov 2026 08:58:54 +0000
+Received: by outflank-mailman (output) from mailman id 1500689.1696735; Tue, 24 Nov 2026 09:18:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVmMY-0005jw-IT; Tue, 24 Nov 2026 08:58:54 +0000
-Received: by outflank-mailman (input) for mailman id 1500676;
- Tue, 24 Nov 2026 08:58:52 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a20cc76fda0001cf5@swg.vates.tech>)
- id 1xVmMW-0005jq-2w
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 08:58:52 +0000
+	id 1xVmfE-0000Hn-4z; Tue, 24 Nov 2026 09:18:12 +0000
+Received: by outflank-mailman (input) for mailman id 1500689;
+ Tue, 24 Nov 2026 09:18:11 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <mark.syms@citrix.com>) id 1xVmfD-0000Hh-H4
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 09:18:11 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xVmMV-002f1W-3k
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 09:58:51 +0100
+ id 1xVmfC-00FcsF-Kl
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 10:18:10 +0100
 Received: from [10.42.69.1] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a20cc76fda0001cf5@swg.vates.tech>)
- id 6b05518d-8faa-0a2a0a5109dd-0a2a45018bb0-46
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 09:58:50 +0100
-Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <mark.syms@citrix.com>)
+ id 6b05564c-bab6-0a2a0a5309dd-0a2a450184b8-18
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 10:18:10 +0100
+Received: from [160.101.131.9] (helo=na1pdmzitismtp02.tibco.com)
  by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a20cc76fda0001cf5@swg.vates.tech>)
- id 6b0551ca-5bcc-0a2a45010019-b9ff1c22a669-3
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 09:58:50 +0100
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a20cc76fda0001cf5.002 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Tue, 24 Nov 2026 08:58:46 +0000
-Received: from [192.168.0.158]
- (cpc92322-cmbg19-2-0-cust1759.5-4.cable.virginm.net [86.26.38.224])
- (Authenticated sender: andriy.sultanov)
- by mail2.vates.fr (Postfix) with ESMTPSA id BDF5F82B62;
- Tue, 24 Nov 2026 09:58:45 +0100 (CET)
+ (envelope-from <mark.syms@citrix.com>)
+ id 6b055651-5bcc-0a2a45010019-a0658309c38a-3
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 10:18:10 +0100
+Received: from mewpvdipd1070.citrite.net (unknown [10.113.40.46])
+ by na1pdmzitismtp02.tibco.com (Postfix) with ESMTP id 5CC6184D50E7;
+ Tue, 24 Nov 2026 04:16:31 -0500 (EST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -56,94 +43,98 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=0z8BABAU35w2jBam4HLQQ50+LdcO3gfe46jCrmE8np0=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
- b=g4fX+NPYoamVt4a4r+cwWYAEJjf6GmUuL4zr/qh1N+Qh/3u1g4Qwdlo6Ydz/o+7UseJ0kRi6A
- 49VYmGqSwTjy7GqLAqaywLUSxZlZwsPlNV2ptcVi2DW7E3v/3v7lLsdjcpdjLj7bKpvRmGZ7uzg
- 3bA5ACP6kDe+++2O6NeKSax8zdCfc89crHT1Ez6r4AnhKVU+56O5CRQ/J0U37WAbCh7US2Jtfmt
- h6X6aTt5NdA11d6HjG7JphWOCNQQiTwQ5aqtSw3GAGKpPblLEjFMXhUj2mUKsspAG6iD4PzyaHp
- fiNf/t+zHUzIVZ6InQoplMU2SCV0sAoxLBbUHp1temcg==
-X-Zone-Loop: bd6ba1e5a74ea86c7ad7ef816526300fe5a7a017a798
-x-campaign-type: default
-x-transaction-id: 4023c363-3f1c-4a07-bb56-ed0341eccddd
-x-swg-uid: 01-551de3c1-5d78-4199-b52f-f563f09ea857
-X-Mailer: Sweego
-Message-ID:
- <1795510726.8631fc262581453bbf619ec5b2062170.1a20cc76fda0001cf5@vates.tech>
-x-swg-bid: 1795510726.8631fc262581453bbf619ec5b2062170.1a20cc76fda0001cf5
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-Date: Tue, 24 Nov 2026 08:58:45 +0000
+Authentication-Results: eu.smtp.expurgate.cloud; none
+From: Mark Syms <mark.syms@citrix.com>
+To: Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	Andrew Lunn <andrew+netdev@lunn.ch>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@kernel.org>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>
+Cc: Jesper Dangaard Brouer <hawk@kernel.org>,
+	Alexei Starovoitov <ast@kernel.org>,
+	Daniel Borkmann <daniel@iogearbox.net>,
+	John Fastabend <john.fastabend@gmail.com>,
+	Stanislav Fomichev <sdf@fomichev.me>,
+	netdev@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	bpf@vger.kernel.org,
+	Mark Syms <mark.syms@citrix.com>,
+	stable@vger.kernel.org
+Subject: [PATCH net] xen-netfront: unregister the XDP rxq before destroying its page_pool
+Date: Tue, 24 Nov 2026 09:18:06 +0000
+Message-ID: <20261124091806.2736453-1-mark.syms@citrix.com>
+X-Mailer: git-send-email 2.56.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] tools/ocaml: Fix OoB read in stub_syslog()
-To: Andrew Cooper <andrew.cooper3@citrix.com>,
- Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Olivier Lambert <olivier.lambert@vates.tech>,
- Guillaume Thouvenin <guillaume.thouvenin@vates.tech>
-References: <20261116222559.3824604-1-andrew.cooper3@citrix.com>
-Content-Language: en-US
-From: Andrii Sultanov <andriy.sultanov@vates.tech>
-In-Reply-To: <20261116222559.3824604-1-andrew.cooper3@citrix.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1795510725972
-X-purgate-ID: tlsNG-d62444/1795510730-4D55D5FD-C7AAD7FA/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-d62444/1795511890-4D55D5FD-3AAC87C6/0/0
 X-purgate-type: clean
-X-purgate-size: 1794
-X-Spam-Status: No, score=-14.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FORGED_MUA_MOZILLA,
+X-purgate-size: 2448
+X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
 	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 11/16/26 22:26, Andrew Cooper wrote:
+Each receive queue registers its page_pool as the XDP memory model,
+which takes a second reference on the pool. On disconnect,
+xennet_disconnect_backend() calls page_pool_destroy() but never
+unregisters the rxq, so the pool's user count never reaches zero and
+the pool is never released, together with the receive buffers that
+xennet_release_rx_bufs() has just recycled into it. Every
+suspend/resume or backend reconnect therefore leaks one pool per
+receive queue. The pool never begins shutdown, so the page_pool stall
+warning does not fire and the leak is silent.
 
-> __syslog_facility_table[] maps Ocaml LOG_* facilities indices to local system
-> indices.  The final line is intended to initialise 6 entries in the table, but
-> only initalises one with the logical OR of 6 facilities, making the table 5
-> entries too short.
->
-> This is probably a copy&paste error from Ocaml, where | is right operator to
-> use for a list of this nature.
->
-> Fixes: ea8ddf27e5c8 ("ocaml: add logging bindings.")
-> Assisted-by: LLM
-> Reported-by: Olivier Lambert <olivier.lambert@vates.tech>
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> ---
-> CC: Andrew Cooper <andrew.cooper3@citrix.com>
-> CC: Andrii Sultanov <andriy.sultanov@vates.tech>
-> CC: Guillaume Thouvenin <guillaume.thouvenin@vates.tech>
->
-> This is only an issue if you modify oxenstored.conf to use one of these
-> facilities.
-> ---
->   tools/ocaml/xenstored/syslog_stubs.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/tools/ocaml/xenstored/syslog_stubs.c b/tools/ocaml/xenstored/syslog_stubs.c
-> index 760e78ff73dc..16c7202d39ba 100644
-> --- a/tools/ocaml/xenstored/syslog_stubs.c
-> +++ b/tools/ocaml/xenstored/syslog_stubs.c
-> @@ -30,7 +30,7 @@ static int __syslog_facility_table[] = {
->   	LOG_AUTH, LOG_AUTHPRIV, LOG_CRON, LOG_DAEMON, LOG_FTP, LOG_KERN,
->   	LOG_LOCAL0, LOG_LOCAL1, LOG_LOCAL2, LOG_LOCAL3,
->   	LOG_LOCAL4, LOG_LOCAL5, LOG_LOCAL6, LOG_LOCAL7,
-> -	LOG_LPR | LOG_MAIL | LOG_NEWS | LOG_SYSLOG | LOG_USER | LOG_UUCP
-> +	LOG_LPR, LOG_MAIL, LOG_NEWS, LOG_SYSLOG, LOG_USER, LOG_UUCP,
->   };
->   
->   value stub_syslog(value facility, value level, value msg)
->
-> base-commit: 97bf370375113caf92fccf04e2877fc6b5ff887f
-Acked-by: Andrii Sultanov <andriy.sultanov@vates.tech>
+Unregister the rxq before destroying the pool, and clear the pointer
+so that a second disconnect without a reconnect is harmless.
+
+The leak was observed in CI testing: in XenServer suspend/resume
+stress runs, HVM guests lost available memory on every cycle until
+they stalled. Over 100 suspend/resume cycles the loss scaled with the
+number of VIFs, on Debian 12 (6.1.0-50) and Ubuntu 26.04 (7.0.0-30)
+guests alike; the missing unregister was then found by code
+inspection. Reproducing it needs no kernel modification: suspend and
+resume a guest repeatedly and compare MemAvailable.
+
+Tested on Debian 12 HVM guests on XenServer 9 (Xen 4.21, AMD EPYC),
+running two builds of the same 6.1.192 source with and without this
+patch. Over 100 suspend/resume cycles the unpatched kernel lost
+1107 KiB per cycle with one VIF and 2279 KiB with two; the patched
+kernel lost 51 and 42 KiB. On current mainline the patch builds
+without warnings at W=1 but was not boot-tested, and kernel selftests
+were not run.
+
+An AI coding assistant (Claude Code) was used to locate the cause,
+write the fix and draft this changelog.
+
+Fixes: 6c5aa6fc4def ("xen networking: add basic XDP support for xen-netfront")
+Cc: stable@vger.kernel.org
+Signed-off-by: Mark Syms <mark.syms@citrix.com>
+---
+ drivers/net/xen-netfront.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/drivers/net/xen-netfront.c b/drivers/net/xen-netfront.c
+index fdcb91042..b82b3bdb2 100644
+--- a/drivers/net/xen-netfront.c
++++ b/drivers/net/xen-netfront.c
+@@ -1860,7 +1860,10 @@ static void xennet_disconnect_backend(struct netfront_info *info)
+ 		queue->tx.sring = NULL;
+ 		queue->rx.sring = NULL;
+ 
++		if (xdp_rxq_info_is_reg(&queue->xdp_rxq))
++			xdp_rxq_info_unreg(&queue->xdp_rxq);
+ 		page_pool_destroy(queue->page_pool);
++		queue->page_pool = NULL;
+ 	}
+ }
+ 
+-- 
+2.56.0
 
 
