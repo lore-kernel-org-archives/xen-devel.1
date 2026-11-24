@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1ECB3606A331
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2026 12:38:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DFCCB606A321
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2026 12:59:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=google header.b=No+5dwMI
-Received: from list by lists.xenproject.org with outflank-mailman.1500896.1696942 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=cdyH0+T0
+Received: from list by lists.xenproject.org with outflank-mailman.1500906.1696951 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVpmQ-0000q9-2m; Tue, 24 Nov 2026 12:37:50 +0000
+	id 1xVq6q-0004Hx-SQ; Tue, 24 Nov 2026 12:58:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1500896.1696942; Tue, 24 Nov 2026 12:37:50 +0000
+Received: by outflank-mailman (output) from mailman id 1500906.1696951; Tue, 24 Nov 2026 12:58:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVpmQ-0000q2-02; Tue, 24 Nov 2026 12:37:50 +0000
-Received: by outflank-mailman (input) for mailman id 1500896;
- Tue, 24 Nov 2026 12:37:48 +0000
+	id 1xVq6q-0004Hq-Pm; Tue, 24 Nov 2026 12:58:56 +0000
+Received: by outflank-mailman (input) for mailman id 1500906;
+ Tue, 24 Nov 2026 12:58:55 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xVpmO-0000oi-12
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 12:37:48 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xVq6p-0004Hk-Qz
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 12:58:55 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xVpmM-008dFx-UK
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 13:37:46 +0100
-Received: from [10.42.69.7] (helo=localhost)
+ id 1xVq6o-008hwO-NF
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 13:58:54 +0100
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6b058515-bab6-0a2a0a5309dd-0a2a4507c6b8-18
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 13:37:46 +0100
-Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6b05851a-b4ea-0a2a45070019-d1558036f054-3
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 13:37:46 +0100
-Received: by mail-wm1-f54.google.com with SMTP id
- 5b1f17b1804b1-4a35d5d4a20so43700585e9.2
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 04:37:46 -0800 (PST)
-Received: from localhost.localdomain (host-78-146-248-75.as13285.net.
- [78.146.248.75]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb853ca452sm424259955e9.15.2026.11.24.04.37.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Nov 2026 04:37:45 -0800 (PST)
+ (envelope-from <jbeulich@suse.com>)
+ id 6b0589fb-8faa-0a2a0a5109dd-0a2a4508bb32-46
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 13:58:54 +0100
+Received: from [209.85.221.41] (helo=mail-wr1-f41.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6b058a0d-f659-0a2a45080019-d155dd29e1ea-3
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 13:58:54 +0100
+Received: by mail-wr1-f41.google.com with SMTP id
+ ffacd0b85a97d-48dee593f18so4248873f8f.3
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 04:58:54 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4ab6b110c50sm27544187f8f.37.2026.11.24.04.58.53
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 24 Nov 2026 04:58:53 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,97 +49,175 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:Autocrypt:Subject:From:Cc:To:Content-Language:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1795523866; x=1796128666; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=mLG+j20mxQFCXukiCf0qhTfmmP4Tp5BDkaTubqg0MZE=;
-        b=No+5dwMIUYJJO6kMYTOz59COTaqmO3zksMpW7aC3+uG8Ggqtu0TdrB6UI0ItXEvQ0h
-         G9c+LBmXYYNWP0FZ5S/e6kl5NjYz5APk7ltMWO008xj4uuf/lCSmrUD30cpMF4WaBx7Y
-         HSjwn94ZP93L32Ki27+ZydAuAJiiIIkfXULR0=
+        d=suse.com; s=google; t=1795525133; x=1796129933; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=MQWJy03iOx7l7eckJdmx/HDYuBYT2YkyFzFC1hnIchs=;
+        b=cdyH0+T0a7/jm1yxkBtFM5iIsc+U/ATctwQ1rhDHSXZI8TwJ1pMFXfeJPBb80okLjO
+         oc1MHEj34uJL5l7lD6irViuGnPhc4yUb3H/EHkDjaCeI96EQxUM/kS1PWNJrbLuWKB+y
+         mPVk0KSsDhtxv2G8NpqjJ21uVBYV7wlZ/0Ltfd1BUCmmrAPlcZgV0xCvqv48k/sYUopI
+         nmPckNJ5ZIvRxUSZEieVIfgeJ6K/otQJjNQ99HOmyKGuglBXzRvwKIUFuVNlnWHpGnRE
+         iQWxOmhYWMhBBWzQGfzOiOSQyi12Y29zT+WmNoQbff9rHkLOEqUV/BliSO6Vuz0cAHZO
+         MoPw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795523866; x=1796128666;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=mLG+j20mxQFCXukiCf0qhTfmmP4Tp5BDkaTubqg0MZE=;
-        b=yIuhhxPknqY8BrNC0FCUlzAVo/2g9HIsgA8zUzUL66dPg5xARyCGQJpmCz7OLzYAfJ
-         W5JJuY1zqIIx7IdG5x2+XskgmX4YSVTE8IOJ8DIENX+VAK7RnET9IXXL7sGYEo63Ot7u
-         6IotRmtuClIytpujbnvNGXomK58rSA9IPN8f5drCChgRq0O5tnG5wApZhNSqu9mKyS1j
-         tn6pzHYakbapaqNc78uc653c+7NchW2fq34KbdbauTkppzrFTrnZGzWhJe7LpNdmMOOs
-         /WsCneKg1yDxUHHHVHMQEaaFJmQIhWMqLRq7M6vfhSTY5R1XK3dbapovjiMPfu80VZ0k
-         LRSA==
-X-Gm-Message-State: APuU4Z8kRVcupmIkJ2S7LTu5XLg84mAPKaJM3cHKVkuT/0dF5y8slNH8
-	mQdlviTgrcchkmGfZjuwKoaCKGeD4wbPozJ6D+iJO9KAjBdfYjozYp/VQ4VRgIzba5JttdV4e/O
-	Zpngg
-X-Gm-Gg: AZFdTZesfJNRbrhClMwO1y7maERKPPFwKZUskdY9kGUxuU5FrtEMxfqevFPE8D3ldYD
-	2tOWeSFZeXMIvDJFF3YFD6cPWw1BFYkiFB6LY1P1yUZiXuMQNx7x16ChUDw6rbJy56orxttECnu
-	pZIzS6+Tv/fkQSfuXoYbKmalDtX8LdS/NiZHpaL2HK6G/ccLLfwes9O/RSfUjPAlGBGVlSdn7aM
-	Vyk8S/zKT98w5QnPd61lxOx3X75L9dgg2nrlntLadJ/LXrfVA3O6i0hLos97YYXj1PIIZv24Jl3
-	+ri989aPfBwDFW4CFGk7DmzrFZXzNFAdqwU8C5+ktEK3FlUk9HX/tXbwo86YkHVbPSL3Ad1VcaI
-	lnCqvwyYwf0gBlqy0nsLLTXZSJ5sFjM+4jJ+Csdb7Tkmz4FX1Cs4rLU8fDG427GlWt2zAFEHVw6
-	0QbLdJTbfJXSxS2O/HJJ31fhqSN5/c6oyPxEyjUyuLCwjcaAlir0voDF4oOeNlVkx5jS/oSVd/g
-	RyG/sW+GNCh/g3Dkg14W/iX8CpildrgBqkMUGQv0DPCzbK9GY1D8kJgn0vZ6DUYlxDXvryjXSRT
-	WJ4RdFdbImOr+SQFaRveZVsGMBSuovO6VwwZsUHFaD0+aCSJCbrV/etqypDpYRTpCari/AGnYDy
-	ftnCCjoI7MlGI9IB1a7jFZ9L9
-X-Received: by 2002:a05:600c:5303:b0:4a2:1655:87db with SMTP id 5b1f17b1804b1-4bb88785d2fmr292362545e9.0.1795523865878;
-        Tue, 24 Nov 2026 04:37:45 -0800 (PST)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Teddy Astie <teddy.astie@vates.tech>,
-	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>
-Subject: [PATCH] x86/emul: Reject MOVNTI without a memory operand
-Date: Tue, 24 Nov 2026 12:37:43 +0000
-Message-Id: <20261124123743.273123-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
+        d=1e100.net; s=20260707; t=1795525133; x=1796129933;
+        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=MQWJy03iOx7l7eckJdmx/HDYuBYT2YkyFzFC1hnIchs=;
+        b=2pkRpxU4x0DsjDrh5fXLxmTblC4j1X3pOyyd2Oy04rN34pr5b0jSOIvzEc1rbuCQsf
+         Jn83gTQ2dFBVB8Jnp9tdpp+l/fx6T26G/UnpKlNIVF4OxkrzLgd+gkYFoCkv2piJJTxG
+         DUYLqde4sUBgl970n/CfTS89UW7CS0uwb7aC+s514bKhQVe+miKQVKaNnI9y/7rRWku7
+         Yaj9SaTsMc60Zz2DHWLsjCO0WTK+k1VExk0zWYfbVzKFDJHXUNHbrii9aJyvAmAZXC/u
+         jDVU+O09nER36Hz+TMYcxoRv0dFMWUnXb3bHmk75XEcKTk8ZKtNhwrrQPDiismIe6U7c
+         IqEQ==
+X-Gm-Message-State: APuU4Z+Vb0ELBsTQLYY7OChsUGfkl4iyTfsV12mJA9Ak7dRlYRnAd2cJ
+	DzDfo/vWZ5FPMr56/gGX7kpoo5tLUSvZ/tEUDeMmW9NqcZU6X47HeGM2NKoIdK+pC8GEydLlr38
+	pi+ew+g==
+X-Gm-Gg: AZFdTZfvfrFuARKN9tgUNqbPF2RX6hyFsT5p6bB1/5I8eanKCofaDQwX59HOrMSerYF
+	CNwpmB4n8JUDJ8GlnGPUr/+dv0Mm3OZhgFwr0zy1OV3QrvIABBs2xpIXKnlAtNEEw5lqf7cFaal
+	W5vDS/9ikAhwy8yn9kfdTH5HPZHiMsn1T9ctKmfbcMyMTRakCiIoipBBE/nqJ49YQMpjtCnG6b3
+	+OJS9PJCih47B40ecSHpaeoeK3BAPPU0wefSQJ7yjaFit2d4B4QsN007o7TT9tOEqM6A/xXyFWF
+	HK/2DEQc2VlbzsqMVHd9c17Nv1GcB/r5fRKQ1x1jaEowClmKgEk2DVCIQcWMC11g+/xC3Mp0z9j
+	zZhojq2FLYnn2QYXUNxUmvtmGNvM1HBwtsxuZ0pc1BIW/qeJyAgos8woRxvMwEtqaKctqdfvBfS
+	t6+/g3BoCQ7Q49CR7VNeGfUZRnLZMWmKU+sSiP63BdgkzSUT1eTaO8JBr9JSn6uJaaA+InPB7Bi
+	HlujuLXXYwSnbRI6/6f8P3cLqpPFxh2qn+LA70lk1SLgglr9klKqzV7DgZjWPqmiz1a1sBiimYM
+	KSG0VmTaAs0I6mMEr+aYolwkpm2knp0QJUS4l0BpAGatg3z2pycyYqgNX6gXdcek6zUNcwg0u8Q
+	lN3U/hNbNtSIC+fIWQKM0+HO0rO1lc7vyTKLVoA==
+X-Received: by 2002:a5d:59c3:0:b0:4b5:b60:4814 with SMTP id ffacd0b85a97d-4b50b60487bmr9568808f8f.54.1795525133596;
+        Tue, 24 Nov 2026 04:58:53 -0800 (PST)
+Message-ID: <a65bdb68-a244-4924-8b0e-b30cf1b9cf24@suse.com>
+Date: Tue, 24 Nov 2026 13:58:52 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>
+From: Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH] PCI: don't free in-use device instances
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1795523866-A66DAAE4-279CE2F5/10/78276251493
+X-purgate-ID: tlsNG-c1860d/1795525134-CE94287B-D8D5B3E1/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 1123
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+X-purgate-size: 2629
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-MOVNTI encoded with two registers is treated as a plain reg->reg move by the
-emulator, but it's a nonsensical encoding which hardware rejects with #UD.
+When a device is already known, alloc_pdev() will not allocate anything.
+Consequently the device should then also not be freed upon encountering
+an error (specifically: pci_add_device() dealing with an SR-IOV VF without
+known PF).
 
-Fixes: 372da9b41e0f ("x86: add movnti emulation")
-Reported-by: Teddy Astie <teddy.astie@vates.tech>
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Fixes: 8fe330a4daf6 ("xen/pci: remove logic catering to adding VF without PF")
+Reported-by: Roger Pau Monné <roger.pau@amd.com>
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
-CC: Jan Beulich <jbeulich@suse.com>
-CC: Roger Pau Monné <roger@xenproject.org>
-CC: Teddy Astie <teddy.astie@vates.tech>
----
- xen/arch/x86/x86_emulate/x86_emulate.c | 1 +
- 1 file changed, 1 insertion(+)
+Yes, find_pdev() could also be passed sbdf_t, but using bus+devfn better
+fits alloc_pdev()'s signature and is also easier in pci_add_device().
 
-diff --git a/xen/arch/x86/x86_emulate/x86_emulate.c b/xen/arch/x86/x86_emulate/x86_emulate.c
-index 09d43d204b8a..dc349115ba66 100644
---- a/xen/arch/x86/x86_emulate/x86_emulate.c
-+++ b/xen/arch/x86/x86_emulate/x86_emulate.c
-@@ -5429,6 +5429,7 @@ x86_emulate(
+--- a/xen/drivers/passthrough/pci.c
++++ b/xen/drivers/passthrough/pci.c
+@@ -315,16 +315,27 @@ static void apply_quirks(struct pci_dev
+             pdev->ignore_bars = true;
+ }
  
-     case X86EMUL_OPC(0x0f, 0xc3): /* movnti */
-         /* Ignore the non-temporal hint for now. */
-+        generate_exception_if(ea.type != OP_MEM, X86_EXC_UD);
-         vcpu_must_have(sse2);
-         dst.val = src.val;
-         sfence = true;
-
-base-commit: 3b65ff9f372fb85a453a952977cc033298cba8b5
--- 
-2.39.5
-
+-static struct pci_dev *alloc_pdev(struct pci_seg *pseg, u8 bus, u8 devfn)
++static struct pci_dev *find_pdev(const struct pci_seg *pseg, uint8_t bus,
++                                 uint8_t devfn)
+ {
+     struct pci_dev *pdev;
+-    unsigned int pos;
+-    int rc;
+ 
+     list_for_each_entry ( pdev, &pseg->alldevs_list, alldevs_list )
+         if ( pdev->bus == bus && pdev->devfn == devfn )
+             return pdev;
+ 
++    return NULL;
++}
++
++static struct pci_dev *alloc_pdev(struct pci_seg *pseg, u8 bus, u8 devfn)
++{
++    struct pci_dev *pdev = find_pdev(pseg, bus, devfn);
++    unsigned int pos;
++    int rc;
++
++    if ( pdev )
++        return pdev;
++
+     pdev = xzalloc(struct pci_dev);
+     if ( !pdev )
+         return NULL;
+@@ -669,6 +680,7 @@ int pci_add_device(u16 seg, u8 bus, u8 d
+     struct pci_dev *pdev;
+     unsigned int slot = PCI_SLOT(devfn), func = PCI_FUNC(devfn);
+     const char *type;
++    bool fresh = false;
+     int ret;
+ 
+     if ( !info )
+@@ -690,9 +702,14 @@ int pci_add_device(u16 seg, u8 bus, u8 d
+     pseg = alloc_pseg(seg);
+     if ( !pseg )
+         goto out;
+-    pdev = alloc_pdev(pseg, bus, devfn);
++    pdev = find_pdev(pseg, bus, devfn);
+     if ( !pdev )
+-        goto out;
++    {
++        pdev = alloc_pdev(pseg, bus, devfn);
++        if ( !pdev )
++            goto out;
++        fresh = true;
++    }
+ 
+     pdev->node = node;
+ 
+@@ -711,7 +728,8 @@ int pci_add_device(u16 seg, u8 bus, u8 d
+                        "Attempted to add SR-IOV VF %pp without PF %pp\n",
+                        &pdev->sbdf,
+                        &PCI_SBDF(seg, info->physfn.bus, info->physfn.devfn));
+-                free_pdev(pseg, pdev);
++                if ( fresh )
++                    free_pdev(pseg, pdev);
+                 ret = -ENODEV;
+                 goto out;
+             }
 
