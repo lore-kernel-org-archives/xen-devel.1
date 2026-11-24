@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3AA83606A31E
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2026 07:05:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2AD90606A32A
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2026 07:16:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=H8m2l5Yk
-Received: from list by lists.xenproject.org with outflank-mailman.1500628.1696695 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=ciBxMHp7
+Received: from list by lists.xenproject.org with outflank-mailman.1500635.1696704 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVkaI-0005CM-0a; Tue, 24 Nov 2026 07:04:58 +0000
+	id 1xVkkr-0006zt-Sl; Tue, 24 Nov 2026 07:15:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1500628.1696695; Tue, 24 Nov 2026 07:04:57 +0000
+Received: by outflank-mailman (output) from mailman id 1500635.1696704; Tue, 24 Nov 2026 07:15:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVkaH-0005CD-RK; Tue, 24 Nov 2026 07:04:57 +0000
-Received: by outflank-mailman (input) for mailman id 1500628;
- Tue, 24 Nov 2026 07:04:56 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xVkaG-0005C7-Cw
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 07:04:56 +0000
+	id 1xVkkr-0006zl-O0; Tue, 24 Nov 2026 07:15:53 +0000
+Received: by outflank-mailman (input) for mailman id 1500635;
+ Tue, 24 Nov 2026 07:15:51 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xVkkp-0006zf-Gg
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 07:15:51 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xVkaE-008FHj-6Y
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 08:04:54 +0100
-Received: from [10.42.69.3] (helo=localhost)
+ id 1xVkko-000Z0D-Ek
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 08:15:50 +0100
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6b053714-bab6-0a2a0a5309dd-0a2a4503dabe-10
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 08:04:53 +0100
-Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6b0539a2-bab6-0a2a0a5309dd-0a2a4501b9dc-12
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 08:15:50 +0100
+Received: from [209.85.221.46] (helo=mail-wr1-f46.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6b053715-fae8-0a2a45030019-d155802cc58e-3
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 08:04:53 +0100
-Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-4bb5b8ef642so35423835e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 23 Nov 2026 23:04:53 -0800 (PST)
+ id 6b0539a6-5bcc-0a2a45010019-d155dd2eb840-3
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 08:15:50 +0100
+Received: by mail-wr1-f46.google.com with SMTP id
+ ffacd0b85a97d-4a42b34e930so3631862f8f.2
+ for <xen-devel@lists.xenproject.org>; Mon, 23 Nov 2026 23:15:50 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb8538b2c5sm411534195e9.5.2026.11.23.23.04.52
+ ffacd0b85a97d-4ab6c43563esm27377180f8f.57.2026.11.23.23.15.49
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 23 Nov 2026 23:04:53 -0800 (PST)
+ Mon, 23 Nov 2026 23:15:49 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,59 +49,65 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:Autocrypt:Subject:From:Cc:To:Content-Language:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1795503893; x=1796108693; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=oGDED30vuQuGViVrSNDR+E4SUwIUrpzIyTq/78xEuCM=;
-        b=H8m2l5YkPsLU8pk+oxdOtjd4wWMwnM0DDDtsEzJbLHkbIEfeVCbW43NCIsBFcViiO/
-         AYiR71rz1Al9baomp4wzT1gItdqWFO2k+DvARJP+RMzwTZcDRqQ+zNbLqDpsy2QJTMkJ
-         QOgaERN8t8mUKqVhJbrhL6hKVfeMSdkxcbkRpGboZUJiHJ/+Kp9wMjUI+OPS6N84bIN8
-         9cxbxBIP/PA2FVJ4nvTALIwBjr2PsFl12VzHqzW9mAcBA4kpgpGPHJzuQ0NckSh4vUnM
-         sVE3k400mT0j9SNbegINLndDHzkkfOHdCma0eIudQyx+wLMBbraq6XBlQWd62I/XQb0e
-         pODw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795503893; x=1796108693;
-        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=suse.com; s=google; t=1795504550; x=1796109350; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=oGDED30vuQuGViVrSNDR+E4SUwIUrpzIyTq/78xEuCM=;
-        b=yKfmoNJ1WaM2acGR/1Mrh3KYp02iPXh8ZF19YdgkSh19ejZhDS1SC8FIiFSTZsSZ6y
-         y2cMv6wulLCTGjVKh5PCPnsY4d14IX9DEwSiz3Se7H+CNNSS/Xcxa62/OJetctYANUz2
-         teVm5CJ+5rS3y9XRbwRVqRF7IyKox29SKK4W/2HadizNsoyY3dVUPoQW1Ov6q8eiMuvh
-         yAackOl9oqWIDkeEgwOlBcf9dmkzLpvfpVgWyU7BDvDWbucMexouUvOk/pVR4BROtUMJ
-         sgog5z6mhuafaVdbcbX8JUIxPm+ULhUkCBZZaz4yqcgygh0Nd4GZ8FbuKBIgw86kqwx/
-         0kPA==
-X-Gm-Message-State: APuU4Z+8n9XjAJzwsqlXkl/xRjNxhT7ynXTr5TIEW64Mbzz8r2HytoGA
-	SWIegYcTn2Lk3PSWUBsOlMwCQ3EHIA25kMcJ0oT89UFu3pPwg8t/nutntqyXUrE/8FDGtr6th4r
-	F5GnsKg==
-X-Gm-Gg: AZFdTZfEWTfGpNPzrwMrWnZFMkBrgdC5rGsCCXYJ1/L93PF2wk+O9+D2JQ0PchD7Kn5
-	Z8ofbFBg7+Chxa7bUhfSdXYMJkhloB6Ohl/vsWOrKBtGrPLb9F/qAHFtLmDjp355+mu5p7NT015
-	6o1ebL2g/PXnHaC/Uy+trFrgKA3rxbKJVo3Qt/9dKlp7LMvc2O/3RJprtyFFVJwzGY3dhzGnvGC
-	/OVH25y8APt5xS89Gkt4s4rFzBcVLjALPOH4+jBBC9BXHnPRAc9Voj8xX1qok1q3KKLg1GuC3aY
-	3j7BCS8+pH+rEoRRb71CQNiMddIMEesCphhOHLid+/fV6byhL0m/PdfLPH9ljbZwFGE13h2t1a2
-	b3LEJ2SFwdnKqeKL5XlEkOoAfX2foUk/rQ89hkLgFEnFatgy9kMnaM8BhY94dQvGaWzmLRtKmze
-	ofsXtwTuJcIvpGS6ev8a3zGcUmfIT+nKbOEh91K6o3qMt9waq/07No7CkdJdJK/PKw84WxjhedG
-	aAcYc7NK3aP1EGFzgsPJcWPmEOLWXZQyiIi6+RYpeEeCP5jXO7L7ca9Sdp7mtyGlMsSXDplCGrA
-	uWgd8z8RXLNCP6ZQtFXim5ujoLZ293abXt9RZpY3Kz9sy0C3c44HMAwota5reUDx55YLP1jAHxk
-	+hDOhAie7+gO7tDyMDfg=
-X-Received: by 2002:a05:600c:19d0:b0:4bb:65ed:b55c with SMTP id 5b1f17b1804b1-4bb88824b18mr282116285e9.33.1795503893393;
-        Mon, 23 Nov 2026 23:04:53 -0800 (PST)
-Message-ID: <bde76aca-0011-47ab-820a-65f3b7d6bb55@suse.com>
-Date: Tue, 24 Nov 2026 08:04:52 +0100
+        bh=NIFoQ6PeFqzt116XUapoVE3J7XEKvbs+tVoReqnLgCU=;
+        b=ciBxMHp7OU4gWG4C5CsddhfU74jj/qGNn1fzvuk5fKZh2p7qFhCyfst6cuhJWq+JYx
+         cVv8/4NroXrzf+xxqWBNxE6FwAf+UtR/zXiSprBlrBVDOc9YXuauimzv4WKjF9IjomzN
+         oRruCtr+CwqJ3eqwnA9cu/umKsHxnQtxHWy01/B25wDCER/HxLccIZLHCpOzgG63EaPA
+         O9GCj/ox52rE0wv3boZfoG9Hy5/6v2XBDQafqPWzmvvg/44jq75K/Ed0KzakBCWGhqm9
+         hc8SMa05yjPBAQJwR3X2f2Fi9GJdbRY/kgGxfUmIQmPz9lwFs8kwfmAlmg08YPkDW1gy
+         AR4A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795504550; x=1796109350;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=NIFoQ6PeFqzt116XUapoVE3J7XEKvbs+tVoReqnLgCU=;
+        b=bXzlbllDGsuwv3zNxjc5m+mU49qxSG5zW0xMOjoDkvpQqep6khjzmQyCcStGErdL0g
+         JrcUD6sCxXd4qq55Lus05rxF1xVOu42qxHfzZEUt6p4EgCX49tFk+Alg5hYKOFP7/r4R
+         Iks6buKLExcGRSTxmPXJF+woLx6AX62nKs83r8wmbUcu/G9rT/4xV73Qfdl+A5M/5pbA
+         DFeY3K3VZ4h+CfxQ5WbIqG4iumXzGbc9yuspY/PVNT0b5Jm2FbsU5+FQAlfrr8ATzzWf
+         99GGh41IhI9K70/PYsxRFscuxAInN6Bepsdo+1h7iI/+I7Bets+7JVRtmIIZJGFKx0RQ
+         ojiA==
+X-Forwarded-Encrypted: i=1; AL+hErFI60TVBaAQ1rfCUB0DZJ2IdN7opcZPKLtxwmxFzMuGARwcIsbuWC1WwRWZHJur57a9haASbbXIk6c=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z92DJ18VDzxEtmH1MR3+fiWI9i2CftNBIFuC4vi33FkywoCLDLM
+	u8ihnpFLPz/71f3QzkmcuQxqEjXiB9QA+mXqyTOfsFEWOpSanF6OK0weHXOa97HCeA==
+X-Gm-Gg: AZFdTZfiSZkEsW3vSU98U6Xr48u9WvOaSBDwYQUoo4NLbOnpMYFxs/uW/7h5LenIxG6
+	NQeTGpTdCW5MrOFVFzWo5EALsD4OLfF1lvc7Ut7ycG49wxZEI/LI9jabGl19Q+b1feTuDAQNtIt
+	Ne60dTxUmn8OQUb7Vkot5WUNRrTeDh60lFCVjPedDFnlRFDSLTVyKV2ov0JCbo/FOHl+nbUJa0M
+	qdSvt5ZfxbNCTuMNyhAJib41gKw01B/78S7zBgGJjI3s6n4pP7RU5or5Er7sMF7xuWrs048tKfS
+	AdxI/OCGnsLkU4+D8ToYCi32sCZvyCgCKuEhQ1i/j4EPuHuJay0rkGRIPxSJ0YXce5vdU4Sx6WM
+	Kef/FzFoBOEyNNGsjkLo9FoAsikDgdZxL8lLI/iRk3Ky3yVGNQkzc+yKqoccUJqy00dvPAD8vEG
+	fWeE3DL9lvyDBGb/PMUjuGbe/s5yHDDMKgUotymEFWy0BY4AdGGx5iX0B35lZ24qxXbYwEiHTE2
+	2rUBTCflkfC6Q/iHXG7d8jWFLVbG5Q3phzKpjYsjr6yRiymuBz+BNoeEFCg1spc6M7NEZhTbSNe
+	0SEBfacw2lapVmYdAJVTIRqEMSpKHV6ZzZcPgqfbN3T3A44EVe7VUYtzG6q+2GBtaQnr8t90QeJ
+	Ho+Od+ziF72/YD0eUWA==
+X-Received: by 2002:a05:6000:491d:b0:4ab:f5b0:a7fa with SMTP id ffacd0b85a97d-4b598a60967mr6282401f8f.33.1795504549684;
+        Mon, 23 Nov 2026 23:15:49 -0800 (PST)
+Message-ID: <8603af36-0c55-48e7-8440-db86f87f13f5@suse.com>
+Date: Tue, 24 Nov 2026 08:15:48 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH] x86/p2m: don't request mapcache invalidation for altp2m
+ removals
+To: =?UTF-8?Q?Micha=C5=82_Leszczy=C5=84ski?= <ml@icedev.pl>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>, Tamas K Lengyel <tamas@tklengyel.com>,
+ xen-devel@lists.xenproject.org
+References: <20261123040805.23963-1-ml@icedev.pl>
+ <4739bbe4-f69d-4f6c-9878-4da1e620937c@suse.com>
+ <CAJ_Okw5b-BagzxirVYnvWBo--H4L5rdrEfH7guaasDbRx5a1+w@mail.gmail.com>
+Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH] x86/HVM: re-work PIC interrupt acceptance
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -125,121 +131,81 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <CAJ_Okw5b-BagzxirVYnvWBo--H4L5rdrEfH7guaasDbRx5a1+w@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-33051d/1795503893-6C8DD4E9-21185E26/10/78276251493
+X-purgate-ID: tlsNG-d62444/1795504550-4E15B5FD-F9EEC6F6/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 3989
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-purgate-size: 2742
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-AI reports that the vlapic_hw_disabled() in vlapic_accept_pic_intr() is
-wrong: In that mode __vlapic_accept_pic_intr() means to return true, which
-that early check defeats. AI's suggestion to use has_vlapic() instead
-(despite it noting that all checking needs to be in sync between
-vlapic_accept_pic_intr() and vlapic_adjust_i8259_target()) isn't quite
-right, though - all other checks want to be in __vlapic_accept_pic_intr().
+On 23.11.2026 16:36, Michał Leszczyński wrote:
+> On Mon, 23 Nov 2026 at 14:23, Jan Beulich <jbeulich@suse.com> wrote:
+>>
+>> On 23.11.2026 05:07, Michał Leszczyński wrote:
+>>> From: Michał Leszczyński <ml@icedev.pl>
+>>>
+>>> Since commit 588d961d15d1, p2m_remove_entry() requests a mapcache
+>>> invalidation for every removal, including altp2m entries removed via
+>>> p2m_change_altp2m_gfn(). Device models map guest memory through the
+>>> host p2m, so such removals cannot leave them with stale mappings.
+>>>
+>>> When the request is issued by another domain, every vCPU of the guest
+>>> synchronously broadcasts IOREQ_TYPE_INVALIDATE on its next hypercall.
+>>> DRAKVUF triggers this whenever it removes the last breakpoint from a
+>>> page.
+>>>
+>>> This was measured on Xen 4.22.0 with QEMU 9.1 and a 2-vCPU Windows 10
+>>> guest, benchmarking a dummy application which calls NtCreateFile in a loop
+>>> while DRAKVUF's filetracer plugin is tracing those calls. On every such
+>>> syscall entry, the plugin places a temporary trap on the return address,
+>>> to be able to observe syscall's return value. The trap is removed after
+>>> the observation is made. Thus, every syscall translates to altp2m entry
+>>> addition and removal under this benchmark scenario.
+>>>
+>>> Without this change, each traced call took about 8.1 ms.
+>>> With patch it goes down to about 0.19 ms (~43 times faster!)
+>>>
+>>> Only request the invalidation for the host p2m.
+>>>
+>>> Fixes: 588d961d15d1 ("IOREQ: refine when to send mapcache invalidation request")
+>>> Backport: 4.15+
+>>> Signed-off-by: Michał Leszczyński <ml@icedev.pl>
+>>
+>> Reviewed-by: Jan Beulich <jbeulich@suse.com>
+>>
+>> Aiui the argumentation equally applied for nested P2Ms, even if the description
+>> doesn't mention that case at all (but the code change covers it).
+>>
+>> Jan
+> 
+> As far as I understand, the device model only uses the host p2m to map guest
+> memory (foreign mappings/ioreq handling), so it doesn't need to be in sync with
+> changes made to any other views.
+> 
+> Moreover, no code path currently calls p2m_remove_entry() providing a
+> nested p2m as an argument. Should such a path appear in the future, the
+> p2m_is_hostp2m() check would still be correct.
+> 
+> I'd suggest replacing the second sentence of the first paragraph of
+> the description
+> with:
+> 
+> "Device models map guest memory through the host p2m only, so removals
+> from altp2m or nested p2ms cannot leave them with stale mappings."
+> 
+> Could this be adjusted on commit? Otherwise I'm happy to send a v2.
 
-Put the has_vlapic() there first, together with the hardware-disabled
-check.
+No problem adjusting on commit.
 
-The has_vioapic() check there was similarly placed wrongly: Without any
-IO-APIC, PIC interrupts can still go through the LAPIC (typically LVT0).
-Therefore cover merely the redir entry 0 checking by that check.
+Btw - I got three similar but not identical replies. I hope I didn't miss
+any subtle difference.
 
-The IO-APIC and LVT0 checks really could come in either order.
-
-While there constify pointers and have the helper function return bool.
-
-Fixes: 302a8519fb85 ("x86/vlapic: fixes for HVM code when running without a vlapic")
-Reported-by: Roger Pau Monné <roger.pau@amd.com>
-Fixes: 5fe65b5eafc8 ("x86/HVM: add more checks verifying that PIT/PIC/IOAPIC are emulated")
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-Alternative (functionally identical) code structure could be
-
-    /* LAPIC absent or fully disabled? */
-    if ( !has_vlapic(d) || vlapic_hw_disabled(vlapic) )
-        return true;
-
-    /* LAPIC software-disabled? */
-    if ( vlapic_disabled(vlapic) )
-        return false;
-
-    if ( has_vioapic(d) )
-    {
-        ...
-
-This is functionally identical because in software-disabled mode all LVTs
-have their mask bits set, without it being possible to clear them. I.e.
-the final "return" will always produce "false" in that case.
-
---- a/xen/arch/x86/hvm/vlapic.c
-+++ b/xen/arch/x86/hvm/vlapic.c
-@@ -1269,37 +1269,40 @@ void vlapic_tdt_msr_set(struct vlapic *v
-                 vlapic->hw.tdt_msr, guest_tsc);
- }
- 
--static int __vlapic_accept_pic_intr(struct vcpu *v)
-+static bool __vlapic_accept_pic_intr(const struct vcpu *v)
- {
--    struct domain *d = v->domain;
--    struct vlapic *vlapic = vcpu_vlapic(v);
--    uint32_t lvt0 = vlapic_get_reg(vlapic, APIC_LVT0);
--    union vioapic_redir_entry redir0;
-+    const struct domain *d = v->domain;
-+    const struct vlapic *vlapic = vcpu_vlapic(v);
- 
-     ASSERT(has_vpic(d));
- 
--    if ( !has_vioapic(d) )
--        return 0;
--
--    redir0 = domain_vioapic(d, 0)->redirtbl[0];
--
-     /* We deliver 8259 interrupts to the appropriate CPU as follows. */
--    return ((/* IOAPIC pin0 is unmasked and routing to this LAPIC? */
--             ((redir0.fields.delivery_mode == dest_ExtINT) &&
--              !redir0.fields.mask &&
--              redir0.fields.dest_id == VLAPIC_ID(vlapic) &&
--              !vlapic_disabled(vlapic)) ||
--             /* LAPIC has LVT0 unmasked for ExtInts? */
--             ((lvt0 & (APIC_DM_MASK | APIC_LVT_MASKED)) == APIC_DM_EXTINT) ||
--             /* LAPIC is fully disabled? */
--             vlapic_hw_disabled(vlapic)));
-+
-+    /* LAPIC absent or fully disabled? */
-+    if ( !has_vlapic(d) || vlapic_hw_disabled(vlapic) )
-+        return true;
-+
-+    if ( has_vioapic(d) && vlapic_enabled(vlapic) )
-+    {
-+        union vioapic_redir_entry redir0 = domain_vioapic(d, 0)->redirtbl[0];
-+
-+        /* IOAPIC pin0 is unmasked and routing to this LAPIC? */
-+        if ( redir0.fields.delivery_mode == dest_ExtINT &&
-+             !redir0.fields.mask &&
-+             redir0.fields.dest_id == VLAPIC_ID(vlapic) )
-+            return true;
-+    }
-+
-+    /* LAPIC has LVT0 unmasked for ExtInts? */
-+    return (vlapic_get_reg(vlapic, APIC_LVT0) &
-+            (APIC_DM_MASK | APIC_LVT_MASKED)) == APIC_DM_EXTINT;
- }
- 
- int vlapic_accept_pic_intr(struct vcpu *v)
- {
-     bool target, accept = false;
- 
--    if ( vlapic_hw_disabled(vcpu_vlapic(v)) || !has_vpic(v->domain) )
-+    if ( !has_vpic(v->domain) )
-         return 0;
- 
-     target = v == v->domain->arch.hvm.i8259_target;
+Jan
 
