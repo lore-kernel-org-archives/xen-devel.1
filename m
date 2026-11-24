@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 704DA606A322
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2026 13:30:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 30A69606A31E
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2026 13:31:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=EqWTT1bi
-Received: from list by lists.xenproject.org with outflank-mailman.1500935.1696979 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=Ny8QRtuJ
+Received: from list by lists.xenproject.org with outflank-mailman.1500939.1696988 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVqbR-0002Bw-ID; Tue, 24 Nov 2026 13:30:33 +0000
+	id 1xVqbp-0002XX-Tf; Tue, 24 Nov 2026 13:30:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1500935.1696979; Tue, 24 Nov 2026 13:30:33 +0000
+Received: by outflank-mailman (output) from mailman id 1500939.1696988; Tue, 24 Nov 2026 13:30:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVqbR-0002Bp-FO; Tue, 24 Nov 2026 13:30:33 +0000
-Received: by outflank-mailman (input) for mailman id 1500935;
- Tue, 24 Nov 2026 13:30:31 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xVqbP-0002BR-N1
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 13:30:31 +0000
+	id 1xVqbp-0002XQ-QF; Tue, 24 Nov 2026 13:30:57 +0000
+Received: by outflank-mailman (input) for mailman id 1500939;
+ Tue, 24 Nov 2026 13:30:57 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xVqbp-0002XD-ET
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 13:30:57 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xVqbP-005TLt-2O
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 14:30:31 +0100
-Received: from [10.42.69.5] (helo=localhost)
+ id 1xVqbo-007v3F-Qt
+ for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 14:30:56 +0100
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6b05916e-e002-0a2a0a5209dd-0a2a4505c8a4-28
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 14:30:31 +0100
-Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6b05918d-8faa-0a2a0a5109dd-0a2a4509d18c-14
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 14:30:56 +0100
+Received: from [209.85.221.43] (helo=mail-wr1-f43.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6b059176-4cb1-0a2a45050019-d1558030f1bb-3
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 14:30:31 +0100
-Received: by mail-wm1-f48.google.com with SMTP id
- 5b1f17b1804b1-4bb9d8e8e90so16330485e9.3
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 05:30:30 -0800 (PST)
+ id 6b059190-be1a-0a2a45090019-d155dd2be0f6-3
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 14:30:56 +0100
+Received: by mail-wr1-f43.google.com with SMTP id
+ ffacd0b85a97d-4aa5833c263so4339264f8f.2
+ for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 05:30:56 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4ab6c61e53asm29153876f8f.59.2026.11.24.05.30.28
+ ffacd0b85a97d-4ab658e2d60sm28743687f8f.3.2026.11.24.05.30.53
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 24 Nov 2026 05:30:28 -0800 (PST)
+ Tue, 24 Nov 2026 05:30:54 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,52 +51,52 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1795527030; x=1796131830; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1795527055; x=1796131855; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=VU46UnoOFTSTF+vejMzYzFOZJoLf0Fed7xBJUJ6z7T4=;
-        b=EqWTT1bi+jqHAaNY5D52tHScOKO2nCMFXGlEFH1DkfYX29eJ+7bOFVI5ZEqgZKw9YK
-         bPBKz06fgYferxNvCtPGmymaI1wydfzWfjyHJ06z7avKXo8hcgIqBYRode8Wx6yCHaci
-         RaR7EqMb/BbNkMzrHDDyNLWf3oMWD1JAdYu4I11iZ/wyW6JggtKUf7hjq6m5KQ/4taub
-         Sw9p5HjFpdBMJXpv0OFjgfTA3BpnOs4Xeb0rWCHc32o6UT3nzzi7l8sVOOo6s6oVsVTz
-         tQBx8PPpxesPiZzn04iIBzfbFbktIqsAgNY6Tt+etUwG9fuAhx3JQEWpkf34rXj6GDe/
-         +KHw==
+        bh=efQMg8ccz53MW7JwG/28Z6uF2wC4RfyLzCsVqji7zXM=;
+        b=Ny8QRtuJZ0yHLPjmV3u7AOMYfUfF2hDFp3yqU9qAwTgMswncGZKgHlXgHBZcUQVmRz
+         Nj9UcthO8fHrwYonzUcJj7KRxF3LEEUpprbECBnvDXYkjAl7Y+j+zxMhzQE/k8iMxlt+
+         x/c44CLH4NWRdWfd0LaLDtAnumwa5PS3PW6ieggLvJTWOSK9rENz9HdhcV26+AiguVr/
+         zQe4+jVW/kyl1IqjM3g/VPX2gqTLQHwidYPNo46683T7jMiXdJIptIU8ictbZJgquxH4
+         kv+t1sNt5MUcrgpeQ8FH3E1v4cDgxiy81giTSijVZNR0RsZxMcvITLBgBWta88dkkZ/j
+         5a8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795527030; x=1796131830;
+        d=1e100.net; s=20260707; t=1795527055; x=1796131855;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=VU46UnoOFTSTF+vejMzYzFOZJoLf0Fed7xBJUJ6z7T4=;
-        b=A1Z7Qn7gWyUXymwcc1Ib0c5Gjs/w6040e80z2Sr0K+8evP3x1cKrwwmplcweP1JisO
-         TBYp14ORs5QqqQActbfYWCdkK//1QD/l2ispDRXCJvyIwzN6lKihzWBl7sHZiBtjOTyJ
-         UngCvbKA5oGlcMvVuvJbBvB7BUI69EUGQlURpLLS9XMmxbZugtJC0GXpHua4pr6ViOfc
-         hHrnoXaoL1K7q+ts5W/xzSFI0kzFT864/BIPQh2ejXR/iZzFq8budMP8ggZy4npvsoR/
-         e6A7IWSnOmTyQhREBC6Y8HbtDCwBW+s7Sd6guBGiaEN0mhmNsedhVih9EnJibxNXZIt8
-         gRhw==
-X-Gm-Message-State: APuU4Z/M5riiJBlOcYuJOQ+EeNqSc/CHJmB9WIUbS9ZknTS/t1hipXQx
-	zCf2Om3RPq7cLzoIzt+RBQyWLSW9SM/8jhbIdXA6LOry+7BQ4Wl1Y9UZS7kO5TO5/vvDflmBjfj
-	nU8Jowg==
-X-Gm-Gg: AZFdTZfZ2Sn8ZYQB/OgSYjHxjSE/gf6PZeA2AKt/KQyepdDAlapJU8I6wndarVKXxs4
-	Whzajz/mzdV62Fk/LUJZ+kGiPTAQE8eZqoNGf+fdc3fBuyPDPIVkYdPfrmPUf0x3+4Sz8IanZIY
-	gV6mfDgt8mvXoKXffPglFBAoi60+8IGPFnokwXDh1zdy7zqEBpKqayaFyB5FE9o1B3KCz73Z7BM
-	7POypYtxmOlbPYbPxNb9vt201YS5A08aj/B9jLlXd/hheSpDUeNBa99Pv6907iGZcBHFOwknq3q
-	tFUSsLflS+gI8ARF3OBSY1H7u5OjDae0M3gETtfLguRN4wh/VEKIFRzjmmaISan38wOREnC/DqC
-	nM3F/WlljMBQeN8z/52VnrRbU7lnzZ2+r09ipcqFJzyC2qfmO2nYI0MHJSfb4omxNX1rlxOQInH
-	tvr7mAaAd4S4rlktnATRHiWalzI9i9WN7Jpjvf2ua3EbN9Qare/VkQ+7TeRaGwy0Q+SC1M92dzU
-	JRDYudloj292PFhTaHQiEx48UgfIKbiwQFULHQ0hvqSEp8vvt92YXCm1scZdnjiVKSTWfo0uvH8
-	UDhFZeHUyZcu3uxoY92CzLfrBUWxVHao08XJiYcFi+tPdH2dIARtDPIVYi0lqvgfLtGglZt7oLA
-	nU1qrIA6E+Jx9gpSb
-X-Received: by 2002:a05:600c:3ba3:b0:4bb:7571:5743 with SMTP id 5b1f17b1804b1-4bb88813444mr336422175e9.27.1795527029209;
-        Tue, 24 Nov 2026 05:30:29 -0800 (PST)
-Message-ID: <ef9d7231-32c5-4b7d-aa8c-b54cc0c48349@suse.com>
-Date: Tue, 24 Nov 2026 14:30:28 +0100
+        bh=efQMg8ccz53MW7JwG/28Z6uF2wC4RfyLzCsVqji7zXM=;
+        b=bKqWMS2BVHmdn3IDAhcvzV9XPGtmZfyp6uHB+prBi+mOrKRzi9A041RTm2suXTmWJs
+         n2oVGfpWD/peCvLgB001Mu2T5rPq6NynkanmVETXWTvCeObf9M1gnCLiNkJYNK28lh8J
+         r90T9amjV/5a4ZILhGtn5zgxz39cz6MEXJy1BzLdD+K2ChLa6l9PUy1uf8XYIMrB6CMU
+         EHmI4hLe8W8aJu49gR+EwIC5gxgeVZx6yGaZMB7kEu/5w7imxZhgzXBdDgMXOVXzUktF
+         GH1dONAR7RxkrEG2AtLKOqxC3rjQGepnuj8B/KxfA6NvPgLpnXCf93CMBnM0Emx33Bmz
+         IDLA==
+X-Gm-Message-State: APuU4Z91L7Gn/xQA9Kd0oNYKfdcu0vELCXFgCqEPvQ3E1UukSCpLD572
+	/Es5ihkJlKrCk1N++PXNDI1Xh0XnxDO/rbBV0bb2EJQpu2GgKUcS29lNODD0WYiTOOyGwliIxKR
+	fYwP4og==
+X-Gm-Gg: AZFdTZe2ioGu2aP8OZRNpJ8hHdirsZzN2tipp/s2Omr6JzdwVRKMutCtCwLJmFlGmeW
+	6yjXYyV+1TfRyNzvqPm8OIvfrL6YeFIsOrd3CdfJ86KYLDfk0kiD+c/kKIMGLioQ3G/zkoYX9ko
+	2GyRO+Q00VtFlRpfZigL67TWxX1xSbBDfMesCOWMonYJwSGoWB6emwfQfOKnKENh2pzcthiXtMj
+	SnH4kAGpGINKaLPj5knWUPILaJRRD86veT1i0VIXKGKC8vISKoh4SFXQgDjnuLC5FHUwvylVJnx
+	NvM0aldAjyczO8AhsvZ2unteCPDyRrvphYJgOOCigxRRfIaX7XMsTuvjSUcSqzJsMnmTaloolEF
+	FC3xSu9xh/93624eP/BIjtL7HnuQYsQEwM6apBEM0kVaGDsKGrs9/BeWF2bW3HiqSBIDPCWsNBl
+	7nUiyOPuUh6YOPVxOAm0tmkVkqN3aTZqzX65oQCc6h3RyOP4yurysXFE2AXvh4wJCzGc1ln9Z7X
+	USnuHHq/Ptvqf23eDiIbxKPvauw7uZvgX8Ef7jk5EoqG/bOAVVAkU19TDx4SwA/ddfEAxVsERaP
+	FU7gPM7bWFvegk5PWzVbYMQp1OWdMR0jvumL5S3VWewtDx3Cd64yXbx2vrlRuhPJwv6865WSJ26
+	Q6PIYh6gGw+ZL0uVOMoRDeyoLyYcj/Hz8jFvdYA==
+X-Received: by 2002:a05:6000:1847:b0:4ad:d65:ab13 with SMTP id ffacd0b85a97d-4ad0d65aed2mr26035543f8f.51.1795527054608;
+        Tue, 24 Nov 2026 05:30:54 -0800 (PST)
+Message-ID: <f1be8280-ee73-466c-bcf9-cbc1c00eda07@suse.com>
+Date: Tue, 24 Nov 2026 14:30:53 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 1/2] x86/PV: correct descriptor read sanity check
+Subject: [PATCH 2/2] x86/PV: modernize descriptor read sanity checks
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -129,10 +129,10 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
 In-Reply-To: <ba2a2c31-24c4-4ca2-a2db-fa3745ce2fcb@suse.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c201ff/1795527031-F54AC2A1-88CB444A/10/78276251493
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-bad1c0/1795527056-BEAD8034-F6BC60E0/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 1370
+X-purgate-size: 1649
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -141,42 +141,46 @@ X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Checking what LAR returns against what we read from the descriptor table
-requires that we check unaltered values. The clearing of L therefore needs
-limiting: Do that just in *ar, and use the then unaltered desc.b in the
-BUG_ON() instead.
+First of all use ASM_FLAG_OUT() for better codegen with new enough gcc.
+Then further change l's type, such that the compiler no longer has a need
+to emit an extra MOV ahead of the CMP: LAR zero-extends the result just
+fine.
 
-Fixes: 8d6e195a2def ("Adjust emulation code to deal with compatibility mode guests")
-Reported-by: Roger Pau Monné <roger.pau@amd.com>
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
+---
+Imo the #ifndef NDEBUG (soon to be switched to CONFIG_DEBUG) could be
+dropped altogether, by using ASSERT() in place of BUG_ON(), and by
+dropping the volatile from the asm()s. Then the compiler ought to be
+able to eliminate the entire if() in release builds.
 
 --- a/xen/arch/x86/pv/emulate.c
 +++ b/xen/arch/x86/pv/emulate.c
-@@ -37,11 +37,12 @@ int pv_emul_read_descriptor(unsigned int
-             return 0;
-     }
+@@ -52,17 +52,20 @@ int pv_emul_read_descriptor(unsigned int
+ #ifndef NDEBUG
+         if ( sel > 3 )
+         {
+-            unsigned int a, l;
+-            unsigned char valid;
++            unsigned int a;
++            unsigned long l;
++            bool valid;
  
--    if ( !insn_fetch )
--        desc.b &= ~_SEGMENT_L;
+             asm volatile (
+-                "larl %2,%0 ; setz %1"
+-                : "=r" (a), "=qm" (valid) : "rm" (sel));
++                "lar %[sel], %[ar];" ASM_FLAG_OUT(, "setz %[zf]")
++                : [ar] "=r" (a), ASM_FLAG_OUT("=@ccz", [zf] "=qm") (valid)
++                : [sel] "rm" (sel));
+             BUG_ON(valid && ((a ^ desc.b) & 0x00f0ff00));
  
-     *ar = desc.b & 0x00f0ff00;
--    if ( !(desc.b & _SEGMENT_L) )
-+    if ( !insn_fetch )
-+        *ar &= ~_SEGMENT_L;
-+
-+    if ( !(*ar & _SEGMENT_L) )
-     {
-         *base = ((desc.a >> 16) + ((desc.b & 0xff) << 16) +
-                  (desc.b & 0xff000000U));
-@@ -57,7 +58,8 @@ int pv_emul_read_descriptor(unsigned int
              asm volatile (
-                 "larl %2,%0 ; setz %1"
-                 : "=r" (a), "=qm" (valid) : "rm" (sel));
--            BUG_ON(valid && ((a & 0x00f0ff00) != *ar));
-+            BUG_ON(valid && ((a ^ desc.b) & 0x00f0ff00));
-+
-             asm volatile (
-                 "lsll %2,%0 ; setz %1"
-                 : "=r" (l), "=qm" (valid) : "rm" (sel));
+-                "lsll %2,%0 ; setz %1"
+-                : "=r" (l), "=qm" (valid) : "rm" (sel));
++                "lsl %[sel], %k[lim];" ASM_FLAG_OUT(, "setz %[zf]")
++                : [lim] "=r" (l), ASM_FLAG_OUT("=@ccz", [zf] "=qm") (valid)
++                : [sel] "rm" (sel));
+             BUG_ON(valid && (l != *limit));
+         }
+ #endif
 
 
