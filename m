@@ -2,40 +2,44 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 47924606A321
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2026 16:22:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EAA97606A32A
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2026 16:45:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=manguebit.org header.i=@manguebit.org header.a=rsa-sha256 header.s=dkim header.b=Au1x/Qfi
-Received: from list by lists.xenproject.org with outflank-mailman.1502583.1698611 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.a=rsa-sha256 header.s=20201203 header.b=gYew8w2z
+Received: from list by lists.xenproject.org with outflank-mailman.1502607.1698620 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWFlT-0007hA-9L; Wed, 25 Nov 2026 16:22:35 +0000
+	id 1xWG7p-0003Es-3F; Wed, 25 Nov 2026 16:45:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1502583.1698611; Wed, 25 Nov 2026 16:22:35 +0000
+Received: by outflank-mailman (output) from mailman id 1502607.1698620; Wed, 25 Nov 2026 16:45:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWFlT-0007h3-6c; Wed, 25 Nov 2026 16:22:35 +0000
-Received: by outflank-mailman (input) for mailman id 1502583;
- Wed, 25 Nov 2026 16:20:51 +0000
+	id 1xWG7p-0003El-0e; Wed, 25 Nov 2026 16:45:41 +0000
+Received: by outflank-mailman (input) for mailman id 1502607;
+ Wed, 25 Nov 2026 16:45:40 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <pc@manguebit.org>) id 1xWFjn-0007UH-L4
- for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 16:20:51 +0000
+ (envelope-from <corbet@lwn.net>) id 1xWG7o-0003EZ-3a
+ for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 16:45:40 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xWFjm-005sAl-U9
- for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 17:20:50 +0100
+ id 1xWG7n-005wDL-BR
+ for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 17:45:39 +0100
 Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <pc@manguebit.org>)
- id 6b070ae2-bab6-0a2a0a5309dd-0a2a4504c37e-2
- for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 17:20:50 +0100
-Received: from [143.255.12.172] (helo=mx1.manguebit.org)
+ (envelope-from <corbet@lwn.net>)
+ id 6b0710a4-8faa-0a2a0a5109dd-0a2a45048562-20
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 17:45:38 +0100
+Received: from [45.79.88.28] (helo=ms.lwn.net)
  by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <pc@manguebit.org>)
- id 6b070ae0-b57f-0a2a45040019-8fff0cac8098-3
- for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 17:20:50 +0100
-Received: from pc by mx1.manguebit.org with local (Exim 4.100.1)
- id 1xWFjN-00000000vNZ-3XTu; Wed, 25 Nov 2026 13:20:25 -0300
+ (envelope-from <corbet@lwn.net>)
+ id 6b0710b0-b57f-0a2a45040019-2d4f581cbae0-3
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 17:45:38 +0100
+Received: from localhost (unknown [205.220.129.44])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1)
+ server-digest SHA256) (No client certificate requested)
+ by ms.lwn.net (Postfix) with ESMTPSA id 164CF410D0;
+ Wed, 25 Nov 2026 16:45:34 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -44,24 +48,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=dkim header.d=manguebit.org header.i="@manguebit.org" header.h="Content-Type:MIME-Version:Date:References:In-Reply-To:Subject:Cc:To:From:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=manguebit.org; s=dkim; h=Content-Type:MIME-Version:Date:References:
-	In-Reply-To:Subject:Cc:To:From:Message-ID:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=MFjp1Epxvbzt1A9g4t7Y/jDE3CxQAavGU4RMdlNgNPA=; b=Au1x/Qfixdt8Oeg5ELWQmTzZ7d
-	wr1MiZso849kQQI90RjKYgtWlHvOsL4sUODQa+yJU/QJtei3+nwrCl8XPzyxSYVWxD0jEkv9ZHfHG
-	OmNUZEcDaNBk4Nn1E9cP7BuRGcZNEM6J6xtS4Ket7/m79g97o7hU8kn2wKyFBLeu8gwPpXcQdviQ+
-	Hln2JCas14QUSmhfJsWIjqhstDco/PUWJlhmY/+248fQXkeCIGO5O9nEwcb7Q1W2v+0HrcyzdyrIT
-	XwITUgiGSX5J7ehQY0B1lclNs46kSXv1DsiPlzDA2AP0RSCXykcJrKqmOyVKoOLO8j21CyIPiZYaT
-	T4+/q8fw==;
-Message-ID: <9afd33b0951849b9a48c5a0783d76fde@manguebit.org>
-From: Paulo Alcantara <pc@manguebit.org>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20201203 header.d=lwn.net header.i="@lwn.net" header.h="From:To:Cc:Subject:In-Reply-To:References:Date"
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 164CF410D0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+	t=1795625135; bh=11zt4OupvieQqDw22Q2ubqyLm0TwPHTf9uDp8UQ/aNg=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+	b=gYew8w2zbH6+bi/mBbqli+h0aBDamw00BioPDCMMC4Es4g+qCaaIw8gBYOLhfGAsU
+	 9mfNHzR2Wjt3eb5ezNkPplfVvqDZB4yLXc7H/uIjYl6k/R0SNrt0O4pqewchTPc4H+
+	 DoPRzU4+fJgJOU7hPx03jLkV4HVaXJMTTjxyrWRVyiE+GFkUio915W5ZUB0L5VMnbm
+	 Z5AtjEERksNhEMgjG3ZSm0ynjzhzYrKmQP0JaqQq4T6DitPDhHE0cz5cUJ9ItE/n9j
+	 Ip9FDRPDTnpXpMfA3rcqvq+BtjVyvtC+AdbQzNra/9WErFSqw5foLA7PdpN6n18WG/
+	 9pepodyHhS3sA==
+From: Jonathan Corbet <corbet@lwn.net>
 To: Randy Dunlap <rdunlap@infradead.org>, linux-kernel@vger.kernel.org
-Cc: Randy Dunlap <rdunlap@infradead.org>, Jonathan Corbet <corbet@lwn.net>,
- Shuah Khan <skhan@linuxfoundation.org>, linux-doc@vger.kernel.org, David
- Hildenbrand <david@kernel.org>, Andrew Morton <akpm@linux-foundation.org>,
- Jason Gunthorpe <jgg@nvidia.com>, Leon Romanovsky <leonro@nvidia.com>,
+Cc: Randy Dunlap <rdunlap@infradead.org>, Shuah Khan
+ <skhan@linuxfoundation.org>, linux-doc@vger.kernel.org, David Hildenbrand
+ <david@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, Jason
+ Gunthorpe <jgg@nvidia.com>, Leon Romanovsky <leonro@nvidia.com>,
  linux-mm@kvack.org, Jaroslav Kysela <perex@perex.cz>, Takashi Iwai
  <tiwai@suse.com>, linux-sound@vger.kernel.org, Jens Axboe
  <axboe@kernel.dk>, linux-block@vger.kernel.org, Marcel Holtmann
@@ -90,11 +93,12 @@ Cc: Randy Dunlap <rdunlap@infradead.org>, Jonathan Corbet <corbet@lwn.net>,
  virtualization@lists.linux.dev, Jan Kara <jack@suse.cz>,
  linux-fsdevel@vger.kernel.org, Theodore Ts'o <tytso@mit.edu>,
  linux-ext4@vger.kernel.org, Mike Marshall <hubcap@omnibond.com>,
- devel@lists.orangefs.org, Namjae Jeon <linkinjeon@kernel.org>,
- linux-cifs@vger.kernel.org, Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu
- <chao@kernel.org>, linux-f2fs-devel@lists.sourceforge.net, Florian
- Fainelli <florian.fainelli@broadcom.com>, Broadcom internal kernel review
- list <bcm-kernel-feedback-list@broadcom.com>, Tzung-Bi Shih
+ devel@lists.orangefs.org, Paulo Alcantara <pc@manguebit.org>, Namjae Jeon
+ <linkinjeon@kernel.org>, linux-cifs@vger.kernel.org, Jaegeuk Kim
+ <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>,
+ linux-f2fs-devel@lists.sourceforge.net, Florian Fainelli
+ <florian.fainelli@broadcom.com>, Broadcom internal kernel review list
+ <bcm-kernel-feedback-list@broadcom.com>, Tzung-Bi Shih
  <tzungbi@kernel.org>, Benson Leung <bleung@chromium.org>, David Airlie
  <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Alex Deucher
  <alexander.deucher@amd.com>, Christian =?utf-8?Q?K=C3=B6nig?=
@@ -105,33 +109,50 @@ Cc: Randy Dunlap <rdunlap@infradead.org>, Jonathan Corbet <corbet@lwn.net>,
  intel-gfx@lists.freedesktop.org, Matthew Brost <matthew.brost@intel.com>,
  Thomas =?utf-8?Q?Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
  intel-xe@lists.freedesktop.org
-Subject: Re: [PATCH v2 10/12] docs: ioctl-number: update FS entries
-In-Reply-To: <20261119053514.255348-11-rdunlap@infradead.org>
-References: <20261119053514.255348-1-rdunlap@infradead.org>
- <20261119053514.255348-11-rdunlap@infradead.org>
-Date: Wed, 25 Nov 2026 13:20:25 -0300
+Subject: Re: [PATCH v3 00/12] docs: ioctl-number: update entries
+In-Reply-To: <20261125061340.3402300-1-rdunlap@infradead.org>
+References: <20261125061340.3402300-1-rdunlap@infradead.org>
+Date: Wed, 25 Nov 2026 09:45:27 -0700
+Message-ID: <875wxkx3ko.fsf@trenco.lwn.net>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
-X-purgate-ID: tlsNG-ebf023/1795623650-C1ED6B50-83504120/0/0
+X-purgate-ID: tlsNG-ebf023/1795625138-C1AD0B50-BC28723A/0/0
 X-purgate-type: clean
-X-purgate-size: 384
-X-Spam-Status: No, score=-7.8 required=3.0 tests=BAYES_00,DKIM_ADSP_ALL,
-	DKIM_INVALID,DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY autolearn=no autolearn_force=no version=4.0.1
+X-purgate-size: 1291
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
+	autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 Randy Dunlap <rdunlap@infradead.org> writes:
 
-> Update the list of files where filesystem ioctls are defined and update
-> the ranges of function numbers that are used.
+> Update file names that define ioctls and update the range of
+> ioctl function numbers that are used where they have changed.
 >
-> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-> ---
-> v2: address sashiko review comment (ext4 00-2F range referred to
->     the wrong file name)
+> [Since having multiple maintainers trying to merge these would
+> cause some conflicts, it would be more manageable for Jon to
+> take all of these through the docs-next tree.]
+>
+>  [PATCH 01/12 v2] docs: ioctl-number: update MM entries
+>  [PATCH 02/12 v2] docs: ioctl-number: update sound entries
+>  [PATCH 03/12 v2] docs: ioctl-number: update block entries
+>  [PATCH 04/12 v2] docs: ioctl-number: update networking entries
+>  [PATCH 05/12 v2] docs: ioctl-number: update video/fbdev entries
+>  [PATCH 06/12 v2] docs: ioctl-number: update SCSI entries
+>  [PATCH 07/12 v2] docs: ioctl-number: update MTD entries
+>  [PATCH 08/12 v2] docs: ioctl-number: update USB entries
+>  [PATCH 09/12 v2] docs: ioctl-number: update virtualization entries
+>  [PATCH 10/12 v2] docs: ioctl-number: update FS entries
+>  [PATCH 11/12 v2] docs: ioctl-number: update platform entries
+>  [PATCH 12/12 v2] docs: ioctl-number: update DRM entries
+>
+>  Documentation/userspace-api/ioctl/ioctl-number.rst |   91 ++++++++---
+>  1 file changed, 72 insertions(+), 19 deletions(-)
 
-Reviewed-by: Paulo Alcantara <pc@manguebit.org>
+I've applied the series, thanks.
+
+jon
 
