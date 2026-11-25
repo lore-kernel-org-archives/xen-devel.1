@@ -2,41 +2,41 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 87F6B606A6AC
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC1E5606A680
 	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2026 06:14:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=t0N3QvZj
-Received: from list by lists.xenproject.org with outflank-mailman.1501731.1697848 (Exim 4.92)
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=sbfW4h2/
+Received: from list by lists.xenproject.org with outflank-mailman.1501713.1697777 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xW6H0-0006Qp-B8; Wed, 25 Nov 2026 06:14:30 +0000
+	id 1xW6Gm-0004CV-Ak; Wed, 25 Nov 2026 06:14:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1501731.1697848; Wed, 25 Nov 2026 06:14:30 +0000
+Received: by outflank-mailman (output) from mailman id 1501713.1697777; Wed, 25 Nov 2026 06:14:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xW6H0-0006Ol-0E; Wed, 25 Nov 2026 06:14:30 +0000
-Received: by outflank-mailman (input) for mailman id 1501731;
- Wed, 25 Nov 2026 06:14:28 +0000
+	id 1xW6Gm-0004BU-3P; Wed, 25 Nov 2026 06:14:16 +0000
+Received: by outflank-mailman (input) for mailman id 1501713;
+ Wed, 25 Nov 2026 06:14:14 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <rdunlap@infradead.org>) id 1xW6Gy-0006ED-64
- for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 06:14:28 +0000
+ (envelope-from <rdunlap@infradead.org>) id 1xW6Gk-0003yq-G2
+ for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 06:14:14 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xW6Gx-00ABXn-IV
- for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 07:14:27 +0100
-Received: from [10.42.69.3] (helo=localhost)
+ id 1xW6Gj-001Cde-Sm
+ for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 07:14:13 +0100
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <rdunlap@infradead.org>)
- id 6b067caa-8faa-0a2a0a5109dd-0a2a45039fa2-36
- for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 07:14:27 +0100
+ id 6b067cb1-2eae-0a2a0a5409dd-0a2a4506d9fc-2
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 07:14:13 +0100
 Received: from [198.137.202.133] (helo=bombadil.infradead.org)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <rdunlap@infradead.org>)
- id 6b067cc2-fae8-0a2a45030019-c689ca85e566-3
- for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 07:14:27 +0100
+ id 6b067cb4-195a-0a2a45060019-c689ca85e7a6-3
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 07:14:13 +0100
 Received: from [50.53.43.113] (helo=bombadil.infradead.org)
  by bombadil.infradead.org with esmtpsa (Exim 4.100.1 #2 (Red Hat Linux))
- id 1xW6Gd-00000008Wvh-05Wr; Wed, 25 Nov 2026 06:14:07 +0000
+ id 1xW6GQ-00000008Wvh-0lyd; Wed, 25 Nov 2026 06:13:54 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -50,12 +50,12 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=HbuCV21suICAifmMr+QiJxglk35NFZTKGTKkvkyuZyo=; b=t0N3QvZj67sXAElPcQDRfFEeFC
-	Ry87q/HKHnd9AflpeJ6sdyDtMOspDD6dk2kaKcGI09Doxg/kOyBkkDwuQF/GwL+aUcraRQSMAI4gq
-	vaqJWlOuO16ACJ+hVxBTQvxMm6w7klhtRvz5Yuyb/9as7/epd7p8KXoZozPJ9vin16Qwnte6KAQDZ
-	B28OGP5xhj8FWN6iqYyBJVLmdncGI4T/+eayqDgNpmb6Hw4RS8zBiBjrlpxInv3X7OrcCLrJYK19C
-	NoN6ftlIGZXNkThIXdUqXsPtWw01Bnj1QiVeCmRzeFE66JRwhcWdPaXrSAfBriLmxjvU5NlxFqa4l
-	D51u5MqA==;
+	bh=RebRu2g/z31wGx+2OCPyrPhThAdN2yCx9u1zbQ7clX4=; b=sbfW4h2/B6I9JDHOZSZ9flrwqH
+	bhgZPywMW/8HTQaTMbMZKWKRmF/u4H8iCdmE2NXlrIG4l3MwtdK3OE1zXboVyKtO4xeMZ0w0La58S
+	NUE75yCeRbWpCVAQjyZpaIf80DbRSUhaAoWrrqLcAWR8iu4WOHNah3s4A4nj0JBDNqnhlSL3vIUzn
+	zDTTHK+2eUQZNijcwbCFLcBgvYFCfQ6LtgapA4kghONZMaWOka0RBTX02MgSmk/fuJzJpuoxgBYne
+	nZ/aqBW5VeYLOcer0h7Ymqf3LabTYXxS5PH5V6a/fF6uEcyOJXuoXqnamYCYTvhmMUeoOMSzKcIBX
+	rGjDwO8A==;
 From: Randy Dunlap <rdunlap@infradead.org>
 To: linux-kernel@vger.kernel.org
 Cc: Randy Dunlap <rdunlap@infradead.org>,
@@ -141,33 +141,34 @@ Cc: Randy Dunlap <rdunlap@infradead.org>,
 	Matthew Brost <matthew.brost@intel.com>,
 	=?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
 	intel-xe@lists.freedesktop.org
-Subject: [PATCH v3 10/12] docs: ioctl-number: update FS entries
-Date: Tue, 24 Nov 2026 22:13:37 -0800
-Message-ID: <20261125061340.3402300-11-rdunlap@infradead.org>
+Subject: [PATCH v3 04/12] docs: ioctl-number: update networking entries
+Date: Tue, 24 Nov 2026 22:13:31 -0800
+Message-ID: <20261125061340.3402300-5-rdunlap@infradead.org>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261125061340.3402300-1-rdunlap@infradead.org>
 References: <20261125061340.3402300-1-rdunlap@infradead.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-33051d/1795587267-6DCD34E9-58DD80C9/0/0
+X-purgate-ID: tlsNG-16d1c6/1795587253-1ECC577B-9405D9F3/0/0
 X-purgate-type: clean
-X-purgate-size: 5440
+X-purgate-size: 7224
 X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=4.0.1
+	UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=unavailable
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Update the list of files where filesystem ioctls are defined and update
+Update the list of files where networking ioctls are defined and update
 the ranges of function numbers that are used.
 
 Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
 ---
-v2: address sashiko review comment (ext4 00-2F range referred to
-    the wrong file name)
+v2: address sashiko comments (duplicat bnep.h entry; missing its
+    "conflict" marker);
+    drop moderated mailing lists
 v3: rebase
 
 [Since having multiple maintainers trying to merge these would
@@ -177,73 +178,102 @@ take all of these through the docs-next tree.]
 Cc: Jonathan Corbet <corbet@lwn.net>
 Cc: Shuah Khan <skhan@linuxfoundation.org>
 Cc: linux-doc@vger.kernel.org
-Cc: Jan Kara <jack@suse.cz>
-Cc: linux-fsdevel@vger.kernel.org
-Cc: "Theodore Ts'o" <tytso@mit.edu>
-Cc: linux-ext4@vger.kernel.org
-Cc: Mike Marshall <hubcap@omnibond.com>
-Cc: devel@lists.orangefs.org
-Cc: Paulo Alcantara <pc@manguebit.org>
-Cc: Namjae Jeon <linkinjeon@kernel.org>
-Cc: linux-cifs@vger.kernel.org
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: Chao Yu <chao@kernel.org>
-Cc: linux-f2fs-devel@lists.sourceforge.net
+Cc: Marcel Holtmann <marcel@holtmann.org>
+Cc: Luiz Augusto von Dentz <luiz.dentz@gmail.com>
+Cc: linux-bluetooth@vger.kernel.org
+Cc: Willem de Bruijn <willemdebruijn.kernel@gmail.com>
+Cc: Jason Wang <jasowangio@gmail.com>
+Cc: David Heidelberg <david@ixit.cz>
+Cc: oe-linux-nfc@lists.linux.dev
+Cc: Chas Williams <3chas3@gmail.com>
+Cc: "David S. Miller" <davem@davemloft.net>
+Cc: Eric Dumazet <edumazet@kernel.org>
+Cc: Jakub Kicinski <kuba@kernel.org>
+Cc: Paolo Abeni <pabeni@redhat.com>
+Cc: netdev@vger.kernel.org
 
- Documentation/userspace-api/ioctl/ioctl-number.rst |    9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
+ Documentation/userspace-api/ioctl/ioctl-number.rst |   22 +++++++----
+ 1 file changed, 14 insertions(+), 8 deletions(-)
 
 --- linux-next-20261123.orig/Documentation/userspace-api/ioctl/ioctl-number.rst
 +++ linux-next-20261123/Documentation/userspace-api/ioctl/ioctl-number.rst
-@@ -185,6 +185,7 @@ Code  Seq#    Include File
+@@ -130,8 +130,9 @@ Code  Seq#    Include File
+ 'A'   10-53  sound/core/pcm_compat.c                                   conflict!
+ 'B'   00-1F  linux/cciss_ioctl.h                                       conflict!
+ 'B'   00-0F  include/linux/pmu.h                                       conflict!
+-'B'   C0-FF  advanced bbus                                             <mailto:maassen@uni-freiburg.de>
++'B'   C0-FF  advanced bbus                                             conflict! <mailto:maassen@uni-freiburg.de>
+ 'B'   00-0F  xen/xenbus_dev.h                                          conflict!
++'B'   C8-D4  net/bluetooth/bnep/bnep.h                                 conflict! <mailto:linux-bluetooth@vger.kernel.org>
+ 'C'   all    linux/soundcard.h                                         conflict!
+ 'C'   00-68  sound/compress_offload.h                                  conflict!
+ 'C'   01-2F  linux/capi.h                                              conflict!
+@@ -172,10 +173,9 @@ Code  Seq#    Include File
+ 'H'   FC     sound/pci/asihpi/hpios.h                                  conflict!
+ 'H'   00-0F  uapi/misc/habanalabs.h                                    conflict!
+ 'H'   A0     uapi/linux/usb/cdc-wdm.h
+-'H'   C0-F0  net/bluetooth/hci.h                                       conflict!
++'H'   C0-F0  net/bluetooth/hci_sock.h                                  conflict!
+ 'H'   C0-DF  net/bluetooth/hidp/hidp.h                                 conflict!
+ 'H'   C0-DF  net/bluetooth/cmtp/cmtp.h                                 conflict!
+-'H'   C0-DF  net/bluetooth/bnep/bnep.h                                 conflict!
+ 'H'   F1     linux/hid-roccat.h                                        <mailto:erazor_de@users.sourceforge.net>
+ 'H'   F8-FE  sound/firewire.h                                          conflict!
  'I'   all    linux/isdn.h                                              conflict!
- 'I'   00-0F  drivers/isdn/divert/isdn_divert.h                         conflict!
- 'I'   40-4F  linux/mISDNif.h                                           conflict!
-+'I'   00     linux/inotify.h
- 'K'   all    linux/kd.h
- 'L'   00-1F  linux/loop.h                                              conflict!
- 'L'   10-21  drivers/scsi/mpt3sas/mpt3sas_ctl.h                        conflict!
-@@ -274,7 +275,7 @@ Code  Seq#    Include File
- 'f'   00-1F  linux/ext2_fs.h                                           conflict!
- 'f'   00-1F  linux/ext3_fs.h                                           conflict!
- 'f'   00-0F  fs/jfs/jfs_dinode.h                                       conflict!
--'f'   00-0F  fs/ext4/ext4.h                                            conflict!
-+'f'   00-2F  fs/ext4/ext4.h, uapi/linux/ext4.h                         conflict!
- 'f'   00-0F  linux/fs.h                                                conflict!
+@@ -219,11 +219,12 @@ Code  Seq#    Include File
+ 'T'   all    linux/soundcard.h                                         conflict!
+ 'T'   00-AF  sound/asound.h                                            conflict!
+ 'T'   all    arch/x86/include/asm/ioctls.h                             conflict!
+-'T'   C0-DF  linux/if_tun.h                                            conflict!
++'T'   C0-E3  linux/if_tun.h                                            conflict!
+ 'U'   all    sound/asound.h                                            conflict!
+ 'U'   00-CF  linux/uinput.h                                            conflict!
+ 'U'   00-EF  linux/usbdevice_fs.h
+ 'U'   C0-CF  drivers/bluetooth/hci_uart.h
++'U'   00     net/nfc/nci_core.h                                        conflict!
+ 'V'   all    linux/vt.h                                                conflict!
+ 'V'   all    linux/videodev2.h                                         conflict!
+ 'V'   C0     linux/ivtvfb.h                                            conflict!
+@@ -242,8 +243,8 @@ Code  Seq#    Include File
+ 'Z'   14-15  drivers/message/fusion/mptctl.h
+ '['   00-3F  linux/usb/tmc.h                                           USB Test and Measurement Devices
+                                                                        <mailto:gregkh@linuxfoundation.org>
+-'a'   all    linux/atm*.h, linux/sonet.h                               ATM on linux
+-                                                                       <http://lrcwww.epfl.ch/>
++'a'   all    linux/atm*.h, linux/sonet.h, linux/atmbr2684.h            ATM on linux
++             linux/atmdev.h, net/atm/ioctl.c                           <http://lrcwww.epfl.ch/>
+ 'b'   00-FF                                                            conflict! bit3 vme host bridge
+                                                                        <mailto:natalia@nikhefk.nikhef.nl>
+ 'b'   00-0F  linux/dma-buf.h                                           conflict!
+@@ -264,6 +265,7 @@ Code  Seq#    Include File
  'f'   00-0F  fs/ocfs2/ocfs2_fs.h                                       conflict!
  'f'   13-27  linux/fscrypt.h
-@@ -299,6 +300,7 @@ Code  Seq#    Include File
- 'k'   00-0F  linux/spi/spidev.h                                        conflict!
- 'k'   00-05  video/kyro.h                                              conflict!
- 'k'   10-17  linux/hsi/hsi_char.h                                      HSI character device
-+'k'   01-0F  fs/orangefs/protocol.h                                    <mailto:devel@lists.orangefs.org>
- 'l'   00-3F  linux/tcfs_fs.h                                           transparent cryptographic file system
-                                                                        <http://web.archive.org/web/%2A/http://mikonos.dia.unisa.it/tcfs>
- 'l'   40-7F  linux/udf_fs_i.h                                          in development:
-@@ -372,7 +374,7 @@ Code  Seq#    Include File
- 0x92  00-0F  drivers/usb/mon/mon_bin.c
- 0x93  60-7F  linux/auto_fs.h
- 0x94  all    fs/btrfs/ioctl.h                                          Btrfs filesystem
--             and linux/fs.h                                            some lifted to vfs/generic
-+0x94  all    linux/fs.h                                                some lifted from Btrfs to vfs/generic
- 0x97  00-7F  fs/ceph/ioctl.h                                           Ceph file system
- 0x99  00-0F                                                            537-Addinboard driver
-                                                                        <mailto:buk@buks.ipn.de>
-@@ -440,7 +442,7 @@ Code  Seq#    Include File
- 0xCC  00-0F  drivers/misc/ibmvmc.h                                     pseries VMC driver
- 0xCD  01     linux/reiserfs_fs.h                                       Dead since 6.13
- 0xCE  01-02  uapi/linux/cxl_mem.h                                      Compute Express Link Memory Devices
--0xCF  02     fs/smb/client/cifs_ioctl.h
-+0xCF  01-0F  fs/smb/client/cifs_ioctl.h                                <mailto:linux-cifs@vger.kernel.org>
- 0xDD  00-3F                                                            ZFCP device driver see drivers/s390/scsi/
-                                                                        <mailto:aherrman@de.ibm.com>
- 0xE5  00-3F  linux/fuse.h
-@@ -449,6 +451,7 @@ Code  Seq#    Include File
- 0xEF  00-0F  uapi/linux/ntfs.h                                         NTFS
- 0xF3  00-3F  drivers/usb/misc/sisusbvga/sisusb.h                       sisfb
- 0xF3  00-3F  video/sisfb.h                                             <mailto:thomas@winischhofer.net>
-+0xF5  01-1F  uapi/linux/f2fs.h                                         <mailto:linux-f2fs-devel@lists.sourceforge.net>
- 0xF6  all                                                              LTTng Linux Trace Toolkit Next Generation
-                                                                        <mailto:mathieu.desnoyers@efficios.com>
- 0xF8  all    arch/x86/include/uapi/asm/amd_hsmp.h                      AMD HSMP EPYC system management interface driver
+ 'f'   81-8F  linux/fsverity.h
++'f'   7b-7c  arch/{alpha,mips,sh,xtensa}/include/uapi/asm/sockios.h
+ 'g'   00-0F  linux/usb/gadgetfs.h
+ 'g'   20-2F  linux/usb/g_printer.h
+ 'g'   01-0F  mm/gup_test.h                                             conflict!
+@@ -308,8 +310,11 @@ Code  Seq#    Include File
+ 'q'   80-FF  linux/telephony.h                                         Internet PhoneJACK, Internet LineJACK
+              linux/ixjuser.h                                           <http://web.archive.org/web/%2A/http://www.quicknet.net>
+ 'r'   00-1F  linux/msdos_fs.h and fs/fat/dir.c
+-'s'   all    linux/cdk.h
++'s'   all    linux/cdk.h                                               conflict!
++'s'   07-09  arch/{alpha,mips,sh,xtensa}/include/uapi/asm/sockios.h    conflict!
++'s'   64-65  arch/sh/include/uapi/asm/sockios.h                        conflict!
+ 't'   00-7F  linux/ppp-ioctl.h
++'t'   46-4D  drivers/net/ppp/ppp_generic.c
+ 't'   80-8F  linux/isdn_ppp.h
+ 't'   90-91  linux/toshiba.h                                           toshiba and toshiba_acpi SMM
+ 'u'   00-1F  linux/smb_fs.h                                            gone
+@@ -334,7 +339,8 @@ Code  Seq#    Include File
+ '|'   80-9F  samples/                                                  Any sample and example drivers
+ 0x80  00-1F  linux/fb.h
+ 0x81  00-1F  linux/vduse.h
+-0x89  00-06  arch/x86/include/asm/sockios.h
++0x89  00-07  asm-generic/sockios.h
++0x89  06-07  linux/sockios.h
+ 0x89  0B-DF  linux/sockios.h
+ 0x89  E0-EF  linux/sockios.h                                           SIOCPROTOPRIVATE range
+ 0x89  F0-FF  linux/sockios.h                                           SIOCDEVPRIVATE range
 
