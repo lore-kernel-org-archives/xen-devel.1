@@ -2,43 +2,42 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ACBC9606A31E
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2026 22:29:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=NmP5law5
-Received: from list by lists.xenproject.org with outflank-mailman.1502862.1698764 (Exim 4.92)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A046606A31E
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2026 22:37:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1502871.1698774 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWLUI-0008Qj-PZ; Wed, 25 Nov 2026 22:29:14 +0000
+	id 1xWLcV-00022N-Ie; Wed, 25 Nov 2026 22:37:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1502862.1698764; Wed, 25 Nov 2026 22:29:14 +0000
+Received: by outflank-mailman (output) from mailman id 1502871.1698774; Wed, 25 Nov 2026 22:37:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWLUI-0008Qc-N5; Wed, 25 Nov 2026 22:29:14 +0000
-Received: by outflank-mailman (input) for mailman id 1502862;
- Wed, 25 Nov 2026 22:29:13 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xWLcV-00022G-FR; Wed, 25 Nov 2026 22:37:43 +0000
+Received: by outflank-mailman (input) for mailman id 1502871;
+ Wed, 25 Nov 2026 22:37:41 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <frederic@kernel.org>) id 1xWLUH-0008QW-7L
- for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 22:29:13 +0000
+ (envelope-from <ehem@m5p.com>) id 1xWLcT-00022A-KM
+ for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 22:37:41 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xWLUG-00DZur-5N
- for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 23:29:12 +0100
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xWLcS-00EZRq-Sj; Wed, 25 Nov 2026 23:37:40 +0100
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <frederic@kernel.org>)
- id 6b076123-2eae-0a2a0a5409dd-0a2a4508bb20-8
- for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 23:29:12 +0100
-Received: from [172.105.4.254] (helo=tor.source.kernel.org)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <frederic@kernel.org>)
- id 6b076046-f659-0a2a45080019-ac6904feb44c-3
- for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 23:25:11 +0100
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id D46FA62795;
- Wed, 25 Nov 2026 22:25:09 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8AD3F1F0089F;
- Wed, 25 Nov 2026 22:25:06 +0000 (UTC)
+ (envelope-from <ehem@m5p.com>)
+ id 6b076320-e002-0a2a0a5209dd-0a2a4507d60a-24
+ for <multiple-recipients>; Wed, 25 Nov 2026 23:37:40 +0100
+Received: from [74.104.188.4] (helo=mailhost.m5p.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <ehem@m5p.com>)
+ id 6b076332-b4ea-0a2a45070019-4a68bc04aec8-3
+ for <multiple-recipients>; Wed, 25 Nov 2026 23:37:40 +0100
+Received: from m5p.com (mailhost.m5p.com [IPv6:fdc4:6ee8:648f:6bf6:0:0:0:f7])
+ by mailhost.m5p.com (8.18.1/8.17.1) with ESMTPS id 6APMTZvp072507
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
+ Wed, 25 Nov 2026 17:30:01 -0500 (EST) (envelope-from ehem@m5p.com)
+Received: (from ehem@localhost)
+ by m5p.com (8.18.1/8.15.2/Submit) id 6APMTZts072506;
+ Wed, 25 Nov 2026 14:29:35 -0800 (PST) (envelope-from ehem)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -47,95 +46,66 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="From:To:Cc:Subject:Date:In-Reply-To:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795645509;
-	bh=Hv7SBVML9XzIUft1jnff7+5QLjc3MtQ8AT9Ecf5l9sk=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=NmP5law51IXeoUZCzLDT0cKiztrkQhG0aJwxHOSUCBtfAfcECYZX81p+3rT9SZAbA
-	 MgnQIF6cci99zm/LFMNk1n2TiHvQS2w8iWyWwMRFpbaS8nxmErolyLQZRwFgYG+cup
-	 ybLqEAnYQ9Yv0av5lAoI4B00e36nwnnVS4kxVZ8Kr1rEMFCEqaScGvZSymsqPoVt6j
-	 NcJbodrSSIsgILfHAW1jOb+T5CFNLaTTZliNI2QQpOd0D7aHrUlI5K7V1zHpVaZzkx
-	 lJKOSO8bNAN2Xv0+WUWdwZlWP/QiAvinHgatcrgaA3OtI8vltvkUq2jGITwrkWjXp2
-	 Ghs7gA1lJqJ+w==
-From: Frederic Weisbecker <frederic@kernel.org>
-To: LKML <linux-kernel@vger.kernel.org>
-Cc: Frederic Weisbecker <frederic@kernel.org>,
-	"Paul E. McKenney" <paulmck@kernel.org>,
-	Marco Crivellari <marco.crivellari@suse.com>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Phil Auld <pauld@redhat.com>,
-	Russell King <linux@armlinux.org.uk>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Thomas Gleixner <tglx@kernel.org>,
-	Waiman Long <longman@redhat.com>,
-	linux-arm-kernel@lists.infradead.org,
-	xen-devel@lists.xenproject.org,
-	Michael Kelley <mhklinux@outlook.com>
-Subject: [PATCH 41/47] ARM: xen: Move CPUHP_AP_ARM_XEN_STARTING post stop_machine()
-Date: Wed, 25 Nov 2026 23:22:24 +0100
-Message-ID: <20261125222230.22508-42-frederic@kernel.org>
-X-Mailer: git-send-email 2.56.1
-In-Reply-To: <20261125222230.22508-1-frederic@kernel.org>
-References: <20261125222230.22508-1-frederic@kernel.org>
+Authentication-Results: eu.smtp.expurgate.cloud; none
+Date: Wed, 25 Nov 2026 14:29:35 -0800
+From: Elliott Mitchell <ehem+xen@m5p.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+        Anthony PERARD <anthony.perard@vates.tech>,
+        Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+        Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger@xenproject.org>,
+        Stefano Stabellini <sstabellini@kernel.org>,
+        xen-devel@lists.xenproject.org
+Subject: Re: [PATCH 2/5] Config.mk: record hash of SeaBIOS tag
+Message-ID: <awdhT9wjUxndiFWG@mattapan.m5p.com.>
+References: <cover.1792436534.git.ehem+xen@m5p.com>
+ <9771fce7e080b2d64fd9535b6e38d70781eb2de3.1792436534.git.ehem+xen@m5p.com>
+ <0fc3eb31-1aac-4b0e-8f9a-ae947dabe81d@suse.com>
+ <au_lyioQRMuKkoqJ@mattapan.m5p.com.>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1795645511-D4F4F87B-33EDFD5A/13/0
-X-purgate-type: clean
-X-purgate-size: 1785
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <au_lyioQRMuKkoqJ@mattapan.m5p.com.>
+X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY autolearn=no autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
+X-purgate-ID: tlsNG-ef75cf/1795646260-A68D9AE4-F1563579/0/0
+X-purgate-type: clean
+X-purgate-size: 1443
 
-Between CPUHP_TEARDOWN_CPU and CPUHP_AP_OFFLINE, stop_machine executes
-all the teardown callbacks while temporarily stopping/pausing all CPUs
-in the system. This doesn't mix well with running RT or isolated tasks.
+On Sat, Nov 07, 2026 at 07:00:26PM -0800, Elliott Mitchell wrote:
+> 
+> The situation with Qemu is far more concerning.  Since
+> $(QEMU_UPSTREAM_REVISION) points at a branch on Xen's git server, every
+> time that branch moves you get a different build.  Since different
+> versions will have different bugs/features unless there is a public
+> record of where the branch was over time, older builds become impossible
+> to reproduce.  
+> 
+> The favored solution to these problems would be to switch to using
+> `git subtree`.  This though would be a pretty major move.  I was hoping
+> this series would get a discussion started about option.
 
-In order to transition smoothly from global stop_machine to finer
-grained synchronization between teardown callbacks and the other CPUs,
-a new stop machine post function has been introduced to be executed
-after the main one with IRQs still disabled while other CPUs can exit
-stop_machine().
+I suppose I should ask given lack of response to this statement.  Do you
+feel this is something which should be brought up during the Community
+Call?
 
-The teardown callback here simply performs IRQ disablement, which can
-run concurrently with other CPUs.
+I'm rather unsure of which direction to go with the handling of those
+git repositories.  Some of the problem is the script is almost untouched
+since it was written 15 years ago.  This was just before the Xen Project
+moved from Mercurial to Git.  In turn that explains some of the
+characteristics which need to be updated.
 
-Move it to post stop_machine() accordingly.
 
-Signed-off-by: Frederic Weisbecker <frederic@kernel.org>
-Tested-by: Michael Kelley <mhklinux@outlook.com>
----
- kernel/cpu.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/kernel/cpu.c b/kernel/cpu.c
-index 47b33c6759aa..5c84a39f6f06 100644
---- a/kernel/cpu.c
-+++ b/kernel/cpu.c
-@@ -1275,7 +1275,7 @@ void clear_tasks_mm_cpumask(int cpu)
- static int take_cpu_down(void *_param)
- {
- 	struct cpuhp_cpu_state *st = this_cpu_ptr(&cpuhp_state);
--	enum cpuhp_state target = max((int)st->target, CPUHP_AP_DUMMY_TIMER_STARTING);
-+	enum cpuhp_state target = max((int)st->target, CPUHP_AP_ARM_XEN_STARTING);
- 	int err, cpu = smp_processor_id();
- 
- 	/* Ensure this CPU doesn't handle any more interrupts. */
-@@ -1303,7 +1303,7 @@ static int take_cpu_down_post(void *_param)
- 	enum cpuhp_state target = max((int)st->target, CPUHP_AP_OFFLINE);
- 	int cpu = smp_processor_id();
- 
--	WARN_ON(st->state != CPUHP_AP_DUMMY_TIMER_STARTING);
-+	WARN_ON(st->state != CPUHP_AP_ARM_XEN_STARTING);
- 	/*
- 	 * Invoke the former CPU_DYING callbacks. DYING must not fail!
- 	 */
 -- 
-2.56.1
+(\___(\___(\______          --=> 8-) EHM <=--          ______/)___/)___/)
+ \BS (    |         ehem+sigmsg@m5p.com  PGP 87145445         |    )   /
+  \_CS\   |  _____  -O #include <stddisclaimer.h> O-   _____  |   /  _/
+8A19\___\_|_/58D2 7E3D DDF4 7BA6 <-PGP-> 41D1 B375 37D0 8714\_|_/___/5445
+
 
 
