@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2452F606A31E
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2026 11:16:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E2FBF606A321
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2026 11:17:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=IxX86S5a
-Received: from list by lists.xenproject.org with outflank-mailman.1502081.1698072 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=MjCpkR3/
+Received: from list by lists.xenproject.org with outflank-mailman.1502089.1698080 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWAzA-00054F-6Z; Wed, 25 Nov 2026 11:16:24 +0000
+	id 1xWAzr-0005WH-EV; Wed, 25 Nov 2026 11:17:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1502081.1698072; Wed, 25 Nov 2026 11:16:24 +0000
+Received: by outflank-mailman (output) from mailman id 1502089.1698080; Wed, 25 Nov 2026 11:17:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWAzA-000548-3I; Wed, 25 Nov 2026 11:16:24 +0000
-Received: by outflank-mailman (input) for mailman id 1502081;
- Wed, 25 Nov 2026 11:16:22 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xWAzr-0005WA-BB; Wed, 25 Nov 2026 11:17:07 +0000
+Received: by outflank-mailman (input) for mailman id 1502089;
+ Wed, 25 Nov 2026 11:17:05 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <xadimgnik@gmail.com>) id 1xWAz8-000541-J3
- for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 11:16:22 +0000
+ (envelope-from <xadimgnik@gmail.com>) id 1xWAzp-0005W3-I6
+ for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 11:17:05 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xWAz7-00Bt7W-Ot
- for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 12:16:21 +0100
-Received: from [10.42.69.2] (helo=localhost)
+ id 1xWAzo-004yRB-Un
+ for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 12:17:04 +0100
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <xadimgnik@gmail.com>)
- id 6b06c378-2eae-0a2a0a5409dd-0a2a4502bd14-38
- for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 12:16:21 +0100
-Received: from [209.85.208.53] (helo=mail-ed1-f53.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6b06c3af-2eae-0a2a0a5409dd-0a2a450bcf42-10
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 12:17:04 +0100
+Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <xadimgnik@gmail.com>)
- id 6b06c385-4900-0a2a45020019-d155d035f043-3
- for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 12:16:21 +0100
-Received: by mail-ed1-f53.google.com with SMTP id
- 4fb4d7f45d1cf-6ba1e22ff4dso6641015a12.2
- for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 03:16:21 -0800 (PST)
+ id 6b06c3b0-b7e8-0a2a450b0019-d1558029e959-3
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 12:17:04 +0100
+Received: by mail-wm1-f41.google.com with SMTP id
+ 5b1f17b1804b1-4bb6ba3b244so57707215e9.3
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 03:17:04 -0800 (PST)
 Received: from [10.45.18.224] ([15.248.2.8]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6ba9b131d3bsm5256928a12.34.2026.11.25.03.16.19
+ 5b1f17b1804b1-4bb90660cb4sm454867055e9.2.2026.11.25.03.17.02
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 25 Nov 2026 03:16:20 -0800 (PST)
+ Wed, 25 Nov 2026 03:17:03 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,52 +51,52 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795605381; x=1796210181; darn=lists.xenproject.org;
+        d=gmail.com; s=20260707; t=1795605424; x=1796210224; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:content-language
          :references:cc:to:subject:user-agent:mime-version:date:message-id
          :from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=4iv8A6gqUfnNbo5/jmNa9lhvSF2xOy75Oyi24duA5IU=;
-        b=IxX86S5aXXUz7GJI4dTVCvAe3y27uKmv5Ov1owXrcoMx4vZEdwifg+8ez9i9rihAZy
-         7iFXE4cd7PK7CoSI8fZM1PyR6XnYcJkTWVIys+jaJVLDEfScazK1YhVb/hVv8OQV4eJ/
-         Ove9R1XIJOFYvNwRBst5ORTIPB/VM1gIvZkaRTaZ3akWVizjxlAxBDkxqKJspdFSdQF/
-         6Yz5YmXoPYKqbdrB59Fz5HC6ghJW0BtKjo4oodC7CHqVKrDE1qWX1PIQSw3XDUz74pmH
-         IDdTMIpiDFDpvI/cvDl5YEFDA1kPpcaGX7o+S88ZX69ZSyIHg3E/AwuDbLLLgs+XF6cJ
-         kCPw==
+        bh=sDsbr5ve7lstRzCqqwaH7hey2ad4/GX/MTHn8iSlZz4=;
+        b=MjCpkR3/JrqVZWkfAwqhV+DeIMXRTpAMPLO71Dy6rq5pPO0ROsIJg8jJGqAiH2XYn5
+         0Fij5ocpFHdtVqyRRVBssHWpQI9FoH/tob3sq5txdlmu1pNlqm+vNBUh4CXsTgMzIury
+         s5RXcqU9+ZF++YmGYjKiQGpODo/lOjQP9e4w0OGv+QTwEUnkeUkjz+jl11bZGWsJxhoL
+         eir3A7vLJyP2JN6pFK28DmCBU+bkH2g8tPFJ9eZUTi2R45bWBbvgwhuT31nF9tVlFnJP
+         DNYl/oG0IzPQetBzDmWmXRHOKDbTXnqBG17yIYJitv4wmLj/QZeBj5XebGX4r7S8WoR0
+         1zIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795605381; x=1796210181;
+        d=1e100.net; s=20260707; t=1795605424; x=1796210224;
         h=content-transfer-encoding:content-type:in-reply-to:content-language
          :references:cc:to:subject:user-agent:mime-version:date:message-id
          :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=4iv8A6gqUfnNbo5/jmNa9lhvSF2xOy75Oyi24duA5IU=;
-        b=JJRuy7JHjyaxkm3bjcpvNNEBYjO+ymj9omCd2/BBqA/x2oUH6mBHHjveEI23L2xR0Y
-         1bS4DASSMV2TERbVA5OYIOEr5T2ZbUulgewqC5pFJzcg6rv0QhZ7Qac7QN0/Re4OnJQW
-         XpnIfZvZnaFpYhOQxshpDZ8+GlVgNyd2UHMXEVBV9cUA4lUnFUn5hiFf9TF5gpy0tW4E
-         NReAVOXLu7tWzIiH+Mg2MEVmBw0ofSHi92q08IpGKqvcWoLVkufOMpg9MwfyiETVVDQQ
-         OjLLnzQ40rVJG0Gec1mLr+TRgFKEGYOAq2PNWrfTr/5O85hAeDdsnnU0zra8AASelCkp
-         /D6w==
-X-Gm-Message-State: APuU4Z+NHbh0b/QZVA1ge+2URFluJeaHhIBQoOh7vzanJ+W6P2AhZ4ms
-	SuAJZgQ9oqAXuShV80PwvMzp8PyNXGxTm8N5r3ssu8h+9bvC0dx4isFb
-X-Gm-Gg: AZFdTZds/2r+EToT8BS+MMlx1WkvDECc7O1Z7S3lVPjtqCwlMTv9K/3Re4fqdJZiebY
-	9QL0Ixet2BZvZpSP/JjXSXoBBJMa8W9bG9be3UjJBozUAUaLwL1PMcatw7omQjoW7nrLdWi/GzI
-	IksM0xABH6LvAhXWKnzhTSmHSASDO6mxIGsJc6PtMEDa70Wixd1deiPC2qCCRK5E5+IuHfqhrZp
-	bk2knPLfbZ96sHfvrPxxz21SiUJSxyRV1YccPtH/UK9JLmkOwg4BJvCTAIAhKfyuxpEGYzmWnvW
-	Va6i7Dp3EfRk8LEPw2RH56lMCgRXCQGNjFre1CHsj04H5yomX2GjT8DuXnLXa3aNrOyCAtZJqSM
-	RnT8JoD3OVtbgdRqS+V2aj1WrbJ2hLjrJicXB27333M3VdjiOL2kIzH5iPQlAT3bW9g6yFuJpPr
-	IcBm5aE40qO3FUrNvnXQVIsEuPuaQoCZ001EomUgc2OvNNAUcO1EZoRUzvmAsj1EA2sS/rSH/Dt
-	4Q/nOVuM8RUKpkRbLdAFT8GDVz184J1lmK30ciXAk2hrgAPDy+QOXbL3iB4wggUlAN3/OtLGtFT
-	cAiVPuZDyXUUWCXOWY5iU8vfAHGnpR1ovg==
-X-Received: by 2002:aa7:d351:0:b0:6b4:86e1:cc67 with SMTP id 4fb4d7f45d1cf-6ba37ea0b91mr9087571a12.27.1795605380976;
-        Wed, 25 Nov 2026 03:16:20 -0800 (PST)
+        bh=sDsbr5ve7lstRzCqqwaH7hey2ad4/GX/MTHn8iSlZz4=;
+        b=sO6yHZVtrz2p86PQqVuQnkSGZAKXTNUvO8tDyErOQcHeWVrM18HlhOmbSV9Pyf9tMv
+         kHYDab9plciDsimy4pCbPe1kUcRQoRtzvGXofjSyywrgT0PNV/gXQf36ZhY0XOA07nJE
+         Mp13J3098UFIygRBU9Owtd+Qh25HPSLy8aAxpcYip4rlFM4S+aVNljeALaY6dGocvqmE
+         B1UIMAwKqalbnGvrS1p/JAbal9jgwA7YnAl/VWPjZgO199eGUTYZk8bJvWoc4aBa1mRx
+         t2OQtkw8ZTNtfso5J4AMWAzg4Z9iXQ0TyNygeWRx+ZpLRvzNKl8kUAuWf4tCpjD+rTQu
+         QN3g==
+X-Gm-Message-State: APuU4Z+eJ083hx9k5ZK8awSwgGev5UUn4p2jJ/t42Z4A86xynqcod9L3
+	xxmuQCO5tsaCScIS38FozQxaIReLf+msLHNDilj5T9gBACP0two6venC
+X-Gm-Gg: AZFdTZeyrR8XLfCJlxyDCKST7Y54MuBaU1lHQVE0S6VEwKw+fyt6r9O50jwitqdCzXR
+	44OSXQ2CbV7z1QHTpcTpQRmhgG/mg7h2RSytP/F8ju+miQQs3cb7tKbuokoAlmPfnrvcATZ033h
+	2e6wEPiSZpMwuyHJ4QjNss4w73yb3t2/BpnN/rAX341WQhvEiF+rcHZB5YpPje+aAnXTBAyRP3b
+	dwzfRwrB73NZ/gaF88OtnrcEUzqg3FrtIjvzRSy2jjLhyHlkZSxWvbHdv5AaQiI8AcXClXs6FoS
+	9IMcOaBHLQFMRy+0uqpxK7NnvZTk5DdjVeRZIizyDk0wdUizELBfZcrL50neRZE7m6OvOd6mZkk
+	mKrXPo1f6Nap6dEtEb/xgN0NzI2PFWDBwO+feCiivi+rmhEVsqLdob9yINy/f96EX26V9ZE8Qm8
+	lyZcfpf6m/pSj4nezPhLMvNNp2342PMj1tcthHm1ayKXPWikdoDmBorotcTFVsUe0sTpDQhFQjM
+	nQLQUAPJM4IaN0RIyI+3+9gdJSYBxwUjwSOPlQaUNYb0ERGPyDsSay++II+3yn3Jclj9YZqTLu8
+	0UyIhPzfA+mRxYrQiW/w4dV/4+kpUfxSKPp+LAZYgUQiM5yjxTR86/U=
+X-Received: by 2002:a05:600c:45d4:b0:4a2:84c:52f3 with SMTP id 5b1f17b1804b1-4bb8880988cmr372815065e9.6.1795605424154;
+        Wed, 25 Nov 2026 03:17:04 -0800 (PST)
 From: Paul Durrant <xadimgnik@gmail.com>
 X-Google-Original-From: Paul Durrant <paul@xen.org>
-Message-ID: <8e8fa5ae-f30a-4e38-8aa8-cd46e3b4ca31@xen.org>
-Date: Wed, 25 Nov 2026 11:16:19 +0000
+Message-ID: <719ac82d-4638-43c1-b563-af0a33b25d1e@xen.org>
+Date: Wed, 25 Nov 2026 11:17:02 +0000
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 08/21] hw/i386/kvm/xen_evtchn: Fix off-by-one in
- do_remove_pci_vector()
+Subject: Re: [PATCH v1 09/21] i386/xen: Don't inject event on invalid port in
+ qmp_xen_event_inject()
 To: David Woodhouse <dwmw2@infradead.org>, qemu-devel@nongnu.org
 Cc: xen-devel@lists.xenproject.org, kvm@vger.kernel.org,
  Paolo Bonzini <pbonzini@redhat.com>, Peter Maydell
@@ -111,55 +111,37 @@ Cc: xen-devel@lists.xenproject.org, kvm@vger.kernel.org,
  Mark Syms <mark.syms@citrix.com>, Feifan Qian <bea1e@proton.me>,
  David Woodhouse <dwmw@amazon.co.uk>
 References: <20261124232247.23169-1-dwmw2@infradead.org>
- <20261124232247.23169-9-dwmw2@infradead.org>
+ <20261124232247.23169-10-dwmw2@infradead.org>
 Content-Language: en-US
-In-Reply-To: <20261124232247.23169-9-dwmw2@infradead.org>
+In-Reply-To: <20261124232247.23169-10-dwmw2@infradead.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1795605381-F05846C6-09D19D1F/0/0
+X-purgate-ID: tlsNG-42698a/1795605424-2C39B9EA-7A5A9D27/0/0
 X-purgate-type: clean
-X-purgate-size: 1358
-X-Spam-Status: No, score=-18.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FORGED_GMAIL_RCVD,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=4.0.1
+X-purgate-size: 645
+X-Spam-Status: No, score=-19.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 On 24/11/2026 16:22, David Woodhouse wrote:
 > From: David Woodhouse <dwmw@amazon.co.uk>
 > 
-> The empty-word optimisation advanced pirq by 64 on top of the loop
-> increment, so the first PIRQ of the following word was never examined
-> and could retain a stale device binding after the device was removed.
+> qmp_xen_event_inject() reported the invalid port with error_setg() but
+> then carried on regardless, passing it to set_port_pending(). Return
+> after setting the error.
 > 
-> Fixes: 6096cf7877bc ("hw/xen: Support MSI mapping to PIRQ")
+> Fixes: 507cb64d6e66 ("i386/xen: add monitor commands to test event injection")
 > Reported-by: Hui Peng <benquike@gmail.com>
 > Closes: https://gitlab.com/qemu-project/qemu/-/work_items/4525
 > Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 > ---
->   hw/i386/kvm/xen_evtchn.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+>   hw/i386/kvm/xen_evtchn.c | 1 +
+>   1 file changed, 1 insertion(+)
 > 
-> diff --git a/hw/i386/kvm/xen_evtchn.c b/hw/i386/kvm/xen_evtchn.c
-> index 3aff01b5d6c..d0807f5fece 100644
-> --- a/hw/i386/kvm/xen_evtchn.c
-> +++ b/hw/i386/kvm/xen_evtchn.c
-> @@ -1701,7 +1701,7 @@ static void do_remove_pci_vector(XenEvtchnState *s, PCIDevice *dev, int vector,
->            * and cache lines).
->            */
->           if (!(pirq & 63) && !(pirq_inuse_word(s, pirq))) {
-> -            pirq += 64;
-> +            pirq += 63;
-
-I guess I'm missing a subtlety here, but the test only fires if pirq is 
-a multiple of 64... so why is advancing to the next word by adding 64 
-not correct?
-
->               continue;
->           }
->           if (except_pirq && pirq == except_pirq) {
-
+Reviewed-by: Paul Durrant <paul@xen.org>
 
