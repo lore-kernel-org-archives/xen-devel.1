@@ -2,44 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EAA97606A32A
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2026 16:45:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A046606A687
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2026 17:45:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lwn.net header.i=@lwn.net header.a=rsa-sha256 header.s=20201203 header.b=gYew8w2z
-Received: from list by lists.xenproject.org with outflank-mailman.1502607.1698620 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=google header.b=N/MnlgZ2
+Received: from list by lists.xenproject.org with outflank-mailman.1502654.1698631 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWG7p-0003Es-3F; Wed, 25 Nov 2026 16:45:41 +0000
+	id 1xWH3d-0004Xs-5q; Wed, 25 Nov 2026 17:45:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1502607.1698620; Wed, 25 Nov 2026 16:45:41 +0000
+Received: by outflank-mailman (output) from mailman id 1502654.1698631; Wed, 25 Nov 2026 17:45:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWG7p-0003El-0e; Wed, 25 Nov 2026 16:45:41 +0000
-Received: by outflank-mailman (input) for mailman id 1502607;
- Wed, 25 Nov 2026 16:45:40 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xWH3d-0004Xl-1G; Wed, 25 Nov 2026 17:45:25 +0000
+Received: by outflank-mailman (input) for mailman id 1502654;
+ Wed, 25 Nov 2026 17:45:24 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <corbet@lwn.net>) id 1xWG7o-0003EZ-3a
- for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 16:45:40 +0000
+ (envelope-from <andrew.cooper3@citrix.com>) id 1xWH3c-0004Xf-6F
+ for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 17:45:24 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xWG7n-005wDL-BR
- for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 17:45:39 +0100
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xWH3a-008a14-QP
+ for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 18:45:22 +0100
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <corbet@lwn.net>)
- id 6b0710a4-8faa-0a2a0a5109dd-0a2a45048562-20
- for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 17:45:38 +0100
-Received: from [45.79.88.28] (helo=ms.lwn.net)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <corbet@lwn.net>)
- id 6b0710b0-b57f-0a2a45040019-2d4f581cbae0-3
- for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 17:45:38 +0100
-Received: from localhost (unknown [205.220.129.44])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1)
- server-digest SHA256) (No client certificate requested)
- by ms.lwn.net (Postfix) with ESMTPSA id 164CF410D0;
- Wed, 25 Nov 2026 16:45:34 +0000 (UTC)
+ (envelope-from <andrew.cooper3@citrix.com>)
+ id 6b071e9c-bab6-0a2a0a5309dd-0a2a450bd5ae-48
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 18:45:22 +0100
+Received: from [209.85.221.42] (helo=mail-wr1-f42.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <andrew.cooper3@citrix.com>)
+ id 6b071eb2-b7e8-0a2a450b0019-d155dd2ab472-3
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 18:45:22 +0100
+Received: by mail-wr1-f42.google.com with SMTP id
+ ffacd0b85a97d-492f0a1b685so4245582f8f.0
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 09:45:22 -0800 (PST)
+Received: from localhost.localdomain (host-78-146-248-75.as13285.net.
+ [78.146.248.75]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4ab6b205443sm37359968f8f.39.2026.11.25.09.45.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 25 Nov 2026 09:45:21 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -48,111 +50,227 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20201203 header.d=lwn.net header.i="@lwn.net" header.h="From:To:Cc:Subject:In-Reply-To:References:Date"
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 164CF410D0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-	t=1795625135; bh=11zt4OupvieQqDw22Q2ubqyLm0TwPHTf9uDp8UQ/aNg=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=gYew8w2zbH6+bi/mBbqli+h0aBDamw00BioPDCMMC4Es4g+qCaaIw8gBYOLhfGAsU
-	 9mfNHzR2Wjt3eb5ezNkPplfVvqDZB4yLXc7H/uIjYl6k/R0SNrt0O4pqewchTPc4H+
-	 DoPRzU4+fJgJOU7hPx03jLkV4HVaXJMTTjxyrWRVyiE+GFkUio915W5ZUB0L5VMnbm
-	 Z5AtjEERksNhEMgjG3ZSm0ynjzhzYrKmQP0JaqQq4T6DitPDhHE0cz5cUJ9ItE/n9j
-	 Ip9FDRPDTnpXpMfA3rcqvq+BtjVyvtC+AdbQzNra/9WErFSqw5foLA7PdpN6n18WG/
-	 9pepodyHhS3sA==
-From: Jonathan Corbet <corbet@lwn.net>
-To: Randy Dunlap <rdunlap@infradead.org>, linux-kernel@vger.kernel.org
-Cc: Randy Dunlap <rdunlap@infradead.org>, Shuah Khan
- <skhan@linuxfoundation.org>, linux-doc@vger.kernel.org, David Hildenbrand
- <david@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, Jason
- Gunthorpe <jgg@nvidia.com>, Leon Romanovsky <leonro@nvidia.com>,
- linux-mm@kvack.org, Jaroslav Kysela <perex@perex.cz>, Takashi Iwai
- <tiwai@suse.com>, linux-sound@vger.kernel.org, Jens Axboe
- <axboe@kernel.dk>, linux-block@vger.kernel.org, Marcel Holtmann
- <marcel@holtmann.org>, Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
- linux-bluetooth@vger.kernel.org, Willem de Bruijn
- <willemdebruijn.kernel@gmail.com>, Jason Wang <jasowangio@gmail.com>,
- David Heidelberg <david@ixit.cz>, oe-linux-nfc@lists.linux.dev, Chas
- Williams <3chas3@gmail.com>, "David S. Miller" <davem@davemloft.net>, Eric
- Dumazet <edumazet@kernel.org>, Jakub Kicinski <kuba@kernel.org>, Paolo
- Abeni <pabeni@redhat.com>, netdev@vger.kernel.org, Helge Deller
- <deller@gmx.de>, linux-fbdev@vger.kernel.org,
- dri-devel@lists.freedesktop.org, MPT-FusionLinux.pdl@broadcom.com, "James
- E.J. Bottomley" <James.Bottomley@HansenPartnership.com>, "Martin K.
- Petersen" <mkp@kernel.org>, linux-scsi@vger.kernel.org, Miquel Raynal
- <miquel.raynal@bootlin.com>, Richard Weinberger <richard@nod.at>, Vignesh
- Raghavendra <vigneshr@ti.com>, Zhihao Cheng <chengzhihao1@huawei.com>,
- linux-mtd@lists.infradead.org, Neill Kapron <nkapron@google.com>, Andrey
- Konovalov <andreyknvl@gmail.com>, Greg Kroah-Hartman
- <gregkh@linuxfoundation.org>, linux-usb@vger.kernel.org, Juergen Gross
- <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>,
- xen-devel@lists.xenproject.org, Hans de Goede <hansg@kernel.org>, Arnd
- Bergmann <arnd@arndb.de>, "Michael S. Tsirkin" <mst@redhat.com>, Eugenio
- =?utf-8?Q?P=C3=A9rez?= <eperezma@redhat.com>, Sean Christopherson
- <seanjc@google.com>,
- Paolo Bonzini <pbonzini@redhat.com>, kvm@vger.kernel.org,
- virtualization@lists.linux.dev, Jan Kara <jack@suse.cz>,
- linux-fsdevel@vger.kernel.org, Theodore Ts'o <tytso@mit.edu>,
- linux-ext4@vger.kernel.org, Mike Marshall <hubcap@omnibond.com>,
- devel@lists.orangefs.org, Paulo Alcantara <pc@manguebit.org>, Namjae Jeon
- <linkinjeon@kernel.org>, linux-cifs@vger.kernel.org, Jaegeuk Kim
- <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net, Florian Fainelli
- <florian.fainelli@broadcom.com>, Broadcom internal kernel review list
- <bcm-kernel-feedback-list@broadcom.com>, Tzung-Bi Shih
- <tzungbi@kernel.org>, Benson Leung <bleung@chromium.org>, David Airlie
- <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Alex Deucher
- <alexander.deucher@amd.com>, Christian =?utf-8?Q?K=C3=B6nig?=
- <christian.koenig@amd.com>,
- amd-gfx@lists.freedesktop.org, Jani Nikula <jani.nikula@linux.intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Rodrigo Vivi
- <rodrigo.vivi@intel.com>, Tvrtko Ursulin <tursulin@ursulin.net>,
- intel-gfx@lists.freedesktop.org, Matthew Brost <matthew.brost@intel.com>,
- Thomas =?utf-8?Q?Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
- intel-xe@lists.freedesktop.org
-Subject: Re: [PATCH v3 00/12] docs: ioctl-number: update entries
-In-Reply-To: <20261125061340.3402300-1-rdunlap@infradead.org>
-References: <20261125061340.3402300-1-rdunlap@infradead.org>
-Date: Wed, 25 Nov 2026 09:45:27 -0700
-Message-ID: <875wxkx3ko.fsf@trenco.lwn.net>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1795628722; x=1796233522; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=q7DzJYr240WJVp1CrVHniYceiB9BYQhoE3iB8e0M/QA=;
+        b=N/MnlgZ250elX5dtz56SfjSS7h/4LJ/LErpBYilVZ4efrtkGGGllM4jDPfKPc4dV5n
+         KBmT4iHTAUfV7Em8ubegJivrpfnZNDLBMZOeykHc9ZluJ6zWv5NDU4SwoqHT0h9YrH85
+         CT5IYo91l4EZkkVADdnXlOZ3h9G6LC0dFWiik=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795628722; x=1796233522;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=q7DzJYr240WJVp1CrVHniYceiB9BYQhoE3iB8e0M/QA=;
+        b=0dQq5UTv63rVlAGxbgtykvNVyFtJxefdPdfn7ZIWOyUZc2/mOgLSwWEEKV+3h9dYRO
+         aBD8Oxx69x1yH0siyR3Nc1picGW4nDuqVYyfs50fKdYj/wXSxUe8gwYxcR4gNljtOTlK
+         02wMvmmxpwaho5+CY1xGQWRFUyUuYsTF/ib6/xqNbnyQcKH++6MD1zMg4++WAIfva9WP
+         bwIQ1YYehTLqcohKQhrJXMIvXJA2MA1Dzwvo/NcKfsIggJK8l3h2aB9l3NLweWFn9pC0
+         0mWg0u4wpZWXk0dj0hU0OaYJmij1ttlLEcp1py0k4UBMWKD79wMBaHZd07If1lRF4fVv
+         /Bcg==
+X-Gm-Message-State: APuU4Z9n35ZyoTG3ORqJXxtyep9ohW6+alnRX9EIWtUBJujJmvxgHfmr
+	Mq5zQDh4CPtHFRyB728XRAICZdXO5dZpEdaEVjBAy6gcFtRMOAmO0Q4yOjoxu4O//c+4vdPbLNy
+	+4rCqFCA=
+X-Gm-Gg: AZFdTZcb077fLD6XcopNEGzKRV+/9yIRwpPj3j+zkcpmYIVNoJL5mkNQHF2RxVmm/Nk
+	dFg3wG6N72C5Ljm5DrECzWqwmwL3NPZkbn8dxtYU8Qx5Ws7xibAwZ2Vb2jELUyOHY3U+J9SOp4D
+	OjUxraUWiRM7lXpniTNhMl2WEhabzztWaAajQwsIFzOANPufOflX9Ozd+NBapC3tLuKGSszpd6F
+	qH4wVQ3I4wWyLuk/1ANWe2+3Ui6/0WWVjbVSzgpUMF6AES9qf4XCb4BgfoaAApVixzJxwSSM918
+	lA50ITqS0a0PDwLWxV6Y9onpDVJ2mM1qSr8wPFQxl4Oor47QVCbactCu4lrUFOHvNyHFT+AOxys
+	OfS8BfQ9pABR2tUsJe4cP+mDgtrEJU1o5QaOnc6soaL0xz4ogOk1THq2/bDgV/NuOFaPrw6Ln00
+	5lqK5FjbAxFqmdJHGvXL1uPz50GPq2zG9MQeT7Pp2Kq8B6QL8m9GeHe7kepQR0+TmnvQvFGNewa
+	2ZampdObk5eYEKM8lFTp6O8Sb94me+ZHzw6gXGSa5qPT2NhzozV71tn5h0fTl42szajNkZKX+0p
+	Gwz9rc3+H2CcrPoSWjz79XXCv69F4pPyy4BBrUSY0+iRJpFp+BiYi4MAQgmuFy27wUj0OBDKKj6
+	eBq8=
+X-Received: by 2002:a05:6000:2c13:b0:4a6:9f2f:4153 with SMTP id ffacd0b85a97d-4abaac57ba9mr35290778f8f.1.1795628721747;
+        Wed, 25 Nov 2026 09:45:21 -0800 (PST)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Doug Goldstein <cardoe@cardoe.com>,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Subject: [PATCH] CI: Add a SecureBoot/UKI test
+Date: Wed, 25 Nov 2026 17:45:19 +0000
+Message-Id: <20261125174519.643860-1-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-purgate-ID: tlsNG-ebf023/1795625138-C1AD0B50-BC28723A/0/0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-42698a/1795628722-A82F49EA-1C5D53E6/0/0
 X-purgate-type: clean
-X-purgate-size: 1291
-X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
-	autolearn=unavailable autolearn_force=no version=4.0.1
+X-purgate-size: 5615
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Randy Dunlap <rdunlap@infradead.org> writes:
+Debian 13 ships an OVMF image that is pre-enrolled with the snakeoil key.  The
+only problem using this is that sbsign requires an interactive prompt for the
+password, so arrange for container generation to strip the password; it's not
+a secret.
 
-> Update file names that define ioctls and update the range of
-> ioctl function numbers that are used where they have changed.
->
-> [Since having multiple maintainers trying to merge these would
-> cause some conflicts, it would be more manageable for Jon to
-> take all of these through the docs-next tree.]
->
->  [PATCH 01/12 v2] docs: ioctl-number: update MM entries
->  [PATCH 02/12 v2] docs: ioctl-number: update sound entries
->  [PATCH 03/12 v2] docs: ioctl-number: update block entries
->  [PATCH 04/12 v2] docs: ioctl-number: update networking entries
->  [PATCH 05/12 v2] docs: ioctl-number: update video/fbdev entries
->  [PATCH 06/12 v2] docs: ioctl-number: update SCSI entries
->  [PATCH 07/12 v2] docs: ioctl-number: update MTD entries
->  [PATCH 08/12 v2] docs: ioctl-number: update USB entries
->  [PATCH 09/12 v2] docs: ioctl-number: update virtualization entries
->  [PATCH 10/12 v2] docs: ioctl-number: update FS entries
->  [PATCH 11/12 v2] docs: ioctl-number: update platform entries
->  [PATCH 12/12 v2] docs: ioctl-number: update DRM entries
->
->  Documentation/userspace-api/ioctl/ioctl-number.rst |   91 ++++++++---
->  1 file changed, 72 insertions(+), 19 deletions(-)
+Extend the qemu-xtf infrasturcture with a UKI variant, sign the result with
+the snakeoil key, and use the snakeoil OVMF image.
 
-I've applied the series, thanks.
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Anthony PERARD <anthony.perard@vates.tech>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Michal Orzel <michal.orzel@amd.com>
+CC: Doug Goldstein <cardoe@cardoe.com>
+CC: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 
-jon
+Marek, I stol^W borrowed the vma and objtool runes from your related patch.
+I'm not overly happy with adding more tests which clone XTF like this, but it
+is easier to run manually than the full alpine version.
+
+python3-virt-firmware isn't strictly needed right now, but it's useful to edit
+OVMF_VARS when debugging.  A later strictnx test does need to use the package,
+although that's in a Fedora container for other reasons.
+---
+ automation/build/debian/13-x86_64.dockerfile  | 11 +++
+ automation/gitlab-ci/test.yaml                |  7 ++
+ automation/scripts/include/xtf-x86_64-efi-uki | 71 +++++++++++++++++++
+ 3 files changed, 89 insertions(+)
+ create mode 100644 automation/scripts/include/xtf-x86_64-efi-uki
+
+diff --git a/automation/build/debian/13-x86_64.dockerfile b/automation/build/debian/13-x86_64.dockerfile
+index 784299d52dc3..8efae0150a9b 100644
+--- a/automation/build/debian/13-x86_64.dockerfile
++++ b/automation/build/debian/13-x86_64.dockerfile
+@@ -57,8 +57,11 @@ RUN <<EOF
+         # for test phase, qemu-* jobs
+         busybox-static
+         expect
++        openssl
+         ovmf
++        python3-virt-firmware
+         qemu-system-x86
++        sbsigntool
+ 
+         # for build-each-commit-gcc
+         ccache
+@@ -66,6 +69,14 @@ RUN <<EOF
+ 
+     apt-get -y --no-install-recommends install "${DEPS[@]}"
+ 
++    # Strip the password off the snakeoil key to avoid sbsigntool wanting an
++    # interactive prompt
++    openssl rsa \
++            -in  /usr/share/ovmf/PkKek-1-snakeoil.key \
++            -out /usr/share/ovmf/PkKek-1-snakeoil-nopass.key \
++            -passin pass:snakeoil
++    chmod 644 /usr/share/ovmf/PkKek-1-snakeoil-nopass.key
++
+     rm -rf /var/lib/apt/lists*
+ EOF
+ 
+diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
+index 96127995d7be..cf4b7ed416b0 100644
+--- a/automation/gitlab-ci/test.yaml
++++ b/automation/gitlab-ci/test.yaml
+@@ -776,6 +776,13 @@ qemu-smoke-x86_64-gcc-efi:
+   needs:
+     - debian-13-x86_64-gcc-debug
+ 
++qemu-smoke-x86_64-gcc-efi-uki:
++  extends: .qemu-smoke-x86_64
++  script:
++    - ./automation/scripts/qemu-xtf.sh x86_64-efi-uki pv64 example 2>&1 | tee ${LOGFILE}
++  needs:
++    - debian-13-x86_64-gcc-debug
++
+ qemu-xtf-argo-x86_64-gcc-debug:
+   extends: .qemu-smoke-x86_64
+   variables:
+diff --git a/automation/scripts/include/xtf-x86_64-efi-uki b/automation/scripts/include/xtf-x86_64-efi-uki
+new file mode 100644
+index 000000000000..b47def06d49c
+--- /dev/null
++++ b/automation/scripts/include/xtf-x86_64-efi-uki
+@@ -0,0 +1,71 @@
++#!/bin/bash
++#
++# XTF test utilities (x86_64, EFI).
++#
++
++# Arch-specific environment overrides.
++function xtf_arch_prepare()
++{
++    export FW_PREFIX="${FW_PREFIX:-/usr/share/OVMF}"
++    export QEMU_PREFIX="${QEMU_PREFIX:-}"
++    export XEN_BINARY="${XEN_BINARY:-${WORKDIR}/xen.efi}"
++    export XEN_CMDLINE="${XEN_CMDLINE:-loglvl=all noreboot console_timestamps=boot console=com1}"
++    export XTF_SRC_BRANCH="${XTF_SRC_BRANCH:-master}"
++    export XTF_SRC_URI="${XTF_SRC_URI:-https://xenbits.xen.org/git-http/xtf.git}"
++    export XTF_SRC_VARIANTS="hvm64 pv64"
++}
++
++# Perform arch-specific XTF environment setup.
++function xtf_arch_setup()
++{
++    local esp_dir="${WORKDIR}/boot-esp"
++    local efi_dir="${esp_dir}/EFI/BOOT"
++
++    cat > ${WORKDIR}/xen.cfg <<EOF
++[global]
++default=test
++
++[test]
++options=${XEN_CMDLINE}
++kernel=kernel
++EOF
++
++    vma=$(objdump -h ${XEN_BINARY} | \
++              perl -ane 'if (/\..*/) { $vma=hex($F[2]) + hex($F[3]) }
++                         END { printf "0x%016x\n", ($vma + 0xfff) & ~0xfff }')
++
++    objcopy \
++        --add-section .config=${WORKDIR}/xen.cfg \
++        --change-section-vma .config=$vma \
++        --add-section .kernel=${XTF_BINARY} \
++        --change-section-vma .kernel=$(( $vma + 0x100000 )) \
++        ${XEN_BINARY} \
++        ${XEN_BINARY}.uki
++
++    mkdir -p ${efi_dir}
++
++    sbsign --key  /usr/share/ovmf/PkKek-1-snakeoil-nopass.key \
++           --cert /usr/share/ovmf/PkKek-1-snakeoil.pem \
++           --output ${efi_dir}/BOOTX64.EFI \
++           ${XEN_BINARY}.uki
++
++    local ovmf_code=${FW_PREFIX}/OVMF_CODE_4M.snakeoil.fd
++    local ovmf_vars=${FW_PREFIX}/OVMF_VARS_4M.snakeoil.fd
++    local ovmf_format=raw
++
++    cp $ovmf_code ${WORKDIR}/OVMF_CODE
++    cp $ovmf_vars ${WORKDIR}/OVMF_VARS
++
++    export TEST_CMD="${QEMU_PREFIX}qemu-system-x86_64 \
++        -no-reboot \
++        -nographic \
++        -monitor none \
++        -serial stdio \
++        -m 2048 \
++        -smp 2 \
++        -M q35,kernel-irqchip=split \
++        -drive if=pflash,format=${ovmf_format},readonly=on,file=${WORKDIR}/OVMF_CODE \
++        -drive if=pflash,format=${ovmf_format},file=${WORKDIR}/OVMF_VARS \
++        -drive file=fat:rw:${esp_dir},media=disk,index=0,format=raw \
++    "
++}
+-- 
+2.39.5
+
 
