@@ -2,44 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2CF5A606A321
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2026 12:03:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DAD74606A31E
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2026 12:24:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=casper.20170209 header.b=PtVYB8gH
-Received: from list by lists.xenproject.org with outflank-mailman.1502297.1698278 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=google header.b=vYbIB5+B
+Received: from list by lists.xenproject.org with outflank-mailman.1502314.1698287 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWBiu-0000WT-GM; Wed, 25 Nov 2026 12:03:40 +0000
+	id 1xWC2Z-0004Y3-0P; Wed, 25 Nov 2026 12:23:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1502297.1698278; Wed, 25 Nov 2026 12:03:40 +0000
+Received: by outflank-mailman (output) from mailman id 1502314.1698287; Wed, 25 Nov 2026 12:23:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWBiu-0000WL-D8; Wed, 25 Nov 2026 12:03:40 +0000
-Received: by outflank-mailman (input) for mailman id 1502297;
- Wed, 25 Nov 2026 12:03:39 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <BATV+302b0ab082d37c9f612b+8494+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1xWBis-0000WF-VB
- for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 12:03:39 +0000
+	id 1xWC2Y-0004Xw-Ts; Wed, 25 Nov 2026 12:23:58 +0000
+Received: by outflank-mailman (input) for mailman id 1502314;
+ Wed, 25 Nov 2026 12:23:57 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xWC2X-0004Xq-R9
+ for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 12:23:57 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xWBir-0056Ei-GL
- for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 13:03:38 +0100
-Received: from [10.42.69.10] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <BATV+302b0ab082d37c9f612b+8494+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6b06ce8d-8faa-0a2a0a5109dd-0a2a450a8e04-40
- for <multiple-recipients>; Wed, 25 Nov 2026 13:03:37 +0100
-Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <BATV+302b0ab082d37c9f612b+8494+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6b06ce98-f2d2-0a2a450a0019-5a9b32229fd6-3
- for <multiple-recipients>; Wed, 25 Nov 2026 13:03:37 +0100
-Received: from 54-240-197-238.amazon.com ([54.240.197.238]
- helo=freeip.amazon.com)
- by casper.infradead.org with esmtpsa (Exim 4.100.1 #2 (Red Hat Linux))
- id 1xWBip-0000000D1V6-2Vh0; Wed, 25 Nov 2026 12:03:35 +0000
+ id 1xWC2W-002WOJ-Sl
+ for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 13:23:56 +0100
+Received: from [10.42.69.5] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <andrew.cooper3@citrix.com>)
+ id 6b06d359-2eae-0a2a0a5409dd-0a2a45058ac0-20
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 13:23:56 +0100
+Received: from [209.85.221.53] (helo=mail-wr1-f53.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <andrew.cooper3@citrix.com>)
+ id 6b06d35c-4cb1-0a2a45050019-d155dd35e0f7-3
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 13:23:56 +0100
+Received: by mail-wr1-f53.google.com with SMTP id
+ ffacd0b85a97d-4aa5833c263so5479812f8f.2
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 04:23:56 -0800 (PST)
+Received: from localhost.localdomain (host-78-146-248-75.as13285.net.
+ [78.146.248.75]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4ab69bf680fsm38920127f8f.14.2026.11.25.04.23.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 25 Nov 2026 04:23:55 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -48,195 +49,105 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="MIME-Version:Content-Type:References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
-	In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=xE0rpSTBJThJ1kINbSbKT3Nszp1ZU69u7iwsccCVCLE=; b=PtVYB8gHod6Of2VTqnw7KNlKtU
-	Z8pZ+LIOaWxKfIPvXo6ZzMAm3ei4JM4ptf2r2cI8TnJ2Cl6H+F/QH6t4ouKbqeM1WEgv34Q5SZPc2
-	87M37A4Pocn+dRBJWNe6kiCvaR+kodP6ShVcPMplTwDEszOtznC8OuTGaB2UPe8bQZuGdwxrH3vdr
-	2uVM2wV960MKAiUDBPsCKwiJaWXofB8LF+kCeCXvzr1LVU19MmchCZsTnFL42018y+8umEog9yJj7
-	ILWCNMVkCHzEiHuNJyjHEWQe3VFiUFxg7lbGLs1wii+WVvbE1AhzCF3yd9Cx9f6vpnvLLHO4nx+am
-	uo/5upoQ==;
-Message-ID: <51d6301de00d83468af889fd4eda0e9cadf23ec4.camel@infradead.org>
-Subject: Re: [PATCH v1 08/21] hw/i386/kvm/xen_evtchn: Fix off-by-one in
- do_remove_pci_vector()
-From: David Woodhouse <dwmw2@infradead.org>
-To: Paul Durrant <xadimgnik@gmail.com>, qemu-devel@nongnu.org
-Cc: xen-devel@lists.xenproject.org, kvm@vger.kernel.org, Paolo Bonzini	
- <pbonzini@redhat.com>, Peter Maydell <peter.maydell@linaro.org>, Stefano
- Stabellini <sstabellini@kernel.org>, Anthony PERARD
- <anthony@xenproject.org>, "Edgar E . Iglesias"	 <edgar.iglesias@gmail.com>,
- "Michael S . Tsirkin" <mst@redhat.com>, Richard Henderson
- <richard.henderson@linaro.org>, Marcelo Tosatti <mtosatti@redhat.com>, 
- =?ISO-8859-1?Q?Marc-Andr=E9?= Lureau	 <marcandre.lureau@redhat.com>, Jason
- Wang <jasowangio@gmail.com>, Hui Peng	 <benquike@gmail.com>, Mark Syms
- <mark.syms@citrix.com>, Feifan Qian	 <bea1e@proton.me>
-Date: Wed, 25 Nov 2026 12:03:34 +0000
-In-Reply-To: <8e8fa5ae-f30a-4e38-8aa8-cd46e3b4ca31@xen.org>
-References: <20261124232247.23169-1-dwmw2@infradead.org>
-	 <20261124232247.23169-9-dwmw2@infradead.org>
-	 <8e8fa5ae-f30a-4e38-8aa8-cd46e3b4ca31@xen.org>
-Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
-	boundary="=-YFYUNa4ByaeRNt5pRmID"
-User-Agent: Evolution 3.62.0-0ubuntu1~ppa1~24.04 
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1795609436; x=1796214236; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Ptz8xdnkDV3M9ld4h55qzN+WgUrmUpYaWFN9TvWPKR8=;
+        b=vYbIB5+BJ7d+b1kjMtFUjH86I0Qhg5UDYMC8zSoEIVeBYERt2YjdNMhGjA20/tzJ3s
+         StpmCdBakmfawEUAQ0u+avHlFXaoSG3dfzZch3bpLe4aobsMemYgeVfXVivRU5kRV8NX
+         VrLhvSSrsGJOcwMmeW9EP9Co1OGMqmOAinUa4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795609436; x=1796214236;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=Ptz8xdnkDV3M9ld4h55qzN+WgUrmUpYaWFN9TvWPKR8=;
+        b=WwM/jdUff6byUaAqgpKrP01MB0Xilsfi0584VhkhAE2YLVDXLXW19iDPCKHIi1JR8O
+         xrQQprD+0Hq0k7AjkMOGGh13CgAd+/Hvt8Naq7zOG8IUgfJ7INPCgrjT1NelqT3+VVxz
+         qp9wDuz5cd8s+pA/c2kF0v0yaho6zIoEP91GMrhEROcfzqL3fOj3wR8PmOhExw1Bh+hO
+         L00MYBiVuliZTdlo3eNz+Lch2KuaBkPXLJ/yQzdKg+9RweViATnuXUKwq2eHqVcRuD0Q
+         HoiFFRxfX1salr3ugC2GXwZDniGhl2jskeJTvcyx5YMv0ICVvM+wmfUyc60Q7FZEAVdX
+         AsUg==
+X-Gm-Message-State: APuU4Z9Px2XPpphTFj0H0Dgf2dIJhOpmUvgYbPAo9SIKi987kQ1Stq1r
+	SpdU8Unn8MEnPP0rPJeRmAlBbKvsw+oyd44TRwNVFAyTA5a9jfleG6d6Pifmp39lygmpAioRCPa
+	CkBHZ
+X-Gm-Gg: AZFdTZfBEWnYQ6+V/wST/I0E2H61p+763Z2dQifLIXj3ozEIxdyeHQGUna50J9PmT2c
+	W+uI3S8p3+UdSdr/7cM42J9RlhG1hXnZMrNRBNLRmqoOKwpHqSUV/SF85tHPCVbJgrjkxXu+tW9
+	VVR2v17cuBoYHCRuePELhPFE9i8euc2H54m7f3qJv/8fk3nrNrwRcykJVhpRekZ4xI7JzZ9HBp9
+	vU1InjvKl7LJuJz2deZIMAvHT7n4wYJgou1DYhEe7adHhK33r52Gqkl8PNac3p543bAMksuVAfp
+	U3cZsYDCBi29Pbhd57FbkJDSVCD4oGiG7l6/UgcDlm/BCAigDIsKGx2ySKAIIPeBb9Ztx4hOvfn
+	d8JJWfrL/oZOeWYIB4gPcEsPDLQG35a9QwouY1KUN0jsylcRYtJc+FFphFucvKOgtjb+HK6ldqo
+	ZTsXLT0z91RiYCf5TBNOHCFWpVQWAzAvJUxHvwHKeqmSlFaGMMhRdXtC24+SB/lzAdQEChUIO2u
+	GMyB+9o5fpl7k0QtnbJh6GwrIfJ7Jn8TqU01MtugZ21CLMI9nuxSj3B/4Oz49C0aDecE7u42pzz
+	A7K4V/xtZn1L2k49uHzRFd/yhPNmXCBQpsh0aHa3j8jRzre+kt+QJZjLrkyzkGc+yjCZlQyXV8y
+	yYys=
+X-Received: by 2002:a05:6000:45c7:b0:48e:2448:ea23 with SMTP id ffacd0b85a97d-4abb5144bd2mr20446370f8f.55.1795609435634;
+        Wed, 25 Nov 2026 04:23:55 -0800 (PST)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Teddy Astie <teddy.astie@vates.tech>,
+	Ross Lagerwall <ross.lagerwall@citrix.com>
+Subject: [PATCH] xen/efi: Explicitly set NX_COMPAT on xen.efi
+Date: Wed, 25 Nov 2026 12:23:52 +0000
+Message-Id: <20261125122352.578425-1-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-4011c0/1795608217-506CECFC-E916289A/0/0
-X-purgate-type: clean
-X-purgate-size: 9670
-X-Spam-Status: No, score=-3.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY autolearn=no
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-c201ff/1795609436-247132A1-17453B5E/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 1476
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+Binutils since 2.45 no longer set NX_COMPAT.  Programs have to ask for it
+explicitly.
 
---=-YFYUNa4ByaeRNt5pRmID
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Xen is NX_COMPAT-able; Xen does not execute from it's stack at all.  The
+property is mandated by the Microsoft UEFI signing requirements.
 
-On Wed, 2026-11-25 at 11:16 +0000, Paul Durrant wrote:
->=20
-> I guess I'm missing a subtlety here, but the test only fires if pirq is=
-=20
-> a multiple of 64... so why is advancing to the next word by adding 64
-> not correct?
+The --nxcompat option is available since binutils 2.20 and llvm 6, so can be
+used unconditionally given our toolchain baseline.
 
-You're missing the same subtlety that I missed when I wrote it in the
-first place: the loop *itself* does pirq++ every time, so when we do
-'pirq +=3D 64; continue;' we end up adding *65*.
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <jbeulich@suse.com>
+CC: Roger Pau Monné <roger@xenproject.org>
+CC: Teddy Astie <teddy.astie@vates.tech>
+CC: Ross Lagerwall <ross.lagerwall@citrix.com>
 
-    for (pirq =3D 0; pirq < s->nr_pirqs; pirq++) {
-        /*
-         * We could be cleverer here, but it isn't really a fast path, and
-         * this trivial optimisation is enough to let us skip the big gap
-         * in the middle a bit quicker (in terms of both loop iterations,
-         * and cache lines).
-         */
-        if (!(pirq & 63) && !(pirq_inuse_word(s, pirq))) {
-            pirq +=3D 63;
-            continue;
-        }
+Backporting notes: 4.20 and earlier need this turning into an $(ld-option).
+---
+ xen/arch/x86/Makefile | 1 +
+ 1 file changed, 1 insertion(+)
 
---=-YFYUNa4ByaeRNt5pRmID
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Transfer-Encoding: base64
+diff --git a/xen/arch/x86/Makefile b/xen/arch/x86/Makefile
+index 2be90ea09880..320593a1e824 100644
+--- a/xen/arch/x86/Makefile
++++ b/xen/arch/x86/Makefile
+@@ -131,6 +131,7 @@ EFI_LDFLAGS += --major-image-version=$(XEN_VERSION)
+ EFI_LDFLAGS += --minor-image-version=$(XEN_SUBVERSION)
+ EFI_LDFLAGS += --major-os-version=2 --minor-os-version=0
+ EFI_LDFLAGS += --major-subsystem-version=2 --minor-subsystem-version=0
++EFI_LDFLAGS += --nxcompat
+ # It seems ld unfortunately can't set a custom timestamp, so add a zero value
+ # for the timestamp (option --no-insert-timestamp) if SOURCE_DATE_EPOCH is
+ # defined to make reproducible builds possible.
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCCE8Ew
-ggWvMIIEl6ADAgECAhANkOKMSmGXhF5eMl0rsRhvMA0GCSqGSIb3DQEBDAUAMGUxCzAJBgNVBAYT
-AlVTMRUwEwYDVQQKEwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5jb20xJDAi
-BgNVBAMTG0RpZ2lDZXJ0IEFzc3VyZWQgSUQgUm9vdCBHMjAeFw0yNDAzMTMwMDAwMDBaFw0zNDAz
-MTIyMzU5NTlaMGIxCzAJBgNVBAYTAlVTMRcwFQYDVQQKEw5EaWdpQ2VydCwgSW5jLjE6MDgGA1UE
-AxMxRGlnaUNlcnQgQXNzdXJlZCBHMiBTTUlNRSBSU0E0MDk2IFNIQTM4NCAyMDI0IENBMTCCAiIw
-DQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBAOfSIeC0vv1xPQ+dgSxbIIrkaru6skAWJYaGFzmv
-q4Kq+2wU2jxhcWlJg/JeP5jEkq/LM3pn5aaLao79j+XRmS7J1ZpJKUODJVoM4s9MQJhTMvo4qS5Z
-S64g6QR7Obkz3I1Lr3aWeSBmDDEyzue+NKtuWZ1Cxy3RdXo/w5HgRc3l2AercOM3Gt1XonTzEtTb
-Z/Hwc0Sn9Gz8RmGRK6Ka4hVDl8q/2l110KaV233Kh5etP0csXS8MIMdVRfRu3sc5hp13DG7lCKzK
-72a2GEpI8Wpl26G6I1/LMzz/98T+FqjTqxsdquk7Cj7m2vKGLW1BorpQH7WFGPdJQXJe1hfbfiZA
-CcVdCtl4nAacFacmsiArZBfX7AQGL7isvHUwwYFEtcApyGW4p2Lt+t8nvU0CANA6BHOpOz1xOP8W
-mAESbUriIjyuTUf3fJ9oDNCurVqhASMJCDaWI3lYX/QAoiAzt6akqbbZxo2ujW7mGGqc0KxqE2cs
-h2T79v7pC8aUtHBfwNrTR19GnZVxE0eQ7ViIQhR6mpSaUQFA9sG+cmD2G8TnCgYsLa0q8De6F61a
-CBevQGHNzrbZ3JAMneveYg/Jy1XxQHDRcvrMfWKe0jjcWbdKYlaGVPm5V1ILwYz7Yv5ewo3NUrxI
-GJiywe9qPhuJSDZs7VehTuI0FxGIsgKzVjgbAgMBAAGjggFcMIIBWDASBgNVHRMBAf8ECDAGAQH/
-AgEAMB0GA1UdDgQWBBT3m6JO05fF9DQPQw6Bhc6RkzKv+TAfBgNVHSMEGDAWgBTOw0q5mVXyuNtg
-v6l+vVa1lzan1jAOBgNVHQ8BAf8EBAMCAYYwHQYDVR0lBBYwFAYIKwYBBQUHAwQGCCsGAQUFBwMC
-MHkGCCsGAQUFBwEBBG0wazAkBggrBgEFBQcwAYYYaHR0cDovL29jc3AuZGlnaWNlcnQuY29tMEMG
-CCsGAQUFBzAChjdodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20vRGlnaUNlcnRBc3N1cmVkSURS
-b290RzIuY3J0MEUGA1UdHwQ+MDwwOqA4oDaGNGh0dHA6Ly9jcmwzLmRpZ2ljZXJ0LmNvbS9EaWdp
-Q2VydEFzc3VyZWRJRFJvb3RHMi5jcmwwEQYDVR0gBAowCDAGBgRVHSAAMA0GCSqGSIb3DQEBDAUA
-A4IBAQA+b8Uw53sDspdZgukU+qzLyyHkcjlxGGhHlP+zrmDLKm1wEFvCRS2pili3Hy67i8N4N5NU
-vw5Rg6kv3lxb9S9Rktxk43k+tvm68pl7OxQE55ZjVY87P0lUPGwEqOOwLLyH02ZQcsfq5p5LrOH9
-0JvmvZ1yy73HS+VpDAqOlytE0NSvTIRqFFkKQGQwfjvtql9YflujuNNvJztjBaHKYZsnNSg+J38o
-jYq4TP3pSg3UdVH0PncVjPQyqxC9xef5Xae92Kbkzol3x7Nel3A1bwAkalrDMspvTHvey6LfiBks
-FIqviTnoy7fgjaRAJgHS+RXx/cmuRd3rUAclSVVrYu8RMIIHAzCCBOugAwIBAgIQAzUotrsybJHx
-HTjKOIVdIDANBgkqhkiG9w0BAQsFADBiMQswCQYDVQQGEwJVUzEXMBUGA1UEChMORGlnaUNlcnQs
-IEluYy4xOjA4BgNVBAMTMURpZ2lDZXJ0IEFzc3VyZWQgRzIgU01JTUUgUlNBNDA5NiBTSEEzODQg
-MjAyNCBDQTEwHhcNMjYwNzE4MDAwMDAwWhcNMjgwMTA0MjM1OTU5WjAeMRwwGgYDVQQDDBNkd213
-MkBpbmZyYWRlYWQub3JnMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA2pYux73kdbYX
-sWF8f1u6DJP91qcqaZetsyfPkZk0B+MmXmAEv0kVes5n15V2mbDThOnpoPFly0UugQO9JYqLfrtD
-tKD5yL58fgrDB9Dw+LQikgrHafl6YSCds5AvUu/8hw2J6noKrcOLJpKlKn9Fl/4IB9Q3JIdLx5aa
-EtTqMalIPqHFOlgrJ7s+aua8xbB8YQ9ahqYBXWRJNv3P/2b1DYtdrz1oqZPE3CcB8Pc6Gf2a1Tcm
-6TAgtEx7Cf1BFcrsrMz7TWHmGQITieNb2r9UYWSc2Gp+GtYFNJCgT0JJXKUBIauPMKBLteYrL8Fo
-ff/uY44dC/mDWjdCP/5x0qelPQjlBvWdHL5zvBTOj06rJ0m3HNI/hnIcDh0Qu2j9reb9rLVcdym6
-bWmBM4uDEB8Zv9Ph0KTBFSy1IosyakuD1j1Os30EzjGfbi0EUXIvnOcYbTBAbM5UAzrxEHMhBvoX
-Pvnx+OyvjJmc9tWxTX6AcSz+m40esbT17URBeZS18afgieiikm5TynlUYP1LciR3hSgGVzvGXnKO
-02VDFR5itGWdRKZ2W5wIShNfWfhSa0D0K5UdIDt5Qc7sjzwK1Yb1sY5Tu0uA5mhIS82q1ov83uxB
-sFkriNnhGv/M1NCDVLBiOMsHu73qUM+yKmgKLwF9Hfn9WI25glbAMI4S5r3hYzcCAwEAAaOCAfcw
-ggHzMB8GA1UdIwQYMBaAFPebok7Tl8X0NA9DDoGFzpGTMq/5MB0GA1UdDgQWBBRcYhqbcGzn1jrT
-JOZaB8O7qllDpzAwBgNVHREEKTAngRNkd213MkBpbmZyYWRlYWQub3JngRBkYXZpZEB3b29kaG91
-LnNlMBQGA1UdIAQNMAswCQYHZ4EMAQUBAjAOBgNVHQ8BAf8EBAMCBeAwHQYDVR0lBBYwFAYIKwYB
-BQUHAwIGCCsGAQUFBwMEMIGpBgNVHR8EgaEwgZ4wTaBLoEmGR2h0dHA6Ly9jcmwzLmRpZ2ljZXJ0
-LmNvbS9EaWdpQ2VydEFzc3VyZWRHMlNNSU1FUlNBNDA5NlNIQTM4NDIwMjRDQTEuY3JsME2gS6BJ
-hkdodHRwOi8vY3JsNC5kaWdpY2VydC5jb20vRGlnaUNlcnRBc3N1cmVkRzJTTUlNRVJTQTQwOTZT
-SEEzODQyMDI0Q0ExLmNybDCBjQYIKwYBBQUHAQEEgYAwfjAkBggrBgEFBQcwAYYYaHR0cDovL29j
-c3AuZGlnaWNlcnQuY29tMFYGCCsGAQUFBzAChkpodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20v
-RGlnaUNlcnRBc3N1cmVkRzJTTUlNRVJTQTQwOTZTSEEzODQyMDI0Q0ExLmNydDANBgkqhkiG9w0B
-AQsFAAOCAgEAocabrh1cPd5s3vY5rnlBVQSTc7zs2ZWs67dAIltR+05WELrYClVzzUhMs/LOJPlr
-EUo45UDDomXq38DxFepaPd9+iNLjXfn33EX/IG44j04lU/oF/Rg9VeQILkYLbCZ/x9wOjNHZc4SN
-ydY7Dhvf/sT5aBz88u7D5+azZJ7Qf1U57wYseCH1Mt0nDrtr5y19IJ8D9xJJ33RFL6vfpHZBBAQ8
-+3RqkKNxLoV2aFvQhxdhjNLDqTv3LjUIdicwPraN7JkxEu7CV2Lka7eRqJgkWL7SK0YmBjGpRafs
-+icP/ON5RCCKTTb6VlX8eTG2sJJfsFhvJNCCt6xexbWzWtIrfP7NvPBvwBB737AyEGBZkS5aNizT
-McURJGTv9UKvBh1LF/+tNhYtLvPCN7oecGzhCHht9jcwSkygTo3Y6YlK3QgOu+ncmiBbfeuwlLZ1
-LxbYvG6hgNqXv7u6YyADbYajAQJXJ2OQen39pm3Q/AQSyLYG+B8lDglWsM8tYXPlEdrYJcksGK6F
-nqIX6Bumn43rBooLJdiZp4WmfWdL2pxe+LxRDjprmqu1WprixDxULSTOKJZoqTlugs6y3Bc+if+s
-gHnBBtz9WQ6MtPHkh7zONDAFIKcBmv8OqPQCx0F3Wv3OEybwMpXx0OsKgK8wLldaX1pXcMuyDgTL
-Sqs0AV0OHUgwggcDMIIE66ADAgECAhADNSi2uzJskfEdOMo4hV0gMA0GCSqGSIb3DQEBCwUAMGIx
-CzAJBgNVBAYTAlVTMRcwFQYDVQQKEw5EaWdpQ2VydCwgSW5jLjE6MDgGA1UEAxMxRGlnaUNlcnQg
-QXNzdXJlZCBHMiBTTUlNRSBSU0E0MDk2IFNIQTM4NCAyMDI0IENBMTAeFw0yNjA3MTgwMDAwMDBa
-Fw0yODAxMDQyMzU5NTlaMB4xHDAaBgNVBAMME2R3bXcyQGluZnJhZGVhZC5vcmcwggIiMA0GCSqG
-SIb3DQEBAQUAA4ICDwAwggIKAoICAQDali7HveR1thexYXx/W7oMk/3Wpyppl62zJ8+RmTQH4yZe
-YAS/SRV6zmfXlXaZsNOE6emg8WXLRS6BA70liot+u0O0oPnIvnx+CsMH0PD4tCKSCsdp+XphIJ2z
-kC9S7/yHDYnqegqtw4smkqUqf0WX/ggH1Dckh0vHlpoS1OoxqUg+ocU6WCsnuz5q5rzFsHxhD1qG
-pgFdZEk2/c//ZvUNi12vPWipk8TcJwHw9zoZ/ZrVNybpMCC0THsJ/UEVyuyszPtNYeYZAhOJ41va
-v1RhZJzYan4a1gU0kKBPQklcpQEhq48woEu15isvwWh9/+5jjh0L+YNaN0I//nHSp6U9COUG9Z0c
-vnO8FM6PTqsnSbcc0j+GchwOHRC7aP2t5v2stVx3KbptaYEzi4MQHxm/0+HQpMEVLLUiizJqS4PW
-PU6zfQTOMZ9uLQRRci+c5xhtMEBszlQDOvEQcyEG+hc++fH47K+MmZz21bFNfoBxLP6bjR6xtPXt
-REF5lLXxp+CJ6KKSblPKeVRg/UtyJHeFKAZXO8Zeco7TZUMVHmK0ZZ1EpnZbnAhKE19Z+FJrQPQr
-lR0gO3lBzuyPPArVhvWxjlO7S4DmaEhLzarWi/ze7EGwWSuI2eEa/8zU0INUsGI4ywe7vepQz7Iq
-aAovAX0d+f1YjbmCVsAwjhLmveFjNwIDAQABo4IB9zCCAfMwHwYDVR0jBBgwFoAU95uiTtOXxfQ0
-D0MOgYXOkZMyr/kwHQYDVR0OBBYEFFxiGptwbOfWOtMk5loHw7uqWUOnMDAGA1UdEQQpMCeBE2R3
-bXcyQGluZnJhZGVhZC5vcmeBEGRhdmlkQHdvb2Rob3Uuc2UwFAYDVR0gBA0wCzAJBgdngQwBBQEC
-MA4GA1UdDwEB/wQEAwIF4DAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwQwgakGA1UdHwSB
-oTCBnjBNoEugSYZHaHR0cDovL2NybDMuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0QXNzdXJlZEcyU01J
-TUVSU0E0MDk2U0hBMzg0MjAyNENBMS5jcmwwTaBLoEmGR2h0dHA6Ly9jcmw0LmRpZ2ljZXJ0LmNv
-bS9EaWdpQ2VydEFzc3VyZWRHMlNNSU1FUlNBNDA5NlNIQTM4NDIwMjRDQTEuY3JsMIGNBggrBgEF
-BQcBAQSBgDB+MCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdpY2VydC5jb20wVgYIKwYBBQUH
-MAKGSmh0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNvbS9EaWdpQ2VydEFzc3VyZWRHMlNNSU1FUlNB
-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
-BzWhoy0ZaW68o7A9f3B+qToAAAAAAAA=
+base-commit: 56e231174e1050a43cf199411d5b8a041f5625c6
+-- 
+2.39.5
 
-
---=-YFYUNa4ByaeRNt5pRmID--
 
