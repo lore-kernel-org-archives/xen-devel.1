@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C355C606A31E
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2026 10:58:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 02148606A31E
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2026 11:01:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=rsoAlLfs
-Received: from list by lists.xenproject.org with outflank-mailman.1502004.1698007 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=XYUs1T+c
+Received: from list by lists.xenproject.org with outflank-mailman.1502012.1698016 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWAhU-0007Gz-FU; Wed, 25 Nov 2026 10:58:08 +0000
+	id 1xWAk3-0000OT-Si; Wed, 25 Nov 2026 11:00:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1502004.1698007; Wed, 25 Nov 2026 10:58:08 +0000
+Received: by outflank-mailman (output) from mailman id 1502012.1698016; Wed, 25 Nov 2026 11:00:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWAhU-0007Gs-Cm; Wed, 25 Nov 2026 10:58:08 +0000
-Received: by outflank-mailman (input) for mailman id 1502004;
- Wed, 25 Nov 2026 10:58:07 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xWAk3-0000OM-Pg; Wed, 25 Nov 2026 11:00:47 +0000
+Received: by outflank-mailman (input) for mailman id 1502012;
+ Wed, 25 Nov 2026 11:00:47 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <xadimgnik@gmail.com>) id 1xWAhT-0007Gl-GS
- for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 10:58:07 +0000
+ (envelope-from <xadimgnik@gmail.com>) id 1xWAk2-0000OD-Ve
+ for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 11:00:46 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xWAhS-008WOp-EE
- for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 11:58:06 +0100
-Received: from [10.42.69.3] (helo=localhost)
+ id 1xWAk2-006egy-2X
+ for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 12:00:46 +0100
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <xadimgnik@gmail.com>)
- id 6b06bf36-8faa-0a2a0a5109dd-0a2a4503de7e-36
- for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 11:58:06 +0100
-Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6b06bfd8-8faa-0a2a0a5109dd-0a2a450adf3c-24
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 12:00:46 +0100
+Received: from [209.85.218.51] (helo=mail-ej1-f51.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <xadimgnik@gmail.com>)
- id 6b06bf3e-fae8-0a2a45030019-d1558032a57b-3
- for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 11:58:06 +0100
-Received: by mail-wm1-f50.google.com with SMTP id
- 5b1f17b1804b1-4a9a8d6cea8so72153905e9.1
- for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 02:58:06 -0800 (PST)
+ id 6b06bfdd-f2d2-0a2a450a0019-d155da33b85a-3
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 12:00:45 +0100
+Received: by mail-ej1-f51.google.com with SMTP id
+ a640c23a62f3a-c5133831027so799097366b.2
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 03:00:45 -0800 (PST)
 Received: from [10.45.18.224] ([15.248.2.12]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb906817ccsm285486235e9.5.2026.11.25.02.58.04
+ a640c23a62f3a-c513afe01a0sm626673666b.68.2026.11.25.03.00.43
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 25 Nov 2026 02:58:04 -0800 (PST)
+ Wed, 25 Nov 2026 03:00:44 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,52 +51,52 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795604286; x=1796209086; darn=lists.xenproject.org;
+        d=gmail.com; s=20260707; t=1795604445; x=1796209245; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:content-language
          :references:cc:to:subject:user-agent:mime-version:date:message-id
          :from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=9ojd6QLbo6svWTxF6DUELPeNw20UDvUeJORZrpfd3O4=;
-        b=rsoAlLfs4hGrHRI3FFd+zW0OgK22JHundMApSgAgl7rfvZ/Z3PLeJVbPNWVg/gW64M
-         /2dzmPlyMp8RLxq4DsuOWkYUblO70m1ZB2GbvZny0asuEK8l5L3JGv/zyBmzgwW4htDu
-         qxMO7E4ymVPc5z4FLfSWWcfNIz7b6Ev/fPvc2pXrVkIaIHL7uBoWBe3Z87qIUZUU2Wid
-         OtWEwM/Yg99glE2eUvhe8hSWrVJj/Xlp9rcU3r1ZDEhQ2m6ZRY8n8MszKDf4GhWR7Gwu
-         tJTTEHKL3Nzov3AJaXcmG/VPWOfIWy9zO0veRGOm/rIncIj61IHbR+s/a2AKYU8Ss0j9
-         hznQ==
+        bh=WH6OCX8O2rHrDc+AjcgOmeRyCyW9QUyc1yx5oWf9qtI=;
+        b=XYUs1T+c8d7QjEhXWI0E7EqXnmLWjezfDD2vC64d00+eTRpg7HJTYD6qQP7ieCG/LF
+         6R4df5tnldNOGD9HyUrFKUUrMnBM9Z2ro6amU3c24R7vHH0hSQglqejsRZBSlUr1YqrH
+         KBsP28NliD6swmvKHkC8y4Fs3T9yBMhLeaJvt4KjR2qSDZSlgF8KTvZLKWvENMZMNG2M
+         ZqaHrqy1H+mKzur/blkiZ229hnBraIQF+9NQ5Tnlx3N1ELg+vePHTcGJUvRfpYJg8eEC
+         EV8ObMrjinIYW5n95ykWPKNnCxxRi0hME9HyXCr5pF+55HO7NDoKq92Hl13274xENSmk
+         y0cw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795604286; x=1796209086;
+        d=1e100.net; s=20260707; t=1795604445; x=1796209245;
         h=content-transfer-encoding:content-type:in-reply-to:content-language
          :references:cc:to:subject:user-agent:mime-version:date:message-id
          :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=9ojd6QLbo6svWTxF6DUELPeNw20UDvUeJORZrpfd3O4=;
-        b=wisrYCK5PajcYhfUyZSjyS9Z4E1EIMWSv0CDKJPKU+9Fwk8PdbJv135VQr5BD/wd9K
-         +Y0E+uIC5b223E6pY7DFGCZagPp80/Y0CDUVXzVpcjmtfJ40bByfIBv5nCpgmqeVzU1t
-         fxvsPRbjQmg03JkqetZJ2HYcrrIwfx/WR3iaigI/Me7Xu/0TukRRP4lnK24b9xPHEjih
-         EBe0k6E7HQq4PNAT3Du8NtSAdpW8ZUCbLQ4oWnmX5Hj/WQ3rkqqGMx8ABDZUjyAH/j4E
-         A0N83nfmJ2tHO9CjSwLPNRLLqOWxQyG3ols4YnuqIQvpeWDMPhcFXoWheqVhwTshJUAM
-         K1SA==
-X-Gm-Message-State: APuU4Z/2iOlBNxQ+2ed8qkR2HNg2UeNvU12W/F+7G9w0Z0KInRGY4jyt
-	tuebABsbVarCfCkKTLxSGnyAtUCpu46/Rxltv/ViMEuc3EsqJT23t/Vl
-X-Gm-Gg: AZFdTZdhcpVRi4QaNMk3/dwqmZLuFZpgUfMTAenu31ag4aiF8aQBo/h48JiZMqsS+Cw
-	Wd6sMUGGRz4/ZVuaPm8nnytJI3mvn40WDbVBIG6Z4A1LGJZwBrtpLAeeT6IuIUz8yxJ7eLSJ1QU
-	KiSedBe5WqzEid4cQ4LbX0mWj50bCxXUfGmI/wFmI8juqMsXcDdUxKvcYLuriwnc0yXYZkPlZyi
-	8nEAjfbdYPX4uEKTlkwsuUGFs1PoKRaLgTCWsTnmA87wFszIK1dPtyD7n3mPEsSR6Z2COtoRGRN
-	6IyGdXhjVlnrYLVN/8UL/Pal23sbMVh7+AhaWCK4ieSIeW4i7SIh8/n42lVXSnPT+z4xXt+Z5Vq
-	lto6FbL6SPcdDY/LWGoPi8Fv82XP5C1n1UW0auje6hw11lwhQ7z3Cu0gyi8GAUjkPDSPSoTzu7x
-	5sot7drutAhAP/AsTwbtOzxITM7JxTqLvByHtz/nL3uoMEg6kJscmG9fxeyXDrou2SdhYSZG0jh
-	khsb0F3FiS62VDCDfEANxNR4vQCXxVbcJwNE+WYGrA1viIi6abj3WlogVMM+gaGEXjbPAutHS4O
-	kW+TQkvi+sedIpUQwMh6jDcJKgjxkz5CcnA=
-X-Received: by 2002:a05:600c:4f81:b0:4bb:5e8c:13bc with SMTP id 5b1f17b1804b1-4bb88805902mr337651085e9.7.1795604285398;
-        Wed, 25 Nov 2026 02:58:05 -0800 (PST)
+        bh=WH6OCX8O2rHrDc+AjcgOmeRyCyW9QUyc1yx5oWf9qtI=;
+        b=i+13MFVwpl675T/Ahkyh8fuS73a9vxlkVNukJA/He+X+QnxWjKkueXRU+V5sFk41tp
+         +I13qABTwdAYG7JfsZZVYWECVDhHY836VbTnjVu/6LcVqMJzHGST1R907komMfVElOSx
+         pqCTqhTNQ5CkS4opWsr8tsWfSu3e9yFZF9HLQ6YZfmNJrB3YufIYecUoK1Vl0Kz7Tm7a
+         HMgGPh06EYjjtpA7RIUhds4EknekWG6s2kMjvUi0Q1i4h8wmizMfKuHv5nlb52j3Oicd
+         Fsh8G4nxMcMye8kWC67s8Wrfal+FPoOSL12c8rECMPY7jyB/UeNhH3Jl3BFevPoP2dri
+         aHjw==
+X-Gm-Message-State: APuU4Z+j9SWZjQkYLP9FmFxmW0QNvYn/C3jJzsgeoVcxcc6wq7TXtGlp
+	9OBTBc2WFn0ALAFWy4YlNkp2NC0qOAjR4JBBdoCHRsaWa7H8gkXci/BL
+X-Gm-Gg: AZFdTZfulyMCIEoNA7VrFD4Y2I+kioxd/oZw3HCLdhYpTjgbfAjbABWMJ10gFppWzeG
+	xv0sqzs0116dRnKw5+lctfKKQeHgMZI4B5wHRGkRtcShId5x9IZW/l+QMfgJ2gAC2gyaVQdsl4o
+	a3gqCGXZONAsivA5OwmMxa2+6s4pl/RaR99rLM3EtGuOe1Yc/GhTJWgoBTovwo0ZaXAuKcbHcrD
+	Dx7RaYRQeXfxId8UUutUisr/6+U/5ELYO1MJg3H+r6CD7dBxalEiduyHJ5uYKlXDd/nHSbCOMnV
+	TedCkSAXb1vqRuAPOeaTdzVw+hc/awSJY2RwR5HBGiwEeVynAxEjSGZgftSl9MUn/xCNIe89iwG
+	Kz4K4fUP1jYrhZGcifZ9DYDKpqRSwJXLWV8PXsUA0dKbLaFdPfQOi+DF4t8l2qccMIxZSQqSF2K
+	vL59rA15jfNtNcRaQeZc1ysSPRcT9ihlbmDf/1eJ1nvpr2t2BM3OAVPjqtpk0vpPLM7FN8Doq7h
+	8gCkcRVN8m1QC1x/6vHCgoIQVuFxJPWKrI318XiF4qhhWwSn4OpTWue1uY6H7tnPqza3jl3Dgca
+	I61IpYl66mT2hdBdnm7I3Uoto7miiqA1fXFP
+X-Received: by 2002:a17:907:6eaa:b0:c46:d837:b358 with SMTP id a640c23a62f3a-c513a4355afmr1482828466b.3.1795604445261;
+        Wed, 25 Nov 2026 03:00:45 -0800 (PST)
 From: Paul Durrant <xadimgnik@gmail.com>
 X-Google-Original-From: Paul Durrant <paul@xen.org>
-Message-ID: <8888e81f-ec6b-4211-afef-215eba880e01@xen.org>
-Date: Wed, 25 Nov 2026 10:58:03 +0000
+Message-ID: <3739cc8a-04a6-4d17-96f0-db70833c700a@xen.org>
+Date: Wed, 25 Nov 2026 11:00:43 +0000
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 02/21] i386/xen: Don't resample GSI when per-vCPU
- upcall vector is in use
+Subject: Re: [PATCH v1 03/21] i386/xen: Free Xen vCPU timers when a vCPU is
+ destroyed
 To: David Woodhouse <dwmw2@infradead.org>, qemu-devel@nongnu.org
 Cc: xen-devel@lists.xenproject.org, kvm@vger.kernel.org,
  Paolo Bonzini <pbonzini@redhat.com>, Peter Maydell
@@ -111,46 +111,55 @@ Cc: xen-devel@lists.xenproject.org, kvm@vger.kernel.org,
  Mark Syms <mark.syms@citrix.com>, Feifan Qian <bea1e@proton.me>,
  David Woodhouse <dwmw@amazon.co.uk>
 References: <20261124232247.23169-1-dwmw2@infradead.org>
- <20261124232247.23169-3-dwmw2@infradead.org>
+ <20261124232247.23169-4-dwmw2@infradead.org>
 Content-Language: en-US
-In-Reply-To: <20261124232247.23169-3-dwmw2@infradead.org>
+In-Reply-To: <20261124232247.23169-4-dwmw2@infradead.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-33051d/1795604286-6C2E04E9-5C603578/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-4011c0/1795604445-504CFCFC-7270FA1B/0/0
 X-purgate-type: clean
-X-purgate-size: 1193
-X-Spam-Status: No, score=-14.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-purgate-size: 1659
+X-Spam-Status: No, score=-19.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 On 24/11/2026 16:22, David Woodhouse wrote:
 > From: David Woodhouse <dwmw@amazon.co.uk>
 > 
-> The callback_via GSI (or PCI INTx) and the per-vCPU upcall vector are
-> mutually exclusive delivery mechanisms for Xen event channel upcalls.
-> Xen itself will never assert the callback GSI for a vCPU which has a
-> per-vCPU upcall vector configured.
+> kvm_xen_init_vcpu() allocates the per-vCPU timers with the CPUState as
+> callback opaque, and nothing freed them on vCPU destruction. So a guest
+> could arm the periodic timer for a vCPU (VCPUOP_set_periodic_timer
+> always reaches QEMU; the kernel doesn't handle it) and eject that vCPU
+> via ACPI hotplug, leaving the armed timer pointing at a freed X86CPU.
 > 
-> When the interrupt is acked, QEMU's resampling logic reasserts the
-> GSI if evtchn_upcall_pending is still set. If the guest has configured
-> a per-vCPU upcall vector, events are delivered through that vector and
-> the GSI is unexpected; a guest which receives both the vector upcall
-> and a spurious GSI interrupt for the same event can crash. This was
-> observed in production with Windows guests on a different VMM which
-> implements the same resampling logic.
+> Free both timers in kvm_xen_destroy_vcpu(), called from
+> kvm_arch_destroy_vcpu(). That runs under the BQL, as do the timer
+> callbacks, so it cannot race an in-flight callback. It *can* race a
+> timer hypercall from another vCPU — hypercalls don't take the BQL,
+> which is why xen_timers_lock exists — so clear the pointers under that
+> lock and have the periodic timer paths return -ENOENT when the timer is
+> gone, as for a nonexistent vCPU. The singleshot ops act only on the
+> calling vCPU, so cannot race its destruction.
 > 
-> If a per-vCPU upcall vector is configured, don't resample the GSI;
-> just deassert it.
+> Also move the timer_del() in do_set_periodic_timer() inside the lock,
+> where it should have been all along.
 > 
-> Fixes: ddf0fd9ae1fd ("hw/xen: Support HVM_PARAM_CALLBACK_TYPE_GSI callback")
+> Fixes: CVE-2026-123069
+> Fixes: b746a779264f ("i386/xen: handle PV timer hypercalls")
+> Reported-by: MyeonghunPak <https://gitlab.com/mhun512>
+> Closes: https://gitlab.com/qemu-project/qemu/-/work_items/4098
 > Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
 > ---
->   target/i386/kvm/xen-emu.c | 7 +++++++
->   1 file changed, 7 insertions(+)
+>   target/i386/kvm/kvm.c     |  6 ++++++
+>   target/i386/kvm/xen-emu.c | 36 ++++++++++++++++++++++++++++++++++--
+>   target/i386/kvm/xen-emu.h |  1 +
+>   3 files changed, 41 insertions(+), 2 deletions(-)
 > 
+
 Reviewed-by: Paul Durrant <paul@xen.org>
 
