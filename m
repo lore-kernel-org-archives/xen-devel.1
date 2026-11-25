@@ -2,41 +2,41 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 05D44606A6BD
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2026 06:14:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 87F6B606A6AC
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2026 06:14:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=lMU7sc05
-Received: from list by lists.xenproject.org with outflank-mailman.1501719.1697810 (Exim 4.92)
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=t0N3QvZj
+Received: from list by lists.xenproject.org with outflank-mailman.1501731.1697848 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xW6Gs-0005C1-A9; Wed, 25 Nov 2026 06:14:22 +0000
+	id 1xW6H0-0006Qp-B8; Wed, 25 Nov 2026 06:14:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1501719.1697810; Wed, 25 Nov 2026 06:14:22 +0000
+Received: by outflank-mailman (output) from mailman id 1501731.1697848; Wed, 25 Nov 2026 06:14:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xW6Gs-0005B0-4O; Wed, 25 Nov 2026 06:14:22 +0000
-Received: by outflank-mailman (input) for mailman id 1501719;
- Wed, 25 Nov 2026 06:14:20 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xW6H0-0006Ol-0E; Wed, 25 Nov 2026 06:14:30 +0000
+Received: by outflank-mailman (input) for mailman id 1501731;
+ Wed, 25 Nov 2026 06:14:28 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <rdunlap@infradead.org>) id 1xW6Gq-00057J-Qg
- for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 06:14:20 +0000
+ (envelope-from <rdunlap@infradead.org>) id 1xW6Gy-0006ED-64
+ for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 06:14:28 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xW6Gq-005hnO-77
- for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 07:14:20 +0100
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xW6Gx-00ABXn-IV
+ for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 07:14:27 +0100
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <rdunlap@infradead.org>)
- id 6b067c8f-bab6-0a2a0a5309dd-0a2a4501ad3e-16
- for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 07:14:20 +0100
+ id 6b067caa-8faa-0a2a0a5109dd-0a2a45039fa2-36
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 07:14:27 +0100
 Received: from [198.137.202.133] (helo=bombadil.infradead.org)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <rdunlap@infradead.org>)
- id 6b067cba-5bcc-0a2a45010019-c689ca85e562-3
- for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 07:14:19 +0100
+ id 6b067cc2-fae8-0a2a45030019-c689ca85e566-3
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 07:14:27 +0100
 Received: from [50.53.43.113] (helo=bombadil.infradead.org)
  by bombadil.infradead.org with esmtpsa (Exim 4.100.1 #2 (Red Hat Linux))
- id 1xW6GY-00000008Wvh-1Dwn; Wed, 25 Nov 2026 06:14:02 +0000
+ id 1xW6Gd-00000008Wvh-05Wr; Wed, 25 Nov 2026 06:14:07 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -50,12 +50,12 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=I36+luioMxphcj4OMMZSrZawKV9cLl7mvSqlHqLLmOs=; b=lMU7sc05PHTHTDpjgfQ4+tOxDL
-	sjZvBvUSy+dTfDP8/Bwrjfk8D1jgsOUxBmCQw6J4Hp+fAZ1yTetgxo3BJiWnJWAvq88CIdPoSU4nJ
-	24WuW9+Yh6B+xJIljJSUDfQ0fXNcjlFoGyEP86g1zJKlyFb2NjyMVQRoe+4SF9IpUcY8JljvSRGuL
-	dcdVm+/NgDHvBePy2O4XyBQKSsDAi7I5l5vLW+xi6Zkcr2KT9NylBd9OHM26JOld+auO0wuRafqZO
-	trpQ7Oc+xMGeGta39wcjkZzgQZ1ju5bxXp/r1uVZane+SOnSLYYJkbPlBgmXAiU/nQWBXPfOEnP0q
-	6iidIJ5w==;
+	bh=HbuCV21suICAifmMr+QiJxglk35NFZTKGTKkvkyuZyo=; b=t0N3QvZj67sXAElPcQDRfFEeFC
+	Ry87q/HKHnd9AflpeJ6sdyDtMOspDD6dk2kaKcGI09Doxg/kOyBkkDwuQF/GwL+aUcraRQSMAI4gq
+	vaqJWlOuO16ACJ+hVxBTQvxMm6w7klhtRvz5Yuyb/9as7/epd7p8KXoZozPJ9vin16Qwnte6KAQDZ
+	B28OGP5xhj8FWN6iqYyBJVLmdncGI4T/+eayqDgNpmb6Hw4RS8zBiBjrlpxInv3X7OrcCLrJYK19C
+	NoN6ftlIGZXNkThIXdUqXsPtWw01Bnj1QiVeCmRzeFE66JRwhcWdPaXrSAfBriLmxjvU5NlxFqa4l
+	D51u5MqA==;
 From: Randy Dunlap <rdunlap@infradead.org>
 To: linux-kernel@vger.kernel.org
 Cc: Randy Dunlap <rdunlap@infradead.org>,
@@ -141,32 +141,33 @@ Cc: Randy Dunlap <rdunlap@infradead.org>,
 	Matthew Brost <matthew.brost@intel.com>,
 	=?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
 	intel-xe@lists.freedesktop.org
-Subject: [PATCH v3 08/12] docs: ioctl-number: update USB entries
-Date: Tue, 24 Nov 2026 22:13:35 -0800
-Message-ID: <20261125061340.3402300-9-rdunlap@infradead.org>
+Subject: [PATCH v3 10/12] docs: ioctl-number: update FS entries
+Date: Tue, 24 Nov 2026 22:13:37 -0800
+Message-ID: <20261125061340.3402300-11-rdunlap@infradead.org>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261125061340.3402300-1-rdunlap@infradead.org>
 References: <20261125061340.3402300-1-rdunlap@infradead.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d62444/1795587260-CBD495FD-C6D47F70/0/0
+X-purgate-ID: tlsNG-33051d/1795587267-6DCD34E9-58DD80C9/0/0
 X-purgate-type: clean
-X-purgate-size: 2320
+X-purgate-size: 5440
 X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=unavailable
-	autolearn_force=no version=4.0.1
+	UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Update the list of files where USB ioctls are defined.
+Update the list of files where filesystem ioctls are defined and update
+the ranges of function numbers that are used.
 
 Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 ---
-v2: no change
+v2: address sashiko review comment (ext4 00-2F range referred to
+    the wrong file name)
 v3: rebase
 
 [Since having multiple maintainers trying to merge these would
@@ -176,34 +177,73 @@ take all of these through the docs-next tree.]
 Cc: Jonathan Corbet <corbet@lwn.net>
 Cc: Shuah Khan <skhan@linuxfoundation.org>
 Cc: linux-doc@vger.kernel.org
-Cc: Neill Kapron <nkapron@google.com>
-Cc: Andrey Konovalov <andreyknvl@gmail.com>
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc: linux-usb@vger.kernel.org
+Cc: Jan Kara <jack@suse.cz>
+Cc: linux-fsdevel@vger.kernel.org
+Cc: "Theodore Ts'o" <tytso@mit.edu>
+Cc: linux-ext4@vger.kernel.org
+Cc: Mike Marshall <hubcap@omnibond.com>
+Cc: devel@lists.orangefs.org
+Cc: Paulo Alcantara <pc@manguebit.org>
+Cc: Namjae Jeon <linkinjeon@kernel.org>
+Cc: linux-cifs@vger.kernel.org
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: Chao Yu <chao@kernel.org>
+Cc: linux-f2fs-devel@lists.sourceforge.net
 
- Documentation/userspace-api/ioctl/ioctl-number.rst |    6 ++++++
- 1 file changed, 6 insertions(+)
+ Documentation/userspace-api/ioctl/ioctl-number.rst |    9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
 
 --- linux-next-20261123.orig/Documentation/userspace-api/ioctl/ioctl-number.rst
 +++ linux-next-20261123/Documentation/userspace-api/ioctl/ioctl-number.rst
-@@ -233,6 +233,9 @@ Code  Seq#    Include File
- 'U'   00-EF  linux/usbdevice_fs.h
- 'U'   C0-CF  drivers/bluetooth/hci_uart.h
- 'U'   00     net/nfc/nci_core.h                                        conflict!
-+'U'   00-0F  linux/usb/raw_gadget.h                                    conflict!
-+'U'   01     linux/usb/g_uvc.h                                         conflict!
-+'U'   64     drivers/usb/misc/usbtest.c                                conflict!
- 'V'   all    linux/vt.h                                                conflict!
- 'V'   all    linux/videodev2.h                                         conflict!
- 'V'   C0     linux/ivtvfb.h                                            conflict!
-@@ -279,6 +282,9 @@ Code  Seq#    Include File
- 'g'   20-2F  linux/usb/g_printer.h
- 'g'   01-0F  mm/gup_test.h                                             conflict!
-                                                                        <mailto:linux-mm@kvack.org>
-+'g'   01-03  linux/usb/functionfs.h                                    conflict!
-+      80-86
-+'g'   41-42  linux/usb/g_hid.h
- 'h'   00-7F                                                            conflict! Charon filesystem
-                                                                        <mailto:zapman@interlan.net>
- 'h'   00-1F  linux/hpet.h                                              conflict!
+@@ -185,6 +185,7 @@ Code  Seq#    Include File
+ 'I'   all    linux/isdn.h                                              conflict!
+ 'I'   00-0F  drivers/isdn/divert/isdn_divert.h                         conflict!
+ 'I'   40-4F  linux/mISDNif.h                                           conflict!
++'I'   00     linux/inotify.h
+ 'K'   all    linux/kd.h
+ 'L'   00-1F  linux/loop.h                                              conflict!
+ 'L'   10-21  drivers/scsi/mpt3sas/mpt3sas_ctl.h                        conflict!
+@@ -274,7 +275,7 @@ Code  Seq#    Include File
+ 'f'   00-1F  linux/ext2_fs.h                                           conflict!
+ 'f'   00-1F  linux/ext3_fs.h                                           conflict!
+ 'f'   00-0F  fs/jfs/jfs_dinode.h                                       conflict!
+-'f'   00-0F  fs/ext4/ext4.h                                            conflict!
++'f'   00-2F  fs/ext4/ext4.h, uapi/linux/ext4.h                         conflict!
+ 'f'   00-0F  linux/fs.h                                                conflict!
+ 'f'   00-0F  fs/ocfs2/ocfs2_fs.h                                       conflict!
+ 'f'   13-27  linux/fscrypt.h
+@@ -299,6 +300,7 @@ Code  Seq#    Include File
+ 'k'   00-0F  linux/spi/spidev.h                                        conflict!
+ 'k'   00-05  video/kyro.h                                              conflict!
+ 'k'   10-17  linux/hsi/hsi_char.h                                      HSI character device
++'k'   01-0F  fs/orangefs/protocol.h                                    <mailto:devel@lists.orangefs.org>
+ 'l'   00-3F  linux/tcfs_fs.h                                           transparent cryptographic file system
+                                                                        <http://web.archive.org/web/%2A/http://mikonos.dia.unisa.it/tcfs>
+ 'l'   40-7F  linux/udf_fs_i.h                                          in development:
+@@ -372,7 +374,7 @@ Code  Seq#    Include File
+ 0x92  00-0F  drivers/usb/mon/mon_bin.c
+ 0x93  60-7F  linux/auto_fs.h
+ 0x94  all    fs/btrfs/ioctl.h                                          Btrfs filesystem
+-             and linux/fs.h                                            some lifted to vfs/generic
++0x94  all    linux/fs.h                                                some lifted from Btrfs to vfs/generic
+ 0x97  00-7F  fs/ceph/ioctl.h                                           Ceph file system
+ 0x99  00-0F                                                            537-Addinboard driver
+                                                                        <mailto:buk@buks.ipn.de>
+@@ -440,7 +442,7 @@ Code  Seq#    Include File
+ 0xCC  00-0F  drivers/misc/ibmvmc.h                                     pseries VMC driver
+ 0xCD  01     linux/reiserfs_fs.h                                       Dead since 6.13
+ 0xCE  01-02  uapi/linux/cxl_mem.h                                      Compute Express Link Memory Devices
+-0xCF  02     fs/smb/client/cifs_ioctl.h
++0xCF  01-0F  fs/smb/client/cifs_ioctl.h                                <mailto:linux-cifs@vger.kernel.org>
+ 0xDD  00-3F                                                            ZFCP device driver see drivers/s390/scsi/
+                                                                        <mailto:aherrman@de.ibm.com>
+ 0xE5  00-3F  linux/fuse.h
+@@ -449,6 +451,7 @@ Code  Seq#    Include File
+ 0xEF  00-0F  uapi/linux/ntfs.h                                         NTFS
+ 0xF3  00-3F  drivers/usb/misc/sisusbvga/sisusb.h                       sisfb
+ 0xF3  00-3F  video/sisfb.h                                             <mailto:thomas@winischhofer.net>
++0xF5  01-1F  uapi/linux/f2fs.h                                         <mailto:linux-f2fs-devel@lists.sourceforge.net>
+ 0xF6  all                                                              LTTng Linux Trace Toolkit Next Generation
+                                                                        <mailto:mathieu.desnoyers@efficios.com>
+ 0xF8  all    arch/x86/include/uapi/asm/amd_hsmp.h                      AMD HSMP EPYC system management interface driver
 
