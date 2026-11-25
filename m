@@ -2,56 +2,41 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 401E2606A323
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Nov 2026 23:32:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1BB1B606A32E
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Nov 2026 06:14:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=YdvJDNZU;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=LbzxSFSv
-Received: from list by lists.xenproject.org with outflank-mailman.1501674.1697734 (Exim 4.92)
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=yWU/tPwY
+Received: from list by lists.xenproject.org with outflank-mailman.1501714.1697797 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVzzU-0003RR-Dl; Tue, 24 Nov 2026 23:32:00 +0000
+	id 1xW6Go-0004rj-Mn; Wed, 25 Nov 2026 06:14:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1501674.1697734; Tue, 24 Nov 2026 23:32:00 +0000
+Received: by outflank-mailman (output) from mailman id 1501714.1697797; Wed, 25 Nov 2026 06:14:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xVzzU-0003RK-Al; Tue, 24 Nov 2026 23:32:00 +0000
-Received: by outflank-mailman (input) for mailman id 1501674;
- Tue, 24 Nov 2026 23:31:59 +0000
+	id 1xW6Go-0004rc-Jh; Wed, 25 Nov 2026 06:14:18 +0000
+Received: by outflank-mailman (input) for mailman id 1501714;
+ Wed, 25 Nov 2026 06:14:17 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <philmd@oss.qualcomm.com>) id 1xVzzT-0003RE-DB
- for xen-devel@lists.xenproject.org; Tue, 24 Nov 2026 23:31:59 +0000
+ (envelope-from <rdunlap@infradead.org>) id 1xW6Gm-0004MM-RP
+ for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 06:14:16 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xVzzS-0050tP-Px
- for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 00:31:58 +0100
-Received: from [10.42.69.5] (helo=localhost)
+ id 1xW6Gm-005hpF-7B
+ for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 07:14:16 +0100
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <philmd@oss.qualcomm.com>)
- id 6b061dfa-e002-0a2a0a5209dd-0a2a4505841e-48
- for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 00:31:58 +0100
-Received: from [205.220.168.131] (helo=mx0a-0031df01.pphosted.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <philmd@oss.qualcomm.com>)
- id 6b061e6c-4cb1-0a2a45050019-cddca88319b8-3
- for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 00:31:57 +0100
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6AOMaaBZ3520031
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 23:31:56 GMT
-Received: from mail-yw1-f197.google.com (mail-yw1-f197.google.com
- [209.85.128.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j5f00h9sg-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 23:31:55 +0000 (GMT)
-Received: by mail-yw1-f197.google.com with SMTP id
- 00721157ae682-869553205a7so70952667b3.1
- for <xen-devel@lists.xenproject.org>; Tue, 24 Nov 2026 15:31:55 -0800 (PST)
-Received: from [192.168.69.234] (pmd666.hd.free.fr. [82.67.153.177])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4ab6b110c3csm29788684f8f.36.2026.11.24.15.31.52
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 24 Nov 2026 15:31:53 -0800 (PST)
+ (envelope-from <rdunlap@infradead.org>)
+ id 6b067cac-e002-0a2a0a5209dd-0a2a450cd3d2-24
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 07:14:16 +0100
+Received: from [198.137.202.133] (helo=bombadil.infradead.org)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <rdunlap@infradead.org>)
+ id 6b067cb6-f479-0a2a450c0019-c689ca85b6c0-3
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 07:14:16 +0100
+Received: from [50.53.43.113] (helo=bombadil.infradead.org)
+ by bombadil.infradead.org with esmtpsa (Exim 4.100.1 #2 (Red Hat Linux))
+ id 1xW6GU-00000008Wvh-0Sz8; Wed, 25 Nov 2026 06:13:58 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -60,139 +45,163 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=qcppdkim1 header.d=qualcomm.com header.i="@qualcomm.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=google header.d=oss.qualcomm.com header.i="@oss.qualcomm.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Content-Language:From:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	G1ZAm7akP9D8mbltmYnzmqncqYxXc4x3mIjxdEr9bU4=; b=YdvJDNZUyxhdhS6J
-	arsYzy3lKCqdBPApC8vjWOmux1EIZ/i1OW6ayttqTLrpcttLnVewWbiIMUWRLJz0
-	RmmzuEZZCfCRwALk8iiU5w1FrdEn80w8EaCCPuo1QryLIYZsv52MaPN7dB5/Fx6z
-	l6jCl47R23yif+/qQfkM5FhT8f14UNd2fOQ2jupj4TKMNHZrqVPmmT6zOyrtzDL+
-	5l4JKsIwHiZQIhO4ZAJ6D3jyEh4dbR9gTyjgAnpZqeLCk36mMOeNAxvWBa4P3WlY
-	+e2yGHnhMeCh/SpVzWeo/Iwoh3bYrLMJDCh6MNDsq527n5lkVfRmsYCXMJgLDRBL
-	uQNQSA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795563115; x=1796167915; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=G1ZAm7akP9D8mbltmYnzmqncqYxXc4x3mIjxdEr9bU4=;
-        b=LbzxSFSv5hG/YXHbvJmU1yYLp5rZGkThwChjYhVvgiDoH0HDCf1qQ/+MlhM9ZBstmz
-         Yg31y4LMDvtUmxmLpg+IMpdTJwUXvLPpUbwh9KJTyw8dW8S3v/m+SXO/NVGrzAq9kCRZ
-         fH6g/6TmmC5b37+rVmrtERO5rHdC6m/962rRi0qkHNfL50XdnGmr+DVR/VzfRGLFCqou
-         aApS6Iliz8jsOSJogOC7WNw1Q9s+vww28jAaf06Db4vy6+lC+RjXt/HiXMda3/iXAvTf
-         4v9Zcq5EQwbrsLPb5Keyy/aEfkBPxeGCqSM7plKwHdNEX0OMYNmibD2FKJ2ygH95PSn3
-         J5Rw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795563115; x=1796167915;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=G1ZAm7akP9D8mbltmYnzmqncqYxXc4x3mIjxdEr9bU4=;
-        b=OXDCT0zDpy2HaKHAmrHPMhncBiGKzFiJJlMfJZ2AjcKXX5eUyQD1biy0PFZ7P5Wze6
-         ikZo4AK/w0/YqHzMfDnURI0Vpqeb6+3pkg/PBdt7r3jelRqDHwdC6Iybv/H+3SZWNJK2
-         VYdisEBIGXfFXSOJShks3I0E93l3yTZ6TbO9yxti8yRO24ND6M0BQBQ6k2pSx5coTkx9
-         TeOD56NEcpDAfjfB9+uAuEP5b5KOTE60VcH/ik15U0n2pm/feJ5rlEvtEBpy1N/Mh0Yf
-         Ucs5qRyKGRW4llk14GnYHMamrQbBBKUi26aXHVd4aLfxoTGOiL24/2J4YJob5f1XovWc
-         Nbew==
-X-Gm-Message-State: APuU4Z+J8XB5d/LUkiIk3hFK20MHRoBYYeZ13Z0Rb/FzDZ6cI9rHOU3f
-	qEKRXXDIC+VTG/GA035kOXRxZkibGjYkxqduBSMfu8KJg2no9gFeXm2s5Zgi4GoJJ+R7iELbS/t
-	fxK1UQAmym7p+J/NcH/cvlrFNKlm6HOtXtXz63vi6lGFTWE2Da3qpFU0JZTXe/3m32ZjcAQ==
-X-Gm-Gg: AZFdTZcC6z5YcRmi3PLhE3P0lQif1NNZ2Yl3T1dOOSEGd4/8Q0R6BhOTrRiNlw/tg4g
-	PvTUBN3OZuDK35BEammtF9kCZ9qZ6ylXEGW/kusM+/JcVyFY/WTm+NEt9WqbRwnZctlF4FmqEaI
-	RZeiVqtj/f8u5pXleyCKXG7tcyEovq/xDALSfF3PFIiRvsI8j+yOUMOnjssS1XxDXXlFMBEt4j2
-	fDkIzJnHCw7G6P7I3dtMfUwsqgjUXi9Kzp2PMan4VWLA6JMWVCdvrDN3lPX+BN9rTcIAcyutcEc
-	Q85Z0o/hBgTPzzjEvMZT+tLeunB7NMKaC72gkUB1tHudViX9jZUNA1J7Wj5I9RH9VX9OHoI0ndH
-	Zqc5wFHAi1AaAKqLUO7Y/nvFSxOxI2U7tBC0vJVA+B9rf6XRWH/WoFeU0RYqeZ6wjzYI5mPeiMf
-	NRVG4z3Gk=
-X-Received: by 2002:a05:690c:e3d2:b0:873:5c0f:27c with SMTP id 00721157ae682-8b5204ad248mr71151117b3.38.1795563114749;
-        Tue, 24 Nov 2026 15:31:54 -0800 (PST)
-X-Received: by 2002:a05:690c:e3d2:b0:873:5c0f:27c with SMTP id 00721157ae682-8b5204ad248mr71150797b3.38.1795563114026;
-        Tue, 24 Nov 2026 15:31:54 -0800 (PST)
-Message-ID: <2f326926-16e7-478d-bc57-86052033199b@oss.qualcomm.com>
-Date: Wed, 25 Nov 2026 00:31:52 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=bombadil.20210309 header.d=infradead.org header.i="@infradead.org" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
+	:Reply-To:Content-Type:Content-ID:Content-Description;
+	bh=KSyfkTIM3oBW4szNqhNzxJzYdeXlrWQwTUs3E0agQZA=; b=yWU/tPwYuhIm5oxlF+9IIOB21x
+	XZ1/SuGnvm8fxYUV82u/rwcd+e0JZTVBDbmeo2EFN8RRcskRB0J8b/0GVtFClKCZvHJDDfHB5vJoP
+	mioMKbeXUW1pWyqV3vu4b3sl59Hg3eAdFCLVCKFOWEIQeOJQKtNmm6uSDYGYFEcNmOhI8Ogqlp0Qw
+	UCmXP5Nzvez1UEntRjVk5QkwqQuJFewkiU0ivn2GKJXjq6y17OjRmrQ+fzQ6uD4QJpFz4jELL8vwP
+	QcJ6uaOqREsHDGyS5bWv5k7pNbopX8lNMRWxb+uY/dTboKIQkxA+w2SxUTYfDiL4XcfSJeGrkPkWU
+	S6PSujXA==;
+From: Randy Dunlap <rdunlap@infradead.org>
+To: linux-kernel@vger.kernel.org
+Cc: Randy Dunlap <rdunlap@infradead.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	linux-doc@vger.kernel.org,
+	David Hildenbrand <david@kernel.org>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Jason Gunthorpe <jgg@nvidia.com>,
+	Leon Romanovsky <leonro@nvidia.com>,
+	linux-mm@kvack.org,
+	Jaroslav Kysela <perex@perex.cz>,
+	Takashi Iwai <tiwai@suse.com>,
+	linux-sound@vger.kernel.org,
+	Jens Axboe <axboe@kernel.dk>,
+	linux-block@vger.kernel.org,
+	Marcel Holtmann <marcel@holtmann.org>,
+	Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
+	linux-bluetooth@vger.kernel.org,
+	Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
+	Jason Wang <jasowangio@gmail.com>,
+	David Heidelberg <david@ixit.cz>,
+	oe-linux-nfc@lists.linux.dev,
+	Chas Williams <3chas3@gmail.com>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@kernel.org>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>,
+	netdev@vger.kernel.org,
+	Helge Deller <deller@gmx.de>,
+	linux-fbdev@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	MPT-FusionLinux.pdl@broadcom.com,
+	"James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+	"Martin K. Petersen" <mkp@kernel.org>,
+	linux-scsi@vger.kernel.org,
+	Miquel Raynal <miquel.raynal@bootlin.com>,
+	Richard Weinberger <richard@nod.at>,
+	Vignesh Raghavendra <vigneshr@ti.com>,
+	Zhihao Cheng <chengzhihao1@huawei.com>,
+	linux-mtd@lists.infradead.org,
+	Neill Kapron <nkapron@google.com>,
+	Andrey Konovalov <andreyknvl@gmail.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	linux-usb@vger.kernel.org,
+	Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	xen-devel@lists.xenproject.org,
+	Hans de Goede <hansg@kernel.org>,
+	Arnd Bergmann <arnd@arndb.de>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	=?UTF-8?q?Eugenio=20P=C3=A9rez?= <eperezma@redhat.com>,
+	Sean Christopherson <seanjc@google.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	kvm@vger.kernel.org,
+	virtualization@lists.linux.dev,
+	Jan Kara <jack@suse.cz>,
+	linux-fsdevel@vger.kernel.org,
+	"Theodore Ts'o" <tytso@mit.edu>,
+	linux-ext4@vger.kernel.org,
+	Mike Marshall <hubcap@omnibond.com>,
+	devel@lists.orangefs.org,
+	Paulo Alcantara <pc@manguebit.org>,
+	Namjae Jeon <linkinjeon@kernel.org>,
+	linux-cifs@vger.kernel.org,
+	Jaegeuk Kim <jaegeuk@kernel.org>,
+	Chao Yu <chao@kernel.org>,
+	linux-f2fs-devel@lists.sourceforge.net,
+	Florian Fainelli <florian.fainelli@broadcom.com>,
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
+	Tzung-Bi Shih <tzungbi@kernel.org>,
+	Benson Leung <bleung@chromium.org>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	Alex Deucher <alexander.deucher@amd.com>,
+	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+	amd-gfx@lists.freedesktop.org,
+	Jani Nikula <jani.nikula@linux.intel.com>,
+	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+	Rodrigo Vivi <rodrigo.vivi@intel.com>,
+	Tvrtko Ursulin <tursulin@ursulin.net>,
+	intel-gfx@lists.freedesktop.org,
+	Matthew Brost <matthew.brost@intel.com>,
+	=?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
+	intel-xe@lists.freedesktop.org
+Subject: [PATCH v3 06/12] docs: ioctl-number: update SCSI entries
+Date: Tue, 24 Nov 2026 22:13:33 -0800
+Message-ID: <20261125061340.3402300-7-rdunlap@infradead.org>
+X-Mailer: git-send-email 2.56.1
+In-Reply-To: <20261125061340.3402300-1-rdunlap@infradead.org>
+References: <20261125061340.3402300-1-rdunlap@infradead.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 09/21] i386/xen: Don't inject event on invalid port in
- qmp_xen_event_inject()
-To: David Woodhouse <dwmw2@infradead.org>, qemu-devel@nongnu.org
-Cc: xen-devel@lists.xenproject.org, kvm@vger.kernel.org,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        Peter Maydell
- <peter.maydell@linaro.org>, Paul Durrant <paul@xen.org>,
-        Stefano Stabellini <sstabellini@kernel.org>,
-        Anthony PERARD <anthony@xenproject.org>,
-        "Edgar E . Iglesias" <edgar.iglesias@gmail.com>,
-        "Michael S . Tsirkin" <mst@redhat.com>,
-        Richard Henderson <richard.henderson@linaro.org>,
-        Marcelo Tosatti <mtosatti@redhat.com>,
-        =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
-        Jason Wang <jasowangio@gmail.com>, Hui Peng <benquike@gmail.com>,
-        Mark Syms <mark.syms@citrix.com>, Feifan Qian <bea1e@proton.me>,
-        David Woodhouse <dwmw@amazon.co.uk>
-References: <20261124232247.23169-1-dwmw2@infradead.org>
- <20261124232247.23169-10-dwmw2@infradead.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <20261124232247.23169-10-dwmw2@infradead.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: HZnqHRRYtTGzxXy2BEr2hGDOdnvdjeP6
-X-Proofpoint-GUID: HZnqHRRYtTGzxXy2BEr2hGDOdnvdjeP6
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI0MDA5MiBTYWx0ZWRfX6QbHAoH/BRyN
- wBBsnVWl1P6xFZ1s5rFun0T+v5gMfXjlUkKUrybD3uwf4FBp07HTv5D5fzLMLQSv8GIh/k0AbpF
- lc27fcGxv2nOH63uxMg+/1HKnj50dpM=
-X-Authority-Analysis: v=2.4 cv=JqtkP84C c=1 sm=1 tr=0 ts=6b061e6b cx=c_pps
- a=0mLRTIufkjop4KoA/9S1MA==:117 a=nz36NW0qrpeEijYxj/H2Ew==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=p0WdMEafAAAA:8 a=pBOR-ozoAAAA:8 a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8
- a=1tSEMpTH9XP_W59IOagA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=WgItmB6HBUc_1uVUp3mg:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI0MDA5MiBTYWx0ZWRfXwwRBsbq9M8Qd
- g7z+bPszE0b37mvP4dct0vl+IwvAv+Hm3KKU9Q1haEp+MRxHIchfkoFajK2IcfKhMzeLfeMjgAI
- 5HDvZhNsgU9P7ws8irUjZoWKodlMEzgO8i7tLpcgzgfrbO7/zde8wJIWbPZQJL+OWKS1XRdOFHm
- PUAcNMVx1cPylbJOD73H0kU6ENnCx/v9qDM6XxYuCQ+NKY8RfFziA5DBQb7yEbv5ViXbT51E2rQ
- KapXj8ge5Bwvq4/21tWrdR3BD/lT8z3a1OJ7nbOCl5GR3YBQ0F91ZyqeepIvD8g6O3KsHFtka+M
- Qdt/smpzhR2hh/CvQLSx2eQPUUUB3Ixowb97vB+hTjPaCId5ICvzODsgpkksx/Io5hdEjSe5Us0
- ql9c/WRLd1m2DdUaSnihciqaZZjRF/G0dL9JOSiGX8e7pz+EDKWvBdx1GTyV3QobeKneuNRlVci
- /FVpc+OqeXN8EHWcUqg==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-24_06,2026-11-23_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 suspectscore=0 impostorscore=0 spamscore=0
- priorityscore=1501 malwarescore=0 adultscore=0 clxscore=1015 phishscore=0
- bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611240092
-X-purgate-ID: tlsNG-c201ff/1795563118-F4AA72A1-1ED2952A/0/0
+X-purgate-ID: tlsNG-d25034/1795587256-008CDA5B-8F3D37B7/0/0
 X-purgate-type: clean
-X-purgate-size: 663
-X-Spam-Status: No, score=-22.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+X-purgate-size: 2273
+X-Spam-Status: No, score=-16.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=unavailable
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 25/11/26 00:22, David Woodhouse wrote:
-> From: David Woodhouse <dwmw@amazon.co.uk>
-> 
-> qmp_xen_event_inject() reported the invalid port with error_setg() but
-> then carried on regardless, passing it to set_port_pending(). Return
-> after setting the error.
-> 
-> Fixes: 507cb64d6e66 ("i386/xen: add monitor commands to test event injection")
-> Reported-by: Hui Peng <benquike@gmail.com>
-> Closes: https://gitlab.com/qemu-project/qemu/-/work_items/4525
-> Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
-> ---
->   hw/i386/kvm/xen_evtchn.c | 1 +
->   1 file changed, 1 insertion(+)
+Update the list of files where SCSI ioctls are defined and update the
+ranges of function numbers that are used.
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
+Reviewed-by: Martin K. Petersen (Oracle) <mkp@kernel.org>
+---
+v2: no change
+v3: rebase
+
+[Since having multiple maintainers trying to merge these would
+cause some conflicts, it would be more manageable for Jon to
+take all of these through the docs-next tree.]
+
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: Shuah Khan <skhan@linuxfoundation.org>
+Cc: linux-doc@vger.kernel.org
+Cc: MPT-FusionLinux.pdl@broadcom.com
+Cc: "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>
+Cc: "Martin K. Petersen" <mkp@kernel.org>
+Cc: linux-scsi@vger.kernel.org
+
+ Documentation/userspace-api/ioctl/ioctl-number.rst |    3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+--- linux-next-20261123.orig/Documentation/userspace-api/ioctl/ioctl-number.rst
++++ linux-next-20261123/Documentation/userspace-api/ioctl/ioctl-number.rst
+@@ -187,7 +187,7 @@ Code  Seq#    Include File
+ 'I'   40-4F  linux/mISDNif.h                                           conflict!
+ 'K'   all    linux/kd.h
+ 'L'   00-1F  linux/loop.h                                              conflict!
+-'L'   10-1F  drivers/scsi/mpt3sas/mpt3sas_ctl.h                        conflict!
++'L'   10-21  drivers/scsi/mpt3sas/mpt3sas_ctl.h                        conflict!
+ 'L'   E0-FF  linux/ppdd.h                                              encrypted disk device driver
+                                                                        <http://linux01.gwdg.de/~alatham/ppdd.html>
+ 'L'   35-38  arch/m68k/include/asm/fbio.h
+@@ -259,6 +259,7 @@ Code  Seq#    Include File
+ 'c'   00-7F  linux/comstats.h                                          conflict!
+ 'c'   00-7F  linux/coda.h                                              conflict!
+ 'c'   00-1F  linux/chio.h                                              conflict!
++'c'   08     drivers/scsi/ch.c                                         conflict!
+ 'c'   80-9F  arch/s390/include/asm/chsc.h                              conflict!
+ 'c'   A0-AF  arch/x86/include/asm/msr.h conflict!
+ 'd'   00-FF  linux/char/drm/drm.h                                      conflict!
 
