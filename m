@@ -2,64 +2,49 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BDF8A606A31E
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Nov 2026 09:25:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 99B3E606A31C
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Nov 2026 09:59:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=yg8naujG
-Received: from list by lists.xenproject.org with outflank-mailman.1503230.1699015 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=LVu0c3Fg
+Received: from list by lists.xenproject.org with outflank-mailman.1503255.1699047 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWVj2-0003o7-6z; Thu, 26 Nov 2026 09:25:08 +0000
+	id 1xWWFX-0000tI-PB; Thu, 26 Nov 2026 09:58:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1503230.1699015; Thu, 26 Nov 2026 09:25:08 +0000
+Received: by outflank-mailman (output) from mailman id 1503255.1699047; Thu, 26 Nov 2026 09:58:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWVj2-0003o0-3o; Thu, 26 Nov 2026 09:25:08 +0000
-Received: by outflank-mailman (input) for mailman id 1503230;
- Thu, 26 Nov 2026 09:25:07 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1xWVj1-0003mp-7P
- for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 09:25:07 +0000
+	id 1xWWFX-0000tB-MW; Thu, 26 Nov 2026 09:58:43 +0000
+Received: by outflank-mailman (input) for mailman id 1503255;
+ Thu, 26 Nov 2026 09:58:42 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xWWFV-0000t4-Eu
+ for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 09:58:42 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xWViz-00F4Ca-Eo
- for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 10:25:05 +0100
-Received: from [10.42.69.3] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6b07faef-2eae-0a2a0a5409dd-0a2a4503c9e8-4
- for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 10:25:04 +0100
-Received: from [40.107.200.5]
- (helo=CH5PR02CU005.outbound.protection.outlook.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6b07faef-fae8-0a2a45030019-286bc805d7dc-3
- for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 10:25:04 +0100
-Received: from CH2PR04CA0025.namprd04.prod.outlook.com (2603:10b6:610:52::35)
- by PH8PR12MB6724.namprd12.prod.outlook.com (2603:10b6:510:1cf::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.662.7; Thu, 26 Nov
- 2026 09:23:58 +0000
-Received: from CH1PEPF0005BD62.namprd02.prod.outlook.com
- (2603:10b6:610:52:cafe::15) by CH2PR04CA0025.outlook.office365.com
- (2603:10b6:610:52::35) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.662.7 via Frontend Transport; Thu, 26
- Nov 2026 09:23:58 +0000
-Received: from satlexmb08.amd.com (165.204.84.17) by
- CH1PEPF0005BD62.mail.protection.outlook.com (10.167.244.251) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.662.3 via Frontend Transport; Thu, 26 Nov 2026 09:23:58 +0000
-Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.57; Thu, 26 Nov
- 2026 03:23:57 -0600
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb09.amd.com
- (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.57; Thu, 26 Nov
- 2026 03:23:57 -0600
-Received: from [192.168.31.141] (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.57 via Frontend
- Transport; Thu, 26 Nov 2026 03:23:56 -0600
+ id 1xWWFU-00BimV-K7
+ for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 10:58:40 +0100
+Received: from [10.42.69.1] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a2174ae9fb00099bd@swg.vates.tech>)
+ id 6b0802c4-bab6-0a2a0a5309dd-0a2a4501ce0c-32
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 10:58:40 +0100
+Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a2174ae9fb00099bd@swg.vates.tech>)
+ id 6b0802cf-5bcc-0a2a45010019-b9ff1c2394ef-3
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 10:58:40 +0100
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a2174ae9fb00099bd.001 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Thu, 26 Nov 2026 09:58:35 +0000
+Received: from [192.168.1.37] (lfbn-gre-1-56-253.w92-157.abo.wanadoo.fr
+ [92.157.33.253]) (Authenticated sender: baptiste.le-duc)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 81F3681EFD
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 10:58:34 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -68,172 +53,108 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=MRWXoCHlp58YhMTd6fM1zYP6plkLs5ACkzxwC8Cc9c8/CIPQNmGAC7jz7N17ZihwoG+IEkzPEOzcSQOYs3yLJi3Bx20DrBJo3FdJPV5Du8dKpkXZfVK+jlpXqQl4G0qDCSg75p8EFjhSbtsViXCvNhXI4WU87fgvy6uOecB43WnAHXnyNoO4+3ncGiQt5jg0bYzxeGGUzD8CcA+t89DAnVLYp82b+xJFLsi6Kk40gaNcj3MTWukjuxtRJqS1cY4CUrjkP9w263Z2BQi5gT3wxgwz4eSnhSBcqqfgTNot2HSzQm3xYAHq7pM552wKJC0eFIz/lBDL+IdtkcBIyVQfPw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=D3g3Gp7BxPOcXA7SVg0zjOOfyI1U03rv7zyB3iD6oXE=;
- b=vcAUGD2//QKXgIJcf2vShq3J7yhj+0F96RI4vP7jV7bnKQ7Ul63BocWiGjgj3Pu6Zji5OLEeXnTlSrFF7xZog6Se26yDT9M065KZ8v3zf+J+gSWtOiu2VKbxu23fGTRiBQ9/Qt5fWARQgvbZ6u/UE+v6EK2ZXrBJr8kaMJLmkIinRPIQSFd7uZbWNMNYPMk7GLPQNp4GLhpuIA0z737XvXbf9MazP5Y1v2JgUKyaEiGC3tLI1hT4auWfGebZiv423PwpocvuBzXyyCVYVKBNswvKHVusitwpq4zNni9muOybKCGZEdPwgP4XdqY+hHNaM3bOauXj1bl07SdCQZA4MQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=valinux.co.jp smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=D3g3Gp7BxPOcXA7SVg0zjOOfyI1U03rv7zyB3iD6oXE=;
- b=yg8naujGsalqa4PnbMMqJ2wFA+S0yyGnO9w5VyZWnuKI4QymcYtCs11hsZnN6MbTFz2FKprpqirqSg3CIDtby9isrPw5Bpe2EwwhvLnBungp/4qihb3+HPIi3uihBy+G8kvdkeO8o8XAxp2z4sBanHRUYxukVHL737FS1uNxfdE=
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Message-ID: <87b23da3-6418-40d1-9ec8-3b26f6b000b1@amd.com>
-Date: Thu, 26 Nov 2026 10:23:55 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=SpQUtnsl9xsQqBHZ9sqIBNTykZnYw2hH55DFApUwBiA=;
+ h=from:subject:date:message-id:to:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
+ b=LVu0c3Fg/XwDIpFI+X+wIFA6fUgqlZjWCArspN/O/suQckpb66NkOQOibwgkEXjl+SK9fFeGA
+ zyxkxbWB3ZaHJJGCcLCe5aMYsOy6TdJFILXReHYJp1Et3m114Cp41YL+lNMZ/YDe5VqbRhPgZUk
+ CEOD7o1nvdHQJAP0Jj/XaD4A0ZdMtLsG9iWyS351ZtvpL9ogxOTH49DK1KQ5eGe47dbkYo0c0Cj
+ SipsGMGO7fJf0RJURS++3wJoryKSFUTAjlRLm7gUK8MgRT8nt7IkxEJrP9th0XS3Y44lHDjnxp9
+ 24zCovLG0+GCigBu2dQh4WeAmfrH5g8GfWYi+FKa+0+w==
+X-Zone-Loop: 7a042db2f8c5c83b1ccd2d631ad375dd167f4f3449d2
+x-campaign-type: default
+x-transaction-id: 581cdd0f-a86d-4327-9b4c-822076d6b6e3
+x-swg-uid: 01-651e502b-81d2-4ff6-805c-22d71f4cac1c
+X-Mailer: Sweego
+Message-ID:
+ <1795687115.8631fc262581453bbf619ec5b2062170.1a2174ae9fb00099bd@vates.tech>
+x-swg-bid: 1795687115.8631fc262581453bbf619ec5b2062170.1a2174ae9fb00099bd
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+Date: Thu, 26 Nov 2026 10:58:34 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] xen/arm: Fix sibling mask setup to only include online
- CPUs
-To: Hirokazu Takahashi <taka@valinux.co.jp>, <xen-devel@lists.xenproject.org>
-CC: <jbeulich@suse.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>
-References: <20261126044340.14779-1-taka@valinux.co.jp>
-From: "Orzel, Michal" <michal.orzel@amd.com>
+Subject: Re: [PATCH] xen/riscv: don't decrement total_pages on failed
+ paging_alloc_page()
+To: xen-devel@lists.xenproject.org
+References: <20261126083130.32791-1-oleksii.kurochko@gmail.com>
+From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
 Content-Language: en-US
-In-Reply-To: <20261126044340.14779-1-taka@valinux.co.jp>
-Content-Type: text/plain; charset="UTF-8"
+Autocrypt: addr=baptiste.le-duc@vates.tech; keydata=
+ xsBNBGoPSX8BCADSuTikqW3FD4mscQugY1thRaKlIhcJ2G9YCWYXAlp+xosvTlzfIftOZZim
+ 750MLvyKtLPkQzB6TZtFZBiexSraaF/MdDKRTT5DcVa3r7ZnHgqMclWlPa4ioysS4yFcJanL
+ cyNOT7HUFvIdirMMqiViedfYtS0GORPBBPVISD6ClMz3ecHIxqllfq9CHYQn4amKEfHmh6tm
+ Rufo4Gjl6x8cUFZZlRQf+aCmUzdSPA0P5u3sueYH1uEz4w/jbD53MlKqzCvxUeOsfS2swTQA
+ 6mS9jIgOjNadpUTOzKfDHMgFirtG+HFpm45Nwp6KQizxgDVOfTnOfVHm5Gwqm3ETl9y5ABEB
+ AAHNPEJhcHRpc3RlIExlIER1YyAoVmF0ZXMgWXViaWtleSkgPGJhcHRpc3RlLmxlLWR1Y0B2
+ YXRlcy50ZWNoPsLAjgQTAQoAOBYhBGiSJ6HgW88MgT/gfu2Cu2XL9M6QBQJqD0l/AhsDBQsJ
+ CAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEO2Cu2XL9M6QuMcH/ihiy/Nrxp919AmY0ENnc0NK
+ r/2LDvW/hrX4FfbpxAmrGmQ7MU1aQTk0JDbfcsG8OYH6wO5sqnXb1gz50YrEdpfVSbHz5YTZ
+ EhDIxE4g7NrvJZh3Qc0m0CAyjYTNHen7J6olVaCMjrOH7uRHUYZ7Pl3am9mZosfLmez/aWJO
+ a6ihQxBXHI75brlk1teIURkep2kP7P0Flmfl4cA//saREoTF7GXCtjOSQk/xg8PP0Sswqp5G
+ TdJptn3FQn6lAzfz0eFSYqkaoX2c2k1MDa7o+UX9cfGPL8ybMKnYkasLxck6eOWGJWf+YTrm
+ ga/r0kBaftmqNDgt5nI2jNTDwZcT9g3OwE0Eag9JfwEIAM6IWbuBSvz+erv27oGDDpo8M6Fp
+ dGUvft7v+WceHUfxiXpYFx9qgIU6XGy6y+3lJMAvNcltS8DuhioqMlfKRSYGKZlpliY65dNP
+ 557IuM4ctVJ+I9CVclvv9eahARQKgF5auLJAAlvGSmU+ufNvlwTUmLIRcrPviTmB6X5jJYc+
+ fiNeyI0HcsgcN21C0r62tUCypuZ+vgEJXw2bx1V8mVGZKxdGJPh58QF6kRK+xmd4kEComLGV
+ BeM6BcVOtEjDcGNC0tLhXb0p9g1Ys55iA8sd6s4WacyolW2J6rwmcOkjiWexWw1caYgIWAV1
+ 004M3gwUaOz0dGq2i7HQ0AiVfVkAEQEAAcLAdgQYAQoAIBYhBGiSJ6HgW88MgT/gfu2Cu2XL
+ 9M6QBQJqD0l/AhsMAAoJEO2Cu2XL9M6QovYH/RjstyL5o/V5K74ylBtz0j5t3pLX5JKbwApi
+ 656rGgDdqElImyvvZppNMl/mgHNzvxmfFAhJXnSX9f1fqVEQKOGEhLUastnl/ssBiE5x7btM
+ V0GAffxXbXJZbVv4b/DI+gVrOPc2YXlVwruapvTZNtD3hqPrkjrmq5WTtGR2loIVSe62hmh0
+ BGD2Fy79b/hYWyBqhayPBEjwGW75u4/yn+Yqy1PgG3hIcvg7GSuT3akhHZSB2Mbguzcoyf9Q
+ DJl6t33JxPRkkNrEdkPPmRlQCTSiUkVjKqMDF3jlINWsJ5t4jKFsNF91ksdw7aQgiX+tQIpE
+ ugMC1NuNi5dDGip66bw=
+In-Reply-To: <20261126083130.32791-1-oleksii.kurochko@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0005BD62:EE_|PH8PR12MB6724:EE_
-X-MS-Office365-Filtering-Correlation-Id: 45563298-893f-49f2-7479-08df4b9efff7
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700016|23010399003|376014|1800799024|82310400026|261022075727099003|261022105027099003|10067099003|56012099006|11063799006|261026140227099003|261026121527099003|261028144727099003|261021123027099003|261021121427099003|261102123227099003|261009223027099003|18002099003|22082099003|3023799007;
-X-Microsoft-Antispam-Message-Info:
-	gS/aaIVpaZmA/D6YYXSkd7Mf4kJNdVLM67yxUjp4zDvsL1Illxk+n59ykwT8ppiS9NSxloioS2tFf/+xj+a3lmolYO/B/VTA9EQGERD4GGtEFnsfn8flWaf3A6A15jQlIb8gomwm5xIXNH0h2bVxPlqblvVHLB4C3cLBuQsZ1htD1VT6UnGv6apHIheO1J9aBBoaa4oOQfhofSSDBW3c+92GNbvOCxCm4k2sW6HjRbANW8+rg6TuM9tPqVJLOx9VzgmsvVYcsIsjfGz3lkYKPo6cZX1Xn7idEfadXve2pHUDshKqSMNgcqPCXQxRBI2aMvRS/MJNjkXYYl7hlM0KIN0rCQhetnhvpB8vNblxaAwCXc3r49g/V7YyOT+e3crC6cEva7QU6uDKFXPfabqlmIZ7Em9D/ln14uWNXyyjexETw4D65MnT2Jb8aXjoXEyonwCfAECCrsy/pA0F++GMBUTb7XaJhmPXfc3oQr1Ug1KZ8HBfwhOkCFKa/Ak3UNX+unuwagxn/wuigDlLc+ZzRB+DIxnTruw+f9tV5kk3tqbrp0R2j6qUBBqStmM0Ne8ROEEgBiaSR203Po/XOSdBKCwOP1AsC2wELVb0+70bew8rN7PtdCgm9pz+QTqh4I+e3ca494AY1nRI/6nOZRAJCGaXwZ1g2A7ZEs/b2r07NbV1ubrRc9oZj4il0BLLJvZ1o6FxakeGpHAMeCrcgWqGJQ==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(23010399003)(376014)(1800799024)(82310400026)(261022075727099003)(261022105027099003)(10067099003)(56012099006)(11063799006)(261026140227099003)(261026121527099003)(261028144727099003)(261021123027099003)(261021121427099003)(261102123227099003)(261009223027099003)(18002099003)(22082099003)(3023799007);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	FkF8vFeHP9/dr2AdF9GlcmQMoHFAKuu5Xe0EeMgNzePv4fWIf9Mn1O05JGMdjMK6mBx7ecOOTgec42Gul22uisP1ObnBnxLa6Y1Tmo40Arjb9iEUi1JGZrbxY5HM4HszCNSLhvvDziHf7Yz8kGrQ4QWuUdu1nHe7zfaw/Sl6Qlcb5X7oBAQiq6N0Fv80Z1zxnOAVdFat5EDXYwnHQdXb3Dnamm4nVeCY1ZdcJnqckuxtonC2fnnN94xtd6jnk7nOJ61ecxDxqxGbTVZPDDWt7uHr1kP9oMaIL7mN9IdsZf5mWEik9+Nof9etnQaQmbvS1R5PFrG9YxXEvntTIZOGL9NPKEfv9slX+TdioHV37N//KVV/fnsnpOSGV6zUzfsdyIPQqkrfuQB9qbY/6dNc4o4RKggDQlPvVl5JFcIjdxTQwxhirmvQUalTgI52ZaOK
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Nov 2026 09:23:58.0651
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 45563298-893f-49f2-7479-08df4b9efff7
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CH1PEPF0005BD62.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB6724
-X-purgate-ID: tlsNG-33051d/1795685104-77AC44E9-39E78C66/0/0
-X-purgate-type: clean
-X-purgate-size: 3413
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=4.0.1
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1795687114572
+X-purgate-ID: tlsNG-d62444/1795687120-BD2EC5FD-61514CBB/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 1298
+X-Spam-Status: No, score=-14.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FORGED_MUA_MOZILLA,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+Reviewed-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
 
-
-On 26-Nov-26 05:43, Hirokazu Takahashi wrote:
-> Populate the CPU sibling map only with CPUs that are brought
-> online. Currently, all CPUs in cpu_possible_map are added,
-> which leaves CPUs that failed to boot in the sibling masks and
-> may lead the scheduler to make incorrect decisions.
-Please mention the removal part as well which you added in this revision.
-
+On 11/26/26 9:33 AM, Oleksii Kurochko wrote:
+> paging_alloc_page() unconditionally decrements d->arch.paging.total_pages,
+> even when the freelist is empty and page_list_remove_head() returns NULL.
+> In that case the counter underflows, so arch_get_paging_mempool_size()
+> reports a bogus pool size and subsequent paging_freelist_adjust() calls
+> operate on a wrong page count.
 > 
-> Fixes: 701190abb3d5 ("xen/arm: Set correct per-cpu cpu_core_mask")
-> Signed-off-by: Hirokazu Takahashi <taka@valinux.co.jp>
+> Only decrement the counter when a page was actually taken from the
+> freelist.
+> 
+> Fixes: af87a609c79d ("xen/riscv: implement p2m_next_level()")
+> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 > ---
-> Changes in v3:
-> - Remove the CPU from sibling maps when it goes down, introducing
->   remove_siblinginfo() to match x86 Xen.
-> - Change the cpu parameter type of set_cpu_sibling_map() to
->   'unsigned int' to align with x86 Xen. Also use 'unsigned int'
->   for the cpu parameters of remove_siblinginfo() and
->   remove_cpu_sibling_map().
-> - Minor code cleanups.
+>   xen/arch/riscv/paging.c | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
 > 
-> Changes in v2:
-> - Rename init_cpu_sibling_map() to set_cpu_sibling_map() to align
->   with x86.
-> - Use BUG_ON() in set_cpu_sibling_map() to verify that per-cpu
->   cpu_sibling_mask and cpu_core_mask are allocated.
-> 
->  xen/arch/arm/smpboot.c | 39 +++++++++++++++++++++++++++++++++++----
->  1 file changed, 35 insertions(+), 4 deletions(-)
-> 
-> diff --git a/xen/arch/arm/smpboot.c b/xen/arch/arm/smpboot.c
-> index 8c9072f3c1..c4c9f535e3 100644
-> --- a/xen/arch/arm/smpboot.c
-> +++ b/xen/arch/arm/smpboot.c
-> @@ -91,18 +91,44 @@ static int setup_cpu_sibling_map(int cpu)
->           !zalloc_cpumask_var(&per_cpu(cpu_core_mask, cpu)) )
->          return -ENOMEM;
->  
-> +    return 0;
-> +}
-> +
-> +static void set_cpu_sibling_map(unsigned int cpu)
-> +{
-> +    unsigned int sibling;
-> +
-> +    BUG_ON(!per_cpu(cpu_sibling_mask, cpu));
-> +    BUG_ON(!per_cpu(cpu_core_mask, cpu));
-> +
->      /*
->       * Currently we assume there is no multithread and NUMA, so
-> -     * a CPU is a sibling with itself, and the all possible CPUs
-> +     * a CPU is a sibling with itself, and the all online CPUs
->       * are supposed to belong to the same socket (NUMA node).
->       */
->      cpumask_set_cpu(cpu, per_cpu(cpu_sibling_mask, cpu));
-> -    cpumask_copy(per_cpu(cpu_core_mask, cpu), &cpu_possible_map);
-> +    cpumask_copy(per_cpu(cpu_core_mask, cpu), &cpu_online_map);
-> +    cpumask_set_cpu(cpu, per_cpu(cpu_core_mask, cpu));
->  
-> -    return 0;
-> +    for_each_online_cpu(sibling)
-> +        cpumask_set_cpu(cpu, per_cpu(cpu_core_mask, sibling));
->  }
->  
-> -static void remove_cpu_sibling_map(int cpu)
-> +static void remove_siblinginfo(unsigned int cpu)
-> +{
-> +    unsigned int sibling;
-> +
-> +    for_each_cpu(sibling, per_cpu(cpu_core_mask, cpu))
-> +        cpumask_clear_cpu(cpu, per_cpu(cpu_core_mask, sibling));
-> +
-> +    for_each_cpu(sibling, per_cpu(cpu_sibling_mask, cpu))
-> +        cpumask_clear_cpu(cpu, per_cpu(cpu_sibling_mask, sibling));
-On ARM a CPU is a sbiling with itself only, so this loop is redundant. Please drop.
-
-> +
-> +    cpumask_clear(per_cpu(cpu_sibling_mask, cpu));
-> +    cpumask_clear(per_cpu(cpu_core_mask, cpu));
-> +}
-> +
-> +static void remove_cpu_sibling_map(unsigned int cpu)
-We try not to add unrelated changes to the patch that is meant to do something
-else (here s/int/unsigned int/). If at all, it should be mentioned in the commit
-msg.
-
-With that:
-Reviewed-by: Michal Orzel <michal.orzel@amd.com>
-
-~Michal
+> diff --git a/xen/arch/riscv/paging.c b/xen/arch/riscv/paging.c
+> index 35f572689a7c..6464c7ce68a6 100644
+> --- a/xen/arch/riscv/paging.c
+> +++ b/xen/arch/riscv/paging.c
+> @@ -120,7 +120,8 @@ struct page_info *paging_alloc_page(struct domain *d)
+>   
+>       spin_lock(&d->arch.paging.lock);
+>       pg = page_list_remove_head(&d->arch.paging.freelist);
+> -    d->arch.paging.total_pages--;
+> +    if ( pg )
+> +        d->arch.paging.total_pages--;
+>       spin_unlock(&d->arch.paging.lock);
+>   
+>       return pg;
 
 
