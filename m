@@ -2,41 +2,43 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3D9CF606A31E
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Nov 2026 00:29:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C0EE8606A327
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Nov 2026 00:55:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=i2MigzQG
-Received: from list by lists.xenproject.org with outflank-mailman.1502929.1698880 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=JAR5FNcn
+Received: from list by lists.xenproject.org with outflank-mailman.1502958.1698888 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWNMZ-0005bl-VH; Thu, 26 Nov 2026 00:29:23 +0000
+	id 1xWNlr-0002HK-Vv; Thu, 26 Nov 2026 00:55:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1502929.1698880; Thu, 26 Nov 2026 00:29:23 +0000
+Received: by outflank-mailman (output) from mailman id 1502958.1698888; Thu, 26 Nov 2026 00:55:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWNMZ-0005bd-Re; Thu, 26 Nov 2026 00:29:23 +0000
-Received: by outflank-mailman (input) for mailman id 1502929;
- Thu, 26 Nov 2026 00:29:23 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xWNlr-0002HD-T2; Thu, 26 Nov 2026 00:55:31 +0000
+Received: by outflank-mailman (input) for mailman id 1502958;
+ Thu, 26 Nov 2026 00:55:30 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <xakep.amatop@gmail.com>) id 1xWNMY-0005bX-SU
- for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 00:29:22 +0000
+ (envelope-from <sstabellini@kernel.org>) id 1xWNlq-0002H7-Cl
+ for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 00:55:30 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xWNMX-00EmUe-UL
- for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 01:29:21 +0100
-Received: from [10.42.69.11] (helo=localhost)
+ id 1xWNlp-006rbv-Eg
+ for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 01:55:29 +0100
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <xakep.amatop@gmail.com>)
- id 6b077cdd-2eae-0a2a0a5409dd-0a2a450bdb60-20
- for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 01:29:21 +0100
-Received: from [209.85.208.171] (helo=mail-lj1-f171.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <xakep.amatop@gmail.com>)
- id 6b077d61-b7e8-0a2a450b0019-d155d0aba412-3
- for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 01:29:21 +0100
-Received: by mail-lj1-f171.google.com with SMTP id
- 38308e7fff4ca-3ada7d53082so70469601fa.0
- for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 16:29:21 -0800 (PST)
+ (envelope-from <sstabellini@kernel.org>)
+ id 6b078355-8faa-0a2a0a5109dd-0a2a4506ac46-18
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 01:55:29 +0100
+Received: from [172.234.252.31] (helo=sea.source.kernel.org)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <sstabellini@kernel.org>)
+ id 6b07837f-195a-0a2a45060019-aceafc1f9452-3
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 01:55:29 +0100
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id 18653400D8;
+ Thu, 26 Nov 2026 00:55:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0932C1F000C4;
+ Thu, 26 Nov 2026 00:55:25 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -45,344 +47,213 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1795652961; cv=none;
-        d=google.com; s=arc-20260327;
-        b=G4+yu3zwvAt3hIpQP3kH8vCDqFzhuBubn4pjohJjDVKXKjvIvMhC/nWSaaBTsGIAnH
-         jwkP4uTAmqGr25JEBO5O9AnUz8cKCOko0mMbadpNScF9Ny6RnZTwOS1fI/1i5li2mWcI
-         1PNRBDxwmtxjtoMB6+sMOjXlRzZOD+oQWhwaM0xS8BiPJYDK1n+1PvTdR6rLWEUXSkKG
-         Gpy1usDtksra/8Ped/zBYxcPmIgfCBIjH8r9q8Vyj8e9VtDlArPSB6UgP/FbMcfjbxN/
-         XVmiE9f2xW6d0z2O86+ILJUGzksVuFYsSCUrjLJeXRe0Nw+XyiJp1aJsZyDsfHtXaH0u
-         9Kag==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=lY7D/M8OX0FLWB39ISehQtqHLeLzhUeSBSpAYZK+nHo=;
-        fh=F3RNbjY7HGhv1K80flmiFZpRiz/hLFdWKtGPVcWuod8=;
-        b=q/5Zvmc3psWZ0IyviKwzycJsLasR83RtKOVnDOryT2VeVp7IlDRgKFc6CuLDwhOZdm
-         B4zcW4JRhoMDYMfD01MqqpVTKxl4RX4WWjFYMuwmmrl6+E1eyfKV86Ai2vjLCSkeXGOV
-         Q+o83HMednx3oX6W4kTOqJLdMxq0hxeqFjh3jSpqJcoJBAEamzam1S+/+y3EzSdcYqlV
-         ipFNInp/heQlOi2uaHEyKdAJuKfrxGUcfYTpXoROprhqsdT9z1wQ++XwQSuAmD+vDOXU
-         YYxH770tlFDnZzDKVOdacNpJWeeYQ8urOqosbTdLLhFMU500kJd5DVfUfCvR+7Y3onlA
-         3Gxw==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795652961; x=1796257761; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=lY7D/M8OX0FLWB39ISehQtqHLeLzhUeSBSpAYZK+nHo=;
-        b=i2MigzQGuId/Zfx/G0B37v/Z86tITpBVUrtAAXkb165XH3nvrcu+VEiIMlUrgayKHZ
-         9QY1pCQkShrf4KYCYYpG/E9ucRDubBdM0bp4RuAzDYKjdjRtpwXrQGZrqOgX5iiKl2NE
-         elObED5x22v33wBeNFnA+ZbUvkJ7PiBbhrmne43oKGf5eNP5PxiKoQRyYpymdv7oijNy
-         5bv8b9XoZKnD/riusVgebpC81xxozrkilbYi0F2h78kyFC9xRo7kt7KgdKDzV7lUWcGI
-         f4eNVc7gt3C/BeXZpmTSubAqiFfh8NIqwLja6R9esdrGzP8JtwiHOLYDPedNviKutoN5
-         whsA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795652961; x=1796257761;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=lY7D/M8OX0FLWB39ISehQtqHLeLzhUeSBSpAYZK+nHo=;
-        b=ErWhaYje8vEfF+Gdoj01fAAsy829jPwgL2hatQQss4pEYthdnQgQglpjTtFd5vm8fT
-         DLopIxgU8VaJgbaK1+YiSR3qd6+5D4kODNleQGkXkPinV7ou+1JU18Z0ngQLK9uh9QVU
-         qE5Y3njyU87h1WbOtt/sGKPJhYOJLHIk0667KfhtiUISQvbHDjyNNe0/02WJsN7X2uly
-         5aqFVu7CFNnZh0DsO46qnNp4QsNgg98m0rkF0svDi7VblXM9aM7PORuZH1nIGDSpCHUJ
-         +AK9R6mnyGVr/BUP/F3UaCOBDKtgIlMIUxE4umz5iEjcCk6eMWuyPapWm5yc3JqN3Ppl
-         J0GQ==
-X-Gm-Message-State: APuU4Z+8GyS8TI0fLT5OljKBTHobIBPP9r1xQmI4mXp/nSVDXjce427B
-	rWJP2J46DjUxWSaG/610W8LWDnUEAZ/mKrjQgGi6e1f7yu3XWKZQcvj0ViHqJLspRje7BJaaCN6
-	QlXfsudYAvVLzAsX423by/FaEgkVmOeLWLbm6
-X-Gm-Gg: AZFdTZcygtEn1YWqD0fA1eaE4GF/0iXxE1HTswBPLo2L9bawoJizaKqw2IxCKabYR/l
-	M5qpJHg162BWgXOl3avpgNhzW2rXTmGeNqdXBayGmbB9d2c3wsxcBE7jTElLA1qO08hqo9q8iBz
-	dx8pPCYN+dPOktwaapt+lbVlHQ9I+lJs9NM258+JbDwnRBP0bXSFnglohSN/6KmP+zBNfB6Nelf
-	T7VQNYQUGlKaJ5HDqGO9IMfPnu8t964ij4NtochbdX0KJ+HNspkO4X+m4/dtBaS7aC7J7sQIil9
-	z24jiMCaxKd+4u85OdDMiZiwUjObznLLckYBUakNCt+CVdJOGxuaO1G5uLVKC/xOiXGEme3H46j
-	kbISNBn6vMVNiRSBjecVu3GpPFK5kCgi0EnAMoSl09XTjt1H99JCKJnk=
-X-Received: by 2002:a05:651c:2214:b0:3ae:28ac:6df with SMTP id
- 38308e7fff4ca-3ae7fa25a48mr44520041fa.5.1795652960884; Wed, 25 Nov 2026
- 16:29:20 -0800 (PST)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:From:To:cc:Subject:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795654527;
+	bh=3Kb6Cm9FnDBHwS8OADLtuESF2ptEcMk1KWYATsuAHFk=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References;
+	b=JAR5FNcnV1aHJRGNAikmUy7ZWUayOD1r/8e+vrbZbg8auzituWJ3iyCGCL8crUVDY
+	 oFH3CmYKdg8azaT0vUAJOT4T1s7opWJOq41lh3xuI+SJiWJIdReyrRWzVC1bi5/9M0
+	 eODt1k4dlcrReOsEKvbiTScph22yMKFSnrccUGH6b9XRswFThZtNGG13mDBItzm7om
+	 8DA3xSP10smwUBU+ItK8V6d88esTRI7ffztKKS2RfoAdm1kk5a8fOVOOEwUoY4Ptpk
+	 sNiIND6hL5HC1XAfCnp3mM84YO/h3pZ60u48t8CTBj+yJNFTA46+VBwQV36+XWu4Tx
+	 /oCiQHJG1jO7A==
+Date: Wed, 25 Nov 2026 16:55:25 -0800 (PST)
+From: Stefano Stabellini <sstabellini@kernel.org>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+cc: Xen-devel <xen-devel@lists.xenproject.org>, 
+    Anthony PERARD <anthony.perard@vates.tech>, 
+    Stefano Stabellini <sstabellini@kernel.org>, 
+    Michal Orzel <michal.orzel@amd.com>, Doug Goldstein <cardoe@cardoe.com>, 
+    =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH] CI: Add a SecureBoot/UKI test
+In-Reply-To: <20261125174519.643860-1-andrew.cooper3@citrix.com>
+Message-ID: <941c953b-54c2-5321-61d8-a455e73fc6d4@kernel.org>
+References: <20261125174519.643860-1-andrew.cooper3@citrix.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <cover.1788268510.git.bertrand.marquis@arm.com> <39cce5e806b7070da7d4a627bd739b7de711db4b.1788268510.git.bertrand.marquis@arm.com>
-In-Reply-To: <39cce5e806b7070da7d4a627bd739b7de711db4b.1788268510.git.bertrand.marquis@arm.com>
-From: Mykola Kvach <xakep.amatop@gmail.com>
-Date: Thu, 26 Nov 2026 02:29:09 +0200
-X-Gm-Features: Aa3M54ow7nws3QKO6aFCQeRSR2X0kUwpnI8cW05mGSxrBzfSBIorFq_CZ9ZVmSY
-Message-ID: <CAGeoDV-g-kxvN4cSJmkSk_59e-hZ5KHcoo6oW1VdyZLQrre+aA@mail.gmail.com>
-Subject: Re: [PATCH v3 2/6] xen/arm: ffa: Track hypervisor notifications in a bitmap
-To: Bertrand Marquis <bertrand.marquis@arm.com>
-Cc: xen-devel@lists.xenproject.org, 
-	Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Jens Wiklander <jenswi@kernel.org>, 
-	Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
-	Michal Orzel <michal.orzel@amd.com>, Jens Wiklander <jens.wiklander@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-42698a/1795652961-1BED69EA-DD8E8449/0/0
+Content-Type: multipart/mixed; boundary="8323329-179127885-1795654526=:2648157"
+X-purgate-ID: tlsNG-16d1c6/1795654529-FDA0C77B-E52A7CC6/0/0
 X-purgate-type: clean
-X-purgate-size: 8995
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
-	autolearn=ham autolearn_force=no version=4.0.1
+X-purgate-size: 6352
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Bertrand,
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
 
-On Thu, Sep 3, 2026 at 5:44=E2=80=AFPM Bertrand Marquis
-<bertrand.marquis@arm.com> wrote:
->
-> Hypervisor notifications are currently tracked with a dedicated
-> buff_full_pending boolean. The old RX-buffer-full path also exposed a
-> pending indication indirectly via vm_pending, so
-> FFA_NOTIFICATION_INFO_GET could clear that summary before the guest
-> retrieved the Hypervisor notification bitmap with
-> FFA_NOTIFICATION_GET.
->
-> Replace the single boolean with a Hypervisor notification bitmap
-> protected by notif_lock. INFO_GET reports pending when hyp_pending is
-> non-zero, GET returns and clears the HYP bitmap under the lock, and
-> RX-buffer-full now keeps notif_lock held across the local NPI
-> decision. notif_irq_raised is only set when an NPI is actually
-> injected, and is cleared once the local pending state is consumed.
->
-> Initialize and clear the bitmap during domain lifecycle handling, and
-> use ctx->ffa_id for bitmap create and destroy so the notification
-> state stays tied to the cached FF-A endpoint ID.
->
-> If the local injection attempt fails because no vCPU is online,
-> hyp_pending remains set and notif_irq_raised remains clear. This
-> keeps the RX-buffer-full notification pending until the guest
-> retrieves it, without publishing a successful local IRQ state too
-> early.
->
-> Functional impact: RX-buffer-full remains pending in hyp_pending
-> until FFA_NOTIFICATION_GET, and failed local NPI injection no longer
-> leaves Xen thinking the interrupt was already raised.
->
-> Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
-> Reviewed-by: Jens Wiklander <jens.wiklander@linaro.org>
+--8323329-179127885-1795654526=:2648157
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+On Wed, 25 Nov 2026, Andrew Cooper wrote:
+> Debian 13 ships an OVMF image that is pre-enrolled with the snakeoil key.  The
+> only problem using this is that sbsign requires an interactive prompt for the
+> password, so arrange for container generation to strip the password; it's not
+> a secret.
+> 
+> Extend the qemu-xtf infrasturcture with a UKI variant, sign the result with
+> the snakeoil key, and use the snakeoil OVMF image.
+> 
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+
+Acked-by: Stefano Stabellini <sstabellini@kernel.org>
+
+
 > ---
-> Changes since v2:
-> - add Jens R-b
-> Changes since v1:
-> - clarify that v1 exposed RX-buffer-full indirectly via vm_pending
-> - document that v2 keeps the HYP pending indication until
->   FFA_NOTIFICATION_GET
-> - keep RX-buffer-full pending state stable across failed local NPI
->   injection attempts
+> CC: Anthony PERARD <anthony.perard@vates.tech>
+> CC: Stefano Stabellini <sstabellini@kernel.org>
+> CC: Michal Orzel <michal.orzel@amd.com>
+> CC: Doug Goldstein <cardoe@cardoe.com>
+> CC: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+> 
+> Marek, I stol^W borrowed the vma and objtool runes from your related patch.
+> I'm not overly happy with adding more tests which clone XTF like this, but it
+> is easier to run manually than the full alpine version.
+> 
+> python3-virt-firmware isn't strictly needed right now, but it's useful to edit
+> OVMF_VARS when debugging.  A later strictnx test does need to use the package,
+> although that's in a Fedora container for other reasons.
 > ---
->  xen/arch/arm/tee/ffa_notif.c   | 56 ++++++++++++++++++++++++++--------
->  xen/arch/arm/tee/ffa_private.h | 15 +++++++--
->  2 files changed, 56 insertions(+), 15 deletions(-)
->
-> diff --git a/xen/arch/arm/tee/ffa_notif.c b/xen/arch/arm/tee/ffa_notif.c
-> index 07bc5cb3a430..a631481e3815 100644
-> --- a/xen/arch/arm/tee/ffa_notif.c
-> +++ b/xen/arch/arm/tee/ffa_notif.c
-> @@ -19,7 +19,7 @@
->  static bool __ro_after_init fw_notif_enabled;
->  static unsigned int __ro_after_init notif_sri_irq;
->
-> -static void inject_notif_pending(struct domain *d)
-> +static bool inject_notif_pending(struct domain *d)
->  {
->      struct vcpu *v;
->
-> @@ -33,13 +33,15 @@ static void inject_notif_pending(struct domain *d)
->          if ( is_vcpu_online(v) )
->          {
->              vgic_inject_irq(d, v, GUEST_FFA_NOTIF_PEND_INTR_ID, true);
-> -            return;
-> +            return true;
-
-The vCPU can go offline after this helper checks it. The default
-vGIC checks the vCPU again inside vgic_inject_irq(). If the vCPU is
-offline at that point, vgic_inject_irq() returns before it queues
-the SGI.
-
-The helper still returns true. The caller sets notif_irq_raised
-because it thinks Xen queued the NPI. When a new local
-notification arrives, Xen sees the flag and skips the NPI, even if
-another vCPU is online.
-
-Can the vGIC call tell us whether it queued the NPI? If the vCPU
-went offline before the call could queue it, the helper could try
-the next vCPU.
-
-What happens if the target vCPU goes offline just after vGIC queues
-the NPI and before the guest handles it? SGI  stays with that vCPU,
-and notif_irq_raised stays true. The notification is still pending
-for the whole VM.
-
-Can FF-A notice when the target guest vCPU goes offline? If the
-notification is still pending, can Xen send a new NPI to another
-online vCPU? If none are online, can Xen try again when one comes
-online?
-
->          }
->      }
->
->      if ( printk_ratelimit() )
->          printk(XENLOG_G_DEBUG "%pd: ffa: can't inject NPI, all vCPUs off=
-line\n",
->                 d);
+>  automation/build/debian/13-x86_64.dockerfile  | 11 +++
+>  automation/gitlab-ci/test.yaml                |  7 ++
+>  automation/scripts/include/xtf-x86_64-efi-uki | 71 +++++++++++++++++++
+>  3 files changed, 89 insertions(+)
+>  create mode 100644 automation/scripts/include/xtf-x86_64-efi-uki
+> 
+> diff --git a/automation/build/debian/13-x86_64.dockerfile b/automation/build/debian/13-x86_64.dockerfile
+> index 784299d52dc3..8efae0150a9b 100644
+> --- a/automation/build/debian/13-x86_64.dockerfile
+> +++ b/automation/build/debian/13-x86_64.dockerfile
+> @@ -57,8 +57,11 @@ RUN <<EOF
+>          # for test phase, qemu-* jobs
+>          busybox-static
+>          expect
+> +        openssl
+>          ovmf
+> +        python3-virt-firmware
+>          qemu-system-x86
+> +        sbsigntool
+>  
+>          # for build-each-commit-gcc
+>          ccache
+> @@ -66,6 +69,14 @@ RUN <<EOF
+>  
+>      apt-get -y --no-install-recommends install "${DEPS[@]}"
+>  
+> +    # Strip the password off the snakeoil key to avoid sbsigntool wanting an
+> +    # interactive prompt
+> +    openssl rsa \
+> +            -in  /usr/share/ovmf/PkKek-1-snakeoil.key \
+> +            -out /usr/share/ovmf/PkKek-1-snakeoil-nopass.key \
+> +            -passin pass:snakeoil
+> +    chmod 644 /usr/share/ovmf/PkKek-1-snakeoil-nopass.key
 > +
-> +    return false;
->  }
->
->  int32_t ffa_handle_notification_bind(struct cpu_user_regs *regs)
-> @@ -94,8 +96,15 @@ void ffa_handle_notification_info_get(struct cpu_user_=
-regs *regs)
->
->      notif_pending =3D test_and_clear_bool(ctx->notif.secure_pending);
->      if ( IS_ENABLED(CONFIG_FFA_VM_TO_VM) )
-> +    {
->          notif_pending |=3D test_and_clear_bool(ctx->notif.vm_pending);
->
-> +        spin_lock(&ctx->notif.notif_lock);
-> +        if ( ctx->notif.hyp_pending )
-
-Here, hyp_pending tells us that the guest still has to read
-RX_BUFFER_FULL. The first INFO_GET call returns the endpoint and
-leaves the pending bit set. If the guest calls INFO_GET again before
-GET, Xen returns the same endpoint for the same notification. This
-happens even if no new message has arrived.
-
-DEN0077A 1.2 REL0, section 16.7.1, says to report pending
-notification information only once.
-
-Can INFO_GET record that it has reported the notification and
-leave the bit set for GET to read?
-
-Best regards,
-Mykola
-
-> +            notif_pending =3D true;
-> +        spin_unlock(&ctx->notif.notif_lock);
-> +    }
+>      rm -rf /var/lib/apt/lists*
+>  EOF
+>  
+> diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
+> index 96127995d7be..cf4b7ed416b0 100644
+> --- a/automation/gitlab-ci/test.yaml
+> +++ b/automation/gitlab-ci/test.yaml
+> @@ -776,6 +776,13 @@ qemu-smoke-x86_64-gcc-efi:
+>    needs:
+>      - debian-13-x86_64-gcc-debug
+>  
+> +qemu-smoke-x86_64-gcc-efi-uki:
+> +  extends: .qemu-smoke-x86_64
+> +  script:
+> +    - ./automation/scripts/qemu-xtf.sh x86_64-efi-uki pv64 example 2>&1 | tee ${LOGFILE}
+> +  needs:
+> +    - debian-13-x86_64-gcc-debug
 > +
->      if ( notif_pending )
->      {
->          /* A pending global notification for the guest */
-> @@ -174,12 +183,19 @@ void ffa_handle_notification_get(struct cpu_user_re=
-gs *regs)
->              w6 =3D resp.a6;
->      }
->
-> -    if ( IS_ENABLED(CONFIG_FFA_VM_TO_VM) &&
-> -          flags & FFA_NOTIF_FLAG_BITMAP_HYP &&
-> -          test_and_clear_bool(ctx->notif.buff_full_pending) )
-> +    if ( IS_ENABLED(CONFIG_FFA_VM_TO_VM) )
->      {
-> -        ACCESS_ONCE(ctx->notif.vm_pending) =3D false;
-> -        w7 =3D FFA_NOTIF_RX_BUFFER_FULL;
-> +        spin_lock(&ctx->notif.notif_lock);
+>  qemu-xtf-argo-x86_64-gcc-debug:
+>    extends: .qemu-smoke-x86_64
+>    variables:
+> diff --git a/automation/scripts/include/xtf-x86_64-efi-uki b/automation/scripts/include/xtf-x86_64-efi-uki
+> new file mode 100644
+> index 000000000000..b47def06d49c
+> --- /dev/null
+> +++ b/automation/scripts/include/xtf-x86_64-efi-uki
+> @@ -0,0 +1,71 @@
+> +#!/bin/bash
+> +#
+> +# XTF test utilities (x86_64, EFI).
+> +#
 > +
-> +        if ( (flags & FFA_NOTIF_FLAG_BITMAP_HYP) && ctx->notif.hyp_pendi=
-ng )
-> +        {
-> +            w7 =3D ctx->notif.hyp_pending;
-> +            ctx->notif.hyp_pending =3D 0;
-> +            if ( !ctx->notif.vm_pending )
-> +                ctx->notif.notif_irq_raised =3D false;
-> +        }
+> +# Arch-specific environment overrides.
+> +function xtf_arch_prepare()
+> +{
+> +    export FW_PREFIX="${FW_PREFIX:-/usr/share/OVMF}"
+> +    export QEMU_PREFIX="${QEMU_PREFIX:-}"
+> +    export XEN_BINARY="${XEN_BINARY:-${WORKDIR}/xen.efi}"
+> +    export XEN_CMDLINE="${XEN_CMDLINE:-loglvl=all noreboot console_timestamps=boot console=com1}"
+> +    export XTF_SRC_BRANCH="${XTF_SRC_BRANCH:-master}"
+> +    export XTF_SRC_URI="${XTF_SRC_URI:-https://xenbits.xen.org/git-http/xtf.git}"
+> +    export XTF_SRC_VARIANTS="hvm64 pv64"
+> +}
 > +
-> +        spin_unlock(&ctx->notif.notif_lock);
->      }
->
->      ffa_set_regs(regs, FFA_SUCCESS_32, 0, w2, w3, w4, w5, w6, w7);
-> @@ -211,9 +227,12 @@ void ffa_raise_rx_buffer_full(struct domain *d)
->      if ( !ctx )
->          return;
->
-> -    ACCESS_ONCE(ctx->notif.buff_full_pending) =3D true;
-> -    if ( !test_and_set_bool(ctx->notif.vm_pending) )
-> -        inject_notif_pending(d);
-> +    spin_lock(&ctx->notif.notif_lock);
-> +    ctx->notif.hyp_pending |=3D FFA_NOTIF_RX_BUFFER_FULL;
-> +    if ( !ctx->notif.notif_irq_raised &&
-> +         inject_notif_pending(d) )
-> +        ctx->notif.notif_irq_raised =3D true;
-> +    spin_unlock(&ctx->notif.notif_lock);
->  }
->  #endif
->
-> @@ -426,12 +445,16 @@ void ffa_notif_init(void)
->
->  int ffa_notif_domain_init(struct domain *d)
->  {
-> +    struct ffa_ctx *ctx =3D d->arch.tee;
->      int32_t res;
->
-> +    spin_lock_init(&ctx->notif.notif_lock);
-> +    ctx->notif.notif_irq_raised =3D false;
-> +    ctx->notif.hyp_pending =3D 0;
+> +# Perform arch-specific XTF environment setup.
+> +function xtf_arch_setup()
+> +{
+> +    local esp_dir="${WORKDIR}/boot-esp"
+> +    local efi_dir="${esp_dir}/EFI/BOOT"
 > +
->      if ( fw_notif_enabled )
->      {
-> -
-> -        res =3D ffa_notification_bitmap_create(ffa_get_vm_id(d), d->max_=
-vcpus);
-> +        res =3D ffa_notification_bitmap_create(ctx->ffa_id, d->max_vcpus=
-);
->          if ( res )
->              return -ENOMEM;
->      }
-> @@ -441,10 +464,17 @@ int ffa_notif_domain_init(struct domain *d)
->
->  void ffa_notif_domain_destroy(struct domain *d)
->  {
-> +    struct ffa_ctx *ctx =3D d->arch.tee;
+> +    cat > ${WORKDIR}/xen.cfg <<EOF
+> +[global]
+> +default=test
 > +
-> +    spin_lock(&ctx->notif.notif_lock);
-> +    ctx->notif.notif_irq_raised =3D false;
-> +    ctx->notif.hyp_pending =3D 0;
-> +    spin_unlock(&ctx->notif.notif_lock);
+> +[test]
+> +options=${XEN_CMDLINE}
+> +kernel=kernel
+> +EOF
 > +
->      /*
->       * Call bitmap_destroy even if bitmap create failed as the SPMC will
->       * return a DENIED error that we will ignore.
->       */
->      if ( fw_notif_enabled )
-> -        ffa_notification_bitmap_destroy(ffa_get_vm_id(d));
-> +        ffa_notification_bitmap_destroy(ctx->ffa_id);
->  }
-> diff --git a/xen/arch/arm/tee/ffa_private.h b/xen/arch/arm/tee/ffa_privat=
-e.h
-> index e16bc0d83df3..025dfe6fed7b 100644
-> --- a/xen/arch/arm/tee/ffa_private.h
-> +++ b/xen/arch/arm/tee/ffa_private.h
-> @@ -340,9 +340,20 @@ struct ffa_ctx_notif {
->      bool vm_pending;
->
->      /*
-> -     * True if domain has buffer full notification pending
-> +     * Lock protecting the hypervisor-managed notification state.
->       */
-> -    bool buff_full_pending;
-> +    spinlock_t notif_lock;
+> +    vma=$(objdump -h ${XEN_BINARY} | \
+> +              perl -ane 'if (/\..*/) { $vma=hex($F[2]) + hex($F[3]) }
+> +                         END { printf "0x%016x\n", ($vma + 0xfff) & ~0xfff }')
 > +
-> +    /*
-> +     * Tracks whether a local notification pending interrupt was raised.
-> +     * Protected by notif_lock.
-> +     */
-> +    bool notif_irq_raised;
+> +    objcopy \
+> +        --add-section .config=${WORKDIR}/xen.cfg \
+> +        --change-section-vma .config=$vma \
+> +        --add-section .kernel=${XTF_BINARY} \
+> +        --change-section-vma .kernel=$(( $vma + 0x100000 )) \
+> +        ${XEN_BINARY} \
+> +        ${XEN_BINARY}.uki
 > +
-> +    /*
-> +     * Bitmap of pending hypervisor notifications (for HYP bitmap querie=
-s).
-> +     */
-> +    uint32_t hyp_pending;
->  };
->
->  struct ffa_ctx {
-> --
-> 2.53.0
->
->
+> +    mkdir -p ${efi_dir}
+> +
+> +    sbsign --key  /usr/share/ovmf/PkKek-1-snakeoil-nopass.key \
+> +           --cert /usr/share/ovmf/PkKek-1-snakeoil.pem \
+> +           --output ${efi_dir}/BOOTX64.EFI \
+> +           ${XEN_BINARY}.uki
+> +
+> +    local ovmf_code=${FW_PREFIX}/OVMF_CODE_4M.snakeoil.fd
+> +    local ovmf_vars=${FW_PREFIX}/OVMF_VARS_4M.snakeoil.fd
+> +    local ovmf_format=raw
+> +
+> +    cp $ovmf_code ${WORKDIR}/OVMF_CODE
+> +    cp $ovmf_vars ${WORKDIR}/OVMF_VARS
+> +
+> +    export TEST_CMD="${QEMU_PREFIX}qemu-system-x86_64 \
+> +        -no-reboot \
+> +        -nographic \
+> +        -monitor none \
+> +        -serial stdio \
+> +        -m 2048 \
+> +        -smp 2 \
+> +        -M q35,kernel-irqchip=split \
+> +        -drive if=pflash,format=${ovmf_format},readonly=on,file=${WORKDIR}/OVMF_CODE \
+> +        -drive if=pflash,format=${ovmf_format},file=${WORKDIR}/OVMF_VARS \
+> +        -drive file=fat:rw:${esp_dir},media=disk,index=0,format=raw \
+> +    "
+> +}
+> -- 
+> 2.39.5
+> 
+--8323329-179127885-1795654526=:2648157--
 
