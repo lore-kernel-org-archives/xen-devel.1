@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C7C7606A689
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Nov 2026 13:41:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3CBEA606A31C
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Nov 2026 13:42:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=AhBYeLIC
-Received: from list by lists.xenproject.org with outflank-mailman.1503480.1699198 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=B4aXz69q
+Received: from list by lists.xenproject.org with outflank-mailman.1503488.1699207 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWZiv-00075o-Vt; Thu, 26 Nov 2026 13:41:17 +0000
+	id 1xWZjR-0007dB-AH; Thu, 26 Nov 2026 13:41:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1503480.1699198; Thu, 26 Nov 2026 13:41:17 +0000
+Received: by outflank-mailman (output) from mailman id 1503488.1699207; Thu, 26 Nov 2026 13:41:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWZiv-00075h-SI; Thu, 26 Nov 2026 13:41:17 +0000
-Received: by outflank-mailman (input) for mailman id 1503480;
- Thu, 26 Nov 2026 13:41:16 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xWZiu-00075N-Hq
- for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 13:41:16 +0000
+	id 1xWZjR-0007d4-61; Thu, 26 Nov 2026 13:41:49 +0000
+Received: by outflank-mailman (input) for mailman id 1503488;
+ Thu, 26 Nov 2026 13:41:47 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xWZjP-0007cc-8g
+ for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 13:41:47 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xWZit-0089hu-UB
- for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 14:41:15 +0100
-Received: from [10.42.69.6] (helo=localhost)
+ id 1xWZjO-00CSdg-L2
+ for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 14:41:46 +0100
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6b0836fa-bab6-0a2a0a5309dd-0a2a45068cde-14
- for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 14:41:15 +0100
-Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6b083710-2eae-0a2a0a5409dd-0a2a45098ce2-36
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 14:41:46 +0100
+Received: from [209.85.221.51] (helo=mail-wr1-f51.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6b0836fb-195a-0a2a45060019-d1558031d028-3
- for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 14:41:15 +0100
-Received: by mail-wm1-f49.google.com with SMTP id
- 5b1f17b1804b1-4ba013938d7so66037895e9.2
- for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 05:41:15 -0800 (PST)
+ id 6b08371a-be1a-0a2a45090019-d155dd33d834-3
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 14:41:46 +0100
+Received: by mail-wr1-f51.google.com with SMTP id
+ ffacd0b85a97d-498f5fa5103so4186649f8f.2
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 05:41:46 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb853a9687sm673010865e9.10.2026.11.26.05.41.14
+ ffacd0b85a97d-4ab6bb98b4dsm41338467f8f.53.2026.11.26.05.41.45
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 26 Nov 2026 05:41:14 -0800 (PST)
+ Thu, 26 Nov 2026 05:41:45 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,52 +51,52 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Cc:Content-Language:References:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1795700475; x=1796305275; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1795700506; x=1796305306; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:cc
          :content-language:references:to:from:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=W+jYP1X/LsUZTkVE+ccByXbdvGJ9GQt9K191XlKP7vo=;
-        b=AhBYeLICXcFKGCMCajtMw9TGmTPmYKK/m2PYQA24KA8mh7iGQIvQ0NurE0gI/xcq8K
-         xuRlD2dd9B8AAbWr7O4SCr56ARXdrnq2qEZ3nIoGHFKGJh9eJ4dbZ5cD6zXqFnRIGU5G
-         ytObeGV6UatCPKfxafn9uGdlVHSZHchEGEG/nhOrkwysud+YGS9mSXqlzujWYJaB3o0G
-         jotjs8He/O3WGQGLH1rn3Uyw4vJtTe+CN1VA4JbNtRLahEqGePAWK56bMZL88Af56qUJ
-         kOpmBpiB4p/PeB8C/MW+F1S6tx5kxD4m4ptVzu1W3z1K1uvwiPW5qH5ORhGLojT/7b9y
-         wAyw==
+        bh=YWTNRorQkm9m/1VL2Iu5cgfPQ/8FHY7xSZLou/Hnqoc=;
+        b=B4aXz69qdQvJK0KrvIIocjl9jvSf3WSaHt2b5BeOaWY3h1Gw5NP3BNKdHCAF69HHcI
+         1I02H5NFk5sFqhZYNV/10IgQloXIVLM4X5VQwxHT7fRSpI+BWocNDasY6iEHR+cpwxAL
+         JJAFtrnuYoDD0vaKe0hBXCDayyw2sN70333fm9K7FBgc2YoLDTRq++pYFKyIr5v9wmG/
+         2HR8SMEDVt9VSkkqkyOwaSpit8yYjbNlhZaswzxbTaH1e34oiw9d3UD8PtsJ6KbB23MZ
+         NuL4JmlJyArtn1gnCZl85P4fjqs02zXklIQxeVZfX+5lPNmNVSdh2sA0//8H+Tgzjoy/
+         3IKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795700475; x=1796305275;
+        d=1e100.net; s=20260707; t=1795700506; x=1796305306;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:cc
          :content-language:references:to:from:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=W+jYP1X/LsUZTkVE+ccByXbdvGJ9GQt9K191XlKP7vo=;
-        b=lM07vlU6p9MZucBN3Yh+77sELMa+zpThbhm6bThFjm425bq6mlQRnZslDQSEcI0V+V
-         HR1A4I8M/LPvJsJ8OGeToIrirDug0fQsttugAM6pcis6ZR0kwvY0WuT3VNFsE+2upqe1
-         5BWRF4EUTzAle0UeQzW/IMzYB4hmP+ZrPXYAGQ7q0yoCOBYsN4Jg5qFHMzd47gYlRTVG
-         F18FjT8eBTlHZ9pw6Yld2iur7BAlAlK0G6ScDZL9YI5F2Qf2CXo+51pYWTMco8zbtKPG
-         3cyZMllLx7EXEG0LJr8rCRkdvcJd3NUYTl0OSJgvSAt9UVVdIeZ8BOCKCqt8763v30kb
-         7Wlg==
-X-Gm-Message-State: APuU4Z/QOQbccDbrtkqABbgfw/bpKzWGQI20rZaYg1+nqlYriWdEj8uS
-	uJuf7fQj7b27Mu1VCQgRhBE+WJ2cGKhJCr+61FXoo4CJPKvKIA7QxrKBJH0ku/FHdnFKdR98hUU
-	9PGmyUw==
-X-Gm-Gg: AZFdTZeunFDAT6Ib2fiQBYCNxuPB3Us1BVNeDagB8SucmLs1SK0xEYEhSDDUkV8569I
-	cimAO9EgvFwTPvxqUO9odiR1FX/6O8lgvE5DE41kEboxCadvYlvFJfx0hOVzIstLRxZLYv/Uh2b
-	AybUeNclSOyD7OkBcWSC+RXPlUgfLx/alfmWk4lACxzAZOKKq9/Bq4Ub229/K7f2B8P4+alHNvf
-	PE7K0TQ+MAM/aJ8YTkAv6NXoyY3Em9PYLN/2lPHZ5ULwdRaamEsGKSD/QUIwZJ8SRfuJL0jrtIw
-	i24U6u1m5B8BCLUiF2OW5UzJX7FvUAjbX2B91W9wr9eNdABcanWF/vtxkQOzrUtdloA1DnUy+ti
-	ysZKF628PV1ZdXCExEoAwMOtefj1UweNjd++uxa0Y4+w1D/iVMS+T+hsnkTNxYlfhfIle1J51i6
-	msC/rmx/ZEgH4+7VI7+eOFcvM/r4KxScC+RBRJOwKLhArwR240po+i1DpDaEZXik1izpNpmbZWX
-	7zMXBTP4GdHV8ABGI5SAHodmlrFSmOfTeBBsHxYq9hSNIjz59YeFOJUFTXC1T03c97eQpFxOPlH
-	kRCNg00DfltrwbfWoE3fZxivNxZadaCrKZnT0UrJqidzGQ/u8TSUREY8RLy+mo/9hLSLyNv7QBc
-	Tw0oqBq1GqIbIjF0C
-X-Received: by 2002:a05:600c:3ac9:b0:4a2:a3b:7aa8 with SMTP id 5b1f17b1804b1-4bb887e068emr444851105e9.3.1795700475010;
-        Thu, 26 Nov 2026 05:41:15 -0800 (PST)
-Message-ID: <f12df30a-f427-4c95-be32-e9a83f8985ac@suse.com>
-Date: Thu, 26 Nov 2026 14:41:14 +0100
+        bh=YWTNRorQkm9m/1VL2Iu5cgfPQ/8FHY7xSZLou/Hnqoc=;
+        b=y1j7hwyu7kevdoWeliwkMuLQ8OzrOa+VoYdT3d/2E4bxHuaF16vWawhwWcZySckLmu
+         UG8ykaty12kREf72joFIkG6V8LReiD3AwmpFCJm9qIXpUQ42sj8LVHlTNXs+gljSRRJu
+         cHSNTLnr0IJrcsb+VN6wuIQKSb0WI8hIWWfpsJ3CBhllj9V+/W86jNggyc0oauy46A++
+         9bmbK4NcG791OvHxa3Iz0Dq3LJb9S1TkdOSPUIYqZ5uQ+qmA1Wh5EUq7BuYNZsmKbX9a
+         vf5kAbxmTjm76WIumhwFwBLoMYxpkrYia8s/98FfBGMg8uIhIBvXtYF4hDwkc9/Lr6h/
+         ODGA==
+X-Gm-Message-State: APuU4Z8gOoLqivAHr5SZug8atgUQ7m47cFDnG6Shmw3t15dk0kCQgYqn
+	TN1/+39Lyq/iWNd5e1lRnAWDkBczXcV0JVzzurXJgHzLswKeLAFwya7lStsQ8T30B5pc0XMwzwU
+	q27uq0g==
+X-Gm-Gg: AZFdTZeiKoZLYe2dzhsdwHwq+floct6xPSfAWdraBo3zngRDnm+koWFlYMKKnx6qmDA
+	cH2xHYTwbGUW7QaCeAfvCoy0VzKUS75AIq7ksR17lq3NI4AAB7yDRfvTMgiL8qiQKke54wK98rp
+	JCEgzvMCJbU6DAUv3DHbv4euxGvROY6aZJ9RNaCLJnaOoOP8XkoMe+x0muv6XnIk2bv9Q5GXMTe
+	9hhkdvRDdFtjMGEa0GHe/doyYvgvBBecx7kFpM20PkDYg3GqeZE/uDgoCwTBcJd1UEmYoFJPNR9
+	RG9u35LEqAiqZ8BY56yyCnhbDQNEa138UW1HEOkYly7Gm0ql9dgGZ5mHEFT4ROFnXjp303YSrXF
+	UuQmwmP1vddgka2fxMz+2b9NFKpZsIhK6W+DaVQo46Z10IWviZbc6fd0OQ8SmIsoYOgVwOtFmZj
+	v/opF3wyKfvEiR+FtFVTGILcg+RTHA4v/HLyeJt6v8Z985BXz+Eix+QlJmTmCCuM6HdLXmjm8u+
+	VoR1OhmpPOuHXtOJ7eEdhdZW5SxTiOMSY+D50YVKNR/NLxrbNwIUrukHTfPkcL0joCWFZLCiLCx
+	FQcISlpiwzsI3Qv+C/F0fK/HCQEfmw2KF/k/6HyPOiu6aWIe48fHoHwm51lmDx7rwb/gGMdIex+
+	Zid6YuXQl6aYavU12
+X-Received: by 2002:adf:e183:0:b0:4a7:790c:4a56 with SMTP id ffacd0b85a97d-4abb5cc17dcmr37305079f8f.33.1795700506003;
+        Thu, 26 Nov 2026 05:41:46 -0800 (PST)
+Message-ID: <d8b8908d-3491-4be4-b661-859a78e6dfe6@suse.com>
+Date: Thu, 26 Nov 2026 14:41:45 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 10/13] x86/HVM/MTRR: use domain_vcpu()
+Subject: [PATCH 11/13] x86/HVM: introduce hvm_load_vcpu_instance()
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 References: <1ea6d02b-8fba-4b1e-969c-033d6a7be233@suse.com>
@@ -130,9 +130,9 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <1ea6d02b-8fba-4b1e-969c-033d6a7be233@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-16d1c6/1795700475-F5C0F77B-ABBCCDB4/10/78276251493
+X-purgate-ID: tlsNG-bad1c0/1795700506-3B2DC034-7D1E627A/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 1599
+X-purgate-size: 12149
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -141,51 +141,334 @@ X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-If for nothing else, then to reduce the number of open-coded d->vcpu[]
-accesses.
-
-No functional change intended.
+Use this to remove open-coding of domain_vcpu().
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
+---
+lapic_load_{hidden,regs}() are left alone, as I fear analysis tools would
+otherwise pick on the missing NULL checks.
 
---- a/xen/arch/x86/hvm/mtrr.c
-+++ b/xen/arch/x86/hvm/mtrr.c
-@@ -689,7 +689,7 @@ int hvm_set_mem_pinned_cacheattr(struct
-  finish:
-     if ( flush )
-         memory_type_changed(d);
--    else if ( d->vcpu && d->vcpu[0] )
-+    else if ( domain_vcpu(d, 0) )
-         p2m_memory_type_changed(d);
+--- a/xen/arch/x86/cpu/mcheck/vmce.c
++++ b/xen/arch/x86/cpu/mcheck/vmce.c
+@@ -364,15 +364,14 @@ static int cf_check vmce_save_vcpu_ctxt(
  
-     return rc;
-@@ -735,13 +735,12 @@ static int cf_check hvm_save_mtrr_msr(st
- 
- static int cf_check hvm_load_mtrr_msr(struct domain *d, hvm_domain_context_t *h)
+ static int cf_check vmce_load_vcpu_ctxt(struct domain *d, hvm_domain_context_t *h)
  {
--    unsigned int vcpuid, i;
+-    unsigned int vcpuid = hvm_load_instance(h);
 -    struct vcpu *v;
-+    unsigned int vcpuid = hvm_load_instance(h), i;
-+    struct vcpu *v = domain_vcpu(d, vcpuid);
-     struct mtrr_state *m;
-     struct hvm_hw_mtrr hw_mtrr;
++    struct vcpu *v = hvm_load_vcpu_instance(d, h);
+     struct hvm_vmce_vcpu ctxt;
+     int err;
  
+-    if ( vcpuid >= d->max_vcpus || (v = d->vcpu[vcpuid]) == NULL )
++    if ( !v )
+     {
+         dprintk(XENLOG_G_ERR, "HVM restore: dom%d has no vcpu%u\n",
+-                d->domain_id, vcpuid);
++                d->domain_id, hvm_load_instance(h));
+         err = -EINVAL;
+     }
+     else
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -804,14 +804,13 @@ static int cf_check hvm_save_tsc_adjust(
+ 
+ static int cf_check hvm_load_tsc_adjust(struct domain *d, hvm_domain_context_t *h)
+ {
+-    unsigned int vcpuid = hvm_load_instance(h);
+-    struct vcpu *v;
++    struct vcpu *v = hvm_load_vcpu_instance(d, h);
+     struct hvm_tsc_adjust ctxt;
+ 
+-    if ( vcpuid >= d->max_vcpus || (v = d->vcpu[vcpuid]) == NULL )
++    if ( !v )
+     {
+         dprintk(XENLOG_G_ERR, "HVM restore: dom%d has no vcpu%u\n",
+-                d->domain_id, vcpuid);
++                d->domain_id, hvm_load_instance(h));
+         return -EINVAL;
+     }
+ 
+@@ -1018,18 +1017,16 @@ unsigned long hvm_cr4_guest_valid_bits(c
+ static int cf_check hvm_load_cpu_ctxt(struct domain *d, hvm_domain_context_t *h)
+ {
+     const struct cpu_policy *p = d->arch.cpu_policy;
+-    unsigned int vcpuid = hvm_load_instance(h);
+-    struct vcpu *v;
++    struct vcpu *v = hvm_load_vcpu_instance(d, h);
+     struct hvm_hw_cpu ctxt;
+     struct segment_register seg;
+     const char *errstr;
+     unsigned long valid;
+ 
+-    /* Which vcpu is this? */
+-    if ( vcpuid >= d->max_vcpus || (v = d->vcpu[vcpuid]) == NULL )
++    if ( !v )
+     {
+         dprintk(XENLOG_G_ERR, "HVM restore: dom%u has no vcpu%u\n",
+-                d->domain_id, vcpuid);
++                d->domain_id, hvm_load_instance(h));
+         return -EINVAL;
+     }
+ 
+@@ -1267,19 +1264,17 @@ CHECK_FIELD_(struct, xsave_hdr, reserved
+ static int cf_check hvm_load_cpu_xsave_states(
+     struct domain *d, hvm_domain_context_t *h)
+ {
+-    unsigned int vcpuid, size;
++    unsigned int size;
+     int err;
+-    struct vcpu *v;
++    struct vcpu *v = hvm_load_vcpu_instance(d, h);
+     struct hvm_hw_cpu_xsave *ctxt;
+     const struct hvm_save_descriptor *desc;
+     unsigned int i, desc_start, desc_length;
+ 
+-    /* Which vcpu is this? */
 -    vcpuid = hvm_load_instance(h);
 -    if ( vcpuid >= d->max_vcpus || (v = d->vcpu[vcpuid]) == NULL )
 +    if ( !v )
      {
          dprintk(XENLOG_G_ERR, "HVM restore: dom%d has no vcpu%u\n",
-                 d->domain_id, vcpuid);
-@@ -788,8 +787,8 @@ HVM_REGISTER_SAVE_RESTORE(MTRR, hvm_save
+-                d->domain_id, vcpuid);
++                d->domain_id, hvm_load_instance(h));
+         return -EINVAL;
+     }
  
- void memory_type_changed(struct domain *d)
+@@ -1298,14 +1293,14 @@ static int cf_check hvm_load_cpu_xsave_s
+     {
+         printk(XENLOG_G_WARNING
+                "HVM%d.%d restore: not enough data left to read xsave descriptor\n",
+-               d->domain_id, vcpuid);
++               d->domain_id, v->vcpu_id);
+         return -ENODATA;
+     }
+     if ( desc->length + sizeof (*desc) > h->size - h->cur)
+     {
+         printk(XENLOG_G_WARNING
+                "HVM%d.%d restore: not enough data left to read %u xsave bytes\n",
+-               d->domain_id, vcpuid, desc->length);
++               d->domain_id, v->vcpu_id, desc->length);
+         return -ENODATA;
+     }
+     if ( desc->length < offsetof(struct hvm_hw_cpu_xsave, save_area) +
+@@ -1313,7 +1308,7 @@ static int cf_check hvm_load_cpu_xsave_s
+     {
+         printk(XENLOG_G_WARNING
+                "HVM%d.%d restore mismatch: xsave length %u < %zu\n",
+-               d->domain_id, vcpuid, desc->length,
++               d->domain_id, v->vcpu_id, desc->length,
+                offsetof(struct hvm_hw_cpu_xsave,
+                         save_area) + XSTATE_AREA_MIN_SIZE);
+         return -EINVAL;
+@@ -1331,7 +1326,7 @@ static int cf_check hvm_load_cpu_xsave_s
+         printk(XENLOG_G_WARNING
+                "HVM%d.%d restore: inconsistent xsave state (feat=%#"PRIx64
+                " accum=%#"PRIx64" xcr0=%#"PRIx64" bv=%#"PRIx64" err=%d)\n",
+-               d->domain_id, vcpuid, ctxt->xfeature_mask, ctxt->xcr0_accum,
++               d->domain_id, v->vcpu_id, ctxt->xfeature_mask, ctxt->xcr0_accum,
+                ctxt->xcr0, ctxt->save_area.xsave_hdr.xstate_bv, err);
+         return err;
+     }
+@@ -1350,13 +1345,13 @@ static int cf_check hvm_load_cpu_xsave_s
+             {
+                 printk(XENLOG_G_WARNING
+                        "HVM%d.%u restore mismatch: xsave length %#x > %#x (non-zero data at %#x)\n",
+-                       d->domain_id, vcpuid, desc->length, size, i);
++                       d->domain_id, v->vcpu_id, desc->length, size, i);
+                 return -EOPNOTSUPP;
+             }
+         }
+         printk(XENLOG_G_WARNING
+                "HVM%d.%u restore mismatch: xsave length %#x > %#x\n",
+-               d->domain_id, vcpuid, desc->length, size);
++               d->domain_id, v->vcpu_id, desc->length, size);
+         /* Rewind desc_length to ignore the extraneous zeros. */
+         desc_length = size;
+     }
+@@ -1365,14 +1360,14 @@ static int cf_check hvm_load_cpu_xsave_s
+     {
+         printk(XENLOG_G_WARNING
+                "HVM%d.%u restore: compressed xsave state not supported\n",
+-               d->domain_id, vcpuid);
++               d->domain_id, v->vcpu_id);
+         return -EOPNOTSUPP;
+     }
+     else if ( desc_length != size )
+     {
+         printk(XENLOG_G_WARNING
+                "HVM%d.%u restore mismatch: xsave length %#x != %#x\n",
+-               d->domain_id, vcpuid, desc_length, size);
++               d->domain_id, v->vcpu_id, desc_length, size);
+         return -EINVAL;
+     }
+     /* Checking finished */
+@@ -1481,15 +1476,15 @@ static int cf_check hvm_save_cpu_msrs(st
+ 
+ static int cf_check hvm_load_cpu_msrs(struct domain *d, hvm_domain_context_t *h)
  {
--    if ( cache_flush_permitted(d) &&
--         d->vcpu && d->vcpu[0] && p2m_memory_type_changed(d) &&
-+    if ( cache_flush_permitted(d) && domain_vcpu(d, 0) &&
-+         p2m_memory_type_changed(d) &&
-          /*
-           * Do the p2m type-change, but skip the cache flush if the domain is
-           * not yet running.  The check for creation_finished must strictly be
+-    unsigned int i, vcpuid = hvm_load_instance(h);
+-    struct vcpu *v;
++    unsigned int i;
++    struct vcpu *v = hvm_load_vcpu_instance(d, h);
+     const struct hvm_save_descriptor *desc;
+     struct hvm_msr *ctxt;
+ 
+-    if ( vcpuid >= d->max_vcpus || (v = d->vcpu[vcpuid]) == NULL )
++    if ( !v )
+     {
+         dprintk(XENLOG_G_ERR, "HVM restore: dom%d has no vcpu%u\n",
+-                d->domain_id, vcpuid);
++                d->domain_id, hvm_load_instance(h));
+         return -EINVAL;
+     }
+ 
+@@ -1499,21 +1494,21 @@ static int cf_check hvm_load_cpu_msrs(st
+     {
+         printk(XENLOG_G_WARNING
+                "HVM%d.%d restore: not enough data left to read MSR descriptor\n",
+-               d->domain_id, vcpuid);
++               d->domain_id, v->vcpu_id);
+         return -ENODATA;
+     }
+     if ( desc->length + sizeof (*desc) > h->size - h->cur)
+     {
+         printk(XENLOG_G_WARNING
+                "HVM%d.%d restore: not enough data left to read %u MSR bytes\n",
+-               d->domain_id, vcpuid, desc->length);
++               d->domain_id, v->vcpu_id, desc->length);
+         return -ENODATA;
+     }
+     if ( desc->length < HVM_CPU_MSR_SIZE(1) )
+     {
+         printk(XENLOG_G_WARNING
+                "HVM%d.%d restore mismatch: MSR length %u < %zu\n",
+-               d->domain_id, vcpuid, desc->length, HVM_CPU_MSR_SIZE(1));
++               d->domain_id, v->vcpu_id, desc->length, HVM_CPU_MSR_SIZE(1));
+         return -EINVAL;
+     }
+ 
+@@ -1525,7 +1520,7 @@ static int cf_check hvm_load_cpu_msrs(st
+     {
+         printk(XENLOG_G_WARNING
+                "HVM%d.%d restore mismatch: MSR length %u != %zu\n",
+-               d->domain_id, vcpuid, desc->length,
++               d->domain_id, v->vcpu_id, desc->length,
+                HVM_CPU_MSR_SIZE(ctxt->count));
+         return -EOPNOTSUPP;
+     }
+--- a/xen/arch/x86/hvm/mtrr.c
++++ b/xen/arch/x86/hvm/mtrr.c
+@@ -735,15 +735,15 @@ static int cf_check hvm_save_mtrr_msr(st
+ 
+ static int cf_check hvm_load_mtrr_msr(struct domain *d, hvm_domain_context_t *h)
+ {
+-    unsigned int vcpuid = hvm_load_instance(h), i;
+-    struct vcpu *v = domain_vcpu(d, vcpuid);
++    unsigned int i;
++    struct vcpu *v = hvm_load_vcpu_instance(d, h);
+     struct mtrr_state *m;
+     struct hvm_hw_mtrr hw_mtrr;
+ 
+     if ( !v )
+     {
+         dprintk(XENLOG_G_ERR, "HVM restore: dom%d has no vcpu%u\n",
+-                d->domain_id, vcpuid);
++                d->domain_id, hvm_load_instance(h));
+         return -EINVAL;
+     }
+ 
+--- a/xen/arch/x86/hvm/viridian/viridian.c
++++ b/xen/arch/x86/hvm/viridian/viridian.c
+@@ -1152,14 +1152,13 @@ static int cf_check viridian_save_vcpu_c
+ static int cf_check viridian_load_vcpu_ctxt(
+     struct domain *d, hvm_domain_context_t *h)
+ {
+-    unsigned int vcpuid = hvm_load_instance(h);
+-    struct vcpu *v;
++    struct vcpu *v = hvm_load_vcpu_instance(d, h);
+     struct hvm_viridian_vcpu_context ctxt;
+ 
+-    if ( vcpuid >= d->max_vcpus || (v = d->vcpu[vcpuid]) == NULL )
++    if ( !v )
+     {
+         dprintk(XENLOG_G_ERR, "HVM restore: dom%d has no vcpu%u\n",
+-                d->domain_id, vcpuid);
++                d->domain_id, hvm_load_instance(h));
+         return -EINVAL;
+     }
+ 
+--- a/xen/arch/x86/hvm/vlapic.c
++++ b/xen/arch/x86/hvm/vlapic.c
+@@ -1577,16 +1577,17 @@ static void lapic_load_fixup(struct vlap
+ }
+ 
+ 
+-static int lapic_check_common(const struct domain *d, unsigned int vcpuid)
++static int lapic_check_common(const struct domain *d,
++                              const hvm_domain_context_t *h)
+ {
+     if ( !has_vlapic(d) )
+         return -ENODEV;
+ 
+     /* Which vlapic to load? */
+-    if ( !domain_vcpu(d, vcpuid) )
++    if ( !hvm_load_vcpu_instance(d, h) )
+     {
+         dprintk(XENLOG_G_ERR, "HVM restore: dom%d has no vCPU %u\n",
+-                d->domain_id, vcpuid);
++                d->domain_id, hvm_load_instance(h));
+         return -EINVAL;
+     }
+ 
+@@ -1596,9 +1597,8 @@ static int lapic_check_common(const stru
+ static int cf_check lapic_check_hidden(const struct domain *d,
+                                        hvm_domain_context_t *h)
+ {
+-    unsigned int vcpuid = hvm_load_instance(h);
+     struct hvm_hw_lapic s;
+-    int rc = lapic_check_common(d, vcpuid);
++    int rc = lapic_check_common(d, h);
+ 
+     if ( rc )
+         return rc;
+@@ -1638,10 +1638,9 @@ static int cf_check lapic_load_hidden(st
+ static int cf_check lapic_check_regs(const struct domain *d,
+                                      hvm_domain_context_t *h)
+ {
+-    unsigned int vcpuid = hvm_load_instance(h);
+     int rc;
+ 
+-    if ( (rc = lapic_check_common(d, vcpuid)) )
++    if ( (rc = lapic_check_common(d, h)) )
+         return rc;
+ 
+     if ( !hvm_get_entry(LAPIC_REGS, h) )
+--- a/xen/arch/x86/include/asm/hvm/save.h
++++ b/xen/arch/x86/include/asm/hvm/save.h
+@@ -6,8 +6,8 @@
+ #ifndef __XEN_HVM_SAVE_H__
+ #define __XEN_HVM_SAVE_H__
+ 
+-#include <xen/types.h>
+ #include <xen/init.h>
++#include <xen/sched.h>
+ #include <public/xen.h>
+ #include <public/hvm/save.h>
+ 
+@@ -97,6 +97,13 @@ static inline unsigned int hvm_load_inst
+     return d->instance;
+ }
+ 
++/* Unmarshalling: Wrapper around the above for per-vCPU instances. */
++static inline struct vcpu *hvm_load_vcpu_instance(
++    const struct domain *d, const struct hvm_domain_context *h)
++{
++    return domain_vcpu(d, hvm_load_instance(h));
++}
++
+ /* Handler types for different types of save-file entry. 
+  * The save handler may save multiple instances of a type into the buffer;
+  * the load handler will be called once for each instance found when
 
 
