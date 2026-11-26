@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0B228606A31C
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Nov 2026 13:36:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1295D606A32D
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Nov 2026 13:36:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=P0MLxmZ9
-Received: from list by lists.xenproject.org with outflank-mailman.1503410.1699116 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=gFrBuXFs
+Received: from list by lists.xenproject.org with outflank-mailman.1503417.1699125 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWZdd-0001gW-GD; Thu, 26 Nov 2026 13:35:49 +0000
+	id 1xWZeC-00026z-Mg; Thu, 26 Nov 2026 13:36:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1503410.1699116; Thu, 26 Nov 2026 13:35:49 +0000
+Received: by outflank-mailman (output) from mailman id 1503417.1699125; Thu, 26 Nov 2026 13:36:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWZdd-0001gP-DV; Thu, 26 Nov 2026 13:35:49 +0000
-Received: by outflank-mailman (input) for mailman id 1503410;
- Thu, 26 Nov 2026 13:35:47 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xWZdb-0001gJ-Ni
- for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 13:35:47 +0000
+	id 1xWZeC-00026s-Jo; Thu, 26 Nov 2026 13:36:24 +0000
+Received: by outflank-mailman (input) for mailman id 1503417;
+ Thu, 26 Nov 2026 13:36:23 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xWZeB-00026i-F1
+ for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 13:36:23 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xWZdb-00Fukf-40
- for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 14:35:47 +0100
-Received: from [10.42.69.6] (helo=localhost)
+ id 1xWZeA-00FaLW-R4
+ for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 14:36:22 +0100
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6b0835a3-8faa-0a2a0a5109dd-0a2a4506b2c0-42
- for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 14:35:47 +0100
-Received: from [209.85.221.46] (helo=mail-wr1-f46.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6b0835d1-bab6-0a2a0a5309dd-0a2a4508855c-26
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 14:36:22 +0100
+Received: from [209.85.221.42] (helo=mail-wr1-f42.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6b0835b2-195a-0a2a45060019-d155dd2ea894-3
- for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 14:35:47 +0100
-Received: by mail-wr1-f46.google.com with SMTP id
- ffacd0b85a97d-4a5024b3c28so4626537f8f.0
- for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 05:35:47 -0800 (PST)
+ id 6b0835d6-f659-0a2a45080019-d155dd2ad8d9-3
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 14:36:22 +0100
+Received: by mail-wr1-f42.google.com with SMTP id
+ ffacd0b85a97d-498f5fa5103so4182439f8f.2
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 05:36:22 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4ab6bb989eesm41028609f8f.50.2026.11.26.05.35.45
+ ffacd0b85a97d-4ab6b9add26sm41191423f8f.44.2026.11.26.05.36.21
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 26 Nov 2026 05:35:46 -0800 (PST)
+ Thu, 26 Nov 2026 05:36:21 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,59 +51,61 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Cc:Content-Language:References:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1795700146; x=1796304946; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1795700182; x=1796304982; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:cc
          :content-language:references:to:from:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=H3OzYqaOSt5hmjVQn89vcBD2hR0nuewhaUSDsOtgH/o=;
-        b=P0MLxmZ9KUBVYbS4Cd5BqmQG7YdxgeCHlaFjbmj/BGH4Jb9spGkTNzgUGB7n5xqf5V
-         yFp3d2Y3pfHRNkCoO+4izmE+lJQuIE3yalriRE0GRIkAykNGm2wUsJ68d2i7LC078SRu
-         sGDXQMjN4nC4oPkrwEtw6Ptjii3+gS2YPz48FFZdsDsMGMijhUPggD5C3fvlET1bdGwM
-         9msUXgl1+WbkYplrm7gdUSfhplwkWUt1aXt/EdbM1Ql1f4+xBuJGDXr+t2DatHqsDX99
-         Pk6Gwb2FwzxoNca8znrhEW755Uo8RONttpdAxwzPTXjhrzmjBUdkRVQFmwMo62XBuuCY
-         hLyQ==
+        bh=FrzE5C9udTDhw1JB851Zc7Pw+RZX8N2Gvg2dfMlOkdc=;
+        b=gFrBuXFs2vrONboPrQQHq6atGR9sM9ZJ3sJysAuKv6VE3fRHj9HbpygMxFF5mg0z/U
+         Ewkl8JcvPAl1jVkIMeTVpPaa0pr88G93URNDovoQVsaFTIUDQVH8Em1E1yUKEYCZjFoF
+         VQV/+sIYbHt2Hxsvulxqm1vKPWqlC2MQB1ohpNar8Pfi+fCFFCxoT32e1CwJj9SrQ+5A
+         p8YkfyV6pUonXjCkwQX7gVHrHAbcP9Perpz98HRIGnYoGp9oHVxnDegn6w3FGenTQ0SX
+         aiqSl6Ti7WO46tv0H5D4CtD+sjwG5wcXKigZKkxIfIKopc1iWfgK7ZrwYHte3kZj7hVT
+         GMmA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795700146; x=1796304946;
+        d=1e100.net; s=20260707; t=1795700182; x=1796304982;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:cc
          :content-language:references:to:from:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=H3OzYqaOSt5hmjVQn89vcBD2hR0nuewhaUSDsOtgH/o=;
-        b=kjYi+mmDWx4pTH//jWObSGSI09Xb2T60lB4I1B49PROp+FdU9qZo1xJ9GqGjo8ltK6
-         Z6V2DXBdkpKboSltNpef+Fyzh0V9rAdx9Q2Vaw7xvLeD4vkCKx++yes5/aFMFm5ianJq
-         dUirDQFjjItdv7vxrS+/RmOYs3oU/tjkoA+np7X89mGNVt9Pwe7B3JjUdZgA6Zdtb3dX
-         foR0oxYsRRCZxbv6OjsJudspavYd0v05Il1V9yu+iT8DdehiHwJiETRBFI0ddJOPyd3T
-         dZNVcTcRLrxrIa4ZpS691gCy4EoCwxy6fE1GFSF6vOjnrLqtKkuWGH5yy0/lDBIsQiT7
-         /T5A==
-X-Gm-Message-State: APuU4Z/v7xwgiXR+W83AAfsoO9XHXJK/pohk5Ru8qKjAWbtCMvzOMTAg
-	/6d98lo2cEEqXF2XuEDJ49T0kY9hvF4jrXRH5Sf+qYXBsxUzxfINuCVL5x3R6vjLvFzlhNz4Yst
-	UA9wvWg==
-X-Gm-Gg: AZFdTZeVFPkQpxMq5EevOTvySaFJLEAD1py4VGvYF+2rt861KoE5k5JZtdNkI1mrged
-	xkFZ5RkVJneOuVTzvCWsnLC3Yo2SiQUShYGLExiQRfXFH6FrzG43pnxQw474guplkebTTt3n0pp
-	nis5R5I18v+8d5lMcYFK2a4tSUHfy/6/58bTGVFeZsF/lCbpmRMcytDSC3FM7ELGvkLdMfly+Mb
-	jj9hft9tJiY0Jw41K9C2ja0NZpCjTBt1VLJMmvYCVr1RubdCktiHYS2HZd+o5GIL1eHsSiiXiGY
-	3Dtf93VifunLk6kD36m8EGdRlavME4pNqJ01i+W2riX/ztBPc3xn2+Ka/IOX8HpnD1nKBabcyZG
-	uR1gT1XSfIl336RXt/li2ayVbQsAyrhsGDR7V3c1p0nEwx71ZeIEt3cYlbp5lqOrqPNXRmN91NU
-	IP71+jsJPppNyXLL0IlvQmJ2/DNFW8bJtSP9G2i0HiAgrbhRsVHacSYUpf8RY5lEP42395SaeRc
-	sdK5WNbQkcSpEvSFJaw+tWQHKD7wqCAIU7rEpgE6siFDiWm3hd14fP1Lqkz4Sr1/5JXSYzfVasP
-	fMffSVDQsYSpbjMWazDZRIa4+r0yBPXwc+DuLz+egCh7snJeaDktlMfXzLHDfFwpjr6Xuz1Z/HS
-	3h4qjqLYO8V6RPCR5ww==
-X-Received: by 2002:a05:6000:4012:b0:4a8:f1a5:efb3 with SMTP id ffacd0b85a97d-4aa550796b2mr49435703f8f.11.1795700146394;
-        Thu, 26 Nov 2026 05:35:46 -0800 (PST)
-Message-ID: <0031aac4-59f4-499c-9e6e-32e894d0c6d8@suse.com>
-Date: Thu, 26 Nov 2026 14:35:45 +0100
+        bh=FrzE5C9udTDhw1JB851Zc7Pw+RZX8N2Gvg2dfMlOkdc=;
+        b=b5+7tfcSj9jqFqo4176wGpoDLnXkF9YWhCKIsWUNAyPgKuqAPapZOEIxqygwAaxBcD
+         vMoz4J3hcJC5f7pyv1R3zworod+xtzYp0AyfEfIeNJQXF0mUXd2juwoiA0gAEuic7H2+
+         u8rglbn8hk+rq3k57Sn3tSsXBKyvvR38M14AlPTmP1YL9lxIVcuGNlr7OKQ9ahD+ol3o
+         b0fmWqNad1ojoVDs96MH2IGmniJLoHWhlWICFvWziPY/TJ8vo6GMycYl/JuHc8rjhLe4
+         QBpRIFrGUZcTFbsazrFKV6rjm7OY2TP6wpFDf2zcPi9bCQUCzCLjuqupqC6iBYZbEpbo
+         ap7A==
+X-Gm-Message-State: APuU4Z/I3wAmb5riTVuJyqcnIbyds25r7N0n54SGzeGtAjnFcLLceEZI
+	IQRVd090jwyAzPTkdt3G7AOh/ryZceC9dU9kzir2q0cV61O+qdOkDQgbtA9K/KTKxkPhj9CUBv+
+	0RddXTQ==
+X-Gm-Gg: AZFdTZeeEdxmSg5SeHCfjEYlzw6nDCHkFXFs26XA7qKdBsPHwWZdS21kRgzGkn7gAux
+	BQBc3NaBBqRlWKpCxLBGt9qyHWbkTNThWE78VghhMyZPenqMkUG1Djjs1Sst/+578UKdsjdyOXm
+	f7pvEFvdPpKRsIg4tVe5y6+s6tZ3ZTfbsJ44Q4ZxdX/zrqBUjvIYj12oueyDe8x4VL1GmMRSZMw
+	rO8np/r2jT//1GQceWfH6dPPfqSShM/bclKpChN2Kb6uGZa1nmP7K2tLJardZvvfobV9aJRu+Hs
+	8D1mBAS9jgAPRkV9QpewKBi6Y/nby1tg0zaa8TAfCvSe4ZfbbD5bp9K1615yCu7JO2TnnqqZVRG
+	yl/CqIJdVHlyPM6dQ0BBkqtuA3OxK/2rRc0AIaX7ZGxoXOLHFic29An8Kqt9f3MW4Aqk0ykh56i
+	OWo7x3AmwgaX7tyAWvBEokpnJWN7F2XHmAm0e1QX5qxhr9xW0Io5TOwhgSJfr2cUk5QyKtTHRjK
+	5bXeo3shBV2v6NoCeRTKlQJSb27E1xLGcQqPnnUxlHfrPGyjp1AyyjyTPI2oLl3YGLeuDTqNUhd
+	TURHHF6zxcE/QAXuqyFIul8eiwoC6wlQztl4p3AWLZSX3E6Rd2UhC5A5g6u9hGzyAMk4OLP/yIl
+	c3TIgu8wndo7QjvOE
+X-Received: by 2002:a05:6000:26d0:b0:4a6:8012:197 with SMTP id ffacd0b85a97d-4ad5d5f9320mr40751087f8f.2.1795700181708;
+        Thu, 26 Nov 2026 05:36:21 -0800 (PST)
+Message-ID: <ebe22349-be46-4853-a142-ffc934c995ba@suse.com>
+Date: Thu, 26 Nov 2026 14:36:20 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 01/13] x86/gdbsx: don't blindly assume vCPU 0 exists
+Subject: [PATCH 02/13] x86/passthrough: don't blindly assume vCPU-s exist
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 References: <1ea6d02b-8fba-4b1e-969c-033d6a7be233@suse.com>
 Content-Language: en-US
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Elena Ufimtseva <elena.ufimtseva@oracle.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Teddy Astie <teddy.astie@vates.tech>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -130,9 +132,9 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <1ea6d02b-8fba-4b1e-969c-033d6a7be233@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-16d1c6/1795700147-F76C877B-516C21FE/10/78276251493
+X-purgate-ID: tlsNG-c1860d/1795700182-CCD7087B-D78079F2/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 2492
+X-purgate-size: 6301
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -141,78 +143,158 @@ X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-For the PV case, pass domain_vcpu()'s result into the low-level function,
-and refuse the lookup there when pgd3val wasn't provided and the vCPU
-doesn't exist. Additionally also check whether CR3 was ever set.
+First, pirq_guest_bind() really only needs a vCPU to establish IRQ
+affinity, and it already has fallback logic which can be used if the vCPU
+passed in is NULL. Have the caller pass in a (guaranteed non-NULL) domain
+pointer, making the vCPU one optional.
 
-For the HVM case, simply use domain_vcpu() in the low-level helper and
-bail if the result is NULL.
-
-Fixes: 61f2a440299c ("gdbsx: a gdbserver stub for xen")
 Reported-by: Roger Pau Monné <roger.pau@amd.com>
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
---- a/xen/arch/x86/gdbsx.c
-+++ b/xen/arch/x86/gdbsx.c
-@@ -30,11 +30,15 @@ typedef unsigned char dbgbyte_t;
- static mfn_t
- dbg_hvm_va2mfn(dbgva_t vaddr, struct domain *dp, int toaddr, gfn_t *gfn)
+While altering pirq_guest_bind()'s signature also convert its boolean
+parameter to bool.
+
+Further, while generally hvm_girq_dest_2_vcpu_id() would return only IDs
+of valid vCPU-s, for a single-vCPU guest it would return 0 no matter
+whether that vCPU was created already. Use domain_vcpu() when consuming
+the return value; subsequent code already deals with the pointer being
+NULL.
+
+Fixes: fbe487b996b5 ("PCI passthru: VT-d I/O hooks")
+Fixes: 85715f4bc7c9 ("MSI 5/6: add MSI support to passthrough HVM domain")
+Fixes:  ("")
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
+---
+I'll fill the missing Fixes: when xenbits is willing to work again.
+
+--- a/xen/arch/x86/irq.c
++++ b/xen/arch/x86/irq.c
+@@ -1627,14 +1627,15 @@ int pirq_shared(struct domain *d, int pi
+     return shared;
+ }
+ 
+-int pirq_guest_bind(struct vcpu *v, struct pirq *pirq, int will_share)
++int pirq_guest_bind(struct domain *d, const struct vcpu *v, struct pirq *pirq,
++                    bool will_share)
  {
-+    struct vcpu *v = domain_vcpu(dp, 0);
-     mfn_t mfn;
-     uint32_t pfec = PFEC_page_present;
-     p2m_type_t gfntype;
+     struct irq_desc         *desc;
+     irq_guest_action_t *action, *newaction = NULL;
+     unsigned int        max_nr_guests = will_share ? irq_max_guests : 1;
+     int                 rc = 0;
  
--    *gfn = _gfn(paging_gva_to_gfn(dp->vcpu[0], vaddr, &pfec));
-+    if ( !v )
-+        return INVALID_MFN;
-+
-+    *gfn = _gfn(paging_gva_to_gfn(v, vaddr, &pfec));
-     if ( gfn_eq(*gfn, INVALID_GFN) )
-         return INVALID_MFN;
+-    WARN_ON(!rw_is_write_locked(&v->domain->event_lock));
++    WARN_ON(!rw_is_write_locked(&d->event_lock));
+     BUG_ON(!local_irq_is_enabled());
  
-@@ -65,17 +69,21 @@ dbg_hvm_va2mfn(dbgva_t vaddr, struct dom
-  * Returns: mfn for the given (pv guest) vaddr 
-  */
- static mfn_t
--dbg_pv_va2mfn(dbgva_t vaddr, struct domain *dp, uint64_t pgd3val)
-+dbg_pv_va2mfn(dbgva_t vaddr, const struct vcpu *v, uint64_t pgd3val)
- {
-     l4_pgentry_t l4e, *l4t;
-     l3_pgentry_t l3e, *l3t;
-     l2_pgentry_t l2e, *l2t;
-     l1_pgentry_t l1e, *l1t;
--    unsigned long cr3 = (pgd3val ? pgd3val : dp->vcpu[0]->arch.cr3);
--    mfn_t mfn = maddr_to_mfn(cr3_pa(cr3));
-+    mfn_t mfn;
+  retry:
+@@ -1651,7 +1652,7 @@ int pirq_guest_bind(struct vcpu *v, stru
+         {
+             printk(XENLOG_G_INFO
+                    "Cannot bind IRQ%d to dom%d. In use by '%s'.\n",
+-                   pirq->pirq, v->domain->domain_id, desc->action->name);
++                   pirq->pirq, d->domain_id, desc->action->name);
+             rc = -EBUSY;
+             goto unlock_out;
+         }
+@@ -1666,7 +1667,7 @@ int pirq_guest_bind(struct vcpu *v, stru
+             xfree(newaction);
+             printk(XENLOG_G_INFO
+                    "Cannot bind IRQ%d to dom%d. Out of memory.\n",
+-                   pirq->pirq, v->domain->domain_id);
++                   pirq->pirq, d->domain_id);
+             return -ENOMEM;
+         }
  
-     if ( pgd3val == 0 )
+@@ -1690,7 +1691,7 @@ int pirq_guest_bind(struct vcpu *v, stru
+         {
+             const cpumask_t *affinity = NULL;
+ 
+-            if ( !opt_noirqbalance )
++            if ( !opt_noirqbalance && v )
+                 affinity = cpumask_of(v->processor);
+             else if ( !cpumask_intersects(desc->affinity, &cpu_online_map) )
+             {
+@@ -1710,7 +1711,7 @@ int pirq_guest_bind(struct vcpu *v, stru
+     else if ( !will_share || !action->shareable )
      {
-+        if ( !v || !v->arch.cr3 )
-+            return INVALID_MFN;
-+
-+        mfn = maddr_to_mfn(cr3_pa(v->arch.cr3));
-+
-         l4t = map_domain_page(mfn);
-         l4e = l4t[l4_table_offset(vaddr)];
-         unmap_domain_page(l4t);
-@@ -91,6 +99,8 @@ dbg_pv_va2mfn(dbgva_t vaddr, struct doma
-              (l3e_get_flags(l3e) & _PAGE_PSE) )
-             return INVALID_MFN;
+         printk(XENLOG_G_INFO "Cannot bind IRQ%d to dom%d. %s.\n",
+-               pirq->pirq, v->domain->domain_id,
++               pirq->pirq, d->domain_id,
+                will_share ? "Others do not share"
+                           : "Will not share with others");
+         rc = -EBUSY;
+@@ -1734,17 +1735,17 @@ int pirq_guest_bind(struct vcpu *v, stru
+         printk(XENLOG_G_INFO
+                "Cannot bind IRQ%d to %pd: already at max share %u"
+                " (increase with irq-max-guests= option)\n",
+-               pirq->pirq, v->domain, irq_max_guests);
++               pirq->pirq, d, irq_max_guests);
+         rc = -EBUSY;
+         goto unlock_out;
      }
-+    else
-+        mfn = maddr_to_mfn(cr3_pa(pgd3val));
  
-     l2t = map_domain_page(mfn);
-     l2e = l2t[l2_table_offset(vaddr)];
-@@ -125,7 +135,7 @@ static unsigned int dbg_rw_guest_mem(str
+-    action->guest[action->nr_guests++] = v->domain;
++    action->guest[action->nr_guests++] = d;
  
-         mfn = (is_hvm_domain(dp)
-                ? dbg_hvm_va2mfn(addr, dp, toaddr, &gfn)
--               : dbg_pv_va2mfn(addr, dp, pgd3));
-+               : dbg_pv_va2mfn(addr, domain_vcpu(dp, 0), pgd3));
-         if ( mfn_eq(mfn, INVALID_MFN) )
-             break;
+     if ( action->ack_type != ACKTYPE_NONE )
+-        set_pirq_eoi(v->domain, pirq->pirq);
++        set_pirq_eoi(d, pirq->pirq);
+     else
+-        clear_pirq_eoi(v->domain, pirq->pirq);
++        clear_pirq_eoi(d, pirq->pirq);
  
+  unlock_out:
+     spin_unlock_irq(&desc->lock);
+--- a/xen/common/event_channel.c
++++ b/xen/common/event_channel.c
+@@ -718,7 +718,7 @@ static int evtchn_bind_pirq(evtchn_bind_
+ 
+     info->evtchn = port;
+     rc = (!is_hvm_domain(d)
+-          ? pirq_guest_bind(v, info,
++          ? pirq_guest_bind(d, v, info,
+                             !!(bind->flags & BIND_PIRQ__WILL_SHARE))
+           : 0);
+     if ( rc != 0 )
+--- a/xen/drivers/passthrough/x86/hvm.c
++++ b/xen/drivers/passthrough/x86/hvm.c
+@@ -315,7 +315,7 @@ int pt_irq_create_bind(
+              */
+             pirq_dpci->dom = d;
+             /* bind after hvm_irq_dpci is setup to avoid race with irq handler*/
+-            rc = pirq_guest_bind(d->vcpu[0], info, 0);
++            rc = pirq_guest_bind(d, d->vcpu[0], info, 0);
+             if ( rc == 0 && pt_irq_bind->u.msi.gtable )
+             {
+                 rc = msixtbl_pt_register(d, info, pt_irq_bind->u.msi.gtable);
+@@ -375,7 +375,7 @@ int pt_irq_create_bind(
+         pirq_dpci->gmsi.dest_vcpu_id = dest_vcpu_id;
+ 
+         pirq_dpci->gmsi.posted = false;
+-        vcpu = (dest_vcpu_id >= 0) ? d->vcpu[dest_vcpu_id] : NULL;
++        vcpu = (dest_vcpu_id >= 0) ? domain_vcpu(d, dest_vcpu_id) : NULL;
+         if ( iommu_intpost )
+         {
+             if ( delivery_mode == dest_LowestPrio )
+@@ -527,7 +527,7 @@ int pt_irq_create_bind(
+             }
+ 
+             /* Deal with gsi for legacy devices */
+-            rc = pirq_guest_bind(d->vcpu[0], info, share);
++            rc = pirq_guest_bind(d, d->vcpu[0], info, share);
+             if ( unlikely(rc) )
+             {
+                 /*
+--- a/xen/include/xen/irq.h
++++ b/xen/include/xen/irq.h
+@@ -184,7 +184,8 @@ void pirq_cleanup_check(struct pirq *pir
+ extern void pirq_guest_eoi(struct pirq *pirq);
+ extern void desc_guest_eoi(struct irq_desc *desc, struct pirq *pirq);
+ extern int pirq_guest_unmask(struct domain *d);
+-extern int pirq_guest_bind(struct vcpu *v, struct pirq *pirq, int will_share);
++extern int pirq_guest_bind(struct domain *d, const struct vcpu *v,
++                           struct pirq *pirq, bool will_share);
+ extern void pirq_guest_unbind(struct domain *d, struct pirq *pirq);
+ extern void pirq_set_affinity(struct domain *d, int pirq,
+                               const cpumask_t *mask);
 
 
