@@ -2,46 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 420C8606A329
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Nov 2026 06:05:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C0EDF606A31E
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Nov 2026 07:25:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20260707 header.b=CSzV2OOG
-Received: from list by lists.xenproject.org with outflank-mailman.1502811.1698934 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=ezA2r4XF
+Received: from list by lists.xenproject.org with outflank-mailman.1503107.1698942 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWSbo-00012C-7k; Thu, 26 Nov 2026 06:05:28 +0000
+	id 1xWTqV-0005PS-OU; Thu, 26 Nov 2026 07:24:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1502811.1698934; Thu, 26 Nov 2026 06:05:28 +0000
+Received: by outflank-mailman (output) from mailman id 1503107.1698942; Thu, 26 Nov 2026 07:24:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWSbo-000125-4L; Thu, 26 Nov 2026 06:05:28 +0000
-Received: by outflank-mailman (input) for mailman id 1502811;
- Wed, 25 Nov 2026 19:24:19 +0000
+	id 1xWTqV-0005PL-Lj; Thu, 26 Nov 2026 07:24:43 +0000
+Received: by outflank-mailman (input) for mailman id 1503107;
+ Thu, 26 Nov 2026 07:24:43 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <bleung@google.com>) id 1xWIbK-0002hA-UY
- for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 19:24:19 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xWTqU-0005PF-QQ
+ for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 07:24:43 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xWIbJ-005JJ5-W3
- for xen-devel@lists.xenproject.org; Wed, 25 Nov 2026 20:24:17 +0100
-Received: from [10.42.69.10] (helo=localhost)
+ id 1xWTqU-005G8y-2O
+ for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 08:24:42 +0100
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <bleung@google.com>)
- id 6b0735a3-2eae-0a2a0a5409dd-0a2a450aa028-42
- for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 20:24:17 +0100
-Received: from [209.85.210.172] (helo=mail-pf1-f172.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <bleung@google.com>)
- id 6b0735e0-f2d2-0a2a450a0019-d155d2acb410-3
- for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 20:24:17 +0100
-Received: by mail-pf1-f172.google.com with SMTP id
- d2e1a72fcca58-8a06e79e152so3098145b3a.0
- for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 11:24:17 -0800 (PST)
-Received: from google.com (196.126.197.35.bc.googleusercontent.com.
- [35.197.126.196]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-8c87077bc47sm9717494b3a.6.2026.11.25.11.24.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Nov 2026 11:24:13 -0800 (PST)
+ (envelope-from <jbeulich@suse.com>)
+ id 6b07deb1-8faa-0a2a0a5109dd-0a2a4509b354-16
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 08:24:41 +0100
+Received: from [209.85.221.46] (helo=mail-wr1-f46.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6b07deb9-be1a-0a2a45090019-d155dd2ec4f1-3
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 08:24:41 +0100
+Received: by mail-wr1-f46.google.com with SMTP id
+ ffacd0b85a97d-4a7b8abe209so5125279f8f.0
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Nov 2026 23:24:41 -0800 (PST)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4ab6c4353d6sm37438178f8f.56.2026.11.25.23.24.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 25 Nov 2026 23:24:41 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -50,212 +49,125 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=google.com header.i="@google.com" header.h="In-Reply-To:Content-Disposition:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20260707; t=1795634656; x=1796239456; darn=lists.xenproject.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=N55gjPKFtoyQEkpZ+mulBFdiGvAn3buEDUMJWwRWBLA=;
-        b=CSzV2OOGoLnsPAxf/IXs9fSOJFjrzWpUf9SFuRaB+jDmxx4lZ6b8kmPaDBK6k/VoZf
-         UvOASlp9tZYd5az3K1pfbdbslRQw8EQ9LyEO8hIXr3rDvFul+pkP5DosGXkh9Tgu1Axt
-         Nf/7tcjcKXMi3qZ7UBVzlN0IYPQ/4mqe7gcmGX7CfjoFyCKFtrmoju4l5fX4EK1pognw
-         Uz2sC8gTIW+duEWNz6EapKHuTNQQCt1z1xVQODlpJvx9WVFOGNfsAPGdQ/eC6sJ55cYb
-         rxXgu/RcNyYJIj2FLd4XVdMfJrhTWP114+Kb5CJwR3PsTdltwbw2yoP5LEXr12RfTlHD
-         vTJw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795634656; x=1796239456;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=suse.com; s=google; t=1795677881; x=1796282681; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=N55gjPKFtoyQEkpZ+mulBFdiGvAn3buEDUMJWwRWBLA=;
-        b=F3SNLPiyMUzMuC/RJic0c9e5Upe2NISNyRWcEN/hhB9HeU6+maIRF8kPbWHu7rYTyu
-         2DccapGvng/tyFLgDclPRWlM27kZgwuu3NSyOlhojZ/WoMlH7lQZOssxi0hT16yyseSa
-         g8jLkSyAFtPo0XJeoUg553fDAhKLQMtYnKNniO4PKEYuRXs9PbC83yADkhnIk/PLwsLT
-         CunrEcgtPg3xDyi6k2aDjmvO1G5WTlGSwtw7STXdNM1MKisKOJuzXzIUDmvu186TuniS
-         +313mzVJx/dEi/nRoKhHMzxjlAPOkE7Qmz30OSL6is3pKDplNZQxTrllXBjnoHeLoICq
-         U7Jw==
-X-Forwarded-Encrypted: i=1; AL+hErHjgtki1d1KFMWFdDxx+wRHrormcOerxO3wfq8ZoqFPcom7a48AR8tyMcTJhQJInDKtA9+D6oG3iwc=@lists.xenproject.org
-X-Gm-Message-State: APuU4Z9ygbP/J6FDlhfz42A4/hNZWuX7Aza4v3aE0ojZF9BFlUMLbtWf
-	n00GTpycnWDXPQhj1RY4O0Y8BT+yEVJawpUwqqkL3xz+HvA5NZ7lZqpxBVT2LMOhsw==
-X-Gm-Gg: AZFdTZezIGNYiFTrGieYxEVjtz/Hxa9JT6WfrooQtkYj4WNXHkxBVYsp7yf6YorgaL/
-	0w6MEprVIX6CG3/9/GoRLN6TUEe/9bxYrpTfBmcbTvDZDxvF7dH84C2sxQeN74SvF3zmSiGSWtS
-	IIMyXAs82c6lTEoGhjL7cgdtMqg1kGDwl3Ygr/MzTSboJyT9MuBOERTZfQ+ew0kPczpjgzZHyT6
-	nX33QmzKQRNDA9JPt71I28L4EpT7cupg42sb9NzQ5jvHbe1bv3zQBUYFTEbKyVxvdjTimJntP1H
-	4+I5ni/YRXFe9vnQGB3dWqhZClo+vWdE7QMmSHglMVAYdYhPCkZygyAYH9DGc4lymmwhBy9JcBy
-	NY0b7XXd6lxcJoVN4v71qdanSpi2QEalTEPHoLJhHh8oGH3IH42bAtumtPgyYIzA7mE3B84saBD
-	zlxuljxlTVrNn0UEvS2nraTmbX+96kfirQJ8qnrnSPaCOAz7DPdhl2IKJbs8SLa19kYCrUI8wD3
-	WTjTstNrR2ufJYbzsX4duy9YDo5syoobijF9CsoSMv4wQm9AfMhpMA7R8ffWLFXw/XKwGTf0Yta
-	56mz1fLCUxu1ppqSQFVvRNJh5KIkhgFt1Vi/zU0CRnOiGgs7Igw08ktsdglx2tXDRpG5SEpw5hJ
-	zIB7/R/+CS8LmcFaSmSrW/4n7ZyV0Kg7IKR+xYlu0RqV1F1iDiHyHfCCIIXvg9rloKM3w3Umtwc
-	LxUMSq5agOVA==
-X-Received: by 2002:a05:6a00:a908:b0:886:773d:a6a with SMTP id d2e1a72fcca58-8c87c199463mr15925448b3a.28.1795634654761;
-        Wed, 25 Nov 2026 11:24:14 -0800 (PST)
-Date: Wed, 25 Nov 2026 11:24:10 -0800
-From: Benson Leung <bleung@google.com>
-To: Randy Dunlap <rdunlap@infradead.org>
-Cc: linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>, linux-doc@vger.kernel.org,
-	David Hildenbrand <david@kernel.org>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Jason Gunthorpe <jgg@nvidia.com>,
-	Leon Romanovsky <leonro@nvidia.com>, linux-mm@kvack.org,
-	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
-	linux-sound@vger.kernel.org, Jens Axboe <axboe@kernel.dk>,
-	linux-block@vger.kernel.org, Marcel Holtmann <marcel@holtmann.org>,
-	Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
-	linux-bluetooth@vger.kernel.org,
-	Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
-	Jason Wang <jasowangio@gmail.com>, David Heidelberg <david@ixit.cz>,
-	oe-linux-nfc@lists.linux.dev, Chas Williams <3chas3@gmail.com>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@kernel.org>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-	netdev@vger.kernel.org, Helge Deller <deller@gmx.de>,
-	linux-fbdev@vger.kernel.org, dri-devel@lists.freedesktop.org,
-	MPT-FusionLinux.pdl@broadcom.com,
-	"James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
-	"Martin K. Petersen" <mkp@kernel.org>, linux-scsi@vger.kernel.org,
-	Miquel Raynal <miquel.raynal@bootlin.com>,
-	Richard Weinberger <richard@nod.at>,
-	Vignesh Raghavendra <vigneshr@ti.com>,
-	Zhihao Cheng <chengzhihao1@huawei.com>,
-	linux-mtd@lists.infradead.org, Neill Kapron <nkapron@google.com>,
-	Andrey Konovalov <andreyknvl@gmail.com>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	linux-usb@vger.kernel.org, Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	xen-devel@lists.xenproject.org, Hans de Goede <hansg@kernel.org>,
-	Arnd Bergmann <arnd@arndb.de>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Eugenio =?iso-8859-1?Q?P=E9rez?= <eperezma@redhat.com>,
-	Sean Christopherson <seanjc@google.com>,
-	Paolo Bonzini <pbonzini@redhat.com>, kvm@vger.kernel.org,
-	virtualization@lists.linux.dev, Jan Kara <jack@suse.cz>,
-	linux-fsdevel@vger.kernel.org, Theodore Ts'o <tytso@mit.edu>,
-	linux-ext4@vger.kernel.org, Mike Marshall <hubcap@omnibond.com>,
-	devel@lists.orangefs.org, Paulo Alcantara <pc@manguebit.org>,
-	Namjae Jeon <linkinjeon@kernel.org>, linux-cifs@vger.kernel.org,
-	Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>,
-	linux-f2fs-devel@lists.sourceforge.net,
-	Florian Fainelli <florian.fainelli@broadcom.com>,
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
-	Tzung-Bi Shih <tzungbi@kernel.org>,
-	Benson Leung <bleung@chromium.org>,
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-	Alex Deucher <alexander.deucher@amd.com>,
-	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
-	amd-gfx@lists.freedesktop.org,
-	Jani Nikula <jani.nikula@linux.intel.com>,
-	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-	Rodrigo Vivi <rodrigo.vivi@intel.com>,
-	Tvrtko Ursulin <tursulin@ursulin.net>,
-	intel-gfx@lists.freedesktop.org,
-	Matthew Brost <matthew.brost@intel.com>,
-	Thomas =?iso-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>,
-	intel-xe@lists.freedesktop.org
-Subject: Re: [PATCH v3 11/12] docs: ioctl-number: update platform entries
-Message-ID: <awc12oWB5WDJi8XZ@google.com>
-References: <20261125061340.3402300-1-rdunlap@infradead.org>
- <20261125061340.3402300-12-rdunlap@infradead.org>
+        bh=fkQHqHi14QEHX2AVv6OrLUKC9699MAhUX0LQZ+rpZLA=;
+        b=ezA2r4XF911s4c4TS/KGUkc6SJk+nrX7mpAdAJjpOH5vUTL6Rcuu5sW9fTFmSNKhSa
+         iaIEFUn/XnwaqLxxpwKW3/FTIrVKicObIfdZyyCAb8HnFetA5OEJdF3HSzCDo2qGlY5R
+         AfmCt7LUx9/eOjBj9tZGenty5hcb+W5JcTd8WJ9fp5J01rDOZNRgGra0i2eHf7d+uJzZ
+         hOYr2AwCR5I5duKokL1XS2NweusxNk/ElhgyITMVEBQ076ojO4aa9Y7Ta+xDX7S5ZXZU
+         MJp07T4p8YDnQbIPU9Hyq4BQkVR69DAnfjkFowZgb9kpZJfWslQFubgDj1Qsb9JcFzni
+         zhxw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795677881; x=1796282681;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=fkQHqHi14QEHX2AVv6OrLUKC9699MAhUX0LQZ+rpZLA=;
+        b=ZwALvESci9oHo1YtzmwAP1kDlWTtAR1MYZFqW9NZiUy2pHXg1ARu0xZgES/0e8dCJK
+         G3vovSjmtAUFLBxDWLUEFE0sIbWmLLoNmj9eYT4eSa56ApyV1OWIwl9hCbs2O65VEigF
+         iK9/9k91cm6NztFxV0dTjBJ++Ots4fthdSnJqO9HOApBH/jjgYHmU2FdB8gfPhoIUPGI
+         8ALPG2LeALClvPGcAgodJn8Rz2OAasKF9SnR8irXNq0O3pzSzhXueEv+t1+w6bw4sel2
+         zKS+WjKQ0bPbUZbY45GNMP8Dwgwrb5RhCVk4a1IrTtTkSmfUbw/DdlCGkSwoZmMjxHM1
+         i3fQ==
+X-Forwarded-Encrypted: i=1; AL+hErHtDRRdsD+8wa2oco52xeSz199tyMG2fxh/TtbUh4zctK6RTdPYPhSYUSkrKw+badQQDhMGSn7MHjk=@lists.xenproject.org
+X-Gm-Message-State: APuU4Z8G3Wlg5GoeZodK6sv7tXZ0DuLa1yeSBx9X59roLspYK+y26SYN
+	cXzBsYilxhirrZEpdxUDAqjRa+8oRE3zncSGOYP/G2B4TNWyN37DW57iMDB0/mJ3Eg==
+X-Gm-Gg: AZFdTZed0ol8Qmgf9cvd0xdWA9QoDFjkjaRV5F+x7XPiGM5cCEjpUmYN+q3xG21ptxt
+	tE60RleGjBhKRbT78jnb6ggx73s+cpVc3emOSgd3fEiWEHcPih4fGUXoV0URqGzR6otDT4A/k9v
+	Kfqz1OuVhOc+kiCn+o7l27nKafmbz3FiDdz/tWa/s5PlKw6jl0ZF/mYN1BTslP0C6Z3XB+khkwr
+	fhKUWhoGEucu8ZblflDWV+ZH/v4yjMzrejliP3TBOBPOMgFj6dWOPbUVFb0L2tGABcyF15r7JIc
+	BZgQJ0V0xfMg3lihyRG2+z6t330buphwvhm0sg8GZlo45JLAONUvGpD56iU+oiipStbOA25qBZE
+	PeqBhAHGhh1fe4By4285d8iRTpu9W06fklKtS2rSD3swghpAL78OGyO9jaMJnIsWg37Gl2NlJ+h
+	2IG8OF9cyy0JIZQn3r673Jvvpb9Ue7kXsIzqFxCl6j+JLWq2meY8rAAs7cjAWKzbqaIE81x2PvP
+	GSji5AuD8rcO0pZTSnWEeG2axmbPucS2t0KQaBbN4cwDd5SjnhbOHZXVvHTwWnY9pFbWysjqNYl
+	veskepa5Z3+etQqo+aYIYMPxAMRC8xxAA3eSEhrRQEckVqxhZQ70OnJyb+OjgQQy+o7XPuEnnoj
+	WhjXDuABZKlxB8ln5FqgXcpktESIePG9GffVUO0Y=
+X-Received: by 2002:a05:6000:490a:b0:4b7:80c1:11bd with SMTP id ffacd0b85a97d-4b780c1127cmr13241565f8f.35.1795677881291;
+        Wed, 25 Nov 2026 23:24:41 -0800 (PST)
+Message-ID: <b5f7029f-13d7-484e-93a6-eec873882901@suse.com>
+Date: Thu, 26 Nov 2026 08:24:40 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="Kk3dCghKBQNrocaf"
-Content-Disposition: inline
-In-Reply-To: <20261125061340.3402300-12-rdunlap@infradead.org>
-X-purgate-ID: tlsNG-4011c0/1795634657-4ACDBCFC-F4BD9110/0/0
-X-purgate-type: clean
-X-purgate-size: 3117
-X-Spam-Status: No, score=-23.3 required=3.0 tests=BAYES_00,DKIMWL_WL_MED,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_IN_DEF_DKIM_WL autolearn=unavailable
-	autolearn_force=no version=4.0.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/5] Config.mk: record hash of SeaBIOS tag
+To: Elliott Mitchell <ehem+xen@m5p.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1792436534.git.ehem+xen@m5p.com>
+ <9771fce7e080b2d64fd9535b6e38d70781eb2de3.1792436534.git.ehem+xen@m5p.com>
+ <0fc3eb31-1aac-4b0e-8f9a-ae947dabe81d@suse.com>
+ <au_lyioQRMuKkoqJ@mattapan.m5p.com.>
+ <6b07617a.985e8776.145007.9be0SMTPIN_ADDED_BROKEN@mx.google.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <6b07617a.985e8776.145007.9be0SMTPIN_ADDED_BROKEN@mx.google.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-bad1c0/1795677881-BCCCF034-BD1BC958/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 1163
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+On 25.11.2026 23:29, Elliott Mitchell wrote:
+> On Sat, Nov 07, 2026 at 07:00:26PM -0800, Elliott Mitchell wrote:
+>>
+>> The situation with Qemu is far more concerning.  Since
+>> $(QEMU_UPSTREAM_REVISION) points at a branch on Xen's git server, every
+>> time that branch moves you get a different build.  Since different
+>> versions will have different bugs/features unless there is a public
+>> record of where the branch was over time, older builds become impossible
+>> to reproduce.  
+>>
+>> The favored solution to these problems would be to switch to using
+>> `git subtree`.  This though would be a pretty major move.  I was hoping
+>> this series would get a discussion started about option.
+> 
+> I suppose I should ask given lack of response to this statement.  Do you
+> feel this is something which should be brought up during the Community
+> Call?
 
---Kk3dCghKBQNrocaf
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I fear I'm the wrong one to ask, not the least because I wasn't even aware
+of a "subtree" sub-command. Whether that's (meaningfully) better than
+"submodule" I have no idea. One aspect which may matter is that in the git
+version I'm using, for example, the sub-command isn't known.
 
-On Tue, Nov 24, 2026 at 10:13:38PM -0800, Randy Dunlap wrote:
-> Update the list of platform/ files where ioctls are defined and update
-> the ranges of function numbers that are used.
->=20
-> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-> Acked-by: Tzung-Bi Shih <tzungbi@kernel.org> # cros_ec
-
-For cros_ec as well:
-
-Reviewed-by: Benson Leung <bleung@chromium.org>
-
-
-> ---
-> v2: no change
-> v3: rebase
->=20
-> [Since having multiple maintainers trying to merge these would
-> cause some conflicts, it would be more manageable for Jon to
-> take all of these through the docs-next tree.]
->=20
-> Cc: Jonathan Corbet <corbet@lwn.net>
-> Cc: Shuah Khan <skhan@linuxfoundation.org>
-> Cc: linux-doc@vger.kernel.org
-> Cc: Florian Fainelli <florian.fainelli@broadcom.com>
-> Cc: Broadcom internal kernel review list <bcm-kernel-feedback-list@broadc=
-om.com>
-> Cc: Tzung-Bi Shih <tzungbi@kernel.org>
-> Cc: Benson Leung <bleung@chromium.org>
->=20
->  Documentation/userspace-api/ioctl/ioctl-number.rst |    3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
->=20
-> --- linux-next-20261123.orig/Documentation/userspace-api/ioctl/ioctl-numb=
-er.rst
-> +++ linux-next-20261123/Documentation/userspace-api/ioctl/ioctl-number.rst
-> @@ -434,6 +434,7 @@ Code  Seq#    Include File
->  0xBA  00-0F  uapi/linux/liveupdate.h                                   P=
-asha Tatashin
->                                                                         <=
-mailto:pasha.tatashin@soleen.com>
->  0xC0  00-0F  linux/usb/iowarrior.h
-> +0xC4  00-1F  platform/raspberrypi/vchiq-interface/vchiq_ioctl.h
->  0xCA  00-0F  uapi/misc/cxl.h                                           D=
-ead since 6.15
->  0xCA  10-2F  uapi/misc/ocxl.h
->  0xCA  80-BF  uapi/scsi/cxlflash_ioctl.h                                D=
-ead since 6.15
-> @@ -446,7 +447,7 @@ Code  Seq#    Include File
->  0xDD  00-3F                                                            Z=
-FCP device driver see drivers/s390/scsi/
->                                                                         <=
-mailto:aherrman@de.ibm.com>
->  0xE5  00-3F  linux/fuse.h
-> -0xEC  00-01  linux/platform_data/cros_ec_chardev.h                     C=
-hromeOS EC driver
-> +0xEC  00-02  linux/platform_data/cros_ec_chardev.h                     C=
-hromeOS EC driver
->  0xEE  00-09  uapi/linux/pfrut.h                                        P=
-latform Firmware Runtime Update and Telemetry
->  0xEF  00-0F  uapi/linux/ntfs.h                                         N=
-TFS
->  0xF3  00-3F  drivers/usb/misc/sisusbvga/sisusb.h                       s=
-isfb
-
---Kk3dCghKBQNrocaf
-Content-Type: application/pgp-signature; name=signature.asc
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQQCtZK6p/AktxXfkOlzbaomhzOwwgUCawc12gAKCRBzbaomhzOw
-wuvSAP9FFr45oXAv5Psc3n5xsSYyPFouusI/XwRnWy3tYxQspAD+KIeOTWQfcOeC
-TWeqyAANog5rg68r7xNPxeH8I/R6xAQ=
-=Fk2v
------END PGP SIGNATURE-----
-
---Kk3dCghKBQNrocaf--
+Jan
 
