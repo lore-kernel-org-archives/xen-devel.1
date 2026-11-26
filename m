@@ -2,46 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B052606A31C
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Nov 2026 21:03:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DA34C606A31C
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Nov 2026 21:03:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=google header.b=ObjTNdvK
-Received: from list by lists.xenproject.org with outflank-mailman.1504054.1699617 (Exim 4.92)
+	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=google header.b=HbA0e2X2
+Received: from list by lists.xenproject.org with outflank-mailman.1504056.1699628 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWgd5-0006hk-I7; Thu, 26 Nov 2026 21:03:43 +0000
+	id 1xWgd6-0006py-9J; Thu, 26 Nov 2026 21:03:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1504054.1699617; Thu, 26 Nov 2026 21:03:43 +0000
+Received: by outflank-mailman (output) from mailman id 1504056.1699628; Thu, 26 Nov 2026 21:03:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWgd5-0006hZ-EV; Thu, 26 Nov 2026 21:03:43 +0000
-Received: by outflank-mailman (input) for mailman id 1504054;
- Thu, 26 Nov 2026 21:03:41 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xWgd6-0006ot-3F; Thu, 26 Nov 2026 21:03:44 +0000
+Received: by outflank-mailman (input) for mailman id 1504056;
+ Thu, 26 Nov 2026 21:03:43 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper3@citrix.com>) id 1xWgd3-0006I6-C1
- for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 21:03:41 +0000
+ (envelope-from <andrew.cooper3@citrix.com>) id 1xWgd4-0006Ub-Re
+ for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 21:03:42 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xWgd2-00CPvZ-Ot
- for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 22:03:40 +0100
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xWgd4-00Gh7b-8I
+ for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 22:03:42 +0100
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <andrew.cooper3@citrix.com>)
- id 6b089e84-8faa-0a2a0a5109dd-0a2a4509e5ce-44
- for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 22:03:40 +0100
-Received: from [209.85.128.47] (helo=mail-wm1-f47.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6b089e8b-e002-0a2a0a5209dd-0a2a4505d4c0-32
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 22:03:42 +0100
+Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <andrew.cooper3@citrix.com>)
- id 6b089eac-be1a-0a2a45090019-d155802fa410-3
- for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 22:03:40 +0100
-Received: by mail-wm1-f47.google.com with SMTP id
- 5b1f17b1804b1-4bb55cda775so46493715e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 13:03:40 -0800 (PST)
+ id 6b089eae-4cb1-0a2a45050019-d155802eb94f-3
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 22:03:42 +0100
+Received: by mail-wm1-f46.google.com with SMTP id
+ 5b1f17b1804b1-4bb6886d30aso71204735e9.3
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 13:03:42 -0800 (PST)
 Received: from localhost.localdomain (host-78-146-248-75.as13285.net.
  [78.146.248.75]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb88442693sm570536295e9.1.2026.11.26.13.03.39
+ 5b1f17b1804b1-4bb88442693sm570536295e9.1.2026.11.26.13.03.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Nov 2026 13:03:39 -0800 (PST)
+ Thu, 26 Nov 2026 13:03:41 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,42 +52,42 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1795727020; x=1796331820; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1795727022; x=1796331822; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:mime-version:references
          :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=2Wsej0LA7EDSL6KhsBVUN19Ey9sfratpimRkNUuIibs=;
-        b=ObjTNdvKEI4M9QlP4l5fDQmSvzdjy+dTUF7noSboQbM7oVHRudUSX6kRNOHZ/99BCz
-         VHBKLGux4INoYtRqK/urbLQsMduK6v5dPqVmFcFc163cngx4jxn+8FYl9Jj/T/o+NMb+
-         mTaJ1zgX9EEAP9ArBI5HAk3mXA+78zBgDoXXQ=
+        bh=1jlOXeKT1EOgFt75DzMKWpcXSq6wZJ1CMqIY0d3xiX4=;
+        b=HbA0e2X24H95G3Ip39R1myeXovobXZxrZsaaFGswv6aXquRtq8wfFe/Y2f4+MWQTia
+         mD98tOETb/aqf7t1xiV1xXFLekIyWovyIvjAATWyxkhr4zazjlCPduO4oqrmGHHAGWOb
+         bhdC3FrQw3LzY9Zbwo+xZQAlIehhO/NBE3Mc8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795727020; x=1796331820;
+        d=1e100.net; s=20260707; t=1795727022; x=1796331822;
         h=content-transfer-encoding:content-type:mime-version:references
          :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=2Wsej0LA7EDSL6KhsBVUN19Ey9sfratpimRkNUuIibs=;
-        b=t0HQyYEyJt7OOmif8jVMyMTVErEdjxIC7ttH3skS9/c4Ns8RkjqCBLLz4ewaNE/wyP
-         gmprA2K4Q9e+ZfInHPULamt74HcfT2nxUreoC2AarISaDzAnVDLiNp82PXRKXJKMyJD6
-         oqofFe3XSKReIyaj12WP9U/s1x7Ail5heP1AbdCaR7wqPG+AGlV7ADe7zC8+RJ3PcHaU
-         yN36fXPxc+BBuL//cZDppIq2RYyJVCj8NZzjRMKKh7qmQsEHsd80DpT+yLCMgc9+XbG5
-         wCt1Tynh0ZrUnjiGHWMEZBignWkT108gkAHfU7uTSVJ0ocwCo4OPU4nwr9z0oGUy2Q7l
-         HxlQ==
-X-Gm-Message-State: APuU4Z9lXyKXaboa3IhAgP/7MePZwI1cplByWdZ3hoKS6DYwxFDzXod6
-	E0RYeDxhNEk+a6VOAzJXXRdA/sHWo/PJHRyRO2yNmta7GOPotlmOa9xhAqMxlWWvEM6UYp+05V/
-	whJ6C/6g=
-X-Gm-Gg: AZFdTZdnqO/IQw2OzFNd9wf9u+i416Jp8Z0g7EXPNRZaSdH7Hk2Y7zt/H+Z2q22cBjT
-	XTHGcoPquI0UH/5GJF3FCW3+dvGj26mcYmpQhnUzuXm9EdaM8hJVwbo2OuicfLx2UZQ1L8aD3/M
-	v00z6YijDWLuDAYp/kbBKX0+SX8DvVu9Wds+wZk++ZJL5Esrky5RQP9U0+xPAj31X8bOTDIf5xa
-	iquWPZWOLO5QZoBMu2W0TyA+9ishzYmLoAu30VY36FaJeZACSBvwIeDqxTD5ujgA9+SgnoUsRFs
-	NdcQmz55bmyp92niq3Xj2tYClVJgIMYC1Wp06ezDMt4CHPGW0LDAD9wuMtIMiKZtzDLXW5dT86S
-	4NFyqsMfzl6dBvY019h56+8e33zwApR3x3+eBDhcKfee1FYF1PVzlF0sIU1sl3SatlMBlP1IBhG
-	JaVQWco+F8HkVE71PugsebhsyXk4eFw8nAKHbVWQCdVR1ul22dSsQIzqvV53pkaGYaMp+0wbmAO
-	UCnt7LsHRRvP7esrfy/z2gLzB1rh91s1KR5ZjTdKwhWeav03ZsG90DcBtENDz9UX0hnVy7olnMl
-	QFIeMpnZw2oNeMhrpQaahcoWL3Y76jDSn9Lo44USPUYt5ZIvmi+RlATKKVxwJZhMjki+2O183vH
-	LV+U=
-X-Received: by 2002:a05:600c:4f81:b0:4bb:5e8c:13bc with SMTP id 5b1f17b1804b1-4bb88805902mr428828625e9.7.1795727020102;
-        Thu, 26 Nov 2026 13:03:40 -0800 (PST)
+        bh=1jlOXeKT1EOgFt75DzMKWpcXSq6wZJ1CMqIY0d3xiX4=;
+        b=x0q77aMVpE3Mq1kOKam+jpmDCvniWMxtK/EVIkZAp647435ozutoAl+FKiImU+bn30
+         mT8ZQWlzh2mtZ4asJLL/pkFooVNf9S5gFjQwx6d/9/+8XbcrSIwYzIDOJ2PJQSo38yQb
+         CSeZEvTvLOm2LSXvf4maFAFMpWkMXH7Viv1GHDHG2Ve7+2qX3mym3YPz5ALKaLVSBjmX
+         8+LBYpauMqsv7z5/4a9ZPLiIbc8GmltVuSu9u03UkQcpXWSPW9tuw138aIIdPl2ZYFWA
+         moknCURpxtdDdrL/5tbwp8lZrwjAvICi1hNk+DqllRB6XcFg20ftN/aMK3jBGJ+Fbd9V
+         0hEg==
+X-Gm-Message-State: APuU4Z8yARRB7MOKjI04MSR082KDhjrCnfi7kVCaXf0Ifv71jZ5yh32/
+	FAhjlksYV6IZYVc7rc50Qm2PUkuf9aB6PirqDXSf7Oo0D2Dw9xiTPKrfqvqy/dqsJDY7LUSgf42
+	J5UtU8zc=
+X-Gm-Gg: AZFdTZdc8nUIsFX4XB4bUB8nGN9hutVavXT65FKY4jizZYHVV99owJGusv+4W6YwTLw
+	qWfkkwsQf+BbJAVnUcD2QQQ/+AjNTfPdcjpaiChaMMejU5EuwCkEXlLOjG3CMmkXpw2N/fVt6M8
+	LeGiIv/B9BeqTrIkFk7pTxQ5riqU81KzMVU635Oz8jyB5j9x6+yV2StWpbWGJH6yv4LJebK976Q
+	aS2MfjGOMAjAYIKIBX0nBb9nQUhNlHkqUo39j/GFKn8Az8Hy12++Y9Zjq2kqt4f8K5OCV5idVs7
+	xVoao7DJKxCkrrjMjuSc1mujYtNXidXqViPwqEq9tcJUNrT55zQIoRhUR5mZJVS9L0pw+fnlzcx
+	jmbg5jQ5Fb8euEcTT2BIjjOtHhZRsge23GWrGcgjd9e/+W1EzrAEYqCTVhxf0+6XtwzFAElLSIc
+	xhtsM6jRBX3+RygVAWqGwrmDP955fTTrvgCpW2nW9xIazgkBVmvvyWLtBXnj1xpTTYKZbKBGGDx
+	rBqTMQMWp+g74m4ahLqY6+TFGu5Y/fsN8QBeKMaeQpbsewVNvTM3vrj3jrDlPZOf2UMcbshFG3D
+	mIfYHkpZGjuE4Ysvd9oJ7B/b436KyxwLa3jZKEvOq/e64UMrttni772QDlZbn5jQ6W/MWP7wErE
+	oIIQ=
+X-Received: by 2002:a05:600c:3b84:b0:4bb:6f45:2a6d with SMTP id 5b1f17b1804b1-4bb888074bbmr540846405e9.12.1795727021384;
+        Thu, 26 Nov 2026 13:03:41 -0800 (PST)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Anthony PERARD <anthony.perard@vates.tech>,
@@ -100,9 +100,9 @@ Cc: Anthony PERARD <anthony.perard@vates.tech>,
 	Teddy Astie <teddy.astie@vates.tech>,
 	"Daniel P . Smith" <dpsmith@apertussolutions.com>,
 	Frediano Ziglio <freddy77@gmail.com>
-Subject: [PATCH 2/4] x86/efi: Move the trampoline into .init.data for EFI builds
-Date: Thu, 26 Nov 2026 21:03:35 +0000
-Message-Id: <20261126210337.746228-3-andrew.cooper3@citrix.com>
+Subject: [PATCH 4/4] CI: Add an EFI/StrictNX test
+Date: Thu, 26 Nov 2026 21:03:37 +0000
+Message-Id: <20261126210337.746228-5-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20261126210337.746228-1-andrew.cooper3@citrix.com>
 References: <20261126210337.746228-1-andrew.cooper3@citrix.com>
@@ -110,9 +110,9 @@ X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1795727020-3BCD7034-7FE5590B/0/0
+X-purgate-ID: tlsNG-c201ff/1795727022-24D1E2A1-1A0C9607/0/0
 X-purgate-type: clean
-X-purgate-size: 3229
+X-purgate-size: 5317
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -121,8 +121,22 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-... but keep it in .init.text for xen.gz
+From: Roger Pau Monné <roger.pau@citrix.com>
 
+While most of our testing of this nature happens in a Debian container,
+Debian's strictnx build of OVMF is buggy at the time of writing.  See:
+
+  https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1154178
+
+Fedora have non-strict StrictNX enabled in their SecureBoot build of OVMF, but
+by default it prints a warning on failure and then relaxes permissions.  It
+can be turned into strict StrictNX mode with an extra -fw_cfg setting, making
+it actually usable in a CI scenario.
+
+Unlike Debian, Fedora has no equivalent of the enrolled snake-oil key, so for
+simplicity sake just turn off SecureBoot for now.
+
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Anthony PERARD <anthony.perard@vates.tech>
@@ -136,72 +150,123 @@ CC: Teddy Astie <teddy.astie@vates.tech>
 CC: Daniel P. Smith <dpsmith@apertussolutions.com>
 CC: Frediano Ziglio <freddy77@gmail.com>
 
-In an ideal world, we'd remove all xen.efi writes into the trampoline while
-it's part of the Xen image. Two (trampoline_efer, trampoline_xen_phys_start)
-are easy to fix.  Applying relocations is doable (requires coordinated effort
-with the MB2 path), but EDID is problem write.  EDID needs to be written
-before EBS, but the trampoline cannot be placed prior to EBS in all cases.
-
-It isn't completely ideal to use "a" rather than "ax" or "aw" but it is
-necessary given that head.S is built only once.  It means that the trampoline
-is only disassemblable in xen-syms, not head.o.
-
-I admit that this justification is getting a little flimsy, yet I do
-disassemble the trampoline on a concerningly frequent basis.
+As Fedora 45 is new this series, I've already deployed the container with
+these additions.
 ---
- xen/arch/x86/boot/head.S | 14 +++++++++++++-
- xen/arch/x86/xen.lds.S   |  6 ++++++
- 2 files changed, 19 insertions(+), 1 deletion(-)
+ automation/build/fedora/45-x86_64.dockerfile  |  7 ++
+ automation/gitlab-ci/test.yaml                |  9 +++
+ .../scripts/include/xtf-x86_64-efi-strictnx   | 64 +++++++++++++++++++
+ 3 files changed, 80 insertions(+)
+ create mode 100644 automation/scripts/include/xtf-x86_64-efi-strictnx
 
-diff --git a/xen/arch/x86/boot/head.S b/xen/arch/x86/boot/head.S
-index 981f262b5ec4..3c396cd952c3 100644
---- a/xen/arch/x86/boot/head.S
-+++ b/xen/arch/x86/boot/head.S
-@@ -711,7 +711,19 @@ trampoline_setup:
-         /* Jump into the relocated trampoline. */
-         lret
+diff --git a/automation/build/fedora/45-x86_64.dockerfile b/automation/build/fedora/45-x86_64.dockerfile
+index 5a1764c7ee55..e470f19eedb4 100644
+--- a/automation/build/fedora/45-x86_64.dockerfile
++++ b/automation/build/fedora/45-x86_64.dockerfile
+@@ -67,6 +67,13 @@ RUN <<EOF
+         glib2-devel
+         pixman-devel
+         ninja-build
++
++        # for test phase, qemu-* jobs
++        edk2-ovmf
++        expect
++        python3-virt-firmware
++        qemu-img
++        qemu-system-x86
+     )
  
--        .section .init.text, "ax", @progbits
-+        /*
-+         * In an ideal world, the trampoline would live in .init.text, as it
-+         * is necessary to disassemble during development.
-+         *
-+         * However, xen.efi writes into the trampoline while it's part of the
-+         * main Xen image.  xen.efi needs to be StrictNX compatible
-+         * (i.e. writable sections must not be executable), so must have the
-+         * trampoline in a data section.
-+         *
-+         * Put the trampoline in a dedicated section so the final link can
-+         * place it appropriately.
-+         */
-+        .section .init.trampoline, "a", @progbits
- ENTRY(trampoline_start)
- #include "trampoline.S"
- ENTRY(trampoline_end)
-diff --git a/xen/arch/x86/xen.lds.S b/xen/arch/x86/xen.lds.S
-index 888d5293f3d6..cef3d404a1a8 100644
---- a/xen/arch/x86/xen.lds.S
-+++ b/xen/arch/x86/xen.lds.S
-@@ -200,6 +200,9 @@ SECTIONS
-        _sinittext = .;
-        *(.init.multiboot)
-        *(.init.text)
-+#ifndef EFI /* Non-EFI wants the trampoline in .init.text for disassembly. */
-+       *(.init.trampoline)
-+#endif
-        *(.text.startup)
-        _einittext = .;
-        /*
-@@ -232,6 +235,9 @@ SECTIONS
+     dnf -y --setopt=install_weak_deps=False install "${DEPS[@]}"
+diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
+index cf4b7ed416b0..cfde4d05c6e8 100644
+--- a/automation/gitlab-ci/test.yaml
++++ b/automation/gitlab-ci/test.yaml
+@@ -783,6 +783,15 @@ qemu-smoke-x86_64-gcc-efi-uki:
+   needs:
+     - debian-13-x86_64-gcc-debug
  
-        *(.init.data.multiboot)
-        *(.init.data)
-+#ifdef EFI /* EFI needs the trampoline in .init.data for StrictNX compatibility. */
-+       *(.init.trampoline)
-+#endif
-        *(.init.data.rel)
-        *(.init.data.rel.*)
-        . = ALIGN(4);
++qemu-smoke-x86_64-gcc-efi-strictnx:
++  extends: .qemu-smoke-x86_64
++  variables:
++    CONTAINER: fedora:45-x86_64
++  script:
++    - ./automation/scripts/qemu-xtf.sh x86_64-efi-strictnx pv64 example 2>&1 | tee ${LOGFILE}
++  needs:
++    - fedora-45-x86_64-gcc-debug
++
+ qemu-xtf-argo-x86_64-gcc-debug:
+   extends: .qemu-smoke-x86_64
+   variables:
+diff --git a/automation/scripts/include/xtf-x86_64-efi-strictnx b/automation/scripts/include/xtf-x86_64-efi-strictnx
+new file mode 100644
+index 000000000000..49a87c7dd91f
+--- /dev/null
++++ b/automation/scripts/include/xtf-x86_64-efi-strictnx
+@@ -0,0 +1,64 @@
++#!/bin/bash
++#
++# XTF test utilities (x86_64, EFI).
++#
++
++# Arch-specific environment overrides.
++function xtf_arch_prepare()
++{
++    export FW_PREFIX="${FW_PREFIX:-/usr/share/edk2/ovmf}"
++    export QEMU_PREFIX="${QEMU_PREFIX:-}"
++    export XEN_BINARY="${XEN_BINARY:-${WORKDIR}/xen.efi}"
++    export XEN_CMDLINE="${XEN_CMDLINE:-loglvl=all noreboot console_timestamps=boot console=com1}"
++    export XTF_SRC_BRANCH="${XTF_SRC_BRANCH:-master}"
++    export XTF_SRC_URI="${XTF_SRC_URI:-https://xenbits.xen.org/git-http/xtf.git}"
++    export XTF_SRC_VARIANTS="hvm64 pv64"
++}
++
++# Perform arch-specific XTF environment setup.
++function xtf_arch_setup()
++{
++    local esp_dir="${WORKDIR}/boot-esp"
++    local efi_dir="${esp_dir}/EFI/BOOT"
++
++    # Generate EFI boot environment
++    mkdir -p ${efi_dir}
++    cp ${XEN_BINARY} ${efi_dir}/BOOTX64.EFI
++    cp ${XTF_BINARY} ${efi_dir}/kernel
++
++    cat > ${efi_dir}/BOOTX64.cfg <<EOF
++[global]
++default=test
++
++[test]
++options=${XEN_CMDLINE}
++kernel=kernel
++EOF
++
++    # Fedora has StrictNX built into in the SecureBoot image, but by default
++    # it is permissive and only prints a warning.  It's made strict by an
++    # extra -fw_cfg setting.
++    local ovmf_code=${FW_PREFIX}/OVMF_CODE_4M.secboot.qcow2
++    local ovmf_vars=${FW_PREFIX}/OVMF_VARS_4M.secboot.qcow2
++    local ovmf_format=qcow2
++
++    cp $ovmf_code ${WORKDIR}/OVMF_CODE
++    cp $ovmf_vars ${WORKDIR}/OVMF_VARS
++
++    # Xen.efi isn't signed, so turn SecureBoot off.
++    virt-fw-vars --inplace ${WORKDIR}/OVMF_VARS --set-false SecureBootEnable
++
++    export TEST_CMD="${QEMU_PREFIX}qemu-system-x86_64 \
++        -no-reboot \
++        -nographic \
++        -monitor none \
++        -serial stdio \
++        -m 2048 \
++        -smp 2 \
++        -M q35,kernel-irqchip=split \
++        -drive if=pflash,format=${ovmf_format},readonly=on,file=${WORKDIR}/OVMF_CODE \
++        -drive if=pflash,format=${ovmf_format},file=${WORKDIR}/OVMF_VARS \
++        -drive file=fat:rw:${esp_dir},media=disk,index=0,format=raw \
++        -fw_cfg name=opt/org.tianocore/StrictNX,string=yes \
++    "
++}
 -- 
 2.39.5
 
