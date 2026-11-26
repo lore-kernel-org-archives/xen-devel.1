@@ -2,48 +2,64 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E8662606A31E
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Nov 2026 09:12:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BDF8A606A31E
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Nov 2026 09:25:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=selector1 header.b=Q3gHh2jr
-Received: from list by lists.xenproject.org with outflank-mailman.1503214.1699006 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=yg8naujG
+Received: from list by lists.xenproject.org with outflank-mailman.1503230.1699015 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWVWd-0001Ek-2X; Thu, 26 Nov 2026 09:12:19 +0000
+	id 1xWVj2-0003o7-6z; Thu, 26 Nov 2026 09:25:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1503214.1699006; Thu, 26 Nov 2026 09:12:19 +0000
+Received: by outflank-mailman (output) from mailman id 1503230.1699015; Thu, 26 Nov 2026 09:25:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWVWc-0001Ed-VU; Thu, 26 Nov 2026 09:12:18 +0000
-Received: by outflank-mailman (input) for mailman id 1503214;
- Thu, 26 Nov 2026 09:12:18 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xWVj2-0003o0-3o; Thu, 26 Nov 2026 09:25:08 +0000
+Received: by outflank-mailman (input) for mailman id 1503230;
+ Thu, 26 Nov 2026 09:25:07 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Changlei.Li@citrix.com>) id 1xWVWc-0001EX-28
- for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 09:12:18 +0000
+ (envelope-from <Michal.Orzel@amd.com>) id 1xWVj1-0003mp-7P
+ for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 09:25:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xWVWb-00Ecmi-EW
- for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 10:12:17 +0100
-Received: from [10.42.69.11] (helo=localhost)
+ id 1xWViz-00F4Ca-Eo
+ for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 10:25:05 +0100
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Changlei.Li@citrix.com>)
- id 6b07f7ec-2eae-0a2a0a5409dd-0a2a450b8d5c-34
- for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 10:12:17 +0100
-Received: from [52.101.48.12]
- (helo=MW6PR02CU001.outbound.protection.outlook.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Changlei.Li@citrix.com>)
- id 6b07f7ee-b7e8-0a2a450b0019-3465300c6672-3
- for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 10:12:16 +0100
-Received: from LV4PPF5EFB6ADBA.namprd03.prod.outlook.com
- (2603:10b6:40f:fc02::20d) by SA1PR03MB7029.namprd03.prod.outlook.com
- (2603:10b6:806:334::13) with Microsoft SMTP Server (version=TLS1_2,
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6b07faef-2eae-0a2a0a5409dd-0a2a4503c9e8-4
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 10:25:04 +0100
+Received: from [40.107.200.5]
+ (helo=CH5PR02CU005.outbound.protection.outlook.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6b07faef-fae8-0a2a45030019-286bc805d7dc-3
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 10:25:04 +0100
+Received: from CH2PR04CA0025.namprd04.prod.outlook.com (2603:10b6:610:52::35)
+ by PH8PR12MB6724.namprd12.prod.outlook.com (2603:10b6:510:1cf::20)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.662.7; Thu, 26 Nov
- 2026 09:12:11 +0000
-Received: from LV4PPF5EFB6ADBA.namprd03.prod.outlook.com
- ([fe80::7166:4b26:da40:2eb4]) by LV4PPF5EFB6ADBA.namprd03.prod.outlook.com
- ([fe80::7166:4b26:da40:2eb4%3]) with mapi id 15.21.0639.011; Thu, 26 Nov 2026
- 09:12:11 +0000
+ 2026 09:23:58 +0000
+Received: from CH1PEPF0005BD62.namprd02.prod.outlook.com
+ (2603:10b6:610:52:cafe::15) by CH2PR04CA0025.outlook.office365.com
+ (2603:10b6:610:52::35) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.662.7 via Frontend Transport; Thu, 26
+ Nov 2026 09:23:58 +0000
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ CH1PEPF0005BD62.mail.protection.outlook.com (10.167.244.251) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.662.3 via Frontend Transport; Thu, 26 Nov 2026 09:23:58 +0000
+Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.57; Thu, 26 Nov
+ 2026 03:23:57 -0600
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb09.amd.com
+ (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.57; Thu, 26 Nov
+ 2026 03:23:57 -0600
+Received: from [192.168.31.141] (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.57 via Frontend
+ Transport; Thu, 26 Nov 2026 03:23:56 -0600
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,1255 +68,172 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Enpsp5uTmNNUURXof6A5MNKooBvWb+cVkp1jKZWCreTstxXb77bccNZWZUDq3Oyuf7v8QGhLs9bioQLd1TSmtR4elE4rhbaEaCPeDrJd+hpANaJmu2HqCsDLQLlHAoDrPyKYs/Sp5/+4AaJqDBahjixY6RKooqi0EMGvs48qLJeqXRV3hVtb2Mc1aRVizlzG7H3qDd7DEthzGGBGYafVqHD40t3EsJaOy/kZEdMoIcIVXxY+Ae/JakDO2rIxRO99K4ZILswR51K7bxcpCIi10bW2xy+ZcF57xJHXcZ7ocf/hdVCMvjTm5BbL75k+7ZYBW/s4U92XDRDSWGsoNw3sPw==
+ b=MRWXoCHlp58YhMTd6fM1zYP6plkLs5ACkzxwC8Cc9c8/CIPQNmGAC7jz7N17ZihwoG+IEkzPEOzcSQOYs3yLJi3Bx20DrBJo3FdJPV5Du8dKpkXZfVK+jlpXqQl4G0qDCSg75p8EFjhSbtsViXCvNhXI4WU87fgvy6uOecB43WnAHXnyNoO4+3ncGiQt5jg0bYzxeGGUzD8CcA+t89DAnVLYp82b+xJFLsi6Kk40gaNcj3MTWukjuxtRJqS1cY4CUrjkP9w263Z2BQi5gT3wxgwz4eSnhSBcqqfgTNot2HSzQm3xYAHq7pM552wKJC0eFIz/lBDL+IdtkcBIyVQfPw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2gOnFOU1DucdEV7S2/K32PgUsGJvgIOQuRpQe3yTTeo=;
- b=ik1k2ACYyK5Mb11yY2WWpJQp3gWNX0o3dZReI7vGzGBbDCl0C70mzf2VcMELNXbgsR413o/AHIahPyAMSLAwX+PS+6uhhGWivtdnMinuZIzPNTT3b2/4bDYGZO0AZ8ibV8amIVdAOrKr18/e+tdaLbVPUF+CrdaY58E3j2jDaDNf/ed86NSpt3BGsGEcdXZiRKJyzTR+7h6aLvhuqtQQ5AlvAjY6a7qTiRibl00T9T2SsAOV2AIdJT5nuWEGaOM+V5FcGiIkaP7WDgamONzDFI8D5HJWX4FEboOAn09N0kOr2yErIwxQoe6SlgNnoTMNNy8RInR5aOX2z4k8XH/dlg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
+ bh=D3g3Gp7BxPOcXA7SVg0zjOOfyI1U03rv7zyB3iD6oXE=;
+ b=vcAUGD2//QKXgIJcf2vShq3J7yhj+0F96RI4vP7jV7bnKQ7Ul63BocWiGjgj3Pu6Zji5OLEeXnTlSrFF7xZog6Se26yDT9M065KZ8v3zf+J+gSWtOiu2VKbxu23fGTRiBQ9/Qt5fWARQgvbZ6u/UE+v6EK2ZXrBJr8kaMJLmkIinRPIQSFd7uZbWNMNYPMk7GLPQNp4GLhpuIA0z737XvXbf9MazP5Y1v2JgUKyaEiGC3tLI1hT4auWfGebZiv423PwpocvuBzXyyCVYVKBNswvKHVusitwpq4zNni9muOybKCGZEdPwgP4XdqY+hHNaM3bOauXj1bl07SdCQZA4MQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=valinux.co.jp smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2gOnFOU1DucdEV7S2/K32PgUsGJvgIOQuRpQe3yTTeo=;
- b=Q3gHh2jredgtckgjCugUvGns80RJc6tC/spECigqAdwqMyV4o/kotnoVl6+FJOCyLG6RASX43SpBHlHB0+2JE3J1HSGmoLSPESGmaPlMhAdk89K2cOQzgX3ZPcpp8dJeiCtV8WCR08aqDvXIsaBV2jVYW9WcYLAGQgYIsFVgAew=
-From: =?gb2312?B?Q2hhbmdsZWkgTGkgo6jA7rOkwNqjqQ==?= <Changlei.Li@citrix.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: "anthony.perard@vates.tech" <anthony.perard@vates.tech>, Ross Lagerwall
-	<ross.lagerwall@citrix.com>, Andrew Cooper <andrew.cooper@citrix.com>,
-	"oleksii.kurochko@gmail.com" <oleksii.kurochko@gmail.com>,
-	=?gb2312?B?U3RlcGhlbiBDaGVuZyCjqLPM0KG346Op?= <stephen.cheng@citrix.com>,
-	=?gb2312?B?TGluIExpdSCjqMH1wdajqQ==?= <lin.liu01@citrix.com>,
-	=?gb2312?B?Q2h1bmppZSBaaHUgo6jW7LS6vdyjqQ==?= <chunjie.zhu@citrix.com>,
-	"community.manager@xenproject.org" <community.manager@xenproject.org>
-Subject: Re: [XEN PATCH] tools/xenconsoled: add --syslog option
-Thread-Topic: [XEN PATCH] tools/xenconsoled: add --syslog option
-Thread-Index: AQHdfYABIzdH4kftzEW2+S7FuEjhOrdAD7eN
-Date: Thu, 26 Nov 2026 09:12:11 +0000
-Message-ID:
- <LV4PPF5EFB6ADBAEA4F47210A52854A387C80422@LV4PPF5EFB6ADBA.namprd03.prod.outlook.com>
-References:
- <0242bd9b817ac4d56f68bf6381167d1e6410b1ff.1795681198.git.changlei.li@citrix.com>
-In-Reply-To:
- <0242bd9b817ac4d56f68bf6381167d1e6410b1ff.1795681198.git.changlei.li@citrix.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-msip_labels:
-authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: LV4PPF5EFB6ADBA:EE_|SA1PR03MB7029:EE_
-x-ms-office365-filtering-correlation-id: 7c9dafdd-0d65-46ff-b472-08df4b9d5af2
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam:
- BCL:0;ARA:13230040|366016|23010399003|1800799024|376014|38070700021|10067099003|56012099006|261026121527099003|261026140227099003|261028144727099003|261022105027099003|261022113327099003|261022075727099003|261021123027099003|261021121427099003|261102123227099003|261009223027099003|22082099003|18002099003|11063799006|6133799003|13003099007|8096899003|3023799007;
-x-microsoft-antispam-message-info:
- zwZZvio0Qhfclo3kJqu0vXVFTQlJnFD+F92IPaXa7hRpmq23futcT9nBCePoKKbr06dlYq8hkbu5j8KEhLo7Xtre0IRNridMj314LO4ArCOw74WWGP0qzYmvp9F8lwYoXyqJdb64d8QsGSCytzFNzm2ZZpGemS1wWUgNjDDH4CapXS9JsIXbrwsnHkPDaKRedxOrtaA4QQ70pm1D5DK4GvTULAaTr1k7CxghMc1OwQdUH33cWoyLzNfZ+RYHYkaLnF6KiiiQRaSfjhMpb0SutKn2uCBsPCQ4CJ/3svap8cOwvsnvPaVfGOjSgH5/N/nlUslu/MNWLtn+jAQXJBbUgHDNmjVm+Fhgh7YIJSm9172IexcoRlgdhSivx+Qk7nfmx6jdCnWshIsdRuGzKcKyjCWaF/NrBo3SpsM9PNqjVdY9K9hysTdF/3c4SMGN5kKvFrXPtrW5n27AVFC+QhxIPqPvcCAKfjE0+baPhFk4EsdCqWkv6nAm5Xr8OdOQgFC9JFzT+GemO8NAT7pfDvOgGVfzoe7l4wVd1SQXKmFdp53viXy+7PpRsH+C3OvlMzJDj9vb1iNtttMGemokGOTsGfqH7Zeu2tOvH363K83EfrLcbPxbP7i+RvVmHIl+6GvmcfOihyEtNbWvYRn1xwtT0nktyZ+fnmdo/8eNyyXn8qA=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:zh-cn;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LV4PPF5EFB6ADBA.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(23010399003)(1800799024)(376014)(38070700021)(10067099003)(56012099006)(261026121527099003)(261026140227099003)(261028144727099003)(261022105027099003)(261022113327099003)(261022075727099003)(261021123027099003)(261021121427099003)(261102123227099003)(261009223027099003)(22082099003)(18002099003)(11063799006)(6133799003)(13003099007)(8096899003)(3023799007);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?gb2312?B?Zko4YS9qVUZTVlNaTXlWRFVYWm1HaytOSEZRVkdoMnArTDlwbUZBSkRHYy9q?=
- =?gb2312?B?NHZnVVE1dDhaL0s1VURuWkZFYkNmV3V3RkVDSnh3MHBadXd4ZWdoYmFTQVlH?=
- =?gb2312?B?S3d4YVRUaTF2dktXdW9OWHg3akNLcWxVSDdRRHVaYnBuUzBucHJrU2hkV0hX?=
- =?gb2312?B?UlMrQk0zNUJVZ2hVTUtjcGdVZzdXZHpWWS8xU3dRNlJkRW0zNno3cDBDeTRs?=
- =?gb2312?B?UDRpZ0VZUFdPNzlGNmNGdGhIUHVSWkN3bDVCYlhBOVV4RzNQb1dJUHpma3Vy?=
- =?gb2312?B?KzFNQTUydDhyYnJQYTRGZG4yTmRZN0U1TW5yM21mSGoyUThZZmIzOG1XQXgy?=
- =?gb2312?B?ZWhRMVRsUU5sRUIxT3pULzNkTWFQQTZQWGFNSTFoUU1qa3U1VUlyTjBIa2pl?=
- =?gb2312?B?WVBSdWlaWnd0aUNjV2ovc1pVOFgwUkZsWmRHWWV2TzJQMCtCS2E1b0huWWho?=
- =?gb2312?B?aVVZRnBWZWxyK2Y5QmpadnRyRnNyNTM3UDNYYis5VXF3b0FzOGVpdEI3b2tN?=
- =?gb2312?B?R3lCNFZQaFZuS3I1RUJTR0p3d3Q2MkUraHhBRVV5TFlPYkcvdUxoWFduV3hn?=
- =?gb2312?B?WTdYZGNqbGg4YXMrMFAxbTRBbXl0Q1BZVTNWOGxBY1AyRERpOFR6c1dWaXVi?=
- =?gb2312?B?NEtGeUpQYUJmZ2NrWHlDa21BL3Z0VEtwU1lQK0tNeVVVb2gwejJYYWVQRnpV?=
- =?gb2312?B?UURUTko5eUNFVHFSb282d0gxd0ZzMlg3L1pLRkh4Rnc5Z21KaEd1dTdoZnNj?=
- =?gb2312?B?VUxINGM0ODNlbXBHb1JRcWw0V2VVWmdRcjgyeklOQXFRV1cxMzAyeGllQ3M3?=
- =?gb2312?B?ekw5Q1FtNnJkeUpMSmVmRFNObzNtZitDMEpDUkJOQWdSZ1o2N3kyQUMxOE1O?=
- =?gb2312?B?Q0xSSmttejN4NllsUE5pRTA2OUJuNHYySnJHYk1VekJ1ZHdyMjFWaDV6VmFj?=
- =?gb2312?B?bitvMXhLOXpobHRsVDlISVJKdlEvNDRCT0RoclJ6VkZWRHcraXV6aW0zK0p5?=
- =?gb2312?B?MUdEYXdKMnBBbzR4SEpmWmxURVJ5aUlVdVhCVy9qZ0gyQnlVem01blVHdm9M?=
- =?gb2312?B?MTZVTEkxNldqNXNDUCtYK3dBUlZ5ZWJxSnVySXRibVJZNHVXV1hxWTgvZGY2?=
- =?gb2312?B?U213aHJ4Wmg0TmhvT3RBcGxETGZYREl4U25rMlc1aWZ3ZE5UOEY2STB3MUtk?=
- =?gb2312?B?NWxnUm12S3NLb3I4dWt0em1pMFJLNkc2WmFkOHdxWkhRNThZSGlLd3ljV25E?=
- =?gb2312?B?aWZLcEJxUXM3bEV2eFJDRHJ4S2FQMnhsdGlrZDlyMGcvdythN3BhWUtvZTJR?=
- =?gb2312?B?UnJtM3pMc2tRelVNa1I4ejZwR2ZVbDRpZzlaYm84VFp1NW5mRW1wS3dTdmg1?=
- =?gb2312?B?RGRTcWRiK2Jodmx1NEpEQmRPR1ArNFRQUWYwY2syQzhMRXY4dTA1ZHVpYmRO?=
- =?gb2312?B?OG5hSzdiamNON3lXMUhnUmgyRGpxS0tYMXVCNlJ4WkYvQytDWm1mVWZWek5p?=
- =?gb2312?B?NmJQV2NzczkxYzlSS3NhcU9hS0pBakpUUnFPTnVvWGM0YmdSemYrNTVMeG9h?=
- =?gb2312?B?V2tVUXFVM2ljYjJVNUkyaG1YaEhIZXFXRTdqdkFPWWR2amFTUHZMSEFoaU94?=
- =?gb2312?B?bUlGVTNpSEpGbDEycWtkRklxTTdWbFAxZndaOGV1M1NYNTBhN3k5MFFSZG9D?=
- =?gb2312?B?VDNVS0dvMmJqdXZ4OTBmQ2VRdk5ob0M0cjBpQTZXMUlJbjFYZGROYUQxUnM4?=
- =?gb2312?B?dlEzbGxWNkhpMVNOeU84U0lHYUsrUFdsMVd4TS9tYlh6bTgvZVltYUdQU1pH?=
- =?gb2312?B?VjN3STVuMkZXdlRRTDNMN1FJWW5DOVRPcjByYWpTU1krRlhaMEw3R3c5ZjYx?=
- =?gb2312?B?TEhnZHNFaWVmeGxTYitTQjZsbEUwcHBYSGE1SnZ3OUQyMG5nS0FtQThuNEls?=
- =?gb2312?B?d1FnWTZaREYyZkpYcTVVbzI2NncxSFdIVUt4T2NaZXdtdlhndmhlWWVGWkc4?=
- =?gb2312?B?RWFTY0d0SE9HVWNkN09LdVNKb2c0b2FDRTEwckwvMThqNjZaa3J1L0tDVXBp?=
- =?gb2312?B?aXdYbU1EeklEaHhiWXhJN0phMkp2NGtHU2F4d0F1ZXlTaHVNTGZVTnJpZEZP?=
- =?gb2312?B?RUpjSXJORUU0ZmRUeUhvT3g0L3BsU2hyVnVmK2hQczlLcTB5UnVRbGVrTFFO?=
- =?gb2312?B?MlNSTFBob05KYUNPS1h1OUZIbTQvanRDbngweVJab3IyaVNwNEk3ejhxNXZF?=
- =?gb2312?B?VGZySlc4a2s1RjBCdlp4d1VVb3dNUEVjdWtqUWdHZWxRaTdHUXkvdDR0Y3BW?=
- =?gb2312?Q?hBz/xmshT3bLdfKxXA?=
-Content-Type: multipart/alternative;
-	boundary="_000_LV4PPF5EFB6ADBAEA4F47210A52854A387C80422LV4PPF5EFB6ADBA_"
+ bh=D3g3Gp7BxPOcXA7SVg0zjOOfyI1U03rv7zyB3iD6oXE=;
+ b=yg8naujGsalqa4PnbMMqJ2wFA+S0yyGnO9w5VyZWnuKI4QymcYtCs11hsZnN6MbTFz2FKprpqirqSg3CIDtby9isrPw5Bpe2EwwhvLnBungp/4qihb3+HPIi3uihBy+G8kvdkeO8o8XAxp2z4sBanHRUYxukVHL737FS1uNxfdE=
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Message-ID: <87b23da3-6418-40d1-9ec8-3b26f6b000b1@amd.com>
+Date: Thu, 26 Nov 2026 10:23:55 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: LV4PPF5EFB6ADBA.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7c9dafdd-0d65-46ff-b472-08df4b9d5af2
-X-MS-Exchange-CrossTenant-originalarrivaltime: 26 Nov 2026 09:12:11.7658
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] xen/arm: Fix sibling mask setup to only include online
+ CPUs
+To: Hirokazu Takahashi <taka@valinux.co.jp>, <xen-devel@lists.xenproject.org>
+CC: <jbeulich@suse.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>
+References: <20261126044340.14779-1-taka@valinux.co.jp>
+From: "Orzel, Michal" <michal.orzel@amd.com>
+Content-Language: en-US
+In-Reply-To: <20261126044340.14779-1-taka@valinux.co.jp>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH1PEPF0005BD62:EE_|PH8PR12MB6724:EE_
+X-MS-Office365-Filtering-Correlation-Id: 45563298-893f-49f2-7479-08df4b9efff7
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700016|23010399003|376014|1800799024|82310400026|261022075727099003|261022105027099003|10067099003|56012099006|11063799006|261026140227099003|261026121527099003|261028144727099003|261021123027099003|261021121427099003|261102123227099003|261009223027099003|18002099003|22082099003|3023799007;
+X-Microsoft-Antispam-Message-Info:
+	gS/aaIVpaZmA/D6YYXSkd7Mf4kJNdVLM67yxUjp4zDvsL1Illxk+n59ykwT8ppiS9NSxloioS2tFf/+xj+a3lmolYO/B/VTA9EQGERD4GGtEFnsfn8flWaf3A6A15jQlIb8gomwm5xIXNH0h2bVxPlqblvVHLB4C3cLBuQsZ1htD1VT6UnGv6apHIheO1J9aBBoaa4oOQfhofSSDBW3c+92GNbvOCxCm4k2sW6HjRbANW8+rg6TuM9tPqVJLOx9VzgmsvVYcsIsjfGz3lkYKPo6cZX1Xn7idEfadXve2pHUDshKqSMNgcqPCXQxRBI2aMvRS/MJNjkXYYl7hlM0KIN0rCQhetnhvpB8vNblxaAwCXc3r49g/V7YyOT+e3crC6cEva7QU6uDKFXPfabqlmIZ7Em9D/ln14uWNXyyjexETw4D65MnT2Jb8aXjoXEyonwCfAECCrsy/pA0F++GMBUTb7XaJhmPXfc3oQr1Ug1KZ8HBfwhOkCFKa/Ak3UNX+unuwagxn/wuigDlLc+ZzRB+DIxnTruw+f9tV5kk3tqbrp0R2j6qUBBqStmM0Ne8ROEEgBiaSR203Po/XOSdBKCwOP1AsC2wELVb0+70bew8rN7PtdCgm9pz+QTqh4I+e3ca494AY1nRI/6nOZRAJCGaXwZ1g2A7ZEs/b2r07NbV1ubrRc9oZj4il0BLLJvZ1o6FxakeGpHAMeCrcgWqGJQ==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(23010399003)(376014)(1800799024)(82310400026)(261022075727099003)(261022105027099003)(10067099003)(56012099006)(11063799006)(261026140227099003)(261026121527099003)(261028144727099003)(261021123027099003)(261021121427099003)(261102123227099003)(261009223027099003)(18002099003)(22082099003)(3023799007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	FkF8vFeHP9/dr2AdF9GlcmQMoHFAKuu5Xe0EeMgNzePv4fWIf9Mn1O05JGMdjMK6mBx7ecOOTgec42Gul22uisP1ObnBnxLa6Y1Tmo40Arjb9iEUi1JGZrbxY5HM4HszCNSLhvvDziHf7Yz8kGrQ4QWuUdu1nHe7zfaw/Sl6Qlcb5X7oBAQiq6N0Fv80Z1zxnOAVdFat5EDXYwnHQdXb3Dnamm4nVeCY1ZdcJnqckuxtonC2fnnN94xtd6jnk7nOJ61ecxDxqxGbTVZPDDWt7uHr1kP9oMaIL7mN9IdsZf5mWEik9+Nof9etnQaQmbvS1R5PFrG9YxXEvntTIZOGL9NPKEfv9slX+TdioHV37N//KVV/fnsnpOSGV6zUzfsdyIPQqkrfuQB9qbY/6dNc4o4RKggDQlPvVl5JFcIjdxTQwxhirmvQUalTgI52ZaOK
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Nov 2026 09:23:58.0651
  (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: ZY3GcwXymMJdxV1/DXuDMRZsHKdnPZAb2rbnHzA3C7tVEFGOJ8W65qOf7tXjFw38lVPJkyMzyJnwFxX8eQ2rTA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR03MB7029
-X-purgate-ID: tlsNG-42698a/1795684336-1B2DCA4A-D61C393F/0/0
+X-MS-Exchange-CrossTenant-Network-Message-Id: 45563298-893f-49f2-7479-08df4b9efff7
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CH1PEPF0005BD62.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB6724
+X-purgate-ID: tlsNG-33051d/1795685104-77AC44E9-39E78C66/0/0
 X-purgate-type: clean
-X-purgate-size: 67574
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-purgate-size: 3413
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	HTML_MESSAGE,INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY autolearn=ham
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
---_000_LV4PPF5EFB6ADBAEA4F47210A52854A387C80422LV4PPF5EFB6ADBA_
-Content-Type: text/plain; charset="gb2312"
-Content-Transfer-Encoding: base64
 
-QWRkaW5nIHRoZSBtYWludGFpbmVycyBhbmQgcmV2aWV3ZXJzIHRvIENjLCB3aGljaCBJIG1pc3Nl
-ZCBvbiB0aGUgZmlyc3Qgc2VuZC4NCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fDQpG
-cm9tOiBDaGFuZ2xlaSBMaSCjqMDus6TA2qOpIDxjaGFuZ2xlaS5saUBjaXRyaXguY29tPg0KU2Vu
-dDogVGh1cnNkYXksIE5vdmVtYmVyIDI2LCAyMDI2IDQ6MjcgUE0NClRvOiBDaGFuZ2xlaSBMaSCj
-qMDus6TA2qOpIDxjaGFuZ2xlaS5saUBjaXRyaXguY29tPjsgeGVuLWRldmVsQGxpc3RzLnhlbnBy
-b2plY3Qub3JnIDx4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmc+DQpTdWJqZWN0OiBbWEVO
-IFBBVENIXSB0b29scy94ZW5jb25zb2xlZDogYWRkIC0tc3lzbG9nIG9wdGlvbg0KDQpUaGUgaHlw
-ZXJ2aXNvciBhbmQgZ3Vlc3QgY29uc29sZSBsb2dzIGNhbiBvbmx5IGJlIHdyaXR0ZW4gdG8gZmls
-ZXMNCnRvZGF5LCBzbyB0aGV5IGFyZSBub3QgcGFydCBvZiB0aGUgaG9zdCdzIHN5c2xvZyBzdHJl
-YW0gYW5kIGFyZSBub3QNCmZvcndhcmRlZCB3aXRoIGl0Lg0KDQpBZGQgYSAtLXN5c2xvZz1ub25l
-fGd1ZXN0fGh2fGFsbCBvcHRpb24sIHdpdGggdGhlIHNhbWUgdmFsdWVzIGFzIC0tbG9nLg0KRWFj
-aCBsaW5lIG9mIGNvbnNvbGUgb3V0cHV0IGlzIHNlbnQgdG8gc3lzbG9nIGF0IExPR19JTkZPLCBm
-YWNpbGl0eQ0KTE9HX0RBRU1PTi4gSHlwZXJ2aXNvciBsaW5lcyB1c2UgdGhlIGlkZW50ICJoeXBl
-cnZpc29yIi4gR3Vlc3QgbGluZXMgdXNlDQoiZ3Vlc3QtPG5hbWU+IiAoImd1ZXN0LTxuYW1lPi12
-dWFydDAiIGZvciB0aGUgdlVBUlQpLCB3aGljaCBtYXRjaGVzIHRoZQ0KZ3Vlc3QgbG9nIGZpbGUg
-bmFtZS4geGVuY29uc29sZWQga2VlcHMgaXRzIG93biAieGVuY29uc29sZWQiIGlkZW50IGZvcg0K
-aXRzIG1lc3NhZ2VzLCBzbyB0aGUgc291cmNlcyBjYW4gYmUgdG9sZCBhcGFydCB3aXRob3V0IHJl
-bHlpbmcgb24NCmxldmVscy4NCg0Kc3lzbG9nKDMpIGtlZXBzIG9uZSBpZGVudCwgb3B0aW9uIHNl
-dCBhbmQgbG9nIG1hc2sgcGVyIHByb2Nlc3MuIEZvcg0KZWFjaCBjb25zb2xlIGxpbmUsIHRoZSBp
-ZGVudCwgb3B0aW9ucyBhbmQgbWFzayBhcmUgc3dpdGNoZWQgYW5kIHRoZW4NCnJlc3RvcmVkLCBz
-byB4ZW5jb25zb2xlZCdzIG93biBsb2dnaW5nIGlzIHVuY2hhbmdlZC4geGVuY29uc29sZWQgaXMN
-CnNpbmdsZS10aHJlYWRlZCwgc28gbm8gb3RoZXIgbWVzc2FnZSBjYW4gYmUgbG9nZ2VkIGluIGJl
-dHdlZW4uDQoNCkVhY2ggY29uc29sZSBoYXMgaXRzIG93biBsaW5lIGJ1ZmZlciwgYW5kIHNvIGRv
-ZXMgdGhlIGh5cGVydmlzb3IgbG9nLg0KQSBsaW5lIGlzIHNlbnQgd2hlbiBpdHMgbmV3bGluZSBh
-cnJpdmVzLCBzbyBhIGxpbmUgd3JpdHRlbiBpbiBzZXZlcmFsDQpwYXJ0cyBiZWNvbWVzIG9uZSBz
-eXNsb2cgbWVzc2FnZS4gQSBsaW5lIGxvbmdlciB0aGFuIDk2MCBieXRlcyBpcyBzcGxpdC4NCkEg
-cGFydGlhbCBsaW5lIGlzIHNlbnQgd2hlbiBhIGd1ZXN0IGNvbnNvbGUgaXMgY2xlYW5lZCB1cCwg
-b3Igd2hlbg0KeGVuY29uc29sZWQgbGVhdmVzIGl0cyBtYWluIGxvb3AuIEl0IGlzIGxvc3Qgd2hl
-biB4ZW5jb25zb2xlZCBpcyBraWxsZWQsDQpmb3IgZXhhbXBsZSBieSBTSUdURVJNLiBBIHRyYWls
-aW5nICdccicgaXMgcmVtb3ZlZCwgYXMgZ3Vlc3QgY29uc29sZXMNCnVzdWFsbHkgZW5kIGxpbmVz
-IHdpdGggIlxyXG4iLiBHdWVzdCBvdXRwdXQgaXMgcGFzc2VkIHRvIGl0cyBidWZmZXIgaW4NCmJ1
-ZmZlcl9hcHBlbmQoKSwgd2hlcmUgaXQgaXMgd3JpdHRlbiB0byB0aGUgZ3Vlc3QgbG9nIGZpbGUs
-IHNvIG92ZXJmbG93DQpkaXNjYXJkIGRvZXMgbm90IGFmZmVjdCBpdC4NCg0KVGhlIGd1ZXN0IG5h
-bWUgY29tZXMgZnJvbSB4ZW5zdG9yZS4gSW4gdGhlIGlkZW50LCBBU0NJSSBjaGFyYWN0ZXJzIG90
-aGVyDQp0aGFuIEEtWiwgYS16LCAwLTksICcuJywgJ18nIGFuZCAnLScgYXJlIHJlcGxhY2VkIHdp
-dGggJ18nLCBzbyB0aGUgbmFtZQ0KY2Fubm90IGJyZWFrIHN5c2xvZyB0YWcgcGFyc2luZy4gTm9u
-LUFTQ0lJIChVVEYtOCkgYnl0ZXMgYXJlIGtlcHQsIHNvDQpuYW1lcyBpbiBvdGhlciBzY3JpcHRz
-IHN0YXkgcmVhZGFibGUgYW5kIGRpc3RpbmN0LiBUaGUgaWRlbnQgaXMgbGltaXRlZA0KdG8gMTI3
-IGJ5dGVzLCBjdXQgb24gYSBVVEYtOCBjaGFyYWN0ZXIgYm91bmRhcnksIGFuZCBrZWVwcyB0aGUg
-dlVBUlQNCnN1ZmZpeC4gVGhlIHhlbnN0b3JlIHJlYWQgb2YgdGhlIG5hbWUgaXMgc2hhcmVkIHdp
-dGggdGhlIGd1ZXN0IGxvZyBmaWxlDQpjb2RlLg0KDQotLWxvZyBrZWVwcyBjb250cm9sbGluZyBm
-aWxlIG91dHB1dCBhbmQgdGhlIHR3byBvcHRpb25zIGFyZSBpbmRlcGVuZGVudCwNCnNvIC0tbG9n
-PW5vbmUgLS1zeXNsb2c9aHYgc2VuZHMgdGhlIGh5cGVydmlzb3IgbG9nIHRvIHN5c2xvZyBvbmx5
-Lg0KLS10aW1lc3RhbXAgYW5kIC0tbG9nLWRpciBvbmx5IGFwcGx5IHRvIGZpbGUgb3V0cHV0OyAt
-LXJlcGxhY2UtZXNjYXBlDQphcHBsaWVzIHRvIGJvdGguIEFuIHVua25vd24gLS1zeXNsb2cgdmFs
-dWUgaXMgYW4gZXJyb3IuDQoNClNpZ25lZC1vZmYtYnk6IENoYW5nbGVpIExpIDxjaGFuZ2xlaS5s
-aUBjaXRyaXguY29tPg0KLS0tDQogQ0hBTkdFTE9HLm1kICAgICAgICAgICAgICAgIHwgICAyICsN
-CiB0b29scy9jb25zb2xlL2RhZW1vbi9pby5jICAgfCAxOTUgKysrKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKy0tLS0tDQogdG9vbHMvY29uc29sZS9kYWVtb24vbWFpbi5jIHwgIDI2ICsrKyst
-DQogMyBmaWxlcyBjaGFuZ2VkLCAxOTYgaW5zZXJ0aW9ucygrKSwgMjcgZGVsZXRpb25zKC0pDQoN
-CmRpZmYgLS1naXQgYS9DSEFOR0VMT0cubWQgYi9DSEFOR0VMT0cubWQNCmluZGV4IGY5Njc0Mzdl
-ZGEuLjg1MWMxYWQ2ZjYgMTAwNjQ0DQotLS0gYS9DSEFOR0VMT0cubWQNCisrKyBiL0NIQU5HRUxP
-Ry5tZA0KQEAgLTE3LDYgKzE3LDggQEAgVGhlIGZvcm1hdCBpcyBiYXNlZCBvbiBbS2VlcCBhIENo
-YW5nZWxvZ10oaHR0cHM6Ly9rZWVwYWNoYW5nZWxvZy5jb20vZW4vMS4wLjAvKQ0KICAgICAgYWZ0
-ZXJ3YXJkcy4NCg0KICMjIyBBZGRlZA0KKyAtIHhlbmNvbnNvbGVkOiBuZXcgLS1zeXNsb2c9bm9u
-ZXxndWVzdHxodnxhbGwgb3B0aW9uIHRvIHNlbmQgY29uc29sZSBvdXRwdXQNCisgICB0byBzeXNs
-b2cuDQoNCiAjIyMgUmVtb3ZlZA0KICAtIE9uIEFybToNCmRpZmYgLS1naXQgYS90b29scy9jb25z
-b2xlL2RhZW1vbi9pby5jIGIvdG9vbHMvY29uc29sZS9kYWVtb24vaW8uYw0KaW5kZXggYjZjNDZk
-MTFkZS4uMTA5MDMzNmJiZSAxMDA2NDQNCi0tLSBhL3Rvb2xzL2NvbnNvbGUvZGFlbW9uL2lvLmMN
-CisrKyBiL3Rvb2xzL2NvbnNvbGUvZGFlbW9uL2lvLmMNCkBAIC02MywxNiArNjMsMjkgQEANCiBl
-eHRlcm4gaW50IGxvZ19yZWxvYWQ7DQogZXh0ZXJuIGludCBsb2dfZ3Vlc3Q7DQogZXh0ZXJuIGlu
-dCBsb2dfaHY7DQorZXh0ZXJuIGludCBzeXNsb2dfZ3Vlc3Q7DQorZXh0ZXJuIGludCBzeXNsb2df
-aHY7DQogZXh0ZXJuIGludCBsb2dfdGltZV9odjsNCiBleHRlcm4gaW50IGxvZ190aW1lX2d1ZXN0
-Ow0KIGV4dGVybiBjaGFyICpsb2dfZGlyOw0KIGV4dGVybiBpbnQgZGlzY2FyZF9vdmVyZmxvd2Vk
-X2RhdGE7DQogZXh0ZXJuIGludCByZXBsYWNlX2VzY2FwZTsNCitleHRlcm4gaW50IHN5c2xvZ19v
-cHRpb247DQoNCiBzdGF0aWMgaW50IGxvZ190aW1lX2h2X25lZWR0cyA9IDE7DQogc3RhdGljIGlu
-dCBsb2dfdGltZV9ndWVzdF9uZWVkdHMgPSAxOw0KIHN0YXRpYyBpbnQgbG9nX2h2X2ZkID0gLTE7
-DQoNCitzdHJ1Y3Qgc3lzbG9nX2xpbmUgew0KKyAgICAgICAvKiBnbGliYyBrZWVwcyB0aGUgd2hv
-bGUgaWRlbnQ7IG11c2wga2VlcHMgYXQgbW9zdCAzMSBieXRlcy4gKi8NCisgICAgICAgY2hhciBp
-ZGVudFsxMjhdOw0KKyAgICAgICBzaXplX3QgbGVuOw0KKyAgICAgICAvKiBObyBsaW1pdCBpbiBn
-bGliYzsgZml0cyBtdXNsJ3MgMTAyNC1ieXRlIGJ1ZmZlciB3aXRoIHRoZSBoZWFkZXIuICovDQor
-ICAgICAgIGNoYXIgZGF0YVs5NjBdOw0KK307DQorDQorc3RhdGljIHN0cnVjdCBzeXNsb2dfbGlu
-ZSBodl9zeXNsb2cgPSB7IC5pZGVudCA9ICJoeXBlcnZpc29yIiB9Ow0KKw0KIHN0YXRpYyB4ZW5n
-bnR0YWJfaGFuZGxlICp4Z3RfaGFuZGxlID0gTlVMTDsNCiBzdGF0aWMgeGVuZm9yZWlnbm1lbW9y
-eV9oYW5kbGUgKnhmbV9oYW5kbGU7DQoNCkBAIC05NCw2ICsxMDcsNyBAQCBzdHJ1Y3QgY29uc29s
-ZSB7DQogICAgICAgICBpbnQgbWFzdGVyX3BvbGxmZF9pZHg7DQogICAgICAgICBpbnQgc2xhdmVf
-ZmQ7DQogICAgICAgICBpbnQgbG9nX2ZkOw0KKyAgICAgICBzdHJ1Y3Qgc3lzbG9nX2xpbmUgKnN5
-c2xvZzsNCiAgICAgICAgIHN0cnVjdCBidWZmZXIgYnVmZmVyOw0KICAgICAgICAgY2hhciAqeHNw
-YXRoOw0KICAgICAgICAgY29uc3QgY2hhciAqbG9nX3N1ZmZpeDsNCkBAIC0yOTYsNiArMzEwLDUz
-IEBAIHN0YXRpYyBpbnQgd3JpdGVfd2l0aF90aW1lc3RhbXAoaW50IGZkLCBjb25zdCBjaGFyICpk
-YXRhLCBzaXplX3Qgc3osDQogICAgICAgICByZXR1cm4gMDsNCiB9DQoNCitzdGF0aWMgdm9pZCBz
-eXNsb2dfbGluZV9mbHVzaChzdHJ1Y3Qgc3lzbG9nX2xpbmUgKmxpbmUpDQorew0KKyAgICAgICBp
-bnQgbWFzazsNCisNCisgICAgICAgLyogR3Vlc3QgY29uc29sZXMgdXN1YWxseSBlbmQgbGluZXMg
-d2l0aCAiXHJcbiIuICovDQorICAgICAgIHdoaWxlIChsaW5lLT5sZW4gJiYgbGluZS0+ZGF0YVts
-aW5lLT5sZW4gLSAxXSA9PSAnXHInKQ0KKyAgICAgICAgICAgICAgIGxpbmUtPmxlbi0tOw0KKyAg
-ICAgICBpZiAoIWxpbmUtPmxlbikNCisgICAgICAgICAgICAgICByZXR1cm47DQorDQorICAgICAg
-IC8qDQorICAgICAgICAqIE93biB0YWcsIG5vIGZsYWdzIGFuZCBvd24gbWFzaywgcmVzdG9yZWQg
-YWZ0ZXJ3YXJkczsgc2FmZSBhcyB3ZSBhcmUNCisgICAgICAgICogc2luZ2xlLXRocmVhZGVkLiBO
-byBMT0dfQ09OUy9MT0dfUEVSUk9SOiB0aGUgbGluZSBtdXN0IG5vdCBsb29wDQorICAgICAgICAq
-IGJhY2sgaW50byB0aGUgY29uc29sZSByaW5nIG9yIGJlIGR1cGxpY2F0ZWQgb24gc3RkZXJyLg0K
-KyAgICAgICAgKi8NCisgICAgICAgbWFzayA9IHNldGxvZ21hc2soTE9HX01BU0soTE9HX0lORk8p
-KTsNCisgICAgICAgb3BlbmxvZyhsaW5lLT5pZGVudCwgMCwgTE9HX0RBRU1PTik7DQorICAgICAg
-IHN5c2xvZyhMT0dfSU5GTywgIiUuKnMiLCAoaW50KWxpbmUtPmxlbiwgbGluZS0+ZGF0YSk7DQor
-ICAgICAgIG9wZW5sb2coInhlbmNvbnNvbGVkIiwgc3lzbG9nX29wdGlvbiwgTE9HX0RBRU1PTik7
-DQorICAgICAgIHNldGxvZ21hc2sobWFzayk7DQorICAgICAgIGxpbmUtPmxlbiA9IDA7DQorfQ0K
-Kw0KK3N0YXRpYyB2b2lkIHN5c2xvZ19saW5lX3dyaXRlKHN0cnVjdCBzeXNsb2dfbGluZSAqbGlu
-ZSwgY29uc3QgY2hhciAqZGF0YSwNCisgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHNpemVf
-dCBzeikNCit7DQorICAgICAgIHNpemVfdCBpOw0KKw0KKyAgICAgICBmb3IgKGkgPSAwOyBpIDwg
-c3o7IGkrKykgew0KKyAgICAgICAgICAgICAgIGNoYXIgYyA9IGRhdGFbaV07DQorDQorICAgICAg
-ICAgICAgICAgaWYgKGMgPT0gJ1xuJykgew0KKyAgICAgICAgICAgICAgICAgICAgICAgc3lzbG9n
-X2xpbmVfZmx1c2gobGluZSk7DQorICAgICAgICAgICAgICAgICAgICAgICBjb250aW51ZTsNCisg
-ICAgICAgICAgICAgICB9DQorICAgICAgICAgICAgICAgLyogU3RyaXAgXHIgYWZ0ZXIgYSBuZXds
-aW5lLCBsaWtlIHdyaXRlX3dpdGhfdGltZXN0YW1wKCkuICovDQorICAgICAgICAgICAgICAgaWYg
-KGMgPT0gJ1xyJyAmJiAhbGluZS0+bGVuKQ0KKyAgICAgICAgICAgICAgICAgICAgICAgY29udGlu
-dWU7DQorICAgICAgICAgICAgICAgaWYgKGMgPT0gJ1wwMzMnICYmIHJlcGxhY2VfZXNjYXBlKQ0K
-KyAgICAgICAgICAgICAgICAgICAgICAgYyA9ICcuJzsNCisNCisgICAgICAgICAgICAgICBsaW5l
-LT5kYXRhW2xpbmUtPmxlbisrXSA9IGM7DQorICAgICAgICAgICAgICAgaWYgKGxpbmUtPmxlbiA9
-PSBzaXplb2YobGluZS0+ZGF0YSkpDQorICAgICAgICAgICAgICAgICAgICAgICBzeXNsb2dfbGlu
-ZV9mbHVzaChsaW5lKTsNCisgICAgICAgfQ0KK30NCisNCiBzdGF0aWMgaW5saW5lIGJvb2wgYnVm
-ZmVyX2F2YWlsYWJsZShzdHJ1Y3QgY29uc29sZSAqY29uKQ0KIHsNCiAgICAgICAgIGlmIChkaXNj
-YXJkX292ZXJmbG93ZWRfZGF0YSB8fA0KQEAgLTM2MSw2ICs0MjIsMTAgQEAgc3RhdGljIHZvaWQg
-YnVmZmVyX2FwcGVuZChzdHJ1Y3QgY29uc29sZSAqY29uKQ0KICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIGRvbS0+ZG9taWQsIGVycm5vLCBzdHJlcnJvcihlcnJubykpOw0KICAgICAgICAg
-fQ0KDQorICAgICAgIGlmIChjb24tPnN5c2xvZykNCisgICAgICAgICAgICAgICBzeXNsb2dfbGlu
-ZV93cml0ZShjb24tPnN5c2xvZywNCisgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBi
-dWZmZXItPmRhdGEgKyBidWZmZXItPnNpemUgLSBzaXplLCBzaXplKTsNCisNCiAgICAgICAgIGlm
-IChkaXNjYXJkX292ZXJmbG93ZWRfZGF0YSAmJiBidWZmZXItPm1heF9jYXBhY2l0eSAmJg0KICAg
-ICAgICAgICAgIGJ1ZmZlci0+c2l6ZSA+IDUgKiBidWZmZXItPm1heF9jYXBhY2l0eSAvIDQpIHsN
-CiAgICAgICAgICAgICAgICAgaWYgKGJ1ZmZlci0+Y29uc3VtZWQgPiBidWZmZXItPm1heF9jYXBh
-Y2l0eSAvIDQpIHsNCkBAIC00MzMsMzAgKzQ5OCwzNyBAQCBzdGF0aWMgaW50IGNyZWF0ZV9odl9s
-b2codm9pZCkNCiAgICAgICAgIHJldHVybiBmZDsNCiB9DQoNCi1zdGF0aWMgaW50IGNyZWF0ZV9j
-b25zb2xlX2xvZyhzdHJ1Y3QgY29uc29sZSAqY29uKQ0KK3N0YXRpYyBjaGFyICpyZWFkX2RvbWFp
-bl9uYW1lKHN0cnVjdCBkb21haW4gKmRvbSkNCiB7DQotICAgICAgIGNoYXIgbG9nZmlsZVtQQVRI
-X01BWF07DQogICAgICAgICBjaGFyICpuYW1lcGF0aCwgKmRhdGEsICpzOw0KLSAgICAgICBpbnQg
-ZmQ7DQogICAgICAgICB1bnNpZ25lZCBpbnQgbGVuOw0KLSAgICAgICBzdHJ1Y3QgZG9tYWluICpk
-b20gPSBjb24tPmQ7DQoNCiAgICAgICAgIG5hbWVwYXRoID0geHNfZ2V0X2RvbWFpbl9wYXRoKHhz
-LCBkb20tPmRvbWlkKTsNCiAgICAgICAgIHMgPSByZWFsbG9jKG5hbWVwYXRoLCBzdHJsZW4obmFt
-ZXBhdGgpICsgNik7DQogICAgICAgICBpZiAocyA9PSBOVUxMKSB7DQogICAgICAgICAgICAgICAg
-IGZyZWUobmFtZXBhdGgpOw0KLSAgICAgICAgICAgICAgIHJldHVybiAtMTsNCisgICAgICAgICAg
-ICAgICByZXR1cm4gTlVMTDsNCiAgICAgICAgIH0NCiAgICAgICAgIG5hbWVwYXRoID0gczsNCiAg
-ICAgICAgIHN0cmNhdChuYW1lcGF0aCwgIi9uYW1lIik7DQogICAgICAgICBkYXRhID0geHNfcmVh
-ZCh4cywgWEJUX05VTEwsIG5hbWVwYXRoLCAmbGVuKTsNCiAgICAgICAgIGZyZWUobmFtZXBhdGgp
-Ow0KLSAgICAgICBpZiAoIWRhdGEpDQotICAgICAgICAgICAgICAgcmV0dXJuIC0xOw0KLSAgICAg
-ICBpZiAoIWxlbikgew0KKyAgICAgICBpZiAoZGF0YSAmJiAhbGVuKSB7DQogICAgICAgICAgICAg
-ICAgIGZyZWUoZGF0YSk7DQotICAgICAgICAgICAgICAgcmV0dXJuIC0xOw0KKyAgICAgICAgICAg
-ICAgIHJldHVybiBOVUxMOw0KICAgICAgICAgfQ0KKyAgICAgICByZXR1cm4gZGF0YTsNCit9DQor
-DQorc3RhdGljIGludCBjcmVhdGVfY29uc29sZV9sb2coc3RydWN0IGNvbnNvbGUgKmNvbikNCit7
-DQorICAgICAgIGNoYXIgbG9nZmlsZVtQQVRIX01BWF07DQorICAgICAgIGNoYXIgKmRhdGE7DQor
-ICAgICAgIGludCBmZDsNCisNCisgICAgICAgZGF0YSA9IHJlYWRfZG9tYWluX25hbWUoY29uLT5k
-KTsNCisgICAgICAgaWYgKCFkYXRhKQ0KKyAgICAgICAgICAgICAgIHJldHVybiAtMTsNCg0KICAg
-ICAgICAgc25wcmludGYobG9nZmlsZSwgUEFUSF9NQVgtMSwgIiVzL2d1ZXN0LSVzJXMubG9nIiwN
-CiAgICAgICAgICAgICAgICAgIGxvZ19kaXIsIGRhdGEsIGNvbi0+bG9nX3N1ZmZpeCk7DQpAQCAt
-NDgyLDYgKzU1NCw0NSBAQCBzdGF0aWMgaW50IGNyZWF0ZV9jb25zb2xlX2xvZyhzdHJ1Y3QgY29u
-c29sZSAqY29uKQ0KICAgICAgICAgcmV0dXJuIGZkOw0KIH0NCg0KK3N0YXRpYyBzdHJ1Y3Qgc3lz
-bG9nX2xpbmUgKmNyZWF0ZV9jb25zb2xlX3N5c2xvZyhzdHJ1Y3QgY29uc29sZSAqY29uKQ0KK3sN
-CisgICAgICAgc3RydWN0IHN5c2xvZ19saW5lICpsaW5lOw0KKyAgICAgICBjaGFyICpuYW1lLCAq
-cDsNCisgICAgICAgc2l6ZV90IGxlbiwgbmFtZV9tYXg7DQorDQorICAgICAgIG5hbWUgPSByZWFk
-X2RvbWFpbl9uYW1lKGNvbi0+ZCk7DQorICAgICAgIGlmICghbmFtZSkNCisgICAgICAgICAgICAg
-ICByZXR1cm4gTlVMTDsNCisNCisgICAgICAgbGluZSA9IGNhbGxvYygxLCBzaXplb2YoKmxpbmUp
-KTsNCisgICAgICAgaWYgKGxpbmUgPT0gTlVMTCkgew0KKyAgICAgICAgICAgICAgIGRvbG9nKExP
-R19FUlIsICJNZW1vcnkgYWxsb2NhdGlvbiBmYWlsZWQiKTsNCisgICAgICAgICAgICAgICBleGl0
-KEVOT01FTSk7DQorICAgICAgIH0NCisNCisgICAgICAgLyogS2VlcCB0aGUgc3VmZml4IGFuZCB3
-aG9sZSBVVEYtOCBjaGFyYWN0ZXJzIGlmIHRoZSBuYW1lIGlzIGN1dC4gKi8NCisgICAgICAgbmFt
-ZV9tYXggPSBzaXplb2YobGluZS0+aWRlbnQpIC0gc3RybGVuKCJndWVzdC0iKSAtDQorICAgICAg
-ICAgICAgICAgICAgc3RybGVuKGNvbi0+bG9nX3N1ZmZpeCkgLSAxOw0KKyAgICAgICBsZW4gPSBz
-dHJsZW4obmFtZSk7DQorICAgICAgIGlmIChsZW4gPiBuYW1lX21heCkgew0KKyAgICAgICAgICAg
-ICAgIGxlbiA9IG5hbWVfbWF4Ow0KKyAgICAgICAgICAgICAgIHdoaWxlIChsZW4gJiYgKCh1bnNp
-Z25lZCBjaGFyKW5hbWVbbGVuXSAmIDB4YzApID09IDB4ODApDQorICAgICAgICAgICAgICAgICAg
-ICAgICBsZW4tLTsNCisgICAgICAgfQ0KKyAgICAgICBzbnByaW50ZihsaW5lLT5pZGVudCwgc2l6
-ZW9mKGxpbmUtPmlkZW50KSwgImd1ZXN0LSUuKnMlcyIsDQorICAgICAgICAgICAgICAgIChpbnQp
-bGVuLCBuYW1lLCBjb24tPmxvZ19zdWZmaXgpOw0KKyAgICAgICBmcmVlKG5hbWUpOw0KKw0KKyAg
-ICAgICAvKiBSZXBsYWNlIEFTQ0lJIHRoYXQgY291bGQgYnJlYWsgdGFnIHBhcnNpbmc7IGtlZXAg
-VVRGLTggYnl0ZXMuICovDQorICAgICAgIGZvciAocCA9IGxpbmUtPmlkZW50OyAqcDsgcCsrKQ0K
-KyAgICAgICAgICAgICAgIGlmICghKCgqcCA+PSAnYScgJiYgKnAgPD0gJ3onKSB8fCAoKnAgPj0g
-J0EnICYmICpwIDw9ICdaJykgfHwNCisgICAgICAgICAgICAgICAgICAgICAoKnAgPj0gJzAnICYm
-ICpwIDw9ICc5JykgfHwgKnAgPT0gJy4nIHx8ICpwID09ICdfJyB8fA0KKyAgICAgICAgICAgICAg
-ICAgICAgICpwID09ICctJyB8fCAodW5zaWduZWQgY2hhcikqcCA+PSAweDgwKSkNCisgICAgICAg
-ICAgICAgICAgICAgICAgICpwID0gJ18nOw0KKw0KKyAgICAgICByZXR1cm4gbGluZTsNCit9DQor
-DQogc3RhdGljIHZvaWQgY29uc29sZV9jbG9zZV90dHkoc3RydWN0IGNvbnNvbGUgKmNvbikNCiB7
-DQogICAgICAgICBpZiAoY29uLT5tYXN0ZXJfZmQgIT0gLTEpIHsNCkBAIC03ODAsNiArODkxLDkg
-QEAgc3RhdGljIGludCBjb25zb2xlX2NyZWF0ZV9yaW5nKHN0cnVjdCBjb25zb2xlICpjb24pDQog
-ICAgICAgICBpZiAobG9nX2d1ZXN0ICYmIChjb24tPmxvZ19mZCA9PSAtMSkpDQogICAgICAgICAg
-ICAgICAgIGNvbi0+bG9nX2ZkID0gY3JlYXRlX2NvbnNvbGVfbG9nKGNvbik7DQoNCisgICAgICAg
-aWYgKHN5c2xvZ19ndWVzdCAmJiAhY29uLT5zeXNsb2cpDQorICAgICAgICAgICAgICAgY29uLT5z
-eXNsb2cgPSBjcmVhdGVfY29uc29sZV9zeXNsb2coY29uKTsNCisNCiAgb3V0Og0KICAgICAgICAg
-LyogTWFyayB0aGUgY29uc29sZSBjb25uZWN0ZWQuICovDQogICAgICAgICBpZiAoIWVyciAmJiBj
-b24tPmludGVyZmFjZSkNCkBAIC04MjcsNiArOTQxLDcgQEAgc3RhdGljIGludCBjb25zb2xlX2lu
-aXQoc3RydWN0IGNvbnNvbGUgKmNvbiwgc3RydWN0IGRvbWFpbiAqZG9tLCB2b2lkICoqZGF0YSkN
-CiAgICAgICAgIGNvbi0+bWFzdGVyX3BvbGxmZF9pZHggPSAtMTsNCiAgICAgICAgIGNvbi0+c2xh
-dmVfZmQgPSAtMTsNCiAgICAgICAgIGNvbi0+bG9nX2ZkID0gLTE7DQorICAgICAgIGNvbi0+c3lz
-bG9nID0gTlVMTDsNCiAgICAgICAgIGNvbi0+cmluZ19yZWYgPSAtMTsNCiAgICAgICAgIGNvbi0+
-bG9jYWxfcG9ydCA9IC0xOw0KICAgICAgICAgY29uLT5yZW1vdGVfcG9ydCA9IC0xOw0KQEAgLTkx
-Niw2ICsxMDMxLDEyIEBAIHN0YXRpYyB2b2lkIHJlbW92ZV9kb21haW4oc3RydWN0IGRvbWFpbiAq
-ZG9tKQ0KICAgICAgICAgfQ0KIH0NCg0KK3N0YXRpYyB2b2lkIGNvbnNvbGVfZmx1c2hfc3lzbG9n
-KHN0cnVjdCBjb25zb2xlICpjb24pDQorew0KKyAgICAgICBpZiAoY29uLT5zeXNsb2cpDQorICAg
-ICAgICAgICAgICAgc3lzbG9nX2xpbmVfZmx1c2goY29uLT5zeXNsb2cpOw0KK30NCisNCiBzdGF0
-aWMgdm9pZCBjb25zb2xlX2NsZWFudXAoc3RydWN0IGNvbnNvbGUgKmNvbikNCiB7DQogICAgICAg
-ICBpZiAoY29uLT5sb2dfZmQgIT0gLTEpIHsNCkBAIC05MjMsNiArMTA0NCwxMiBAQCBzdGF0aWMg
-dm9pZCBjb25zb2xlX2NsZWFudXAoc3RydWN0IGNvbnNvbGUgKmNvbikNCiAgICAgICAgICAgICAg
-ICAgY29uLT5sb2dfZmQgPSAtMTsNCiAgICAgICAgIH0NCg0KKyAgICAgICBpZiAoY29uLT5zeXNs
-b2cpIHsNCisgICAgICAgICAgICAgICBzeXNsb2dfbGluZV9mbHVzaChjb24tPnN5c2xvZyk7DQor
-ICAgICAgICAgICAgICAgZnJlZShjb24tPnN5c2xvZyk7DQorICAgICAgICAgICAgICAgY29uLT5z
-eXNsb2cgPSBOVUxMOw0KKyAgICAgICB9DQorDQogICAgICAgICBmcmVlKGNvbi0+YnVmZmVyLmRh
-dGEpOw0KICAgICAgICAgY29uLT5idWZmZXIuZGF0YSA9IE5VTEw7DQoNCkBAIC0xMTc1LDIyICsx
-MzAyLDI5IEBAIHN0YXRpYyB2b2lkIGhhbmRsZV9odl9sb2dzKHhlbmV2dGNobl9oYW5kbGUgKnhj
-ZV9oYW5kbGUsIGJvb2wgZm9yY2UpDQoNCiAgICAgICAgIGRvDQogICAgICAgICB7DQotICAgICAg
-ICAgICAgICAgaW50IGxvZ3JldDsNCi0NCiAgICAgICAgICAgICAgICAgc2l6ZSA9IHNpemVvZihi
-dWZmZXIpOw0KICAgICAgICAgICAgICAgICBpZiAoeGNfcmVhZGNvbnNvbGVyaW5nKHhjLCBidWZw
-dHIsICZzaXplLCAwLCAxLCAmaW5kZXgpICE9IDAgfHwNCiAgICAgICAgICAgICAgICAgICAgIHNp
-emUgPT0gMCkNCiAgICAgICAgICAgICAgICAgICAgICAgICBicmVhazsNCg0KLSAgICAgICAgICAg
-ICAgIGlmIChsb2dfdGltZV9odikNCi0gICAgICAgICAgICAgICAgICAgICAgIGxvZ3JldCA9IHdy
-aXRlX3dpdGhfdGltZXN0YW1wKGxvZ19odl9mZCwgYnVmZmVyLCBzaXplLA0KLSAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgJmxvZ190aW1lX2h2X25l
-ZWR0cyk7DQotICAgICAgICAgICAgICAgZWxzZQ0KLSAgICAgICAgICAgICAgICAgICAgICAgbG9n
-cmV0ID0gd3JpdGVfYWxsKGxvZ19odl9mZCwgYnVmZmVyLCBzaXplKTsNCisgICAgICAgICAgICAg
-ICBpZiAoc3lzbG9nX2h2KQ0KKyAgICAgICAgICAgICAgICAgICAgICAgc3lzbG9nX2xpbmVfd3Jp
-dGUoJmh2X3N5c2xvZywgYnVmZmVyLCBzaXplKTsNCg0KLSAgICAgICAgICAgICAgIGlmIChsb2dy
-ZXQgPCAwKQ0KLSAgICAgICAgICAgICAgICAgICAgICAgZG9sb2coTE9HX0VSUiwgIkZhaWxlZCB0
-byB3cml0ZSBoeXBlcnZpc29yIGxvZzogIg0KLSAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIiVkICglcykiLCBlcnJubywgc3RyZXJyb3IoZXJybm8pKTsNCisgICAgICAgICAg
-ICAgICBpZiAobG9nX2h2KSB7DQorICAgICAgICAgICAgICAgICAgICAgICBpbnQgbG9ncmV0Ow0K
-Kw0KKyAgICAgICAgICAgICAgICAgICAgICAgaWYgKGxvZ190aW1lX2h2KQ0KKyAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBsb2dyZXQgPSB3cml0ZV93aXRoX3RpbWVzdGFtcCgNCisgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBsb2dfaHZfZmQsIGJ1ZmZlciwgc2l6
-ZSwNCisgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAmbG9nX3RpbWVfaHZf
-bmVlZHRzKTsNCisgICAgICAgICAgICAgICAgICAgICAgIGVsc2UNCisgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgbG9ncmV0ID0gd3JpdGVfYWxsKGxvZ19odl9mZCwgYnVmZmVyLCBzaXpl
-KTsNCisNCisgICAgICAgICAgICAgICAgICAgICAgIGlmIChsb2dyZXQgPCAwKQ0KKyAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBkb2xvZyhMT0dfRVJSLA0KKyAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAiRmFpbGVkIHRvIHdyaXRlIGh5cGVydmlzb3IgbG9nOiAlZCAo
-JXMpIiwNCisgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZXJybm8sIHN0cmVy
-cm9yKGVycm5vKSk7DQorICAgICAgICAgICAgICAgfQ0KICAgICAgICAgfSB3aGlsZSAoc2l6ZSA9
-PSBzaXplb2YoYnVmZmVyKSk7DQoNCiAgICAgICAgIGlmIChwb3J0ICE9IC0xKQ0KQEAgLTEzMjQs
-MTcgKzE0NTgsMjAgQEAgdm9pZCBoYW5kbGVfaW8odm9pZCkNCiAgICAgICAgIGludCB4Y2VfcG9s
-bGZkX2lkeCA9IC0xOw0KICAgICAgICAgaW50IHhzX3BvbGxmZF9pZHggPSAtMTsNCiAgICAgICAg
-IHhlbmV2dGNobl9oYW5kbGUgKnhjZV9oYW5kbGUgPSBOVUxMOw0KKyAgICAgICBib29sIHJlYWRf
-aHYgPSBsb2dfaHYgfHwgc3lzbG9nX2h2Ow0KDQotICAgICAgIGlmIChsb2dfaHYpIHsNCisgICAg
-ICAgaWYgKHJlYWRfaHYpIHsNCiAgICAgICAgICAgICAgICAgeGNlX2hhbmRsZSA9IHhlbmV2dGNo
-bl9vcGVuKE5VTEwsIDApOw0KICAgICAgICAgICAgICAgICBpZiAoeGNlX2hhbmRsZSA9PSBOVUxM
-KSB7DQogICAgICAgICAgICAgICAgICAgICAgICAgZG9sb2coTE9HX0VSUiwgIkZhaWxlZCB0byBv
-cGVuIHhjZSBoYW5kbGU6ICVkICglcykiLA0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IGVycm5vLCBzdHJlcnJvcihlcnJubykpOw0KICAgICAgICAgICAgICAgICAgICAgICAgIGdvdG8g
-b3V0Ow0KICAgICAgICAgICAgICAgICB9DQotICAgICAgICAgICAgICAgbG9nX2h2X2ZkID0gY3Jl
-YXRlX2h2X2xvZygpOw0KLSAgICAgICAgICAgICAgIGlmIChsb2dfaHZfZmQgPT0gLTEpDQotICAg
-ICAgICAgICAgICAgICAgICAgICBnb3RvIG91dDsNCisgICAgICAgICAgICAgICBpZiAobG9nX2h2
-KSB7DQorICAgICAgICAgICAgICAgICAgICAgICBsb2dfaHZfZmQgPSBjcmVhdGVfaHZfbG9nKCk7
-DQorICAgICAgICAgICAgICAgICAgICAgICBpZiAobG9nX2h2X2ZkID09IC0xKQ0KKyAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBnb3RvIG91dDsNCisgICAgICAgICAgICAgICB9DQogICAg
-ICAgICAgICAgICAgIGxvZ19odl9ldnRjaG4gPSB4ZW5ldnRjaG5fYmluZF92aXJxKHhjZV9oYW5k
-bGUsIFZJUlFfQ09OX1JJTkcpOw0KICAgICAgICAgICAgICAgICBpZiAobG9nX2h2X2V2dGNobiA9
-PSAtMSkgew0KICAgICAgICAgICAgICAgICAgICAgICAgIGRvbG9nKExPR19FUlIsICJGYWlsZWQg
-dG8gYmluZCB0byBWSVJRX0NPTl9SSU5HOiAiDQpAQCAtMTM3MSw3ICsxNTA4LDcgQEAgdm9pZCBo
-YW5kbGVfaW8odm9pZCkNCg0KICAgICAgICAgICAgICAgICB4c19wb2xsZmRfaWR4ID0gc2V0X2Zk
-cyh4c19maWxlbm8oeHMpLCBQT0xMSU58UE9MTFBSSSk7DQoNCi0gICAgICAgICAgICAgICBpZiAo
-bG9nX2h2KQ0KKyAgICAgICAgICAgICAgIGlmIChyZWFkX2h2KQ0KICAgICAgICAgICAgICAgICAg
-ICAgICAgIHhjZV9wb2xsZmRfaWR4ID0gc2V0X2Zkcyh4ZW5ldnRjaG5fZmQoeGNlX2hhbmRsZSks
-DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFBPTExJ
-TnxQT0xMUFJJKTsNCg0KQEAgLTE0MjEsNyArMTU1OCw3IEBAIHZvaWQgaGFuZGxlX2lvKHZvaWQp
-DQogICAgICAgICAgICAgICAgICAgICAgICAgYnJlYWs7DQogICAgICAgICAgICAgICAgIH0NCg0K
-LSAgICAgICAgICAgICAgIGlmIChsb2dfaHYgJiYgeGNlX3BvbGxmZF9pZHggIT0gLTEpIHsNCisg
-ICAgICAgICAgICAgICBpZiAocmVhZF9odiAmJiB4Y2VfcG9sbGZkX2lkeCAhPSAtMSkgew0KICAg
-ICAgICAgICAgICAgICAgICAgICAgIGlmIChmZHNbeGNlX3BvbGxmZF9pZHhdLnJldmVudHMgJiB+
-KFBPTExJTnxQT0xMT1VUfFBPTExQUkkpKSB7DQogICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBkb2xvZyhMT0dfRVJSLA0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIkZhaWx1cmUgaW4gcG9sbCB4Y2VfaGFuZGxlOiAlZCAoJXMpIiwNCkBAIC0xNDcyLDYgKzE2
-MDksMTQgQEAgdm9pZCBoYW5kbGVfaW8odm9pZCkNCiAgICAgICAgICAgICAgICAgY2xvc2UobG9n
-X2h2X2ZkKTsNCiAgICAgICAgICAgICAgICAgbG9nX2h2X2ZkID0gLTE7DQogICAgICAgICB9DQor
-ICAgICAgIGlmIChzeXNsb2dfaHYpDQorICAgICAgICAgICAgICAgc3lzbG9nX2xpbmVfZmx1c2go
-Jmh2X3N5c2xvZyk7DQorICAgICAgIGlmIChzeXNsb2dfZ3Vlc3QpIHsNCisgICAgICAgICAgICAg
-ICBzdHJ1Y3QgZG9tYWluICpkOw0KKw0KKyAgICAgICAgICAgICAgIGZvciAoZCA9IGRvbV9oZWFk
-OyBkOyBkID0gZC0+bmV4dCkNCisgICAgICAgICAgICAgICAgICAgICAgIGNvbnNvbGVfaXRlcl92
-b2lkX2FyZzEoZCwgY29uc29sZV9mbHVzaF9zeXNsb2cpOw0KKyAgICAgICB9DQogICAgICAgICBp
-ZiAoeGNlX2hhbmRsZSAhPSBOVUxMKSB7DQogICAgICAgICAgICAgICAgIHhlbmV2dGNobl9jbG9z
-ZSh4Y2VfaGFuZGxlKTsNCiAgICAgICAgICAgICAgICAgeGNlX2hhbmRsZSA9IE5VTEw7DQpkaWZm
-IC0tZ2l0IGEvdG9vbHMvY29uc29sZS9kYWVtb24vbWFpbi5jIGIvdG9vbHMvY29uc29sZS9kYWVt
-b24vbWFpbi5jDQppbmRleCA3OTgwNzdhYzJmLi41NmIyYmI3OWQ4IDEwMDY0NA0KLS0tIGEvdG9v
-bHMvY29uc29sZS9kYWVtb24vbWFpbi5jDQorKysgYi90b29scy9jb25zb2xlL2RhZW1vbi9tYWlu
-LmMNCkBAIC0zNSwxMSArMzUsMTQgQEANCiBpbnQgbG9nX3JlbG9hZCA9IDA7DQogaW50IGxvZ19n
-dWVzdCA9IDA7DQogaW50IGxvZ19odiA9IDA7DQoraW50IHN5c2xvZ19ndWVzdCA9IDA7DQoraW50
-IHN5c2xvZ19odiA9IDA7DQogaW50IGxvZ190aW1lX2h2ID0gMDsNCiBpbnQgbG9nX3RpbWVfZ3Vl
-c3QgPSAwOw0KIGNoYXIgKmxvZ19kaXIgPSBOVUxMOw0KIGludCBkaXNjYXJkX292ZXJmbG93ZWRf
-ZGF0YSA9IDE7DQogaW50IHJlcGxhY2VfZXNjYXBlID0gMDsNCitpbnQgc3lzbG9nX29wdGlvbiA9
-IExPR19DT05TOw0KDQogc3RhdGljIHZvaWQgaGFuZGxlX2h1cChpbnQgc2lnKQ0KIHsNCkBAIC00
-OCw4ICs1MSw5IEBAIHN0YXRpYyB2b2lkIGhhbmRsZV9odXAoaW50IHNpZykNCg0KIHN0YXRpYyB2
-b2lkIHVzYWdlKGNoYXIgKm5hbWUpDQogew0KLSAgICAgICBwcmludGYoIlVzYWdlOiAlcyBbLWhd
-IFstVl0gWy12XSBbLWldIFstLWxvZz1ub25lfGd1ZXN0fGh2fGFsbF0gWy0tbG9nLWRpcj1ESVJd
-IFstLXBpZC1maWxlPVBBVEhdIFstdCwgLS10aW1lc3RhbXA9bm9uZXxndWVzdHxodnxhbGxdIFst
-bywgLS1vdmVyZmxvdy1kYXRhPWRpc2NhcmR8a2VlcF0gWy0tcmVwbGFjZS1lc2NhcGVdXG4iLCBu
-YW1lKTsNCisgICAgICAgcHJpbnRmKCJVc2FnZTogJXMgWy1oXSBbLVZdIFstdl0gWy1pXSBbLS1s
-b2c9bm9uZXxndWVzdHxodnxhbGxdIFstLWxvZy1kaXI9RElSXSBbLS1waWQtZmlsZT1QQVRIXSBb
-LXQsIC0tdGltZXN0YW1wPW5vbmV8Z3Vlc3R8aHZ8YWxsXSBbLW8sIC0tb3ZlcmZsb3ctZGF0YT1k
-aXNjYXJkfGtlZXBdIFstLXJlcGxhY2UtZXNjYXBlXSBbLS1zeXNsb2c9bm9uZXxndWVzdHxodnxh
-bGxdXG4iLCBuYW1lKTsNCiAgICAgICAgIHByaW50ZigiICAtLXJlcGxhY2UtZXNjYXBlICAtIHJl
-cGxhY2UgRVNDIGNoYXJhY3RlciB3aXRoIGRvdCB3aGVuIHdyaXRpbmcgY29uc29sZSBsb2dcbiIp
-Ow0KKyAgICAgICBwcmludGYoIiAgLS1zeXNsb2cgICAgICAgICAgLSBzZW5kIGNvbnNvbGUgb3V0
-cHV0IHRvIHN5c2xvZyAoaW5kZXBlbmRlbnQgb2YgLS1sb2cpXG4iKTsNCiB9DQoNCiBzdGF0aWMg
-dm9pZCB2ZXJzaW9uKGNoYXIgKm5hbWUpDQpAQCAtMTA2LDExICsxMTAsMTEgQEAgaW50IG1haW4o
-aW50IGFyZ2MsIGNoYXIgKiphcmd2KQ0KICAgICAgICAgICAgICAgICB7ICJ0aW1lc3RhbXAiLCAx
-LCAwLCAndCcgfSwNCiAgICAgICAgICAgICAgICAgeyAib3ZlcmZsb3ctZGF0YSIsIDEsIDAsICdv
-J30sDQogICAgICAgICAgICAgICAgIHsgInJlcGxhY2UtZXNjYXBlIiwgMCwgMCwgJ2UnfSwNCisg
-ICAgICAgICAgICAgICB7ICJzeXNsb2ciLCAxLCAwLCAnUyd9LA0KICAgICAgICAgICAgICAgICB7
-IDAgfSwNCiAgICAgICAgIH07DQogICAgICAgICBib29sIGlzX2ludGVyYWN0aXZlID0gZmFsc2U7
-DQogICAgICAgICBpbnQgY2g7DQotICAgICAgIGludCBzeXNsb2dfb3B0aW9uID0gTE9HX0NPTlM7
-DQogICAgICAgICBpbnQgc3lzbG9nX21hc2sgPSBMT0dfTUFTSyhMT0dfV0FSTklORyl8TE9HX01B
-U0soTE9HX0VSUil8TE9HX01BU0soTE9HX0NSSVQpfFwNCiAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIExPR19NQVNLKExPR19BTEVSVCl8TE9HX01BU0soTE9HX0VNRVJHKTsNCiAgICAgICAgIGlu
-dCBvcHRfaW5kID0gMDsNCkBAIC0xNzMsNiArMTc3LDI0IEBAIGludCBtYWluKGludCBhcmdjLCBj
-aGFyICoqYXJndikNCiAgICAgICAgICAgICAgICAgY2FzZSAnZSc6DQogICAgICAgICAgICAgICAg
-ICAgICAgICAgcmVwbGFjZV9lc2NhcGUgPSAxOw0KICAgICAgICAgICAgICAgICAgICAgICAgIGJy
-ZWFrOw0KKyAgICAgICAgICAgICAgIGNhc2UgJ1MnOg0KKyAgICAgICAgICAgICAgICAgICAgICAg
-aWYgKCFzdHJjbXAob3B0YXJnLCAiYWxsIikpIHsNCisgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgc3lzbG9nX2h2ID0gMTsNCisgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc3lz
-bG9nX2d1ZXN0ID0gMTsNCisgICAgICAgICAgICAgICAgICAgICAgIH0gZWxzZSBpZiAoIXN0cmNt
-cChvcHRhcmcsICJodiIpKSB7DQorICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHN5c2xv
-Z19odiA9IDE7DQorICAgICAgICAgICAgICAgICAgICAgICB9IGVsc2UgaWYgKCFzdHJjbXAob3B0
-YXJnLCAiZ3Vlc3QiKSkgew0KKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzeXNsb2df
-Z3Vlc3QgPSAxOw0KKyAgICAgICAgICAgICAgICAgICAgICAgfSBlbHNlIGlmICghc3RyY21wKG9w
-dGFyZywgIm5vbmUiKSkgew0KKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzeXNsb2df
-aHYgPSAwOw0KKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzeXNsb2dfZ3Vlc3QgPSAw
-Ow0KKyAgICAgICAgICAgICAgICAgICAgICAgfSBlbHNlIHsNCisgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgZnByaW50ZihzdGRlcnIsICJJbnZhbGlkIC0tc3lzbG9nIHZhbHVlICclcydc
-biIsDQorICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgb3B0YXJnKTsNCisg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdXNhZ2UoYXJndlswXSk7DQorICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIGV4aXQoRUlOVkFMKTsNCisgICAgICAgICAgICAgICAgICAg
-ICAgIH0NCisgICAgICAgICAgICAgICAgICAgICAgIGJyZWFrOw0KICAgICAgICAgICAgICAgICBj
-YXNlICc/JzoNCiAgICAgICAgICAgICAgICAgICAgICAgICBmcHJpbnRmKHN0ZGVyciwNCiAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICJUcnkgYCVzIC0taGVscCcgZm9yIG1vcmUgaW5m
-b3JtYXRpb25cbiIsDQotLQ0KMi41Mi4wDQoNCg==
 
---_000_LV4PPF5EFB6ADBAEA4F47210A52854A387C80422LV4PPF5EFB6ADBA_
-Content-Type: text/html; charset="gb2312"
-Content-Transfer-Encoding: quoted-printable
+On 26-Nov-26 05:43, Hirokazu Takahashi wrote:
+> Populate the CPU sibling map only with CPUs that are brought
+> online. Currently, all CPUs in cpu_possible_map are added,
+> which leaves CPUs that failed to boot in the sibling masks and
+> may lead the scheduler to make incorrect decisions.
+Please mention the removal part as well which you added in this revision.
 
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dgb2312">
-<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
-ttom:0;} </style>
-</head>
-<body dir=3D"ltr">
-<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
-Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);">
-Adding the maintainers and reviewers to Cc, which I missed on the first sen=
-d.</div>
-<div id=3D"appendonsend"></div>
-<hr style=3D"display:inline-block;width:98%" tabindex=3D"-1">
-<div id=3D"divRplyFwdMsg" dir=3D"ltr"><font face=3D"Calibri, sans-serif" st=
-yle=3D"font-size:11pt" color=3D"#000000"><b>From:</b> Changlei Li =A3=A8=C0=
-=EE=B3=A4=C0=DA=A3=A9 &lt;changlei.li@citrix.com&gt;<br>
-<b>Sent:</b> Thursday, November 26, 2026 4:27 PM<br>
-<b>To:</b> Changlei Li =A3=A8=C0=EE=B3=A4=C0=DA=A3=A9 &lt;changlei.li@citri=
-x.com&gt;; xen-devel@lists.xenproject.org &lt;xen-devel@lists.xenproject.or=
-g&gt;<br>
-<b>Subject:</b> [XEN PATCH] tools/xenconsoled: add --syslog option</font>
-<div>&nbsp;</div>
-</div>
-<div class=3D"BodyFragment"><font size=3D"2"><span style=3D"font-size:11pt;=
-">
-<div class=3D"PlainText">The hypervisor and guest console logs can only be =
-written to files<br>
-today, so they are not part of the host's syslog stream and are not<br>
-forwarded with it.<br>
-<br>
-Add a --syslog=3Dnone|guest|hv|all option, with the same values as --log.<b=
-r>
-Each line of console output is sent to syslog at LOG_INFO, facility<br>
-LOG_DAEMON. Hypervisor lines use the ident &quot;hypervisor&quot;. Guest li=
-nes use<br>
-&quot;guest-&lt;name&gt;&quot; (&quot;guest-&lt;name&gt;-vuart0&quot; for t=
-he vUART), which matches the<br>
-guest log file name. xenconsoled keeps its own &quot;xenconsoled&quot; iden=
-t for<br>
-its messages, so the sources can be told apart without relying on<br>
-levels.<br>
-<br>
-syslog(3) keeps one ident, option set and log mask per process. For<br>
-each console line, the ident, options and mask are switched and then<br>
-restored, so xenconsoled's own logging is unchanged. xenconsoled is<br>
-single-threaded, so no other message can be logged in between.<br>
-<br>
-Each console has its own line buffer, and so does the hypervisor log.<br>
-A line is sent when its newline arrives, so a line written in several<br>
-parts becomes one syslog message. A line longer than 960 bytes is split.<br=
->
-A partial line is sent when a guest console is cleaned up, or when<br>
-xenconsoled leaves its main loop. It is lost when xenconsoled is killed,<br=
->
-for example by SIGTERM. A trailing '\r' is removed, as guest consoles<br>
-usually end lines with &quot;\r\n&quot;. Guest output is passed to its buff=
-er in<br>
-buffer_append(), where it is written to the guest log file, so overflow<br>
-discard does not affect it.<br>
-<br>
-The guest name comes from xenstore. In the ident, ASCII characters other<br=
->
-than A-Z, a-z, 0-9, '.', '_' and '-' are replaced with '_', so the name<br>
-cannot break syslog tag parsing. Non-ASCII (UTF-8) bytes are kept, so<br>
-names in other scripts stay readable and distinct. The ident is limited<br>
-to 127 bytes, cut on a UTF-8 character boundary, and keeps the vUART<br>
-suffix. The xenstore read of the name is shared with the guest log file<br>
-code.<br>
-<br>
---log keeps controlling file output and the two options are independent,<br=
->
-so --log=3Dnone --syslog=3Dhv sends the hypervisor log to syslog only.<br>
---timestamp and --log-dir only apply to file output; --replace-escape<br>
-applies to both. An unknown --syslog value is an error.<br>
-<br>
-Signed-off-by: Changlei Li &lt;changlei.li@citrix.com&gt;<br>
----<br>
-&nbsp;CHANGELOG.md&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp; 2 +<br>
-&nbsp;tools/console/daemon/io.c&nbsp;&nbsp; | 195 +++++++++++++++++++++++++=
-++++++-----<br>
-&nbsp;tools/console/daemon/main.c |&nbsp; 26 ++++-<br>
-&nbsp;3 files changed, 196 insertions(+), 27 deletions(-)<br>
-<br>
-diff --git a/CHANGELOG.md b/CHANGELOG.md<br>
-index f967437eda..851c1ad6f6 100644<br>
---- a/CHANGELOG.md<br>
-+++ b/CHANGELOG.md<br>
-@@ -17,6 +17,8 @@ The format is based on [Keep a Changelog](<a href=3D"http=
-s://keepachangelog.com/en/1.0.0/">https://keepachangelog.com/en/1.0.0/</a>)=
-<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; afterwards.<br>
-&nbsp;<br>
-&nbsp;### Added<br>
-+ - xenconsoled: new --syslog=3Dnone|guest|hv|all option to send console ou=
-tput<br>
-+&nbsp;&nbsp; to syslog.<br>
-&nbsp;<br>
-&nbsp;### Removed<br>
-&nbsp; - On Arm:<br>
-diff --git a/tools/console/daemon/io.c b/tools/console/daemon/io.c<br>
-index b6c46d11de..1090336bbe 100644<br>
---- a/tools/console/daemon/io.c<br>
-+++ b/tools/console/daemon/io.c<br>
-@@ -63,16 +63,29 @@<br>
-&nbsp;extern int log_reload;<br>
-&nbsp;extern int log_guest;<br>
-&nbsp;extern int log_hv;<br>
-+extern int syslog_guest;<br>
-+extern int syslog_hv;<br>
-&nbsp;extern int log_time_hv;<br>
-&nbsp;extern int log_time_guest;<br>
-&nbsp;extern char *log_dir;<br>
-&nbsp;extern int discard_overflowed_data;<br>
-&nbsp;extern int replace_escape;<br>
-+extern int syslog_option;<br>
-&nbsp;<br>
-&nbsp;static int log_time_hv_needts =3D 1;<br>
-&nbsp;static int log_time_guest_needts =3D 1;<br>
-&nbsp;static int log_hv_fd =3D -1;<br>
-&nbsp;<br>
-+struct syslog_line {<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* glibc keeps the whole ident; musl =
-keeps at most 31 bytes. */<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; char ident[128];<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; size_t len;<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* No limit in glibc; fits musl's 102=
-4-byte buffer with the header. */<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; char data[960];<br>
-+};<br>
-+<br>
-+static struct syslog_line hv_syslog =3D { .ident =3D &quot;hypervisor&quot=
-; };<br>
-+<br>
-&nbsp;static xengnttab_handle *xgt_handle =3D NULL;<br>
-&nbsp;static xenforeignmemory_handle *xfm_handle;<br>
-&nbsp;<br>
-@@ -94,6 +107,7 @@ struct console {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int master_pollfd_idx;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int slave_fd;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int log_fd;<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; struct syslog_line *syslog;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; struct buffer buffer;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; char *xspath;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; const char *log_suffix;<br=
->
-@@ -296,6 +310,53 @@ static int write_with_timestamp(int fd, const char *da=
-ta, size_t sz,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 0;<br>
-&nbsp;}<br>
-&nbsp;<br>
-+static void syslog_line_flush(struct syslog_line *line)<br>
-+{<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int mask;<br>
-+<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* Guest consoles usually end lines w=
-ith &quot;\r\n&quot;. */<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while (line-&gt;len &amp;&amp; line-&=
-gt;data[line-&gt;len - 1] =3D=3D '\r')<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; line-&gt;len--;<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (!line-&gt;len)<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; return;<br>
-+<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /*<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * Own tag, no flags and own mas=
-k, restored afterwards; safe as we are<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * single-threaded. No LOG_CONS/=
-LOG_PERROR: the line must not loop<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * back into the console ring or=
- be duplicated on stderr.<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mask =3D setlogmask(LOG_MASK(LOG_INFO=
-));<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; openlog(line-&gt;ident, 0, LOG_DAEMON=
-);<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; syslog(LOG_INFO, &quot;%.*s&quot;, (i=
-nt)line-&gt;len, line-&gt;data);<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; openlog(&quot;xenconsoled&quot;, sysl=
-og_option, LOG_DAEMON);<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; setlogmask(mask);<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; line-&gt;len =3D 0;<br>
-+}<br>
-+<br>
-+static void syslog_line_write(struct syslog_line *line, const char *data,<=
-br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp; size_t sz)<br>
-+{<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; size_t i;<br>
-+<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (i =3D 0; i &lt; sz; i++) {<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; char c =3D data[i];<br>
-+<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; if (c =3D=3D '\n') {<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; syslog_line_flus=
-h(line);<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; continue;<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; }<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; /* Strip \r after a newline, like write_with_timestamp(). */<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; if (c =3D=3D '\r' &amp;&amp; !line-&gt;len)<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; continue;<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; if (c =3D=3D '\033' &amp;&amp; replace_escape)<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c =3D '.';<br>
-+<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; line-&gt;data[line-&gt;len++] =3D c;<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; if (line-&gt;len =3D=3D sizeof(line-&gt;data))<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; syslog_line_flus=
-h(line);<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
-+}<br>
-+<br>
-&nbsp;static inline bool buffer_available(struct console *con)<br>
-&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (discard_overflowed_dat=
-a ||<br>
-@@ -361,6 +422,10 @@ static void buffer_append(struct console *con)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dom-&gt;domid, errno, strerror(errno));<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
-&nbsp;<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (con-&gt;syslog)<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; syslog_line_write(con-&gt;syslog,<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; buffer-&gt;data + buffer-&gt;si=
-ze - size, size);<br>
-+<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (discard_overflowed_dat=
-a &amp;&amp; buffer-&gt;max_capacity &amp;&amp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bu=
-ffer-&gt;size &gt; 5 * buffer-&gt;max_capacity / 4) {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp; if (buffer-&gt;consumed &gt; buffer-&gt;max_capacity =
-/ 4) {<br>
-@@ -433,30 +498,37 @@ static int create_hv_log(void)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return fd;<br>
-&nbsp;}<br>
-&nbsp;<br>
--static int create_console_log(struct console *con)<br>
-+static char *read_domain_name(struct domain *dom)<br>
-&nbsp;{<br>
--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; char logfile[PATH_MAX];<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; char *namepath, *data, *s;=
-<br>
--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int fd;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; unsigned int len;<br>
--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; struct domain *dom =3D con-&gt;d;<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; namepath =3D xs_get_domain=
-_path(xs, dom-&gt;domid);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; s =3D realloc(namepath, st=
-rlen(namepath) + 6);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (s =3D=3D NULL) {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp; free(namepath);<br>
--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; return -1;<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; return NULL;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; namepath =3D s;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; strcat(namepath, &quot;/na=
-me&quot;);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; data =3D xs_read(xs, XBT_N=
-ULL, namepath, &amp;len);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; free(namepath);<br>
--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (!data)<br>
--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; return -1;<br>
--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (!len) {<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (data &amp;&amp; !len) {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp; free(data);<br>
--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; return -1;<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; return NULL;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return data;<br>
-+}<br>
-+<br>
-+static int create_console_log(struct console *con)<br>
-+{<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; char logfile[PATH_MAX];<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; char *data;<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int fd;<br>
-+<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; data =3D read_domain_name(con-&gt;d);=
-<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (!data)<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; return -1;<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; snprintf(logfile, PATH_MAX=
--1, &quot;%s/guest-%s%s.log&quot;,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp; log_dir, data, con-&gt;log_suffix);<br>
-@@ -482,6 +554,45 @@ static int create_console_log(struct console *con)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return fd;<br>
-&nbsp;}<br>
-&nbsp;<br>
-+static struct syslog_line *create_console_syslog(struct console *con)<br>
-+{<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; struct syslog_line *line;<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; char *name, *p;<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; size_t len, name_max;<br>
-+<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; name =3D read_domain_name(con-&gt;d);=
-<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (!name)<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; return NULL;<br>
-+<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; line =3D calloc(1, sizeof(*line));<br=
->
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (line =3D=3D NULL) {<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; dolog(LOG_ERR, &quot;Memory allocation failed&quot;);<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; exit(ENOMEM);<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
-+<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* Keep the suffix and whole UTF-8 ch=
-aracters if the name is cut. */<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; name_max =3D sizeof(line-&gt;ident) -=
- strlen(&quot;guest-&quot;) -<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp; strlen(con-&gt;log_suffix) - 1;<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; len =3D strlen(name);<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (len &gt; name_max) {<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; len =3D name_max;<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; while (len &amp;&amp; ((unsigned char)name[len] &amp; 0xc0) =3D=
-=3D 0x80)<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; len--;<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; snprintf(line-&gt;ident, sizeof(line-=
-&gt;ident), &quot;guest-%.*s%s&quot;,<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp; (int)len, name, con-&gt;log_suffix);<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; free(name);<br>
-+<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* Replace ASCII that could break tag=
- parsing; keep UTF-8 bytes. */<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (p =3D line-&gt;ident; *p; p++)<b=
-r>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; if (!((*p &gt;=3D 'a' &amp;&amp; *p &lt;=3D 'z') || (*p &gt;=3D =
-'A' &amp;&amp; *p &lt;=3D 'Z') ||<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (*p &gt;=3D '0' &amp;&amp; *=
-p &lt;=3D '9') || *p =3D=3D '.' || *p =3D=3D '_' ||<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *p =3D=3D '-' || (unsigned c=
-har)*p &gt;=3D 0x80))<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *p =3D '_';<br>
-+<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return line;<br>
-+}<br>
-+<br>
-&nbsp;static void console_close_tty(struct console *con)<br>
-&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (con-&gt;master_fd !=3D=
- -1) {<br>
-@@ -780,6 +891,9 @@ static int console_create_ring(struct console *con)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (log_guest &amp;&amp; (=
-con-&gt;log_fd =3D=3D -1))<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp; con-&gt;log_fd =3D create_console_log(con);<br>
-&nbsp;<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (syslog_guest &amp;&amp; !con-&gt;=
-syslog)<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; con-&gt;syslog =3D create_console_syslog(con);<br>
-+<br>
-&nbsp; out:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* Mark the console connec=
-ted. */<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (!err &amp;&amp; con-&g=
-t;interface)<br>
-@@ -827,6 +941,7 @@ static int console_init(struct console *con, struct dom=
-ain *dom, void **data)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; con-&gt;master_pollfd_idx =
-=3D -1;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; con-&gt;slave_fd =3D -1;<b=
-r>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; con-&gt;log_fd =3D -1;<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; con-&gt;syslog =3D NULL;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; con-&gt;ring_ref =3D -1;<b=
-r>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; con-&gt;local_port =3D -1;=
-<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; con-&gt;remote_port =3D -1=
-;<br>
-@@ -916,6 +1031,12 @@ static void remove_domain(struct domain *dom)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
-&nbsp;}<br>
-&nbsp;<br>
-+static void console_flush_syslog(struct console *con)<br>
-+{<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (con-&gt;syslog)<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; syslog_line_flush(con-&gt;syslog);<br>
-+}<br>
-+<br>
-&nbsp;static void console_cleanup(struct console *con)<br>
-&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (con-&gt;log_fd !=3D -1=
-) {<br>
-@@ -923,6 +1044,12 @@ static void console_cleanup(struct console *con)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp; con-&gt;log_fd =3D -1;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
-&nbsp;<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (con-&gt;syslog) {<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; syslog_line_flush(con-&gt;syslog);<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; free(con-&gt;syslog);<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; con-&gt;syslog =3D NULL;<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
-+<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; free(con-&gt;buffer.data);=
-<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; con-&gt;buffer.data =3D NU=
-LL;<br>
-&nbsp;<br>
-@@ -1175,22 +1302,29 @@ static void handle_hv_logs(xenevtchn_handle *xce_ha=
-ndle, bool force)<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; do<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; int logret;<br>
--<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp; size =3D sizeof(buffer);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp; if (xc_readconsolering(xc, bufptr, &amp;size, 0, 1, &=
-amp;index) !=3D 0 ||<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; size =3D=3D 0)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break=
-;<br>
-&nbsp;<br>
--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; if (log_time_hv)<br>
--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; logret =3D write=
-_with_timestamp(log_hv_fd, buffer, size,<br>
--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp; &amp;log_time_hv_needts);<br>
--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; else<br>
--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; logret =3D write=
-_all(log_hv_fd, buffer, size);<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; if (syslog_hv)<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; syslog_line_writ=
-e(&amp;hv_syslog, buffer, size);<br>
-&nbsp;<br>
--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; if (logret &lt; 0)<br>
--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dolog(LOG_ERR, &=
-quot;Failed to write hypervisor log: &quot;<br>
--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &=
-quot;%d (%s)&quot;, errno, strerror(errno));<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; if (log_hv) {<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int logret;<br>
-+<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (log_time_hv)=
-<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; logret =3D write_with_timestamp(<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp; log_hv_fd, buffer, size,<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp; &amp;log_time_hv_needts);<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; logret =3D write_all(log_hv_fd, buffer, siz=
-e);<br>
-+<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (logret &lt; =
-0)<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dolog(LOG_ERR,<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;F=
-ailed to write hypervisor log: %d (%s)&quot;,<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; errno, =
-strerror(errno));<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; }<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } while (size =3D=3D sizeo=
-f(buffer));<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (port !=3D -1)<br>
-@@ -1324,17 +1458,20 @@ void handle_io(void)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int xce_pollfd_idx =3D -1;=
-<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int xs_pollfd_idx =3D -1;<=
-br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xenevtchn_handle *xce_hand=
-le =3D NULL;<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bool read_hv =3D log_hv || syslog_hv;=
-<br>
-&nbsp;<br>
--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (log_hv) {<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (read_hv) {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp; xce_handle =3D xenevtchn_open(NULL, 0);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp; if (xce_handle =3D=3D NULL) {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dolog=
-(LOG_ERR, &quot;Failed to open xce handle: %d (%s)&quot;,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; errno, strerror(errno));<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; goto =
-out;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp; }<br>
--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; log_hv_fd =3D create_hv_log();<br>
--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; if (log_hv_fd =3D=3D -1)<br>
--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; goto out;<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; if (log_hv) {<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; log_hv_fd =3D cr=
-eate_hv_log();<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (log_hv_fd =
-=3D=3D -1)<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; goto out;<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; }<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp; log_hv_evtchn =3D xenevtchn_bind_virq(xce_handle, VIR=
-Q_CON_RING);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp; if (log_hv_evtchn =3D=3D -1) {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dolog=
-(LOG_ERR, &quot;Failed to bind to VIRQ_CON_RING: &quot;<br>
-@@ -1371,7 +1508,7 @@ void handle_io(void)<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp; xs_pollfd_idx =3D set_fds(xs_fileno(xs), POLLIN|POLLP=
-RI);<br>
-&nbsp;<br>
--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; if (log_hv)<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; if (read_hv)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xce_p=
-ollfd_idx =3D set_fds(xenevtchn_fd(xce_handle),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; POLLI=
-N|POLLPRI);<br>
-&nbsp;<br>
-@@ -1421,7 +1558,7 @@ void handle_io(void)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break=
-;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp; }<br>
-&nbsp;<br>
--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; if (log_hv &amp;&amp; xce_pollfd_idx !=3D -1) {<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; if (read_hv &amp;&amp; xce_pollfd_idx !=3D -1) {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (f=
-ds[xce_pollfd_idx].revents &amp; ~(POLLIN|POLLOUT|POLLPRI)) {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dolog(LOG_ERR,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp; &quot;Failure in poll xce_handle: %d (%s)&quot;,<br>
-@@ -1472,6 +1609,14 @@ void handle_io(void)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp; close(log_hv_fd);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp; log_hv_fd =3D -1;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (syslog_hv)<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; syslog_line_flush(&amp;hv_syslog);<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (syslog_guest) {<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; struct domain *d;<br>
-+<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; for (d =3D dom_head; d; d =3D d-&gt;next)<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console_iter_voi=
-d_arg1(d, console_flush_syslog);<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (xce_handle !=3D NULL) =
-{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp; xenevtchn_close(xce_handle);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp; xce_handle =3D NULL;<br>
-diff --git a/tools/console/daemon/main.c b/tools/console/daemon/main.c<br>
-index 798077ac2f..56b2bb79d8 100644<br>
---- a/tools/console/daemon/main.c<br>
-+++ b/tools/console/daemon/main.c<br>
-@@ -35,11 +35,14 @@<br>
-&nbsp;int log_reload =3D 0;<br>
-&nbsp;int log_guest =3D 0;<br>
-&nbsp;int log_hv =3D 0;<br>
-+int syslog_guest =3D 0;<br>
-+int syslog_hv =3D 0;<br>
-&nbsp;int log_time_hv =3D 0;<br>
-&nbsp;int log_time_guest =3D 0;<br>
-&nbsp;char *log_dir =3D NULL;<br>
-&nbsp;int discard_overflowed_data =3D 1;<br>
-&nbsp;int replace_escape =3D 0;<br>
-+int syslog_option =3D LOG_CONS;<br>
-&nbsp;<br>
-&nbsp;static void handle_hup(int sig)<br>
-&nbsp;{<br>
-@@ -48,8 +51,9 @@ static void handle_hup(int sig)<br>
-&nbsp;<br>
-&nbsp;static void usage(char *name)<br>
-&nbsp;{<br>
--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf(&quot;Usage: %s [-h] [-V] [-v]=
- [-i] [--log=3Dnone|guest|hv|all] [--log-dir=3DDIR] [--pid-file=3DPATH] [-t=
-, --timestamp=3Dnone|guest|hv|all] [-o, --overflow-data=3Ddiscard|keep] [--=
-replace-escape]\n&quot;, name);<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf(&quot;Usage: %s [-h] [-V] [-v]=
- [-i] [--log=3Dnone|guest|hv|all] [--log-dir=3DDIR] [--pid-file=3DPATH] [-t=
-, --timestamp=3Dnone|guest|hv|all] [-o, --overflow-data=3Ddiscard|keep] [--=
-replace-escape] [--syslog=3Dnone|guest|hv|all]\n&quot;, name);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf(&quot;&nbsp; --repl=
-ace-escape&nbsp; - replace ESC character with dot when writing console log\=
-n&quot;);<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf(&quot;&nbsp; --syslog&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - send console output to sysl=
-og (independent of --log)\n&quot;);<br>
-&nbsp;}<br>
-&nbsp;<br>
-&nbsp;static void version(char *name)<br>
-@@ -106,11 +110,11 @@ int main(int argc, char **argv)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp; { &quot;timestamp&quot;, 1, 0, 't' },<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp; { &quot;overflow-data&quot;, 1, 0, 'o'},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp; { &quot;replace-escape&quot;, 0, 0, 'e'},<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; { &quot;syslog&quot;, 1, 0, 'S'},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp; { 0 },<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; };<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bool is_interactive =3D fa=
-lse;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int ch;<br>
--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int syslog_option =3D LOG_CONS;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int syslog_mask =3D LOG_MA=
-SK(LOG_WARNING)|LOG_MASK(LOG_ERR)|LOG_MASK(LOG_CRIT)|\<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp; LOG_MASK(LOG_ALERT)|LOG_MASK(LOG_EMERG);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int opt_ind =3D 0;<br>
-@@ -173,6 +177,24 @@ int main(int argc, char **argv)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp; case 'e':<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; repla=
-ce_escape =3D 1;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break=
-;<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; case 'S':<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (!strcmp(opta=
-rg, &quot;all&quot;)) {<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; syslog_hv =3D 1;<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; syslog_guest =3D 1;<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else if (!strc=
-mp(optarg, &quot;hv&quot;)) {<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; syslog_hv =3D 1;<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else if (!strc=
-mp(optarg, &quot;guest&quot;)) {<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; syslog_guest =3D 1;<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else if (!strc=
-mp(optarg, &quot;none&quot;)) {<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; syslog_hv =3D 0;<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; syslog_guest =3D 0;<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else {<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fprintf(stderr, &quot;Invalid --syslog valu=
-e '%s'\n&quot;,<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp; optarg);<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; usage(argv[0]);<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(EINVAL);<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
-+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp; case '?':<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fprin=
-tf(stderr,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;Try `%s --help' for more i=
-nformation\n&quot;,<br>
--- <br>
-2.52.0<br>
-<br>
-</div>
-</span></font></div>
-</body>
-</html>
+> 
+> Fixes: 701190abb3d5 ("xen/arm: Set correct per-cpu cpu_core_mask")
+> Signed-off-by: Hirokazu Takahashi <taka@valinux.co.jp>
+> ---
+> Changes in v3:
+> - Remove the CPU from sibling maps when it goes down, introducing
+>   remove_siblinginfo() to match x86 Xen.
+> - Change the cpu parameter type of set_cpu_sibling_map() to
+>   'unsigned int' to align with x86 Xen. Also use 'unsigned int'
+>   for the cpu parameters of remove_siblinginfo() and
+>   remove_cpu_sibling_map().
+> - Minor code cleanups.
+> 
+> Changes in v2:
+> - Rename init_cpu_sibling_map() to set_cpu_sibling_map() to align
+>   with x86.
+> - Use BUG_ON() in set_cpu_sibling_map() to verify that per-cpu
+>   cpu_sibling_mask and cpu_core_mask are allocated.
+> 
+>  xen/arch/arm/smpboot.c | 39 +++++++++++++++++++++++++++++++++++----
+>  1 file changed, 35 insertions(+), 4 deletions(-)
+> 
+> diff --git a/xen/arch/arm/smpboot.c b/xen/arch/arm/smpboot.c
+> index 8c9072f3c1..c4c9f535e3 100644
+> --- a/xen/arch/arm/smpboot.c
+> +++ b/xen/arch/arm/smpboot.c
+> @@ -91,18 +91,44 @@ static int setup_cpu_sibling_map(int cpu)
+>           !zalloc_cpumask_var(&per_cpu(cpu_core_mask, cpu)) )
+>          return -ENOMEM;
+>  
+> +    return 0;
+> +}
+> +
+> +static void set_cpu_sibling_map(unsigned int cpu)
+> +{
+> +    unsigned int sibling;
+> +
+> +    BUG_ON(!per_cpu(cpu_sibling_mask, cpu));
+> +    BUG_ON(!per_cpu(cpu_core_mask, cpu));
+> +
+>      /*
+>       * Currently we assume there is no multithread and NUMA, so
+> -     * a CPU is a sibling with itself, and the all possible CPUs
+> +     * a CPU is a sibling with itself, and the all online CPUs
+>       * are supposed to belong to the same socket (NUMA node).
+>       */
+>      cpumask_set_cpu(cpu, per_cpu(cpu_sibling_mask, cpu));
+> -    cpumask_copy(per_cpu(cpu_core_mask, cpu), &cpu_possible_map);
+> +    cpumask_copy(per_cpu(cpu_core_mask, cpu), &cpu_online_map);
+> +    cpumask_set_cpu(cpu, per_cpu(cpu_core_mask, cpu));
+>  
+> -    return 0;
+> +    for_each_online_cpu(sibling)
+> +        cpumask_set_cpu(cpu, per_cpu(cpu_core_mask, sibling));
+>  }
+>  
+> -static void remove_cpu_sibling_map(int cpu)
+> +static void remove_siblinginfo(unsigned int cpu)
+> +{
+> +    unsigned int sibling;
+> +
+> +    for_each_cpu(sibling, per_cpu(cpu_core_mask, cpu))
+> +        cpumask_clear_cpu(cpu, per_cpu(cpu_core_mask, sibling));
+> +
+> +    for_each_cpu(sibling, per_cpu(cpu_sibling_mask, cpu))
+> +        cpumask_clear_cpu(cpu, per_cpu(cpu_sibling_mask, sibling));
+On ARM a CPU is a sbiling with itself only, so this loop is redundant. Please drop.
 
---_000_LV4PPF5EFB6ADBAEA4F47210A52854A387C80422LV4PPF5EFB6ADBA_--
+> +
+> +    cpumask_clear(per_cpu(cpu_sibling_mask, cpu));
+> +    cpumask_clear(per_cpu(cpu_core_mask, cpu));
+> +}
+> +
+> +static void remove_cpu_sibling_map(unsigned int cpu)
+We try not to add unrelated changes to the patch that is meant to do something
+else (here s/int/unsigned int/). If at all, it should be mentioned in the commit
+msg.
+
+With that:
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+
+~Michal
+
 
