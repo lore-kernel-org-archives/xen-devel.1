@@ -2,45 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 02A9C606A31C
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Nov 2026 21:04:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 874E8606A31C
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Nov 2026 21:04:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=google header.b=KpkzVcT9
-Received: from list by lists.xenproject.org with outflank-mailman.1504053.1699604 (Exim 4.92)
+	dkim=pass (1024-bit key) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=google header.b=mGPC5J62
+Received: from list by lists.xenproject.org with outflank-mailman.1504055.1699622 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWgd4-0006L2-CK; Thu, 26 Nov 2026 21:03:42 +0000
+	id 1xWgd5-0006kw-U0; Thu, 26 Nov 2026 21:03:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1504053.1699604; Thu, 26 Nov 2026 21:03:42 +0000
+Received: by outflank-mailman (output) from mailman id 1504055.1699622; Thu, 26 Nov 2026 21:03:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWgd4-0006Ka-7B; Thu, 26 Nov 2026 21:03:42 +0000
-Received: by outflank-mailman (input) for mailman id 1504053;
- Thu, 26 Nov 2026 21:03:40 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xWgd2-0006I0-Ne
- for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 21:03:40 +0000
+	id 1xWgd5-0006kI-OJ; Thu, 26 Nov 2026 21:03:43 +0000
+Received: by outflank-mailman (input) for mailman id 1504055;
+ Thu, 26 Nov 2026 21:03:42 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <andrew.cooper3@citrix.com>) id 1xWgd4-0006ID-5W
+ for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 21:03:42 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xWgd2-00CPvZ-4G
- for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 22:03:40 +0100
-Received: from [10.42.69.10] (helo=localhost)
+ id 1xWgd3-00Gh7b-IS
+ for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 22:03:41 +0100
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <andrew.cooper3@citrix.com>)
- id 6b089eac-8faa-0a2a0a5109dd-0a2a450a97f6-0
- for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 22:03:40 +0100
-Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6b089e8b-e002-0a2a0a5209dd-0a2a4505d4c0-30
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 22:03:41 +0100
+Received: from [209.85.128.47] (helo=mail-wm1-f47.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <andrew.cooper3@citrix.com>)
- id 6b089eab-f2d2-0a2a450a0019-d1558036ad31-3
- for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 22:03:40 +0100
-Received: by mail-wm1-f54.google.com with SMTP id
- 5b1f17b1804b1-4b79502c27aso75245225e9.1
- for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 13:03:40 -0800 (PST)
+ id 6b089ead-4cb1-0a2a45050019-d155802fb4e6-3
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 22:03:41 +0100
+Received: by mail-wm1-f47.google.com with SMTP id
+ 5b1f17b1804b1-4bb69f5b161so48613465e9.0
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 13:03:41 -0800 (PST)
 Received: from localhost.localdomain (host-78-146-248-75.as13285.net.
  [78.146.248.75]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb88442693sm570536295e9.1.2026.11.26.13.03.38
+ 5b1f17b1804b1-4bb88442693sm570536295e9.1.2026.11.26.13.03.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Nov 2026 13:03:39 -0800 (PST)
+ Thu, 26 Nov 2026 13:03:40 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,42 +52,42 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1795727019; x=1796331819; darn=lists.xenproject.org;
+        d=citrix.com; s=google; t=1795727021; x=1796331821; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:mime-version:references
          :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=d0xJupgVMhexTIqZnilRQJX1qMS7vNcSlf1zAvcqhmw=;
-        b=KpkzVcT9Px27OSZ+0An2xIus9LOFAkbjtZ1yvgss0fVU4pQv8l2e56+z74Yjg1QqpJ
-         dHf2rPF9TxOS/ewnUa9c83ZRAf+rZmkjMjAvE3yOmLOtsFrcIfd85vGMrFoRcz2359rs
-         qjZqJbatZJDeP+6Y0zN3lrHljfMSFybFjePyY=
+        bh=KsoWdzVqgLh50C55Otz6lIcCOhPOwZrY/bEiWn2xKQE=;
+        b=mGPC5J62uAbATfY4xSq9Gdb9hoY/qPrRfdIV9thpLeZ6+ZlVTG9xSjs19mPoDnEJ1A
+         sl+krgHQUh5leUcmOZQ6CfeSoONgNGrS3XnwNsrRagUKzEyc0gchrF4as0BWtGZfnxuf
+         W3e572FaV93pv+3pKnU7I9SnsI1B0o+LXZS3M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795727019; x=1796331819;
+        d=1e100.net; s=20260707; t=1795727021; x=1796331821;
         h=content-transfer-encoding:content-type:mime-version:references
          :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=d0xJupgVMhexTIqZnilRQJX1qMS7vNcSlf1zAvcqhmw=;
-        b=CnCos/sk42UV0lnswBdz0L7AgZU2wa3IP/QPmtGwJZ52DVwQchH7chcCGECO3qYAaV
-         m8ycxSkwJWg/xCLAnjpeuj7dm/Ci0maXBEHRCqHI+FehsNXLw6GR9cuJd21pTSFy4ZDn
-         mSWqni5NPXkMLcWAUrDgxariEjnmqzYoaTig6QO3QdSwL0R6w3KB2jXuqZyouJvH6uBN
-         GuVEYeYcNt7Nhkr4fn38dgphmmz/83M6VWFdJtrzpw56hiEvIGeU/74PpAyfXDloS0x3
-         f6N+HYxZBKo+vVkpUSqVfSCkTK8HzylN+Je3L07YjK+fSL5s/6dRBU5nJPonTBrNpv2K
-         88PQ==
-X-Gm-Message-State: APuU4Z/QlyEKDHS+gac6A1cAF1+xScwMc3XGAb9YkikST43uLSvlQJyM
-	6n5sVWGK3Z7EYQEZpc/Lg8CmIy8C+iRat2pvT/tCxkherJU+NnxLVszpVjOatHe+lhNIiKWyfza
-	m5bd7CHI=
-X-Gm-Gg: AZFdTZdsGknI86ts7jvmxAKWeGv3bge2busmi7+CauR648l63ejNv22A59BRWVqQwdk
-	MXiusxKXY1Mojaz2/W4EpEcb5mfbrJ+ROoshZTRQmyLuUzN8M4PwkIMXxyyL6PlfOhuVjS5sMKe
-	FkVucRPnKAs5S9sAuALUCwmXIFEd0BoOo4W1kT8sVscD9g/rG22Fk6eTYjeACVi2zD24HzMa8yJ
-	BsnhVGw0t66QCUGMKdlofn2Ozr3FxRI9PM4sZcfi81xGwIze/X4itT1N/ExPW8RWUyaBWPW8rUi
-	y49bjYhVgPmI64NxzNgU+TGR2XbLolHTnsXGMNf181gvLENlpqvpqcTefHuAjjdVwUF9NvjHDQJ
-	bmwBlsa0mnqZ7fT5UNQnoC/Cb1euvu8lrLoRjxUuTMnRJKEKTptEyV8SPdKNdtGukFhRjIQZ6k7
-	DCujWiXD6Q816vz2u6X0wIAXnRqzXcijNzcbD8OI7qDxo0F1E0AzMLE+vHptEcaMRcm98Go65zE
-	HBf+/zqAg6uj31AVANPS7ihWiQv/tX+/rNV2nTd9lkuYz5wtfATuAIAyjvqRv9iw/eYpSEMYO/z
-	PqIJmoUaEyZFkY7t0Jgg8Sx/StIX3q1TC6K50F4YTp7JfSeR3tkkYvyr/em2aPmuk2K4o8SFeET
-	rnR0=
-X-Received: by 2002:a05:600c:4e02:b0:4bb:5d39:95fa with SMTP id 5b1f17b1804b1-4bb88811c82mr435667865e9.12.1795727019372;
-        Thu, 26 Nov 2026 13:03:39 -0800 (PST)
+        bh=KsoWdzVqgLh50C55Otz6lIcCOhPOwZrY/bEiWn2xKQE=;
+        b=fUtdnI4qZq9/WGsVbx+wQOgVHP2C7i35K2c4HxQsoVJxe26/85jsXYgVZzjVHe1m7A
+         L8OxPXWUOTruq14jfDO9fLxnM8/2CtMFnewTuDhyLVLINspNYyPXowHFT9tUQA0JxjQz
+         ZGwelNS59XzNVlN8O8qbSiTmeXXzZqrma6+rIeYBkShfgWyxNzA35RfQUr54LJ69hrYf
+         OCXe7P4N24QI06NPgDvn9ET2wo0mZrpSlDiJd+0iARBadSpC3Ze5HkHXPtFgugcaX2FS
+         HDFJ5CxyfAs4BzEwdIuLY4q2rcfi7NSyGpW1XBmkzx3z0n8WoPcd5mNlzaaX4iq1pISM
+         7Ehw==
+X-Gm-Message-State: APuU4Z8MHXol3f9eLmrIuic8xTX+aV5PfexdjqfAHzQr6MJuDQjWM0fX
+	lomRnn4Io0X+C92VubGUsOuQvvvu6Wbma9Wz3+ONnifxmRncvhS5wCrG7PZDpMx8TP8Pwz+XwEs
+	jNLu/cSE=
+X-Gm-Gg: AZFdTZcMkCJS7LiBAePR/Yh7auczrXmx2lonWc4Q4nEEK3rtgwLnZSgKJck1IWPAo41
+	qbLLMXgLkzhHstS41dQNArhasXXBYjN2Vieu4JrMFQHiZcuthbVo8+NACp1kOp+Viwu5g+N/GA0
+	C6ZA8tIWeEqtXWmM4CA6tw/48D5adUNFJK6+1Rn6l1VB2OLeKCTyviAq1V0hv5qEIlxGaw4wMVn
+	cv1Vw1k0Is88+z0Qli8UmF3eVK6iSfZgzvOuFtslsJN2qMe77IF2f9Qx8nUUMi3wwG/xA5Nqo9r
+	WZmYh+/SC9cKOap87biyDv317Xw/+/3Hgzsqa4TIHPp1lhZ0pAu1T2D+0Zs9dGZGq4gZrmrWBaz
+	m9L11SivVSix5egyfdBVBZjnQRG0fYXeqiPYsrvnVka+itsSOXyZ4WwSzD+hHrDOUtrUcm6MUeN
+	keWh07bB9O6APNG7PvORPlfTIx82CUXs2mP3MkwWlQOR1J71FvsQ3tCtWnwNlulz/fHKyrxgGBV
+	00y08d+BF/sWVaWOE+rMzXPP79Se+zG7NzF5BMoQctMlPE6tE5QE783qejZ6UmRr67kwW56Anj9
+	jzkNdWjiu4/Klpm7ZaszQFavLkyFOJvZ2UaNgKuD50GtAn0w1qATLxU2fI6T4ygw4BGbtNm2d8D
+	DEPc=
+X-Received: by 2002:a05:600c:3113:b0:4bb:5f45:c97f with SMTP id 5b1f17b1804b1-4bb88816b2bmr480697455e9.27.1795727020724;
+        Thu, 26 Nov 2026 13:03:40 -0800 (PST)
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 Cc: Anthony PERARD <anthony.perard@vates.tech>,
@@ -99,9 +100,9 @@ Cc: Anthony PERARD <anthony.perard@vates.tech>,
 	Teddy Astie <teddy.astie@vates.tech>,
 	"Daniel P . Smith" <dpsmith@apertussolutions.com>,
 	Frediano Ziglio <freddy77@gmail.com>
-Subject: [PATCH 1/4] CI: Update Fedora to 45
-Date: Thu, 26 Nov 2026 21:03:34 +0000
-Message-Id: <20261126210337.746228-2-andrew.cooper3@citrix.com>
+Subject: [PATCH 3/4] x86/efi: Split .init section to satisfy Microsoft UEFI signing requirements
+Date: Thu, 26 Nov 2026 21:03:36 +0000
+Message-Id: <20261126210337.746228-4-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20261126210337.746228-1-andrew.cooper3@citrix.com>
 References: <20261126210337.746228-1-andrew.cooper3@citrix.com>
@@ -109,9 +110,9 @@ X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1795727020-4B8D5CFC-A7C306CA/10/63158204843
-X-purgate-type: spam
-X-purgate-size: 3194
+X-purgate-ID: tlsNG-c201ff/1795727021-71CA82A1-59987A2E/0/0
+X-purgate-type: clean
+X-purgate-size: 2940
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -120,12 +121,24 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Fedora 43 is about to hit EoL.
+From: Frediano Ziglio <frediano.ziglio@citrix.com>
 
-This also gets us a container with binutils >= 2.46, which is going to be
-needed for EFI/StrictNX testing.
+Since 2022, Microsoft require that sections are not both writable and
+executable, in order to be able to apply W^X restrictions.
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Xen specifies SectionAlignment=2M, which technically requires that all
+sections have such alignment.  For now, only separate code and data sections
+in this way.  This is good enough to get an OVMF based StrictNX test working
+in CI.
+
+In the longterm Xen needs to be reworked to use SectionAlignment=4k, which
+will allow us to become fully compliant without more than doubling the size of
+Xen in memory.
+
+Link: https://techcommunity.microsoft.com/blog/hardware-dev-center/updated-microsoft-uefi-signing-requirements/1062916
+Signed-off-by: Frediano Ziglio <frediano.ziglio@citrix.com>
+Acked-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 CC: Anthony PERARD <anthony.perard@vates.tech>
 CC: Stefano Stabellini <sstabellini@kernel.org>
@@ -138,66 +151,53 @@ CC: Teddy Astie <teddy.astie@vates.tech>
 CC: Daniel P. Smith <dpsmith@apertussolutions.com>
 CC: Frediano Ziglio <freddy77@gmail.com>
 
-I have already deployed this container, including the additional change from
-patch 4.
+This reverts part of commit 1308f0170c1f ("x86/EFI: warn about r/o sections
+requiring relocations"), following the work to ensure that Xen does not write
+into read-only sections.
 ---
- .../fedora/{43-x86_64.dockerfile => 45-x86_64.dockerfile} | 2 +-
- automation/gitlab-ci/build.yaml                           | 8 ++++----
- automation/scripts/containerize                           | 2 +-
- 3 files changed, 6 insertions(+), 6 deletions(-)
- rename automation/build/fedora/{43-x86_64.dockerfile => 45-x86_64.dockerfile} (97%)
+ xen/arch/x86/xen.lds.S | 19 +++++++++++--------
+ 1 file changed, 11 insertions(+), 8 deletions(-)
 
-diff --git a/automation/build/fedora/43-x86_64.dockerfile b/automation/build/fedora/45-x86_64.dockerfile
-similarity index 97%
-rename from automation/build/fedora/43-x86_64.dockerfile
-rename to automation/build/fedora/45-x86_64.dockerfile
-index 0a2329e2dc37..5a1764c7ee55 100644
---- a/automation/build/fedora/43-x86_64.dockerfile
-+++ b/automation/build/fedora/45-x86_64.dockerfile
-@@ -1,5 +1,5 @@
- # syntax=docker/dockerfile:1
--FROM --platform=linux/amd64 fedora:43
-+FROM --platform=linux/amd64 fedora:45
- LABEL maintainer.name="The Xen Project"
- LABEL maintainer.email="xen-devel@lists.xenproject.org"
+diff --git a/xen/arch/x86/xen.lds.S b/xen/arch/x86/xen.lds.S
+index cef3d404a1a8..474cdd95c9e8 100644
+--- a/xen/arch/x86/xen.lds.S
++++ b/xen/arch/x86/xen.lds.S
+@@ -192,11 +192,7 @@ SECTIONS
+   __2M_init_start = .;         /* Start of 2M superpages, mapped RWX (boot only). */
+   . = ALIGN(PAGE_SIZE);             /* Init code and data */
+   __init_begin = .;
+-#ifdef EFI /* EFI wants to merge all of .init.*  ELF doesn't. */
+-  DECL_SECTION(.init) {
+-#else
+   DECL_SECTION(.init.text) {
+-#endif
+        _sinittext = .;
+        *(.init.multiboot)
+        *(.init.text)
+@@ -212,12 +208,19 @@ SECTIONS
+         */
+        *(.altinstr_replacement)
  
-diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
-index 94359febdae2..676009045448 100644
---- a/automation/gitlab-ci/build.yaml
-+++ b/automation/gitlab-ci/build.yaml
-@@ -619,15 +619,15 @@ debian-13-x86_32-gcc-debug:
-   variables:
-     CONTAINER: debian:13-x86_32
+-#ifdef EFI /* EFI wants to merge all of .init.*  ELF doesn't. */
+-       . = ALIGN(SMP_CACHE_BYTES);
+-#else
+   } PHDR(text)
+-  DECL_SECTION(.init.data) {
++
++#ifdef EFI
++  /*
++   * Xen.efi specifies SectionAlignment=2M, allowing it to be constructed with
++   * superpages.  StrictNX requires code sections to be non-writable, so
++   * .init.data must not share the same superpage.
++   *
++   * TODO: Rework Xen to use SectionAlignment=4k.
++   */
++  . = ALIGN(SECTION_ALIGN);
+ #endif
++  DECL_SECTION(.init.data) {
+        *(.init.bss.stack_aligned)
+        *(.init.data.page_aligned)
  
--fedora-43-x86_64-gcc:
-+fedora-45-x86_64-gcc:
-   extends: .gcc-x86_64-build
-   variables:
--    CONTAINER: fedora:43-x86_64
-+    CONTAINER: fedora:45-x86_64
- 
--fedora-43-x86_64-gcc-debug:
-+fedora-45-x86_64-gcc-debug:
-   extends: .gcc-x86_64-build-debug
-   variables:
--    CONTAINER: fedora:43-x86_64
-+    CONTAINER: fedora:45-x86_64
- 
- ubuntu-18.04-x86_64-gcc:
-   extends: .gcc-x86_64-build
-diff --git a/automation/scripts/containerize b/automation/scripts/containerize
-index feadd9e82fc4..8a175fcd0b36 100755
---- a/automation/scripts/containerize
-+++ b/automation/scripts/containerize
-@@ -27,7 +27,7 @@ case "_${CONTAINER}" in
-     _alpine) CONTAINER="${BASE}/alpine:3.24-x86_64" ;;
-     _alpine-arm64v8) CONTAINER="${BASE}/alpine:3.24-arm64v8" ;;
-     _archlinux|_arch) CONTAINER="${BASE}/archlinux:current-x86_64" ;;
--    _fedora) CONTAINER="${BASE}/fedora:43-x86_64";;
-+    _fedora) CONTAINER="${BASE}/fedora:45-x86_64";;
-     _bullseye-ppc64le) CONTAINER="${BASE}/debian:11-ppc64le" ;;
-     _bookworm-ppc64le) CONTAINER="${BASE}/debian:12-ppc64le" ;;
-     _trixie-ppc64le) CONTAINER="${BASE}/debian:13-ppc64le" ;;
 -- 
 2.39.5
 
