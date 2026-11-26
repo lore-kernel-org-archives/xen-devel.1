@@ -2,49 +2,44 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 99B3E606A31C
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Nov 2026 09:59:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 89E7F606A31C
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Nov 2026 10:19:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=LVu0c3Fg
-Received: from list by lists.xenproject.org with outflank-mailman.1503255.1699047 (Exim 4.92)
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=casper.20170209 header.b=pGshxVy6
+Received: from list by lists.xenproject.org with outflank-mailman.1503270.1699058 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWWFX-0000tI-PB; Thu, 26 Nov 2026 09:58:43 +0000
+	id 1xWWZe-00046y-DJ; Thu, 26 Nov 2026 10:19:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1503255.1699047; Thu, 26 Nov 2026 09:58:43 +0000
+Received: by outflank-mailman (output) from mailman id 1503270.1699058; Thu, 26 Nov 2026 10:19:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWWFX-0000tB-MW; Thu, 26 Nov 2026 09:58:43 +0000
-Received: by outflank-mailman (input) for mailman id 1503255;
- Thu, 26 Nov 2026 09:58:42 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xWWFV-0000t4-Eu
- for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 09:58:42 +0000
+	id 1xWWZe-00046r-9H; Thu, 26 Nov 2026 10:19:30 +0000
+Received: by outflank-mailman (input) for mailman id 1503270;
+ Thu, 26 Nov 2026 10:19:29 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <BATV+a849bc58c39020da164c+8495+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1xWWZc-00046l-58
+ for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 10:19:29 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xWWFU-00BimV-K7
- for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 10:58:40 +0100
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xWWZb-00Etwx-6m
+ for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 11:19:27 +0100
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a2174ae9fb00099bd@swg.vates.tech>)
- id 6b0802c4-bab6-0a2a0a5309dd-0a2a4501ce0c-32
- for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 10:58:40 +0100
-Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ <BATV+a849bc58c39020da164c+8495+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 6b0807ad-8faa-0a2a0a5109dd-0a2a450c988c-4
+ for <multiple-recipients>; Thu, 26 Nov 2026 11:19:26 +0100
+Received: from [90.155.50.34] (helo=casper.infradead.org)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a2174ae9fb00099bd@swg.vates.tech>)
- id 6b0802cf-5bcc-0a2a45010019-b9ff1c2394ef-3
- for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 10:58:40 +0100
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a2174ae9fb00099bd.001 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Thu, 26 Nov 2026 09:58:35 +0000
-Received: from [192.168.1.37] (lfbn-gre-1-56-253.w92-157.abo.wanadoo.fr
- [92.157.33.253]) (Authenticated sender: baptiste.le-duc)
- by mail2.vates.fr (Postfix) with ESMTPSA id 81F3681EFD
- for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 10:58:34 +0100 (CET)
+ <BATV+a849bc58c39020da164c+8495+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 6b0807ad-f479-0a2a450c0019-5a9b32228528-3
+ for <multiple-recipients>; Thu, 26 Nov 2026 11:19:26 +0100
+Received: from 54-240-197-238.amazon.com ([54.240.197.238]
+ helo=u09cd745991455d.ant.amazon.com)
+ by casper.infradead.org with esmtpsa (Exim 4.100.1 #2 (Red Hat Linux))
+ id 1xWWZY-00000000r8F-3s3d; Thu, 26 Nov 2026 10:19:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -53,108 +48,261 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=SpQUtnsl9xsQqBHZ9sqIBNTykZnYw2hH55DFApUwBiA=;
- h=from:subject:date:message-id:to:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
- b=LVu0c3Fg/XwDIpFI+X+wIFA6fUgqlZjWCArspN/O/suQckpb66NkOQOibwgkEXjl+SK9fFeGA
- zyxkxbWB3ZaHJJGCcLCe5aMYsOy6TdJFILXReHYJp1Et3m114Cp41YL+lNMZ/YDe5VqbRhPgZUk
- CEOD7o1nvdHQJAP0Jj/XaD4A0ZdMtLsG9iWyS351ZtvpL9ogxOTH49DK1KQ5eGe47dbkYo0c0Cj
- SipsGMGO7fJf0RJURS++3wJoryKSFUTAjlRLm7gUK8MgRT8nt7IkxEJrP9th0XS3Y44lHDjnxp9
- 24zCovLG0+GCigBu2dQh4WeAmfrH5g8GfWYi+FKa+0+w==
-X-Zone-Loop: 7a042db2f8c5c83b1ccd2d631ad375dd167f4f3449d2
-x-campaign-type: default
-x-transaction-id: 581cdd0f-a86d-4327-9b4c-822076d6b6e3
-x-swg-uid: 01-651e502b-81d2-4ff6-805c-22d71f4cac1c
-X-Mailer: Sweego
-Message-ID:
- <1795687115.8631fc262581453bbf619ec5b2062170.1a2174ae9fb00099bd@vates.tech>
-x-swg-bid: 1795687115.8631fc262581453bbf619ec5b2062170.1a2174ae9fb00099bd
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-Date: Thu, 26 Nov 2026 10:58:34 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="MIME-Version:Content-Type:References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
+	In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=+GeL5pnTwCQLlCCZk2db+OLzwkshETDRAWxYAlKTvd0=; b=pGshxVy60OpZft8JdMIF2CvCAg
+	TrhRlHf2GnuyfrI5EJ4ls0lFdibC3GM/VIKe68kxRimG0Ty+RMw8l2cW/zTvg1sGX1i2l5hbMoTKd
+	cXwnKcHz5WfFUgq2MTJ/nQWU0JMTlEjEcvAKLvROhlxwj+YbWO++KPfnCm4QXeJA6tMsndVYcbLRQ
+	q7NZeFrKW584cgmWplo+eAj1Okv8/USBz/C47P4nnJ4gQKnSTbXF8NokyEE8g8yNc6fqy2s0yDOT2
+	HIpqEmTfRYCfB9r0CPflOeAKANOlcL49JAGhKgzk1GKF7o77R8bz3Rf5EFPzWKrZMIulerENO7H69
+	u+WdVLOw==;
+Message-ID: <d40cf395d3f8bbce335339a2638eb69247831971.camel@infradead.org>
+Subject: Re: [PATCH v1 08/21] hw/i386/kvm/xen_evtchn: Fix off-by-one in
+ do_remove_pci_vector()
+From: David Woodhouse <dwmw2@infradead.org>
+To: Paul Durrant <xadimgnik@gmail.com>, qemu-devel@nongnu.org
+Cc: xen-devel@lists.xenproject.org, kvm@vger.kernel.org, Paolo Bonzini	
+ <pbonzini@redhat.com>, Peter Maydell <peter.maydell@linaro.org>, Stefano
+ Stabellini <sstabellini@kernel.org>, Anthony PERARD
+ <anthony@xenproject.org>, "Edgar E . Iglesias"	 <edgar.iglesias@gmail.com>,
+ "Michael S . Tsirkin" <mst@redhat.com>, Richard Henderson
+ <richard.henderson@linaro.org>, Marcelo Tosatti <mtosatti@redhat.com>, 
+ =?ISO-8859-1?Q?Marc-Andr=E9?= Lureau	 <marcandre.lureau@redhat.com>, Jason
+ Wang <jasowangio@gmail.com>, Hui Peng	 <benquike@gmail.com>, Mark Syms
+ <mark.syms@citrix.com>, Feifan Qian	 <bea1e@proton.me>
+Date: Thu, 26 Nov 2026 10:19:23 +0000
+In-Reply-To: <219cbb501717a33b6ce9525682a6f86de0a8626c.camel@infradead.org>
+References: <20261124232247.23169-1-dwmw2@infradead.org>
+	 <20261124232247.23169-9-dwmw2@infradead.org>
+	 <8e8fa5ae-f30a-4e38-8aa8-cd46e3b4ca31@xen.org>
+	 <51d6301de00d83468af889fd4eda0e9cadf23ec4.camel@infradead.org>
+	 <7bdf9aad-dea6-4073-97eb-1c5d2535c9ae@xen.org>
+	 <219cbb501717a33b6ce9525682a6f86de0a8626c.camel@infradead.org>
+Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
+	boundary="=-5qGOLNVrljXa8WVq0n+/"
+User-Agent: Evolution 3.62.0-0ubuntu1~ppa1~24.04 
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/riscv: don't decrement total_pages on failed
- paging_alloc_page()
-To: xen-devel@lists.xenproject.org
-References: <20261126083130.32791-1-oleksii.kurochko@gmail.com>
-From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-Content-Language: en-US
-Autocrypt: addr=baptiste.le-duc@vates.tech; keydata=
- xsBNBGoPSX8BCADSuTikqW3FD4mscQugY1thRaKlIhcJ2G9YCWYXAlp+xosvTlzfIftOZZim
- 750MLvyKtLPkQzB6TZtFZBiexSraaF/MdDKRTT5DcVa3r7ZnHgqMclWlPa4ioysS4yFcJanL
- cyNOT7HUFvIdirMMqiViedfYtS0GORPBBPVISD6ClMz3ecHIxqllfq9CHYQn4amKEfHmh6tm
- Rufo4Gjl6x8cUFZZlRQf+aCmUzdSPA0P5u3sueYH1uEz4w/jbD53MlKqzCvxUeOsfS2swTQA
- 6mS9jIgOjNadpUTOzKfDHMgFirtG+HFpm45Nwp6KQizxgDVOfTnOfVHm5Gwqm3ETl9y5ABEB
- AAHNPEJhcHRpc3RlIExlIER1YyAoVmF0ZXMgWXViaWtleSkgPGJhcHRpc3RlLmxlLWR1Y0B2
- YXRlcy50ZWNoPsLAjgQTAQoAOBYhBGiSJ6HgW88MgT/gfu2Cu2XL9M6QBQJqD0l/AhsDBQsJ
- CAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEO2Cu2XL9M6QuMcH/ihiy/Nrxp919AmY0ENnc0NK
- r/2LDvW/hrX4FfbpxAmrGmQ7MU1aQTk0JDbfcsG8OYH6wO5sqnXb1gz50YrEdpfVSbHz5YTZ
- EhDIxE4g7NrvJZh3Qc0m0CAyjYTNHen7J6olVaCMjrOH7uRHUYZ7Pl3am9mZosfLmez/aWJO
- a6ihQxBXHI75brlk1teIURkep2kP7P0Flmfl4cA//saREoTF7GXCtjOSQk/xg8PP0Sswqp5G
- TdJptn3FQn6lAzfz0eFSYqkaoX2c2k1MDa7o+UX9cfGPL8ybMKnYkasLxck6eOWGJWf+YTrm
- ga/r0kBaftmqNDgt5nI2jNTDwZcT9g3OwE0Eag9JfwEIAM6IWbuBSvz+erv27oGDDpo8M6Fp
- dGUvft7v+WceHUfxiXpYFx9qgIU6XGy6y+3lJMAvNcltS8DuhioqMlfKRSYGKZlpliY65dNP
- 557IuM4ctVJ+I9CVclvv9eahARQKgF5auLJAAlvGSmU+ufNvlwTUmLIRcrPviTmB6X5jJYc+
- fiNeyI0HcsgcN21C0r62tUCypuZ+vgEJXw2bx1V8mVGZKxdGJPh58QF6kRK+xmd4kEComLGV
- BeM6BcVOtEjDcGNC0tLhXb0p9g1Ys55iA8sd6s4WacyolW2J6rwmcOkjiWexWw1caYgIWAV1
- 004M3gwUaOz0dGq2i7HQ0AiVfVkAEQEAAcLAdgQYAQoAIBYhBGiSJ6HgW88MgT/gfu2Cu2XL
- 9M6QBQJqD0l/AhsMAAoJEO2Cu2XL9M6QovYH/RjstyL5o/V5K74ylBtz0j5t3pLX5JKbwApi
- 656rGgDdqElImyvvZppNMl/mgHNzvxmfFAhJXnSX9f1fqVEQKOGEhLUastnl/ssBiE5x7btM
- V0GAffxXbXJZbVv4b/DI+gVrOPc2YXlVwruapvTZNtD3hqPrkjrmq5WTtGR2loIVSe62hmh0
- BGD2Fy79b/hYWyBqhayPBEjwGW75u4/yn+Yqy1PgG3hIcvg7GSuT3akhHZSB2Mbguzcoyf9Q
- DJl6t33JxPRkkNrEdkPPmRlQCTSiUkVjKqMDF3jlINWsJ5t4jKFsNF91ksdw7aQgiX+tQIpE
- ugMC1NuNi5dDGip66bw=
-In-Reply-To: <20261126083130.32791-1-oleksii.kurochko@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1795687114572
-X-purgate-ID: tlsNG-d62444/1795687120-BD2EC5FD-61514CBB/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 1298
-X-Spam-Status: No, score=-14.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FORGED_MUA_MOZILLA,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-purgate-ID: tlsNG-d25034/1795688366-00ECAA5B-CFD4B2D2/0/0
+X-purgate-type: clean
+X-purgate-size: 12410
+X-Spam-Status: No, score=-3.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY autolearn=no
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Reviewed-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
 
-On 11/26/26 9:33 AM, Oleksii Kurochko wrote:
-> paging_alloc_page() unconditionally decrements d->arch.paging.total_pages,
-> even when the freelist is empty and page_list_remove_head() returns NULL.
-> In that case the counter underflows, so arch_get_paging_mempool_size()
-> reports a bogus pool size and subsequent paging_freelist_adjust() calls
-> operate on a wrong page count.
-> 
-> Only decrement the counter when a page was actually taken from the
-> freelist.
-> 
-> Fixes: af87a609c79d ("xen/riscv: implement p2m_next_level()")
-> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-> ---
->   xen/arch/riscv/paging.c | 3 ++-
->   1 file changed, 2 insertions(+), 1 deletion(-)
-> 
-> diff --git a/xen/arch/riscv/paging.c b/xen/arch/riscv/paging.c
-> index 35f572689a7c..6464c7ce68a6 100644
-> --- a/xen/arch/riscv/paging.c
-> +++ b/xen/arch/riscv/paging.c
-> @@ -120,7 +120,8 @@ struct page_info *paging_alloc_page(struct domain *d)
->   
->       spin_lock(&d->arch.paging.lock);
->       pg = page_list_remove_head(&d->arch.paging.freelist);
-> -    d->arch.paging.total_pages--;
-> +    if ( pg )
-> +        d->arch.paging.total_pages--;
->       spin_unlock(&d->arch.paging.lock);
->   
->       return pg;
+--=-5qGOLNVrljXa8WVq0n+/
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+On Wed, 2026-11-25 at 13:43 +0000, David Woodhouse wrote:
+> On Wed, 2026-11-25 at 13:31 +0000, Paul Durrant wrote:
+> > On 25/11/2026 05:03, David Woodhouse wrote:
+> > > On Wed, 2026-11-25 at 11:16 +0000, Paul Durrant wrote:
+> > > >=20
+> > > > I guess I'm missing a subtlety here, but the test only fires if pir=
+q is
+> > > > a multiple of 64... so why is advancing to the next word by adding =
+64
+> > > > not correct?
+> > >=20
+> > > You're missing the same subtlety that I missed when I wrote it in the
+> > > first place: the loop *itself* does pirq++ every time, so when we do
+> > > 'pirq +=3D 64; continue;' we end up adding *65*.
+> > >=20
+> > > =C2=A0=C2=A0=C2=A0=C2=A0 for (pirq =3D 0; pirq < s->nr_pirqs; pirq++)=
+ {
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /*
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * We could be =
+cleverer here, but it isn't really a fast path, and
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * this trivial=
+ optimisation is enough to let us skip the big gap
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * in the middl=
+e a bit quicker (in terms of both loop iterations,
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * and cache li=
+nes).
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 */
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (!(pirq & 63) && =
+!(pirq_inuse_word(s, pirq))) {
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 pirq +=3D 63;
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 continue;
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+> >=20
+> > Gah! Recoding as a while loop where the increment is either 1 or 64
+> > would make this much less fragile.
+>=20
+> Or refactor it completely to use ffs? Do we have a for_each_set_bit()
+> helper? Do we want one?
+
+I iterated on this a few times, and even as a while() loop you still
+end up skipping to the last *zero* and then adding one more, so it
+might as well stay as for() loop and do the skip *every* time not just
+for full empty words:
+
+    for (pirq =3D 0; pirq < s->nr_pirqs; pirq++) {
+        uint64_t bits;
+
+        if (pirq_inuse(s, pirq) &&
+            !(except_pirq && pirq =3D=3D except_pirq) &&
+            s->pirq[pirq].dev =3D=3D dev &&
+            (vector =3D=3D -1 || s->pirq[pirq].vector =3D=3D vector)) {
+            /*
+             * It could theoretically be bound to a port already, but that
+             * is OK.
+             */
+            s->pirq[pirq].dev =3D dev;
+            s->pirq[pirq].gsi =3D IRQ_UNBOUND;
+            s->pirq[pirq].is_msix =3D false;
+            s->pirq[pirq].vector =3D 0;
+            s->pirq[pirq].is_masked =3D false;
+            s->pirq[pirq].is_translated =3D false;
+        }
+
+        /*
+         * Skip to the last clear bit before the next in-use PIRQ, or to
+         * the end of the word if the rest of it is clear, leaving the
+         * loop increment to do the final step.
+         */
+        bits =3D (pirq_inuse_word(s, pirq) >> (pirq & 63)) >> 1;
+        if (bits) {
+            pirq +=3D ctz64(bits);
+        } else {
+            pirq |=3D 63;
+        }
+    }
+
+And actually, written like this the *benefit* of the skip is largely
+removed, as the subtle difference here is that we now check
+pirq_inuse() before dereferencing s->pirq[pirq] so it isn't trashing
+the cache anyway.
+
+But on the whole, I think the single-character change I originally
+posted is the simpler option in the short term.=20
+
+--=-5qGOLNVrljXa8WVq0n+/
+Content-Type: application/pkcs7-signature; name="smime.p7s"
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Transfer-Encoding: base64
+
+MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCCE8Ew
+ggWvMIIEl6ADAgECAhANkOKMSmGXhF5eMl0rsRhvMA0GCSqGSIb3DQEBDAUAMGUxCzAJBgNVBAYT
+AlVTMRUwEwYDVQQKEwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5jb20xJDAi
+BgNVBAMTG0RpZ2lDZXJ0IEFzc3VyZWQgSUQgUm9vdCBHMjAeFw0yNDAzMTMwMDAwMDBaFw0zNDAz
+MTIyMzU5NTlaMGIxCzAJBgNVBAYTAlVTMRcwFQYDVQQKEw5EaWdpQ2VydCwgSW5jLjE6MDgGA1UE
+AxMxRGlnaUNlcnQgQXNzdXJlZCBHMiBTTUlNRSBSU0E0MDk2IFNIQTM4NCAyMDI0IENBMTCCAiIw
+DQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBAOfSIeC0vv1xPQ+dgSxbIIrkaru6skAWJYaGFzmv
+q4Kq+2wU2jxhcWlJg/JeP5jEkq/LM3pn5aaLao79j+XRmS7J1ZpJKUODJVoM4s9MQJhTMvo4qS5Z
+S64g6QR7Obkz3I1Lr3aWeSBmDDEyzue+NKtuWZ1Cxy3RdXo/w5HgRc3l2AercOM3Gt1XonTzEtTb
+Z/Hwc0Sn9Gz8RmGRK6Ka4hVDl8q/2l110KaV233Kh5etP0csXS8MIMdVRfRu3sc5hp13DG7lCKzK
+72a2GEpI8Wpl26G6I1/LMzz/98T+FqjTqxsdquk7Cj7m2vKGLW1BorpQH7WFGPdJQXJe1hfbfiZA
+CcVdCtl4nAacFacmsiArZBfX7AQGL7isvHUwwYFEtcApyGW4p2Lt+t8nvU0CANA6BHOpOz1xOP8W
+mAESbUriIjyuTUf3fJ9oDNCurVqhASMJCDaWI3lYX/QAoiAzt6akqbbZxo2ujW7mGGqc0KxqE2cs
+h2T79v7pC8aUtHBfwNrTR19GnZVxE0eQ7ViIQhR6mpSaUQFA9sG+cmD2G8TnCgYsLa0q8De6F61a
+CBevQGHNzrbZ3JAMneveYg/Jy1XxQHDRcvrMfWKe0jjcWbdKYlaGVPm5V1ILwYz7Yv5ewo3NUrxI
+GJiywe9qPhuJSDZs7VehTuI0FxGIsgKzVjgbAgMBAAGjggFcMIIBWDASBgNVHRMBAf8ECDAGAQH/
+AgEAMB0GA1UdDgQWBBT3m6JO05fF9DQPQw6Bhc6RkzKv+TAfBgNVHSMEGDAWgBTOw0q5mVXyuNtg
+v6l+vVa1lzan1jAOBgNVHQ8BAf8EBAMCAYYwHQYDVR0lBBYwFAYIKwYBBQUHAwQGCCsGAQUFBwMC
+MHkGCCsGAQUFBwEBBG0wazAkBggrBgEFBQcwAYYYaHR0cDovL29jc3AuZGlnaWNlcnQuY29tMEMG
+CCsGAQUFBzAChjdodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20vRGlnaUNlcnRBc3N1cmVkSURS
+b290RzIuY3J0MEUGA1UdHwQ+MDwwOqA4oDaGNGh0dHA6Ly9jcmwzLmRpZ2ljZXJ0LmNvbS9EaWdp
+Q2VydEFzc3VyZWRJRFJvb3RHMi5jcmwwEQYDVR0gBAowCDAGBgRVHSAAMA0GCSqGSIb3DQEBDAUA
+A4IBAQA+b8Uw53sDspdZgukU+qzLyyHkcjlxGGhHlP+zrmDLKm1wEFvCRS2pili3Hy67i8N4N5NU
+vw5Rg6kv3lxb9S9Rktxk43k+tvm68pl7OxQE55ZjVY87P0lUPGwEqOOwLLyH02ZQcsfq5p5LrOH9
+0JvmvZ1yy73HS+VpDAqOlytE0NSvTIRqFFkKQGQwfjvtql9YflujuNNvJztjBaHKYZsnNSg+J38o
+jYq4TP3pSg3UdVH0PncVjPQyqxC9xef5Xae92Kbkzol3x7Nel3A1bwAkalrDMspvTHvey6LfiBks
+FIqviTnoy7fgjaRAJgHS+RXx/cmuRd3rUAclSVVrYu8RMIIHAzCCBOugAwIBAgIQAzUotrsybJHx
+HTjKOIVdIDANBgkqhkiG9w0BAQsFADBiMQswCQYDVQQGEwJVUzEXMBUGA1UEChMORGlnaUNlcnQs
+IEluYy4xOjA4BgNVBAMTMURpZ2lDZXJ0IEFzc3VyZWQgRzIgU01JTUUgUlNBNDA5NiBTSEEzODQg
+MjAyNCBDQTEwHhcNMjYwNzE4MDAwMDAwWhcNMjgwMTA0MjM1OTU5WjAeMRwwGgYDVQQDDBNkd213
+MkBpbmZyYWRlYWQub3JnMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA2pYux73kdbYX
+sWF8f1u6DJP91qcqaZetsyfPkZk0B+MmXmAEv0kVes5n15V2mbDThOnpoPFly0UugQO9JYqLfrtD
+tKD5yL58fgrDB9Dw+LQikgrHafl6YSCds5AvUu/8hw2J6noKrcOLJpKlKn9Fl/4IB9Q3JIdLx5aa
+EtTqMalIPqHFOlgrJ7s+aua8xbB8YQ9ahqYBXWRJNv3P/2b1DYtdrz1oqZPE3CcB8Pc6Gf2a1Tcm
+6TAgtEx7Cf1BFcrsrMz7TWHmGQITieNb2r9UYWSc2Gp+GtYFNJCgT0JJXKUBIauPMKBLteYrL8Fo
+ff/uY44dC/mDWjdCP/5x0qelPQjlBvWdHL5zvBTOj06rJ0m3HNI/hnIcDh0Qu2j9reb9rLVcdym6
+bWmBM4uDEB8Zv9Ph0KTBFSy1IosyakuD1j1Os30EzjGfbi0EUXIvnOcYbTBAbM5UAzrxEHMhBvoX
+Pvnx+OyvjJmc9tWxTX6AcSz+m40esbT17URBeZS18afgieiikm5TynlUYP1LciR3hSgGVzvGXnKO
+02VDFR5itGWdRKZ2W5wIShNfWfhSa0D0K5UdIDt5Qc7sjzwK1Yb1sY5Tu0uA5mhIS82q1ov83uxB
+sFkriNnhGv/M1NCDVLBiOMsHu73qUM+yKmgKLwF9Hfn9WI25glbAMI4S5r3hYzcCAwEAAaOCAfcw
+ggHzMB8GA1UdIwQYMBaAFPebok7Tl8X0NA9DDoGFzpGTMq/5MB0GA1UdDgQWBBRcYhqbcGzn1jrT
+JOZaB8O7qllDpzAwBgNVHREEKTAngRNkd213MkBpbmZyYWRlYWQub3JngRBkYXZpZEB3b29kaG91
+LnNlMBQGA1UdIAQNMAswCQYHZ4EMAQUBAjAOBgNVHQ8BAf8EBAMCBeAwHQYDVR0lBBYwFAYIKwYB
+BQUHAwIGCCsGAQUFBwMEMIGpBgNVHR8EgaEwgZ4wTaBLoEmGR2h0dHA6Ly9jcmwzLmRpZ2ljZXJ0
+LmNvbS9EaWdpQ2VydEFzc3VyZWRHMlNNSU1FUlNBNDA5NlNIQTM4NDIwMjRDQTEuY3JsME2gS6BJ
+hkdodHRwOi8vY3JsNC5kaWdpY2VydC5jb20vRGlnaUNlcnRBc3N1cmVkRzJTTUlNRVJTQTQwOTZT
+SEEzODQyMDI0Q0ExLmNybDCBjQYIKwYBBQUHAQEEgYAwfjAkBggrBgEFBQcwAYYYaHR0cDovL29j
+c3AuZGlnaWNlcnQuY29tMFYGCCsGAQUFBzAChkpodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20v
+RGlnaUNlcnRBc3N1cmVkRzJTTUlNRVJTQTQwOTZTSEEzODQyMDI0Q0ExLmNydDANBgkqhkiG9w0B
+AQsFAAOCAgEAocabrh1cPd5s3vY5rnlBVQSTc7zs2ZWs67dAIltR+05WELrYClVzzUhMs/LOJPlr
+EUo45UDDomXq38DxFepaPd9+iNLjXfn33EX/IG44j04lU/oF/Rg9VeQILkYLbCZ/x9wOjNHZc4SN
+ydY7Dhvf/sT5aBz88u7D5+azZJ7Qf1U57wYseCH1Mt0nDrtr5y19IJ8D9xJJ33RFL6vfpHZBBAQ8
++3RqkKNxLoV2aFvQhxdhjNLDqTv3LjUIdicwPraN7JkxEu7CV2Lka7eRqJgkWL7SK0YmBjGpRafs
++icP/ON5RCCKTTb6VlX8eTG2sJJfsFhvJNCCt6xexbWzWtIrfP7NvPBvwBB737AyEGBZkS5aNizT
+McURJGTv9UKvBh1LF/+tNhYtLvPCN7oecGzhCHht9jcwSkygTo3Y6YlK3QgOu+ncmiBbfeuwlLZ1
+LxbYvG6hgNqXv7u6YyADbYajAQJXJ2OQen39pm3Q/AQSyLYG+B8lDglWsM8tYXPlEdrYJcksGK6F
+nqIX6Bumn43rBooLJdiZp4WmfWdL2pxe+LxRDjprmqu1WprixDxULSTOKJZoqTlugs6y3Bc+if+s
+gHnBBtz9WQ6MtPHkh7zONDAFIKcBmv8OqPQCx0F3Wv3OEybwMpXx0OsKgK8wLldaX1pXcMuyDgTL
+Sqs0AV0OHUgwggcDMIIE66ADAgECAhADNSi2uzJskfEdOMo4hV0gMA0GCSqGSIb3DQEBCwUAMGIx
+CzAJBgNVBAYTAlVTMRcwFQYDVQQKEw5EaWdpQ2VydCwgSW5jLjE6MDgGA1UEAxMxRGlnaUNlcnQg
+QXNzdXJlZCBHMiBTTUlNRSBSU0E0MDk2IFNIQTM4NCAyMDI0IENBMTAeFw0yNjA3MTgwMDAwMDBa
+Fw0yODAxMDQyMzU5NTlaMB4xHDAaBgNVBAMME2R3bXcyQGluZnJhZGVhZC5vcmcwggIiMA0GCSqG
+SIb3DQEBAQUAA4ICDwAwggIKAoICAQDali7HveR1thexYXx/W7oMk/3Wpyppl62zJ8+RmTQH4yZe
+YAS/SRV6zmfXlXaZsNOE6emg8WXLRS6BA70liot+u0O0oPnIvnx+CsMH0PD4tCKSCsdp+XphIJ2z
+kC9S7/yHDYnqegqtw4smkqUqf0WX/ggH1Dckh0vHlpoS1OoxqUg+ocU6WCsnuz5q5rzFsHxhD1qG
+pgFdZEk2/c//ZvUNi12vPWipk8TcJwHw9zoZ/ZrVNybpMCC0THsJ/UEVyuyszPtNYeYZAhOJ41va
+v1RhZJzYan4a1gU0kKBPQklcpQEhq48woEu15isvwWh9/+5jjh0L+YNaN0I//nHSp6U9COUG9Z0c
+vnO8FM6PTqsnSbcc0j+GchwOHRC7aP2t5v2stVx3KbptaYEzi4MQHxm/0+HQpMEVLLUiizJqS4PW
+PU6zfQTOMZ9uLQRRci+c5xhtMEBszlQDOvEQcyEG+hc++fH47K+MmZz21bFNfoBxLP6bjR6xtPXt
+REF5lLXxp+CJ6KKSblPKeVRg/UtyJHeFKAZXO8Zeco7TZUMVHmK0ZZ1EpnZbnAhKE19Z+FJrQPQr
+lR0gO3lBzuyPPArVhvWxjlO7S4DmaEhLzarWi/ze7EGwWSuI2eEa/8zU0INUsGI4ywe7vepQz7Iq
+aAovAX0d+f1YjbmCVsAwjhLmveFjNwIDAQABo4IB9zCCAfMwHwYDVR0jBBgwFoAU95uiTtOXxfQ0
+D0MOgYXOkZMyr/kwHQYDVR0OBBYEFFxiGptwbOfWOtMk5loHw7uqWUOnMDAGA1UdEQQpMCeBE2R3
+bXcyQGluZnJhZGVhZC5vcmeBEGRhdmlkQHdvb2Rob3Uuc2UwFAYDVR0gBA0wCzAJBgdngQwBBQEC
+MA4GA1UdDwEB/wQEAwIF4DAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwQwgakGA1UdHwSB
+oTCBnjBNoEugSYZHaHR0cDovL2NybDMuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0QXNzdXJlZEcyU01J
+TUVSU0E0MDk2U0hBMzg0MjAyNENBMS5jcmwwTaBLoEmGR2h0dHA6Ly9jcmw0LmRpZ2ljZXJ0LmNv
+bS9EaWdpQ2VydEFzc3VyZWRHMlNNSU1FUlNBNDA5NlNIQTM4NDIwMjRDQTEuY3JsMIGNBggrBgEF
+BQcBAQSBgDB+MCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdpY2VydC5jb20wVgYIKwYBBQUH
+MAKGSmh0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNvbS9EaWdpQ2VydEFzc3VyZWRHMlNNSU1FUlNB
+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
+JO2X/Z6mSdFnRYyAwSI3gywAAAAAAAA=
+
+
+--=-5qGOLNVrljXa8WVq0n+/--
 
