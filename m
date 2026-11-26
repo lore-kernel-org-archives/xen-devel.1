@@ -2,48 +2,47 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D5F11606A31C
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Nov 2026 21:05:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D76FA606A31C
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Nov 2026 22:29:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=selector1 header.b=OAjBFEpF
-Received: from list by lists.xenproject.org with outflank-mailman.1504094.1699645 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=xOEKrBE6
+Received: from list by lists.xenproject.org with outflank-mailman.1504185.1699716 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWgeO-0000FQ-PZ; Thu, 26 Nov 2026 21:05:04 +0000
+	id 1xWhyM-0006vR-Nz; Thu, 26 Nov 2026 22:29:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1504094.1699645; Thu, 26 Nov 2026 21:05:04 +0000
+Received: by outflank-mailman (output) from mailman id 1504185.1699716; Thu, 26 Nov 2026 22:29:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWgeO-0000FJ-Ld; Thu, 26 Nov 2026 21:05:04 +0000
-Received: by outflank-mailman (input) for mailman id 1504094;
- Thu, 26 Nov 2026 21:05:03 +0000
+	id 1xWhyM-0006vE-KD; Thu, 26 Nov 2026 22:29:46 +0000
+Received: by outflank-mailman (input) for mailman id 1504185;
+ Thu, 26 Nov 2026 22:29:44 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper@citrix.com>) id 1xWgeN-0000F0-Cm
- for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 21:05:03 +0000
+ (envelope-from <balaandeguefrancoislionnel@gmail.com>)
+ id 1xWhyK-0006hN-M0
+ for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 22:29:44 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xWgeM-009Dyv-Hq
- for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 22:05:02 +0100
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xWhyK-007qNu-24
+ for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 23:29:44 +0100
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6b089ee6-bab6-0a2a0a5309dd-0a2a4508c640-32
- for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 22:05:02 +0100
-Received: from [52.101.53.43]
- (helo=BL0PR03CU003.outbound.protection.outlook.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6b089efd-f659-0a2a45080019-3465352bb56a-3
- for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 22:05:02 +0100
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
- by LVXPR03MB989180.namprd03.prod.outlook.com (2603:10b6:408:37f::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.662.7; Thu, 26 Nov
- 2026 21:04:59 +0000
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::a70d:dc32:bba8:ce37%4]) with mapi id 15.21.0662.004; Thu, 26 Nov 2026
- 21:04:59 +0000
+ (envelope-from <balaandeguefrancoislionnel@gmail.com>)
+ id 6b08b275-e002-0a2a0a5209dd-0a2a4502d5bc-22
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 23:29:44 +0100
+Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <balaandeguefrancoislionnel@gmail.com>)
+ id 6b08b2d7-4900-0a2a45020019-d155802db83c-3
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 23:29:44 +0100
+Received: by mail-wm1-f45.google.com with SMTP id
+ 5b1f17b1804b1-4a5177d78c7so75694535e9.2
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 14:29:43 -0800 (PST)
+Received: from bala-Latitude-5580.. ([129.0.189.183])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4bb884b7515sm871972235e9.13.2026.11.26.14.29.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 26 Nov 2026 14:29:43 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,171 +51,94 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=RXeVL8JZswa0+jhdQ41weDmKaIYy91vm931DoHC9PmaULqLKZ6kVlTJ5Aa3utwyl5+zozc3UN0RECTLf8g9vRSHKhKICa4Ca1i2sfeOOPg9kQxYg7WAyb7/BmJuq4eLFLYBFPkuhLS0lCGsK9VNaDQvA3ooOMW5UhBslkFqufP35RZU39G4h9jeJ8LeOYOv/dFco0T5iW5eoDpg28nRgNxQtZeveRVaiQ61Mg4gqwkzTwbWZRAva+R5hx09oKDJUvXJpeeQBoVwvIxGBsloHdoEE9jSdzjLXRAgJ97HO95oKcl5GPbbEY1ZsrJ3UfB+uQ9tWEJL3BWCi1kq8601SSQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=44XMFedIOXg47AIf8vnuf7X/5gfMQ5hTimVIBcruSRY=;
- b=Dfs5klHonRJigLgAbh3RgPB/WEnmIkmz4dOvekntTOoKUbTC0JvuPw1y+jRpTtfC6QuAYPUdl555YSkatlu/XQ5TAwGb12eK6bH945xiVLxh6qeRPFOmtlkiiLVttunydnECs0Zt3NtBaHOvKje2Euh0F/V4OXz5gMs6u9ehi5RFTkVJt+mR2RImnKp+zQLCrUGF496z0Y17aXfCENRV7es8LDWDOt3OMDPGcOi6/LlBrmS6MpC8+hF9YzfBhnricMtKGgYddDE20i+cxQzKE6P9A5QywcuT20Z3kmi8VxvdKuHhCIMHmf2Wt9nt5Mi3sAk2HrTs919XyIcPNEtqHw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=44XMFedIOXg47AIf8vnuf7X/5gfMQ5hTimVIBcruSRY=;
- b=OAjBFEpFcQBXAoHtG2VeEq7wXtcR8oNC5DoIue32OPsVzEOWwsYygPi8iWxGYhnaktJwLAfqWawyy4xY36Fgt2lrZyCRWdCzDpZLkmldcrOi9TGyNnau24QqfZwDYEt0YR9dwLNk03fPUf0ULlY0P1I9p1hykM/1srjMjHYy7LA=
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <fd0d6623-3d62-4f8a-aa0f-733ffe5dc08c@citrix.com>
-Date: Thu, 26 Nov 2026 21:04:56 +0000
-User-Agent: Mozilla Thunderbird
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>
-Subject: Re: [PATCH] docs/man: fix typo in xl.1
-To: =?UTF-8?Q?Bala_Andegue_Fran=C3=A7ois_Lionnel?=
- <balaandeguefrancoislionnel@gmail.com>, xen-devel@lists.xenproject.org
-References: <20261110045730.433737-1-balaandeguefrancoislionnel@gmail.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <20261110045730.433737-1-balaandeguefrancoislionnel@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: LO4P123CA0651.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:296::17) To CH8PR03MB8275.namprd03.prod.outlook.com
- (2603:10b6:610:2b9::7)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1795732183; x=1796336983; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=k6HnbUcdcBaWXY6DEvsjjzv+zVTB4gQneKA/qZOpamg=;
+        b=xOEKrBE6zoJMFjHddKV5I654A00oh5UG2P8nzcnkwmKg5kFxF5Y5mYAuUt3IeMZVKE
+         /ouWrwwL6U7EmGm6hE9MkpaNQxjWjq5CNmPHpDFGr0weYV8aF4IMLXpoHJV4PewsWAdE
+         8iZP5KIzFt/9zjIQCu3EojLkCi9hFGinJY35Y+uezAdp8Xs4KodBaU7WrS1696HdMZKq
+         lkoJEpYVGwFUWf58q60YqUVRFXGa+Fpn/ZJfUlvBWpk/fS9mdlfie8d37iBSmFfIQC3o
+         O/IMRFQqdJokdGEAqrD0umFc2PGIwL4dKaH9Zx46Qb86FbYExhTKBm2TYvs33UfT9NyV
+         5Phg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795732183; x=1796336983;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=k6HnbUcdcBaWXY6DEvsjjzv+zVTB4gQneKA/qZOpamg=;
+        b=aNlNhIf2Z92SgQYadTBcZNRoCr1wtZAoD14sCoW9OEBekqrUGQiFshieiyH+tMDTWZ
+         3D0poVhWsjkI1ACCCDTxw/6vqYHx4v3bGpyMkCDcHQ/TnXJJTxMjKPHw4dr2b/zPY+RA
+         AJ9N1w9kJtFwqRfziJ641FrdwwcKWrHOwHg7dIL0wbNp/jGjaU5qVXZCDEnlG2kfKdxy
+         Gj3qaHB9VBn+HjBEKX9reiGCsdDKPydjp9RTDrIY4h6ohfrSyn09fCa5CTFxSyzBdf8k
+         QthEnJhEoiyxQAemU0fq2U7hxcUMY9kgumBJ+P2SmRQ5si01ygiGgFeU8ZWF9WgFHhw7
+         pbug==
+X-Gm-Message-State: APuU4Z+Rca8FlXPElulS1LthNs4u3f2O3Nh+1JTYPGcTm9iIUtLV01Gi
+	fve2T9YqS1hnx+i/f4qOj12B80T6ak2o9B9HCt3Qq9sGmkDfATWYTbkzehxinx6g
+X-Gm-Gg: AZFdTZf54y0ZoJao4a3sdwUwzTH4xKFjjx8U9Hxko82SFHKvsutmooxiR8izcsqfkOz
+	/HXtqtiLA6BOsSNUHSO9E+2BsOGxZQbJQ2VHk7/bKqjwzAWhZzUHEK3cG/vwroy/utoEL6kw7G7
+	eU2YDnMkTCTQ6lmdqrhftUhwWDQVGKujh6wkZ4MRp2dpfmx91Nc6ZfJ74uFrsZmoe1/2YO5YO7+
+	6rhNGqGEuYajP8i0pREwdGUylsd6EZGwhYf4GZt460obKoL+axBXSmwCfYHH78Aob+drzXbn3cl
+	tDIUMpbqN5ob6IGRKEiBMHegtEHvmEIFiycUMVzyMT2gdzzt+J0C2i81Z7uzeJm8NcMUg/FCnxa
+	cXmrfviOmtCKZijxZFU7MqYC8mw45g+pXwEiItNHoYZL1yzoS2MuBXDkVIs0XkXiMRwIoL7ezZm
+	e0I00Wq9CXQMiE+qg78e5bZ+RiCCsv2JdiyxujN2o8NKV/U+d8kc8CGV/ivzPgLCWrkbrCvI4XO
+	r/eGYkLyxY4CqqEKsvoSPX5gFIRVKNZjalWsdUgYKBo2hAnck427GuQBSXYTZnOY8nKV3ccRGkK
+	lv/yQPvt+tx/2BSlAWzPx+XyKbTZjYE9foU1v82HH1RGYvlNxFq+evQwsNDIkw==
+X-Received: by 2002:a05:600c:820e:b0:4ac:da92:2bd4 with SMTP id 5b1f17b1804b1-4bb887c9936mr447232645e9.1.1795732183393;
+        Thu, 26 Nov 2026 14:29:43 -0800 (PST)
+From: =?UTF-8?q?Bala=20Andegue=20Fran=C3=A7ois=20Lionnel?= <balaandeguefrancoislionnel@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Anthony PERARD <anthony.perard@vates.tech>
+Subject: [PATCH 3/3] docs/man: fix typo in xen-vtpmmgr.7
+Date: Thu, 26 Nov 2026 23:29:18 +0100
+Message-Id: <20261126222918.951621-4-balaandeguefrancoislionnel@gmail.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20261126222918.951621-1-balaandeguefrancoislionnel@gmail.com>
+References: <20261126222918.951621-1-balaandeguefrancoislionnel@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|LVXPR03MB989180:EE_
-X-MS-Office365-Filtering-Correlation-Id: dff7ead9-47dc-4207-88b3-08df4c00ee53
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|1800799024|376014|23010399003|10067099003|11063799006|56012099006|261022105027099003|261028144727099003|261009223027099003|261009221227099003|261026140227099003|261102123227099003|261021121427099003|261022075727099003|18002099003|22082099003|6133799003;
-X-Microsoft-Antispam-Message-Info:
-	7rChjrNMrxoP0EaFC8C32ktqqO+/1xkW2Sj8M4bN2UvbRkOqqQ3B+cpqxiL/aYAfIcXDowG/zHkBF+SgwK0U4a26jUYZ/enBQX6O9rbEu0B9czy2gVGJBus4jzcn1Eb0wDCtmzLopXk6+si2MZqayrnp2MZvd7RP++DzwIisXaomA23rZV5z+2/vyYiYnB3niCKSoKUQQ7+1bZ0AxjSWXGFgtZv3d8cHJd7rHg2YP74Dc3LbI9Fnz17BAE6gD9wpmNzRDvCiuGTspTXZxqSuzgrwsTs5AtE4POCULCuQPVH+XHBQwzHkB5Rodv5Mr5UT1l6GSgTahmP+RagaZzrM++QeP4aJhRiYYBykWSmiZvoHoR1JXx/QnXw4Dg0izEatd6V0WABoEd3Vvf58KhQBDT3VBL30pPaDNxuXsZkVUrAZjKGOmrzdlsgPhnUMGSSXC98sdh4m9GBz2wRS4YhlFnq4NlKwxp+b+F8JgFpCmlYPXoebe7sDnU5OdEyqhNIzqgZh7uLRZnC5IODiT+2YeL4+P9ZI8oik4rrFgJeoJcQmYCVY4SGDunDaklE7pynJhA3LkuMAbIOk929iOfoOO8pnfY1qlEnSRKoitoXMDXguE3Db6G5ScIMXve/rNT1aJbDZyDje+oR9bKcaTFIZOu4Ou2EED9p2rrHUI0Fq9z8=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(23010399003)(10067099003)(11063799006)(56012099006)(261022105027099003)(261028144727099003)(261009223027099003)(261009221227099003)(261026140227099003)(261102123227099003)(261021121427099003)(261022075727099003)(18002099003)(22082099003)(6133799003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?SExaanNJVnBCNElSaEtnSzNNamhHdDk2aEhvWm9FaktpTlJLUG1sVXVid3gr?=
- =?utf-8?B?RE44SE5ldHBCZjlmQm1zYmVpOTRZbnBWLyt6NEhvQlJHRDNQOFBnN3RxaWZQ?=
- =?utf-8?B?NnM4cmdaZk5GM01ZVWF4cU9OWUhDcjhMMDFUVUpqcU9kWXZ5MEd1RHdCSzRS?=
- =?utf-8?B?c2s4YnZrYWNYRXY3WDNVN0lOWHlpN0x6bllOSDFYcGIyWGR3TGFIbUY4UXd0?=
- =?utf-8?B?V3FheHVVb05sNHlPWUNZMStXOHlPak4vckdJTVpnY3RXcjdab09Bc01UbTdM?=
- =?utf-8?B?N1lXZjBtUXcrcmwzVmtlakNqdENOUEd0RjFVM0J6Vm94MFFoUlo0amRpM2dU?=
- =?utf-8?B?T3VwZ3crdmRZL3JzOThPODRVcFB4clJnSnhwbW5XUVFSMERHL0RUNGFCVnpr?=
- =?utf-8?B?bUxyN1owVFRzaEw5cVdjSFdBbVJNVjQ3RDdqV3A1VmRuUHIwOW92RXJsb09a?=
- =?utf-8?B?S2t4WjlzWlZPcHdYWFNuMGJVa3R3aHFoVldIRVFjd0pWalZtL3Y0N2NObjhn?=
- =?utf-8?B?L0d2TXBxQ1dseUcxSnEvS0xmSjM2RmcrVmhHY3B6bGVkTFFiU0c3UVltUTFl?=
- =?utf-8?B?aHZGellyZW9sK2hlalhKZVF6SXY3UWsrUk80QXJES2g2cUFMd0x6T3ZkUmxC?=
- =?utf-8?B?L2ZVQ3A2WDR0eXJhbkFyWnl4Y0ZCcTdEMXJoLytNWjRCSGFpR094TU8xdUFM?=
- =?utf-8?B?Z090cVBIVFM5SitYcXZqTDYxTDI1OGtYaUEvK29pOURub1ZGbmtodHFreHRH?=
- =?utf-8?B?L09KMkxWZjRDcnAxWkErTklwU043UjJyZ1VYNWxjTzB0NnQ5alFOcjhYbmtH?=
- =?utf-8?B?TXZkb3NPeFl4QStDZ2RrOWUvdTk1ME1EeCtsb29Uc0h2RkNVcE5rbW5DUmkv?=
- =?utf-8?B?OTNuYm9xTDdVK2hYSFl0ZU5GQ2kxMUhGYUNFdWhXWmw3OUwvRXNlNWJLTkxU?=
- =?utf-8?B?TURzVGRVRnE2bW84MUpmNWlUY1Q4aFJMWklpV2RGMVJ5ZHNMSk5oSzBjSklD?=
- =?utf-8?B?bFFEbWx6Y01VeFgyNVcwQUhUN2xlb2RrejBiYVFITDVTUGdQVXdyQW4zaEUx?=
- =?utf-8?B?Z0lvV2x4dHExMEVNWURoSzY2c3plbU1CSSs0alJGbWhyMkRIeWVhbmJvUnVI?=
- =?utf-8?B?dUEvT29zdG9GcHA1bVB5SFNKUCt5UHkxRGdRckEvdDBBMFpBenl0bFZDaGQz?=
- =?utf-8?B?amp2VFgxdjMrMVFnRS9MbXJMOVd5Si9SSUpmUmpIVzFVekttNDRXVHNvd3FG?=
- =?utf-8?B?SkU1ZnAyRStOMEozSko2M0s2WHhQOHFaNEZndENMU0xhY0ZuZ0N2blpqamZG?=
- =?utf-8?B?STAwREpXZEtUc3BROTRCaDVFaDd0bnRGbVpLbXZERk1XREVRcW03MU9UR29N?=
- =?utf-8?B?bjRra3B3SWpMcTltekJzYkxaa3VReVRpRmIxN252d2ZjaHVMNEV0czd0VkU4?=
- =?utf-8?B?WCtRVmw5RmY4Wng1b25xVFFWMlY0dXovZU5iOTVSMmdmNFlnVFZuZFFuVmFM?=
- =?utf-8?B?MFdNcEZTNithQkgzYkNOVUwrdWNWYnpWL24rNEpTbWYweXpNTTRqVWVDK3Nm?=
- =?utf-8?B?Zll4VXBlWEQvODZtRS8wUFZrcWpFaW4xMkd2bkVVdXVLV3lDV1JoSmphQmx3?=
- =?utf-8?B?RytzUEFNdTRYZjRGekRSMEh5eHlEa3NQUEZmV0c0Y1o2QXorNGM2K09XY1ZV?=
- =?utf-8?B?YitsWFhsRThFai9uM2RrWjBLQ1hSRzNISlhUOVFtT3lKbGFDaXMvWEpERlFs?=
- =?utf-8?B?NERLVzhDUlR5MjhTV0hwM2NOd21NTy9oMHdLc1hVWUNYeHdUOHBJeG9lWDNX?=
- =?utf-8?B?eDFaQldNWElpejNKYkdxMlQ0cUZVeWZqMXhTV1pGbk9iNkUxUmowQzdCYXI3?=
- =?utf-8?B?YndJalViN3JnU1hiWG5VSWFycWlHcnFEdkFWSzRKbzg0VGpnTGtGV0pmRmU2?=
- =?utf-8?B?MjE0aE1WK0kvcUNQaWVuRkx2YTdrMGJobTFJZDhUTE90dnJxM3drQmlYWC9v?=
- =?utf-8?B?bTcxTGorMFptZnNGUWgvS044UDZDbnBOWWphVDRlaDQwd3p0SmJQcC9zVmdO?=
- =?utf-8?B?RW5TYVozSHErWkNJVklBMXc1RVhTbUovVENVOXRDaTA2ZHI2a1ZvQW9UUGlX?=
- =?utf-8?B?eEdGdlZDa0pRc1hlM1BLRGVVUW5ZR0JJd3NLS3pGUGFJQmEzaE1OMFRWL3Qw?=
- =?utf-8?B?bjcrUFUyTGZvbi8vU29GNmNEeVFRWGQrYWRHRjE5Vit0SGZkZmd6eTZLaVBk?=
- =?utf-8?B?U2hwclNsQ295a0hMMTJyNjNOd0YzV2hFRFROYnFkRDgwbEhscU4xVDRYNXo3?=
- =?utf-8?B?aGMzTzk2a2YzRStLamJzTFdXYWR3UWluQXJNVW9mWk5KaFR0V3hzNDgwcnFu?=
- =?utf-8?Q?6MsRwF4E4SWUPJg4=3D?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: dff7ead9-47dc-4207-88b3-08df4c00ee53
-X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Nov 2026 21:04:59.2747
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: G6vSw+mIZCKvoG3DyswejBMnpKp4Ki6HnNkZz9uXfM7v5mt/qyu3X9RM+O/v6jwxXqec0sVCIVPPHI8nmqBMj/iv9zXLCJVgpXKo47z5zOM=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LVXPR03MB989180
-X-purgate-ID: tlsNG-c1860d/1795727102-CDF4787B-E7165571/0/0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-720697/1795732184-F2B976C6-2D7D3898/0/0
 X-purgate-type: clean
-X-purgate-size: 491
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=4.0.1
+X-purgate-size: 1128
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 10/11/2026 4:57 am, Bala Andegue François Lionnel wrote:
-> Fix the misspelling "coniguration" -> "configuration" in the
-> description of the -D option of both "xl migrate" and "xl save".
->
-> Found with codespell. No functional change.
->
-> Assisted-by: Claude:claude-opus-5-5
-> Signed-off-by: Bala Andegue François Lionnel <balaandeguefrancoislionnel@gmail.com>
+Fix the misspelling "vTPM manger" -> "vTPM manager" in the section
+about the incomplete TPM 2.0 support.
 
-Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Found with codespell. No functional change.
 
-Yes, it did get lost.  I'll pick it up for my next sweep.
+Assisted-by: Claude:claude-opus-5-5
+Signed-off-by: Bala Andegue François Lionnel <balaandeguefrancoislionnel@gmail.com>
+---
+ docs/man/xen-vtpmmgr.7.pod | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/docs/man/xen-vtpmmgr.7.pod b/docs/man/xen-vtpmmgr.7.pod
+index 95854adb0885..15ab3c7bac5b 100644
+--- a/docs/man/xen-vtpmmgr.7.pod
++++ b/docs/man/xen-vtpmmgr.7.pod
+@@ -235,7 +235,7 @@ TPM 2.0 support for vTPM manager is incomplete.  There is no support for
+ persisting an encryption key, so vTPM manager regenerates primary and secondary
+ key handles each boot.
+ 
+-Also, the vTPM manger group command implementation hardcodes TPM 1.2 commands.
++Also, the vTPM manager group command implementation hardcodes TPM 1.2 commands.
+ This means running manage-vtpmmgr.pl fails when the TPM 2.0 hardware rejects
+ the TPM 1.2 commands.  vTPM manager with TPM 2.0 cannot create groups and
+ therefore cannot persist vTPM contents.
+-- 
+2.39.2
+
 
