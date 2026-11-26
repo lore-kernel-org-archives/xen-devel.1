@@ -2,42 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 21BC3606A31C
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Nov 2026 20:59:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C8289606A31E
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Nov 2026 21:03:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=R6tB+Wst
-Received: from list by lists.xenproject.org with outflank-mailman.1504040.1699591 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=google header.b=IFAd0U8q
+Received: from list by lists.xenproject.org with outflank-mailman.1504052.1699598 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWgYS-0004cQ-I0; Thu, 26 Nov 2026 20:58:56 +0000
+	id 1xWgd4-0006IL-3P; Thu, 26 Nov 2026 21:03:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1504040.1699591; Thu, 26 Nov 2026 20:58:56 +0000
+Received: by outflank-mailman (output) from mailman id 1504052.1699598; Thu, 26 Nov 2026 21:03:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWgYS-0004cH-CU; Thu, 26 Nov 2026 20:58:56 +0000
-Received: by outflank-mailman (input) for mailman id 1504040;
- Thu, 26 Nov 2026 20:58:55 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xWgd4-0006IE-0m; Thu, 26 Nov 2026 21:03:42 +0000
+Received: by outflank-mailman (input) for mailman id 1504052;
+ Thu, 26 Nov 2026 21:03:40 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <balaandeguefrancoislionnel@gmail.com>)
- id 1xWgYR-0004cB-4z
- for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 20:58:55 +0000
+ (envelope-from <andrew.cooper3@citrix.com>) id 1xWgd2-0006Hu-9y
+ for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 21:03:40 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xWgYQ-007h6u-EQ
- for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 21:58:54 +0100
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xWgd1-00CPvZ-Mw
+ for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 22:03:39 +0100
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <balaandeguefrancoislionnel@gmail.com>)
- id 6b089d81-8faa-0a2a0a5109dd-0a2a4508b01a-6
- for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 21:58:54 +0100
-Received: from [209.85.218.54] (helo=mail-ej1-f54.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <balaandeguefrancoislionnel@gmail.com>)
- id 6b089d8e-f659-0a2a45080019-d155da36a506-3
- for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 21:58:54 +0100
-Received: by mail-ej1-f54.google.com with SMTP id
- a640c23a62f3a-c50933bdf4bso1401017366b.1
- for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 12:58:54 -0800 (PST)
+ (envelope-from <andrew.cooper3@citrix.com>)
+ id 6b089e84-8faa-0a2a0a5109dd-0a2a4509e5ce-42
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 22:03:39 +0100
+Received: from [209.85.221.46] (helo=mail-wr1-f46.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <andrew.cooper3@citrix.com>)
+ id 6b089eab-be1a-0a2a45090019-d155dd2ec1cd-3
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 22:03:39 +0100
+Received: by mail-wr1-f46.google.com with SMTP id
+ ffacd0b85a97d-49412eb1474so4874099f8f.3
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 13:03:39 -0800 (PST)
+Received: from localhost.localdomain (host-78-146-248-75.as13285.net.
+ [78.146.248.75]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4bb88442693sm570536295e9.1.2026.11.26.13.03.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 26 Nov 2026 13:03:38 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -46,141 +50,104 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20260707 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1795726734; cv=none;
-        d=google.com; s=arc-20260327;
-        b=KUCje+U/0Gkp2tZ9BNCfLtz25Hb4eJXYmQt0w2+wvEZGNfT4fJg5bSFNux+hWvXwE7
-         ODey8uHBDw4naGR4yvmOHtTOlj7b6k3Zn2xmiXC7ar7BJqwreWYal6f0KhuPiswqOfnP
-         R8VcMzplWWzpEOZI2KKc/42K1Qv/uY+W492WGDH/RDQeuRSsGMSCTkRGTFImNr1Vl+4K
-         mmuLEb3VxYMRLnJZMvv6yZmJRXWZN7//L8FXNHTraUkVy6NU2+yCyuthqkBMuEsGaY69
-         Lcyi6o0LPMTWzEzchalxjSbv5OU4ClSB+nyW5jvy5POKwQ9yxhGk+hsc/fkNXyEzfyxr
-         L5Pg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=Nfkx6YqvUCuyBA6MZuKpdZq+qdppvAtiNRc7kvEvQBY=;
-        fh=WU3HsY45l8IoeuZptkB5i0FKT1rSu49KrMuKHU+Mfbc=;
-        b=rJi5T1umb0fWIr0nWKkatgbRFM2Bb5NkNlECOQcuvJlvEtUObSS1FigPNdowH8NTn6
-         XD59mAPFTRH3H4t5Iw9/ksYOVYkW2XyKhzNWq2QZ388CgDMx4UIZtVvE0MOO9on/gu8o
-         66G75n63dpzNEkh9WUt8No1bbju5p87yMQq/ZdOlVjjjKJt6gb4WKkLOGdpAQwYEjNZP
-         RNx2H9uEuuRFz2gHRrPduYBP/5f0Im+WcFgmvXA20JTG42t5zkQa/uTXR8EYGFGj2evK
-         ZyVhwZ55as+fQOTPqC0SZYNTFZZtzURbZKOM8zvWyp44uCDCxOtxRlwn/Y1Hq7LntXGJ
-         JuCw==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795726734; x=1796331534; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=Nfkx6YqvUCuyBA6MZuKpdZq+qdppvAtiNRc7kvEvQBY=;
-        b=R6tB+Wstes9U5pwDfnmfhvblVpAD579rmPyu1gMAUTkLiOZobrzqinylTR6knZun2O
-         H8ls8OgYlJYN0Gj9iWnDTv4yVmvAfnxrCnpSXct0t9V899KOdbNF9/Nsh9GdUSe4OoGr
-         ukOld77Lm2pXMMIyJrBUmQkIohQYKwsbj2NLCShJEvHgJsoLRiz1f3d3sIbruZenPpf4
-         gQTT/DcVTnbOjzd6qAGRyQi/k3rtmSTNeOeRv7aSs0ZNrwJaJE+Jwr/auR0Ixyu2MNP8
-         ZInKR2mK0K/vQePq5nyOZNKDv4lsF+Vg2h/ht0H+9DzvAX3VWdjtIMZloAJIOSbuML0e
-         xZgg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795726734; x=1796331534;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=citrix.com; s=google; t=1795727019; x=1796331819; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Nfkx6YqvUCuyBA6MZuKpdZq+qdppvAtiNRc7kvEvQBY=;
-        b=wlh+FVIknYMa45Hy6RLst5DSGv8zeZiwNVUeVP1ydlpBzEgh27Wfb/mN3hoKUA/417
-         3zwNXpYc6i2DvdZk4rAs6fnhVZZWCL4luel1q75stsbm/1ggYUHbeGpUGSWiUqyKmNq2
-         Qtjqmrk+aDVAuS5wMYo7dhI54mH56JvuOJdkxYvURRK+aD7zUbM0DSOuLeSwwkR4dvvu
-         76YIyNXmrCcuZX8hp8sFf/VNw7acy6vf0xX0R2IHtpFnWNPqWu4XqxQ+xnw7iOySi9az
-         Ux1qNZJ/kad25zspQfHw0CUzdxweuh3kSS8WaHfl9zgVPlfdc5vdFtINrcK0qvOCCG3+
-         UoXQ==
-X-Gm-Message-State: APuU4Z9LY+u5xDlurFN0dK0po4rxYb1LDoqILMmLov0U0TUm69vJ1UL7
-	YLEck7tw0RIkvsFHkwUY1iHcRCrHBSfI3mzarg+C774GHhL60qiTSNnMOuPQI58Yp/mvQr8D9XR
-	9WSKKw97wFwnewQDZAAInUyDldTHeFXHSGQRjIzE=
-X-Gm-Gg: AZFdTZft33+mCINCR7lvQGG2HXrX86ug0gWOthD3jTule5A2IEeObRl6Oi6+gCc6Otb
-	XbRaPgZCW6VCi+bdU27T7duXZhAxMdm94nKuRlKcRI0Q/GNsekBikbnz461cAaS5iSYqStBliOp
-	AlfW0JtDz/jOz7auf4t11JqZMZKf+4Jh2kK+ylB3etBKvvo1iXO/XAgabc3eT1MztspuoLcTiA7
-	BU+tUd5bSTOmml4x79DYXJfZHKx3hAQaV64V3Moef1guRd50C0O1fD7N7lbxrMp5nk3LHaMpAkD
-	6PZzT2VKedlywXmKgmhoOzbYmN/cbCyJ3UPjpE86DXu6ckXv55c3hSRwIhuK4cJ6yWboiCT+VcF
-	LCuzFfDj53oLL6pvI/5wSyUf1KKppiPsf8b7Gp63CfrPymwFTTxwh9ghIRQ==
-X-Received: by 2002:a17:906:9c01:b0:c51:f96:feb with SMTP id
- a640c23a62f3a-c513a5e63ddmr1271258566b.5.1795726733785; Thu, 26 Nov 2026
- 12:58:53 -0800 (PST)
+        bh=ZPSbQAWXvTMjEnBpBEGczMtDP46LVNgP44uX/nrr/BQ=;
+        b=IFAd0U8qSaFMQqlRqZv2O3+56jjPT6Q5PCA0hQkTH6e/UD1YL3al10tq2eJ6rTkpjn
+         bzmwK4N2H5eqDTlYXaiVVVTz9x5NbrnahKH01s/JmgmTTErQDFS7nXDBOZqYJslOS8XI
+         e2+PlmnyLfK6ezGYY6vEinm8c1I8JszyaMGxk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795727019; x=1796331819;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=ZPSbQAWXvTMjEnBpBEGczMtDP46LVNgP44uX/nrr/BQ=;
+        b=SlNjpjz1yj2to0+5uWS3PPMxR2oK0lXx9vKvhmlLLp+aDtzhtIid5zeeTxbZNRC4Yl
+         sdUIeuu21VAoIpvulaQFcFKXJTUSq+1WemwnXt9+/6S3tm4WmZA0ns+Oj54qWpeWYSKy
+         4vMq0APOMUps+yP0Rm6GxZsfg87NUe/kAuHPdl/NBD1XuqHE8Fxkbo0QYUM+ZOdyQ/7U
+         Wsyko94JmrDRz9gR5JKknOqXI2+HybbYNkksByF5mdch2coEqz3Ua9OjLBQbb8Mu+69z
+         CbIysEqRVctsc79bUgNrIwaal637LIpUUpkDiqLPYj3uzs5H9UYhyia6pikf3W6bNoIG
+         Xr3Q==
+X-Gm-Message-State: APuU4Z8uOuzxRR6+zCOdPVubZF6nGgn5Yyguy94FG6ZhdcmM6E4DbME6
+	w6FWICT2Ta2kkQx3AtMv9XzWjK60dbXUtOz58d54oKSeJUO8eZa//IuVocIMb90iobqA8wAkt6Y
+	q/YnohpE=
+X-Gm-Gg: AZFdTZe6L+P7b+MpY8/7/yKbdJaZceJvzFTv1HpwnsjO/aKlUKtPDEHXBnuGj2XCFBl
+	qXjJKN/CYFFZjHBKsB2tZN7+BhAjxQUburr9kbHmUNaN24UWIDYkGYM9+BowzGOH9jhrfKlqBWD
+	bfB+oVB5a3yYBfTdFamWmjyA7C1G44Jp/GGF1qcbHzBR9hZxEy2vxAfXpLwlZyvcstfOlLECeVs
+	efVAvwDhaAdV9Ca2mPlKc6+yLfCxgqmqkQIcgDFgMfn0LouwYuL27ycdjQuqaKdORFrMDFnwOmh
+	G+kIt73R0FmOegzyU8lxRKETUI0rOiB7A8F67NBfbhAVef74kwK+30uHDLw392q0VRqTMNWpon9
+	fPslYnHL1rXw6OiOlKCg1pDqkZToX7dxwiZz2eo4T8VGoAs6kq2XYE42xWDW3NHao0Xqny0iYLd
+	4L631GQ3G+lawauBK2b0vNofI9omu0B6mnDF7NscUB/qYtmyGG8tmuPc6ky9Du/3TLNNT1md0Yr
+	YRAzdM6jMfgkMRAWFWqHW9JQ1WMhlBsSyf9RYhOUSV+6pRRzQtqhA5nsR8PAtLTFfeTO4klQiTv
+	+ToHqEM85CeSI/4A2rv4hYHe4QACOeOOlabqyef52mlcOdSfeGjnq3z/RRVvm8HKDZ9yzeCSjfH
+	DWRkiY2l3vWdNfOG7HJow31FO
+X-Received: by 2002:a05:600c:3ba5:b0:4b0:a307:46f8 with SMTP id 5b1f17b1804b1-4bb8880f29bmr505722615e9.10.1795727018837;
+        Thu, 26 Nov 2026 13:03:38 -0800 (PST)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Anthony PERARD <anthony.perard@vates.tech>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Doug Goldstein <cardoe@cardoe.com>,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Teddy Astie <teddy.astie@vates.tech>,
+	"Daniel P . Smith" <dpsmith@apertussolutions.com>,
+	Frediano Ziglio <freddy77@gmail.com>
+Subject: [PATCH 0/4] CI: Add an EFI/StrictNX test
+Date: Thu, 26 Nov 2026 21:03:33 +0000
+Message-Id: <20261126210337.746228-1-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <20261110045730.433737-1-balaandeguefrancoislionnel@gmail.com>
-In-Reply-To: <20261110045730.433737-1-balaandeguefrancoislionnel@gmail.com>
-From: =?UTF-8?Q?Fran=C3=A7ois_Lionnel_Bala_Andegue?= <balaandeguefrancoislionnel@gmail.com>
-Date: Thu, 26 Nov 2026 21:58:42 +0100
-X-Gm-Features: Aa3M54qycq0fHiomy--jdXNRi0UvZ-o7nKK_KLCZEOYDyHZ4PNK5_JVrK79SkCU
-Message-ID: <CABqoPO5CMwW4gajFO0jktBoJepM+p7hCdYesE8Qa+SD522U+Cw@mail.gmail.com>
-Subject: Re: [PATCH] docs/man: fix typo in xl.1
-To: xen-devel@lists.xenproject.org
-Cc: Anthony PERARD <anthony.perard@vates.tech>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-c1860d/1795726734-D654487B-712DB801/0/0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-bad1c0/1795727019-BC4CB034-BD5020AE/0/0
 X-purgate-type: clean
-X-purgate-size: 1768
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
-	autolearn=ham autolearn_force=no version=4.0.1
+X-purgate-size: 1203
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi,
+https://gitlab.com/xen-project/hardware/xen-staging/-/jobs/18411468064
 
-Gentle ping on this patch, in case it got lost.
+This is good enough to at least get a regression test in CI.
 
-Thanks,
-Bala
+Further work is going to be required to become strictly spec compliant,
+aligning all data sections properly.  See patch 3 for details.
 
+Andrew Cooper (2):
+  CI: Update Fedora to 45
+  x86/efi: Move the trampoline into .init.data for EFI builds
 
-Le mar. 10 nov. 2026 =C3=A0 05:58, Bala Andegue Fran=C3=A7ois Lionnel
-<balaandeguefrancoislionnel@gmail.com> a =C3=A9crit :
->
-> Fix the misspelling "coniguration" -> "configuration" in the
-> description of the -D option of both "xl migrate" and "xl save".
->
-> Found with codespell. No functional change.
->
-> Assisted-by: Claude:claude-opus-5-5
-> Signed-off-by: Bala Andegue Fran=C3=A7ois Lionnel <balaandeguefrancoislio=
-nnel@gmail.com>
-> ---
->  docs/man/xl.1.pod.in | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/docs/man/xl.1.pod.in b/docs/man/xl.1.pod.in
-> index 51405f4e3341..8964811e8917 100644
-> --- a/docs/man/xl.1.pod.in
-> +++ b/docs/man/xl.1.pod.in
-> @@ -494,7 +494,7 @@ Leave the domain on the receive side paused after mig=
-ration.
->
->  =3Ditem B<-D>
->
-> -Preserve the B<domain-id> in the domain coniguration that is transferred
-> +Preserve the B<domain-id> in the domain configuration that is transferre=
-d
->  such that it will be identical on the destination host, unless that
->  configuration is overridden using the B<-C> option. Note that it is not
->  possible to use this option for a 'localhost' migration.
-> @@ -707,7 +707,7 @@ Leave the domain paused after creating the snapshot.
->
->  =3Ditem B<-D>
->
-> -Preserve the B<domain-id> in the domain coniguration that is embedded in
-> +Preserve the B<domain-id> in the domain configuration that is embedded i=
-n
->  the state file such that it will be identical when the domain is restore=
-d,
->  unless that configuration is overridden. (See the B<restore> operation
->  above).
->
-> base-commit: a5c26d0e73d4cde7c4620ea43cbd82ba7b2af02e
-> --
-> 2.39.2
->
+Frediano Ziglio (1):
+  x86/efi: Split .init section to satisfy Microsoft UEFI signing
+    requirements
+
+Roger Pau Monné (1):
+  CI: Add an EFI/StrictNX test
+
+ ...x86_64.dockerfile => 45-x86_64.dockerfile} |  9 ++-
+ automation/gitlab-ci/build.yaml               |  8 +--
+ automation/gitlab-ci/test.yaml                |  9 +++
+ automation/scripts/containerize               |  2 +-
+ .../scripts/include/xtf-x86_64-efi-strictnx   | 64 +++++++++++++++++++
+ xen/arch/x86/boot/head.S                      | 14 +++-
+ xen/arch/x86/xen.lds.S                        | 25 +++++---
+ 7 files changed, 116 insertions(+), 15 deletions(-)
+ rename automation/build/fedora/{43-x86_64.dockerfile => 45-x86_64.dockerfile} (88%)
+ create mode 100644 automation/scripts/include/xtf-x86_64-efi-strictnx
+
+-- 
+2.39.5
+
 
