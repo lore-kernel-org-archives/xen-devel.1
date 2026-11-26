@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 15B3B606A31C
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Nov 2026 13:39:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E0AF606A31E
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Nov 2026 13:40:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=YvB21mtQ
-Received: from list by lists.xenproject.org with outflank-mailman.1503455.1699170 (Exim 4.92)
+	dkim=pass (2048-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=X2v+1MGX
+Received: from list by lists.xenproject.org with outflank-mailman.1503463.1699180 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWZhD-0004af-8K; Thu, 26 Nov 2026 13:39:31 +0000
+	id 1xWZhc-00052T-FP; Thu, 26 Nov 2026 13:39:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1503455.1699170; Thu, 26 Nov 2026 13:39:31 +0000
+Received: by outflank-mailman (output) from mailman id 1503463.1699180; Thu, 26 Nov 2026 13:39:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWZhD-0004aY-4D; Thu, 26 Nov 2026 13:39:31 +0000
-Received: by outflank-mailman (input) for mailman id 1503455;
- Thu, 26 Nov 2026 13:39:30 +0000
+	id 1xWZhc-00052M-BV; Thu, 26 Nov 2026 13:39:56 +0000
+Received: by outflank-mailman (input) for mailman id 1503463;
+ Thu, 26 Nov 2026 13:39:55 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xWZhC-0004YW-L5
- for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 13:39:30 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xWZhb-00052A-Jz
+ for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 13:39:55 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xWZhC-00Fvq0-0y
- for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 14:39:30 +0100
+ id 1xWZha-00Fvw0-WA
+ for xen-devel@lists.xenproject.org; Thu, 26 Nov 2026 14:39:55 +0100
 Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6b083681-8faa-0a2a0a5109dd-0a2a450b841e-36
- for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 14:39:30 +0100
-Received: from [209.85.221.49] (helo=mail-wr1-f49.google.com)
+ id 6b0836aa-8faa-0a2a0a5109dd-0a2a450b9456-0
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 14:39:54 +0100
+Received: from [209.85.221.54] (helo=mail-wr1-f54.google.com)
  by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6b083691-b7e8-0a2a450b0019-d155dd31e138-3
- for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 14:39:29 +0100
-Received: by mail-wr1-f49.google.com with SMTP id
- ffacd0b85a97d-48dee593f18so6550893f8f.3
- for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 05:39:29 -0800 (PST)
+ id 6b0836aa-b7e8-0a2a450b0019-d155dd36e82a-3
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 14:39:54 +0100
+Received: by mail-wr1-f54.google.com with SMTP id
+ ffacd0b85a97d-48e09aa5264so4103097f8f.2
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Nov 2026 05:39:54 -0800 (PST)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4ab65cb41f4sm39430596f8f.7.2026.11.26.05.39.29
+ 5b1f17b1804b1-4bb8538b09bsm1116972985e9.4.2026.11.26.05.39.53
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 26 Nov 2026 05:39:29 -0800 (PST)
+ Thu, 26 Nov 2026 05:39:54 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,52 +51,52 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Cc:Content-Language:References:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1795700369; x=1796305169; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1795700394; x=1796305194; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:cc
          :content-language:references:to:from:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=D/F9twjHB3DFynA6lMxxDV/v+d+cXdeXECvoyPLY1Ds=;
-        b=YvB21mtQymxZu0zvByTdq+RotWGWqPsHIeohsV/JwMSIocRjWa4exT0PvQLmhEXNN/
-         Z+BbZY9Y2ep0rF2eRBMkVuXRh6LIIXvnSidA7t8k2xO+wtg+pcezD++TAnLprOWG7fYA
-         J6pTNza67S0aKvfi2P9Eq8M4sRzv45jWxFVBLLsSLaA03tjULvxwaaRkw8U45hmjlwgb
-         NeU+qXvN9vUYZ6O9W5ZRk0igrs+5ipAO8vOhWXU9JLgiQXUgOY+Z0EJgXBoKxvR5eoXa
-         NQ9mzJKwt8SZNUCBTC2vybqcquqsvRF6YgFWECQ+3uCHrwNVLzmdE8IhG8Hf0rVo06wB
-         snxw==
+        bh=MmOlKBivTr/k7+hbLS+oNsciiQdyU2i6x8nPAJBMwpM=;
+        b=X2v+1MGX9On+evj2lNsY9NgClR/rFgUF6QFP1swhktDgfxC5rwLJYncFw86lkSoPd8
+         HIPwoDedgvkiizdYgUbKHn47RLXx2awSXaWJf0wZf+iw8HKzCKlR0ns+znvBOuOtwx/K
+         WmQ4Uwy+KHKUf9VqZTvZ9wbqlAuAPUdsUIQKpUWQum4cqIDEUOaWmO4bVb2o6b9HrfNy
+         RcPJf3gXbH9FLGnp+1Y3lSHf2dMfknged8eBUDlJizISQvZ/+NANy3xdq2PUA/KS9sVY
+         sljLfOySOsSUlOtuN8hhTEIOBKb2rFzVdHqOde1JegBUmSHji8KLzdXzGAOO+LmvFJn+
+         0BpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795700369; x=1796305169;
+        d=1e100.net; s=20260707; t=1795700394; x=1796305194;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:cc
          :content-language:references:to:from:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=D/F9twjHB3DFynA6lMxxDV/v+d+cXdeXECvoyPLY1Ds=;
-        b=nHe2bHFPTmzO4+ZNg3MkKZehswIj6ssgS3y6wD590iUNQQ+7ZkTJ6nQBh6fuVXZuqa
-         BqAyNR6AaGrlAbv5ueYEdaIOMMBdqrUiiQWNbzygDpm5xSyYb6G8pk8GKckcziJAvrkm
-         Hq1B6MUkkPdDhSqJuahLxluGgef0Hlw0cCelfagBc67hTG5dAI/bdbmZlhjN+ys1Yqtc
-         gjSwl7gPSoDlbJysXt38NK7ofioa5hIx+dbk1sLa7grV0mrBdJfzi4bYeIRms9QllLvn
-         gTe6Vi4jaINGCyFoInqozUL567esVrTQ3oXT01Fj3UM0ggnJu7mCUcHXxi7ONHLy0b19
-         IaaA==
-X-Gm-Message-State: APuU4Z9IAUqheSQ2t0j8ddmzfQZvgaYLF6A7z2E6PG62x2k/uqgd2s1j
-	un/6u3XvjjXX//OH3hQQv15o+D8TVFklzSX8dEqLCRehLBa7EeIoguzi4xZ4tEGK72R3bH4ONKT
-	2GkDS7g==
-X-Gm-Gg: AZFdTZenev0geb/7fFXCPRvY8HNprxw58gxzIRxOIbtSQZma+LW/bEQPK8nBpGTc9Nf
-	y0Gc5MVbAIvAiBmK0LpzL7R7NfANdw76oNaUwEZF0zFleOdxKr9wUIsmiuuVsmwZ0DFozfH9N4T
-	ucKRn1VLa6HaaedpOq+jmJDVVGOmcir69ys6THsnIoLUkTh3WeCkkR7gZSlBE4xO7xZ9QNeo8E1
-	tOU0eOhBSTOsfXTd+DRs0OetEnPB9b4cAf3Kfpxn5Sx5DYQP0wceGkKTQ3bQeu9IKV7FxcZVBQc
-	T8oLp/uiC3fZ1aBczQBuUfnQtCsluZQ7qwkuOoKNykmGnWYaVVUEadj91yko4JOObwTIJIFp0Or
-	6PH7Eqg3dkI5ql6v7QLGcG/RF+hpMxZUoHMD7W674u+dxFuK9hti6ZA6uopi5UKZR+eUGPS8NZY
-	wUAZAid0ppeA8dqV5dW+iaP4Mq+h46V78bYtphNSl52OXah7xJ2Yfj+hy+dztIPV3Px0hAFOEc3
-	374NtF+T1NPymVyeZqFHPc5XfLpa45711EWLS6vd/nGiot+dlzM4d6Cq+JddJVSY0OULn5pPwKB
-	wNPe2IuGIuv16y0Nbt8vlmX4g9iDyQYUcKvuT34v7UeIvUOV4gdxpsbwVz7sU2zGoK4z4qVsW+4
-	4e0ETczEe6+d9cNJLwA==
-X-Received: by 2002:a05:6000:299c:10b0:4a7:9630:7b5a with SMTP id ffacd0b85a97d-4abb47b2043mr30255589f8f.47.1795700369474;
-        Thu, 26 Nov 2026 05:39:29 -0800 (PST)
-Message-ID: <ca238147-e4bd-4928-b3a6-d4a8dacecf13@suse.com>
-Date: Thu, 26 Nov 2026 14:39:28 +0100
+        bh=MmOlKBivTr/k7+hbLS+oNsciiQdyU2i6x8nPAJBMwpM=;
+        b=pH0bmnDVburPQCKqhl2sQ9LgLmceM7/OBVtHr6jL8ndqcTM7Ouiv3IWOkgU3BAVDru
+         VYs7a5XFEqsxXMxaYPXFtproLgryh7fhNct2Pu2SND/cvth18qtFPp6V3YZ1v9M4VH3/
+         CeWAO1x1xjyNsbmFWZbId1XcBOBWtYGhWrKvP2f0GZro8JJe6lueZe7bGVIDHO0f48ur
+         IWGhQZU+4XxAIsbUFOuAaX/KNYTMovTlpaHn5l8+ReaPbcy/QY3ADME9FJoZI+ev47I+
+         00MncnIxJne+oLpkKxkHCXYFi9s4kqAQd5AsOZ56AZp4L5yB8h3LvY/8aIi0HtZCdgFs
+         MwVQ==
+X-Gm-Message-State: APuU4Z8euTHdErQ/ouhs07C83D6mBkUReUZpMEuIH7GkuS0iDtF5O8XN
+	L53cOzmkuwaMwSWVDwNtPPhuyD9yCcxXQTQdLeSQQdqJxeV7bBLxXNFlMvqn6QyRhYyAQ9XQuyS
+	fUOdJlQ==
+X-Gm-Gg: AZFdTZeOH6JYJNsg3Vg5SRRzkSHrmelD+rYOIfd+0CHXe1YExDPj8v1JB1Tk/UrJs0u
+	kId49WOSrjhn22+g6W8wziyB3fiRYvFlU8ypL+kX1LW+T7ZinbnpYxrDjvgwgR5naEPJJdz735N
+	ipx0CpurK+BvRUYR76txdX+bs0LjQlfZelMFw1yLUpGIBAUUnBxwDnkeU/kHli7Dc/ob6Z8k1BQ
+	JYCy2Vxk32Zz6UemkuYQy+n8LgX+2/OSogwYEK5H1Nc6MjkScAtvYIVgL7najQ+8wfxPR3WkqCz
+	p4BZ8rN1KqLWFt4MkKBlPHZ3RBBzx2d/P7Onh4xMOXZfbFWmhwnnnrpTy9bCrNFosM1e9QngxmL
+	WZPDA7SE2QimCfUHdetQ7NNx/McRZvgDIZ9fn46/ZM2mc+k/G8BGJbK2LpdJ0pe1RZ2BjDdckXJ
+	bqbHKqWT8EvVDF7UXq8WfJc949Qk8bQ38qiJCCnE+D6btgGLIk5v6BUMUnEU8vt4aw0dBhYJGb+
+	btJ+aoSVmMbrbKv9pGZRDQNMF0HsLLMLIhP0zqDGp7+a/g1Uh5n1ubJWpUuR48It6wJfgwSl37X
+	m2LHpJzsrIX7PgS8LEVeZGWuBxoXXVlsSUbhrmb+XsJhAAc6/MKtYT8JIvUroePrQJ26URmUby0
+	BmlMeJRI0QQq2XN5DaQ==
+X-Received: by 2002:a05:600c:3113:b0:4a2:267:25b3 with SMTP id 5b1f17b1804b1-4bb8882a4b9mr449722605e9.35.1795700394414;
+        Thu, 26 Nov 2026 05:39:54 -0800 (PST)
+Message-ID: <392f316b-cf6d-494a-92c1-63461fe9954a@suse.com>
+Date: Thu, 26 Nov 2026 14:39:53 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 07/13] x86/time: use domain_vcpu() in tsc_set_info()
+Subject: [PATCH 08/13] x86/paging: use domain_vcpu() in paging_domctl()
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 References: <1ea6d02b-8fba-4b1e-969c-033d6a7be233@suse.com>
@@ -130,9 +130,9 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <1ea6d02b-8fba-4b1e-969c-033d6a7be233@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-42698a/1795700369-18AC89EA-BF431F38/10/78276251493
+X-purgate-ID: tlsNG-42698a/1795700394-19EC69EA-2E769743/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 1241
+X-purgate-size: 568
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -148,35 +148,16 @@ No functional change intended.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
---- a/xen/arch/x86/time.c
-+++ b/xen/arch/x86/time.c
-@@ -3076,12 +3076,16 @@ int tsc_set_info(struct domain *d,
-     d->arch.incarnation = incarnation + 1;
-     if ( is_hvm_domain(d) )
-     {
-+        struct vcpu *v;
-+
-         if ( hvm_tsc_scaling_supported && !d->arch.vtsc )
-             d->arch.hvm.tsc_scaling_ratio =
-                 hvm_get_tsc_scaling_ratio(d->arch.tsc_khz);
- 
-         hvm_set_rdtsc_exiting(d, d->arch.vtsc);
--        if ( d->vcpu && d->vcpu[0] && incarnation == 0 )
-+
-+        v = domain_vcpu(d, 0);
-+        if ( v && !incarnation )
-         {
-             /*
-              * set_tsc_offset() is called from hvm_vcpu_initialise() before
-@@ -3092,8 +3096,7 @@ int tsc_set_info(struct domain *d,
-              * will sync their TSC to BSP's sync_tsc.
-              */
-             d->arch.hvm.sync_tsc = rdtsc();
--            hvm_set_tsc_offset(d->vcpu[0],
--                               d->vcpu[0]->arch.hvm.cache_tsc_offset);
-+            hvm_set_tsc_offset(v, v->arch.hvm.cache_tsc_offset);
-         }
+--- a/xen/arch/x86/mm/paging.c
++++ b/xen/arch/x86/mm/paging.c
+@@ -668,7 +668,7 @@ int paging_domctl(struct domain *d, stru
+         return -EINVAL;
      }
  
+-    if ( unlikely(d->vcpu == NULL) || unlikely(d->vcpu[0] == NULL) )
++    if ( unlikely(!domain_vcpu(d, 0)) )
+     {
+         gdprintk(XENLOG_DEBUG, "Paging op on a domain (%u) with no vcpus\n",
+                  d->domain_id);
 
 
