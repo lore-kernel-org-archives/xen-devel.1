@@ -2,48 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 542FC606A31C
-	for <xen-devel@archiver.kernel.org>; Fri, 27 Nov 2026 03:51:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C0A78606A324
+	for <xen-devel@archiver.kernel.org>; Fri, 27 Nov 2026 05:45:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=selector1 header.b=NOHlKlTV
-Received: from list by lists.xenproject.org with outflank-mailman.1504434.1699769 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=valinux.co.jp header.i=@valinux.co.jp header.a=rsa-sha256 header.s=selector1 header.b=mzWGHGGZ
+Received: from list by lists.xenproject.org with outflank-mailman.1504515.1699788 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWmyu-0007ey-PY; Fri, 27 Nov 2026 03:50:40 +0000
+	id 1xWom1-0001GF-RQ; Fri, 27 Nov 2026 05:45:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1504434.1699769; Fri, 27 Nov 2026 03:50:40 +0000
+Received: by outflank-mailman (output) from mailman id 1504515.1699788; Fri, 27 Nov 2026 05:45:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWmyu-0007ep-Mp; Fri, 27 Nov 2026 03:50:40 +0000
-Received: by outflank-mailman (input) for mailman id 1504434;
- Fri, 27 Nov 2026 03:50:38 +0000
+	id 1xWom1-0001G8-Ok; Fri, 27 Nov 2026 05:45:29 +0000
+Received: by outflank-mailman (input) for mailman id 1504515;
+ Fri, 27 Nov 2026 05:45:28 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <chunjie.zhu@citrix.com>) id 1xWmys-0007eI-I4
- for xen-devel@lists.xenproject.org; Fri, 27 Nov 2026 03:50:38 +0000
+ (envelope-from <taka@valinux.co.jp>) id 1xWolz-0001Ew-4M
+ for xen-devel@lists.xenproject.org; Fri, 27 Nov 2026 05:45:28 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xWmyr-009tfL-Um
- for xen-devel@lists.xenproject.org; Fri, 27 Nov 2026 04:50:37 +0100
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xWoly-0000kf-1H
+ for xen-devel@lists.xenproject.org; Fri, 27 Nov 2026 06:45:26 +0100
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <chunjie.zhu@citrix.com>)
- id 6b08fdc2-2eae-0a2a0a5409dd-0a2a4509e328-40
- for <xen-devel@lists.xenproject.org>; Fri, 27 Nov 2026 04:50:37 +0100
-Received: from [52.101.52.66]
- (helo=BL2PR02CU003.outbound.protection.outlook.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <chunjie.zhu@citrix.com>)
- id 6b08fe0c-be1a-0a2a45090019-34653442a0a2-3
- for <xen-devel@lists.xenproject.org>; Fri, 27 Nov 2026 04:50:37 +0100
-Received: from LVXPR03MB989161.namprd03.prod.outlook.com
- (2603:10b6:408:37e::6) by CO1PR03MB5874.namprd03.prod.outlook.com
- (2603:10b6:303:9c::11) with Microsoft SMTP Server (version=TLS1_2,
+ (envelope-from <taka@valinux.co.jp>)
+ id 6b0918d2-8faa-0a2a0a5109dd-0a2a4507ad76-48
+ for <xen-devel@lists.xenproject.org>; Fri, 27 Nov 2026 06:45:24 +0100
+Received: from [52.101.125.91]
+ (helo=TYVP286CU001.outbound.protection.outlook.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <taka@valinux.co.jp>)
+ id 6b0918f1-b4ea-0a2a45070019-34657d5bfee0-3
+ for <xen-devel@lists.xenproject.org>; Fri, 27 Nov 2026 06:45:23 +0100
+Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:458::18)
+ by TY7P286MB974424.JPNP286.PROD.OUTLOOK.COM (2603:1096:403:402::23)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.662.9; Fri, 27 Nov
- 2026 03:50:35 +0000
-Received: from LVXPR03MB989161.namprd03.prod.outlook.com
- ([fe80::f728:f8a9:4e0c:d902]) by LVXPR03MB989161.namprd03.prod.outlook.com
- ([fe80::f728:f8a9:4e0c:d902%6]) with mapi id 15.21.0639.011; Fri, 27 Nov 2026
- 03:50:35 +0000
+ 2026 05:45:18 +0000
+Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::c8c9:25cd:8d13:96d6]) by OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::c8c9:25cd:8d13:96d6%4]) with mapi id 15.21.0662.007; Fri, 27 Nov 2026
+ 05:45:18 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,226 +52,216 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-Id:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=GG1i8veSkmpI4+IVKx1UqPrmq2yeM/TDxV0XPp/2gMXfBTQ5Zm4Cs18Cs/sm6AHNPnz6moWCQ1nWDPw5fn5omZsB7JDKrNr6QC9VkLF6W7zLbCmmVQYMVLTskWotsJsIC5RumPaA9+J1ymiA8Ijs/azS1Pkw8rsmVog6xHKAK3cErJWhznFNH+UVWN7FDIjuCYpSfOTaU5f/N23m/+HblMlfX2Auz5JVxmLBjaLteVewSrnKYntSOayDzkztBhGKPGfrUALbrSiLnEpNYyR7azrzMAqSQxP18O8KSDQSVbrnEz8z9//yQUzH81Q6HuhvyRRcex1Qj5xVxjpTuc7W9A==
+ b=b2dT0mUCGA5pjlmOY7RFa/aqqfF5KAnhl+yH6uvnXDKJnJG3tWEm8Pnod4zOhAQAn46elGVM7aVzvfD0pfhtCsDQwWfr+sm6LcAp9fQIDHkjhJkusmuegc5cTMEkC2u4Gr1T6tYFopFd3NEqG3BLkDMwjVlz3IcBu7w54Pi48JtDxgdOC66x2K2VXymyO9HoA0/WDpstMnON4DDe/wUWRKjlmTOor1JsfXQooBIcfPteR+DXM26bmNOLSvNubjfXaY3ttsRFllmQ57ZhdDk+Kp2Pw4JeOU1ucQGzDwkBbouCa5rob0kQgkifz3THoZCymNPlCrov7pbpFxG6l7WEsw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=hXvF+A+vfX3qYzv7uLDbQ32Gwf2NbjF3rfU+vrmV5aM=;
- b=cG6LRoM6nHZ8flcZy657CIfR7ArRzwcPIQLofqkMY41bLHKuYGi4YnXy9m36y6qy/2Zi9XCoX/yGe8luU0QFf6Aij1fUGvw3Rtk8/iBpglD/Hl82mzUVZFckyEV+zAwzAXQ+pfbnxq9Q8g11O42C6SL4/U43MY08U2hOwAiovjNYlTWD8c3rMs1K5lSc7kYhPUAQoAMJRoRNOfBOHokNGwHAIpC1OTfK+M0smLOVP/DOjtF6HfWBmNQa0B37EkDP3Jpgjj6D5doBEZWG0ZrafsSRnDfefTSZ5RNq5t8jIxYobht/J1ZQwYwnG4TuGF+1ir8+Ey42b/f7+rt1DfTa8g==
+ bh=n3hEr2P3d/ANgcTLWGUYZ6u0HlpuEh537h7YkvXwAxk=;
+ b=sntzJbxB8jMmoWpzKzvtgsUBqIwMjvIQwWZUX0I+BJQpcAZ9u1D9PSKi1hrAjQC9iVKuhT3nhmy9K5dfAT1BGQPHWdtnRtAdIEa/jJJJqpY9t+Tt2R5CDHprg+Bi/mAKFCRpp6NuYcnkl9TZo6CBAXWd1/hJ4XjNu17/EIeuYCTRbFFd1YTpLz4TLBcORR0n1a77URmwLs39CSKEVm0W1O81p8Ui+ivN5BMH5pCY3lM6rQAdjngzGijeS3LfHtRqRGbWbvtj3hTtkuf9CfJ+6scbCfd4PW4KTfnT9moYi7Ti84Zmvx1JTPZVjN+2i9fIabgCOpZJPBbnF2ggn/VHCA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
+ header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=hXvF+A+vfX3qYzv7uLDbQ32Gwf2NbjF3rfU+vrmV5aM=;
- b=NOHlKlTVFz3HWVQDoMsfXclLs1ysurCnSNws0mP+WuOJP8N+wrouzUvkSYvgTGmcW3ST2QqcPdXKg2IeJUWM1r7TgYvQgzqupQPoI9iXqTWZNRKGKvxBt7oNQwrSgyM7qeQlpYJpzfzO+MPhRAF39qOFhn4XUCNZyjP+cQ8cPuc=
+ bh=n3hEr2P3d/ANgcTLWGUYZ6u0HlpuEh537h7YkvXwAxk=;
+ b=mzWGHGGZiGUOXxRGa83wGi4cuvaqZaMQL9hc4MCg6fdbohaWZXU3gS8E1v5gd1DErQ4mOqj4rOASKryApgojFFQAiXGRSS6DCGtaj7l1eUuQzLYs9MtA1JxUI3UH+I42iAA3OUpSlI5WhaHDkY/16taVzu1hDeRdkby3WVpFdTU=
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-From: chunjie.zhu@citrix.com
+ header.d=none;dmarc=none action=none header.from=valinux.co.jp;
+From: Hirokazu Takahashi <taka@valinux.co.jp>
 To: xen-devel@lists.xenproject.org
-Cc: ross.lagerwall@citrix.com,
+Cc: michal.orzel@amd.com,
 	jbeulich@suse.com,
-	andrew.cooper3@citrix.com,
-	roger@xenproject.org,
-	jason.andryuk@amd.com,
-	teddy.astie@vates.tech,
-	Chunjie Zhu <chunjie.zhu@citrix.com>
-Subject: [PATCH v4 1/2] x86/hvm: don't let EFLAGS.IF block NMI/#MC due to nested state
-Date: Fri, 27 Nov 2026 11:49:45 +0800
-Message-Id: <20261127034946.1130719-2-chunjie.zhu@citrix.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20261127034946.1130719-1-chunjie.zhu@citrix.com>
-References: <20261127034946.1130719-1-chunjie.zhu@citrix.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Hirokazu Takahashi <taka@valinux.co.jp>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>
+Subject: [PATCH v4] xen/arm: Fix sibling mask setup to only include online CPUs
+Date: Fri, 27 Nov 2026 14:45:05 +0900
+Message-ID: <20261127054505.27222-1-taka@valinux.co.jp>
+X-Mailer: git-send-email 2.43.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: SG2PR06CA0234.apcprd06.prod.outlook.com
- (2603:1096:4:c8::14) To LVXPR03MB989161.namprd03.prod.outlook.com
- (2603:10b6:408:37e::6)
+X-ClientProxiedBy: TY4PR01CA0067.jpnprd01.prod.outlook.com
+ (2603:1096:405:370::11) To OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:604:458::18)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LVXPR03MB989161:EE_|CO1PR03MB5874:EE_
-X-MS-Office365-Filtering-Correlation-Id: 77a5b89d-6e80-4184-00cb-08df4c39979c
+X-MS-TrafficTypeDiagnostic: OS9P286MB7222:EE_|TY7P286MB974424:EE_
+X-MS-Office365-Filtering-Correlation-Id: 882e4dd4-ea83-467c-b3f6-08df4c499e74
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|376014|366016|1800799024|11063799006|5023799004|261009223027099003|18002099003|22082099003|10067099003|56012099006|261028144727099003|261026140227099003|261026121527099003|261022105027099003|261102123227099003|261021123027099003|261021121427099003;
+	BCL:0;ARA:13230040|1800799024|376014|10070799003|23010399003|366016|261009223027099003|18002099003|3023799007|10067099003|56012099006|261028144727099003|261102123227099003|261026121527099003|261026140227099003|261021135927099003|261022105027099003|261021121427099003|261021123027099003|261022075727099003;
 X-Microsoft-Antispam-Message-Info:
-	kVTAB/m9ILAY0sFw/j2toeXQGGLcFkzeObqEqGVBqxyfOeCf0LJadsR6YlSS7Ej9a7RnR9X5jN3ON6vQtMLxkVM0RfQSvkEAlxycUuc4SMOA7Db5y8sfv8stAO6MT0hit7QLfI1jW+jj8NB9JJSOzf38ljtRQCg/yMTFz7dap64N1tZe5bH8OUTcr/Et9BQaEvkrVDZqcVK+AxSCM6gcG13gnz0auP8IcgAHvhsGrO9C0C3AP1CwZM3VjuNJnSTGfXN/yZQKAOTnRhkXRS3/PDSy4E8yZPM3pMLQFuLnYJYTOXRA5GdrvxpWo5PhNUHZcKrmZqy8kPMkfu7kr5gD6BCnyP1rI2hF4GcbydcX6SHmypQhtYHGQ5gfuoe38bxu+Dn4KV1p117NrjPiqswAU796w7UmAEJYTV2snjXGBs9hPVqgktna2bJ2HvRsrCLvs5FuqJ68g76YnyBSYRMTnKXqRvHCSaEtlh0Gzr401CSxB4BKWKiG1HHEBV379mBDBFE0cbCyAVZMsAwXelPwM3i7hKSNJqKFqcuHR1Db6Rs/Z2DzEdHhJAYuSx6vqN7XPSkw5UAcnxPkiKLs/mZwq8/bNa1CSrX54YUCgVepg1HNxP9qwrc+7pMvdRMym1hvF5Rmun91bQbGEFRvIBMAdbdZ83kQ7dc9f408lO7fPiI=
+	V0n+/95UlBOFEOpmCQJ5LywapEEH2PINtSbJwTTVmdNJCKoU3/SvlTB2UYb818fsgVzgHY7NbczhZtkQKRRo3yKQSwZQfA2+uqY0ECcxqXl8Howctl2OKzM/xUo4mZEeYa0Inpp36LkSTRBC5Gq+bBn9gfORQaueJv10axzbVRo9Lq+7TbVggAIGjMaj1u153WnFy+HV9Zgr7+hMzeGXiDmaQB/zvdRQoNwhOR76Z3RnzaVCXOypfC8+JMygI6wI8Gz/ATqBJ6GKFRCqVspl8EaV/POHrOERpyzin4/vBC3Y/MitKvERgJWz9VpKwyYx9VzokgjsyLxRnFhQ2k5HTOJ1iZo2sHrlFnLzSPs3VFyhmEPDAI7ksH4xtzSwGYBQuL/+XtHoqmLlR5g3LfMyGGhFGNCWuSNV8kxCQfptgngSp0vUt+aPfN9MJQ6qsBRbURNhTTaFDk2FIr2P4JDXJa3skAwCwexQEEzoRXCd2I7KO3IIYePCbqbK7W1kxVDdoQd1GcrR3nz2Mr/uvsyJy9FTRJuFFKYSIVx9DQaIExC2s9e145CBvZjJhnOt+tBUsGhtYXJkDMLZ9MIp5IuSlh/whRHkNi8JLPwYK8TzuYsxhwRVQ74O/nvzBWLsGsssGwmNwJx6tFSHtdBmDg9rbAG2GYNqHN471BBrikvERT4=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LVXPR03MB989161.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(376014)(366016)(1800799024)(11063799006)(5023799004)(261009223027099003)(18002099003)(22082099003)(10067099003)(56012099006)(261028144727099003)(261026140227099003)(261026121527099003)(261022105027099003)(261102123227099003)(261021123027099003)(261021121427099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(10070799003)(23010399003)(366016)(261009223027099003)(18002099003)(3023799007)(10067099003)(56012099006)(261028144727099003)(261102123227099003)(261026121527099003)(261026140227099003)(261021135927099003)(261022105027099003)(261021121427099003)(261021123027099003)(261022075727099003);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?Ew20Vt9GX/PBm0tJGFGXcvGC4Yh1vDn+6jLPZ8qFaHZ5XuhOYyv+M+jFpLtu?=
- =?us-ascii?Q?iBqEyFziLaxkeiSjxCTiQP8Z2gBIV7tU99CJ3nlbhsL4JUhFttXyDeavGOaG?=
- =?us-ascii?Q?RAA+t4Jx4vx4E5UTxW2w8oLi3mOGtrIeylOJ0KaRs/J4PwfZ9T0RJeFJFgG2?=
- =?us-ascii?Q?+pCgnCIgw45jYo48R/+52wQ05L/RS7r0JS3JCn+c2RIhyjCCiZB6kIvDx1QT?=
- =?us-ascii?Q?M2479f31wuaoRPg9tKmb4n0ypAICG8OpCbxe4ulMmJTAQA6KMaEI1bcHfI7/?=
- =?us-ascii?Q?pkGn4sABzH0DlLCRTP2R2Hb/V6tVaBjoDSFhNW7srO48x+pR8u7Vo1U77T7d?=
- =?us-ascii?Q?RTse2uKtH0J37hDef3tTL+tcLBdwwyidsMLaBMn9Um5pNd9Wkahx1Jya09Vo?=
- =?us-ascii?Q?gnTbBgJ3vRLG1xw2fDXP59fs8KhcwT35Htm95fYMtav3dQ+ci0EMDc60UjB8?=
- =?us-ascii?Q?wACYeuG1C4PMxoljGEWY68sYAWziXMDN78kDTGe8SRw6AnBujnvTMnCY1SOJ?=
- =?us-ascii?Q?Bq08LG3QTUaUtxHw41pZ0V+cSfTzPHT1YHLzPrReAbrd0TE0UjkU8h/ESEG+?=
- =?us-ascii?Q?wmYV3eYUY4rE1gxIy2uB7DrkT5kjlrorhVPmFZDAd4Zjlkf3KRPXtzvtU3Oc?=
- =?us-ascii?Q?wPP2CDcbc3sjiBuu3HlCTZpo4GuPfcGkTW4zewNbeQxCoijqLXUZJvNTdzWm?=
- =?us-ascii?Q?ikxh9IhTaurpxMbptYqzUuCoZHKERhEMnsZvkStsCYia++/KFn5DZddRIbKO?=
- =?us-ascii?Q?rwR6O3Xcy1iNPV/o9pgMPqqHPSqI0FyWyxXtPzbETbvfyyxo/u+2FaPwaY+V?=
- =?us-ascii?Q?lBwvyNrXZgLJNuSgqhzft7adZmJuUtyIo5gE3V8Qa2/aEMY6/KmSNCZJrLm4?=
- =?us-ascii?Q?n1BzhFZi7WyClFxJT4Hdm66VnvDSF1Vl5a3qXhBkur/AhhZ+UjnhCg75AiU3?=
- =?us-ascii?Q?lONDBZZF1VZr6g6of8FP3K70fUpwmLTOvylo+g0+WHyuqk0XDczGkAIRvAtE?=
- =?us-ascii?Q?weK+MYVM03y2aF/ZiGmjpN8UZjHD2olYredlla0ho+iG+NdYPf3XXatpaYqs?=
- =?us-ascii?Q?uCyBhXW92DlR8qcLglm470C5+EQEunczuPEvW5ETGor44wGaC/ZB2oSHHsp7?=
- =?us-ascii?Q?jZlfmZX3xmXXfgX7N/tbph3Xcwuy3KWMIPA9lxbgaXv6lKpaAs9EMbwqfFQy?=
- =?us-ascii?Q?VZrRmSV2aIk2wxTBZBfunml//SLOeLpT5ENWl+zmJamjwJC/0yrfCrQ0iKF5?=
- =?us-ascii?Q?g3nPPHiXt1evTkvXwJgbWcB5CJW/EilQ3GCzmPqu7gNJ/j4Tu3xn41HLrbjD?=
- =?us-ascii?Q?p4mLqsWO8vx6aLs7epqysL3dvxaxFJ4HpSH9FT0oKawU7bmAoqnLyQ8fOH4o?=
- =?us-ascii?Q?SV/blm+q8T16V/UuTAB3D9QB3ha2ECASL3SHaz3iBot36DjSEC01h2Suu5A5?=
- =?us-ascii?Q?9MtbMuTy4NLN0hbLgcOu52NuqivjnUkW7hBN/aEZtIkFfiVumBSBILpQK1kf?=
- =?us-ascii?Q?reJ/VIcx17/450EXjHPieGOt6NWs/YmzeyeiGQW2xQJuVle5gHXNEvXauzIl?=
- =?us-ascii?Q?c4ga64hO1M2nPlGeTUkVdhH8bYhVzBhbuyaHoegLQnNeSgBaTKaRa/+lAIVa?=
- =?us-ascii?Q?kI2U5jfQYUm9lXcXK/PJFNHB4cEnarH32Zjg8HIkorYBqC5qhhbkbQAhysNx?=
- =?us-ascii?Q?iwULKsrcE0wleHlT+tQhGIz8zs2NtdBqz8pyzx0A9vHjBUxZ4R0vyWLfXTJz?=
- =?us-ascii?Q?l0/DuY+KXA=3D=3D?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 77a5b89d-6e80-4184-00cb-08df4c39979c
-X-MS-Exchange-CrossTenant-AuthSource: LVXPR03MB989161.namprd03.prod.outlook.com
+	=?us-ascii?Q?KzDsouXKCwDjoOlO57DJetPky2/u64rJdua7e+6bkm4ff3CJCC8mSJ4YnUzb?=
+ =?us-ascii?Q?F2G7kxk9+c5cjSr6Ry11DSZ2H1GZQ1NgIqCaAm86OibSYPteO94wJbmXTZ3L?=
+ =?us-ascii?Q?3DkiIb1VMf2B5RbMc+gQHP7xWq/2z7z2VuDcUwUNw2hpnXxosdv2z7Olj+LR?=
+ =?us-ascii?Q?Fc3yUwxlCUXd2suzza+R0D8QJMXrTNiuNDffqaTlngpLVen4wCTJsc6ELnv4?=
+ =?us-ascii?Q?4SXsD/SX0Rlk6/XkjrszLPTDhUaoh4zYZrYe8iwy6WcHzALL9Xq5SQkYEBou?=
+ =?us-ascii?Q?0nJAXBCEt9zSx+6UWpbTf1Uh/vKWayFQnLIXuwnREoCe3Dzz7UMSmKg88H4e?=
+ =?us-ascii?Q?z0ObUULqNLUse/CyEUPJ1h2y48hksp5/AKkR+qDohv2xrxDX3lbnspR/m9fM?=
+ =?us-ascii?Q?LZsEedvhvttCNSGVvldkFoc9qtIjdma1OfQJ/OGfY08h1iB0km3X3koDzgWc?=
+ =?us-ascii?Q?TLuRaQDBjA6h22TzYOcQOehjx95LmOUz72aOm6iNL/2ifYDYojEFqa8QNu/c?=
+ =?us-ascii?Q?MxhGgh8qCbN3X+ojIIDcus3m7TXkiuYJSbEsMtWbrlmDEpyXuvlXnjpjhUFN?=
+ =?us-ascii?Q?t+Wd2zBsDa7XGgmiVIzIs063KpCKriPIbODVw87/1bFLN2oM/nb/jinF+zpt?=
+ =?us-ascii?Q?wsSXgnYVy8w+Bv3YsXY2WMT45KbqCZR2hSTenhs6br5ufXXG2nken77Q3WQZ?=
+ =?us-ascii?Q?vk55Phs850gSHnUV0j6W8GSV51FRMOlGFZ4Spi2HBE4DrOXS5CcanY27TAi3?=
+ =?us-ascii?Q?Img7Ehmc8d8zVtP1R1004UXo13C078AzvMWgZ+LxaczfaXrM01pn5EVxnxe4?=
+ =?us-ascii?Q?kdvmx3f7BYeR2u98K6qnQWlSYPfX+mt/c2lj6ZFSYeQc0oGRnpFG15Zkqi4t?=
+ =?us-ascii?Q?5SgYX35MTEZBc2MkK9vQD1qL1OzAtMDkTzeLLoUV4fDNn0B9fLqzJqRymFn1?=
+ =?us-ascii?Q?qVKcsvjKTDMHk0F7EAMar0dwvLRbD7yAax8VXGpASIm38oZf+5gTFAC92SK7?=
+ =?us-ascii?Q?OB+AUrLIpY/MZsDuJwTQElz2rNigP6ee7ktcsLUQoE7QshbKkVvOLamS8njc?=
+ =?us-ascii?Q?iVYH8OLDj8RstZWBay1Nn803pDCfDbNda0YGqFXGOa+rUmX3xKs2z5CUARTd?=
+ =?us-ascii?Q?c5TCAajwn7akSVItXEFyyfZaGiGhR/YMZ7SQJReeiq8bOl80xr91xAgJo6+H?=
+ =?us-ascii?Q?pbFF88cOwNY7ivRvdQ/LZLQ2R6GmgfkaSy/GpFAsLY2lE7d+/iVENBeaCM2e?=
+ =?us-ascii?Q?oAWK53slpxq8OrbsGwf5uGDE2qOoiAx8uyGVneCKprOd6ezIqarbeVVs+EMC?=
+ =?us-ascii?Q?T7qGikwA0ZtGSjGhjWpTiPlaRobfkpn3lZgSb7YddKMbSj4+D/pEsv1a23uP?=
+ =?us-ascii?Q?DrNn8xht+ZJZ16rkh/I+m/f7sMJQ6UtOp7oPeZLzk2S2aEZdgEn+OJQuWqmI?=
+ =?us-ascii?Q?xT0AY4ayyjv17S3LiAmLEZs3Kzey1F7CqJeaL8D93WqB79ny6Fw+QI4Ipg8D?=
+ =?us-ascii?Q?ZEkRuNvArTk8cOU7vbVBugD85DUU6CV3aq0m8z5tSmU/y+5siEpkHFOixq9D?=
+ =?us-ascii?Q?JGQI/UOkazRtGprpqn5TILtBdd9sfOpgqqMPgyQK3BNlYlVjlXj7rc5TmUtC?=
+ =?us-ascii?Q?SipR5qn8DypwBAv+P+RWwawKwxJUPrBPk9bJLUmbCeLiJHG1bCV7t6rIwOOz?=
+ =?us-ascii?Q?UX8mpliKmVyEKvWDpwaii4wZPVYmwaHguw849QktY63XvNJ3Dwo2EjDRRKHE?=
+ =?us-ascii?Q?Of1oKuX5CPjOq7vJz6s/xCuPkGiauAKiCpsbT9oJqKkAVy6zxbBT4aqYGEPa?=
+X-MS-Exchange-AntiSpam-MessageData-1: lKQ1PE/JMybjrQ==
+X-OriginatorOrg: valinux.co.jp
+X-MS-Exchange-CrossTenant-Network-Message-Id: 882e4dd4-ea83-467c-b3f6-08df4c499e74
+X-MS-Exchange-CrossTenant-AuthSource: OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Nov 2026 03:50:35.1554
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Nov 2026 05:45:18.6818
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-Id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: HwlDpcDh97wC+mvtP7X0lp7O/4pT9CR8qi1WuA5jJ/E4VRNRbqZ3XIAxTs/ABRjHOGqwiIjK/rG6vtjP337hAg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR03MB5874
-X-purgate-ID: tlsNG-bad1c0/1795751437-BCECE034-5F4E03B3/0/0
+X-MS-Exchange-CrossTenant-UserPrincipalName: xGKV0RFR5bFQj8o7pjJono6uViUChmksNoWD3QUwssi0ayL4L66MeTzL19Om8x6vLHtObOkQc2LAOy9/9kmC0g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY7P286MB974424
+X-purgate-ID: tlsNG-ef75cf/1795758324-35CC7AE4-DDDEBFFE/0/0
 X-purgate-type: clean
-X-purgate-size: 4628
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+X-purgate-size: 3619
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
 	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Chunjie Zhu <chunjie.zhu@citrix.com>
+Populate the CPU sibling masks only with CPUs that are brought
+up, and remove a CPU from the masks when it goes down.
+Currently, all CPUs in cpu_possible_map are added to the masks
+at boot time, which leaves CPUs that failed to boot in the sibling
+masks and may lead the scheduler to make incorrect decisions.
 
-nhvm_interrupt_blocked() reports why an interrupt is blocked, but both
-callers, nestedsvm_vcpu_interrupt() and hvm_interrupt_blocked(), treat any
-reason as blocking every event source.  EFLAGS.IF (hvm_intblk_rflags_ie)
-doesn't mask NMI or #MC, so NMI/#MC get held pending needlessly, e.g. when
-L1 sets V_INTR_MASKING and L1's IF is clear.
-
-Have nhvm_interrupt_blocked() take the intack and report no block for
-NMI/#MC when the reason is hvm_intblk_rflags_ie.
-
-nvmx_intr_blocked() used hvm_intblk_rflags_ie for vmexit/vmentry in
-progress and a valid VM_ENTRY_INTR_INFO.  Those block every event source
-and have nothing to do with RFLAGS.IF, so report hvm_intblk_arch instead.
-This doesn't change behaviour as all callers only compare against
-hvm_intblk_none and hvm_intblk_tpr.
-
-Fixes: 3a1ef3c33fa7 ("Implement SVM specific interrupt handling")
-Fixes: 479d4619fd5b ("Nested VMX: interrupt/exception handling for n2 guest")
-Signed-off-by: Chunjie Zhu <chunjie.zhu@citrix.com>
-Reviewed-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+Fixes: 701190abb3d5 ("xen/arm: Set correct per-cpu cpu_core_mask")
+Signed-off-by: Hirokazu Takahashi <taka@valinux.co.jp>
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
 ---
-v3->v4: add Fixes: tag(s), collect Reviewed-by (Ross)
- xen/arch/x86/hvm/hvm.c             |  2 +-
- xen/arch/x86/hvm/svm/nestedsvm.c   |  2 +-
- xen/arch/x86/hvm/vmx/intr.c        |  8 ++++----
- xen/arch/x86/include/asm/hvm/hvm.h | 12 ++++++++++--
- 4 files changed, 16 insertions(+), 8 deletions(-)
+Changes in v4:
+- Mention removing the CPU from sibling masks on CPU down in the commit message.
+- Remove the redundant loop in remove_siblinginfo().
+- Avoid including changes unrelated to this commit.
 
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 4334ff678d34..95247e772d09 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -3897,7 +3897,7 @@ enum hvm_intblk hvm_interrupt_blocked(struct vcpu *v, struct hvm_intack intack)
-     if ( nestedhvm_enabled(v->domain) ) {
-         enum hvm_intblk intr;
+Changes in v3:
+- Remove the CPU from sibling maps when it goes down, introducing
+  remove_siblinginfo() to match x86 Xen.
+- Change the cpu parameter type of set_cpu_sibling_map() to
+  'unsigned int' to align with x86 Xen. Also use 'unsigned int'
+  for the cpu parameters of remove_siblinginfo() and
+  remove_cpu_sibling_map().
+- Minor code cleanups.
+
+Changes in v2:
+- Rename init_cpu_sibling_map() to set_cpu_sibling_map() to align
+  with x86.
+- Use BUG_ON() in set_cpu_sibling_map() to verify that per-cpu
+  cpu_sibling_mask and cpu_core_mask are allocated.
+
+ xen/arch/arm/smpboot.c | 34 +++++++++++++++++++++++++++++++---
+ 1 file changed, 31 insertions(+), 3 deletions(-)
+
+diff --git a/xen/arch/arm/smpboot.c b/xen/arch/arm/smpboot.c
+index 8c9072f3c1..2fc6c36ca1 100644
+--- a/xen/arch/arm/smpboot.c
++++ b/xen/arch/arm/smpboot.c
+@@ -91,15 +91,38 @@ static int setup_cpu_sibling_map(int cpu)
+          !zalloc_cpumask_var(&per_cpu(cpu_core_mask, cpu)) )
+         return -ENOMEM;
  
--        intr = nhvm_interrupt_blocked(v);
-+        intr = nhvm_interrupt_blocked(v, intack);
-         if ( intr != hvm_intblk_none )
-             return intr;
-     }
-diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
-index 0c1fa583d583..f366d9b92be3 100644
---- a/xen/arch/x86/hvm/svm/nestedsvm.c
-+++ b/xen/arch/x86/hvm/svm/nestedsvm.c
-@@ -1410,7 +1410,7 @@ nestedsvm_vcpu_interrupt(struct vcpu *v, const struct hvm_intack intack)
-     uint64_t exitinfo2 = 0;
-     ASSERT(nestedhvm_vcpu_in_guestmode(v));
- 
--    intr = nhvm_interrupt_blocked(v);
-+    intr = nhvm_interrupt_blocked(v, intack);
-     if ( intr != hvm_intblk_none )
-         return NSVM_INTR_MASKED;
- 
-diff --git a/xen/arch/x86/hvm/vmx/intr.c b/xen/arch/x86/hvm/vmx/intr.c
-index c69caa41aecd..caa2eda8256b 100644
---- a/xen/arch/x86/hvm/vmx/intr.c
-+++ b/xen/arch/x86/hvm/vmx/intr.c
-@@ -142,18 +142,18 @@ enum hvm_intblk cf_check nvmx_intr_blocked(struct vcpu *v)
-     {
-         if ( nvcpu->nv_vmexit_pending ||
-              nvcpu->nv_vmswitch_in_progress )
--            r = hvm_intblk_rflags_ie;
-+            r = hvm_intblk_arch;
-         else
-         {
-             unsigned long intr_info;
- 
-             __vmread(VM_ENTRY_INTR_INFO, &intr_info);
-             if ( intr_info & INTR_INFO_VALID_MASK )
--                r = hvm_intblk_rflags_ie;
-+                r = hvm_intblk_arch;
-         }
-     }
-     else if ( nvcpu->nv_vmentry_pending )
--        r = hvm_intblk_rflags_ie;
-+        r = hvm_intblk_arch;
- 
-     return r;
- }
-@@ -167,7 +167,7 @@ static int nvmx_intr_intercept(struct vcpu *v, struct hvm_intack intack)
-          hvm_interrupt_blocked(v, intack) == hvm_intblk_tpr )
-         return 1;
- 
--    if ( nvmx_intr_blocked(v) != hvm_intblk_none )
-+    if ( nhvm_interrupt_blocked(v, intack) != hvm_intblk_none )
-     {
-         vmx_enable_intr_window(v, intack);
-         return 1;
-diff --git a/xen/arch/x86/include/asm/hvm/hvm.h b/xen/arch/x86/include/asm/hvm/hvm.h
-index c6eb02c00924..9f844f32571c 100644
---- a/xen/arch/x86/include/asm/hvm/hvm.h
-+++ b/xen/arch/x86/include/asm/hvm/hvm.h
-@@ -678,9 +678,17 @@ static inline bool nhvm_vmcx_hap_enabled(struct vcpu *v)
- }
- 
- /* interrupt */
--static inline enum hvm_intblk nhvm_interrupt_blocked(struct vcpu *v)
-+static inline enum hvm_intblk nhvm_interrupt_blocked(
-+    struct vcpu *v, const struct hvm_intack intack)
- {
--    return alternative_call(hvm_funcs.nhvm_intr_blocked, v);
-+    enum hvm_intblk intr = alternative_call(hvm_funcs.nhvm_intr_blocked, v);
++    return 0;
++}
 +
-+    /* EFLAGS.IF doesn't mask NMI or #MC. */
-+    if ( intr == hvm_intblk_rflags_ie &&
-+         (intack.source == hvm_intsrc_nmi || intack.source == hvm_intsrc_mce) )
-+        return hvm_intblk_none;
++static void set_cpu_sibling_map(unsigned int cpu)
++{
++    unsigned int sibling;
 +
-+    return intr;
++    BUG_ON(!per_cpu(cpu_sibling_mask, cpu));
++    BUG_ON(!per_cpu(cpu_core_mask, cpu));
++
+     /*
+      * Currently we assume there is no multithread and NUMA, so
+-     * a CPU is a sibling with itself, and the all possible CPUs
++     * a CPU is a sibling with itself, and the all online CPUs
+      * are supposed to belong to the same socket (NUMA node).
+      */
+     cpumask_set_cpu(cpu, per_cpu(cpu_sibling_mask, cpu));
+-    cpumask_copy(per_cpu(cpu_core_mask, cpu), &cpu_possible_map);
++    cpumask_copy(per_cpu(cpu_core_mask, cpu), &cpu_online_map);
++    cpumask_set_cpu(cpu, per_cpu(cpu_core_mask, cpu));
+ 
+-    return 0;
++    for_each_online_cpu(sibling)
++        cpumask_set_cpu(cpu, per_cpu(cpu_core_mask, sibling));
++}
++
++static void remove_siblinginfo(unsigned int cpu)
++{
++    unsigned int sibling;
++
++    for_each_cpu(sibling, per_cpu(cpu_core_mask, cpu))
++        cpumask_clear_cpu(cpu, per_cpu(cpu_core_mask, sibling));
++
++    cpumask_clear(per_cpu(cpu_sibling_mask, cpu));
++    cpumask_clear(per_cpu(cpu_core_mask, cpu));
  }
  
- static inline int nhvm_hap_walk_L1_p2m(
+ static void remove_cpu_sibling_map(int cpu)
+@@ -314,6 +337,7 @@ smp_prepare_cpus(void)
+     if ( rc )
+         panic("Unable to allocate CPU sibling/core maps\n");
+ 
++    set_cpu_sibling_map(0);
+ }
+ 
+ /* Boot the current CPU */
+@@ -385,6 +409,8 @@ void asmlinkage noreturn start_secondary(void)
+ 
+     set_current(idle_vcpu[cpuid]);
+ 
++    set_cpu_sibling_map(cpuid);
++
+     /* Run local notifiers */
+     notify_cpu_starting(cpuid);
+     /*
+@@ -431,6 +457,8 @@ void __cpu_disable(void)
+     mdelay(1);
+     local_irq_disable();
+ 
++    remove_siblinginfo(cpu);
++
+     /* It's now safe to remove this processor from the online map */
+     cpumask_clear_cpu(cpu, &cpu_online_map);
+ 
 -- 
-2.34.1
+2.43.0
 
 
