@@ -2,49 +2,49 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D7CB7606A31F
-	for <xen-devel@archiver.kernel.org>; Fri, 27 Nov 2026 12:55:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AFA57606A31C
+	for <xen-devel@archiver.kernel.org>; Fri, 27 Nov 2026 13:15:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=lbhw/lnk
-Received: from list by lists.xenproject.org with outflank-mailman.1505032.1700016 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=i9oDAemR
+Received: from list by lists.xenproject.org with outflank-mailman.1505054.1700033 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWvU7-0003UT-KH; Fri, 27 Nov 2026 12:55:27 +0000
+	id 1xWvnd-0007EO-EC; Fri, 27 Nov 2026 13:15:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1505032.1700016; Fri, 27 Nov 2026 12:55:27 +0000
+Received: by outflank-mailman (output) from mailman id 1505054.1700033; Fri, 27 Nov 2026 13:15:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xWvU7-0003UI-H1; Fri, 27 Nov 2026 12:55:27 +0000
-Received: by outflank-mailman (input) for mailman id 1505032;
- Fri, 27 Nov 2026 12:55:26 +0000
+	id 1xWvnd-0007EH-BE; Fri, 27 Nov 2026 13:15:37 +0000
+Received: by outflank-mailman (input) for mailman id 1505054;
+ Fri, 27 Nov 2026 13:15:35 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a21d131f21000bb85@swg.vates.tech>)
- id 1xWvU6-0003UB-IT
- for xen-devel@lists.xenproject.org; Fri, 27 Nov 2026 12:55:26 +0000
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a21d259bfe000bb85@swg.vates.tech>)
+ id 1xWvnb-00071x-Lt
+ for xen-devel@lists.xenproject.org; Fri, 27 Nov 2026 13:15:35 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xWvU5-00A2ja-V2
- for xen-devel@lists.xenproject.org; Fri, 27 Nov 2026 13:55:25 +0100
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xWvnb-001Vcr-21
+ for xen-devel@lists.xenproject.org; Fri, 27 Nov 2026 14:15:35 +0100
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a21d131f21000bb85@swg.vates.tech>)
- id 6b097db8-8faa-0a2a0a5109dd-0a2a450993c2-24
- for <xen-devel@lists.xenproject.org>; Fri, 27 Nov 2026 13:55:25 +0100
-Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a21d259bfe000bb85@swg.vates.tech>)
+ id 6b09826e-2eae-0a2a0a5409dd-0a2a4508c26e-32
+ for <xen-devel@lists.xenproject.org>; Fri, 27 Nov 2026 14:15:35 +0100
+Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a21d131f21000bb85@swg.vates.tech>)
- id 6b097dbd-be1a-0a2a45090019-b9ff1c22a195-3
- for <xen-devel@lists.xenproject.org>; Fri, 27 Nov 2026 13:55:25 +0100
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a21d259bfe000bb85@swg.vates.tech>)
+ id 6b098276-f659-0a2a45080019-b9ff1c128477-4
+ for <xen-devel@lists.xenproject.org>; Fri, 27 Nov 2026 14:15:34 +0100
 Received: from localhost
- by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a21d131f21000bb85.004 for <xen-devel@lists.xenproject.org>
+ by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a21d259bfe000bb85.007 for <xen-devel@lists.xenproject.org>
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Fri, 27 Nov 2026 12:55:22 +0000
-Received: from julian.home (82-67-211-29.subs.proxad.net [82.67.211.29])
- (Authenticated sender: julian.vetter@vates.tech)
- by mail2.vates.fr (Postfix) with ESMTPSA id BFB8880D5B;
- Fri, 27 Nov 2026 13:55:20 +0100 (CET)
+ Fri, 27 Nov 2026 13:15:33 +0000
+Received: from [192.168.1.72] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
+ [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 2FCBF8346D;
+ Fri, 27 Nov 2026 14:15:33 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -53,191 +53,98 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=Gc8AtDXqtpraRJn63/T6QGK6ZgppKCiKt44/R96hlEk=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=lbhw/lnknHW9UTd46nrdtpjAaAUUeWVwf6IEZv9rPudnJRG0QtynI5+kZpmY6/qURcOO0qnRg
- +67sKLXxNJfyna/4XM9hZ7hPuqnZIB2Wzc2I9aXgIsXC+51lg/ZsZGxT8Nck6EVPnTflIQk3i8a
- EXtnMw8wa3D1Ci+3oGniUWl5JhpVjY3OpMP7JQW2tRGSCNzCZVPF8LpC3YTT5ZQweXxJpkyvdrw
- sBNFgEQX4Uh1VCbPsVVmO8b1pSoraycBSsbX4VTZVcomji/hiFfHc0fGsBGX6Fki/ec16yAxOab
- 9EIRL1GOYipA7QSmY6RYMhcnSOPA0QSXqE60XJ9rsdtA==
-X-Zone-Loop: cbf135ebefa58e9cf1049895579b71c672db4feee111
+ q=dns/txt; s=selector1; bh=Bu2Gnql/TCsQcTOH3Bub0JMJuZlg24xQJKlkp/xVy4E=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
+ b=i9oDAemRh9LtvzCE/Pv4gYLOYlulRgxFJT5m7Hv4pvxpFy6UyHHBDO6peZ2JyJWPWnIaY2Q/M
+ 74lS2IOjGk0IMHQErGhy7kTICkBXVbM0KpR0q56ZSVXK86Varr3w400FCZP7lG7RczbF/IbNg2n
+ CLwPmhPEfAomq/qnxixygAnJh+syCqOxGP/+avKMxqf4ZRBm4bjkYdKsmjcZ1M1fCZwGXdsJ7qo
+ TO8Rd4XKlQpsIM9WyMy6V43S6xgRKhI8BONTdVoOLZJA4fKozVxx+04+qTs8Ec503pkYH+X9Zli
+ KyoI1Wy8BlWjnD95hthi7y25tvsTCEYLs0mhGD4etIQQ==
+X-Zone-Loop: 2fde0ed4abf32f40e24e6513dcba599679cda717c4c7
 x-campaign-type: default
-x-transaction-id: d027b9fd-a17e-42b9-a17a-144c15d79982
-x-swg-uid: 01-6fc07095-bf53-400d-9231-014f4472c513
+x-transaction-id: 49707f84-ca91-4b8f-93af-3d3093f542b0
+x-swg-uid: 01-4b97fd19-ee33-4e2e-b13c-066692841156
 X-Mailer: Sweego
 Message-ID:
- <1795784122.8631fc262581453bbf619ec5b2062170.1a21d131f21000bb85@vates.tech>
-x-swg-bid: 1795784122.8631fc262581453bbf619ec5b2062170.1a21d131f21000bb85
+ <1795785333.8631fc262581453bbf619ec5b2062170.1a21d259bfe000bb85@vates.tech>
+x-swg-bid: 1795785333.8631fc262581453bbf619ec5b2062170.1a21d259bfe000bb85
 Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
 x-campaign-id: default
 x-client-id: 8631fc262581453bbf619ec5b2062170
-From: Julian Vetter <julian.vetter@vates.tech>
-To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Julian Vetter <julian.vetter@vates.tech>
-Subject: [PATCH v2 1/1] tools/tests: pick a GIC version for ARM test domains
-Date: Fri, 27 Nov 2026 13:55:16 +0100
-In-Reply-To: <1795783916.8631fc262581453bbf619ec5b2062170.1a21d0ffa91000bb85@vates.tech>
-References: <1795783916.8631fc262581453bbf619ec5b2062170.1a21d0ffa91000bb85@vates.tech>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.1f2.74a166bff09f9e35.1a21d131b0b.5ae61295e3302fd4=-"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH 1/2] xen/riscv: implement udelay()
+From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+To: Anandu Padinhare <Anandu.Padinhare@electrifex.com>
+Cc: xen-devel@lists.xenproject.org, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>, 
+ Connor Davis <connojdavis@gmail.com>, 
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>, andrew.cooper3@citrix.com, 
+ Anthony PERARD <anthony.perard@vates.tech>, 
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, 
+ Julien Grall <julien@xen.org>, roger@xenproject.org, 
+ Stefano Stabellini <sstabellini@kernel.org>
+In-Reply-To: <MA0PR01MB92176C8ABCF9CDCDD772D4C9FD412@MA0PR01MB9217.INDPRD01.PROD.OUTLOOK.COM>
+References: <MA0PR01MB92178FEAFBB95A225781351CFD412@MA0PR01MB9217.INDPRD01.PROD.OUTLOOK.COM>
+ <MA0PR01MB92176C8ABCF9CDCDD772D4C9FD412@MA0PR01MB9217.INDPRD01.PROD.OUTLOOK.COM>
+Date: Fri, 27 Nov 2026 14:15:25 +0100
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795785327; l=1313;
+ i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
+ bh=qqZlj1uvwXXdx7uZvcUQYd80GhYTLDslh5PA/PV5Jn4=;
+ b=sdS2dm/Ac00gKVlOIPfhOKMSvzWOuDFDsGGa6BDR3xgkpUT3GiILdib4zzpbUhmMjjDg6RZUe
+ SgFTfe4CBPNDJGOBBYRQWIbrNSuj3qE3kbJn+s5dZQS5pb/AB5b1OKb
+X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
+ pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1795784121099
-X-purgate-ID: tlsNG-bad1c0/1795784125-FC610034-2979F66A/0/0
+X-Bm-Transport-Timestamp: 1795785333382
+X-purgate-ID: tlsNG-c1860d/1795785335-D5D4887B-5FFA8361/0/0
 X-purgate-type: clean
-X-purgate-size: 4916
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-purgate-size: 1313
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
-	version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
+	autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
----=Part.1f2.74a166bff09f9e35.1a21d131b0b.5ae61295e3302fd4=-
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+> udelay() is still a stub that hits BUG_ON(), so mdelay() can't be used
+> on RISC-V, for example to honour the delay in machine_restart().
+> 
+> Busy-wait on the time CSR instead, as Linux's RISC-V __delay() does.
+Instead of what? Maybe:
 
-The tests test-mem-claim, test-paging-mempool and test-resource create
-ARM domains with xen_arch_domainconfig set to zero, i=2Ee=2E, gic_version
-XEN_DOMCTL_CONFIG_GIC_NATIVE, which has been removed=2E Thus, domain
-creation fails=2E
+  Implement udelay() by busy-waiting on the time CSR, as Linux's RISC-V
+  __delay() does.
 
-So, pick the GIC version from the XEN_SYSCTL_PHYSCAP_ARM_GIC_V2/V3
-capability bits reported by XEN_SYSCTL_physinfo instead=2E Use GICv3 if
-available, else GICv2, else fail the test=2E
+> Convert the delay to timer ticks once, multiplying before dividing and
+> rounding up so that short delays aren't cut to zero ticks, then spin
+> until that many ticks have passed.
+> 
+> cpu_khz is only set by preinit_xen_time(). Before that it is 0, so the
+> tick count is 0 and udelay() returns without waiting. This is also why
+> the loop doesn't use get_s_time(): it divides by cpu_khz, which is a
+> division by zero before then.
+> 
+> Assisted-by: Claude
+Nit: according to sending-patches.pandoc the form should be Assisted-by:
+AGENT:MODEL, e.g. "Assisted-by: Claude:claude-opus-5-5".
 
-Signed-off-by: Julian Vetter <julian=2Evetter@vates=2Etech>
----
- tools/tests/mem-claim/test-mem-claim=2Ec        |  8 ++++++++
- =2E=2E=2E/paging-mempool/test-paging-mempool=2Ec      | 19 ++++++++++++++=
-+++++
- tools/tests/resource/test-resource=2Ec          | 11 +++++++++++
- 3 files changed, 38 insertions(+)
+> [ ... 33 lines skipped ... ]
+> +
+> +void udelay(unsigned long usecs)
+> +{
+When cpu_khz is 0 there is nothing to wait for, so there is no need to
+compute ticks or read the counter. Wouldn't an explicit early return be
+clearer? It would also make the comment unnecessary:
 
-diff --git a/tools/tests/mem-claim/test-mem-claim=2Ec b/tools/tests/mem-cl=
-aim/test-mem-claim=2Ec
-index 69dc99cfdd=2E=2Ede59c3d50c 100644
---- a/tools/tests/mem-claim/test-mem-claim=2Ec
-+++ b/tools/tests/mem-claim/test-mem-claim=2Ec
-@@ -9,6 +9,7 @@
- #include <xenctrl=2Eh>
- #include <xenforeignmemory=2Eh>
- #include <xengnttab=2Eh>
-+#include <xen-tools/arm-arch-capabilities=2Eh>
- #include <xen-tools/common-macros=2Eh>
-=20
- static unsigned int nr_failures;
-@@ -72,6 +73,13 @@ static void run_tests(void)
-         create=2Eflags &=3D ~XEN_DOMCTL_CDF_hvm;
-         create=2Earch=2Eemulation_flags =3D 0;
-     }
-+#elif defined(__arm__) || defined(__aarch64__)
-+    if ( arch_capabilities_arm_gic_v3(physinfo=2Earch_capabilities) )
-+        create=2Earch=2Egic_version =3D XEN_DOMCTL_CONFIG_GIC_V3;
-+    else if ( arch_capabilities_arm_gic_v2(physinfo=2Earch_capabilities) =
-)
-+        create=2Earch=2Egic_version =3D XEN_DOMCTL_CONFIG_GIC_V2;
-+    else
-+        return fail("  No supported GIC version\n");
- #endif
-=20
-     rc =3D xc_domain_create(xch, &domid, &create);
-diff --git a/tools/tests/paging-mempool/test-paging-mempool=2Ec b/tools/te=
-sts/paging-mempool/test-paging-mempool=2Ec
-index 0e03e2e4a0=2E=2Eaebe29af27 100644
---- a/tools/tests/paging-mempool/test-paging-mempool=2Ec
-+++ b/tools/tests/paging-mempool/test-paging-mempool=2Ec
-@@ -9,6 +9,7 @@
- #include <xendevicemodel=2Eh>
- #include <xenforeignmemory=2Eh>
- #include <xengnttab=2Eh>
-+#include <xen-tools/arm-arch-capabilities=2Eh>
- #include <xen-tools/common-macros=2Eh>
-=20
- static unsigned int nr_failures;
-@@ -24,6 +25,8 @@ static xendevicemodel_handle *dh;
- static xenforeignmemory_handle *fh;
- static uint32_t domid =3D DOMID_ANY;
-=20
-+static xc_physinfo_t physinfo;
-+
- static struct xen_domctl_createdomain create =3D {
-     =2Eflags =3D (XEN_DOMCTL_CDF_hvm |
-               XEN_DOMCTL_CDF_hap |
-@@ -370,6 +373,22 @@ int main(int argc, char **argv)
-     if ( !fh )
-         err(1, "xenforeignmemory_open");
-=20
-+    rc =3D xc_physinfo(xch, &physinfo);
-+    if ( rc )
-+        err(1, "Failed to obtain physinfo");
-+
-+#if defined(__arm__) || defined(__aarch64__)
-+    if ( arch_capabilities_arm_gic_v3(physinfo=2Earch_capabilities) )
-+        create=2Earch=2Egic_version =3D XEN_DOMCTL_CONFIG_GIC_V3;
-+    else if ( arch_capabilities_arm_gic_v2(physinfo=2Earch_capabilities) =
-)
-+        create=2Earch=2Egic_version =3D XEN_DOMCTL_CONFIG_GIC_V2;
-+    else
-+    {
-+        fail("  No supported GIC version\n");
-+        goto out;
-+    }
-+#endif
-+
-     rc =3D xc_domain_create(xch, &domid, &create);
-     if ( rc )
-     {
-diff --git a/tools/tests/resource/test-resource=2Ec b/tools/tests/resource=
-/test-resource=2Ec
-index 236da0dcd4=2E=2E4771425587 100644
---- a/tools/tests/resource/test-resource=2Ec
-+++ b/tools/tests/resource/test-resource=2Ec
-@@ -7,6 +7,7 @@
- #include <xenctrl=2Eh>
- #include <xenforeignmemory=2Eh>
- #include <xengnttab=2Eh>
-+#include <xen-tools/arm-arch-capabilities=2Eh>
- #include <xen-tools/common-macros=2Eh>
-=20
- static unsigned int nr_failures;
-@@ -213,6 +214,16 @@ static void test_domain_configurations(void)
-                 continue;
-             }
-         }
-+#elif defined(__aarch64__) || defined(__arm__)
-+        if ( arch_capabilities_arm_gic_v3(physinfo=2Earch_capabilities) )
-+            t->create=2Earch=2Egic_version =3D XEN_DOMCTL_CONFIG_GIC_V3;
-+        else if ( arch_capabilities_arm_gic_v2(physinfo=2Earch_capabiliti=
-es) )
-+            t->create=2Earch=2Egic_version =3D XEN_DOMCTL_CONFIG_GIC_V2;
-+        else
-+        {
-+            fail("  No supported GIC version\n");
-+            continue;
-+        }
- #endif
-=20
-         rc =3D xc_domain_create(xch, &domid, &t->create);
---=20
-2=2E53=2E0
-
-
+    if ( !cpu_khz )
+        return;
 
 -- 
-Julian Vetter | Vates Hypervisor & Kernel Developer
-
-XCP-ng & Xen Orch=
-estra - Vates solutions
-
-web: https://vates=2Etech
----=Part.1f2.74a166bff09f9e35.1a21d131b0b.5ae61295e3302fd4=---
+Baptiste Le Duc <baptiste.le-duc@vates.tech>
 
