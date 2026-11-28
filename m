@@ -2,48 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB761606A31E
-	for <xen-devel@archiver.kernel.org>; Fri, 27 Nov 2026 23:23:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0F06C606A31C
+	for <xen-devel@archiver.kernel.org>; Sat, 28 Nov 2026 12:41:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=selector1 header.b=CQatceyc
-Received: from list by lists.xenproject.org with outflank-mailman.1505825.1700197 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=selector1 header.b=slXA9sk2
+Received: from list by lists.xenproject.org with outflank-mailman.1506365.1700206 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xX5HB-00006u-D1; Fri, 27 Nov 2026 23:22:45 +0000
+	id 1xXHjr-00052B-2g; Sat, 28 Nov 2026 12:41:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1505825.1700197; Fri, 27 Nov 2026 23:22:45 +0000
+Received: by outflank-mailman (output) from mailman id 1506365.1700206; Sat, 28 Nov 2026 12:41:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xX5HB-00006m-9Q; Fri, 27 Nov 2026 23:22:45 +0000
-Received: by outflank-mailman (input) for mailman id 1505825;
- Fri, 27 Nov 2026 23:22:44 +0000
+	id 1xXHjq-000522-To; Sat, 28 Nov 2026 12:41:10 +0000
+Received: by outflank-mailman (input) for mailman id 1506365;
+ Sat, 28 Nov 2026 12:41:09 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper@citrix.com>) id 1xX5H9-00006g-W1
- for xen-devel@lists.xenproject.org; Fri, 27 Nov 2026 23:22:44 +0000
+ (envelope-from <andrew.cooper@citrix.com>) id 1xXHjp-00051w-Bn
+ for xen-devel@lists.xenproject.org; Sat, 28 Nov 2026 12:41:09 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xX5H9-00GoVR-1w
- for xen-devel@lists.xenproject.org; Sat, 28 Nov 2026 00:22:43 +0100
-Received: from [10.42.69.2] (helo=localhost)
+ id 1xXHjo-000OR6-Jd
+ for xen-devel@lists.xenproject.org; Sat, 28 Nov 2026 13:41:08 +0100
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <andrew.cooper@citrix.com>)
- id 6b0a106b-2eae-0a2a0a5409dd-0a2a45028106-28
- for <xen-devel@lists.xenproject.org>; Sat, 28 Nov 2026 00:22:42 +0100
-Received: from [52.101.48.13]
- (helo=MW6PR02CU001.outbound.protection.outlook.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6b0acbd4-2eae-0a2a0a5409dd-0a2a4509df46-24
+ for <xen-devel@lists.xenproject.org>; Sat, 28 Nov 2026 13:41:08 +0100
+Received: from [40.107.201.32]
+ (helo=CH4PR04CU002.outbound.protection.outlook.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <andrew.cooper@citrix.com>)
- id 6b0a10c0-4900-0a2a45020019-3465300d8286-3
- for <xen-devel@lists.xenproject.org>; Sat, 28 Nov 2026 00:22:42 +0100
+ id 6b0acbe2-be1a-0a2a45090019-286bc920a690-3
+ for <xen-devel@lists.xenproject.org>; Sat, 28 Nov 2026 13:41:07 +0100
 Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
- by SA1PR03MB6450.namprd03.prod.outlook.com (2603:10b6:806:1c1::9)
+ by SJ0PR03MB5728.namprd03.prod.outlook.com (2603:10b6:a03:2dc::14)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.662.10; Fri, 27 Nov
- 2026 23:22:37 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.662.6; Sat, 28 Nov
+ 2026 12:41:04 +0000
 Received: from CH8PR03MB8275.namprd03.prod.outlook.com
  ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::a70d:dc32:bba8:ce37%4]) with mapi id 15.21.0662.007; Fri, 27 Nov 2026
- 23:22:36 +0000
+ ([fe80::a70d:dc32:bba8:ce37%4]) with mapi id 15.21.0662.007; Sat, 28 Nov 2026
+ 12:41:03 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -54,34 +54,34 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=KacSSNdJXZOPSzpYrUypmU7OO31ZUzs8rZY3cg+RF4KywZW52IhASzf6wQysVtx/r2UpW0f6cDEQlPdvJ6hsmkindc8Zv4kpqo5Q5kelRVxcNliIdFuqZ+cIlYxUM3iHw45QRnJyqPyDx357F8EV8R2PYC8s0gMsM8RdkpimTeepZ02VD3ZGmjYrPkrTowKTkbXYl2Jmp/0kbzoUW6xNi7xQyjkG0wcPVDSbFxJS+EWerffnTo/XsL3OSiht8ZNzNhbTDenxoui8HcLmCkEqmdM+T4fgEG9otheZnO5kGiEQ3k5u0Kr+2KMdWWLwGooxWVham+EMAG6W83iHs9BPRA==
+ b=S3ClT7S0omOhNta/rnqik5or85Mwj8c+mDg5rwuUG7lMVVdBA4IGMcSPGyHOIkDjEZZNlnIPxbWBtjwaG5n+Fmt532EdQs6mj9CgEfQ+Yyksd/itU3JSHTMOVM2dVOtwY/jDEeXFUAdsQX0wi8ccYv7HeunsLwVKF9ZYFlIafKqT5enG1XTLeN3dZU094z+nBK9IE6oPdUaMACu4u0bdWskDMsVFGGR0MEECMnE8Mcrh0oytTjXzYRfujw3CJbP6QoAE3JXzcYWKABbIx0cnGx5R9OupgEJxhGls1sPF13MabK4vPqdLUnIbQ75n/R3caL9XzQzMU3OcLXpqWYf1nQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=uvH2ek0ppFzPoqq+czljMkeoC8O4rDlRo6qsgKsi7Qc=;
- b=y/VPn3uXO6K/AK0HOtw3LXl9cNESNsDRAX7lM5z7A7CdT90EBkhKXxi9hNBOIqp8PeZj+7qHk6gjYAvotTO9aHmlawuCewNOxubBE6u5yLm+/4jicetKWpuJFqa+x3l38jCoo+slAHDAN5P0j3UecU+Ge7szXF5PMFLIK9OFaHGh12rqd3QhByHnXjRsFAyE5zlY9l5aDqYhE5OzrLNlL6p1bqPTT6xTyVDie8OdoIhYwYRI6V8DjSqvpmkeyXE4oIBgq3JmoM0pzFwIFxdcbbDe5YHO+uCQELUJpntm749gRbdEeaZmSDHGfw6aXPfyBY6rXl/0v9KXoqrsXX2zQQ==
+ bh=Y3drNNuU3PSRuIkFK19H81CgFIykgnX3vO/2UnScJYo=;
+ b=C3xVPyxR0nNgA40xke3Z/v/kBJMTsWt8Umw6BbLCT2336sXZ+4+oT9uYayYxExPWJRvMftJ8/sSjmScLGBurSVt1CuXqjkQ0S4DghZvsITk3rmE5GOpBu6IuXoiKBVvFuU8lHE1vWWeDzUolYjv9Ayd2rjXPBp8hjlJfbsWjy8LnsXJJhx5mn1hyMP3y1RzbU6MrtiOeZ/zot/aj1wEhD+FfeQp+DfttOnHaWCKQKcrr+vixP4vPXzq2j7+IJaglJAO2/LOb/v/4krU7xW/yZZRxFBII21mFTb125LVVab579hPhiCB0puNDVY3VHdx/9r1xHVXwehHJKbcwaq8rNQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
  dkim=pass header.d=citrix.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uvH2ek0ppFzPoqq+czljMkeoC8O4rDlRo6qsgKsi7Qc=;
- b=CQatceycqGqZ8T2odX7QF+kmzZPrzMOmk14u2/mKNBZptC81JO10KMg/Y4AnN82E3wbs9Yx+/TCPVSst2H1s2jQkqfBmQkA+ciEBjQt8nslBtUjyZwlCW+nA0wQMJIdoVlIlIQlHz7hou2Pc7eKA1wPcD7aIvzktChi9s1ccNbk=
+ bh=Y3drNNuU3PSRuIkFK19H81CgFIykgnX3vO/2UnScJYo=;
+ b=slXA9sk2lL2UIhpqQNz95jxz0KiN9sIeQhE9dxxAVaaAbDqJj9awgMYSlcGnTe5qMc1eby1ydgUNMagGn3z3PB+m3A+SluPKaJA9vW2SiDZJ0c9p8f2erHGJEyGimMK9q2uw1yxbWL8g18Chi0q+0d3gh1ZhpnVVld885P9QAs0=
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <681b7764-7c79-43f6-923a-e09e1566946d@citrix.com>
-Date: Fri, 27 Nov 2026 23:22:33 +0000
+Message-ID: <9a640944-5f22-4d7f-b37c-22562f8ebc28@citrix.com>
+Date: Sat, 28 Nov 2026 12:40:59 +0000
 User-Agent: Mozilla Thunderbird
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Andrii Sultanov <andriy.sultanov@vates.tech>,
- Guillaume Thouvenin <guillaume.thouvenin@vates.tech>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Michal Orzel <michal.orzel@amd.com>,
  Anthony PERARD <anthony.perard@vates.tech>
-Subject: Re: [PATCH 1/2] tools/ocaml: check physinfo and domain_getinfolist in
- the bindings test
+Subject: Re: [PATCH v2 1/1] tools/tests: pick a GIC version for ARM test
+ domains
 To: Julian Vetter <julian.vetter@vates.tech>, xen-devel@lists.xenproject.org
-References: <1795790988.8631fc262581453bbf619ec5b2062170.1a21d7be52c0004767@vates.tech>
- <1795791234.8631fc262581453bbf619ec5b2062170.1a21d7fa6080004767@vates.tech>
+References: <1795783916.8631fc262581453bbf619ec5b2062170.1a21d0ffa91000bb85@vates.tech>
+ <1795784122.8631fc262581453bbf619ec5b2062170.1a21d131f21000bb85@vates.tech>
 Content-Language: en-GB
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
@@ -127,212 +127,108 @@ Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
  B8WrhBLXDiYlyJT6zOV2yZFuW47VrLsjYnHwn27hmxTC/7tvG3euCklmkn9Sl9IAKFu29RSo
  d5bD8kMSCYsTqtTfT6W4A3qHGvIDta3ptLYpIAOD2sY3GYq2nf3Bbzx81wZK14JdDDHUX2Rs
  6+ahAA==
-In-Reply-To: <1795791234.8631fc262581453bbf619ec5b2062170.1a21d7fa6080004767@vates.tech>
+In-Reply-To: <1795784122.8631fc262581453bbf619ec5b2062170.1a21d131f21000bb85@vates.tech>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: LO4P123CA0405.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:189::14) To CH8PR03MB8275.namprd03.prod.outlook.com
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: LO6P265CA0028.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:2ff::12) To CH8PR03MB8275.namprd03.prod.outlook.com
  (2603:10b6:610:2b9::7)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|SA1PR03MB6450:EE_
-X-MS-Office365-Filtering-Correlation-Id: 695dfdf3-6c65-4e84-aff0-08df4cdd52ab
+X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|SJ0PR03MB5728:EE_
+X-MS-Office365-Filtering-Correlation-Id: 50e7283f-69fe-45fe-1525-08df4d4cdd1e
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|366016|376014|23010399003|10067099003|56012099006|261026121527099003|261026140227099003|261022105027099003|261021121427099003|261021123027099003|261028144727099003|261102123227099003|261009223027099003|18002099003|22082099003|5023799004|4143699003|11063799006|6133799003|3023799007;
+	BCL:0;ARA:13230040|366016|376014|23010399003|1800799024|261021121427099003|56012099006|11063799006|10067099003|261022105027099003|261026121527099003|261026140227099003|261028144727099003|261102123227099003|18002099003|22082099003|6133799003|261009223027099003|4143699003;
 X-Microsoft-Antispam-Message-Info:
-	pSrSS6R3d1l23UrpPuGF9h26i7rVQ9qOl4dtaadE+EQguM9m4ms5JFlxlfHeneEbGsrwfcFpH27EDC92TkgFDXvVWIA06aJ72k9Nslhm4dtXAuNEVi3pTizpfvBBOg2i9ObMn6REkTwEd05Nan4KhNeMfK1mN3QiKQksXkCF7Rz7EXqKjGg5q43TwguYRqc6C/DuTMHgmJjl03wjcBM/H3PDLirE7HLqLVGb4bH2koF30Daf7/A1XWK3GMj5qTY83J1QpSDHTmDlSmuVfCG1NlCPn8VxvlbJIocE5HH08Ro/06IRIxHkHQXUcR/azwtMhnZkWgZ47wFd3jleLa6JxtuovGhr6OAuZD1uQQtjB3H7zEB9KlFjXAfFNfRwbO5M9pdITxlHOl3T6YwzvfW71EEUQMMNVxUFxMNPSGj9QYOuAMdGAM42jKVqf4Ky53yfr8yDGhzFcSGDHHoOnbDt+aA7W5D/XmlpaV9/pTUebtXu+eYNcagTv/+8gSAvKKTklGISWys3Yi+Vq3+8j7n0A51AtT7KVdbcRvHWI2VgVP7qLvhCI8xPBkYezxkEwiRyDdJMsOIxg66t93f9pc0U0PkwvVbu6NEZqGC/li1aU6lPey7xB4ybr6jvLTaFHn6PhEVhkjjGj0X3EARdnQ1npwzp+GBZ1L45hf8SiiMXTV0=
+	XTsc/cpupUxETHdbCFsWyEYNhAhiLCT/+07gWFac29g3UpgbtT4bYomr7JqwNLSlLV8Cw3apOvLkseqqozVXyc20nFKYG4BhYJf2JzjxOW3shCkROl3LlD95ws0KVKu5uN0bGQA/zGAjjcXq68Ci9RT7ZJe8H7LirMuqMg3QqcmjX7sRFmd7zDR43NtMJdxDuO+3UlvFH0ZMBE0a0S0AhDO60YHJKT6XYZPpnzM6+1uGpoqFzagzXz7X7dzLUZKId3sI6PP7bctkyqHZae1PiivXi1nhVAvZ8fi9ZPRY/2DLfvMzUsJziB3uTXhD68IlZPgSbph781L/b777ph2YmSQSdIep2pvCYe+WLxATULtxYtcikeuxMCKkmLX7YfcGzFLN0PXU2tQ7FqO/Sfy45Dyej62o2+f4lpKDcbcQhk0JLdg5NaGxjSdXa0KO2vJ1DgM7J0iyEVP5Bzr1bnNHyLaaRf4WUtRc75K3T1k6qJKajLMqPmRH9feQYlMlZhPsc32C+iK5yap5JzOo9KLMUbGpLex5xV+fjSu5uEWgdEnFS1hY8CUzgK8RogDbxzxy2GaYfiaJ5ypKnOkA4YqgU193FfQovwmQY9NBpWMH3wkQGnySmEttjuz7nkbzaEWmnHW/02Zgq+7EfB6PZjRFJXUh9RBfMdO2Jp/o+vUrrCw=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(23010399003)(10067099003)(56012099006)(261026121527099003)(261026140227099003)(261022105027099003)(261021121427099003)(261021123027099003)(261028144727099003)(261102123227099003)(261009223027099003)(18002099003)(22082099003)(5023799004)(4143699003)(11063799006)(6133799003)(3023799007);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(23010399003)(1800799024)(261021121427099003)(56012099006)(11063799006)(10067099003)(261022105027099003)(261026121527099003)(261026140227099003)(261028144727099003)(261102123227099003)(18002099003)(22082099003)(6133799003)(261009223027099003)(4143699003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?N2hTMjNhSkczT05td3NadndsWDdZWEw2UklFQndhTG9BNVREQUlOaWZKcHl4?=
- =?utf-8?B?dldrZUdEcWlRN1JYVFlCSWFKUm51WXZ0UU9rZm1tMnRvamZMYjhVNlVEYS9W?=
- =?utf-8?B?eVE1b01tN2EwYmFNMlJaSm93ZGd1eHNMV29EUWsxTFc3em1laEpNeC9XaGFW?=
- =?utf-8?B?aDExWVgvczRmL0hxOGhLOTQ4WE1pQVpzMU1jN2YvNTZrYXhFbkpwb0M0SW5K?=
- =?utf-8?B?cEJKcnRLanl5Y2tCYzhvTEhybXBKZkpBc0dQbzhwcE1HVER0M2VSWEhVN29U?=
- =?utf-8?B?ZnRJeDNyZlArTVJ6WUFSRytrakZUd0Y2cGUxcmRJbE9xTG8zcVRPUmtuYnNh?=
- =?utf-8?B?TWhtNkwya0xJVmZGVzc3SHdSWVJqZGExUDhDKzdpekIvN2hEY0c4TlFtRko5?=
- =?utf-8?B?cUN2clNNRXNLMVVvY21nckNvcXRjbndlbE1PczRSN091aTdJSWs3eU5JeEtO?=
- =?utf-8?B?SjJ6bnIxYUpyWUMxanlTVWdtOFdtOCtNcFRZSWhHNnVtL1hBOXNNWVlxbW5p?=
- =?utf-8?B?aS8yY0l6UEtXU3JGckM3N21Yd2pSMnR6SThXL0dPNXQ2OFVmd09kbWtMWi9P?=
- =?utf-8?B?YVNMeHpQbmdnYjh3aEFXUHhScTF4Nk1jbTd2YzFaeC9HamlTZDY4TkNKMHlK?=
- =?utf-8?B?M1VQNkFRcEJ3RGdPVm5Td0FMZUJ0d2ZKMk1MaVpUUVptUkp0czFLME5aSGFs?=
- =?utf-8?B?ZE9YdW5NK25tVVNLMmFHRmY3Sm0xVWFQSUkxQVRNVjZCdk9tQnpDOWI2KzRi?=
- =?utf-8?B?VFdjT0FlL21yYUFUQWxtNDI0TTBBZ0V3UUpxOFVNQ1ljc3EwMlZFUlVyUmZk?=
- =?utf-8?B?YmpvcFRVc0dtQ3Y0UEZYTXNIT0habGh3S29lRHBWQnBIQ2w1SDltcWNoQXZi?=
- =?utf-8?B?WmdyYnYxSVlZYURLRkgvbGhQZ0p4YTQ0N3Y1WlRVVHYrNU5WWVp6SkJHK21V?=
- =?utf-8?B?b1FwRjI1UkFOWDFxQm9FajFJbmpQM25jUXBEMU9CVVo1YWl0K2pqcFYxejFx?=
- =?utf-8?B?aW5QViswTGsxamNpUFhpMU5iU0VEVzBRQXNIVmVFcER3NkxoWDBWTDUzbmFq?=
- =?utf-8?B?aVJOdEdQcGsxMGF2Z0g2akRVZXVSd0JBUmNTTWFYRkpaLzQ1Z2drbENMQzBS?=
- =?utf-8?B?V1RxNzZPN0FIRGxYUFRYZTRlMzBHY253TEhpcDJVRDh5OGRrNzkvS1dSYzk4?=
- =?utf-8?B?SXI0cDM2bGRvWSswcmFwNFNnNUtqUFJZUVhyWTBYeW9qZXV3ZGtLZ1V6RC96?=
- =?utf-8?B?MXdGV2VsV3IyL0RVS0ZlbjRnMkZqc1ZjS0VwSTQ1VXQ0dStMbXYxMXZxZXV6?=
- =?utf-8?B?SkFYM2crNjJlS1ErMGxjWlRPWWt1U3Q0YlRqY0ZXby9ZR09XZWJuNGdVKzF5?=
- =?utf-8?B?TnA1SWlSaDliOXFrd0xTZmdVTjNtSzdRWXBkcm1TOC9pZ21FNGdBNHR6K3Fk?=
- =?utf-8?B?bHBUVWdPckFsVW1aY1lidUVNU0Y5VUIzYXRraFBiMXI3MnNVcEpFaGlvSmNB?=
- =?utf-8?B?RUREVDk0RFZ5ZFFHYWFwSHJUSFVMa29WWk44SnEzK3JHS0xlUHhUWDMrNE5k?=
- =?utf-8?B?TklJMnJrbDJOMnFtRGdvQlFDZmJ5a3U2R1hWUWVjVGtMbVpsRVBzVmcyUFZM?=
- =?utf-8?B?STgzNVN1cm5mY0JidDNTaTFqdDR1NzNDY2hWaXBjZ0FqUjZjWUFKZks2OXQz?=
- =?utf-8?B?c2krSGNNZHhMcUNvMUNBNURMa2VJanNSS0oxcG5OQXhEcTBxVk1PQmxDZjNo?=
- =?utf-8?B?VjkzWmY1YjE2UldoT0lUQUQ5Zk5lK1BYcW1UUnlhUm9CSWVrZE9Od2dBUEUx?=
- =?utf-8?B?S1NQR3ZnV0s1WDBJSXhoUXZ6eTFUSjZ3MDBzWSsyWXlDWHEyLzEvcnZqYzcz?=
- =?utf-8?B?UGlBWXBrOVQ0VGJuZEIwZFBaZXd2SVFQM0xDYm50enRDS3ZWd3JNeTdMc1JO?=
- =?utf-8?B?ZnplQkZVNmRFZVg2dUJWSlNTSDN3SjBjd1RUR29CQnlkWTh6RnZMWlUrMkgz?=
- =?utf-8?B?MzJhN3NSZGErbXR1TGVhN2wwUWFZeSt2Z2d1bW44aE9yVnE4SC82cStaUG5s?=
- =?utf-8?B?aWVXQUFFNmMwK3hLKzFwTVJNL3ZYNm1GU3pIS09EMnhteUt4ZXlTN3BOb0ZP?=
- =?utf-8?B?ei9NSUxwSE90ODlEVzJOOXFoYTZOZENNSXpvTHJKVkdzWDZ4UEkwam93cGE3?=
- =?utf-8?B?NkdRenlreUVaWTkyazZvV3dCQ2Fid2FSc09wRFpLZmdMWnNRV0orZEY1YmFi?=
- =?utf-8?B?ekFObVVqWkNpMjgvcDdBSWF6MGJsMFp4MkV1S1I1SWFkU2tWcGF5citzdTVs?=
- =?utf-8?B?R0ptbkd4N3BqY3FrMHNjQUgzS0tLM1dYWmpRMnc0YlFlVkpIdXRPeXAySGdq?=
- =?utf-8?Q?fN22ej/h9jOIsgHc=3D?=
+	=?utf-8?B?RDFCTHkrMlBJeDNyUEpHZHRTVzhlN0MzSlE4WnZlSDRYTURDb0tiZERRMERT?=
+ =?utf-8?B?MUFUMEkrdjJ4Y1FSaHYxQlIySW9KWnc2TzRQQWJyY21KK21XN0dsOTcrbURI?=
+ =?utf-8?B?b0t5Z0dKNEJaTnRIU0gzZk4yWm91ZFQ2QVYyUnlHR3pZSnNQemFobEw5c1RK?=
+ =?utf-8?B?dkN4S0pINFh2eHRkSXRuUU5weCtnS3ZnQjlDT0x5Mm5DQ0pYSlJWVUpzWmtJ?=
+ =?utf-8?B?MEFKeERiTHpIZXhPaWdGNkw5RUxwakRITzlQNFlaTFZQL0NpMHJ3L1FEa0lX?=
+ =?utf-8?B?Zm5SdzNwY0xDNjg5NEcraHU2TXFybnF3Z2p1Vm9NZUduenBsZld6bXhmejl5?=
+ =?utf-8?B?dEx1c295eGhRU0NhbXdxbk5Kc1dRVkxxU2ZaUlFQcW5LMDBQOHV6ZDMrSlZ6?=
+ =?utf-8?B?MlBlenRWczZQTmthU3EwVFh4SE1ud1A0NkVaNzQ2bG5KNm5ic0ZvUWovd1g1?=
+ =?utf-8?B?NE14dEl5TlVScGM3cHNDdThEaFVJUkNiSURPcWdVSmIyVHJqdEFBUi9od2Q3?=
+ =?utf-8?B?aDdQTEY2MElTQjgxMDJIL3ZNRStyeXVreTlKSmVoNGNkSWU5bFhjMWUrZ3o3?=
+ =?utf-8?B?aWRnd2N6Um9xV25veXVaVzBUZWsxQStuUDJlR1V0eWpsQjZTSHUwdVJpYnF6?=
+ =?utf-8?B?K3J3S1NXQkEzWncxWDI5d2JBK0VvWlVNQnhUcmFXUTZaRVZ1UVJTTWNWMm9t?=
+ =?utf-8?B?SjBOa1EvMitSSjJTblJCVm5NamNWSTFRbktDbWNqQk42SWlpNDVqUTBRNEpq?=
+ =?utf-8?B?cmhGVjRoM1kza2dCQUF6aEJzN1prb0VURUdWWnBkYXVyYzA5cEdjUmhPVWR2?=
+ =?utf-8?B?bXZ2aUM5eXN4dkZmdGpDSkZpOC94U1EyZDk5QzhvM2xTZUQ5TTV5UFZzTUE2?=
+ =?utf-8?B?UTlsblVqNWF0R2RqVHNnZWk5N0lsN1JlSlpCWFJFc3pPM01HWENVb0czMFZ2?=
+ =?utf-8?B?RWNuZ0l0NHdReGRkSHNmK3BDQXRNcFFScVhFZGFxdVpZS3NyQXVFVGREL2R0?=
+ =?utf-8?B?R3RBMTZVZm9HbWEvQlVsMEcrYWd0MnpkREFVTWpDZG9BUTh2bmV2L0hSR2sx?=
+ =?utf-8?B?STVpajBxYW55VFYyWTNaRS9MeDZJc1FOUzJNdTY2aEYyY2tlT1lmeVZGcmQv?=
+ =?utf-8?B?MVFYeDdselFMYTRWWjRxRm03SnRYQmYyeUZEZDEvRGJPSlFDY2xDTWNKQi9w?=
+ =?utf-8?B?Mm1TZ0ZMajdGeGxZWXBSU1kyY1gwNUp2TDJzY3V1cDJkSXYwcERrdHUwSWpR?=
+ =?utf-8?B?bUx3WW1nVHJoZ0JKemNPMCtVcHRiTklXcjdmRVdTbUpuZG9LMm5rTkxNWmg4?=
+ =?utf-8?B?TFdqWEsvVk02OVBXKzBkRld2SS81aGZPZ3pDMW4xMWhtZW5vMGNiSm1CWXlJ?=
+ =?utf-8?B?OVcrWXdmVzZHcnFqSEhQYkdQaERaR0toV3M3SEY5ZXhuNE1lQXRPTVNicTZG?=
+ =?utf-8?B?YjNxa0Z0dlZ6djVVUTFCZGxyVE1PMThRSWUvdkJIbVAvNnF3eklpNTI3aDh2?=
+ =?utf-8?B?YUxMa0JZN1V3YjhRbkJPMmZzSFJLNWFoVXRtWEhEWCtvbDdNRXBibDVmMkt2?=
+ =?utf-8?B?ZnR4d3laMTlhZ3krb0o2b2QzZzNsWDMzM1FyTE5ZSVg0cjVKcmhIdUxUZ2l3?=
+ =?utf-8?B?ajZYbktQbGRnZHpXUEZvRVhTVElwMW1ySEl6ZkFpRWNhVURkc0ZPYThTUnZx?=
+ =?utf-8?B?UUV3Z0M4eXlJWDNaNE8wMnJxNzQ0U241RTVtNmg1dkIxUDFTejB3NDNGNkdJ?=
+ =?utf-8?B?YXBGczlaM0xSRDFQOHdmSDFNbmE4bFQyZkpleU90Tk1MUU5ZeGpiTEIxend3?=
+ =?utf-8?B?VGJSSHhHbHlKcEREOU1hVldrbmNpNFYvVVFYa0pKd1ljbHVkTjRIUHRYM2I2?=
+ =?utf-8?B?czMwTDlNdFczRDZaZlZvbm9JWld0NmRhaUV5TG5MRmcxUWs5ZmVwMEJEalhr?=
+ =?utf-8?B?ZlZSaS9TWTJ0c3k1dTRYQ3BHWTdHWVZDbDVIcmQ0S3NjQ0RQN2hmSGRISXM0?=
+ =?utf-8?B?ejdtWlROVEtLamdWV2ovR3FWWXdPRjFlaUpOemZhTGxvdzZWS1diZHNzSnhk?=
+ =?utf-8?B?dHVKNS9zVGJSSjk3eis1SjNGeDkwanN4amRKb1VQSHVoaHh2UDBoaWY5Q3Vi?=
+ =?utf-8?B?OXYwSlk0OWNpRk1TMXV0R0VCOGtobGVOUmNmQktDY2NaanRqd240cXhZSGUr?=
+ =?utf-8?B?WjBnUGZEZ2Y2STJiZnU1bi9FZTV2ZW5wZ0J4elYyajF4V1JlVzhiN0QyZDNM?=
+ =?utf-8?B?S3d3azJTeW1GWDl6UU1JOHovenVMOExSd2dKVnVDdEQrb25tbUNtR0d6clVD?=
+ =?utf-8?B?UjZDMW9Ycmswa2lIbk1MeTl2OWhaQ2h5N205blp1VGtVMHdQQWpYNGlERW5E?=
+ =?utf-8?Q?eObBq7UNTnb+R6Iw=3D?=
 X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 695dfdf3-6c65-4e84-aff0-08df4cdd52ab
+X-MS-Exchange-CrossTenant-Network-Message-Id: 50e7283f-69fe-45fe-1525-08df4d4cdd1e
 X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Nov 2026 23:22:36.9297
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Nov 2026 12:41:03.4486
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: vrw0t+fxsLdm8Ro9XIGctFCDCd4pv0rlgK8n1IN2KWrScMLzjFP2rIEMoJcHl6OGQCXBSAhkRRI0Il/NWD1PTsxZCDZhfA9rmTipTfl0skc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR03MB6450
-X-purgate-ID: tlsNG-720697/1795821762-325946C6-3DA85275/0/0
+X-MS-Exchange-CrossTenant-UserPrincipalName: guftIOJrrMId/vtCtIL2M3DDn3cQUdnfDDXQotcDFJbnS7i9uxl+maT86CCeSfiSbzPLixQ46Ix1q7f3L485aOKFUg9b97KSB0rrxhQcRB4=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR03MB5728
+X-purgate-ID: tlsNG-bad1c0/1795869668-3BCD7034-9A28B369/0/0
 X-purgate-type: clean
-X-purgate-size: 4879
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-purgate-size: 879
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 27/11/2026 2:53 pm, Julian Vetter wrote:
-> The Xenctrl C stubs build OCaml values by hand, and nothing checks that
-> the blocks they allocate match the types declared in xenctrl.mli. A
-> mismatch, e.g. a record or variant argument with a different number of
-> fields, isn't caught at build time.
+On 27/11/2026 12:55 pm, Julian Vetter wrote:
+> The tests test-mem-claim, test-paging-mempool and test-resource create
+> ARM domains with xen_arch_domainconfig set to zero, i.e., gic_version
+> XEN_DOMCTL_CONFIG_GIC_NATIVE, which has been removed. Thus, domain
+> creation fails.
 >
-> So, extend test-ocaml-bindings to also call physinfo() and
-> domain_getinfolist(), check the tag and size of each returned block
-> against the declared type, check the flag lists, and read every field.
->
-> This covers the Arm specific parts too, i.e. arm_physinfo_caps and
-> xen_arm_arch_domainconfig, which were tested on arm64 under QEMU.
+> So, pick the GIC version from the XEN_SYSCTL_PHYSCAP_ARM_GIC_V2/V3
+> capability bits reported by XEN_SYSCTL_physinfo instead. Use GICv3 if
+> available, else GICv2, else fail the test.
 
-Urgh yes, we are getting rather backed up.  Sorry, there's just too much
-to do.
+Fixes: 6c6bec2c804c ("xen/arm: remove XEN_DOMCTL_CONFIG_GIC_NATIVE from
+the ABI")
+Fixes: 93e976a1d174 ("tools/arm: choose GIC version explicitly instead
+of relying on GIC_NATIVE")
 
-Lets start by getting tools/tests/* running on the Xilinx ARM board.  We
-can start by explicitly excluding the failing tests in the short term,
-because that causes the non-failing tests to be blocking in CI.
+If we had actually been running these tests in CI properly, this
+wouldn't have slipped through.
 
-That should also get this test running on real ARM hardware, and we
-won't have to resort to testing under emulation.
-
->
 > Signed-off-by: Julian Vetter <julian.vetter@vates.tech>
-> ---
->  tools/ocaml/tests/bindings/main.ml | 126 ++++++++++++++++++++++++++++-
->  1 file changed, 125 insertions(+), 1 deletion(-)
->
-> diff --git a/tools/ocaml/tests/bindings/main.ml b/tools/ocaml/tests/bindings/main.ml
-> index 785837e270..02049d2f79 100644
-> --- a/tools/ocaml/tests/bindings/main.ml
-> +++ b/tools/ocaml/tests/bindings/main.ml
-> @@ -2,18 +2,142 @@ open Printf
->  
->  let xch = Xenctrl.interface_open ()
->  
-> +let nr_failures = ref 0
-> +
-> +let fail fmt =
-> +  ksprintf (fun s -> incr nr_failures; printf "  Fail: %s\n%!" s) fmt
-> +
-> +(* Check that [v] is a block with the given tag and number of fields. *)
-> +let check_block name v ~tag ~size =
-> +  let r = Obj.repr v in
-> +  if Obj.is_int r then
-> +    fail "%s: immediate value, expected a block" name
-> +  else if Obj.tag r <> tag || Obj.size r <> size then
-> +    fail "%s: tag %d, size %d, expected tag %d, size %d"
-> +      name (Obj.tag r) (Obj.size r) tag size
-> +
-> +let check_record name v ~size = check_block name v ~tag:0 ~size
-> +
-> +(* Check that [v] is one of the [nr] constant constructors of a variant. *)
-> +let check_enum name v ~nr =
-> +  let r = Obj.repr v in
-> +  let ok = Obj.is_int r && (Obj.obj r : int) >= 0 && (Obj.obj r : int) < nr in
-> +  if not ok then
-> +    fail "%s: not one of the %d constructors" name nr;
-> +  ok
-> +
-> +(* XEN_DOMCTL_CONFIG_GIC_* *)
-> +let string_of_gic_version = function
-> +  | 1 -> "GICv2"
-> +  | 2 -> "GICv3"
-> +  | v -> fail "unknown gic_version %d" v; "unknown"
-> +
-> +let string_of_cap_flag = function
-> +  | Xenctrl.CAP_HVM -> "hvm"
-> +  | Xenctrl.CAP_PV -> "pv"
-> +  | Xenctrl.CAP_DirectIO -> "directio"
-> +  | Xenctrl.CAP_HAP -> "hap"
-> +  | Xenctrl.CAP_Shadow -> "shadow"
-> +  | Xenctrl.CAP_IOMMU_HAP_PT_SHARE -> "iommu_hap_pt_share"
-> +  | Xenctrl.CAP_Vmtrace -> "vmtrace"
-> +  | Xenctrl.CAP_Vpmu -> "vpmu"
-> +  | Xenctrl.CAP_Gnttab_v1 -> "gnttab-v1"
-> +  | Xenctrl.CAP_Gnttab_v2 -> "gnttab-v2"
-> +
->  let test_xenversion () =
->    let ver = Xenctrl.version xch in
-> +  check_record "version" ver ~size:3;
 
-Just for my understanding, with these check_*'s now in place, we'll have
-to adjust the ~size or ~nr parameters as we extend the C stubs ?
-
-It's a shame, but AIUI it's a well-known limitation of the Ocaml
-language that you can't query these types of values dynamically.
-
-Also, forcing people to edit this file is probably a good thing if it
-gets them to add tests for other things they're doing.
-
-
-Either way, could I ask you to split this into 3 patches?
-
-The first extending the test infrastructure (nr_failed, check_* and this
-change to test_xenversion), then one adding physinfo, then one adding
-dominfo?
-
-In an ideal world, the bugfix for x86 misc flags would be slotted into
-the series just ahead of the dominfo patch, but seeing as it's already
-been posted in isolation and wants backporting, I'll see about picking
-it up directly.
-
->    printf "Xen version: %d.%d%s\n" ver.major ver.minor ver.extra
->  
-> +let test_physinfo () =
-> +  printf "Test physinfo\n";
-> +
-> +  let p = Xenctrl.physinfo xch in
-> +  check_record "physinfo" p ~size:11;
-> +  printf "  threads_per_core %d, cores_per_socket %d, nr_cpus %d\n"
-> +    p.Xenctrl.threads_per_core p.Xenctrl.cores_per_socket p.Xenctrl.nr_cpus;
-
-Why do we need the .Xenctrl infix on these variable accesses?  The type
-of p is known.
-
-Given the other repetition of Xenctrl, e.g. in string_of_cap_flag, it
-might be better to Open Xenctrl generally (which I guess would remove
-these infixes too, although I'm not entirely sure why)
-
-Otherwise, it looks broadly ok.  This is a significant improvement over
-the nothing we had before.
-
-~Andrew
+Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
